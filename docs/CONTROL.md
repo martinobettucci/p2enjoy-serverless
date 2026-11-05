@@ -24,16 +24,24 @@ de secours. La clé maîtresse doit rester stable avec la base chiffrée.
 - `GET /auth/login` : découverte OIDC, création du flow, cookie temporaire,
   redirection S256 vers le vrai fournisseur.
 - `GET /auth/retour` : correspondance state/cookie, consommation du flow,
-  échange du code avec verifier, validation ID token (audience et nonce) et
+  échange du code avec verifier, validation ID token (signature, issuer,
+  expiration, audience et nonce) et
   access token (issuer, expiration, signature, azp et rôles verified/admin),
   puis session serveur et redirection accueil.
 - `POST /auth/logout` : CSRF, révocation locale et fin de session OIDC.
 
-Cookies Secure, HttpOnly, SameSite=Lax, Path=/ ; aucun token OAuth dans le
+Scopes demandés : openid, profile, email, sans offline_access. Cookies Secure,
+HttpOnly, SameSite=Lax, Path=/ ; aucun token OAuth dans le
 stockage navigateur. Une session vérifie son expiration à chaque requête.
 Au renouvellement du jeton d'accès, les rôles sont revérifiés ; un retrait de
 rôle prend donc effet au plus tard à son expiration. Un fournisseur devenu
-indisponible n'autorise pas à prolonger un jeton expiré.
+indisponible n'autorise pas à prolonger un jeton expiré. Le renouvellement est
+sérialisé par session, conserve le même subject et ne prolonge pas la limite
+absolue de huit heures. La déconnexion locale reste définitive même si le SSO
+est injoignable. Les flows de connexion vivants sont bornés à 256 pendant dix
+minutes ; un dépassement retourne 429. Le contrôle borne les corps JSON à
+256 Kio, y compris les requêtes chunked, et ne renvoie pas leurs valeurs dans
+les erreurs de validation.
 
 ## Gestion
 
