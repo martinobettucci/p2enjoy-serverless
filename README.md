@@ -1,12 +1,13 @@
 # P2Enjoy Serverless
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
-de FORGE. La plateforme de management est en phase de cadrage. Une première
+de FORGE. La console et le plan de contrôle sont en cours de qualification
+dans **[control/](control/README.md)** et **[web/](web/README.md)**. Une première
 application indépendante de qualification et son exécuteur de référence DEV
 sont disponibles dans **[qualification/](qualification/README.md)**, avec
 handlers, manifeste `serverless.yml`, Docker, tests et commandes d'exploitation.
-Le moteur de plateforme, son interface et son adaptateur de déploiement ne sont
-pas encore implémentés. Le composant de [stockage à quota](storage/README.md)
+Le moteur d'invocation et l'adaptateur de déploiement ne sont pas encore
+implémentés. Le composant de [stockage à quota](storage/README.md)
 est disponible et qualifié sur le SPARK DEV : 31 contrôles réels réussis,
 dont saturation, concurrence et reprise après interruption.
 
@@ -64,6 +65,15 @@ dépôts temporaires et un remote Git local, sans réseau ni mock.
 
 ## Exécution et validation
 
+La console DEV est accessible sur [serverless-dev.lelabs.tech](https://serverless-dev.lelabs.tech).
+Son accueil et l'entrée vers le vrai SSO sont déployés ; la qualification
+administrateur des objets, droits et cycles de session reste en cours.
+Les commandes du contrôle figurent dans [control/README.md](control/README.md).
+Les clients de preuve de plateforme vivent dans [e2e/](e2e/README.md).
+Le [checkpoint DEV](docs/evidence/control-dev-checkpoint-2026-11-06.json)
+conserve les sources déployées, les campagnes terminées et les parcours
+administrateur encore à qualifier. Le [manuel](docs/manual.md) décrit la console.
+
 **Il est interdit de lancer l'application avec un profil PREPROD ou PROD,
 quelles que soient les circonstances.**
 
@@ -102,6 +112,17 @@ d'administration n'y est autorisée.
 ## Structure
 
 ```text
+control/
+  app/                    API, SSO, sessions, objets et droits
+  migrations/             Schéma SQLite versionné
+  compose.spark.yml       Contrôle DEV sur le port 18090
+web/
+  src/                    Console React, formulaires et navigation
+e2e/
+  public.py               HTTPS public et refus OIDC réels
+  login-ui.mjs            Accueil, clavier, responsive et SSO
+  control-admin.mjs        Campagne API authentifiée
+  control-ui.mjs           Parcours de gestion dans le navigateur
 storage/
   main.go                 Proxy de quota FUSE sur les fichiers natifs
   client.py               Client de preuve dans un conteneur Docker isolé

@@ -505,3 +505,27 @@ sa redirection pour retirer code/state de l'URL. La panne de volume SQLite
 readonly refuse effectivement le démarrage avec « unable to open database
 file » lors de l'ouverture WAL ; l'attendu de preuve est aligné sur ce
 diagnostic observé, sans changer le refus de l'application.
+
+## Checkpoint du contrôle — 2026-11-06
+
+Le code initial du contrôle et de la console est conservé dans le dépôt, avec
+les pilotes E2E. Les sept rapports consolidés sont complets dans leur périmètre
+et sans test ignoré ; SLS-020 reste ouvert pour la session et les parcours
+administrateur. La comparaison SHA256 confirme les sources applicatives
+effectivement déployées. Les dépendances npm et les 21 dépendances Python
+verrouillées ne présentent aucun avis de vulnérabilité connu lors de l'audit.
+L'auditeur Python isolé a nécessité un tmpfs exécutable pour ses modules natifs
+et un cache explicite ; ces réglages ne concernent pas le contrôle déployé.
+
+L'accueil, son état d'erreur et le refus 429 mobile sont inspectés visuellement.
+Un vrai SIGKILL du client après sa première requête confirme que le rapport
+précédent n'est plus réputé complet. Les trois notes officielles du SPARK sont
+appliquées puis relues. Le tunnel local de sa console a été rouvert par son
+API normale après expiration ; aucune administration de la FORGE.
+
+La seule dépendance externe restante de cette unité est une connexion réelle
+et les comptes nécessaires aux variantes de rôle SSO. Les opérations de
+gestion préparées ne sont donc pas présentées comme validées. L'exploration
+de SLS-030 précise les mappings de manifeste à formaliser pour poursuivre
+les parties indépendantes. Aucun remote Git n'est configuré pour publier
+les commits locaux.

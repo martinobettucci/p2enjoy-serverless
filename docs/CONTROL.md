@@ -116,6 +116,7 @@ HTML, sans mettre code OAuth ni jeton dans l'URL d'erreur. Un refus de l'entrée
 navigateur : la console reçoit le message initial dans un attribut HTML
 échappé et l'affiche comme texte. Le callback reste redirigé pour retirer
 ses paramètres confidentiels de l'adresse.
+Le guide d'utilisation correspondant est [manual.md](manual.md).
 
 ## Preuves
 

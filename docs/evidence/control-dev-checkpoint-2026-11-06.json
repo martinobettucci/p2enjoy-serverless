@@ -1,0 +1,336 @@
+{
+  "timestamp": "2026-11-05T23:02:53.479657+00:00",
+  "target": "infra-serverless DEV",
+  "scope": "Checkpoint SLS-020, qualification partielle explicite",
+  "unit_complete": false,
+  "pending": [
+    "Session SSO admin et rôles réellement acceptés/refusés",
+    "CRUD et ACL authentifiés",
+    "Parcours UI administrateur",
+    "Renouvellement et fin des sessions SSO"
+  ],
+  "runtime": {
+    "sources": {
+      "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+      "control/Dockerfile.dockerignore": "a8424f1e9654f2e08c9ac87607c41bcfc497d854e38498de1e899982019a026a",
+      "control/requirements.in": "98432985aa168714ffda8de8de43ef44c1676e331ccabcd65ef079f5c7cd0113",
+      "control/Dockerfile": "a739350a3b2551c1fd03d59cc7bece5c296d252e029785442dad59450332cc16",
+      "control/dev.sh": "6dc32bb777038ac9f65d841308103beba471b7254e197b2d906a51bcdebca4f9",
+      "control/compose.spark.yml": "94a419e7eb9dab9d39e1ea7150733308e591711db7d8faf4b381f4826ea0e957",
+      "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "control/app/db.py": "55bb45fe2c4eaaf29496de3b6515d689f69cb07be60a8d9fc4184534f67e3c79",
+      "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "control/app/models.py": "0ee79f76dc26fd56e14b008369dbfb71b9cd794e5654cb1e1bb06d4ad993a4fa",
+      "control/app/main.py": "f18a9f2afe7a05c9c8e5887e9432d9b70fe2d7cd2dccf70a59fc357d8f0e7929",
+      "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "control/app/config.py": "e38d765f875556949bd7819924229335003ce9b1cfdf87e4419ef576041dab17",
+      "control/app/auth.py": "c14010aa76599800aec265ca25264759a69d23f0791f78575af9b83bce032d61",
+      "control/app/api.py": "8374dab052057fd51badd2f11db470106bafc9eb0f1f911b41f711cd24011e97",
+      "web/package.json": "4cb742f19dbce36e4c28482d645e807bba1aad4ca48667e9d3e5fa2a3394457a",
+      "web/package-lock.json": "cac4d733e880aca30daa1cd8d24d2f0727abb81ffd14930839408e65335c99f7",
+      "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+      "web/public/favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+      "web/src/main.jsx": "fc71658be7d05abce01a1153b4c400ff5fd382e3fcaeedea1cd1dcd2de0a8014",
+      "web/src/function.jsx": "e827072092bcac273cd3f2b6a147a71b3f9226a929458c57574ab7c4fcafef0b",
+      "web/src/style.css": "f5ceb8150d070f0835bfc23fff1ae1ff447282f6d4d0c91aac638b670b40adde",
+      "web/src/management.jsx": "94f2851b28ef8cd48a5569b6ca3fbfc966d7549d8fb2f51f522f1b674e9762a5",
+      "web/src/api.js": "44c428bf8a13b7bd91faca929b7aa5ef63466861c89e387c5e3bbdbf93d610a9",
+      "web/src/ui.jsx": "62026ca8f5be957a6986ad1642855ff1de32e46cc52f8d4c667c95f53f62bcf5"
+    },
+    "containers": [
+      {
+        "name": "/p2enjoy-serverless-dev-control-1",
+        "image": "sha256:29f2419de1df38264673446ae4ecd1c5c1f23b11b48e4ce79a0ce6a18ebed079",
+        "status": "running",
+        "health": "healthy",
+        "network_mode": "host"
+      },
+      {
+        "name": "/p2enjoy-qualification-dev-qualification-1",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "status": "running",
+        "health": "healthy",
+        "network_mode": "p2enjoy-qualification-dev_default"
+      }
+    ],
+    "state_permissions": "0o750"
+  },
+  "e2e_sources": {
+    "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+    "e2e/proxy.py": "7d4330b4211c4eae548984232da48a8350f7e3fb7e16b2581f843a9f546c1821",
+    "e2e/login-capacity.py": "de9926f647cca8e3ec9da50d0d23bfe4cf8ada3d471ebc2ce96399b1a25043f1",
+    "e2e/control-operations.py": "7ae3a6fb4215b0dd10cedd5fa8e2a8bdb69fdef5ee0890fa70f6a8bfbfbf7e5f",
+    "e2e/login-limits.py": "974166bd23704789fd79b072d307d33850be136d3aa53e8f964f7a90c3fea0de",
+    "e2e/login-ui.mjs": "af1f4975fb2a5a7b675023789aef58336c3f6bacca606f6605e2fa41440cdccf",
+    "e2e/authorize.mjs": "5321a7b4adf194fb299afebfe2e2737de51406560e8febbdfd8db9c2f1687cf6",
+    "e2e/control-ui.mjs": "d84bd9340c1fc77f2139fe9c2563eaf4decaa72922c848d8425d27ceac7b5c60",
+    "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+    "e2e/control-admin.mjs": "3f6449a07be287574313853a851f16c112d826182b7f0fcb730fe770340c1c9d",
+    "e2e/public.py": "0e9e4a09ec567ba4b95c1146115e14b826592b0460acb0ea8b326593140b5c61",
+    "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7"
+  },
+  "campaigns": {
+    "public": {
+      "target": "https://serverless-dev.lelabs.tech",
+      "timestamp": 1793919256.531286,
+      "completed": true,
+      "checks": [
+        {
+          "name": "TLS, santé et en-têtes",
+          "status": "passed",
+          "duration_seconds": 0.047
+        },
+        {
+          "name": "Document et ressources de la console",
+          "status": "passed",
+          "duration_seconds": 0.321
+        },
+        {
+          "name": "Refus anonymes",
+          "status": "passed",
+          "duration_seconds": 0.222
+        },
+        {
+          "name": "Callbacks malformés",
+          "status": "passed",
+          "duration_seconds": 0.181
+        },
+        {
+          "name": "Flows réels et refus du fournisseur",
+          "status": "passed",
+          "duration_seconds": 0.558
+        },
+        {
+          "name": "Corps bornés et erreurs expurgées",
+          "status": "passed",
+          "duration_seconds": 0.243
+        }
+      ],
+      "skipped": 0
+    },
+    "browser": {
+      "target": "https://serverless-dev.lelabs.tech",
+      "completed": true,
+      "checks": [
+        "Accueil anonyme et navigation clavier",
+        "Accueil desktop sans débordement, cible 40 px",
+        "Accueil tablette sans débordement, cible 40 px",
+        "Accueil mobile sans débordement, cible 40 px",
+        "Contraste de connexion mesuré : 9.03:1",
+        "Refus de callback visible depuis le vrai serveur",
+        "Entrée normale vers le vrai SSO en HTTPS",
+        "Refus 429 visible sur mobile, Retry-After conservé et aucun flow créé",
+        "Aucune erreur JavaScript de page"
+      ],
+      "failures": [],
+      "skipped": 0
+    },
+    "proxy": {
+      "completed": true,
+      "passed": 4,
+      "skipped": 0,
+      "expected_proxy": "10.77.0.1",
+      "peers": {
+        "public": "10.77.0.1",
+        "public-forged": "10.77.0.1",
+        "direct-loopback": "127.0.0.1",
+        "direct-container": "10.77.0.24"
+      }
+    },
+    "operations": {
+      "image": "sha256:29f2419de1df38264673446ae4ecd1c5c1f23b11b48e4ce79a0ce6a18ebed079",
+      "completed": true,
+      "checks": [
+        {
+          "name": "Même image réelle, entrée HTTP et confinement Docker",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : SERVERLESS_PUBLIC_URL",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : OIDC_ISSUER",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : OIDC_CLIENT_ID",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : OIDC_CLIENT_SECRET",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : SERVERLESS_MASTER_KEY",
+          "status": "passed"
+        },
+        {
+          "name": "URL publique HTTP refusée",
+          "status": "passed"
+        },
+        {
+          "name": "Sous-chemin public refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Issuer étranger refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Clé maîtresse malformée refusée",
+          "status": "passed"
+        },
+        {
+          "name": "CIDR de proxy malformé refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Clé différente refusée sur la base existante",
+          "status": "passed"
+        },
+        {
+          "name": "Métadonnées non inscriptibles refusées",
+          "status": "passed"
+        },
+        {
+          "name": "Reprise de la même base avec la clé officielle",
+          "status": "passed"
+        },
+        {
+          "name": "Verrou réel SQLite : refus 503 puis récupération",
+          "status": "passed"
+        },
+        {
+          "name": "Écriture reprise et aucune valeur secrète dans les journaux",
+          "status": "passed"
+        },
+        {
+          "name": "Refus de validation journalisé sans valeur du corps",
+          "status": "passed"
+        }
+      ],
+      "cleanup": true,
+      "skipped": 0
+    },
+    "login_limits": {
+      "completed": true,
+      "checks": [
+        {
+          "name": "Huit flows actifs par client, neuvième refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Les en-têtes falsifiés ne contournent pas le quota",
+          "status": "passed"
+        },
+        {
+          "name": "Une autre adresse réelle reste autorisée pendant la saturation",
+          "status": "passed"
+        },
+        {
+          "name": "Trente ouvertures par fenêtre, même après consommation des flows",
+          "status": "passed"
+        },
+        {
+          "name": "Le redémarrage Docker ne remet pas le compteur à zéro",
+          "status": "passed"
+        },
+        {
+          "name": "La fenêtre expirée permet une nouvelle ouverture réelle",
+          "status": "passed"
+        }
+      ],
+      "cleanup_errors": 0,
+      "skipped": 0
+    },
+    "login_capacity": {
+      "completed": true,
+      "checks": [
+        {
+          "name": "256 flows réels : le suivant est refusé globalement",
+          "status": "passed"
+        },
+        {
+          "name": "La consommation libère réellement une place",
+          "status": "passed"
+        }
+      ],
+      "cleanup_errors": 0,
+      "skipped": 0
+    },
+    "report_interruption": {
+      "completed": true,
+      "checks": [
+        {
+          "name": "SIGKILL du vrai client après échange HTTP invalide le précédent rapport",
+          "status": "passed"
+        },
+        {
+          "name": "Une nouvelle campagne réelle complète restaure un rapport réussi",
+          "status": "passed"
+        }
+      ],
+      "skipped": 0
+    }
+  },
+  "dependency_audits": {
+    "web": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "dependencies": {
+        "prod": 5,
+        "dev": 40,
+        "optional": 27,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 44
+      }
+    },
+    "e2e": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "dependencies": {
+        "prod": 3,
+        "dev": 0,
+        "optional": 0,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 2
+      }
+    },
+    "control": {
+      "tool": "pip-audit 2.10.1",
+      "packages": 21,
+      "known_vulnerabilities": 0
+    }
+  },
+  "screenshots_sha256": {
+    "login-desktop.png": "d022f4279f4fa9188ad98e6cd91fdd943db0414777081927befd97abbd1cc47f",
+    "login-mobile.png": "9231ee06e1bebf263d47fc693ba9ed3c4b3a03a05176ab19ac326edaa998cee7",
+    "login-limit.png": "a2d3880ce67982e683bbc4fe24785208d9d84634f41531f862d99bb17cd7ad31",
+    "login-tablette.png": "60e963d6d7e6ff892319959186f279705bf6beddaf6058380f33993fd10671a6",
+    "login-error.png": "05c65ab3eb839c20d7393df4fd2405daf26f66f7909e23631244e64d73a867b9"
+  },
+  "visual_review": "Accueil desktop/mobile et erreur 429 mobile inspectés par le principal",
+  "spark_notes": "README, CONTRIBUTORS et INSTALL appliquées puis relues par API normale",
+  "qualification_reference_recheck": {
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "reason": "Réseaux recréés après essai rootless annulé"
+  }
+}

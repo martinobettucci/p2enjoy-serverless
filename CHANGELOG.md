@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- Checkpoint DEV du contrôle Python/SQLite et de la console React : parcours
+  SSO réel, modèles de gestion, sessions/CSRF, jetons CRUD et formulaires.
+  Qualification administrateur encore ouverte ; moteur et adaptateur à venir.
+- Preuves publiques et navigateur, provenance réseau, limites SSO persistantes,
+  pannes réelles de configuration/SQLite et interruption du client de preuve.
+  Refus HTML conservant leur statut, journaux expurgés et rapports incomplets
+  invalidés dès le démarrage. Dépendances verrouillées auditées sans avis connu.
+
 - Stockage FUSE à quota logique : réservations avant extension, fichiers et
   répertoires ouverts après suppression comptés, refus des mutations hors
   contrat, verrou exclusif et conservation des fichiers natifs.

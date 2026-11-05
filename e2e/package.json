@@ -1,0 +1,6 @@
+{
+  "name": "p2enjoy-serverless-e2e",
+  "private": true,
+  "type": "module",
+  "dependencies": {"playwright": "1.64.1"}
+}

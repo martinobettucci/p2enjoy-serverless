@@ -1,8 +1,7 @@
 # Application de qualification DEV
 
 Service synthétique destiné à éprouver les développements de P2Enjoy Serverless.
-Tout le code et les données sont propres à ce dépôt. Aucun artefact John Dalia
-n'est utilisé. Spécification : `../docs/DAT.md#qualification`, unité QLF-001.
+Spécification : `../docs/DAT.md#qualification`, unité QLF-001.
 
 L'exécuteur de référence sert uniquement au développement. Il ne remplace pas
 la plateforme et ne prouve ni SSO, ACL CRUD, quotas par fonction ni autoscaling.

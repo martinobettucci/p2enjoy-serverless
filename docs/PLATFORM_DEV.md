@@ -31,8 +31,8 @@ appliqué dans le SPARK, avec `OIDC_CLIENT_ID` et `SERVERLESS_PUBLIC_URL`.
 État vérifié le 5 novembre 2026 : découverte SSO accessible ; callback accepté
 par le client, PKCE exigé ; l'authentification du client au token endpoint est
 acceptée (code d'autorisation invalide volontairement, erreur invalid_grant).
-La route DNS et HTTPS répond et le contrôle écoute sur 18090. Les notes de
-cellule du banc et du stockage sont appliquées. La console
+La route DNS et HTTPS répond et le contrôle écoute sur 18090. Les trois notes
+de cellule décrivent le banc, le stockage et le contrôle déployé. La console
 locale est accessible sur 5175. Le parcours utilisateur SSO reste à vérifier
 avec le contrôle, dans SLS-020 et SLS-060.
 

@@ -1,0 +1,17 @@
+# @spec docs/BACKLOG.md#sls-020 | docs/CONTROL.md
+*
+!control/
+!control/requirements.txt
+!control/app/
+!control/app/**
+!control/migrations/
+!control/migrations/**
+!web/
+!web/package.json
+!web/package-lock.json
+!web/index.html
+!web/src/
+!web/src/**
+!web/public/
+!web/public/**
+**/__pycache__

@@ -83,7 +83,7 @@ manquant est nommé ; aucun fournisseur d'identité de remplacement.
 
 ## SLS-020
 
-Statut : [~] — contrôle, identité et objets ; spécification persistée.
+Statut : [~] — contrôle et console initiale déployés ; qualification en cours.
 
 API Python/SQLite avec migrations, SSO admin réel, sessions/CSRF, CRUD des
 namespaces/services/fonctions et tokens. E2E : persistance après redémarrage,
@@ -92,6 +92,14 @@ révocation, renouvellement et refus SSO. Références : PLATFORM organisation
 et identité ; [schéma](SCHEMA.md) et [API du contrôle](CONTROL.md).
 La tranche de console associée expose ces objets et le parcours SSO dès cette
 unité ; SLS-060 complète ses facettes d'exécution et la campagne transversale.
+Les parcours publics, l'accueil navigateur, la provenance réseau et les
+limites de connexion sont éprouvés. Les scénarios administrateur préparés
+attendent une connexion au vrai SSO ; ils ne sont pas déclarés réussis.
+Le [checkpoint du 6 novembre](evidence/control-dev-checkpoint-2026-11-06.json)
+regroupe six groupes HTTP, neuf contrôles navigateur, quatre chemins réseau,
+six scénarios de limite par client, deux de capacité globale et dix-sept
+de panne/reprise. Deux contrôles supplémentaires éprouvent l'interruption
+du pilote de preuve. Les dépendances verrouillées sont auditées.
 
 ## SLS-030
 

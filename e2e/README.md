@@ -1,0 +1,52 @@
+# Qualification de la plateforme
+
+Les clients de ce répertoire visent exclusivement le déploiement DEV réel.
+Ils n'importent pas les handlers, ne créent pas de serveur substitué et
+n'interceptent aucune réponse réseau. Le navigateur utilise la connexion SSO
+normale. Un accès absent est une erreur de prérequis, jamais un test ignoré.
+
+Installer les dépendances par `npm ci`, puis le navigateur par
+`npx playwright install chromium`. Exécuter un seul scénario à la fois.
+Les captures et fichiers contenant une session sont conservés uniquement
+sous `.local/`, ignoré par Git. Ne jamais publier un état de navigateur.
+
+Depuis la racine du dépôt, chaque commande attend la fin de la précédente :
+
+```sh
+python3 e2e/public.py
+node e2e/login-ui.mjs
+node e2e/authorize.mjs
+node e2e/control-admin.mjs
+node e2e/control-ui.mjs
+```
+
+`python3 e2e/proxy.py --expected-proxy 10.77.0.1` s'exécute depuis le poste et
+mesure les chemins réseau via HTTPS et SSH. Les pilotes `login-limits.py`,
+`login-capacity.py` et `control-operations.py` s'exécutent comme `spark-docker`
+dans le SPARK DEV. Les deux premiers exercent les limites SSO ; `login-limits`
+redémarre aussi le contrôle. Le dernier utilise des conteneurs temporaires de son image immuable pour les
+pannes de configuration, de clé et de base. Les fichiers `.proof-*.json`
+produits sous `/srv/p2enjoy-serverless/control` contiennent les résultats
+expurgés. Leurs ressources temporaires sont nettoyées après chaque campagne.
+`python3 e2e/report-interruption.py`, depuis le poste après `public.py`, tue
+réellement un client de preuve après son premier échange HTTP, vérifie que
+l'ancien rapport réussi est invalidé, puis rejoue la campagne publique.
+Les rapports ne valent que lorsque `completed` est vrai et les nettoyages
+réussis ; leur initialisation précède les prérequis externes.
+
+`authorize.mjs` ouvre Chromium sur l'entrée normale SSO ; le détenteur du
+compte s'y connecte lui-même. Le script ne lit aucun champ de mot de passe.
+Il conserve seulement le cookie de plateforme, sous `.local/e2e/` en mode
+0600, puis ferme le navigateur. Les cookies du fournisseur ne sont pas
+exportés. Les deux campagnes suivantes exigent cette vraie session ; son
+absence fait échouer leur prérequis.
+
+`control-admin.mjs` crée ses propres objets, qualifie les droits CRUD et
+redémarre le conteneur de contrôle du SPARK DEV pour éprouver la persistance.
+`control-ui.mjs` crée ses objets depuis la console et augmente temporairement
+la latence réelle de Chromium pour vérifier un envoi en cours ; il ne remplace
+aucune réponse. Les deux nettoient uniquement les objets qu'ils ont créés.
+
+Les scripts et preuves sont ajoutés au rythme de SLS-020 à SLS-060. Les premiers
+contrôles publics ont réussi ; les campagnes administrateur et la campagne
+complète de plateforme ne sont pas encore réussies.
