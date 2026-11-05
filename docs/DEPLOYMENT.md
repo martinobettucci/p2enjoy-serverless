@@ -13,6 +13,11 @@ PyYAML 6.0.3 verrouillé. ZIP, HTTP, empreintes et sélection des chemins utilis
 la bibliothèque standard. Le code Node est construit explicitement par son
 projet avant packaging ; aucun plugin YAML, script npm ou commande de build
 n'est exécuté par la CLI.
+L'installation utilise un environnement Python avec pip et le fichier de
+dépendances à empreintes, ou l'image Docker Python épinglée de l'adaptateur.
+Sa cible de qualification ajoute les vrais fichiers de test à cette même
+image ; elle exécute la CLI complète et conserve son rapport dans un montage
+dédié. Les deux services Compose DEV lisent les fichiers officiels de cellule.
 
 Le fichier par défaut est `serverless.yml`. `--config` sélectionne un autre
 manifeste dans le même projet. `plan` valide et affiche noms, contrats,

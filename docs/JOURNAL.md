@@ -551,3 +551,12 @@ vraies valeurs applicatives, un conteneur borné et sans réseau ni données
 métier ; les connexions réseau doivent commencer dans le handler. Cela permet
 de vérifier le vrai export tout en bornant les effets du chargement. La preuve
 d'invocation restera nécessaire pour les dépendances importées tardivement.
+
+La première CLI plan/package passe 24 scénarios réels. La revue a fait corriger
+l'exclusion du manifeste sélectionné avec --config et de ses liens physiques,
+la publication par descripteur de répertoire pour résister à son remplacement,
+le quota explicite des volumes et les entiers YAML hors bornes. Une course
+réelle à deux processus confirme qu'un lien substitué à la sortie ne détourne
+pas les écritures. Le poste ne fournit pas ensurepip ; la vérification d'une
+installation vierge se poursuit dans l'image Docker épinglée, sans installer
+de paquet système sur le poste.
