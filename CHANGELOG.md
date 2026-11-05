@@ -2,6 +2,9 @@
 
 ## [Non publié]
 
+- Contrat de plateforme et découpage SLS-010 à SLS-060 : identité, objets,
+  adaptation YAML, moteur Docker, stockage, exploitation et console.
+
 - Méthode software-factory-base importée : contrats, rôles Codex/Claude, hooks,
   scripts et campagne Git réelle. Formation et workflow pédagogique exclus.
 - Hooks standard activés dans le dépôt Git initialisé par le responsable.

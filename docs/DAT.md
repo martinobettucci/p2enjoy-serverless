@@ -1,10 +1,21 @@
 # Architecture technique
 
+## Plateforme
+
+Contrat de réalisation : [PLATFORM.md](PLATFORM.md). Le contrôle retenu est
+Python avec SQLite WAL local et un seul processus de coordination ; les
+transactions de réservation sont courtes et ne contiennent aucun appel Docker.
+L'interface prévue est React/Vite. Les instances Docker appartiennent au
+contrôle par labels et sont réconciliées au démarrage. Le mécanisme de quota
+dur est en qualification dans SLS-010 avant son choix définitif.
+
+Ces composants ne sont pas encore livrés. Le banc décrit ci-dessous reste
+actuellement le seul service déployé.
+
 ## Qualification
 
-QLF-001 construit d'abord l'application témoin indépendante demandée par le
-responsable. Les handlers et données sont créés ici. Aucun fichier ou artefact
-John Dalia n'est copié, modifié, compilé ou déployé.
+QLF-001 fournit l'application témoin de qualification, ses handlers et ses
+données synthétiques.
 
 ### Service synthétique
 

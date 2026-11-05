@@ -55,7 +55,7 @@ non encore implémentées.
 
 ## SLS-001
 
-Statut : [ ] — plateforme de management et moteur à développer.
+Statut : [~] — objectif autonome actif ; réalisation détaillée ci-dessous.
 
 Spécifier puis livrer par unités cohérentes les fonctions confirmées du produit :
 SSO admin, namespaces/services/functions, jetons CRUD et invocations avec jeton,
@@ -65,3 +65,64 @@ deadline d'invocation et extinction des instances. Chaque comportement livré
 exige sa preuve E2E réelle, notamment les refus et cycles de vie.
 Le banc QLF-001 constitue l'application indépendante pour cette qualification.
 Aucun de ses résultats ne clôture ces fonctionnalités de plateforme absentes.
+
+Spécification commune : [Contrat de plateforme](PLATFORM.md).
+
+## SLS-010
+
+Statut : [~] — qualification des prérequis d'hébergement.
+
+Qualifier le quota dur par fonction, le montage dans Docker rootless et sa
+persistance. Préparer l'intégration SSO réelle, le domaine DEV et les variables
+de cellule. Preuves : écriture jusqu'au plafond, isolation entre deux volumes,
+remontage, nettoyage des seules ressources de l'expérience. Un accès SSO
+manquant est nommé ; aucun fournisseur d'identité de remplacement.
+
+## SLS-020
+
+Statut : [ ] — contrôle, identité et objets.
+
+API Python/SQLite avec migrations, SSO admin réel, sessions/CSRF, CRUD des
+namespaces/services/fonctions et tokens. E2E : persistance après redémarrage,
+matrice de permissions, restriction interservice/fonction, expiration,
+révocation, renouvellement et refus SSO. Références : PLATFORM organisation
+et identité ; schéma à persister avant implémentation.
+
+## SLS-030
+
+Statut : [ ] — révisions et adaptateur.
+
+Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
+handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
+l'adaptateur, rejeter archives invalides, mettre à jour/rollback en préservant
+l'identifiant. Référence : PLATFORM adaptateur.
+
+## SLS-040
+
+Statut : [ ] — passerelle et moteur Docker.
+
+Invocation authentifiée, limites réelles, admission atomique, min/max/idle,
+deadline, descendants, drainage et réconciliation. CORS/IP ET/OU côté backend.
+E2E : succès/refus, saturation, mémoire/CPU/PIDs, délais, extinction/reprise,
+authentification métier, chaînes proxy, crash du contrôle et absence de rejeu.
+Références : PLATFORM origines et exécution.
+
+## SLS-050
+
+Statut : [ ] — stockage, crons et exploitation.
+
+Volumes par ID, quotas et modes, archive/purge, crons UTC, logs bornés et
+métriques. E2E : concurrence, saturation disque, cache, déploiement/rollback,
+redémarrage, cron réellement déclenché et diagnostic autorisé/refusé.
+Références : PLATFORM stockage et exploitation.
+
+## SLS-060
+
+Statut : [ ] — console et campagne complète.
+
+Parcours d'administration sur les API réelles : connexion, objets, jetons,
+code, variables/secrets, limites, état, stockage, historique et journaux.
+Lire et appliquer les deux design systems avant implémentation. Tester depuis
+l'accueil, clavier/souris, états vides/erreurs/données longues et mobile ;
+inspecter les captures. Exécuter la campagne complète, mettre à jour manuel,
+notes SPARK, installation/reprise, preuves et backlog. Zéro échec et zéro skip.

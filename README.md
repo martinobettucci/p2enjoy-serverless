@@ -16,17 +16,14 @@ socle d'exécution. Une interface permettra de gérer namespaces, fonctions,
 allocations, mémoire, stockage permanent par identifiant de fonction et durées
 du cycle d'exécution.
 
-Le stockage doit proposer des modes configurables par fonction pour les données
-métier et pour le cache reconstructible. Leurs règles de concurrence, rétention
-et suppression restent à spécifier.
+Le stockage propose des modes configurables par fonction pour les données
+métier et le cache reconstructible. Le [contrat de plateforme](docs/PLATFORM.md)
+définit concurrence, rétention, quotas et suppression ; son implémentation suit
+les unités du [backlog](docs/BACKLOG.md).
 
 Le premier projet de référence est `johndalia/jd_serverless`, actuellement
 déployé sur Scaleway. La décision confirmée est de conserver ses handlers et
 de réutiliser `serverless.yml` avec un adaptateur P2Enjoy.
-Ce projet client reste une référence en lecture seule : **aucun code, secret,
-configuration ou donnée John Dalia ne doit être copié, modifié ou déployé**.
-L'application de qualification utilise exclusivement du code original et des
-données synthétiques de ce dépôt.
 
 ## Accès confirmé
 
@@ -35,8 +32,8 @@ données synthétiques de ce dépôt.
   service, avec des droits CRUD.
 - `Create` et `Update` permettent la création ou modification des fonctions,
   du code, des variables, des secrets et des configurations, suivant le droit.
-- `Delete` permet la suppression ; le sort des données persistantes doit être
-  précisé avant implémentation.
+- `Delete` supprime une fonction en archivant ses données persistantes ; la
+  purge des archives constitue une opération administrateur distincte.
 - `Read` autorise l'invocation. Une invocation peut avoir des effets métier en
   écriture ; ce droit ne signifie pas que le handler est sans effet de bord.
 - L'authentification métier reste indépendante et peut être implémentée dans

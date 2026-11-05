@@ -330,3 +330,29 @@ Preuve actuelle : docs/evidence/qualification-dev-2026-11-05-complete.json.
 Les preuves 17/19 sont historiques. La matrice porte sur le banc réellement
 livré ; elle ne vaut ni couverture de lignes à 100 %, ni qualification du SSO,
 de l'UI et des fonctions de plateforme encore non implémentés.
+
+## 2026-11-05 — Objectif autonome et contrats de plateforme
+
+L'objectif actif est la livraison complète du contrôle, du runtime et de la
+console, avec leurs preuves E2E sur le SPARK. Les anciennes propositions de
+cadrage sont tranchées par PLATFORM.md : namespace/service/fonction UUID,
+jetons X-Serverless-Token, restriction facultative aux fonctions, Read incluant
+consultation et invocation, archivage durable à la suppression, purge admin,
+ET par défaut pour les politiques origine/IP, exclusivité des données par
+défaut et partage explicite, révisions immuables et aucun rejeu après crash.
+
+Le contrôle Python/SQLite est retenu pour la cellule unique ; l'ordonnancement
+sera centralisé avec réservations atomiques courtes. Un processus applicatif
+neuf par invocation évite les connexions globales périmées ; le conteneur peut
+rester prêt. Un timeout recycle tout le conteneur pour supprimer ses descendants.
+La compatibilité de référence inclut les champs Scaleway, HTTP implicite,
+cron à cinq champs, héritage env/secret et artefacts compilés avec dépendances.
+Node 20 n'est pas assimilé silencieusement à Node 24.
+
+Les revues indépendantes ont identifié le quota dur comme risque d'hébergement.
+/dev/fuse et fusermount3 sont présents dans le SPARK. Décision : qualifier un
+filesystem de taille bornée et son montage Docker avant de retenir le mécanisme.
+SLS-010 couvre cette preuve et les prérequis SSO. Les autres unités sont
+persistées dans BACKLOG avant leur implémentation. Le SSO public répond ; le
+domaine envisagé ne résout pas et la console locale ne répond plus sur 5175.
+Aucune preuve de plateforme n'est déduite du banc existant.
