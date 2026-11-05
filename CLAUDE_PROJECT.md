@@ -1,0 +1,38 @@
+# Contrat local
+
+- Lire le README racine et celui du premier sous-dossier concerné avant agir.
+- Ne jamais lancer de profil PREPROD ou PROD, même pour une qualification.
+- John Dalia est exclusivement une référence : ne modifier, copier ou déployer
+  aucun code, configuration, donnée ou secret du client. Les fixtures sont
+  originales, synthétiques et conservées dans ce dépôt.
+- La seule cible distante autorisée est le SPARK DEV décrit dans
+  `docs/dev-spark.md`. La FORGE ne sert que de rebond SSH : aucune commande
+  d'administration, modification de route ou autre opération sur elle.
+- Appliquer le contrat de configuration et les propositions `.?` du SPARK.
+- Un seul build, test ou scénario à la fois ; attendre sa fin complète.
+- Aucun mock, stub, faux serveur, interception réseau ou remplacement d'une
+  dépendance. Toute fonctionnalité testée doit l'être E2E sur le vrai code
+  effectivement déployé. Le client de test ne démarre pas son propre serveur
+  applicatif et n'importe pas les handlers pour contourner l'entrée HTTP.
+- Toutes les fonctionnalités livrées doivent être testées E2E. Aucun skip ni
+  succès conditionnel : un prérequis absent fait échouer la campagne. Les
+  parcours positifs, refus, limites et cycles de vie font partie de la preuve.
+- Cette instruction utilisateur remplace les tests unitaires obligatoires et
+  les mocks parfois autorisés par le contrat global. Les contrôles statiques
+  restent distincts des preuves fonctionnelles.
+- L'agent principal est le seul écrivain. Les délégations de revue sont en
+  lecture seule, sans lancement de tests ni opération distante.
+- Aucun résultat du banc ne prouve la compatibilité complète du client ni une
+  fonction de plateforme qui n'existe pas encore.
+
+La méthode est importée depuis `P2Enjoy/software-factory-base` ; provenance et
+adaptations : `docs/METHODE.md`. La routine planifiée est inactive. Aucun
+bootstrap de FORGE, démon local, contournement TLS ou lancement PREPROD/PROD
+mentionné dans CloudWorker n'est applicable ici. Les opérations restent
+limitées au SPARK DEV autorisé et à son contrat normal de configuration.
+Les preuves Git utilisent des dépôts jetables locaux. Aucun remote du produit
+n'est créé ni poussé implicitement. L'absence de remote est signalée.
+
+La consigne de commits de la méthode s'applique avec l'identité configurée du
+responsable. L'absence de remote n'autorise pas à en inventer un : la preuve
+locale et le commit sont conservés, et l'absence de push est déclarée.

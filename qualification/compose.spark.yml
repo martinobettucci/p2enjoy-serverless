@@ -1,0 +1,10 @@
+# @spec docs/BACKLOG.md#qlf-001 | docs/DAT.md#deploiement-dev
+services:
+  qualification:
+    env_file:
+      - /etc/spark/env
+      - /run/spark/secrets
+  e2e:
+    env_file:
+      - /etc/spark/env
+      - /run/spark/secrets

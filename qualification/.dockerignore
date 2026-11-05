@@ -1,0 +1,13 @@
+*
+!package.json
+!package-lock.json
+!serverless.yml
+!src/
+!src/**
+!runner/
+!runner/**
+!tests/
+!tests/**
+
+**/__pycache__/
+**/*.pyc

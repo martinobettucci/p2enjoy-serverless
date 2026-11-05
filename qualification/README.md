@@ -1,0 +1,147 @@
+# Application de qualification DEV
+
+Service synthétique destiné à éprouver les développements de P2Enjoy Serverless.
+Tout le code et les données sont propres à ce dépôt. Aucun artefact John Dalia
+n'est utilisé. Spécification : `../docs/DAT.md#qualification`, unité QLF-001.
+
+L'exécuteur de référence sert uniquement au développement. Il ne remplace pas
+la plateforme et ne prouve ni SSO, ACL CRUD, quotas par fonction ni autoscaling.
+Son accès HTTP est limité à `127.0.0.1:18080`. Ne pas l'exposer publiquement.
+
+## Installer, lancer et vérifier
+
+Prérequis : Docker Engine avec Compose, Bash. Aucun Node installé sur l'hôte
+n'est requis. L'image Node 24 est verrouillée par digest ; la dépendance YAML
+est verrouillée par `package-lock.json`. Les services externes sont inutiles.
+
+Depuis ce répertoire, exécuter une commande à la fois :
+
+```sh
+bash dev.sh build
+bash dev.sh up
+bash dev.sh check
+bash dev.sh test
+bash dev.sh probe
+bash dev.sh recreate-proof
+bash dev.sh status
+```
+
+Dans le SPARK, utiliser `bash dev.sh --spark <commande>` pour chacune. Cet
+argument ajoute obligatoirement les deux `env_file` du contrat de cellule.
+La pile utilise exclusivement le profil `dev`. Aucun profil PREPROD/PROD.
+`test` lance un conteneur client distinct qui appelle le service déjà déployé
+par HTTP, sans importer ses modules ni démarrer de serveur. Aucun mock, faux
+serveur, interception réseau ou substitution de dépendance. Les scénarios sont
+séquentiels ; un prérequis absent fait échouer la campagne, sans test ignoré.
+La matrice complète est dans `../docs/TEST_MATRIX.md`. Sur le SPARK DEV,
+`bash dev.sh --spark operations` vérifie aussi confinement, logs, arrêt actif,
+manifestes invalides et pannes de stockage/processus dans des conteneurs isolés
+portant la même image réelle. Python 3 est requis sur la cellule pour ce pilote.
+`recreate-proof` incrémente le compteur, mémorise la génération du cache,
+crée un job partiel, recrée le conteneur puis vérifie les deux volumes et
+reprend le calcul du job jusqu’à son résultat complet.
+
+Logs et arrêt, avec le même argument `--spark` sur la cellule :
+
+```sh
+bash dev.sh logs
+bash dev.sh stop
+```
+
+Le code peut aussi se travailler avec Node 24 : `npm ci --ignore-scripts` et
+`npm run check`. Ce dernier est un contrôle statique, pas une preuve E2E du
+déploiement. `npm test` s'exécute dans le conteneur client et nécessite le vrai
+service Compose démarré, joignable sous son nom de service `qualification`.
+`npm start` est l'entrée du conteneur et écoute sur toutes ses interfaces ;
+préférer Compose pour bénéficier de la publication limitée à la boucle locale.
+
+## Utiliser le banc
+
+Le serveur de référence expose HTTP sur `127.0.0.1:18080` de l'hôte DEV :
+
+```sh
+curl --fail http://127.0.0.1:18080/healthz
+curl --fail http://127.0.0.1:18080/catalog
+curl --fail -H 'Content-Type: application/json' -d '{"message":"essai"}' http://127.0.0.1:18080/functions/echo
+```
+
+Le handler `business` exige un véritable jeton confidentiel fourni par la
+cellule sous `QUALIFICATION_BUSINESS_TOKEN`, transmis en `Authorization:
+Bearer <jeton>`. Sans configuration, il répond 503 et n'accorde aucun accès.
+L'ancien marqueur public n'est plus une identité de démonstration acceptée.
+Le serveur n'implémente aucune authentification de plateforme. Ne jamais y
+injecter de code, jetons ou données de client. Le manifeste est la cible du
+futur adaptateur P2Enjoy : `serverless deploy` n'est pas encore disponible.
+
+| Fonction | Contrat à qualifier |
+| --- | --- |
+| `echo` | HTTP, corps, query, contexte et identifiant d'invocation |
+| `binary` | Réponse binaire encodée en base64 par le handler |
+| `callback` | Callback et Promise : première terminaison seulement |
+| `business` | Contrôle d'un vrai jeton métier configuré, sans succès simulé |
+| `configuration` | Variables déclarées et présence d'un secret sans sa valeur |
+| `state` | Compteur persistant, GET ou POST avec incrément de 1 à 10 |
+| `cache` | Cache reconstructible, GET et invalidation par DELETE |
+| `worker` | Calcul PBKDF2 sur les entrées d'un job nommé, checkpoint et reprise |
+| `failure` | Exception, rejet de Promise ou sortie brutale |
+| `sleep` | Attente bornée pour éprouver le timeout |
+| `spin` | Boucle CPU volontairement interrompue par le superviseur |
+| `relay` | Appel HTTP de pairs réels limités à echo, failure et sleep |
+
+## Configuration
+
+Le serveur peut démarrer sans secret, mais cela ne qualifie pas les parcours
+d'authentification et d'injection de secret présent. `configuration` comprend
+`QUALIFICATION_PUBLIC_LABEL` (texte public,
+défaut invariant `qualification`) et `QUALIFICATION_SYNTHETIC_SECRET` (secret
+de test uniquement, présence rendue sous forme booléenne). Dans le SPARK, ils
+doivent venir des fichiers de cellule ; aucun `.env` n'est créé. Le jeton
+`QUALIFICATION_BUSINESS_TOKEN` est un secret requis pour activer `business`.
+Les tests lisent les mêmes fichiers de cellule que l'application, sans injecter
+ou fabriquer de configuration. L'absence de secrets fait échouer la campagne.
+Sur le SPARK DEV autorisé, les deux secrets et le label ont été posés par
+l'API normale de la console, au seul niveau de ce Spark. Leurs valeurs restent
+hors du dépôt et des rapports. Le cas sans configuration est également éprouvé
+dans un vrai conteneur dont le manifeste ne déclare aucune variable de fonction.
+
+L'environnement ambiant n'est pas transmis intégralement aux fonctions. Les
+chemins de stockage et l'adresse du pair de `relay` sont des valeurs calculées
+par l'exécuteur, pas une configuration de déploiement à recopier.
+
+## Données de démonstration
+
+Les données durables et le cache sont stockés dans deux volumes dédiés à ce
+banc. Un arrêt ou une recréation les conserve ; aucune suppression de
+volume ne fera partie des commandes normales de test ou de déploiement.
+
+Les fonctions state, cache et worker acceptent `?key=<identifiant>` (1 à 64
+caractères alphanumériques, tirets et underscores). GET lit, DELETE supprime
+uniquement cette ressource ; POST incrémente le compteur ou lance/reprend un
+job. Un job est créé avec `{"items":["texte", "autre texte"]}`, de 1 à 128
+entrées, chacune de 128 caractères au maximum. Changer les entrées d'un job
+existant est refusé avec 409. Les résultats calculés sont réellement stockés.
+
+Chaque campagne crée des identifiants uniques et nettoie ses ressources via
+HTTP. Elle ne lit ni ne modifie directement les fichiers applicatifs. Le volume
+de rapports est réservé au client E2E ; il conserve les observations attendues
+entre les deux étapes de la vraie recréation Docker.
+
+## Limites explicites
+
+Une invocation = un processus enfant frais. Le banc n'offre pas encore de
+conteneur par fonction, d'instance chaude, de cron, d'autoscaling, de garantie
+exactement une fois, de quota disque par fonction, de SSO ni d'ACL plateforme.
+Les budgets mémoire du manifeste sont déclaratifs ; le catalogue le signale.
+Le conteneur complet est limité à 384 Mio, 0,5 CPU et 96 processus. Les délais
+d'invocation incluent le démarrage du processus enfant. Seul le sous-ensemble
+de manifeste présent est pris en charge ; les extensions de fonction inconnues
+sont refusées.
+
+La file d'admission est limitée à seize requêtes. Un appel interne peut être
+refusé si cette file est saturée ; `relay` propage alors le statut d'erreur du
+pair. Aucun mécanisme de réservation de capacité interne n'est revendiqué.
+Les scénarios restent séquentiels. Les scénarios de contention et de saturation
+émettent plusieurs vraies requêtes comme charge d'un seul scénario, puis
+attendent leur fin et nettoient leurs ressources. Le relais propage les vrais
+statuts 500, 504 et 429 de ses pairs. L'admission est observée via la santé.
+Aucun serveur de substitution n'est utilisé.

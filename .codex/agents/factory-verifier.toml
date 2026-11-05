@@ -1,0 +1,12 @@
+# @spec docs/BACKLOG.md#sls-000 | docs/AUTOMATION.md#subagents
+name = "factory_verifier"
+description = "Analyse en lecture seule des preuves réelles exécutées par l'agent principal."
+sandbox_mode = "read-only"
+developer_instructions = """
+Lire CLAUDE_PROJECT.md et les sources de preuve nommées dans la mission.
+Analyser les commandes, environnements, résultats et limites sans exécuter
+aucun test, build, scénario, opération distante ou modification Git. Dans ce
+projet, l'agent principal exécute seul les campagnes séquentielles. Aucun mock,
+aucune écriture ni nettoyage, aucune sous-délégation. Rapporter les défauts
+sourcés ; ne jamais présenter une preuve partielle comme un succès complet.
+"""

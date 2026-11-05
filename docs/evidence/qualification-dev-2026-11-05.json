@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-05",
+  "unit": "QLF-001",
+  "environment": "dev",
+  "target": "infra-serverless",
+  "local_source": "qualification/",
+  "remote_source": "/srv/p2enjoy-serverless/qualification",
+  "node": "v24.22.2",
+  "docker": "29.9.3",
+  "docker_mode": "rootless",
+  "image": "sha256:2548005caae943094b6cd143bd91ce05d3af72b67faab1a913139f17e1f2202d",
+  "manifest_functions": 12,
+  "tests": {
+    "unit": {
+      "passed": 7,
+      "failed": 0
+    },
+    "http_e2e": {
+      "passed": 14,
+      "failed": 0
+    },
+    "execution": "sequential campaigns; one dedicated two-request contention scenario"
+  },
+  "deployed_http_smoke": "passed",
+  "container_recreation": {
+    "state_preserved": true,
+    "cache_preserved": true,
+    "counter_after": 2
+  },
+  "runtime": {
+    "health": "healthy",
+    "user": "node",
+    "memory_bytes": 402653184,
+    "nano_cpus": 500000000,
+    "pids_limit": 96,
+    "host_bind": "127.0.0.1:18080"
+  },
+  "npm_audit": {
+    "known_vulnerabilities": 0
+  },
+  "notes": {
+    "README.md.?": "written-and-verified",
+    "CONTRIBUTORS.md.?": "written-and-verified",
+    "INSTALL.md.?": "written-and-verified",
+    "official_notes_updated": false
+  },
+  "variables_proposed": [],
+  "secrets_proposed": [],
+  "routes_proposed": [],
+  "configuration_contract": "two Spark env_file entries; no .env, Dockerfile ENV/ARG or Compose environment",
+  "local_remote_sources_match": true,
+  "source_sha256": {
+    "Dockerfile": "1287f1ec247d0fdf2a5d6fdd4da7654a4f18c5248def12f7311b3873f40a60dc",
+    "compose.dev.yml": "a4a0190097cdd20928f6e86eb5fecf3c7c5eaf00dac2e30094b7c3bd6f36fc2f",
+    "compose.spark.yml": "e6b2bcc90fd7aeb45ab40dd0935db4495f6c7e708d5299216f562ee48c7624f0",
+    "dev.sh": "988d46df0f837c691b87b5ee20aae6c44c03d472b687615f32aad60118acd941",
+    "package-lock.json": "a17bb562a678057a489381abef0f494cdf33c3a15d5233a2bbd2d3b22813015d",
+    "package.json": "3d437222d6d9c7742308b73dcc374e0f8e3aff87352c19ed905b98e2df0eb3e8",
+    "runner/check.cjs": "1022c5841a1a45e8756647727bd65f0140fb78b3414e4d9abeba0c38e47889d0",
+    "runner/child.cjs": "d79af9a682c30908493a13c0a7573322ee5ca4dc1d96f83b68951cd2b146ef5e",
+    "runner/invoke.cjs": "3423f40d03c9fe9401a3327f882b411d01e5c3e208e3a304e255474eb443b1e7",
+    "runner/manifest.cjs": "f799469b4f7779581b4f06697c0041839f9b8541ef839da66a6fca70bcab6a52",
+    "runner/server.cjs": "8a4054ea51b505569ba499ffaf200e2c14343cfdee77d51418720cb922defdb3",
+    "serverless.yml": "2b5708e2db4f5b6aacf051f499f81f4f0c26ead809f96d139305737241643643",
+    "src/handlers.cjs": "fa2c1b6df60200e0ebd372467f8e54064f4aef8cb2cc1260c084bcf1212a8a5e",
+    "tests/e2e.test.cjs": "6c62b0627e22f6637154925aae0f280e83aad060c77d09a295c6913508c4a6ec",
+    "tests/probe.cjs": "8739d89371743200501e5b30ddc32d7b44f1ab5a278615b15efef1fecfe3f5e7",
+    "tests/unit.test.cjs": "e9db9214dc11f018324ad1da50521cb0ff732d7af4a9cb6d3bf926232dccaeb5"
+  },
+  "not_proven": [
+    "full client compatibility",
+    "SSO and platform CRUD ACLs",
+    "per-function containers and memory/disk quotas",
+    "autoscaling",
+    "public ingress"
+  ],
+  "client_deployed": false,
+  "forge_administration_performed": false,
+  "git_commit": null,
+  "git_push": false,
+  "status": "historical-superseded-by-e2e-only-policy",
+  "scope_correction": "Previous unit suite included a fixed-response HTTP stub; previous HTTP suite started a private real-code server. Only smoke and recreation targeted the deployed container. Not current E2E qualification."
+}

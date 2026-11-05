@@ -1,0 +1,46 @@
+# @spec docs/BACKLOG.md#qlf-001 | docs/DAT.md#qualification
+name: p2enjoy-qualification-dev
+services:
+  qualification:
+    profiles: [dev]
+    build: .
+    image: p2enjoy-qualification:dev
+    init: true
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 384m
+    cpus: 0.5
+    pids_limit: 96
+    ports: ["127.0.0.1:18080:8080"]
+    volumes:
+      - qualification-data:/app/.state/data
+      - qualification-cache:/app/.state/cache
+    tmpfs: ["/tmp:size=32m,mode=1777"]
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:8080/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    logging:
+      driver: json-file
+      options: { max-size: 5m, max-file: "2" }
+  e2e:
+    profiles: [dev]
+    image: p2enjoy-qualification:dev
+    command: [npm, test]
+    init: true
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 192m
+    cpus: 0.25
+    pids_limit: 48
+    volumes:
+      - qualification-reports:/reports
+    tmpfs: ["/tmp:size=16m,mode=1777"]
+volumes:
+  qualification-data:
+  qualification-cache:
+  qualification-reports:

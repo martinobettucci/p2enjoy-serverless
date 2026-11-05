@@ -1,0 +1,85 @@
+{
+  "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+  "health": {
+    "status": "ok",
+    "kind": "qualification-reference-runner",
+    "activeInvocations": 0,
+    "pendingRequests": 0
+  },
+  "docker_health": "healthy",
+  "running_containers": [
+    "p2enjoy-qualification-dev-qualification-1"
+  ],
+  "configured": {
+    "QUALIFICATION_BUSINESS_TOKEN": true,
+    "QUALIFICATION_SYNTHETIC_SECRET": true,
+    "QUALIFICATION_PUBLIC_LABEL": true
+  },
+  "source_sha256": {
+    ".dockerignore": "3a02e90c877a6fe14a5c21f33da0b78465c5c9c7cf1720ee8ef39caf81fd516d",
+    "Dockerfile": "004f6fd0304b021ba1a9a4c04603f8de22e58645dd4e3534561ad23940bc2bfa",
+    "compose.dev.yml": "e3562d78c56ab956b9f3e9054be3f8827efac8a51bbfcaeac7ee825d4ff7914c",
+    "compose.spark.yml": "15c642dbfabde2557b23b9e17229752837a25e37fb156e06d5cda05aaaae5ff6",
+    "dev.sh": "f7c3f662be21aee2b248efeeedf3675d3b9fef2c19b2aa987e049091f5104871",
+    "package-lock.json": "a17bb562a678057a489381abef0f494cdf33c3a15d5233a2bbd2d3b22813015d",
+    "package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+    "runner/check.cjs": "1022c5841a1a45e8756647727bd65f0140fb78b3414e4d9abeba0c38e47889d0",
+    "runner/child.cjs": "cdfabf1f965bd60e7c8a0062217e90a30954800d6f337037c2fe5999c83d9607",
+    "runner/invoke.cjs": "3efcea72ced0ef2fefff1b2320130a6f8b254cc9be72a67a93cfe29ff76dfe87",
+    "runner/manifest.cjs": "f2ba71be874e257371b34ddfb72b9b5554ff725ba20b331295eac508f3c0c278",
+    "runner/server.cjs": "011eade770814db10083e80f014e6b688df6e98f2dc1328b8262fce91fe92023",
+    "serverless.yml": "7d2c031948052fe08f4eeac9a621ab714d86beb2a62eda33187a7a30ed63094b",
+    "src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+    "tests/configuration-absent.cjs": "5babe86d1bfd77628fa722491458bd3abeb9676aac12b8be26f3ecd94181bc5d",
+    "tests/e2e.test.cjs": "29c371406554337fa445c60c69dbcde425eb3940a4494c2909a71b3031e26dd9",
+    "tests/http.cjs": "eb9d618272fdbce1a3bc4ccb8db36dae622cc173a467eb65a1653deb7f205661",
+    "tests/operations.py": "67e9ba7f61c7c811d85067af4f94923a26150db5638788c6a26e470314f357e5",
+    "tests/probe.cjs": "709f4ee687be19ef22d2f60f08c71f9b7f77fcad1aec7ea7e8c7157924bac6b4"
+  },
+  "date": "2026-11-05",
+  "environment": "dev",
+  "target": "infra-serverless",
+  "unit": "QLF-001",
+  "local_remote_sources_match": true,
+  "policy": "Real E2E only; no mocks, substitute dependencies, skipped or conditional-success tests",
+  "http": {
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "duration_ms": 139868.129503
+  },
+  "docker_operations": {
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0
+  },
+  "pre_configuration_absence": {
+    "passed": 2
+  },
+  "smoke": "passed",
+  "recreation": {
+    "state_preserved": true,
+    "cache_preserved": true,
+    "worker_checkpoint_preserved": true,
+    "worker_resumed_to_completion": true,
+    "separate_client_volume": true
+  },
+  "scope": "All delivered qualification-app contracts listed in docs/TEST_MATRIX.md; not a source-line coverage percentage or qualification of unimplemented platform features",
+  "absent_platform_features": [
+    "SSO",
+    "CRUD tokens",
+    "UI",
+    "deployment adapter",
+    "origin/IP policies",
+    "per-function quotas and container lifecycle"
+  ],
+  "configuration_method": "existing local console API, scope spark infra-serverless only",
+  "routes": [],
+  "secrets_values_recorded": false,
+  "notes": {
+    "README.md.?": "proposal updated and verified",
+    "CONTRIBUTORS.md.?": "proposal updated and verified",
+    "INSTALL.md.?": "proposal updated and verified"
+  },
+  "official_notes_modified": false
+}

@@ -1,0 +1,74 @@
+# @spec docs/BACKLOG.md#qlf-001 | docs/DAT.md#qualification
+# Service original de qualification. Le fournisseur est un contrat, pas un plugin livre.
+service: p2enjoy-qualification
+provider:
+  name: p2enjoy
+  runtime: nodejs24.x
+functions:
+  echo:
+    handler: src/handlers.echo
+    timeout: 2
+    memorySize: 128
+    events: [{ http: { path: echo, method: any } }]
+  binary:
+    handler: src/handlers.binary
+    timeout: 2
+    memorySize: 128
+    events: [{ http: { path: binary, method: get } }]
+  callback:
+    handler: src/handlers.callback
+    timeout: 2
+    memorySize: 128
+    events: [{ http: { path: callback, method: post } }]
+  business:
+    handler: src/handlers.business
+    timeout: 2
+    memorySize: 128
+    events: [{ http: { path: business, method: post } }]
+    p2enjoy:
+      environmentKeys: [QUALIFICATION_BUSINESS_TOKEN]
+  configuration:
+    handler: src/handlers.configuration
+    timeout: 2
+    memorySize: 128
+    events: [{ http: { path: configuration, method: get } }]
+    p2enjoy:
+      environmentKeys: [QUALIFICATION_PUBLIC_LABEL, QUALIFICATION_SYNTHETIC_SECRET]
+  state:
+    handler: src/handlers.state
+    timeout: 2
+    memorySize: 128
+    events: [{ http: { path: state, method: any } }]
+    p2enjoy: { functionId: qlf-state-v1, storage: data }
+  cache:
+    handler: src/handlers.cache
+    timeout: 2
+    memorySize: 128
+    events: [{ http: { path: cache, method: any } }]
+    p2enjoy: { functionId: qlf-cache-v1, storage: cache }
+  worker:
+    handler: src/handlers.worker
+    timeout: 1
+    memorySize: 128
+    events: [{ http: { path: worker, method: any } }]
+    p2enjoy: { functionId: qlf-worker-v1, storage: data }
+  failure:
+    handler: src/handlers.failure
+    timeout: 1
+    memorySize: 128
+    events: [{ http: { path: failure, method: post } }]
+  sleep:
+    handler: src/handlers.sleep
+    timeout: 1
+    memorySize: 128
+    events: [{ http: { path: sleep, method: post } }]
+  spin:
+    handler: src/handlers.spin
+    timeout: 0.4
+    memorySize: 128
+    events: [{ http: { path: spin, method: post } }]
+  relay:
+    handler: src/handlers.relay
+    timeout: 3
+    memorySize: 128
+    events: [{ http: { path: relay, method: post } }]

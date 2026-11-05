@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-05",
+  "unit": "QLF-001",
+  "policy": "E2E on deployed real code; no mocks or substitute dependencies",
+  "environment": "dev",
+  "target": "infra-serverless",
+  "local_source": "qualification/",
+  "remote_source": "/srv/p2enjoy-serverless/qualification",
+  "tests": {
+    "registered": 19,
+    "passed": 17,
+    "failed": 0,
+    "not_qualified": 2,
+    "client": "separate Docker container on real Compose network",
+    "application_started_by_tests": false,
+    "application_imports_in_client": false,
+    "suites": "sequential",
+    "contention": "two real HTTP requests in one scenario"
+  },
+  "not_qualified": [
+    {
+      "feature": "Positive business token authentication",
+      "reason": "Actual cell secret QUALIFICATION_BUSINESS_TOKEN absent"
+    },
+    {
+      "feature": "Positive configured secret injection",
+      "reason": "Actual cell secret QUALIFICATION_SYNTHETIC_SECRET absent"
+    }
+  ],
+  "real_behaviors_verified": [
+    "HTTP/context/binary/callback",
+    "named counter and cache lifecycle",
+    "concurrent writes without loss",
+    "PBKDF2 job computation/checkpoint/resume/input-conflict",
+    "exception/rejection/process exit",
+    "handler entry and forced deadline",
+    "real peer success/failure/timeout",
+    "HTTP routing/method/body-size refusals",
+    "actual environment defaults",
+    "business access refuses missing configuration"
+  ],
+  "deployed_http_smoke": "passed",
+  "container_recreation": {
+    "state_preserved": true,
+    "cache_preserved": true,
+    "observations_in_separate_client_volume": true
+  },
+  "absent_platform_features_not_tested": [
+    "SSO",
+    "CRUD service tokens",
+    "origin/IP policies",
+    "per-function container and quotas",
+    "autoscaling",
+    "cron"
+  ],
+  "historical_proof": "qualification-dev-2026-11-05.json",
+  "image": "sha256:b0ef4c2b40537b0704e223d9b3e2ef80f6d9169d7de10ed3e696dc5c8eeb3666",
+  "health": "healthy",
+  "application_user": "node",
+  "port_bindings": {
+    "8080/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "18080"
+      }
+    ]
+  },
+  "client_volume_targets": [
+    "/reports"
+  ],
+  "notes": {
+    "README.md.?": "updated-and-verified",
+    "CONTRIBUTORS.md.?": "updated-and-verified",
+    "INSTALL.md.?": "updated-and-verified"
+  },
+  "variables_proposed": [
+    "QUALIFICATION_PUBLIC_LABEL"
+  ],
+  "secrets_proposed": [
+    "QUALIFICATION_BUSINESS_TOKEN",
+    "QUALIFICATION_SYNTHETIC_SECRET"
+  ],
+  "routes_proposed": [],
+  "source_sha256": {
+    "Dockerfile": "004f6fd0304b021ba1a9a4c04603f8de22e58645dd4e3534561ad23940bc2bfa",
+    "compose.dev.yml": "e3562d78c56ab956b9f3e9054be3f8827efac8a51bbfcaeac7ee825d4ff7914c",
+    "compose.spark.yml": "15c642dbfabde2557b23b9e17229752837a25e37fb156e06d5cda05aaaae5ff6",
+    "dev.sh": "6bfe22e2c8efe0f8050771c85162ab5630823d34d9f5033b2e2de00521c63a63",
+    "package-lock.json": "a17bb562a678057a489381abef0f494cdf33c3a15d5233a2bbd2d3b22813015d",
+    "package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+    "runner/check.cjs": "1022c5841a1a45e8756647727bd65f0140fb78b3414e4d9abeba0c38e47889d0",
+    "runner/child.cjs": "d79af9a682c30908493a13c0a7573322ee5ca4dc1d96f83b68951cd2b146ef5e",
+    "runner/invoke.cjs": "f5bc5677f57e2ecf93f0a5b20c2f37dfdf3ca28657c1cabb3419d1110b735f99",
+    "runner/manifest.cjs": "f2ba71be874e257371b34ddfb72b9b5554ff725ba20b331295eac508f3c0c278",
+    "runner/server.cjs": "8224e08aad9f5ea195d2528f6cea693430f52ceb20b1932fb16d95575655f81e",
+    "serverless.yml": "7d2c031948052fe08f4eeac9a621ab714d86beb2a62eda33187a7a30ed63094b",
+    "src/handlers.cjs": "93a0a0e199c41fa7fbcf0e58c2eeaee6f64cb41075ba9093b5194c7a03e4a2d5",
+    "tests/e2e.test.cjs": "162ef814aa39f734ab75e3407e3d83a42e421baa929e6680dffdfab8b300a80f",
+    "tests/http.cjs": "67df237919b843ef9dacf8fea4f95f29d977a2c75145af243f22e1a13c9726f0",
+    "tests/probe.cjs": "102f17222cd8251e52bf42e52fcc3e78bc7b0a167c87aae6948ff914ecb6ce8d"
+  },
+  "official_notes_changed": false,
+  "git_commit": null,
+  "git_push": false,
+  "local_remote_sources_match": true,
+  "status": "historical-partial-superseded-by-complete-campaign",
+  "superseded_by": "qualification-dev-2026-11-05-complete.json"
+}

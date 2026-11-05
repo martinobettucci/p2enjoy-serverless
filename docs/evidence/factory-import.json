@@ -1,0 +1,219 @@
+{
+  "source": "https://github.com/P2Enjoy/software-factory-base",
+  "commit": "886ba5a28a834a5f08fd1a01ec8dd78787317559",
+  "files": [
+    {
+      "path": ".claude/agents/factory-explorer.md",
+      "upstream_blob": "bbb22f5dbbe5c48d0a53e1436c526403f3bf4f98",
+      "mode": "100644",
+      "installed_sha256": "abffd1360566de79aa3ec41ea5acb630c23d635a12c12fccc0c1074492ae8d69",
+      "adapted": true
+    },
+    {
+      "path": ".claude/agents/factory-resolver.md",
+      "upstream_blob": "3f9cdbb66410beddadf4f3262411a92bb9fdedc7",
+      "mode": "100644",
+      "installed_sha256": "e85d8520d4c7275627a2123f6f138932eaf82aee5779b8e3a8f56c60adb42d4e",
+      "adapted": true
+    },
+    {
+      "path": ".claude/agents/factory-reviewer.md",
+      "upstream_blob": "08a631dea07eeacae2b2fd4dad4fe91df405c77a",
+      "mode": "100644",
+      "installed_sha256": "7f5ab8b25a4f57106f68c6bee704544e222cbb44ecebea02396ddd09acf3d63d",
+      "adapted": true
+    },
+    {
+      "path": ".claude/agents/factory-verifier.md",
+      "upstream_blob": "784517ae4131ac5e1018e07c0ee8daba3c5bbb90",
+      "mode": "100644",
+      "installed_sha256": "e4699edf31ad3e121823bc562e2f51a61802a72abdb506c56a4c83f4fa446a50",
+      "adapted": true
+    },
+    {
+      "path": ".codex/agents/factory-explorer.toml",
+      "upstream_blob": "4308ee74890efe5fcd955be1845ea27b3a454366",
+      "mode": "100644",
+      "installed_sha256": "42a30f27d07d7b2050fc667c11a0edf3ee99297c1be4dd38db078dff5e5a6e8c",
+      "adapted": true
+    },
+    {
+      "path": ".codex/agents/factory-resolver.toml",
+      "upstream_blob": "b7f83f19c8466682be4e6617e18d66743d0f1a4f",
+      "mode": "100644",
+      "installed_sha256": "2b6400490714ac59cc163d7414b69d7e2238f68eec3d6c16b41452d1d748e4f8",
+      "adapted": true
+    },
+    {
+      "path": ".codex/agents/factory-reviewer.toml",
+      "upstream_blob": "4401bb0399f07087b908c058d71edf471007508b",
+      "mode": "100644",
+      "installed_sha256": "c7f1eca4d75b35972835ba18e6a8b196cbb635127ce2ec7bd0c8bafa2ff816fb",
+      "adapted": true
+    },
+    {
+      "path": ".codex/agents/factory-verifier.toml",
+      "upstream_blob": "3cf98960d7a7e2e525d99017b87e3e9a425d9449",
+      "mode": "100644",
+      "installed_sha256": "6c46cc8f993e4e8037a30407af2643ad39c9713dfee0e82da4661031644541b0",
+      "adapted": true
+    },
+    {
+      "path": ".codex/config.toml",
+      "upstream_blob": "7474200ce8cdf282d96a6f20b0359bf989d678a1",
+      "mode": "100644",
+      "installed_sha256": "27f96063de650d40d8c0ad37ab8c7743069e895b3556ce4e805e62e5ea0ce4eb",
+      "adapted": true
+    },
+    {
+      "path": ".githooks/commit-msg",
+      "upstream_blob": "baffcd6765010d52bda1a5fb47fbc1aecb0c65ad",
+      "mode": "100755",
+      "installed_sha256": "50a143a4d031aabe3e23cb282fe7ba4f8318f35362984ab1cd78df2cf2c4539b",
+      "adapted": true
+    },
+    {
+      "path": ".githooks/pre-commit",
+      "upstream_blob": "423ff0f644c5f6b9823f8cc94414b28b73ab47e5",
+      "mode": "100755",
+      "installed_sha256": "a32e79bdbcbe08327ad0486ed2e578d2001bca16b26b652512ecf8f4c5db68d8",
+      "adapted": true
+    },
+    {
+      "path": ".githooks/pre-push",
+      "upstream_blob": "6b8204f5a54fe5768cef45dcb81d5ac402361a78",
+      "mode": "100755",
+      "installed_sha256": "5f64a2c2a0029f36ba348b810f90c592b66d6ce5115c46f333f70c5d41460016",
+      "adapted": true
+    },
+    {
+      "path": ".gitignore",
+      "upstream_blob": "ad3d68de6400e6f51aa9bc05e0ef058e9b8a6e50",
+      "mode": "100644",
+      "installed_sha256": "8252403d3a39a2bf3ec8dd0752e3dbb6448dc3d61318beb780dc4a864d7609e7",
+      "adapted": true
+    },
+    {
+      "path": "AGENTS.md",
+      "upstream_blob": "1861c6957764c9e4213ed632b4a48beec16ec60a",
+      "mode": "100644",
+      "installed_sha256": "f27290b79b97116ca2c97b21284edd0aaad8d3b822a0e85ae72d7301c302b31b",
+      "adapted": true
+    },
+    {
+      "path": "CLAUDE.md",
+      "upstream_blob": "7e3779b50a99b7f128c8a96ba1d477fd31212395",
+      "mode": "100644",
+      "installed_sha256": "1cab4f5ae335937b47ebee52df6b42334bd678b039b80f0eade023934958d728",
+      "adapted": false
+    },
+    {
+      "path": "LICENSE",
+      "upstream_blob": "d0a1fa1482eea82e19510e7920cbe3a03e41f691",
+      "mode": "100644",
+      "installed_sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04",
+      "adapted": false
+    },
+    {
+      "path": "docs/.routine",
+      "upstream_blob": "715d2d3c1109e84d5a8d1e33edb99245a6a66e46",
+      "mode": "100644",
+      "installed_sha256": "8f47c298f193f3361ff42dd6c51e9dc1c8cf9b9b87e87923d951020dc479c87f",
+      "adapted": true
+    },
+    {
+      "path": "docs/CloudWorker.md",
+      "upstream_blob": "56896770c4c4afa572749c12d0af9afa2fcdf365",
+      "mode": "100644",
+      "installed_sha256": "3ba078bb2d9c5848eec552085f2542e0d4766806b027c9dd77f823ca3505a0a9",
+      "adapted": false
+    },
+    {
+      "path": "docs/DESIGN_SYSTEM.md",
+      "upstream_blob": "c830720071279ad320cfb78dcf68941f76c4fec8",
+      "mode": "100644",
+      "installed_sha256": "37bbe1a1628783d1cf88794ac63449c5dc39e390c63ca1de9cb554386b48ae74",
+      "adapted": false
+    },
+    {
+      "path": "scripts/git-hooks/check-message",
+      "upstream_blob": "a2512942f32bcef7796b57832a4c879f4a70889c",
+      "mode": "100755",
+      "installed_sha256": "de6c0b951a2480a45e0b84fca35e343a3250977d714eb8d9f9d6ffbd0283327f",
+      "adapted": true
+    },
+    {
+      "path": "scripts/git-hooks/check-push",
+      "upstream_blob": "b39ae5fae247f00993582be8688d02aadc6a7f86",
+      "mode": "100755",
+      "installed_sha256": "09658ba86870f1b637a6d6d8ab6661b983ea02848f407c80bf96ff3226f7b901",
+      "adapted": true
+    },
+    {
+      "path": "scripts/git-hooks/check-session",
+      "upstream_blob": "de37368a34f8834c7fbde7ad26066aa3fce272bc",
+      "mode": "100755",
+      "installed_sha256": "399c926217fd58bb27678747380548366ecd4b349fe7bac292f9d57cad9b6a39",
+      "adapted": true
+    },
+    {
+      "path": "scripts/git-hooks/check-staged",
+      "upstream_blob": "6c18ee9254d363a1a2cfcec564b84444e7734aee",
+      "mode": "100755",
+      "installed_sha256": "e781005ef929a0c646d933d8d42d5e4186da157165c01868539ee3a81c71364d",
+      "adapted": true
+    },
+    {
+      "path": "scripts/git-hooks/install",
+      "upstream_blob": "dbe349d6bdfd952896b952bc76b7a6625f1e1cde",
+      "mode": "100755",
+      "installed_sha256": "3f6f2388e884f306194d9194518a02007b357a3d53767313dbb9c6638dc9f3f1",
+      "adapted": true
+    },
+    {
+      "path": "scripts/git-hooks/lib.sh",
+      "upstream_blob": "8f5cf961e45326cc7c31f65edc3d158f1070c262",
+      "mode": "100644",
+      "installed_sha256": "b07433ea577cc06e27dedf4dbb18300215e611c88749e7cdafac7193deedaef0",
+      "adapted": true
+    },
+    {
+      "path": "tests/git-hooks/test-hooks",
+      "upstream_blob": "2ca9216531332a00dc1c96d25c93a91c1de8dd92",
+      "mode": "100755",
+      "installed_sha256": "8775be1e49dfac0bc7aa7e2d3b0bd2512c2ddb0cf2242c40693227f92db7084a",
+      "adapted": true
+    }
+  ],
+  "additional_local_files": [
+    "docs/AUTOMATION.md"
+  ],
+  "excluded": [
+    "formation/",
+    "docs/DESIGN_SYSTEM_APP.md",
+    ".github/workflows/pages.yml",
+    "README.md (product README retained)"
+  ],
+  "local_companion": {
+    "path": "docs/AUTOMATION.md",
+    "source": "/home/p2enjoy/Documents/VSCodeProjects/software-factory-base/docs/AUTOMATION.md",
+    "sha256": "3d50664dd724d8ece6658e8750944c98b4eba001bda57301e4bbcd8d97017ec2",
+    "upstream_tracked": false
+  },
+  "git_guard_campaign": {
+    "command": "bash tests/git-hooks/test-hooks",
+    "passed": 45,
+    "failed": 0,
+    "real_git_repositories": true,
+    "real_local_bare_pushes": true,
+    "network": false
+  },
+  "hooks": {
+    "activated": true,
+    "mode": "standard",
+    "core.hooksPath": ".githooks"
+  },
+  "routine_active": false,
+  "verifier_role": "read-only analysis; root runs every test",
+  "date": "2026-11-05"
+}

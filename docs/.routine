@@ -1,0 +1,3 @@
+Routine planifiee inactive dans ce projet. Lire README.md, CLAUDE.md et
+CLAUDE_PROJECT.md. Aucun lancement de worker, profil PREPROD/PROD, bootstrap
+hote ou operation Git automatique depuis ce fichier. Voir docs/METHODE.md.

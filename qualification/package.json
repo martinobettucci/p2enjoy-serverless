@@ -1,0 +1,15 @@
+{
+  "name": "@p2enjoy/serverless-qualification",
+  "version": "0.1.0",
+  "private": true,
+  "description": "QLF-001: service synthetique, docs/DAT.md#qualification",
+  "engines": { "node": ">=24 <25" },
+  "scripts": {
+    "start": "node runner/server.cjs",
+    "test:e2e": "node --test --test-concurrency=1 tests/e2e.test.cjs",
+    "test": "npm run test:e2e",
+    "check": "node runner/check.cjs",
+    "probe": "node tests/probe.cjs"
+  },
+  "dependencies": { "yaml": "2.9.1" }
+}
