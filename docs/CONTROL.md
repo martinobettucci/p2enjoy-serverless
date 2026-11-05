@@ -111,7 +111,11 @@ suivantes. La console React/Vite est compilée dans l'image du contrôle ; ses
 appels sont de même origine et utilisent exclusivement les API ci-dessus.
 L'accueil et `/console/*` servent son document, `/assets/*` ses fichiers figés.
 Les erreurs du callback sont présentées sur l'accueil quand le client accepte
-HTML, sans mettre code OAuth ni jeton dans l'URL d'erreur.
+HTML, sans mettre code OAuth ni jeton dans l'URL d'erreur. Un refus de l'entrée
+`/auth/login` conserve son statut HTTP et Retry-After, y compris dans un
+navigateur : la console reçoit le message initial dans un attribut HTML
+échappé et l'affiche comme texte. Le callback reste redirigé pour retirer
+ses paramètres confidentiels de l'adresse.
 
 ## Preuves
 
@@ -138,3 +142,6 @@ maîtresse différente doit refuser la base créée lors du scénario précéden
 la clé originale doit permettre sa reprise. Les journaux de ces refus ne
 doivent révéler aucune valeur secrète. Ces injections de panne ne remplacent
 ni le contrôle, ni sa base, ni le fournisseur SSO par une simulation.
+Chaque rapport de campagne comporte un indicateur de fin `completed` et un
+échec explicite si le pilote s'interrompt. Un rapport partiel ne constitue
+jamais une campagne réussie, même si ses contrôles précédents sont verts.

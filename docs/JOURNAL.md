@@ -495,3 +495,13 @@ preuves authentifiées restent en attente de cet accès ; aucune identité n'est
 injectée pour les remplacer. Les pannes de configuration seront qualifiées
 sur des conteneurs isolés de la même image et un état créé par cette image,
 avec les deux fichiers officiels puis une altération ciblée du processus.
+
+La revue de SLS-020 relève deux écarts corrigés dans le checkpoint : le refus
+429 de connexion HTML était transformé en 303, et certains rapports de panne
+ne distinguaient pas une interruption d'une campagne finie. Décision : garder
+le statut/Retry-After à l'entrée login tout en servant le véritable accueil,
+et enregistrer une fin explicite avec les échecs. Le retour OAuth conserve
+sa redirection pour retirer code/state de l'URL. La panne de volume SQLite
+readonly refuse effectivement le démarrage avec « unable to open database
+file » lors de l'ouverture WAL ; l'attendu de preuve est aligné sur ce
+diagnostic observé, sans changer le refus de l'application.
