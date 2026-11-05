@@ -405,3 +405,23 @@ Les trois notes .? décrivent le composant qualifié et l'état de la plateforme
 Aucun montage de preuve ne reste actif. Le SSO nécessite encore la création du
 client et le secret via l'interface externe ; demande d'accès envoyée au
 responsable, sans bloquer la poursuite des unités indépendantes.
+
+### Prérequis SSO et domaine appliqués ; démarrage de SLS-020
+
+Le responsable a créé le client SSO et appliqué les propositions via la console.
+Lecture actuelle des fichiers officiels : OIDC_CLIENT_ID, SERVERLESS_PUBLIC_URL
+et OIDC_CLIENT_SECRET présents ; trois notes et route 18090 TLS appliquées.
+Le fournisseur DNS porte le sous-domaine attendu, puis la résolution locale et
+la connexion HTTPS réussissent (502, contrôle encore absent). Le callback est
+accepté avec exigence PKCE ; l'échange de code volontairement invalide retourne
+invalid_grant après authentification du client, ce qui valide ses identifiants
+sans délivrer de session utilisateur. Aucun secret n'est enregistré au dépôt.
+SLS-010 est clôturée pour ces prérequis et la preuve de quota ; le parcours de
+connexion administrateur reste dans SLS-020/SLS-060.
+
+SLS-020 est spécifiée avant implémentation dans CONTROL.md et SCHEMA.md :
+API Python, migrations SQLite, sessions OAuth chiffrées, CSRF, objets et
+jetons scoped CRUD. La politique réseau et l'administration des jetons restent
+réservées au SSO ; les jetons limités à des fonctions ne changent pas les
+variables globales d'autres fonctions. Pas de mode d'authentification de
+secours pour les preuves.

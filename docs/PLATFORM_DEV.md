@@ -11,31 +11,29 @@ Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
 ## Ordre de réalisation
 
-1. Déclarer la route DEV et le client SSO dans leurs interfaces autorisées.
-2. Proposer les paramètres du contrôle dans les fichiers `.?` de la cellule,
+1. Proposer les paramètres supplémentaires du contrôle dans les fichiers `.?` de la cellule,
    puis les appliquer par sa console. Aucun secret n'est conservé au dépôt.
-3. Construire et déployer le contrôle et le runtime, appliquer les migrations
+2. Construire et déployer le contrôle et le runtime, appliquer les migrations
    SQLite versionnées, puis déployer l'application témoin via l'adaptateur.
-4. Exécuter les campagnes ciblées puis complète et mettre à jour les notes.
+3. Exécuter les campagnes ciblées puis complète et mettre à jour les notes.
 
-## Intégration à préparer
+## Intégration appliquée
 
-Client OIDC prévu : `p2enjoy-serverless-dev`, application serveur confidentielle,
+Client OIDC créé : `p2enjoy-serverless-dev`, application serveur confidentielle,
 PKCE S256, callback `/auth/retour`, déconnexion `/`, rôles `verified` et `admin`.
 Déclaration prête à importer dans l'interface SSO, onglet Intégrations :
 [OIDC_DEV.txt](OIDC_DEV.txt). Domaine retenu pour DEV :
-`serverless-dev.lelabs.tech`, à faire résoudre vers l'entrée de la cellule et
-à déclarer par sa console sur le port HTTP 18090 avec TLS public.
-Le secret doit porter le nom `OIDC_CLIENT_SECRET`, selon `sso.md`, et être
-saisi directement comme secret de ce SPARK. Il ne doit pas transiter en chat.
+`serverless-dev.lelabs.tech`, résolu vers l'entrée de la cellule et déclaré
+sur le port HTTP 18090 avec TLS public. Le secret `OIDC_CLIENT_SECRET` est
+appliqué dans le SPARK, avec `OIDC_CLIENT_ID` et `SERVERLESS_PUBLIC_URL`.
 
-État observé le 5 novembre 2026 : découverte du SSO accessible ;
-`serverless-dev.lelabs.tech` ne résout pas ; console locale sur le port 5175
-indisponible. Ces constats ne prouvent pas une panne de la FORGE. Les actions
-de configuration restent limitées au scope du SPARK.
-La tentative publique d'autorisation avec le client prévu retourne
-« Client non trouvé ». L'accès administrateur au SSO est donc nécessaire pour
-enregistrer cette intégration ; le navigateur de la session est indisponible.
+État vérifié le 5 novembre 2026 : découverte SSO accessible ; callback accepté
+par le client, PKCE exigé ; l'authentification du client au token endpoint est
+acceptée (code d'autorisation invalide volontairement, erreur invalid_grant).
+La route DNS et HTTPS répond ; HTTP 502 est attendu tant que le contrôle
+n'écoute pas sur 18090. Les trois notes officielles sont appliquées. La console
+locale est accessible sur 5175. Le parcours utilisateur SSO reste à vérifier
+avec le contrôle, dans SLS-020 et SLS-060.
 
 ## Reprise et retour arrière
 

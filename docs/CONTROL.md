@@ -1,0 +1,80 @@
+# API du contrôle
+
+Contrat de réalisation SLS-020 ; les preuves et l'état sont dans BACKLOG.
+Le contrôle utilise Python/FastAPI, SQLite, HTTPX pour OIDC et PyJWT avec
+cryptography pour la validation/chiffrement. Il écoute sur 8080 dans Docker,
+publié sur 18090 dans le SPARK. Un seul processus Uvicorn, sans access log
+brut des URLs : le callback OAuth contient des paramètres confidentiels.
+
+## Configuration
+
+Les deux env_file de cellule alimentent le contrôle. Variables requises :
+`SERVERLESS_PUBLIC_URL`, `OIDC_ISSUER`, `OIDC_CLIENT_ID`.
+Secrets requis : `OIDC_CLIENT_SECRET`, `SERVERLESS_MASTER_KEY` (clé Fernet
+aléatoire, encodage URL-safe de 32 octets). Le stockage de métadonnées est
+monté dans `/state` ; le chemin interne est constant pour tout déploiement.
+Une configuration absente entraîne une erreur explicite, jamais un mode admin
+de secours. La clé maîtresse doit rester stable avec la base chiffrée.
+
+## Connexion
+
+- `GET /healthz` : santé technique et version, sans données d'identité.
+- `GET /api/session` : statut authentifié et identité affichable ; un jeton
+  CSRF est fourni uniquement à la session correspondante.
+- `GET /auth/login` : découverte OIDC, création du flow, cookie temporaire,
+  redirection S256 vers le vrai fournisseur.
+- `GET /auth/retour` : correspondance state/cookie, consommation du flow,
+  échange du code avec verifier, validation ID token (audience et nonce) et
+  access token (issuer, expiration, signature, azp et rôles verified/admin),
+  puis session serveur et redirection accueil.
+- `POST /auth/logout` : CSRF, révocation locale et fin de session OIDC.
+
+Cookies Secure, HttpOnly, SameSite=Lax, Path=/ ; aucun token OAuth dans le
+stockage navigateur. Une session vérifie son expiration à chaque requête.
+Au renouvellement du jeton d'accès, les rôles sont revérifiés ; un retrait de
+rôle prend donc effet au plus tard à son expiration. Un fournisseur devenu
+indisponible n'autorise pas à prolonger un jeton expiré.
+
+## Gestion
+
+Toutes les mutations exigent soit une session admin et un jeton CSRF, soit
+le jeton `X-Serverless-Token` portant le droit exact. Les restrictions de jeton
+sont vérifiées en base à chaque requête. Les routes globales, les politiques
+origine/IP et la gestion de jetons sont réservées aux sessions admin.
+
+- `/api/namespaces` et `/api/namespaces/{id}` : liste, création, modification,
+  suppression d'un namespace vide.
+- `/api/namespaces/{id}/services` : liste et création des services.
+- `/api/services/{id}` : lecture et mise à jour administrateur ; suppression
+  d'un service vide. Le Read du service autorise sa lecture expurgée.
+- `/api/services/{id}/configuration` : variables et secrets globaux, droit
+  Update non restreint à certaines fonctions. La politique d'accès est exclue.
+- `/api/services/{id}/functions` et `/api/functions/{id}` : CRUD des brouillons
+  de fonctions. Le code et son activation arrivent avec SLS-030/040.
+- `/api/services/{id}/tokens`, `/api/tokens/{id}/revoke` et
+  `/api/tokens/{id}/rotate` : administration des jetons. Valeur complète
+  uniquement dans la réponse de création/rotation ; ensuite id, préfixe,
+  droits, portée, expiration et état.
+- `/api/services/{id}/audit` : consultation paginée selon Read.
+
+Les listes sont bornées et paginées. Les objets étrangers au service d'un
+jeton ne sont jamais accessibles, y compris par ID deviné. Les requêtes de
+configuration rejettent les champs inconnus. Les conflits de nom sont des
+409, les validations des 422, l'absence d'identité un 401 et l'absence de droit
+un 403. L'authentification est vérifiée avant la divulgation des données.
+
+Les valeurs de secret null demandent leur suppression ; une valeur chaîne
+les crée ou remplace. Les lectures montrent uniquement les noms. Une variable
+et un secret ne peuvent partager un nom dans le même niveau de configuration.
+Les champs de ressources sont des contrats stockés jusqu'à l'intégration du
+runtime ; leur seule sauvegarde ne constitue pas une preuve d'application.
+
+## Preuves
+
+La campagne cible le vrai contrôle déployé, la base réelle et le SSO réel.
+Les comptes permettent de qualifier admin, verified sans admin et absence de
+verified. Les jetons créés depuis le parcours normal servent aux preuves CRUD
+et interservice. Les assertions couvrent aussi CSRF, rotation, révocation,
+expiration, configuration expurgée, conflits, redémarrage et absence de fuite
+dans les journaux. Aucun mode bootstrap authentifié artificiellement n'est
+ajouté pour remplacer une preuve de connexion.

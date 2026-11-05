@@ -70,8 +70,9 @@ Spécification commune : [Contrat de plateforme](PLATFORM.md).
 
 ## SLS-010
 
-Statut : [~] — composant de quota livré et qualifié par 31 contrôles réels,
-zéro échec/skip ; intégration SSO et domaine DEV en attente d'accès externe.
+Statut : [x] — composant de quota qualifié par 31 contrôles réels,
+zéro échec/skip ; client SSO créé, authentification du client vérifiée,
+variables/secret de cellule appliqués, DNS et TLS DEV opérationnels.
 Preuve : [stockage DEV](evidence/storage-dev-2026-11-05.json).
 
 Qualifier le quota dur par fonction, le montage dans Docker rootless et sa
@@ -82,13 +83,13 @@ manquant est nommé ; aucun fournisseur d'identité de remplacement.
 
 ## SLS-020
 
-Statut : [ ] — contrôle, identité et objets.
+Statut : [~] — contrôle, identité et objets ; spécification persistée.
 
 API Python/SQLite avec migrations, SSO admin réel, sessions/CSRF, CRUD des
 namespaces/services/fonctions et tokens. E2E : persistance après redémarrage,
 matrice de permissions, restriction interservice/fonction, expiration,
 révocation, renouvellement et refus SSO. Références : PLATFORM organisation
-et identité ; schéma à persister avant implémentation.
+et identité ; [schéma](SCHEMA.md) et [API du contrôle](CONTROL.md).
 
 ## SLS-030
 
