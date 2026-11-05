@@ -84,6 +84,12 @@ les crée ou remplace. Les lectures montrent uniquement les noms. Une variable
 et un secret ne peuvent partager un nom dans le même niveau de configuration.
 Les champs de ressources sont des contrats stockés jusqu'à l'intégration du
 runtime ; leur seule sauvegarde ne constitue pas une preuve d'application.
+Les mises à jour acceptent `If-Match` portant la valeur `updated_at` lue.
+La console l'envoie systématiquement : si l'objet a changé depuis l'ouverture,
+le serveur refuse à 409 et conserve l'objet courant. La saisie reste ouverte
+pour consultation, annulation et relecture ; aucune section obsolète n'est
+réécrite silencieusement depuis un autre onglet. Les clients de déploiement
+peuvent aussi employer ce contrôle de concurrence.
 
 ## Console du contrôle
 

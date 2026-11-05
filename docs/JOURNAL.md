@@ -442,3 +442,10 @@ l'entrée normale SSO. React/Vite suit la préférence du contrat global ; son
 build est servi par le contrôle, ce qui conserve les cookies de même origine
 et évite un second service d'interface. Les décisions de navigation et de
 saisie sont persistées dans DESIGN_SYSTEM_APP avant leur implémentation.
+
+La revue UI relève qu'une mise à jour complète issue d'un second onglet peut
+réécrire une autre section devenue obsolète. La console transmet désormais
+la version lue via If-Match et le serveur la compare après authentification,
+avant la mutation. Un conflit conserve la saisie et les données actuelles.
+Les champs d'une modale sont indisponibles pendant sa soumission pour qu'une
+nouvelle frappe ne soit pas effacée par la fermeture de la requête précédente.
