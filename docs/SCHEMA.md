@@ -4,6 +4,8 @@ Spécification SLS-020. Le schéma SQLite est appliqué par migrations numérot�
 avec table `schema_migrations`. WAL, clés étrangères activées, transactions
 explicites courtes ; un unique contrôle coordonne le cycle des instances.
 Tous les identifiants d'objets sont des UUID, les dates des secondes UTC.
+`security_metadata` conserve un témoin chiffré de la clé maîtresse ; son
+contrôle au démarrage refuse une clé différente avant d'exposer le service.
 
 ## Objets
 
