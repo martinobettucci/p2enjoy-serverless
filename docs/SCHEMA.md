@@ -35,7 +35,10 @@ cellule. Seuls les noms sortent dans les lectures de gestion.
   est consommé une seule fois au callback.
 - `sessions` : digest, subject, display_name, csrf_digest, tokens_cipher,
   access_expires_at, created_at, expires_at. Les jetons OAuth restent côté
-  serveur, chiffrés ; l'expiration absolue est bornée à huit heures.
+  serveur, chiffrés ; l'expiration absolue est bornée à huit heures. Le payload
+  chiffré conserve aussi la valeur CSRF, stable pendant la session et partagée
+  entre ses onglets ; csrf_digest permet de vérifier les mutations sans la
+  régénérer lors des lectures.
 
 Un jeton restreint à des fonctions ne peut porter Create ni modifier les
 variables globales du service. Une liste vide est invalide ; null désigne
