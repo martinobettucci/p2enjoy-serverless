@@ -529,3 +529,25 @@ gestion préparées ne sont donc pas présentées comme validées. L'exploration
 de SLS-030 précise les mappings de manifeste à formaliser pour poursuivre
 les parties indépendantes. Aucun remote Git n'est configuré pour publier
 les commits locaux.
+
+## Révisions et packaging — 2026-11-06
+
+Décisions SLS-030 : CLI Python avec PyYAML verrouillé et ZIP standard, sans
+exécution de build ou de plugin ; manifeste de qualification explicite
+serverless.platform.yml réutilisant les handlers originaux. Les motifs glob
+ont un sous-ensemble documenté, les options non appliquées sont signalées,
+et la conversion Node 20/22 vers Node 24 exige une option explicite.
+
+La publication est atomique par fonction : candidat chiffré, upload borné,
+validation Node dans Docker, relecture des droits et versions, puis transaction
+de publication. Create permet de terminer la première révision ; Update sert
+aux suivantes. La révision fige code/handler/événements ; un rollback conserve
+les ressources et secrets courants. Une version de service protège aussi
+les variables communes contre une course pendant l'import.
+
+Le chargeur est commun à la validation et au futur runtime, avec résolution
+CJS/ESM non ambiguë et propriétés propres seulement. L'import utilise les
+vraies valeurs applicatives, un conteneur borné et sans réseau ni données
+métier ; les connexions réseau doivent commencer dans le handler. Cela permet
+de vérifier le vrai export tout en bornant les effets du chargement. La preuve
+d'invocation restera nécessaire pour les dépendances importées tardivement.

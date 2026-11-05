@@ -61,6 +61,29 @@ cette identité, le statut et le patron de route. Les requêtes anonymes
 malformées sont consignées dans les journaux bornés plutôt qu'en base pour
 éviter une croissance du registre sous trafic anonyme.
 
-Les révisions, invocations, instances, réservations et schedules recevront
-leurs migrations dans SLS-030 à SLS-050. Leur absence n'est pas simulée par
-des lignes de démonstration.
+## Déploiements et révisions
+
+Contrat SLS-030 : [DEPLOYMENT](DEPLOYMENT.md). La migration suivante ajoute :
+
+- `deployments` : id, function_id, service_id, actor_kind, actor_id,
+  expected_function_version, expected_service_version, configuration_cipher,
+  events_json, state, error_code nullable, reserved_bytes, created_at,
+  expires_at, completed_at nullable, revision_id nullable.
+- `revisions` : id, function_id, handler, runtime, architecture, image_id,
+  archive_sha256, inventory_json, events_json, stored_bytes, created_at,
+  deleted_at nullable. Les fichiers résident sous artifacts/{revision_id}.
+
+États de candidat : prepared, receiving, validating, published, failed,
+expired. Les états receiving/validating trouvés au redémarrage sont échoués
+et nettoyés, sans publication automatique. Les réservations servent au budget
+global avant extraction ; leur somme et les révisions conservées sont comptées
+dans les transactions d'admission. Un UUID d'installation dans security_metadata
+sert à reconnaître les seuls conteneurs Docker appartenant à ce contrôle.
+
+Le pointeur active_revision_id de functions ne change qu'après validation et
+relecture des versions attendues. Le rollback ne déchiffre ni ne restaure
+d'ancienne configuration : il restaure le code, le handler et les événements
+de la révision choisie, avec les ressources et secrets courants.
+
+Les invocations, instances et exécutions planifiées recevront leurs migrations
+dans SLS-040/050.

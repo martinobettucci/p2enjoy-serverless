@@ -103,12 +103,14 @@ du pilote de preuve. Les dépendances verrouillées sont auditées.
 
 ## SLS-030
 
-Statut : [ ] — révisions et adaptateur.
+Statut : [~] — révisions et adaptateur ; contrat et formats décidés.
 
 Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
 l'adaptateur, rejeter archives invalides, mettre à jour/rollback en préservant
-l'identifiant. Référence : PLATFORM adaptateur.
+l'identifiant. Référence : PLATFORM adaptateur et [DEPLOYMENT](DEPLOYMENT.md).
+Cette unité poursuit les parties indépendantes pendant l'attente de session
+SSO de SLS-020. Les preuves d'upload/publication exigent toujours cette session.
 
 ## SLS-040
 
