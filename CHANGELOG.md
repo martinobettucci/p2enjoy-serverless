@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Première CLI d'adaptation YAML et de packaging ZIP, avec héritage explicite,
+  descripteurs sans valeurs de configuration, inventaires SHA256, chemins bornés
+  et publication des fichiers par descripteurs de répertoire.
+- Manifeste plateforme des douze fonctions de qualification ; 24 scénarios CLI
+  réels sur le SPARK, dans une image installée avec dépendances à empreintes.
+  Chargement Node, upload et publication encore en développement.
+
 - Checkpoint DEV du contrôle Python/SQLite et de la console React : parcours
   SSO réel, modèles de gestion, sessions/CSRF, jetons CRUD et formulaires.
   Qualification administrateur encore ouverte ; moteur et adaptateur à venir.

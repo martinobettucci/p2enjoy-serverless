@@ -6,8 +6,9 @@ dans **[control/](control/README.md)** et **[web/](web/README.md)**. Une premiè
 application indépendante de qualification et son exécuteur de référence DEV
 sont disponibles dans **[qualification/](qualification/README.md)**, avec
 handlers, manifeste `serverless.yml`, Docker, tests et commandes d'exploitation.
-Le moteur d'invocation et l'adaptateur de déploiement ne sont pas encore
-implémentés. Le composant de [stockage à quota](storage/README.md)
+L'[adaptateur](adapter/README.md) prépare les plans et archives ZIP ; la
+validation Node, la publication des révisions et le moteur d'invocation restent
+à implémenter. Le composant de [stockage à quota](storage/README.md)
 est disponible et qualifié sur le SPARK DEV : 31 contrôles réels réussis,
 dont saturation, concurrence et reprise après interruption.
 
@@ -112,6 +113,10 @@ d'administration n'y est autorisée.
 ## Structure
 
 ```text
+adapter/
+  manifest.py             Lecture sûre du manifeste et correspondances
+  archive.py              Packaging ZIP et inventaire SHA256
+  dev.sh                  Construction et qualification CLI dans le SPARK
 control/
   app/                    API, SSO, sessions, objets et droits
   migrations/             Schéma SQLite versionné
@@ -129,6 +134,7 @@ storage/
   prove.py                Campagne de montage, quota, crash et reprise
 qualification/
   serverless.yml          Manifeste du service synthétique
+  serverless.platform.yml Manifeste de packaging pour la plateforme
   src/handlers.cjs         Les douze fonctions originales
   runner/                 Exécuteur de référence, sans SSO ni ACL plateforme
   tests/                  Client E2E HTTP et preuve de recréation Docker

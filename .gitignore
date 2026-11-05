@@ -252,3 +252,4 @@ coverage/
 # Local runtime artifacts
 .state/
 .local/
+.serverless-p2/

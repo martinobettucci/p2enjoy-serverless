@@ -50,3 +50,11 @@ aucune réponse. Les deux nettoient uniquement les objets qu'ils ont créés.
 Les scripts et preuves sont ajoutés au rythme de SLS-020 à SLS-060. Les premiers
 contrôles publics ont réussi ; les campagnes administrateur et la campagne
 complète de plateforme ne sont pas encore réussies.
+
+`python3 e2e/adapter.py` exécute les vraies commandes plan/package sur une
+copie temporaire des fichiers de qualification. Il examine les ZIP produits
+et exerce les refus, les liens physiques/symboliques ainsi qu'une course
+réelle sur le répertoire de sortie. Le même pilote est inclus dans l'image
+E2E de l'adaptateur et lancé sur le SPARK par `bash adapter/dev.sh test`.
+Sa preuve porte sur la CLI et les fichiers ; elle n'invoque aucun handler et
+ne remplace pas les preuves HTTP de déploiement ou d'exécution à venir.

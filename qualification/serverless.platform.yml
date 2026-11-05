@@ -1,0 +1,131 @@
+# @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#application-de-qualification
+service: p2enjoy-qualification
+provider:
+  name: p2enjoy
+  runtime: nodejs24.x
+functions:
+  echo:
+    handler: src/handlers.echo
+    timeout: 2
+    memorySize: 128
+    events:
+    - http:
+        path: echo
+        method: any
+  binary:
+    handler: src/handlers.binary
+    timeout: 2
+    memorySize: 128
+    events:
+    - http:
+        path: binary
+        method: get
+  callback:
+    handler: src/handlers.callback
+    timeout: 2
+    memorySize: 128
+    events:
+    - http:
+        path: callback
+        method: post
+  business:
+    handler: src/handlers.business
+    timeout: 2
+    memorySize: 128
+    events:
+    - http:
+        path: business
+        method: post
+    secret:
+      QUALIFICATION_BUSINESS_TOKEN: ${env:QUALIFICATION_BUSINESS_TOKEN}
+  configuration:
+    handler: src/handlers.configuration
+    timeout: 2
+    memorySize: 128
+    events:
+    - http:
+        path: configuration
+        method: get
+    environment:
+      QUALIFICATION_PUBLIC_LABEL: ${env:QUALIFICATION_PUBLIC_LABEL}
+    secret:
+      QUALIFICATION_SYNTHETIC_SECRET: ${env:QUALIFICATION_SYNTHETIC_SECRET}
+  state:
+    handler: src/handlers.state
+    timeout: 2
+    memorySize: 128
+    events:
+    - http:
+        path: state
+        method: any
+    p2enjoy:
+      storage:
+        data:
+          enabled: true
+          quota_mib: 8
+        concurrency: exclusive
+  cache:
+    handler: src/handlers.cache
+    timeout: 2
+    memorySize: 128
+    events:
+    - http:
+        path: cache
+        method: any
+    p2enjoy:
+      storage:
+        cache:
+          enabled: true
+          quota_mib: 8
+        concurrency: exclusive
+  worker:
+    handler: src/handlers.worker
+    timeout: 1
+    memorySize: 128
+    events:
+    - http:
+        path: worker
+        method: any
+    p2enjoy:
+      storage:
+        data:
+          enabled: true
+          quota_mib: 8
+        concurrency: exclusive
+  failure:
+    handler: src/handlers.failure
+    timeout: 1
+    memorySize: 128
+    events:
+    - http:
+        path: failure
+        method: post
+  sleep:
+    handler: src/handlers.sleep
+    timeout: 1
+    memorySize: 128
+    events:
+    - http:
+        path: sleep
+        method: post
+  spin:
+    handler: src/handlers.spin
+    timeout: 0.4
+    memorySize: 128
+    events:
+    - http:
+        path: spin
+        method: post
+  relay:
+    handler: src/handlers.relay
+    timeout: 3
+    memorySize: 128
+    events:
+    - http:
+        path: relay
+        method: post
+package:
+  patterns:
+  - '!**'
+  - src/**
+  - package.json

@@ -69,8 +69,10 @@ cellule sous `QUALIFICATION_BUSINESS_TOKEN`, transmis en `Authorization:
 Bearer <jeton>`. Sans configuration, il répond 503 et n'accorde aucun accès.
 L'ancien marqueur public n'est plus une identité de démonstration acceptée.
 Le serveur n'implémente aucune authentification de plateforme. Ne jamais y
-injecter de code, jetons ou données de client. Le manifeste est la cible du
-futur adaptateur P2Enjoy : `serverless deploy` n'est pas encore disponible.
+injecter de code, jetons ou données de client. `serverless.yml` décrit ce banc.
+`serverless.platform.yml` réutilise ses handlers avec quotas, variables et
+secrets déclarés pour la plateforme. La CLI `python3 -m adapter` sait produire
+son plan et ses ZIP ; l'upload et la validation Node restent à intégrer.
 
 | Fonction | Contrat à qualifier |
 | --- | --- |

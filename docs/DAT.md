@@ -21,8 +21,9 @@ Les copies avec repli noyau passent par les écritures contrôlées du proxy.
 
 Le contrôle et l'interface initiale sont déployés en DEV, avec la qualification
 administrateur encore ouverte. Le banc décrit ci-dessous reste déployé à côté
-du contrôle ; les montages de preuve sont nettoyés. Le moteur d'invocation
-de plateforme et l'adaptateur ne sont pas encore implémentés.
+du contrôle ; les montages de preuve sont nettoyés. La CLI Python de
+plan/packaging passe 24 scénarios ciblés dans Docker ; la publication des révisions et
+le moteur d'invocation restent à réaliser.
 
 La compilation utilise Go 1.27.3 dans une image épinglée. go-fuse v2.12.1 et
 x/sys v0.28.0 sont verrouillés avec go.sum. L'audit govulncheck v1.9.0 relève

@@ -1,0 +1,41 @@
+# @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#preuves
+name: p2enjoy-adapter-dev
+services:
+  adapter:
+    profiles: [dev]
+    image: p2enjoy-adapter:dev
+    build:
+      context: ..
+      dockerfile: adapter/Dockerfile
+      target: cli
+    env_file:
+      - /etc/spark/env
+      - /run/spark/secrets
+    volumes:
+      - /srv/p2enjoy-serverless/qualification:/project
+    read_only: true
+    tmpfs: ["/tmp:size=128m,mode=1777,noexec,nosuid"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 256m
+    cpus: 1
+    pids_limit: 32
+  e2e:
+    profiles: [dev]
+    image: p2enjoy-adapter-e2e:dev
+    build:
+      context: ..
+      dockerfile: adapter/Dockerfile
+      target: qualification
+    env_file:
+      - /etc/spark/env
+      - /run/spark/secrets
+    volumes:
+      - /srv/p2enjoy-serverless/adapter/reports:/app/.local/e2e
+    read_only: true
+    tmpfs: ["/tmp:size=384m,mode=1777,noexec,nosuid"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    cpus: 1
+    pids_limit: 64

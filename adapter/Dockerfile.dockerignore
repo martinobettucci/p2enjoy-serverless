@@ -1,0 +1,12 @@
+# @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#outil-et-manifeste
+*
+!adapter/
+!adapter/*.py
+!adapter/requirements.txt
+!e2e/
+!e2e/adapter.py
+!qualification/
+!qualification/package.json
+!qualification/serverless.platform.yml
+!qualification/src/
+!qualification/src/**
