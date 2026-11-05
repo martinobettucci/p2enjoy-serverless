@@ -203,14 +203,18 @@ validation. Les logs sont bornés, et les valeurs de secrets connues sont
 expurgées. Le conteneur ne possède ni socket Docker, ni base du contrôle,
 ni secret de SSO. Le socket local Docker appartient au contrôle uniquement.
 
-Le transport choisi est HTTP sur un socket Unix privé par conteneur, dans un
-répertoire de protocole distinct du code. Il fonctionne avec le contrôle en
+Le transport choisi est HTTP sur un socket Unix privé par conteneur, créé par
+le contrôle dans un répertoire de protocole distinct du code. Ce répertoire
+est monté readonly : le runtime peut se connecter au socket, mais ne peut pas
+y écrire des fichiers qui échapperaient aux quotas. Il fonctionne avec le contrôle en
 réseau hôte et les fonctions en réseau Docker isolé, sans dépendre du routage
 des adresses de bridge. Les bind mounts utilisent les chemins du SPARK vus
 par le daemon ; leur correspondance avec `/state` est explicite.
 
-Le superviseur Node ne charge pas le code applicatif. Il reçoit une seule
-requête de validation, lance un enfant avec canal IPC, puis expose son résultat.
+Le superviseur Node ne charge pas le code applicatif. Il retire une seule fois
+sa configuration par GET, lance un enfant avec canal IPC, puis remet son résultat
+par POST. Le contrôle expose aussi un statut sans configuration. Les requêtes
+et connexions sont bornées et expirent sous la même échéance globale.
 stdout/stderr de l'enfant sont consommés et bornés à 64 Kio en mémoire ; ils
 ne constituent jamais le protocole de résultat. Les logs Docker de ce conteneur
 sont désactivés pour ne pas persister les valeurs applicatives brutes. Le
