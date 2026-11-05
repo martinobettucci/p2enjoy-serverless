@@ -203,6 +203,35 @@ validation. Les logs sont bornés, et les valeurs de secrets connues sont
 expurgées. Le conteneur ne possède ni socket Docker, ni base du contrôle,
 ni secret de SSO. Le socket local Docker appartient au contrôle uniquement.
 
+Le transport choisi est HTTP sur un socket Unix privé par conteneur, dans un
+répertoire de protocole distinct du code. Il fonctionne avec le contrôle en
+réseau hôte et les fonctions en réseau Docker isolé, sans dépendre du routage
+des adresses de bridge. Les bind mounts utilisent les chemins du SPARK vus
+par le daemon ; leur correspondance avec `/state` est explicite.
+
+Le superviseur Node ne charge pas le code applicatif. Il reçoit une seule
+requête de validation, lance un enfant avec canal IPC, puis expose son résultat.
+stdout/stderr de l'enfant sont consommés et bornés à 64 Kio en mémoire ; ils
+ne constituent jamais le protocole de résultat. Les logs Docker de ce conteneur
+sont désactivés pour ne pas persister les valeurs applicatives brutes. Le
+contrôle expurge les valeurs de secrets avant d'enregistrer ces diagnostics.
+Une sortie sans message de chargement réussi échoue, même avec le code zéro.
+
+Les variables applicatives sont transmises par le socket, puis installées dans
+l'enfant après son bootstrap. Elles ne deviennent ni la configuration du
+superviseur, ni des arguments de commande, ni l'environnement enregistré par
+Docker. Le chargeur refuse les chemins ambigus, liens et sorties de l'archive.
+L'interopérabilité CommonJS utilise l'export `module.exports` identifié par
+Node 24 ; un objet default ESM n'est pas assimilé à un module CommonJS.
+
+Le pilote Python utilise l'API HTTP locale Docker, sans shell ni nouvelle
+dépendance. Il résout une image existante en identifiant immuable, crée un
+conteneur étiqueté, attend le résultat sous une échéance externe puis supprime
+le conteneur avec ses descendants avant de rendre la validation. Une erreur
+de nettoyage est un échec, jamais une validation réussie. Les scénarios de
+chargement autonomes utilisent exactement ce pilote et ce runtime déployés ;
+ils ne prouvent pas encore les autorisations de publication de l'API.
+
 ## Preuves
 
 Les CLI sont exécutées comme de véritables processus sur les fichiers du
