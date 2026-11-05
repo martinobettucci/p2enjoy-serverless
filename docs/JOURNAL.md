@@ -425,3 +425,20 @@ jetons scoped CRUD. La politique réseau et l'administration des jetons restent
 réservées au SSO ; les jetons limités à des fonctions ne changent pas les
 variables globales d'autres fonctions. Pas de mode d'authentification de
 secours pour les preuves.
+
+### Premier contrôle DEV et revue de l'identité
+
+Le contrôle répond désormais en HTTPS : santé 200, session anonyme 200,
+namespaces refusés à 401. OIDC_ISSUER et SERVERLESS_MASTER_KEY ont été proposés
+puis importés par l'API normale de la console, dans le seul infra-serverless.
+Les dépendances Python sont verrouillées avec empreintes dans Python 3.14.
+La revue détecte un callback Unicode qui produit 500 ; la reproduction HTTP
+réelle le confirme. La correction conserve un format state base64url borné.
+Les autres constats à traiter sont l'issuer exclusif du contrat, l'audit des
+refus associés à une identité et la saturation des flows de connexion.
+
+La console initiale rejoint SLS-020 afin que les preuves de gestion empruntent
+l'entrée normale SSO. React/Vite suit la préférence du contrat global ; son
+build est servi par le contrôle, ce qui conserve les cookies de même origine
+et évite un second service d'interface. Les décisions de navigation et de
+saisie sont persistées dans DESIGN_SYSTEM_APP avant leur implémentation.

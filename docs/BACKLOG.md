@@ -90,6 +90,8 @@ namespaces/services/fonctions et tokens. E2E : persistance après redémarrage,
 matrice de permissions, restriction interservice/fonction, expiration,
 révocation, renouvellement et refus SSO. Références : PLATFORM organisation
 et identité ; [schéma](SCHEMA.md) et [API du contrôle](CONTROL.md).
+La tranche de console associée expose ces objets et le parcours SSO dès cette
+unité ; SLS-060 complète ses facettes d'exécution et la campagne transversale.
 
 ## SLS-030
 

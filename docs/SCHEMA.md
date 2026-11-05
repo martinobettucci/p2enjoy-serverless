@@ -53,6 +53,10 @@ nouveau dans une même transaction.
 object_id nullable, created_at, detail_json expurgé. Les mutations et refus
 exploitables sont corrélés à leurs objets ; aucun corps utilisateur, secret,
 en-tête d'authentification ou jeton n'est journalisé.
+Un refus associé à une identité connue conserve l'acteur et le service de
+cette identité, le statut et le patron de route. Les requêtes anonymes
+malformées sont consignées dans les journaux bornés plutôt qu'en base pour
+éviter une croissance du registre sous trafic anonyme.
 
 Les révisions, invocations, instances, réservations et schedules recevront
 leurs migrations dans SLS-030 à SLS-050. Leur absence n'est pas simulée par

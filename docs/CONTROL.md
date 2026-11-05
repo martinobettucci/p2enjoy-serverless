@@ -15,6 +15,8 @@ aléatoire, encodage URL-safe de 32 octets). Le stockage de métadonnées est
 monté dans `/state` ; le chemin interne est constant pour tout déploiement.
 Une configuration absente entraîne une erreur explicite, jamais un mode admin
 de secours. La clé maîtresse doit rester stable avec la base chiffrée.
+L'issuer autorisé par le contrat SSO est exclusivement
+`https://oauth.lelabs.tech/realms/lelabs` ; une autre valeur refuse le démarrage.
 
 ## Connexion
 
@@ -42,6 +44,9 @@ est injoignable. Les flows de connexion vivants sont bornés à 256 pendant dix
 minutes ; un dépassement retourne 429. Le contrôle borne les corps JSON à
 256 Kio, y compris les requêtes chunked, et ne renvoie pas leurs valeurs dans
 les erreurs de validation.
+Les identifiants state et cookies de flow ont exactement 43 caractères
+base64url. Une nouvelle tentative remplace le flow précédent du navigateur.
+Un callback malformé donne un refus contrôlé, y compris en Unicode.
 
 ## Gestion
 
@@ -70,12 +75,26 @@ jeton ne sont jamais accessibles, y compris par ID deviné. Les requêtes de
 configuration rejettent les champs inconnus. Les conflits de nom sont des
 409, les validations des 422, l'absence d'identité un 401 et l'absence de droit
 un 403. L'authentification est vérifiée avant la divulgation des données.
+Les noms de fonctions conservent la casse des clés du manifeste ; ils acceptent
+lettres ASCII, chiffres, tirets et underscores, avec un premier caractère
+alphanumérique et une longueur maximale de 63 caractères.
 
 Les valeurs de secret null demandent leur suppression ; une valeur chaîne
 les crée ou remplace. Les lectures montrent uniquement les noms. Une variable
 et un secret ne peuvent partager un nom dans le même niveau de configuration.
 Les champs de ressources sont des contrats stockés jusqu'à l'intégration du
 runtime ; leur seule sauvegarde ne constitue pas une preuve d'application.
+
+## Console du contrôle
+
+La première tranche de console appartient à SLS-020 : connexion, consultation
+de session, namespaces, services, brouillons de fonctions, configuration et
+jetons. Le runtime, le code et les mesures rejoignent les vues au fil des unités
+suivantes. La console React/Vite est compilée dans l'image du contrôle ; ses
+appels sont de même origine et utilisent exclusivement les API ci-dessus.
+L'accueil et `/console/*` servent son document, `/assets/*` ses fichiers figés.
+Les erreurs du callback sont présentées sur l'accueil quand le client accepte
+HTML, sans mettre code OAuth ni jeton dans l'URL d'erreur.
 
 ## Preuves
 
