@@ -128,3 +128,13 @@ changent pas le client retenu. Une adresse de proxy n'est configurée comme
 approuvée qu'après cette mesure. Les logs de refus conservent le pair TCP et
 les adresses X-Forwarded-For valides, sous l'étiquette « untrusted », pour
 diagnostiquer la chaîne ; aucune valeur libre d'en-tête n'y est recopiée.
+
+Les défauts de démarrage sont exercés sur la même image immuable dans des
+conteneurs DEV isolés, alimentés par les deux env_file officiels. Le pilote
+retire ou altère explicitement un paramètre dans le seul processus du scénario
+négatif, ou rend son propre volume de métadonnées non inscriptible. Il ne
+modifie pas les fichiers de cellule ni l'état du contrôle permanent. Une clé
+maîtresse différente doit refuser la base créée lors du scénario précédent ;
+la clé originale doit permettre sa reprise. Les journaux de ces refus ne
+doivent révéler aucune valeur secrète. Ces injections de panne ne remplacent
+ni le contrôle, ni sa base, ni le fournisseur SSO par une simulation.

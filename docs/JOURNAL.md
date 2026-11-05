@@ -484,3 +484,14 @@ La première tentative de ce probe lisait les env_file avec docker run, qui
 conserve leurs guillemets ; elle a été corrigée en passant par Compose,
 conformément au contrat de la cellule. Ce refus de configuration n'était pas
 une défaillance du réseau hôte.
+
+La pile permanente en réseau hôte passe les quatre mesures de provenance.
+Le seul proxy approuvé est désormais 10.77.0.1/32, appliqué via la proposition
+officielle du SPARK. Les six scénarios de limitation SSO passent, dont la
+falsification d'en-têtes et le compteur conservé au redémarrage ; la campagne
+publique (six groupes) et l'accueil navigateur (huit contrôles) repassent.
+La fenêtre de connexion administrateur a expiré sans authentification. Les
+preuves authentifiées restent en attente de cet accès ; aucune identité n'est
+injectée pour les remplacer. Les pannes de configuration seront qualifiées
+sur des conteneurs isolés de la même image et un état créé par cette image,
+avec les deux fichiers officiels puis une altération ciblée du processus.
