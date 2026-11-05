@@ -34,8 +34,10 @@ l'ancien rapport réussi est invalidé, puis rejoue la campagne publique.
 Les rapports ne valent que lorsque `completed` est vrai et les nettoyages
 réussis ; leur initialisation précède les prérequis externes.
 
-`authorize.mjs` ouvre Chromium sur l'entrée normale SSO ; le détenteur du
-compte s'y connecte lui-même. Le script ne lit aucun champ de mot de passe.
+`authorize.mjs` ouvre Chromium sur l'accueil de la console et laisse jusqu'à
+huit heures au détenteur du compte pour démarrer la connexion SSO. Aucun flow
+OAuth n'est créé avant son clic, ce qui évite une expiration pendant l'attente.
+Le script ne lit aucun champ de mot de passe.
 Il conserve seulement le cookie de plateforme, sous `.local/e2e/` en mode
 0600, puis ferme le navigateur. Les cookies du fournisseur ne sont pas
 exportés. Les deux campagnes suivantes exigent cette vraie session ; son
