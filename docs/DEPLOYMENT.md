@@ -63,8 +63,10 @@ Les plugins et les options d'identification du fournisseur sont énumérés
 comme non exécutés ; leurs valeurs ne sont pas affichées ou transmises.
 `configValidationMode: off` ne désactive pas les validations de l'adaptateur.
 Les options Scaleway `custom_domains`, `httpOption`, `privacy` ne sont pas
-appliquées silencieusement : leur présence exige une adaptation explicite du
-manifeste. L'authentification par jeton reste obligatoire pour les invocations.
+appliquées silencieusement : leur présence exige `--accept-provider-differences`
+après lecture du plan, ou une adaptation explicite du manifeste. L'option
+accepte uniquement ces différences connues, qui restent affichées avant upload.
+L'authentification par jeton reste obligatoire pour les invocations.
 
 Les méthodes initiales sont GET, POST, PUT, PATCH, DELETE, HEAD et OPTIONS.
 Un chemin HTTP est relatif au point d'invocation de la fonction ; pas de
