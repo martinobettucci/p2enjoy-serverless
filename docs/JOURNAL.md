@@ -369,3 +369,14 @@ natifs conservés. Les fonctionnalités POSIX hors contrat sont explicitement
 refusées. La preuve inclura crash, remontage, saturation et Docker rootless.
 Sources : dépôts primaires hanwen/go-fuse, tytso/e2fsprogs, tuxera/ntfs-3g ;
 JuiceFS docs/en/guide/quota.md. L'implémentation n'est pas encore qualifiée.
+
+### Premier build et diagnostic de montage
+
+Le build réel réussit. La première campagne échoue avant montage, sans skip.
+La trace strace dans le SPARK montre dup3(socket,3,0) réussi puis le descripteur
+3 absent après exec du helper fusermount3 ; la cause de cette fermeture reste
+indéterminée. Décision réversible : qualifier le mode de montage direct fourni
+par go-fuse, sous spark-docker avec la seule capacité de montage accordée au
+processus. Aucun changement de politique de sécurité de FORGE ni de runtime.
+La revue identifie également le transfert ioctl hérité des répertoires ; son
+refus explicite et sa preuve sont inclus dans le composant.

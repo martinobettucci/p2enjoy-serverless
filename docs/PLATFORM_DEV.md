@@ -40,10 +40,14 @@ enregistrer cette intégration ; le navigateur de la session est indisponible.
 
 ## Reprise et retour arrière
 
-Le binaire de montage s'exécute comme `spark-docker`, avec fusermount3 fourni
-par la cellule. Les workloads et la construction restent dans Docker. Le
-montage reste accessible au seul UID propriétaire, qui correspond au root
-interne des conteneurs rootless ; les capacités des workloads sont retirées.
+Le binaire de montage s'exécute comme `spark-docker`. Le helper fusermount3
+installé perd son descripteur de communication au passage exec dans cette
+cellule (trace réelle : dup3 réussi, puis fd 3 absent au démarrage du helper).
+Le mode direct sera donc qualifié avec CAP_SYS_ADMIN attribuée exclusivement
+au processus de montage dans le SPARK, sous ce même UID. Les workloads et la
+construction restent dans Docker. Le montage reste accessible au seul UID
+propriétaire, qui correspond au root interne des conteneurs rootless ; les
+capacités des workloads sont retirées. Le montage n'expose aucune API réseau.
 
 L'expérience de quota ne remplace aucun volume existant. Son nettoyage suit
 l'ordre arrêt des conteneurs, démontage FUSE, suppression des fichiers propres
