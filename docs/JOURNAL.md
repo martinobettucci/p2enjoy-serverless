@@ -449,3 +449,21 @@ la version lue via If-Match et le serveur la compare après authentification,
 avant la mutation. Un conflit conserve la saisie et les données actuelles.
 Les champs d'une modale sont indisponibles pendant sa soumission pour qu'une
 nouvelle frappe ne soit pas effacée par la fermeture de la requête précédente.
+
+### Adresse cliente et saturation des connexions
+
+La revue réseau établit que FORGE génère un reverse_proxy Caddy sans règle
+personnalisée de confiance des en-têtes. L'adresse vue après Docker reste à
+mesurer. RootlessKit 3.3.0 est installé sur le SPARK ; sa documentation annonce
+la conservation TCP avec le driver builtin depuis v3, à condition de désactiver
+userland-proxy dans Docker. La configuration du démon n'est pas encore changée.
+Références primaires : [Docker rootless](https://docs.docker.com/engine/security/rootless/troubleshoot/)
+et [pilotes RootlessKit](https://github.com/rootless-containers/rootlesskit/blob/master/docs/port.md).
+
+Le contrôle retiendra le pair TCP par défaut, puis X-Forwarded-For uniquement
+depuis des CIDR de confiance mesurés et injectés par la cellule. Ce même calcul
+servira aux ACL et aux limites SSO : huit flows actifs et trente ouvertures par
+minute par client, avec compteurs durables. Cette borne empêche un seul client
+de réserver les 256 flows globaux. Les autres en-têtes d'adresse ne portent
+aucune autorité. La qualification doit vérifier les falsifications sur la
+vraie route et les appels directs ; un simple contrat de proxy ne suffit pas.

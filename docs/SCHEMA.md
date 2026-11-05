@@ -35,6 +35,9 @@ cellule. Seuls les noms sortent dans les lectures de gestion.
 - `login_flows` : state_digest, verifier_cipher, nonce, expires_at. Le state
   est aussi lié au navigateur par un cookie HttpOnly à durée courte. Le flow
   est consommé une seule fois au callback.
+  La migration 002 ajoute client_address pour borner les flows par client.
+- `login_rate` : client_address, window_start, attempts. Fenêtre fixe d'une
+  minute ; compteur des flows ouverts, nettoyé à expiration.
 - `sessions` : digest, subject, display_name, csrf_digest, tokens_cipher,
   access_expires_at, created_at, expires_at. Les jetons OAuth restent côté
   serveur, chiffrés ; l'expiration absolue est bornée à huit heures. Le payload

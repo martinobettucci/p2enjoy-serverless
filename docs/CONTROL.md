@@ -17,6 +17,12 @@ Une configuration absente entraîne une erreur explicite, jamais un mode admin
 de secours. La clé maîtresse doit rester stable avec la base chiffrée.
 L'issuer autorisé par le contrat SSO est exclusivement
 `https://oauth.lelabs.tech/realms/lelabs` ; une autre valeur refuse le démarrage.
+`SERVERLESS_TRUSTED_PROXIES` est une liste facultative de CIDR séparés par
+virgules. Par défaut elle est vide. Le pair TCP fait autorité ; seul un pair
+explicitement approuvé permet de lire X-Forwarded-For. Les relais approuvés
+sont retirés de droite à gauche ; le premier non approuvé est le client.
+Une chaîne absente ou malformée venant d'un proxy approuvé est refusée à 400.
+Forwarded et X-Real-IP ne sont jamais utilisés pour identifier le client.
 
 ## Connexion
 
@@ -47,6 +53,9 @@ les erreurs de validation.
 Les identifiants state et cookies de flow ont exactement 43 caractères
 base64url. Une nouvelle tentative remplace le flow précédent du navigateur.
 Un callback malformé donne un refus contrôlé, y compris en Unicode.
+Une même adresse client ne peut conserver plus de huit flows actifs ni ouvrir
+plus de trente flows en une minute. Le refus est 429 ; la limite globale reste
+256. Les compteurs persistent avec la base et expirent après leur fenêtre.
 
 ## Gestion
 
@@ -111,3 +120,9 @@ et interservice. Les assertions couvrent aussi CSRF, rotation, révocation,
 expiration, configuration expurgée, conflits, redémarrage et absence de fuite
 dans les journaux. Aucun mode bootstrap authentifié artificiellement n'est
 ajouté pour remplacer une preuve de connexion.
+La preuve du proxy relève le pair TCP réel, compare le chemin TLS et les
+chemins directs, puis forge les en-têtes transmis pour vérifier qu'ils ne
+changent pas le client retenu. Une adresse de proxy n'est configurée comme
+approuvée qu'après cette mesure. Les logs de refus conservent le pair TCP et
+les adresses X-Forwarded-For valides, sous l'étiquette « untrusted », pour
+diagnostiquer la chaîne ; aucune valeur libre d'en-tête n'y est recopiée.
