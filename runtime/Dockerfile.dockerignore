@@ -1,0 +1,9 @@
+# @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#chargeur-et-validation-docker
+*
+!runtime/
+!runtime/*.mjs
+!qualification/
+!qualification/package.json
+!qualification/package-lock.json
+!qualification/artifacts/
+!qualification/artifacts/**

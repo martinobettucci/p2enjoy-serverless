@@ -22,8 +22,26 @@ Les copies avec repli noyau passent par les écritures contrôlées du proxy.
 Le contrôle et l'interface initiale sont déployés en DEV, avec la qualification
 administrateur encore ouverte. Le banc décrit ci-dessous reste déployé à côté
 du contrôle ; les montages de preuve sont nettoyés. La CLI Python de
-plan/packaging passe 24 scénarios ciblés dans Docker ; la publication des révisions et
-le moteur d'invocation restent à réaliser.
+plan/packaging passe 24 scénarios ciblés dans Docker ; le chargeur Node passe
+36 scénarios réels. La publication des révisions et le moteur d'invocation
+restent à réaliser.
+
+### Validation du code
+
+Le pilote Python `control/app/validator.py` utilise uniquement la bibliothèque
+standard pour Docker HTTP et son serveur Unix privé. Le runtime Node épinglé
+reste sans dépendance ajoutée : import dynamique, hook natif de format et IPC.
+Le contrôle crée le socket dans un répertoire 0700 monté readonly, puis le
+superviseur Node retire sa configuration et renvoie un résultat explicite.
+Les valeurs applicatives ne figurent pas dans l'environnement Docker.
+
+Un enfant importe le code via `runtime/loader.mjs`, partagé avec la future
+invocation. Les logs sont drainés, bornés, expurgés en conservant les positions
+brutes avant troncature, puis convertis en UTF-8 borné. L'échéance extérieure
+de quinze secondes englobe création, démarrage et import. Le pilote ferme
+les connexions et supprime le conteneur avec ses descendants avant de conclure.
+La preuve porte sur le chargement et ses pannes ; les droits de publication
+et la réconciliation d'un contrôle interrompu nécessitent leur intégration API.
 
 La compilation utilise Go 1.27.3 dans une image épinglée. go-fuse v2.12.1 et
 x/sys v0.28.0 sont verrouillés avec go.sum. L'audit govulncheck v1.9.0 relève

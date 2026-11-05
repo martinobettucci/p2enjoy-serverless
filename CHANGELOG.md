@@ -2,12 +2,19 @@
 
 ## [Non publié]
 
+- Chargeur Node 24 CJS/ESM et validation Docker avec transport Unix readonly,
+  configuration applicative privée, logs expurgés et délai extérieur de quinze
+  secondes. 36 scénarios E2E réels, dont dépendances, imports bloqués, limites,
+  secrets recoupés, données binaires et destruction des descendants.
+- Correction de confinement du canal, de troncature des secrets et de fermeture
+  des connexions partielles. Intégration aux révisions encore en cours.
+
 - Première CLI d'adaptation YAML et de packaging ZIP, avec héritage explicite,
   descripteurs sans valeurs de configuration, inventaires SHA256, chemins bornés
   et publication des fichiers par descripteurs de répertoire.
 - Manifeste plateforme des douze fonctions de qualification ; 24 scénarios CLI
   réels sur le SPARK, dans une image installée avec dépendances à empreintes.
-  Chargement Node, upload et publication encore en développement.
+  Upload et publication encore en développement.
 
 - Checkpoint DEV du contrôle Python/SQLite et de la console React : parcours
   SSO réel, modèles de gestion, sessions/CSRF, jetons CRUD et formulaires.

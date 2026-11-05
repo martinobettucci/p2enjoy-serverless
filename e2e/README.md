@@ -60,3 +60,11 @@ réelle sur le répertoire de sortie. Le même pilote est inclus dans l'image
 E2E de l'adaptateur et lancé sur le SPARK par `bash adapter/dev.sh test`.
 Sa preuve porte sur la CLI et les fichiers ; elle n'invoque aucun handler et
 ne remplace pas les preuves HTTP de déploiement ou d'exécution à venir.
+
+`runtime-validation.py`, lancé sur le SPARK par `bash runtime/dev.sh test`,
+exécute le pilote Docker réel de validation. Il utilise les variantes originales
+de `qualification/artifacts/`, la vraie dépendance YAML, les valeurs applicatives
+de cellule et le contrôle déjà déployé pour éprouver les permissions du socket.
+Il vérifie chargement, refus, limites, logs et destruction des descendants ;
+son rapport est `runtime/validation-proof.json` sur le SPARK. Il ne prouve pas
+encore les autorisations de publication ni l'invocation des handlers.

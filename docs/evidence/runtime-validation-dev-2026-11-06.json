@@ -1,0 +1,233 @@
+{
+  "date": "2026-11-05T23:57:35.505835+00:00",
+  "unit": "SLS-030",
+  "unit_complete": false,
+  "target": "infra-serverless DEV",
+  "scope": "Chargement et validation Docker, sans publication ni invocation de plateforme",
+  "campaign": {
+    "completed": true,
+    "checks": [
+      {
+        "name": "CommonJS export propre calculé",
+        "status": "passed"
+      },
+      {
+        "name": "CommonJS JS sans type déclaré",
+        "status": "passed"
+      },
+      {
+        "name": "ESM JS détecté par Node",
+        "status": "passed"
+      },
+      {
+        "name": "ESM avec await au chargement",
+        "status": "passed"
+      },
+      {
+        "name": "Export ESM default callable",
+        "status": "passed"
+      },
+      {
+        "name": "JS sous package type module sans extension",
+        "status": "passed"
+      },
+      {
+        "name": "Résolution ambiguë refusée",
+        "status": "passed"
+      },
+      {
+        "name": "Module absent refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Export absent refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Export hérité refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Export non callable refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Default synthétique CJS refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Objet default ESM sans export nommé refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Marqueur module.exports ESM non assimilé à CJS",
+        "status": "passed"
+      },
+      {
+        "name": "Résultat import then non namespace refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Vraie dépendance YAML packagée chargée",
+        "status": "passed"
+      },
+      {
+        "name": "Dépendance absente refusée",
+        "status": "passed"
+      },
+      {
+        "name": "Exception avec secret expurgée",
+        "status": "passed"
+      },
+      {
+        "name": "Exit zéro et faux résultat dans stdout refusés",
+        "status": "passed"
+      },
+      {
+        "name": "Configuration réelle et confinement effectif cgroups/montages/réseau",
+        "status": "passed"
+      },
+      {
+        "name": "Traversée du chemin de handler refusée",
+        "status": "passed"
+      },
+      {
+        "name": "Retrait réel de la dépendance auparavant valide",
+        "status": "passed"
+      },
+      {
+        "name": "Module lié refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Répertoire à la place du module refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Configurations malformées et limites refusées avant création Docker",
+        "status": "passed"
+      },
+      {
+        "name": "Logs volumineux drainés et secret fractionné/tronqué expurgé",
+        "status": "passed"
+      },
+      {
+        "name": "Secret complet proche de la coupe expurgé avant troncature",
+        "status": "passed"
+      },
+      {
+        "name": "Secrets superposés et troncature conservent les offsets bruts",
+        "status": "passed"
+      },
+      {
+        "name": "Connexion partielle du descendant fermée avant nettoyage Docker",
+        "status": "passed"
+      },
+      {
+        "name": "Résultat privé malformé refusé sans traceback puis vrai résultat accepté",
+        "status": "passed"
+      },
+      {
+        "name": "Logs binaires convertis en UTF8 sans dépasser la borne de sortie",
+        "status": "passed"
+      },
+      {
+        "name": "Variables de bootstrap isolées du superviseur",
+        "status": "passed"
+      },
+      {
+        "name": "Échéance extérieure et nettoyage : loop.cjs.handler",
+        "status": "passed"
+      },
+      {
+        "name": "Échéance extérieure et nettoyage : await.mjs.handler",
+        "status": "passed"
+      },
+      {
+        "name": "UDS depuis le vrai contrôle, configuration unique, descendants détruits",
+        "status": "passed"
+      },
+      {
+        "name": "Contrôle sain et absence de ressources de validation survivantes",
+        "status": "passed"
+      }
+    ],
+    "failed": 0,
+    "skipped": 0,
+    "image_id": "sha256:2868ee63f3ab1682fbf6c0f94f535af83c8b647d91e3937e1ce70bc83ef07efd",
+    "fixture_image_id": "sha256:b13e206a7903ebdfc0f30fe2561c8d4be289db9b4898336bf23fcd3dc9f182b7"
+  },
+  "source_sha256": {
+    "control/app/validator.py": "f7d21e712337581b9bf9c368afa1f8ec6136af5befd46db29571abcf168ad005",
+    "e2e/runtime-validation.py": "9a270fd62167f59a2314b0d131c008b9a773196e3974c538db7a7dcba9762a2b",
+    "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+    "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+    "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+    "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+    "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+    "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+    "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+    "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+    "qualification/artifacts/esm/entry.js": "4bdff9d934a23519a6767c964046cbc384d2f90ecf5c8def5dec962c71bb1ee5",
+    "qualification/artifacts/esm/package.json": "89c47db7851f89caec72da4f215ebc21cf1e294aeef3b45d2583562d846ab035",
+    "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+    "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+    "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+    "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+    "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+    "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+    "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+    "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+    "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+    "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+    "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+    "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+    "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+    "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+    "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+    "qualification/package-lock.json": "a17bb562a678057a489381abef0f494cdf33c3a15d5233a2bbd2d3b22813015d",
+    "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+    "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+    "runtime/Dockerfile.dockerignore": "e1100fadb5f9ae82fab4d8a766241d93c4212a833fb918b3a8c8219da1adbbe1",
+    "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+    "runtime/dev.sh": "9ad7a21d55864a658f54c31f000b885283e0d88705a4d4e907f5cadc6a2099ef",
+    "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+    "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+    "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632"
+  },
+  "baked_runtime_sha256": {
+    "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+    "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+    "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632"
+  },
+  "running_services": [
+    {
+      "name": "p2enjoy-serverless-dev-control-1",
+      "image_id": "sha256:29f2419de1df38264673446ae4ecd1c5c1f23b11b48e4ce79a0ce6a18ebed079",
+      "health": "healthy"
+    },
+    {
+      "name": "p2enjoy-qualification-dev-qualification-1",
+      "image_id": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+      "health": "healthy"
+    }
+  ],
+  "remaining_validation_containers": [],
+  "secret_scan": {
+    "checked_values": 4,
+    "matching_paths": []
+  },
+  "regressions": [
+    "Canal readonly",
+    "Secrets complets et superposés à la troncature",
+    "Fermeture des connexions avant attente serveur",
+    "Résultat privé malformé sans traceback",
+    "Logs binaires : 65538 octets observés avant correction, borne 65536 respectée après correction"
+  ],
+  "pending": [
+    "Extraction ZIP serveur",
+    "Upload et publication authentifiés",
+    "Réconciliation après crash du contrôle",
+    "Invocations Docker et volumes par fonction"
+  ]
+}

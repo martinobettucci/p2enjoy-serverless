@@ -560,3 +560,37 @@ réelle à deux processus confirme qu'un lien substitué à la sortie ne détour
 pas les écritures. Le poste ne fournit pas ensurepip ; la vérification d'une
 installation vierge se poursuit dans l'image Docker épinglée, sans installer
 de paquet système sur le poste.
+
+## Chargeur Docker — 2026-11-06
+
+Le validateur Node est implémenté dans `runtime/` et piloté par la CLI réelle
+`control/app/validator.py`. Le contrôle crée un socket Unix privé, monté
+readonly dans le conteneur ; le superviseur retire une fois sa configuration,
+charge dans un enfant et remet un résultat distinct des logs. Ce sens de
+connexion ferme l'écriture non bornée que permettait un répertoire de socket
+créé par le runtime. Le format CJS/ESM est constaté par Node, y compris pour
+les fichiers JS sans type déclaré ; un namespace substitué par un export
+then et un default synthétique CommonJS sont refusés.
+
+La campagne finale passe 36 scénarios réels, zéro échec et zéro test ignoré.
+Les sources du SPARK correspondent aux 36 fichiers comparés ; les trois
+modules exécutables de l'image runtime correspondent aussi au dépôt. Le
+contrôle et le banc restent sains ; aucun conteneur de validation ne subsiste.
+La comparaison avec les quatre valeurs confidentielles connues ne relève
+aucune occurrence dans ces sources. Les trois notes officielles de cellule
+sont proposées, appliquées via sa console et relues.
+
+Les revues et preuves font corriger la troncature des secrets complets puis
+superposés, l'attente des connexions partielles avant leur annulation, et une
+erreur de type dans un résultat privé malformé. Le masque conserve désormais
+les offsets bruts avant la coupe. Une mesure réelle révèle aussi 65 538 octets
+de logs binaires convertis pour une borne de 65 536 ; la correction retire
+l'ultime caractère UTF-8 incomplet, et la régression passe. Les descendants
+sont observés puis leur disparition vérifiée après destruction du conteneur.
+
+Ce checkpoint ne change ni l'image ni les routes du contrôle en service.
+L'extraction, l'upload, les révisions et la réconciliation après interruption
+du contrôle restent dans SLS-030. La session SSO administrateur manque encore
+pour leurs preuves authentifiées. Le registre d'incohérences hors unité est
+vide ; les défauts relevés ici sont corrigés avec leurs preuves. Aucun remote
+Git n'est configuré ; les checkpoints sont conservés localement.

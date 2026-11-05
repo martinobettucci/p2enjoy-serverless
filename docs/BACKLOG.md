@@ -103,7 +103,7 @@ du pilote de preuve. Les dépendances verrouillées sont auditées.
 
 ## SLS-030
 
-Statut : [~] — plan et packaging disponibles ; révisions à réaliser.
+Statut : [~] — plan, packaging et validation Node disponibles ; révisions à réaliser.
 
 Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
@@ -113,7 +113,11 @@ Cette unité poursuit les parties indépendantes pendant l'attente de session
 SSO de SLS-020. Les preuves d'upload/publication exigent toujours cette session.
 Le [checkpoint CLI](evidence/adapter-package-dev-2026-11-06.json) comporte
 24 scénarios réels réussis dans Docker sur le SPARK, avec source et images
-identifiées. Il ne qualifie pas encore le chargement Node ni l'upload.
+identifiées. Le [checkpoint du chargeur](evidence/runtime-validation-dev-2026-11-06.json)
+ajoute 36 scénarios réels : formats CJS/ESM, dépendances, confinement, logs,
+échéance extérieure, protocole Unix et destruction des descendants.
+L'extraction ZIP côté serveur, l'upload authentifié, la publication et la
+réconciliation après crash du contrôle restent à réaliser et qualifier.
 
 ## SLS-040
 

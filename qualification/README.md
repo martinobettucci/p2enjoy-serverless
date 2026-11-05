@@ -7,6 +7,12 @@ L'exécuteur de référence sert uniquement au développement. Il ne remplace pa
 la plateforme et ne prouve ni SSO, ACL CRUD, quotas par fonction ni autoscaling.
 Son accès HTTP est limité à `127.0.0.1:18080`. Ne pas l'exposer publiquement.
 
+Les variantes de `artifacts/` sont des modules originaux destinés au vrai
+chargeur de plateforme : ESM, CommonJS, dépendance YAML et défauts d'import
+intentionnels. Leur campagne se lance séparément selon
+[runtime/README.md](../runtime/README.md). Elles ne modifient pas l'exécuteur
+de référence ni son manifeste.
+
 ## Installer, lancer et vérifier
 
 Prérequis : Docker Engine avec Compose, Bash. Aucun Node installé sur l'hôte

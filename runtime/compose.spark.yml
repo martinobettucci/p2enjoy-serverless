@@ -1,0 +1,19 @@
+# @spec docs/BACKLOG.md#sls-030 | docs/PLATFORM_DEV.md
+name: p2enjoy-runtime-dev
+services:
+  runtime:
+    image: p2enjoy-runtime:dev
+    profiles: [dev]
+    build:
+      context: ..
+      dockerfile: runtime/Dockerfile
+      target: runtime
+    env_file: [/etc/spark/env, /run/spark/secrets]
+  qualification:
+    image: p2enjoy-runtime-qualification:dev
+    profiles: [dev]
+    build:
+      context: ..
+      dockerfile: runtime/Dockerfile
+      target: qualification
+    env_file: [/etc/spark/env, /run/spark/secrets]

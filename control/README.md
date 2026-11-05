@@ -28,3 +28,9 @@ Les contrôles publics, de l'accueil, du réseau, des limites SSO et les
 à qualifier avec une session SSO. Ce répertoire n'est
 donc pas encore un contrôle intégralement qualifié. Les preuves SLS-020
 emploient le vrai SSO et les véritables API, sans authentification substituée.
+
+`app/validator.py` fournit le pilote de chargement Node de SLS-030. Sa CLI
+est qualifiée sur le SPARK avec le runtime isolé, selon
+[runtime/README.md](../runtime/README.md). Elle n'est pas encore reliée aux
+routes du contrôle ni incluse dans son image déployée ; l'upload et les
+révisions restent la prochaine étape.

@@ -7,8 +7,9 @@ application indépendante de qualification et son exécuteur de référence DEV
 sont disponibles dans **[qualification/](qualification/README.md)**, avec
 handlers, manifeste `serverless.yml`, Docker, tests et commandes d'exploitation.
 L'[adaptateur](adapter/README.md) prépare les plans et archives ZIP ; la
-validation Node, la publication des révisions et le moteur d'invocation restent
-à implémenter. Le composant de [stockage à quota](storage/README.md)
+validation Node dans Docker est disponible dans [runtime/](runtime/README.md),
+avec 36 scénarios réels réussis. La publication des révisions et le moteur
+d'invocation restent à implémenter. Le composant de [stockage à quota](storage/README.md)
 est disponible et qualifié sur le SPARK DEV : 31 contrôles réels réussis,
 dont saturation, concurrence et reprise après interruption.
 
@@ -132,6 +133,10 @@ storage/
   main.go                 Proxy de quota FUSE sur les fichiers natifs
   client.py               Client de preuve dans un conteneur Docker isolé
   prove.py                Campagne de montage, quota, crash et reprise
+runtime/
+  loader.mjs              Chargeur commun Node : CommonJS et ESM
+  validate-supervisor.mjs Supervision d'import et protocole Unix privé
+  dev.sh                  Construction et qualification sur le SPARK
 qualification/
   serverless.yml          Manifeste du service synthétique
   serverless.platform.yml Manifeste de packaging pour la plateforme

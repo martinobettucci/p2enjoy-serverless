@@ -12,11 +12,14 @@ Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
 ## Ordre de réalisation
 
-Prochaine étape SLS-030 : construire l'image `runtime/` de validation Node,
-copier ses variantes originales et qualifier le pilote Docker dans le SPARK.
-Cette étape ne change pas le contrôle déployé. L'intégration du socket Docker
+L'image `runtime/` de validation Node et ses variantes originales sont construites
+sur le SPARK. Le pilote Docker passe 36 scénarios réels ; ses ressources de
+qualification sont nettoyées. Cette étape ne change pas le contrôle déployé.
+L'intégration du socket Docker
 et du chemin hôte des artefacts au contrôle sera appliquée avec les API de
-révision et leur migration, après ce checkpoint indépendant.
+révision et leur migration, après ce checkpoint indépendant. Les répertoires
+`adapter/`, `runtime/`, `e2e/` et `qualification/artifacts/` sont présents sous
+`/srv/p2enjoy-serverless`. Les commandes d'exploitation figurent dans leurs README.
 
 1. Proposer les paramètres supplémentaires du contrôle dans les fichiers `.?` de la cellule,
    puis les appliquer par sa console. Aucun secret n'est conservé au dépôt.
