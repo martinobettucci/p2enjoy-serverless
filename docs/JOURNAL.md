@@ -467,3 +467,9 @@ minute par client, avec compteurs durables. Cette borne empêche un seul client
 de réserver les 256 flows globaux. Les autres en-têtes d'adresse ne portent
 aucune autorité. La qualification doit vérifier les falsifications sur la
 vraie route et les appels directs ; un simple contrat de proxy ne suffit pas.
+
+La mesure réelle confirme le risque : TLS public et loopback direct arrivent
+tous deux de 172.19.0.1 ; seul TLS remplace le X-Forwarded-For falsifié par
+l'adresse réelle. Cette adresse commune reste non approuvée. Le réglage
+userland-proxy=false est retenu dans le seul démon rootless du SPARK, avec
+reprise des deux conteneurs DEV et retour arrière si la preuve échoue.

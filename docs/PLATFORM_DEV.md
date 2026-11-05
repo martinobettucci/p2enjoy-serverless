@@ -35,6 +35,23 @@ n'écoute pas sur 18090. Les trois notes officielles sont appliquées. La consol
 locale est accessible sur 5175. Le parcours utilisateur SSO reste à vérifier
 avec le contrôle, dans SLS-020 et SLS-060.
 
+## Conservation de l'adresse cliente
+
+La mesure sur le contrôle DEV constate que le proxy TLS et l'accès direct
+depuis le SPARK arrivent tous deux avec le pair `172.19.0.1` tant que le proxy
+utilisateur Docker est actif. Caddy reconstruit X-Forwarded-For sur l'entrée
+TLS, mais un accès direct peut le fournir lui-même. Ce pair commun ne doit
+donc pas entrer dans SERVERLESS_TRUSTED_PROXIES.
+
+Avec RootlessKit 3.3.0, le choix retenu est `"userland-proxy": false` dans
+`/home/spark-docker/.config/docker/daemon.json`, en conservant les autres clés.
+Le démon rootless du seul SPARK est redémarré ; les deux piles DEV doivent
+reprendre et les trois trajets (TLS, TLS falsifié, direct) sont remesurés.
+Si la santé ou la conservation de source échoue, remettre la configuration
+précédente et redémarrer ce même démon. Aucune modification du noyau ou du
+réseau de FORGE n'est prévue. Le proxy approuvé sera proposé par la cellule
+uniquement après une mesure concluante.
+
 ## Reprise et retour arrière
 
 Le binaire de montage s'exécute comme `spark-docker`. Le helper fusermount3

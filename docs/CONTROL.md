@@ -54,8 +54,9 @@ Les identifiants state et cookies de flow ont exactement 43 caractères
 base64url. Une nouvelle tentative remplace le flow précédent du navigateur.
 Un callback malformé donne un refus contrôlé, y compris en Unicode.
 Une même adresse client ne peut conserver plus de huit flows actifs ni ouvrir
-plus de trente flows en une minute. Le refus est 429 ; la limite globale reste
-256. Les compteurs persistent avec la base et expirent après leur fenêtre.
+plus de trente flows par fenêtre fixe d'une minute, commencée à sa première
+ouverture. Le refus est 429 ; la limite globale reste 256. Les compteurs
+persistent avec la base et expirent après leur fenêtre.
 
 ## Gestion
 
