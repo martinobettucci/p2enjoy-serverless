@@ -380,3 +380,28 @@ par go-fuse, sous spark-docker avec la seule capacité de montage accordée au
 processus. Aucun changement de politique de sécurité de FORGE ni de runtime.
 La revue identifie également le transfert ioctl hérité des répertoires ; son
 refus explicite et sa preuve sont inclus dans le composant.
+
+### Stockage qualifié sur le SPARK
+
+Le montage direct avec la capacité de montage limitée au processus fonctionne
+sous spark-docker. La revue a fermé le transfert ioctl des répertoires et les
+réservations après mutation ; les tailles maximales sont maintenant réservées
+avant syscall. La preuve a reproduit un autre défaut : un répertoire supprimé
+resté ouvert était décompté (0 au lieu de 4096 octets). Le handle de répertoire
+conserve désormais sa référence jusqu'à Releasedir, en gardant fsyncdir natif.
+
+La campagne finale passe 31 contrôles, zéro échec et zéro skip. Elle vérifie
+quotas, concurrence, fichiers et répertoires ouverts supprimés, copies noyau
+avec repli, restrictions POSIX, SIGKILL du démon, consommateurs existants et
+nouveaux, remontage, données acquittées, configurations invalides et verrou
+exclusif. Les six empreintes de sources locales/déployées correspondent.
+Preuve : evidence/storage-dev-2026-11-05.json. Go 1.27.3, image et modules
+épinglés. govulncheck v1.9.0 : zéro chemin ou paquet importé affecté ; un avis
+x/sys Windows hors cible Linux, documenté dans le DAT.
+
+Les propositions de cellule portent OIDC_CLIENT_ID, SERVERLESS_PUBLIC_URL,
+OIDC_CLIENT_SECRET vide et la route serverless-dev.lelabs.tech vers 18090 TLS.
+Les trois notes .? décrivent le composant qualifié et l'état de la plateforme.
+Aucun montage de preuve ne reste actif. Le SSO nécessite encore la création du
+client et le secret via l'interface externe ; demande d'accès envoyée au
+responsable, sans bloquer la poursuite des unités indépendantes.

@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Stockage FUSE à quota logique : réservations avant extension, fichiers et
+  répertoires ouverts après suppression comptés, refus des mutations hors
+  contrat, verrou exclusif et conservation des fichiers natifs.
+- Campagne DEV de 31 contrôles réels de stockage, Docker rootless, saturation,
+  concurrence, arrêt brutal, remontage et configurations refusées.
+
 - Contrat de plateforme et découpage SLS-010 à SLS-060 : identité, objets,
   adaptation YAML, moteur Docker, stockage, exploitation et console.
 

@@ -2,22 +2,21 @@
 
 ## Baseline
 
-Le banc de qualification est déployé selon `QUALIFICATION_DEV.md`. La
-plateforme n'est pas encore installée. La cible est le SPARK `infra-serverless`
+Le banc de qualification est déployé selon `QUALIFICATION_DEV.md`. Le composant
+de quota est construit dans `storage/`, testé par 31 contrôles puis laissé
+sans montage permanent. La plateforme n'est pas encore installée.
+La cible est le SPARK `infra-serverless`
 et le répertoire `/srv/p2enjoy-serverless`, administré par `spark-docker` pour
 Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
 ## Ordre de réalisation
 
-1. Qualifier le proxy de quota FUSE dans le SPARK, puis lire/écrire depuis
-   Docker rootless. L'expérience emploie des répertoires et des conteneurs
-   dédiés supprimés après démontage.
-2. Déclarer la route DEV et le client SSO dans leurs interfaces autorisées.
-3. Proposer les paramètres du contrôle dans les fichiers `.?` de la cellule,
+1. Déclarer la route DEV et le client SSO dans leurs interfaces autorisées.
+2. Proposer les paramètres du contrôle dans les fichiers `.?` de la cellule,
    puis les appliquer par sa console. Aucun secret n'est conservé au dépôt.
-4. Construire et déployer le contrôle et le runtime, appliquer les migrations
+3. Construire et déployer le contrôle et le runtime, appliquer les migrations
    SQLite versionnées, puis déployer l'application témoin via l'adaptateur.
-5. Exécuter les campagnes ciblées puis complète et mettre à jour les notes.
+4. Exécuter les campagnes ciblées puis complète et mettre à jour les notes.
 
 ## Intégration à préparer
 
@@ -43,7 +42,7 @@ enregistrer cette intégration ; le navigateur de la session est indisponible.
 Le binaire de montage s'exécute comme `spark-docker`. Le helper fusermount3
 installé perd son descripteur de communication au passage exec dans cette
 cellule (trace réelle : dup3 réussi, puis fd 3 absent au démarrage du helper).
-Le mode direct sera donc qualifié avec CAP_SYS_ADMIN attribuée exclusivement
+Le mode direct est qualifié avec CAP_SYS_ADMIN attribuée exclusivement
 au processus de montage dans le SPARK, sous ce même UID. Les workloads et la
 construction restent dans Docker. Le montage reste accessible au seul UID
 propriétaire, qui correspond au root interne des conteneurs rootless ; les

@@ -70,7 +70,9 @@ Spécification commune : [Contrat de plateforme](PLATFORM.md).
 
 ## SLS-010
 
-Statut : [~] — qualification des prérequis d'hébergement.
+Statut : [~] — composant de quota livré et qualifié par 31 contrôles réels,
+zéro échec/skip ; intégration SSO et domaine DEV en attente d'accès externe.
+Preuve : [stockage DEV](evidence/storage-dev-2026-11-05.json).
 
 Qualifier le quota dur par fonction, le montage dans Docker rootless et sa
 persistance. Préparer l'intégration SSO réelle, le domaine DEV et les variables

@@ -6,7 +6,9 @@ application indépendante de qualification et son exécuteur de référence DEV
 sont disponibles dans **[qualification/](qualification/README.md)**, avec
 handlers, manifeste `serverless.yml`, Docker, tests et commandes d'exploitation.
 Le moteur de plateforme, son interface et son adaptateur de déploiement ne sont
-pas encore implémentés.
+pas encore implémentés. Le composant de [stockage à quota](storage/README.md)
+est disponible et qualifié sur le SPARK DEV : 31 contrôles réels réussis,
+dont saturation, concurrence et reprise après interruption.
 
 ## Objectif
 
@@ -100,6 +102,10 @@ d'administration n'y est autorisée.
 ## Structure
 
 ```text
+storage/
+  main.go                 Proxy de quota FUSE sur les fichiers natifs
+  client.py               Client de preuve dans un conteneur Docker isolé
+  prove.py                Campagne de montage, quota, crash et reprise
 qualification/
   serverless.yml          Manifeste du service synthétique
   src/handlers.cjs         Les douze fonctions originales

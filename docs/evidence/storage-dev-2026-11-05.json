@@ -1,0 +1,158 @@
+{
+  "results": [
+    {
+      "name": "exclusive-backing-lock",
+      "status": "passed",
+      "detail": "2026/11/05 17:33:05 volume already owned: resource temporarily unavailable"
+    },
+    {
+      "name": "read-write-fsync-chmod",
+      "status": "passed"
+    },
+    {
+      "name": "directory-fsync-rename",
+      "status": "passed"
+    },
+    {
+      "name": "saturation-isolation",
+      "status": "passed"
+    },
+    {
+      "name": "truncate-both-paths",
+      "status": "passed"
+    },
+    {
+      "name": "sparse-charged",
+      "status": "passed"
+    },
+    {
+      "name": "open-unlink",
+      "status": "passed"
+    },
+    {
+      "name": "multiple-open-handles",
+      "status": "passed"
+    },
+    {
+      "name": "rename-open-destination",
+      "status": "passed"
+    },
+    {
+      "name": "open-removed-directory",
+      "status": "passed"
+    },
+    {
+      "name": "concurrent-growth",
+      "status": "passed"
+    },
+    {
+      "name": "empty-entry-bound",
+      "status": "passed"
+    },
+    {
+      "name": "alternate-mutations-refused",
+      "status": "passed"
+    },
+    {
+      "name": "copy-append-self-rename",
+      "status": "passed"
+    },
+    {
+      "name": "directory-ioctl-refused",
+      "status": "passed"
+    },
+    {
+      "name": "copy-range-quota",
+      "status": "passed"
+    },
+    {
+      "name": "shared-mmap-refused",
+      "status": "passed"
+    },
+    {
+      "name": "persist-write",
+      "status": "passed"
+    },
+    {
+      "name": "persist-read",
+      "status": "passed"
+    },
+    {
+      "name": "persist-write",
+      "status": "passed"
+    },
+    {
+      "name": "disconnected-mount-refuses-write",
+      "status": "passed"
+    },
+    {
+      "name": "new-container-rejects-disconnected-mount",
+      "status": "passed"
+    },
+    {
+      "name": "persist-read",
+      "status": "passed"
+    },
+    {
+      "name": "refuse-limit-below-usage",
+      "status": "passed",
+      "detail": "2026/11/05 17:33:17 quota smaller than existing usage"
+    },
+    {
+      "name": "refuse-preexisting-symlink",
+      "status": "passed",
+      "detail": "2026/11/05 17:33:17 unsupported link, type or nested filesystem in backing"
+    },
+    {
+      "name": "refuse-preexisting-hardlink",
+      "status": "passed",
+      "detail": "2026/11/05 17:33:17 unsupported link, type or nested filesystem in backing"
+    },
+    {
+      "name": "refuse-preexisting-special-file",
+      "status": "passed",
+      "detail": "2026/11/05 17:33:17 unsupported link, type or nested filesystem in backing"
+    },
+    {
+      "name": "refuse-overlapping-paths",
+      "status": "passed",
+      "detail": "2026/11/05 17:33:17 backing and mount must be separate trees"
+    },
+    {
+      "name": "refuse-zero-quota",
+      "status": "passed",
+      "detail": "2026/11/05 17:33:17 backing, mount and bytes (4KiB..1PiB) required"
+    },
+    {
+      "name": "refuse-oversized-quota",
+      "status": "passed",
+      "detail": "2026/11/05 17:33:17 backing, mount and bytes (4KiB..1PiB) required"
+    },
+    {
+      "name": "refuse-nonempty-mount",
+      "status": "passed",
+      "detail": "2026/11/05 17:33:17 mount must be empty"
+    }
+  ],
+  "failed": 0,
+  "skipped": 0,
+  "sources": {
+    "main.go": "61786c535bcc236bec3de7462e6e11b26bdc7e334f6d9df6f238480ab55a600c",
+    "Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+    "go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+    "go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+    "client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+    "prove.py": "c2cdd8a54dfd12eb1a48472b60aa7e5bf79e108941a28edca6ed486f457b8063"
+  },
+  "binary_sha256": "b785c7f32c1ae0e9150884a1bfe60a2d5c0bc2acad96083b786225e19abbfd87",
+  "client_image": "python:3.14-slim@sha256:af8a5aa14780025dbfbcfbc81bd8a91ebd87711dd5b0f48ed71090949dd7cb1d",
+  "daemon_logs": {
+    "a.log": "2026/11/05 17:33:05 mounted quota=1048576 used=0\n2026/11/05 17:33:09 mounted quota=1048576 used=8192\n2026/11/05 17:33:15 mounted quota=1048576 used=8192\n",
+    "b.log": "2026/11/05 17:33:05 mounted quota=1048576 used=0\n"
+  },
+  "verified_at_utc": "2026-11-05T17:33:17Z",
+  "scope": "Composant FUSE de stockage, Docker rootless du SPARK DEV ; intégration au moteur de plateforme à réaliser.",
+  "builder_image": "golang:1-bookworm@sha256:b08bc99468058b6d8a0ada17fa54996b910d5e82a7e95bee0372e3bd98415258",
+  "compiler": "go1.27.3 linux/amd64",
+  "govulncheck": "v1.9.0 ; 0 vulnérabilité atteignable ou paquet importé affecté ; GO-2026-5024 Windows uniquement dans x/sys 0.28.0"
+}

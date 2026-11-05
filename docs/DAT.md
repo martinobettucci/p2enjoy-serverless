@@ -12,10 +12,21 @@ release du 21 octobre 2026). Le proxy conserve les fichiers natifs et couvre
 leurs chemins de mutation ; le contrat précis est dans PLATFORM, stockage.
 Go sert uniquement à ce composant système. Son binaire statique se construit
 dans Docker et s'exécute sous `spark-docker` pour fournir un montage au démon
-rootless. La preuve de fonctionnement dans le SPARK reste à établir.
+rootless. Le montage direct sous spark-docker avec CAP_SYS_ADMIN dans la
+cellule est qualifié ; les workloads Docker n'ont aucune capacité. Le helper
+fusermount3 de cette cellule ne conserve pas son descripteur au passage exec.
+Le composant passe 31 contrôles réels : [preuve](evidence/storage-dev-2026-11-05.json).
+Les répertoires supprimés encore ouverts restent comptés jusqu'à Releasedir.
+Les copies avec repli noyau passent par les écritures contrôlées du proxy.
 
-Ces composants ne sont pas encore livrés. Le banc décrit ci-dessous reste
-actuellement le seul service déployé.
+Le contrôle et l'interface ne sont pas encore livrés. Le banc décrit ci-dessous
+reste le seul service permanent déployé ; les montages de preuve sont nettoyés.
+
+La compilation utilise Go 1.27.3 dans une image épinglée. go-fuse v2.12.1 et
+x/sys v0.28.0 sont verrouillés avec go.sum. L'audit govulncheck v1.9.0 relève
+zéro vulnérabilité atteignable et zéro paquet importé affecté. L'avis
+GO-2026-5024 du module x/sys concerne uniquement Windows ; ce composant est
+Linux. Résultat complet : [audit](evidence/storage-dependencies-2026-11-05.txt).
 
 ## Qualification
 

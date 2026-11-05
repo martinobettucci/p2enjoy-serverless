@@ -121,10 +121,12 @@ pour les métadonnées, images, journaux et sauvegardes du SPARK.
 
 Un processus possède exclusivement chaque volume avec un verrou système. Il
 sérialise les mutations et compte les inodes supprimés encore ouverts jusqu'au
-dernier close. Les extensions sont réservées avant écriture/truncate ; les
+dernier close, y compris pour les répertoires supprimés. Les extensions sont
+réservées avant écriture/truncate ; les
 écritures partielles sont recomptées. Les liens, fichiers spéciaux, xattrs,
-préallocation, ioctl et copie côté filesystem sont refusés ; les copies
-ordinaires par read/write restent possibles. Le passthrough noyau et le cache
+préallocation et ioctl sont refusés ; l'accélération de copie côté filesystem
+est désactivée. Les copies ordinaires et le repli read/write du noyau pour
+copy_file_range restent soumis au quota. Le passthrough noyau et le cache
 d'écriture sont désactivés. Les fichiers utilisent des accès directs FUSE ;
 les mappings mémoire partagés ne font pas partie du contrat initial.
 
