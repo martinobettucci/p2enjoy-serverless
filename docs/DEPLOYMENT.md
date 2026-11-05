@@ -222,7 +222,13 @@ l'enfant après son bootstrap. Elles ne deviennent ni la configuration du
 superviseur, ni des arguments de commande, ni l'environnement enregistré par
 Docker. Le chargeur refuse les chemins ambigus, liens et sorties de l'archive.
 L'interopérabilité CommonJS utilise l'export `module.exports` identifié par
-Node 24 ; un objet default ESM n'est pas assimilé à un module CommonJS.
+Node 24 et le format constaté par son hook de chargement ; un objet default
+ESM n'est pas assimilé à un module CommonJS. Un résultat d'import qui n'est
+pas un namespace Node est refusé, notamment si un export `then` détourne la
+résolution de Promise. Les variables interprétées au démarrage de Node sont
+lisibles comme valeurs applicatives, mais n'altèrent pas rétroactivement son
+bootstrap. L'IPC sépare les logs du protocole ; il ne constitue pas une
+attestation contre un module qui falsifierait délibérément son propre processus.
 
 Le pilote Python utilise l'API HTTP locale Docker, sans shell ni nouvelle
 dépendance. Il résout une image existante en identifiant immuable, crée un
