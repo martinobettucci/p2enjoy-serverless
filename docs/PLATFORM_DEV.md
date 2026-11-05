@@ -23,13 +23,20 @@ Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
 Client OIDC prévu : `p2enjoy-serverless-dev`, application serveur confidentielle,
 PKCE S256, callback `/auth/retour`, déconnexion `/`, rôles `verified` et `admin`.
-Le domaine doit être résolu et exposé avant de fournir la déclaration finale.
-Le secret doit porter le nom `OIDC_CLIENT_SECRET`, selon `sso.md`.
+Déclaration prête à importer dans l'interface SSO, onglet Intégrations :
+[OIDC_DEV.txt](OIDC_DEV.txt). Domaine retenu pour DEV :
+`serverless-dev.lelabs.tech`, à faire résoudre vers l'entrée de la cellule et
+à déclarer par sa console sur le port HTTP 18090 avec TLS public.
+Le secret doit porter le nom `OIDC_CLIENT_SECRET`, selon `sso.md`, et être
+saisi directement comme secret de ce SPARK. Il ne doit pas transiter en chat.
 
 État observé le 5 novembre 2026 : découverte du SSO accessible ;
 `serverless-dev.lelabs.tech` ne résout pas ; console locale sur le port 5175
 indisponible. Ces constats ne prouvent pas une panne de la FORGE. Les actions
 de configuration restent limitées au scope du SPARK.
+La tentative publique d'autorisation avec le client prévu retourne
+« Client non trouvé ». L'accès administrateur au SSO est donc nécessaire pour
+enregistrer cette intégration ; le navigateur de la session est indisponible.
 
 ## Reprise et retour arrière
 
