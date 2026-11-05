@@ -142,6 +142,10 @@ runtime ne doit démarrer sur un simple répertoire lorsque son montage manque.
 Contrôle Python, stockage de métadonnées SQLite WAL local, API unique et
 console React/Vite. Le contrôle est seul détenteur du socket Docker. Les
 fonctions ne montent ni ce socket, ni les données ou secrets du contrôle.
+Le contrôle utilise le réseau hôte du SPARK afin de conserver son pair TCP,
+alors que les fonctions restent dans leurs réseaux Docker. Le transport des
+commandes d'exécution passe par l'API locale Docker ; il ne suppose pas que
+les adresses internes rootless soient routables depuis le SPARK.
 Les journaux portent service, fonction, révision et invocation ; ils sont
 bornés et accessibles selon les mêmes ACL. Les métriques distinguent usage,
 allocation et plafond. Toutes les valeurs propres au SPARK viennent des deux

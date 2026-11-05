@@ -43,14 +43,23 @@ utilisateur Docker est actif. Caddy reconstruit X-Forwarded-For sur l'entrée
 TLS, mais un accès direct peut le fournir lui-même. Ce pair commun ne doit
 donc pas entrer dans SERVERLESS_TRUSTED_PROXIES.
 
-Avec RootlessKit 3.3.0, le choix retenu est `"userland-proxy": false` dans
-`/home/spark-docker/.config/docker/daemon.json`, en conservant les autres clés.
-Le démon rootless du seul SPARK est redémarré ; les deux piles DEV doivent
-reprendre et les trois trajets (TLS, TLS falsifié, direct) sont remesurés.
-Si la santé ou la conservation de source échoue, remettre la configuration
-précédente et redémarrer ce même démon. Aucune modification du noyau ou du
-réseau de FORGE n'est prévue. Le proxy approuvé sera proposé par la cellule
-uniquement après une mesure concluante.
+La désactivation de userland-proxy est écartée : Docker refuse de démarrer
+sans `/proc/sys/net/bridge/bridge-nf-call-iptables`, absent de cette cellule.
+La configuration initiale du démon est restaurée. Les réseaux Compose,
+devenus incohérents au redémarrage refusé, ont été recréés sans retirer les
+volumes ; les deux piles DEV sont revenues saines.
+
+Le choix retenu est `network_mode: host` pour le seul contrôle. Docker 29.9.3
+permet ici de partager le réseau réel du SPARK : la preuve utilise le vrai
+contrôle, un état SQLite temporaire et les deux env_file officiels lus par
+Compose. Le pair loopback reste 127.0.0.1 et l'inode de namespace réseau du
+conteneur correspond à celui du SPARK. Les fonctions gardent un réseau Docker
+isolé ; leur commande d'exécution passera par l'API locale Docker.
+
+Le contrôle écoute directement sur 18090, sans publication de port Docker.
+Les chemins TLS et directs sont remesurés avant d'approuver le proxy. Aucun
+paramètre de FORGE ni garde de filtrage noyau n'est modifié. Les expériences
+de conteneurs temporaires sont supprimées après chaque mesure.
 
 ## Reprise et retour arrière
 

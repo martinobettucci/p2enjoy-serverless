@@ -473,3 +473,14 @@ tous deux de 172.19.0.1 ; seul TLS remplace le X-Forwarded-For falsifié par
 l'adresse réelle. Cette adresse commune reste non approuvée. Le réglage
 userland-proxy=false est retenu dans le seul démon rootless du SPARK, avec
 reprise des deux conteneurs DEV et retour arrière si la preuve échoue.
+
+L'essai userland-proxy=false échoue faute de br_netfilter visible ; aucun
+contournement du garde Docker n'est appliqué. Après restauration, Compose down
+puis up a recréé les deux réseaux devenus incohérents, sans retirer les volumes.
+La santé des deux piles est rétablie. L'alternative host est ensuite qualifiée
+sur le vrai contrôle dans une pile temporaire : pair 127.0.0.1 conservé et
+namespace réseau identique au SPARK. Elle est retenue pour le contrôle seul.
+La première tentative de ce probe lisait les env_file avec docker run, qui
+conserve leurs guillemets ; elle a été corrigée en passant par Compose,
+conformément au contrat de la cellule. Ce refus de configuration n'était pas
+une défaillance du réseau hôte.

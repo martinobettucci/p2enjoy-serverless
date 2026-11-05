@@ -2,8 +2,9 @@
 
 Contrat de réalisation SLS-020 ; les preuves et l'état sont dans BACKLOG.
 Le contrôle utilise Python/FastAPI, SQLite, HTTPX pour OIDC et PyJWT avec
-cryptography pour la validation/chiffrement. Il écoute sur 8080 dans Docker,
-publié sur 18090 dans le SPARK. Un seul processus Uvicorn, sans access log
+cryptography pour la validation/chiffrement. Il écoute sur 18090 dans Docker,
+avec le réseau hôte du SPARK pour conserver le pair TCP. Les conteneurs de
+fonctions gardent leur propre réseau isolé. Un seul processus Uvicorn, sans access log
 brut des URLs : le callback OAuth contient des paramètres confidentiels.
 
 ## Configuration
