@@ -356,3 +356,16 @@ SLS-010 couvre cette preuve et les prérequis SSO. Les autres unités sont
 persistées dans BACKLOG avant leur implémentation. Le SSO public répond ; le
 domaine envisagé ne résout pas et la console locale ne répond plus sur 5175.
 Aucune preuve de plateforme n'est déduite du banc existant.
+
+### Choix du quota pour SLS-010
+
+Les sources primaires confirment que fuse2fs ne journalise pas ses écritures,
+et que NTFS-3G documente des limites de récupération et de renommage. JuiceFS
+synchronise les usages entre clients avec délai. Ces options ne sont pas
+retenues pour imposer le contrat de cette cellule. Choix : proxy go-fuse
+v2.12.1, un propriétaire par volume, octets logiques arrondis et coût par entrée,
+comptabilité d'inodes ouverts supprimés, contrôle avant mutation et fichiers
+natifs conservés. Les fonctionnalités POSIX hors contrat sont explicitement
+refusées. La preuve inclura crash, remontage, saturation et Docker rootless.
+Sources : dépôts primaires hanwen/go-fuse, tytso/e2fsprogs, tuxera/ntfs-3g ;
+JuiceFS docs/en/guide/quota.md. L'implémentation n'est pas encore qualifiée.

@@ -6,8 +6,13 @@ Contrat de réalisation : [PLATFORM.md](PLATFORM.md). Le contrôle retenu est
 Python avec SQLite WAL local et un seul processus de coordination ; les
 transactions de réservation sont courtes et ne contiennent aucun appel Docker.
 L'interface prévue est React/Vite. Les instances Docker appartiennent au
-contrôle par labels et sont réconciliées au démarrage. Le mécanisme de quota
-dur est en qualification dans SLS-010 avant son choix définitif.
+contrôle par labels et sont réconciliées au démarrage. Le quota logique par
+volume est développé dans `storage/`, avec go-fuse v2.12.1 (BSD-3-Clause,
+release du 21 octobre 2026). Le proxy conserve les fichiers natifs et couvre
+leurs chemins de mutation ; le contrat précis est dans PLATFORM, stockage.
+Go sert uniquement à ce composant système. Son binaire statique se construit
+dans Docker et s'exécute sous `spark-docker` pour fournir un montage au démon
+rootless. La preuve de fonctionnement dans le SPARK reste à établir.
 
 Ces composants ne sont pas encore livrés. Le banc décrit ci-dessous reste
 actuellement le seul service déployé.

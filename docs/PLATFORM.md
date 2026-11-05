@@ -113,10 +113,27 @@ purge automatique des données métier. Une réduction sous l'usage est refusée
 
 Le plafond disque doit être imposé au chemin d'écriture, avec une erreur
 observable par le handler. Une simple mesure périodique ne suffit pas.
-L'unité SLS-010 commence par qualifier un filesystem de taille bornée via
-FUSE dans le SPARK : montage utilisateur, écriture jusqu'à saturation,
-visibilité depuis Docker rootless, démontage/remontage et intégrité après
-interruption. Le mécanisme définitif sera décidé sur cette preuve.
+L'unité SLS-010 qualifie un proxy FUSE sur les fichiers natifs du SPARK. La
+comptabilité porte sur la taille logique arrondie à 4 Kio, plus 4 Kio par
+entrée. Elle borne aussi les fichiers vides et répertoires ; ce compteur
+n'est pas une mesure des blocs physiques ZFS. Le budget global garde une marge
+pour les métadonnées, images, journaux et sauvegardes du SPARK.
+
+Un processus possède exclusivement chaque volume avec un verrou système. Il
+sérialise les mutations et compte les inodes supprimés encore ouverts jusqu'au
+dernier close. Les extensions sont réservées avant écriture/truncate ; les
+écritures partielles sont recomptées. Les liens, fichiers spéciaux, xattrs,
+préallocation, ioctl et copie côté filesystem sont refusés ; les copies
+ordinaires par read/write restent possibles. Le passthrough noyau et le cache
+d'écriture sont désactivés. Les fichiers utilisent des accès directs FUSE ;
+les mappings mémoire partagés ne font pas partie du contrat initial.
+
+Les fichiers natifs conservent leur format et les opérations rename/fsync
+sont déléguées au filesystem du SPARK. Au remontage, un scan reconstruit le
+compteur, refuse les types interdits et refuse une limite inférieure à l'usage.
+La preuve vérifie le montage utilisateur, l'accès Docker rootless, la
+saturation, les voies alternatives, le remontage et l'interruption. Aucun
+runtime ne doit démarrer sur un simple répertoire lorsque son montage manque.
 
 ## Exploitation et preuves
 

@@ -9,9 +9,9 @@ Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
 ## Ordre de réalisation
 
-1. Qualifier un disque de fonction à taille bornée dans le SPARK, monté via
-   FUSE puis lu/écrit depuis Docker rootless. L'expérience emploie des images
-   de disque et des conteneurs dédiés supprimés après démontage.
+1. Qualifier le proxy de quota FUSE dans le SPARK, puis lire/écrire depuis
+   Docker rootless. L'expérience emploie des répertoires et des conteneurs
+   dédiés supprimés après démontage.
 2. Déclarer la route DEV et le client SSO dans leurs interfaces autorisées.
 3. Proposer les paramètres du contrôle dans les fichiers `.?` de la cellule,
    puis les appliquer par sa console. Aucun secret n'est conservé au dépôt.
@@ -32,6 +32,11 @@ indisponible. Ces constats ne prouvent pas une panne de la FORGE. Les actions
 de configuration restent limitées au scope du SPARK.
 
 ## Reprise et retour arrière
+
+Le binaire de montage s'exécute comme `spark-docker`, avec fusermount3 fourni
+par la cellule. Les workloads et la construction restent dans Docker. Le
+montage reste accessible au seul UID propriétaire, qui correspond au root
+interne des conteneurs rootless ; les capacités des workloads sont retirées.
 
 L'expérience de quota ne remplace aucun volume existant. Son nettoyage suit
 l'ordre arrêt des conteneurs, démontage FUSE, suppression des fichiers propres
