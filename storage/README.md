@@ -2,7 +2,8 @@
 
 `p2-quota` monte un répertoire natif avec un plafond de taille logique. Il passe
 31 contrôles E2E réels dans le SPARK DEV. Un agent local de volumes est
-installé en DEV ; son raccordement au moteur reste à réaliser. [Preuve](../docs/evidence/storage-dev-2026-11-05.json).
+installé en DEV ; le raccordement au pilote d’instances est qualifié, avant
+son intégration aux admissions publiques. [Preuve](../docs/evidence/storage-dev-2026-11-05.json).
 Contrat : [PLATFORM, stockage](../docs/PLATFORM.md#stockage).
 
 Prérequis : Linux, `/dev/fuse`, `fusermount3`, Docker pour construire le binaire.
@@ -96,7 +97,7 @@ Les rapports bruts et le binaire exporté ne sont pas versionnés.
 | Variable | Usage et format | Défaut |
 | --- | --- | --- |
 | SERVERLESS_STORAGE_ROOT_HOST | Répertoire absolu privé de l’état et des volumes | Requis |
-| SERVERLESS_STORAGE_SOCKET_DIR_HOST | Répertoire privé directement sous /run | Requis |
+| SERVERLESS_STORAGE_SOCKET_DIR_HOST | Répertoire privé durable hors des données et de /run | Requis |
 | SERVERLESS_STORAGE_BUDGET_MIB | Budget logique total, entier de 1 à 1048576 Mio | 32768 |
 | SERVERLESS_STORAGE_RESERVE_MIB | Marge physique avant allocation, entier de 0 à 1048576 Mio | 8192 |
 | SERVERLESS_STORAGE_MAX_MOUNTS | Montages ou préparations réservées, entier de 1 à 256 | 64 |
@@ -115,7 +116,17 @@ Une opération en attente garde sa réservation ; diagnostiquer son code et ses
 permissions avant de réessayer, sans supprimer la base ni monter le backing.
 L’arrêt normal d’exploitation doit d’abord drainer les consommateurs.
 
-Le raccordement aux instances, aux API et à la console reste à réaliser.
+Le raccordement aux instances passe quatorze groupes réels :
+[preuve](../docs/evidence/managed-storage-dev-2026-11-06.json). Les mutations
+publiques et la console restent à raccorder.
 Les interruptions pendant préparation/acquisition partielle et la marge de
 filesystem restent à qualifier. Une coupure électrique et un processus bloqué
 dans un appel noyau impossible à tuer ne sont pas reproduits par ces campagnes.
+
+Le canal installé est `/srv/p2enjoy-serverless/storage-channel`, privé 0700 et
+séparé des backings. Le Docker rootless du SPARK a son propre `/run` ; ce canal
+partagé permet au contrôle de retrouver le socket après restart de l'agent.
+Le répertoire demeure en place et seul le socket est recréé. L'unité conserve
+la racine installée dans une annotation de garde, comparée à la configuration
+officielle même lorsque l'agent est arrêté. Cette annotation n'injecte aucune
+variable d'exécution. Une migration de racine exige une procédure explicite.

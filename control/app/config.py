@@ -23,6 +23,8 @@ class Settings:
     host_state_dir: Path | None = None
     runtime_image: str = ''
     artifact_budget: int = 4096*1024**2
+    storage_root_host: Path | None = None
+    storage_socket_dir_host: Path | None = None
 
     @classmethod
     def load(cls):
@@ -58,7 +60,17 @@ class Settings:
         budget=os.environ.get('SERVERLESS_ARTIFACT_BUDGET_MIB','4096')
         if not re.fullmatch(r'[0-9]{3,5}',budget) or not 512<=int(budget)<=65536:
             raise RuntimeError('SERVERLESS_ARTIFACT_BUDGET_MIB doit être compris entre 512 et 65536.')
-        return cls(*values,trusted_proxies=trusted,host_state_dir=paths[0],runtime_image=image,artifact_budget=int(budget)*1024**2)
+        storage_paths=[]
+        for key in ('SERVERLESS_STORAGE_ROOT_HOST','SERVERLESS_STORAGE_SOCKET_DIR_HOST'):
+            raw=os.environ.get(key,'');path=Path(raw)
+            if not raw or not path.is_absolute() or '..' in path.parts or path==Path('/') or '\0' in raw:
+                raise RuntimeError(key+' doit être un chemin absolu de cellule.')
+            storage_paths.append(path)
+        if (storage_paths[1].is_relative_to('/run') or storage_paths[1].is_relative_to(storage_paths[0])
+                or storage_paths[0].is_relative_to(storage_paths[1])):
+            raise RuntimeError('Le canal de stockage doit être distinct des données et hors de /run.')
+        return cls(*values,trusted_proxies=trusted,host_state_dir=paths[0],runtime_image=image,artifact_budget=int(budget)*1024**2,
+                   storage_root_host=storage_paths[0],storage_socket_dir_host=storage_paths[1])
 
 
 class Vault:

@@ -5,7 +5,8 @@ réels sur le SPARK DEV le 6 novembre 2026, zéro échec et zéro test ignoré.
 Le pilote d’instances chaudes et son superviseur sont implémentés ; leurs
 campagnes réelles passent 31 contrôles d’invocation et 11 de cycle de vie,
 avec les 36 régressions du chargeur : [preuve](../docs/evidence/instances-dev-2026-11-06.json). La passerelle
-authentifiée, les admissions et les volumes par fonction restent à intégrer.
+authentifiée et les admissions restent à intégrer. Les instances avec baux
+de stockage passent quatorze groupes réels, selon [la preuve de raccordement](../docs/evidence/managed-storage-dev-2026-11-06.json).
 Contrat : [DEPLOYMENT](../docs/DEPLOYMENT.md). Le superviseur contacte le contrôle
 par HTTP sur un socket Unix privé monté readonly ; un enfant distinct importe le code. Les logs ne valent
 jamais résultat de validation. Le pilote du contrôle impose la limite de quinze
@@ -46,7 +47,7 @@ le véritable démon Docker ; `invoke-supervisor.mjs` garde le conteneur prêt,
 réseau dédié sont supprimés après timeout, disparition ou défaut du protocole.
 La fermeture rejoint les opérations système et confirme la suppression avant
 retrait du canal. Les montages déclarés exigent le type FUSE réel ; leur gestion
-par fonction dépend encore de l’agent de stockage.
+par fonction utilise désormais ManagedInstance et le client réel de l’agent.
 
 Le diagnostic s’exécute depuis la racine du dépôt sur le SPARK :
 
@@ -79,3 +80,27 @@ et `cleanup` doivent valoir true, `failed` et `skipped` zéro.
 
 Ces preuves ne qualifient pas encore la file, l’autoscaling, les ACL d’invocation,
 les générations, les montages fonctionnels ni les opérations de console.
+
+## Baux de stockage
+
+Le diagnostic exécuté dans le contrôle accepte `--managed-storage`. Sa première
+trame contient `environment`, `secrets` et `storage`, avec exactement `data`
+et `cache`, chacun défini par `enabled` et `quota_mib`. Les quotas doivent déjà
+avoir été configurés par l'agent pour l'UUID de fonction. Les chemins libres
+`mounts` sont alors refusés ; les binds proviennent uniquement de l'acquisition
+réelle du bail. `--docker-socket /docker.sock`, `--work` dans `/state` et
+`--host-work` désignent les chemins respectivement vus par le contrôle et Docker.
+Cette entrée exige l'accès opérateur Docker.
+
+Sur le SPARK DEV, comme root et après la fin des autres campagnes :
+
+```sh
+python3 -B /srv/p2enjoy-serverless/e2e/managed-storage.py
+```
+
+Ce client charge la classe réellement embarquée dans le contrôle et invoque
+les handlers Docker. Il provoque des suspensions de l'agent, la mort d'un démon
+FUSE appartenant à sa fonction, puis un arrêt/démarrage de l'agent. Il restaure
+le service, détruit ses instances et purge ses fonctions temporaires. Son
+rapport `runtime/managed-storage-proof.json` exige completed/cleanup vrais,
+failed/skipped à zéro. Il vérifie aussi la CLI gérée et sa fermeture sur EOF.

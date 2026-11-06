@@ -209,7 +209,9 @@ Les cinq variables SERVERLESS_STORAGE_ROOT_HOST,
 SERVERLESS_STORAGE_SOCKET_DIR_HOST, SERVERLESS_STORAGE_BUDGET_MIB,
 SERVERLESS_STORAGE_RESERVE_MIB et SERVERLESS_STORAGE_MAX_MOUNTS ont été
 proposées puis appliquées par la console. Racines DEV :
-`/srv/p2enjoy-serverless/storage-state` et `/run/p2enjoy-serverless-storage`.
+`/srv/p2enjoy-serverless/storage-state` et `/srv/p2enjoy-serverless/storage-channel`.
+Le canal a été migré par proposition officielle : le /run du démon Docker
+rootless est distinct de celui de l’agent et ne rendait pas son socket visible.
 Budget 32768 Mio, marge 8192 Mio, limite 64 montages. Aucun secret ni route
 supplémentaire. Le service lit directement les deux fichiers officiels.
 
@@ -218,14 +220,18 @@ propriétaire root. Le service conserve UID/GID spark-docker, CAP_SYS_ADMIN
 seule, le namespace de montage de la cellule et un socket 0600 sous dossier
 0700. Les vrais binds Docker valident la visibilité des montages. La base
 séparée porte les migrations 001/002, avec intention de sonde avant lancement.
-Le contrôle et le banc existants n’ont pas été recréés pour ces variables
-propres à l’agent ; leurs paramètres applicatifs demeurent ceux du checkpoint.
+Le contrôle est recréé avec le répertoire du canal monté readonly sous
+/storage-agent ; ses valeurs sont relues dans les deux fichiers officiels.
+L’installateur conserve le répertoire 0700 aux arrêts et l’agent recrée seulement
+son socket. Le même contrôle retrouve ce socket après stop/start de l’agent.
 
 Construire avec `bash storage/dev.sh build` comme spark-docker ; installer
 avec `bash storage/dev.sh install` comme root. Puis exécuter en série
 `agent-test` et `limits-test` comme root. La [preuve de composant](evidence/storage-agent-dev-2026-11-06.json)
 recoupe sources, paquet installé, binaire, rapports, configuration et nettoyage.
-Le raccordement au pilote et les parcours publics restent ouverts dans SLS-050.
+Le raccordement au pilote passe quatorze groupes réels, dont annulation, quotas,
+panne FUSE et arrêt/reprise de l’agent. [Preuve](evidence/managed-storage-dev-2026-11-06.json).
+Les parcours publics restent ouverts dans SLS-050.
 
 Une mise à jour exige l’absence de baux et d’opérations en attente. Le protocole
 quiesce empêche un acquire entre cette vérification et le restart. Les anciens

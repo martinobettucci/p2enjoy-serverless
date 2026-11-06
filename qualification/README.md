@@ -15,7 +15,10 @@ Son accès HTTP est limité à `127.0.0.1:18080`. Ne pas l'exposer publiquement.
 Les variantes de `artifacts/` sont des modules originaux destinés au vrai
 chargeur de plateforme : ESM, CommonJS, dépendance YAML et défauts d'import
 intentionnels. `invoke.cjs` et `invoke.mjs` ajoutent les handlers d’invocation,
-les gros corps et les pannes réellement déclenchées dans Docker. Leur campagne se lance séparément selon
+les gros corps et les pannes réellement déclenchées dans Docker.
+`volume-operations.cjs` écrit, relit, supprime et sature réellement les volumes
+/data et /cache ; il conserve l’errno Linux EDQUOT (-122), que Node expose
+actuellement sous code UNKNOWN. Leur campagne se lance séparément selon
 [runtime/README.md](../runtime/README.md). Elles ne modifient pas l'exécuteur
 de référence ni son manifeste.
 

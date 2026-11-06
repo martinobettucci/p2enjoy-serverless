@@ -21,7 +21,8 @@ registre WAL, générations, baux, sondes bornées et socket Unix authentifié p
 UID. Il possède seul la capacité de montage et partage le namespace de la
 cellule ; le code installé reste possédé par root. Les opérations locales et
 la maintenance sont décrites dans [STORAGE_AGENT](STORAGE_AGENT.md). Son
-raccordement aux instances et aux API publiques reste à réaliser.
+raccordement aux instances passe quatorze groupes réels ; les API publiques
+et les admissions restent à réaliser.
 Les répertoires supprimés encore ouverts restent comptés jusqu'à Releasedir.
 Les copies avec repli noyau passent par les écritures contrôlées du proxy.
 

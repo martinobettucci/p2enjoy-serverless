@@ -188,8 +188,9 @@ La tranche initiale fournit le superviseur chaud, son enfant neuf et le pilote
 Docker réel. Les campagnes d’invocation et de courses de cycle sont présentes,
 avec régression du chargeur partagé : 31 + 11 + 36 contrôles réels réussis,
 zéro échec et zéro test ignoré. La [preuve](evidence/instances-dev-2026-11-06.json)
-est conservée séparément des parcours API. Les admissions, min/max/idle, générations, agent
-FUSE et invocation authentifiée restent à intégrer et qualifier.
+est conservée séparément des parcours API. Le pilote est maintenant raccordé
+aux baux de l’agent FUSE, avec quatorze groupes réels. Les admissions, min/max/idle,
+générations et invocation authentifiée restent à intégrer et qualifier.
 
 ## SLS-050
 
@@ -202,8 +203,9 @@ Références : PLATFORM stockage et exploitation, [STORAGE_AGENT](STORAGE_AGENT.
 Le registre durable, les baux et la supervision FUSE sont implémentés. Quinze
 groupes de cycle, huit de limites et les 31 contrôles du proxy passent, avec
 nettoyage confirmé, zéro échec et zéro skip. La [preuve recoupée](evidence/storage-agent-dev-2026-11-06.json)
-précède leur raccordement au pilote d’instances,
-puis aux mutations publiques et aux admissions. Les interruptions pendant
+est complétée par quatorze groupes de raccordement au pilote d’instances :
+[preuve](evidence/managed-storage-dev-2026-11-06.json). Les mutations publiques
+et les admissions restent à raccorder. Les interruptions pendant
 préparation/acquisition partielle, la marge physique et les pannes de registre
 restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls composants.
 

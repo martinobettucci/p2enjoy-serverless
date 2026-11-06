@@ -18,7 +18,9 @@ réception/validation passent quatre groupes supplémentaires :
 Expiration, budget et interruption pendant nettoyage restent à éprouver.
 Le pilote Docker d’instances chaudes passe 31 contrôles d’invocation et
 11 de cycle de vie : [preuve DEV](docs/evidence/instances-dev-2026-11-06.json).
-La passerelle, les admissions et l’intégration des volumes restent à réaliser. L'extracteur ZIP serveur dans
+Le raccordement des instances aux baux de volumes passe quatorze groupes réels :
+[preuve](docs/evidence/managed-storage-dev-2026-11-06.json). La passerelle et
+les admissions restent à réaliser. L'extracteur ZIP serveur dans
 [control/](control/README.md) passe 112 contrôles réels, dont les limites,
 les erreurs de disque et les douze archives chargées ensuite par Node.
 Le composant de [stockage à quota](storage/README.md)

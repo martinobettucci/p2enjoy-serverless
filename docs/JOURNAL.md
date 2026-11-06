@@ -1236,3 +1236,35 @@ prioritaire d'une panne du watcher et la fermeture sur annulation du check
 préalable. La course exacte résultat/panne simultanés reste vérifiée par la
 structure du code ; les pannes réelles sont déclenchées pendant un handler
 actif. Régressions et recoupement des preuves restent en cours à ce stade.
+
+### SLS-040/050 — checkpoint du pilote avec stockage
+
+La campagne complétée ajoute la pagination de 51 vrais baux et les refus
+configuration_conflict/function_unknown avant Docker : quatorze groupes passent.
+Les régressions passent en série : 31 invocations, onze cycles de vie, quinze
+groupes de l'agent, 38 démarrages/opérations du contrôle, huit groupes HTTPS.
+La garde de racine avec agent arrêté passe un groupe séparé via la vraie console.
+Total de ce checkpoint : 118 groupes, zéro échec/skip, nettoyages confirmés.
+La revue finale ne relève plus d'anomalie dans la garde de l'installateur.
+
+La preuve managed-storage-dev-2026-11-06.json recoupe 60 sources locales/distantes,
+21 fichiers embarqués, les ressources web servies, le paquet protégé de stockage
+et les rapports. Image de contrôle :
+sha256:aaf50a012184335e331acb40ccecdf5cedbe4b360eedb3bf31fe193d812c9bef.
+Les 73 archives de publication sont intactes. Aucun bail, montage, allocation,
+instance, réseau d'instance, conteneur de validation ni espace de preuve restant.
+Les deux conteneurs permanents et l'agent sont sains ; les ressources de console
+sont identiques au checkpoint relu visuellement de gestion.
+
+Les valeurs consommées sont conformes à /etc/spark/env et /run/spark/secrets.
+Le chemin du canal a été appliqué via la console ; les secrets sont vérifiés
+sans être publiés. Route actuelle : serverless.lelabs.tech vers 18090 avec TLS.
+README, CONTRIBUTORS et INSTALL de cellule ont été proposés, appliqués puis relus.
+Les incohérences de visibilité /run et de garde sur agent arrêté sont résolues.
+Le dépôt ne possède aucun remote ; ce checkpoint est conservé en commit local.
+
+SLS-040/050 restent ouverts : admission et réservations durables, générations,
+min/max/idle, reprise du contrôle, invocation publique avec ACL origine/IP,
+mutations de stockage par API/console, crons et métriques d'exploitation.
+La prochaine tranche raccorde l'admission et la passerelle au pilote réel avec
+baux ; aucune campagne de composants ne vaut clôture du goal de plateforme.

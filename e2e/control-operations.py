@@ -129,6 +129,14 @@ try:
         failure('Configuration de publication absente : '+key,'os.environ.pop('+repr(key)+',None)',key)
     for key in ('SERVERLESS_STATE_HOST_PATH','SERVERLESS_DOCKER_SOCKET_HOST'):
         failure('Chemin de cellule relatif refusé : '+key,'os.environ['+repr(key)+']="relative/path"',key)
+    for key in ('SERVERLESS_STORAGE_ROOT_HOST','SERVERLESS_STORAGE_SOCKET_DIR_HOST'):
+        failure('Configuration de stockage absente : '+key,'os.environ.pop('+repr(key)+',None)',key)
+        failure('Chemin de stockage relatif refusé : '+key,'os.environ['+repr(key)+']="relative/path"',key)
+    for name,expression in [('run',repr('/run/private-socket')),('racine','os.environ["SERVERLESS_STORAGE_ROOT_HOST"]'),
+                            ('sous-répertoire','os.environ["SERVERLESS_STORAGE_ROOT_HOST"]+"/socket"'),
+                            ('parent',repr('/srv/p2enjoy-serverless'))]:
+        failure('Canal de stockage incompatible : '+name,
+                'os.environ["SERVERLESS_STORAGE_SOCKET_DIR_HOST"]='+expression,'distinct des données et hors de /run')
     failure('Image mutable refusée',"os.environ['SERVERLESS_RUNTIME_IMAGE']='node:24'",'empreinte Docker immuable')
     failure('Image immuable absente refusée',"os.environ['SERVERLESS_RUNTIME_IMAGE']='sha256:'+'0'*64",'docker_http_404')
     for value in ('511','65537','invalid'):

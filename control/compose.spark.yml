@@ -14,6 +14,7 @@ services:
     volumes:
       - ${SERVERLESS_STATE_HOST_PATH:?Chemin hôte requis}:/state
       - ${SERVERLESS_DOCKER_SOCKET_HOST:?Socket rootless requis}:/docker.sock
+      - ${SERVERLESS_STORAGE_SOCKET_DIR_HOST:?Répertoire du canal de stockage requis}:/storage-agent:ro
     read_only: true
     tmpfs:
       - /tmp:size=16m,mode=1777,noexec,nosuid

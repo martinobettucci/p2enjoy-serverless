@@ -8,6 +8,7 @@ console est `https://serverless.lelabs.tech`.
 | --- | --- | --- |
 | `serverless-api` | API de gestion, SSO et console web | HTTP 18090, route TLS publique |
 | `serverless-runtime-reference` | Exécuteur Node autonome des douze fonctions de qualification | Boucle locale 127.0.0.1:18080 |
+| `serverless-function-<nom>-<uuid>` | Instance Docker exécutant la fonction nommée | Canal Unix privé du contrôle |
 
 Les tests sont des clients éphémères distincts. Le runtime de référence exécute
 réellement les handlers. Il reste séparé du pilote d’instances Docker de la

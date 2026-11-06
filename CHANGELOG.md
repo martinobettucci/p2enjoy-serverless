@@ -2,6 +2,18 @@
 
 ## [Non publié]
 
+- Instances raccordées aux baux de l’agent : quatorze groupes réels réussis,
+  avec persistance data/cache, quotas Linux, partage/isolation, pagination,
+  annulations, timeout, perte FUSE et arrêt/reprise de l’agent. Destruction
+  Docker confirmée avant libération ; nettoyage différé repris après panne.
+- Canal privé migré hors du /run isolé de Docker rootless, par la configuration
+  officielle du SPARK. Garde de racine installée vérifiée avec agent arrêté,
+  puis variable et service restaurés. Les noms des instances indiquent leur fonction.
+- 118 groupes de cette tranche et de ses régressions réussis, zéro échec/skip ;
+  [preuve](docs/evidence/managed-storage-dev-2026-11-06.json), sources et ressources
+  recoupées, trois notes de cellule appliquées et relues. Admissions et API
+  publiques d’invocation restent à raccorder.
+
 - Plafonds et reprises de publication : quatre groupes E2E réels réussis,
   avec 64 candidats, vingt révisions, puis SIGKILL pendant réception et
   validation Docker. Redémarrage, non-publication des candidats interrompus,

@@ -145,3 +145,21 @@ l’instance existante utilisable. Les commandes sont `bash runtime/dev.sh
 instances-test` puis `bash runtime/dev.sh lifecycle-test`, sur le SPARK.
 Les rapports se trouvent dans `runtime/`. La passerelle et les admissions
 restent hors de ces preuves de composants.
+
+`managed-storage.py` s'exécute comme root dans le SPARK DEV. Un worker temporaire
+est écrit dans le tmpfs du contrôle readonly, puis charge les classes de
+production embarquées sous `/app`. Les quatorze groupes utilisent Docker,
+l'agent installé et le handler `volume-operations.cjs` pour les quotas,
+la persistance, les consommateurs partagés, les annulations et les pannes.
+Le parent limite la durée totale, garde la propriété de la cible FUSE, restaure
+l'agent et rejoint le worker même si une commande de panne échoue. Le rapport
+et les ressources sont vérifiés avant de déclarer le succès. Aucun test ne
+passe encore par la passerelle publique d'invocation, qui reste à réaliser.
+
+`python3 -B e2e/storage-installation.py`, depuis le poste, utilise la console
+SPARK sur 127.0.0.1:5175 et le rebond SSH autorisé. Il arrête l'agent au repos,
+propose une autre racine par la vraie console et exige le refus de l'installateur
+avant création de cette racine. Il restaure la variable officielle et l'agent,
+puis vérifie son identité et le maintien du même contrôle. Son rapport est
+`.local/e2e/storage-installation.json` ; ne pas lancer une autre campagne pendant
+ce changement de configuration de la cellule.

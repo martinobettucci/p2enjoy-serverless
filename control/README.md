@@ -34,7 +34,7 @@ et `SERVERLESS_RUNTIME_IMAGE` une empreinte locale `sha256:…` du runtime quali
 appliqués depuis les propositions de cellule avant le démarrage.
 
 Les contrôles publics, de l'accueil, du réseau et des limites SSO ont réussi
-sur DEV. Trente scénarios de panne/démarrage passent, dont le verrou exclusif et la
+sur DEV. Trente-huit scénarios de panne/démarrage passent, dont le verrou exclusif et la
 reprise automatique de maintenance. Huit groupes publics passent sur cette
 image : [preuve du contrôle de publication](../docs/evidence/deployment-control-dev-2026-11-06.json).
 La [preuve de gestion authentifiée](../docs/evidence/control-management-dev-2026-11-06.json)
@@ -91,3 +91,19 @@ Ses campagnes passent par Docker et les handlers de qualification, selon
 [runtime/README.md](../runtime/README.md). Il n’est pas encore raccordé aux
 routes publiques ni à la file d’admission du contrôle déployé. Les preuves de
 ce composant ne ferment donc pas SLS-040.
+
+## Instances avec stockage géré
+
+`app/storage_client.py` dialogue avec le véritable agent local, via le répertoire
+privé monté readonly sous `/storage-agent`. `app/managed_instances.py` acquiert
+un bail avant de créer Docker et le libère après destruction confirmée du
+conteneur, de son réseau et de son canal. Une panne de stockage retire le
+consommateur ; un nettoyage encore impossible reste signalé comme tel et se
+reprend après retour de l'agent.
+
+Quatorze groupes réels passent dans l'image du contrôle, avec les handlers
+`qualification/artifacts/volume-operations.cjs` : persistance, quotas, partage,
+isolation, refus, courses, interruptions et diagnostic CLI. La [preuve de
+raccordement](../docs/evidence/managed-storage-dev-2026-11-06.json) recoupe le
+code embarqué, les montages et les ressources nettoyées. Les admissions et
+routes publiques d'invocation restent à réaliser.

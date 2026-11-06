@@ -47,3 +47,21 @@ La présence et l'activation locale des hooks sont vérifiées séparément.
 Les résultats datés et les empreintes sont dans `docs/evidence/` ; les résultats
 des campagnes antérieures restent historiques et ne qualifient pas un code
 modifié depuis leur exécution.
+
+### Instances et baux de stockage — SLS-040/050
+
+Le client `e2e/managed-storage.py` vérifie quatorze groupes réels dans l'image
+active du contrôle : acquisition/binds, persistance chaud/froid, quotas data
+et cache, partage/isolation/refus de mutation, invocation concurrente et double
+démarrage, échec Docker, deadline, annulation pendant acquire, annulation
+pendant check, SIGKILL FUSE, arrêt/reprise agent avec nettoyage différé,
+volumes désactivés, pagination de 51 baux, diagnostic CLI/EOF. Les ressources appartiennent à une
+installation de preuve distincte ; le contrôle conserve son ID durant les pannes.
+La simultanéité exacte du résultat métier et de l'échec du watcher est couverte
+par revue structurelle ; aucune synchronisation factice n'est présentée comme
+une reproduction E2E de cette course.
+
+`e2e/storage-installation.py` vérifie la garde de racine avec agent réellement
+arrêté, refus avant création, restauration via propositions de cellule et
+identité de registre conservée. Les démarrages invalides associés au nouveau
+canal sont vérifiés par les conteneurs isolés de `control-operations.py`.

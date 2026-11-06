@@ -20,6 +20,7 @@ from urllib.parse import urlencode
 from uuid import UUID,uuid4
 
 from .validator import Docker,ERRORS,ValidationError,application_environment,redact_logs,request
+from .storage_client import StorageError
 
 PROTOCOL_LIMIT=10*1024**2
 BODY_LIMIT=6*1024**2
@@ -92,7 +93,7 @@ class Instance:
         self.labels={'tech.p2enjoy.serverless.installation':self.installation,'tech.p2enjoy.serverless.kind':'instance',
                      'tech.p2enjoy.serverless.function':self.function_id,'tech.p2enjoy.serverless.revision':self.revision_id,
                      'tech.p2enjoy.serverless.instance':self.id}
-        self.name='p2-i-'+UUID(self.id).hex;self.container=None;self.network=None;self.channel=None;self.server=None
+        self.name='serverless-function-'+function_name+'-'+UUID(self.id).hex;self.container=None;self.network=None;self.channel=None;self.server=None
         self.key=random_secrets.token_urlsafe(32);self.bootstrapped=False;self.ready=asyncio.Event();self.wake=asyncio.Event()
         self.job=None;self.future=None;self.claimed=False;self.started_observed=False;self.connections=set();self.baseline=set()
         self.busy=False;self.closing=False;self.removed=False;self.cleanup_error=False;self._close_task=None;self.lifecycle_lock=asyncio.Lock()
@@ -354,11 +355,19 @@ async def diagnose(args):
         return value
     try:
         data=await read()
-        if data is None or set(data)-{'environment','secrets','mounts'}:raise ValidationError('invalid_configuration')
-        instance=Instance(docker_socket=args.docker_socket,image=args.image,code=args.code,work=args.work,host_work=args.host_work,
+        allowed={'environment','secrets','storage'} if args.managed_storage else {'environment','secrets','mounts'}
+        if data is None or set(data)-allowed:raise ValidationError('invalid_configuration')
+        constructor=Instance;extra={'mounts':data.get('mounts')}
+        if args.managed_storage:
+            from .managed_instances import ManagedInstance
+            from .storage_client import StorageClient
+            constructor=ManagedInstance
+            extra={'storage':StorageClient('/storage-agent/agent.sock',os.environ['SERVERLESS_STORAGE_ROOT_HOST']),
+                   'storage_configuration':data['storage']}
+        instance=constructor(docker_socket=args.docker_socket,image=args.image,code=args.code,work=args.work,host_work=args.host_work,
             installation=args.installation,function_id=args.function_id,revision_id=args.revision_id,handler=args.handler,
             function_name=args.function_name,environment=data.get('environment',{}),secrets=data.get('secrets',{}),
-            memory_mib=args.memory_mib,cpu=args.cpu,mounts=data.get('mounts'),network=args.network)
+            memory_mib=args.memory_mib,cpu=args.cpu,network=args.network,**extra)
         await instance.start()
         await emit({'ready':True,'instance_id':instance.id,'container_id':instance.container,'network_id':instance.network,
                     'baseline_pids':sorted(instance.baseline),'channel':str(instance.channel)})
@@ -388,11 +397,12 @@ def main():
     parser.add_argument('--host-work');parser.add_argument('--docker-socket',default='/run/user/1001/docker.sock')
     parser.add_argument('--memory-mib',type=int,default=256);parser.add_argument('--cpu',type=float,default=.25)
     parser.add_argument('--network',choices=('bridge','none'),default='bridge')
+    parser.add_argument('--managed-storage',action='store_true')
     args=parser.parse_args()
     try:asyncio.run(diagnose(args))
     except (BrokenPipeError,TimeoutError):return 1
-    except (ValidationError,OSError,ValueError,TypeError,KeyError) as error:
-        print(json.dumps({'error':str(error) if isinstance(error,ValidationError) else 'instance_unavailable'}),flush=True);return 1
+    except (ValidationError,StorageError,OSError,ValueError,TypeError,KeyError) as error:
+        print(json.dumps({'error':str(error) if isinstance(error,(ValidationError,StorageError)) else 'instance_unavailable'}),flush=True);return 1
     return 0
 
 
