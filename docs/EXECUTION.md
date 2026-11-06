@@ -38,6 +38,12 @@ absente de l’environnement Docker, de l’environnement métier et du message
 envoyé à l’enfant. Les corps du protocole sont bornés à 10 Mio, les en-têtes à
 8 Kio et les connexions simultanées à quatre par instance.
 
+Le corps de réponse est toujours encodé en base64 dans ce canal uniquement :
+les 6 Mio décodés occupent au plus 8 Mio, même avec des caractères JSON échappés.
+Le contrôle restitue le texte UTF-8 lorsque le handler a rendu du texte.
+L’enveloppe d’événement est bornée à 8 Mio de JSON UTF-8 ; elle peut ainsi
+transporter un corps HTTP de 1 Mio entièrement échappé sans réduire sa limite.
+
 Le superviseur demande le prochain travail ; une attente sans travail est
 bornée. Un seul travail peut être retiré à la fois. Les résultats tardifs,
 doublons et identifiants étrangers sont refusés. Une sortie de processus ou
@@ -67,6 +73,13 @@ non confirmée conserve ces ressources et dégrade la santé. Les tâches systè
 en cours sont rejointes avant la libération du verrou du contrôle, y compris
 après annulation. Une invocation n’est jamais rejouée automatiquement.
 
+Une notification indépendante signale le début du handler. L’observation
+`handler_started` vaut true lorsqu’il a été signalé, false lorsqu’un résultat
+exclut ce début, et null si le travail a été retiré puis perdu sans observation
+suffisante. Un import peut lui-même produire des effets avant le handler ;
+aucune de ces observations n’autorise un rejeu automatique. Le diagnostic
+rejoint le nettoyage sur SIGTERM et SIGINT, y compris au repos avec stdin ouvert.
+
 ## Événement, réponse et journaux
 
 La passerelle fournit un événement Lambda HTTP v1 : httpMethod, path, headers,
@@ -87,7 +100,8 @@ La réponse exige statusCode entier 200..599 et body chaîne. Le corps décodé
 est borné à 6 Mio ; le base64 doit être canonique. headers et multiValueHeaders
 portent uniquement des noms HTTP valides et des valeurs sans caractères de
 contrôle. Leur ensemble est borné à 32 Kio et 128 valeurs ; les valeurs multiples
-prennent la priorité pour un même nom. Les en-têtes hop-by-hop, Content-Length
+prennent la priorité pour un même nom. Les en-têtes hop-by-hop, y compris ceux
+nommés par Connection, Content-Length
 et Access-Control-* applicatifs ne sont pas émis. La passerelle calcule ses
 propres longueurs et sa politique CORS. HEAD ne transmet pas de corps.
 

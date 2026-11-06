@@ -804,3 +804,13 @@ bind Docker. Le contrôle ne suppose pas voir les nouveaux sous-montages dans
 son bind existant. Le pilote d’instance est construit d’abord, puis raccordé
 à cet agent et aux admissions réelles ; les preuves de composants ne clôturent
 pas la passerelle authentifiée.
+
+La relecture du pilote identifie une expansion JSON incompatible avec les corps
+autorisés. Le transport privé encode donc toutes les réponses en base64 et
+accepte une enveloppe d’événement de 8 Mio, sans changer les bornes HTTP.
+Le début du handler est notifié séparément ; une disparition sans observation
+est explicitement inconnue. La fermeture du diagnostic doit aussi interrompre
+son attente stdin et rejoindre le nettoyage sur les signaux ordinaires.
+Les autres constats portent sur les champs nommés par Connection, la sortie
+fatale effective du superviseur et les courses de fermeture. Ils sont intégrés
+à la campagne réelle avant qualification de cette tranche.
