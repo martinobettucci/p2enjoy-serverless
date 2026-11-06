@@ -117,3 +117,26 @@ et le boot sont inscrits avant lancement pour retrouver un enfant orphelin.
 `metadata` conserve l’identité de cette installation de stockage. WAL,
 synchronous FULL et verrou de propriétaire protègent les transitions décrites
 dans [STORAGE_AGENT](STORAGE_AGENT.md).
+
+## Préparation des quotas par le contrôle
+
+La migration 003 du registre de stockage ajoute configuration_receipts :
+function_id unique, operation_id unique, installation_id propriétaire,
+configuration_json cible, expected_version de départ, decision committed/aborted
+et version résultante. L'intention pending_json de la fonction porte les mêmes
+identifiants pendant preparing/prepared/aborting, ainsi que la provenance des
+nouvelles lignes et des répertoires, et la réservation supplémentaire.
+
+Commit et abort incrémentent la version de fonction ; elle ne revient jamais à
+sa valeur antérieure. Après abandon d'une création, l'agent conserve un état vide
+versionné et son reçu, sans allocation ni visibilité dans les objets du contrôle.
+Un nouvel identifiant d'opération exige la version courante ; rejouer une demande
+ancienne ne recrée donc pas une préparation après remplacement de son reçu.
+Les anciennes intentions configure sans provenance conservent leur traitement
+de reprise historique ; les nouvelles enregistrent explicitement leurs créations.
+
+Le contrôle utilisera son UUID durable comme installation_id. Les commandes
+prepare-configuration exigent function_id, operation_id, installation_id,
+configuration et expected_version ; commit-configuration, abort-configuration et
+configuration-operation exigent les trois identifiants. La consultation permet
+de distinguer la préparation de la décision sans rejouer une mutation.

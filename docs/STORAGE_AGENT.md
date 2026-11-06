@@ -270,3 +270,14 @@ paquet, ferme les mutations, puis remplace l’unité ; en cas d’abandon il ap
 attendue. Les consultations restent disponibles. Le redémarrage démarre avec
 les mutations ouvertes après récupération. Une sonde encore impossible à
 terminer garde l’agent en récupération consultable, sans boucle de restart.
+
+## Décision de configuration du contrôle
+
+Les opérations préparées suivent [ADMISSION](ADMISSION.md#configuration-de-stockage-en-deux-phases).
+La migration 003 conserve leur reçu terminal et leur propriétaire. Une demande
+répétée doit porter les mêmes identifiants, configuration et version initiale.
+Commit et abort font progresser la version ; le reçu courant interdit une
+résolution opposée. Les répertoires dont l'absence initiale n'est pas établie
+ne sont jamais retirés par compensation. L'abandon d'une création conserve un
+état vide versionné dans l'agent pour refuser les anciennes demandes ; il ne
+conserve aucune allocation et ne crée pas de fonction visible dans le contrôle.
