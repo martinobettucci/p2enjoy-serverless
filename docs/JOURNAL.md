@@ -898,3 +898,10 @@ durable, compensation du premier si le second échoue. Les places de montage et
 augmentations de quota sont réservées avant ces préparations et conservées sur
 nettoyage non confirmé. L’archivage refuse sous bail ; le drainage relève du
 contrôle. Ces précisions précèdent le code de gestion des volumes.
+
+Le registre de stockage est décrit dans SCHEMA avant sa première installation.
+Le canal opérateur précise sa pagination et ses bornes ; une acquisition
+interrompue ne doit jamais être déclarée saine à partir d’une liste vide de
+montages. La maintenance normale refuse les baux et intentions en cours. Le
+paquet root est identifié par son empreinte et son unité borne mémoire,
+processus et descripteurs ; ces choix restent propres au service DEV.

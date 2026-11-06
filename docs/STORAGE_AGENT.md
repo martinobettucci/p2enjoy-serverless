@@ -182,3 +182,22 @@ saturation, quotas trop petits, conservation après désactivation et archive,
 vidage/purge explicites, montée de génération, processus FUSE arrêté ou tué,
 sonde bloquée, reprise de service et réservations conservées sur erreur.
 Les preuves de composants ne ferment pas les parcours publics ni SLS-050.
+
+## Installation et canal opérateur
+
+Le paquet immuable est installé sous `/usr/local/lib/p2enjoy-serverless/storage/`
+dans un dossier nommé par son empreinte. Une unité DEV pointe vers ce paquet,
+avec MemoryMax=1G, TasksMax=1024 et LimitNOFILE=4096 pour borner ses ressources.
+Son remplacement exige l’absence de baux et de mutation en cours ; un contrôle
+échoué interdit la maintenance normale. Le répertoire du socket est créé par
+systemd sous `/run`, avec le propriétaire et le mode requis.
+
+Le protocole expose health, status, leases (pagination de 50), configure,
+acquire, release, check, archive, purge et clear-cache. Il refuse les clés
+inconnues et les doublons JSON. Le délai maximal d’attente du verrou est trois
+secondes. Une déconnexion du demandeur ne révoque pas une mutation engagée.
+Les lectures de registre restent disponibles pendant la récupération ; les
+mutations attendent sa fin. Une acquisition partielle conservée après un crash
+est signalée comme telle et doit être libérée après réconciliation Docker.
+La santé globale reste dégradée tant qu’une compensation ou suppression est en
+attente, même si aucun démon n’est actuellement monté.

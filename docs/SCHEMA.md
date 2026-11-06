@@ -98,3 +98,20 @@ de la révision choisie, avec les ressources et secrets courants.
 
 Les invocations, instances et exécutions planifiées recevront leurs migrations
 dans SLS-040/050.
+
+## Registre local de stockage
+
+SLS-050 utilise une base distincte, possédée exclusivement par l’agent de
+montage : `storage/migrations/001.sql`. Elle ne porte aucune identité publique.
+`functions` conserve l’UUID, l’état active/archived/purging/purged, la version,
+la configuration publiée et l’intention de mutation. `volumes` conserve le type,
+le quota alloué, l’activation, la génération, la phase de montage, l’identité
+complète du démon, la dernière mesure et un code d’erreur fixe. Une intention
+configure réserve les augmentations jusqu’au commit ou à la compensation.
+`leases` associe consommateur, installation du contrôle, fonction, configuration
+et montages acquis. Une ligne sans résultat de montage complet représente une
+acquisition interrompue : elle exige une réconciliation, pas une santé positive.
+`probes` contient au plus une sonde dont la terminaison reste à confirmer.
+`metadata` conserve l’identité de cette installation de stockage. WAL,
+synchronous FULL et verrou de propriétaire protègent les transitions décrites
+dans [STORAGE_AGENT](STORAGE_AGENT.md).
