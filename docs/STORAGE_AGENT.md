@@ -186,12 +186,20 @@ du socket en lecture seule sous `/storage-agent`, et utilise
 aux chemins hôtes dérivés de SERVERLESS_STORAGE_ROOT_HOST et de l'UUID de
 fonction ; aucun backing n'est monté dans le contrôle ou dans la fonction.
 
-Le répertoire systemd du socket est conservé à l'arrêt avec
-RuntimeDirectoryPreserve=yes ; le socket lui-même reste recréé par l'agent.
-Un bind du seul socket serait périmé après restart. La conservation du
-répertoire suit [systemd.exec](https://freedesktop.org/software/systemd/man/latest/systemd.exec.html#RuntimeDirectoryPreserve=)
-et sera vérifiée depuis le même conteneur de contrôle avant/après restart.
-Le répertoire sous /run reste éphémère au reboot de la cellule.
+Le canal réside dans un répertoire privé durable de la cellule, séparé des
+backings et du registre : `/srv/p2enjoy-serverless/storage-channel` en DEV.
+L'installateur crée ce répertoire 0700 appartenant à spark-docker et le conserve
+aux arrêts ; l'agent recrée seulement le socket 0600, sous son verrou exclusif.
+Un bind du seul socket serait périmé après restart. Le même conteneur doit
+retrouver le canal après arrêt/démarrage de l'agent, sans recréation.
+
+L'essai réel a établi que le `/run` du démon Docker rootless n'est pas celui de
+l'agent systemd : un bind de l'ancien chemin y donnait un répertoire vide.
+Le canal ne réside donc pas sous `/run`. La migration s'applique par la variable
+officielle de cellule ; l'installateur lit le chemin du processus actif pour
+vérifier puis fermer ses mutations avant de redémarrer au nouveau chemin.
+Changer simultanément de racine de données est refusé. Aucun déplacement de
+backing ni modification de la base n'est nécessaire pour migrer le canal.
 
 `ManagedInstance` compose le client et le pilote Docker existant. La
 configuration des quotas est une opération distincte, terminée avant son
@@ -236,7 +244,8 @@ dans un dossier nommé par son empreinte. Une unité DEV pointe vers ce paquet,
 avec MemoryMax=1G, TasksMax=1024 et LimitNOFILE=4096 pour borner ses ressources.
 Son remplacement exige l’absence de baux et de mutation en cours ; un contrôle
 échoué interdit la maintenance normale. Le répertoire du socket est créé par
-systemd sous `/run`, avec le propriétaire et le mode requis.
+l'installateur dans la cellule, avec le propriétaire et le mode requis, hors
+de la racine des données et de `/run`.
 
 Le protocole expose health, status, leases (pagination de 50), configure,
 acquire, release, check, archive, purge et clear-cache. Il refuse les clés

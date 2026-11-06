@@ -36,8 +36,8 @@ env_file. Aucun fallback d'authentification n'est associé à ces paramètres.
 
 Le raccordement des volumes utilise les variables de cellule déjà définies
 SERVERLESS_STORAGE_ROOT_HOST et SERVERLESS_STORAGE_SOCKET_DIR_HOST. La racine
-est un chemin absolu privé ; le répertoire du canal réside directement sous
-/run. Compose monte seulement ce répertoire, readonly, sous /storage-agent.
+est un chemin absolu privé ; le répertoire du canal est distinct, durable et
+hors de /run. Compose monte seulement ce répertoire, readonly, sous /storage-agent.
 Ces paramètres sont validés au démarrage. Aucun secret de montage ni nouveau
 port n'est nécessaire ; SO_PEERCRED relie le contrôle rootless à l'UID autorisé.
 

@@ -1195,3 +1195,18 @@ La libération sera confirmée par bail absent et état des volumes, car une
 réponse already_released seule ne prouve pas leur démontage. Cette tranche
 branche les classes de production et leurs preuves Docker ; la passerelle,
 l'admission et les mutations publiques restent l'étape suivante.
+
+### SLS-050 — canal visible depuis Docker rootless
+
+Le premier essai dans l'image du contrôle a échoué avant création de fonction :
+`storage_transport`. Le socket existait sur la cellule (0700/0600, UID1001),
+mais /storage-agent dans Docker montrait un autre inode, un répertoire vide
+0755 et un autre périphérique. Le /run du démon rootless est distinct de celui
+du service systemd. La conservation du répertoire systemd ne résout pas cette
+frontière. Décision réversible : canal privé dans
+/srv/p2enjoy-serverless/storage-channel, hors du registre/backing. Configuration
+par la proposition de cellule, installateur vérifiant le service actif à son
+ancien chemin avant quiesce/restart. La racine de données reste identique.
+Le pilote de preuve reçoit une échéance externe et restaure l'agent même si
+son dialogue échoue. Le défaut de transport est enregistré comme échec réel,
+jamais comme preuve réussie ; les campagnes seront rejouées après correction.
