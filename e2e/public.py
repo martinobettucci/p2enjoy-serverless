@@ -13,6 +13,8 @@ import urllib.request
 import uuid
 
 BASE='https://serverless-dev.lelabs.tech'
+ISSUER='https://oauth.lelabs.tech/realms/lelabs'
+discovered=None
 results=[]
 
 
@@ -55,6 +57,8 @@ def login(client):
     code,headers,body=status(client.call('/auth/login'),303)
     target=urllib.parse.urlsplit(headers['Location'])
     assert target.scheme=='https' and target.hostname=='oauth.lelabs.tech'
+    assert discovered,'Découverte OIDC requise avant le parcours de connexion'
+    assert urllib.parse.urlunsplit(target._replace(query='',fragment=''))==discovered['authorization_endpoint']
     query=urllib.parse.parse_qs(target.query)
     assert query['client_id']==['p2enjoy-serverless-dev']
     assert query['redirect_uri']==[BASE+'/auth/retour']
@@ -75,6 +79,26 @@ def health():
     assert response[1]['Referrer-Policy']=='no-referrer'
     assert "frame-ancestors 'none'" in response[1]['Content-Security-Policy']
     uuid.UUID(response[1]['X-Request-ID'])
+
+
+def discovery():
+    global discovered
+    with urllib.request.urlopen(ISSUER+'/.well-known/openid-configuration',timeout=20) as response:
+        assert response.status==200
+        discovered=json.load(response)
+    assert discovered['issuer']==ISSUER
+    for key in ('authorization_endpoint','token_endpoint','end_session_endpoint','jwks_uri'):
+        parsed=urllib.parse.urlsplit(discovered[key])
+        assert parsed.scheme=='https' and parsed.netloc=='oauth.lelabs.tech' and not parsed.username
+    assert 'code' in discovered['response_types_supported']
+    assert 'S256' in discovered['code_challenge_methods_supported']
+    assert {'openid','profile','email'}<=set(discovered['scopes_supported'])
+    assert {'client_secret_post','client_secret_basic'}<=set(discovered['token_endpoint_auth_methods_supported'])
+    with urllib.request.urlopen(discovered['jwks_uri'],timeout=20) as response:
+        assert response.status==200
+        keys=json.load(response)['keys']
+    assert any(key.get('use')=='sig' and key.get('alg') in ('RS256','ES256') and
+               key.get('kty') in ('RSA','EC') and key.get('kid') for key in keys)
 
 
 def assets():
@@ -144,7 +168,8 @@ if __name__=='__main__':
     output.write_text('{"completed":false,"error":"Campagne non terminée"}\n')
     completed=False
     try:
-        for name,fn in [('TLS, santé et en-têtes',health),('Document et ressources de la console',assets),
+        for name,fn in [('Découverte OIDC et clés asymétriques réelles',discovery),
+                        ('TLS, santé et en-têtes',health),('Document et ressources de la console',assets),
                         ('Refus anonymes',anonymous),('Callbacks malformés',bad_callbacks),
                         ('Flows réels et refus du fournisseur',real_flows),('Corps bornés et erreurs expurgées',bounded_bodies)]:check(name,fn)
         completed=True

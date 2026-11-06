@@ -101,6 +101,14 @@ six scénarios de limite par client, deux de capacité globale et dix-sept
 de panne/reprise. Deux contrôles supplémentaires éprouvent l'interruption
 du pilote de preuve. Les dépendances verrouillées sont auditées.
 
+La revue du contrat OIDC du client créé précise les travaux SLS-020 restants :
+état d'attente distinct d'une erreur technique pour verified/admin manquant,
+contrôle de l'azp de l'ID token en complément de son audience, et réponse
+temporaire préservant la session lorsqu'un nouveau kid arrive dans la fenêtre
+anti-refresh JWKS de deux secondes. Les comptes réels et une rotation réelle
+maîtrisée sont nécessaires aux preuves correspondantes ; aucune n'est déclarée
+réussie. La durée de 300 secondes se mesure sur le jeton réellement émis.
+
 ## SLS-030
 
 Statut : [~] — plan, packaging et validation Node disponibles ; révisions à réaliser.

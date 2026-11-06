@@ -600,3 +600,24 @@ clic du détenteur du compte jusqu'à huit heures. Le flow SSO ne vieillit donc
 plus avant ce clic. La fenêtre a atteint l'état prêt dans Chromium ; aucun
 cookie administrateur n'est encore enregistré. Le script n'exportera que les
 cookies du domaine de plateforme après une réponse de session authentifiée.
+
+## Contrat du client OIDC créé — 2026-11-06
+
+Le responsable transmet le llms.txt de `p2enjoy-serverless-dev`, conservé dans
+OIDC_DEV.llms.txt. Le flux code, S256, scopes, callback et les rôles vérifiés
+correspondent à l'implémentation lue. Le secret reste fourni par la cellule.
+Le TTL annoncé de 300 secondes est une propriété du fournisseur : sa mesure
+attend un jeton obtenu par une connexion réelle, et ne se déduit pas du TTL
+local de session de huit heures. La découverte globale ne remplace pas une
+preuve des règles particulières de ce client.
+
+La revue relève trois points conservés explicitement dans SLS-020 : attente
+de rôles distincte d'une erreur, azp de l'ID token, et 401 transitoire de kid
+inconnu pouvant révoquer une session pendant la fenêtre anti-refresh. Ils
+appartiennent à l'unité SSO ouverte et à sa campagne authentifiée ; la mise
+à disposition de ce contrat ne les transforme pas en contrôles réussis.
+Les sept groupes publics passent après ajout de la découverte obligatoire,
+des clés asymétriques publiées et de la comparaison de la cible de redirection
+à cette découverte. La preuve est conservée dans
+`evidence/sso-contract-dev-2026-11-06.json`. Aucun composant de remplacement
+n'intervient dans ces échanges HTTPS.

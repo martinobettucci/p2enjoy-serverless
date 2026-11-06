@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- Contrat OIDC du client DEV créé conservé dans le dépôt et rapproché du code.
+  La campagne publique ajoute la découverte et les clés asymétriques réelles ;
+  les points d'attente de rôle, azp ID token et rotation restent dans SLS-020.
+
 - Chargeur Node 24 CJS/ESM et validation Docker avec transport Unix readonly,
   configuration applicative privée, logs expurgés et délai extérieur de quinze
   secondes. 36 scénarios E2E réels, dont dépendances, imports bloqués, limites,

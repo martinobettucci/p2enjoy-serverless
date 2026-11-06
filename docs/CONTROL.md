@@ -27,6 +27,16 @@ Forwarded et X-Real-IP ne sont jamais utilisés pour identifier le client.
 
 ## Connexion
 
+L'intégration DEV suit le [contrat du client créé](OIDC_DEV.llms.txt).
+Le fournisseur annonce des jetons d'accès de 300 secondes ; l'application
+respecte leur `exp` signé et renouvelle la session ordinaire avant expiration.
+La découverte et les clés publiques sont vérifiées réellement par le client
+E2E public. Cette découverte globale ne prouve pas les restrictions propres
+au client ni les rôles d'un compte ; ces preuves exigent les parcours SSO.
+Le contrôle complémentaire prévu pour l'ID token compare `azp` au client
+lorsque cette revendication est présente, en complément de l'audience ;
+voir [OIDC Core, validation de l'ID token](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation).
+
 - `GET /healthz` : santé technique et version, sans données d'identité.
 - `GET /api/session` : statut authentifié et identité affichable ; un jeton
   CSRF est fourni uniquement à la session correspondante.
@@ -121,6 +131,8 @@ Le guide d'utilisation correspondant est [manual.md](manual.md).
 ## Preuves
 
 La campagne cible le vrai contrôle déployé, la base réelle et le SSO réel.
+La [preuve du contrat DEV](evidence/sso-contract-dev-2026-11-06.json) conserve
+les sept groupes publics et les limites de la revue de sources.
 Les comptes permettent de qualifier admin, verified sans admin et absence de
 verified. Les jetons créés depuis le parcours normal servent aux preuves CRUD
 et interservice. Les assertions couvrent aussi CSRF, rotation, révocation,

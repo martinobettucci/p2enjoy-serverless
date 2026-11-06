@@ -2,6 +2,10 @@
 
 Pour les équipes qui branchent une application sur ce SSO.
 
+Le contrat du client effectivement créé pour ce projet est conservé dans
+[OIDC_DEV.llms.txt](OIDC_DEV.llms.txt), transmis par le responsable le
+6 novembre 2026. La déclaration correspondante reste [OIDC_DEV.txt](OIDC_DEV.txt).
+
 ## Le seul point d'entrée à connaître
 
 ```

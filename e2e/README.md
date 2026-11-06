@@ -52,6 +52,11 @@ aucune réponse. Les deux nettoient uniquement les objets qu'ils ont créés.
 Les scripts et preuves sont ajoutés au rythme de SLS-020 à SLS-060. Les premiers
 contrôles publics ont réussi ; les campagnes administrateur et la campagne
 complète de plateforme ne sont pas encore réussies.
+La campagne publique comporte sept groupes : découverte OIDC et clés réelles,
+santé TLS, ressources de la console, refus anonymes, callbacks malformés,
+flows et refus du fournisseur, puis bornes des corps. La cible d'autorisation
+est comparée à la découverte fraîchement lue. Les règles de client et de rôle
+restent à éprouver par leurs parcours authentifiés.
 
 `python3 e2e/adapter.py` exécute les vraies commandes plan/package sur une
 copie temporaire des fichiers de qualification. Il examine les ZIP produits

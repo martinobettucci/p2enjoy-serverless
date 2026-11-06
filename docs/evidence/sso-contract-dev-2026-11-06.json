@@ -1,0 +1,76 @@
+{
+  "recorded_at": "2026-11-06T00:07:05.814753+00:00",
+  "unit": "SLS-020",
+  "unit_complete": false,
+  "client_contract_source": "Contrat fourni par le responsable le 2026-11-06",
+  "client_id": "p2enjoy-serverless-dev",
+  "public_campaign": {
+    "target": "https://serverless-dev.lelabs.tech",
+    "timestamp": 1793923596.815494,
+    "completed": true,
+    "checks": [
+      {
+        "name": "Découverte OIDC et clés asymétriques réelles",
+        "status": "passed",
+        "duration_seconds": 0.097
+      },
+      {
+        "name": "TLS, santé et en-têtes",
+        "status": "passed",
+        "duration_seconds": 0.064
+      },
+      {
+        "name": "Document et ressources de la console",
+        "status": "passed",
+        "duration_seconds": 0.306
+      },
+      {
+        "name": "Refus anonymes",
+        "status": "passed",
+        "duration_seconds": 0.24
+      },
+      {
+        "name": "Callbacks malformés",
+        "status": "passed",
+        "duration_seconds": 0.182
+      },
+      {
+        "name": "Flows réels et refus du fournisseur",
+        "status": "passed",
+        "duration_seconds": 0.502
+      },
+      {
+        "name": "Corps bornés et erreurs expurgées",
+        "status": "passed",
+        "duration_seconds": 0.323
+      }
+    ],
+    "skipped": 0
+  },
+  "source_sha256": {
+    "docs/OIDC_DEV.llms.txt": "039456284827d238e2c9e28c5d463de13823c932b8c455f2f0526717546680db",
+    "e2e/public.py": "13db98dc88b2a4f68b369153d2174cbc354f1dfefd9b3c4d96fba2911428bc5e",
+    "control/app/auth.py": "c14010aa76599800aec265ca25264759a69d23f0791f78575af9b83bce032d61",
+    "control/app/config.py": "e38d765f875556949bd7819924229335003ce9b1cfdf87e4419ef576041dab17"
+  },
+  "code_review": [
+    "Code et PKCE S256",
+    "Scopes openid profile email sans offline_access",
+    "Issuer exact",
+    "Azp access token exact",
+    "Rôles verified et admin par présence à chaque requête de session",
+    "Signatures RS256/ES256 et clés JWKS dynamiques"
+  ],
+  "open_findings": [
+    "État d’attente pour les rôles manquants",
+    "Contrôle azp ID token",
+    "Kid inconnu dans la fenêtre JWKS de 2 s : éviter la révocation de session sur erreur temporaire"
+  ],
+  "pending_real_proofs": [
+    "Connexion administrateur",
+    "Compte verified sans admin",
+    "Compte sans verified",
+    "TTL réel du jeton 300 s et renouvellement",
+    "Rotation réelle des clés du fournisseur"
+  ]
+}
