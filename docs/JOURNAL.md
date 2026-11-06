@@ -1651,3 +1651,33 @@ comme dépendance de construction verrouillée (MIT, publication vérifiée dans
 registre npm) ; audit des dépendances et preuves réelles précèdent la livraison.
 Les deux design systems ont été lus ; la publication UI reprendra après cette
 unité. Aucun remote Git n’est configuré.
+
+### Manuel intégré — preuve et clôture du 7 novembre
+
+Le build lit directement docs/manual.md, compile ses neuf chapitres et exclut
+le parseur de l’artefact navigateur. Le guide est autonome et son entrée de
+navigation possède un état courant distinct de Namespaces. Les ancres sont
+partageables, focalisées et restaurées après rechargement de la session.
+
+La revue indépendante renforce deux preuves : toutes les cellules du tableau
+sont comparées au source et le corps de texte à 200 % est mesuré, sans prétendre
+être un zoom du navigateur. Le client autonome refuse aussi une erreur JavaScript
+reçue tardivement, après fermeture. La mention de qualification interne restante
+est retirée du guide. Les deux constats sont fermés à la relecture.
+
+Huit groupes ciblés passent. La première inspection révèle que deux captures
+d’entrée montraient le sommaire après son ancre ; le banc rouvre alors le manuel
+par sa navigation avant de photographier son titre, avec scrollY égal à zéro.
+La suite finale rejoue cinq campagnes et passe 48 groupes, zéro échec et zéro
+skip. Les sept captures du manuel sont relues, puis une huitième vue du tiroir
+mobile est capturée depuis l’accueil et inspectée séparément. Elle n’ajoute
+pas un groupe au total. Les 25 captures de régression sont relues par les
+vérificateurs ; l’arbre Git est identique avant/après leurs lectures.
+
+La preuve manual-console-dev-2026-11-07.json recoupe sources, image, documents,
+rapports frais, 33 captures, archives conservées et ressources nettoyées.
+Les notes SPARK sont appliquées par la console normale puis relues. Le manuel
+affiché correspond à la source, avec 22 paragraphes et le tableau vérifiés.
+L’audit des dépendances verrouillées ne signale aucune vulnérabilité connue.
+SLS-062 est clos, l’objectif global reste actif. Aucun registre d’incohérences
+ne subsiste pour cette unité ; aucun remote Git ne permet un push.

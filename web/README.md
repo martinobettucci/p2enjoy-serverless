@@ -26,3 +26,16 @@ python3 -B e2e/execution-suite.py --scope console
 
 Ces deux commandes sont des campagnes distinctes ; la seconde rejoue aussi
 la première avec les parcours publics, de connexion et de gestion.
+
+## Manuel d’usage
+
+La navigation ouvre `/console/manual`, avec sommaire, ancres partageables et
+retour au sommaire. `docs/manual.md` est la seule source à éditer ;
+`vite.config.mjs` la compile en contenu HTML sans HTML brut, avec son empreinte.
+Le contexte Docker inclut explicitement ce document. `markdown-it` est verrouillé
+en dépendance de build et n’est pas inclus dans le navigateur. Mettre à jour le
+guide avec chaque comportement utilisateur, puis reconstruire la console.
+
+`node e2e/manual-ui.mjs` vérifie huit groupes réels. La suite de console ajoute
+cette campagne aux quatre précédentes : 48 groupes, zéro échec/skip et 33 captures
+relues dans la [preuve courante](../docs/evidence/manual-console-dev-2026-11-07.json).

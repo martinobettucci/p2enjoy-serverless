@@ -10,6 +10,9 @@
 !web/package.json
 !web/package-lock.json
 !web/index.html
+!web/vite.config.mjs
+!docs/
+!docs/manual.md
 !web/src/
 !web/src/**
 !web/public/

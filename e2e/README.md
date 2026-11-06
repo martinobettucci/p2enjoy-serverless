@@ -65,7 +65,7 @@ redémarre le conteneur de contrôle du SPARK DEV pour éprouver la persistance.
 la latence réelle de Chromium pour vérifier un envoi en cours ; il ne remplace
 aucune réponse. Les deux nettoient uniquement les objets qu'ils ont créés.
 
-Les scripts et preuves sont ajoutés au rythme de SLS-020 à SLS-060. Les premiers
+Les scripts et preuves sont ajoutés au rythme de SLS-020 à SLS-062. Les premiers
 contrôles publics, les 19 groupes API administrateur et les 11 parcours UI
 ont réussi avec nettoyage confirmé. La [preuve de gestion](../docs/evidence/control-management-dev-2026-11-06.json)
 recoupe l'image et les sources ; les cycles de rôles et de clés SSO ainsi que
@@ -263,10 +263,27 @@ Le nettoyage retrouve les créations par leurs noms exacts même si la navigatio
 échoue, puis confirme suppression et purge de leurs archives de stockage.
 
 `python3 -B e2e/execution-suite.py --scope console` exécute en série `public`,
-`login-ui`, `control-ui` puis `execution-ui`. Son rapport est
+`login-ui`, `control-ui`, `execution-ui` puis `manual-ui`. Son rapport est
 `.local/e2e/console-execution-regressions.json`. Il vérifie la fraîcheur et le
 contenu de chaque rapport : fin, nombres de groupes, absence d’échec/skip et
 nettoyage selon son schéma. La source et l’image sont recoupées avant/après.
-La [preuve finale](../docs/evidence/console-execution-dev-2026-11-07.json) compte
+La [preuve initiale des observations](../docs/evidence/console-execution-dev-2026-11-07.json) compte
 40 groupes et 25 captures relues. Les mesures Docker partielles sont une donnée
 réelle : leur absence doit rester visible, jamais devenir un zéro.
+
+## Manuel intégré
+
+`node e2e/manual-ui.mjs` ouvre le manuel depuis l’accueil réel et sa navigation.
+Huit groupes vérifient le contenu intégral (empreinte, neuf chapitres, 22
+paragraphes et tableau), le clavier, le focus, les ancres rechargées, les formats
+desktop/tablette/mobile, l’agrandissement mesuré du corps de texte, l’absence de
+session et le retour aux namespaces. Les erreurs JavaScript sont contrôlées
+après fermeture du navigateur, avant de déclarer le rapport terminé.
+
+La [preuve courante](../docs/evidence/manual-console-dev-2026-11-07.json) recoupe
+48 groupes exécutés en série et 33 captures relues. Le tiroir mobile ouvert
+dispose d’une capture visuelle complémentaire prise depuis l’accueil réel ;
+elle n’ajoute pas un groupe au total. Les sources du manuel, du build Vite et
+du filtre de contexte Docker font partie de l’inventaire avant/après chaque
+campagne. Le parseur Markdown n’est pas utilisé par le client de preuve pour
+fabriquer son attendu : paragraphes, titres et cellules sont recoupés au document.

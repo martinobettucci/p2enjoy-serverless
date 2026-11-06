@@ -231,7 +231,7 @@ restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls compos
 
 ## SLS-060
 
-Statut : [~] — gestion et consultation des exécutions livrées ; publication et campagne transversale ouvertes.
+Statut : [~] — gestion, consultation des exécutions et manuel livrés ; publication et campagne transversale ouvertes.
 
 Parcours d'administration sur les API réelles : connexion, objets, jetons,
 code, variables/secrets, limites, état, stockage, historique et journaux.
@@ -253,7 +253,9 @@ La publication depuis l’UI, purge/cache et crons appartiennent aux autres tran
 
 ## SLS-062
 
-Statut : [~] — manuel maintenu dans le dépôt ; accès intégré en cours.
+Statut : [x] — manuel intégré et maintenu depuis sa source unique ; 48 groupes
+réels réussis, zéro échec/skip, 33 captures relues.
+[Preuve](evidence/manual-console-dev-2026-11-07.json).
 
 [Contrat du manuel intégré](CONSOLE_MANUAL.md). Source éditoriale unique,
 construction automatique, entrée de navigation, sommaire et ancres accessibles,

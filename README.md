@@ -108,7 +108,12 @@ Les facettes **Instances** et **Invocations** affichent allocations, mesures Doc
 passe 40 groupes réels, avec 25 captures relues.
 La [preuve de gestion](docs/evidence/control-management-dev-2026-11-06.json)
 recoupe les sources déployées, les campagnes, les ressources web servies et
-les sept captures relues. Le [manuel](docs/manual.md) décrit la console.
+les sept captures relues. Le [manuel](docs/manual.md) décrit la console et se
+consulte depuis **Manuel d’usage** dans sa navigation, à
+[serverless.lelabs.tech/console/manual](https://serverless.lelabs.tech/console/manual).
+Ce même fichier est compilé avec chaque version de la console ; le contrat local
+impose sa mise à jour à chaque évolution fonctionnelle. La [preuve du manuel](docs/evidence/manual-console-dev-2026-11-07.json)
+passe 48 groupes réels avec 33 captures relues.
 
 **Il est interdit de lancer l'application avec un profil PREPROD ou PROD,
 quelles que soient les circonstances.**

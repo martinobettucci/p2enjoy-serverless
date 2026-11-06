@@ -1,6 +1,8 @@
 # Manuel d’usage dans la console
 
-Contrat SLS-062, demandé le 7 novembre 2026. Implémentation et preuve à réaliser.
+Contrat SLS-062, implémenté et vérifié le 7 novembre 2026 sur le SPARK DEV.
+[Preuve](evidence/manual-console-dev-2026-11-07.json) : 48 groupes réels, dont
+huit propres au manuel, zéro échec/skip et 33 captures relues.
 
 ## Source et maintenance
 
@@ -49,7 +51,9 @@ Depuis l’accueil réel et la session SSO : navigation clavier et souris, somma
 focus, ancres après rechargement, retour aux namespaces, tableau des droits,
 commandes et texte intégral. Comparer l’empreinte source à celle de la vue déployée,
 et tous les chapitres/paragraphes au document. Vérifier le menu mobile, desktop,
-tablette, largeur de 390 px et zoom ; inspecter les captures. Après retrait réel
+tablette, largeur de 390 px et agrandissement mesuré du corps de texte à 200 % ;
+ce dernier contrôle ne prétend pas mesurer le zoom global du navigateur.
+Inspecter les captures. Après retrait réel
 des cookies puis rechargement, la page revient à la connexion. Aucun mock/skip.
 Rejouer séquentiellement les parcours publics, de connexion, de gestion et de
 consultation, affectés par la navigation commune. Les rapports identifient sources,

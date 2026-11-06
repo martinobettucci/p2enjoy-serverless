@@ -368,3 +368,25 @@ libérés ; les archives de code et l’historique suivent leur rétention norma
 La publication depuis l’UI, les commandes de purge/cache, les crons et les
 preuves résiduelles du backlog restent ouverts. La commande de qualification
 de cette tranche est `python3 -B e2e/execution-suite.py --scope console`.
+
+## Baseline du manuel intégré
+
+L’image courante devient
+`sha256:c2dd1e3a3849558fe6202538c21591f8c534bd6c963ecaec1dbe20f5e629904d`.
+Le manuel est généré depuis `docs/manual.md` à la construction et affiché dans
+la navigation de console. Le backend Python/SQL reste identique à la preuve
+moteur ; schéma, configuration de cellule et agent de stockage sont inchangés.
+
+La [preuve du manuel](evidence/manual-console-dev-2026-11-07.json) recoupe 101
+sources locales/distantes, 27 fichiers embarqués, 287 archives conservées et les
+ressources effectivement servies. Les cinq campagnes sérielles passent 48
+groupes : 8 publics, 9 connexion, 11 gestion, 12 exécution et 8 manuel.
+Les 33 captures sont relues : huit du manuel/tiroir par le principal et 25 de
+régression par les vérificateurs. Le SHA256 documentaire affiché correspond
+au fichier du dépôt ; titres, paragraphes et tableau sont aussi vérifiés.
+Les trois notes sont appliquées puis relues par la console SPARK. Aucune
+ressource active de campagne ni opération en attente ne subsiste.
+
+La commande reste `python3 -B e2e/execution-suite.py --scope console` et inclut
+désormais `manual-ui`. SLS-062 est clos ; les autres unités du backlog et
+l’objectif global restent ouverts.

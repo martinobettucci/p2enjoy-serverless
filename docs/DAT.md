@@ -268,3 +268,18 @@ une allocation ou un zéro. Le [contrat](CONSOLE_EXECUTION.md) est vérifié par
 la [preuve de console](evidence/console-execution-dev-2026-11-07.json), qui recoupe
 le backend inchangé avec la preuve moteur, les nouvelles ressources web et
 les parcours réels de session/gestion/exécution.
+
+## Manuel d’usage embarqué
+
+`docs/manual.md` est compilé par `web/vite.config.mjs` dans le module virtuel
+`virtual:usage-manual` : titre, sommaire, HTML et SHA256 du document. La page
+React `/console/manual` le présente dans la navigation existante. Le contrat
+local impose la maintenance du document avec chaque évolution fonctionnelle.
+La compilation standard utilise [markdown-it](https://github.com/markdown-it/markdown-it)
+15.0.3 (MIT), uniquement au build, HTML brut désactivé et liens HTTPS/ancres
+contrôlés. L’audit du verrou ne signale aucune vulnérabilité le 7 novembre.
+Le guide est documentaire, embarqué dans les ressources publiques ; son affichage
+suit la session habituelle de console. Aucune nouvelle route serveur, migration
+ni variable de cellule. La [preuve](evidence/manual-console-dev-2026-11-07.json)
+recoupe 101 sources, 27 fichiers embarqués et l’identité du backend avec la
+preuve moteur, puis 48 groupes et 33 captures.

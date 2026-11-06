@@ -166,3 +166,8 @@ fonction. Les deux API d’observation sont consommées avec la session admin ;
 les journaux se déplient dans le flux. La [preuve de console](../docs/evidence/console-execution-dev-2026-11-07.json)
 passe 40 groupes réels et vérifie l’identité du backend avec celui de la preuve
 moteur. Commande depuis le poste : `python3 -B e2e/execution-suite.py --scope console`.
+
+Le build embarque aussi le manuel d’usage, généré depuis `docs/manual.md` et
+accessible dans la navigation de console. Aucune route API ni migration ajoutée.
+La [preuve du manuel](../docs/evidence/manual-console-dev-2026-11-07.json) rejoue
+les parcours de console et ajoute huit groupes : 48 réussites au total.

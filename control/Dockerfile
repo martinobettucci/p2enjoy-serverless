@@ -4,6 +4,8 @@ WORKDIR /web
 COPY web/package.json web/package-lock.json ./
 RUN npm ci --ignore-scripts --no-audit --no-fund
 COPY web ./
+# @spec docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md#construction
+COPY docs/manual.md /docs/manual.md
 RUN npm run build
 
 FROM python:3.14-slim@sha256:af8a5aa14780025dbfbcfbc81bd8a91ebd87711dd5b0f48ed71090949dd7cb1d

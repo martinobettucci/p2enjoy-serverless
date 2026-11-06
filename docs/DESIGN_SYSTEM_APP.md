@@ -105,4 +105,12 @@ la navigation principale. Le texte est borné à 72ch pour la lisibilité ; le s
 utilise la largeur de navigation de 240 px sur desktop et s’empile avant le guide
 sous 1024 px. Titres ancrés et focus explicite suivent les §§5.1, 9 et 1.5 bis
 du socle. Le contenu est généré depuis `docs/manual.md` lors de la construction.
-Implémentation et captures restent à qualifier.
+La [preuve](evidence/manual-console-dev-2026-11-07.json) vérifie les neuf chapitres,
+22 paragraphes et toutes les cellules du tableau depuis la source unique.
+Huit captures du manuel et du tiroir sont relues par le principal ; les 25
+captures de régression sont relues par les vérificateurs. Le titre est visible
+dans les captures d’entrée desktop/tablette ; les chapitres visés par ancre
+défilent dans la page. Le corps de texte agrandi est mesuré à 200 %, sans prétendre
+modifier les titres en px ni mesurer le zoom global du navigateur.
+La nouvelle capture des namespaces montre leur chargement ; celle du namespace
+mobile montre désormais les services vides. Ces états sont nommés dans la preuve.

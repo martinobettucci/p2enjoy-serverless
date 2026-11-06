@@ -18,6 +18,8 @@ def source_hashes():
     files=[p for folder,pattern in [('control/app','*.py'),('control/migrations','*.sql'),('storage','*.py'),('storage/migrations','*.sql'),('runtime','*.mjs')] for p in (ROOT/folder).glob(pattern)]
     files += [ROOT/p for p in ['control/Dockerfile','control/requirements.txt','control/compose.spark.yml','control/dev.sh','runtime/Dockerfile','runtime/compose.spark.yml','runtime/dev.sh','storage/main.go','storage/go.mod','storage/go.sum','storage/dev.sh','storage/Dockerfile','qualification/artifacts/volume-operations.cjs','qualification/artifacts/public-invocation.cjs','qualification/artifacts/invoke.cjs','web/package.json','web/package-lock.json','web/index.html']]
     files += [ROOT/'qualification/artifacts/observation.cjs']
+    # @spec docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md#preuves-attendues
+    files += [ROOT/name for name in ['docs/manual.md','web/vite.config.mjs','control/Dockerfile.dockerignore']]
     files += [p for p in (ROOT/'web/src').glob('*') if p.is_file()]
     files += [p for p in (ROOT/'e2e').iterdir() if p.suffix in ('.py','.mjs')]
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
@@ -72,15 +74,16 @@ def verify_report(name,path,is_remote,expected_hash):
     expected={'control-operations':55,'function-storage':14,'runtime-instances':31,'instance-lifecycle':11,
               'runtime-validation':36,'managed-storage':14,'control-admin':19,'control-ui':11,
               'deployments':11,'adapter-deploy':7,'publication-recovery':4,'public':8,
-              'public-invocations':31,'login-ui':9,'execution-ui':12}
+              'public-invocations':31,'login-ui':9,'execution-ui':12,'manual-ui':8}
     checks=result.get('checks',result.get('results'))
     assert isinstance(checks,list) and len(checks)==expected[name],'Nombre de groupes inattendu'
     if name=='login-ui':assert all(isinstance(row,str) and row for row in checks)
     else:assert all(row['status']=='passed' for row in checks),'Groupe échoué'
     assert not result.get('failed') and not result.get('failures') and not result.get('cleanupErrors')
-    if name not in ('runtime-validation','public','login-ui','control-ui','control-admin'):
+    if name not in ('runtime-validation','public','login-ui','control-ui','control-admin','manual-ui'):
         assert result['cleanup'] is True,'Nettoyage incomplet'
     if name in ('control-ui','execution-ui'):assert result['faults']==[] and result['cleanupErrors']==[]
+    if name=='manual-ui':assert result['faults']==[]
     return len(checks)
 
 def main():
@@ -94,6 +97,7 @@ def main():
         ('login-ui',['node','e2e/login-ui.mjs'],'.local/e2e/login-ui.json',False),
         next(row for row in CASES if row[0]=='control-ui'),
         ('execution-ui',['node','e2e/execution-ui.mjs'],'.local/e2e/execution-ui.json',False),
+        ('manual-ui',['node','e2e/manual-ui.mjs'],'.local/e2e/manual-ui.json',False),
     ]
     records=[];baseline=None
     def save(done=False):

@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Manuel d’usage intégré à la navigation, sommaire et ancres accessibles,
+  rendu responsive compilé depuis l’unique source `docs/manual.md`.
+- Maintenance du manuel imposée par le contrat local et concordance de son
+  contenu avec la version déployée vérifiée E2E. 48 groupes passent avec zéro
+  échec/skip et 33 captures relues : [preuve](docs/evidence/manual-console-dev-2026-11-07.json).
+
 - Facettes Instances et Invocations dans la fiche de fonction : allocations,
   mesures réelles ou indisponibles, état et HTTP séparés, détails et journaux
   expurgés/tronqués, pagination, rafraîchissement manuel, clavier et mobile.

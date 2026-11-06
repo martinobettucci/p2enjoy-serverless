@@ -1,10 +1,12 @@
-# Utiliser la console DEV
+# Manuel d’usage
 
-La console initiale est déployée sur
-[serverless.lelabs.tech](https://serverless.lelabs.tech).
-Les parcours de gestion passent leurs preuves API et UI ; les cycles SSO
-restants figurent dans [BACKLOG.md](BACKLOG.md). Les paramètres d'exécution sont appliqués aux fonctions par le moteur déployé
-en qualification.
+La console [P2Enjoy Serverless](https://serverless.lelabs.tech) permet de gérer
+les services et leurs fonctions, leurs accès, leurs ressources et leurs exécutions.
+Ce guide décrit les opérations disponibles dans la version déployée.
+
+Après connexion, choisir **Manuel d’usage** dans la navigation principale.
+Sur mobile, ouvrir d’abord **Menu**. Le sommaire mène aux chapitres ; leur adresse
+peut être conservée pour y revenir. **Namespaces** ramène à la gestion.
 
 ## Se connecter
 
@@ -66,13 +68,15 @@ une nouvelle valeur.
 | Delete | Supprimer les fonctions autorisées |
 
 Les appels portent `X-Serverless-Token`. L'en-tête `Authorization` reste
-disponible pour l'authentification métier du handler. Les routes de révision
-et la commande CLI `deploy` passent leurs premiers parcours authentifiés en DEV.
+disponible pour l'authentification métier du handler. La publication du code
+s’effectue avec la commande `deploy` de l’adaptateur ou avec l’API.
 Les vues de publication ne sont pas encore disponibles dans la console.
 Les fonctions publiées sont invocables. Leurs instances et journaux se
 consultent dans les facettes Instances et Invocations de la fiche de fonction.
 
-La [CLI](../adapter/README.md) lit `P2_SERVERLESS_URL` et `P2_SERVERLESS_TOKEN`
+## Publier le code avec l’adaptateur
+
+La commande de déploiement lit `P2_SERVERLESS_URL` et `P2_SERVERLESS_TOKEN`
 dans son environnement. Depuis le projet de fonctions, lancer
 `python3 -m adapter deploy --config serverless.yml --service UUID_DU_SERVICE`.
 Le nom du service doit correspondre au manifeste. Le jeton requiert Read et
