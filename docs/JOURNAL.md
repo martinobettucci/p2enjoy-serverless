@@ -1128,3 +1128,17 @@ après publication/rollback dans SLS-040. Les cas CLI de transport et de
 modification locale concurrente sont également explicites. Cette unité apporte
 une progression fonctionnelle vérifiée ; la prochaine porte sur les limites
 et la reprise de publication avant le raccordement du moteur.
+
+## Plafonds et reprise de publication — décision du 2026-11-06
+
+Le checkpoint bdf81fb est une progression fonctionnelle vérifiée. L'exploration
+des quatre prochaines preuves confirme les compteurs et leur point de contrôle :
+64 candidats globaux à la préparation, vingt révisions à l'upload. Le principal
+relit les suppressions, le démarrage et les réservations. Le contrat précise
+des coupures après observation physique, la fenêtre courte de quatre secondes
+du module existant, l'attente de la requête interrompue et le redémarrage dans
+le nettoyage. Les seules lectures privées portent sur états, empreintes et
+présence de fichiers ; aucune écriture de base ni simulation d'horloge.
+La nouvelle campagne sera exécutée seule sur le contrôle DEV, sans modifier
+les variables de cellule. Budget, expiration et autres interruptions restent
+des preuves séparées, explicitement ouvertes.

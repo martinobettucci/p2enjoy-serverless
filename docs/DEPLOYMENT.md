@@ -394,6 +394,39 @@ exige le préfixe conservé, la valeur remplacée par `[redacted]`, le refus
 Une exception seule ne prouve pas l’expurgation des logs : son message est
 remplacé par le code fixe du chargeur avant toute sortie.
 
+### Limites et reprise des publications
+
+`e2e/publication-recovery.mjs` s'exécute seul contre le contrôle DEV et sa
+session administrateur réelle. Le prérequis vérifie l'absence de candidat
+ou de validation en cours avant de créer ses propres objets. Huit fonctions
+portent chacune huit candidats ; le refus du suivant sur une neuvième
+fonction démontre le plafond global. La suppression d'une fonction libère
+ses places et permet une nouvelle préparation.
+
+Vingt publications réelles distinctes précèdent le refus du vingt-et-unième
+upload. Le candidat refusé reste préparé, sans réservation. La lecture de
+l'historique demande cent entrées pour ne pas confondre plafond et pagination.
+Après suppression d'une révision inactive, une nouvelle publication réussit.
+
+Les interruptions utilisent SIGKILL sur le seul conteneur serverless-api.
+Le client conserve un upload HTTPS partiel ouvert jusqu'à observation de
+receiving et d'octets réellement écrits. Pour validating, il observe aussi
+le conteneur Docker vivant portant l'installation et le montage du candidat
+avant la coupure. La commande distante borne cette observation et vérifie
+l'arrêt du contrôle ; manquer la fenêtre échoue, sans convertir une publication
+terminée en preuve d'interruption. Le contrôle est ensuite redémarré.
+
+Chaque reprise exige failed/control_interrupted, aucune révision du candidat,
+réservation libérée, configuration temporaire effacée, conteneur et canal
+supprimés. Les lectures privées comparent l'empreinte de la configuration
+chiffrée avant/après ; aucune valeur secrète n'est exposée. La révision
+précédente et son archive restent intactes et la publication suivante réussit.
+Le client rejoint l'upload interrompu avant son nettoyage et tente toujours
+le redémarrage du contrôle dans son finally. Les archives antérieures sont
+vérifiées, jamais supprimées par la campagne. Expiration, budget de stockage,
+déconnexion concurrente et interruption pendant nettoyage sont des preuves
+distinctes encore ouvertes.
+
 Références primaires : [PyYAML](https://pypi.org/project/PyYAML/),
 [glob pathlib](https://docs.python.org/3.14/library/pathlib.html#pathlib.PurePath.full_match),
 [API Docker](https://docs.docker.com/reference/api/engine/),

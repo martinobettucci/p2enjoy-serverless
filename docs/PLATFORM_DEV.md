@@ -22,13 +22,23 @@ a été appliquée par la proposition officielle. Les trois notes ont été
 appliquées et relues. La connexion personnelle sur le nouveau domaine a
 réussi : session authentifiée et accès administrateur aux namespaces HTTP 200.
 
+La [preuve de gestion](evidence/control-management-dev-2026-11-06.json) ajoute
+19 groupes API administrateur, 11 parcours UI et huit groupes publics sur
+l'image corrigée de navigation mobile. La [preuve de publication](evidence/deployment-authenticated-dev-2026-11-06.json)
+ajoute onze groupes API et sept groupes CLI authentifiés sur cette même image.
+Les trois notes sont appliquées et relues, les fichiers officiels concordent.
+Les constats d'absence de session ci-dessous décrivent leurs checkpoints
+historiques ; la session réelle est maintenant disponible. Les cycles SSO,
+limites et interruptions de publication, vues de révisions et raccordement
+du moteur restent ouverts.
+
 ## Baseline
 
 Le banc de qualification est déployé selon `QUALIFICATION_DEV.md`. Le composant
 de quota est construit dans `storage/`, testé par 31 contrôles puis laissé
 sans montage permanent après ses preuves. L’agent local est maintenant installé
 en service DEV, avec état durable et socket privé. Le contrôle et la console initiale sont déployés en
-DEV ; leurs parcours administrateur restent à qualifier avec une session SSO.
+DEV ; les parcours de gestion administrateur sont désormais qualifiés.
 La cible est le SPARK `infra-serverless`
 et le répertoire `/srv/p2enjoy-serverless`, administré par `spark-docker` pour
 Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
