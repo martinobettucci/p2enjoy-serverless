@@ -1494,3 +1494,67 @@ Le délai du contrôle demeure trente secondes et aucune invocation n'est admise
 Le diagnostic conserve ses deux groupes réussis et son nettoyage, séparément
 de la campagne échouée. La preuve finale ne prétendra pas qu'HTTP/1.1 reçoit
 un refus anticipé avant la fin de son corps sur cette infrastructure.
+
+Une relecture ciblée relève le rejet secondaire sous contention SQLite :
+l’erreur d’enqueue tente un reject, dont l’écriture échoue à nouveau. La
+réponse sort alors de l’enveloppe publique et perd UUID/CORS. Le diagnostic
+HTTPS reproduit le message générique à la place de execution_unavailable ;
+son nettoyage réussit et le rapport reste en échec. La décision de rejet est
+déjà conservée en mémoire avant l’écriture ; les routes peuvent donc différer
+la seule persistance en conservant la responsabilité de reprise. La correction
+protège les trois appels de rejet/déconnexion contre sqlite3.Error, sans
+rendre silencieux les autres appelants du moteur ni retirer l’attente tôt.
+
+Le correctif de rejet passe le même diagnostic HTTPS sur l’image
+9bd48a3183b98c01bdaca28641995fe4ac4e1912ff2bdd9065f6334bf5fee04d :
+503, UUID, CORS et reprise des états durables sont vérifiés. La preuve finale
+ajoute une déconnexion réellement en file et exige, avant restitution SQL,
+les événements corrélés de décision différée pour les deux déconnexions et
+le rejet. Ces événements fixes sont émis une seule fois par rejet en attente.
+
+Le scénario global de réception a connu un passage incomplet : seules trois
+fonctions avaient reçu des demandes, sans résidu après nettoyage. Son rejeu
+isolé atteint les 128 réceptions. Le banc ouvre désormais les connexions par
+lots de seize, attend leur observation réelle, puis exige toujours 128
+réceptions simultanées et le refus de la suivante. Les états de transport
+client sont conservés pour diagnostiquer un nouvel échec ; aucune pause
+arbitraire ni réduction du plafond attendu n’est introduite.
+
+La campagne complète observe bien 128 réceptions simultanées avec cette
+ouverture par lots. L’instrumentation du client ajoutait toutefois un listener
+secureConnect à chaque réutilisation d’un socket déjà connecté, d’où un
+avertissement Node sans échec des requêtes. Elle n’installe désormais ce
+listener que pendant une connexion effective. La campagne finale sera rejouée
+avec cette correction du client ; l’application déployée n’est pas modifiée
+par cette instrumentation.
+
+La première régression du stockage après les 31 groupes d’invocation passe
+12 groupes puis échoue pendant la publication avec confirmation suspendue :
+503 de la base du contrôle, avant observation de storage_version par le garde.
+Le rapport reste en échec, y compris son garde ; les volumes, baux et objets
+créés sont néanmoins supprimés et la santé du stockage est recoupée à zéro.
+Le diagnostic isolé création/écriture/publication/rollback/suppression passe
+ses quatre groupes sur la même image. Pour identifier une éventuelle course,
+le journal database.unavailable ajoute le nom d’erreur SQLite et la dernière
+position statique du code ; aucun SQL, argument ou contenu de requête n’est
+journalisé. La campagne complète doit être rejouée avec ce diagnostic.
+
+Le rejeu intégral du stockage sur l’image de diagnostic d7621027 passe les
+14 groupes avec nettoyage confirmé. Il ne reproduit pas l’erreur initiale.
+La contention transitoire liée aux ouvertures/fermetures WAL reste une
+hypothèse de revue, pas une cause établie ni un défaut annoncé corrigé.
+La clôture conserve cet échec et ses deux diagnostics séparément des rapports
+frais de la suite finale ; celle-ci rattache les treize commandes à leurs
+sources, image et empreintes de rapports avant/après exécution.
+
+Le deuxième passage sériel échoue au groupe de confirmation avec audit occupé,
+après observation de la préparation. Le diagnostic corrélé à la requête révèle
+SQLITE_READONLY au BEGIN de transaction, et non SQLITE_BUSY. Les lectures root
+répétées de la base du contrôle sont donc instruites. Une trace strace réelle
+sur le SPARK observe openat(O_RDWR|O_CREAT) du WAL puis fchown(1001,1001), et
+la même séquence pour SHM. Leur propriétaire final correct n’exclut pas la
+fenêtre de création sous root. La règle de diagnostic est précisée dans
+ADMISSION : tous les accès CONTROL des gardes utilisent l’identité effective
+du compte propriétaire, avant de retrouver root pour les signaux et systemd.
+La preuve doit rejouer les gardes réelles et contrôler la restauration des
+identités ; aucune reprise SQLITE_BUSY n’est ajoutée au moteur sur cette base.

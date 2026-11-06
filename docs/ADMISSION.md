@@ -253,3 +253,15 @@ publication augmentant les minima au-delà de ces budgets est refusée à 409
 dans sa transaction finale, avant de publier l'objet. Une réduction de maximum
 ou changement de génération n'interrompt pas un appel déjà admis : les anciennes
 instances deviennent drainantes et continuent de compter jusqu'à destruction.
+
+## Identité des diagnostics SQLite
+
+Les diagnostics et gardes de panne qui ouvrent la base du contrôle emploient
+l’identité effective du compte Docker rootless propriétaire de cette base,
+y compris pour une lecture seule. Le contexte couvre ouverture, exécution,
+consommation des résultats et fermeture ; les writers conservés entre deux
+actions opérateur rétablissent cette identité pour chaque accès SQLite.
+Les actions système de la garde retrouvent ensuite leur identité root.
+Cette règle évite que le banc crée WAL/SHM sous une autre identité avant leur
+changement de propriétaire. Elle ne change pas les permissions de la base et
+ne supprime pas les fichiers WAL pour rétablir un test.
