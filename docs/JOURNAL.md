@@ -820,3 +820,47 @@ correction, ce cas passe ; une réponse de 6 Mio fait encore sortir le supervise
 avec le code générique 1, sans événement OOM. Des codes de sortie fatale fixes
 sont ajoutés au contrat pour rendre cette panne observable sans exposer les
 messages applicatifs. Le diagnostic est vérifié sur les événements Docker réels.
+
+
+Le second arrêt sur gros corps provient du diagnostic lui-même : son écriture
+stdout synchrone bloque la boucle de contrôle, ce qui expire le canal privé.
+Une émission non bloquante bornée et une lecture linéaire du client de preuve
+font passer les trois réponses exactes de 6 Mio, dont NUL et retours à la ligne.
+Les réponses privées restent encodées en base64 ; les limites HTTP ne changent pas.
+
+Les courses réelles révèlent ensuite un inventaire Docker revenant à 404 après
+une fermeture volontaire. Le résultat terminal accepté est maintenant conservé,
+et le nettoyage confirmé avant retour. Le verrou de cycle couvre les créations
+Docker en cours ; un second start refuse sans fermer l’instance existante.
+Une deadline devenue exception pendant une suspension du contrôle est recueillie
+même si l’échéance extérieure a déjà déclenché le nettoyage.
+
+La campagne finale passe 31 contrôles d’invocation, 11 contrôles de cycle et les
+36 régressions du chargeur partagé, dans cet ordre, sans concurrence entre
+campagnes ni test ignoré. Les annulations répétées sont réellement acceptées
+sur des tâches encore actives. Les descendants sont comparés à l’inventaire
+initial. La saturation mémoire est confirmée par les événements OOM Docker.
+Le refus de suppression du canal est provoqué par permissions, puis repris
+après leur rétablissement. Le signalement Python de ce refus est attendu.
+Le résultat tardif est éprouvé par SIGSTOP/SIGCONT du vrai pilote, après
+production du résultat et récolte de son enfant. Les octets secrets sont
+cherchés dans les chaînes JSON décodées, y compris avec caractères échappés.
+
+Les preuves restent celles d’un composant opérateur. Les admissions, générations,
+min/max/idle, agent de stockage, passerelle et parcours UI sont encore ouverts.
+Le débit CPU sous contention et un processus réellement impossible à tuer ne
+sont pas revendiqués qualifiés. Aucun registre d’incohérences ne reste ouvert
+pour cette tranche ; les travaux d’intégration sont dans le backlog.
+
+
+L’empreinte runtime qualifiée est appliquée par la proposition officielle
+SERVERLESS_RUNTIME_IMAGE, puis le contrôle DEV est recréé et revient healthy.
+Les huit groupes HTTPS/OIDC publics repassent. La preuve
+`evidence/instances-dev-2026-11-06.json` compare 44 fichiers avec le SPARK et
+vérifie les fichiers embarqués des deux images. Les configurations actives
+correspondent aux deux fichiers officiels ; les quatre secrets configurés sont
+recherchés en mémoire, sans correspondance dans les sources et rapports vérifiés.
+Les ressources de qualification sont absentes. README, CONTRIBUTORS et INSTALL
+sont proposées, appliquées par la console, puis relues et comparées. Aucun
+nouveau secret, route ou migration. Le commit reste local : aucun remote Git.
+Le helper d’autorisation reste vivant, sans session administrateur enregistrée.

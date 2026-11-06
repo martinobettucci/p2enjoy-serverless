@@ -107,3 +107,18 @@ commande deploy : onze fonctions imposent une pagination, un import qui
 lève réellement une erreur produit un résultat partiel, et un brouillon
 refusé est repris avec Read/Create. Les révisions archivées à la suppression
 sont recensées. La campagne authentifiée reste en échec de prérequis.
+
+`runtime-instances.py` exerce le diagnostic réel en processus séparé : enfants
+neufs dans un conteneur chaud, corps aux limites, callbacks, ESM et dépendances,
+confinement, logs, mesures Docker, HTTPS sortant, descendants, mémoire/PIDs,
+timeouts, signaux et imports bloquants. Une suspension SIGSTOP/SIGCONT du pilote
+vérifie qu’un résultat en attente ne devient pas un succès après la deadline.
+`instance-lifecycle.py` appelle les méthodes réelles du pilote avec Docker et
+son canal Unix pour les courses de démarrage/fermeture, annulations répétées,
+nettoyage filesystem refusé puis repris, IDs étrangers, doublons et bornes du
+canal. La clé testée est celle de cette instance réelle ; aucun jeton public
+ni handler de substitution n’est créé. Un second démarrage refusé doit laisser
+l’instance existante utilisable. Les commandes sont `bash runtime/dev.sh
+instances-test` puis `bash runtime/dev.sh lifecycle-test`, sur le SPARK.
+Les rapports se trouvent dans `runtime/`. La passerelle et les admissions
+restent hors de ces preuves de composants.

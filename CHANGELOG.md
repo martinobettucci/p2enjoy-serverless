@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- Pilote d’instances Docker chaudes avec enfant Node neuf, canal privé,
+  deadlines monotones, réponses bornées, logs expurgés et mesures Docker.
+  Récolte des descendants, fermeture coordonnée et nettoyage confirmé/reprenable.
+- 31 contrôles réels d’invocation et 11 contrôles de cycle de vie réussis,
+  avec les 36 régressions du chargeur partagé. Gros corps, OOM, PIDs, signaux,
+  résultat tardif après suspension du contrôle et courses réellement exercés.
+  Admission, volumes par fonction et passerelle authentifiée restent à intégrer.
+
 - Commande CLI deploy : cible HTTPS vérifiée, pagination, conservation des UUID,
   packaging avant mutation, publications en série et rapport des résultats
   partiels ou inconnus sans rejeu automatique. Valeurs résolues en mémoire.

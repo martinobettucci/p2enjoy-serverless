@@ -78,16 +78,16 @@ def application_environment(environment,secrets):
     return combined
 
 
-def safe_result(data,secrets):
-    if not isinstance(data,dict) or data.get('state')!='done' or type(data.get('valid')) is not bool:
-        raise ValidationError('protocol_invalid')
-    try:logs=base64.b64decode(data.get('logs',''),validate=True)
+# @spec docs/BACKLOG.md#sls-040 | docs/EXECUTION.md#événement-réponse-et-journaux
+# Shared byte-level redaction for validation and invocation records.
+def redact_logs(encoded,truncated,secrets):
+    try:logs=base64.b64decode(encoded,validate=True)
     except (ValueError,TypeError):raise ValidationError('protocol_invalid') from None
     if len(logs)>65536:raise ValidationError('protocol_limit')
     values=sorted({value.encode() for value in secrets.values() if value},key=len,reverse=True)
     # Preserve raw positions while masking. NUL is forbidden in secret values.
     for value in values:logs=logs.replace(value,b'\0'*len(value))
-    if data.get('logs_truncated') and values:
+    if truncated and values:
         # Remove any incomplete suffix using the original byte offsets, before expanding markers.
         logs=logs[:max(0,len(logs)-max(map(len,values))+1)]
     logs=re.sub(b'\0+',b'[redacted]',logs)
@@ -95,8 +95,14 @@ def safe_result(data,secrets):
     expanded=len(logs)>65536
     logs=logs[:65536]
     # This buffer is already valid UTF-8; only its last truncated code point may be incomplete.
-    result={'valid':data['valid'],'logs':logs.decode('utf8',errors='ignore'),
-            'logs_truncated':bool(data.get('logs_truncated')) or expanded}
+    return {'logs':logs.decode('utf8',errors='ignore'),
+            'logs_truncated':bool(truncated) or expanded}
+
+
+def safe_result(data,secrets):
+    if not isinstance(data,dict) or data.get('state')!='done' or type(data.get('valid')) is not bool:
+        raise ValidationError('protocol_invalid')
+    result={'valid':data['valid'],**redact_logs(data.get('logs',''),data.get('logs_truncated'),secrets)}
     if data['valid']:
         module=data.get('module')
         if not isinstance(module,str) or not re.fullmatch(r'[A-Za-z0-9_./-]+\.(?:js|cjs|mjs)',module):

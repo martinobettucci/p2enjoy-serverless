@@ -2,8 +2,8 @@
 
 Contrat SLS-040 en cours de réalisation, complété par SLS-050 pour le stockage
 et l’exploitation. Il précise [PLATFORM](PLATFORM.md) sans remplacer ses exigences.
-Le runtime de validation est déjà qualifié ; les instances chaudes, la passerelle
-et leurs preuves réelles restent à construire. Les campagnes de composants
+Le runtime de validation et le pilote d’instances chaudes sont implémentés ;
+la passerelle et les admissions restent à construire. Les campagnes de composants
 ne prouvent ni les autorisations publiques ni les parcours de console.
 
 ## Instance et processus
@@ -81,7 +81,8 @@ aucune de ces observations n’autorise un rejeu automatique. Le diagnostic
 rejoint le nettoyage sur SIGTERM et SIGINT, y compris au repos avec stdin ouvert.
 Les sorties fatales du superviseur portent des codes fixes pour distinguer
 protocole trop grand (120), refus/protocole (121), récolte (122), montage (123),
-deadline (124) et délai de canal (125), sans recopier de message applicatif.
+deadline (124), délai de canal (125) et autre erreur interne (126), sans recopier
+de message applicatif.
 
 ## Événement, réponse et journaux
 

@@ -142,15 +142,19 @@ restent à réaliser.
 
 ## SLS-040
 
-Statut : [~] — contrat du moteur précisé ; instances et passerelle en réalisation.
+Statut : [~] — pilote d’instances implémenté ; admissions et passerelle en réalisation.
 
 Invocation authentifiée, limites réelles, admission atomique, min/max/idle,
 deadline, descendants, drainage et réconciliation. CORS/IP ET/OU côté backend.
 E2E : succès/refus, saturation, mémoire/CPU/PIDs, délais, extinction/reprise,
 authentification métier, chaînes proxy, crash du contrôle et absence de rejeu.
 Références : PLATFORM origines et exécution, [EXECUTION](EXECUTION.md).
-La tranche initiale porte le superviseur chaud et le pilote Docker réutilisés
-par le moteur ; aucune invocation de plateforme n’est encore qualifiée.
+La tranche initiale fournit le superviseur chaud, son enfant neuf et le pilote
+Docker réel. Les campagnes d’invocation et de courses de cycle sont présentes,
+avec régression du chargeur partagé : 31 + 11 + 36 contrôles réels réussis,
+zéro échec et zéro test ignoré. La [preuve](evidence/instances-dev-2026-11-06.json)
+est conservée séparément des parcours API. Les admissions, min/max/idle, générations, agent
+FUSE et invocation authentifiée restent à intégrer et qualifier.
 
 ## SLS-050
 

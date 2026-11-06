@@ -71,3 +71,10 @@ recoupe les sources locales/distantes et le code embarqué.
 Son rapport `artifacts-proof.json` n'est valide que si `completed` et
 `cleanup` valent true. Cette preuve indépendante de l'extracteur ne qualifie
 pas les routes authentifiées qui l'appellent.
+
+`app/instances.py` fournit le pilote réel d’instances chaudes, avec diagnostic
+opérateur, limites Docker, canal privé, deadline et fermeture confirmée.
+Ses campagnes passent par Docker et les handlers de qualification, selon
+[runtime/README.md](../runtime/README.md). Il n’est pas encore raccordé aux
+routes publiques ni à la file d’admission du contrôle déployé. Les preuves de
+ce composant ne ferment donc pas SLS-040.

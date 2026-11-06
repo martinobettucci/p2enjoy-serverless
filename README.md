@@ -11,7 +11,9 @@ HTTPS via sa commande `deploy`, dont la qualification authentifiée reste ouvert
 validation Node dans Docker est disponible dans [runtime/](runtime/README.md),
 avec 36 scénarios réels réussis. Les routes de publication, d'historique et de
 rollback sont déployées en DEV ; leurs parcours authentifiés restent à qualifier.
-Le moteur d'invocation reste à implémenter. L'extracteur ZIP serveur dans
+Le pilote Docker d’instances chaudes passe 31 contrôles d’invocation et
+11 de cycle de vie : [preuve DEV](docs/evidence/instances-dev-2026-11-06.json).
+La passerelle, les admissions et l’intégration des volumes restent à réaliser. L'extracteur ZIP serveur dans
 [control/](control/README.md) passe 112 contrôles réels, dont les limites,
 les erreurs de disque et les douze archives chargées ensuite par Node.
 Le composant de [stockage à quota](storage/README.md)
@@ -147,6 +149,7 @@ storage/
   prove.py                Campagne de montage, quota, crash et reprise
 runtime/
   loader.mjs              Chargeur commun Node : CommonJS et ESM
+  invoke-supervisor.mjs   Instances chaudes avec enfant neuf par invocation
   validate-supervisor.mjs Supervision d'import et protocole Unix privé
   dev.sh                  Construction et qualification sur le SPARK
 qualification/

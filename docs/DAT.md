@@ -26,7 +26,8 @@ plan/packaging passe 24 scénarios ciblés dans Docker ; le chargeur Node passe
 36 scénarios réels. L'extracteur ZIP passe 112 contrôles réels, avec une
 preuve indépendante des contenus et le chargement des douze fonctions.
 La publication des révisions est intégrée au contrôle DEV, avec qualification
-authentifiée encore ouverte. Le moteur d'invocation reste à réaliser.
+authentifiée encore ouverte. Le pilote d’instances chaudes est implémenté ;
+son raccordement aux admissions et à la passerelle reste à réaliser.
 
 La compilation du stockage utilise Go 1.27.3 dans une image épinglée. go-fuse
 v2.12.1 et x/sys v0.28.0 sont verrouillés avec go.sum. L'audit govulncheck v1.9.0
@@ -54,14 +55,34 @@ Le contrôle crée le socket dans un répertoire 0700 monté readonly, puis le
 superviseur Node retire sa configuration et renvoie un résultat explicite.
 Les valeurs applicatives ne figurent pas dans l'environnement Docker.
 
-Un enfant importe le code via `runtime/loader.mjs`, partagé avec la future
-invocation. Les logs sont drainés, bornés, expurgés en conservant les positions
+Un enfant importe le code via `runtime/loader.mjs`, partagé avec le pilote
+d’invocation. Les logs sont drainés, bornés, expurgés en conservant les positions
 brutes avant troncature, puis convertis en UTF-8 borné. L'échéance extérieure
 de quinze secondes englobe création, démarrage et import. Le pilote ferme
 les connexions et supprime le conteneur avec ses descendants avant de conclure.
 La preuve porte sur le chargement et ses pannes ; les droits de publication
 et la réconciliation d'un contrôle interrompu doivent être qualifiés par
 les parcours API maintenant intégrés.
+
+### Instances d’exécution
+
+`control/app/instances.py` utilise Docker HTTP et un canal Unix privé authentifié.
+Le superviseur chaud lance un enfant neuf par appel, retire ses descendants,
+puis le pilote compare les processus à l’inventaire initial. Une deadline
+monotone partagée couvre l’import et l’exécution ; le contrôle refuse aussi un
+résultat reçu après cette échéance. Les corps privés sont encodés en base64
+pour borner l’expansion JSON. Les logs partagent l’expurgation du validateur.
+
+Un verrou coordonne démarrage et fermeture. Les opérations système sont
+rejointes malgré les annulations répétées ; la suppression Docker et réseau
+est vérifiée avant retrait du canal. Un défaut de suppression garde l’état de
+nettoyage dégradé et peut être repris. Un second démarrage refusé conserve
+l’instance existante. Le diagnostic lit et écrit sans bloquer la boucle async.
+
+Le contrat complet est [EXECUTION](EXECUTION.md). Les preuves du pilote portent
+sur Docker réel, processus, mémoire/PIDs, réseau et courses ; elles ne qualifient
+pas encore les admissions, générations, volumes ni routes publiques. Les
+mesures proviennent de Docker stats, pas de l’allocation déclarée.
 
 ### Extraction des artefacts
 

@@ -9,7 +9,8 @@ Son accès HTTP est limité à `127.0.0.1:18080`. Ne pas l'exposer publiquement.
 
 Les variantes de `artifacts/` sont des modules originaux destinés au vrai
 chargeur de plateforme : ESM, CommonJS, dépendance YAML et défauts d'import
-intentionnels. Leur campagne se lance séparément selon
+intentionnels. `invoke.cjs` et `invoke.mjs` ajoutent les handlers d’invocation,
+les gros corps et les pannes réellement déclenchées dans Docker. Leur campagne se lance séparément selon
 [runtime/README.md](../runtime/README.md). Elles ne modifient pas l'exécuteur
 de référence ni son manifeste.
 

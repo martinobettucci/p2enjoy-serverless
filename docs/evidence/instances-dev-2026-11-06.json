@@ -1,0 +1,534 @@
+{
+  "date": "2026-11-06T02:27:04.063413+00:00",
+  "unit": "SLS-040",
+  "unit_complete": false,
+  "target": "infra-serverless DEV",
+  "scope": "Pilote réel d’instances, superviseur, limites, pannes et cycles concurrents ; régression du chargeur",
+  "reports": {
+    "instances-proof.json": {
+      "completed": true,
+      "cleanup": true,
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "Production instance driver and Docker; public admission and storage integration pending",
+      "image": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+      "fixture_image": "sha256:9621685adf279148078ddb9f7481d9fa1e21d01ed3396d0b7cf93a5b8f28dc7c",
+      "checks": [
+        {
+          "name": "Conteneur chaud, enfant neuf, événement et contexte réels",
+          "status": "passed"
+        },
+        {
+          "name": "Callback et Promise : première terminaison conservée",
+          "status": "passed"
+        },
+        {
+          "name": "Entrées UTF-8 de 1 Mio avec expansion JSON",
+          "status": "passed"
+        },
+        {
+          "name": "Réponses texte de 6 Mio exacts, NUL et retours à la ligne inclus",
+          "status": "passed"
+        },
+        {
+          "name": "Réponse binaire canonique",
+          "status": "passed"
+        },
+        {
+          "name": "En-têtes multiples et retrait des champs hop-by-hop et CORS",
+          "status": "passed"
+        },
+        {
+          "name": "Réponses malformées et dépassements de corps/en-têtes refusés",
+          "status": "passed"
+        },
+        {
+          "name": "Exception, rejet et sortie sans résultat distincts, instance réutilisable",
+          "status": "passed"
+        },
+        {
+          "name": "Logs bornés, stdout/stderr, secrets expurgés et remise à zéro",
+          "status": "passed"
+        },
+        {
+          "name": "Confinement effectif, clé privée inaccessible et limites Docker appliquées",
+          "status": "passed"
+        },
+        {
+          "name": "Consommations mémoire, CPU et PIDs mesurées par Docker",
+          "status": "passed"
+        },
+        {
+          "name": "Sortie réseau réelle vers la santé HTTPS de la plateforme",
+          "status": "passed"
+        },
+        {
+          "name": "Descendant détaché arrêté avant réutilisation du conteneur",
+          "status": "passed"
+        },
+        {
+          "name": "Saturation réelle des PIDs, récolte et reprise",
+          "status": "passed"
+        },
+        {
+          "name": "Fermeture confirmée du conteneur, du réseau et du canal",
+          "status": "passed"
+        },
+        {
+          "name": "Retour synchrone et callback asynchrone sans Promise",
+          "status": "passed"
+        },
+        {
+          "name": "Handler ESM avec await et véritable dépendance YAML",
+          "status": "passed"
+        },
+        {
+          "name": "Erreur réelle d’import distinguée du début du handler",
+          "status": "passed"
+        },
+        {
+          "name": "Variables de bootstrap injectées uniquement après lancement de l’enfant",
+          "status": "passed"
+        },
+        {
+          "name": "Secret dérivé avec caractères JSON échappés expurgé après décodage",
+          "status": "passed"
+        },
+        {
+          "name": "Allocation minimale réelle 128 Mio et 0,05 CPU",
+          "status": "passed"
+        },
+        {
+          "name": "Timeout avec effet observé et destruction : spin",
+          "status": "passed"
+        },
+        {
+          "name": "Timeout avec effet observé et destruction : descendant",
+          "status": "passed"
+        },
+        {
+          "name": "Résultat livré à un contrôle suspendu refusé après sa reprise hors délai",
+          "status": "passed"
+        },
+        {
+          "name": "Saturation mémoire effective observée dans les événements Docker",
+          "status": "passed"
+        },
+        {
+          "name": "Signal SIGTERM avec stdin ouvert et nettoyage confirmé",
+          "status": "passed"
+        },
+        {
+          "name": "Signal SIGINT avec stdin ouvert et nettoyage confirmé",
+          "status": "passed"
+        },
+        {
+          "name": "Disparition réelle du superviseur pendant le handler et nettoyage confirmé",
+          "status": "passed"
+        },
+        {
+          "name": "Import bloquant compris dans la deadline : loop.cjs.handler",
+          "status": "passed"
+        },
+        {
+          "name": "Import bloquant compris dans la deadline : await.mjs.handler",
+          "status": "passed"
+        },
+        {
+          "name": "Répertoire ordinaire refusé à la place du montage FUSE",
+          "status": "passed"
+        }
+      ]
+    },
+    "lifecycle-proof.json": {
+      "completed": true,
+      "cleanup": true,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "image": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+      "fixture_image": "sha256:9621685adf279148078ddb9f7481d9fa1e21d01ed3396d0b7cf93a5b8f28dc7c",
+      "checks": [
+        {
+          "name": "Fermeture concurrente au démarrage : image",
+          "status": "passed"
+        },
+        {
+          "name": "Fermeture concurrente au démarrage : network",
+          "status": "passed"
+        },
+        {
+          "name": "Fermeture concurrente au démarrage : container",
+          "status": "passed"
+        },
+        {
+          "name": "Annulation répétée du démarrage : network",
+          "status": "passed"
+        },
+        {
+          "name": "Annulation répétée du démarrage : container",
+          "status": "passed"
+        },
+        {
+          "name": "Annulation répétée pendant invocation et destruction rejointe",
+          "status": "passed"
+        },
+        {
+          "name": "Fermeture concurrente à une invocation active",
+          "status": "passed"
+        },
+        {
+          "name": "Second démarrage refusé sans détruire l’instance prête",
+          "status": "passed"
+        },
+        {
+          "name": "Réponse acceptée conservée pendant une fermeture concurrente",
+          "status": "passed"
+        },
+        {
+          "name": "Échec réel de suppression du canal puis reprise du nettoyage",
+          "status": "passed"
+        },
+        {
+          "name": "Canal réel : identifiants étrangers, doublons, tailles et connexions bornées",
+          "status": "passed"
+        }
+      ]
+    },
+    "validation-proof.json": {
+      "completed": true,
+      "checks": [
+        {
+          "name": "CommonJS export propre calculé",
+          "status": "passed"
+        },
+        {
+          "name": "CommonJS JS sans type déclaré",
+          "status": "passed"
+        },
+        {
+          "name": "ESM JS détecté par Node",
+          "status": "passed"
+        },
+        {
+          "name": "ESM avec await au chargement",
+          "status": "passed"
+        },
+        {
+          "name": "Export ESM default callable",
+          "status": "passed"
+        },
+        {
+          "name": "JS sous package type module sans extension",
+          "status": "passed"
+        },
+        {
+          "name": "Résolution ambiguë refusée",
+          "status": "passed"
+        },
+        {
+          "name": "Module absent refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Export absent refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Export hérité refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Export non callable refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Default synthétique CJS refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Objet default ESM sans export nommé refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Marqueur module.exports ESM non assimilé à CJS",
+          "status": "passed"
+        },
+        {
+          "name": "Résultat import then non namespace refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Vraie dépendance YAML packagée chargée",
+          "status": "passed"
+        },
+        {
+          "name": "Dépendance absente refusée",
+          "status": "passed"
+        },
+        {
+          "name": "Exception avec secret expurgée",
+          "status": "passed"
+        },
+        {
+          "name": "Exit zéro et faux résultat dans stdout refusés",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration réelle et confinement effectif cgroups/montages/réseau",
+          "status": "passed"
+        },
+        {
+          "name": "Traversée du chemin de handler refusée",
+          "status": "passed"
+        },
+        {
+          "name": "Retrait réel de la dépendance auparavant valide",
+          "status": "passed"
+        },
+        {
+          "name": "Module lié refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Répertoire à la place du module refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Configurations malformées et limites refusées avant création Docker",
+          "status": "passed"
+        },
+        {
+          "name": "Logs volumineux drainés et secret fractionné/tronqué expurgé",
+          "status": "passed"
+        },
+        {
+          "name": "Secret complet proche de la coupe expurgé avant troncature",
+          "status": "passed"
+        },
+        {
+          "name": "Secrets superposés et troncature conservent les offsets bruts",
+          "status": "passed"
+        },
+        {
+          "name": "Connexion partielle du descendant fermée avant nettoyage Docker",
+          "status": "passed"
+        },
+        {
+          "name": "Résultat privé malformé refusé sans traceback puis vrai résultat accepté",
+          "status": "passed"
+        },
+        {
+          "name": "Logs binaires convertis en UTF8 sans dépasser la borne de sortie",
+          "status": "passed"
+        },
+        {
+          "name": "Variables de bootstrap isolées du superviseur",
+          "status": "passed"
+        },
+        {
+          "name": "Échéance extérieure et nettoyage : loop.cjs.handler",
+          "status": "passed"
+        },
+        {
+          "name": "Échéance extérieure et nettoyage : await.mjs.handler",
+          "status": "passed"
+        },
+        {
+          "name": "UDS depuis le vrai contrôle, configuration unique, descendants détruits",
+          "status": "passed"
+        },
+        {
+          "name": "Contrôle sain et absence de ressources de validation survivantes",
+          "status": "passed"
+        }
+      ],
+      "failed": 0,
+      "skipped": 0,
+      "image_id": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+      "fixture_image_id": "sha256:9621685adf279148078ddb9f7481d9fa1e21d01ed3396d0b7cf93a5b8f28dc7c"
+    }
+  },
+  "images": {
+    "p2enjoy-runtime:dev": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+    "p2enjoy-runtime-qualification:dev": "sha256:9621685adf279148078ddb9f7481d9fa1e21d01ed3396d0b7cf93a5b8f28dc7c"
+  },
+  "sources": {
+    "control/app/instances.py": "a3b5dbf14d85245b87b4c75ac10326073f881ae6501c86da1a21589d96fcdac3",
+    "control/app/validator.py": "f088cc26c509ef6f1a7f7816787e81523cc473bbf392e4739c13917937b1ab85",
+    "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+    "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+    "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+    "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+    "qualification/package-lock.json": "a17bb562a678057a489381abef0f494cdf33c3a15d5233a2bbd2d3b22813015d",
+    "e2e/runtime-instances.py": "3d5c5f98b93a4cab1f292d7170eaf56a8a5f0545c52c81f80d678705a5c10022",
+    "e2e/instance-lifecycle.py": "1c83bfc36180e3e63722073137745a3522ea39642108b589778cfd087773aab2",
+    "e2e/runtime-validation.py": "9a270fd62167f59a2314b0d131c008b9a773196e3974c538db7a7dcba9762a2b",
+    "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+    "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+    "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+    "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+    "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+    "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+    "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+    "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+    "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+    "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+    "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+    "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+    "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+    "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+    "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+    "qualification/artifacts/esm/entry.js": "4bdff9d934a23519a6767c964046cbc384d2f90ecf5c8def5dec962c71bb1ee5",
+    "qualification/artifacts/esm/package.json": "89c47db7851f89caec72da4f215ebc21cf1e294aeef3b45d2583562d846ab035",
+    "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+    "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+    "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+    "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+    "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+    "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+    "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+    "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+    "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+    "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+    "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+    "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+    "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+    "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+    "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+    "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+    "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75"
+  },
+  "baked_sources": {
+    "p2enjoy-runtime:dev": {
+      "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+      "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+      "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+      "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+      "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+      "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632"
+    },
+    "p2enjoy-runtime-qualification:dev": {
+      "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+      "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+      "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+      "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+      "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+      "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+      "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+      "qualification/package-lock.json": "a17bb562a678057a489381abef0f494cdf33c3a15d5233a2bbd2d3b22813015d",
+      "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+      "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+      "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+      "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+      "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+      "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+      "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+      "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+      "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+      "qualification/artifacts/esm/entry.js": "4bdff9d934a23519a6767c964046cbc384d2f90ecf5c8def5dec962c71bb1ee5",
+      "qualification/artifacts/esm/package.json": "89c47db7851f89caec72da4f215ebc21cf1e294aeef3b45d2583562d846ab035",
+      "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+      "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+      "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+      "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+      "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+      "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+      "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+      "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+      "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+      "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+      "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+      "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+      "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+      "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+      "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+      "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+      "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75"
+    }
+  },
+  "services": {
+    "p2enjoy-serverless-dev-control-1": {
+      "healthy": true,
+      "image": "sha256:48026e714e2dbc03724abe876a01270a2c95f44e7a99a1ebb675b261b15effb8"
+    },
+    "p2enjoy-qualification-dev-qualification-1": {
+      "healthy": true,
+      "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2"
+    }
+  },
+  "configuration_matches_official_files": true,
+  "runtime_image_active": true,
+  "remaining_owned_resources": {
+    "validation": [],
+    "instance": [],
+    "instance-network": []
+  },
+  "known_secrets_checked": 4,
+  "secret_matches": 0,
+  "public": {
+    "target": "https://serverless-dev.lelabs.tech",
+    "timestamp": 1793931986.3850262,
+    "completed": true,
+    "checks": [
+      {
+        "name": "Découverte OIDC et clés asymétriques réelles",
+        "status": "passed",
+        "duration_seconds": 0.13
+      },
+      {
+        "name": "TLS, santé et en-têtes",
+        "status": "passed",
+        "duration_seconds": 0.068
+      },
+      {
+        "name": "Document et ressources de la console",
+        "status": "passed",
+        "duration_seconds": 0.339
+      },
+      {
+        "name": "Refus anonymes",
+        "status": "passed",
+        "duration_seconds": 0.309
+      },
+      {
+        "name": "Callbacks malformés",
+        "status": "passed",
+        "duration_seconds": 0.159
+      },
+      {
+        "name": "Flows réels et refus du fournisseur",
+        "status": "passed",
+        "duration_seconds": 0.475
+      },
+      {
+        "name": "Corps bornés et erreurs expurgées",
+        "status": "passed",
+        "duration_seconds": 0.36
+      },
+      {
+        "name": "Routes de révision et upload anonyme refusé avant lecture",
+        "status": "passed",
+        "duration_seconds": 0.351
+      }
+    ],
+    "skipped": 0
+  },
+  "limitations": [
+    "Admission, file, min/max/idle et générations à intégrer",
+    "Agent de stockage, montages FUSE fonctionnels et gestion des volumes à intégrer",
+    "Passerelle authentifiée, politiques réseau et parcours de console non qualifiés",
+    "Reprise après SIGKILL du contrôle à intégrer à la réconciliation",
+    "Plafond CPU configuré et consommation mesurée ; débit CPU sous contention non mesuré",
+    "Échec OS empêchant de tuer un processus relu, non provoqué sans substitution"
+  ],
+  "spark_notes": {
+    "applied_through_console": true,
+    "verified": {
+      "INSTALL.md": "5f8935efca12cc381ce24f90945cbae5fe7a405a20908614402ecb204235b123",
+      "CONTRIBUTORS.md": "9af93de2af52e786efa51b427974faf5486386470e91003d1311fe390ddad26f",
+      "README.md": "e99cb44ebbb23b52e3dbb2c6a2303e23b5517b11afb92050e80f054414e65ad6"
+    }
+  }
+}

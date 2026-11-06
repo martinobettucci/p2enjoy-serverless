@@ -10,6 +10,26 @@ La cible est le SPARK `infra-serverless`
 et le répertoire `/srv/p2enjoy-serverless`, administré par `spark-docker` pour
 Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
+## Instances chaudes qualifiées
+
+Le pilote opérateur et le superviseur sont construits sur le SPARK DEV, avec
+31 contrôles d’invocation, 11 de courses et 36 régressions du chargeur réussis.
+La [preuve](evidence/instances-dev-2026-11-06.json) conserve les empreintes des
+sources et images, les rapports et les limites d’intégration. Les commandes
+sont `bash runtime/dev.sh instances-test`, `lifecycle-test` et `test`, en série.
+
+L’empreinte `SERVERLESS_RUNTIME_IMAGE` est proposée puis appliquée par la console
+SPARK après qualification, et le contrôle est recréé pour la lire. Son image
+applicative reste celle du checkpoint de publication ; les futures révisions
+utiliseront le nouveau runtime validé, qui contient aussi le superviseur
+d’invocation. Aucun nouveau secret, route, port ou schéma SQLite.
+Le pilote d’instance n’est pas encore relié aux routes publiques. Il nécessite
+le véritable accès opérateur au démon ; aucun accès d’invocation public n’est
+créé par ce diagnostic. La réconciliation des instances après SIGKILL sera
+raccordée avec le moteur. Les trois notes de cellule décrivent ce checkpoint.
+Un retour à l’ancienne empreinte reste possible depuis la console, en tenant
+compte des révisions qui auront été publiées ensuite ; les images sont conservées.
+
 ## Ordre de réalisation
 
 La migration 003 et les routes de publication sont intégrées au contrôle DEV.
