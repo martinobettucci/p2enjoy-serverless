@@ -7,7 +7,10 @@ Le conteneur `serverless-api` sert la console et l’API ;
 `serverless-runtime-reference` exécute les fonctions du banc sur la boucle locale
 18080. Les noms Compose internes conservent l’identité des ressources et volumes.
 Le client OIDC reste `p2enjoy-serverless-dev`, avec les nouvelles URL de la
-[déclaration](OIDC_DEV.txt). Le détail de migration est dans
+[déclaration](OIDC_DEV.txt). Le [contrat OIDC courant](OIDC_DEV.llms.txt)
+est le bloc fourni par le responsable pour le client daté du 6 novembre 2026
+à 15:44:32 ; il confirme aussi l’origine web et l’accueil sur ce domaine.
+Le détail de migration est dans
 [DEPLOYMENT_NAMES](DEPLOYMENT_NAMES.md). Les constats datés ci-dessous décrivent
 les étapes antérieures, dont l’ancien domaine.
 

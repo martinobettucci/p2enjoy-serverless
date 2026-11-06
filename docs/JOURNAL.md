@@ -1025,3 +1025,16 @@ et interface, distingue moteur d’exécution et clients de test, et exige de
 justifier les qualificatifs d’environnement. Le nom est vérifié dès la création
 et à la revue. Cette modification documentaire ne change aucune ressource
 déployée ; sa validation porte sur le contenu, le lien et la propreté du diff.
+
+## Contrat OIDC actualisé — 2026-11-06
+
+Le responsable fournit le bloc d’intégration du client p2enjoy-serverless-dev,
+daté du 6 novembre à 15:44:32, avec retour, déconnexion, origine et accueil sur
+serverless.lelabs.tech. OIDC_DEV.llms.txt reprend ce bloc courant ; OIDC_DEV.txt
+reprend exactement sa déclaration, y compris le nom enregistré, ORIGINE et
+ACCUEIL. Le précédent contrat reste accessible dans l’historique Git.
+Les exigences PKCE S256, rôles verified/admin, clés asymétriques et durée de
+300 secondes sont identiques au contrat déjà reçu. Les URL correspondent à
+la connexion réelle vérifiée dans la preuve de migration SLS-011.
+Cette mise à jour documentaire n’ajoute aucune nouvelle preuve fonctionnelle ;
+la déclaration extraite du bloc est comparée au fichier d’import avant commit.

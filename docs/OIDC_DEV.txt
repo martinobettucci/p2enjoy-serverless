@@ -1,7 +1,9 @@
 CLIENTID=p2enjoy-serverless-dev
-NOM=P2Enjoy Serverless
+NOM=P2Enjoy Serverless DEV
 TYPE=serveur
 REDIRECT=https://serverless.lelabs.tech/auth/retour
 DECONNEXION=https://serverless.lelabs.tech/
+ORIGINE=https://serverless.lelabs.tech
+ACCUEIL=https://serverless.lelabs.tech
 ROLE=verified
 ROLE=admin

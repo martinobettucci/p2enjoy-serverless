@@ -1,10 +1,7 @@
 # llms.txt — intégration OIDC « P2Enjoy Serverless DEV »
 
-> Fournisseur d'identité du domaine, realm `lelabs`. Client créé le 2026-11-05 17:38:02.
-> Contrat transmis par le responsable le 2026-11-06. Aucun secret.
-> Archive du contrat initial : le domaine a ensuite été remplacé par
-> serverless.lelabs.tech. La déclaration courante est docs/OIDC_DEV.txt ;
-> les règles OIDC et l’identifiant client ci-dessous restent applicables.
+> Fournisseur d'identité du domaine, realm `lelabs`. Client créé le 2026-11-06 15:44:32.
+> Ce bloc ne contient aucun secret et peut être collé tel quel à votre agent.
 
 ## Points d'entrée
 
@@ -30,13 +27,13 @@ Elles sont comparées **caractère par caractère**. Une différence d'un seul
 caractère fait échouer la connexion sans message utile.
 
 redirect_uri :
-- https://serverless-dev.lelabs.tech/auth/retour
+- https://serverless.lelabs.tech/auth/retour
 
 post_logout_redirect_uri :
-- https://serverless-dev.lelabs.tech/
+- https://serverless.lelabs.tech/
 
 origines web :
-- https://serverless-dev.lelabs.tech
+- https://serverless.lelabs.tech
 
 ## Flux et portées
 
@@ -77,8 +74,10 @@ s'attribue.
 CLIENTID=p2enjoy-serverless-dev
 NOM=P2Enjoy Serverless DEV
 TYPE=serveur
-REDIRECT=https://serverless-dev.lelabs.tech/auth/retour
-DECONNEXION=https://serverless-dev.lelabs.tech/
+REDIRECT=https://serverless.lelabs.tech/auth/retour
+DECONNEXION=https://serverless.lelabs.tech/
+ORIGINE=https://serverless.lelabs.tech
+ACCUEIL=https://serverless.lelabs.tech
 ROLE=verified
 ROLE=admin
 ```

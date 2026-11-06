@@ -2,6 +2,9 @@
 
 ## [Non publié]
 
+- Contrat OIDC courant fourni par le responsable : URL sur serverless.lelabs.tech,
+  origine et accueil explicites ; déclaration synchronisée avec le client enregistré.
+
 - Règle de nommage obligatoire dans le contrat local : rôle réel et usage
   compréhensibles, vocabulaire cohérent et qualificatifs justifiés ; lien
   depuis le README pour les prochains développements et leurs revues.
