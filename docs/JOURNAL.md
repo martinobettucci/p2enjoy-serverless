@@ -1210,3 +1210,29 @@ ancien chemin avant quiesce/restart. La racine de données reste identique.
 Le pilote de preuve reçoit une échéance externe et restaure l'agent même si
 son dialogue échoue. Le défaut de transport est enregistré comme échec réel,
 jamais comme preuve réussie ; les campagnes seront rejouées après correction.
+
+### SLS-050 — premiers résultats du raccordement réel
+
+Les treize groupes de managed-storage passent dans la véritable image du
+contrôle : baux, binds FUSE, enfants neufs, recréations, quotas data/cache,
+partage/isolation, refus de mutation, courses, échec Docker, timeout,
+annulations pendant acquire/check, mort FUSE, arrêt/démarrage agent, volumes
+désactivés et diagnostic CLI avec EOF. Nettoyage confirmé, zéro échec/skip.
+Le contrôle conserve le même ID et le répertoire du socket le même inode
+pendant stop/start de l'agent. Le chemin officiel est maintenant
+/srv/p2enjoy-serverless/storage-channel ; l'installateur a migré le canal après
+quiesce du service actif, avec racine de données inchangée.
+
+Deux défauts du client de preuve ont été corrigés après échecs réels : Node
+rend EDQUOT sous code UNKNOWN/errno -122 (le handler reconnaît l'errno Linux,
+les assertions le contrôlent) ; le nom FUSE contient l'UUID sans tirets. Son
+garde-fou a refusé la coupure avant correction, et la procédure de secours a
+restauré l'agent, rejoint le worker et nettoyé tous ses consommateurs/baux.
+La copie par docker cp étant interdite sur rootfs readonly, le script de
+preuve est déposé dans le seul tmpfs /tmp via docker exec, puis supprimé.
+
+La revue a corrigé la garde avant le premier await d'invocation, le traitement
+prioritaire d'une panne du watcher et la fermeture sur annulation du check
+préalable. La course exacte résultat/panne simultanés reste vérifiée par la
+structure du code ; les pannes réelles sont déclenchées pendant un handler
+actif. Régressions et recoupement des preuves restent en cours à ce stade.

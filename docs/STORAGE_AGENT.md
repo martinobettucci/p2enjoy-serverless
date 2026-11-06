@@ -200,6 +200,10 @@ officielle de cellule ; l'installateur lit le chemin du processus actif pour
 vérifier puis fermer ses mutations avant de redémarrer au nouveau chemin.
 Changer simultanément de racine de données est refusé. Aucun déplacement de
 backing ni modification de la base n'est nécessaire pour migrer le canal.
+L'unité conserve la racine installée dans une annotation de garde, sans en
+faire une source de configuration. L'installateur la compare aux fichiers
+officiels même lorsque le service est arrêté. Une ancienne unité dépourvue de
+cette annotation doit être active pour établir sa racine avant la mise à jour.
 
 `ManagedInstance` compose le client et le pilote Docker existant. La
 configuration des quotas est une opération distincte, terminée avant son
