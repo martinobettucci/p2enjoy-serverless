@@ -864,3 +864,30 @@ Les ressources de qualification sont absentes. README, CONTRIBUTORS et INSTALL
 sont proposées, appliquées par la console, puis relues et comparées. Aucun
 nouveau secret, route ou migration. Le commit reste local : aucun remote Git.
 Le helper d’autorisation reste vivant, sans session administrateur enregistrée.
+
+
+## Agent local de volumes — 2026-11-06
+
+Le tour précédent constitue une progression vérifiée : checkpoint a3d3c77,
+78 contrôles de composants et huit groupes publics, image appliquée et notes
+relues. L’arbre est propre à la reprise. Le helper SSO 3998 est confirmé vivant ;
+la session administrateur manque encore. Le travail indépendant passe au
+raccordement du stockage. Le SPARK présente systemd 259, Python 3.14.4, aucun
+montage p2quota ni service d’agent existant ; le binaire qualifié est présent.
+
+Les explorations confirment que PUT de fonction et publication remplacent tous
+deux la configuration de stockage ; un rollback conserve ses quotas. L’agent
+ne pourra donc pas être raccordé uniquement au PUT. Un montage visible peut
+être déconnecté, et un signal TERM n’est pas une confirmation de démontage.
+Les baux sont conservés jusqu’à suppression Docker, y compris à la reprise.
+
+Le contrat STORAGE_AGENT tranche les opérations, la conservation après
+ désactivation, les archives, le cache explicite et les budgets par défaut.
+Le code installé est possédé par root ; seule l’unité de montage reçoit
+CAP_SYS_ADMIN. Elle partage le namespace de montage de la cellule, exigence
+vérifiée dans les sources systemd et à mesurer sur le service réel. Le choix
+KillMode=control-group traite un restart avec consommateurs comme une panne,
+avec drainage/recréation et aucune prétendue réparation de leurs binds.
+Les sondes FUSE sont des processus bornés plutôt que des threads abandonnés.
+Le plan de réalisation est registre/supervision, baux du pilote, puis routes
+publiques et admissions ; les preuves de chaque tranche restent distinctes.

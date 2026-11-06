@@ -158,12 +158,14 @@ FUSE et invocation authentifiée restent à intégrer et qualifier.
 
 ## SLS-050
 
-Statut : [ ] — stockage, crons et exploitation.
+Statut : [~] — agent de volumes en réalisation ; crons et exploitation à poursuivre.
 
 Volumes par ID, quotas et modes, archive/purge, crons UTC, logs bornés et
 métriques. E2E : concurrence, saturation disque, cache, déploiement/rollback,
 redémarrage, cron réellement déclenché et diagnostic autorisé/refusé.
-Références : PLATFORM stockage et exploitation.
+Références : PLATFORM stockage et exploitation, [STORAGE_AGENT](STORAGE_AGENT.md).
+Le registre durable, les baux et la supervision FUSE précèdent leur raccordement
+au pilote d’instances, puis aux mutations publiques et aux admissions.
 
 ## SLS-060
 
