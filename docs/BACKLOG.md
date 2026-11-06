@@ -142,13 +142,15 @@ restent à réaliser.
 
 ## SLS-040
 
-Statut : [ ] — passerelle et moteur Docker.
+Statut : [~] — contrat du moteur précisé ; instances et passerelle en réalisation.
 
 Invocation authentifiée, limites réelles, admission atomique, min/max/idle,
 deadline, descendants, drainage et réconciliation. CORS/IP ET/OU côté backend.
 E2E : succès/refus, saturation, mémoire/CPU/PIDs, délais, extinction/reprise,
 authentification métier, chaînes proxy, crash du contrôle et absence de rejeu.
-Références : PLATFORM origines et exécution.
+Références : PLATFORM origines et exécution, [EXECUTION](EXECUTION.md).
+La tranche initiale porte le superviseur chaud et le pilote Docker réutilisés
+par le moteur ; aucune invocation de plateforme n’est encore qualifiée.
 
 ## SLS-050
 

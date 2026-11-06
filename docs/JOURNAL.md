@@ -777,3 +777,30 @@ Les trois notes officielles sont de nouveau proposées, appliquées via la
 console et relues pour inclure deploy. Aucun nouveau paramètre, secret ou route,
 aucune recréation du contrôle pour cette tranche. Le commit reste local,
 aucun remote n’étant configuré.
+
+## Moteur d’invocation — 2026-11-06
+
+Le tour précédent a livré les checkpoints de publication et de CLI ; l’arbre
+est propre à b5717e1. Le helper d’autorisation 3998 est confirmé vivant, mais
+aucune session SSO n’est enregistrée. SLS-040 poursuit les travaux indépendants.
+Les explorations des contrats, du runtime et du stockage sont en lecture seule.
+
+Le contrat EXECUTION précise les frontières jusque-là ouvertes : un appel en
+file n’est pas admis ; l’échéance d’exécution commence sur une instance prête ;
+les anciennes générations restent réservées et protègent leur code. Les
+mutations de quota longues refusent pendant une invocation active, au lieu de
+prétendre avoir appliqué un nouveau plafond. Le port zéro est identifié comme
+défaut de la normalisation d’origine à corriger dans cette unité.
+
+Le superviseur chaud conserve un enfant neuf par invocation. Les descendants
+sont récoltés avant réutilisation et vérifiés depuis Docker ; un timeout recycle
+le conteneur entier. Le canal privé est authentifié après bootstrap et ne
+transmet sa clé ni à l’enfant ni à son environnement. Une horloge monotone
+commune garde contexte et échéance extérieure cohérents.
+
+L’intégration FUSE exige un agent hôte et des baux de consommation : le type
+du montage seul ne prouve pas sa santé, et un remontage ne répare pas un ancien
+bind Docker. Le contrôle ne suppose pas voir les nouveaux sous-montages dans
+son bind existant. Le pilote d’instance est construit d’abord, puis raccordé
+à cet agent et aux admissions réelles ; les preuves de composants ne clôturent
+pas la passerelle authentifiée.
