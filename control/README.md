@@ -1,5 +1,10 @@
 # Plan de contrôle
 
+Le conteneur `serverless-api` sert l’API et la console à
+`https://serverless.lelabs.tech`, sur le port interne 18090.
+Les [noms d’exploitation](../docs/DEPLOYMENT_NAMES.md) distinguent ce service
+du runtime de référence et des conteneurs d’exécution des fonctions.
+
 Implémentation en cours de SLS-020 et SLS-030. Contrats : [API](../docs/CONTROL.md),
 [schéma](../docs/SCHEMA.md), [SSO](../docs/sso.md), [publication](../docs/DEPLOYMENT.md).
 

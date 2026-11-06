@@ -8,7 +8,7 @@ import {promisify} from 'node:util';
 import {randomUUID} from 'node:crypto';
 import {request} from 'playwright';
 
-const base = 'https://serverless-dev.lelabs.tech';
+const base = 'https://serverless.lelabs.tech';
 const output = new URL('../.local/e2e/',import.meta.url);
 await mkdir(output,{recursive:true,mode:0o700});
 await writeFile(new URL('control-admin.json',output),JSON.stringify({completed:false,error:'Campagne non terminée'})+'\n');
@@ -200,7 +200,7 @@ try {
   });
   await check('Redémarrage Docker : session, CSRF, objets et secrets persistants',async () => {
     await promisify(execFile)('ssh',['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','spark-docker@10.77.0.24',
-      'docker restart p2enjoy-serverless-dev-control-1'],{timeout:45000});
+      'docker restart serverless-api'],{timeout:45000});
     let ready=false;
     for (let attempt=0;attempt<60;attempt++) {try {const r=await caller.get('/healthz');if (r.ok()) {ready=true;break;}} catch {}
       await new Promise(resolve => setTimeout(resolve,500));}

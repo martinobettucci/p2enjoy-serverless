@@ -1,7 +1,7 @@
 # Utiliser la console DEV
 
 La console initiale est déployée sur
-[serverless-dev.lelabs.tech](https://serverless-dev.lelabs.tech).
+[serverless.lelabs.tech](https://serverless.lelabs.tech).
 Sa qualification administrateur est en cours ; l'état des preuves est dans
 [BACKLOG.md](BACKLOG.md). Les paramètres d'exécution sont actuellement
 enregistrés : leur application aux fonctions appartient au moteur en développement.

@@ -1,5 +1,24 @@
 # Déploiement DEV de la plateforme
 
+## Noms et entrée courants
+
+L’entrée est `https://serverless.lelabs.tech` vers le port HTTP 18090 du SPARK.
+Le conteneur `serverless-api` sert la console et l’API ;
+`serverless-runtime-reference` exécute les fonctions du banc sur la boucle locale
+18080. Les noms Compose internes conservent l’identité des ressources et volumes.
+Le client OIDC reste `p2enjoy-serverless-dev`, avec les nouvelles URL de la
+[déclaration](OIDC_DEV.txt). Le détail de migration est dans
+[DEPLOYMENT_NAMES](DEPLOYMENT_NAMES.md). Les constats datés ci-dessous décrivent
+les étapes antérieures, dont l’ancien domaine.
+
+La [preuve du 6 novembre](evidence/deployment-names-dev-2026-11-06.json) recoupe
+les deux services healthy, la conservation avant/après recréation, dix-sept
+sources déployées et les campagnes publiques sur cette adresse. La route
+courante a été corrigée vers 18090 par le responsable ; SERVERLESS_PUBLIC_URL
+a été appliquée par la proposition officielle. Les trois notes ont été
+appliquées et relues. La connexion personnelle sur le nouveau domaine a
+réussi : session authentifiée et accès administrateur aux namespaces HTTP 200.
+
 ## Baseline
 
 Le banc de qualification est déployé selon `QUALIFICATION_DEV.md`. Le composant
@@ -90,7 +109,7 @@ au contrôle avec les API de révision et leur migration. Les répertoires
    SQLite versionnées, puis déployer l'application témoin via l'adaptateur.
 3. Exécuter les campagnes ciblées puis complète et mettre à jour les notes.
 
-## Intégration appliquée
+## Intégration initiale des 5 et 6 novembre
 
 Client OIDC créé : `p2enjoy-serverless-dev`, application serveur confidentielle,
 PKCE S256, callback `/auth/retour`, déconnexion `/`, rôles `verified` et `admin`.

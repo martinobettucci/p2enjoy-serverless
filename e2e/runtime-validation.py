@@ -54,7 +54,7 @@ def validate(handler,error=None,config=None):
 try:
     image=run(['docker','image','inspect','--format','{{.Id}}','p2enjoy-runtime:dev']).stdout.strip()
     fixture_image=run(['docker','image','inspect','--format','{{.Id}}','p2enjoy-runtime-qualification:dev']).stdout.strip()
-    cell=json.loads(run(['docker','exec','p2enjoy-serverless-dev-control-1','python','-c',
+    cell=json.loads(run(['docker','exec','serverless-api','python','-c',
         'import os,json; print(json.dumps({k:os.environ[k] for k in ("QUALIFICATION_PUBLIC_LABEL","QUALIFICATION_SYNTHETIC_SECRET")}))']).stdout)
     assert all(cell.values()),'Configuration réelle absente'
     configuration={'environment':{'QUALIFICATION_PUBLIC_LABEL':cell['QUALIFICATION_PUBLIC_LABEL']},
@@ -181,7 +181,7 @@ finally:
  for s in held:s.close()
 print(json.dumps(results))
 '''%(inside,inside,inside,inside)
-    states=json.loads(run(['docker','exec','p2enjoy-serverless-dev-control-1','python','-c',program]).stdout)
+    states=json.loads(run(['docker','exec','serverless-api','python','-c',program]).stdout)
     assert states==[202,409],states
     stdout,stderr=process.communicate(timeout=35)
     assert not stderr and process.returncode==1
@@ -193,7 +193,7 @@ print(json.dumps(results))
         assert not stat.exists() or stat.read_text().split()[21]!=birth,'Processus de validation survivant'
     passed('UDS depuis le vrai contrôle, configuration unique, descendants détruits')
     assert not list(work.glob('v-*')),'Répertoire de protocole survivant'
-    health=run(['docker','inspect','--format','{{.State.Health.Status}}','p2enjoy-serverless-dev-control-1']).stdout.strip()
+    health=run(['docker','inspect','--format','{{.State.Health.Status}}','serverless-api']).stdout.strip()
     assert health=='healthy'
     passed('Contrôle sain et absence de ressources de validation survivantes')
     completed=True

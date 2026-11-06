@@ -3,6 +3,11 @@
 Service synthétique destiné à éprouver les développements de P2Enjoy Serverless.
 Spécification : `../docs/DAT.md#qualification`, unité QLF-001.
 
+Le conteneur permanent s’appelle `serverless-runtime-reference` : c’est
+l’exécuteur Node des handlers de ce répertoire. Les commandes de test lancent
+des clients éphémères séparés qui l’appellent par HTTP. Le nom de service
+Compose `qualification` reste son adresse réseau interne.
+
 L'exécuteur de référence sert uniquement au développement. Il ne remplace pas
 la plateforme et ne prouve ni SSO, ACL CRUD, quotas par fonction ni autoscaling.
 Son accès HTTP est limité à `127.0.0.1:18080`. Ne pas l'exposer publiquement.

@@ -3,7 +3,7 @@
 import {mkdir,writeFile,chmod} from 'node:fs/promises';
 import {chromium} from 'playwright';
 
-const base = 'https://serverless-dev.lelabs.tech';
+const base = 'https://serverless.lelabs.tech';
 const output = new URL('../.local/e2e/admin-session.json',import.meta.url);
 await mkdir(new URL('../.local/e2e/',import.meta.url),{recursive:true,mode:0o700});
 const browser = await chromium.launch({headless:false});
@@ -24,7 +24,7 @@ try {
   console.log('AUTHORIZATION_WINDOW_READY — cliquer sur Se connecter avec le SSO dans Chromium.');
   await authenticated;
   const state = await context.storageState();
-  state.cookies = state.cookies.filter(cookie => cookie.domain==='serverless-dev.lelabs.tech');
+  state.cookies = state.cookies.filter(cookie => cookie.domain==='serverless.lelabs.tech');
   state.origins = [];
   await writeFile(output,JSON.stringify(state),{mode:0o600});
   await chmod(output,0o600);

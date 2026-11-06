@@ -121,7 +121,7 @@ def started(client,marker,timeout=5):
 try:
     image=run(['docker','image','inspect','--format','{{.Id}}','p2enjoy-runtime:dev']).stdout.strip()
     fixture_image=run(['docker','image','inspect','--format','{{.Id}}','p2enjoy-runtime-qualification:dev']).stdout.strip()
-    cell=json.loads(run(['docker','exec','p2enjoy-serverless-dev-control-1','python','-c',
+    cell=json.loads(run(['docker','exec','serverless-api','python','-c',
         'import os,json;print(json.dumps({k:os.environ[k] for k in ("QUALIFICATION_PUBLIC_LABEL","QUALIFICATION_SYNTHETIC_SECRET","SERVERLESS_PUBLIC_URL")}))']).stdout)
     assert all(cell.values()),'Configuration officielle manquante'
     configuration={'environment':{'QUALIFICATION_PUBLIC_LABEL':cell['QUALIFICATION_PUBLIC_LABEL'],'QUALIFICATION_TARGET_URL':cell['SERVERLESS_PUBLIC_URL']},

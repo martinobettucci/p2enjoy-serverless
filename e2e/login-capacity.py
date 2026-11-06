@@ -39,7 +39,7 @@ try:
     assert refused and 1<=len(pending)<=256
     # Observation only: prove the aggregate includes existing genuine flows.
     code='import sqlite3; db=sqlite3.connect("file:/state/control.sqlite3?mode=ro",uri=True); print(db.execute("SELECT count(*) FROM login_flows").fetchone()[0])'
-    result=subprocess.run(['docker','exec','p2enjoy-serverless-dev-control-1','python','-B','-c',code],check=True,capture_output=True,text=True,timeout=10)
+    result=subprocess.run(['docker','exec','serverless-api','python','-B','-c',code],check=True,capture_output=True,text=True,timeout=10)
     assert int(result.stdout)==256
     checks.append({'name':'256 flows réels : le suivant est refusé globalement','status':'passed'})
     cancel(*pending[0])

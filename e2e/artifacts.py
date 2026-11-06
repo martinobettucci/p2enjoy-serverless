@@ -324,7 +324,7 @@ try:
         assert validator.returncode==0 and not validator.stderr and validated['valid'] and validated['container_removed'],validated
         erase(destination);passed('Packaging → extraction → chargement Node réel : '+name)
     assert not run(['docker','ps','-aq','--filter','label=tech.p2enjoy.serverless.installation='+installation]).stdout.strip()
-    for container in ('p2enjoy-serverless-dev-control-1','p2enjoy-qualification-dev-qualification-1'):
+    for container in ('serverless-api','serverless-runtime-reference'):
         assert run(['docker','inspect','--format','{{.State.Health.Status}}',container]).stdout.strip()=='healthy'
     passed('Aucun conteneur de preuve restant et services DEV sains')
     completed=True

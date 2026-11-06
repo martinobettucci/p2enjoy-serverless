@@ -11,7 +11,7 @@ import {request} from 'playwright';
 
 const root=fileURLToPath(new URL('../',import.meta.url)),output=path.join(root,'.local/e2e');
 await mkdir(output,{recursive:true,mode:0o700});
-const report=path.join(output,'adapter-deploy.json'),base='https://serverless-dev.lelabs.tech';
+const report=path.join(output,'adapter-deploy.json'),base='https://serverless.lelabs.tech';
 await writeFile(report,JSON.stringify({completed:false,error:'Campagne non terminée'})+'\n');
 let storageState;
 try {storageState=JSON.parse(await readFile(path.join(output,'admin-session.json'),'utf8'));}

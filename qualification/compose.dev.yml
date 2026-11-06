@@ -1,7 +1,8 @@
-# @spec docs/BACKLOG.md#qlf-001 | docs/DAT.md#qualification
+# @spec docs/BACKLOG.md#qlf-001 | docs/BACKLOG.md#sls-011 | docs/DEPLOYMENT_NAMES.md
 name: p2enjoy-qualification-dev
 services:
   qualification:
+    container_name: serverless-runtime-reference
     profiles: [dev]
     build: .
     image: p2enjoy-qualification:dev

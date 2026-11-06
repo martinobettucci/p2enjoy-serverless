@@ -983,3 +983,35 @@ Le contrat DEPLOYMENT_NAMES précède les changements de code et de déploiement
 La session administrateur créée par la connexion réelle du responsable est
 présente sur l’ancien domaine et ses API répondent 200. Elle n’est pas exportée
 vers le nouveau domaine. La qualification authentifiée globale reste ouverte.
+
+Le responsable corrige la route vers 18090 et retire l’ancienne entrée.
+La relecture ne trouve que serverless.lelabs.tech 18090 tls. La proposition
+SERVERLESS_PUBLIC_URL est appliquée par la console, sans secret supplémentaire.
+Les deux Compose reçoivent container_name et les clients opérateur leurs
+nouvelles cibles. La revue indépendante ne relève aucun blocage statique.
+
+Avant la recréation, une sauvegarde SQLite native intègre est créée en 0600,
+puis les observations HTTP du compteur, du cache et du travail partiel sont
+conservées dans le volume du client. Après recréation, les deux conteneurs
+reviennent healthy ; images, montages, labels Compose, base, identité et objets
+sont identiques. La reprise HTTP du calcul aboutit et nettoie ses ressources.
+Le premier passage public a commencé avant la fin de ce client : écart à la
+consigne de série, ce résultat public est écarté puis rejoué seul. Le rapport
+retenu est celui du second passage, terminé sans autre campagne en cours.
+
+38 tests HTTP du runtime, neuf contrôles Chromium, huit groupes HTTPS/OIDC,
+quatre chemins réseau et quatorze contrôles de CLI réussissent sans skip.
+L’image du seul client E2E de l’adaptateur est reconstruite pour embarquer le
+nouveau domaine. Les images applicatives sont conservées. Les captures de
+l’accueil et de l’entrée SSO sont relues ; elles montrent la console et le
+formulaire réel du fournisseur. Dix-sept sources locales/distantes concordent,
+le TLS est vérifié normalement et neuf paramètres actifs correspondent aux
+deux fichiers officiels, comparaison des secrets uniquement en mémoire.
+
+README, CONTRIBUTORS et INSTALL sont proposés, appliqués par la console puis
+relus identiques. La fenêtre normale ouverte sur le nouveau domaine reçoit
+la connexion personnelle du responsable. Le helper enregistre uniquement son
+cookie de plateforme ; une nouvelle requête confirme session authenticated
+et namespaces HTTP 200 le 6 novembre à 16:00 UTC. La migration SLS-011 est
+qualifiée. Les campagnes administrateur globales restent ouvertes et disposent
+maintenant de cette session réelle. Aucun remote Git n’est configuré.

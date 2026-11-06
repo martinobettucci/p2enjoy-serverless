@@ -2,6 +2,9 @@
 
 > Fournisseur d'identité du domaine, realm `lelabs`. Client créé le 2026-11-05 17:38:02.
 > Contrat transmis par le responsable le 2026-11-06. Aucun secret.
+> Archive du contrat initial : le domaine a ensuite été remplacé par
+> serverless.lelabs.tech. La déclaration courante est docs/OIDC_DEV.txt ;
+> les règles OIDC et l’identifiant client ci-dessous restent applicables.
 
 ## Points d'entrée
 

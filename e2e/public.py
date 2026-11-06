@@ -12,7 +12,7 @@ import urllib.parse
 import urllib.request
 import uuid
 
-BASE='https://serverless-dev.lelabs.tech'
+BASE='https://serverless.lelabs.tech'
 ISSUER='https://oauth.lelabs.tech/realms/lelabs'
 discovered=None
 results=[]
@@ -128,7 +128,7 @@ def bad_callbacks():
         status(client.call('/auth/retour?state='+state,headers={'Cookie':'__Host-p2-flow=x'}),401)
     response=status(client.call('/auth/retour?state=%C3%A9',headers={'Accept':'text/html'}),303)
     parsed=urllib.parse.urlsplit(response[1]['Location'])
-    assert parsed.netloc=='serverless-dev.lelabs.tech' and parsed.path=='/'
+    assert parsed.netloc=='serverless.lelabs.tech' and parsed.path=='/'
     assert 'auth-error=' in parsed.fragment and not parsed.query
 
 

@@ -16,7 +16,7 @@ REPORT=ROOT/'.local/e2e/adapter-deploy-public.json'
 REPORT.parent.mkdir(parents=True,exist_ok=True)
 REPORT.write_text('{"completed":false,"error":"Campagne non terminée"}\n')
 checks=[];completed=False
-target='https://serverless-dev.lelabs.tech'
+target='https://serverless.lelabs.tech'
 credential='p2-e2e-invalid-'+uuid4().hex
 service=str(uuid4())
 
@@ -69,7 +69,7 @@ try:
 
         for title,endpoint in [
             ('HTTP',target.replace('https:','http:')),
-            ('Identifiants URL','https://private-user:private-password@serverless-dev.lelabs.tech'),
+            ('Identifiants URL','https://private-user:private-password@serverless.lelabs.tech'),
             ('Chemin URL',target+'/api'),('Query URL',target+'?x=1'),('Fragment URL',target+'#fragment'),
             ('Port invalide',target+':65536'),('Port zéro',target+':0'),('Caractère de contrôle',target+'\n')]:
             def invalid_origin(endpoint=endpoint):

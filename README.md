@@ -76,7 +76,11 @@ dépôts temporaires et un remote Git local, sans réseau ni mock.
 
 ## Exécution et validation
 
-La console DEV est accessible sur [serverless-dev.lelabs.tech](https://serverless-dev.lelabs.tech).
+La console DEV est accessible sur [serverless.lelabs.tech](https://serverless.lelabs.tech).
+Le conteneur `serverless-api` sert cette console et l’API. Le conteneur
+`serverless-runtime-reference` exécute les handlers de qualification sur la
+boucle locale ; ses clients de test sont éphémères. Les
+[noms d’exploitation](docs/DEPLOYMENT_NAMES.md) précisent leurs rôles.
 Son accueil et l'entrée vers le vrai SSO sont déployés ; la qualification
 administrateur des objets, droits et cycles de session reste en cours.
 Les commandes du contrôle figurent dans [control/README.md](control/README.md).

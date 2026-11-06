@@ -42,10 +42,11 @@ ajoute ses fichiers de preuve à l'image réelle de la CLI et ne lance aucun
 serveur de substitution. Le rapport est conservé dans `adapter/reports/`.
 
 `deploy-public-test` exerce les erreurs locales et un véritable refus 401
-sur https://serverless-dev.lelabs.tech, avec validation TLS normale. Un jeton
+sur https://serverless.lelabs.tech, avec validation TLS normale. Un jeton
 volontairement invalide n’est jamais accepté comme identité. Le rapport est
 `adapter/reports/adapter-deploy-public.json`. Cette campagne ne prouve aucune
 publication. Depuis le dépôt du poste, `node e2e/adapter-deploy.mjs` utilise
 la session SSO réelle pour créer ses jetons, puis exécute la CLI et les
 validations Docker : pagination, mises à jour, résultats partiels et reprise
-de brouillon. Son prérequis de session est actuellement en échec.
+de brouillon. Une session SSO réelle est disponible sur le nouveau domaine ;
+cette campagne authentifiée reste à exécuter.

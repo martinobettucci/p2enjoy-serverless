@@ -83,14 +83,22 @@ manquant est nommé ; aucun fournisseur d'identité de remplacement.
 
 ## SLS-011
 
-Statut : [~] — renommage d’exploitation et bascule du domaine demandés.
+Statut : [x] — noms et domaine appliqués, persistance et connexion SSO réelle
+sur la nouvelle adresse vérifiées.
 
 Rendre les noms Docker explicites par rôle et adopter `serverless.lelabs.tech`
 dans le SPARK de développement. Contrat : [noms d’exploitation](DEPLOYMENT_NAMES.md).
 Conserver les données et les identifiants Compose, qualifier la recréation
 réelle, la route TLS 18090, la configuration officielle et le parcours SSO.
 Le nouveau callback est accepté par le vrai fournisseur le 6 novembre ; la
-route nouvellement créée vise encore 8080 au constat initial.
+route a été corrigée vers 18090 par le responsable. Les deux conteneurs sont
+healthy sous leurs nouveaux noms, avec les mêmes images, volumes, objets et
+identité de base. Compteur, cache et checkpoint sont retrouvés par HTTP ; le
+calcul reprend jusqu’au résultat complet. 38 tests HTTP, neuf contrôles
+navigateur, huit groupes publics, quatre chemins réseau et quatorze contrôles
+CLI passent. La connexion personnelle sur le nouveau domaine produit une
+session authentifiée et l’API administrateur des namespaces répond 200.
+[Preuve de migration](evidence/deployment-names-dev-2026-11-06.json).
 
 ## SLS-020
 
@@ -105,7 +113,8 @@ La tranche de console associée expose ces objets et le parcours SSO dès cette
 unité ; SLS-060 complète ses facettes d'exécution et la campagne transversale.
 Les parcours publics, l'accueil navigateur, la provenance réseau et les
 limites de connexion sont éprouvés. Les scénarios administrateur préparés
-attendent une connexion au vrai SSO ; ils ne sont pas déclarés réussis.
+disposent désormais d’une session réelle sur le nouveau domaine ; leurs
+campagnes complètes restent à exécuter et ne sont pas déclarées réussies.
 Le [checkpoint du 6 novembre](evidence/control-dev-checkpoint-2026-11-06.json)
 regroupe six groupes HTTP, neuf contrôles navigateur, quatre chemins réseau,
 six scénarios de limite par client, deux de capacité globale et dix-sept

@@ -1,7 +1,8 @@
-# @spec docs/BACKLOG.md#sls-020 | docs/CONTROL.md | docs/PLATFORM_DEV.md
+# @spec docs/BACKLOG.md#sls-020 | docs/BACKLOG.md#sls-011 | docs/DEPLOYMENT_NAMES.md
 name: p2enjoy-serverless-dev
 services:
   control:
+    container_name: serverless-api
     image: p2enjoy-control:dev
     build:
       context: ..

@@ -1,0 +1,489 @@
+{
+  "unit": "SLS-011",
+  "timestamp": "2026-11-06T15:58:53.538087+00:00",
+  "spec_commit": "b3c6a4b",
+  "target": "SPARK DEV infra-serverless",
+  "before": {
+    "containers": [
+      {
+        "name": "/p2enjoy-serverless-dev-control-1",
+        "image": "sha256:48026e714e2dbc03724abe876a01270a2c95f44e7a99a1ebb675b261b15effb8",
+        "mounts": [
+          {
+            "Type": "bind",
+            "Source": "/run/user/1001/docker.sock",
+            "Destination": "/docker.sock",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/srv/p2enjoy-serverless/state",
+            "Destination": "/state",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": "rprivate"
+          }
+        ],
+        "health": "healthy",
+        "labels": {
+          "com.docker.compose.project": "p2enjoy-serverless-dev",
+          "com.docker.compose.service": "control"
+        },
+        "ports": {}
+      },
+      {
+        "name": "/p2enjoy-qualification-dev-qualification-1",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "mounts": [
+          {
+            "Type": "volume",
+            "Name": "p2enjoy-qualification-dev_qualification-cache",
+            "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-cache/_data",
+            "Destination": "/app/.state/cache",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          },
+          {
+            "Type": "volume",
+            "Name": "p2enjoy-qualification-dev_qualification-data",
+            "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-data/_data",
+            "Destination": "/app/.state/data",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          }
+        ],
+        "health": "healthy",
+        "labels": {
+          "com.docker.compose.project": "p2enjoy-qualification-dev",
+          "com.docker.compose.service": "qualification"
+        },
+        "ports": {
+          "8080/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18080"
+            }
+          ]
+        }
+      }
+    ],
+    "installation": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+    "integrity": "ok",
+    "migrations": [
+      "001_control.sql",
+      "002_login_limits.sql",
+      "003_deployments.sql"
+    ],
+    "objects": {
+      "namespaces": 0,
+      "services": 0,
+      "functions": 0,
+      "revisions": 0
+    },
+    "backup": "/srv/p2enjoy-serverless/state/backups/before-names-20261106T154823Z.sqlite3",
+    "routes": [
+      "serverless.lelabs.tech 18090 tls"
+    ],
+    "time": "2026-11-06T15:48:23.202378+00:00"
+  },
+  "after": {
+    "containers": [
+      {
+        "name": "/serverless-api",
+        "image": "sha256:48026e714e2dbc03724abe876a01270a2c95f44e7a99a1ebb675b261b15effb8",
+        "mounts": [
+          {
+            "Type": "bind",
+            "Source": "/run/user/1001/docker.sock",
+            "Destination": "/docker.sock",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/srv/p2enjoy-serverless/state",
+            "Destination": "/state",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": "rprivate"
+          }
+        ],
+        "health": "healthy",
+        "labels": {
+          "com.docker.compose.project": "p2enjoy-serverless-dev",
+          "com.docker.compose.service": "control"
+        },
+        "ports": {}
+      },
+      {
+        "name": "/serverless-runtime-reference",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "mounts": [
+          {
+            "Type": "volume",
+            "Name": "p2enjoy-qualification-dev_qualification-cache",
+            "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-cache/_data",
+            "Destination": "/app/.state/cache",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          },
+          {
+            "Type": "volume",
+            "Name": "p2enjoy-qualification-dev_qualification-data",
+            "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-data/_data",
+            "Destination": "/app/.state/data",
+            "Driver": "local",
+            "Mode": "rw",
+            "RW": true,
+            "Propagation": ""
+          }
+        ],
+        "health": "healthy",
+        "labels": {
+          "com.docker.compose.project": "p2enjoy-qualification-dev",
+          "com.docker.compose.service": "qualification"
+        },
+        "ports": {
+          "8080/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "18080"
+            }
+          ]
+        }
+      }
+    ],
+    "installation": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+    "integrity": "ok",
+    "migrations": [
+      "001_control.sql",
+      "002_login_limits.sql",
+      "003_deployments.sql"
+    ],
+    "objects": {
+      "namespaces": 0,
+      "services": 0,
+      "functions": 0,
+      "revisions": 0
+    },
+    "routes": [
+      "serverless.lelabs.tech 18090 tls"
+    ],
+    "time": "2026-11-06T15:50:45.445185+00:00"
+  },
+  "deployed": {
+    "sources": {
+      "control/compose.spark.yml": "dc7546685ed6a10cdfaebcc46474e033df1f171407044fed62d00a6fcc0a2aac",
+      "qualification/compose.dev.yml": "a79755f9c97ccf5a629d1707b28b2cd001263dc5a3693023c14cc82879b0e9c9",
+      "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+      "e2e/adapter-deploy.mjs": "4dff1956ed16209d2cfae6124dbda18b22da78d3fc1b5506b54cc60019c3fe46",
+      "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+      "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+      "e2e/control-admin.mjs": "8e020e14d0b96c10c14b8513125dc6a639e87bf0210b2d1a58745e4789e02793",
+      "e2e/control-operations.py": "f569e88a898267c76d4794ccdae2e8c9639de1e55a2953481041d5ca35885712",
+      "e2e/control-ui.mjs": "b2bdfaaa52e7571020b67af9cd3ce69a07752bb84d79263314965d938a74b477",
+      "e2e/deployments.mjs": "54a6323709ae06640aec3ef0bbf0cf81e61588c4832b3be12b5c5d29050f3c56",
+      "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+      "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+      "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+      "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+      "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+      "e2e/runtime-instances.py": "c9652acb58dd42725d9a45d852c7db7a239f40ac640399a7e1868177bae129bc",
+      "e2e/runtime-validation.py": "69ff066e77cb8df5b954731ed1b01cd8dbf46ff2bb023642af53ed66f7894420"
+    },
+    "configuration": {
+      "matched_official_files": true,
+      "keys": [
+        "SERVERLESS_PUBLIC_URL",
+        "OIDC_ISSUER",
+        "OIDC_CLIENT_ID",
+        "OIDC_CLIENT_SECRET",
+        "SERVERLESS_MASTER_KEY",
+        "SERVERLESS_STATE_HOST_PATH",
+        "SERVERLESS_DOCKER_SOCKET_HOST",
+        "SERVERLESS_RUNTIME_IMAGE",
+        "SERVERLESS_TRUSTED_PROXIES"
+      ],
+      "public_url": "https://serverless.lelabs.tech",
+      "client_id": "p2enjoy-serverless-dev",
+      "secret_values_excluded": true
+    },
+    "adapter_image": "sha256:fc4a29dedf10226e34bdce397e3a4ce668093ab58e8c5d11fe992c7b6efb4f9b",
+    "running_containers": [
+      "serverless-runtime-reference",
+      "serverless-api"
+    ],
+    "routes": [
+      "serverless.lelabs.tech 18090 tls"
+    ]
+  },
+  "reports": {
+    "public": {
+      "target": "https://serverless.lelabs.tech",
+      "timestamp": 1793980646.929319,
+      "completed": true,
+      "checks": [
+        {
+          "name": "Découverte OIDC et clés asymétriques réelles",
+          "status": "passed",
+          "duration_seconds": 0.101
+        },
+        {
+          "name": "TLS, santé et en-têtes",
+          "status": "passed",
+          "duration_seconds": 0.055
+        },
+        {
+          "name": "Document et ressources de la console",
+          "status": "passed",
+          "duration_seconds": 0.273
+        },
+        {
+          "name": "Refus anonymes",
+          "status": "passed",
+          "duration_seconds": 0.293
+        },
+        {
+          "name": "Callbacks malformés",
+          "status": "passed",
+          "duration_seconds": 0.164
+        },
+        {
+          "name": "Flows réels et refus du fournisseur",
+          "status": "passed",
+          "duration_seconds": 0.535
+        },
+        {
+          "name": "Corps bornés et erreurs expurgées",
+          "status": "passed",
+          "duration_seconds": 0.235
+        },
+        {
+          "name": "Routes de révision et upload anonyme refusé avant lecture",
+          "status": "passed",
+          "duration_seconds": 0.315
+        }
+      ],
+      "skipped": 0
+    },
+    "login-ui": {
+      "target": "https://serverless.lelabs.tech",
+      "completed": true,
+      "checks": [
+        "Accueil anonyme et navigation clavier",
+        "Accueil desktop sans débordement, cible 40 px",
+        "Accueil tablette sans débordement, cible 40 px",
+        "Accueil mobile sans débordement, cible 40 px",
+        "Contraste de connexion mesuré : 9.03:1",
+        "Refus de callback visible depuis le vrai serveur",
+        "Entrée normale vers le vrai SSO en HTTPS",
+        "Refus 429 visible sur mobile, Retry-After conservé et aucun flow créé",
+        "Aucune erreur JavaScript de page"
+      ],
+      "failures": [],
+      "skipped": 0
+    },
+    "proxy": {
+      "completed": true,
+      "expected_proxy": "10.77.0.1",
+      "measurements": [
+        {
+          "source": "public",
+          "event": "request.refused",
+          "status": 401,
+          "route": "/api/namespaces",
+          "request_id": "b09e3aef-9652-4b3f-8404-e8f37a2bf1a3",
+          "transport_peer": "10.77.0.1",
+          "untrusted_forwarded_for": [
+            "82.233.120.128"
+          ]
+        },
+        {
+          "source": "public-forged",
+          "event": "request.refused",
+          "status": 401,
+          "route": "/api/namespaces",
+          "request_id": "64659f0c-3550-4d88-915f-24984437ca18",
+          "transport_peer": "10.77.0.1",
+          "untrusted_forwarded_for": [
+            "82.233.120.128"
+          ]
+        },
+        {
+          "source": "direct-loopback",
+          "event": "request.refused",
+          "status": 401,
+          "route": "/api/namespaces",
+          "request_id": "5d00bbb2-0419-4b75-a37a-79cbe8c39110",
+          "transport_peer": "127.0.0.1",
+          "untrusted_forwarded_for": [
+            "192.0.2.10"
+          ]
+        },
+        {
+          "source": "direct-container",
+          "event": "request.refused",
+          "status": 401,
+          "route": "/api/namespaces",
+          "request_id": "66ba612e-85c7-476f-9938-d29f97895003",
+          "transport_peer": "10.77.0.24",
+          "untrusted_forwarded_for": [
+            "192.0.2.10"
+          ]
+        }
+      ],
+      "passed": 4,
+      "skipped": 0
+    },
+    "adapter-public": {
+      "completed": true,
+      "target": "https://serverless.lelabs.tech",
+      "scope": "CLI deploy : prérequis, packaging, TLS et refus réel 401 ; aucune publication authentifiée",
+      "checks": [
+        {
+          "name": "CLI réelle : service obligatoire pour deploy uniquement",
+          "status": "passed",
+          "duration_seconds": 0.479
+        },
+        {
+          "name": "UUID de service invalide refusé avant mutation",
+          "status": "passed",
+          "duration_seconds": 0.635
+        },
+        {
+          "name": "HTTP refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.153
+        },
+        {
+          "name": "Identifiants URL refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.15
+        },
+        {
+          "name": "Chemin URL refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.154
+        },
+        {
+          "name": "Query URL refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.156
+        },
+        {
+          "name": "Fragment URL refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.163
+        },
+        {
+          "name": "Port invalide refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.174
+        },
+        {
+          "name": "Port zéro refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.15
+        },
+        {
+          "name": "Caractère de contrôle refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.145
+        },
+        {
+          "name": "Jeton absent ou impropre à un en-tête refusé localement",
+          "status": "passed",
+          "duration_seconds": 0.945
+        },
+        {
+          "name": "Valeur de manifeste absente : échec de résolution avant réseau",
+          "status": "passed",
+          "duration_seconds": 0.191
+        },
+        {
+          "name": "Configuration résolue trop grande refusée avant packaging et mutation",
+          "status": "passed",
+          "duration_seconds": 0.707
+        },
+        {
+          "name": "Véritable HTTPS DEV : jeton invalide refusé 401 après packaging",
+          "status": "passed",
+          "duration_seconds": 0.261
+        }
+      ],
+      "skipped": 0
+    },
+    "qualification": {
+      "passed": 38,
+      "failed": 0,
+      "skipped": 0,
+      "log_sha256": "1ff84a13168dac01641ceb0912602e2b662d4738bde292a3a2ddb727618a2021"
+    },
+    "rename_persistence": {
+      "proof": "after-recreate",
+      "statePreserved": true,
+      "cachePreserved": true,
+      "workerCheckpointPreserved": true,
+      "workerResumed": true,
+      "clientVolumeSeparate": true
+    }
+  },
+  "tls": {
+    "validated": true,
+    "subjectAltName": [
+      [
+        "DNS",
+        "serverless.lelabs.tech"
+      ]
+    ],
+    "issuer": [
+      [
+        [
+          "countryName",
+          "US"
+        ]
+      ],
+      [
+        [
+          "organizationName",
+          "Let's Encrypt"
+        ]
+      ],
+      [
+        [
+          "commonName",
+          "YE1"
+        ]
+      ]
+    ],
+    "notAfter": "Feb  4 14:46:10 2027 GMT"
+  },
+  "spark_notes": {
+    "applied_through_console": true,
+    "verified": {
+      "README.md": "eb09a873cf81d416843ad7bcba2edbf748043b37268752ebbc555044b19f2355",
+      "CONTRIBUTORS.md": "883bdffee48a9f9d842d061b618ae71143e29375a7ca21faf6f130174a412e83",
+      "INSTALL.md": "7f6587bee222bf2708c555c10d8ce210a9393bac6b3668054cdab340dafc68b3"
+    }
+  },
+  "administrator_login_new_domain": {
+    "verified": true,
+    "normal_sso_login": true,
+    "authenticated": true,
+    "session_http": 200,
+    "namespaces_http": 200,
+    "timestamp": "2026-11-06T16:00:22.430Z",
+    "session_file_excluded": true
+  },
+  "campaign_note": "La première campagne publique a été lancée avant la fin du client de persistance. Elle a été écartée puis rejouée seule ; le rapport public retenu est celui du second passage.",
+  "scope": "Renommage, conservation et nouvelle entrée publique ; ne clôture pas les fonctionnalités restantes du backlog."
+}

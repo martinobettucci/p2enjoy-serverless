@@ -11,7 +11,7 @@ import urllib.parse
 import urllib.request
 
 assert Path('/etc/hostname').read_text().strip()=='infra-serverless','SPARK DEV requis'
-BASE='https://serverless-dev.lelabs.tech'
+BASE='https://serverless.lelabs.tech'
 Path('/srv/p2enjoy-serverless/control/.proof-login-limits.json').write_text('{"completed":false,"error":"Campagne non terminée"}\n')
 checks=[];completed=False
 pending=[]
@@ -68,7 +68,7 @@ try:
         state=opened(repeated);cancel(repeated,state)
     assert repeated.call('/auth/login')[0]==429
     passed('Trente ouvertures par fenêtre, même après consommation des flows')
-    subprocess.run(['docker','restart','p2enjoy-serverless-dev-control-1'],check=True,capture_output=True,timeout=45)
+    subprocess.run(['docker','restart','serverless-api'],check=True,capture_output=True,timeout=45)
     for _ in range(60):
         try:
             if repeated.call('/healthz')[0]==200:break

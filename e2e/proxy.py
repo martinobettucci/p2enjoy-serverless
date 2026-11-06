@@ -17,7 +17,7 @@ ids={}
 for name,headers in [('public',{}),('public-forged',{
     'X-Forwarded-For':'192.0.2.10, 198.51.100.20','Forwarded':'for=192.0.2.99',
     'X-Real-IP':'192.0.2.77','X-Forwarded-Host':'wrong.example.com','X-Forwarded-Proto':'http'})]:
-    try:r=urllib.request.urlopen(urllib.request.Request('https://serverless-dev.lelabs.tech/api/namespaces',headers=headers),timeout=15)
+    try:r=urllib.request.urlopen(urllib.request.Request('https://serverless.lelabs.tech/api/namespaces',headers=headers),timeout=15)
     except urllib.error.HTTPError as error:r=error
     assert r.status==401
     ids[r.headers['X-Request-ID']]=name;r.close()
@@ -38,7 +38,7 @@ result=subprocess.run(['docker','run','--rm','--name','p2enjoy-proxy-client-dev'
  'python:3.14-slim@sha256:af8a5aa14780025dbfbcfbc81bd8a91ebd87711dd5b0f48ed71090949dd7cb1d','python','-B','-c',client],
  capture_output=True,text=True,check=True,timeout=30)
 ids[result.stdout.strip()]='direct-container'
-logs=subprocess.run(['docker','logs','--since','3m','p2enjoy-serverless-dev-control-1'],capture_output=True,text=True,check=True)
+logs=subprocess.run(['docker','logs','--since','3m','serverless-api'],capture_output=True,text=True,check=True)
 for line in (logs.stdout+'\n'+logs.stderr).splitlines():
  if '{' not in line:continue
  try:row=json.loads(line[line.index('{'):])

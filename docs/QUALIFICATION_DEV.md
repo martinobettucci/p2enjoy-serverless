@@ -26,8 +26,10 @@ ssh -N -J ubuntu@51.158.54.202 -L 18080:127.0.0.1:18080 spark-docker@10.77.0.24
 ```
 
 Les points d'entrée sont alors `http://127.0.0.1:18080/healthz`, `/catalog` et
-`/functions/<nom>`. Aucune interface de management n'existe encore ; ces routes
-sont celles d'un outil DEV. Ne pas créer de route publique pour cet exécuteur.
+`/functions/<nom>`. Le conteneur `serverless-runtime-reference` exécute les
+handlers de qualification. La console de gestion est servie séparément par
+`serverless-api` sur `https://serverless.lelabs.tech`. Le runtime de référence
+reste limité à la boucle locale, sans route publique.
 
 ## Transférer une version
 

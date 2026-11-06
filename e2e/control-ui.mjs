@@ -6,7 +6,7 @@ import {randomUUID} from 'node:crypto';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {chromium} from 'playwright';
 
-const base='https://serverless-dev.lelabs.tech';
+const base='https://serverless.lelabs.tech';
 const output=new URL('../.local/e2e/',import.meta.url);
 await mkdir(output,{recursive:true,mode:0o700});
 await writeFile(new URL('control-ui.json',output),JSON.stringify({completed:false,error:'Campagne non terminée'})+'\n');

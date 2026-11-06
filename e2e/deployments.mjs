@@ -11,7 +11,7 @@ import path from 'node:path';
 import {request} from 'playwright';
 
 const run=promisify(execFile), root=fileURLToPath(new URL('../',import.meta.url));
-const output=path.join(root,'.local/e2e'),base='https://serverless-dev.lelabs.tech';
+const output=path.join(root,'.local/e2e'),base='https://serverless.lelabs.tech';
 await mkdir(output,{recursive:true,mode:0o700});
 const report=path.join(output,'deployments.json');
 await writeFile(report,JSON.stringify({completed:false,error:'Campagne non terminée'})+'\n');

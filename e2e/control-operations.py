@@ -30,8 +30,8 @@ def run(args,timeout=60,check=True):
     return result
 
 
-image=run(['docker','inspect','--format','{{.Image}}','p2enjoy-serverless-dev-control-1']).stdout.strip()
-docker_socket=run(['docker','inspect','--format','{{range .Mounts}}{{if eq .Destination "/docker.sock"}}{{.Source}}{{end}}{{end}}','p2enjoy-serverless-dev-control-1']).stdout.strip()
+image=run(['docker','inspect','--format','{{.Image}}','serverless-api']).stdout.strip()
+docker_socket=run(['docker','inspect','--format','{{range .Mounts}}{{if eq .Destination "/docker.sock"}}{{.Source}}{{end}}{{end}}','serverless-api']).stdout.strip()
 assert docker_socket,'Montage Docker du contrôle absent'
 base=['docker','compose','-p',project,'-f',str(compose)]
 
@@ -133,7 +133,7 @@ try:
     failure('Image immuable absente refusée',"os.environ['SERVERLESS_RUNTIME_IMAGE']='sha256:'+'0'*64",'docker_http_404')
     for value in ('511','65537','invalid'):
         failure('Budget d’artefacts invalide : '+value,'os.environ["SERVERLESS_ARTIFACT_BUDGET_MIB"]='+repr(value),'SERVERLESS_ARTIFACT_BUDGET_MIB')
-    failure('URL publique HTTP refusée',"os.environ['SERVERLESS_PUBLIC_URL']='http://serverless-dev.lelabs.tech'",'absolute HTTPS')
+    failure('URL publique HTTP refusée',"os.environ['SERVERLESS_PUBLIC_URL']='http://serverless.lelabs.tech'",'absolute HTTPS')
     failure('Sous-chemin public refusé',"os.environ['SERVERLESS_PUBLIC_URL']+='/subpath'",'root path')
     failure('Issuer étranger refusé',"os.environ['OIDC_ISSUER']='https://example.org/realm'",'realm lelabs autorisé')
     failure('Clé maîtresse malformée refusée',"os.environ['SERVERLESS_MASTER_KEY']='invalid'",'Fernet key')

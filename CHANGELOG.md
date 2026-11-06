@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- Noms Docker explicites `serverless-api` et `serverless-runtime-reference`,
+  avec conservation des volumes, de l’identité et des objets de la base.
+- Entrée `https://serverless.lelabs.tech` appliquée dans la configuration SPARK ;
+  clients E2E, documentation et trois notes de cellule actualisés. Persistance
+  et reprise réelles, 38 tests HTTP, neuf contrôles navigateur, huit groupes
+  HTTPS, quatre chemins réseau et quatorze contrôles CLI réussis. Connexion
+  SSO personnelle et accès administrateur confirmés sur le nouveau domaine.
+
 - Agent local de stockage DEV : registre WAL, générations FUSE, baux durables,
   quotas data/cache, conservation, archivage, purge et vidage explicites.
   Canal Unix borné avec contrôle d’UID ; maintenance fermant les mutations.

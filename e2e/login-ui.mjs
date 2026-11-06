@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {chromium,request} from 'playwright';
 
-const base = 'https://serverless-dev.lelabs.tech';
+const base = 'https://serverless.lelabs.tech';
 const directory = new URL('../.local/e2e/',import.meta.url).pathname;
 await mkdir(directory,{recursive:true,mode:0o700});
 await writeFile(directory+'login-ui.json',JSON.stringify({completed:false,error:'Campagne non terminée'})+'\n');
