@@ -205,8 +205,12 @@ groupes de cycle, huit de limites et les 31 contrôles du proxy passent, avec
 nettoyage confirmé, zéro échec et zéro skip. La [preuve recoupée](evidence/storage-agent-dev-2026-11-06.json)
 est complétée par quatorze groupes de raccordement au pilote d’instances :
 [preuve](evidence/managed-storage-dev-2026-11-06.json). Les mutations publiques
-et les admissions restent à raccorder. Les interruptions pendant
-préparation/acquisition partielle, la marge physique et les pannes de registre
+et les admissions restent à raccorder. Les quotas préparés et leurs reçus sont
+implémentés ; dix groupes vérifient les décisions, réservations, SIGKILL pendant
+préparation et reprise d'abandon partiel avec conservation des données.
+La [preuve recoupée](evidence/storage-preparations-dev-2026-11-06.json) ajoute
+37 groupes de régression, avec nettoyages confirmés, zéro échec et zéro skip.
+L'acquisition partielle après interruption, la marge physique et les pannes de registre
 restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls composants.
 
 ## SLS-060

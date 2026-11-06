@@ -83,11 +83,12 @@ class Volumes:
         self.db=sqlite3.connect(path,isolation_level=None,timeout=1);self.db.row_factory=sqlite3.Row
         self.db.execute('PRAGMA foreign_keys=ON');self.db.execute('PRAGMA journal_mode=WAL');self.db.execute('PRAGMA synchronous=FULL')
         version=self.db.execute('PRAGMA user_version').fetchone()[0]
-        if version not in (0,1,2):raise StorageError('registry_version')
+        if version not in (0,1,2,3):raise StorageError('registry_version')
         if version==0:
             self.db.executescript((Path(__file__).parent/'migrations/001.sql').read_text())
             self.db.execute('PRAGMA user_version=1')
         if version<2:self.db.executescript((Path(__file__).parent/'migrations/002.sql').read_text())
+        if version<3:self.db.executescript((Path(__file__).parent/'migrations/003.sql').read_text())
         self.db.execute("INSERT OR IGNORE INTO metadata VALUES('installation',?)",(str(uuid4()),))
         self.id=self.db.execute("SELECT value FROM metadata WHERE name='installation'").fetchone()[0]
         self.system=System(root,binary,self.db)
@@ -207,7 +208,157 @@ class Volumes:
             try:await self.stop(row)
             except (StorageError,OSError):errors.append(row['kind'])
         if errors:raise StorageError('cleanup_pending')
+        pending=json.loads(self.function(identifier)['pending_json'] or '{}')
+        await self.remove_created(identifier,pending)
         self.db.execute('UPDATE functions SET pending_json=NULL WHERE id=?',(identifier,))
+
+    def created_volumes(self,identifier,value):
+        created={}
+        for kind,item in value.items():
+            if item['enabled'] and not self.row(identifier,kind):
+                backing,mount=self.system.paths({'function_id':identifier,'kind':kind})
+                created[kind]={'backing':not backing.exists(),'mount':not mount.exists(),
+                               'backing_parent':not backing.parent.exists(),'mount_parent':not mount.parent.exists()}
+        return created
+
+    async def remove_created(self,identifier,pending):
+        # Never recursively delete a preparation's paths: a new file prevents abort.
+        parents=set()
+        for kind,created in pending.get('created',{}).items():
+            row=self.row(identifier,kind)
+            if row and (row['phase']!='unmounted' or row['quota']!=0):raise StorageError('cleanup_pending')
+            backing,mount=self.system.paths({'function_id':identifier,'kind':kind})
+            for name,path in [('backing',backing),('mount',mount)]:
+                if created[name]:
+                    try:
+                        path.rmdir()
+                        fd=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+                        try:os.fsync(fd)
+                        finally:os.close(fd)
+                    except FileNotFoundError:pass
+                    except OSError:raise StorageError('preparation_not_empty') from None
+                if created[name+'_parent']:parents.add(path.parent)
+        for path in parents:
+            try:
+                path.rmdir()
+                fd=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+                try:os.fsync(fd)
+                finally:os.close(fd)
+            except FileNotFoundError:pass
+            except OSError:raise StorageError('preparation_not_empty') from None
+        with self.transaction():
+            for kind in pending.get('created',{}):
+                self.db.execute('DELETE FROM volumes WHERE function_id=? AND kind=? AND quota=0',(identifier,kind))
+
+    async def probe_configuration(self,identifier,value):
+        for row in self.rows(identifier):
+            desired=value[row['kind']]['quota_mib']*MIB
+            if row['phase']!='unmounted':await self.stop(row)
+            if row['quota']:
+                mounted=await self.mount(self.row(identifier,row['kind']))
+                usage=(await self.measure(mounted))['used']
+                await self.stop(mounted)
+                if usage>desired:raise StorageError('quota_below_usage')
+            candidate=await self.mount(self.row(identifier,row['kind']),desired)
+            await self.stop(candidate)
+
+    def preparation_extra(self,identifier,value):
+        extra=0
+        for kind,item in value.items():
+            row=self.row(identifier,kind)
+            if row or item['enabled']:extra+=max(0,item['quota_mib']*MIB-(row['quota'] if row else 0))
+        if self.allocated()+extra>self.budget:raise StorageError('storage_budget')
+        space=os.statvfs(self.root)
+        if extra and space.f_bavail*space.f_frsize<self.reserve+extra:raise StorageError('storage_free_space')
+        return extra
+
+    # @spec docs/ADMISSION.md#configuration-de-stockage-en-deux-phases
+    def configuration_operation(self,identifier,operation,installation):
+        identifier=uuid(identifier);operation=uuid(operation);installation=uuid(installation)
+        function=self.function(identifier)
+        pending=json.loads(function['pending_json'] or '{}')
+        if pending.get('operation')=='configuration-prepared' and pending['operation_id']==operation:
+            if pending['installation_id']!=installation:raise StorageError('operation_owner')
+            return {'function_id':identifier,'operation_id':operation,'installation_id':installation,
+                    'state':pending['phase'],'configuration':pending['configuration'],
+                    'expected_version':pending['expected_version'],'version':function['version']}
+        row=self.db.execute('SELECT * FROM configuration_receipts WHERE function_id=? AND operation_id=?',(identifier,operation)).fetchone()
+        if not row:raise StorageError('operation_unknown')
+        if row['installation_id']!=installation:raise StorageError('operation_owner')
+        return {'function_id':identifier,'operation_id':operation,'installation_id':installation,
+                'state':row['decision'],'configuration':json.loads(row['configuration_json']),
+                'expected_version':row['expected_version'],'version':row['version']}
+
+    async def prepare_configuration(self,identifier,operation,installation,value,expected):
+        identifier=uuid(identifier);operation=uuid(operation);installation=uuid(installation);value=configuration(value)
+        if type(expected) is not int or expected<0:raise StorageError('invalid_version')
+        existing=self.db.execute('SELECT * FROM functions WHERE id=?',(identifier,)).fetchone()
+        if existing:
+            try:result=self.configuration_operation(identifier,operation,installation)
+            except StorageError as error:
+                if str(error)!='operation_unknown':raise
+            else:
+                if result['configuration']!=value or result['expected_version']!=expected:raise StorageError('operation_conflict')
+                return result
+        elif expected!=0:raise StorageError('version_conflict')
+        if self.db.execute('SELECT 1 FROM configuration_receipts WHERE operation_id=?',(operation,)).fetchone():raise StorageError('operation_conflict')
+        for row in self.db.execute('SELECT pending_json FROM functions WHERE pending_json IS NOT NULL'):
+            if json.loads(row['pending_json']).get('operation_id')==operation:raise StorageError('operation_conflict')
+        # The version remains monotone, even after abandoning a new empty function.
+        with self.transaction():
+            self.db.execute("INSERT OR IGNORE INTO functions VALUES(?,'active',0,?,NULL)",(identifier,canonical(DEFAULT)))
+        function=self.function(identifier);self.version(function,expected)
+        if function['state']!='active':raise StorageError('function_archived')
+        if function['pending_json']:raise StorageError('operation_pending')
+        if self.leased(identifier):raise StorageError('volume_busy')
+        pending={'operation':'configuration-prepared','operation_id':operation,'installation_id':installation,
+                 'phase':'preparing','configuration':value,'expected_version':expected,
+                 'created':self.created_volumes(identifier,value),'extra':self.preparation_extra(identifier,value)}
+        with self.transaction():
+            self.db.execute('UPDATE functions SET pending_json=? WHERE id=?',(canonical(pending),identifier))
+            for kind in pending['created']:
+                self.db.execute('INSERT INTO volumes(function_id,kind,quota,enabled) VALUES(?,?,0,0)',(identifier,kind))
+        try:
+            await self.probe_configuration(identifier,value)
+            pending['phase']='prepared'
+            self.db.execute('UPDATE functions SET pending_json=? WHERE id=?',(canonical(pending),identifier))
+        except BaseException:
+            await joined(self.resolve_configuration(identifier,operation,installation,'aborted'));raise
+        return self.configuration_operation(identifier,operation,installation)
+
+    def receipt(self,identifier,pending,decision):
+        version=self.function(identifier)['version']+1
+        self.db.execute('UPDATE functions SET pending_json=NULL,version=? WHERE id=?',(version,identifier))
+        self.db.execute('INSERT INTO configuration_receipts VALUES(?,?,?,?,?,?,?) ON CONFLICT(function_id) DO UPDATE SET '
+                        'operation_id=excluded.operation_id,installation_id=excluded.installation_id,configuration_json=excluded.configuration_json,'
+                        'expected_version=excluded.expected_version,decision=excluded.decision,version=excluded.version',
+                        (identifier,pending['operation_id'],pending['installation_id'],canonical(pending['configuration']),pending['expected_version'],decision,version))
+
+    async def resolve_configuration(self,identifier,operation,installation,decision):
+        result=self.configuration_operation(identifier,operation,installation)
+        if result['state'] in ('committed','aborted'):
+            if result['state']!=decision:raise StorageError('operation_decided')
+            return result
+        if self.leased(identifier):raise StorageError('volume_busy')
+        pending=json.loads(self.function(identifier)['pending_json'])
+        if decision=='committed':
+            if pending['phase']!='prepared':raise StorageError('preparation_incomplete')
+            for row in self.rows(identifier):
+                if row['phase']!='unmounted' or self.system.mounted(row):raise StorageError('cleanup_pending')
+            with self.transaction():
+                for row in self.rows(identifier):
+                    item=pending['configuration'][row['kind']]
+                    self.db.execute('UPDATE volumes SET quota=?,enabled=? WHERE function_id=? AND kind=?',
+                                    (item['quota_mib']*MIB,int(item['enabled']),identifier,row['kind']))
+                self.db.execute('UPDATE functions SET config_json=? WHERE id=?',(canonical(pending['configuration']),identifier))
+                self.receipt(identifier,pending,decision)
+        else:
+            pending['phase']='aborting'
+            self.db.execute('UPDATE functions SET pending_json=? WHERE id=?',(canonical(pending),identifier))
+            for row in self.rows(identifier):await self.stop(row)
+            await self.remove_created(identifier,pending)
+            with self.transaction():self.receipt(identifier,pending,decision)
+        return self.configuration_operation(identifier,operation,installation)
 
     async def configure(self,identifier,value,expected=None):
         identifier=uuid(identifier);value=configuration(value)
@@ -218,28 +369,13 @@ class Volumes:
         if function['pending_json']:raise StorageError('operation_pending')
         if json.loads(function['config_json'])==value:return self.snapshot(identifier)
         if self.leased(identifier):raise StorageError('volume_busy')
-        extra=0
-        for kind,item in value.items():
-            row=self.row(identifier,kind)
-            if row or item['enabled']:extra+=max(0,item['quota_mib']*MIB-(row['quota'] if row else 0))
-        if self.allocated()+extra>self.budget:raise StorageError('storage_budget')
-        space=os.statvfs(self.root)
-        if extra and space.f_bavail*space.f_frsize<self.reserve+extra:raise StorageError('storage_free_space')
+        extra=self.preparation_extra(identifier,value);created=self.created_volumes(identifier,value)
         with self.transaction():
-            self.db.execute('UPDATE functions SET pending_json=? WHERE id=?',(canonical({'operation':'configure','configuration':value,'extra':extra}),identifier))
+            self.db.execute('UPDATE functions SET pending_json=? WHERE id=?',(canonical({'operation':'configure','configuration':value,'extra':extra,'created':created}),identifier))
             for kind,item in value.items():
                 if item['enabled']:self.db.execute("INSERT OR IGNORE INTO volumes(function_id,kind,quota,enabled) VALUES(?,?,0,0)",(identifier,kind))
         try:
-            for row in self.rows(identifier):
-                desired=value[row['kind']]['quota_mib']*MIB
-                if row['phase']!='unmounted':await self.stop(row)
-                if row['quota']:
-                    mounted=await self.mount(self.row(identifier,row['kind']))
-                    usage=(await self.measure(mounted))['used']
-                    await self.stop(mounted)
-                    if usage>desired:raise StorageError('quota_below_usage')
-                candidate=await self.mount(self.row(identifier,row['kind']),desired)
-                await self.stop(candidate)
+            await self.probe_configuration(identifier,value)
             with self.transaction():
                 for row in self.rows(identifier):
                     item=value[row['kind']]
@@ -376,8 +512,7 @@ class Volumes:
         for function in self.db.execute('SELECT * FROM functions WHERE pending_json IS NOT NULL').fetchall():
             try:
                 pending=json.loads(function['pending_json'])
-                if pending['operation']=='configure':await self.compensate(function['id'])
-                else:await self.finish_discard(function['id'],pending)
+                await self.recover_operation(function['id'],pending)
             except (StorageError,OSError,sqlite3.Error):self.last_error='recovery_pending'
         for row in self.db.execute('SELECT * FROM volumes').fetchall():
             try:
@@ -412,14 +547,24 @@ class Volumes:
                 if function['pending_json'] and not self.leased(identifier):
                     try:
                         pending=json.loads(function['pending_json'])
-                        if pending['operation']=='configure':await self.compensate(identifier)
-                        else:await self.finish_discard(identifier,pending)
+                        await self.recover_operation(identifier,pending)
                     except (StorageError,OSError):pass
             await asyncio.sleep(0)
         async with self.lock:
             failed=self.db.execute("SELECT 1 FROM volumes WHERE phase='failed' LIMIT 1").fetchone()
             pending=self.db.execute('SELECT 1 FROM functions WHERE pending_json IS NOT NULL LIMIT 1').fetchone()
             self.last_error='recovery_pending' if failed or pending else None
+
+    async def recover_operation(self,identifier,pending):
+        if pending['operation']=='configure':await self.compensate(identifier)
+        elif pending['operation']=='configuration-prepared':
+            if pending['phase']=='aborting':
+                await self.resolve_configuration(identifier,pending['operation_id'],pending['installation_id'],'aborted')
+            else:
+                for row in self.rows(identifier):
+                    if row['phase']!='unmounted':await self.stop(row)
+        elif pending['operation'] in ('purge','clear-cache'):await self.finish_discard(identifier,pending)
+        else:raise StorageError('unknown_pending_operation')
 
     def close(self):
         self.closed=True;self.db.close();os.close(self.owner)

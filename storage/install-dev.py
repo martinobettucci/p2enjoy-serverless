@@ -13,7 +13,7 @@ import sys
 
 ROOT=Path(__file__).resolve().parent
 UNIT='p2enjoy-storage-dev.service'
-FILES=('agent.py','agent_system.py','agent_volumes.py','migrations/001.sql','migrations/002.sql','p2-quota')
+FILES=('agent.py','agent_system.py','agent_volumes.py','migrations/001.sql','migrations/002.sql','migrations/003.sql','p2-quota')
 
 
 def run(*args,**kwargs):return subprocess.run(args,check=True,text=True,capture_output=True,**kwargs).stdout.strip()

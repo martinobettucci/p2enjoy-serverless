@@ -163,3 +163,15 @@ avant création de cette racine. Il restaure la variable officielle et l'agent,
 puis vérifie son identité et le maintien du même contrôle. Son rapport est
 `.local/e2e/storage-installation.json` ; ne pas lancer une autre campagne pendant
 ce changement de configuration de la cellule.
+
+`storage-preparations.py` s'exécute comme root du SPARK DEV. Il appelle les
+commandes réelles du client de stockage embarqué dans le contrôle : préparation,
+commit, abort et consultation du reçu. Dix groupes couvrent droits de propriétaire,
+baux actifs, versions, quota réduit sous saturation, écritures et conservation,
+échec sous usage réel, reprise après restart, SIGKILL pendant preparing observé,
+abandon partiel devant un fichier inattendu et répertoire vide antérieur préservé.
+Le nettoyage confirme la suppression Docker avant release ; une incertitude
+garde le bail et bloque abort/purge de cette fonction. Son rapport
+`storage/preparations-proof.json` est invalidé avant les prérequis et conserve
+les erreurs de restauration. Il ne qualifie pas les mutations publiques, qui
+restent à raccorder à la décision durable du contrôle.

@@ -1,5 +1,8 @@
 # @spec docs/BACKLOG.md#sls-010 | docs/PLATFORM.md#exploitation-et-preuves
 /p2-quota
 /proof.json
+/agent-proof.json
+/agent-limits-proof.json
+/preparations-proof.json
 /quota-proof-*/
 /mount.trace

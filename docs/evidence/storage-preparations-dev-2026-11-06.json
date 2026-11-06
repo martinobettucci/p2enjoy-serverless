@@ -1,0 +1,773 @@
+{
+  "unchanged_console_assets_since": "control-management-dev-2026-11-06.json",
+  "units": [
+    "SLS-040",
+    "SLS-050"
+  ],
+  "units_complete": false,
+  "date": "2026-11-06T18:31:10.048746+00:00",
+  "target": "infra-serverless DEV",
+  "spec_commits": [
+    "4a80ce2",
+    "5e54c37",
+    "2660a45"
+  ],
+  "scope": "Préparation et décision durable des quotas, réservation et compensation conservatrice après interruption réelle",
+  "deployed": {
+    "sources": {
+      "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "control/app/api.py": "dc73c8cee4e7d2fbfe98da21bfc517987fde442a758794054ec48a6859046824",
+      "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "control/app/config.py": "12745721fb91be712ddb0302d9c5342f61f17735f82fb1a4ac55d9ce83e36751",
+      "control/app/db.py": "55bb45fe2c4eaaf29496de3b6515d689f69cb07be60a8d9fc4184534f67e3c79",
+      "control/app/deployments.py": "ff3b527eeafa7ff5a159d7a2716ba2795a938c74bf4c3eb88313e6c9e44e6a95",
+      "control/app/instances.py": "8f7e578e1c1b4539c1e8303ecc10d076f2da7ef0231170c669069d6354a3df2c",
+      "control/app/main.py": "ff669c4cc5d2cfb1981680c11774ac66ecd112938897039060c395c31bcfe4f5",
+      "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+      "control/app/models.py": "fef330910e4555a02ab2e452a48518c022e81c339041b0b854d9605dc07b0f9c",
+      "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+      "control/app/validator.py": "f088cc26c509ef6f1a7f7816787e81523cc473bbf392e4739c13917937b1ab85",
+      "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+      "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+      "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+      "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+      "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+      "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+      "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+      "storage/agent.py": "80ce45cfd64c05b3f16c767d5e0e2358140791dc8b49028adf2b31286816c9ec",
+      "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+      "storage/agent_volumes.py": "2985dfc40690e2324b02d47a3e707cff8cabc3b071a70a829281d4f7098a792a",
+      "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+      "storage/install-dev.py": "51b7e233aafd04ab4439cfff5a75f7dc63706e8f5873ce612f22833b3ffc4646",
+      "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+      "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+      "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+      "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+      "control/Dockerfile": "a739350a3b2551c1fd03d59cc7bece5c296d252e029785442dad59450332cc16",
+      "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+      "control/compose.spark.yml": "b63fe61e18b99ceef2d4a3132154ee8613ac6837cd8315b659aaad2f2f294afa",
+      "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+      "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+      "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+      "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+      "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+      "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+      "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+      "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+      "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+      "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+      "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+      "e2e/storage-preparations.py": "a03dc9ebee430a3f7ec144d278dc2597e6109084835401dba98ca9e1795aace9",
+      "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+      "e2e/control-operations.py": "f1b644e7ffb3ed26df491d34e831adb00ada99071f32a574b2cd50659dd97eb6",
+      "e2e/runtime-instances.py": "c9652acb58dd42725d9a45d852c7db7a239f40ac640399a7e1868177bae129bc",
+      "e2e/instance-lifecycle.py": "1c83bfc36180e3e63722073137745a3522ea39642108b589778cfd087773aab2",
+      "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+      "web/src/api.js": "44c428bf8a13b7bd91faca929b7aa5ef63466861c89e387c5e3bbdbf93d610a9",
+      "web/src/function.jsx": "e827072092bcac273cd3f2b6a147a71b3f9226a929458c57574ab7c4fcafef0b",
+      "web/src/main.jsx": "9ca3abe92d89669f12e1fd6d65b5975ab33ef4c30b9eca2e2190f51ca18a9cb6",
+      "web/src/management.jsx": "94f2851b28ef8cd48a5569b6ca3fbfc966d7549d8fb2f51f522f1b674e9762a5",
+      "web/src/style.css": "fb845d5f1b8c96842db0a794f5db12da216b5f662664c5fd86f4dd89d852a632",
+      "web/src/ui.jsx": "62026ca8f5be957a6986ad1642855ff1de32e46cc52f8d4c667c95f53f62bcf5",
+      "web/package.json": "4cb742f19dbce36e4c28482d645e807bba1aad4ca48667e9d3e5fa2a3394457a",
+      "web/package-lock.json": "cac4d733e880aca30daa1cd8d24d2f0727abb81ffd14930839408e65335c99f7",
+      "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721"
+    },
+    "baked_sources": {
+      "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "app/validator.py": "f088cc26c509ef6f1a7f7816787e81523cc473bbf392e4739c13917937b1ab85",
+      "app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+      "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "app/config.py": "12745721fb91be712ddb0302d9c5342f61f17735f82fb1a4ac55d9ce83e36751",
+      "app/api.py": "dc73c8cee4e7d2fbfe98da21bfc517987fde442a758794054ec48a6859046824",
+      "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "app/models.py": "fef330910e4555a02ab2e452a48518c022e81c339041b0b854d9605dc07b0f9c",
+      "app/db.py": "55bb45fe2c4eaaf29496de3b6515d689f69cb07be60a8d9fc4184534f67e3c79",
+      "app/instances.py": "8f7e578e1c1b4539c1e8303ecc10d076f2da7ef0231170c669069d6354a3df2c",
+      "app/main.py": "ff669c4cc5d2cfb1981680c11774ac66ecd112938897039060c395c31bcfe4f5",
+      "app/deployments.py": "ff3b527eeafa7ff5a159d7a2716ba2795a938c74bf4c3eb88313e6c9e44e6a95",
+      "app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+      "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "web/index.html": "c097ae5e1278bc0fdac120b4d477eef77170db6c6738621bfdbe09b688cda1d4",
+      "web/favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+      "web/assets/index-DPRUSZLF.js": "8be7762519ed7c533c6eccfe7b8f3945eb67a980de10871d0577748196a784d2",
+      "web/assets/index-m_qusgUe.css": "fa402623fda809535a8d28a440d6db9f1e8cd4050064b6ec606eee4a92f0953d"
+    },
+    "services": {
+      "serverless-api": {
+        "image": "sha256:aaf50a012184335e331acb40ccecdf5cedbe4b360eedb3bf31fe193d812c9bef",
+        "healthy": true
+      },
+      "serverless-runtime-reference": {
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "healthy": true
+      }
+    },
+    "runtime_image": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+    "configuration": {
+      "matches_official_files": true,
+      "keys": [
+        "SERVERLESS_PUBLIC_URL",
+        "OIDC_ISSUER",
+        "OIDC_CLIENT_ID",
+        "OIDC_CLIENT_SECRET",
+        "SERVERLESS_MASTER_KEY",
+        "SERVERLESS_STATE_HOST_PATH",
+        "SERVERLESS_DOCKER_SOCKET_HOST",
+        "SERVERLESS_RUNTIME_IMAGE",
+        "SERVERLESS_TRUSTED_PROXIES",
+        "SERVERLESS_STORAGE_ROOT_HOST",
+        "SERVERLESS_STORAGE_SOCKET_DIR_HOST",
+        "SERVERLESS_STORAGE_BUDGET_MIB",
+        "SERVERLESS_STORAGE_RESERVE_MIB",
+        "SERVERLESS_STORAGE_MAX_MOUNTS"
+      ],
+      "changed": {},
+      "secret_values_excluded": true
+    },
+    "storage": {
+      "schema_version": 3,
+      "health": {
+        "allocated_bytes": 0,
+        "budget_bytes": 34359738368,
+        "error": null,
+        "failed_volumes": 0,
+        "healthy": true,
+        "installation_id": "a8fb85c6-13a2-4f92-a60e-7f5d924cebbe",
+        "leases": 0,
+        "max_mounts": 64,
+        "mounted_or_reserved": 0,
+        "pending_functions": 0,
+        "quiesced": false,
+        "ready": true,
+        "reserve_bytes": 8589934592
+      },
+      "unit_sha256": "5ceac4c2856acba65f182395d664d824ae4c108dc9127218daaf72e9ccaf972b",
+      "bundle": "/usr/local/lib/p2enjoy-serverless/storage/4ba9e4bf5626d221596725566102d919047d19c43a944bfa20cd1a12bd8a3d34",
+      "package_sha256": {
+        "agent.py": "80ce45cfd64c05b3f16c767d5e0e2358140791dc8b49028adf2b31286816c9ec",
+        "agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+        "agent_volumes.py": "2985dfc40690e2324b02d47a3e707cff8cabc3b071a70a829281d4f7098a792a",
+        "migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+        "migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+        "migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+        "p2-quota": "c731fdcf33a42ba1206721e72a0635ce84dfe7833c03fa2e01e036ca3cd780ff"
+      },
+      "socket_directory": "/srv/p2enjoy-serverless/storage-channel",
+      "readonly_bind_verified": true,
+      "installed_root_annotation_verified": true
+    },
+    "database": {
+      "integrity": "ok",
+      "active_objects": {
+        "namespaces": 0,
+        "services": 0,
+        "functions": 0
+      },
+      "retained_archives_verified": [
+        {
+          "revision_id": "66e326ac-ecbf-4fe7-8de5-ed144ffca6a7",
+          "sha256": "843622fda2228c75fcd7c5b3d3c01a6b3938d3b8d7928f12191d15107534623e"
+        },
+        {
+          "revision_id": "0a0d2eb9-c87d-46c0-9e82-4b9d2a800060",
+          "sha256": "f3ea00469a7db141431fd8163fb63b78756dcef94dad0537a34a37b972b4a92d"
+        },
+        {
+          "revision_id": "358edbe6-4303-42e6-863e-25ed3d2865fb",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "237bf058-d6e5-4149-b123-6337e7b28fe2",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "fb377c8b-c3f2-47e8-bef0-0bc7cdc2c11e",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "ecf9c682-8968-4dbd-bb7b-a38e7c1206c7",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "395d03c6-1579-4ae0-8b85-ff9d920cd73a",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "d03c3cea-bb98-432b-b2fd-efc32e8055c5",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "3c8fa4a6-8a16-47db-9dd4-1e78337283f9",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "62f4a978-c5bc-4bd4-b9b4-877378e81a5b",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "8192bf2c-6908-40c8-bf6f-dcbec6c42e90",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "00d5d11b-8cdb-4927-86fd-3d0951ec2203",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "54d72b1d-047f-49b4-b3b0-2915164e97ad",
+          "sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2"
+        },
+        {
+          "revision_id": "a15d1cb8-a42c-4fdc-a9bf-1c114809d017",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "3db77b3b-210e-4faa-b3ee-d099954030cf",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "69c14c19-a2d7-4f94-b267-15208350bfac",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "4481f083-88ec-491b-a3a4-7769fd0db851",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "ade6be63-5004-411d-a032-1471e9fa4d8e",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "e7c2ace2-167d-4f18-a335-adc4991fa340",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "1de10daa-6e08-42e4-8953-716cf86a090c",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "ed26a01f-0265-4bc1-8f7b-9583d9a9ea9e",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "d3ed65ef-a51a-4a13-b182-dfdad1310853",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "072703fe-c62d-4f25-a65f-685f876ea642",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "5e6f611a-5cac-4b53-94ca-f9d8f6022de3",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "278691e5-8aa2-4594-9490-3de9dbff33eb",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "d6fac4bb-8c87-4dc0-8236-d6c228d87b46",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "647217c6-f770-4cc1-8a3f-ae8f450c2e23",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "0fb8f147-ae16-4a39-8f79-9c4288567d9e",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "86701575-8c0c-4141-a4a8-be0e73b468f1",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "40afa9e0-ea7d-4b73-8536-76c248f9c5ae",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "87b8d56c-a16a-4179-b5b5-192a022331f2",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "f24aebff-4262-4ecd-b226-0e56a8c83b64",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "0a075158-9251-4ed6-8657-c557200b0a59",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "c0a1741c-4d68-4441-bd90-e617e14e78fa",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "1020a5c3-13a2-46c6-aa90-0bd95f7efdee",
+          "sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075"
+        },
+        {
+          "revision_id": "a49489b9-7c6d-49b3-9bba-7ec0a25235ed",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "eb371c5d-a04d-4d1d-a96f-5cfab86248ee",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "83681dde-687e-46d9-b780-52e1b5241df9",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "8a699582-db6f-479a-928d-42522c77a892",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "f33ca405-17b0-413c-bb11-9a737d0a6d6f",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "c9726b25-cc0a-487b-8c0f-299c86032ad3",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "5c9c443c-b604-4ca0-b5d2-9e7db1e1581e",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "904cbf23-8ffd-4b55-a7ff-3c6f6ad3b55b",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "23ebcb37-f1b8-4dcb-8ad5-0aaaefdf168f",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "65d8219e-7466-47e3-af54-b764866685d6",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "7998d767-6d4d-4acc-994d-fa1dc679ef10",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "fce1121a-5bbe-484d-9a13-48ee67f350f7",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "7a2a063e-1ea9-44f6-815e-4c5d5f62e208",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "37f6aed1-8f7e-45c3-aad9-786bc9218edd",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "1cc0538b-e562-4753-8d03-e825dd9278aa",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "26042919-7bf2-40ab-81a6-7ead99a2f0e5",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "51bdc6a0-f8d0-4e04-aec4-a3ac97a18149",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "7393d3ee-b4fb-4994-846c-686e30fcfe58",
+          "sha256": "c16ae1671a4333c90cba4dacda3d64e07b2fe4a4a42777389ed30e1e35460582"
+        },
+        {
+          "revision_id": "4a6bafd0-b25b-472f-a920-9be8034f5efd",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "2c00193d-a3ab-4be7-bdf7-79f6bc7fc962",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "354b0662-3b46-474d-bbd7-a42f84b11823",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "c5585686-b14d-4736-85c2-e8d905d883ca",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "1c3232ff-815a-416e-bca0-927c566a290e",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "64a3ee8c-3580-40f7-9a82-6e8b8375d4bc",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "eabe52a7-66fe-4537-8464-8e8707941910",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "26a70a34-61f5-4121-b827-0ec7a987155f",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "e0a20313-cc0f-4b4f-aace-2781fc8209b6",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "9904698f-3d65-4d89-8709-94418e3d09b8",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "7fb429bb-0fac-46bd-98cb-009e0babdfe6",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "e6e1fb2f-94fa-4ff7-9dad-08dd61023515",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "87d1b325-e6a9-4a92-833a-537c37cf4b86",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "727e4c4b-9e6d-4efe-b50e-61aaffc48a41",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "14253c25-e091-4744-8547-03f7f1443da2",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "8ab5666d-39de-4d27-a0c9-2006b4bd5e87",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "ab784495-e58d-46d6-aa4d-04564a3780f7",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "207be67a-c3e3-4d3a-aa36-b9c46ebf4d0c",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "38985a3a-cf5e-43b8-8ac5-9e1e0b6f3d28",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        },
+        {
+          "revision_id": "31399693-0099-4137-b361-2c4d8a61ba23",
+          "sha256": "76ab8cdd0f2970d7dc086207acec286cb5ff3aeff6ae504c6f3dc1845bff9fb2"
+        }
+      ]
+    },
+    "remaining_instances": 0,
+    "remaining_instance_networks": 0,
+    "remaining_validation_containers": 0,
+    "remaining_test_workspaces": 0,
+    "routes": [
+      "serverless.lelabs.tech 18090 tls"
+    ]
+  },
+  "reports": {
+    "managed-storage": {
+      "completed": true,
+      "cleanup": true,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "checks": [
+        {
+          "name": "Bail réel depuis le contrôle et binds limités aux montages FUSE",
+          "status": "passed"
+        },
+        {
+          "name": "Données et cache conservés entre enfants et recréations Docker",
+          "status": "passed"
+        },
+        {
+          "name": "Quotas data et cache appliqués aux écritures réelles du handler",
+          "status": "passed"
+        },
+        {
+          "name": "Partage par fonction, isolation entre fonctions et mutation refusée sous bail",
+          "status": "passed"
+        },
+        {
+          "name": "Invocations concurrentes et double démarrage refusés sans tuer le consommateur",
+          "status": "passed"
+        },
+        {
+          "name": "Refus de stockage et échec du démarrage Docker sans bail abandonné",
+          "status": "passed"
+        },
+        {
+          "name": "Deadline, destruction et conservation des écritures acquittées",
+          "status": "passed"
+        },
+        {
+          "name": "Annulation répétée pendant acquisition réelle suspendue puis rejointe",
+          "status": "passed"
+        },
+        {
+          "name": "Annulation pendant contrôle du bail avant dispatch avec nettoyage complet",
+          "status": "passed"
+        },
+        {
+          "name": "Mort du vrai démon FUSE, retrait du consommateur et réacquisition sans perte",
+          "status": "passed"
+        },
+        {
+          "name": "Arrêt agent, nettoyage différé, socket retrouvé dans le même contrôle et reprise",
+          "status": "passed"
+        },
+        {
+          "name": "Volumes désactivés : aucun bind et bail libéré",
+          "status": "passed"
+        },
+        {
+          "name": "Pagination du client de production sur 51 vrais baux puis libération confirmée",
+          "status": "passed"
+        },
+        {
+          "name": "Diagnostic CLI géré : configuration stdin, vraie invocation puis fermeture sur EOF",
+          "status": "passed"
+        }
+      ],
+      "cleanup_errors": [],
+      "installation_id": "7d1b3838-ba8c-48b2-8f34-414b6bc1a7e4",
+      "functions": [
+        "890b95b3-f3f2-4bc4-9cb5-a8337cd78e44",
+        "3c540b73-09c6-4a53-949e-047396b9d8f9",
+        "3273af34-e02a-41be-b233-44b267d5e3fc"
+      ],
+      "control_container_unchanged": true,
+      "socket_directory_preserved": true
+    },
+    "preparations": {
+      "completed": true,
+      "cleanup": true,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "checks": [
+        {
+          "name": "Préparation réelle, configuration non publiée, réservation et refus de concurrence/propriétaire",
+          "status": "passed"
+        },
+        {
+          "name": "Commit idempotent, décision opposée refusée et écritures Docker sur les volumes publiés",
+          "status": "passed"
+        },
+        {
+          "name": "Préparation sous bail actif refusée sans mutation ni réservation supplémentaire",
+          "status": "passed"
+        },
+        {
+          "name": "Baisse de quota : ancien budget réservé jusqu’à abort/commit, même sous saturation globale",
+          "status": "passed"
+        },
+        {
+          "name": "Abort d’une création : chemins nouveaux retirés, reçu monotone et ancien rejeu refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Refus sous usage : donnée antérieure conservée et nouveau cache compensé, deux chemins de configuration",
+          "status": "passed"
+        },
+        {
+          "name": "Restart après préparation : décision attendue, réservation conservée et commit explicite",
+          "status": "passed"
+        },
+        {
+          "name": "SIGKILL pendant préparation observée : réponse perdue, aucun commit implicite et abort récupéré",
+          "status": "passed"
+        },
+        {
+          "name": "Abort partiel et restart : donnée inattendue et réservation préservées, reprise après résolution",
+          "status": "passed"
+        },
+        {
+          "name": "Provenance physique : répertoire vide antérieur préservé pendant abort",
+          "status": "passed"
+        }
+      ],
+      "cleanup_errors": [],
+      "installation_id": "51cbe186-c25a-4e02-ba0b-6087d8f22b5a",
+      "functions": [
+        "7fb719de-be65-438c-9cc3-d1d937280747",
+        "e287e9be-f2ff-419f-a8e0-6fea89e95368",
+        "647cef9a-5c77-429f-85b9-42531186e44b",
+        "661d5b13-255c-4efc-8a60-de6fbb41a86f",
+        "e4ded040-b871-435d-b715-1eccaa32c67d",
+        "6cf28a71-21ff-44e9-90e9-d2ca2e90cee2",
+        "859600ae-3e9a-4590-ac1f-aa5fcb178a04",
+        "0f49f61b-ed07-4b92-a0e6-903f4df4db3f",
+        "c58542b3-f94b-4712-b1b3-db1d8b04615a",
+        "ab0e8b8e-a470-43db-b217-45b200ebdaab"
+      ],
+      "blocked_functions": [],
+      "final_health": {
+        "allocated_bytes": 0,
+        "budget_bytes": 34359738368,
+        "error": null,
+        "failed_volumes": 0,
+        "healthy": true,
+        "installation_id": "a8fb85c6-13a2-4f92-a60e-7f5d924cebbe",
+        "leases": 0,
+        "max_mounts": 64,
+        "mounted_or_reserved": 0,
+        "pending_functions": 0,
+        "quiesced": false,
+        "ready": true,
+        "reserve_bytes": 8589934592
+      }
+    },
+    "agent": {
+      "completed": true,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "cleanup": true,
+      "error": null,
+      "results": [
+        {
+          "name": "private-socket-capability-and-host-mount-namespace",
+          "status": "passed"
+        },
+        {
+          "name": "reject-root-peer-uid",
+          "status": "passed"
+        },
+        {
+          "name": "reject-malformed-and-unknown-protocol-fields",
+          "status": "passed"
+        },
+        {
+          "name": "atomic-configuration-idempotence-and-version",
+          "status": "passed"
+        },
+        {
+          "name": "durable-idempotent-lease-and-owner-refusals",
+          "status": "passed"
+        },
+        {
+          "name": "reject-mutations-under-live-lease",
+          "status": "passed"
+        },
+        {
+          "name": "docker-write-quota-and-logical-usage",
+          "status": "passed"
+        },
+        {
+          "name": "shared-leases-last-release-and-persistence",
+          "status": "passed"
+        },
+        {
+          "name": "disable-retains-allocation-and-files",
+          "status": "passed"
+        },
+        {
+          "name": "explicit-cache-clear-preserves-data",
+          "status": "passed"
+        },
+        {
+          "name": "second-volume-failure-compensates-first-candidate",
+          "status": "passed"
+        },
+        {
+          "name": "blocked-fuse-probe-bounded-and-degraded-until-drain",
+          "status": "passed"
+        },
+        {
+          "name": "fuse-death-recovery-and-acknowledged-data",
+          "status": "passed"
+        },
+        {
+          "name": "service-restart-retains-leases-and-data",
+          "status": "passed"
+        },
+        {
+          "name": "archive-purge-budget-and-tombstone",
+          "status": "passed"
+        }
+      ],
+      "source_sha256": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a"
+    },
+    "limits": {
+      "completed": true,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "cleanup": true,
+      "error": null,
+      "results": [
+        {
+          "name": "atomic-maintenance-gate-and-readable-state",
+          "status": "passed"
+        },
+        {
+          "name": "second-agent-refused-by-durable-root-lock",
+          "status": "passed"
+        },
+        {
+          "name": "request-size-connection-limit-and-slow-client-deadline",
+          "status": "passed"
+        },
+        {
+          "name": "lost-acquire-response-idempotence-and-lease-pagination",
+          "status": "passed"
+        },
+        {
+          "name": "global-budget-disabled-archives-and-temporary-increase",
+          "status": "passed"
+        },
+        {
+          "name": "real-mount-limit-reservations-compensation-and-reuse",
+          "status": "passed"
+        },
+        {
+          "name": "foreign-mount-refused-and-preserved-across-restart",
+          "status": "passed"
+        },
+        {
+          "name": "wide-tree-and-chmod-zero-cleanup-resize-and-purge",
+          "status": "passed"
+        }
+      ],
+      "source_sha256": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a"
+    }
+  },
+  "passed_groups": 47,
+  "served_assets": {
+    "https://serverless.lelabs.tech/": "c097ae5e1278bc0fdac120b4d477eef77170db6c6738621bfdbe09b688cda1d4",
+    "https://serverless.lelabs.tech/favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+    "https://serverless.lelabs.tech/assets/index-DPRUSZLF.js": "8be7762519ed7c533c6eccfe7b8f3945eb67a980de10871d0577748196a784d2",
+    "https://serverless.lelabs.tech/assets/index-m_qusgUe.css": "fa402623fda809535a8d28a440d6db9f1e8cd4050064b6ec606eee4a92f0953d"
+  },
+  "spark_notes": {
+    "applied_through_console": true,
+    "verified": {
+      "README.md": "6282cb45cc8a858ad549b7072d69ae3d4065f35c324c7f8edb0fac6576a91ab0",
+      "CONTRIBUTORS.md": "55cb712015cc6c2616fd633b187120a759122ea1d386857787e170ea74ddbbd3",
+      "INSTALL.md": "dff99ff56bedd9f0987c69cc3e3d756ad6fd111a19dc2611333c6837b5e1806f"
+    }
+  },
+  "review_corrections": [
+    "Nettoyage du banc bloquant la libération du bail si la suppression Docker n’est pas confirmée",
+    "Erreurs de restauration collectées dans un rapport incomplet ; ressources des refus enregistrées avant les appels",
+    "État vide et version monotone après abort documentés conformément aux reçus"
+  ],
+  "limitations": [
+    "Mutations publiques et publication à raccorder à la décision du contrôle",
+    "Admission, réservations globales, min/max/idle, générations et reprise du contrôle à intégrer",
+    "Passerelle authentifiée avec origine/IP et observations UI à intégrer",
+    "Acquisition partielle après SIGKILL, marge physique et panne du registre à qualifier"
+  ]
+}

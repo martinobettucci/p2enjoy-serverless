@@ -23,17 +23,24 @@ cellule ; le code installé reste possédé par root. Les opérations locales et
 la maintenance sont décrites dans [STORAGE_AGENT](STORAGE_AGENT.md). Son
 raccordement aux instances passe quatorze groupes réels ; les API publiques
 et les admissions restent à réaliser.
+L'agent prépare aussi les mutations de quotas en deux phases : l'ancienne
+allocation reste réservée jusqu'à commit/abort et un reçu versionné survit aux
+interruptions. Seuls les chemins nouveaux restés vides peuvent être retirés à
+l'abandon. Le protocole est qualifié ; son raccordement à la décision SQL des
+mutations publiques suit [ADMISSION](ADMISSION.md).
 Les répertoires supprimés encore ouverts restent comptés jusqu'à Releasedir.
 Les copies avec repli noyau passent par les écritures contrôlées du proxy.
 
-Le contrôle et l'interface initiale sont déployés en DEV, avec la qualification
-administrateur encore ouverte. Le banc décrit ci-dessous reste déployé à côté
+Le contrôle et l'interface initiale sont déployés en DEV, avec 19 groupes API
+administrateur et onze parcours UI qualifiés dans la [preuve de gestion](evidence/control-management-dev-2026-11-06.json).
+Le banc décrit ci-dessous reste déployé à côté
 du contrôle ; les montages de preuve sont nettoyés. La CLI Python de
 plan/packaging passe 24 scénarios ciblés dans Docker ; le chargeur Node passe
 36 scénarios réels. L'extracteur ZIP passe 112 contrôles réels, avec une
 preuve indépendante des contenus et le chargement des douze fonctions.
-La publication des révisions est intégrée au contrôle DEV, avec qualification
-authentifiée encore ouverte. Le pilote d’instances chaudes est implémenté ;
+La publication des révisions est intégrée au contrôle DEV, avec onze groupes API
+et sept groupes CLI authentifiés qualifiés, puis quatre groupes de plafonds et
+de reprise après interruption. Le pilote d’instances chaudes est implémenté ;
 son raccordement aux admissions et à la passerelle reste à réaliser.
 
 La compilation du stockage utilise Go 1.27.3 dans une image épinglée. go-fuse
@@ -51,7 +58,8 @@ archive est relue sans suivre les liens puis comparée à son empreinte avant
 envoi. Les fonctions sont publiées en série, les identifiants connus sont
 conservés dans le rapport et les mutations ne sont jamais rejouées automatiquement.
 Les refus locaux et un refus HTTPS 401 passent 14 contrôles réels ; la campagne
-positive, les résultats partiels et la pagination attendent la session SSO.
+positive, les résultats partiels et la pagination passent sept groupes avec
+la vraie session SSO : [preuve authentifiée](evidence/deployment-authenticated-dev-2026-11-06.json).
 
 ### Validation du code
 
@@ -67,9 +75,9 @@ d’invocation. Les logs sont drainés, bornés, expurgés en conservant les pos
 brutes avant troncature, puis convertis en UTF-8 borné. L'échéance extérieure
 de quinze secondes englobe création, démarrage et import. Le pilote ferme
 les connexions et supprime le conteneur avec ses descendants avant de conclure.
-La preuve porte sur le chargement et ses pannes ; les droits de publication
-et la réconciliation d'un contrôle interrompu doivent être qualifiés par
-les parcours API maintenant intégrés.
+La preuve porte sur le chargement et ses pannes. Les droits de publication
+et la réconciliation d'un contrôle interrompu disposent de campagnes API
+distinctes, recensées avec leurs limites restantes dans le backlog.
 
 ### Instances d’exécution
 
@@ -104,7 +112,9 @@ L'extracteur travaille par descripteurs de répertoire sans suivre les liens,
 applique les permissions readonly puis publie le candidat avec
 renameat2(NOREPLACE). Son image Python indépendante permet la qualification
 sans recréer le contrôle en service. Le même extracteur est maintenant appelé
-par les routes de publication, dont l'admission et la reprise restent à qualifier.
+par les routes de publication. Leurs plafonds et la reprise pendant réception
+ou validation sont qualifiés ; expiration, budget et interruption du nettoyage
+restent ouverts.
 
 ### Coordination des publications
 

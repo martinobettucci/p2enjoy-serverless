@@ -68,7 +68,7 @@ Le contrat est [STORAGE_AGENT](../docs/STORAGE_AGENT.md). Le service
 `p2enjoy-storage-dev.service` expose un socket Unix privé à `spark-docker`,
 avec contrôle d’UID, quotas data/cache, baux durables et opérations explicites
 de conservation, archive, purge et vidage du cache. Il possède sa propre base
-SQLite WAL (migrations 001 et 002), distincte de celle du contrôle.
+SQLite WAL (migrations 001, 002 et 003), distincte de celle du contrôle.
 Le binaire accepte `-name` pour identifier chaque génération dans mountinfo ;
 son défaut reste `p2quota` pour les commandes existantes.
 
@@ -119,8 +119,8 @@ L’arrêt normal d’exploitation doit d’abord drainer les consommateurs.
 Le raccordement aux instances passe quatorze groupes réels :
 [preuve](../docs/evidence/managed-storage-dev-2026-11-06.json). Les mutations
 publiques et la console restent à raccorder.
-Les interruptions pendant préparation/acquisition partielle et la marge de
-filesystem restent à qualifier. Une coupure électrique et un processus bloqué
+L'acquisition partielle après interruption et la marge de filesystem restent
+à qualifier. Une coupure électrique et un processus bloqué
 dans un appel noyau impossible à tuer ne sont pas reproduits par ces campagnes.
 
 Le canal installé est `/srv/p2enjoy-serverless/storage-channel`, privé 0700 et
@@ -130,3 +130,26 @@ Le répertoire demeure en place et seul le socket est recréé. L'unité conserv
 la racine installée dans une annotation de garde, comparée à la configuration
 officielle même lorsque l'agent est arrêté. Cette annotation n'injecte aucune
 variable d'exécution. Une migration de racine exige une procédure explicite.
+
+## Préparation des quotas avant publication
+
+L'agent expose `prepare-configuration`, `commit-configuration`,
+`abort-configuration` et `configuration-operation`. Une préparation sonde les
+vrais quotas mais conserve la configuration et l'allocation précédentes jusqu'à
+la décision. Les commandes portent les UUID de fonction, d'opération et
+d'installation ; préparer exige aussi la version courante du registre.
+Les répertoires nouveaux ne sont retirés à l'abandon que s'ils sont vides.
+Le reçu durable permet de retrouver une décision après perte de réponse ;
+la version progresse même après abandon, pour refuser une ancienne demande.
+
+Comme root du SPARK DEV, lancer `python3 -B
+/srv/p2enjoy-serverless/e2e/storage-preparations.py`. La campagne utilise le
+client embarqué dans le contrôle, l'agent installé, les montages et des clients
+Docker réels. Elle interrompt réellement l'agent pendant une préparation,
+redémarre un abandon partiel et conserve une donnée inattendue avant résolution.
+Son rapport `storage/preparations-proof.json` exige completed/cleanup vrais,
+zéro échec et zéro skip. Exécuter ensuite les régressions en série.
+Le protocole et sa reprise sont définis dans [ADMISSION](../docs/ADMISSION.md).
+Les dix groupes de préparation et 37 groupes de régression passent sur le
+paquet installé : [preuve recoupée](../docs/evidence/storage-preparations-dev-2026-11-06.json).
+Le raccordement aux mutations publiques du contrôle reste à réaliser.

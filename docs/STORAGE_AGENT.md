@@ -252,7 +252,8 @@ l'installateur dans la cellule, avec le propriétaire et le mode requis, hors
 de la racine des données et de `/run`.
 
 Le protocole expose health, status, leases (pagination de 50), configure,
-acquire, release, check, archive, purge et clear-cache. Il refuse les clés
+prepare-configuration, commit-configuration, abort-configuration,
+configuration-operation, acquire, release, check, archive, purge et clear-cache. Il refuse les clés
 inconnues et les doublons JSON. Le délai maximal d’attente du verrou est trois
 secondes. Une déconnexion du demandeur ne révoque pas une mutation engagée.
 Les lectures de registre restent disponibles pendant la récupération ; les
@@ -281,3 +282,13 @@ résolution opposée. Les répertoires dont l'absence initiale n'est pas établi
 ne sont jamais retirés par compensation. L'abandon d'une création conserve un
 état vide versionné dans l'agent pour refuser les anciennes demandes ; il ne
 conserve aucune allocation et ne crée pas de fonction visible dans le contrôle.
+
+Le paquet installé inclut migrations/003.sql. Après application de cette
+migration, un ancien agent limité aux versions 001/002 refuse le registre :
+le retour arrière exige une restauration explicitement préparée, pas un simple
+changement de chemin de paquet. L'installation normale refuse les préparations
+en attente comme les baux actifs. Une préparation preparing/prepared survit au
+restart et attend sa décision ; seul aborting reprend automatiquement son
+nettoyage conservateur. configuration-operation reste une lecture disponible
+pendant la récupération. La présence d'une intention dégrade health sans fermer
+les lectures du registre.

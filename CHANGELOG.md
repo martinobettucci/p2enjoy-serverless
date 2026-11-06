@@ -2,6 +2,16 @@
 
 ## [Non publié]
 
+- Quotas préparés avant publication : configuration précédente conservée,
+  budget réservé jusqu'à décision, commit/abort idempotents et reçus versionnés.
+  La migration 003 de l'agent garde les décisions après interruption ; un abandon
+  retire uniquement les répertoires nouveaux restés vides.
+- Dix groupes réels et 37 groupes de régression passent avec nettoyage confirmé,
+  zéro échec et zéro skip : SIGKILL pendant préparation, restart après préparation
+  ou abandon partiel, données conservées et refus sous bail actif.
+  [Preuve](docs/evidence/storage-preparations-dev-2026-11-06.json).
+  Les mutations publiques restent à raccorder à la décision SQL du contrôle.
+
 - Instances raccordées aux baux de l’agent : quatorze groupes réels réussis,
   avec persistance data/cache, quotas Linux, partage/isolation, pagination,
   annulations, timeout, perte FUSE et arrêt/reprise de l’agent. Destruction

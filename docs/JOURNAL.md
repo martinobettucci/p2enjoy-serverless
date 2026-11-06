@@ -1292,3 +1292,50 @@ SQL de l'objet et de sa décision ; confirmer ensuite commit dans l'agent. Avant
 cette décision, une interruption entraîne abort. Après, elle reprend commit.
 Cette étape sert directement les créations, mises à jour et publications réelles
 avant activation de la passerelle ; le goal garde son périmètre complet.
+
+### SLS-040/050 — préparations de quotas installées et qualifiées
+
+Les contrats 4a80ce2, 5e54c37 et 2660a45 précèdent cette réalisation. La revue
+confirme la réservation de l'ancien quota jusqu'à décision, la compensation
+limitée aux répertoires nouveaux vides et la reprise de preparing/prepared
+sans décision implicite. Le contrat ADMISSION est aligné sur le maintien d'un
+état vide versionné après abandon ; un reçu remplacé ne permet pas le rejeu
+d'une ancienne préparation. Le registre de stockage passe à sa migration 003.
+
+Le paquet protégé installé porte l'empreinte
+4ba9e4bf5626d221596725566102d919047d19c43a944bfa20cd1a12bd8a3d34.
+La nouvelle campagne passe dix groupes réels : préparation et publication,
+propriété, baux actifs, réservation sous saturation, versions et décisions
+répétées/opposées, fichiers conservés lors des refus, restart après prepared,
+SIGKILL pendant preparing observé, abandon partiel après retrait du cache
+et préservation d'un répertoire antérieur. Le signal vise le pidfd vérifié du
+seul agent DEV ; aucun état de registre n'est fabriqué pour provoquer la panne.
+
+La revue du banc a corrigé avant exécution son nettoyage : conserver les
+correspondances conteneur/bail/fonction, bloquer release/abort/purge après un
+échec de destruction, collecter les erreurs indépendantes et enregistrer les
+identifiants des refus avant les appels. Une connexion SQLite de surveillance
+est maintenant fermée explicitement ; la version finale du scénario est
+rejouée intégralement. Ces corrections concernent le client de preuve.
+
+Les régressions passent en série : quinze groupes de l'agent, huit groupes de
+limites et quatorze groupes du pilote avec baux, soit 47 groupes avec la nouvelle
+campagne. Zéro échec/skip, nettoyages confirmés. La preuve
+storage-preparations-dev-2026-11-06.json recoupe 62 sources locales/distantes,
+21 fichiers embarqués et le paquet installé. Les 73 archives antérieures sont
+intactes. Aucun bail, montage, allocation, intention, conteneur/réseau d'instance,
+validation ni espace temporaire de campagne ne subsiste.
+
+L'image du contrôle reste aaf50a012184335e331acb40ccecdf5cedbe4b360eedb3bf31fe193d812c9bef.
+Les deux conteneurs permanents et l'agent sont sains. La configuration consommée
+concorde avec /etc/spark/env et /run/spark/secrets ; la route reste
+serverless.lelabs.tech vers 18090 avec TLS. Les trois notes sont proposées,
+appliquées par la console puis relues. Le registre d'incohérences étant vide,
+son fichier est retiré conformément au contrat. Aucun remote Git n'est configuré.
+
+Prochaine réalisation : intentions durables du contrôle et raccordement des
+créations, modifications, suppressions et publications, avec relecture des
+droits/versions après préparation. La publication SQL doit porter sa décision ;
+une perte d'ACK après commit ne peut pas annoncer que l'ancienne configuration
+est conservée. Admission, min/max/idle, passerelle, observations et parcours UI
+restent ensuite à terminer. Le goal demeure actif et conserve tout son périmètre.

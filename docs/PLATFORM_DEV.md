@@ -219,7 +219,8 @@ Le paquet versionné par empreinte est installé sous `/usr/local/lib` avec
 propriétaire root. Le service conserve UID/GID spark-docker, CAP_SYS_ADMIN
 seule, le namespace de montage de la cellule et un socket 0600 sous dossier
 0700. Les vrais binds Docker valident la visibilité des montages. La base
-séparée porte les migrations 001/002, avec intention de sonde avant lancement.
+séparée porte les migrations 001/002/003, avec intention de sonde avant lancement
+et reçus durables de configuration.
 Le contrôle est recréé avec le répertoire du canal monté readonly sous
 /storage-agent ; ses valeurs sont relues dans les deux fichiers officiels.
 L’installateur conserve le répertoire 0700 aux arrêts et l’agent recrée seulement
@@ -240,3 +241,32 @@ de restauration de sa base ; ne pas pointer l’unité vers l’ancien paquet en
 supposant une migration descendante. Les backups de la cellule restent gérés
 par son mécanisme existant. Un restart forcé invalide les anciens binds et
 exige la réconciliation des consommateurs avant libération des baux.
+
+## Préparation des mutations de stockage
+
+Le paquet installé le 6 novembre porte l'empreinte
+`4ba9e4bf5626d221596725566102d919047d19c43a944bfa20cd1a12bd8a3d34`.
+L'installateur l'a préparé au repos, a fermé les mutations par quiesce puis a
+redémarré l'agent, qui a appliqué sa migration 003. L'image et le schéma du
+contrôle ne changent pas dans cette étape. Les paramètres, secrets et la route
+restent fournis par les fichiers officiels de la cellule.
+
+Les préparations réservent les augmentations sans libérer l'ancien quota. Les
+reçus distinguent prepared, committed et aborted ; un redémarrage ne choisit
+pas à la place du contrôle. L'abandon retire uniquement les répertoires nouveaux
+restés vides et conserve une version monotone même pour une création abandonnée.
+La campagne `python3 -B e2e/storage-preparations.py`, exécutée comme root dans
+le SPARK, qualifie dix groupes avec SIGKILL, reprise partielle et vrais fichiers.
+Le rapport reste sous storage/preparations-proof.json. Les commandes de
+régression agent-test, limits-test et e2e/managed-storage.py s'exécutent en série.
+Les 47 groupes passent avec nettoyage confirmé ; la [preuve recoupée](evidence/storage-preparations-dev-2026-11-06.json)
+vérifie 62 sources locales/distantes, 21 fichiers embarqués, le paquet protégé,
+la configuration officielle et les 73 archives de publication conservées.
+Les trois notes de cellule sont appliquées par sa console puis relues.
+Les mutations de gestion et de publication doivent encore être raccordées à
+ce protocole. L'admission et l'invocation publiques restent à réaliser et qualifier.
+
+La migration est additive, mais l'ancien agent n'accepte pas la version 003.
+Un retour à son paquet exige une restauration explicite et cohérente du
+registre après drainage, en tenant compte des écritures postérieures.
+Les mécanismes de sauvegarde du SPARK restent l'autorité d'exploitation.

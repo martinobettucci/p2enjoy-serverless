@@ -65,3 +65,18 @@ une reproduction E2E de cette course.
 arrêté, refus avant création, restauration via propositions de cellule et
 identité de registre conservée. Les démarrages invalides associés au nouveau
 canal sont vérifiés par les conteneurs isolés de `control-operations.py`.
+
+### Décisions de quotas — SLS-040/050
+
+`e2e/storage-preparations.py` exerce les vrais RPC, montages et écritures Docker.
+La réservation de l'ancien quota reste comptée lors d'une baisse, y compris
+avec le budget global saturé. Les refus portent sur les mutations concurrentes,
+le propriétaire, les baux actifs, la version et la taille réellement occupée.
+Commit/abort sont rejoués et une décision opposée est refusée. Le scénario
+SIGKILL vérifie preparing après SIGSTOP avant de tuer l'agent ; une préparation
+déjà achevée ferait échouer ce contrôle. Le restart après préparation conserve
+la décision en attente. L'abandon partiel retire d'abord un cache vide, puis
+rencontre une donnée inattendue : le restart doit préserver cette donnée et
+l'allocation, avant résolution explicite. Un répertoire antérieur vide est
+conservé. Les régressions agent, limites et instances gérées sont exécutées
+séparément, en série ; ces preuves ne remplacent pas celles de l'API publique.
