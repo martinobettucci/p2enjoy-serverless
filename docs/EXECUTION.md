@@ -79,6 +79,9 @@ exclut ce début, et null si le travail a été retiré puis perdu sans observat
 suffisante. Un import peut lui-même produire des effets avant le handler ;
 aucune de ces observations n’autorise un rejeu automatique. Le diagnostic
 rejoint le nettoyage sur SIGTERM et SIGINT, y compris au repos avec stdin ouvert.
+Les sorties fatales du superviseur portent des codes fixes pour distinguer
+protocole trop grand (120), refus/protocole (121), récolte (122), montage (123),
+deadline (124) et délai de canal (125), sans recopier de message applicatif.
 
 ## Événement, réponse et journaux
 

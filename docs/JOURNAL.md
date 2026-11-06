@@ -814,3 +814,9 @@ son attente stdin et rejoindre le nettoyage sur les signaux ordinaires.
 Les autres constats portent sur les champs nommés par Connection, la sortie
 fatale effective du superviseur et les courses de fermeture. Ils sont intégrés
 à la campagne réelle avant qualification de cette tranche.
+
+La première campagne reproduit le refus d’entrée échappée de 1 Mio. Après
+correction, ce cas passe ; une réponse de 6 Mio fait encore sortir le superviseur
+avec le code générique 1, sans événement OOM. Des codes de sortie fatale fixes
+sont ajoutés au contrat pour rendre cette panne observable sans exposer les
+messages applicatifs. Le diagnostic est vérifié sur les événements Docker réels.
