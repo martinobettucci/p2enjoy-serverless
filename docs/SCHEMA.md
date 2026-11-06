@@ -67,11 +67,22 @@ Contrat SLS-030 : [DEPLOYMENT](DEPLOYMENT.md). La migration suivante ajoute :
 
 - `deployments` : id, function_id, service_id, actor_kind, actor_id,
   expected_function_version, expected_service_version, configuration_cipher,
-  events_json, state, error_code nullable, reserved_bytes, created_at,
-  expires_at, completed_at nullable, revision_id nullable.
+  events_json, required_right, state, error_code nullable, validation_json
+  nullable, reserved_bytes, created_at, expires_at, completed_at nullable,
+  revision_id nullable. configuration_cipher devient NULL à la fin du candidat.
 - `revisions` : id, function_id, handler, runtime, architecture, image_id,
   archive_sha256, inventory_json, events_json, stored_bytes, created_at,
   deleted_at nullable. Les fichiers résident sous artifacts/{revision_id}.
+
+Le candidat et sa future révision partagent le même UUID. Son dossier privé
+`artifacts/{id}` contient `archive.zip` et `code/` dès la réception ; seule la
+transaction créant la ligne de révision et son pointeur actif le rend utilisable.
+Cette disposition évite une pseudo-transaction entre renommage et SQLite.
+Une réservation reste comptée tant qu'un nettoyage échoué n'est pas repris.
+Une révision supprimée conserve stored_bytes jusqu'à la suppression physique
+confirmée ; son tombstone reste en base avec stored_bytes=0 ensuite.
+Un trigger interdit un pointeur actif vers une révision absente, supprimée
+ou appartenant à une autre fonction.
 
 États de candidat : prepared, receiving, validating, published, failed,
 expired. Les états receiving/validating trouvés au redémarrage sont échoués

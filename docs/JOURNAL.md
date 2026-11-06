@@ -676,3 +676,24 @@ fichiers .?, appliqués par la console du SPARK puis relus sans écart. Les
 README des commandes sont aussi copiés près des sources installées. Aucune
 nouvelle variable, secret, route ou migration ; configuration toujours issue
 des deux env_file officiels. Aucun remote Git configuré, donc commit local.
+
+## Publication authentifiée — 2026-11-06
+
+La suite de SLS-030 relie les composants qualifiés au contrôle. Le helper SSO
+3998 est toujours vivant, mais aucune session administrateur n'est enregistrée.
+Les implémentations indépendantes se poursuivent ; aucun substitut d'identité
+ne servira de preuve aux routes authentifiées.
+
+La revue du flux confirme qu'authorize ouvre sa propre transaction et peut
+attendre le SSO : elle ne peut pas être appelée sous le verrou de publication.
+Le contrôle revalide donc avant le commit puis relit la credential exacte,
+les droits et versions dans cette transaction. Le candidat partage l'UUID
+de sa future révision et écrit dans un dossier privé sous artifacts : la
+publication est exclusivement le commit SQLite, sans renommage interposé.
+Un processus unique possède l'état par flock ; le démarrage réconcilie ses
+seuls labels Docker et conserve le budget des nettoyages échoués.
+
+Découpage retenu : migration et coordination, branchement aux routes et à la
+configuration de cellule, commande deploy, puis preuves authentifiées réelles
+et intégration console. Les contrats précisent les limites temporelles, les
+réservations, les diagnostics et l'archivage de fonction avant le premier code.

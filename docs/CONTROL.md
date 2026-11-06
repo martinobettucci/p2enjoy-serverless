@@ -25,6 +25,15 @@ sont retirés de droite à gauche ; le premier non approuvé est le client.
 Une chaîne absente ou malformée venant d'un proxy approuvé est refusée à 400.
 Forwarded et X-Real-IP ne sont jamais utilisés pour identifier le client.
 
+L'intégration de publication ajoute `SERVERLESS_STATE_HOST_PATH`, chemin
+absolu de `/state` vu par le démon, et `SERVERLESS_RUNTIME_IMAGE`, empreinte
+Docker immuable sha256 de l'image Node validée. `SERVERLESS_DOCKER_SOCKET_HOST`
+désigne le socket rootless à monter ; son chemin interne constant est
+`/docker.sock`. `SERVERLESS_ARTIFACT_BUDGET_MIB` vaut 4096 par défaut, entier
+entre 512 et 65536. Les chemins hôtes viennent de la cellule ; Compose lit
+les mêmes deux fichiers officiels pour ses substitutions de montage et ses
+env_file. Aucun fallback d'authentification n'est associé à ces paramètres.
+
 ## Connexion
 
 L'intégration DEV suit le [contrat du client créé](OIDC_DEV.llms.txt).

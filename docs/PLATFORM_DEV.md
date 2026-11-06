@@ -12,6 +12,15 @@ Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
 ## Ordre de réalisation
 
+Prochaine intégration SLS-030 : migration 003 des candidats/révisions et
+UUID d'installation durable, coordination des uploads et réconciliation,
+routes authentifiées puis commande deploy de l'adaptateur. Configurer par
+propositions de cellule les trois paramètres hôtes/image décrits dans CONTROL
+avant de recréer le contrôle avec le montage du socket Docker. Sauvegarder
+la base par l'API de backup SQLite avant migration ; la sauvegarde conserve
+les permissions privées et reste dans le SPARK. Les preuves positives des
+routes exigent la session SSO réelle, toujours absente à ce stade.
+
 L'extraction serveur est construite depuis `control/Dockerfile.artifacts`
 et qualifiée par `e2e/artifacts.py` : 112 contrôles réels réussis le 6 novembre,
 zéro échec et zéro test ignoré. Image, empreintes et périmètre figurent dans

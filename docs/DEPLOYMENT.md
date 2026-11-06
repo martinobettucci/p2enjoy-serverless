@@ -222,6 +222,59 @@ avec Update ; vingt révisions conservées par fonction constituent la limite
 initiale. La publication refuse de dépasser ce plafond sans purger silencieusement
 l'historique.
 
+### Intégration au contrôle
+
+Le corps de préparation est `{config, configuration, events}` : les deux
+premiers objets suivent les modèles du contrôle ; events reprend les listes
+normalisées `http` et `schedules` du plan de l'adaptateur, au plus seize de
+chaque type. Les chemins sont relatifs exacts, les méthodes distinctes, les
+crons numériques à cinq champs avec fuseau UTC. Une liste HTTP vide reçoit
+l'endpoint implicite portant le nom de fonction.
+
+`GET /api/deployments/{id}` permet au créateur encore détenteur du droit
+initial, ou à un admin, de suivre l'état et le diagnostic expurgé. Une seconde
+réception du même candidat est refusée. `DELETE /api/functions/{id}/revisions/{revision}`
+exige Update et refuse la révision active. Les lectures d'historique sont
+paginées et n'incluent pas les inventaires complets des archives.
+
+L'autorisation de publication s'effectue en deux temps : revalidation SSO
+éventuelle avant transaction, puis relecture SQL sur la connexion qui publie.
+Un admin reste lié à sa session exacte et à la version du jeton vérifiée ;
+un jeton de service est relu par ID et empreinte, avec ses droits et sa portée.
+Aucun appel HTTP ou Docker ni seconde transaction d'identité ne s'exécute
+sous le verrou de publication. La fermeture de session et la révocation
+concurrentes empêchent donc l'activation du candidat.
+
+Le contrôle prend un verrou de processus exclusif sur son état. Au démarrage,
+il reprend uniquement les validations portant son UUID d'installation et le
+label kind=validation. Il vérifie les labels après inspection, détruit les
+conteneurs concernés puis nettoie leurs canaux privés et les candidats
+interrompus. Les dossiers de révisions publiées restent conservés, même si
+le dernier client n'a pas reçu sa réponse. Une erreur de nettoyage garde sa
+réservation et bloque une nouvelle admission jusqu'à réconciliation.
+
+Les fichiers de candidat sont privés sous la racine d'artefacts, avec UUID
+du contrôle ; aucun chemin client ne détermine une destination. La réserve
+avant réception couvre 64 Mio de ZIP, 256 Mio extraits, les 20 000 fichiers
+et 20 000 répertoires par blocs de 4 Kio, plus les répertoires conteneurs.
+La réception est bornée à 120 secondes, l'extraction à 300 secondes ; la
+validation garde ses quinze secondes. L'extraction utilise un processus
+Python séparé, et les appels Docker de validation s'exécutent hors de la
+boucle HTTP. Le client de déploiement prévoit 480 secondes par upload.
+
+L'environnement effectif fusionne les variables de service puis de fonction,
+et de même les secrets ; une collision variable/secret entre ces niveaux est
+refusée, ainsi qu'un résultat dépassant les bornes du validateur. La version
+du service capturée garantit que le code validé reçoit la configuration qui
+sera activée. Le diagnostic terminal conserve seulement le résultat expurgé ;
+le payload chiffré temporaire est effacé après publication ou échec.
+
+La suppression d'une fonction désactive son pointeur et conserve ses révisions
+et son UUID avec les métadonnées archivées. Elle invalide les candidats en
+cours ; l'intégration du moteur ajoutera le drainage des invocations avant
+cette désactivation. L'historique conservé compte dans le budget d'artefacts ;
+sa purge appartient au parcours administrateur d'archives de SLS-050.
+
 ## Chargeur et validation Docker
 
 Le même chargeur est utilisé pour valider puis invoquer. Un chemin avec
