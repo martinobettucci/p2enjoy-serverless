@@ -891,3 +891,10 @@ avec drainage/recréation et aucune prétendue réparation de leurs binds.
 Les sondes FUSE sont des processus bornés plutôt que des threads abandonnés.
 Le plan de réalisation est registre/supervision, baux du pilote, puis routes
 publiques et admissions ; les preuves de chaque tranche restent distinctes.
+
+La revue du contrat fait expliciter la préparation des deux volumes : retrait
+confirmé de chaque candidat avant commit, acquisitions bloquées par intention
+durable, compensation du premier si le second échoue. Les places de montage et
+augmentations de quota sont réservées avant ces préparations et conservées sur
+nettoyage non confirmé. L’archivage refuse sous bail ; le drainage relève du
+contrôle. Ces précisions précèdent le code de gestion des volumes.

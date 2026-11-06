@@ -73,6 +73,15 @@ Un échec conserve les anciens quotas inscrits et les fichiers. Une configuratio
 identique est idempotente. Les générations attendues empêchent une mutation
 sur un état devenu périmé.
 
+La préparation démonte l’ancienne génération avant de lancer un candidat sur
+le même backing. Chaque candidat est arrêté et son démontage confirmé avant
+le commit commun. Une intention durable bloque toute acquisition pendant cette
+préparation. Si le second volume échoue, les candidats du premier sont aussi
+retirés ; les anciens quotas restent publiés et seront remontés à la prochaine
+acquisition. Un nettoyage non confirmé garde l’intention et un état dégradé.
+La reprise retire ces seules générations identifiées avant de lever le blocage ;
+elle ne présente pas le seul état SQLite comme une compensation achevée.
+
 Un bail porte l’UUID du consommateur, celui de son contrôle et la fonction.
 Il est durable avant création Docker et protège les deux montages demandés.
 L’acquisition vérifie quotas et état courants, limite de montages, identité FUSE
@@ -127,7 +136,9 @@ même règle de conservation ; son caractère reconstructible autorise un vidage
 explicite après drainage, pas une suppression implicite au changement de mode.
 
 Archiver une fonction désactive ses volumes, interdit les nouveaux baux et
-conserve données et cache. La purge exige l’état archivé et l’absence de bail.
+conserve données et cache. L’archivage refuse tant qu’un bail subsiste ; le
+contrôle ferme les admissions et termine le drainage avant de le demander.
+La purge exige l’état archivé et l’absence de bail.
 Elle est réservée aux administrateurs par le contrôle. L’agent sépare la mise
 à l’écart atomique des fichiers et leur suppression effective ; la réservation
 n’est libérée qu’après nettoyage confirmé. Un échec conserve un état reprenable.
@@ -140,6 +151,11 @@ dans le budget global. Le défaut est 32 Gio, avec 8 Gio de marge de libre espac
 sur le filesystem de la racine avant une nouvelle allocation. Une augmentation
 est refusée si ces contraintes ne tiennent pas. La limite de montages simultanés
 vaut 64 par défaut ; un volume conservé sans bail ne garde pas un démon inutile.
+Les préparations et démarrages réservent aussi une place avant le lancement,
+et un arrêt non confirmé la conserve. Une préparation réserve durablement
+chaque augmentation de quota en plus des allocations publiées ; une baisse
+n’est libérée qu’au commit. Cette règle peut refuser un transfert entre deux
+volumes lorsque sa préparation dépasse temporairement le budget disponible.
 Les quotas de volume gardent la plage publique de 1 à 65 536 Mio. La limite
 agrégée peut donc refuser une allocation individuelle pourtant valide.
 
