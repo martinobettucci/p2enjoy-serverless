@@ -85,10 +85,14 @@ injecter de code, jetons ou données de client. `serverless.yml` décrit ce banc
 `serverless.platform.yml` réutilise ses handlers avec quotas, variables et
 secrets déclarés pour la plateforme. La CLI `python3 -m adapter` sait produire
 son plan et ses ZIP. Les routes d'upload et de validation Node sont intégrées
-au contrôle DEV ; leur preuve authentifiée utilise `e2e/deployments.mjs` et
-reste ouverte. La variante originale `artifacts/deployment-delay.mjs` effectue
+au contrôle DEV ; les onze groupes de `e2e/deployments.mjs` et les sept de la
+CLI passent dans la [preuve authentifiée](../docs/evidence/deployment-authenticated-dev-2026-11-06.json).
+La variante originale `artifacts/deployment-delay.mjs` effectue
 un véritable import asynchrone pour observer les révocations et modifications
 concurrentes pendant la validation Docker.
+`artifacts/log-secret-then-throw.cjs` écrit réellement le secret injecté sur
+stderr puis échoue à l'import : la preuve exige le préfixe conservé et la
+valeur expurgée. Le module `throws.cjs` éprouve seulement l'exception d'import.
 
 | Fonction | Contrat à qualifier |
 | --- | --- |

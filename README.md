@@ -7,10 +7,12 @@ application indépendante de qualification et son exécuteur de référence DEV
 sont disponibles dans **[qualification/](qualification/README.md)**, avec
 handlers, manifeste `serverless.yml`, Docker, tests et commandes d'exploitation.
 L'[adaptateur](adapter/README.md) prépare les plans, archives ZIP et publications
-HTTPS via sa commande `deploy`, dont la qualification authentifiée reste ouverte. La
+HTTPS via sa commande `deploy`, dont les sept groupes authentifiés passent. La
 validation Node dans Docker est disponible dans [runtime/](runtime/README.md),
 avec 36 scénarios réels réussis. Les routes de publication, d'historique et de
-rollback sont déployées en DEV ; leurs parcours authentifiés restent à qualifier.
+rollback sont déployées en DEV ; onze groupes authentifiés passent :
+[preuve de publication](docs/evidence/deployment-authenticated-dev-2026-11-06.json).
+Expiration, plafonds globaux et interruptions restent à éprouver.
 Le pilote Docker d’instances chaudes passe 31 contrôles d’invocation et
 11 de cycle de vie : [preuve DEV](docs/evidence/instances-dev-2026-11-06.json).
 La passerelle, les admissions et l’intégration des volumes restent à réaliser. L'extracteur ZIP serveur dans

@@ -27,8 +27,8 @@ Consulter ce candidat avant toute relance. Les avertissements précèdent les
 appels sur stderr ; stdout contient le rapport final sans configuration ni logs.
 
 Les preuves CLI exécutent le vrai processus ; les preuves de déploiement
-utilisent la véritable API DEV et une identité SSO. Les publications positives
-de cette commande restent à qualifier.
+utilisent la véritable API DEV et une identité SSO. Les sept groupes authentifiés
+passent : [preuve de publication](../docs/evidence/deployment-authenticated-dev-2026-11-06.json).
 Chaque campagne est séquentielle. Les sorties locales vont dans .serverless-p2
 du projet et sont exclues des archives. Les valeurs de secrets restent hors
 des descripteurs et de la sortie standard.
@@ -48,5 +48,6 @@ volontairement invalide n’est jamais accepté comme identité. Le rapport est
 publication. Depuis le dépôt du poste, `node e2e/adapter-deploy.mjs` utilise
 la session SSO réelle pour créer ses jetons, puis exécute la CLI et les
 validations Docker : pagination, mises à jour, résultats partiels et reprise
-de brouillon. Une session SSO réelle est disponible sur le nouveau domaine ;
-cette campagne authentifiée reste à exécuter.
+de brouillon. Les ruptures après envoi, modifications concurrentes des fichiers,
+redirections et réponses trop grandes restent à éprouver avec leurs causes réelles.
+L'invocation du code publié attend le raccordement du moteur.

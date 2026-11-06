@@ -97,9 +97,13 @@ Les assertions portent sur droits, candidats, import, révisions, révocation,
 conflits, admission unique, rollback et suppression des révisions inactives.
 Les archives conservées à la suppression d’une fonction sont recensées dans
 le rapport ; ce nettoyage de gestion n’est pas une purge d’archives.
-Cette campagne exige la session SSO et n’est pas encore réussie. Les limites
+Cette campagne exige la session SSO ; ses onze groupes passent, ainsi que les
+sept groupes CLI, dans la [preuve authentifiée](../docs/evidence/deployment-authenticated-dev-2026-11-06.json).
+Une fixture écrit réellement un secret avant d'échouer à l'import ; le client
+vérifie son expurgation et rejoint ses quatre uploads concurrents avant nettoyage.
+Les limites
 globales, l’expiration, la reprise après crash et les parcours CLI/UI complets
-restent des preuves distinctes à ajouter et exécuter.
+restent des preuves distinctes à compléter et exécuter.
 
 `adapter-deploy-public.py`, exécuté sur le SPARK par `bash adapter/dev.sh
 deploy-public-test`, appelle de vrais processus CLI pour les prérequis,
@@ -108,7 +112,11 @@ les bornes de configuration et le refus 401 de la véritable API HTTPS DEV.
 commande deploy : onze fonctions imposent une pagination, un import qui
 lève réellement une erreur produit un résultat partiel, et un brouillon
 refusé est repris avec Read/Create. Les révisions archivées à la suppression
-sont recensées. La campagne authentifiée reste en échec de prérequis.
+sont recensées. Ses sept groupes sont réussis et le nettoyage confirmé.
+Le recoupement vérifie les archives sur disque et l'absence de réservations,
+de canaux et de conteneurs de validation restants. Les cas de rupture réseau,
+de modification locale concurrente, de redirection et de réponse trop grande
+restent ouverts.
 
 `runtime-instances.py` exerce le diagnostic réel en processus séparé : enfants
 neufs dans un conteneur chaud, corps aux limites, callbacks, ESM et dépendances,

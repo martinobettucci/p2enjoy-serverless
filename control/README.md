@@ -56,8 +56,13 @@ ressources et la configuration applicative courantes.
 `node e2e/deployments.mjs`, depuis la racine du dépôt, exige une session SSO
 réelle enregistrée par `e2e/authorize.mjs`. Le pilote empaquette les sources
 de qualification, crée ses objets et jetons par les API puis exerce publication,
-refus, révocation pendant validation, conflits et rollback. Cette campagne
-n'est pas encore qualifiée. L'API de publication ne fournit pas l'invocation.
+refus, révocation pendant validation, conflits et rollback. Ses onze groupes
+passent ; sept groupes CLI passent ensuite sur le même contrôle :
+[preuve authentifiée](../docs/evidence/deployment-authenticated-dev-2026-11-06.json).
+Les archives conservées sont vérifiées sur disque, les validations Docker
+supprimées et les réservations libérées. Expiration, plafonds globaux,
+interruptions et interface de révisions restent ouverts. L'API de publication
+ne fournit pas l'invocation.
 
 `app/artifacts.py` fournit l'extraction bornée des ZIP classiques. Sa CLI
 vérifie les en-têtes, les tailles réelles, les CRC et les chemins, écrit dans

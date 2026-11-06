@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Publication authentifiée : onze groupes API et sept groupes CLI réussis,
+  dont concurrence réelle, droits, rollback, pagination, résultats partiels
+  et reprise de brouillon. Le client rejoint ses uploads avant nettoyage ;
+  une fixture écrit réellement un secret pour prouver l'expurgation des logs.
+  Sources, archives et état Docker recoupés ; limites et interruptions ouvertes.
+
 - Gestion authentifiée qualifiée : 19 groupes API, 11 parcours UI et huit
   groupes publics, nettoyage confirmé et sept captures relues. Noms longs
   lisibles sur mobile et restitution du focus après fermeture du menu corrigés.

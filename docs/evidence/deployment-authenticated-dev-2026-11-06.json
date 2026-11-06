@@ -1,0 +1,615 @@
+{
+  "unit": "SLS-030",
+  "unit_complete": false,
+  "date": "2026-11-06T16:38:58.393049+00:00",
+  "target": "infra-serverless DEV",
+  "spec_commits": [
+    "ca47c39",
+    "af1580e"
+  ],
+  "scope": "Publication authentifiée API et CLI : packaging réel, validation Docker, droits, concurrence et rollback de révision",
+  "deployed": {
+    "sources": {
+      "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "control/app/api.py": "dc73c8cee4e7d2fbfe98da21bfc517987fde442a758794054ec48a6859046824",
+      "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "control/app/config.py": "0e08503ad40c05ba72aed23bb96266770716de774a18d4c094f7746eff54e72f",
+      "control/app/db.py": "55bb45fe2c4eaaf29496de3b6515d689f69cb07be60a8d9fc4184534f67e3c79",
+      "control/app/deployments.py": "ff3b527eeafa7ff5a159d7a2716ba2795a938c74bf4c3eb88313e6c9e44e6a95",
+      "control/app/instances.py": "a3b5dbf14d85245b87b4c75ac10326073f881ae6501c86da1a21589d96fcdac3",
+      "control/app/main.py": "ff669c4cc5d2cfb1981680c11774ac66ecd112938897039060c395c31bcfe4f5",
+      "control/app/models.py": "fef330910e4555a02ab2e452a48518c022e81c339041b0b854d9605dc07b0f9c",
+      "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "control/app/validator.py": "f088cc26c509ef6f1a7f7816787e81523cc473bbf392e4739c13917937b1ab85",
+      "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "web/src/api.js": "44c428bf8a13b7bd91faca929b7aa5ef63466861c89e387c5e3bbdbf93d610a9",
+      "web/src/function.jsx": "e827072092bcac273cd3f2b6a147a71b3f9226a929458c57574ab7c4fcafef0b",
+      "web/src/main.jsx": "9ca3abe92d89669f12e1fd6d65b5975ab33ef4c30b9eca2e2190f51ca18a9cb6",
+      "web/src/management.jsx": "94f2851b28ef8cd48a5569b6ca3fbfc966d7549d8fb2f51f522f1b674e9762a5",
+      "web/src/style.css": "fb845d5f1b8c96842db0a794f5db12da216b5f662664c5fd86f4dd89d852a632",
+      "web/src/ui.jsx": "62026ca8f5be957a6986ad1642855ff1de32e46cc52f8d4c667c95f53f62bcf5",
+      "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+      "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+      "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+      "adapter/deploy.py": "a73059d49e7d236afe20190671f2cc5ea32659fdecf184980a510f04b6d0f22a",
+      "adapter/manifest.py": "aefb4a62d1c2599ecea67a8c84c2341226135c151be18af74b79fc0b0cc6ce1e",
+      "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+      "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+      "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+      "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+      "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+      "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+      "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+      "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+      "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+      "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+      "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+      "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+      "e2e/deployments.mjs": "700203d339f2452022afa40185e98b3107ecbcdcdfd7f72f685627a84e6d196f",
+      "e2e/adapter-deploy.mjs": "4dff1956ed16209d2cfae6124dbda18b22da78d3fc1b5506b54cc60019c3fe46",
+      "control/Dockerfile": "a739350a3b2551c1fd03d59cc7bece5c296d252e029785442dad59450332cc16",
+      "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+      "control/compose.spark.yml": "dc7546685ed6a10cdfaebcc46474e033df1f171407044fed62d00a6fcc0a2aac",
+      "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+      "web/package.json": "4cb742f19dbce36e4c28482d645e807bba1aad4ca48667e9d3e5fa2a3394457a",
+      "web/package-lock.json": "cac4d733e880aca30daa1cd8d24d2f0727abb81ffd14930839408e65335c99f7",
+      "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+      "e2e/control-admin.mjs": "8e020e14d0b96c10c14b8513125dc6a639e87bf0210b2d1a58745e4789e02793",
+      "e2e/control-ui.mjs": "caebf5ff2927a337db1847f4cf657814ba216d0b88a8a154c9d25a6dc708787c",
+      "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316"
+    },
+    "baked_sources": {
+      "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "app/deployments.py": "ff3b527eeafa7ff5a159d7a2716ba2795a938c74bf4c3eb88313e6c9e44e6a95",
+      "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "app/config.py": "0e08503ad40c05ba72aed23bb96266770716de774a18d4c094f7746eff54e72f",
+      "app/db.py": "55bb45fe2c4eaaf29496de3b6515d689f69cb07be60a8d9fc4184534f67e3c79",
+      "app/api.py": "dc73c8cee4e7d2fbfe98da21bfc517987fde442a758794054ec48a6859046824",
+      "app/instances.py": "a3b5dbf14d85245b87b4c75ac10326073f881ae6501c86da1a21589d96fcdac3",
+      "app/models.py": "fef330910e4555a02ab2e452a48518c022e81c339041b0b854d9605dc07b0f9c",
+      "app/main.py": "ff669c4cc5d2cfb1981680c11774ac66ecd112938897039060c395c31bcfe4f5",
+      "app/validator.py": "f088cc26c509ef6f1a7f7816787e81523cc473bbf392e4739c13917937b1ab85",
+      "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "web/index.html": "c097ae5e1278bc0fdac120b4d477eef77170db6c6738621bfdbe09b688cda1d4",
+      "web/favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+      "web/assets/index-m_qusgUe.css": "fa402623fda809535a8d28a440d6db9f1e8cd4050064b6ec606eee4a92f0953d",
+      "web/assets/index-DPRUSZLF.js": "8be7762519ed7c533c6eccfe7b8f3945eb67a980de10871d0577748196a784d2"
+    },
+    "services": {
+      "serverless-api": {
+        "image": "sha256:90219c44766965c211edd5836479741f6db18c3283ebb1b7052c4587d2238748",
+        "healthy": true
+      },
+      "serverless-runtime-reference": {
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "healthy": true
+      }
+    },
+    "configuration": {
+      "matches_official_files": true,
+      "keys": [
+        "SERVERLESS_PUBLIC_URL",
+        "OIDC_ISSUER",
+        "OIDC_CLIENT_ID",
+        "OIDC_CLIENT_SECRET",
+        "SERVERLESS_MASTER_KEY",
+        "SERVERLESS_STATE_HOST_PATH",
+        "SERVERLESS_DOCKER_SOCKET_HOST",
+        "SERVERLESS_RUNTIME_IMAGE",
+        "SERVERLESS_TRUSTED_PROXIES"
+      ],
+      "secret_values_excluded": true
+    },
+    "database": {
+      "integrity": "ok",
+      "active_objects": {
+        "namespaces": 0,
+        "services": 0,
+        "functions": 0
+      }
+    },
+    "retained_archives": [
+      {
+        "function_id": "a0e8b76e-0a60-407d-9f67-eca6728c5a1e",
+        "revision_id": "0a0d2eb9-c87d-46c0-9e82-4b9d2a800060",
+        "archive_sha256": "f3ea00469a7db141431fd8163fb63b78756dcef94dad0537a34a37b972b4a92d",
+        "stored_bytes": 49152
+      },
+      {
+        "function_id": "25d43f62-0c5f-4c08-90c9-0bb0d89eaed1",
+        "revision_id": "a15d1cb8-a42c-4fdc-a9bf-1c114809d017",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "25d43f62-0c5f-4c08-90c9-0bb0d89eaed1",
+        "revision_id": "358edbe6-4303-42e6-863e-25ed3d2865fb",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "499894a6-ef62-4a21-acb3-bb8be33a1803",
+        "revision_id": "278691e5-8aa2-4594-9490-3de9dbff33eb",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "499894a6-ef62-4a21-acb3-bb8be33a1803",
+        "revision_id": "3db77b3b-210e-4faa-b3ee-d099954030cf",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "499894a6-ef62-4a21-acb3-bb8be33a1803",
+        "revision_id": "237bf058-d6e5-4149-b123-6337e7b28fe2",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "279b8048-a3d2-4bae-9604-4b08526f2f90",
+        "revision_id": "d6fac4bb-8c87-4dc0-8236-d6c228d87b46",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "279b8048-a3d2-4bae-9604-4b08526f2f90",
+        "revision_id": "69c14c19-a2d7-4f94-b267-15208350bfac",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "279b8048-a3d2-4bae-9604-4b08526f2f90",
+        "revision_id": "fb377c8b-c3f2-47e8-bef0-0bc7cdc2c11e",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "ba1797f7-dd75-4e5d-83ce-295ecd93afa1",
+        "revision_id": "647217c6-f770-4cc1-8a3f-ae8f450c2e23",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "ba1797f7-dd75-4e5d-83ce-295ecd93afa1",
+        "revision_id": "4481f083-88ec-491b-a3a4-7769fd0db851",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "ba1797f7-dd75-4e5d-83ce-295ecd93afa1",
+        "revision_id": "ecf9c682-8968-4dbd-bb7b-a38e7c1206c7",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "97ee85fc-d558-4116-8f33-e42fec016529",
+        "revision_id": "0fb8f147-ae16-4a39-8f79-9c4288567d9e",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "97ee85fc-d558-4116-8f33-e42fec016529",
+        "revision_id": "ade6be63-5004-411d-a032-1471e9fa4d8e",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "97ee85fc-d558-4116-8f33-e42fec016529",
+        "revision_id": "395d03c6-1579-4ae0-8b85-ff9d920cd73a",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "7b9dabeb-c3ff-4b95-b905-9c4657efd8c3",
+        "revision_id": "86701575-8c0c-4141-a4a8-be0e73b468f1",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "7b9dabeb-c3ff-4b95-b905-9c4657efd8c3",
+        "revision_id": "e7c2ace2-167d-4f18-a335-adc4991fa340",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "7b9dabeb-c3ff-4b95-b905-9c4657efd8c3",
+        "revision_id": "d03c3cea-bb98-432b-b2fd-efc32e8055c5",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "6d1003c8-8743-455b-a138-bb57bd54e3dc",
+        "revision_id": "40afa9e0-ea7d-4b73-8536-76c248f9c5ae",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "6d1003c8-8743-455b-a138-bb57bd54e3dc",
+        "revision_id": "1de10daa-6e08-42e4-8953-716cf86a090c",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "6d1003c8-8743-455b-a138-bb57bd54e3dc",
+        "revision_id": "3c8fa4a6-8a16-47db-9dd4-1e78337283f9",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "f257a095-ac36-4244-907a-92ff5b23e924",
+        "revision_id": "87b8d56c-a16a-4179-b5b5-192a022331f2",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "f257a095-ac36-4244-907a-92ff5b23e924",
+        "revision_id": "ed26a01f-0265-4bc1-8f7b-9583d9a9ea9e",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "f257a095-ac36-4244-907a-92ff5b23e924",
+        "revision_id": "62f4a978-c5bc-4bd4-b9b4-877378e81a5b",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "e9731efe-64aa-484f-b8fc-964f5412dc26",
+        "revision_id": "f24aebff-4262-4ecd-b226-0e56a8c83b64",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "e9731efe-64aa-484f-b8fc-964f5412dc26",
+        "revision_id": "d3ed65ef-a51a-4a13-b182-dfdad1310853",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "e9731efe-64aa-484f-b8fc-964f5412dc26",
+        "revision_id": "8192bf2c-6908-40c8-bf6f-dcbec6c42e90",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "a55c2317-9fae-4ab6-b98d-a86ed508a1c5",
+        "revision_id": "0a075158-9251-4ed6-8657-c557200b0a59",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "a55c2317-9fae-4ab6-b98d-a86ed508a1c5",
+        "revision_id": "072703fe-c62d-4f25-a65f-685f876ea642",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "a55c2317-9fae-4ab6-b98d-a86ed508a1c5",
+        "revision_id": "00d5d11b-8cdb-4927-86fd-3d0951ec2203",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "6c03afa3-b5a3-4106-8a00-761ec9951c39",
+        "revision_id": "c0a1741c-4d68-4441-bd90-e617e14e78fa",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "6c03afa3-b5a3-4106-8a00-761ec9951c39",
+        "revision_id": "5e6f611a-5cac-4b53-94ca-f9d8f6022de3",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "6c03afa3-b5a3-4106-8a00-761ec9951c39",
+        "revision_id": "54d72b1d-047f-49b4-b3b0-2915164e97ad",
+        "archive_sha256": "818a7483f209e9998b1cac0643b403bb8bf3a094bbd14149245887e6324752a2",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "79be2724-a7e6-4332-bae2-ca57a9548dea",
+        "revision_id": "1020a5c3-13a2-46c6-aa90-0bd95f7efdee",
+        "archive_sha256": "8c8fa279a87135939483ea1d634fc67fa6a04accdc86be044a12ab3e3e4a6075",
+        "stored_bytes": 40960
+      },
+      {
+        "function_id": "78f794e7-fb5f-4334-b96d-9289aebaf768",
+        "revision_id": "66e326ac-ecbf-4fe7-8de5-ed144ffca6a7",
+        "archive_sha256": "843622fda2228c75fcd7c5b3d3c01a6b3938d3b8d7928f12191d15107534623e",
+        "stored_bytes": 45056
+      }
+    ],
+    "remaining_validation_containers": 0,
+    "remaining_validation_channels": 0,
+    "remaining_candidate_reservations": 0,
+    "remaining_nonterminal_candidates": 0,
+    "routes": [
+      "serverless.lelabs.tech 18090 tls"
+    ]
+  },
+  "reports": {
+    "deployments": {
+      "completed": true,
+      "checks": [
+        {
+          "name": "Préparation : identité, droits, If-Match et données invalides",
+          "status": "passed"
+        },
+        {
+          "name": "Archive invalide : échec et brouillon conservé",
+          "status": "passed"
+        },
+        {
+          "name": "Première publication par Create, lecture expurgée et historique Read",
+          "status": "passed"
+        },
+        {
+          "name": "Propriété du candidat et échec réel d’import avec secret expurgé",
+          "status": "passed"
+        },
+        {
+          "name": "Révocation réelle pendant un chargement valide : publication refusée",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration de service modifiée pendant la validation : conflit",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration de fonction modifiée pendant la validation : conflit",
+          "status": "passed"
+        },
+        {
+          "name": "Admission unique et état consultable pendant un véritable chargement",
+          "status": "passed"
+        },
+        {
+          "name": "Handler immuable hors déploiement, rollback et configuration courante conservée",
+          "status": "passed"
+        },
+        {
+          "name": "Suppression explicite des seules révisions inactives",
+          "status": "passed"
+        },
+        {
+          "name": "Huit candidats maximum par fonction",
+          "status": "passed"
+        }
+      ],
+      "cleanup": true,
+      "skipped": 0,
+      "retained_archives": [
+        {
+          "function_id": "a0e8b76e-0a60-407d-9f67-eca6728c5a1e",
+          "revision_id": "0a0d2eb9-c87d-46c0-9e82-4b9d2a800060"
+        }
+      ],
+      "remaining_proofs": [
+        "Expiration, limites globales et révisions",
+        "Reprise après crash pendant upload/validation",
+        "Déconnexion admin concurrente",
+        "UI et déploiement CLI complet",
+        "Code exécuté après rollback et valeur secrète conservée sous le même nom",
+        "Arrêt pendant nettoyage et exclusivité du contrôle"
+      ]
+    },
+    "adapter-deploy": {
+      "completed": true,
+      "checks": [
+        {
+          "name": "Nom de service contrôlé avant toute création",
+          "status": "passed"
+        },
+        {
+          "name": "Read seul : onze créations réellement refusées",
+          "status": "passed"
+        },
+        {
+          "name": "Onze premières publications par Read et Create",
+          "status": "passed"
+        },
+        {
+          "name": "Create ne republie pas une fonction déjà active",
+          "status": "passed"
+        },
+        {
+          "name": "Pagination réelle puis nouvelles révisions avec UUID conservés",
+          "status": "passed"
+        },
+        {
+          "name": "Import réellement défaillant : résultat partiel et poursuite des autres fonctions",
+          "status": "passed"
+        },
+        {
+          "name": "Reprise du même brouillon après import refusé avec Read et Create",
+          "status": "passed"
+        }
+      ],
+      "cleanup": true,
+      "skipped": 0,
+      "retained_archives": [
+        {
+          "function_id": "25d43f62-0c5f-4c08-90c9-0bb0d89eaed1",
+          "revision_id": "a15d1cb8-a42c-4fdc-a9bf-1c114809d017"
+        },
+        {
+          "function_id": "25d43f62-0c5f-4c08-90c9-0bb0d89eaed1",
+          "revision_id": "358edbe6-4303-42e6-863e-25ed3d2865fb"
+        },
+        {
+          "function_id": "499894a6-ef62-4a21-acb3-bb8be33a1803",
+          "revision_id": "278691e5-8aa2-4594-9490-3de9dbff33eb"
+        },
+        {
+          "function_id": "499894a6-ef62-4a21-acb3-bb8be33a1803",
+          "revision_id": "3db77b3b-210e-4faa-b3ee-d099954030cf"
+        },
+        {
+          "function_id": "499894a6-ef62-4a21-acb3-bb8be33a1803",
+          "revision_id": "237bf058-d6e5-4149-b123-6337e7b28fe2"
+        },
+        {
+          "function_id": "279b8048-a3d2-4bae-9604-4b08526f2f90",
+          "revision_id": "d6fac4bb-8c87-4dc0-8236-d6c228d87b46"
+        },
+        {
+          "function_id": "279b8048-a3d2-4bae-9604-4b08526f2f90",
+          "revision_id": "69c14c19-a2d7-4f94-b267-15208350bfac"
+        },
+        {
+          "function_id": "279b8048-a3d2-4bae-9604-4b08526f2f90",
+          "revision_id": "fb377c8b-c3f2-47e8-bef0-0bc7cdc2c11e"
+        },
+        {
+          "function_id": "ba1797f7-dd75-4e5d-83ce-295ecd93afa1",
+          "revision_id": "647217c6-f770-4cc1-8a3f-ae8f450c2e23"
+        },
+        {
+          "function_id": "ba1797f7-dd75-4e5d-83ce-295ecd93afa1",
+          "revision_id": "4481f083-88ec-491b-a3a4-7769fd0db851"
+        },
+        {
+          "function_id": "ba1797f7-dd75-4e5d-83ce-295ecd93afa1",
+          "revision_id": "ecf9c682-8968-4dbd-bb7b-a38e7c1206c7"
+        },
+        {
+          "function_id": "97ee85fc-d558-4116-8f33-e42fec016529",
+          "revision_id": "0fb8f147-ae16-4a39-8f79-9c4288567d9e"
+        },
+        {
+          "function_id": "97ee85fc-d558-4116-8f33-e42fec016529",
+          "revision_id": "ade6be63-5004-411d-a032-1471e9fa4d8e"
+        },
+        {
+          "function_id": "97ee85fc-d558-4116-8f33-e42fec016529",
+          "revision_id": "395d03c6-1579-4ae0-8b85-ff9d920cd73a"
+        },
+        {
+          "function_id": "7b9dabeb-c3ff-4b95-b905-9c4657efd8c3",
+          "revision_id": "86701575-8c0c-4141-a4a8-be0e73b468f1"
+        },
+        {
+          "function_id": "7b9dabeb-c3ff-4b95-b905-9c4657efd8c3",
+          "revision_id": "e7c2ace2-167d-4f18-a335-adc4991fa340"
+        },
+        {
+          "function_id": "7b9dabeb-c3ff-4b95-b905-9c4657efd8c3",
+          "revision_id": "d03c3cea-bb98-432b-b2fd-efc32e8055c5"
+        },
+        {
+          "function_id": "6d1003c8-8743-455b-a138-bb57bd54e3dc",
+          "revision_id": "40afa9e0-ea7d-4b73-8536-76c248f9c5ae"
+        },
+        {
+          "function_id": "6d1003c8-8743-455b-a138-bb57bd54e3dc",
+          "revision_id": "1de10daa-6e08-42e4-8953-716cf86a090c"
+        },
+        {
+          "function_id": "6d1003c8-8743-455b-a138-bb57bd54e3dc",
+          "revision_id": "3c8fa4a6-8a16-47db-9dd4-1e78337283f9"
+        },
+        {
+          "function_id": "f257a095-ac36-4244-907a-92ff5b23e924",
+          "revision_id": "87b8d56c-a16a-4179-b5b5-192a022331f2"
+        },
+        {
+          "function_id": "f257a095-ac36-4244-907a-92ff5b23e924",
+          "revision_id": "ed26a01f-0265-4bc1-8f7b-9583d9a9ea9e"
+        },
+        {
+          "function_id": "f257a095-ac36-4244-907a-92ff5b23e924",
+          "revision_id": "62f4a978-c5bc-4bd4-b9b4-877378e81a5b"
+        },
+        {
+          "function_id": "e9731efe-64aa-484f-b8fc-964f5412dc26",
+          "revision_id": "f24aebff-4262-4ecd-b226-0e56a8c83b64"
+        },
+        {
+          "function_id": "e9731efe-64aa-484f-b8fc-964f5412dc26",
+          "revision_id": "d3ed65ef-a51a-4a13-b182-dfdad1310853"
+        },
+        {
+          "function_id": "e9731efe-64aa-484f-b8fc-964f5412dc26",
+          "revision_id": "8192bf2c-6908-40c8-bf6f-dcbec6c42e90"
+        },
+        {
+          "function_id": "a55c2317-9fae-4ab6-b98d-a86ed508a1c5",
+          "revision_id": "0a075158-9251-4ed6-8657-c557200b0a59"
+        },
+        {
+          "function_id": "a55c2317-9fae-4ab6-b98d-a86ed508a1c5",
+          "revision_id": "072703fe-c62d-4f25-a65f-685f876ea642"
+        },
+        {
+          "function_id": "a55c2317-9fae-4ab6-b98d-a86ed508a1c5",
+          "revision_id": "00d5d11b-8cdb-4927-86fd-3d0951ec2203"
+        },
+        {
+          "function_id": "6c03afa3-b5a3-4106-8a00-761ec9951c39",
+          "revision_id": "c0a1741c-4d68-4441-bd90-e617e14e78fa"
+        },
+        {
+          "function_id": "6c03afa3-b5a3-4106-8a00-761ec9951c39",
+          "revision_id": "5e6f611a-5cac-4b53-94ca-f9d8f6022de3"
+        },
+        {
+          "function_id": "6c03afa3-b5a3-4106-8a00-761ec9951c39",
+          "revision_id": "54d72b1d-047f-49b4-b3b0-2915164e97ad"
+        },
+        {
+          "function_id": "79be2724-a7e6-4332-bae2-ca57a9548dea",
+          "revision_id": "1020a5c3-13a2-46c6-aa90-0bd95f7efdee"
+        }
+      ],
+      "remaining_proofs": [
+        "Rupture réelle après envoi et absence de double publication",
+        "Modification concurrente des fichiers après packaging",
+        "Réponses trop grandes et redirections réelles",
+        "Invocation du code publié"
+      ]
+    }
+  },
+  "served_assets": {
+    "https://serverless.lelabs.tech/": "c097ae5e1278bc0fdac120b4d477eef77170db6c6738621bfdbe09b688cda1d4",
+    "https://serverless.lelabs.tech/favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+    "https://serverless.lelabs.tech/assets/index-m_qusgUe.css": "fa402623fda809535a8d28a440d6db9f1e8cd4050064b6ec606eee4a92f0953d",
+    "https://serverless.lelabs.tech/assets/index-DPRUSZLF.js": "8be7762519ed7c533c6eccfe7b8f3945eb67a980de10871d0577748196a784d2"
+  },
+  "unchanged_application_images_since": "control-management-dev-2026-11-06.json",
+  "first_attempt": {
+    "completed": false,
+    "cleanup": true,
+    "passed_groups": 3,
+    "cause": "Le module throws ne produit pas de logs ; ajout d’une fixture écrivant réellement le secret avant exception",
+    "retained_archives": [
+      {
+        "function_id": "78f794e7-fb5f-4334-b96d-9289aebaf768",
+        "revision_id": "66e326ac-ecbf-4fe7-8de5-ed144ffca6a7"
+      }
+    ]
+  },
+  "spark_notes": {
+    "applied_through_console": true,
+    "verified": {
+      "README.md": "8d241feca75a725ae33d544cf0df80dd31e82c41f2f916f30e5605307dc152bf",
+      "CONTRIBUTORS.md": "1496d1cb1aadfd607348f3a428cf8b64d2cf1b14d9b93d44d02ef95f0e842189",
+      "INSTALL.md": "0d91a67a5c1f461321deb1a36fd49f45cab3db2327c5b7bdc31713c714c36bb4"
+    }
+  },
+  "limitations": [
+    "Expiration réelle, plafond global, budget et vingt révisions encore à qualifier",
+    "Reprise après crash pendant upload ou validation et arrêt pendant nettoyage",
+    "Déconnexion administrateur concurrente",
+    "Interface de publication à réaliser",
+    "Invocation du code publié et après rollback à intégrer",
+    "Rupture réelle après envoi, modifications locales concurrentes, réponses trop grandes et redirections CLI"
+  ]
+}

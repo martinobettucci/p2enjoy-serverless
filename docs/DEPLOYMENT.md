@@ -1,10 +1,12 @@
 # Révisions et adaptateur de déploiement
 
 Contrat SLS-030, en cours de réalisation. Il complète PLATFORM et CONTROL.
-Le checkpoint SLS-020 reste ouvert pour ses preuves administrateur ; les
-parties indépendantes de cette unité progressent avec les mêmes composants
-réels. Une qualification d'archive ou de CLI ne remplace pas les preuves
-authentifiées d'upload, de droits et de publication.
+La gestion SLS-020 passe ses preuves administrateur, avec cycles SSO encore
+ouverts. Onze groupes API de publication et sept groupes CLI authentifiés
+passent sur le SPARK DEV : [preuve](evidence/deployment-authenticated-dev-2026-11-06.json).
+Expiration, plafonds globaux, interruptions et invocation du code publié
+restent à qualifier. Une qualification d'archive seule ne remplace pas ces
+parcours de plateforme.
 
 ## Outil et manifeste
 

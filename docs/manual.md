@@ -52,8 +52,9 @@ une nouvelle valeur.
 
 Les appels portent `X-Serverless-Token`. L'en-tête `Authorization` reste
 disponible pour l'authentification métier du handler. Les routes de révision
-et la commande CLI `deploy` sont implémentées en DEV et restent à qualifier
-avec une session administrateur. Le moteur d’invocation est en développement.
+et la commande CLI `deploy` passent leurs premiers parcours authentifiés en DEV.
+Les vues de publication ne sont pas encore disponibles dans la console.
+Le moteur d’invocation est en développement.
 
 La [CLI](../adapter/README.md) lit `P2_SERVERLESS_URL` et `P2_SERVERLESS_TOKEN`
 dans son environnement. Depuis le projet de fonctions, lancer

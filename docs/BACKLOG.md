@@ -133,7 +133,7 @@ réussie. La durée de 300 secondes se mesure sur le jeton réellement émis.
 
 ## SLS-030
 
-Statut : [~] — CLI de packaging et composants qualifiés ; publication DEV intégrée, preuve authentifiée ouverte.
+Statut : [~] — publication API et CLI authentifiée qualifiées sur les premiers parcours ; limites et interruptions ouvertes.
 
 Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
@@ -152,14 +152,22 @@ Node des douze fonctions. Le [checkpoint du contrôle de publication](evidence/d
 intègre les routes de préparation, upload, historique, rollback et suppression,
 la migration 003, le budget et la reprise. Huit groupes publics et trente
 contrôles réels de configuration/démarrage/panne passent sur l'image déployée.
-Les onze groupes du client authentifié restent à exécuter avec cette session.
-Admission globale, expiration, limites de révisions,
-crash pendant upload/validation et arrêt pendant nettoyage restent à qualifier.
+La [preuve authentifiée](evidence/deployment-authenticated-dev-2026-11-06.json)
+recoupe onze groupes API et sept groupes CLI : droits, refus, import et logs
+expurgés, révocation/conflits pendant validation, admission unique, rollback,
+suppression de révisions inactives et huit candidats par fonction. Les 35
+archives conservées des campagnes sont vérifiées sur disque ; aucun objet
+actif, candidat non terminal, réservation, canal ou conteneur de validation
+ne subsiste. Plafond global, expiration, budget, vingt révisions, crash pendant
+upload/validation et arrêt pendant nettoyage restent à qualifier.
 La commande deploy est désormais implémentée : sa [preuve ciblée](evidence/adapter-deploy-dev-2026-11-06.json)
 conserve 14 contrôles de prérequis et de refus HTTPS réel, plus les 24 scénarios
-plan/package rejoués. La campagne CLI authentifiée dispose de sa session ; ses
-sept groupes ne sont pas déclarés réussis. Les vues de révisions et le moteur
-restent à réaliser.
+plan/package rejoués. Les sept groupes CLI authentifiés réussissent onze
+premières publications, la pagination, les mises à jour à UUID conservé,
+les refus de droits, le résultat partiel et la reprise du même brouillon.
+Rupture après envoi, modification locale concurrente, réponse trop grande et
+redirection restent à éprouver. Les vues de révisions et le moteur restent
+à réaliser ; l'exécution du code après rollback n'est pas encore qualifiée.
 
 ## SLS-040
 

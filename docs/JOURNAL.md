@@ -1108,3 +1108,23 @@ log-secret-then-throw.cjs écrit le secret injecté par writeSync sur stderr,
 avec préfixe public, avant son exception. L’assertion vérifie ce préfixe expurgé
 et le nettoyage Docker. throws.cjs conserve son rôle de simple exception dans
 les autres campagnes. Le contrat de preuve est précisé avant cette correction.
+
+La campagne corrigée passe ses onze groupes, puis la CLI réelle passe ses
+sept groupes, exécutés en série. La revue confirme l'attente des quatre
+uploads et l'expurgation des octets réellement écrits par la nouvelle fixture.
+Issue du registre : corrigée ; l'entrée finishUpload est retirée avec sa preuve.
+Le contrôle applicatif n'a pas changé depuis ca47c39. Le recoupement compare
+50 sources locales/distantes et 19 fichiers embarqués, les mêmes images,
+quatre ressources HTTPS et les neuf paramètres officiels. Les 35 révisions
+archivées sont présentes avec leurs SHA256 ; aucun objet actif, candidat
+non terminal, réservation, canal ou conteneur de validation ne subsiste.
+Les trois notes sont proposées, appliquées et relues. Aucun nouveau réglage
+de cellule. Aucun remote Git configuré, donc conservation locale sans push.
+
+La preuve deployment-authenticated-dev-2026-11-06.json clôt ces parcours,
+pas SLS-030 : expiration réelle, plafonds, interruptions, déconnexion
+concurrente et interface de révisions restent ouverts, ainsi que l'invocation
+après publication/rollback dans SLS-040. Les cas CLI de transport et de
+modification locale concurrente sont également explicites. Cette unité apporte
+une progression fonctionnelle vérifiée ; la prochaine porte sur les limites
+et la reprise de publication avant le raccordement du moteur.

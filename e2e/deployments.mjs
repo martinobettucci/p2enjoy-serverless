@@ -55,7 +55,7 @@ function pendingUpload(promise) {
   return promise.then(value=>({value}),error=>({error}));
 }
 async function finishUpload(pending) {
-  const result=await finishUpload(pending);if(result.error)throw result.error;return result.value;
+  const result=await pending;if(result.error)throw result.error;return result.value;
 }
 async function token(service,name,rights) {
   const row=await call(`/api/services/${service.id}/tokens`,{method:'POST',status:201,body:{name,rights}});
@@ -91,7 +91,7 @@ async function packageVariant(name,handler) {
   await cp(path.join(root,'qualification/package.json'),path.join(project,'package.json'));
   await writeFile(path.join(project,'src/revision.json'),JSON.stringify({revision:name})+'\n');
   await cp(path.join(root,'qualification/artifacts/deployment-delay.mjs'),path.join(project,'src/deployment-delay.mjs'));
-  await cp(path.join(root,'qualification/artifacts/throws.cjs'),path.join(project,'src/throws.cjs'));
+  await cp(path.join(root,'qualification/artifacts/log-secret-then-throw.cjs'),path.join(project,'src/log-secret-then-throw.cjs'));
   const manifest={service:'qualification-deployment',provider:{name:'p2enjoy',runtime:'nodejs24.x'},
     functions:{probe:{handler}},package:{patterns:['!**','src/**','package.json']}};
   const config=path.join(project,'serverless.yml');await writeFile(config,JSON.stringify(manifest));
@@ -104,7 +104,7 @@ try {
   work=await mkdtemp(path.join(output,'deployment-code-'));
   const ordinary=await packageVariant('ordinary','src/handlers.echo');
   const slow=await packageVariant('slow','src/deployment-delay.handler');
-  const broken=await packageVariant('broken','src/throws.handler');
+  const broken=await packageVariant('broken','src/log-secret-then-throw.handler');
   const ordinaryHash=createHash('sha256').update(ordinary).digest('hex'),slowHash=createHash('sha256').update(slow).digest('hex');
   assert.notEqual(ordinaryHash,slowHash,'Les deux révisions doivent contenir des fichiers distincts');
   namespace=await call('/api/namespaces',{method:'POST',status:201,body:{name:prefix}});
@@ -143,12 +143,14 @@ try {
       headers:{'If-Match':String(row.updated_at)},status:403});
   });
   await check('Propriété du candidat et échec réel d’import avec secret expurgé',async()=>{
-    const row=await current(fn),candidate=await prepare(fn,update,{config:{...row.config,handler:'src/throws.handler'}});
+    const row=await current(fn),candidate=await prepare(fn,update,{config:{...row.config,handler:'src/log-secret-then-throw.handler'}});
     await upload(candidate,broken,other,403);
     await upload(candidate,broken,update,422);
     const status=await call(`/api/deployments/${candidate.id}`,{token:update});
     assert.equal(status.state,'failed');assert.equal(status.validation.error,'import_failed');
-    assert(status.validation.logs.includes('[redacted]'));assert.equal((await current(fn)).active_revision_id,first.revision_id);
+    assert.equal(status.validation.valid,false);assert.equal(status.validation.container_removed,true);
+    assert(status.validation.logs.includes('qualification-import-secret=[redacted]\n'));
+    assert.equal((await current(fn)).active_revision_id,first.revision_id);
   });
   await check('Révocation réelle pendant un chargement valide : publication refusée',async()=>{
     const disposable=await token(service,'during-validation',['update']);
@@ -184,7 +186,8 @@ try {
     const pending=pendingUpload(upload(candidate,slow,update));
     try {await waitValidating(candidate,update);await upload(waiting,ordinary,update,429);}
     finally {second=await finishUpload(pending);}
-    assert.equal(second.state,'published');await upload(waiting,ordinary,update,409);
+    assert.equal(second.state,'published');assert(second.validation.valid&&second.validation.container_removed);
+    await upload(waiting,ordinary,update,409);
   });
   await check('Handler immuable hors déploiement, rollback et configuration courante conservée',async()=>{
     let row=await current(fn);

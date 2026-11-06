@@ -30,7 +30,8 @@ Le superviseur tourne en UID 0 interne, correspondant à `spark-docker` dans
 Docker rootless, comme le contrôle. Son répertoire de socket est 0700 et son
 socket 0600. Toutes les capacités sont retirées ; code readonly, réseau coupé,
 512 Mio, 0,25 CPU, 64 PIDs et `/tmp` 16 Mio. Le transport est vérifié depuis
-le conteneur réel du contrôle ; son intégration aux API reste à réaliser.
+le conteneur réel du contrôle ; l'intégration aux API de publication passe
+les onze groupes de la [preuve authentifiée](../docs/evidence/deployment-authenticated-dev-2026-11-06.json).
 
 La commande `python3 -m control.app.validator` reçoit sur stdin un objet JSON
 avec `environment` et `secrets`, et retourne un diagnostic JSON expurgé. Les
