@@ -51,8 +51,19 @@ une nouvelle valeur.
 | Delete | Supprimer les fonctions autorisées |
 
 Les appels portent `X-Serverless-Token`. L'en-tête `Authorization` reste
-disponible pour l'authentification métier du handler. Le déploiement des
-révisions et l'invocation seront utilisables avec les unités moteur/adaptateur.
+disponible pour l'authentification métier du handler. Les routes de révision
+et la commande CLI `deploy` sont implémentées en DEV et restent à qualifier
+avec une session administrateur. Le moteur d’invocation est en développement.
+
+La [CLI](../adapter/README.md) lit `P2_SERVERLESS_URL` et `P2_SERVERLESS_TOKEN`
+dans son environnement. Depuis le projet de fonctions, lancer
+`python3 -m adapter deploy --config serverless.yml --service UUID_DU_SERVICE`.
+Le nom du service doit correspondre au manifeste. Le jeton requiert Read et
+Create pour une première publication, Read et Update pour une mise à jour.
+Le rapport distingue les fonctions publiées, refusées et celles dont l’issue
+est inconnue après une rupture réseau. Dans ce dernier cas, consulter le
+candidat indiqué avant de relancer. Les valeurs de configuration restent
+absentes des sorties et des descripteurs locaux.
 
 ## Définir les restrictions d'appel
 

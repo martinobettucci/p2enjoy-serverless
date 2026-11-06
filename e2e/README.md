@@ -19,6 +19,7 @@ node e2e/authorize.mjs
 node e2e/control-admin.mjs
 node e2e/control-ui.mjs
 node e2e/deployments.mjs
+node e2e/adapter-deploy.mjs
 ```
 
 `python3 e2e/proxy.py --expected-proxy 10.77.0.1` s'exécute depuis le poste et
@@ -97,3 +98,12 @@ le rapport ; ce nettoyage de gestion n’est pas une purge d’archives.
 Cette campagne exige la session SSO et n’est pas encore réussie. Les limites
 globales, l’expiration, la reprise après crash et les parcours CLI/UI complets
 restent des preuves distinctes à ajouter et exécuter.
+
+`adapter-deploy-public.py`, exécuté sur le SPARK par `bash adapter/dev.sh
+deploy-public-test`, appelle de vrais processus CLI pour les prérequis,
+les bornes de configuration et le refus 401 de la véritable API HTTPS DEV.
+`adapter-deploy.mjs` crée ses jetons par la session SSO puis lance la vraie
+commande deploy : onze fonctions imposent une pagination, un import qui
+lève réellement une erreur produit un résultat partiel, et un brouillon
+refusé est repris avec Read/Create. Les révisions archivées à la suppression
+sont recensées. La campagne authentifiée reste en échec de prérequis.

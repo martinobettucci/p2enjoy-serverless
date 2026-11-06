@@ -6,7 +6,8 @@ dans **[control/](control/README.md)** et **[web/](web/README.md)**. Une premiè
 application indépendante de qualification et son exécuteur de référence DEV
 sont disponibles dans **[qualification/](qualification/README.md)**, avec
 handlers, manifeste `serverless.yml`, Docker, tests et commandes d'exploitation.
-L'[adaptateur](adapter/README.md) prépare les plans et archives ZIP ; la
+L'[adaptateur](adapter/README.md) prépare les plans, archives ZIP et publications
+HTTPS via sa commande `deploy`, dont la qualification authentifiée reste ouverte. La
 validation Node dans Docker est disponible dans [runtime/](runtime/README.md),
 avec 36 scénarios réels réussis. Les routes de publication, d'historique et de
 rollback sont déployées en DEV ; leurs parcours authentifiés restent à qualifier.
@@ -121,6 +122,7 @@ d'administration n'y est autorisée.
 adapter/
   manifest.py             Lecture sûre du manifeste et correspondances
   archive.py              Packaging ZIP et inventaire SHA256
+  deploy.py               Publication HTTPS en série et résultats partiels
   dev.sh                  Construction et qualification CLI dans le SPARK
 control/
   app/                    API, SSO, sessions, objets et droits
@@ -138,6 +140,7 @@ e2e/
   control-admin.mjs        Campagne API authentifiée
   control-ui.mjs           Parcours de gestion dans le navigateur
   deployments.mjs          Publication et courses par les véritables API
+  adapter-deploy.mjs       Parcours de la commande deploy avec jetons réels
 storage/
   main.go                 Proxy de quota FUSE sur les fichiers natifs
   client.py               Client de preuve dans un conteneur Docker isolé

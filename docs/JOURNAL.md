@@ -750,3 +750,30 @@ publication positifs restent soumis au prérequis SSO réel de la campagne.
 La revue précise que la borne JSON doit être contrôlée pour toutes les fonctions
 avant la première mutation, comme le packaging. Elle fait aussi corriger le port
 zéro, la recopie d’un UUID invalide et le classement des succès HTTP inattendus.
+
+La commande deploy est implémentée avec HTTPS standard, sans nouvelle
+dépendance. Les quatre défauts relevés sont corrigés et relus. Les avertissements
+sont émis avant les appels et le rapport final ne recopie aucun corps distant.
+Le packager garde ses 24 contrôles réussis dans la nouvelle image. La campagne
+deploy-public-test passe 14 contrôles : arguments, URL, port zéro, identité
+absente/invalide, valeurs manquantes, corps trop grand avant packaging et
+véritable refus 401 de l’API DEV avec TLS normal. Aucun de ces refus ne prouve
+une publication. Les deux services permanents restent healthy.
+
+Le client e2e/adapter-deploy.mjs crée onze fonctions pour exercer la pagination,
+les nouvelles révisions et la préservation des UUID, puis un véritable import
+défaillant pour les résultats partiels et la reprise d’un brouillon. Son
+lancement échoue au prérequis de session SSO réelle. Les sept groupes positifs
+restent non qualifiés ; aucune identité de remplacement n’est introduite.
+La preuve conservée est evidence/adapter-deploy-dev-2026-11-06.json. Les statuts
+2xx inattendus sont une protection relue, pas une réponse inventée pour un test.
+
+Les douze empreintes de sources sont identiques entre dépôt et SPARK, et les
+fichiers Python des deux images sont recoupés. Les quatre secrets configurés
+sont recherchés en mémoire sans correspondance dans les sources et rapports.
+La relecture du client authentifié ne relève pas de défaut supplémentaire ;
+elle confirme la portée de ses assertions, sans les transformer en preuves.
+Les trois notes officielles sont de nouveau proposées, appliquées via la
+console et relues pour inclure deploy. Aucun nouveau paramètre, secret ou route,
+aucune recréation du contrôle pour cette tranche. Le commit reste local,
+aucun remote n’étant configuré.

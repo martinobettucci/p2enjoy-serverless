@@ -7,7 +7,7 @@ COPY adapter/*.py ./adapter/
 ENTRYPOINT ["python", "-B", "-m", "adapter"]
 
 FROM cli AS qualification
-COPY e2e/adapter.py ./e2e/adapter.py
+COPY e2e/adapter.py e2e/adapter-deploy-public.py ./e2e/
 COPY qualification/serverless.platform.yml qualification/package.json ./qualification/
 COPY qualification/src ./qualification/src/
 ENTRYPOINT ["python", "-B", "/app/e2e/adapter.py"]

@@ -1,0 +1,285 @@
+{
+  "date": "2026-11-06T01:28:22.361708+00:00",
+  "unit": "SLS-030",
+  "unit_complete": false,
+  "target": "infra-serverless DEV",
+  "scope": "CLI deploy, prérequis réels et refus HTTPS 401 ; régression plan/package",
+  "reports": {
+    "adapter.json": {
+      "completed": true,
+      "scope": "CLI plan/package, sans preuve runtime ni upload",
+      "checks": [
+        {
+          "name": "Plan réel des douze fonctions : ressources et noms de configuration",
+          "status": "passed",
+          "duration_seconds": 0.385
+        },
+        {
+          "name": "ZIP réels : contenu, inventaire, exclusions et reproductibilité",
+          "status": "passed",
+          "duration_seconds": 0.447
+        },
+        {
+          "name": "Héritage vide/null, retrait de clé, casse et confidentialité du descripteur",
+          "status": "passed",
+          "duration_seconds": 0.494
+        },
+        {
+          "name": "Conversion et différences fournisseur explicites, cron et HTTP implicite",
+          "status": "passed",
+          "duration_seconds": 0.525
+        },
+        {
+          "name": "Alias contradictoires refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.182
+        },
+        {
+          "name": "Collision variable et secret refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.186
+        },
+        {
+          "name": "Variable non chaîne refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.183
+        },
+        {
+          "name": "Référence non prise en charge refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.257
+        },
+        {
+          "name": "Champ inconnu refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.192
+        },
+        {
+          "name": "Timeout hors borne refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.184
+        },
+        {
+          "name": "Mémoire booléenne refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.18
+        },
+        {
+          "name": "Entier de 400 chiffres refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.177
+        },
+        {
+          "name": "Stockage activé sans quota refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.239
+        },
+        {
+          "name": "CPU non fini refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.188
+        },
+        {
+          "name": "Concurrence supérieure au maximum refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.18
+        },
+        {
+          "name": "Cron hors plage refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.183
+        },
+        {
+          "name": "Chemin de handler sortant refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.181
+        },
+        {
+          "name": "Glob avancé non supporté refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.213
+        },
+        {
+          "name": "YAML dupliqué, alias et syntaxe refusés sans valeur sensible",
+          "status": "passed",
+          "duration_seconds": 0.626
+        },
+        {
+          "name": "Module effectivement exclu de l’archive refusé",
+          "status": "passed",
+          "duration_seconds": 0.181
+        },
+        {
+          "name": "Vrais liens et noms dangereux refusés ; fichiers confidentiels exclus",
+          "status": "passed",
+          "duration_seconds": 0.488
+        },
+        {
+          "name": "Manifeste alternatif et son vrai lien physique exclus avec leurs valeurs",
+          "status": "passed",
+          "duration_seconds": 0.317
+        },
+        {
+          "name": "Remplacement réel de la sortie pendant le packaging : refus sans écriture extérieure",
+          "status": "passed",
+          "duration_seconds": 0.671
+        },
+        {
+          "name": "Fichier réel supérieur à 64 Mio refusé",
+          "status": "passed",
+          "duration_seconds": 0.172
+        }
+      ],
+      "skipped": 0
+    },
+    "adapter-deploy-public.json": {
+      "completed": true,
+      "target": "https://serverless-dev.lelabs.tech",
+      "scope": "CLI deploy : prérequis, packaging, TLS et refus réel 401 ; aucune publication authentifiée",
+      "checks": [
+        {
+          "name": "CLI réelle : service obligatoire pour deploy uniquement",
+          "status": "passed",
+          "duration_seconds": 0.614
+        },
+        {
+          "name": "UUID de service invalide refusé avant mutation",
+          "status": "passed",
+          "duration_seconds": 0.606
+        },
+        {
+          "name": "HTTP refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.166
+        },
+        {
+          "name": "Identifiants URL refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.274
+        },
+        {
+          "name": "Chemin URL refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.166
+        },
+        {
+          "name": "Query URL refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.199
+        },
+        {
+          "name": "Fragment URL refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.153
+        },
+        {
+          "name": "Port invalide refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.15
+        },
+        {
+          "name": "Port zéro refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.214
+        },
+        {
+          "name": "Caractère de contrôle refusé par la vraie CLI",
+          "status": "passed",
+          "duration_seconds": 0.152
+        },
+        {
+          "name": "Jeton absent ou impropre à un en-tête refusé localement",
+          "status": "passed",
+          "duration_seconds": 0.896
+        },
+        {
+          "name": "Valeur de manifeste absente : échec de résolution avant réseau",
+          "status": "passed",
+          "duration_seconds": 0.151
+        },
+        {
+          "name": "Configuration résolue trop grande refusée avant packaging et mutation",
+          "status": "passed",
+          "duration_seconds": 1.02
+        },
+        {
+          "name": "Véritable HTTPS DEV : jeton invalide refusé 401 après packaging",
+          "status": "passed",
+          "duration_seconds": 0.22
+        }
+      ],
+      "skipped": 0
+    }
+  },
+  "sources": {
+    "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+    "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+    "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+    "adapter/deploy.py": "a73059d49e7d236afe20190671f2cc5ea32659fdecf184980a510f04b6d0f22a",
+    "adapter/manifest.py": "aefb4a62d1c2599ecea67a8c84c2341226135c151be18af74b79fc0b0cc6ce1e",
+    "adapter/Dockerfile": "1716bc11f4755f2b58a73a30a174f7108dbee477e30df9e4f909ced07dc81e60",
+    "adapter/Dockerfile.dockerignore": "84bc4c8ccc7a0e4f53719e98ba410c1048901837ad7417ba4f47f0688eb40284",
+    "adapter/dev.sh": "d0b37fd798554644d35e452d0ebbed0bb18f4222aaf992fcd524121ad26e0e7d",
+    "adapter/compose.spark.yml": "cf76088598e5b6bea10d3291471739e7ef172aaa5ab27d1a3d5cf18e63edfe1e",
+    "e2e/adapter.py": "997946b45f2eaf2671b5501eaad31ad88816e65f0bb3a02d06804d641b001605",
+    "e2e/adapter-deploy-public.py": "846090011294b48973fb35e79c4916c70a9320787fdc13ca4bdb5c4541d88866",
+    "e2e/adapter-deploy.mjs": "b6ca0daed0813ba04635cd11ae9332b4ded002e2d3ced2ff4c9b1e7e9444064d"
+  },
+  "images": {
+    "p2enjoy-adapter:dev": "sha256:a6713f83bd427021c5750c31ffa87ca21b95f9bd6906785df3c8ded226be25c6",
+    "p2enjoy-adapter-e2e:dev": "sha256:5e5da49d30dfc0d69e71660c75072bb2c4280e11c06a0778c7f36dd51eea081a"
+  },
+  "baked_sources": {
+    "p2enjoy-adapter:dev": {
+      "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+      "adapter/deploy.py": "a73059d49e7d236afe20190671f2cc5ea32659fdecf184980a510f04b6d0f22a",
+      "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+      "adapter/manifest.py": "aefb4a62d1c2599ecea67a8c84c2341226135c151be18af74b79fc0b0cc6ce1e",
+      "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5"
+    },
+    "p2enjoy-adapter-e2e:dev": {
+      "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+      "adapter/deploy.py": "a73059d49e7d236afe20190671f2cc5ea32659fdecf184980a510f04b6d0f22a",
+      "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+      "adapter/manifest.py": "aefb4a62d1c2599ecea67a8c84c2341226135c151be18af74b79fc0b0cc6ce1e",
+      "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+      "e2e/adapter-deploy-public.py": "846090011294b48973fb35e79c4916c70a9320787fdc13ca4bdb5c4541d88866",
+      "e2e/adapter.py": "997946b45f2eaf2671b5501eaad31ad88816e65f0bb3a02d06804d641b001605"
+    }
+  },
+  "services": {
+    "p2enjoy-serverless-dev-control-1": {
+      "healthy": true,
+      "image": "sha256:48026e714e2dbc03724abe876a01270a2c95f44e7a99a1ebb675b261b15effb8"
+    },
+    "p2enjoy-qualification-dev-qualification-1": {
+      "healthy": true,
+      "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2"
+    }
+  },
+  "remaining_proof_containers": 0,
+  "known_secrets_checked": 4,
+  "secret_matches": 0,
+  "authenticated": {
+    "completed": false,
+    "prerequisite_failed": true,
+    "checks": [],
+    "skipped": 0,
+    "error": "Session SSO administrateur réelle absente ou illisible"
+  },
+  "limitations": [
+    "Publications positives, pagination, droits et résultats partiels non qualifiés : session SSO réelle absente",
+    "Rupture réelle après envoi et absence de double publication à qualifier",
+    "Modification concurrente des archives après packaging à qualifier",
+    "Réponses trop grandes, redirections et statuts de succès inattendus relus sans faux serveur de preuve",
+    "Invocation du code publié à réaliser"
+  ],
+  "spark_notes": {
+    "applied_through_console": true,
+    "verified": {
+      "INSTALL.md": "70e6a1459bfd255869dbe04461d9396aff87b4b6bc28d4247064457fe964a1fb",
+      "CONTRIBUTORS.md": "74f3017e2b74082e3b740066373792d1e9396b9b27de10ce56a040874f01da29",
+      "README.md": "3789e235796daf536c8e8b6ba8208ce65292d7f628bab6c332669da3d23619da"
+    }
+  }
+}

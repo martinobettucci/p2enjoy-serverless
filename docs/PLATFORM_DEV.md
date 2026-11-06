@@ -31,8 +31,18 @@ Huit groupes HTTPS publics et trente contrôles de démarrage/panne passent sur
 l’image déployée. La [preuve](evidence/deployment-control-dev-2026-11-06.json)
 recoupe 21 sources avec le SPARK et 14 fichiers embarqués, la configuration
 active, la sauvegarde et les deux services sains. Le client de publication
-s’arrête sur le prérequis absent de session SSO réelle. La commande deploy,
-la console de révisions et les preuves authentifiées restent à poursuivre.
+s’arrête sur le prérequis absent de session SSO réelle. La console de révisions
+et les preuves authentifiées restent à poursuivre.
+
+La commande deploy de l’adaptateur est construite dans ses images DEV. Après
+`bash adapter/dev.sh build`, la campagne `test` repasse ses 24 contrôles et
+`deploy-public-test` passe 14 contrôles de prérequis, configuration et refus
+HTTPS réel. Sources et images sont recoupées dans la
+[preuve CLI](evidence/adapter-deploy-dev-2026-11-06.json). Le contrôle permanent
+n’est pas recréé pour cette tranche ; aucun paramètre de cellule supplémentaire.
+Les jetons de déploiement sont ceux créés par un administrateur pour un service.
+La campagne `node e2e/adapter-deploy.mjs` exige la session SSO réelle, absente
+au checkpoint ; aucun déploiement positif n’est déclaré qualifié.
 
 L'extraction serveur est construite depuis `control/Dockerfile.artifacts`
 et qualifiée par `e2e/artifacts.py` : 112 contrôles réels réussis le 6 novembre,

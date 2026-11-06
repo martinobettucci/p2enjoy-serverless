@@ -5,6 +5,7 @@
 !adapter/requirements.txt
 !e2e/
 !e2e/adapter.py
+!e2e/adapter-deploy-public.py
 !qualification/
 !qualification/package.json
 !qualification/serverless.platform.yml

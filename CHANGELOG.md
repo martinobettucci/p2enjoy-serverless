@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- Commande CLI deploy : cible HTTPS vérifiée, pagination, conservation des UUID,
+  packaging avant mutation, publications en série et rapport des résultats
+  partiels ou inconnus sans rejeu automatique. Valeurs résolues en mémoire.
+- 14 contrôles réels de prérequis et de refus HTTPS, plus 24 scénarios
+  plan/package rejoués dans les nouvelles images. Client authentifié ajouté
+  pour pagination, publications successives et reprise de brouillon ; sa
+  qualification reste en échec de prérequis SSO.
+
 - Routes DEV de préparation, upload ZIP, validation Node, publication atomique,
   historique, rollback et suppression des révisions inactives. Migration 003,
   relecture des droits/versions au commit, verrou d’état et réservations
@@ -9,7 +17,7 @@
 - Huit groupes HTTPS publics et trente scénarios réels de démarrage/panne
   réussis sur la nouvelle image, dont exclusivité et reprise SQLite. Client
   de publication ajouté ; sa campagne reste en échec de prérequis sans session
-  SSO réelle. CLI deploy, vues de révisions et invocation restent à réaliser.
+  SSO réelle. Vues de révisions et invocation restent à réaliser.
 
 - Extraction ZIP serveur bornée : tailles réelles, cohérence des en-têtes,
   CRC, refus des liens et publication readonly sans écrasement. Correction

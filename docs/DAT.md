@@ -34,6 +34,17 @@ relève zéro vulnérabilité atteignable et zéro paquet importé affecté. L'a
 GO-2026-5024 du module x/sys concerne uniquement Windows ; ce composant est
 Linux. Résultat complet : [audit](evidence/storage-dependencies-2026-11-05.txt).
 
+### Client de publication
+
+`adapter/deploy.py` utilise HTTPS de la bibliothèque standard avec validation
+TLS et sans suivi des redirections. Le packaging et les corps JSON sont
+vérifiés avant mutation ; les valeurs résolues restent en mémoire. Chaque
+archive est relue sans suivre les liens puis comparée à son empreinte avant
+envoi. Les fonctions sont publiées en série, les identifiants connus sont
+conservés dans le rapport et les mutations ne sont jamais rejouées automatiquement.
+Les refus locaux et un refus HTTPS 401 passent 14 contrôles réels ; la campagne
+positive, les résultats partiels et la pagination attendent la session SSO.
+
 ### Validation du code
 
 Le pilote Python `control/app/validator.py` utilise uniquement la bibliothèque
@@ -169,7 +180,7 @@ Une preuve distincte recrée le vrai conteneur et relit ses données par HTTP.
 L'attendu est conservé dans un volume du client de test, séparé des volumes
 applicatifs. Les traces ne contiennent ni jeton métier ni corps d'erreur.
 Les contrôles statiques du manifeste ne sont pas des preuves fonctionnelles
-E2E d'un adaptateur de déploiement encore absent.
+E2E du déploiement de plateforme, qui exige ses propres campagnes.
 
 Les limites Docker portent sur le banc complet, pas individuellement sur ses
 fonctions. Le budget mémoire du manifeste reste un contrat à qualifier par le

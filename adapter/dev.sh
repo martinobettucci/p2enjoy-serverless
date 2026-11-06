@@ -9,5 +9,6 @@ case "${1:-}" in
   plan) "${compose[@]}" run --rm adapter plan --config /project/serverless.platform.yml ;;
   package) "${compose[@]}" run --rm adapter package --config /project/serverless.platform.yml ;;
   test) "${compose[@]}" run --rm e2e ;;
-  *) echo 'Usage: bash dev.sh {build|plan|package|test}' >&2; exit 2 ;;
+  deploy-public-test) "${compose[@]}" run --rm --entrypoint python e2e -B /app/e2e/adapter-deploy-public.py ;;
+  *) echo 'Usage: bash dev.sh {build|plan|package|test|deploy-public-test}' >&2; exit 2 ;;
 esac

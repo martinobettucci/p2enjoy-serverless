@@ -134,7 +134,11 @@ contrôles réels de configuration/démarrage/panne passent sur l'image déploy�
 Le client authentifié échoue au prérequis de session SSO : aucun de ses onze
 groupes n'est déclaré réussi. Admission globale, expiration, limites de révisions,
 crash pendant upload/validation et arrêt pendant nettoyage restent à qualifier.
-La commande deploy, les vues de révisions et le moteur restent à réaliser.
+La commande deploy est désormais implémentée : sa [preuve ciblée](evidence/adapter-deploy-dev-2026-11-06.json)
+conserve 14 contrôles de prérequis et de refus HTTPS réel, plus les 24 scénarios
+plan/package rejoués. La campagne CLI authentifiée attend sa session ; ses
+sept groupes ne sont pas déclarés réussis. Les vues de révisions et le moteur
+restent à réaliser.
 
 ## SLS-040
 
