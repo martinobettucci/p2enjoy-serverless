@@ -66,6 +66,14 @@ est inconnue après une rupture réseau. Dans ce dernier cas, consulter le
 candidat indiqué avant de relancer. Les valeurs de configuration restent
 absentes des sorties et des descripteurs locaux.
 
+La plateforme accepte jusqu'à 64 candidats en attente, avec huit par fonction.
+Une fonction conserve vingt révisions. Au plafond, l'upload est refusé avant
+réception ; supprimer explicitement une révision inactive permet de publier
+de nouveau. Après interruption du contrôle pendant réception ou validation,
+le candidat devient `failed` avec `control_interrupted`. Consulter son état
+avant de préparer une nouvelle publication ; la révision active précédente
+reste conservée.
+
 ## Définir les restrictions d'appel
 
 La politique du service accepte des origines exactes, par exemple

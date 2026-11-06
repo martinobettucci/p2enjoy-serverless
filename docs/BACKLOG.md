@@ -133,7 +133,7 @@ réussie. La durée de 300 secondes se mesure sur le jeton réellement émis.
 
 ## SLS-030
 
-Statut : [~] — publication API et CLI authentifiée qualifiées sur les premiers parcours ; limites et interruptions ouvertes.
+Statut : [~] — publication API/CLI, plafonds de candidats/révisions et deux reprises après SIGKILL qualifiés ; autres limites et UI ouvertes.
 
 Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
@@ -158,8 +158,14 @@ expurgés, révocation/conflits pendant validation, admission unique, rollback,
 suppression de révisions inactives et huit candidats par fonction. Les 35
 archives conservées des campagnes sont vérifiées sur disque ; aucun objet
 actif, candidat non terminal, réservation, canal ou conteneur de validation
-ne subsiste. Plafond global, expiration, budget, vingt révisions, crash pendant
-upload/validation et arrêt pendant nettoyage restent à qualifier.
+ne subsiste à ce checkpoint. La [preuve de reprise](evidence/publication-recovery-dev-2026-11-06.json)
+ajoute quatre groupes : 64 candidats globaux, vingt révisions, SIGKILL pendant
+réception partielle puis pendant validation Docker vivante. Les candidats
+interrompus échouent sans publication, les configurations et archives
+précédentes sont intactes, les ressources sont libérées et de nouveaux uploads
+réussissent. Les 53 archives antérieures et vingt nouvelles archives conservées
+sont recoupées. Expiration, budget/marge disque, déconnexion concurrente et
+arrêt pendant nettoyage restent à qualifier.
 La commande deploy est désormais implémentée : sa [preuve ciblée](evidence/adapter-deploy-dev-2026-11-06.json)
 conserve 14 contrôles de prérequis et de refus HTTPS réel, plus les 24 scénarios
 plan/package rejoués. Les sept groupes CLI authentifiés réussissent onze

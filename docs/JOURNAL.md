@@ -1142,3 +1142,34 @@ présence de fichiers ; aucune écriture de base ni simulation d'horloge.
 La nouvelle campagne sera exécutée seule sur le contrôle DEV, sans modifier
 les variables de cellule. Budget, expiration et autres interruptions restent
 des preuves séparées, explicitement ouvertes.
+
+Le premier passage réussit les plafonds globaux et de révisions. Le troisième
+scénario refuse de couper : receiving est observé, mais les 16 Kio envoyés
+n'atteignent pas le fichier pendant ses huit secondes d'observation. Aucun
+SIGKILL n'a été émis ; le nettoyage réussit, sans candidat ni réservation
+restants. L'image Python réelle annonce io.DEFAULT_BUFFER_SIZE=131072.
+Le fragment passe à 192 Kio dans une archive contenant 256 Kio de vrais octets
+aléatoires, afin de dépasser le tampon tout en maintenant le corps incomplet.
+Le critère physique est conservé ; aucune attente ni assertion n'est supprimée.
+
+Le second passage réussit les quatre groupes. La première coupure observe
+88 903 octets effectivement reçus sur disque ; la seconde observe le conteneur
+de validation vivant et son montage du candidat. Les deux SIGKILL donnent
+un contrôle arrêté en code 137, suivi du démarrage réel et du retour de santé.
+Chaque candidat devient failed/control_interrupted, sans révision ; payload
+temporaire, réservation, artefact, canal et conteneur sont éliminés. La
+configuration chiffrée et la révision précédentes restent identiques, puis
+la publication suivante réussit. La revue indépendante confirme les gardes,
+le finally de rétablissement et la portée limitée de la preuve.
+
+La preuve publication-recovery-dev-2026-11-06.json conserve quatre groupes,
+zéro échec/skip, les nettoyages, 51 sources concordantes, 19 fichiers embarqués,
+les deux services healthy et les mêmes paramètres officiels. Les 53 archives
+antérieures sont intactes ; vingt archives supplémentaires restent conservées.
+Les six sources Node correspondent toujours à l'image immuable qualifiée.
+Les trois notes de cellule sont appliquées puis relues, sans nouveau réglage.
+Le registre d'incohérences est vide. Ce checkpoint constitue une progression
+fonctionnelle vérifiée, avec arbre et preuves prêts pour un commit local.
+Expiration, budget, déconnexion concurrente et arrêt pendant nettoyage restent
+ouverts ; le raccordement de l'admission, des volumes et de la passerelle est
+la principale partie fonctionnelle restante avant la campagne transversale.

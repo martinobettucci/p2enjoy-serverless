@@ -30,7 +30,12 @@ Les trois notes sont appliquées et relues, les fichiers officiels concordent.
 Les constats d'absence de session ci-dessous décrivent leurs checkpoints
 historiques ; la session réelle est maintenant disponible. Les cycles SSO,
 limites et interruptions de publication, vues de révisions et raccordement
-du moteur restent ouverts.
+du moteur restent ouverts. La [preuve de reprise](evidence/publication-recovery-dev-2026-11-06.json)
+qualifie ensuite quatre groupes de plafonds et de reprise après SIGKILL pendant
+réception et validation. Le contrôle est redémarré et healthy ; ses images,
+la configuration officielle et la route sont conservées. Les trois notes
+décrivent les commandes et limites restantes : expiration, budget, déconnexion
+concurrente et interruption pendant nettoyage.
 
 ## Baseline
 

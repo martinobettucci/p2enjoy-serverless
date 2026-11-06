@@ -60,9 +60,11 @@ refus, révocation pendant validation, conflits et rollback. Ses onze groupes
 passent ; sept groupes CLI passent ensuite sur le même contrôle :
 [preuve authentifiée](../docs/evidence/deployment-authenticated-dev-2026-11-06.json).
 Les archives conservées sont vérifiées sur disque, les validations Docker
-supprimées et les réservations libérées. Expiration, plafonds globaux,
-interruptions et interface de révisions restent ouverts. L'API de publication
-ne fournit pas l'invocation.
+supprimées et les réservations libérées. Quatre groupes supplémentaires
+qualifient les plafonds globaux/de révisions et la reprise après SIGKILL
+pendant réception ou validation : [preuve de reprise](../docs/evidence/publication-recovery-dev-2026-11-06.json).
+Expiration, budget, interruption pendant nettoyage et interface de révisions
+restent ouverts. L'API de publication ne fournit pas l'invocation.
 
 `app/artifacts.py` fournit l'extraction bornée des ZIP classiques. Sa CLI
 vérifie les en-têtes, les tailles réelles, les CRC et les chemins, écrit dans

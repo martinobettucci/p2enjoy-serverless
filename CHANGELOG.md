@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Plafonds et reprises de publication : quatre groupes E2E réels réussis,
+  avec 64 candidats, vingt révisions, puis SIGKILL pendant réception et
+  validation Docker. Redémarrage, non-publication des candidats interrompus,
+  configuration et archives intactes, nettoyage et publications suivantes vérifiés.
+
 - Publication authentifiée : onze groupes API et sept groupes CLI réussis,
   dont concurrence réelle, droits, rollback, pagination, résultats partiels
   et reprise de brouillon. Le client rejoint ses uploads avant nettoyage ;

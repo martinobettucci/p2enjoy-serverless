@@ -12,7 +12,10 @@ validation Node dans Docker est disponible dans [runtime/](runtime/README.md),
 avec 36 scénarios réels réussis. Les routes de publication, d'historique et de
 rollback sont déployées en DEV ; onze groupes authentifiés passent :
 [preuve de publication](docs/evidence/deployment-authenticated-dev-2026-11-06.json).
-Expiration, plafonds globaux et interruptions restent à éprouver.
+Les plafonds de candidats/révisions et les reprises après SIGKILL pendant
+réception/validation passent quatre groupes supplémentaires :
+[preuve de reprise](docs/evidence/publication-recovery-dev-2026-11-06.json).
+Expiration, budget et interruption pendant nettoyage restent à éprouver.
 Le pilote Docker d’instances chaudes passe 31 contrôles d’invocation et
 11 de cycle de vie : [preuve DEV](docs/evidence/instances-dev-2026-11-06.json).
 La passerelle, les admissions et l’intégration des volumes restent à réaliser. L'extracteur ZIP serveur dans

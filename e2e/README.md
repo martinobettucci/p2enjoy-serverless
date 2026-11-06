@@ -20,6 +20,7 @@ node e2e/control-admin.mjs
 node e2e/control-ui.mjs
 node e2e/deployments.mjs
 node e2e/adapter-deploy.mjs
+node e2e/publication-recovery.mjs
 ```
 
 `python3 e2e/proxy.py --expected-proxy 10.77.0.1` s'exécute depuis le poste et
@@ -117,6 +118,18 @@ Le recoupement vérifie les archives sur disque et l'absence de réservations,
 de canaux et de conteneurs de validation restants. Les cas de rupture réseau,
 de modification locale concurrente, de redirection et de réponse trop grande
 restent ouverts.
+
+`publication-recovery.mjs` vise les plafonds de 64 candidats globaux et de vingt
+révisions, puis deux arrêts brutaux du seul `serverless-api` DEV pendant un
+upload partiel et une validation Docker observée. Il redémarre le contrôle,
+rejoint les requêtes interrompues et vérifie les états HTTP, SQLite en lecture
+seule, fichiers et conteneurs. Il crée ses objets et conserve les archives
+antérieures ; aucune base ni horloge n'est modifiée pour obtenir un résultat.
+Le rapport `publication-recovery.json` exige completed et cleanup vrais.
+Ses quatre groupes passent sur le SPARK DEV : [preuve de reprise](../docs/evidence/publication-recovery-dev-2026-11-06.json).
+Le fragment de 192 Kio dépasse le tampon Python réel de 128 Kio ; le pilote
+exige des octets présents sur disque avant de couper. Les vingt publications
+du plafond utilisent des UUID distincts et le même artefact réel.
 
 `runtime-instances.py` exerce le diagnostic réel en processus séparé : enfants
 neufs dans un conteneur chaud, corps aux limites, callbacks, ESM et dépendances,
