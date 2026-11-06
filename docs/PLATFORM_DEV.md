@@ -4,7 +4,8 @@
 
 Le banc de qualification est déployé selon `QUALIFICATION_DEV.md`. Le composant
 de quota est construit dans `storage/`, testé par 31 contrôles puis laissé
-sans montage permanent. Le contrôle et la console initiale sont déployés en
+sans montage permanent après ses preuves. L’agent local est maintenant installé
+en service DEV, avec état durable et socket privé. Le contrôle et la console initiale sont déployés en
 DEV ; leurs parcours administrateur restent à qualifier avec une session SSO.
 La cible est le SPARK `infra-serverless`
 et le répertoire `/srv/p2enjoy-serverless`, administré par `spark-docker` pour
@@ -162,5 +163,37 @@ capacités des workloads sont retirées. Le montage n'expose aucune API réseau.
 L'expérience de quota ne remplace aucun volume existant. Son nettoyage suit
 l'ordre arrêt des conteneurs, démontage FUSE, suppression des fichiers propres
 à l'expérience. Un échec de montage arrête cette expérience sans modifier les
-volumes du banc. L'installation définitive et ses procédures de reprise seront
-documentées avec l'implémentation retenue.
+volumes du banc. L’installation de l’agent DEV et ses limites sont décrites ci-dessous.
+
+
+## Agent de volumes installé
+
+Les cinq variables SERVERLESS_STORAGE_ROOT_HOST,
+SERVERLESS_STORAGE_SOCKET_DIR_HOST, SERVERLESS_STORAGE_BUDGET_MIB,
+SERVERLESS_STORAGE_RESERVE_MIB et SERVERLESS_STORAGE_MAX_MOUNTS ont été
+proposées puis appliquées par la console. Racines DEV :
+`/srv/p2enjoy-serverless/storage-state` et `/run/p2enjoy-serverless-storage`.
+Budget 32768 Mio, marge 8192 Mio, limite 64 montages. Aucun secret ni route
+supplémentaire. Le service lit directement les deux fichiers officiels.
+
+Le paquet versionné par empreinte est installé sous `/usr/local/lib` avec
+propriétaire root. Le service conserve UID/GID spark-docker, CAP_SYS_ADMIN
+seule, le namespace de montage de la cellule et un socket 0600 sous dossier
+0700. Les vrais binds Docker valident la visibilité des montages. La base
+séparée porte les migrations 001/002, avec intention de sonde avant lancement.
+Le contrôle et le banc existants n’ont pas été recréés pour ces variables
+propres à l’agent ; leurs paramètres applicatifs demeurent ceux du checkpoint.
+
+Construire avec `bash storage/dev.sh build` comme spark-docker ; installer
+avec `bash storage/dev.sh install` comme root. Puis exécuter en série
+`agent-test` et `limits-test` comme root. La [preuve de composant](evidence/storage-agent-dev-2026-11-06.json)
+recoupe sources, paquet installé, binaire, rapports, configuration et nettoyage.
+Le raccordement au pilote et les parcours publics restent ouverts dans SLS-050.
+
+Une mise à jour exige l’absence de baux et d’opérations en attente. Le protocole
+quiesce empêche un acquire entre cette vérification et le restart. Les anciens
+paquets restent conservés. Revenir à un code de schéma antérieur exige un plan
+de restauration de sa base ; ne pas pointer l’unité vers l’ancien paquet en
+supposant une migration descendante. Les backups de la cellule restent gérés
+par son mécanisme existant. Un restart forcé invalide les anciens binds et
+exige la réconciliation des consommateurs avant libération des baux.

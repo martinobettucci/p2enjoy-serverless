@@ -914,3 +914,51 @@ un contrôle ponctuel de l’absence de bail ne suffit pas avant un restart.
 Le canal reçoit donc quiesce/resume avec identité d’installation attendue.
 La récupération d’une sonde persistante reste consultable même quand sa
 terminaison ne peut pas encore être confirmée.
+
+
+## Preuves de l’agent local — 2026-11-06
+
+Le paquet immuable de l’agent est installé dans le SPARK DEV. Les cinq variables
+ont été proposées et appliquées par la console ; aucun secret ni route ajouté.
+Quinze groupes de cycle de vie et huit groupes de limites passent, ainsi que
+les 31 contrôles historiques du proxy sur son nouveau binaire. Les consommateurs
+Docker restent vivants lors de la mort de FUSE et du restart ; leurs anciens
+binds échouent, puis la réacquisition retrouve les fichiers après leur suppression.
+Les 64 montages, le budget logique plein, 51 baux paginés, une réponse perdue,
+un montage étranger, les connexions lentes et les répertoires 000 sont exercés.
+
+La saturation a révélé la monopolisation du verrou par un tour de surveillance
+complet. Le verrou est maintenant rendu entre volumes et chaque ligne relue
+après acquisition. Le vidage d’un cache 000 échouait au rename avant même sa
+suppression : le déplacement vers un autre parent exige son écriture. L’opération
+explicite rétablit désormais le mode privé avant ce déplacement. La fixture
+échouée a reçu une réparation opérateur limitée de permissions, puis l’ancien
+agent a achevé son intention et les vraies opérations archive/purge ont nettoyé
+ses fichiers ; la nouvelle campagne repart de nouvelles ressources et passe.
+
+La revue en lecture seule a également fait corriger le bail partiel déclaré
+sain, la sonde lancée sans intention préalable, la synchronisation de trash
+avant restitution du quota et la course de maintenance. L’installateur tente
+resume même si la réponse quiesce se perd. La reprise d’une sonde impossible à
+terminer reste consultable. Ces derniers cas extrêmes de crash et blocage noyau
+ne sont pas déclarés prouvés par les campagnes courantes. Leur périmètre, comme
+le raccordement aux instances et aux API, reste explicite dans SLS-050.
+
+À la demande du responsable, le helper SSO expiré après huit heures a été
+relancé. Le binaire Chromium manquait : la version requise par Playwright
+1.64.1 a été installée, puis l’accueil a été rouvert dans Chromium en mode graphique.
+La connexion administrateur n’est pas encore enregistrée à ce checkpoint.
+
+Trois refus CLI réels complètent les 31 régressions du proxy pour le nouveau
+nom de montage : vide, espace et dépassement de la longueur maximale.
+
+La preuve finale recoupe quinze sources locales/distantes, les fichiers du
+paquet root installé et les trois rapports réussis (15, 8 et 34 groupes/contrôles).
+Le registre est intègre, sans bail, volume, sonde, intention ni fonction active
+de preuve ; les montages et conteneurs temporaires ont disparu. Les deux
+applications existantes restent saines. Aucun remote Git n’est configuré.
+
+Le tunnel local de la console était rompu et renvoyait tunnel_unavailable.
+Son geste normal POST /api/tunnels l’a reconnecté ; les propositions des trois
+notes ont ensuite été appliquées et les notes officielles relues identiques.
+La réinstallation finale a conservé le même paquet et passe quiesce/restart.

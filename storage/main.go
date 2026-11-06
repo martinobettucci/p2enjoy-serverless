@@ -1,4 +1,5 @@
 // @spec docs/BACKLOG.md#sls-010 | docs/PLATFORM.md#stockage
+// @spec docs/BACKLOG.md#sls-050 | docs/STORAGE_AGENT.md#registre-et-chemins
 // All declarations implement the exclusive, bounded, native-file FUSE volume.
 package main
 
@@ -12,6 +13,7 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"regexp"
 	"sync"
 	"syscall"
 	"time"
@@ -401,7 +403,11 @@ func run() error {
 	mount := flag.String("mount", "", "empty mount directory")
 	limit := flag.Uint64("bytes", 0, "logical quota including 4KiB per entry")
 	direct := flag.Bool("direct", false, "mount directly with CAP_SYS_ADMIN in the cell")
+	name := flag.String("name", "p2quota", "mount generation identity")
 	flag.Parse()
+	if !regexp.MustCompile(`^[A-Za-z0-9_-]{1,128}$`).MatchString(*name) {
+		return errors.New("invalid mount name")
+	}
 	if *backing == "" || *mount == "" || *limit < block || *limit > 1<<50 {
 		return errors.New("backing, mount and bytes (4KiB..1PiB) required")
 	}
@@ -489,7 +495,7 @@ func run() error {
 	rd.RootNode = root
 	zero := time.Duration(0)
 	server, err := fusefs.Mount(*mount, root, &fusefs.Options{MountOptions: fuse.MountOptions{
-		Name: "p2quota", FsName: "p2quota", Options: []string{"default_permissions", "nosuid", "nodev", "noexec"}, DisableXAttrs: true, EnableLocks: true, DirectMountStrict: *direct,
+		Name: "p2quota", FsName: *name, Options: []string{"default_permissions", "nosuid", "nodev", "noexec"}, DisableXAttrs: true, EnableLocks: true, DirectMountStrict: *direct,
 	}, AttrTimeout: &zero, EntryTimeout: &zero, NegativeTimeout: &zero})
 	if err != nil {
 		return err

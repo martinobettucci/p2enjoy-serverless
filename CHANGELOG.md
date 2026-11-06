@@ -2,6 +2,16 @@
 
 ## [Non publié]
 
+- Agent local de stockage DEV : registre WAL, générations FUSE, baux durables,
+  quotas data/cache, conservation, archivage, purge et vidage explicites.
+  Canal Unix borné avec contrôle d’UID ; maintenance fermant les mutations.
+- Installation d’un paquet root immuable et de son unité systemd dans le SPARK.
+  Corrections issues des preuves réelles : équité du verrou de surveillance
+  à 64 montages et déplacement des répertoires en mode 000 avant suppression.
+  Quinze groupes de cycle, huit de limites et 31 régressions FUSE réussis,
+  zéro échec/skip et ressources nettoyées. Raccordement au pilote, API/UI et
+  preuves d’interruptions intermédiaires ouverts.
+
 - Pilote d’instances Docker chaudes avec enfant Node neuf, canal privé,
   deadlines monotones, réponses bornées, logs expurgés et mesures Docker.
   Récolte des descendants, fermeture coordonnée et nettoyage confirmé/reprenable.

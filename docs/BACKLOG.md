@@ -158,14 +158,19 @@ FUSE et invocation authentifiée restent à intégrer et qualifier.
 
 ## SLS-050
 
-Statut : [~] — agent de volumes en réalisation ; crons et exploitation à poursuivre.
+Statut : [~] — agent local installé en DEV ; raccordements et preuves de reprise à poursuivre.
 
 Volumes par ID, quotas et modes, archive/purge, crons UTC, logs bornés et
 métriques. E2E : concurrence, saturation disque, cache, déploiement/rollback,
 redémarrage, cron réellement déclenché et diagnostic autorisé/refusé.
 Références : PLATFORM stockage et exploitation, [STORAGE_AGENT](STORAGE_AGENT.md).
-Le registre durable, les baux et la supervision FUSE précèdent leur raccordement
-au pilote d’instances, puis aux mutations publiques et aux admissions.
+Le registre durable, les baux et la supervision FUSE sont implémentés. Quinze
+groupes de cycle, huit de limites et les 31 contrôles du proxy passent, avec
+nettoyage confirmé, zéro échec et zéro skip. La [preuve recoupée](evidence/storage-agent-dev-2026-11-06.json)
+précède leur raccordement au pilote d’instances,
+puis aux mutations publiques et aux admissions. Les interruptions pendant
+préparation/acquisition partielle, la marge physique et les pannes de registre
+restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls composants.
 
 ## SLS-060
 

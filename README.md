@@ -18,7 +18,9 @@ La passerelle, les admissions et l’intégration des volumes restent à réalis
 les erreurs de disque et les douze archives chargées ensuite par Node.
 Le composant de [stockage à quota](storage/README.md)
 est disponible et qualifié sur le SPARK DEV : 31 contrôles réels réussis,
-dont saturation, concurrence et reprise après interruption.
+dont saturation, concurrence et reprise après interruption. Son agent local
+de volumes est installé en DEV ; les baux, budgets et reprises font l’objet
+de campagnes réelles de composant, avant leur raccordement au moteur.
 
 ## Objectif
 
@@ -144,6 +146,9 @@ e2e/
   deployments.mjs          Publication et courses par les véritables API
   adapter-deploy.mjs       Parcours de la commande deploy avec jetons réels
 storage/
+  agent.py                Service local, baux et registre durable des volumes
+  install-dev.py          Installation du paquet protégé et maintenance
+  agent-proof.py          Campagnes réelles de cycle de vie et de limites
   main.go                 Proxy de quota FUSE sur les fichiers natifs
   client.py               Client de preuve dans un conteneur Docker isolé
   prove.py                Campagne de montage, quota, crash et reprise

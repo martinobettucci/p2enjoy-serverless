@@ -1,8 +1,8 @@
 # Stockage des fonctions
 
 `p2-quota` monte un répertoire natif avec un plafond de taille logique. Il passe
-31 contrôles E2E réels dans le SPARK DEV ; son intégration au moteur reste à
-réaliser. [Preuve](../docs/evidence/storage-dev-2026-11-05.json).
+31 contrôles E2E réels dans le SPARK DEV. Un agent local de volumes est
+installé en DEV ; son raccordement au moteur reste à réaliser. [Preuve](../docs/evidence/storage-dev-2026-11-05.json).
 Contrat : [PLATFORM, stockage](../docs/PLATFORM.md#stockage).
 
 Prérequis : Linux, `/dev/fuse`, `fusermount3`, Docker pour construire le binaire.
@@ -56,3 +56,66 @@ Le helper conserve le même propriétaire de fichiers et utilise la capacité
 uniquement pour les montages. Les clients Docker n'ont aucune capacité, aucun
 réseau et une racine en lecture seule. Les sources de l'outil sont versionnées ;
 le binaire exporté et les rapports bruts restent des artefacts locaux.
+
+## Agent local de volumes
+
+Quinze groupes de cycle de vie et huit groupes de limites passent en DEV, avec
+nettoyage confirmé, zéro échec et zéro test ignoré. Les 31 contrôles historiques
+du proxy repassent sur le binaire modifié. [Preuve recoupée](../docs/evidence/storage-agent-dev-2026-11-06.json).
+
+Le contrat est [STORAGE_AGENT](../docs/STORAGE_AGENT.md). Le service
+`p2enjoy-storage-dev.service` expose un socket Unix privé à `spark-docker`,
+avec contrôle d’UID, quotas data/cache, baux durables et opérations explicites
+de conservation, archive, purge et vidage du cache. Il possède sa propre base
+SQLite WAL (migrations 001 et 002), distincte de celle du contrôle.
+Le binaire accepte `-name` pour identifier chaque génération dans mountinfo ;
+son défaut reste `p2quota` pour les commandes existantes.
+
+Sur le SPARK DEV seulement, depuis `/srv/p2enjoy-serverless/storage` :
+
+```sh
+# Comme spark-docker, après copie des sources :
+bash dev.sh build
+# Comme root de la cellule, après application des variables par la console :
+bash dev.sh install
+bash dev.sh agent-test
+bash dev.sh limits-test
+bash dev.sh status
+```
+
+Attendre la fin complète de chaque commande. Les campagnes utilisent le
+service installé, son socket réel, les montages FUSE et des conteneurs Docker.
+`agent-test` vérifie les opérations et les pannes, y compris des consommateurs
+vivants lors de la mort de FUSE et du restart. `limits-test` remplit le budget
+logique, monte réellement 64 volumes, crée 51 baux, sature les connexions et
+vérifie une arborescence de 4 200 répertoires avec permissions `000`.
+Les rapports `agent-proof.json` et `agent-limits-proof.json` sont invalidés au
+démarrage ; leur succès exige completed/cleanup vrais et failed/skipped à zéro.
+Les rapports bruts et le binaire exporté ne sont pas versionnés.
+
+| Variable | Usage et format | Défaut |
+| --- | --- | --- |
+| SERVERLESS_STORAGE_ROOT_HOST | Répertoire absolu privé de l’état et des volumes | Requis |
+| SERVERLESS_STORAGE_SOCKET_DIR_HOST | Répertoire privé directement sous /run | Requis |
+| SERVERLESS_STORAGE_BUDGET_MIB | Budget logique total, entier de 1 à 1048576 Mio | 32768 |
+| SERVERLESS_STORAGE_RESERVE_MIB | Marge physique avant allocation, entier de 0 à 1048576 Mio | 8192 |
+| SERVERLESS_STORAGE_MAX_MOUNTS | Montages ou préparations réservées, entier de 1 à 256 | 64 |
+
+La configuration entre par les deux EnvironmentFile de cellule. L’installateur
+conserve les paquets immuables, possédés par root, sous
+`/usr/local/lib/p2enjoy-serverless/storage/<empreinte>`. Il ferme atomiquement
+les mutations par quiesce après avoir préparé le paquet ; toute consommation,
+mutation ou génération montée empêche cette maintenance normale. Un échec de
+remplacement tente resume. Aucun socket ni port TCP n’est exposé.
+
+Un restart avec baux constitue une panne : il conserve les baux et fichiers,
+mais le contrôle doit supprimer les anciens conteneurs avant release et
+réacquisition. Les montages déconnectés ne se réparent pas dans un ancien bind.
+Une opération en attente garde sa réservation ; diagnostiquer son code et ses
+permissions avant de réessayer, sans supprimer la base ni monter le backing.
+L’arrêt normal d’exploitation doit d’abord drainer les consommateurs.
+
+Le raccordement aux instances, aux API et à la console reste à réaliser.
+Les interruptions pendant préparation/acquisition partielle et la marge de
+filesystem restent à qualifier. Une coupure électrique et un processus bloqué
+dans un appel noyau impossible à tuer ne sont pas reproduits par ces campagnes.

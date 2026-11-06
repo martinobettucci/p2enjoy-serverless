@@ -112,6 +112,8 @@ configure réserve les augmentations jusqu’au commit ou à la compensation.
 et montages acquis. Une ligne sans résultat de montage complet représente une
 acquisition interrompue : elle exige une réconciliation, pas une santé positive.
 `probes` contient au plus une sonde dont la terminaison reste à confirmer.
+La migration 002 permet un PID et une naissance absents : la commande unique
+et le boot sont inscrits avant lancement pour retrouver un enfant orphelin.
 `metadata` conserve l’identité de cette installation de stockage. WAL,
 synchronous FULL et verrou de propriétaire protègent les transitions décrites
 dans [STORAGE_AGENT](STORAGE_AGENT.md).

@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-010 | docs/PLATFORM.md#stockage
 # @verifies docs/BACKLOG.md#sls-010 | docs/PLATFORM.md#stockage
+# @spec docs/BACKLOG.md#sls-050 | docs/STORAGE_AGENT.md#registre-et-chemins
+# @verifies docs/BACKLOG.md#sls-050 | docs/STORAGE_AGENT.md#registre-et-chemins
 # Serial real FUSE/Docker proof, run only by the principal on the DEV Spark.
 import hashlib
 import ctypes
@@ -101,6 +103,10 @@ try:
     ba,bb=work/'backing-a',work/'backing-b'
     extra=work/'extra-mount'
     for p in (a,b,ba,bb,extra):p.mkdir(mode=0o700)
+    for label,name in [('empty',''),('spaces','bad name'),('too-long','a'*129)]:
+        result=subprocess.run([str(ROOT/'p2-quota'),'-direct','-backing',str(ba),'-mount',str(a),'-bytes',str(LIMIT),'-name',name],capture_output=True,text=True,timeout=10)
+        assert result.returncode!=0 and 'invalid mount name' in result.stderr
+        RESULTS.append({'name':'reject-mount-name-'+label,'status':'passed'})
     logs=[(work/'a.log').open('w'),(work/'b.log').open('w')]
     pa=launch(ba,a,logs[0]);processes.append(pa)
     pb=launch(bb,b,logs[1]);processes.append(pb)

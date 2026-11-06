@@ -16,6 +16,12 @@ rootless. Le montage direct sous spark-docker avec CAP_SYS_ADMIN dans la
 cellule est qualifié ; les workloads Docker n'ont aucune capacité. Le helper
 fusermount3 de cette cellule ne conserve pas son descripteur au passage exec.
 Le composant passe 31 contrôles réels : [preuve](evidence/storage-dev-2026-11-05.json).
+L’agent Python standard `storage/agent.py` supervise maintenant ce proxy, avec
+registre WAL, générations, baux, sondes bornées et socket Unix authentifié par
+UID. Il possède seul la capacité de montage et partage le namespace de la
+cellule ; le code installé reste possédé par root. Les opérations locales et
+la maintenance sont décrites dans [STORAGE_AGENT](STORAGE_AGENT.md). Son
+raccordement aux instances et aux API publiques reste à réaliser.
 Les répertoires supprimés encore ouverts restent comptés jusqu'à Releasedir.
 Les copies avec repli noyau passent par les écritures contrôlées du proxy.
 

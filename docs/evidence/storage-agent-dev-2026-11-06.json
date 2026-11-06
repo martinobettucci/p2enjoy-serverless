@@ -1,0 +1,376 @@
+{
+  "date": "2026-11-06T14:17:01.761046+00:00",
+  "unit": "SLS-050",
+  "unit_complete": false,
+  "target": "infra-serverless DEV",
+  "scope": "Agent local de volumes, socket Unix, vrais FUSE et consommateurs Docker",
+  "reports": {
+    "agent-proof.json": {
+      "completed": true,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "cleanup": true,
+      "error": null,
+      "results": [
+        {
+          "name": "private-socket-capability-and-host-mount-namespace",
+          "status": "passed"
+        },
+        {
+          "name": "reject-root-peer-uid",
+          "status": "passed"
+        },
+        {
+          "name": "reject-malformed-and-unknown-protocol-fields",
+          "status": "passed"
+        },
+        {
+          "name": "atomic-configuration-idempotence-and-version",
+          "status": "passed"
+        },
+        {
+          "name": "durable-idempotent-lease-and-owner-refusals",
+          "status": "passed"
+        },
+        {
+          "name": "reject-mutations-under-live-lease",
+          "status": "passed"
+        },
+        {
+          "name": "docker-write-quota-and-logical-usage",
+          "status": "passed"
+        },
+        {
+          "name": "shared-leases-last-release-and-persistence",
+          "status": "passed"
+        },
+        {
+          "name": "disable-retains-allocation-and-files",
+          "status": "passed"
+        },
+        {
+          "name": "explicit-cache-clear-preserves-data",
+          "status": "passed"
+        },
+        {
+          "name": "second-volume-failure-compensates-first-candidate",
+          "status": "passed"
+        },
+        {
+          "name": "blocked-fuse-probe-bounded-and-degraded-until-drain",
+          "status": "passed"
+        },
+        {
+          "name": "fuse-death-recovery-and-acknowledged-data",
+          "status": "passed"
+        },
+        {
+          "name": "service-restart-retains-leases-and-data",
+          "status": "passed"
+        },
+        {
+          "name": "archive-purge-budget-and-tombstone",
+          "status": "passed"
+        }
+      ],
+      "source_sha256": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a"
+    },
+    "agent-limits-proof.json": {
+      "completed": true,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "cleanup": true,
+      "error": null,
+      "results": [
+        {
+          "name": "atomic-maintenance-gate-and-readable-state",
+          "status": "passed"
+        },
+        {
+          "name": "second-agent-refused-by-durable-root-lock",
+          "status": "passed"
+        },
+        {
+          "name": "request-size-connection-limit-and-slow-client-deadline",
+          "status": "passed"
+        },
+        {
+          "name": "lost-acquire-response-idempotence-and-lease-pagination",
+          "status": "passed"
+        },
+        {
+          "name": "global-budget-disabled-archives-and-temporary-increase",
+          "status": "passed"
+        },
+        {
+          "name": "real-mount-limit-reservations-compensation-and-reuse",
+          "status": "passed"
+        },
+        {
+          "name": "foreign-mount-refused-and-preserved-across-restart",
+          "status": "passed"
+        },
+        {
+          "name": "wide-tree-and-chmod-zero-cleanup-resize-and-purge",
+          "status": "passed"
+        }
+      ],
+      "source_sha256": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a"
+    },
+    "proof.json": {
+      "results": [
+        {
+          "name": "reject-mount-name-empty",
+          "status": "passed"
+        },
+        {
+          "name": "reject-mount-name-spaces",
+          "status": "passed"
+        },
+        {
+          "name": "reject-mount-name-too-long",
+          "status": "passed"
+        },
+        {
+          "name": "exclusive-backing-lock",
+          "status": "passed",
+          "detail": "2026/11/06 14:16:38 volume already owned: resource temporarily unavailable"
+        },
+        {
+          "name": "read-write-fsync-chmod",
+          "status": "passed"
+        },
+        {
+          "name": "directory-fsync-rename",
+          "status": "passed"
+        },
+        {
+          "name": "saturation-isolation",
+          "status": "passed"
+        },
+        {
+          "name": "truncate-both-paths",
+          "status": "passed"
+        },
+        {
+          "name": "sparse-charged",
+          "status": "passed"
+        },
+        {
+          "name": "open-unlink",
+          "status": "passed"
+        },
+        {
+          "name": "multiple-open-handles",
+          "status": "passed"
+        },
+        {
+          "name": "rename-open-destination",
+          "status": "passed"
+        },
+        {
+          "name": "open-removed-directory",
+          "status": "passed"
+        },
+        {
+          "name": "concurrent-growth",
+          "status": "passed"
+        },
+        {
+          "name": "empty-entry-bound",
+          "status": "passed"
+        },
+        {
+          "name": "alternate-mutations-refused",
+          "status": "passed"
+        },
+        {
+          "name": "copy-append-self-rename",
+          "status": "passed"
+        },
+        {
+          "name": "directory-ioctl-refused",
+          "status": "passed"
+        },
+        {
+          "name": "copy-range-quota",
+          "status": "passed"
+        },
+        {
+          "name": "shared-mmap-refused",
+          "status": "passed"
+        },
+        {
+          "name": "persist-write",
+          "status": "passed"
+        },
+        {
+          "name": "persist-read",
+          "status": "passed"
+        },
+        {
+          "name": "persist-write",
+          "status": "passed"
+        },
+        {
+          "name": "disconnected-mount-refuses-write",
+          "status": "passed"
+        },
+        {
+          "name": "new-container-rejects-disconnected-mount",
+          "status": "passed"
+        },
+        {
+          "name": "persist-read",
+          "status": "passed"
+        },
+        {
+          "name": "refuse-limit-below-usage",
+          "status": "passed",
+          "detail": "2026/11/06 14:16:50 quota smaller than existing usage"
+        },
+        {
+          "name": "refuse-preexisting-symlink",
+          "status": "passed",
+          "detail": "2026/11/06 14:16:50 unsupported link, type or nested filesystem in backing"
+        },
+        {
+          "name": "refuse-preexisting-hardlink",
+          "status": "passed",
+          "detail": "2026/11/06 14:16:50 unsupported link, type or nested filesystem in backing"
+        },
+        {
+          "name": "refuse-preexisting-special-file",
+          "status": "passed",
+          "detail": "2026/11/06 14:16:50 unsupported link, type or nested filesystem in backing"
+        },
+        {
+          "name": "refuse-overlapping-paths",
+          "status": "passed",
+          "detail": "2026/11/06 14:16:50 backing and mount must be separate trees"
+        },
+        {
+          "name": "refuse-zero-quota",
+          "status": "passed",
+          "detail": "2026/11/06 14:16:50 backing, mount and bytes (4KiB..1PiB) required"
+        },
+        {
+          "name": "refuse-oversized-quota",
+          "status": "passed",
+          "detail": "2026/11/06 14:16:50 backing, mount and bytes (4KiB..1PiB) required"
+        },
+        {
+          "name": "refuse-nonempty-mount",
+          "status": "passed",
+          "detail": "2026/11/06 14:16:50 mount must be empty"
+        }
+      ],
+      "failed": 0,
+      "skipped": 0,
+      "sources": {
+        "main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+        "Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+        "go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+        "go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+        "client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+        "prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407"
+      },
+      "binary_sha256": "c731fdcf33a42ba1206721e72a0635ce84dfe7833c03fa2e01e036ca3cd780ff",
+      "client_image": "python:3.14-slim@sha256:af8a5aa14780025dbfbcfbc81bd8a91ebd87711dd5b0f48ed71090949dd7cb1d",
+      "daemon_logs": {
+        "b.log": "2026/11/06 14:16:38 mounted quota=1048576 used=0\n",
+        "a.log": "2026/11/06 14:16:38 mounted quota=1048576 used=0\n2026/11/06 14:16:42 mounted quota=1048576 used=8192\n2026/11/06 14:16:48 mounted quota=1048576 used=8192\n"
+      }
+    }
+  },
+  "sources": {
+    "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+    "storage/README.md": "96b99cec195d366937b08bd45130d323eb962030e2cf22e083e49bba2dc4b419",
+    "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+    "storage/agent.py": "bb723a8fa84ee762cc0e53a3d972808063abb280d693ca32eb727aa14100c7e1",
+    "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+    "storage/agent_volumes.py": "0e122076094a41391017f153a2dc3f778c5e79a55e5b9ee141250f5c855230b6",
+    "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+    "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+    "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+    "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+    "storage/install-dev.py": "34752f0ffee2599ea8a31f3e89ec9fa5b7369942afad356d158299d69bf01dd3",
+    "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+    "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+    "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+    "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407"
+  },
+  "installed_bundle": "/usr/local/lib/p2enjoy-serverless/storage/6ab170f699f57a1140e2045f73dd60b5c51248fa53ade09926776125e5810751",
+  "installed_files": {
+    "p2-quota": "c731fdcf33a42ba1206721e72a0635ce84dfe7833c03fa2e01e036ca3cd780ff",
+    "agent.py": "bb723a8fa84ee762cc0e53a3d972808063abb280d693ca32eb727aa14100c7e1",
+    "agent_volumes.py": "0e122076094a41391017f153a2dc3f778c5e79a55e5b9ee141250f5c855230b6",
+    "agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+    "migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+    "migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295"
+  },
+  "schema_version": 2,
+  "registry_integrity": "ok",
+  "remaining_resources": {
+    "leases": 0,
+    "volumes": 0,
+    "probes": 0,
+    "pending": 0,
+    "active_functions": 0
+  },
+  "health": {
+    "allocated_bytes": 0,
+    "budget_bytes": 34359738368,
+    "error": null,
+    "failed_volumes": 0,
+    "healthy": true,
+    "installation_id": "a8fb85c6-13a2-4f92-a60e-7f5d924cebbe",
+    "leases": 0,
+    "max_mounts": 64,
+    "mounted_or_reserved": 0,
+    "pending_functions": 0,
+    "quiesced": false,
+    "ready": true,
+    "reserve_bytes": 8589934592
+  },
+  "services": {
+    "p2enjoy-serverless-dev-control-1": {
+      "healthy": true,
+      "image": "sha256:48026e714e2dbc03724abe876a01270a2c95f44e7a99a1ebb675b261b15effb8"
+    },
+    "p2enjoy-qualification-dev-qualification-1": {
+      "healthy": true,
+      "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2"
+    }
+  },
+  "host_mount_namespace_shared": true,
+  "configuration_matches_official_files": true,
+  "variables": {
+    "SERVERLESS_STORAGE_ROOT_HOST": "/srv/p2enjoy-serverless/storage-state",
+    "SERVERLESS_STORAGE_SOCKET_DIR_HOST": "/run/p2enjoy-serverless-storage",
+    "SERVERLESS_STORAGE_BUDGET_MIB": "32768",
+    "SERVERLESS_STORAGE_RESERVE_MIB": "8192",
+    "SERVERLESS_STORAGE_MAX_MOUNTS": "64"
+  },
+  "new_secrets": [],
+  "new_routes": [],
+  "known_secrets_checked": 4,
+  "secret_matches": 0,
+  "limitations": [
+    "Raccordement aux baux du pilote d’instances, aux mutations publiques et à la console encore à réaliser",
+    "Crash au milieu de la préparation des deux quotas ou d’une acquisition partielle restant à provoquer et qualifier",
+    "Marge minimale de filesystem et erreurs de disque du registre restant à provoquer dans le service",
+    "Coupure électrique et processus bloqué dans un appel noyau impossible à tuer non provoqués",
+    "Crons, admission, passerelle authentifiée et parcours administrateur restent hors de cette preuve"
+  ],
+  "spark_notes": {
+    "applied_through_console": true,
+    "verified": {
+      "INSTALL.md": "a6f7e9832ae2ffdbf74b28700f4d6b58c106364f36103342565f8780eb0a7219",
+      "CONTRIBUTORS.md": "a898dd231b041e2f56b05ddabca6297b66e90f864b1e3cc54ec3cd25d5510089",
+      "README.md": "cae6bc593356cf30c2f8f9b68ce3838c5ef5d9cd691561c8e86952d320f90f90"
+    }
+  }
+}
