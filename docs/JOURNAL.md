@@ -962,3 +962,24 @@ Le tunnel local de la console était rompu et renvoyait tunnel_unavailable.
 Son geste normal POST /api/tunnels l’a reconnecté ; les propositions des trois
 notes ont ensuite été appliquées et les notes officielles relues identiques.
 La réinstallation finale a conservé le même paquet et passe quiesce/restart.
+
+## Noms d’exploitation et domaine — 2026-11-06
+
+Le responsable demande des noms de conteneurs compréhensibles et l’adresse
+serverless.lelabs.tech : lelabs est déjà son infrastructure de développement.
+Le conteneur permanent de qualification exécute les handlers ; le nommer
+« tests » décrirait son client plutôt que son rôle. Les noms retenus sont
+serverless-api et serverless-runtime-reference. La mission factory_explorer
+confirme que container_name suffit et que renommer le projet Compose créerait
+de nouveaux volumes implicites. Les clés internes restent donc stables.
+
+Le relevé courant trouve les deux anciens conteneurs healthy, la variable
+publique sur l’ancien domaine et une nouvelle route serverless.lelabs.tech
+vers 8080. Le vrai fournisseur accepte déjà le nouveau redirect_uri : une
+requête PKCE prompt=none renvoie login_required au nouveau domaine (302).
+La migration corrigera la route vers 18090, puis la variable officielle.
+Le contrat DEPLOYMENT_NAMES précède les changements de code et de déploiement.
+
+La session administrateur créée par la connexion réelle du responsable est
+présente sur l’ancien domaine et ses API répondent 200. Elle n’est pas exportée
+vers le nouveau domaine. La qualification authentifiée globale reste ouverte.

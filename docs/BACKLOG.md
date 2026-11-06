@@ -81,6 +81,17 @@ de cellule. Preuves : écriture jusqu'au plafond, isolation entre deux volumes,
 remontage, nettoyage des seules ressources de l'expérience. Un accès SSO
 manquant est nommé ; aucun fournisseur d'identité de remplacement.
 
+## SLS-011
+
+Statut : [~] — renommage d’exploitation et bascule du domaine demandés.
+
+Rendre les noms Docker explicites par rôle et adopter `serverless.lelabs.tech`
+dans le SPARK de développement. Contrat : [noms d’exploitation](DEPLOYMENT_NAMES.md).
+Conserver les données et les identifiants Compose, qualifier la recréation
+réelle, la route TLS 18090, la configuration officielle et le parcours SSO.
+Le nouveau callback est accepté par le vrai fournisseur le 6 novembre ; la
+route nouvellement créée vise encore 8080 au constat initial.
+
 ## SLS-020
 
 Statut : [~] — contrôle et console initiale déployés ; qualification en cours.
