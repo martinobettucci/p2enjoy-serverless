@@ -45,6 +45,16 @@ de cellule décrivent le banc, le stockage et le contrôle déployé. La console
 locale est accessible sur 5175. Le parcours utilisateur SSO reste à vérifier
 avec le contrôle, dans SLS-020 et SLS-060.
 
+Revalidation du 6 novembre 2026 à 00:09 UTC après confirmation du responsable :
+la route officielle est `serverless-dev.lelabs.tech 18090 tls`. Le certificat
+Let’s Encrypt YE1 couvre le domaine et passe la validation TLS normale ; il
+est valable du 5 novembre 2026 au 3 février 2027. `/healthz` répond 200 et le
+contrôle est healthy. Les cinq paramètres requis et le proxy approuvé du
+conteneur correspondent aux fichiers de cellule, comparaison des secrets
+effectuée uniquement en mémoire. Aucune recréation n'est nécessaire. Les sept
+groupes de contrôles publics repassent. Les trois notes officielles restent
+justes pour cette confirmation ; aucune route ni variable supplémentaire.
+
 ## Conservation de l'adresse cliente
 
 La mesure sur le contrôle DEV constate que le proxy TLS et l'accès direct

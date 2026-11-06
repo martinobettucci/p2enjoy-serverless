@@ -621,3 +621,9 @@ des clés asymétriques publiées et de la comparaison de la cible de redirectio
 à cette découverte. La preuve est conservée dans
 `evidence/sso-contract-dev-2026-11-06.json`. Aucun composant de remplacement
 n'intervient dans ces échanges HTTPS.
+
+Le responsable confirme la route et les paramètres posés. Le contrôle live du
+6 novembre à 00:09 UTC constate déjà le certificat Let’s Encrypt valide, la
+route TLS vers 18090 et une santé 200. Les valeurs du conteneur et de ses deux
+env_file correspondent, y compris les secrets comparés en mémoire : la
+recréation serait inutile. Les sept groupes publics passent sur cet état.
