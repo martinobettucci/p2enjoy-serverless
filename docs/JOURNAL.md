@@ -746,3 +746,7 @@ avant mutation et les résultats partiels. La configuration active n'est jamais
 modifiée avant validation. Une rupture réseau peut suivre un commit serveur :
 le client signale cette ambiguïté sans rejouer une mutation. Les chemins de
 publication positifs restent soumis au prérequis SSO réel de la campagne.
+
+La revue précise que la borne JSON doit être contrôlée pour toutes les fonctions
+avant la première mutation, comme le packaging. Elle fait aussi corriger le port
+zéro, la recopie d’un UUID invalide et le classement des succès HTTP inattendus.

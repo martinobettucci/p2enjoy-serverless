@@ -76,7 +76,9 @@ L'authentification par jeton reste obligatoire pour les invocations.
 ### Commande deploy
 
 `python3 -m adapter deploy --config MANIFESTE --service UUID` résout les valeurs
-de configuration en mémoire et empaquette toutes les fonctions avant mutation.
+de configuration en mémoire, borne tous les corps de préparation à 256 Kio et
+empaquette toutes les fonctions avant mutation. Un défaut de cette préparation
+locale arrête le service entier avant toute création de brouillon.
 `P2_SERVERLESS_URL` est une origine HTTPS sans identifiants, chemin, query ni
 fragment ; `P2_SERVERLESS_TOKEN` fournit le jeton de service. Le client vérifie
 le certificat normalement et ne suit aucune redirection. Il vérifie que l'UUID
