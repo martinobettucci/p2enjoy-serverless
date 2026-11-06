@@ -88,8 +88,8 @@ configuration, sans libérer son ancienne allocation et sans permettre de bail.
 L'agent ajoute prepare-configuration, commit-configuration et abort-configuration,
 avec function_id et operation_id UUID. Préparer prend configuration et version
 attendue du registre. L'agent conserve dans son intention durable la configuration
-cible, les nouveaux types de volumes, la création initiale éventuelle de fonction,
-l'ancien état et la réservation supplémentaire. Il arrête les anciens montages,
+cible, les nouveaux types de volumes, la provenance de leurs répertoires et
+la réservation supplémentaire. L'ancien état reste publié. Il arrête les anciens montages,
 sonde réellement ancien usage et quotas cibles, puis inscrit prepared avant de
 répondre. Les lignes de volumes gardent leur ancienne allocation jusqu'au commit.
 La configuration courante reste inchangée ; acquire et les mutations concurrentes
@@ -101,8 +101,10 @@ la réservation de préparation et écrit le reçu committed. Abort conserve les
 volumes antérieurs et leurs données ; il retire uniquement les volumes créés par
 cette préparation après confirmation de leur absence de consommation et de leur
 vacuité. Une donnée inattendue interdit la suppression et garde une erreur
-récupérable. Une fonction initialement absente et restée vide peut être retirée.
-Un reçu par fonction conserve operation_id et committed/aborted ; la répétition
+récupérable. Une fonction initialement absente conserve un état vide versionné,
+sans allocation, afin de refuser un ancien prepare après remplacement du reçu.
+Abort incrémente aussi la version. Un reçu par fonction conserve operation_id,
+installation_id, configuration, version initiale/finale et committed/aborted ; la répétition
 de la même décision est idempotente, la décision opposée est refusée. Une nouvelle
 préparation peut remplacer le reçu précédent après résolution de son intention.
 
