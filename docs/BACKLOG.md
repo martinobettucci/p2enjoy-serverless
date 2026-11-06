@@ -115,6 +115,10 @@ Les parcours publics, l'accueil navigateur, la provenance réseau et les
 limites de connexion sont éprouvés. Les scénarios administrateur préparés
 disposent désormais d’une session réelle sur le nouveau domaine ; leurs
 campagnes complètes restent à exécuter et ne sont pas déclarées réussies.
+Le premier passage authentifié des API réussit ses 19 groupes, nettoyage
+compris. La campagne UI révèle un débordement du nom maximal dans le fil
+d’Ariane mobile : correction et reprise du parcours en cours, selon
+[le contrat des noms longs](DESIGN_SYSTEM_APP.md#noms-longs-dans-la-navigation).
 Le [checkpoint du 6 novembre](evidence/control-dev-checkpoint-2026-11-06.json)
 regroupe six groupes HTTP, neuf contrôles navigateur, quatre chemins réseau,
 six scénarios de limite par client, deux de capacité globale et dix-sept

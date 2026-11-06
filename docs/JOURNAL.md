@@ -1038,3 +1038,22 @@ Les exigences PKCE S256, rôles verified/admin, clés asymétriques et durée de
 la connexion réelle vérifiée dans la preuve de migration SLS-011.
 Cette mise à jour documentaire n’ajoute aucune nouvelle preuve fonctionnelle ;
 la déclaration extraite du bloc est comparée au fichier d’import avant commit.
+
+## Qualification authentifiée et noms longs — 2026-11-06
+
+La reprise trouve l’arbre propre au commit 50b25d2 et les deux conteneurs
+healthy, sans campagne active sur le SPARK. Le checkpoint précédent constitue
+une progression documentaire : contrat OIDC courant persisté. La vraie session
+administrateur permet maintenant les campagnes jusque-là non exécutées.
+Les 19 groupes de control-admin passent, dont droits CRUD, portée, secrets,
+conflits, expiration, rotation et redémarrage. Le nettoyage est confirmé.
+
+Le parcours UI échoue ensuite à 390 px sur un namespace de 63 caractères.
+La reproduction depuis l’accueil mesure scrollWidth=405 pour innerWidth=390 :
+le seul élément débordant est le dernier span du fil d’Ariane, large de 389 px.
+La capture confirme sa coupure à droite. L’exploration indépendante retrouve
+la cause : les titres ont overflow-wrap:anywhere, ce span flex ne l’a pas.
+Décision : donner aux segments du fil d’Ariane une largeur minimale réductible
+et la coupure des mots longs, sans masquer le contenu ni modifier la taille
+des titres. Le contrat local de design est précisé avant la correction CSS.
+Les deux design systems ont été lus intégralement.

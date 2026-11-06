@@ -2,8 +2,9 @@
 
 ## Statut
 
-Le socle global est importé dans `DESIGN_SYSTEM.md`. Aucune interface de
-management n'est encore implémentée ni qualifiée visuellement.
+Le socle global est importé dans `DESIGN_SYSTEM.md`. La console de gestion
+SLS-020 est déployée en DEV ; son accueil est qualifié. Les parcours
+administrateur et leur validation visuelle sont en cours.
 
 ## Périmètre confirmé
 
@@ -49,4 +50,13 @@ l'écran et les sections s'empilent. Les tableaux défilent localement avec une
 indication de débordement. Icônes Lucide, favicon SVG propre au produit.
 
 Les captures de référence et mesures seront ajoutées après exécution des
-parcours sur la vraie console DEV. Aucune validation visuelle n'est acquise.
+parcours de gestion sur la vraie console DEV.
+
+## Noms longs dans la navigation
+
+Le fil d’Ariane conserve les noms complets des namespaces, services et
+fonctions, y compris leur longueur maximale de 63 caractères. Ses segments
+se réduisent à la largeur disponible et leurs mots longs reviennent à la ligne.
+La page ne défile pas horizontalement, conformément au §8 du socle ; aucun
+nom n’est masqué pour obtenir ce résultat. La campagne du contrôle mesure
+le rendu à 390 px depuis la création d’un namespace par la vraie console.
