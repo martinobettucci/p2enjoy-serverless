@@ -1096,3 +1096,15 @@ au terme du scénario d’admission saturée. La résolution sera acquise après
 les onze groupes réels, leur nettoyage et la conservation des preuves.
 Une réponse HTTP perdue reste un cas distinct : cette attente cliente ne
 prouve pas à elle seule l’issue serveur après rupture réseau.
+
+La première campagne SLS-030 atteint trois groupes réussis, dont une vraie
+publication par Create, puis échoue sur le marqueur d’expurgation absent.
+La lecture du candidat confirme import_failed, zéro octet de logs et
+container_removed=true. Le module throws.cjs ne fait que lever une exception ;
+le chargeur remplace son message par un code fixe sans l’écrire. Le nettoyage
+du client réussit et conserve une archive conformément au contrat.
+L’exploration indépendante confirme la cause. Décision : une fixture distincte
+log-secret-then-throw.cjs écrit le secret injecté par writeSync sur stderr,
+avec préfixe public, avant son exception. L’assertion vérifie ce préfixe expurgé
+et le nettoyage Docker. throws.cjs conserve son rôle de simple exception dans
+les autres campagnes. Le contrat de preuve est précisé avant cette correction.

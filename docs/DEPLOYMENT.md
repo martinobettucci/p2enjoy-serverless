@@ -383,6 +383,15 @@ exercés avec leurs causes réelles. Un refus laisse le précédent état intact
 Les E2E HTTP du moteur éprouveront les dépendances chargées pendant l'invocation,
 que la validation de l'import ne suffit pas à prouver.
 
+La preuve d’expurgation lors d’un import refusé emploie un module distinct,
+`qualification/artifacts/log-secret-then-throw.cjs`. Il écrit réellement sur
+stderr un préfixe public suivi de la valeur secrète injectée, puis lève une
+exception. L’écriture synchrone précède la terminaison du chargeur. Le client
+exige le préfixe conservé, la valeur remplacée par `[redacted]`, le refus
+`import_failed`, la disparition du conteneur et la révision précédente intacte.
+Une exception seule ne prouve pas l’expurgation des logs : son message est
+remplacé par le code fixe du chargeur avant toute sortie.
+
 Références primaires : [PyYAML](https://pypi.org/project/PyYAML/),
 [glob pathlib](https://docs.python.org/3.14/library/pathlib.html#pathlib.PurePath.full_match),
 [API Docker](https://docs.docker.com/reference/api/engine/),
