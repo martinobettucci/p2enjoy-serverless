@@ -124,7 +124,7 @@ concaténation et enregistrements supplémentaires sont refusés explicitement :
 les limites du produit et le packager fourni n'en ont pas besoin. Le répertoire
 central est parcouru en flux avant toute extraction ; ses 16 Mio maximum et
 ses 20 000 entrées incluent les répertoires explicites. Au plus 20 000 répertoires
-implicites peuvent être créés. Les noms UTF-8 ou CP437 sont conservés ; aucune
+explicites ou implicites peuvent être créés. Les noms UTF-8 ou CP437 sont conservés ; aucune
 normalisation silencieuse d'un chemin interdit. Les composants suivent aussi
 la borne Linux de 255 octets.
 
@@ -144,10 +144,20 @@ préexistante est refusée ; un répertoire temporaire privé est publié par
 renameat2 NOREPLACE sous Linux après succès. Un échec supprime uniquement ce
 candidat et conserve l'ancienne destination. Les fichiers sont readonly,
 avec exécution conservée lorsqu'elle était demandée ; les répertoires sont 0555.
+La synchronisation du parent fait partie du succès : si elle échoue après
+le renommage, seule la nouvelle destination, identifiée par son inode, est
+retirée. Les répertoires de travail appartiennent au contrôle et restent privés ;
+les fonctions n'y ont jamais de montage en écriture. Une interruption brutale
+du processus laisse éventuellement un candidat privé à réconcilier au démarrage,
+comme les uploads interrompus ; elle ne produit pas un succès de publication.
 
 L'extracteur est d'abord qualifié comme vraie CLI dans une image Python épinglée,
 avec le packager et le validateur Node réels. Son intégration HTTP et la
 réservation globale restent dans le parcours de publication décrit ci-dessous.
+Le pilote E2E s'exécute sur le SPARK et appelle l'image de la CLI pour chaque
+archive. Il crée de vrais ZIP, provoque des erreurs de disque dans un tmpfs
+limité et exerce une collision concurrente de destination. Aucune dépendance
+ou primitive du système n'est substituée.
 Sa charge de stockage compte les fichiers et répertoires par blocs logiques
 de 4 Kio, en plus du ZIP ; l'admission conservera la marge libre de 1 Gio.
 
