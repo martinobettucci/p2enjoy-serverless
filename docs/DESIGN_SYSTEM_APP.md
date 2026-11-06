@@ -60,3 +60,12 @@ se réduisent à la largeur disponible et leurs mots longs reviennent à la lign
 La page ne défile pas horizontalement, conformément au §8 du socle ; aucun
 nom n’est masqué pour obtenir ce résultat. La campagne du contrôle mesure
 le rendu à 390 px depuis la création d’un namespace par la vraie console.
+
+## Focus du menu mobile
+
+L’ouverture rend le contenu principal inerte et place le focus sur « Fermer
+le menu ». La fermeture par Échap, bouton ou fond retire cet état inerte avant
+de rendre le focus au bouton « Menu ». Un passage au palier desktop ferme le
+tiroir et place le focus sur le lien de navigation visible. La fermeture
+rétablit aussi le défilement de la page ; elle ne laisse pas le focus sur un
+contrôle masqué.

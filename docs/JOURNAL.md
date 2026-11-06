@@ -1057,3 +1057,12 @@ Décision : donner aux segments du fil d’Ariane une largeur minimale réductib
 et la coupure des mots longs, sans masquer le contenu ni modifier la taille
 des titres. Le contrat local de design est précisé avant la correction CSS.
 Les deux design systems ont été lus intégralement.
+
+La console reconstruite supprime le débordement. Le parcours suivant révèle
+que fermer le tiroir mobile conserve le focus sur « Fermer le menu », désormais
+masqué. La mesure confirme menuExpanded=false et shell.inert=false, avec ce
+bouton encore actif. closeMenu appelle focus avant que React retire inert du
+contenu contenant le bouton Menu. Décision : effectuer la restitution après
+la mise à jour du DOM, dans l’effet de layout de la transition ouvert/fermé.
+Le passage desktop rend le focus au lien visible de navigation. Les trois
+gestes de fermeture et ce passage de palier seront exercés dans le vrai parcours.
