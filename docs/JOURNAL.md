@@ -1173,3 +1173,25 @@ fonctionnelle vérifiée, avec arbre et preuves prêts pour un commit local.
 Expiration, budget, déconnexion concurrente et arrêt pendant nettoyage restent
 ouverts ; le raccordement de l'admission, des volumes et de la passerelle est
 la principale partie fonctionnelle restante avant la campagne transversale.
+
+## Raccordement des instances aux volumes — 2026-11-06
+
+Reprise sur 6833c9a, arbre propre, deux conteneurs healthy et agent actif.
+Le tour précédent constitue une progression vérifiée : gestion, publications,
+plafonds et reprises qualifiés. La lecture des contrats d'exécution/stockage et
+les explorations indépendantes confirment le prochain raccordement nécessaire :
+un bail durable avant Docker, une destruction confirmée avant libération,
+et un contrôle des volumes durant les invocations. Les canaux d'instances
+doivent rester distincts de validation ; le futur moteur coordonnera aussi
+leurs générations, références de révision et drainage.
+
+Le Compose ne monte pas le canal de stockage. L'agent recrée son socket et
+systemd peut aussi recréer son répertoire : décision de monter le répertoire
+readonly et de le conserver à l'arrêt par RuntimeDirectoryPreserve=yes.
+La documentation primaire systemd confirme ce comportement ; le restart sera
+éprouvé depuis le même contrôle. Les deux variables requises sont déjà celles
+de la cellule. L'UUID de l'agent et celui du contrôle restent distincts.
+La libération sera confirmée par bail absent et état des volumes, car une
+réponse already_released seule ne prouve pas leur démontage. Cette tranche
+branche les classes de production et leurs preuves Docker ; la passerelle,
+l'admission et les mutations publiques restent l'étape suivante.

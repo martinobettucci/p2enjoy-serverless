@@ -176,6 +176,52 @@ proposées et appliquées par la console avant démarrage.
 3. Raccorder les mutations publiques et admissions avec leur relecture de droits
    et versions ; qualifier par les API authentifiées et la console.
 
+### Instances avec baux gérés
+
+Le client de production `control/app/storage_client.py` utilise le vrai canal
+Unix, avec une nouvelle connexion par opération, des trames bornées et des
+erreurs fixes. Il ne rejoue aucune mutation. Le contrôle monte le répertoire
+du socket en lecture seule sous `/storage-agent`, et utilise
+`/storage-agent/agent.sock`. Les chemins de volumes retournés sont comparés
+aux chemins hôtes dérivés de SERVERLESS_STORAGE_ROOT_HOST et de l'UUID de
+fonction ; aucun backing n'est monté dans le contrôle ou dans la fonction.
+
+Le répertoire systemd du socket est conservé à l'arrêt avec
+RuntimeDirectoryPreserve=yes ; le socket lui-même reste recréé par l'agent.
+Un bind du seul socket serait périmé après restart. La conservation du
+répertoire suit [systemd.exec](https://freedesktop.org/software/systemd/man/latest/systemd.exec.html#RuntimeDirectoryPreserve=)
+et sera vérifiée depuis le même conteneur de contrôle avant/après restart.
+Le répertoire sous /run reste éphémère au reboot de la cellule.
+
+`ManagedInstance` compose le client et le pilote Docker existant. La
+configuration des quotas est une opération distincte, terminée avant son
+démarrage. L'UUID du pilote sert de consumer_id ; installation_id est celui
+du contrôle, distinct de l'identité du registre de stockage. Une acquisition
+incertaine interdit la création Docker et reste à réconcilier. Une annulation
+rejoint l'acquisition engagée avant de fermer et de libérer.
+
+La fermeture est partageable et reprenable : destruction Docker/réseau/canal,
+puis libération du bail. Une réponse already_released ne suffit pas ; le
+client confirme l'absence de son bail et relit l'état de la fonction. Sans
+autre bail, ses volumes doivent être démontés et aucune intention ne doit
+rester. Avec d'autres consommateurs, leurs montages sont conservés. Un échec
+garde cleanup_error et interdit de présenter les ressources comme restituées.
+
+Avant dispatch et durant l'invocation, le pilote vérifie le bail réel. Une
+perte du montage, du canal ou de l'agent retire le conteneur ; le résultat
+signale storage_unavailable et conserve l'observation handler_started. Aucun
+appel n'est rejoué. Les erreurs de quota rendues par le système de fichiers
+restent des réponses applicatives normales lorsque le handler les traite.
+
+Le diagnostic opérateur existant accepte --managed-storage et une configuration
+storage data/cache sur stdin, à la place de chemins mounts libres. Ce chemin
+exécute la classe de production dans l'image réelle du contrôle ; il ne crée
+aucun endpoint public ni identité d'invocation alternative. La campagne utilise
+de vrais handlers Docker écrivant /data et /cache, puis vérifie persistance,
+quotas, partage, fermeture, annulation, panne FUSE, restart de l'agent et
+reprise avec nouveaux consommateurs. Les admissions et API publiques restent
+la tranche suivante de SLS-040/050.
+
 La première campagne comprend double propriétaire, refus d’UID, entrées
 malformées, baux idempotents, mutations refusées pendant consommation,
 saturation, quotas trop petits, conservation après désactivation et archive,

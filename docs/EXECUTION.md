@@ -171,6 +171,13 @@ FUSE impose le remplacement de ses consommateurs avant remontage, sans prétendr
 réparer leurs anciens bind mounts. Les données sont conservées pendant toute
 reprise ; archive et purge sont des opérations distinctes.
 
+Le raccordement au bail est porté par ManagedInstance, selon
+[le contrat d'instances gérées](STORAGE_AGENT.md#instances-avec-baux-gérés).
+Le pilote de base reste utilisable pour le diagnostic sans volumes gérés.
+Les noms Docker d'instances décrivent leur usage et leur fonction :
+`serverless-function-<nom>-<uuid>`. L'UUID complète le nom lisible et conserve
+l'unicité ; les labels portent les identifiants complets de propriété.
+
 ## Passerelle et politique réseau
 
 L’entrée stable est `/invoke/{function_id}/{path}`. Le chemin relatif correspond
