@@ -53,8 +53,10 @@ la latence réelle de Chromium pour vérifier un envoi en cours ; il ne remplace
 aucune réponse. Les deux nettoient uniquement les objets qu'ils ont créés.
 
 Les scripts et preuves sont ajoutés au rythme de SLS-020 à SLS-060. Les premiers
-contrôles publics ont réussi ; les campagnes administrateur et la campagne
-complète de plateforme ne sont pas encore réussies.
+contrôles publics, les 19 groupes API administrateur et les 11 parcours UI
+ont réussi avec nettoyage confirmé. La [preuve de gestion](../docs/evidence/control-management-dev-2026-11-06.json)
+recoupe l'image et les sources ; les cycles de rôles et de clés SSO ainsi que
+la campagne complète de plateforme restent ouverts.
 La campagne publique comporte huit groupes : découverte OIDC et clés réelles,
 santé TLS, ressources de la console, refus anonymes, callbacks malformés,
 flows et refus du fournisseur, bornes des corps, puis refus anonymes des routes

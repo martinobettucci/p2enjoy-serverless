@@ -2,8 +2,8 @@
 
 La console initiale est déployée sur
 [serverless.lelabs.tech](https://serverless.lelabs.tech).
-Sa qualification administrateur est en cours ; l'état des preuves est dans
-[BACKLOG.md](BACKLOG.md). Les paramètres d'exécution sont actuellement
+Les parcours de gestion passent leurs preuves API et UI ; les cycles SSO
+restants figurent dans [BACKLOG.md](BACKLOG.md). Les paramètres d'exécution sont actuellement
 enregistrés : leur application aux fonctions appartient au moteur en développement.
 
 ## Se connecter

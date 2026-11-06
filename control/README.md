@@ -37,10 +37,11 @@ Les contrôles publics, de l'accueil, du réseau et des limites SSO ont réussi
 sur DEV. Trente scénarios de panne/démarrage passent, dont le verrou exclusif et la
 reprise automatique de maintenance. Huit groupes publics passent sur cette
 image : [preuve du contrôle de publication](../docs/evidence/deployment-control-dev-2026-11-06.json).
-Les scénarios authentifiés restent
-à qualifier avec une session SSO. Ce répertoire n'est
-donc pas encore un contrôle intégralement qualifié. Les preuves SLS-020
-emploient le vrai SSO et les véritables API, sans authentification substituée.
+La [preuve de gestion authentifiée](../docs/evidence/control-management-dev-2026-11-06.json)
+ajoute 19 groupes API et 11 parcours UI, ainsi que huit groupes publics rejoués
+sur l'image corrigée. Objets, droits, secrets, concurrence et persistance après
+redémarrage sont éprouvés avec la vraie session SSO. Les cycles de rôles,
+de renouvellement et de clés du fournisseur restent ouverts dans SLS-020.
 
 `app/validator.py` fournit le pilote de chargement Node de SLS-030. Sa CLI
 est qualifiée sur le SPARK avec le runtime isolé, selon

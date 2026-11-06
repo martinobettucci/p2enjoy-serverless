@@ -1,0 +1,346 @@
+{
+  "unit": "SLS-020",
+  "unit_complete": false,
+  "date": "2026-11-06T16:31:23.122546+00:00",
+  "target": "infra-serverless DEV",
+  "spec_commits": [
+    "c030291",
+    "821cebf"
+  ],
+  "scope": "Gestion authentifiée API et console, rendu mobile et focus ; configuration des ressources",
+  "deployed": {
+    "sources": {
+      "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "control/app/api.py": "dc73c8cee4e7d2fbfe98da21bfc517987fde442a758794054ec48a6859046824",
+      "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "control/app/config.py": "0e08503ad40c05ba72aed23bb96266770716de774a18d4c094f7746eff54e72f",
+      "control/app/db.py": "55bb45fe2c4eaaf29496de3b6515d689f69cb07be60a8d9fc4184534f67e3c79",
+      "control/app/deployments.py": "ff3b527eeafa7ff5a159d7a2716ba2795a938c74bf4c3eb88313e6c9e44e6a95",
+      "control/app/instances.py": "a3b5dbf14d85245b87b4c75ac10326073f881ae6501c86da1a21589d96fcdac3",
+      "control/app/main.py": "ff669c4cc5d2cfb1981680c11774ac66ecd112938897039060c395c31bcfe4f5",
+      "control/app/models.py": "fef330910e4555a02ab2e452a48518c022e81c339041b0b854d9605dc07b0f9c",
+      "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "control/app/validator.py": "f088cc26c509ef6f1a7f7816787e81523cc473bbf392e4739c13917937b1ab85",
+      "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "web/src/api.js": "44c428bf8a13b7bd91faca929b7aa5ef63466861c89e387c5e3bbdbf93d610a9",
+      "web/src/function.jsx": "e827072092bcac273cd3f2b6a147a71b3f9226a929458c57574ab7c4fcafef0b",
+      "web/src/main.jsx": "9ca3abe92d89669f12e1fd6d65b5975ab33ef4c30b9eca2e2190f51ca18a9cb6",
+      "web/src/management.jsx": "94f2851b28ef8cd48a5569b6ca3fbfc966d7549d8fb2f51f522f1b674e9762a5",
+      "web/src/style.css": "fb845d5f1b8c96842db0a794f5db12da216b5f662664c5fd86f4dd89d852a632",
+      "web/src/ui.jsx": "62026ca8f5be957a6986ad1642855ff1de32e46cc52f8d4c667c95f53f62bcf5",
+      "control/Dockerfile": "a739350a3b2551c1fd03d59cc7bece5c296d252e029785442dad59450332cc16",
+      "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+      "control/compose.spark.yml": "dc7546685ed6a10cdfaebcc46474e033df1f171407044fed62d00a6fcc0a2aac",
+      "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+      "web/package.json": "4cb742f19dbce36e4c28482d645e807bba1aad4ca48667e9d3e5fa2a3394457a",
+      "web/package-lock.json": "cac4d733e880aca30daa1cd8d24d2f0727abb81ffd14930839408e65335c99f7",
+      "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+      "e2e/control-admin.mjs": "8e020e14d0b96c10c14b8513125dc6a639e87bf0210b2d1a58745e4789e02793",
+      "e2e/control-ui.mjs": "caebf5ff2927a337db1847f4cf657814ba216d0b88a8a154c9d25a6dc708787c",
+      "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316"
+    },
+    "baked_sources": {
+      "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "app/deployments.py": "ff3b527eeafa7ff5a159d7a2716ba2795a938c74bf4c3eb88313e6c9e44e6a95",
+      "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "app/config.py": "0e08503ad40c05ba72aed23bb96266770716de774a18d4c094f7746eff54e72f",
+      "app/db.py": "55bb45fe2c4eaaf29496de3b6515d689f69cb07be60a8d9fc4184534f67e3c79",
+      "app/api.py": "dc73c8cee4e7d2fbfe98da21bfc517987fde442a758794054ec48a6859046824",
+      "app/instances.py": "a3b5dbf14d85245b87b4c75ac10326073f881ae6501c86da1a21589d96fcdac3",
+      "app/models.py": "fef330910e4555a02ab2e452a48518c022e81c339041b0b854d9605dc07b0f9c",
+      "app/main.py": "ff669c4cc5d2cfb1981680c11774ac66ecd112938897039060c395c31bcfe4f5",
+      "app/validator.py": "f088cc26c509ef6f1a7f7816787e81523cc473bbf392e4739c13917937b1ab85",
+      "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "web/index.html": "c097ae5e1278bc0fdac120b4d477eef77170db6c6738621bfdbe09b688cda1d4",
+      "web/favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+      "web/assets/index-m_qusgUe.css": "fa402623fda809535a8d28a440d6db9f1e8cd4050064b6ec606eee4a92f0953d",
+      "web/assets/index-DPRUSZLF.js": "8be7762519ed7c533c6eccfe7b8f3945eb67a980de10871d0577748196a784d2"
+    },
+    "services": {
+      "serverless-api": {
+        "image": "sha256:90219c44766965c211edd5836479741f6db18c3283ebb1b7052c4587d2238748",
+        "healthy": true
+      },
+      "serverless-runtime-reference": {
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "healthy": true
+      }
+    },
+    "configuration": {
+      "matches_official_files": true,
+      "keys": [
+        "SERVERLESS_PUBLIC_URL",
+        "OIDC_ISSUER",
+        "OIDC_CLIENT_ID",
+        "OIDC_CLIENT_SECRET",
+        "SERVERLESS_MASTER_KEY",
+        "SERVERLESS_STATE_HOST_PATH",
+        "SERVERLESS_DOCKER_SOCKET_HOST",
+        "SERVERLESS_RUNTIME_IMAGE",
+        "SERVERLESS_TRUSTED_PROXIES"
+      ],
+      "secret_values_excluded": true
+    },
+    "database": {
+      "integrity": "ok",
+      "active_objects": {
+        "namespaces": 0,
+        "services": 0,
+        "functions": 0
+      }
+    },
+    "routes": [
+      "serverless.lelabs.tech 18090 tls"
+    ]
+  },
+  "reports": {
+    "control-admin": {
+      "target": "https://serverless.lelabs.tech",
+      "completed": true,
+      "checks": [
+        {
+          "name": "Namespace : création, lecture, conflit et modification",
+          "status": "passed",
+          "duration_ms": 71
+        },
+        {
+          "name": "Services : création et refus de suppression du parent occupé",
+          "status": "passed",
+          "duration_ms": 72
+        },
+        {
+          "name": "CSRF : jeton absent, incorrect et origine étrangère refusés",
+          "status": "passed",
+          "duration_ms": 80
+        },
+        {
+          "name": "Politique : origines exactes, IPv4/IPv6, ET/OU et données invalides",
+          "status": "passed",
+          "duration_ms": 60
+        },
+        {
+          "name": "Concurrence : une modification obsolète ne rétablit pas la politique",
+          "status": "passed",
+          "duration_ms": 58
+        },
+        {
+          "name": "Jetons : création de chaque droit et lecture sans valeur complète",
+          "status": "passed",
+          "duration_ms": 127
+        },
+        {
+          "name": "Create : création seule, casse préservée et refus des autres opérations",
+          "status": "passed",
+          "duration_ms": 169
+        },
+        {
+          "name": "Read : lectures autorisées, mutations et accès globaux refusés",
+          "status": "passed",
+          "duration_ms": 137
+        },
+        {
+          "name": "Étanchéité : service et fonction étrangers refusés",
+          "status": "passed",
+          "duration_ms": 84
+        },
+        {
+          "name": "Update : configuration globale et secrets expurgés",
+          "status": "passed",
+          "duration_ms": 166
+        },
+        {
+          "name": "Fonction : ressources, variables, secrets et conflit de version",
+          "status": "passed",
+          "duration_ms": 165
+        },
+        {
+          "name": "Validation : bornes, stockage exclusif, handler et champ inconnu",
+          "status": "passed",
+          "duration_ms": 148
+        },
+        {
+          "name": "Portée fonction : liste filtrée, opérations étrangères et globales refusées",
+          "status": "passed",
+          "duration_ms": 153
+        },
+        {
+          "name": "Pagination et conflits concurrents réels",
+          "status": "passed",
+          "duration_ms": 60
+        },
+        {
+          "name": "Delete : suppression autorisée et service occupé protégé",
+          "status": "passed",
+          "duration_ms": 84
+        },
+        {
+          "name": "Audit : refus corrélés, pagination et portée fonction",
+          "status": "passed",
+          "duration_ms": 33
+        },
+        {
+          "name": "Rotation et révocation immédiates",
+          "status": "passed",
+          "duration_ms": 86
+        },
+        {
+          "name": "Expiration réelle du jeton",
+          "status": "passed",
+          "duration_ms": 3281
+        },
+        {
+          "name": "Redémarrage Docker : session, CSRF, objets et secrets persistants",
+          "status": "passed",
+          "duration_ms": 2335
+        }
+      ],
+      "cleanupErrors": [],
+      "skipped": 0
+    },
+    "control-ui": {
+      "target": "https://serverless.lelabs.tech",
+      "completed": true,
+      "checks": [
+        {
+          "name": "Accueil authentifié depuis l’entrée normale",
+          "status": "passed"
+        },
+        {
+          "name": "Modale : focus, annulation des changements et retour au déclencheur",
+          "status": "passed"
+        },
+        {
+          "name": "Namespace : création avec nom long et description rendue comme texte",
+          "status": "passed"
+        },
+        {
+          "name": "Responsive : nom long, tiroir, clavier et retour au desktop",
+          "status": "passed"
+        },
+        {
+          "name": "Service : création et navigation par onglets partageables",
+          "status": "passed"
+        },
+        {
+          "name": "Variables : enregistrement réel et champs protégés durant l’envoi",
+          "status": "passed"
+        },
+        {
+          "name": "Secret : saisie masquée, lecture expurgée et suppression confirmée",
+          "status": "passed"
+        },
+        {
+          "name": "Politique réseau : sauvegarde et refus d’une édition obsolète",
+          "status": "passed"
+        },
+        {
+          "name": "Fonction : création, paramètres précis et stockage",
+          "status": "passed"
+        },
+        {
+          "name": "Jetons : confirmation, valeurs uniques conservées et révocation",
+          "status": "passed"
+        },
+        {
+          "name": "Activité réelle et absence d’erreurs JavaScript",
+          "status": "passed"
+        }
+      ],
+      "faults": [],
+      "cleanupErrors": [],
+      "skipped": 0
+    },
+    "public": {
+      "target": "https://serverless.lelabs.tech",
+      "timestamp": 1793982444.4510577,
+      "completed": true,
+      "checks": [
+        {
+          "name": "Découverte OIDC et clés asymétriques réelles",
+          "status": "passed",
+          "duration_seconds": 0.388
+        },
+        {
+          "name": "TLS, santé et en-têtes",
+          "status": "passed",
+          "duration_seconds": 0.05
+        },
+        {
+          "name": "Document et ressources de la console",
+          "status": "passed",
+          "duration_seconds": 0.872
+        },
+        {
+          "name": "Refus anonymes",
+          "status": "passed",
+          "duration_seconds": 0.389
+        },
+        {
+          "name": "Callbacks malformés",
+          "status": "passed",
+          "duration_seconds": 0.241
+        },
+        {
+          "name": "Flows réels et refus du fournisseur",
+          "status": "passed",
+          "duration_seconds": 0.469
+        },
+        {
+          "name": "Corps bornés et erreurs expurgées",
+          "status": "passed",
+          "duration_seconds": 0.251
+        },
+        {
+          "name": "Routes de révision et upload anonyme refusé avant lecture",
+          "status": "passed",
+          "duration_seconds": 0.344
+        }
+      ],
+      "skipped": 0
+    }
+  },
+  "served_assets": {
+    "https://serverless.lelabs.tech/": "c097ae5e1278bc0fdac120b4d477eef77170db6c6738621bfdbe09b688cda1d4",
+    "https://serverless.lelabs.tech/favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+    "https://serverless.lelabs.tech/assets/index-m_qusgUe.css": "fa402623fda809535a8d28a440d6db9f1e8cd4050064b6ec606eee4a92f0953d",
+    "https://serverless.lelabs.tech/assets/index-DPRUSZLF.js": "8be7762519ed7c533c6eccfe7b8f3945eb67a980de10871d0577748196a784d2"
+  },
+  "visual_review": {
+    "reviewed": true,
+    "screenshots": {
+      "console-namespaces": "5c64caea6d14392a1e1c18010eb0779b7e5561dca31d0b7f7ac5a2a9faef9577",
+      "namespace-mobile-long": "1b12b1de676870951355d4d6938921777c9c1fb2b82a706db6ec8598cf830dcc",
+      "configuration-conflict": "d884187a5259bd7e5672bb74d573c460f385c6b1ef84fc55e07570286a628f23",
+      "function-desktop": "0c487aa6f2c159ecf9106eb5444c0b5eb265cc1d67fa956e7b04bd3245aac1ac",
+      "function-mobile": "3b6d551b3f4329aacfeb9cf1d8ed09aed95d95ba7e08486b0d29892d733523d8",
+      "tokens-desktop": "b7888796ca0eef50f4a766ec149f97fbeb3953ab86eb22c5824fd2ec0a1664f7",
+      "activity-desktop": "e0a0f7edecd6d20d1dd51dd468de8ea53f12708946a9bbc5cf3d41a5c16a2a92"
+    },
+    "observations": [
+      "Noms complets sur 390 px sans débordement horizontal",
+      "Formulaire conservé après conflit réel",
+      "Secrets et valeurs de jetons masqués sur les captures conservées",
+      "Fiches de fonction lisibles sur desktop et mobile"
+    ]
+  },
+  "spark_notes": {
+    "applied_through_console": true,
+    "verified": {
+      "README.md": "13135d5f4117f5e3877a46512b4eec913da00f00e05e3659891c2c8c72a3c870",
+      "CONTRIBUTORS.md": "eefae02b83c7d29c7748ca668571a316a14c064808b30ca396da063bda2d3003",
+      "INSTALL.md": "ea30a6692f381ca7a5a6320edd45bfc3fb1c79bd40f549198498e678e1b6af00"
+    }
+  },
+  "limitations": [
+    "Cycles de rôles, refresh et rotation JWKS du fournisseur encore à qualifier",
+    "Publication et CLI authentifiées dans la prochaine campagne SLS-030",
+    "Application des allocations, politique réseau et volumes par le moteur encore à intégrer"
+  ]
+}

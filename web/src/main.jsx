@@ -1,5 +1,5 @@
 // @spec docs/DESIGN_SYSTEM.md | docs/BACKLOG.md#sls-020 | docs/CONTROL.md#console-du-contrôle | docs/DESIGN_SYSTEM_APP.md
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {ArrowRight, FolderTree, Menu, X} from 'lucide-react';
 import {api,sessionToken} from './api';
@@ -32,17 +32,26 @@ function App() {
 function Shell({user}) {
   const [menu,setMenu] = useState(false);
   const menuButton = useRef(null), closeButton = useRef(null), sidebar = useRef(null);
+  const menuWasOpen = useRef(false);
   useEffect(() => {
     const desktop = matchMedia('(min-width:1024px)');
-    function changed() {if (desktop.matches) {setMenu(false); sidebar.current?.querySelector('nav a')?.focus();}}
+    function changed() {if (desktop.matches) setMenu(false);}
     desktop.addEventListener('change',changed);
     return () => desktop.removeEventListener('change',changed);
   }, []);
-  useEffect(() => {if (menu) {closeButton.current?.focus(); document.body.classList.add('dialog-open');}
-    else document.body.classList.remove('dialog-open');
+  useLayoutEffect(() => {
+    if (menu) {closeButton.current?.focus(); document.body.classList.add('dialog-open');}
+    else {
+      document.body.classList.remove('dialog-open');
+      if (menuWasOpen.current) {
+        const target = matchMedia('(min-width:1024px)').matches ? sidebar.current?.querySelector('nav a') : menuButton.current;
+        target?.focus();
+      }
+    }
+    menuWasOpen.current = menu;
     return () => document.body.classList.remove('dialog-open');
   }, [menu]);
-  function closeMenu() {setMenu(false); menuButton.current?.focus();}
+  function closeMenu() {setMenu(false);}
   const parts = location.pathname.split('/').filter(Boolean);
   let view = <Namespaces/>;
   if (parts[0] === 'console' && parts[1] === 'namespaces' && parts[2]) view = <Namespace id={parts[2]}/>;

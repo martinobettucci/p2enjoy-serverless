@@ -1066,3 +1066,33 @@ contenu contenant le bouton Menu. Décision : effectuer la restitution après
 la mise à jour du DOM, dans l’effet de layout de la transition ouvert/fermé.
 Le passage desktop rend le focus au lien visible de navigation. Les trois
 gestes de fermeture et ce passage de palier seront exercés dans le vrai parcours.
+
+La correction est relue contre les contrats puis déployée dans serverless-api.
+Les 11 parcours UI passent, dont inert, verrouillage du défilement et focus
+sur les trois fermetures puis le passage desktop. Les sept captures sont
+inspectées : nom complet, conflit conservant la saisie, paramètres, jetons et
+activité. Les 19 groupes API sont rejoués sur cette image, y compris le
+redémarrage, puis les huit groupes publics seuls. Zéro échec et zéro skip ;
+aucune erreur de nettoyage ni objet de gestion actif résiduel.
+
+La preuve control-management-dev-2026-11-06.json recoupe 31 sources,
+19 fichiers embarqués dont quatre ressources web servies identiques, l’image
+90219c44… et neuf paramètres provenant des fichiers officiels. Les deux
+conteneurs sont healthy et l’intégrité SQLite est confirmée. README,
+CONTRIBUTORS et INSTALL sont proposés, appliqués par la console puis relus.
+Aucune variable, secret, route ou migration ajoutée. SLS-020 reste ouvert
+pour ses cycles SSO ; les allocations et volumes attendent le raccordement
+du moteur. Ce checkpoint constitue une progression fonctionnelle vérifiée.
+
+## Attente des uploads concurrents — décision du 2026-11-06
+
+L’instruction indépendante du registre confirme la récursion de finishUpload.
+Le principal vérifie les quatre finally qui doivent rejoindre l’upload déjà
+lancé avant le nettoyage. Le contrat de publication exige des modifications
+concurrentes réelles puis une revalidation des droits et versions. Décision :
+attendre directement pending, conserver son enveloppe valeur/erreur et les
+quatre finally. Vérifier également la destruction du conteneur de validation
+au terme du scénario d’admission saturée. La résolution sera acquise après
+les onze groupes réels, leur nettoyage et la conservation des preuves.
+Une réponse HTTP perdue reste un cas distinct : cette attente cliente ne
+prouve pas à elle seule l’issue serveur après rupture réseau.

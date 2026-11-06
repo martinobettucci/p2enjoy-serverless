@@ -85,13 +85,14 @@ Le conteneur `serverless-api` sert cette console et l’API. Le conteneur
 `serverless-runtime-reference` exécute les handlers de qualification sur la
 boucle locale ; ses clients de test sont éphémères. Les
 [noms d’exploitation](docs/DEPLOYMENT_NAMES.md) précisent leurs rôles.
-Son accueil et l'entrée vers le vrai SSO sont déployés ; la qualification
-administrateur des objets, droits et cycles de session reste en cours.
+La gestion authentifiée passe 19 groupes API et 11 parcours de console,
+avec persistance après redémarrage, droits CRUD, secrets et rendu mobile.
+Les cycles de rôles, de renouvellement et de clés SSO restent à qualifier.
 Les commandes du contrôle figurent dans [control/README.md](control/README.md).
 Les clients de preuve de plateforme vivent dans [e2e/](e2e/README.md).
-Le [checkpoint DEV](docs/evidence/control-dev-checkpoint-2026-11-06.json)
-conserve les sources déployées, les campagnes terminées et les parcours
-administrateur encore à qualifier. Le [manuel](docs/manual.md) décrit la console.
+La [preuve de gestion](docs/evidence/control-management-dev-2026-11-06.json)
+recoupe les sources déployées, les campagnes, les ressources web servies et
+les sept captures relues. Le [manuel](docs/manual.md) décrit la console.
 
 **Il est interdit de lancer l'application avec un profil PREPROD ou PROD,
 quelles que soient les circonstances.**

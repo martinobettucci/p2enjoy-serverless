@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Gestion authentifiée qualifiée : 19 groupes API, 11 parcours UI et huit
+  groupes publics, nettoyage confirmé et sept captures relues. Noms longs
+  lisibles sur mobile et restitution du focus après fermeture du menu corrigés.
+  Sources, image, ressources web et configuration recoupées sur le SPARK DEV.
+  Cycles SSO, publication authentifiée et intégration du moteur encore ouverts.
+
 - Contrat OIDC courant fourni par le responsable : URL sur serverless.lelabs.tech,
   origine et accueil explicites ; déclaration synchronisée avec le client enregistré.
 

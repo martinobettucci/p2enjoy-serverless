@@ -72,6 +72,7 @@ main {max-width:var(--size-content); margin:auto; padding:var(--space-8); min-wi
 .page-title p {color:var(--color-text-2); margin-top:var(--space-2);}
 .page-title>div {min-width:0;}
 .breadcrumb {display:flex; flex-wrap:wrap; gap:var(--space-2); margin-bottom:var(--space-4); font-size:var(--text-small);}
+.breadcrumb>* {min-width:0; overflow-wrap:anywhere;}
 .panel {padding:var(--space-6); border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-card); background:var(--color-surface); margin-bottom:var(--space-6); min-width:0;}
 .section-heading {display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--space-3); margin-bottom:var(--space-4);}
 .entity-list {list-style:none; margin:0; padding:0;}

@@ -63,15 +63,22 @@ try {
   });
   await check('Responsive : nom long, tiroir, clavier et retour au desktop',async () => {
     await page.setViewportSize({width:390,height:844});
-    assert(await page.evaluate(() => document.documentElement.scrollWidth<=innerWidth));
     await screenshot('namespace-mobile-long');
-    await page.getByRole('button',{name:'Menu',exact:true}).click();
-    assert(await page.getByRole('button',{name:'Fermer le menu',exact:true}).evaluate(element => document.activeElement===element));
-    await page.keyboard.press('Escape');
-    assert(await page.getByRole('button',{name:'Menu',exact:true}).evaluate(element => document.activeElement===element));
+    assert(await page.evaluate(() => document.documentElement.scrollWidth<=innerWidth));
+    for (const gesture of ['escape','button','backdrop']) {
+      await page.getByRole('button',{name:'Menu',exact:true}).click();
+      assert(await page.getByRole('button',{name:'Fermer le menu',exact:true}).evaluate(element => document.activeElement===element));
+      assert(await page.evaluate(() => document.querySelector('.shell').inert && getComputedStyle(document.body).overflow==='hidden'));
+      if (gesture==='escape') await page.keyboard.press('Escape');
+      else if (gesture==='button') await page.getByRole('button',{name:'Fermer le menu',exact:true}).click();
+      else await page.locator('.nav-veil').click({position:{x:380,y:400}});
+      assert(await page.getByRole('button',{name:'Menu',exact:true}).evaluate(element => document.activeElement===element));
+      assert(await page.evaluate(() => !document.querySelector('.shell').inert && getComputedStyle(document.body).overflow!=='hidden'));
+    }
     await page.getByRole('button',{name:'Menu',exact:true}).click();
     await page.setViewportSize({width:1440,height:1000});
     await page.waitForFunction(() => !document.querySelector('.shell').inert && getComputedStyle(document.body).overflow!=='hidden');
+    assert(await page.getByRole('link',{name:'Namespaces',exact:true}).first().evaluate(element => document.activeElement===element));
     await page.getByRole('button',{name:'Modifier le namespace',exact:true}).click();
     await dialog.getByRole('button',{name:'Annuler',exact:true}).click();await gone();
   });

@@ -112,13 +112,11 @@ et identité ; [schéma](SCHEMA.md) et [API du contrôle](CONTROL.md).
 La tranche de console associée expose ces objets et le parcours SSO dès cette
 unité ; SLS-060 complète ses facettes d'exécution et la campagne transversale.
 Les parcours publics, l'accueil navigateur, la provenance réseau et les
-limites de connexion sont éprouvés. Les scénarios administrateur préparés
-disposent désormais d’une session réelle sur le nouveau domaine ; leurs
-campagnes complètes restent à exécuter et ne sont pas déclarées réussies.
-Le premier passage authentifié des API réussit ses 19 groupes, nettoyage
-compris. La campagne UI révèle un débordement du nom maximal dans le fil
-d’Ariane mobile : correction et reprise du parcours en cours, selon
-[le contrat des noms longs](DESIGN_SYSTEM_APP.md#noms-longs-dans-la-navigation).
+limites de connexion sont éprouvés. La [preuve de gestion authentifiée](evidence/control-management-dev-2026-11-06.json)
+recoupe 19 groupes API, 11 parcours UI et huit groupes publics sur l'image
+déployée. Nettoyages confirmés, sept captures relues. Le nom maximal du fil
+d’Ariane mobile revient à la ligne et les trois gestes de fermeture du menu
+rendent le focus au bon contrôle, y compris après passage au desktop.
 Le [checkpoint du 6 novembre](evidence/control-dev-checkpoint-2026-11-06.json)
 regroupe six groupes HTTP, neuf contrôles navigateur, quatre chemins réseau,
 six scénarios de limite par client, deux de capacité globale et dix-sept
@@ -141,8 +139,7 @@ Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
 l'adaptateur, rejeter archives invalides, mettre à jour/rollback en préservant
 l'identifiant. Référence : PLATFORM adaptateur et [DEPLOYMENT](DEPLOYMENT.md).
-Cette unité poursuit les parties indépendantes pendant l'attente de session
-SSO de SLS-020. Les preuves d'upload/publication exigent toujours cette session.
+La session SSO réelle est disponible pour les preuves d'upload et de publication.
 Le [checkpoint CLI](evidence/adapter-package-dev-2026-11-06.json) comporte
 24 scénarios réels réussis dans Docker sur le SPARK, avec source et images
 identifiées. Le [checkpoint du chargeur](evidence/runtime-validation-dev-2026-11-06.json)
@@ -155,12 +152,12 @@ Node des douze fonctions. Le [checkpoint du contrôle de publication](evidence/d
 intègre les routes de préparation, upload, historique, rollback et suppression,
 la migration 003, le budget et la reprise. Huit groupes publics et trente
 contrôles réels de configuration/démarrage/panne passent sur l'image déployée.
-Le client authentifié échoue au prérequis de session SSO : aucun de ses onze
-groupes n'est déclaré réussi. Admission globale, expiration, limites de révisions,
+Les onze groupes du client authentifié restent à exécuter avec cette session.
+Admission globale, expiration, limites de révisions,
 crash pendant upload/validation et arrêt pendant nettoyage restent à qualifier.
 La commande deploy est désormais implémentée : sa [preuve ciblée](evidence/adapter-deploy-dev-2026-11-06.json)
 conserve 14 contrôles de prérequis et de refus HTTPS réel, plus les 24 scénarios
-plan/package rejoués. La campagne CLI authentifiée attend sa session ; ses
+plan/package rejoués. La campagne CLI authentifiée dispose de sa session ; ses
 sept groupes ne sont pas déclarés réussis. Les vues de révisions et le moteur
 restent à réaliser.
 

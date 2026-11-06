@@ -3,8 +3,8 @@
 ## Statut
 
 Le socle global est importé dans `DESIGN_SYSTEM.md`. La console de gestion
-SLS-020 est déployée en DEV ; son accueil est qualifié. Les parcours
-administrateur et leur validation visuelle sont en cours.
+SLS-020 est déployée en DEV. Les 11 parcours de gestion passent, et leurs
+sept captures desktop/mobile ont été relues le 6 novembre 2026.
 
 ## Périmètre confirmé
 
@@ -49,8 +49,10 @@ navigation devient un tiroir à libellés ; sous 768 px les dialogs occupent
 l'écran et les sections s'empilent. Les tableaux défilent localement avec une
 indication de débordement. Icônes Lucide, favicon SVG propre au produit.
 
-Les captures de référence et mesures seront ajoutées après exécution des
-parcours de gestion sur la vraie console DEV.
+La [preuve de gestion](evidence/control-management-dev-2026-11-06.json)
+conserve les empreintes des sept captures relues et des ressources servies.
+Les captures restent sous `.local/e2e/`. Le nom maximal est vérifié à 390 px,
+avec `scrollWidth <= innerWidth`, depuis la création dans la console.
 
 ## Noms longs dans la navigation
 
