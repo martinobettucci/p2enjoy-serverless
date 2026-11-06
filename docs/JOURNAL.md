@@ -1583,3 +1583,19 @@ Le hook de commit relève ensuite le lien de backlog manquant dans le commentair
 reste du fichier et son code compilé sont identiques. Les empreintes avant/après
 sont conservées séparément dans la preuve finale, sans réécrire les captures de
 sources prises pendant les treize campagnes ni rejouer celles-ci pour un commentaire.
+
+### Console des exécutions — décision de tranche
+
+Après le commit moteur 675de3e et ses 252 groupes réussis, SLS-061 ajoute les
+facettes Instances et Invocations à la fonction. Les deux explorations de sources
+confirment que les API existantes suffisent. Cinq lignes bornent les mesures
+Docker séquentielles et les journaux inclus dans chaque réponse. Le rafraîchissement
+reste manuel ; une scrutation accumulerait des requêtes et déplacerait le contenu
+pendant la lecture. Les états et métriques manquantes ne sont jamais convertis
+en zéro. Les liens de facette préservent la configuration actuelle et évitent
+d’allonger sa page avec les historiques. La décision et les preuves attendues
+sont persistées avant implémentation. Aucun remote Git n’est configuré.
+
+La relecture détecte deux descriptions périmées : CONTROL présentait encore les
+paramètres comme seulement stockés et e2e annonçait la qualification finale en
+cours. Ces descriptions sont corrigées vers la preuve moteur déjà enregistrée.

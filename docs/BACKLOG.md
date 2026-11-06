@@ -239,3 +239,12 @@ Lire et appliquer les deux design systems avant implémentation. Tester depuis
 l'accueil, clavier/souris, états vides/erreurs/données longues et mobile ;
 inspecter les captures. Exécuter la campagne complète, mettre à jour manuel,
 notes SPARK, installation/reprise, preuves et backlog. Zéro échec et zéro skip.
+
+## SLS-061
+
+Statut : [~] — vues d’instances et d’invocations en cours de réalisation.
+
+Tranche bornée de SLS-060 : [contrat de consultation](CONSOLE_EXECUTION.md).
+Facettes de la fonction, mesures distinctes des allocations, pagination réelle,
+états et journaux expurgés, focus, mobile, erreur/reprise et preuves de console.
+La publication depuis l’UI, purge/cache et crons appartiennent aux autres tranches.

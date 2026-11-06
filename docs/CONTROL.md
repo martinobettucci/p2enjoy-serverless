@@ -118,6 +118,9 @@ origine/IP et la gestion de jetons sont réservées aux sessions admin.
   uniquement dans la réponse de création/rotation ; ensuite id, préfixe,
   droits, portée, expiration et état.
 - `/api/services/{id}/audit` : consultation paginée selon Read.
+- `/api/functions/{id}/instances` et `/invocations` : réservations, mesures
+  Docker et historique avec journaux expurgés, selon Read ou la session admin ;
+  [contrat des observations](ADMISSION.md#observations-et-cycle-du-contrôle).
 
 Les listes sont bornées et paginées. Les objets étrangers au service d'un
 jeton ne sont jamais accessibles, y compris par ID deviné. Les requêtes de
@@ -132,8 +135,8 @@ Les valeurs de secret null demandent leur suppression ; une valeur chaîne
 les crée ou remplace. Les lectures montrent uniquement les noms. Une variable
 et un secret ne peuvent partager un nom dans le même niveau de configuration.
 Les quotas de stockage sont appliqués par l’agent lors de leur sauvegarde.
-Les paramètres d’exécution restent des contrats stockés jusqu’à l’intégration
-du moteur ; leur seule sauvegarde ne constitue pas une preuve d’application.
+Les paramètres d’exécution sont appliqués par le moteur déployé ; sa
+[preuve](evidence/execution-dev-2026-11-06.json) les vérifie sur Docker réel.
 Les mises à jour acceptent `If-Match` portant la valeur `updated_at` lue.
 La console l'envoie systématiquement : si l'objet a changé depuis l'ouverture,
 le serveur refuse à 409 et conserve l'objet courant. La saisie reste ouverte

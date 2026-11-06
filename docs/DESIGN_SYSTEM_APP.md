@@ -80,3 +80,11 @@ La campagne de régression du moteur rejoue ces onze parcours et renouvelle
 les sept captures, relues sans modification des ressources web. La
 [preuve du moteur](evidence/execution-dev-2026-11-06.json) conserve leurs
 empreintes et les états inspectés. Les facettes d’exécution restent à réaliser.
+
+## Consultation des exécutions SLS-061
+
+Contrat à réaliser : [CONSOLE_EXECUTION](CONSOLE_EXECUTION.md). La fiche de
+fonction répartit Configuration, Instances et Invocations par liens partageables.
+Les listes sont bornées à cinq éléments et les détails de journal se déplient
+dans le flux. Les états, inconnues, focus et mesures suivent les §§6.13, 6.27
+et 14 du socle ; aucune modale n’est ouverte pour une simple lecture.

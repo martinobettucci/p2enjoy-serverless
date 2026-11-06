@@ -239,7 +239,8 @@ les identifiants créés, les archives de code retenues, les gardes et les erreu
 Le nettoyage attend les états terminaux côté serveur, supprime les seuls objets
 créés, purge leurs archives de stockage puis exige l’absence de réservations,
 conteneurs, réseaux, baux et canaux résiduels. Un échec de prérequis ou de
-nettoyage ne peut pas être déclaré réussi. La qualification finale est en cours.
+nettoyage ne peut pas être déclaré réussi. Les 31 groupes publics et 221 régressions passent dans la
+[preuve du moteur](../docs/evidence/execution-dev-2026-11-06.json).
 
 Les gardes root ouvrent la base du contrôle sous l’identité effective du compte
 `spark-docker`, puis retrouvent root pour les signaux et systemd. Lectures,
