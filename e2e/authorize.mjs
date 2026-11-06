@@ -9,24 +9,20 @@ await mkdir(new URL('../.local/e2e/',import.meta.url),{recursive:true,mode:0o700
 const browser = await chromium.launch({headless:false});
 const context = await browser.newContext({viewport:{width:1280,height:900},locale:'fr-FR'});
 const page = await context.newPage();
+let timer;
 try {
+  const authenticated = new Promise((resolve,reject) => {
+    timer=setTimeout(() => reject(new Error('Connexion administrateur non effectuée.')),8*60*60*1000);
+    page.on('close',() => reject(new Error('Fenêtre de connexion fermée.')));
+    page.on('response',async response => {
+      if (response.url()!==base+'/api/session' || !response.ok()) return;
+      try {if ((await response.json()).authenticated) resolve();} catch {}
+    });
+  });
   await page.goto(base);
-  await page.getByRole('link',{name:'Se connecter avec le SSO'}).click();
-  await page.waitForURL(value => value.hostname === 'oauth.lelabs.tech');
-  console.log('AUTHORIZATION_WINDOW_READY — connexion SSO attendue dans Chromium.');
-  const deadline = Date.now()+30*60*1000;
-  let authenticated = false;
-  while (Date.now()<deadline && !page.isClosed()) {
-    if (new URL(page.url()).origin===base) {
-      const session = await page.evaluate(async () => {
-        const response = await fetch('/api/session',{credentials:'same-origin'});
-        return response.ok ? response.json() : {authenticated:false};
-      });
-      if (session.authenticated) {authenticated=true;break;}
-    }
-    await new Promise(resolve => setTimeout(resolve,2000));
-  }
-  if (!authenticated) throw new Error('Connexion administrateur non effectuée ; aucune session de remplacement.');
+  await page.getByRole('link',{name:'Se connecter avec le SSO'}).waitFor();
+  console.log('AUTHORIZATION_WINDOW_READY — cliquer sur Se connecter avec le SSO dans Chromium.');
+  await authenticated;
   const state = await context.storageState();
   state.cookies = state.cookies.filter(cookie => cookie.domain==='serverless-dev.lelabs.tech');
   state.origins = [];
@@ -34,5 +30,6 @@ try {
   await chmod(output,0o600);
   console.log('AUTHENTICATED — session de plateforme sauvegardée localement pour la qualification.');
 } finally {
+  clearTimeout(timer);
   await browser.close();
 }

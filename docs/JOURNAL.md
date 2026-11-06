@@ -594,3 +594,9 @@ du contrôle restent dans SLS-030. La session SSO administrateur manque encore
 pour leurs preuves authentifiées. Le registre d'incohérences hors unité est
 vide ; les défauts relevés ici sont corrigés avec leurs preuves. Aucun remote
 Git n'est configuré ; les checkpoints sont conservés localement.
+
+L'aide de connexion de qualification ouvre désormais l'accueil et attend le
+clic du détenteur du compte jusqu'à huit heures. Le flow SSO ne vieillit donc
+plus avant ce clic. La fenêtre a atteint l'état prêt dans Chromium ; aucun
+cookie administrateur n'est encore enregistré. Le script n'exportera que les
+cookies du domaine de plateforme après une réponse de session authentifiée.
