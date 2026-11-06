@@ -12,9 +12,16 @@ Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
 ## Ordre de réalisation
 
-L'extraction serveur reçoit un checkpoint distinct, construit depuis
-`control/Dockerfile.artifacts` et qualifié par `e2e/artifacts.py`. Ses commandes
-DEV restent séparées du contrôle permanent et ne déclenchent aucune migration.
+L'extraction serveur est construite depuis `control/Dockerfile.artifacts`
+et qualifiée par `e2e/artifacts.py` : 112 contrôles réels réussis le 6 novembre,
+zéro échec et zéro test ignoré. Image, empreintes et périmètre figurent dans
+[la preuve](evidence/artifacts-dev-2026-11-06.json). Depuis `control/`, lancer
+`bash artifacts-dev.sh build` puis `bash artifacts-dev.sh test`, en série.
+Ces commandes restent séparées du contrôle permanent et ne déclenchent aucune
+migration. L'image du contrôle en service reste inchangée.
+Les notes README, CONTRIBUTORS et INSTALL de la cellule sont reproposées,
+appliquées par la console SPARK puis relues : elles décrivent ce composant,
+ses commandes et ses limites. Aucune variable, secret ou route supplémentaire.
 
 L'image `runtime/` de validation Node et ses variantes originales sont construites
 sur le SPARK. Le pilote Docker passe 36 scénarios réels ; ses ressources de

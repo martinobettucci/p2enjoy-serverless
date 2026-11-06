@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Extraction ZIP serveur bornée : tailles réelles, cohérence des en-têtes,
+  CRC, refus des liens et publication readonly sans écrasement. Correction
+  du drainage DEFLATE et borne de lecture du hash d'entrée.
+- 112 contrôles réels sur le SPARK DEV, incluant les limites de volume,
+  20 000 fichiers, saturation disque, courses et les douze archives du
+  packager chargées par Node. Intégration aux API de révision encore en cours.
+
 - Contrat OIDC du client DEV créé conservé dans le dépôt et rapproché du code.
   La campagne publique ajoute la découverte et les clés asymétriques réelles ;
   les points d'attente de rôle, azp ID token et rotation restent dans SLS-020.

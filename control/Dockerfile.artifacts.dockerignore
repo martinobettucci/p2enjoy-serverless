@@ -1,0 +1,5 @@
+# @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#artefact
+*
+!control/
+!control/app/
+!control/app/artifacts.py

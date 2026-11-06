@@ -23,8 +23,15 @@ Le contrôle et l'interface initiale sont déployés en DEV, avec la qualificati
 administrateur encore ouverte. Le banc décrit ci-dessous reste déployé à côté
 du contrôle ; les montages de preuve sont nettoyés. La CLI Python de
 plan/packaging passe 24 scénarios ciblés dans Docker ; le chargeur Node passe
-36 scénarios réels. La publication des révisions et le moteur d'invocation
-restent à réaliser.
+36 scénarios réels. L'extracteur ZIP passe 112 contrôles réels, avec une
+preuve indépendante des contenus et le chargement des douze fonctions.
+La publication des révisions et le moteur d'invocation restent à réaliser.
+
+La compilation du stockage utilise Go 1.27.3 dans une image épinglée. go-fuse
+v2.12.1 et x/sys v0.28.0 sont verrouillés avec go.sum. L'audit govulncheck v1.9.0
+relève zéro vulnérabilité atteignable et zéro paquet importé affecté. L'avis
+GO-2026-5024 du module x/sys concerne uniquement Windows ; ce composant est
+Linux. Résultat complet : [audit](evidence/storage-dependencies-2026-11-05.txt).
 
 ### Validation du code
 
@@ -43,11 +50,25 @@ les connexions et supprime le conteneur avec ses descendants avant de conclure.
 La preuve porte sur le chargement et ses pannes ; les droits de publication
 et la réconciliation d'un contrôle interrompu nécessitent leur intégration API.
 
-La compilation utilise Go 1.27.3 dans une image épinglée. go-fuse v2.12.1 et
-x/sys v0.28.0 sont verrouillés avec go.sum. L'audit govulncheck v1.9.0 relève
-zéro vulnérabilité atteignable et zéro paquet importé affecté. L'avis
-GO-2026-5024 du module x/sys concerne uniquement Windows ; ce composant est
-Linux. Résultat complet : [audit](evidence/storage-dependencies-2026-11-05.txt).
+### Extraction des artefacts
+
+`control/app/artifacts.py` lit le ZIP classique avec struct et zlib, sans
+dépendance ajoutée. Le répertoire central est borné avant toute création de
+fichier. Les en-têtes sont recoupés et les tailles réellement décompressées
+sont comptées avant écriture. Les CRC sont vérifiés et les empreintes SHA256
+calculées ; la campagne E2E les compare aux contenus attendus.
+Le hash d'entrée est lui-même limité à la taille initiale acceptée.
+
+L'extracteur travaille par descripteurs de répertoire sans suivre les liens,
+applique les permissions readonly puis publie le candidat avec
+renameat2(NOREPLACE). Son image Python indépendante permet la qualification
+sans recréer le contrôle en service. L'admission globale, les API et la
+réconciliation des candidats après interruption restent à intégrer.
+
+Le client E2E calcule les contenus attendus depuis les données originales de
+ses ZIP synthétiques, indépendamment de l'inventaire retourné par l'extracteur.
+Pour les douze ZIP issus du packager, un second lecteur ZIP recoupe cet
+inventaire puis le runtime Node charge chacun des handlers extraits.
 
 ## Qualification
 

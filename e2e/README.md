@@ -73,3 +73,11 @@ de cellule et le contrôle déjà déployé pour éprouver les permissions du so
 Il vérifie chargement, refus, limites, logs et destruction des descendants ;
 son rapport est `runtime/validation-proof.json` sur le SPARK. Il ne prouve pas
 encore les autorisations de publication ni l'invocation des handlers.
+
+`artifacts.py`, lancé dans le SPARK par `bash control/artifacts-dev.sh test`,
+fabrique des archives réelles et appelle la CLI d'extraction dans son image
+Python. Il vérifie les fichiers produits, leurs empreintes et permissions,
+les erreurs de format, les bornes, une saturation effective du disque et
+des courses sur les destinations et la source. Le dernier parcours empaquette
+l'application de qualification, extrait son ZIP puis charge son handler avec
+le véritable runtime Node. Le rapport est `control/artifacts-proof.json`.

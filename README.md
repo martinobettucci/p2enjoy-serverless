@@ -9,7 +9,10 @@ handlers, manifeste `serverless.yml`, Docker, tests et commandes d'exploitation.
 L'[adaptateur](adapter/README.md) prépare les plans et archives ZIP ; la
 validation Node dans Docker est disponible dans [runtime/](runtime/README.md),
 avec 36 scénarios réels réussis. La publication des révisions et le moteur
-d'invocation restent à implémenter. Le composant de [stockage à quota](storage/README.md)
+d'invocation restent à implémenter. L'extracteur ZIP serveur dans
+[control/](control/README.md) passe 112 contrôles réels, dont les limites,
+les erreurs de disque et les douze archives chargées ensuite par Node.
+Le composant de [stockage à quota](storage/README.md)
 est disponible et qualifié sur le SPARK DEV : 31 contrôles réels réussis,
 dont saturation, concurrence et reprise après interruption.
 
@@ -120,11 +123,14 @@ adapter/
   dev.sh                  Construction et qualification CLI dans le SPARK
 control/
   app/                    API, SSO, sessions, objets et droits
+  app/artifacts.py         Extraction ZIP bornée et publication readonly
+  artifacts-dev.sh         Construction et qualification de l'extracteur
   migrations/             Schéma SQLite versionné
   compose.spark.yml       Contrôle DEV sur le port 18090
 web/
   src/                    Console React, formulaires et navigation
 e2e/
+  artifacts.py            Preuves ZIP, disque, courses et parcours des 12 fonctions
   public.py               HTTPS public et refus OIDC réels
   login-ui.mjs            Accueil, clavier, responsive et SSO
   control-admin.mjs        Campagne API authentifiée

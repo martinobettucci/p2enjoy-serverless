@@ -299,5 +299,8 @@ Références primaires : [PyYAML](https://pypi.org/project/PyYAML/),
 [glob pathlib](https://docs.python.org/3.14/library/pathlib.html#pathlib.PurePath.full_match),
 [API Docker](https://docs.docker.com/reference/api/engine/),
 [interopérabilité Node](https://github.com/nodejs/node/blob/v24.x/doc/api/esm.md).
+Pour l'extraction : [format ZIP PKWARE](https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT),
+[zipfile Python](https://docs.python.org/3.14/library/zipfile.html) et
+[décompression zlib](https://docs.python.org/3.14/library/zlib.html#zlib.Decompress.decompress).
 Le format du module est constaté via les
 [hooks de chargement Node](https://github.com/nodejs/node/blob/v24.x/doc/api/module.md#moduleregisterhooksoptions).

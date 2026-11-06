@@ -627,3 +627,52 @@ Le responsable confirme la route et les paramètres posés. Le contrôle live du
 route TLS vers 18090 et une santé 200. Les valeurs du conteneur et de ses deux
 env_file correspondent, y compris les secrets comparés en mémoire : la
 recréation serait inutile. Les sept groupes publics passent sur cet état.
+
+## Extraction ZIP serveur — 2026-11-06
+
+Le contrat est persisté avant implémentation : ZIP classique borné, lecture
+centrale en flux, tailles réelles, écritures par FD et publication sans
+écrasement. L'extracteur reçoit une image séparée pour qualifier ce composant
+avant de le relier aux API de publication. La revue borne aussi le hash
+d'entrée et vérifie les cas de nettoyage après renommage.
+
+La campagne réelle reproduit le refus d'un DEFLATE valide de 65 537 octets :
+le flux a encore une sortie interne alors que son entrée est consommée.
+Une reproduction ciblée retourne zip_deflate_incomplete, sans candidat
+résiduel. Le drainage rappelle désormais zlib tant que la sortie remplit son
+tampon, y compris avec une entrée vide. Les six frontières autour de 64 et
+128 Kio repassent, ainsi que les fichiers de 64 Mio.
+
+La revue renforce aussi le pilote : inventaire attendu indépendant, borne de
+chemin exactement 512 octets, suivi du conteneur de packaging, statut processus
+en échec pour un rapport incomplet et contrôle des douze archives. Le lecteur
+zipfile de Python ne sait pas relire le commentaire valide de 65 535 octets
+contenant une fausse signature de fin ; l'attendu des fixtures provient donc
+de leurs données originales. Le second lecteur reste utilisé sur les ZIP
+produits par l'adaptateur réel. Ces corrections n'utilisent aucun mock.
+
+Résultat final : 112 contrôles réussis, zéro échec, zéro test ignoré. La
+campagne atteint réellement 64 Mio par fichier, 64 Mio de ZIP, 256 Mio au
+total, 20 000 fichiers et 16 Mio de répertoire central. Elle vérifie la
+saturation du disque, la préservation d'une destination concurrente,
+l'échange du parent, la source augmentée pendant sa lecture et les douze
+archives du packager chargées par Node. Six empreintes de sources sont
+identiques entre dépôt et SPARK ; celle embarquée dans l'image est recoupée.
+Les quatre secrets connus sont recherchés en mémoire dans le rapport sans
+correspondance. Les deux services restent healthy ; aucun conteneur de preuve
+ne subsiste. La preuve complète est `evidence/artifacts-dev-2026-11-06.json`.
+
+SLS-030 reste ouvert pour les routes authentifiées, la publication, l'admission
+globale et la reprise après interruption. Le contrôle permanent n'est pas
+recréé. L'erreur matérielle de fsync après renommage n'est pas provoquée par
+la campagne ; son traitement reste une propriété relue du code, explicitement
+distinguée des pannes effectivement exercées. Aucun défaut hors unité ouvert
+dans le registre d'incohérences à ce checkpoint.
+
+La revue finale ne relève aucun défaut bloquant pour la CLI. Elle précise la
+répartition entre CRC vérifié par l'extracteur et SHA256 calculés puis recoupés
+par la preuve E2E. README, CONTRIBUTORS et INSTALL sont proposés dans les
+fichiers .?, appliqués par la console du SPARK puis relus sans écart. Les
+README des commandes sont aussi copiés près des sources installées. Aucune
+nouvelle variable, secret, route ou migration ; configuration toujours issue
+des deux env_file officiels. Aucun remote Git configuré, donc commit local.

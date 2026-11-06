@@ -34,3 +34,22 @@ est qualifiée sur le SPARK avec le runtime isolé, selon
 [runtime/README.md](../runtime/README.md). Elle n'est pas encore reliée aux
 routes du contrôle ni incluse dans son image déployée ; l'upload et les
 révisions restent la prochaine étape.
+
+`app/artifacts.py` fournit l'extraction bornée des ZIP classiques. Sa CLI
+vérifie les en-têtes, les tailles réelles, les CRC et les chemins, écrit dans
+un candidat privé puis publie un répertoire readonly sans écraser une
+destination existante. L'image dédiée ne remplace pas le contrôle en service.
+Depuis ce répertoire dans le SPARK DEV, construire puis qualifier en série :
+
+```sh
+bash artifacts-dev.sh build
+bash artifacts-dev.sh test
+```
+
+La campagne appelle l'image immuable, le packager existant et le validateur
+Node ; 112 contrôles réussissent, zéro échec et zéro test ignoré sur le SPARK
+le 6 novembre 2026. La [preuve conservée](../docs/evidence/artifacts-dev-2026-11-06.json)
+recoupe les sources locales/distantes et le code embarqué.
+Son rapport `artifacts-proof.json` n'est valide que si `completed` et
+`cleanup` valent true. Cette étape ne fournit pas encore les routes d'upload
+et de publication des révisions.

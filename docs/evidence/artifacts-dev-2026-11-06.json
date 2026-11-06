@@ -1,0 +1,497 @@
+{
+  "date": "2026-11-06T00:33:52.875303+00:00",
+  "unit": "SLS-030",
+  "unit_complete": false,
+  "target": "infra-serverless DEV",
+  "scope": "CLI extraction ZIP, packaging et chargement Node ; sans upload HTTP ni publication authentifiée",
+  "campaign": {
+    "completed": true,
+    "passed": 112,
+    "skipped": 0,
+    "checks": [
+      {
+        "name": "STORED, DEFLATE, dossiers explicites/implicites et fichier vide",
+        "status": "passed"
+      },
+      {
+        "name": "Permissions readonly et retrait des bits privilégiés",
+        "status": "passed"
+      },
+      {
+        "name": "Noms UTF-8 et CP437 conservés",
+        "status": "passed"
+      },
+      {
+        "name": "Data descriptor signed méthode 0",
+        "status": "passed"
+      },
+      {
+        "name": "Data descriptor signed méthode 8",
+        "status": "passed"
+      },
+      {
+        "name": "Data descriptor unsigned méthode 0",
+        "status": "passed"
+      },
+      {
+        "name": "Data descriptor unsigned méthode 8",
+        "status": "passed"
+      },
+      {
+        "name": "Extra Unicode confirmant le nom et métadonnées admises",
+        "status": "passed"
+      },
+      {
+        "name": "Commentaire ZIP maximal avec signatures internes",
+        "status": "passed"
+      },
+      {
+        "name": "Composant 256 refusé dans un chemin de 512 octets",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin 512 octets accepté",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 1",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 2",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 3",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 4",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 5",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 6",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 7",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 8",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 9",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 10",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin interdit 11",
+        "status": "passed"
+      },
+      {
+        "name": "Nom UTF-8 invalide",
+        "status": "passed"
+      },
+      {
+        "name": "Extra Unicode contradictoire",
+        "status": "passed"
+      },
+      {
+        "name": "Extra Unicode CRC invalide",
+        "status": "passed"
+      },
+      {
+        "name": "Extra refusé 1",
+        "status": "passed"
+      },
+      {
+        "name": "Extra refusé 39321",
+        "status": "passed"
+      },
+      {
+        "name": "Extra tronqué",
+        "status": "passed"
+      },
+      {
+        "name": "Extra répété",
+        "status": "passed"
+      },
+      {
+        "name": "Type spécial refusé 40960",
+        "status": "passed"
+      },
+      {
+        "name": "Type spécial refusé 4096",
+        "status": "passed"
+      },
+      {
+        "name": "Type spécial refusé 49152",
+        "status": "passed"
+      },
+      {
+        "name": "Type spécial refusé 8192",
+        "status": "passed"
+      },
+      {
+        "name": "Type spécial refusé 24576",
+        "status": "passed"
+      },
+      {
+        "name": "Type répertoire sans slash",
+        "status": "passed"
+      },
+      {
+        "name": "Type fichier avec slash",
+        "status": "passed"
+      },
+      {
+        "name": "Répertoire avec données",
+        "status": "passed"
+      },
+      {
+        "name": "Archive vide",
+        "status": "passed"
+      },
+      {
+        "name": "Archive contenant seulement des dossiers",
+        "status": "passed"
+      },
+      {
+        "name": "Doublon de chemin complet",
+        "status": "passed"
+      },
+      {
+        "name": "Doublon de chemin complet",
+        "status": "passed"
+      },
+      {
+        "name": "Collision fichier et parent dans les deux ordres",
+        "status": "passed"
+      },
+      {
+        "name": "Collision fichier et parent dans les deux ordres",
+        "status": "passed"
+      },
+      {
+        "name": "ZIP chiffré",
+        "status": "passed"
+      },
+      {
+        "name": "Compression non prise en charge",
+        "status": "passed"
+      },
+      {
+        "name": "Version ZIP64",
+        "status": "passed"
+      },
+      {
+        "name": "Flags non admis",
+        "status": "passed"
+      },
+      {
+        "name": "Volume distinct",
+        "status": "passed"
+      },
+      {
+        "name": "Préfixe non décrit",
+        "status": "passed"
+      },
+      {
+        "name": "Nom local divergent",
+        "status": "passed"
+      },
+      {
+        "name": "Méthode locale divergente",
+        "status": "passed"
+      },
+      {
+        "name": "CRC local divergent",
+        "status": "passed"
+      },
+      {
+        "name": "Octet entre données et répertoire",
+        "status": "passed"
+      },
+      {
+        "name": "Descripteur surdimensionné",
+        "status": "passed"
+      },
+      {
+        "name": "Taille locale de descripteur contradictoire",
+        "status": "passed"
+      },
+      {
+        "name": "Comptes par disque incohérents",
+        "status": "passed"
+      },
+      {
+        "name": "Nombre central mensonger",
+        "status": "passed"
+      },
+      {
+        "name": "Sentinelle ZIP64",
+        "status": "passed"
+      },
+      {
+        "name": "Répertoire central hors limite",
+        "status": "passed"
+      },
+      {
+        "name": "Offset central incohérent",
+        "status": "passed"
+      },
+      {
+        "name": "Fin ZIP tronquée",
+        "status": "passed"
+      },
+      {
+        "name": "Contenu après la fin ZIP",
+        "status": "passed"
+      },
+      {
+        "name": "Zones locales superposées",
+        "status": "passed"
+      },
+      {
+        "name": "Taille réelle supérieure à la taille annoncée méthode 0",
+        "status": "passed"
+      },
+      {
+        "name": "Taille réelle inférieure à la taille annoncée méthode 0",
+        "status": "passed"
+      },
+      {
+        "name": "Taille réelle supérieure à la taille annoncée méthode 8",
+        "status": "passed"
+      },
+      {
+        "name": "Taille réelle inférieure à la taille annoncée méthode 8",
+        "status": "passed"
+      },
+      {
+        "name": "CRC erroné après écriture effective",
+        "status": "passed"
+      },
+      {
+        "name": "Flux DEFLATE tronqué",
+        "status": "passed"
+      },
+      {
+        "name": "Octets après fin DEFLATE",
+        "status": "passed"
+      },
+      {
+        "name": "Drainage DEFLATE à 65535 octets",
+        "status": "passed"
+      },
+      {
+        "name": "Drainage DEFLATE à 65536 octets",
+        "status": "passed"
+      },
+      {
+        "name": "Drainage DEFLATE à 65537 octets",
+        "status": "passed"
+      },
+      {
+        "name": "Drainage DEFLATE à 131071 octets",
+        "status": "passed"
+      },
+      {
+        "name": "Drainage DEFLATE à 131072 octets",
+        "status": "passed"
+      },
+      {
+        "name": "Drainage DEFLATE à 131073 octets",
+        "status": "passed"
+      },
+      {
+        "name": "Limite réelle fichier 64 Mio",
+        "status": "passed"
+      },
+      {
+        "name": "Limite réelle ZIP 64 Mio",
+        "status": "passed"
+      },
+      {
+        "name": "Fichier au-dessus de 64 Mio annoncé",
+        "status": "passed"
+      },
+      {
+        "name": "Expansion cachée au-dessus de 64 Mio",
+        "status": "passed"
+      },
+      {
+        "name": "Limite totale réelle 256 Mio",
+        "status": "passed"
+      },
+      {
+        "name": "Total déclaré supérieur à 256 Mio",
+        "status": "passed"
+      },
+      {
+        "name": "Limite réelle 20 000 fichiers",
+        "status": "passed"
+      },
+      {
+        "name": "Entrées au-dessus de 20 000",
+        "status": "passed"
+      },
+      {
+        "name": "Répertoires explicites comptés parmi les entrées",
+        "status": "passed"
+      },
+      {
+        "name": "Limite 20 000 répertoires implicites",
+        "status": "passed"
+      },
+      {
+        "name": "Répertoire central réel à 16 Mio",
+        "status": "passed"
+      },
+      {
+        "name": "Répertoire central réel au-dessus de 16 Mio",
+        "status": "passed"
+      },
+      {
+        "name": "ZIP réel de plus de 64 Mio refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Destination existante préservée",
+        "status": "passed"
+      },
+      {
+        "name": "Destination lien symbolique refusée",
+        "status": "passed"
+      },
+      {
+        "name": "Parent destination lié refusé sans écriture externe",
+        "status": "passed"
+      },
+      {
+        "name": "Archive liée refusée",
+        "status": "passed"
+      },
+      {
+        "name": "Archive FIFO refusée sans blocage",
+        "status": "passed"
+      },
+      {
+        "name": "Archive répertoire refusée",
+        "status": "passed"
+      },
+      {
+        "name": "Disque réellement saturé : erreur et candidat supprimé",
+        "status": "passed"
+      },
+      {
+        "name": "Création concurrente de destination préservée par NOREPLACE",
+        "status": "passed"
+      },
+      {
+        "name": "Échange du parent en cours : aucune écriture via le lien et nettoyage par FD",
+        "status": "passed"
+      },
+      {
+        "name": "Source réellement augmentée pendant sa lecture : refus sans publication",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : echo",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : binary",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : callback",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : business",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : configuration",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : state",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : cache",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : worker",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : failure",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : sleep",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : spin",
+        "status": "passed"
+      },
+      {
+        "name": "Packaging → extraction → chargement Node réel : relay",
+        "status": "passed"
+      },
+      {
+        "name": "Aucun conteneur de preuve restant et services DEV sains",
+        "status": "passed"
+      }
+    ],
+    "image": "sha256:7b7303a22fafac662820e636f822d13002466702ea999a0680e7c7871b68bbd7",
+    "adapter_image": "sha256:1ffecab5420e9fedcf906336cef313bb10eb068ccbe4db3bf5fcdd84d755f570",
+    "runtime_image": "sha256:2868ee63f3ab1682fbf6c0f94f535af83c8b647d91e3937e1ce70bc83ef07efd",
+    "cleanup": true
+  },
+  "sources": {
+    "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+    "control/Dockerfile.artifacts": "27c9c399595e4b595e19688cef30aafdb4867050553919393461c22975a7636a",
+    "control/Dockerfile.artifacts.dockerignore": "e40d2a680a466f6dc07190d84e1fbc5d7e690cf899c6693b08eadd948bac844b",
+    "control/compose.artifacts.spark.yml": "7f3f40af0139f91d9f1c680e8883f7f2f96fae86678476e57fb9399f1461feb7",
+    "control/artifacts-dev.sh": "47a0d398626a5449d5d6e948ac63630ed046dc33d991c1d247c95384900b8b39",
+    "e2e/artifacts.py": "cad447656a6c5863630780f7c165def8bbeab548b12cd7e552f8a3d798ddd975"
+  },
+  "image_source_sha256": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+  "services": {
+    "p2enjoy-serverless-dev-control-1": {
+      "healthy": true,
+      "image": "sha256:29f2419de1df38264673446ae4ecd1c5c1f23b11b48e4ce79a0ce6a18ebed079"
+    },
+    "p2enjoy-qualification-dev-qualification-1": {
+      "healthy": true,
+      "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2"
+    }
+  },
+  "remaining_proof_containers": 0,
+  "known_secrets_checked": 4,
+  "secret_matches": 0,
+  "limitations": [
+    "Routes upload/révision et quotas globaux non intégrés",
+    "Reprise des candidats après interruption du contrôle à réaliser",
+    "fsync après rename traité dans le code, panne matérielle de fsync non reproduite"
+  ],
+  "regression": {
+    "before": "65537 octets DEFLATE valides refusés zip_deflate_incomplete",
+    "after": "Drainage interne explicite et campagne complète"
+  }
+}

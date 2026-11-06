@@ -111,7 +111,7 @@ réussie. La durée de 300 secondes se mesure sur le jeton réellement émis.
 
 ## SLS-030
 
-Statut : [~] — plan, packaging et validation Node disponibles ; révisions à réaliser.
+Statut : [~] — plan, packaging, extraction ZIP et validation Node disponibles ; révisions à réaliser.
 
 Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
@@ -124,8 +124,12 @@ Le [checkpoint CLI](evidence/adapter-package-dev-2026-11-06.json) comporte
 identifiées. Le [checkpoint du chargeur](evidence/runtime-validation-dev-2026-11-06.json)
 ajoute 36 scénarios réels : formats CJS/ESM, dépendances, confinement, logs,
 échéance extérieure, protocole Unix et destruction des descendants.
-L'extraction ZIP côté serveur, l'upload authentifié, la publication et la
-réconciliation après crash du contrôle restent à réaliser et qualifier.
+Le [checkpoint d'extraction](evidence/artifacts-dev-2026-11-06.json) ajoute
+112 contrôles réels : formats et refus, limites exactes, disque saturé,
+courses sur les chemins et la source, puis packaging/extraction/chargement
+Node des douze fonctions. L'upload authentifié, l'intégration aux révisions,
+l'admission globale et la réconciliation après crash du contrôle restent
+à réaliser et qualifier.
 
 ## SLS-040
 

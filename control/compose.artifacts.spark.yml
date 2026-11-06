@@ -1,0 +1,18 @@
+# @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#artefact
+name: p2enjoy-artifacts-dev
+services:
+  artifacts:
+    profiles: [dev]
+    image: p2enjoy-artifacts:dev
+    build:
+      context: ..
+      dockerfile: control/Dockerfile.artifacts
+    env_file: [/etc/spark/env, /run/spark/secrets]
+    read_only: true
+    network_mode: none
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 256m
+    cpus: 1
+    pids_limit: 32
+    tmpfs: ["/tmp:size=16m,mode=1777,noexec,nosuid"]
