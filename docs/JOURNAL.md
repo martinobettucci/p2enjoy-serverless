@@ -1558,3 +1558,28 @@ ADMISSION : tous les accès CONTROL des gardes utilisent l’identité effective
 du compte propriétaire, avant de retrouver root pour les signaux et systemd.
 La preuve doit rejouer les gardes réelles et contrôler la restauration des
 identités ; aucune reprise SQLITE_BUSY n’est ajoutée au moteur sur cette base.
+
+Le contexte propriétaire est appliqué aux lectures et writers des gardes de
+stockage, d’exécution et de plafond, ainsi qu’au collecteur final. Une preuve
+système réelle effectue trente lectures puis un writer sur CONTROL : UID/GID
+1001, WAL/SHM 1001, restauration complète de root et des groupes ; la trace ne
+contient plus de fchown après création. Les clients E2E exigent ces identités
+pour leurs gardes. La revue ne relève pas de fuite de connexion ou d’identité ;
+le prérequis de synchronisation inclut maintenant control_database.py.
+
+La suite finale du moteur termine ses treize campagnes en série : 252 groupes
+réussis, zéro échec et zéro skip. Les empreintes fraîches sont recoupées pour
+chaque rapport avec l’image et les 93 sources locales/distantes avant et après
+sa commande. Les sept JPEG sont observés et les trois notes appliquées puis
+relues par la console. La preuve execution-dev-2026-11-06.json vérifie aussi
+les artefacts embarqués, la configuration consommée, les archives de code
+retenues et l’absence de ressources actives résiduelles. Elle conserve les
+diagnostics antérieurs séparément ; aucun échec n’est requalifié en succès.
+SLS-040/SLS-050 restent partiels pour les éléments explicités dans le backlog.
+Aucun remote Git n’est configuré ; le changement est conservé en commit local.
+
+Le hook de commit relève ensuite le lien de backlog manquant dans le commentaire
+`@spec` de `e2e/control_database.py`. Ce seul commentaire est complété ; le
+reste du fichier et son code compilé sont identiques. Les empreintes avant/après
+sont conservées séparément dans la preuve finale, sans réécrire les captures de
+sources prises pendant les treize campagnes ni rejouer celles-ci pour un commentaire.

@@ -2,6 +2,19 @@
 
 ## [Non publié]
 
+- Moteur public déployé en qualification : migration 005, réservations CPU/RAM
+  et instances, file bornée, minimum/maximum/inactivité, générations et reprise
+  sans rejeu. Les appels admis restent possédés après déconnexion du client.
+- Passerelle Lambda HTTP avec jeton Read, politiques origine/IP, corps/réponses
+  bornés et observations paginées. Les droits métier sont conservés.
+- 252 groupes réels réussis dans la suite finale : 31 groupes HTTPS et 221
+  régressions, exécutés en série et liés aux sources, à l’image et aux rapports
+  fraîchement écrits. Sept captures relues, trois notes SPARK appliquées ;
+  [preuve](docs/evidence/execution-dev-2026-11-06.json).
+- Gardes SQLite exécutées sous l’identité du propriétaire de la base, avec
+  restauration root vérifiée. Les diagnostics et échecs initiaux sont conservés.
+  La limite de réponse anticipée HTTP/1.1 du proxy DEV est documentée.
+
 - Créations, changements de quotas, suppressions et publications raccordés à
   l’agent de stockage réel. Migration 004 du contrôle, décision commune avec
   l’objet, reprises abort/commit et relecture des droits après préparation.
@@ -36,8 +49,8 @@
   puis variable et service restaurés. Les noms des instances indiquent leur fonction.
 - 118 groupes de cette tranche et de ses régressions réussis, zéro échec/skip ;
   [preuve](docs/evidence/managed-storage-dev-2026-11-06.json), sources et ressources
-  recoupées, trois notes de cellule appliquées et relues. Admissions et API
-  publiques d’invocation restent à raccorder.
+  recoupées, trois notes de cellule appliquées et relues. Le raccordement public
+  est livré dans la tranche du moteur décrite ci-dessus.
 
 - Plafonds et reprises de publication : quatre groupes E2E réels réussis,
   avec 64 candidats, vingt révisions, puis SIGKILL pendant réception et

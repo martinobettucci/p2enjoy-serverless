@@ -22,6 +22,7 @@ node e2e/deployments.mjs
 node e2e/adapter-deploy.mjs
 node e2e/publication-recovery.mjs
 node e2e/function-storage.mjs
+node e2e/public-invocations.mjs
 ```
 
 `python3 e2e/proxy.py --expected-proxy 10.77.0.1` s'exécute depuis le poste et
@@ -38,6 +39,16 @@ réellement un client de preuve après son premier échange HTTP, vérifie que
 l'ancien rapport réussi est invalidé, puis rejoue la campagne publique.
 Les rapports ne valent que lorsque `completed` est vrai et les nettoyages
 réussis ; leur initialisation précède les prérequis externes.
+
+`python3 e2e/execution-suite.py` rejoue en série les treize campagnes du
+moteur et de régression sur le SPARK DEV. Chaque commande attend la fin de
+la précédente ; les rapports sont vérifiés comme fraîchement régénérés et
+rattachés à leurs empreintes, aux sources locales et à l’image du contrôle
+observée avant et après chaque campagne. Une modification pendant la suite
+ou un prérequis absent provoque un échec. Le journal atomique est
+`.local/e2e/execution-regressions.json` ; les 31 groupes d’invocations sont
+exécutés en dernier. Les propositions de notes et la revue visuelle restent
+des étapes de clôture distinctes.
 
 `authorize.mjs` ouvre Chromium sur l'accueil de la console et laisse jusqu'à
 huit heures au détenteur du compte pour démarrer la connexion SSO. Aucun flow
@@ -154,8 +165,8 @@ l'agent installé et le handler `volume-operations.cjs` pour les quotas,
 la persistance, les consommateurs partagés, les annulations et les pannes.
 Le parent limite la durée totale, garde la propriété de la cible FUSE, restaure
 l'agent et rejoint le worker même si une commande de panne échoue. Le rapport
-et les ressources sont vérifiés avant de déclarer le succès. Aucun test ne
-passe encore par la passerelle publique d'invocation, qui reste à réaliser.
+et les ressources sont vérifiés avant de déclarer le succès. Cette campagne de composant n'exerce pas la passerelle publique : ses preuves
+HTTPS sont portées par `public-invocations.mjs`.
 
 `python3 -B e2e/storage-installation.py`, depuis le poste, utilise la console
 SPARK sur 127.0.0.1:5175 et le rebond SSH autorisé. Il arrête l'agent au repos,
@@ -196,3 +207,42 @@ rapports `storage_archives` conservent l’état archivé précédant cette purg
 Les archives de **code** recensées dans `retained_archives` restent conservées.
 Une erreur de purge fait échouer le nettoyage ; les fonctions indépendantes
 continuent d’être traitées. Les UUID des fonctions déjà supprimées restent suivis.
+
+## Moteur public
+
+`public-invocations.mjs` publie les handlers originaux du dépôt, appelle HTTPS
+avec les vrais jetons et recoupe les observations avec SQLite, Docker et les
+baux. Il couvre les droits, enveloppes et limites HTTP, les files, générations,
+allocations, modes de stockage, déconnexions et reprises du contrôle. Les
+scénarios de corps incomplet distinguent HTTP/1.1 et HTTP/2 conformément au
+[contrat de transport](../docs/ADMISSION.md#budgets-et-attente).
+
+Synchroniser `execution-faults.py`, `function-storage-faults.py` et leur module
+`control_database.py` dans le SPARK
+avant la campagne. Le premier vérifie installation, namespace et UUID avant
+les observations ou interruptions ; il ne modifie aucune ligne SQL. L’arrêt
+gracieux est observé sous un vrai verrou écrivain et avec des ressources
+présentes avant fermeture. Le code 143 d’Uvicorn n’est accepté qu’avec sa fin
+de lifespan observée ; SIGKILL reste un scénario séparé. Les gardes indépendantes
+redémarrent le contrôle en cas de perte du pilote.
+
+`instance-limit-guard.py`, piloté par cette même campagne, applique temporairement
+32 → 2 par les propositions et l’API normale de la console SPARK locale, puis
+restaure 32 et recrée le contrôle. Il refuse une proposition préexistante sur
+cette clé, des fonctions étrangères ou des consommateurs actifs. Garder cette
+clé sans édition concurrente pendant la campagne. La console locale est donc
+un prérequis de preuve ; son absence fait échouer la campagne. Les budgets CPU
+et mémoire officiels et consommés sont recoupés pour isoler le plafond testé.
+
+Le rapport `.local/e2e/public-invocations.json` conserve des checkpoints atomiques,
+les identifiants créés, les archives de code retenues, les gardes et les erreurs.
+Le nettoyage attend les états terminaux côté serveur, supprime les seuls objets
+créés, purge leurs archives de stockage puis exige l’absence de réservations,
+conteneurs, réseaux, baux et canaux résiduels. Un échec de prérequis ou de
+nettoyage ne peut pas être déclaré réussi. La qualification finale est en cours.
+
+Les gardes root ouvrent la base du contrôle sous l’identité effective du compte
+`spark-docker`, puis retrouvent root pour les signaux et systemd. Lectures,
+writers et fermetures suivent ce contexte ; les preuves contrôlent les UID du
+WAL/SHM et la restauration de l’identité opérateur. Le registre de stockage
+conserve son propriétaire root.

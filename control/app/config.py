@@ -1,6 +1,7 @@
 # @spec docs/BACKLOG.md#sls-020 | docs/CONTROL.md#configuration
 # All declarations validate the cell configuration and protect persisted data.
 from dataclasses import dataclass
+from decimal import Decimal,InvalidOperation,ROUND_CEILING
 import ipaddress
 import json
 import os
@@ -25,6 +26,11 @@ class Settings:
     artifact_budget: int = 4096*1024**2
     storage_root_host: Path | None = None
     storage_socket_dir_host: Path | None = None
+    function_cpu_nanos: int = 1000000000
+    function_memory_mib: int = 8192
+    function_instance_limit: int = 32
+    waiting_call_limit: int = 128
+    function_waiting_call_limit: int = 16
 
     @classmethod
     def load(cls):
@@ -69,8 +75,25 @@ class Settings:
         if (storage_paths[1].is_relative_to('/run') or storage_paths[1].is_relative_to(storage_paths[0])
                 or storage_paths[0].is_relative_to(storage_paths[1])):
             raise RuntimeError('Le canal de stockage doit être distinct des données et hors de /run.')
+        # @spec docs/BACKLOG.md#sls-040 | docs/ADMISSION.md#budgets-et-attente
+        try:
+            cpu=Decimal(os.environ.get('SERVERLESS_FUNCTION_CPU_BUDGET','1'))
+            if not cpu.is_finite() or not Decimal('.05')<=cpu<=64:raise ValueError
+            limits=[]
+            for key,default,low,high in (
+                ('SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB',8192,128,1048576),
+                ('SERVERLESS_FUNCTION_INSTANCE_LIMIT',32,1,256),
+                ('SERVERLESS_WAITING_CALL_LIMIT',128,1,4096),
+                ('SERVERLESS_FUNCTION_WAITING_CALL_LIMIT',16,1,256)):
+                raw=os.environ.get(key,str(default))
+                if not re.fullmatch('[0-9]{1,7}',raw) or not low<=int(raw)<=high:raise ValueError
+                limits.append(int(raw))
+            if limits[3]>limits[2]:raise ValueError
+        except (ValueError,InvalidOperation):raise RuntimeError('Budgets d’exécution de cellule invalides.') from None
         return cls(*values,trusted_proxies=trusted,host_state_dir=paths[0],runtime_image=image,artifact_budget=int(budget)*1024**2,
-                   storage_root_host=storage_paths[0],storage_socket_dir_host=storage_paths[1])
+                   storage_root_host=storage_paths[0],storage_socket_dir_host=storage_paths[1],
+                   function_cpu_nanos=int((cpu*1000000000).to_integral_value(rounding=ROUND_CEILING)),
+                   function_memory_mib=limits[0],function_instance_limit=limits[1],waiting_call_limit=limits[2],function_waiting_call_limit=limits[3])
 
 
 class Vault:

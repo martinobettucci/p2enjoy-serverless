@@ -29,8 +29,9 @@ ajoute onze groupes API et sept groupes CLI authentifiés sur cette même image.
 Les trois notes sont appliquées et relues, les fichiers officiels concordent.
 Les constats d'absence de session ci-dessous décrivent leurs checkpoints
 historiques ; la session réelle est maintenant disponible. Les cycles SSO,
-limites et interruptions de publication, vues de révisions et raccordement
-du moteur restent ouverts. La [preuve de reprise](evidence/publication-recovery-dev-2026-11-06.json)
+limites et interruptions résiduelles de publication et vues de révisions restent
+ouverts. Le moteur raccordé est décrit dans la section de déploiement courante
+ci-dessous. La [preuve de reprise](evidence/publication-recovery-dev-2026-11-06.json)
 qualifie ensuite quatre groupes de plafonds et de reprise après SIGKILL pendant
 réception et validation. Le contrôle est redémarré et healthy ; ses images,
 la configuration officielle et la route sont conservées. Les trois notes
@@ -307,5 +308,42 @@ Les 82 sources locales/distantes, 23 fichiers embarqués et 136 archives de code
 sont vérifiés. Les sept captures JPEG sont relues ; les trois notes de cellule
 sont appliquées par sa console puis relues. Aucun bail, montage, allocation,
 intention, conteneur d’instance/validation ni espace de test ne subsiste.
-Le moteur d’admission et l’invocation publique,
-les commandes de purge/cache de la console et l’observabilité restent à terminer.
+Ce checkpoint précède le raccordement du moteur décrit ci-dessous. Les
+commandes de purge/cache et les vues d’observation de la console restent à réaliser.
+
+## Déploiement du moteur en qualification
+
+Les cinq budgets SERVERLESS_FUNCTION_CPU_BUDGET=1,
+SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB=8192, SERVERLESS_FUNCTION_INSTANCE_LIMIT=32,
+SERVERLESS_WAITING_CALL_LIMIT=128 et SERVERLESS_FUNCTION_WAITING_CALL_LIMIT=16
+sont proposés puis appliqués par la console et relus dans /etc/spark/env.
+La route, les secrets et le runtime Node ne changent pas.
+
+La sauvegarde native préalable est
+`/state/backups/before-005-20261106T203759Z-a85aa7.sqlite3` dans le contrôle,
+soit le même suffixe sous /srv/p2enjoy-serverless/state. Elle est intègre,
+en mode 0600, porte les migrations 001 à 004 et les 136 archives conservées.
+La migration 005 ajoute les réservations et invocations, ainsi que les gardes
+de révision utilisée. Elle est appliquée ; le moteur est déployé avec l’image
+`sha256:d7621027bf550ea1e199aa81cb87d89b6628c93ff75b258a84cc18a64a4edb43`.
+La [preuve courante](evidence/execution-dev-2026-11-06.json) recoupe 252 groupes
+réussis, zéro échec et zéro test ignoré dans les treize campagnes finales.
+Elle vérifie 93 sources locales/distantes, 27 fichiers embarqués,
+280 archives de code retenues, les ressources web servies et les valeurs de cellule.
+Les sept captures de console sont relues ; les trois notes sont appliquées
+par la console SPARK puis relues. Les ressources actives, baux, montages,
+réservations et espaces de campagne sont libérés. Les archives de code et
+l’historique restent conservés selon leur contrat.
+
+Le banc corrige une course de création WAL/SHM pendant ses lectures root :
+les accès SQLite des gardes emploient l’identité effective du contrôle et
+restaurent root avant les actions système. La preuve conserve les échecs
+initiaux et les diagnostics séparément du bilan de la campagne finale.
+Les vues de révisions/exécution, les commandes de purge/cache, les crons et
+les preuves résiduelles restent ouverts dans le backlog.
+
+Un retour à une ancienne image exige d'abord un drainage confirmé et l'absence
+de réservation ou invocation active. Une restauration de base ne rejoue jamais
+les appels interrompus et doit tenir compte des écritures métier postérieures.
+Le répertoire privé /state/execution est possédé par l'installation et est
+réconcilié avec ses labels Docker et baux avant réouverture des admissions.

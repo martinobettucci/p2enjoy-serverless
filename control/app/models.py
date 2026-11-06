@@ -9,6 +9,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from .invocation_http import canonical_origin,canonical_network
+
 
 class Strict(BaseModel):
     model_config=ConfigDict(extra='forbid',allow_inf_nan=False)
@@ -27,23 +29,12 @@ class NetworkPolicy(Strict):
     @field_validator('origins')
     @classmethod
     def exact_origins(cls,values):
-        result=[]
-        for value in values:
-            url=urlsplit(value)
-            if url.scheme not in ('http','https') or not url.hostname or url.username or url.password or url.path or url.query or url.fragment or '*' in value:
-                raise ValueError('Une origine contient uniquement protocole, hôte et port.')
-            # Reading port validates its syntax and range, including IPv6.
-            port=url.port
-            host=url.hostname.lower()
-            if ':' in host:host='['+host+']'
-            default=443 if url.scheme=='https' else 80
-            result.append(f'{url.scheme}://{host}'+(f':{port}' if port and port!=default else ''))
-        return sorted(set(result))
+        return sorted({canonical_origin(value) for value in values})
 
     @field_validator('ips')
     @classmethod
     def networks(cls,values):
-        try:return sorted({str(ipaddress.ip_network(value,strict=False)) for value in values})
+        try:return sorted({canonical_network(value) for value in values})
         except ValueError:raise ValueError('Adresse IP ou réseau CIDR invalide.') from None
 
 
@@ -168,12 +159,15 @@ class Events(Strict):
 
     @model_validator(mode='after')
     def unique(self):
-        routes=set()
+        routes=set();implicit=set()
         for event in self.http:
             for method in event.methods:
                 key=(event.path,method)
                 if key in routes:raise ValueError('Route HTTP dupliquée.')
                 routes.add(key)
+                if event.implicit:
+                    if method in implicit:raise ValueError('Endpoint implicite dupliqué pour cette méthode.')
+                    implicit.add(method)
         return self
 
 

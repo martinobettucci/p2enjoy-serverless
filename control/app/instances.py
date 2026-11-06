@@ -73,8 +73,9 @@ def response(data):
 
 class Instance:
     def __init__(self,*,docker_socket,image,code,work,installation,function_id,revision_id,
-                 handler,function_name,environment,secrets,memory_mib=256,cpu=.25,host_work=None,mounts=None,network='bridge'):
-        self.id=str(uuid4());self.installation=str(UUID(installation));self.function_id=str(UUID(function_id));self.revision_id=str(UUID(revision_id))
+                 handler,function_name,environment,secrets,memory_mib=256,cpu=.25,host_work=None,mounts=None,network='bridge',instance_id=None,started_callback=None):
+        self.id=str(UUID(instance_id)) if instance_id else str(uuid4());self.installation=str(UUID(installation));self.function_id=str(UUID(function_id));self.revision_id=str(UUID(revision_id))
+        self.started_callback=started_callback
         if type(memory_mib) is not int or not 128<=memory_mib<=8192:raise ValidationError('invalid_memory')
         if isinstance(cpu,bool) or not isinstance(cpu,(int,float)) or not math.isfinite(cpu) or not .05<=cpu<=1:raise ValidationError('invalid_cpu')
         if not isinstance(handler,str) or len(handler)>256 or not isinstance(function_name,str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,62}',function_name):
@@ -145,6 +146,7 @@ class Instance:
                     else:
                         data=json.loads(await reader.readexactly(int(length)))
                         if not isinstance(data,dict) or data.get('invocation_id')!=self.job['invocation_id']:raise ValidationError('protocol_invalid')
+                        if self.started_callback:self.started_callback(self.job['invocation_id'])
                         self.started_observed=True;status=202;answer={'accepted':True}
                 elif method=='POST' and path=='/result':
                     if headers.get('content-type')!='application/json':status=415;answer={'error':'content_type'}
@@ -212,7 +214,7 @@ class Instance:
             'Entrypoint':['node','/runtime/invoke-supervisor.mjs'],'Cmd':[],
             'HostConfig':{'NetworkMode':self.network or 'none','ReadonlyRootfs':True,'CapDrop':['ALL'],
                 'SecurityOpt':['no-new-privileges:true'],'Memory':self.memory_mib*1024**2,'MemorySwap':self.memory_mib*1024**2,
-                'NanoCpus':int(self.cpu*1000000000),'PidsLimit':64,'Init':True,'LogConfig':{'Type':'none'},
+                'NanoCpus':math.ceil(self.cpu*1000000000),'PidsLimit':64,'Init':True,'LogConfig':{'Type':'none'},
                 'Tmpfs':{'/tmp':'rw,noexec,nosuid,size=16m,mode=1777'},
                 'Mounts':[{'Type':'bind','Source':str(self.code),'Target':'/code','ReadOnly':True},
                           {'Type':'bind','Source':str(self.host_work/self.channel.name),'Target':'/protocol','ReadOnly':True}]+

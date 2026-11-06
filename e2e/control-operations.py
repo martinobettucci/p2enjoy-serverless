@@ -120,8 +120,8 @@ try:
     passed('Même image réelle, entrée HTTP et confinement Docker')
     metadata=json.loads(run(['docker','exec',container,'python','-B','-c',
         'import sqlite3,json; db=sqlite3.connect("/state/control.sqlite3"); print(json.dumps({"versions":[r[0] for r in db.execute("SELECT version FROM schema_migrations ORDER BY version")],"installation":db.execute("SELECT value FROM security_metadata WHERE name=?",("installation-id",)).fetchone()[0],"integrity":db.execute("PRAGMA integrity_check").fetchone()[0]}))']).stdout)
-    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql'] and metadata['integrity']=='ok'
-    uuid.UUID(metadata['installation']);passed('Quatre migrations réelles, intégrité SQLite et UUID d’installation')
+    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql'] and metadata['integrity']=='ok'
+    uuid.UUID(metadata['installation']);passed('Cinq migrations réelles, intégrité SQLite et UUID d’installation')
     competing=run(base+['run','--rm','--no-deps','control'],timeout=20,check=False)
     assert competing.returncode!=0 and 'Un contrôle possède déjà cet état' in competing.stderr
     ready(container);passed('Second contrôle réel refusé par le verrou exclusif')
@@ -143,6 +143,17 @@ try:
     failure('Image immuable absente refusée',"os.environ['SERVERLESS_RUNTIME_IMAGE']='sha256:'+'0'*64",'docker_http_404')
     for value in ('511','65537','invalid'):
         failure('Budget d’artefacts invalide : '+value,'os.environ["SERVERLESS_ARTIFACT_BUDGET_MIB"]='+repr(value),'SERVERLESS_ARTIFACT_BUDGET_MIB')
+    # @spec docs/BACKLOG.md#sls-040 | docs/ADMISSION.md#budgets-et-attente
+    # @verifies docs/BACKLOG.md#sls-040 | docs/ADMISSION.md#budgets-et-attente
+    for key,values in {
+        'SERVERLESS_FUNCTION_CPU_BUDGET':('NaN','.049','64.1','invalid'),
+        'SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB':('127','1048577','invalid'),
+        'SERVERLESS_FUNCTION_INSTANCE_LIMIT':('0','257','invalid'),
+        'SERVERLESS_WAITING_CALL_LIMIT':('0','4097','invalid'),
+        'SERVERLESS_FUNCTION_WAITING_CALL_LIMIT':('0','257','invalid')}.items():
+        for value in values:failure('Budget d’exécution refusé : '+key+'='+value,'os.environ['+repr(key)+']='+repr(value),'Budgets d’exécution de cellule invalides')
+    failure('File par fonction supérieure au plafond global',
+            "os.environ['SERVERLESS_WAITING_CALL_LIMIT']='1'; os.environ['SERVERLESS_FUNCTION_WAITING_CALL_LIMIT']='2'",'Budgets d’exécution de cellule invalides')
     failure('URL publique HTTP refusée',"os.environ['SERVERLESS_PUBLIC_URL']='http://serverless.lelabs.tech'",'absolute HTTPS')
     failure('Sous-chemin public refusé',"os.environ['SERVERLESS_PUBLIC_URL']+='/subpath'",'root path')
     failure('Issuer étranger refusé',"os.environ['OIDC_ISSUER']='https://example.org/realm'",'realm lelabs autorisé')
@@ -163,11 +174,15 @@ try:
         stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     try:
         assert lock.stdout.readline().strip()=='LOCKED'
-        request('/auth/login',503)
+        refused=request('/auth/login',503)
     finally:
         lock.communicate(timeout=20)
         assert lock.returncode==0
-    assert 'database.unavailable' in logs(container)
+    diagnostics=[json.loads(line) for line in logs(container).splitlines() if line.startswith('{')]
+    diagnostic=next(row for row in diagnostics if row.get('event')=='database.unavailable' and row.get('request_id')==refused['request_id'])
+    assert diagnostic['sqlite_errorname']=='SQLITE_BUSY'
+    assert diagnostic['source']['file']=='db.py' and diagnostic['source']['function']=='transaction'
+    assert isinstance(diagnostic['source']['line'],int) and diagnostic['source']['line']>0
     request('/api/session',200)
     passed('Verrou réel SQLite : refus 503 puis récupération')
     maintenance_lock=subprocess.Popen(['docker','exec','-i',container,'python','-u','-B','-c',
@@ -179,7 +194,7 @@ try:
         while time.monotonic()<deadline:
             result=run(['docker','exec',container,'python','-B','-c',
                 'import urllib.request,urllib.error;\ntry: r=urllib.request.urlopen("http://127.0.0.1:18090/healthz",timeout=10)\nexcept urllib.error.HTTPError as e:r=e\nprint(r.status)'])
-            if result.stdout.strip()=='503':break
+            if result.stdout.strip()=='503' and 'deployment.cleanup_failed' in logs(container):break
             time.sleep(.5)
         else:raise AssertionError('La panne de maintenance SQLite doit dégrader la santé')
         assert 'deployment.cleanup_failed' in logs(container)

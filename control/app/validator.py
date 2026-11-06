@@ -56,8 +56,8 @@ def request(path,method,target,body=None,timeout=5,max_bytes=LIMIT):
 class Docker:
     def __init__(self,path):self.path=path
 
-    def call(self,method,path,body=None,timeout=5,allowed=(200,201,204)):
-        status,data=request(self.path,method,'/v1.45'+path,body,timeout)
+    def call(self,method,path,body=None,timeout=5,allowed=(200,201,204),max_bytes=LIMIT):
+        status,data=request(self.path,method,'/v1.45'+path,body,timeout,max_bytes)
         if status not in allowed:raise ValidationError('docker_http_'+str(status))
         return data
 

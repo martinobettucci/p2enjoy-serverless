@@ -35,6 +35,10 @@ class FunctionOperations:
         self.database=database
         self.storage=StorageClient('/storage-agent/agent.sock',settings.storage_root_host)
         self.installation=None;self.task=None;self.live={};self.closing=False;self.agent_ready=False;self.cleanup_error=False
+        self.execution=None
+
+    def minimum_budget(self,db,function_id,config):
+        if self.execution:self.execution.minimum_budget(db,function_id,config)
 
     async def ready(self,installation):
         self.installation=installation
@@ -104,6 +108,7 @@ class FunctionOperations:
     async def prepare(self,operation):
         row=self.database.one('SELECT * FROM function_operations WHERE id=?',(operation,))
         if not row or row['decision']!='undecided':raise StorageError('operation_conflict')
+        if self.execution:await self.execution.drain(row['function_id'])
         snapshot=await self.snapshot(row['function_id'])
         if snapshot:
             allowed=('active',) if row['kind']=='configuration' else ('active','archived','purged')

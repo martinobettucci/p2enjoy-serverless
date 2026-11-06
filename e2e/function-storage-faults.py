@@ -15,6 +15,7 @@ import subprocess
 import sys
 import time
 from uuid import UUID,uuid4
+from control_database import read_control,ControlWriter
 
 assert os.getuid()==0 and Path('/etc/hostname').read_text().strip()=='infra-serverless'
 ROOT=Path('/srv/p2enjoy-serverless');UNIT='p2enjoy-storage-dev.service'
@@ -49,7 +50,8 @@ def command(args,**kwargs):
 
 
 def rows(path,sql,parameters=()):
-    with closing(sqlite3.connect('file:'+str(path)+'?mode=ro',uri=True,timeout=2)) as db:
+    connection=read_control(path) if path==CONTROL else closing(sqlite3.connect('file:'+str(path)+'?mode=ro',uri=True,timeout=2))
+    with connection as db:
         db.row_factory=sqlite3.Row
         return [dict(row) for row in db.execute(sql,parameters)]
 
@@ -66,7 +68,7 @@ def owned_function():
     assert len(result)==1,'campaign_function_required'
     if mode=='archive-cleanup':
         assert result[0]['namespace_id']==str(UUID(sys.argv[3])),'campaign_namespace_required'
-        assert re.fullmatch(r'(qa|ui|deploy|cli|publication-recovery)-[0-9a-f]{8}x*',result[0]['namespace_name']),'campaign_namespace_required'
+        assert re.fullmatch(r'(qa|ui|deploy|cli|publication-recovery|invocation)-[0-9a-f]{8}x*',result[0]['namespace_name']),'campaign_namespace_required'
     else:assert result[0]['namespace_name'].startswith('storage-api-'),'campaign_function_required'
     return result[0]
 
@@ -134,8 +136,8 @@ except (ProcessLookupError,FileNotFoundError):pass
 if mode=='health':emit(storage('health'));raise SystemExit(0)
 owned_function()
 if mode=='empty-resolution-busy':
-    with closing(sqlite3.connect(CONTROL,timeout=2,isolation_level=None)) as writer:
-        writer.execute('BEGIN IMMEDIATE')
+    with ControlWriter(CONTROL) as writer:
+        emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
         try:
             program='''import asyncio,json
 from uuid import uuid4
@@ -152,8 +154,9 @@ async def prove():
  print(json.dumps({'resolved':True,'writer_lock_held':True}))
 asyncio.run(prove())
 '''
-            emit(json.loads(command(DOCKER+['exec','-i','serverless-api','python','-B','-'],input=program)))
-        finally:writer.rollback()
+            emit({**json.loads(command(DOCKER+['exec','-i','serverless-api','python','-B','-'],input=program)),
+                  'writer_identity':writer.identity,'operator_uid':os.geteuid()})
+        finally:writer.close()
 elif mode=='audit-failure':
     request_id=str(UUID(sys.argv[3]))
     logs=subprocess.run(DOCKER+['logs','--tail','300','serverless-api'],text=True,capture_output=True,timeout=20)
@@ -255,7 +258,7 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
             signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True
             assert json.loads(rows(REGISTRY,'SELECT pending_json FROM functions WHERE id=?',(identifier,))[0]['pending_json'])['phase']=='preparing'
         else:
-            writer=sqlite3.connect(CONTROL,timeout=2,isolation_level=None);writer.execute('BEGIN IMMEDIATE')
+            writer=ControlWriter(CONTROL);emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
             registry_writer.rollback();registry_writer.close();registry_writer=None
             deadline=time.monotonic()+3
             while True:
@@ -265,7 +268,7 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
                 assert time.monotonic()<deadline,'prepared_not_observed'
                 time.sleep(.001)
             signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True
-            writer.rollback();writer.close();writer=None
+            writer.close();writer=None
             deadline=time.monotonic()+5
             while True:
                 pending=rows(CONTROL,'SELECT decision FROM function_operations WHERE id=?',(operation,))
@@ -273,7 +276,7 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
                 assert time.monotonic()<deadline,'commit_not_observed'
                 time.sleep(.001)
             if mode=='commit-database-busy':
-                writer=sqlite3.connect(CONTROL,timeout=2,isolation_level=None);writer.execute('BEGIN IMMEDIATE')
+                writer=ControlWriter(CONTROL);emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
         emit({'event':'paused','phase':mode,'operation_id':operation})
         action=input_command()
         if action=='kill-control':
@@ -290,7 +293,7 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
             try:
                 if registry_writer:registry_writer.rollback();registry_writer.close()
             finally:
-                if writer:writer.rollback();writer.close()
+                if writer:writer.close()
         finally:
             if pidfd is not None:
                 try:

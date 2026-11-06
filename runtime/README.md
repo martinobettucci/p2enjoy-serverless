@@ -4,8 +4,8 @@ Chargeur de handlers et validation Docker de SLS-030, qualifiés par 36 scénari
 réels sur le SPARK DEV le 6 novembre 2026, zéro échec et zéro test ignoré.
 Le pilote d’instances chaudes et son superviseur sont implémentés ; leurs
 campagnes réelles passent 31 contrôles d’invocation et 11 de cycle de vie,
-avec les 36 régressions du chargeur : [preuve](../docs/evidence/instances-dev-2026-11-06.json). La passerelle
-authentifiée et les admissions restent à intégrer. Les instances avec baux
+avec les 36 régressions du chargeur : [preuve](../docs/evidence/instances-dev-2026-11-06.json). La passerelle authentifiée et les admissions passent 31 groupes HTTPS dans
+la [preuve du moteur](../docs/evidence/execution-dev-2026-11-06.json). Les instances avec baux
 de stockage passent quatorze groupes réels, selon [la preuve de raccordement](../docs/evidence/managed-storage-dev-2026-11-06.json).
 Contrat : [DEPLOYMENT](../docs/DEPLOYMENT.md). Le superviseur contacte le contrôle
 par HTTP sur un socket Unix privé monté readonly ; un enfant distinct importe le code. Les logs ne valent
@@ -65,8 +65,9 @@ peut contenir les informations que son handler choisit de renvoyer. Seuls les
 logs sont expurgés des secrets déclarés. La clé du canal n’est jamais imprimée.
 SIGTERM et SIGINT rejoignent le nettoyage ; stdin et stdout n’immobilisent pas
 la boucle de contrôle. Une sortie consommée trop lentement est bornée à dix
-secondes. SIGKILL exige une réconciliation par l’exploitant ; l’intégration de
-cette réconciliation au démarrage du moteur reste à réaliser.
+secondes. SIGKILL du diagnostic exige une réconciliation par l’exploitant. Les instances
+créées par la plateforme sont réconciliées automatiquement au démarrage de
+son moteur, avant réouverture des admissions.
 
 `instances-test` utilise la CLI en processus séparé, les handlers originaux
 embarqués dans l’image de qualification, le réseau HTTPS réel et Docker.
@@ -78,7 +79,7 @@ ce seul scénario. La campagne dispose d’une alarme indépendante de 90 second
 Les rapports sont `instances-proof.json` et `lifecycle-proof.json` ; `completed`
 et `cleanup` doivent valoir true, `failed` et `skipped` zéro.
 
-Ces preuves ne qualifient pas encore la file, l’autoscaling, les ACL d’invocation,
+Ces preuves de composants ne qualifient pas la file, l’autoscaling, les ACL d’invocation,
 les générations, les montages fonctionnels ni les opérations de console.
 
 ## Baux de stockage

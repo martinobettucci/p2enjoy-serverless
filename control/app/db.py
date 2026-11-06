@@ -21,9 +21,10 @@ class Database:
         return db
 
     @contextmanager
-    def transaction(self):
+    def transaction(self,*,busy_timeout=5000):
         db=self.connect()
         try:
+            db.execute('PRAGMA busy_timeout='+str(int(busy_timeout)))
             db.execute('BEGIN IMMEDIATE')
             yield db
             db.execute('COMMIT')

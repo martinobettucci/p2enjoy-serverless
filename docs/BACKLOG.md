@@ -172,12 +172,12 @@ plan/package rejoués. Les sept groupes CLI authentifiés réussissent onze
 premières publications, la pagination, les mises à jour à UUID conservé,
 les refus de droits, le résultat partiel et la reprise du même brouillon.
 Rupture après envoi, modification locale concurrente, réponse trop grande et
-redirection restent à éprouver. Les vues de révisions et le moteur restent
-à réaliser ; l'exécution du code après rollback n'est pas encore qualifiée.
+redirection restent à éprouver. Les vues de révisions restent à réaliser. Le moteur est déployé ; son exécution après rollback est vérifiée dans
+la [campagne publique](evidence/execution-dev-2026-11-06.json).
 
 ## SLS-040
 
-Statut : [~] — pilote d’instances implémenté ; admissions et passerelle en réalisation.
+Statut : [~] — admissions publiques et reprises éprouvées ; preuves résiduelles et console ouvertes.
 
 Invocation authentifiée, limites réelles, admission atomique, min/max/idle,
 deadline, descendants, drainage et réconciliation. CORS/IP ET/OU côté backend.
@@ -189,8 +189,15 @@ Docker réel. Les campagnes d’invocation et de courses de cycle sont présente
 avec régression du chargeur partagé : 31 + 11 + 36 contrôles réels réussis,
 zéro échec et zéro test ignoré. La [preuve](evidence/instances-dev-2026-11-06.json)
 est conservée séparément des parcours API. Le pilote est maintenant raccordé
-aux baux de l’agent FUSE, avec quatorze groupes réels. Les admissions, min/max/idle,
-générations et invocation authentifiée restent à intégrer et qualifier.
+aux baux de l’agent FUSE, avec quatorze groupes réels. Les admissions, min/max/idle, générations et invocations authentifiées sont
+intégrées et déployées sur DEV. La [preuve du moteur](evidence/execution-dev-2026-11-06.json)
+recoupe 31 groupes HTTPS et 221 groupes de régression, avec zéro échec/skip
+dans la suite finale : budgets CPU/RAM/instances, 128 réceptions, générations,
+déconnexions, contention SQLite, SIGKILL et arrêt gracieux sans rejeu.
+Les scénarios échoués pendant le développement restent conservés séparément.
+La rétention à sept jours/10 000 observations et les chemins résiduels de
+nettoyage/reprise doivent encore recevoir leurs preuves ciblées ; les vues
+d’exécution sont ouvertes dans SLS-060.
 
 ## SLS-050
 
@@ -210,8 +217,10 @@ de quotas, suppressions et publications sont raccordées à une décision SQL du
 la révocation, les fichiers réels, la publication et le rollback. Le protocole
 de l’agent compte douze groupes avec la neutralisation d’un prepare retardé.
 La [preuve du raccordement](evidence/function-storage-dev-2026-11-06.json)
-recoupe aussi les régressions et la console. Les admissions, les commandes
-publiques de purge/cache, les observations et crons restent à réaliser.
+recoupe aussi les régressions et la console. Les admissions et observations API sont éprouvées par les 31 groupes publics
+de la [preuve du moteur](evidence/execution-dev-2026-11-06.json). Les
+commandes publiques de purge/cache, leurs vues de console et les crons restent
+à réaliser.
 Les quotas préparés et leurs reçus sont
 implémentés ; la preuve initiale de dix groupes vérifie décisions, réservations, SIGKILL pendant
 préparation et reprise d'abandon partiel avec conservation des données.

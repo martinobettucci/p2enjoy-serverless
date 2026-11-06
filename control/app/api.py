@@ -196,6 +196,7 @@ def router(database,identity,vault,operations):
                 service=current_object(db,'services',key)
                 identity.recheck(db,authorization,str(key),'create',function_id)
                 operations.verify(db,operation,{'id':function_id},service)
+                operations.minimum_budget(db,function_id,data.config.model_dump())
                 now=time.time()
                 db.execute('INSERT INTO functions VALUES (?,?,?,?,?,?,NULL,?,?,NULL)',(
                     function_id,str(key),data.name,data.config.model_dump_json(),env,secured,now,now))
@@ -221,6 +222,7 @@ def router(database,identity,vault,operations):
                 changed=storage_configuration(previous)!=storage_configuration(data.config.model_dump())
                 if changed:operations.reserve(db,operation,row,service,storage_configuration(data.config.model_dump()))
                 else:
+                    operations.minimum_budget(db,str(key),data.config.model_dump())
                     db.execute('UPDATE functions SET name=?,config_json=?,environment_json=?,secrets_cipher=?,updated_at=? WHERE id=?',(
                         data.name,data.config.model_dump_json(),env,secured,time.time(),str(key)))
                     audit(db,authorization.actor,'function.update',str(key),row['service_id'])
@@ -231,6 +233,7 @@ def router(database,identity,vault,operations):
                     row=current_object(db,'functions',key);service=current_object(db,'services',row['service_id'])
                     identity.recheck(db,authorization,row['service_id'],'update',str(key))
                     operations.verify(db,operation,row,service)
+                    operations.minimum_budget(db,str(key),data.config.model_dump())
                     db.execute('UPDATE functions SET name=?,config_json=?,environment_json=?,secrets_cipher=?,updated_at=? WHERE id=?',(
                         data.name,data.config.model_dump_json(),env,secured,time.time(),str(key)))
                     operations.commit(db,operation)

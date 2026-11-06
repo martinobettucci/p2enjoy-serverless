@@ -41,6 +41,13 @@ hors de /run. Compose monte seulement ce répertoire, readonly, sous /storage-ag
 Ces paramètres sont validés au démarrage. Aucun secret de montage ni nouveau
 port n'est nécessaire ; SO_PEERCRED relie le contrôle rootless à l'UID autorisé.
 
+Le moteur ajoute cinq budgets de cellule, précisés dans [ADMISSION](ADMISSION.md) :
+SERVERLESS_FUNCTION_CPU_BUDGET (1), SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB (8192),
+SERVERLESS_FUNCTION_INSTANCE_LIMIT (32), SERVERLESS_WAITING_CALL_LIMIT (128),
+SERVERLESS_FUNCTION_WAITING_CALL_LIMIT (16). Les minima existants sont validés
+au démarrage. Les réservations de fonctions, y compris celles en nettoyage,
+comptent jusqu'à libération confirmée ; contrôle et validations sont distincts.
+
 ## Connexion
 
 L'intégration DEV suit le [contrat du client créé](OIDC_DEV.llms.txt).

@@ -6,13 +6,14 @@ console est `https://serverless.lelabs.tech`.
 
 | Nom Docker visible | Rôle | Entrée |
 | --- | --- | --- |
-| `serverless-api` | API de gestion, SSO et console web | HTTP 18090, route TLS publique |
+| `serverless-api` | API de gestion, SSO, console, passerelle et coordination des fonctions | HTTP 18090, route TLS publique |
 | `serverless-runtime-reference` | Exécuteur Node autonome des douze fonctions de qualification | Boucle locale 127.0.0.1:18080 |
 | `serverless-function-<nom>-<uuid>` | Instance Docker exécutant la fonction nommée | Canal Unix privé du contrôle |
 
 Les tests sont des clients éphémères distincts. Le runtime de référence exécute
 réellement les handlers. Il reste séparé du pilote d’instances Docker de la
-plateforme, dont le raccordement aux invocations publiques est en cours.
+plateforme, désormais raccordé aux invocations publiques et déployé en
+qualification.
 
 Les noms explicites `container_name` remplacent les noms générés par Compose.
 Les identifiants de projet et de service Compose restent stables : ils

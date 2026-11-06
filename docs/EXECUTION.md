@@ -2,8 +2,9 @@
 
 Contrat SLS-040 en cours de réalisation, complété par SLS-050 pour le stockage
 et l’exploitation. Il précise [PLATFORM](PLATFORM.md) sans remplacer ses exigences.
-Le runtime de validation et le pilote d’instances chaudes sont implémentés ;
-la passerelle et les admissions restent à construire. Les campagnes de composants
+Le runtime de validation, le pilote d’instances chaudes, la passerelle et les
+admissions sont implémentés et déployés sur DEV. La [campagne du moteur](evidence/execution-dev-2026-11-06.json)
+passe 31 groupes HTTPS et 221 groupes de régression sur la même image. Les campagnes de composants
 ne prouvent ni les autorisations publiques ni les parcours de console.
 
 ## Instance et processus
@@ -208,8 +209,8 @@ ses ressources étiquetées ; il n’ajoute aucune identité d’invocation publ
 Les campagnes exécutent ce vrai pilote avec les sources de qualification,
 le chargeur et Docker réels, puis vérifient processus, limites et nettoyage.
 
-Les tranches suivantes raccordent l’agent de stockage, les admissions, les
-transitions et la passerelle. Leurs preuves complètes passent par les véritables
+L’agent de stockage, les admissions, les transitions et la passerelle sont
+raccordés. Leurs preuves passent par les véritables
 routes avec des jetons créés après connexion SSO. La matrice couvre chaud/froid,
 callback/Promise, binaire, erreurs, logs, CPU/RAM/PIDs, saturation, file, min/max/idle,
 descendants, origines/IP, volumes, redéploiement, rollback, suppression et crash.

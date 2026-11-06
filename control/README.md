@@ -5,7 +5,7 @@ Le conteneur `serverless-api` sert l’API et la console à
 Les [noms d’exploitation](../docs/DEPLOYMENT_NAMES.md) distinguent ce service
 du runtime de référence et des conteneurs d’exécution des fonctions.
 
-Implémentation en cours de SLS-020 et SLS-030. Contrats : [API](../docs/CONTROL.md),
+Implémentation en cours de SLS-020, SLS-030 et SLS-040. Contrats : [API](../docs/CONTROL.md),
 [schéma](../docs/SCHEMA.md), [SSO](../docs/sso.md), [publication](../docs/DEPLOYMENT.md).
 
 Python 3.14, FastAPI, SQLite WAL et authentification OIDC confidentielle.
@@ -88,9 +88,10 @@ pas les routes authentifiées qui l'appellent.
 `app/instances.py` fournit le pilote réel d’instances chaudes, avec diagnostic
 opérateur, limites Docker, canal privé, deadline et fermeture confirmée.
 Ses campagnes passent par Docker et les handlers de qualification, selon
-[runtime/README.md](../runtime/README.md). Il n’est pas encore raccordé aux
-routes publiques ni à la file d’admission du contrôle déployé. Les preuves de
-ce composant ne ferment donc pas SLS-040.
+[runtime/README.md](../runtime/README.md). Il est raccordé aux routes publiques et à la file d’admission du contrôle
+déployé. Les preuves propres à ces admissions restent distinctes de celles du
+pilote ; leurs 31 groupes HTTPS passent dans la
+[preuve du moteur](../docs/evidence/execution-dev-2026-11-06.json).
 
 ## Instances avec stockage géré
 
@@ -105,8 +106,7 @@ Quatorze groupes réels passent dans l'image du contrôle, avec les handlers
 `qualification/artifacts/volume-operations.cjs` : persistance, quotas, partage,
 isolation, refus, courses, interruptions et diagnostic CLI. La [preuve de
 raccordement](../docs/evidence/managed-storage-dev-2026-11-06.json) recoupe le
-code embarqué, les montages et les ressources nettoyées. Les admissions et
-routes publiques d'invocation restent à réaliser.
+code embarqué, les montages et les ressources nettoyées. Les admissions et routes publiques sont déployées en qualification.
 
 ## Mutations de stockage des fonctions
 
@@ -130,4 +130,31 @@ Les lectures ajoutent `storage_operation`. Un 503 avec
 persistée et attend la confirmation du stockage : relire la fonction ou le
 candidat avant de réessayer. Les mutations incompatibles restent refusées.
 La suppression archive les volumes ; elle ne libère pas leur allocation.
-Le moteur d’admission et les commandes publiques de purge restent à intégrer.
+Le moteur d’admission est intégré ; les commandes publiques de purge restent
+à réaliser.
+
+## Invocations publiques et admissions
+
+La migration 005 conserve réservations et observations d’invocation.
+`app/execution.py` réserve CPU, mémoire et place avant Docker, garde les
+responsabilités malgré les déconnexions, applique minimum, maximum et extinction
+après inactivité, puis réconcilie ses ressources au redémarrage sans rejeu.
+`app/invocation_routes.py` exige Read dans X-Serverless-Token, applique origine/IP
+et traduit l’événement/réponse Lambda HTTP. Les observations d’instances et
+d’invocations exigent Read ou la session administrateur.
+
+Les cinq budgets de cellule et leurs bornes figurent dans
+[ADMISSION](../docs/ADMISSION.md). Les minima doivent tenir simultanément dans
+ces budgets. Les réservations ne sont restituées qu’après destruction et
+libération confirmées, y compris pour les anciennes générations. La santé
+est dégradée si cette réconciliation ne peut pas finir.
+
+`node e2e/public-invocations.mjs` qualifie l’entrée réelle, les files, les
+générations, les budgets, le stockage et les reprises. Ses 31 groupes passent,
+avec 221 groupes de régression, dans la [preuve du moteur](../docs/evidence/execution-dev-2026-11-06.json).
+Les 55 groupes de configuration/panne, les 14 de stockage, les composants
+Docker et les parcours API/UI sont rejoués par `python3 e2e/execution-suite.py`.
+Les rapports frais sont liés à l’image et aux sources locales/distantes avant
+et après chaque commande. Les prérequis et fautes ciblées sont décrits dans
+[e2e](../e2e/README.md). La limite HTTP/1.1 du proxy est explicitée dans
+[ADMISSION](../docs/ADMISSION.md#budgets-et-attente).

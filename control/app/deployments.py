@@ -145,6 +145,7 @@ class Deployments:
             for row in self.database.all("SELECT id FROM deployments WHERE state IN ('failed','expired') AND reserved_bytes>0"):
                 await self.clean_candidate(row['id'])
             for row in self.database.all('SELECT id FROM revisions WHERE deleted_at IS NOT NULL AND stored_bytes>0'):
+                if self.database.one('SELECT 1 FROM execution_instances WHERE revision_id=?',(row['id'],)):continue
                 await blocking(self.remove,self.root,str(UUID(row['id'])))
                 with self.database.transaction() as db:db.execute('UPDATE revisions SET stored_bytes=0 WHERE id=? AND deleted_at IS NOT NULL',(row['id'],))
             if startup:
@@ -297,6 +298,7 @@ class Deployments:
                 function,service=self.verify(db,current,authorization,state='validating',operation=operation)
                 if storage_changed:self.operations.verify(db,operation,function,service)
                 now=time.time();config=configuration['config'];values=configuration['configuration']
+                self.operations.minimum_budget(db,function['id'],config)
                 db.execute('INSERT INTO revisions VALUES (?,?,?,?,?,?,?,?,?,?,?,NULL)',
                     (key,function['id'],config['handler'],config['runtime'],'linux-x64',validation['image_id'],extracted['archive_sha256'],
                      json.dumps(extracted['inventory']),current['events_json'],stored,now))
@@ -408,6 +410,8 @@ class Deployments:
                 revision=get(db,'revisions',revision_id)
                 if revision['function_id']!=str(key):raise HTTPException(403,'Cette révision appartient à une autre fonction.')
                 if function['active_revision_id']==str(revision_id):raise HTTPException(409,'La révision active ne peut pas être supprimée.')
+                if db.execute('SELECT 1 FROM execution_instances WHERE revision_id=?',(str(revision_id),)).fetchone():
+                    raise HTTPException(409,'Cette révision est encore utilisée par une instance.')
                 db.execute('UPDATE revisions SET deleted_at=? WHERE id=?',(time.time(),str(revision_id)))
                 audit(db,authorization.actor,'revision.delete',str(key),function['service_id'],{'revision_id':str(revision_id)})
             await self.clean()

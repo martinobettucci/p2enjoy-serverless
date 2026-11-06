@@ -19,8 +19,8 @@ Expiration, budget et interruption pendant nettoyage restent à éprouver.
 Le pilote Docker d’instances chaudes passe 31 contrôles d’invocation et
 11 de cycle de vie : [preuve DEV](docs/evidence/instances-dev-2026-11-06.json).
 Le raccordement des instances aux baux de volumes passe quatorze groupes réels :
-[preuve](docs/evidence/managed-storage-dev-2026-11-06.json). La passerelle et
-les admissions restent à réaliser. Les préparations de quotas et leurs décisions
+[preuve](docs/evidence/managed-storage-dev-2026-11-06.json). La passerelle et les admissions sont déployées sur DEV ; les 31 groupes HTTPS
+et 221 groupes de régression passent dans la [preuve du moteur](docs/evidence/execution-dev-2026-11-06.json). Les préparations de quotas et leurs décisions
 durables ont fait l’objet d’une première campagne de dix groupes réels,
 avec 37 groupes de régression :
 [preuve](docs/evidence/storage-preparations-dev-2026-11-06.json). Les créations, changements de quotas, suppressions et publications sont
@@ -32,7 +32,8 @@ Le composant de [stockage à quota](storage/README.md)
 est disponible et qualifié sur le SPARK DEV : 31 contrôles réels réussis,
 dont saturation, concurrence et reprise après interruption. Son agent local
 de volumes est installé en DEV ; les baux, budgets et reprises font l’objet
-de campagnes réelles de composant, avant leur raccordement au moteur.
+de campagnes réelles de composant. Leur raccordement aux admissions publiques
+est désormais déployé et éprouvé par la campagne publique.
 
 ## Objectif
 
@@ -153,6 +154,8 @@ control/
   app/                    API, SSO, sessions, objets et droits
   app/artifacts.py         Extraction ZIP bornée et publication readonly
   app/deployments.py       Candidats, validation Docker et publication SQLite
+  app/execution.py         Admission, réservations, instances et reprise
+  app/invocation_routes.py Passerelle HTTP et observations autorisées
   artifacts-dev.sh         Construction et qualification de l'extracteur
   migrations/             Schéma SQLite versionné
   compose.spark.yml       Contrôle DEV sur le port 18090

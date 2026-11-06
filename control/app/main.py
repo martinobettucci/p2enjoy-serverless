@@ -14,6 +14,7 @@ from fastapi import FastAPI,HTTPException,Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse,HTMLResponse,JSONResponse,RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .api import router
 from .auth import Identity,SESSION_COOKIE,FLOW_COOKIE
@@ -21,6 +22,8 @@ from .config import Settings,Vault
 from .db import Database,audit
 from .deployments import Deployments
 from .function_operations import FunctionOperations
+from .execution import Execution
+from .invocation_routes import routes as invocation_routes,gateway_error
 from .network import forwarded_addresses
 
 logger=logging.getLogger('p2enjoy.control')
@@ -37,7 +40,8 @@ class BodyLimit:
             message=await receive()
             if message['type']=='http.request':
                 total+=len(message.get('body',b''))
-                limit=64*1024**2 if scope.get('state',{}).get('artifact_upload_authorized') is True else 256*1024
+                state=scope.get('state',{})
+                limit=64*1024**2 if state.get('artifact_upload_authorized') is True else 1024**2 if state.get('invocation_authorized') is True else 256*1024
                 if total>limit:raise HTTPException(413,'Le corps de requête dépasse sa limite autorisée.')
             return message
         await self.app(scope,limited,send)
@@ -49,6 +53,8 @@ vault=Vault(settings.master_key)
 identity=Identity(settings,database,vault)
 operations=FunctionOperations(settings,database)
 deployments=Deployments(settings,database,identity,vault,operations)
+execution=Execution(settings,database,identity,vault,operations,deployments)
+operations.execution=execution
 
 
 @asynccontextmanager
@@ -66,9 +72,12 @@ async def lifespan(app):
             else:db.execute('INSERT INTO security_metadata VALUES (?,?)',('master-key',vault.seal(marker)))
         await deployments.ready()
         await operations.ready(deployments.installation)
+        await execution.ready(deployments.installation)
         yield
     finally:
-        try:await operations.close()
+        try:
+            try:await operations.close()
+            finally:await execution.close()
         finally:
             await deployments.close()
             await identity.close()
@@ -78,6 +87,7 @@ app=FastAPI(title='P2Enjoy Serverless',lifespan=lifespan,docs_url=None,redoc_url
 app.add_middleware(BodyLimit)
 app.include_router(router(database,identity,vault,operations))
 app.include_router(deployments.routes())
+app.include_router(invocation_routes(execution))
 web_root=Path(__file__).parent.parent/'web'
 app.mount('/assets',StaticFiles(directory=web_root/'assets'),name='assets')
 
@@ -86,6 +96,9 @@ app.mount('/assets',StaticFiles(directory=web_root/'assets'),name='assets')
 async def response_headers(request:Request,call_next):
     request.state.request_id=str(uuid4())
     response=await call_next(request)
+    if request.url.path.startswith('/invoke/'):
+        if 'X-Request-ID' not in response.headers:response.headers['X-Request-ID']=request.state.request_id
+        return response
     response.headers['X-Request-ID']=request.state.request_id
     response.headers['Cache-Control']='no-store'
     response.headers['X-Content-Type-Options']='nosniff'
@@ -95,7 +108,9 @@ async def response_headers(request:Request,call_next):
 
 
 @app.exception_handler(HTTPException)
+@app.exception_handler(StarletteHTTPException)
 async def http_error(request:Request,error:HTTPException):
+    if request.url.path.startswith('/invoke/'):return gateway_error(execution,request,error.status_code)
     # No query string: OAuth codes and state must never enter access logs.
     if error.status_code>=400:
         route=getattr(request.scope.get('route'),'path','unmatched')
@@ -151,7 +166,12 @@ async def conflict(request:Request,error:sqlite3.IntegrityError):
 
 @app.exception_handler(sqlite3.OperationalError)
 async def database_error(request:Request,error:sqlite3.OperationalError):
-    logger.error(json.dumps({'event':'database.unavailable','request_id':getattr(request.state,'request_id',None)}))
+    trace=error.__traceback__
+    while trace and trace.tb_next:trace=trace.tb_next
+    logger.error(json.dumps({'event':'database.unavailable','request_id':getattr(request.state,'request_id',None),
+        'sqlite_errorname':getattr(error,'sqlite_errorname',None),
+        'source':{'file':Path(trace.tb_frame.f_code.co_filename).name,'function':trace.tb_frame.f_code.co_name,
+                  'line':trace.tb_lineno} if trace else None}))
     return JSONResponse({'error':'Le stockage du contrôle est temporairement indisponible.'},status_code=503)
 
 
@@ -160,6 +180,7 @@ async def health():
     database.one('SELECT 1')
     if deployments.cleanup_error:raise HTTPException(503,'Le nettoyage des artefacts doit être repris.')
     if operations.cleanup_error or not operations.agent_ready:raise HTTPException(503,'Le stockage des fonctions doit être rétabli ou réconcilié.')
+    if not execution.healthy():raise HTTPException(503,'Les instances doivent être réconciliées avant la reprise.')
     return {'status':'ok','component':'control','version':'0.1.0-dev'}
 
 

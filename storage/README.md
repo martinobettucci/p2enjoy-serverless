@@ -2,8 +2,8 @@
 
 `p2-quota` monte un répertoire natif avec un plafond de taille logique. Il passe
 31 contrôles E2E réels dans le SPARK DEV. Un agent local de volumes est
-installé en DEV ; le raccordement au pilote d’instances est qualifié, avant
-son intégration aux admissions publiques. [Preuve](../docs/evidence/storage-dev-2026-11-05.json).
+installé en DEV ; le raccordement au pilote et les admissions publiques sont
+éprouvés dans la [campagne du moteur](../docs/evidence/execution-dev-2026-11-06.json). [Preuve](../docs/evidence/storage-dev-2026-11-05.json).
 Contrat : [PLATFORM, stockage](../docs/PLATFORM.md#stockage).
 
 Prérequis : Linux, `/dev/fuse`, `fusermount3`, Docker pour construire le binaire.
@@ -119,7 +119,8 @@ L’arrêt normal d’exploitation doit d’abord drainer les consommateurs.
 Le raccordement aux instances passe quatorze groupes réels :
 [preuve](../docs/evidence/managed-storage-dev-2026-11-06.json). Les mutations publiques de
 création, quotas, publication et suppression sont raccordées au contrôle.
-Les admissions et commandes de purge/cache de la console restent à intégrer.
+Les admissions publiques sont intégrées et déployées en qualification. Les
+commandes de purge/cache de la console restent à réaliser.
 L'acquisition partielle après interruption et la marge de filesystem restent
 à qualifier. Une coupure électrique et un processus bloqué
 dans un appel noyau impossible à tuer ne sont pas reproduits par ces campagnes.

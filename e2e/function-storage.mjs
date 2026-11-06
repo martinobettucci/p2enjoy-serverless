@@ -96,6 +96,12 @@ async function fault(mode,fn){
     assert.fail('Phase réelle non observée : '+event);
   },async release(command='resume'){
     if(!ended)child.stdin.end(command+'\n');assert.equal(await done,0,'Échec de restauration de la garde');
+    if(['commit','commit-database-busy'].includes(mode)){
+      const identities=events.filter(row=>row.event==='control-writer-identity');
+      assert.equal(identities.length,mode==='commit'?1:2);
+      for(const row of identities){assert(row.effective_uid>0);assert(row.effective_gid>0);assert.equal(row.operator_uid,0);
+        assert(Object.values(row.sidecar_uids).every(uid=>uid===row.effective_uid));}
+    }
   }};
   faults.push(handle);await handle.wait(mode==='hold-lease'?'leased':'watching');return handle;
 }
@@ -115,6 +121,8 @@ try{
   await check('Pilote embarqué : résolution sans mutation de volumes sous un vrai verrou écrivain SQLite',async()=>{
     const evidence=await remote('empty-resolution-busy',fn);
     assert.equal(evidence.writer_lock_held,true);assert.equal(evidence.resolved,true);
+    assert(evidence.writer_identity.effective_uid>0);assert.equal(evidence.operator_uid,0);
+    assert(Object.values(evidence.writer_identity.sidecar_uids).every(uid=>uid===evidence.writer_identity.effective_uid));
     await healthy();assert.equal((await remote('inspect',fn)).operation,null);
   });
   await check('Garde indépendante : SIGKILL du helper suspendant l’agent puis reprise réelle par le timer',async()=>{

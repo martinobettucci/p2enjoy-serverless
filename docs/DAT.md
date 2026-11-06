@@ -5,7 +5,7 @@
 Contrat de réalisation : [PLATFORM.md](PLATFORM.md). Le contrôle retenu est
 Python avec SQLite WAL local et un seul processus de coordination ; les
 transactions de réservation sont courtes et ne contiennent aucun appel Docker.
-L'interface prévue est React/Vite. Les instances Docker appartiennent au
+L'interface est React/Vite. Les instances Docker appartiennent au
 contrôle par labels et sont réconciliées au démarrage. Le quota logique par
 volume est développé dans `storage/`, avec go-fuse v2.12.1 (BSD-3-Clause,
 release du 21 octobre 2026). Le proxy conserve les fichiers natifs et couvre
@@ -22,8 +22,8 @@ UID. Il possède seul la capacité de montage et partage le namespace de la
 cellule ; le code installé reste possédé par root. Les opérations locales et
 la maintenance sont décrites dans [STORAGE_AGENT](STORAGE_AGENT.md). Son
 raccordement aux instances passe quatorze groupes réels. Les mutations de
-gestion et publication utilisent maintenant l’agent ; les admissions publiques
-restent à réaliser.
+gestion, publication et admissions publiques utilisent maintenant l’agent ;
+le moteur public est déployé en qualification.
 L'agent prépare aussi les mutations de quotas en deux phases : l'ancienne
 allocation reste réservée jusqu'à commit/abort et un reçu versionné survit aux
 interruptions. Seuls les chemins nouveaux restés vides peuvent être retirés à
@@ -44,8 +44,8 @@ plan/packaging passe 24 scénarios ciblés dans Docker ; le chargeur Node passe
 preuve indépendante des contenus et le chargement des douze fonctions.
 La publication des révisions est intégrée au contrôle DEV, avec onze groupes API
 et sept groupes CLI authentifiés qualifiés, puis quatre groupes de plafonds et
-de reprise après interruption. Le pilote d’instances chaudes est implémenté ;
-son raccordement aux admissions et à la passerelle reste à réaliser.
+de reprise après interruption. Le pilote d’instances chaudes est raccordé aux admissions et à la passerelle
+déployées en qualification.
 
 La compilation du stockage utilise Go 1.27.3 dans une image épinglée. go-fuse
 v2.12.1 et x/sys v0.28.0 sont verrouillés avec go.sum. L'audit govulncheck v1.9.0
@@ -100,8 +100,28 @@ l’instance existante. Le diagnostic lit et écrit sans bloquer la boucle async
 
 Le contrat complet est [EXECUTION](EXECUTION.md). Les preuves du pilote portent
 sur Docker réel, processus, mémoire/PIDs, réseau et courses ; elles ne qualifient
-pas encore les admissions, générations, volumes ni routes publiques. Les
+pas les admissions, générations, volumes ni routes publiques. Les
 mesures proviennent de Docker stats, pas de l’allocation déclarée.
+
+### Coordination et entrée publique
+
+`control/app/execution.py` garde une réservation SQLite (migration 005) avant
+Docker et avant acquisition de bail. Toutes ses instances, y compris en
+drainage, comptent dans les budgets. Une tâche conserve chaque invocation
+admise jusqu’à sa finalisation durable et sa fermeture ou remise au repos.
+La notification de début du handler est persistée avant acquittement.
+
+`invocation_routes.py` applique le jeton Read et la politique du service ;
+`invocation_http.py` porte les normalisations et l’enveloppe Lambda. L’attente
+ne conserve les corps qu’en mémoire, avec délai et plafonds globaux/par fonction.
+La génération privée combine révision et configuration effective ; les
+appels admis gardent leur instantané. Les observations paginées distinguent
+réservations et mesures Docker, sans exposer cette génération ni les secrets.
+
+Au redémarrage, le contrôle retire ses conteneurs et réseaux, libère les baux
+et nettoie les canaux avant restitution des réservations. Les appels perdus
+deviennent interrompus sans rejeu. Le contrat complet, dont les limites du
+transport HTTP/1.1 de l’entrée DEV, est dans [ADMISSION](ADMISSION.md).
 
 ### Extraction des artefacts
 
@@ -226,7 +246,7 @@ E2E du déploiement de plateforme, qui exige ses propres campagnes.
 
 Les limites Docker portent sur le banc complet, pas individuellement sur ses
 fonctions. Le budget mémoire du manifeste reste un contrat à qualifier par le
-futur moteur ; il ne doit jamais être présenté comme un quota appliqué par
+moteur de plateforme ; il ne doit jamais être présenté comme un quota appliqué par
 l'exécuteur de référence. Même limite pour min/max instances, cron, stockage
 à quota dur et passage à zéro : non implémentés.
 

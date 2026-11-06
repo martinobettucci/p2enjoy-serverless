@@ -75,3 +75,8 @@ de rendre le focus au bouton « Menu ». Un passage au palier desktop ferme le
 tiroir et place le focus sur le lien de navigation visible. La fermeture
 rétablit aussi le défilement de la page ; elle ne laisse pas le focus sur un
 contrôle masqué.
+
+La campagne de régression du moteur rejoue ces onze parcours et renouvelle
+les sept captures, relues sans modification des ressources web. La
+[preuve du moteur](evidence/execution-dev-2026-11-06.json) conserve leurs
+empreintes et les états inspectés. Les facettes d’exécution restent à réaliser.

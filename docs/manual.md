@@ -3,8 +3,8 @@
 La console initiale est déployée sur
 [serverless.lelabs.tech](https://serverless.lelabs.tech).
 Les parcours de gestion passent leurs preuves API et UI ; les cycles SSO
-restants figurent dans [BACKLOG.md](BACKLOG.md). Les paramètres d'exécution sont actuellement
-enregistrés : leur application aux fonctions appartient au moteur en développement.
+restants figurent dans [BACKLOG.md](BACKLOG.md). Les paramètres d'exécution sont appliqués aux fonctions par le moteur déployé
+en qualification.
 
 ## Se connecter
 
@@ -37,7 +37,8 @@ Dans la fiche de fonction, ouvrir « Modifier le stockage ». Les données perma
 et le cache ont chacun une activation et une allocation en Mio. L’enregistrement
 vérifie les quotas réels avant confirmation. Un quota inférieur à l’usage est
 refusé ; désactiver un volume conserve ses fichiers et son allocation. Une
-modification est refusée tant qu’un consommateur utilise les volumes.
+modification ferme les instances au repos ; elle est refusée à 409 tant
+qu’une invocation admise est active.
 
 Si le message indique que la modification est enregistrée mais attend sa
 confirmation, relire la fonction avant de recommencer. Une nouvelle mutation
@@ -68,7 +69,8 @@ Les appels portent `X-Serverless-Token`. L'en-tête `Authorization` reste
 disponible pour l'authentification métier du handler. Les routes de révision
 et la commande CLI `deploy` passent leurs premiers parcours authentifiés en DEV.
 Les vues de publication ne sont pas encore disponibles dans la console.
-Le moteur d’invocation est en développement.
+Les fonctions publiées sont invocables ; les vues d’exécution et de journaux
+restent à ajouter à la console.
 
 La [CLI](../adapter/README.md) lit `P2_SERVERLESS_URL` et `P2_SERVERLESS_TOKEN`
 dans son environnement. Depuis le projet de fonctions, lancer
@@ -88,14 +90,41 @@ le candidat devient `failed` avec `control_interrupted`. Consulter son état
 avant de préparer une nouvelle publication ; la révision active précédente
 reste conservée.
 
+## Invoquer et suivre une fonction
+
+Après publication, appeler `/invoke/UUID_DE_FONCTION` si le manifeste déclare
+un alias implicite, ou `/invoke/UUID_DE_FONCTION/chemin` pour un chemin déclaré.
+La méthode HTTP doit figurer dans cette déclaration. Envoyer le jeton du service
+dans `X-Serverless-Token` ; une session administrateur seule n’autorise pas
+l’invocation. L’authentification métier peut rester dans `Authorization`.
+
+Le délai de file précède le délai maximal d’exécution. Une file pleine ou
+une attente expirée donne 429 ; un dépassement du délai d’exécution donne 504.
+Un client déconnecté après admission peut avoir déclenché des écritures :
+ne pas rejouer automatiquement son appel. L’identifiant de réponse
+`X-Serverless-Request-ID` permet de retrouver son observation.
+
+Les listes `/api/functions/UUID_DE_FONCTION/instances` et
+`/api/functions/UUID_DE_FONCTION/invocations` sont accessibles avec Read ou la
+session administrateur. `limit` vaut 20 par défaut, au plus 100 ; `offset` permet
+la pagination. L’historique conserve états, début observé, erreurs fixes et logs
+expurgés. Une mesure Docker indisponible est signalée ; elle ne devient pas
+une consommation estimée à partir de l’allocation. Les vues correspondantes
+sont encore à intégrer à la console.
+
+Un corps incomplet est refusé après trente secondes. Sur l’entrée DEV, HTTP/2
+transmet immédiatement le 408 ; HTTP/1.1 peut attendre la fin du corps côté
+proxy pour le recevoir. Cette attente n’occupe plus de place dans le moteur.
+
 ## Définir les restrictions d'appel
 
 La politique du service accepte des origines exactes, par exemple
 `https://app.johndalia.com`, et des adresses IP ou CIDR. Choisir ET pour
 exiger les deux critères actifs, OU pour accepter l'un des deux. Une liste
 vide désactive son critère ; deux listes vides laissent le jeton comme
-condition d'accès. La sauvegarde de cette politique est disponible ; son
-application publique sera qualifiée avec la passerelle d'invocation.
+condition d'accès. Cette politique est appliquée à l’entrée publique et relue avant admission.
+Un changement peut refuser un appel encore en file ; il n’interrompt pas un
+appel déjà admis.
 
 ## Consulter les changements et supprimer
 
