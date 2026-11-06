@@ -73,6 +73,39 @@ après lecture du plan, ou une adaptation explicite du manifeste. L'option
 accepte uniquement ces différences connues, qui restent affichées avant upload.
 L'authentification par jeton reste obligatoire pour les invocations.
 
+### Commande deploy
+
+`python3 -m adapter deploy --config MANIFESTE --service UUID` résout les valeurs
+de configuration en mémoire et empaquette toutes les fonctions avant mutation.
+`P2_SERVERLESS_URL` est une origine HTTPS sans identifiants, chemin, query ni
+fragment ; `P2_SERVERLESS_TOKEN` fournit le jeton de service. Le client vérifie
+le certificat normalement et ne suit aucune redirection. Il vérifie que l'UUID
+du service et son nom correspondent à la cible et au manifeste.
+
+La CLI retrouve les fonctions par leur nom exact dans la liste paginée, puis
+relit chaque fonction avant préparation. Une fonction absente est créée comme
+brouillon avec son nom et ses ressources ; les variables/secrets sont envoyés
+avec le candidat, afin de ne pas modifier une configuration active avant validation.
+Un brouillon existant suit la première publication et requiert donc Create.
+Chaque archive est ouverte sans suivre les liens, bornée à 64 Mio, chargée en
+mémoire et comparée à l'empreinte issue du packaging avant son envoi.
+
+Les fonctions sont publiées en série. La sortie JSON contient un résultat par
+fonction, ses identifiants connus, son état et des codes d'erreur fixes ; elle
+ne recopie ni corps d'erreur distant, ni logs de validation, ni configuration.
+Une erreur de fonction n'efface pas les succès précédents et les fonctions
+suivantes sont tentées ; le processus retourne un code non nul si l'une échoue.
+Les réponses JSON sont bornées à 8 Mio, les appels de gestion attendent au
+plus 30 secondes sans activité réseau et un upload 480 secondes.
+
+Aucune mutation n'est rejouée automatiquement, y compris après 429, timeout
+ou rupture de connexion. Si l'envoi ou la réponse se termine sans résultat
+exploitable, la CLI signale une issue inconnue et conserve l'identifiant du
+candidat lorsqu'il est connu. Sa consultation permet de déterminer si le
+serveur a publié ; relancer sans cette vérification peut créer une nouvelle
+révision. Les refus HTTP fournissent leur statut et Retry-After s'il est
+numérique. Aucun fichier local ne conserve le jeton ou les valeurs résolues.
+
 Les méthodes initiales sont GET, POST, PUT, PATCH, DELETE, HEAD et OPTIONS.
 Un chemin HTTP est relatif au point d'invocation de la fonction ; pas de
 paramètres de chemin, wildcard ou intégration API Gateway avancée dans cette

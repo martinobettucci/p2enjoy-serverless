@@ -739,3 +739,10 @@ par la console du SPARK puis relus sans écart. Les notes distinguent les routes
 intégrées des parcours authentifiés non qualifiés. Les anciennes copies de
 pilotes sous control/ sont remplacées dans les instructions par e2e/.
 Le dépôt n’a pas de remote configuré ; ce checkpoint reste un commit local.
+
+La commande deploy est la tranche suivante de SLS-030. Son contrat précise
+la cible HTTPS, la correspondance de service, la pagination, le packaging
+avant mutation et les résultats partiels. La configuration active n'est jamais
+modifiée avant validation. Une rupture réseau peut suivre un commit serveur :
+le client signale cette ambiguïté sans rejouer une mutation. Les chemins de
+publication positifs restent soumis au prérequis SSO réel de la campagne.
