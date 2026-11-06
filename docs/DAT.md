@@ -25,7 +25,8 @@ du contrôle ; les montages de preuve sont nettoyés. La CLI Python de
 plan/packaging passe 24 scénarios ciblés dans Docker ; le chargeur Node passe
 36 scénarios réels. L'extracteur ZIP passe 112 contrôles réels, avec une
 preuve indépendante des contenus et le chargement des douze fonctions.
-La publication des révisions et le moteur d'invocation restent à réaliser.
+La publication des révisions est intégrée au contrôle DEV, avec qualification
+authentifiée encore ouverte. Le moteur d'invocation reste à réaliser.
 
 La compilation du stockage utilise Go 1.27.3 dans une image épinglée. go-fuse
 v2.12.1 et x/sys v0.28.0 sont verrouillés avec go.sum. L'audit govulncheck v1.9.0
@@ -48,7 +49,8 @@ brutes avant troncature, puis convertis en UTF-8 borné. L'échéance extérieur
 de quinze secondes englobe création, démarrage et import. Le pilote ferme
 les connexions et supprime le conteneur avec ses descendants avant de conclure.
 La preuve porte sur le chargement et ses pannes ; les droits de publication
-et la réconciliation d'un contrôle interrompu nécessitent leur intégration API.
+et la réconciliation d'un contrôle interrompu doivent être qualifiés par
+les parcours API maintenant intégrés.
 
 ### Extraction des artefacts
 
@@ -62,8 +64,19 @@ Le hash d'entrée est lui-même limité à la taille initiale acceptée.
 L'extracteur travaille par descripteurs de répertoire sans suivre les liens,
 applique les permissions readonly puis publie le candidat avec
 renameat2(NOREPLACE). Son image Python indépendante permet la qualification
-sans recréer le contrôle en service. L'admission globale, les API et la
-réconciliation des candidats après interruption restent à intégrer.
+sans recréer le contrôle en service. Le même extracteur est maintenant appelé
+par les routes de publication, dont l'admission et la reprise restent à qualifier.
+
+### Coordination des publications
+
+Le contrôle monte le socket du démon rootless et utilise une image Node
+immuable. Les candidats et révisions partagent leur UUID dans un dossier privé.
+Après extraction et validation, une transaction revalide la credential exacte,
+les droits et les versions de fonction/service, puis active code et configuration.
+Le budget conserve les fichiers dont le nettoyage n'est pas confirmé. Un défaut
+de réconciliation dégrade la santé et bloque l'admission jusqu'à reprise.
+Le verrou de processus demeure détenu jusqu'à la fin des travaux de nettoyage,
+y compris lorsque leur attente reçoit plusieurs annulations.
 
 Le client E2E calcule les contenus attendus depuis les données originales de
 ses ZIP synthétiques, indépendamment de l'inventaire retourné par l'extracteur.

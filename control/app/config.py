@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import ipaddress
 import json
 import os
+import re
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -19,6 +20,9 @@ class Settings:
     master_key: str
     state_dir: Path = Path('/state')
     trusted_proxies: tuple = ()
+    host_state_dir: Path | None = None
+    runtime_image: str = ''
+    artifact_budget: int = 4096*1024**2
 
     @classmethod
     def load(cls):
@@ -42,7 +46,19 @@ class Settings:
             trusted=tuple(ipaddress.ip_network(value.strip(),strict=False)
                           for value in os.environ.get('SERVERLESS_TRUSTED_PROXIES','').split(',') if value.strip())
         except ValueError:raise RuntimeError('SERVERLESS_TRUSTED_PROXIES doit contenir des CIDR valides.') from None
-        return cls(*values,trusted_proxies=trusted)
+        # @spec docs/BACKLOG.md#sls-030 | docs/CONTROL.md#configuration
+        paths=[]
+        for key in ('SERVERLESS_STATE_HOST_PATH','SERVERLESS_DOCKER_SOCKET_HOST'):
+            raw=os.environ.get(key,'');path=Path(raw)
+            if not raw or not path.is_absolute() or '..' in path.parts or path==Path('/') or '\0' in raw:
+                raise RuntimeError(key+' doit être un chemin absolu de cellule.')
+            paths.append(path)
+        image=os.environ.get('SERVERLESS_RUNTIME_IMAGE','')
+        if not re.fullmatch(r'sha256:[0-9a-f]{64}',image):raise RuntimeError('SERVERLESS_RUNTIME_IMAGE exige une empreinte Docker immuable.')
+        budget=os.environ.get('SERVERLESS_ARTIFACT_BUDGET_MIB','4096')
+        if not re.fullmatch(r'[0-9]{3,5}',budget) or not 512<=int(budget)<=65536:
+            raise RuntimeError('SERVERLESS_ARTIFACT_BUDGET_MIB doit être compris entre 512 et 65536.')
+        return cls(*values,trusted_proxies=trusted,host_state_dir=paths[0],runtime_image=image,artifact_budget=int(budget)*1024**2)
 
 
 class Vault:

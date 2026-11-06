@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- Routes DEV de préparation, upload ZIP, validation Node, publication atomique,
+  historique, rollback et suppression des révisions inactives. Migration 003,
+  relecture des droits/versions au commit, verrou d’état et réservations
+  conservées jusqu’au nettoyage confirmé.
+- Huit groupes HTTPS publics et trente scénarios réels de démarrage/panne
+  réussis sur la nouvelle image, dont exclusivité et reprise SQLite. Client
+  de publication ajouté ; sa campagne reste en échec de prérequis sans session
+  SSO réelle. CLI deploy, vues de révisions et invocation restent à réaliser.
+
 - Extraction ZIP serveur bornée : tailles réelles, cohérence des en-têtes,
   CRC, refus des liens et publication readonly sans écrasement. Correction
   du drainage DEFLATE et borne de lecture du hash d'entrée.

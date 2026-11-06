@@ -125,3 +125,63 @@ class TokenCreate(Strict):
         if self.function_ids is not None and 'create' in self.rights:raise ValueError('Create exige une portée sur toutes les fonctions du service.')
         if self.expires_at is not None and self.expires_at<=time.time():raise ValueError('L’expiration doit être future.')
         return self
+
+
+# @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
+class HttpEvent(Strict):
+    path:str=Field(min_length=1,max_length=256,pattern=r'^[A-Za-z0-9_/-]+$')
+    methods:list[Literal['GET','POST','PUT','PATCH','DELETE','HEAD','OPTIONS']]=Field(min_length=1,max_length=7)
+    implicit:bool=False
+
+    @model_validator(mode='after')
+    def exact(self):
+        if any(part in ('','.','..') for part in self.path.split('/')):raise ValueError('Chemin HTTP relatif exact requis.')
+        if len(self.methods)!=len(set(self.methods)):raise ValueError('Les méthodes HTTP doivent être distinctes.')
+        return self
+
+
+class ScheduleEvent(Strict):
+    cron:str=Field(min_length=9,max_length=256)
+    enabled:bool=True
+    timezone:Literal['UTC']='UTC'
+
+    @field_validator('cron')
+    @classmethod
+    def schedule(cls,value):
+        parts=value.split()
+        if len(parts)!=5:raise ValueError('Cron attendu : cinq champs numériques.')
+        for part,(low,high) in zip(parts,[(0,59),(0,23),(1,31),(1,12),(0,7)]):
+            for item in part.split(','):
+                match=re.fullmatch(r'(\*|\d+(?:-\d+)?)(?:/(\d+))?',item)
+                if not match:raise ValueError('Champ cron invalide.')
+                base,step=match.groups()
+                if step is not None and not 1<=int(step)<=high-low+1:raise ValueError('Pas cron hors limites.')
+                if base!='*':
+                    numbers=[int(n) for n in base.split('-')]
+                    if not all(low<=n<=high for n in numbers) or numbers[0]>numbers[-1]:raise ValueError('Plage cron invalide.')
+        return ' '.join(parts)
+
+
+class Events(Strict):
+    http:list[HttpEvent]=Field(default_factory=list,max_length=16)
+    schedules:list[ScheduleEvent]=Field(default_factory=list,max_length=16)
+
+    @model_validator(mode='after')
+    def unique(self):
+        routes=set()
+        for event in self.http:
+            for method in event.methods:
+                key=(event.path,method)
+                if key in routes:raise ValueError('Route HTTP dupliquée.')
+                routes.add(key)
+        return self
+
+
+class DeploymentCreate(Strict):
+    config:FunctionConfig
+    configuration:Configuration=Field(default_factory=Configuration)
+    events:Events=Field(default_factory=Events)
+
+
+class Rollback(Strict):
+    revision_id:UUID

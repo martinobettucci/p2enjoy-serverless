@@ -6,11 +6,12 @@ if [[ ! -r /etc/spark/env || ! -r /run/spark/secrets ]]; then
   echo 'Cette commande DEV s’exécute dans le SPARK configuré.' >&2
   exit 1
 fi
+compose=(docker compose --env-file /etc/spark/env --env-file /run/spark/secrets -f compose.spark.yml)
 case "${1:-}" in
-  build) docker compose -f compose.spark.yml build --pull ;;
-  up) docker compose -f compose.spark.yml up -d --wait --wait-timeout 90 ;;
-  status) docker compose -f compose.spark.yml ps ;;
-  logs) docker compose -f compose.spark.yml logs --tail 100 control ;;
-  stop) docker compose -f compose.spark.yml stop ;;
+  build) "${compose[@]}" build --pull ;;
+  up) "${compose[@]}" up -d --wait --wait-timeout 90 ;;
+  status) "${compose[@]}" ps ;;
+  logs) "${compose[@]}" logs --tail 100 control ;;
+  stop) "${compose[@]}" stop ;;
   *) echo 'Usage: bash dev.sh {build|up|status|logs|stop}' >&2; exit 2 ;;
 esac

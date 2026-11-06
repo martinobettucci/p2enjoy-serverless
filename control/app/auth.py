@@ -38,6 +38,14 @@ class Actor:
     functions: tuple[str,...] | None = None
 
 
+# @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
+@dataclass(frozen=True)
+class Authorization:
+    actor:Actor
+    credential_digest:str
+    tokens_cipher:str|None=None
+
+
 class Identity:
     def __init__(self,settings,db,vault):
         self.settings,self.db,self.vault=settings,db,vault
@@ -277,3 +285,28 @@ class Identity:
             remote_closed=r.status_code in (200,204)
         except (HTTPException,httpx.HTTPError,InvalidToken,KeyError,ValueError):remote_closed=False
         return {'signed_out':True,'sso_signed_out':remote_closed}
+
+    # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
+    async def operation(self,request,service_id,right,function_id):
+        actor=await self.authorize(request,service_id,right,function_id)
+        if actor.kind=='token':return Authorization(actor,digest(request.headers['x-serverless-token']))
+        key=digest(request.cookies[SESSION_COOKIE])
+        row=self.db.one('SELECT * FROM sessions WHERE digest=?',(key,))
+        if not row or row['subject']!=actor.id:raise HTTPException(401,'La session a été fermée.')
+        return Authorization(actor,key,row['tokens_cipher'])
+
+    # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
+    def recheck(self,db,authorization,service_id,right,function_id):
+        actor=authorization.actor;now=time.time()
+        if actor.kind=='admin':
+            row=db.execute('SELECT * FROM sessions WHERE digest=?',(authorization.credential_digest,)).fetchone()
+            if (not row or row['subject']!=actor.id or row['expires_at']<=now or row['access_expires_at']<=now or
+                row['tokens_cipher']!=authorization.tokens_cipher):
+                raise HTTPException(401,'La session a changé ou expiré pendant cette opération.')
+        else:
+            row=db.execute('SELECT * FROM service_tokens WHERE id=? AND digest=?',(actor.id,authorization.credential_digest)).fetchone()
+            if not row or row['revoked_at'] is not None or (row['expires_at'] is not None and row['expires_at']<=now):
+                raise HTTPException(401,'Le jeton du service est invalide, expiré ou révoqué.')
+            functions=json.loads(row['function_ids_json']) if row['function_ids_json'] is not None else None
+            if row['service_id']!=service_id or right not in json.loads(row['rights_json']) or (functions is not None and function_id not in functions):
+                raise HTTPException(403,'Les droits ont changé pendant cette opération.')

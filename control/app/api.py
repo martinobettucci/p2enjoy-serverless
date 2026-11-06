@@ -184,6 +184,11 @@ def router(database,identity,vault):
     async def update_function(request:Request,key:UUID,data:FunctionCreate):
         row,actor=await function_actor(request,key,'update');current_version(request,row);env,secured=configuration(row,data.configuration)
         with database.transaction() as db:
+            # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#préparation-validation-et-publication
+            current=db.execute('SELECT config_json,active_revision_id FROM functions WHERE id=?',(str(key),)).fetchone()
+            previous=json.loads(current['config_json'])
+            if current['active_revision_id'] and any(getattr(data.config,name)!=previous[name] for name in ('handler','runtime')):
+                raise HTTPException(409,'Un changement de handler ou de runtime exige un nouveau déploiement.')
             db.execute('UPDATE functions SET name=?,config_json=?,environment_json=?,secrets_cipher=?,updated_at=? WHERE id=?',(
                 data.name,data.config.model_dump_json(),env,secured,time.time(),str(key)))
             audit(db,actor,'function.update',str(key),row['service_id'])
@@ -192,9 +197,11 @@ def router(database,identity,vault):
     @api.delete('/functions/{key}')
     async def delete_function(request:Request,key:UUID):
         row,actor=await function_actor(request,key,'delete')
-        if row['active_revision_id'] is not None:raise HTTPException(409,'Le moteur doit drainer cette fonction avant sa suppression.')
         with database.transaction() as db:
-            db.execute('UPDATE functions SET deleted_at=?,updated_at=? WHERE id=?',(time.time(),time.time(),str(key)))
+            # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
+            now=time.time()
+            db.execute('UPDATE functions SET active_revision_id=NULL,deleted_at=?,updated_at=? WHERE id=?',(now,now,str(key)))
+            db.execute("UPDATE deployments SET state='failed',error_code='function_deleted',configuration_cipher=NULL,completed_at=? WHERE function_id=? AND state IN ('prepared','receiving','validating')",(now,str(key)))
             audit(db,actor,'function.delete',str(key),row['service_id'])
         return {'deleted':True,'data_policy':'archive'}
 

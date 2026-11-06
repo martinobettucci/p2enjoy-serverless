@@ -18,6 +18,7 @@ node e2e/login-ui.mjs
 node e2e/authorize.mjs
 node e2e/control-admin.mjs
 node e2e/control-ui.mjs
+node e2e/deployments.mjs
 ```
 
 `python3 e2e/proxy.py --expected-proxy 10.77.0.1` s'exécute depuis le poste et
@@ -25,7 +26,8 @@ mesure les chemins réseau via HTTPS et SSH. Les pilotes `login-limits.py`,
 `login-capacity.py` et `control-operations.py` s'exécutent comme `spark-docker`
 dans le SPARK DEV. Les deux premiers exercent les limites SSO ; `login-limits`
 redémarre aussi le contrôle. Le dernier utilise des conteneurs temporaires de son image immuable pour les
-pannes de configuration, de clé et de base. Les fichiers `.proof-*.json`
+pannes de configuration, de clé et de base, le verrou exclusif d’état et la
+reprise de maintenance après une contention SQLite réelle. Les fichiers `.proof-*.json`
 produits sous `/srv/p2enjoy-serverless/control` contiennent les résultats
 expurgés. Leurs ressources temporaires sont nettoyées après chaque campagne.
 `python3 e2e/report-interruption.py`, depuis le poste après `public.py`, tue
@@ -40,7 +42,7 @@ OAuth n'est créé avant son clic, ce qui évite une expiration pendant l'attent
 Le script ne lit aucun champ de mot de passe.
 Il conserve seulement le cookie de plateforme, sous `.local/e2e/` en mode
 0600, puis ferme le navigateur. Les cookies du fournisseur ne sont pas
-exportés. Les deux campagnes suivantes exigent cette vraie session ; son
+exportés. Les campagnes de gestion et de publication exigent cette vraie session ; son
 absence fait échouer leur prérequis.
 
 `control-admin.mjs` crée ses propres objets, qualifie les droits CRUD et
@@ -52,9 +54,11 @@ aucune réponse. Les deux nettoient uniquement les objets qu'ils ont créés.
 Les scripts et preuves sont ajoutés au rythme de SLS-020 à SLS-060. Les premiers
 contrôles publics ont réussi ; les campagnes administrateur et la campagne
 complète de plateforme ne sont pas encore réussies.
-La campagne publique comporte sept groupes : découverte OIDC et clés réelles,
+La campagne publique comporte huit groupes : découverte OIDC et clés réelles,
 santé TLS, ressources de la console, refus anonymes, callbacks malformés,
-flows et refus du fournisseur, puis bornes des corps. La cible d'autorisation
+flows et refus du fournisseur, bornes des corps, puis refus anonymes des routes
+de publication. Un upload HTTPS utilisant Expect: 100-continue est refusé
+avant l’envoi du corps de 64 Mio annoncé. La cible d'autorisation
 est comparée à la découverte fraîchement lue. Les règles de client et de rôle
 restent à éprouver par leurs parcours authentifiés.
 
@@ -81,3 +85,15 @@ les erreurs de format, les bornes, une saturation effective du disque et
 des courses sur les destinations et la source. Le dernier parcours empaquette
 l'application de qualification, extrait son ZIP puis charge son handler avec
 le véritable runtime Node. Le rapport est `control/artifacts-proof.json`.
+
+`deployments.mjs` empaquette les handlers originaux par la CLI réelle, puis
+crée namespace, service, fonctions et jetons par les API de gestion normales.
+Le chargement asynchrone de `qualification/artifacts/deployment-delay.mjs`
+permet les modifications concurrentes réelles pendant la validation Docker.
+Les assertions portent sur droits, candidats, import, révisions, révocation,
+conflits, admission unique, rollback et suppression des révisions inactives.
+Les archives conservées à la suppression d’une fonction sont recensées dans
+le rapport ; ce nettoyage de gestion n’est pas une purge d’archives.
+Cette campagne exige la session SSO et n’est pas encore réussie. Les limites
+globales, l’expiration, la reprise après crash et les parcours CLI/UI complets
+restent des preuves distinctes à ajouter et exécuter.

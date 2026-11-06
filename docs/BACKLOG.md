@@ -111,7 +111,7 @@ réussie. La durée de 300 secondes se mesure sur le jeton réellement émis.
 
 ## SLS-030
 
-Statut : [~] — plan, packaging, extraction ZIP et validation Node disponibles ; révisions à réaliser.
+Statut : [~] — CLI de packaging et composants qualifiés ; publication DEV intégrée, preuve authentifiée ouverte.
 
 Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
@@ -127,9 +127,14 @@ ajoute 36 scénarios réels : formats CJS/ESM, dépendances, confinement, logs,
 Le [checkpoint d'extraction](evidence/artifacts-dev-2026-11-06.json) ajoute
 112 contrôles réels : formats et refus, limites exactes, disque saturé,
 courses sur les chemins et la source, puis packaging/extraction/chargement
-Node des douze fonctions. L'upload authentifié, l'intégration aux révisions,
-l'admission globale et la réconciliation après crash du contrôle restent
-à réaliser et qualifier.
+Node des douze fonctions. Le [checkpoint du contrôle de publication](evidence/deployment-control-dev-2026-11-06.json)
+intègre les routes de préparation, upload, historique, rollback et suppression,
+la migration 003, le budget et la reprise. Huit groupes publics et trente
+contrôles réels de configuration/démarrage/panne passent sur l'image déployée.
+Le client authentifié échoue au prérequis de session SSO : aucun de ses onze
+groupes n'est déclaré réussi. Admission globale, expiration, limites de révisions,
+crash pendant upload/validation et arrêt pendant nettoyage restent à qualifier.
+La commande deploy, les vues de révisions et le moteur restent à réaliser.
 
 ## SLS-040
 

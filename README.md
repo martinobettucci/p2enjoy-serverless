@@ -8,8 +8,9 @@ sont disponibles dans **[qualification/](qualification/README.md)**, avec
 handlers, manifeste `serverless.yml`, Docker, tests et commandes d'exploitation.
 L'[adaptateur](adapter/README.md) prépare les plans et archives ZIP ; la
 validation Node dans Docker est disponible dans [runtime/](runtime/README.md),
-avec 36 scénarios réels réussis. La publication des révisions et le moteur
-d'invocation restent à implémenter. L'extracteur ZIP serveur dans
+avec 36 scénarios réels réussis. Les routes de publication, d'historique et de
+rollback sont déployées en DEV ; leurs parcours authentifiés restent à qualifier.
+Le moteur d'invocation reste à implémenter. L'extracteur ZIP serveur dans
 [control/](control/README.md) passe 112 contrôles réels, dont les limites,
 les erreurs de disque et les douze archives chargées ensuite par Node.
 Le composant de [stockage à quota](storage/README.md)
@@ -124,6 +125,7 @@ adapter/
 control/
   app/                    API, SSO, sessions, objets et droits
   app/artifacts.py         Extraction ZIP bornée et publication readonly
+  app/deployments.py       Candidats, validation Docker et publication SQLite
   artifacts-dev.sh         Construction et qualification de l'extracteur
   migrations/             Schéma SQLite versionné
   compose.spark.yml       Contrôle DEV sur le port 18090
@@ -135,6 +137,7 @@ e2e/
   login-ui.mjs            Accueil, clavier, responsive et SSO
   control-admin.mjs        Campagne API authentifiée
   control-ui.mjs           Parcours de gestion dans le navigateur
+  deployments.mjs          Publication et courses par les véritables API
 storage/
   main.go                 Proxy de quota FUSE sur les fichiers natifs
   client.py               Client de preuve dans un conteneur Docker isolé

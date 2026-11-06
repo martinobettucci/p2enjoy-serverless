@@ -12,14 +12,27 @@ Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
 ## Ordre de réalisation
 
-Prochaine intégration SLS-030 : migration 003 des candidats/révisions et
-UUID d'installation durable, coordination des uploads et réconciliation,
-routes authentifiées puis commande deploy de l'adaptateur. Configurer par
-propositions de cellule les trois paramètres hôtes/image décrits dans CONTROL
-avant de recréer le contrôle avec le montage du socket Docker. Sauvegarder
-la base par l'API de backup SQLite avant migration ; la sauvegarde conserve
-les permissions privées et reste dans le SPARK. Les preuves positives des
-routes exigent la session SSO réelle, toujours absente à ce stade.
+La migration 003 et les routes de publication sont intégrées au contrôle DEV.
+Les trois paramètres `SERVERLESS_STATE_HOST_PATH`, `SERVERLESS_DOCKER_SOCKET_HOST`
+et `SERVERLESS_RUNTIME_IMAGE` ont été proposés puis appliqués par la console
+de cellule. Le contrôle monte son état durable et le socket Docker rootless ;
+le runtime est désigné par son empreinte immuable. Le budget d’artefacts garde
+sa valeur par défaut de 4096 Mio. Aucun nouveau secret ni route n’est requis.
+
+Avant la première migration, la sauvegarde SQLite native
+`/srv/p2enjoy-serverless/state/backups/before-003-20261106T005940Z-5d7534.sqlite3`
+a été créée et vérifiée : intégrité correcte, versions 001/002, fichier 0600
+et dossier 0700. La base active porte les versions 001/002/003 et un UUID
+d’installation durable. Les anciennes images sont conservées ; un retour
+à une version antérieure de schéma exige l’arrêt du contrôle et une restauration
+explicite de sa sauvegarde, avec prise en compte des écritures postérieures.
+
+Huit groupes HTTPS publics et trente contrôles de démarrage/panne passent sur
+l’image déployée. La [preuve](evidence/deployment-control-dev-2026-11-06.json)
+recoupe 21 sources avec le SPARK et 14 fichiers embarqués, la configuration
+active, la sauvegarde et les deux services sains. Le client de publication
+s’arrête sur le prérequis absent de session SSO réelle. La commande deploy,
+la console de révisions et les preuves authentifiées restent à poursuivre.
 
 L'extraction serveur est construite depuis `control/Dockerfile.artifacts`
 et qualifiée par `e2e/artifacts.py` : 112 contrôles réels réussis le 6 novembre,
@@ -27,7 +40,7 @@ zéro échec et zéro test ignoré. Image, empreintes et périmètre figurent da
 [la preuve](evidence/artifacts-dev-2026-11-06.json). Depuis `control/`, lancer
 `bash artifacts-dev.sh build` puis `bash artifacts-dev.sh test`, en série.
 Ces commandes restent séparées du contrôle permanent et ne déclenchent aucune
-migration. L'image du contrôle en service reste inchangée.
+migration. Leurs résultats précèdent l’intégration HTTP décrite ci-dessus.
 Les notes README, CONTRIBUTORS et INSTALL de la cellule sont reproposées,
 appliquées par la console SPARK puis relues : elles décrivent ce composant,
 ses commandes et ses limites. Aucune variable, secret ou route supplémentaire.
@@ -35,9 +48,8 @@ ses commandes et ses limites. Aucune variable, secret ou route supplémentaire.
 L'image `runtime/` de validation Node et ses variantes originales sont construites
 sur le SPARK. Le pilote Docker passe 36 scénarios réels ; ses ressources de
 qualification sont nettoyées. Cette étape ne change pas le contrôle déployé.
-L'intégration du socket Docker
-et du chemin hôte des artefacts au contrôle sera appliquée avec les API de
-révision et leur migration, après ce checkpoint indépendant. Les répertoires
+Le socket Docker et le chemin hôte des artefacts sont maintenant intégrés
+au contrôle avec les API de révision et leur migration. Les répertoires
 `adapter/`, `runtime/`, `e2e/` et `qualification/artifacts/` sont présents sous
 `/srv/p2enjoy-serverless`. Les commandes d'exploitation figurent dans leurs README.
 

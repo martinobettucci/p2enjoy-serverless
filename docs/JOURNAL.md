@@ -697,3 +697,45 @@ Découpage retenu : migration et coordination, branchement aux routes et à la
 configuration de cellule, commande deploy, puis preuves authentifiées réelles
 et intégration console. Les contrats précisent les limites temporelles, les
 réservations, les diagnostics et l'archivage de fonction avant le premier code.
+
+La migration 003 et les routes sont maintenant déployées sur le SPARK DEV.
+La base a été sauvegardée par l’API SQLite avant migration ; intégrité, modes
+privés et versions antérieures ont été recoupés. Les trois variables hôtes/image
+passent par les propositions officielles puis leur application en console.
+Le socket rootless est monté dans le seul contrôle. Aucun secret ni route ajouté.
+
+La revue a corrigé trois défauts : un nettoyage Docker non confirmé conserve
+les fichiers et leur réservation ; les travaux bloquants sont rejoints avant
+la libération du verrou, même après annulations répétées ; une erreur SQLite
+de maintenance dégrade la santé et laisse la boucle périodique reprendre.
+La dernière propriété passe E2E avec un vrai verrou SQL. L’arrêt pendant
+nettoyage reste à qualifier ; la double annulation précise est relue sans être
+déclarée déclenchée par les signaux normaux du serveur ASGI.
+
+La première campagne opérationnelle étendue échoue dans son pilote : docker
+run lit littéralement les guillemets des fichiers de cellule, et la seconde
+instance refuse la configuration avant d’atteindre flock. Le scénario utilise
+désormais Compose comme le déploiement normal. La campagne complète repasse :
+30 contrôles, zéro échec, zéro skip, ressources temporaires nettoyées. Les huit
+groupes HTTPS publics passent, dont l’upload anonyme refusé avant lecture du
+corps. Les services contrôle et qualification restent healthy.
+
+Le pilote authentifié utilise les vraies API et le packager. La revue a fait
+ajouter la prise en charge immédiate des rejets des uploads concurrents,
+des contenus d’archives distincts et un changement de noms secrets avant
+rollback. La valeur d’un secret sous le même nom et le code effectivement
+exécuté après rollback devront encore être observés par le moteur. Le lancement
+du client échoue explicitement au prérequis de session SSO, aucune session
+n’étant enregistrée ; le navigateur d’autorisation 3998 est toujours vivant.
+Aucune de ces assertions authentifiées n’est comptée comme réussie.
+
+La preuve `evidence/deployment-control-dev-2026-11-06.json` recoupe 21 sources
+locales/distantes et 14 fichiers embarqués. Les valeurs actives correspondent
+aux fichiers officiels ; quatre secrets connus sont recherchés en mémoire
+dans les preuves et les sources sans correspondance. SLS-030 reste ouvert.
+
+README, CONTRIBUTORS et INSTALL sont proposés dans leurs fichiers .?, appliqués
+par la console du SPARK puis relus sans écart. Les notes distinguent les routes
+intégrées des parcours authentifiés non qualifiés. Les anciennes copies de
+pilotes sous control/ sont remplacées dans les instructions par e2e/.
+Le dépôt n’a pas de remote configuré ; ce checkpoint reste un commit local.

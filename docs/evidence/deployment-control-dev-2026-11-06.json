@@ -1,0 +1,286 @@
+{
+  "date": "2026-11-06T01:12:33.020108+00:00",
+  "unit": "SLS-030",
+  "unit_complete": false,
+  "target": "infra-serverless DEV",
+  "scope": "Routes publiques, démarrage, configuration, migration, verrou et reprise SQLite",
+  "operations": {
+    "image": "sha256:48026e714e2dbc03724abe876a01270a2c95f44e7a99a1ebb675b261b15effb8",
+    "completed": true,
+    "checks": [
+      {
+        "name": "Même image réelle, entrée HTTP et confinement Docker",
+        "status": "passed"
+      },
+      {
+        "name": "Trois migrations réelles, intégrité SQLite et UUID d’installation",
+        "status": "passed"
+      },
+      {
+        "name": "Second contrôle réel refusé par le verrou exclusif",
+        "status": "passed"
+      },
+      {
+        "name": "Configuration requise absente : SERVERLESS_PUBLIC_URL",
+        "status": "passed"
+      },
+      {
+        "name": "Configuration requise absente : OIDC_ISSUER",
+        "status": "passed"
+      },
+      {
+        "name": "Configuration requise absente : OIDC_CLIENT_ID",
+        "status": "passed"
+      },
+      {
+        "name": "Configuration requise absente : OIDC_CLIENT_SECRET",
+        "status": "passed"
+      },
+      {
+        "name": "Configuration requise absente : SERVERLESS_MASTER_KEY",
+        "status": "passed"
+      },
+      {
+        "name": "Configuration de publication absente : SERVERLESS_STATE_HOST_PATH",
+        "status": "passed"
+      },
+      {
+        "name": "Configuration de publication absente : SERVERLESS_DOCKER_SOCKET_HOST",
+        "status": "passed"
+      },
+      {
+        "name": "Configuration de publication absente : SERVERLESS_RUNTIME_IMAGE",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin de cellule relatif refusé : SERVERLESS_STATE_HOST_PATH",
+        "status": "passed"
+      },
+      {
+        "name": "Chemin de cellule relatif refusé : SERVERLESS_DOCKER_SOCKET_HOST",
+        "status": "passed"
+      },
+      {
+        "name": "Image mutable refusée",
+        "status": "passed"
+      },
+      {
+        "name": "Image immuable absente refusée",
+        "status": "passed"
+      },
+      {
+        "name": "Budget d’artefacts invalide : 511",
+        "status": "passed"
+      },
+      {
+        "name": "Budget d’artefacts invalide : 65537",
+        "status": "passed"
+      },
+      {
+        "name": "Budget d’artefacts invalide : invalid",
+        "status": "passed"
+      },
+      {
+        "name": "URL publique HTTP refusée",
+        "status": "passed"
+      },
+      {
+        "name": "Sous-chemin public refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Issuer étranger refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Clé maîtresse malformée refusée",
+        "status": "passed"
+      },
+      {
+        "name": "CIDR de proxy malformé refusé",
+        "status": "passed"
+      },
+      {
+        "name": "Clé différente refusée sur la base existante",
+        "status": "passed"
+      },
+      {
+        "name": "Métadonnées non inscriptibles refusées",
+        "status": "passed"
+      },
+      {
+        "name": "Reprise de la même base avec la clé officielle",
+        "status": "passed"
+      },
+      {
+        "name": "Verrou réel SQLite : refus 503 puis récupération",
+        "status": "passed"
+      },
+      {
+        "name": "Maintenance SQLite réellement bloquée : santé dégradée puis reprise automatique",
+        "status": "passed"
+      },
+      {
+        "name": "Écriture reprise et aucune valeur secrète dans les journaux",
+        "status": "passed"
+      },
+      {
+        "name": "Refus de validation journalisé sans valeur du corps",
+        "status": "passed"
+      }
+    ],
+    "cleanup": true,
+    "skipped": 0
+  },
+  "sources": {
+    "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+    "control/app/api.py": "dc73c8cee4e7d2fbfe98da21bfc517987fde442a758794054ec48a6859046824",
+    "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+    "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+    "control/app/config.py": "0e08503ad40c05ba72aed23bb96266770716de774a18d4c094f7746eff54e72f",
+    "control/app/db.py": "55bb45fe2c4eaaf29496de3b6515d689f69cb07be60a8d9fc4184534f67e3c79",
+    "control/app/deployments.py": "ff3b527eeafa7ff5a159d7a2716ba2795a938c74bf4c3eb88313e6c9e44e6a95",
+    "control/app/main.py": "ff669c4cc5d2cfb1981680c11774ac66ecd112938897039060c395c31bcfe4f5",
+    "control/app/models.py": "fef330910e4555a02ab2e452a48518c022e81c339041b0b854d9605dc07b0f9c",
+    "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+    "control/app/validator.py": "f7d21e712337581b9bf9c368afa1f8ec6136af5befd46db29571abcf168ad005",
+    "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+    "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+    "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+    "control/Dockerfile": "a739350a3b2551c1fd03d59cc7bece5c296d252e029785442dad59450332cc16",
+    "control/compose.spark.yml": "10d0857358cd0fb7c0b496a2765463594e99511db3400ecd9c78c803d9c76868",
+    "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+    "e2e/control-operations.py": "90bc71ccfbefdead4fc714cec43b53377cd89c52c465c82dc7017f344b1dbcd2",
+    "e2e/public.py": "65e150859921305566eda222c018dd2e79cd4e9f3f9dd9d5b9c5ca9591d972bf",
+    "e2e/deployments.mjs": "520e5e2368436ec785f346d956987c1d92eb1eb059c192c83ace46bfcbf604ff",
+    "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e"
+  },
+  "baked_sources": {
+    "app/main.py": "ff669c4cc5d2cfb1981680c11774ac66ecd112938897039060c395c31bcfe4f5",
+    "app/models.py": "fef330910e4555a02ab2e452a48518c022e81c339041b0b854d9605dc07b0f9c",
+    "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+    "app/config.py": "0e08503ad40c05ba72aed23bb96266770716de774a18d4c094f7746eff54e72f",
+    "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+    "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+    "app/validator.py": "f7d21e712337581b9bf9c368afa1f8ec6136af5befd46db29571abcf168ad005",
+    "app/db.py": "55bb45fe2c4eaaf29496de3b6515d689f69cb07be60a8d9fc4184534f67e3c79",
+    "app/deployments.py": "ff3b527eeafa7ff5a159d7a2716ba2795a938c74bf4c3eb88313e6c9e44e6a95",
+    "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+    "app/api.py": "dc73c8cee4e7d2fbfe98da21bfc517987fde442a758794054ec48a6859046824",
+    "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+    "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+    "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928"
+  },
+  "services": {
+    "p2enjoy-serverless-dev-control-1": {
+      "healthy": true,
+      "image": "sha256:48026e714e2dbc03724abe876a01270a2c95f44e7a99a1ebb675b261b15effb8"
+    },
+    "p2enjoy-qualification-dev-qualification-1": {
+      "healthy": true,
+      "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2"
+    }
+  },
+  "configuration_matches_official_files": true,
+  "configuration": {
+    "SERVERLESS_STATE_HOST_PATH": "/srv/p2enjoy-serverless/state",
+    "SERVERLESS_DOCKER_SOCKET_HOST": "/run/user/1001/docker.sock",
+    "SERVERLESS_RUNTIME_IMAGE": "sha256:2868ee63f3ab1682fbf6c0f94f535af83c8b647d91e3937e1ce70bc83ef07efd"
+  },
+  "database": {
+    "versions": [
+      "001_control.sql",
+      "002_login_limits.sql",
+      "003_deployments.sql"
+    ],
+    "integrity": "ok",
+    "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+    "deployments": 0,
+    "revisions": 0
+  },
+  "backup": {
+    "path": "/srv/p2enjoy-serverless/state/backups/before-003-20261106T005940Z-5d7534.sqlite3",
+    "mode": "0600",
+    "directory_mode": "0700",
+    "integrity": "ok",
+    "versions": [
+      "001_control.sql",
+      "002_login_limits.sql"
+    ]
+  },
+  "remaining_proof_containers": 0,
+  "remaining_artifact_candidates": 0,
+  "remaining_validation_channels": 0,
+  "known_secrets_checked": 4,
+  "secret_matches": 0,
+  "public": {
+    "target": "https://serverless-dev.lelabs.tech",
+    "timestamp": 1793927412.4835236,
+    "completed": true,
+    "checks": [
+      {
+        "name": "Découverte OIDC et clés asymétriques réelles",
+        "status": "passed",
+        "duration_seconds": 0.11
+      },
+      {
+        "name": "TLS, santé et en-têtes",
+        "status": "passed",
+        "duration_seconds": 0.058
+      },
+      {
+        "name": "Document et ressources de la console",
+        "status": "passed",
+        "duration_seconds": 0.32
+      },
+      {
+        "name": "Refus anonymes",
+        "status": "passed",
+        "duration_seconds": 0.252
+      },
+      {
+        "name": "Callbacks malformés",
+        "status": "passed",
+        "duration_seconds": 0.246
+      },
+      {
+        "name": "Flows réels et refus du fournisseur",
+        "status": "passed",
+        "duration_seconds": 0.463
+      },
+      {
+        "name": "Corps bornés et erreurs expurgées",
+        "status": "passed",
+        "duration_seconds": 0.279
+      },
+      {
+        "name": "Routes de révision et upload anonyme refusé avant lecture",
+        "status": "passed",
+        "duration_seconds": 0.371
+      }
+    ],
+    "skipped": 0
+  },
+  "authenticated": {
+    "completed": false,
+    "prerequisite_failed": true,
+    "error": "Session SSO administrateur réelle absente ou illisible",
+    "checks": [],
+    "skipped": 0
+  },
+  "limitations": [
+    "Publication, rollback et droits authentifiés non qualifiés : session SSO réelle absente",
+    "Admission globale, expiration, limites de révisions et reprise après crash pendant upload/validation à qualifier",
+    "Arrêt pendant nettoyage et exclusivité à qualifier ; annulations répétées relues, pas déclenchées E2E",
+    "Déploiement CLI, console de révisions et moteur d’invocation à réaliser",
+    "Rollback du code exécuté et conservation de la valeur secrète sous le même nom à qualifier"
+  ],
+  "spark_notes": {
+    "applied_through_console": true,
+    "verified": {
+      "INSTALL.md": "e59f128a73f85dfadd966e305ee76e901294669f17769c486a38eb9bbcdf4bf7",
+      "CONTRIBUTORS.md": "85582a25ed919f213cc85f51620a48cd1c1a317b7afab66402f3954874cc4183",
+      "README.md": "69f952c5dd7cd2b6d8c8c9bb970899ca72f43ea4eb6ca3b6ce5b2066cf463933"
+    }
+  }
+}

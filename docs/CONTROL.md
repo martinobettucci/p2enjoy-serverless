@@ -92,8 +92,13 @@ origine/IP et la gestion de jetons sont réservées aux sessions admin.
   d'un service vide. Le Read du service autorise sa lecture expurgée.
 - `/api/services/{id}/configuration` : variables et secrets globaux, droit
   Update non restreint à certaines fonctions. La politique d'accès est exclue.
-- `/api/services/{id}/functions` et `/api/functions/{id}` : CRUD des brouillons
-  de fonctions. Le code et son activation arrivent avec SLS-030/040.
+- `/api/services/{id}/functions` et `/api/functions/{id}` : CRUD des fonctions
+  et de leur configuration. Le handler d’une révision active change par déploiement.
+- `/api/functions/{id}/deployments`, `/api/deployments/{id}` et sa route
+  `/artifact` : préparation, état et réception ZIP authentifiée. Historique,
+  rollback et suppression sous `/api/functions/{id}/revisions` et `/rollback`,
+  selon le [contrat de publication](DEPLOYMENT.md). Ces routes sont déployées
+  en DEV, avec qualification authentifiée encore ouverte.
 - `/api/services/{id}/tokens`, `/api/tokens/{id}/revoke` et
   `/api/tokens/{id}/rotate` : administration des jetons. Valeur complète
   uniquement dans la réponse de création/rotation ; ensuite id, préfixe,
@@ -167,3 +172,11 @@ ni le contrôle, ni sa base, ni le fournisseur SSO par une simulation.
 Chaque rapport de campagne comporte un indicateur de fin `completed` et un
 échec explicite si le pilote s'interrompt. Un rapport partiel ne constitue
 jamais une campagne réussie, même si ses contrôles précédents sont verts.
+
+Le [checkpoint de publication](evidence/deployment-control-dev-2026-11-06.json)
+conserve huit groupes publics et trente contrôles de panne/démarrage réussis
+sur la même image déployée. Ils comprennent migration 003, refus d’un second
+propriétaire de l’état, paramètres hôtes/image/budget, santé dégradée lors
+d’un verrou SQLite réel et reprise automatique de la maintenance. Le client
+authentifié s’arrête en échec sur l’absence de session SSO ; ce n’est pas
+une preuve des opérations de publication ni de leurs droits.

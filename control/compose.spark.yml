@@ -11,7 +11,8 @@ services:
       - /run/spark/secrets
     network_mode: host
     volumes:
-      - /srv/p2enjoy-serverless/state:/state
+      - ${SERVERLESS_STATE_HOST_PATH:?Chemin hôte requis}:/state
+      - ${SERVERLESS_DOCKER_SOCKET_HOST:?Socket rootless requis}:/docker.sock
     read_only: true
     tmpfs:
       - /tmp:size=16m,mode=1777,noexec,nosuid

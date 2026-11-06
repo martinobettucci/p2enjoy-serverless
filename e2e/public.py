@@ -163,6 +163,28 @@ def bounded_bodies():
     finally:connection.close()
 
 
+# @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
+# @verifies docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
+def deployment_refusals():
+    key=str(uuid.uuid4());client=Client()
+    status(client.call('/api/functions/'+key+'/deployments','POST',{'config':{'handler':'handler.handler'}}),401)
+    status(client.call('/api/deployments/'+key),401)
+    status(client.call('/api/functions/'+key+'/revisions'),401)
+    status(client.call('/api/functions/'+key+'/rollback','POST',{'revision_id':str(uuid.uuid4())}),401)
+    status(client.call('/api/functions/'+key+'/revisions/'+str(uuid.uuid4()),'DELETE'),401)
+    connection=http.client.HTTPSConnection(urllib.parse.urlsplit(BASE).hostname,timeout=5)
+    try:
+        # Declare a genuine large HTTP body, send none: auth must answer before requesting it.
+        connection.putrequest('PUT','/api/deployments/'+key+'/artifact')
+        connection.putheader('Content-Type','application/zip')
+        connection.putheader('Content-Length',str(64*1024**2))
+        connection.putheader('Expect','100-continue');connection.endheaders()
+        response=connection.getresponse()
+        assert response.status==401,f'Upload anonyme avant lecture : HTTP {response.status}'
+        response.read()
+    finally:connection.close()
+
+
 if __name__=='__main__':
     output=Path('.local/e2e/public.json');output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text('{"completed":false,"error":"Campagne non terminée"}\n')
@@ -171,7 +193,8 @@ if __name__=='__main__':
         for name,fn in [('Découverte OIDC et clés asymétriques réelles',discovery),
                         ('TLS, santé et en-têtes',health),('Document et ressources de la console',assets),
                         ('Refus anonymes',anonymous),('Callbacks malformés',bad_callbacks),
-                        ('Flows réels et refus du fournisseur',real_flows),('Corps bornés et erreurs expurgées',bounded_bodies)]:check(name,fn)
+                        ('Flows réels et refus du fournisseur',real_flows),('Corps bornés et erreurs expurgées',bounded_bodies),
+                        ('Routes de révision et upload anonyme refusé avant lecture',deployment_refusals)]:check(name,fn)
         completed=True
     finally:
         output.write_text(json.dumps({'target':BASE,'timestamp':time.time(),'completed':completed,'checks':results,'skipped':0},indent=2,ensure_ascii=False)+'\n')

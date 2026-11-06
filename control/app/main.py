@@ -19,6 +19,7 @@ from .api import router
 from .auth import Identity,SESSION_COOKIE,FLOW_COOKIE
 from .config import Settings,Vault
 from .db import Database,audit
+from .deployments import Deployments
 from .network import forwarded_addresses
 
 logger=logging.getLogger('p2enjoy.control')
@@ -35,7 +36,8 @@ class BodyLimit:
             message=await receive()
             if message['type']=='http.request':
                 total+=len(message.get('body',b''))
-                if total>256*1024:raise HTTPException(413,'Le corps de requête dépasse 256 Kio.')
+                limit=64*1024**2 if scope.get('state',{}).get('artifact_upload_authorized') is True else 256*1024
+                if total>limit:raise HTTPException(413,'Le corps de requête dépasse sa limite autorisée.')
             return message
         await self.app(scope,limited,send)
 
@@ -44,26 +46,33 @@ settings=Settings.load()
 database=Database(settings.state_dir)
 vault=Vault(settings.master_key)
 identity=Identity(settings,database,vault)
+deployments=Deployments(settings,database,identity,vault)
 
 
 @asynccontextmanager
 async def lifespan(app):
-    database.migrate()
-    marker={'purpose':'p2enjoy-serverless-control','version':1}
-    with database.transaction() as db:
-        row=db.execute("SELECT value FROM security_metadata WHERE name='master-key'").fetchone()
-        if row:
-            try:valid=vault.open(row['value'])==marker
-            except (InvalidToken,ValueError):valid=False
-            if not valid:raise RuntimeError('La clé maîtresse ne correspond pas à cette base.')
-        else:db.execute('INSERT INTO security_metadata VALUES (?,?)',('master-key',vault.seal(marker)))
-    try:yield
-    finally:await identity.close()
+    await deployments.start()
+    try:
+        database.migrate()
+        marker={'purpose':'p2enjoy-serverless-control','version':1}
+        with database.transaction() as db:
+            row=db.execute("SELECT value FROM security_metadata WHERE name='master-key'").fetchone()
+            if row:
+                try:valid=vault.open(row['value'])==marker
+                except (InvalidToken,ValueError):valid=False
+                if not valid:raise RuntimeError('La clé maîtresse ne correspond pas à cette base.')
+            else:db.execute('INSERT INTO security_metadata VALUES (?,?)',('master-key',vault.seal(marker)))
+        await deployments.ready()
+        yield
+    finally:
+        await deployments.close()
+        await identity.close()
 
 
 app=FastAPI(title='P2Enjoy Serverless',lifespan=lifespan,docs_url=None,redoc_url=None,openapi_url=None)
 app.add_middleware(BodyLimit)
 app.include_router(router(database,identity,vault))
+app.include_router(deployments.routes())
 web_root=Path(__file__).parent.parent/'web'
 app.mount('/assets',StaticFiles(directory=web_root/'assets'),name='assets')
 
@@ -102,6 +111,9 @@ async def http_error(request:Request,error:HTTPException):
                     table='functions' if '/functions/' in route else 'service_tokens'
                     row=database.one(f'SELECT service_id FROM {table} WHERE id=?',(key,))
                     if row:service_id=row['service_id']
+                elif route.startswith('/api/deployments/'):
+                    row=database.one('SELECT service_id,function_id FROM deployments WHERE id=?',(key,))
+                    if row:service_id=row['service_id'];key=row['function_id']
             with database.transaction() as db:
                 audit(db,actor,'request.denied',key,service_id,{'status':error.status_code,'route':route})
     response=JSONResponse({'error':error.detail},status_code=error.status_code,headers=error.headers)
@@ -138,6 +150,7 @@ async def database_error(request:Request,error:sqlite3.OperationalError):
 @app.get('/healthz')
 async def health():
     database.one('SELECT 1')
+    if deployments.cleanup_error:raise HTTPException(503,'Le nettoyage des artefacts doit être repris.')
     return {'status':'ok','component':'control','version':'0.1.0-dev'}
 
 
