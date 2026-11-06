@@ -1637,3 +1637,17 @@ l’absence de ressources actives de campagne. Trois notes sont appliquées et
 relues par la console normale. SLS-061 est clos ; SLS-060 et l’objectif global
 restent ouverts. Aucun registre d’incohérences ne subsiste pour cette tranche.
 Aucun remote Git n’est configuré ; le commit reste local.
+
+### Manuel accessible depuis l’application — décision du 7 novembre
+
+La demande révèle une lacune : le manuel est maintenu dans docs/manual.md mais
+aucune page de console ni entrée Docker ne l’embarque. L’exploration indépendante
+confirme le constat. SLS-062 le raccorde au build Vite et à une destination de
+navigation avec sommaire. Le document unique évite une divergence éditoriale ;
+le rendu à la construction évite une route serveur et un parseur navigateur.
+Ce texte d’usage n’est pas confidentiel. Les liens de chantier sont retirés du
+guide ; les liens non servis sont refusés au build. markdown-it 15.0.3 est retenu
+comme dépendance de construction verrouillée (MIT, publication vérifiée dans le
+registre npm) ; audit des dépendances et preuves réelles précèdent la livraison.
+Les deux design systems ont été lus ; la publication UI reprendra après cette
+unité. Aucun remote Git n’est configuré.

@@ -250,3 +250,11 @@ Tranche bornée de SLS-060 : [contrat de consultation](CONSOLE_EXECUTION.md).
 Facettes de la fonction, mesures distinctes des allocations, pagination réelle,
 états et journaux expurgés, focus, mobile, erreur/reprise et preuves de console.
 La publication depuis l’UI, purge/cache et crons appartiennent aux autres tranches.
+
+## SLS-062
+
+Statut : [~] — manuel maintenu dans le dépôt ; accès intégré en cours.
+
+[Contrat du manuel intégré](CONSOLE_MANUAL.md). Source éditoriale unique,
+construction automatique, entrée de navigation, sommaire et ancres accessibles,
+guide autonome, rendu responsive et preuve E2E de concordance avec le document.

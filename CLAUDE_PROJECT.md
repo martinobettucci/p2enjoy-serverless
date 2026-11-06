@@ -57,6 +57,12 @@ qu’un nom générique comme `timeout` confondrait.
 
 ## Application de la méthode
 
+Le manuel d’usage canonique est `docs/manual.md`. Toute modification d’un
+comportement utilisateur met à jour ce document dans le même changement.
+La console affiche le contenu généré depuis ce fichier à la construction,
+selon `docs/CONSOLE_MANUAL.md` ; aucune copie éditoriale parallèle n’est maintenue.
+La qualification recoupe son contenu et son empreinte avec l’application déployée.
+
 La méthode est importée depuis `P2Enjoy/software-factory-base` ; provenance et
 adaptations : `docs/METHODE.md`. La routine planifiée est inactive. Aucun
 bootstrap de FORGE, démon local, contournement TLS ou lancement PREPROD/PROD

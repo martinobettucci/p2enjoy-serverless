@@ -97,3 +97,12 @@ nom maximal, les mesures partielles, les journaux longs et les états d’erreur
 sont lisibles ; la capture mobile du namespace montre encore le chargement.
 Les captures pleine page dépassant le viewport distinguent cette extension
 du rendu effectif du voile de modale.
+
+## Manuel d’usage SLS-062
+
+Le [contrat du manuel](CONSOLE_MANUAL.md) ajoute une destination de lecture dans
+la navigation principale. Le texte est borné à 72ch pour la lisibilité ; le sommaire
+utilise la largeur de navigation de 240 px sur desktop et s’empile avant le guide
+sous 1024 px. Titres ancrés et focus explicite suivent les §§5.1, 9 et 1.5 bis
+du socle. Le contenu est généré depuis `docs/manual.md` lors de la construction.
+Implémentation et captures restent à qualifier.
