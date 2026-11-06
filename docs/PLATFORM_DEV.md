@@ -265,7 +265,8 @@ vérifie 62 sources locales/distantes, 21 fichiers embarqués, le paquet protég
 la configuration officielle et les 73 archives de publication conservées.
 Les trois notes de cellule sont appliquées par sa console puis relues.
 Le raccordement des mutations de gestion et publication est décrit dans la
-baseline suivante. L’admission et l’invocation publiques restent à réaliser.
+baseline suivante. Les admissions et invocations sont décrites dans la
+baseline du moteur ci-dessous.
 
 La migration est additive, mais l'ancien agent n'accepte pas la version 003.
 Un retour à son paquet exige une restauration explicite et cohérente du
@@ -309,7 +310,8 @@ sont vérifiés. Les sept captures JPEG sont relues ; les trois notes de cellule
 sont appliquées par sa console puis relues. Aucun bail, montage, allocation,
 intention, conteneur d’instance/validation ni espace de test ne subsiste.
 Ce checkpoint précède le raccordement du moteur décrit ci-dessous. Les
-commandes de purge/cache et les vues d’observation de la console restent à réaliser.
+commandes de purge/cache restent à réaliser ; les vues d’observation sont
+livrées dans la baseline de console ci-dessous.
 
 ## Déploiement du moteur en qualification
 
@@ -339,7 +341,7 @@ Le banc corrige une course de création WAL/SHM pendant ses lectures root :
 les accès SQLite des gardes emploient l’identité effective du contrôle et
 restaurent root avant les actions système. La preuve conserve les échecs
 initiaux et les diagnostics séparément du bilan de la campagne finale.
-Les vues de révisions/exécution, les commandes de purge/cache, les crons et
+Les vues de révisions, les commandes de purge/cache, les crons et
 les preuves résiduelles restent ouverts dans le backlog.
 
 Un retour à une ancienne image exige d'abord un drainage confirmé et l'absence
@@ -347,3 +349,22 @@ de réservation ou invocation active. Une restauration de base ne rejoue jamais
 les appels interrompus et doit tenir compte des écritures métier postérieures.
 Le répertoire privé /state/execution est possédé par l'installation et est
 réconcilié avec ses labels Docker et baux avant réouverture des admissions.
+
+## Baseline de consultation des exécutions
+
+Le 7 novembre, l’image du contrôle devient `sha256:ff953f8e39871c060618482f6ecb4a88fc8026d2da93f80efe1565f83be30b21`. Les fichiers Python/SQL
+embarqués sont identiques à ceux de la preuve moteur ; les ressources web
+ajoutent les facettes Instances et Invocations. Le schéma reste 005 et les
+valeurs officielles consommées sont recoupées avec la cellule.
+
+La [preuve courante](evidence/console-execution-dev-2026-11-07.json) passe 40 groupes
+dans quatre campagnes sérielles : 8 publics, 9 de connexion, 11 de gestion et
+12 propres aux observations. Elle recoupe 96 sources locales/distantes, 27
+fichiers embarqués, 286 archives de code conservées et 25 captures relues.
+Les trois notes sont appliquées puis relues par la console SPARK. Les fonctions
+de campagne, instances, réseaux, baux, montages et espaces temporaires sont
+libérés ; les archives de code et l’historique suivent leur rétention normale.
+
+La publication depuis l’UI, les commandes de purge/cache, les crons et les
+preuves résiduelles du backlog restent ouverts. La commande de qualification
+de cette tranche est `python3 -B e2e/execution-suite.py --scope console`.

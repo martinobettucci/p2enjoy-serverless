@@ -1,6 +1,7 @@
 # @spec docs/BACKLOG.md#sls-040 | docs/ADMISSION.md
 # @verifies docs/BACKLOG.md#sls-040 | docs/ADMISSION.md
 """Serial DEV qualification with fresh reports bound to sources and deployed image."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -16,6 +17,7 @@ REPORT=ROOT/'.local/e2e/execution-regressions.json'
 def source_hashes():
     files=[p for folder,pattern in [('control/app','*.py'),('control/migrations','*.sql'),('storage','*.py'),('storage/migrations','*.sql'),('runtime','*.mjs')] for p in (ROOT/folder).glob(pattern)]
     files += [ROOT/p for p in ['control/Dockerfile','control/requirements.txt','control/compose.spark.yml','control/dev.sh','runtime/Dockerfile','runtime/compose.spark.yml','runtime/dev.sh','storage/main.go','storage/go.mod','storage/go.sum','storage/dev.sh','storage/Dockerfile','qualification/artifacts/volume-operations.cjs','qualification/artifacts/public-invocation.cjs','qualification/artifacts/invoke.cjs','web/package.json','web/package-lock.json','web/index.html']]
+    files += [ROOT/'qualification/artifacts/observation.cjs']
     files += [p for p in (ROOT/'web/src').glob('*') if p.is_file()]
     files += [p for p in (ROOT/'e2e').iterdir() if p.suffix in ('.py','.mjs')]
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
@@ -59,14 +61,47 @@ CASES=[
  ('public-invocations',['node','e2e/public-invocations.mjs'],'.local/e2e/public-invocations.json',False),
 ]
 
+def verify_report(name,path,is_remote,expected_hash):
+    if is_remote:
+        script='from pathlib import Path;import sys;sys.stdout.buffer.write(Path('+repr(REMOTE+path)+').read_bytes())'
+        contents=subprocess.check_output(remote(['python3','-B','-c',script],'root'))
+    else:contents=(ROOT/path).read_bytes()
+    assert hashlib.sha256(contents).hexdigest()==expected_hash,'Rapport changé après le relevé'
+    result=json.loads(contents)
+    assert result['completed'] is True and result['skipped']==0,'Campagne incomplète ou ignorée'
+    expected={'control-operations':55,'function-storage':14,'runtime-instances':31,'instance-lifecycle':11,
+              'runtime-validation':36,'managed-storage':14,'control-admin':19,'control-ui':11,
+              'deployments':11,'adapter-deploy':7,'publication-recovery':4,'public':8,
+              'public-invocations':31,'login-ui':9,'execution-ui':12}
+    checks=result.get('checks',result.get('results'))
+    assert isinstance(checks,list) and len(checks)==expected[name],'Nombre de groupes inattendu'
+    if name=='login-ui':assert all(isinstance(row,str) and row for row in checks)
+    else:assert all(row['status']=='passed' for row in checks),'Groupe échoué'
+    assert not result.get('failed') and not result.get('failures') and not result.get('cleanupErrors')
+    if name not in ('runtime-validation','public','login-ui','control-ui','control-admin'):
+        assert result['cleanup'] is True,'Nettoyage incomplet'
+    if name in ('control-ui','execution-ui'):assert result['faults']==[] and result['cleanupErrors']==[]
+    return len(checks)
+
 def main():
+    # @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--scope',choices=('engine','console'),default='engine')
+    scope=parser.parse_args().scope
+    report=REPORT if scope=='engine' else ROOT/'.local/e2e/console-execution-regressions.json'
+    cases=CASES if scope=='engine' else [
+        next(row for row in CASES if row[0]=='public'),
+        ('login-ui',['node','e2e/login-ui.mjs'],'.local/e2e/login-ui.json',False),
+        next(row for row in CASES if row[0]=='control-ui'),
+        ('execution-ui',['node','e2e/execution-ui.mjs'],'.local/e2e/execution-ui.json',False),
+    ]
     records=[];baseline=None
     def save(done=False):
-        temporary=REPORT.with_suffix('.tmp')
-        temporary.write_text(json.dumps({'completed':done,'serial':True,'commands':records},ensure_ascii=False,indent=2)+'\n')
-        temporary.replace(REPORT)
-    REPORT.parent.mkdir(parents=True,exist_ok=True,mode=0o700);save()
-    for name,command,path,is_remote in CASES:
+        temporary=report.with_suffix('.tmp')
+        temporary.write_text(json.dumps({'completed':done,'serial':True,'scope':scope,'commands':records},ensure_ascii=False,indent=2)+'\n')
+        temporary.replace(report)
+    report.parent.mkdir(parents=True,exist_ok=True,mode=0o700);save()
+    for name,command,path,is_remote in cases:
         before=snapshot(path,is_remote)
         if baseline is None:baseline={k:before[k] for k in ('image','source_sha256')}
         assert all(before[k]==v for k,v in baseline.items()),'Image ou sources changées avant campagne'
@@ -79,7 +114,8 @@ def main():
         after=snapshot(path,is_remote);record['after']=after;save()
         assert all(after[k]==v for k,v in baseline.items()),'Image ou sources changées pendant campagne'
         assert before['report']['sampled_at_ns']<=after['report']['mtime_ns']<=after['report']['sampled_at_ns'],'Rapport non régénéré par la campagne'
-        record['fresh_report_verified']=True;save()
+        record['passed_groups']=verify_report(name,path,is_remote,after['report']['sha256'])
+        record['fresh_report_verified']=True;record['report_content_verified']=True;save()
     save(True)
 
 if __name__=='__main__':main()

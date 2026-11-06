@@ -158,3 +158,11 @@ Les rapports frais sont liés à l’image et aux sources locales/distantes avan
 et après chaque commande. Les prérequis et fautes ciblées sont décrits dans
 [e2e](../e2e/README.md). La limite HTTP/1.1 du proxy est explicitée dans
 [ADMISSION](../docs/ADMISSION.md#budgets-et-attente).
+
+## Consultation des exécutions
+
+La console présente les facettes Instances et Invocations dans la fiche de
+fonction. Les deux API d’observation sont consommées avec la session admin ;
+les journaux se déplient dans le flux. La [preuve de console](../docs/evidence/console-execution-dev-2026-11-07.json)
+passe 40 groupes réels et vérifie l’identité du backend avec celui de la preuve
+moteur. Commande depuis le poste : `python3 -B e2e/execution-suite.py --scope console`.

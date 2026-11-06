@@ -196,8 +196,8 @@ dans la suite finale : budgets CPU/RAM/instances, 128 réceptions, générations
 déconnexions, contention SQLite, SIGKILL et arrêt gracieux sans rejeu.
 Les scénarios échoués pendant le développement restent conservés séparément.
 La rétention à sept jours/10 000 observations et les chemins résiduels de
-nettoyage/reprise doivent encore recevoir leurs preuves ciblées ; les vues
-d’exécution sont ouvertes dans SLS-060.
+nettoyage/reprise doivent encore recevoir leurs preuves ciblées. Les vues
+d’exécution sont livrées et vérifiées par SLS-061.
 
 ## SLS-050
 
@@ -231,7 +231,7 @@ restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls compos
 
 ## SLS-060
 
-Statut : [ ] — console et campagne complète.
+Statut : [~] — gestion et consultation des exécutions livrées ; publication et campagne transversale ouvertes.
 
 Parcours d'administration sur les API réelles : connexion, objets, jetons,
 code, variables/secrets, limites, état, stockage, historique et journaux.
@@ -242,7 +242,9 @@ notes SPARK, installation/reprise, preuves et backlog. Zéro échec et zéro ski
 
 ## SLS-061
 
-Statut : [~] — vues d’instances et d’invocations en cours de réalisation.
+Statut : [x] — facettes déployées ; 40 groupes réels réussis, zéro échec/skip,
+25 captures relues, sources et image recoupées, nettoyages confirmés.
+[Preuve](evidence/console-execution-dev-2026-11-07.json).
 
 Tranche bornée de SLS-060 : [contrat de consultation](CONSOLE_EXECUTION.md).
 Facettes de la fonction, mesures distinctes des allocations, pagination réelle,

@@ -56,7 +56,7 @@ function Shell({user}) {
   let view = <Namespaces/>;
   if (parts[0] === 'console' && parts[1] === 'namespaces' && parts[2]) view = <Namespace id={parts[2]}/>;
   else if (parts[0] === 'console' && parts[1] === 'services' && parts[2]) view = <Service id={parts[2]} tab={parts[3] || 'functions'}/>;
-  else if (parts[0] === 'console' && parts[1] === 'functions' && parts[2]) view = <FunctionPage id={parts[2]}/>;
+  else if (parts[0] === 'console' && parts[1] === 'functions' && parts[2]) view = <FunctionPage id={parts[2]} tab={parts[3]}/>;
   else if (parts.length) view = <><h1>Page introuvable</h1><a href="/">Revenir aux namespaces</a></>;
   return <><a className="skip-link" href="#main">Aller au contenu</a>
     {menu && <div className="nav-veil" onClick={closeMenu} aria-hidden="true"/>}

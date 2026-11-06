@@ -106,6 +106,14 @@ elif mode=='hold-database':
         assert ready and sys.stdin.readline().strip()=='release','release_required'
     finally:
         db.close();emit({'event':'writer-released'})
+elif mode=='kill-instance':
+    # @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
+    identifier=sys.argv[3];assert str(UUID(identifier))==identifier
+    before=inspect()
+    matches=[row for row in before['containers'] if row['instance_id']==identifier and row['running']]
+    assert len(matches)==1,'owned_running_instance_required'
+    docker('kill',matches[0]['id'])
+    emit({'killed_instance_id':identifier,'container_id':matches[0]['id']})
 elif mode=='graceful-stop':
     peer=sys.argv[3];assert str(UUID(peer))==peer and peer!=function
     with connect() as db:

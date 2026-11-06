@@ -1,6 +1,8 @@
 # Consultation des exécutions dans la console
 
-Contrat SLS-061, tranche de SLS-060, en cours de réalisation.
+Contrat SLS-061, tranche de SLS-060, implémenté et vérifié sur DEV.
+[Preuve](evidence/console-execution-dev-2026-11-07.json) : 12 groupes propres aux
+facettes et 28 de régression, zéro échec/skip, 25 captures relues.
 
 ## Parcours et données
 

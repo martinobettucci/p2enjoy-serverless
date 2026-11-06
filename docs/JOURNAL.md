@@ -1599,3 +1599,41 @@ sont persistées avant implémentation. Aucun remote Git n’est configuré.
 La relecture détecte deux descriptions périmées : CONTROL présentait encore les
 paramètres comme seulement stockés et e2e annonçait la qualification finale en
 cours. Ces descriptions sont corrigées vers la preuve moteur déjà enregistrée.
+
+### Console des exécutions — qualification du 7 novembre
+
+Les facettes partagent l’identité de fonction et les sections de configuration
+existantes. La revue corrige le focus d’Actualiser lors du recalage automatique
+d’une page disparue, puis renforce les preuves de mesures rendues, défilement
+clavier et suivi des créations en cas de navigation échouée. Les lectures
+de corps Playwright après navigation échouaient réellement ; le banc retient
+le statut et retrouve l’objet par son nom exact dans l’API avant de contrôler
+la destination. Les promesses de réponse sont jointes immédiatement aux gestes.
+
+Les tentatives initiales ont révélé des prérequis de banc : If-Match à la
+publication, mesures Docker parfois partielles, attente des lignes effectivement
+rendues après pagination et drainage de génération avant un appel avec file
+réglée à zéro. Les rapports échoués et leurs nettoyages restent sous .local/e2e.
+Un premier passage ciblé termine douze groupes. La capture pleine page du
+journal est ensuite prise depuis le haut de page, conservant son défilement
+interne, pour éviter l’inclusion hors viewport du lien d’évitement fixe.
+
+La revue du runner détecte qu’un exit zéro ne suffisait pas à établir completed.
+Il relit désormais le JSON dont l’empreinte est recoupée : nombre attendu, états,
+fin, échecs/skips et nettoyage selon le schéma. La suite finale termine ses
+quatre campagnes avec 40 groupes réussis, zéro échec et zéro skip ; chaque
+rapport est frais et son contenu validé. L’image finale est `sha256:ff953f8e39871c060618482f6ecb4a88fc8026d2da93f80efe1565f83be30b21`.
+
+Le principal observe les douze nouvelles captures ; le vérificateur observe
+les sept captures de gestion et six de connexion. Leurs SHA256 sont recoupés ;
+l’état Git avant/après cette vérification est identique. Les vingt-cinq vues
+ne présentent pas d’anomalie bloquante dans les états capturés. Les limites de
+capture pleine page et l’état de chargement du namespace mobile sont nommés.
+
+La preuve console-execution-dev-2026-11-07.json vérifie 96 sources, 27 fichiers
+embarqués, 286 archives conservées, ressources servies et configuration
+officielle. Elle confirme l’identité du backend avec la preuve moteur et
+l’absence de ressources actives de campagne. Trois notes sont appliquées et
+relues par la console normale. SLS-061 est clos ; SLS-060 et l’objectif global
+restent ouverts. Aucun registre d’incohérences ne subsiste pour cette tranche.
+Aucun remote Git n’est configuré ; le commit reste local.

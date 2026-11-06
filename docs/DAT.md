@@ -257,3 +257,14 @@ Sources : ce dépôt uniquement. Cible : cellule `infra-serverless` décrite dan
 `/srv/p2enjoy-serverless/qualification`. Docker est piloté par `spark-docker`.
 Les notes se proposent sous `/etc/spark/notes/*.md.?`, sans modifier les notes
 gérées par la console. Aucun accès d'administration à la FORGE.
+
+## Consultation des exécutions
+
+La fiche React de fonction possède trois destinations : Configuration,
+Instances et Invocations. Les deux dernières utilisent les routes d’observation
+existantes, cinq lignes par page et rafraîchissement manuel. Les détails de
+journal sont natifs et rendus comme texte ; aucune mesure manquante ne devient
+une allocation ou un zéro. Le [contrat](CONSOLE_EXECUTION.md) est vérifié par
+la [preuve de console](evidence/console-execution-dev-2026-11-07.json), qui recoupe
+le backend inchangé avec la preuve moteur, les nouvelles ressources web et
+les parcours réels de session/gestion/exécution.

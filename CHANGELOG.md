@@ -2,6 +2,16 @@
 
 ## [Non publié]
 
+- Facettes Instances et Invocations dans la fiche de fonction : allocations,
+  mesures réelles ou indisponibles, état et HTTP séparés, détails et journaux
+  expurgés/tronqués, pagination, rafraîchissement manuel, clavier et mobile.
+- 40 groupes réels réussis dans la suite de console, avec 25 captures relues,
+  notes SPARK appliquées et code servi recoupé :
+  [preuve](docs/evidence/console-execution-dev-2026-11-07.json).
+- Le pilote de suite valide aussi le contenu des rapports frais ; les attentes
+  réseau sont jointes aux gestes UI et le nettoyage retrouve les créations
+  même si la navigation échoue.
+
 - Moteur public déployé en qualification : migration 005, réservations CPU/RAM
   et instances, file bornée, minimum/maximum/inactivité, générations et reprise
   sans rejeu. Les appels admis restent possédés après déconnexion du client.

@@ -69,8 +69,8 @@ Les appels portent `X-Serverless-Token`. L'en-tête `Authorization` reste
 disponible pour l'authentification métier du handler. Les routes de révision
 et la commande CLI `deploy` passent leurs premiers parcours authentifiés en DEV.
 Les vues de publication ne sont pas encore disponibles dans la console.
-Les fonctions publiées sont invocables ; les vues d’exécution et de journaux
-restent à ajouter à la console.
+Les fonctions publiées sont invocables. Leurs instances et journaux se
+consultent dans les facettes Instances et Invocations de la fiche de fonction.
 
 La [CLI](../adapter/README.md) lit `P2_SERVERLESS_URL` et `P2_SERVERLESS_TOKEN`
 dans son environnement. Depuis le projet de fonctions, lancer
@@ -89,6 +89,25 @@ de nouveau. Après interruption du contrôle pendant réception ou validation,
 le candidat devient `failed` avec `control_interrupted`. Consulter son état
 avant de préparer une nouvelle publication ; la révision active précédente
 reste conservée.
+
+## Consulter les instances et les journaux
+
+Ouvrir une fonction depuis son service. **Configuration** conserve ses réglages ;
+**Instances** affiche les conteneurs réservés, leur état, les allocations et les
+mesures disponibles. Le temps CPU est cumulé depuis la création de l’instance.
+« Indisponible » signifie qu’aucune mesure n’a pu être obtenue pour ce relevé.
+
+**Invocations** présente les appels les plus récents, leur état et leur statut
+HTTP séparément. Ouvrir « Détails et journal » pour lire la chronologie,
+la révision, l’instance, le diagnostic et les traces expurgées. « Non confirmé »
+signifie que le début du handler n’a pas été observé avec certitude. Une réponse
+métier HTTP 503 peut correspondre à une exécution terminée normalement.
+
+Chaque page contient cinq éléments. **Actualiser** relit la page ; la date du
+relevé reste visible. Si des instances disparaissent, la pagination revient
+à une page existante. Un journal tronqué est signalé ; les traces longues
+se parcourent dans leur cadre, y compris au clavier. Les liens de facette
+peuvent être conservés pour retrouver la même fonction.
 
 ## Invoquer et suivre une fonction
 
@@ -109,8 +128,7 @@ Les listes `/api/functions/UUID_DE_FONCTION/instances` et
 session administrateur. `limit` vaut 20 par défaut, au plus 100 ; `offset` permet
 la pagination. L’historique conserve états, début observé, erreurs fixes et logs
 expurgés. Une mesure Docker indisponible est signalée ; elle ne devient pas
-une consommation estimée à partir de l’allocation. Les vues correspondantes
-sont encore à intégrer à la console.
+une consommation estimée à partir de l’allocation. Les facettes de la console utilisent ces mêmes observations.
 
 Un corps incomplet est refusé après trente secondes. Sur l’entrée DEV, HTTP/2
 transmet immédiatement le 408 ; HTTP/1.1 peut attendre la fin du corps côté

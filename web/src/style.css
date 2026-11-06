@@ -33,6 +33,7 @@ button.primary:hover,.button.primary:hover {background:var(--color-brand-hover);
 button.danger {color:var(--color-danger-on-soft); border-color:var(--color-danger);}
 button.danger:hover {background:var(--color-danger-soft);}
 button:disabled {opacity:.65;}
+button[aria-disabled=true] {color:var(--color-text-3); cursor:default; background:var(--color-bg); opacity:.65;}
 svg {flex:none; width:20px; height:20px; stroke-width:2;}
 :focus-visible {outline:2px solid var(--color-brand); outline-offset:3px;}
 input,textarea,select {width:100%; font:inherit; color:var(--color-ink); min-height:var(--size-target); border:1px solid var(--color-border); border-radius:var(--radius-sm); padding:var(--space-2) var(--space-3); background:var(--color-surface);}
@@ -112,6 +113,19 @@ th,td {padding:var(--space-3); border-bottom:1px solid var(--color-border); min-
 th {font-size:var(--text-small); color:var(--color-text-2); background:var(--color-bg);}
 td {overflow-wrap:anywhere;}
 .key-row {display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; gap:var(--space-2); align-items:end;}
+/* @spec docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#présentation */
+.observation-list {list-style:none; margin:0; padding:0;}
+.observation-list>li {padding:var(--space-6) 0; border-bottom:1px solid var(--color-border);}
+.observation-list>li:last-child {border-bottom:0; padding-bottom:0;}
+.observation-heading {display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--space-3); margin-bottom:var(--space-4);}
+.observation-heading h3 {min-width:0;}
+.observation-note {margin-top:var(--space-4);}
+.invocation-details {margin-top:var(--space-3);}
+.invocation-details summary {cursor:pointer; color:var(--color-brand); min-height:var(--size-target); padding:var(--space-2) 0;}
+.invocation-details[open] summary {margin-bottom:var(--space-3);}
+.invocation-details h4 {font-size:var(--text-body); margin:0;}
+.invocation-log {white-space:pre-wrap; overflow-wrap:anywhere; max-height:320px; overflow:auto; margin:0; padding:var(--space-4); background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-sm); font-size:var(--text-small);}
+.log-warning {background:var(--color-accent-soft); color:var(--color-accent-on-soft);}
 .skip-link {position:fixed; top:var(--space-2); left:var(--space-2); transform:translateY(-150%); z-index:20; background:var(--color-surface); padding:var(--space-3);}
 .skip-link:focus {transform:none;}
 @media (max-width:1023px) {

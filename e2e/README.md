@@ -247,3 +247,26 @@ Les gardes root ouvrent la base du contrôle sous l’identité effective du com
 writers et fermetures suivent ce contexte ; les preuves contrôlent les UID du
 WAL/SHM et la restauration de l’identité opérateur. Le registre de stockage
 conserve son propriétaire root.
+
+## Console des exécutions
+
+`node e2e/execution-ui.mjs` part de l’accueil et crée ses objets par la console.
+Le handler original `qualification/artifacts/observation.cjs` est empaqueté
+par l’adaptateur, publié par l’API et invoqué avec un vrai jeton Read. Douze
+groupes couvrent six instances sur deux pages, mesures rendues, extinction,
+recalage et focus, journaux expurgés/tronqués/HTML texte, mobile, erreurs réseau,
+absence de session, suppression, appel actif et démarrage non confirmé.
+La panne de métriques tue le seul conteneur de fonction identifié par ses UUID
+et labels, pendant une garde SQLite bornée ; le contrôle reprend ensuite ses
+ressources. Les attentes de réponse sont jointes immédiatement aux actions UI.
+Le nettoyage retrouve les créations par leurs noms exacts même si la navigation
+échoue, puis confirme suppression et purge de leurs archives de stockage.
+
+`python3 -B e2e/execution-suite.py --scope console` exécute en série `public`,
+`login-ui`, `control-ui` puis `execution-ui`. Son rapport est
+`.local/e2e/console-execution-regressions.json`. Il vérifie la fraîcheur et le
+contenu de chaque rapport : fin, nombres de groupes, absence d’échec/skip et
+nettoyage selon son schéma. La source et l’image sont recoupées avant/après.
+La [preuve finale](../docs/evidence/console-execution-dev-2026-11-07.json) compte
+40 groupes et 25 captures relues. Les mesures Docker partielles sont une donnée
+réelle : leur absence doit rester visible, jamais devenir un zéro.

@@ -103,6 +103,9 @@ avec persistance après redémarrage, droits CRUD, secrets et rendu mobile.
 Les cycles de rôles, de renouvellement et de clés SSO restent à qualifier.
 Les commandes du contrôle figurent dans [control/README.md](control/README.md).
 Les clients de preuve de plateforme vivent dans [e2e/](e2e/README.md).
+Les facettes **Instances** et **Invocations** affichent allocations, mesures Docker,
+états et journaux expurgés dans la fiche de fonction. Leur [preuve de console](docs/evidence/console-execution-dev-2026-11-07.json)
+passe 40 groupes réels, avec 25 captures relues.
 La [preuve de gestion](docs/evidence/control-management-dev-2026-11-06.json)
 recoupe les sources déployées, les campagnes, les ressources web servies et
 les sept captures relues. Le [manuel](docs/manual.md) décrit la console.
