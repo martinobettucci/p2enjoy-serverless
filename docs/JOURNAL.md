@@ -1339,3 +1339,20 @@ droits/versions après préparation. La publication SQL doit porter sa décision
 une perte d'ACK après commit ne peut pas annoncer que l'ancienne configuration
 est conservée. Admission, min/max/idle, passerelle, observations et parcours UI
 restent ensuite à terminer. Le goal demeure actif et conserve tout son périmètre.
+
+### SLS-040/050 — décision SQL des mutations publiques
+
+Le tour précédent est classé progrès : 0a94d22 déployé et 47 groupes vérifiés.
+L'arbre et les services sont sains au début de ce raccordement. La migration
+004 du contrôle est spécifiée : intention invisible avant création, quota cible
+sans secrets, versions internes et décision commise avec l'objet. La maintenance
+résout les opérations abandonnées ; une réponse perdue après commit ne promet
+pas une conservation de l'ancienne configuration.
+
+Une fenêtre supplémentaire est fermée dans le contrat : après réponse incertaine,
+une consultation inconnue ne prouve pas qu'un prepare retardé n'arrivera pas.
+Abort peut donc porter la configuration et la version initiale pour inscrire un
+reçu d'abandon sans préparer ni allouer. La requête retardée retrouve ce reçu.
+Le contrôle persiste la version avant tout envoi ; sans version inscrite, aucun
+prepare n'a pu partir. Cette extension utilise la migration 003 existante de
+l'agent et sera éprouvée par les vrais RPC et les reprises HTTP du contrôle.

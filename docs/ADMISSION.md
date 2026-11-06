@@ -116,6 +116,16 @@ nettoyage après panne, sans effacer de fichier antérieur ni baisser le budget 
 Le configure direct historique reste atomique côté agent et garde ses commandes
 d'opérateur ; sa compensation retire aussi les lignes nouvelles restées vides.
 
+Pour résoudre une réponse incertaine ou un arrêt avant envoi, abort-configuration
+accepte aussi configuration et expected_version, ensemble. Si l'opération est
+inconnue, l'agent vérifie cette version, l'absence de mutation et de bail, puis
+écrit directement un reçu aborted sans préparation ni allocation. La version
+progresse. Un prepare retardé du même UUID retrouve ce reçu et ne monte rien.
+Un abort inconnu sans ces deux valeurs reste refusé. Une intention du contrôle
+dont storage_version n'a pas encore été inscrite n'a envoyé aucun prepare ;
+elle peut être retirée sans appel agent. Une décision commit inconnue n'est
+jamais recréée automatiquement : elle reste en erreur pour diagnostic.
+
 Côté contrôle, function_operations ferme les nouvelles admissions avant une
 mutation de stockage. Les appels actifs rendent 409 ; les instances au repos
 sont fermées et leurs baux libérés. Préparer est effectué hors transaction SQL.
@@ -138,6 +148,41 @@ porte l'intention d'archive ; cette décision précède l'archivage irréversibl
 Le cache se vide et les données archivées se purgent par opérations explicites,
 avec contrôle administrateur pour la purge. Aucun appel d'agent n'est effectué
 pendant une transaction SQLite du contrôle.
+
+## Raccordement des mutations du contrôle
+
+La migration 004 ajoute function_operations. Une responsabilité async garde
+chaque opération vivante pendant la requête et rejoint sa résolution même après
+annulation. La maintenance ignore ces responsabilités actives ; au redémarrage,
+les intentions undecided deviennent abort, les commit sont confirmés. Une
+intention ne disparaît qu'après reçu correspondant, ou avant tout envoi possible.
+Les erreurs de transport conservent l'intention et dégradent la santé ; la
+maintenance reprend toutes les cinq secondes, sous le même verrou d'installation.
+
+La création inscrit d'abord une intention sans ligne functions. Le nom, les
+droits, la version du service et les contraintes sont revérifiés dans la
+transaction de création finale. Deux créations de même nom ne publient qu'une
+fonction ; le perdant abandonne ses quotas. Modifier le service ou le supprimer
+refuse toute intention de fonction encore présente, y compris une création
+invisible. Modifier, supprimer, publier ou rollback une fonction refuse une
+intention concurrente. La révocation d'un jeton reste possible à tout instant.
+
+Les changements de quotas et la suppression exigent l'absence de consommateur
+avant décision. Le raccordement initial refuse les baux actifs ; le moteur
+fermera ses instances au repos avant cette étape lors de son intégration, tout
+en refusant les appels admis. Les changements sans mutation de volumes restent
+des transactions de configuration ordinaires, après vérification de l'absence
+d'intention concurrente.
+
+La réponse normale attend la confirmation de stockage. Une confirmation perdue
+après commit SQL retourne 503 avec un message indiquant que la modification est
+enregistrée et doit être relue avant une nouvelle tentative. Les en-têtes
+X-Serverless-Operation-ID, X-Serverless-Function-ID et
+X-Serverless-Mutation-Committed: true permettent le diagnostic sans exposer
+les paramètres. Les lectures de fonction ajoutent storage_operation, null ou
+un résumé id/kind/decision/error_code ; aucune configuration privée n'y figure.
+L'upload ne transforme pas un candidat publié en échec pour une confirmation
+agent manquante. Le nettoyage conserve son code publié.
 
 ## Entrée HTTP
 

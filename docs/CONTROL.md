@@ -133,6 +133,16 @@ pour consultation, annulation et relecture ; aucune section obsolète n'est
 réécrite silencieusement depuis un autre onglet. Les clients de déploiement
 peuvent aussi employer ce contrôle de concurrence.
 
+Le raccordement en réalisation dans [ADMISSION](ADMISSION.md) applique les quotas
+avant de rendre une création disponible et conserve une intention jusqu'à leur
+confirmation. Les droits et versions sont relus après les appels à l'agent.
+Une suppression logique porte une décision d'archive durable, reprise après
+interruption. Les mutations incompatibles rendent 409 tant qu'une intention
+est en cours. Une confirmation perdue après décision rend 503 en indiquant que
+la modification est enregistrée ; le client relit l'objet avant de réessayer.
+Les lectures exposent uniquement le résumé public storage_operation de cette
+intention. Le stockage privé demeure accessible au seul agent.
+
 ## Console du contrôle
 
 La première tranche de console appartient à SLS-020 : connexion, consultation

@@ -140,3 +140,28 @@ prepare-configuration exigent function_id, operation_id, installation_id,
 configuration et expected_version ; commit-configuration, abort-configuration et
 configuration-operation exigent les trois identifiants. La consultation permet
 de distinguer la préparation de la décision sans rejouer une mutation.
+
+Un abort portant aussi configuration et expected_version peut écrire un reçu
+aborted pour une opération encore inconnue, sans allocation. Ce reçu interdit
+à un prepare retardé du même UUID de recréer une préparation après abandon.
+La version et les conflits de propriétaire/mutation/bail restent vérifiés.
+
+## Intentions des mutations publiques
+
+La migration 004 du contrôle ajoute function_operations : id UUID primaire,
+function_id unique sans clé étrangère (création encore invisible), service_id
+référencé, kind configuration/archive, decision undecided/commit/abort,
+configuration_json des seuls quotas nullable, storage_version nullable,
+expected_function_version nullable, expected_service_version, created_at et
+error_code nullable. Les secrets et la configuration applicative ne sont pas
+copiés dans cette table. Une intention bloque les mutations incompatibles du
+service et de la fonction. Le pointeur de décision commit est modifié dans la
+même transaction que l'objet public ou sa suppression logique.
+
+storage_version est écrit avant tout envoi de prepare ; son absence permet de
+prouver qu'aucune préparation n'a été envoyée. Une version présente impose une
+résolution agent, y compris pour une opération encore inconnue. Après décision
+et confirmation, la ligne est retirée ; l'audit métier et le reçu de l'agent
+restent les traces durables. Le démarrage résout les seules intentions de ce
+contrôle avant leur réouverture. Les tables d'instances et d'invocations seront
+ajoutées avec leur moteur ; leur absence n'autorise aucune invocation publique.
