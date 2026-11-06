@@ -1454,3 +1454,43 @@ de qualification : chaud/froid, limites et file, déconnexion, min/max/inactivit
 générations, révocation en attente, stockage, origine/IP, reprise et logs. Les
 budgets de cellule seront proposés et appliqués par la console normale avant
 le déploiement ; aucune preuve de composant ne remplace cette qualification.
+
+La revue initiale a identifié deux pertes possibles de responsabilité sous panne
+SQL : arrêt interrompu avant fermeture des instances, et finalisation laissant
+une instance busy sans propriétaire. Le moteur joint maintenant une tâche
+portant toute la fermeture ; la finalisation garde sa responsabilité jusqu'à
+publication atomique de l'état terminal et du retour ready, ou fermeture puis
+reprise des métadonnées. Ses transactions échouent immédiatement sur contention
+pour laisser sa boucle traiter les autres propriétaires. ArtifactError du
+nettoyeur fait partie des refus récupérables. Ces corrections restent à éprouver.
+
+La session SSO arrivée à expiration est renouvelée par le parcours normal avec
+l'accès déjà autorisé ; seul le cookie de plateforme est conservé. La première
+requête d'invocation sur la baseline donne bien 404, sans identifiant
+d'invocation. Son rapport reste en échec. Le client utilisait une route de
+révocation inexistante ; il est corrigé vers POST /tokens/{id}/revoke. Les deux
+jetons exacts sont révoqués et les suppressions de fonction/namespace confirmées
+dans une preuve de récupération distincte. Aucun succès n'est attribué à ce run.
+
+Les cinq budgets sont appliqués par la console. La sauvegarde native avant
+005 est intègre, mode 0600, conserve 136 archives et confirme l'absence d'objet
+actif et d'intention de stockage avant migration.
+
+Le premier démarrage de 005 révèle un appel d'inventaire Docker avec une borne
+de réponse que Docker.call ne transmettait pas. La santé reste à 503 ; la
+signature est corrigée et le démarrage suivant devient sain. Les onze groupes
+nominaux passent ensuite. La campagne élargie passe vingt-deux groupes et son
+nettoyage ; son dernier groupe échoue : le refus de corps incomplet est bien
+persisté après trente secondes mais le client HTTP/1.1 ne reçoit rien avant
+son propre timeout. Ce rapport reste en échec.
+
+Un diagnostic réel distinct mesure le 408 HTTP/1.1 après terminaison du corps
+(30,197 s, après observation du refus durable), puis le 408 HTTP/2 sans terminer
+le corps (30,123 s). Le proxy d'entrée attend donc encore les octets du corps
+HTTP/1.1 ; le contrôle a déjà libéré sa place. Ce comportement correspond au
+[contrat Caddy de communication HTTP/1](https://github.com/caddyserver/caddy/blob/master/modules/caddyhttp/server.go).
+Décision : documenter et mesurer les deux transports, sans modifier la FORGE.
+Le délai du contrôle demeure trente secondes et aucune invocation n'est admise.
+Le diagnostic conserve ses deux groupes réussis et son nettoyage, séparément
+de la campagne échouée. La preuve finale ne prétendra pas qu'HTTP/1.1 reçoit
+un refus anticipé avant la fin de son corps sur cette infrastructure.

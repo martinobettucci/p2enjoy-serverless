@@ -27,6 +27,16 @@ de file expiré rendent 429. Aucun corps, en-tête métier ou jeton brut n'est
 persisté dans la file. Les demandes attendent en ordre d'arrivée par fonction ;
 une fonction bloquée ne bloque pas les demandes admissibles des autres fonctions.
 
+Le délai de réception libère la place côté contrôle à trente secondes, même
+si le client continue de laisser son corps ouvert. Sur l'entrée DEV actuelle,
+HTTP/2 transmet immédiatement le refus 408. En HTTP/1.1, le proxy d'entrée
+attend la fin du corps avant de transmettre cette réponse anticipée : cette
+limite de transport ne prolonge ni la réservation ni une exécution. La preuve
+vérifie séparément le délai durable, la restitution de la place, puis le 408
+reçu après fin du corps en HTTP/1.1. L'application ne peut pas modifier ce
+comportement du proxy ; sa configuration appartient à la FORGE, hors du
+périmètre d'administration autorisé.
+
 La déconnexion avant admission retire la demande. Après admission, une tâche du
 moteur conserve la responsabilité de l'appel et de ses effets jusqu'au résultat
 ou à sa deadline, même si son client HTTP disparaît. Aucun rejeu automatique.
