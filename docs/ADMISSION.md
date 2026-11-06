@@ -219,3 +219,27 @@ absent 404, une méthode absente 405, une attente refusée 429, une erreur du ha
 ou de réponse 502, une panne du runtime/stockage 503 et une deadline 504.
 Les erreurs publiques exposent un code fixe et l'identifiant d'invocation ; aucun
 message de processus ou secret n'y est copié. HEAD retire le corps final.
+
+## Observations et cycle du contrôle
+
+GET /api/functions/{id}/instances et GET /api/functions/{id}/invocations
+exigent Read sur la fonction, ou la session administrateur normale. Les listes
+sont paginées (20 par défaut, 100 maximum, offset 10000 maximum). Les instances
+exposent leurs réservations et états, avec mesures Docker séparées lorsqu'elles
+sont disponibles. Une mesure indisponible est null avec un code fixe, jamais
+remplacée par l'allocation. L'historique expose les métadonnées, observations de
+début et journaux expurgés ; aucune configuration privée ni génération secrète.
+
+La notification de début du handler est persistée avant son acquittement. Le
+dispatch est inscrit avant l'envoi au pilote ; si une panne le rend incertain,
+handler_started reste null. Une erreur avant dispatch conserve false. À la
+fermeture du contrôle, les propriétaires sont rejoints et les instances drainées
+avant libération du verrou durable. Au redémarrage, les invocations actives
+deviennent interrupted sans rejeu, et l'admission attend la réconciliation.
+
+Les cinq budgets de cellule sont validés au démarrage ; les minima existants
+doivent tenir dans les budgets configurés. Une configuration publique ou une
+publication augmentant les minima au-delà de ces budgets est refusée à 409
+dans sa transaction finale, avant de publier l'objet. Une réduction de maximum
+ou changement de génération n'interrompt pas un appel déjà admis : les anciennes
+instances deviennent drainantes et continuent de compter jusqu'à destruction.

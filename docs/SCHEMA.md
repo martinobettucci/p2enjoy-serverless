@@ -165,3 +165,27 @@ et confirmation, la ligne est retirée ; l'audit métier et le reçu de l'agent
 restent les traces durables. Le démarrage résout les seules intentions de ce
 contrôle avant leur réouverture. Les tables d'instances et d'invocations seront
 ajoutées avec leur moteur ; leur absence n'autorise aucune invocation publique.
+
+## Réservations et invocations
+
+La migration 005 ajoute execution_instances : id, function_id, revision_id,
+generation privée, cpu_nanos, memory_mib, state, snapshot_cipher, created_at,
+ready_at, last_used_at et error_code. L'instantané contient le nom, la révision,
+l'image, les paramètres et la configuration effective chiffrée. La réservation
+précède toute acquisition de bail ou création de canal Docker. Une référence
+d'instance interdit la suppression logique et physique de sa révision.
+
+invocations conserve id, actor_kind/id, service_id, function_id, revision_id,
+instance_id, state, created_at, queued_at, admitted_at, dispatched_at,
+completed_at, handler_started nullable, error_code, http_status, logs et
+logs_truncated. Les références historiques d'instance/révision restent des UUID
+de diagnostic et ne retiennent pas indéfiniment leurs ressources. Les états
+actifs sont receiving, queued, admitted et running ; les états terminaux sont
+succeeded, failed, rejected, disconnected et interrupted. Aucun corps métier,
+réponse, en-tête ni jeton brut n'est enregistré dans ces deux tables.
+
+Le canal de chaque instance appartient à /state/execution/<UUID>, dérivé de sa
+réservation. La reprise inventorie les conteneurs et les réseaux séparément,
+avec tous leurs labels de propriété ; elle libère aussi les baux incomplets
+de cette installation. La réservation ne disparaît qu'après confirmation de
+la disparition de Docker, de son réseau, du bail et du répertoire de canal.

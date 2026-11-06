@@ -1434,3 +1434,23 @@ Cette tranche clôt le raccordement des mutations, pas SLS-040/050. Le moteur
 d’admission, les budgets et générations, min/max/inactivité, la passerelle
 authentifiée, les observations et commandes de console restent à réaliser.
 Le goal demeure actif avec l’ensemble de ses exigences.
+
+### SLS-040 — raccordement du moteur et de l'entrée publique
+
+Le tour précédent est classé progrès : f5fc86b, 161 groupes qualifiés, arbre
+propre et copie documentaire recoupée. La prochaine unité raccorde les pilotes
+existants à la réservation durable, la file, les générations et la passerelle.
+Les explorations en lecture seule confirment les interfaces utilisables et
+l'absence actuelle de reprise d'instances dans le nettoyage de validation.
+
+Le contrat précise la migration 005, le canal par UUID réservé, les observations
+publiques autorisées et la persistance de la notification du handler. L'UUID
+d'instance sera fourni au constructeur avant tout effet externe ; modifier son
+id après construction laisserait ses labels et son nom incohérents. La reprise
+inventorie réseaux et baux même lorsqu'aucun conteneur n'a pu être créé.
+
+Les preuves de cette unité passeront par HTTPS avec de vrais jetons et handlers
+de qualification : chaud/froid, limites et file, déconnexion, min/max/inactivité,
+générations, révocation en attente, stockage, origine/IP, reprise et logs. Les
+budgets de cellule seront proposés et appliqués par la console normale avant
+le déploiement ; aucune preuve de composant ne remplace cette qualification.
