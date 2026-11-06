@@ -50,7 +50,11 @@ l'écran et les sections s'empilent. Les tableaux défilent localement avec une
 indication de débordement. Icônes Lucide, favicon SVG propre au produit.
 
 La [preuve de gestion](evidence/control-management-dev-2026-11-06.json)
-conserve les empreintes des sept captures relues et des ressources servies.
+conserve les empreintes des sept captures initiales et des ressources servies.
+Le raccordement du stockage est aussi vérifié par les onze parcours de console ;
+ses sept nouvelles captures JPEG sont relues, avec le quota réellement appliqué,
+les états vides, les noms longs, le conflit conservant la saisie et les jetons.
+Leurs empreintes figurent dans la [preuve de stockage](evidence/function-storage-dev-2026-11-06.json).
 Les captures restent sous `.local/e2e/`. Le nom maximal est vérifié à 390 px,
 avec `scrollWidth <= innerWidth`, depuis la création dans la console.
 

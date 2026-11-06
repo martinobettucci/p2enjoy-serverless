@@ -301,9 +301,7 @@ class Volumes:
                 if result['configuration']!=value or result['expected_version']!=expected:raise StorageError('operation_conflict')
                 return result
         elif expected!=0:raise StorageError('version_conflict')
-        if self.db.execute('SELECT 1 FROM configuration_receipts WHERE operation_id=?',(operation,)).fetchone():raise StorageError('operation_conflict')
-        for row in self.db.execute('SELECT pending_json FROM functions WHERE pending_json IS NOT NULL'):
-            if json.loads(row['pending_json']).get('operation_id')==operation:raise StorageError('operation_conflict')
+        self.operation_available(operation)
         # The version remains monotone, even after abandoning a new empty function.
         with self.transaction():
             self.db.execute("INSERT OR IGNORE INTO functions VALUES(?,'active',0,?,NULL)",(identifier,canonical(DEFAULT)))
@@ -334,8 +332,33 @@ class Volumes:
                         'expected_version=excluded.expected_version,decision=excluded.decision,version=excluded.version',
                         (identifier,pending['operation_id'],pending['installation_id'],canonical(pending['configuration']),pending['expected_version'],decision,version))
 
-    async def resolve_configuration(self,identifier,operation,installation,decision):
-        result=self.configuration_operation(identifier,operation,installation)
+    def operation_available(self,operation):
+        if self.db.execute('SELECT 1 FROM configuration_receipts WHERE operation_id=?',(operation,)).fetchone():raise StorageError('operation_conflict')
+        for row in self.db.execute('SELECT pending_json FROM functions WHERE pending_json IS NOT NULL'):
+            if json.loads(row['pending_json']).get('operation_id')==operation:raise StorageError('operation_conflict')
+
+    def abandon_unseen(self,identifier,operation,installation,value,expected):
+        self.operation_available(operation)
+        with self.transaction():
+            self.db.execute("INSERT OR IGNORE INTO functions VALUES(?,'active',0,?,NULL)",(identifier,canonical(DEFAULT)))
+            function=self.function(identifier);self.version(function,expected)
+            if function['state']!='active':raise StorageError('function_archived')
+            if function['pending_json']:raise StorageError('operation_pending')
+            if self.leased(identifier):raise StorageError('volume_busy')
+            pending={'operation_id':operation,'installation_id':installation,'configuration':value,'expected_version':expected}
+            self.receipt(identifier,pending,'aborted')
+        return self.configuration_operation(identifier,operation,installation)
+
+    async def resolve_configuration(self,identifier,operation,installation,decision,unseen=None):
+        identifier=uuid(identifier);operation=uuid(operation);installation=uuid(installation)
+        if unseen is not None:
+            value=configuration(unseen['configuration']);expected=unseen['expected_version']
+            if type(expected) is not int or expected<0:raise StorageError('invalid_version')
+        try:result=self.configuration_operation(identifier,operation,installation)
+        except StorageError as error:
+            if decision!='aborted' or unseen is None or str(error) not in ('function_unknown','operation_unknown'):raise
+            return self.abandon_unseen(identifier,operation,installation,value,expected)
+        if unseen is not None and (result['configuration']!=value or result['expected_version']!=expected):raise StorageError('operation_conflict')
         if result['state'] in ('committed','aborted'):
             if result['state']!=decision:raise StorageError('operation_decided')
             return result

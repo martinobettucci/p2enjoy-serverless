@@ -32,7 +32,9 @@ def run(args,timeout=60,check=True):
 
 image=run(['docker','inspect','--format','{{.Image}}','serverless-api']).stdout.strip()
 docker_socket=run(['docker','inspect','--format','{{range .Mounts}}{{if eq .Destination "/docker.sock"}}{{.Source}}{{end}}{{end}}','serverless-api']).stdout.strip()
+storage_channel=run(['docker','inspect','--format','{{range .Mounts}}{{if eq .Destination "/storage-agent"}}{{.Source}}{{end}}{{end}}','serverless-api']).stdout.strip()
 assert docker_socket,'Montage Docker du contrôle absent'
+assert storage_channel,'Canal réel de stockage absent'
 base=['docker','compose','-p',project,'-f',str(compose)]
 
 
@@ -42,7 +44,7 @@ def start(alter=None,readonly=False):
         command=['python','-B','-c','import os; '+alter+'; os.execvp("python",'+repr(cmd)+')']
     compose.write_text(json.dumps({'services':{'control':{
         'image':image,'env_file':['/etc/spark/env','/run/spark/secrets'],
-        'volumes':[str(state)+':/state'+(':ro' if readonly else ''),docker_socket+':/docker.sock'],
+        'volumes':[str(state)+':/state'+(':ro' if readonly else ''),docker_socket+':/docker.sock',storage_channel+':/storage-agent:ro'],
         'read_only':True,'tmpfs':['/tmp:size=16m,mode=1777,noexec,nosuid'],
         'cap_drop':['ALL'],'security_opt':['no-new-privileges:true'],
         'mem_limit':'512m','cpus':1,'pids_limit':64,'init':True,
@@ -118,8 +120,8 @@ try:
     passed('Même image réelle, entrée HTTP et confinement Docker')
     metadata=json.loads(run(['docker','exec',container,'python','-B','-c',
         'import sqlite3,json; db=sqlite3.connect("/state/control.sqlite3"); print(json.dumps({"versions":[r[0] for r in db.execute("SELECT version FROM schema_migrations ORDER BY version")],"installation":db.execute("SELECT value FROM security_metadata WHERE name=?",("installation-id",)).fetchone()[0],"integrity":db.execute("PRAGMA integrity_check").fetchone()[0]}))']).stdout)
-    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql'] and metadata['integrity']=='ok'
-    uuid.UUID(metadata['installation']);passed('Trois migrations réelles, intégrité SQLite et UUID d’installation')
+    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql'] and metadata['integrity']=='ok'
+    uuid.UUID(metadata['installation']);passed('Quatre migrations réelles, intégrité SQLite et UUID d’installation')
     competing=run(base+['run','--rm','--no-deps','control'],timeout=20,check=False)
     assert competing.returncode!=0 and 'Un contrôle possède déjà cet état' in competing.stderr
     ready(container);passed('Second contrôle réel refusé par le verrou exclusif')

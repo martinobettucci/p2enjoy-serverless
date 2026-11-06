@@ -2,6 +2,21 @@
 
 ## [Non publié]
 
+- Créations, changements de quotas, suppressions et publications raccordés à
+  l’agent de stockage réel. Migration 004 du contrôle, décision commune avec
+  l’objet, reprises abort/commit et relecture des droits après préparation.
+- Confirmation perdue après commit signalée sans déclarer la publication
+  abandonnée. Une panne d’audit conserve la réponse ; les publications sans
+  changement de volumes n’exigent aucun verrou écrivain pour clôturer leur garde.
+- Archivage conservant données et allocation à la suppression. Les campagnes
+  vérifient les archives puis purgent leurs seuls volumes ; leurs archives de
+  code restent conservées. Gardes de panne indépendantes, restaurations et
+  erreurs de nettoyage explicites. [Preuve](docs/evidence/function-storage-dev-2026-11-06.json).
+- 161 groupes réels réussis dans cette qualification, zéro échec et zéro test
+  ignoré : 149 groupes rejoués en série sur le contrôle final et douze groupes
+  de préparation sur le même paquet de stockage. Sept captures JPEG relues,
+  sources et ressources déployées recoupées, trois notes de cellule actualisées.
+
 - Quotas préparés avant publication : configuration précédente conservée,
   budget réservé jusqu'à décision, commit/abort idempotents et reçus versionnés.
   La migration 003 de l'agent garde les décisions après interruption ; un abandon
@@ -10,7 +25,7 @@
   zéro échec et zéro skip : SIGKILL pendant préparation, restart après préparation
   ou abandon partiel, données conservées et refus sous bail actif.
   [Preuve](docs/evidence/storage-preparations-dev-2026-11-06.json).
-  Les mutations publiques restent à raccorder à la décision SQL du contrôle.
+  Le raccordement public figure dans la tranche décrite ci-dessus.
 
 - Instances raccordées aux baux de l’agent : quatorze groupes réels réussis,
   avec persistance data/cache, quotas Linux, partage/isolation, pagination,

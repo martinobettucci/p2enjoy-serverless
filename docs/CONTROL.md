@@ -124,8 +124,9 @@ alphanumérique et une longueur maximale de 63 caractères.
 Les valeurs de secret null demandent leur suppression ; une valeur chaîne
 les crée ou remplace. Les lectures montrent uniquement les noms. Une variable
 et un secret ne peuvent partager un nom dans le même niveau de configuration.
-Les champs de ressources sont des contrats stockés jusqu'à l'intégration du
-runtime ; leur seule sauvegarde ne constitue pas une preuve d'application.
+Les quotas de stockage sont appliqués par l’agent lors de leur sauvegarde.
+Les paramètres d’exécution restent des contrats stockés jusqu’à l’intégration
+du moteur ; leur seule sauvegarde ne constitue pas une preuve d’application.
 Les mises à jour acceptent `If-Match` portant la valeur `updated_at` lue.
 La console l'envoie systématiquement : si l'objet a changé depuis l'ouverture,
 le serveur refuse à 409 et conserve l'objet courant. La saisie reste ouverte
@@ -133,7 +134,7 @@ pour consultation, annulation et relecture ; aucune section obsolète n'est
 réécrite silencieusement depuis un autre onglet. Les clients de déploiement
 peuvent aussi employer ce contrôle de concurrence.
 
-Le raccordement en réalisation dans [ADMISSION](ADMISSION.md) applique les quotas
+Le raccordement déployé suivant [ADMISSION](ADMISSION.md) applique les quotas
 avant de rendre une création disponible et conserve une intention jusqu'à leur
 confirmation. Les droits et versions sont relus après les appels à l'agent.
 Une suppression logique porte une décision d'archive durable, reprise après

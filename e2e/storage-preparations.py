@@ -1,5 +1,5 @@
 # @spec docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#configuration-de-stockage-en-deux-phases
-# @verifies docs/ADMISSION.md#configuration-de-stockage-en-deux-phases
+# @verifies docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#configuration-de-stockage-en-deux-phases
 """Real prepared quota decisions, physical Docker writes and interrupted DEV agent."""
 import copy
 from contextlib import closing,suppress
@@ -245,6 +245,34 @@ try:
     operation,_=prepare(prior,data_only,0);decision(prior,operation,'abort')
     assert backing.is_dir() and not list(backing.iterdir()) and status(prior)['volumes']=={}
     passed('Provenance physique : répertoire vide antérieur préservé pendant abort')
+
+    unseen=str(uuid4());FUNCTIONS.append(unseen);operation=str(uuid4());OPERATIONS.append((unseen,operation))
+    allocated=call('health')['allocated_bytes']
+    decision(unseen,operation,'abort',denied='function_unknown')
+    fields={'function_id':unseen,'operation_id':operation,'installation_id':INSTALLATION,'configuration':BASE,'expected_version':0}
+    cancelled=call('abort-configuration',**fields)
+    assert cancelled['state']=='aborted' and cancelled['version']==1 and status(unseen)['volumes']=={}
+    assert call('health')['allocated_bytes']==allocated and not (STATE/'backings'/unseen).exists()
+    assert call('prepare-configuration',**fields)==cancelled
+    assert call('abort-configuration',**fields)==cancelled
+    call('abort-configuration',denied='operation_conflict',**(fields|{'configuration':changed}))
+    call('abort-configuration',denied='operation_owner',**(fields|{'installation_id':str(uuid4())}))
+    decision(unseen,operation,'commit',denied='operation_decided')
+    call('abort-configuration',denied='invalid_fields',**{key:value for key,value in fields.items() if key!='configuration'})
+    passed('Abort avant envoi : reçu sans allocation, prepare retardé neutralisé et identité stricte')
+
+    operation=str(uuid4());OPERATIONS.append((occupied,operation));version=status(occupied)['version']
+    fields={'function_id':occupied,'operation_id':operation,'installation_id':INSTALLATION,'configuration':BASE,'expected_version':version}
+    held=str(uuid4());LEASES[held]=occupied
+    call('acquire',function_id=occupied,consumer_id=held,installation_id=INSTALLATION,configuration=data_only)
+    call('abort-configuration',denied='volume_busy',**fields)
+    call('release',consumer_id=held,installation_id=INSTALLATION);del LEASES[held]
+    call('abort-configuration',denied='version_conflict',**(fields|{'expected_version':version+1}))
+    result=call('abort-configuration',**fields)
+    assert result['state']=='aborted' and status(occupied)['configuration']==data_only and status(occupied)['version']==version+1
+    assert docker_files(occupied,data_only,"from pathlib import Path;print(Path('/data/large').stat().st_size)")=='1310720'
+    assert call('health')['allocated_bytes']==allocated
+    passed('Abandon inconnu sur fonction existante : refus sous bail/version puis conservation des données et quotas')
     completed=True
 finally:
     signal.alarm(0)

@@ -263,10 +263,49 @@ Les 47 groupes passent avec nettoyage confirmé ; la [preuve recoupée](evidence
 vérifie 62 sources locales/distantes, 21 fichiers embarqués, le paquet protégé,
 la configuration officielle et les 73 archives de publication conservées.
 Les trois notes de cellule sont appliquées par sa console puis relues.
-Les mutations de gestion et de publication doivent encore être raccordées à
-ce protocole. L'admission et l'invocation publiques restent à réaliser et qualifier.
+Le raccordement des mutations de gestion et publication est décrit dans la
+baseline suivante. L’admission et l’invocation publiques restent à réaliser.
 
 La migration est additive, mais l'ancien agent n'accepte pas la version 003.
 Un retour à son paquet exige une restauration explicite et cohérente du
 registre après drainage, en tenant compte des écritures postérieures.
 Les mécanismes de sauvegarde du SPARK restent l'autorité d'exploitation.
+
+
+## Baseline des mutations publiques de stockage
+
+Le contrôle déployé porte l’image
+`sha256:922b2be19b240df60ed4dec7397b4f87c5902a7a97d9d23592ef825bf57e8cb2`
+et les migrations 001 à 004. La migration 004 ajoute les intentions de fonction.
+La sauvegarde native préalable est
+`/srv/p2enjoy-serverless/state/backups/before-004-20261106T190408Z-793ab4.sqlite3` :
+intégrité vérifiée, migrations 001 à 003, mode 0600 et 73 archives de code recensées.
+La migration est additive ; revenir à un ancien contrôle ne doit pas laisser
+une intention non résolue. Une restauration de base doit tenir compte des
+publications et écritures postérieures ; aucune restauration n’est implicite.
+
+L’agent porte le paquet protégé
+`e116f761cadf8a04a59d1f45d729ef29edcb7b1e41e3a81afab43eda4422b255`,
+avec le schéma 003 et l’abandon d’une préparation encore inconnue par sa
+configuration et sa version initiales. Aucune nouvelle variable ni route :
+les deux fichiers officiels et `serverless.lelabs.tech` vers 18090 restent
+l’autorité de configuration. Le canal privé conserve son montage readonly.
+
+Les créations, modifications de quotas, suppressions et publications passent
+par l’intention durable du contrôle. Une suppression conserve une archive
+allouée ; seule une purge opérateur distincte la libère. Après confirmation
+perdue, relire la fonction et le candidat : une décision commit se confirme,
+elle ne se compense pas par l’ancienne configuration. Les intentions et codes
+fixes de reprise sont consultables sans exposer leurs paramètres privés.
+
+Les commandes de cette qualification figurent dans [e2e](../e2e/README.md).
+La [preuve recoupée](evidence/function-storage-dev-2026-11-06.json) distingue les
+parcours HTTPS, la preuve ciblée du pilote sous contention, les composants de
+stockage et les régressions. Les 161 groupes passent, dont 149 rejoués en série
+sur le contrôle final et douze préparations sur le même paquet d’agent.
+Les 82 sources locales/distantes, 23 fichiers embarqués et 136 archives de code
+sont vérifiés. Les sept captures JPEG sont relues ; les trois notes de cellule
+sont appliquées par sa console puis relues. Aucun bail, montage, allocation,
+intention, conteneur d’instance/validation ni espace de test ne subsiste.
+Le moteur d’admission et l’invocation publique,
+les commandes de purge/cache de la console et l’observabilité restent à terminer.

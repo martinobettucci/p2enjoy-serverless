@@ -1356,3 +1356,81 @@ reçu d'abandon sans préparer ni allouer. La requête retardée retrouve ce re�
 Le contrôle persiste la version avant tout envoi ; sans version inscrite, aucun
 prepare n'a pu partir. Cette extension utilise la migration 003 existante de
 l'agent et sera éprouvée par les vrais RPC et les reprises HTTP du contrôle.
+
+### SLS-040/050 — raccordement public et défauts de preuve corrigés
+
+Les créations, modifications de quotas, suppressions et publications utilisent
+maintenant function_operations. Les décisions de publication et d’archive sont
+persistées avec l’objet ; les droits et versions sont relus après préparation.
+La migration 004 est appliquée après une sauvegarde native SQLite vérifiée
+(before-004-20261106T190408Z-793ab4.sqlite3, intégrité, mode 0600 et 73 archives).
+L’extension de l’agent neutralisant un prepare retardé passe douze groupes réels.
+
+La première campagne HTTPS a révélé un défaut du banc : docker kill est un
+arrêt demandé au démon et le pilote n’appelait pas start. Les deux UUID de
+cette campagne ont été récupérés après redémarrage et vérification de la décision
+aborted, puis archivés et purgés explicitement. Le rapport initial reste en
+échec ; sa récupération est conservée séparément. Le banc arme désormais sa
+restauration avant le signal, confirme exited/137, puis redémarre avant nettoyage.
+Le timer indépendant produit une trace corrélée confirmant que l’agent était
+suspendu avant son SIGCONT ; une reprise du finally ne suffit plus à valider ce cas.
+
+La revue a aussi corrigé le départ de tâches propriétaires lors de la fermeture
+et la portée du try SQLite d’audit. Une vraie contention de l’écrivain après
+commit confirme le maintien du 503, des identifiants de décision et d’une trace
+audit.unavailable corrélée. La publication avec ACK perdu reste published,
+conserve sa nouvelle révision et permet ensuite un rollback sans modifier les quotas.
+
+Un dernier défaut a été reproduit avant le correctif (référence de configuration
+du build bffa36bc) : même sans mutation de
+volumes, resolve prenait un verrou d’écriture avant de constater l’absence
+confirmée d’intention. Sous BEGIN IMMEDIATE réel, la responsabilité embarquée
+rendait 503 avec Mutation-Committed:false. La correction lit d’abord l’UUID exact ;
+elle ne prend le verrou écrivain que pour une intention existante. Le garde de
+propriété et les erreurs de lecture sont conservés. La preuve ciblée appelle
+le vrai pilote embarqué et la vraie base ; elle est distinguée des parcours HTTPS.
+
+Les campagnes précédentes sont adaptées à l’archivage désormais effectif :
+DELETE est suivi d’une purge opérateur de leurs seuls UUID, rattachés au namespace
+exact. Les états archivés et allocations sont conservés dans les rapports avant
+purge ; les archives de code demeurent. Les nettoyages indépendants continuent
+après erreur, et une purge échouée peut être retentée sans relire une fonction
+logiquement supprimée. Les captures de console sont désormais produites en JPEG.
+
+### SLS-040/050 — preuve finale des mutations et de leurs régressions
+
+Les quatorze groupes ciblés passent sur le contrôle final. Les onze campagnes
+de la séquence complète terminent avec code zéro, soit 149 groupes, auxquels
+s’ajoutent les douze préparations déjà vérifiées sur le même paquet d’agent.
+La preuve function-storage-dev-2026-11-06.json totalise 161 groupes réussis,
+zéro échec et zéro skip. Le contrôle opérationnel en compte 38, la gestion 19,
+la console 11, les publications 11, l’adaptateur 7, les reprises 4, le public 8,
+l’agent 15, ses limites 8 et le pilote avec volumes 14. Les nettoyages sont confirmés.
+
+Les sept nouvelles captures JPEG sont observées : vide, nom maximal mobile,
+conflit de configuration conservant la saisie, jetons, fonction desktop/mobile
+avec stockage réellement alloué, et activité. Les ressources web sont identiques
+à la baseline de gestion ; aucune modification visuelle n’est déduite du seul build.
+
+La consolidation vérifie 82 sources locales/distantes, 23 fichiers embarqués,
+le paquet protégé e116f761 et les 136 archives de code conservées. Aucun objet
+de gestion actif, intention, bail, montage, allocation, conteneur ou réseau
+d’instance, validation ni espace temporaire de campagne ne subsiste. Les bases
+sont intègres ; les deux conteneurs permanents et l’agent sont sains.
+
+L’identifiant Docker déployé est 922b2be19b240df60ed4dec7397b4f87c5902a7a97d9d23592ef825bf57e8cb2.
+La valeur 31e13832 relevée au build désigne son blob de configuration, confirmé
+dans l’export de cette même image ; elle n’est pas l’identifiant Docker. La
+baseline et la note d’exploitation utilisent maintenant la référence déployée.
+La preuve avant/après conserve ses références initiales en explicitant leur nature.
+
+Les trois notes sont proposées, appliquées par la console puis relues. Les
+paramètres consommés concordent avec les deux fichiers officiels ; la route
+reste serverless.lelabs.tech vers 18090 avec TLS. La revue finale ne relève
+aucun défaut bloquant sur la clôture et ses procédures. Aucun registre
+d’incohérences ouvert ni remote Git configuré.
+
+Cette tranche clôt le raccordement des mutations, pas SLS-040/050. Le moteur
+d’admission, les budgets et générations, min/max/inactivité, la passerelle
+authentifiée, les observations et commandes de console restent à réaliser.
+Le goal demeure actif avec l’ensemble de ses exigences.

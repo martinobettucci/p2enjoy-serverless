@@ -107,3 +107,27 @@ isolation, refus, courses, interruptions et diagnostic CLI. La [preuve de
 raccordement](../docs/evidence/managed-storage-dev-2026-11-06.json) recoupe le
 code embarqué, les montages et les ressources nettoyées. Les admissions et
 routes publiques d'invocation restent à réaliser.
+
+## Mutations de stockage des fonctions
+
+La migration 004 et `app/function_operations.py` raccordent les créations,
+changements de quotas, suppressions et publications à l’agent réel. La décision
+SQL et l’objet métier sont commis ensemble, puis le stockage est confirmé.
+Avant décision, une interruption reprend l’abandon ; après décision, elle reprend
+la confirmation. Une erreur d’audit SQLite ne masque pas le statut ni les
+identifiants d’une modification déjà enregistrée.
+
+`node e2e/function-storage.mjs` utilise la session SSO, HTTPS, les vrais volumes,
+Docker et des interruptions du seul contrôle DEV. Treize groupes HTTPS et une preuve ciblée du pilote couvrent aussi
+révocation, nom concurrent, bail actif, conservation des fichiers, publication
+avec confirmation perdue et rollback. Le helper distant doit être synchronisé
+avant la campagne. Les gardes indépendantes rétablissent un agent suspendu même
+si le processus de preuve meurt ; le contrôle est explicitement redémarré après
+un arrêt demandé à Docker. [Preuve recoupée](../docs/evidence/function-storage-dev-2026-11-06.json).
+
+Les lectures ajoutent `storage_operation`. Un 503 avec
+`X-Serverless-Mutation-Committed: true` signifie que la modification est
+persistée et attend la confirmation du stockage : relire la fonction ou le
+candidat avant de réessayer. Les mutations incompatibles restent refusées.
+La suppression archive les volumes ; elle ne libère pas leur allocation.
+Le moteur d’admission et les commandes publiques de purge restent à intégrer.

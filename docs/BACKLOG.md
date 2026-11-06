@@ -204,9 +204,16 @@ Le registre durable, les baux et la supervision FUSE sont implémentés. Quinze
 groupes de cycle, huit de limites et les 31 contrôles du proxy passent, avec
 nettoyage confirmé, zéro échec et zéro skip. La [preuve recoupée](evidence/storage-agent-dev-2026-11-06.json)
 est complétée par quatorze groupes de raccordement au pilote d’instances :
-[preuve](evidence/managed-storage-dev-2026-11-06.json). Les mutations publiques
-et les admissions restent à raccorder. Les quotas préparés et leurs reçus sont
-implémentés ; dix groupes vérifient les décisions, réservations, SIGKILL pendant
+[preuve](evidence/managed-storage-dev-2026-11-06.json). Les créations, modifications
+de quotas, suppressions et publications sont raccordées à une décision SQL durable
+(migration 004). Treize groupes HTTPS et une preuve ciblée du pilote couvrent les reprises avant/après commit,
+la révocation, les fichiers réels, la publication et le rollback. Le protocole
+de l’agent compte douze groupes avec la neutralisation d’un prepare retardé.
+La [preuve du raccordement](evidence/function-storage-dev-2026-11-06.json)
+recoupe aussi les régressions et la console. Les admissions, les commandes
+publiques de purge/cache, les observations et crons restent à réaliser.
+Les quotas préparés et leurs reçus sont
+implémentés ; la preuve initiale de dix groupes vérifie décisions, réservations, SIGKILL pendant
 préparation et reprise d'abandon partiel avec conservation des données.
 La [preuve recoupée](evidence/storage-preparations-dev-2026-11-06.json) ajoute
 37 groupes de régression, avec nettoyages confirmés, zéro échec et zéro skip.

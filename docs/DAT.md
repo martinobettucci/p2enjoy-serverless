@@ -21,13 +21,17 @@ registre WAL, générations, baux, sondes bornées et socket Unix authentifié p
 UID. Il possède seul la capacité de montage et partage le namespace de la
 cellule ; le code installé reste possédé par root. Les opérations locales et
 la maintenance sont décrites dans [STORAGE_AGENT](STORAGE_AGENT.md). Son
-raccordement aux instances passe quatorze groupes réels ; les API publiques
-et les admissions restent à réaliser.
+raccordement aux instances passe quatorze groupes réels. Les mutations de
+gestion et publication utilisent maintenant l’agent ; les admissions publiques
+restent à réaliser.
 L'agent prépare aussi les mutations de quotas en deux phases : l'ancienne
 allocation reste réservée jusqu'à commit/abort et un reçu versionné survit aux
 interruptions. Seuls les chemins nouveaux restés vides peuvent être retirés à
-l'abandon. Le protocole est qualifié ; son raccordement à la décision SQL des
-mutations publiques suit [ADMISSION](ADMISSION.md).
+l'abandon. `function_operations` (migration 004 du contrôle) persiste la
+décision de chaque mutation publique et sa version de stockage avant envoi.
+La maintenance confirme commit/abort après interruption, sous le verrou unique
+d’installation. Le protocole et ses reprises sont définis dans [ADMISSION](ADMISSION.md)
+et vérifiés par la [preuve des mutations publiques](evidence/function-storage-dev-2026-11-06.json).
 Les répertoires supprimés encore ouverts restent comptés jusqu'à Releasedir.
 Les copies avec repli noyau passent par les écritures contrôlées du proxy.
 

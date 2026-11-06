@@ -21,9 +21,11 @@ Le pilote Docker d’instances chaudes passe 31 contrôles d’invocation et
 Le raccordement des instances aux baux de volumes passe quatorze groupes réels :
 [preuve](docs/evidence/managed-storage-dev-2026-11-06.json). La passerelle et
 les admissions restent à réaliser. Les préparations de quotas et leurs décisions
-durables passent dix groupes réels, avec 37 groupes de régression :
-[preuve](docs/evidence/storage-preparations-dev-2026-11-06.json). Leur raccordement
-aux mutations de gestion et de publication reste à réaliser. L'extracteur ZIP serveur dans
+durables ont fait l’objet d’une première campagne de dix groupes réels,
+avec 37 groupes de régression :
+[preuve](docs/evidence/storage-preparations-dev-2026-11-06.json). Les créations, changements de quotas, suppressions et publications sont
+raccordés à une décision durable du contrôle : [contrat](docs/ADMISSION.md),
+[preuve des mutations publiques](docs/evidence/function-storage-dev-2026-11-06.json). L'extracteur ZIP serveur dans
 [control/](control/README.md) passe 112 contrôles réels, dont les limites,
 les erreurs de disque et les douze archives chargées ensuite par Node.
 Le composant de [stockage à quota](storage/README.md)

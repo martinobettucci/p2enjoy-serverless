@@ -20,6 +20,7 @@ from starlette.requests import ClientDisconnect
 
 from .artifacts import MAX_ZIP,MAX_TOTAL,MAX_ENTRIES,ArtifactError,open_directory,remove_tree
 from .db import audit
+from .function_operations import storage_configuration
 from .models import DeploymentCreate,Rollback
 from .validator import Docker,ValidationError,application_environment,validate,LIMIT
 
@@ -57,10 +58,11 @@ def get(db,table,key):
 
 
 class Deployments:
-    def __init__(self,settings,database,identity,vault):
+    def __init__(self,settings,database,identity,vault,operations):
         self.settings,self.database,self.identity,self.vault=settings,database,identity,vault
         self.root=settings.state_dir/'artifacts';self.channels=settings.state_dir/'validation'
         self.lock=None;self.task=None;self.busy=False;self.cleanup_error=False;self.installation=None
+        self.operations=operations
 
     async def start(self):
         self.lock=os.open(self.settings.state_dir/'control.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
@@ -197,9 +199,10 @@ class Deployments:
         except ValidationError:raise HTTPException(422,'La configuration effective de service et de fonction dépasse les limites ou présente une collision.') from None
         return environment,secrets
 
-    def verify(self,db,row,authorization,*,state=None):
+    def verify(self,db,row,authorization,*,state=None,operation=None):
         self.identity.recheck(db,authorization,row['service_id'],row['required_right'],row['function_id'])
         function=get(db,'functions',row['function_id']);service=get(db,'services',row['service_id'])
+        self.operations.function_available(db,function['id'],operation)
         if function['service_id']!=service['id']:raise HTTPException(409,'Le rattachement de la fonction a changé.')
         if state and row['state']!=state:raise HTTPException(409,'Ce candidat ne peut plus recevoir de publication.')
         if row['expires_at']<=time.time():raise HTTPException(409,'Ce candidat a expiré.')
@@ -230,7 +233,7 @@ class Deployments:
             if process.returncode is None:
                 process.kill();await joined(process.communicate())
 
-    async def upload(self,request,key):
+    async def upload(self,request,key,operation):
         row=await self.read_candidate(request,key);authorization=await self.access(request,row)
         if request.headers.get('content-type','').split(';',1)[0].strip().lower()!='application/zip':
             raise HTTPException(415,'Un corps application/zip est requis.')
@@ -283,6 +286,16 @@ class Deployments:
             with self.database.transaction() as db:
                 current=dict(db.execute('SELECT * FROM deployments WHERE id=?',(key,)).fetchone())
                 function,service=self.verify(db,current,authorization,state='validating')
+                storage_changed=storage_configuration(json.loads(function['config_json']))!=storage_configuration(configuration['config'])
+                if storage_changed:
+                    self.operations.reserve(db,operation,function,service,storage_configuration(configuration['config']))
+            if storage_changed:
+                await self.operations.prepare(operation)
+                authorization=await self.access(request,row)
+            with self.database.transaction() as db:
+                current=dict(db.execute('SELECT * FROM deployments WHERE id=?',(key,)).fetchone())
+                function,service=self.verify(db,current,authorization,state='validating',operation=operation)
+                if storage_changed:self.operations.verify(db,operation,function,service)
                 now=time.time();config=configuration['config'];values=configuration['configuration']
                 db.execute('INSERT INTO revisions VALUES (?,?,?,?,?,?,?,?,?,?,?,NULL)',
                     (key,function['id'],config['handler'],config['runtime'],'linux-x64',validation['image_id'],extracted['archive_sha256'],
@@ -291,6 +304,7 @@ class Deployments:
                     (json.dumps(config),json.dumps(values['environment']),self.vault.seal({k:v for k,v in values['secrets'].items() if v is not None}),key,now,function['id']))
                 db.execute("UPDATE deployments SET state='published',reserved_bytes=0,configuration_cipher=NULL,validation_json=?,completed_at=?,revision_id=? WHERE id=?",
                     (json.dumps(validation),now,key,key))
+                if storage_changed:self.operations.commit(db,operation)
                 audit(db,authorization.actor,'function.deploy',function['id'],function['service_id'],{'revision_id':key})
             return self.public(self.candidate(key))
         except BaseException as error:
@@ -330,6 +344,7 @@ class Deployments:
             self.expire();now=time.time();candidate=str(uuid4())
             with self.database.transaction() as db:
                 function=get(db,'functions',key);service=get(db,'services',function['service_id'])
+                self.operations.function_available(db,str(key))
                 current_right='update' if db.execute('SELECT 1 FROM revisions WHERE function_id=?',(str(key),)).fetchone() else 'create'
                 if current_right!=right:raise HTTPException(409,'La fonction a reçu une première révision pendant la préparation.')
                 self.identity.recheck(db,authorization,service['id'],right,str(key));required_version(request,function)
@@ -352,7 +367,9 @@ class Deployments:
             return self.public(self.candidate(key))
 
         @api.put('/deployments/{key}/artifact')
-        async def upload(request:Request,key:UUID):return await self.upload(request,key)
+        async def upload(request:Request,key:UUID):
+            operation=str(uuid4())
+            async with self.operations.responsibility(operation):return await self.upload(request,key,operation)
 
         @api.get('/functions/{key}/revisions')
         async def revisions(request:Request,key:UUID,limit:int=Query(20,ge=1,le=100),offset:int=Query(0,ge=0,le=10000)):
@@ -370,6 +387,7 @@ class Deployments:
             with self.database.transaction() as db:
                 function=get(db,'functions',key);get(db,'services',function['service_id'])
                 self.identity.recheck(db,authorization,function['service_id'],'update',str(key));required_version(request,function)
+                self.operations.function_available(db,str(key))
                 revision=get(db,'revisions',data.revision_id)
                 if revision['function_id']!=str(key):raise HTTPException(403,'Cette révision appartient à une autre fonction.')
                 config=json.loads(function['config_json']);config.update({'handler':revision['handler'],'runtime':revision['runtime']})
@@ -386,6 +404,7 @@ class Deployments:
             with self.database.transaction() as db:
                 function=get(db,'functions',key);get(db,'services',function['service_id'])
                 self.identity.recheck(db,authorization,function['service_id'],'update',str(key))
+                self.operations.function_available(db,str(key))
                 revision=get(db,'revisions',revision_id)
                 if revision['function_id']!=str(key):raise HTTPException(403,'Cette révision appartient à une autre fonction.')
                 if function['active_revision_id']==str(revision_id):raise HTTPException(409,'La révision active ne peut pas être supprimée.')

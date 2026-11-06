@@ -31,6 +31,20 @@ sa présence ; sa valeur enregistrée n'est pas réaffichée. Les secrets et les
 variables de service servent de configuration commune aux fonctions. Une
 surcharge de fonction doit être explicite.
 
+## Régler le stockage
+
+Dans la fiche de fonction, ouvrir « Modifier le stockage ». Les données permanentes
+et le cache ont chacun une activation et une allocation en Mio. L’enregistrement
+vérifie les quotas réels avant confirmation. Un quota inférieur à l’usage est
+refusé ; désactiver un volume conserve ses fichiers et son allocation. Une
+modification est refusée tant qu’un consommateur utilise les volumes.
+
+Si le message indique que la modification est enregistrée mais attend sa
+confirmation, relire la fonction avant de recommencer. Une nouvelle mutation
+incompatible reste refusée jusqu’à la fin de cette opération. Un redémarrage
+reprend la décision persistée ; il ne rétablit pas arbitrairement l’ancienne valeur.
+Un rollback du code conserve les réglages et les volumes courants.
+
 ## Donner un accès à un service
 
 Dans la fiche du service, créer un jeton, choisir ses droits CRUD, sa portée
@@ -88,5 +102,6 @@ application publique sera qualifiée avec la passerelle d'invocation.
 L'activité du service présente les mutations et refus attribuables à une
 identité connue. Les listes sont paginées.
 La suppression demande confirmation. Un service doit être vide de fonctions
-actives ; un namespace doit être vide de services actifs. L'archivage des
-données de fonctions exécutables sera intégré avec leur stockage.
+actives ; un namespace doit être vide de services actifs. Supprimer une fonction
+archive ses données et son cache, en conservant leur allocation. Leur purge est
+une opération distincte ; sa commande dans la console reste à réaliser.

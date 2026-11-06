@@ -1,6 +1,7 @@
 // @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
 // @verifies docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#préparation-validation-et-publication
 // Uses the real SSO session, normal management API, adapter and Docker validation.
+import {purgeStorageArchive} from './storage-archives.mjs';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
@@ -34,6 +35,7 @@ try {
     error:'Session SSO administrateur réelle indisponible',checks:[],skipped:0})+'\n');
   throw error;
 }
+const storageArchives=[],cleanupErrors=[];
 const checks=[],functions=[],services=[],tokens=[],archives=[];
 let namespace,work,completed=false,clean=false;
 const prefix='deploy-'+randomUUID().slice(0,8),secret='qa-private-'+randomUUID();
@@ -217,19 +219,22 @@ try {
 } finally {
   try {
     for(const fn of functions.reverse()) {
-      const history=await call(`/api/functions/${fn.id}/revisions`);
-      for(const row of history.items)archives.push({function_id:fn.id,revision_id:row.id});
-      await call(`/api/functions/${fn.id}`,{method:'DELETE'});
+      try{
+        const history=await call(`/api/functions/${fn.id}/revisions`);
+        for(const row of history.items)archives.push({function_id:fn.id,revision_id:row.id});
+        await call(`/api/functions/${fn.id}`,{method:'DELETE'});
+        storageArchives.push(await purgeStorageArchive(fn.id,namespace.id));
+      }catch(error){cleanupErrors.push('function:'+fn.id+':'+error.name);}
     }
-    for(const token of tokens)await call(`/api/tokens/${token.id}/revoke`,{method:'POST'});
-    for(const service of services.reverse())await call(`/api/services/${service.id}`,{method:'DELETE'});
-    if(namespace)await call(`/api/namespaces/${namespace.id}`,{method:'DELETE'});
-    if(work)await rm(work,{recursive:true,force:true});
-    clean=true;
+    for(const token of tokens){try{await call(`/api/tokens/${token.id}/revoke`,{method:'POST'});}catch(error){cleanupErrors.push('token:'+token.id+':'+error.name);}}
+    for(const service of services.reverse()){try{await call(`/api/services/${service.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push('service:'+service.id+':'+error.name);}}
+    if(namespace){try{await call(`/api/namespaces/${namespace.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push('namespace:'+namespace.id+':'+error.name);}}
+    if(work){try{await rm(work,{recursive:true,force:true});}catch(error){cleanupErrors.push('local_files:'+error.name);}}
+    clean=cleanupErrors.length===0;
   } finally {
     await admin.dispose();await caller.dispose();
     await writeFile(report,JSON.stringify({completed:completed&&clean,checks,cleanup:clean,skipped:0,
-      retained_archives:archives,remaining_proofs:['Expiration, limites globales et révisions','Reprise après crash pendant upload/validation','Déconnexion admin concurrente','UI et déploiement CLI complet','Code exécuté après rollback et valeur secrète conservée sous le même nom','Arrêt pendant nettoyage et exclusivité du contrôle']},null,2)+'\n');
+      retained_archives:archives,storage_archives:storageArchives,cleanupErrors,function_ids:functions.map(f=>f.id),namespace_id:namespace?.id,remaining_proofs:['Expiration, limites globales et révisions','Reprise après crash pendant upload/validation','Déconnexion admin concurrente','UI et déploiement CLI complet','Code exécuté après rollback et valeur secrète conservée sous le même nom','Arrêt pendant nettoyage et exclusivité du contrôle']},null,2)+'\n');
   }
 }
 assert(completed&&clean);

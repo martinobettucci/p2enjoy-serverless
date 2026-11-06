@@ -117,8 +117,9 @@ permissions avant de réessayer, sans supprimer la base ni monter le backing.
 L’arrêt normal d’exploitation doit d’abord drainer les consommateurs.
 
 Le raccordement aux instances passe quatorze groupes réels :
-[preuve](../docs/evidence/managed-storage-dev-2026-11-06.json). Les mutations
-publiques et la console restent à raccorder.
+[preuve](../docs/evidence/managed-storage-dev-2026-11-06.json). Les mutations publiques de
+création, quotas, publication et suppression sont raccordées au contrôle.
+Les admissions et commandes de purge/cache de la console restent à intégrer.
 L'acquisition partielle après interruption et la marge de filesystem restent
 à qualifier. Une coupure électrique et un processus bloqué
 dans un appel noyau impossible à tuer ne sont pas reproduits par ces campagnes.
@@ -150,6 +151,10 @@ redémarre un abandon partiel et conserve une donnée inattendue avant résoluti
 Son rapport `storage/preparations-proof.json` exige completed/cleanup vrais,
 zéro échec et zéro skip. Exécuter ensuite les régressions en série.
 Le protocole et sa reprise sont définis dans [ADMISSION](../docs/ADMISSION.md).
-Les dix groupes de préparation et 37 groupes de régression passent sur le
-paquet installé : [preuve recoupée](../docs/evidence/storage-preparations-dev-2026-11-06.json).
-Le raccordement aux mutations publiques du contrôle reste à réaliser.
+La preuve initiale conserve dix groupes de préparation et 37 régressions :
+[preuve](../docs/evidence/storage-preparations-dev-2026-11-06.json). La campagne
+actuelle compte douze groupes : elle vérifie aussi l’abandon avant réception
+d’un prepare retardé, sans allocation, et ses refus de version/propriétaire/bail.
+Le raccordement aux mutations publiques est décrit dans
+[control](../control/README.md#mutations-de-stockage-des-fonctions) et sa
+[preuve](../docs/evidence/function-storage-dev-2026-11-06.json).

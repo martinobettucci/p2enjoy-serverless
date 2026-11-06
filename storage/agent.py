@@ -54,7 +54,7 @@ class Server:
             'configure':{'function_id','configuration','expected_version'},
             'prepare-configuration':{'function_id','operation_id','installation_id','configuration','expected_version'},
             'commit-configuration':{'function_id','operation_id','installation_id'},
-            'abort-configuration':{'function_id','operation_id','installation_id'},
+            'abort-configuration':{'function_id','operation_id','installation_id','configuration','expected_version'},
             'configuration-operation':{'function_id','operation_id','installation_id'},
             'acquire':{'function_id','consumer_id','installation_id','configuration'},
             'release':{'consumer_id','installation_id'},'check':{'consumer_id','installation_id'},
@@ -63,6 +63,9 @@ class Server:
         }
         if not isinstance(operation,str) or operation not in fields:raise StorageError('invalid_operation')
         optional={'after'} if operation=='prepare-configuration' else {'after','expected_version'}
+        if operation=='abort-configuration':
+            optional.add('configuration')
+            if ('configuration' in request)!=('expected_version' in request):raise StorageError('invalid_fields')
         if set(request)-{'op'}-fields[operation] or fields[operation]-optional-set(request):raise StorageError('invalid_fields')
         for field in ('function_id','consumer_id','installation_id','operation_id','after'):
             if field in request:uuid(request[field])
@@ -93,7 +96,8 @@ class Server:
             if self.quiesced:raise StorageError('maintenance_active')
             if op=='prepare-configuration':return await v.prepare_configuration(request['function_id'],request['operation_id'],request['installation_id'],request['configuration'],request['expected_version'])
             if op in ('commit-configuration','abort-configuration'):
-                return await v.resolve_configuration(request['function_id'],request['operation_id'],request['installation_id'],'committed' if op=='commit-configuration' else 'aborted')
+                unseen={'configuration':request['configuration'],'expected_version':request['expected_version']} if 'configuration' in request else None
+                return await v.resolve_configuration(request['function_id'],request['operation_id'],request['installation_id'],'committed' if op=='commit-configuration' else 'aborted',unseen=unseen)
             if op=='configure':return await v.configure(request['function_id'],request['configuration'],request.get('expected_version'))
             if op=='acquire':return await v.acquire(request['function_id'],request['consumer_id'],request['installation_id'],request['configuration'])
             if op=='release':return await v.release(request['consumer_id'],request['installation_id'])

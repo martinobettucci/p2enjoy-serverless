@@ -20,6 +20,7 @@ from .auth import Identity,SESSION_COOKIE,FLOW_COOKIE
 from .config import Settings,Vault
 from .db import Database,audit
 from .deployments import Deployments
+from .function_operations import FunctionOperations
 from .network import forwarded_addresses
 
 logger=logging.getLogger('p2enjoy.control')
@@ -46,7 +47,8 @@ settings=Settings.load()
 database=Database(settings.state_dir)
 vault=Vault(settings.master_key)
 identity=Identity(settings,database,vault)
-deployments=Deployments(settings,database,identity,vault)
+operations=FunctionOperations(settings,database)
+deployments=Deployments(settings,database,identity,vault,operations)
 
 
 @asynccontextmanager
@@ -63,15 +65,18 @@ async def lifespan(app):
                 if not valid:raise RuntimeError('La clé maîtresse ne correspond pas à cette base.')
             else:db.execute('INSERT INTO security_metadata VALUES (?,?)',('master-key',vault.seal(marker)))
         await deployments.ready()
+        await operations.ready(deployments.installation)
         yield
     finally:
-        await deployments.close()
-        await identity.close()
+        try:await operations.close()
+        finally:
+            await deployments.close()
+            await identity.close()
 
 
 app=FastAPI(title='P2Enjoy Serverless',lifespan=lifespan,docs_url=None,redoc_url=None,openapi_url=None)
 app.add_middleware(BodyLimit)
-app.include_router(router(database,identity,vault))
+app.include_router(router(database,identity,vault,operations))
 app.include_router(deployments.routes())
 web_root=Path(__file__).parent.parent/'web'
 app.mount('/assets',StaticFiles(directory=web_root/'assets'),name='assets')
@@ -105,17 +110,20 @@ async def http_error(request:Request,error:HTTPException):
             try:key=str(UUID(str(key))) if key else None
             except ValueError:key=None
             service_id=actor.service_id
-            if actor.kind=='admin' and key:
-                if route.startswith('/api/services/'):service_id=key
-                elif route.startswith('/api/functions/') or route.startswith('/api/tokens/'):
-                    table='functions' if '/functions/' in route else 'service_tokens'
-                    row=database.one(f'SELECT service_id FROM {table} WHERE id=?',(key,))
-                    if row:service_id=row['service_id']
-                elif route.startswith('/api/deployments/'):
-                    row=database.one('SELECT service_id,function_id FROM deployments WHERE id=?',(key,))
-                    if row:service_id=row['service_id'];key=row['function_id']
-            with database.transaction() as db:
-                audit(db,actor,'request.denied',key,service_id,{'status':error.status_code,'route':route})
+            try:
+                if actor.kind=='admin' and key:
+                    if route.startswith('/api/services/'):service_id=key
+                    elif route.startswith('/api/functions/') or route.startswith('/api/tokens/'):
+                        table='functions' if '/functions/' in route else 'service_tokens'
+                        row=database.one(f'SELECT service_id FROM {table} WHERE id=?',(key,))
+                        if row:service_id=row['service_id']
+                    elif route.startswith('/api/deployments/'):
+                        row=database.one('SELECT service_id,function_id FROM deployments WHERE id=?',(key,))
+                        if row:service_id=row['service_id'];key=row['function_id']
+                with database.transaction() as db:
+                    audit(db,actor,'request.denied',key,service_id,{'status':error.status_code,'route':route})
+            except sqlite3.Error:
+                logger.error(json.dumps({'event':'audit.unavailable','request_id':getattr(request.state,'request_id',None)}))
     response=JSONResponse({'error':error.detail},status_code=error.status_code,headers=error.headers)
     if request.url.path=='/auth/login' and 'text/html' in request.headers.get('accept',''):
         document=(web_root/'index.html').read_text().replace('<body>',
@@ -151,6 +159,7 @@ async def database_error(request:Request,error:sqlite3.OperationalError):
 async def health():
     database.one('SELECT 1')
     if deployments.cleanup_error:raise HTTPException(503,'Le nettoyage des artefacts doit être repris.')
+    if operations.cleanup_error or not operations.agent_ready:raise HTTPException(503,'Le stockage des fonctions doit être rétabli ou réconcilié.')
     return {'status':'ok','component':'control','version':'0.1.0-dev'}
 
 

@@ -10,10 +10,12 @@ from fastapi import APIRouter,HTTPException,Query,Request
 
 from .auth import digest
 from .db import audit
+from .deployments import get as current_object
+from .function_operations import storage_configuration
 from .models import Configuration,FunctionCreate,Named,ServiceCreate,TokenCreate
 
 
-def router(database,identity,vault):
+def router(database,identity,vault,operations):
     api=APIRouter(prefix='/api')
 
     def get(table,key):
@@ -26,6 +28,7 @@ def router(database,identity,vault):
         for column in ('environment_json','policy_json','config_json'):
             if column in result:result[column.removesuffix('_json')]=json.loads(result.pop(column))
         if 'secrets_cipher' in result:result['secret_names']=sorted(vault.open(result.pop('secrets_cipher')))
+        if 'config' in result:result['storage_operation']=operations.summary(result['id'])
         return result
 
     def configuration(row,data):
@@ -50,6 +53,12 @@ def router(database,identity,vault):
         row=get('functions',key)
         get('services',row['service_id'])
         return row,actor
+
+    async def function_authorization(request,key,right):
+        row=database.one('SELECT * FROM functions WHERE id=? AND deleted_at IS NULL',(str(key),))
+        authorization=await identity.operation(request,row['service_id'] if row else '',right,str(key))
+        if not row:raise HTTPException(404,'Fonction introuvable.')
+        return authorization
 
     def token_public(row):
         data=dict(row);data.pop('digest',None)
@@ -131,6 +140,7 @@ def router(database,identity,vault):
     async def update_service(request:Request,key:UUID,data:ServiceCreate):
         actor=await identity.admin(request,True);row=get('services',key);current_version(request,row)
         with database.transaction() as db:
+            operations.service_available(db,str(key))
             db.execute('UPDATE services SET name=?,description=?,policy_json=?,updated_at=? WHERE id=?',(
                 data.name,data.description,data.policy.model_dump_json(),time.time(),str(key)))
             audit(db,actor,'service.update',str(key),str(key))
@@ -140,6 +150,7 @@ def router(database,identity,vault):
     async def delete_service(request:Request,key:UUID):
         actor=await identity.admin(request,True);get('services',key)
         with database.transaction() as db:
+            operations.service_available(db,str(key))
             if db.execute('SELECT 1 FROM functions WHERE service_id=? AND deleted_at IS NULL',(str(key),)).fetchone():raise HTTPException(409,'Supprimez d’abord les fonctions de ce service.')
             db.execute('UPDATE services SET deleted_at=? WHERE id=?',(time.time(),str(key)))
             db.execute('UPDATE service_tokens SET revoked_at=? WHERE service_id=? AND revoked_at IS NULL',(time.time(),str(key)))
@@ -152,6 +163,7 @@ def router(database,identity,vault):
         if actor.functions is not None:raise HTTPException(403,'Un jeton limité à des fonctions ne modifie pas la configuration globale.')
         row=get('services',key);current_version(request,row);env,secured=configuration(row,data)
         with database.transaction() as db:
+            operations.service_available(db,str(key))
             db.execute('UPDATE services SET environment_json=?,secrets_cipher=?,updated_at=? WHERE id=?',(env,secured,time.time(),str(key)))
             audit(db,actor,'service.configure',str(key),str(key))
         return public(get('services',key))
@@ -167,13 +179,28 @@ def router(database,identity,vault):
 
     @api.post('/services/{key}/functions',status_code=201)
     async def create_function(request:Request,key:UUID,data:FunctionCreate):
-        actor=await identity.authorize(request,str(key),'create');get('services',key)
-        if actor.functions is not None:raise HTTPException(403,'Create exige une portée sur le service entier.')
-        function_id=str(uuid4());now=time.time();env,secured=configuration({},data.configuration)
-        with database.transaction() as db:
-            db.execute('INSERT INTO functions VALUES (?,?,?,?,?,?,NULL,?,?,NULL)',(
-                function_id,str(key),data.name,data.config.model_dump_json(),env,secured,now,now))
-            audit(db,actor,'function.create',function_id,str(key))
+        function_id=str(uuid4());operation=str(uuid4())
+        authorization=await identity.operation(request,str(key),'create',function_id)
+        if authorization.actor.functions is not None:raise HTTPException(403,'Create exige une portée sur le service entier.')
+        env,secured=configuration({},data.configuration)
+        async with operations.responsibility(operation):
+            with database.transaction() as db:
+                service=current_object(db,'services',key)
+                identity.recheck(db,authorization,str(key),'create',function_id)
+                if db.execute('SELECT 1 FROM functions WHERE service_id=? AND name=? AND deleted_at IS NULL',(str(key),data.name)).fetchone():
+                    raise HTTPException(409,'Ce nom de fonction existe déjà dans ce service.')
+                operations.reserve(db,operation,{'id':function_id},service,storage_configuration(data.config.model_dump()))
+            await operations.prepare(operation)
+            authorization=await identity.operation(request,str(key),'create',function_id)
+            with database.transaction() as db:
+                service=current_object(db,'services',key)
+                identity.recheck(db,authorization,str(key),'create',function_id)
+                operations.verify(db,operation,{'id':function_id},service)
+                now=time.time()
+                db.execute('INSERT INTO functions VALUES (?,?,?,?,?,?,NULL,?,?,NULL)',(
+                    function_id,str(key),data.name,data.config.model_dump_json(),env,secured,now,now))
+                operations.commit(db,operation)
+                audit(db,authorization.actor,'function.create',function_id,str(key))
         return public(get('functions',function_id))
 
     @api.get('/functions/{key}')
@@ -182,27 +209,52 @@ def router(database,identity,vault):
 
     @api.put('/functions/{key}')
     async def update_function(request:Request,key:UUID,data:FunctionCreate):
-        row,actor=await function_actor(request,key,'update');current_version(request,row);env,secured=configuration(row,data.configuration)
-        with database.transaction() as db:
-            # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#préparation-validation-et-publication
-            current=db.execute('SELECT config_json,active_revision_id FROM functions WHERE id=?',(str(key),)).fetchone()
-            previous=json.loads(current['config_json'])
-            if current['active_revision_id'] and any(getattr(data.config,name)!=previous[name] for name in ('handler','runtime')):
-                raise HTTPException(409,'Un changement de handler ou de runtime exige un nouveau déploiement.')
-            db.execute('UPDATE functions SET name=?,config_json=?,environment_json=?,secrets_cipher=?,updated_at=? WHERE id=?',(
-                data.name,data.config.model_dump_json(),env,secured,time.time(),str(key)))
-            audit(db,actor,'function.update',str(key),row['service_id'])
+        authorization=await function_authorization(request,key,'update');operation=str(uuid4())
+        async with operations.responsibility(operation):
+            with database.transaction() as db:
+                row=current_object(db,'functions',key);service=current_object(db,'services',row['service_id'])
+                identity.recheck(db,authorization,row['service_id'],'update',str(key));current_version(request,row)
+                operations.function_available(db,str(key));previous=json.loads(row['config_json'])
+                if row['active_revision_id'] and any(getattr(data.config,name)!=previous[name] for name in ('handler','runtime')):
+                    raise HTTPException(409,'Un changement de handler ou de runtime exige un nouveau déploiement.')
+                env,secured=configuration(row,data.configuration)
+                changed=storage_configuration(previous)!=storage_configuration(data.config.model_dump())
+                if changed:operations.reserve(db,operation,row,service,storage_configuration(data.config.model_dump()))
+                else:
+                    db.execute('UPDATE functions SET name=?,config_json=?,environment_json=?,secrets_cipher=?,updated_at=? WHERE id=?',(
+                        data.name,data.config.model_dump_json(),env,secured,time.time(),str(key)))
+                    audit(db,authorization.actor,'function.update',str(key),row['service_id'])
+            if changed:
+                await operations.prepare(operation)
+                authorization=await identity.operation(request,row['service_id'],'update',str(key))
+                with database.transaction() as db:
+                    row=current_object(db,'functions',key);service=current_object(db,'services',row['service_id'])
+                    identity.recheck(db,authorization,row['service_id'],'update',str(key))
+                    operations.verify(db,operation,row,service)
+                    db.execute('UPDATE functions SET name=?,config_json=?,environment_json=?,secrets_cipher=?,updated_at=? WHERE id=?',(
+                        data.name,data.config.model_dump_json(),env,secured,time.time(),str(key)))
+                    operations.commit(db,operation)
+                    audit(db,authorization.actor,'function.update',str(key),row['service_id'])
         return public(get('functions',key))
 
     @api.delete('/functions/{key}')
     async def delete_function(request:Request,key:UUID):
-        row,actor=await function_actor(request,key,'delete')
-        with database.transaction() as db:
-            # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
-            now=time.time()
-            db.execute('UPDATE functions SET active_revision_id=NULL,deleted_at=?,updated_at=? WHERE id=?',(now,now,str(key)))
-            db.execute("UPDATE deployments SET state='failed',error_code='function_deleted',configuration_cipher=NULL,completed_at=? WHERE function_id=? AND state IN ('prepared','receiving','validating')",(now,str(key)))
-            audit(db,actor,'function.delete',str(key),row['service_id'])
+        authorization=await function_authorization(request,key,'delete');operation=str(uuid4())
+        async with operations.responsibility(operation):
+            with database.transaction() as db:
+                row=current_object(db,'functions',key);service=current_object(db,'services',row['service_id'])
+                identity.recheck(db,authorization,row['service_id'],'delete',str(key));current_version(request,row)
+                operations.reserve(db,operation,row,service)
+            await operations.prepare(operation)
+            authorization=await identity.operation(request,row['service_id'],'delete',str(key))
+            with database.transaction() as db:
+                row=current_object(db,'functions',key);service=current_object(db,'services',row['service_id'])
+                identity.recheck(db,authorization,row['service_id'],'delete',str(key));operations.verify(db,operation,row,service)
+                now=time.time()
+                db.execute('UPDATE functions SET active_revision_id=NULL,deleted_at=?,updated_at=? WHERE id=?',(now,now,str(key)))
+                db.execute("UPDATE deployments SET state='failed',error_code='function_deleted',configuration_cipher=NULL,completed_at=? WHERE function_id=? AND state IN ('prepared','receiving','validating')",(now,str(key)))
+                operations.commit(db,operation)
+                audit(db,authorization.actor,'function.delete',str(key),row['service_id'])
         return {'deleted':True,'data_policy':'archive'}
 
     @api.get('/services/{key}/tokens')

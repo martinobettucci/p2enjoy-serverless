@@ -1,5 +1,6 @@
 // @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#limites-et-reprise-des-publications
 // @verifies docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#limites-et-reprise-des-publications
+import {purgeStorageArchive} from './storage-archives.mjs';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
@@ -116,9 +117,15 @@ async function check(name,action) {
 }
 async function create(name) {
   const row=await call(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'src/handlers.echo',memory_mib:128}}});
-  functions.set(row.id,row);return row;
+  functions.set(row.id,row);functionIds.push(row.id);return row;
 }
-async function remove(fn) {await call(`/api/functions/${fn.id}`,{method:'DELETE'});functions.delete(fn.id);}
+const storageArchives=[],functionIds=[],deletedFunctions=new Set();
+async function remove(fn) {
+  if(!deletedFunctions.has(fn.id)){
+    await call(`/api/functions/${fn.id}`,{method:'DELETE'});deletedFunctions.add(fn.id);
+  }
+  storageArchives.push(await purgeStorageArchive(fn.id,namespace.id));functions.delete(fn.id);
+}
 async function current(fn) {return call(`/api/functions/${fn.id}`,{token:true});}
 async function prepare(fn,handler='src/handlers.echo',status=201) {
   const row=await current(fn);
@@ -247,8 +254,10 @@ try {
 } finally {
   if(needsStart)try {await restoreControl();} catch {cleanupErrors.push('control_restart');}
   for(const fn of functions.values())try {
-    const history=await call(`/api/functions/${fn.id}/revisions?limit=100`);
-    for(const row of history.items)archives.push({function_id:fn.id,revision_id:row.id});
+    if(!deletedFunctions.has(fn.id)){
+      const history=await call(`/api/functions/${fn.id}/revisions?limit=100`);
+      for(const row of history.items)archives.push({function_id:fn.id,revision_id:row.id});
+    }
     await remove(fn);
   } catch {cleanupErrors.push('function:'+fn.id);}
   if(service)try {await call(`/api/services/${service.id}`,{method:'DELETE'});} catch {cleanupErrors.push('service:'+service.id);}
@@ -262,7 +271,7 @@ try {
   } catch {cleanupErrors.push('state_or_archive_verification');}
   await admin.dispose();await caller.dispose();
   await writeFile(report,JSON.stringify({completed:completed&&!cleanupErrors.length,checks,skipped:0,cleanup:!cleanupErrors.length,
-    cleanupErrors,before,observations,after,retained_archives:archives,
+    cleanupErrors,before,observations,after,retained_archives:archives,storage_archives:storageArchives,function_ids:functionIds,namespace_id:namespace?.id,
     remaining_proofs:['Expiration réelle','Budget et marge disque','Déconnexion administrateur concurrente','Interruption pendant nettoyage','Invocation après rollback']},null,2)+'\n');
   assert.deepEqual(cleanupErrors,[]);
 }

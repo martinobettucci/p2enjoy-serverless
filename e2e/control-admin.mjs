@@ -1,6 +1,7 @@
 // @spec docs/CONTROL.md#preuves | docs/SCHEMA.md | docs/BACKLOG.md#sls-020
 // @verifies docs/CONTROL.md#preuves | docs/SCHEMA.md | docs/BACKLOG.md#sls-020
 // Uses a real admin session obtained by authorize.mjs and real scoped tokens.
+import {purgeStorageArchive} from './storage-archives.mjs';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
@@ -20,6 +21,7 @@ const session = await stateResponse.json();
 assert(session.authenticated,'Une vraie connexion administrateur est requise.');
 const csrf = session.csrf_token;
 const prefix = `qa-${randomUUID().slice(0,8)}`;
+const storageArchives=[],deletedFunctions=[];
 const checks = [], functions = new Map(), services = [], tokens = [];
 let namespace, a, b, first, second, read, create, update, remove, full, restricted, completed=false;
 
@@ -171,7 +173,7 @@ try {
   await check('Delete : suppression autorisée et service occupé protégé',async () => {
     await call(`/api/services/${a.id}`,{method:'DELETE',status:409});
     const disposable = await makeFunction(a,`${prefix}-delete`,create.token);
-    await call(`/api/functions/${disposable.id}`,{method:'DELETE',token:remove.token});functions.delete(disposable.id);
+    await call(`/api/functions/${disposable.id}`,{method:'DELETE',token:remove.token});functions.delete(disposable.id);deletedFunctions.push(disposable.id);
     await call(`/api/functions/${disposable.id}`,{token:read.token,status:403});
     await call(`/api/functions/${first.id}`,{token:remove.token,status:403});
   });
@@ -212,10 +214,11 @@ try {
   completed=true;
 } finally {
   const cleanupErrors=[];
-  for (const [id] of functions) {try {await call(`/api/functions/${id}`,{method:'DELETE'});} catch {cleanupErrors.push(`function:${id}`);}}
+  for (const [id] of functions) {try {await call(`/api/functions/${id}`,{method:'DELETE'});deletedFunctions.push(id);} catch {cleanupErrors.push(`function:${id}`);}}
+  for(const id of deletedFunctions){try{storageArchives.push(await purgeStorageArchive(id,namespace.id));}catch{cleanupErrors.push('storage:'+id);}}
   for (const service of services) {try {await call(`/api/services/${service.id}`,{method:'DELETE'});} catch {cleanupErrors.push(`service:${service.id}`);}}
   if (namespace) {try {await call(`/api/namespaces/${namespace.id}`,{method:'DELETE'});} catch {cleanupErrors.push(`namespace:${namespace.id}`);}}
   await admin.dispose();await caller.dispose();
-  await writeFile(new URL('control-admin.json',output),JSON.stringify({target:base,completed:completed && !cleanupErrors.length,checks,cleanupErrors,skipped:0},null,2)+'\n');
+  await writeFile(new URL('control-admin.json',output),JSON.stringify({target:base,completed:completed && !cleanupErrors.length,checks,cleanupErrors,skipped:0,storage_archives:storageArchives,namespace_id:namespace?.id,function_ids:[...functions.keys(),...deletedFunctions]},null,2)+'\n');
   assert.deepEqual(cleanupErrors,[],'Nettoyage des objets de qualification requis.');
 }

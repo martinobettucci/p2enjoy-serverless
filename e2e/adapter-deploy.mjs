@@ -1,6 +1,7 @@
 // @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#commande-deploy
 // @verifies docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#commande-deploy
 // Genuine SSO session, service tokens, CLI processes and Docker publications.
+import {purgeStorageArchive} from './storage-archives.mjs';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
@@ -28,7 +29,7 @@ try {
   await api.dispose();await writeFile(report,JSON.stringify({completed:false,prerequisite_failed:true,checks:[],skipped:0,
     error:'Session SSO administrateur réelle indisponible'})+'\n');throw error;
 }
-const checks=[],archives=[];let namespace,service,work,completed=false,clean=false;
+const checks=[],archives=[],storageArchives=[],functionIds=[],cleanupErrors=[];let namespace,service,work,completed=false,clean=false;
 const prefix='cli-'+randomUUID().slice(0,8),secret='qualification-cli-'+randomUUID();
 async function call(url,{method='GET',body,status=200}={}) {
   const response=await api.fetch(url,{method,data:body,headers:{Origin:base,'X-CSRF-Token':session.csrf_token}});
@@ -132,18 +133,24 @@ try {
 } finally {
   try {
     if(service) {
-      const functions=(await call(`/api/services/${service.id}/functions?limit=100`)).items;
+      let functions=[];
+      try{functions=(await call(`/api/services/${service.id}/functions?limit=100`)).items;functionIds.push(...functions.map(f=>f.id));}
+      catch(error){cleanupErrors.push('function_inventory:'+error.name);}
       for(const fn of functions) {
-        for(const row of (await call(`/api/functions/${fn.id}/revisions`)).items)archives.push({function_id:fn.id,revision_id:row.id});
-        await call(`/api/functions/${fn.id}`,{method:'DELETE'});
+        try{
+          for(const row of (await call(`/api/functions/${fn.id}/revisions`)).items)archives.push({function_id:fn.id,revision_id:row.id});
+          await call(`/api/functions/${fn.id}`,{method:'DELETE'});
+          storageArchives.push(await purgeStorageArchive(fn.id,namespace.id));
+        }catch(error){cleanupErrors.push('function:'+fn.id+':'+error.name);}
       }
-      await call(`/api/services/${service.id}`,{method:'DELETE'});
+      try{await call(`/api/services/${service.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push('service:'+service.id+':'+error.name);}
     }
-    if(namespace)await call(`/api/namespaces/${namespace.id}`,{method:'DELETE'});
-    if(work)await rm(work,{recursive:true,force:true});clean=true;
+    if(namespace){try{await call(`/api/namespaces/${namespace.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push('namespace:'+namespace.id+':'+error.name);}}
+    if(work){try{await rm(work,{recursive:true,force:true});}catch(error){cleanupErrors.push('local_files:'+error.name);}}
+    clean=cleanupErrors.length===0;
   } finally {
     await api.dispose();
-    await writeFile(report,JSON.stringify({completed:completed&&clean,checks,cleanup:clean,skipped:0,retained_archives:archives,
+    await writeFile(report,JSON.stringify({completed:completed&&clean,checks,cleanup:clean,skipped:0,retained_archives:archives,storage_archives:storageArchives,cleanupErrors,function_ids:functionIds,namespace_id:namespace?.id,
       remaining_proofs:['Rupture réelle après envoi et absence de double publication','Modification concurrente des fichiers après packaging','Réponses trop grandes et redirections réelles','Invocation du code publié']},null,2)+'\n');
   }
 }

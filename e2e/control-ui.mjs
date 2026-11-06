@@ -1,6 +1,7 @@
 // @spec docs/BACKLOG.md#sls-020 | docs/CONTROL.md#preuves | docs/DESIGN_SYSTEM_APP.md
 // @verifies docs/BACKLOG.md#sls-020 | docs/CONTROL.md#preuves | docs/DESIGN_SYSTEM_APP.md
 // Canonical UI paths on the real deployment using a real SSO admin session.
+import {purgeStorageArchive} from './storage-archives.mjs';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
@@ -14,7 +15,7 @@ const state=JSON.parse(await readFile(new URL('admin-session.json',output),'utf8
 const browser=await chromium.launch({headless:true});
 const context=await browser.newContext({storageState:state,viewport:{width:1440,height:1000},locale:'fr-FR'});
 const page=await context.newPage();
-const faults=[],checks=[],cleanupErrors=[];
+const faults=[],checks=[],cleanupErrors=[],storageArchives=[];
 page.on('pageerror',error => faults.push(error.name));
 const prefix=`ui-${randomUUID().slice(0,8)}`;
 const namespaceName=(prefix+'x'.repeat(63)).slice(0,63);
@@ -22,7 +23,7 @@ let namespaceId,serviceId,functionId,completed=false;
 const dialog=page.getByRole('dialog');
 async function check(name,run) {try {await run();checks.push({name,status:'passed'});console.log('PASS',name);} catch (error) {checks.push({name,status:'failed',error:error.name});throw error;}}
 async function gone() {await dialog.waitFor({state:'hidden'});}
-async function screenshot(name) {await page.screenshot({path:new URL(name+'.png',output).pathname,fullPage:true});}
+async function screenshot(name) {await page.screenshot({path:new URL(name+'.jpg',output).pathname,type:'jpeg',quality:85,fullPage:true});}
 async function api(path,method='GET',body,headers={}) {
   const session=await (await context.request.get(base+'/api/session')).json();
   assert(session.authenticated,'Session administrateur réelle requise.');
@@ -189,9 +190,9 @@ try {
   completed=true;
 } finally {
   for (const [kind,id] of [['functions',functionId],['services',serviceId],['namespaces',namespaceId]]) {
-    if (id) {try {await api(`/api/${kind}/${id}`,'DELETE');} catch {cleanupErrors.push(`${kind}:${id}`);}}
+    if (id) {try {await api(`/api/${kind}/${id}`,'DELETE');if(kind==='functions')storageArchives.push(await purgeStorageArchive(id,namespaceId));} catch {cleanupErrors.push(`${kind}:${id}`);}}
   }
   await browser.close();
-  await writeFile(new URL('control-ui.json',output),JSON.stringify({target:base,completed:completed && !cleanupErrors.length && !faults.length,checks,faults,cleanupErrors,skipped:0},null,2)+'\n');
+  await writeFile(new URL('control-ui.json',output),JSON.stringify({target:base,completed:completed && !cleanupErrors.length && !faults.length,checks,faults,cleanupErrors,skipped:0,storage_archives:storageArchives,namespace_id:namespaceId,function_id:functionId},null,2)+'\n');
   assert.deepEqual(cleanupErrors,[],'Nettoyage des objets créés par le parcours UI.');
 }
