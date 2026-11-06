@@ -12,6 +12,10 @@ Docker. Le dossier de cellule fourni reste la référence `dev-spark.md`.
 
 ## Ordre de réalisation
 
+L'extraction serveur reçoit un checkpoint distinct, construit depuis
+`control/Dockerfile.artifacts` et qualifié par `e2e/artifacts.py`. Ses commandes
+DEV restent séparées du contrôle permanent et ne déclenchent aucune migration.
+
 L'image `runtime/` de validation Node et ses variantes originales sont construites
 sur le SPARK. Le pilote Docker passe 36 scénarios réels ; ses ressources de
 qualification sont nettoyées. Cette étape ne change pas le contrôle déployé.

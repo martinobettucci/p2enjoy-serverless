@@ -118,6 +118,39 @@ La limite réelle d'extraction est recomptée pendant la lecture, même si les
 tailles annoncées sont mensongères. Les permissions finales ne conservent
 que le caractère exécutable éventuel ; aucun bit privilégié n'est repris.
 
+L'entrée serveur accepte ZIP classique monovolume, STORED ou DEFLATE, avec
+ou sans data descriptor (signature facultative). ZIP64, préfixe exécutable,
+concaténation et enregistrements supplémentaires sont refusés explicitement :
+les limites du produit et le packager fourni n'en ont pas besoin. Le répertoire
+central est parcouru en flux avant toute extraction ; ses 16 Mio maximum et
+ses 20 000 entrées incluent les répertoires explicites. Au plus 20 000 répertoires
+implicites peuvent être créés. Les noms UTF-8 ou CP437 sont conservés ; aucune
+normalisation silencieuse d'un chemin interdit. Les composants suivent aussi
+la borne Linux de 255 octets.
+
+Les extras admis sont les timestamps, UID/GID et métadonnées NTFS ignorés,
+ainsi que le chemin Unicode Info-ZIP uniquement lorsqu'il confirme exactement
+le nom principal et son CRC. Un extra inconnu ou un nom alternatif contradictoire
+est refusé. Les en-têtes locaux, centraux et descripteurs doivent être cohérents,
+et les zones de données ne doivent ni se chevaucher ni laisser de contenu
+intermédiaire non décrit.
+
+Le serveur lit les flux STORED/DEFLATE avec struct et zlib, sans extractall ni
+ZipExtFile : celui-ci peut tronquer aux tailles annoncées avant son CRC et
+ne suffit pas à prouver une taille réelle mensongère. Les compteurs, CRC et
+fin de flux sont vérifiés avant conservation de chaque fichier. Les écritures
+utilisent des descripteurs de répertoire sans suivre de liens. Une destination
+préexistante est refusée ; un répertoire temporaire privé est publié par
+renameat2 NOREPLACE sous Linux après succès. Un échec supprime uniquement ce
+candidat et conserve l'ancienne destination. Les fichiers sont readonly,
+avec exécution conservée lorsqu'elle était demandée ; les répertoires sont 0555.
+
+L'extracteur est d'abord qualifié comme vraie CLI dans une image Python épinglée,
+avec le packager et le validateur Node réels. Son intégration HTTP et la
+réservation globale restent dans le parcours de publication décrit ci-dessous.
+Sa charge de stockage compte les fichiers et répertoires par blocs logiques
+de 4 Kio, en plus du ZIP ; l'admission conservera la marge libre de 1 Gio.
+
 L'inventaire enregistré comprend chemins, tailles et SHA256 ; la révision
 conserve aussi l'empreinte du ZIP, runtime, architecture, handler et image
 Node utilisés. Le code est monté en lecture seule lors de son utilisation.
