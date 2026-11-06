@@ -65,6 +65,10 @@ Les décisions, preuves de lecture et questions sont dans
 
 ## Méthode
 
+Les noms décrivent obligatoirement la fonction réelle et l’usage de chaque
+élément. La [règle de nommage](CLAUDE_PROJECT.md#nommage-obligatoire) s’applique
+au code, aux ressources déployées et aux libellés de la console.
+
 Référence : [P2Enjoy Software Factory Base](https://github.com/P2Enjoy/software-factory-base).
 Le module de formation, ses supports et ses exports de séminaire sont exclus.
 Le socle est importé ici : `CLAUDE.md`, `AGENTS.md`, rôles `.codex/` et

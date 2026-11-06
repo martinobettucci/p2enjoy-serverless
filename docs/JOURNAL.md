@@ -1015,3 +1015,13 @@ cookie de plateforme ; une nouvelle requête confirme session authenticated
 et namespaces HTTP 200 le 6 novembre à 16:00 UTC. La migration SLS-011 est
 qualifiée. Les campagnes administrateur globales restent ouvertes et disposent
 maintenant de cette session réelle. Aucun remote Git n’est configuré.
+
+## Consigne durable de nommage — 2026-11-06
+
+Le responsable demande de rendre obligatoire un nommage significatif de la
+fonction et de l’usage. La règle est inscrite dans CLAUDE_PROJECT.md, contrat
+lu par les agents, et référencée depuis le README. Elle couvre code, ressources
+et interface, distingue moteur d’exécution et clients de test, et exige de
+justifier les qualificatifs d’environnement. Le nom est vérifié dès la création
+et à la revue. Cette modification documentaire ne change aucune ressource
+déployée ; sa validation porte sur le contenu, le lien et la propreté du diff.

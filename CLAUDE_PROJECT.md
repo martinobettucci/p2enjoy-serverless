@@ -25,6 +25,38 @@
 - Aucun résultat du banc ne prouve la compatibilité complète du client ni une
   fonction de plateforme qui n'existe pas encore.
 
+## Nommage obligatoire
+
+Tout nom décrit la fonction réelle de l’élément et son usage. Une personne
+qui découvre le projet doit comprendre ce qu’il fait en lisant son nom,
+sans explication orale ni connaissance de l’historique de développement.
+Cette règle s’applique aux conteneurs, images, services, domaines, ressources,
+répertoires, fichiers, fonctions de code, variables et libellés d’interface.
+
+- Nommer d’abord la responsabilité : API, runtime, agent de stockage,
+  client de tests, délai maximal d’exécution, délai d’arrêt après inactivité.
+- Distinguer le composant qui exécute une fonction du client qui le teste.
+  Un runtime ne s’appelle pas « tests » parce qu’il sert à la qualification.
+- Employer des termes précis et cohérents entre le code, Docker, la console
+  et la documentation. Éviter les noms arbitraires, abréviations inventées,
+  mots vagues et empilements de préfixes ou suffixes.
+- Ajouter un qualificatif d’usage ou d’environnement seulement s’il distingue
+  réellement deux éléments. Ne pas ajouter systématiquement « dev », « test »
+  ou « qualification » ; `lelabs.tech` indique déjà l’infrastructure de
+  développement, d’où `serverless.lelabs.tech`.
+- Un identifiant technique nécessaire à l’unicité complète le nom descriptif ;
+  il ne remplace pas l’indication du rôle dans les vues d’exploitation.
+- Vérifier le nom avant chaque création ou modification et lors de la revue.
+  Corriger un nom ambigu avant livraison ; un commentaire explicatif ne suffit
+  pas à rendre acceptable un nom trompeur.
+
+Exemples : `serverless-api` pour l’API et la console, `serverless-runtime`
+pour le moteur d’exécution, `serverless-storage-agent` pour l’agent de stockage ;
+`max_execution_seconds` et `idle_shutdown_seconds` distinguent deux délais
+qu’un nom générique comme `timeout` confondrait.
+
+## Application de la méthode
+
 La méthode est importée depuis `P2Enjoy/software-factory-base` ; provenance et
 adaptations : `docs/METHODE.md`. La routine planifiée est inactive. Aucun
 bootstrap de FORGE, démon local, contournement TLS ou lancement PREPROD/PROD

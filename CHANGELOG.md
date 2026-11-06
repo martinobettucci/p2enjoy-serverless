@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- Règle de nommage obligatoire dans le contrat local : rôle réel et usage
+  compréhensibles, vocabulaire cohérent et qualificatifs justifiés ; lien
+  depuis le README pour les prochains développements et leurs revues.
+
 - Noms Docker explicites `serverless-api` et `serverless-runtime-reference`,
   avec conservation des volumes, de l’identité et des objets de la base.
 - Entrée `https://serverless.lelabs.tech` appliquée dans la configuration SPARK ;
