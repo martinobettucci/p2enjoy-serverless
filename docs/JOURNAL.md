@@ -1268,3 +1268,27 @@ min/max/idle, reprise du contrôle, invocation publique avec ACL origine/IP,
 mutations de stockage par API/console, crons et métriques d'exploitation.
 La prochaine tranche raccorde l'admission et la passerelle au pilote réel avec
 baux ; aucune campagne de composants ne vaut clôture du goal de plateforme.
+
+### SLS-040 — admission, passerelle et frontière de commit
+
+Le tour précédent est classé progrès : bfcb264 déployé, 118 groupes vérifiés.
+L'arbre est propre au démarrage de cette tranche ; les deux conteneurs et l'agent
+sont sains. La cellule confirme memory.max=17179869184 et cpu.max sans plafond ;
+son contrat garantit 1 CPU partagé. Les budgets de fonctions proposés sont donc
+1 CPU, 8192 Mio et 32 instances, hors contrôle/agent/validation, avec 128 attentes
+globales et 16 par fonction. Le fichier ADMISSION.md fixe la comptabilité, la
+file, les minima/idle, les états durables, la reprise et la passerelle.
+
+Les explorations ont confirmé trois défauts à corriger pour l'entrée publique :
+repli admin du helper authorize, limite générique de 256 Kio et port Origin :0
+canonisé à tort. Elles ont aussi identifié les CIDR IPv4-mapped et les alias
+implicites concurrents. Les références des instances doivent protéger les archives.
+
+Le raccordement des mutations exige une vraie décision durable entre SQLite et
+l'agent. configure(old) n'est pas un rollback sûr : nouveaux volumes conservés
+et budget libéré déjà réutilisable. Décision : préparer et sonder les quotas sans
+publier ni libérer l'ancienne allocation ; revalider les droits avant le commit
+SQL de l'objet et de sa décision ; confirmer ensuite commit dans l'agent. Avant
+cette décision, une interruption entraîne abort. Après, elle reprend commit.
+Cette étape sert directement les créations, mises à jour et publications réelles
+avant activation de la passerelle ; le goal garde son périmètre complet.
