@@ -905,3 +905,12 @@ interrompue ne doit jamais être déclarée saine à partir d’une liste vide d
 montages. La maintenance normale refuse les baux et intentions en cours. Le
 paquet root est identifié par son empreinte et son unité borne mémoire,
 processus et descripteurs ; ces choix restent propres au service DEV.
+
+La première campagne de l’agent passe quinze groupes réels avec nettoyage,
+zéro échec et zéro skip. Elle établit les baux et fichiers après restart, mais
+les pannes doivent encore être exercées avec un consommateur Docker vivant.
+La revue impose une fermeture atomique des mutations pour la maintenance :
+un contrôle ponctuel de l’absence de bail ne suffit pas avant un restart.
+Le canal reçoit donc quiesce/resume avec identité d’installation attendue.
+La récupération d’une sonde persistante reste consultable même quand sa
+terminaison ne peut pas encore être confirmée.

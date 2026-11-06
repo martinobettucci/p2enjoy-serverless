@@ -201,3 +201,13 @@ mutations attendent sa fin. Une acquisition partielle conservée après un crash
 est signalée comme telle et doit être libérée après réconciliation Docker.
 La santé globale reste dégradée tant qu’une compensation ou suppression est en
 attente, même si aucun démon n’est actuellement monté.
+
+La maintenance normale ferme atomiquement les mutations par `quiesce`, sous
+le même verrou que configure/acquire. Cette opération refuse si un bail, une
+intention ou une génération montée subsiste. Les requêtes déjà en attente
+relisent cette fermeture après obtention du verrou. L’installateur prépare le
+paquet, ferme les mutations, puis remplace l’unité ; en cas d’abandon il appelle
+`resume`. Ces deux opérations locales exigent l’identité de l’installation
+attendue. Les consultations restent disponibles. Le redémarrage démarre avec
+les mutations ouvertes après récupération. Une sonde encore impossible à
+terminer garde l’agent en récupération consultable, sans boucle de restart.
