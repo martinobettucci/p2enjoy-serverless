@@ -1863,3 +1863,16 @@ SLS-065 raccordera ensuite droits, catalogue d’archives et parcours de console
 avec le manuel. Ce découpage isole une garantie nécessaire avant les effets
 publics irréversibles. Spécification, schéma, installation et backlog sont
 persistés avant code. Aucun remote configuré ; commit local uniquement.
+
+### Effacements — première qualification et précision de preuve
+
+Le paquet agent 409d887c est installé après backup natif du registre 003 ;
+la migration 004 conserve l’identité de stockage. La première campagne passe
+12 groupes et nettoie ses ressources. La revue corrige auparavant la référence
+de worker terminée en erreur et le fsync du parent après disparition du montage.
+
+La preuve SQLite initiale reste trop indirecte (attente puis pending). Décision :
+ajouter un diagnostic JSON fixe lors de l’observation effective de l’exception
+du worker et l’exiger sous le vrai verrou SQLite. Garantir la fermeture continue
+du writer et recouper tous les UUID sur disque au nettoyage. La campagne sera
+rejouée avec six régressions en série ; le premier rapport reste un checkpoint.

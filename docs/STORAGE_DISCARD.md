@@ -55,6 +55,10 @@ Une erreur physique garde l’intention, sa réservation et un code fixe ; la
 maintenance reprend. La consultation rend state pending, phase
 stopping/erasing/finalizing et error_code, ou completed et error_code null.
 Elle inclut UUID, kind, expected_version et version, sans chemin système.
+Un worker terminé en exception SQLite est détaché avant lecture de son résultat,
+puis signalé par un événement JSON storage_discard_worker_failed portant
+function_id et error_code=registry_unavailable. Ce diagnostic fixe permet de
+corréler la reprise à une panne réellement observée, sans contenu SQL.
 La déconnexion n’annule rien. Un restart reprend la même intention. Un arrêt
 gracieux rejoint le worker avant fermeture SQLite ; une interruption par la
 borne systemd conserve l’intention. Les baux existants restent protégés.
@@ -87,3 +91,10 @@ Régressions en série : agent-test, limits-test, storage-preparations,
 managed-storage, puis function-storage et public-invocations HTTPS. Les preuves
 de composant ne ferment ni SLS-050 ni SLS-065. Le manuel utilisateur change
 avec les commandes publiques et n’anticipe pas leur disponibilité.
+
+La suite `python3 -B e2e/execution-suite.py --scope storage` exécute ces sept
+campagnes en série, avec rapports frais et sources/image recoupées. Le scénario
+SQLite conserve son vrai writer jusqu’à l’événement corrélé du worker échoué,
+puis exige sa reprise sans restart. La responsabilité du writer englobe
+acquisition et fermeture. Chaque UUID est recoupé physiquement au nettoyage ;
+corbeille et conteneurs sont comparés à l’inventaire initial.
