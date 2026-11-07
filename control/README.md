@@ -132,7 +132,12 @@ persistée et attend la confirmation du stockage : relire la fonction ou le
 candidat avant de réessayer. Les mutations incompatibles restent refusées.
 La suppression archive les volumes ; elle ne libère pas leur allocation.
 Le moteur d’admission est intégré ; les commandes publiques de purge restent
-à réaliser.
+en qualification dans SLS-065. La migration 006, les reçus publics, le vidage du
+cache, le catalogue d’archives et la purge sont déployés ; leurs pannes et reprises
+sont suivies dans la [preuve ciblée](../docs/evidence/storage-command-recovery-dev-2026-11-07.json).
+La campagne courante de mutation comporte quinze groupes, dont la fermeture
+du writer de qualification sous SIGTERM réel ; la preuve historique ci-dessus
+précède cet ajout. La qualification complète de SLS-065 reste ouverte.
 
 ## Invocations publiques et admissions
 

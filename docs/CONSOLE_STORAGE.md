@@ -180,3 +180,21 @@ l’API, erreurs réseau/session/version, attentes, focus/noms longs desktop/mob
 Concordance manuel source/rendu et captures inspectées. Régressions sérielles :
 mutations stockage, publication, invocations et console complète ; les preuves
 de l’agent ne remplacent pas celles des parcours publics.
+
+La preuve de validation encore vivante emploie un module original dont l’import
+attend réellement soixante secondes et écrit un marqueur dans son `/tmp`.
+Le délai produit de quinze secondes reste inchangé. Le conteneur est rattaché
+au candidat par le montage `/code`, ses labels d’installation et son marqueur.
+Une garde systemd indépendante est armée avant de retirer temporairement les
+permissions du seul socket Docker rootless de ce SPARK. Le contrôle doit subir
+un vrai refus EACCES ; root conserve l’accès opérateur à ce même daemon.
+
+DELETE puis purge interviennent pendant l’import. La preuve exige ensuite
+l’échec réel de l’upload avec nettoyage non confirmé, une purge encore en attente,
+les fichiers et compteurs retenus. Après restauration exacte du socket, le
+produit doit retirer le validateur et son canal, effacer les seuls artefacts de
+la fonction, vider les diagnostics tardifs et terminer le même reçu. Le banc
+ne retire pas lui-même le conteneur avant ces assertions. La restauration du
+socket après perte du helper est aussi exercée réellement. La fenêtre exige
+une cellule au repos, sans fonction étrangère active ; aucune opération sur
+la FORGE ni arrêt du daemon Docker.

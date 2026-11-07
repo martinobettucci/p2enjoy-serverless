@@ -2023,3 +2023,21 @@ et les budgets globaux à zéro. Les 25 fichiers Python/migrations embarqués so
 recoupés avec l’image inchangée. SLS-065 reste ouverte pour ses pannes résiduelles,
 la validation vivante, les régressions élargies et les notes SPARK. Aucun remote
 Git n’est configuré ; le checkpoint reste local.
+
+### Purge pendant validation Docker encore active
+
+Le tour précédent constitue un progrès vérifié : checkpoint `066ca0c`, sept
+groupes de reprise, quinze de mutation et huit du manuel. La prochaine preuve
+de SLS-065 vise la fenêtre entre DELETE, la fin d’un upload en validation et
+son nettoyage. La revue des sources confirme que `busy` retient les artefacts
+pendant l’upload, puis `cleanup_error` doit continuer à les retenir si Docker
+n’est pas joignable. Le diagnostic de validation peut arriver après la décision
+de purge ; la transaction terminale doit l’effacer de nouveau.
+
+Décision de banc, persistée avant code : import réel de soixante secondes avec
+marqueur, refus temporaire du seul socket rootless par permissions, restauration
+indépendante systemd avant perturbation. Les inspections sous panne passent par
+root sur le même daemon ; le contrôle doit constater EACCES. L’upload commence
+avant l’attente du marqueur par le helper. Après restauration, aucun nettoyage
+opérateur ne doit se substituer à celui du produit. Un scénario distinct éprouve
+la garde par perte réelle du helper. Le contrat des preuves détaille ces bornes.
