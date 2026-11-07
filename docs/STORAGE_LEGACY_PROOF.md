@@ -12,6 +12,12 @@ sans registre agent. Son image est construite depuis son propre arbre Git :
 contrôle, migrations 001–003, frontend et verrous de dépendances. Les dépendances
 Python, l’authentification et le protocole de validation sont comparés avec la
 version actuelle avant utilisation. L’image runtime officielle est conservée.
+Les dépendances Python, l’authentification et les deux fichiers runtime sont
+identiques. Le client Docker du validateur actuel ajoute seulement le paramètre
+optionnel `max_bytes=LIMIT`, transmis à sa requête ; sa valeur par défaut et le
+protocole de validation historique restent inchangés. Le banc vérifie exactement
+cette différence et conserve les deux empreintes, sans qualifier les fichiers
+entiers d’identiques.
 
 Le passage ancien → actuel utilise l’image immuable du contrôle actuellement
 déployé, qui applique normalement 004–006. L’ancienne API ne doit jamais voir la
