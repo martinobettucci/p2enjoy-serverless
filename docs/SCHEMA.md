@@ -197,3 +197,16 @@ discard_receipts (function_id unique référencé, operation_id unique,
 installation_id, kind, expected_version, version). Le reçu et la terminaison
 sont atomiques ; pending_json porte identifiants/phase/error_code pendant
 nettoyage. [Contrat](STORAGE_DISCARD.md#migration-et-installation).
+
+## Commandes publiques de stockage
+
+Migration 006 du contrôle prévue par [SLS-065](CONSOLE_STORAGE.md), non appliquée :
+functions reçoit purged_at nullable. function_operations est recréée avec ses
+colonnes et lignes conservées, en autorisant clear-cache/purge sans configuration,
+en plus de configuration/archive. Index service et unicité fonction conservés.
+storage_commands conserve id UUID primaire, function_id/service_id référencés,
+installation_id, kind clear-cache/purge, state preparing/pending/completed/aborted,
+phase nullable, storage_absent booléen, expected_function_version, result_version nullable, created_at,
+completed_at et error_code nullable. Un index function_id/created_at sert la
+dernière commande. Les résultats terminaux restent consultables ; la garde
+active reste exclusivement dans function_operations. Aucun secret n’est copié.

@@ -130,3 +130,13 @@ local. L’action d’actualisation et sa date restent visibles. Les pages et er
 de lecture restent indépendantes du formulaire en cours. L’activation conserve
 le focus dans la liste ; une suppression rend le focus à son titre si la carte
 disparaît. Sur mobile, champs et actions s’empilent ; pas de débordement de page.
+
+## Stockage et archives SLS-065
+
+Contrat décidé, à implémenter : [CONSOLE_STORAGE](CONSOLE_STORAGE.md#console-et-manuel).
+Stockage devient une facette de fonction ; Archives de fonctions une destination
+générale indépendante des parents supprimés. Listes de cinq, filtre et total
+explicites. Dernières mesures, inconnues et allocations restent distinctes.
+La confirmation de purge exige le nom exact ; celle de cache nomme sa portée
+sans ressaisie. Suivi partageable sans rejeu au rechargement, noms/UUID complets,
+états français et focus sur un élément encore monté, selon le socle global.

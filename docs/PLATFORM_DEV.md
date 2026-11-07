@@ -407,3 +407,19 @@ La [preuve](evidence/storage-discard-dev-2026-11-07.json) recoupe sept campagnes
 de code et les ressources libérées. La commande est `python3 -B
 e2e/execution-suite.py --scope storage`. Les commandes publiques et la console
 restent dans SLS-065. [Contrat](STORAGE_DISCARD.md).
+
+## Préparation de SLS-065
+
+Le [contrat public](CONSOLE_STORAGE.md) prévoit une migration 006 du contrôle,
+non appliquée : reçus durables, extension des gardes et date de purge. Avant
+déploiement : confirmer l’absence de campagnes, invocations, validations et
+intentions actives ; sauvegarder nativement SQLite avec permissions 0600 et
+inventorier les archives conservées. Construire puis démarrer le contrôle DEV,
+recouper migrations/intégrité/anciennes lignes et fichiers. L’agent 004 ne change
+pas. Aucun secret, variable, route ou service de cellule supplémentaire.
+
+Un retour à l’ancien contrôle exige d’abord zéro commande en cours et une
+restauration cohérente base/fichiers/volumes ; une purge effective ne s’annule
+pas en restaurant seulement SQLite. Aucune migration descendante automatique.
+Les preuves utilisent uniquement leurs propres fonctions et archives, jamais
+une purge globale des archives conservées des campagnes précédentes.

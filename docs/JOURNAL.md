@@ -1899,3 +1899,28 @@ d’archives, les droits publics et les parcours de console avec leur manuel.
 Aucune interface n’a changé dans SLS-064 ; sa vérification est celle des
 composants et API réels. Le goal de plateforme reste actif. Aucun remote Git
 n’est configuré, donc le commit reste local.
+
+### Stockage public — décisions de SLS-065
+
+Les explorations en lecture seule recoupent trois obligations : la purge de
+code est déjà prescrite par DEPLOYMENT ; les parents supprimés restent en base
+mais sont masqués par les lectures ordinaires ; le résolveur de garde traite
+actuellement tout type non configuration comme archive. Ajouter un bouton ou
+seulement un type SQL ne suffit donc pas.
+
+Décision : reçus publics persistants distincts des gardes, UUID connu avant
+POST et If-Match obligatoire, relecture des droits après drainage, décision
+SQL avant tout effacement et confirmation séparée des volumes et du code.
+Le reçu public ne dépend pas de la rétention du dernier reçu agent. La purge
+efface aussi la configuration propre inutilisable d’une fonction supprimée,
+en conservant audit et métadonnées de diagnostic ; elle ne touche pas celles
+des parents. Une lecture d’archive reste possible après leur suppression.
+Ces choix évitent une répétition destructive et une libération fictive de budget.
+
+La console ajoute Stockage et Archives de fonctions ; confirmations dans le
+flux, nom exact pour la purge irréversible, suivi par URL et aucune mutation
+automatique au rechargement. Les deux design systems ont été lus intégralement.
+CONSOLE_STORAGE, schéma, architecture, déploiement, backlog et design local
+portent ces décisions avant implémentation. Le manuel changera avec les écrans.
+La vérification du manuel existant vient de repasser ses huit groupes réels,
+zéro skip, 28 paragraphes recoupés et sept captures relues. Aucun remote Git.

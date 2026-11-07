@@ -308,3 +308,13 @@ Cette livraison ne clôt pas les preuves résiduelles et fonctionnalités du bac
 SLS-064 prépare les [reçus durables](STORAGE_DISCARD.md) et le worker unique
 d’effacement hors verrou de registre. Protocole déployé et vérifié : sept campagnes, 106 groupes réels, sans échec
 ni skip, avec migration et nettoyages recoupés. [Preuve](evidence/storage-discard-dev-2026-11-07.json). Le raccordement public et la console appartiennent à SLS-065.
+
+## Gestion publique du stockage
+
+Le contrat [SLS-065](CONSOLE_STORAGE.md) est fixé, non encore implémenté.
+Les reçus publics persistants sont séparés des gardes temporaires d’admission.
+Le contrôle décide après drainage et nouvelle vérification des droits, puis
+reprend le protocole agent corrélé avec ses paramètres initiaux. La purge
+attend aussi le nettoyage du code avant de rendre un résultat terminal.
+Le catalogue traverse les parents supprimés par leurs UUID ; seule une session
+administrateur y accède. Aucun service ni dépendance supplémentaire prévu.
