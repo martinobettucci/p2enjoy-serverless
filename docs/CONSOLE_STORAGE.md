@@ -94,9 +94,10 @@ vérifiés ; un reçu inconnu n’autorise jamais une nouvelle version initiale.
 Une révocation ultérieure ne défait pas la décision. La garde bloque admissions
 et mutations incompatibles jusqu’à terminaison confirmée.
 
-Si l’agent ne connaissait aucun volume lors de la préparation, cette absence
-est persistée et revérifiée à la reprise ; une apparition inattendue reste une
-erreur. Un cache absent ou une archive purgée par le protocole opérateur peut
+Si l’agent répondait function_unknown lors de la préparation, cette absence
+de ligne est persistée et revérifiée à la reprise ; une apparition inattendue
+reste une erreur. Un registre connu avec volumes vides n’est pas absent :
+il possède une version et exige le reçu normal. Un cache absent ou une archive purgée par le protocole opérateur peut
 être confirmé par le reçu normal. Une archive déjà purgée par le contrôle
 refuse une nouvelle commande ; répéter le même UUID reste possible.
 
@@ -104,8 +105,17 @@ La phase artifacts attend l’absence de validation/upload actif avant de
 retirer les seuls fichiers de la fonction. Elle vérifie les références
 d’instances, utilise le nettoyage protégé et synchronise le parent même si
 le répertoire a disparu. Les compteurs ne tombent à zéro qu’après confirmation
-physique. Une erreur conserve réservations, garde et diagnostic ; la maintenance
-reprend. Un vidage de cache ne passe pas par cette phase.
+physique. Cette synchronisation s’applique aussi au nettoyage général des
+révisions et candidats, qui peut confirmer des fichiers de cette purge. Le
+verrou d’activité commun empêche deux nettoyeurs ou une validation d’agir
+simultanément. Une erreur conserve réservations, garde et diagnostic ; la
+maintenance reprend. Un vidage de cache ne passe pas par cette phase.
+
+Un upload invalidé par DELETE peut encore terminer son diagnostic. Après son
+arrêt effectif et avant le reçu completed, la transaction terminale efface
+à nouveau les résultats de validation/configurations de candidats. Aucun
+propriétaire d’upload ne peut alors les réintroduire. La preuve maintient une
+vraie validation active pendant DELETE/purge puis vérifie cet état terminal.
 
 Reçu terminal, purged_at éventuel et retrait de garde sont atomiques. completed
 exige les deux volets confirmés. Une réponse perdue se résout par GET, jamais

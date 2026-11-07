@@ -1924,3 +1924,11 @@ CONSOLE_STORAGE, schéma, architecture, déploiement, backlog et design local
 portent ces décisions avant implémentation. Le manuel changera avec les écrans.
 La vérification du manuel existant vient de repasser ses huit groupes réels,
 zéro skip, 28 paragraphes recoupés et sept captures relues. Aucun remote Git.
+
+La revue du contrat relève un upload invalidé qui peut encore réécrire son
+diagnostic après la décision de purge. Décision : effacement terminal des
+résultats après jonction du propriétaire, en plus de l’effacement initial.
+La synchronisation du parent doit couvrir tous les nettoyeurs existants,
+même lorsque le répertoire a disparu. Enfin storage_absent désigne seulement
+function_unknown, jamais un registre connu avec volumes vides. Contrat
+précisé avant les corrections correspondantes, avec leurs preuves attendues.
