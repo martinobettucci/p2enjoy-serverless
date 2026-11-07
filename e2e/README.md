@@ -25,10 +25,34 @@ Les trois fonctions sont purgées par l’API ; `storage-console-inspect.py`
 recoupe ensuite leur nettoyage physique. La
 [preuve de reprise](../docs/evidence/storage-command-recovery-dev-2026-11-07.json)
 conserve sept groupes de reprise, quinze de régression des mutations et huit du
-manuel, exécutés en série. Elle reste un checkpoint : validation vivante,
-pannes résiduelles et régressions élargies restent à terminer.
+manuel, exécutés en série. Elle reste un checkpoint ; la validation vivante est
+éprouvée par la campagne suivante, les autres pannes résiduelles et régressions
+élargies restent à terminer.
 
-Les deux campagnes stockage créent leurs ressources et les purgent par leurs
+`node e2e/storage-validation-recovery.mjs` ajoute deux groupes : perte réelle du
+helper avec restauration indépendante du socket Docker, puis purge pendant un
+import encore vivant et nettoyage du diagnostic tardif. Le module original
+`qualification/artifacts/storage-validation-delay.mjs` écrit un marqueur puis
+attend soixante secondes à l’import, face au délai normal de validation de quinze
+secondes. `storage-validation-faults.py` refuse temporairement le socket rootless
+au contrôle, après rattachement du validateur à la campagne et armement d’une
+garde systemd ; il conserve le propriétaire, le groupe et le mode réels du socket.
+La reprise et les effacements sont réalisés par le produit. Les deux fonctions
+sont ensuite purgées via leurs API publiques. Synchroniser ces sources et la
+fixture avant de lancer cette campagne seule, après la fin de tout autre test.
+
+La campagne `storage-console-api.mjs` conserve neuf groupes et ajoute le conflit
+d’un UUID entre vidage et purge, puis la réutilisation des noms de namespace,
+service et fonction avec de nouveaux UUID. Elle vérifie que purger l’ancienne
+archive préserve les données et le cache de la nouvelle fonction. Son champ
+`campaigns` associe exactement les quatre fonctions aux deux namespaces ; les
+champs historiques `namespace_id` et `function_ids` ne forment plus cette relation.
+La [preuve](../docs/evidence/storage-validation-recovery-dev-2026-11-07.json)
+recoupe ces onze groupes exécutés en série, leurs sources et l’image inchangée.
+Elle conserve aussi l’échec initial de précontrôle, corrigé avant la relance,
+et le nettoyage physique des huit fonctions et neuf répertoires de code des essais.
+
+Les campagnes stockage créent leurs ressources et les purgent par leurs
 API publiques. Le rapport exige `completed`, `cleanup` et zéro test ignoré.
 La campagne navigateur perd réellement une réponse, conserve l’UUID puis
 reprend sa lecture sans second POST ; la pagination subit une vraie coupure
@@ -36,8 +60,11 @@ réseau du navigateur. Aucune interception de réponse n’est utilisée.
 
 Au repos, `storage-console-inspect.py` s’exécute comme root du seul SPARK DEV,
 avec un argument JSON associant chaque `namespace_id` à la liste exhaustive
-de ses `function_ids` (ou `[function_id]` pour la campagne UI), lus dans les
-rapports réussis. Il lit les deux bases sous leur propriétaire `spark-docker`,
+de ses fonctions. Lire le champ `campaigns` lorsqu’il existe ; pour les anciens
+rapports à un seul namespace, utiliser `namespace_id` et `function_ids` (ou
+`[function_id]` pour la campagne UI). Un essai échoué peut aussi être inspecté
+si son nettoyage a réussi ; il reste identifié comme échoué dans la preuve.
+Le collecteur lit les deux bases sous leur propriétaire `spark-docker`,
 recoupe reçus, budgets, artefacts, montages, canaux et ressources Docker, puis
 vérifie le vide des secrets dans le conteneur sans en sortir leur valeur.
 Les inventaires trash et canaux non attribuables doivent être globalement vides.

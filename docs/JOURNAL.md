@@ -2060,3 +2060,38 @@ complétée par ces assertions avant sa régression : le même UUID doit rester
 attaché à son type ; une nouvelle chaîne namespace/service/fonction portant
 les anciens noms possède d’autres UUID et conserve ses données lorsque l’ancienne
 archive est purgée. Son rapport recensera chaque namespace et ses fonctions.
+
+### Validation vivante et identité des archives — résultats recoupés
+
+Les deux groupes de validation passent sur le vrai contrôle : la perte du helper
+déclenche une restauration indépendante du socket, puis l’import atteint son
+délai normal avec nettoyage du validateur. Dans le second groupe, la purge est
+commise alors que le marqueur de l’import est vivant. Le refus Docker maintient
+le reçu en attente, les réservations, le ZIP et le code. L’upload écrit ensuite
+un diagnostic `cleanup_failed` ; après restauration, le produit termine le même
+reçu, efface ce diagnostic tardif et libère fichiers, canaux et réservations.
+La fonction voisine conserve code, données et cache.
+
+Les neuf groupes API renforcés passent ensuite : réemployer l’UUID d’un vidage
+pour une purge est refusé sans altérer le reçu ; recréer les trois niveaux sous
+les mêmes noms attribue d’autres UUID, et purger l’ancienne archive conserve les
+fichiers de la nouvelle fonction. Le rapport porte un mapping exact `campaigns`
+pour les deux namespaces. Le collecteur recoupe quatre namespaces, huit fonctions
+et neuf répertoires d’artefacts absents, avec budgets globaux à zéro. Il inclut
+les deux fonctions de l’essai initial échoué au précontrôle et correctement nettoyé.
+
+La [preuve](evidence/storage-validation-recovery-dev-2026-11-07.json) conserve
+les onze groupes, les rapports complets, leurs empreintes et la chronologie des
+sources. Chaque campagne possède le même inventaire de 159 sources avant/après ;
+seul le client API a changé entre les deux campagnes. La synchronisation distante
+comprend aussi le contrat, soit 160 fichiers. L’image du contrôle reste identique
+au checkpoint précédent et ses 25 sources Python/migrations n’ont pas changé.
+Les trois constats de revue sur les gardes ont été corrigés avant exécution :
+PID réutilisé, attente de fin du helper avant restauration et nettoyage API
+conditionné à la restauration effective du socket.
+
+La vérification du manuel retrouve sa source unique, sa règle de maintenance et
+ses huit groupes E2E déjà enregistrés au checkpoint précédent ; le guide et son
+rendu n’ont pas changé. Aucun nouveau parcours UI n’est revendiqué ici. SLS-065
+reste ouverte pour les pannes résiduelles, les régressions élargies et les notes
+SPARK. Aucun remote n’est configuré ; ce checkpoint est conservé localement.

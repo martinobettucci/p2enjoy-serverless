@@ -8,9 +8,9 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 const root=fileURLToPath(new URL('../',import.meta.url));
 
-export async function publicationArchive(work,name,handler='publication.handler') {
+export async function publicationArchive(work,name,handler='publication.handler',additionalFiles=[]) {
   const project=path.join(work,name);await mkdir(project);
-  for(const file of ['publication.cjs','deployment-delay.mjs','log-secret-then-throw.cjs','logs.cjs','storage-console.cjs'])
+  for(const file of ['publication.cjs','deployment-delay.mjs','log-secret-then-throw.cjs','logs.cjs','storage-console.cjs',...additionalFiles])
     await cp(path.join(root,'qualification/artifacts',file),path.join(project,file));
   await writeFile(path.join(project,'revision.json'),JSON.stringify({revision:name}));
   const config=path.join(project,'serverless.yml');

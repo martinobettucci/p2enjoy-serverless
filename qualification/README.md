@@ -93,6 +93,13 @@ CLI passent dans la [preuve authentifiée](../docs/evidence/deployment-authentic
 La variante originale `artifacts/deployment-delay.mjs` effectue
 un véritable import asynchrone pour observer les révocations et modifications
 concurrentes pendant la validation Docker.
+`artifacts/storage-validation-delay.mjs` écrit un marqueur puis attend réellement
+soixante secondes à l’import. La campagne
+`node e2e/storage-validation-recovery.mjs`, depuis la racine après synchronisation
+sur le SPARK, utilise ce module pour vérifier une purge pendant validation vivante,
+le diagnostic tardif et le nettoyage après indisponibilité temporaire du socket
+Docker. Ses deux groupes passent dans la
+[preuve SLS-065](../docs/evidence/storage-validation-recovery-dev-2026-11-07.json).
 `artifacts/log-secret-then-throw.cjs` écrit réellement le secret injecté sur
 stderr puis échoue à l'import : la preuve exige le préfixe conservé et la
 valeur expurgée. Le module `throws.cjs` éprouve seulement l'exception d'import.

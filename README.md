@@ -232,3 +232,9 @@ de mutation et huit du manuel. Révocation, collision, SIGKILL et reprise après
 erreur physique sont éprouvés ; les trois fonctions de cette campagne sont purgées
 et leur nettoyage physique recoupé. Les scénarios résiduels restent détaillés
 dans SLS-065, qui demeure ouverte.
+La [preuve de validation et d’identité](docs/evidence/storage-validation-recovery-dev-2026-11-07.json)
+ajoute deux groupes sur la validation vivante, dont une purge pendant import Docker, puis rejoue
+les neuf groupes API avec conflits de type de commande et réutilisation des noms.
+Le diagnostic tardif et les artefacts sont nettoyés après restauration du socket ;
+une nouvelle fonction portant les anciens noms conserve ses données. Les huit
+fonctions des essais sont purgées et leur nettoyage physique est recoupé.

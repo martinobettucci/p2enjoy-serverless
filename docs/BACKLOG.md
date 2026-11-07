@@ -306,8 +306,15 @@ ajoute sept groupes sur agent indisponible, révocation Update pendant préparat
 collision sous garde, SIGKILL avant/après décision et erreurs physiques cache/artefacts.
 Elle recoupe quinze groupes de mutation, huit du manuel et le nettoyage physique
 des trois fonctions de reprise. Les onze captures du manuel sont relues.
-Restent validation encore vivante et diagnostic tardif, transport agent/writer
-occupé après décision publique, retrait de session administrateur pendant purge,
+La [preuve de validation vivante](evidence/storage-validation-recovery-dev-2026-11-07.json)
+ajoute deux groupes : restauration indépendante du socket après SIGKILL du helper,
+puis purge pendant import Docker et effacement du diagnostic tardif. Les neuf
+groupes API repassent avec conflit de type pour un UUID et réutilisation des noms
+sans confusion entre les archives. Huit fonctions, dont celles de l’essai initial
+de précontrôle corrigé, sont purgées avec nettoyage physique recoupé.
+Restent transport agent/writer occupé après décision publique,
+retrait de session administrateur pendant purge,
 apparition inattendue après `storage_absent`, secours de redémarrage indépendant
-du contrôle, régressions élargies et actualisation finale des notes SPARK.
+du contrôle, intégration des nouvelles campagnes à la suite commune,
+régressions élargies et actualisation finale des notes SPARK.
 SLS-064 seul ne qualifie aucun parcours public d’effacement.

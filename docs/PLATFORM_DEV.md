@@ -447,3 +447,16 @@ correction de son assertion d’identité. Les nettoyages de l’ancienne campag
 de mutation conservent leurs archives de code selon son contrat.
 La preuve nomme les cas restant à qualifier et la mise à jour finale des notes
 SPARK ; aucune nouvelle migration ni modification de configuration de cellule.
+
+Le [checkpoint de validation vivante](evidence/storage-validation-recovery-dev-2026-11-07.json)
+ajoute deux groupes de panne du socket Docker et neuf groupes API renforcés.
+Le contrôle constate réellement EACCES pendant l’import. La purge conserve ses
+réservations et fichiers tant que le validateur n’est pas nettoyé ; le diagnostic
+tardif est effacé après reprise. La garde indépendante rétablit aussi le socket
+après SIGKILL du helper. Le socket observé appartient à UID 1001/GID 1987, mode
+01660 : son groupe n’est pas déduit de celui de SQLite, et son mode est restauré
+exactement. Les deux campagnes gardent l’image ci-dessus, sans configuration
+supplémentaire. Le collecteur confirme huit fonctions purgées et neuf répertoires
+de code absents, avec réservations et allocations globales à zéro au repos.
+Ce total inclut les deux fonctions de l’essai initial refusé avant perturbation,
+les deux fonctions de validation et les quatre fonctions des deux namespaces API.

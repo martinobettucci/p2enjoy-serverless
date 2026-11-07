@@ -138,6 +138,11 @@ sont suivies dans la [preuve ciblée](../docs/evidence/storage-command-recovery-
 La campagne courante de mutation comporte quinze groupes, dont la fermeture
 du writer de qualification sous SIGTERM réel ; la preuve historique ci-dessus
 précède cet ajout. La qualification complète de SLS-065 reste ouverte.
+La [preuve de validation vivante](../docs/evidence/storage-validation-recovery-dev-2026-11-07.json)
+ajoute deux groupes sous panne réelle du socket Docker et neuf groupes API
+renforcés : diagnostic tardif effacé après nettoyage, UUID lié au type de commande
+et archives distinctes malgré la réutilisation des noms. Le contrôle et son image
+restent inchangés ; ces campagnes étendent la qualification du comportement livré.
 
 ## Invocations publiques et admissions
 

@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- Purge pendant validation Docker vivante qualifiée : deux groupes réels,
+  restauration indépendante du socket après perte du helper, conservation des
+  réservations jusqu’au nettoyage et effacement du diagnostic tardif. Les neuf
+  groupes API repassent avec conflit de type d’UUID et réutilisation des noms.
+  Huit fonctions purgées et neuf répertoires de code absents recoupés dans la
+  [preuve](docs/evidence/storage-validation-recovery-dev-2026-11-07.json).
+  L’image du produit reste inchangée ; SLS-065 conserve ses preuves résiduelles.
+
 - Commandes publiques de stockage qualifiées sous révocation, collision,
   indisponibilité, SIGKILL et erreurs physiques : sept groupes réels, avec
   quinze groupes de régression et huit du manuel. Nettoyage des trois fonctions

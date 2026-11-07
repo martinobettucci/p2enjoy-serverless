@@ -7,10 +7,10 @@ import {request} from 'playwright';
 import {publicationArchive} from './publication-fixtures.mjs';
 
 const base='https://serverless.lelabs.tech',output=new URL('../.local/e2e/',import.meta.url);
-const report=new URL('storage-console-api.json',output),checks=[],cleanupErrors=[],functions=[],services=[],operations=[],pending=[];
+const report=new URL('storage-console-api.json',output),checks=[],cleanupErrors=[],functions=[],services=[],namespaces=[],operations=[],pending=[];
 const prefix='storage-console-api-'+randomUUID().slice(0,8),secret='storage-private-'+randomUUID();
 let admin,caller,session,namespace,work,completed=false,cleanup=false;
-async function save(){const temporary=new URL('storage-console-api.pending',output);await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),operation_ids:operations},null,2)+'\n');await rename(temporary,report);}
+async function save(){const temporary=new URL('storage-console-api.pending',output);const campaigns=Object.fromEntries(namespaces.map(ns=>[ns.id,functions.filter(fn=>services.some(service=>service.id===fn.service_id&&service.namespace_id===ns.id)).map(fn=>fn.id)]));await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),campaigns,operation_ids:operations},null,2)+'\n');await rename(temporary,report);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}}
 async function call(url,{method='GET',body,bytes,token,anonymous=false,headers={},status=200}={}){
   const result=await (token||anonymous?caller:admin).fetch(url,{method,data:bytes??body,headers:{
@@ -39,7 +39,7 @@ try {
   admin=await request.newContext({baseURL:base,storageState:JSON.parse(await readFile(new URL('admin-session.json',output),'utf8')),timeout:180000});
   caller=await request.newContext({baseURL:base,timeout:180000});session=await call('/api/session');assert(session.authenticated,'Session SSO réelle requise');
   work=await mkdtemp(new URL('storage-console-api-',output).pathname);const archive=await publicationArchive(work,'storage','storage-console.handler');
-  namespace=await call('/api/namespaces',{method:'POST',status:201,body:{name:prefix}});
+  namespace=await call('/api/namespaces',{method:'POST',status:201,body:{name:prefix}});namespaces.push(namespace);
   const service=await call(`/api/namespaces/${namespace.id}/services`,{method:'POST',status:201,body:{name:'storage'}});services.push(service);
   const foreign=await call(`/api/namespaces/${namespace.id}/services`,{method:'POST',status:201,body:{name:'foreign'}});services.push(foreign);
   const fn=await create(service,'storage-files'),peer=await create(service,'preserved-files'),empty=await create(service,'without-volumes',false);
@@ -110,6 +110,10 @@ try {
     await call(`/api/archives/${fn.id}/purge`,{...options,headers:{...options.headers,'X-CSRF-Token':'invalid'},status:403});
     await call(`/api/archives/${fn.id}/purge`,{...options,headers:{},status:428});
     await call(`/api/archives/${fn.id}/purge`,{...options,body:{...options.body,confirm_name:'wrong'},status:422});
+    const receipt=await call(`/api/storage-operations/${cleared.identifier}`);
+    await call(`/api/archives/${fn.id}/purge`,{method:'POST',body:{operation_id:cleared.identifier,confirm_name:row.name},headers:{'If-Match':String(cleared.version)},status:409});
+    assert.deepEqual(await call(`/api/storage-operations/${cleared.identifier}`),receipt);
+    const unchanged=await call(`/api/archives/${fn.id}`);assert.equal(unchanged.updated_at,row.updated_at);assert.equal(unchanged.purged_at,null);assert.equal(unchanged.artifact_bytes,row.artifact_bytes);
   });
   await check('Purge réelle du code et des volumes, reçu terminal et voisin intact',async()=>{
     const purged=await command(fn,'purge');await terminal(purged.identifier);
@@ -120,14 +124,24 @@ try {
     await command(fn,'purge',undefined,{status:409});
     assert.equal((await invoke(peer)).data,'peer-data');assert.equal((await invoke(peer)).cache,'peer-cache');
   });
-  await check('Catalogue paginé et conservation après suppression des parents',async()=>{
+  await check('Catalogue paginé, parents supprimés et noms réutilisés sans confusion d’archives',async()=>{
     for(const row of [peer,empty]){await call(`/api/functions/${row.id}`,{method:'DELETE'});await settle(row);}
     const first=await call(`/api/archives?service_id=${service.id}&state=all&limit=2`),second=await call(`/api/archives?service_id=${service.id}&state=all&limit=2&offset=2`);
     assert.equal(first.total,3);assert.equal(first.items.length,2);assert.equal(second.items.length,1);assert.equal(new Set([...first.items,...second.items].map(row=>row.id)).size,3);
     for(const row of services)await call(`/api/services/${row.id}`,{method:'DELETE'});
     await call(`/api/namespaces/${namespace.id}`,{method:'DELETE'});
     const kept=await call(`/api/archives/${peer.id}`);assert.equal(kept.namespace_id,namespace.id);assert.equal(kept.service_id,service.id);assert.equal(kept.name,peer.name);
+    const replacementNamespace=await call('/api/namespaces',{method:'POST',status:201,body:{name:namespace.name}});namespaces.push(replacementNamespace);
+    const replacementService=await call(`/api/namespaces/${replacementNamespace.id}/services`,{method:'POST',status:201,body:{name:service.name}});services.push(replacementService);
+    const replacement=await create(replacementService,peer.name),replacementRead=await token(replacementService,['read']);
+    await publish(replacement,archive);
+    assert.notEqual(replacementNamespace.id,namespace.id);assert.notEqual(replacementService.id,service.id);assert.notEqual(replacement.id,peer.id);
+    const fresh=await call(`/invoke/${replacement.id}`,{token:replacementRead.token});assert.equal(fresh.data,null);assert.equal(fresh.cache,null);
+    await call(`/invoke/${replacement.id}`,{method:'POST',token:replacementRead.token,body:{data:'replacement-data',cache:'replacement-cache'}});
+    const archived=await call(`/api/archives/${peer.id}`);assert.equal(archived.namespace_name,replacementNamespace.name);assert.equal(archived.service_name,replacementService.name);assert.equal(archived.name,replacement.name);
+    assert.equal(archived.namespace_id,namespace.id);assert.equal(archived.service_id,service.id);assert.equal(archived.id,peer.id);assert.equal(archived.purged_at,null);
     const operation=await command(peer,'purge');await terminal(operation.identifier);
+    const preserved=await call(`/invoke/${replacement.id}`,{token:replacementRead.token});assert.equal(preserved.data,'replacement-data');assert.equal(preserved.cache,'replacement-cache');
     assert.equal((await call(`/api/storage-operations/${cleared.identifier}`)).state,'completed');
   });
   completed=true;
@@ -142,7 +156,7 @@ try {
       const finished=await call(`/api/archives/${fn.id}`);assert(finished.purged_at&&finished.artifact_bytes===0&&!finished.storage_operation);
     }catch(error){cleanupErrors.push({function_id:fn.id,error:error.name});}
     for(const service of services)try{const response=await admin.get(`/api/services/${service.id}`);if(response.status()===200)await call(`/api/services/${service.id}`,{method:'DELETE'});else assert.equal(response.status(),404);}catch(error){cleanupErrors.push({service_id:service.id,error:error.name});}
-    if(namespace)try{const response=await admin.get(`/api/namespaces/${namespace.id}`);if(response.status()===200)await call(`/api/namespaces/${namespace.id}`,{method:'DELETE'});else assert.equal(response.status(),404);}catch(error){cleanupErrors.push({namespace_id:namespace.id,error:error.name});}
+    for(const ns of namespaces)try{const response=await admin.get(`/api/namespaces/${ns.id}`);if(response.status()===200)await call(`/api/namespaces/${ns.id}`,{method:'DELETE'});else assert.equal(response.status(),404);}catch(error){cleanupErrors.push({namespace_id:ns.id,error:error.name});}
   }
   if(work)await rm(work,{recursive:true,force:true});await admin?.dispose();await caller?.dispose();cleanup=!cleanupErrors.length;await save();assert.deepEqual(cleanupErrors,[]);
 }
