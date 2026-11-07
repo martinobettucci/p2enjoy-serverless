@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- Contrat de publication depuis la console : conservation serveur de la
+  configuration, suivi des candidats et gestion des révisions (SLS-063).
+  Implémentation et qualification encore ouvertes.
+
 - Manuel d’usage intégré à la navigation, sommaire et ancres accessibles,
   rendu responsive compilé depuis l’unique source `docs/manual.md`.
 - Maintenance du manuel imposée par le contrat local et concordance de son

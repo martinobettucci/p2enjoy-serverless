@@ -260,3 +260,12 @@ réels réussis, zéro échec/skip, 33 captures relues.
 [Contrat du manuel intégré](CONSOLE_MANUAL.md). Source éditoriale unique,
 construction automatique, entrée de navigation, sommaire et ancres accessibles,
 guide autonome, rendu responsive et preuve E2E de concordance avec le document.
+
+## SLS-063
+
+Statut : [~] — contrat arrêté ; implémentation et preuves à produire.
+
+[Publication dans la console](CONSOLE_PUBLICATION.md). ZIP et handler avec
+conservation serveur de la configuration, suivi corrélé et abandon des candidats
+préparés, historique, activation et suppression des révisions. Parcours UI réels,
+droits et conflits, invocation après activation, reprise et régressions complètes.

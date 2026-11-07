@@ -1681,3 +1681,26 @@ affiché correspond à la source, avec 22 paragraphes et le tableau vérifiés.
 L’audit des dépendances verrouillées ne signale aucune vulnérabilité connue.
 SLS-062 est clos, l’objectif global reste actif. Aucun registre d’incohérences
 ne subsiste pour cette unité ; aucun remote Git ne permet un push.
+
+### Publication depuis la console — cadrage du 7 novembre
+
+Les explorations indépendantes des API et des preuves existantes sont recoupées
+dans les sources. La préparation complète remplace les secrets de fonction ;
+la console ne peut donc pas la reconstruire depuis sa lecture expurgée. Une
+route additive de publication du code capture côté serveur la configuration
+courante et les événements, avec le handler choisi. Le contrat CLI reste stable.
+
+Un UUID choisi avant envoi permet de retrouver la préparation après réponse
+perdue ; son unicité refuse le rejeu. La liste des candidats reste réservée aux
+administrateurs pour conserver la confidentialité des diagnostics entre jetons.
+L’abandon d’un candidat préparé libère explicitement sa place. Les états et le
+schéma existants suffisent ; aucune migration ni dépendance n’est nécessaire.
+
+SLS-063 conserve l’upload ZIP réel, les droits et versions existants. Le suivi
+ne promet pas de reprise de transport après rechargement. L’historique borné à
+vingt révisions suffit à une pagination locale de cinq ; les tentatives utilisent
+une pagination serveur. Lecture de code et éditeur ne font pas partie de ce
+parcours. Le manuel évoluera avec l’implémentation ; aucune preuve n’est encore
+revendiquée pour cette unité. La réponse précédente au sujet du manuel était
+un état des lieux, sans progrès supplémentaire du produit ; cette unité reprend
+le travail concret après revalidation de l’arbre propre à d8e7dcf.

@@ -114,3 +114,19 @@ défilent dans la page. Le corps de texte agrandi est mesuré à 200 %, sans pr�
 modifier les titres en px ni mesurer le zoom global du navigateur.
 La nouvelle capture des namespaces montre leur chargement ; celle du namespace
 mobile montre désormais les services vides. Ces états sont nommés dans la preuve.
+
+## Publication et révisions SLS-063
+
+La facette **Code et révisions** suit [CONSOLE_PUBLICATION](CONSOLE_PUBLICATION.md).
+L’édition ZIP/handler utilise le dialog natif existant et une confirmation nommant
+la fonction et l’archive. Le suivi, les diagnostics et les détails de révision
+restent dans le flux de la page. Les états serveur sont libellés en français ;
+aucun pourcentage de progression n’est estimé. L’état d’envoi navigateur se
+distingue du dernier état serveur observé.
+
+Listes de cinq éléments, actions par révision et confirmations dans leur carte,
+UUID et empreintes complets avec retour à la ligne, logs bornés avec défilement
+local. L’action d’actualisation et sa date restent visibles. Les pages et erreurs
+de lecture restent indépendantes du formulaire en cours. L’activation conserve
+le focus dans la liste ; une suppression rend le focus à son titre si la carte
+disparaît. Sur mobile, champs et actions s’empilent ; pas de débordement de page.

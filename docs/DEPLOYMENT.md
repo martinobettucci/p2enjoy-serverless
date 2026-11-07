@@ -4,9 +4,11 @@ Contrat SLS-030, en cours de réalisation. Il complète PLATFORM et CONTROL.
 La gestion SLS-020 passe ses preuves administrateur, avec cycles SSO encore
 ouverts. Onze groupes API de publication et sept groupes CLI authentifiés
 passent sur le SPARK DEV : [preuve](evidence/deployment-authenticated-dev-2026-11-06.json).
-Expiration, plafonds globaux, interruptions et invocation du code publié
-restent à qualifier. Une qualification d'archive seule ne remplace pas ces
-parcours de plateforme.
+Les plafonds de candidats/révisions et les interruptions pendant réception ou
+validation passent la [preuve de reprise](evidence/publication-recovery-dev-2026-11-06.json).
+L’invocation du code publié passe la [preuve du moteur](evidence/execution-dev-2026-11-06.json).
+Expiration, budget et interruption pendant nettoyage restent à qualifier.
+Le parcours UI est spécifié dans [CONSOLE_PUBLICATION](CONSOLE_PUBLICATION.md).
 
 ## Outil et manifeste
 
@@ -308,8 +310,8 @@ le payload chiffré temporaire est effacé après publication ou échec.
 
 La suppression d'une fonction désactive son pointeur et conserve ses révisions
 et son UUID avec les métadonnées archivées. Elle invalide les candidats en
-cours ; l'intégration du moteur ajoutera le drainage des invocations avant
-cette désactivation. L'historique conservé compte dans le budget d'artefacts ;
+cours ; le moteur refuse la mutation tant qu’une invocation admise est active
+et ferme les instances au repos avant la mutation de stockage. L'historique conservé compte dans le budget d'artefacts ;
 sa purge appartient au parcours administrateur d'archives de SLS-050.
 
 ## Chargeur et validation Docker
