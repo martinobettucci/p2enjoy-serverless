@@ -1753,3 +1753,11 @@ une suspension du helper. La reprise se constate par la maintenance normale,
 pas par une écriture SQL ni un appel direct au nettoyage. Les préconditions
 excluent les consommateurs et nettoyages étrangers. Cette décision complète
 les preuves de SLS-063 ; elle ne change pas le comportement du produit.
+
+### Publication UI — régression commune
+
+Les campagnes moteur et console partagent les parcours publics et de gestion.
+La qualification de publication les réunit dans un scope dédié, dédupliqué par
+nom de campagne, afin que chaque preuve soit exécutée une fois sur les mêmes
+sources et image. Cela évite aussi d’écraser un rapport utilisé par une première
+suite lors de l’exécution d’une seconde. Les scopes existants restent utilisables.

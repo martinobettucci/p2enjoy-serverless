@@ -109,6 +109,12 @@ Les rapports frais et leurs sources/image sont recoupés. Le nettoyage rejoint
 les requêtes, supprime uniquement les objets de campagne et recense les archives
 de code conservées. Aucun mock, scénario ignoré ou succès conditionnel.
 
+La clôture utilise `python3 -B e2e/execution-suite.py --scope publication` :
+union séquentielle des campagnes du moteur et de la console, chaque campagne
+commune exécutée une seule fois. Son rapport dédié conserve les empreintes
+avant/après et la fraîcheur des rapports. Les scopes moteur et console restent
+disponibles pour leurs qualifications propres.
+
 ### Nettoyage physique refusé
 
 La preuve de 503 après suppression logique vise uniquement le répertoire parent
