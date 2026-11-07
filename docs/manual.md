@@ -86,6 +86,7 @@ avec l’adaptateur permet aussi de modifier ces paramètres.
 La tentative affiche son identifiant et les états réellement observés : attente
 d’archive, réception, validation, publication ou échec. **Validation et journal**
 ouvre le résultat de chargement et les traces expurgées. **Actualiser** relit l’état.
+Une nouvelle consultation efface le message de succès de l’action précédente.
 L’adresse de la page conserve la tentative suivie ; elle peut être réouverte.
 
 Quitter ou recharger la page peut interrompre l’envoi. Revenir sur cette adresse

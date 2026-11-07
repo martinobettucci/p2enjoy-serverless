@@ -1797,3 +1797,21 @@ le commit suivant. Les empreintes de cet arbre qualifié sont conservées ;
 aucune preuve n’est attribuée au seul arbre intermédiaire du premier commit.
 La campagne complète et la clôture SLS-063 restent à faire. Aucun remote
 Git n’est configuré.
+
+### Publication UI — résolution SLS-063-OBS-2
+
+Les consultations explicites effacent le succès précédent sans effacer les
+diagnostics d’erreur ni la confirmation de stockage en attente. Une revue a
+relevé que les assertions initiales arrivaient après plusieurs gestes : la
+preuve constate désormais un succès réel avant chacun des cinq parcours, puis
+sa disparition après un seul geste (actualisation, autre tentative, pagination
+des révisions, des tentatives et actualisation hors ligne).
+
+La campagne navigateur rejouée passe ses 21 groupes ; le manuel reconstruit
+passe huit groupes et 28 paragraphes recoupés. Le principal inspecte les
+captures de stockage en attente, d’erreur réseau et du manuel. La preuve ciblée
+est `evidence/publication-success-correction-dev-2026-11-07.json`. Les rapports
+et 29 captures sont conservés sous .local/e2e/publication-consistency-29.
+Le registre devenu vide est supprimé. La régression commune de 18 campagnes,
+la revue complète et les notes SPARK restent nécessaires avant clôture.
+Aucun remote Git n’est configuré.

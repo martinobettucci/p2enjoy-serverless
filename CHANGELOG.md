@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- Les consultations de publication effacent le succès précédent tout en
+  conservant les diagnostics. Cinq gestes qualifiés séparément, manuel mis à
+  jour et 29 groupes ciblés réussis après corrections (SLS-063-OBS-2).
+
 - Concordance du candidat suivi avec sa ligne de liste, vérifiée pendant une
   vraie validation Docker et sur la capture rendue (SLS-063-OBS-1).
 

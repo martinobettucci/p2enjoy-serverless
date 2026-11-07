@@ -81,9 +81,10 @@ export function CodePublications({functionId,onFunction}) {
   }, [dialog,selected]);
 
   const data=state.data, locked=busy || state.loading || Boolean(state.error) || Boolean(data?.candidateError);
-  function refresh() {if (!reading.current) {reading.current=true;setState(previous=>({...previous,loading:true}));setRevision(value=>value+1);}}
+  function refresh() {if (!reading.current) {setNotice('');reading.current=true;setState(previous=>({...previous,loading:true}));setRevision(value=>value+1);}}
   function selectCandidate(id) {
     if (id===selected) {refresh();return;}
+    setNotice('');
     const address=new URL(location.href);
     if (id) address.searchParams.set('deployment',id);else address.searchParams.delete('deployment');
     history.replaceState(null,'',address);
@@ -132,7 +133,7 @@ export function CodePublications({functionId,onFunction}) {
   }
   function changeCandidates(page) {
     if (page===candidatePage) {refresh();return;}
-    if (!reading.current && !busy) {reading.current=true;setState(previous=>({...previous,loading:true}));setCandidatePage(page);}
+    if (!reading.current && !busy) {setNotice('');reading.current=true;setState(previous=>({...previous,loading:true}));setCandidatePage(page);}
   }
 
   return <div className="stack publication-view">
@@ -172,7 +173,7 @@ export function CodePublications({functionId,onFunction}) {
             remove={() => mutate(() => api(`/api/functions/${functionId}/revisions/${row.id}`,{method:'DELETE'}),'Révision supprimée.')}/></li>)}
         </ul>}
         <Pages name="révisions" page={revisionPage} total={data.revisions.length} disabled={busy || state.loading}
-          change={page=>{setRevisionPage(page);historyHeading.current?.focus();}}/>
+          change={page=>{setNotice('');setRevisionPage(page);historyHeading.current?.focus();}}/>
       </>}
     </section>
 
