@@ -224,3 +224,8 @@ La garde du writer est exercée par SIGKILL de son helper. Une campagne distinct
 laisse la garde de redémarrage relancer effectivement le contrôle arrêté, avec
 preuve de son état antérieur et de son redémarrage. Toutes les fonctions de ces
 campagnes sont créées, publiées, invoquées, archivées et purgées par les API.
+Le secours de redémarrage attend un verrou natif conservé par le helper et son
+processus d’arrêt Docker, lui-même borné indépendamment du helper. Il ne peut
+ainsi redémarrer avant un arrêt tardif. Le fichier de garde est privé, rattaché
+à son unité et retiré après restauration ; l’observation attend ensuite le
+retour réel de l’API avant de relire le reçu.

@@ -2115,3 +2115,11 @@ reçu doit terminer et son rejeu préserver le cache reconstruit. Le helper du w
 est tué pour éprouver sa garde indépendante. Le secours de redémarrage du contrôle
 est également forcé, sans reprise opérateur anticipée. Les identités, gardes,
 nettoyages et sessions séparées font partie des prérequis de cette campagne.
+
+La revue avant lancement identifie une course entre le timer de secours et
+un arrêt Docker retardé. Le restaurateur doit joindre le mutateur avant de
+redémarrer. Le seul PID du helper ne couvre pas son enfant CLI ; décision :
+verrou `flock` transmis au processus d’arrêt, encapsulé dans un `timeout`
+indépendant. Le restaurateur attend ce verrou après terminaison du helper,
+puis redémarre et retire le fichier privé. Le client attend aussi le retour
+HTTP et borne la fermeture de SSH. Ces corrections précèdent toute perturbation.
