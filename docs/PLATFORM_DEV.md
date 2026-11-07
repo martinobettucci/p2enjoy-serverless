@@ -390,3 +390,12 @@ ressource active de campagne ni opération en attente ne subsiste.
 La commande reste `python3 -B e2e/execution-suite.py --scope console` et inclut
 désormais `manual-ui`. SLS-062 est clos ; les autres unités du backlog et
 l’objectif global restent ouverts.
+
+## Préparation des reçus d’effacement
+
+SLS-064 prévoit la migration 004 du registre agent, sans variable nouvelle ni
+changement du schéma du contrôle. Avant installation : vérifier l’état sain
+sans bail/montage/intention et sauvegarder le registre par SQLite backup. Le
+paquet inclura migration et module d’effacement. L’ancien paquet refuse 004 ;
+le retour arrière exige une restauration cohérente préparée. Aucune installation
+ni preuve de cette évolution n’est encore réalisée. [Contrat](STORAGE_DISCARD.md).

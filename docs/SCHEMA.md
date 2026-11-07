@@ -189,3 +189,11 @@ réservation. La reprise inventorie les conteneurs et les réseaux séparément,
 avec tous leurs labels de propriété ; elle libère aussi les baux incomplets
 de cette installation. La réservation ne disparaît qu'après confirmation de
 la disparition de Docker, de son réseau, du bail et du répertoire de canal.
+
+## Reçus d’effacement
+
+Décision SLS-064, pas encore installée : migration 004 du registre agent avec
+discard_receipts (function_id unique référencé, operation_id unique,
+installation_id, kind, expected_version, version). Le reçu et la terminaison
+sont atomiques ; pending_json porte identifiants/phase/error_code pendant
+nettoyage. [Contrat](STORAGE_DISCARD.md#migration-et-installation).

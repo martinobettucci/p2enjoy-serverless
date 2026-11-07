@@ -302,3 +302,9 @@ mêmes sources et image avant/après chaque campagne. Le manuel à onze chapitre
 est reconstruit et comparé au document source. Les trois notes maintenues dans
 `qualification/spark-notes/` sont appliquées par la console SPARK puis relues.
 Cette livraison ne clôt pas les preuves résiduelles et fonctionnalités du backlog.
+
+## Effacement corrélé du stockage
+
+SLS-064 prépare les [reçus durables](STORAGE_DISCARD.md) et le worker unique
+d’effacement hors verrou de registre. Protocole décidé, non encore implémenté
+ni déployé. Le raccordement public et la console appartiennent à SLS-065.

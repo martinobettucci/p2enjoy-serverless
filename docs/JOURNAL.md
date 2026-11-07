@@ -1844,3 +1844,22 @@ SLS-063 est clôturée. Les unités parentes conservent leurs preuves résiduell
 les commandes de purge/cache et les crons ; le goal de plateforme reste actif.
 Aucune migration ni nouvelle variable n’est nécessaire. Aucun remote Git
 n’est configuré ; le commit reste local.
+
+### 7 novembre — reprise fiable des effacements
+
+Après SLS-063, deux explorations bornées relisent les opérations de stockage
+et les précédents de décision du contrôle. Le principal recoupe le code :
+purge/clear-cache n’ont pas de reçu corrélé et erase garde le verrou global.
+La répétition d’un cache vidé pourrait effacer une nouvelle écriture.
+
+Décision : SLS-064 ajoute start-discard/discard-operation, un reçu versionné
+par fonction et un worker unique supprimant hors verrou. La version initiale
+obligatoire empêche un rejeu après remplacement du reçu ; une phase finalizing
+protège la recréation du cache. Le protocole historique est conservé pour ses
+clients opérateur. Une répétition aveugle et une simple inférence depuis la
+version sont écartées car elles ne prouvent pas l’issue d’un UUID donné.
+
+SLS-065 raccordera ensuite droits, catalogue d’archives et parcours de console
+avec le manuel. Ce découpage isole une garantie nécessaire avant les effets
+publics irréversibles. Spécification, schéma, installation et backlog sont
+persistés avant code. Aucun remote configuré ; commit local uniquement.
