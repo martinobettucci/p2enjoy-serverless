@@ -14,19 +14,23 @@ publics et de sa décision irréversible préalable. Il n’y a pas d’annulati
 
 Une demande identique retrouve l’intention ou le reçu sans second effacement,
 même après de nouvelles écritures. Changer propriétaire, type ou version avec
-le même UUID est refusé. Les identifiants ne se réutilisent pas entre
-configuration et effacement. Les anciennes commandes restent compatibles ;
+le même UUID est refusé. Les identifiants encore connus dans une intention ou un reçu ne se
+réutilisent pas entre configuration et effacement. Les anciennes commandes restent compatibles ;
 les futures routes publiques utilisent exclusivement le protocole corrélé.
 
 Un reçu par fonction est conservé, séparément du reçu de configuration. Le
 prochain effacement le remplace à sa terminaison. Une demande ancienne porte
 alors une version périmée et sa consultation rend operation_unknown. La version
 progresse aussi pour un cache absent ou une fonction déjà purgée : leur reçu
-acquitte une décision sans allocation supplémentaire.
+acquitte une décision sans allocation supplémentaire. Une réutilisation volontaire
+d’un ancien UUID oublié avec une version actuelle n’est pas une répétition
+demande/réponse et n’est pas détectable par cette rétention bornée. Le contrôle
+génère un UUID neuf par décision et conserve les paramètres initiaux à la reprise.
 
 ## États et effets
 
-La demande vérifie version, absence d’intention et absence de tout bail.
+Après recherche du reçu ou de l’intention identique, une nouvelle demande
+vérifie version, absence d’intention et absence de tout bail.
 clear-cache exige active ; purge exige archived ou purged. Elle inscrit
 l’intention avant toute opération physique et rend pending ; un cas sans
 contenu à retirer produit directement completed. Les acquisitions et mutations
