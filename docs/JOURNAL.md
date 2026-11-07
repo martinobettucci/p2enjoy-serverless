@@ -1980,3 +1980,12 @@ du README E2E était erronée. Deux anciens helpers ouvrent encore ce registre
 sous root, dont un writer de contention. Le contrat ADMISSION est précisé
 avant correction : ouvrir, lire, rollback et fermer sous son propriétaire,
 puis retrouver root pour les signaux. Les campagnes concernées seront rejouées.
+
+La première régression des quatorze groupes réussit. La revue du helper relève
+toutefois une fenêtre entre l'abandon de sa référence au writer du registre
+et sa fermeture : un signal opérateur peut empêcher le `finally` de retrouver
+ce writer. Le helper conservera donc sa responsabilité jusqu'à fermeture
+effective, avec fermeture répétable et signaux d'interruption différés pendant
+la transition d'identité. Une preuve exercera un vrai SIGTERM durant cette
+transition, puis exigera la libération du verrou et les propriétaires WAL/SHM.
+La régression complète sera rejouée après cette correction du banc.
