@@ -292,3 +292,13 @@ restart et attend sa décision ; seul aborting reprend automatiquement son
 nettoyage conservateur. configuration-operation reste une lecture disponible
 pendant la récupération. La présence d'une intention dégrade health sans fermer
 les lectures du registre.
+
+## Effacement corrélé
+
+L’évolution SLS-064 est installée et qualifiée : 106 groupes dans sept
+campagnes, avec zéro échec/skip. [Preuve](evidence/storage-discard-dev-2026-11-07.json). Le
+[contrat dédié](STORAGE_DISCARD.md) ajoute start-discard/discard-operation,
+reçu terminal, version initiale obligatoire et worker unique hors verrou pour
+la suppression récursive. La migration 004 et agent_discard.py entrent dans le
+paquet immuable. Les commandes historiques restent compatibles. Les routes
+publiques et leur console restent à raccorder dans SLS-065.

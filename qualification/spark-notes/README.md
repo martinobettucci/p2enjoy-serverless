@@ -30,3 +30,10 @@ La publication de code conserve côté serveur les ressources, variables, secret
 La qualification `python3 -B e2e/execution-suite.py --scope publication` passe 18 campagnes en série et 312 groupes réels, sans échec ni cas ignoré. Elle réunit moteur et console sans répéter les campagnes communes. La preuve `docs/evidence/publication-console-dev-2026-11-07.json` recoupe sources, image, rapports frais, captures relues, archives et ressources nettoyées. Les pannes de nettoyage sont éprouvées sur les seules révisions de campagne, avec garde indépendante puis maintenance normale.
 
 Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses onze chapitres viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.
+
+L’agent de stockage dispose maintenant d’effacements corrélés : reçu durable,
+répétition sans second vidage et reprise après erreur physique ou interruption.
+Le schéma agent est 004. Sept campagnes et 106 groupes réels passent, avec
+nettoyage recoupé : docs/evidence/storage-discard-dev-2026-11-07.json.
+Ces opérations internes préparent les commandes publiques de cache/purge
+et le catalogue d’archives, encore suivis dans SLS-065.

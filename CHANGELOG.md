@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Protocole corrélé de vidage/purge, reçu durable, reprise et worker unique
+  supprimant hors verrou du registre ; migration 004 agent et campagne réelle
+  SLS-064 installés et qualifiés sur DEV : sept campagnes, 106 groupes réels,
+  zéro échec/skip et nettoyage recoupé. [Preuve](docs/evidence/storage-discard-dev-2026-11-07.json).
+
 - Console de publication vérifiée sur le SPARK DEV : 18 campagnes en série,
   312 groupes réels, zéro échec/skip et 54 captures inspectées. Sources, image,
   archives et nettoyages recoupés ; trois notes SPARK appliquées et relues.

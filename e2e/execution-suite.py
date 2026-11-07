@@ -80,6 +80,8 @@ def verify_report(name,path,is_remote,expected_hash):
               'deployments':11,'adapter-deploy':7,'publication-recovery':4,'public':8,
               'public-invocations':31,'login-ui':9,'execution-ui':12,'manual-ui':8,
               'code-publications':10,'publication-ui':21}
+    # @spec docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#qualification-réelle
+    expected.update({'storage-discard':12,'storage-agent':15,'storage-limits':8,'storage-preparations':12})
     checks=result.get('checks',result.get('results'))
     assert isinstance(checks,list) and len(checks)==expected[name],'Nombre de groupes inattendu'
     if name=='login-ui':assert all(isinstance(row,str) and row for row in checks)
@@ -96,9 +98,10 @@ def main():
     # @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
     # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--scope',choices=('engine','console','publication'),default='engine')
+    parser.add_argument('--scope',choices=('engine','console','publication','storage'),default='engine')
     scope=parser.parse_args().scope
-    report={'engine':REPORT,'console':ROOT/'.local/e2e/console-execution-regressions.json','publication':ROOT/'.local/e2e/publication-regressions.json'}[scope]
+    report={'engine':REPORT,'console':ROOT/'.local/e2e/console-execution-regressions.json','publication':ROOT/'.local/e2e/publication-regressions.json',
+            'storage':ROOT/'.local/e2e/storage-discard-regressions.json'}[scope]
     console_cases=[
         next(row for row in CASES if row[0]=='public'),
         ('login-ui',['node','e2e/login-ui.mjs'],'.local/e2e/login-ui.json',False),
@@ -110,6 +113,16 @@ def main():
     cases=CASES if scope=='engine' else console_cases
     if scope=='publication':
         cases=CASES+[row for row in console_cases if row[0] not in {case[0] for case in CASES}]
+    # @spec docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#qualification-réelle
+    # @verifies docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#qualification-réelle
+    if scope=='storage':
+        cases=[
+            ('storage-discard',remote(['python3','-B',REMOTE+'e2e/storage-discard.py'],'root'),'storage/discard-proof.json',True),
+            ('storage-agent',remote(['bash',REMOTE+'storage/dev.sh','agent-test'],'root'),'storage/agent-proof.json',True),
+            ('storage-limits',remote(['bash',REMOTE+'storage/dev.sh','limits-test'],'root'),'storage/agent-limits-proof.json',True),
+            ('storage-preparations',remote(['python3','-B',REMOTE+'e2e/storage-preparations.py'],'root'),'storage/preparations-proof.json',True),
+            *[next(row for row in CASES if row[0]==name) for name in ('managed-storage','function-storage','public-invocations')],
+        ]
     records=[];baseline=None
     def save(done=False):
         temporary=report.with_suffix('.tmp')

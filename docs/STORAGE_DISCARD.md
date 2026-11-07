@@ -1,6 +1,7 @@
 # Effacement de stockage corrélé
 
-Spécification SLS-064, décidée avant code. Prérequis des commandes publiques
+Contrat SLS-064, qualifié sur le SPARK DEV par sept campagnes et 106 groupes
+réels : [preuve](evidence/storage-discard-dev-2026-11-07.json). Prérequis des commandes publiques
 de cache et d’archives SLS-065 ; aucun nouveau bouton ni droit public livré ici.
 
 ## Décision et périmètre

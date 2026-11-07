@@ -8,7 +8,7 @@ La configuration consommée vient exclusivement de `/etc/spark/env` et `/run/spa
 
 Le contrôle conserve sa base et ses artefacts dans `/srv/p2enjoy-serverless/state`. La clé `SERVERLESS_MASTER_KEY` reste liée à cette base. Le schéma courant porte les migrations 001 à 005 ; la sauvegarde native préalable est `state/backups/before-005-20261106T203759Z-a85aa7.sqlite3`, vérifiée intègre en mode 0600. Les écritures postérieures empêchent une restauration implicite.
 
-L’agent possède `/srv/p2enjoy-serverless/storage-state`, schéma 003. Son canal `/srv/p2enjoy-serverless/storage-channel` est privé et monté readonly dans le contrôle. Ne jamais monter les backings natifs dans un workload : acquérir un bail et utiliser son chemin FUSE. Budget logique 32768 Mio, marge physique 8192 Mio, plafond 64 montages. Les valeurs officielles restent l’autorité.
+L’agent possède `/srv/p2enjoy-serverless/storage-state`, schéma 004. Son canal `/srv/p2enjoy-serverless/storage-channel` est privé et monté readonly dans le contrôle. Ne jamais monter les backings natifs dans un workload : acquérir un bail et utiliser son chemin FUSE. Budget logique 32768 Mio, marge physique 8192 Mio, plafond 64 montages. Les valeurs officielles restent l’autorité.
 
 ## Construire et déployer
 
@@ -22,7 +22,7 @@ bash control/dev.sh status
 
 `logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:52d17fa14b7fe92ac5bad61695114f687dd702ebff5a57c8d7e3a6e69c1116d6`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence.
 
-Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `e116f761cadf8a04a59d1f45d729ef29edcb7b1e41e3a81afab43eda4422b255`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
+Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 
 Un arrêt brutal de l’agent conserve baux et fichiers mais invalide les anciens binds. Détruire et confirmer l’absence des consommateurs Docker avant de libérer leurs baux. Une erreur de nettoyage conserve la responsabilité ; ne pas supprimer de ligne du registre pour la masquer.
 
@@ -69,3 +69,24 @@ La campagne publique utilise la console SPARK locale pour réduire temporairemen
 `publication-cleanup-fault.py` refuse temporairement l’ouverture du parent d’une seule révision inactive possédée par sa campagne. Il vérifie l’inode, les permissions et le refus EACCES réel dans Docker. Une garde systemd indépendante restaure le mode après interruption ; le test confirme ensuite la maintenance normale. Ne pas lancer une autre campagne ni redémarrer le contrôle sous cette faute. Le scénario de confirmation de stockage suspend l’agent réel pendant l’expiration de confirmation, puis vérifie sa reprise avant tout nettoyage.
 
 Maintenir `docs/manual.md` dans le même changement que chaque comportement utilisateur. Le build de console l’embarque directement, avec son empreinte ; le navigateur doit retrouver ses chapitres, paragraphes et tableaux. Les trois notes de cellule sont maintenues dans `qualification/spark-notes/`, proposées par les fichiers `.?`, appliquées par la console SPARK puis relues.
+
+## Effacements corrélés du stockage
+
+Le registre 004 ajoute les reçus start-discard/discard-operation. Sauvegarde
+native avant migration : `/srv/p2enjoy-serverless/storage-state/backups/before-004-20261107T030639Z.sqlite3`. Son intégrité, l’identité et les
+lignes préexistantes sont recoupées. L’ancien agent refuse ce schéma ; ne pas
+remplacer simplement le paquet pour revenir en arrière.
+
+La commande `python3 -B e2e/execution-suite.py --scope storage`, depuis le poste,
+exécute sept campagnes et 106 groupes réels avec zéro échec/skip. Elle exige
+la vraie session SSO pour les régressions HTTPS. La campagne ciblée peut se
+lancer comme root DEV par `python3 -B e2e/storage-discard.py`. Elle crée un
+arbre de 150 000 fichiers, exerce permissions, verrou SQLite, restart et
+SIGKILL ; ses gardes restaurent les permissions. Attendre sa fin avant une
+autre intervention. Rapport : storage/discard-proof.json.
+
+Le reçu corrélé retrouve une opération après réponse perdue sans effacer un
+cache reconstruit. La suppression récursive laisse le verrou de registre
+disponible. Une exception de worker SQLite produit le diagnostic JSON
+`storage_discard_worker_failed`, avec UUID et code fixe, puis une reprise.
+Les routes publiques et leurs commandes de console restent à réaliser.

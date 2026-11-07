@@ -280,7 +280,9 @@ restent ouvertes.
 
 ## SLS-064
 
-Statut : [~] — protocole décidé ; implémentation et preuves à réaliser.
+Statut : [x] — paquet installé et migration 004 vérifiée ; sept campagnes,
+106 groupes réels, zéro échec/skip, reprises et nettoyage recoupés.
+[Preuve](evidence/storage-discard-dev-2026-11-07.json).
 
 [Effacement corrélé](STORAGE_DISCARD.md) : reçus de vidage/purge, versions et
 propriétaire, réponse perdue, erreur physique et interruption ; suppression

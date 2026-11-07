@@ -13,6 +13,7 @@ import time
 from uuid import uuid4
 
 from agent_system import StorageError,System,private_directory,uuid
+from agent_discard import Discards
 
 MIB=1024**2
 DEFAULT={'data':{'enabled':False,'quota_mib':64},'cache':{'enabled':False,'quota_mib':64}}
@@ -83,15 +84,18 @@ class Volumes:
         self.db=sqlite3.connect(path,isolation_level=None,timeout=1);self.db.row_factory=sqlite3.Row
         self.db.execute('PRAGMA foreign_keys=ON');self.db.execute('PRAGMA journal_mode=WAL');self.db.execute('PRAGMA synchronous=FULL')
         version=self.db.execute('PRAGMA user_version').fetchone()[0]
-        if version not in (0,1,2,3):raise StorageError('registry_version')
+        if version not in (0,1,2,3,4):raise StorageError('registry_version')
         if version==0:
             self.db.executescript((Path(__file__).parent/'migrations/001.sql').read_text())
             self.db.execute('PRAGMA user_version=1')
         if version<2:self.db.executescript((Path(__file__).parent/'migrations/002.sql').read_text())
         if version<3:self.db.executescript((Path(__file__).parent/'migrations/003.sql').read_text())
+        # @spec docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#migration-et-installation
+        if version<4:self.db.executescript((Path(__file__).parent/'migrations/004.sql').read_text())
         self.db.execute("INSERT OR IGNORE INTO metadata VALUES('installation',?)",(str(uuid4()),))
         self.id=self.db.execute("SELECT value FROM metadata WHERE name='installation'").fetchone()[0]
         self.system=System(root,binary,self.db)
+        self.discards=Discards(self,erase,joined)
 
     @contextmanager
     def transaction(self):
@@ -334,6 +338,8 @@ class Volumes:
 
     def operation_available(self,operation):
         if self.db.execute('SELECT 1 FROM configuration_receipts WHERE operation_id=?',(operation,)).fetchone():raise StorageError('operation_conflict')
+        # @spec docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#décision-et-périmètre
+        if self.db.execute('SELECT 1 FROM discard_receipts WHERE operation_id=?',(operation,)).fetchone():raise StorageError('operation_conflict')
         for row in self.db.execute('SELECT pending_json FROM functions WHERE pending_json IS NOT NULL'):
             if json.loads(row['pending_json']).get('operation_id')==operation:raise StorageError('operation_conflict')
 
@@ -544,6 +550,7 @@ class Volumes:
                 else:self.failed(row,StorageError('lease_needs_reconciliation'))
             except (StorageError,OSError,sqlite3.Error):self.last_error='recovery_pending'
         self.ready=True
+        self.discards.schedule()
 
     async def maintain(self):
         # Give waiting mutations a turn between volumes; a 64-volume sweep must
@@ -577,6 +584,7 @@ class Volumes:
             failed=self.db.execute("SELECT 1 FROM volumes WHERE phase='failed' LIMIT 1").fetchone()
             pending=self.db.execute('SELECT 1 FROM functions WHERE pending_json IS NOT NULL LIMIT 1').fetchone()
             self.last_error='recovery_pending' if failed or pending else None
+            self.discards.schedule()
 
     async def recover_operation(self,identifier,pending):
         if pending['operation']=='configure':await self.compensate(identifier)
@@ -586,7 +594,10 @@ class Volumes:
             else:
                 for row in self.rows(identifier):
                     if row['phase']!='unmounted':await self.stop(row)
-        elif pending['operation'] in ('purge','clear-cache'):await self.finish_discard(identifier,pending)
+        elif pending['operation'] in ('purge','clear-cache'):
+            # @spec docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#états-et-effets
+            # Correlated erasures are owned by the single worker, outside this lock.
+            if 'operation_id' not in pending:await self.finish_discard(identifier,pending)
         else:raise StorageError('unknown_pending_operation')
 
     def close(self):

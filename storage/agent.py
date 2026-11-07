@@ -56,13 +56,16 @@ class Server:
             'commit-configuration':{'function_id','operation_id','installation_id'},
             'abort-configuration':{'function_id','operation_id','installation_id','configuration','expected_version'},
             'configuration-operation':{'function_id','operation_id','installation_id'},
+            # @spec docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#décision-et-périmètre
+            'start-discard':{'function_id','operation_id','installation_id','kind','expected_version'},
+            'discard-operation':{'function_id','operation_id','installation_id'},
             'acquire':{'function_id','consumer_id','installation_id','configuration'},
             'release':{'consumer_id','installation_id'},'check':{'consumer_id','installation_id'},
             'archive':{'function_id','expected_version'},'purge':{'function_id','expected_version'},
             'clear-cache':{'function_id','expected_version'},
         }
         if not isinstance(operation,str) or operation not in fields:raise StorageError('invalid_operation')
-        optional={'after'} if operation=='prepare-configuration' else {'after','expected_version'}
+        optional={'after'} if operation in ('prepare-configuration','start-discard') else {'after','expected_version'}
         if operation=='abort-configuration':
             optional.add('configuration')
             if ('configuration' in request)!=('expected_version' in request):raise StorageError('invalid_fields')
@@ -77,6 +80,7 @@ class Server:
         if op=='health':return {**v.health(),'quiesced':self.quiesced}
         if op=='status':return v.snapshot(request['function_id'])
         if op=='configuration-operation':return v.configuration_operation(request['function_id'],request['operation_id'],request['installation_id'])
+        if op=='discard-operation':return v.discards.query(request['function_id'],request['operation_id'],request['installation_id'])
         if op=='leases':
             rows=v.db.execute('SELECT consumer_id,function_id,mounts_json FROM leases WHERE installation_id=? AND consumer_id>? ORDER BY consumer_id LIMIT 51',
                 (request['installation_id'],request.get('after',''))).fetchall()
@@ -86,6 +90,7 @@ class Server:
         try:await asyncio.wait_for(v.lock.acquire(),3)
         except TimeoutError:raise StorageError('agent_busy') from None
         try:
+            if self.stopping:raise StorageError('agent_not_ready')
             if op in ('quiesce','resume'):
                 if request['installation_id']!=v.id:raise StorageError('installation_conflict')
                 if op=='quiesce':
@@ -94,6 +99,7 @@ class Server:
                 self.quiesced=op=='quiesce'
                 return {'quiesced':self.quiesced,'installation_id':v.id}
             if self.quiesced:raise StorageError('maintenance_active')
+            if op=='start-discard':return v.discards.start(request['function_id'],request['operation_id'],request['installation_id'],request['kind'],request['expected_version'])
             if op=='prepare-configuration':return await v.prepare_configuration(request['function_id'],request['operation_id'],request['installation_id'],request['configuration'],request['expected_version'])
             if op in ('commit-configuration','abort-configuration'):
                 unseen={'configuration':request['configuration'],'expected_version':request['expected_version']} if 'configuration' in request else None
@@ -170,9 +176,11 @@ class Server:
                 await maintenance
         finally:
             self.stopping=True;server.close();await server.wait_closed()
+            self.volumes.discards.stopping=True
             # In-flight durable mutations finish even if their clients disconnected.
             await joined(asyncio.gather(*tuple(self.tasks),return_exceptions=True))
             await joined(maintenance)
+            await self.volumes.discards.finish()
             self.path.unlink(missing_ok=True);os.close(self.owner);self.volumes.close()
 
 

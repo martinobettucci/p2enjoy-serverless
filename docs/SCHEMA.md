@@ -192,7 +192,7 @@ la disparition de Docker, de son réseau, du bail et du répertoire de canal.
 
 ## Reçus d’effacement
 
-Décision SLS-064, pas encore installée : migration 004 du registre agent avec
+SLS-064, installée et qualifiée en DEV : migration 004 du registre agent avec
 discard_receipts (function_id unique référencé, operation_id unique,
 installation_id, kind, expected_version, version). Le reçu et la terminaison
 sont atomiques ; pending_json porte identifiants/phase/error_code pendant

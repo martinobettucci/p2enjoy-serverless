@@ -68,7 +68,7 @@ Le contrat est [STORAGE_AGENT](../docs/STORAGE_AGENT.md). Le service
 `p2enjoy-storage-dev.service` expose un socket Unix privé à `spark-docker`,
 avec contrôle d’UID, quotas data/cache, baux durables et opérations explicites
 de conservation, archive, purge et vidage du cache. Il possède sa propre base
-SQLite WAL (migrations 001, 002 et 003), distincte de celle du contrôle.
+SQLite WAL (migrations 001 à 004), distincte de celle du contrôle.
 Le binaire accepte `-name` pour identifier chaque génération dans mountinfo ;
 son défaut reste `p2quota` pour les commandes existantes.
 
@@ -159,3 +159,25 @@ d’un prepare retardé, sans allocation, et ses refus de version/propriétaire/
 Le raccordement aux mutations publiques est décrit dans
 [control](../control/README.md#mutations-de-stockage-des-fonctions) et sa
 [preuve](../docs/evidence/function-storage-dev-2026-11-06.json).
+
+## Effacement corrélé
+
+SLS-064 ajoute start-discard et discard-operation, avec identifiants et version
+obligatoires : [contrat](../docs/STORAGE_DISCARD.md). Le reçu évite un second
+vidage après perte de réponse. Un worker unique supprime hors verrou global.
+Cette évolution est déployée et qualifiée par sept campagnes : 106 groupes
+réels réussis, zéro échec/skip et nettoyage confirmé.
+[Preuve](../docs/evidence/storage-discard-dev-2026-11-07.json).
+
+Le paquet contient agent_discard.py et migrations/004.sql. Avant installation,
+sauvegarder le registre par SQLite backup sous son propriétaire, vérifier son
+intégrité et conserver le paquet précédent. L’installateur exige toujours un
+état sain sans consommateur, montage ni intention. L’ancien agent refuse le
+schéma 004 ; un retour arrière exige une restauration cohérente préparée.
+
+Après installation, comme root du SPARK DEV :
+`python3 -B /srv/p2enjoy-serverless/e2e/storage-discard.py`. Le rapport est
+`storage/discard-proof.json`. Exécuter ensuite agent-test, limits-test,
+storage-preparations et managed-storage, puis function-storage et
+public-invocations depuis le poste, en série. Aucune variable nouvelle.
+Les commandes publiques et leur manuel appartiennent à SLS-065.

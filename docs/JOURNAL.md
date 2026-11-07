@@ -1876,3 +1876,26 @@ ajouter un diagnostic JSON fixe lors de l’observation effective de l’excepti
 du worker et l’exiger sous le vrai verrou SQLite. Garantir la fermeture continue
 du writer et recouper tous les UUID sur disque au nettoyage. La campagne sera
 rejouée avec six régressions en série ; le premier rapport reste un checkpoint.
+
+### Effacements — qualification finale de SLS-064
+
+La suite storage termine à zéro : 12 groupes propres aux effacements, puis
+15 de cycle agent, 8 de limites, 12 de préparations, 14 de baux gérés,
+14 de mutations publiques et 31 d’invocations HTTPS. Les sept campagnes
+restent sérielles, sans substitution ni test ignoré. L’exception SQLite du
+worker est effectivement observée dans le journal sous writer réel ; sa
+reprise conserve le même PID. La phase erasing est observée lors du check,
+de la libération puis de la réacquisition d’un autre bail.
+
+La preuve finale recoupe le registre 004, le paquet installé, les empreintes
+des sources, l’image du contrôle, les rapports frais et les ressources
+libérées. Les lignes antérieures à migration sont comparées au backup natif.
+Les archives de code suivent leur rétention ; elles sont vérifiées sur disque.
+Les notes SPARK sont mises à jour par leurs propositions et relues après
+application. Le registre d’incohérences ne contient aucune entrée ouverte.
+
+Cette unité livre le protocole privé de l’agent ; SLS-065 portera le catalogue
+d’archives, les droits publics et les parcours de console avec leur manuel.
+Aucune interface n’a changé dans SLS-064 ; sa vérification est celle des
+composants et API réels. Le goal de plateforme reste actif. Aucun remote Git
+n’est configuré, donc le commit reste local.

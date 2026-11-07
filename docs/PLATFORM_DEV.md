@@ -391,11 +391,19 @@ La commande reste `python3 -B e2e/execution-suite.py --scope console` et inclut
 désormais `manual-ui`. SLS-062 est clos ; les autres unités du backlog et
 l’objectif global restent ouverts.
 
-## Préparation des reçus d’effacement
+## Baseline des reçus d’effacement
 
-SLS-064 prévoit la migration 004 du registre agent, sans variable nouvelle ni
-changement du schéma du contrôle. Avant installation : vérifier l’état sain
-sans bail/montage/intention et sauvegarder le registre par SQLite backup. Le
-paquet inclura migration et module d’effacement. L’ancien paquet refuse 004 ;
-le retour arrière exige une restauration cohérente préparée. Aucune installation
-ni preuve de cette évolution n’est encore réalisée. [Contrat](STORAGE_DISCARD.md).
+Le paquet `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4` est installé le 7 novembre.
+La migration 004 du registre agent est appliquée après sauvegarde native
+`/srv/p2enjoy-serverless/storage-state/backups/before-004-20261107T030639Z.sqlite3`, intègre et en mode 0600.
+Les lignes préexistantes de fonctions, reçus de configuration et métadonnées
+sont recoupées avec cette sauvegarde ; l’identité de stockage est conservée.
+Aucune nouvelle variable ni migration du contrôle. Son image reste celle de
+SLS-063. L’ancien paquet refuse 004 : revenir exige une restauration cohérente
+explicitement préparée.
+
+La [preuve](evidence/storage-discard-dev-2026-11-07.json) recoupe sept campagnes en série et
+106 groupes réels, sans échec/skip, le paquet protégé, les sources, les archives
+de code et les ressources libérées. La commande est `python3 -B
+e2e/execution-suite.py --scope storage`. Les commandes publiques et la console
+restent dans SLS-065. [Contrat](STORAGE_DISCARD.md).

@@ -187,6 +187,7 @@ e2e/
   adapter-deploy.mjs       Parcours de la commande deploy avec jetons réels
 storage/
   agent.py                Service local, baux et registre durable des volumes
+  agent_discard.py        Effacements corrélés, reçus et reprise hors verrou
   install-dev.py          Installation du paquet protégé et maintenance
   agent-proof.py          Campagnes réelles de cycle de vie et de limites
   main.go                 Proxy de quota FUSE sur les fichiers natifs
@@ -213,3 +214,11 @@ docs/
   dev-spark.md             Dossier du SPARK fourni par le responsable
   sso.md                   Contrat d'intégration SSO
 ```
+
+Les effacements corrélés de l’agent sont qualifiés sur DEV : sept campagnes,
+106 groupes réels, zéro échec/skip. Un reçu empêche le second vidage après
+réponse perdue ; les reprises après erreur physique/SQLite et interruption
+sont recoupées. [Preuve SLS-064](docs/evidence/storage-discard-dev-2026-11-07.json).
+La commande `python3 -B e2e/execution-suite.py --scope storage` rejoue cette
+qualification en série. Le catalogue d’archives et les commandes publiques
+dans la console, avec leur manuel, constituent SLS-065.

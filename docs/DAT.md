@@ -306,5 +306,5 @@ Cette livraison ne clôt pas les preuves résiduelles et fonctionnalités du bac
 ## Effacement corrélé du stockage
 
 SLS-064 prépare les [reçus durables](STORAGE_DISCARD.md) et le worker unique
-d’effacement hors verrou de registre. Protocole décidé, non encore implémenté
-ni déployé. Le raccordement public et la console appartiennent à SLS-065.
+d’effacement hors verrou de registre. Protocole déployé et vérifié : sept campagnes, 106 groupes réels, sans échec
+ni skip, avec migration et nettoyages recoupés. [Preuve](evidence/storage-discard-dev-2026-11-07.json). Le raccordement public et la console appartiennent à SLS-065.

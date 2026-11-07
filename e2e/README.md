@@ -336,3 +336,19 @@ et l’absence de ressources actives de campagne. Les 54 captures sont inspecté
 La lecture du même candidat est cohérente entre liste et suivi ; cinq gestes
 constatent un succès réel puis son effacement après une seule consultation.
 Les rapports et images antérieurs sont conservés comme checkpoints distincts.
+
+## Effacements corrélés du stockage
+
+Comme root du SPARK DEV, après installation du paquet SLS-064, exécuter
+`python3 -B /srv/p2enjoy-serverless/e2e/storage-discard.py`. La campagne utilise
+le client embarqué, le socket installé, Docker et les volumes FUSE : reçus,
+versions, droits de propriétaire, collisions de préparation, réponse fermée
+sans lecture, quotas, fichiers conservés, cache désactivé, purge et tombstone.
+Elle exerce les permissions réelles, un verrou SQLite, restart et SIGKILL en
+finalizing, et un arbre de 150 000 fichiers pendant l’usage d’autres baux.
+Les permissions ont une garde systemd indépendante ; seuls les UUID de la
+campagne sont nettoyés. Le rapport storage/discard-proof.json exige fin et
+nettoyage vrais, zéro échec/skip. Les douze groupes ciblés et 94 groupes de
+régression passent dans la [preuve](../docs/evidence/storage-discard-dev-2026-11-07.json).
+Depuis le poste, `python3 -B e2e/execution-suite.py --scope storage` exécute les
+sept campagnes en série, avec sources, image et fraîcheur des rapports vérifiées.
