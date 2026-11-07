@@ -31,8 +31,9 @@ python3 -B e2e/execution-suite.py --scope console
 ```
 
 Ces commandes sont des campagnes distinctes ; la suite rejoue les observations
-avec les parcours publics, de connexion, de gestion et du manuel. La publication
-reste pour ce checkpoint une commande ciblée distincte de cette suite.
+et la publication avec les parcours publics, de connexion, de gestion et du
+manuel. `python3 -B e2e/execution-suite.py --scope publication` ajoute les
+régressions du moteur dans une suite commune sans répéter les campagnes partagées.
 
 ## Manuel d’usage
 
@@ -43,8 +44,9 @@ Le contexte Docker inclut explicitement ce document. `markdown-it` est verrouill
 en dépendance de build et n’est pas inclus dans le navigateur. Mettre à jour le
 guide avec chaque comportement utilisateur, puis reconstruire la console.
 
-`node e2e/manual-ui.mjs` vérifie huit groupes réels. La suite de console ajoute
-cette campagne aux quatre précédentes : 48 groupes, zéro échec/skip et 33 captures
-relues dans la [preuve initiale](../docs/evidence/manual-console-dev-2026-11-07.json).
+`node e2e/manual-ui.mjs` vérifie huit groupes réels. La
+[preuve initiale](../docs/evidence/manual-console-dev-2026-11-07.json) précède la
+publication UI : 48 groupes, zéro échec/skip et 33 captures relues. La suite
+de console comprend désormais aussi les 21 groupes de publication.
 Le guide compte maintenant onze chapitres ; sa concordance est rejouée dans
 la preuve intermédiaire de publication.

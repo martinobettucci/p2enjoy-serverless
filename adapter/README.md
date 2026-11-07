@@ -50,4 +50,5 @@ la session SSO réelle pour créer ses jetons, puis exécute la CLI et les
 validations Docker : pagination, mises à jour, résultats partiels et reprise
 de brouillon. Les ruptures après envoi, modifications concurrentes des fichiers,
 redirections et réponses trop grandes restent à éprouver avec leurs causes réelles.
-L'invocation du code publié attend le raccordement du moteur.
+L’invocation du code publié est qualifiée séparément par le moteur public et
+les parcours de publication de la console : [preuves E2E](../e2e/README.md).

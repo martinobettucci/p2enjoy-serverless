@@ -1,0 +1,1174 @@
+{
+  "date": "2026-11-07 01:52:05 UTC",
+  "target": "infra-serverless DEV",
+  "units": [
+    "SLS-063"
+  ],
+  "units_complete": false,
+  "scope": "Première régression commune réussie ; revue visuelle révélant deux incohérences à corriger",
+  "passed_groups": 312,
+  "deployed": {
+    "sources": {
+      "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+      "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+      "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+      "adapter/deploy.py": "a73059d49e7d236afe20190671f2cc5ea32659fdecf184980a510f04b6d0f22a",
+      "adapter/manifest.py": "aefb4a62d1c2599ecea67a8c84c2341226135c151be18af74b79fc0b0cc6ce1e",
+      "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+      "control/Dockerfile": "858d0ed75d833754fd48b73a780c0607f81f7b34b6473d4a921591ee90b1b862",
+      "control/Dockerfile.dockerignore": "3d4e09e669ded704ed8e8765450b1eacc41b94b313f5cd93a48941b8377dd915",
+      "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "control/app/api.py": "481f00faa2ad51bc69b6c8165348ec86a474e05a93157e63943d99484a5ff458",
+      "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+      "control/app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+      "control/app/deployments.py": "edacce07849810359c7ae3226927e3f9299e532be038deb598227fb13143f9a0",
+      "control/app/execution.py": "e8957c1b65daa5b04f3560675166db085333b4af9436bc5bf7a3344e51051006",
+      "control/app/function_operations.py": "deab33eba30d30f171e1d0e92b3903d6b13becc2fa85626409f19a459b0dc454",
+      "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+      "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+      "control/app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+      "control/app/main.py": "d67399fe9703f9e98713805946e215849b2f2a526a7fd1bd956aae9948286a21",
+      "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+      "control/app/models.py": "c14cbf7eeec0732966eb0076f4ade66b5e9a50fbb5ca59c653ad110b6662c552",
+      "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+      "control/app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+      "control/compose.spark.yml": "b63fe61e18b99ceef2d4a3132154ee8613ac6837cd8315b659aaad2f2f294afa",
+      "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+      "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+      "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+      "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+      "docs/CONSOLE_PUBLICATION.md": "37abbaf40dcdc56d29ccade3b4188dc0b5e10d611234f75ebbb44dadc44cb95a",
+      "docs/DESIGN_SYSTEM_APP.md": "6319f8694a39060b3423b9ce3a859da152b6b36272d28c0c973ebf3348b83fd2",
+      "docs/manual.md": "f26e9e29ae0ee846cbc5fc7b76f4b044e87c24aacced9bd03318d50a4656ff92",
+      "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+      "e2e/adapter-deploy.mjs": "3c2cd7146c0397be27290dce582955eefbfca2afc58e0ae755ca0566fb91feab",
+      "e2e/adapter.py": "997946b45f2eaf2671b5501eaad31ad88816e65f0bb3a02d06804d641b001605",
+      "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+      "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+      "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+      "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+      "e2e/control-operations.py": "f22514a626d059315b79dbbee1b448df93997da32fd0ed934bf728dea0910017",
+      "e2e/control-ui.mjs": "d719d0241bdca96c381c8e8d2743f62dc2c5c5a86fbd4c55d00677c6d75c16d8",
+      "e2e/control_database.py": "fe1c7cb2450f193bba5be5a6d4cd98e88936199b20b85e0a903226f6beb2a043",
+      "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+      "e2e/execution-faults.py": "1b6bea159b2ba38322c3ca7f9ba9eec506cb91415fbe071ee57c13a97a7e7b31",
+      "e2e/execution-suite.py": "376e9fc7ee154cc0085a4527d0fe26b577abf85778cb2fd68578b19b8af3e144",
+      "e2e/execution-ui.mjs": "536ba6d8f10096a4f1782079a476fcfe94535cf8c5a414cf618ba2f7d7a454cd",
+      "e2e/function-storage-faults.py": "30910f56ce8cd0724949fb27daff1b86af0fd871ecbea209bf379114eebbad30",
+      "e2e/function-storage.mjs": "c487ce480facb07d96a2728eb67262224817c26fc13b27dfa5f140240085f3f2",
+      "e2e/instance-lifecycle.py": "1c83bfc36180e3e63722073137745a3522ea39642108b589778cfd087773aab2",
+      "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+      "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+      "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+      "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+      "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+      "e2e/manual-ui.mjs": "094427db5a77ea0251048eb9078b7a48037fc39fd95690edc57543ce8297acb7",
+      "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+      "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+      "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+      "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+      "e2e/publication-fixtures.mjs": "6b0259622a62cce6ebb073a4560f75382e4c38b56efbaf42d105730c80f27fff",
+      "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+      "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+      "e2e/publication-ui.mjs": "1f15aa4cbabe2af890722034ac92453e10f04510932dec8316de9c599784b28c",
+      "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+      "e2e/runtime-instances.py": "c9652acb58dd42725d9a45d852c7db7a239f40ac640399a7e1868177bae129bc",
+      "e2e/runtime-validation.py": "69ff066e77cb8df5b954731ed1b01cd8dbf46ff2bb023642af53ed66f7894420",
+      "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+      "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+      "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+      "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+      "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+      "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+      "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+      "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+      "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+      "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+      "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+      "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+      "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+      "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+      "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+      "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+      "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+      "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+      "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+      "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+      "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+      "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+      "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+      "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+      "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+      "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+      "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+      "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+      "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+      "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+      "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+      "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+      "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+      "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+      "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+      "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+      "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+      "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+      "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+      "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+      "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+      "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+      "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+      "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+      "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+      "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+      "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+      "storage/agent.py": "63e5523d9cc22f1acd09d33b2e211dcecb5931400034506a769b9a0693dd2990",
+      "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+      "storage/agent_volumes.py": "1c6cc2cd550dd1f9cf2b40825318a8664ded5a3308ac7ebed15ae32ea9a02153",
+      "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+      "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+      "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+      "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+      "storage/install-dev.py": "51b7e233aafd04ab4439cfff5a75f7dc63706e8f5873ce612f22833b3ffc4646",
+      "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+      "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+      "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+      "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+      "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+      "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+      "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+      "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+      "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+      "web/src/function.jsx": "c7ee08d19b63f18988af26173a008122ce631e06cf07b47bc283c07293686f21",
+      "web/src/main.jsx": "20089cace8704d1b0f8f0b8419cf8ebbbf288d91a06c66fd799a539b9a9c1548",
+      "web/src/management.jsx": "94f2851b28ef8cd48a5569b6ca3fbfc966d7549d8fb2f51f522f1b674e9762a5",
+      "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+      "web/src/observations.jsx": "9073da7e1764f42acd7f7b611bc2f47c058f7db1394b191eca4994864d943a15",
+      "web/src/publications.jsx": "4bdb01fea7197a893b7fa2666e71ce4b4934eaf55808d35cae6ef0ccf4770804",
+      "web/src/style.css": "917e31c25713e0b71336d4dda0b492127ce6134c0ba8c5811c9661e09d66d269",
+      "web/src/ui.jsx": "c1b546238d5a90bcf693dc50bdfdba0ba46c951637e3345fd32cf00852ae6a05",
+      "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+    },
+    "baked_sources": {
+      "app/execution.py": "e8957c1b65daa5b04f3560675166db085333b4af9436bc5bf7a3344e51051006",
+      "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "app/main.py": "d67399fe9703f9e98713805946e215849b2f2a526a7fd1bd956aae9948286a21",
+      "app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+      "app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+      "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "app/models.py": "c14cbf7eeec0732966eb0076f4ade66b5e9a50fbb5ca59c653ad110b6662c552",
+      "app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+      "app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+      "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "app/api.py": "481f00faa2ad51bc69b6c8165348ec86a474e05a93157e63943d99484a5ff458",
+      "app/function_operations.py": "deab33eba30d30f171e1d0e92b3903d6b13becc2fa85626409f19a459b0dc454",
+      "app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+      "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+      "app/deployments.py": "edacce07849810359c7ae3226927e3f9299e532be038deb598227fb13143f9a0",
+      "app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+      "app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+      "migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+      "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+      "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "web/index.html": "4d52a2d3c74d101c166881f1ea050a2276a3816100af962587f5593c31554ef3",
+      "web/favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+      "web/assets/index-C4bBNkln.js": "29984cdcc58048a7b43dab41683a97f42e3f14a0201a16f246dad8eb16aba7ba",
+      "web/assets/index-DKsbJ_3K.css": "e36cee350f2f86ec3720a5405520752fbe19ee5682d6a00d1dd35136f41e89e6"
+    },
+    "services": {
+      "serverless-api": {
+        "image": "sha256:b969a756af1bba2689bb859aac2a6ab0b8dfcb1976e4bbce73d34a049afde13e",
+        "healthy": true
+      },
+      "serverless-runtime-reference": {
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "healthy": true
+      }
+    },
+    "image_identity": {
+      "docker_image": "sha256:b969a756af1bba2689bb859aac2a6ab0b8dfcb1976e4bbce73d34a049afde13e",
+      "configuration_digest": "sha256:93a291dd10889036332b79e9b63bc5eec63b13e4da8d91eec67fa3faa1d7ff27"
+    },
+    "runtime_image": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+    "configuration": {
+      "matches_official_files": true,
+      "keys": [
+        "SERVERLESS_PUBLIC_URL",
+        "OIDC_ISSUER",
+        "OIDC_CLIENT_ID",
+        "OIDC_CLIENT_SECRET",
+        "SERVERLESS_MASTER_KEY",
+        "SERVERLESS_STATE_HOST_PATH",
+        "SERVERLESS_DOCKER_SOCKET_HOST",
+        "SERVERLESS_RUNTIME_IMAGE",
+        "SERVERLESS_TRUSTED_PROXIES",
+        "SERVERLESS_STORAGE_ROOT_HOST",
+        "SERVERLESS_STORAGE_SOCKET_DIR_HOST",
+        "SERVERLESS_STORAGE_BUDGET_MIB",
+        "SERVERLESS_STORAGE_RESERVE_MIB",
+        "SERVERLESS_STORAGE_MAX_MOUNTS",
+        "SERVERLESS_FUNCTION_CPU_BUDGET",
+        "SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB",
+        "SERVERLESS_FUNCTION_INSTANCE_LIMIT",
+        "SERVERLESS_WAITING_CALL_LIMIT",
+        "SERVERLESS_FUNCTION_WAITING_CALL_LIMIT"
+      ],
+      "changed": {},
+      "secret_values_excluded": true
+    },
+    "storage": {
+      "schema_version": 3,
+      "health": {
+        "allocated_bytes": 0,
+        "budget_bytes": 34359738368,
+        "error": null,
+        "failed_volumes": 0,
+        "healthy": true,
+        "installation_id": "a8fb85c6-13a2-4f92-a60e-7f5d924cebbe",
+        "leases": 0,
+        "max_mounts": 64,
+        "mounted_or_reserved": 0,
+        "pending_functions": 0,
+        "quiesced": false,
+        "ready": true,
+        "reserve_bytes": 8589934592
+      },
+      "unit_sha256": "f2d851e60fdb1a76cac3f252d63e39eae1edb6595f97e5f7b639e2b17c202823",
+      "bundle": "/usr/local/lib/p2enjoy-serverless/storage/e116f761cadf8a04a59d1f45d729ef29edcb7b1e41e3a81afab43eda4422b255",
+      "package_sha256": {
+        "agent.py": "63e5523d9cc22f1acd09d33b2e211dcecb5931400034506a769b9a0693dd2990",
+        "agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+        "agent_volumes.py": "1c6cc2cd550dd1f9cf2b40825318a8664ded5a3308ac7ebed15ae32ea9a02153",
+        "migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+        "migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+        "migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+        "p2-quota": "c731fdcf33a42ba1206721e72a0635ce84dfe7833c03fa2e01e036ca3cd780ff"
+      },
+      "socket_directory": "/srv/p2enjoy-serverless/storage-channel",
+      "readonly_bind_verified": true,
+      "installed_root_annotation_verified": true
+    },
+    "database": {
+      "integrity": "ok",
+      "migrations": [
+        "001_control.sql",
+        "002_login_limits.sql",
+        "003_deployments.sql",
+        "004_function_operations.sql",
+        "005_execution.sql"
+      ],
+      "pending_function_operations": 0,
+      "active_objects": {
+        "namespaces": 0,
+        "services": 0,
+        "functions": 0
+      },
+      "retained_archives_verified_count": 434,
+      "retained_archives_inventory_sha256": "ab63de4e7277b4c56a76c2fe53652d6f17dd33a36b53546a36c81dfde16a8a14"
+    },
+    "remaining_instances": 0,
+    "remaining_instance_networks": 0,
+    "remaining_validation_containers": 0,
+    "remaining_test_workspaces": 0,
+    "routes": [
+      "serverless.lelabs.tech 18090 tls"
+    ]
+  },
+  "served_assets": {
+    "https://serverless.lelabs.tech/": "4d52a2d3c74d101c166881f1ea050a2276a3816100af962587f5593c31554ef3",
+    "https://serverless.lelabs.tech/favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+    "https://serverless.lelabs.tech/assets/index-C4bBNkln.js": "29984cdcc58048a7b43dab41683a97f42e3f14a0201a16f246dad8eb16aba7ba",
+    "https://serverless.lelabs.tech/assets/index-DKsbJ_3K.css": "e36cee350f2f86ec3720a5405520752fbe19ee5682d6a00d1dd35136f41e89e6"
+  },
+  "report_sha256": {
+    "managed-storage": "159e9f3945ae12333cec82827720ad2c6bd8769c6b2bbb876ddc31eedeb7c4e5",
+    "runtime-instances": "09f3a512e10f1a2d68033fd4bee108b66213525a8c83f37be1cd6b9205bb8785",
+    "instance-lifecycle": "f7858a0d836aef1fa3d294c2736f4fd6afd47e146d1ed7ebaed32614e9351e3f",
+    "runtime-validation": "8178a971b4fec2102c68b1438a9066251a395fd7583a7c5160fd5ee83ed35188",
+    "control-operations": "6642103e7c606517a9deec5e3dc1fdd18d52bdd45c790cd7ec21c0ab205aa7b1",
+    "function-storage": "1f170193d932225a3b5c6801f1e1086527d4f8874b2ed167665d19a7516f3ad0",
+    "control-admin": "241de0b4e841ebe040e497dfe551d375283180df59d2cb55d252c036748ecaba",
+    "control-ui": "ee588269f6206666197817a319374237a7b2d185647860a2f9fc7198c5e78d8f",
+    "deployments": "26150846f6d34f87f36d361b9e4ea64cd25c3ed3000f4e530d4be947deec4f9c",
+    "code-publications": "ada77b6ab25161409cbf96f8dcf5d39ff68a8a992816ceb960dd0d5e2b9dbbec",
+    "adapter-deploy": "12c54890cc1957059a3dddd41aa544c8901956ee87f487f96411530459d72527",
+    "publication-recovery": "37f748bbad473c05dc4704e2fc0cd19e024ed1ee18f7b675e2bf11775a5373ba",
+    "public": "f7672c9e21b84b5ee1b708e9c399a76836fe1dea9f436721bc828d72e18a79dd",
+    "public-invocations": "bbf37432149fff7fb7888d1792754c79ea161676bdf0e399fe64fd60977ff2dd",
+    "login-ui": "ef9686ff5c717a6ae4c3d8ecf266e3f0af5aa356885bb8ae3bb5782e52ab8396",
+    "execution-ui": "447a1e782e231f6d9f77ee6673098d0f7c65810be010343a53745f62626b4004",
+    "publication-ui": "7e6845bc9adbcf5b44a18fbfa4d5cb9b7f655829c1021471d77c3275febbc2d0",
+    "manual-ui": "2727b9142ce9bfd5b0a31d499db356264d7517c883809ba2dfb891bc6ef63ca2"
+  },
+  "campaigns": [
+    {
+      "name": "control-operations",
+      "passed_groups": 55,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "function-storage",
+      "passed_groups": 14,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "runtime-instances",
+      "passed_groups": 31,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "instance-lifecycle",
+      "passed_groups": 11,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "runtime-validation",
+      "passed_groups": 36,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "managed-storage",
+      "passed_groups": 14,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "control-admin",
+      "passed_groups": 19,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "control-ui",
+      "passed_groups": 11,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "deployments",
+      "passed_groups": 11,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "code-publications",
+      "passed_groups": 10,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "adapter-deploy",
+      "passed_groups": 7,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "publication-recovery",
+      "passed_groups": 4,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "public",
+      "passed_groups": 8,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "public-invocations",
+      "passed_groups": 31,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "login-ui",
+      "passed_groups": 9,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "execution-ui",
+      "passed_groups": 12,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "publication-ui",
+      "passed_groups": 21,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    },
+    {
+      "name": "manual-ui",
+      "passed_groups": 8,
+      "exit_code": 0,
+      "fresh_report_verified": true,
+      "report_content_verified": true
+    }
+  ],
+  "visual_review": {
+    "reviewed": true,
+    "tracked_tree_unchanged": true,
+    "captures": {
+      "console-namespaces.jpg": {
+        "sha256": "7c1e7b0a01e3b87c08058acae4037c03020c3ebcf9d089b5862487dbb80a5851",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "control-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "État vide, création, navigation et accès au manuel lisibles, sans chevauchement.",
+        "viewport_recorded": false
+      },
+      "namespace-mobile-long.jpg": {
+        "sha256": "6980b105710c062c41b98dc7b7cc6a38c42c2f35c6d433242c314bbd1c2943a3",
+        "dimensions": [
+          390,
+          924
+        ],
+        "campaign": "control-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Nom long et description se répartissent sans débordement visible ; actions lisibles à 390 px.",
+        "viewport_recorded": false
+      },
+      "configuration-conflict.jpg": {
+        "sha256": "d118cfe4cea7504c871c6a367b029e2286de0a431fd3a85334cbc7454b95c8c5",
+        "dimensions": [
+          1440,
+          1087
+        ],
+        "campaign": "control-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Saisie conservée et diagnostic de conflit lisibles ; dialogue et actions sans coupure.",
+        "viewport_recorded": false
+      },
+      "tokens-desktop.jpg": {
+        "sha256": "4bc3d97029edfacb32ed69e0216d0d37fa3f55e7ebf72f6d57b0919b3fe9690d",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "control-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "États, droits, portée, préfixes abrégés et actions clairement associés.",
+        "viewport_recorded": false
+      },
+      "function-desktop.jpg": {
+        "sha256": "b48539b70aac8fb454bbe2c58a3fda953be534013a0996b97c42fc220fae9fe2",
+        "dimensions": [
+          1440,
+          1713
+        ],
+        "campaign": "control-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Identité, ressources, délais, stockage et états vides lisibles ; actions sans collision.",
+        "viewport_recorded": false
+      },
+      "function-mobile.jpg": {
+        "sha256": "c42ba680694c51f4ce18ddc9bb025e31ccbc18d725744212ccd48f996f2bb46f",
+        "dimensions": [
+          390,
+          2219
+        ],
+        "campaign": "control-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Onglets sur deux lignes, UUID renvoyé à la ligne et actions adaptées à la largeur.",
+        "viewport_recorded": false
+      },
+      "activity-desktop.jpg": {
+        "sha256": "46733400d56cc60a2d022ccc4f866cafb876ffb84475321bffc01be0c0c37cb3",
+        "dimensions": [
+          1440,
+          1396
+        ],
+        "campaign": "control-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Tableau, événements, acteurs et UUID lisibles sans collision.",
+        "viewport_recorded": false
+      },
+      "login-desktop.png": {
+        "sha256": "d022f4279f4fa9188ad98e6cd91fdd943db0414777081927befd97abbd1cc47f",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "login-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Carte centrée, bouton SSO et focus visibles, sans coupure.",
+        "viewport_recorded": false
+      },
+      "login-tablette.png": {
+        "sha256": "60e963d6d7e6ff892319959186f279705bf6beddaf6058380f33993fd10671a6",
+        "dimensions": [
+          820,
+          1180
+        ],
+        "campaign": "login-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Carte et action lisibles, espacement régulier.",
+        "viewport_recorded": false
+      },
+      "login-mobile.png": {
+        "sha256": "9231ee06e1bebf263d47fc693ba9ed3c4b3a03a05176ab19ac326edaa998cee7",
+        "dimensions": [
+          390,
+          844
+        ],
+        "campaign": "login-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Titre réparti et bouton entièrement visible avec focus.",
+        "viewport_recorded": false
+      },
+      "login-error.png": {
+        "sha256": "05c65ab3eb839c20d7393df4fd2405daf26f66f7909e23631244e64d73a867b9",
+        "dimensions": [
+          390,
+          844
+        ],
+        "campaign": "login-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Erreur SSO et reconnexion lisibles sans chevauchement.",
+        "viewport_recorded": false
+      },
+      "sso-entry.png": {
+        "sha256": "f147cd602520f5806cdb2fcfe087744fbe66eb0422ca79d076b1630f8d3b6dcb",
+        "dimensions": [
+          390,
+          844
+        ],
+        "campaign": "login-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Formulaire LeLabs contenu dans la largeur ; cette capture ne prouve pas une connexion accomplie.",
+        "viewport_recorded": false
+      },
+      "login-limit.png": {
+        "sha256": "a2d3880ce67982e683bbc4fe24785208d9d84634f41531f862d99bb17cd7ad31",
+        "dimensions": [
+          390,
+          844
+        ],
+        "campaign": "login-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Limitation explicite et bouton SSO visible.",
+        "viewport_recorded": false
+      },
+      "execution-ui-empty.jpg": {
+        "sha256": "ac23e818d4aca91702728bbbf6ee8f444eecf2705277a4df37f49e81f31c5147",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "État vide, compteur, date, nom long et onglets lisibles.",
+        "viewport_recorded": false
+      },
+      "execution-ui-instances-desktop.jpg": {
+        "sha256": "176a5c6ae94904f78b30676b386dd1dd9008aebdd527917a743d24595fd78a9c",
+        "dimensions": [
+          1440,
+          2220
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Identifiants, allocations, mesures et indisponibilités lisibles ; pagination visible.",
+        "viewport_recorded": false
+      },
+      "execution-ui-instances-mobile.jpg": {
+        "sha256": "577c0ba858021b2863d0df0889d53e124520f53dc62a7d6fff03fe91d0398b06",
+        "dimensions": [
+          390,
+          4243
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "UUID et nom long se répartissent ; mesures et pagination sans chevauchement.",
+        "viewport_recorded": false
+      },
+      "execution-ui-loading.jpg": {
+        "sha256": "fe684dacda38433feeebe33d8e5131b2305b7c42ae964073817ceeaaae3be246",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Chargement textuel et actions désactivées visibles.",
+        "viewport_recorded": false
+      },
+      "execution-ui-network-error.jpg": {
+        "sha256": "8a7229bfd65d3f73c5fc5e7725fca2492cc17a8ed66ae8c3d42629275e4c2b26",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Erreur réseau et Réessayer visibles ; pas de liste ambiguë.",
+        "viewport_recorded": false
+      },
+      "execution-ui-logs-desktop.jpg": {
+        "sha256": "d6e65590569ed85f103e7e2fd57809ad02550548ca35f9266d7b4698dc879ec2",
+        "dimensions": [
+          1440,
+          2404
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "États, codes HTTP, détails et journal en texte lisibles ; expurgation et focus visibles.",
+        "viewport_recorded": false
+      },
+      "execution-ui-logs-mobile.jpg": {
+        "sha256": "bfac865c03b46f10afc466160e1927c2b0a88c8495794a9f765c84b3208a7448",
+        "dimensions": [
+          390,
+          4054
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Troncature annoncée, journal contenu et focus visible ; UUID et diagnostics répartis.",
+        "viewport_recorded": false
+      },
+      "execution-ui-running.jpg": {
+        "sha256": "3dd90567b5ff3248cfbdce9778cc80df51acfbf5cf21a7a55a254cf748408220",
+        "dimensions": [
+          1440,
+          1655
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Invocation en cours, fin non observée et disponibilité des journaux explicites.",
+        "viewport_recorded": false
+      },
+      "execution-ui-unconfirmed.jpg": {
+        "sha256": "84cb08d7495ad18c3a6e741da35f1391a56b10c7be7982b0b69972160328311b",
+        "dimensions": [
+          1440,
+          1655
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Démarrage non confirmé et autre invocation refusée à 429 identifiables.",
+        "viewport_recorded": false
+      },
+      "execution-ui-metrics-unavailable.jpg": {
+        "sha256": "24b605e2350624ca494effc832b1ad7f41db662d43c7c726c20e33da2ed0fa1d",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Allocation conservée, mesures indisponibles explicitement expliquées.",
+        "viewport_recorded": false
+      },
+      "execution-ui-unauthorized.jpg": {
+        "sha256": "e9d4cde14785635e5c1a3c3128c8d56206e76b9d87ac2d53fee2157453eca510",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Refus et reconnexion lisibles, sans données d’invocation dans le résultat.",
+        "viewport_recorded": false
+      },
+      "execution-ui-deleted.jpg": {
+        "sha256": "cb5ef5b09c4f6242d6426d2264a32fc36ab066bb3e52a8252079165cb3a87e57",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "execution-ui",
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Fonction introuvable explicite, Réessayer visible.",
+        "viewport_recorded": false
+      },
+      "publication-ui-empty.jpg": {
+        "sha256": "d59574f18a614d5e19fcf284d4fb1c2fc1b229c728dcc2f0ec086acdad31073e",
+        "dimensions": [
+          1440,
+          1035
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Brouillon et listes vides explicites, publication visible.",
+        "viewport_recorded": true
+      },
+      "publication-ui-preparation-conflict.jpg": {
+        "sha256": "b583e4abc23b9106284b264eeca75e9688fe813ba32ad9d9e717238da8911cdd",
+        "dimensions": [
+          1440,
+          1059
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Dialogue lisible, ZIP/handler conservés et conflit explicite.",
+        "viewport_recorded": true
+      },
+      "publication-ui-published-desktop.jpg": {
+        "sha256": "79998614d572400ffc1607df50a2cbe583edf0382e5edae82d445937f267e6cc",
+        "dimensions": [
+          1440,
+          2385
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Confirmation, candidat publié, révision active et UUID concordants ; métadonnées contenues.",
+        "viewport_recorded": true
+      },
+      "publication-ui-validation-failed.jpg": {
+        "sha256": "98fdf013d26fbe0029ef2852463f679440a1dea4d9e3c51875f4b41f35950a07",
+        "dimensions": [
+          1440,
+          2984
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Échec et import_failed lisibles, secret expurgé, ancienne révision conservée.",
+        "viewport_recorded": true
+      },
+      "publication-ui-activated.jpg": {
+        "sha256": "bda82f8eb5e5d773f9f93c56a21aedbc55cfe4177f460f745258beafe1407f4b",
+        "dimensions": [
+          1440,
+          3237
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Activation et pointeur concordants, tentative historique distincte.",
+        "viewport_recorded": true
+      },
+      "publication-ui-validation-log-mobile-start.jpg": {
+        "sha256": "997ad15d7499225010502ff91f98b166d6dea3da29ec397b7d35bde2a16a281c",
+        "dimensions": [
+          390,
+          5912
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Troncature visible, début expurgé et bloc borné sans débordement.",
+        "viewport_recorded": true
+      },
+      "publication-ui-validation-log-mobile-end.jpg": {
+        "sha256": "d2d652337667309dddf5c77d5eeea7260dbd53061362a6842bd578df2266266c",
+        "dimensions": [
+          390,
+          5912
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Fin de journal et focus visibles, avertissement conservé.",
+        "viewport_recorded": true
+      },
+      "publication-ui-activation-response-lost.jpg": {
+        "sha256": "f40e33db8648ed600a6dbac375210960a25f1bdb4cfc454147fc128eb5a79224",
+        "dimensions": [
+          1440,
+          3188
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Après retour, révision active et ancienne révision inactive distinctes.",
+        "viewport_recorded": true
+      },
+      "publication-ui-deletion-response-lost.jpg": {
+        "sha256": "4041e795817c9fa2a14df82b1a5778a64cc772a88b93d38165d7fd735121de83",
+        "dimensions": [
+          1440,
+          2810
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Révision supprimée absente, tentative historique conservée.",
+        "viewport_recorded": true
+      },
+      "publication-ui-cleanup-pending.jpg": {
+        "sha256": "6176cc77b2551779a3857fd6db9de9cab4fa8ff14277c7c15e13734d076585c2",
+        "dimensions": [
+          1440,
+          2870
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "503 de nettoyage lisible, suppression logique visible dans l’historique.",
+        "viewport_recorded": true
+      },
+      "publication-ui-cleanup-pending-mobile.jpg": {
+        "sha256": "3bf413fb419f5857c2e8f7f32fb53a96da23fa070486ab5679eb9854074a440b",
+        "dimensions": [
+          390,
+          4057
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Alerte, UUID, boutons et pagination contenus à 390 px.",
+        "viewport_recorded": true
+      },
+      "publication-ui-storage-confirmation-pending.jpg": {
+        "sha256": "9ce25852ddb031a1e99539854b5ad1141068760bca8cfe35a075360177c94519",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": false
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Publication et pointeur concordants, confirmation de stockage en attente ; ancien succès d’activation encore visible.",
+        "viewport_recorded": true
+      },
+      "publication-ui-validating.jpg": {
+        "sha256": "574f125446f7b51c3e6b7290ae3b557ec46051b710d13f96e71dc180a1fa208c",
+        "dimensions": [
+          1440,
+          3533
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Même candidat affiché en validation dans le suivi et en réception dans la liste : incohérence confirmée.",
+        "viewport_recorded": true
+      },
+      "publication-ui-reloaded.jpg": {
+        "sha256": "c326c2a18c77b54cde007b2b88ae889b9c720d9525b8ecd5bd22a3183eb664c3",
+        "dimensions": [
+          1440,
+          3946
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Candidat publié, pointeur et handler concordants après rechargement.",
+        "viewport_recorded": true
+      },
+      "publication-ui-pagination.jpg": {
+        "sha256": "fe7bff293fcfb8643e996eba539d4f161a6a2060f998a826d09f0da8b5136b54",
+        "dimensions": [
+          1440,
+          4009
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier publication_fault_review",
+        "observation": "Pages et commandes de pagination lisibles et distinctes.",
+        "viewport_recorded": true
+      },
+      "publication-ui-network-error.jpg": {
+        "sha256": "9a82f96243fb1f3cba9987d4d192f48176dbec767b05ee3271bc223e41600492",
+        "dimensions": [
+          1440,
+          4065
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Erreur, Réessayer et état non actualisé visibles ; mutations désactivées.",
+        "viewport_recorded": true
+      },
+      "publication-ui-unauthorized.jpg": {
+        "sha256": "1c9cb5fe7aa58d96d25fdb190ef46ec2d28ade9584acae350d780c03b4920076",
+        "dimensions": [
+          1440,
+          4087
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Refus et reconnexion visibles ; ancien état marqué non actualisé.",
+        "viewport_recorded": true
+      },
+      "publication-ui-preparation-response-lost.jpg": {
+        "sha256": "baf4614f1967314da9bc13f493b0d3c96e3a8ecc35987fee5a0a7b0ace72d73e",
+        "dimensions": [
+          1440,
+          3934
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Même candidat préparé, abandon et fermeture explicites, ancienne active distincte.",
+        "viewport_recorded": true
+      },
+      "publication-ui-foreign-candidate.jpg": {
+        "sha256": "e474de7a8d321f1b410acc96946183e3437dfde022d3203e84fd8be472d1cdc7",
+        "dimensions": [
+          1440,
+          3794
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 1440,
+          "height": 1000,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Refus de candidat étranger sans détails ni abandon, suivi fermable.",
+        "viewport_recorded": true
+      },
+      "publication-ui-mobile.jpg": {
+        "sha256": "d00050f9d5b2ad5d7cf6c5f12b9cd11dc9fb2d2dd455c94b9f18e6e8895b7e66",
+        "dimensions": [
+          390,
+          4927
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Nom, UUID, facettes, cartes et pagination sans chevauchement.",
+        "viewport_recorded": true
+      },
+      "publication-ui-metadata-mobile.jpg": {
+        "sha256": "eb5bbf34824938f7a5d51400242e47db040e536fa339e335c835c8a340ab3e8f",
+        "dimensions": [
+          390,
+          5568
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "fullPage": true
+        },
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Focus, empreintes et métadonnées contenus dans leur largeur.",
+        "viewport_recorded": true
+      },
+      "publication-ui-confirmation-mobile.jpg": {
+        "sha256": "323e015c0b238e86ef19c9f62cfa18696729e9e8854d188d6c7393249fcc2e74",
+        "dimensions": [
+          390,
+          844
+        ],
+        "campaign": "publication-ui",
+        "viewport": {
+          "width": 390,
+          "height": 844,
+          "fullPage": false
+        },
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Confirmation entière visible dans le viewport, nom d’archive et actions lisibles.",
+        "viewport_recorded": true
+      },
+      "manual-desktop.jpg": {
+        "sha256": "ebb115c3d5a88bd6b58338aafb1deaaf8d4e1d765c0c43585ddba0a98c0f9dc2",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "manual-ui",
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Navigation active, sommaire adjacent, onze chapitres dont publication/révisions et texte lisibles.",
+        "viewport_recorded": false
+      },
+      "manual-rights-desktop.jpg": {
+        "sha256": "bbb89f285c35d68820c5d3b9d2550a7eff1e5a082702728bc5e3af95621ccb90",
+        "dimensions": [
+          1440,
+          1000
+        ],
+        "campaign": "manual-ui",
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Quatre droits et usages entièrement visibles, authentification métier distincte.",
+        "viewport_recorded": false
+      },
+      "manual-mobile.jpg": {
+        "sha256": "73045066e5793db205b34174a901f27dc4eee2236377c3e8cbbcf2e46e50f805",
+        "dimensions": [
+          390,
+          844
+        ],
+        "campaign": "manual-ui",
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Menu, titre et onze liens du sommaire lisibles sans débordement.",
+        "viewport_recorded": false
+      },
+      "manual-rights-mobile.jpg": {
+        "sha256": "7688c03b1382c74577152fd687b2492dc710cbf5f10a3e5a81c8d468f76fe82b",
+        "dimensions": [
+          390,
+          844
+        ],
+        "campaign": "manual-ui",
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Tableau complet, chaque droit reste associé à son usage.",
+        "viewport_recorded": false
+      },
+      "manual-command-mobile.jpg": {
+        "sha256": "3b59c2c1adac35c9d7934604a7ebb0bc66abb6033c60baf36af74f84e9313ac8",
+        "dimensions": [
+          390,
+          844
+        ],
+        "campaign": "manual-ui",
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Variables et commande longue reviennent à la ligne, explications lisibles.",
+        "viewport_recorded": false
+      },
+      "manual-tablet.jpg": {
+        "sha256": "01bb4e8ab581049421bedc042f0da73e8a3e1adf45f9704123c2db509f3d3c37",
+        "dimensions": [
+          820,
+          1180
+        ],
+        "campaign": "manual-ui",
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Menu compact et sommaire empilé, lecture bornée sans collision.",
+        "viewport_recorded": false
+      },
+      "manual-large-text.jpg": {
+        "sha256": "a0ab8ab737ff5501bc9b60e971e6f63d43ba7050b40923032ca61dae592d4583",
+        "dimensions": [
+          390,
+          844
+        ],
+        "campaign": "manual-ui",
+        "reviewer": "factory_verifier runtime_review",
+        "observation": "Texte/code agrandis et repliés, titres distincts ; facteur 200 % prouvé par le test.",
+        "viewport_recorded": false
+      }
+    },
+    "limitations": [
+      "Les dimensions des images ne sont pas assimilées au viewport ; celui-ci est enregistré explicitement pour la publication.",
+      "La revue visuelle ne remplace pas les preuves clavier et d’autorisation."
+    ],
+    "accepted": false,
+    "findings": [
+      {
+        "id": "SLS-063-OBS-1",
+        "capture": "publication-ui-validating.jpg",
+        "issue": "Deux états différents du même candidat dans le cycle de lecture",
+        "decision": "Utiliser l’observation individuelle plus récente dans la ligne de liste"
+      },
+      {
+        "id": "SLS-063-OBS-2",
+        "capture": "publication-ui-storage-confirmation-pending.jpg",
+        "issue": "Succès d’une ancienne activation conservé après actualisation d’une autre publication",
+        "decision": "Effacer les anciens messages de succès lors d’une nouvelle consultation explicite"
+      }
+    ],
+    "principal_reviewed": [
+      "manual-desktop.jpg",
+      "publication-ui-validating.jpg",
+      "publication-ui-cleanup-pending-mobile.jpg"
+    ]
+  },
+  "next_step": "Corriger la cohérence des observations et du message de succès, puis reconstruire et rejouer la qualification"
+}

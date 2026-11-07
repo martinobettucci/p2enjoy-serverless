@@ -40,7 +40,7 @@ l'ancien rapport réussi est invalidé, puis rejoue la campagne publique.
 Les rapports ne valent que lorsque `completed` est vrai et les nettoyages
 réussis ; leur initialisation précède les prérequis externes.
 
-`python3 e2e/execution-suite.py` rejoue en série les treize campagnes du
+`python3 e2e/execution-suite.py` rejoue en série les quatorze campagnes du
 moteur et de régression sur le SPARK DEV. Chaque commande attend la fin de
 la précédente ; les rapports sont vérifiés comme fraîchement régénérés et
 rattachés à leurs empreintes, aux sources locales et à l’image du contrôle
@@ -199,7 +199,7 @@ Le pilote redémarre explicitement le contrôle après `docker kill` et restaure
 les composants avant nettoyage, même en cas d’échec. Le rapport conserve UUID,
 décisions, gardes, archives et erreurs de nettoyage ; aucun jeton ni secret.
 
-Les cinq campagnes de gestion et publication utilisent `storage-archives.mjs`
+Les campagnes de gestion et publication utilisent `storage-archives.mjs`
 pour une purge opérateur séparée, après leur DELETE normal. Le helper du SPARK
 vérifie les UUID exacts de fonction et namespace, leur rattachement, la suppression
 logique et l’absence de bail ou mutation avant d’appeler l’agent réel. Les
@@ -263,7 +263,7 @@ Le nettoyage retrouve les créations par leurs noms exacts même si la navigatio
 échoue, puis confirme suppression et purge de leurs archives de stockage.
 
 `python3 -B e2e/execution-suite.py --scope console` exécute en série `public`,
-`login-ui`, `control-ui`, `execution-ui` puis `manual-ui`. Son rapport est
+`login-ui`, `control-ui`, `execution-ui`, `publication-ui` puis `manual-ui`. Son rapport est
 `.local/e2e/console-execution-regressions.json`. Il vérifie la fraîcheur et le
 contenu de chaque rapport : fin, nombres de groupes, absence d’échec/skip et
 nettoyage selon son schéma. La source et l’image sont recoupées avant/après.
@@ -311,5 +311,22 @@ le helper borné et recensent séparément le code conservé. La
 recoupe 32 groupes, 21 captures relues et 109 sources inchangées pendant les
 campagnes. La capture nommée `validating` montre encore le libellé de réception ;
 la validation est observée par l’API, sans preuve visuelle de ce libellé dans
-ce checkpoint. Restent les pannes de mutation/nettoyage, les longs journaux,
-le candidat étranger et l’intégration à la régression complète.
+ce checkpoint. La qualification a été étendue aux scénarios ci-dessous.
+
+Les parcours étendus passent 21 groupes ciblés : réponses perdues d’activation
+et suppression, candidat d’une autre fonction, journal long/tronqué et clavier,
+validation rendue, nettoyage physique refusé puis repris et confirmation de
+stockage en attente. `publication-cleanup-fault.py` vérifie namespace, UUID,
+inode et permissions avant son mode 000 ; sa garde indépendante est éprouvée
+après SIGKILL et SIGSTOP du seul helper. Le vrai contrôle constate EACCES,
+la console reçoit 503 après suppression logique, puis la maintenance reprend.
+Le mode commit de `function-storage-faults.py` suspend brièvement l’agent réel
+pour qualifier une publication enregistrée dont la confirmation expire ; ce
+mode et son inspect exigent l’UUID exact du namespace de publication.
+
+La commande `python3 -B e2e/execution-suite.py --scope publication` réunit les
+campagnes moteur et console en série, sans répéter les campagnes communes :
+dix-huit campagnes, 312 groupes attendus. Son rapport autonome est
+`.local/e2e/publication-regressions.json`. Chaque rapport doit être frais,
+complet et nettoyé ; sources locales/distantes et image restent identiques.
+Cette suite constitue le prochain contrôle avant clôture de SLS-063.

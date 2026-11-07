@@ -15,11 +15,14 @@ REMOTE='/srv/p2enjoy-serverless/'
 REPORT=ROOT/'.local/e2e/execution-regressions.json'
 
 def source_hashes():
-    files=[p for folder,pattern in [('control/app','*.py'),('control/migrations','*.sql'),('storage','*.py'),('storage/migrations','*.sql'),('runtime','*.mjs')] for p in (ROOT/folder).glob(pattern)]
+    files=[p for folder,pattern in [('control/app','*.py'),('control/migrations','*.sql'),('storage','*.py'),('storage/migrations','*.sql'),('runtime','*.mjs'),('adapter','*.py')] for p in (ROOT/folder).glob(pattern)]
     files += [ROOT/p for p in ['control/Dockerfile','control/requirements.txt','control/compose.spark.yml','control/dev.sh','runtime/Dockerfile','runtime/compose.spark.yml','runtime/dev.sh','storage/main.go','storage/go.mod','storage/go.sum','storage/dev.sh','storage/Dockerfile','qualification/artifacts/volume-operations.cjs','qualification/artifacts/public-invocation.cjs','qualification/artifacts/invoke.cjs','web/package.json','web/package-lock.json','web/index.html']]
     files += [ROOT/'qualification/artifacts/observation.cjs']
     # @spec docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md#preuves-attendues
     files += [ROOT/name for name in ['docs/manual.md','web/vite.config.mjs','control/Dockerfile.dockerignore']]
+    # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
+    files += [p for p in (ROOT/'qualification/artifacts').iterdir() if p.is_file()]
+    files += [ROOT/name for name in ['docs/CONSOLE_PUBLICATION.md','docs/DESIGN_SYSTEM_APP.md','qualification/serverless.platform.yml','qualification/src/handlers.cjs','adapter/requirements.txt']]
     files += [p for p in (ROOT/'web/src').glob('*') if p.is_file()]
     files += [p for p in (ROOT/'e2e').iterdir() if p.suffix in ('.py','.mjs')]
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
@@ -57,6 +60,7 @@ CASES=[
  ('control-admin',['node','e2e/control-admin.mjs'],'.local/e2e/control-admin.json',False),
  ('control-ui',['node','e2e/control-ui.mjs'],'.local/e2e/control-ui.json',False),
  ('deployments',['node','e2e/deployments.mjs'],'.local/e2e/deployments.json',False),
+ ('code-publications',['node','e2e/code-publications.mjs'],'.local/e2e/code-publications.json',False),
  ('adapter-deploy',['node','e2e/adapter-deploy.mjs'],'.local/e2e/adapter-deploy.json',False),
  ('publication-recovery',['node','e2e/publication-recovery.mjs'],'.local/e2e/publication-recovery.json',False),
  ('public',['python3','-B','e2e/public.py'],'.local/e2e/public.json',False),
@@ -74,31 +78,38 @@ def verify_report(name,path,is_remote,expected_hash):
     expected={'control-operations':55,'function-storage':14,'runtime-instances':31,'instance-lifecycle':11,
               'runtime-validation':36,'managed-storage':14,'control-admin':19,'control-ui':11,
               'deployments':11,'adapter-deploy':7,'publication-recovery':4,'public':8,
-              'public-invocations':31,'login-ui':9,'execution-ui':12,'manual-ui':8}
+              'public-invocations':31,'login-ui':9,'execution-ui':12,'manual-ui':8,
+              'code-publications':10,'publication-ui':21}
     checks=result.get('checks',result.get('results'))
     assert isinstance(checks,list) and len(checks)==expected[name],'Nombre de groupes inattendu'
     if name=='login-ui':assert all(isinstance(row,str) and row for row in checks)
     else:assert all(row['status']=='passed' for row in checks),'Groupe échoué'
-    assert not result.get('failed') and not result.get('failures') and not result.get('cleanupErrors')
+    assert not result.get('failed') and not result.get('failures') and not result.get('cleanupErrors') and not result.get('cleanup_errors')
     if name not in ('runtime-validation','public','login-ui','control-ui','control-admin','manual-ui'):
         assert result['cleanup'] is True,'Nettoyage incomplet'
     if name in ('control-ui','execution-ui'):assert result['faults']==[] and result['cleanupErrors']==[]
     if name=='manual-ui':assert result['faults']==[]
+    if name=='publication-ui':assert result['faults']==[]
     return len(checks)
 
 def main():
     # @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
+    # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--scope',choices=('engine','console'),default='engine')
+    parser.add_argument('--scope',choices=('engine','console','publication'),default='engine')
     scope=parser.parse_args().scope
-    report=REPORT if scope=='engine' else ROOT/'.local/e2e/console-execution-regressions.json'
-    cases=CASES if scope=='engine' else [
+    report={'engine':REPORT,'console':ROOT/'.local/e2e/console-execution-regressions.json','publication':ROOT/'.local/e2e/publication-regressions.json'}[scope]
+    console_cases=[
         next(row for row in CASES if row[0]=='public'),
         ('login-ui',['node','e2e/login-ui.mjs'],'.local/e2e/login-ui.json',False),
         next(row for row in CASES if row[0]=='control-ui'),
         ('execution-ui',['node','e2e/execution-ui.mjs'],'.local/e2e/execution-ui.json',False),
+        ('publication-ui',['node','e2e/publication-ui.mjs'],'.local/e2e/publication-ui.json',False),
         ('manual-ui',['node','e2e/manual-ui.mjs'],'.local/e2e/manual-ui.json',False),
     ]
+    cases=CASES if scope=='engine' else console_cases
+    if scope=='publication':
+        cases=CASES+[row for row in console_cases if row[0] not in {case[0] for case in CASES}]
     records=[];baseline=None
     def save(done=False):
         temporary=report.with_suffix('.tmp')

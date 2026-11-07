@@ -1761,3 +1761,24 @@ La qualification de publication les réunit dans un scope dédié, dédupliqué 
 nom de campagne, afin que chaque preuve soit exécutée une fois sur les mêmes
 sources et image. Cela évite aussi d’écraser un rapport utilisé par une première
 suite lors de l’exécution d’une seconde. Les scopes existants restent utilisables.
+
+### Publication UI — première régression et constats visuels
+
+Les dix-huit campagnes passent 312 groupes, sans échec ni skip. Les 144 sources
+restent identiques pendant la suite ; l’image b969a756, les fichiers embarqués,
+ressources servies et 434 archives sont recoupés. Aucun objet actif, bail,
+montage, opération pendante ou instance de qualification ne subsiste.
+
+La revue de 54 captures constate deux défauts : la liste peut afficher un état
+antérieur à celui du suivi du même candidat, et une ancienne confirmation de
+succès reste visible après une actualisation portant sur une autre publication.
+Le principal confirme les captures et le flux de lecture ; les issues retenues
+sont persistées dans CONSOLE_PUBLICATION et le registre avant correction.
+La capture de confirmation de stockage, limitée par une condition de nom trop
+large, sera aussi reprise en pleine page ; seule la modale de confirmation
+mobile doit conserver sa capture de viewport.
+
+Les rapports et images de cette première suite sont conservés sous
+.local/e2e/publication-regression-first-312 et leur bilan recoupé est versionné.
+SLS-063 reste ouvert. Une nouvelle qualification suivra la correction de ces
+incohérences ; aucune clôture ne repose sur les seuls comptes de tests.

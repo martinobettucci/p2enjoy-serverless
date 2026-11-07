@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Qualification de publication étendue à 21 groupes navigateur et dix API,
+  avec vraies pannes de transport, permissions disque et confirmation de stockage.
+- Première régression commune : 18 campagnes, 312 groupes réussis. La revue
+  des 54 captures relève deux incohérences de lecture à corriger ; l’unité
+  reste ouverte : [preuve](docs/evidence/publication-console-review-dev-2026-11-07.json).
+
 - Publication ZIP depuis la console, conservation serveur de la configuration,
   suivi corrélé des candidats et abandon explicite, historique, activation et
   suppression des révisions. Le manuel décrit ces parcours (SLS-063).

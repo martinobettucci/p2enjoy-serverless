@@ -69,7 +69,12 @@ def owned_function():
     if mode=='archive-cleanup':
         assert result[0]['namespace_id']==str(UUID(sys.argv[3])),'campaign_namespace_required'
         assert re.fullmatch(r'(qa|ui|deploy|cli|publication-recovery|publication-api|publication-ui|invocation)-[0-9a-f]{8}x*',result[0]['namespace_name']),'campaign_namespace_required'
-    else:assert result[0]['namespace_name'].startswith('storage-api-'),'campaign_function_required'
+    else:
+        # @verifies docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#suivi-et-réponses-perdues
+        publication=(mode in ('commit','inspect') and re.fullmatch(r'publication-ui-[0-9a-f]{8}',result[0]['namespace_name']))
+        if publication:
+            assert result[0]['namespace_id']==str(UUID(sys.argv[3])),'campaign_namespace_required'
+        else:assert result[0]['namespace_name'].startswith('storage-api-'),'campaign_function_required'
     return result[0]
 
 

@@ -70,6 +70,12 @@ fonction et historique avant une nouvelle action. Un état publié avec une
 opération de stockage en attente est annoncé comme enregistré, confirmation
 en attente ; il n’est pas présenté comme une ancienne version conservée.
 
+Dans un cycle de consultation, le candidat suivi est lu après la liste. Son
+observation plus récente remplace aussi sa ligne dans cette liste : le même
+candidat ne porte pas deux états différents dans l’écran. Une actualisation
+ou sélection explicite efface les messages de succès d’une action antérieure,
+afin de ne pas les présenter comme confirmation du nouvel état consulté.
+
 ## Révisions
 
 La liste conserve les identifiants complets, handler/runtime, dates, SHA256,
