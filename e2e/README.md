@@ -5,6 +5,38 @@ Ils n'importent pas les handlers, ne créent pas de serveur substitué et
 n'interceptent aucune réponse réseau. Le navigateur utilise la connexion SSO
 normale. Un accès absent est une erreur de prérequis, jamais un test ignoré.
 
+## Stockage public et manuel
+
+Après synchronisation des sources sur le SPARK, exécuter successivement depuis
+la racine `node e2e/storage-console-api.mjs`, `node e2e/storage-console-ui.mjs`,
+`node e2e/manual-ui.mjs`, puis `node e2e/control-ui.mjs`. Les campagnes ciblées
+passent respectivement neuf, neuf, huit et onze groupes réels. La preuve reste
+un [checkpoint SLS-065](../docs/evidence/storage-console-checkpoint-dev-2026-11-07.json) :
+les pannes et reprises du contrôle public et les régressions élargies restent ouvertes.
+
+Les deux campagnes stockage créent leurs ressources et les purgent par leurs
+API publiques. Le rapport exige `completed`, `cleanup` et zéro test ignoré.
+La campagne navigateur perd réellement une réponse, conserve l’UUID puis
+reprend sa lecture sans second POST ; la pagination subit une vraie coupure
+réseau du navigateur. Aucune interception de réponse n’est utilisée.
+
+Au repos, `storage-console-inspect.py` s’exécute comme root du seul SPARK DEV,
+avec un argument JSON associant chaque `namespace_id` à la liste exhaustive
+de ses `function_ids` (ou `[function_id]` pour la campagne UI), lus dans les
+rapports réussis. Il lit les deux bases sous leur propriétaire `spark-docker`,
+recoupe reçus, budgets, artefacts, montages, canaux et ressources Docker, puis
+vérifie le vide des secrets dans le conteneur sans en sortir leur valeur.
+Les inventaires trash et canaux non attribuables doivent être globalement vides.
+Le collecteur ne supprime rien ; toute ressource restante fait échouer la preuve.
+L’appelant doit conserver les empreintes des rapports et du collecteur avec
+son résultat pour rattacher les UUID aux campagnes effectivement exécutées.
+
+Le manuel est recoupé intégralement avec `docs/manual.md` : treize chapitres,
+34 paragraphes et empreinte SHA256. Ses onze captures comprennent les nouveaux
+chapitres cache et archives sur ordinateur et mobile ; elles doivent être relues.
+
+## Banc et campagnes
+
 Installer les dépendances par `npm ci`, puis le navigateur par
 `npx playwright install chromium`. Exécuter un seul scénario à la fois.
 Les captures et fichiers contenant une session sont conservés uniquement

@@ -198,7 +198,7 @@ def router(database,identity,vault,operations):
                 operations.verify(db,operation,{'id':function_id},service)
                 operations.minimum_budget(db,function_id,data.config.model_dump())
                 now=time.time()
-                db.execute('INSERT INTO functions VALUES (?,?,?,?,?,?,NULL,?,?,NULL)',(
+                db.execute('INSERT INTO functions (id,service_id,name,config_json,environment_json,secrets_cipher,active_revision_id,created_at,updated_at,deleted_at) VALUES (?,?,?,?,?,?,NULL,?,?,NULL)',(
                     function_id,str(key),data.name,data.config.model_dump_json(),env,secured,now,now))
                 operations.commit(db,operation)
                 audit(db,authorization.actor,'function.create',function_id,str(key))

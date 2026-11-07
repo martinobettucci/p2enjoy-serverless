@@ -290,12 +290,17 @@ hors verrou global. Migration 004 agent, installation DEV et preuves réelles.
 
 ## SLS-065
 
-Statut : [~] — contrat fixé ; gestion publique du cache et des archives à implémenter.
+Statut : [~] — API, console et manuel déployés ; qualification ciblée réussie,
+preuves de pannes et régressions élargies encore ouvertes.
 
 Après SLS-064 : catalogue consultable après suppression des parents, purge
 administrateur confirmée et vidage sous droit Update ; drainage et relecture
 des droits/versions avant décision durable. Console, manuel et E2E API/UI.
 Contrat : [CONSOLE_STORAGE](CONSOLE_STORAGE.md), incluant code et configuration
-dans la purge, reçus publics durables, migration 006, droits et reprise. API,
-console, manuel, migration et preuves restent à réaliser ; SLS-064 seul ne
-qualifie aucun parcours public d’effacement.
+dans la purge, reçus publics durables, migration 006, droits et reprise.
+Le [checkpoint](evidence/storage-console-checkpoint-dev-2026-11-07.json)
+recoupe 37 groupes réussis, dont neuf API, neuf UI stockage, huit manuel et
+onze de gestion, ainsi que la purge physique des quatre fonctions de campagne.
+Restent les révocations et collisions pendant préparation, interruptions
+avant/après décision, erreurs agent/artefacts/validation et régressions élargies.
+SLS-064 seul ne qualifie aucun parcours public d’effacement.

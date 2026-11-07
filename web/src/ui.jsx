@@ -1,5 +1,5 @@
 // @spec docs/BACKLOG.md#sls-020 | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md
-import React, {useEffect, useId, useRef, useState} from 'react';
+import React, {useEffect, useId, useLayoutEffect, useRef, useState} from 'react';
 import {AlertCircle, Check, ChevronLeft, ChevronRight, X} from 'lucide-react';
 import {api} from './api';
 
@@ -39,8 +39,8 @@ export function Field({label, children, help}) {
     {help && <small id={`${id}-help`}>{help}</small>}</div>;
 }
 
-export function Section({title, action, children}) {
-  return <section className="panel"><div className="section-heading"><h2>{title}</h2>{action}</div>{children}</section>;
+export function Section({title, action, children, headingRef}) {
+  return <section className="panel"><div className="section-heading"><h2 ref={headingRef} tabIndex={headingRef ? -1 : undefined}>{title}</h2>{action}</div>{children}</section>;
 }
 
 export function Badge({children, tone = 'neutral'}) {return <span className={`badge ${tone}`}>{children}</span>;}
@@ -108,30 +108,38 @@ export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirm
   </dialog>;
 }
 
-export function Confirm({label, message, action, name}) {
+// @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#console-et-manuel | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md
+export function Confirm({label, message, action, name, disabled=false, focusTarget}) {
   const [open, setOpen] = useState(false);
   const [typed, setTyped] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
   const opener = useRef(null);
   const target = useRef(null);
+  const restoreFocus = useRef(false);
   const explanation = useId();
   useEffect(() => {if (open) target.current?.focus();}, [open]);
-  function cancel() {if (!busy) {setOpen(false); setTyped(''); setError(null); opener.current?.focus();}}
+  useLayoutEffect(() => {
+    if (!open && !busy && restoreFocus.current) {
+      const node = opener.current && !opener.current.disabled ? opener.current : focusTarget?.current;
+      if (node?.isConnected) {node.focus();restoreFocus.current=false;}
+    }
+  }, [open,busy,disabled,focusTarget]);
+  function cancel() {if (!busy) {restoreFocus.current=true;setOpen(false); setTyped(''); setError(null);}}
   async function run() {
-    if (busy) return;
+    if (busy || disabled || Boolean(name && typed !== name)) return;
     setBusy(true); setError(null);
-    try {await action(); setOpen(false); opener.current?.focus();}
+    try {await action();restoreFocus.current=true;setOpen(false);setTyped('');}
     catch (err) {setError(err);}
     finally {setBusy(false);}
   }
-  return <div className="confirmation"><button ref={opener} onClick={() => open ? cancel() : setOpen(true)} aria-expanded={open}>{label}</button>
+  return <div className="confirmation"><button ref={opener} disabled={disabled || busy} onClick={() => open ? cancel() : setOpen(true)} aria-expanded={open}>{label}</button>
     {open && <div className="confirm" onKeyDown={e => {if (e.key === 'Escape') {e.stopPropagation(); cancel();}}}>
-      <p id={explanation}>{message}{name ? ` Saisissez exactement « ${name} » pour confirmer.` : ''}</p>{name && <Field label={`Saisir « ${name} » pour confirmer`}>
-        <input ref={target} value={typed} onChange={e => setTyped(e.target.value)} autoComplete="off"/>
+      <p id={explanation}>{message}{name ? ` Saisissez exactement « ${name} » pour confirmer.` : ''}</p>{name && <Field label={`Saisir « ${name} » pour confirmer`} help="La validation devient disponible lorsque le nom correspond exactement.">
+        <input ref={target} disabled={busy} value={typed} onChange={e => setTyped(e.target.value)} autoComplete="off"/>
       </Field>}
       <ErrorMessage error={error}/><div className="actions"><button ref={name ? undefined : target} onClick={cancel} disabled={busy}>Annuler</button>
-      <button className="danger" aria-describedby={explanation} onClick={run} disabled={busy || Boolean(name && typed !== name)}>{busy ? 'Traitement…' : label}</button></div>
+      <button className="danger" aria-describedby={explanation} onClick={run} disabled={disabled || busy || Boolean(name && typed !== name)}>{busy ? 'Traitement…' : label}</button></div>
     </div>}
   </div>;
 }

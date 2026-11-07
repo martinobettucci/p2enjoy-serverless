@@ -1,10 +1,12 @@
 // @spec docs/DESIGN_SYSTEM.md | docs/BACKLOG.md#sls-020 | docs/CONTROL.md#gestion | docs/PLATFORM.md | docs/DESIGN_SYSTEM_APP.md
+// @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#console-et-manuel | docs/manual.md
 import React, {useState} from 'react';
 import {api} from './api';
 import {Badge, Confirm, DialogForm, Facts, Field, Resource, Section, useResource} from './ui';
 import {Configuration, url} from './management';
 import {ExecutionObservations} from './observations';
 import {CodePublications} from './publications';
+import {FunctionStorage} from './storage';
 
 const limits = [
   ['memory_mib','Mémoire (Mio)',128,8192,1],
@@ -23,13 +25,13 @@ export function FunctionPage({id,tab}) {
 
 function FunctionView({row:initialRow,tab,reload}) {
   const [row,setRow] = useState(initialRow);
-  const active = ['code','instances','invocations'].includes(tab) ? tab : 'configuration';
+  const active = ['code','storage','instances','invocations'].includes(tab) ? tab : 'configuration';
   const [mode,setMode] = useState(null), config = row.config, storage = config.storage;
   async function update(change) {await api(`/api/functions/${row.id}`,{method:'PUT',headers:{'If-Match':String(row.updated_at)},body:{name:row.name,config,...change}}); reload();}
   return <><nav className="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Namespaces</a><span>/</span><a href={url('services',row.service_id,'functions')}>Fonctions du service</a><span>/</span><span>{row.name}</span></nav>
     <div className="page-title"><h1>{row.name}</h1><Badge tone={row.active_revision_id ? 'success' : 'neutral'}>{row.active_revision_id ? 'Déployée' : 'Brouillon'}</Badge></div>
-    <nav className="tabs" aria-label="Fonction">{Object.entries({configuration:'Configuration',code:'Code et révisions',instances:'Instances',invocations:'Invocations'}).map(([key,label]) => <a key={key} href={url('functions',row.id,key === 'configuration' ? '' : key)} aria-current={active === key ? 'page' : undefined}>{label}</a>)}</nav>
-    {active === 'code' ? <CodePublications functionId={row.id} onFunction={setRow}/> : active !== 'configuration' ? <ExecutionObservations key={active} functionId={row.id} kind={active}/> : <>
+    <nav className="tabs" aria-label="Fonction">{Object.entries({configuration:'Configuration',code:'Code et révisions',storage:'Stockage',instances:'Instances',invocations:'Invocations'}).map(([key,label]) => <a key={key} href={url('functions',row.id,key === 'configuration' ? '' : key)} aria-current={active === key ? 'page' : undefined}>{label}</a>)}</nav>
+    {active === 'code' ? <CodePublications functionId={row.id} onFunction={setRow}/> : active === 'storage' ? <FunctionStorage functionId={row.id}/> : active !== 'configuration' ? <ExecutionObservations key={active} functionId={row.id} kind={active}/> : <>
     <Section title="Identité" action={<button onClick={() => setMode('identity')}>Modifier l’identité</button>}>
       <Facts values={[
         ['Nom',row.name],['Runtime',config.runtime],['Handler',<span className="mono">{config.handler}</span>],['Identifiant stable',<span className="mono">{row.id}</span>],

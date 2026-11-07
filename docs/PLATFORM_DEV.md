@@ -408,15 +408,23 @@ de code et les ressources libérées. La commande est `python3 -B
 e2e/execution-suite.py --scope storage`. Les commandes publiques et la console
 restent dans SLS-065. [Contrat](STORAGE_DISCARD.md).
 
-## Préparation de SLS-065
+## Déploiement et qualification ciblée de SLS-065
 
-Le [contrat public](CONSOLE_STORAGE.md) prévoit une migration 006 du contrôle,
-non appliquée : reçus durables, extension des gardes et date de purge. Avant
-déploiement : confirmer l’absence de campagnes, invocations, validations et
-intentions actives ; sauvegarder nativement SQLite avec permissions 0600 et
-inventorier les archives conservées. Construire puis démarrer le contrôle DEV,
-recouper migrations/intégrité/anciennes lignes et fichiers. L’agent 004 ne change
-pas. Aucun secret, variable, route ou service de cellule supplémentaire.
+Le [contrat public](CONSOLE_STORAGE.md) est déployé avec la migration 006 du
+contrôle : reçus durables, extension des gardes et date de purge. Le déploiement
+du 7 novembre suit le contrôle d’absence d’invocations, de validations,
+de fonctions actives, d’instances et d’intentions. La sauvegarde SQLite native
+`state/backups/before-006-20261107T041204Z.sqlite3` conserve les permissions 0600 ;
+son SHA256 est `d5bd52c12099df2be17330476facf7d8c8d53cd748515523f7d3c14189972a05`.
+Les anciennes lignes et les 2 705 fichiers d’archives sont recoupés après migration,
+avec contrôles d’intégrité et de clés étrangères réussis.
+
+L’image du contrôle est
+`sha256:fb01050c7c1055fde4b295c228d24d6086715218872756859d8bbccb2bdbd6cf`.
+L’agent 004 reste inchangé. Aucun secret, variable, route ou service de cellule
+supplémentaire. Les campagnes ciblées API, console de stockage et manuel passent
+26 groupes réels ; les campagnes créatrices nettoient leurs propres objets.
+Les pannes, reprises et régressions élargies restent à terminer avant clôture.
 
 Un retour à l’ancien contrôle exige d’abord zéro commande en cours et une
 restauration cohérente base/fichiers/volumes ; une purge effective ne s’annule

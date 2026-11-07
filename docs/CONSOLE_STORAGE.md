@@ -1,8 +1,12 @@
 # Gestion du stockage et des archives
 
-Contrat SLS-065, décidé avant implémentation. Le protocole agent de
-[SLS-064](STORAGE_DISCARD.md) est déployé ; les routes et écrans décrits ici
-restent à implémenter et qualifier. Le manuel change avec leur livraison.
+Contrat SLS-065, décidé avant implémentation. Les routes, les écrans et leur
+manuel sont déployés sur le SPARK DEV avec le protocole agent de
+[SLS-064](STORAGE_DISCARD.md). Les neuf groupes API, neuf parcours navigateur
+et huit groupes du manuel passent en qualification ciblée. La qualification
+complète reste ouverte : pannes et reprises du contrôle public et régressions
+élargies. Le [checkpoint](evidence/storage-console-checkpoint-dev-2026-11-07.json)
+inclut aussi onze groupes de gestion et le recoupement physique des nettoyages.
 
 ## Portée et droits
 

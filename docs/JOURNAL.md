@@ -1938,3 +1938,36 @@ même UUID. Une propriété de résolution en mémoire, distincte de la garde
 durable, sérialise cette activité. Un UUID déjà pris est rejeté avant entrée
 dans la responsabilité async, afin qu’un refus ne résolve pas la garde d’un
 autre propriétaire. Ces invariants complètent le contrat avant raccordement.
+
+### Stockage public — déploiement et checkpoint de qualification
+
+Le contrôle applique 006 après sauvegarde native et contrôle d’inactivité.
+Les anciennes lignes et les 2 705 fichiers d’archives sont préservés et recoupés.
+La revue conduit à joindre le nettoyage réel des validateurs avant les artefacts,
+à revérifier l’absence d’une ligne agent et à restituer le focus après le rendu.
+La console distingue le nouvel UUID du reçu précédent et bloque une pagination
+en erreur jusqu’à reprise de la page demandée.
+
+Les premiers essais UI ont révélé deux erreurs du banc : libellé « Nom du jeton »
+mal ciblé, puis comparaison des UUID avant le rendu après reprise réseau. Les
+rapports échoués restent sous `.local/e2e/`. Les assertions corrigées sont
+rejouées intégralement. Neuf groupes API et neuf groupes UI passent, avec
+nettoyage. Le manuel repasse huit groupes : treize chapitres, 34 paragraphes,
+source SHA256 identique au document servi. Quatorze captures stockage et onze
+du manuel sont inspectées, dont les deux nouveaux chapitres sur mobile.
+Les onze groupes de gestion passent ensuite ; leurs sept captures sont relues.
+
+Le collecteur opérateur en lecture seule rattache les quatre fonctions aux
+deux rapports, vérifie trois répertoires d’artefacts absents, volumes, montages,
+canaux, Docker, gardes et compteurs. Il déchiffre les secrets uniquement dans
+le conteneur et ne produit que des booléens de vide. Son premier passage refuse
+une hypothèse erronée de propriétaire root du registre ; l’installateur et le
+service réel imposent spark-docker. La lecture sous cette identité, avec
+restauration de root et contrôle des WAL/SHM, réussit ensuite. Les réservations
+globales d’instances/CPU/mémoire et les allocations de stockage valent zéro.
+
+Le [checkpoint](evidence/storage-console-checkpoint-dev-2026-11-07.json) conserve
+ces 37 groupes réussis et 32 captures inspectées. SLS-065 demeure ouverte :
+révocation avant décision, collisions sous garde, pannes et reprises publiques,
+validation encore vivante, apparition inattendue d’une ligne agent et régressions
+élargies restent à éprouver. Le goal de plateforme reste actif.

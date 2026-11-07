@@ -48,6 +48,28 @@ incompatible reste refusée jusqu’à la fin de cette opération. Un redémarra
 reprend la décision persistée ; il ne rétablit pas arbitrairement l’ancienne valeur.
 Un rollback du code conserve les réglages et les volumes courants.
 
+## Consulter et vider le cache
+
+Dans la fiche de fonction, ouvrir **Stockage**. Chaque volume indique son
+allocation, son état et sa dernière occupation mesurée. Cette occupation est
+une mesure logique ; elle peut avoir changé depuis le relevé. Une mesure
+indisponible reste signalée. **Actualiser** consulte de nouveau le serveur.
+Les quotas et modes se modifient dans **Configuration → Modifier le stockage**.
+
+**Vider le cache** demande une confirmation nommant la fonction. Les données
+permanentes, le code, les quotas et les réglages sont conservés. Les instances
+au repos sont arrêtées ; une invocation en cours fait refuser l’opération.
+Le droit Update est nécessaire via l’API. Un cache désactivé peut encore
+contenir des fichiers conservés ; il peut également être vidé.
+
+Le suivi distingue préparation, attente, terminaison et abandon. Une demande
+en attente est déjà enregistrée et reprend automatiquement après une panne.
+Actualiser relit son résultat. L’adresse contient l’identifiant de l’opération :
+la conserver permet de retrouver ce suivi après rechargement. Une réponse
+perdue ne signifie pas que rien n’a changé ; consulter le suivi avant de
+demander un nouvel effacement. **Ne plus suivre cet identifiant** revient à la
+dernière opération de la fonction sans annuler une demande enregistrée.
+
 ## Donner un accès à un service
 
 Dans la fiche du service, créer un jeton, choisir ses droits CRUD, sa portée
@@ -190,6 +212,29 @@ condition d'accès. Cette politique est appliquée à l’entrée publique et re
 Un changement peut refuser un appel encore en file ; il n’interrompt pas un
 appel déjà admis.
 
+## Consulter les archives et les purger
+
+Ouvrir **Archives de fonctions** dans la navigation principale. Les filtres
+**Conservées**, **Purgées** et **Toutes** et la pagination permettent de retrouver
+une fonction supprimée, même si son service ou son namespace a été supprimé
+ensuite. Le détail affiche leurs noms et identifiants, la date de suppression,
+le stockage et l’espace du code encore occupé ou réservé. Deux objets peuvent
+porter le même nom ; leurs identifiants les distinguent.
+
+**Purger les archives** est réservé aux administrateurs. Saisir exactement le
+nom affiché puis confirmer. Cette opération efface définitivement les données,
+le cache, le code, les variables, les secrets et les réglages propres à la
+fonction. Elle conserve les traces de gestion et les identifiants ; elle ne
+modifie pas les autres fonctions, les réglages du service ni les sauvegardes.
+La console ne propose pas de restauration de ces archives.
+
+Le suivi indique l’effacement des volumes puis du code. Tant que le nettoyage
+n’est pas confirmé, l’opération reste en attente et les ressources encore
+conservées restent comptées. Un diagnostic permet de signaler une reprise
+nécessaire ; **Actualiser** relit l’avancement. Une purge terminée reste
+consultable dans le filtre **Purgées**. Conserver l’adresse de suivi permet
+également de retrouver le résultat après une interruption de connexion.
+
 ## Consulter les changements et supprimer
 
 L'activité du service présente les mutations et refus attribuables à une
@@ -197,4 +242,4 @@ identité connue. Les listes sont paginées.
 La suppression demande confirmation. Un service doit être vide de fonctions
 actives ; un namespace doit être vide de services actifs. Supprimer une fonction
 archive ses données et son cache, en conservant leur allocation. Leur purge est
-une opération distincte ; sa commande dans la console reste à réaliser.
+une opération distincte, accessible aux administrateurs dans **Archives de fonctions**.

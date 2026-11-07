@@ -1,12 +1,13 @@
 // @spec docs/DESIGN_SYSTEM.md | docs/BACKLOG.md#sls-020 | docs/CONTROL.md#console-du-contrôle | docs/DESIGN_SYSTEM_APP.md
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
-import {ArrowRight, BookOpen, FolderTree, Menu, X} from 'lucide-react';
+import {Archive, ArrowRight, BookOpen, FolderTree, Menu, X} from 'lucide-react';
 import {api,sessionToken} from './api';
 import {Confirm,ErrorMessage,Resource,useResource} from './ui';
 import {Namespace,Namespaces,Service} from './management';
 import {FunctionPage} from './function';
 import {UsageManual} from './manual';
+import {Archives,ArchiveDetail} from './storage';
 import './style.css';
 
 const brand = <div className="brand"><img src="/favicon.svg" alt=""/><div>P2Enjoy<small>Serverless</small></div></div>;
@@ -56,8 +57,11 @@ function Shell({user}) {
   const parts = location.pathname.split('/').filter(Boolean);
   // @spec docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md#parcours-et-présentation
   const isManual = parts.length === 2 && parts[0] === 'console' && parts[1] === 'manual';
+  // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#console-et-manuel | docs/DESIGN_SYSTEM_APP.md
+  const isArchives = parts[0] === 'console' && parts[1] === 'archives' && parts.length <= 3;
   let view = <Namespaces/>;
   if (isManual) view = <UsageManual/>;
+  else if (isArchives) view = parts[2] ? <ArchiveDetail id={parts[2]}/> : <Archives/>;
   else if (parts[0] === 'console' && parts[1] === 'namespaces' && parts[2]) view = <Namespace id={parts[2]}/>;
   else if (parts[0] === 'console' && parts[1] === 'services' && parts[2]) view = <Service id={parts[2]} tab={parts[3] || 'functions'}/>;
   else if (parts[0] === 'console' && parts[1] === 'functions' && parts[2]) view = <FunctionPage id={parts[2]} tab={parts[3]}/>;
@@ -74,7 +78,8 @@ function Shell({user}) {
       }
     }}>
       <div className="stack">{brand}<button className="close-nav" ref={closeButton} onClick={closeMenu}><X aria-hidden="true"/>Fermer le menu</button></div>
-      <nav><a href="/" aria-current={!isManual ? 'page' : undefined}><FolderTree aria-hidden="true"/>Namespaces</a>
+      <nav><a href="/" aria-current={!isManual && !isArchives ? 'page' : undefined}><FolderTree aria-hidden="true"/>Namespaces</a>
+        <a href="/console/archives" aria-current={isArchives ? 'page' : undefined}><Archive aria-hidden="true"/>Archives de fonctions</a>
         <a href="/console/manual" aria-current={isManual ? 'page' : undefined}><BookOpen aria-hidden="true"/>Manuel d’usage</a></nav>
       <footer><div><small>Compte connecté</small><p>{user.name}</p></div>
         <Confirm label="Se déconnecter" message={`Fermer la session de « ${user.name} » ?`} action={async () => {await api('/auth/logout',{method:'POST'}); sessionToken(''); location.assign('/');}}/>

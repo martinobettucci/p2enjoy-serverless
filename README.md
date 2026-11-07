@@ -120,8 +120,9 @@ suivre ou abandonner une préparation, activer et supprimer des révisions.
 Le manuel comprend ces nouveaux parcours. Leur [preuve finale](docs/evidence/publication-console-dev-2026-11-07.json)
 passe 18 campagnes en série, 312 groupes réels, sans échec ni test ignoré,
 avec 54 captures inspectées. Les sources, l’image servie, les nettoyages et les
-notes SPARK sont recoupés. Les commandes de purge/cache, les crons et les
-preuves résiduelles de plateforme restent suivis au backlog.
+notes SPARK sont recoupés. Les commandes publiques de purge/cache sont déployées
+et font l’objet de la qualification ciblée SLS-065 décrite ci-dessous.
+Les crons et les preuves résiduelles de plateforme restent suivis au backlog.
 
 **Il est interdit de lancer l'application avec un profil PREPROD ou PROD,
 quelles que soient les circonstances.**
@@ -221,4 +222,7 @@ réponse perdue ; les reprises après erreur physique/SQLite et interruption
 sont recoupées. [Preuve SLS-064](docs/evidence/storage-discard-dev-2026-11-07.json).
 La commande `python3 -B e2e/execution-suite.py --scope storage` rejoue cette
 qualification en série. Le catalogue d’archives et les commandes publiques
-dans la console, avec leur manuel, constituent SLS-065.
+dans la console, avec leur manuel, sont déployés dans SLS-065. Son
+[checkpoint](docs/evidence/storage-console-checkpoint-dev-2026-11-07.json)
+recoupe 37 groupes API/UI/manuel et la purge physique des fonctions de campagne.
+Les preuves de pannes et les régressions élargies restent ouvertes avant clôture.

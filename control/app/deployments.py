@@ -114,7 +114,10 @@ class Deployments:
         fd=open_directory(root)
         try:
             try:row=os.stat(key,dir_fd=fd,follow_symlinks=False)
-            except FileNotFoundError:return
+            except FileNotFoundError:
+                # @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#décision-durable-et-répétition
+                # A preceding attempt may have removed the tree but failed its fsync.
+                os.fsync(fd);return
             if not stat.S_ISDIR(row.st_mode):raise ArtifactError('cleanup_type')
             remove_tree(fd,key,(row.st_dev,row.st_ino));os.fsync(fd)
         finally:os.close(fd)

@@ -1,5 +1,5 @@
 // @spec docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md | docs/DESIGN_SYSTEM_APP.md
-// @verifies docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md#preuves-attendues
+// @verifies docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md#preuves-attendues | docs/CONSOLE_STORAGE.md#console-et-manuel
 import assert from 'node:assert/strict';
 import {readFile,writeFile,rename,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -85,6 +85,8 @@ try {
     await page.getByRole('heading',{name:'Manuel d’usage',exact:true}).waitFor();
     assert.equal(await page.evaluate(() => scrollY),0);await fits();await capture('desktop');
     await chapter('Donner un accès à un service');await fits();await capture('rights-desktop');
+    await chapter('Consulter et vider le cache');await fits();await capture('cache-desktop');
+    await chapter('Consulter les archives et les purger');await fits();await capture('archives-desktop');
   });
   await check('Menu mobile, guide à 390 px, tableau et commande longue',async () => {
     await page.getByRole('link',{name:'Namespaces',exact:true}).click();
@@ -97,6 +99,8 @@ try {
     await fits();await capture('mobile');
     await chapter('Donner un accès à un service');await fits();await capture('rights-mobile');
     await chapter('Publier le code avec l’adaptateur');await fits();await capture('command-mobile');
+    await chapter('Consulter et vider le cache');await fits();await capture('cache-mobile');
+    await chapter('Consulter les archives et les purger');await fits();await capture('archives-mobile');
   });
   await check('Tablette et agrandissement mesuré du corps de texte à 200 pour cent',async () => {
     await page.setViewportSize({width:820,height:1180});

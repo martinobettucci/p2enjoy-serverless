@@ -22,6 +22,7 @@ from .config import Settings,Vault
 from .db import Database,audit
 from .deployments import Deployments
 from .function_operations import FunctionOperations
+from .storage_management import StorageManagement
 from .execution import Execution
 from .invocation_routes import routes as invocation_routes,gateway_error
 from .network import forwarded_addresses
@@ -55,6 +56,9 @@ operations=FunctionOperations(settings,database)
 deployments=Deployments(settings,database,identity,vault,operations)
 execution=Execution(settings,database,identity,vault,operations,deployments)
 operations.execution=execution
+# @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md
+storage_management=StorageManagement(database,identity,vault,operations,deployments)
+operations.discards=storage_management
 
 
 @asynccontextmanager
@@ -88,6 +92,7 @@ app.add_middleware(BodyLimit)
 app.include_router(router(database,identity,vault,operations))
 app.include_router(deployments.routes())
 app.include_router(invocation_routes(execution))
+app.include_router(storage_management.routes())
 web_root=Path(__file__).parent.parent/'web'
 app.mount('/assets',StaticFiles(directory=web_root/'assets'),name='assets')
 
@@ -128,12 +133,15 @@ async def http_error(request:Request,error:HTTPException):
             try:
                 if actor.kind=='admin' and key:
                     if route.startswith('/api/services/'):service_id=key
-                    elif route.startswith('/api/functions/') or route.startswith('/api/tokens/'):
-                        table='functions' if '/functions/' in route else 'service_tokens'
+                    elif route.startswith(('/api/functions/','/api/archives/','/api/tokens/')):
+                        table='service_tokens' if '/tokens/' in route else 'functions'
                         row=database.one(f'SELECT service_id FROM {table} WHERE id=?',(key,))
                         if row:service_id=row['service_id']
                     elif route.startswith('/api/deployments/'):
                         row=database.one('SELECT service_id,function_id FROM deployments WHERE id=?',(key,))
+                        if row:service_id=row['service_id'];key=row['function_id']
+                    elif route.startswith('/api/storage-operations/'):
+                        row=database.one('SELECT service_id,function_id FROM storage_commands WHERE id=?',(key,))
                         if row:service_id=row['service_id'];key=row['function_id']
                 with database.transaction() as db:
                     audit(db,actor,'request.denied',key,service_id,{'status':error.status_code,'route':route})

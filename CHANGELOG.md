@@ -2,9 +2,11 @@
 
 ## [Non publié]
 
-- Contrat SLS-065 fixé avant code : catalogue d’archives, vidage du cache,
-  purge volumes/code/configuration, droits et reçus publics durables. Migration,
-  API, console et qualification restent à réaliser.
+- SLS-065 déployée en DEV après contrat et migration 006 contrôlée : catalogue
+  d’archives, vidage du cache, purge volumes/code/configuration, droits et reçus
+  publics durables. Les neuf groupes API, neuf parcours navigateur et huit groupes
+  du manuel passent. Le manuel affiche treize chapitres depuis sa source unique.
+  La qualification des pannes, reprises et régressions élargies reste ouverte.
 
 - Protocole corrélé de vidage/purge, reçu durable, reprise et worker unique
   supprimant hors verrou du registre ; migration 004 agent et campagne réelle

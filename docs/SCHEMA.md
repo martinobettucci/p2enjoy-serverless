@@ -200,7 +200,9 @@ nettoyage. [Contrat](STORAGE_DISCARD.md#migration-et-installation).
 
 ## Commandes publiques de stockage
 
-Migration 006 du contrôle prévue par [SLS-065](CONSOLE_STORAGE.md), non appliquée :
+Migration 006 du contrôle appliquée en DEV le 7 novembre 2026 pour
+[SLS-065](CONSOLE_STORAGE.md), après sauvegarde SQLite native et recoupement
+des lignes et fichiers antérieurs :
 functions reçoit purged_at nullable. function_operations est recréée avec ses
 colonnes et lignes conservées, en autorisant clear-cache/purge sans configuration,
 en plus de configuration/archive. Index service et unicité fonction conservés.

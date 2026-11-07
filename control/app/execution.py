@@ -329,6 +329,8 @@ class Execution:
 
     async def recover(self):
         self.reconciled=False
+        # @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#décision-durable-et-répétition
+        if self.operations.discards:self.operations.discards.execution_reconciled=False
         try:
             await joined(asyncio.to_thread(self.remove_owned_docker))
             for lease in await self.operations.storage.leases(self.installation):
@@ -339,6 +341,7 @@ class Execution:
             with self.db.transaction(busy_timeout=0) as db:
                 db.execute('DELETE FROM execution_instances')
                 db.execute("UPDATE invocations SET state='interrupted',error_code='control_interrupted',http_status=503,completed_at=? WHERE state IN ('receiving','queued','admitted','running')",(time.time(),))
+            if self.operations.discards:self.operations.discards.execution_reconciled=True
             await self.operations.sweep()
             self.reconciled=not self.operations.cleanup_error and self.operations.agent_ready
         except Exception as error:

@@ -1,4 +1,5 @@
 # @spec docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle
+# @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#décision-durable-et-répétition
 """Durable public mutations and confirmation of the actual host volume agent."""
 import asyncio
 from contextlib import asynccontextmanager,suppress
@@ -35,7 +36,7 @@ class FunctionOperations:
         self.database=database
         self.storage=StorageClient('/storage-agent/agent.sock',settings.storage_root_host)
         self.installation=None;self.task=None;self.live={};self.closing=False;self.agent_ready=False;self.cleanup_error=False
-        self.execution=None
+        self.execution=None;self.discards=None;self.resolving=set()
 
     def minimum_budget(self,db,function_id,config):
         if self.execution:self.execution.minimum_budget(db,function_id,config)
@@ -64,10 +65,10 @@ class FunctionOperations:
         if db.execute('SELECT 1 FROM function_operations WHERE service_id=?',(service,)).fetchone():
             raise HTTPException(409,'Une opération de fonction doit être terminée avant de modifier ce service.')
 
-    def reserve(self,db,operation,function,service,configuration=None):
+    def reserve(self,db,operation,function,service,configuration=None,*,kind=None):
         identifier=function['id'];self.function_available(db,identifier)
         db.execute('INSERT INTO function_operations VALUES (?,?,?,?,\'undecided\',?,NULL,?,?,?,NULL)',
-            (operation,identifier,service['id'],'configuration' if configuration is not None else 'archive',
+            (operation,identifier,service['id'],kind or ('configuration' if configuration is not None else 'archive'),
              json.dumps(volumes(configuration)) if configuration is not None else None,
              function.get('updated_at'),service['updated_at'],time.time()))
 
@@ -111,7 +112,8 @@ class FunctionOperations:
         if self.execution:await self.execution.drain(row['function_id'])
         snapshot=await self.snapshot(row['function_id'])
         if snapshot:
-            allowed=('active',) if row['kind']=='configuration' else ('active','archived','purged')
+            allowed=(('archived','purged') if row['kind']=='purge' else
+                     ('active',) if row['kind'] in ('configuration','clear-cache') else ('active','archived','purged'))
             if snapshot['state'] not in allowed:raise StorageError('function_archived')
             if snapshot['pending']:raise StorageError('operation_pending')
             if snapshot['leases']:raise StorageError('volume_busy')
@@ -119,6 +121,8 @@ class FunctionOperations:
         with self.database.transaction() as db:
             if db.execute("UPDATE function_operations SET storage_version=? WHERE id=? AND decision='undecided' AND storage_version IS NULL",(version,operation)).rowcount!=1:
                 raise StorageError('operation_conflict')
+            if row['kind'] in ('clear-cache','purge'):
+                db.execute('UPDATE storage_commands SET storage_absent=? WHERE id=?',(int(snapshot is None),operation))
         row['storage_version']=version
         if row['kind']=='configuration':
             result=await joined(self.storage.call('prepare-configuration',function_id=row['function_id'],operation_id=operation,
@@ -126,6 +130,12 @@ class FunctionOperations:
             self.receipt(row,result,'prepared')
 
     async def resolve(self,operation):
+        if operation in self.resolving:return False
+        self.resolving.add(operation)
+        try:return await self._resolve(operation)
+        finally:self.resolving.discard(operation)
+
+    async def _resolve(self,operation):
         try:
             # A publication without volume changes owns no storage intention.
             # Confirm absence by reading; taking a writer lock here could mask
@@ -144,13 +154,17 @@ class FunctionOperations:
                     if row['decision']=='abort':fields.update(configuration=json.loads(row['configuration_json']),expected_version=row['storage_version'])
                     result=await self.storage.call(row['decision']+'-configuration',**fields)
                     self.receipt(row,result,'committed' if row['decision']=='commit' else 'aborted')
-            elif row['decision']=='commit':
+            elif row['kind'] in ('clear-cache','purge'):
+                if self.discards is None:raise StorageError('storage_protocol')
+                return await self.discards.resolve(row)
+            elif row['kind']=='archive' and row['decision']=='commit':
                 snapshot=await self.snapshot(row['function_id'])
                 if snapshot and snapshot['state'] not in ('archived','purged'):
                     await self.storage.call('archive',function_id=row['function_id'],expected_version=row['storage_version'])
                     snapshot=await self.snapshot(row['function_id'])
                 if snapshot and (snapshot['state'] not in ('archived','purged') or snapshot['pending'] or snapshot['leases'] or
                         any(value['phase']!='unmounted' for value in snapshot['volumes'].values())):raise StorageError('storage_cleanup_pending')
+            elif row['kind']!='archive':raise StorageError('storage_protocol')
             with self.database.transaction() as db:db.execute('DELETE FROM function_operations WHERE id=? AND decision=?',(operation,row['decision']))
             return True
         except (StorageError,sqlite3.Error) as error:
@@ -158,12 +172,14 @@ class FunctionOperations:
             self.cleanup_error=True
             if isinstance(error,StorageError) and error.uncertain:self.agent_ready=False
             with suppress(sqlite3.Error):
-                with self.database.transaction() as db:db.execute('UPDATE function_operations SET error_code=? WHERE id=?',(code,operation))
+                with self.database.transaction() as db:
+                    db.execute('UPDATE function_operations SET error_code=? WHERE id=?',(code,operation))
+                    db.execute('UPDATE storage_commands SET error_code=? WHERE id=?',(code,operation))
             logger.error(json.dumps({'event':'function.storage_pending','operation_id':operation,'error_code':code}))
             return False
 
     @asynccontextmanager
-    async def responsibility(self,operation):
+    async def responsibility(self,operation,*,pending_response=False):
         if self.closing:raise HTTPException(503,'Le contrôle est en cours d’arrêt.')
         self.live[operation]=asyncio.current_task();failed=False
         try:yield
@@ -174,7 +190,7 @@ class FunctionOperations:
         finally:
             try:resolved=await joined(self.resolve(operation))
             finally:self.live.pop(operation,None)
-            if not resolved and not failed:
+            if not resolved and not failed and not pending_response:
                 row=self.database.one('SELECT function_id,decision FROM function_operations WHERE id=?',(operation,))
                 committed=bool(row and row['decision']=='commit')
                 headers={'X-Serverless-Operation-ID':operation,'X-Serverless-Mutation-Committed':str(committed).lower()}

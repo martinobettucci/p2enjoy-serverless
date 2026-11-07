@@ -49,5 +49,8 @@ guide avec chaque comportement utilisateur, puis reconstruire la console.
 [preuve initiale](../docs/evidence/manual-console-dev-2026-11-07.json) précède la
 publication UI : 48 groupes, zéro échec/skip et 33 captures relues. La suite
 de console comprend désormais aussi les 21 groupes de publication.
-Le guide compte onze chapitres ; sa concordance est rejouée dans la preuve
-finale de publication : empreinte, chapitres, 28 paragraphes, tableau et commande.
+Le guide compte treize chapitres, dont le vidage du cache et la purge des
+archives. La campagne courante recoupe son empreinte, ses chapitres,
+34 paragraphes, le tableau et la commande ; onze captures couvrent aussi
+ces deux nouveaux chapitres sur ordinateur et mobile. La qualification
+complète du stockage public reste suivie dans SLS-065.

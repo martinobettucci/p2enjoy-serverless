@@ -1,4 +1,5 @@
 // @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
+// @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#preuves-attendues
 import {mkdir,cp,writeFile,readFile} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
@@ -9,7 +10,7 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 
 export async function publicationArchive(work,name,handler='publication.handler') {
   const project=path.join(work,name);await mkdir(project);
-  for(const file of ['publication.cjs','deployment-delay.mjs','log-secret-then-throw.cjs','logs.cjs'])
+  for(const file of ['publication.cjs','deployment-delay.mjs','log-secret-then-throw.cjs','logs.cjs','storage-console.cjs'])
     await cp(path.join(root,'qualification/artifacts',file),path.join(project,file));
   await writeFile(path.join(project,'revision.json'),JSON.stringify({revision:name}));
   const config=path.join(project,'serverless.yml');
