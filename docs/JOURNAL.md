@@ -2095,3 +2095,23 @@ ses huit groupes E2E déjà enregistrés au checkpoint précédent ; le guide et
 rendu n’ont pas changé. Aucun nouveau parcours UI n’est revendiqué ici. SLS-065
 reste ouverte pour les pannes résiduelles, les régressions élargies et les notes
 SPARK. Aucun remote n’est configuré ; ce checkpoint est conservé localement.
+
+### Décisions publiques de stockage — prochaines preuves résiduelles
+
+Le tour précédent est un progrès vérifié : commit `605c15f`, onze groupes
+réussis et inventaire physique des huit fonctions nettoyées. Le contrat source
+confirme la relecture de session après préparation et la reprise par le même
+UUID après commit. Décision de banc avant code : campagne dédiée aux décisions,
+avec une seconde vraie connexion SSO pour la purge révoquée. La déconnexion
+supprime la session locale avant l’échange fournisseur ; le banc attend ce refus
+local puis rend l’agent disponible avant l’expiration normale de sa lecture.
+
+Les pannes après commit partent d’un vidage retenu par l’erreur physique déjà
+qualifiée. Le refus du socket agent doit produire `storage_transport` ; le worker
+agent peut continuer de son côté. Un writer réel du contrôle, sans écriture,
+doit ensuite empêcher l’enregistrement du résultat malgré le reçu agent terminé.
+Son diagnostic est recoupé dans les journaux par UUID. Après libération, le même
+reçu doit terminer et son rejeu préserver le cache reconstruit. Le helper du writer
+est tué pour éprouver sa garde indépendante. Le secours de redémarrage du contrôle
+est également forcé, sans reprise opérateur anticipée. Les identités, gardes,
+nettoyages et sessions séparées font partie des prérequis de cette campagne.

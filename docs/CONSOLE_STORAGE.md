@@ -198,3 +198,29 @@ ne retire pas lui-même le conteneur avant ces assertions. La restauration du
 socket après perte du helper est aussi exercée réellement. La fenêtre exige
 une cellule au repos, sans fonction étrangère active ; aucune opération sur
 la FORGE ni arrêt du daemon Docker.
+
+La preuve des décisions utilise deux sessions administrateur issues de connexions
+SSO distinctes. Pendant une préparation de purge retenue par l’agent suspendu,
+la session demandeuse est fermée par `/auth/logout`. La session de contrôle
+observe l’abandon, l’absence de reçu d’effacement agent et la conservation des
+fichiers, de la configuration et de la version ; elle assure aussi le nettoyage.
+Une copie du même cookie ne constitue pas une seconde session.
+
+Après une décision réelle retenue par une erreur physique de cache, le banc
+peut retirer les permissions du socket agent ou acquérir un vrai writer SQLite
+du contrôle avec `BEGIN IMMEDIATE`, sans changer aucune ligne. Le socket et
+son montage doivent être ceux des fichiers officiels de cellule. Le writer est
+ouvert, lu, rollbacké et fermé sous l’identité propriétaire de la base, avec
+signaux différés pendant ouverture/fermeture. Une garde indépendante précède
+chaque perturbation et contrôle l’identité de la ressource restaurée.
+
+La panne de transport exige le diagnostic `storage_transport` sur le reçu commis.
+Le worker agent reste libre de finir son effacement : la preuve ne confond pas
+l’absence de communication avec un arrêt du worker. La contention exige un reçu
+agent terminé et le reçu public encore en attente, puis le diagnostic corrélé
+`control_database_unavailable` dans le journal réel. Après restauration, le même
+UUID/version doit terminer ; un rejeu après reconstruction conserve le cache.
+La garde du writer est exercée par SIGKILL de son helper. Une campagne distincte
+laisse la garde de redémarrage relancer effectivement le contrôle arrêté, avec
+preuve de son état antérieur et de son redémarrage. Toutes les fonctions de ces
+campagnes sont créées, publiées, invoquées, archivées et purgées par les API.
