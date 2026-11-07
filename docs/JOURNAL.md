@@ -2050,3 +2050,13 @@ puis conserver son groupe réellement observé, sans l’assimiler à celui de l
 Le mode observé est 01660 et devra être restauré exactement. Les deux fonctions
 de cet essai sont purgées par leurs API, avec nettoyage réussi. Le rapport échoué
 est conservé ; le précontrôle sera corrigé puis la campagne entière relancée.
+
+La campagne relancée passe ses deux groupes ; le socket est restauré, le
+nettoyage des quatre fonctions des deux essais est recoupé et les budgets
+globaux sont à zéro. La revue de couverture relève deux exigences existantes
+encore peu discriminées par les preuves : conflit d’UUID entre vidage et purge,
+et réutilisation des noms après suppression des parents. La campagne API sera
+complétée par ces assertions avant sa régression : le même UUID doit rester
+attaché à son type ; une nouvelle chaîne namespace/service/fonction portant
+les anciens noms possède d’autres UUID et conserve ses données lorsque l’ancienne
+archive est purgée. Son rapport recensera chaque namespace et ses fonctions.
