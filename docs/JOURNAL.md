@@ -1932,3 +1932,9 @@ La synchronisation du parent doit couvrir tous les nettoyeurs existants,
 même lorsque le répertoire a disparu. Enfin storage_absent désigne seulement
 function_unknown, jamais un registre connu avec volumes vides. Contrat
 précisé avant les corrections correspondantes, avec leurs preuves attendues.
+
+La reprise du moteur et la maintenance peuvent demander la résolution du
+même UUID. Une propriété de résolution en mémoire, distincte de la garde
+durable, sérialise cette activité. Un UUID déjà pris est rejeté avant entrée
+dans la responsabilité async, afin qu’un refus ne résolve pas la garde d’un
+autre propriétaire. Ces invariants complètent le contrat avant raccordement.

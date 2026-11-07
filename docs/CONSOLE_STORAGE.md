@@ -94,6 +94,12 @@ vérifiés ; un reçu inconnu n’autorise jamais une nouvelle version initiale.
 Une révocation ultérieure ne défait pas la décision. La garde bloque admissions
 et mutations incompatibles jusqu’à terminaison confirmée.
 
+Une seule résolution par UUID peut s’exécuter à la fois, y compris entre
+maintenance des opérations et reprise du moteur. Les appels concurrents
+constatent l’attente ; ils ne réécrivent pas la phase d’un reçu terminé.
+Un UUID déjà pris par une autre garde est refusé avant d’en prendre la
+responsabilité, pour ne jamais abandonner l’opération d’un autre propriétaire.
+
 Si l’agent répondait function_unknown lors de la préparation, cette absence
 de ligne est persistée et revérifiée à la reprise ; une apparition inattendue
 reste une erreur. Un registre connu avec volumes vides n’est pas absent :
