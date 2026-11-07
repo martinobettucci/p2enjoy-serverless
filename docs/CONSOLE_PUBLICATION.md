@@ -108,3 +108,26 @@ Le manuel est mis à jour et sa concordance reconstruite est rejouée.
 Les rapports frais et leurs sources/image sont recoupés. Le nettoyage rejoint
 les requêtes, supprime uniquement les objets de campagne et recense les archives
 de code conservées. Aucun mock, scénario ignoré ou succès conditionnel.
+
+### Nettoyage physique refusé
+
+La preuve de 503 après suppression logique vise uniquement le répertoire parent
+d’une révision inactive créée par la campagne, sans instance utilisatrice.
+L’opérateur relève identité, mode et empreintes, puis retire temporairement
+les permissions du parent ; le vrai contrôle doit observer EACCES avant toute
+suppression de fichier. Aucun contenu ni état SQL n’est fabriqué.
+
+Une garde systemd indépendante est armée avant le changement de mode. Elle
+identifie le processus éphémère par PID, naissance et commande, le termine à
+échéance pour empêcher une faute tardive, puis restaure uniquement l’inode
+attendu. Le chemin ne peut être remplacé ni recréé. EOF, signal et exception
+du pilote restaurent aussi le mode avant désarmement. Une première preuve tue
+le pilote sous faute et attend la restauration par cette garde.
+
+Le DELETE normal de console doit répondre 503 après son commit, afficher le
+diagnostic et relire l’historique avant une nouvelle mutation. SQL et disque
+doivent montrer la suppression logique avec octets toujours comptés et contenu
+intact. Après restauration, la maintenance normale supprime les octets ; une
+nouvelle publication réelle prouve la reprise. Le gestionnaire bloque les
+uploads pendant cette faute : la campagne est seule et ne redémarre pas le
+contrôle tant que la permission n’est pas restaurée.

@@ -1738,3 +1738,18 @@ SLS-063 reste en cours : réponses perdues de mutation, 503 de nettoyage réel,
 candidat d’une autre fonction, journal long/tronqué mobile, régression complète
 et notes SPARK restent à terminer. Ce commit constitue un checkpoint conforme
 au §13 de la méthode, sans clôture d’unité. Aucun remote Git n’est configuré.
+
+### Publication UI — choix de la panne physique
+
+L’exploration du DELETE et de remove_tree confirme que le parent artifacts/UUID
+est ouvert avant tout fchmod ou unlink. Un mode 000 sur ce seul parent permet
+de prouver le 503 après commit sans toucher au contenu. Le vrai processus
+Docker doit confirmer EACCES et ses capabilities nulles ; son UID root dans
+l’espace rootless ne suffit pas à déduire le résultat.
+
+Le garde indépendant termine le seul helper éphémère identifié par PID et
+naissance avant restauration à échéance, afin d’empêcher un chmod tardif après
+une suspension du helper. La reprise se constate par la maintenance normale,
+pas par une écriture SQL ni un appel direct au nettoyage. Les préconditions
+excluent les consommateurs et nettoyages étrangers. Cette décision complète
+les preuves de SLS-063 ; elle ne change pas le comportement du produit.
