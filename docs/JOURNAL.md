@@ -1989,3 +1989,37 @@ effective, avec fermeture répétable et signaux d'interruption différés penda
 la transition d'identité. Une preuve exercera un vrai SIGTERM durant cette
 transition, puis exigera la libération du verrou et les propriétaires WAL/SHM.
 La régression complète sera rejouée après cette correction du banc.
+
+### Reprises publiques du stockage et vérification du manuel
+
+Sept groupes réels passent : perte du helper avec reprise de l’agent par sa
+garde indépendante, agent suspendu et abandon avant décision, révocation Update,
+collision avec la garde d’une autre fonction, SIGKILL avant décision, panne cache
+après commit avec révocation et SIGKILL, puis artefacts inaccessibles avec reprise
+de purge. Le code exécuté appartient aux fixtures du dépôt. Les mêmes reçus
+terminent après reprise ; rejouer le vidage après reconstruction conserve le cache.
+
+La correction d’identité des anciens helpers est qualifiée par quinze groupes
+de mutation : les quatorze existants et un vrai SIGTERM pendant fermeture du
+writer. La revue relève ensuite une lecture `in_transaction` sous root dans
+la seule assertion du probe ; elle est replacée sous propriétaire et ce probe
+rejoué avec succès. La lecture du registre par le helper d’invocation est aussi
+exécutée sur une fonction de campagne existante. Le validateur de la suite
+accepte le rapport réel de quinze groupes. La suite complète n’est pas rejouée
+à ce checkpoint ; cette distinction est conservée dans la preuve.
+
+La demande sur le manuel est vérifiée sur la console réelle, depuis l’accueil :
+huit groupes, treize chapitres, 34 paragraphes et empreinte identique à la source.
+Les onze captures ordinateur/tablette/mobile sont inspectées par le principal.
+Le premier lancement de Chromium est refusé par le sandbox avant tout parcours ;
+la relance avec l’autorisation système normale réussit. Aucun changement du
+guide ni du rendu n’est nécessaire : la source unique et la règle de maintenance
+sont déjà en place.
+
+Le [checkpoint](evidence/storage-command-recovery-dev-2026-11-07.json) conserve
+ces trente groupes et la chronologie exacte des sources. Le collecteur confirme
+la purge des trois fonctions de reprise, l’absence de leurs fichiers et ressources,
+et les budgets globaux à zéro. Les 25 fichiers Python/migrations embarqués sont
+recoupés avec l’image inchangée. SLS-065 reste ouverte pour ses pannes résiduelles,
+la validation vivante, les régressions élargies et les notes SPARK. Aucun remote
+Git n’est configuré ; le checkpoint reste local.

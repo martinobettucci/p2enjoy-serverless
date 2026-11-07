@@ -99,6 +99,8 @@ async function fault(mode,fn){
     if(['commit','commit-database-busy'].includes(mode)){
       const identities=events.filter(row=>row.event==='control-writer-identity');
       assert.equal(identities.length,mode==='commit'?1:2);
+      const registryIdentities=events.filter(row=>row.event==='registry-writer-identity');
+      assert.equal(registryIdentities.length,1);identities.push(...registryIdentities);
       for(const row of identities){assert(row.effective_uid>0);assert(row.effective_gid>0);assert.equal(row.operator_uid,0);
         assert(Object.values(row.sidecar_uids).every(uid=>uid===row.effective_uid));}
     }
@@ -123,6 +125,17 @@ try{
     assert.equal(evidence.writer_lock_held,true);assert.equal(evidence.resolved,true);
     assert(evidence.writer_identity.effective_uid>0);assert.equal(evidence.operator_uid,0);
     assert(Object.values(evidence.writer_identity.sidecar_uids).every(uid=>uid===evidence.writer_identity.effective_uid));
+    await healthy();assert.equal((await remote('inspect',fn)).operation,null);
+  });
+  await check('SIGTERM réel pendant la fermeture du registre : identité conservée et verrou libéré',async()=>{
+    const evidence=await remote('registry-close-interruption',fn);
+    assert.equal(evidence.interruption_deferred,true);assert.equal(evidence.writer_closed,true);
+    assert.equal(evidence.writer_reacquired,true);assert.equal(evidence.operator_uid,0);
+    for(const identity of [evidence.writer_identity,evidence.replacement_identity]){
+      assert(identity.effective_uid>0);assert(identity.effective_gid>0);
+      assert(Object.values(identity.sidecar_uids).every(uid=>uid===identity.effective_uid));
+    }
+    requestOutcomes.push({registry_close_interruption:evidence});
     await healthy();assert.equal((await remote('inspect',fn)).operation,null);
   });
   await check('Garde indépendante : SIGKILL du helper suspendant l’agent puis reprise réelle par le timer',async()=>{

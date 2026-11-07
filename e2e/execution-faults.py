@@ -5,7 +5,7 @@ import fcntl,json,os,re,select,shlex,signal,socket,sqlite3,subprocess,sys,time
 from contextlib import closing
 from pathlib import Path
 from uuid import UUID,uuid4
-from control_database import read_control,ControlWriter
+from control_database import read_control,control_owner,ControlWriter
 
 assert os.geteuid()==0 and socket.gethostname()=='infra-serverless','dev_spark_required'
 mode,function=sys.argv[1:3];assert str(UUID(function))==function
@@ -34,7 +34,9 @@ def inspect(target=function):
         reserved={row[0] for row in db.execute('SELECT id FROM execution_instances')}
         global_reservations=dict(db.execute('SELECT count(*) AS instances,coalesce(sum(cpu_nanos),0) AS cpu_nanos,coalesce(sum(memory_mib),0) AS memory_mib FROM execution_instances').fetchone())
         orphan_channels=sum(path.name not in reserved for path in (state/'execution').iterdir())
-    with closing(sqlite3.connect('file:'+str(Path(values['SERVERLESS_STORAGE_ROOT_HOST'])/'registry.sqlite3')+'?mode=ro',uri=True)) as db:
+    registry=Path(values['SERVERLESS_STORAGE_ROOT_HOST'])/'registry.sqlite3'
+    assert (registry.stat().st_uid,registry.stat().st_gid)==((state/'control.sqlite3').stat().st_uid,(state/'control.sqlite3').stat().st_gid),'registry_owner_mismatch'
+    with control_owner(state/'control.sqlite3'),closing(sqlite3.connect('file:'+str(registry)+'?mode=ro',uri=True)) as db:
         leases=[{'consumer_id':row[0],'complete':bool(json.loads(row[1]))} for row in db.execute('SELECT consumer_id,mounts_json FROM leases WHERE installation_id=? AND function_id=?',(installation,target))]
     containers=[]
     for key in docker('ps','-aq','--filter','label=tech.p2enjoy.serverless.installation='+installation,'--filter','label=tech.p2enjoy.serverless.kind=instance','--filter','label=tech.p2enjoy.serverless.function='+target).split():

@@ -226,3 +226,9 @@ dans la console, avec leur manuel, sont déployés dans SLS-065. Son
 [checkpoint](docs/evidence/storage-console-checkpoint-dev-2026-11-07.json)
 recoupe 37 groupes API/UI/manuel et la purge physique des fonctions de campagne.
 Les preuves de pannes et les régressions élargies restent ouvertes avant clôture.
+La [preuve de reprise](docs/evidence/storage-command-recovery-dev-2026-11-07.json)
+ajoute sept groupes sur les commandes publiques sous panne, avec quinze groupes
+de mutation et huit du manuel. Révocation, collision, SIGKILL et reprise après
+erreur physique sont éprouvés ; les trois fonctions de cette campagne sont purgées
+et leur nettoyage physique recoupé. Les scénarios résiduels restent détaillés
+dans SLS-065, qui demeure ouverte.

@@ -75,7 +75,7 @@ def verify_report(name,path,is_remote,expected_hash):
     assert hashlib.sha256(contents).hexdigest()==expected_hash,'Rapport changé après le relevé'
     result=json.loads(contents)
     assert result['completed'] is True and result['skipped']==0,'Campagne incomplète ou ignorée'
-    expected={'control-operations':55,'function-storage':14,'runtime-instances':31,'instance-lifecycle':11,
+    expected={'control-operations':55,'function-storage':15,'runtime-instances':31,'instance-lifecycle':11,
               'runtime-validation':36,'managed-storage':14,'control-admin':19,'control-ui':11,
               'deployments':11,'adapter-deploy':7,'publication-recovery':4,'public':8,
               'public-invocations':31,'login-ui':9,'execution-ui':12,'manual-ui':8,

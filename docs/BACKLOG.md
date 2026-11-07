@@ -301,6 +301,13 @@ dans la purge, reçus publics durables, migration 006, droits et reprise.
 Le [checkpoint](evidence/storage-console-checkpoint-dev-2026-11-07.json)
 recoupe 37 groupes réussis, dont neuf API, neuf UI stockage, huit manuel et
 onze de gestion, ainsi que la purge physique des quatre fonctions de campagne.
-Restent les révocations et collisions pendant préparation, interruptions
-avant/après décision, erreurs agent/artefacts/validation et régressions élargies.
+La [preuve de reprise](evidence/storage-command-recovery-dev-2026-11-07.json)
+ajoute sept groupes sur agent indisponible, révocation Update pendant préparation,
+collision sous garde, SIGKILL avant/après décision et erreurs physiques cache/artefacts.
+Elle recoupe quinze groupes de mutation, huit du manuel et le nettoyage physique
+des trois fonctions de reprise. Les onze captures du manuel sont relues.
+Restent validation encore vivante et diagnostic tardif, transport agent/writer
+occupé après décision publique, retrait de session administrateur pendant purge,
+apparition inattendue après `storage_absent`, secours de redémarrage indépendant
+du contrôle, régressions élargies et actualisation finale des notes SPARK.
 SLS-064 seul ne qualifie aucun parcours public d’effacement.

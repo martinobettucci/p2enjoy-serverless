@@ -52,7 +52,7 @@ with read_control(state / 'control.sqlite3') as db:
     installation = db.execute("SELECT value FROM security_metadata WHERE name='installation-id'").fetchone()[0]
     for namespace, functions in campaigns.items():
         row = db.execute('SELECT name,deleted_at FROM namespaces WHERE id=?', (namespace,)).fetchone()
-        assert row and row['deleted_at'] is not None and re.fullmatch(r'(storage-console-api|storage-ui)-[0-9a-f]{8}', row['name']), 'owned_campaign_required'
+        assert row and row['deleted_at'] is not None and re.fullmatch(r'(storage-console-api|storage-ui|storage-recovery)-[0-9a-f]{8}', row['name']), 'owned_campaign_required'
         actual = {r[0] for r in db.execute('SELECT f.id FROM functions f JOIN services s ON s.id=f.service_id WHERE s.namespace_id=?', (namespace,))}
         assert actual == set(functions), 'campaign_inventory_mismatch'
         assert not db.execute('SELECT 1 FROM services WHERE namespace_id=? AND deleted_at IS NULL', (namespace,)).fetchone(), 'live_campaign_service'

@@ -15,7 +15,7 @@ import subprocess
 import sys
 import time
 from uuid import UUID,uuid4
-from control_database import read_control,ControlWriter
+from control_database import control_owner,ControlWriter
 
 assert os.getuid()==0 and Path('/etc/hostname').read_text().strip()=='infra-serverless'
 ROOT=Path('/srv/p2enjoy-serverless');UNIT='p2enjoy-storage-dev.service'
@@ -50,10 +50,50 @@ def command(args,**kwargs):
 
 
 def rows(path,sql,parameters=()):
-    connection=read_control(path) if path==CONTROL else closing(sqlite3.connect('file:'+str(path)+'?mode=ro',uri=True,timeout=2))
-    with connection as db:
-        db.row_factory=sqlite3.Row
-        return [dict(row) for row in db.execute(sql,parameters)]
+    assert path in (CONTROL,REGISTRY)
+    assert (path.stat().st_uid,path.stat().st_gid)==(CONTROL.stat().st_uid,CONTROL.stat().st_gid),'database_owner_mismatch'
+    with control_owner(CONTROL):
+        with closing(sqlite3.connect('file:'+str(path)+'?mode=ro',uri=True,timeout=2)) as db:
+            db.row_factory=sqlite3.Row
+            return [dict(row) for row in db.execute(sql,parameters)]
+
+
+class RegistryWriter:
+    """Keep ownership until SQLite closes, including an operator interruption."""
+    def __init__(self):
+        self.db=None;self.identity=None;self.interruption_pending=False
+
+    def begin(self):
+        assert self.db is None,'registry_writer_already_open'
+        assert (REGISTRY.stat().st_uid,REGISTRY.stat().st_gid)==(CONTROL.stat().st_uid,CONTROL.stat().st_gid),'registry_owner_mismatch'
+        previous=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGHUP,signal.SIGTERM,signal.SIGINT})
+        try:
+            with control_owner(CONTROL):
+                self.db=sqlite3.connect('file:'+str(REGISTRY)+'?mode=rw',uri=True,timeout=2,isolation_level=None)
+                self.db.execute('BEGIN IMMEDIATE')
+                self.identity={'effective_uid':os.geteuid(),'effective_gid':os.getegid(),
+                    'sidecar_uids':{suffix:Path(str(REGISTRY)+suffix).stat().st_uid for suffix in ('-wal','-shm')}}
+        finally:signal.pthread_sigmask(signal.SIG_SETMASK,previous)
+
+    def close(self,interrupt=False):
+        if self.db is None:return
+        previous=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGHUP,signal.SIGTERM,signal.SIGINT})
+        try:
+            with control_owner(CONTROL):
+                # This helper-only probe injects a real OS signal while SQLite is
+                # still open under its owner; it replaces no product dependency.
+                if interrupt:
+                    os.kill(os.getpid(),signal.SIGTERM)
+                    self.interruption_pending=signal.SIGTERM in signal.sigpending()
+                    assert self.interruption_pending,'operator_signal_not_queued'
+                try:
+                    if self.db.in_transaction:self.db.rollback()
+                finally:
+                    self.db.close()
+                    self.db=None
+            assert all((Path(str(REGISTRY)+suffix).stat().st_uid,Path(str(REGISTRY)+suffix).stat().st_gid)==
+                       (CONTROL.stat().st_uid,CONTROL.stat().st_gid) for suffix in ('','-wal','-shm')),'registry_owner_changed'
+        finally:signal.pthread_sigmask(signal.SIG_SETMASK,previous)
 
 
 def storage(operation,**fields):
@@ -140,7 +180,28 @@ except (ProcessLookupError,FileNotFoundError):pass
 
 if mode=='health':emit(storage('health'));raise SystemExit(0)
 owned_function()
-if mode=='empty-resolution-busy':
+if mode=='registry-close-interruption':
+    def interrupted(signum,frame):raise InterruptedError('operator_interrupted')
+    signal.signal(signal.SIGTERM,interrupted)
+    writer=RegistryWriter();replacement=RegistryWriter();caught=False
+    try:
+        writer.begin()
+        try:writer.close(interrupt=True)
+        except InterruptedError:
+            caught=True
+            assert writer.db is None and os.geteuid()==0,'interruption_before_registry_close'
+        assert caught and writer.interruption_pending,'operator_interruption_missing'
+        writer.close()
+        replacement.begin()
+        with control_owner(CONTROL):
+            assert replacement.db.in_transaction,'registry_writer_not_reacquired'
+        replacement.close()
+        emit({'interruption_deferred':True,'writer_closed':writer.db is None,'writer_reacquired':True,
+            'writer_identity':writer.identity,'replacement_identity':replacement.identity,'operator_uid':os.geteuid()})
+    finally:
+        try:writer.close()
+        finally:replacement.close()
+elif mode=='empty-resolution-busy':
     with ControlWriter(CONTROL) as writer:
         emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
         try:
@@ -236,8 +297,8 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
         pid=int(command(['systemctl','show','--property=MainPID','--value',UNIT]));pidfd=os.pidfd_open(pid)
         guard=recovery_guard(pid,5 if mode=='watchdog' else 110)
         if mode in ('commit','commit-database-busy'):
-            registry_writer=sqlite3.connect(REGISTRY,timeout=2,isolation_level=None)
-            registry_writer.execute('BEGIN IMMEDIATE')
+            registry_writer=RegistryWriter();registry_writer.begin()
+            emit({'event':'registry-writer-identity',**registry_writer.identity,'operator_uid':os.geteuid()})
         emit({'event':'watching'});deadline=time.monotonic()+25;operation=None
         if mode=='watchdog':
             signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True;emit({'event':'paused','phase':'watchdog'})
@@ -264,7 +325,7 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
             assert json.loads(rows(REGISTRY,'SELECT pending_json FROM functions WHERE id=?',(identifier,))[0]['pending_json'])['phase']=='preparing'
         else:
             writer=ControlWriter(CONTROL);emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
-            registry_writer.rollback();registry_writer.close();registry_writer=None
+            registry_writer.close();registry_writer=None
             deadline=time.monotonic()+3
             while True:
                 raw=rows(REGISTRY,'SELECT pending_json FROM functions WHERE id=?',(identifier,))[0]['pending_json']
@@ -296,7 +357,7 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
     finally:
         try:
             try:
-                if registry_writer:registry_writer.rollback();registry_writer.close()
+                if registry_writer:registry_writer.close()
             finally:
                 if writer:writer.close()
         finally:

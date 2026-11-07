@@ -431,3 +431,19 @@ restauration cohérente base/fichiers/volumes ; une purge effective ne s’annul
 pas en restaurant seulement SQLite. Aucune migration descendante automatique.
 Les preuves utilisent uniquement leurs propres fonctions et archives, jamais
 une purge globale des archives conservées des campagnes précédentes.
+
+Le [checkpoint de reprise](evidence/storage-command-recovery-dev-2026-11-07.json)
+conserve sept groupes publics sous panne : garde indépendante de l’agent,
+indisponibilité avant décision, révocation Update, collision avec une garde de
+configuration, SIGKILL avant décision, puis erreurs cache/artefacts après décision
+et reprise. Le même UUID termine sans second effacement après reconstruction.
+Quinze groupes de mutations et huit du manuel passent aussi, avec onze captures
+relues. L’image du contrôle reste identique ; ses 25 fichiers Python/migrations
+sont recoupés. Les trois fonctions de reprise sont purgées, leurs trois répertoires
+de code absents, les canaux et réservations globaux vides au repos.
+Le helper de mutation ferme désormais son writer sous propriétaire même lors
+d’un SIGTERM ; la preuve ciblée rejoue cette transition après la dernière
+correction de son assertion d’identité. Les nettoyages de l’ancienne campagne
+de mutation conservent leurs archives de code selon son contrat.
+La preuve nomme les cas restant à qualifier et la mise à jour finale des notes
+SPARK ; aucune nouvelle migration ni modification de configuration de cellule.

@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- Commandes publiques de stockage qualifiées sous révocation, collision,
+  indisponibilité, SIGKILL et erreurs physiques : sept groupes réels, avec
+  quinze groupes de régression et huit du manuel. Nettoyage des trois fonctions
+  recoupé, onze captures du manuel relues. Fermeture interrompue et identité
+  SQLite des helpers corrigées et éprouvées. Ce
+  [checkpoint](docs/evidence/storage-command-recovery-dev-2026-11-07.json)
+  ne clôture pas SLS-065 ; les scénarios résiduels et régressions restent ouverts.
+
 - SLS-065 déployée en DEV après contrat et migration 006 contrôlée : catalogue
   d’archives, vidage du cache, purge volumes/code/configuration, droits et reçus
   publics durables. Les neuf groupes API, neuf parcours navigateur et huit groupes

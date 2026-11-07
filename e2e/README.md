@@ -14,6 +14,20 @@ passent respectivement neuf, neuf, huit et onze groupes réels. La preuve reste
 un [checkpoint SLS-065](../docs/evidence/storage-console-checkpoint-dev-2026-11-07.json) :
 les pannes et reprises du contrôle public et les régressions élargies restent ouvertes.
 
+`node e2e/storage-command-recovery.mjs` ajoute sept groupes réels : perte du
+helper avec restauration indépendante, indisponibilité de l’agent, révocation
+avant décision, collision avec une autre garde, SIGKILL avant/après décision,
+pannes physiques de cache et d’artefacts avec reprise. Le reçu garde le même
+UUID et un rejeu après reconstruction du cache ne l’efface pas une seconde fois.
+Le helper `storage-command-faults.py` borne les perturbations par des gardes
+systemd et vérifie le rattachement des fonctions à la campagne avant chaque geste.
+Les trois fonctions sont purgées par l’API ; `storage-console-inspect.py`
+recoupe ensuite leur nettoyage physique. La
+[preuve de reprise](../docs/evidence/storage-command-recovery-dev-2026-11-07.json)
+conserve sept groupes de reprise, quinze de régression des mutations et huit du
+manuel, exécutés en série. Elle reste un checkpoint : validation vivante,
+pannes résiduelles et régressions élargies restent à terminer.
+
 Les deux campagnes stockage créent leurs ressources et les purgent par leurs
 API publiques. Le rapport exige `completed`, `cleanup` et zéro test ignoré.
 La campagne navigateur perd réellement une réponse, conserve l’UUID puis
@@ -221,8 +235,10 @@ les erreurs de restauration. Il qualifie le protocole de l’agent. Les mutation
 séparément par `function-storage.mjs`.
 
 
-`function-storage.mjs` vérifie treize groupes autour des vraies routes de gestion
-et de publication, et un groupe ciblé du pilote embarqué sous verrou SQLite : quotas, usages écrits par Docker, baux, refus et révocation,
+`function-storage.mjs` vérifie quinze groupes : treize autour des vraies routes
+de gestion et de publication, un groupe du pilote embarqué sous verrou SQLite
+et un groupe de fermeture du writer sous SIGTERM réel. Ils couvrent quotas,
+usages écrits par Docker, baux, refus et révocation,
 SIGKILL avant/après décision, confirmation indisponible, contention SQLite,
 publication et rollback, archive avec SHA256 des données. Un timer systemd
 indépendant est armé avant chaque suspension de l’agent. La preuve du garde
@@ -230,6 +246,9 @@ exige sa trace corrélée et un processus réellement suspendu avant SIGCONT.
 Le pilote redémarre explicitement le contrôle après `docker kill` et restaure
 les composants avant nettoyage, même en cas d’échec. Le rapport conserve UUID,
 décisions, gardes, archives et erreurs de nettoyage ; aucun jeton ni secret.
+Le writer du registre conserve sa responsabilité jusqu’à sa fermeture sous
+`spark-docker`. Le probe `registry-close-interruption` vérifie le signal différé,
+le retour root et la reprise du vrai verrou écrivain ; il ne modifie aucune ligne.
 
 Les campagnes de gestion et publication utilisent `storage-archives.mjs`
 pour une purge opérateur séparée, après leur DELETE normal. Le helper du SPARK
