@@ -2123,3 +2123,35 @@ verrou `flock` transmis au processus d’arrêt, encapsulé dans un `timeout`
 indépendant. Le restaurateur attend ce verrou après terminaison du helper,
 puis redémarre et retire le fichier privé. Le client attend aussi le retour
 HTTP et borne la fermeture de SSH. Ces corrections précèdent toute perturbation.
+
+### Décisions publiques — quatre nouveaux groupes et régression réussis
+
+La seconde session SSO est obtenue depuis l’accueil réel, avec un cookie distinct.
+Le premier lancement du navigateur n’avait pas de stdin maintenu ouvert ; le
+processus est constaté terminé puis relancé avec une entrée privée, écho désactivé.
+Aucun identifiant ni cookie n’entre dans les preuves versionnées.
+
+Les quatre groupes passent au premier lancement de la campagne. Pendant purge,
+la déconnexion ferme la session locale avant la décision ; le reçu est abandonné,
+les fichiers, révisions et l’empreinte de configuration sont conservés. Sous refus
+du socket, le reçu public porte `storage_transport` tandis que l’agent termine
+son effacement. Sous vrai writer SQLite, le journal porte l’UUID attendu avec
+`control_database_unavailable` ; la garde termine après libération. Le helper
+du writer est tué et sa restauration indépendante est constatée, puis une nouvelle
+acquisition prouve l’absence de verrou retenu. Le contrôle sorti en 137 est
+redémarré par son timer ; le verrou du mutateur est joint et retiré.
+
+Les mêmes UUID et versions terminent après reprise ; un rejeu conserve le cache
+reconstruit. Les sept groupes de reprise existants passent ensuite pour vérifier
+le helper commun modifié. Les rapports sont frais, les 160 sources identiques
+avant/après chaque campagne et entre campagnes, avec la même image immuable.
+La [preuve](evidence/storage-decision-recovery-dev-2026-11-07.json) conserve ces
+onze groupes, l’état intermédiaire, les diagnostics et les empreintes des sources.
+
+Le collecteur recoupe six fonctions purgées, six répertoires de code absents,
+ressources libérées et budgets globaux à zéro. Un contrôle de restauration séparé
+confirme agent actif, contrôle sain, exécuteur de référence actif, accès aux deux
+sockets, six timers corrélés inactifs et absence de verrou de redémarrage.
+SLS-065 reste ouverte pour l’apparition inattendue après `storage_absent`, la suite
+commune et ses régressions élargies, puis les notes SPARK. Le produit, le manuel
+et les écrans n’ont pas changé dans ce checkpoint. Aucun remote Git configuré.

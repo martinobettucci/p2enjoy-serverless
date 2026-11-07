@@ -238,3 +238,10 @@ les neuf groupes API avec conflits de type de commande et réutilisation des nom
 Le diagnostic tardif et les artefacts sont nettoyés après restauration du socket ;
 une nouvelle fonction portant les anciens noms conserve ses données. Les huit
 fonctions des essais sont purgées et leur nettoyage physique est recoupé.
+La [preuve des décisions](docs/evidence/storage-decision-recovery-dev-2026-11-07.json)
+ajoute quatre groupes : session administrateur fermée pendant purge, transport
+agent refusé après commit, contention SQLite du contrôle et redémarrage par garde
+indépendante. Les sept groupes de reprise existants repassent avec le helper
+renforcé. Les six fonctions sont purgées, les services et sockets rétablis.
+Restent le cas d’apparition inattendue après absence persistée de stockage,
+l’intégration à la suite commune, les régressions élargies et les notes SPARK.

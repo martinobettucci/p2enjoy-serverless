@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Décisions publiques de stockage éprouvées avec une vraie session admin fermée
+  pendant purge, refus du transport après commit, writer SQLite occupé et
+  redémarrage indépendant du contrôle : quatre groupes nouveaux et sept groupes
+  de reprise rejoués. Gardes du helper renforcées avec jonction du mutateur,
+  restauration et attentes bornées. Six fonctions purgées et services rétablis :
+  [preuve](docs/evidence/storage-decision-recovery-dev-2026-11-07.json).
+
 - Purge pendant validation Docker vivante qualifiée : deux groupes réels,
   restauration indépendante du socket après perte du helper, conservation des
   réservations jusqu’au nettoyage et effacement du diagnostic tardif. Les neuf

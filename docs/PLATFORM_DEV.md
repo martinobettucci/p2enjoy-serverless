@@ -460,3 +460,16 @@ supplémentaire. Le collecteur confirme huit fonctions purgées et neuf réperto
 de code absents, avec réservations et allocations globales à zéro au repos.
 Ce total inclut les deux fonctions de l’essai initial refusé avant perturbation,
 les deux fonctions de validation et les quatre fonctions des deux namespaces API.
+
+Le [checkpoint des décisions](evidence/storage-decision-recovery-dev-2026-11-07.json)
+recoupe quatre nouveaux groupes et les sept groupes de reprise rejoués. Une
+seconde vraie session SSO est fermée pendant la préparation de purge ; l’abandon
+conserve version, fichiers, révisions et configuration. Après commit, les refus
+de transport et du writer SQLite conservent le reçu jusqu’à confirmation. Les
+gardes indépendantes libèrent le writer et redémarrent le contrôle ; ce dernier
+attend la fin de son mutateur Docker par un verrou natif avant de redémarrer.
+Le nettoyage physique des six fonctions, l’absence des six répertoires de code,
+les budgets à zéro, l’accès aux deux sockets depuis le contrôle et les six timers
+corrélés inactifs sont vérifiés au repos. Aucun verrou de redémarrage ne reste.
+L’image et les 160 sources couvertes restent identiques entre les deux campagnes.
+Aucune nouvelle variable, route, migration ou modification du paquet agent.

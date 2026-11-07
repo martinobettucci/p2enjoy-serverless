@@ -143,6 +143,12 @@ ajoute deux groupes sous panne réelle du socket Docker et neuf groupes API
 renforcés : diagnostic tardif effacé après nettoyage, UUID lié au type de commande
 et archives distinctes malgré la réutilisation des noms. Le contrôle et son image
 restent inchangés ; ces campagnes étendent la qualification du comportement livré.
+La [preuve des décisions](../docs/evidence/storage-decision-recovery-dev-2026-11-07.json)
+qualifie ensuite quatre groupes sur la session administrateur et les pannes après
+commit, avec sept groupes de reprise rejoués. La décision est abandonnée si la
+session est fermée avant commit ; une décision déjà enregistrée termine après
+restauration du transport ou du writer, avec le même reçu. Le redémarrage effectif
+par la garde indépendante est aussi recoupé. Les régressions élargies restent ouvertes.
 
 ## Invocations publiques et admissions
 

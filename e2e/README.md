@@ -52,6 +52,31 @@ recoupe ces onze groupes exécutés en série, leurs sources et l’image inchan
 Elle conserve aussi l’échec initial de précontrôle, corrigé avant la relance,
 et le nettoyage physique des huit fonctions et neuf répertoires de code des essais.
 
+`node e2e/storage-decision-recovery.mjs` ajoute quatre groupes : session
+administrateur révoquée pendant une préparation de purge, refus du transport
+agent après décision, writer SQLite réellement occupé après décision, puis
+redémarrage du contrôle par sa garde indépendante. Elle partage le helper
+`storage-command-faults.py`, dont les sept groupes de reprise sont rejoués ensuite.
+La [preuve des décisions](../docs/evidence/storage-decision-recovery-dev-2026-11-07.json)
+recoupe les onze groupes, les six fonctions purgées, la libération des verrous,
+la restauration des services/sockets et les sources inchangées entre campagnes.
+
+Cette campagne exige deux connexions SSO indépendantes : conserver l’état de la
+première dans `.local/e2e/purge-admin-session.json`, puis obtenir une nouvelle
+connexion pour `.local/e2e/admin-session.json`. `authorize.mjs` produit l’état de
+chaque connexion réelle ; déplacer son premier résultat avant la seconde connexion.
+Le premier cookie est consommé par la véritable déconnexion testée. Il faut donc
+une nouvelle connexion de purge avant toute relance ; recopier le cookie actif
+de l’observateur est refusé. Les deux fichiers restent privés, en mode 0600.
+
+Sous contention, le diagnostic SQLite est lu dans le journal réel, car son
+écriture en base peut elle-même échouer. Le writer ne modifie aucune ligne ;
+sa libération après SIGKILL est recoupée par une nouvelle acquisition. Le secours
+de redémarrage attend un verrou natif conservé par la commande Docker, bornée
+par un processus `timeout` indépendant. Il retire le fichier privé après reprise.
+Le client attend ensuite le retour de l’API, dont la santé peut rester dégradée
+tant que la panne volontaire de cache n’est pas levée.
+
 Les campagnes stockage créent leurs ressources et les purgent par leurs
 API publiques. Le rapport exige `completed`, `cleanup` et zéro test ignoré.
 La campagne navigateur perd réellement une réponse, conserve l’UUID puis

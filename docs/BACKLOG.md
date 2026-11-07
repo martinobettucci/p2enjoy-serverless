@@ -312,9 +312,13 @@ puis purge pendant import Docker et effacement du diagnostic tardif. Les neuf
 groupes API repassent avec conflit de type pour un UUID et réutilisation des noms
 sans confusion entre les archives. Huit fonctions, dont celles de l’essai initial
 de précontrôle corrigé, sont purgées avec nettoyage physique recoupé.
-Restent transport agent/writer occupé après décision publique,
-retrait de session administrateur pendant purge,
-apparition inattendue après `storage_absent`, secours de redémarrage indépendant
-du contrôle, intégration des nouvelles campagnes à la suite commune,
-régressions élargies et actualisation finale des notes SPARK.
+La [preuve des décisions](evidence/storage-decision-recovery-dev-2026-11-07.json)
+ajoute quatre groupes : retrait d’une session administrateur distincte pendant
+purge, refus du transport agent après commit, writer contrôle occupé après commit
+et redémarrage effectif par la garde indépendante. Les sept groupes de reprise
+existants repassent avec le helper renforcé. Les six fonctions sont purgées,
+leurs fichiers et ressources absents, services et sockets rétablis.
+Restent l’apparition inattendue après `storage_absent`, l’intégration des nouvelles
+campagnes à la suite commune, les régressions élargies et l’actualisation finale
+des notes SPARK.
 SLS-064 seul ne qualifie aucun parcours public d’effacement.
