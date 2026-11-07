@@ -2041,3 +2041,12 @@ root sur le même daemon ; le contrôle doit constater EACCES. L’upload commen
 avant l’attente du marqueur par le helper. Après restauration, aucun nettoyage
 opérateur ne doit se substituer à celui du produit. Un scénario distinct éprouve
 la garde par perte réelle du helper. Le contrat des preuves détaille ces bornes.
+
+Le premier précontrôle refuse une hypothèse du banc avant toute perturbation :
+le socket Docker relève d’UID 1001 et GID 1987, tandis que SQLite est 1001:1001.
+Le daemon est bien rootless et le montage du contrôle correspond au fichier
+officiel. L’identité du socket doit donc vérifier son utilisateur propriétaire
+puis conserver son groupe réellement observé, sans l’assimiler à celui de la base.
+Le mode observé est 01660 et devra être restauré exactement. Les deux fonctions
+de cet essai sont purgées par leurs API, avec nettoyage réussi. Le rapport échoué
+est conservé ; le précontrôle sera corrigé puis la campagne entière relancée.
