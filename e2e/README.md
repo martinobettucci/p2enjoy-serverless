@@ -274,11 +274,11 @@ conteneurs, réseaux, baux et canaux résiduels. Un échec de prérequis ou de
 nettoyage ne peut pas être déclaré réussi. Les 31 groupes publics et 221 régressions passent dans la
 [preuve du moteur](../docs/evidence/execution-dev-2026-11-06.json).
 
-Les gardes root ouvrent la base du contrôle sous l’identité effective du compte
+Les gardes root ouvrent les bases du contrôle et du stockage sous l’identité effective du compte
 `spark-docker`, puis retrouvent root pour les signaux et systemd. Lectures,
 writers et fermetures suivent ce contexte ; les preuves contrôlent les UID du
-WAL/SHM et la restauration de l’identité opérateur. Le registre de stockage
-conserve son propriétaire root.
+WAL/SHM et la restauration de l’identité opérateur. Le service de stockage
+et son registre appartiennent également à `spark-docker`.
 
 ## Console des exécutions
 

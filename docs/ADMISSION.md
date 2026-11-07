@@ -262,6 +262,11 @@ y compris pour une lecture seule. Le contexte couvre ouverture, exécution,
 consommation des résultats et fermeture ; les writers conservés entre deux
 actions opérateur rétablissent cette identité pour chaque accès SQLite.
 Les actions système de la garde retrouvent ensuite leur identité root.
+Le registre de l’agent de stockage suit la même règle : sur le SPARK DEV,
+son service et ses fichiers appartiennent également à `spark-docker`.
+Vérifier le propriétaire de chaque base avant ouverture ; le rôle root du
+helper ne lui donne pas l’identité SQLite appropriée. Les lectures du registre
+et ses writers de contention doivent donc être encadrés de la même manière.
 Cette règle évite que le banc crée WAL/SHM sous une autre identité avant leur
 changement de propriétaire. Elle ne change pas les permissions de la base et
 ne supprime pas les fichiers WAL pour rétablir un test.

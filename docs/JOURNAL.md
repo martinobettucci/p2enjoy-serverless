@@ -1971,3 +1971,12 @@ ces 37 groupes réussis et 32 captures inspectées. SLS-065 demeure ouverte :
 révocation avant décision, collisions sous garde, pannes et reprises publiques,
 validation encore vivante, apparition inattendue d’une ligne agent et régressions
 élargies restent à éprouver. Le goal de plateforme reste actif.
+
+### Identité du registre dans les anciens clients de preuve
+
+La vérification de SLS-065 recoupe l’installateur, systemd et les fichiers :
+le registre agent et ses WAL/SHM appartiennent à spark-docker. La mention root
+du README E2E était erronée. Deux anciens helpers ouvrent encore ce registre
+sous root, dont un writer de contention. Le contrat ADMISSION est précisé
+avant correction : ouvrir, lire, rollback et fermer sous son propriétaire,
+puis retrouver root pour les signaux. Les campagnes concernées seront rejouées.
