@@ -2,10 +2,13 @@
 
 ## [Non publié]
 
+- Concordance du candidat suivi avec sa ligne de liste, vérifiée pendant une
+  vraie validation Docker et sur la capture rendue (SLS-063-OBS-1).
+
 - Qualification de publication étendue à 21 groupes navigateur et dix API,
   avec vraies pannes de transport, permissions disque et confirmation de stockage.
 - Première régression commune : 18 campagnes, 312 groupes réussis. La revue
-  des 54 captures relève deux incohérences de lecture à corriger ; l’unité
+  des 54 captures a relevé deux incohérences de lecture ; l’unité
   reste ouverte : [preuve](docs/evidence/publication-console-review-dev-2026-11-07.json).
 
 - Publication ZIP depuis la console, conservation serveur de la configuration,

@@ -53,6 +53,7 @@ export function CodePublications({functionId,onFunction}) {
             if (candidate.function_id !== functionId) throw Object.assign(new Error('Cette tentative appartient à une autre fonction.'),{status:403});
           } catch(error) {candidate=null;candidateError=readable(error);}
         }
+        const observedCandidates=candidate ? {...candidates,items:candidates.items.map(row=>row.id===candidate.id ? candidate : row)} : candidates;
         const confirmed=await api(`/api/functions/${functionId}`,options);
         if (!current) return;
         if (confirmed.updated_at !== fn.updated_at) {setRevision(value=>value+1);return;}
@@ -61,7 +62,7 @@ export function CodePublications({functionId,onFunction}) {
         setRevisionPage(page => Math.min(page,Math.max(0,Math.ceil(revisions.items.length/size)-1)));
         onFunction(fn);
         reading.current=false;
-        setState({loading:false,error:null,data:{fn,revisions:revisions.items,candidates,candidatePage,candidate,candidateError},loadedAt:Date.now()/1000});
+        setState({loading:false,error:null,data:{fn,revisions:revisions.items,candidates:observedCandidates,candidatePage,candidate,candidateError},loadedAt:Date.now()/1000});
         if (!candidateError && (uploading || activeStates.has(candidate?.state))) timer=setTimeout(() => setRevision(value=>value+1),1000);
       } catch(error) {
         if (!current) return;

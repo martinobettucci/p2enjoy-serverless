@@ -218,7 +218,14 @@ try{
     await confirmAction(revision(firstId),'Activer cette révision',value=>value.url()===base+`/api/functions/${functionId}/rollback`&&value.request().method()==='POST');
   });
   await check('Conflit pendant validation : ancienne révision et modification concurrente conservées',async()=>{
-    const upload=await startPublication(slow);await until(async()=>(await manage(`/api/deployments/${upload.id}`)).state==='validating','Validation réelle non observée');await follow().getByText('Validation du handler',{exact:true}).waitFor();await capture('validating');await update({},'during-validation');await finished(upload,409);await follow().getByText('Échec',{exact:true}).waitFor();assert.equal((await manage(`/api/functions/${functionId}`)).active_revision_id,firstId);assert.equal((await manage(`/api/functions/${functionId}`)).environment.PUBLIC_LABEL,'during-validation');
+    const upload=await startPublication(slow);await until(async()=>(await manage(`/api/deployments/${upload.id}`)).state==='validating','Validation réelle non observée');
+    const observation=await page.waitForFunction(id=>{
+      const followed=document.querySelector(`article[aria-label="Suivi ${id}"] .badge`)?.textContent;
+      if(followed!=='Validation du handler')return false;
+      return {followed,listed:document.querySelector(`article[aria-label="Tentative ${id}"] .badge`)?.textContent};
+    },upload.id);
+    const states=await observation.jsonValue();await observation.dispose();assert.deepEqual(states,{followed:'Validation du handler',listed:'Validation du handler'});evidence.push({validation_observation:upload.id,...states});
+    await capture('validating');await update({},'during-validation');await finished(upload,409);await follow().getByText('Échec',{exact:true}).waitFor();assert.equal((await manage(`/api/functions/${functionId}`)).active_revision_id,firstId);assert.equal((await manage(`/api/functions/${functionId}`)).environment.PUBLIC_LABEL,'during-validation');
   });
   await check('Rechargement pendant son upload : même candidat et pointeur actif relu sans rejeu',async()=>{
     const before=(await manage(`/api/functions/${functionId}/deployments?limit=100`)).total,upload=await startPublication(slow);

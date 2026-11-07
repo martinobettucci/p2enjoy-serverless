@@ -1782,3 +1782,18 @@ Les rapports et images de cette première suite sont conservés sous
 .local/e2e/publication-regression-first-312 et leur bilan recoupé est versionné.
 SLS-063 reste ouvert. Une nouvelle qualification suivra la correction de ces
 incohérences ; aucune clôture ne repose sur les seuls comptes de tests.
+
+### Publication UI — résolution SLS-063-OBS-1
+
+La lecture individuelle du candidat suivi remplace sa ligne de liste dans le
+même cycle d’affichage. L’assertion DOM lit les deux badges en une observation
+et exige leur concordance pendant la vraie validation Docker. Les 21 groupes
+navigateur passent ; la capture est inspectée et montre les deux libellés de
+validation pour le même UUID. La preuve ciblée est
+`evidence/publication-observation-correction-dev-2026-11-07.json`.
+
+L’image 52d17fa1 contient aussi la correction de succès, résolue séparément dans
+le commit suivant. Les empreintes de cet arbre qualifié sont conservées ;
+aucune preuve n’est attribuée au seul arbre intermédiaire du premier commit.
+La campagne complète et la clôture SLS-063 restent à faire. Aucun remote
+Git n’est configuré.

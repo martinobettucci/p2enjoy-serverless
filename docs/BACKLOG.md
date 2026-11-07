@@ -263,8 +263,9 @@ guide autonome, rendu responsive et preuve E2E de concordance avec le document.
 
 ## SLS-063
 
-Statut : [~] — 312 groupes de régression réussis ; 54 captures relues,
-deux incohérences d’affichage à corriger avant clôture.
+Statut : [~] — premier contrôle de 312 groupes puis 54 captures relues.
+La concordance liste/suivi est corrigée et qualifiée ; l’ancien succès reste
+à retirer du registre après sa preuve, puis la régression complète sera rejouée.
 [Revue](evidence/publication-console-review-dev-2026-11-07.json).
 
 [Publication dans la console](CONSOLE_PUBLICATION.md). ZIP et handler avec
@@ -272,7 +273,7 @@ conservation serveur de la configuration, suivi corrélé et abandon des candida
 préparés, historique, activation et suppression des révisions. Parcours UI réels,
 droits et conflits, invocation après activation, reprise et régressions complètes.
 Les réponses perdues, pannes de nettoyage et de confirmation du stockage,
-candidat étranger et longs journaux passent. Restent la concordance des états
-entre liste et suivi, l’effacement d’un ancien succès après actualisation,
-leur requalification et les notes SPARK. Les constats sont dans le registre
+candidat étranger et longs journaux passent. La concordance des états
+entre liste et suivi passe ses 21 groupes ciblés après correction. Restent
+la résolution du succès ancien, la régression complète et les notes SPARK. Les constats sont dans le registre
 d’incohérences ; la réussite fonctionnelle seule ne clôt pas cette unité.
