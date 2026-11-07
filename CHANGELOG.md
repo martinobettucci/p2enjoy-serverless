@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Console de publication vérifiée sur le SPARK DEV : 18 campagnes en série,
+  312 groupes réels, zéro échec/skip et 54 captures inspectées. Sources, image,
+  archives et nettoyages recoupés ; trois notes SPARK appliquées et relues.
+  [Preuve finale SLS-063](docs/evidence/publication-console-dev-2026-11-07.json).
+
 - Les consultations de publication effacent le succès précédent tout en
   conservant les diagnostics. Cinq gestes qualifiés séparément, manuel mis à
   jour et 29 groupes ciblés réussis après corrections (SLS-063-OBS-2).
@@ -11,9 +16,10 @@
 
 - Qualification de publication étendue à 21 groupes navigateur et dix API,
   avec vraies pannes de transport, permissions disque et confirmation de stockage.
-- Première régression commune : 18 campagnes, 312 groupes réussis. La revue
-  des 54 captures a relevé deux incohérences de lecture ; l’unité
-  reste ouverte : [preuve](docs/evidence/publication-console-review-dev-2026-11-07.json).
+- Première régression commune : 18 campagnes, 312 groupes réussis. La
+  [revue initiale](docs/evidence/publication-console-review-dev-2026-11-07.json)
+  des 54 captures a relevé deux incohérences de lecture, corrigées puis
+  requalifiées dans la preuve finale ci-dessus.
 
 - Publication ZIP depuis la console, conservation serveur de la configuration,
   suivi corrélé des candidats et abandon explicite, historique, activation et
@@ -21,7 +27,7 @@
 - 32 groupes ciblés réels passent : dix API, quatorze navigateur et huit manuel,
   avec 21 captures relues. Sources, image et nettoyages recoupés dans la
   [preuve intermédiaire](docs/evidence/publication-console-checkpoint-dev-2026-11-07.json).
-  Pannes résiduelles et régression complète encore ouvertes.
+  Ce checkpoint précède l’extension et la qualification finale de SLS-063.
 
 - Manuel d’usage intégré à la navigation, sommaire et ancres accessibles,
   rendu responsive compilé depuis l’unique source `docs/manual.md`.

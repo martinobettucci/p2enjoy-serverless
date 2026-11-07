@@ -1,9 +1,10 @@
 # Publication du code dans la console
 
-Contrat SLS-063, déployé en qualification. Complète [DEPLOYMENT](DEPLOYMENT.md)
-et [CONTROL](CONTROL.md). La [preuve intermédiaire](evidence/publication-console-checkpoint-dev-2026-11-07.json)
-recoupe 32 groupes ciblés et 21 captures relues ; les pannes résiduelles et la
-campagne complète restent nécessaires avant clôture.
+Contrat SLS-063, implémenté et vérifié sur le SPARK DEV le 7 novembre 2026.
+Complète [DEPLOYMENT](DEPLOYMENT.md) et [CONTROL](CONTROL.md).
+La [preuve finale](evidence/publication-console-dev-2026-11-07.json) recoupe
+18 campagnes en série, 312 groupes réels et 54 captures inspectées, sans échec
+ni test ignoré. Les deux incohérences de lecture sont corrigées et requalifiées.
 
 ## Parcours et conservation
 

@@ -63,8 +63,9 @@ Les archives conservées sont vérifiées sur disque, les validations Docker
 supprimées et les réservations libérées. Quatre groupes supplémentaires
 qualifient les plafonds globaux/de révisions et la reprise après SIGKILL
 pendant réception ou validation : [preuve de reprise](../docs/evidence/publication-recovery-dev-2026-11-06.json).
-Expiration, budget, interruption pendant nettoyage et interface de révisions
-restent ouverts. L'API de publication ne fournit pas l'invocation.
+Expiration, budget et interruption du contrôle pendant nettoyage restent à
+qualifier. La console Code et révisions est livrée par SLS-063. L’API de
+publication et la passerelle d’invocation ont des responsabilités distinctes.
 
 `app/artifacts.py` fournit l'extraction bornée des ZIP classiques. Sa CLI
 vérifie les en-têtes, les tailles réelles, les CRC et les chemins, écrit dans
@@ -174,6 +175,8 @@ les parcours de console et ajoute huit groupes : 48 réussites au total.
 
 La publication UI ajoute la préparation du code conservant la configuration,
 la liste administrateur des candidats et l’abandon des seuls candidats préparés.
-Le schéma reste inchangé. Dix groupes API, quatorze navigateur et huit manuel
-passent dans la [preuve intermédiaire](../docs/evidence/publication-console-checkpoint-dev-2026-11-07.json).
-La qualification finale de [SLS-063](../docs/CONSOLE_PUBLICATION.md) reste ouverte.
+Le schéma reste inchangé. La [preuve finale de SLS-063](../docs/evidence/publication-console-dev-2026-11-07.json)
+réunit 18 campagnes et 312 groupes réels, dont dix API de publication du code,
+21 de console de publication et huit du manuel. Les réponses perdues, le vrai
+503 de nettoyage et la confirmation de stockage en attente sont éprouvés.
+Les 54 captures ont été inspectées ; sources, image et nettoyage sont recoupés.

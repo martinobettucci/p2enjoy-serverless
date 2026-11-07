@@ -39,9 +39,10 @@ est désormais déployé et éprouvé par la campagne publique.
 
 Exploiter et déployer les projets P2Enjoy avec une compatibilité Lambda ciblée,
 sans rechercher une reproduction complète des API AWS. Docker constitue le
-socle d'exécution. Une interface permettra de gérer namespaces, fonctions,
-allocations, mémoire, stockage permanent par identifiant de fonction et durées
-du cycle d'exécution.
+socle d'exécution. La console gère namespaces, fonctions, allocations, mémoire,
+stockage permanent par identifiant de fonction et durées du cycle d’exécution.
+Elle donne accès au code et aux révisions, aux instances et aux invocations,
+ainsi qu’au manuel d’usage.
 
 Le stockage propose des modes configurables par fonction pour les données
 métier et le cache reconstructible. Le [contrat de plateforme](docs/PLATFORM.md)
@@ -116,9 +117,11 @@ impose sa mise à jour à chaque évolution fonctionnelle. La [preuve du manuel]
 passe 48 groupes réels avec 33 captures relues.
 La facette **Code et révisions** permet maintenant de publier une archive ZIP,
 suivre ou abandonner une préparation, activer et supprimer des révisions.
-Le manuel comprend ces nouveaux parcours. Leur [preuve intermédiaire](docs/evidence/publication-console-checkpoint-dev-2026-11-07.json)
-passe 32 groupes ciblés avec 21 captures relues ; la qualification complète
-de cette unité reste ouverte.
+Le manuel comprend ces nouveaux parcours. Leur [preuve finale](docs/evidence/publication-console-dev-2026-11-07.json)
+passe 18 campagnes en série, 312 groupes réels, sans échec ni test ignoré,
+avec 54 captures inspectées. Les sources, l’image servie, les nettoyages et les
+notes SPARK sont recoupés. Les commandes de purge/cache, les crons et les
+preuves résiduelles de plateforme restent suivis au backlog.
 
 **Il est interdit de lancer l'application avec un profil PREPROD ou PROD,
 quelles que soient les circonstances.**

@@ -80,6 +80,9 @@ API avec des identifiants propres. Le volume qualification-reports conserve
 uniquement les observations du client entre les étapes de recréation.
 
 Les trois textes de notes sont conservés dans `qualification/spark-notes/`.
+Ils décrivent désormais l’ensemble du SPARK : contrôle, console, moteur, manuel
+et runtime de référence. Leur application et leur contenu sont recoupés dans
+la [preuve de publication](evidence/publication-console-dev-2026-11-07.json).
 Ils doivent être déposés comme propositions dans `/etc/spark/notes/*.md.?`.
 Ils ne remplacent pas directement les notes officielles : leur adoption reste
 un geste de console. Ne jamais toucher aux fichiers réécrits par le plan de

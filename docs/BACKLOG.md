@@ -133,7 +133,7 @@ réussie. La durée de 300 secondes se mesure sur le jeton réellement émis.
 
 ## SLS-030
 
-Statut : [~] — publication API/CLI, plafonds de candidats/révisions et deux reprises après SIGKILL qualifiés ; autres limites et UI ouvertes.
+Statut : [~] — publication API/CLI, plafonds de candidats/révisions et deux reprises après SIGKILL qualifiés ; autres limites ouvertes ; interface livrée par SLS-063.
 
 Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
@@ -172,12 +172,12 @@ plan/package rejoués. Les sept groupes CLI authentifiés réussissent onze
 premières publications, la pagination, les mises à jour à UUID conservé,
 les refus de droits, le résultat partiel et la reprise du même brouillon.
 Rupture après envoi, modification locale concurrente, réponse trop grande et
-redirection restent à éprouver. Les vues de révisions restent à réaliser. Le moteur est déployé ; son exécution après rollback est vérifiée dans
+redirection restent à éprouver. Les vues de révisions sont livrées et vérifiées par SLS-063. Le moteur est déployé ; son exécution après rollback est vérifiée dans
 la [campagne publique](evidence/execution-dev-2026-11-06.json).
 
 ## SLS-040
 
-Statut : [~] — admissions publiques et reprises éprouvées ; preuves résiduelles et console ouvertes.
+Statut : [~] — admissions publiques et reprises éprouvées ; preuves résiduelles ouvertes ; vues de consultation livrées par SLS-061.
 
 Invocation authentifiée, limites réelles, admission atomique, min/max/idle,
 deadline, descendants, drainage et réconciliation. CORS/IP ET/OU côté backend.
@@ -231,7 +231,7 @@ restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls compos
 
 ## SLS-060
 
-Statut : [~] — gestion, consultation des exécutions et manuel livrés ; publication et campagne transversale ouvertes.
+Statut : [~] — gestion, exécutions, manuel et publication livrés ; purge/cache, crons et campagne transversale ouverts.
 
 Parcours d'administration sur les API réelles : connexion, objets, jetons,
 code, variables/secrets, limites, état, stockage, historique et journaux.
@@ -263,17 +263,17 @@ guide autonome, rendu responsive et preuve E2E de concordance avec le document.
 
 ## SLS-063
 
-Statut : [~] — premier contrôle de 312 groupes puis 54 captures relues.
-Les deux défauts visuels sont corrigés ; 21 groupes navigateur et huit du
-manuel passent sur la nouvelle image. La régression complète reste à rejouer.
-[Revue](evidence/publication-console-review-dev-2026-11-07.json).
+Statut : [x] — publication depuis la console déployée et vérifiée : 18 campagnes,
+312 groupes réels, zéro échec/skip, 54 captures inspectées, sources et image
+recoupées, nettoyages confirmés et notes SPARK appliquées.
+[Preuve](evidence/publication-console-dev-2026-11-07.json).
 
 [Publication dans la console](CONSOLE_PUBLICATION.md). ZIP et handler avec
 conservation serveur de la configuration, suivi corrélé et abandon des candidats
 préparés, historique, activation et suppression des révisions. Parcours UI réels,
-droits et conflits, invocation après activation, reprise et régressions complètes.
-Les réponses perdues, pannes de nettoyage et de confirmation du stockage,
-candidat étranger et longs journaux passent. La concordance liste/suivi
-et l’effacement d’un ancien succès sont qualifiés, avec leurs preuves ciblées
-et captures inspectées. Le registre est résolu. Restent la régression complète,
-sa revue visuelle et les notes SPARK.
+droits et conflits, invocation après activation, réponses perdues, reprises de
+nettoyage physique et de confirmation du stockage, candidat étranger et longs
+journaux. Les deux incohérences de lecture découvertes à la première revue sont
+corrigées puis requalifiées ; le registre est résolu. Le manuel et les notes
+SPARK décrivent les parcours livrés. Les preuves résiduelles des unités parentes
+restent ouvertes.

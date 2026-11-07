@@ -1,31 +1,39 @@
-# Points d'entrée du banc DEV
+# Intégration avec P2Enjoy Serverless
 
-Ce SPARK n'expose aucun service public. Un opérateur autorisé peut utiliser un
-tunnel SSH vers 127.0.0.1:18080 de cette cellule, sans changement de FORGE.
+Entrée HTTPS : https://serverless.lelabs.tech. La console utilise le SSO LeLabs, client confidentiel `p2enjoy-serverless-dev`, retour `/auth/retour`. Les rôles `verified` et `admin` sont exigés côté serveur. Les secrets OIDC et jetons du fournisseur restent côté serveur.
 
-HTTP local :
-- GET /healthz : état du serveur de référence ;
-- GET /catalog : douze fonctions, identifiants et limites déclaratives ;
-- /functions/<nom> : invocation HTTP du handler de qualification.
+## Accès des projets
 
-Les noms sont echo, binary, callback, business, configuration, state, cache,
-worker, failure, sleep, spin, relay. Les méthodes figurent dans serverless.yml.
-Le handler reçoit event.httpMethod, path, queryStringParameters, headers,
-body, isBase64Encoded et un context avec identifiant et temps restant. Il
-renvoie statusCode, headers, body et éventuellement isBase64Encoded.
+Un administrateur crée un namespace, un service puis des jetons de plateforme. Les clients utilisent `X-Serverless-Token`. Le droit Create permet une création et première publication ; Update permet les modifications et publications suivantes ; Delete supprime une fonction. Read permet les lectures autorisées et les invocations, quelle que soit leur méthode HTTP. Une portée par fonction interdit les opérations globales du service.
 
-Il n'existe pas encore de jeton de plateforme ni d'intégration SSO. business
-exige le secret réel QUALIFICATION_BUSINESS_TOKEN injecté par la cellule, dans
-Authorization: Bearer <jeton>. Sans configuration, il répond 503 ; le marqueur
-public de l'ancienne démonstration n'est plus une identité acceptée.
-Les fonctions failure, sleep et spin sont intentionnellement conçues pour
-tester les erreurs et interruptions ; ne pas exposer ce banc sur Internet.
+L’en-tête métier `Authorization` reste réservé au handler. Les règles d’origine web et d’IP sont appliquées par la passerelle, puis relues avant admission. Une origine web n’est pas une preuve d’identité d’un client hors navigateur.
 
-Les données et le cache survivent aux recréations. state, cache et worker
-acceptent ?key=<identifiant> ; DELETE supprime seulement la ressource nommée.
-Un job worker reçoit items (1 à 128 textes) et calcule réellement ses résultats
-PBKDF2 avec checkpoint. Le même job se reprend ; des entrées différentes pour
-son identifiant existant sont refusées. Aucun endpoint ne supprime toutes
-les données ou les volumes. Aucun appel sortant vers un client ou un cloud
-métier n'est nécessaire ; relay vise uniquement les pairs locaux réels echo,
-failure ou sleep. Il propage leurs véritables erreurs et timeouts.
+## Déployer
+
+Le projet garde ses handlers et son `serverless.yml`. L’adaptateur lit `P2_SERVERLESS_URL` et `P2_SERVERLESS_TOKEN`, puis s’utilise ainsi :
+
+```sh
+python3 -m adapter deploy --config serverless.yml --service UUID_DU_SERVICE
+```
+
+Le service doit correspondre au manifeste. L’adaptateur prépare avant mutation, publie en série et distingue succès, refus et issue inconnue. Les valeurs secrètes ne figurent pas dans son rapport. Les API de candidat sont `POST /api/functions/{id}/deployments`, `PUT /api/deployments/{id}/artifact` et `GET /api/deployments/{id}`. L’upload est une archive ZIP ; le contrôle valide le vrai handler dans un conteneur isolé avant publication.
+
+L’historique se lit sous `/api/functions/{id}/revisions`. Le rollback rétablit une révision connue sans rétablir les anciens réglages ni les volumes. La facette Code et révisions propose la publication d’un ZIP et de son handler, le suivi, l’abandon d’une préparation, l’activation et la suppression de révisions. Les réglages et secrets courants sont conservés côté serveur lors de cette publication du code. L’entrée publique est `/invoke/{function_id}` pour un alias implicite, ou `/invoke/{function_id}/{chemin}` pour un chemin déclaré. Elle exige Read dans `X-Serverless-Token` ; le cookie administrateur ne remplace pas ce jeton.
+
+## Quotas, décisions et erreurs
+
+Une fonction configure séparément données permanentes et cache, avec activation et allocation en Mio. Désactiver conserve les fichiers et l’allocation. Un quota sous l’usage est refusé ; une invocation admise interdit une mutation incompatible et les instances au repos sont drainées. Supprimer archive les volumes, sans les purger ni libérer leur allocation. La purge est une commande d’administration distincte, dont l’interface publique reste à réaliser.
+
+Une réponse normale attend confirmation de l’agent. Un 503 portant `X-Serverless-Mutation-Committed: true` signifie que la modification est enregistrée et attend sa confirmation : relire la fonction ou le candidat avant toute nouvelle tentative. `X-Serverless-Operation-ID` et `X-Serverless-Function-ID` identifient cette décision ; `storage_operation` expose son résumé public, puis revient à null après confirmation. Une publication déjà décidée reste publiée malgré une confirmation perdue.
+
+Les mutations concurrentes incompatibles donnent 409, une configuration ou réduction de quota invalide 422, un budget/marge de stockage insuffisant 507. Les mises à jour supportent `If-Match` avec la valeur `updated_at` lue. Une interruption avant décision abandonne la préparation ; après décision, elle reprend sa confirmation. Une requête retardée ne recrée pas une préparation déjà abandonnée.
+
+Les paramètres d’exécution sont appliqués par le moteur. File pleine ou expirée : 429 ; délai d’exécution dépassé : 504. Une déconnexion après admission ne prouve pas l’absence d’effet métier : consulter l’historique par X-Serverless-Request-ID avant toute relance. Les routes `/api/functions/{id}/instances` et `/api/functions/{id}/invocations` exigent Read ou la session administrateur, avec pagination. Les logs sont expurgés ; une mesure Docker indisponible reste signalée comme telle. Les contrats détaillés sont dans docs/CONTROL.md, DEPLOYMENT.md, ADMISSION.md et le manuel du dépôt.
+
+## Retrouver une publication et consulter le guide
+
+La console inscrit l’UUID du candidat dans son adresse avant d’envoyer la préparation. Après interruption réseau, fermeture ou rechargement, consulter cette même adresse avant de recommencer. Une préparation en attente d’archive peut être abandonnée explicitement ; le navigateur ne renvoie pas automatiquement le ZIP.
+
+Supprimer une révision inactive demande confirmation. Un 503 peut signifier que sa suppression logique est enregistrée mais que le nettoyage physique attend encore ; relire l’historique. La révision active reste protégée et les révisions utilisées par une instance ne peuvent pas être supprimées.
+
+Le manuel d’usage est accessible dans la navigation, à /console/manual. Il décrit les parcours disponibles, les droits, la publication, les révisions, les limites et le diagnostic. Sa source unique est `docs/manual.md`, construite et vérifiée avec la version de la console.

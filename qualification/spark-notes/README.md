@@ -1,20 +1,32 @@
-# Application de qualification P2Enjoy Serverless — DEV
+# P2Enjoy Serverless
 
-Cette cellule porte le banc de qualification indépendant de P2Enjoy Serverless.
-Les douze fonctions et les données sont synthétiques. Aucun code, secret ou
-artefact de client n'est déployé.
+Ce SPARK héberge la plateforme de fonctions Docker sur l’infrastructure de développement LeLabs.
 
-Le banc sert à vérifier les contrats de handlers HTTP/CommonJS, contexte,
-callback, données persistantes, cache, échéance, erreurs et appel entre
-fonctions. Il n'est pas encore la plateforme de management : pas de SSO,
-d'ACL CRUD, d'autoscaling ou de conteneur par fonction.
+## Services et accès
 
-Toutes les preuves fonctionnelles sont E2E : un conteneur client distinct
-appelle la vraie application déployée, sans mock ni faux service. Une
-configuration absente fait échouer la campagne complète ; aucun cas n'est ignoré.
-Les scénarios de panne utilisent des conteneurs isolés portant la même image.
+- https://serverless.lelabs.tech : console React et API Python, servies par `serverless-api` sur le port 18090 derrière la route TLS.
+- `serverless-runtime-reference` : exécuteur des douze handlers synthétiques du dépôt, accessible sur la boucle locale du SPARK, port 18080.
+- `p2enjoy-storage-dev.service` : agent de quotas et de volumes persistants par UUID de fonction, avec socket Unix privé.
+- Les validateurs de code, instances de fonctions et clients de qualification sont des conteneurs distincts, identifiés par leur rôle et leur propriétaire.
 
-Le service Docker est p2enjoy-qualification-dev/qualification. Il est accessible
-uniquement sur la boucle locale de la cellule, port 18080. Aucune route
-publique ni aucun port de FORGE n'est nécessaire. Il ne dépend d'aucun service
-client. La FORGE ne doit pas être modifiée pour exploiter ce banc.
+## Fonctions disponibles
+
+Le SSO LeLabs exige les rôles `verified` et `admin`. La console gère namespaces, services, fonctions, politiques d’origine/IP, variables, secrets et jetons CRUD limités au service ou à certaines fonctions.
+
+L’adaptateur Python lit `serverless.yml`, prépare des archives et publie les fonctions par HTTPS. Le contrôle valide réellement le handler dans Node/Docker, conserve les révisions et fournit historique et rollback. Le rollback du code conserve les réglages applicatifs et les volumes courants.
+
+Les créations, changements de quotas, publications et suppressions sont raccordés à l’agent réel. La décision durable du contrôle et l’objet sont commis ensemble. Avant cette décision, une interruption reprend l’abandon ; après, elle confirme la mutation. La suppression archive données et cache en conservant leur allocation. Leur purge est distincte.
+
+## État de réalisation
+
+Le moteur public exécute les fonctions publiées avec un jeton Read. Il réserve CPU, mémoire et place d’instance avant Docker, applique minimum/maximum/concurrence et extinction après inactivité, puis réconcilie ses ressources au redémarrage sans rejouer les appels incertains. Les générations de code et configuration conservent les appels déjà admis ; les changements de stockage drainent les instances au repos et refusent les invocations actives.
+
+La passerelle applique les politiques d’origine/IP et CORS. Les API d’observation exposent états, allocations, mesures Docker et journaux expurgés. Les facettes Instances et Invocations montrent les allocations, mesures, états et journaux expurgés dans la fiche de fonction. La facette Code et révisions permet de publier un ZIP, suivre ou abandonner une préparation, consulter les métadonnées, activer et supprimer les révisions. Les commandes de purge/cache et les crons restent à réaliser. Les cycles SSO et les pannes résiduelles sont recensés dans le backlog.
+
+Preuve moteur : `docs/evidence/execution-dev-2026-11-06.json` dans le dépôt du projet. Elle recoupe sources, image, rapports, archives, ressources web et configuration officielle. Les campagnes sont sérielles, sans mock, doublure ou test ignoré. Les archives de code conservées sont distinguées des volumes de qualification explicitement purgés.
+
+La publication de code conserve côté serveur les ressources, variables, secrets, volumes et routes courants. Son UUID est connu avant l’envoi ; revenir sur la même adresse permet de consulter son issue sans rejouer la publication. La console relit l’état après une erreur de mutation et distingue une publication enregistrée dont la confirmation de stockage attend encore.
+
+La qualification `python3 -B e2e/execution-suite.py --scope publication` passe 18 campagnes en série et 312 groupes réels, sans échec ni cas ignoré. Elle réunit moteur et console sans répéter les campagnes communes. La preuve `docs/evidence/publication-console-dev-2026-11-07.json` recoupe sources, image, rapports frais, captures relues, archives et ressources nettoyées. Les pannes de nettoyage sont éprouvées sur les seules révisions de campagne, avec garde indépendante puis maintenance normale.
+
+Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses onze chapitres viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.

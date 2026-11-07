@@ -1815,3 +1815,32 @@ et 29 captures sont conservés sous .local/e2e/publication-consistency-29.
 Le registre devenu vide est supprimé. La régression commune de 18 campagnes,
 la revue complète et les notes SPARK restent nécessaires avant clôture.
 Aucun remote Git n’est configuré.
+
+### Publication UI — qualification finale
+
+Après les corrections b4d260c et 6934f80, les dix-huit campagnes sont rejouées
+séquentiellement : 312 groupes réussis, zéro échec et zéro cas ignoré. Les 144
+sources et l’image restent identiques avant/après chaque campagne. La revue des
+54 nouvelles captures confirme les corrections et les parcours de console ;
+son relevé recoupe les fichiers et l’absence de modification de l’arbre.
+
+L’enveloppe d’exécution a renvoyé 143 après l’écriture du rapport atomique
+complet. Les dix-huit commandes y ont toutes un retour zéro. Le collecteur
+indépendant, terminé à zéro, recoupe les rapports frais, sources, image et
+nettoyages ; cette anomalie d’enveloppe est conservée dans la preuve, sans
+cause inventée ni déclaration d’un retour zéro pour l’enveloppe initiale.
+
+Les trois notes de cellule sont maintenues dans qualification/spark-notes,
+proposées via les fichiers .? puis appliquées par la console normale du SPARK.
+Leur contenu officiel est relu et recoupé. Le manuel reste la source unique,
+avec ses onze chapitres et 28 paragraphes vérifiés dans l’application.
+Le collecteur final vérifie code embarqué, ressources servies, archives et
+absence de ressources actives de campagne ; ses détails sont versionnés dans
+`evidence/publication-console-dev-2026-11-07.json`. Les rapports et les
+54 images de cette exécution sont conservés sous
+`.local/e2e/publication-console-qualified-312`.
+
+SLS-063 est clôturée. Les unités parentes conservent leurs preuves résiduelles,
+les commandes de purge/cache et les crons ; le goal de plateforme reste actif.
+Aucune migration ni nouvelle variable n’est nécessaire. Aucun remote Git
+n’est configuré ; le commit reste local.

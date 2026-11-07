@@ -33,9 +33,10 @@ Docker et HTTP sur le SPARK DEV. Aucun test ignoré n'est accepté.
 
 La matrice qualifie les comportements de l'application témoin et de son
 exécuteur de référence. Elle ne mesure pas une couverture de lignes et ne
-prouve pas les fonctionnalités de plateforme qui restent à construire : SSO,
-ACL CRUD, UI, adaptateur de déploiement, règles origine/IP, quotas individuels,
-instances chaudes et extinction automatique.
+prouve pas les fonctionnalités propres à la plateforme : SSO, ACL CRUD, UI,
+adaptateur de déploiement, règles origine/IP, quotas individuels, instances
+chaudes et extinction automatique. Ces fonctionnalités ont leurs campagnes
+distinctes, preuves datées et limites suivies au backlog.
 
 ## Méthode SLS-000
 
@@ -80,3 +81,20 @@ rencontre une donnée inattendue : le restart doit préserver cette donnée et
 l'allocation, avant résolution explicite. Un répertoire antérieur vide est
 conservé. Les régressions agent, limites et instances gérées sont exécutées
 séparément, en série ; ces preuves ne remplacent pas celles de l'API publique.
+
+### Console de publication et manuel — SLS-062/063
+
+| Contrat livré | Preuve E2E réelle |
+| --- | --- |
+| Préparation du code, conservation serveur, droits et versions | Dix groupes de `e2e/code-publications.mjs` |
+| ZIP depuis la console, suivi, abandon, activation et suppression | 21 groupes de `e2e/publication-ui.mjs`, invocations Docker après activation |
+| Réponses perdues après commit, retour sans rejeu | Transport réel, sortie de page puis retour et état serveur recoupé |
+| Nettoyage physique refusé, garde et reprise | EACCES Docker réel, 503 après suppression logique, SIGKILL/SIGSTOP du helper et maintenance normale |
+| Publication enregistrée avec confirmation de stockage retardée | Suspension bornée de l’agent, 503 réel, décision conservée puis quota confirmé |
+| Liste/suivi cohérents et succès antérieur retiré | Observation DOM atomique et cinq gestes indépendants après succès réel |
+| Manuel maintenu et affiché | Huit groupes de `e2e/manual-ui.mjs`, SHA256, onze chapitres, 28 paragraphes, tableau, clavier et formats d’écran |
+| Régression commune | `python3 -B e2e/execution-suite.py --scope publication` : 18 campagnes, 312 groupes, zéro échec/skip |
+
+La [preuve finale](evidence/publication-console-dev-2026-11-07.json) recoupe les
+rapports frais avec les sources et l’image, les 54 captures inspectées, les
+archives conservées, le nettoyage et les notes appliquées au SPARK.

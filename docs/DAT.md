@@ -260,8 +260,8 @@ gérées par la console. Aucun accès d'administration à la FORGE.
 
 ## Consultation des exécutions
 
-La fiche React de fonction possède trois destinations : Configuration,
-Instances et Invocations. Les deux dernières utilisent les routes d’observation
+La fiche React de fonction possède quatre destinations : Configuration, Code
+et révisions, Instances et Invocations. Les deux dernières utilisent les routes d’observation
 existantes, cinq lignes par page et rafraîchissement manuel. Les détails de
 journal sont natifs et rendus comme texte ; aucune mesure manquante ne devient
 une allocation ou un zéro. Le [contrat](CONSOLE_EXECUTION.md) est vérifié par
@@ -283,3 +283,22 @@ suit la session habituelle de console. Aucune nouvelle route serveur, migration
 ni variable de cellule. La [preuve](evidence/manual-console-dev-2026-11-07.json)
 recoupe 101 sources, 27 fichiers embarqués et l’identité du backend avec la
 preuve moteur, puis 48 groupes et 33 captures.
+
+## Publication depuis la console
+
+La facette **Code et révisions** utilise la préparation serveur du code, qui
+capture les ressources, variables, secrets et événements courants. L’UUID connu
+avant le POST corrèle suivi et upload ; la consultation au retour ne rejoue pas
+le transport. La dernière lecture du candidat remplace sa ligne dans la liste.
+Les révisions sont paginées localement, les candidats côté serveur. Une erreur
+de mutation déclenche une relecture avant toute nouvelle action ; les succès
+antérieurs disparaissent lors des consultations explicites.
+
+Le [contrat](CONSOLE_PUBLICATION.md) conserve les refus de droits et de version
+au contrôle. Aucun schéma ni dépendance supplémentaire n’est nécessaire.
+La [preuve finale](evidence/publication-console-dev-2026-11-07.json) recoupe
+18 campagnes et 312 groupes, 144 sources et 54 captures inspectées, avec les
+mêmes sources et image avant/après chaque campagne. Le manuel à onze chapitres
+est reconstruit et comparé au document source. Les trois notes maintenues dans
+`qualification/spark-notes/` sont appliquées par la console SPARK puis relues.
+Cette livraison ne clôt pas les preuves résiduelles et fonctionnalités du backlog.

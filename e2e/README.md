@@ -296,8 +296,9 @@ opérateur sur le SPARK, exécuter séparément `node e2e/code-publications.mjs`
 campagnes utilisent `publication-fixtures.mjs` pour empaqueter les handlers
 originaux par l’adaptateur ; aucun code applicatif n’est remplacé.
 
-Dix groupes API couvrent droits, versions, UUID, conservation effective,
-abandon, conflits, révocation et courses. Quatorze groupes navigateur couvrent
+La campagne intermédiaire comportait dix groupes API couvrant droits, versions,
+UUID, conservation effective, abandon, conflits, révocation et courses. Ses
+quatorze groupes navigateur couvraient
 la création depuis la console, les vrais ZIP, import et logs expurgés,
 publication A/B et activation A invoquée, historique, pagination, panne réseau,
 session absente, rechargement pendant l’upload et retour à une préparation
@@ -326,7 +327,12 @@ mode et son inspect exigent l’UUID exact du namespace de publication.
 
 La commande `python3 -B e2e/execution-suite.py --scope publication` réunit les
 campagnes moteur et console en série, sans répéter les campagnes communes :
-dix-huit campagnes, 312 groupes attendus. Son rapport autonome est
+dix-huit campagnes, 312 groupes réussis dans la qualification finale. Son rapport autonome est
 `.local/e2e/publication-regressions.json`. Chaque rapport doit être frais,
 complet et nettoyé ; sources locales/distantes et image restent identiques.
-Cette suite constitue le prochain contrôle avant clôture de SLS-063.
+La [preuve finale](../docs/evidence/publication-console-dev-2026-11-07.json) recoupe
+144 sources, l’image déployée, les ressources web servies, les archives conservées
+et l’absence de ressources actives de campagne. Les 54 captures sont inspectées.
+La lecture du même candidat est cohérente entre liste et suivi ; cinq gestes
+constatent un succès réel puis son effacement après une seule consultation.
+Les rapports et images antérieurs sont conservés comme checkpoints distincts.

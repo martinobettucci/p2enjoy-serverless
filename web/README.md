@@ -15,12 +15,13 @@ séparées, détails des appels et journaux expurgés, pagination et rafraîchis
 manuel. Le [contrat](../docs/CONSOLE_EXECUTION.md) et la
 [preuve](../docs/evidence/console-execution-dev-2026-11-07.json) recoupent 12 groupes
 propres à ces vues et 28 groupes de régression, avec 25 captures relues.
-La facette **Code et révisions** est déployée en qualification : ZIP/handler,
+La facette **Code et révisions** est déployée et vérifiée : ZIP/handler,
 suivi de publication, abandon, métadonnées, activation et suppression.
 Son [contrat](../docs/CONSOLE_PUBLICATION.md) conserve les réglages et secrets
-côté serveur. Les 14 groupes navigateur passent avec les dix groupes API et
-les huit groupes du manuel : [preuve intermédiaire](../docs/evidence/publication-console-checkpoint-dev-2026-11-07.json).
-Les pannes résiduelles et les régressions complètes restent à terminer.
+côté serveur. Ses 21 groupes navigateur passent, avec les dix groupes API et
+les huit groupes du manuel, dans la [preuve finale](../docs/evidence/publication-console-dev-2026-11-07.json) :
+18 campagnes en série, 312 groupes réels et 54 captures inspectées. Les deux
+écarts de lecture relevés à la première revue sont corrigés et requalifiés.
 
 Depuis la racine, avec la session SSO réelle :
 
@@ -48,5 +49,5 @@ guide avec chaque comportement utilisateur, puis reconstruire la console.
 [preuve initiale](../docs/evidence/manual-console-dev-2026-11-07.json) précède la
 publication UI : 48 groupes, zéro échec/skip et 33 captures relues. La suite
 de console comprend désormais aussi les 21 groupes de publication.
-Le guide compte maintenant onze chapitres ; sa concordance est rejouée dans
-la preuve intermédiaire de publication.
+Le guide compte onze chapitres ; sa concordance est rejouée dans la preuve
+finale de publication : empreinte, chapitres, 28 paragraphes, tableau et commande.
