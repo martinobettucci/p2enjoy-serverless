@@ -2,9 +2,13 @@
 
 ## [Non publié]
 
-- Contrat de publication depuis la console : conservation serveur de la
-  configuration, suivi des candidats et gestion des révisions (SLS-063).
-  Implémentation et qualification encore ouvertes.
+- Publication ZIP depuis la console, conservation serveur de la configuration,
+  suivi corrélé des candidats et abandon explicite, historique, activation et
+  suppression des révisions. Le manuel décrit ces parcours (SLS-063).
+- 32 groupes ciblés réels passent : dix API, quatorze navigateur et huit manuel,
+  avec 21 captures relues. Sources, image et nettoyages recoupés dans la
+  [preuve intermédiaire](docs/evidence/publication-console-checkpoint-dev-2026-11-07.json).
+  Pannes résiduelles et régression complète encore ouvertes.
 
 - Manuel d’usage intégré à la navigation, sommaire et ancres accessibles,
   rendu responsive compilé depuis l’unique source `docs/manual.md`.

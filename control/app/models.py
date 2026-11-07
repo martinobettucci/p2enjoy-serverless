@@ -177,5 +177,16 @@ class DeploymentCreate(Strict):
     events:Events=Field(default_factory=Events)
 
 
+# @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md
+class CodeDeploymentCreate(Strict):
+    handler:str=Field(min_length=3,max_length=256)
+    deployment_id:UUID
+
+    @field_validator('handler')
+    @classmethod
+    def handler_path(cls,value):
+        return FunctionConfig.handler_path(value)
+
+
 class Rollback(Strict):
     revision_id:UUID

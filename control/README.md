@@ -171,3 +171,9 @@ Le build embarque aussi le manuel d’usage, généré depuis `docs/manual.md` e
 accessible dans la navigation de console. Aucune route API ni migration ajoutée.
 La [preuve du manuel](../docs/evidence/manual-console-dev-2026-11-07.json) rejoue
 les parcours de console et ajoute huit groupes : 48 réussites au total.
+
+La publication UI ajoute la préparation du code conservant la configuration,
+la liste administrateur des candidats et l’abandon des seuls candidats préparés.
+Le schéma reste inchangé. Dix groupes API, quatorze navigateur et huit manuel
+passent dans la [preuve intermédiaire](../docs/evidence/publication-console-checkpoint-dev-2026-11-07.json).
+La qualification finale de [SLS-063](../docs/CONSOLE_PUBLICATION.md) reste ouverte.

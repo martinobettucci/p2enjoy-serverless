@@ -65,7 +65,7 @@ redémarre le conteneur de contrôle du SPARK DEV pour éprouver la persistance.
 la latence réelle de Chromium pour vérifier un envoi en cours ; il ne remplace
 aucune réponse. Les deux nettoient uniquement les objets qu'ils ont créés.
 
-Les scripts et preuves sont ajoutés au rythme de SLS-020 à SLS-062. Les premiers
+Les scripts et preuves sont ajoutés au rythme de SLS-020 à SLS-063. Les premiers
 contrôles publics, les 19 groupes API administrateur et les 11 parcours UI
 ont réussi avec nettoyage confirmé. La [preuve de gestion](../docs/evidence/control-management-dev-2026-11-06.json)
 recoupe l'image et les sources ; les cycles de rôles et de clés SSO ainsi que
@@ -274,16 +274,42 @@ réelle : leur absence doit rester visible, jamais devenir un zéro.
 ## Manuel intégré
 
 `node e2e/manual-ui.mjs` ouvre le manuel depuis l’accueil réel et sa navigation.
-Huit groupes vérifient le contenu intégral (empreinte, neuf chapitres, 22
+Huit groupes vérifient le contenu intégral (empreinte, chapitres,
 paragraphes et tableau), le clavier, le focus, les ancres rechargées, les formats
 desktop/tablette/mobile, l’agrandissement mesuré du corps de texte, l’absence de
 session et le retour aux namespaces. Les erreurs JavaScript sont contrôlées
 après fermeture du navigateur, avant de déclarer le rapport terminé.
 
-La [preuve courante](../docs/evidence/manual-console-dev-2026-11-07.json) recoupe
+La [preuve initiale](../docs/evidence/manual-console-dev-2026-11-07.json) recoupe
 48 groupes exécutés en série et 33 captures relues. Le tiroir mobile ouvert
 dispose d’une capture visuelle complémentaire prise depuis l’accueil réel ;
 elle n’ajoute pas un groupe au total. Les sources du manuel, du build Vite et
 du filtre de contexte Docker font partie de l’inventaire avant/après chaque
 campagne. Le parseur Markdown n’est pas utilisé par le client de preuve pour
 fabriquer son attendu : paragraphes, titres et cellules sont recoupés au document.
+
+## Publication du code dans la console
+
+Depuis la racine, après synchronisation de `publication-state.py` et des helpers
+opérateur sur le SPARK, exécuter séparément `node e2e/code-publications.mjs`,
+`node e2e/publication-ui.mjs` puis `node e2e/manual-ui.mjs`. Les deux premières
+campagnes utilisent `publication-fixtures.mjs` pour empaqueter les handlers
+originaux par l’adaptateur ; aucun code applicatif n’est remplacé.
+
+Dix groupes API couvrent droits, versions, UUID, conservation effective,
+abandon, conflits, révocation et courses. Quatorze groupes navigateur couvrent
+la création depuis la console, les vrais ZIP, import et logs expurgés,
+publication A/B et activation A invoquée, historique, pagination, panne réseau,
+session absente, rechargement pendant l’upload et retour à une préparation
+après interruption de sa réponse. Ce dernier scénario ajoute une latence
+Chromium réelle, quitte le document après observation du commit par l’API,
+puis retrouve le même UUID sans renvoyer le ZIP. Il ne remplace aucune réponse.
+
+Les campagnes suppriment leurs objets, purgent leurs archives de stockage par
+le helper borné et recensent séparément le code conservé. La
+[preuve intermédiaire](../docs/evidence/publication-console-checkpoint-dev-2026-11-07.json)
+recoupe 32 groupes, 21 captures relues et 109 sources inchangées pendant les
+campagnes. La capture nommée `validating` montre encore le libellé de réception ;
+la validation est observée par l’API, sans preuve visuelle de ce libellé dans
+ce checkpoint. Restent les pannes de mutation/nettoyage, les longs journaux,
+le candidat étranger et l’intégration à la régression complète.

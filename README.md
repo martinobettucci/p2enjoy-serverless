@@ -114,6 +114,11 @@ consulte depuis **Manuel d’usage** dans sa navigation, à
 Ce même fichier est compilé avec chaque version de la console ; le contrat local
 impose sa mise à jour à chaque évolution fonctionnelle. La [preuve du manuel](docs/evidence/manual-console-dev-2026-11-07.json)
 passe 48 groupes réels avec 33 captures relues.
+La facette **Code et révisions** permet maintenant de publier une archive ZIP,
+suivre ou abandonner une préparation, activer et supprimer des révisions.
+Le manuel comprend ces nouveaux parcours. Leur [preuve intermédiaire](docs/evidence/publication-console-checkpoint-dev-2026-11-07.json)
+passe 32 groupes ciblés avec 21 captures relues ; la qualification complète
+de cette unité reste ouverte.
 
 **Il est interdit de lancer l'application avec un profil PREPROD ou PROD,
 quelles que soient les circonstances.**

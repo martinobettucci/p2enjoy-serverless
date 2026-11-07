@@ -263,9 +263,13 @@ guide autonome, rendu responsive et preuve E2E de concordance avec le document.
 
 ## SLS-063
 
-Statut : [~] — contrat arrêté ; implémentation et preuves à produire.
+Statut : [~] — déployé en DEV ; 32 groupes ciblés réussis et 21 captures relues.
+[Preuve intermédiaire](evidence/publication-console-checkpoint-dev-2026-11-07.json).
 
 [Publication dans la console](CONSOLE_PUBLICATION.md). ZIP et handler avec
 conservation serveur de la configuration, suivi corrélé et abandon des candidats
 préparés, historique, activation et suppression des révisions. Parcours UI réels,
 droits et conflits, invocation après activation, reprise et régressions complètes.
+Restent : réponses perdues d’activation/suppression, nettoyage physique refusé
+puis repris, candidat d’une autre fonction, logs longs/tronqués sur mobile,
+régressions complètes et notes SPARK. Cette preuve ciblée ne clôt pas l’unité.

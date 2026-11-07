@@ -15,17 +15,24 @@ séparées, détails des appels et journaux expurgés, pagination et rafraîchis
 manuel. Le [contrat](../docs/CONSOLE_EXECUTION.md) et la
 [preuve](../docs/evidence/console-execution-dev-2026-11-07.json) recoupent 12 groupes
 propres à ces vues et 28 groupes de régression, avec 25 captures relues.
-La publication et la gestion des révisions depuis l’UI restent à réaliser.
+La facette **Code et révisions** est déployée en qualification : ZIP/handler,
+suivi de publication, abandon, métadonnées, activation et suppression.
+Son [contrat](../docs/CONSOLE_PUBLICATION.md) conserve les réglages et secrets
+côté serveur. Les 14 groupes navigateur passent avec les dix groupes API et
+les huit groupes du manuel : [preuve intermédiaire](../docs/evidence/publication-console-checkpoint-dev-2026-11-07.json).
+Les pannes résiduelles et les régressions complètes restent à terminer.
 
 Depuis la racine, avec la session SSO réelle :
 
 ```sh
 node e2e/execution-ui.mjs
+node e2e/publication-ui.mjs
 python3 -B e2e/execution-suite.py --scope console
 ```
 
-Ces deux commandes sont des campagnes distinctes ; la seconde rejoue aussi
-la première avec les parcours publics, de connexion et de gestion.
+Ces commandes sont des campagnes distinctes ; la suite rejoue les observations
+avec les parcours publics, de connexion, de gestion et du manuel. La publication
+reste pour ce checkpoint une commande ciblée distincte de cette suite.
 
 ## Manuel d’usage
 
@@ -38,4 +45,6 @@ guide avec chaque comportement utilisateur, puis reconstruire la console.
 
 `node e2e/manual-ui.mjs` vérifie huit groupes réels. La suite de console ajoute
 cette campagne aux quatre précédentes : 48 groupes, zéro échec/skip et 33 captures
-relues dans la [preuve courante](../docs/evidence/manual-console-dev-2026-11-07.json).
+relues dans la [preuve initiale](../docs/evidence/manual-console-dev-2026-11-07.json).
+Le guide compte maintenant onze chapitres ; sa concordance est rejouée dans
+la preuve intermédiaire de publication.

@@ -1,7 +1,9 @@
 # Publication du code dans la console
 
-Contrat SLS-063, en réalisation. Complète [DEPLOYMENT](DEPLOYMENT.md) et
-[CONTROL](CONTROL.md) ; les preuves de cette unité restent à produire.
+Contrat SLS-063, déployé en qualification. Complète [DEPLOYMENT](DEPLOYMENT.md)
+et [CONTROL](CONTROL.md). La [preuve intermédiaire](evidence/publication-console-checkpoint-dev-2026-11-07.json)
+recoupe 32 groupes ciblés et 21 captures relues ; les pannes résiduelles et la
+campagne complète restent nécessaires avant clôture.
 
 ## Parcours et conservation
 

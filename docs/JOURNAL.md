@@ -1704,3 +1704,37 @@ parcours. Le manuel évoluera avec l’implémentation ; aucune preuve n’est e
 revendiquée pour cette unité. La réponse précédente au sujet du manuel était
 un état des lieux, sans progrès supplémentaire du produit ; cette unité reprend
 le travail concret après revalidation de l’arbre propre à d8e7dcf.
+
+### Publication UI — checkpoint ciblé du 7 novembre
+
+Les routes additives et la facette Code et révisions sont déployées. La
+préparation capture les réglages et secrets côté serveur ; le navigateur suit
+l’UUID créé avant envoi. Le manuel passe à onze chapitres et décrit les gestes
+de publication et d’historique. Aucun schéma ni dépendance n’est ajouté.
+
+Les campagnes ont révélé des défauts de preuve et d’interface : lecture de
+réponse après navigation, ancienne page de résultats affichée sous le nouveau
+numéro, réessai de la même page après erreur sans nouvelle lecture. Le banc
+recoupe désormais les créations par leurs noms/UUID et les listes par leurs
+identifiants exacts. L’interface ne change le numéro affiché qu’avec les données
+reçues, rend immédiatement le chargement visible et relit aussi une sélection
+identique. Une préparation refusée à 4xx conserve le fichier et le formulaire.
+
+La rupture de réponse est éprouvée en quittant réellement le document après
+commit observé ; la latence Chromium seule ne garantissait pas l’annulation
+de la requête. Le retour retrouve le même candidat préparé sans upload.
+Les rapports d’essais échoués et leurs nettoyages sont conservés sous .local.
+
+La preuve intermédiaire recoupe dix groupes API, quatorze navigateur et huit
+manuel, tous réussis sans skip. Les 109 sources sont restées identiques au build
+durant ces campagnes ; image, fichiers embarqués et ressources servies sont
+recoupés. Deux revues indépendantes inspectent 21 captures et retrouvent l’arbre
+inchangé. La capture nommée validating montre encore la réception et ne prouve
+donc pas le libellé de validation. Les dimensions JPEG ne sont pas présentées
+comme des tailles de viewport. Les 336 archives de code sont inventoriées ;
+aucun objet actif, bail, réservation, instance ou workspace de test ne subsiste.
+
+SLS-063 reste en cours : réponses perdues de mutation, 503 de nettoyage réel,
+candidat d’une autre fonction, journal long/tronqué mobile, régression complète
+et notes SPARK restent à terminer. Ce commit constitue un checkpoint conforme
+au §13 de la méthode, sans clôture d’unité. Aucun remote Git n’est configuré.

@@ -1,7 +1,7 @@
 # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle | docs/SCHEMA.md#déploiements-et-révisions
 """Authenticated publication, bounded admission and installation-owned recovery."""
 import asyncio
-from contextlib import suppress
+from contextlib import closing,suppress
 import fcntl
 import json
 import logging
@@ -21,7 +21,7 @@ from starlette.requests import ClientDisconnect
 from .artifacts import MAX_ZIP,MAX_TOTAL,MAX_ENTRIES,ArtifactError,open_directory,remove_tree
 from .db import audit
 from .function_operations import storage_configuration
-from .models import DeploymentCreate,Rollback
+from .models import CodeDeploymentCreate,DeploymentCreate,Rollback
 from .validator import Docker,ValidationError,application_environment,validate,LIMIT
 
 RESERVATION=MAX_ZIP+MAX_TOTAL+(2*MAX_ENTRIES+2)*4096
@@ -335,33 +335,75 @@ class Deployments:
             await self.identity.authorize(request,'','read')
             raise
 
+    # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#parcours-et-conservation
+    async def prepare(self,request,key,data):
+        function=self.database.one('SELECT * FROM functions WHERE id=? AND deleted_at IS NULL',(str(key),))
+        right='update' if self.database.one('SELECT 1 FROM revisions WHERE function_id=?',(str(key),)) else 'create'
+        authorization=await self.identity.operation(request,function['service_id'] if function else '',right,str(key))
+        self.expire();now=time.time()
+        code_only=isinstance(data,CodeDeploymentCreate)
+        candidate=str(data.deployment_id) if code_only else str(uuid4())
+        with self.database.transaction() as db:
+            function=get(db,'functions',key);service=get(db,'services',function['service_id'])
+            self.operations.function_available(db,str(key))
+            current_right='update' if db.execute('SELECT 1 FROM revisions WHERE function_id=?',(str(key),)).fetchone() else 'create'
+            if current_right!=right:raise HTTPException(409,'La fonction a reçu une première révision pendant la préparation.')
+            self.identity.recheck(db,authorization,service['id'],right,str(key));required_version(request,function)
+            if db.execute('SELECT 1 FROM deployments WHERE id=?',(candidate,)).fetchone():
+                raise HTTPException(409,'Cet identifiant de publication existe déjà. Consultez son état.')
+            if db.execute("SELECT count(*) FROM deployments WHERE state IN ('prepared','receiving','validating')").fetchone()[0]>=64:
+                raise HTTPException(429,'Trop de candidats en attente.',headers={'Retry-After':'60'})
+            if db.execute("SELECT count(*) FROM deployments WHERE function_id=? AND state IN ('prepared','receiving','validating')",(str(key),)).fetchone()[0]>=8:
+                raise HTTPException(429,'Cette fonction possède déjà huit candidats.',headers={'Retry-After':'60'})
+            if code_only:
+                config=json.loads(function['config_json'])|{'handler':data.handler}
+                values={'environment':json.loads(function['environment_json']),'secrets':self.vault.open(function['secrets_cipher'])}
+                revision=get(db,'revisions',function['active_revision_id']) if function['active_revision_id'] else None
+                events=json.loads(revision['events_json']) if revision else {'http':[],'schedules':[]}
+            else:
+                config=data.config.model_dump();values=data.configuration.model_dump();events=data.events.model_dump()
+            self.effective(service,values)
+            if not events['http']:events['http']=[{'path':function['name'],'methods':METHODS,'implicit':True}]
+            db.execute('INSERT INTO deployments VALUES (?,?,?,?,?,?,?,?,?,?,?,NULL,NULL,0,?,?,NULL,NULL)',
+                (candidate,str(key),service['id'],authorization.actor.kind,authorization.actor.id,function['updated_at'],service['updated_at'],
+                 self.vault.seal({'config':config,'configuration':values}),json.dumps(events),right,'prepared',now,now+3600))
+            audit(db,authorization.actor,'deployment.prepare',str(key),service['id'],{'deployment_id':candidate})
+        return self.public(self.candidate(candidate))
+
     def routes(self):
         api=APIRouter(prefix='/api')
 
         @api.post('/functions/{key}/deployments',status_code=201)
         async def prepare(request:Request,key:UUID,data:DeploymentCreate):
-            function=self.database.one('SELECT * FROM functions WHERE id=? AND deleted_at IS NULL',(str(key),))
-            right='update' if self.database.one('SELECT 1 FROM revisions WHERE function_id=?',(str(key),)) else 'create'
-            authorization=await self.identity.operation(request,function['service_id'] if function else '',right,str(key))
-            self.expire();now=time.time();candidate=str(uuid4())
+            return await self.prepare(request,key,data)
+
+        @api.post('/functions/{key}/code-deployments',status_code=201)
+        async def prepare_code(request:Request,key:UUID,data:CodeDeploymentCreate):
+            return await self.prepare(request,key,data)
+
+        @api.get('/functions/{key}/deployments')
+        async def candidates(request:Request,key:UUID,limit:int=Query(20,ge=1,le=100),offset:int=Query(0,ge=0,le=10000)):
+            await self.identity.admin(request)
+            self.expire()
+            with closing(self.database.connect()) as db:
+                db.execute('BEGIN')
+                get(db,'functions',key)
+                total=db.execute('SELECT count(*) FROM deployments WHERE function_id=?',(str(key),)).fetchone()[0]
+                rows=db.execute('SELECT * FROM deployments WHERE function_id=? ORDER BY created_at DESC,id LIMIT ? OFFSET ?',(str(key),limit,offset)).fetchall()
+                return {'items':[self.public(row) for row in rows],'total':total}
+
+        @api.delete('/deployments/{key}')
+        async def abandon(request:Request,key:UUID):
+            row=await self.read_candidate(request,key);authorization=await self.access(request,row)
+            self.expire()
             with self.database.transaction() as db:
-                function=get(db,'functions',key);service=get(db,'services',function['service_id'])
-                self.operations.function_available(db,str(key))
-                current_right='update' if db.execute('SELECT 1 FROM revisions WHERE function_id=?',(str(key),)).fetchone() else 'create'
-                if current_right!=right:raise HTTPException(409,'La fonction a reçu une première révision pendant la préparation.')
-                self.identity.recheck(db,authorization,service['id'],right,str(key));required_version(request,function)
-                if db.execute("SELECT count(*) FROM deployments WHERE state IN ('prepared','receiving','validating')").fetchone()[0]>=64:
-                    raise HTTPException(429,'Trop de candidats en attente.',headers={'Retry-After':'60'})
-                if db.execute("SELECT count(*) FROM deployments WHERE function_id=? AND state IN ('prepared','receiving','validating')",(str(key),)).fetchone()[0]>=8:
-                    raise HTTPException(429,'Cette fonction possède déjà huit candidats.',headers={'Retry-After':'60'})
-                self.effective(service,data.configuration.model_dump())
-                events=data.events.model_dump()
-                if not events['http']:events['http']=[{'path':function['name'],'methods':METHODS,'implicit':True}]
-                db.execute('INSERT INTO deployments VALUES (?,?,?,?,?,?,?,?,?,?,?,NULL,NULL,0,?,?,NULL,NULL)',
-                    (candidate,str(key),service['id'],authorization.actor.kind,authorization.actor.id,function['updated_at'],service['updated_at'],
-                     self.vault.seal({'config':data.config.model_dump(),'configuration':data.configuration.model_dump()}),json.dumps(events),right,'prepared',now,now+3600))
-                audit(db,authorization.actor,'deployment.prepare',str(key),service['id'],{'deployment_id':candidate})
-            return self.public(self.candidate(candidate))
+                row=dict(db.execute('SELECT * FROM deployments WHERE id=?',(str(key),)).fetchone())
+                self.identity.recheck(db,authorization,row['service_id'],row['required_right'],row['function_id'])
+                get(db,'functions',row['function_id']);get(db,'services',row['service_id'])
+                if row['state']!='prepared':raise HTTPException(409,'Seul un candidat en attente d’archive peut être abandonné.')
+                db.execute("UPDATE deployments SET state='failed',error_code='candidate_abandoned',configuration_cipher=NULL,completed_at=? WHERE id=?",(time.time(),str(key)))
+                audit(db,authorization.actor,'deployment.abandon',row['function_id'],row['service_id'],{'deployment_id':str(key)})
+            return self.public(self.candidate(key))
 
         @api.get('/deployments/{key}')
         async def status(request:Request,key:UUID):

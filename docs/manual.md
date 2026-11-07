@@ -69,10 +69,51 @@ une nouvelle valeur.
 
 Les appels portent `X-Serverless-Token`. L'en-tête `Authorization` reste
 disponible pour l'authentification métier du handler. La publication du code
-s’effectue avec la commande `deploy` de l’adaptateur ou avec l’API.
-Les vues de publication ne sont pas encore disponibles dans la console.
+s’effectue dans **Code et révisions**, avec la commande `deploy` de l’adaptateur
+ou avec l’API.
 Les fonctions publiées sont invocables. Leurs instances et journaux se
 consultent dans les facettes Instances et Invocations de la fiche de fonction.
+
+## Publier une archive dans la console
+
+Dans la fiche de fonction, ouvrir **Code et révisions**, puis **Publier une
+archive**. Choisir un ZIP de 64 Mio maximum contenant le code et ses dépendances
+prêtes à exécuter, puis vérifier le handler : chemin du module et export à appeler.
+Confirmer l’archive et la fonction affichées. Les ressources, variables, secrets,
+volumes et routes courants sont conservés ; le déploiement d’un manifeste complet
+avec l’adaptateur permet aussi de modifier ces paramètres.
+
+La tentative affiche son identifiant et les états réellement observés : attente
+d’archive, réception, validation, publication ou échec. **Validation et journal**
+ouvre le résultat de chargement et les traces expurgées. **Actualiser** relit l’état.
+L’adresse de la page conserve la tentative suivie ; elle peut être réouverte.
+
+Quitter ou recharger la page peut interrompre l’envoi. Revenir sur cette adresse
+pour consulter le résultat avant de republier : un problème réseau n’implique
+pas que la publication a échoué. Le navigateur ne renvoie pas automatiquement
+l’archive. Une tentative encore en attente d’archive peut être abandonnée avec
+confirmation ; choisir ensuite une nouvelle archive pour recommencer. Une
+tentative absente se ferme avec **Fermer le suivi** avant une nouvelle publication.
+
+Si la fonction ou son service a changé entre préparation et publication, le
+serveur refuse le candidat. Relire la configuration avant une nouvelle tentative.
+Une publication enregistrée peut encore attendre une confirmation de stockage ;
+son message reste visible jusqu’à résolution de cette opération.
+
+## Gérer les révisions
+
+**Code et révisions** affiche la révision active et les révisions conservées par
+pages de cinq. Les métadonnées donnent le handler, le runtime, l’espace stocké,
+l’empreinte SHA256 de l’archive et ses événements. **Activer cette révision**
+revient au code choisi après confirmation, en conservant les ressources, variables,
+secrets et volumes courants. Les événements de cette révision redeviennent actifs.
+
+**Supprimer cette révision** retire définitivement une archive de code inactive.
+La révision active ne peut pas être supprimée ; une instance qui utilise encore
+une ancienne révision peut également empêcher sa suppression. Attendre son arrêt,
+puis actualiser. En cas de réponse perdue, relire l’historique avant toute nouvelle
+opération. Un nettoyage physique peut rester à reprendre alors que la révision
+est déjà retirée de la liste ; le message du serveur le précise.
 
 ## Publier le code avec l’adaptateur
 

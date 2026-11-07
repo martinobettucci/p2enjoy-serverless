@@ -56,7 +56,7 @@ export function Pagination({page, size, count, change}) {
   </nav>;
 }
 
-export function DialogForm({title, initial, submitLabel = 'Enregistrer', children, onSubmit, onClose, confirmation}) {
+export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirmationLabel = 'Confirmer la création', children, onSubmit, onClose, confirmation}) {
   const [value, setValue] = useState(initial);
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -101,7 +101,7 @@ export function DialogForm({title, initial, submitLabel = 'Enregistrer', childre
           <button className="danger" type="button" onClick={onClose}>Abandonner</button>
         </div></div> : review ? <div className="confirm" role="group" aria-label="Confirmation de l’opération">
           <p>{confirmation(value)}</p><div className="actions"><button ref={reviewRef} type="button" onClick={() => setReview(false)} disabled={busy}>Revenir à la saisie</button>
-            <button className="primary" type="button" disabled={busy} onClick={() => submit(null,true)}>{busy ? 'Enregistrement…' : 'Confirmer la création'}</button></div>
+            <button className="primary" type="button" disabled={busy} onClick={() => submit(null,true)}>{busy ? 'Enregistrement…' : confirmationLabel}</button></div>
         </div> : <div className="dialog-actions"><button type="button" onClick={close} disabled={busy}>Annuler</button>
         <button className="primary" disabled={busy}>{busy ? 'Enregistrement…' : submitLabel}</button></div>}
     </form>

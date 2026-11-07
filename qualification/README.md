@@ -96,6 +96,10 @@ concurrentes pendant la validation Docker.
 `artifacts/log-secret-then-throw.cjs` écrit réellement le secret injecté sur
 stderr puis échoue à l'import : la preuve exige le préfixe conservé et la
 valeur expurgée. Le module `throws.cjs` éprouve seulement l'exception d'import.
+`artifacts/publication.cjs` relit les métadonnées de sa vraie révision, les
+variables, l’empreinte du secret et un compteur sur /data. Les campagnes
+de publication l’invoquent pour vérifier le code actif et la conservation
+de la configuration après publication et retour à une révision antérieure.
 
 | Fonction | Contrat à qualifier |
 | --- | --- |
