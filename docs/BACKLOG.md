@@ -290,8 +290,8 @@ hors verrou global. Migration 004 agent, installation DEV et preuves réelles.
 
 ## SLS-065
 
-Statut : [~] — API, console et manuel déployés ; qualification ciblée réussie,
-preuves de pannes et régressions élargies encore ouvertes.
+Statut : [~] — API, console et manuel déployés ; défaut de nettoyage reproduit
+sur archive historique, correction et régressions élargies en cours.
 
 Après SLS-064 : catalogue consultable après suppression des parents, purge
 administrateur confirmée et vidage sous droit Update ; drainage et relecture
@@ -318,7 +318,13 @@ purge, refus du transport agent après commit, writer contrôle occupé après c
 et redémarrage effectif par la garde indépendante. Les sept groupes de reprise
 existants repassent avec le helper renforcé. Les six fonctions sont purgées,
 leurs fichiers et ressources absents, services et sockets rétablis.
-Restent l’apparition inattendue après `storage_absent`, l’intégration des nouvelles
+La [preuve historique avant correction](evidence/storage-legacy-cleanup-defect-dev-2026-11-07.json)
+confirme l’ancienne publication réelle, la migration et la purge sans registre.
+Elle révèle qu’après apparition d’une ligne agent, le nettoyage général au
+redémarrage efface le code malgré `pending/storage_state_changed`. Les originaux
+sont restaurés et recoupés ; le contrat réserve désormais cet effacement au
+résolveur de purge tant que sa garde existe. La correction reste à qualifier.
+Restent la correction de l’apparition inattendue après `storage_absent`, l’intégration des nouvelles
 campagnes à la suite commune, les régressions élargies et l’actualisation finale
 des notes SPARK.
 SLS-064 seul ne qualifie aucun parcours public d’effacement.

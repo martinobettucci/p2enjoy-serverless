@@ -2179,3 +2179,36 @@ ne peut pas terminer par une purge métier : l’agent conserve même les tombst
 Il est donc cantonné aux registres temporaires, qui seront retirés entièrement.
 La garde sera réellement exercée après le premier déplacement, avant le parcours
 historique complet. Aucune preuve de redémarrage complet du SPARK n’est revendiquée.
+
+### Archive historique — défaut réel du nettoyage général
+
+L’image exacte de `93f88e5` est reconstruite avec ses sources et dépendances.
+Le client Docker actuel diffère seulement par la limite de réponse optionnelle,
+recoupée explicitement. Un premier précontrôle a refusé à tort le mode 0750
+du répertoire de contrôle, avant toute interruption ; il conserve désormais ce
+mode original. Un second essai a rencontré le cwd `/root` inaccessible à Compose
+sous spark-docker ; les originaux ont été restaurés puis le cwd fixé au projet.
+Ces essais restent distingués des groupes fonctionnels.
+
+La mort du pilote après le premier renommage passe : garde indépendante,
+identités des trois répertoires, empreintes logiques des bases et inventaire des
+artefacts identiques, API et agent sains, exécuteur de référence inchangé.
+Le parcours complet ouvre une vraie session SSO de l’ancienne API, publie deux
+ZIP validés dans Docker, supprime les fonctions puis applique 004–006 normalement.
+La session et les archives persistent ; la première purge termine avec absence
+agent persistée et aucun reçu inventé.
+
+Pour la seconde archive, le refus réel d’accès à l’artefact retient la phase
+artifacts. Le protocole `configure` crée réellement une ligne agent, puis les
+permissions sont rétablies. Le reçu reste `pending/storage_state_changed`, mais
+le redémarrage efface le répertoire de révision et libère ses 36 Kio. La
+[preuve avant correction](evidence/storage-legacy-cleanup-defect-dev-2026-11-07.json)
+conserve les relevés intermédiaires, l’échec et la restauration des originaux.
+
+Décision : le nettoyage général laisse les artefacts d’une fonction portant une
+garde de purge à son seul résolveur. Cette règle vaut pour révisions et candidats,
+au démarrage comme en maintenance. Elle empêche de contourner le contrôle du
+stockage tout en permettant le nettoyage après abandon/terminaison de la garde.
+Le contrat CONSOLE_STORAGE est corrigé avant l’implémentation. Le statut SLS-065
+reste ouvert ; aucun résultat de cette campagne en échec n’est présenté comme
+une qualification du comportement corrigé.

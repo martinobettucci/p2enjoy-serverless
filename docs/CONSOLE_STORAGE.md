@@ -115,8 +115,11 @@ La phase artifacts attend l’absence de validation/upload actif avant de
 retirer les seuls fichiers de la fonction. Elle vérifie les références
 d’instances, utilise le nettoyage protégé et synchronise le parent même si
 le répertoire a disparu. Les compteurs ne tombent à zéro qu’après confirmation
-physique. Cette synchronisation s’applique aussi au nettoyage général des
-révisions et candidats, qui peut confirmer des fichiers de cette purge. Le
+physique. Tant qu’une garde de purge existe pour la fonction, le nettoyage
+général des révisions et candidats lui laisse l’effacement de ses artefacts.
+Il ne peut ni retirer ces fichiers ni libérer leurs compteurs, y compris au
+démarrage : cela contournerait la relecture de l’absence/version du stockage.
+Une garde abandonnée ou terminée libère le nettoyage ordinaire. Le
 verrou d’activité commun empêche deux nettoyeurs ou une validation d’agir
 simultanément. Une erreur conserve réservations, garde et diagnostic ; la
 maintenance reprend. Un vidage de cache ne passe pas par cette phase.
