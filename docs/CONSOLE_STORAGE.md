@@ -229,3 +229,10 @@ processus d’arrêt Docker, lui-même borné indépendamment du helper. Il ne p
 ainsi redémarrer avant un arrêt tardif. Le fichier de garde est privé, rattaché
 à son unité et retiré après restauration ; l’observation attend ensuite le
 retour réel de l’API avant de relire le reçu.
+
+Le cas `storage_absent` est produit par une véritable version historique puis
+migré vers le contrôle actuel, dans une installation temporaire dont les données
+sont retirées après preuve de la contradiction attendue. Le
+[contrat de qualification des archives anciennes](STORAGE_LEGACY_PROOF.md)
+définit les versions, la fenêtre DEV, la garde et la conservation de l’installation
+habituelle. Aucun enregistrement absent n’est fabriqué par SQL.

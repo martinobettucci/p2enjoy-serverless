@@ -2155,3 +2155,27 @@ sockets, six timers corrélés inactifs et absence de verrou de redémarrage.
 SLS-065 reste ouverte pour l’apparition inattendue après `storage_absent`, la suite
 commune et ses régressions élargies, puis les notes SPARK. Le produit, le manuel
 et les écrans n’ont pas changé dans ce checkpoint. Aucun remote Git configuré.
+
+### Archive antérieure au registre — décision de banc avant implémentation
+
+Le tour précédent est un progrès vérifié : commit `148bb57`, onze groupes et
+restauration physique recoupés. Le dernier cas de panne SLS-065 exige une archive
+dont l’absence agent a été réellement persistée, puis contredite par une création
+opérateur. L’ancienne version `93f88e5c543be4ad41e4ca22d08cbedbabec73c5` produit
+cet état par ses API ; les schémas de requête et l’absence d’appel agent ont été
+relus. Son authentification et ses dépendances Python sont identiques aux actuelles.
+
+Le briefing actuel du SPARK confirme l’interdiction des surcharges de configuration.
+Décision : conserver les trois répertoires par renommage, propriétaires arrêtés,
+et créer l’installation temporaire aux mêmes chemins officiels. Une garde
+indépendante restaure les originaux par identité avant de relancer l’agent puis
+le contrôle original. La variante à chemins injectés est écartée car elle ne
+respecterait pas ce contrat. Un montage par-dessus les répertoires est également
+écarté, car sa visibilité dans les espaces de montage rootless serait ambiguë.
+
+Le [contrat dédié](STORAGE_LEGACY_PROOF.md) précise les précontrôles, backups,
+étapes partielles, versions, deux archives et nettoyage. Le cas contradictoire
+ne peut pas terminer par une purge métier : l’agent conserve même les tombstones.
+Il est donc cantonné aux registres temporaires, qui seront retirés entièrement.
+La garde sera réellement exercée après le premier déplacement, avant le parcours
+historique complet. Aucune preuve de redémarrage complet du SPARK n’est revendiquée.
