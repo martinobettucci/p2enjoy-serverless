@@ -2888,3 +2888,20 @@ Les documents de statut et les trois propositions de notes sont actualisés
 après gel ; l’empreinte exécutée du contrat et celle livrée restent distinctes.
 Aucune nouvelle variable, secret, migration ou route appliquée. Aucun remote,
 aucun push ; le goal global reste actif.
+
+## 2026-11-08 — Preuve de révocation après publication choisie
+
+Le complément de coupure est livré au commit fdf25a6. Pour qualifier le refus
+réel sans arrêter le contrôle, retenir la CLI locale avant son sixième connect
+443, après ses cinq échanges séquentiels. Le diagnostic du SPARK confirme
+la publication unique ; l’administrateur peut alors révoquer normalement son
+jeton, puis libérer le client et observer son vrai 401. Le résultat doit rester
+published/completed, avec six connexions, UUID/archive inchangés et invocation
+par un autre Read. Ce choix évite de suspendre le contrôle pendant la révocation.
+Décision persistée avant code : pilote enfant PTRACE_TRACEME, syscall metadata
+GET_SYSCALL_INFO, lecture sockaddr seulement, TRACESYSGOOD et EXITKILL. La
+référence Linux confirme EXITKILL et les métadonnées d’entrée/sortie. Aucun
+buffer, syscall, code de retour, DNS ou réponse n’est remplacé. Les délais,
+EOF/erreurs et sorties sont bornés ; fin de l’enfant/groupe avant nettoyage.
+Le client existant et son nettoyage sont réutilisés ; les trois groupes déjà
+qualifiés restent dans le replay de quatre groupes. Aucun changement produit.

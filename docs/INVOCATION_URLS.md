@@ -293,3 +293,30 @@ La fin du traceur seul ne prouve pas celle de Python. Une fin non confirmée
 produit un diagnostic d’état inconnu et interdit le nettoyage automatique.
 Ces chemins d’échec restent distincts du résultat nominal et ne sont pas
 déclarés éprouvés avant leurs scénarios réels.
+
+## Révocation avant le GET facultatif
+
+Étendre le client de transport par un quatrième groupe réel. Un pilote local
+`e2e/adapter-catalogue-barrier.py` démarre la véritable CLI en enfant tracé,
+compte ses appels système connect vers le port 443 et la retient à l’entrée
+du sixième. Les cinq connexions précédentes doivent avoir terminé ; la
+publication unique est recoupée par le diagnostic natif du SPARK avant toute
+révocation. Aucun syscall, argument, registre, mémoire ou résultat réseau
+n’est modifié. Seule l’exécution du client est retenue ; le contrôle reste sain.
+
+L’administrateur révoque alors le jeton utilisé par la CLI par la véritable
+route de gestion et confirme son refus 401. Libérer le client : son GET reçoit
+à son tour le vrai 401, mais son résultat conserve completed=true, published,
+les UUID déjà commis et invocation_urls.state=unavailable. Toujours six
+connexions, aucun renvoi de code. Un autre jeton Read relit le catalogue et
+invoque le handler Docker. Purger les seules ressources possédées.
+
+Le pilote lit seulement les sockaddr des connect et les sorties de son enfant,
+jamais les buffers TLS. Sorties et métadonnées sont bornées. TRACE_SYSGOOD
+identifie les arrêts syscall ; EXITKILL termine la CLI si son pilote disparaît,
+selon la [référence Linux ptrace](https://man7.org/linux/man-pages/man2/ptrace.2.html).
+Une attente de libération a un délai borné ; erreur/EOF entraîne l’arrêt et la
+jonction de l’enfant, puis la disparition du groupe reste exigée par le parent
+avant nettoyage. Cette nouvelle branche ne convertit pas une impossibilité de
+traçage en succès. Ses pannes propres restent non éprouvées avant exécution.
+Le refus 403 n’est pas revendiqué par une révocation, qui produit 401.

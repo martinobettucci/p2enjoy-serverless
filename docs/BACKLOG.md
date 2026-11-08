@@ -479,6 +479,12 @@ Le refus 401/403 reste distinct et non éprouvé après publication ; les branch
 d’expiration/sortie excessive/lancement et nettoyage après réponses perdues
 du nouveau client ne sont pas déclarées acquises.
 
+Prochaine preuve indépendante des domaines : quatrième groupe de transport,
+CLI retenue nativement avant sa sixième connexion, publication durable vérifiée,
+révocation API du jeton puis vrai GET 401 sans requalification ni rejeu.
+Contrat : [révocation avant GET](INVOCATION_URLS.md#révocation-avant-le-get-facultatif).
+Ce groupe reste à implémenter et à qualifier ; aucun refus anticipé.
+
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale
 

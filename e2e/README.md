@@ -54,6 +54,12 @@ La reprise de purge suit l’UUID archivé et le reçu ; le groupe CLI doit avoi
 disparu avant nettoyage. Les branches d’expiration/sortie excessive/lancement
 et les nettoyages après réponses de création/purge perdues restent non éprouvés.
 
+Le quatrième groupe de transport est spécifié dans
+[révocation avant GET](../docs/INVOCATION_URLS.md#révocation-avant-le-get-facultatif) :
+le pilote local adapter-catalogue-barrier.py retient la véritable CLI avant
+sa sixième connexion, puis une révocation API produit le vrai 401. Il reste
+à implémenter/qualifier ; le checkpoint de trois groupes reste distinct.
+
 ## Configuration commune du service
 
 `node e2e/service-configuration.mjs` exige la session SSO réelle de

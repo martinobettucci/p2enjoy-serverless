@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- Refus du catalogue après publication spécifié : retenir la CLI avant sa
+  sixième connexion, révoquer son jeton par l’API puis vérifier le vrai 401
+  avec publication conservée sans rejeu. Implémentation et preuve à réaliser.
+
 - Complément de transport du catalogue qualifié en DEV : trois groupes réels
   avec garde indépendante et coupures après publication, puis treize groupes
   de régression, tous réussis. Les vrais HTTP 502 conservent la publication
