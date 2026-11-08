@@ -3069,3 +3069,22 @@ pour exiger explicitement 415 avant corps, puis vingt trames complètes pour le
 même refus. Serveur, superviseur, handlers et assertions métier inchangés.
 Revue, preuve ciblée des onze groupes et résolution de l’entrée précèdent
 un replay complet explicite ; cet arrêt ne devient pas une suite réussie.
+
+## 2026-11-08 — INC-002 corrigée et éprouvée sur le vrai canal
+
+La revue readonly ne relève pas de défaut bloquant dans la trame client et
+sa lecture bornée. La preuve ciblée termine à zéro : onze groupes de cycle de
+vie, cleanup vrai, zéro échec/skip ; vrai 415 avant corps puis vingt trames
+complètes donnant chacune 415, sans relance. Les assertions antérieures du
+dernier groupe passent aussi. Les 196 sources et les images restent stables
+avant/après ; EXECUTION entre désormais dans l’index des contrats recoupés.
+Le relevé natif confirme le répertoire temporaire, conteneurs et réseaux
+d’instances absents, les deux services sains et l’agent actif.
+
+Issue INC-002 : corrigée dans le client, avec contrat, commentaires, revue et
+[preuve ciblée](evidence/private-channel-lifecycle-dev-2026-11-08.json).
+Le serveur et les composants exécutés sont inchangés. La réponse de l’arrêt
+initial reste inconnue ; la preuve ne lui attribue aucun 415 rétroactif.
+Le premier essai conserve ses 101 groupes complets et dix groupes partiels,
+sans les additionner à une campagne complète. L’entrée est retirée et le
+registre devenu vide supprimé ; le replay commun demeure à exécuter.

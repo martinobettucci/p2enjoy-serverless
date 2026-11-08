@@ -79,6 +79,15 @@ ce seul scénario. La campagne dispose d’une alarme indépendante de 90 second
 Les rapports sont `instances-proof.json` et `lifecycle-proof.json` ; `completed`
 et `cleanup` doivent valoir true, `failed` et `skipped` zéro.
 
+Le [complément du canal privé](../docs/evidence/private-channel-lifecycle-dev-2026-11-08.json)
+rejoue les onze groupes de cycle de vie sur le même serveur. Le client envoie
+ses petites requêtes complètes sur le vrai socket et lit la réponse bornée :
+415 reçu avant le corps annoncé, puis vingt vrais 415 sans rejeu. Cela corrige
+un BrokenPipe du client qui séparait en-têtes et corps ; sa cause exacte reste
+une inférence, faute de réponse lue dans l’arrêt initial. Cet arrêt est conservé
+séparément, avec dix groupes partiels et nettoyage natif recoupé. Aucun code
+du pilote, du superviseur ou des handlers ne change pour ce complément.
+
 Ces preuves de composants ne qualifient pas la file, l’autoscaling, les ACL d’invocation,
 les générations, les montages fonctionnels ni les opérations de console.
 

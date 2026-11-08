@@ -4,8 +4,10 @@
 import asyncio
 from contextlib import suppress
 import http.client
+import io
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import signal
@@ -18,11 +20,11 @@ from uuid import uuid4
 
 ROOT=Path('/srv/p2enjoy-serverless');sys.path.insert(0,str(ROOT))
 from control.app.instances import Instance
-from control.app.validator import UnixHTTP,ValidationError
+from control.app.validator import ValidationError
 REPORT=ROOT/'runtime'/'lifecycle-proof.json'
 REPORT.write_text('{"completed":false,"error":"Campagne non terminée"}\n')
 assert Path('/etc/hostname').read_text().strip()=='infra-serverless','SPARK DEV requis'
-checks=[];completed=False;work=None;fixture=None;installation=str(uuid4());instances=[];image=None
+checks=[];protocol_observations=[];completed=False;work=None;fixture=None;installation=str(uuid4());instances=[];image=None
 
 
 def run(args):
@@ -53,13 +55,45 @@ async def wait_for(predicate,timeout=10):
         await asyncio.sleep(0)
 
 
+def private_frame(item,path,body,headers=None):
+    assert path in ('/started','/result')
+    payload=json.dumps(body).encode()
+    fields={'Host':'local','Content-Type':'application/json','Content-Length':str(len(payload)),
+            'X-Instance-Key':item.key,'Connection':'close',**(headers or {})}
+    frame=('POST '+path+' HTTP/1.1\r\n'+''.join(k+': '+v+'\r\n' for k,v in fields.items())+'\r\n').encode('ascii')+payload
+    assert len(payload)<=1024 and len(frame)<=8192
+    return frame
+
+
+def private_response(connection):
+    with connection.makefile('rb') as stream:
+        line=stream.readline(8193)
+        if not line:return None
+        match=re.fullmatch(rb'HTTP/1\.[01] ([1-5][0-9]{2}) [^\r\n]*\r\n',line)
+        assert match and len(line)<=8192,'Réponse HTTP privée invalide'
+        raw=bytearray()
+        for _ in range(9):
+            line=stream.readline(8193);assert line.endswith(b'\r\n') and len(raw)+len(line)<=8192
+            raw.extend(line)
+            if line==b'\r\n':break
+        else:raise AssertionError('En-têtes de réponse privée trop nombreux')
+        fields=http.client.parse_headers(io.BytesIO(raw))
+        lengths=fields.get_all('Content-Length');assert lengths and len(lengths)==1 and re.fullmatch(r'[0-9]{1,4}',lengths[0])
+        length=int(lengths[0]);assert length<=4096
+        assert fields.get_all('Connection')==['close'] and fields.get_all('Content-Type')==['application/json']
+        payload=stream.read(length);assert len(payload)==length
+        return int(match[1]),json.loads(payload)
+
+
 def private(item,path,body,headers=None):
-    connection=UnixHTTP(item.channel/'control.sock',3)
+    # @spec docs/EXECUTION.md#réalisation-et-preuves
+    # One complete, real request; a transport error never becomes an expected status.
     try:
-        connection.request('POST',path,body=json.dumps(body),headers={'Content-Type':'application/json','X-Instance-Key':item.key,**(headers or {})})
-        response=connection.getresponse();response.read();return response.status
-    except (http.client.RemoteDisconnected,ConnectionResetError):return None
-    finally:connection.close()
+        with socket.socket(socket.AF_UNIX,socket.SOCK_STREAM) as connection:
+            connection.settimeout(3);connection.connect(str(item.channel/'control.sock'))
+            connection.sendall(private_frame(item,path,body,headers))
+            response=private_response(connection);return response[0] if response else None
+    except ConnectionResetError:return None
 
 
 async def absent(item):
@@ -126,7 +160,15 @@ async def main():
     foreign={'invocation_id':str(uuid4()),'handler_started':True,'state':'failed','error':'handler_error','logs':'','logs_truncated':False}
     assert await asyncio.to_thread(private,item,'/result',foreign) is None
     assert await asyncio.to_thread(private,item,'/started',{'invocation_id':str(uuid4())}) is None
-    assert await asyncio.to_thread(private,item,'/result',{}, {'Content-Type':'text/plain'})==415
+    def rejected_type():
+        # The real server must answer before the announced body is sent.
+        header=private_frame(item,'/result',{}, {'Content-Type':'text/plain'}).split(b'\r\n\r\n',1)[0]+b'\r\n\r\n'
+        with socket.socket(socket.AF_UNIX,socket.SOCK_STREAM) as connection:
+            connection.settimeout(3);connection.connect(str(item.channel/'control.sock'));connection.sendall(header)
+            assert private_response(connection)==(415,{'error':'content_type'})
+        for _ in range(20):assert private(item,'/result',{}, {'Content-Type':'text/plain'})==415
+        protocol_observations.append({'early_415_before_body':True,'complete_frames_415':20,'retries':0})
+    await asyncio.to_thread(rejected_type)
     assert await asyncio.to_thread(private,item,'/started',{'invocation_id':item.job['invocation_id']})==202
     def malformed():
         for raw in [b'GET /next HTTP/1.1\r\nHost: local\r\nHost: duplicate\r\n\r\n',
@@ -180,5 +222,5 @@ finally:
     if work:shutil.rmtree(work)
     cleanup=not owned() and not owned('network');completed=completed and cleanup
     REPORT.write_text(json.dumps({'completed':completed,'cleanup':cleanup,'passed':len(checks),'failed':0 if completed else 1,
-        'skipped':0,'image':image,'fixture_image':fixture_image,'checks':checks},ensure_ascii=False,indent=2)+'\n')
+        'skipped':0,'image':image,'fixture_image':fixture_image,'checks':checks,'protocol_observations':protocol_observations},ensure_ascii=False,indent=2)+'\n')
     assert cleanup,'Ressource survivante'
