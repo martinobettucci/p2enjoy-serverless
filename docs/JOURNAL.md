@@ -3021,3 +3021,28 @@ autre SPARK ni système FORGE n’est administré. L’autorisation ne constitue
 ni application de la proposition routes.? ni réussite d’une preuve TLS.
 Décision d’ordre : terminer la campagne navigateur SLS-067 avant cette campagne
 distincte, afin de conserver les opérations et preuves en série.
+
+## 2026-11-08 — Checkpoint navigateur du catalogue et campagne commune décidée
+
+La campagne navigateur du catalogue termine à zéro : quatorze groupes passés,
+aucun skip, nettoyage réussi et 195 sources stables avant/après. La lecture
+native recoupe les 27 fonctions purgées, six namespaces dont les parents vides,
+sept configurations de service effacées et les 27 sources embarquées. Les
+assertions couvrent le vrai accueil, les filtres recherchés/paginés, les deux
+reprises de recherche invalide, l’annulation réseau native, l’historique et le
+rechargement, les six facettes, le retour vide/filtré, les erreurs de transport
+et de cookie absent, le mobile et le recalage après deux suppressions.
+
+La revue préalable avait corrigé deux attentes du client : nom accessible du
+service incluant son namespace, et attente de la vraie réponse recherchée avant
+de paginer après debounce. Aucune réussite n’est inférée d’une temporisation.
+Les captures pleine page restent un checkpoint ; la relecture note que leur
+réduction ne permet pas de juger le placement du dialog mobile ni les dernières
+colonnes, le défilement actuel n’exigeant que scrollLeft positif. Décision avant
+adaptation : capter les listes longues au format du viewport et défiler au
+clavier jusqu’à droite, sans mutation du scroll par script.
+
+La suite commune est spécifiée avant extension du runner : 37 campagnes,
+489 groupes, six prérequis distincts ; trois relevés physiques bornés aux UUID
+exacts, total 23 namespaces et 91 fonctions. Le scope historique reste intact.
+Ce plan n’est pas encore une campagne exécutée ; SLS-067 reste en qualification.

@@ -1,7 +1,7 @@
 # Catalogue global des fonctions
 
-Contrat SLS-067, en réalisation. La console déployée conserve encore son accueil
-Namespaces tant que le nouveau build n’est pas qualifié. SLS-066 reste ouverte
+Contrat SLS-067, déployé en DEV et en qualification. La console affiche désormais
+l’accueil Fonctions ; cette mise en service ne clôture pas les preuves. SLS-066 reste ouverte
 pour ses preuves de routes ; ce catalogue ne dépend pas de leur modification.
 
 ## Lecture et périmètre
@@ -107,3 +107,30 @@ sont sélectionnés dans leur navigation contextuelle pour éviter toute ambigu�
 SSO courant et restaurations historiques restent éprouvés avec leurs vrais
 accueils respectifs. Aucun mock, interception ou skip ; seules les ressources
 explicitement créées par les campagnes sont supprimées puis purgées.
+
+## Suite commune de qualification
+
+Le scope `function-catalogue` de `e2e/execution-suite.py` reprend les 35
+campagnes et 467 groupes de la suite `invocation-urls`, puis ajoute les huit
+groupes API et quatorze groupes navigateur du catalogue : 37 campagnes et
+489 groupes attendus, en série, zéro échec et zéro skip. Les six prérequis
+SSO/builds/relevé physique restent distincts des groupes fonctionnels. Chaque
+phase conserve ses empreintes de sources locales/distantes, image et rapport
+frais. Toute adaptation du banc conserve les scénarios historiques, notamment
+la vraie connexion des restaurations sur leur ancien accueil.
+
+Le relevé physique garde les limites de sécurité du collecteur : dix namespaces
+et 32 fonctions des campagnes de stockage/adresses, sept namespaces et 32
+fonctions du catalogue API, puis six namespaces et 27 fonctions du catalogue UI,
+recoupés par trois appels séparés sur leurs UUID exacts. Total : 23 namespaces
+et 91 fonctions, distincts des installations historiques restaurées. Les deux
+nouveaux jeux incluent des parents vides et vérifient aussi l’effacement réel
+des configurations des quinze services synthétiques. Aucun relâchement global
+de la limite du collecteur n’est nécessaire.
+
+Les captures de listes longues comprennent des vues au format du viewport pour
+garder les textes et le dialog mobile lisibles. Le parcours mobile défile la
+table au clavier jusqu’à sa dernière colonne : les captures gauche/droite
+complètent la mesure d’absence de débordement du document. Ces images sont
+inspectées après exécution ; ni le seul scrollLeft positif ni un JPEG pleine
+page réduit ne prouvent la lecture de toutes les colonnes dans le viewport.
