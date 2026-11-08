@@ -2979,3 +2979,15 @@ La table à six colonnes utilise le token local --size-catalogue-table de
 720 px : garder les valeurs lisibles et un défilement interne sur mobile.
 Les autres dimensions reprennent le socle. Les nouvelles sources ne sont pas
 encore construites ni déployées ; aucune preuve visuelle n’est anticipée.
+
+La revue readonly avant build relève trois chemins à corriger : revenir à la
+recherche déjà appliquée doit effacer une erreur de saisie ; les sélecteurs
+paginés doivent rendre le focus à un élément stable ; la redirection canonique
+doit conserver catalogue= vide, contexte valide du retour par défaut. Le contrat
+décrit déjà ces invariants. Décisions avant correction : traiter l’égalité de
+recherche avec erreur, titre de résultats stable dans le dialog pour le focus,
+et parsing externe conservant les valeurs vides avant validation. La preuve
+native inclura vide/filtré/invalide ; le navigateur couvrira retour vide/non vide
+après erreur et pagination clavier dans les sélecteurs. Le collecteur de purge
+sera borné au préfixe de ces nouvelles campagnes et à leurs UUID exacts, avec
+parents vides recoupés et configuration synthétique de service effacée par API.

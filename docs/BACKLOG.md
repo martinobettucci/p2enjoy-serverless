@@ -507,6 +507,9 @@ anticipé ; SLS-066 conserve ses preuves résiduelles indépendantes.
 E2E : résultats au-delà de la première page, noms identiques dans plusieurs
 services, filtres combinés, recherche rapide sous vrai délai réseau, refus,
 navigation retour, clavier et mobile. Manuel et captures avec la livraison.
+La revue pré-build ajoute les cas explicites : recherche invalide corrigée
+vers la valeur déjà appliquée, focus après pagination des sélecteurs et contexte
+de retour vide conservé lors d’une redirection canonique. Aucun résultat anticipé.
 
 <a id="sls-068"></a>
 ## SLS-068 — Favoris personnels persistants
