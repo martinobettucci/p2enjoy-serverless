@@ -2838,3 +2838,12 @@ Le nouveau client utilise le handler original invocation-addresses.cjs,
 recoupe SQLite/archive/hash, puis invoque par HTTPS et purge ses ressources.
 Ni refus 401/403, ni alias/TLS, ni source perturbée ne sont revendiqués par
 ce complément. Aucun changement produit ou dépendance n’est nécessaire.
+
+La revue readonly avant exécution trouve deux défauts du nouveau client : une
+reprise de nettoyage fondée sur les seules fonctions vivantes peut oublier
+l’archive après DELETE ; la fin de strace sous timeout ne prouve pas celle
+de la CLI Python. Décision avant correction : suivre l’UUID/nom exact possédé,
+son archive et l’UUID de purge conservé ; isoler traceur et CLI dans un groupe,
+en confirmer la disparition et refuser le nettoyage en cas d’état inconnu.
+La revue ne trouve pas de défaut nominal des barrières ; aucun test n’a encore
+été exécuté. Ces constats appartiennent à SLS-066 en cours.

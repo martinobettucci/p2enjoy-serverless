@@ -271,3 +271,16 @@ périmètre, avec restauration indépendante et garde terminée. Le refus réel
 401/403 après publication reste une preuve distincte : ne pas prétendre le
 couvrir par une coupure du contrôle. Le checkpoint de 467 groupes reste intact ;
 ce complément conserve ses sources, image, rapports et nettoyages propres.
+
+Le nettoyage suit l’UUID possédé même après suppression logique : retrouver
+l’archive et consulter une purge déjà engagée avant toute relance explicite,
+avec un UUID d’opération conservé. Une création dont la réponse est perdue
+se retrouve uniquement par le nom exact dans le service possédé. Aucun service
+n’est déclaré nettoyé avant confirmation de la purge de sa fonction.
+
+Le processus CLI et son traceur appartiennent à un groupe isolé. Une expiration
+arrête ce groupe, et sa disparition doit être confirmée avant tout nettoyage.
+La fin du traceur seul ne prouve pas celle de Python. Une fin non confirmée
+produit un diagnostic d’état inconnu et interdit le nettoyage automatique.
+Ces chemins d’échec restent distincts du résultat nominal et ne sont pas
+déclarés éprouvés avant leurs scénarios réels.

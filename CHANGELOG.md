@@ -5,6 +5,8 @@
 - Complément de transport du catalogue spécifié : trois groupes réels avec
   garde indépendante, coupure après publication et absence de rejeu CLI.
   Implémentation et qualification à réaliser ; aucun résultat anticipé.
+  La revue impose la reprise de purge par UUID après archivage et la fin
+  confirmée du groupe CLI avant nettoyage, y compris après expiration.
 
 - Suite complète des adresses réussie en DEV : union sans doublon de
   35 campagnes / 467 groupes, zéro échec/skip, six prérequis non comptés,
