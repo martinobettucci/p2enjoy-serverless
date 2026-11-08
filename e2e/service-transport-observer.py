@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuve-de-transport
 # @verifies docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuve-de-transport
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli
+# @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli
 """Bounded native observation of the unchanged DEV control, with independent recovery.
 
 All helpers implement the same transport-proof contract. No buffers, registers,
@@ -58,7 +60,7 @@ from pathlib import Path
 assert os.geteuid()==0 and socket.gethostname()=='infra-serverless'
 signal.alarm(180)
 folder=Path(sys.argv[1]);info=folder.lstat()
-assert folder.parent==Path('/run') and folder.name.startswith('serverless-restore-service-transport-')
+assert folder.parent==Path('/run') and folder.name.startswith(('serverless-restore-service-transport-','serverless-restore-invocation-url-'))
 assert stat.S_ISDIR(info.st_mode) and info.st_uid==0 and stat.S_IMODE(info.st_mode)==0o700
 item=json.loads((folder/'identity.json').read_text());independent=len(sys.argv)>2
 result={'event':'restored','independent':independent,'container_id':item['container_id'],'image':item['image']}
@@ -197,7 +199,8 @@ class NativeObserver:
 assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
 assert platform.machine() == 'x86_64', 'x86_64_required'
 mode, service, namespace = sys.argv[1:4]
-assert mode in ('before', 'after', 'watchdog', 'inspect', 'restore', 'evidence')
+assert mode in ('before', 'after', 'watchdog', 'inspect', 'restore', 'evidence',
+                'catalogue-before', 'catalogue-after', 'catalogue-watchdog')
 assert str(UUID(service)) == service and str(UUID(namespace)) == namespace
 values = settings()
 control = Path(values['SERVERLESS_STATE_HOST_PATH']) / 'control.sqlite3'
@@ -215,20 +218,59 @@ def durable():
     with read_control(control) as db:
         row = db.execute('SELECT environment_json,updated_at FROM services WHERE id=? AND namespace_id=?', (service, namespace)).fetchone()
         assert row is not None, 'campaign_service_missing'
-        return {'environment_sha256': hashlib.sha256(row['environment_json'].encode()).hexdigest(), 'version': row['updated_at'],
+        result = {'environment_sha256': hashlib.sha256(row['environment_json'].encode()).hexdigest(), 'version': row['updated_at'],
                 'mutations': db.execute("SELECT count(*) FROM audit_events WHERE action='service.configure' AND object_id=?", (service,)).fetchone()[0],
                 'functions': db.execute('SELECT count(*) FROM functions WHERE service_id=?', (service,)).fetchone()[0],
                 'candidates': db.execute('SELECT count(*) FROM deployments WHERE service_id=?', (service,)).fetchone()[0]}
+        if catalogue_scope:
+            function = db.execute('SELECT id,active_revision_id,deleted_at FROM functions WHERE id=? AND service_id=?', (function_id, service)).fetchone()
+            assert function and function['deleted_at'] is None, 'owned_function_required'
+            revisions = [dict(v) for v in db.execute('SELECT id,archive_sha256,deleted_at FROM revisions WHERE function_id=?', (function_id,))]
+            candidates = [dict(v) for v in db.execute('SELECT id,state,revision_id,reserved_bytes FROM deployments WHERE function_id=?', (function_id,))]
+            result['publication'] = {'function_id': function_id, 'active_revision_id': function['active_revision_id'],
+                'revisions': revisions, 'candidates': candidates,
+                'deploy_audits': db.execute("SELECT count(*) FROM audit_events WHERE action='function.deploy' AND object_id=?", (function_id,)).fetchone()[0],
+                'storage_operations': db.execute('SELECT count(*) FROM function_operations WHERE function_id=?', (function_id,)).fetchone()[0]}
+            if function['active_revision_id']:
+                revision = str(UUID(function['active_revision_id']))
+                folder = control.parent / 'artifacts' / revision
+                assert folder.is_dir() and not folder.is_symlink(), 'real_artifact_directory_required'
+                fd = os.open(folder / 'archive.zip', os.O_RDONLY | os.O_NOFOLLOW)
+                with os.fdopen(fd, 'rb') as stream:
+                    info = os.fstat(stream.fileno())
+                    assert stat.S_ISREG(info.st_mode) and 0 < info.st_size <= 64*1024**2, 'real_archive_required'
+                    result['publication']['archive_sha256'] = hashlib.file_digest(stream, 'sha256').hexdigest()
+                    result['publication']['archive_bytes'] = info.st_size
+                assert (folder / 'code').is_dir() and not (folder / 'code').is_symlink(), 'real_code_directory_required'
+        return result
+
+
+def published(value):
+    """Require the exact one committed publication before disrupting its optional GET."""
+    item = value['publication']
+    assert value['functions'] == value['candidates'] == 1 and value['mutations'] == 0
+    assert len(item['revisions']) == len(item['candidates']) == item['deploy_audits'] == 1
+    revision, candidate = item['revisions'][0], item['candidates'][0]
+    assert item['active_revision_id'] == revision['id'] == candidate['revision_id'] == candidate['id']
+    assert revision['deleted_at'] is None and candidate['state'] == 'published' and candidate['reserved_bytes'] == 0
+    assert item['archive_sha256'] == revision['archive_sha256'] and item['storage_operations'] == 0
 
 
 with read_control(control) as db:
     owner = db.execute('SELECT name FROM namespaces WHERE id=?', (namespace,)).fetchone()
-    assert owner and re.fullmatch(r'service-transport-[0-9a-f]{8}', owner['name']), 'owned_campaign_required'
+    assert owner and re.fullmatch(r'(?:service-transport|invocation-url-transport)-[0-9a-f]{8}', owner['name']), 'owned_campaign_required'
+    catalogue_scope = owner['name'].startswith('invocation-url-transport-')
     assert db.execute('SELECT 1 FROM services WHERE id=? AND namespace_id=?', (service, namespace)).fetchone(), 'owned_service_required'
+
+if mode not in ('restore', 'evidence'):
+    assert catalogue_scope == mode.startswith('catalogue-') or mode == 'inspect', 'campaign_mode_mismatch'
+    function_id = sys.argv[4] if catalogue_scope else None
+    if function_id is not None:
+        assert str(UUID(function_id)) == function_id, 'function_uuid_required'
 
 if mode in ('restore', 'evidence'):
     unit = sys.argv[4]
-    assert re.fullmatch(r'serverless-restore-service-transport-[0-9a-f]{32}', unit)
+    assert re.fullmatch(r'serverless-restore-(?:service-transport|invocation-url)-[0-9a-f]{32}', unit)
     folder = Path('/run') / unit
     identity = json.loads((folder / 'identity.json').read_text())
     assert identity['service_id'] == service and identity['namespace_id'] == namespace
@@ -247,8 +289,12 @@ if mode == 'inspect':
     sys.exit(0)
 
 with read_control(control) as db:
+    if catalogue_scope:
+        assert db.execute('SELECT count(*) FROM functions WHERE deleted_at IS NULL').fetchone()[0] == 1, 'only_owned_function_required'
+        assert db.execute('SELECT 1 FROM functions WHERE id=? AND service_id=? AND deleted_at IS NULL AND active_revision_id IS NULL',
+                          (function_id, service)).fetchone(), 'owned_draft_required'
     for sql in (
-        'SELECT count(*) FROM functions WHERE deleted_at IS NULL',
+        *(() if catalogue_scope else ('SELECT count(*) FROM functions WHERE deleted_at IS NULL',)),
         "SELECT count(*) FROM deployments WHERE state IN ('prepared','receiving','validating')",
         "SELECT count(*) FROM invocations WHERE state IN ('receiving','queued','admitted','running')",
         'SELECT count(*) FROM function_operations', 'SELECT count(*) FROM execution_instances',
@@ -270,8 +316,8 @@ assert len(processes) == 1, 'unique_control_process_required'
 pid = processes[0]
 assert Path('/proc', str(pid), 'cgroup').read_text() == Path('/proc', str(init), 'cgroup').read_text(), 'container_owner_required'
 before = durable()
-assert before['functions'] == before['candidates'] == 0, 'empty_campaign_required'
-unit = 'serverless-restore-service-transport-' + uuid4().hex
+assert before['functions'] == (1 if catalogue_scope else 0) and before['candidates'] == 0, 'empty_campaign_required'
+unit = ('serverless-restore-invocation-url-' if catalogue_scope else 'serverless-restore-service-transport-') + uuid4().hex
 folder = Path('/run') / unit
 folder.mkdir(mode=0o700)
 lock = os.open(folder / 'mutation.lock', os.O_RDWR | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
@@ -284,7 +330,7 @@ item = {'service_id': service, 'namespace_id': namespace, 'container_id': curren
 (folder / 'restore.py').write_text(RESTORE)
 observer, armed = NativeObserver(pid), False
 try:
-    command(['systemd-run', '--quiet', '--collect', '--unit=' + unit, '--on-active=' + ('12s' if mode == 'watchdog' else '70s'),
+    command(['systemd-run', '--quiet', '--collect', '--unit=' + unit, '--on-active=' + ('12s' if mode.endswith('watchdog') else '70s'),
              '--timer-property=AccuracySec=100ms', '--timer-property=RandomizedDelaySec=0',
              '--property=RuntimeMaxSec=190s', '--property=TimeoutStopSec=5s',
              '/usr/bin/python3', '-I', str(folder / 'restore.py'), str(folder), 'guard'])
@@ -293,14 +339,15 @@ try:
     emit({'event': 'guard-armed', 'unit': unit})
     observer.start()
     emit({'event': 'armed', 'unit': unit, 'container_id': current['Id'], 'image': current['Image'], 'before': before})
-    if mode == 'watchdog':
+    if mode.endswith('watchdog'):
         emit({'event': 'suspended', 'unit': unit})
         # Intentional observer death proves independent detach/resume and health.
         assert select.select([sys.stdin], [], [], 8)[0], 'watchdog_command_missing'
         assert sys.stdin.readline().strip() == 'lose-observer'
         emit({'event': 'observer-loss', 'signal': 'SIGKILL', 'unit': unit})
         os.kill(os.getpid(), signal.SIGKILL)
-    expected = f'PUT /api/services/{service}/configuration HTTP/1.1\r\n'.encode('ascii')
+    expected = (f'GET /api/functions/{function_id}/invocation-urls?limit=5&offset=0 HTTP/1.1\r\n' if catalogue_scope
+                else f'PUT /api/services/{service}/configuration HTTP/1.1\r\n').encode('ascii')
     pending, offsets, target, gated = None, {}, None, False
     deadline = time.monotonic() + 45
     observer.resume()
@@ -319,9 +366,12 @@ try:
                 offsets.pop(fd, None)
                 assert fd != target, 'target_connection_closed_before_gate'
             if target is not None and fd == target and number in (1, 20, 44, 46):
-                assert mode == 'after', 'unexpected_response_gate'
+                assert mode.endswith('after'), 'unexpected_response_gate'
                 after = durable()
-                assert after['mutations'] == before['mutations'] + 1 and after['environment_sha256'] != before['environment_sha256'], 'commit_not_observed'
+                if catalogue_scope:
+                    published(after)
+                else:
+                    assert after['mutations'] == before['mutations'] + 1 and after['environment_sha256'] != before['environment_sha256'], 'commit_not_observed'
                 gated = True
                 gate = {'boundary': 'before-send', 'syscall': number, 'durable': after}
         elif phase == 2 and pending:
@@ -345,10 +395,14 @@ try:
                         offsets[fd] = offset
                         if offset == len(expected):
                             target = fd
-                            if mode == 'before':
-                                assert durable() == before, 'mutation_preceded_receive_gate'
+                            if mode.endswith('before'):
+                                received = durable()
+                                if catalogue_scope:
+                                    published(received)
+                                else:
+                                    assert received == before, 'mutation_preceded_receive_gate'
                                 gated = True
-                                gate = {'boundary': 'after-receive', 'syscall': number, 'durable': before}
+                                gate = {'boundary': 'after-receive', 'syscall': number, 'durable': received}
             if number in (1, 20, 44, 46) and data > 0:
                 offsets.pop(args[0], None)
         if not gated:

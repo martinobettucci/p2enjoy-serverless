@@ -589,8 +589,18 @@ deux restaurations historiques séparées et les 26 fichiers embarqués recoupé
 Les 79 captures fraîches sont recoupées : 61 observations et 18 identités avec
 une référence inspectée. Le manuel servi correspond à 14 chapitres/43 paragraphes.
 Le Host réel est qualifié en boucle locale ; routes publiques, sources perturbées,
-pagination multi-domaines et GET CLI perdu/refusé restent ouverts.
+pagination multi-domaines et GET CLI refusé restent ouverts.
 
 Ce replay ne demande aucun build du contrôle, migration, variable ou secret.
 Les trois notes de cellule sont actualisées et proposées par leurs voisins
 `.?`, avec empreintes recoupées ; leur adoption n’est pas revendiquée.
+
+Le [complément de transport du catalogue](evidence/invocation-url-transport-dev-2026-11-08.json)
+passe ensuite trois groupes propres et treize de régression, sans changement
+applicatif. Les 187 sources et images restent identiques avant/après chaque
+phase. Les deux vrais HTTP 502 préservent la publication ; six connexions CLI
+sans rejeu sont comptées et les fonctions invoquées après reprise. Huit fonctions
+sont purgées dans trois namespaces, six gardes terminées et les 26 fichiers
+embarqués recoupés. La référence conserve son identité/image/démarrage. Les
+trois notes sont actualisées et reproposées, sans application de route, variable,
+secret ou migration. Les branches d’erreur du nouveau client restent explicites.

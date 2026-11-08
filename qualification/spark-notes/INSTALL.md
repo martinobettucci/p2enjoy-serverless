@@ -94,9 +94,28 @@ allocations globales à zéro. Les archives historiques étrangères restent con
 
 La preuve native du Host est acquise en boucle locale. Restent les changements
 réels de routes/TLS, seconde page sur six domaines, source perturbée et
-consultation CLI perdue/refusée après publication. Le build nominal CLI est
+consultation CLI refusée après publication. Le build nominal CLI est
 qualifié ; sa branche d’expiration/perte SSH reste à éprouver. SLS-066 demeure
 ouverte. L’alias functions.lelabs.tech vers 18090 TLS est proposé dans routes.? ;
 il n’est pas appliqué. Aucun nouveau secret, variable ou schéma ; la configuration
 reste dans les deux fichiers de cellule. Ces trois notes sont proposées,
 sans revendiquer leur adoption.
+
+
+## Transport du catalogue après publication
+
+Le complément `docs/evidence/invocation-url-transport-dev-2026-11-08.json`
+passe trois nouveaux groupes puis treize de régression en série, zéro échec/skip.
+Les deux vrais HTTP 502 du catalogue conservent la publication et ses UUID ;
+six connexions HTTPS CLI sont comptées, sans rejeu. Après reprise, catalogue
+et invocation Docker fonctionnent. Les 187 sources/images sont recoupées avant
+et après chaque phase, huit fonctions purgées dans trois namespaces, six gardes
+terminées et 26 fichiers embarqués conformes. La référence conserve son identité,
+son image et son démarrage. Aucun changement produit, build du contrôle,
+migration, variable, secret ou route appliquée pour ce complément.
+
+Le refus 401/403 après publication reste à éprouver. Les branches d’expiration,
+sortie excessive, lancement et nettoyage après réponses de création/purge perdues
+du nouveau client ne sont pas déclarées acquises. Le client exige la disparition
+de tout le groupe CLI avant nettoyage et reprend une purge par son UUID conservé.
+La preuve complète de 467 groupes reste distincte. SLS-066 demeure ouverte.

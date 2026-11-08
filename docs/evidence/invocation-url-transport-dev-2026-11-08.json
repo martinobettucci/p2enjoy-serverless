@@ -1,0 +1,1655 @@
+{
+  "unit": "SLS-066",
+  "status": "catalogue_transport_checkpoint_passed_unit_open",
+  "unit_complete": false,
+  "recorded_at_ns": 1794160586872034723,
+  "target": "SPARK DEV infra-serverless",
+  "serial": true,
+  "execution_base_commit": "a1714e7",
+  "execution_worktree_source_hashes_authoritative": true,
+  "campaign_count": 3,
+  "passed_groups": 16,
+  "new_transport_groups": 3,
+  "regression_groups": 13,
+  "failed_groups": 0,
+  "skipped": 0,
+  "control_image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+  "adapter_images": {
+    "p2enjoy-adapter:dev": "sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa",
+    "p2enjoy-adapter-e2e:dev": "sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e"
+  },
+  "source_files": 187,
+  "source_sha256_at_execution": {
+    "adapter/Dockerfile": "1716bc11f4755f2b58a73a30a174f7108dbee477e30df9e4f909ced07dc81e60",
+    "adapter/Dockerfile.dockerignore": "84bc4c8ccc7a0e4f53719e98ba410c1048901837ad7417ba4f47f0688eb40284",
+    "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+    "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+    "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+    "adapter/compose.spark.yml": "cf76088598e5b6bea10d3291471739e7ef172aaa5ab27d1a3d5cf18e63edfe1e",
+    "adapter/deploy.py": "462ed21dd2433317052e03be9c25ae18a6d2d8f1aee53cd4eb56211272302e27",
+    "adapter/dev.sh": "d0b37fd798554644d35e452d0ebbed0bb18f4222aaf992fcd524121ad26e0e7d",
+    "adapter/manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+    "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+    "control/Dockerfile": "858d0ed75d833754fd48b73a780c0607f81f7b34b6473d4a921591ee90b1b862",
+    "control/Dockerfile.dockerignore": "3d4e09e669ded704ed8e8765450b1eacc41b94b313f5cd93a48941b8377dd915",
+    "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+    "control/app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+    "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+    "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+    "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+    "control/app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+    "control/app/deployments.py": "1df532d18cfa3838fb3b04840ccf1dda13eb3e9ae2963b4e1b781551d861195d",
+    "control/app/execution.py": "8c52837c6b893411ea10af481f573aa54db98990624079d5bb7b8c2a6f6e485f",
+    "control/app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+    "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+    "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+    "control/app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+    "control/app/invocation_urls.py": "f05e6ee7f399b4d54cf2c15b186c13d7eb75266172bcc33127e7fca6dce5c1df",
+    "control/app/main.py": "0763accfcd9dfca32ce8d7f09ae67d7adb7264d567fa0f8822479d432d863956",
+    "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+    "control/app/models.py": "fbfa169dc95872a8b19378e92b19f3f1074ff20f2a825a5671b99b784aac4b3e",
+    "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+    "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+    "control/app/storage_management.py": "37ce7e205ec06860eb096c37d85d7015c5002558101faf6b90eccfda81181ea7",
+    "control/app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+    "control/compose.spark.yml": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+    "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+    "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+    "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+    "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+    "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+    "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+    "control/migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+    "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+    "docs/CONSOLE_PUBLICATION.md": "d710833cc0849871379e18b93c4f4d9d7003644a110ab72edb3dc6129a9bf10d",
+    "docs/CONSOLE_STORAGE.md": "71e9f9b3afe4a63021a812cd0abb1d314bc62fe4672765ade0f9f641fb604f8b",
+    "docs/DESIGN_SYSTEM_APP.md": "d6797b43660d4e04e7fffdcee3ae25e25d7da95d104f3c723d78c74958fd4052",
+    "docs/INVOCATION_URLS.md": "8fb534b9f7862ffe26fd8400bc3f3f0f891982782d5f18c3a316c815937ef77c",
+    "docs/STORAGE_LEGACY_PROOF.md": "a923c0059d36008bbeb5421ef878b7c0be42cb9c0604abfbe5535cbc8a8d58f6",
+    "docs/manual.md": "cf7bcdb9d6ef887203b7b84d42e46ec4ba9507b78acf488aea266d13909c7207",
+    "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+    "e2e/adapter-deploy.mjs": "e8246c0b475920c6b23a4f5f8f095ac864644c5d958c4aea2d8d2d3f9bc46fda",
+    "e2e/adapter.py": "564c89a4d842e3e2c68c5d261fa687b06e9106035b5820d084415fcbeff8b1a2",
+    "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+    "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+    "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+    "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+    "e2e/control-operations.py": "2ef1013fe73dc946eeb221a2cab7e7f03dcb838b0612eb4a2357dd68677c9278",
+    "e2e/control-ui.mjs": "d719d0241bdca96c381c8e8d2743f62dc2c5c5a86fbd4c55d00677c6d75c16d8",
+    "e2e/control_database.py": "fe1c7cb2450f193bba5be5a6d4cd98e88936199b20b85e0a903226f6beb2a043",
+    "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+    "e2e/dev-sso-sessions.mjs": "4c74f8f023b4ef8503f05624218b5d7e0d6bc19a35bf45841053c9a62c7094f4",
+    "e2e/execution-faults.py": "7f879b8d9702f7c0d9654a8064d797cc60b95ec17f97b69091acff69bdc58fea",
+    "e2e/execution-suite.py": "34a0e3b1fd7f41b36c79aca1925fe5a69f4f6198441378fe40d4548f71276e59",
+    "e2e/execution-ui.mjs": "536ba6d8f10096a4f1782079a476fcfe94535cf8c5a414cf618ba2f7d7a454cd",
+    "e2e/function-storage-faults.py": "3a4c9c019c499199e6e12adddc70d2b8d9a178d82755f4c9ab0b9b4ee138d0aa",
+    "e2e/function-storage.mjs": "aac2325b00d6f74f0ef44ce6d2016cbefbe85b41309a1feb4c8f098cd090f632",
+    "e2e/instance-lifecycle.py": "1c83bfc36180e3e63722073137745a3522ea39642108b589778cfd087773aab2",
+    "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+    "e2e/invocation-url-adapter-build.py": "e84f45820028c4a1d3737dfbe486520ce3b106ba0dbe821c9875fc8dcda418bd",
+    "e2e/invocation-url-host.py": "568f8fb107387f10618aaa9b955274bf4fcac1c0d022d222964a4f092992d36e",
+    "e2e/invocation-url-transport.mjs": "207c2b9ac373e3dde24c3956347cface0a91f2bd1d24f97395844d4eb6d893ee",
+    "e2e/invocation-urls-ui.mjs": "8aa2bf0e95f2f857ca2630129f3982688ee27cb6fdef08566eb63161b69ca626",
+    "e2e/invocation-urls.mjs": "7438964baccdc56effecb06bfc1064403f2797168aeca909c2ec2f2aa47d7e12",
+    "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+    "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+    "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+    "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+    "e2e/manual-ui.mjs": "ff98a5c6694f7450ab91b4104e1905ebf1edb09a6010486b5d65d5adba7012f7",
+    "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7",
+    "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+    "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+    "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+    "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+    "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+    "e2e/publication-fixtures.mjs": "b994a9332a39f952e8f20c9d5e5b3ad7efddf5ed690d4359d12c481926c44438",
+    "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+    "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+    "e2e/publication-ui.mjs": "a65fa3545decfe63b8829cac8bf485dfa95092564d278352f0e3021501fbdeca",
+    "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+    "e2e/runtime-instances.py": "c9652acb58dd42725d9a45d852c7db7a239f40ac640399a7e1868177bae129bc",
+    "e2e/runtime-validation.py": "69ff066e77cb8df5b954731ed1b01cd8dbf46ff2bb023642af53ed66f7894420",
+    "e2e/service-configuration.mjs": "50c01b89800f36045e296d47c73ca624ee62245058a4547bd49dea56c8e961e7",
+    "e2e/service-transport-observer.py": "9dc27d1a6222d962c0bed64f075739960b06d6ab4a3eae781821ed0397d9d4b1",
+    "e2e/service-transport.mjs": "424912a5caed927a9a9deb23af10fb4f6d690cf7b5c56fc15ace5ca2dd6a080d",
+    "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+    "e2e/storage-command-faults.py": "8cacdc0036114a95948f31136bb9dea8ecb4df6ec21c76b5dd299cd1ba4cc498",
+    "e2e/storage-command-recovery.mjs": "57c5e1fead1fc90549f1b732617d5b786bd442f302f21396f5e2fa178e1d8b81",
+    "e2e/storage-console-api.mjs": "548888014f4823205f40e86cb9d03b3747e6901f7a620946b51dc0b9069ec569",
+    "e2e/storage-console-inspect.py": "280603dbe3013006ae4374168338473b046b1e8038062c926136f55ae7eb8bd9",
+    "e2e/storage-console-ui.mjs": "77b4c2a62fa23f3c4af144556e63a22f4b1ee1584fcdb3a87f0cee01445842dc",
+    "e2e/storage-decision-recovery.mjs": "d0514f70ff857d602196ace1af09944f975fb6d7d7e64e3b86bbb4b4cefb40fb",
+    "e2e/storage-discard.py": "bd167df38ebe45089538a9b6ec7fe6b98fd7fc88616375179ce611887f3e51d7",
+    "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+    "e2e/storage-legacy-build.py": "1f93643e4c3543d2a6ac74160eab4b59ba2689be6f447a1b5d8cee975f7ae125",
+    "e2e/storage-legacy-environment.py": "0f70eca2c949c3c23e50f877d9febd933a2ac38426573f9ce35fd73ec7ca94da",
+    "e2e/storage-legacy-recovery.mjs": "1b7976347afb37d655dafdc6c94718080cce11ee7648da505c2939abdb004ba0",
+    "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+    "e2e/storage-suite-inspect.py": "afa310358f693939385cca66671e5a29391d38ed4953aeb4ede705bfb367cef6",
+    "e2e/storage-validation-faults.py": "78a95d848cca13dd190391b5ff03266d0a3b5a7eae40355700496da90e89ba0d",
+    "e2e/storage-validation-recovery.mjs": "78a37c4334c488f25cb20b7978914dad7f908fd45743757e88cc59f8c0afb4fa",
+    "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+    "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+    "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+    "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+    "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+    "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+    "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+    "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+    "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+    "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+    "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+    "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+    "qualification/artifacts/invocation-addresses.cjs": "d92d814fbd8d07343e491f013b5199e8e8454b5f54244c044c287665ccdb1a6f",
+    "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+    "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+    "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+    "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+    "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+    "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+    "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+    "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+    "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+    "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+    "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+    "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+    "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+    "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+    "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+    "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+    "qualification/artifacts/service-configuration.cjs": "0a9bf83c6dffc76544491abdda0d14b9dbf0ebc767c60c29b063e893c2c22e70",
+    "qualification/artifacts/storage-console.cjs": "5e8e2199fa7605f8d00407c92537b175e072f47ce4d6fd42b116ef1a87de873f",
+    "qualification/artifacts/storage-validation-delay.mjs": "91dbcf7480341d8596a6300a026de792217a3f23bb217adf6e974cf4b97f79b3",
+    "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+    "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+    "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+    "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+    "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+    "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+    "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+    "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+    "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+    "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+    "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+    "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+    "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+    "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+    "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+    "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+    "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+    "storage/agent.py": "689a45bc367b339112c41696031be46e7fb1d449340fe92d6915f791db58de64",
+    "storage/agent_discard.py": "69c6c570162e2c7dc2cdde4b53f6840866fad50ae738f85f9f3f18c4f8d5e859",
+    "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+    "storage/agent_volumes.py": "e03ad2df9bfe657b2a959bc3019247a3769f0dbb1e6a5802a875171a9cddf041",
+    "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+    "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+    "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+    "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+    "storage/install-dev.py": "d6e233ccc1e893ee64220ddc1436127b32434778db9b44820f359560465f33db",
+    "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+    "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+    "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+    "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+    "storage/migrations/004.sql": "bde5c2068fbe9ecf03a077e911d03e6d67737a6cf9b5912c4fc55944926eaf7d",
+    "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+    "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+    "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+    "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+    "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+    "web/src/function.jsx": "a66a3534f62e2ed1dd8d6ad85ac21b8b6c9865015ddf70d7f0e03ff2380cdf6a",
+    "web/src/invocation-urls.jsx": "c8e803c27c483c411f281ac88e5d31da4353f678a011c1ce7114cba874c0d3cf",
+    "web/src/main.jsx": "74f91f2af68eecb357b9ffd0b61f2b173115204086524dd655284cf1a744fd8b",
+    "web/src/management.jsx": "764b793e7a01b6ec2f072538e1a788f0f0a9bb03d4501ebb75b2d8b12fbea744",
+    "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+    "web/src/observations.jsx": "9073da7e1764f42acd7f7b611bc2f47c058f7db1394b191eca4994864d943a15",
+    "web/src/publications.jsx": "2c847cf9ca5aad42c05a7c64366959be535ada5b001ba711b86d4cf47a678618",
+    "web/src/storage.jsx": "efa3f329b6bb7db4d65c514ec1eabb6e6eab3750e5084dce7a454f3d5b0a6ac1",
+    "web/src/style.css": "f2a5c21f40841e7f69d6347b0e97444ce9efb3444864f3f9167d540cb8dc5d89",
+    "web/src/ui.jsx": "156d17fd49af779b2a75c88bb188878ab7feb96199caccd2bbb2149a7e83a21e",
+    "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+  },
+  "source_sha256_at_delivery": {
+    "adapter/Dockerfile": "1716bc11f4755f2b58a73a30a174f7108dbee477e30df9e4f909ced07dc81e60",
+    "adapter/Dockerfile.dockerignore": "84bc4c8ccc7a0e4f53719e98ba410c1048901837ad7417ba4f47f0688eb40284",
+    "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+    "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+    "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+    "adapter/compose.spark.yml": "cf76088598e5b6bea10d3291471739e7ef172aaa5ab27d1a3d5cf18e63edfe1e",
+    "adapter/deploy.py": "462ed21dd2433317052e03be9c25ae18a6d2d8f1aee53cd4eb56211272302e27",
+    "adapter/dev.sh": "d0b37fd798554644d35e452d0ebbed0bb18f4222aaf992fcd524121ad26e0e7d",
+    "adapter/manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+    "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+    "control/Dockerfile": "858d0ed75d833754fd48b73a780c0607f81f7b34b6473d4a921591ee90b1b862",
+    "control/Dockerfile.dockerignore": "3d4e09e669ded704ed8e8765450b1eacc41b94b313f5cd93a48941b8377dd915",
+    "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+    "control/app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+    "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+    "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+    "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+    "control/app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+    "control/app/deployments.py": "1df532d18cfa3838fb3b04840ccf1dda13eb3e9ae2963b4e1b781551d861195d",
+    "control/app/execution.py": "8c52837c6b893411ea10af481f573aa54db98990624079d5bb7b8c2a6f6e485f",
+    "control/app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+    "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+    "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+    "control/app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+    "control/app/invocation_urls.py": "f05e6ee7f399b4d54cf2c15b186c13d7eb75266172bcc33127e7fca6dce5c1df",
+    "control/app/main.py": "0763accfcd9dfca32ce8d7f09ae67d7adb7264d567fa0f8822479d432d863956",
+    "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+    "control/app/models.py": "fbfa169dc95872a8b19378e92b19f3f1074ff20f2a825a5671b99b784aac4b3e",
+    "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+    "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+    "control/app/storage_management.py": "37ce7e205ec06860eb096c37d85d7015c5002558101faf6b90eccfda81181ea7",
+    "control/app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+    "control/compose.spark.yml": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+    "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+    "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+    "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+    "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+    "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+    "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+    "control/migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+    "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+    "docs/CONSOLE_PUBLICATION.md": "d710833cc0849871379e18b93c4f4d9d7003644a110ab72edb3dc6129a9bf10d",
+    "docs/CONSOLE_STORAGE.md": "71e9f9b3afe4a63021a812cd0abb1d314bc62fe4672765ade0f9f641fb604f8b",
+    "docs/DESIGN_SYSTEM_APP.md": "d6797b43660d4e04e7fffdcee3ae25e25d7da95d104f3c723d78c74958fd4052",
+    "docs/INVOCATION_URLS.md": "d757a5c167bc0e9a10bdbcc19416748ec1423f7293316555daaa0cfa8b5acbc6",
+    "docs/STORAGE_LEGACY_PROOF.md": "a923c0059d36008bbeb5421ef878b7c0be42cb9c0604abfbe5535cbc8a8d58f6",
+    "docs/manual.md": "cf7bcdb9d6ef887203b7b84d42e46ec4ba9507b78acf488aea266d13909c7207",
+    "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+    "e2e/adapter-deploy.mjs": "e8246c0b475920c6b23a4f5f8f095ac864644c5d958c4aea2d8d2d3f9bc46fda",
+    "e2e/adapter.py": "564c89a4d842e3e2c68c5d261fa687b06e9106035b5820d084415fcbeff8b1a2",
+    "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+    "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+    "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+    "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+    "e2e/control-operations.py": "2ef1013fe73dc946eeb221a2cab7e7f03dcb838b0612eb4a2357dd68677c9278",
+    "e2e/control-ui.mjs": "d719d0241bdca96c381c8e8d2743f62dc2c5c5a86fbd4c55d00677c6d75c16d8",
+    "e2e/control_database.py": "fe1c7cb2450f193bba5be5a6d4cd98e88936199b20b85e0a903226f6beb2a043",
+    "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+    "e2e/dev-sso-sessions.mjs": "4c74f8f023b4ef8503f05624218b5d7e0d6bc19a35bf45841053c9a62c7094f4",
+    "e2e/execution-faults.py": "7f879b8d9702f7c0d9654a8064d797cc60b95ec17f97b69091acff69bdc58fea",
+    "e2e/execution-suite.py": "34a0e3b1fd7f41b36c79aca1925fe5a69f4f6198441378fe40d4548f71276e59",
+    "e2e/execution-ui.mjs": "536ba6d8f10096a4f1782079a476fcfe94535cf8c5a414cf618ba2f7d7a454cd",
+    "e2e/function-storage-faults.py": "3a4c9c019c499199e6e12adddc70d2b8d9a178d82755f4c9ab0b9b4ee138d0aa",
+    "e2e/function-storage.mjs": "aac2325b00d6f74f0ef44ce6d2016cbefbe85b41309a1feb4c8f098cd090f632",
+    "e2e/instance-lifecycle.py": "1c83bfc36180e3e63722073137745a3522ea39642108b589778cfd087773aab2",
+    "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+    "e2e/invocation-url-adapter-build.py": "e84f45820028c4a1d3737dfbe486520ce3b106ba0dbe821c9875fc8dcda418bd",
+    "e2e/invocation-url-host.py": "568f8fb107387f10618aaa9b955274bf4fcac1c0d022d222964a4f092992d36e",
+    "e2e/invocation-url-transport.mjs": "207c2b9ac373e3dde24c3956347cface0a91f2bd1d24f97395844d4eb6d893ee",
+    "e2e/invocation-urls-ui.mjs": "8aa2bf0e95f2f857ca2630129f3982688ee27cb6fdef08566eb63161b69ca626",
+    "e2e/invocation-urls.mjs": "7438964baccdc56effecb06bfc1064403f2797168aeca909c2ec2f2aa47d7e12",
+    "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+    "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+    "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+    "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+    "e2e/manual-ui.mjs": "ff98a5c6694f7450ab91b4104e1905ebf1edb09a6010486b5d65d5adba7012f7",
+    "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7",
+    "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+    "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+    "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+    "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+    "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+    "e2e/publication-fixtures.mjs": "b994a9332a39f952e8f20c9d5e5b3ad7efddf5ed690d4359d12c481926c44438",
+    "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+    "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+    "e2e/publication-ui.mjs": "a65fa3545decfe63b8829cac8bf485dfa95092564d278352f0e3021501fbdeca",
+    "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+    "e2e/runtime-instances.py": "c9652acb58dd42725d9a45d852c7db7a239f40ac640399a7e1868177bae129bc",
+    "e2e/runtime-validation.py": "69ff066e77cb8df5b954731ed1b01cd8dbf46ff2bb023642af53ed66f7894420",
+    "e2e/service-configuration.mjs": "50c01b89800f36045e296d47c73ca624ee62245058a4547bd49dea56c8e961e7",
+    "e2e/service-transport-observer.py": "9dc27d1a6222d962c0bed64f075739960b06d6ab4a3eae781821ed0397d9d4b1",
+    "e2e/service-transport.mjs": "424912a5caed927a9a9deb23af10fb4f6d690cf7b5c56fc15ace5ca2dd6a080d",
+    "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+    "e2e/storage-command-faults.py": "8cacdc0036114a95948f31136bb9dea8ecb4df6ec21c76b5dd299cd1ba4cc498",
+    "e2e/storage-command-recovery.mjs": "57c5e1fead1fc90549f1b732617d5b786bd442f302f21396f5e2fa178e1d8b81",
+    "e2e/storage-console-api.mjs": "548888014f4823205f40e86cb9d03b3747e6901f7a620946b51dc0b9069ec569",
+    "e2e/storage-console-inspect.py": "280603dbe3013006ae4374168338473b046b1e8038062c926136f55ae7eb8bd9",
+    "e2e/storage-console-ui.mjs": "77b4c2a62fa23f3c4af144556e63a22f4b1ee1584fcdb3a87f0cee01445842dc",
+    "e2e/storage-decision-recovery.mjs": "d0514f70ff857d602196ace1af09944f975fb6d7d7e64e3b86bbb4b4cefb40fb",
+    "e2e/storage-discard.py": "bd167df38ebe45089538a9b6ec7fe6b98fd7fc88616375179ce611887f3e51d7",
+    "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+    "e2e/storage-legacy-build.py": "1f93643e4c3543d2a6ac74160eab4b59ba2689be6f447a1b5d8cee975f7ae125",
+    "e2e/storage-legacy-environment.py": "0f70eca2c949c3c23e50f877d9febd933a2ac38426573f9ce35fd73ec7ca94da",
+    "e2e/storage-legacy-recovery.mjs": "1b7976347afb37d655dafdc6c94718080cce11ee7648da505c2939abdb004ba0",
+    "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+    "e2e/storage-suite-inspect.py": "afa310358f693939385cca66671e5a29391d38ed4953aeb4ede705bfb367cef6",
+    "e2e/storage-validation-faults.py": "78a95d848cca13dd190391b5ff03266d0a3b5a7eae40355700496da90e89ba0d",
+    "e2e/storage-validation-recovery.mjs": "78a37c4334c488f25cb20b7978914dad7f908fd45743757e88cc59f8c0afb4fa",
+    "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+    "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+    "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+    "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+    "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+    "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+    "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+    "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+    "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+    "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+    "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+    "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+    "qualification/artifacts/invocation-addresses.cjs": "d92d814fbd8d07343e491f013b5199e8e8454b5f54244c044c287665ccdb1a6f",
+    "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+    "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+    "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+    "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+    "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+    "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+    "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+    "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+    "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+    "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+    "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+    "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+    "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+    "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+    "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+    "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+    "qualification/artifacts/service-configuration.cjs": "0a9bf83c6dffc76544491abdda0d14b9dbf0ebc767c60c29b063e893c2c22e70",
+    "qualification/artifacts/storage-console.cjs": "5e8e2199fa7605f8d00407c92537b175e072f47ce4d6fd42b116ef1a87de873f",
+    "qualification/artifacts/storage-validation-delay.mjs": "91dbcf7480341d8596a6300a026de792217a3f23bb217adf6e974cf4b97f79b3",
+    "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+    "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+    "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+    "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+    "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+    "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+    "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+    "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+    "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+    "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+    "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+    "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+    "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+    "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+    "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+    "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+    "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+    "storage/agent.py": "689a45bc367b339112c41696031be46e7fb1d449340fe92d6915f791db58de64",
+    "storage/agent_discard.py": "69c6c570162e2c7dc2cdde4b53f6840866fad50ae738f85f9f3f18c4f8d5e859",
+    "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+    "storage/agent_volumes.py": "e03ad2df9bfe657b2a959bc3019247a3769f0dbb1e6a5802a875171a9cddf041",
+    "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+    "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+    "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+    "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+    "storage/install-dev.py": "d6e233ccc1e893ee64220ddc1436127b32434778db9b44820f359560465f33db",
+    "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+    "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+    "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+    "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+    "storage/migrations/004.sql": "bde5c2068fbe9ecf03a077e911d03e6d67737a6cf9b5912c4fc55944926eaf7d",
+    "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+    "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+    "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+    "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+    "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+    "web/src/function.jsx": "a66a3534f62e2ed1dd8d6ad85ac21b8b6c9865015ddf70d7f0e03ff2380cdf6a",
+    "web/src/invocation-urls.jsx": "c8e803c27c483c411f281ac88e5d31da4353f678a011c1ce7114cba874c0d3cf",
+    "web/src/main.jsx": "74f91f2af68eecb357b9ffd0b61f2b173115204086524dd655284cf1a744fd8b",
+    "web/src/management.jsx": "764b793e7a01b6ec2f072538e1a788f0f0a9bb03d4501ebb75b2d8b12fbea744",
+    "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+    "web/src/observations.jsx": "9073da7e1764f42acd7f7b611bc2f47c058f7db1394b191eca4994864d943a15",
+    "web/src/publications.jsx": "2c847cf9ca5aad42c05a7c64366959be535ada5b001ba711b86d4cf47a678618",
+    "web/src/storage.jsx": "efa3f329b6bb7db4d65c514ec1eabb6e6eab3750e5084dce7a454f3d5b0a6ac1",
+    "web/src/style.css": "f2a5c21f40841e7f69d6347b0e97444ce9efb3444864f3f9167d540cb8dc5d89",
+    "web/src/ui.jsx": "156d17fd49af779b2a75c88bb188878ab7feb96199caccd2bbb2149a7e83a21e",
+    "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+  },
+  "post_qualification_documentation_changes": {
+    "docs/INVOCATION_URLS.md": {
+      "executed_sha256": "8fb534b9f7862ffe26fd8400bc3f3f0f891982782d5f18c3a316c815937ef77c",
+      "delivered_sha256": "d757a5c167bc0e9a10bdbcc19416748ec1423f7293316555daaa0cfa8b5acbc6"
+    }
+  },
+  "product_sources_unchanged_since_full_regression": {
+    "proof": "docs/evidence/invocation-urls-regressions-dev-2026-11-08.json",
+    "sha256": "df0e90267afae50c4b733b8e36f6952acc875b23d79572374abd9807778cc58f",
+    "compared_source_files": 56
+  },
+  "phases": [
+    {
+      "campaign": "invocation-url-transport",
+      "exit_code": 0,
+      "duration_seconds": 120.958,
+      "passed_groups": 3,
+      "report_archive": {
+        "path": ".local/e2e/invocation-url-transport-invocation-url-transport-report.json",
+        "sha256": "85c05f6a478596e8fe27e288f84771e93a29827de7ca8599b45f8235d71e5d3c"
+      },
+      "before": {
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "adapter_images": {
+          "p2enjoy-adapter:dev": "sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa",
+          "p2enjoy-adapter-e2e:dev": "sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e"
+        },
+        "report": {
+          "sampled_at_ns": 1794159824333739937,
+          "mtime_ns": null,
+          "sha256": null
+        }
+      },
+      "after": {
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "adapter_images": {
+          "p2enjoy-adapter:dev": "sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa",
+          "p2enjoy-adapter-e2e:dev": "sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e"
+        },
+        "report": {
+          "sampled_at_ns": 1794159945291355399,
+          "mtime_ns": 1794159944637145112,
+          "sha256": "85c05f6a478596e8fe27e288f84771e93a29827de7ca8599b45f8235d71e5d3c"
+        }
+      },
+      "source_before_after_identical": true
+    },
+    {
+      "campaign": "service-transport",
+      "exit_code": 0,
+      "duration_seconds": 61.46,
+      "passed_groups": 5,
+      "report_archive": {
+        "path": ".local/e2e/invocation-url-transport-service-transport-report.json",
+        "sha256": "80e76cb6e56778136b124c0bc4281302f2b3eaa06104b27d9bd3b23a569840de"
+      },
+      "before": {
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "adapter_images": {
+          "p2enjoy-adapter:dev": "sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa",
+          "p2enjoy-adapter-e2e:dev": "sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e"
+        },
+        "report": {
+          "sampled_at_ns": 1794159945924114071,
+          "mtime_ns": 1794157154225053350,
+          "sha256": "5c6f94f8833a1b4db3cbd747059beab5a2c530adbc608e352bc0bd915ec35943"
+        }
+      },
+      "after": {
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "adapter_images": {
+          "p2enjoy-adapter:dev": "sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa",
+          "p2enjoy-adapter-e2e:dev": "sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e"
+        },
+        "report": {
+          "sampled_at_ns": 1794160007384110342,
+          "mtime_ns": 1794160006608104237,
+          "sha256": "80e76cb6e56778136b124c0bc4281302f2b3eaa06104b27d9bd3b23a569840de"
+        }
+      },
+      "source_before_after_identical": true
+    },
+    {
+      "campaign": "invocation-urls",
+      "exit_code": 0,
+      "duration_seconds": 30.089,
+      "passed_groups": 8,
+      "report_archive": {
+        "path": ".local/e2e/invocation-url-transport-invocation-urls-report.json",
+        "sha256": "ca3a5b59a693f76f684f52f69626ea666cb418937df3a6b72a23076513bf4833"
+      },
+      "before": {
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "adapter_images": {
+          "p2enjoy-adapter:dev": "sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa",
+          "p2enjoy-adapter-e2e:dev": "sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e"
+        },
+        "report": {
+          "sampled_at_ns": 1794160008023264952,
+          "mtime_ns": 1794157245484518558,
+          "sha256": "089ed7ac03ea1d4d7a850c6225304e5efb5a4d33825089dbdf4c8f7a4d29d306"
+        }
+      },
+      "after": {
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "adapter_images": {
+          "p2enjoy-adapter:dev": "sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa",
+          "p2enjoy-adapter-e2e:dev": "sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e"
+        },
+        "report": {
+          "sampled_at_ns": 1794160038112487556,
+          "mtime_ns": 1794160036777595015,
+          "sha256": "ca3a5b59a693f76f684f52f69626ea666cb418937df3a6b72a23076513bf4833"
+        }
+      },
+      "source_before_after_identical": true
+    }
+  ],
+  "suite_archive": {
+    "path": ".local/e2e/invocation-url-transport-checkpoint.json",
+    "sha256": "ee5e5c537b2d0e7f5da13b88257aac792a75f38317746a93538d3e92371ce187"
+  },
+  "catalogue_transport_report": {
+    "target": "https://serverless.lelabs.tech",
+    "completed": true,
+    "checks": [
+      {
+        "name": "Observateur de catalogue perdu : restauration indépendante, brouillon intact",
+        "status": "passed"
+      },
+      {
+        "name": "GET catalogue coupé après réception : publication conservée sans rejeu",
+        "status": "passed"
+      },
+      {
+        "name": "GET catalogue coupé avant émission : publication conservée sans rejeu",
+        "status": "passed"
+      }
+    ],
+    "observations": [
+      {
+        "scenario": "observer-loss",
+        "events": [
+          {
+            "event": "guard-armed",
+            "unit": "serverless-restore-invocation-url-5389a2b7560f4ced9e03b825d680363f"
+          },
+          {
+            "event": "armed",
+            "unit": "serverless-restore-invocation-url-5389a2b7560f4ced9e03b825d680363f",
+            "container_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+            "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+            "before": {
+              "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "version": 1794159824.79682,
+              "mutations": 0,
+              "functions": 1,
+              "candidates": 0,
+              "publication": {
+                "function_id": "4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e",
+                "active_revision_id": null,
+                "revisions": [],
+                "candidates": [],
+                "deploy_audits": 0,
+                "storage_operations": 0
+              }
+            }
+          },
+          {
+            "event": "suspended",
+            "unit": "serverless-restore-invocation-url-5389a2b7560f4ced9e03b825d680363f"
+          },
+          {
+            "event": "observer-loss",
+            "signal": "SIGKILL",
+            "unit": "serverless-restore-invocation-url-5389a2b7560f4ced9e03b825d680363f"
+          }
+        ],
+        "restored": {
+          "event": "restored",
+          "independent": true,
+          "container_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+          "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+          "observer_gone": true,
+          "was_running": true,
+          "exit_code_before": 0,
+          "healthy": true,
+          "reference_unchanged": true,
+          "stop_mutator_joined": true,
+          "ssh_exit_code": 255
+        },
+        "durable": {
+          "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "version": 1794159824.79682,
+          "mutations": 0,
+          "functions": 1,
+          "candidates": 0,
+          "publication": {
+            "function_id": "4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e",
+            "active_revision_id": null,
+            "revisions": [],
+            "candidates": [],
+            "deploy_audits": 0,
+            "storage_operations": 0
+          }
+        }
+      },
+      {
+        "scenario": "native-cli-connections",
+        "service_id": "a81d6d6a-5807-4eac-85cd-673dd0b3b765",
+        "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+        "https_connect_attempts": 6,
+        "expected_read_requests": 4,
+        "expected_mutation_attempts": 2,
+        "cli_process_group_confirmed_gone": true,
+        "trace_sha256": "d2485d59a7c610ba510c1686c36385b095a35ad243ff6d7e828dabae8fd06266"
+      },
+      {
+        "scenario": "before",
+        "service_id": "a81d6d6a-5807-4eac-85cd-673dd0b3b765",
+        "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+        "events": [
+          {
+            "event": "guard-armed",
+            "unit": "serverless-restore-invocation-url-6ed0cc83554f49bd813222507361a952"
+          },
+          {
+            "event": "armed",
+            "unit": "serverless-restore-invocation-url-6ed0cc83554f49bd813222507361a952",
+            "container_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+            "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+            "before": {
+              "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "version": 1794159843.3470533,
+              "mutations": 0,
+              "functions": 1,
+              "candidates": 0,
+              "publication": {
+                "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+                "active_revision_id": null,
+                "revisions": [],
+                "candidates": [],
+                "deploy_audits": 0,
+                "storage_operations": 0
+              }
+            }
+          },
+          {
+            "event": "gated",
+            "boundary": "after-receive",
+            "syscall": 45,
+            "durable": {
+              "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "version": 1794159843.3470533,
+              "mutations": 0,
+              "functions": 1,
+              "candidates": 1,
+              "publication": {
+                "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+                "active_revision_id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                "revisions": [
+                  {
+                    "id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                    "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                    "deleted_at": null
+                  }
+                ],
+                "candidates": [
+                  {
+                    "id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                    "state": "published",
+                    "revision_id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                    "reserved_bytes": 0
+                  }
+                ],
+                "deploy_audits": 1,
+                "storage_operations": 0,
+                "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                "archive_bytes": 568
+              }
+            },
+            "service_id": "a81d6d6a-5807-4eac-85cd-673dd0b3b765"
+          },
+          {
+            "event": "cut",
+            "exit_code": 137,
+            "durable": {
+              "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "version": 1794159843.3470533,
+              "mutations": 0,
+              "functions": 1,
+              "candidates": 1,
+              "publication": {
+                "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+                "active_revision_id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                "revisions": [
+                  {
+                    "id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                    "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                    "deleted_at": null
+                  }
+                ],
+                "candidates": [
+                  {
+                    "id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                    "state": "published",
+                    "revision_id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                    "reserved_bytes": 0
+                  }
+                ],
+                "deploy_audits": 1,
+                "storage_operations": 0,
+                "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                "archive_bytes": 568
+              }
+            }
+          },
+          {
+            "event": "restored",
+            "independent": false,
+            "container_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+            "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+            "was_running": false,
+            "exit_code_before": 137,
+            "healthy": true,
+            "reference_unchanged": true,
+            "stop_mutator_joined": true
+          }
+        ],
+        "restored": {
+          "event": "restored",
+          "independent": false,
+          "container_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+          "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+          "was_running": false,
+          "exit_code_before": 137,
+          "healthy": true,
+          "reference_unchanged": true,
+          "stop_mutator_joined": true
+        },
+        "report": {
+          "service": "catalogue-before",
+          "completed": true,
+          "results": [
+            {
+              "name": "durable-publication",
+              "state": "published",
+              "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+              "deployment_id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+              "revision_id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+              "invocation_urls": {
+                "state": "unavailable",
+                "error": {
+                  "code": "http_502",
+                  "status": 502
+                }
+              }
+            }
+          ],
+          "warnings": [],
+          "service_configuration": {
+            "state": "preserved"
+          },
+          "service_id": "a81d6d6a-5807-4eac-85cd-673dd0b3b765"
+        },
+        "durable": {
+          "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "version": 1794159843.3470533,
+          "mutations": 0,
+          "functions": 1,
+          "candidates": 1,
+          "publication": {
+            "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+            "active_revision_id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+            "revisions": [
+              {
+                "id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                "deleted_at": null
+              }
+            ],
+            "candidates": [
+              {
+                "id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                "state": "published",
+                "revision_id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+                "reserved_bytes": 0
+              }
+            ],
+            "deploy_audits": 1,
+            "storage_operations": 0,
+            "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+            "archive_bytes": 568
+          }
+        },
+        "catalogue": {
+          "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+          "service_id": "a81d6d6a-5807-4eac-85cd-673dd0b3b765",
+          "revision_id": "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+          "function_state": "published",
+          "console_url": "https://serverless.lelabs.tech/console/functions/69da175a-60e4-4c2c-997c-48fc4a1f091d/invocation-urls",
+          "source": {
+            "state": "available",
+            "observed_at": 1794159889.946678,
+            "mtime": 1794156773.406629,
+            "sha256": "40426864082b4559bccaf3ab6cb68460d40d7b439b285d13311188d9a6e30fd4"
+          },
+          "items": [
+            {
+              "domain": "serverless.lelabs.tech",
+              "origin": "https://serverless.lelabs.tech",
+              "transport": "https",
+              "urls": [
+                {
+                  "url": "https://serverless.lelabs.tech/invoke/69da175a-60e4-4c2c-997c-48fc4a1f091d",
+                  "methods": [
+                    "DELETE",
+                    "GET",
+                    "HEAD",
+                    "OPTIONS",
+                    "PATCH",
+                    "POST",
+                    "PUT"
+                  ]
+                }
+              ]
+            }
+          ],
+          "total": 1,
+          "limit": 5,
+          "offset": 0,
+          "wildcards": []
+        },
+        "invocation_status": 200
+      },
+      {
+        "scenario": "native-cli-connections",
+        "service_id": "6cf8dafb-f116-49cb-b539-8a3ff7dad6ca",
+        "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+        "https_connect_attempts": 6,
+        "expected_read_requests": 4,
+        "expected_mutation_attempts": 2,
+        "cli_process_group_confirmed_gone": true,
+        "trace_sha256": "f94219956b41eef9485203225fabd072a22496387e1672ac216b9449fa96df73"
+      },
+      {
+        "scenario": "after",
+        "service_id": "6cf8dafb-f116-49cb-b539-8a3ff7dad6ca",
+        "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+        "events": [
+          {
+            "event": "guard-armed",
+            "unit": "serverless-restore-invocation-url-3ce03aaf9edb431384ffa886ed98842a"
+          },
+          {
+            "event": "armed",
+            "unit": "serverless-restore-invocation-url-3ce03aaf9edb431384ffa886ed98842a",
+            "container_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+            "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+            "before": {
+              "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "version": 1794159895.2216876,
+              "mutations": 0,
+              "functions": 1,
+              "candidates": 0,
+              "publication": {
+                "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+                "active_revision_id": null,
+                "revisions": [],
+                "candidates": [],
+                "deploy_audits": 0,
+                "storage_operations": 0
+              }
+            }
+          },
+          {
+            "event": "gated",
+            "boundary": "before-send",
+            "syscall": 44,
+            "durable": {
+              "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "version": 1794159895.2216876,
+              "mutations": 0,
+              "functions": 1,
+              "candidates": 1,
+              "publication": {
+                "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+                "active_revision_id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                "revisions": [
+                  {
+                    "id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                    "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                    "deleted_at": null
+                  }
+                ],
+                "candidates": [
+                  {
+                    "id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                    "state": "published",
+                    "revision_id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                    "reserved_bytes": 0
+                  }
+                ],
+                "deploy_audits": 1,
+                "storage_operations": 0,
+                "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                "archive_bytes": 568
+              }
+            },
+            "service_id": "6cf8dafb-f116-49cb-b539-8a3ff7dad6ca"
+          },
+          {
+            "event": "cut",
+            "exit_code": 137,
+            "durable": {
+              "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "version": 1794159895.2216876,
+              "mutations": 0,
+              "functions": 1,
+              "candidates": 1,
+              "publication": {
+                "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+                "active_revision_id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                "revisions": [
+                  {
+                    "id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                    "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                    "deleted_at": null
+                  }
+                ],
+                "candidates": [
+                  {
+                    "id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                    "state": "published",
+                    "revision_id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                    "reserved_bytes": 0
+                  }
+                ],
+                "deploy_audits": 1,
+                "storage_operations": 0,
+                "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                "archive_bytes": 568
+              }
+            }
+          },
+          {
+            "event": "restored",
+            "independent": false,
+            "container_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+            "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+            "was_running": false,
+            "exit_code_before": 137,
+            "healthy": true,
+            "reference_unchanged": true,
+            "stop_mutator_joined": true
+          }
+        ],
+        "restored": {
+          "event": "restored",
+          "independent": false,
+          "container_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+          "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+          "was_running": false,
+          "exit_code_before": 137,
+          "healthy": true,
+          "reference_unchanged": true,
+          "stop_mutator_joined": true
+        },
+        "report": {
+          "service": "catalogue-after",
+          "completed": true,
+          "results": [
+            {
+              "name": "durable-publication",
+              "state": "published",
+              "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+              "deployment_id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+              "revision_id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+              "invocation_urls": {
+                "state": "unavailable",
+                "error": {
+                  "code": "http_502",
+                  "status": 502
+                }
+              }
+            }
+          ],
+          "warnings": [],
+          "service_configuration": {
+            "state": "preserved"
+          },
+          "service_id": "6cf8dafb-f116-49cb-b539-8a3ff7dad6ca"
+        },
+        "durable": {
+          "environment_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "version": 1794159895.2216876,
+          "mutations": 0,
+          "functions": 1,
+          "candidates": 1,
+          "publication": {
+            "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+            "active_revision_id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+            "revisions": [
+              {
+                "id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+                "deleted_at": null
+              }
+            ],
+            "candidates": [
+              {
+                "id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                "state": "published",
+                "revision_id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+                "reserved_bytes": 0
+              }
+            ],
+            "deploy_audits": 1,
+            "storage_operations": 0,
+            "archive_sha256": "5aa0f20c3167bda3be48228f9ceb861fef10a897f2a9669c7490ac75341c2996",
+            "archive_bytes": 568
+          }
+        },
+        "catalogue": {
+          "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+          "service_id": "6cf8dafb-f116-49cb-b539-8a3ff7dad6ca",
+          "revision_id": "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+          "function_state": "published",
+          "console_url": "https://serverless.lelabs.tech/console/functions/2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0/invocation-urls",
+          "source": {
+            "state": "available",
+            "observed_at": 1794159938.0140073,
+            "mtime": 1794156773.406629,
+            "sha256": "40426864082b4559bccaf3ab6cb68460d40d7b439b285d13311188d9a6e30fd4"
+          },
+          "items": [
+            {
+              "domain": "serverless.lelabs.tech",
+              "origin": "https://serverless.lelabs.tech",
+              "transport": "https",
+              "urls": [
+                {
+                  "url": "https://serverless.lelabs.tech/invoke/2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+                  "methods": [
+                    "DELETE",
+                    "GET",
+                    "HEAD",
+                    "OPTIONS",
+                    "PATCH",
+                    "POST",
+                    "PUT"
+                  ]
+                }
+              ]
+            }
+          ],
+          "total": 1,
+          "limit": 5,
+          "offset": 0,
+          "wildcards": []
+        },
+        "invocation_status": 200
+      }
+    ],
+    "skipped": 0,
+    "cleanup": true,
+    "cleanup_errors": [],
+    "cli_process_group": {
+      "id": 309669,
+      "confirmed_gone": true
+    },
+    "work_retained": false,
+    "namespace_id": "2def8ab5-bc2f-4989-ae90-6e4941935ef8",
+    "service_ids": [
+      "23787576-6f20-4d43-bd8b-9d559af9bbad",
+      "a81d6d6a-5807-4eac-85cd-673dd0b3b765",
+      "6cf8dafb-f116-49cb-b539-8a3ff7dad6ca"
+    ],
+    "function_ids": [
+      "4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e",
+      "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+      "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0"
+    ],
+    "storage_archives": [
+      {
+        "namespace_id": "2def8ab5-bc2f-4989-ae90-6e4941935ef8",
+        "function_id": "4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e",
+        "operation_id": "d438da93-a5ba-41ba-bba9-47c752e63ca6",
+        "purged": true
+      },
+      {
+        "namespace_id": "2def8ab5-bc2f-4989-ae90-6e4941935ef8",
+        "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+        "operation_id": "024d9ff7-d5ba-4502-8baf-6fbbe4e35ded",
+        "purged": true
+      },
+      {
+        "namespace_id": "2def8ab5-bc2f-4989-ae90-6e4941935ef8",
+        "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+        "operation_id": "4561977d-ba7b-41d8-a418-5b8033fff7ce",
+        "purged": true
+      }
+    ]
+  },
+  "physical": {
+    "completed": true,
+    "physical": {
+      "completed": true,
+      "target": "infra-serverless DEV",
+      "campaigns": {
+        "2def8ab5-bc2f-4989-ae90-6e4941935ef8": [
+          "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+          "4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e",
+          "69da175a-60e4-4c2c-997c-48fc4a1f091d"
+        ],
+        "9ddd3f5d-208d-4c4d-bc58-c9d1ca8d650d": [
+          "4fef4ced-75de-4988-b40e-0c63a0202689",
+          "bd587310-5135-4f35-a0b5-8f0aff8ddb52"
+        ],
+        "d85b6884-0b63-4fd6-b569-7f0f6e1c8699": [
+          "9db79fc7-c1de-4f1b-9daf-771c2ca5ede5",
+          "b3184191-960b-4800-9af2-1d6732da2f29",
+          "bd2eb3a1-bff9-40fb-88e0-4c8ba849534f"
+        ]
+      },
+      "functions": {
+        "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0": {
+          "control": {
+            "id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "4561977d-ba7b-41d8-a418-5b8033fff7ce",
+          "result_version": 1794159939.7825053,
+          "agent_receipt": {
+            "operation_id": "4561977d-ba7b-41d8-a418-5b8033fff7ce",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e": {
+          "control": {
+            "id": "4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "d438da93-a5ba-41ba-bba9-47c752e63ca6",
+          "result_version": 1794159839.7396417,
+          "agent_receipt": {
+            "operation_id": "d438da93-a5ba-41ba-bba9-47c752e63ca6",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "69da175a-60e4-4c2c-997c-48fc4a1f091d": {
+          "control": {
+            "id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "024d9ff7-d5ba-4502-8baf-6fbbe4e35ded",
+          "result_version": 1794159891.779607,
+          "agent_receipt": {
+            "operation_id": "024d9ff7-d5ba-4502-8baf-6fbbe4e35ded",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "4fef4ced-75de-4988-b40e-0c63a0202689": {
+          "control": {
+            "id": "4fef4ced-75de-4988-b40e-0c63a0202689",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "537e1430-1d2a-4881-bf87-fdd6a94bb0d7",
+          "result_version": 1794160004.3941483,
+          "agent_receipt": {
+            "operation_id": "537e1430-1d2a-4881-bf87-fdd6a94bb0d7",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "bd587310-5135-4f35-a0b5-8f0aff8ddb52": {
+          "control": {
+            "id": "bd587310-5135-4f35-a0b5-8f0aff8ddb52",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "cb874174-6886-4d37-8f59-9219315799dd",
+          "result_version": 1794159981.4348428,
+          "agent_receipt": {
+            "operation_id": "cb874174-6886-4d37-8f59-9219315799dd",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "9db79fc7-c1de-4f1b-9daf-771c2ca5ede5": {
+          "control": {
+            "id": "9db79fc7-c1de-4f1b-9daf-771c2ca5ede5",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "a5002d2d-1e8d-4dd4-873a-04c1e74778f6",
+          "result_version": 1794160031.9712842,
+          "agent_receipt": {
+            "operation_id": "a5002d2d-1e8d-4dd4-873a-04c1e74778f6",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "b3184191-960b-4800-9af2-1d6732da2f29": {
+          "control": {
+            "id": "b3184191-960b-4800-9af2-1d6732da2f29",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "fe952c59-0bae-4b12-a3af-a1db35b54e66",
+          "result_version": 1794160027.073903,
+          "agent_receipt": {
+            "operation_id": "fe952c59-0bae-4b12-a3af-a1db35b54e66",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "bd2eb3a1-bff9-40fb-88e0-4c8ba849534f": {
+          "control": {
+            "id": "bd2eb3a1-bff9-40fb-88e0-4c8ba849534f",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "86c09692-8938-41e9-b42c-0ea7bca31e59",
+          "result_version": 1794160026.3473861,
+          "agent_receipt": {
+            "operation_id": "86c09692-8938-41e9-b42c-0ea7bca31e59",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        }
+      },
+      "global_control_reservations": {
+        "instances": 0,
+        "cpu_nanos": 0,
+        "memory_mib": 0
+      },
+      "global_storage_allocated_bytes": 0,
+      "physical": {
+        "artifacts_absent": true,
+        "backings_absent": true,
+        "mount_directories_absent": true,
+        "mounts_absent": true,
+        "known_execution_channels_absent": true,
+        "global_trash_empty": true,
+        "global_validation_channels_empty": true,
+        "global_execution_channels_empty": true,
+        "containers_absent_2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0": true,
+        "networks_absent_2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0": true,
+        "containers_absent_4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e": true,
+        "networks_absent_4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e": true,
+        "containers_absent_69da175a-60e4-4c2c-997c-48fc4a1f091d": true,
+        "networks_absent_69da175a-60e4-4c2c-997c-48fc4a1f091d": true,
+        "containers_absent_4fef4ced-75de-4988-b40e-0c63a0202689": true,
+        "networks_absent_4fef4ced-75de-4988-b40e-0c63a0202689": true,
+        "containers_absent_bd587310-5135-4f35-a0b5-8f0aff8ddb52": true,
+        "networks_absent_bd587310-5135-4f35-a0b5-8f0aff8ddb52": true,
+        "containers_absent_9db79fc7-c1de-4f1b-9daf-771c2ca5ede5": true,
+        "networks_absent_9db79fc7-c1de-4f1b-9daf-771c2ca5ede5": true,
+        "containers_absent_b3184191-960b-4800-9af2-1d6732da2f29": true,
+        "networks_absent_b3184191-960b-4800-9af2-1d6732da2f29": true,
+        "containers_absent_bd2eb3a1-bff9-40fb-88e0-4c8ba849534f": true,
+        "networks_absent_bd2eb3a1-bff9-40fb-88e0-4c8ba849534f": true,
+        "global_validators_absent": true
+      },
+      "artifact_ids": [
+        "0e012139-d330-479e-a44f-833f2637b451",
+        "187ff2e4-f1f5-40d3-8a01-c946e2f6ed03",
+        "20846479-9bd8-4c3c-af75-2ebe40ec9116",
+        "3e217439-1dc9-4765-99ad-7523e9143bbc",
+        "434070c0-fdd4-4f68-a6f9-0071aefe2a4e",
+        "63616ff0-258b-493e-a6ac-f8abd05bebe8",
+        "98053028-8fa6-41d1-9e29-77b842393dbb",
+        "a9aeaa58-3825-472f-aeec-5a2f46ea13a6"
+      ],
+      "instance_ids": [
+        "0f970536-a8be-4ef9-a552-0d452eacc084",
+        "11811c04-684e-4643-bc51-4644798a5f84",
+        "1c0ebf75-ef23-45c4-af17-1e37c93acd6d",
+        "22046326-354f-409c-9452-5f7ea27bd776",
+        "2dfe0978-7d7e-4b91-bb16-3adcca7aff03",
+        "39ce9953-5ae4-4d5a-9df7-7cc8c8d9cbfc",
+        "3be9c995-2c2c-4455-87f3-045af2bb13aa",
+        "6faec628-cfd3-4de4-993e-1a34b9c566d7",
+        "a79a6048-26a7-463e-bcaa-0bdd1c6fa602"
+      ],
+      "secrets": [
+        {
+          "function_id": "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "69da175a-60e4-4c2c-997c-48fc4a1f091d",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "4fef4ced-75de-4988-b40e-0c63a0202689",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "bd587310-5135-4f35-a0b5-8f0aff8ddb52",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "9db79fc7-c1de-4f1b-9daf-771c2ca5ede5",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "b3184191-960b-4800-9af2-1d6732da2f29",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "bd2eb3a1-bff9-40fb-88e0-4c8ba849534f",
+          "secrets_empty": true
+        }
+      ],
+      "control_image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a"
+    },
+    "campaigns": {
+      "2def8ab5-bc2f-4989-ae90-6e4941935ef8": [
+        "2b0d7a9b-0a7f-44a2-9120-4af1fc9cf4d0",
+        "4e940cc5-9c0c-47f0-8c70-a3f2e02dd45e",
+        "69da175a-60e4-4c2c-997c-48fc4a1f091d"
+      ],
+      "9ddd3f5d-208d-4c4d-bc58-c9d1ca8d650d": [
+        "4fef4ced-75de-4988-b40e-0c63a0202689",
+        "bd587310-5135-4f35-a0b5-8f0aff8ddb52"
+      ],
+      "d85b6884-0b63-4fd6-b569-7f0f6e1c8699": [
+        "9db79fc7-c1de-4f1b-9daf-771c2ca5ede5",
+        "b3184191-960b-4800-9af2-1d6732da2f29",
+        "bd2eb3a1-bff9-40fb-88e0-4c8ba849534f"
+      ]
+    },
+    "guards_inactive": [
+      "serverless-restore-invocation-url-3ce03aaf9edb431384ffa886ed98842a",
+      "serverless-restore-invocation-url-5389a2b7560f4ced9e03b825d680363f",
+      "serverless-restore-invocation-url-6ed0cc83554f49bd813222507361a952",
+      "serverless-restore-service-transport-05bbbb48c4294a1a95e9842db0d31ad1",
+      "serverless-restore-service-transport-62af94b5af5241e09305972029d69657",
+      "serverless-restore-service-transport-ab6d1b0af2c8406f8101437a77dd438a"
+    ],
+    "agent_active": true,
+    "embedded_sources": {
+      "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+      "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+      "app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+      "app/deployments.py": "1df532d18cfa3838fb3b04840ccf1dda13eb3e9ae2963b4e1b781551d861195d",
+      "app/execution.py": "8c52837c6b893411ea10af481f573aa54db98990624079d5bb7b8c2a6f6e485f",
+      "app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+      "app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+      "app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+      "app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+      "app/invocation_urls.py": "f05e6ee7f399b4d54cf2c15b186c13d7eb75266172bcc33127e7fca6dce5c1df",
+      "app/main.py": "0763accfcd9dfca32ce8d7f09ae67d7adb7264d567fa0f8822479d432d863956",
+      "app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+      "app/models.py": "fbfa169dc95872a8b19378e92b19f3f1074ff20f2a825a5671b99b784aac4b3e",
+      "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+      "app/storage_management.py": "37ce7e205ec06860eb096c37d85d7015c5002558101faf6b90eccfda81181ea7",
+      "app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+      "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+      "migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+      "migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859"
+    },
+    "services": [
+      {
+        "name": "/serverless-api",
+        "id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "started_at": "2026-11-08T17:46:34.042092061Z",
+        "healthy": true
+      },
+      {
+        "name": "/serverless-runtime-reference",
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "started_at": "2026-11-06T15:49:39.578107028Z",
+        "healthy": true
+      }
+    ],
+    "reference_unchanged_since_full_regression": true,
+    "raw_report_archive": {
+      "path": ".local/e2e/invocation-url-transport-physical-raw.json",
+      "sha256": "98a747b0e3c64613fb4219568e07564d47d07dd2f7379ee7874f557601bc4d72",
+      "note": "Octets natifs échantillonnés, reconstitués sans modification depuis le wrapper ; SHA identique au snapshot original."
+    }
+  },
+  "physical_wrapper_archive": {
+    "path": ".local/e2e/invocation-url-transport-physical.json",
+    "sha256": "4e8708a63ae154e99c1c3f2981b26c4d4d4c4b2cfa6df8078c95b38cdfc56c4d"
+  },
+  "physical_raw_archive": {
+    "path": ".local/e2e/invocation-url-transport-physical-raw.json",
+    "sha256": "98a747b0e3c64613fb4219568e07564d47d07dd2f7379ee7874f557601bc4d72",
+    "note": "Octets natifs échantillonnés, reconstitués sans modification depuis le wrapper ; SHA identique au snapshot original."
+  },
+  "final_installation": {
+    "official_environment_matches": true,
+    "network_mode": "host",
+    "spark_mount_readonly": true,
+    "official_sha256": {
+      "/etc/spark/env": "ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d",
+      "/run/spark/secrets": "b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5"
+    },
+    "services": [
+      {
+        "name": "/serverless-api",
+        "id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "health": "healthy",
+        "started_at": "2026-11-08T17:46:34.042092061Z"
+      },
+      {
+        "name": "/serverless-runtime-reference",
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "health": "healthy",
+        "started_at": "2026-11-06T15:49:39.578107028Z"
+      }
+    ],
+    "agent_active": true,
+    "routes": {
+      "sha256": "40426864082b4559bccaf3ab6cb68460d40d7b439b285d13311188d9a6e30fd4",
+      "mode": "0o640",
+      "declared_rows": [
+        "serverless.lelabs.tech 18090 tls"
+      ]
+    },
+    "route_proposal_sha256": "28dd866ad53907ab8e467298468f354752b411d1b0219c296ece56385e82123f",
+    "notes": {
+      "README.md": {
+        "active_sha256": "68231a5bc5cd7b7a7521e435c67b6d1117fd56fbca3092d9483ea3cbd86d04b3",
+        "proposal_sha256": "eba95f154ea58f48f5b7002ff6112bc6daabf5e13302b0ef9d5e17410e480baf"
+      },
+      "CONTRIBUTORS.md": {
+        "active_sha256": "b6ee5681dca28cced5e57008b8b2002e11680ee0506be045b98458302f324f66",
+        "proposal_sha256": "6f308138cb19c28937904f9bb43577b5c803ee962c2f9de986b586100aab2443"
+      },
+      "INSTALL.md": {
+        "active_sha256": "8f1506c07b936669f16990f31eb9469fda6724c40ff2c6a8e50f9ace26f52d65",
+        "proposal_sha256": "1d09914c54c3551e338dde69bf08a579c95905369f45a108105b93958636fc81"
+      }
+    }
+  },
+  "spark_notes": {
+    "completed": true,
+    "notes": {
+      "README.md": {
+        "path": "/etc/spark/notes/README.md.?",
+        "sha256": "eba95f154ea58f48f5b7002ff6112bc6daabf5e13302b0ef9d5e17410e480baf",
+        "active_sha256": "68231a5bc5cd7b7a7521e435c67b6d1117fd56fbca3092d9483ea3cbd86d04b3",
+        "previous_proposal_sha256": "670c7bb18c6b975df96f33aa8363da745bc63b7adbd9ef00f28944586958277b",
+        "proposed": true,
+        "adoption_claimed": false
+      },
+      "CONTRIBUTORS.md": {
+        "path": "/etc/spark/notes/CONTRIBUTORS.md.?",
+        "sha256": "6f308138cb19c28937904f9bb43577b5c803ee962c2f9de986b586100aab2443",
+        "active_sha256": "b6ee5681dca28cced5e57008b8b2002e11680ee0506be045b98458302f324f66",
+        "previous_proposal_sha256": "9e5e3ccd78ea61be5f1e97e338aec6322ba6c0e461e3cab093552ea46942bfb3",
+        "proposed": true,
+        "adoption_claimed": false
+      },
+      "INSTALL.md": {
+        "path": "/etc/spark/notes/INSTALL.md.?",
+        "sha256": "1d09914c54c3551e338dde69bf08a579c95905369f45a108105b93958636fc81",
+        "active_sha256": "8f1506c07b936669f16990f31eb9469fda6724c40ff2c6a8e50f9ace26f52d65",
+        "previous_proposal_sha256": "464ff94b7abf2b6dd1d43aef2efe3592cad01183ebd8ecb5df5eabe4d6726a14",
+        "proposed": true,
+        "adoption_claimed": false
+      }
+    }
+  },
+  "configuration": {
+    "new_variables": [],
+    "new_secrets": [],
+    "new_migrations": [],
+    "new_routes_applied": [],
+    "application_rebuild": false,
+    "official_env_files_only": true
+  },
+  "documentation_and_clients_sha256": {
+    "CHANGELOG.md": "f068cff63a9c80e51825c01ea6680ea96d0eb9c51d0bbdc271293a651a3bf100",
+    "README.md": "50b8a4e0ed08717313833b78737cf6c8b27023f7209400b0b20235308a9cdc3f",
+    "adapter/README.md": "bc534884572b071bd9bbd6e53aed2758a70326d7a06ab431bee6574098f6f1ff",
+    "docs/BACKLOG.md": "c28e123261c4df882c0e878374942e0fa6a792e6e9ec51ce3dccf071847c3365",
+    "docs/DAT.md": "350aa5f3293f4427b8c6300efb4079b93c50f2c3cbf03bd5f8c407631718df15",
+    "docs/INVOCATION_URLS.md": "d757a5c167bc0e9a10bdbcc19416748ec1423f7293316555daaa0cfa8b5acbc6",
+    "docs/JOURNAL.md": "381056226e525cbf16ae9e2e5d9b08c15d07208ed977755a77ce6d66319f395d",
+    "docs/PLATFORM_DEV.md": "e07534172711eb54bbb682c50f3f9ce41e25b8c9508fb96b4d0536fc50198c55",
+    "e2e/README.md": "dde251c208ea776c114062ce76d1a0dbcd653f196a7c242dc196d0ad700f3d32",
+    "e2e/service-transport-observer.py": "9dc27d1a6222d962c0bed64f075739960b06d6ab4a3eae781821ed0397d9d4b1",
+    "e2e/storage-console-inspect.py": "280603dbe3013006ae4374168338473b046b1e8038062c926136f55ae7eb8bd9",
+    "qualification/spark-notes/CONTRIBUTORS.md": "6f308138cb19c28937904f9bb43577b5c803ee962c2f9de986b586100aab2443",
+    "qualification/spark-notes/INSTALL.md": "1d09914c54c3551e338dde69bf08a579c95905369f45a108105b93958636fc81",
+    "qualification/spark-notes/README.md": "eba95f154ea58f48f5b7002ff6112bc6daabf5e13302b0ef9d5e17410e480baf",
+    "e2e/invocation-url-transport.mjs": "207c2b9ac373e3dde24c3956347cface0a91f2bd1d24f97395844d4eb6d893ee"
+  },
+  "reviews": {
+    "implementation": {
+      "initial_findings": [
+        "Reprise de purge limitée aux fonctions vivantes",
+        "Fin du traceur ne prouvant pas la fin du groupe CLI"
+      ],
+      "corrected_before_execution": true,
+      "blocking_findings_after_correction": []
+    },
+    "evidence": {
+      "role": "factory_verifier",
+      "tests_services_or_remote_commands_run": false,
+      "tracked_writes": false,
+      "verified": [
+        "16 groupes / 187 sources / images / fraîcheur SHA",
+        "Deux vrais HTTP502 et publication conservée avec six connexions sans rejeu",
+        "Huit fonctions dans trois namespaces et six gardes terminées",
+        "26 sources embarquées et référence inchangée"
+      ],
+      "raw_wrapper_traceability": {
+        "finding": "L’empreinte du rapport brut ne désignait plus le wrapper enrichi",
+        "resolution": "Brut reconstitué par sérialisation identique des seuls sept champs natifs, SHA égal au snapshot original ; archive et lien séparés du wrapper",
+        "rechecked": true,
+        "blocking_findings_remaining": []
+      }
+    }
+  },
+  "remaining_proofs": [
+    "Refus réel401/403 du GET de catalogue après publication CLI",
+    "Routes supplémentaires, TLS, retrait/rétablissement et absence réelle de domaine applicable",
+    "Seconde page console/CLI sur six domaines réels et cohérence/recalage",
+    "Source officielle réellement perturbée",
+    "Expiration/perte SSH du build distant",
+    "Branches du nouveau client : expiration du groupe, sortie excessive, lancement impossible, disparition inconnue, réponse de création/purge perdue"
+  ],
+  "limitations": [
+    "Complément distinct de la régression complète467 ; les13 groupes de régression sont des replays, pas13 nouveaux comportements.",
+    "Les trois nouveaux groupes prouvent les coupures502 exécutées ; ils ne prouvent ni401/403 ni les branches d’erreur listées.",
+    "Aucune interface ni source produit modifiée ; pas de nouvelle capture UI ni de reconstruction du contrôle.",
+    "Notes proposées, adoption non revendiquée ; routes/propositions inchangées.",
+    "Documents de statut actualisés après qualification ; le contrat exécuté et le contrat livré ont leurs empreintes distinctes.",
+    "Aucun remote Git configuré ; aucun push."
+  ]
+}

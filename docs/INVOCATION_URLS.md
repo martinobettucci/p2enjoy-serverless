@@ -202,7 +202,7 @@ servi correspond à ses 14 chapitres et 43 paragraphes. Les catalogues globaux
 peuvent conserver des archives historiques étrangères à ces fonctions purgées.
 
 Restent les cycles de routes et leur TLS, les pages console/CLI sur six domaines,
-la source officielle réellement perturbée et le GET de catalogue perdu/refusé
+la source officielle réellement perturbée et le GET de catalogue refusé
 après publication CLI. La preuve native du Host ci-dessous est acquise sur
 la boucle locale ; elle ne qualifie pas un alias HTTPS public. Le build nominal
 est qualifié ; sa branche d’expiration ou de perte SSH reste non éprouvée.
@@ -239,8 +239,10 @@ parcours nominal confirme le retour de chaque build, ses images et contenus.
 
 ## Perte native du catalogue après publication CLI
 
-Complément à exécuter avec `node e2e/invocation-url-transport.mjs`, sans autre
-campagne active. Réutiliser l’observateur natif et la garde indépendante du
+Le [complément DEV](evidence/invocation-url-transport-dev-2026-11-08.json)
+passe trois groupes propres avec `node e2e/invocation-url-transport.mjs`, puis
+cinq groupes de transport historique et huit API/CLI, en série. Il réutilise
+l’observateur natif et la garde indépendante du
 transport de configuration, avec des modes bornés à un namespace
 `invocation-url-transport-XXXXXXXX`, son service et l’UUID exact d’une seule
 fonction brouillon précréée. L’installation ne doit porter aucune autre fonction
@@ -271,6 +273,13 @@ périmètre, avec restauration indépendante et garde terminée. Le refus réel
 401/403 après publication reste une preuve distincte : ne pas prétendre le
 couvrir par une coupure du contrôle. Le checkpoint de 467 groupes reste intact ;
 ce complément conserve ses sources, image, rapports et nettoyages propres.
+Ses 187 sources et les images contrôle/CLI sont identiques avant/après chaque
+phase. Les deux coupures donnent réellement HTTP 502, avec publication réussie,
+mêmes UUID et six connexions CLI sans rejeu. Les deux catalogues relus et
+invocations Docker répondent normalement après reprise. Huit fonctions sont
+purgées dans trois namespaces ; six gardes sont terminées et les 26 fichiers
+embarqués sont recoupés. Le brut du relevé physique et son wrapper enrichi
+ont des empreintes séparées. Aucun comportement produit n’est modifié.
 
 Le nettoyage suit l’UUID possédé même après suppression logique : retrouver
 l’archive et consulter une purge déjà engagée avant toute relance explicite,

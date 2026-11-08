@@ -20,7 +20,7 @@ Le [checkpoint](../docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 réunit ces quatorze groupes, 36 régressions et 38 groupes dans les deux images
 CLI reconstruites, soit 88. Chaque commande est liée à ses sources et image. Il ne constitue
 pas une suite complète de plateforme ni une qualification multi-domaines.
-Les sources perturbées, CLI après consultation perdue/refusée, six domaines
+Les sources perturbées, CLI après consultation refusée, six domaines
 réels pour une seconde page et les cycles de routes restent à éprouver.
 Aucun de ces manques n’est converti en test ignoré dans les campagnes exécutées.
 
@@ -39,13 +39,20 @@ SHA avec une référence inspectée. Le vrai Host est éprouvé sur la boucle lo
 sans constituer une preuve d’alias public/TLS. Le build CLI nominal passe ; sa
 branche d’expiration ou perte SSH reste à éprouver. SLS-066 demeure ouverte.
 
-Le complément `node e2e/invocation-url-transport.mjs` est en préparation : trois
-groupes sur le vrai contrôle DEV avec garde indépendante, publication conservée
+Le [complément](../docs/evidence/invocation-url-transport-dev-2026-11-08.json)
+`node e2e/invocation-url-transport.mjs` passe trois groupes sur le vrai contrôle
+DEV avec garde indépendante, publication conservée
 malgré le GET interrompu et six connexions HTTPS CLI sans rejeu. Lire son
 [contrat](../docs/INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli)
-avant lancement ; aucune autre campagne ne peut être active. Le refus 401/403
-après publication reste distinct de cette coupure. Le rapport propre sera
+avant lancement ; aucune autre campagne ne peut être active. Les cinq groupes
+de transport historique puis huit API/CLI repassent, soit 16 groupes en série,
+avec 187 sources, huit fonctions purgées dans trois namespaces et six gardes
+terminées. Le refus 401/403 après publication reste distinct de cette coupure.
+Le rapport propre est
 `.local/e2e/invocation-url-transport.json`, sans modifier la preuve des 467 groupes.
+La reprise de purge suit l’UUID archivé et le reçu ; le groupe CLI doit avoir
+disparu avant nettoyage. Les branches d’expiration/sortie excessive/lancement
+et les nettoyages après réponses de création/purge perdues restent non éprouvés.
 
 ## Configuration commune du service
 

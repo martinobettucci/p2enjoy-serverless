@@ -357,7 +357,7 @@ La projection ne garantit ni fraîcheur transactionnelle ni certificat prêt.
 Le [checkpoint DEV](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 recoupe montage readonly, 26 sources embarquées, 88 groupes et 31 captures.
 Le contrôle est déployé avec ces parcours ; multi-domaines, sources perturbées
-et consultation CLI perdue/refusée après publication restent à qualifier.
+et consultation CLI refusée après publication restent à qualifier.
 
 ## Régression complète SLS-066
 
@@ -371,3 +371,9 @@ avec 61 observations et 18 identités SHA avec une référence inspectée.
 Le Host est exercé par un client réel de boucle locale du SPARK,
 sans dépendance remplacée ; les alias publics restent une preuve distincte.
 L’intégration de ces clients ne change ni service, schéma ni configuration.
+
+Le [complément de transport](evidence/invocation-url-transport-dev-2026-11-08.json)
+passe 16 groupes ciblés/régressions : publication conservée sous deux vrais 502
+du GET facultatif, six connexions CLI sans rejeu et invocation Docker après
+reprise. Ses 187 sources, image, huit fonctions purgées et six gardes terminées
+sont recoupées. La preuve des 467 groupes reste distincte ; le produit est inchangé.

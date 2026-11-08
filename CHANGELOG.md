@@ -2,11 +2,14 @@
 
 ## [Non publié]
 
-- Complément de transport du catalogue spécifié : trois groupes réels avec
-  garde indépendante, coupure après publication et absence de rejeu CLI.
-  Implémentation et qualification à réaliser ; aucun résultat anticipé.
-  La revue impose la reprise de purge par UUID après archivage et la fin
-  confirmée du groupe CLI avant nettoyage, y compris après expiration.
+- Complément de transport du catalogue qualifié en DEV : trois groupes réels
+  avec garde indépendante et coupures après publication, puis treize groupes
+  de régression, tous réussis. Les vrais HTTP 502 conservent la publication
+  et les UUID ; six connexions HTTPS CLI sans rejeu. Les 187 sources/images
+  sont liées, huit fonctions purgées dans trois namespaces et six gardes terminées.
+  La reprise de purge par UUID et la fin du groupe CLI bornent le nettoyage ;
+  leurs branches d’erreur restent à éprouver. Le refus 401/403 après publication
+  demeure distinct et ouvert. [Preuve](docs/evidence/invocation-url-transport-dev-2026-11-08.json).
 
 - Suite complète des adresses réussie en DEV : union sans doublon de
   35 campagnes / 467 groupes, zéro échec/skip, six prérequis non comptés,
@@ -25,7 +28,7 @@
   résultat CLI séparé du succès de publication et entrée console/SSO canonique.
   Le checkpoint passe 88 groupes réels et recoupe 31 captures ; manuel à
   14 chapitres et 43 paragraphes. Les preuves multi-domaines, sources perturbées
-  et perte du GET de catalogue après publication restent ouvertes dans SLS-066.
+  et refus du GET de catalogue après publication restent ouverts dans SLS-066.
 
 - Stockage public qualifié en DEV : 29 campagnes en série, 397 groupes réussis,
   puis neuf groupes API renforcés de quatorze corps invalides de purge et d’une

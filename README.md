@@ -85,6 +85,10 @@ passe 35 campagnes en série et 467 groupes, sans échec ni test ignoré :
 186 sources recoupées avant/après chaque phase, 79 captures fraîches recoupées
 (61 observations et 18 identités SHA avec une référence inspectée) et 32 fonctions
 suivies purgées dans dix namespaces. Les six prérequis sont distincts du total.
+Le [complément de transport](docs/evidence/invocation-url-transport-dev-2026-11-08.json)
+passe ensuite trois nouveaux groupes et treize de régression : une perte du GET
+des adresses après publication conserve le succès et les UUID, sans rejeu CLI.
+Le refus d’autorisation après publication reste une preuve distincte à compléter.
 
 ## Accès confirmé
 

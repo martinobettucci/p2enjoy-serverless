@@ -77,10 +77,14 @@ obtenu par le catalogue Read du contrôle. La lecture parcourt les domaines
 par cinq et exige la même révision et empreinte de source entre pages. Une
 lecture refusée, perdue ou changeante donne `invocation_urls.state=unavailable`
 sans requalifier la publication réussie ni renvoyer de code. Les cas courants
-passent dans le checkpoint SLS-066 ; la perte réelle de cette consultation et
-les pages suivantes restent à éprouver. [Contrat](../docs/INVOCATION_URLS.md).
+passent dans le checkpoint SLS-066. La perte réelle est qualifiée dans le
+[complément de transport](../docs/evidence/invocation-url-transport-dev-2026-11-08.json) :
+deux vrais 502 après publication, succès/UUID conservés, six connexions sans
+rejeu et invocation Docker après reprise. Le refus 401/403 et les pages suivantes
+restent à éprouver. [Contrat](../docs/INVOCATION_URLS.md).
 Les campagnes courantes sont aussi rejouées dans la
 [suite de 35 campagnes / 467 groupes](../docs/evidence/invocation-urls-regressions-dev-2026-11-08.json),
 avec les deux images Docker reconstruites en série et figées avant/après chaque
 campagne. Les cinq modules CLI embarqués correspondent aux sources. Cette
-réussite ne qualifie pas les pertes de lecture ni les pages supplémentaires.
+réussite ne qualifie pas les pages supplémentaires ; les pertes de lecture
+sont établies séparément par le complément de transport.

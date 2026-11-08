@@ -450,7 +450,7 @@ avec 31 captures recoupées.
 Le manuel servi comporte 14 chapitres et 43 paragraphes. Les preuves multi-domaines,
 retrait et absence exigent les vraies routes et l’autorité bornée du SPARK ;
 aucune substitution du registre n’est admise. Restent également les sources
-perturbées et la consultation CLI perdue/refusée après publication. Le manuel
+perturbées et la consultation CLI refusée après publication. Le manuel
 est reconstruit et qualifié pour les parcours actuellement éprouvés.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
@@ -466,11 +466,18 @@ passent avec le vrai Host en boucle locale, puis dans la suite complète.
 Les preuves de routes publiques restent ouvertes, ainsi que la branche
 d’expiration/perte SSH du build borné, dont seul le parcours nominal est qualifié.
 
-Complément en préparation : trois groupes de transport du catalogue, avec perte
+Le [complément de transport](evidence/invocation-url-transport-dev-2026-11-08.json)
+passe trois groupes de transport du catalogue, avec perte
 de l’observateur, coupure du GET après réception puis avant émission, publication
 durable conservée, six connexions CLI sans rejeu et invocation Docker après
 reprise. Contrat : [perte native](INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli).
-Ces groupes et le refus réel après publication ne sont pas encore acquis.
+Les cinq groupes de transport historique et huit API/CLI repassent ensuite :
+16 groupes au total, 187 sources et images liées avant/après chaque phase,
+huit fonctions purgées dans trois namespaces, six gardes terminées et 26 fichiers
+embarqués recoupés. Les vrais 502 ne changent pas le succès de publication.
+Le refus 401/403 reste distinct et non éprouvé après publication ; les branches
+d’expiration/sortie excessive/lancement et nettoyage après réponses perdues
+du nouveau client ne sont pas déclarées acquises.
 
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale

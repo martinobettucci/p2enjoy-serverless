@@ -2847,3 +2847,44 @@ son archive et l’UUID de purge conservé ; isoler traceur et CLI dans un group
 en confirmer la disparition et refuser le nettoyage en cas d’état inconnu.
 La revue ne trouve pas de défaut nominal des barrières ; aucun test n’a encore
 été exécuté. Ces constats appartiennent à SLS-066 en cours.
+
+
+## 2026-11-08 — Catalogue perdu après publication : preuve réelle réussie
+
+Les trois groupes du nouveau client terminent à zéro : perte SIGKILL de
+l’observateur avec restauration indépendante, GET interrompu au retour de
+recvfrom avant traitement, puis avant sendto. Aux deux barrières, une seule
+publication est déjà durable : fonction, candidat, révision active, audit,
+archive réelle de 568 octets et hash identiques. Le contrôle est réellement tué
+(exit 137), puis restauré avec son conteneur/image conservés. L’ingress répond
+HTTP 502 ; la CLI conserve completed=true, published, mêmes UUID et diagnostic
+d’adresses indisponibles. Exactement six connexions HTTPS sont comptées, sans
+rejeu. Le groupe CLI a disparu avant nettoyage. Après reprise, le catalogue
+Read est disponible et les deux handlers s’exécutent en Docker via HTTPS 200.
+
+Les cinq groupes du transport de configuration repassent sur l’observateur
+étendu, puis les huit groupes API/CLI des adresses : 16 groupes au total,
+zéro échec/skip, 187 sources locales/distantes et images stables avant/après
+chaque phase. Le recoupement final retrouve les huit fonctions purgées dans
+trois namespaces, six gardes inactives, réservations/allocation nulles et les
+26 fichiers embarqués conformes. La référence conserve exactement son identité,
+son image et son démarrage depuis la suite de 467 groupes. Aucun code produit
+n’est modifié ni reconstruit. La preuve complète précédente reste intacte.
+
+La revue readonly valide les barrières et les résultats. Elle relève que le
+relevé physique enrichi porte l’empreinte du brut échantillonné ; le brut est
+reconstitué sans changement depuis ses champs, sérialisé identiquement et
+archivé avec le SHA exact du snapshot original. Son lien et son empreinte sont
+maintenant séparés de ceux du wrapper. La revue confirme l’identité des sept
+champs natifs et la résolution de ce point. Aucun registre d’incohérences
+extérieur à l’unité ne reste ouvert.
+
+SLS-066 reste [~] : refus 401/403 du GET après publication, domaines/TLS,
+pagination, source perturbée et expiration du build restent non acquis.
+Les chemins d’erreur du nouveau client (expiration, sortie excessive,
+lancement impossible, disparition de groupe inconnue, réponses de création/purge
+perdues) sont prudents mais ne sont pas déclarés éprouvés par les trois groupes.
+Les documents de statut et les trois propositions de notes sont actualisés
+après gel ; l’empreinte exécutée du contrat et celle livrée restent distinctes.
+Aucune nouvelle variable, secret, migration ou route appliquée. Aucun remote,
+aucun push ; le goal global reste actif.
