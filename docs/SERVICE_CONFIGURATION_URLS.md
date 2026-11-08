@@ -6,8 +6,8 @@ La configuration commune SLS-031 est déployée et qualifiée sur DEV :
 [preuve initiale](evidence/service-configuration-dev-2026-11-08.json) et
 [complément de transport](evidence/service-configuration-transport-dev-2026-11-08.json).
 La perte réelle de réponse et les relances explicites sont éprouvées ; SLS-031
-est clôturée. Les adresses multi-domaines SLS-066 sont spécifiées et restent
-à implémenter. Le manuel décrit le comportement livré.
+est clôturée. Le catalogue SLS-066 est déployé en DEV ; son checkpoint sur le domaine
+courant est qualifié, et ses preuves multi-domaines/résiduelles restent ouvertes. Le manuel décrit le comportement livré.
 
 ## État constaté
 
@@ -24,9 +24,9 @@ La correction qualifiée conserve maintenant les deux niveaux ; les valeurs
 communes ne deviennent plus des surcharges masquant les évolutions du service.
 La référence fournie comporte bien `provider.env` et `provider.secret`.
 
-Le contrôle ne connaît actuellement qu’une URL publique configurée. La console
-ne présente pas de catalogue d’adresses d’invocation calculées depuis les routes
-du SPARK. La passerelle possède déjà les chemins `/invoke/{function_id}` et
+Le contrôle conserve une URL canonique de console/SSO et lit maintenant les
+domaines d’appel dans la projection officielle du SPARK. La console affiche
+ce catalogue dans la fiche de fonction. La passerelle possède déjà les chemins `/invoke/{function_id}` et
 `/invoke/{function_id}/{path}`.
 
 ## Configuration de service et surcharges

@@ -198,6 +198,33 @@ relevé reste visible. Si des instances disparaissent, la pagination revient
 se parcourent dans leur cadre, y compris au clavier. Les liens de facette
 peuvent être conservés pour retrouver la même fonction.
 
+## Adresses d’appel
+
+Depuis le service, choisir **Adresses d’appel** sous le nom de la fonction,
+ou ouvrir cette facette dans sa fiche. Les domaines sont présentés par pages
+de cinq avec les méthodes et chemins de la révision active. **Actualiser**
+relit les domaines et cette révision ; un brouillon n’a aucune adresse à appeler.
+Une activation ou un rollback change les chemins proposés après actualisation.
+
+**Copier l’adresse** copie l’URL complète. **Copier l’exemple curl** copie une
+commande avec `VOTRE_JETON` à remplacer par un jeton Read du service. **Exemple curl**
+affiche cette commande ; en cas de refus du presse-papiers, sélectionner le
+texte pour le copier. Le jeton enregistré n’est jamais ajouté automatiquement.
+
+« HTTPS déclaré » ou « HTTP déclaré » décrit la route du relevé ;
+« Disponibilité non vérifiée » indique que ce catalogue ne contrôle ni le
+certificat ni l’accès réseau. Un relevé indisponible demande une actualisation
+ou une intervention de l’administrateur du SPARK. L’absence de domaine applicable
+demande une route vers la passerelle. Un domaine générique sans hôte concret
+n’offre pas d’adresse copiable. La console et le SSO gardent leur adresse
+canonique ; les domaines supplémentaires servent aux appels.
+
+Le résultat de `deploy` expose également `invocation_urls` pour chaque fonction
+publiée. Si cette consultation échoue ou si les domaines/la révision changent
+pendant la lecture, la publication reste réussie et le rapport signale seulement
+les adresses indisponibles. Consulter la facette puis actualiser, sans republier
+le code pour obtenir ses adresses.
+
 ## Invoquer et suivre une fonction
 
 Après publication, appeler `/invoke/UUID_DE_FONCTION` si le manifeste déclare

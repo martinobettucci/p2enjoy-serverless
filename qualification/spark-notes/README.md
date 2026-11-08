@@ -29,7 +29,7 @@ La publication de code conserve côté serveur les ressources, variables, secret
 
 La qualification `python3 -B e2e/execution-suite.py --scope publication` passe 18 campagnes en série et 312 groupes réels, sans échec ni cas ignoré. Elle réunit moteur et console sans répéter les campagnes communes. La preuve `docs/evidence/publication-console-dev-2026-11-07.json` recoupe sources, image, rapports frais, captures relues, archives et ressources nettoyées. Les pannes de nettoyage sont éprouvées sur les seules révisions de campagne, avec garde indépendante puis maintenance normale.
 
-Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses treize chapitres et 39 paragraphes viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.
+Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses quatorze chapitres et 43 paragraphes viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.
 
 L’agent de stockage dispose maintenant d’effacements corrélés : reçu durable,
 répétition sans second vidage et reprise après erreur physique ou interruption.
@@ -52,5 +52,26 @@ en série et 21 captures inspectées. Le complément
 `docs/evidence/service-configuration-transport-dev-2026-11-08.json` ajoute cinq
 groupes de vraies coupures et treize groupes de configuration rejoués, sur la
 même image : `unknown` sans rejeu, état durable recoupé et relances publiées puis
-invoquées dans Docker. SLS-031 est qualifiée. Les adresses d’appel multi-domaines restent
-suivies dans SLS-066.
+invoquées dans Docker. SLS-031 est qualifiée. Le catalogue des adresses d’appel est déployé ; sa qualification multi-domaines
+reste ouverte dans SLS-066.
+
+## Adresses d’appel en qualification
+
+SLS-066 lit la projection officielle des routes par le montage readonly
+`/etc/spark:/spark:ro`. La facette Adresses d’appel et son lien depuis le
+service affichent URL, méthodes et transport déclaré. La copie native propose
+un emplacement de jeton, sans valeur réelle ; les erreurs retirent les
+anciennes adresses. Le résultat CLI ajoute la même information après publication.
+La console et le SSO gardent leur origine canonique.
+
+Le checkpoint `docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json`
+passe 88 groupes réels : huit API/CLI, six UI, 36 régressions et 38 groupes CLI Docker. Les 31 captures
+sont recoupées ; le manuel à 14 chapitres et 43 paragraphes est compilé et
+vérifié. Les neuf fonctions des essais/replays sont purgées et les 26 sources
+Python/SQL embarquées recoupées. Ce checkpoint ne clôture pas l’unité.
+
+Restent les changements réels de routes, seconde page sur six domaines, source
+perturbée, Host réel, consultation CLI perdue après publication et campagne
+complète sur cette image. L’alias functions.lelabs.tech vers 18090 TLS est
+proposé dans routes.? ; il n’est pas appliqué. Aucun nouveau secret, variable
+ou schéma ; la configuration reste dans les deux fichiers de cellule.

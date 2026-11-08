@@ -229,3 +229,14 @@ UUID frais ; les snapshots natifs sont identiques avant/après. Le contrôle et
 son image restent identiques. Les 28 fonctions des huit namespaces SLS-065 sont
 purgées et les ressources globales libérées ; les deux restaurations historiques
 sont vérifiées séparément.
+
+## Catalogue des adresses d’appel
+
+SLS-066 ajoute `GET /api/functions/{id}/invocation-urls`, autorisé par session
+admin ou Read, et le montage readonly `/etc/spark:/spark:ro`. La révision active
+fournit chemins et méthodes ; le port ASGI réel filtre les routes officielles.
+Source indisponible et absence de domaine sont distinctes ; la santé du moteur
+n’est pas affectée par cette consultation. Aucun nouveau secret, réglage ou
+schéma. [Contrat](../docs/INVOCATION_URLS.md) et
+[checkpoint DEV](../docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json).
+Les changements de routes et la qualification résiduelle restent ouverts.

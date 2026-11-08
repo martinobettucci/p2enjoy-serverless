@@ -558,18 +558,24 @@ ou route. Configuration exclusivement par les deux fichiers officiels de cellule
 Les trois notes actualisées sont proposées et recoupées ; leur adoption n’est
 pas revendiquée. Les autres unités du backlog restent indépendantes.
 
-## Préparation des adresses d’appel SLS-066
+## Adresses d’appel SLS-066 en qualification
 
-Le [contrat](INVOCATION_URLS.md) prévoit un montage readonly du répertoire
+Le [contrat](INVOCATION_URLS.md) utilise un montage readonly du répertoire
 `/etc/spark` dans le contrôle, sans nouvelle variable, secret, migration ou
-service. L’installation courante reste inchangée à ce checkpoint de conception.
+service. L’image du contrôle déployée est
+`sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a`.
+Le [checkpoint](evidence/invocation-urls-checkpoint-dev-2026-11-08.json) recoupe
+88 groupes, les sources embarquées et les nettoyages ; les preuves résiduelles
+ne sont pas annoncées comme acquises.
 Le fichier routes est actuellement 0640 root:1001 ; lecture réelle et refus
 d’écriture vérifiés dans un conteneur rootless supprimé après relevé. Une
 projection future en 0600 sera signalée indisponible, sans modification de ses
 permissions par l’application.
 
 Une proposition d’alias `functions.lelabs.tech` vers 18090 TLS et un plan borné
-de qualification des routes sont décrits dans le contrat. Ils ne constituent
+de qualification des routes sont décrits dans le contrat. L’alias figure
+dans `/etc/spark/routes.?` (SHA256
+28dd866ad53907ab8e467298468f354752b411d1b0219c296ece56385e82123f). Ils ne constituent
 pas une route appliquée. Les changements normaux doivent être réalisés par
 le propriétaire ou avec une autorisation distincte limitée au seul SPARK.
 La FORGE et les autres SPARK restent hors du périmètre d’administration.

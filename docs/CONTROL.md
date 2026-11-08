@@ -216,3 +216,16 @@ propriétaire de l’état, paramètres hôtes/image/budget, santé dégradée l
 d’un verrou SQLite réel et reprise automatique de la maintenance. Le client
 authentifié s’arrête en échec sur l’absence de session SSO ; ce n’est pas
 une preuve des opérations de publication ni de leurs droits.
+
+## Catalogue des URL d’invocation
+
+`GET /api/functions/{id}/invocation-urls?limit=5&offset=0` exige Read sur
+la fonction ou une session administrateur. Limite de 1 à 20 domaines par page,
+offset de 0 à 10000 ; diagnostic d’existence après contrôle d’accès.
+La source officielle filtrée par port, la révision active et ses événements
+déterminent les adresses. Une source absente, interdite ou invalide est
+indisponible avec liste vide ; une source valide peut n’avoir aucun domaine
+applicable. Le catalogue ne vérifie pas la disponibilité ou le certificat.
+Le [contrat SLS-066](INVOCATION_URLS.md) décrit réponse, bornes et limites.
+Le checkpoint sur le domaine courant est déployé ; ses preuves résiduelles
+restent ouvertes. Aucun secret, code ou contenu de variable dans cette lecture.

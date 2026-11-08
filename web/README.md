@@ -63,3 +63,14 @@ La [preuve de configuration commune](../docs/evidence/service-configuration-dev-
 rejoue les onze groupes de gestion et les huit du manuel, puis complète la lecture
 des niveaux service/fonction et du déploiement. Ses 21 captures sont inspectées,
 dont les sept vues de gestion, onze du guide et trois lectures complémentaires.
+
+## Adresses d’appel en qualification
+
+La fiche de fonction présente la facette **Adresses d’appel**, également liée
+depuis sa ligne du service. Le catalogue officiel fournit méthodes, URL et
+transport déclaré. Les copies natives ont leurs confirmations et refus ; une
+erreur de consultation retire les anciennes adresses. Le manuel contient le
+chapitre correspondant. Le [checkpoint SLS-066](../docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
+passe six groupes propres au parcours navigateur et ses régressions, avec
+sept captures inspectées. Les pages suivantes et les changements réels de
+routes restent à qualifier ; aucune preuve simulée ne les remplace.

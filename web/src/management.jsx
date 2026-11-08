@@ -79,7 +79,10 @@ function Functions({service}) {
   const resource = useResource(`/api/services/${service.id}/functions?limit=${pageSize}&offset=${page * pageSize}`);
   return <><Section title="Fonctions" action={<button className="primary" onClick={() => setCreate(true)}><Plus aria-hidden="true"/>Créer une fonction</button>}>
     <Resource resource={resource}>{data => <>{!data.items.length ? <p className="empty">Aucune fonction dans ce service.</p> : <ul className="entity-list">{data.items.map(row =>
-      <li key={row.id}><div><a href={url('functions',row.id)}>{row.name}</a><p className="mono">{row.config.handler}</p></div><Badge tone={row.active_revision_id ? 'success' : 'neutral'}>{row.active_revision_id ? 'Déployée' : 'Brouillon'}</Badge></li>)}</ul>}
+      <li key={row.id}><div><a href={url('functions',row.id)}>{row.name}</a><p className="mono">{row.config.handler}</p>
+        {/* @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#console-et-domaine-canonique | docs/DESIGN_SYSTEM_APP.md | docs/manual.md */}
+        <a href={url('functions',row.id,'invocation-urls')} aria-label={`Adresses d’appel de ${row.name}`}>Adresses d’appel</a>
+      </div><Badge tone={row.active_revision_id ? 'success' : 'neutral'}>{row.active_revision_id ? 'Déployée' : 'Brouillon'}</Badge></li>)}</ul>}
       <Pagination page={page} size={pageSize} count={data.items.length} change={setPage}/></>}</Resource></Section>
     {create && <DialogForm title="Créer une fonction" initial={{name:'',handler:'handler.handler'}} submitLabel="Créer" onClose={() => setCreate(false)}
       onSubmit={async value => {const row = await api(`/api/services/${service.id}/functions`,{method:'POST',body:{name:value.name,config:{handler:value.handler}}}); location.assign(url('functions',row.id));}}>

@@ -434,8 +434,8 @@ de la FORGE ni les autres scénarios résiduels de SLS-030.
 <a id="sls-066"></a>
 ## SLS-066 — Afficher les URL d’appel issues des domaines du SPARK
 
-Statut : [~] — contrat et lecture de la source officielle instruits ; calcul,
-console, CLI et preuves fonctionnelles à réaliser.
+Statut : [~] — catalogue, console et résultat CLI déployés en DEV ; checkpoint
+de 88 groupes réels, qualification multi-domaines et résiduelle ouverte.
 
 Découvrir les routes effectivement affectées à la passerelle dans le SPARK,
 calculer les adresses par fonction et événement HTTP, les afficher et les
@@ -443,11 +443,15 @@ rendre copiables dans la console ainsi que dans le résultat de déploiement.
 Distinguer les domaines d’invocation du domaine SSO canonique. Contrat, limites
 d’infrastructure et preuves E2E :
 [SERVICE_CONFIGURATION_URLS](SERVICE_CONFIGURATION_URLS.md) et
-[INVOCATION_URLS](INVOCATION_URLS.md). Le probe rootless du 8 novembre confirme
-la lecture readonly réelle, sans qualifier le catalogue. Les preuves multi-domaines,
+[INVOCATION_URLS](INVOCATION_URLS.md). Le [checkpoint DEV](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
+réunit huit groupes API/CLI, six UI, 36 régressions et 38 groupes CLI Docker,
+avec 31 captures recoupées.
+Le manuel servi comporte 14 chapitres et 43 paragraphes. Les preuves multi-domaines,
 retrait et absence exigent les vraies routes et l’autorité bornée du SPARK ;
-aucune substitution du registre n’est admise. Mettre à jour et qualifier le
-manuel dans l’application avec cette livraison.
+aucune substitution du registre n’est admise. Restent également les sources
+perturbées, le Host réel, la consultation CLI perdue après publication et la
+campagne complète sur cette image. Le manuel est reconstruit et qualifié
+pour les parcours actuellement éprouvés.
 
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale

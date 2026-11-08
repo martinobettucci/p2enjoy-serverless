@@ -186,7 +186,7 @@ effectivement appelée. Ses exemples copiés conservent le tag choisi. Une versi
 indisponible affiche le refus réel sans substitution. Ces parcours restent
 planifiés ; aucune commande absente du backend n’est ajoutée aux écrans actuels.
 
-## Adresses d’appel SLS-066 à réaliser
+## Adresses d’appel SLS-066 en qualification
 
 La facette **Adresses d’appel** suit [INVOCATION_URLS](INVOCATION_URLS.md).
 Une destination partageable dans la fonction et un lien depuis sa ligne de
@@ -206,3 +206,11 @@ clavier, mobile à 390 px et refus de copie exigent des preuves réelles.
 L’exemple curl préfère GET lorsqu’il existe. La redirection depuis un domaine
 d’appel préserve les identifiants UUID de suivi de publication ou de stockage
 des fiches ; elle n’efface pas le contexte déjà partageable de ces parcours.
+
+Le [checkpoint DEV](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
+recoupe sept nouvelles captures de cette facette, sept de gestion, onze du
+manuel et six PNG de connexion. Vingt images sont inspectées sur ce checkpoint ;
+onze sont strictement identiques à la référence SLS-065 inspectée. Le chapitre
+Adresses d’appel est aussi lu dans un vrai viewport mobile 390 × 844 après
+navigation. Ces images ne couvrent pas encore plusieurs domaines, leur retrait,
+la source inaccessible ou une seconde page.

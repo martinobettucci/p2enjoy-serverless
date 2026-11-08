@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Catalogue des adresses d’appel déployé en DEV : routes officielles lues via
+  montage readonly, facette de fonction et lien de service, copie d’URL/curl,
+  résultat CLI séparé du succès de publication et entrée console/SSO canonique.
+  Le checkpoint passe 88 groupes réels et recoupe 31 captures ; manuel à
+  14 chapitres et 43 paragraphes. Les preuves multi-domaines, sources perturbées
+  et campagne complète restent ouvertes dans SLS-066.
+
 - Stockage public qualifié en DEV : 29 campagnes en série, 397 groupes réussis,
   puis neuf groupes API renforcés de quatorze corps invalides de purge et d’une
   version périmée. Snapshots natifs identiques avant/après les refus, 28 fonctions

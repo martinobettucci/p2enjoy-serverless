@@ -20,7 +20,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:62ad2b7f13f0e274b7365daa39c1b5f3fcf524a32e82fa27d4acf582e7187900`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:3304f057c81d7dd5169752f8cef7d15c6b9f5788b30d513dbdcd05f11b91277c`.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:15600fbeaf0496b1688c77035464cc6643b230a26ad824ccccfacdaa02f7aa66`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 
@@ -138,3 +138,30 @@ et les deux mises à jour documentaires de statut postérieures sont explicites
 dans docs/evidence/storage-console-dev-2026-11-08.json. Les 72 images sont
 recoupées ; les captures de connexion/manuel régénérées sont identiques aux
 images déjà inspectées. Aucun nouveau déploiement applicatif ni migration.
+
+## Adresses d’appel en qualification
+
+SLS-066 lit la projection officielle des routes par le montage readonly
+`/etc/spark:/spark:ro`. La facette Adresses d’appel et son lien depuis le
+service affichent URL, méthodes et transport déclaré. La copie native propose
+un emplacement de jeton, sans valeur réelle ; les erreurs retirent les
+anciennes adresses. Le résultat CLI ajoute la même information après publication.
+La console et le SSO gardent leur origine canonique.
+
+Le checkpoint `docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json`
+passe 88 groupes réels : huit API/CLI, six UI, 36 régressions et 38 groupes CLI Docker. Les 31 captures
+sont recoupées ; le manuel à 14 chapitres et 43 paragraphes est compilé et
+vérifié. Les neuf fonctions des essais/replays sont purgées et les 26 sources
+Python/SQL embarquées recoupées. Ce checkpoint ne clôture pas l’unité.
+
+Restent les changements réels de routes, seconde page sur six domaines, source
+perturbée, Host réel, consultation CLI perdue après publication et campagne
+complète sur cette image. L’alias functions.lelabs.tech vers 18090 TLS est
+proposé dans routes.? ; il n’est pas appliqué. Aucun nouveau secret, variable
+ou schéma ; la configuration reste dans les deux fichiers de cellule.
+
+Rejouer séparément et en série `node e2e/invocation-urls.mjs` puis
+`node e2e/invocation-urls-ui.mjs`. Ces commandes exigent la session SSO réelle
+et utilisent le contrôle déployé, la vraie CLI, les publications Docker et
+le presse-papiers natif. Leur périmètre est celui des domaines réellement
+affectés, sans registre ou réponse substitué.

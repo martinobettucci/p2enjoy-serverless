@@ -6,7 +6,7 @@ import json
 import logging
 from pathlib import Path
 import sqlite3
-from urllib.parse import urlencode
+from urllib.parse import parse_qsl,urlencode,urlsplit
 from uuid import UUID,uuid4
 
 from cryptography.fernet import InvalidToken
@@ -26,6 +26,8 @@ from .storage_management import StorageManagement
 from .execution import Execution
 from .invocation_routes import routes as invocation_routes,gateway_error
 from .network import forwarded_addresses
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md
+from .invocation_urls import routes as invocation_url_routes
 
 logger=logging.getLogger('p2enjoy.control')
 
@@ -93,6 +95,8 @@ app.include_router(router(database,identity,vault,operations))
 app.include_router(deployments.routes())
 app.include_router(invocation_routes(execution))
 app.include_router(storage_management.routes())
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#api-et-calcul-commun
+app.include_router(invocation_url_routes(database,identity,settings))
 web_root=Path(__file__).parent.parent/'web'
 app.mount('/assets',StaticFiles(directory=web_root/'assets'),name='assets')
 
@@ -192,9 +196,32 @@ async def health():
     return {'status':'ok','component':'control','version':'0.1.0-dev'}
 
 
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#console-et-domaine-canonique
+def canonical_entry(request,path):
+    configured=urlsplit(settings.public_url)
+    # The caller's Host can only decide to use the fixed configured destination.
+    hosts=request.headers.getlist('host')
+    expected={configured.netloc.lower()}
+    if configured.port is None:expected.add(configured.netloc.lower()+':443')
+    if len(hosts)!=1 or hosts[0].lower() not in expected:
+        if path.startswith('/console/'):
+            selected={}
+            try:parameters=parse_qsl(request.url.query,max_num_fields=32)
+            except ValueError:parameters=[]
+            for name,value in parameters:
+                if name in ('deployment','operation'):
+                    try:selected[name]=str(UUID(value))
+                    except ValueError:pass
+            if selected:path+='?'+urlencode(selected)
+        return RedirectResponse(settings.public_url+path,status_code=303)
+    return None
+
+
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#console-et-domaine-canonique
 @app.get('/')
 @app.get('/console/{path:path}')
-async def home(path=''):return FileResponse(web_root/'index.html',media_type='text/html')
+async def home(request:Request,path=''):
+    return canonical_entry(request,'/console/'+path if request.url.path.startswith('/console/') else '/') or FileResponse(web_root/'index.html',media_type='text/html')
 
 
 @app.get('/favicon.svg')
@@ -212,7 +239,8 @@ async def session(request:Request):
 
 
 @app.get('/auth/login')
-async def login(request:Request):return await identity.login(request)
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#console-et-domaine-canonique
+async def login(request:Request):return canonical_entry(request,'/auth/login') or await identity.login(request)
 
 
 @app.get('/auth/retour')

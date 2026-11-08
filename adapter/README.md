@@ -71,3 +71,11 @@ de brouillon. Les ruptures après envoi, modifications concurrentes des fichiers
 redirections et réponses trop grandes restent à éprouver avec leurs causes réelles.
 L’invocation du code publié est qualifiée séparément par le moteur public et
 les parcours de publication de la console : [preuves E2E](../e2e/README.md).
+
+Le résultat de chaque publication réussie inclut maintenant `invocation_urls`,
+obtenu par le catalogue Read du contrôle. La lecture parcourt les domaines
+par cinq et exige la même révision et empreinte de source entre pages. Une
+lecture refusée, perdue ou changeante donne `invocation_urls.state=unavailable`
+sans requalifier la publication réussie ni renvoyer de code. Les cas courants
+passent dans le checkpoint SLS-066 ; la perte réelle de cette consultation et
+les pages suivantes restent à éprouver. [Contrat](../docs/INVOCATION_URLS.md).

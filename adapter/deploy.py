@@ -148,6 +148,50 @@ def configure_service(client,service,target,configuration,report):
     result['state']='applied';result['updated_at']=updated
 
 
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#api-et-calcul-commun
+def invocation_urls(client,function_id,service_id,revision_id):
+    """Optional post-publication metadata, with a stable source across pages."""
+    items=[];fingerprint=None;total=None
+    for offset in range(0,513,5):
+        page=client.request('GET',f'/api/functions/{function_id}/invocation-urls?limit=5&offset={offset}')
+        if (page.get('function_id')!=function_id or page.get('service_id')!=service_id or
+                page.get('revision_id')!=revision_id or page.get('function_state')!='published'):
+            raise DeploymentError('invocation_catalogue_changed')
+        source=page.get('source')
+        if not isinstance(source,dict):raise DeploymentError('invalid_invocation_catalogue')
+        if source.get('state')!='available':raise DeploymentError('invocation_domains_unavailable')
+        sha=source.get('sha256');count=page.get('total');rows=page.get('items')
+        if (not isinstance(sha,str) or not re.fullmatch('[a-f0-9]{64}',sha) or
+                type(count) is not int or not 0<=count<=512 or
+                page.get('offset')!=offset or page.get('limit')!=5 or not isinstance(rows,list) or
+                len(rows)!=min(5,max(0,count-offset))):
+            raise DeploymentError('invalid_invocation_catalogue')
+        if fingerprint is None:fingerprint=sha;total=count
+        elif (sha,count)!=(fingerprint,total):raise DeploymentError('invocation_catalogue_changed')
+        for item in rows:
+            if not isinstance(item,dict):raise DeploymentError('invalid_invocation_catalogue')
+            domain=item.get('domain');transport=item.get('transport');entries=item.get('urls')
+            if (not isinstance(domain,str) or len(domain)>253 or
+                    not re.fullmatch(r'(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}',domain) or
+                    transport not in ('http','https') or item.get('origin')!=transport+'://'+domain or
+                    not isinstance(entries,list) or not 1<=len(entries)<=16 or
+                    any(previous['domain']==domain for previous in items)):
+                raise DeploymentError('invalid_invocation_catalogue')
+            for entry in entries:
+                if not isinstance(entry,dict):raise DeploymentError('invalid_invocation_catalogue')
+                address=entry.get('url');methods=entry.get('methods');prefix=item['origin']+'/invoke/'+function_id
+                if (not isinstance(address,str) or not (address==prefix or
+                        (address.startswith(prefix+'/') and re.fullmatch(r'[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*',address[len(prefix)+1:]))) or
+                        not isinstance(methods,list) or not methods or len(methods)>7 or
+                        any(method not in ('GET','POST','PUT','PATCH','DELETE','HEAD','OPTIONS') for method in methods) or
+                        len(set(methods))!=len(methods)):
+                    raise DeploymentError('invalid_invocation_catalogue')
+            items.append(item)
+        if offset+len(rows)>=total:
+            return {'state':'available','revision_id':revision_id,'source_sha256':fingerprint,'items':items,'total':total}
+    raise DeploymentError('invocation_catalogue_limit')
+
+
 def deploy(plan,manifest,service):
     report={'service':plan['service'],'completed':False,'results':[],'warnings':plan['warnings'],
             'service_configuration':{'state':'preserved'}}
@@ -200,5 +244,11 @@ def deploy(plan,manifest,service):
             row['error']=error.public()
         except OSError:
             row['error']={'code':'artifact_unavailable'}
+        # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#api-et-calcul-commun
+        # No optional GET failure can reclassify an already committed publication.
+        if row['state']=='published':
+            try:row['invocation_urls']=invocation_urls(client,key,service,row['revision_id'])
+            except DeploymentError as error:
+                row['invocation_urls']={'state':'unavailable','error':error.public()}
     report['completed']=all(row['state']=='published' for row in report['results'])
     return report

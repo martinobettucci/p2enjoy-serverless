@@ -5,6 +5,25 @@ Ils n'importent pas les handlers, ne créent pas de serveur substitué et
 n'interceptent aucune réponse réseau. Le navigateur utilise la connexion SSO
 normale. Un accès absent est une erreur de prérequis, jamais un test ignoré.
 
+## Adresses d’appel SLS-066
+
+Exécuter séparément et en série `node e2e/invocation-urls.mjs` puis
+`node e2e/invocation-urls-ui.mjs`, avec la session SSO réelle préparée selon
+le protocole stdin ci-dessous. Le premier passe huit groupes API/CLI avec
+publication et appels Docker ; le second six groupes depuis la création UI,
+publication ZIP, copie native et invocation, refus natif du presse-papiers,
+coupure réseau, clavier et mobile. Le collecteur suit la destination UI créée
+sans dépendre du corps de réponse libéré par sa navigation. Le nettoyage
+retrouve aussi les objets de son nom exact si une réponse est perdue.
+
+Le [checkpoint](../docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
+réunit ces quatorze groupes, 36 régressions et 38 groupes dans les deux images
+CLI reconstruites, soit 88. Chaque commande est liée à ses sources et image. Il ne constitue
+pas une suite complète de plateforme ni une qualification multi-domaines.
+Les sources perturbées, vrai Host, CLI après consultation perdue, six domaines
+réels pour une seconde page et les cycles de routes restent à éprouver.
+Aucun de ces manques n’est converti en test ignoré dans les campagnes exécutées.
+
 ## Configuration commune du service
 
 `node e2e/service-configuration.mjs` exige la session SSO réelle de

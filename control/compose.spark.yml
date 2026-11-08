@@ -15,6 +15,8 @@ services:
       - ${SERVERLESS_STATE_HOST_PATH:?Chemin hôte requis}:/state
       - ${SERVERLESS_DOCKER_SOCKET_HOST:?Socket rootless requis}:/docker.sock
       - ${SERVERLESS_STORAGE_SOCKET_DIR_HOST:?Répertoire du canal de stockage requis}:/storage-agent:ro
+      # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#source-officielle-et-limites
+      - /etc/spark:/spark:ro
     read_only: true
     tmpfs:
       - /tmp:size=16m,mode=1777,noexec,nosuid

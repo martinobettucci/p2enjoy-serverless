@@ -1,8 +1,10 @@
 # Adresses d’appel des fonctions
 
-Contrat SLS-066, décidé avant implémentation. Le calcul et les nouveaux écrans
-restent à réaliser. La source et le montage sont vérifiés sur le SPARK DEV ;
-ce relevé de capacité ne constitue pas une qualification fonctionnelle des URL.
+Contrat SLS-066. Catalogue, console, CLI et montage readonly sont déployés sur
+le SPARK DEV. Le [checkpoint](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
+passe 88 groupes réels sur le seul domaine actuellement affecté ; l’unité reste
+en qualification. Les changements de routes, pages suivantes et autres preuves
+résiduelles ci-dessous ne sont pas couverts par ce checkpoint.
 
 ## Source officielle et limites
 

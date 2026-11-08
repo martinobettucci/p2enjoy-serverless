@@ -344,9 +344,9 @@ publics sont purgées ; les deux restaurations historiques sont séparées. Sour
 image, 25 fichiers embarqués et 72 captures sont liés à chaque phase. Aucune
 nouvelle migration, dépendance ou configuration.
 
-## Catalogue des adresses d’appel à réaliser
+## Catalogue des adresses d’appel en qualification
 
-SLS-066 suit [INVOCATION_URLS](INVOCATION_URLS.md). Le contrôle lira le répertoire
+SLS-066 suit [INVOCATION_URLS](INVOCATION_URLS.md). Le contrôle lit le répertoire
 officiel de cellule par montage readonly, sans nouveau service ni variable.
 Le port local ASGI du réseau hôte identifie les routes d’invocation ; le Host
 client ne participe pas au calcul. Une lecture SQL joint fonction, service et
@@ -354,4 +354,7 @@ client ne participe pas au calcul. Une lecture SQL joint fonction, service et
 catalogue Read autorisé et borné ; une erreur de lecture des adresses après
 publication ne transforme pas celle-ci en échec. Aucun changement de schéma.
 La projection ne garantit ni fraîcheur transactionnelle ni certificat prêt.
-Le montage est éprouvé sur l’image actuelle ; le produit n’est pas encore modifié.
+Le [checkpoint DEV](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
+recoupe montage readonly, 26 sources embarquées, 88 groupes et 31 captures.
+Le contrôle est déployé avec ces parcours ; multi-domaines, sources perturbées
+et campagne complète restent à qualifier.

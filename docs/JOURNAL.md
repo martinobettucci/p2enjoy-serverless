@@ -2676,3 +2676,49 @@ l’UI (cinq domaines/page). La CLI est alignée à cinq : six véritables domai
 permettront les deux parcours sans créer vingt et une routes pour la seule CLI.
 Les quatre alias supplémentaires restent à autoriser ; le checkpoint courant
 reste limité aux domaines effectivement affectés, sans revendiquer cette preuve.
+
+### SLS-066 — Checkpoint réel sur le domaine courant
+
+Catalogue, lecture readonly du répertoire de cellule, facette et lien de
+service, copie et résultat CLI sont déployés. Le contrôle est recréé au repos
+et healthy ; la référence reste distincte. Les huit groupes API/CLI et les
+six groupes UI passent sur le vrai code, ainsi que 36 régressions sérielles
+(manuel 8, gestion 11, public 8, connexion 9). Les deux images Docker de la CLI
+sont aussi reconstruites et passent 24 groupes de packaging puis 14 de refus
+public ; leurs cinq modules embarqués correspondent au poste. Le checkpoint
+retient ces 88 groupes,
+pas une qualification complète de l’unité. Image:
+sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a.
+
+Les essais initiaux ont échoué dans le collecteur : corps de réponse perdu
+lors de location.assign, puis refus du presse-papiers n’appliquant qu’une des
+deux permissions natives de Chromium. Le banc suit maintenant la destination
+UI après réponse 201 et récupère ses identités dans le nettoyage ; les deux
+permissions sont refusées sans remplacer navigator.clipboard. Deux namespaces
+vides des premiers essais ont été retrouvés par noms et UUID exacts, contrôlés
+sans services, puis supprimés. Ces essais ne sont pas comptés comme réussis.
+Le collecteur de capture est aussi corrigé pour garder le viewport du chapitre
+mobile ; les six groupes sont rejoués après correction.
+
+Le contrôle physique recoupe neuf fonctions de cinq namespaces (essais et
+replays compris), leurs reçus de purge, code/volumes/canaux absents, secrets
+propres effacés et allocations globales à zéro. Vingt-six fichiers Python/SQL
+embarqués correspondent au poste. Le montage /spark est readonly ; la source
+porte toujours la seule route serverless.lelabs.tech → 18090 TLS. Le manuel compilé
+porte 14 chapitres, 43 paragraphes et SHA256
+cf7bcdb9d6ef887203b7b84d42e46ec4ba9507b78acf488aea266d13909c7207.
+
+Les 31 captures sont recoupées : vingt inspectées sur ce checkpoint, onze
+strictement identiques à leurs références SLS-065 déjà inspectées. La dernière
+capture mobile du chapitre est un vrai viewport 390 × 844 ; la première pleine
+page de 12 242 px est conservée séparément sans lui attribuer cette propriété.
+Aucun défaut visuel bloquant retenu. Les index de sources distinguent les
+phases ; la mise à jour documentaire finale ne prétend pas avoir été compilée
+dans un code produit qui ne la lit pas.
+
+Restent explicitement : routes multiples, autre port, retrait/absence, pages
+suivantes sur six domaines, source perturbée et Host réel, vraie consultation
+CLI perdue après publication, entrée SSO sur alias et campagne complète.
+La proposition de route est déposée ; aucune route FORGE n’a été appliquée.
+L’autorité bornée demandée reste sans réponse. SLS-066 garde [~] ; le goal
+général reste actif. Aucun remote Git n’est configuré.

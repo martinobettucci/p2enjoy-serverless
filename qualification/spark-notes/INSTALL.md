@@ -67,3 +67,24 @@ Ces refus n’entament pas la purge et ne créent pas son reçu. Les fichiers,
 configuration et registres ont été recoupés avant/après les refus réels.
 Un UUID déjà connu suit les règles de répétition corrélée : relire son reçu,
 puis réutiliser ses paramètres initiaux si une répétition explicite est nécessaire.
+
+## Adresses d’appel en qualification
+
+SLS-066 lit la projection officielle des routes par le montage readonly
+`/etc/spark:/spark:ro`. La facette Adresses d’appel et son lien depuis le
+service affichent URL, méthodes et transport déclaré. La copie native propose
+un emplacement de jeton, sans valeur réelle ; les erreurs retirent les
+anciennes adresses. Le résultat CLI ajoute la même information après publication.
+La console et le SSO gardent leur origine canonique.
+
+Le checkpoint `docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json`
+passe 88 groupes réels : huit API/CLI, six UI, 36 régressions et 38 groupes CLI Docker. Les 31 captures
+sont recoupées ; le manuel à 14 chapitres et 43 paragraphes est compilé et
+vérifié. Les neuf fonctions des essais/replays sont purgées et les 26 sources
+Python/SQL embarquées recoupées. Ce checkpoint ne clôture pas l’unité.
+
+Restent les changements réels de routes, seconde page sur six domaines, source
+perturbée, Host réel, consultation CLI perdue après publication et campagne
+complète sur cette image. L’alias functions.lelabs.tech vers 18090 TLS est
+proposé dans routes.? ; il n’est pas appliqué. Aucun nouveau secret, variable
+ou schéma ; la configuration reste dans les deux fichiers de cellule.
