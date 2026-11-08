@@ -44,6 +44,25 @@ normale. Un accès absent est une erreur de prérequis, jamais un test ignoré.
 
 ## Adresses d’appel SLS-066
 
+Le complément à deux domaines réels passe huit groupes API/CLI et six UI sur
+`serverless.lelabs.tech` et `functions.lelabs.tech`, tous deux en HTTPS vérifié.
+Quatre fonctions sont purgées dans deux namespaces et recoupées nativement.
+Sa [preuve distincte](../docs/evidence/invocation-domains-dev-2026-11-08.json)
+conserve aussi les arrêts initiaux : déclaration effective suivie d’une
+comparaison trop stricte de `applied_at`, puis premier départ API sans session
+valide avant création d’objet. La vérification de l’installation et le replay
+réussis ne réécrivent aucun de ces essais en succès.
+
+`python3 -B e2e/invocation-domain-console.py inspect` consulte la console normale
+déjà en fonctionnement. `apply-authorized-alias` est une opération de mise en
+service unique, limitée au nom expressément autorisé ; un reçu existant refuse
+son rejeu. Le premier reçu incomplet reste conservé.
+`verify-installed-alias` est la reprise en lecture seule de ce reçu précis :
+identités, DNS et propriétés matérielles, puis véritables HTTPS des deux noms,
+sans renvoyer les créations. Aucun de ces clients ne constitue un chemin
+d’administration de FORGE. Les retraits/détours et pages sur six domaines
+restent à éprouver séparément ; SLS-066 demeure ouverte.
+
 Exécuter séparément et en série `node e2e/invocation-urls.mjs` puis
 `node e2e/invocation-urls-ui.mjs`, avec la session SSO réelle préparée selon
 le protocole stdin ci-dessous. Le premier passe huit groupes API/CLI avec

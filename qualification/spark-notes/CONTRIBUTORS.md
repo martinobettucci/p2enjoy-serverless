@@ -163,12 +163,12 @@ sont recoupées : 61 observations et 18 identités SHA avec une référence insp
 Le contrôle et la référence sont sains, l’agent actif, les réservations et
 allocations globales à zéro. Les archives historiques étrangères restent conservées.
 
-La preuve native du Host est acquise en boucle locale. Restent les changements
-réels de routes/TLS, seconde page sur six domaines et source perturbée.
+La preuve native du Host est acquise en boucle locale. Le couple de domaines TLS est maintenant vérifié ; restent retrait/détours,
+seconde page sur six domaines et source perturbée.
 Le GET CLI 401 après publication est qualifié séparément ci-dessous. Le build nominal CLI est
 qualifié ; sa branche d’expiration/perte SSH reste à éprouver. SLS-066 demeure
-ouverte. L’alias functions.lelabs.tech vers 18090 TLS est proposé dans routes.? ;
-il n’est pas appliqué. Aucun nouveau secret, variable ou schéma ; la configuration
+ouverte. L’alias functions.lelabs.tech vers 18090 TLS est appliqué par la
+console normale du seul SPARK ; son certificat et sa résolution native sont vérifiés. Aucun nouveau secret, variable ou schéma ; la configuration
 reste dans les deux fichiers de cellule. Ces trois notes sont proposées,
 sans revendiquer leur adoption.
 
@@ -239,6 +239,31 @@ Les deux arrêts précédents restent incomplets ; ils ne sont pas transformés
 en succès. La preuve du canal privé corrige seulement son client HTTP.
 
 Les configurations restent dans /etc/spark/env et /run/spark/secrets, avec
-/etc/spark monté readonly dans l’API. L’alias functions.lelabs.tech reste une
-proposition de route ; la console du seul SPARK est autorisée pour les essais
-suivants, sans administration de la FORGE. Ces notes restent des propositions.
+/etc/spark monté readonly dans l’API. L’alias functions.lelabs.tech est désormais
+appliqué par la console normale du seul SPARK, selon le complément ci-dessous.
+Ces notes restent des propositions.
+
+
+## Deux domaines TLS — complément SLS-066
+
+https://functions.lelabs.tech et https://serverless.lelabs.tech visent désormais
+le port 18090 du même contrôle. La console et le SSO gardent leur domaine
+canonique serverless.lelabs.tech. Le DNS A exact de functions et sa route TLS
+sont posés par la console normale autorisée ; les deux HTTPS sont vérifiés
+sans substitution de DNS ni contournement de certificat. La projection officielle
+porte les deux lignes, lisibles depuis le montage readonly du contrôle.
+
+Les huit groupes API/CLI et six parcours UI passent sur les deux domaines :
+publication, appels Docker des adresses émises, droits, chemins/méthodes,
+révisions et rollback. Leurs quatre fonctions sont purgées dans deux namespaces
+et recoupées nativement. Sources de preuve :
+docs/evidence/invocation-domains-dev-2026-11-08.json. Ce complément ne clôture
+pas SLS-066 : retrait, détours vers 18091 avec garde, source perturbée et
+pages suivantes sur six domaines restent distincts.
+
+La première déclaration est conservée comme interrompue pendant une comparaison
+trop stricte de applied_at ; sa reprise en lecture seule vérifie les propriétés
+matérielles inchangées et les vrais HTTPS, sans second POST. Le premier départ
+API sur session expirée est également conservé, avant création de ressources ;
+le replay utilise une nouvelle connexion SSO réelle. Aucun nouveau secret,
+variable, schéma ou build du contrôle. Les notes sont proposées sans adoption.

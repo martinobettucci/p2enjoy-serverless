@@ -447,7 +447,8 @@ d’infrastructure et preuves E2E :
 [INVOCATION_URLS](INVOCATION_URLS.md). Le [checkpoint DEV](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 réunit huit groupes API/CLI, six UI, 36 régressions et 38 groupes CLI Docker,
 avec 31 captures recoupées.
-Le manuel servi comporte 14 chapitres et 43 paragraphes. Les preuves multi-domaines,
+Le manuel de ce checkpoint comporte 14 chapitres et 43 paragraphes ; le guide
+courant qualifié par SLS-067 en comporte quinze et 46. Les preuves multi-domaines,
 retrait et absence exigent les vraies routes et l’autorité bornée du SPARK ;
 aucune substitution du registre n’est admise. Restent également les sources
 perturbées. La consultation CLI refusée par révocation 401 est qualifiée
@@ -457,13 +458,19 @@ est reconstruit et qualifié pour les parcours actuellement éprouvés.
 L’autorisation bornée de gestion des routes du seul SPARK depuis sa console
 normale est confirmée le 8 novembre 2026 : alias functions.lelabs.tech, deux
 routes vers 18091 temporairement, garde et restauration à 18090. Le périmètre
-est inscrit dans CLAUDE_PROJECT ; la proposition n’est pas encore appliquée et
-les preuves de ces changements restent à exécuter après la campagne SLS-067.
+est inscrit dans CLAUDE_PROJECT ; l’alias est appliqué, tandis que les preuves
+de retrait et détours restent à exécuter après la campagne SLS-067.
 
 SLS-067 est clôturée. La reprise commence par le DNS exact et la route TLS de
 l’alias autorisé via la console normale, puis les huit groupes API/CLI et six UI
 sur les deux domaines. Le [contrat opératoire](INVOCATION_URLS.md#console-normale-et-mise-en-service-de-lalias-autorisé)
 sépare cette mise en service des perturbations et de leur garde à éprouver.
+Le DNS exact et l’alias sont maintenant appliqués ; les deux HTTPS et la
+projection lisible depuis le contrôle sont vérifiés. Les huit groupes API/CLI
+et six UI passent, avec quatre fonctions purgées dans deux namespaces.
+La [preuve à deux domaines](evidence/invocation-domains-dev-2026-11-08.json)
+conserve ses arrêts initiaux et la reprise sans mutation ; elle ne clôture
+pas les critères résiduels de SLS-066.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,

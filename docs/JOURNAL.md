@@ -3215,3 +3215,38 @@ comparer les champs matériels et garder la date séparément, puis vérifier
 l’installation existante avec une nouvelle commande strictement en lecture
 seule. Le premier reçu reste incomplet et n’est pas réécrit en succès. Aucun
 POST n’est rejoué ; les HTTPS réels et campagnes métier restent à vérifier.
+
+## 2026-11-08 — INC-004 corrigée, couple de domaines TLS éprouvé
+
+Le client compare désormais toutes les propriétés matérielles de la route,
+en conservant applied_at comme observation. La revue ciblée ne relève pas de
+défaut concret. verify-installed-alias termine à zéro en lecture seule : SHA du
+reçu initial, identités exactes, DNS inchangé et deux réponses HTTPS 200 avec
+certificats vérifiés. Le reçu initial reste incomplet, sans second POST.
+Issue INC-004 : corrigée avec contrat, client, revue et preuve réelle ; l’entrée
+est retirée et le registre vide supprimé.
+
+Un premier départ API s’arrête avant création d’objet : session administrateur
+expirée, zéro groupe exécuté. Ses deux rapports restent archivés séparément.
+Une connexion SSO réelle par stdin privée renouvelle les sessions ; aucune
+valeur d’identifiant ne rejoint les rapports. Le replay passe huit groupes
+API/CLI, puis six UI depuis l’accueil normal. Les 198 sources et images sont
+identiques avant/après chaque phase. Les deux domaines émis sont effectivement
+invoqués dans Docker ; chemins, méthodes, portée, révisions, renommage et rollback
+passent. Les sept captures fraîches sont inspectées individuellement, sans
+défaut visuel bloquant. Le principal observe aussi la fiche mobile à deux noms.
+
+La lecture native recoupe quatre fonctions purgées dans deux namespaces,
+leurs reçus agent, absences physiques et secrets de fonction vides. Le contrôle
+lit les deux lignes officielles via son montage readonly ; services, démarrages,
+agent et configuration officielle restent inchangés. Les mesures HTTPS de santé
+ne sont pas confondues avec les preuves d’invocation ou la redirection canonique
+publique, encore à éprouver. La preuve est
+[invocation-domains-dev-2026-11-08.json](evidence/invocation-domains-dev-2026-11-08.json).
+
+Livraison SPARK : aucune variable ni secret nouveau. Route ajoutée :
+functions.lelabs.tech vers 18090 TLS, avec son DNS A exact ; route canonique
+conservée. README.md, CONTRIBUTORS.md et INSTALL.md sont reproposés séparément,
+sans adoption des notes actives. La configuration reste celle des deux fichiers
+officiels. SLS-066 demeure ouverte pour les perturbations/garde, source, pages
+suivantes et entrée publique canonique. Aucun remote Git n’est configuré.

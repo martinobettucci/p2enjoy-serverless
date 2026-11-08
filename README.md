@@ -88,6 +88,12 @@ en DEV : facette de fonction, copie d’URL/curl et résultat CLI issus des rout
 du SPARK. Le [checkpoint](docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 passe 88 groupes sur le domaine courant. La qualification multi-domaines et
 les preuves résiduelles restent ouvertes ; SLS-066 n’est pas clôturée. La
+[preuve à deux domaines](docs/evidence/invocation-domains-dev-2026-11-08.json)
+ajoute huit groupes API/CLI et six UI sur `serverless.lelabs.tech` et
+`functions.lelabs.tech`, désormais tous deux vérifiés en HTTPS vers 18090.
+Les quatre fonctions de ces campagnes sont purgées dans deux namespaces ;
+sept nouvelles captures sont inspectées. Retrait/détours de routes, source
+perturbée et pagination sur six domaines restent à éprouver. La
 [régression complète](docs/evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes en série et 467 groupes, sans échec ni test ignoré :
 186 sources recoupées avant/après chaque phase, 79 captures fraîches recoupées

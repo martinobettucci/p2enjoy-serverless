@@ -562,7 +562,7 @@ pas revendiquée. Les autres unités du backlog restent indépendantes.
 
 Le [contrat](INVOCATION_URLS.md) utilise un montage readonly du répertoire
 `/etc/spark` dans le contrôle, sans nouvelle variable, secret, migration ou
-service. L’image du contrôle déployée est
+service. L’image du contrôle utilisée par ce checkpoint initial est
 `sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a`.
 Le [checkpoint](evidence/invocation-urls-checkpoint-dev-2026-11-08.json) recoupe
 88 groupes, les sources embarquées et les nettoyages ; les preuves résiduelles
@@ -572,13 +572,16 @@ d’écriture vérifiés dans un conteneur rootless supprimé après relevé. Un
 projection future en 0600 sera signalée indisponible, sans modification de ses
 permissions par l’application.
 
-Une proposition d’alias `functions.lelabs.tech` vers 18090 TLS et un plan borné
-de qualification des routes sont décrits dans le contrat. L’alias figure
-dans `/etc/spark/routes.?` (SHA256
-28dd866ad53907ab8e467298468f354752b411d1b0219c296ece56385e82123f). Ils ne constituent
-pas une route appliquée. Les changements normaux doivent être réalisés par
-le propriétaire ou avec une autorisation distincte limitée au seul SPARK.
+L’alias `functions.lelabs.tech` vers 18090 TLS est désormais appliqué depuis
+la console normale, avec l’autorisation explicite du seul SPARK. Son DNS A
+exact, sa résolution native et les deux HTTPS sont vérifiés. Le contrôle lit
+les deux lignes dans la projection officielle. Le reçu distinct conserve la
+déclaration initiale interrompue pendant sa vérification, puis sa reprise en
+lecture seule ; aucun POST n’est rejoué. Les huit groupes API/CLI et six UI
+passent et leurs quatre fonctions sont purgées dans deux namespaces.
 La FORGE et les autres SPARK restent hors du périmètre d’administration.
+Retrait/détours avec garde, source perturbée et pages sur six domaines restent
+à qualifier dans SLS-066.
 
 Le [replay complet](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe ensuite 35 campagnes et 467 groupes, zéro échec/skip. Six prérequis restent

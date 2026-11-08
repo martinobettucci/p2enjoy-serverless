@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- Alias functions.lelabs.tech appliqué en DEV par la console normale vers
+  18090 TLS, avec DNS exact et certificats réellement vérifiés sur les deux
+  domaines. Huit groupes API/CLI et six UI passent ; quatre fonctions purgées
+  dans deux namespaces, sept captures inspectées. Le premier reçu de déclaration
+  interrompu et le départ API sur session expirée restent séparés. La reprise
+  de vérification n’envoie aucune mutation. SLS-066 reste ouverte pour retrait,
+  détours avec garde, source perturbée et pages suivantes sur six domaines.
+  [Preuve](docs/evidence/invocation-domains-dev-2026-11-08.json).
+
 - Catalogue global SLS-067 qualifié en DEV : accueil Fonctions, recherche
   serveur, filtres paginés, tri/état et contexte de retour dans les six facettes.
   La preuve retient 37 campagnes uniques / 489 groupes réels, six prérequis

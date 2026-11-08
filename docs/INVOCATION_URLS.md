@@ -2,7 +2,7 @@
 
 Contrat SLS-066. Catalogue, console, CLI et montage readonly sont déployés sur
 le SPARK DEV. Le [checkpoint](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
-passe 88 groupes réels sur le seul domaine actuellement affecté. La
+passe 88 groupes réels sur le seul domaine alors affecté. La
 [régression complète](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe ensuite 35 campagnes et 467 groupes, sans échec ni test ignoré. L’unité
 reste en qualification : les changements de routes, pages suivantes et autres
@@ -211,6 +211,37 @@ verify-installed-alias reprend uniquement les lectures et le HTTPS. Elle exige
 le reçu de déclaration, recoupe les mêmes identifiants et ne renvoie aucune
 mutation. Le reçu initial reste incomplet ; son diagnostic et sa reprise sont
 conservés séparément. Un changement matériel demeure un échec.
+
+## Qualification du couple de domaines TLS
+
+Le [complément réel](evidence/invocation-domains-dev-2026-11-08.json) passe huit
+groupes API/CLI puis six groupes navigateur sur serverless.lelabs.tech et
+functions.lelabs.tech. Les 198 sources et les mêmes images contrôle/CLI sont
+recoupées avant/après les deux campagnes. Les appels parcourent effectivement
+toutes les adresses émises, avec handlers Docker, chemins/méthodes, révisions,
+renommage et rollback. Les sept nouvelles captures sont inspectées : deux
+domaines lisibles, copies, refus natif du presse-papiers, réseau, mobile et guide.
+Les quatre fonctions sont purgées dans deux namespaces ; reçus, ressources
+physiques et secrets de fonction sont recoupés. Les services gardent leur
+identité et démarrage, et les deux fichiers de configuration sont inchangés.
+
+Le DNS A exact et les deux réponses HTTPS vérifiées sont conservés séparément
+des tests métier. Le contrôle lit les deux lignes du vrai fichier officiel
+par son montage readonly. Le premier essai de mise en service reste incomplet :
+la déclaration réussit, puis l’assertion de date d’application s’arrête. Une
+reprise strictement en lecture seule recoupe son SHA et ses identités et confirme
+les vrais HTTPS, sans second POST. INC-004 est corrigée dans ce seul client ;
+la date reste enregistrée sans servir de propriété matérielle de configuration.
+
+Le premier départ API sur session expirée reste également distinct : zéro groupe,
+avant création de ressources. Une nouvelle connexion SSO réelle précède le
+replay positif. Aucun de ces essais n’est réécrit en réussite.
+
+Ce complément ne prouve pas encore le retrait, les détours vers 18091, l’état
+vide ou la source indisponible, les pages suivantes sur six domaines ni l’entrée
+HTML/SSO depuis l’alias public. La preuve native du Host/redirection reste
+celle de la boucle locale. Les scénarios résiduels et leur garde maintiennent
+SLS-066 ouverte. Le mode clair n’a pas été activé.
 
 ## Suite complète de preuve
 
