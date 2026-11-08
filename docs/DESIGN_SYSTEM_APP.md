@@ -229,3 +229,15 @@ rejeu. Les vues sans session peuvent conserver la structure déjà chargée.
 Le catalogue de stockage affiche aussi des archives historiques ; son total
 ne représente pas les seules fonctions du replay. Les limites de routes,
 source inaccessible et pagination du catalogue d’adresses restent ouvertes.
+
+## Catalogue global SLS-067 en réalisation
+
+[FUNCTION_CATALOGUE](FUNCTION_CATALOGUE.md) ajoute Fonctions en tête de la
+navigation, avec table sémantique, recherche et filtres locaux à la liste.
+Les dialogues Namespace/Service recueillent un choix radio dans une collection
+recherchée et paginée, avec un seul engagement Appliquer ; ils suivent le §6.27.
+Les tableaux larges défilent dans leur conteneur, les noms complets reviennent
+à la ligne. Les états chargement/vide/erreur, les totaux, la page et le focus
+sont explicites. La query de retour accompagne les liens des six facettes.
+Ce parcours reste à implémenter et à qualifier ; les preuves existantes
+décrivent encore l’accueil Namespaces.

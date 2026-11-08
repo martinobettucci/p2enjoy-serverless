@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- Catalogue global SLS-067 en réalisation : contrat API/console persisté,
+  recherche serveur, filtres paginés et contexte de retour. Aucune nouvelle
+  fonctionnalité annoncée déployée avant sa qualification.
+
 - Refus du catalogue après publication qualifié en DEV : CLI retenue avant sa
   sixième connexion, jeton révoqué par l’API, vrai 401 conservant publication
   et UUID sans rejeu. Le replay passe 17 groupes en série, 188 sources/images

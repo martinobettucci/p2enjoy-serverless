@@ -389,3 +389,12 @@ Le premier essai incomplet reste distinct, avec deux fonctions et gardes
 nettoyées ; sa barrière manquée reste de cause non prouvée. Aucun code produit,
 schéma ou réglage n’est modifié ; les notes actualisées sont reproposées.
 Le 403 et les pannes du pilote/diagnostic restent hors de cette preuve.
+
+## Catalogue global en réalisation
+
+SLS-067 suit [FUNCTION_CATALOGUE](FUNCTION_CATALOGUE.md) : lecture administrateur
+des métadonnées existantes, recherche Unicode avant pagination dans un snapshot
+SQLite, normalisation par fonction locale à cette connexion et sélecteurs de
+parents paginés. Aucune migration ni dépendance. La console prépare un accueil
+Fonctions et un retour de catalogue par query validée, sans stockage client.
+API, interface, manuel et preuves restent à livrer ensemble avant clôture.

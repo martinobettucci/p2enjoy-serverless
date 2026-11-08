@@ -495,11 +495,15 @@ et les pannes propres du pilote/diagnostic ne sont pas revendiqués.
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale
 
-Statut : [ ] — contrat défini, implémentation à réaliser.
+Statut : [~] — contrat détaillé, implémentation API/console et qualification en cours.
 
 Catalogue global, recherche serveur, filtres namespace/service/état, tri,
 pagination et contexte conservé dans l’URL. Contrat :
 [catalogue et recherche](CONSOLE_USABILITY.md#catalogue-et-recherche).
+Le [contrat détaillé](FUNCTION_CATALOGUE.md) fixe les API admin, les champs
+existants recherchés, la normalisation, les tris/bornes, les filtres paginés,
+l’accueil Fonctions et le retour URL depuis les six facettes. Aucun résultat
+anticipé ; SLS-066 conserve ses preuves résiduelles indépendantes.
 E2E : résultats au-delà de la première page, noms identiques dans plusieurs
 services, filtres combinés, recherche rapide sous vrai délai réseau, refus,
 navigation retour, clavier et mobile. Manuel et captures avec la livraison.

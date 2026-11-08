@@ -2954,3 +2954,23 @@ restent ouverts ; SLS-066 garde [~], le goal reste actif. Les documents de statu
 et trois notes sont actualisés après gel ; le contrat exécuté et le contrat
 livré ont leurs empreintes distinctes. Aucun registre d’incohérences extérieur
 ouvert, aucune migration, variable, secret ou route appliquée. Aucun remote/push.
+
+## 2026-11-08 — Catalogue global choisi comme unité suivante
+
+La révocation après publication est qualifiée au commit 9ba7f47. SLS-066 garde
+ses preuves résiduelles, notamment celles dépendant de l’autorité sur les routes.
+Choix : avancer SLS-067, indépendant de cette autorité, selon la demande de
+recherche et ergonomie. La méthode et le goal restent inchangés.
+
+L’exploration readonly recoupe les routes, la racine Namespaces et huit clients
+qui la supposent après connexion. Décisions avant code : racine et
+/console/functions pour le catalogue, /console/namespaces pour la structure,
+fiches historiques conservées ; contexte de retour canonique traversant les six
+facettes. Recherche sur métadonnées existantes (descriptions de parents), pas
+de nouveau champ fonction ni d’index secret. API admin comme Namespaces, jetons
+de service conservant leur liste dédiée. Unicode NFKD/casefold sans accents,
+mots ET et caractères littéraux, tris fermés, total/page/sélections dans un
+snapshot. Sélecteurs de parents recherchés et paginés dans DialogForm plutôt
+qu’un chargement global non borné. Les régressions suivent la navigation réelle,
+sans accès UI direct ni suppression de scénario. Le contrat détaillé fixe
+limites, déroulé, API/UI, manuel et preuves ; aucune réussite anticipée.

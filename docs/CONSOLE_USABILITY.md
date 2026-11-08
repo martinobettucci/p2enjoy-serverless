@@ -36,6 +36,8 @@ L’URL conserve recherche, filtres, tri et page. Un retour depuis une fiche
 retrouve la liste précédente. Une réponse ancienne ne remplace pas une recherche
 plus récente. Le champ et les résultats sont utilisables au clavier, avec
 contexte du service visible lorsque plusieurs fonctions portent le même nom.
+Le [contrat détaillé SLS-067](FUNCTION_CATALOGUE.md) fixe les champs existants,
+API, bornes, sélection des filtres et navigation à réaliser.
 
 ## Favoris personnels
 
@@ -187,11 +189,12 @@ révision. Les dates, filtres et liens permettent de partager le même diagnosti
 
 ## Livraison et preuves
 
-L’ordre de réalisation conserve les travaux de fiabilité ouverts : terminer
-la preuve de transport SLS-031 et les reprises SLS-065, livrer les URL SLS-066,
-puis catalogue/favoris, opérations en masse, éditeur/client HTTP et extension
-des journaux/monitoring. Les vues de journaux et mesures existantes restent le
-socle des parcours intermédiaires.
+SLS-031 et SLS-065 sont qualifiées. Les URL SLS-066 sont déployées ; leurs
+preuves résiduelles de routes restent ouvertes. Le catalogue SLS-067 avance
+indépendamment de cette autorité externe, puis favoris, opérations en masse,
+éditeur/client HTTP et journaux/monitoring. Cette progression ne clôture ni
+ne dispense les preuves restantes de SLS-066. Les vues de journaux et mesures
+existantes restent le socle des parcours intermédiaires.
 
 Chaque unité livre API, interface, persistance ou migrations nécessaires, manuel
 affiché et preuves E2E sur le SPARK DEV. Les parcours partent de l’accueil réel
