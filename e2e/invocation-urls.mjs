@@ -103,10 +103,19 @@ try{
     const revoked=await token('revoked',['read']);await api(`/api/tokens/${revoked.id}/revoke`,{method:'POST'});await asToken(endpoint,revoked.token,401);
     const allowed=await token('allowed',['read'],{function_ids:[draft.id]});await asToken(endpoint,allowed.token);
   });
-  await check('Validation des bornes et X-Forwarded-Host étranger sans influence sur les domaines',async()=>{
+  await check('Bornes et vrais Host/X-Forwarded-Host sans influence sur les domaines',async()=>{
     for(const query of ['?limit=0','?limit=21','?limit=abc','?offset=-1','?offset=10001'])await asToken(endpoint+query,read,422);
     const normal=await catalogue(draft.id),spoofed=await asToken(endpoint,read,200,{'X-Forwarded-Host':'untrusted.invalid'});
     assert.deepEqual(normal.items,spoofed.items);assert.equal(normal.source.sha256,spoofed.source.sha256);
+    const native=await new Promise((resolve,reject)=>{
+      const child=execFile('ssh',['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24',
+        'python3','-B','/srv/p2enjoy-serverless/e2e/invocation-url-host.py'],{timeout:120000,maxBuffer:1024*1024},
+        (error,stdout)=>error?reject(new Error('native_host_proof_failed')):resolve(JSON.parse(stdout)));
+      child.stdin.end(JSON.stringify({function_id:draft.id,token:read})+'\n');
+    });
+    assert(native.completed);assert.equal(native.transport,'native-loopback-http');
+    assert.deepEqual(normal.items,native.catalogue.items);assert.equal(normal.source.sha256,native.catalogue.source.sha256);
+    observations.push({scenario:'real-host-native-loopback',...native});
     const end=await catalogue(draft.id,'?limit=20&offset=10000');assert.deepEqual(end.items,[]);assert.equal(end.total,normal.total);
     const first=await catalogue(draft.id,'?limit=1');assert.equal(first.items.length,1);assert.equal(first.total,normal.total);
     await asToken(`/api/functions/${randomUUID()}/invocation-urls`,read,403);

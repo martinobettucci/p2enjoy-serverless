@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-020 | docs/CONTROL.md#preuves
 # @verifies docs/BACKLOG.md#sls-020 | docs/CONTROL.md#configuration | docs/SCHEMA.md
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#preuve-native-du-host-et-des-clients-de-panne
+# @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#preuve-native-du-host-et-des-clients-de-panne
 # Real immutable control image, real SQLite and real OIDC discovery on DEV only.
 import json
 from pathlib import Path
@@ -8,6 +10,7 @@ import subprocess
 import tempfile
 import time
 import uuid
+from urllib.parse import urlsplit
 
 assert Path('/etc/hostname').read_text().strip()=='infra-serverless','SPARK DEV requis'
 ROOT=Path('/srv/p2enjoy-serverless/control')
@@ -31,6 +34,11 @@ def run(args,timeout=60,check=True):
 
 
 image=run(['docker','inspect','--format','{{.Image}}','serverless-api']).stdout.strip()
+# Read only the public origin, never the rest of the effective environment.
+public_url=run(['docker','exec','serverless-api','python','-B','-c',
+                'import os; print(os.environ["SERVERLESS_PUBLIC_URL"])']).stdout.strip()
+canonical_host=urlsplit(public_url).netloc
+assert public_url.startswith('https://') and canonical_host
 docker_socket=run(['docker','inspect','--format','{{range .Mounts}}{{if eq .Destination "/docker.sock"}}{{.Source}}{{end}}{{end}}','serverless-api']).stdout.strip()
 storage_channel=run(['docker','inspect','--format','{{range .Mounts}}{{if eq .Destination "/storage-agent"}}{{.Source}}{{end}}{{end}}','serverless-api']).stdout.strip()
 assert docker_socket,'Montage Docker du contrôle absent'
@@ -65,10 +73,13 @@ def logs(container):
 
 def request(path,expected,method='GET',body=None):
     program='''import urllib.request,urllib.error,json
-try:r=urllib.request.urlopen(urllib.request.Request('http://control:18090'+%r,method=%r,data=%r,headers={'Content-Type':'application/json'}),timeout=15)
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+ def redirect_request(self,*args):return None
+client=urllib.request.build_opener(NoRedirect())
+try:r=client.open(urllib.request.Request('http://control:18090'+%r,method=%r,data=%r,headers={'Content-Type':'application/json','Host':%r}),timeout=15)
 except urllib.error.HTTPError as e:r=e
 print(json.dumps({'status':r.status,'request_id':r.headers.get('X-Request-ID'),'body':r.read().decode()}))
-'''%(path,method,json.dumps(body).encode() if body is not None else None)
+'''%(path,method,json.dumps(body).encode() if body is not None else None,canonical_host)
     result=run(['docker','run','--rm','--network',project+'_default','--read-only',
                 '--cap-drop','ALL','--security-opt','no-new-privileges:true','--pids-limit','32',
                 '--memory','128m',image,'python','-B','-c',program],timeout=30)
@@ -213,14 +224,15 @@ try:
 class NoRedirect(urllib.request.HTTPRedirectHandler):
  def redirect_request(self,*args):return None
 client=urllib.request.build_opener(NoRedirect())
-try:client.open('http://control:18090/auth/login')
+host=HOST
+try:client.open(urllib.request.Request('http://control:18090/auth/login',headers={'Host':host}))
 except urllib.error.HTTPError as r:
  assert r.code==303
  state=urllib.parse.parse_qs(urllib.parse.urlsplit(r.headers['Location']).query)['state'][0]
-try:client.open(urllib.request.Request('http://control:18090/auth/retour?state='+state+'&error=access_denied',headers={'Cookie':'__Host-p2-flow='+state}))
+try:client.open(urllib.request.Request('http://control:18090/auth/retour?state='+state+'&error=access_denied',headers={'Cookie':'__Host-p2-flow='+state,'Host':host}))
 except urllib.error.HTTPError as r:assert r.code==401
 else:raise AssertionError('Callback non refusé')
-'''
+'''.replace('HOST',repr(canonical_host))
     run(['docker','run','--rm','--network',project+'_default','--read-only','--cap-drop','ALL',image,'python','-B','-c',program])
     logs(container)
     passed('Écriture reprise et aucune valeur secrète dans les journaux')

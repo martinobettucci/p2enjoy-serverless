@@ -1,5 +1,7 @@
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
 // @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
+// @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
+// @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
 // All helpers use the actual home/SSO flow; only platform cookies reach private files.
 import assert from 'node:assert/strict';
 import {mkdir,writeFile,rename,chmod,rm} from 'node:fs/promises';
@@ -42,10 +44,10 @@ async function signIn(browser,credentials,filename){
 }
 async function main(){
   const args=process.argv.slice(2);
-  assert(args.length===0||(args.length===1&&args[0]==='--for-storage-decisions'),'invalid_sso_purpose');
-  const purpose=args.length?'storage-decisions':'suite-start';
+  assert(args.length===0||(args.length===1&&['--for-storage-decisions','--for-invocation-urls'].includes(args[0])),'invalid_sso_purpose');
+  const purpose=args[0]==='--for-storage-decisions'?'storage-decisions':args[0]==='--for-invocation-urls'?'invocation-urls':'suite-start';
   await mkdir(output,{recursive:true,mode:0o700});
-  const report=new URL(args.length?'dev-sso-decision-sessions.json':'dev-sso-sessions.json',output);
+  const report=new URL(purpose==='storage-decisions'?'dev-sso-decision-sessions.json':purpose==='invocation-urls'?'dev-sso-invocation-sessions.json':'dev-sso-sessions.json',output);
   await writeFile(report,JSON.stringify({completed:false,purpose})+'\n',{mode:0o600});
   let credentials=await credentialsFromStdin(),browser;
   try{

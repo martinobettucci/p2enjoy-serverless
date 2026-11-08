@@ -158,7 +158,7 @@ par cinq comme la console, plutôt que d’exiger vingt et un domaines pour
 
 ## Suite complète de preuve
 
-Le scope `invocation-urls` de `e2e/execution-suite.py` est prévu pour l’union
+Le scope `invocation-urls` de `e2e/execution-suite.py` compose l’union
 sans doublon de 35 campagnes, soit 467 groupes : socle stockage/console 397,
 adresses API 8 et UI 6, transport commun 5 puis configuration commune 13,
 CLI Docker plan/package 24 et refus public 14. Ce total reste à exécuter ;

@@ -25,7 +25,7 @@ réels pour une seconde page et les cycles de routes restent à éprouver.
 Aucun de ces manques n’est converti en test ignoré dans les campagnes exécutées.
 
 Le scope complet `python3 -B e2e/execution-suite.py --scope invocation-urls`
-est spécifié et reste à intégrer/qualifier :35 campagnes / 467 groupes sans doublon,
+est intégré et reste à qualifier : 35 campagnes / 467 groupes sans doublon,
 avec le même protocole stdin privée que stockage. Ses six prérequis ne gonflent
 pas le décompte ; le recoupement détaillé10 namespaces / 32 fonctions reste séparé
 des nettoyages propres aux autres campagnes. Le contrat

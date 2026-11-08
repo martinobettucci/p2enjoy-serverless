@@ -2,6 +2,8 @@
 # @verifies docs/BACKLOG.md#sls-040 | docs/ADMISSION.md
 # @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
 # @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
+# @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
 """Serial DEV qualification with fresh reports bound to sources and deployed image."""
 import argparse
 import hashlib
@@ -30,23 +32,29 @@ def source_hashes():
     files += [p for p in (ROOT/'web/src').glob('*') if p.is_file()]
     files += [p for p in (ROOT/'e2e').iterdir() if p.suffix in ('.py','.mjs')]
     files += [ROOT/name for name in ['e2e/package.json','e2e/package-lock.json','docs/CONSOLE_STORAGE.md','docs/STORAGE_LEGACY_PROOF.md']]
+    # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
+    files += [ROOT/name for name in ['docs/INVOCATION_URLS.md','adapter/Dockerfile','adapter/Dockerfile.dockerignore',
+                                    'adapter/compose.spark.yml','adapter/dev.sh','qualification/package.json']]
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
 def metadata(path):
     return {'sampled_at_ns':time.time_ns(),'mtime_ns':path.stat().st_mtime_ns,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()} if path.exists() else {'sampled_at_ns':time.time_ns(),'mtime_ns':None,'sha256':None}
 
-def snapshot(report_path,remote):
+def snapshot(report_path,remote,*,include_adapter=False):
     sources=source_hashes()
     script="""import hashlib,json,subprocess,time
 from pathlib import Path
 assert Path('/etc/hostname').read_text().strip()=='infra-serverless'
 image=subprocess.check_output(['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock','inspect','--format','{{.Image}}','serverless-api'],text=True).strip()
 result={'image':image,'source_sha256':{name:hashlib.sha256((Path('/srv/p2enjoy-serverless')/name).read_bytes()).hexdigest() for name in SOURCE_INDEX}}
+if INCLUDE_ADAPTER:
+ rows=json.loads(subprocess.check_output(['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock','image','inspect','p2enjoy-adapter:dev','p2enjoy-adapter-e2e:dev'],text=True))
+ result['adapter_images']={name:row['Id'] for name,row in zip(['p2enjoy-adapter:dev','p2enjoy-adapter-e2e:dev'],rows,strict=True)}
 path=Path(REPORT_PATH) if REMOTE_REPORT else None
 if path:
  result['report']={'sampled_at_ns':time.time_ns(),'mtime_ns':path.stat().st_mtime_ns,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()} if path.exists() else {'sampled_at_ns':time.time_ns(),'mtime_ns':None,'sha256':None}
 print(json.dumps(result))
-""".replace('REPORT_PATH',repr(REMOTE+report_path)).replace('REMOTE_REPORT',repr(remote)).replace('SOURCE_INDEX',repr(list(sources)))
+""".replace('REPORT_PATH',repr(REMOTE+report_path)).replace('REMOTE_REPORT',repr(remote)).replace('SOURCE_INDEX',repr(list(sources))).replace('INCLUDE_ADAPTER',repr(include_adapter))
     value=json.loads(subprocess.run(SSH+['root@10.77.0.24','python3 -B -'],input=script,text=True,capture_output=True,check=True).stdout)
     if not remote:value['report']=metadata(ROOT/report_path)
     assert value['source_sha256']==sources,'Sources distantes différentes du poste'
@@ -93,17 +101,21 @@ def verify_report(name,path,is_remote,expected_hash):
     expected.update({'storage-console-api':9,'storage-console-ui':10,'storage-command-recovery':7,
                      'storage-validation-recovery':2,'storage-decision-recovery':4,
                      'storage-legacy-partial':1,'storage-legacy-recovery':4})
+    # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
+    expected.update({'invocation-urls':8,'invocation-urls-ui':6,'service-transport':5,'service-configuration':13,
+                     'adapter-docker':24,'adapter-public-docker':14})
     checks=result.get('checks',result.get('results'))
     assert isinstance(checks,list) and len(checks)==expected[name],'Nombre de groupes inattendu'
     if name=='login-ui':assert all(isinstance(row,str) and row for row in checks)
     else:assert all(row['status']=='passed' for row in checks),'Groupe échoué'
     assert not result.get('failed') and not result.get('failures') and not result.get('cleanupErrors') and not result.get('cleanup_errors')
-    if name not in ('runtime-validation','public','login-ui','control-ui','control-admin','manual-ui'):
+    if name not in ('runtime-validation','public','login-ui','control-ui','control-admin','manual-ui','adapter-docker','adapter-public-docker'):
         assert result['cleanup'] is True,'Nettoyage incomplet'
     if name in ('control-ui','execution-ui'):assert result['faults']==[] and result['cleanupErrors']==[]
     if name=='manual-ui':assert result['faults']==[]
     if name=='publication-ui':assert result['faults']==[]
     if name=='storage-console-ui':assert result['faults']==[]
+    if name=='invocation-urls-ui':assert result['faults']==[]
     return len(checks)
 
 
@@ -131,12 +143,13 @@ def main():
     # @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
     # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--scope',choices=('engine','console','publication','storage','storage-console-focused','storage-console'),default='engine')
+    parser.add_argument('--scope',choices=('engine','console','publication','storage','storage-console-focused','storage-console','invocation-urls'),default='engine')
     scope=parser.parse_args().scope
     report={'engine':REPORT,'console':ROOT/'.local/e2e/console-execution-regressions.json','publication':ROOT/'.local/e2e/publication-regressions.json',
             'storage':ROOT/'.local/e2e/storage-discard-regressions.json',
             'storage-console-focused':ROOT/'.local/e2e/storage-console-focused.json',
-            'storage-console':ROOT/'.local/e2e/storage-console-regressions.json'}[scope]
+            'storage-console':ROOT/'.local/e2e/storage-console-regressions.json',
+            'invocation-urls':ROOT/'.local/e2e/invocation-urls-regressions.json'}[scope]
     console_cases=[
         next(row for row in CASES if row[0]=='public'),
         ('login-ui',['node','e2e/login-ui.mjs'],'.local/e2e/login-ui.json',False),
@@ -158,7 +171,7 @@ def main():
             *[next(row for row in CASES if row[0]==name) for name in ('managed-storage','function-storage','public-invocations')],
         ]
     if scope=='storage':cases=storage_cases
-    storage_console=scope in ('storage-console-focused','storage-console')
+    storage_console=scope in ('storage-console-focused','storage-console','invocation-urls')
     if storage_console:
         focused=[
             (name,['node','e2e/'+name+'.mjs'],'.local/e2e/'+name+'.json',False)
@@ -169,19 +182,29 @@ def main():
         ]
         if scope=='storage-console-focused':cases=focused
         else:
-            union=CASES+console_cases+storage_cases+focused
+            extra=[]
+            if scope=='invocation-urls':
+                extra=[(name,['node','e2e/'+name+'.mjs'],'.local/e2e/'+name+'.json',False)
+                       for name in ('service-transport','service-configuration','invocation-urls','invocation-urls-ui')]
+                extra += [(name,remote(['bash',REMOTE+'adapter/dev.sh',action]),'adapter/reports/'+filename,True)
+                          for name,action,filename in [('adapter-docker','test','adapter.json'),
+                                                       ('adapter-public-docker','deploy-public-test','adapter-deploy-public.json')]]
+            union=CASES+console_cases+extra+storage_cases+focused
             cases=list({row[0]:row for row in union}.values())
-    records=[];prerequisites=[];baseline=None
+            if scope=='invocation-urls':assert len(cases)==35
+    records=[];prerequisites=[];baseline=None;adapter_baseline=None
     def save(done=False):
         temporary=report.with_suffix('.tmp')
         temporary.write_text(json.dumps({'completed':done,'serial':True,'scope':scope,'prerequisites':prerequisites,'commands':records},ensure_ascii=False,indent=2)+'\n')
         temporary.replace(report)
     report.parent.mkdir(parents=True,exist_ok=True,mode=0o700);save()
     def execute(name,command,path,is_remote,*,count=True,private_input=None):
-        nonlocal baseline
-        before=snapshot(path,is_remote)
+        nonlocal baseline,adapter_baseline
+        include_adapter=adapter_baseline is not None
+        before=snapshot(path,is_remote,include_adapter=include_adapter)
         if baseline is None:baseline={k:before[k] for k in ('image','source_sha256')}
         assert all(before[k]==v for k,v in baseline.items()),'Image ou sources changées avant campagne'
+        if include_adapter:assert before['adapter_images']==adapter_baseline,'Images CLI changées avant campagne'
         record={'campaign':name,'command':command,'report_path':path,'report_remote':is_remote,'before':before,'exit_code':None}
         (records if count else prerequisites).append(record);save();print(json.dumps({'campaign' if count else 'prerequisite':name,'state':'running'}),flush=True)
         started=time.monotonic()
@@ -189,17 +212,27 @@ def main():
         result=subprocess.run(command,cwd=ROOT,**options)
         record.update(exit_code=result.returncode,duration_seconds=round(time.monotonic()-started,2));save()
         if result.returncode:raise SystemExit(result.returncode)
-        after=snapshot(path,is_remote);record['after']=after;save()
+        after=snapshot(path,is_remote,include_adapter=include_adapter);record['after']=after;save()
         assert all(after[k]==v for k,v in baseline.items()),'Image ou sources changées pendant campagne'
+        if include_adapter:assert after['adapter_images']==adapter_baseline,'Images CLI changées pendant campagne'
         assert before['report']['sampled_at_ns']<=after['report']['mtime_ns']<=after['report']['sampled_at_ns'],'Rapport non régénéré par la campagne'
         if count:record['passed_groups']=verify_report(name,path,is_remote,after['report']['sha256'])
         else:
             value=read_report(path,is_remote,after['report']['sha256']);assert value['completed'] is True,'Prérequis incomplet'
-            if name in ('dev-sso-sessions','dev-sso-decision-sessions'):
+            if name in ('dev-sso-sessions','dev-sso-decision-sessions','dev-sso-invocation-sessions'):
                 assert value['authenticated'] and value['independent_sessions']==2 and value['platform_cookies_only']
-                assert value['purpose']==('suite-start' if name=='dev-sso-sessions' else 'storage-decisions')
+                assert value['purpose']=={'dev-sso-sessions':'suite-start','dev-sso-decision-sessions':'storage-decisions',
+                                          'dev-sso-invocation-sessions':'invocation-urls'}[name]
             elif name=='storage-legacy-build':assert value['current_image']==baseline['image'] and value['current_tag_unchanged']
-            elif name=='storage-console-physical':assert value['physical']['completed'] and value['campaign_count']==6 and value['function_count']==24
+            elif name=='invocation-url-adapter-build':
+                assert value['remote_state']=='completed' and value['current_image']==baseline['image'] and value['current_tag_unchanged']
+                assert set(value['images'])=={'p2enjoy-adapter:dev','p2enjoy-adapter-e2e:dev'}
+                expected={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'adapter').glob('*.py')}
+                assert all(row['embedded_sources']==expected for row in value['images'].values())
+                adapter_baseline={name:row['image'] for name,row in value['images'].items()}
+            elif name=='storage-console-physical':
+                counts=(10,32) if scope=='invocation-urls' else (6,24)
+                assert value['physical']['completed'] and (value['campaign_count'],value['function_count'])==counts
             else:raise AssertionError('Prérequis inconnu')
         record['fresh_report_verified']=True;record['report_content_verified']=True;save()
     credentials=None
@@ -207,7 +240,13 @@ def main():
         credentials=private_credentials()
         execute('dev-sso-sessions',['node','e2e/dev-sso-sessions.mjs'],'.local/e2e/dev-sso-sessions.json',False,count=False,private_input=credentials)
         execute('storage-legacy-build',['python3','-B','e2e/storage-legacy-build.py'],'.local/e2e/storage-legacy-build.json',False,count=False)
+        if scope=='invocation-urls':
+            execute('invocation-url-adapter-build',['python3','-B','e2e/invocation-url-adapter-build.py'],
+                    '.local/e2e/invocation-url-adapter-build.json',False,count=False)
     for name,command,path,is_remote in cases:
+        if scope=='invocation-urls' and name=='service-transport':
+            execute('dev-sso-invocation-sessions',['node','e2e/dev-sso-sessions.mjs','--for-invocation-urls'],
+                    '.local/e2e/dev-sso-invocation-sessions.json',False,count=False,private_input=credentials)
         if storage_console and name=='storage-decision-recovery':
             execute('dev-sso-decision-sessions',['node','e2e/dev-sso-sessions.mjs','--for-storage-decisions'],
                     '.local/e2e/dev-sso-decision-sessions.json',False,count=False,private_input=credentials)
@@ -215,7 +254,8 @@ def main():
     credentials=None
     if storage_console:
         execute('storage-console-physical',['python3','-B','e2e/storage-suite-inspect.py',str(report.relative_to(ROOT))],
-                '.local/e2e/storage-console-physical.json',False,count=False)
+                '.local/e2e/invocation-urls-physical.json' if scope=='invocation-urls' else '.local/e2e/storage-console-physical.json',False,count=False)
+    if scope=='invocation-urls':assert len(records)==35 and sum(row['passed_groups'] for row in records)==467 and len(prerequisites)==6
     save(True)
 
 if __name__=='__main__':main()

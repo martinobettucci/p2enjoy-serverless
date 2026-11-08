@@ -2763,3 +2763,11 @@ distant. Décision avant correction : borne distante 780 + 15 secondes, envelopp
 900 secondes et état inconnu persistant en cas d’échec. Aucun rejeu avant
 diagnostic réel de fin et archivage du rapport ; ne pas confondre borne et
 preuve de terminaison. Aucun changement produit ou de route.
+
+La tranche de clients et de runner est intégrée. Le préflight retenu conserve
+les 55 groupes de panne, les huit groupes API avec Host réel, le prérequis SSO
+réel et la construction bornée des deux images avec cinq modules recoupés.
+La revue ne trouve pas de blocage nominal ; la branche d’expiration du nouveau
+build n’est pas déclarée éprouvée. Le scope 35 / 467 reste à lancer après ce
+checkpoint ; aucun succès de cette suite ou du collecteur 32 fonctions n’est
+encore revendiqué. Code produit, manuel compilé et route active inchangés.
