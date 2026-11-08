@@ -58,8 +58,11 @@ Les correspondances sont explicites :
 | package.patterns | Inclusions/exclusions ordonnées du contenu livré |
 
 Deux alias présents au même niveau sont refusés. Un mapping environment/env
-ou secret vide ou null conserve l'héritage ; une valeur null d'une clé retire
-cette clé héritée. Une collision finale entre variable et secret est refusée.
+ou secret vide ou null au niveau fonction conserve l'héritage ; une valeur null
+d'une clé retire sa surcharge locale et rétablit l'héritage. La configuration
+provider est conservée au niveau du service selon le
+[contrat SLS-031](SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges),
+dont l'implémentation reste à qualifier. Une collision finale entre variable et secret est refusée.
 Les valeurs sont des chaînes, sans conversion implicite d'un booléen YAML.
 Seules les références `${env:NOM}` sont résolues, à partir des noms explicitement
 déclarés ; les autres expressions sont refusées. Une variable manquante ne

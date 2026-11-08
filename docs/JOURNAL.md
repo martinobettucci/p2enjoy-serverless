@@ -2271,3 +2271,15 @@ le manuel compilé. Conversion des deux écarts en unités SLS-031 et SLS-066,
 non commencées. Les scénarios réels requis sont nommés dans le contrat.
 Cette inspection et cette spécification ne sont ni un déploiement ni une
 nouvelle preuve E2E ; les modifications de purge en cours restent distinctes.
+
+### SLS-031 — Sémantique de remplacement avant implémentation
+
+Une catégorie provider absente préserve le service ; une catégorie présente
+remplace ses clés. Les valeurs locales null rétablissent l’héritage, ce qui
+remplace l’ancien masquage produit par l’aplatissement. La configuration commune
+est appliquée après préparation locale et avant les publications en série,
+avec Update et If-Match. Son résultat est séparé dans le rapport : un import
+refusé conserve son ancien code mais n’annule pas une modification commune
+déjà appliquée. Les valeurs de secrets ne pouvant être comparées, leur déclaration
+exige toujours Update. Ces règles rendent les droits et les échecs partiels
+explicites sans inventer de transaction multi-fonctions.

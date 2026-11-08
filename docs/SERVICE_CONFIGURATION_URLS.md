@@ -38,11 +38,29 @@ prend le dessus pour sa catégorie ; une collision variable/secret dans la
 configuration effective est refusée. Retirer une surcharge rétablit l’héritage.
 Les lectures ne retournent jamais les valeurs des secrets enregistrés.
 
+Une catégorie absente du provider laisse la configuration de service existante
+intacte. Une catégorie explicitement déclarée, même vide ou null, remplace les
+clés de cette catégorie au niveau du service. Les clés absentes de la catégorie
+déclarée sont retirées. Pour une fonction, une clé locale null retire sa
+surcharge et rétablit la valeur du service ; elle ne masque pas cette valeur.
+Cette règle remplace l’ancien retrait d’une clé héritée pendant l’aplatissement.
+Elle permet de modifier la valeur commune sans redéployer chaque fonction.
+
 La publication doit contrôler les droits nécessaires avant toute mutation
 commune : un jeton restreint à des fonctions ne peut modifier le service. Un
 changement commun exige Update sur le service. Les modifications concurrentes
 doivent être détectées ; un échec partiel est rapporté sans annoncer un
 déploiement atomique de toutes les fonctions.
+
+Le rapport distingue l’application de la configuration commune des publications
+individuelles. La CLI valide et empaquette tout avant d’appliquer cette
+configuration. Elle utilise la version lue du service et transmet explicitement
+les retraits de secrets par leurs noms. Une déclaration de secrets exige Update,
+même si les noms sont inchangés : leur valeur enregistrée n’est pas comparable.
+Un refus de configuration commune arrête la commande avant toute mutation de
+fonction. Après application commune, un échec d’import conserve le code actif
+de la fonction concernée, mais la configuration commune a déjà changé pour
+toutes les fonctions. Cet effet est visible dans le rapport.
 
 Les nouvelles invocations utilisent la configuration commune courante. Une
 invocation déjà admise conserve sa configuration jusqu’à sa fin. Les preuves
