@@ -2905,3 +2905,16 @@ buffer, syscall, code de retour, DNS ou réponse n’est remplacé. Les délais,
 EOF/erreurs et sorties sont bornés ; fin de l’enfant/groupe avant nettoyage.
 Le client existant et son nettoyage sont réutilisés ; les trois groupes déjà
 qualifiés restent dans le replay de quatre groupes. Aucun changement produit.
+
+Le premier replay étendu termine avec échec de barrière dans l’ancien scénario
+de coupure avant traitement, après le watchdog réussi. Le nouveau groupe de
+révocation n’est pas exécuté. Le rapport indique nettoyage réussi et groupe
+CLI disparu ; la lecture native confirme deux fonctions supprimées/purgées,
+zéro fonction active, deux gardes restaurées et services sains. L’audit confirme
+une publication et une préparation pour la fonction concernée ; l’absence de
+barrière ne signifie donc pas absence de publication. Le résultat CLI n’était
+pas conservé sur ce chemin : la cause reste inconnue. Les rapports incomplets
+et le diagnostic sont archivés distinctement. Décision avant correction :
+conserver tous les événements des observateurs et le résultat CLI fini expurgé,
+avec empreintes plutôt que texte brut si illisible/sensible. Ne pas prolonger
+arbitrairement les délais ni transformer cet arrêt en succès.

@@ -320,3 +320,10 @@ jonction de l’enfant, puis la disparition du groupe reste exigée par le paren
 avant nettoyage. Cette nouvelle branche ne convertit pas une impossibilité de
 traçage en succès. Ses pannes propres restent non éprouvées avant exécution.
 Le refus 403 n’est pas revendiqué par une révocation, qui produit 401.
+
+En cas d’échec avant une barrière, conserver aussi les événements de chaque
+observateur et le résultat CLI déjà terminé, après contrôle d’absence de jeton.
+Un résultat illisible ou contenant un identifiant sensible se résume par codes
+fixes et empreintes, jamais par sa sortie brute. Une barrière non atteinte ne
+prouve ni une publication échouée ni sa cause ; les audits natifs et le nettoyage
+sont recoupés avant toute relance explicite.
