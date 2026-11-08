@@ -202,6 +202,23 @@ déclarées. Les en-têtes Vary conservent les dimensions de cette décision.
 
 ## Réalisation et preuves
 
+Le client E2E du canal privé doit lire les véritables refus HTTP sans dépendre
+d’un second envoi de corps après un refus anticipé. Pour ses petites requêtes
+fixes, il envoie en-têtes et JSON dans une trame complète sur le vrai socket Unix,
+puis lit statut/en-têtes/corps avec bornes et délai ; aucun rejeu ni conversion
+d’une erreur de transport en statut attendu. Un scénario distinct envoie les
+seuls en-têtes `text/plain` avec corps annoncé et exige le vrai 415 avant envoi
+du corps, puis répète vingt refus avec des trames complètes. Cela complète le
+groupe existant du canal, sans créer de serveur, remplacer une dépendance ni
+importer un handler. Les dix autres groupes de cycle de vie restent inchangés.
+
+Le serveur conserve son rejet dès les en-têtes et `Connection: close` ; il
+n’est pas obligé d’attendre le corps invalide. Référence :
+[RFC 9110, réponse finale anticipée](https://www.rfc-editor.org/rfc/rfc9110.html#section-10.1.1).
+Le client utilise le [parseur d’en-têtes standard Python](https://docs.python.org/3.14/library/http.client.html#http.client.parse_headers)
+après une ligne de statut explicitement bornée. Une fermeture sans réponse
+reste permise seulement dans les assertions de protocole qui l’exigent déjà.
+
 La première tranche construit le superviseur, l’enfant et le pilote réel
 d’instance, réutilisés ensuite par l’admission du contrôle. Leur outil de
 diagnostic exige l’accès administratif au démon Docker et possède uniquement

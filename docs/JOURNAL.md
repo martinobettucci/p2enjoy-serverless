@@ -3046,3 +3046,26 @@ La suite commune est spécifiée avant extension du runner : 37 campagnes,
 489 groupes, six prérequis distincts ; trois relevés physiques bornés aux UUID
 exacts, total 23 namespaces et 91 fonctions. Le scope historique reste intact.
 Ce plan n’est pas encore une campagne exécutée ; SLS-067 reste en qualification.
+
+## 2026-11-08 — Première suite catalogue arrêtée sur le client du canal privé
+
+La première suite termine à un : trois campagnes complètes, 101 groupes passés,
+puis dix groupes de cycle de vie avant BrokenPipe pendant l’envoi text/plain
+à /result. Le dernier groupe de canal n’est pas qualifié et les campagnes
+suivantes ne sont pas exécutées. Le rapport, ses prérequis et le relevé physique
+sont archivés séparément sous .local/e2e/function-catalogue-suite-incomplete.
+Les 195 sources et les images restent celles du gel. Le rapport de cycle de vie
+confirme cleanup ; la lecture native recoupe absence du répertoire, conteneurs
+et réseaux d’instances, services sains et agent actif.
+
+INC-002 consigne le défaut du client HTTP séparant en-têtes et corps. Le serveur
+réel peut refuser le type et fermer avant réception du corps, ce que permet le
+protocole ; la réponse de l’arrêt n’a pas été lue, donc cette cause reste une
+inférence à vérifier. Décision avant correction, suivant le précédent des
+requêtes brutes déjà présentes dans ce client : trame complète petite sur
+socket réel, lecture standard bornée du vrai statut et du vrai corps, sans
+rejeu ni succès substitué. Le nouveau contrôle enverra seulement les en-têtes
+pour exiger explicitement 415 avant corps, puis vingt trames complètes pour le
+même refus. Serveur, superviseur, handlers et assertions métier inchangés.
+Revue, preuve ciblée des onze groupes et résolution de l’entrée précèdent
+un replay complet explicite ; cet arrêt ne devient pas une suite réussie.
