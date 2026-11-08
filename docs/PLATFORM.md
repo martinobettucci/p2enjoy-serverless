@@ -16,6 +16,13 @@ Les namespaces et services sont administrés par le SSO ; leurs fonctions
 peuvent également être gérées par un jeton du service. Les lectures présentent
 les noms de secrets et leur présence, jamais leurs valeurs enregistrées.
 
+Les variables et secrets communs appartiennent au service ; les fonctions
+portent leurs surcharges explicites. L’adaptateur doit préserver cette séparation.
+Les adresses d’appel sont calculées depuis les domaines du SPARK qui ciblent
+la passerelle et les événements HTTP de la fonction. Le
+[contrat de configuration et d’adresses](SERVICE_CONFIGURATION_URLS.md)
+précise les écarts actuels et les preuves requises dans SLS-031 et SLS-066.
+
 ## Identité et autorisations
 
 Connexion au SSO réel selon `sso.md` : Authorization Code, PKCE S256, state,

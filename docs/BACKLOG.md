@@ -328,3 +328,30 @@ Restent la correction de l’apparition inattendue après `storage_absent`, l’
 campagnes à la suite commune, les régressions élargies et l’actualisation finale
 des notes SPARK.
 SLS-064 seul ne qualifie aucun parcours public d’effacement.
+
+
+<a id="sls-031"></a>
+## SLS-031 — Préserver la configuration commune du service au déploiement
+
+Statut : [ ] — écart confirmé dans l’adaptateur le 8 novembre 2026.
+
+Jetons, variables et secrets de service existent dans l’API et la console.
+L’adaptateur aplatit cependant provider et fonction avant publication, ce qui
+transforme les valeurs communes en surcharges. Préserver les deux niveaux,
+qualifier leur évolution par invocation réelle, les droits, les conflits et
+la reprise des manifestes déjà déployés. Contrat et critères E2E :
+[SERVICE_CONFIGURATION_URLS](SERVICE_CONFIGURATION_URLS.md). Inclure le manuel
+affiché et la lecture de l’héritage dans la console.
+
+<a id="sls-066"></a>
+## SLS-066 — Afficher les URL d’appel issues des domaines du SPARK
+
+Statut : [ ] — calcul et affichage multi-domaines absents.
+
+Découvrir les routes effectivement affectées à la passerelle dans le SPARK,
+calculer les adresses par fonction et événement HTTP, les afficher et les
+rendre copiables dans la console ainsi que dans le résultat de déploiement.
+Distinguer les domaines d’invocation du domaine SSO canonique. Contrat, limites
+d’infrastructure et preuves E2E :
+[SERVICE_CONFIGURATION_URLS](SERVICE_CONFIGURATION_URLS.md). Mettre à jour et
+qualifier le manuel dans l’application avec cette livraison.

@@ -2212,3 +2212,21 @@ stockage tout en permettant le nettoyage après abandon/terminaison de la garde.
 Le contrat CONSOLE_STORAGE est corrigé avant l’implémentation. Le statut SLS-065
 reste ouvert ; aucun résultat de cette campagne en échec n’est présenté comme
 une qualification du comportement corrigé.
+
+
+## 2026-11-08 — Configuration commune et domaines d’invocation
+
+Le responsable rappelle que jetons, variables et secrets doivent être gérés au
+niveau du service, et demande le calcul des URL depuis les domaines du SPARK.
+Lecture de la console, de l’API, du moteur et de l’adaptateur : les trois objets
+existent au niveau du service, mais le déploiement YAML aplatit la configuration
+provider dans chaque fonction. La référence présente bien provider.env et
+provider.secret. Le catalogue d’URL multi-domaines manque.
+
+Décision persistée dans SERVICE_CONFIGURATION_URLS.md : préserver la
+configuration commune et les surcharges explicites, lire les routes affectées
+à la passerelle sans administrer la FORGE, exposer les URL calculées et maintenir
+le manuel compilé. Conversion des deux écarts en unités SLS-031 et SLS-066,
+non commencées. Les scénarios réels requis sont nommés dans le contrat.
+Cette inspection et cette spécification ne sont ni un déploiement ni une
+nouvelle preuve E2E ; les modifications de purge en cours restent distinctes.
