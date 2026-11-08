@@ -134,8 +134,9 @@ functions.lelabs.tech vers 18090 en TLS, après vérification de disponibilité 
 nom dans la console ; qualifier les deux domaines et l’entrée SSO canonique.
 Retargeter temporairement seulement ces deux routes vers 18091 pour éprouver
 l’exclusion de l’autre port et l’absence de domaine applicable, puis rétablir
-18090. Retirer et rétablir l’alias pour qualifier son retrait réel. Un mode clair
-de l’alias peut qualifier le schéma HTTP déclaré. Aucun autre SPARK ni route
+18090. Retirer et rétablir l’alias pour qualifier son retrait réel. Le mode clair
+et les quatre domaines supplémentaires ne font pas partie de l’autorisation reçue.
+Aucun autre SPARK ni route
 n’est modifié, aucun fichier/configuration système de FORGE n’est administré.
 
 Avant perturbation : installation au repos, identité des routes et du SPARK,
@@ -159,6 +160,48 @@ preuves demandent six domaines réels : quatre alias supplémentaires devront
 restent ouvertes tant que ces routes ne sont pas disponibles. La CLI consulte
 par cinq comme la console, plutôt que d’exiger vingt et un domaines pour
 éprouver son changement de page.
+
+## Console normale et mise en service de l’alias autorisé
+
+Le catalogue SLS-067 étant qualifié, reprendre SLS-066 par étapes sérialisées.
+La console normale déjà ouverte sur le poste expose son relais local ; il
+constitue le même chemin d’administration que ses formulaires. Aucun accès
+direct au registre, à Caddy ou au système de FORGE n’est utilisé. Le navigateur
+intégré de la session étant indisponible, les opérations passent par cette API
+de console existante, sans démarrer ni reconfigurer son serveur.
+
+Première étape, sans perturbation de la route canonique : vérifier le serveur
+sélectionné, l’identité infra-serverless / 10.77.0.24, sa protection, les routes
+exactes et génériques déjà affectées, puis l’aperçu DNS du seul alias autorisé.
+Le relevé du 8 novembre trouve functions.lelabs.tech absent, la zone lelabs.tech
+active et l’aperçu d’un A functions vers 51.158.54.202 à créer, TTL 300. Le DNS
+est une dépendance de l’alias HTTPS autorisé. Poser uniquement cet enregistrement
+par la fonction DNS normale de la console ; ne remplacer aucune valeur existante
+différente, ne toucher à aucun autre nom ou type. Relever l’effet réel et attendre
+la résolution native, sans forcer Host, DNS ou validation de certificat.
+
+Déclarer ensuite functions.lelabs.tech vers 18090 TLS pour ce seul SPARK.
+Une réponse de mutation perdue ne déclenche aucun renvoi automatique : relire
+l’état durable et diagnostiquer. Un nom possédé ailleurs interrompt l’opération.
+La projection officielle est rafraîchie par le chemin suggestions qu’utilise
+normalement la facette Routes ; seule sa métadonnée cell_read est conservée,
+jamais son corps contenant d’autres propositions ou secrets. Recouper ensuite
+les vraies lignes de /etc/spark/routes et leur lisibilité depuis le contrôle.
+Attendre un vrai HTTPS public vérifié et une réponse de l’application sur les
+deux domaines. Une route déclarée ne vaut pas certificat prêt.
+
+Conserver les résultats et empreintes dans un reçu d’exploitation distinct.
+Rejouer ensuite les huit groupes API/CLI existants : leur boucle invoque déjà
+chaque adresse émise et vérifie les chemins, révisions et méthodes. Les six
+groupes navigateur repartent de l’accueil, créent et publient leur fonction,
+copient et invoquent le code Docker sur le catalogue réellement à deux domaines.
+Leur preuve reste distincte du catalogue SLS-067 figé, avec rapports frais,
+captures observées et collecte native des seules ressources créées.
+
+Cette étape n’exerce aucun retrait ni détour vers 18091. Ces perturbations
+suivent avec une garde indépendante éprouvée et un contrat de pilote borné,
+avant leur première exécution. L’autorisation ne couvre pas de nouvelles
+variables de cellule, d’adoption de notes ou d’administration d’autres SPARKs.
 
 ## Suite complète de preuve
 

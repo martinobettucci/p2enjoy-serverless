@@ -460,6 +460,11 @@ routes vers 18091 temporairement, garde et restauration à 18090. Le périmètre
 est inscrit dans CLAUDE_PROJECT ; la proposition n’est pas encore appliquée et
 les preuves de ces changements restent à exécuter après la campagne SLS-067.
 
+SLS-067 est clôturée. La reprise commence par le DNS exact et la route TLS de
+l’alias autorisé via la console normale, puis les huit groupes API/CLI et six UI
+sur les deux domaines. Le [contrat opératoire](INVOCATION_URLS.md#console-normale-et-mise-en-service-de-lalias-autorisé)
+sépare cette mise en service des perturbations et de leur garde à éprouver.
+
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,
 186 sources et les images contrôle/CLI recoupées avant/après chaque phase.

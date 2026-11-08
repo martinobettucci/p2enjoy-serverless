@@ -3179,3 +3179,23 @@ La revue finale en lecture seule recoupe les rapports, sources, captures,
 reçus, installation et diff produit sans nouveau défaut bloquant. SLS-067 est
 clôturée dans ce changement cohérent. Aucun remote Git n’est configuré : le
 commit reste local. SLS-066 et SLS-075 restent ouvertes avec leurs propres critères.
+
+## 2026-11-08 — Reprise de SLS-066 par l’alias HTTPS autorisé
+
+SLS-067 est livrée dans 3e68953. La console normale existante est joignable
+par son relais local ; le navigateur intégré est indisponible. L’API de cette
+console fournit le même chemin que ses formulaires, sans intervention système
+de FORGE. Le DNS de la console est configuré, la zone lelabs.tech active et
+l’aperçu du seul nom functions annonce une création A vers l’IP publique du
+serveur sélectionné, TTL 300, sans valeur antérieure. Ce relevé en lecture seule
+ne constitue pas un enregistrement écrit ni une route ou un certificat appliqué.
+
+Décision avant opération : traiter d’abord le DNS exact nécessaire à l’alias
+HTTPS déjà autorisé, puis sa route 18090 TLS, sans modifier la route canonique.
+Conflit ou valeur DNS différente : arrêt sans remplacement ; réponse perdue :
+lecture de l’état réel avant toute reprise. La projection passe par le chemin
+suggestions normal, dont le corps sensible n’est ni conservé ni affiché.
+Les huit groupes API/CLI et six UI existants seront ensuite rejoués avec les
+deux domaines réels et leurs rapports distincts. Retrait/18091 et garde restent
+une étape séparée à réaliser. Le mode clair et quatre alias supplémentaires
+restent hors du périmètre reçu ; aucun de ces scénarios n’est déclaré qualifié.
