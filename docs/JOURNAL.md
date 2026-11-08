@@ -2361,3 +2361,32 @@ La CLI doit rapporter l’issue inconnue, arrêter les publications et ne rien
 rejouer automatiquement. Une relance explicite doit fonctionner ensuite.
 Les outils strace, ss, nsenter, nft, tc et ip existent dans le SPARK ; ses
 capacités natives ont été relevées. Ce relevé n’est pas la preuve du banc.
+
+## 2026-11-08 — Ergonomie, édition et exploitation de la console
+
+Le responsable demande recherche, favoris, suppression/renommage en masse,
+édition du code et du handler sur place, client de requêtes par fonction,
+logging et monitoring. Ces besoins entrent dans le périmètre de la console
+SLS-060 et sont découpés dans SLS-067 à SLS-073, tous non commencés.
+Le contrat est persisté dans CONSOLE_USABILITY.md avant implémentation.
+
+La console possède déjà les journaux d’invocation, les relevés d’instances et
+la publication ZIP. Les extensions ajoutent un catalogue opérationnel, des
+préférences liées au compte, des lots suivis, des brouillons de code validés
+avant publication, un vrai client de passerelle et des historiques de mesures.
+Le chemin utilisateur relie recherche, édition, publication, appel, journaux
+et diagnostic. Le design system local décrit ces parcours futurs séparément
+des écrans actuellement déployés.
+
+Décisions : favoris persistés par identité SSO ; renommage conservant les UUID
+avec export de correspondances pour l’adaptateur ; suppression archivant les
+fonctions selon le contrat existant ; édition créant des révisions immuables ;
+appels avec un vrai jeton Read et contexte serveur/navigateur explicite ;
+journaux et métriques avec rétention et coût bornés. Les journaux existants
+ne sont pas présentés comme un monitoring historique déjà livré.
+
+Le manuel affiché évoluera avec chaque livraison effective. Cette modification
+documentaire ne change ni code, ni service, ni preuve E2E existante. L’ordre
+de réalisation conserve les preuves de fiabilité et les URL actuellement
+ouvertes avant les nouvelles tranches d’ergonomie. Chaque tranche exige ses
+parcours E2E réels, refus, reprises et inspection visuelle.

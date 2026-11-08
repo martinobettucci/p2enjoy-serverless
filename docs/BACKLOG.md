@@ -231,7 +231,7 @@ restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls compos
 
 ## SLS-060
 
-Statut : [~] — gestion, exécutions, manuel et publication livrés ; purge/cache, crons et campagne transversale ouverts.
+Statut : [~] — gestion, exécutions, manuel et publication livrés ; qualifications de purge/cache, crons, ergonomie avancée et campagne transversale ouverts.
 
 Parcours d'administration sur les API réelles : connexion, objets, jetons,
 code, variables/secrets, limites, état, stockage, historique et journaux.
@@ -239,6 +239,9 @@ Lire et appliquer les deux design systems avant implémentation. Tester depuis
 l'accueil, clavier/souris, états vides/erreurs/données longues et mobile ;
 inspecter les captures. Exécuter la campagne complète, mettre à jour manuel,
 notes SPARK, installation/reprise, preuves et backlog. Zéro échec et zéro skip.
+Les demandes de recherche, favoris, actions en masse, édition du code, client
+HTTP et observabilité sont spécifiées dans [CONSOLE_USABILITY](CONSOLE_USABILITY.md)
+et découpées dans SLS-067 à SLS-073.
 
 ## SLS-061
 
@@ -380,3 +383,88 @@ Distinguer les domaines d’invocation du domaine SSO canonique. Contrat, limite
 d’infrastructure et preuves E2E :
 [SERVICE_CONFIGURATION_URLS](SERVICE_CONFIGURATION_URLS.md). Mettre à jour et
 qualifier le manuel dans l’application avec cette livraison.
+
+<a id="sls-067"></a>
+## SLS-067 — Catalogue de fonctions et recherche globale
+
+Statut : [ ] — contrat défini, implémentation à réaliser.
+
+Catalogue global, recherche serveur, filtres namespace/service/état, tri,
+pagination et contexte conservé dans l’URL. Contrat :
+[catalogue et recherche](CONSOLE_USABILITY.md#catalogue-et-recherche).
+E2E : résultats au-delà de la première page, noms identiques dans plusieurs
+services, filtres combinés, recherche rapide sous vrai délai réseau, refus,
+navigation retour, clavier et mobile. Manuel et captures avec la livraison.
+
+<a id="sls-068"></a>
+## SLS-068 — Favoris personnels persistants
+
+Statut : [ ] — contrat défini, implémentation à réaliser.
+
+Épingler et ordonner namespaces/services/fonctions par identité SSO stable,
+avec persistance entre appareils et traitement des objets devenus indisponibles.
+Contrat : [favoris](CONSOLE_USABILITY.md#favoris-personnels).
+E2E : deux sessions réelles du même compte, isolation entre comptes réels,
+renommage/suppression/retrait d’accès, redémarrage et parcours clavier/mobile.
+
+<a id="sls-069"></a>
+## SLS-069 — Renommage et suppression en masse
+
+Statut : [ ] — contrat défini, implémentation à réaliser.
+
+Sélection explicite, aperçu, droits et versions, renommage atomique et suivi
+durable de suppression par objet. Préserver UUID, révisions et volumes ; fournir
+la correspondance de manifeste pour l’adaptateur après renommage. Contrat :
+[opérations en masse](CONSOLE_USABILITY.md#opérations-en-masse).
+E2E : sélection multi-pages, collisions/échanges de noms, version obsolète,
+limite du lot, fonctions occupées, parents non vides, résultat partiel, reprise
+après réponse perdue/SIGKILL, redéploiement exporté et état physique des données.
+
+<a id="sls-070"></a>
+## SLS-070 — Édition du code et du handler dans la console
+
+Statut : [ ] — contrat défini, implémentation à réaliser.
+
+Arborescence de fichiers, édition texte, handler, brouillon persistant, diff et
+publication par le pipeline réel de révisions immuables. Contrat :
+[éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler).
+E2E : lecture autorisée/refusée, modification et export CJS/ESM, conflits,
+contenus binaires/volumineux, chemins invalides, import réellement défaillant,
+publication puis invocation Docker, rollback, rechargement et perte de réponse.
+
+<a id="sls-071"></a>
+## SLS-071 — Client HTTP intégré par fonction
+
+Statut : [ ] — contrat défini, implémentation à réaliser.
+
+Facette Tester avec méthode, URL calculée, paramètres, en-têtes, corps, réponse,
+durée et lien vers l’appel et ses journaux. Contextes serveur et navigateur
+explicites ; vrais jetons Read, politiques et authentification métier. Contrat :
+[client HTTP](CONSOLE_USABILITY.md#client-http-par-fonction).
+E2E : appels réels, corps texte/JSON/binaire, CORS/origine/IP, droits et expiration,
+destinations interdites/redirections, erreur/timeout/annulation, corrélation,
+expurgation des identifiants et rendu sur ordinateur/mobile.
+
+<a id="sls-072"></a>
+## SLS-072 — Journaux recherchables et corrélation d’exploitation
+
+Statut : [ ] — extension des journaux d’invocation existants à réaliser.
+
+Vues fonction/service, période, sévérité connue, recherche, suivi activable,
+export et corrélation appel/révision/instance/publication. Collecte, taille et
+rétention bornées. Contrat : [journaux](CONSOLE_USABILITY.md#journaux-et-corrélation).
+E2E : vrais logs texte/JSON et erreurs Docker, droits, secrets expurgés,
+troncature/rétention, pagination/recherche, suivi interrompu puis repris,
+redémarrage, export et diagnostic depuis un appel déclenché dans la console.
+
+<a id="sls-073"></a>
+## SLS-073 — Monitoring historique et alertes dans la console
+
+Statut : [ ] — extension des relevés Docker existants à réaliser.
+
+Tableaux de bord plateforme/namespace/service/fonction, séries d’appels,
+latences/erreurs/refus, CPU/mémoire/stockage, santé et alertes à seuils
+configurables. Contrat : [monitoring](CONSOLE_USABILITY.md#monitoring-et-alertes).
+E2E : charge réelle et pannes, valeurs agrégées recoupées aux appels et mesures,
+échantillons insuffisants/collecte indisponible, rétention, seuils et retour à la
+normale, droits, redémarrage, coût de collecte mesuré et inspection des graphes.

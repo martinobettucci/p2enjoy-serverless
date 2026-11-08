@@ -48,6 +48,12 @@ stockage permanent par identifiant de fonction et durées du cycle d’exécutio
 Elle donne accès au code et aux révisions, aux instances et aux invocations,
 ainsi qu’au manuel d’usage.
 
+Les évolutions demandées pour la console comprennent catalogue et recherche,
+favoris, opérations en masse, édition du code et du handler, client HTTP par
+fonction, journaux recherchables et monitoring historique. Leur
+[contrat de parcours](docs/CONSOLE_USABILITY.md) et les unités SLS-067 à SLS-073
+du backlog définissent la livraison ; ces extensions restent à implémenter.
+
 Le stockage propose des modes configurables par fonction pour les données
 métier et le cache reconstructible. Le [contrat de plateforme](docs/PLATFORM.md)
 définit concurrence, rétention, quotas et suppression ; son implémentation suit

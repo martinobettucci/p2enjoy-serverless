@@ -8,10 +8,10 @@ sept captures desktop/mobile ont été relues le 6 novembre 2026.
 
 ## Périmètre confirmé
 
-La future console gérera namespaces, services, fonctions, jetons CRUD,
+La console gère namespaces, services, fonctions, jetons CRUD,
 variables et secrets, allocations, mémoire, stockage par identifiant,
-durée d'invocation et extinction des instances. Elle utilisera le SSO du
-domaine et le rôle administrateur. Les règles d'origine web et d'IP seront
+durée d'invocation et extinction des instances. Elle utilise le SSO du
+domaine et le rôle administrateur. Les règles d'origine web et d'IP sont
 visibles dans la configuration des services et appliquées côté serveur.
 
 ## Console SLS-020
@@ -133,10 +133,38 @@ disparaît. Sur mobile, champs et actions s’empilent ; pas de débordement de 
 
 ## Stockage et archives SLS-065
 
-Contrat décidé, à implémenter : [CONSOLE_STORAGE](CONSOLE_STORAGE.md#console-et-manuel).
+Console déployée, qualification complète en cours : [CONSOLE_STORAGE](CONSOLE_STORAGE.md#console-et-manuel).
 Stockage devient une facette de fonction ; Archives de fonctions une destination
 générale indépendante des parents supprimés. Listes de cinq, filtre et total
 explicites. Dernières mesures, inconnues et allocations restent distinctes.
 La confirmation de purge exige le nom exact ; celle de cache nomme sa portée
 sans ressaisie. Suivi partageable sans rejeu au rechargement, noms/UUID complets,
 états français et focus sur un élément encore monté, selon le socle global.
+
+## Parcours d’efficacité et d’exploitation à réaliser
+
+Le [contrat d’ergonomie](CONSOLE_USABILITY.md) couvre SLS-067 à SLS-073.
+Le catalogue global de fonctions devient l’entrée opérationnelle ; namespaces
+et services donnent leur contexte aux objets. La navigation principale conserve
+des destinations nommées, dont favoris et monitoring. Les facettes de fonction
+intègrent progressivement édition du code, client HTTP et journaux corrélés.
+Ces changements sont planifiés ; l’accueil actuellement déployé reste celui
+des namespaces.
+
+Recherche et filtres appartiennent à la liste qu’ils affectent. Les liens
+conservent leur contexte au retour d’une fiche. Favoris et sélection de masse
+sont deux états distincts ; chacun possède libellé, état accessible et commandes
+au clavier. Une sélection montre sa portée exacte avant toute action.
+
+Les aperçus de renommage et résultats de lot utilisent des tableaux sémantiques,
+avec anciens/nouveaux noms ou résultat par objet. La confirmation d’une
+suppression nomme ses objets et effets. Le suivi d’une opération reste une
+destination partageable ; une consultation ne rejoue pas la mutation.
+
+L’éditeur distingue source déployée, brouillon et diff, avec commandes nommées
+pour enregistrer puis publier. Le client HTTP indique la révision appelée et
+le contexte navigateur/serveur ; la réponse ouvre ses journaux par corrélation.
+Les graphes conservent unités, période, source et valeurs accessibles sous forme
+textuelle. Mesure absente, zéro et collecte interrompue ont des états distincts.
+Ces parcours appliquent les règles du socle sur clavier, focus, confirmations,
+retour d’erreur, mobile et vérification visuelle.
