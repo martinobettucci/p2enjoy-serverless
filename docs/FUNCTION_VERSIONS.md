@@ -41,17 +41,20 @@ Deux uploads identiques concurrents convergent vers une seule version de la
 fonction. Le serveur ne se fie jamais à un hash simplement annoncé par le client.
 
 Réutiliser un hash ancien encore disponible n’en change pas la date de création
-et ne le fait pas passer silencieusement pour un nouveau code. La publication
-peut en faire la cible par défaut, comme un rollback explicite. Un upload
+et ne le fait pas passer silencieusement pour un nouveau code. Seule une promotion
+explicite peut en faire la cible par défaut, comme un rollback explicite. Un upload
 identique à la cible courante ne modifie pas inutilement son pointeur ni ne
 redémarre les instances. Toute autre configuration envoyée dans un déploiement
 reste une mutation séparée, contrôlée et rapportée selon SLS-031.
 
 ## Appel par défaut et appel par tag
 
-La règle retenue à ce stade suit la demande littérale : sans tag, l’appel vise
-la dernière version validée et publiée comme cible par défaut de la fonction.
-Une publication normale d’un nouveau code met à jour ce pointeur atomiquement.
+Sans tag, l’appel vise la dernière version explicitement promue comme cible
+par défaut de la fonction. L’upload valide et prépare une version disponible
+par son hash ; il ne déplace jamais ce pointeur, y compris au premier upload.
+La promotion constitue une action distincte et met à jour ce pointeur atomiquement.
+Sans première promotion, l’appel sans tag indique l’absence de cible ; l’appel
+explicite du hash disponible reste possible avec les droits requis.
 Le rollback remplace ce même pointeur par le hash choisi ; un appel sans tag
 suit alors ce choix explicite, même si son code a été créé plus tôt.
 
@@ -73,8 +76,9 @@ origine/IP restent obligatoires. Le hash n’est pas un secret d’accès. Le
 préflight utilise les événements de la version demandée, sans exécuter de code.
 L’authentification métier conserve son en-tête Authorization.
 
-Create autorise la fonction et sa première publication. Update autorise les
-publications suivantes, y compris sans activation, ainsi que l’activation,
+Create autorise la fonction, sa première publication et la première promotion
+de cette version, tant qu’aucune promotion antérieure n’existe. Update autorise les
+publications suivantes ainsi que les promotions suivantes, l’activation,
 le rollback, l’archivage, la restauration et la suppression individuelle des
 versions, dans la continuité des droits existants sur les révisions. Delete
 reste le droit de supprimer la fonction. Une portée limitée à des fonctions
@@ -87,16 +91,16 @@ résolu sont corrélés avec l’invocation, l’instance, les journaux et les m
 
 ## Pilote et maintien de la version stable
 
-Les clients de production peuvent rester fixés sur le hash stable pendant
-que les utilisateurs pilotes appellent explicitement le nouveau hash. Publier
-un nouveau code ne modifie jamais la cible d’un appel portant l’ancien hash.
+Les clients de production utilisent l’URL sans tag ou restent fixés sur un hash
+stable pendant que les utilisateurs pilotes appellent explicitement le nouveau
+hash. Publier un nouveau code ne modifie ni la cible sans tag, ni celle d’un
+appel portant un ancien hash.
 
-Un parcours complémentaire **Publier sans activer** valide et conserve un
-nouveau hash sans déplacer le pointeur des appels sans tag. Il permet aussi
-un pilote quand les clients existants utilisent l’URL sans tag. L’action
-**Activer cette version** la rend ensuite courante ; revenir à un hash antérieur
-est la même opération atomique et auditée. Le choix publier/activer doit être
-explicite dans la console, la CLI et les résultats, sans effet caché de l’upload.
+**Publier une version** valide et conserve le nouveau hash. **Promouvoir cette
+version** la rend ensuite courante pour les appels sans tag ; revenir à un hash
+antérieur utilise la même opération atomique et auditée. Publication et promotion
+sont deux actions distinctes dans la console et la CLI. Le résultat indique le
+hash disponible et la cible promue séparément, sans promotion automatique.
 
 Le mode pilote de la CLI publie uniquement le code et son descripteur, en
 conservant variables, secrets, quotas et réglages courants. Il ne réapplique pas
@@ -154,8 +158,8 @@ historiques sans perte de références ou de données.
 ## Console, adaptateur et preuves
 
 La fiche **Code et révisions** montre hash complet copiable, cible par défaut,
-disponibilité, dates et résultats de validation. Elle permet publication normale,
-publication sans activation, activation/rollback, archivage/restauration et
+disponibilité, dates et résultats de validation. Elle permet publication,
+promotion/rollback, archivage/restauration et
 suppression. Les confirmations nomment la fonction et le hash concerné. Le
 client HTTP SLS-071 choisit cible par défaut ou tag précis et montre le hash
 effectivement exécuté. L’éditeur SLS-070 réutilise un hash si son paquet n’a pas
@@ -171,6 +175,7 @@ Les preuves utilisent les véritables API, CLI, Docker et navigateur du SPARK DE
 - appels simultanés à l’ancien hash, au nouveau et sans tag, avec effets distincts observés ;
 - handlers différents entre deux versions, avec handler/runtime/événements du hash sélectionné ;
 - publication sans activation puis activation et rollback, en conservant un appel déjà admis ;
+- première publication invocable par hash, appel sans tag refusé avant promotion, puis première promotion explicite ;
 - refus Read/portée, origine/IP, hash inconnu et version archivée/supprimée sans repli ;
 - archivage pendant attente/appel vivant, restauration, suppression et nettoyage physique ;
 - budgets communs réellement saturés par plusieurs versions et fin des instances au repos ;

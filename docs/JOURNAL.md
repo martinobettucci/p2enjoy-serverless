@@ -13,13 +13,13 @@ les invocations vers la seule révision active. La nouvelle preuve devra couvrir
 déduplication, tags, archive individuelle, pools simultanés et migration ; les
 preuves de révisions existantes ne sont pas étendues implicitement.
 
-L’expression « dernière version » permet deux politiques. Une question propose
-dernière promue ou dernière publiée. Sans réponse à ce stade, la décision
-réversible suit la demande littérale : la publication normale actualise la cible
-sans tag ; les clients épinglés conservent leur hash. Un parcours explicite
-publie sans activer pour tester aussi lorsque les clients stables sont sans tag.
-Le rollback remplace la cible courante ; les appels portant un hash ne la suivent
-jamais. Cette décision évite qu’un tag refusé déclenche silencieusement un autre code.
+Le responsable confirme la dernière version promue pour les appels sans tag.
+L’upload prépare une version disponible par hash sans modifier la cible, même
+au premier upload. La promotion est une action explicite et distincte dans la
+console et la CLI. Le pilote appelle le nouveau hash pendant que le sans-tag
+reste stable. Le rollback remplace la cible courante ; les appels portant un
+hash ne la suivent jamais. La règle de dernière version uploadée est écartée
+par ce choix explicite du responsable. Aucun tag refusé ne déclenche un autre code.
 
 Le hash porte sur le paquet exécutable canonique et son descripteur, sans les
 métadonnées sans effet du ZIP ni les valeurs de configuration. Les variables,
@@ -32,7 +32,7 @@ chemins métier existants. Modification documentaire uniquement, statut non comm
 La revue du contrat fait préciser quatre invariants vérifiés dans les sources
 actuelles : le snapshot devra prendre handler/runtime/image/événements de la
 version choisie, séparément des ressources et variables courantes ; le cycle
-des versions garde Update, première publication Create, invocation Read et
+des versions garde Update, première publication et sa première promotion Create, invocation Read et
 suppression de fonction Delete ; un doublon est admis au plafond de versions,
 avec consommation définitive après déduplication ; le chemin d’événement
 implicite dérivé du nom est exclu de l’empreinte, afin qu’un renommage conserve

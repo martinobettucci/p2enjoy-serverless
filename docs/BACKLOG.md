@@ -547,17 +547,18 @@ doublon durable ni activation inutile. Les métadonnées sans effet du ZIP sont
 exclues ; fichiers, dépendances et descripteur d’exécution sont pris en compte.
 Un renommage conserve le hash ; un doublon reste admis au plafond de versions.
 
-Sans tag, appeler la cible courante, mise à jour par publication normale ou
-activation/rollback explicite. Avec un hash, appeler exactement cette version
+Sans tag, appeler la dernière version promue, mise à jour uniquement par
+promotion/rollback explicite. L’upload prépare une version sans déplacer cette
+cible, y compris au premier upload. Avec un hash, appeler exactement cette version
 disponible, sans aucun repli si elle est archivée ou supprimée. Conserver les
 droits Read, politiques origine/IP et authentification métier. Les URL
 versionnées sont calculées avec SLS-066 et proposées dans SLS-071.
-Create couvre la première publication ; Update les suivantes et le cycle des
+Create couvre la première publication et sa première promotion ; Update les suivantes et le cycle des
 versions, y compris leur suppression individuelle. Delete reste la suppression
 de la fonction. Le handler/runtime/image/événements viennent du hash sélectionné,
 les ressources et configurations applicatives restent courantes.
 
-Permettre de publier sans activer pour un pilote, puis d’activer ou de revenir
+Séparer publication et promotion pour un pilote, puis promouvoir ou revenir
 à un ancien hash depuis la fiche de fonction. La CLI propose le même parcours
 de code seul, sans mutation implicite des variables/secrets communs. Les clients
 épinglés au hash stable continuent à l’appeler pendant le pilote. Configurations

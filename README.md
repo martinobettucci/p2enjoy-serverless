@@ -63,6 +63,9 @@ identiques, invocation d’un hash précis, archivage de version et publication
 pour un pilote sans déplacer la cible par défaut. Cette extension est spécifiée
 et reste à implémenter.
 
+Pour SLS-074, un upload prépare une version disponible par hash ; seule une
+promotion explicite change la version appelée sans tag, selon le choix confirmé.
+
 Le stockage propose des modes configurables par fonction pour les données
 métier et le cache reconstructible. Le [contrat de plateforme](docs/PLATFORM.md)
 définit concurrence, rétention, quotas et suppression ; son implémentation suit

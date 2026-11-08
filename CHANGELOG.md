@@ -5,7 +5,9 @@
 - Versionnement par hash, déduplication, appels épinglés et pilote sans activation
   spécifiés dans SLS-074 et FUNCTION_VERSIONS. Les raccordements console, éditeur,
   client HTTP, journaux, budgets et crons sont consignés ; l’extension reste
-  à implémenter au-dessus des révisions et du rollback existants.
+  à implémenter au-dessus des révisions et du rollback existants. Le responsable
+  confirme la dernière version promue pour le sans-tag : upload et promotion
+  constituent deux actions distinctes, sans activation automatique.
 
 - Suivi systématique des demandes du responsable dans le backlog, avec une
   table de correspondance vers les unités existantes et la règle persistée

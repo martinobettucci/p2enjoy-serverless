@@ -174,8 +174,9 @@ retour d’erreur, mobile et vérification visuelle.
 [SLS-074](FUNCTION_VERSIONS.md) complète la facette Code et révisions : hash
 complet copiable avec retour à la ligne, cible courante et disponibilité de
 chaque version en texte. Le résultat distingue code inchangé et nouvelle
-version ; une publication normale et une publication sans activation nomment
-leurs effets avant engagement. Activation/rollback, archivage/restauration
+version ; « Publier une version » et « Promouvoir cette version » sont deux
+actions distinctes. Seule la promotion change la cible sans tag, après confirmation
+nommant la fonction et le hash. Promotion/rollback, archivage/restauration
 et suppression sont des actions distinctes par version, avec confirmations
 dans le flux selon le socle. Les appels déjà admis et les pools d’autres versions
 ne sont pas présentés comme ayant changé de code.

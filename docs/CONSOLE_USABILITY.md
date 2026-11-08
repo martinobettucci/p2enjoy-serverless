@@ -103,8 +103,8 @@ de revenir à une révision précédente.
 
 Le versionnement de [SLS-074](FUNCTION_VERSIONS.md) s’applique aussi à l’éditeur :
 un paquet inchangé réutilise son hash ; un changement crée une version après
-validation. La publication normale et la publication pour un pilote sans
-activation sont des choix explicites. Le retour à un ancien hash conserve les
+validation. Publier prépare une version invocable par hash ; seule une promotion
+explicite modifie la cible des appels sans tag. Le retour à un ancien hash conserve les
 configurations et volumes courants.
 
 ## Client HTTP par fonction
