@@ -79,7 +79,12 @@ Le [catalogue des adresses d’appel](docs/INVOCATION_URLS.md), SLS-066, est dé
 en DEV : facette de fonction, copie d’URL/curl et résultat CLI issus des routes
 du SPARK. Le [checkpoint](docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 passe 88 groupes sur le domaine courant. La qualification multi-domaines et
-les preuves résiduelles restent ouvertes ; SLS-066 n’est pas clôturée.
+les preuves résiduelles restent ouvertes ; SLS-066 n’est pas clôturée. La
+[régression complète](docs/evidence/invocation-urls-regressions-dev-2026-11-08.json)
+passe 35 campagnes en série et 467 groupes, sans échec ni test ignoré :
+186 sources recoupées avant/après chaque phase, 79 captures fraîches recoupées
+(61 observations et 18 identités SHA avec une référence inspectée) et 32 fonctions
+suivies purgées dans dix namespaces. Les six prérequis sont distincts du total.
 
 ## Accès confirmé
 

@@ -1,0 +1,3103 @@
+{
+  "unit": "SLS-066",
+  "status": "regression_complete_unit_open",
+  "unit_complete": false,
+  "recorded_at_ns": 1794159196201784525,
+  "target": "SPARK DEV infra-serverless",
+  "serial": true,
+  "execution_commit": "5ec9093",
+  "control_image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+  "adapter_images": {
+    "p2enjoy-adapter:dev": "sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa",
+    "p2enjoy-adapter-e2e:dev": "sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e"
+  },
+  "campaign_count": 35,
+  "passed_groups": 467,
+  "failed_groups": 0,
+  "skipped": 0,
+  "prerequisite_count": 6,
+  "suite": {
+    "path": ".local/e2e/invocation-urls-full-checkpoint/suite.json",
+    "sha256": "7ef362741637e369ab86d3ad15a21e112bed78734f1de77289317ec6a5447785",
+    "completed": true,
+    "exit_code": 0
+  },
+  "source_files": 186,
+  "source_sha256_at_execution": {
+    "adapter/Dockerfile": "1716bc11f4755f2b58a73a30a174f7108dbee477e30df9e4f909ced07dc81e60",
+    "adapter/Dockerfile.dockerignore": "84bc4c8ccc7a0e4f53719e98ba410c1048901837ad7417ba4f47f0688eb40284",
+    "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+    "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+    "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+    "adapter/compose.spark.yml": "cf76088598e5b6bea10d3291471739e7ef172aaa5ab27d1a3d5cf18e63edfe1e",
+    "adapter/deploy.py": "462ed21dd2433317052e03be9c25ae18a6d2d8f1aee53cd4eb56211272302e27",
+    "adapter/dev.sh": "d0b37fd798554644d35e452d0ebbed0bb18f4222aaf992fcd524121ad26e0e7d",
+    "adapter/manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+    "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+    "control/Dockerfile": "858d0ed75d833754fd48b73a780c0607f81f7b34b6473d4a921591ee90b1b862",
+    "control/Dockerfile.dockerignore": "3d4e09e669ded704ed8e8765450b1eacc41b94b313f5cd93a48941b8377dd915",
+    "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+    "control/app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+    "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+    "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+    "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+    "control/app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+    "control/app/deployments.py": "1df532d18cfa3838fb3b04840ccf1dda13eb3e9ae2963b4e1b781551d861195d",
+    "control/app/execution.py": "8c52837c6b893411ea10af481f573aa54db98990624079d5bb7b8c2a6f6e485f",
+    "control/app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+    "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+    "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+    "control/app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+    "control/app/invocation_urls.py": "f05e6ee7f399b4d54cf2c15b186c13d7eb75266172bcc33127e7fca6dce5c1df",
+    "control/app/main.py": "0763accfcd9dfca32ce8d7f09ae67d7adb7264d567fa0f8822479d432d863956",
+    "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+    "control/app/models.py": "fbfa169dc95872a8b19378e92b19f3f1074ff20f2a825a5671b99b784aac4b3e",
+    "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+    "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+    "control/app/storage_management.py": "37ce7e205ec06860eb096c37d85d7015c5002558101faf6b90eccfda81181ea7",
+    "control/app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+    "control/compose.spark.yml": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+    "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+    "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+    "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+    "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+    "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+    "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+    "control/migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+    "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+    "docs/CONSOLE_PUBLICATION.md": "d710833cc0849871379e18b93c4f4d9d7003644a110ab72edb3dc6129a9bf10d",
+    "docs/CONSOLE_STORAGE.md": "71e9f9b3afe4a63021a812cd0abb1d314bc62fe4672765ade0f9f641fb604f8b",
+    "docs/DESIGN_SYSTEM_APP.md": "4b5377c5fcb198b7f2f603790164c32d99edeca0ca5768d017b9b0bd4071e588",
+    "docs/INVOCATION_URLS.md": "d71357adc983254b364ed8236f262eec6933eb1ae3179b501001c3c1e8b3f350",
+    "docs/STORAGE_LEGACY_PROOF.md": "a923c0059d36008bbeb5421ef878b7c0be42cb9c0604abfbe5535cbc8a8d58f6",
+    "docs/manual.md": "cf7bcdb9d6ef887203b7b84d42e46ec4ba9507b78acf488aea266d13909c7207",
+    "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+    "e2e/adapter-deploy.mjs": "e8246c0b475920c6b23a4f5f8f095ac864644c5d958c4aea2d8d2d3f9bc46fda",
+    "e2e/adapter.py": "564c89a4d842e3e2c68c5d261fa687b06e9106035b5820d084415fcbeff8b1a2",
+    "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+    "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+    "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+    "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+    "e2e/control-operations.py": "2ef1013fe73dc946eeb221a2cab7e7f03dcb838b0612eb4a2357dd68677c9278",
+    "e2e/control-ui.mjs": "d719d0241bdca96c381c8e8d2743f62dc2c5c5a86fbd4c55d00677c6d75c16d8",
+    "e2e/control_database.py": "fe1c7cb2450f193bba5be5a6d4cd98e88936199b20b85e0a903226f6beb2a043",
+    "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+    "e2e/dev-sso-sessions.mjs": "4c74f8f023b4ef8503f05624218b5d7e0d6bc19a35bf45841053c9a62c7094f4",
+    "e2e/execution-faults.py": "7f879b8d9702f7c0d9654a8064d797cc60b95ec17f97b69091acff69bdc58fea",
+    "e2e/execution-suite.py": "34a0e3b1fd7f41b36c79aca1925fe5a69f4f6198441378fe40d4548f71276e59",
+    "e2e/execution-ui.mjs": "536ba6d8f10096a4f1782079a476fcfe94535cf8c5a414cf618ba2f7d7a454cd",
+    "e2e/function-storage-faults.py": "3a4c9c019c499199e6e12adddc70d2b8d9a178d82755f4c9ab0b9b4ee138d0aa",
+    "e2e/function-storage.mjs": "aac2325b00d6f74f0ef44ce6d2016cbefbe85b41309a1feb4c8f098cd090f632",
+    "e2e/instance-lifecycle.py": "1c83bfc36180e3e63722073137745a3522ea39642108b589778cfd087773aab2",
+    "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+    "e2e/invocation-url-adapter-build.py": "e84f45820028c4a1d3737dfbe486520ce3b106ba0dbe821c9875fc8dcda418bd",
+    "e2e/invocation-url-host.py": "568f8fb107387f10618aaa9b955274bf4fcac1c0d022d222964a4f092992d36e",
+    "e2e/invocation-urls-ui.mjs": "8aa2bf0e95f2f857ca2630129f3982688ee27cb6fdef08566eb63161b69ca626",
+    "e2e/invocation-urls.mjs": "7438964baccdc56effecb06bfc1064403f2797168aeca909c2ec2f2aa47d7e12",
+    "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+    "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+    "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+    "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+    "e2e/manual-ui.mjs": "ff98a5c6694f7450ab91b4104e1905ebf1edb09a6010486b5d65d5adba7012f7",
+    "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7",
+    "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+    "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+    "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+    "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+    "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+    "e2e/publication-fixtures.mjs": "b994a9332a39f952e8f20c9d5e5b3ad7efddf5ed690d4359d12c481926c44438",
+    "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+    "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+    "e2e/publication-ui.mjs": "a65fa3545decfe63b8829cac8bf485dfa95092564d278352f0e3021501fbdeca",
+    "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+    "e2e/runtime-instances.py": "c9652acb58dd42725d9a45d852c7db7a239f40ac640399a7e1868177bae129bc",
+    "e2e/runtime-validation.py": "69ff066e77cb8df5b954731ed1b01cd8dbf46ff2bb023642af53ed66f7894420",
+    "e2e/service-configuration.mjs": "50c01b89800f36045e296d47c73ca624ee62245058a4547bd49dea56c8e961e7",
+    "e2e/service-transport-observer.py": "2020f652a7a3def91649272da4a371df38cd5733450b097d952bb76696a08d02",
+    "e2e/service-transport.mjs": "424912a5caed927a9a9deb23af10fb4f6d690cf7b5c56fc15ace5ca2dd6a080d",
+    "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+    "e2e/storage-command-faults.py": "8cacdc0036114a95948f31136bb9dea8ecb4df6ec21c76b5dd299cd1ba4cc498",
+    "e2e/storage-command-recovery.mjs": "57c5e1fead1fc90549f1b732617d5b786bd442f302f21396f5e2fa178e1d8b81",
+    "e2e/storage-console-api.mjs": "548888014f4823205f40e86cb9d03b3747e6901f7a620946b51dc0b9069ec569",
+    "e2e/storage-console-inspect.py": "1201c2cf03dfc4b1ee05a86fc3e81a62db1fd1307e8d67bcf849f2d9394e0348",
+    "e2e/storage-console-ui.mjs": "77b4c2a62fa23f3c4af144556e63a22f4b1ee1584fcdb3a87f0cee01445842dc",
+    "e2e/storage-decision-recovery.mjs": "d0514f70ff857d602196ace1af09944f975fb6d7d7e64e3b86bbb4b4cefb40fb",
+    "e2e/storage-discard.py": "bd167df38ebe45089538a9b6ec7fe6b98fd7fc88616375179ce611887f3e51d7",
+    "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+    "e2e/storage-legacy-build.py": "1f93643e4c3543d2a6ac74160eab4b59ba2689be6f447a1b5d8cee975f7ae125",
+    "e2e/storage-legacy-environment.py": "0f70eca2c949c3c23e50f877d9febd933a2ac38426573f9ce35fd73ec7ca94da",
+    "e2e/storage-legacy-recovery.mjs": "1b7976347afb37d655dafdc6c94718080cce11ee7648da505c2939abdb004ba0",
+    "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+    "e2e/storage-suite-inspect.py": "afa310358f693939385cca66671e5a29391d38ed4953aeb4ede705bfb367cef6",
+    "e2e/storage-validation-faults.py": "78a95d848cca13dd190391b5ff03266d0a3b5a7eae40355700496da90e89ba0d",
+    "e2e/storage-validation-recovery.mjs": "78a37c4334c488f25cb20b7978914dad7f908fd45743757e88cc59f8c0afb4fa",
+    "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+    "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+    "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+    "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+    "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+    "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+    "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+    "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+    "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+    "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+    "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+    "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+    "qualification/artifacts/invocation-addresses.cjs": "d92d814fbd8d07343e491f013b5199e8e8454b5f54244c044c287665ccdb1a6f",
+    "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+    "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+    "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+    "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+    "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+    "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+    "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+    "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+    "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+    "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+    "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+    "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+    "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+    "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+    "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+    "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+    "qualification/artifacts/service-configuration.cjs": "0a9bf83c6dffc76544491abdda0d14b9dbf0ebc767c60c29b063e893c2c22e70",
+    "qualification/artifacts/storage-console.cjs": "5e8e2199fa7605f8d00407c92537b175e072f47ce4d6fd42b116ef1a87de873f",
+    "qualification/artifacts/storage-validation-delay.mjs": "91dbcf7480341d8596a6300a026de792217a3f23bb217adf6e974cf4b97f79b3",
+    "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+    "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+    "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+    "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+    "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+    "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+    "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+    "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+    "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+    "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+    "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+    "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+    "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+    "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+    "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+    "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+    "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+    "storage/agent.py": "689a45bc367b339112c41696031be46e7fb1d449340fe92d6915f791db58de64",
+    "storage/agent_discard.py": "69c6c570162e2c7dc2cdde4b53f6840866fad50ae738f85f9f3f18c4f8d5e859",
+    "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+    "storage/agent_volumes.py": "e03ad2df9bfe657b2a959bc3019247a3769f0dbb1e6a5802a875171a9cddf041",
+    "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+    "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+    "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+    "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+    "storage/install-dev.py": "d6e233ccc1e893ee64220ddc1436127b32434778db9b44820f359560465f33db",
+    "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+    "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+    "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+    "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+    "storage/migrations/004.sql": "bde5c2068fbe9ecf03a077e911d03e6d67737a6cf9b5912c4fc55944926eaf7d",
+    "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+    "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+    "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+    "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+    "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+    "web/src/function.jsx": "a66a3534f62e2ed1dd8d6ad85ac21b8b6c9865015ddf70d7f0e03ff2380cdf6a",
+    "web/src/invocation-urls.jsx": "c8e803c27c483c411f281ac88e5d31da4353f678a011c1ce7114cba874c0d3cf",
+    "web/src/main.jsx": "74f91f2af68eecb357b9ffd0b61f2b173115204086524dd655284cf1a744fd8b",
+    "web/src/management.jsx": "764b793e7a01b6ec2f072538e1a788f0f0a9bb03d4501ebb75b2d8b12fbea744",
+    "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+    "web/src/observations.jsx": "9073da7e1764f42acd7f7b611bc2f47c058f7db1394b191eca4994864d943a15",
+    "web/src/publications.jsx": "2c847cf9ca5aad42c05a7c64366959be535ada5b001ba711b86d4cf47a678618",
+    "web/src/storage.jsx": "efa3f329b6bb7db4d65c514ec1eabb6e6eab3750e5084dce7a454f3d5b0a6ac1",
+    "web/src/style.css": "f2a5c21f40841e7f69d6347b0e97444ce9efb3444864f3f9167d540cb8dc5d89",
+    "web/src/ui.jsx": "156d17fd49af779b2a75c88bb188878ab7feb96199caccd2bbb2149a7e83a21e",
+    "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+  },
+  "source_sha256_at_delivery": {
+    "adapter/Dockerfile": "1716bc11f4755f2b58a73a30a174f7108dbee477e30df9e4f909ced07dc81e60",
+    "adapter/Dockerfile.dockerignore": "84bc4c8ccc7a0e4f53719e98ba410c1048901837ad7417ba4f47f0688eb40284",
+    "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+    "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+    "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+    "adapter/compose.spark.yml": "cf76088598e5b6bea10d3291471739e7ef172aaa5ab27d1a3d5cf18e63edfe1e",
+    "adapter/deploy.py": "462ed21dd2433317052e03be9c25ae18a6d2d8f1aee53cd4eb56211272302e27",
+    "adapter/dev.sh": "d0b37fd798554644d35e452d0ebbed0bb18f4222aaf992fcd524121ad26e0e7d",
+    "adapter/manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+    "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+    "control/Dockerfile": "858d0ed75d833754fd48b73a780c0607f81f7b34b6473d4a921591ee90b1b862",
+    "control/Dockerfile.dockerignore": "3d4e09e669ded704ed8e8765450b1eacc41b94b313f5cd93a48941b8377dd915",
+    "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+    "control/app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+    "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+    "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+    "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+    "control/app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+    "control/app/deployments.py": "1df532d18cfa3838fb3b04840ccf1dda13eb3e9ae2963b4e1b781551d861195d",
+    "control/app/execution.py": "8c52837c6b893411ea10af481f573aa54db98990624079d5bb7b8c2a6f6e485f",
+    "control/app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+    "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+    "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+    "control/app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+    "control/app/invocation_urls.py": "f05e6ee7f399b4d54cf2c15b186c13d7eb75266172bcc33127e7fca6dce5c1df",
+    "control/app/main.py": "0763accfcd9dfca32ce8d7f09ae67d7adb7264d567fa0f8822479d432d863956",
+    "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+    "control/app/models.py": "fbfa169dc95872a8b19378e92b19f3f1074ff20f2a825a5671b99b784aac4b3e",
+    "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+    "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+    "control/app/storage_management.py": "37ce7e205ec06860eb096c37d85d7015c5002558101faf6b90eccfda81181ea7",
+    "control/app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+    "control/compose.spark.yml": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+    "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+    "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+    "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+    "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+    "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+    "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+    "control/migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+    "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+    "docs/CONSOLE_PUBLICATION.md": "d710833cc0849871379e18b93c4f4d9d7003644a110ab72edb3dc6129a9bf10d",
+    "docs/CONSOLE_STORAGE.md": "71e9f9b3afe4a63021a812cd0abb1d314bc62fe4672765ade0f9f641fb604f8b",
+    "docs/DESIGN_SYSTEM_APP.md": "d6797b43660d4e04e7fffdcee3ae25e25d7da95d104f3c723d78c74958fd4052",
+    "docs/INVOCATION_URLS.md": "a3577b99217690ec7e0ec8786328fb840094dda0d135572d69359aa0dd9ac12e",
+    "docs/STORAGE_LEGACY_PROOF.md": "a923c0059d36008bbeb5421ef878b7c0be42cb9c0604abfbe5535cbc8a8d58f6",
+    "docs/manual.md": "cf7bcdb9d6ef887203b7b84d42e46ec4ba9507b78acf488aea266d13909c7207",
+    "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+    "e2e/adapter-deploy.mjs": "e8246c0b475920c6b23a4f5f8f095ac864644c5d958c4aea2d8d2d3f9bc46fda",
+    "e2e/adapter.py": "564c89a4d842e3e2c68c5d261fa687b06e9106035b5820d084415fcbeff8b1a2",
+    "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+    "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+    "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+    "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+    "e2e/control-operations.py": "2ef1013fe73dc946eeb221a2cab7e7f03dcb838b0612eb4a2357dd68677c9278",
+    "e2e/control-ui.mjs": "d719d0241bdca96c381c8e8d2743f62dc2c5c5a86fbd4c55d00677c6d75c16d8",
+    "e2e/control_database.py": "fe1c7cb2450f193bba5be5a6d4cd98e88936199b20b85e0a903226f6beb2a043",
+    "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+    "e2e/dev-sso-sessions.mjs": "4c74f8f023b4ef8503f05624218b5d7e0d6bc19a35bf45841053c9a62c7094f4",
+    "e2e/execution-faults.py": "7f879b8d9702f7c0d9654a8064d797cc60b95ec17f97b69091acff69bdc58fea",
+    "e2e/execution-suite.py": "34a0e3b1fd7f41b36c79aca1925fe5a69f4f6198441378fe40d4548f71276e59",
+    "e2e/execution-ui.mjs": "536ba6d8f10096a4f1782079a476fcfe94535cf8c5a414cf618ba2f7d7a454cd",
+    "e2e/function-storage-faults.py": "3a4c9c019c499199e6e12adddc70d2b8d9a178d82755f4c9ab0b9b4ee138d0aa",
+    "e2e/function-storage.mjs": "aac2325b00d6f74f0ef44ce6d2016cbefbe85b41309a1feb4c8f098cd090f632",
+    "e2e/instance-lifecycle.py": "1c83bfc36180e3e63722073137745a3522ea39642108b589778cfd087773aab2",
+    "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+    "e2e/invocation-url-adapter-build.py": "e84f45820028c4a1d3737dfbe486520ce3b106ba0dbe821c9875fc8dcda418bd",
+    "e2e/invocation-url-host.py": "568f8fb107387f10618aaa9b955274bf4fcac1c0d022d222964a4f092992d36e",
+    "e2e/invocation-urls-ui.mjs": "8aa2bf0e95f2f857ca2630129f3982688ee27cb6fdef08566eb63161b69ca626",
+    "e2e/invocation-urls.mjs": "7438964baccdc56effecb06bfc1064403f2797168aeca909c2ec2f2aa47d7e12",
+    "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+    "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+    "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+    "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+    "e2e/manual-ui.mjs": "ff98a5c6694f7450ab91b4104e1905ebf1edb09a6010486b5d65d5adba7012f7",
+    "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7",
+    "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+    "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+    "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+    "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+    "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+    "e2e/publication-fixtures.mjs": "b994a9332a39f952e8f20c9d5e5b3ad7efddf5ed690d4359d12c481926c44438",
+    "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+    "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+    "e2e/publication-ui.mjs": "a65fa3545decfe63b8829cac8bf485dfa95092564d278352f0e3021501fbdeca",
+    "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+    "e2e/runtime-instances.py": "c9652acb58dd42725d9a45d852c7db7a239f40ac640399a7e1868177bae129bc",
+    "e2e/runtime-validation.py": "69ff066e77cb8df5b954731ed1b01cd8dbf46ff2bb023642af53ed66f7894420",
+    "e2e/service-configuration.mjs": "50c01b89800f36045e296d47c73ca624ee62245058a4547bd49dea56c8e961e7",
+    "e2e/service-transport-observer.py": "2020f652a7a3def91649272da4a371df38cd5733450b097d952bb76696a08d02",
+    "e2e/service-transport.mjs": "424912a5caed927a9a9deb23af10fb4f6d690cf7b5c56fc15ace5ca2dd6a080d",
+    "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+    "e2e/storage-command-faults.py": "8cacdc0036114a95948f31136bb9dea8ecb4df6ec21c76b5dd299cd1ba4cc498",
+    "e2e/storage-command-recovery.mjs": "57c5e1fead1fc90549f1b732617d5b786bd442f302f21396f5e2fa178e1d8b81",
+    "e2e/storage-console-api.mjs": "548888014f4823205f40e86cb9d03b3747e6901f7a620946b51dc0b9069ec569",
+    "e2e/storage-console-inspect.py": "1201c2cf03dfc4b1ee05a86fc3e81a62db1fd1307e8d67bcf849f2d9394e0348",
+    "e2e/storage-console-ui.mjs": "77b4c2a62fa23f3c4af144556e63a22f4b1ee1584fcdb3a87f0cee01445842dc",
+    "e2e/storage-decision-recovery.mjs": "d0514f70ff857d602196ace1af09944f975fb6d7d7e64e3b86bbb4b4cefb40fb",
+    "e2e/storage-discard.py": "bd167df38ebe45089538a9b6ec7fe6b98fd7fc88616375179ce611887f3e51d7",
+    "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+    "e2e/storage-legacy-build.py": "1f93643e4c3543d2a6ac74160eab4b59ba2689be6f447a1b5d8cee975f7ae125",
+    "e2e/storage-legacy-environment.py": "0f70eca2c949c3c23e50f877d9febd933a2ac38426573f9ce35fd73ec7ca94da",
+    "e2e/storage-legacy-recovery.mjs": "1b7976347afb37d655dafdc6c94718080cce11ee7648da505c2939abdb004ba0",
+    "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+    "e2e/storage-suite-inspect.py": "afa310358f693939385cca66671e5a29391d38ed4953aeb4ede705bfb367cef6",
+    "e2e/storage-validation-faults.py": "78a95d848cca13dd190391b5ff03266d0a3b5a7eae40355700496da90e89ba0d",
+    "e2e/storage-validation-recovery.mjs": "78a37c4334c488f25cb20b7978914dad7f908fd45743757e88cc59f8c0afb4fa",
+    "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+    "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+    "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+    "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+    "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+    "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+    "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+    "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+    "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+    "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+    "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+    "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+    "qualification/artifacts/invocation-addresses.cjs": "d92d814fbd8d07343e491f013b5199e8e8454b5f54244c044c287665ccdb1a6f",
+    "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+    "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+    "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+    "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+    "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+    "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+    "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+    "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+    "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+    "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+    "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+    "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+    "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+    "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+    "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+    "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+    "qualification/artifacts/service-configuration.cjs": "0a9bf83c6dffc76544491abdda0d14b9dbf0ebc767c60c29b063e893c2c22e70",
+    "qualification/artifacts/storage-console.cjs": "5e8e2199fa7605f8d00407c92537b175e072f47ce4d6fd42b116ef1a87de873f",
+    "qualification/artifacts/storage-validation-delay.mjs": "91dbcf7480341d8596a6300a026de792217a3f23bb217adf6e974cf4b97f79b3",
+    "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+    "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+    "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+    "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+    "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+    "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+    "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+    "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+    "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+    "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+    "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+    "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+    "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+    "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+    "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+    "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+    "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+    "storage/agent.py": "689a45bc367b339112c41696031be46e7fb1d449340fe92d6915f791db58de64",
+    "storage/agent_discard.py": "69c6c570162e2c7dc2cdde4b53f6840866fad50ae738f85f9f3f18c4f8d5e859",
+    "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+    "storage/agent_volumes.py": "e03ad2df9bfe657b2a959bc3019247a3769f0dbb1e6a5802a875171a9cddf041",
+    "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+    "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+    "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+    "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+    "storage/install-dev.py": "d6e233ccc1e893ee64220ddc1436127b32434778db9b44820f359560465f33db",
+    "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+    "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+    "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+    "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+    "storage/migrations/004.sql": "bde5c2068fbe9ecf03a077e911d03e6d67737a6cf9b5912c4fc55944926eaf7d",
+    "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+    "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+    "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+    "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+    "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+    "web/src/function.jsx": "a66a3534f62e2ed1dd8d6ad85ac21b8b6c9865015ddf70d7f0e03ff2380cdf6a",
+    "web/src/invocation-urls.jsx": "c8e803c27c483c411f281ac88e5d31da4353f678a011c1ce7114cba874c0d3cf",
+    "web/src/main.jsx": "74f91f2af68eecb357b9ffd0b61f2b173115204086524dd655284cf1a744fd8b",
+    "web/src/management.jsx": "764b793e7a01b6ec2f072538e1a788f0f0a9bb03d4501ebb75b2d8b12fbea744",
+    "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+    "web/src/observations.jsx": "9073da7e1764f42acd7f7b611bc2f47c058f7db1394b191eca4994864d943a15",
+    "web/src/publications.jsx": "2c847cf9ca5aad42c05a7c64366959be535ada5b001ba711b86d4cf47a678618",
+    "web/src/storage.jsx": "efa3f329b6bb7db4d65c514ec1eabb6e6eab3750e5084dce7a454f3d5b0a6ac1",
+    "web/src/style.css": "f2a5c21f40841e7f69d6347b0e97444ce9efb3444864f3f9167d540cb8dc5d89",
+    "web/src/ui.jsx": "156d17fd49af779b2a75c88bb188878ab7feb96199caccd2bbb2149a7e83a21e",
+    "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+  },
+  "post_qualification_documentation_changes": {
+    "docs/DESIGN_SYSTEM_APP.md": {
+      "executed_sha256": "4b5377c5fcb198b7f2f603790164c32d99edeca0ca5768d017b9b0bd4071e588",
+      "delivered_sha256": "d6797b43660d4e04e7fffdcee3ae25e25d7da95d104f3c723d78c74958fd4052"
+    },
+    "docs/INVOCATION_URLS.md": {
+      "executed_sha256": "d71357adc983254b364ed8236f262eec6933eb1ae3179b501001c3c1e8b3f350",
+      "delivered_sha256": "a3577b99217690ec7e0ec8786328fb840094dda0d135572d69359aa0dd9ac12e"
+    }
+  },
+  "phases": [
+    {
+      "campaign": "control-operations",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "spark-docker@10.77.0.24",
+        "python3 -B /srv/p2enjoy-serverless/e2e/control-operations.py"
+      ],
+      "report_path": "control/.proof-control-operations.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 164.56,
+      "passed_groups": 55,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "function-storage",
+      "command": [
+        "node",
+        "e2e/function-storage.mjs"
+      ],
+      "report_path": ".local/e2e/function-storage.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 299.17,
+      "passed_groups": 15,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "runtime-instances",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "spark-docker@10.77.0.24",
+        "bash /srv/p2enjoy-serverless/runtime/dev.sh instances-test"
+      ],
+      "report_path": "runtime/instances-proof.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 73.54,
+      "passed_groups": 31,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "instance-lifecycle",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "spark-docker@10.77.0.24",
+        "bash /srv/p2enjoy-serverless/runtime/dev.sh lifecycle-test"
+      ],
+      "report_path": "runtime/lifecycle-proof.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 17.33,
+      "passed_groups": 11,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "runtime-validation",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "spark-docker@10.77.0.24",
+        "bash /srv/p2enjoy-serverless/runtime/dev.sh test"
+      ],
+      "report_path": "runtime/validation-proof.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 90.97,
+      "passed_groups": 36,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "managed-storage",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "root@10.77.0.24",
+        "python3 -B /srv/p2enjoy-serverless/e2e/managed-storage.py"
+      ],
+      "report_path": "runtime/managed-storage-proof.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 53.11,
+      "passed_groups": 14,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "control-admin",
+      "command": [
+        "node",
+        "e2e/control-admin.mjs"
+      ],
+      "report_path": ".local/e2e/control-admin.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 17.46,
+      "passed_groups": 19,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "control-ui",
+      "command": [
+        "node",
+        "e2e/control-ui.mjs"
+      ],
+      "report_path": ".local/e2e/control-ui.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 9.86,
+      "passed_groups": 11,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "deployments",
+      "command": [
+        "node",
+        "e2e/deployments.mjs"
+      ],
+      "report_path": ".local/e2e/deployments.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 29.82,
+      "passed_groups": 11,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "code-publications",
+      "command": [
+        "node",
+        "e2e/code-publications.mjs"
+      ],
+      "report_path": ".local/e2e/code-publications.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 36.99,
+      "passed_groups": 10,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "adapter-deploy",
+      "command": [
+        "node",
+        "e2e/adapter-deploy.mjs"
+      ],
+      "report_path": ".local/e2e/adapter-deploy.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 85.89,
+      "passed_groups": 7,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "publication-recovery",
+      "command": [
+        "node",
+        "e2e/publication-recovery.mjs"
+      ],
+      "report_path": ".local/e2e/publication-recovery.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 76.1,
+      "passed_groups": 4,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "public",
+      "command": [
+        "python3",
+        "-B",
+        "e2e/public.py"
+      ],
+      "report_path": ".local/e2e/public.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 2.84,
+      "passed_groups": 8,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "public-invocations",
+      "command": [
+        "node",
+        "e2e/public-invocations.mjs"
+      ],
+      "report_path": ".local/e2e/public-invocations.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 338.15,
+      "passed_groups": 31,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "login-ui",
+      "command": [
+        "node",
+        "e2e/login-ui.mjs"
+      ],
+      "report_path": ".local/e2e/login-ui.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 2.32,
+      "passed_groups": 9,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "execution-ui",
+      "command": [
+        "node",
+        "e2e/execution-ui.mjs"
+      ],
+      "report_path": ".local/e2e/execution-ui.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 97.66,
+      "passed_groups": 12,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "publication-ui",
+      "command": [
+        "node",
+        "e2e/publication-ui.mjs"
+      ],
+      "report_path": ".local/e2e/publication-ui.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 166.6,
+      "passed_groups": 21,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "manual-ui",
+      "command": [
+        "node",
+        "e2e/manual-ui.mjs"
+      ],
+      "report_path": ".local/e2e/manual-ui.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 4.3,
+      "passed_groups": 8,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "service-transport",
+      "command": [
+        "node",
+        "e2e/service-transport.mjs"
+      ],
+      "report_path": ".local/e2e/service-transport.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 58.36,
+      "passed_groups": 5,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "service-configuration",
+      "command": [
+        "node",
+        "e2e/service-configuration.mjs"
+      ],
+      "report_path": ".local/e2e/service-configuration.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 59.59,
+      "passed_groups": 13,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "invocation-urls",
+      "command": [
+        "node",
+        "e2e/invocation-urls.mjs"
+      ],
+      "report_path": ".local/e2e/invocation-urls.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 28.88,
+      "passed_groups": 8,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "invocation-urls-ui",
+      "command": [
+        "node",
+        "e2e/invocation-urls-ui.mjs"
+      ],
+      "report_path": ".local/e2e/invocation-urls-ui.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 13.65,
+      "passed_groups": 6,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "adapter-docker",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "spark-docker@10.77.0.24",
+        "bash /srv/p2enjoy-serverless/adapter/dev.sh test"
+      ],
+      "report_path": "adapter/reports/adapter.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 9.27,
+      "passed_groups": 24,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "adapter-public-docker",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "spark-docker@10.77.0.24",
+        "bash /srv/p2enjoy-serverless/adapter/dev.sh deploy-public-test"
+      ],
+      "report_path": "adapter/reports/adapter-deploy-public.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 5.93,
+      "passed_groups": 14,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-discard",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "root@10.77.0.24",
+        "python3 -B /srv/p2enjoy-serverless/e2e/storage-discard.py"
+      ],
+      "report_path": "storage/discard-proof.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 212.96,
+      "passed_groups": 12,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-agent",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "root@10.77.0.24",
+        "bash /srv/p2enjoy-serverless/storage/dev.sh agent-test"
+      ],
+      "report_path": "storage/agent-proof.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 29.22,
+      "passed_groups": 15,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-limits",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "root@10.77.0.24",
+        "bash /srv/p2enjoy-serverless/storage/dev.sh limits-test"
+      ],
+      "report_path": "storage/agent-limits-proof.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 108.58,
+      "passed_groups": 8,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-preparations",
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "-J",
+        "ubuntu@51.158.54.202",
+        "root@10.77.0.24",
+        "python3 -B /srv/p2enjoy-serverless/e2e/storage-preparations.py"
+      ],
+      "report_path": "storage/preparations-proof.json",
+      "report_remote": true,
+      "exit_code": 0,
+      "duration_seconds": 87.58,
+      "passed_groups": 12,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-console-api",
+      "command": [
+        "node",
+        "e2e/storage-console-api.mjs"
+      ],
+      "report_path": ".local/e2e/storage-console-api.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 69.69,
+      "passed_groups": 9,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-console-ui",
+      "command": [
+        "node",
+        "e2e/storage-console-ui.mjs"
+      ],
+      "report_path": ".local/e2e/storage-console-ui.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 93.34,
+      "passed_groups": 10,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-command-recovery",
+      "command": [
+        "node",
+        "e2e/storage-command-recovery.mjs"
+      ],
+      "report_path": ".local/e2e/storage-command-recovery.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 112.14,
+      "passed_groups": 7,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-validation-recovery",
+      "command": [
+        "node",
+        "e2e/storage-validation-recovery.mjs"
+      ],
+      "report_path": ".local/e2e/storage-validation-recovery.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 83.85,
+      "passed_groups": 2,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-decision-recovery",
+      "command": [
+        "node",
+        "e2e/storage-decision-recovery.mjs"
+      ],
+      "report_path": ".local/e2e/storage-decision-recovery.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 148.87,
+      "passed_groups": 4,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-legacy-partial",
+      "command": [
+        "node",
+        "e2e/storage-legacy-recovery.mjs",
+        "--partial"
+      ],
+      "report_path": ".local/e2e/storage-legacy-partial.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 69.25,
+      "passed_groups": 1,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    },
+    {
+      "campaign": "storage-legacy-recovery",
+      "command": [
+        "node",
+        "e2e/storage-legacy-recovery.mjs",
+        "--full"
+      ],
+      "report_path": ".local/e2e/storage-legacy-recovery.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 40.41,
+      "passed_groups": 4,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true,
+      "cli_images_before_after_identical": true
+    }
+  ],
+  "prerequisites": [
+    {
+      "campaign": "dev-sso-sessions",
+      "command": [
+        "node",
+        "e2e/dev-sso-sessions.mjs"
+      ],
+      "report_path": ".local/e2e/dev-sso-sessions.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 2.81,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true
+    },
+    {
+      "campaign": "storage-legacy-build",
+      "command": [
+        "python3",
+        "-B",
+        "e2e/storage-legacy-build.py"
+      ],
+      "report_path": ".local/e2e/storage-legacy-build.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 2.21,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true
+    },
+    {
+      "campaign": "invocation-url-adapter-build",
+      "command": [
+        "python3",
+        "-B",
+        "e2e/invocation-url-adapter-build.py"
+      ],
+      "report_path": ".local/e2e/invocation-url-adapter-build.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 3.01,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true
+    },
+    {
+      "campaign": "dev-sso-invocation-sessions",
+      "command": [
+        "node",
+        "e2e/dev-sso-sessions.mjs",
+        "--for-invocation-urls"
+      ],
+      "report_path": ".local/e2e/dev-sso-invocation-sessions.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 2.49,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true
+    },
+    {
+      "campaign": "dev-sso-decision-sessions",
+      "command": [
+        "node",
+        "e2e/dev-sso-sessions.mjs",
+        "--for-storage-decisions"
+      ],
+      "report_path": ".local/e2e/dev-sso-decision-sessions.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 2.48,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true
+    },
+    {
+      "campaign": "storage-console-physical",
+      "command": [
+        "python3",
+        "-B",
+        "e2e/storage-suite-inspect.py",
+        ".local/e2e/invocation-urls-regressions.json"
+      ],
+      "report_path": ".local/e2e/invocation-urls-physical.json",
+      "report_remote": false,
+      "exit_code": 0,
+      "duration_seconds": 3.77,
+      "fresh_report_verified": true,
+      "report_content_verified": true,
+      "source_and_control_before_after_identical": true
+    }
+  ],
+  "report_archives": {
+    "dev-sso-sessions": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/dev-sso-sessions-report.json",
+      "sha256": "10d7232ffdfeb7bb40f536471a2515d835d70112538ae211bc1f4810751cc986"
+    },
+    "storage-legacy-build": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-legacy-build-report.json",
+      "sha256": "4e77511afffd4f3c892f531c2f9e4612d767d7b00da15a8118f0867b856ec7f8"
+    },
+    "invocation-url-adapter-build": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/invocation-url-adapter-build-report.json",
+      "sha256": "3869146754ee36e0adb775d9974f851510da95cacb8a5415cb2bd9c0072be0bf"
+    },
+    "dev-sso-invocation-sessions": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/dev-sso-invocation-sessions-report.json",
+      "sha256": "460695f9d27630b8ab527db17eaf19fc3e369c72933fc714265796f611e574da"
+    },
+    "dev-sso-decision-sessions": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/dev-sso-decision-sessions-report.json",
+      "sha256": "a35b90b3756100c7d0419307c19a26075101064969730bdd434967abfdf9e1ed"
+    },
+    "storage-console-physical": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-console-physical-report.json",
+      "sha256": "a694334c2832fd518ae536913cc9826de80f2b0981160453aca86c2d57be3955"
+    },
+    "control-operations": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/control-operations-report.json",
+      "sha256": "cf04fb9ae1e80863f79aaa7d61a5dc8b4d0ce526e7188dce25f4847e9ab0b8b9"
+    },
+    "function-storage": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/function-storage-report.json",
+      "sha256": "57a58c0b6d6da7957a3b3a3d9e998164226a92a55a91f09d4fa9429da328f5bd"
+    },
+    "runtime-instances": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/runtime-instances-report.json",
+      "sha256": "09f3a512e10f1a2d68033fd4bee108b66213525a8c83f37be1cd6b9205bb8785"
+    },
+    "instance-lifecycle": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/instance-lifecycle-report.json",
+      "sha256": "f7858a0d836aef1fa3d294c2736f4fd6afd47e146d1ed7ebaed32614e9351e3f"
+    },
+    "runtime-validation": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/runtime-validation-report.json",
+      "sha256": "8178a971b4fec2102c68b1438a9066251a395fd7583a7c5160fd5ee83ed35188"
+    },
+    "managed-storage": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/managed-storage-report.json",
+      "sha256": "d3bd08b97241bcebb3bd4786c37ad5bc836a5be6b99f2c1f0110bc122ba618b5"
+    },
+    "control-admin": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/control-admin-report.json",
+      "sha256": "bf74b62ca7a7ca87fea6995ff5a52767fc8bdd03c15c236d76e54bfa38a8c624"
+    },
+    "control-ui": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/control-ui-report.json",
+      "sha256": "56960f30d1c1f11549abe14889afba80768d2ec5a4f82e3d75641464fed0ee5b"
+    },
+    "deployments": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/deployments-report.json",
+      "sha256": "07ad2adf233c01140c81ac4f205da42d3d162c5ce08485b95aa0b1684ec9c279"
+    },
+    "code-publications": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/code-publications-report.json",
+      "sha256": "ff990a88276e58039c967e8ba24e4f31afc870234cffeeb41080c884c8a40019"
+    },
+    "adapter-deploy": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/adapter-deploy-report.json",
+      "sha256": "8f4775594493b1443a7f19631d5349430397e92588339182a13b0a4526bbae79"
+    },
+    "publication-recovery": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/publication-recovery-report.json",
+      "sha256": "57433c06277b72ed3434368e1121d367db192202e871032b37b15508a985abfe"
+    },
+    "public": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/public-report.json",
+      "sha256": "1ee4da1d628243375755e6e6b3f808f7614193017c98fcf2d5b2f6a49acca85a"
+    },
+    "public-invocations": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/public-invocations-report.json",
+      "sha256": "540454e45d2e1b4ff364d7d973fe9522f87c9cef6042d5aece17017f3affa1b0"
+    },
+    "login-ui": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/login-ui-report.json",
+      "sha256": "ef9686ff5c717a6ae4c3d8ecf266e3f0af5aa356885bb8ae3bb5782e52ab8396"
+    },
+    "execution-ui": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/execution-ui-report.json",
+      "sha256": "0f4ef3154105454a76eb3a39f19666c469950e76e3f6e23bd8b76ec8cf1c84e2"
+    },
+    "publication-ui": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/publication-ui-report.json",
+      "sha256": "c1e2e55446a921e7f15dd42468780f543e3b12eb8fc1af428d4ea293a2ecefd9"
+    },
+    "manual-ui": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/manual-ui-report.json",
+      "sha256": "510351d41bf121b465724764b6d3b3a13d42591726ef68e70eb2bbabfd75af6e"
+    },
+    "service-transport": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/service-transport-report.json",
+      "sha256": "5c6f94f8833a1b4db3cbd747059beab5a2c530adbc608e352bc0bd915ec35943"
+    },
+    "service-configuration": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/service-configuration-report.json",
+      "sha256": "ccd4266d9b6ef743286bde69c7241967974cfe2ecb8fcf0bbee1677deabd1489"
+    },
+    "invocation-urls": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/invocation-urls-report.json",
+      "sha256": "089ed7ac03ea1d4d7a850c6225304e5efb5a4d33825089dbdf4c8f7a4d29d306"
+    },
+    "invocation-urls-ui": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/invocation-urls-ui-report.json",
+      "sha256": "ce2f48a2b75830f303faf08a2b8bd1069fc0057baf7e4d22217f5178745d62b9"
+    },
+    "adapter-docker": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/adapter-docker-report.json",
+      "sha256": "bf73d512bb28004c9f73fb20380e4667a5625b9dfaafe5e5ec52fb987e5d39bb"
+    },
+    "adapter-public-docker": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/adapter-public-docker-report.json",
+      "sha256": "938d13f0eeab24ffac80a510955d67079ac5e2d8ac72d4770fc798be6e0d81f1"
+    },
+    "storage-discard": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-discard-report.json",
+      "sha256": "b139b863a4cf424539b1abc92157c4c213b81487a7fd0409621dd74fc30fb5d0"
+    },
+    "storage-agent": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-agent-report.json",
+      "sha256": "6541981b6d2072eed136e4c600d4444ec32e320efcbf44d40d4215ab8d6a066b"
+    },
+    "storage-limits": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-limits-report.json",
+      "sha256": "828dd7cccfa9fbb96eda18b2a057e99feec05f1b4672c74f8398a4fad897c0ad"
+    },
+    "storage-preparations": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-preparations-report.json",
+      "sha256": "195a403dbe034fbb93f616098e40b374388f491a635191a725c176a7a8131873"
+    },
+    "storage-console-api": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-console-api-report.json",
+      "sha256": "16ccf862156f5b6685991825bb8aacffee4b669d6fe904d0f39e751b56e6ac93"
+    },
+    "storage-console-ui": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-console-ui-report.json",
+      "sha256": "eb3aace0539bcb3e46867b5f534646377682a0d95f51e754824b45bd183e9b9c"
+    },
+    "storage-command-recovery": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-command-recovery-report.json",
+      "sha256": "4eb71e55e6ee4501646a44cbc2a2790e13f831cc3617450e56a110b03a7fef0e"
+    },
+    "storage-validation-recovery": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-validation-recovery-report.json",
+      "sha256": "ccfffa03a8cbd7cf44f802be33d4f3afbe5c82d1aba356516ee299cd1aaaceac"
+    },
+    "storage-decision-recovery": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-decision-recovery-report.json",
+      "sha256": "dbd3b5025ca6e9822a99f9b1711dc5312467abf609c95dbb12bc5007b0c840b9"
+    },
+    "storage-legacy-partial": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-legacy-partial-report.json",
+      "sha256": "277d79d511c71616a97c55bdfe5ed8e977c29e3c9532f333d38611206c76aa6a"
+    },
+    "storage-legacy-recovery": {
+      "path": ".local/e2e/invocation-urls-full-checkpoint/storage-legacy-recovery-report.json",
+      "sha256": "3c763de8823924e846b9a9ca7f37835978d1fe63a0b815e29e0d0d936968381b"
+    }
+  },
+  "visual_reviews": {
+    "control-ui": {
+      "captures": {
+        "console-namespaces.jpg": "09ec507cbfd6f4b664fe7e35badc3e52d7eb6a6c6927c2bbbab4f893d5ea8138",
+        "namespace-mobile-long.jpg": "e5e3afd7914354f1082e58662209f014065c1e9e0ce2e79dcb318a530fbd1857",
+        "configuration-conflict.jpg": "934d562fe26dcb115f995f581a9171cbfd765de6766fb39171ac8a0f9faa81e2",
+        "function-desktop.jpg": "d4f246b053d8ee3c276f57ebfc7d0353a16afb1458fc82d1a5ca55f577ac165e",
+        "function-mobile.jpg": "4f8a097f55173d680ef0d35216933873a5d597b8fb9115fd2376e491a1cfaedf",
+        "tokens-desktop.jpg": "d962981ff7c6bfb7ddc1c2eb1a4efbab1c93a33715aaa4e2c284fb7d2d7b8ba0",
+        "activity-desktop.jpg": "f17289bcf5e07e9bae475c6f483b02a77fe9c97acab4201461777bb840255135"
+      },
+      "report_sha256": "56960f30d1c1f11549abe14889afba80768d2ec5a4f82e3d75641464fed0ee5b",
+      "reference": {
+        "path": "docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json",
+        "sha256": "0344fd9c86b7d0ceb715c4c8bb533b76e044e83205d4b3f7744ba52da0a1d3dc"
+      },
+      "personally_observed": [
+        "console-namespaces.jpg",
+        "namespace-mobile-long.jpg",
+        "configuration-conflict.jpg",
+        "function-desktop.jpg",
+        "function-mobile.jpg",
+        "tokens-desktop.jpg",
+        "activity-desktop.jpg"
+      ],
+      "inspection_reused": [],
+      "all_fresh": true
+    },
+    "execution-ui": {
+      "captures": {
+        "execution-ui-empty.jpg": "e38b35b42214e0a49c0f0cbaf48f2f53753d710f75a58d17db784d2493ecda64",
+        "execution-ui-instances-desktop.jpg": "4a8cea34ebbfd03a835f93e0d2fad095c4c9a4b2f3fae0dd5d2e6f1879599052",
+        "execution-ui-instances-mobile.jpg": "814e92f1b7cc799e9f2ecd8650d31c902eab1821bbd86c42ab6acdc2f19c938d",
+        "execution-ui-loading.jpg": "4bcc9dee31c7972ce57d0b5151cfdd88207f0797034bb7ad81ef843881caa7e6",
+        "execution-ui-network-error.jpg": "85ebf76814899b84829b3a941e9e89d55e2a4285b58a4be06cb3b8f1617e8a3f",
+        "execution-ui-logs-desktop.jpg": "4bfc9e8a0ca1fb3a2ddd3668b3fc0cd163587dc102b71f7a91bf0764f3b225f4",
+        "execution-ui-logs-mobile.jpg": "b7fdeb909f5caa3de01c9188ccecd33d8ddd6bacb76e937535d423de07303bdb",
+        "execution-ui-running.jpg": "681a7311b1fbc40e593f73a70ddbc67c13c124361ca8bc5a67412420f3027a4f",
+        "execution-ui-unconfirmed.jpg": "3865ac55637f65ec67679f6a7c33b7d11f9ab519bd7c9f4acb1509b00159e930",
+        "execution-ui-metrics-unavailable.jpg": "baf310a31b2b024c866e651e914f6d7fcfc1f923c2d199dfa281b98102132694",
+        "execution-ui-unauthorized.jpg": "d3bc0a508c060506f790142cb63af1fad5fd75dd3935cb5fa5a351f5b4b1ce1d",
+        "execution-ui-deleted.jpg": "78fb05484d3d6a235584c07baee80ecfe298eef9516417f8af5b4df4203ee006"
+      },
+      "report_sha256": "0f4ef3154105454a76eb3a39f19666c469950e76e3f6e23bd8b76ec8cf1c84e2",
+      "reference": {
+        "path": "docs/evidence/storage-console-dev-2026-11-08.json",
+        "sha256": "9c67fef463d7cb1f8d31dcdd8df7b20889d4eb306be166b41a730b57eededaa8"
+      },
+      "personally_observed": [
+        "execution-ui-empty.jpg",
+        "execution-ui-instances-desktop.jpg",
+        "execution-ui-instances-mobile.jpg",
+        "execution-ui-loading.jpg",
+        "execution-ui-network-error.jpg",
+        "execution-ui-logs-desktop.jpg",
+        "execution-ui-logs-mobile.jpg",
+        "execution-ui-running.jpg",
+        "execution-ui-unconfirmed.jpg",
+        "execution-ui-metrics-unavailable.jpg",
+        "execution-ui-unauthorized.jpg",
+        "execution-ui-deleted.jpg"
+      ],
+      "inspection_reused": [],
+      "all_fresh": true
+    },
+    "publication-ui": {
+      "captures": {
+        "publication-ui-empty.jpg": "d05a5543016260081a0e34341921dbdee34ae5a66af96806e7cf03d06bc50959",
+        "publication-ui-preparation-conflict.jpg": "4339f31b72bea713e3901c755002a7b5b05b43f9f2b294d6522631520ae82602",
+        "publication-ui-published-desktop.jpg": "fa0d3486736b9dbd3d750fa52c34998816c2710483e3601db9a4fd8c7c97de1d",
+        "publication-ui-validation-failed.jpg": "439105c1775a8328487b06d2ede8af1e3ec6e0e234b493a171aca4fc9d77a975",
+        "publication-ui-activated.jpg": "4c2c6ffd9b7db08fd4f6a876ca1c2ff111745665afdb7c53096e7d633e879b4b",
+        "publication-ui-validation-log-mobile-start.jpg": "ed4486a74c8568a6498b6ad5e71e6fe11f6c830ae198f1dfd7da48153e8668eb",
+        "publication-ui-validation-log-mobile-end.jpg": "c1160add93f57d5802f7ee128cd119ee61038742dcb11d7b247d710b5346c4d5",
+        "publication-ui-activation-response-lost.jpg": "11c1f17aceb1078c4d172e489df79d3c0e560f92f9a7d433bdc2b707357cca9c",
+        "publication-ui-deletion-response-lost.jpg": "59a2dfca2cba2ac408de8f5b964b78c2a184405cad5c161a9c9a733e82031399",
+        "publication-ui-cleanup-pending.jpg": "24a2f22e32129b93da7bc94a4681553c3641d9b430903b4b0643ec63d8c333ba",
+        "publication-ui-cleanup-pending-mobile.jpg": "cb08a898dfd7d32880673de7b7ac7c57e8b2488b60a9d19471b9016e710b1bc6",
+        "publication-ui-storage-confirmation-pending.jpg": "dcae3f789d77b312b04ed142d86af3068b82736e5d2754d775c912de4ab2f3a4",
+        "publication-ui-validating.jpg": "1e9260db5cc9ac13ca20f50965c8f53ec708e8fcf8173219d2ecd72afbcfc02a",
+        "publication-ui-reloaded.jpg": "336d89b7c425aa4e93983fafa0c50e98dcc897dc56ca7c5e058814b11a936630",
+        "publication-ui-pagination.jpg": "d7802163c7eced002f9f2ef314351d1040f5207cdcbd5747bbbb7f994704bea8",
+        "publication-ui-network-error.jpg": "52e4a9edbe89f2ffd137ccabf3b8165ac3ced22301912d1bc5f13920fb3f4539",
+        "publication-ui-unauthorized.jpg": "ca342bf3763d81178d2859797a6fe212b3d45fc27df2f47fa576c26127150500",
+        "publication-ui-preparation-response-lost.jpg": "e21a8e5dbdf5ea608cdc1391764f77441063fccba4ca639f26c926bf347783de",
+        "publication-ui-foreign-candidate.jpg": "cb86c7725cd10f401c25556642784aa26e393d2ed98eff3d63e393bd7125e6eb",
+        "publication-ui-mobile.jpg": "25e6798632684a3a0d2cf430b306bdfac7a076c8337c4d3e820f10ab831bba68",
+        "publication-ui-metadata-mobile.jpg": "7fe9249723289ef58a5ff7087928353a2e0bfc0bc6b716c266f297c4f7844b42",
+        "publication-ui-confirmation-mobile.jpg": "c15ddba2c0d3478b5ac521e77cdda2a59398420be1a98e0ceef9e4303dbb2d98"
+      },
+      "report_sha256": "c1e2e55446a921e7f15dd42468780f543e3b12eb8fc1af428d4ea293a2ecefd9",
+      "reference": {
+        "path": "docs/evidence/storage-console-dev-2026-11-08.json",
+        "sha256": "9c67fef463d7cb1f8d31dcdd8df7b20889d4eb306be166b41a730b57eededaa8"
+      },
+      "personally_observed": [
+        "publication-ui-empty.jpg",
+        "publication-ui-preparation-conflict.jpg",
+        "publication-ui-published-desktop.jpg",
+        "publication-ui-validation-failed.jpg",
+        "publication-ui-activated.jpg",
+        "publication-ui-validation-log-mobile-start.jpg",
+        "publication-ui-validation-log-mobile-end.jpg",
+        "publication-ui-activation-response-lost.jpg",
+        "publication-ui-deletion-response-lost.jpg",
+        "publication-ui-cleanup-pending.jpg",
+        "publication-ui-cleanup-pending-mobile.jpg",
+        "publication-ui-storage-confirmation-pending.jpg",
+        "publication-ui-validating.jpg",
+        "publication-ui-reloaded.jpg",
+        "publication-ui-pagination.jpg",
+        "publication-ui-network-error.jpg",
+        "publication-ui-unauthorized.jpg",
+        "publication-ui-preparation-response-lost.jpg",
+        "publication-ui-foreign-candidate.jpg",
+        "publication-ui-mobile.jpg",
+        "publication-ui-metadata-mobile.jpg",
+        "publication-ui-confirmation-mobile.jpg"
+      ],
+      "inspection_reused": [],
+      "all_fresh": true
+    },
+    "manual-ui": {
+      "captures": {
+        "manual-desktop.jpg": "660a731360a1bf0d4c86258559f8e42f6235855c145b7ade278739a9a41448b3",
+        "manual-rights-desktop.jpg": "0d3285706f279bbbc20742048c3ed46d02cb5908682399447d2118551509020b",
+        "manual-cache-desktop.jpg": "6f959468150515785917a6f71de0ca870e22fe80ab69d74c766a9283a37d70fc",
+        "manual-archives-desktop.jpg": "774d69f4c6c978ccf74a72d17b6b602e06a15f9f58411a6e89b4dbc3afdd4164",
+        "manual-mobile.jpg": "cbcb58a530ff741be80d49bd364447a20f673b9d26efd9f5f3b52df8bbb6cd89",
+        "manual-rights-mobile.jpg": "3555330b70717fe761b1e9591afc7a03d40baee654f51ce6b7c17b4e8341fd70",
+        "manual-command-mobile.jpg": "018e6d8277ebadfb91298041faaddd14456bdb50983303b56701b0611e70a714",
+        "manual-cache-mobile.jpg": "fb8239c67cc08fe465ad8e44f08c629a39a74fbad8825fbf183817237215ce7c",
+        "manual-archives-mobile.jpg": "3c064b2784452a9826455aea1d86ad220cf1d3594ecd257cfb4e2d76836c965e",
+        "manual-tablet.jpg": "4220f14f7c59adbbb2eac51decc86bc67f38abffeee654453f8e3855e492d206",
+        "manual-large-text.jpg": "a0ab8ab737ff5501bc9b60e971e6f63d43ba7050b40923032ca61dae592d4583"
+      },
+      "report_sha256": "510351d41bf121b465724764b6d3b3a13d42591726ef68e70eb2bbabfd75af6e",
+      "reference": {
+        "path": "docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json",
+        "sha256": "0344fd9c86b7d0ceb715c4c8bb533b76e044e83205d4b3f7744ba52da0a1d3dc"
+      },
+      "personally_observed": [],
+      "inspection_reused": [
+        "manual-desktop.jpg",
+        "manual-rights-desktop.jpg",
+        "manual-cache-desktop.jpg",
+        "manual-archives-desktop.jpg",
+        "manual-mobile.jpg",
+        "manual-rights-mobile.jpg",
+        "manual-command-mobile.jpg",
+        "manual-cache-mobile.jpg",
+        "manual-archives-mobile.jpg",
+        "manual-tablet.jpg",
+        "manual-large-text.jpg"
+      ],
+      "all_fresh": true
+    },
+    "login-ui": {
+      "captures": {
+        "login-desktop.png": "d022f4279f4fa9188ad98e6cd91fdd943db0414777081927befd97abbd1cc47f",
+        "login-tablette.png": "60e963d6d7e6ff892319959186f279705bf6beddaf6058380f33993fd10671a6",
+        "login-mobile.png": "9231ee06e1bebf263d47fc693ba9ed3c4b3a03a05176ab19ac326edaa998cee7",
+        "login-error.png": "05c65ab3eb839c20d7393df4fd2405daf26f66f7909e23631244e64d73a867b9",
+        "sso-entry.png": "f147cd602520f5806cdb2fcfe087744fbe66eb0422ca79d076b1630f8d3b6dcb",
+        "login-limit.png": "a2d3880ce67982e683bbc4fe24785208d9d84634f41531f862d99bb17cd7ad31"
+      },
+      "report_sha256": "ef9686ff5c717a6ae4c3d8ecf266e3f0af5aa356885bb8ae3bb5782e52ab8396",
+      "reference": {
+        "path": "docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json",
+        "sha256": "0344fd9c86b7d0ceb715c4c8bb533b76e044e83205d4b3f7744ba52da0a1d3dc"
+      },
+      "personally_observed": [],
+      "inspection_reused": [
+        "login-desktop.png",
+        "login-tablette.png",
+        "login-mobile.png",
+        "login-error.png",
+        "sso-entry.png",
+        "login-limit.png"
+      ],
+      "all_fresh": true
+    },
+    "storage-console-ui": {
+      "captures": {
+        "storage-ui-empty.jpg": "eef15b6d89eeb10273733da05e2c1041710db8d6c1e4d10edec53df869378a12",
+        "storage-ui-volumes-desktop.jpg": "3b406189e77b85f9510bfa5e2d83bdb4c1fb8a3a86bc351faa37e00f359c6cd1",
+        "storage-ui-cache-pending.jpg": "37cf5e8698a769c1f14ca984f735612ad862e8af187fde2eaa4326a8f65a978f",
+        "storage-ui-cache-completed.jpg": "da9e3522bfc4beee6a6cb234338186f9e86dd97c2465f55d29a725e31379a62e",
+        "storage-ui-response-pending.jpg": "f7b0640576bcd057649c9400793c7228a6b853db25afe3b7d7a4723763a5584f",
+        "storage-ui-response-recovered.jpg": "a88f6a0d8f04b63dca7072116fe31ceda06f29c6b91555a208fc1b7957f11db5",
+        "storage-ui-conflict.jpg": "4104d9ec08628d6f82f3697bcc3510bec08f1290953d14383401eb0c953fea64",
+        "storage-ui-session-error.jpg": "260f0e909911b8a5aac8e03d82c544a0cb5e8159e8c693a49f208a9f8aa2dd6e",
+        "storage-ui-archive-desktop.jpg": "926aab94e2337d51a6e8933f2d708d6a0a1ce4a1d56ef3d798dd89b51f6e4ae4",
+        "storage-ui-purge-confirmation-mobile.jpg": "0eede598f96426adfba17daae25c7a009deb614f24958f2c5a0f632c5f81c90f",
+        "storage-ui-purged-mobile.jpg": "ea2138958cae7ae9e67a48693b80e00b67c38534b4203e07ae1eea24d471a9fa",
+        "storage-ui-catalogue-mobile.jpg": "78fccaaa8b4d1e5095d03909aba64a4112407d9f9274fef33765cfdc1a78e96f",
+        "storage-ui-pagination-error.jpg": "0bae35c25c616451f626f8a4990e9531aa457ceaa6f453407fb875ff2d0953d6",
+        "storage-ui-catalogue-desktop.jpg": "d4ed22d39e5cc8002d0be7e9ad18c6bee1384195bad6e34be7be3c0a37f7f6e4"
+      },
+      "report_sha256": "eb3aace0539bcb3e46867b5f534646377682a0d95f51e754824b45bd183e9b9c",
+      "reference": {
+        "path": "docs/evidence/storage-console-dev-2026-11-08.json",
+        "sha256": "9c67fef463d7cb1f8d31dcdd8df7b20889d4eb306be166b41a730b57eededaa8"
+      },
+      "personally_observed": [
+        "storage-ui-empty.jpg",
+        "storage-ui-volumes-desktop.jpg",
+        "storage-ui-cache-pending.jpg",
+        "storage-ui-cache-completed.jpg",
+        "storage-ui-response-pending.jpg",
+        "storage-ui-response-recovered.jpg",
+        "storage-ui-conflict.jpg",
+        "storage-ui-session-error.jpg",
+        "storage-ui-archive-desktop.jpg",
+        "storage-ui-purge-confirmation-mobile.jpg",
+        "storage-ui-purged-mobile.jpg",
+        "storage-ui-catalogue-mobile.jpg",
+        "storage-ui-pagination-error.jpg",
+        "storage-ui-catalogue-desktop.jpg"
+      ],
+      "inspection_reused": [],
+      "all_fresh": true
+    },
+    "invocation-urls-ui": {
+      "captures": {
+        "invocation-urls-ui-draft-desktop.jpg": "b1008b254242ae4b67254d5b2befb7e40c2207d666558b48fe93bd9b2a63d803",
+        "invocation-urls-ui-published-desktop.jpg": "27b420e7b65a83eb0b952837143c3d863c5500a521ce24e242f9ef17fd159abb",
+        "invocation-urls-ui-copy-desktop.jpg": "448cd48bc8f56c719a62a16a50af11114853d572ff5fa74425bdda7f0879548f",
+        "invocation-urls-ui-clipboard-denied.jpg": "0ae4f37263b4588296e4ebf539d30512b770ee24d30945f83d8481795ca30ec7",
+        "invocation-urls-ui-network-error.jpg": "58ddb066fd7cf44f82068ba02bab8b05c5f8c1137676c8912c1f591f8b8e64e7",
+        "invocation-urls-ui-published-mobile.jpg": "5ecf0920161ef22fb9b89f3324435e97a55be74390fc3aab0b6d1621ad9ef651",
+        "invocation-urls-ui-manual-mobile.jpg": "b18869a29bff36adfb52bb17a80f9611406f7ca43b9870be7b356da41fd9df88"
+      },
+      "report_sha256": "ce2f48a2b75830f303faf08a2b8bd1069fc0057baf7e4d22217f5178745d62b9",
+      "reference": {
+        "path": "docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json",
+        "sha256": "0344fd9c86b7d0ceb715c4c8bb533b76e044e83205d4b3f7744ba52da0a1d3dc"
+      },
+      "personally_observed": [
+        "invocation-urls-ui-draft-desktop.jpg",
+        "invocation-urls-ui-published-desktop.jpg",
+        "invocation-urls-ui-copy-desktop.jpg",
+        "invocation-urls-ui-clipboard-denied.jpg",
+        "invocation-urls-ui-network-error.jpg",
+        "invocation-urls-ui-published-mobile.jpg"
+      ],
+      "inspection_reused": [
+        "invocation-urls-ui-manual-mobile.jpg"
+      ],
+      "all_fresh": true
+    }
+  },
+  "capture_count": 79,
+  "personally_inspected_capture_count": 61,
+  "inspection_reused_capture_count": 18,
+  "visual_notes": [
+    "Les7captures de gestion montrent le catalogue chargé et les états réels, dont les six facettes.",
+    "Les12captures d’exécution ne montrent pas la seconde page finalement chargée ; les assertions du parcours la recoupent.",
+    "Les22captures de publication montrent notamment les données conservées mais marquées non actualisées après perte réseau/refus.",
+    "Les14captures de stockage incluent un cache réellement en attente et les pages1/2 du catalogue ;622archives à cet instant ne sont pas les seules fixtures.",
+    "Les6nouvelles captures d’adresses sont inspectées ; son viewport manuel390x844 et les11captures du guide sont strictement identiques au checkpoint88.",
+    "Les6PNG de connexion régénérés sont strictement identiques à la référence.",
+    "Les images ne constituent pas seules la preuve des effets physiques, pertes de réponse, autorisations ou absence de rejeu."
+  ],
+  "manual": {
+    "sha256": "cf7bcdb9d6ef887203b7b84d42e46ec4ba9507b78acf488aea266d13909c7207",
+    "chapters": 14,
+    "paragraphs": 43
+  },
+  "physical": {
+    "completed": true,
+    "campaign_count": 10,
+    "function_count": 32,
+    "reports": {
+      "storage-console-api": {
+        "path": ".local/e2e/storage-console-api.json",
+        "sha256": "16ccf862156f5b6685991825bb8aacffee4b669d6fe904d0f39e751b56e6ac93"
+      },
+      "storage-console-ui": {
+        "path": ".local/e2e/storage-console-ui.json",
+        "sha256": "eb3aace0539bcb3e46867b5f534646377682a0d95f51e754824b45bd183e9b9c"
+      },
+      "storage-command-recovery": {
+        "path": ".local/e2e/storage-command-recovery.json",
+        "sha256": "4eb71e55e6ee4501646a44cbc2a2790e13f831cc3617450e56a110b03a7fef0e"
+      },
+      "storage-validation-recovery": {
+        "path": ".local/e2e/storage-validation-recovery.json",
+        "sha256": "ccfffa03a8cbd7cf44f802be33d4f3afbe5c82d1aba356516ee299cd1aaaceac"
+      },
+      "storage-decision-recovery": {
+        "path": ".local/e2e/storage-decision-recovery.json",
+        "sha256": "dbd3b5025ca6e9822a99f9b1711dc5312467abf609c95dbb12bc5007b0c840b9"
+      },
+      "invocation-urls": {
+        "path": ".local/e2e/invocation-urls.json",
+        "sha256": "089ed7ac03ea1d4d7a850c6225304e5efb5a4d33825089dbdf4c8f7a4d29d306"
+      },
+      "invocation-urls-ui": {
+        "path": ".local/e2e/invocation-urls-ui.json",
+        "sha256": "ce2f48a2b75830f303faf08a2b8bd1069fc0057baf7e4d22217f5178745d62b9"
+      },
+      "service-configuration": {
+        "path": ".local/e2e/service-configuration.json",
+        "sha256": "ccd4266d9b6ef743286bde69c7241967974cfe2ecb8fcf0bbee1677deabd1489"
+      },
+      "service-transport": {
+        "path": ".local/e2e/service-transport.json",
+        "sha256": "5c6f94f8833a1b4db3cbd747059beab5a2c530adbc608e352bc0bd915ec35943"
+      },
+      "storage-legacy-partial": {
+        "path": ".local/e2e/storage-legacy-partial.json",
+        "sha256": "277d79d511c71616a97c55bdfe5ed8e977c29e3c9532f333d38611206c76aa6a"
+      },
+      "storage-legacy-recovery": {
+        "path": ".local/e2e/storage-legacy-recovery.json",
+        "sha256": "3c763de8823924e846b9a9ca7f37835978d1fe63a0b815e29e0d0d936968381b"
+      }
+    },
+    "physical": {
+      "completed": true,
+      "target": "infra-serverless DEV",
+      "campaigns": {
+        "496c0322-b741-4cf5-a57c-98d0ca490b18": [
+          "ee57cbe8-e242-4f5d-a0c6-53a079619ba1",
+          "f6b3d9e7-24c4-432d-8a5a-edcd52774a4f",
+          "89df1229-61ab-43e2-9df9-7fee483f7512"
+        ],
+        "1e80854f-5af4-4948-9d77-b700c17e097a": [
+          "f33fb920-877e-4020-ac0c-d36da71c7cdc"
+        ],
+        "eb6781f3-d923-4712-92fd-6ae6089e5ba2": [
+          "f8280be8-e591-48cc-8060-12b962610055",
+          "c13c36e4-981e-40a0-b8fe-7a31b6141d1e",
+          "70ecdaf1-bd28-477c-a7e9-577cd410c1a5",
+          "3fb64d97-21e0-4464-ab5e-04e916f9f439",
+          "a90f3afb-e931-432d-adff-c4300ca3cdba",
+          "a8545959-4e8b-4cfa-a996-5d83bcdcb246",
+          "1374170b-5270-4918-96a1-ac2b1bfc3ca3",
+          "23f19de4-7561-4ff9-b34c-72a2a7c005b8",
+          "508dd945-4abc-41f2-9ca2-f9d09d6e6d7c",
+          "a909b2af-651f-4a84-bdf3-2e80ed10d74f",
+          "84a6b965-346f-43ac-9da4-3cda0a731e59",
+          "08f214ca-f1df-4cbf-8a76-a8a48f45f178"
+        ],
+        "4b75d717-cec4-48d8-a9be-1469b2833595": [
+          "5d454f0c-5ad1-4804-8232-71164584abe4",
+          "d9591628-4cca-4f8f-b29a-de45688caaa3",
+          "49c417f4-63ad-4e76-908e-a3566cb3c020"
+        ],
+        "5dc68fad-1fbb-4762-be3c-002ee425701f": [
+          "18a040a3-1d3e-43d3-a583-ac879f66be8d",
+          "0969ba23-51c0-466d-ba0a-097f8f1b7861"
+        ],
+        "4ed21a3d-8583-4e6d-bd6b-2eedd6420bad": [
+          "36e32dad-2397-4fc8-adcf-b943ba856c87",
+          "b2073ca0-2ae5-4b99-a7a3-10cce4197ad7",
+          "ed9c1a78-2475-41d9-9b6a-5a20bf0efb72"
+        ],
+        "0b87eda0-0f0f-48ea-be83-426433ea84f5": [
+          "07f538e3-288d-4309-a4a8-c085cf077c56",
+          "4fb299ed-b842-44ab-a75e-2b13715f59e6",
+          "ad796b63-9484-4fce-afba-5158d9c419d9"
+        ],
+        "0d107ecd-fec9-4985-82e8-282e2367ae58": [
+          "4935822b-3ac6-4781-bc5e-afd2548a2242"
+        ],
+        "812161c9-39d3-4adf-9465-e257e5f04541": [
+          "96e8c337-6fa9-4a06-8c97-6578ac83230e",
+          "46033c1b-0921-4607-9890-cdad3bb54b76"
+        ],
+        "5fda6e89-892f-4cac-88c6-250a305c1e7c": [
+          "969c2518-f422-4338-bf7f-d6198e405a6b",
+          "e5c0e01c-5287-4a4e-b8dc-66124191b10f"
+        ]
+      },
+      "functions": {
+        "ee57cbe8-e242-4f5d-a0c6-53a079619ba1": {
+          "control": {
+            "id": "ee57cbe8-e242-4f5d-a0c6-53a079619ba1",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "100acf12-a982-4167-9d95-d21bbd68b701",
+          "result_version": 1794157771.8656404,
+          "agent_receipt": {
+            "operation_id": "100acf12-a982-4167-9d95-d21bbd68b701",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 6,
+            "version": 7
+          }
+        },
+        "f6b3d9e7-24c4-432d-8a5a-edcd52774a4f": {
+          "control": {
+            "id": "f6b3d9e7-24c4-432d-8a5a-edcd52774a4f",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "e7de9442-b554-4492-8d13-863c67a951a0",
+          "result_version": 1794157785.8082368,
+          "agent_receipt": {
+            "operation_id": "e7de9442-b554-4492-8d13-863c67a951a0",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "89df1229-61ab-43e2-9df9-7fee483f7512": {
+          "control": {
+            "id": "89df1229-61ab-43e2-9df9-7fee483f7512",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "ef8b001e-de5a-4ebe-bcb5-ed7230c1ac73",
+          "result_version": 1794157788.0977979,
+          "agent_receipt": {
+            "operation_id": "ef8b001e-de5a-4ebe-bcb5-ed7230c1ac73",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 3,
+            "version": 4
+          }
+        },
+        "f33fb920-877e-4020-ac0c-d36da71c7cdc": {
+          "control": {
+            "id": "f33fb920-877e-4020-ac0c-d36da71c7cdc",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "9dda4135-260a-472b-afa3-40678a1fb3ba",
+          "result_version": 1794157792.749466,
+          "agent_receipt": {
+            "operation_id": "9dda4135-260a-472b-afa3-40678a1fb3ba",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "f8280be8-e591-48cc-8060-12b962610055": {
+          "control": {
+            "id": "f8280be8-e591-48cc-8060-12b962610055",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "086bd166-7900-4702-a1c2-b8ef698a174f",
+          "result_version": 1794157835.98414,
+          "agent_receipt": {
+            "operation_id": "086bd166-7900-4702-a1c2-b8ef698a174f",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 5,
+            "version": 6
+          }
+        },
+        "c13c36e4-981e-40a0-b8fe-7a31b6141d1e": {
+          "control": {
+            "id": "c13c36e4-981e-40a0-b8fe-7a31b6141d1e",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "bc388da8-b622-43f3-be86-c14238e65979",
+          "result_version": 1794157838.4306014,
+          "agent_receipt": {
+            "operation_id": "bc388da8-b622-43f3-be86-c14238e65979",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "70ecdaf1-bd28-477c-a7e9-577cd410c1a5": {
+          "control": {
+            "id": "70ecdaf1-bd28-477c-a7e9-577cd410c1a5",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "962e3b8a-7110-4aa3-8144-86c434f9cb7e",
+          "result_version": 1794157842.061888,
+          "agent_receipt": {
+            "operation_id": "962e3b8a-7110-4aa3-8144-86c434f9cb7e",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "3fb64d97-21e0-4464-ab5e-04e916f9f439": {
+          "control": {
+            "id": "3fb64d97-21e0-4464-ab5e-04e916f9f439",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "b3956e2d-f82b-4dd6-86b8-b96541835b9c",
+          "result_version": 1794157847.0821402,
+          "agent_receipt": {
+            "operation_id": "b3956e2d-f82b-4dd6-86b8-b96541835b9c",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "a90f3afb-e931-432d-adff-c4300ca3cdba": {
+          "control": {
+            "id": "a90f3afb-e931-432d-adff-c4300ca3cdba",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "11d35901-9e31-4b19-ab31-b8bb60d263c9",
+          "result_version": 1794157852.1566193,
+          "agent_receipt": {
+            "operation_id": "11d35901-9e31-4b19-ab31-b8bb60d263c9",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "a8545959-4e8b-4cfa-a996-5d83bcdcb246": {
+          "control": {
+            "id": "a8545959-4e8b-4cfa-a996-5d83bcdcb246",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "9b32ebad-a772-42ca-b57f-c6f30e91f01a",
+          "result_version": 1794157857.2120643,
+          "agent_receipt": {
+            "operation_id": "9b32ebad-a772-42ca-b57f-c6f30e91f01a",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "1374170b-5270-4918-96a1-ac2b1bfc3ca3": {
+          "control": {
+            "id": "1374170b-5270-4918-96a1-ac2b1bfc3ca3",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "5d81467a-08b1-43e2-a91f-6953bdc92593",
+          "result_version": 1794157862.316489,
+          "agent_receipt": {
+            "operation_id": "5d81467a-08b1-43e2-a91f-6953bdc92593",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "23f19de4-7561-4ff9-b34c-72a2a7c005b8": {
+          "control": {
+            "id": "23f19de4-7561-4ff9-b34c-72a2a7c005b8",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "91150516-6f42-4c75-87fa-9233be69e5da",
+          "result_version": 1794157867.303412,
+          "agent_receipt": {
+            "operation_id": "91150516-6f42-4c75-87fa-9233be69e5da",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "508dd945-4abc-41f2-9ca2-f9d09d6e6d7c": {
+          "control": {
+            "id": "508dd945-4abc-41f2-9ca2-f9d09d6e6d7c",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "9e6b9650-c7a1-4f91-90e0-91fd486c7f49",
+          "result_version": 1794157872.4798703,
+          "agent_receipt": {
+            "operation_id": "9e6b9650-c7a1-4f91-90e0-91fd486c7f49",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "a909b2af-651f-4a84-bdf3-2e80ed10d74f": {
+          "control": {
+            "id": "a909b2af-651f-4a84-bdf3-2e80ed10d74f",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "cd483160-7f6e-4d0b-93c4-7939b04b97f3",
+          "result_version": 1794157877.4713728,
+          "agent_receipt": {
+            "operation_id": "cd483160-7f6e-4d0b-93c4-7939b04b97f3",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "84a6b965-346f-43ac-9da4-3cda0a731e59": {
+          "control": {
+            "id": "84a6b965-346f-43ac-9da4-3cda0a731e59",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "7f6694b3-bd2a-4316-9f9b-4de07f73b142",
+          "result_version": 1794157882.4322767,
+          "agent_receipt": {
+            "operation_id": "7f6694b3-bd2a-4316-9f9b-4de07f73b142",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "08f214ca-f1df-4cbf-8a76-a8a48f45f178": {
+          "control": {
+            "id": "08f214ca-f1df-4cbf-8a76-a8a48f45f178",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "409b5eaa-dff3-4229-a4c9-c1931fe61ffb",
+          "result_version": 1794157887.5584779,
+          "agent_receipt": {
+            "operation_id": "409b5eaa-dff3-4229-a4c9-c1931fe61ffb",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "5d454f0c-5ad1-4804-8232-71164584abe4": {
+          "control": {
+            "id": "5d454f0c-5ad1-4804-8232-71164584abe4",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "6f282b0d-8e40-42a4-a336-873ea88e3f20",
+          "result_version": 1794158000.048462,
+          "agent_receipt": {
+            "operation_id": "6f282b0d-8e40-42a4-a336-873ea88e3f20",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 4,
+            "version": 5
+          }
+        },
+        "d9591628-4cca-4f8f-b29a-de45688caaa3": {
+          "control": {
+            "id": "d9591628-4cca-4f8f-b29a-de45688caaa3",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "774ff4ef-4bc7-484e-85b3-75428da8695d",
+          "result_version": 1794158001.89702,
+          "agent_receipt": {
+            "operation_id": "774ff4ef-4bc7-484e-85b3-75428da8695d",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "49c417f4-63ad-4e76-908e-a3566cb3c020": {
+          "control": {
+            "id": "49c417f4-63ad-4e76-908e-a3566cb3c020",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "b623dea7-46e4-43fa-bedf-a62134892680",
+          "result_version": 1794157987.0665364,
+          "agent_receipt": {
+            "operation_id": "b623dea7-46e4-43fa-bedf-a62134892680",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "18a040a3-1d3e-43d3-a583-ac879f66be8d": {
+          "control": {
+            "id": "18a040a3-1d3e-43d3-a583-ac879f66be8d",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "2561406a-2969-434d-975a-5f338ada6fdd",
+          "result_version": 1794158043.8820856,
+          "agent_receipt": {
+            "operation_id": "2561406a-2969-434d-975a-5f338ada6fdd",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "0969ba23-51c0-466d-ba0a-097f8f1b7861": {
+          "control": {
+            "id": "0969ba23-51c0-466d-ba0a-097f8f1b7861",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "19348f63-26e1-412e-b163-3516877a8492",
+          "result_version": 1794158090.0671096,
+          "agent_receipt": {
+            "operation_id": "19348f63-26e1-412e-b163-3516877a8492",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "36e32dad-2397-4fc8-adcf-b943ba856c87": {
+          "control": {
+            "id": "36e32dad-2397-4fc8-adcf-b943ba856c87",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "d17485ca-6797-4a36-a74a-d39d44e5cbec",
+          "result_version": 1794158234.1680768,
+          "agent_receipt": {
+            "operation_id": "d17485ca-6797-4a36-a74a-d39d44e5cbec",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 5,
+            "version": 6
+          }
+        },
+        "b2073ca0-2ae5-4b99-a7a3-10cce4197ad7": {
+          "control": {
+            "id": "b2073ca0-2ae5-4b99-a7a3-10cce4197ad7",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "52e46a0e-30e1-45be-8a0c-43bc3a871e56",
+          "result_version": 1794158236.7233438,
+          "agent_receipt": {
+            "operation_id": "52e46a0e-30e1-45be-8a0c-43bc3a871e56",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "ed9c1a78-2475-41d9-9b6a-5a20bf0efb72": {
+          "control": {
+            "id": "ed9c1a78-2475-41d9-9b6a-5a20bf0efb72",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "13e5000b-2eb1-4f6a-b5ce-03fc45a7bc4f",
+          "result_version": 1794158241.5964453,
+          "agent_receipt": {
+            "operation_id": "13e5000b-2eb1-4f6a-b5ce-03fc45a7bc4f",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "07f538e3-288d-4309-a4a8-c085cf077c56": {
+          "control": {
+            "id": "07f538e3-288d-4309-a4a8-c085cf077c56",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "fe521e57-fcbe-4fd1-b247-9f4bed89789b",
+          "result_version": 1794157240.542968,
+          "agent_receipt": {
+            "operation_id": "fe521e57-fcbe-4fd1-b247-9f4bed89789b",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "4fb299ed-b842-44ab-a75e-2b13715f59e6": {
+          "control": {
+            "id": "4fb299ed-b842-44ab-a75e-2b13715f59e6",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "c3db113b-b085-4f4c-945a-72ccb7731124",
+          "result_version": 1794157235.7805605,
+          "agent_receipt": {
+            "operation_id": "c3db113b-b085-4f4c-945a-72ccb7731124",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "ad796b63-9484-4fce-afba-5158d9c419d9": {
+          "control": {
+            "id": "ad796b63-9484-4fce-afba-5158d9c419d9",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "9ffa8fe8-5a73-4dae-af80-393cbb9f4605",
+          "result_version": 1794157235.1504173,
+          "agent_receipt": {
+            "operation_id": "9ffa8fe8-5a73-4dae-af80-393cbb9f4605",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "4935822b-3ac6-4781-bc5e-afd2548a2242": {
+          "control": {
+            "id": "4935822b-3ac6-4781-bc5e-afd2548a2242",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "40ba73a5-668e-4105-a33f-c092408f877a",
+          "result_version": 1794157255.467497,
+          "agent_receipt": {
+            "operation_id": "40ba73a5-668e-4105-a33f-c092408f877a",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "96e8c337-6fa9-4a06-8c97-6578ac83230e": {
+          "control": {
+            "id": "96e8c337-6fa9-4a06-8c97-6578ac83230e",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "937414af-8ffd-4265-bd1f-51327e754bff",
+          "result_version": 1794157208.45216,
+          "agent_receipt": {
+            "operation_id": "937414af-8ffd-4265-bd1f-51327e754bff",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "46033c1b-0921-4607-9890-cdad3bb54b76": {
+          "control": {
+            "id": "46033c1b-0921-4607-9890-cdad3bb54b76",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "e419665e-0828-4c96-903e-b02d2958baa8",
+          "result_version": 1794157210.593773,
+          "agent_receipt": {
+            "operation_id": "e419665e-0828-4c96-903e-b02d2958baa8",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "969c2518-f422-4338-bf7f-d6198e405a6b": {
+          "control": {
+            "id": "969c2518-f422-4338-bf7f-d6198e405a6b",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "c0d00e3e-450e-4e7e-91bc-6b41159f89e3",
+          "result_version": 1794157129.861738,
+          "agent_receipt": {
+            "operation_id": "c0d00e3e-450e-4e7e-91bc-6b41159f89e3",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "e5c0e01c-5287-4a4e-b8dc-66124191b10f": {
+          "control": {
+            "id": "e5c0e01c-5287-4a4e-b8dc-66124191b10f",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "74fa9131-1e1f-49af-b9d9-5dfdeb4dbc3b",
+          "result_version": 1794157151.7375119,
+          "agent_receipt": {
+            "operation_id": "74fa9131-1e1f-49af-b9d9-5dfdeb4dbc3b",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        }
+      },
+      "global_control_reservations": {
+        "instances": 0,
+        "cpu_nanos": 0,
+        "memory_mib": 0
+      },
+      "global_storage_allocated_bytes": 0,
+      "physical": {
+        "artifacts_absent": true,
+        "backings_absent": true,
+        "mount_directories_absent": true,
+        "mounts_absent": true,
+        "known_execution_channels_absent": true,
+        "global_trash_empty": true,
+        "global_validation_channels_empty": true,
+        "global_execution_channels_empty": true,
+        "containers_absent_ee57cbe8-e242-4f5d-a0c6-53a079619ba1": true,
+        "networks_absent_ee57cbe8-e242-4f5d-a0c6-53a079619ba1": true,
+        "containers_absent_f6b3d9e7-24c4-432d-8a5a-edcd52774a4f": true,
+        "networks_absent_f6b3d9e7-24c4-432d-8a5a-edcd52774a4f": true,
+        "containers_absent_89df1229-61ab-43e2-9df9-7fee483f7512": true,
+        "networks_absent_89df1229-61ab-43e2-9df9-7fee483f7512": true,
+        "containers_absent_f33fb920-877e-4020-ac0c-d36da71c7cdc": true,
+        "networks_absent_f33fb920-877e-4020-ac0c-d36da71c7cdc": true,
+        "containers_absent_f8280be8-e591-48cc-8060-12b962610055": true,
+        "networks_absent_f8280be8-e591-48cc-8060-12b962610055": true,
+        "containers_absent_c13c36e4-981e-40a0-b8fe-7a31b6141d1e": true,
+        "networks_absent_c13c36e4-981e-40a0-b8fe-7a31b6141d1e": true,
+        "containers_absent_70ecdaf1-bd28-477c-a7e9-577cd410c1a5": true,
+        "networks_absent_70ecdaf1-bd28-477c-a7e9-577cd410c1a5": true,
+        "containers_absent_3fb64d97-21e0-4464-ab5e-04e916f9f439": true,
+        "networks_absent_3fb64d97-21e0-4464-ab5e-04e916f9f439": true,
+        "containers_absent_a90f3afb-e931-432d-adff-c4300ca3cdba": true,
+        "networks_absent_a90f3afb-e931-432d-adff-c4300ca3cdba": true,
+        "containers_absent_a8545959-4e8b-4cfa-a996-5d83bcdcb246": true,
+        "networks_absent_a8545959-4e8b-4cfa-a996-5d83bcdcb246": true,
+        "containers_absent_1374170b-5270-4918-96a1-ac2b1bfc3ca3": true,
+        "networks_absent_1374170b-5270-4918-96a1-ac2b1bfc3ca3": true,
+        "containers_absent_23f19de4-7561-4ff9-b34c-72a2a7c005b8": true,
+        "networks_absent_23f19de4-7561-4ff9-b34c-72a2a7c005b8": true,
+        "containers_absent_508dd945-4abc-41f2-9ca2-f9d09d6e6d7c": true,
+        "networks_absent_508dd945-4abc-41f2-9ca2-f9d09d6e6d7c": true,
+        "containers_absent_a909b2af-651f-4a84-bdf3-2e80ed10d74f": true,
+        "networks_absent_a909b2af-651f-4a84-bdf3-2e80ed10d74f": true,
+        "containers_absent_84a6b965-346f-43ac-9da4-3cda0a731e59": true,
+        "networks_absent_84a6b965-346f-43ac-9da4-3cda0a731e59": true,
+        "containers_absent_08f214ca-f1df-4cbf-8a76-a8a48f45f178": true,
+        "networks_absent_08f214ca-f1df-4cbf-8a76-a8a48f45f178": true,
+        "containers_absent_5d454f0c-5ad1-4804-8232-71164584abe4": true,
+        "networks_absent_5d454f0c-5ad1-4804-8232-71164584abe4": true,
+        "containers_absent_d9591628-4cca-4f8f-b29a-de45688caaa3": true,
+        "networks_absent_d9591628-4cca-4f8f-b29a-de45688caaa3": true,
+        "containers_absent_49c417f4-63ad-4e76-908e-a3566cb3c020": true,
+        "networks_absent_49c417f4-63ad-4e76-908e-a3566cb3c020": true,
+        "containers_absent_18a040a3-1d3e-43d3-a583-ac879f66be8d": true,
+        "networks_absent_18a040a3-1d3e-43d3-a583-ac879f66be8d": true,
+        "containers_absent_0969ba23-51c0-466d-ba0a-097f8f1b7861": true,
+        "networks_absent_0969ba23-51c0-466d-ba0a-097f8f1b7861": true,
+        "containers_absent_36e32dad-2397-4fc8-adcf-b943ba856c87": true,
+        "networks_absent_36e32dad-2397-4fc8-adcf-b943ba856c87": true,
+        "containers_absent_b2073ca0-2ae5-4b99-a7a3-10cce4197ad7": true,
+        "networks_absent_b2073ca0-2ae5-4b99-a7a3-10cce4197ad7": true,
+        "containers_absent_ed9c1a78-2475-41d9-9b6a-5a20bf0efb72": true,
+        "networks_absent_ed9c1a78-2475-41d9-9b6a-5a20bf0efb72": true,
+        "containers_absent_07f538e3-288d-4309-a4a8-c085cf077c56": true,
+        "networks_absent_07f538e3-288d-4309-a4a8-c085cf077c56": true,
+        "containers_absent_4fb299ed-b842-44ab-a75e-2b13715f59e6": true,
+        "networks_absent_4fb299ed-b842-44ab-a75e-2b13715f59e6": true,
+        "containers_absent_ad796b63-9484-4fce-afba-5158d9c419d9": true,
+        "networks_absent_ad796b63-9484-4fce-afba-5158d9c419d9": true,
+        "containers_absent_4935822b-3ac6-4781-bc5e-afd2548a2242": true,
+        "networks_absent_4935822b-3ac6-4781-bc5e-afd2548a2242": true,
+        "containers_absent_96e8c337-6fa9-4a06-8c97-6578ac83230e": true,
+        "networks_absent_96e8c337-6fa9-4a06-8c97-6578ac83230e": true,
+        "containers_absent_46033c1b-0921-4607-9890-cdad3bb54b76": true,
+        "networks_absent_46033c1b-0921-4607-9890-cdad3bb54b76": true,
+        "containers_absent_969c2518-f422-4338-bf7f-d6198e405a6b": true,
+        "networks_absent_969c2518-f422-4338-bf7f-d6198e405a6b": true,
+        "containers_absent_e5c0e01c-5287-4a4e-b8dc-66124191b10f": true,
+        "networks_absent_e5c0e01c-5287-4a4e-b8dc-66124191b10f": true,
+        "global_validators_absent": true
+      },
+      "artifact_ids": [
+        "03b1a705-73cf-4ead-aeaf-85ba80a775b4",
+        "08c66dc2-91e8-4ba2-abdb-31760f88aa00",
+        "0ef04a2f-e6a6-4ebf-8f25-a4661d5b86d1",
+        "18e87c6b-ed6a-4e84-8545-8f05d1af8704",
+        "24179911-7330-47e6-b30e-502d219a2b92",
+        "3a758132-e6c2-495c-bc02-3105043c1dab",
+        "3ee95f43-9894-4d5a-bd3c-27e3a997f6b7",
+        "440e8de5-65fa-4e8f-b515-f4e02cc77a99",
+        "507e29e2-1f6e-49b8-b9a0-f1cb475b698e",
+        "5573a8e9-15b8-4ca7-a68e-4639c8913d8d",
+        "5ae83cf6-0561-44fc-b8e9-4527ffbe07de",
+        "7b05c900-526b-4fc1-8f3e-c4304439142f",
+        "7e341673-1018-44da-aae5-9b8e81857a57",
+        "8c0fe77f-647d-4d24-a6c0-fce2a04c9f78",
+        "92cabd66-6327-48c8-b404-6f44a1c72f8b",
+        "95cd5b44-1a3a-4293-a5b1-10c4726b3e0b",
+        "9644c9f1-49cd-456d-a21b-91f5e193a19e",
+        "a060096c-352e-4e10-9bcd-38d00a8cc116",
+        "b6ecb2dc-b179-43ad-9f96-330a47e7678e",
+        "c8114ecd-d1c1-4539-b3a0-d6ccd71328a4",
+        "ce56bd1e-fc39-48be-bfa8-18fc0cb33c55",
+        "d6ed1348-99ed-4bf3-acde-06e816369fac",
+        "d8a1902d-85dd-408d-ae10-cebea96042e1",
+        "dd14ecd3-3ac4-46d3-b16f-ed796205c2d8",
+        "de3692bc-f461-4695-b452-090f05ecd379",
+        "e029303d-1e65-456a-bfe0-e228faee020a",
+        "e23c1eb1-af68-4ea8-b331-97ff508cfe28",
+        "e70c3a91-59cb-4a0c-85c6-fd4b0dfd345d",
+        "ec104803-397a-442f-9a50-233162418b4d",
+        "eeabb8e4-a4b1-4ff5-8789-f1f8b5ca40e3",
+        "ef673d31-a8e3-46c8-84d7-a62acfb95519",
+        "fc9b3ed3-e0c3-4ad3-a5d7-3435638f6c73"
+      ],
+      "instance_ids": [
+        "0373745b-cead-4621-b0de-54a592fb85be",
+        "03d85e71-ba8d-4e0f-8aa7-8e9e9e4372e2",
+        "086f9a14-2364-4665-9b66-3e0e99651b4f",
+        "0ae52878-8dbb-4b43-aad0-7136c4b5971d",
+        "0cd37d77-b022-412d-b597-54ffce77f88e",
+        "0ece6233-4448-4fd0-9a06-7180fce0af5e",
+        "11f21b29-1630-4ab8-aa4d-df3b8d0231ab",
+        "14cd35ff-0346-41c2-97cb-80ffb000c1c0",
+        "22599555-b02b-4ef8-96f1-ce79c5b44308",
+        "28b1679d-253a-4543-b6f0-1664e31e7b91",
+        "2ba3182e-acd8-4b00-a370-cad92f8651ce",
+        "331a9ed5-0b38-4b1f-a945-048112bb58f3",
+        "38e37af8-1594-49a3-9da5-a7ef656726b2",
+        "3d56e0ac-0b0e-4bbc-9937-31f07e50b036",
+        "41a6f352-fd61-4957-807a-c19ebb3404cc",
+        "42c60964-1ed8-4f46-9d3b-6f6e079f2c71",
+        "458d9e31-0d3f-46e1-af07-9d2f552b0420",
+        "4b0ec786-bd73-4019-accd-64a20d58c61f",
+        "4bb0e1ac-c23a-45ef-8a5c-68553f0eefc5",
+        "4cb8c357-7d08-4417-bca9-65ee10a1a73f",
+        "56494291-0333-4365-803a-ffe0bc56fba8",
+        "5a167e84-5d55-400f-8f11-005b81ddfe7f",
+        "60e69696-ac1a-4a0c-947f-822146545f8f",
+        "6313d2a7-3c35-4ae2-8a84-8c77414e854f",
+        "6dbc35aa-537e-4196-a76b-46ba8e397900",
+        "74f8956b-3374-4ed2-a912-14258e4ea91b",
+        "758cdc08-f39b-487a-b8fd-754067b88683",
+        "76508f7e-5aa1-4332-a478-800d7349f34f",
+        "7d5bbe02-a150-4516-92ba-7b5e7fe06eb4",
+        "7dba4e48-e887-4e93-becc-7a0904d2e0f7",
+        "7e8f0a54-1de4-4bde-89cc-45cd5b3a9030",
+        "88789426-7c13-41b9-8d09-08c93c1ae940",
+        "8c691422-6cdc-41b4-9be1-dccc2a7bd123",
+        "92717835-fb66-4b2a-aca2-0b8c6df54e52",
+        "98fd4c18-5610-477a-afbc-30c08242c391",
+        "9a795f74-88ab-4e79-a6be-4e91ad41ce47",
+        "a2e9bc63-8cc1-4bbf-822f-a6d4c2a01d3e",
+        "aa0e3c67-e17c-43d1-b5db-b6f0a01f9cf8",
+        "abfa9d25-6463-4b88-a905-00ae6d3f324e",
+        "afcb3448-b48f-4deb-be37-7fe9e07f77c9",
+        "b505e691-49e5-41b2-b27d-61bfeb85c85f",
+        "c0fc09b8-7ab1-4b06-87f7-7523cfa56abe",
+        "c1392304-0ce6-4c80-afe5-d2168be56cfa",
+        "c215644c-b0be-405f-a406-d0eab4e184f9",
+        "c6f33e23-6468-439a-9df2-cc4c36911adf",
+        "cbb2183d-ce26-4c01-a6bb-96d82b8f4d79",
+        "cfba1e2c-fce1-4565-933e-d77b670851da",
+        "d8cab1eb-efa9-4467-8ed7-b409f46a0baf",
+        "e3e6a73e-6545-482f-bd37-890efc2c6385",
+        "e4a91b32-e2dd-4764-b590-144e124c84e8",
+        "e554ff95-30b2-4d9b-a394-3edfce6c51fc",
+        "e55a3f23-fa88-4cf2-b704-bd6045e983b1",
+        "e5d944c3-0aa6-4281-9b2f-2a553f6a2dd7",
+        "e88e65b6-45fd-47c1-8e98-48627678cf41",
+        "eefa7d50-dc13-44da-885f-9f49ed5adf46",
+        "ef67fc32-26a6-440d-b170-75e642e30a0f",
+        "f4ac51a0-e226-4af9-af62-39c668f54a4d",
+        "f6281a5a-19e9-4bdf-a185-e1b98ea3616b",
+        "f6e98708-b421-4ebb-8c92-7ce7c52e4363"
+      ],
+      "secrets": [
+        {
+          "function_id": "ee57cbe8-e242-4f5d-a0c6-53a079619ba1",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "f6b3d9e7-24c4-432d-8a5a-edcd52774a4f",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "89df1229-61ab-43e2-9df9-7fee483f7512",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "f33fb920-877e-4020-ac0c-d36da71c7cdc",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "f8280be8-e591-48cc-8060-12b962610055",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "c13c36e4-981e-40a0-b8fe-7a31b6141d1e",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "70ecdaf1-bd28-477c-a7e9-577cd410c1a5",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "3fb64d97-21e0-4464-ab5e-04e916f9f439",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "a90f3afb-e931-432d-adff-c4300ca3cdba",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "a8545959-4e8b-4cfa-a996-5d83bcdcb246",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "1374170b-5270-4918-96a1-ac2b1bfc3ca3",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "23f19de4-7561-4ff9-b34c-72a2a7c005b8",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "508dd945-4abc-41f2-9ca2-f9d09d6e6d7c",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "a909b2af-651f-4a84-bdf3-2e80ed10d74f",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "84a6b965-346f-43ac-9da4-3cda0a731e59",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "08f214ca-f1df-4cbf-8a76-a8a48f45f178",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "5d454f0c-5ad1-4804-8232-71164584abe4",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "d9591628-4cca-4f8f-b29a-de45688caaa3",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "49c417f4-63ad-4e76-908e-a3566cb3c020",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "18a040a3-1d3e-43d3-a583-ac879f66be8d",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "0969ba23-51c0-466d-ba0a-097f8f1b7861",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "36e32dad-2397-4fc8-adcf-b943ba856c87",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "b2073ca0-2ae5-4b99-a7a3-10cce4197ad7",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "ed9c1a78-2475-41d9-9b6a-5a20bf0efb72",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "07f538e3-288d-4309-a4a8-c085cf077c56",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "4fb299ed-b842-44ab-a75e-2b13715f59e6",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "ad796b63-9484-4fce-afba-5158d9c419d9",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "4935822b-3ac6-4781-bc5e-afd2548a2242",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "96e8c337-6fa9-4a06-8c97-6578ac83230e",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "46033c1b-0921-4607-9890-cdad3bb54b76",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "969c2518-f422-4338-bf7f-d6198e405a6b",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "e5c0e01c-5287-4a4e-b8dc-66124191b10f",
+          "secrets_empty": true
+        }
+      ],
+      "control_image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a"
+    },
+    "installation": {
+      "global_active_functions": 0,
+      "global_owned_containers_absent": true,
+      "agent_active": true,
+      "control": {
+        "id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "started_at": "2026-11-08T17:19:12.258763213Z",
+        "health": "healthy"
+      },
+      "reference": {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "started_at": "2026-11-06T15:49:39.578107028Z",
+        "health": "healthy"
+      },
+      "embedded_sources": {
+        "app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+        "app/execution.py": "8c52837c6b893411ea10af481f573aa54db98990624079d5bb7b8c2a6f6e485f",
+        "app/storage_management.py": "37ce7e205ec06860eb096c37d85d7015c5002558101faf6b90eccfda81181ea7",
+        "app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+        "app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+        "app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+        "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+        "app/invocation_urls.py": "f05e6ee7f399b4d54cf2c15b186c13d7eb75266172bcc33127e7fca6dce5c1df",
+        "app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+        "app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+        "app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+        "app/main.py": "0763accfcd9dfca32ce8d7f09ae67d7adb7264d567fa0f8822479d432d863956",
+        "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+        "app/models.py": "fbfa169dc95872a8b19378e92b19f3f1074ff20f2a825a5671b99b784aac4b3e",
+        "app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+        "app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+        "app/deployments.py": "1df532d18cfa3838fb3b04840ccf1dda13eb3e9ae2963b4e1b781551d861195d",
+        "app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+        "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+        "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+        "migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+        "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+        "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+        "migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+        "migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+        "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec"
+      }
+    },
+    "historical_restoration": {
+      "storage-legacy-partial": {
+        "report_sha256": "277d79d511c71616a97c55bdfe5ed8e977c29e3c9532f333d38611206c76aa6a",
+        "restorations": [
+          {
+            "restored": true,
+            "restoration": {
+              "agent_healthy": true,
+              "artifacts_identical": true,
+              "configuration_unchanged": true,
+              "control_healthy": true,
+              "databases_identical": true,
+              "directories_identical": true,
+              "event": "restored",
+              "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+              "independent": true,
+              "original_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+              "reference_unchanged": true,
+              "temporary_directories_removed": true
+            },
+            "driver_alive": false,
+            "unit": "serverless-restore-archive-migration-b24d0a32-0bf8-4cef-89f6-7b0267aace83"
+          }
+        ]
+      },
+      "storage-legacy-recovery": {
+        "report_sha256": "3c763de8823924e846b9a9ca7f37835978d1fe63a0b815e29e0d0d936968381b",
+        "restorations": [
+          {
+            "scenario": "original-installation-restored",
+            "driver_exit_code": 0,
+            "restored": true,
+            "restoration": {
+              "agent_healthy": true,
+              "artifacts_identical": true,
+              "configuration_unchanged": true,
+              "control_healthy": true,
+              "databases_identical": true,
+              "directories_identical": true,
+              "event": "restored",
+              "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+              "independent": false,
+              "original_id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+              "reference_unchanged": true,
+              "temporary_directories_removed": true
+            },
+            "driver_alive": false,
+            "unit": "serverless-restore-archive-migration-285de19d-3b6e-4834-a1cb-d22635cf1f6e"
+          }
+        ]
+      }
+    },
+    "excluded_historical_function_ids": [
+      "1c7e684a-5447-455e-a5f6-3839781e421d",
+      "c450ca50-bbe1-46f9-a749-49a05e529550"
+    ],
+    "adapter_build": {
+      "completed": true,
+      "remote_state": "completed",
+      "current_image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+      "current_tag_unchanged": true,
+      "images": {
+        "p2enjoy-adapter:dev": {
+          "image": "sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa",
+          "embedded_sources": {
+            "manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+            "__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+            "deploy.py": "462ed21dd2433317052e03be9c25ae18a6d2d8f1aee53cd4eb56211272302e27",
+            "archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+            "__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47"
+          }
+        },
+        "p2enjoy-adapter-e2e:dev": {
+          "image": "sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e",
+          "embedded_sources": {
+            "manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+            "__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+            "deploy.py": "462ed21dd2433317052e03be9c25ae18a6d2d8f1aee53cd4eb56211272302e27",
+            "archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+            "__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47"
+          }
+        }
+      }
+    }
+  },
+  "final_installation": {
+    "official_environment_matches": true,
+    "network_mode": "host",
+    "spark_mount_readonly": true,
+    "official_sha256": {
+      "/etc/spark/env": "ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d",
+      "/run/spark/secrets": "b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5"
+    },
+    "services": [
+      {
+        "name": "/serverless-api",
+        "id": "45cb9bce459a7721efc3f7b3d3b5d9b00cafde568051ef795fa3da1e057e2580",
+        "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+        "health": "healthy",
+        "started_at": "2026-11-08T17:19:12.258763213Z"
+      },
+      {
+        "name": "/serverless-runtime-reference",
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "health": "healthy",
+        "started_at": "2026-11-06T15:49:39.578107028Z"
+      }
+    ],
+    "agent_active": true,
+    "routes": {
+      "sha256": "40426864082b4559bccaf3ab6cb68460d40d7b439b285d13311188d9a6e30fd4",
+      "mode": "0o640",
+      "declared_rows": [
+        "serverless.lelabs.tech 18090 tls"
+      ]
+    },
+    "route_proposal_sha256": "28dd866ad53907ab8e467298468f354752b411d1b0219c296ece56385e82123f",
+    "notes": {
+      "README.md": {
+        "active_sha256": "68231a5bc5cd7b7a7521e435c67b6d1117fd56fbca3092d9483ea3cbd86d04b3",
+        "proposal_sha256": "a20e9dbf9cb58a3eb5235ad9258121ac411995dbdb613214b079b772e331fbac"
+      },
+      "CONTRIBUTORS.md": {
+        "active_sha256": "b6ee5681dca28cced5e57008b8b2002e11680ee0506be045b98458302f324f66",
+        "proposal_sha256": "60bf6e3b01a26ca96a2985070d2a1e953095c80474d0aff77370ce6b47c66d32"
+      },
+      "INSTALL.md": {
+        "active_sha256": "8f1506c07b936669f16990f31eb9469fda6724c40ff2c6a8e50f9ace26f52d65",
+        "proposal_sha256": "2f902fd95f6febc3b138e45dfda69b1de03de3071af42949618c043ed5400268"
+      }
+    },
+    "reference_unchanged_since_checkpoint88": true
+  },
+  "spark_notes": {
+    "completed": true,
+    "notes": {
+      "README.md": {
+        "path": "/etc/spark/notes/README.md.?",
+        "sha256": "670c7bb18c6b975df96f33aa8363da745bc63b7adbd9ef00f28944586958277b",
+        "active_sha256": "68231a5bc5cd7b7a7521e435c67b6d1117fd56fbca3092d9483ea3cbd86d04b3",
+        "previous_proposal_sha256": "a20e9dbf9cb58a3eb5235ad9258121ac411995dbdb613214b079b772e331fbac",
+        "proposed": true,
+        "adoption_claimed": false
+      },
+      "CONTRIBUTORS.md": {
+        "path": "/etc/spark/notes/CONTRIBUTORS.md.?",
+        "sha256": "9e5e3ccd78ea61be5f1e97e338aec6322ba6c0e461e3cab093552ea46942bfb3",
+        "active_sha256": "b6ee5681dca28cced5e57008b8b2002e11680ee0506be045b98458302f324f66",
+        "previous_proposal_sha256": "60bf6e3b01a26ca96a2985070d2a1e953095c80474d0aff77370ce6b47c66d32",
+        "proposed": true,
+        "adoption_claimed": false
+      },
+      "INSTALL.md": {
+        "path": "/etc/spark/notes/INSTALL.md.?",
+        "sha256": "464ff94b7abf2b6dd1d43aef2efe3592cad01183ebd8ecb5df5eabe4d6726a14",
+        "active_sha256": "8f1506c07b936669f16990f31eb9469fda6724c40ff2c6a8e50f9ace26f52d65",
+        "previous_proposal_sha256": "2f902fd95f6febc3b138e45dfda69b1de03de3071af42949618c043ed5400268",
+        "proposed": true,
+        "adoption_claimed": false
+      }
+    }
+  },
+  "route_proposal": {
+    "path": "/etc/spark/routes.?",
+    "sha256": "28dd866ad53907ab8e467298468f354752b411d1b0219c296ece56385e82123f",
+    "proposed_alias": "functions.lelabs.tech 18090 tls",
+    "adoption_claimed": false
+  },
+  "configuration": {
+    "new_variables": [],
+    "new_secrets": [],
+    "new_migrations": [],
+    "new_routes_applied": [],
+    "application_rebuild_for_this_regression": false,
+    "official_env_files_only": true,
+    "spark_directory_readonly": true
+  },
+  "documentation_sha256": {
+    "CHANGELOG.md": "82ed655fc0fe20a6c36a917ee756828501f9b69259b49b2c914b092bd17e6154",
+    "README.md": "48b0d9edf672e6000d8cc7e9aec3d40767211a6587dcfbde51138d4cc95a9535",
+    "adapter/README.md": "7cad4e73898c848b5998c4f367c5aefabd176eca3a31a18da2162f841e40b423",
+    "control/README.md": "4225f032efbd208adbe802df42654e19309fc3fe77f620656df7143cad4ab2d4",
+    "docs/BACKLOG.md": "b535c97e45a032857da2d180676d4dc687947f3a205f68dc8e0280154ba152bd",
+    "docs/DAT.md": "3d26e374a1661699bacf10396c6012c7d4fef1a0eb6d792dc01c8c24b63721bd",
+    "docs/DESIGN_SYSTEM_APP.md": "d6797b43660d4e04e7fffdcee3ae25e25d7da95d104f3c723d78c74958fd4052",
+    "docs/INVOCATION_URLS.md": "a3577b99217690ec7e0ec8786328fb840094dda0d135572d69359aa0dd9ac12e",
+    "docs/JOURNAL.md": "d40b7cc2333d40c73f972b48d1fc478219ee7293000d031f705f57e50c81d3ee",
+    "docs/PLATFORM_DEV.md": "0b88b3fe15d831a46029f668fc261a147f363dbb666e4485485d81eaf359eed2",
+    "e2e/README.md": "52738a8e9e97a4f6726bd9af4720dd6c0dd41bd36b0c0a2ce54bd8593f112491",
+    "qualification/spark-notes/CONTRIBUTORS.md": "9e5e3ccd78ea61be5f1e97e338aec6322ba6c0e461e3cab093552ea46942bfb3",
+    "qualification/spark-notes/INSTALL.md": "464ff94b7abf2b6dd1d43aef2efe3592cad01183ebd8ecb5df5eabe4d6726a14",
+    "qualification/spark-notes/README.md": "670c7bb18c6b975df96f33aa8363da745bc63b7adbd9ef00f28944586958277b",
+    "web/README.md": "149e66600d49656dbea96e689ed50387404c16893791f92d2d7bc45be7cc992c"
+  },
+  "final_review": {
+    "role": "factory_verifier",
+    "tracked_changes": false,
+    "services_or_tests_run": false,
+    "blocking_findings": [],
+    "verified": [
+      "41 archives byte-identiques au manifeste, fraîcheur et chronologie sans chevauchement",
+      "35 campagnes uniques / 467 groupes / six prérequis séparés",
+      "186 sources et images contrôle/CLI stables",
+      "10 namespaces / 32 fonctions et deux UUID historiques distincts",
+      "26 fichiers embarqués",
+      "79 captures : 61 observations déclarées / 18 identités SHA avec références inspectées"
+    ],
+    "limits": "Revue de cohérence des preuves ; ni nouvelle exécution ni nouvelle inspection visuelle. SLS-066 reste ouverte."
+  },
+  "remaining_proofs": [
+    "Ajout/retrait/rétablissement de vraies routes et invocation HTTPS/TLS sur un alias public ; proposition non appliquée.",
+    "Absence de domaine applicable par modification normale des routes ; transport HTTP déclaré.",
+    "Seconde page console et CLI sur six domaines réels, recalage après retrait et cohérence entre pages.",
+    "Source officielle réellement indisponible/changeante/invalide, sans substitution ni modification directe de son registre.",
+    "GET facultatif du catalogue réellement perdu/refusé après publication CLI : succès conservé et aucune mutation rejouée.",
+    "Branche d’expiration/perte SSH du build borné : seul son parcours nominal est qualifié."
+  ],
+  "limitations": [
+    "Cette régression réussie ne clôture ni SLS-066 ni le goal de plateforme.",
+    "Les archives historiques étrangères aux fonctions suivies restent conservées.",
+    "La preuve native du Host local ne qualifie pas un alias public/TLS.",
+    "Les 18 réemplois visuels sont fondés sur identité SHA avec une référence inspectée, pas sur une nouvelle observation.",
+    "Les captures ne prouvent pas seules les pertes de réponse, autorisations et effets physiques ; les rapports de scénario les établissent.",
+    "Les deux documents de statut indexés changent après qualification ; sources exécutées et livrées sont conservées séparément.",
+    "Les notes sont proposées ; leur adoption n’est pas revendiquée.",
+    "Aucun remote Git configuré ; aucun push."
+  ]
+}

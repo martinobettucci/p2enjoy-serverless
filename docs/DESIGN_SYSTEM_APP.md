@@ -214,3 +214,18 @@ onze sont strictement identiques à la référence SLS-065 inspectée. Le chapit
 Adresses d’appel est aussi lu dans un vrai viewport mobile 390 × 844 après
 navigation. Ces images ne couvrent pas encore plusieurs domaines, leur retrait,
 la source inaccessible ou une seconde page.
+
+La [régression complète](evidence/invocation-urls-regressions-dev-2026-11-08.json)
+renouvelle 79 captures : sept de gestion, douze d’exécution, 22 de publication,
+quatorze de stockage, sept d’adresses, onze du manuel et six de connexion.
+Les vérificateurs observent 61 images ; les 18 autres sont strictement identiques
+par SHA256 aux références inspectées. Les rapports et heures de génération
+sont recoupés. Le manuel servi conserve ses 14 chapitres et 43 paragraphes.
+
+Les captures d’exécution ne montrent pas la seconde page finalement chargée,
+vérifiée par les assertions du parcours. Les vues après perte de réponse
+montrent l’état relu ; elles ne prouvent pas seules la perte ou l’absence de
+rejeu. Les vues sans session peuvent conserver la structure déjà chargée.
+Le catalogue de stockage affiche aussi des archives historiques ; son total
+ne représente pas les seules fonctions du replay. Les limites de routes,
+source inaccessible et pagination du catalogue d’adresses restent ouvertes.

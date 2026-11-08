@@ -579,3 +579,18 @@ dans `/etc/spark/routes.?` (SHA256
 pas une route appliquée. Les changements normaux doivent être réalisés par
 le propriétaire ou avec une autorisation distincte limitée au seul SPARK.
 La FORGE et les autres SPARK restent hors du périmètre d’administration.
+
+Le [replay complet](evidence/invocation-urls-regressions-dev-2026-11-08.json)
+passe ensuite 35 campagnes et 467 groupes, zéro échec/skip. Six prérequis restent
+non comptés ; 186 sources et images sont recoupées avant/après chaque phase.
+L’image du contrôle reste identique ; les deux images CLI sont reconstruites
+puis figées. Les 32 fonctions suivies dans dix namespaces sont purgées, les
+deux restaurations historiques séparées et les 26 fichiers embarqués recoupés.
+Les 79 captures fraîches sont recoupées : 61 observations et 18 identités avec
+une référence inspectée. Le manuel servi correspond à 14 chapitres/43 paragraphes.
+Le Host réel est qualifié en boucle locale ; routes publiques, sources perturbées,
+pagination multi-domaines et GET CLI perdu/refusé restent ouverts.
+
+Ce replay ne demande aucun build du contrôle, migration, variable ou secret.
+Les trois notes de cellule sont actualisées et proposées par leurs voisins
+`.?`, avec empreintes recoupées ; leur adoption n’est pas revendiquée.

@@ -2771,3 +2771,53 @@ La revue ne trouve pas de blocage nominal ; la branche d’expiration du nouveau
 build n’est pas déclarée éprouvée. Le scope 35 / 467 reste à lancer après ce
 checkpoint ; aucun succès de cette suite ou du collecteur 32 fonctions n’est
 encore revendiqué. Code produit, manuel compilé et route active inchangés.
+
+
+## 2026-11-08 — Régression complète des adresses réussie, unité ouverte
+
+Depuis le commit 5ec9093, la commande `python3 -B e2e/execution-suite.py
+--scope invocation-urls` termine avec retour 0 : 35 campagnes uniques,
+467 groupes réussis, zéro échec et zéro test ignoré. Les six prérequis sont
+séparés du total. Les 41 rapports frais sont archivés byte pour byte et liés
+à leurs snapshots avant/après : mêmes 186 sources locales/distantes, même
+image du contrôle, deux images CLI figées après leur build en série. Les cinq
+modules CLI embarqués correspondent aux sources ; les 26 fichiers Python/SQL
+embarqués sont recoupés. Aucune modification produit n’intervient pendant
+cette suite. Le premier arrêt réel de 51 groupes et le préflight ciblé restent
+des preuves distinctes ; ils ne gonflent pas ce total.
+
+Le collecteur final retrouve exactement dix namespaces et 32 fonctions suivies,
+purgées avec leurs reçus et absences physiques. Les deux restaurations historiques
+portent des UUID temporaires distincts, pilotes terminés, originaux restaurés.
+Les réservations globales et allocations de stockage sont nulles ; les archives
+historiques étrangères ne sont pas présentées comme purgées. Le contrôle et la
+référence sont sains, l’agent actif. Le conteneur de référence conserve son
+identité, son image et son heure de démarrage depuis le checkpoint de 88 groupes.
+La configuration effective correspond aux deux fichiers officiels ; le montage
+SPARK reste readonly. L’unique route déclarée vise toujours 18090 en TLS.
+
+Les 79 captures fraîches sont reliées aux rapports : 61 observations visuelles
+par les vérificateurs et 18 réemplois stricts par SHA avec les références
+inspectées. Le manuel affiché correspond à ses 14 chapitres et 43 paragraphes.
+Les limites d’observation sont maintenues : certaines pages d’exécution ne
+montrent pas leur état final chargé, les réponses perdues sont établies par
+les scénarios natifs et les images après reprise ne les prouvent pas seules.
+Les vues de stockage affichent aussi les archives historiques du catalogue.
+La revue readonly de la preuve ne trouve pas de défaut bloquant et confirme
+ces liaisons ; elle ne relance aucun scénario et ne remplace pas la vision.
+
+Issue : régression complète acquise, SLS-066 reste [~]. Routes supplémentaires,
+TLS d’alias, retrait/absence, pages sur six domaines, perturbation de la source
+et GET de catalogue perdu/refusé après publication restent à prouver. Le Host
+réel est désormais qualifié sur la boucle locale, sans équivalence avec un
+alias public. La branche d’expiration/perte SSH du build reste non éprouvée ;
+son parcours nominal passe. La demande d’autorité bornée pour les routes reste
+sans réponse, sans empêcher les travaux indépendants. Aucun registre
+d’incohérences ouvert n’existe à cette frontière.
+
+Les documents de statut et les trois notes de cellule sont actualisés après
+le gel des sources exécutées. Les empreintes exécutées et celles des documents
+livrés restent distinguées dans la preuve finale. Aucun rebuild du contrôle,
+migration, secret, variable ou application de route n’est nécessaire pour ce
+relevé. Les notes sont reproposées avec contrôle de leurs empreintes préexistantes,
+sans revendiquer leur adoption. Le dépôt n’a pas de remote ; aucun push.

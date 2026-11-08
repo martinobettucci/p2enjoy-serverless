@@ -83,8 +83,20 @@ sont recoupées ; le manuel à 14 chapitres et 43 paragraphes est compilé et
 vérifié. Les neuf fonctions des essais/replays sont purgées et les 26 sources
 Python/SQL embarquées recoupées. Ce checkpoint ne clôture pas l’unité.
 
-Restent les changements réels de routes, seconde page sur six domaines, source
-perturbée, Host réel, consultation CLI perdue après publication et campagne
-complète sur cette image. L’alias functions.lelabs.tech vers 18090 TLS est
-proposé dans routes.? ; il n’est pas appliqué. Aucun nouveau secret, variable
-ou schéma ; la configuration reste dans les deux fichiers de cellule.
+La régression complète `docs/evidence/invocation-urls-regressions-dev-2026-11-08.json`
+passe ensuite 35 campagnes et 467 groupes, zéro échec/skip. Six prérequis sont
+non comptés ; 186 sources et images contrôle/CLI sont identiques avant/après
+chaque phase. Les 32 fonctions suivies sont purgées dans dix namespaces ; les
+deux restaurations historiques restent distinctes. Les 79 captures fraîches
+sont recoupées : 61 observations et 18 identités SHA avec une référence inspectée.
+Le contrôle et la référence sont sains, l’agent actif, les réservations et
+allocations globales à zéro. Les archives historiques étrangères restent conservées.
+
+La preuve native du Host est acquise en boucle locale. Restent les changements
+réels de routes/TLS, seconde page sur six domaines, source perturbée et
+consultation CLI perdue/refusée après publication. Le build nominal CLI est
+qualifié ; sa branche d’expiration/perte SSH reste à éprouver. SLS-066 demeure
+ouverte. L’alias functions.lelabs.tech vers 18090 TLS est proposé dans routes.? ;
+il n’est pas appliqué. Aucun nouveau secret, variable ou schéma ; la configuration
+reste dans les deux fichiers de cellule. Ces trois notes sont proposées,
+sans revendiquer leur adoption.

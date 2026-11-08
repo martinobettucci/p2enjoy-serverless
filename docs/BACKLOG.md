@@ -434,8 +434,9 @@ de la FORGE ni les autres scénarios résiduels de SLS-030.
 <a id="sls-066"></a>
 ## SLS-066 — Afficher les URL d’appel issues des domaines du SPARK
 
-Statut : [~] — catalogue, console et résultat CLI déployés en DEV ; checkpoint
-de 88 groupes réels, qualification multi-domaines et résiduelle ouverte.
+Statut : [~] — catalogue, console et résultat CLI déployés en DEV ; régression
+complète de 35 campagnes / 467 groupes réussie, qualification multi-domaines
+et résiduelle ouverte.
 
 Découvrir les routes effectivement affectées à la passerelle dans le SPARK,
 calculer les adresses par fonction et événement HTTP, les afficher et les
@@ -449,17 +450,21 @@ avec 31 captures recoupées.
 Le manuel servi comporte 14 chapitres et 43 paragraphes. Les preuves multi-domaines,
 retrait et absence exigent les vraies routes et l’autorité bornée du SPARK ;
 aucune substitution du registre n’est admise. Restent également les sources
-perturbées, le Host réel, la consultation CLI perdue après publication et la
-campagne complète sur cette image. Le manuel est reconstruit et qualifié
-pour les parcours actuellement éprouvés.
+perturbées et la consultation CLI perdue/refusée après publication. Le manuel
+est reconstruit et qualifié pour les parcours actuellement éprouvés.
 
-Suite `invocation-urls` intégrée, à exécuter : 35 campagnes / 467 groupes,
-avec prérequis SSO privés, images CLI recoupées et contrôle détaillé final de
-10 namespaces / 32 fonctions. Le premier replay des pannes est arrêté après 51 groupes
-à cause d’un client suivant la redirection canonique ; sa correction et la
-preuve native du Host sont définies dans INVOCATION_URLS. La correction du client de panne passe 55 groupes ; les huit groupes API
-passent avec le vrai Host en boucle locale. La suite de 467 groupes reste
-à exécuter et les preuves de routes publiques restent ouvertes.
+La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
+passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,
+186 sources et les images contrôle/CLI recoupées avant/après chaque phase.
+Les 32 fonctions suivies sont purgées dans dix namespaces ; les deux restaurations
+historiques sont distinctes. Les 79 captures fraîches sont recoupées : 61
+observations et 18 identités SHA avec une référence inspectée. Le premier replay
+des pannes est arrêté après 51 groupes à cause d’un client suivant la redirection
+canonique ; sa correction et la preuve native du Host sont définies dans
+INVOCATION_URLS. Le client de panne corrigé passe 55 groupes ; les huit groupes API
+passent avec le vrai Host en boucle locale, puis dans la suite complète.
+Les preuves de routes publiques restent ouvertes, ainsi que la branche
+d’expiration/perte SSH du build borné, dont seul le parcours nominal est qualifié.
 
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale

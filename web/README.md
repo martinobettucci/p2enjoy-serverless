@@ -49,10 +49,11 @@ guide avec chaque comportement utilisateur, puis reconstruire la console.
 [preuve initiale](../docs/evidence/manual-console-dev-2026-11-07.json) précède la
 publication UI : 48 groupes, zéro échec/skip et 33 captures relues. La suite
 de console comprend désormais aussi les 21 groupes de publication.
-Le guide compte treize chapitres, dont le vidage du cache et la purge des
-archives. La campagne courante recoupe son empreinte, ses chapitres,
-39 paragraphes, le tableau et la commande ; onze captures couvrent aussi
-ces deux nouveaux chapitres sur ordinateur et mobile. La [qualification complète du stockage public](../docs/evidence/storage-console-dev-2026-11-08.json)
+Le guide compte quatorze chapitres, dont le vidage du cache, la purge des
+archives et les adresses d’appel. La campagne courante recoupe son empreinte, ses chapitres,
+43 paragraphes, le tableau et la commande ; onze captures couvrent aussi
+ces deux chapitres sur ordinateur et mobile ; le chapitre Adresses d’appel
+possède aussi son viewport mobile dédié. La [qualification complète du stockage public](../docs/evidence/storage-console-dev-2026-11-08.json)
 recoupe ces huit groupes, dix parcours UI stockage, les régressions et leurs captures.
 La [preuve du correctif de purge](../docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
 rejoue ces huit groupes et ajoute une capture de lecture mobile du nouveau
@@ -74,3 +75,8 @@ chapitre correspondant. Le [checkpoint SLS-066](../docs/evidence/invocation-urls
 passe six groupes propres au parcours navigateur et ses régressions, avec
 sept captures inspectées. Les pages suivantes et les changements réels de
 routes restent à qualifier ; aucune preuve simulée ne les remplace.
+La [régression complète](../docs/evidence/invocation-urls-regressions-dev-2026-11-08.json)
+recoupe 79 captures fraîches de l’ensemble des parcours : 61 observations
+visuelles et 18 identités SHA avec les références inspectées, sans défaut
+bloquant constaté. Le manuel servi correspond aux 14 chapitres et 43 paragraphes
+de sa source. Les limites d’observation sont précisées dans le design du produit.

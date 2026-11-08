@@ -357,13 +357,17 @@ La projection ne garantit ni fraîcheur transactionnelle ni certificat prêt.
 Le [checkpoint DEV](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 recoupe montage readonly, 26 sources embarquées, 88 groupes et 31 captures.
 Le contrôle est déployé avec ces parcours ; multi-domaines, sources perturbées
-et campagne complète restent à qualifier.
+et consultation CLI perdue/refusée après publication restent à qualifier.
 
-## Extension de la suite SLS-066 à qualifier
+## Régression complète SLS-066
 
-Le contrat [INVOCATION_URLS](INVOCATION_URLS.md#suite-complète-de-preuve)
-prévoit un scope commun35 campagnes / 467 groupes, des prérequis distincts non
-comptés, les sources/images CLI liées et le recoupement détaillé10namespaces/
-32fonctions. Le Host est exercé par un client réel de boucle locale du SPARK,
+La suite définie par [INVOCATION_URLS](INVOCATION_URLS.md#suite-complète-de-preuve)
+passe dans la [preuve complète](evidence/invocation-urls-regressions-dev-2026-11-08.json) :
+35 campagnes / 467 groupes, six prérequis distincts non comptés, 186 sources
+et images contrôle/CLI liées avant/après chaque phase. Les 32 fonctions suivies
+dans dix namespaces sont purgées ; les deux restaurations historiques restent
+distinctes. Les 26 fichiers embarqués et 79 captures fraîches sont recoupés,
+avec 61 observations et 18 identités SHA avec une référence inspectée.
+Le Host est exercé par un client réel de boucle locale du SPARK,
 sans dépendance remplacée ; les alias publics restent une preuve distincte.
 L’intégration de ces clients ne change ni service, schéma ni configuration.

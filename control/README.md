@@ -240,3 +240,8 @@ n’est pas affectée par cette consultation. Aucun nouveau secret, réglage ou
 schéma. [Contrat](../docs/INVOCATION_URLS.md) et
 [checkpoint DEV](../docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json).
 Les changements de routes et la qualification résiduelle restent ouverts.
+La [régression complète](../docs/evidence/invocation-urls-regressions-dev-2026-11-08.json)
+passe 35 campagnes / 467 groupes sans échec/skip, avec six prérequis distincts,
+186 sources avant/après chaque phase et les 26 fichiers embarqués recoupés.
+La preuve native du Host est acquise sur la boucle locale ; elle ne qualifie
+pas un alias public. Aucun nouveau déploiement applicatif pour ce replay.

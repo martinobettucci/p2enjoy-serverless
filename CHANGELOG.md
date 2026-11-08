@@ -2,19 +2,24 @@
 
 ## [Non publié]
 
-- Suite complète des adresses intégrée au runner : union sans doublon de
-  35 campagnes / 467 groupes, six prérequis privés, images CLI figées et
-  recoupement détaillé de dix namespaces / 32 fonctions. Qualification complète
-  encore à exécuter. Le client de panne corrigé passe 55 groupes et les huit
+- Suite complète des adresses réussie en DEV : union sans doublon de
+  35 campagnes / 467 groupes, zéro échec/skip, six prérequis non comptés,
+  186 sources et images contrôle/CLI figées avant/après chaque phase.
+  Les 32 fonctions suivies sont purgées dans dix namespaces ; les deux
+  restaurations historiques sont séparées. Les 79 captures sont recoupées,
+  dont 61 observations et 18 identités avec une référence inspectée.
+  Le client de panne corrigé passe 55 groupes et les huit
   groupes API éprouvent maintenant le Host réel et les redirections natives.
-  Le build distant est borné ; une issue inconnue interdit un rejeu sans diagnostic.
+  Le build distant nominal est qualifié ; son expiration reste à éprouver.
+  Une issue inconnue interdit un rejeu sans diagnostic.
+  [Preuve](docs/evidence/invocation-urls-regressions-dev-2026-11-08.json).
 
 - Catalogue des adresses d’appel déployé en DEV : routes officielles lues via
   montage readonly, facette de fonction et lien de service, copie d’URL/curl,
   résultat CLI séparé du succès de publication et entrée console/SSO canonique.
   Le checkpoint passe 88 groupes réels et recoupe 31 captures ; manuel à
   14 chapitres et 43 paragraphes. Les preuves multi-domaines, sources perturbées
-  et campagne complète restent ouvertes dans SLS-066.
+  et perte du GET de catalogue après publication restent ouvertes dans SLS-066.
 
 - Stockage public qualifié en DEV : 29 campagnes en série, 397 groupes réussis,
   puis neuf groupes API renforcés de quatorze corps invalides de purge et d’une

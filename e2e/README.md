@@ -20,17 +20,24 @@ Le [checkpoint](../docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 réunit ces quatorze groupes, 36 régressions et 38 groupes dans les deux images
 CLI reconstruites, soit 88. Chaque commande est liée à ses sources et image. Il ne constitue
 pas une suite complète de plateforme ni une qualification multi-domaines.
-Les sources perturbées, vrai Host, CLI après consultation perdue, six domaines
+Les sources perturbées, CLI après consultation perdue/refusée, six domaines
 réels pour une seconde page et les cycles de routes restent à éprouver.
 Aucun de ces manques n’est converti en test ignoré dans les campagnes exécutées.
 
 Le scope complet `python3 -B e2e/execution-suite.py --scope invocation-urls`
-est intégré et reste à qualifier : 35 campagnes / 467 groupes sans doublon,
+est [qualifié en DEV](../docs/evidence/invocation-urls-regressions-dev-2026-11-08.json) :
+35 campagnes / 467 groupes sans doublon, zéro échec/skip,
 avec le même protocole stdin privée que stockage. Ses six prérequis ne gonflent
-pas le décompte ; le recoupement détaillé10 namespaces / 32 fonctions reste séparé
+pas le décompte ; le recoupement détaillé de dix namespaces / 32 fonctions reste séparé
 des nettoyages propres aux autres campagnes. Le contrat
 [INVOCATION_URLS](../docs/INVOCATION_URLS.md#suite-complète-de-preuve) fixe ordre,
-images CLI, frontières natives et limites de cette suite.
+images CLI, frontières natives et limites de cette suite. Les 186 sources sont
+identiques avant/après chaque phase. Les 32 fonctions suivies sont purgées,
+les deux restaurations historiques séparées et les 26 fichiers embarqués
+recoupés. Les 79 captures fraîches comprennent 61 observations et 18 identités
+SHA avec une référence inspectée. Le vrai Host est éprouvé sur la boucle locale,
+sans constituer une preuve d’alias public/TLS. Le build CLI nominal passe ; sa
+branche d’expiration ou perte SSH reste à éprouver. SLS-066 demeure ouverte.
 
 ## Configuration commune du service
 

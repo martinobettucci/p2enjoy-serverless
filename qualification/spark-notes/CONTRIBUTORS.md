@@ -20,7 +20,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:15600fbeaf0496b1688c77035464cc6643b230a26ad824ccccfacdaa02f7aa66`.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa` ; son image cliente E2E est `sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 
@@ -154,11 +154,23 @@ sont recoupées ; le manuel à 14 chapitres et 43 paragraphes est compilé et
 vérifié. Les neuf fonctions des essais/replays sont purgées et les 26 sources
 Python/SQL embarquées recoupées. Ce checkpoint ne clôture pas l’unité.
 
-Restent les changements réels de routes, seconde page sur six domaines, source
-perturbée, Host réel, consultation CLI perdue après publication et campagne
-complète sur cette image. L’alias functions.lelabs.tech vers 18090 TLS est
-proposé dans routes.? ; il n’est pas appliqué. Aucun nouveau secret, variable
-ou schéma ; la configuration reste dans les deux fichiers de cellule.
+La régression complète `docs/evidence/invocation-urls-regressions-dev-2026-11-08.json`
+passe ensuite 35 campagnes et 467 groupes, zéro échec/skip. Six prérequis sont
+non comptés ; 186 sources et images contrôle/CLI sont identiques avant/après
+chaque phase. Les 32 fonctions suivies sont purgées dans dix namespaces ; les
+deux restaurations historiques restent distinctes. Les 79 captures fraîches
+sont recoupées : 61 observations et 18 identités SHA avec une référence inspectée.
+Le contrôle et la référence sont sains, l’agent actif, les réservations et
+allocations globales à zéro. Les archives historiques étrangères restent conservées.
+
+La preuve native du Host est acquise en boucle locale. Restent les changements
+réels de routes/TLS, seconde page sur six domaines, source perturbée et
+consultation CLI perdue/refusée après publication. Le build nominal CLI est
+qualifié ; sa branche d’expiration/perte SSH reste à éprouver. SLS-066 demeure
+ouverte. L’alias functions.lelabs.tech vers 18090 TLS est proposé dans routes.? ;
+il n’est pas appliqué. Aucun nouveau secret, variable ou schéma ; la configuration
+reste dans les deux fichiers de cellule. Ces trois notes sont proposées,
+sans revendiquer leur adoption.
 
 Rejouer séparément et en série `node e2e/invocation-urls.mjs` puis
 `node e2e/invocation-urls-ui.mjs`. Ces commandes exigent la session SSO réelle

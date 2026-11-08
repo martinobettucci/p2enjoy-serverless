@@ -79,3 +79,8 @@ lecture refusée, perdue ou changeante donne `invocation_urls.state=unavailable`
 sans requalifier la publication réussie ni renvoyer de code. Les cas courants
 passent dans le checkpoint SLS-066 ; la perte réelle de cette consultation et
 les pages suivantes restent à éprouver. [Contrat](../docs/INVOCATION_URLS.md).
+Les campagnes courantes sont aussi rejouées dans la
+[suite de 35 campagnes / 467 groupes](../docs/evidence/invocation-urls-regressions-dev-2026-11-08.json),
+avec les deux images Docker reconstruites en série et figées avant/après chaque
+campagne. Les cinq modules CLI embarqués correspondent aux sources. Cette
+réussite ne qualifie pas les pertes de lecture ni les pages supplémentaires.

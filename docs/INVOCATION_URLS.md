@@ -2,9 +2,11 @@
 
 Contrat SLS-066. Catalogue, console, CLI et montage readonly sont déployés sur
 le SPARK DEV. Le [checkpoint](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
-passe 88 groupes réels sur le seul domaine actuellement affecté ; l’unité reste
-en qualification. Les changements de routes, pages suivantes et autres preuves
-résiduelles ci-dessous ne sont pas couverts par ce checkpoint.
+passe 88 groupes réels sur le seul domaine actuellement affecté. La
+[régression complète](evidence/invocation-urls-regressions-dev-2026-11-08.json)
+passe ensuite 35 campagnes et 467 groupes, sans échec ni test ignoré. L’unité
+reste en qualification : les changements de routes, pages suivantes et autres
+preuves résiduelles ci-dessous ne sont pas couverts par ces campagnes.
 
 ## Source officielle et limites
 
@@ -161,8 +163,9 @@ par cinq comme la console, plutôt que d’exiger vingt et un domaines pour
 Le scope `invocation-urls` de `e2e/execution-suite.py` compose l’union
 sans doublon de 35 campagnes, soit 467 groupes : socle stockage/console 397,
 adresses API 8 et UI 6, transport commun 5 puis configuration commune 13,
-CLI Docker plan/package 24 et refus public 14. Ce total reste à exécuter ;
-il ne complète pas artificiellement les essais nécessitant des routes réelles.
+CLI Docker plan/package 24 et refus public 14. Cette union passe intégralement
+sur DEV, avec zéro échec et zéro test ignoré ; elle ne remplace pas les essais
+nécessitant des routes réelles.
 
 L’ordre ajoute transport, configuration puis adresses avant les campagnes
 ciblées de stockage et leurs restaurations historiques. Aucun service de
@@ -187,6 +190,23 @@ contre les rapports frais, sans inclure les UUID historiques temporaires.
 Les autres campagnes gardent leur propre reçu de nettoyage et le contrôle
 global exige zéro fonction, instance, invocation active et réservation.
 Les conteneurs clients adapter éphémères doivent également être absents.
+
+Le replay réussi recoupe 186 sources avant/après chacune des 41 phases
+(35 campagnes et six prérequis) et l’image du contrôle. Les deux images CLI
+sont figées après leur build, puis recoupées sur les 35 campagnes.
+Les 32 fonctions suivies sont purgées ; les deux restaurations historiques
+restent distinctes. Les 26 fichiers Python/migrations embarqués correspondent
+aux sources. Les 79 captures fraîches sont recoupées : 61 observations visuelles
+et 18 réemplois par identité SHA256 avec une référence inspectée. Le manuel
+servi correspond à ses 14 chapitres et 43 paragraphes. Les catalogues globaux
+peuvent conserver des archives historiques étrangères à ces fonctions purgées.
+
+Restent les cycles de routes et leur TLS, les pages console/CLI sur six domaines,
+la source officielle réellement perturbée et le GET de catalogue perdu/refusé
+après publication CLI. La preuve native du Host ci-dessous est acquise sur
+la boucle locale ; elle ne qualifie pas un alias HTTPS public. Le build nominal
+est qualifié ; sa branche d’expiration ou de perte SSH reste non éprouvée.
+Ces limites maintiennent SLS-066 en cours.
 
 ## Preuve native du Host et des clients de panne
 
