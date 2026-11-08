@@ -3088,3 +3088,35 @@ initial reste inconnue ; la preuve ne lui attribue aucun 415 rétroactif.
 Le premier essai conserve ses 101 groupes complets et dix groupes partiels,
 sans les additionner à une campagne complète. L’entrée est retirée et le
 registre devenu vide supprimé ; le replay commun demeure à exécuter.
+
+## 2026-11-08 — Attente de retour oubliée et continuation bornée décidée
+
+Le replay termine à un dans storage-console-ui : 31 campagnes complètes et
+461 groupes réussis, puis sept groupes de stockage UI avant timeout. Le client
+attend encore / après suppression du namespace, tandis que l’application
+revient à /console/namespaces. C’est une attente oubliée lors de l’adaptation
+des anciens parcours ; le produit applique son contrat. Les autres attentes
+de navigation sont relues : cette destination est la seule attente actuelle
+encore périmée ; Namespaces après SSO dans le banc historique reste requis
+par sa vraie image antérieure.
+
+L’essai et ses 36 rapports sont archivés séparément. Le relevé physique confirme
+39 fonctions purgées dans sept namespaces pour les jeux catalogue UI et stockage
+UI, allocations/réservations globales à zéro. Le premier arrêt du canal privé
+reste lui aussi séparé dans sa preuve. Aucun de ces essais n’est déclaré réussi.
+
+Les 82 images fraîches des campagnes terminées sont inspectées. La nouvelle
+vue mobile du catalogue montre les filtres et laisse les premières lignes sous
+le viewport ; le bord droit montre bien État/Modification, avec Handler recoupé
+à gauche. Décision avant correction : vue gauche après focus puis vue milieu
+au clavier, pour compléter le bord droit. Client toujours à quatorze groupes,
+désormais seize images ; aucune modification du code produit.
+
+Décision de preuve : conserver les 30 campagnes aux clients inchangés (447
+groupes), réexécuter le catalogue retouché et les six campagnes restantes (42
+groupes), puis collecter la preuve physique. Les images Docker restent identiques ;
+seuls les deux clients UI, FUNCTION_CATALOGUE et le nouveau pilote peuvent
+différer du premier gel. Toute autre différence refuse la continuation. La
+preuve indiquera explicitement les deux époques, les 37 campagnes uniques/489
+groupes attendus et les six prérequis. Le résultat positif remplacé et le groupe
+échoué restent hors de ce total. Ce plan n’est pas encore une exécution réussie.

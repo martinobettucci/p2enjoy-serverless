@@ -134,3 +134,43 @@ table au clavier jusqu’à sa dernière colonne : les captures gauche/droite
 complètent la mesure d’absence de débordement du document. Ces images sont
 inspectées après exécution ; ni le seul scrollLeft positif ni un JPEG pleine
 page réduit ne prouvent la lecture de toutes les colonnes dans le viewport.
+
+## Continuation après correction des seuls clients de preuve
+
+Le replay du 8 novembre s’arrête dans storage-console-ui après 31 campagnes
+complètes (461 groupes) : une attente conserve l’ancien retour `/` après
+suppression d’un namespace, alors que l’application revient correctement à
+`/console/namespaces`. Sept groupes de ce client passent ; les trois suivants
+ne sont pas qualifiés. L’essai et ses rapports restent archivés comme incomplets.
+Le relevé natif confirme les 39 fonctions purgées des jeux catalogue UI et
+stockage UI, dans sept namespaces, sans allocation/réservation restante.
+
+La lecture des captures relève aussi que le viewport mobile initial montre
+les filtres, mais pas les lignes de gauche. Ajouter deux vues après focus de
+la table : bord gauche puis milieu après défilement clavier réel, avant le
+bord droit déjà éprouvé. Les trois positions doivent permettre de lire toutes
+les colonnes ; les 16 captures du client gardent ses quatorze groupes.
+
+La continuation conserve uniquement les 30 campagnes réussies dont le client
+reste inchangé, soit 447 groupes. Le client catalogue retouché est réexécuté :
+son ancien résultat positif reste séparé, hors du total. Sept campagnes sont
+alors exécutées en série : catalogue UI (14), stockage UI (10), reprise des
+commandes (7), validation vivante (2), décisions (4), historique partiel (1)
+et historique complet (4). Résultat attendu : 37 campagnes uniques et 489
+groupes, puis le relevé physique final ; six prérequis distincts au total.
+
+`e2e/function-catalogue-completion.py` contrôle la provenance avant tout test :
+archive exacte de l’essai, rapports conservés recoupés par SHA et validateur
+existant, empreintes avant/après de chaque phase, mêmes images contrôle/CLI.
+Les seuls écarts autorisés avec le premier gel sont les deux clients UI,
+le présent contrat de preuve et le nouveau pilote de continuation. Toute
+autre différence, notamment source produit, manuel compilé, fixture ou image,
+refuse cette continuation et exige une nouvelle qualification adaptée.
+
+La preuve conserve les deux époques de sources et l’ordre chronologique réel.
+Elle ne prétend pas qu’une commande monolithique initialement en échec a passé.
+Chaque campagne retenue doit avoir terminé et nettoyé, zéro échec et zéro skip ;
+aucun résultat incomplet ni ancien résultat du client retouché n’entre dans
+les 37 résultats actifs. Les nouveaux rapports sont frais sur le nouveau gel.
+La séquence nommée complète ne clôture l’unité qu’après inspection des 98 images,
+recoupement des ressources, documentation et revue finale.
