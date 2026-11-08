@@ -243,5 +243,10 @@ ajoute quatre groupes : session administrateur fermée pendant purge, transport
 agent refusé après commit, contention SQLite du contrôle et redémarrage par garde
 indépendante. Les sept groupes de reprise existants repassent avec le helper
 renforcé. Les six fonctions sont purgées, les services et sockets rétablis.
-Restent le cas d’apparition inattendue après absence persistée de stockage,
-l’intégration à la suite commune, les régressions élargies et les notes SPARK.
+La [preuve des archives historiques](docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
+reproduit une ancienne publication puis sa migration réelle. Elle a révélé un
+effacement de code par le nettoyage général malgré une purge bloquée ; le
+correctif réserve ces artefacts au résolveur de purge. Cinq groupes historiques
+et de restauration, neuf groupes de panne/validation et huit du manuel passent
+sur l’image corrigée : 22 groupes, zéro échec/skip, douze captures relues.
+Restent l’intégration à la suite commune, les régressions élargies et les notes SPARK.

@@ -126,10 +126,16 @@ class Deployments:
         with self.database.transaction() as db:
             db.execute("UPDATE deployments SET state='expired',error_code='candidate_expired',configuration_cipher=NULL,completed_at=? WHERE state='prepared' AND expires_at<=?",(time.time(),time.time()))
 
+    # @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#décision-durable-et-répétition
+    def purge_holds_artifacts(self,function):
+        # Only the purge resolver may erase these files after rechecking storage.
+        return self.database.one("SELECT 1 FROM function_operations WHERE function_id=? AND kind='purge'",(function,)) is not None
+
     async def clean_candidate(self,key):
         if self.database.one('SELECT 1 FROM revisions WHERE id=?',(key,)):return
-        row=self.database.one('SELECT state FROM deployments WHERE id=?',(key,))
+        row=self.database.one('SELECT state,function_id FROM deployments WHERE id=?',(key,))
         if row and row['state'] not in ('failed','expired'):return
+        if row and self.purge_holds_artifacts(row['function_id']):return
         await blocking(self.remove,self.root,str(UUID(key)))
         with self.database.transaction() as db:
             db.execute("UPDATE deployments SET reserved_bytes=0 WHERE id=? AND state IN ('failed','expired')",(key,))
@@ -147,7 +153,8 @@ class Deployments:
             self.expire()
             for row in self.database.all("SELECT id FROM deployments WHERE state IN ('failed','expired') AND reserved_bytes>0"):
                 await self.clean_candidate(row['id'])
-            for row in self.database.all('SELECT id FROM revisions WHERE deleted_at IS NOT NULL AND stored_bytes>0'):
+            for row in self.database.all('SELECT id,function_id FROM revisions WHERE deleted_at IS NOT NULL AND stored_bytes>0'):
+                if self.purge_holds_artifacts(row['function_id']):continue
                 if self.database.one('SELECT 1 FROM execution_instances WHERE revision_id=?',(row['id'],)):continue
                 await blocking(self.remove,self.root,str(UUID(row['id'])))
                 with self.database.transaction() as db:db.execute('UPDATE revisions SET stored_bytes=0 WHERE id=? AND deleted_at IS NOT NULL',(row['id'],))

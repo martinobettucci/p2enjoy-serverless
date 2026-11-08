@@ -51,6 +51,10 @@ publication UI : 48 groupes, zéro échec/skip et 33 captures relues. La suite
 de console comprend désormais aussi les 21 groupes de publication.
 Le guide compte treize chapitres, dont le vidage du cache et la purge des
 archives. La campagne courante recoupe son empreinte, ses chapitres,
-34 paragraphes, le tableau et la commande ; onze captures couvrent aussi
+35 paragraphes, le tableau et la commande ; onze captures couvrent aussi
 ces deux nouveaux chapitres sur ordinateur et mobile. La qualification
 complète du stockage public reste suivie dans SLS-065.
+La [preuve du correctif de purge](../docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
+rejoue ces huit groupes et ajoute une capture de lecture mobile du nouveau
+paragraphe sur une purge en attente après changement du stockage. Les douze
+captures sont inspectées ; le document affiché correspond à sa source.

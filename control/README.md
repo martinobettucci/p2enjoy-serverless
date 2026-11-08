@@ -150,6 +150,16 @@ session est fermée avant commit ; une décision déjà enregistrée termine apr
 restauration du transport ou du writer, avec le même reçu. Le redémarrage effectif
 par la garde indépendante est aussi recoupé. Les régressions élargies restent ouvertes.
 
+Le [banc historique](../docs/STORAGE_LEGACY_PROOF.md) produit de vraies archives
+avec l’API antérieure au registre, puis applique les migrations actuelles.
+Il a reproduit un contournement de purge : le nettoyage général retirait le
+code malgré une apparition inattendue du stockage. Tant qu’une garde de purge
+existe, le nettoyage des révisions/candidats laisse maintenant ses artefacts au
+résolveur de purge. La [preuve corrigée](../docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
+passe 22 groupes ciblés et recoupe les 25 sources Python/migrations embarquées,
+la restauration des originaux, cinq fonctions de régression nettoyées et douze
+captures du manuel. Elle ne clôture pas les régressions communes de SLS-065.
+
 ## Invocations publiques et admissions
 
 La migration 005 conserve réservations et observations d’invocation.

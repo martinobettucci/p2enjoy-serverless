@@ -473,3 +473,34 @@ les budgets à zéro, l’accès aux deux sockets depuis le contrôle et les six
 corrélés inactifs sont vérifiés au repos. Aucun verrou de redémarrage ne reste.
 L’image et les 160 sources couvertes restent identiques entre les deux campagnes.
 Aucune nouvelle variable, route, migration ou modification du paquet agent.
+
+### Correction de la purge des archives historiques
+
+Image du contrôle après correction :
+`sha256:9110295b4652e011b97bc6edfdb3d368b581a19fb73e5af1d1d2a9e5b8e8d40d`.
+L’[image historique](STORAGE_LEGACY_PROOF.md) reconstruite depuis `93f88e5` est
+`sha256:6b579d7eaa001d14834d34162e02fff9ef7c955ae5f301f13c7aa76378aeaedb`.
+Elle s’exécute uniquement dans la fenêtre temporaire de qualification ; le
+contrôle courant et ses trois répertoires sont conservés puis rétablis.
+
+La [preuve](evidence/storage-legacy-recovery-dev-2026-11-07.json) recoupe
+22 groupes sans échec/skip sur la nouvelle image, avec 163 sources identiques
+entre les cinq campagnes et les 25 fichiers Python/migrations embarqués.
+Une [preuve en échec](evidence/storage-legacy-cleanup-defect-dev-2026-11-07.json)
+conserve le défaut observé avant correction. Le nettoyage général respecte
+maintenant la garde de purge, ce qui préserve le code et son budget quand le
+stockage a changé de manière inattendue. Le manuel explique cette attente.
+
+Les deux fenêtres finales ont rétabli les identités des répertoires et du
+conteneur original, les bases et artefacts, l’agent et l’API sains ; l’exécuteur
+de référence reste intact. Leurs timers/services de garde sont inactifs et
+leurs ressources temporaires absentes. Les journaux privés et backups natifs
+restent dans `qualification-history/storage-absence-<UUID>` pour la traçabilité.
+Le contrôle partiel prouve la restauration après mort du pilote au premier
+renommage ; il ne constitue pas une preuve de redémarrage complet de la cellule.
+Les cinq fonctions des régressions sont purgées, sept répertoires de code absents
+et les budgets globaux à zéro. Les douze captures du manuel ont été relues.
+
+Aucune migration, variable, secret ou route n’est ajouté. Les deux fichiers
+officiels de configuration sont inchangés. SLS-065 attend encore la suite
+commune élargie et l’actualisation finale des notes du SPARK.

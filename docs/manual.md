@@ -235,6 +235,11 @@ nécessaire ; **Actualiser** relit l’avancement. Une purge terminée reste
 consultable dans le filtre **Purgées**. Conserver l’adresse de suivi permet
 également de retrouver le résultat après une interruption de connexion.
 
+Si le stockage a changé de manière inattendue pendant une purge, son suivi reste
+en attente avec un diagnostic. Les fichiers de code encore présents restent
+conservés et comptés, y compris après un redémarrage. Faire examiner ce diagnostic
+par l’administrateur ; une nouvelle demande ne résout pas le changement constaté.
+
 ## Consulter les changements et supprimer
 
 L'activité du service présente les mutations et refus attribuables à une

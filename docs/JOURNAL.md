@@ -2213,6 +2213,47 @@ Le contrat CONSOLE_STORAGE est corrigé avant l’implémentation. Le statut SLS
 reste ouvert ; aucun résultat de cette campagne en échec n’est présenté comme
 une qualification du comportement corrigé.
 
+### Correctif du nettoyage historique — checkpoint vérifié
+
+`Deployments.clean_candidate()` et le nettoyage des révisions consultent
+désormais la garde de purge de la fonction avant tout effacement ou libération
+de compteurs. Le résolveur de purge conserve son accès direct au nettoyage,
+avec relecture du stockage et verrou d’activité ; il ne se bloque pas lui-même.
+La revue ciblée confirme ce chemin, y compris après validation tardive.
+
+Le contrôle corrigé et le manuel sont construits puis déployés en DEV. Les
+quatre groupes historiques passent ; le même cas qui effaçait le code conserve
+son répertoire et ses 36 Kio après redémarrage, avec le même reçu en attente.
+Les deux groupes de validation vivante puis les sept groupes de panne passent
+en série. La garde de restauration est réexercée après le premier renommage,
+puis les huit groupes du manuel sont rejoués. Au total : 22 groupes, aucun
+échec/skip sur cette image. Les essais antérieurs en échec restent conservés
+séparément et ne sont pas comptés comme réussites.
+
+La [preuve corrigée](evidence/storage-legacy-recovery-dev-2026-11-07.json)
+recoupe les rapports frais, les 163 sources identiques avant/après et entre les
+cinq campagnes, l’image immuable et les 25 fichiers Python/migrations embarqués.
+Le collecteur confirme la restauration des deux fenêtres finales et leurs gardes
+inactives. Cinq fonctions de régression, sept répertoires de code et les budgets
+libérés sont vérifiés physiquement. Les onze captures du manuel et une capture
+supplémentaire de son nouveau paragraphe mobile sont inspectées ; les 35 paragraphes
+affichés correspondent à la source. L’essai ponctuel de capture lancé depuis la
+racine sans chemin de résolution Playwright a échoué avant ouverture du navigateur ;
+la dépendance existante de `e2e/` a ensuite été utilisée normalement.
+
+SLS-065 reste ouverte pour l’intégration de toutes ses campagnes au runner commun,
+les régressions élargies et les notes SPARK. Aucune nouvelle migration ni
+configuration de cellule. Aucun remote Git configuré ; aucun push effectué.
+
+La revue finale a relevé un chemin d’erreur du client de preuve qui relançait
+l’exception Playwright originale après restauration. Sa sortie est remplacée
+par un diagnostic fixe ; une entrée JSON invalide portant une valeur synthétique
+est réellement refusée sans reproduire cette valeur dans stdout, stderr ou le
+rapport. Ce contrôle du client précède toute fenêtre et reste distinct des
+groupes de plateforme. Les cinq campagnes et leurs 22 groupes sont ensuite
+rejoués en série ; les rapports finaux et le recoupement physique correspondent
+à ce client corrigé. Aucun changement supplémentaire de l’image du produit.
+
 
 ## 2026-11-08 — Configuration commune et domaines d’invocation
 

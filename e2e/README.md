@@ -7,6 +7,39 @@ normale. Un accès absent est une erreur de prérequis, jamais un test ignoré.
 
 ## Stockage public et manuel
 
+Les archives antérieures au registre ont leur [contrat de banc](../docs/STORAGE_LEGACY_PROOF.md).
+Après synchronisation des sources, lancer séparément et en série :
+
+```sh
+python3 -B e2e/storage-legacy-build.py
+node e2e/storage-legacy-recovery.mjs --partial
+node e2e/storage-legacy-recovery.mjs --full
+```
+
+Le build reconstruit exactement `93f88e5` dans une image historique distincte.
+Le mode partiel interrompt réellement le pilote après le premier renommage et
+vérifie la restauration indépendante. Le mode complet reçoit les identifiants
+de connexion SSO en JSON sur stdin (`username`, `password`), sans les conserver
+ni les afficher ; utiliser une entrée sans écho et jamais un argument de commande
+ou un fichier versionné. Il ouvre la connexion normale dans le navigateur, puis
+publie et supprime deux fonctions via l’ancienne API. Quatre groupes couvrent
+ce parcours, sa migration réelle, la purge sans registre et une apparition
+contradictoire après décision, avec conservation du code après redémarrage.
+
+Ces commandes ouvrent une fenêtre sur le seul contrôle DEV : les trois répertoires
+officiels sont conservés puis restaurés par identité. `storage-legacy-environment.py`
+arme la garde indépendante, utilise les deux env_file de cellule et conserve ses
+journaux/backups privés sous `qualification-history/storage-absence-<UUID>`.
+Le mode `status <UUID>` lit l’état de restauration ; le mode `restore <UUID>`
+joint le pilote et ses commandes avant de rétablir les originaux. La commande
+contradictoire demeure volontairement en attente dans son installation temporaire,
+retirée entièrement après observation. Ce retrait n’est pas une purge métier réussie.
+
+La [preuve corrigée](../docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
+réunit cinq groupes historiques/restauration, deux de validation vivante, sept de
+commandes sous panne et huit du manuel. La [preuve avant correction](../docs/evidence/storage-legacy-cleanup-defect-dev-2026-11-07.json)
+conserve l’échec réel. L’intégration de ces campagnes à la suite commune reste ouverte.
+
 Après synchronisation des sources sur le SPARK, exécuter successivement depuis
 la racine `node e2e/storage-console-api.mjs`, `node e2e/storage-console-ui.mjs`,
 `node e2e/manual-ui.mjs`, puis `node e2e/control-ui.mjs`. Les campagnes ciblées

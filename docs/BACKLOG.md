@@ -290,8 +290,8 @@ hors verrou global. Migration 004 agent, installation DEV et preuves réelles.
 
 ## SLS-065
 
-Statut : [~] — API, console et manuel déployés ; défaut de nettoyage reproduit
-sur archive historique, correction et régressions élargies en cours.
+Statut : [~] — API, console et manuel déployés ; défaut de nettoyage historique
+corrigé et qualifié, intégration commune et régressions élargies encore ouvertes.
 
 Après SLS-064 : catalogue consultable après suppression des parents, purge
 administrateur confirmée et vidage sous droit Update ; drainage et relecture
@@ -323,10 +323,21 @@ confirme l’ancienne publication réelle, la migration et la purge sans registr
 Elle révèle qu’après apparition d’une ligne agent, le nettoyage général au
 redémarrage efface le code malgré `pending/storage_state_changed`. Les originaux
 sont restaurés et recoupés ; le contrat réserve désormais cet effacement au
-résolveur de purge tant que sa garde existe. La correction reste à qualifier.
-Restent la correction de l’apparition inattendue après `storage_absent`, l’intégration des nouvelles
+résolveur de purge tant que sa garde existe. La [preuve corrigée](evidence/storage-legacy-recovery-dev-2026-11-07.json)
+réunit 22 groupes réels : cinq historiques/restauration, deux de validation
+vivante, sept de panne et huit du manuel. Les originaux sont rétablis, cinq
+fonctions de régression et sept répertoires de code sont purgés, budgets à zéro.
+Les 25 fichiers Python/migrations embarqués correspondent aux sources ; douze
+captures du manuel, maintenant à 35 paragraphes, sont inspectées.
+Restent l’intégration des nouvelles
 campagnes à la suite commune, les régressions élargies et l’actualisation finale
 des notes SPARK.
+L’intégration doit également rendre la pagination UI autonome : son assertion
+actuelle suppose plus de dix archives conservées préexistantes. La campagne
+doit créer ses propres archives réelles avant le parcours, puis les purger.
+Le runner doit traiter l’entrée SSO du banc historique sans écho ni valeur dans
+les commandes/rapports, et préparer la seconde session consommée par la preuve
+de révocation administrateur.
 SLS-064 seul ne qualifie aucun parcours public d’effacement.
 
 

@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Correction d’un effacement prématuré du code lors d’une purge bloquée par
+  un changement inattendu du stockage. Le nettoyage général respecte désormais
+  la garde de purge pour les révisions et candidats, y compris au redémarrage.
+  Le défaut est reproduit avec une vraie ancienne publication puis migration ;
+  22 groupes passent après correction et douze captures du manuel sont relues.
+  [Preuve](docs/evidence/storage-legacy-recovery-dev-2026-11-07.json).
+
 - Décisions publiques de stockage éprouvées avec une vraie session admin fermée
   pendant purge, refus du transport après commit, writer SQLite occupé et
   redémarrage indépendant du contrôle : quatre groupes nouveaux et sept groupes
