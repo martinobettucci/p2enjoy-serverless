@@ -300,8 +300,12 @@ confirment deux HTTPS et la fin de la garde. Le scope d’échéance déclenche
 deadline mais échoue sur la dernière vérification HTTPS de l’alias ; il reste
 incomplet. Le diagnostic suivant observe une ancienne réponse DNS native
 négative, avec les deux autoritaires corrects. Aucun détour/retrait n’a commencé.
-Le cache natif doit réellement se rétablir avant la reprise, sans réécriture
-du bon enregistrement, forçage de DNS ou contournement TLS.
+La [reprise positive](evidence/invocation-route-guard-dev-2026-11-08.json)
+rejoue ensuite les trois scopes sur la résolution native réellement rétablie :
+trois groupes réussis, deux HTTPS et fin de garde confirmés, avec 201 sources
+et les mêmes images. L’expiration du cache ancien est observée ; aucun
+enregistrement correct n’est réécrit, aucune adresse forcée et aucun TLS contourné.
+Ce résultat qualifie les déclencheurs sans perturbation, avant les cycles réels.
 
 ## Barrière native de pause et libération
 
@@ -360,10 +364,10 @@ Les 27 fichiers embarqués correspondent toujours au contrôle. Leurs pannes
 recréent de vrais arrêts/reprises du contrôle, avec référence inchangée.
 
 Cette extraction et ses neuf régressions sont vérifiées ; le nouveau protocole
-de pause/libération et ses scénarios ne sont pas encore implémentés. L’échéance
-de la garde de routes reste incomplète : l’invalidation du cache local ne change
-pas la configuration des résolveurs et n’a pas rétabli la résolution native de
-l’alias. Aucun domaine ni réponse n’est forcé dans les tests.
+de pause/libération et ses scénarios ne sont pas encore implémentés. Le premier
+essai d’échéance reste conservé incomplet. L’invalidation locale n’avait pas
+rétabli le DNS ; après expiration du cache en amont, la reprise positive des
+trois déclencheurs est qualifiée ci-dessus. Aucun domaine ni réponse n’est forcé.
 
 ## Suite complète de preuve
 

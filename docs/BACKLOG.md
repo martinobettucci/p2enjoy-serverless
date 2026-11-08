@@ -477,16 +477,16 @@ retrait/rétablissement puis deux ports détournés et catalogue vide local rée
 Le vide UI public exige ensuite sa propre pause/libération native, distincte
 du pilote historique de destruction ; aucune de ces preuves n’est acquise.
 
-La garde est implémentée en qualification. Deux scénarios sans perturbation
-passent : restauration explicite et SIGKILL réel du pilote avec restauration
-indépendante, deux HTTPS et fin confirmée. Le scénario d’échéance déclenche
-effectivement sa restauration mais échoue à son dernier contrôle HTTPS de
-l’alias (URLError) ; il n’est pas compté réussi. Le diagnostic ultérieur trouve
-un cache DNS natif négatif ancien, alors que les deux autoritaires rendent le
-bon A. Les ports restent tous deux 18090 ; aucun détour/retrait n’a commencé.
-Le [checkpoint de garde](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
-conserve les deux réussites, l’arrêt et le diagnostic séparément. Rejouer
-l’échéance sur résolution native rétablie avant toute perturbation.
+Les trois déclencheurs de garde sans perturbation sont vérifiés : restauration
+explicite, SIGKILL réel du pilote avec restauration indépendante et échéance
+avec pilote vivant, deux HTTPS et fin confirmée dans chaque cas. La
+[preuve positive](evidence/invocation-route-guard-dev-2026-11-08.json) conserve
+trois groupes sur 201 sources. Le premier
+[checkpoint incomplet](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
+garde ses deux réussites, l’arrêt HTTPS de l’échéance et le diagnostic séparément.
+Le cache négatif a expiré et la résolution native s’est rétablie ; aucune adresse
+ni aucun résolveur n’est forcé. Les ports restent tous deux 18090 ; aucun
+détour/retrait n’a commencé. Les cycles effectifs restent à qualifier.
 Pendant cette attente, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
 sont préparées sur la requête canonique, sans changer de route. L’extraction de
 NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,

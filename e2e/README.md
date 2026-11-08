@@ -58,14 +58,15 @@ poste qui héberge la console normale, exécuter
 séparément `python3 -B e2e/invocation-route-lifecycle.py --guard-baseline-only`,
 puis `--guard-owner-loss-only` et `--guard-deadline-only`. Chaque scope refuse
 de remplacer son rapport existant : archiver les résultats avant replay.
-Les deux premiers passent sur le vrai relais de console et les HTTPS publics,
-avec fin confirmée du processus indépendant, sans aucune perturbation de route.
-Le troisième déclenche son échéance mais s’arrête sur le HTTPS de l’alias ;
-le diagnostic trouve ensuite une ancienne réponse DNS négative native et des
-autoritaires corrects. Le [checkpoint incomplet](../docs/evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
-garde cette séparation. Aucun détour ni retrait n’est encore qualifié ; les
-actions correspondantes du pilote de garde ne doivent pas être confondues
-avec ses deux scénarios réussis sans perturbation.
+Les trois passent sur le vrai relais de console et les HTTPS publics, avec
+fin confirmée du processus indépendant, sans aucune perturbation de route :
+[preuve positive](../docs/evidence/invocation-route-guard-dev-2026-11-08.json).
+Le premier essai d’échéance s’est arrêté sur le HTTPS de l’alias ; l’ancien
+cache DNS négatif a ensuite expiré avant le replay. Le
+[checkpoint incomplet](../docs/evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
+garde cet arrêt et son diagnostic séparés. Aucun détour ni retrait n’est encore
+qualifié ; les actions correspondantes du pilote de garde ne doivent pas être
+confondues avec ses trois scénarios réussis sans perturbation.
 
 Le complément à deux domaines réels passe huit groupes API/CLI et six UI sur
 `serverless.lelabs.tech` et `functions.lelabs.tech`, tous deux en HTTPS vérifié.

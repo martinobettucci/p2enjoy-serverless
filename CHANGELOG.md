@@ -8,12 +8,13 @@
   nouveau build applicatif ; le futur pilote de pause/libération reste à écrire.
   [Preuve](docs/evidence/invocation-native-observer-dev-2026-11-08.json).
 
-- Pilotes de garde de routes en qualification : restauration explicite et
-  SIGKILL du seul pilote passent sans perturbation. L’échéance se déclenche
-  mais son contrôle HTTPS de l’alias échoue ; diagnostic ultérieur de cache
-  DNS natif négatif ancien avec autoritaires corrects. Aucun détour/retrait
-  ni nouveau déploiement applicatif ; SLS-066 reste ouverte.
-  [Checkpoint incomplet](docs/evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json).
+- Trois déclencheurs de garde vérifiés sans perturbation : restauration
+  explicite, SIGKILL du seul pilote et échéance avec pilote vivant, deux HTTPS
+  et fin confirmée. Le premier arrêt HTTPS et le cache DNS négatif restent
+  conservés séparément ; la reprise utilise la résolution native rétablie
+  après expiration du cache. Aucun détour/retrait ni nouveau déploiement
+  applicatif ; SLS-066 reste ouverte.
+  [Preuve positive](docs/evidence/invocation-route-guard-dev-2026-11-08.json).
 
 - Alias functions.lelabs.tech appliqué en DEV par la console normale vers
   18090 TLS, avec DNS exact et certificats réellement vérifiés sur les deux

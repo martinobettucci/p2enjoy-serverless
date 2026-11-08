@@ -186,17 +186,18 @@ le replay utilise une nouvelle connexion SSO réelle. Aucun nouveau secret,
 variable, schéma ou build du contrôle. Les notes sont proposées sans adoption.
 
 
-## Vérification de garde en cours
+## Garde vérifiée avant perturbation
 
-Deux scénarios de garde sans perturbation passent : restauration explicite et
-SIGKILL du seul pilote suivi d’une restauration indépendante, deux HTTPS et
-fin confirmée. Le scénario d’échéance reste en échec sur sa dernière lecture
-HTTPS de l’alias ; ses deux routes sont toujours à 18090 et aucune perturbation
-n’a été engagée. Le diagnostic ultérieur trouve un ancien cache DNS natif
-négatif, tandis que les deux autoritaires servent le bon A de functions.
-La disponibilité passée dans la preuve à deux domaines ne vaut pas une
-garantie de résolution continue depuis tous les caches. La reprise utilisera
-la résolution native rétablie, sans forcer d’adresse ou de résolveur.
-Preuve : docs/evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json.
+Les trois déclencheurs de garde passent sur la résolution native rétablie :
+restauration explicite, SIGKILL du seul pilote avec restauration indépendante,
+et échéance avec pilote vivant. Chaque scénario confirme les deux HTTPS et la
+fin de la garde. Les ports restent à 18090 ; aucun détour, retrait ou
+rétablissement d’alias n’est qualifié par ces trois groupes.
+
+La première échéance échouée et son diagnostic DNS restent conservés séparément.
+Après expiration du cache négatif en amont, les deux domaines résolvent
+nativement vers l’adresse attendue ; aucune adresse ni aucun résolveur n’est
+forcé dans les tests. Preuve : docs/evidence/invocation-route-guard-dev-2026-11-08.json.
+La pause native et les perturbations réelles restent à éprouver dans SLS-066.
 Aucune nouvelle variable, secret, route ou image applicative dans cette étape.
 Ces trois notes restent proposées, sans adoption revendiquée.

@@ -671,4 +671,17 @@ identité, son image et son démarrage. Les deux routes et les fichiers officiel
 restent inchangés. Les trois notes restent justes, avec leurs empreintes actives
 et proposées inchangées. [Preuve](evidence/invocation-native-observer-dev-2026-11-08.json).
 Le nouveau protocole pause/libération reste à implémenter et l’échéance de
-garde attend toujours la résolution native de l’alias.
+garde est désormais vérifiée sur la résolution native rétablie, selon le
+complément ci-dessous.
+
+## Trois déclencheurs de garde vérifiés sans perturbation
+
+Après expiration du cache DNS négatif en amont, les deux noms résolvent
+nativement vers l’IP attendue et leurs HTTPS sont vérifiés. Le replay passe
+trois groupes sur 201 sources : explicite, mort SIGKILL du pilote et échéance
+avec propriétaire vivant. Les ports restent à 18090 ; services, démarrages et
+configuration sont inchangés depuis les régressions du traceur commun.
+La [preuve](evidence/invocation-route-guard-dev-2026-11-08.json) garde le premier
+arrêt séparé. Les trois notes sont actualisées et reproposées ; aucune variable,
+secret, route ou image applicative nouvelle. Les cycles effectifs restent à
+qualifier dans SLS-066.

@@ -3352,3 +3352,26 @@ inchangées. La vérification native suivante trouve encore gaierror -2 pour
 l’alias, tandis que la canonique répond 200 ; le cache négatif persiste en amont.
 Cette opération ne transforme pas l’échéance échouée en réussite et n’autorise
 aucun forçage DNS des tests. La préparation de la pause native continue.
+
+## 2026-11-08 — Résolution native rétablie et trois déclencheurs de garde réussis
+
+Le compteur du cache négatif est observé jusqu’à son expiration. La vérification
+native suivante résout les deux domaines vers l’IP attendue et obtient deux
+HTTPS 200 avec certificats vérifiés, sans adresse ou résolveur forcé. Le premier
+arrêt et les effets infructueux du flush local restent conservés.
+
+Sur un gel commun de 201 sources, les trois scopes sont rejoués en série :
+baseline, perte SIGKILL du pilote, échéance de quinze secondes avec pilote vivant.
+Trois groupes terminent à zéro ; les deux HTTPS et la fin de la garde sont
+confirmés dans chaque cas. Le deuxième n’a aucune demande explicite de reprise,
+le troisième garde son propriétaire vivant. Les propriétés matérielles des
+routes sont conservées et events reste vide : aucune perturbation n’a commencé.
+
+Le collecteur natif recoupe les mêmes services/images/démarrages et fichiers
+officiels qu’après les neuf régressions du traceur, avec deux lignes lisibles
+sur 18090 et agent actif. Le nouvel
+[ensemble positif](evidence/invocation-route-guard-dev-2026-11-08.json) n’ajoute
+pas les anciennes réussites au total et ne réécrit pas le checkpoint échoué.
+Les trois notes sont reproposées avec ce statut courant, sans adoption. Aucune
+variable, secret, route ou image nouvelle. Les cycles réels et SLS-066 restent
+ouverts ; la garde dispose maintenant de ses trois prérequis sans perturbation.
