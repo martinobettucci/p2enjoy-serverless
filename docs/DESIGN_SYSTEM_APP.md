@@ -185,3 +185,20 @@ Le client HTTP propose cible courante ou hash explicite et montre la version
 effectivement appelée. Ses exemples copiés conservent le tag choisi. Une version
 indisponible affiche le refus réel sans substitution. Ces parcours restent
 planifiés ; aucune commande absente du backend n’est ajoutée aux écrans actuels.
+
+## Adresses d’appel SLS-066 à réaliser
+
+La facette **Adresses d’appel** suit [INVOCATION_URLS](INVOCATION_URLS.md).
+Une destination partageable dans la fonction et un lien depuis sa ligne de
+service rendent le catalogue découvrable. Cinq domaines par page ; méthodes,
+adresses et exemples complets reviennent à la ligne. La copie confirme le
+résultat natif du presse-papiers et conserve le texte sélectionnable en cas
+de refus. Aucun jeton réel dans les exemples.
+
+Chargement, source indisponible, absence de domaine applicable et brouillon
+sont distincts. « HTTPS déclaré » / « HTTP déclaré » et « Disponibilité non
+vérifiée » qualifient le relevé sans prétendre vérifier un certificat. Une
+erreur ou nouvelle lecture retire les anciennes adresses et les succès de
+copie. Pagination et actualisation conservent le focus sur un contrôle visible,
+y compris après retrait du dernier domaine d’une page. Le parcours complet,
+clavier, mobile à 390 px et refus de copie exigent des preuves réelles.

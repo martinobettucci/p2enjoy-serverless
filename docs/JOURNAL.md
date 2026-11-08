@@ -2623,3 +2623,37 @@ Les trois notes SPARK sont reproposées après comparaison des empreintes des
 propositions précédentes et des notes actives. Leur adoption reste en attente ;
 aucune variable, aucun secret ni route n’est proposé ou modifié. La configuration
 reste dans les deux fichiers de cellule. Aucun remote Git n’est configuré.
+
+## 2026-11-08 — Conception du catalogue des adresses d’appel SLS-066
+
+Après clôture de SLS-065, l’unité en cours devient SLS-066. Le choix confirmé
+pour SLS-074 reste persisté : upload préparatoire, promotion explicite pour
+la cible sans tag. SLS-066 ne publie aucune URL par hash avant cette extension.
+
+Lecture native : seul serverless.lelabs.tech vise actuellement 18090 TLS.
+Le registre officiel est 0640 root:1001. Un conteneur rootless de l’image
+courante lit les 747 octets (SHA256 40426864082b4559bccaf3ab6cb68460d40d7b439b285d13311188d9a6e30fd4),
+refuse l’écriture et est supprimé. Ce probe est un relevé de capacité, sans
+groupe E2E de fonctionnalité. Le code de projection infra lu en référence
+montre que le fichier décrit les routes enabled, sans applied_at ; certains
+chemins le réécrivent 0600 avant ouverture au groupe, et les PATCH peuvent
+laisser une projection ancienne. L’atomicité n’est pas garantie par ce code.
+
+Décision : montage de dossier readonly et ouverture fraîche, lecture bornée
+stricte sans conservation d’un ancien résultat en erreur ; pas d’agent ou
+de registre supplémentaire. Filtrage par le port ASGI réel du réseau hôte,
+jointure SQL de la révision active, catalogue Read commun console/CLI. Les
+URL montrent un transport déclaré et une disponibilité non vérifiée. Une
+lecture d’adresses indisponible après publication CLI ne change pas son succès.
+Le contrat détaillé est INVOCATION_URLS.md ; le design local et le DAT le relient.
+
+Les tests multi-domaines, exclusion d’autre port, retrait et absence ont
+besoin de changements normaux des vraies routes. Aucun fichier projeté ni
+DNS/TLS ne sera substitué. Le contrat local interdisant les opérations FORGE,
+une action propriétaire ou autorité bornée de console du seul SPARK est
+nécessaire ; le plan concret est écrit avant de la solliciter. L’implémentation
+indépendante peut avancer. Aucun service, variable, secret ou route modifié
+à ce checkpoint ; aucun remote Git configuré.
+
+La phrase périmée de SERVICE_CONFIGURATION_URLS annonçant encore le test de
+réponse perdue est corrigée d’après la preuve de transport déjà clôturée.

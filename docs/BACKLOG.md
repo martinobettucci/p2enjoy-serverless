@@ -434,15 +434,20 @@ de la FORGE ni les autres scénarios résiduels de SLS-030.
 <a id="sls-066"></a>
 ## SLS-066 — Afficher les URL d’appel issues des domaines du SPARK
 
-Statut : [ ] — calcul et affichage multi-domaines absents.
+Statut : [~] — contrat et lecture de la source officielle instruits ; calcul,
+console, CLI et preuves fonctionnelles à réaliser.
 
 Découvrir les routes effectivement affectées à la passerelle dans le SPARK,
 calculer les adresses par fonction et événement HTTP, les afficher et les
 rendre copiables dans la console ainsi que dans le résultat de déploiement.
 Distinguer les domaines d’invocation du domaine SSO canonique. Contrat, limites
 d’infrastructure et preuves E2E :
-[SERVICE_CONFIGURATION_URLS](SERVICE_CONFIGURATION_URLS.md). Mettre à jour et
-qualifier le manuel dans l’application avec cette livraison.
+[SERVICE_CONFIGURATION_URLS](SERVICE_CONFIGURATION_URLS.md) et
+[INVOCATION_URLS](INVOCATION_URLS.md). Le probe rootless du 8 novembre confirme
+la lecture readonly réelle, sans qualifier le catalogue. Les preuves multi-domaines,
+retrait et absence exigent les vraies routes et l’autorité bornée du SPARK ;
+aucune substitution du registre n’est admise. Mettre à jour et qualifier le
+manuel dans l’application avec cette livraison.
 
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale

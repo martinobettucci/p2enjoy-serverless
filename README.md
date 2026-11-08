@@ -75,6 +75,10 @@ Le premier projet de référence est `johndalia/jd_serverless`, actuellement
 déployé sur Scaleway. La décision confirmée est de conserver ses handlers et
 de réutiliser `serverless.yml` avec un adaptateur P2Enjoy.
 
+Le [catalogue des adresses d’appel](docs/INVOCATION_URLS.md), SLS-066, est en
+cours de conception à partir des routes réelles du SPARK. Son implémentation
+console/CLI et sa qualification multi-domaines restent à réaliser.
+
 ## Accès confirmé
 
 - La console d'administration utilise le SSO du domaine avec le rôle `admin`.

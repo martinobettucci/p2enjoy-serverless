@@ -2,11 +2,12 @@
 
 Décision du 8 novembre 2026, à la suite de la précision du responsable.
 Unités : [SLS-031](BACKLOG.md#sls-031) et [SLS-066](BACKLOG.md#sls-066).
-La configuration commune SLS-031 est déployée et ses parcours ciblés qualifiés
-sur DEV : [preuve](evidence/service-configuration-dev-2026-11-08.json). La perte
-réelle d’une réponse de modification commune reste à éprouver avant clôture.
-Les adresses
-multi-domaines SLS-066 restent à réaliser. Le manuel décrit le comportement livré.
+La configuration commune SLS-031 est déployée et qualifiée sur DEV :
+[preuve initiale](evidence/service-configuration-dev-2026-11-08.json) et
+[complément de transport](evidence/service-configuration-transport-dev-2026-11-08.json).
+La perte réelle de réponse et les relances explicites sont éprouvées ; SLS-031
+est clôturée. Les adresses multi-domaines SLS-066 sont spécifiées et restent
+à implémenter. Le manuel décrit le comportement livré.
 
 ## État constaté
 
@@ -95,43 +96,25 @@ Le manifeste explicite sert à rétablir cette distinction lors du redéploiemen
 
 ## Domaines du SPARK et chemins d’appel
 
-La source d’autorité est le registre de routes effectivement affectées au SPARK,
-exposé par son contrat de cellule, notamment `/etc/spark/routes`. Une proposition
-dans `routes.?` n’est pas une route active. L’intégration reste en lecture seule
-et ne réalise aucune administration de FORGE.
+Le [contrat détaillé des adresses d’appel](INVOCATION_URLS.md) définit la lecture
+readonly de la projection officielle `/etc/spark/routes`, le filtrage par port
+réel de la passerelle, le catalogue commun API/console/CLI et les preuves.
+La projection décrit les routes enregistrées et activées dans le registre ;
+elle ne certifie ni leur application effective ni la disponibilité TLS.
+Une proposition `routes.?` ne fournit aucune adresse au catalogue.
 
-Retenir seulement les domaines dont la route vise le port de la passerelle
-serverless de cette cellule. Un autre service hébergé dans le même SPARK ne
-constitue pas une adresse d’invocation. Lire les changements de routes de façon
-à supporter leur remplacement par le plan de contrôle. Le mode de publication
-TLS ou clair est explicite ; ne pas annoncer un certificat prêt sur la seule
-base de la déclaration d’une route.
+Les événements de la révision active déterminent les méthodes et chemins :
+`/invoke/{function_id}` pour l’entrée implicite et
+`/invoke/{function_id}/{chemin}` pour un chemin exact déclaré. Aucun gabarit
+paramétré absent du moteur n’est annoncé. Un brouillon n’a aucune adresse
+appelable. L’URL SSO canonique configurée reste distincte des domaines d’appel ;
+Host et X-Forwarded-Host ne constituent jamais une source de confiance.
 
-Pour chaque domaine applicable et chaque événement HTTP de la révision active,
-calculer l’URL complète à partir de l’origine publique et du chemin existant :
-
-```text
-https://<domaine-affecté>/invoke/<uuid-fonction>
-https://<domaine-affecté>/invoke/<uuid-fonction>/<chemin-déclaré>
-```
-
-Présenter les méthodes autorisées. Un chemin paramétré reste un modèle à
-compléter. Une fonction sans publication ne reçoit pas de fausse adresse
-appelable ; en l’absence d’événement HTTP, retenir son point d’entrée implicite.
-Avec [SLS-074](FUNCTION_VERSIONS.md#appel-par-défaut-et-appel-par-tag), calculer
-aussi les URL `/invoke/{function_id}@{code_hash}` et leurs chemins déclarés pour
-chaque version disponible. Le hash et les événements appartiennent à la même
-version ; une version archivée ou supprimée n’est pas proposée comme appelable.
-Cette sélection versionnée reste à implémenter dans SLS-074.
-Ne pas dériver la liste de confiance d’un en-tête
-Host ou X-Forwarded-Host reçu. L’URL SSO canonique reste distincte des domaines
-d’invocation supplémentaires ; leur ajout ne modifie pas les callbacks OIDC.
-
-La fiche de fonction affiche les adresses et permet de les copier ; la fiche
-du service permet de retrouver les adresses de ses fonctions. Le résultat de
-déploiement expose la même information. Les exemples d’appel utilisent un
-emplacement pour `X-Serverless-Token`, jamais un jeton ou secret enregistré.
-L’absence de domaine applicable est affichée explicitement.
+Avec [SLS-074](FUNCTION_VERSIONS.md#appel-par-défaut-et-appel-par-tag), le catalogue
+ajoutera les URL portant le hash complet pour chaque version disponible ;
+les événements et le hash proviendront de la même version. Les appels sans
+tag suivront uniquement la dernière promotion explicite. Cette extension
+reste à implémenter, sans émission anticipée d’URL versionnées.
 
 ## Preuves et manuel
 

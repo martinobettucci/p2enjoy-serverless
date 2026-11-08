@@ -557,3 +557,19 @@ restent identiques. Aucun nouveau build applicatif, migration, variable, secret
 ou route. Configuration exclusivement par les deux fichiers officiels de cellule.
 Les trois notes actualisées sont proposées et recoupées ; leur adoption n’est
 pas revendiquée. Les autres unités du backlog restent indépendantes.
+
+## Préparation des adresses d’appel SLS-066
+
+Le [contrat](INVOCATION_URLS.md) prévoit un montage readonly du répertoire
+`/etc/spark` dans le contrôle, sans nouvelle variable, secret, migration ou
+service. L’installation courante reste inchangée à ce checkpoint de conception.
+Le fichier routes est actuellement 0640 root:1001 ; lecture réelle et refus
+d’écriture vérifiés dans un conteneur rootless supprimé après relevé. Une
+projection future en 0600 sera signalée indisponible, sans modification de ses
+permissions par l’application.
+
+Une proposition d’alias `functions.lelabs.tech` vers 18090 TLS et un plan borné
+de qualification des routes sont décrits dans le contrat. Ils ne constituent
+pas une route appliquée. Les changements normaux doivent être réalisés par
+le propriétaire ou avec une autorisation distincte limitée au seul SPARK.
+La FORGE et les autres SPARK restent hors du périmètre d’administration.

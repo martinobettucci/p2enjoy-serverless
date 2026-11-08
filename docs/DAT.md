@@ -343,3 +343,15 @@ seule et limités aux UUID de campagne. Les 28 fonctions des huit namespaces
 publics sont purgées ; les deux restaurations historiques sont séparées. Sources,
 image, 25 fichiers embarqués et 72 captures sont liés à chaque phase. Aucune
 nouvelle migration, dépendance ou configuration.
+
+## Catalogue des adresses d’appel à réaliser
+
+SLS-066 suit [INVOCATION_URLS](INVOCATION_URLS.md). Le contrôle lira le répertoire
+officiel de cellule par montage readonly, sans nouveau service ni variable.
+Le port local ASGI du réseau hôte identifie les routes d’invocation ; le Host
+client ne participe pas au calcul. Une lecture SQL joint fonction, service et
+événements de sa révision active. La console et la CLI utilisent le même
+catalogue Read autorisé et borné ; une erreur de lecture des adresses après
+publication ne transforme pas celle-ci en échec. Aucun changement de schéma.
+La projection ne garantit ni fraîcheur transactionnelle ni certificat prêt.
+Le montage est éprouvé sur l’image actuelle ; le produit n’est pas encore modifié.
