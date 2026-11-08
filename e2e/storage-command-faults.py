@@ -55,7 +55,8 @@ def rows(path, sql, args=()):
 
 owned = rows(control, '''SELECT f.id,n.name FROM functions f JOIN services s ON s.id=f.service_id
     JOIN namespaces n ON n.id=s.namespace_id WHERE f.id=? AND n.id=?''', (function, namespace))
-assert len(owned) == 1 and re.fullmatch(r'storage-recovery-[0-9a-f]{8}', owned[0]['name']), 'owned_campaign_required'
+campaign_pattern = r'storage-console-api-[0-9a-f]{8}' if mode == 'inspect-api-refusals' else r'storage-recovery-[0-9a-f]{8}'
+assert len(owned) == 1 and re.fullmatch(campaign_pattern, owned[0]['name']), 'owned_campaign_required'
 assert not rows(control, '''SELECT 1 FROM functions f JOIN services s ON s.id=f.service_id
     WHERE f.deleted_at IS NULL AND s.namespace_id!=?''', (namespace,)), 'foreign_active_function'
 
@@ -164,7 +165,22 @@ def restore(item):
     emit(value)
     return value
 
-if mode == 'inspect':
+if mode == 'inspect-api-refusals':
+    observed = inspect()
+    assert observed['function']['deleted_at'] is not None and observed['function']['purged_at'] is None, 'retained_archive_required'
+    observed['artifact_file_sha256'] = {}
+    for revision in observed['revisions']:
+        folder = state / 'artifacts' / revision['id']
+        assert folder.is_dir() and not folder.is_symlink(), 'artifact_directory_required'
+        inventory = {}
+        for path in sorted(folder.rglob('*')):
+            assert not path.is_symlink() and (path.is_file() or path.is_dir()), 'regular_artifact_required'
+            if path.is_file():
+                inventory[str(path.relative_to(folder))] = hashlib.sha256(path.read_bytes()).hexdigest()
+        observed['artifact_file_sha256'][revision['id']] = inventory
+    observed['purge_audits'] = rows(control, 'SELECT id FROM audit_events WHERE object_id=? AND action=? ORDER BY id', (function, 'function.purge'))
+    emit(observed)
+elif mode == 'inspect':
     emit(inspect())
 elif mode == 'guard-evidence':
     unit = sys.argv[4]

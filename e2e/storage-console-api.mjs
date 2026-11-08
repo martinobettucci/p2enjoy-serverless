@@ -4,13 +4,18 @@ import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {readFile,writeFile,rename,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {request} from 'playwright';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
 import {publicationArchive} from './publication-fixtures.mjs';
 
 const base='https://serverless.lelabs.tech',output=new URL('../.local/e2e/',import.meta.url);
-const report=new URL('storage-console-api.json',output),checks=[],cleanupErrors=[],functions=[],services=[],namespaces=[],operations=[],pending=[];
+const report=new URL('storage-console-api.json',output),checks=[],cleanupErrors=[],functions=[],services=[],namespaces=[],operations=[],pending=[],refusalEvidence=[];
+const run=promisify(execFile),ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
 const prefix='storage-console-api-'+randomUUID().slice(0,8),secret='storage-private-'+randomUUID();
 let admin,caller,session,namespace,work,completed=false,cleanup=false;
-async function save(){const temporary=new URL('storage-console-api.pending',output);const campaigns=Object.fromEntries(namespaces.map(ns=>[ns.id,functions.filter(fn=>services.some(service=>service.id===fn.service_id&&service.namespace_id===ns.id)).map(fn=>fn.id)]));await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),campaigns,operation_ids:operations},null,2)+'\n');await rename(temporary,report);}
+async function save(){const temporary=new URL('storage-console-api.pending',output);const campaigns=Object.fromEntries(namespaces.map(ns=>[ns.id,functions.filter(fn=>services.some(service=>service.id===fn.service_id&&service.namespace_id===ns.id)).map(fn=>fn.id)]));await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),campaigns,operation_ids:operations,refusal_evidence:refusalEvidence},null,2)+'\n');await rename(temporary,report);}
+function nativeInspectionCommand(fn,mode='inspect-api-refusals',namespaceId=namespace.id){return run('ssh',[...ssh,'python3','-B','/srv/p2enjoy-serverless/e2e/storage-command-faults.py',mode,fn.id,namespaceId],{timeout:30000,maxBuffer:1024*1024});}
+async function inspectRefusals(fn){return JSON.parse((await nativeInspectionCommand(fn)).stdout);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}}
 async function call(url,{method='GET',body,bytes,token,anonymous=false,headers={},status=200}={}){
   const result=await (token||anonymous?caller:admin).fetch(url,{method,data:bytes??body,headers:{
@@ -101,18 +106,54 @@ try {
     row=await current(fn);await call(`/api/functions/${fn.id}`,{method:'PUT',headers:{'If-Match':String(row.updated_at)},body:{name:row.name,config:{...row.config,storage:{...row.config.storage,cache:{...row.config.storage.cache,enabled:true}}}}});
     assert.equal((await invoke(fn)).cache,null);assert.equal((await invoke(fn)).data,'permanent-record');
   });
-  await check('Archivage consultable et purge réservée à l’administrateur',async()=>{
+  await check('Archivage, schéma strict de purge, version et administration',async()=>{
+    await invoke(fn,{cache:'cache-before-archive-refusals'});
     await call(`/api/functions/${fn.id}`,{method:'DELETE'});await settle(fn);
     const row=await call(`/api/archives/${fn.id}`);assert.equal(row.storage.state,'archived');assert(row.artifact_bytes>0);assert.equal(row.revision_count,1);
+    const before=await inspectRefusals(fn);assert(before.files.data&&before.files.cache);assert(Object.values(before.artifact_file_sha256).some(files=>Object.keys(files).length));assert.deepEqual(before.purge_audits,[]);
     for(const credential of [read,update,remove,createOnly])await call(`/api/archives/${fn.id}`,{token:credential.token,status:403});
     const options={method:'POST',body:{operation_id:randomUUID(),confirm_name:row.name},headers:{'If-Match':String(row.updated_at)}};
     for(const credential of [read,update,remove,createOnly])await call(`/api/archives/${fn.id}/purge`,{...options,token:credential.token,status:403});
     await call(`/api/archives/${fn.id}/purge`,{...options,headers:{...options.headers,'X-CSRF-Token':'invalid'},status:403});
     await call(`/api/archives/${fn.id}/purge`,{...options,headers:{},status:428});
     await call(`/api/archives/${fn.id}/purge`,{...options,body:{...options.body,confirm_name:'wrong'},status:422});
+    const validBody=()=>({operation_id:randomUUID(),confirm_name:row.name}),schemaRefusals=[];
+    const malformed=[
+      {label:'missing-body',body:undefined},
+      {label:'null-body',body:undefined,bytes:Buffer.from('null'),headers:{...options.headers,'Content-Type':'application/json'}},
+      {label:'array-body',body:[]},
+      {label:'empty-object',body:{}},
+      {label:'missing-operation-id',body:{confirm_name:row.name}},
+      {label:'malformed-operation-id',body:{...validBody(),operation_id:'not-an-uuid'}},
+      {label:'number-operation-id',body:{...validBody(),operation_id:42}},
+      {label:'null-operation-id',body:{...validBody(),operation_id:null}},
+      {label:'missing-confirmation',body:{operation_id:randomUUID()}},
+      {label:'null-confirmation',body:{...validBody(),confirm_name:null}},
+      {label:'number-confirmation',body:{...validBody(),confirm_name:42}},
+      {label:'empty-confirmation',body:{...validBody(),confirm_name:''}},
+      {label:'long-confirmation',body:{...validBody(),confirm_name:'x'.repeat(64)}},
+      {label:'unknown-field',body:{...validBody(),unknown:true}},
+    ];
+    for(const {label,...changes} of malformed){
+      await call(`/api/archives/${fn.id}/purge`,{...options,...changes,status:422});
+      const id=changes.body?.operation_id;
+      if(typeof id==='string'&&/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/.test(id))await call('/api/storage-operations/'+id,{status:404});
+      schemaRefusals.push({label,status:422});
+    }
+    assert(fn.updated_at>0&&fn.updated_at<row.updated_at);const staleId=randomUUID();
+    await call(`/api/archives/${fn.id}/purge`,{...options,body:{operation_id:staleId,confirm_name:row.name},headers:{'If-Match':String(fn.updated_at)},status:409});
+    await call('/api/storage-operations/'+staleId,{status:404});
+    const ownershipRefusals=[];
+    for(const [mode,namespaceId] of [['inspect',namespace.id],['inspect-api-refusals',randomUUID()]]){
+      let refused;
+      try{await nativeInspectionCommand(fn,mode,namespaceId);}catch(error){refused={code:error.code,ownership_refused:error.stderr?.includes('owned_campaign_required')};}
+      assert.deepEqual(refused,{code:1,ownership_refused:true});ownershipRefusals.push({mode,ownership_refused:true});
+    }
     const receipt=await call(`/api/storage-operations/${cleared.identifier}`);
     await call(`/api/archives/${fn.id}/purge`,{method:'POST',body:{operation_id:cleared.identifier,confirm_name:row.name},headers:{'If-Match':String(cleared.version)},status:409});
     assert.deepEqual(await call(`/api/storage-operations/${cleared.identifier}`),receipt);
+    const after=await inspectRefusals(fn);assert.deepEqual(after,before);
+    refusalEvidence.push({function_id:fn.id,schema_refusals:schemaRefusals,stale_version:{operation_id:staleId,supplied:fn.updated_at,current:row.updated_at,status:409},ownership_refusals:ownershipRefusals,before,after});
     const unchanged=await call(`/api/archives/${fn.id}`);assert.equal(unchanged.updated_at,row.updated_at);assert.equal(unchanged.purged_at,null);assert.equal(unchanged.artifact_bytes,row.artifact_bytes);
   });
   await check('Purge réelle du code et des volumes, reçu terminal et voisin intact',async()=>{

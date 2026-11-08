@@ -45,7 +45,7 @@ node e2e/publication-recovery.mjs
 python3 -B e2e/public.py
 ```
 
-La suite commune du moteur et de ses régressions se lance aussi par `python3 e2e/execution-suite.py` depuis le poste. Elle exécute quatorze campagnes en série et rattache chaque rapport fraîchement écrit à l’image et aux empreintes des sources locales/distantes avant et après la commande. Les campagnes de configuration commune et de stockage public se lancent séparément selon `e2e/README.md` ; leur intégration complète à cette suite reste à faire. Aucun fichier source ne doit être modifié pendant une suite.
+La suite commune du moteur et de ses régressions se lance aussi par `python3 e2e/execution-suite.py` depuis le poste. Elle exécute quatorze campagnes en série et rattache chaque rapport fraîchement écrit à l’image et aux empreintes des sources locales/distantes avant et après la commande. La configuration commune conserve ses campagnes distinctes. Le stockage public est intégré par `--scope storage-console` : 29 campagnes, 397 groupes, quatre prérequis non comptés et 173 sources liées avant/après. Lire `e2e/README.md` pour les deux phases de qualification. Aucun fichier source ne doit être modifié pendant une suite.
 
 Comme spark-docker dans le SPARK : `python3 -B e2e/control-operations.py`. Comme root dans le SPARK, séparément : `python3 -B e2e/storage-preparations.py`, `bash storage/dev.sh agent-test`, `bash storage/dev.sh limits-test`, puis `python3 -B e2e/managed-storage.py`.
 
@@ -79,7 +79,7 @@ lignes préexistantes sont recoupées. L’ancien agent refuse ce schéma ; ne p
 remplacer simplement le paquet pour revenir en arrière.
 
 La commande `python3 -B e2e/execution-suite.py --scope storage`, depuis le poste,
-exécute sept campagnes et 106 groupes réels avec zéro échec/skip. Elle exige
+exécute actuellement sept campagnes et 107 groupes réels. Le checkpoint historique SLS-064 conserve ses 106 groupes sans échec/skip. Elle exige
 la vraie session SSO pour les régressions HTTPS. La campagne ciblée peut se
 lancer comme root DEV par `python3 -B e2e/storage-discard.py`. Elle crée un
 arbre de 150 000 fichiers, exerce permissions, verrou SQLite, restart et
@@ -117,3 +117,24 @@ indépendante borne la perturbation. Les deux CLI rendent unknown sans rejeu,
 les relances publient et invoquent Docker. Quatre fonctions et treize artefacts
 des deux campagnes sont purgés, les trois gardes inactives et les réservations
 à zéro. Lire `e2e/README.md` et `docs/SERVICE_CONFIGURATION_URLS.md` avant usage.
+
+## Qualification complète du stockage public
+
+Depuis le poste, `python3 -B e2e/execution-suite.py --scope storage-console`
+reçoit les identifiants SSO en JSON sur stdin privée, sans écho, argument,
+variable ni fichier contenant cette saisie. Le client ouvre deux connexions
+réelles au début, puis renouvelle une paire juste avant la campagne qui ferme
+la session de purge. Le build historique, ces deux préparations et le collecteur
+physique ne gonflent pas les 397 groupes des 29 campagnes. Les rapports sont
+invalidés avant exécution et rattachés aux 173 sources et à l’image.
+
+Le complément `node e2e/storage-console-api.mjs` rejoue neuf groupes avec SSH
+root DEV : quatorze corps de purge invalides, version périmée avec UUID neuf et
+comparaison native avant/après. Le mode inspect-api-refusals est seulement en
+lecture et borné au namespace API exact ; les modes de perturbation restent
+bornés à storage-recovery. Ses quatre fonctions s’ajoutent aux 24 du replay,
+avec purges physiques recoupées et ressources globales libérées. Les deux phases
+et les deux mises à jour documentaires de statut postérieures sont explicites
+dans docs/evidence/storage-console-dev-2026-11-08.json. Les 72 images sont
+recoupées ; les captures de connexion/manuel régénérées sont identiques aux
+images déjà inspectées. Aucun nouveau déploiement applicatif ni migration.

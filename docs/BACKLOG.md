@@ -274,7 +274,7 @@ La [preuve du raccordement](evidence/function-storage-dev-2026-11-06.json)
 recoupe aussi les régressions et la console. Les admissions et observations API sont éprouvées par les 31 groupes publics
 de la [preuve du moteur](evidence/execution-dev-2026-11-06.json). Les
 commandes publiques de purge/cache et leurs vues de console sont déployées
-dans SLS-065, dont la qualification élargie reste ouverte. Les crons restent
+et qualifiées dans SLS-065. Les crons restent
 à réaliser.
 Les quotas préparés et leurs reçus sont
 implémentés ; la preuve initiale de dix groupes vérifie décisions, réservations, SIGKILL pendant
@@ -352,78 +352,49 @@ hors verrou global. Migration 004 agent, installation DEV et preuves réelles.
 
 ## SLS-065
 
-Statut : [~] — API, console et manuel déployés ; défaut de nettoyage historique
-corrigé et qualifié, campagnes ciblées intégrées ; régressions élargies encore ouvertes.
+Statut : [x] — déployé et qualifié en DEV ; replay complet, complément API,
+captures, nettoyages, trois notes proposées et revue finale recoupés.
 
-Après SLS-064 : catalogue consultable après suppression des parents, purge
-administrateur confirmée et vidage sous droit Update ; drainage et relecture
-des droits/versions avant décision durable. Console, manuel et E2E API/UI.
-Contrat : [CONSOLE_STORAGE](CONSOLE_STORAGE.md), incluant code et configuration
-dans la purge, reçus publics durables, migration 006, droits et reprise.
-Le [checkpoint](evidence/storage-console-checkpoint-dev-2026-11-07.json)
-recoupe 37 groupes réussis, dont neuf API, neuf UI stockage, huit manuel et
-onze de gestion, ainsi que la purge physique des quatre fonctions de campagne.
-La [preuve de reprise](evidence/storage-command-recovery-dev-2026-11-07.json)
-ajoute sept groupes sur agent indisponible, révocation Update pendant préparation,
-collision sous garde, SIGKILL avant/après décision et erreurs physiques cache/artefacts.
-Elle recoupe quinze groupes de mutation, huit du manuel et le nettoyage physique
-des trois fonctions de reprise. Les onze captures du manuel sont relues.
-La [preuve de validation vivante](evidence/storage-validation-recovery-dev-2026-11-07.json)
-ajoute deux groupes : restauration indépendante du socket après SIGKILL du helper,
-puis purge pendant import Docker et effacement du diagnostic tardif. Les neuf
-groupes API repassent avec conflit de type pour un UUID et réutilisation des noms
-sans confusion entre les archives. Huit fonctions, dont celles de l’essai initial
-de précontrôle corrigé, sont purgées avec nettoyage physique recoupé.
-La [preuve des décisions](evidence/storage-decision-recovery-dev-2026-11-07.json)
-ajoute quatre groupes : retrait d’une session administrateur distincte pendant
-purge, refus du transport agent après commit, writer contrôle occupé après commit
-et redémarrage effectif par la garde indépendante. Les sept groupes de reprise
-existants repassent avec le helper renforcé. Les six fonctions sont purgées,
-leurs fichiers et ressources absents, services et sockets rétablis.
-La [preuve historique avant correction](evidence/storage-legacy-cleanup-defect-dev-2026-11-07.json)
-confirme l’ancienne publication réelle, la migration et la purge sans registre.
-Elle révèle qu’après apparition d’une ligne agent, le nettoyage général au
-redémarrage efface le code malgré `pending/storage_state_changed`. Les originaux
-sont restaurés et recoupés ; le contrat réserve désormais cet effacement au
-résolveur de purge tant que sa garde existe. La [preuve corrigée](evidence/storage-legacy-recovery-dev-2026-11-07.json)
-réunit 22 groupes réels : cinq historiques/restauration, deux de validation
-vivante, sept de panne et huit du manuel. Les originaux sont rétablis, cinq
-fonctions de régression et sept répertoires de code sont purgés, budgets à zéro.
-Les 25 fichiers Python/migrations embarqués correspondent aux sources ; douze
-captures du manuel, à 35 paragraphes dans cette campagne historique, sont inspectées.
-L’intégration passe désormais sept campagnes et 37 groupes réels dans le
-[checkpoint ciblé](evidence/storage-console-focused-dev-2026-11-08.json), zéro
-échec/skip : deux connexions SSO distinctes préparées depuis stdin privée,
-build historique frais, 173 sources avant/après et 25 fichiers embarqués conformes.
-La pagination UI est autonome : onze brouillons sont créés et archivés par
-les parcours console, dix UUID propres sont recoupés sur deux pages après vraie
-panne réseau. Les 24 fonctions de six namespaces sont purgées ; les deux
-restaurations historiques restent distinctes, et quatorze captures sont inspectées.
-La première union complète s’arrête après 26 campagnes et 388 groupes réussis :
-la session de purge inutilisée depuis le début n’est plus authentifiée lors du
-précontrôle de décision, sans création d’objet de cette campagne.
-[Preuve incomplète](evidence/storage-console-incomplete-dev-2026-11-08.json).
-Le contrat impose une nouvelle paire de connexions réelles juste avant cette
-campagne, avec un rapport distinct ; aucune durée SSO n’est modifiée.
-La revue de couverture identifie aussi un complément requis : appeler réellement
-la route de purge avec corps absent/null/tableau, champs obligatoires manquants,
-UUID invalide, confirmation de type/longueur invalide et champ supplémentaire.
-Éprouver séparément une ancienne version positive réellement lue, avec UUID
-d’opération neuf et nom exact. Comparer avant/après fichiers données/cache,
-inventaire du code, configuration chiffrée, versions, commandes, gardes et audit
-de purge. Le helper ne gagne qu’un mode de lecture borné aux UUID de cette campagne.
-Ces assertions seront ajoutées après le replay en cours puis qualifiées par
-les neuf groupes API et leur nettoyage physique, avec empreintes distinctes :
-elles ne sont pas attribuées rétroactivement aux 397 groupes du replay.
-Restent les régressions élargies de l’union complète et l’actualisation finale
-des notes SPARK. Leur adoption n’est pas annoncée.
-Le [contrat d’intégration](CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome)
-fixe les deux scopes ciblé/complet, l’authentification réelle par stdin, les onze
-archives de pagination créées par l’UI et le mapping exhaustif du nettoyage.
-Le build historique reste un prérequis distinct ; les UUID de son installation
-temporaire sont exclus du collecteur de la cellule habituelle. Cette intégration
-est qualifiée sur le scope ciblé ; l’union complète de 29 campagnes reste à
-qualifier avant clôture SLS-065.
+Catalogue consultable après suppression des parents, purge administrateur
+confirmée, vidage sous droit Update, drainage et relecture des droits/versions
+avant décision durable. API, console et manuel sont déployés avec la migration
+006 et le protocole agent 004. Contrat : [CONSOLE_STORAGE](CONSOLE_STORAGE.md).
+
+La [preuve complète](evidence/storage-console-dev-2026-11-08.json) réunit
+29 campagnes et 397 groupes réels en série, sans échec/skip, puis un complément
+distinct de neuf groupes API. Celui-ci couvre quatorze corps invalides de purge,
+une ancienne version positive réellement lue avec UUID neuf et nom exact, les
+refus du helper de lecture et l’égalité des fichiers, configurations, versions,
+commandes, gardes, reçus et audit de purge avant/après. Ses assertions ne sont
+pas attribuées rétroactivement aux 397 groupes.
+
+Les 24 fonctions de six namespaces du replay et les quatre de deux namespaces
+du complément sont purgées et recoupées physiquement ; ressources et allocations
+globales libérées. Les deux fenêtres historiques restaurent les tables, fichiers,
+identités et services originaux. La purge contradictoire de leur installation
+temporaire reste volontairement en attente : elle ne devient pas une purge
+métier réussie par le retrait de cette installation.
+
+La pagination crée onze brouillons depuis l’UI, les archive et recoupe dix UUID
+propres sur deux pages après coupure réseau. Le runner prépare une paire SSO au
+début puis une autre juste avant la décision, sans changer les durées SSO.
+Quatre prérequis restent hors du compte des groupes. Les 173 sources sont liées
+avant/après chaque phase, avec deux sources E2E renforcées pour le complément ;
+les 25 fichiers du contrôle embarqué et la même image sont recoupés. Les deux
+mises à jour documentaires finales de statut sont distinguées des sources testées.
+
+Les 72 captures sont recoupées : 55 nouvelles images observées et 17 images
+régénérées identiques à celles déjà inspectées. Le manuel correspond à ses
+treize chapitres et 39 paragraphes. Les trois notes SPARK sont proposées et
+recoupées ; leur adoption n’est pas annoncée.
+
+Checkpoints conservés : [initial](evidence/storage-console-checkpoint-dev-2026-11-07.json),
+[commandes sous panne](evidence/storage-command-recovery-dev-2026-11-07.json),
+[validation vivante](evidence/storage-validation-recovery-dev-2026-11-07.json),
+[décisions](evidence/storage-decision-recovery-dev-2026-11-07.json),
+[correctif historique](evidence/storage-legacy-recovery-dev-2026-11-07.json),
+[intégration ciblée](evidence/storage-console-focused-dev-2026-11-08.json) et
+[premier replay arrêté sur prérequis SSO](evidence/storage-console-incomplete-dev-2026-11-08.json).
 SLS-064 seul ne qualifie aucun parcours public d’effacement.
 
 

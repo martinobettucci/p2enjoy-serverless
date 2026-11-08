@@ -37,7 +37,7 @@ L’historique se lit sous `/api/functions/{id}/revisions`. Le rollback rétabli
 
 ## Quotas, décisions et erreurs
 
-Une fonction configure séparément données permanentes et cache, avec activation et allocation en Mio. Désactiver conserve les fichiers et l’allocation. Un quota sous l’usage est refusé ; une invocation admise interdit une mutation incompatible et les instances au repos sont drainées. Supprimer archive les volumes, sans les purger ni libérer leur allocation. La purge est une commande d’administration distincte dans Archives de fonctions ; le vidage du cache est dans la facette Stockage. La qualification transversale de ces commandes reste suivie dans SLS-065.
+Une fonction configure séparément données permanentes et cache, avec activation et allocation en Mio. Désactiver conserve les fichiers et l’allocation. Un quota sous l’usage est refusé ; une invocation admise interdit une mutation incompatible et les instances au repos sont drainées. Supprimer archive les volumes, sans les purger ni libérer leur allocation. La purge est une commande d’administration distincte dans Archives de fonctions ; le vidage du cache est dans la facette Stockage. La qualification transversale de ces commandes est recoupée dans SLS-065 et docs/evidence/storage-console-dev-2026-11-08.json.
 
 Les commandes publiques utilisent un UUID d’opération et la version lue :
 `POST /api/functions/{id}/cache-clear`, `POST /api/archives/{id}/purge`, puis
@@ -59,3 +59,11 @@ La console inscrit l’UUID du candidat dans son adresse avant d’envoyer la pr
 Supprimer une révision inactive demande confirmation. Un 503 peut signifier que sa suppression logique est enregistrée mais que le nettoyage physique attend encore ; relire l’historique. La révision active reste protégée et les révisions utilisées par une instance ne peuvent pas être supprimées.
 
 Le manuel d’usage est accessible dans la navigation, à /console/manual. Il décrit les parcours disponibles, les droits, la publication, les révisions, les limites et le diagnostic. Sa source unique est `docs/manual.md`, construite et vérifiée avec la version de la console.
+
+Pour une nouvelle commande de purge, le corps JSON strict exige operation_id
+UUID et confirm_name texte de 1 à 63 caractères, égal au nom exact. Un corps
+invalide donne 422 ; une version If-Match absente donne 428, périmée 409.
+Ces refus n’entament pas la purge et ne créent pas son reçu. Les fichiers,
+configuration et registres ont été recoupés avant/après les refus réels.
+Un UUID déjà connu suit les règles de répétition corrélée : relire son reçu,
+puis réutiliser ses paramètres initiaux si une répétition explicite est nécessaire.

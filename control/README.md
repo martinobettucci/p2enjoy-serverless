@@ -147,12 +147,12 @@ persistée et attend la confirmation du stockage : relire la fonction ou le
 candidat avant de réessayer. Les mutations incompatibles restent refusées.
 La suppression archive les volumes ; elle ne libère pas leur allocation.
 Le moteur d’admission est intégré ; les commandes publiques de purge restent
-en qualification dans SLS-065. La migration 006, les reçus publics, le vidage du
+qualifiées dans SLS-065. La migration 006, les reçus publics, le vidage du
 cache, le catalogue d’archives et la purge sont déployés ; leurs pannes et reprises
 sont suivies dans la [preuve ciblée](../docs/evidence/storage-command-recovery-dev-2026-11-07.json).
 La campagne courante de mutation comporte quinze groupes, dont la fermeture
 du writer de qualification sous SIGTERM réel ; la preuve historique ci-dessus
-précède cet ajout. La qualification complète de SLS-065 reste ouverte.
+précède cet ajout. La qualification complète de SLS-065 est recoupée dans la preuve finale ci-dessous.
 La [preuve de validation vivante](../docs/evidence/storage-validation-recovery-dev-2026-11-07.json)
 ajoute deux groupes sous panne réelle du socket Docker et neuf groupes API
 renforcés : diagnostic tardif effacé après nettoyage, UUID lié au type de commande
@@ -163,7 +163,7 @@ qualifie ensuite quatre groupes sur la session administrateur et les pannes apr�
 commit, avec sept groupes de reprise rejoués. La décision est abandonnée si la
 session est fermée avant commit ; une décision déjà enregistrée termine après
 restauration du transport ou du writer, avec le même reçu. Le redémarrage effectif
-par la garde indépendante est aussi recoupé. Les régressions élargies restent ouvertes.
+par la garde indépendante est aussi recoupé. Les régressions élargies sont incluses dans la preuve finale ci-dessous.
 
 Le [banc historique](../docs/STORAGE_LEGACY_PROOF.md) produit de vraies archives
 avec l’API antérieure au registre, puis applique les migrations actuelles.
@@ -173,7 +173,7 @@ existe, le nettoyage des révisions/candidats laisse maintenant ses artefacts au
 résolveur de purge. La [preuve corrigée](../docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
 passe 22 groupes ciblés et recoupe les 25 sources Python/migrations embarquées,
 la restauration des originaux, cinq fonctions de régression nettoyées et douze
-captures du manuel. Elle ne clôture pas les régressions communes de SLS-065.
+captures du manuel. Ce checkpoint historique est complété par la preuve finale ci-dessous.
 
 ## Invocations publiques et admissions
 
@@ -221,3 +221,11 @@ réunit 18 campagnes et 312 groupes réels, dont dix API de publication du code,
 21 de console de publication et huit du manuel. Les réponses perdues, le vrai
 503 de nettoyage et la confirmation de stockage en attente sont éprouvés.
 Les 54 captures ont été inspectées ; sources, image et nettoyage sont recoupés.
+
+La [preuve finale du stockage public](../docs/evidence/storage-console-dev-2026-11-08.json)
+passe 29 campagnes et 397 groupes, puis neuf groupes API renforcés. Les refus
+directs de purge couvrent quatorze corps invalides et une version périmée avec
+UUID frais ; les snapshots natifs sont identiques avant/après. Le contrôle et
+son image restent identiques. Les 28 fonctions des huit namespaces SLS-065 sont
+purgées et les ressources globales libérées ; les deux restaurations historiques
+sont vérifiées séparément.

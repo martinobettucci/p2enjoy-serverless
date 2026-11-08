@@ -2,18 +2,26 @@
 
 ## [Non publié]
 
+- Stockage public qualifié en DEV : 29 campagnes en série, 397 groupes réussis,
+  puis neuf groupes API renforcés de quatorze corps invalides de purge et d’une
+  version périmée. Snapshots natifs identiques avant/après les refus, 28 fonctions
+  des huit namespaces publics purgées, restaurations historiques et ressources
+  recoupées. 72 captures vérifiées ; manuel à treize chapitres et 39 paragraphes.
+  Les deux phases et les mises à jour documentaires de statut ont leurs empreintes
+  distinctes. [Preuve](docs/evidence/storage-console-dev-2026-11-08.json).
+
 - La première suite complète de stockage conserve son arrêt réel après 388
   groupes : prérequis de session de purge devenu invalide avant la campagne de
   décision. Le runner prépare une nouvelle paire SSO juste avant cette campagne,
   avec un rapport distinct, sans changer les durées d’authentification ni compter
-  un groupe fictif. La nouvelle campagne complète reste à qualifier.
+  un groupe fictif. La nouvelle campagne complète termine avec succès dans la preuve finale.
 
 - Suite publique de stockage intégrée : sept campagnes et 37 groupes E2E passent
   sur l’image du contrôle inchangée. Deux sessions SSO réelles préparées par stdin
   privée, onze archives créées via UI pour la pagination, 24 fonctions purgées,
   restaurations historiques recoupées et quatorze captures inspectées.
   [Checkpoint](docs/evidence/storage-console-focused-dev-2026-11-08.json).
-  L’union complète des régressions reste ouverte avant clôture SLS-065.
+  L’union complète et le complément sont recoupés dans la preuve finale.
 
 - Versionnement par hash, déduplication, appels épinglés et pilote sans activation
   spécifiés dans SLS-074 et FUNCTION_VERSIONS. Les raccordements console, éditeur,
@@ -64,7 +72,7 @@
   groupes API repassent avec conflit de type d’UUID et réutilisation des noms.
   Huit fonctions purgées et neuf répertoires de code absents recoupés dans la
   [preuve](docs/evidence/storage-validation-recovery-dev-2026-11-07.json).
-  L’image du produit reste inchangée ; SLS-065 conserve ses preuves résiduelles.
+  L’image du produit reste inchangée ; les preuves suivantes sont réunies dans la qualification finale SLS-065.
 
 - Commandes publiques de stockage qualifiées sous révocation, collision,
   indisponibilité, SIGKILL et erreurs physiques : sept groupes réels, avec
@@ -72,13 +80,13 @@
   recoupé, onze captures du manuel relues. Fermeture interrompue et identité
   SQLite des helpers corrigées et éprouvées. Ce
   [checkpoint](docs/evidence/storage-command-recovery-dev-2026-11-07.json)
-  ne clôture pas SLS-065 ; les scénarios résiduels et régressions restent ouverts.
+  est complété par les scénarios et régressions de la preuve finale SLS-065.
 
 - SLS-065 déployée en DEV après contrat et migration 006 contrôlée : catalogue
   d’archives, vidage du cache, purge volumes/code/configuration, droits et reçus
   publics durables. Les neuf groupes API, neuf parcours navigateur et huit groupes
   du manuel passent. Le manuel affiche treize chapitres depuis sa source unique.
-  La qualification des pannes, reprises et régressions élargies reste ouverte.
+  Les pannes, reprises et régressions élargies sont recoupées dans la preuve finale.
 
 - Protocole corrélé de vidage/purge, reçu durable, reprise et worker unique
   supprimant hors verrou du registre ; migration 004 agent et campagne réelle
@@ -226,7 +234,7 @@
 - 31 contrôles réels d’invocation et 11 contrôles de cycle de vie réussis,
   avec les 36 régressions du chargeur partagé. Gros corps, OOM, PIDs, signaux,
   résultat tardif après suspension du contrôle et courses réellement exercés.
-  Admission, volumes par fonction et passerelle authentifiée restent à intégrer.
+  Admission, volumes par fonction et passerelle authentifiée sont intégrés et qualifiés.
 
 - Commande CLI deploy : cible HTTPS vérifiée, pagination, conservation des UUID,
   packaging avant mutation, publications en série et rapport des résultats
@@ -234,7 +242,7 @@
 - 14 contrôles réels de prérequis et de refus HTTPS, plus 24 scénarios
   plan/package rejoués dans les nouvelles images. Client authentifié ajouté
   pour pagination, publications successives et reprise de brouillon ; sa
-  qualification reste en échec de prérequis SSO.
+  qualification authentifiée passe désormais ses sept groupes.
 
 - Routes DEV de préparation, upload ZIP, validation Node, publication atomique,
   historique, rollback et suppression des révisions inactives. Migration 003,
@@ -242,15 +250,14 @@
   conservées jusqu’au nettoyage confirmé.
 - Huit groupes HTTPS publics et trente scénarios réels de démarrage/panne
   réussis sur la nouvelle image, dont exclusivité et reprise SQLite. Client
-  de publication ajouté ; sa campagne reste en échec de prérequis sans session
-  SSO réelle. Vues de révisions et invocation restent à réaliser.
+  de publication authentifié qualifié ; vues de révisions et invocation disponibles.
 
 - Extraction ZIP serveur bornée : tailles réelles, cohérence des en-têtes,
   CRC, refus des liens et publication readonly sans écrasement. Correction
   du drainage DEFLATE et borne de lecture du hash d'entrée.
 - 112 contrôles réels sur le SPARK DEV, incluant les limites de volume,
   20 000 fichiers, saturation disque, courses et les douze archives du
-  packager chargées par Node. Intégration aux API de révision encore en cours.
+  packager chargées par Node. Intégration aux API de révision réalisée et qualifiée.
 
 - Contrat OIDC du client DEV créé conservé dans le dépôt et rapproché du code.
   La campagne publique ajoute la découverte et les clés asymétriques réelles ;
@@ -261,7 +268,7 @@
   secondes. 36 scénarios E2E réels, dont dépendances, imports bloqués, limites,
   secrets recoupés, données binaires et destruction des descendants.
 - Correction de confinement du canal, de troncature des secrets et de fermeture
-  des connexions partielles. Intégration aux révisions encore en cours.
+  des connexions partielles. Intégration aux révisions réalisée et qualifiée.
 
 - Première CLI d'adaptation YAML et de packaging ZIP, avec héritage explicite,
   descripteurs sans valeurs de configuration, inventaires SHA256, chemins bornés

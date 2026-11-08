@@ -1,5 +1,52 @@
 # Journal de cadrage
 
+## 2026-11-08 — Qualification transversale du stockage public
+
+Le replay sur les sources fonctionnelles ae03204 termine à zéro : 29 campagnes,
+397 groupes réussis, aucun échec ni test ignoré. Quatre prérequis sont distincts :
+paire SSO initiale, build historique, paire SSO juste avant la décision et collecte
+physique. La nouvelle paire permet les quatre groupes de décision, dont une vraie
+session fermée pendant préparation. Le premier arrêt après 388 groupes reste
+conservé, sans transformer son prérequis en groupe passé.
+
+Les 24 fonctions de six namespaces publics sont purgées ; deux restaurations
+historiques distinctes rétablissent tables, identités et fichiers. La comparaison
+SQLite est logique, pas une comparaison binaire des fichiers après redémarrage.
+Le scénario contradictoire conserve son reçu pending/storage_state_changed et
+ses artefacts jusqu’à la restauration de son installation temporaire ; cette
+restauration ne constitue pas une purge métier réussie.
+
+Les 72 captures sont recoupées. Gestion (7), exécution (12), publication (22)
+et stockage (14) sont observés sur le nouveau replay. Les six PNG de connexion
+et onze JPEG du manuel sont régénérés dans leur fenêtre fraîche et identiques
+octet par octet aux images déjà inspectées. Le manuel correspond à ses treize
+chapitres et 39 paragraphes. Aucun défaut visuel bloquant relevé ; chaque revue
+nomme les limites des captures ponctuelles et les assertions qui les complètent.
+
+Après conservation de ce checkpoint, les deux sources E2E de refus de purge
+sont renforcées puis synchronisées. Neuf groupes API passent : quatorze corps
+malformés, version positive antérieure avec UUID neuf, reçus absents et deux
+refus du helper de lecture hors de son périmètre. Les snapshots natifs avant/
+après sont identiques : fichiers métier, inventaires des artefacts, configuration
+chiffrée, versions, commandes, gardes, reçus agent et audit de purge. Les quatre
+nouvelles fonctions de deux namespaces sont purgées et recoupées physiquement.
+L’image applicative reste 62ad2b7f ; aucune migration ou configuration ajoutée.
+
+La preuve conserve séparément les 173 sources de chaque phase : les nouvelles
+assertions ne sont pas attribuées aux 397 groupes. Les deux documents indexés
+CONSOLE_STORAGE et DESIGN_SYSTEM_APP reçoivent ensuite seulement leur statut
+et leurs références de preuve ; les différences sont explicites. La collecte
+initiale des rapports avait confondu function-storage.faults, qui décrit les
+pannes provoquées, avec une liste d’échecs. Son contrôle est corrigé par schéma,
+sans rejouer ni modifier une campagne fonctionnelle.
+
+Le briefing courant est relu ; la route active reste serverless.lelabs.tech
+vers 18090. Les trois notes actualisées sont proposées et leurs empreintes
+recoupées, sans annoncer leur adoption. Aucune variable, secret ou route proposé,
+aucun fichier de configuration alternatif. La revue finale ne relève aucun défaut bloquant ; SLS-065 est clôturée. Le
+registre d’incohérences est absent, les autres unités restent indépendantes. Aucun remote Git n’est configuré.
+
+
 ## 2026-11-08 — Couverture directe des refus de purge
 
 Pendant le replay complet sur les sources figées ae03204, la revue de couverture

@@ -65,8 +65,11 @@ Le premier scope passe sept campagnes et 37 groupes réels dans le
 [checkpoint ciblé](../docs/evidence/storage-console-focused-dev-2026-11-08.json) :
 173 sources liées avant/après, 24 fonctions purgées dans six namespaces,
 deux restaurations historiques distinctes, 25 sources embarquées et quatorze
-captures UI inspectées. Le scope complet réunit 29 campagnes, soit 397 groupes
-attendus ; son replay élargi reste nécessaire avant clôture de SLS-065.
+captures UI inspectées. Le scope complet passe 29 campagnes et 397 groupes
+dans la [preuve complète](../docs/evidence/storage-console-dev-2026-11-08.json),
+avec 72 captures recoupées, puis neuf groupes API rejoués et renforcés. Les deux
+phases gardent leurs empreintes distinctes ; les nouvelles assertions ne sont
+pas attribuées au replay antérieur.
 
 Ces deux scopes reçoivent une ligne JSON `username`/`password` sur stdin privée.
 Le runner coupe lui-même l’écho d’un terminal et ne conserve pas cette entrée.
@@ -116,7 +119,7 @@ La [preuve corrigée](../docs/evidence/storage-legacy-recovery-dev-2026-11-07.js
 réunit cinq groupes historiques/restauration, deux de validation vivante, sept de
 commandes sous panne et huit du manuel. La [preuve avant correction](../docs/evidence/storage-legacy-cleanup-defect-dev-2026-11-07.json)
 conserve l’échec réel. Ces campagnes sont maintenant intégrées au scope ciblé ;
-les régressions élargies de la suite complète restent ouvertes.
+les régressions élargies sont recoupées dans la preuve complète du 8 novembre.
 
 Après synchronisation des sources sur le SPARK, exécuter successivement depuis
 la racine `node e2e/storage-console-api.mjs`, `node e2e/storage-console-ui.mjs`,
@@ -126,7 +129,7 @@ La campagne UI courante passe dix groupes : elle crée onze brouillons et les
 archive depuis la console avant d’exercer les deux pages, puis purge ses douze
 fonctions. Le rapport `campaigns` contient leur mapping exhaustif. La preuve reste
 un [checkpoint SLS-065](../docs/evidence/storage-console-checkpoint-dev-2026-11-07.json) :
-les pannes et reprises du contrôle public et les régressions élargies restent ouvertes.
+les pannes, reprises et régressions figurent désormais dans la preuve complète.
 
 `node e2e/storage-command-recovery.mjs` ajoute sept groupes réels : perte du
 helper avec restauration indépendante, indisponibilité de l’agent, révocation
@@ -140,8 +143,8 @@ recoupe ensuite leur nettoyage physique. La
 [preuve de reprise](../docs/evidence/storage-command-recovery-dev-2026-11-07.json)
 conserve sept groupes de reprise, quinze de régression des mutations et huit du
 manuel, exécutés en série. Elle reste un checkpoint ; la validation vivante est
-éprouvée par la campagne suivante, les autres pannes résiduelles et régressions
-élargies restent à terminer.
+éprouvée par la campagne suivante ; pannes et régressions sont recoupées dans
+la preuve complète du 8 novembre.
 
 `node e2e/storage-validation-recovery.mjs` ajoute deux groupes : perte réelle du
 helper avec restauration indépendante du socket Docker, puis purge pendant un
@@ -546,7 +549,8 @@ mode et son inspect exigent l’UUID exact du namespace de publication.
 
 La commande `python3 -B e2e/execution-suite.py --scope publication` réunit les
 campagnes moteur et console en série, sans répéter les campagnes communes :
-dix-huit campagnes, 312 groupes réussis dans la qualification finale. Son rapport autonome est
+dix-huit campagnes ; le checkpoint historique ci-dessous passe 312 groupes,
+et le runner courant en attend 313. Son rapport autonome est
 `.local/e2e/publication-regressions.json`. Chaque rapport doit être frais,
 complet et nettoyé ; sources locales/distantes et image restent identiques.
 La [preuve finale](../docs/evidence/publication-console-dev-2026-11-07.json) recoupe
@@ -570,4 +574,24 @@ campagne sont nettoyés. Le rapport storage/discard-proof.json exige fin et
 nettoyage vrais, zéro échec/skip. Les douze groupes ciblés et 94 groupes de
 régression passent dans la [preuve](../docs/evidence/storage-discard-dev-2026-11-07.json).
 Depuis le poste, `python3 -B e2e/execution-suite.py --scope storage` exécute les
-sept campagnes en série, avec sources, image et fraîcheur des rapports vérifiées.
+sept campagnes en série, actuellement 107 groupes, avec sources, image et fraîcheur
+des rapports vérifiées. Le checkpoint SLS-064 conserve ses 106 groupes historiques.
+
+## Refus directs de purge et absence d’effet
+
+`node e2e/storage-console-api.mjs` exige aussi SSH root vers le seul SPARK DEV.
+Ses neuf groupes incluent quatorze corps de purge malformés, une ancienne version
+positive réellement lue avec UUID frais et nom exact, puis absence des reçus.
+`storage-command-faults.py inspect-api-refusals UUID_FONCTION UUID_NAMESPACE`
+lit seulement l’archive exacte de la campagne `storage-console-api-XXXXXXXX`.
+Les autres modes gardent leur périmètre `storage-recovery-XXXXXXXX`. Le banc
+vérifie le refus de l’ancien mode de lecture sur ce namespace et du nouveau mode
+avec un autre namespace. Il compare fichiers data/cache, inventaires d’artefacts,
+empreinte de configuration chiffrée, versions, commandes, gardes, reçus et audit
+de purge. Les snapshots encadrent aussi les refus d’accès, de CSRF et de confirmation.
+
+Le complément est qualifié après le replay complet, avec ses propres 173 sources
+avant/après et le même contrôle. Ses quatre fonctions sont purgées dans deux
+namespaces distincts, recoupés par `storage-console-inspect.py`. La preuve complète
+conserve les deux phases et les mises à jour documentaires de statut postérieures.
+Le manuel et l’application ne changent pas dans ce complément de qualification.

@@ -408,7 +408,7 @@ de code et les ressources libérées. La commande est `python3 -B
 e2e/execution-suite.py --scope storage`. Les commandes publiques et la console
 restent dans SLS-065. [Contrat](STORAGE_DISCARD.md).
 
-## Déploiement et qualification ciblée de SLS-065
+## Déploiement initial et checkpoints de SLS-065
 
 Le [contrat public](CONSOLE_STORAGE.md) est déployé avec la migration 006 du
 contrôle : reçus durables, extension des gardes et date de purge. Le déploiement
@@ -424,7 +424,7 @@ L’image du contrôle est
 L’agent 004 reste inchangé. Aucun secret, variable, route ou service de cellule
 supplémentaire. Les campagnes ciblées API, console de stockage et manuel passent
 26 groupes réels ; les campagnes créatrices nettoient leurs propres objets.
-Les pannes, reprises et régressions élargies restent à terminer avant clôture.
+Ces campagnes initiales sont complétées par la qualification finale ci-dessous.
 
 Un retour à l’ancien contrôle exige d’abord zéro commande en cours et une
 restauration cohérente base/fichiers/volumes ; une purge effective ne s’annule
@@ -502,8 +502,8 @@ Les cinq fonctions des régressions sont purgées, sept répertoires de code abs
 et les budgets globaux à zéro. Les douze captures du manuel ont été relues.
 
 Aucune migration, variable, secret ou route n’est ajouté. Les deux fichiers
-officiels de configuration sont inchangés. SLS-065 attend encore la suite
-commune élargie. Les notes actualisées sont proposées dans le déploiement
+officiels de configuration sont inchangés. La suite commune élargie est recoupée
+dans la qualification finale ci-dessous. Les notes sont aussi proposées dans le déploiement
 de configuration commune du 8 novembre décrit ci-dessous.
 
 ### Configuration commune des services — 8 novembre 2026
@@ -537,3 +537,23 @@ tant que ces propositions ne sont pas adoptées. Le dépôt a vérifié qu’auc
 autre proposition n’était en attente avant écriture. Aucune proposition de
 variable, secret ou route n’a été nécessaire. Les deux env_file officiels restent
 la seule source de configuration des services.
+
+## Qualification finale du stockage public — 8 novembre 2026
+
+La [preuve](evidence/storage-console-dev-2026-11-08.json) recoupe 29 campagnes,
+397 groupes et 72 captures, puis un complément distinct de neuf groupes API.
+Les quatorze refus de corps de purge et la version périmée conservent les fichiers,
+configurations, versions, commandes, gardes et audit. Les 24 fonctions du replay
+et les quatre du complément sont purgées dans huit namespaces ; les deux fenêtres
+historiques restaurent les originaux et restent distinctes de ces purges publiques.
+Les tables restaurées sont comparées logiquement et les fichiers par empreinte,
+sans prétendre à une identité octet par octet des fichiers SQLite redémarrés.
+
+Les 173 sources sont identiques avant/après chaque phase ; deux sources E2E sont
+renforcées entre replay et complément, puis deux documents reçoivent leur statut
+final. Ces écarts sont explicites dans la preuve. Les 25 fichiers Python/migrations
+embarqués et l’image `sha256:62ad2b7f13f0e274b7365daa39c1b5f3fcf524a32e82fa27d4acf582e7187900`
+restent identiques. Aucun nouveau build applicatif, migration, variable, secret
+ou route. Configuration exclusivement par les deux fichiers officiels de cellule.
+Les trois notes actualisées sont proposées et recoupées ; leur adoption n’est
+pas revendiquée. Les autres unités du backlog restent indépendantes.

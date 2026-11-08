@@ -143,7 +143,7 @@ Le manuel comprend ces nouveaux parcours. Leur [preuve finale](docs/evidence/pub
 passe 18 campagnes en série, 312 groupes réels, sans échec ni test ignoré,
 avec 54 captures inspectées. Les sources, l’image servie, les nettoyages et les
 notes SPARK sont recoupés. Les commandes publiques de purge/cache sont déployées
-et font l’objet de la qualification ciblée SLS-065 décrite ci-dessous.
+et font l’objet de la qualification complète SLS-065 décrite ci-dessous.
 Les crons et les preuves résiduelles de plateforme restent suivis au backlog.
 
 **Il est interdit de lancer l'application avec un profil PREPROD ou PROD,
@@ -238,43 +238,26 @@ docs/
   sso.md                   Contrat d'intégration SSO
 ```
 
-Les effacements corrélés de l’agent sont qualifiés sur DEV : sept campagnes,
-106 groupes réels, zéro échec/skip. Un reçu empêche le second vidage après
-réponse perdue ; les reprises après erreur physique/SQLite et interruption
-sont recoupées. [Preuve SLS-064](docs/evidence/storage-discard-dev-2026-11-07.json).
-La commande `python3 -B e2e/execution-suite.py --scope storage` rejoue cette
-qualification en série. Le catalogue d’archives et les commandes publiques
-dans la console, avec leur manuel, sont déployés dans SLS-065. Son
-[checkpoint](docs/evidence/storage-console-checkpoint-dev-2026-11-07.json)
-recoupe 37 groupes API/UI/manuel et la purge physique des fonctions de campagne.
-Les preuves de pannes et les régressions élargies restent ouvertes avant clôture.
-La [preuve de reprise](docs/evidence/storage-command-recovery-dev-2026-11-07.json)
-ajoute sept groupes sur les commandes publiques sous panne, avec quinze groupes
-de mutation et huit du manuel. Révocation, collision, SIGKILL et reprise après
-erreur physique sont éprouvés ; les trois fonctions de cette campagne sont purgées
-et leur nettoyage physique recoupé. Les scénarios résiduels restent détaillés
-dans SLS-065, qui demeure ouverte.
-La [preuve de validation et d’identité](docs/evidence/storage-validation-recovery-dev-2026-11-07.json)
-ajoute deux groupes sur la validation vivante, dont une purge pendant import Docker, puis rejoue
-les neuf groupes API avec conflits de type de commande et réutilisation des noms.
-Le diagnostic tardif et les artefacts sont nettoyés après restauration du socket ;
-une nouvelle fonction portant les anciens noms conserve ses données. Les huit
-fonctions des essais sont purgées et leur nettoyage physique est recoupé.
-La [preuve des décisions](docs/evidence/storage-decision-recovery-dev-2026-11-07.json)
-ajoute quatre groupes : session administrateur fermée pendant purge, transport
-agent refusé après commit, contention SQLite du contrôle et redémarrage par garde
-indépendante. Les sept groupes de reprise existants repassent avec le helper
-renforcé. Les six fonctions sont purgées, les services et sockets rétablis.
-La [preuve des archives historiques](docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
-reproduit une ancienne publication puis sa migration réelle. Elle a révélé un
-effacement de code par le nettoyage général malgré une purge bloquée ; le
-correctif réserve ces artefacts au résolveur de purge. Cinq groupes historiques
-et de restauration, neuf groupes de panne/validation et huit du manuel passent
-sur l’image corrigée : 22 groupes, zéro échec/skip, douze captures relues.
-L’intégration des sept campagnes publiques/historiques à la suite commune passe
-37 groupes réels : [checkpoint ciblé](docs/evidence/storage-console-focused-dev-2026-11-08.json).
-La pagination crée ses onze archives depuis la console ; les 24 fonctions des
-campagnes sont purgées et les quatorze captures relues. Deux connexions SSO réelles
-sont préparées automatiquement par stdin privée. Les régressions élargies du
-scope `storage-console` restent à rejouer avant clôture SLS-065. Les trois
-notes SPARK actualisées ont été proposées le 8 novembre.
+Les effacements corrélés de l’agent sont qualifiés dans la preuve historique
+[SLS-064](docs/evidence/storage-discard-dev-2026-11-07.json), avec 106 groupes.
+Le catalogue d’archives, les commandes de cache/purge, leur console et leur
+manuel passent la [preuve complète SLS-065](docs/evidence/storage-console-dev-2026-11-08.json) :
+29 campagnes en série, 397 groupes réussis, zéro échec et zéro test ignoré.
+Un complément distinct rejoue neuf groupes API avec quatorze corps invalides
+de purge, une version périmée et des relevés natifs sans mutation.
+
+Les 24 fonctions du replay et les quatre du complément sont purgées dans huit
+namespaces ; les deux restaurations historiques restent distinctes. La preuve
+recoupe 173 sources avant/après chaque phase, les 25 fichiers du contrôle
+embarqué et 72 captures : 66 JPEG et six PNG de connexion. Les 17 images de
+connexion/manuel régénérées sont identiques aux images déjà inspectées ; les
+55 autres sont inspectées sur ce replay. Le manuel servi correspond à ses
+treize chapitres et 39 paragraphes sources.
+
+`python3 -B e2e/execution-suite.py --scope storage-console` prépare les sessions
+SSO par stdin privée, puis renouvelle une paire juste avant le scénario qui
+ferme sa session de purge. Le build historique et les deux préparations SSO
+restent des prérequis sans groupes artificiels. L’[arrêt initial](docs/evidence/storage-console-incomplete-dev-2026-11-08.json)
+après 388 groupes est conservé séparément ; le replay complet termine à zéro.
+Les trois notes SPARK sont maintenues dans `qualification/spark-notes/` et leur
+proposition finale est recoupée ; leur adoption n’est pas revendiquée.

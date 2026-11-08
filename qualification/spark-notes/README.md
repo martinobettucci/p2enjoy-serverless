@@ -21,7 +21,7 @@ Les créations, changements de quotas, publications et suppressions sont raccord
 
 Le moteur public exécute les fonctions publiées avec un jeton Read. Il réserve CPU, mémoire et place d’instance avant Docker, applique minimum/maximum/concurrence et extinction après inactivité, puis réconcilie ses ressources au redémarrage sans rejouer les appels incertains. Les générations de code et configuration conservent les appels déjà admis ; les changements de stockage drainent les instances au repos et refusent les invocations actives.
 
-La passerelle applique les politiques d’origine/IP et CORS. Les API d’observation exposent états, allocations, mesures Docker et journaux expurgés. Les facettes Instances et Invocations montrent les allocations, mesures, états et journaux expurgés dans la fiche de fonction. La facette Code et révisions permet de publier un ZIP, suivre ou abandonner une préparation, consulter les métadonnées, activer et supprimer les révisions. Les commandes publiques de purge/cache et le catalogue d’archives sont déployés ; leur qualification transversale reste ouverte dans SLS-065. Les crons, cycles SSO et pannes résiduelles sont recensés dans le backlog.
+La passerelle applique les politiques d’origine/IP et CORS. Les API d’observation exposent états, allocations, mesures Docker et journaux expurgés. Les facettes Instances et Invocations montrent les allocations, mesures, états et journaux expurgés dans la fiche de fonction. La facette Code et révisions permet de publier un ZIP, suivre ou abandonner une préparation, consulter les métadonnées, activer et supprimer les révisions. Les commandes publiques de purge/cache et le catalogue d’archives sont déployés et qualifiés dans SLS-065. Les crons, cycles SSO et pannes résiduelles sont recensés dans le backlog.
 
 Preuve moteur : `docs/evidence/execution-dev-2026-11-06.json` dans le dépôt du projet. Elle recoupe sources, image, rapports, archives, ressources web et configuration officielle. Les campagnes sont sérielles, sans mock, doublure ou test ignoré. Les archives de code conservées sont distinguées des volumes de qualification explicitement purgés.
 
@@ -36,8 +36,11 @@ répétition sans second vidage et reprise après erreur physique ou interruptio
 Le schéma agent est 004. Sept campagnes et 106 groupes réels passent, avec
 nettoyage recoupé : docs/evidence/storage-discard-dev-2026-11-07.json.
 Ces opérations sont raccordées aux commandes publiques de cache/purge
-et au catalogue d’archives. Les reprises ciblées de SLS-065 sont éprouvées ;
-la suite commune élargie reste à terminer. La purge conserve les artefacts
+et au catalogue d’archives. La suite commune passe 29 campagnes et 397 groupes,
+puis neuf groupes API renforcés : quatorze corps invalides de purge, version
+périmée et relevés natifs sans mutation. Les 28 fonctions des huit namespaces
+publics sont purgées, les deux restaurations historiques sont séparées et les
+72 captures recoupées. Preuve : docs/evidence/storage-console-dev-2026-11-08.json. La purge conserve les artefacts
 tant que sa garde existe, y compris après redémarrage si le stockage a changé.
 
 La configuration du provider est conservée dans le service ; les fonctions

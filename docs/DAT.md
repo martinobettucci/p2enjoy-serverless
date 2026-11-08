@@ -327,10 +327,19 @@ ni skip, avec migration et nettoyages recoupés. [Preuve](evidence/storage-disca
 
 ## Gestion publique du stockage
 
-Le contrat [SLS-065](CONSOLE_STORAGE.md) est fixé, non encore implémenté.
+Le contrat [SLS-065](CONSOLE_STORAGE.md) est déployé et qualifié en DEV.
 Les reçus publics persistants sont séparés des gardes temporaires d’admission.
 Le contrôle décide après drainage et nouvelle vérification des droits, puis
 reprend le protocole agent corrélé avec ses paramètres initiaux. La purge
 attend aussi le nettoyage du code avant de rendre un résultat terminal.
 Le catalogue traverse les parents supprimés par leurs UUID ; seule une session
 administrateur y accède. Aucun service ni dépendance supplémentaire prévu.
+
+La [preuve complète](evidence/storage-console-dev-2026-11-08.json) recoupe
+29 campagnes et 397 groupes, puis neuf groupes API renforcés. Quatorze corps
+invalides de purge et une version périmée sont refusés sans mutation des fichiers,
+configurations ou registres. Les relevés du helper sont strictement en lecture
+seule et limités aux UUID de campagne. Les 28 fonctions des huit namespaces
+publics sont purgées ; les deux restaurations historiques sont séparées. Sources,
+image, 25 fichiers embarqués et 72 captures sont liés à chaque phase. Aucune
+nouvelle migration, dépendance ou configuration.

@@ -52,8 +52,8 @@ de console comprend désormais aussi les 21 groupes de publication.
 Le guide compte treize chapitres, dont le vidage du cache et la purge des
 archives. La campagne courante recoupe son empreinte, ses chapitres,
 39 paragraphes, le tableau et la commande ; onze captures couvrent aussi
-ces deux nouveaux chapitres sur ordinateur et mobile. La qualification
-complète du stockage public reste suivie dans SLS-065.
+ces deux nouveaux chapitres sur ordinateur et mobile. La [qualification complète du stockage public](../docs/evidence/storage-console-dev-2026-11-08.json)
+recoupe ces huit groupes, dix parcours UI stockage, les régressions et leurs captures.
 La [preuve du correctif de purge](../docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
 rejoue ces huit groupes et ajoute une capture de lecture mobile du nouveau
 paragraphe sur une purge en attente après changement du stockage. Les douze

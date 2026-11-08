@@ -133,7 +133,7 @@ disparaît. Sur mobile, champs et actions s’empilent ; pas de débordement de 
 
 ## Stockage et archives SLS-065
 
-Console déployée, qualification complète en cours : [CONSOLE_STORAGE](CONSOLE_STORAGE.md#console-et-manuel).
+Console déployée, parcours qualifiés en DEV : [CONSOLE_STORAGE](CONSOLE_STORAGE.md#console-et-manuel).
 Stockage devient une facette de fonction ; Archives de fonctions une destination
 générale indépendante des parents supprimés. Listes de cinq, filtre et total
 explicites. Dernières mesures, inconnues et allocations restent distinctes.
