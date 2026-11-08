@@ -24,9 +24,12 @@ seulement leurs surcharges. Une catégorie provider absente préserve le service
 une catégorie présente remplace ses clés. Le rapport `service_configuration`
 indique `preserved`, `applied`, `failed` ou `unknown`. Une modification commune
 appliquée reste effective même si l’import d’une fonction échoue ensuite.
-Les parcours couverts sont qualifiés dans [SLS-031](../docs/BACKLOG.md#sls-031),
-qui reste ouverte jusqu’à la preuve d’une vraie réponse perdue de modification
-commune et de son issue `unknown`.
+Les parcours sont qualifiés dans [SLS-031](../docs/BACKLOG.md#sls-031), y compris
+une vraie réponse perdue avant traitement et après commit : `unknown`, état
+durable recoupé et absence de rejeu. Le
+[complément](../docs/evidence/service-configuration-transport-dev-2026-11-08.json)
+ajoute cinq groupes natifs puis treize groupes de configuration rejoués sur la
+même image que le checkpoint de 191 groupes.
 Le plan et le descripteur exposent les noms des valeurs communes, les noms
 effectifs connus et les noms des surcharges locales, sans leurs valeurs.
 La [preuve DEV](../docs/evidence/service-configuration-dev-2026-11-08.json)

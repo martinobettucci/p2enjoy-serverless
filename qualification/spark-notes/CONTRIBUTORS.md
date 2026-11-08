@@ -97,7 +97,7 @@ de test, avec garde indépendante. Lire `docs/STORAGE_LEGACY_PROOF.md` et
 `e2e/README.md` avant son lancement ; elle ne s’exécute jamais avec une autre
 campagne active.
 
-## Checkpoint de configuration commune
+## Qualification de configuration commune
 
 La preuve `docs/evidence/service-configuration-dev-2026-11-08.json` porte 191
 groupes : 153 sur le poste puis 38 rejoués dans les clients Docker, en série.
@@ -106,7 +106,14 @@ Python/migrations du contrôle et cinq modules de la CLI sont recoupés dans les
 images exécutées. Le contrôle et l’agent sont sains au repos ; les deux fonctions
 ciblées et onze répertoires d’artefacts sont purgés, les réservations à zéro.
 Les 21 captures de gestion et du manuel sont inspectées.
-SLS-031 reste ouverte : la vraie perte d’une réponse de modification commune
-et l’issue inconnue de la CLI doivent encore être éprouvées, avant et après
-la décision durable. Le banc résiduel est décrit dans
-`docs/SERVICE_CONFIGURATION_URLS.md`.
+SLS-031 est qualifiée par le complément
+`docs/evidence/service-configuration-transport-dev-2026-11-08.json` : cinq groupes
+natifs puis treize groupes rejoués sur la même image, avec 167 sources recoupées.
+`node e2e/service-transport.mjs` lance le vrai client CLI et suspend le contrôle
+avant traitement ou après commit, puis SIGKILL et restauration du conteneur
+original. Il exige strace sur le poste, root et PTRACE sur ce seul DEV x86_64.
+L’installation doit être au repos, sans autre campagne ; une garde systemd
+indépendante borne la perturbation. Les deux CLI rendent unknown sans rejeu,
+les relances publient et invoquent Docker. Quatre fonctions et treize artefacts
+des deux campagnes sont purgés, les trois gardes inactives et les réservations
+à zéro. Lire `e2e/README.md` et `docs/SERVICE_CONFIGURATION_URLS.md` avant usage.

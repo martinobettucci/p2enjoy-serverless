@@ -35,6 +35,28 @@ La preuve lie aussi les 25 fichiers Python/migrations du contrôle et les cinq
 modules CLI embarqués à leurs sources. Le manuel est relu depuis l’accueil et
 son empreinte est comparée à `docs/manual.md` ; ses 39 paragraphes sont vérifiés.
 
+Le [complément de transport](../docs/evidence/service-configuration-transport-dev-2026-11-08.json)
+qualifie cinq groupes supplémentaires, puis rejoue les treize groupes ci-dessus.
+Lancer `node e2e/service-transport.mjs` seul depuis le poste, après synchronisation
+des sources E2E dans le SPARK. Il exige `strace` sur le poste, la session SSO et
+l’accès root au seul SPARK DEV x86_64. Son helper `service-transport-observer.py`
+refuse une installation occupée, arme une garde systemd indépendante, puis
+observe le vrai processus Uvicorn. Il le tue avant traitement ou après commit
+mais avant émission de réponse, et rétablit son conteneur original. Une perte
+du helper éprouve aussi la restauration indépendante. Les connexions HTTPS du
+vrai processus CLI sont comptées nativement, sans lecture de ses données TLS.
+Aucun serveur, middleware ou réponse n’est substitué. Ce banc interrompt
+temporairement la disponibilité de la console DEV ; aucune autre campagne ne
+doit être active. Le rapport est `.local/e2e/service-transport.json`.
+
+Après cette commande, rejouer `node e2e/service-configuration.mjs`, puis recouper
+les deux mappings namespace → UUID des fonctions avec `storage-console-inspect.py`
+sous root dans le SPARK. Les rapports conservent `namespace_id` et `function_ids`.
+Le complément recoupe quatre fonctions purgées, treize artefacts absents, les
+25 fichiers embarqués du contrôle et les trois gardes inactives. Ses 167 sources
+sont liées avant/après chaque campagne ; le checkpoint historique de 191 groupes
+conserve son index de 165 sources et ses captures, sur la même image produit.
+
 ## Stockage public et manuel
 
 Les archives antérieures au registre ont leur [contrat de banc](../docs/STORAGE_LEGACY_PROOF.md).

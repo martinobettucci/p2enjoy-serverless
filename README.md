@@ -11,7 +11,10 @@ HTTPS via sa commande `deploy`, dont les sept groupes authentifiés passent. La
 configuration commune du manifeste est conservée dans le service, avec uniquement
 les surcharges dans les fonctions. Cette évolution et ses régressions passent
 191 groupes en série sur DEV, avec 21 captures relues :
-[preuve de configuration commune](docs/evidence/service-configuration-dev-2026-11-08.json). La
+[preuve de configuration commune](docs/evidence/service-configuration-dev-2026-11-08.json).
+Son [complément](docs/evidence/service-configuration-transport-dev-2026-11-08.json)
+ajoute cinq groupes sous vraies coupures puis treize groupes rejoués : issue
+inconnue sans rejeu, état durable recoupé et relances explicites réussies. La
 validation Node dans Docker est disponible dans [runtime/](runtime/README.md),
 avec 36 scénarios réels réussis. Les routes de publication, d'historique et de
 rollback sont déployées en DEV ; onze groupes authentifiés passent :

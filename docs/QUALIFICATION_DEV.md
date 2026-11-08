@@ -7,8 +7,9 @@ sont exclus de toute modification ou déploiement.
 ## Cible et accès
 
 Le seul SPARK autorisé est celui décrit dans [dev-spark.md](dev-spark.md).
-Utiliser `spark-docker` pour Docker ; le compte root n'a servi qu'à créer le
-répertoire dédié `/srv/p2enjoy-serverless/qualification` avec son propriétaire.
+Utiliser `spark-docker` pour Docker. Root prépare les répertoires et exécute les
+helpers de perturbation bornés documentés dans [e2e/README.md](../e2e/README.md),
+avec gardes indépendantes et contrôle de l’identité de chaque ressource.
 Le rebond SSH transporte la connexion : aucune commande n'est lancée sur la
 FORGE elle-même.
 
@@ -87,3 +88,9 @@ Ils doivent être déposés comme propositions dans `/etc/spark/notes/*.md.?`.
 Ils ne remplacent pas directement les notes officielles : leur adoption reste
 un geste de console. Ne jamais toucher aux fichiers réécrits par le plan de
 contrôle ou à sa configuration sur la FORGE.
+
+Les trois propositions du 8 novembre intègrent la qualification de configuration
+commune et son [complément de transport](evidence/service-configuration-transport-dev-2026-11-08.json).
+Elles sont recoupées par empreintes mais restent proposées, sans adoption
+revendiquée. Aucune nouvelle variable, secret ou route n’est nécessaire pour
+ce banc ; il conserve l’image du contrôle et les deux `env_file` officiels.

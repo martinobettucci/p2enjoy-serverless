@@ -52,8 +52,11 @@ groupes, les 25 sources Python/migrations embarquées et le nettoyage physique.
 L’API conserve les schémas de données existants ; aucune migration ni nouvelle
 variable de cellule n’est nécessaire. `replace_secrets` est un champ applicatif
 de `/api/services/{id}/configuration`, documenté dans [CONTROL](../docs/CONTROL.md).
-La perte de réponse d’une modification commune et son issue inconnue restent
-à éprouver avant la clôture de cette unité.
+La [preuve complémentaire](../docs/evidence/service-configuration-transport-dev-2026-11-08.json)
+qualifie la perte réelle d’une réponse de modification commune avant traitement
+et après commit, avec garde indépendante, relance explicite et invocation Docker.
+Cinq groupes natifs puis treize groupes de configuration passent sur la même
+image du contrôle, sans modification de ses sources ; SLS-031 est clôturée.
 
 `app/validator.py` fournit le pilote de chargement Node de SLS-030. Sa CLI
 est qualifiée sur le SPARK avec le runtime isolé, selon

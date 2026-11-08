@@ -149,10 +149,13 @@ surcharge est appliquée, sans exposer les valeurs des secrets.
 
 ## Preuve de transport
 
-La preuve de 191 groupes ne couvre pas encore l’état `unknown` d’une mutation
-commune dont la réponse est perdue. Ce comportement reste une exigence de SLS-031.
-Il faut observer le résultat de la vraie CLI, l’état durable du service et son
-audit, puis démontrer qu’aucune publication ni répétition automatique ne suit.
+La preuve de 191 groupes est complétée par cinq groupes de transport réel, puis
+treize groupes de configuration rejoués après les interruptions. Le
+[complément de preuve](evidence/service-configuration-transport-dev-2026-11-08.json)
+lie ces campagnes à la même image du produit et conserve les deux index de
+sources, sans réécrire le checkpoint historique. Il vérifie le résultat de la
+vraie CLI, l’état durable du service et son audit, puis l’absence de publication
+et de répétition automatique après l’issue inconnue.
 
 Le banc retenu lance la CLI réelle et observe le processus réel du contrôle
 dans le seul SPARK DEV, à une frontière d’appel système. L’interruption avant
@@ -182,6 +185,16 @@ Après retour de l’API, vérifier le nombre exact de mutations communes, l’a
 de fonction/candidat créé par la commande interrompue et l’état `unknown` sans
 configuration ni secret dans le rapport. Une relance explicite par l’opérateur
 doit ensuite publier et invoquer le handler de qualification normalement. Les
-ressources sont purgées par l’API et recoupées au repos. Les capacités natives
-et outils de diagnostic du SPARK ont été relevés ; le banc reste à implémenter
-et à qualifier, sans succès présumé sur ces scénarios.
+ressources sont purgées par l’API et recoupées au repos.
+
+Les clients `e2e/service-transport.mjs` et `e2e/service-transport-observer.py`
+réalisent ce banc. Les arrêts ont été constatés au retour de `recvfrom` avant
+traitement et avant `sendto` après commit. Le vrai ingress renvoie alors 502 ;
+la CLI indique `unknown`, sans résultat de fonction ni connexion supplémentaire.
+Les deux relances explicites publient et invoquent le handler dans Docker.
+La garde indépendante est éprouvée par perte SIGKILL du pilote suspendu. Santé
+HTTP et Docker, identité du contrôle et absence de redémarrage de la référence
+sont vérifiées ; les trois gardes terminent inactives. Les quatre fonctions des
+deux campagnes et treize répertoires d’artefacts sont purgés, avec zéro réservation.
+Cette preuve cible ce contrôle DEV x86_64 ; elle ne démontre pas un redémarrage
+complet du SPARK ni une panne de la FORGE.

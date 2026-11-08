@@ -25,6 +25,10 @@ Une clé locale null rétablit l’héritage. Modifier une catégorie commune ex
 Update non limité à des fonctions. Le rapport `service_configuration` indique
 si elle est préservée, appliquée, refusée ou d’issue inconnue. Une configuration
 commune appliquée reste effective si l’import d’une fonction échoue ensuite.
+Après une issue inconnue de modification commune, relire la configuration du
+service avant une relance explicite ; la CLI ne répète pas cette mutation et
+n’entame pas les publications de fonctions. Des coupures réelles avant traitement
+et après commit qualifient ce comportement sur DEV.
 L’API `/api/services/{id}/configuration` accepte `replace_secrets: true` avec
 un mapping `secrets` explicite ; sans ce champ, les secrets se modifient par clé.
 Les lectures ne renvoient jamais leurs valeurs enregistrées.

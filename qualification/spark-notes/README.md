@@ -45,5 +45,9 @@ portent seulement leurs surcharges. Les jetons restent gérés au niveau service
 Treize groupes ciblés couvrent héritage, secrets, droits, limites, échec partiel
 et redémarrage. Avec les régressions et les clients Docker, la preuve
 `docs/evidence/service-configuration-dev-2026-11-08.json` réunit 191 groupes
-en série et 21 captures inspectées. Les adresses d’appel multi-domaines restent
+en série et 21 captures inspectées. Le complément
+`docs/evidence/service-configuration-transport-dev-2026-11-08.json` ajoute cinq
+groupes de vraies coupures et treize groupes de configuration rejoués, sur la
+même image : `unknown` sans rejeu, état durable recoupé et relances publiées puis
+invoquées dans Docker. SLS-031 est qualifiée. Les adresses d’appel multi-domaines restent
 suivies dans SLS-066.

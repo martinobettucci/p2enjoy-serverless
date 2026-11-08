@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- Qualification réelle des réponses perdues de modification commune : coupures
+  du contrôle avant traitement et après commit, issue CLI `unknown`, trois
+  connexions HTTPS sans rejeu, aucune publication et relances explicites réussies.
+  Cinq groupes natifs puis treize groupes de configuration passent sur la même
+  image que le checkpoint de 191 groupes. Garde indépendante et nettoyage des
+  quatre fonctions recoupés ; SLS-031 clôturée.
+  [Complément de preuve](docs/evidence/service-configuration-transport-dev-2026-11-08.json).
+
 - Les variables et secrets du `provider` sont désormais conservés dans le service
   lors d’un déploiement ; les fonctions portent seulement leurs surcharges.
   Le rapport distingue la modification commune des publications individuelles.

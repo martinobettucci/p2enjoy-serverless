@@ -76,6 +76,10 @@ Contrat et limites des échecs partiels :
 [configuration commune](SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges).
 La [preuve](evidence/service-configuration-dev-2026-11-08.json) recoupe 191 groupes,
 les sources embarquées dans les deux images et 21 captures inspectées.
+Le [complément natif](evidence/service-configuration-transport-dev-2026-11-08.json)
+éprouve les vraies coupures avant traitement et après commit sur ce même contrôle,
+sans changement du produit : cinq groupes puis treize groupes rejoués, avec
+`unknown`, absence de rejeu et relances explicites publiées/invoquées dans Docker.
 
 ### Validation du code
 

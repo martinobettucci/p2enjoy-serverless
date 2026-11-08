@@ -2390,3 +2390,47 @@ documentaire ne change ni code, ni service, ni preuve E2E existante. L’ordre
 de réalisation conserve les preuves de fiabilité et les URL actuellement
 ouvertes avant les nouvelles tranches d’ergonomie. Chaque tranche exige ses
 parcours E2E réels, refus, reprises et inspection visuelle.
+
+## 2026-11-08 — Réponse perdue de configuration commune et clôture SLS-031
+
+Le checkpoint de 191 groupes laissait l’état CLI `unknown` sans preuve de vraie
+perte de réponse commune. Le banc retenu est implémenté ici dans
+`e2e/service-transport.mjs` et `e2e/service-transport-observer.py`, contre le
+contrôle inchangé. Son contrat natif est persisté avant code ; le comptage des
+connexions CLI complète les audits, car un rejeu refusé 409 n’ajouterait pas
+d’audit. La revue a aussi renforcé la preuve de disparition du pilote, les
+bornes de restauration, la santé Docker et le StartedAt de la référence.
+
+Les essais préparatoires ont échoué explicitement : session SSO expirée,
+sélecteur retenant aussi docker-init, attente incorrecte d’un code SSH 137 lors
+d’un SIGKILL distant et arrêt non idempotent d’un timer déjà collecté. La session
+est renouvelée par le vrai SSO ; le ciblage vérifie l’exécutable Python ; la
+disparition native est confirmée par la garde indépendamment du code SSH ; les
+résultats de garde sont écrits atomiquement et son arrêt vérifié inactif. Les
+objets API vides de l’essai interrompu pendant collecte ont été supprimés après
+confirmation de restauration. Aucun de ces essais n’est compté comme réussi.
+
+La campagne finale passe cinq groupes en série. Le pilote est réellement perdu
+par SIGKILL pendant suspension ; la garde indépendante confirme sa disparition
+et l’état sain. Le contrôle est ensuite arrêté à la sortie de recvfrom avant
+traitement : aucune mutation. Puis à l’entrée de sendto après commit : une
+mutation durable et son audit. Les deux vrais ingress renvoient 502 ; la CLI
+rend unknown et results vide. Strace ne voit que trois tentatives HTTPS par
+commande, soit les deux lectures et le seul PUT, sans publication ni rejeu.
+Les deux relances explicites publient et invoquent le handler original dans
+Docker. Les treize groupes de configuration passent ensuite sur la même image.
+
+Le complément conserve 167 empreintes avant/après, image et 25 sources embarquées,
+quatre fonctions purgées, treize artefacts absents, réservations et allocation
+à zéro et trois gardes inactives. La revue ne trouve aucun défaut bloquant.
+Les sources produit, buildfiles, fixtures, dépendances et manuel sont identiques
+à la preuve de 191 groupes ; les différences sont le contrat UX futur, le
+préfixe supplémentaire de l’inspecteur et les deux nouveaux clients E2E.
+Les campagnes et leurs index restent distincts, sans prétendre à une nouvelle
+suite unique de 209 groupes. SLS-031 est clôturée ; les autres unités restent
+suivies indépendamment. Aucun nouveau parcours UI n’est livré par ce banc.
+
+Les trois notes SPARK sont reproposées après comparaison des empreintes des
+propositions précédentes et des notes actives. Leur adoption reste en attente ;
+aucune variable, aucun secret ni route n’est proposé ou modifié. La configuration
+reste dans les deux fichiers de cellule. Aucun remote Git n’est configuré.

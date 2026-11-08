@@ -348,7 +348,7 @@ SLS-064 seul ne qualifie aucun parcours public d’effacement.
 <a id="sls-031"></a>
 ## SLS-031 — Préserver la configuration commune du service au déploiement
 
-Statut : [~] — déployé, 191 groupes qualifiés ; issue inconnue à éprouver sous vraie coupure.
+Statut : [x] — déployé et qualifié, y compris l’issue inconnue sous vraie coupure.
 
 L’adaptateur conserve les valeurs communes du provider dans le service et
 uniquement les surcharges dans les fonctions. Le rapport distingue les deux
@@ -365,11 +365,18 @@ Zéro échec/skip, 165 sources recoupées, 25 fichiers embarqués du contrôle e
 de la CLI conformes. Les deux fonctions ciblées et onze répertoires d’artefacts
 sont purgés, sans réservation ou conteneur résiduel. Le manuel affiche ses
 39 paragraphes ; les 21 captures de gestion et de lecture sont inspectées.
-La vérification finale confirme cette preuve mais conserve une lacune : provoquer
-la perte réelle d’une réponse de modification commune, vérifier `unknown`, l’état
-du service, l’absence de rejeu et l’arrêt avant les publications. Ce parcours
-doit être qualifié avant clôture de l’unité, selon le
-[banc de transport](SERVICE_CONFIGURATION_URLS.md#preuve-de-transport).
+Le [complément de transport](evidence/service-configuration-transport-dev-2026-11-08.json)
+ajoute cinq groupes natifs : garde indépendante, coupure avant traitement et après
+commit, puis deux relances explicites avec publication et invocation Docker.
+La vraie CLI rend `unknown` et ne tente que les trois connexions HTTPS attendues,
+sans rejeu ni fonction/candidat créé. Les treize groupes de configuration sont
+ensuite rejoués. Ces dix-huit groupes passent sans échec/skip sur la même image,
+avec 167 sources identiques avant/après ; aucune source produit du checkpoint
+de 191 groupes n’a changé. Le recoupement physique couvre les quatre fonctions,
+treize artefacts absents et les réservations à zéro ; les trois gardes sont inactives.
+Les deux preuves conservent leurs index historiques distincts. Le
+[banc](SERVICE_CONFIGURATION_URLS.md#preuve-de-transport) ne couvre ni une panne
+de la FORGE ni les autres scénarios résiduels de SLS-030.
 
 <a id="sls-066"></a>
 ## SLS-066 — Afficher les URL d’appel issues des domaines du SPARK
