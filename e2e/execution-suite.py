@@ -195,7 +195,9 @@ def main():
         if count:record['passed_groups']=verify_report(name,path,is_remote,after['report']['sha256'])
         else:
             value=read_report(path,is_remote,after['report']['sha256']);assert value['completed'] is True,'Prérequis incomplet'
-            if name=='dev-sso-sessions':assert value['authenticated'] and value['independent_sessions']==2 and value['platform_cookies_only']
+            if name in ('dev-sso-sessions','dev-sso-decision-sessions'):
+                assert value['authenticated'] and value['independent_sessions']==2 and value['platform_cookies_only']
+                assert value['purpose']==('suite-start' if name=='dev-sso-sessions' else 'storage-decisions')
             elif name=='storage-legacy-build':assert value['current_image']==baseline['image'] and value['current_tag_unchanged']
             elif name=='storage-console-physical':assert value['physical']['completed'] and value['campaign_count']==6 and value['function_count']==24
             else:raise AssertionError('Prérequis inconnu')
@@ -206,6 +208,9 @@ def main():
         execute('dev-sso-sessions',['node','e2e/dev-sso-sessions.mjs'],'.local/e2e/dev-sso-sessions.json',False,count=False,private_input=credentials)
         execute('storage-legacy-build',['python3','-B','e2e/storage-legacy-build.py'],'.local/e2e/storage-legacy-build.json',False,count=False)
     for name,command,path,is_remote in cases:
+        if storage_console and name=='storage-decision-recovery':
+            execute('dev-sso-decision-sessions',['node','e2e/dev-sso-sessions.mjs','--for-storage-decisions'],
+                    '.local/e2e/dev-sso-decision-sessions.json',False,count=False,private_input=credentials)
         execute(name,command,path,is_remote,private_input=credentials if name=='storage-legacy-recovery' else None)
     credentials=None
     if storage_console:

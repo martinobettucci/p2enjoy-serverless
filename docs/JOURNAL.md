@@ -19,6 +19,12 @@ supplémentaire ne les reçoit. Aucun maintien artificiel de session, modificati
 du fournisseur ou rejeu implicite du scénario. Une nouvelle suite complète est
 requise après correction et synchronisation des sources.
 
+Le runner et son client SSO portent ce nouveau prérequis sous un rapport séparé
+dev-sso-decision-sessions.json. Les contrôles de syntaxe Python/Node passent et
+les 173 sources sont synchronisées et recoupées dans la cellule ; l’image reste
+inchangée. Cette étape n’est pas une preuve E2E : la suite complète doit être
+rejouée sans modification concurrente des sources.
+
 ## 2026-11-08 — Intégration des campagnes publiques de stockage
 
 Après les preuves de reprise et d’archives historiques, SLS-065 doit réunir ses

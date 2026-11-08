@@ -41,16 +41,19 @@ async function signIn(browser,credentials,filename){
   }finally{await context.close();await rm(pending,{force:true});}
 }
 async function main(){
+  const args=process.argv.slice(2);
+  assert(args.length===0||(args.length===1&&args[0]==='--for-storage-decisions'),'invalid_sso_purpose');
+  const purpose=args.length?'storage-decisions':'suite-start';
   await mkdir(output,{recursive:true,mode:0o700});
-  const report=new URL('dev-sso-sessions.json',output);
-  await writeFile(report,JSON.stringify({completed:false})+'\n',{mode:0o600});
+  const report=new URL(args.length?'dev-sso-decision-sessions.json':'dev-sso-sessions.json',output);
+  await writeFile(report,JSON.stringify({completed:false,purpose})+'\n',{mode:0o600});
   let credentials=await credentialsFromStdin(),browser;
   try{
     browser=await chromium.launch({headless:true});
     const purge=await signIn(browser,credentials,'purge-admin-session.json');
     const control=await signIn(browser,credentials,'admin-session.json');
     assert.notEqual(purge,control,'independent_platform_sessions_required');
-    const result={completed:true,authenticated:true,independent_sessions:2,platform_cookies_only:true};
+    const result={completed:true,purpose,authenticated:true,independent_sessions:2,platform_cookies_only:true};
     await writeFile(report,JSON.stringify(result)+'\n',{mode:0o600});console.log(JSON.stringify(result));
   }finally{credentials=null;await browser?.close();}
 }

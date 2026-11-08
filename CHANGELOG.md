@@ -4,8 +4,9 @@
 
 - La première suite complète de stockage conserve son arrêt réel après 388
   groupes : prérequis de session de purge devenu invalide avant la campagne de
-  décision. Nouvelle préparation SSO juste avant cette campagne spécifiée,
-  sans changer les durées d’authentification ni compter un groupe fictif.
+  décision. Le runner prépare une nouvelle paire SSO juste avant cette campagne,
+  avec un rapport distinct, sans changer les durées d’authentification ni compter
+  un groupe fictif. La nouvelle campagne complète reste à qualifier.
 
 - Suite publique de stockage intégrée : sept campagnes et 37 groupes E2E passent
   sur l’image du contrôle inchangée. Deux sessions SSO réelles préparées par stdin

@@ -74,6 +74,11 @@ Le runner coupe lui-même l’écho d’un terminal et ne conserve pas cette ent
 neufs, enregistre seulement les cookies de plateforme dans `admin-session.json`
 et `purge-admin-session.json` privés, puis vérifie leur différence. Le build
 historique et le recoupement physique sont des prérequis, sans groupes ajoutés.
+Une nouvelle paire de connexions est préparée immédiatement avant la campagne
+de décision ; son rapport distinct est `dev-sso-decision-sessions.json`.
+Le cookie de purge inutilisé peut ne plus être renouvelable après une longue
+suite : les durées SSO restent appliquées normalement. Les deux scopes comptent
+donc quatre prérequis, sans modifier leurs 37 ou 397 groupes fonctionnels.
 Les rapports de suite sont `.local/e2e/storage-console-focused.json` et
 `.local/e2e/storage-console-regressions.json` ; le recoupement final est
 `.local/e2e/storage-console-physical.json`. Les identifiants ne rejoignent ni
