@@ -93,8 +93,8 @@ Le contrôle et la référence sont sains, l’agent actif, les réservations et
 allocations globales à zéro. Les archives historiques étrangères restent conservées.
 
 La preuve native du Host est acquise en boucle locale. Restent les changements
-réels de routes/TLS, seconde page sur six domaines, source perturbée et
-consultation CLI refusée après publication. Le build nominal CLI est
+réels de routes/TLS, seconde page sur six domaines et source perturbée.
+Le GET CLI 401 après publication est qualifié séparément ci-dessous. Le build nominal CLI est
 qualifié ; sa branche d’expiration/perte SSH reste à éprouver. SLS-066 demeure
 ouverte. L’alias functions.lelabs.tech vers 18090 TLS est proposé dans routes.? ;
 il n’est pas appliqué. Aucun nouveau secret, variable ou schéma ; la configuration
@@ -114,8 +114,24 @@ terminées et 26 fichiers embarqués conformes. La référence conserve son iden
 son image et son démarrage. Aucun changement produit, build du contrôle,
 migration, variable, secret ou route appliquée pour ce complément.
 
-Le refus 401/403 après publication reste à éprouver. Les branches d’expiration,
+Le refus 401 après publication est qualifié ci-dessous ; le 403 reste distinct. Les branches d’expiration,
 sortie excessive, lancement et nettoyage après réponses de création/purge perdues
 du nouveau client ne sont pas déclarées acquises. Le client exige la disparition
 de tout le groupe CLI avant nettoyage et reprend une purge par son UUID conservé.
 La preuve complète de 467 groupes reste distincte. SLS-066 demeure ouverte.
+
+
+## Révocation avant le catalogue facultatif
+
+La preuve `docs/evidence/invocation-url-refusal-dev-2026-11-08.json` passe
+quatre groupes de transport puis treize de régression, soit 17, sans échec/skip.
+La CLI est retenue avant sa sixième connexion ; le jeton révoqué par l’API donne
+un vrai 401 sans changer la publication réussie ni ses UUID, avec six connexions
+sans rejeu. Un autre Read retrouve le catalogue et invoque Docker. Les 188 sources
+et images sont recoupées, neuf fonctions purgées dans trois namespaces, six gardes
+terminées et 26 fichiers embarqués conformes. Le premier essai incomplet est
+conservé séparément : barrière manquée de cause inconnue, deux fonctions et deux
+gardes nettoyées. Aucun changement produit, migration, build du contrôle,
+variable, secret ou route appliquée. Le 403, les pannes du pilote et les branches
+de confidentialité/illisibilité du diagnostic restent non éprouvés. SLS-066
+reste ouverte. Les trois notes sont proposées, sans revendiquer leur adoption.

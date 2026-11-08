@@ -88,7 +88,10 @@ suivies purgées dans dix namespaces. Les six prérequis sont distincts du total
 Le [complément de transport](docs/evidence/invocation-url-transport-dev-2026-11-08.json)
 passe ensuite trois nouveaux groupes et treize de régression : une perte du GET
 des adresses après publication conserve le succès et les UUID, sans rejeu CLI.
-Le refus d’autorisation après publication reste une preuve distincte à compléter.
+Le [complément de révocation](docs/evidence/invocation-url-refusal-dev-2026-11-08.json)
+qualifie ensuite le vrai 401 après publication : succès/UUID conservés et six
+connexions sans rejeu. Son replay passe 17 groupes avec 188 sources recoupées ;
+le premier essai incomplet reste conservé séparément avec son nettoyage.
 
 ## Accès confirmé
 

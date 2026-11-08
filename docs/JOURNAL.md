@@ -2918,3 +2918,39 @@ et le diagnostic sont archivés distinctement. Décision avant correction :
 conserver tous les événements des observateurs et le résultat CLI fini expurgé,
 avec empreintes plutôt que texte brut si illisible/sensible. Ne pas prolonger
 arbitrairement les délais ni transformer cet arrêt en succès.
+
+
+## 2026-11-08 — Refus réel du catalogue après publication qualifié
+
+Le replay explicite termine à zéro : quatre groupes de transport, cinq du
+transport historique et huit API/CLI, soit 17 groupes réussis sans skip.
+Les 188 sources locales/distantes et images sont stables avant/après chaque
+phase. La barrière native du client retient son sixième connect443, après
+cinq retours. Le diagnostic du SPARK confirme la publication unique avant
+révocation. L’administrateur révoque réellement le jeton et confirme 401 ;
+la CLI libérée reçoit elle-même http_401 et conserve completed/published,
+les UUID et son archive, avec six connexions sans rejeu. Un autre Read relit
+le catalogue de cette révision et le handler Docker répond HTTPS 200.
+L’enfant est récolté, le groupe disparu et les diagnostics nominaux conservés.
+
+Les neuf fonctions du replay sont purgées dans trois namespaces, les six
+gardes terminées et les 26 fichiers embarqués recoupés. Contrôle/référence
+sains, agent actif et réservations/allocation à zéro ; la référence conserve
+son identité/image/démarrage. Le brut physique est archivé avant ajout des
+snapshots ; le wrapper possède son empreinte propre. La revue readonly confirme
+ces liaisons sans défaut bloquant. Elle confirme aussi la séparation du premier
+échec : un groupe passé puis barrière manquée, cause non prouvée et nouveau401
+non exécuté. Ses deux fonctions et ses deux gardes sont recoupées nettoyées
+séparément, UUID distincts du replay. Aucun succès ni correction du produit
+n’est inféré de cet essai.
+
+La revue avant exécution a fait borner toute la commande de libération, pas
+seulement son premier octet, et exiger un statut terminal pour récolter l’enfant.
+Le nominal de ces chemins est exécuté ; commande partielle/EOF, expiration,
+sortie excessive, lancement, disparition inconnue et branches sensibles ou
+illisibles du diagnostic restent non éprouvés. Le 403 n’est pas revendiqué.
+Domaines/TLS, pages supplémentaires, source perturbée et expiration du build
+restent ouverts ; SLS-066 garde [~], le goal reste actif. Les documents de statut
+et trois notes sont actualisés après gel ; le contrat exécuté et le contrat
+livré ont leurs empreintes distinctes. Aucun registre d’incohérences extérieur
+ouvert, aucune migration, variable, secret ou route appliquée. Aucun remote/push.

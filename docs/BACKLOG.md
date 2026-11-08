@@ -450,7 +450,8 @@ avec 31 captures recoupées.
 Le manuel servi comporte 14 chapitres et 43 paragraphes. Les preuves multi-domaines,
 retrait et absence exigent les vraies routes et l’autorité bornée du SPARK ;
 aucune substitution du registre n’est admise. Restent également les sources
-perturbées et la consultation CLI refusée après publication. Le manuel
+perturbées. La consultation CLI refusée par révocation 401 est qualifiée
+ci-dessous. Le manuel
 est reconstruit et qualifié pour les parcours actuellement éprouvés.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
@@ -475,15 +476,21 @@ Les cinq groupes de transport historique et huit API/CLI repassent ensuite :
 16 groupes au total, 187 sources et images liées avant/après chaque phase,
 huit fonctions purgées dans trois namespaces, six gardes terminées et 26 fichiers
 embarqués recoupés. Les vrais 502 ne changent pas le succès de publication.
-Le refus 401/403 reste distinct et non éprouvé après publication ; les branches
+Le refus reste distinct de ces coupures ; le vrai 401 est qualifié ci-dessous.
+Les branches
 d’expiration/sortie excessive/lancement et nettoyage après réponses perdues
 du nouveau client ne sont pas déclarées acquises.
 
-Prochaine preuve indépendante des domaines : quatrième groupe de transport,
+Le [complément de révocation](evidence/invocation-url-refusal-dev-2026-11-08.json)
+ajoute le quatrième groupe de transport :
 CLI retenue nativement avant sa sixième connexion, publication durable vérifiée,
 révocation API du jeton puis vrai GET 401 sans requalification ni rejeu.
 Contrat : [révocation avant GET](INVOCATION_URLS.md#révocation-avant-le-get-facultatif).
-Ce groupe reste à implémenter et à qualifier ; aucun refus anticipé.
+Le replay passe 4 + 5 + 8 = 17 groupes, sans échec/skip, avec 188 sources/images
+stables et neuf fonctions purgées dans trois namespaces ; six gardes et 26
+fichiers embarqués recoupés. Le premier essai incomplet reste séparé, cause
+de barrière inconnue, deux fonctions et deux gardes nettoyées. Le refus 403
+et les pannes propres du pilote/diagnostic ne sont pas revendiqués.
 
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale

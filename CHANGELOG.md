@@ -2,9 +2,14 @@
 
 ## [Non publié]
 
-- Refus du catalogue après publication spécifié : retenir la CLI avant sa
-  sixième connexion, révoquer son jeton par l’API puis vérifier le vrai 401
-  avec publication conservée sans rejeu. Implémentation et preuve à réaliser.
+- Refus du catalogue après publication qualifié en DEV : CLI retenue avant sa
+  sixième connexion, jeton révoqué par l’API, vrai 401 conservant publication
+  et UUID sans rejeu. Le replay passe 17 groupes en série, 188 sources/images
+  stables, neuf fonctions purgées dans trois namespaces et six gardes terminées.
+  Un premier essai échoué à une barrière reste archivé, cause non prouvée,
+  avec ses deux fonctions et gardes nettoyées séparément. Diagnostics nominaux
+  conservés ; branches d’erreur du pilote non éprouvées.
+  [Preuve](docs/evidence/invocation-url-refusal-dev-2026-11-08.json).
 
 - Complément de transport du catalogue qualifié en DEV : trois groupes réels
   avec garde indépendante et coupures après publication, puis treize groupes
@@ -12,8 +17,8 @@
   et les UUID ; six connexions HTTPS CLI sans rejeu. Les 187 sources/images
   sont liées, huit fonctions purgées dans trois namespaces et six gardes terminées.
   La reprise de purge par UUID et la fin du groupe CLI bornent le nettoyage ;
-  leurs branches d’erreur restent à éprouver. Le refus 401/403 après publication
-  demeure distinct et ouvert. [Preuve](docs/evidence/invocation-url-transport-dev-2026-11-08.json).
+  leurs branches d’erreur restent à éprouver. Le refus après publication est
+  qualifié séparément ci-dessus par révocation 401. [Preuve](docs/evidence/invocation-url-transport-dev-2026-11-08.json).
 
 - Suite complète des adresses réussie en DEV : union sans doublon de
   35 campagnes / 467 groupes, zéro échec/skip, six prérequis non comptés,
@@ -31,8 +36,8 @@
   montage readonly, facette de fonction et lien de service, copie d’URL/curl,
   résultat CLI séparé du succès de publication et entrée console/SSO canonique.
   Le checkpoint passe 88 groupes réels et recoupe 31 captures ; manuel à
-  14 chapitres et 43 paragraphes. Les preuves multi-domaines, sources perturbées
-  et refus du GET de catalogue après publication restent ouverts dans SLS-066.
+  14 chapitres et 43 paragraphes. Les preuves multi-domaines et sources perturbées
+  restent ouvertes dans SLS-066 ; le refus 401 est qualifié séparément ci-dessus.
 
 - Stockage public qualifié en DEV : 29 campagnes en série, 397 groupes réussis,
   puis neuf groupes API renforcés de quatorze corps invalides de purge et d’une

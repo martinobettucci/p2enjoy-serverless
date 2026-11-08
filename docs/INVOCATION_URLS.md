@@ -201,9 +201,10 @@ et 18 réemplois par identité SHA256 avec une référence inspectée. Le manuel
 servi correspond à ses 14 chapitres et 43 paragraphes. Les catalogues globaux
 peuvent conserver des archives historiques étrangères à ces fonctions purgées.
 
-Restent les cycles de routes et leur TLS, les pages console/CLI sur six domaines,
-la source officielle réellement perturbée et le GET de catalogue refusé
-après publication CLI. La preuve native du Host ci-dessous est acquise sur
+Restent les cycles de routes et leur TLS, les pages console/CLI sur six domaines
+et la source officielle réellement perturbée. Le refus 401 après publication
+CLI est qualifié dans le complément de révocation ci-dessous. La preuve native
+du Host est acquise sur
 la boucle locale ; elle ne qualifie pas un alias HTTPS public. Le build nominal
 est qualifié ; sa branche d’expiration ou de perte SSH reste non éprouvée.
 Ces limites maintiennent SLS-066 en cours.
@@ -270,8 +271,9 @@ puis supprimer et purger les seules ressources possédées.
 
 Éprouver aussi la perte SIGKILL de l’observateur suspendu dans ce nouveau
 périmètre, avec restauration indépendante et garde terminée. Le refus réel
-401/403 après publication reste une preuve distincte : ne pas prétendre le
-couvrir par une coupure du contrôle. Le checkpoint de 467 groupes reste intact ;
+après publication est une preuve distincte, qualifiée par le vrai 401 de
+révocation ci-dessous ; une coupure du contrôle ne la remplace pas. Le checkpoint
+de 467 groupes reste intact ;
 ce complément conserve ses sources, image, rapports et nettoyages propres.
 Ses 187 sources et les images contrôle/CLI sont identiques avant/après chaque
 phase. Les deux coupures donnent réellement HTTP 502, avec publication réussie,
@@ -296,7 +298,9 @@ déclarés éprouvés avant leurs scénarios réels.
 
 ## Révocation avant le GET facultatif
 
-Étendre le client de transport par un quatrième groupe réel. Un pilote local
+Le client de transport passe désormais quatre groupes réels dans le
+[complément de révocation](evidence/invocation-url-refusal-dev-2026-11-08.json).
+Un pilote local
 `e2e/adapter-catalogue-barrier.py` démarre la véritable CLI en enfant tracé,
 compte ses appels système connect vers le port 443 et la retient à l’entrée
 du sixième. Les cinq connexions précédentes doivent avoir terminé ; la
@@ -327,3 +331,17 @@ Un résultat illisible ou contenant un identifiant sensible se résume par codes
 fixes et empreintes, jamais par sa sortie brute. Une barrière non atteinte ne
 prouve ni une publication échouée ni sa cause ; les audits natifs et le nettoyage
 sont recoupés avant toute relance explicite.
+
+Le replay réussi passe 17 groupes en série : quatre de transport, cinq de
+transport historique et huit API/CLI. Les 188 sources et images sont identiques
+avant/après chaque phase. Le vrai 401 conserve completed/published, les UUID,
+l’archive unique et les six connexions CLI ; un autre Read invoque Docker.
+Neuf fonctions sont purgées dans trois namespaces, six gardes terminées et
+26 fichiers embarqués recoupés. Le brut physique est archivé avant enrichissement.
+
+L’essai initial reste un échec distinct : watchdog passé, barrière suivante
+manquée avant le nouveau scénario, cause non prouvée faute de diagnostic CLI
+conservé dans cette version. Ses deux fonctions et deux gardes sont recoupées
+nettoyées séparément. Le replay réussi ne prouve aucune correction du produit.
+La conservation nominale des diagnostics est exécutée ; ses branches sensibles,
+illisibles et les pannes propres du pilote restent non éprouvées. SLS-066 reste ouverte.

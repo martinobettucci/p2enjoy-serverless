@@ -80,8 +80,11 @@ sans requalifier la publication réussie ni renvoyer de code. Les cas courants
 passent dans le checkpoint SLS-066. La perte réelle est qualifiée dans le
 [complément de transport](../docs/evidence/invocation-url-transport-dev-2026-11-08.json) :
 deux vrais 502 après publication, succès/UUID conservés, six connexions sans
-rejeu et invocation Docker après reprise. Le refus 401/403 et les pages suivantes
-restent à éprouver. [Contrat](../docs/INVOCATION_URLS.md).
+rejeu et invocation Docker après reprise. Le
+[complément de révocation](../docs/evidence/invocation-url-refusal-dev-2026-11-08.json)
+qualifie le vrai GET 401 après publication, avec succès/UUID conservés et
+six connexions sans rejeu ; un autre Read invoque Docker. Les pages suivantes
+restent à éprouver ; le 403 n’est pas revendiqué. [Contrat](../docs/INVOCATION_URLS.md).
 Les campagnes courantes sont aussi rejouées dans la
 [suite de 35 campagnes / 467 groupes](../docs/evidence/invocation-urls-regressions-dev-2026-11-08.json),
 avec les deux images Docker reconstruites en série et figées avant/après chaque

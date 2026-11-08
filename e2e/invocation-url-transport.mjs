@@ -1,5 +1,7 @@
 // @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli
 // @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli
+// @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#révocation-avant-le-get-facultatif
+// @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#révocation-avant-le-get-facultatif
 // All helpers exercise the real CLI, native control process and public HTTPS API.
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
@@ -72,28 +74,63 @@ async function createService(name){
 async function token(service,name,rights){
   const row=await api(`/api/services/${service.id}/tokens`,{method:'POST',body:{name,rights},status:201});credentials.push(row.token);return row.token;
 }
-async function startDeployment(service,credential){
+async function startDeployment(service,credential,{refusal=false}={}){
   const config=path.join(work,'serverless.yml');
   await writeFile(config,JSON.stringify({service:service.name,provider:{name:'p2enjoy',runtime:'node24',p2enjoy:{idle_seconds:0}},
     functions:{'durable-publication':{handler:'handler.handler'}},package:{patterns:['!**','*.cjs','revision.json']}}));
   const tracePath=path.join(work,'https-connect.trace'),args=['-f','-qq','-e','trace=connect,getsockopt','-s','0','-o',tracePath,
     'python3','-B','-m','adapter','deploy','--config',config,'--service',service.id];
+  const nativeEvents=[];
   const task={settled:false,groupConfirmedGone:false,async result(){
     const value=await task.done;task.settled=true;assert(task.groupConfirmedGone,'Fin du groupe CLI non confirmée');assert.equal(value.code,0,'Code de sortie CLI');
-    const native=await readFile(tracePath,'utf8');
+    const finished=refusal?nativeEvents.find(row=>row.event==='finished'):null;
+    if(refusal)assert(finished?.child_reaped&&finished.exit_code===0&&finished.connect_results.length===6&&nativeEvents.some(row=>row.event==='armed'&&row.exitkill),'Fin native de la vraie CLI');
+    const cliStdout=refusal?finished.stdout:value.stdout,cliStderr=refusal?finished.stderr:value.stderr;
+    const native=refusal?JSON.stringify(nativeEvents):await readFile(tracePath,'utf8');
     for(const token of credentials)assert(!value.stdout.includes(token)&&!value.stderr.includes(token)&&!native.includes(token),'Identifiant exposé');
-    assert(!value.stderr.includes('Traceback'));const result=JSON.parse(value.stdout);assert.equal(result.completed,true);
-    const attempts=native.split('\n').filter(line=>line.includes('connect(')&&line.includes('htons(443)'));
-    const connections=attempts.filter(line=>/ = 0$| = -1 EINPROGRESS /.test(line));
-    assert.equal(connections.length,6,'Lectures service/liste/fonction, préparation, upload et catalogue');
-    assert.equal(attempts.length,connections.length,'Aucune autre tentative HTTPS');
+    assert(!cliStderr.includes('Traceback'));const result=JSON.parse(cliStdout);assert.equal(result.completed,true);
+    let attempts;
+    if(refusal){attempts=finished.https_connect_attempts;assert(finished.connect_results.every(value=>[0,-115].includes(value)));}
+    else{
+      const lines=native.split('\n').filter(line=>line.includes('connect(')&&line.includes('htons(443)'));
+      const connections=lines.filter(line=>/ = 0$| = -1 EINPROGRESS /.test(line));
+      assert.equal(lines.length,connections.length,'Aucune tentative HTTPS supplémentaire refusée');attempts=lines.length;
+    }
+    assert.equal(attempts,6,'Lectures service/liste/fonction, préparation, upload et catalogue sans rejeu');
     observations.push({scenario:'native-cli-connections',service_id:service.id,function_id:service.function.id,
-      https_connect_attempts:attempts.length,expected_read_requests:4,expected_mutation_attempts:2,
+      https_connect_attempts:attempts,expected_read_requests:4,expected_mutation_attempts:2,
+      observer_kind:refusal?'child-ptrace':'strace',exitkill:refusal,
       cli_process_group_confirmed_gone:task.groupConfirmedGone,trace_sha256:digest(native)});
     return result;
   }};
-  const child=spawn('strace',args,{cwd:root,detached:true,stdio:['ignore','pipe','pipe'],
+  task.diagnostic=async()=>{
+    const value=await task.done;
+    const safe=!credentials.some(token=>value.stdout.includes(token)||value.stderr.includes(token));
+    const result={exit_code:value.code,group_confirmed_gone:task.groupConfirmedGone,stdout_sha256:digest(value.stdout),stderr_sha256:digest(value.stderr),credential_exposure_detected:!safe};
+    if(safe){
+      try{result.cli_result=JSON.parse(refusal?nativeEvents.find(row=>row.event==='finished')?.stdout:value.stdout);}
+      catch{result.cli_result_unreadable=true;}
+      if(refusal)result.native_events=nativeEvents;
+      else try{
+        const native=await readFile(tracePath,'utf8');
+        assert(!credentials.some(token=>native.includes(token)));
+        result.https_connect_attempts=native.split('\n').filter(line=>line.includes('connect(')&&line.includes('htons(443)')).length;
+        result.native_trace_sha256=digest(native);
+      }catch{result.native_trace_unavailable=true;}
+    }
+    return result;
+  };
+  const child=spawn(refusal?'python3':'strace',refusal?['-B',path.join(root,'e2e/adapter-catalogue-barrier.py'),config,service.id]:args,
+    {cwd:root,detached:true,stdio:['pipe','pipe','pipe'],
     env:{...process.env,P2_SERVERLESS_URL:base,P2_SERVERLESS_TOKEN:credential}});
+  child.stdin.on('error',()=>{});
+  if(refusal){
+    createInterface({input:child.stdout}).on('line',line=>{
+      try{nativeEvents.push(JSON.parse(line));}catch{nativeEvents.push({event:'protocol-error'});}
+    });
+    task.waitGate=()=>until(()=>{assert(!nativeEvents.some(row=>row.event==='protocol-error'));return nativeEvents.find(row=>row.event==='gated');},'Barrière CLI absente',60000);
+    task.release=()=>child.stdin.write('release\n');
+  }
   task.processGroup=child.pid;
   let stdout='',stderr='',expired=false,overflow=false;
   const groupAlive=()=>{
@@ -187,10 +224,38 @@ try{
         report:result,durable:state,catalogue:addresses,invocation_status:response.status()});await purge(service);
     });
   }
+  await check('Jeton révoqué après publication : vrai GET 401, publication conservée sans rejeu',async()=>{
+    const service=await createService('catalogue-revoked');
+    const credential=await api(`/api/services/${service.id}/tokens`,{method:'POST',body:{name:'deployment-to-revoke',rights:['read','create','update']},status:201});
+    credentials.push(credential.token);
+    const task=await startDeployment(service,credential.token,{refusal:true}),barrier=await task.waitGate();
+    assert.equal(barrier.boundary,'before-sixth-https-connect');assert.equal(barrier.https_connect_attempts,6);
+    const before=await remote('inspect',service);assert.equal(before.publication.deploy_audits,1);
+    assert.equal(before.publication.candidates[0].state,'published');assert.equal(before.publication.revisions.length,1);
+    await api(`/api/tokens/${credential.id}/revoke`,{method:'POST'});
+    const denied=await caller.get(`/api/functions/${service.function.id}/invocation-urls`,{headers:{'X-Serverless-Token':credential.token}});
+    assert.equal(denied.status(),401);task.release();
+    const result=await task.result(),state=await remote('inspect',service);assert.deepEqual(state,before);
+    assert.equal(result.service_configuration.state,'preserved');assert.equal(result.results.length,1);
+    const published=result.results[0];assert.equal(published.state,'published');assert.equal(published.function_id,service.function.id);
+    assert.equal(published.revision_id,state.publication.active_revision_id);assert.equal(published.deployment_id,state.publication.candidates[0].id);
+    assert.deepEqual(published.invocation_urls,{state:'unavailable',error:{code:'http_401',status:401}});assert(!published.error);
+    const read=await token(service,'invocation-after-revocation',['read']);
+    const catalogue=await caller.get(`/api/functions/${service.function.id}/invocation-urls?limit=5&offset=0`,{headers:{'X-Serverless-Token':read}});
+    assert.equal(catalogue.status(),200);const addresses=await catalogue.json();assert.equal(addresses.revision_id,published.revision_id);
+    const entry=addresses.items.find(row=>row.origin===base);assert(entry);
+    const response=await caller.get(entry.urls[0].url,{headers:{'X-Serverless-Token':read}});assert.equal(response.status(),200);assert.equal((await response.json()).revision,prefix);
+    const descriptor=JSON.parse(await readFile(path.join(work,'.serverless-p2/deployment.json'),'utf8'));
+    assert.equal(descriptor.artifacts['durable-publication'].sha256,state.publication.archive_sha256);
+    observations.push({scenario:'revoked-before-catalogue',service_id:service.id,function_id:service.function.id,token_id:credential.id,
+      barrier,revocation_confirmed_status:denied.status(),report:result,durable:state,catalogue:addresses,invocation_status:response.status()});
+    await purge(service);
+  });
   completed=true;
 }finally{
   for(const held of gates)if(!held.restored)try{await held.recover();}catch(error){cleanupErrors.push({resource:'observer',error:error.name});}
   if(activeTask&&!activeTask.settled)await activeTask.done;
+  const cliDiagnostic=activeTask?await activeTask.diagnostic():null;
   const cliGone=!activeTask||activeTask.groupConfirmedGone;
   if(!cliGone)cleanupErrors.push({resource:'cli-process-group',error:'state_unknown_cleanup_blocked'});
   if(session?.authenticated&&cliGone&&gates.every(row=>row.restored)){
@@ -200,6 +265,7 @@ try{
   if(work&&cliGone)await rm(work,{recursive:true,force:true});
   await admin.dispose();await caller.dispose();
   await writeFile(report,JSON.stringify({target:base,completed:completed&&!cleanupErrors.length,checks,observations,skipped:0,cleanup:!cleanupErrors.length,cleanup_errors:cleanupErrors,
+    cli_diagnostic:cliDiagnostic,observer_diagnostics:gates.map(row=>({service_id:row.service.id,events:row.events,restored:row.restored})),
     cli_process_group:activeTask?{id:activeTask.processGroup,confirmed_gone:activeTask.groupConfirmedGone}:null,
     work_retained:!!work&&!cliGone,namespace_id:namespace?.id,service_ids:services.map(row=>row.id),function_ids:archives.map(row=>row.function_id),storage_archives:archives},null,2)+'\n');
 }

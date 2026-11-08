@@ -589,7 +589,7 @@ deux restaurations historiques séparées et les 26 fichiers embarqués recoupé
 Les 79 captures fraîches sont recoupées : 61 observations et 18 identités avec
 une référence inspectée. Le manuel servi correspond à 14 chapitres/43 paragraphes.
 Le Host réel est qualifié en boucle locale ; routes publiques, sources perturbées,
-pagination multi-domaines et GET CLI refusé restent ouverts.
+pagination multi-domaines restent ouverts ; le GET CLI 401 est qualifié séparément.
 
 Ce replay ne demande aucun build du contrôle, migration, variable ou secret.
 Les trois notes de cellule sont actualisées et proposées par leurs voisins
@@ -604,3 +604,15 @@ sont purgées dans trois namespaces, six gardes terminées et les 26 fichiers
 embarqués recoupés. La référence conserve son identité/image/démarrage. Les
 trois notes sont actualisées et reproposées, sans application de route, variable,
 secret ou migration. Les branches d’erreur du nouveau client restent explicites.
+
+
+Le [complément de révocation](evidence/invocation-url-refusal-dev-2026-11-08.json)
+qualifie le refus réel du GET après publication : CLI retenue avant sa sixième
+connexion, jeton révoqué par l’API puis vrai 401, publication/UUID conservés,
+six connexions sans rejeu et invocation Docker par un autre Read. Le replay
+passe 17 groupes avec 188 sources/images stables, neuf fonctions purgées dans
+trois namespaces, six gardes terminées et 26 fichiers embarqués recoupés.
+Le premier essai incomplet reste distinct, avec deux fonctions et gardes
+nettoyées ; sa barrière manquée reste de cause non prouvée. Aucun code produit,
+schéma ou réglage n’est modifié ; les notes actualisées sont reproposées.
+Le 403 et les pannes du pilote/diagnostic restent hors de cette preuve.
