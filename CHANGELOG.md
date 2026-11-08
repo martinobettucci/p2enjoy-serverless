@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Pilotes de garde de routes en qualification : restauration explicite et
+  SIGKILL du seul pilote passent sans perturbation. L’échéance se déclenche
+  mais son contrôle HTTPS de l’alias échoue ; diagnostic ultérieur de cache
+  DNS natif négatif ancien avec autoritaires corrects. Aucun détour/retrait
+  ni nouveau déploiement applicatif ; SLS-066 reste ouverte.
+  [Checkpoint incomplet](docs/evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json).
+
 - Alias functions.lelabs.tech appliqué en DEV par la console normale vers
   18090 TLS, avec DNS exact et certificats réellement vérifiés sur les deux
   domaines. Huit groupes API/CLI et six UI passent ; quatre fonctions purgées

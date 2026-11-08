@@ -291,7 +291,17 @@ requête, sans commande cut, destruction du contrôle, modification de mémoire,
 registre ou résultat système. La survie de la connexion pendant la réapplication
 normale de Caddy reste à éprouver. Le mode catalogue-before historique n’est
 pas réutilisé tel quel : il détruit le contrôle et sa garde ne rétablit pas
-les routes. Aucun de ces nouveaux scénarios n’est encore qualifié.
+les routes. Les perturbations et cette pause publique ne sont pas encore qualifiées.
+
+Le [premier checkpoint de garde](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
+passe la restauration explicite puis le SIGKILL réel du pilote sans demande
+explicite de restauration. Les deux scénarios gardent les ports inchangés,
+confirment deux HTTPS et la fin de la garde. Le scope d’échéance déclenche
+deadline mais échoue sur la dernière vérification HTTPS de l’alias ; il reste
+incomplet. Le diagnostic suivant observe une ancienne réponse DNS native
+négative, avec les deux autoritaires corrects. Aucun détour/retrait n’a commencé.
+Le cache natif doit réellement se rétablir avant la reprise, sans réécriture
+du bon enregistrement, forçage de DNS ou contournement TLS.
 
 ## Suite complète de preuve
 

@@ -477,6 +477,17 @@ retrait/rétablissement puis deux ports détournés et catalogue vide local rée
 Le vide UI public exige ensuite sa propre pause/libération native, distincte
 du pilote historique de destruction ; aucune de ces preuves n’est acquise.
 
+La garde est implémentée en qualification. Deux scénarios sans perturbation
+passent : restauration explicite et SIGKILL réel du pilote avec restauration
+indépendante, deux HTTPS et fin confirmée. Le scénario d’échéance déclenche
+effectivement sa restauration mais échoue à son dernier contrôle HTTPS de
+l’alias (URLError) ; il n’est pas compté réussi. Le diagnostic ultérieur trouve
+un cache DNS natif négatif ancien, alors que les deux autoritaires rendent le
+bon A. Les ports restent tous deux 18090 ; aucun détour/retrait n’a commencé.
+Le [checkpoint de garde](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
+conserve les deux réussites, l’arrêt et le diagnostic séparément. Rejouer
+l’échéance sur résolution native rétablie avant toute perturbation.
+
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,
 186 sources et les images contrôle/CLI recoupées avant/après chaque phase.

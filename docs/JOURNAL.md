@@ -3274,3 +3274,38 @@ catalogue-before attend cut puis tue le contrôle. Il ne convient donc pas tel
 quel. Aucune trame, réponse, source ou syscall n’est substitué. Ces décisions
 sont persistées avant le code des nouveaux pilotes ; les scénarios restent
 à exécuter, et SLS-066 demeure ouverte.
+
+## 2026-11-08 — Garde sans perturbation : deux réussites et un arrêt HTTPS
+
+La revue préalable révèle deux courses corrigées avant usage : ouvrir le pidfd
+du propriétaire avant d’annoncer ready, et persister immédiatement l’identifiant
+d’un alias recréé avant la lecture réseau suivante. La revue suivante ne relève
+pas de nouveau défaut bloquant. Le pilote et la garde sont des processus réels
+séparés ; le verrou et les identités limitent leurs responsabilités.
+
+Sur le gel courant de 200 sources, la baseline puis la perte du propriétaire
+terminent à zéro. Le second scénario tue seulement le pilote par SIGKILL,
+observe owner_gone sans restore.request, confirme les deux HTTPS et la fin
+de la garde. Les propriétés matérielles des deux routes sont conservées et
+events est vide : aucun détour, retrait ou recréation n’est exercé. Les
+baselines positives antérieures à l’extension du banc restent archivées hors
+du total actif.
+
+Le troisième scénario arme une échéance réelle de quinze secondes avec son
+propriétaire vivant. La garde déclenche deadline, relit les deux routes 18090
+et vérifie le HTTPS canonique, puis reçoit URLError sur l’alias. Son reçu reste
+incomplet ; la reprise de nettoyage ne transforme pas l’essai en réussite.
+La cause précise de cette première exception n’a pas été enregistrée. Le
+diagnostic ultérieur observe gaierror -2 / NXDOMAIN depuis la résolution native,
+avec SOA négative ancienne 2026110505, tandis que les deux autoritaires rendent
+le A attendu et la SOA 2026110506. Le cache annonce encore environ 1500 secondes.
+Cette observation étaye un cache négatif ancien, sans attribuer rétrospectivement
+un détail absent à l’exception initiale.
+
+Décision : conserver l’arrêt, ne pas réécrire le DNS déjà correct, ne pas forcer
+de résolveur ou d’IP dans les tests, puis reprendre sur résolution native réelle
+rétablie. La préparation des preuves indépendantes continue. La lecture native
+confirme les mêmes services/images/démarrages, agent actif, fichiers officiels
+inchangés et deux lignes de route lisibles sur 18090. Les gardes sont terminées.
+Ce [checkpoint](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
+ne clôture ni la garde ni SLS-066.

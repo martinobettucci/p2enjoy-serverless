@@ -643,3 +643,17 @@ la référence conserve son identité/démarrage et les quatre fichiers web serv
 en HTTPS correspondent à l’image. Le manuel affiché compte 15 chapitres et
 46 paragraphes, avec son empreinte compilée recoupée. Les trois notes actualisées
 sont proposées sans adoption ; env, secrets et routes officiels restent identiques.
+
+## Garde des routes : checkpoint sans perturbation
+
+Le contrôle et ses deux routes 18090 restent inchangés. Deux scopes du nouveau
+client de garde passent : restauration explicite et perte SIGKILL du pilote
+avec restauration indépendante, HTTPS vérifiés et processus terminés. Le scope
+d’échéance reste incomplet après URLError sur le HTTPS de l’alias. Le diagnostic
+ultérieur observe un ancien cache négatif natif alors que les deux autoritaires
+servent le bon A. Aucune modification de résolveur, route, secret, variable ou
+image applicative n’est appliquée dans cette étape. La lecture native confirme
+services/images/démarrages, agent actif, configuration officielle inchangée et
+deux lignes lisibles depuis le contrôle. La qualification de garde et SLS-066
+restent ouvertes ; la [preuve](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
+conserve l’essai arrêté et son diagnostic. Les trois notes sont reproposées.

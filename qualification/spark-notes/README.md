@@ -171,3 +171,19 @@ matérielles inchangées et les vrais HTTPS, sans second POST. Le premier dépar
 API sur session expirée est également conservé, avant création de ressources ;
 le replay utilise une nouvelle connexion SSO réelle. Aucun nouveau secret,
 variable, schéma ou build du contrôle. Les notes sont proposées sans adoption.
+
+
+## Vérification de garde en cours
+
+Deux scénarios de garde sans perturbation passent : restauration explicite et
+SIGKILL du seul pilote suivi d’une restauration indépendante, deux HTTPS et
+fin confirmée. Le scénario d’échéance reste en échec sur sa dernière lecture
+HTTPS de l’alias ; ses deux routes sont toujours à 18090 et aucune perturbation
+n’a été engagée. Le diagnostic ultérieur trouve un ancien cache DNS natif
+négatif, tandis que les deux autoritaires servent le bon A de functions.
+La disponibilité passée dans la preuve à deux domaines ne vaut pas une
+garantie de résolution continue depuis tous les caches. La reprise utilisera
+la résolution native rétablie, sans forcer d’adresse ou de résolveur.
+Preuve : docs/evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json.
+Aucune nouvelle variable, secret, route ou image applicative dans cette étape.
+Ces trois notes restent proposées, sans adoption revendiquée.
