@@ -405,6 +405,16 @@ précontrôle de décision, sans création d’objet de cette campagne.
 [Preuve incomplète](evidence/storage-console-incomplete-dev-2026-11-08.json).
 Le contrat impose une nouvelle paire de connexions réelles juste avant cette
 campagne, avec un rapport distinct ; aucune durée SSO n’est modifiée.
+La revue de couverture identifie aussi un complément requis : appeler réellement
+la route de purge avec corps absent/null/tableau, champs obligatoires manquants,
+UUID invalide, confirmation de type/longueur invalide et champ supplémentaire.
+Éprouver séparément une ancienne version positive réellement lue, avec UUID
+d’opération neuf et nom exact. Comparer avant/après fichiers données/cache,
+inventaire du code, configuration chiffrée, versions, commandes, gardes et audit
+de purge. Le helper ne gagne qu’un mode de lecture borné aux UUID de cette campagne.
+Ces assertions seront ajoutées après le replay en cours puis qualifiées par
+les neuf groupes API et leur nettoyage physique, avec empreintes distinctes :
+elles ne sont pas attribuées rétroactivement aux 397 groupes du replay.
 Restent les régressions élargies de l’union complète et l’actualisation finale
 des notes SPARK. Leur adoption n’est pas annoncée.
 Le [contrat d’intégration](CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome)

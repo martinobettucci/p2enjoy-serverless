@@ -1,5 +1,33 @@
 # Journal de cadrage
 
+## 2026-11-08 — Couverture directe des refus de purge
+
+Pendant le replay complet sur les sources figées ae03204, la revue de couverture
+retrouve la série de corps malformés sur cache-clear seulement. La purge possède
+ses refus d’accès, de CSRF, d’absence de version et de mauvais nom, mais pas de
+probe HTTP directe pour ses autres contraintes de corps. Le conflit d’UUID avec
+un ancien vidage est vérifié avant required_version ; il ne prouve donc pas à
+lui seul le refus d’une version périmée avec une nouvelle commande. Aucun défaut
+produit n’est démontré : ce sont des preuves manquantes du contrat existant.
+
+Décision persistée avant code : laisser finir la suite figée, puis renforcer le
+groupe d’archivage/purge de storage-console-api, sans changer son compte de neuf
+groupes. Cas : corps absent/null/tableau/vide, UUID manquant/invalide/non UUID,
+nom absent/non texte/vide/trop long, champ supplémentaire et ancienne version
+positive réellement lue avant archivage avec UUID neuf et nom exact. Les refus
+doivent précéder toute commande et toute mutation des fichiers ou registres.
+Un mode inspect-api-refusals du helper existant est strictement en lecture seule
+et limité au namespace exact de campagne ; les modes de perturbation conservent
+leur périmètre actuel. Le relevé compare données/cache, inventaire des artefacts,
+configuration chiffrée, versions, commandes, gardes, reçus agent et audit de purge.
+
+Le complément rejoue les neuf groupes API puis recoupe le nettoyage physique
+des quatre nouvelles fonctions. Il conserve ses propres sources avant/après,
+sans présenter ses assertions comme exécutées dans les 397 groupes précédents.
+L’image applicative doit rester identique ; une modification de comportement
+produit imposerait des régressions adaptées supplémentaires. Les mises à jour
+documentaires finales de statut seront distinguées des sources de chaque preuve.
+
 ## 2026-11-08 — Session de purge et durée de la suite complète
 
 La première union complète termine 26 campagnes et 388 groupes, puis s’arrête
