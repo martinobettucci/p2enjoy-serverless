@@ -28,7 +28,8 @@ pas garantie par le code infra. Les URL sont des adresses issues du relevé,
 leur disponibilité et leur certificat restent non vérifiés par ce catalogue.
 
 Lecture bornée à 64 Kio et 512 lignes de route, fichier ordinaire sans lien,
-UTF-8 strict. Rouvrir, lire puis recouper identité/taille/mtime ; un changement
+UTF-8 strict. Rouvrir, lire puis recouper identité/taille/mtime du descripteur et du nom
+courant sans suivre un lien ; un changement
 observé ou une ligne invalide rend la lecture indisponible, sans ancien résultat
 réutilisé. Un en-tête tronqué sans ligne ne vaut pas registre vide : le marqueur
 officiel d’absence est requis dans ce cas. Une coupure entre deux lignes valides
@@ -47,7 +48,9 @@ sont recensés séparément, sans inventer un hôte concret ni une URL copiable.
 
 Ajouter `GET /api/functions/{UUID}/invocation-urls?limit=5&offset=0` : session
 administrateur ou Read sur cette fonction. Create/Update/Delete seuls, portée
-étrangère et anonymat restent refusés. Fonction ou parent supprimé : 404.
+étrangère et anonymat restent refusés avant de révéler l’existence de l’objet.
+Fonction ou parent supprimé : 404 après autorisation ; un jeton ne pouvant
+identifier un service autorisé reçoit le refus de portée habituel.
 Limite 1..20 domaines par page, offset 0..10000 ; tri par domaine.
 
 Une seule lecture SQL joint fonction active, service actif et révision active
@@ -80,6 +83,8 @@ indisponible, un changement de catalogue/révision ou un refus après publicatio
 rend seulement l’information d’adresses indisponible avec diagnostic : une
 publication déjà réussie reste published, sans nouveau ZIP ni mutation rejouée.
 Les exemples utilisent un emplacement X-Serverless-Token, jamais une valeur réelle.
+L’exemple curl préfère GET lorsqu’il est autorisé ; sinon il reprend une méthode
+déclarée. Le classement alphabétique ne choisit pas DELETE lorsqu’un GET existe.
 
 ## Console et domaine canonique
 
@@ -98,7 +103,9 @@ supplémentaire ni secret dans les adresses, exemples, URL ou messages.
 
 Le SSO et la console conservent SERVERLESS_PUBLIC_URL. Une entrée HTML ou
 /auth/login sur un autre hôte rejoint cette origine configurée, sans fabriquer
-une cible depuis un en-tête. API de jetons et /invoke restent utilisables sur
+une cible depuis un en-tête. La redirection des fiches conserve les UUID valides
+de suivi deployment/operation ; les paramètres non reconnus sont écartés.
+L’entrée /auth/login rejoint uniquement ce chemin canonique. API de jetons et /invoke restent utilisables sur
 les domaines d’appel ; les règles de CSRF, origine/IP et Read ne sont pas modifiées.
 
 ## Qualification réelle et autorité

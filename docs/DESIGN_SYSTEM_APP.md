@@ -202,3 +202,7 @@ erreur ou nouvelle lecture retire les anciennes adresses et les succès de
 copie. Pagination et actualisation conservent le focus sur un contrôle visible,
 y compris après retrait du dernier domaine d’une page. Le parcours complet,
 clavier, mobile à 390 px et refus de copie exigent des preuves réelles.
+
+L’exemple curl préfère GET lorsqu’il existe. La redirection depuis un domaine
+d’appel préserve les identifiants UUID de suivi de publication ou de stockage
+des fiches ; elle n’efface pas le contexte déjà partageable de ces parcours.

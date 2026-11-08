@@ -2657,3 +2657,16 @@ indépendante peut avancer. Aucun service, variable, secret ou route modifié
 
 La phrase périmée de SERVICE_CONFIGURATION_URLS annonçant encore le test de
 réponse perdue est corrigée d’après la preuve de transport déjà clôturée.
+
+### Revue avant déploiement des adresses
+
+La proposition `/etc/spark/routes.?` ajoute uniquement functions.lelabs.tech
+vers 18090 TLS, empreinte 28dd866ad53907ab8e467298468f354752b411d1b0219c296ece56385e82123f.
+Elle n’est pas appliquée. Une demande d’autorité bornée nomme la clause locale
+et les seules routes du SPARK concernées ; le développement continue.
+
+La revue readonly relève quatre points vérifiés dans les sources avant correction :
+préférer GET au DELETE issu du tri dans curl, préserver les UUID des paramètres
+de suivi lors d’une redirection canonique, recouper aussi l’inode du nom courant
+après lecture, et appliquer l’autorisation avant de révéler l’existence d’une
+fonction. Ces précisions sont intégrées au contrat avant modification dépendante.
