@@ -487,6 +487,10 @@ garde ses deux réussites, l’arrêt HTTPS de l’échéance et le diagnostic s
 Le cache négatif a expiré et la résolution native s’est rétablie ; aucune adresse
 ni aucun résolveur n’est forcé. Les ports restent tous deux 18090 ; aucun
 détour/retrait n’a commencé. Les cycles effectifs restent à qualifier.
+Le [contrat des cinq cycles réels](INVOCATION_ROUTE_CYCLES.md) fixe maintenant
+la fixture originale, pagination API à deux domaines, détour d’alias avec reprise
+explicite puis perte du pilote, retrait/rétablissement et détour des deux ports
+avec catalogue vide local réel. Aucun de ces cinq groupes n’est encore exécuté.
 Pendant cette attente, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
 sont préparées sur la requête canonique, sans changer de route. L’extraction de
 NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,

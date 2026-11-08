@@ -3375,3 +3375,20 @@ pas les anciennes réussites au total et ne réécrit pas le checkpoint échoué
 Les trois notes sont reproposées avec ce statut courant, sans adoption. Aucune
 variable, secret, route ou image nouvelle. Les cycles réels et SLS-066 restent
 ouverts ; la garde dispose maintenant de ses trois prérequis sans perturbation.
+
+## 2026-11-08 — Décision des cinq cycles réels autorisés
+
+La garde sans perturbation est livrée dans b1fab60. La prochaine preuve reste
+limitée aux deux routes autorisées : fixture originale publiée par la CLI,
+pagination API de taille un et appels Docker, détour d’alias avec reprise
+explicite puis pilote perdu après mutation confirmée, retrait/recréation avec
+nouvel identifiant, enfin deux ports détournés et catalogue vide sur le vrai
+HTTP local. La pause UI publique reste indépendante et non qualifiée.
+
+Les parents portent un nonce de propriété ; le collecteur natif accepte le seul
+nouveau préfixe invocation-route-cycles en gardant ses inventaires exacts.
+Avant chaque faute : seule fonction possédée, aucune instance vivante ni
+invocation active. Le délai d’inactivité de fixture vaut une seconde ; aucune
+autre configuration de cellule ou application n’est changée. Une garde ou route
+non restaurée interdit le nettoyage automatique. Le protocole et les cinq
+résultats attendus sont persistés dans INVOCATION_ROUTE_CYCLES avant le code.
