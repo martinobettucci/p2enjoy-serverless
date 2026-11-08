@@ -684,4 +684,18 @@ configuration sont inchangés depuis les régressions du traceur commun.
 La [preuve](evidence/invocation-route-guard-dev-2026-11-08.json) garde le premier
 arrêt séparé. Les trois notes sont actualisées et reproposées ; aucune variable,
 secret, route ou image applicative nouvelle. Les cycles effectifs restent à
-qualifier dans SLS-066.
+qualifier à ce checkpoint ; ils sont désormais recoupés dans le complément suivant.
+
+## Cinq cycles réels des routes qualifiés
+
+Le client des cycles passe cinq groupes et sept invocations des URL émises,
+sur 203 sources et les mêmes images. Les quatre gardes sont terminées et la
+fonction originale est purgée dans son namespace. Les deux routes finales
+visent 18090 TLS ; l’alias a un nouvel identifiant après son retrait/recréation,
+la canonique conserve le sien. Les services et leurs démarrages, l’agent et
+les deux fichiers officiels restent inchangés. Aucun build applicatif ni DNS
+supplémentaire n’est appliqué. La [preuve](evidence/invocation-route-cycles-dev-2026-11-09.json)
+conserve les données natives exactes, ainsi que le premier arrêt de collecte
+sur les seuls horodatages arrondis pendant le passage JSON JavaScript.
+Les trois notes sont reproposées. Le vide UI public, les sources perturbées
+et les pages suivantes UI/CLI restent ouverts dans SLS-066.

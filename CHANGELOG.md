@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- Cinq cycles réels des deux routes qualifiés : pagination API, alias vers
+  18091 avec reprise explicite puis perte du pilote, retrait/rétablissement
+  et deux ports vers 18091 avec catalogue vide local réel. Sept invocations
+  Docker des URL émises, quatre gardes terminées, une fonction purgée et
+  deux routes restaurées à 18090 TLS ; 203 sources et mêmes images recoupées.
+  L’identifiant d’alias est renouvelé ; la canonique conserve le sien.
+  [Preuve](docs/evidence/invocation-route-cycles-dev-2026-11-09.json).
+
 - Traceur natif partagé extrait sans changement de son corps : quatre groupes
   transport des adresses et cinq de configuration passent sur 201 sources,
   six fonctions purgées dans deux namespaces et six gardes terminées. Aucun

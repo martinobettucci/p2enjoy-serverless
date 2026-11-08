@@ -92,7 +92,7 @@ sont recoupées : 61 observations et 18 identités SHA avec une référence insp
 Le contrôle et la référence sont sains, l’agent actif, les réservations et
 allocations globales à zéro. Les archives historiques étrangères restent conservées.
 
-La preuve native du Host est acquise en boucle locale. Le couple de domaines TLS est maintenant vérifié ; restent retrait/détours,
+La preuve native du Host est acquise en boucle locale. Le couple de domaines TLS, son retrait d’alias et ses détours sont vérifiés ; restent
 seconde page sur six domaines et source perturbée.
 Le GET CLI 401 après publication est qualifié séparément ci-dessous. Le build nominal CLI est
 qualifié ; sa branche d’expiration/perte SSH reste à éprouver. SLS-066 demeure
@@ -175,8 +175,8 @@ publication, appels Docker des adresses émises, droits, chemins/méthodes,
 révisions et rollback. Leurs quatre fonctions sont purgées dans deux namespaces
 et recoupées nativement. Sources de preuve :
 docs/evidence/invocation-domains-dev-2026-11-08.json. Ce complément ne clôture
-pas SLS-066 : retrait, détours vers 18091 avec garde, source perturbée et
-pages suivantes sur six domaines restent distincts.
+pas SLS-066. Les cinq cycles ultérieurs qualifient retrait, détours et API locale
+vide ; source perturbée, parcours UI vide et pages UI/CLI sur six domaines restent ouverts.
 
 La première déclaration est conservée comme interrompue pendant une comparaison
 trop stricte de applied_at ; sa reprise en lecture seule vérifie les propriétés
@@ -198,6 +198,25 @@ La première échéance échouée et son diagnostic DNS restent conservés sépa
 Après expiration du cache négatif en amont, les deux domaines résolvent
 nativement vers l’adresse attendue ; aucune adresse ni aucun résolveur n’est
 forcé dans les tests. Preuve : docs/evidence/invocation-route-guard-dev-2026-11-08.json.
-La pause native et les perturbations réelles restent à éprouver dans SLS-066.
+Les perturbations réelles passent les cinq cycles ci-dessous ; la pause native
+et le parcours UI public vide restent à éprouver dans SLS-066.
 Aucune nouvelle variable, secret, route ou image applicative dans cette étape.
 Ces trois notes restent proposées, sans adoption revendiquée.
+
+
+## Cinq cycles réels des routes — 9 novembre
+
+Cinq groupes sérialisés passent sur 203 sources inchangées et les mêmes images :
+pages API de taille un et appels des deux domaines, détour de l’alias,
+restauration indépendante après SIGKILL du pilote, retrait/rétablissement de
+l’alias et détour des deux routes avec catalogue HTTP local réellement vide.
+Sept appels exécutent le handler Docker depuis les URL émises. Les quatre gardes
+sont terminées, la fonction est purgée dans son namespace et ses parents supprimés.
+Les deux routes sont rétablies à 18090 TLS ; la recréation renouvelle l’identifiant
+de l’alias. Preuve : docs/evidence/invocation-route-cycles-dev-2026-11-09.json.
+
+Aucun build, variable ou secret ajouté ; les deux fichiers officiels et les
+services sont inchangés. Le vide UI public, les fautes de source et la seconde
+page UI/CLI restent ouverts. Les quatre alias temporaires de pagination sont
+une proposition locale en attente d’autorisation, sans création DNS ni route.
+Ces trois notes sont proposées individuellement, sans adoption revendiquée.

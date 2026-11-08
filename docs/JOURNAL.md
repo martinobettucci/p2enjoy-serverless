@@ -3425,3 +3425,37 @@ La demande asynchrone au responsable couvre explicitement les quatre alias,
 leurs A exacts et leur retrait après qualification, par la console normale du
 seul SPARK. Sa réponse reste nécessaire et n’est pas déduite du temps écoulé.
 Les travaux sur les deux domaines déjà autorisés et la pause native continuent.
+
+## 2026-11-09 — Cinq cycles recoupés et précision des données natives conservée
+
+Les cinq groupes terminent à zéro sur 203 sources et les mêmes images. Les sept
+appels utilisent effectivement entry.url des catalogues émis. Les quatre gardes
+sont terminées, les deux routes revenues à 18090 TLS ; le retrait/recréation a
+renouvelé l’identité de l’alias, sans changer celle de la canonique. La lecture
+native recoupe une fonction purgée dans un namespace, le nonce des parents,
+les reçus de stockage, secrets vides, fichiers/volumes absents et réservations
+libérées. Services, démarrages, agent et configuration officielle sont inchangés.
+
+La première collecte s’arrête sur une comparaison stricte du premier objet de
+garde : les entiers de nanosecondes Python ont été arrondis au passage JSON dans
+JavaScript. Le diagnostic des quatre jeux trouve exactement dix-huit différences,
+toutes started_at_ns/finished_at_ns, de même valeur numérique flottante et bornées
+à un pas de représentation. Tous les champs matériels restent exacts.
+Décision de preuve : conserver l’arrêt et son collecteur, archiver les huit
+fichiers natifs sans altération avec leurs SHA, puis recouper ce seul passage
+numérique. La nouvelle collecte readonly passe ; aucun scénario applicatif ou
+mutation de route n’est rejoué. Les snapshots Python de fraîcheur conservent
+leurs nanosecondes exactes. La [preuve](evidence/invocation-route-cycles-dev-2026-11-09.json)
+expose cette distinction, sans présenter l’arrêt comme une réussite.
+
+Les trois notes sont actualisées comme propositions, sans adoption. Aucune
+variable ou secret nouveau ; routes exercées puis restaurées, aucun nom DNS
+nouveau. Le vide UI public, les sources perturbées, les six domaines et les
+pannes propres du nouveau client restent à qualifier. La demande d’extension
+de quatre alias reste distincte de cette livraison déjà autorisée.
+
+La revue finale factory_reviewer recoupe les cinq groupes, sept URL invoquées,
+quatre gardes, 203 sources et leurs deux seuls contrats Markdown postérieurs,
+les huit fichiers natifs exacts et la correction bornée des dix-huit horodatages.
+Aucun défaut bloquant constaté. Les branches de panne du pilote et les preuves
+UI/source/pagination résiduelles ne sont pas qualifiées par ce checkpoint.

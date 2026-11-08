@@ -458,8 +458,8 @@ est reconstruit et qualifié pour les parcours actuellement éprouvés.
 L’autorisation bornée de gestion des routes du seul SPARK depuis sa console
 normale est confirmée le 8 novembre 2026 : alias functions.lelabs.tech, deux
 routes vers 18091 temporairement, garde et restauration à 18090. Le périmètre
-est inscrit dans CLAUDE_PROJECT ; l’alias est appliqué, tandis que les preuves
-de retrait et détours restent à exécuter après la campagne SLS-067.
+est inscrit dans CLAUDE_PROJECT ; l’alias est appliqué et les cinq cycles réels
+ci-dessous qualifient retrait, détours et restauration.
 
 SLS-067 est clôturée. La reprise commence par le DNS exact et la route TLS de
 l’alias autorisé via la console normale, puis les huit groupes API/CLI et six UI
@@ -471,11 +471,11 @@ et six UI passent, avec quatre fonctions purgées dans deux namespaces.
 La [preuve à deux domaines](evidence/invocation-domains-dev-2026-11-08.json)
 conserve ses arrêts initiaux et la reprise sans mutation ; elle ne clôture
 pas les critères résiduels de SLS-066.
-La prochaine étape suit le [contrat de garde et cycles](INVOCATION_URLS.md#garde-de-restauration-et-cycles-autorisés) :
+Les cinq cycles suivent le [contrat de garde et cycles](INVOCATION_URLS.md#garde-de-restauration-et-cycles-autorisés) :
 garde sans perturbation, mort du pilote après détour d’alias confirmé,
 retrait/rétablissement puis deux ports détournés et catalogue vide local réel.
 Le vide UI public exige ensuite sa propre pause/libération native, distincte
-du pilote historique de destruction ; aucune de ces preuves n’est acquise.
+du pilote historique de destruction ; cette preuve UI n’est pas encore acquise.
 
 Les trois déclencheurs de garde sans perturbation sont vérifiés : restauration
 explicite, SIGKILL réel du pilote avec restauration indépendante et échéance
@@ -485,14 +485,17 @@ trois groupes sur 201 sources. Le premier
 [checkpoint incomplet](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
 garde ses deux réussites, l’arrêt HTTPS de l’échéance et le diagnostic séparément.
 Le cache négatif a expiré et la résolution native s’est rétablie ; aucune adresse
-ni aucun résolveur n’est forcé. Les ports restent tous deux 18090 ; aucun
-détour/retrait n’a commencé. Les cycles effectifs restent à qualifier.
+ni aucun résolveur n’est forcé. Ces trois groupes précèdent les perturbations ;
+les deux routes sont également revenues à 18090 après les cinq cycles suivants.
 Le [contrat des cinq cycles réels](INVOCATION_ROUTE_CYCLES.md) fixe maintenant
 la fixture originale, pagination API à deux domaines, détour d’alias avec reprise
 explicite puis perte du pilote, retrait/rétablissement et détour des deux ports
 avec catalogue vide local réel. Les cinq groupes passent ; sept appels Docker,
 quatre gardes terminées et une fonction purgée dans un namespace sont recoupés.
-La preuve finale et sa revue restent à assembler avant livraison du changement.
+La [preuve](evidence/invocation-route-cycles-dev-2026-11-09.json) conserve les
+sources, les fichiers natifs exacts et l’arrêt initial du collecteur sur les
+seuls horodatages arrondis par JavaScript. La revue finale en lecture seule
+ne constate aucun défaut bloquant. Ce checkpoint est qualifié ; SLS-066 reste ouverte.
 
 Pour les pages UI/CLI de cinq domaines, les quatre alias temporaires
 functions-pagination-1 à functions-pagination-4.lelabs.tech sont proposés :

@@ -76,3 +76,29 @@ Le rapport complet exige cinq groupes réussis, zéro skip, nettoyages confirmé
 et sources/images identiques avant/après. Conserver séparément tout essai
 interrompu. Les pannes propres du nouveau client restent à éprouver par leurs
 scénarios réels ; ce contrat ne leur attribue aucune réussite anticipée.
+
+## Résultats réels du 9 novembre
+
+Les cinq groupes passent en série sur 203 sources et les mêmes images avant/après.
+Sept appels utilisent les chaînes URL réellement émises et exécutent le handler
+Docker attendu. Les quatre gardes sont terminées : trois reprises explicites
+et une indépendante après SIGKILL du pilote. Le retrait/rétablissement donne
+un nouvel identifiant de route à l’alias, tandis que la canonique conserve le sien.
+Les deux lignes finales ciblent 18090 TLS ; services, démarrages et configuration
+officielle restent inchangés. La fonction est purgée dans son namespace, avec
+reçu de stockage et absences physiques recoupés.
+
+La [preuve](evidence/invocation-route-cycles-dev-2026-11-09.json) distingue les
+cinq succès de la première collecte physique interrompue. Celle-ci comparait
+strictement des nanosecondes Python à leur représentation après JSON JavaScript :
+dix-huit seuls champs started_at_ns/finished_at_ns dépassent la précision entière
+exacte de JavaScript. Le collecteur recoupe leur même valeur numérique et borne
+l’écart à un pas de représentation ; tous les autres champs restent identiques.
+Les huit fichiers natifs de garde sont archivés byte pour byte avec leurs SHA,
+et restent l’autorité pour les nanosecondes. Aucune donnée applicative, réponse,
+route ou résultat de scénario n’est remplacé. La seconde collecte est en lecture
+seule ; les cinq scénarios ne sont pas artificiellement rejoués ou requalifiés.
+
+Le catalogue vide est prouvé sur le vrai HTTP local, pas encore dans le parcours
+UI public retenu. Les six domaines UI/CLI et les pannes propres du nouveau pilote
+restent ouverts dans SLS-066.

@@ -44,6 +44,16 @@ normale. Un accès absent est une erreur de prérequis, jamais un test ignoré.
 
 ## Adresses d’appel SLS-066
 
+`node e2e/invocation-route-cycles.mjs` exerce les seules deux routes autorisées
+depuis la console normale existante : cinq groupes réels passent, sept appels
+Docker des URL émises, quatre gardes terminées et une fonction purgée dans un
+namespace. Le [contrat opératoire](../docs/INVOCATION_ROUTE_CYCLES.md) fixe la
+fixture, l’armement et la restauration. La
+[preuve](../docs/evidence/invocation-route-cycles-dev-2026-11-09.json) recoupe
+203 sources, le catalogue à deux/un/zéro domaines et le nouvel identifiant
+d’alias après retrait/rétablissement. Les ports finaux restent 18090 TLS.
+Le vide UI public et les pages suivantes UI/CLI sur six domaines restent distincts.
+
 `native_control_observer.py` porte la classe pure partagée avec le pilote
 historique `service-transport-observer.py`. Son corps est déplacé sans changement.
 Synchroniser le module dans le même répertoire E2E avant le pilote consommateur.
@@ -64,9 +74,8 @@ fin confirmée du processus indépendant, sans aucune perturbation de route :
 Le premier essai d’échéance s’est arrêté sur le HTTPS de l’alias ; l’ancien
 cache DNS négatif a ensuite expiré avant le replay. Le
 [checkpoint incomplet](../docs/evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
-garde cet arrêt et son diagnostic séparés. Aucun détour ni retrait n’est encore
-qualifié ; les actions correspondantes du pilote de garde ne doivent pas être
-confondues avec ses trois scénarios réussis sans perturbation.
+garde cet arrêt et son diagnostic séparés. Les détours et le retrait font ensuite
+l’objet de la preuve séparée des cinq cycles réels décrite ci-dessus.
 
 Le complément à deux domaines réels passe huit groupes API/CLI et six UI sur
 `serverless.lelabs.tech` et `functions.lelabs.tech`, tous deux en HTTPS vérifié.
@@ -101,7 +110,8 @@ réunit ces quatorze groupes, 36 régressions et 38 groupes dans les deux images
 CLI reconstruites, soit 88. Chaque commande est liée à ses sources et image. Il ne constitue
 pas une suite complète de plateforme ni une qualification multi-domaines.
 Les sources perturbées, six domaines
-réels pour une seconde page et les cycles de routes restent à éprouver.
+réels pour une seconde page restent à éprouver. Les cycles de routes sont
+qualifiés séparément dans le complément à cinq groupes décrit ci-dessus.
 Aucun de ces manques n’est converti en test ignoré dans les campagnes exécutées.
 
 Le scope complet `python3 -B e2e/execution-suite.py --scope invocation-urls`

@@ -37,7 +37,7 @@ def source_hashes():
     # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
     files += [ROOT/name for name in ['docs/INVOCATION_URLS.md','adapter/Dockerfile','adapter/Dockerfile.dockerignore',
                                     'adapter/compose.spark.yml','adapter/dev.sh','qualification/package.json']]
-    files += [ROOT/name for name in ['docs/FUNCTION_CATALOGUE.md','docs/CONSOLE_USABILITY.md','docs/EXECUTION.md']]
+    files += [ROOT/name for name in ['docs/FUNCTION_CATALOGUE.md','docs/CONSOLE_USABILITY.md','docs/EXECUTION.md','docs/INVOCATION_ROUTE_CYCLES.md']]
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
 def metadata(path):
@@ -108,6 +108,8 @@ def verify_report(name,path,is_remote,expected_hash):
     expected.update({'invocation-urls':8,'invocation-urls-ui':6,'service-transport':5,'service-configuration':13,
                      'adapter-docker':24,'adapter-public-docker':14})
     expected.update({'function-catalogue-api':8,'function-catalogue-ui':14})
+    # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_ROUTE_CYCLES.md#cinq-groupes-e2e-sérialisés
+    expected.update({'invocation-route-cycles':5})
     checks=result.get('checks',result.get('results'))
     assert isinstance(checks,list) and len(checks)==expected[name],'Nombre de groupes inattendu'
     if name=='login-ui':assert all(isinstance(row,str) and row for row in checks)

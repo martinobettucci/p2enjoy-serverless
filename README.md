@@ -92,8 +92,13 @@ les preuves résiduelles restent ouvertes ; SLS-066 n’est pas clôturée. La
 ajoute huit groupes API/CLI et six UI sur `serverless.lelabs.tech` et
 `functions.lelabs.tech`, désormais tous deux vérifiés en HTTPS vers 18090.
 Les quatre fonctions de ces campagnes sont purgées dans deux namespaces ;
-sept nouvelles captures sont inspectées. Retrait/détours de routes, source
-perturbée et pagination sur six domaines restent à éprouver. La
+sept nouvelles captures sont inspectées. Les [cinq cycles de routes](docs/evidence/invocation-route-cycles-dev-2026-11-09.json)
+qualifient ensuite le retrait/rétablissement de l’alias, les détours vers 18091,
+la restauration indépendante après SIGKILL du pilote et le catalogue API local
+vide. Sept appels exécutent Docker depuis les URL émises ; les deux routes sont
+rétablies à 18090 TLS et la fonction de campagne est purgée. La source perturbée,
+le vide dans le parcours UI public et la pagination UI/CLI sur six domaines
+restent à éprouver. La
 [régression complète](docs/evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes en série et 467 groupes, sans échec ni test ignoré :
 186 sources recoupées avant/après chaque phase, 79 captures fraîches recoupées

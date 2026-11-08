@@ -5,8 +5,10 @@ le SPARK DEV. Le [checkpoint](evidence/invocation-urls-checkpoint-dev-2026-11-08
 passe 88 groupes réels sur le seul domaine alors affecté. La
 [régression complète](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe ensuite 35 campagnes et 467 groupes, sans échec ni test ignoré. L’unité
-reste en qualification : les changements de routes, pages suivantes et autres
-preuves résiduelles ci-dessous ne sont pas couverts par ces campagnes.
+reste en qualification. Le [complément de cinq cycles](evidence/invocation-route-cycles-dev-2026-11-09.json)
+qualifie les changements des deux routes autorisées et le vide de l’API locale ;
+les pages suivantes UI/CLI, le vide du parcours UI public et les autres preuves
+résiduelles ci-dessous restent ouverts.
 
 ## Source officielle et limites
 
@@ -198,9 +200,9 @@ copient et invoquent le code Docker sur le catalogue réellement à deux domaine
 Leur preuve reste distincte du catalogue SLS-067 figé, avec rapports frais,
 captures observées et collecte native des seules ressources créées.
 
-Cette étape n’exerce aucun retrait ni détour vers 18091. Ces perturbations
-suivent avec une garde indépendante éprouvée et un contrat de pilote borné,
-avant leur première exécution. L’autorisation ne couvre pas de nouvelles
+Cette première étape n’exerce aucun retrait ni détour vers 18091. Leur
+complément ultérieur suit [le contrat des cinq cycles](INVOCATION_ROUTE_CYCLES.md)
+et sa garde indépendante éprouvée. L’autorisation ne couvre pas de nouvelles
 variables de cellule, d’adoption de notes ou d’administration d’autres SPARKs.
 
 La console peut actualiser applied_at sur les routes lors de sa réapplication
@@ -237,8 +239,10 @@ Le premier départ API sur session expirée reste également distinct : zéro gr
 avant création de ressources. Une nouvelle connexion SSO réelle précède le
 replay positif. Aucun de ces essais n’est réécrit en réussite.
 
-Ce complément ne prouve pas encore le retrait, les détours vers 18091, l’état
-vide ou la source indisponible, les pages suivantes sur six domaines ni l’entrée
+Ce premier complément à deux domaines ne prouve pas le retrait ni les détours ;
+ils sont qualifiés par les cinq cycles ultérieurs, avec le vide de l’API locale.
+Restent la source indisponible, le vide du parcours UI public,
+les pages suivantes sur six domaines et l’entrée
 HTML/SSO depuis l’alias public. La preuve native du Host/redirection reste
 celle de la boucle locale. Les scénarios résiduels et leur garde maintiennent
 SLS-066 ouverte. Le mode clair n’a pas été activé.
@@ -291,7 +295,8 @@ requête, sans commande cut, destruction du contrôle, modification de mémoire,
 registre ou résultat système. La survie de la connexion pendant la réapplication
 normale de Caddy reste à éprouver. Le mode catalogue-before historique n’est
 pas réutilisé tel quel : il détruit le contrôle et sa garde ne rétablit pas
-les routes. Les perturbations et cette pause publique ne sont pas encore qualifiées.
+les routes. Les perturbations sont qualifiées par les cinq cycles du 9 novembre ;
+cette pause publique reste à implémenter et à qualifier.
 
 Le [premier checkpoint de garde](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
 passe la restauration explicite puis le SIGKILL réel du pilote sans demande
