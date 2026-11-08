@@ -24,6 +24,14 @@ Les sources perturbées, vrai Host, CLI après consultation perdue, six domaines
 réels pour une seconde page et les cycles de routes restent à éprouver.
 Aucun de ces manques n’est converti en test ignoré dans les campagnes exécutées.
 
+Le scope complet `python3 -B e2e/execution-suite.py --scope invocation-urls`
+est spécifié et reste à intégrer/qualifier :35 campagnes / 467 groupes sans doublon,
+avec le même protocole stdin privée que stockage. Ses six prérequis ne gonflent
+pas le décompte ; le recoupement détaillé10 namespaces / 32 fonctions reste séparé
+des nettoyages propres aux autres campagnes. Le contrat
+[INVOCATION_URLS](../docs/INVOCATION_URLS.md#suite-complète-de-preuve) fixe ordre,
+images CLI, frontières natives et limites de cette suite.
+
 ## Configuration commune du service
 
 `node e2e/service-configuration.mjs` exige la session SSO réelle de

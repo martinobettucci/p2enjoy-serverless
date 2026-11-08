@@ -2722,3 +2722,29 @@ CLI perdue après publication, entrée SSO sur alias et campagne complète.
 La proposition de route est déposée ; aucune route FORGE n’a été appliquée.
 L’autorité bornée demandée reste sans réponse. SLS-066 garde [~] ; le goal
 général reste actif. Aucun remote Git n’est configuré.
+
+## 2026-11-08 — Suite complète SLS-066 et frontière du Host
+
+Le checkpoint précédent est un progrès vérifié : code déployé,88 groupes,
+31 captures et commit f9a33e9. L’unité reste ouverte et la demande d’autorité
+limitée aux routes reste sans réponse. La suite complète peut avancer sans
+modifier les routes. Exploration readonly et recoupement principal confirment
+l’union35 campagnes / 467 groupes et le contrôle ciblé10 namespaces / 32 fonctions ;
+le contrat est écrit avant l’intégration au runner. Les deux images CLI et
+leurs sources doivent être liées ; les campagnes transport 5 / configuration 13
+restent dans cet ordre, sans doublons des campagnes communes.
+
+Le premier replay de control-operations sur la même image échoue après 51 groupes
+réussis : son client local suit la nouvelle redirection canonique de /auth/login
+et reçoit 200 du SSO au lieu du 503 SQLite du contrôle isolé. Le banc est nettoyé.
+L’échec avant correction est persisté dans
+evidence/invocation-url-control-operations-incomplete-dev-2026-11-08.json.
+Décision : Host canonique issu de la configuration réelle et aucune redirection
+automatique dans ce client de panne ; aucune correction du produit n’est requise.
+
+Le Host falsifié peut également être éprouvé par une requête native vers le
+contrôle réel sur sa boucle locale, avec Read valide et portée inchangée. Le
+jeton passe par stdin privée ; aucun domaine ou registre n’est substitué. Cette
+preuve est distinguée des alias publics, qui restent à qualifier sur de vraies
+routes. Les décisions de suite, de prérequis et de recoupement sont consignées
+dans INVOCATION_URLS avant code. Aucun nouveau réglage, secret ou route appliquée.

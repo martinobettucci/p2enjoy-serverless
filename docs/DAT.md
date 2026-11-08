@@ -358,3 +358,12 @@ Le [checkpoint DEV](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 recoupe montage readonly, 26 sources embarquées, 88 groupes et 31 captures.
 Le contrôle est déployé avec ces parcours ; multi-domaines, sources perturbées
 et campagne complète restent à qualifier.
+
+## Extension de la suite SLS-066 à qualifier
+
+Le contrat [INVOCATION_URLS](INVOCATION_URLS.md#suite-complète-de-preuve)
+prévoit un scope commun35 campagnes / 467 groupes, des prérequis distincts non
+comptés, les sources/images CLI liées et le recoupement détaillé10namespaces/
+32fonctions. Le Host est exercé par un client réel de boucle locale du SPARK,
+sans dépendance remplacée ; les alias publics restent une preuve distincte.
+L’intégration de ces clients ne change ni service, schéma ni configuration.

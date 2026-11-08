@@ -1,0 +1,610 @@
+{
+  "unit": "SLS-066",
+  "status": "incomplete-dev",
+  "recorded_at_ns": 1794154357790774810,
+  "target": "infra-serverless DEV",
+  "control_image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+  "record": {
+    "before": {
+      "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+      "source_sha256": {
+        "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+        "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+        "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+        "adapter/deploy.py": "462ed21dd2433317052e03be9c25ae18a6d2d8f1aee53cd4eb56211272302e27",
+        "adapter/manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+        "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+        "control/Dockerfile": "858d0ed75d833754fd48b73a780c0607f81f7b34b6473d4a921591ee90b1b862",
+        "control/Dockerfile.dockerignore": "3d4e09e669ded704ed8e8765450b1eacc41b94b313f5cd93a48941b8377dd915",
+        "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+        "control/app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+        "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+        "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+        "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+        "control/app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+        "control/app/deployments.py": "1df532d18cfa3838fb3b04840ccf1dda13eb3e9ae2963b4e1b781551d861195d",
+        "control/app/execution.py": "8c52837c6b893411ea10af481f573aa54db98990624079d5bb7b8c2a6f6e485f",
+        "control/app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+        "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+        "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+        "control/app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+        "control/app/invocation_urls.py": "f05e6ee7f399b4d54cf2c15b186c13d7eb75266172bcc33127e7fca6dce5c1df",
+        "control/app/main.py": "0763accfcd9dfca32ce8d7f09ae67d7adb7264d567fa0f8822479d432d863956",
+        "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+        "control/app/models.py": "fbfa169dc95872a8b19378e92b19f3f1074ff20f2a825a5671b99b784aac4b3e",
+        "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+        "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+        "control/app/storage_management.py": "37ce7e205ec06860eb096c37d85d7015c5002558101faf6b90eccfda81181ea7",
+        "control/app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+        "control/compose.spark.yml": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+        "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+        "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+        "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+        "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+        "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+        "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+        "control/migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+        "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+        "docs/CONSOLE_PUBLICATION.md": "d710833cc0849871379e18b93c4f4d9d7003644a110ab72edb3dc6129a9bf10d",
+        "docs/CONSOLE_STORAGE.md": "71e9f9b3afe4a63021a812cd0abb1d314bc62fe4672765ade0f9f641fb604f8b",
+        "docs/DESIGN_SYSTEM_APP.md": "4b5377c5fcb198b7f2f603790164c32d99edeca0ca5768d017b9b0bd4071e588",
+        "docs/STORAGE_LEGACY_PROOF.md": "a923c0059d36008bbeb5421ef878b7c0be42cb9c0604abfbe5535cbc8a8d58f6",
+        "docs/manual.md": "cf7bcdb9d6ef887203b7b84d42e46ec4ba9507b78acf488aea266d13909c7207",
+        "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+        "e2e/adapter-deploy.mjs": "e8246c0b475920c6b23a4f5f8f095ac864644c5d958c4aea2d8d2d3f9bc46fda",
+        "e2e/adapter.py": "564c89a4d842e3e2c68c5d261fa687b06e9106035b5820d084415fcbeff8b1a2",
+        "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+        "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+        "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+        "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+        "e2e/control-operations.py": "9ab19f6f31e223926b8c507d21b716db7eb51f881848112310841d8d84b1a960",
+        "e2e/control-ui.mjs": "d719d0241bdca96c381c8e8d2743f62dc2c5c5a86fbd4c55d00677c6d75c16d8",
+        "e2e/control_database.py": "fe1c7cb2450f193bba5be5a6d4cd98e88936199b20b85e0a903226f6beb2a043",
+        "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+        "e2e/dev-sso-sessions.mjs": "0fdee4a3b9df295713ab6d496b98fd42ce90fe6963122198a5ff016e5bca59b8",
+        "e2e/execution-faults.py": "7f879b8d9702f7c0d9654a8064d797cc60b95ec17f97b69091acff69bdc58fea",
+        "e2e/execution-suite.py": "3f6674d5e49eeeae501376db381909c62c2ae5481512ef57c87c423f0d7ebfdc",
+        "e2e/execution-ui.mjs": "536ba6d8f10096a4f1782079a476fcfe94535cf8c5a414cf618ba2f7d7a454cd",
+        "e2e/function-storage-faults.py": "3a4c9c019c499199e6e12adddc70d2b8d9a178d82755f4c9ab0b9b4ee138d0aa",
+        "e2e/function-storage.mjs": "aac2325b00d6f74f0ef44ce6d2016cbefbe85b41309a1feb4c8f098cd090f632",
+        "e2e/instance-lifecycle.py": "1c83bfc36180e3e63722073137745a3522ea39642108b589778cfd087773aab2",
+        "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+        "e2e/invocation-urls-ui.mjs": "8aa2bf0e95f2f857ca2630129f3982688ee27cb6fdef08566eb63161b69ca626",
+        "e2e/invocation-urls.mjs": "bfe61605fe84af0fd86efc803a0f3c076814da2e81d91c13be0336a8df9b8c8e",
+        "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+        "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+        "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+        "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+        "e2e/manual-ui.mjs": "ff98a5c6694f7450ab91b4104e1905ebf1edb09a6010486b5d65d5adba7012f7",
+        "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7",
+        "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+        "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+        "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+        "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+        "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+        "e2e/publication-fixtures.mjs": "b994a9332a39f952e8f20c9d5e5b3ad7efddf5ed690d4359d12c481926c44438",
+        "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+        "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+        "e2e/publication-ui.mjs": "a65fa3545decfe63b8829cac8bf485dfa95092564d278352f0e3021501fbdeca",
+        "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+        "e2e/runtime-instances.py": "c9652acb58dd42725d9a45d852c7db7a239f40ac640399a7e1868177bae129bc",
+        "e2e/runtime-validation.py": "69ff066e77cb8df5b954731ed1b01cd8dbf46ff2bb023642af53ed66f7894420",
+        "e2e/service-configuration.mjs": "50c01b89800f36045e296d47c73ca624ee62245058a4547bd49dea56c8e961e7",
+        "e2e/service-transport-observer.py": "2020f652a7a3def91649272da4a371df38cd5733450b097d952bb76696a08d02",
+        "e2e/service-transport.mjs": "424912a5caed927a9a9deb23af10fb4f6d690cf7b5c56fc15ace5ca2dd6a080d",
+        "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+        "e2e/storage-command-faults.py": "8cacdc0036114a95948f31136bb9dea8ecb4df6ec21c76b5dd299cd1ba4cc498",
+        "e2e/storage-command-recovery.mjs": "57c5e1fead1fc90549f1b732617d5b786bd442f302f21396f5e2fa178e1d8b81",
+        "e2e/storage-console-api.mjs": "548888014f4823205f40e86cb9d03b3747e6901f7a620946b51dc0b9069ec569",
+        "e2e/storage-console-inspect.py": "1201c2cf03dfc4b1ee05a86fc3e81a62db1fd1307e8d67bcf849f2d9394e0348",
+        "e2e/storage-console-ui.mjs": "77b4c2a62fa23f3c4af144556e63a22f4b1ee1584fcdb3a87f0cee01445842dc",
+        "e2e/storage-decision-recovery.mjs": "d0514f70ff857d602196ace1af09944f975fb6d7d7e64e3b86bbb4b4cefb40fb",
+        "e2e/storage-discard.py": "bd167df38ebe45089538a9b6ec7fe6b98fd7fc88616375179ce611887f3e51d7",
+        "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+        "e2e/storage-legacy-build.py": "1f93643e4c3543d2a6ac74160eab4b59ba2689be6f447a1b5d8cee975f7ae125",
+        "e2e/storage-legacy-environment.py": "0f70eca2c949c3c23e50f877d9febd933a2ac38426573f9ce35fd73ec7ca94da",
+        "e2e/storage-legacy-recovery.mjs": "1b7976347afb37d655dafdc6c94718080cce11ee7648da505c2939abdb004ba0",
+        "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+        "e2e/storage-suite-inspect.py": "d7b3c9abb5f88a056badb9a72a6d22f531e9a81ba4b3a77bb7f88b5752715c45",
+        "e2e/storage-validation-faults.py": "78a95d848cca13dd190391b5ff03266d0a3b5a7eae40355700496da90e89ba0d",
+        "e2e/storage-validation-recovery.mjs": "78a37c4334c488f25cb20b7978914dad7f908fd45743757e88cc59f8c0afb4fa",
+        "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+        "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+        "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+        "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+        "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+        "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+        "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+        "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+        "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+        "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+        "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+        "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+        "qualification/artifacts/invocation-addresses.cjs": "d92d814fbd8d07343e491f013b5199e8e8454b5f54244c044c287665ccdb1a6f",
+        "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+        "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+        "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+        "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+        "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+        "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+        "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+        "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+        "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+        "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+        "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+        "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+        "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+        "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+        "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+        "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+        "qualification/artifacts/service-configuration.cjs": "0a9bf83c6dffc76544491abdda0d14b9dbf0ebc767c60c29b063e893c2c22e70",
+        "qualification/artifacts/storage-console.cjs": "5e8e2199fa7605f8d00407c92537b175e072f47ce4d6fd42b116ef1a87de873f",
+        "qualification/artifacts/storage-validation-delay.mjs": "91dbcf7480341d8596a6300a026de792217a3f23bb217adf6e974cf4b97f79b3",
+        "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+        "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+        "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+        "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+        "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+        "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+        "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+        "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+        "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+        "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+        "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+        "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+        "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+        "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+        "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+        "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+        "storage/agent.py": "689a45bc367b339112c41696031be46e7fb1d449340fe92d6915f791db58de64",
+        "storage/agent_discard.py": "69c6c570162e2c7dc2cdde4b53f6840866fad50ae738f85f9f3f18c4f8d5e859",
+        "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+        "storage/agent_volumes.py": "e03ad2df9bfe657b2a959bc3019247a3769f0dbb1e6a5802a875171a9cddf041",
+        "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+        "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+        "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+        "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+        "storage/install-dev.py": "d6e233ccc1e893ee64220ddc1436127b32434778db9b44820f359560465f33db",
+        "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+        "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+        "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+        "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+        "storage/migrations/004.sql": "bde5c2068fbe9ecf03a077e911d03e6d67737a6cf9b5912c4fc55944926eaf7d",
+        "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+        "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+        "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+        "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+        "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+        "web/src/function.jsx": "a66a3534f62e2ed1dd8d6ad85ac21b8b6c9865015ddf70d7f0e03ff2380cdf6a",
+        "web/src/invocation-urls.jsx": "c8e803c27c483c411f281ac88e5d31da4353f678a011c1ce7114cba874c0d3cf",
+        "web/src/main.jsx": "74f91f2af68eecb357b9ffd0b61f2b173115204086524dd655284cf1a744fd8b",
+        "web/src/management.jsx": "764b793e7a01b6ec2f072538e1a788f0f0a9bb03d4501ebb75b2d8b12fbea744",
+        "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+        "web/src/observations.jsx": "9073da7e1764f42acd7f7b611bc2f47c058f7db1394b191eca4994864d943a15",
+        "web/src/publications.jsx": "2c847cf9ca5aad42c05a7c64366959be535ada5b001ba711b86d4cf47a678618",
+        "web/src/storage.jsx": "efa3f329b6bb7db4d65c514ec1eabb6e6eab3750e5084dce7a454f3d5b0a6ac1",
+        "web/src/style.css": "f2a5c21f40841e7f69d6347b0e97444ce9efb3444864f3f9167d540cb8dc5d89",
+        "web/src/ui.jsx": "156d17fd49af779b2a75c88bb188878ab7feb96199caccd2bbb2149a7e83a21e",
+        "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+      },
+      "report": {
+        "sampled_at_ns": 1794154086104355991,
+        "mtime_ns": 1794144260247955804,
+        "sha256": "66f9103e6e8e4f587ea15ba9fd2a162d8a7855db5c7c630901c6b3821918ff9f"
+      }
+    },
+    "after": {
+      "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+      "source_sha256": {
+        "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+        "adapter/__main__.py": "d1f2d92bfde981884c3d7ea58cee6b50180d4e6cbcc8a372323e21bf8d316ed5",
+        "adapter/archive.py": "a454d3fbb9954ae88ab5edf9b1e526aa128e77cb760c559a08b2d5fbe642d186",
+        "adapter/deploy.py": "462ed21dd2433317052e03be9c25ae18a6d2d8f1aee53cd4eb56211272302e27",
+        "adapter/manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+        "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+        "control/Dockerfile": "858d0ed75d833754fd48b73a780c0607f81f7b34b6473d4a921591ee90b1b862",
+        "control/Dockerfile.dockerignore": "3d4e09e669ded704ed8e8765450b1eacc41b94b313f5cd93a48941b8377dd915",
+        "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+        "control/app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+        "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+        "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+        "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+        "control/app/db.py": "c134792fe7682102cff6208030e3880e902c68a5427abffa386adbb44678a047",
+        "control/app/deployments.py": "1df532d18cfa3838fb3b04840ccf1dda13eb3e9ae2963b4e1b781551d861195d",
+        "control/app/execution.py": "8c52837c6b893411ea10af481f573aa54db98990624079d5bb7b8c2a6f6e485f",
+        "control/app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+        "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+        "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+        "control/app/invocation_routes.py": "9d346b9fe345510452b6a6b86239584bb624b690a7d32c7514a86c4de8bcb0a0",
+        "control/app/invocation_urls.py": "f05e6ee7f399b4d54cf2c15b186c13d7eb75266172bcc33127e7fca6dce5c1df",
+        "control/app/main.py": "0763accfcd9dfca32ce8d7f09ae67d7adb7264d567fa0f8822479d432d863956",
+        "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+        "control/app/models.py": "fbfa169dc95872a8b19378e92b19f3f1074ff20f2a825a5671b99b784aac4b3e",
+        "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+        "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+        "control/app/storage_management.py": "37ce7e205ec06860eb096c37d85d7015c5002558101faf6b90eccfda81181ea7",
+        "control/app/validator.py": "03145dccbd5389f7d76290ccce65d648bdd7a07fe6205dd749020b0b6039b495",
+        "control/compose.spark.yml": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+        "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+        "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+        "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+        "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+        "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+        "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+        "control/migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+        "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+        "docs/CONSOLE_PUBLICATION.md": "d710833cc0849871379e18b93c4f4d9d7003644a110ab72edb3dc6129a9bf10d",
+        "docs/CONSOLE_STORAGE.md": "71e9f9b3afe4a63021a812cd0abb1d314bc62fe4672765ade0f9f641fb604f8b",
+        "docs/DESIGN_SYSTEM_APP.md": "4b5377c5fcb198b7f2f603790164c32d99edeca0ca5768d017b9b0bd4071e588",
+        "docs/STORAGE_LEGACY_PROOF.md": "a923c0059d36008bbeb5421ef878b7c0be42cb9c0604abfbe5535cbc8a8d58f6",
+        "docs/manual.md": "cf7bcdb9d6ef887203b7b84d42e46ec4ba9507b78acf488aea266d13909c7207",
+        "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+        "e2e/adapter-deploy.mjs": "e8246c0b475920c6b23a4f5f8f095ac864644c5d958c4aea2d8d2d3f9bc46fda",
+        "e2e/adapter.py": "564c89a4d842e3e2c68c5d261fa687b06e9106035b5820d084415fcbeff8b1a2",
+        "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+        "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+        "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+        "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+        "e2e/control-operations.py": "9ab19f6f31e223926b8c507d21b716db7eb51f881848112310841d8d84b1a960",
+        "e2e/control-ui.mjs": "d719d0241bdca96c381c8e8d2743f62dc2c5c5a86fbd4c55d00677c6d75c16d8",
+        "e2e/control_database.py": "fe1c7cb2450f193bba5be5a6d4cd98e88936199b20b85e0a903226f6beb2a043",
+        "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+        "e2e/dev-sso-sessions.mjs": "0fdee4a3b9df295713ab6d496b98fd42ce90fe6963122198a5ff016e5bca59b8",
+        "e2e/execution-faults.py": "7f879b8d9702f7c0d9654a8064d797cc60b95ec17f97b69091acff69bdc58fea",
+        "e2e/execution-suite.py": "3f6674d5e49eeeae501376db381909c62c2ae5481512ef57c87c423f0d7ebfdc",
+        "e2e/execution-ui.mjs": "536ba6d8f10096a4f1782079a476fcfe94535cf8c5a414cf618ba2f7d7a454cd",
+        "e2e/function-storage-faults.py": "3a4c9c019c499199e6e12adddc70d2b8d9a178d82755f4c9ab0b9b4ee138d0aa",
+        "e2e/function-storage.mjs": "aac2325b00d6f74f0ef44ce6d2016cbefbe85b41309a1feb4c8f098cd090f632",
+        "e2e/instance-lifecycle.py": "1c83bfc36180e3e63722073137745a3522ea39642108b589778cfd087773aab2",
+        "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+        "e2e/invocation-urls-ui.mjs": "8aa2bf0e95f2f857ca2630129f3982688ee27cb6fdef08566eb63161b69ca626",
+        "e2e/invocation-urls.mjs": "bfe61605fe84af0fd86efc803a0f3c076814da2e81d91c13be0336a8df9b8c8e",
+        "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+        "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+        "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+        "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+        "e2e/manual-ui.mjs": "ff98a5c6694f7450ab91b4104e1905ebf1edb09a6010486b5d65d5adba7012f7",
+        "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7",
+        "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+        "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+        "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+        "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+        "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+        "e2e/publication-fixtures.mjs": "b994a9332a39f952e8f20c9d5e5b3ad7efddf5ed690d4359d12c481926c44438",
+        "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+        "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+        "e2e/publication-ui.mjs": "a65fa3545decfe63b8829cac8bf485dfa95092564d278352f0e3021501fbdeca",
+        "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+        "e2e/runtime-instances.py": "c9652acb58dd42725d9a45d852c7db7a239f40ac640399a7e1868177bae129bc",
+        "e2e/runtime-validation.py": "69ff066e77cb8df5b954731ed1b01cd8dbf46ff2bb023642af53ed66f7894420",
+        "e2e/service-configuration.mjs": "50c01b89800f36045e296d47c73ca624ee62245058a4547bd49dea56c8e961e7",
+        "e2e/service-transport-observer.py": "2020f652a7a3def91649272da4a371df38cd5733450b097d952bb76696a08d02",
+        "e2e/service-transport.mjs": "424912a5caed927a9a9deb23af10fb4f6d690cf7b5c56fc15ace5ca2dd6a080d",
+        "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+        "e2e/storage-command-faults.py": "8cacdc0036114a95948f31136bb9dea8ecb4df6ec21c76b5dd299cd1ba4cc498",
+        "e2e/storage-command-recovery.mjs": "57c5e1fead1fc90549f1b732617d5b786bd442f302f21396f5e2fa178e1d8b81",
+        "e2e/storage-console-api.mjs": "548888014f4823205f40e86cb9d03b3747e6901f7a620946b51dc0b9069ec569",
+        "e2e/storage-console-inspect.py": "1201c2cf03dfc4b1ee05a86fc3e81a62db1fd1307e8d67bcf849f2d9394e0348",
+        "e2e/storage-console-ui.mjs": "77b4c2a62fa23f3c4af144556e63a22f4b1ee1584fcdb3a87f0cee01445842dc",
+        "e2e/storage-decision-recovery.mjs": "d0514f70ff857d602196ace1af09944f975fb6d7d7e64e3b86bbb4b4cefb40fb",
+        "e2e/storage-discard.py": "bd167df38ebe45089538a9b6ec7fe6b98fd7fc88616375179ce611887f3e51d7",
+        "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+        "e2e/storage-legacy-build.py": "1f93643e4c3543d2a6ac74160eab4b59ba2689be6f447a1b5d8cee975f7ae125",
+        "e2e/storage-legacy-environment.py": "0f70eca2c949c3c23e50f877d9febd933a2ac38426573f9ce35fd73ec7ca94da",
+        "e2e/storage-legacy-recovery.mjs": "1b7976347afb37d655dafdc6c94718080cce11ee7648da505c2939abdb004ba0",
+        "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+        "e2e/storage-suite-inspect.py": "d7b3c9abb5f88a056badb9a72a6d22f531e9a81ba4b3a77bb7f88b5752715c45",
+        "e2e/storage-validation-faults.py": "78a95d848cca13dd190391b5ff03266d0a3b5a7eae40355700496da90e89ba0d",
+        "e2e/storage-validation-recovery.mjs": "78a37c4334c488f25cb20b7978914dad7f908fd45743757e88cc59f8c0afb4fa",
+        "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+        "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+        "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+        "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+        "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+        "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+        "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+        "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+        "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+        "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+        "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+        "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+        "qualification/artifacts/invocation-addresses.cjs": "d92d814fbd8d07343e491f013b5199e8e8454b5f54244c044c287665ccdb1a6f",
+        "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+        "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+        "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+        "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+        "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+        "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+        "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+        "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+        "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+        "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+        "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+        "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+        "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+        "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+        "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+        "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+        "qualification/artifacts/service-configuration.cjs": "0a9bf83c6dffc76544491abdda0d14b9dbf0ebc767c60c29b063e893c2c22e70",
+        "qualification/artifacts/storage-console.cjs": "5e8e2199fa7605f8d00407c92537b175e072f47ce4d6fd42b116ef1a87de873f",
+        "qualification/artifacts/storage-validation-delay.mjs": "91dbcf7480341d8596a6300a026de792217a3f23bb217adf6e974cf4b97f79b3",
+        "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+        "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+        "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+        "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+        "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+        "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+        "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+        "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+        "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+        "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+        "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+        "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+        "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+        "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+        "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+        "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+        "storage/agent.py": "689a45bc367b339112c41696031be46e7fb1d449340fe92d6915f791db58de64",
+        "storage/agent_discard.py": "69c6c570162e2c7dc2cdde4b53f6840866fad50ae738f85f9f3f18c4f8d5e859",
+        "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+        "storage/agent_volumes.py": "e03ad2df9bfe657b2a959bc3019247a3769f0dbb1e6a5802a875171a9cddf041",
+        "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+        "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+        "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+        "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+        "storage/install-dev.py": "d6e233ccc1e893ee64220ddc1436127b32434778db9b44820f359560465f33db",
+        "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+        "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+        "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+        "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+        "storage/migrations/004.sql": "bde5c2068fbe9ecf03a077e911d03e6d67737a6cf9b5912c4fc55944926eaf7d",
+        "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+        "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+        "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+        "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+        "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+        "web/src/function.jsx": "a66a3534f62e2ed1dd8d6ad85ac21b8b6c9865015ddf70d7f0e03ff2380cdf6a",
+        "web/src/invocation-urls.jsx": "c8e803c27c483c411f281ac88e5d31da4353f678a011c1ce7114cba874c0d3cf",
+        "web/src/main.jsx": "74f91f2af68eecb357b9ffd0b61f2b173115204086524dd655284cf1a744fd8b",
+        "web/src/management.jsx": "764b793e7a01b6ec2f072538e1a788f0f0a9bb03d4501ebb75b2d8b12fbea744",
+        "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+        "web/src/observations.jsx": "9073da7e1764f42acd7f7b611bc2f47c058f7db1394b191eca4994864d943a15",
+        "web/src/publications.jsx": "2c847cf9ca5aad42c05a7c64366959be535ada5b001ba711b86d4cf47a678618",
+        "web/src/storage.jsx": "efa3f329b6bb7db4d65c514ec1eabb6e6eab3750e5084dce7a454f3d5b0a6ac1",
+        "web/src/style.css": "f2a5c21f40841e7f69d6347b0e97444ce9efb3444864f3f9167d540cb8dc5d89",
+        "web/src/ui.jsx": "156d17fd49af779b2a75c88bb188878ab7feb96199caccd2bbb2149a7e83a21e",
+        "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+      },
+      "report": {
+        "sampled_at_ns": 1794154200430347482,
+        "mtime_ns": 1794154199112134480,
+        "sha256": "623dbe969b6dbc6dc4b214af2994ab65f426276fa178ec73f868ccd6e0f2ef0e"
+      }
+    },
+    "exit_code": 1,
+    "duration_seconds": 114.29492911801208,
+    "report": {
+      "image": "sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a",
+      "completed": false,
+      "checks": [
+        {
+          "name": "Même image réelle, entrée HTTP et confinement Docker",
+          "status": "passed"
+        },
+        {
+          "name": "Six migrations réelles, intégrité SQLite et UUID d’installation",
+          "status": "passed"
+        },
+        {
+          "name": "Second contrôle réel refusé par le verrou exclusif",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : SERVERLESS_PUBLIC_URL",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : OIDC_ISSUER",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : OIDC_CLIENT_ID",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : OIDC_CLIENT_SECRET",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration requise absente : SERVERLESS_MASTER_KEY",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration de publication absente : SERVERLESS_STATE_HOST_PATH",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration de publication absente : SERVERLESS_DOCKER_SOCKET_HOST",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration de publication absente : SERVERLESS_RUNTIME_IMAGE",
+          "status": "passed"
+        },
+        {
+          "name": "Chemin de cellule relatif refusé : SERVERLESS_STATE_HOST_PATH",
+          "status": "passed"
+        },
+        {
+          "name": "Chemin de cellule relatif refusé : SERVERLESS_DOCKER_SOCKET_HOST",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration de stockage absente : SERVERLESS_STORAGE_ROOT_HOST",
+          "status": "passed"
+        },
+        {
+          "name": "Chemin de stockage relatif refusé : SERVERLESS_STORAGE_ROOT_HOST",
+          "status": "passed"
+        },
+        {
+          "name": "Configuration de stockage absente : SERVERLESS_STORAGE_SOCKET_DIR_HOST",
+          "status": "passed"
+        },
+        {
+          "name": "Chemin de stockage relatif refusé : SERVERLESS_STORAGE_SOCKET_DIR_HOST",
+          "status": "passed"
+        },
+        {
+          "name": "Canal de stockage incompatible : run",
+          "status": "passed"
+        },
+        {
+          "name": "Canal de stockage incompatible : racine",
+          "status": "passed"
+        },
+        {
+          "name": "Canal de stockage incompatible : sous-répertoire",
+          "status": "passed"
+        },
+        {
+          "name": "Canal de stockage incompatible : parent",
+          "status": "passed"
+        },
+        {
+          "name": "Image mutable refusée",
+          "status": "passed"
+        },
+        {
+          "name": "Image immuable absente refusée",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’artefacts invalide : 511",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’artefacts invalide : 65537",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’artefacts invalide : invalid",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_CPU_BUDGET=NaN",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_CPU_BUDGET=.049",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_CPU_BUDGET=64.1",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_CPU_BUDGET=invalid",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB=127",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB=1048577",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB=invalid",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_INSTANCE_LIMIT=0",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_INSTANCE_LIMIT=257",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_INSTANCE_LIMIT=invalid",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_WAITING_CALL_LIMIT=0",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_WAITING_CALL_LIMIT=4097",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_WAITING_CALL_LIMIT=invalid",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_WAITING_CALL_LIMIT=0",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_WAITING_CALL_LIMIT=257",
+          "status": "passed"
+        },
+        {
+          "name": "Budget d’exécution refusé : SERVERLESS_FUNCTION_WAITING_CALL_LIMIT=invalid",
+          "status": "passed"
+        },
+        {
+          "name": "File par fonction supérieure au plafond global",
+          "status": "passed"
+        },
+        {
+          "name": "URL publique HTTP refusée",
+          "status": "passed"
+        },
+        {
+          "name": "Sous-chemin public refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Issuer étranger refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Clé maîtresse malformée refusée",
+          "status": "passed"
+        },
+        {
+          "name": "CIDR de proxy malformé refusé",
+          "status": "passed"
+        },
+        {
+          "name": "Clé différente refusée sur la base existante",
+          "status": "passed"
+        },
+        {
+          "name": "Métadonnées non inscriptibles refusées",
+          "status": "passed"
+        },
+        {
+          "name": "Reprise de la même base avec la clé officielle",
+          "status": "passed"
+        },
+        {
+          "name": "Campagne interrompue",
+          "status": "failed",
+          "error": "AssertionError"
+        }
+      ],
+      "cleanup": true,
+      "skipped": 0
+    }
+  },
+  "passed_groups": 51,
+  "failed_groups": 1,
+  "skipped": 0,
+  "cleanup": true,
+  "cause": "Le client du contrôle isolé utilise un Host non canonique et suit la redirection jusqu’au vrai SSO ; il ne teste pas le503SQLite voulu.",
+  "next_action": "Corriger uniquement le client : Host de la configuration effective, refus des redirections, puis rejouer55groupes."
+}

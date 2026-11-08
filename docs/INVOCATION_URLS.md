@@ -155,3 +155,55 @@ preuves demandent six domaines réels : quatre alias supplémentaires devront
 restent ouvertes tant que ces routes ne sont pas disponibles. La CLI consulte
 par cinq comme la console, plutôt que d’exiger vingt et un domaines pour
 éprouver son changement de page.
+
+## Suite complète de preuve
+
+Le scope `invocation-urls` de `e2e/execution-suite.py` est prévu pour l’union
+sans doublon de 35 campagnes, soit 467 groupes : socle stockage/console 397,
+adresses API 8 et UI 6, transport commun 5 puis configuration commune 13,
+CLI Docker plan/package 24 et refus public 14. Ce total reste à exécuter ;
+il ne complète pas artificiellement les essais nécessitant des routes réelles.
+
+L’ordre ajoute transport, configuration puis adresses avant les campagnes
+ciblées de stockage et leurs restaurations historiques. Aucun service de
+campagne ne reste actif à la frontière d’une faute. Une paire SSO réelle
+fraîche précède le transport ajouté ; la paire avant décision de stockage est
+conservée. Les identifiants transitent seulement sur stdin privée et restent
+hors des fichiers/arguments/environnements/rapports.
+
+Les prérequis non comptés sont la paire SSO initiale, le build historique,
+la construction séquentielle des deux images CLI avec leurs cinq modules
+recoupés, la paire avant transport, la paire avant décision de stockage et
+le recoupement physique final. Les images CLI sont figées après leur build
+et revérifiées avant/après leurs campagnes. L’image du contrôle et les
+sources locales/distantes restent identiques sur toute la suite ; l’index
+ajoute les fichiers de construction CLI, le manifeste de qualification et
+le présent contrat. Une erreur arrête la suite et conserve le rapport incomplet.
+
+Le recoupement détaillé final couvre dix namespaces et 32 fonctions : six/24
+du stockage, un/trois de l’API des adresses, un/un de son UI, un/deux de la
+configuration et un/deux du transport. Ces noms et inventaires sont vérifiés
+contre les rapports frais, sans inclure les UUID historiques temporaires.
+Les autres campagnes gardent leur propre reçu de nettoyage et le contrôle
+global exige zéro fonction, instance, invocation active et réservation.
+Les conteneurs clients adapter éphémères doivent également être absents.
+
+## Preuve native du Host et des clients de panne
+
+La vérification du véritable Host n’a pas besoin de fabriquer un domaine.
+Un client opérateur du SPARK appelle l’API réelle sur la boucle locale 18090,
+avec le jeton Read de sa fonction de campagne transmis sur stdin privée et
+un Host étranger. Les adresses doivent toujours provenir du registre et du
+port ASGI réel. Cet appel HTTP local vérifie cette frontière du contrôle ;
+il ne prétend pas éprouver la route publique ou le TLS d’un alias absent.
+Le même client vérifie les redirections HTML/login vers l’origine fixe,
+les UUID de suivi conservés et l’absence de cookie de flow créé sur l’autre
+hôte. Aucun registre, DNS, réponse ou fournisseur n’est remplacé.
+
+Les clients des pannes du contrôle isolé portent le Host canonique lu dans
+la configuration effective et refusent les redirections automatiques. Cela
+garde la requête de panne SQLite dans le vrai conteneur de preuve ; suivre
+une redirection jusqu’au SSO du contrôle principal ne constitue pas sa preuve.
+L’échec réel avant correction est conservé séparément avec 51 groupes passés,
+arrêt à la lecture de connexion attendue 503 ayant donné 200 après redirections,
+et nettoyage confirmé. Seul le client est corrigé ; le produit n’est pas changé.

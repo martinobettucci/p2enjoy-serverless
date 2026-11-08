@@ -453,6 +453,13 @@ perturbées, le Host réel, la consultation CLI perdue après publication et la
 campagne complète sur cette image. Le manuel est reconstruit et qualifié
 pour les parcours actuellement éprouvés.
 
+Suite `invocation-urls` à intégrer puis exécuter :35 campagnes / 467 groupes,
+avec prérequis SSO privés, images CLI recoupées et contrôle détaillé final de
+10 namespaces / 32 fonctions. Le premier replay des pannes est arrêté après 51 groupes
+à cause d’un client suivant la redirection canonique ; sa correction et la
+preuve native du Host sont définies dans INVOCATION_URLS. Aucun résultat de
+cette suite n’est encore annoncé comme acquis.
+
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale
 
