@@ -7,9 +7,11 @@ avec le réseau hôte du SPARK pour conserver le pair TCP. Les conteneurs de
 fonctions gardent leur propre réseau isolé. Un seul processus Uvicorn, sans access log
 brut des URLs : le callback OAuth contient des paramètres confidentiels.
 
-Les routes prévues de consultation/vidage du stockage et d’archives/purge
-suivent [CONSOLE_STORAGE](CONSOLE_STORAGE.md#api-et-représentations). Ce contrat
-SLS-065 est fixé ; ces routes ne sont pas encore livrées.
+Les routes de consultation/vidage du stockage et d’archives/purge sont livrées
+et qualifiées dans SLS-065. Elles suivent
+[CONSOLE_STORAGE](CONSOLE_STORAGE.md#api-et-représentations) ; leur
+[preuve complète](evidence/storage-console-dev-2026-11-08.json) distingue
+campagne, complément API, nettoyages et limites d’observation.
 
 ## Configuration
 

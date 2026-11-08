@@ -2991,3 +2991,20 @@ native inclura vide/filtré/invalide ; le navigateur couvrira retour vide/non vi
 après erreur et pagination clavier dans les sélecteurs. Le collecteur de purge
 sera borné au préfixe de ces nouvelles campagnes et à leurs UUID exacts, avec
 parents vides recoupés et configuration synthétique de service effacée par API.
+
+## 2026-11-08 — Résolution INC-001 après qualification API du catalogue
+
+Les huit groupes API ciblés du catalogue terminent à zéro, sans skip, avec
+nettoyage réussi. Le relevé physique confirme les 32 fonctions purgées dans
+sept namespaces, les huit configurations de service effacées et les 27 sources
+du contrôle embarqué. Les 194 sources restent identiques avant/après la campagne
+et le relevé. Cela ne qualifie pas encore le parcours navigateur du catalogue.
+
+La boucle de résolution examine INC-001 : l’introduction de CONTROL annonce
+des routes de purge/cache non livrées, alors que le contrat CONSOLE_STORAGE,
+les routes réelles et la preuve SLS-065 conservée établissent leur livraison.
+Décision et correction : remplacer cette annonce périmée par le statut livré
+et son lien de preuve. Aucun comportement applicatif ne change ; cette
+correction documentaire ne crée aucun groupe de preuve. Le registre ne portant
+plus d’entrée, il est retiré. Les preuves ciblées et la campagne complète de
+SLS-067 restent à terminer avant clôture de cette unité.
