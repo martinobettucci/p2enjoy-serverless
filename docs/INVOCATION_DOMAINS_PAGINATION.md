@@ -32,9 +32,13 @@ créer aucun nouveau cache négatif avant publication.
 ## Autorisation et garde-fous d’application
 
 L’autorisation explicite de ces quatre noms, de leur DNS et de leur nettoyage
-est requise avant toute création. La proposition routes.? reste inerte. Elle
-conserve les autres demandes et retire seulement les deux lignes propres déjà
-acceptées/appliquées pour les domaines permanents. Le fichier officiel ne change pas.
+est requise avant toute création. La proposition est conservée localement dans
+ce dépôt, avec le [texte des quatre routes](INVOCATION_DOMAINS_PAGINATION.routes.txt).
+Le contrôle d’approbation automatique a refusé son écriture dans routes.? :
+les quatre noms dépassent le périmètre actuellement autorisé, même sous forme
+de proposition persistante. La commande n’a pas démarré ; aucun fichier distant,
+registre de routes ou DNS n’a été modifié par cette tentative. La demande
+d’extension est présentée au responsable ; aucune réponse n’est présumée.
 
 Après autorisation : nouvelle lecture de disponibilité et des valeurs exactes,
 créations par la console normale, aucun remplacement de valeur différente ni

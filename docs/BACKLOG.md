@@ -499,7 +499,10 @@ functions-pagination-1 à functions-pagination-4.lelabs.tech sont proposés :
 18090 TLS et A exacts vers la même infrastructure, puis nettoyage de ces seuls
 objets. Le précontrôle normal les trouve libres, sans mutation. Le
 [plan concret](INVOCATION_DOMAINS_PAGINATION.md) attend une extension explicite
-d’autorisation ; seules les propositions peuvent être écrites à ce stade.
+d’autorisation. Le contrôle automatique a refusé l’écriture de la proposition
+distante hors du périmètre à deux noms ; la commande n’a pas démarré. Le texte
+local est prêt, et la demande asynchrone d’extension est en attente. Aucun
+nouveau DNS ni route n’est créé avant réponse explicite.
 Pendant cette attente, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
 sont préparées sur la requête canonique, sans changer de route. L’extraction de
 NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,

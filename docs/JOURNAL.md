@@ -3411,3 +3411,17 @@ plan complet, cible, DNS et nettoyage sont écrits dans
 INVOCATION_DOMAINS_PAGINATION. L’autorisation actuelle n’est pas étendue par
 cette décision : aucune route ni DNS nouveau ne sera créé avant réponse.
 La proposition de cellule sera écrite en conservant les demandes étrangères.
+
+## 2026-11-09 — Proposition distante refusée, extension d’autorité demandée
+
+Le contrôle d’approbation automatique refuse avant démarrage la commande
+d’écriture de /etc/spark/routes.? : les quatre nouveaux noms ne sont pas
+couverts par l’autorisation explicite limitée aux deux domaines existants,
+et une proposition persistante peut être appliquée ultérieurement. Aucun
+fichier distant, DNS ou registre n’est modifié par cette tentative.
+
+La proposition est conservée dans le dépôt avec ses quatre lignes exactes.
+La demande asynchrone au responsable couvre explicitement les quatre alias,
+leurs A exacts et leur retrait après qualification, par la console normale du
+seul SPARK. Sa réponse reste nécessaire et n’est pas déduite du temps écoulé.
+Les travaux sur les deux domaines déjà autorisés et la pause native continuent.

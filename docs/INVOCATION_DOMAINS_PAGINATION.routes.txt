@@ -1,0 +1,6 @@
+# Proposition locale SLS-066 : quatre alias temporaires de pagination.
+# Aucune application avant extension explicite de l'autorisation.
+functions-pagination-1.lelabs.tech 18090 tls
+functions-pagination-2.lelabs.tech 18090 tls
+functions-pagination-3.lelabs.tech 18090 tls
+functions-pagination-4.lelabs.tech 18090 tls
