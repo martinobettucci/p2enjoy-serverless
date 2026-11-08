@@ -490,7 +490,16 @@ détour/retrait n’a commencé. Les cycles effectifs restent à qualifier.
 Le [contrat des cinq cycles réels](INVOCATION_ROUTE_CYCLES.md) fixe maintenant
 la fixture originale, pagination API à deux domaines, détour d’alias avec reprise
 explicite puis perte du pilote, retrait/rétablissement et détour des deux ports
-avec catalogue vide local réel. Aucun de ces cinq groupes n’est encore exécuté.
+avec catalogue vide local réel. Les cinq groupes passent ; sept appels Docker,
+quatre gardes terminées et une fonction purgée dans un namespace sont recoupés.
+La preuve finale et sa revue restent à assembler avant livraison du changement.
+
+Pour les pages UI/CLI de cinq domaines, les quatre alias temporaires
+functions-pagination-1 à functions-pagination-4.lelabs.tech sont proposés :
+18090 TLS et A exacts vers la même infrastructure, puis nettoyage de ces seuls
+objets. Le précontrôle normal les trouve libres, sans mutation. Le
+[plan concret](INVOCATION_DOMAINS_PAGINATION.md) attend une extension explicite
+d’autorisation ; seules les propositions peuvent être écrites à ce stade.
 Pendant cette attente, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
 sont préparées sur la requête canonique, sans changer de route. L’extraction de
 NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,

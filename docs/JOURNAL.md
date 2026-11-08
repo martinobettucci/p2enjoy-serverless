@@ -3392,3 +3392,22 @@ invocation active. Le délai d’inactivité de fixture vaut une seconde ; aucun
 autre configuration de cellule ou application n’est changée. Une garde ou route
 non restaurée interdit le nettoyage automatique. Le protocole et les cinq
 résultats attendus sont persistés dans INVOCATION_ROUTE_CYCLES avant le code.
+
+## 2026-11-09 — Cinq cycles réels passés, proposition des quatre alias de pagination
+
+Le client des cinq cycles termine à zéro : seconde page API de taille un et
+sept invocations des URL effectivement émises, détour d’alias avec reprise
+explicite puis perte SIGKILL du pilote après mutation confirmée, retrait/recréation
+avec nouvel identifiant et deux ports détournés produisant le vrai catalogue
+vide local. Les deux routes sont restaurées à 18090. Le recoupement confirme
+une fonction purgée dans un namespace, quatre gardes terminées et les services
+inchangés. La preuve finale et sa revue restent à assembler.
+
+Décision de préparation indépendante : proposer quatre alias temporaires dont
+le nom explicite la pagination, afin de qualifier la seconde page UI/CLI de
+cinq domaines. Le précontrôle de console trouve les quatre noms libres et les
+A absents, sans mutation ni requête DNS native sur ces noms non créés. Le
+plan complet, cible, DNS et nettoyage sont écrits dans
+INVOCATION_DOMAINS_PAGINATION. L’autorisation actuelle n’est pas étendue par
+cette décision : aucune route ni DNS nouveau ne sera créé avant réponse.
+La proposition de cellule sera écrite en conservant les demandes étrangères.
