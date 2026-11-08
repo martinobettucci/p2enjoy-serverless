@@ -207,3 +207,12 @@ une redirection jusqu’au SSO du contrôle principal ne constitue pas sa preuve
 L’échec réel avant correction est conservé séparément avec 51 groupes passés,
 arrêt à la lecture de connexion attendue 503 ayant donné 200 après redirections,
 et nettoyage confirmé. Seul le client est corrigé ; le produit n’est pas changé.
+
+Le build CLI utilise une borne distante de 780 secondes avec arrêt forcé 15 secondes
+plus tard, sous une enveloppe SSH de 900 secondes. Un échec/une expiration de
+l’enveloppe ne prouve pas l’arrêt du mutateur distant ou du build Docker :
+le rapport porte alors remote_state=unknown et interdit un nouveau build
+automatique. Avant toute reprise, l’opérateur doit inspecter les processus
+et opérations Docker réels, confirmer leur fin et archiver ce rapport avec
+ce diagnostic. Un simple délai écoulé ou fichier d’état ne suffit pas. Le
+parcours nominal confirme le retour de chaque build, ses images et contenus.

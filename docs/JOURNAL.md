@@ -2748,3 +2748,18 @@ jeton passe par stdin privée ; aucun domaine ou registre n’est substitué. Ce
 preuve est distinguée des alias publics, qui restent à qualifier sur de vraies
 routes. Les décisions de suite, de prérequis et de recoupement sont consignées
 dans INVOCATION_URLS avant code. Aucun nouveau réglage, secret ou route appliquée.
+
+### Revue de l’intégration et premières preuves ciblées
+
+Le client de panne corrigé passe 55 groupes sur la même image, avec nettoyage.
+Le nouveau prérequis SSO réel passe et les huit groupes API passent avec Host
+réel sur la boucle locale et redirections fixes sans cookie de flow étranger.
+La construction des deux images CLI et le recoupement de leurs cinq modules
+passent aussi. Ces preuves ciblées ne représentent pas la suite complète.
+
+La revue readonly confirme 35 / 467, six prérequis et 10 / 32. Elle relève une
+limite de reprise : le timeout SSH seul ne prouve pas la jonction du build
+distant. Décision avant correction : borne distante 780 + 15 secondes, enveloppe
+900 secondes et état inconnu persistant en cas d’échec. Aucun rejeu avant
+diagnostic réel de fin et archivage du rapport ; ne pas confondre borne et
+preuve de terminaison. Aucun changement produit ou de route.
