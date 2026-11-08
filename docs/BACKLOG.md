@@ -471,6 +471,11 @@ et six UI passent, avec quatre fonctions purgées dans deux namespaces.
 La [preuve à deux domaines](evidence/invocation-domains-dev-2026-11-08.json)
 conserve ses arrêts initiaux et la reprise sans mutation ; elle ne clôture
 pas les critères résiduels de SLS-066.
+La prochaine étape suit le [contrat de garde et cycles](INVOCATION_URLS.md#garde-de-restauration-et-cycles-autorisés) :
+garde sans perturbation, mort du pilote après détour d’alias confirmé,
+retrait/rétablissement puis deux ports détournés et catalogue vide local réel.
+Le vide UI public exige ensuite sa propre pause/libération native, distincte
+du pilote historique de destruction ; aucune de ces preuves n’est acquise.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,

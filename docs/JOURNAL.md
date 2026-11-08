@@ -3250,3 +3250,27 @@ conservée. README.md, CONTRIBUTORS.md et INSTALL.md sont reproposés séparéme
 sans adoption des notes actives. La configuration reste celle des deux fichiers
 officiels. SLS-066 demeure ouverte pour les perturbations/garde, source, pages
 suivantes et entrée publique canonique. Aucun remote Git n’est configuré.
+
+## 2026-11-08 — Décision de garde avant perturbation des routes
+
+Le checkpoint à deux domaines est livré dans ad7c130. L’exploration readonly
+recoupe le chemin de console, les états durables et le précédent NativeObserver.
+Décision : garde locale indépendante, ciblage explicite du serveur connu,
+identités et naissance du pilote, verrou partagé avec ses seules mutations,
+restauration des propriétés matérielles et projection normale avant désarmement.
+Une nouvelle sélection d’onglet ne doit jamais détourner la restauration.
+
+Éprouver d’abord la garde sans perturbation, puis la mort d’un pilote après
+confirmation complète du seul détour d’alias. Ensuite seulement, retrait/recréation
+et détour des deux routes, avec lecture locale réelle du catalogue vide et
+invocation après restauration. La canonique n’est jamais supprimée. Un 423 ou
+conflit ne déclenche aucune déprotection ni reprise de propriété. Un 502 après
+PATCH peut suivre le commit ; toute issue inconnue exige lecture, sans renvoi
+aveugle. La garde ne garantit pas une console ou un tunnel disparu et ne fournit
+pas un verrou entre tous les exploitants.
+
+La preuve UI vide requiert un pilote pause/libération distinct : le précédent
+catalogue-before attend cut puis tue le contrôle. Il ne convient donc pas tel
+quel. Aucune trame, réponse, source ou syscall n’est substitué. Ces décisions
+sont persistées avant le code des nouveaux pilotes ; les scénarios restent
+à exécuter, et SLS-066 demeure ouverte.

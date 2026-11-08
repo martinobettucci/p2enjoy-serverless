@@ -243,6 +243,56 @@ HTML/SSO depuis l’alias public. La preuve native du Host/redirection reste
 celle de la boucle locale. Les scénarios résiduels et leur garde maintiennent
 SLS-066 ouverte. Le mode clair n’a pas été activé.
 
+## Garde de restauration et cycles autorisés
+
+Étape suivante, après le checkpoint à deux domaines : un pilote de console
+borné aux deux noms et au seul SPARK, avec une garde locale indépendante de
+son processus. Chaque requête de relais conserve explicitement le serveur
+spark-experiment ; une autre sélection d’onglet ne change jamais sa cible.
+Vérifier l’entrée serveur par nom/IP/port et le SPARK par identifiant/IP, sans
+exiger que servers.current reste sélectionné pendant une restauration.
+
+La garde mémorise identité et naissance du pilote, route canonique par son
+identifiant stable, alias par ses identifiants successifs autorisés, propriétaire,
+port 18090, TLS et activation. applied_at reste une observation. Répertoire
+privé, reçu atomique, verrou local : une seule action du pilote ou de la garde
+peut modifier une route à la fois. La garde est démarrée et reconnue prête
+avant toute perturbation ; perte du pilote ou échéance bornée demande la
+restauration. Ne désarmer qu’après lecture des propriétés matérielles, projection
+officielle rafraîchie et deux réponses HTTPS vérifiées, puis fin confirmée de
+la garde. Aucun secret ou contenu de suggestions ne rejoint ses reçus.
+
+Restaurer seulement ce qui appartient toujours au SPARK et aux identités
+possédées. Ne supprimer jamais la canonique ; ne créer que l’alias exact s’il
+est absent et libre, après contrôle des génériques. Ne pas modifier un autre
+propriétaire ni lever une protection 423. Une réponse de mutation perdue ou
+refusée exige une relecture : le PATCH peut avoir commis avant son 502, alors
+que DELETE confirme Caddy avant suppression du registre. Aucun rejeu aveugle.
+Une restauration non confirmée reste en échec explicite ; la garde dépend
+encore du poste, de la console normale et de son tunnel, et ne prétend pas
+survivre à leur disparition. Le verrou ne protège que les propres actions
+du pilote : le chemin normal n’offre pas de comparaison atomique If-Match
+contre une intervention concurrente d’une autre console.
+
+Preuves sérialisées : armer/restaurer sans perturbation ; détourner seulement
+l’alias vers 18091, constater son exclusion du vrai catalogue puis tuer le
+pilote après fin confirmée de la mutation et vérifier la restauration indépendante ;
+retirer/rétablir l’alias avec nouvel identifiant et même comportement d’appel ;
+enfin détourner les deux routes avec garde déjà éprouvée, constater le vrai
+catalogue vide sur l’entrée locale réelle, puis restaurer et invoquer Docker.
+Les scénarios suivent leur fonction originale de qualification et ne nettoient
+que ses objets. Rapports, identités, changements effectifs et nettoyages sont
+conservés par scénario ; aucune réussite n’est déduite d’un seul fichier prêt.
+
+L’état vide dans la console publique reste une preuve distincte. Un futur
+pilote de pause retiendra le vrai GET admis après sa réception et avant lecture
+du fichier officiel, selon le précédent NativeObserver. Il devra libérer la
+requête, sans commande cut, destruction du contrôle, modification de mémoire,
+registre ou résultat système. La survie de la connexion pendant la réapplication
+normale de Caddy reste à éprouver. Le mode catalogue-before historique n’est
+pas réutilisé tel quel : il détruit le contrôle et sa garde ne rétablit pas
+les routes. Aucun de ces nouveaux scénarios n’est encore qualifié.
+
 ## Suite complète de preuve
 
 Le scope `invocation-urls` de `e2e/execution-suite.py` compose l’union
