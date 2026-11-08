@@ -2821,3 +2821,20 @@ livrés restent distinguées dans la preuve finale. Aucun rebuild du contrôle,
 migration, secret, variable ou application de route n’est nécessaire pour ce
 relevé. Les notes sont reproposées avec contrôle de leurs empreintes préexistantes,
 sans revendiquer leur adoption. Le dépôt n’a pas de remote ; aucun push.
+
+## 2026-11-08 — Complément de transport du catalogue choisi
+
+La régression de 467 groupes est livrée au commit 92b4908. L’unité reste ouverte
+pour des preuves que cette suite ne couvre pas. Le prochain travail indépendant
+des domaines supplémentaires est la perte du GET facultatif après publication.
+Décision avant code : étendre l’observateur natif existant à deux barrières
+de catalogue et un watchdog bornés à un namespace/service/fonction exacts.
+Précréer un brouillon donne l’UUID avant l’armement ; le vrai CLI conserve
+ses six connexions normales sans configuration commune. La publication doit
+être durable avant la coupure, et rester unique après restauration. Le vrai
+502 ingress n’est pas renommé network_error. Une garde indépendante ferme
+la fenêtre et sa restauration est elle-même éprouvée dans ce périmètre.
+Le nouveau client utilise le handler original invocation-addresses.cjs,
+recoupe SQLite/archive/hash, puis invoque par HTTPS et purge ses ressources.
+Ni refus 401/403, ni alias/TLS, ni source perturbée ne sont revendiqués par
+ce complément. Aucun changement produit ou dépendance n’est nécessaire.

@@ -39,6 +39,14 @@ SHA avec une référence inspectée. Le vrai Host est éprouvé sur la boucle lo
 sans constituer une preuve d’alias public/TLS. Le build CLI nominal passe ; sa
 branche d’expiration ou perte SSH reste à éprouver. SLS-066 demeure ouverte.
 
+Le complément `node e2e/invocation-url-transport.mjs` est en préparation : trois
+groupes sur le vrai contrôle DEV avec garde indépendante, publication conservée
+malgré le GET interrompu et six connexions HTTPS CLI sans rejeu. Lire son
+[contrat](../docs/INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli)
+avant lancement ; aucune autre campagne ne peut être active. Le refus 401/403
+après publication reste distinct de cette coupure. Le rapport propre sera
+`.local/e2e/invocation-url-transport.json`, sans modifier la preuve des 467 groupes.
+
 ## Configuration commune du service
 
 `node e2e/service-configuration.mjs` exige la session SSO réelle de

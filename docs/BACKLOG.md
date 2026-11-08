@@ -466,6 +466,12 @@ passent avec le vrai Host en boucle locale, puis dans la suite complète.
 Les preuves de routes publiques restent ouvertes, ainsi que la branche
 d’expiration/perte SSH du build borné, dont seul le parcours nominal est qualifié.
 
+Complément en préparation : trois groupes de transport du catalogue, avec perte
+de l’observateur, coupure du GET après réception puis avant émission, publication
+durable conservée, six connexions CLI sans rejeu et invocation Docker après
+reprise. Contrat : [perte native](INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli).
+Ces groupes et le refus réel après publication ne sont pas encore acquis.
+
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale
 

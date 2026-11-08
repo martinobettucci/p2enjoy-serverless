@@ -236,3 +236,38 @@ automatique. Avant toute reprise, l’opérateur doit inspecter les processus
 et opérations Docker réels, confirmer leur fin et archiver ce rapport avec
 ce diagnostic. Un simple délai écoulé ou fichier d’état ne suffit pas. Le
 parcours nominal confirme le retour de chaque build, ses images et contenus.
+
+## Perte native du catalogue après publication CLI
+
+Complément à exécuter avec `node e2e/invocation-url-transport.mjs`, sans autre
+campagne active. Réutiliser l’observateur natif et la garde indépendante du
+transport de configuration, avec des modes bornés à un namespace
+`invocation-url-transport-XXXXXXXX`, son service et l’UUID exact d’une seule
+fonction brouillon précréée. L’installation ne doit porter aucune autre fonction
+active, publication en préparation, invocation ou réservation. Aucun réglage
+commun n’est déclaré dans le manifeste de ce scénario.
+
+Retenir le vrai processus de contrôle sur la ligne publique exacte du GET
+`/api/functions/{UUID}/invocation-urls?limit=5&offset=0`, soit après réception
+avant traitement, soit juste avant émission de la réponse sur cette même
+connexion. À chaque barrière, recouper par lecture native sous le propriétaire
+SQLite le candidat publié unique, sa révision unique, la cible active, l’archive
+sur disque et son hash ; aucune opération de stockage ne doit rester en attente.
+L’observateur ne lit ni en-tête de jeton ni contenu de réponse.
+
+Tuer le seul contrôle DEV identifié, puis le restaurer avec la garde native.
+Le diagnostic réel peut être un HTTP 502 de l’ingress ou une erreur de transport :
+ne pas le transformer en erreur réseau fabriquée. La CLI doit terminer à zéro,
+`completed=true`, résultat `published` avec les mêmes UUID de candidat/révision
+et `invocation_urls.state=unavailable`. Compter nativement ses six connexions
+HTTPS : lectures service/liste/fonction, préparation, upload et catalogue ;
+aucun rejeu de mutation ni tentative supplémentaire. L’audit et les lignes
+durables doivent confirmer une seule publication. Après reprise, lire normalement
+le catalogue avec un jeton Read distinct, invoquer le handler Docker par HTTPS,
+puis supprimer et purger les seules ressources possédées.
+
+Éprouver aussi la perte SIGKILL de l’observateur suspendu dans ce nouveau
+périmètre, avec restauration indépendante et garde terminée. Le refus réel
+401/403 après publication reste une preuve distincte : ne pas prétendre le
+couvrir par une coupure du contrôle. Le checkpoint de 467 groupes reste intact ;
+ce complément conserve ses sources, image, rapports et nettoyages propres.

@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- Complément de transport du catalogue spécifié : trois groupes réels avec
+  garde indépendante, coupure après publication et absence de rejeu CLI.
+  Implémentation et qualification à réaliser ; aucun résultat anticipé.
+
 - Suite complète des adresses réussie en DEV : union sans doublon de
   35 campagnes / 467 groupes, zéro échec/skip, six prérequis non comptés,
   186 sources et images contrôle/CLI figées avant/après chaque phase.
