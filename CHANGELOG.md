@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Suivi systématique des demandes du responsable dans le backlog, avec une
+  table de correspondance vers les unités existantes et la règle persistée
+  dans le contrat local. Critères de compatibilité du projet de référence
+  explicités dans SLS-030 ; état de la purge/cache harmonisé avec SLS-065.
+
 - Qualification réelle des réponses perdues de modification commune : coupures
   du contrôle avant traitement et après commit, issue CLI `unknown`, trois
   connexions HTTPS sans rejeu, aucune publication et relances explicites réussies.

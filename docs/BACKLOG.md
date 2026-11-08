@@ -1,5 +1,42 @@
 # Backlog
 
+## Suivi des demandes du responsable
+
+Toute demande produit, correction ou contrainte reçue est inscrite ici dès sa
+réception, dans l’unité existante correspondante ou dans une nouvelle unité
+identifiée. Chaque unité précise le résultat attendu, ses critères et les
+preuves requises. Les corrections complètent le contrat existant ; elles ne
+disparaissent pas derrière une nouvelle reformulation. Les statuts restent
+`[ ]` non commencé, `[~]` en cours ou insuffisamment vérifié, `[x]` terminé et
+vérifié. Les valeurs de secrets ne sont jamais consignées dans le backlog.
+
+Les demandes confirmées sont rattachées aux unités suivantes. Leur état et
+leurs preuves font autorité dans le détail de chaque unité.
+
+| Demande confirmée | Unités et contrats concernés |
+| --- | --- |
+| Méthode Software Factory importée dans le dépôt, hors module de séminaire | [SLS-000](#sls-000), [METHODE](METHODE.md) |
+| Plateforme Docker compatible avec l’exploitation des projets existants, handlers conservés et adaptateur `serverless.yml` | [SLS-001](#sls-001), [SLS-030](#sls-030), [DEPLOYMENT](DEPLOYMENT.md) |
+| Application de qualification et sources présentes dans ce dépôt | [QLF-001](#qlf-001) |
+| Toutes les fonctionnalités livrées testées E2E sur les vrais composants, sans mock ni skip | [QLF-001](#qlf-001), [SLS-001](#sls-001), critères E2E de chaque unité |
+| SPARK DEV autorisé, FORGE limitée au rebond, référence client en lecture seule, aucun lancement PREPROD/PROD | [Contrat local](../CLAUDE_PROJECT.md), [QUALIFICATION_DEV](QUALIFICATION_DEV.md) ; contraintes de toutes les unités |
+| Noms significatifs par fonction et usage, domaine `serverless.lelabs.tech`, route sur 18090 | [SLS-011](#sls-011), [DEPLOYMENT_NAMES](DEPLOYMENT_NAMES.md), règle de nommage du contrat local |
+| SSO réel, rôles verified/admin, namespaces, services, fonctions et gestion des jetons CRUD de service | [SLS-020](#sls-020), [SLS-060](#sls-060), [CONTROL](CONTROL.md) |
+| Jeton Read pour invoquer, droits Create/Update/Delete, authentification métier indépendante | [SLS-020](#sls-020), [SLS-030](#sls-030), [SLS-040](#sls-040), [PLATFORM](PLATFORM.md) |
+| Jetons, variables et secrets au niveau service, avec surcharges par fonction | [SLS-020](#sls-020), [SLS-031](#sls-031), [configuration commune](SERVICE_CONFIGURATION_URLS.md) |
+| Restrictions par origine web et/ou IP, configurables au niveau service | [SLS-040](#sls-040), [PLATFORM](PLATFORM.md) |
+| CPU, mémoire, concurrence, durée maximale d’exécution et délai d’arrêt après inactivité | [SLS-040](#sls-040), [SLS-060](#sls-060), [EXECUTION](EXECUTION.md) |
+| Disque par identifiant stable, données permanentes et cache configurables, quotas, archive et purge | [SLS-010](#sls-010), [SLS-050](#sls-050), [SLS-064](#sls-064), [SLS-065](#sls-065) |
+| Manuel d’usage maintenu et consultable dans l’application | [SLS-062](#sls-062), [CONSOLE_MANUAL](CONSOLE_MANUAL.md) ; mise à jour avec chaque livraison |
+| Chemins d’appel calculés depuis les domaines réellement affectés au SPARK | [SLS-066](#sls-066) |
+| Recherche, filtres et catalogue opérationnel | [SLS-067](#sls-067) |
+| Favoris personnels | [SLS-068](#sls-068) |
+| Suppression et renommage en masse | [SLS-069](#sls-069) |
+| Édition du code et du handler sur place | [SLS-070](#sls-070) |
+| Client HTTP intégré par fonction, avec réponse et diagnostic d’appel | [SLS-071](#sls-071) |
+| Logging, recherche et corrélation des journaux | [SLS-072](#sls-072) |
+| Monitoring historique et alertes | [SLS-073](#sls-073) |
+
 ## SLS-000
 
 Statut : [x] — socle importé, hooks standard activés, 45 contrôles Git réels
@@ -63,6 +100,8 @@ règles origine/IP, gestion du code/configuration/secrets, adaptateur
 serverless.yml, allocation Docker, mémoire, disques durables/cache par ID,
 deadline d'invocation et extinction des instances. Chaque comportement livré
 exige sa preuve E2E réelle, notamment les refus et cycles de vie.
+Le périmètre inclut le manuel intégré, le calcul des URL du SPARK et les
+demandes d’ergonomie et d’observabilité détaillées dans SLS-062 et SLS-066 à SLS-073.
 Le banc QLF-001 constitue l'application indépendante pour cette qualification.
 Aucun de ses résultats ne clôture ces fonctionnalités de plateforme absentes.
 
@@ -139,6 +178,13 @@ Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
 l'adaptateur, rejeter archives invalides, mettre à jour/rollback en préservant
 l'identifiant. Référence : PLATFORM adaptateur et [DEPLOYMENT](DEPLOYMENT.md).
+La compatibilité du projet de référence reste à établir explicitement : audit
+en lecture seule du manifeste, des contrats de handlers, dépendances, événements,
+variables et secrets ; matrice des comportements pris en charge, adaptations
+nécessaires et écarts bloquants. Reproduire ces contrats avec des fixtures
+originales du dépôt et les déployer/invoquer réellement sur la plateforme.
+La preuve identifie les adaptations nécessaires au client, dont le jeton
+d’invocation ; les résultats du banc seuls ne valent pas compatibilité complète.
 La session SSO réelle est disponible pour les preuves d'upload et de publication.
 Le [checkpoint CLI](evidence/adapter-package-dev-2026-11-06.json) comporte
 24 scénarios réels réussis dans Docker sur le SPARK, avec source et images
@@ -219,7 +265,8 @@ de l’agent compte douze groupes avec la neutralisation d’un prepare retardé
 La [preuve du raccordement](evidence/function-storage-dev-2026-11-06.json)
 recoupe aussi les régressions et la console. Les admissions et observations API sont éprouvées par les 31 groupes publics
 de la [preuve du moteur](evidence/execution-dev-2026-11-06.json). Les
-commandes publiques de purge/cache, leurs vues de console et les crons restent
+commandes publiques de purge/cache et leurs vues de console sont déployées
+dans SLS-065, dont la qualification élargie reste ouverte. Les crons restent
 à réaliser.
 Les quotas préparés et leurs reçus sont
 implémentés ; la preuve initiale de dix groupes vérifie décisions, réservations, SIGKILL pendant

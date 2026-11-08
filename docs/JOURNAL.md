@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 2026-11-08 — Inscription systématique des demandes au backlog
+
+Le responsable demande que toutes ses demandes soient ajoutées au backlog.
+La règle est persistée dans CLAUDE_PROJECT.md et en tête de BACKLOG.md : chaque
+demande produit, correction ou contrainte complète une unité existante ou crée
+une unité identifiée, avec critères et preuves. Une table rattache les demandes
+confirmées aux unités, y compris SLS-067 à SLS-073 déjà spécifiées. Les valeurs
+de secrets restent exclues. SLS-001 reprend explicitement manuel, URL du SPARK
+et ergonomie ; SLS-030 explicite l’audit de compatibilité en lecture seule et
+sa preuve par fixtures originales. La mention périmée de purge/cache à réaliser
+dans SLS-050 est alignée sur leur livraison en SLS-065, encore en qualification.
+Modification documentaire uniquement ; aucun statut de livraison n’est avancé.
+
 ## Reprise complète et import du socle — 2026-11-05
 
 Le responsable exige de tester TOUT le comportement livré, sans mock ni test

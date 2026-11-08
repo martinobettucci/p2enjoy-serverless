@@ -57,6 +57,15 @@ qu’un nom générique comme `timeout` confondrait.
 
 ## Application de la méthode
 
+Chaque demande produit, correction et contrainte donnée par le responsable est
+reportée immédiatement dans `docs/BACKLOG.md`. Compléter l’unité existante
+lorsqu’elle couvre déjà la demande ; sinon créer une unité avec identifiant
+stable, résultat attendu, critères d’acceptation et preuves nécessaires.
+Relier les demandes transversales aux unités concernées et à leur contrat.
+Conserver le statut réel : spécifié, implémenté et vérifié sont des états
+distincts. Une reformulation dans la conversation ne remplace jamais cette
+inscription. Les valeurs de secrets restent hors de ces documents.
+
 Le manuel d’usage canonique est `docs/manual.md`. Toute modification d’un
 comportement utilisateur met à jour ce document dans le même changement.
 La console affiche le contenu généré depuis ce fichier à la construction,
