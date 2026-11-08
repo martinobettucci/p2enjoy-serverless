@@ -69,6 +69,19 @@ existants restent disponibles. Ce remplacement autorise notamment 128 nouveaux
 noms après 128 anciens sans dépasser la limite de clés de la requête. Le drapeau
 est propre au service ; il est refusé dans la configuration d’une fonction.
 
+Avant de modifier le service, vérifier dans la transaction les configurations
+effectives de toutes ses fonctions actives, y compris les brouillons. Une collision
+variable/secret, un dépassement de 128 clés par catégorie ou de la taille cumulée
+autorisée refuse toute la modification sans changer sa version. Les créations et
+modifications de fonction appliquent le même contrôle avec le service courant,
+notamment après une préparation de stockage. La fusion reste définie en un seul
+endroit pour la gestion, la publication et l’exécution.
+
+La CLI borne aussi avant toute mutation la configuration effective qu’elle peut
+calculer depuis le manifeste ; deux mappings séparément valides ne rendent pas
+leur fusion valide. Les valeurs communes préexistantes absentes du manifeste
+restent contrôlées par le serveur, qui est seul détenteur des secrets enregistrés.
+
 Les nouvelles invocations utilisent la configuration commune courante. Une
 invocation déjà admise conserve sa configuration jusqu’à sa fin. Les preuves
 doivent couvrir les instances chaudes et le redémarrage. La reprise des

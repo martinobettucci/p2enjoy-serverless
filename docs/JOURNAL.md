@@ -2293,3 +2293,11 @@ Avant correction, décision supplémentaire : un drapeau `replace_secrets` propr
 au service rend son remplacement atomique et permet le renouvellement de 128
 noms sans cumuler anciens retraits et nouveaux noms dans la même limite de 128.
 Le comportement partiel de l’édition existante est conservé par défaut.
+
+La revue SLS-031 relève deux validations complémentaires : les mutations de
+gestion doivent vérifier la configuration effective dans leur transaction ;
+la CLI doit borner la fusion connue avant de modifier le service. Le premier
+défaut est reproduit : dix groupes passent puis une variable commune entrant
+en collision avec un secret local est acceptée à 200 au lieu de 422. La campagne
+purge ensuite ses deux fonctions. Décision : partager la fusion existante du
+déploiement entre gestion et moteur, et contrôler côté CLI les valeurs connues.
