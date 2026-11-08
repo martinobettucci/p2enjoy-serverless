@@ -3120,3 +3120,12 @@ différer du premier gel. Toute autre différence refuse la continuation. La
 preuve indiquera explicitement les deux époques, les 37 campagnes uniques/489
 groupes attendus et les six prérequis. Le résultat positif remplacé et le groupe
 échoué restent hors de ce total. Ce plan n’est pas encore une exécution réussie.
+
+## 2026-11-08 — Constat mineur INC-003 lors de la lecture des archives
+
+La revue des quatorze images de stockage de la continuation relève le titre
+Archives conservées sur la fiche Purgée. Vérification dans storage.jsx : le titre
+est commun à toutes les fiches, alors que le badge distingue bien la purge.
+Zéro révision, zéro Mio, absence de volumes et reçu terminé sont visibles ; les
+preuves de purge ne sont pas remises en cause. Le constat est inscrit dans
+INC-003 pour résolution dédiée. Il ne provient pas du catalogue SLS-067.
