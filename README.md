@@ -57,6 +57,12 @@ fonction, journaux recherchables et monitoring historique. Leur
 [contrat de parcours](docs/CONSOLE_USABILITY.md) et les unités SLS-067 à SLS-073
 du backlog définissent la livraison ; ces extensions restent à implémenter.
 
+Le [versionnement par hash](docs/FUNCTION_VERSIONS.md), suivi dans SLS-074,
+complète l’historique et le rollback existants : déduplication des uploads
+identiques, invocation d’un hash précis, archivage de version et publication
+pour un pilote sans déplacer la cible par défaut. Cette extension est spécifiée
+et reste à implémenter.
+
 Le stockage propose des modes configurables par fonction pour les données
 métier et le cache reconstructible. Le [contrat de plateforme](docs/PLATFORM.md)
 définit concurrence, rétention, quotas et suppression ; son implémentation suit

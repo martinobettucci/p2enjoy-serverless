@@ -6,6 +6,11 @@ La [preuve finale](evidence/publication-console-dev-2026-11-07.json) recoupe
 18 campagnes en série, 312 groupes réels et 54 captures inspectées, sans échec
 ni test ignoré. Les deux incohérences de lecture sont corrigées et requalifiées.
 
+L’extension [SLS-074](FUNCTION_VERSIONS.md) est spécifiée séparément et reste
+à implémenter : versions par hash, code inchangé dédupliqué, invocation épinglée,
+publication sans activation et archivage/restauration par version. Elle prolonge
+les parcours ci-dessous ; les preuves SLS-063 ne couvrent pas ces nouveaux gestes.
+
 ## Parcours et conservation
 
 La fiche de fonction ajoute la facette partageable **Code et révisions**.

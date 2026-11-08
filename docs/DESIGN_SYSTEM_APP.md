@@ -168,3 +168,19 @@ Les graphes conservent unités, période, source et valeurs accessibles sous for
 textuelle. Mesure absente, zéro et collecte interrompue ont des états distincts.
 Ces parcours appliquent les règles du socle sur clavier, focus, confirmations,
 retour d’erreur, mobile et vérification visuelle.
+
+## Versions par hash et pilote à réaliser
+
+[SLS-074](FUNCTION_VERSIONS.md) complète la facette Code et révisions : hash
+complet copiable avec retour à la ligne, cible courante et disponibilité de
+chaque version en texte. Le résultat distingue code inchangé et nouvelle
+version ; une publication normale et une publication sans activation nomment
+leurs effets avant engagement. Activation/rollback, archivage/restauration
+et suppression sont des actions distinctes par version, avec confirmations
+dans le flux selon le socle. Les appels déjà admis et les pools d’autres versions
+ne sont pas présentés comme ayant changé de code.
+
+Le client HTTP propose cible courante ou hash explicite et montre la version
+effectivement appelée. Ses exemples copiés conservent le tag choisi. Une version
+indisponible affiche le refus réel sans substitution. Ces parcours restent
+planifiés ; aucune commande absente du backend n’est ajoutée aux écrans actuels.

@@ -11,6 +11,11 @@ Un namespace contient des services. Un service correspond à un déploiement
 et un nom unique dans son parent. Une fonction garde son UUID, ses données et
 son historique lors d'un changement de code. Les révisions sont immuables.
 
+Le [contrat des versions par hash](FUNCTION_VERSIONS.md), à livrer dans SLS-074,
+ajoute une identité de code déterministe, la déduplication des uploads, les
+appels d’une version précise et le pilote sans activation. Cette extension
+complète les révisions et le rollback existants ; elle reste à implémenter.
+
 La console et l'API de gestion partagent les mêmes règles d'autorisation.
 Les namespaces et services sont administrés par le SSO ; leurs fonctions
 peuvent également être gérées par un jeton du service. Les lectures présentent

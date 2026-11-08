@@ -36,6 +36,7 @@ leurs preuves font autorité dans le détail de chaque unité.
 | Client HTTP intégré par fonction, avec réponse et diagnostic d’appel | [SLS-071](#sls-071) |
 | Logging, recherche et corrélation des journaux | [SLS-072](#sls-072) |
 | Monitoring historique et alertes | [SLS-073](#sls-073) |
+| Version par hash du code changé, upload identique dédupliqué, invocation épinglée, rollback et pilote stable | [SLS-074](#sls-074), [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
 
 ## SLS-000
 
@@ -101,7 +102,8 @@ serverless.yml, allocation Docker, mémoire, disques durables/cache par ID,
 deadline d'invocation et extinction des instances. Chaque comportement livré
 exige sa preuve E2E réelle, notamment les refus et cycles de vie.
 Le périmètre inclut le manuel intégré, le calcul des URL du SPARK et les
-demandes d’ergonomie et d’observabilité détaillées dans SLS-062 et SLS-066 à SLS-073.
+demandes d’ergonomie et d’observabilité détaillées dans SLS-062 et SLS-066 à SLS-073,
+ainsi que versions par hash, invocation épinglée et pilote dans SLS-074.
 Le banc QLF-001 constitue l'application indépendante pour cette qualification.
 Aucun de ses résultats ne clôture ces fonctionnalités de plateforme absentes.
 
@@ -185,6 +187,8 @@ nécessaires et écarts bloquants. Reproduire ces contrats avec des fixtures
 originales du dépôt et les déployer/invoquer réellement sur la plateforme.
 La preuve identifie les adaptations nécessaires au client, dont le jeton
 d’invocation ; les résultats du banc seuls ne valent pas compatibilité complète.
+La déduplication des uploads, le hash public, la publication sans activation
+et les résultats de version relèvent de l’extension SLS-074.
 La session SSO réelle est disponible pour les preuves d'upload et de publication.
 Le [checkpoint CLI](evidence/adapter-package-dev-2026-11-06.json) comporte
 24 scénarios réels réussis dans Docker sur le SPARK, avec source et images
@@ -230,6 +234,8 @@ deadline, descendants, drainage et réconciliation. CORS/IP ET/OU côté backend
 E2E : succès/refus, saturation, mémoire/CPU/PIDs, délais, extinction/reprise,
 authentification métier, chaînes proxy, crash du contrôle et absence de rejeu.
 Références : PLATFORM origines et exécution, [EXECUTION](EXECUTION.md).
+L’invocation d’une version par hash, ses admissions, pools et budgets partagés
+avec la cible courante sont détaillés dans SLS-074.
 La tranche initiale fournit le superviseur chaud, son enfant neuf et le pilote
 Docker réel. Les campagnes d’invocation et de courses de cycle sont présentes,
 avec régression du chargeur partagé : 31 + 11 + 36 contrôles réels réussis,
@@ -253,6 +259,8 @@ Volumes par ID, quotas et modes, archive/purge, crons UTC, logs bornés et
 métriques. E2E : concurrence, saturation disque, cache, déploiement/rollback,
 redémarrage, cron réellement déclenché et diagnostic autorisé/refusé.
 Références : PLATFORM stockage et exploitation, [STORAGE_AGENT](STORAGE_AGENT.md).
+Les futurs crons suivent uniquement la cible courante de SLS-074 ; publier
+une version pilote sans l’activer ne double pas les déclenchements.
 Le registre durable, les baux et la supervision FUSE sont implémentés. Quinze
 groupes de cycle, huit de limites et les 31 contrôles du proxy passent, avec
 nettoyage confirmé, zéro échec et zéro skip. La [preuve recoupée](evidence/storage-agent-dev-2026-11-06.json)
@@ -289,6 +297,8 @@ notes SPARK, installation/reprise, preuves et backlog. Zéro échec et zéro ski
 Les demandes de recherche, favoris, actions en masse, édition du code, client
 HTTP et observabilité sont spécifiées dans [CONSOLE_USABILITY](CONSOLE_USABILITY.md)
 et découpées dans SLS-067 à SLS-073.
+Le versionnement par hash, les appels épinglés et le pilote de versions sont
+définis dans SLS-074 ; ils complètent les révisions et le rollback déjà livrés.
 
 ## SLS-061
 
@@ -327,6 +337,8 @@ journaux. Les deux incohérences de lecture découvertes à la première revue s
 corrigées puis requalifiées ; le registre est résolu. Le manuel et les notes
 SPARK décrivent les parcours livrés. Les preuves résiduelles des unités parentes
 restent ouvertes.
+L’identification publique par hash, la déduplication et le pilote sans activation
+ne font pas partie de cette preuve historique ; ils sont suivis dans SLS-074.
 
 ## SLS-064
 
@@ -522,3 +534,45 @@ configurables. Contrat : [monitoring](CONSOLE_USABILITY.md#monitoring-et-alertes
 E2E : charge réelle et pannes, valeurs agrégées recoupées aux appels et mesures,
 échantillons insuffisants/collecte indisponible, rétention, seuils et retour à la
 normale, droits, redémarrage, coût de collecte mesuré et inspection des graphes.
+
+<a id="sls-074"></a>
+## SLS-074 — Versions par hash, appels épinglés et pilote de code
+
+Statut : [ ] — demande et contrat définis ; déduplication et invocation par tag absentes.
+
+Contrat : [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md). Une nouvelle version n’est
+créée que si le paquet exécutable a changé ; son tag public est son hash SHA256
+canonique, vérifié côté serveur. Un upload identique réutilise la version, sans
+doublon durable ni activation inutile. Les métadonnées sans effet du ZIP sont
+exclues ; fichiers, dépendances et descripteur d’exécution sont pris en compte.
+Un renommage conserve le hash ; un doublon reste admis au plafond de versions.
+
+Sans tag, appeler la cible courante, mise à jour par publication normale ou
+activation/rollback explicite. Avec un hash, appeler exactement cette version
+disponible, sans aucun repli si elle est archivée ou supprimée. Conserver les
+droits Read, politiques origine/IP et authentification métier. Les URL
+versionnées sont calculées avec SLS-066 et proposées dans SLS-071.
+Create couvre la première publication ; Update les suivantes et le cycle des
+versions, y compris leur suppression individuelle. Delete reste la suppression
+de la fonction. Le handler/runtime/image/événements viennent du hash sélectionné,
+les ressources et configurations applicatives restent courantes.
+
+Permettre de publier sans activer pour un pilote, puis d’activer ou de revenir
+à un ancien hash depuis la fiche de fonction. La CLI propose le même parcours
+de code seul, sans mutation implicite des variables/secrets communs. Les clients
+épinglés au hash stable continuent à l’appeler pendant le pilote. Configurations
+et volumes restent attachés à la fonction ; le rollback concerne son code.
+
+Prévoir archivage/restauration/suppression par version, protection de la cible
+courante, consommateurs vivants et rétention explicite. Compter les ressources
+et limites de toutes les versions ensemble ; isoler leurs pools d’exécution et
+corréler le hash réellement exécuté dans logs et monitoring. Migrer les révisions
+actuelles sans perte de pointeur, références ou données.
+
+E2E : upload identique et ZIP différent de même contenu, modifications réelles,
+renommage sans nouveau hash, doublon au plafond, handlers A/B distincts,
+concurrence et déduplication, stable/pilote simultanés, appel sans tag, activation,
+rollback sous appel vivant, droits/refus et aucune substitution de version,
+archive/restauration/suppression, saturation entre versions, migration, réponse
+perdue/SIGKILL et nettoyage physique. Parcours UI complets, captures et manuel
+compilé requis. Dépendances : SLS-030/040/063 ; raccordements SLS-066/070 à SLS-073.

@@ -101,6 +101,12 @@ Un import refusé conserve la révision active et le brouillon à corriger. Le
 parcours permet de consulter le diagnostic, de tester la révision publiée et
 de revenir à une révision précédente.
 
+Le versionnement de [SLS-074](FUNCTION_VERSIONS.md) s’applique aussi à l’éditeur :
+un paquet inchangé réutilise son hash ; un changement crée une version après
+validation. La publication normale et la publication pour un pilote sans
+activation sont des choix explicites. Le retour à un ancien hash conserve les
+configurations et volumes courants.
+
 ## Client HTTP par fonction
 
 SLS-071 ajoute une facette Tester, avec choix de méthode et d’URL issue de
@@ -109,14 +115,20 @@ paramètres de chemin/query, en-têtes, corps texte/JSON et fichiers admis par
 la passerelle. Elle montre la révision effectivement appelée, le statut,
 les en-têtes, le corps, la durée et l’identifiant de requête. Une réponse
 volumineuse ou binaire conserve une restitution et un téléchargement bornés.
+Avec SLS-074, le sélecteur choisit la cible courante ou un hash disponible ;
+l’adresse versionnée reste dans le périmètre de cette même fonction et la
+réponse indique le hash effectivement appelé. Une version indisponible ne
+provoque jamais de repli vers un autre code.
 
 Le mode par défaut exécute un véritable appel HTTP depuis le serveur de console,
 comme un client d’API. L’utilisateur connaît cet emplacement et l’origine
 déclarée ; l’adresse IP évaluée est celle de cet appel. Seules les adresses
 publiques calculées pour cette installation sont des destinations possibles.
 Le choix de chemin ne transforme pas ce client en relais HTTP arbitraire.
-La destination reste sous `/invoke/UUID_DE_LA_FONCTION` et les redirections ne
-sont pas suivies. Les cookies de console ne sont pas transmis à la fonction.
+La destination utilise `/invoke/UUID_DE_LA_FONCTION`, ou avec SLS-074
+`/invoke/UUID_DE_LA_FONCTION@HASH_VALIDÉ`. L’UUID et le hash sont vérifiés
+séparément ; aucune autre fonction n’est une destination de ce testeur. Les
+redirections ne sont pas suivies. Les cookies de console ne sont pas transmis à la fonction.
 Un mode navigateur permet de vérifier le comportement CORS depuis la véritable
 origine de la console. Les deux contextes sont explicitement distingués.
 
@@ -141,7 +153,7 @@ service : période, sévérité lorsqu’elle est connue, état et identifiant d
 Le suivi des nouveaux événements peut être activé ou mis en pause. Les formats
 texte et JSON sont lisibles ; un niveau absent reste non renseigné.
 
-Un appel relie fonction, service, révision, instance, requête, chronologie et
+Un appel relie fonction, service, révision et hash exécuté, instance, requête, chronologie et
 diagnostic. Les événements de plateforme permettent aussi de retrouver une
 publication, un démarrage, une extinction, un dépassement de délai ou une
 opération de stockage. Les erreurs de code se distinguent des refus d’admission

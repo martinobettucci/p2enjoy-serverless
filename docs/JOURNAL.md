@@ -1,5 +1,44 @@
 # Journal de cadrage
 
+## 2026-11-08 — Version de code par hash et pilote d’utilisateurs
+
+Le responsable demande de créer une version seulement si le code uploadé change,
+d’utiliser son hash comme tag, de revenir à une ancienne version dans la fiche
+et d’invoquer un tag précis tant qu’il reste disponible. Objectif : faire
+coexister un pilote et un code de production stable. SLS-074 et FUNCTION_VERSIONS
+capturent ce périmètre avant implémentation, avec liens vers les unités existantes.
+
+Le produit actuel crée des révisions à UUID et possède le rollback, mais résout
+les invocations vers la seule révision active. La nouvelle preuve devra couvrir
+déduplication, tags, archive individuelle, pools simultanés et migration ; les
+preuves de révisions existantes ne sont pas étendues implicitement.
+
+L’expression « dernière version » permet deux politiques. Une question propose
+dernière promue ou dernière publiée. Sans réponse à ce stade, la décision
+réversible suit la demande littérale : la publication normale actualise la cible
+sans tag ; les clients épinglés conservent leur hash. Un parcours explicite
+publie sans activer pour tester aussi lorsque les clients stables sont sans tag.
+Le rollback remplace la cible courante ; les appels portant un hash ne la suivent
+jamais. Cette décision évite qu’un tag refusé déclenche silencieusement un autre code.
+
+Le hash porte sur le paquet exécutable canonique et son descripteur, sans les
+métadonnées sans effet du ZIP ni les valeurs de configuration. Les variables,
+secrets, ressources et volumes restent ceux du service/de la fonction ; le mode
+pilote publie le code seul pour préserver cette configuration. Les budgets sont
+communs aux versions, les pools les distinguent et les futurs crons suivent la
+seule cible courante. Les URL avec UUID@hash évitent une collision avec les
+chemins métier existants. Modification documentaire uniquement, statut non commencé.
+
+La revue du contrat fait préciser quatre invariants vérifiés dans les sources
+actuelles : le snapshot devra prendre handler/runtime/image/événements de la
+version choisie, séparément des ressources et variables courantes ; le cycle
+des versions garde Update, première publication Create, invocation Read et
+suppression de fonction Delete ; un doublon est admis au plafond de versions,
+avec consommation définitive après déduplication ; le chemin d’événement
+implicite dérivé du nom est exclu de l’empreinte, afin qu’un renommage conserve
+le hash. Les preuves correspondantes sont ajoutées. Le calcul d’URL conserve
+aussi le point implicite des fonctions sans événement HTTP déclaré.
+
 ## 2026-11-08 — Inscription systématique des demandes au backlog
 
 Le responsable demande que toutes ses demandes soient ajoutées au backlog.

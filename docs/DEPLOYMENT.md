@@ -10,6 +10,12 @@ L’invocation du code publié passe la [preuve du moteur](evidence/execution-de
 Expiration, budget et interruption pendant nettoyage restent à qualifier.
 Le parcours UI est spécifié dans [CONSOLE_PUBLICATION](CONSOLE_PUBLICATION.md).
 
+L’extension [SLS-074 — versions par hash](FUNCTION_VERSIONS.md) est spécifiée
+mais non implémentée : déduplication par paquet exécutable, appel épinglé,
+publication sans activation, archivage individuel et conservation d’un pilote
+avec une version stable. Les routes et preuves actuelles décrites ici restent
+celles des révisions à UUID et de l’activation existante.
+
 ## Outil et manifeste
 
 L'adaptateur est une CLI Python 3.13 ou plus récente, dans `adapter/`, avec

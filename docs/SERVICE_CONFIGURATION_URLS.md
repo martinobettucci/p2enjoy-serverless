@@ -116,8 +116,14 @@ https://<domaine-affecté>/invoke/<uuid-fonction>/<chemin-déclaré>
 ```
 
 Présenter les méthodes autorisées. Un chemin paramétré reste un modèle à
-compléter. Une fonction sans publication ou sans événement HTTP ne reçoit pas
-de fausse adresse appelable. Ne pas dériver la liste de confiance d’un en-tête
+compléter. Une fonction sans publication ne reçoit pas de fausse adresse
+appelable ; en l’absence d’événement HTTP, retenir son point d’entrée implicite.
+Avec [SLS-074](FUNCTION_VERSIONS.md#appel-par-défaut-et-appel-par-tag), calculer
+aussi les URL `/invoke/{function_id}@{code_hash}` et leurs chemins déclarés pour
+chaque version disponible. Le hash et les événements appartiennent à la même
+version ; une version archivée ou supprimée n’est pas proposée comme appelable.
+Cette sélection versionnée reste à implémenter dans SLS-074.
+Ne pas dériver la liste de confiance d’un en-tête
 Host ou X-Forwarded-Host reçu. L’URL SSO canonique reste distincte des domaines
 d’invocation supplémentaires ; leur ajout ne modifie pas les callbacks OIDC.
 
