@@ -3008,3 +3008,16 @@ et son lien de preuve. Aucun comportement applicatif ne change ; cette
 correction documentaire ne crée aucun groupe de preuve. Le registre ne portant
 plus d’entrée, il est retiré. Les preuves ciblées et la campagne complète de
 SLS-067 restent à terminer avant clôture de cette unité.
+
+## 2026-11-08 — Autorisation des routes du seul SPARK de qualification
+
+Réponse explicite du responsable à la question SLS-066 : « Autoriser la console
+du SPARK ». Le périmètre soumis est conservé dans CLAUDE_PROJECT : alias
+functions.lelabs.tech vers 18090 TLS après vérification de disponibilité,
+retrait/rétablissement de l’alias, dérivation brève des seules deux routes
+serverless/functions vers 18091, puis restauration à 18090 avec garde.
+Les opérations passent par la console normale du seul infra-serverless ; aucun
+autre SPARK ni système FORGE n’est administré. L’autorisation ne constitue
+ni application de la proposition routes.? ni réussite d’une preuve TLS.
+Décision d’ordre : terminer la campagne navigateur SLS-067 avant cette campagne
+distincte, afin de conserver les opérations et preuves en série.

@@ -8,6 +8,14 @@
 - La seule cible distante autorisée est le SPARK DEV décrit dans
   `docs/dev-spark.md`. La FORGE ne sert que de rebond SSH : aucune commande
   d'administration, modification de route ou autre opération sur elle.
+  Exception explicitement autorisée le 8 novembre 2026 : gérer depuis la
+  console normale les routes du seul SPARK `infra-serverless` (`10.77.0.24`)
+  pour la qualification SLS-066. Vérifier la disponibilité de l’alias
+  `functions.lelabs.tech`, l’ajouter vers `18090` avec TLS, le retirer/rétablir,
+  puis détourner brièvement les seules routes `serverless.lelabs.tech` et
+  `functions.lelabs.tech` vers `18091` pour éprouver le filtrage. Revenir à
+  `18090` avec garde de restauration. Cette autorisation ne couvre aucune
+  administration de FORGE ni d’un autre SPARK.
 - Appliquer le contrat de configuration et les propositions `.?` du SPARK.
 - Un seul build, test ou scénario à la fois ; attendre sa fin complète.
 - Aucun mock, stub, faux serveur, interception réseau ou remplacement d'une
