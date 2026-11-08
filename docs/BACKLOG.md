@@ -487,11 +487,13 @@ bon A. Les ports restent tous deux 18090 ; aucun détour/retrait n’a commencé
 Le [checkpoint de garde](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
 conserve les deux réussites, l’arrêt et le diagnostic séparément. Rejouer
 l’échéance sur résolution native rétablie avant toute perturbation.
-Pendant cette attente, préparer les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
-sur la requête canonique, sans changer de route : module NativeObserver commun,
-replay de ses neuf groupes historiques, pause/libération puis SIGKILL du traceur
-et reprise indépendante de la vraie requête. Ces nouveaux parcours restent
-à implémenter et qualifier.
+Pendant cette attente, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
+sont préparées sur la requête canonique, sans changer de route. L’extraction de
+NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,
+six fonctions purgées dans deux namespaces et six gardes terminées.
+[Preuve du module commun](evidence/invocation-native-observer-dev-2026-11-08.json).
+La pause/libération puis le SIGKILL du traceur et la reprise indépendante de
+la vraie requête restent à implémenter et qualifier.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,

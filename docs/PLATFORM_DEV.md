@@ -657,3 +657,18 @@ services/images/démarrages, agent actif, configuration officielle inchangée et
 deux lignes lisibles depuis le contrôle. La qualification de garde et SLS-066
 restent ouvertes ; la [preuve](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
 conserve l’essai arrêté et son diagnostic. Les trois notes sont reproposées.
+
+## Module de preuve natif partagé qualifié
+
+NativeObserver est déplacé sans changement de son corps vers
+e2e/native_control_observer.py, importé par le pilote historique. Synchroniser
+le module dans le même répertoire E2E avant son consommateur. Aucun nouveau
+build applicatif : neuf groupes de transport passent sur 201 sources, puis
+six fonctions sont recoupées purgées dans deux namespaces, six gardes terminées
+et les observateurs absents. Les 27 fichiers du contrôle restent identiques.
+Les pannes exercent des redémarrages du contrôle ; la référence conserve son
+identité, son image et son démarrage. Les deux routes et les fichiers officiels
+restent inchangés. Les trois notes restent justes, avec leurs empreintes actives
+et proposées inchangées. [Preuve](evidence/invocation-native-observer-dev-2026-11-08.json).
+Le nouveau protocole pause/libération reste à implémenter et l’échéance de
+garde attend toujours la résolution native de l’alias.

@@ -348,6 +348,23 @@ sans qualifier le détournement Caddy encore absent. Aucune erreur ne peut être
 convertie en résultat réseau ou applicatif fabriqué. Les parcours UI publics
 et les changements de routes suivront après leurs prérequis qualifiés.
 
+## Extraction du traceur commun vérifiée
+
+La [preuve du déplacement](evidence/invocation-native-observer-dev-2026-11-08.json)
+rejoue quatre groupes de transport des adresses puis cinq de configuration,
+avec 201 sources et les mêmes images avant/après chaque phase. Le corps de
+NativeObserver est strictement identique à celui du pilote antérieur ; seul
+son emplacement et l’import changent. Les six fonctions des deux namespaces
+sont purgées, les six gardes locales terminées et les observateurs absents.
+Les 27 fichiers embarqués correspondent toujours au contrôle. Leurs pannes
+recréent de vrais arrêts/reprises du contrôle, avec référence inchangée.
+
+Cette extraction et ses neuf régressions sont vérifiées ; le nouveau protocole
+de pause/libération et ses scénarios ne sont pas encore implémentés. L’échéance
+de la garde de routes reste incomplète : l’invalidation du cache local ne change
+pas la configuration des résolveurs et n’a pas rétabli la résolution native de
+l’alias. Aucun domaine ni réponse n’est forcé dans les tests.
+
 ## Suite complète de preuve
 
 Le scope `invocation-urls` de `e2e/execution-suite.py` compose l’union

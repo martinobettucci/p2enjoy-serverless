@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Traceur natif partagé extrait sans changement de son corps : quatre groupes
+  transport des adresses et cinq de configuration passent sur 201 sources,
+  six fonctions purgées dans deux namespaces et six gardes terminées. Aucun
+  nouveau build applicatif ; le futur pilote de pause/libération reste à écrire.
+  [Preuve](docs/evidence/invocation-native-observer-dev-2026-11-08.json).
+
 - Pilotes de garde de routes en qualification : restauration explicite et
   SIGKILL du seul pilote passent sans perturbation. L’échéance se déclenche
   mais son contrôle HTTPS de l’alias échoue ; diagnostic ultérieur de cache

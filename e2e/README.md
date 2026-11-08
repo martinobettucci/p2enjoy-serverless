@@ -44,6 +44,15 @@ normale. Un accès absent est une erreur de prérequis, jamais un test ignoré.
 
 ## Adresses d’appel SLS-066
 
+`native_control_observer.py` porte la classe pure partagée avec le pilote
+historique `service-transport-observer.py`. Son corps est déplacé sans changement.
+Synchroniser le module dans le même répertoire E2E avant le pilote consommateur.
+La [preuve d’extraction](../docs/evidence/invocation-native-observer-dev-2026-11-08.json)
+passe `node e2e/invocation-url-transport.mjs` puis `node e2e/service-transport.mjs`
+en série : neuf groupes, 201 sources recoupées, six fonctions purgées et six
+gardes terminées. Le nouveau pilote pause/libération reste à implémenter ;
+l’ancien mode `catalogue-before` conserve son comportement de destruction.
+
 La garde des cycles de routes reste en qualification. Depuis ce dépôt sur le
 poste qui héberge la console normale, exécuter
 séparément `python3 -B e2e/invocation-route-lifecycle.py --guard-baseline-only`,

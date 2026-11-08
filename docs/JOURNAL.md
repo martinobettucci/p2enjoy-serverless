@@ -3327,3 +3327,28 @@ perte SIGKILL du traceur doit libérer la vraie requête par le timer du SPARK.
 Aucun port ne change pendant ces premiers scénarios ; la garde native ne
 remplace pas celle des routes. Les détails, durées, refus et inventaires sont
 persistés dans INVOCATION_URLS avant implémentation.
+
+## 2026-11-08 — Traceur commun déplacé sans changement et neuf régressions réussies
+
+Le corps de NativeObserver est extrait octet pour octet dans
+e2e/native_control_observer.py ; le pilote historique conserve son opérateur et
+importe cette classe pure. La comparaison avec la version antérieure et la
+revue readonly confirment l’identité de son corps et l’absence d’effet à l’import.
+Les quatre groupes de transport des adresses passent, puis les cinq de
+configuration commune, sur les mêmes 201 sources et images contrôle/CLI.
+Chaque rapport frais est archivé avec ses empreintes et ses relevés avant/après.
+
+Le collecteur natif confirme six fonctions purgées dans deux namespaces,
+six gardes timer/service inactives, leurs observateurs absents et les reçus de
+restauration. Le contrôle et l’agent sont sains ; les 27 fichiers embarqués
+correspondent toujours aux sources. La référence garde identité, image et
+démarrage. Les reprises du contrôle sont celles des pannes réellement exercées.
+La [preuve](evidence/invocation-native-observer-dev-2026-11-08.json) qualifie ce
+déplacement, sans prétendre livrer le futur protocole pause/libération.
+
+Après les deux campagnes, une invalidation du cache local est tentée par
+resolvectl flush-caches. La configuration des résolveurs et les adresses restent
+inchangées. La vérification native suivante trouve encore gaierror -2 pour
+l’alias, tandis que la canonique répond 200 ; le cache négatif persiste en amont.
+Cette opération ne transforme pas l’échéance échouée en réussite et n’autorise
+aucun forçage DNS des tests. La préparation de la pause native continue.
