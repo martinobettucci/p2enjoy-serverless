@@ -357,6 +357,15 @@ sans qualifier le détournement Caddy encore absent. Aucune erreur ne peut être
 convertie en résultat réseau ou applicatif fabriqué. Les parcours UI publics
 et les changements de routes suivront après leurs prérequis qualifiés.
 
+Le premier pilote implémenté retient et libère réellement le GET, mais son
+premier essai reste en échec : disarm tente un second arrêt du timer transitoire
+déjà collecté. Le diagnostic séparé reçoit HTTP 200 pour la même requête puis
+reproduit le refus systemctl de cet arrêt. Un timer déjà déchargé constitue un
+état terminal uniquement après confirmation native LoadState=not-found et
+ActiveState=inactive ; aucun autre échec d’arrêt n’est toléré. Arrêter ou constater
+cette absence avant de confirmer aussi la fin du service indépendant. Conserver
+l’essai initial et le diagnostic séparément du replay après correction.
+
 ## Extraction du traceur commun vérifiée
 
 La [preuve du déplacement](evidence/invocation-native-observer-dev-2026-11-08.json)

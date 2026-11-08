@@ -3459,3 +3459,20 @@ quatre gardes, 203 sources et leurs deux seuls contrats Markdown postérieurs,
 les huit fichiers natifs exacts et la correction bornée des dix-huit horodatages.
 Aucun défaut bloquant constaté. Les branches de panne du pilote et les preuves
 UI/source/pagination résiduelles ne sont pas qualifiées par ce checkpoint.
+
+## 2026-11-09 — Premier essai de pause interrompu au désarmement
+
+Le nouveau pilote et son client sont installés sur 205 sources figées, sans
+build ni changement de service/routes. Le vrai GET atteint la barrière recvfrom,
+puis le programme explicite reprend le même contrôle, sain et sans redémarrage.
+Le client s’arrête toutefois avant de confirmer son premier groupe, puis sa
+récupération échoue aussi : la fixture est conservée. L’essai et ses quatre
+fichiers de preuve exacts sont archivés séparément, sans réussite reconstituée.
+
+Le diagnostic réel sur la même fixture utilise un nouveau jeton Read ensuite
+révoqué. Il reçoit HTTP 200 et le vrai catalogue à deux domaines après release,
+puis reproduit systemctl stop du timer déjà collecté : code 5. Décision avant
+correction : reconnaître un timer déchargé uniquement par LoadState=not-found
+et ActiveState=inactive, sans accepter d’autre erreur. Confirmer ensuite la fin
+du service indépendant avant tout nettoyage. La preuve initiale reste incomplète ;
+le diagnostic et le futur replay ne seront pas ajoutés à ses groupes réussis.
