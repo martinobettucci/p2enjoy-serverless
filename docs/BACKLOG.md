@@ -454,6 +454,12 @@ perturbées. La consultation CLI refusée par révocation 401 est qualifiée
 ci-dessous. Le manuel
 est reconstruit et qualifié pour les parcours actuellement éprouvés.
 
+L’autorisation bornée de gestion des routes du seul SPARK depuis sa console
+normale est confirmée le 8 novembre 2026 : alias functions.lelabs.tech, deux
+routes vers 18091 temporairement, garde et restauration à 18090. Le périmètre
+est inscrit dans CLAUDE_PROJECT ; la proposition n’est pas encore appliquée et
+les preuves de ces changements restent à exécuter après la campagne SLS-067.
+
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,
 186 sources et les images contrôle/CLI recoupées avant/après chaque phase.
@@ -495,7 +501,9 @@ et les pannes propres du pilote/diagnostic ne sont pas revendiqués.
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale
 
-Statut : [~] — contrat détaillé, implémentation API/console et qualification en cours.
+Statut : [~] — API/console déployées ; 37 campagnes uniques / 489 groupes
+réussis en deux époques contrôlées, recoupements physiques terminés ;
+documentation et revue finale en cours avant clôture.
 
 Catalogue global, recherche serveur, filtres namespace/service/état, tri,
 pagination et contexte conservé dans l’URL. Contrat :
@@ -509,7 +517,15 @@ services, filtres combinés, recherche rapide sous vrai délai réseau, refus,
 navigation retour, clavier et mobile. Manuel et captures avec la livraison.
 La revue pré-build ajoute les cas explicites : recherche invalide corrigée
 vers la valeur déjà appliquée, focus après pagination des sélecteurs et contexte
-de retour vide conservé lors d’une redirection canonique. Aucun résultat anticipé.
+de retour vide conservé lors d’une redirection canonique. Les nettoyages des
+32 fonctions API et 27 fonctions UI sont physiquement recoupés séparément,
+avec leurs parents vides et configurations de service effacées. Les quatorze
+captures du checkpoint sont inspectées ; les prises de vue viewport et le
+défilement complet à droite restent à rejouer. Le scope commun prévu comporte
+37 campagnes / 489 groupes et six prérequis distincts. Le premier essai s’arrête
+après 101 groupes complets et dix groupes partiels sur le client du canal privé ;
+sa [correction ciblée](evidence/private-channel-lifecycle-dev-2026-11-08.json)
+passe onze groupes. Le replay complet reste nécessaire.
 
 <a id="sls-068"></a>
 ## SLS-068 — Favoris personnels persistants
@@ -626,3 +642,26 @@ rollback sous appel vivant, droits/refus et aucune substitution de version,
 archive/restauration/suppression, saturation entre versions, migration, réponse
 perdue/SIGKILL et nettoyage physique. Parcours UI complets, captures et manuel
 compilé requis. Dépendances : SLS-030/040/063 ; raccordements SLS-066/070 à SLS-073.
+
+<a id="sls-075"></a>
+## SLS-075 — Nommer la fiche d’archive sans ambiguïté après purge
+
+Statut : [ ] — correction mineure issue de la revue SLS-067, à réaliser avec
+une prochaine livraison UI et sa nouvelle qualification.
+
+Le titre actuel « Archives conservées » apparaît aussi au-dessus de l’état
+Purgée, de zéro révision et zéro Mio. Le badge et le reçu sont corrects ; aucune
+défaillance de purge n’est constatée. Source : `web/src/storage.jsx:96` ;
+capture contrôlée `storage-ui-purged-mobile.jpg`, empreinte
+`ae744c550e6e636e91163047b3768840f310d943d728a621102bee6121fa2285`.
+
+Employer un titre neutre décrivant la fiche, par exemple « Archive de la
+fonction », et conserver les états Conservée/Purge en cours/Purgée dans le
+badge. Ne changer ni rétention, ni commandes, ni allocation pour ce libellé.
+La correction concerne un composant antérieur au catalogue ; elle requiert une
+nouvelle image de console, donc elle est séparée de la preuve produit figée.
+
+E2E : ouvrir une vraie archive après suppression de ses parents, observer le
+titre en état conservé puis effectuer sa purge réelle et relire titre/badge,
+volumes, code et reçu. Captures desktop/mobile, noms complets, focus et guide
+recoupés. Raccordement : SLS-065 et prochain changement de console.

@@ -3129,3 +3129,15 @@ est commun à toutes les fiches, alors que le badge distingue bien la purge.
 Zéro révision, zéro Mio, absence de volumes et reçu terminé sont visibles ; les
 preuves de purge ne sont pas remises en cause. Le constat est inscrit dans
 INC-003 pour résolution dédiée. Il ne provient pas du catalogue SLS-067.
+
+## 2026-11-08 — INC-003 convertie en correction UI bornée
+
+Issue : conversion en SLS-075. Le titre doit décrire la fiche sans affirmer la
+conservation d’un contenu purgé ; badge, reçu et mesures restent inchangés.
+Le résultat attendu et ses preuves E2E desktop/mobile figurent au backlog.
+Cette correction de composant antérieur nécessite une nouvelle image et sort
+du changement produit SLS-067 figé ; elle sera raccordée à une prochaine unité
+UI avant sa qualification. Aucun correctif n’est prétendu livré aujourd’hui.
+L’entrée quitte le registre devenu vide, qui est supprimé. La remarque reste
+visible dans la preuve visuelle et le backlog, sans invalidation fictive de la
+purge réellement éprouvée.
