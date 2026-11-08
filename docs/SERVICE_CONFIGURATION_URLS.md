@@ -161,9 +161,14 @@ sa réponse forment deux scénarios distincts. Un SIGKILL du contrôle réalise 
 coupure ; le démarrage de son conteneur original puis sa santé sont confirmés.
 Le contrôle et son image restent inchangés pour ce banc.
 
-L’observation native est limitée au processus du contrôle et à la ligne de
-requête publique contenant l’UUID du service de campagne. Les identifiants et
-secrets d’authentification restent hors des traces. Le registre SQLite est lu
+L’observation native du contrôle est limitée à la ligne de requête publique
+contenant l’UUID du service de campagne. Celle du processus CLI compte seulement
+ses connexions TCP HTTPS et leurs résultats système, sans lire les buffers TLS.
+Deux lectures initiales et une tentative de mutation doivent donner exactement
+trois connexions à l’origine ; aucune tentative supplémentaire ne doit suivre
+l’issue inconnue. Compter seulement les audits ne suffirait pas : un rejeu refusé
+pour version périmée n’en créerait pas. Les identifiants et secrets
+d’authentification restent hors des traces. Le registre SQLite est lu
 sous son propriétaire pour constater l’état avant et après décision. Les
 requêtes et les réponses métier restent produites par les véritables composants.
 
