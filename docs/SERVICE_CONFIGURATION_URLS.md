@@ -2,8 +2,11 @@
 
 Décision du 8 novembre 2026, à la suite de la précision du responsable.
 Unités : [SLS-031](BACKLOG.md#sls-031) et [SLS-066](BACKLOG.md#sls-066).
-Ce contrat décrit les corrections à réaliser ; il ne constitue pas une preuve
-de livraison. Le manuel continue de décrire le comportement disponible.
+La configuration commune SLS-031 est déployée et ses parcours ciblés qualifiés
+sur DEV : [preuve](evidence/service-configuration-dev-2026-11-08.json). La perte
+réelle d’une réponse de modification commune reste à éprouver avant clôture.
+Les adresses
+multi-domaines SLS-066 restent à réaliser. Le manuel décrit le comportement livré.
 
 ## État constaté
 
@@ -13,10 +16,11 @@ chiffrés dans le service, et les jetons portent son identifiant
 (`control/app/api.py`). Le moteur fusionne la configuration du service et les
 surcharges de fonction (`Deployments.effective`, appelé par l’exécution).
 
-L’adaptateur possède toutefois un défaut de représentation : `adapter/manifest.py`
-fusionne le provider et chaque fonction, puis `adapter/deploy.py` publie ces
-valeurs fusionnées dans la configuration de chaque fonction. Les valeurs communes
-deviennent donc des surcharges qui masquent les évolutions ultérieures du service.
+Le défaut initial de représentation de l’adaptateur est reproduit dans la
+[preuve avant correction](evidence/service-configuration-defect-dev-2026-11-08.json) :
+le provider et chaque fonction étaient fusionnés puis publiés au niveau fonction.
+La correction qualifiée conserve maintenant les deux niveaux ; les valeurs
+communes ne deviennent plus des surcharges masquant les évolutions du service.
 La référence fournie comporte bien `provider.env` et `provider.secret`.
 
 Le contrôle ne connaît actuellement qu’une URL publique configurée. La console
@@ -142,3 +146,37 @@ Les deux unités mettent à jour `docs/manual.md` avec le comportement livré,
 reconstruisent son affichage dans l’application et vérifient sa correspondance
 avec la source. L’interface explique où une valeur est définie et quelle
 surcharge est appliquée, sans exposer les valeurs des secrets.
+
+## Preuve de transport
+
+La preuve de 191 groupes ne couvre pas encore l’état `unknown` d’une mutation
+commune dont la réponse est perdue. Ce comportement reste une exigence de SLS-031.
+Il faut observer le résultat de la vraie CLI, l’état durable du service et son
+audit, puis démontrer qu’aucune publication ni répétition automatique ne suit.
+
+Le banc retenu lance la CLI réelle et observe le processus réel du contrôle
+dans le seul SPARK DEV, à une frontière d’appel système. L’interruption avant
+traitement de la requête et l’interruption après commit mais avant émission de
+sa réponse forment deux scénarios distincts. Un SIGKILL du contrôle réalise la
+coupure ; le démarrage de son conteneur original puis sa santé sont confirmés.
+Le contrôle et son image restent inchangés pour ce banc.
+
+L’observation native est limitée au processus du contrôle et à la ligne de
+requête publique contenant l’UUID du service de campagne. Les identifiants et
+secrets d’authentification restent hors des traces. Le registre SQLite est lu
+sous son propriétaire pour constater l’état avant et après décision. Les
+requêtes et les réponses métier restent produites par les véritables composants.
+
+Avant toute suspension, vérifier la cellule, le conteneur, son image, le service
+de campagne et l’absence d’autres travaux actifs. Une garde indépendante borne
+la durée de l’observateur, libère une suspension et redémarre le contrôle après
+perte du pilote. Sa restauration est elle-même éprouvée. Les identités natives
+des processus et conteneurs empêchent d’agir sur un propriétaire remplacé.
+
+Après retour de l’API, vérifier le nombre exact de mutations communes, l’absence
+de fonction/candidat créé par la commande interrompue et l’état `unknown` sans
+configuration ni secret dans le rapport. Une relance explicite par l’opérateur
+doit ensuite publier et invoquer le handler de qualification normalement. Les
+ressources sont purgées par l’API et recoupées au repos. Les capacités natives
+et outils de diagnostic du SPARK ont été relevés ; le banc reste à implémenter
+et à qualifier, sans succès présumé sur ces scénarios.

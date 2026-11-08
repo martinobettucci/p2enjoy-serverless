@@ -62,7 +62,7 @@ ou secret vide ou null au niveau fonction conserve l'héritage ; une valeur null
 d'une clé retire sa surcharge locale et rétablit l'héritage. La configuration
 provider est conservée au niveau du service selon le
 [contrat SLS-031](SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges),
-dont l'implémentation reste à qualifier. Une collision finale entre variable et secret est refusée.
+qualifié sur DEV. Une collision finale entre variable et secret est refusée.
 Les valeurs sont des chaînes, sans conversion implicite d'un booléen YAML.
 Seules les références `${env:NOM}` sont résolues, à partir des noms explicitement
 déclarés ; les autres expressions sont refusées. Une variable manquante ne
@@ -93,8 +93,11 @@ du service et son nom correspondent à la cible et au manifeste.
 
 La CLI retrouve les fonctions par leur nom exact dans la liste paginée, puis
 relit chaque fonction avant préparation. Une fonction absente est créée comme
-brouillon avec son nom et ses ressources ; les variables/secrets sont envoyés
-avec le candidat, afin de ne pas modifier une configuration active avant validation.
+brouillon avec son nom et ses ressources ; les surcharges de variables/secrets
+sont envoyées avec le candidat et deviennent actives après validation. La
+configuration commune du provider est appliquée auparavant au service, sous
+Update non restreint et avec sa version attendue. Son résultat est séparé dans
+`service_configuration` ; il reste effectif si une publication de fonction échoue.
 Un brouillon existant suit la première publication et requiert donc Create.
 Chaque archive est ouverte sans suivre les liens, bornée à 64 Mio, chargée en
 mémoire et comparée à l'empreinte issue du packaging avant son envoi.

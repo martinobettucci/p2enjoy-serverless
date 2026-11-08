@@ -57,6 +57,17 @@ def get(db,table,key):
     return dict(row)
 
 
+# @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges
+def effective_configuration(vault,service,configuration):
+    environment=json.loads(service['environment_json'])|configuration['environment']
+    secrets=vault.open(service['secrets_cipher'])|{key:value for key,value in configuration['secrets'].items() if value is not None}
+    try:
+        combined=application_environment(environment,secrets)
+        if len(json.dumps({'handler':'x'*256,'environment':combined}).encode())>LIMIT:raise ValidationError('configuration_limit')
+    except ValidationError:raise HTTPException(422,'La configuration effective de service et de fonction dépasse les limites ou présente une collision.') from None
+    return environment,secrets
+
+
 class Deployments:
     def __init__(self,settings,database,identity,vault,operations):
         self.settings,self.database,self.identity,self.vault=settings,database,identity,vault
@@ -202,13 +213,7 @@ class Deployments:
         return result
 
     def effective(self,service,configuration):
-        environment=json.loads(service['environment_json'])|configuration['environment']
-        secrets=self.vault.open(service['secrets_cipher'])|{key:value for key,value in configuration['secrets'].items() if value is not None}
-        try:
-            combined=application_environment(environment,secrets)
-            if len(json.dumps({'handler':'x'*256,'environment':combined}).encode())>LIMIT:raise ValidationError('configuration_limit')
-        except ValidationError:raise HTTPException(422,'La configuration effective de service et de fonction dépasse les limites ou présente une collision.') from None
-        return environment,secrets
+        return effective_configuration(self.vault,service,configuration)
 
     def verify(self,db,row,authorization,*,state=None,operation=None):
         self.identity.recheck(db,authorization,row['service_id'],row['required_right'],row['function_id'])

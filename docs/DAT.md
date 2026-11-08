@@ -65,6 +65,18 @@ Les refus locaux et un refus HTTPS 401 passent 14 contrôles réels ; la campagn
 positive, les résultats partiels et la pagination passent sept groupes avec
 la vraie session SSO : [preuve authentifiée](evidence/deployment-authenticated-dev-2026-11-06.json).
 
+Le provider du manifeste est conservé comme configuration du service ; les
+fonctions portent leurs seules surcharges. L’adaptateur applique les catégories
+communes déclarées avant les publications et en indique le résultat séparément.
+Le contrôle utilise une fusion unique pour la gestion, les validations et
+l’admission des invocations. Il vérifie les configurations effectives dans la
+transaction avant une mutation de service ou de fonction. Aucun schéma SQLite
+ne change ; le remplacement du jeu de secrets réutilise son mapping chiffré.
+Contrat et limites des échecs partiels :
+[configuration commune](SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges).
+La [preuve](evidence/service-configuration-dev-2026-11-08.json) recoupe 191 groupes,
+les sources embarquées dans les deux images et 21 captures inspectées.
+
 ### Validation du code
 
 Le pilote Python `control/app/validator.py` utilise uniquement la bibliothèque

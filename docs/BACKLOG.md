@@ -331,7 +331,8 @@ Les 25 fichiers Python/migrations embarqués correspondent aux sources ; douze
 captures du manuel, maintenant à 35 paragraphes, sont inspectées.
 Restent l’intégration des nouvelles
 campagnes à la suite commune, les régressions élargies et l’actualisation finale
-des notes SPARK.
+des notes SPARK. Les trois notes actualisées sont proposées le 8 novembre ;
+leur adoption n’est pas annoncée.
 L’intégration doit également rendre la pagination UI autonome : son assertion
 actuelle suppose plus de dix archives conservées préexistantes. La campagne
 doit créer ses propres archives réelles avant le parcours, puis les purger.
@@ -344,15 +345,28 @@ SLS-064 seul ne qualifie aucun parcours public d’effacement.
 <a id="sls-031"></a>
 ## SLS-031 — Préserver la configuration commune du service au déploiement
 
-Statut : [ ] — écart confirmé dans l’adaptateur le 8 novembre 2026.
+Statut : [~] — déployé, 191 groupes qualifiés ; issue inconnue à éprouver sous vraie coupure.
 
-Jetons, variables et secrets de service existent dans l’API et la console.
-L’adaptateur aplatit cependant provider et fonction avant publication, ce qui
-transforme les valeurs communes en surcharges. Préserver les deux niveaux,
-qualifier leur évolution par invocation réelle, les droits, les conflits et
-la reprise des manifestes déjà déployés. Contrat et critères E2E :
-[SERVICE_CONFIGURATION_URLS](SERVICE_CONFIGURATION_URLS.md). Inclure le manuel
-affiché et la lecture de l’héritage dans la console.
+L’adaptateur conserve les valeurs communes du provider dans le service et
+uniquement les surcharges dans les fonctions. Le rapport distingue les deux
+étapes. L’API remplace explicitement un jeu de secrets et contrôle les
+configurations effectives avant mutation ; la CLI borne les fusions connues,
+y compris leur représentation Unicode au runtime. Contrat :
+[SERVICE_CONFIGURATION_URLS](SERVICE_CONFIGURATION_URLS.md).
+La [preuve](evidence/service-configuration-dev-2026-11-08.json) recoupe treize
+groupes ciblés : héritage, surcharges, rotation pendant appel admis, droits,
+échec partiel, reprise d’un ancien déploiement aplati, limites et redémarrage.
+Les régressions portent le total à 191 groupes sur douze campagnes en série ;
+24 groupes plan/package et quatorze de refus public sont rejoués dans Docker.
+Zéro échec/skip, 165 sources recoupées, 25 fichiers embarqués du contrôle et cinq
+de la CLI conformes. Les deux fonctions ciblées et onze répertoires d’artefacts
+sont purgés, sans réservation ou conteneur résiduel. Le manuel affiche ses
+39 paragraphes ; les 21 captures de gestion et de lecture sont inspectées.
+La vérification finale confirme cette preuve mais conserve une lacune : provoquer
+la perte réelle d’une réponse de modification commune, vérifier `unknown`, l’état
+du service, l’absence de rejeu et l’arrêt avant les publications. Ce parcours
+doit être qualifié avant clôture de l’unité, selon le
+[banc de transport](SERVICE_CONFIGURATION_URLS.md#preuve-de-transport).
 
 <a id="sls-066"></a>
 ## SLS-066 — Afficher les URL d’appel issues des domaines du SPARK

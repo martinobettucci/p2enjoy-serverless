@@ -503,4 +503,37 @@ et les budgets globaux à zéro. Les douze captures du manuel ont été relues.
 
 Aucune migration, variable, secret ou route n’est ajouté. Les deux fichiers
 officiels de configuration sont inchangés. SLS-065 attend encore la suite
-commune élargie et l’actualisation finale des notes du SPARK.
+commune élargie. Les notes actualisées sont proposées dans le déploiement
+de configuration commune du 8 novembre décrit ci-dessous.
+
+### Configuration commune des services — 8 novembre 2026
+
+Image du contrôle :
+`sha256:62ad2b7f13f0e274b7365daa39c1b5f3fcf524a32e82fa27d4acf582e7187900`.
+Image CLI :
+`sha256:3304f057c81d7dd5169752f8cef7d15c6b9f5788b30d513dbdcd05f11b91277c`.
+
+Le provider est enregistré dans le service, les fonctions conservent seulement
+leurs surcharges. Le contrôle vérifie les configurations effectives dans les
+transactions de gestion ; l’adaptateur borne les fusions connues avant mutation.
+Les valeurs communes modifiées s’appliquent aux appels suivants, sans altérer
+les instantanés déjà admis. Aucun schéma, variable de cellule, secret ou route
+n’est ajouté pour ce changement.
+
+La [preuve](evidence/service-configuration-dev-2026-11-08.json) réunit 191 groupes
+sur douze campagnes : 153 sur le poste, puis 24 de plan/package et quatorze de
+refus public rejoués dans Docker. Les 165 sources sont identiques avant/après
+chaque campagne ; 25 fichiers Python/migrations du contrôle et cinq modules
+CLI embarqués correspondent aux sources. Les deux fonctions ciblées et onze
+répertoires d’artefacts sont purgés ; réservations et allocations sont à zéro,
+aucun conteneur de l’installation ne reste, contrôle/agent/référence sont sains.
+Les 21 captures de gestion et de lecture du manuel sont inspectées ; le guide
+affiché comporte ses treize chapitres et 39 paragraphes conformes à sa source.
+
+Les trois notes sont mises à jour dans `qualification/spark-notes/` et déposées
+dans `/etc/spark/notes/{README,CONTRIBUTORS,INSTALL}.md.?`. Leurs empreintes
+correspondent aux sources locales ; les notes actives restent celles du registre
+tant que ces propositions ne sont pas adoptées. Le dépôt a vérifié qu’aucune
+autre proposition n’était en attente avant écriture. Aucune proposition de
+variable, secret ou route n’a été nécessaire. Les deux env_file officiels restent
+la seule source de configuration des services.

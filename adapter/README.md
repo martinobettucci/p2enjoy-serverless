@@ -18,9 +18,25 @@ manifeste. Read est nécessaire pour rechercher les fonctions ; Create publie
 la première révision et Update les suivantes. Les valeurs `${env:NOM}` sont
 résolues depuis l’environnement du processus, sans fichier `.env`.
 
+La configuration de `provider` est conservée dans le service. Sa modification
+exige également Update non limité à certaines fonctions. Les fonctions portent
+seulement leurs surcharges. Une catégorie provider absente préserve le service ;
+une catégorie présente remplace ses clés. Le rapport `service_configuration`
+indique `preserved`, `applied`, `failed` ou `unknown`. Une modification commune
+appliquée reste effective même si l’import d’une fonction échoue ensuite.
+Les parcours couverts sont qualifiés dans [SLS-031](../docs/BACKLOG.md#sls-031),
+qui reste ouverte jusqu’à la preuve d’une vraie réponse perdue de modification
+commune et de son issue `unknown`.
+Le plan et le descripteur exposent les noms des valeurs communes, les noms
+effectifs connus et les noms des surcharges locales, sans leurs valeurs.
+La [preuve DEV](../docs/evidence/service-configuration-dev-2026-11-08.json)
+réunit treize groupes ciblés et les régressions : 153 groupes sur le poste,
+puis 24 de plan/package et quatorze de refus public rejoués dans Docker.
+
 La CLI valide et empaquette tout avant mutation, puis publie en série. Elle
-conserve les UUID, refuse les redirections et n’applique la configuration
-active qu’avec la validation du candidat. Les erreurs donnent un code de sortie
+conserve les UUID et refuse les redirections. La configuration commune s’applique
+avant les publications ; les surcharges de fonction s’activent seulement après
+validation de leur candidat. Les erreurs donnent un code de sortie
 non nul et un résultat JSON par fonction tentée. Une réponse perdue est signalée
 `unknown`, avec l’identifiant du candidat connu, sans rejouer la mutation.
 Consulter ce candidat avant toute relance. Les avertissements précèdent les

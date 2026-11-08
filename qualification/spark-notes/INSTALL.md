@@ -18,11 +18,29 @@ python3 -m adapter deploy --config serverless.yml --service UUID_DU_SERVICE
 
 Le service doit correspondre au manifeste. L’adaptateur prépare avant mutation, publie en série et distingue succès, refus et issue inconnue. Les valeurs secrètes ne figurent pas dans son rapport. Les API de candidat sont `POST /api/functions/{id}/deployments`, `PUT /api/deployments/{id}/artifact` et `GET /api/deployments/{id}`. L’upload est une archive ZIP ; le contrôle valide le vrai handler dans un conteneur isolé avant publication.
 
+Les variables et secrets du provider sont enregistrés au niveau du service ;
+seules les surcharges explicites sont propres à chaque fonction. Une catégorie
+provider absente conserve le service, une catégorie déclarée remplace ses clés.
+Une clé locale null rétablit l’héritage. Modifier une catégorie commune exige
+Update non limité à des fonctions. Le rapport `service_configuration` indique
+si elle est préservée, appliquée, refusée ou d’issue inconnue. Une configuration
+commune appliquée reste effective si l’import d’une fonction échoue ensuite.
+L’API `/api/services/{id}/configuration` accepte `replace_secrets: true` avec
+un mapping `secrets` explicite ; sans ce champ, les secrets se modifient par clé.
+Les lectures ne renvoient jamais leurs valeurs enregistrées.
+
 L’historique se lit sous `/api/functions/{id}/revisions`. Le rollback rétablit une révision connue sans rétablir les anciens réglages ni les volumes. La facette Code et révisions propose la publication d’un ZIP et de son handler, le suivi, l’abandon d’une préparation, l’activation et la suppression de révisions. Les réglages et secrets courants sont conservés côté serveur lors de cette publication du code. L’entrée publique est `/invoke/{function_id}` pour un alias implicite, ou `/invoke/{function_id}/{chemin}` pour un chemin déclaré. Elle exige Read dans `X-Serverless-Token` ; le cookie administrateur ne remplace pas ce jeton.
 
 ## Quotas, décisions et erreurs
 
-Une fonction configure séparément données permanentes et cache, avec activation et allocation en Mio. Désactiver conserve les fichiers et l’allocation. Un quota sous l’usage est refusé ; une invocation admise interdit une mutation incompatible et les instances au repos sont drainées. Supprimer archive les volumes, sans les purger ni libérer leur allocation. La purge est une commande d’administration distincte, dont l’interface publique reste à réaliser.
+Une fonction configure séparément données permanentes et cache, avec activation et allocation en Mio. Désactiver conserve les fichiers et l’allocation. Un quota sous l’usage est refusé ; une invocation admise interdit une mutation incompatible et les instances au repos sont drainées. Supprimer archive les volumes, sans les purger ni libérer leur allocation. La purge est une commande d’administration distincte dans Archives de fonctions ; le vidage du cache est dans la facette Stockage. La qualification transversale de ces commandes reste suivie dans SLS-065.
+
+Les commandes publiques utilisent un UUID d’opération et la version lue :
+`POST /api/functions/{id}/cache-clear`, `POST /api/archives/{id}/purge`, puis
+`GET /api/storage-operations/{id}`. Le vidage requiert Update ; la purge exige
+une session administrateur et la confirmation du nom exact. Consulter le reçu
+avant de rejouer une requête dont la réponse a été perdue. Une purge en attente
+conserve les ressources comptées jusqu’à confirmation du nettoyage.
 
 Une réponse normale attend confirmation de l’agent. Un 503 portant `X-Serverless-Mutation-Committed: true` signifie que la modification est enregistrée et attend sa confirmation : relire la fonction ou le candidat avant toute nouvelle tentative. `X-Serverless-Operation-ID` et `X-Serverless-Function-ID` identifient cette décision ; `storage_operation` expose son résumé public, puis revient à null après confirmation. Une publication déjà décidée reste publiée malgré une confirmation perdue.
 

@@ -127,16 +127,46 @@ def archive_bytes(root,function,artifact):
     return content
 
 
+# @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges
+def configure_service(client,service,target,configuration,report):
+    result=report['service_configuration']
+    if not configuration:return
+    version=target.get('updated_at')
+    if isinstance(version,bool) or not isinstance(version,(float,int)) or not math.isfinite(version) or version<=0:
+        raise DeploymentError('invalid_service_response')
+    body={**configuration}
+    if 'secrets' in body:body['replace_secrets']=True
+    result['state']='pending'
+    try:
+        row=client.request('PUT','/api/services/'+service+'/configuration',body=body,version=version)
+        updated=row.get('updated_at')
+        if (row.get('id')!=service or row.get('name')!=target['name'] or isinstance(updated,bool) or
+                not isinstance(updated,(float,int)) or not math.isfinite(updated) or updated<=0):
+            raise DeploymentError('invalid_service_response',uncertain=True)
+    except DeploymentError as error:
+        result['state']='unknown' if error.uncertain else 'failed';result['error']=error.public();raise
+    result['state']='applied';result['updated_at']=updated
+
+
 def deploy(plan,manifest,service):
-    report={'service':plan['service'],'completed':False,'results':[],'warnings':plan['warnings']}
+    report={'service':plan['service'],'completed':False,'results':[],'warnings':plan['warnings'],
+            'service_configuration':{'state':'preserved'}}
     try:
         identifier(service);report['service_id']=service;client=Client()
         for function in plan['functions']:
             json_payload({name:function[name] for name in ('config','configuration','events')})
+            common=plan.get('service_configuration',{})
+            effective={category:common.get(category,{})|function['configuration'][category] for category in ('environment','secrets')}
+            json_payload({'config':function['config'],'configuration':effective,'events':function['events']})
+            # The runtime bootstrap uses escaped JSON, which can exceed UTF-8 transport bytes.
+            if len(json.dumps({'handler':'x'*256,'environment':effective['environment']|effective['secrets']}).encode())>256*1024:
+                raise DeploymentError('configuration_body_too_large')
+        json_payload(plan.get('service_configuration',{}))
         descriptor=package(plan,manifest.parent,manifest.parent/'.serverless-p2',manifest)
         target=client.request('GET','/api/services/'+service)
         if target.get('id')!=service or target.get('name')!=plan['service']:raise DeploymentError('service_mismatch')
         existing=list_functions(client,service)
+        configure_service(client,service,target,plan.get('service_configuration',{}),report)
     except DeploymentError as error:
         report['error']=error.public();return report
     for function in plan['functions']:

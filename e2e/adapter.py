@@ -92,13 +92,15 @@ try:
                                'null':{'handler':'src/handlers.echo','env':None}}
             manifest(project,data);plan=invoke(project)
             rows={row['name']:row for row in plan['functions']}
-            assert rows['CamelCase']['environment_names']==['BASE','LOCAL','ON']
+            assert rows['CamelCase']['environment_names']==['BASE','LOCAL','ON','REMOVED']
+            assert rows['CamelCase']['local_environment_names']==['LOCAL']
+            assert plan['service_configuration']=={'environment_names':['BASE','ON','REMOVED'],'secret_names':['PRIVATE']}
             assert rows['empty']['environment_names']==rows['null']['environment_names']==['BASE','ON','REMOVED']
             assert all(row['secret_names']==['PRIVATE'] for row in rows.values())
             assert 'qualification-sensitive-marker' not in json.dumps(plan)
             invoke(project,'package')
             assert 'qualification-sensitive-marker' not in (project/'.serverless-p2/deployment.json').read_text()
-        check('Héritage vide/null, retrait de clé, casse et confidentialité du descripteur',inheritance)
+        check('Héritage vide/null, retrait de surcharge, casse et confidentialité du descripteur',inheritance)
 
         def scaleway():
             data=copy.deepcopy(baseline);data['provider']={'name':'scaleway','runtime':'node20','env':{},'secret':{},'scwToken':'provider-sensitive-marker'}

@@ -68,60 +68,68 @@ try {
   await writeFile(path.join(work,'src/revision.json'),JSON.stringify({version:1}));
   manifest={service:prefix,provider:{name:'p2enjoy',runtime:'nodejs24.x',environment:{PUBLIC_REVISION:'one'},
     secret:{QUALIFICATION_SYNTHETIC_SECRET:'${env:QUALIFICATION_SYNTHETIC_SECRET}'}},
-    functions:Object.fromEntries(Array.from({length:11},(_,i)=>['function'+String(i).padStart(2,'0'),{handler:'src/handlers.echo'}])),
+    functions:Object.fromEntries(Array.from({length:11},(_,i)=>['echo-pagination-'+String(i).padStart(2,'0'),{handler:'src/handlers.echo'}])),
     package:{patterns:['!**','src/**','package.json']}};
   await save();
   namespace=await call('/api/namespaces',{method:'POST',status:201,body:{name:prefix}});
   service=await call(`/api/namespaces/${namespace.id}/services`,{method:'POST',status:201,body:{name:prefix}});
   const read=await credential('read',['read']),create=await credential('create',['read','create']),update=await credential('update',['read','update']);
+  const publisher=await credential('publication',['read','create','update']);
   await check('Nom de service contrôlé avant toute création',async()=>{
     manifest.service=prefix+'-wrong';await save();const result=await deploy(create,false);
     assert.equal(result.error.code,'service_mismatch');assert.deepEqual(result.results,[]);
     assert.deepEqual((await call(`/api/services/${service.id}/functions`)).items,[]);
     manifest.service=prefix;await save();
   });
-  await check('Read seul : onze créations réellement refusées',async()=>{
-    const result=await deploy(read,false);assert.equal(result.results.length,11);
-    assert(result.results.every(row=>row.state==='failed'&&row.error.status===403));
+  await check('Read seul : configuration commune refusée avant les créations',async()=>{
+    const result=await deploy(read,false);assert.equal(result.results.length,0);
+    assert.equal(result.error.status,403);assert.equal(result.service_configuration.state,'failed');
     assert.deepEqual((await call(`/api/services/${service.id}/functions`)).items,[]);
   });
   let first,second;
-  await check('Onze premières publications par Read et Create',async()=>{
-    first=await deploy(create,true);assert.equal(first.results.length,11);
+  await check('Onze premières publications avec configuration commune au service',async()=>{
+    first=await deploy(publisher,true);assert.equal(first.results.length,11);
     for(const row of first.results) {
       assert(row.created);const fn=await current(row.function_id);
-      assert.equal(fn.active_revision_id,row.revision_id);assert.equal(fn.environment.PUBLIC_REVISION,'one');
-      assert.deepEqual(fn.secret_names,['QUALIFICATION_SYNTHETIC_SECRET']);
+      assert.equal(fn.active_revision_id,row.revision_id);assert.deepEqual(fn.environment,{});
+      assert.deepEqual(fn.secret_names,[]);
       const history=await call(`/api/functions/${fn.id}/revisions`);
       const descriptor=JSON.parse(await readFile(path.join(work,'.serverless-p2/deployment.json'),'utf8'));
       const bytes=await readFile(path.join(work,'.serverless-p2',descriptor.artifacts[row.name].file));
       assert.equal(history.items[0].archive_sha256,createHash('sha256').update(bytes).digest('hex'));
     }
+    const common=await call(`/api/services/${service.id}`);assert.equal(common.environment.PUBLIC_REVISION,'one');
+    assert.deepEqual(common.secret_names,['QUALIFICATION_SYNTHETIC_SECRET']);
   });
   await check('Create ne republie pas une fonction déjà active',async()=>{
+    delete manifest.provider.environment;delete manifest.provider.secret;await save();
     const result=await deploy(create,false);assert(result.results.every(row=>row.error.status===403));
     for(const row of first.results)assert.equal((await current(row.function_id)).active_revision_id,row.revision_id);
   });
   await check('Pagination réelle puis nouvelles révisions avec UUID conservés',async()=>{
-    manifest.provider.environment.PUBLIC_REVISION='two';await save();
+    manifest.provider.environment={PUBLIC_REVISION:'two'};await save();
     await writeFile(path.join(work,'src/revision.json'),JSON.stringify({version:2}));
     second=await deploy(update,true);assert.equal(second.results.length,11);
     for(let i=0;i<11;i++) {
       assert.equal(second.results[i].function_id,first.results[i].function_id);
       assert.notEqual(second.results[i].revision_id,first.results[i].revision_id);
-      assert.equal((await current(second.results[i].function_id)).environment.PUBLIC_REVISION,'two');
+      assert.deepEqual((await current(second.results[i].function_id)).environment,{});
     }
+    assert.equal((await call(`/api/services/${service.id}`)).environment.PUBLIC_REVISION,'two');
   });
   await check('Import réellement défaillant : résultat partiel et poursuite des autres fonctions',async()=>{
-    manifest.functions.function00.handler='src/throws.handler';manifest.provider.environment.PUBLIC_REVISION='three';await save();
+    manifest.functions['echo-pagination-00'].handler='src/throws.handler';manifest.provider.environment.PUBLIC_REVISION='three';await save();
     const partial=await deploy(update,false);assert.equal(partial.results.length,11);
     assert.equal(partial.results[0].error.status,422);assert.equal(partial.results[0].state,'failed');
     assert(partial.results.slice(1).every(row=>row.state==='published'));
     const unchanged=await current(second.results[0].function_id);
-    assert.equal(unchanged.active_revision_id,second.results[0].revision_id);assert.equal(unchanged.environment.PUBLIC_REVISION,'two');
-    for(const row of partial.results.slice(1))assert.equal((await current(row.function_id)).environment.PUBLIC_REVISION,'three');
+    assert.equal(unchanged.active_revision_id,second.results[0].revision_id);assert.deepEqual(unchanged.environment,{});
+    assert.equal(partial.service_configuration.state,'applied');
+    assert.equal((await call(`/api/services/${service.id}`)).environment.PUBLIC_REVISION,'three');
+    for(const row of partial.results.slice(1))assert.deepEqual((await current(row.function_id)).environment,{});
   });
   await check('Reprise du même brouillon après import refusé avec Read et Create',async()=>{
+    delete manifest.provider.environment;await save();
     manifest.functions={retry:{handler:'src/throws.handler'}};await save();
     const failed=await deploy(create,false);assert.equal(failed.results[0].error.status,422);
     const id=failed.results[0].function_id;assert.equal((await current(id)).active_revision_id,null);

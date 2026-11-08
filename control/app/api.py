@@ -10,9 +10,9 @@ from fastapi import APIRouter,HTTPException,Query,Request
 
 from .auth import digest
 from .db import audit
-from .deployments import get as current_object
+from .deployments import effective_configuration,get as current_object
 from .function_operations import storage_configuration
-from .models import Configuration,FunctionCreate,Named,ServiceCreate,TokenCreate
+from .models import Configuration,FunctionCreate,Named,ServiceCreate,ServiceConfiguration,TokenCreate
 
 
 def router(database,identity,vault,operations):
@@ -33,7 +33,8 @@ def router(database,identity,vault,operations):
 
     def configuration(row,data):
         env=data.environment if 'environment' in data.model_fields_set else json.loads(row.get('environment_json','{}'))
-        secured=vault.open(row['secrets_cipher']) if row.get('secrets_cipher') else {}
+        # @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges
+        secured={} if isinstance(data,ServiceConfiguration) and data.replace_secrets else vault.open(row['secrets_cipher']) if row.get('secrets_cipher') else {}
         for name,value in data.secrets.items():
             if value is None:secured.pop(name,None)
             else:secured[name]=value
@@ -158,12 +159,16 @@ def router(database,identity,vault,operations):
         return {'deleted':True}
 
     @api.put('/services/{key}/configuration')
-    async def configure_service(request:Request,key:UUID,data:Configuration):
+    # @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges
+    async def configure_service(request:Request,key:UUID,data:ServiceConfiguration):
         actor=await identity.authorize(request,str(key),'update')
         if actor.functions is not None:raise HTTPException(403,'Un jeton limité à des fonctions ne modifie pas la configuration globale.')
         row=get('services',key);current_version(request,row);env,secured=configuration(row,data)
         with database.transaction() as db:
             operations.service_available(db,str(key))
+            proposed={**row,'environment_json':env,'secrets_cipher':secured}
+            for function in db.execute('SELECT environment_json,secrets_cipher FROM functions WHERE service_id=? AND deleted_at IS NULL',(str(key),)):
+                effective_configuration(vault,proposed,{'environment':json.loads(function['environment_json']),'secrets':vault.open(function['secrets_cipher'])})
             db.execute('UPDATE services SET environment_json=?,secrets_cipher=?,updated_at=? WHERE id=?',(env,secured,time.time(),str(key)))
             audit(db,actor,'service.configure',str(key),str(key))
         return public(get('services',key))
@@ -187,6 +192,7 @@ def router(database,identity,vault,operations):
             with database.transaction() as db:
                 service=current_object(db,'services',key)
                 identity.recheck(db,authorization,str(key),'create',function_id)
+                effective_configuration(vault,service,{'environment':json.loads(env),'secrets':vault.open(secured)})
                 if db.execute('SELECT 1 FROM functions WHERE service_id=? AND name=? AND deleted_at IS NULL',(str(key),data.name)).fetchone():
                     raise HTTPException(409,'Ce nom de fonction existe déjà dans ce service.')
                 operations.reserve(db,operation,{'id':function_id},service,storage_configuration(data.config.model_dump()))
@@ -196,6 +202,7 @@ def router(database,identity,vault,operations):
                 service=current_object(db,'services',key)
                 identity.recheck(db,authorization,str(key),'create',function_id)
                 operations.verify(db,operation,{'id':function_id},service)
+                effective_configuration(vault,service,{'environment':json.loads(env),'secrets':vault.open(secured)})
                 operations.minimum_budget(db,function_id,data.config.model_dump())
                 now=time.time()
                 db.execute('INSERT INTO functions (id,service_id,name,config_json,environment_json,secrets_cipher,active_revision_id,created_at,updated_at,deleted_at) VALUES (?,?,?,?,?,?,NULL,?,?,NULL)',(
@@ -219,6 +226,7 @@ def router(database,identity,vault,operations):
                 if row['active_revision_id'] and any(getattr(data.config,name)!=previous[name] for name in ('handler','runtime')):
                     raise HTTPException(409,'Un changement de handler ou de runtime exige un nouveau déploiement.')
                 env,secured=configuration(row,data.configuration)
+                effective_configuration(vault,service,{'environment':json.loads(env),'secrets':vault.open(secured)})
                 changed=storage_configuration(previous)!=storage_configuration(data.config.model_dump())
                 if changed:operations.reserve(db,operation,row,service,storage_configuration(data.config.model_dump()))
                 else:
@@ -233,6 +241,7 @@ def router(database,identity,vault,operations):
                     row=current_object(db,'functions',key);service=current_object(db,'services',row['service_id'])
                     identity.recheck(db,authorization,row['service_id'],'update',str(key))
                     operations.verify(db,operation,row,service)
+                    effective_configuration(vault,service,{'environment':json.loads(env),'secrets':vault.open(secured)})
                     operations.minimum_budget(db,str(key),data.config.model_dump())
                     db.execute('UPDATE functions SET name=?,config_json=?,environment_json=?,secrets_cipher=?,updated_at=? WHERE id=?',(
                         data.name,data.config.model_dump_json(),env,secured,time.time(),str(key)))

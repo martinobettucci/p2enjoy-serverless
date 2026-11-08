@@ -57,6 +57,17 @@ class Configuration(Strict):
         return self
 
 
+# @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges
+class ServiceConfiguration(Configuration):
+    replace_secrets:bool=False
+
+    @model_validator(mode='after')
+    def explicit_replacement(self):
+        if self.replace_secrets and 'secrets' not in self.model_fields_set:
+            raise ValueError('Le remplacement des secrets exige un mapping secrets explicite.')
+        return self
+
+
 class StorageVolume(Strict):
     enabled:bool=False
     quota_mib:int=Field(default=64,ge=1,le=65536)

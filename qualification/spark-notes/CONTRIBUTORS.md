@@ -6,7 +6,7 @@ Le dépôt de travail est `/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-server
 
 La configuration consommée vient exclusivement de `/etc/spark/env` et `/run/spark/secrets`. Proposer les changements dans les fichiers voisins `.?`, puis utiliser la console SPARK pour les appliquer. La même procédure s’applique aux trois notes. Aucun `.env`, secret en dépôt ou surcharge de conteneur de substitution.
 
-Le contrôle conserve sa base et ses artefacts dans `/srv/p2enjoy-serverless/state`. La clé `SERVERLESS_MASTER_KEY` reste liée à cette base. Le schéma courant porte les migrations 001 à 005 ; la sauvegarde native préalable est `state/backups/before-005-20261106T203759Z-a85aa7.sqlite3`, vérifiée intègre en mode 0600. Les écritures postérieures empêchent une restauration implicite.
+Le contrôle conserve sa base et ses artefacts dans `/srv/p2enjoy-serverless/state`. La clé `SERVERLESS_MASTER_KEY` reste liée à cette base. Le schéma courant porte les migrations 001 à 006 ; les sauvegardes natives avant 005 et 006 et leurs vérifications sont décrites dans `docs/PLATFORM_DEV.md`. Les écritures postérieures empêchent une restauration implicite. SLS-031 ne demande aucune nouvelle migration.
 
 L’agent possède `/srv/p2enjoy-serverless/storage-state`, schéma 004. Son canal `/srv/p2enjoy-serverless/storage-channel` est privé et monté readonly dans le contrôle. Ne jamais monter les backings natifs dans un workload : acquérir un bail et utiliser son chemin FUSE. Budget logique 32768 Mio, marge physique 8192 Mio, plafond 64 montages. Les valeurs officielles restent l’autorité.
 
@@ -20,7 +20,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:52d17fa14b7fe92ac5bad61695114f687dd702ebff5a57c8d7e3a6e69c1116d6`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:62ad2b7f13f0e274b7365daa39c1b5f3fcf524a32e82fa27d4acf582e7187900`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:3304f057c81d7dd5169752f8cef7d15c6b9f5788b30d513dbdcd05f11b91277c`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 
@@ -40,17 +40,18 @@ node e2e/code-publications.mjs
 node e2e/publication-ui.mjs
 node e2e/manual-ui.mjs
 node e2e/adapter-deploy.mjs
+node e2e/service-configuration.mjs
 node e2e/publication-recovery.mjs
 python3 -B e2e/public.py
 ```
 
-La suite complète du moteur et de ses régressions se lance aussi par `python3 e2e/execution-suite.py` depuis le poste. Elle exécute quatorze campagnes en série et rattache chaque rapport fraîchement écrit à l’image et aux empreintes des sources locales/distantes avant et après la commande. Aucun fichier source ne doit être modifié pendant la suite.
+La suite commune du moteur et de ses régressions se lance aussi par `python3 e2e/execution-suite.py` depuis le poste. Elle exécute quatorze campagnes en série et rattache chaque rapport fraîchement écrit à l’image et aux empreintes des sources locales/distantes avant et après la commande. Les campagnes de configuration commune et de stockage public se lancent séparément selon `e2e/README.md` ; leur intégration complète à cette suite reste à faire. Aucun fichier source ne doit être modifié pendant une suite.
 
 Comme spark-docker dans le SPARK : `python3 -B e2e/control-operations.py`. Comme root dans le SPARK, séparément : `python3 -B e2e/storage-preparations.py`, `bash storage/dev.sh agent-test`, `bash storage/dev.sh limits-test`, puis `python3 -B e2e/managed-storage.py`.
 
 Attendre la fin complète de chaque commande. Les campagnes de panne visent seulement les composants de cette cellule ; leurs timers indépendants et finally restaurent les services. Après `docker kill`, le pilote appelle explicitement `docker start`. Un rapport incomplet ou un nettoyage échoué est un échec, jamais un succès partiel.
 
-Les objets se créent et se suppriment par leurs vraies API. Une purge de qualification vérifie la fonction, son namespace exact, sa suppression logique et l’absence de consommateur avant d’appeler l’agent. Les archives de code sont conservées et vérifiées séparément. Ne pas nettoyer globalement par préfixe.
+Les objets se créent et se suppriment par leurs vraies API. Une purge de qualification vérifie la fonction, son namespace exact, sa suppression logique et l’absence de consommateur. La commande publique purge les volumes, le code et la configuration de cette fonction ; son reçu et le nettoyage physique sont recoupés. Les archives métier restent conservées jusqu’à leur purge explicite. Ne pas nettoyer globalement par préfixe.
 
 Le banc de référence possède ses commandes dans qualification/README.md ; ses volumes nommés restent durables. Les suites de composant, packaging et extraction ont leurs commandes dans adapter/, runtime/, storage/ et control/README.md. Le backlog décrit les preuves encore ouvertes.
 
@@ -89,4 +90,23 @@ Le reçu corrélé retrouve une opération après réponse perdue sans effacer u
 cache reconstruit. La suppression récursive laisse le verrou de registre
 disponible. Une exception de worker SQLite produit le diagnostic JSON
 `storage_discard_worker_failed`, avec UUID et code fixe, puis une reprise.
-Les routes publiques et leurs commandes de console restent à réaliser.
+Les routes publiques et leurs commandes de console sont déployées ; leurs
+preuves et limites sont suivies dans SLS-065. La campagne historique reconstruit
+une ancienne image et restaure les trois répertoires originaux après sa fenêtre
+de test, avec garde indépendante. Lire `docs/STORAGE_LEGACY_PROOF.md` et
+`e2e/README.md` avant son lancement ; elle ne s’exécute jamais avec une autre
+campagne active.
+
+## Checkpoint de configuration commune
+
+La preuve `docs/evidence/service-configuration-dev-2026-11-08.json` porte 191
+groupes : 153 sur le poste puis 38 rejoués dans les clients Docker, en série.
+Les 165 sources sont identiques avant/après chaque campagne ; les 25 fichiers
+Python/migrations du contrôle et cinq modules de la CLI sont recoupés dans les
+images exécutées. Le contrôle et l’agent sont sains au repos ; les deux fonctions
+ciblées et onze répertoires d’artefacts sont purgés, les réservations à zéro.
+Les 21 captures de gestion et du manuel sont inspectées.
+SLS-031 reste ouverte : la vraie perte d’une réponse de modification commune
+et l’issue inconnue de la CLI doivent encore être éprouvées, avant et après
+la décision durable. Le banc résiduel est décrit dans
+`docs/SERVICE_CONFIGURATION_URLS.md`.

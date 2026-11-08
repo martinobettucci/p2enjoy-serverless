@@ -110,6 +110,10 @@ origine/IP et la gestion de jetons sont réservées aux sessions admin.
   d'un service vide. Le Read du service autorise sa lecture expurgée.
 - `/api/services/{id}/configuration` : variables et secrets globaux, droit
   Update non restreint à certaines fonctions. La politique d'accès est exclue.
+  `replace_secrets: true` avec un mapping `secrets` explicite remplace ce jeu
+  dans la même transaction ; sans ce drapeau, les secrets se modifient par clé.
+  Le drapeau est refusé au niveau fonction. Contrat :
+  [configuration commune](SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges).
 - `/api/services/{id}/functions` et `/api/functions/{id}` : CRUD des fonctions
   et de leur configuration. Le handler d’une révision active change par déploiement.
 - `/api/functions/{id}/deployments`, `/api/deployments/{id}` et sa route

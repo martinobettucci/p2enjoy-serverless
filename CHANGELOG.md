@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- Les variables et secrets du `provider` sont désormais conservés dans le service
+  lors d’un déploiement ; les fonctions portent seulement leurs surcharges.
+  Le rapport distingue la modification commune des publications individuelles.
+  L’API permet le remplacement du jeu de secrets et refuse les collisions ou
+  dépassements effectifs avant mutation. La CLI borne aussi la représentation
+  JSON Unicode du runtime. Treize groupes ciblés et les régressions passent :
+  191 groupes en série, zéro échec/skip, 21 captures inspectées et manuel actualisé.
+  [Preuve DEV](docs/evidence/service-configuration-dev-2026-11-08.json).
+
 - Correction d’un effacement prématuré du code lors d’une purge bloquée par
   un changement inattendu du stockage. Le nettoyage général respecte désormais
   la garde de purge pour les révisions et candidats, y compris au redémarrage.

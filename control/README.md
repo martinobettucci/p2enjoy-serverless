@@ -43,6 +43,18 @@ sur l'image corrigée. Objets, droits, secrets, concurrence et persistance aprè
 redémarrage sont éprouvés avec la vraie session SSO. Les cycles de rôles,
 de renouvellement et de clés du fournisseur restent ouverts dans SLS-020.
 
+La configuration commune de service est déployée dans SLS-031 : catégories
+provider conservées à ce niveau, surcharges de fonction et remplacement explicite
+du jeu de secrets. Les mutations de gestion partagent le contrôle de configuration
+effective avec la publication et le moteur. La
+[preuve](../docs/evidence/service-configuration-dev-2026-11-08.json) recoupe 191
+groupes, les 25 sources Python/migrations embarquées et le nettoyage physique.
+L’API conserve les schémas de données existants ; aucune migration ni nouvelle
+variable de cellule n’est nécessaire. `replace_secrets` est un champ applicatif
+de `/api/services/{id}/configuration`, documenté dans [CONTROL](../docs/CONTROL.md).
+La perte de réponse d’une modification commune et son issue inconnue restent
+à éprouver avant la clôture de cette unité.
+
 `app/validator.py` fournit le pilote de chargement Node de SLS-030. Sa CLI
 est qualifiée sur le SPARK avec le runtime isolé, selon
 [runtime/README.md](../runtime/README.md). Elle est désormais incluse dans le

@@ -210,6 +210,10 @@ def load(path,runtime_override=None,accept_provider_differences=False,resolve_en
     secrets=variables(provider.get('secret'),'provider.secret',resolve_environment)
     functions=mapping(data.get('functions'),'functions')
     if not functions or len(functions)>256:raise ManifestError('Une à 256 fonctions sont requises.')
+    # @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges
+    common={}
+    if 'env' in provider or 'environment' in provider:common['environment']=merged({},environment)
+    if 'secret' in provider:common['secrets']=merged({},secrets)
     result=[];global_patterns=patterns(data.get('package'))
     for name,function in functions.items():
         if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,62}',name):raise ManifestError('Nom de fonction invalide.')
@@ -224,16 +228,24 @@ def load(path,runtime_override=None,accept_provider_differences=False,resolve_en
             if key in function:
                 if not accept_provider_differences:raise ManifestError(name+'.'+key+' : --accept-provider-differences requis ; HTTPS et jeton plateforme font autorité, domaines configurés dans SPARK.')
                 warnings.append(name+'.'+key+' : non appliqué ; HTTPS, jeton plateforme et route SPARK font autorité.')
-        fn_env=merged(environment,variables(alias(function,('environment','env')),name+'.environment',resolve_environment))
-        fn_secret=merged(secrets,variables(function.get('secret'),name+'.secret',resolve_environment))
-        if len(fn_env)>128 or len(fn_secret)>128:raise ManifestError(name+' : configuration héritée supérieure à 128 clés.')
-        if fn_env.keys()&fn_secret.keys():raise ManifestError(name+' : collision variable/secret.')
+        fn_env=merged({},variables(alias(function,('environment','env')),name+'.environment',resolve_environment))
+        fn_secret=merged({},variables(function.get('secret'),name+'.secret',resolve_environment))
+        effective_env=merged(environment,fn_env);effective_secret=merged(secrets,fn_secret)
+        if len(effective_env)>128 or len(effective_secret)>128:raise ManifestError(name+' : configuration héritée supérieure à 128 clés.')
+        if effective_env.keys()&effective_secret.keys():raise ManifestError(name+' : collision variable/secret.')
         result.append({'name':name,'config':config(provider,function),'configuration':{'environment':fn_env,'secrets':fn_secret},
                        'events':events(function.get('events'),name),'patterns':global_patterns+patterns(function.get('package'))})
-    return {'service':service,'runtime':'node24','architecture':'linux-x64','functions':result,'warnings':warnings}
+    return {'service':service,'service_configuration':common,'runtime':'node24','architecture':'linux-x64','functions':result,'warnings':warnings}
 
 
 def public_plan(plan):
-    return {**plan,'functions':[{key:value for key,value in function.items() if key!='configuration'}|
-        {'environment_names':sorted(function['configuration']['environment']),'secret_names':sorted(function['configuration']['secrets'])}
+    # @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges
+    common=plan.get('service_configuration',{})
+    return {**{key:value for key,value in plan.items() if key!='service_configuration'},
+        'service_configuration':{('secret_names' if category=='secrets' else 'environment_names'):sorted(values) for category,values in common.items()},
+        'functions':[{key:value for key,value in function.items() if key!='configuration'}|
+        {'environment_names':sorted(merged(common.get('environment',{}),function['configuration']['environment'])),
+         'secret_names':sorted(merged(common.get('secrets',{}),function['configuration']['secrets'])),
+         'local_environment_names':sorted(function['configuration']['environment']),
+         'local_secret_names':sorted(function['configuration']['secrets'])}
         for function in plan['functions']]}

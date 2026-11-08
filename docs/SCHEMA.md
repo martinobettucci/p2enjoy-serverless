@@ -27,6 +27,12 @@ mémoire, deadline, idle, instances min/max, concurrence, attente et stockage.
 Les secrets sont des mappings chiffrés avec Fernet et la clé maîtresse de
 cellule. Seuls les noms sortent dans les lectures de gestion.
 
+Le service conserve la configuration commune, la fonction ses surcharges.
+Le remplacement du jeu de secrets de service réutilise `secrets_cipher` et
+ne change pas le schéma. Les configurations effectives sont validées dans la
+transaction avant mutation, selon
+[SLS-031](SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges).
+
 ## Identités
 
 - `service_tokens` : id, service_id, name, digest unique, prefix, rights_json,

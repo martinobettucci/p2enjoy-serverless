@@ -33,6 +33,12 @@ sa présence ; sa valeur enregistrée n'est pas réaffichée. Les secrets et les
 variables de service servent de configuration commune aux fonctions. Une
 surcharge de fonction doit être explicite.
 
+Pour définir une valeur commune, ouvrir le service puis **Configuration**.
+Pour définir une exception, ouvrir la fonction puis sa **Configuration**.
+Retirer la valeur propre à la fonction rétablit celle du service. Une modification
+commune s’applique aux nouveaux appels ; un appel déjà admis termine avec les
+valeurs qu’il avait reçues. Les jetons se gèrent dans l’onglet **Jetons** du service.
+
 ## Régler le stockage
 
 Dans la fiche de fonction, ouvrir « Modifier le stockage ». Les données permanentes
@@ -143,8 +149,23 @@ est déjà retirée de la liste ; le message du serveur le précise.
 La commande de déploiement lit `P2_SERVERLESS_URL` et `P2_SERVERLESS_TOKEN`
 dans son environnement. Depuis le projet de fonctions, lancer
 `python3 -m adapter deploy --config serverless.yml --service UUID_DU_SERVICE`.
-Le nom du service doit correspondre au manifeste. Le jeton requiert Read et
-Create pour une première publication, Read et Update pour une mise à jour.
+Le nom du service doit correspondre au manifeste. Pour publier une fonction,
+le jeton requiert Read et Create pour sa première révision, Read et Update
+pour les suivantes.
+
+Les variables et secrets déclarés dans `provider` sont enregistrés dans le
+service ; les déclarations des fonctions définissent uniquement leurs surcharges.
+Modifier une catégorie commune exige Update sur le service. Une catégorie absente
+du provider conserve les valeurs du service ; une catégorie déclarée vide les
+retire. Dans une fonction, une clé à null retire sa surcharge et rétablit
+l’héritage. Les secrets ne figurent pas dans le plan ou le rapport.
+
+Le rapport distingue la configuration commune des publications individuelles.
+Si une fonction refuse son nouveau code, elle conserve son ancienne révision ;
+la configuration commune déjà appliquée reste utilisée. Corriger l’import puis
+relancer le déploiement. Un refus de modification commune arrête la commande
+avant toute publication de fonction.
+
 Le rapport distingue les fonctions publiées, refusées et celles dont l’issue
 est inconnue après une rupture réseau. Dans ce dernier cas, consulter le
 candidat indiqué avant de relancer. Les valeurs de configuration restent

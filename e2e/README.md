@@ -5,6 +5,36 @@ Ils n'importent pas les handlers, ne créent pas de serveur substitué et
 n'interceptent aucune réponse réseau. Le navigateur utilise la connexion SSO
 normale. Un accès absent est une erreur de prérequis, jamais un test ignoré.
 
+## Configuration commune du service
+
+`node e2e/service-configuration.mjs` exige la session SSO réelle de
+`.local/e2e/admin-session.json`. Ses treize groupes publient les handlers
+originaux de `qualification/artifacts/service-configuration.cjs` puis les
+invoquent par HTTPS dans Docker. Ils couvrent valeurs communes, surcharges,
+rotation pendant un appel, retrait d’une surcharge, droits de service, échec
+partiel, reprise d’une configuration aplatie, limites ASCII/Unicode et redémarrage
+du contrôle. Les ressources sont purgées par l’API publique ; le rapport conserve
+leurs UUID et les opérations de purge. Un prérequis absent fait échouer le banc.
+
+La [preuve SLS-031](../docs/evidence/service-configuration-dev-2026-11-08.json)
+recoupe les empreintes avant/après chaque campagne. Rejouer en série depuis la
+racine : `node e2e/service-configuration.mjs`, `python3 -B e2e/adapter.py`,
+`python3 -B e2e/adapter-deploy-public.py`, `node e2e/adapter-deploy.mjs`,
+`node e2e/deployments.mjs`, `node e2e/control-admin.mjs`,
+`node e2e/control-ui.mjs`, `node e2e/manual-ui.mjs`,
+`node e2e/function-storage.mjs`, puis `node e2e/public-invocations.mjs`.
+Le client de refus public requiert `QUALIFICATION_SYNTHETIC_SECRET`, une valeur
+synthétique privée de qualification fournie au processus. Il ne doit pas recevoir
+de secret métier. Cette suite compte 153 groupes ; les images de CLI sont ensuite
+construites et ses commandes `test` et `deploy-public-test` rejouent 38 groupes
+dans le SPARK, selon [adapter/README](../adapter/README.md).
+
+Les deux fonctions ciblées sont recoupées au repos par
+`storage-console-inspect.py`, avec le mapping exact namespace → UUID des fonctions.
+La preuve lie aussi les 25 fichiers Python/migrations du contrôle et les cinq
+modules CLI embarqués à leurs sources. Le manuel est relu depuis l’accueil et
+son empreinte est comparée à `docs/manual.md` ; ses 39 paragraphes sont vérifiés.
+
 ## Stockage public et manuel
 
 Les archives antérieures au registre ont leur [contrat de banc](../docs/STORAGE_LEGACY_PROOF.md).

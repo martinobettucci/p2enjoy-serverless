@@ -16,6 +16,9 @@ Les variantes de `artifacts/` sont des modules originaux destinés au vrai
 chargeur de plateforme : ESM, CommonJS, dépendance YAML et défauts d'import
 intentionnels. `invoke.cjs` et `invoke.mjs` ajoutent les handlers d’invocation,
 les gros corps et les pannes réellement déclenchées dans Docker.
+`service-configuration.cjs` expose des valeurs publiques et une empreinte de
+secret pour qualifier les valeurs communes du service et les surcharges par
+la passerelle réelle ; la valeur secrète n’est pas renvoyée.
 `volume-operations.cjs` écrit, relit, supprime et sature réellement les volumes
 /data et /cache ; il conserve l’errno Linux EDQUOT (-122), que Node expose
 actuellement sous code UNKNOWN. Leur campagne se lance séparément selon

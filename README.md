@@ -8,6 +8,10 @@ sont disponibles dans **[qualification/](qualification/README.md)**, avec
 handlers, manifeste `serverless.yml`, Docker, tests et commandes d'exploitation.
 L'[adaptateur](adapter/README.md) prépare les plans, archives ZIP et publications
 HTTPS via sa commande `deploy`, dont les sept groupes authentifiés passent. La
+configuration commune du manifeste est conservée dans le service, avec uniquement
+les surcharges dans les fonctions. Cette évolution et ses régressions passent
+191 groupes en série sur DEV, avec 21 captures relues :
+[preuve de configuration commune](docs/evidence/service-configuration-dev-2026-11-08.json). La
 validation Node dans Docker est disponible dans [runtime/](runtime/README.md),
 avec 36 scénarios réels réussis. Les routes de publication, d'historique et de
 rollback sont déployées en DEV ; onze groupes authentifiés passent :
@@ -249,4 +253,5 @@ effacement de code par le nettoyage général malgré une purge bloquée ; le
 correctif réserve ces artefacts au résolveur de purge. Cinq groupes historiques
 et de restauration, neuf groupes de panne/validation et huit du manuel passent
 sur l’image corrigée : 22 groupes, zéro échec/skip, douze captures relues.
-Restent l’intégration à la suite commune, les régressions élargies et les notes SPARK.
+Restent l’intégration à la suite commune et les régressions élargies. Les trois
+notes SPARK actualisées ont été proposées le 8 novembre.

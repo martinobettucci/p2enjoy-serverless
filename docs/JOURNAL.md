@@ -2301,3 +2301,63 @@ défaut est reproduit : dix groupes passent puis une variable commune entrant
 en collision avec un secret local est acceptée à 200 au lieu de 422. La campagne
 purge ensuite ses deux fonctions. Décision : partager la fusion existante du
 déploiement entre gestion et moteur, et contrôler côté CLI les valeurs connues.
+
+### SLS-031 — Correction et qualification finale
+
+Le contrôle partage désormais la fusion entre gestion, validation et moteur.
+La configuration de service vérifie toutes ses fonctions dans la transaction ;
+les créations/modifications vérifient aussi leur résultat avant et après une
+préparation de stockage. Le remplacement explicite des secrets conserve le
+mode d’édition partiel existant par défaut.
+
+Le contrôle de taille de la CLI a été complété après une reproduction Unicode :
+la requête UTF-8 tenait dans la limite mais son JSON échappé de bootstrap la
+dépassait. L’essai avait modifié le service et créé un brouillon avant refus.
+La preuve avant correction conserve cette observation et sa purge. Les deux
+représentations sont maintenant bornées avant mutation.
+
+Treize groupes ciblés passent : provider au service, surcharges, rotation
+pendant un appel admis, droits, retraits, échec partiel, reprise d’un ancien
+déploiement aplati, limites et vrai redémarrage. Les régressions et clients
+Docker portent la série finale à 191 groupes sur douze campagnes, zéro échec
+et zéro skip. Les 165 sources sont recoupées entre commandes ; les images
+contiennent les 25 fichiers Python/migrations et les cinq modules CLI attendus.
+Les deux fonctions ciblées et onze répertoires d’artefacts sont purgés,
+les réservations sont à zéro et aucun conteneur de l’installation ne reste.
+
+Les campagnes intermédiaires restent distinctes de cette série finale : un
+oracle utilisait LOCAL_ONLY alors que le handler lit LOCAL_LABEL ; le lanceur
+local omettait d’abord le marqueur synthétique du refus public puis interprétait
+à tort les perturbations volontaires du rapport stockage comme des erreurs UI.
+Ces défauts de banc ont été corrigés ; la série finale a été intégralement
+rejouée sur l’état figé, avec des noms de fonctions décrivant leur usage.
+
+La revue en lecture seule a confirmé les corrections de fusion, taille Unicode
+et ordre d’application, sans nouveau défaut produit. Les 21 captures sont
+inspectées, dont sept images du manuel strictement identiques à celles déjà
+relues. Le guide rendu comporte treize chapitres et 39 paragraphes conformes
+à sa source ; les textes communs sont lisibles sur ordinateur et mobile.
+La preuve complète est `evidence/service-configuration-dev-2026-11-08.json`.
+
+Les trois notes de cellule ont été actualisées et proposées dans leurs voisins
+`.?`, après comparaison aux notes actives et vérification de propositions vides
+de contenu. Leurs empreintes sont recoupées ; leur adoption reste du ressort
+du registre. Aucune variable, secret, route ni migration n’a été ajouté.
+L’interface d’adresses multi-domaines reste l’unité SLS-066.
+
+### SLS-031 — Issue de la vérification et banc résiduel
+
+Le vérificateur en lecture seule confirme les 191 groupes, leur ordre sans
+chevauchement, fraîcheur, empreintes, images et nettoyages. Les états Git avant
+et après sa mission sont identiques. Il relève une lacune de couverture : le
+nouvel état `service_configuration = unknown` n’a pas été provoqué par une vraie
+perte de réponse de mutation commune. SLS-031 reste donc ouverte ; les 191
+groupes constituent un checkpoint et ne prouvent pas ce parcours.
+
+Le contrat décrit le banc résiduel avant son implémentation : observation native
+du contrôle réel, puis SIGKILL avant traitement ou après commit mais avant
+émission de réponse, garde indépendante et reprise du conteneur original.
+La CLI doit rapporter l’issue inconnue, arrêter les publications et ne rien
+rejouer automatiquement. Une relance explicite doit fonctionner ensuite.
+Les outils strace, ss, nsenter, nft, tc et ip existent dans le SPARK ; ses
+capacités natives ont été relevées. Ce relevé n’est pas la preuve du banc.
