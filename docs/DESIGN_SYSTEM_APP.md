@@ -148,8 +148,8 @@ Le catalogue global de fonctions devient l’entrée opérationnelle ; namespace
 et services donnent leur contexte aux objets. La navigation principale conserve
 des destinations nommées, dont favoris et monitoring. Les facettes de fonction
 intègrent progressivement édition du code, client HTTP et journaux corrélés.
-Ces changements sont planifiés ; l’accueil actuellement déployé reste celui
-des namespaces.
+Le catalogue SLS-067 est qualifié en DEV avec l’accueil Fonctions ;
+les autres changements restent planifiés.
 
 Recherche et filtres appartiennent à la liste qu’ils affectent. Les liens
 conservent leur contexte au retour d’une fiche. Favoris et sélection de masse
@@ -230,7 +230,7 @@ Le catalogue de stockage affiche aussi des archives historiques ; son total
 ne représente pas les seules fonctions du replay. Les limites de routes,
 source inaccessible et pagination du catalogue d’adresses restent ouvertes.
 
-## Catalogue global SLS-067 en réalisation
+## Catalogue global SLS-067 qualifié
 
 [FUNCTION_CATALOGUE](FUNCTION_CATALOGUE.md) ajoute Fonctions en tête de la
 navigation, avec table sémantique, recherche et filtres locaux à la liste.
@@ -239,9 +239,32 @@ recherchée et paginée, avec un seul engagement Appliquer ; ils suivent le §6.
 Les tableaux larges défilent dans leur conteneur, les noms complets reviennent
 à la ligne. Les états chargement/vide/erreur, les totaux, la page et le focus
 sont explicites. La query de retour accompagne les liens des six facettes.
-Ce parcours reste à implémenter et à qualifier ; les preuves existantes
-décrivent encore l’accueil Namespaces.
+API et console sont construites, déployées et qualifiées en DEV. Les preuves
+antérieures décrivent encore leur accueil Namespaces historique.
 
 La table conserve une largeur minimale locale de 720 px, exprimée par
 `--size-catalogue-table`, pour ses six colonnes ; les noms reviennent à la ligne
 et le défilement reste dans la table sur mobile, sans élargir la page.
+
+Le checkpoint initial de quatorze images reste distinct de la preuve active.
+La [qualification](evidence/function-catalogue-dev-2026-11-08.json) retient
+37 campagnes uniques / 489 groupes, six prérequis et deux époques de clients
+sur les mêmes sources produit/images. Les 98 images actives sont inspectées
+individuellement : sept de gestion, six de connexion, douze d’exécution,
+22 de publication, quatorze du manuel, sept d’adresses, seize de catalogue et
+quatorze de stockage. Le manuel servi correspond à 15 chapitres / 46 paragraphes.
+
+Les seize vues du catalogue comprennent huit vrais viewports, dont la table
+mobile à gauche, au milieu et à droite. Elles montrent les six colonnes lisibles
+à ces positions successives, et le dialog plein écran sans contrôle recouvert.
+Les autres colonnes partiellement recoupées aux bords ne sont pas présentées
+comme simultanément lisibles. Le contexte de retour et la page recalée après
+suppression relèvent aussi des assertions, car la pagination peut être sous
+le viewport d’une capture. Les images ne remplacent pas les preuves d’interaction,
+de réseau, de droits ou de nettoyage. Les vues après refus peuvent garder le
+cadre précédemment chargé ; les mesures absentes restent distinctes des zéros.
+
+Aucun défaut visuel bloquant confirmé. La fiche d’archive Purgée porte encore
+le titre Archives conservées ; cette remarque mineure est suivie dans SLS-075.
+Les totaux d’archives incluent l’historique et ne représentent pas seulement
+les jeux de cette preuve. Les modes pilote et versions par hash restent planifiés.

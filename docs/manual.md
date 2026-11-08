@@ -15,6 +15,31 @@ le SSO lelabs ; le compte doit posséder les rôles `verified` et `admin`.
 Un refus de connexion revient à l'accueil avec son motif. La session de console
 expire au plus tard après huit heures ; la déconnexion la ferme immédiatement.
 
+## Retrouver une fonction
+
+Après connexion, **Fonctions** présente le catalogue de vos services. La recherche
+porte sur les noms et identifiants de fonction, service et namespace, le handler
+et les descriptions des namespaces et services. La casse et les accents ne
+changent pas les résultats. Plusieurs mots doivent tous être présents ; ils
+peuvent appartenir à des champs différents. La recherche accepte huit mots et
+200 caractères ; `%` et `_` sont recherchés littéralement. Variables, secrets,
+code et journaux ne sont pas recherchés dans ce catalogue.
+
+Choisir un **Namespace** ou un **Service** ouvre sa sélection : rechercher,
+parcourir les pages de cinq choix, sélectionner puis **Appliquer**. Choisir
+un autre namespace retire le filtre de service précédent. **État** distingue
+brouillon et fonction déployée ; **Trier par** classe par nom ou modification.
+Le total et les pages de 25 fonctions portent sur tous les résultats des
+filtres. Le contexte de service et namespace distingue les noms identiques.
+
+L’adresse conserve la recherche, les filtres, le tri et la page. Elle peut être
+partagée ou rechargée. Ouvrir une fonction conserve **Revenir au catalogue**
+dans ses différentes facettes. Le retour retrouve la liste filtrée ; si une
+suppression a vidé sa dernière page, la liste revient à une page disponible.
+**Réinitialiser les filtres** retrouve la liste générale. **Actualiser** relit
+le serveur ; une erreur de consultation retire les anciennes lignes et propose
+de réessayer. **Namespaces** reste l’entrée pour créer les espaces et services.
+
 ## Organiser les fonctions
 
 Depuis **Namespaces**, créer un namespace puis ouvrir sa fiche. Créer un service

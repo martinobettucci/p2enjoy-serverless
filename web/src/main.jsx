@@ -1,13 +1,16 @@
 // @spec docs/DESIGN_SYSTEM.md | docs/BACKLOG.md#sls-020 | docs/CONTROL.md#console-du-contrôle | docs/DESIGN_SYSTEM_APP.md
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#parcours-et-adresses | docs/DESIGN_SYSTEM_APP.md | docs/manual.md
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
-import {Archive, ArrowRight, BookOpen, FolderTree, Menu, X} from 'lucide-react';
+import {Archive, ArrowRight, BookOpen, FolderTree, Layers, Menu, X} from 'lucide-react';
 import {api,sessionToken} from './api';
 import {Confirm,ErrorMessage,Resource,useResource} from './ui';
 import {Namespace,Namespaces,Service} from './management';
 import {FunctionPage} from './function';
 import {UsageManual} from './manual';
 import {Archives,ArchiveDetail} from './storage';
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#parcours-et-adresses | docs/DESIGN_SYSTEM_APP.md
+import {FunctionCatalogue} from './catalogue';
 import './style.css';
 
 const brand = <div className="brand"><img src="/favicon.svg" alt=""/><div>P2Enjoy<small>Serverless</small></div></div>;
@@ -59,13 +62,17 @@ function Shell({user}) {
   const isManual = parts.length === 2 && parts[0] === 'console' && parts[1] === 'manual';
   // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#console-et-manuel | docs/DESIGN_SYSTEM_APP.md
   const isArchives = parts[0] === 'console' && parts[1] === 'archives' && parts.length <= 3;
-  let view = <Namespaces/>;
+  const isCatalogue=parts.length===0||(parts[0]==='console'&&parts[1]==='functions'&&parts.length===2);
+  const isNamespaceList=parts[0]==='console'&&parts[1]==='namespaces'&&parts.length===2;
+  const isHierarchy=parts[0]==='console'&&['namespaces','services'].includes(parts[1]);
+  let view = <FunctionCatalogue/>;
   if (isManual) view = <UsageManual/>;
   else if (isArchives) view = parts[2] ? <ArchiveDetail id={parts[2]}/> : <Archives/>;
+  else if (isNamespaceList) view = <Namespaces/>;
   else if (parts[0] === 'console' && parts[1] === 'namespaces' && parts[2]) view = <Namespace id={parts[2]}/>;
   else if (parts[0] === 'console' && parts[1] === 'services' && parts[2]) view = <Service id={parts[2]} tab={parts[3] || 'functions'}/>;
   else if (parts[0] === 'console' && parts[1] === 'functions' && parts[2]) view = <FunctionPage id={parts[2]} tab={parts[3]}/>;
-  else if (parts.length) view = <><h1>Page introuvable</h1><a href="/">Revenir aux namespaces</a></>;
+  else if (!isCatalogue) view = <><h1>Page introuvable</h1><a href="/console/functions">Revenir aux fonctions</a></>;
   return <><a className="skip-link" href="#main">Aller au contenu</a>
     {menu && <div className="nav-veil" onClick={closeMenu} aria-hidden="true"/>}
     <aside ref={sidebar} className={`sidebar ${menu ? 'visible' : ''}`} aria-label="Navigation principale" onKeyDown={event => {
@@ -78,7 +85,8 @@ function Shell({user}) {
       }
     }}>
       <div className="stack">{brand}<button className="close-nav" ref={closeButton} onClick={closeMenu}><X aria-hidden="true"/>Fermer le menu</button></div>
-      <nav><a href="/" aria-current={!isManual && !isArchives ? 'page' : undefined}><FolderTree aria-hidden="true"/>Namespaces</a>
+      <nav><a href="/console/functions" aria-current={isCatalogue||(parts[0]==='console'&&parts[1]==='functions') ? 'page' : undefined}><Layers aria-hidden="true"/>Fonctions</a>
+        <a href="/console/namespaces" aria-current={isHierarchy ? 'page' : undefined}><FolderTree aria-hidden="true"/>Namespaces</a>
         <a href="/console/archives" aria-current={isArchives ? 'page' : undefined}><Archive aria-hidden="true"/>Archives de fonctions</a>
         <a href="/console/manual" aria-current={isManual ? 'page' : undefined}><BookOpen aria-hidden="true"/>Manuel d’usage</a></nav>
       <footer><div><small>Compte connecté</small><p>{user.name}</p></div>

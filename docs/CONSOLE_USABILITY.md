@@ -190,8 +190,10 @@ révision. Les dates, filtres et liens permettent de partager le même diagnosti
 ## Livraison et preuves
 
 SLS-031 et SLS-065 sont qualifiées. Les URL SLS-066 sont déployées ; leurs
-preuves résiduelles de routes restent ouvertes. Le catalogue SLS-067 avance
-indépendamment de cette autorité externe, puis favoris, opérations en masse,
+preuves résiduelles de routes restent ouvertes. Le catalogue SLS-067 est
+qualifié : 37 campagnes uniques / 489 groupes, deux époques de clients sur les
+mêmes images, 98 captures inspectées. L’autorisation bornée de console du SPARK
+est reçue pour la prochaine campagne de routes. Puis favoris, opérations en masse,
 éditeur/client HTTP et journaux/monitoring. Cette progression ne clôture ni
 ne dispense les preuves restantes de SLS-066. Les vues de journaux et mesures
 existantes restent le socle des parcours intermédiaires.

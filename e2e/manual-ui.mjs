@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
+// @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md | docs/DESIGN_SYSTEM_APP.md
 // @verifies docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md#preuves-attendues | docs/CONSOLE_STORAGE.md#console-et-manuel
 import assert from 'node:assert/strict';
@@ -44,7 +46,7 @@ try {
   page = await context.newPage();page.on('pageerror',error => faults.push(error.name));
   await check('Accueil réel et accès au manuel par le clavier',async () => {
     await page.goto(base);
-    await page.getByRole('heading',{name:'Namespaces',exact:true}).waitFor();
+    await page.getByRole('heading',{name:'Fonctions',exact:true}).waitFor();
     const link = page.getByRole('link',{name:'Manuel d’usage',exact:true});
     await link.focus();await page.keyboard.press('Enter');
     await page.waitForURL(base+'/console/manual');
@@ -84,6 +86,7 @@ try {
     await page.waitForURL(base+'/console/manual');
     await page.getByRole('heading',{name:'Manuel d’usage',exact:true}).waitFor();
     assert.equal(await page.evaluate(() => scrollY),0);await fits();await capture('desktop');
+    await chapter('Retrouver une fonction');await fits();await capture('catalogue-desktop');
     await chapter('Donner un accès à un service');await fits();await capture('rights-desktop');
     await chapter('Consulter et vider le cache');await fits();await capture('cache-desktop');
     await chapter('Consulter les archives et les purger');await fits();await capture('archives-desktop');
@@ -97,6 +100,9 @@ try {
     await page.getByRole('heading',{name:'Manuel d’usage',exact:true}).waitFor();
     assert(await page.evaluate(() => !document.querySelector('.shell').inert && getComputedStyle(document.body).overflow !== 'hidden'));
     await fits();await capture('mobile');
+    await chapter('Retrouver une fonction');await fits();await capture('catalogue-mobile');
+    const cataloguePosition=await page.evaluate(()=>scrollY);
+    await page.mouse.wheel(0,500);await page.waitForFunction(previous=>scrollY>previous,cataloguePosition);await fits();await capture('catalogue-return-mobile');
     await chapter('Donner un accès à un service');await fits();await capture('rights-mobile');
     await chapter('Publier le code avec l’adaptateur');await fits();await capture('command-mobile');
     await chapter('Consulter et vider le cache');await fits();await capture('cache-mobile');

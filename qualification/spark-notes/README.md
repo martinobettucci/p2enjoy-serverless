@@ -29,7 +29,7 @@ La publication de code conserve côté serveur les ressources, variables, secret
 
 La qualification `python3 -B e2e/execution-suite.py --scope publication` passe 18 campagnes en série et 312 groupes réels, sans échec ni cas ignoré. Elle réunit moteur et console sans répéter les campagnes communes. La preuve `docs/evidence/publication-console-dev-2026-11-07.json` recoupe sources, image, rapports frais, captures relues, archives et ressources nettoyées. Les pannes de nettoyage sont éprouvées sur les seules révisions de campagne, avec garde indépendante puis maintenance normale.
 
-Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses quatorze chapitres et 43 paragraphes viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.
+Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses quinze chapitres et 46 paragraphes viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.
 
 L’agent de stockage dispose maintenant d’effacements corrélés : reçu durable,
 répétition sans second vidage et reprise après erreur physique ou interruption.
@@ -122,3 +122,27 @@ gardes nettoyées. Aucun changement produit, migration, build du contrôle,
 variable, secret ou route appliquée. Le 403, les pannes du pilote et les branches
 de confidentialité/illisibilité du diagnostic restent non éprouvés. SLS-066
 reste ouverte. Les trois notes sont proposées, sans revendiquer leur adoption.
+
+
+## Catalogue des fonctions qualifié
+
+L’accueil authentifié est Fonctions, également disponible à /console/functions.
+La recherche porte sur les métadonnées des fonctions et de leurs parents ; les
+filtres Namespace/Service se cherchent et se paginent, avec état et tri. L’adresse
+conserve le contexte et la page lors des passages par les six facettes. Namespaces
+reste l’entrée de création et d’organisation, à /console/namespaces.
+
+La preuve docs/evidence/function-catalogue-dev-2026-11-08.json réunit
+37 campagnes uniques et 489 groupes réels : 447 conservés après vérification
+des mêmes sources produit/images, puis 42 réexécutés sur les clients corrigés.
+Les deux époques 196/197 sources, les essais incomplets et les six prérequis
+restent distincts. Les 98 captures actives sont inspectées ; le manuel servi
+correspond à 15 chapitres et 46 paragraphes. Les 91 fonctions suivies sont
+purgées dans 23 namespaces, quinze configurations de service effacées et les
+restaurations historiques recoupées. La référence conserve identité et démarrage.
+
+Le titre ambigu d’une fiche déjà purgée est suivi dans SLS-075. Le catalogue
+est qualifié ; favoris, lots, édition, client HTTP et versions par hash restent
+au backlog. SLS-066 poursuit ses preuves de domaines : autorisation de console
+du seul SPARK reçue, alias proposé, aucun changement de route appliqué ici.
+Les trois notes sont proposées sans revendiquer leur adoption.

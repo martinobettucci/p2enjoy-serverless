@@ -390,11 +390,15 @@ nettoyées ; sa barrière manquée reste de cause non prouvée. Aucun code produ
 schéma ou réglage n’est modifié ; les notes actualisées sont reproposées.
 Le 403 et les pannes du pilote/diagnostic restent hors de cette preuve.
 
-## Catalogue global en réalisation
+## Catalogue global qualifié
 
 SLS-067 suit [FUNCTION_CATALOGUE](FUNCTION_CATALOGUE.md) : lecture administrateur
 des métadonnées existantes, recherche Unicode avant pagination dans un snapshot
 SQLite, normalisation par fonction locale à cette connexion et sélecteurs de
-parents paginés. Aucune migration ni dépendance. La console prépare un accueil
+parents paginés. Aucune migration ni dépendance. La console utilise l’accueil
 Fonctions et un retour de catalogue par query validée, sans stockage client.
-API, interface, manuel et preuves restent à livrer ensemble avant clôture.
+La [preuve](evidence/function-catalogue-dev-2026-11-08.json) retient 37 campagnes
+uniques / 489 groupes et six prérequis, avec 447 groupes conservés aux clients
+inchangés puis 42 réexécutés. Les deux époques de sources sont distinctes et
+les images produit/CLI restent identiques. Les 98 captures, le manuel 15/46,
+les 91 fonctions suivies purgées et les ressources libérées sont recoupés.

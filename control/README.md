@@ -245,3 +245,20 @@ passe 35 campagnes / 467 groupes sans échec/skip, avec six prérequis distincts
 186 sources avant/après chaque phase et les 26 fichiers embarqués recoupés.
 La preuve native du Host est acquise sur la boucle locale ; elle ne qualifie
 pas un alias public. Aucun nouveau déploiement applicatif pour ce replay.
+
+## Catalogue global qualifié
+
+SLS-067 ajoute les lectures administrateur `/api/functions`,
+`/api/catalogue/namespaces` et `/api/catalogue/services` : recherche avant
+pagination dans les métadonnées publiques, filtres croisés et tris stables.
+Le [contrat](../docs/FUNCTION_CATALOGUE.md) précise les bornes et l’authentification.
+Aucune migration, variable ou dépendance nouvelle. L’image est construite et
+déployée sur DEV, avec 27 fichiers Python/migrations embarqués recoupés.
+Les huit groupes API et quatorze navigateur passent dans la
+[preuve SLS-067](../docs/evidence/function-catalogue-dev-2026-11-08.json), avec
+les régressions : 37 campagnes uniques / 489 groupes et six prérequis distincts.
+Les 447 groupes aux clients inchangés sont conservés avec leurs rapports et
+empreintes ; 42 sont réexécutés après correction des seuls clients de preuve.
+Les sources produit et images restent identiques dans les deux époques.
+Le recoupement lie les 27 fichiers embarqués, quatre fichiers web HTTPS,
+91 fonctions purgées et les variables/secrets de quinze services effacés.

@@ -4,6 +4,8 @@
 # @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
 # @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
+# @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
+# @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 """Serial DEV qualification with fresh reports bound to sources and deployed image."""
 import argparse
 import hashlib
@@ -35,6 +37,7 @@ def source_hashes():
     # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
     files += [ROOT/name for name in ['docs/INVOCATION_URLS.md','adapter/Dockerfile','adapter/Dockerfile.dockerignore',
                                     'adapter/compose.spark.yml','adapter/dev.sh','qualification/package.json']]
+    files += [ROOT/name for name in ['docs/FUNCTION_CATALOGUE.md','docs/CONSOLE_USABILITY.md','docs/EXECUTION.md']]
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
 def metadata(path):
@@ -104,6 +107,7 @@ def verify_report(name,path,is_remote,expected_hash):
     # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
     expected.update({'invocation-urls':8,'invocation-urls-ui':6,'service-transport':5,'service-configuration':13,
                      'adapter-docker':24,'adapter-public-docker':14})
+    expected.update({'function-catalogue-api':8,'function-catalogue-ui':14})
     checks=result.get('checks',result.get('results'))
     assert isinstance(checks,list) and len(checks)==expected[name],'Nombre de groupes inattendu'
     if name=='login-ui':assert all(isinstance(row,str) and row for row in checks)
@@ -116,6 +120,7 @@ def verify_report(name,path,is_remote,expected_hash):
     if name=='publication-ui':assert result['faults']==[]
     if name=='storage-console-ui':assert result['faults']==[]
     if name=='invocation-urls-ui':assert result['faults']==[]
+    if name=='function-catalogue-ui':assert result['faults']==[]
     return len(checks)
 
 
@@ -143,13 +148,15 @@ def main():
     # @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
     # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--scope',choices=('engine','console','publication','storage','storage-console-focused','storage-console','invocation-urls'),default='engine')
+    parser.add_argument('--scope',choices=('engine','console','publication','storage','storage-console-focused','storage-console','invocation-urls','function-catalogue'),default='engine')
     scope=parser.parse_args().scope
     report={'engine':REPORT,'console':ROOT/'.local/e2e/console-execution-regressions.json','publication':ROOT/'.local/e2e/publication-regressions.json',
             'storage':ROOT/'.local/e2e/storage-discard-regressions.json',
             'storage-console-focused':ROOT/'.local/e2e/storage-console-focused.json',
             'storage-console':ROOT/'.local/e2e/storage-console-regressions.json',
-            'invocation-urls':ROOT/'.local/e2e/invocation-urls-regressions.json'}[scope]
+            'invocation-urls':ROOT/'.local/e2e/invocation-urls-regressions.json',
+            'function-catalogue':ROOT/'.local/e2e/function-catalogue-regressions.json'}[scope]
+    extended=scope in ('invocation-urls','function-catalogue')
     console_cases=[
         next(row for row in CASES if row[0]=='public'),
         ('login-ui',['node','e2e/login-ui.mjs'],'.local/e2e/login-ui.json',False),
@@ -171,7 +178,7 @@ def main():
             *[next(row for row in CASES if row[0]==name) for name in ('managed-storage','function-storage','public-invocations')],
         ]
     if scope=='storage':cases=storage_cases
-    storage_console=scope in ('storage-console-focused','storage-console','invocation-urls')
+    storage_console=scope in ('storage-console-focused','storage-console','invocation-urls','function-catalogue')
     if storage_console:
         focused=[
             (name,['node','e2e/'+name+'.mjs'],'.local/e2e/'+name+'.json',False)
@@ -183,15 +190,18 @@ def main():
         if scope=='storage-console-focused':cases=focused
         else:
             extra=[]
-            if scope=='invocation-urls':
+            if extended:
                 extra=[(name,['node','e2e/'+name+'.mjs'],'.local/e2e/'+name+'.json',False)
                        for name in ('service-transport','service-configuration','invocation-urls','invocation-urls-ui')]
                 extra += [(name,remote(['bash',REMOTE+'adapter/dev.sh',action]),'adapter/reports/'+filename,True)
                           for name,action,filename in [('adapter-docker','test','adapter.json'),
                                                        ('adapter-public-docker','deploy-public-test','adapter-deploy-public.json')]]
+                if scope=='function-catalogue':
+                    extra += [(name,['node','e2e/'+name+'.mjs'],'.local/e2e/'+name+'.json',False)
+                              for name in ('function-catalogue-api','function-catalogue-ui')]
             union=CASES+console_cases+extra+storage_cases+focused
             cases=list({row[0]:row for row in union}.values())
-            if scope=='invocation-urls':assert len(cases)==35
+            if extended:assert len(cases)==(37 if scope=='function-catalogue' else 35)
     records=[];prerequisites=[];baseline=None;adapter_baseline=None
     def save(done=False):
         temporary=report.with_suffix('.tmp')
@@ -231,8 +241,12 @@ def main():
                 assert all(row['embedded_sources']==expected for row in value['images'].values())
                 adapter_baseline={name:row['image'] for name,row in value['images'].items()}
             elif name=='storage-console-physical':
-                counts=(10,32) if scope=='invocation-urls' else (6,24)
+                counts=(10,32) if extended else (6,24)
                 assert value['physical']['completed'] and (value['campaign_count'],value['function_count'])==counts
+                if scope=='function-catalogue':
+                    assert value['total_namespaces']==23 and value['total_functions']==91
+                    assert set(value['catalogue'])=={'function-catalogue-api','function-catalogue-ui'}
+                    assert all(v['physical']['completed'] and v['services_cleared'] for v in value['catalogue'].values())
             else:raise AssertionError('Prérequis inconnu')
         record['fresh_report_verified']=True;record['report_content_verified']=True;save()
     credentials=None
@@ -240,11 +254,11 @@ def main():
         credentials=private_credentials()
         execute('dev-sso-sessions',['node','e2e/dev-sso-sessions.mjs'],'.local/e2e/dev-sso-sessions.json',False,count=False,private_input=credentials)
         execute('storage-legacy-build',['python3','-B','e2e/storage-legacy-build.py'],'.local/e2e/storage-legacy-build.json',False,count=False)
-        if scope=='invocation-urls':
+        if extended:
             execute('invocation-url-adapter-build',['python3','-B','e2e/invocation-url-adapter-build.py'],
                     '.local/e2e/invocation-url-adapter-build.json',False,count=False)
     for name,command,path,is_remote in cases:
-        if scope=='invocation-urls' and name=='service-transport':
+        if extended and name=='service-transport':
             execute('dev-sso-invocation-sessions',['node','e2e/dev-sso-sessions.mjs','--for-invocation-urls'],
                     '.local/e2e/dev-sso-invocation-sessions.json',False,count=False,private_input=credentials)
         if storage_console and name=='storage-decision-recovery':
@@ -254,8 +268,9 @@ def main():
     credentials=None
     if storage_console:
         execute('storage-console-physical',['python3','-B','e2e/storage-suite-inspect.py',str(report.relative_to(ROOT))],
-                '.local/e2e/invocation-urls-physical.json' if scope=='invocation-urls' else '.local/e2e/storage-console-physical.json',False,count=False)
+                '.local/e2e/function-catalogue-physical.json' if scope=='function-catalogue' else '.local/e2e/invocation-urls-physical.json' if extended else '.local/e2e/storage-console-physical.json',False,count=False)
     if scope=='invocation-urls':assert len(records)==35 and sum(row['passed_groups'] for row in records)==467 and len(prerequisites)==6
+    if scope=='function-catalogue':assert len(records)==37 and sum(row['passed_groups'] for row in records)==489 and len(prerequisites)==6
     save(True)
 
 if __name__=='__main__':main()

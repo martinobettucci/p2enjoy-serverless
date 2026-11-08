@@ -1,5 +1,42 @@
 # Qualification de la plateforme
 
+## Catalogue global SLS-067 qualifié
+
+`node e2e/function-catalogue-api.mjs` passe huit groupes avec 32 fonctions,
+recherche globale, filtres, droits, publication A/B, invocation Docker et rollback.
+`node e2e/function-catalogue-ui.mjs` passe quatorze groupes avec un jeu de 27
+fonctions, départ de l’accueil et créations par la gestion. Ses seize prises
+de vue comprennent la table mobile à gauche, au milieu et à droite.
+Les nettoyages et les variables/secrets des services sont recoupés physiquement.
+
+`python3 -B e2e/execution-suite.py --scope function-catalogue` prépare le SSO par
+stdin privée et lance le parcours intégral : 37 campagnes, 489 groupes attendus
+et six prérequis distincts. Les anciens clients rejoignent Namespaces par
+la navigation après le nouvel accueil Fonctions ; le banc historique utilise
+toujours sa vraie image antérieure et son accueil Namespaces.
+
+La [preuve courante](../docs/evidence/function-catalogue-dev-2026-11-08.json) est
+une continuation contrôlée, pas un succès rétroactif de la commande initiale.
+Le premier arrêt du canal privé reste séparé ; sa
+[correction ciblée](../docs/evidence/private-channel-lifecycle-dev-2026-11-08.json)
+passe onze groupes. Le second essai passe 31 campagnes / 461 groupes puis
+s’arrête sur l’ancien retour racine dans le client stockage UI ; ses sept
+groupes partiels, ses huit images et son nettoyage restent archivés.
+
+`python3 -B e2e/function-catalogue-completion.py` a conservé 30 campagnes aux
+clients inchangés (447 groupes), puis réexécuté les deux clients retouchés et
+les scénarios restants (42 groupes). Les 37 noms sont uniques, les images et
+sources produit identiques, les époques 196/197 explicites. Le pilote exige
+l’archive locale exacte et les écarts précis de son gel ; les mises à jour
+documentaires postérieures peuvent refuser sa réexécution. Pour une nouvelle
+qualification du dépôt livré, utiliser le scope intégral ci-dessus.
+
+Les six prérequis sont distincts des 489 groupes. Le collecteur garde trois
+jeux d’UUID bornés : 23 namespaces / 91 fonctions. Les 39 fonctions des jeux
+écartés sont recoupées séparément. Les 98 captures actives sont inspectées et
+le manuel compilé correspond à 15 chapitres / 46 paragraphes. Contrat détaillé :
+[FUNCTION_CATALOGUE](../docs/FUNCTION_CATALOGUE.md).
+
 Les clients de ce répertoire visent exclusivement le déploiement DEV réel.
 Ils n'importent pas les handlers, ne créent pas de serveur substitué et
 n'interceptent aucune réponse réseau. Le navigateur utilise la connexion SSO
@@ -393,9 +430,12 @@ Cette campagne exige la session SSO ; ses onze groupes passent, ainsi que les
 sept groupes CLI, dans la [preuve authentifiée](../docs/evidence/deployment-authenticated-dev-2026-11-06.json).
 Une fixture écrit réellement un secret avant d'échouer à l'import ; le client
 vérifie son expurgation et rejoint ses quatre uploads concurrents avant nettoyage.
-Les limites
-globales, l’expiration, la reprise après crash et les parcours CLI/UI complets
-restent des preuves distinctes à compléter et exécuter.
+Les plafonds globaux/de révisions et la reprise pendant réception/validation
+ont leur [complément](../docs/evidence/publication-recovery-dev-2026-11-06.json).
+La publication CLI/UI est qualifiée dans
+[SLS-063](../docs/evidence/publication-console-dev-2026-11-07.json), puis rejouée
+dans SLS-067. Les preuves résiduelles d’expiration, budget et nettoyage de
+SLS-030 restent distinctes au backlog.
 
 `adapter-deploy-public.py`, exécuté sur le SPARK par `bash adapter/dev.sh
 deploy-public-test`, appelle de vrais processus CLI pour les prérequis,

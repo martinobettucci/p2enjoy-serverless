@@ -1,8 +1,9 @@
 # Catalogue global des fonctions
 
-Contrat SLS-067, déployé en DEV et en qualification. La console affiche désormais
-l’accueil Fonctions ; cette mise en service ne clôture pas les preuves. SLS-066 reste ouverte
-pour ses preuves de routes ; ce catalogue ne dépend pas de leur modification.
+Contrat SLS-067, déployé et qualifié en DEV. La console affiche désormais
+l’accueil Fonctions ; le résultat et ses limites sont consignés ci-dessous.
+SLS-066 reste ouverte pour ses preuves de routes ; ce catalogue ne dépend pas
+de leur modification.
 
 ## Lecture et périmètre
 
@@ -174,3 +175,33 @@ aucun résultat incomplet ni ancien résultat du client retouché n’entre dans
 les 37 résultats actifs. Les nouveaux rapports sont frais sur le nouveau gel.
 La séquence nommée complète ne clôture l’unité qu’après inspection des 98 images,
 recoupement des ressources, documentation et revue finale.
+
+
+## Résultat qualifié et limites
+
+La [preuve DEV](evidence/function-catalogue-dev-2026-11-08.json) termine avec
+37 campagnes uniques et 489 groupes retenus, zéro échec/skip dans cet ensemble.
+La continuation conserve 30 campagnes aux clients inchangés (447 groupes) et
+réexécute sept campagnes (42 groupes). Les gels 196/197, les essais incomplets
+et l’ancien résultat positif remplacé restent explicites ; la commande
+monolithique arrêtée n’est pas déclarée réussie. Les six prérequis sont distincts.
+
+Les 98 captures sont inspectées. Les trois positions de table mobile montrent
+Fonction/Service, Namespace/Handler puis État/Modification sans débordement du
+document ; le dialog est lisible dans son vrai viewport. Le manuel compilé
+correspond à ses 15 chapitres et 46 paragraphes. Le relevé physique recoupe
+91 fonctions purgées dans 23 namespaces et quinze jeux variables/secrets de
+service vidés, avec restaurations historiques séparées. Les 39 fonctions
+des jeux écartés ont leur propre relevé de nettoyage. Contrôle/référence sains,
+référence inchangée, 27 fichiers embarqués et quatre fichiers web HTTPS identiques
+à l’image ; aucun nouveau schéma, secret, variable ou domaine appliqué.
+
+Trois lectures HTTPS du jeu réel de 32 fonctions actives mesurent 35,638 ms,
+20,198 ms et 24,150 ms, médiane 24,150 ms. Ces durées incluent réseau,
+authentification et décodage JSON ; elles ne constituent pas une mesure SQL
+isolée ni une preuve de performance à grande échelle.
+
+Le titre de fiche d’archive après purge reste une correction mineure SLS-075.
+Les preuves de routes, de TLS multi-domaines et de source perturbée restent
+propres à SLS-066 ; cette unité ne les clôture pas. Les mises à jour de statut
+documentaire postérieures au gel ont leurs empreintes de livraison séparées.

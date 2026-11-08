@@ -1,6 +1,9 @@
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
+// @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#console-et-domaine-canonique | docs/DESIGN_SYSTEM_APP.md
 // @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#qualification-réelle-et-autorité | docs/manual.md
 // Real console entry, creation/publication UI, native clipboard and Docker calls.
+import {enterNamespaces} from './console-navigation.mjs';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
 import {randomUUID,createHash} from 'node:crypto';
@@ -53,7 +56,7 @@ try{
   await writeFile(work+'/revision.json',JSON.stringify({name:'ui-one'}));
   await promisify(execFile)('python3',['-B','-c',"import sys,zipfile;from pathlib import Path;p=Path(sys.argv[1]);z=zipfile.ZipFile(p/'function.zip','w');[z.write(p/n,n) for n in ('handler.cjs','revision.json')];z.close()",work]);
   await check('Accueil normal, création UI et lien des adresses depuis le service',async()=>{
-    await page.goto(base);await page.getByRole('heading',{name:'Namespaces',exact:true}).waitFor();
+    await enterNamespaces(page,base);
     await page.getByRole('button',{name:'Créer un namespace',exact:true}).click();let dialog=page.getByRole('dialog');await dialog.getByLabel('Nom',{exact:true}).fill(prefix);
     namespace=await create('/api/namespaces',()=>dialog.getByRole('button',{name:'Créer',exact:true}).click());
     await page.getByRole('button',{name:'Créer un service',exact:true}).click();dialog=page.getByRole('dialog');await dialog.getByLabel('Nom',{exact:true}).fill('function-addresses');

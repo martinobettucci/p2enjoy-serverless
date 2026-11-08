@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
+// @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
 // @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
 // @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
@@ -31,7 +33,7 @@ async function signIn(browser,credentials,filename){
     await page.locator('input[type=password]').fill(credentials.password);
     await page.locator('input[type=submit],button[type=submit]').first().click();
     await page.waitForURL(base+'/**',{timeout:90000});
-    await page.getByRole('heading',{name:'Namespaces',exact:true}).waitFor();
+    await page.getByRole('heading',{name:'Fonctions',exact:true}).waitFor();
     const response=await context.request.get(base+'/api/session');assert.equal(response.status(),200);
     assert((await response.json()).authenticated);
     const state=await context.storageState();

@@ -1,4 +1,5 @@
 // @spec docs/DESIGN_SYSTEM.md | docs/BACKLOG.md#sls-020 | docs/CONTROL.md#gestion | docs/DESIGN_SYSTEM_APP.md
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#parcours-et-adresses | docs/DESIGN_SYSTEM_APP.md | docs/manual.md
 import React, {useState} from 'react';
 import {Plus, Copy, KeyRound} from 'lucide-react';
 import {api} from './api';
@@ -33,7 +34,7 @@ export function Namespace({id}) {
 function NamespaceView({row,reload}) {
   const [page, setPage] = useState(0), [mode,setMode] = useState(null);
   const services = useResource(`/api/namespaces/${row.id}/services?limit=${pageSize}&offset=${page * pageSize}`);
-  return <><nav className="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Namespaces</a><span>/</span><span>{row.name}</span></nav>
+  return <><nav className="breadcrumb" aria-label="Fil d’Ariane"><a href="/console/namespaces">Namespaces</a><span>/</span><span>{row.name}</span></nav>
     <div className="page-title"><div><h1>{row.name}</h1>{row.description && <p>{row.description}</p>}</div><button onClick={() => setMode('edit')}>Modifier le namespace</button></div>
     <Section title="Services" action={<button className="primary" onClick={() => setMode('create')}><Plus aria-hidden="true"/>Créer un service</button>}>
       <Resource resource={services}>{data => <>{!data.items.length ? <p className="empty">Aucun service dans ce namespace.</p> :
@@ -41,7 +42,7 @@ function NamespaceView({row,reload}) {
         <Pagination page={page} size={pageSize} count={data.items.length} change={setPage}/></>}</Resource>
     </Section>
     <Section title="Gestion du namespace"><Confirm label="Supprimer le namespace" message={`Supprimer « ${row.name} » ? Ses services doivent être supprimés au préalable.`}
-      action={async () => {await api(`/api/namespaces/${row.id}`,{method:'DELETE'}); location.assign('/');}}/></Section>
+      action={async () => {await api(`/api/namespaces/${row.id}`,{method:'DELETE'}); location.assign('/console/namespaces');}}/></Section>
     {mode && <DialogForm title={mode === 'edit' ? 'Modifier le namespace' : 'Créer un service'}
       initial={mode === 'edit' ? {name:row.name,description:row.description} : {name:'',description:''}} onClose={() => setMode(null)}
       onSubmit={async value => {if (mode === 'edit') {await api(`/api/namespaces/${row.id}`,{method:'PUT',headers:{'If-Match':String(row.updated_at)},body:value}); reload();}
@@ -59,7 +60,7 @@ function ServiceView({row,tab,reload}) {
   const [edit,setEdit] = useState(false);
   const tabs = {functions:'Fonctions',configuration:'Configuration',tokens:'Jetons',activity:'Activité'};
   const active = tabs[tab] ? tab : 'functions';
-  return <><nav className="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Namespaces</a><span>/</span><a href={url('namespaces',row.namespace_id)}>Services du namespace</a><span>/</span><span>{row.name}</span></nav>
+  return <><nav className="breadcrumb" aria-label="Fil d’Ariane"><a href="/console/namespaces">Namespaces</a><span>/</span><a href={url('namespaces',row.namespace_id)}>Services du namespace</a><span>/</span><span>{row.name}</span></nav>
     <div className="page-title"><div><h1>{row.name}</h1>{row.description && <p>{row.description}</p>}</div><button onClick={() => setEdit(true)}>Modifier le service</button></div>
     <nav className="tabs" aria-label="Service">{Object.entries(tabs).map(([key,label]) => <a key={key} href={url('services',row.id,key)} aria-current={active === key ? 'page' : undefined}>{label}</a>)}</nav>
     {active === 'functions' && <Functions service={row}/>}

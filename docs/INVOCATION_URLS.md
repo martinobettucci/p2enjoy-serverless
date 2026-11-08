@@ -123,9 +123,11 @@ mobile, erreurs, captures observées et manuel compilé avec sa source.
 
 Les preuves multi-domaines, retrait et absence exigent des changements normaux
 des vraies routes. Leur source n’est jamais éditée, remplacée ou simulée. Le
-contrat local actuel interdit les opérations de FORGE à l’agent : une action du
-propriétaire ou une autorisation bornée de la console du seul SPARK est nécessaire.
-La lecture locale et le développement indépendant continuent pendant cette étape.
+contrat local interdit les opérations de FORGE à l’agent. Le responsable a
+explicitement autorisé le 8 novembre 2026 la gestion des routes du seul
+infra-serverless depuis sa console normale, selon le périmètre inscrit dans
+CLAUDE_PROJECT. Cette autorisation ne constitue pas une route appliquée ni une
+preuve TLS. Les opérations suivent la qualification courante SLS-067 en série.
 
 Plan borné proposé pour infra-serverless (10.77.0.24) : ajouter
 functions.lelabs.tech vers 18090 en TLS, après vérification de disponibilité du

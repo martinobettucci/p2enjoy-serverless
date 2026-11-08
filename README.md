@@ -55,7 +55,15 @@ Les évolutions demandées pour la console comprennent catalogue et recherche,
 favoris, opérations en masse, édition du code et du handler, client HTTP par
 fonction, journaux recherchables et monitoring historique. Leur
 [contrat de parcours](docs/CONSOLE_USABILITY.md) et les unités SLS-067 à SLS-073
-du backlog définissent la livraison ; ces extensions restent à implémenter.
+du backlog définissent la livraison. Le catalogue SLS-067 est déployé et qualifié
+en DEV : recherche globale, filtres paginés, tri et retour à la liste depuis les
+six facettes. Sa [preuve](docs/evidence/function-catalogue-dev-2026-11-08.json)
+réunit 37 campagnes uniques / 489 groupes réels, six prérequis distincts et
+98 captures inspectées. Elle distingue 447 groupes conservés aux clients
+inchangés et 42 réexécutés, avec deux époques de sources et les mêmes images.
+Les 91 fonctions suivies sont purgées dans 23 namespaces ; le manuel servi
+correspond à ses 15 chapitres et 46 paragraphes. Les autres extensions restent
+à implémenter.
 
 Le [versionnement par hash](docs/FUNCTION_VERSIONS.md), suivi dans SLS-074,
 complète l’historique et le rollback existants : déduplication des uploads

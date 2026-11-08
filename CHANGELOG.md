@@ -2,9 +2,15 @@
 
 ## [Non publié]
 
-- Catalogue global SLS-067 en réalisation : contrat API/console persisté,
-  recherche serveur, filtres paginés et contexte de retour. Aucune nouvelle
-  fonctionnalité annoncée déployée avant sa qualification.
+- Catalogue global SLS-067 qualifié en DEV : accueil Fonctions, recherche
+  serveur, filtres paginés, tri/état et contexte de retour dans les six facettes.
+  La preuve retient 37 campagnes uniques / 489 groupes réels, six prérequis
+  distincts et 98 captures inspectées : 447 groupes aux clients inchangés puis
+  42 réexécutés, deux époques explicites et mêmes sources produit/images.
+  91 fonctions suivies purgées dans 23 namespaces ; quinze jeux de variables/
+  secrets de services effacés ; manuel compilé à 15 chapitres et 46 paragraphes.
+  Les deux arrêts précédents sont conservés, sans succès rétroactif.
+  [Preuve](docs/evidence/function-catalogue-dev-2026-11-08.json).
 
 - Refus du catalogue après publication qualifié en DEV : CLI retenue avant sa
   sixième connexion, jeton révoqué par l’API, vrai 401 conservant publication

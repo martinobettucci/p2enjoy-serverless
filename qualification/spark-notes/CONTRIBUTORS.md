@@ -20,7 +20,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:1ef637d7b9f111f5a7324c99c99ff365e9e043ff3c28fed16d8f5946c045dd4a`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:2317812323104076be3511b602cafc07b3c6d09d064c92605d700603853c44fa` ; son image cliente E2E est `sha256:bb9965b48a6db60e24da61d9f2f081443d5b03e100081f7a6a4188ee3cb0395e`.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:7b52f630b7f071a9fc7659298039b7bfcfe3579ed6fb962ebf0a63db8259f490`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:738a2b89bafc5439c941400520f7f310bb66030ab06afb7b575a572e1047cb61` ; son image cliente E2E est `sha256:0850958b525f69a54b01ebbb290f705ea60ce8303cbed96a98b13589d731676b`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 
@@ -212,3 +212,33 @@ gardes nettoyées. Aucun changement produit, migration, build du contrôle,
 variable, secret ou route appliquée. Le 403, les pannes du pilote et les branches
 de confidentialité/illisibilité du diagnostic restent non éprouvés. SLS-066
 reste ouverte. Les trois notes sont proposées, sans revendiquer leur adoption.
+
+
+## Maintenir et qualifier le catalogue global
+
+Contrat : docs/FUNCTION_CATALOGUE.md ; lectures API dans app/catalogue.py et
+console dans web/src/catalogue.jsx. Aucune migration, dépendance, variable ou
+secret ajouté. Le contrôle embarque 27 fichiers Python/migrations recoupés.
+Les quatre fichiers web servis en HTTPS sont identiques aux octets de l’image.
+
+Depuis le dépôt du poste, python3 -B e2e/execution-suite.py --scope function-catalogue
+rejoue le parcours intégral : 37 campagnes, 489 groupes attendus et six
+prérequis distincts. La preuve courante conserve 30 campagnes (447 groupes)
+aux clients inchangés et sept réexécutées (42 groupes), sur les mêmes images.
+Le pilote function-catalogue-completion.py est borné à l’archive et aux écarts
+exacts du gel de cette preuve ; il ne remplace pas une nouvelle qualification
+si une source produit, fixture ou image change. Les statuts documentaires
+postérieurs ont leurs empreintes séparées.
+
+Les 98 captures actives sont inspectées, dont les trois positions de table
+mobile et le dialog plein viewport. Le manuel compilé vient de docs/manual.md :
+15 chapitres, 46 paragraphes, empreinte recoupée. Les collecteurs lisent trois
+jeux séparés d’UUID (10/32, 7/32, 6/27 namespaces/fonctions), sans relâcher leurs
+limites. Le nettoyage de 39 fonctions des résultats écartés reste distinct.
+Les deux arrêts précédents restent incomplets ; ils ne sont pas transformés
+en succès. La preuve du canal privé corrige seulement son client HTTP.
+
+Les configurations restent dans /etc/spark/env et /run/spark/secrets, avec
+/etc/spark monté readonly dans l’API. L’alias functions.lelabs.tech reste une
+proposition de route ; la console du seul SPARK est autorisée pour les essais
+suivants, sans administration de la FORGE. Ces notes restent des propositions.

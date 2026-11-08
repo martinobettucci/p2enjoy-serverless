@@ -501,31 +501,34 @@ et les pannes propres du pilote/diagnostic ne sont pas revendiqués.
 <a id="sls-067"></a>
 ## SLS-067 — Catalogue de fonctions et recherche globale
 
-Statut : [~] — API/console déployées ; 37 campagnes uniques / 489 groupes
-réussis en deux époques contrôlées, recoupements physiques terminés ;
-documentation et revue finale en cours avant clôture.
+Statut : [x] — API/console déployées et qualifiées ; 37 campagnes uniques /
+489 groupes réussis en deux époques contrôlées, recoupements physiques,
+documentation et revue finale terminés.
 
 Catalogue global, recherche serveur, filtres namespace/service/état, tri,
-pagination et contexte conservé dans l’URL. Contrat :
-[catalogue et recherche](CONSOLE_USABILITY.md#catalogue-et-recherche).
-Le [contrat détaillé](FUNCTION_CATALOGUE.md) fixe les API admin, les champs
-existants recherchés, la normalisation, les tris/bornes, les filtres paginés,
-l’accueil Fonctions et le retour URL depuis les six facettes. Aucun résultat
-anticipé ; SLS-066 conserve ses preuves résiduelles indépendantes.
-E2E : résultats au-delà de la première page, noms identiques dans plusieurs
-services, filtres combinés, recherche rapide sous vrai délai réseau, refus,
-navigation retour, clavier et mobile. Manuel et captures avec la livraison.
-La revue pré-build ajoute les cas explicites : recherche invalide corrigée
-vers la valeur déjà appliquée, focus après pagination des sélecteurs et contexte
-de retour vide conservé lors d’une redirection canonique. Les nettoyages des
-32 fonctions API et 27 fonctions UI sont physiquement recoupés séparément,
-avec leurs parents vides et configurations de service effacées. Les quatorze
-captures du checkpoint sont inspectées ; les prises de vue viewport et le
-défilement complet à droite restent à rejouer. Le scope commun prévu comporte
-37 campagnes / 489 groupes et six prérequis distincts. Le premier essai s’arrête
-après 101 groupes complets et dix groupes partiels sur le client du canal privé ;
-sa [correction ciblée](evidence/private-channel-lifecycle-dev-2026-11-08.json)
-passe onze groupes. Le replay complet reste nécessaire.
+pagination et contexte conservé dans l’URL. Le [contrat](FUNCTION_CATALOGUE.md)
+et la [preuve](evidence/function-catalogue-dev-2026-11-08.json) couvrent les
+API administrateur, le nouvel accueil et les retours depuis les six facettes.
+Recherche globale, Unicode/UUID/handler, filtres combinés, homonymes et tris
+stables, refus, vraie latence réseau, erreurs de saisie corrigées, historique,
+rechargement, suppressions et recalage, clavier/mobile sont éprouvés.
+
+La qualification retient 30 campagnes aux clients inchangés (447 groupes) et
+sept réexécutées (42), soit 37 uniques / 489 groupes, sans échec/skip dans cet
+ensemble. Six prérequis sont distincts. Les époques 196/197 et mêmes images
+produit/CLI sont recoupées ; les deux arrêts précédents et l’ancien résultat
+positif remplacé restent séparés, sans succès rétroactif. Le
+[correctif du client privé](evidence/private-channel-lifecycle-dev-2026-11-08.json)
+garde sa propre preuve de onze groupes.
+
+Les 98 captures sont inspectées, dont les trois positions de table à 390 px et
+le dialog plein viewport. Le guide compilé compte 15 chapitres et 46 paragraphes.
+91 fonctions suivies purgées dans 23 namespaces, quinze jeux variables/secrets
+de services vidés et restaurations historiques sont recoupés. Les 39 fonctions
+des jeux écartés ont leur relevé séparé. Sources produit, référence et configuration
+officielle inchangées ; 27 fichiers embarqués et quatre fichiers web HTTPS
+correspondent à l’image. La remarque de titre d’archive après purge est suivie
+dans SLS-075. SLS-066 conserve ses preuves indépendantes.
 
 <a id="sls-068"></a>
 ## SLS-068 — Favoris personnels persistants

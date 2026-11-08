@@ -1,7 +1,10 @@
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
+// @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-020 | docs/CONTROL.md#preuves | docs/DESIGN_SYSTEM_APP.md
 // @verifies docs/BACKLOG.md#sls-020 | docs/CONTROL.md#preuves | docs/DESIGN_SYSTEM_APP.md
 // Canonical UI paths on the real deployment using a real SSO admin session.
 import {purgeStorageArchive} from './storage-archives.mjs';
+import {enterNamespaces} from './console-navigation.mjs';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
@@ -33,8 +36,7 @@ async function api(path,method='GET',body,headers={}) {
 
 try {
   await check('Accueil authentifié depuis l’entrée normale',async () => {
-    await page.goto(base);
-    await page.getByRole('heading',{name:'Namespaces',exact:true}).waitFor();
+    await enterNamespaces(page,base);
     assert(await page.getByRole('button',{name:'Se déconnecter',exact:true}).isVisible());
     await screenshot('console-namespaces');
   });
@@ -79,7 +81,7 @@ try {
     await page.getByRole('button',{name:'Menu',exact:true}).click();
     await page.setViewportSize({width:1440,height:1000});
     await page.waitForFunction(() => !document.querySelector('.shell').inert && getComputedStyle(document.body).overflow!=='hidden');
-    assert(await page.getByRole('link',{name:'Namespaces',exact:true}).first().evaluate(element => document.activeElement===element));
+    assert(await page.getByRole('complementary',{name:'Navigation principale',exact:true}).getByRole('link',{name:'Fonctions',exact:true}).evaluate(element => document.activeElement===element));
     await page.getByRole('button',{name:'Modifier le namespace',exact:true}).click();
     await dialog.getByRole('button',{name:'Annuler',exact:true}).click();await gone();
   });
@@ -136,7 +138,7 @@ try {
     await dialog.getByRole('button',{name:'Annuler',exact:true}).click();await dialog.getByRole('button',{name:'Abandonner',exact:true}).click();await gone();
   });
   await check('Fonction : création, paramètres précis et stockage',async () => {
-    await page.getByRole('link',{name:'Fonctions',exact:true}).click();
+    await page.getByRole('navigation',{name:'Service',exact:true}).getByRole('link',{name:'Fonctions',exact:true}).click();
     await page.getByRole('button',{name:'Créer une fonction',exact:true}).click();
     await dialog.getByLabel('Nom',{exact:true}).fill(prefix+'-Handler');
     await dialog.getByLabel('Handler',{exact:true}).fill('src/handlers.echo');

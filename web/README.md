@@ -49,11 +49,11 @@ guide avec chaque comportement utilisateur, puis reconstruire la console.
 [preuve initiale](../docs/evidence/manual-console-dev-2026-11-07.json) précède la
 publication UI : 48 groupes, zéro échec/skip et 33 captures relues. La suite
 de console comprend désormais aussi les 21 groupes de publication.
-Le guide compte quatorze chapitres, dont le vidage du cache, la purge des
-archives et les adresses d’appel. La campagne courante recoupe son empreinte, ses chapitres,
-43 paragraphes, le tableau et la commande ; onze captures couvrent aussi
-ces deux chapitres sur ordinateur et mobile ; le chapitre Adresses d’appel
-possède aussi son viewport mobile dédié. La [qualification complète du stockage public](../docs/evidence/storage-console-dev-2026-11-08.json)
+Le guide courant compte quinze chapitres, dont Retrouver une fonction, le
+vidage du cache, la purge et les adresses d’appel. La campagne SLS-067 recoupe
+son empreinte, ses quinze chapitres, 46 paragraphes, le tableau et la commande.
+Quatorze captures du guide sont inspectées, dont trois vues du nouveau chapitre ;
+le chapitre Adresses d’appel possède aussi son viewport mobile dédié. La [qualification complète du stockage public](../docs/evidence/storage-console-dev-2026-11-08.json)
 recoupe ces huit groupes, dix parcours UI stockage, les régressions et leurs captures.
 La [preuve du correctif de purge](../docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
 rejoue ces huit groupes et ajoute une capture de lecture mobile du nouveau
@@ -80,3 +80,21 @@ recoupe 79 captures fraîches de l’ensemble des parcours : 61 observations
 visuelles et 18 identités SHA avec les références inspectées, sans défaut
 bloquant constaté. Le manuel servi correspond aux 14 chapitres et 43 paragraphes
 de sa source. Les limites d’observation sont précisées dans le design du produit.
+
+
+## Catalogue global qualifié
+
+L’accueil Fonctions et /console/functions présentent la table globale ;
+Namespaces possède sa destination /console/namespaces. Recherche temporisée,
+filtres recherchés/paginés, tri, état et page sont partageables dans la query.
+Le retour depuis une fiche traverse ses six facettes et se recale après une
+suppression. Les erreurs retirent les anciennes lignes ; une session admin
+reste obligatoire pour les trois lectures de catalogue.
+
+La [preuve SLS-067](../docs/evidence/function-catalogue-dev-2026-11-08.json)
+retient 37 campagnes uniques / 489 groupes réels et six prérequis : 447 groupes
+aux clients inchangés puis 42 réexécutés sur les mêmes sources produit/images.
+Deux époques de clients restent déclarées. Les 98 images sont inspectées, dont
+seize du catalogue avec les trois positions de table mobile et le dialog en
+viewport. Les noms complets restent lisibles sans élargir le document.
+La remarque mineure de titre d’archive après purge est suivie dans SLS-075.

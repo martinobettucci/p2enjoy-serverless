@@ -135,3 +135,27 @@ gardes nettoyées. Aucun changement produit, migration, build du contrôle,
 variable, secret ou route appliquée. Le 403, les pannes du pilote et les branches
 de confidentialité/illisibilité du diagnostic restent non éprouvés. SLS-066
 reste ouverte. Les trois notes sont proposées, sans revendiquer leur adoption.
+
+
+## Retrouver une fonction et ses adresses
+
+La console s’ouvre sur le catalogue Fonctions ; Namespaces ouvre la structure
+à /console/namespaces. Rechercher, choisir Namespace/Service puis Appliquer,
+filtrer l’état ou le tri. La query partageable conserve ces critères et la page ;
+Revenir au catalogue les retrouve depuis les six facettes d’une fonction.
+Le manuel d’usage affiché décrit ces parcours depuis sa source unique du dépôt,
+avec quinze chapitres et 46 paragraphes vérifiés dans l’application.
+
+GET /api/functions et les deux sélecteurs /api/catalogue/namespaces et
+/api/catalogue/services exigent une session administrateur. Un logiciel utilisant
+un jeton Read conserve sa liste GET /api/services/{id}/functions et le catalogue
+d’adresses GET /api/functions/{id}/invocation-urls dans sa portée. Le catalogue
+global ne recherche aucune variable, secret, source ni journal. L’invocation
+conserve son URL par UUID et X-Serverless-Token ; l’authentification métier
+Authorization reste transmise au handler.
+
+Preuve DEV : docs/evidence/function-catalogue-dev-2026-11-08.json, 37 campagnes
+uniques/489 groupes, deux époques de clients explicitement déclarées et mêmes
+images produit. 98 captures inspectées ; aucune nouvelle variable, secret,
+dépendance ou migration. Les routes restent celles de /etc/spark/routes ;
+functions.lelabs.tech est proposé, sans application dans cette livraison.

@@ -3141,3 +3141,41 @@ UI avant sa qualification. Aucun correctif n’est prétendu livré aujourd’hu
 L’entrée quitte le registre devenu vide, qui est supprimé. La remarque reste
 visible dans la preuve visuelle et le backlog, sans invalidation fictive de la
 purge réellement éprouvée.
+
+## 2026-11-08 — Catalogue global : continuation réussie et recoupement final
+
+La continuation bornée termine à zéro. Elle conserve les trente campagnes aux
+clients inchangés, soit 447 groupes, puis exécute sept campagnes / 42 groupes.
+L’ensemble actif contient 37 noms uniques et 489 groupes réussis, zéro échec
+et zéro skip ; les six prérequis sont distincts. Les deux époques 196/197
+restent explicites, avec les mêmes sources produit et images contrôle/CLI.
+Les deux arrêts précédents et l’ancien catalogue UI remplacé restent séparés.
+La commande monolithique initiale n’est pas requalifiée en réussite.
+
+Les 43 rapports bruts et le reçu de suite sont archivés par empreinte. Les
+98 images actives sont inspectées individuellement ; les vues gauche, milieu
+et droite complètent la lecture des six colonnes à 390 px. Le manuel compilé
+correspond à ses quinze chapitres et 46 paragraphes. Les trois changements
+indexés après qualification sont documentaires : CONSOLE_USABILITY,
+DESIGN_SYSTEM_APP et FUNCTION_CATALOGUE. Aucun code produit, client, fixture ou
+manuel n’a changé après le résultat positif.
+
+Le recoupement natif confirme 91 fonctions purgées dans 23 namespaces, quinze
+configurations de service vidées et les deux restaurations historiques. Les
+39 fonctions des jeux écartés ont un reçu séparé. Les 27 fichiers embarqués et
+les quatre ressources web obtenues en HTTPS correspondent à l’image ; les
+services sont sains, l’agent actif et le runtime de référence inchangé.
+La mesure de trois lectures HTTPS sur 32 fonctions donne 35,638 / 20,198 /
+24,150 ms, médiane 24,150 ms : réseau, authentification et JSON compris, sans
+prétention de mesure SQL isolée ni de passage à grande échelle.
+
+Livraison SPARK : aucune variable ni secret nouveau ; la seule route active
+reste serverless.lelabs.tech vers 18090 TLS. README.md, CONTRIBUTORS.md et
+INSTALL.md sont proposés séparément dans leurs voisins .?, avec les notes
+actives conservées. Le Compose courant correspond aux deux fichiers officiels
+de configuration ; aucune surcharge applicative n’est ajoutée. La preuve
+permanente est [function-catalogue-dev-2026-11-08.json](evidence/function-catalogue-dev-2026-11-08.json).
+La revue finale en lecture seule recoupe les rapports, sources, captures,
+reçus, installation et diff produit sans nouveau défaut bloquant. SLS-067 est
+clôturée dans ce changement cohérent. Aucun remote Git n’est configuré : le
+commit reste local. SLS-066 et SLS-075 restent ouvertes avec leurs propres critères.

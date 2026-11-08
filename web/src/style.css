@@ -14,6 +14,8 @@
   --radius-sm:8px; --radius-md:10px; --radius-lg:14px; --radius-pill:999px;
   --shadow-card:0 1px 3px rgb(0 0 0 / .06); --size-target:40px;
   --size-nav:240px; --size-content:1280px; --size-login:448px; --size-dialog:640px;
+  /* @spec docs/BACKLOG.md#sls-067 | docs/DESIGN_SYSTEM_APP.md#catalogue-global-sls-067-en-réalisation */
+  --size-catalogue-table:720px;
   --text-small:13px; --text-body:15px; --text-h3:16px; --text-h2:20px; --text-h1:26px;
   font-family:ui-sans-serif,system-ui,sans-serif; font-size:var(--text-body);
   color:var(--color-ink); background:var(--color-bg); line-height:1.55;
@@ -147,6 +149,27 @@ td {overflow-wrap:anywhere;}
 .invocation-url {overflow-wrap:anywhere; user-select:text;}
 .skip-link {position:fixed; top:var(--space-2); left:var(--space-2); transform:translateY(-150%); z-index:20; background:var(--color-surface); padding:var(--space-3);}
 .skip-link:focus {transform:none;}
+/* @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#parcours-et-adresses | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md */
+.catalogue-search {display:grid; gap:var(--space-4);}
+.catalogue-filters {display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-4);}
+.catalogue-filters .field>span {font-size:var(--text-small); color:var(--color-text-2);}
+.catalogue-filters button {justify-content:flex-start; text-align:left; overflow-wrap:anywhere; min-width:0;}
+.catalogue-options {list-style:none; margin:0; padding:0;}
+.catalogue-options li {border-top:1px solid var(--color-border); padding:var(--space-2) 0;}
+.catalogue-options .check {align-items:flex-start; overflow-wrap:anywhere;}
+.catalogue-options small {display:block;}
+.catalogue-options .check>span {min-width:0;}
+.catalogue-choice input[type=radio] {width:24px; min-height:24px; height:24px; flex:none; accent-color:var(--color-brand);}
+.catalogue-total {margin-bottom:var(--space-4);}
+.catalogue-table {min-width:var(--size-catalogue-table); table-layout:fixed;}
+.catalogue-table th {font-size:var(--text-small); color:var(--color-text-2); background:var(--color-bg);}
+.catalogue-table td {overflow-wrap:anywhere;}
+.catalogue-table td a {display:flex; align-items:center; min-height:var(--size-target);}
+.catalogue-table tbody tr:hover {background:var(--color-hover);}
+.catalogue-table time {font-variant-numeric:tabular-nums; font-size:var(--text-small);}
+.catalogue-back {margin-bottom:var(--space-4);}
+@media (max-width:767px) {.catalogue-filters {grid-template-columns:minmax(0,1fr);}}
+
 @media (max-width:1023px) {
   .manual-layout {grid-template-columns:minmax(0,1fr);}
   .manual-toc {margin-bottom:0;}

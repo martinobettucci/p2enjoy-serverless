@@ -616,3 +616,27 @@ Le premier essai incomplet reste distinct, avec deux fonctions et gardes
 nettoyées ; sa barrière manquée reste de cause non prouvée. Aucun code produit,
 schéma ou réglage n’est modifié ; les notes actualisées sont reproposées.
 Le 403 et les pannes du pilote/diagnostic restent hors de cette preuve.
+
+## Catalogue global SLS-067 en qualification
+
+Le nouveau build du contrôle et de sa console est déployé ; réseau, routes,
+deux env_file et montages conservés. Aucun nouveau schéma, secret ou variable.
+L’accueil authentifié devient Fonctions, Namespaces gardant une destination
+latérale explicite. La configuration et les volumes restent gérés par leurs
+commandes actuelles. L’image est
+`sha256:7b52f630b7f071a9fc7659298039b7bfcfe3579ed6fb962ebf0a63db8259f490`.
+Les deux services sont sains ; les 27 fichiers embarqués correspondent aux
+sources et la référence conserve son identité/image/démarrage. Sauvegarde
+SQLite native avant mise en service :
+`/srv/p2enjoy-serverless/state/backups/before-function-catalogue-1794163923159023391.sqlite3`,
+intégrité vérifiée, migrations 001 à 006.
+La [qualification](evidence/function-catalogue-dev-2026-11-08.json) retient
+37 campagnes uniques / 489 groupes et six prérequis, en deux époques de clients
+sur les mêmes sources produit/images. Les 98 captures sont inspectées ;
+91 fonctions suivies purgées dans 23 namespaces et quinze jeux de variables/
+secrets de services vidés. Les deux restaurations historiques et le nettoyage
+des 39 fonctions des jeux écartés sont séparés. Les deux services sont sains,
+la référence conserve son identité/démarrage et les quatre fichiers web servis
+en HTTPS correspondent à l’image. Le manuel affiché compte 15 chapitres et
+46 paragraphes, avec son empreinte compilée recoupée. Les trois notes actualisées
+sont proposées sans adoption ; env, secrets et routes officiels restent identiques.

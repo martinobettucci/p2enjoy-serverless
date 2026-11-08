@@ -28,6 +28,8 @@ from .invocation_routes import routes as invocation_routes,gateway_error
 from .network import forwarded_addresses
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md
 from .invocation_urls import routes as invocation_url_routes
+# @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md
+from .catalogue import catalogue_query, routes as catalogue_routes
 
 logger=logging.getLogger('p2enjoy.control')
 
@@ -97,6 +99,8 @@ app.include_router(invocation_routes(execution))
 app.include_router(storage_management.routes())
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#api-et-calcul-commun
 app.include_router(invocation_url_routes(database,identity,settings))
+# @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#lecture-et-périmètre
+app.include_router(catalogue_routes(database,identity))
 web_root=Path(__file__).parent.parent/'web'
 app.mount('/assets',StaticFiles(directory=web_root/'assets'),name='assets')
 
@@ -206,12 +210,19 @@ def canonical_entry(request,path):
     if len(hosts)!=1 or hosts[0].lower() not in expected:
         if path.startswith('/console/'):
             selected={}
-            try:parameters=parse_qsl(request.url.query,max_num_fields=32)
+            try:parameters=parse_qsl(request.url.query,max_num_fields=32,keep_blank_values=True)
             except ValueError:parameters=[]
             for name,value in parameters:
                 if name in ('deployment','operation'):
                     try:selected[name]=str(UUID(value))
                     except ValueError:pass
+                # @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#parcours-et-adresses
+                elif name=='catalogue':
+                    try:selected[name]=catalogue_query(value)
+                    except ValueError:pass
+            if path=='/console/functions':
+                try:selected.update(dict(parse_qsl(catalogue_query(urlencode([(k,v) for k,v in parameters if k!='catalogue'])))))
+                except ValueError:pass
             if selected:path+='?'+urlencode(selected)
         return RedirectResponse(settings.public_url+path,status_code=303)
     return None

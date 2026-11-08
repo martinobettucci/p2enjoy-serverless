@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#preuve-native-du-host-et-des-clients-de-panne
 # @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#preuve-native-du-host-et-des-clients-de-panne
+# @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#parcours-et-adresses
+# @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 """Operator HTTP client of the real DEV control; credentials only on stdin."""
 import http.client
 import json
@@ -62,6 +64,16 @@ def main():
     query = urlencode({'deployment': key, 'operation': key, 'return_to': 'https://untrusted.invalid'})
     expected = urlencode({'deployment': key, 'operation': key})
     checks.append((console + '?' + query, origin + console + '?' + expected))
+    # Empty and filtered catalogue contexts remain fixed-origin return queries.
+    for context in ('', urlencode({'q': 'Café same', 'service_id': key, 'sort': 'updated_desc', 'page': '2'})):
+        query = urlencode({'catalogue': context, 'deployment': key, 'operation': key})
+        # The supplied field order is preserved; every value is validated independently.
+        expected = urlencode({'catalogue': context, 'deployment': key, 'operation': key})
+        checks.append((console + '?' + query, origin + console + '?' + expected))
+    for context in ('https://untrusted.invalid', 'q=hello&next=https://untrusted.invalid', 'page=0', 'namespace_id=invalid'):
+        checks.append((console + '?' + urlencode({'catalogue': context}), origin + console))
+    filters = urlencode({'q': 'Café same', 'namespace_id': key, 'state': 'draft', 'sort': 'updated_desc', 'page': '2'})
+    checks.append(('/console/functions?' + filters, origin + '/console/functions?' + filters))
     checks.append((console + '?' + urlencode({f'field{i}': 'x' for i in range(33)}), origin + console))
     redirects = []
     for source, target in checks:

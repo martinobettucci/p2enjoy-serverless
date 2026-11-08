@@ -2,6 +2,8 @@
 # @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
 # @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
+# @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#suite-commune-de-qualification
+# @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#suite-commune-de-qualification
 """Read-only recoup of the exact public storage campaigns and historical recovery.
 
 All declarations implement this scope. The operator never deletes resources.
@@ -22,14 +24,15 @@ NAMES = ('storage-console-api', 'storage-console-ui', 'storage-command-recovery'
 
 def main():
     assert sys.argv[1] in ('.local/e2e/storage-console-focused.json', '.local/e2e/storage-console-regressions.json',
-                           '.local/e2e/invocation-urls-regressions.json')
-    extended = sys.argv[1] == '.local/e2e/invocation-urls-regressions.json'
-    output = ROOT / '.local/e2e/invocation-urls-physical.json' if extended else OUTPUT
+                           '.local/e2e/invocation-urls-regressions.json','.local/e2e/function-catalogue-regressions.json')
+    catalogue = sys.argv[1] == '.local/e2e/function-catalogue-regressions.json'
+    extended = catalogue or sys.argv[1] == '.local/e2e/invocation-urls-regressions.json'
+    output = ROOT / '.local/e2e/function-catalogue-physical.json' if catalogue else ROOT / '.local/e2e/invocation-urls-physical.json' if extended else OUTPUT
     output.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     output.write_text(json.dumps({'completed': False}) + '\n')
     suite = json.loads((ROOT / sys.argv[1]).read_text())
     assert suite['serial'] and not suite['completed'], 'live_suite_checkpoint_required'
-    if extended: assert suite['scope'] == 'invocation-urls'
+    if extended: assert suite['scope'] == ('function-catalogue' if catalogue else 'invocation-urls')
     commands = {row['campaign']: row for row in suite['commands']}
     campaigns, reports, historical, temporary_ids = {}, {}, {}, []
     names = NAMES + (('invocation-urls', 'invocation-urls-ui', 'service-configuration', 'service-transport') if extended else ())
@@ -62,6 +65,29 @@ def main():
     physical = json.loads(subprocess.check_output(SSH + [shlex.join(command)], timeout=240))
     assert physical['completed'] and not any(physical['global_control_reservations'].values())
     assert physical['global_storage_allocated_bytes'] == 0
+    catalogue_results = {}
+    if catalogue:
+        for name, namespace_count, function_count, service_count in [
+                ('function-catalogue-api',7,32,8),('function-catalogue-ui',6,27,7)]:
+            row=commands[name];assert row['exit_code']==0 and row['fresh_report_verified'] and row['report_content_verified']
+            path=ROOT/row['report_path'];assert path==ROOT/('.local/e2e/'+name+'.json')
+            raw=path.read_bytes();digest=hashlib.sha256(raw).hexdigest();assert digest==row['after']['report']['sha256']
+            report=json.loads(raw);assert report['completed'] and report['cleanup'] and not report['cleanup_errors'] and report['skipped']==0
+            mapping={n:sorted(a['function_id'] for a in report['storage_archives'] if a['namespace_id']==n) for n in report['namespaces']}
+            ids=[i for values in mapping.values() for i in values]
+            assert len(mapping)==namespace_count and len(ids)==len(set(ids))==function_count
+            assert set(ids).isdisjoint(identifiers+temporary_ids) and set(mapping).isdisjoint(campaigns)
+            for prior in catalogue_results.values():
+                assert set(ids).isdisjoint(prior['physical']['functions']) and set(mapping).isdisjoint(prior['physical']['campaigns'])
+            command=['python3','-B','/srv/p2enjoy-serverless/e2e/storage-console-inspect.py',json.dumps(mapping)]
+            result=json.loads(subprocess.check_output(SSH+[shlex.join(command)],timeout=240));assert result['completed']
+            services=report['service_ids'];assert len(services)==len(set(services))==service_count
+            # Decryption stays inside the existing image; only a boolean is returned.
+            program='import json;from app.main import database,vault;ids='+repr(services)+';namespaces='+repr(list(mapping))+';rows=[database.one("SELECT id,namespace_id,environment_json,secrets_cipher,deleted_at FROM services WHERE id=?",(i,)) for i in ids];assert all(r and r["namespace_id"] in namespaces and r["deleted_at"] and json.loads(r["environment_json"])=={} and vault.open(r["secrets_cipher"])=={} for r in rows);actual={r["id"] for n in namespaces for r in database.all("SELECT id FROM services WHERE namespace_id=?",(n,))};assert actual==set(ids);print(json.dumps({"services_cleared":True,"service_count":len(ids)}))'
+            command=['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock','exec','serverless-api','python3','-B','-c',program]
+            cleared=json.loads(subprocess.check_output(SSH+[shlex.join(command)],timeout=90));assert cleared['services_cleared']
+            reports[name]={'path':row['report_path'],'sha256':digest}
+            catalogue_results[name]={'physical':result,**cleared}
     expected = {str(path.relative_to(ROOT / 'control')): hashlib.sha256(path.read_bytes()).hexdigest()
                 for directory, pattern in [('app', '*.py'), ('migrations', '*.sql')]
                 for path in (ROOT / 'control' / directory).glob(pattern)}
@@ -111,6 +137,11 @@ print(json.dumps(result))
              'reports': reports, 'physical': physical, 'installation': installation,
              'historical_restoration': historical, 'excluded_historical_function_ids': temporary_ids,
              'adapter_build': adapter}
+    if catalogue:
+        value.update(catalogue=catalogue_results,
+                     total_namespaces=len(campaigns)+sum(len(r['physical']['campaigns']) for r in catalogue_results.values()),
+                     total_functions=len(identifiers)+sum(len(r['physical']['functions']) for r in catalogue_results.values()))
+        assert value['total_namespaces']==23 and value['total_functions']==91
     pending = output.with_suffix('.pending');pending.write_text(json.dumps(value, indent=2) + '\n');pending.replace(output)
     print(json.dumps({'completed': True, 'namespaces': len(campaigns), 'functions': len(identifiers),
                       'embedded_files': len(expected), 'historical_restorations': len(historical)}))

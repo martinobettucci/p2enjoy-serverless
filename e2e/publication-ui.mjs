@@ -1,5 +1,8 @@
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
+// @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md
 // @verifies docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
+import {enterNamespaces} from './console-navigation.mjs';
 import assert from 'node:assert/strict';
 import {randomUUID,createHash} from 'node:crypto';
 import {readFile,writeFile,rename,mkdir,mkdtemp,rm} from 'node:fs/promises';
@@ -114,7 +117,7 @@ try{
   const invalid={file:work+'/invalid.zip',handler:'publication.handler'};await writeFile(invalid.file,'invalid zip');
 
   await check('Entrée normale, création UI, facette partageable et états vides',async()=>{
-    await page.goto(base);await page.getByRole('heading',{name:'Namespaces',exact:true}).waitFor();
+    await enterNamespaces(page,base);
     await page.getByRole('button',{name:'Créer un namespace',exact:true}).click();let dialog=page.getByRole('dialog');await dialog.getByLabel('Nom',{exact:true}).fill(prefix);
     const response=page.waitForResponse(value=>value.url()===base+'/api/namespaces'&&value.request().method()==='POST').then(result=>result.status());const [created]=await Promise.all([response,dialog.getByRole('button',{name:'Créer',exact:true}).click()]);assert.equal(created,201);namespaceId=await until(()=>find('/api/namespaces',prefix),'Namespace créé non retrouvé');
     await page.waitForURL(/\/console\/namespaces\//);await page.getByRole('button',{name:'Créer un service',exact:true}).click();dialog=page.getByRole('dialog');await dialog.getByLabel('Nom',{exact:true}).fill('publications');

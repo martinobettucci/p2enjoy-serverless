@@ -1,6 +1,9 @@
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
+// @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md
 // @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
 // Real browser, SSO session, packaged original handler and Docker observations.
+import {enterNamespaces} from './console-navigation.mjs';
 import assert from 'node:assert/strict';
 import {randomUUID,createHash} from 'node:crypto';
 import {readFile,writeFile,rename,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
@@ -77,7 +80,7 @@ try {
   page=await context.newPage();page.setDefaultTimeout(15000);page.on('pageerror',error=>faults.push(error.name));
   session=await(await context.request.get(base+'/api/session')).json();assert(session.authenticated,'Session administrateur réelle requise');
   await check('Accueil, création réelle et facettes partageables vides',async()=>{
-    await page.goto(base);await page.getByRole('button',{name:'Créer un namespace',exact:true}).click();
+    await enterNamespaces(page,base);await page.getByRole('button',{name:'Créer un namespace',exact:true}).click();
     let dialog=page.getByRole('dialog');await dialog.getByLabel('Nom',{exact:true}).fill(prefix);const namespaceCreated=page.waitForResponse(response=>response.url()===base+'/api/namespaces'&&response.request().method()==='POST').then(response=>response.status());const [namespaceStatus]=await Promise.all([namespaceCreated,dialog.getByRole('button',{name:'Créer',exact:true}).click()]);assert.equal(namespaceStatus,201);namespaceId=await until(()=>find('/api/namespaces',prefix),'Création non retrouvée par API');
     await page.waitForURL(/\/console\/namespaces\//);await save();
     await page.getByRole('button',{name:'Créer un service',exact:true}).click();dialog=page.getByRole('dialog');await dialog.getByLabel('Nom',{exact:true}).fill('observations');const serviceCreated=page.waitForResponse(response=>response.url()===base+`/api/namespaces/${namespaceId}/services`&&response.request().method()==='POST').then(response=>response.status());const [serviceStatus]=await Promise.all([serviceCreated,dialog.getByRole('button',{name:'Enregistrer',exact:true}).click()]);assert.equal(serviceStatus,201);serviceId=await until(()=>find(`/api/namespaces/${namespaceId}/services`,'observations'),'Création non retrouvée par API');

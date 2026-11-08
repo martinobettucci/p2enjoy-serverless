@@ -1,5 +1,8 @@
+// @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
+// @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md | docs/DESIGN_SYSTEM_APP.md
 // @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#preuves-attendues
+import {enterNamespaces} from './console-navigation.mjs';
 import assert from 'node:assert/strict';
 import {randomUUID,createHash} from 'node:crypto';
 import {readFile,writeFile,rename,mkdir,mkdtemp,rm} from 'node:fs/promises';
@@ -48,7 +51,7 @@ try {
   page=await context.newPage();page.on('pageerror',error=>faults.push(error.name));session=await(await context.request.get(base+'/api/session')).json();assert(session.authenticated);
   work=await mkdtemp(new URL('storage-ui-',output).pathname);const zip=await publicationArchive(work,'storage','storage-console.handler');
   await check('Accueil, créations UI et consultation initiale sans volume',async()=>{
-    await page.goto(base);await page.getByRole('heading',{name:'Namespaces',exact:true}).waitFor();
+    await enterNamespaces(page,base);
     await page.getByRole('button',{name:'Créer un namespace',exact:true}).click();let dialog=page.getByRole('dialog');await dialog.getByLabel('Nom',{exact:true}).fill(prefix);await dialog.getByRole('button',{name:'Créer',exact:true}).click();
     await page.waitForURL(/\/console\/namespaces\//);namespaceId=new URL(page.url()).pathname.split('/').at(-1);
     await page.getByRole('button',{name:'Créer un service',exact:true}).click();dialog=page.getByRole('dialog');await dialog.getByLabel('Nom',{exact:true}).fill('storage-console');await dialog.getByRole('button',{name:'Enregistrer',exact:true}).click();
@@ -118,7 +121,8 @@ try {
   });
   await check('Suppression UI des parents et accès autonome aux archives',async()=>{
     await page.getByRole('navigation',{name:'Fonction',exact:true}).getByRole('link',{name:'Configuration',exact:true}).click();await deleteViaUI('Supprimer la fonction');await page.waitForURL(/\/console\/services\//);
-    await page.getByRole('navigation',{name:'Service',exact:true}).getByRole('link',{name:'Configuration',exact:true}).click();await deleteViaUI('Supprimer le service');await page.waitForURL(/\/console\/namespaces\//);await deleteViaUI('Supprimer le namespace');await page.waitForURL(base+'/');
+    await page.getByRole('navigation',{name:'Service',exact:true}).getByRole('link',{name:'Configuration',exact:true}).click();await deleteViaUI('Supprimer le service');await page.waitForURL(/\/console\/namespaces\//);await deleteViaUI('Supprimer le namespace');await page.waitForURL(base+'/console/namespaces');
+    await page.getByRole('heading',{name:'Namespaces',exact:true}).waitFor();
     await navigation('Archives de fonctions');await ready();await page.getByRole('link',{name:functionName,exact:true}).click();await ready();
     assert.equal(new URL(page.url()).pathname,`/console/archives/${functionId}`);await archive().getByText(namespaceId,{exact:true}).waitFor();await archive().getByText(serviceId,{exact:true}).waitFor();await capture('archive-desktop');
   });
