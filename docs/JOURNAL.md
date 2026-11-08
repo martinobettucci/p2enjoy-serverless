@@ -2670,3 +2670,9 @@ préférer GET au DELETE issu du tri dans curl, préserver les UUID des paramèt
 de suivi lors d’une redirection canonique, recouper aussi l’inode du nom courant
 après lecture, et appliquer l’autorisation avant de révéler l’existence d’une
 fonction. Ces précisions sont intégrées au contrat avant modification dépendante.
+
+La revue relève aussi que deux domaines ne qualifient pas la seconde page de
+l’UI (cinq domaines/page). La CLI est alignée à cinq : six véritables domaines
+permettront les deux parcours sans créer vingt et une routes pour la seule CLI.
+Les quatre alias supplémentaires restent à autoriser ; le checkpoint courant
+reste limité aux domaines effectivement affectés, sans revendiquer cette preuve.

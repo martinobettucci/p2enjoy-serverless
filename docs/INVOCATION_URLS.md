@@ -78,7 +78,7 @@ aucune URL versionnée n’est émise avant son implémentation.
 
 La source et la construction sont communes à la console et à l’adaptateur.
 La CLI consulte ce catalogue après publication, avec le même jeton Read, et
-parcourt les pages tant que source et révision restent identiques. Une lecture
+parcourt les pages de cinq domaines tant que source et révision restent identiques. Une lecture
 indisponible, un changement de catalogue/révision ou un refus après publication
 rend seulement l’information d’adresses indisponible avec diagnostic : une
 publication déjà réussie reste published, sans nouveau ZIP ni mutation rejouée.
@@ -145,3 +145,11 @@ Ce chemin permet d’observer l’état vide dans l’UI sans registre, DNS ni r
 substitués. Il reste à qualifier ; une impossibilité ne devient pas un succès
 ni une dispense de preuve. Les limites d’accès et les preuves manquantes restent
 explicites dans SLS-066.
+
+La proposition courante à deux domaines suffit au multi-domaine et à la
+pagination API avec limit=1, pas à une seconde page console/CLI. Ces deux
+preuves demandent six domaines réels : quatre alias supplémentaires devront
+être inclus explicitement dans le périmètre autorisé avant création. Elles
+restent ouvertes tant que ces routes ne sont pas disponibles. La CLI consulte
+par cinq comme la console, plutôt que d’exiger vingt et un domaines pour
+éprouver son changement de page.
