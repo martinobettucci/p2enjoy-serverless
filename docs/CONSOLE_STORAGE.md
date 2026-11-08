@@ -239,3 +239,44 @@ sont retirées après preuve de la contradiction attendue. Le
 [contrat de qualification des archives anciennes](STORAGE_LEGACY_PROOF.md)
 définit les versions, la fenêtre DEV, la garde et la conservation de l’installation
 habituelle. Aucun enregistrement absent n’est fabriqué par SQL.
+
+### Suite commune et pagination autonome
+
+La clôture SLS-065 ajoute deux sélections explicites à `execution-suite.py` :
+`--scope storage-console-focused` rejoue les sept campagnes publiques et
+historiques de stockage ; `--scope storage-console` les complète par l’union
+des régressions publication/console et stockage agent, sans doublon de campagne.
+La sélection ciblée n’est pas une preuve de campagne transversale complète.
+
+Le runner reçoit une ligne JSON `username`/`password` sur stdin privée, sans
+écho sur un terminal, sans valeur dans les arguments, l’environnement, les
+rapports ou fichiers. Un client SSO de qualification ouvre l’accueil puis la
+connexion normale dans deux contextes neufs : session de contrôle et session
+de purge distinctes. Seuls les cookies de plateforme nécessaires sont conservés
+dans les fichiers privés autorisés ; les erreurs de navigateur sont expurgées.
+La session de purge est recréée à chaque suite, car la campagne la déconnecte.
+Les mêmes identifiants sont transmis en mémoire à la campagne historique complète.
+
+Le build historique est un prérequis contrôlé par fraîcheur et empreintes, sans
+groupe artificiellement compté. Son rapport est invalidé avant toute opération.
+Chaque campagne est liée aux sources locales/distantes, aux dépendances du
+client E2E, à l’image et à son rapport frais avant/après. La suite s’arrête sur
+échec, nettoyage incomplet ou restauration historique non confirmée.
+
+La campagne navigateur prépare onze fonctions brouillon supplémentaires depuis
+les parcours UI ordinaires et les archive avant de tester la pagination. Ses
+deux premières pages conservées doivent montrer dix de ces UUID, sans doublon,
+y compris après la vraie panne réseau. Le rapport recense toutes les fonctions
+du namespace, même si une création ou une suppression échoue. Le nettoyage
+purge ses archives et parents par API, sans retirer les archives des autres
+campagnes. Ce groupe de préparation porte la campagne UI à dix groupes.
+
+Le recoupement final utilise `campaigns` lorsqu’il existe, sinon le namespace et
+la liste exhaustive de fonctions du rapport. Il associe cinq campagnes publiques
+à six namespaces et vingt-quatre fonctions, puis exige le nettoyage physique et
+les réservations libérées. Les deux campagnes historiques sont vérifiées par
+leur preuve de restauration, sans envoyer leurs UUID temporaires au collecteur
+de l’installation habituelle. Le rapport historique complet conserve le reçu
+volontairement bloqué comme un résultat de panne, sans le présenter comme une
+purge métier réussie. Les captures fraîches de stockage, publication, gestion
+et manuel restent à inspecter avant clôture.

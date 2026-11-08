@@ -401,6 +401,12 @@ doit créer ses propres archives réelles avant le parcours, puis les purger.
 Le runner doit traiter l’entrée SSO du banc historique sans écho ni valeur dans
 les commandes/rapports, et préparer la seconde session consommée par la preuve
 de révocation administrateur.
+Le [contrat d’intégration](CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome)
+fixe les deux scopes ciblé/complet, l’authentification réelle par stdin, les onze
+archives de pagination créées par l’UI et le mapping exhaustif du nettoyage.
+Le build historique reste un prérequis distinct ; les UUID de son installation
+temporaire sont exclus du collecteur de la cellule habituelle. Cette intégration
+est l’unité de travail courante ; elle doit passer avant clôture SLS-065.
 SLS-064 seul ne qualifie aucun parcours public d’effacement.
 
 

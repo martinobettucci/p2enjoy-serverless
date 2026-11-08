@@ -1,5 +1,24 @@
 # Journal de cadrage
 
+## 2026-11-08 — Intégration des campagnes publiques de stockage
+
+Après les preuves de reprise et d’archives historiques, SLS-065 doit réunir ses
+sept campagnes dans la suite commune. La campagne UI dépend encore d’archives
+préexistantes pour ses deux pages. Décision persistée avant code : elle crée
+onze brouillons et les archive par les parcours UI, recoupe leurs UUID sur les
+deux pages, puis purge uniquement ses objets. Elle passe de neuf à dix groupes.
+Le runner prépare deux vraies connexions SSO distinctes depuis une entrée stdin
+privée et réutilise ces identifiants en mémoire pour le banc historique.
+
+Deux scopes sont retenus : ciblé pour les sept campagnes SLS-065 et complet
+pour leur union avec les régressions publication/console et stockage agent.
+Le build historique est un prérequis frais, sans compter un groupe inexistant.
+Les dépendances Playwright rejoignent l’index de sources. Les mappings de
+campagne sont exhaustifs ; l’installation historique conserve son contrôle de
+restauration distinct, car ses UUID temporaires n’existent pas dans la cellule
+habituelle. Les erreurs SSO ne doivent jamais réémettre une saisie sensible.
+Le produit reste inchangé ; seule la qualification est étendue à ce stade.
+
 ## 2026-11-08 — Version de code par hash et pilote d’utilisateurs
 
 Le responsable demande de créer une version seulement si le code uploadé change,
