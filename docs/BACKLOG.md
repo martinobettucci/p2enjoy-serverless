@@ -399,6 +399,12 @@ La pagination UI est autonome : onze brouillons sont créés et archivés par
 les parcours console, dix UUID propres sont recoupés sur deux pages après vraie
 panne réseau. Les 24 fonctions de six namespaces sont purgées ; les deux
 restaurations historiques restent distinctes, et quatorze captures sont inspectées.
+La première union complète s’arrête après 26 campagnes et 388 groupes réussis :
+la session de purge inutilisée depuis le début n’est plus authentifiée lors du
+précontrôle de décision, sans création d’objet de cette campagne.
+[Preuve incomplète](evidence/storage-console-incomplete-dev-2026-11-08.json).
+Le contrat impose une nouvelle paire de connexions réelles juste avant cette
+campagne, avec un rapport distinct ; aucune durée SSO n’est modifiée.
 Restent les régressions élargies de l’union complète et l’actualisation finale
 des notes SPARK. Leur adoption n’est pas annoncée.
 Le [contrat d’intégration](CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome)

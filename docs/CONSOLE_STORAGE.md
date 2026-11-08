@@ -254,7 +254,13 @@ rapports ou fichiers. Un client SSO de qualification ouvre l’accueil puis la
 connexion normale dans deux contextes neufs : session de contrôle et session
 de purge distinctes. Seuls les cookies de plateforme nécessaires sont conservés
 dans les fichiers privés autorisés ; les erreurs de navigateur sont expurgées.
-La session de purge est recréée à chaque suite, car la campagne la déconnecte.
+La paire est créée au début de la suite, puis recréée immédiatement avant la
+campagne de décision : une session inutilisée pendant les longues régressions
+peut ne plus être renouvelable au SSO, même si son cookie reste valide.
+Ces deux préparations ont des rapports frais distincts et ne comptent aucun
+groupe fonctionnel. Une connexion refusée arrête la suite ; aucun rejeu implicite
+du scénario ni allongement du délai de session ne compense ce refus.
+La session de purge est consommée par la vraie déconnexion de cette campagne.
 Les mêmes identifiants sont transmis en mémoire à la campagne historique complète.
 
 Le build historique est un prérequis contrôlé par fraîcheur et empreintes, sans

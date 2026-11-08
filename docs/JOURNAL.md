@@ -1,5 +1,24 @@
 # Journal de cadrage
 
+## 2026-11-08 — Session de purge et durée de la suite complète
+
+La première union complète termine 26 campagnes et 388 groupes, puis s’arrête
+au précontrôle des deux sessions SSO de storage-decision-recovery. Aucun groupe,
+namespace ni fonction de cette campagne n’a été créé. Le rapport incomplet et
+les rapports précédents sont conservés dans la preuve dédiée. Une relecture
+réelle de /api/session confirme la session principale authentifiée et la session
+de purge refusée, environ quarante minutes après sa préparation ; les deux
+cookies ont encore une échéance future. La cause précise du refus de
+renouvellement par le fournisseur n’est pas attribuée à un délai supposé.
+
+Décision avant code : conserver la paire initiale et préparer une nouvelle paire
+par l’accueil et le SSO immédiatement avant la campagne de décision, sous un
+rapport distinct. Ce prérequis reste hors du compte des groupes. Il utilise les
+identifiants déjà en mémoire dans le runner ; aucun fichier, argument ou variable
+supplémentaire ne les reçoit. Aucun maintien artificiel de session, modification
+du fournisseur ou rejeu implicite du scénario. Une nouvelle suite complète est
+requise après correction et synchronisation des sources.
+
 ## 2026-11-08 — Intégration des campagnes publiques de stockage
 
 Après les preuves de reprise et d’archives historiques, SLS-065 doit réunir ses
