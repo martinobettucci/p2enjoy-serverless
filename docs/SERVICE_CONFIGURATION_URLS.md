@@ -54,13 +54,20 @@ déploiement atomique de toutes les fonctions.
 
 Le rapport distingue l’application de la configuration commune des publications
 individuelles. La CLI valide et empaquette tout avant d’appliquer cette
-configuration. Elle utilise la version lue du service et transmet explicitement
-les retraits de secrets par leurs noms. Une déclaration de secrets exige Update,
+configuration. Elle utilise la version lue du service et demande explicitement
+le remplacement du jeu de secrets lorsqu’il est déclaré. Une déclaration de secrets exige Update,
 même si les noms sont inchangés : leur valeur enregistrée n’est pas comparable.
 Un refus de configuration commune arrête la commande avant toute mutation de
 fonction. Après application commune, un échec d’import conserve le code actif
 de la fonction concernée, mais la configuration commune a déjà changé pour
 toutes les fonctions. Cet effet est visible dans le rapport.
+
+L’API de configuration du service accepte `replace_secrets: true` avec un champ
+`secrets` explicite : le mapping remplace alors le jeu précédent dans une seule
+transaction. Sans ce drapeau, les ajouts, remplacements et retraits individuels
+existants restent disponibles. Ce remplacement autorise notamment 128 nouveaux
+noms après 128 anciens sans dépasser la limite de clés de la requête. Le drapeau
+est propre au service ; il est refusé dans la configuration d’une fonction.
 
 Les nouvelles invocations utilisent la configuration commune courante. Une
 invocation déjà admise conserve sa configuration jusqu’à sa fin. Les preuves

@@ -2283,3 +2283,13 @@ refusé conserve son ancien code mais n’annule pas une modification commune
 déjà appliquée. Les valeurs de secrets ne pouvant être comparées, leur déclaration
 exige toujours Update. Ces règles rendent les droits et les échecs partiels
 explicites sans inventer de transaction multi-fonctions.
+
+Le scénario SLS-031 reproduit le défaut sur l’image `9110295` : deux publications
+réussies, service sans valeurs communes, héritage copié dans les fonctions.
+Les deux archives du second essai sont purgées par l’API publique. Le premier
+essai utilisait un helper dont la liste de préfixes refusait la nouvelle campagne ;
+ses deux archives ont ensuite été purgées par l’API, sans élargir le helper.
+Avant correction, décision supplémentaire : un drapeau `replace_secrets` propre
+au service rend son remplacement atomique et permet le renouvellement de 128
+noms sans cumuler anciens retraits et nouveaux noms dans la même limite de 128.
+Le comportement partiel de l’édition existante est conservé par défaut.
