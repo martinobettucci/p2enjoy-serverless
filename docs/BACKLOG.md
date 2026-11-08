@@ -353,7 +353,7 @@ hors verrou global. Migration 004 agent, installation DEV et preuves réelles.
 ## SLS-065
 
 Statut : [~] — API, console et manuel déployés ; défaut de nettoyage historique
-corrigé et qualifié, intégration commune et régressions élargies encore ouvertes.
+corrigé et qualifié, campagnes ciblées intégrées ; régressions élargies encore ouvertes.
 
 Après SLS-064 : catalogue consultable après suppression des parents, purge
 administrateur confirmée et vidage sous droit Update ; drainage et relecture
@@ -390,23 +390,24 @@ réunit 22 groupes réels : cinq historiques/restauration, deux de validation
 vivante, sept de panne et huit du manuel. Les originaux sont rétablis, cinq
 fonctions de régression et sept répertoires de code sont purgés, budgets à zéro.
 Les 25 fichiers Python/migrations embarqués correspondent aux sources ; douze
-captures du manuel, maintenant à 35 paragraphes, sont inspectées.
-Restent l’intégration des nouvelles
-campagnes à la suite commune, les régressions élargies et l’actualisation finale
-des notes SPARK. Les trois notes actualisées sont proposées le 8 novembre ;
-leur adoption n’est pas annoncée.
-L’intégration doit également rendre la pagination UI autonome : son assertion
-actuelle suppose plus de dix archives conservées préexistantes. La campagne
-doit créer ses propres archives réelles avant le parcours, puis les purger.
-Le runner doit traiter l’entrée SSO du banc historique sans écho ni valeur dans
-les commandes/rapports, et préparer la seconde session consommée par la preuve
-de révocation administrateur.
+captures du manuel, à 35 paragraphes dans cette campagne historique, sont inspectées.
+L’intégration passe désormais sept campagnes et 37 groupes réels dans le
+[checkpoint ciblé](evidence/storage-console-focused-dev-2026-11-08.json), zéro
+échec/skip : deux connexions SSO distinctes préparées depuis stdin privée,
+build historique frais, 173 sources avant/après et 25 fichiers embarqués conformes.
+La pagination UI est autonome : onze brouillons sont créés et archivés par
+les parcours console, dix UUID propres sont recoupés sur deux pages après vraie
+panne réseau. Les 24 fonctions de six namespaces sont purgées ; les deux
+restaurations historiques restent distinctes, et quatorze captures sont inspectées.
+Restent les régressions élargies de l’union complète et l’actualisation finale
+des notes SPARK. Leur adoption n’est pas annoncée.
 Le [contrat d’intégration](CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome)
 fixe les deux scopes ciblé/complet, l’authentification réelle par stdin, les onze
 archives de pagination créées par l’UI et le mapping exhaustif du nettoyage.
 Le build historique reste un prérequis distinct ; les UUID de son installation
 temporaire sont exclus du collecteur de la cellule habituelle. Cette intégration
-est l’unité de travail courante ; elle doit passer avant clôture SLS-065.
+est qualifiée sur le scope ciblé ; l’union complète de 29 campagnes reste à
+qualifier avant clôture SLS-065.
 SLS-064 seul ne qualifie aucun parcours public d’effacement.
 
 

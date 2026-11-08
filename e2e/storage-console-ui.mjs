@@ -8,9 +8,9 @@ import {publicationArchive} from './publication-fixtures.mjs';
 
 const base='https://serverless.lelabs.tech',output=new URL('../.local/e2e/',import.meta.url),report=new URL('storage-console-ui.json',output);
 const prefix='storage-ui-'+randomUUID().slice(0,8),functionName=(prefix+'-persistent-cache-'+'x'.repeat(63)).slice(0,63);
-const checks=[],faults=[],captures={},cleanupErrors=[],evidence=[];
+const checks=[],faults=[],captures={},cleanupErrors=[],evidence=[],paginationFunctions=[];
 let browser,context,page,session,storageState,namespaceId,serviceId,functionId,token,work,completed=false,cleanup=false;
-async function save(){const temporary=new URL('storage-console-ui.pending',output);await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length&&!faults.length,skipped:0,checks,faults,captures,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespaceId,service_id:serviceId,function_id:functionId,evidence},null,2)+'\n');await rename(temporary,report);}
+async function save(){const ids=[functionId,...paginationFunctions.map(row=>row.id)].filter(Boolean);const temporary=new URL('storage-console-ui.pending',output);await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length&&!faults.length,skipped:0,checks,faults,captures,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespaceId,service_id:serviceId,function_id:functionId,function_ids:ids,campaigns:namespaceId?{[namespaceId]:ids}:{},evidence},null,2)+'\n');await rename(temporary,report);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}}
 async function manage(url,{method='GET',body,headers={},status=200}={}){const response=await context.request.fetch(base+url,{method,data:body,headers:{Origin:base,'X-CSRF-Token':session.csrf_token,...headers}});assert([status].flat().includes(response.status()),`${method} ${url}: ${response.status()}`);return response.json();}
 async function until(action,message,milliseconds=60000){const end=Date.now()+milliseconds;while(Date.now()<end){const value=await action();if(value)return value;await new Promise(resolve=>setTimeout(resolve,150));}assert.fail(message);}
@@ -25,6 +25,21 @@ async function invoke(body){const response=await context.request.fetch(base+`/in
 async function finishCommand(id){await until(async()=>(await manage(`/api/storage-operations/${id}`)).state==='completed','Commande non terminée');await refresh();await follow().getByText('Terminée',{exact:true}).waitFor();}
 async function confirm(container,label){await container.getByRole('button',{name:label,exact:true}).first().click();await container.locator('.confirm').getByRole('button',{name:label,exact:true}).click();}
 async function deleteViaUI(label){await page.getByRole('button',{name:label,exact:true}).click();await page.locator('.confirm').getByRole('button',{name:label,exact:true}).click();}
+async function listAll(url){const items=[];for(let offset=0;offset<=10000;offset+=100){const page=await manage(url+`?limit=100&offset=${offset}`);items.push(...page.items);if(page.items.length<100)return items;}assert.fail('Inventaire de nettoyage trop grand');}
+async function discoverCampaign(){
+  namespaceId||=(await listAll('/api/namespaces')).find(row=>row.name===prefix)?.id;
+  if(namespaceId)serviceId||=(await listAll(`/api/namespaces/${namespaceId}/services`)).find(row=>row.name==='storage-console')?.id;
+  if(!serviceId)return;
+  const response=await context.request.get(base+`/api/services/${serviceId}`);if(response.status()===404)return;
+  assert.equal(response.status(),200);assert.equal((await response.json()).namespace_id,namespaceId);
+  const allowed=new Set(Array.from({length:11},(_,index)=>prefix+'-pagination-'+String(index+1).padStart(2,'0')));
+  for(const row of await listAll(`/api/services/${serviceId}/functions`)){
+    assert.equal(row.service_id,serviceId);
+    if(row.name===functionName){assert(!functionId||row.id===functionId);functionId=row.id;}
+    else{assert(allowed.has(row.name),'Fonction étrangère dans le service de campagne');if(!paginationFunctions.some(value=>value.id===row.id))paginationFunctions.push({id:row.id,name:row.name,discovered_during_cleanup:true});}
+  }
+  await save();
+}
 
 await mkdir(output,{recursive:true,mode:0o700});await save();
 try {
@@ -42,6 +57,22 @@ try {
     await page.waitForURL(/\/console\/functions\//);functionId=new URL(page.url()).pathname.split('/')[3];await save();
     await page.getByRole('navigation',{name:'Fonction',exact:true}).getByRole('link',{name:'Stockage',exact:true}).click();await ready();
     assert.equal(new URL(page.url()).pathname,`/console/functions/${functionId}/storage`);await page.getByText('Aucun volume alloué.',{exact:true}).waitFor();await page.getByText('Aucune commande de stockage enregistrée.',{exact:true}).waitFor();await capture('empty');
+  });
+  await check('Onze archives de pagination créées et supprimées depuis les parcours UI',async()=>{
+    await page.getByRole('link',{name:'Fonctions du service',exact:true}).click();
+    for(let index=0;index<11;index++){
+      const name=prefix+'-pagination-'+String(index+1).padStart(2,'0');
+      await page.getByRole('button',{name:'Créer une fonction',exact:true}).click();const dialog=page.getByRole('dialog');
+      await dialog.getByLabel('Nom',{exact:true}).fill(name);await dialog.getByLabel('Handler',{exact:true}).fill(zip.handler);
+      await dialog.getByRole('button',{name:'Créer',exact:true}).click();await page.waitForURL(/\/console\/functions\//);
+      const id=new URL(page.url()).pathname.split('/')[3];assert(id!==functionId&&!paginationFunctions.some(row=>row.id===id));
+      paginationFunctions.push({id,name});await save();
+      await deleteViaUI('Supprimer la fonction');await page.waitForURL(/\/console\/services\//);
+      const archived=await manage(`/api/archives/${id}`);assert.equal(archived.namespace_id,namespaceId);assert(!archived.purged_at);
+    }
+    evidence.push({pagination_fixture_ids:paginationFunctions.map(row=>row.id),created_and_archived_via_ui:true});
+    await page.getByRole('link',{name:functionName,exact:true}).click();
+    await page.getByRole('navigation',{name:'Fonction',exact:true}).getByRole('link',{name:'Stockage',exact:true}).click();await ready();
   });
   await check('Configuration des volumes, publication et jeton depuis la console',async()=>{
     await page.getByRole('navigation',{name:'Fonction',exact:true}).getByRole('link',{name:'Configuration',exact:true}).click();await page.getByRole('button',{name:'Modifier le stockage',exact:true}).click();let dialog=page.getByRole('dialog');
@@ -100,20 +131,25 @@ try {
   });
   await check('Filtres, pagination après vraie panne réseau et identifiants recoupés',async()=>{
     await navigation('Archives de fonctions');await ready();await fits();await capture('catalogue-mobile');await page.setViewportSize({width:1440,height:1000});
-    const first=await manage('/api/archives?limit=5&offset=0');assert(first.total>10);await until(async()=>JSON.stringify(await page.locator('.observation-list article .mono').allTextContents())===JSON.stringify(first.items.map(row=>row.id)),'Première page rendue non recoupée');
+    const owned=new Set(paginationFunctions.map(row=>row.id));assert.equal(owned.size,11);
+    const first=await manage('/api/archives?limit=5&offset=0');assert(first.total>=owned.size);assert.equal(first.items.length,5);assert(first.items.every(row=>owned.has(row.id)),'Première page étrangère aux fixtures');await until(async()=>JSON.stringify(await page.locator('.observation-list article .mono').allTextContents())===JSON.stringify(first.items.map(row=>row.id)),'Première page rendue non recoupée');
     await context.setOffline(true);await page.getByRole('button',{name:'Suivante',exact:true}).click();await page.getByRole('alert').waitFor();assert(await page.getByRole('button',{name:'Suivante',exact:true}).isDisabled());await capture('pagination-error');
-    await context.setOffline(false);await refresh();const second=await manage('/api/archives?limit=5&offset=5');await until(async()=>JSON.stringify(await page.locator('.observation-list article .mono').allTextContents())===JSON.stringify(second.items.map(row=>row.id)),'Deuxième page rendue non recoupée');assert((await page.getByRole('navigation',{name:'Pagination des archives'}).innerText()).includes('Page 2'));await capture('catalogue-desktop');
+    await context.setOffline(false);await refresh();const second=await manage('/api/archives?limit=5&offset=5');assert.equal(second.items.length,5);assert(second.items.every(row=>owned.has(row.id)),'Deuxième page étrangère aux fixtures');assert.equal(new Set([...first.items,...second.items].map(row=>row.id)).size,10);evidence.push({pagination_first_ids:first.items.map(row=>row.id),pagination_second_ids:second.items.map(row=>row.id),owned_fixtures_verified:true});await until(async()=>JSON.stringify(await page.locator('.observation-list article .mono').allTextContents())===JSON.stringify(second.items.map(row=>row.id)),'Deuxième page rendue non recoupée');assert((await page.getByRole('navigation',{name:'Pagination des archives'}).innerText()).includes('Page 2'));await capture('catalogue-desktop');
     await page.getByLabel('Afficher les archives',{exact:true}).selectOption('purged');await ready();await page.getByRole('link',{name:functionName,exact:true}).waitFor();await page.getByRole('link',{name:functionName,exact:true}).click();await ready();assert.equal((await manage(`/api/archives/${functionId}`)).purged_at>0,true);
     assert.deepEqual(faults,[]);assert.equal(await page.evaluate(()=>localStorage.length+sessionStorage.length),0);
   });
   completed=true;
 } finally {
   if(context){await context.setOffline(false);await context.addCookies(storageState.cookies);}
-  if(functionId)try{
-    const response=await context.request.get(base+`/api/functions/${functionId}`);if(response.status()===200)await manage(`/api/functions/${functionId}`,{method:'DELETE'});else assert.equal(response.status(),404);
-    await until(async()=>!(await manage(`/api/archives/${functionId}`)).storage_operation,'Archivage de nettoyage non confirmé');const row=await manage(`/api/archives/${functionId}`);
-    if(!row.purged_at){const id=randomUUID();await manage(`/api/archives/${functionId}/purge`,{method:'POST',status:[200,202],headers:{'If-Match':String(row.updated_at)},body:{operation_id:id,confirm_name:row.name}});await until(async()=>(await manage(`/api/storage-operations/${id}`)).state==='completed','Purge de nettoyage non terminée');}
-  }catch(error){cleanupErrors.push({function_id:functionId,error:error.name});}
+  // Stop the browser actor before discovering a creation whose response was lost.
+  if(page)try{await page.close();}catch(error){cleanupErrors.push({step:'fermeture-page',error:error.name});}
+  if(context&&session?.authenticated)try{await discoverCampaign();}catch(error){cleanupErrors.push({step:'inventaire',error:error.name});}
+  for(const target of [functionId,...paginationFunctions.map(row=>row.id)].filter(Boolean))try{
+    const response=await context.request.get(base+`/api/functions/${target}`);if(response.status()===200)await manage(`/api/functions/${target}`,{method:'DELETE'});else assert.equal(response.status(),404);
+    await until(async()=>!(await manage(`/api/archives/${target}`)).storage_operation,'Archivage de nettoyage non confirmé');const row=await manage(`/api/archives/${target}`);
+    if(!row.purged_at){const id=randomUUID();await manage(`/api/archives/${target}/purge`,{method:'POST',status:[200,202],headers:{'If-Match':String(row.updated_at)},body:{operation_id:id,confirm_name:row.name}});await until(async()=>(await manage(`/api/storage-operations/${id}`)).state==='completed','Purge de nettoyage non terminée');}
+    const purged=await manage(`/api/archives/${target}`);assert(purged.purged_at&&purged.artifact_bytes===0&&!purged.storage_operation);
+  }catch(error){cleanupErrors.push({function_id:target,error:error.name});}
   for(const [kind,id]of [['services',serviceId],['namespaces',namespaceId]])if(id)try{const response=await context.request.get(base+`/api/${kind}/${id}`);if(response.status()===200)await manage(`/api/${kind}/${id}`,{method:'DELETE'});else assert.equal(response.status(),404);}catch(error){cleanupErrors.push({object_id:id,error:error.name});}
   await browser?.close();if(work)await rm(work,{recursive:true,force:true});cleanup=!cleanupErrors.length;await save();assert.deepEqual(cleanupErrors,[]);assert.deepEqual(faults,[]);
 }

@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-040 | docs/ADMISSION.md
 # @verifies docs/BACKLOG.md#sls-040 | docs/ADMISSION.md
+# @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
+# @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
 """Serial DEV qualification with fresh reports bound to sources and deployed image."""
 import argparse
 import hashlib
@@ -7,6 +9,8 @@ import json
 from pathlib import Path
 import shlex
 import subprocess
+import sys
+import termios
 import time
 
 ROOT=Path(__file__).resolve().parent.parent
@@ -25,6 +29,7 @@ def source_hashes():
     files += [ROOT/name for name in ['docs/CONSOLE_PUBLICATION.md','docs/DESIGN_SYSTEM_APP.md','qualification/serverless.platform.yml','qualification/src/handlers.cjs','adapter/requirements.txt']]
     files += [p for p in (ROOT/'web/src').glob('*') if p.is_file()]
     files += [p for p in (ROOT/'e2e').iterdir() if p.suffix in ('.py','.mjs')]
+    files += [ROOT/name for name in ['e2e/package.json','e2e/package-lock.json','docs/CONSOLE_STORAGE.md','docs/STORAGE_LEGACY_PROOF.md']]
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
 def metadata(path):
@@ -67,13 +72,16 @@ CASES=[
  ('public-invocations',['node','e2e/public-invocations.mjs'],'.local/e2e/public-invocations.json',False),
 ]
 
-def verify_report(name,path,is_remote,expected_hash):
+def read_report(path,is_remote,expected_hash):
     if is_remote:
         script='from pathlib import Path;import sys;sys.stdout.buffer.write(Path('+repr(REMOTE+path)+').read_bytes())'
         contents=subprocess.check_output(remote(['python3','-B','-c',script],'root'))
     else:contents=(ROOT/path).read_bytes()
     assert hashlib.sha256(contents).hexdigest()==expected_hash,'Rapport changé après le relevé'
-    result=json.loads(contents)
+    return json.loads(contents)
+
+def verify_report(name,path,is_remote,expected_hash):
+    result=read_report(path,is_remote,expected_hash)
     assert result['completed'] is True and result['skipped']==0,'Campagne incomplète ou ignorée'
     expected={'control-operations':55,'function-storage':15,'runtime-instances':31,'instance-lifecycle':11,
               'runtime-validation':36,'managed-storage':14,'control-admin':19,'control-ui':11,
@@ -82,6 +90,9 @@ def verify_report(name,path,is_remote,expected_hash):
               'code-publications':10,'publication-ui':21}
     # @spec docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#qualification-réelle
     expected.update({'storage-discard':12,'storage-agent':15,'storage-limits':8,'storage-preparations':12})
+    expected.update({'storage-console-api':9,'storage-console-ui':10,'storage-command-recovery':7,
+                     'storage-validation-recovery':2,'storage-decision-recovery':4,
+                     'storage-legacy-partial':1,'storage-legacy-recovery':4})
     checks=result.get('checks',result.get('results'))
     assert isinstance(checks,list) and len(checks)==expected[name],'Nombre de groupes inattendu'
     if name=='login-ui':assert all(isinstance(row,str) and row for row in checks)
@@ -92,16 +103,40 @@ def verify_report(name,path,is_remote,expected_hash):
     if name in ('control-ui','execution-ui'):assert result['faults']==[] and result['cleanupErrors']==[]
     if name=='manual-ui':assert result['faults']==[]
     if name=='publication-ui':assert result['faults']==[]
+    if name=='storage-console-ui':assert result['faults']==[]
     return len(checks)
+
+
+# @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
+# @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
+def private_credentials():
+    """A single private line; its contents never enter command/report metadata."""
+    attributes=None
+    try:
+        if sys.stdin.isatty():
+            attributes=termios.tcgetattr(sys.stdin.fileno())
+            hidden=attributes.copy();hidden[3]&=~termios.ECHO
+            termios.tcsetattr(sys.stdin.fileno(),termios.TCSANOW,hidden)
+        print('Identifiants SSO attendus sur stdin privée (JSON username/password).',flush=True)
+        line=sys.stdin.readline(8194)
+        value=json.loads(line)
+        assert len(line)<=8192 and isinstance(value,dict)
+        assert all(isinstance(value.get(key),str) and 0<len(value[key])<=2048 for key in ('username','password'))
+        return (json.dumps({key:value[key] for key in ('username','password')})+'\n').encode()
+    except (ValueError,AssertionError):raise SystemExit('invalid_private_sso_input') from None
+    finally:
+        if attributes is not None:termios.tcsetattr(sys.stdin.fileno(),termios.TCSANOW,attributes)
 
 def main():
     # @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
     # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--scope',choices=('engine','console','publication','storage'),default='engine')
+    parser.add_argument('--scope',choices=('engine','console','publication','storage','storage-console-focused','storage-console'),default='engine')
     scope=parser.parse_args().scope
     report={'engine':REPORT,'console':ROOT/'.local/e2e/console-execution-regressions.json','publication':ROOT/'.local/e2e/publication-regressions.json',
-            'storage':ROOT/'.local/e2e/storage-discard-regressions.json'}[scope]
+            'storage':ROOT/'.local/e2e/storage-discard-regressions.json',
+            'storage-console-focused':ROOT/'.local/e2e/storage-console-focused.json',
+            'storage-console':ROOT/'.local/e2e/storage-console-regressions.json'}[scope]
     console_cases=[
         next(row for row in CASES if row[0]=='public'),
         ('login-ui',['node','e2e/login-ui.mjs'],'.local/e2e/login-ui.json',False),
@@ -115,35 +150,67 @@ def main():
         cases=CASES+[row for row in console_cases if row[0] not in {case[0] for case in CASES}]
     # @spec docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#qualification-réelle
     # @verifies docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#qualification-réelle
-    if scope=='storage':
-        cases=[
+    storage_cases=[
             ('storage-discard',remote(['python3','-B',REMOTE+'e2e/storage-discard.py'],'root'),'storage/discard-proof.json',True),
             ('storage-agent',remote(['bash',REMOTE+'storage/dev.sh','agent-test'],'root'),'storage/agent-proof.json',True),
             ('storage-limits',remote(['bash',REMOTE+'storage/dev.sh','limits-test'],'root'),'storage/agent-limits-proof.json',True),
             ('storage-preparations',remote(['python3','-B',REMOTE+'e2e/storage-preparations.py'],'root'),'storage/preparations-proof.json',True),
             *[next(row for row in CASES if row[0]==name) for name in ('managed-storage','function-storage','public-invocations')],
         ]
-    records=[];baseline=None
+    if scope=='storage':cases=storage_cases
+    storage_console=scope in ('storage-console-focused','storage-console')
+    if storage_console:
+        focused=[
+            (name,['node','e2e/'+name+'.mjs'],'.local/e2e/'+name+'.json',False)
+            for name in ('storage-console-api','storage-console-ui','storage-command-recovery','storage-validation-recovery','storage-decision-recovery')
+        ]+[
+            ('storage-legacy-partial',['node','e2e/storage-legacy-recovery.mjs','--partial'],'.local/e2e/storage-legacy-partial.json',False),
+            ('storage-legacy-recovery',['node','e2e/storage-legacy-recovery.mjs','--full'],'.local/e2e/storage-legacy-recovery.json',False),
+        ]
+        if scope=='storage-console-focused':cases=focused
+        else:
+            union=CASES+console_cases+storage_cases+focused
+            cases=list({row[0]:row for row in union}.values())
+    records=[];prerequisites=[];baseline=None
     def save(done=False):
         temporary=report.with_suffix('.tmp')
-        temporary.write_text(json.dumps({'completed':done,'serial':True,'scope':scope,'commands':records},ensure_ascii=False,indent=2)+'\n')
+        temporary.write_text(json.dumps({'completed':done,'serial':True,'scope':scope,'prerequisites':prerequisites,'commands':records},ensure_ascii=False,indent=2)+'\n')
         temporary.replace(report)
     report.parent.mkdir(parents=True,exist_ok=True,mode=0o700);save()
-    for name,command,path,is_remote in cases:
+    def execute(name,command,path,is_remote,*,count=True,private_input=None):
+        nonlocal baseline
         before=snapshot(path,is_remote)
         if baseline is None:baseline={k:before[k] for k in ('image','source_sha256')}
         assert all(before[k]==v for k,v in baseline.items()),'Image ou sources changées avant campagne'
         record={'campaign':name,'command':command,'report_path':path,'report_remote':is_remote,'before':before,'exit_code':None}
-        records.append(record);save();print(json.dumps({'campaign':name,'state':'running'}),flush=True)
+        (records if count else prerequisites).append(record);save();print(json.dumps({'campaign' if count else 'prerequisite':name,'state':'running'}),flush=True)
         started=time.monotonic()
-        result=subprocess.run(command,cwd=ROOT)
+        options={'input':private_input} if private_input is not None else {'stdin':subprocess.DEVNULL}
+        result=subprocess.run(command,cwd=ROOT,**options)
         record.update(exit_code=result.returncode,duration_seconds=round(time.monotonic()-started,2));save()
         if result.returncode:raise SystemExit(result.returncode)
         after=snapshot(path,is_remote);record['after']=after;save()
         assert all(after[k]==v for k,v in baseline.items()),'Image ou sources changées pendant campagne'
         assert before['report']['sampled_at_ns']<=after['report']['mtime_ns']<=after['report']['sampled_at_ns'],'Rapport non régénéré par la campagne'
-        record['passed_groups']=verify_report(name,path,is_remote,after['report']['sha256'])
+        if count:record['passed_groups']=verify_report(name,path,is_remote,after['report']['sha256'])
+        else:
+            value=read_report(path,is_remote,after['report']['sha256']);assert value['completed'] is True,'Prérequis incomplet'
+            if name=='dev-sso-sessions':assert value['authenticated'] and value['independent_sessions']==2 and value['platform_cookies_only']
+            elif name=='storage-legacy-build':assert value['current_image']==baseline['image'] and value['current_tag_unchanged']
+            elif name=='storage-console-physical':assert value['physical']['completed'] and value['campaign_count']==6 and value['function_count']==24
+            else:raise AssertionError('Prérequis inconnu')
         record['fresh_report_verified']=True;record['report_content_verified']=True;save()
+    credentials=None
+    if storage_console:
+        credentials=private_credentials()
+        execute('dev-sso-sessions',['node','e2e/dev-sso-sessions.mjs'],'.local/e2e/dev-sso-sessions.json',False,count=False,private_input=credentials)
+        execute('storage-legacy-build',['python3','-B','e2e/storage-legacy-build.py'],'.local/e2e/storage-legacy-build.json',False,count=False)
+    for name,command,path,is_remote in cases:
+        execute(name,command,path,is_remote,private_input=credentials if name=='storage-legacy-recovery' else None)
+    credentials=None
+    if storage_console:
+        execute('storage-console-physical',['python3','-B','e2e/storage-suite-inspect.py',str(report.relative_to(ROOT))],
+                '.local/e2e/storage-console-physical.json',False,count=False)
     save(True)
 
 if __name__=='__main__':main()

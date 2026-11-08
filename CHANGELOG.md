@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Suite publique de stockage intégrée : sept campagnes et 37 groupes E2E passent
+  sur l’image du contrôle inchangée. Deux sessions SSO réelles préparées par stdin
+  privée, onze archives créées via UI pour la pagination, 24 fonctions purgées,
+  restaurations historiques recoupées et quatorze captures inspectées.
+  [Checkpoint](docs/evidence/storage-console-focused-dev-2026-11-08.json).
+  L’union complète des régressions reste ouverte avant clôture SLS-065.
+
 - Versionnement par hash, déduplication, appels épinglés et pilote sans activation
   spécifiés dans SLS-074 et FUNCTION_VERSIONS. Les raccordements console, éditeur,
   client HTTP, journaux, budgets et crons sont consignés ; l’extension reste

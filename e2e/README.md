@@ -59,6 +59,26 @@ conserve son index de 165 sources et ses captures, sur la même image produit.
 
 ## Stockage public et manuel
 
+Les commandes `python3 -B e2e/execution-suite.py --scope storage-console-focused`
+et `--scope storage-console` intègrent désormais les campagnes ci-dessous.
+Le premier scope passe sept campagnes et 37 groupes réels dans le
+[checkpoint ciblé](../docs/evidence/storage-console-focused-dev-2026-11-08.json) :
+173 sources liées avant/après, 24 fonctions purgées dans six namespaces,
+deux restaurations historiques distinctes, 25 sources embarquées et quatorze
+captures UI inspectées. Le scope complet réunit 29 campagnes, soit 397 groupes
+attendus ; son replay élargi reste nécessaire avant clôture de SLS-065.
+
+Ces deux scopes reçoivent une ligne JSON `username`/`password` sur stdin privée.
+Le runner coupe lui-même l’écho d’un terminal et ne conserve pas cette entrée.
+`dev-sso-sessions.mjs` ouvre deux vrais parcours accueil → SSO dans des contextes
+neufs, enregistre seulement les cookies de plateforme dans `admin-session.json`
+et `purge-admin-session.json` privés, puis vérifie leur différence. Le build
+historique et le recoupement physique sont des prérequis, sans groupes ajoutés.
+Les rapports de suite sont `.local/e2e/storage-console-focused.json` et
+`.local/e2e/storage-console-regressions.json` ; le recoupement final est
+`.local/e2e/storage-console-physical.json`. Les identifiants ne rejoignent ni
+arguments de commande, ni variables d’environnement, ni rapports ou fichiers.
+
 Les archives antérieures au registre ont leur [contrat de banc](../docs/STORAGE_LEGACY_PROOF.md).
 Après synchronisation des sources, lancer séparément et en série :
 
@@ -90,12 +110,16 @@ retirée entièrement après observation. Ce retrait n’est pas une purge méti
 La [preuve corrigée](../docs/evidence/storage-legacy-recovery-dev-2026-11-07.json)
 réunit cinq groupes historiques/restauration, deux de validation vivante, sept de
 commandes sous panne et huit du manuel. La [preuve avant correction](../docs/evidence/storage-legacy-cleanup-defect-dev-2026-11-07.json)
-conserve l’échec réel. L’intégration de ces campagnes à la suite commune reste ouverte.
+conserve l’échec réel. Ces campagnes sont maintenant intégrées au scope ciblé ;
+les régressions élargies de la suite complète restent ouvertes.
 
 Après synchronisation des sources sur le SPARK, exécuter successivement depuis
 la racine `node e2e/storage-console-api.mjs`, `node e2e/storage-console-ui.mjs`,
 `node e2e/manual-ui.mjs`, puis `node e2e/control-ui.mjs`. Les campagnes ciblées
-passent respectivement neuf, neuf, huit et onze groupes réels. La preuve reste
+passaient respectivement neuf, neuf, huit et onze groupes dans le checkpoint initial.
+La campagne UI courante passe dix groupes : elle crée onze brouillons et les
+archive depuis la console avant d’exercer les deux pages, puis purge ses douze
+fonctions. Le rapport `campaigns` contient leur mapping exhaustif. La preuve reste
 un [checkpoint SLS-065](../docs/evidence/storage-console-checkpoint-dev-2026-11-07.json) :
 les pannes et reprises du contrôle public et les régressions élargies restent ouvertes.
 
@@ -153,6 +177,8 @@ chaque connexion réelle ; déplacer son premier résultat avant la seconde conn
 Le premier cookie est consommé par la véritable déconnexion testée. Il faut donc
 une nouvelle connexion de purge avant toute relance ; recopier le cookie actif
 de l’observateur est refusé. Les deux fichiers restent privés, en mode 0600.
+Les scopes `storage-console-focused` et `storage-console` automatisent ces deux
+connexions réelles par `dev-sso-sessions.mjs` à partir de l’entrée privée stdin.
 
 Sous contention, le diagnostic SQLite est lu dans le journal réel, car son
 écriture en base peut elle-même échouer. Le writer ne modifie aucune ligne ;
@@ -183,7 +209,7 @@ L’appelant doit conserver les empreintes des rapports et du collecteur avec
 son résultat pour rattacher les UUID aux campagnes effectivement exécutées.
 
 Le manuel est recoupé intégralement avec `docs/manual.md` : treize chapitres,
-34 paragraphes et empreinte SHA256. Ses onze captures comprennent les nouveaux
+39 paragraphes et empreinte SHA256. Ses onze captures comprennent les nouveaux
 chapitres cache et archives sur ordinateur et mobile ; elles doivent être relues.
 
 ## Banc et campagnes

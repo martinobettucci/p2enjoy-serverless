@@ -271,5 +271,10 @@ effacement de code par le nettoyage général malgré une purge bloquée ; le
 correctif réserve ces artefacts au résolveur de purge. Cinq groupes historiques
 et de restauration, neuf groupes de panne/validation et huit du manuel passent
 sur l’image corrigée : 22 groupes, zéro échec/skip, douze captures relues.
-Restent l’intégration à la suite commune et les régressions élargies. Les trois
+L’intégration des sept campagnes publiques/historiques à la suite commune passe
+37 groupes réels : [checkpoint ciblé](docs/evidence/storage-console-focused-dev-2026-11-08.json).
+La pagination crée ses onze archives depuis la console ; les 24 fonctions des
+campagnes sont purgées et les quatorze captures relues. Deux connexions SSO réelles
+sont préparées automatiquement par stdin privée. Les régressions élargies du
+scope `storage-console` restent à rejouer avant clôture SLS-065. Les trois
 notes SPARK actualisées ont été proposées le 8 novembre.

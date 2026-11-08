@@ -15,6 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
+    output = ROOT / '.local/e2e'
+    output.mkdir(parents=True, exist_ok=True, mode=0o700)
+    (output / 'storage-legacy-build.json').write_text(json.dumps({'completed': False, 'revision': REVISION}) + '\n')
     # The old application, its frontend and dependency locks come from one Git tree.
     archive = subprocess.check_output(['git', 'archive', REVISION, 'control', 'web'], cwd=ROOT)
     hashes = {}
@@ -62,8 +65,6 @@ print(json.dumps({'historical_image':built,'current_image':original,'current_tag
     # Build output is retained separately; it contains no cell configuration.
     result = subprocess.run(SSH + ['python3 -B -'], input=remote, text=True,
                             capture_output=True, timeout=900)
-    output = ROOT / '.local/e2e'
-    output.mkdir(parents=True, exist_ok=True)
     (output / 'storage-legacy-build.log').write_text(result.stdout + result.stderr)
     assert result.returncode == 0, 'historical_build_failed; see .local/e2e/storage-legacy-build.log'
     report = json.loads(result.stdout.strip().splitlines()[-1])

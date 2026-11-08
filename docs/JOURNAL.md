@@ -19,6 +19,24 @@ restauration distinct, car ses UUID temporaires n’existent pas dans la cellule
 habituelle. Les erreurs SSO ne doivent jamais réémettre une saisie sensible.
 Le produit reste inchangé ; seule la qualification est étendue à ce stade.
 
+Résultat : les sept campagnes passent 37 groupes en série, sans échec/skip.
+La revue fait compléter l’inventaire par API après fermeture de la page, afin
+de retrouver une création dont la navigation aurait échoué. La campagne UI
+passe ses dix groupes et recoupe les UUID de ses propres archives sur deux pages ;
+ses quatorze captures sont inspectées. La capture cache-pending montre déjà
+un reçu terminé avec une observation antérieure des volumes ; la capture suivante
+montre la lecture réactualisée. Les données restent horodatées et la preuve
+ne présente pas cette capture comme un reçu encore en attente.
+
+Le runner renouvelle deux sessions SSO indépendantes, n’inscrit les identifiants
+que dans les pipes mémoire et invalide aussi le rapport de build historique dès
+son entrée. Les 173 sources et l’image sont identiques avant/après chaque étape.
+Le recoupement physique valide les 24 fonctions, six namespaces, zéro réservation
+et allocation restante, les 25 sources embarquées et les deux restaurations
+historiques séparées. Les UUID temporaires restent hors du collecteur habituel.
+Le checkpoint est conservé avant de lancer les 29 campagnes de l’union complète ;
+SLS-065 reste ouverte jusqu’à cette régression élargie et aux notes finales.
+
 ## 2026-11-08 — Version de code par hash et pilote d’utilisateurs
 
 Le responsable demande de créer une version seulement si le code uploadé change,
