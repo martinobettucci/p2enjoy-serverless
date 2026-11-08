@@ -3309,3 +3309,21 @@ confirme les mêmes services/images/démarrages, agent actif, fichiers officiels
 inchangés et deux lignes de route lisibles sur 18090. Les gardes sont terminées.
 Ce [checkpoint](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
 ne clôture ni la garde ni SLS-066.
+
+## 2026-11-08 — Préparation de pause native pendant l’attente DNS
+
+Le checkpoint de garde est livré dans 35a040f, explicitement incomplet. Le
+cache natif de l’alias reste un prérequis pour son échéance HTTPS, mais il
+n’empêche pas la preuve d’une requête canonique retenue puis libérée sans
+changement de route. Ce travail prépare l’état vide UI sans contourner le DNS.
+
+Décision avant code : extraire la classe NativeObserver inchangée vers un
+module de preuve commun, car le fichier historique exécute son opérateur au
+chargement. Écarter l’import de ce script et la duplication d’un second traceur.
+Rejouer quatre groupes transport adresses et cinq configuration après extraction.
+Le nouveau pilote possède son protocole release et sa reprise indépendante,
+bornés au processus ASGI vérifié et aux UUID de son namespace original. Une
+perte SIGKILL du traceur doit libérer la vraie requête par le timer du SPARK.
+Aucun port ne change pendant ces premiers scénarios ; la garde native ne
+remplace pas celle des routes. Les détails, durées, refus et inventaires sont
+persistés dans INVOCATION_URLS avant implémentation.

@@ -303,6 +303,51 @@ négative, avec les deux autoritaires corrects. Aucun détour/retrait n’a comm
 Le cache natif doit réellement se rétablir avant la reprise, sans réécriture
 du bon enregistrement, forçage de DNS ou contournement TLS.
 
+## Barrière native de pause et libération
+
+Pendant l’attente de résolution native de l’alias, préparer la barrière sans
+changer de route. Le namespace original de preuve porte le préfixe
+invocation-route-pause suivi de huit chiffres hexadécimaux, avec un service et
+une fonction possédés. Les identifiants et l’inventaire exact sont vérifiés en
+lecture native avant attachement ; aucune invocation, instance, publication
+active ni opération de stockage n’est admise à cette frontière.
+
+Extraire NativeObserver du pilote historique dans un module de preuve commun,
+en conservant son corps et son ABI. Le script historique effectue des opérations
+au chargement et ne constitue pas un module importable. Cette extraction évite
+une seconde implémentation du traceur ; elle n’altère ni les modes historiques,
+ni les commandes de destruction de leur propre preuve. Les quatre groupes de
+transport des adresses et les cinq de configuration doivent être rejoués après
+ce déplacement. L’API à huit groupes qui invoque aussi l’alias reste distincte
+et attend la résolution native disponible.
+
+Le nouveau pilote de pause s’exécute uniquement dans infra-serverless, sous
+root, sur x86_64. Il identifie l’unique processus ASGI de l’image attendue, son
+conteneur, sa naissance et son cgroup, et refuse un autre traceur présent.
+PTRACE_SEIZE sans EXITKILL, observation des syscalls et lecture mémoire bornée
+à la ligne publique du GET exact : aucun en-tête, cookie, jeton, corps, registre
+ou résultat système n’est lu ou remplacé au-delà de ce périmètre. Identifier le
+vrai socket TCP de réception 18090, retenir après recv complet et avant reprise
+du traitement applicatif. Publier la barrière avec ses seules métadonnées.
+
+Un protocole release détache et laisse terminer cette même requête, sans cut
+ni destruction du contrôle. Un programme indépendant figé et son timer local
+sur le SPARK sont armés avant attachement : perte du traceur ou échéance doit
+confirmer sa fin puis reprendre seulement le processus ASGI d’origine, après
+vérification de naissance/conteneur/image/cgroup. Il ne restaure aucune route
+et ne remplace pas la garde de console. Le timer normal dispose de soixante-dix
+secondes ; son scénario de perte du traceur utilise douze secondes. Le reçu,
+les processus et la fin effective du timer sont recoupés avant nettoyage.
+
+Premiers scénarios sans changement de route : vraie requête HTTPS canonique
+retenue puis libérée avec catalogue à deux domaines ; perte SIGKILL du traceur
+retenu puis reprise par son seul programme indépendant. Les lectures de santé
+passent par le vrai contrôle et sa boucle locale, sans dépendre du DNS de
+l’alias. Les rapports conservent les identités et l’issue de la requête admise,
+sans qualifier le détournement Caddy encore absent. Aucune erreur ne peut être
+convertie en résultat réseau ou applicatif fabriqué. Les parcours UI publics
+et les changements de routes suivront après leurs prérequis qualifiés.
+
 ## Suite complète de preuve
 
 Le scope `invocation-urls` de `e2e/execution-suite.py` compose l’union
