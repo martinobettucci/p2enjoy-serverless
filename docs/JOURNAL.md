@@ -2974,3 +2974,8 @@ snapshot. Sélecteurs de parents recherchés et paginés dans DialogForm plutôt
 qu’un chargement global non borné. Les régressions suivent la navigation réelle,
 sans accès UI direct ni suppression de scénario. Le contrat détaillé fixe
 limites, déroulé, API/UI, manuel et preuves ; aucune réussite anticipée.
+
+La table à six colonnes utilise le token local --size-catalogue-table de
+720 px : garder les valeurs lisibles et un défilement interne sur mobile.
+Les autres dimensions reprennent le socle. Les nouvelles sources ne sont pas
+encore construites ni déployées ; aucune preuve visuelle n’est anticipée.

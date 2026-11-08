@@ -241,3 +241,7 @@ Les tableaux larges défilent dans leur conteneur, les noms complets reviennent
 sont explicites. La query de retour accompagne les liens des six facettes.
 Ce parcours reste à implémenter et à qualifier ; les preuves existantes
 décrivent encore l’accueil Namespaces.
+
+La table conserve une largeur minimale locale de 720 px, exprimée par
+`--size-catalogue-table`, pour ses six colonnes ; les noms reviennent à la ligne
+et le défilement reste dans la table sur mobile, sans élargir la page.
