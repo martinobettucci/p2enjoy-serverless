@@ -3199,3 +3199,19 @@ Les huit groupes API/CLI et six UI existants seront ensuite rejoués avec les
 deux domaines réels et leurs rapports distincts. Retrait/18091 et garde restent
 une étape séparée à réaliser. Le mode clair et quatre alias supplémentaires
 restent hors du périmètre reçu ; aucun de ces scénarios n’est déclaré qualifié.
+
+## 2026-11-08 — Alias déclaré, comparaison du pilote trop stricte
+
+Le DNS A est créé, puis la résolution native aboutit vers l’IP attendue. Le
+POST ingress déclare l’alias 18090 TLS et le chemin suggestions confirme sa
+lecture de cellule. L’essai s’arrête ensuite sur une assertion du client :
+la réapplication normale actualise applied_at de la canonique, comparé comme
+s’il s’agissait de sa configuration. La relecture normale confirme les mêmes
+identifiant, propriétaire, IP, port, TLS et activation ; l’alias a son identité
+propre. Aucune mutation canonique n’a été envoyée.
+
+INC-004 consigne cette incohérence du pilote. Décision avant correction :
+comparer les champs matériels et garder la date séparément, puis vérifier
+l’installation existante avec une nouvelle commande strictement en lecture
+seule. Le premier reçu reste incomplet et n’est pas réécrit en succès. Aucun
+POST n’est rejoué ; les HTTPS réels et campagnes métier restent à vérifier.

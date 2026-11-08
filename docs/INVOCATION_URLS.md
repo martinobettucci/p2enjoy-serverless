@@ -203,6 +203,15 @@ suivent avec une garde indépendante éprouvée et un contrat de pilote borné,
 avant leur première exécution. L’autorisation ne couvre pas de nouvelles
 variables de cellule, d’adoption de notes ou d’administration d’autres SPARKs.
 
+La console peut actualiser applied_at sur les routes lors de sa réapplication
+normale. Le pilote compare les propriétés matérielles (identité, propriétaire,
+domaine, IP, port, TLS, activation), en conservant cette date comme observation.
+Après déclaration effective et arrêt d’une vérification, une commande distincte
+verify-installed-alias reprend uniquement les lectures et le HTTPS. Elle exige
+le reçu de déclaration, recoupe les mêmes identifiants et ne renvoie aucune
+mutation. Le reçu initial reste incomplet ; son diagnostic et sa reprise sont
+conservés séparément. Un changement matériel demeure un échec.
+
 ## Suite complète de preuve
 
 Le scope `invocation-urls` de `e2e/execution-suite.py` compose l’union
