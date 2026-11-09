@@ -107,3 +107,31 @@ terminés, deux HTTPS sains. Nom, inode, contenu, propriétaire/groupe, mode 064
 mtime restent ceux d’origine ; ctime change comme attendu. Services, démarrages,
 routes et fichiers de configuration restent inchangés, aucune fonction créée.
 Le refus public source_forbidden et son rendu UI restent à éprouver ensuite.
+
+## Catalogue public sous refus de lecture
+
+Le client `invocation-source-api.mjs` éprouve quatre groupes en série, après
+les trois gardes qualifiées. Une seule fonction originale est publiée par
+l’adaptateur dans le namespace possédé `source-access-XXXXXXXX`, avec nonce
+complet dans les descriptions du namespace et du service `source-access-fixture`.
+Le helper reçoit ces trois UUID via un argument SSH correctement cité ; son
+précontrôle natif exige cette fonction seule et aucune opération en cours.
+
+1. Publication réelle, catalogue disponible avec les deux domaines HTTPS et
+   révision active identique à celle retournée par l’adaptateur.
+2. Faute réelle et nouvel open errno 13 : catalogue HTTP 200 pour administrateur
+   et jeton Read, source unavailable/source_forbidden, items/wildcards vides,
+   total zéro, même révision. La source ne porte que state/observed_at/error_code,
+   sans chemin ni métadonnées de fichier. Anonymat, jeton invalide, droits CRUD
+   sans Read et jeton révoqué restent 401/403, sans diagnostic de source.
+3. Les deux URL connues avant la faute invoquent réellement le handler Docker
+   pendant celle-ci. Un nouveau catalogue reste refusé après ces appels.
+4. Libération explicite et fin du helper/timer/service, source et lecture
+   restituées ; catalogue et URL identiques à l’origine, puis appels réels.
+
+Le timer indépendant est armé pour 120 secondes avant chmod. Un dépassement,
+une restauration indépendante prématurée ou une réponse inattendue fait échouer
+la campagne. Le nettoyage conserve la fixture si la restitution n’est pas
+confirmée ; sinon DELETE/purge normaux et recoupement physique en lecture seule.
+Conserver les reçus figés et empreintes des sources/images avant/après.
+Ce complément ne qualifie ni le rendu UI ni les autres classes de panne source.
