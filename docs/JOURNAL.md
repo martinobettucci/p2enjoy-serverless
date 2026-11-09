@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 2026-11-09 — Borner la preuve UI à la publication durable et à son rendu
+
+Le troisième replay reste incomplet sur la collecte CDP du PUT de réimportation,
+après quatre groupes et les refus409/404 correctement focalisés. La publication
+réelle et son nettoyage ne sont pas en échec. Cette instrumentation, utile au
+résultat distant de déconnexion, dépasse la preuve nécessaire ici.
+
+Décision avant correction : observer URL et statut du vrai PUT, puis relire le
+même candidat par GET authentifié et vérifier son état published, hash et
+validation. Comparer sa classification nouvelle/réutilisée/réimportée au message
+réellement affiché. Ces lectures et le rendu sont les autorités du parcours de
+suivi ; aucun corps de PUT n’est reconstitué ni revendiqué comme observé. Les
+rapports partiels, captures et gels de sources restent conservés.
+
 ## 2026-11-09 — Focus vérifié, collecte CDP directe du PUT
 
 Le replay178394ab passe quatre groupes, dont le vrai409 de promotion et son
