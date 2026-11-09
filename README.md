@@ -113,13 +113,16 @@ la version et les compteurs données/cache1–5. La fonction est purgée physiqu
 les deux gardes sont terminées et les ressources actives sont libérées. L'image
 reste19cfe884 ; les autres pannes et la campagne complète restent dans SLS-074.
 
-Un [checkpoint de migration008](docs/evidence/function-version-migration008-checkpoint-dev-2026-11-09.json)
-reproduit puis corrige l'acceptation d'un historique007 incohérent. La candidate
-def45648f9e7 passe neuf groupes réels sur copies privées : six refus, témoin,
-verrou/reprise et contraintes. Les anciennes données et les backfills de2882
-publications/4418 invocations sont conservés. Elle n'est pas servie : interruption
-WAL, bascule et régressions publiques restent à terminer. Les services actuels,
-la sauvegarde originale et les fichiers officiels sont inchangés.
+La [reprise de migration008](docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json)
+complète le premier checkpoint : dix groupes sur copies privées de la vraie007,
+dont six refus transactionnels, témoin, verrou/reprise, contraintes et SIGKILL
+après écriture WAL avant commit. La relance du même conteneur conserve les
+données et2882/4418 backfills. L'image corrigée def45648f9e7 est ensuite déployée
+sur DEV avec sauvegarde native ; les17 tables et le schéma déjà008 sont identiques
+après remplacement. Les12 groupes API et5 CLI passent, avec16 invocations
+réussies et un refus attendu. Deux fonctions sont purgées physiquement. Les
+gardes nominales sont désarmées ; leurs pannes propres, les purges historiques
+engagées et la régression complète restent ouvertes dans SLS-074.
 
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.

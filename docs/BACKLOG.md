@@ -825,21 +825,26 @@ recoupe l'exécution indépendante ; aucune coupure pendant unlink, perte SSH ou
 panne propre de la garde n'est déduite de cette preuve. Ces fenêtres, les autres
 pannes, migrations perturbées et la régression complète restent ouvertes.
 
-Le [complément008](FUNCTION_VERSION_MIGRATION_008_RECOVERY.md) a reproduit le
-refus manquant sur19cfe884 : un alias actif avec stored_bytes=0 était migré.
-La correction de première transition est construite dans la candidate def45648f9e7,
-non servie. Son [checkpoint](evidence/function-version-migration008-checkpoint-dev-2026-11-09.json)
-passe neuf groupes sur275 sources : six refus transactionnels, témoin historique007,
-verrou/reprise et contraintes (14 refus SQL/3 contrôles, non additionnés).
-Les anciennes colonnes des16 tables,863 groupes/219 doublons,261 tombstones
-inconnus et141 alias supprimés au hash connu restent conservés ;2882 publications
-et4418 invocations ont leurs nouveaux hash recoupés. Le jeu réel ne contient
-pas la variante premier hash inconnu puis hash connu ; elle reste à éprouver.
-Les31 backends ne diffèrent que par008, web identique. Conteneurs/copies retirés,
-sauvegarde et services/référence/fichiers officiels conservés, compteurs actifs nuls.
-La coupure avant commit WAL et sa garde restent à implémenter, puis à qualifier
-avant bascule et replays publics sur la candidate. Purges historiques engagées,
-autres pannes et régression complète restent nécessaires. Statut conservé[~].
+Le [complément008](FUNCTION_VERSION_MIGRATION_008_RECOVERY.md) reproduit le
+refus manquant sur19cfe884 puis corrige la première transition. Le premier
+checkpoint neuf reste historique ; la [preuve de reprise](evidence/function-version-migration008-recovery-dev-2026-11-09.json)
+retient dix groupes sur276 sources : six refus transactionnels, témoin007,
+verrou/reprise, contraintes et coupure WAL/reprise. Les anciennes colonnes des16
+tables,863 groupes/219 doublons,261 tombstones inconnus et141 alias supprimés au
+hash connu sont conservés ;2882 publications/4418 invocations sont recoupées.
+Le SIGKILL suit une écriture WAL réelle non commise :007 reste exact puis le
+même conteneur applique008. Copies retirées, sauvegarde originale inchangée.
+
+La bascule def45648f9e7 est qualifiée avec backup natif privé et garde d'image :
+17 tables et schéma déjà008 strictement identiques après remplacement. Sur277
+sources figées,12 groupes API et5 CLI passent, avec16 invocations réussies et
+un refus attendu. Deux fonctions sont purgées physiquement ;31 backends et4
+fichiers HTTPS recoupés, référence/configuration/routes conservées, actifs nuls.
+Les trois essais WAL et l'essai de bascule arrêté avant garde sont séparés du
+total. Les gardes nominales sont désarmées ; leur déclenchement autonome et leurs
+pannes propres ne sont pas qualifiés par ce parcours. Le jeu ne contient pas
+premier hash inconnu puis connu ; cette variante, les purges engagées, les autres
+pannes et la régression complète restent nécessaires. Statut conservé[~].
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

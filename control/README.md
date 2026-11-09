@@ -314,7 +314,7 @@ Les références006 et courante sont conservées sous des tags de responsabilit�
 
 ## Noms des validateurs qualifiés
 
-Le contrôle sert maintenant19cfe884642a, schéma008 inchangé. Ses validateurs
+Lors de la preuve076, le contrôle sert19cfe884642a, schéma008 inchangé. Ses validateurs
 portent `serverless-code-validator-<uuid>` ; les labels reprennent aussi les
 anciens noms après interruption. La [preuve076](../docs/evidence/validator-names-dev-2026-11-09.json)
 passe57 groupes : ancien orphelin réel, trois imports observés, puis36/12/5
@@ -347,13 +347,25 @@ purgée physiquement, deux gardes terminées ; même19cfe884/configuration et
 référence, nouveau démarrage du contrôle attendu. Aucune migration ni variable
 ajoutée. Commande et limites dans [e2e](../e2e/README.md#reprise-des-paquets-dédupliqués--complément-sls-074).
 
-## Candidate avec gardes de migration008
+## Gardes de migration008 déployées en DEV
 
-Le [checkpoint](../docs/evidence/function-version-migration008-checkpoint-dev-2026-11-09.json)
-reproduit sur19cfe884 l'absence de refus d'un alias actif à zéro octet, puis
-éprouve la candidate def45648f9e7 : neuf groupes sur copies privées du véritable007,
-six refus, témoin conservé, verrou/reprise et contraintes. Le seul delta backend
-est le préfixe de garde008 ; le web est identique. Cette première transition
-reste sautée par les bases déjà008. La candidate n'est pas servie et les services
-sont conservés. Interruption WAL et sa garde, bascule et replays publics restent
-à terminer selon [le contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md).
+La [preuve de reprise](../docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json)
+réunit dix groupes de composant sur276 sources et17 groupes publics sur277
+sources : six refus, témoin, verrou/reprise, contraintes, interruption WAL puis
+12 API et5 CLI. Le SIGKILL est observé après une vraie écriture de frame non
+commise ; rollback007 exact et relance du même conteneur appliquent008.
+Les2882 publications et4418 invocations historiques sont recoupées. Les replays
+ne s'ajoutent pas aux anciens checkpoints comme comportements nouveaux.
+
+Le contrôle sert désormais def45648f9e7, conteneur e661516b, démarré le
+2026-11-09T18:25:10.056771655Z. Le seul delta parmi31 backends est le préfixe008,
+le web reste identique. La base déjà008 n'a pas rejoué ce script ; ses17 tables
+et son schéma sont strictement identiques avant/après remplacement. Le backup
+natif privé est conservé dans `qualification-history/migration008-deployment-backup-b6c39eaeb4c447f2a7aab719902f938c`. Aucune restauration DB automatique.
+
+Les deux fonctions publiques sont purgées,16 appels réussissent et un refus
+attendu est conservé. Gardes désarmées, référence et fichiers officiels inchangés,
+ressources actives nulles. L'essai arrêté avant garde sur une erreur du pilote
+est conservé séparément. Les pertes propres des gardes, historiques de purge
+engagés, variante premier hash inconnu puis connu et autres pannes restent
+à éprouver selon [le contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md).

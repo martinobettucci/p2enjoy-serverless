@@ -20,7 +20,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 
@@ -525,7 +525,7 @@ Ces trois notes sont proposées individuellement, sans adoption revendiquée.
 
 ## Noms des validateurs — SLS-076 qualifiée
 
-Le contrôle008 sert19cfe884642a et nomme ses validateurs
+Lors de la preuve076, le contrôle008 sert19cfe884642a et nomme ses validateurs
 serverless-code-validator-UUID. L’ancien p2-v est repris par labels après
 interruption réelle, sans redémarrer l’ancienne image avant la nouvelle.
 Preuve : docs/evidence/validator-names-dev-2026-11-09.json. Quatre groupes
@@ -553,3 +553,20 @@ Le helper natif vise le seul inode candidat ; sa garde est armée avant chmod.
 Le superviseur recoupe le SIGKILL par waitpid/PID/naissance et le journal systemd
 recoupe la reprise indépendante. Les pertes SSH et pannes propres de garde
 restent à éprouver. Contrat : docs/FUNCTION_VERSION_DUPLICATE_RECOVERY.md.
+
+
+## Gardes008 et image actuelle
+
+Le contrôle courant serverless-api est e661516b, image def45648f9e7, démarré
+2026-11-09T18:25:10.056771655Z. Seul le préfixe de première transition008 change
+parmi31 backends ; le web reste identique. Dix groupes sur vraies copies007
+qualifient refus et coupure WAL avant commit/reprise du même conteneur. La
+bascule conserve les17 tables et le schéma déjà008 ; un backup SQLite natif
+privé est conservé dans `qualification-history/migration008-deployment-backup-b6c39eaeb4c447f2a7aab719902f938c`. Ne pas restaurer automatiquement cette base.
+
+Douze groupes API puis cinq CLI passent sur l'image servie,16 appels réussissent
+et un refus attendu est conservé. Deux fonctions purgées physiquement, ressources
+actives nulles, garde d'image désarmée et mutateur joint. Référence et fichiers
+officiels/routes restent identiques. Preuve : docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json. Les pertes propres des gardes, les
+purges engagées et autres critères restent dans SLS-074. Ces notes sont proposées
+individuellement ; leur adoption n'est pas revendiquée.

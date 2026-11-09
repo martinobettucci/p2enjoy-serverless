@@ -58,10 +58,12 @@ références étrangères orphelines ou un cache canonique incompatible avec son
 code conservé. Le [complément de migration008](FUNCTION_VERSION_MIGRATION_008_RECOVERY.md)
 définit les refus, le cas historique déjà reproduit et la reprise avant commit
 WAL. La correction de première transition ne réexécute rien sur une base déjà008.
-Son checkpoint sur candidate def45648f9e7 passe neuf groupes de composant
-(six refus, témoin, verrou/reprise, contraintes), sans bascule du contrôle servi.
-La reprise WAL, les purges historiques engagées et les replays publics restent
-nécessaires ; ce checkpoint ne clôture pas le complément ni SLS-074.
+Sa [preuve de reprise](evidence/function-version-migration008-recovery-dev-2026-11-09.json)
+passe dix groupes de composant (six refus, témoin, verrou/reprise, contraintes,
+SIGKILL WAL/reprise), puis12 API et5 CLI sur def45648f9e7 déployée. La bascule
+conserve les17 tables et le schéma déjà008. Les purges historiques engagées,
+la variante premier hash inconnu puis connu, les pannes propres des gardes et
+la campagne complète restent nécessaires ; SLS-074 conserve son statut[~].
 
 `functions.first_published_code_hash` identifie la première publication réussie.
 `functions.first_promoted_at` établit durablement qu’une promotion a déjà existé.

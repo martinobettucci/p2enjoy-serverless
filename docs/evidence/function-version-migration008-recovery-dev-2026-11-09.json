@@ -1,0 +1,1931 @@
+{
+  "format": 1,
+  "completed": true,
+  "unit": "SLS-074",
+  "unit_complete": false,
+  "target": "infra-serverless DEV",
+  "scope": "Migration008 preconditions, native WAL interruption/retry and code-only DEV deployment with related public regressions",
+  "counts": {
+    "unique_groups": 27,
+    "component_groups": 10,
+    "api_groups": 12,
+    "host_cli_groups": 5,
+    "failures_in_retained_replays": 0,
+    "skipped": 0,
+    "functions_physically_purged": 2,
+    "successful_invocations": 16,
+    "expected_rejected_invocations": 1
+  },
+  "wal_component": {
+    "path": "docs/evidence/function-version-migration008-wal-dev-2026-11-09.json",
+    "sha256": "c6061e42788a79a9526cab9950ae55996f25ce773bc3a46141501b3a5cac812d",
+    "unique_groups": 10,
+    "sources": 276,
+    "candidate_served_during_component": false,
+    "earlier_replays_not_added": true
+  },
+  "source_epochs": {
+    "deployment-and-public-regression": {
+      "adapter/Dockerfile": "231a482220d5122d10ba3c5442722c8dd369aa344de76f6a5b506babd0332d49",
+      "adapter/Dockerfile.dockerignore": "315ec77408e7aecfc430478d68d393b5c2cf9976b0b8f9cef2ba7adcdf4809b3",
+      "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+      "adapter/__main__.py": "2136336dc7913aa79d7a1efc683cb56ca0e82d061e15ff08f49ac2926105d409",
+      "adapter/archive.py": "7a7951e080174dd6cdaa642cb82a9e9ddbb8717f77a9628cf44fa0826e918dc7",
+      "adapter/compose.spark.yml": "cf76088598e5b6bea10d3291471739e7ef172aaa5ab27d1a3d5cf18e63edfe1e",
+      "adapter/deploy.py": "3fa4a78b12622b8b0990fb1898172b9772d631c04a23acec91fb4f5d9e160b4e",
+      "adapter/dev.sh": "d0b37fd798554644d35e452d0ebbed0bb18f4222aaf992fcd524121ad26e0e7d",
+      "adapter/manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+      "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+      "control/Dockerfile": "c9bab4f4152f41afe7b2df77c385aac381fc5c115c5810b70942d82c0ecc8801",
+      "control/Dockerfile.code-hash": "c536c2e44711a4cfa2e49fdc5e5eecb368bc3d343b974576a9c818dd28388c25",
+      "control/Dockerfile.code-hash.dockerignore": "c398f16041a438058e570f393de11c22a307d0bc3da0a2a147a0feb52e24f0a0",
+      "control/Dockerfile.dockerignore": "6f26c0cf25683e6084bd58715095fefedf39f88fa5da68c17828ea414cd43f80",
+      "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+      "control/app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+      "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+      "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+      "control/app/catalogue.py": "d24cde9ca3f3068400018b288cb4dba6c074edc00cd978bdb668d431e43002fe",
+      "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+      "control/app/db.py": "242a5688d94e1464c0b0343368caca6e6dec8bb25de45e63e406f71b7d223552",
+      "control/app/deployments.py": "5d913135b5ade6d841acdd777448c2270772c71f4b4911108d562e1f763ffa90",
+      "control/app/execution.py": "5064920dc6d20f2be449e06aaed017734e900513b4764d09843fb6b8214e3208",
+      "control/app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+      "control/app/function_versions.py": "d2df18c725c248cc63fbc833164b9e474ed2e07f72944e8d0695a106f09bb967",
+      "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+      "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+      "control/app/invocation_routes.py": "04beae967b5208401cafbf0f6921b4bbf44f55d6465854ae1a706b2a4ec3289b",
+      "control/app/invocation_urls.py": "589af8b943ed6956e0fbe6cc8a896b480d933117bdd9d975a7096e710955f488",
+      "control/app/main.py": "9733d7e56c57d72fb26f35e67131f0bd1fd2ab20b36a184865e3f9b780242a94",
+      "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+      "control/app/models.py": "a3c7f50ecef756d4e624eba693218aa0a9a37bc833df84c583758e5baa53d496",
+      "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+      "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+      "control/app/storage_management.py": "16ccc130423f8d9c5bc75e8e7ff2d65c86b99ce9ec111b4c2efabb9292972ed3",
+      "control/app/validator.py": "ea4eb2ff5dedec23be52e3e1fa4e17b8e2182065bf001210cbd3cb6a4108f62f",
+      "control/code-hash-dev.sh": "6dbf84e1e081b307ab717919d64127e7f7a0787e340048f559d1e7b473db9998",
+      "control/compose.code-hash.spark.yml": "5ddfa60a5369f28834f41beb2cbd15ed801756ed833afe9ca229935dffe7374e",
+      "control/compose.spark.yml": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+      "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+      "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+      "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+      "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+      "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+      "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+      "control/migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+      "control/migrations/007_function_code_hash.sql": "f8c80a480c1d22c593198888f80d9b8b2b4bef2853be6f6b1227fea2b9fce412",
+      "control/migrations/008_function_versions.sql": "93adc5a2607c3932462762650698e14b2367285a5931902ab51dfdcbd64080c3",
+      "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+      "docs/CONSOLE_PUBLICATION.md": "d710833cc0849871379e18b93c4f4d9d7003644a110ab72edb3dc6129a9bf10d",
+      "docs/CONSOLE_STORAGE.md": "71e9f9b3afe4a63021a812cd0abb1d314bc62fe4672765ade0f9f641fb604f8b",
+      "docs/CONSOLE_USABILITY.md": "6d47d2c010909223fa3884c7abd327c6c33429389ff20fa2171b66086d299c14",
+      "docs/DEPLOYMENT_NAMES.md": "6d44fc5c15e667d86e873c3c042f6bf0453866ccc73b69de23077f663330e771",
+      "docs/DESIGN_SYSTEM_APP.md": "1c2ca434d27fa6cb67ec93aea95a0ee56bec1331c0b1a7c9be13a393dafbce42",
+      "docs/EXECUTION.md": "8890c0587763a4f11fcf09f50f7e9d50cbbd708f1291942c1098a694726ccccc",
+      "docs/FUNCTION_CATALOGUE.md": "b4cd231f0843f88a094457f53cbb67594038fc7bbab3a00bf3f3ce05b3b2b3cc",
+      "docs/FUNCTION_CODE_HASH.md": "66206dbc7c0cb64fdf2ee2a7c90f3926f53d9ae06b37a342f89d2e592ee40204",
+      "docs/FUNCTION_VERSIONS.md": "82b416742c8541ef7fde265b91616960cfaffaa989ee84a8cd90403653f9232e",
+      "docs/FUNCTION_VERSION_DUPLICATE_RECOVERY.md": "2bd9e677d2567d9ac999083a2a787113a29621090fedbed2d96626946fca6ba7",
+      "docs/FUNCTION_VERSION_EXECUTION.md": "5dbacde00b4c5f2995400093199566b8d3d96d6edd23499c97ba9826c077e657",
+      "docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md": "fef018040caf9092006c55a81b5ac3aafbb18cff9fe070986675ceb813aefdbf",
+      "docs/FUNCTION_VERSION_PURGE_UPGRADE.md": "de623e329938e0f08414bc5e221b0340088667d96cdcb2c63140d90021012a71",
+      "docs/FUNCTION_VERSION_REGISTRY.md": "d63a53b75af20d091f7a368ebc269a451c918bcc87a25382e541acd01614eb52",
+      "docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md": "9798ed44ede07c4ccd0ca2ee1452c8d012e8897c258c3337091dbb3e7650c7b6",
+      "docs/FUNCTION_VERSION_VALIDATION_RECOVERY.md": "94fe2897777809c5e408aa4e3b869a34b1c695dff0962d66fb07563e2c5274b9",
+      "docs/INVOCATION_DOMAINS_PAGINATION.md": "20865d34b6d7adeb59f49745071fe4b338229c41ffde86b890cb90063588f417",
+      "docs/INVOCATION_ROUTE_CYCLES.md": "b721643aae599b1e1d9397ccd274375f87bfcd6fdefdf5115399a53cfa378019",
+      "docs/INVOCATION_SOURCE_PERMISSIONS.md": "abba2d226cb30d5d5a7822cce85c6d81b237270b585e9dc28e7e73c258102c29",
+      "docs/INVOCATION_URLS.md": "9ad03a4042e80d2d178082b66fbe61ba4f85ce5f30c1599e51dae033508b64dc",
+      "docs/SCHEMA.md": "d586d568464d0ae72b9c08fd821a5e05efb209637c847dd81985b0bcc1f0e307",
+      "docs/STORAGE_LEGACY_PROOF.md": "e40167bb448cd7912560c83342a25a24fd4d58eb54127dc190941dfc7ba6056f",
+      "docs/VALIDATOR_NAMES.md": "31fa0e657632963481d3ad6b597f671120d35e241247475cfaa23d29c70d9d80",
+      "docs/manual.md": "cdb0b9df6aa6ae0e65f46364168976a05afe4c4a8f80d9c3c438f13bc41727a7",
+      "e2e/adapter-catalogue-barrier.py": "850a69b3df1ef2621fb7520bc1ebb887951e5301eec6bd7d6bdcba5cd9e4d836",
+      "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+      "e2e/adapter-deploy.mjs": "e8246c0b475920c6b23a4f5f8f095ac864644c5d958c4aea2d8d2d3f9bc46fda",
+      "e2e/adapter.py": "564c89a4d842e3e2c68c5d261fa687b06e9106035b5820d084415fcbeff8b1a2",
+      "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+      "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+      "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+      "e2e/console-navigation.mjs": "fdeb0ae858f8e3bda017b89ba11f27746022b8d705d3abd2e283376687404ba1",
+      "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+      "e2e/control-operations.py": "38d6762af9a24df11fed79c78c6e8724fffd181e789db29407f228c61db05adb",
+      "e2e/control-ui.mjs": "cac83c5293d5b56015baaf642659b0e728d07d10cb13cd3b9801401393e370b2",
+      "e2e/control_database.py": "1ad3e24a98a61e9f131fc68eff96043ba8110d26876ef6079a0c9061cfb216e7",
+      "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+      "e2e/dev-sso-sessions.mjs": "e302e8113514566377bc568fbbcea514a0215692fc97c39671e6439b6e2f24fb",
+      "e2e/execution-faults.py": "7f879b8d9702f7c0d9654a8064d797cc60b95ec17f97b69091acff69bdc58fea",
+      "e2e/execution-suite.py": "1edba7181ec38aa517e24121b06b8e3c19d048cd3a6e068d51e599f3d7aa170d",
+      "e2e/execution-ui.mjs": "523f5b807dc83e66a8690b265d398e9a5cc5e27c6f1ed67b3ad848985798857f",
+      "e2e/function-catalogue-api.mjs": "05c721279fa15133b262575b43600016e65559296cef5bcd204cb3783a6efe4d",
+      "e2e/function-catalogue-completion.py": "286785d180ae0053bdbdd1a14612929b4bbed93085d102a662e633d86b8f68c1",
+      "e2e/function-catalogue-ui.mjs": "54adf64abbf17062e213c7be9d26397e69e3dcaeae471814c1c562102746ca2b",
+      "e2e/function-code-hash.py": "47e4c05a28e9827377c725f7feea8e55e235a433425831b28f495d42aa0ef43a",
+      "e2e/function-storage-faults.py": "55dbf75b9f898c1802948d7488774007365d6dd37f8df741991a396eb3d414ce",
+      "e2e/function-storage.mjs": "99f85f10cf3bbfa59cb2b65d7e0cc7cbdd6bae2d6671fa611607857d5380abef",
+      "e2e/function-version-artifacts.py": "f8aec4f4b16b05378a140ad65fd194d0808288e2265845e618e848701f67dbf3",
+      "e2e/function-version-cli-container.py": "250e773493784f74da3f3f79673b993b3b358c3f2f825cf39f2bab7892183fd8",
+      "e2e/function-version-control-build.py": "792c5d75c7498b0440a6f835734ef9d06fa6c4a0683f61f15645e683c1c31537",
+      "e2e/function-version-duplicate-recovery-operator.py": "4383023f605535fc347371afe6d98c128f0f8a854959353ea2627027a8bfb88d",
+      "e2e/function-version-duplicate-recovery-run.py": "22d616c00fffe01c8c5bcc07c12b66c6a49098d5d70e824f7404725529b363bd",
+      "e2e/function-version-duplicate-recovery.mjs": "aea606b97b2f68036831df3010b9d98d90eccd21b1db7b03403ed827cfa0bca3",
+      "e2e/function-version-migration-faults.py": "87260cf36025a3faaa44e256499e6cb0de3d6bad8c2e1521d3146b532da6d4c3",
+      "e2e/function-version-migration008-build.py": "50976c46732ec445619f84eef72c9d2c135ee96845bbb05703590faea42fe8ad",
+      "e2e/function-version-migration008-deploy.py": "859f835688b405cf758eac95e64d19c0819849b40d58734dc0b876d89add0d0f",
+      "e2e/function-version-migration008-run.py": "7ce7e4a9a92eeed0252ee8ef28479c29ac166d4dd75a06bca20add90ea332f12",
+      "e2e/function-version-migration008.py": "055b45e09f6854f1067dabafb430e951f0596a39c47db3c34ec801cc5c2f7163",
+      "e2e/function-version-purge-correlation.py": "9df4204f732760f8b158a4f2d62653cc9bc4c863b8c2b1ec173d6b3da65768fd",
+      "e2e/function-version-purge-upgrade.mjs": "1f4a00b151e2bc48d1139cd7bef34a420a112821b376b94479de622fb3f03a7e",
+      "e2e/function-version-registry-native.py": "b08bde3138d18c8f7d1a6857dd0e3165c5409ff1e4261893d40c6948af156c2e",
+      "e2e/function-version-registry-ui.mjs": "67336f1e9f1dd5caf1d48ca51fc5f684f1d488336211fa8fc07815470679e62d",
+      "e2e/function-version-registry.mjs": "5ad264a6e5ea74501dd3433eaa1c89b22ce191bb68ba212ab5b3d8f9ae741cbc",
+      "e2e/function-version-upload-capacity-inspect.py": "10ca49e464f247d0b840ea056cf9dc84f095feeef88744e0ba3a70139c4942c8",
+      "e2e/function-version-upload-capacity-run.py": "67c7c8a2f7c9fc00e4d7ce94b0dbb44efbd8f1726575b1476e897de39aab20f0",
+      "e2e/function-version-upload-capacity.mjs": "2c50e985fd8fc668702699ee3e9f3a8536547e1ad6647642e3b0cf49b419f452",
+      "e2e/function-version-validation-faults.py": "b2ee79feca16270ccda5f1e2d341747dd41b9491149a192060754aa642e2ae13",
+      "e2e/function-version-validation.mjs": "9035d6c20f1eb2d14d13bac752e88312c69c334b6c29f43e7de9dc265f8a1d9d",
+      "e2e/function-versions-api.mjs": "a2fdb22d85bfb283a9cac1d87811239412a078b83b56f7b601c64547c2d3f1eb",
+      "e2e/function-versions-cli.mjs": "b58335221bb9c259b56ad098db85815406b7e56fd05da5adb777672c960cc987",
+      "e2e/function-versions-ui.mjs": "8be7b84a11e277c39d7371c6e597a7cb036d4bebf3c2d2cc5cc09705692aacaa",
+      "e2e/function-versions-upgrade.mjs": "758e963d3b42496f6e9fa3a01bb921eebeb3ab25d01f3c127316d9bf8d56fb07",
+      "e2e/function_version_migration_wal.py": "776207f337325edaee1d458cc173bac6f100bdc7f9cad50eeebad97db3b31292",
+      "e2e/instance-lifecycle.py": "ae59e1db5201da3474fbcbb92eda41a706e1f5172333e5a4a58812b3524ff453",
+      "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+      "e2e/invocation-alias-entry.mjs": "d5f44e206d8f186d40dda75b7809af3d8f39473d494ea9680b5afb4ba94a3830",
+      "e2e/invocation-domain-console.py": "8075b767b44ea1b8779d4b9855835faab83e3d73f4c7b47f2c1cd5e25f6fbdeb",
+      "e2e/invocation-empty-ui.mjs": "24bc11d02047c33b144569744628a28808b813c18ee19f533bd000dab86eaf36",
+      "e2e/invocation-pagination-domains.py": "293bda6a42bb4707350a70cba566e52be088f58d9fdbe3462330bf973d7723f0",
+      "e2e/invocation-pagination-native.py": "ea5e360511f0c89687e8cd99cf377fb5afa152a3cdd74660532d9ebed6c9e0f6",
+      "e2e/invocation-pagination-suite.py": "34253f0ba443eefe78b5d383435470ad09476c768baafa6727af4947abc20577",
+      "e2e/invocation-pagination.mjs": "5e4149514b1bc7439fbdd2794b826ac8e226652fc5c1c1ad9ec2abf213454d75",
+      "e2e/invocation-request-pause.mjs": "8b42765e23edf8d6cfb30f54c57c69a0a4e20431a6f9886751dcd30a6375be1b",
+      "e2e/invocation-request-pause.py": "d5f9e785f8983823315bef6dd9c9d525e8162e63d3a6f432fc0af29543339956",
+      "e2e/invocation-route-cycles.mjs": "acefd3e53616c5441d66cc22abed1e9e9b4ebf9823271fa823715f010fd90638",
+      "e2e/invocation-route-guard.py": "0f7c0d18d3a6a47ce4b8bec6b55c2a34014393d9bf81558a8500a7dca877860a",
+      "e2e/invocation-route-lifecycle.py": "ee1723fdf388ce45485fb35be801283d357d15394aaa28332c30605a06d629a8",
+      "e2e/invocation-source-api.mjs": "51df57d03e94726187290bf9dfa83e6424b012a018fe390a3261a4d2d08bf914",
+      "e2e/invocation-source-guard.mjs": "4f442376377c0060fa177c785a532dbfbc4d2dac73905e7bd1857a374b14c555",
+      "e2e/invocation-source-permissions.py": "7ff67f350fae6260ff5f3889a2ebf2a26d2d758c0898708bee69af45802f0288",
+      "e2e/invocation-source-ui.mjs": "4e58702fda698c2a14948e5ce78b28d797c43846bf9e3c955b9c918e4e1293c2",
+      "e2e/invocation-url-adapter-build.py": "e84f45820028c4a1d3737dfbe486520ce3b106ba0dbe821c9875fc8dcda418bd",
+      "e2e/invocation-url-host.py": "77630bfb1f726f7fd0a48949792db6f02547d09b0e3b822139b1c795b050b22f",
+      "e2e/invocation-url-transport.mjs": "94c7b74bf4d6332347a565ee81d069caad91393fcd22261d01814e98fede25d1",
+      "e2e/invocation-urls-ui.mjs": "c4bcce034b1390d2da63d47882427615caabdb04d5d5d91cb2452140ef10a747",
+      "e2e/invocation-urls.mjs": "7438964baccdc56effecb06bfc1064403f2797168aeca909c2ec2f2aa47d7e12",
+      "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+      "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+      "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+      "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+      "e2e/manual-ui.mjs": "71034673e310c4dc6083d89b845f3cefda8a9c48f8fd34010e288d96649dafba",
+      "e2e/native_control_observer.py": "3a2c23bd5245935155ebfac4950edc4bad3696b1bf34f0973a3e96e4d91777cd",
+      "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7",
+      "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+      "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+      "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+      "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+      "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+      "e2e/publication-fixtures.mjs": "b994a9332a39f952e8f20c9d5e5b3ad7efddf5ed690d4359d12c481926c44438",
+      "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+      "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+      "e2e/publication-ui.mjs": "ea1659f486a84c9c1a5b1a529a1bd70f76e372a09bcbc7d5b5f9ce92c9f77e32",
+      "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+      "e2e/runtime-instances.py": "1672ee7f45b5fb5574cdea34110f38c9d3257ffb5be8c48fcd3c2495b8e26fe4",
+      "e2e/runtime-validation.py": "fcb95b1a59a89d82d94f629448252dfed5b24bf5b7d95c6ff5325c388a009233",
+      "e2e/service-configuration.mjs": "50c01b89800f36045e296d47c73ca624ee62245058a4547bd49dea56c8e961e7",
+      "e2e/service-transport-observer.py": "261d16ef4296b053ea099db09679ef6551d68dbad6fc90d97be503db3e371889",
+      "e2e/service-transport.mjs": "424912a5caed927a9a9deb23af10fb4f6d690cf7b5c56fc15ace5ca2dd6a080d",
+      "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+      "e2e/storage-command-faults.py": "8cacdc0036114a95948f31136bb9dea8ecb4df6ec21c76b5dd299cd1ba4cc498",
+      "e2e/storage-command-recovery.mjs": "57c5e1fead1fc90549f1b732617d5b786bd442f302f21396f5e2fa178e1d8b81",
+      "e2e/storage-console-api.mjs": "548888014f4823205f40e86cb9d03b3747e6901f7a620946b51dc0b9069ec569",
+      "e2e/storage-console-inspect.py": "bd13af24504d9f11224a58be09ac32e8cbd3a8334f53572e44e7db98be875700",
+      "e2e/storage-console-ui.mjs": "18e00505efe0e95d9b992da80fe3704ff8373aac9053498afac69ec6b8328f5e",
+      "e2e/storage-decision-recovery.mjs": "d0514f70ff857d602196ace1af09944f975fb6d7d7e64e3b86bbb4b4cefb40fb",
+      "e2e/storage-discard.py": "bd167df38ebe45089538a9b6ec7fe6b98fd7fc88616375179ce611887f3e51d7",
+      "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+      "e2e/storage-legacy-build.py": "1f93643e4c3543d2a6ac74160eab4b59ba2689be6f447a1b5d8cee975f7ae125",
+      "e2e/storage-legacy-environment.py": "97b53bff916ce176ca9550dc3ae9da3609acd6a5f652937e4f1f16b119865a8e",
+      "e2e/storage-legacy-recovery.mjs": "8e19c8762daf2a29ba3f38b54d4187b7aabdaba89c377f97381d3a5e5c663289",
+      "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+      "e2e/storage-suite-inspect.py": "9c567593bd92a584877e00c96c36a6efc59b1e9012377bb3502c8eee908ec285",
+      "e2e/storage-validation-faults.py": "78a95d848cca13dd190391b5ff03266d0a3b5a7eae40355700496da90e89ba0d",
+      "e2e/storage-validation-recovery.mjs": "78a37c4334c488f25cb20b7978914dad7f908fd45743757e88cc59f8c0afb4fa",
+      "e2e/validator-names-build.py": "3e6763efffb1369c0165dbce11701fa8ba1234d412497fd7f25983bfdb8383ac",
+      "e2e/validator-names-collect.py": "fb97dc674fdbcf6adcc1e63d114d123cc224f68f2f68574867268eb535bd40be",
+      "e2e/validator-names-operator.py": "31bf16411245c114ef8ad7183bbe96d823473ca1af5c95ee94878c1ed54737e9",
+      "e2e/validator-names-prepare.py": "cca9109e953910c536c873763c75e96dca845294e813cd77073b7290fabed005",
+      "e2e/validator-names-regressions.py": "e51ca0adcffdb9e8ac2e01fd8558113b788e021a3dc0a4060c06389906fde150",
+      "e2e/validator-names-run.py": "f583020e4c8c693f9c2e4cd5bb7667ab1c668e9b7987fdb8a400d22f5ad74679",
+      "e2e/validator-names.mjs": "42a827d48de710cce26972afa1d084d66329046ff4facc8bb32c02c0cda2c7b6",
+      "function_code_hash.py": "dd2b64c375639d4ffc35eb508233263122adc8f19f3f56bb15e3cfef6e37d23f",
+      "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+      "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+      "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+      "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+      "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+      "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+      "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+      "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+      "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+      "qualification/artifacts/function-version-pilot-delay.mjs": "f303803602fe7184f52484b8daf02036e8f4e958258ed8d7456ed80f51fdc02f",
+      "qualification/artifacts/function-versions.cjs": "71203f00306dce13dfe3d24e72c8f562468e27c1af042370f88eb75ca9859790",
+      "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+      "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+      "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+      "qualification/artifacts/invocation-addresses.cjs": "d92d814fbd8d07343e491f013b5199e8e8454b5f54244c044c287665ccdb1a6f",
+      "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+      "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+      "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+      "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+      "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+      "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+      "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+      "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+      "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+      "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+      "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+      "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+      "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+      "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+      "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+      "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+      "qualification/artifacts/service-configuration.cjs": "0a9bf83c6dffc76544491abdda0d14b9dbf0ebc767c60c29b063e893c2c22e70",
+      "qualification/artifacts/storage-console.cjs": "5e8e2199fa7605f8d00407c92537b175e072f47ce4d6fd42b116ef1a87de873f",
+      "qualification/artifacts/storage-validation-delay.mjs": "91dbcf7480341d8596a6300a026de792217a3f23bb217adf6e974cf4b97f79b3",
+      "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+      "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+      "qualification/artifacts/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31",
+      "qualification/artifacts/version-dependency.cjs": "338860f83f269aa9a254bd56563d08fd6f2057effb2dff266307ec0b2427c8d9",
+      "qualification/artifacts/version-identity.cjs": "aab1051943e2f4272fb58063a75f873a4ae0f7f04daf80cd364e5307f6a07aba",
+      "qualification/artifacts/version-registry.cjs": "ea05d3d1398ba24616751f0587fcec5bb34a67ca4fed9911e5964baaf81fd261",
+      "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+      "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+      "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+      "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+      "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+      "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+      "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+      "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+      "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+      "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+      "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+      "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+      "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+      "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+      "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+      "storage/agent.py": "689a45bc367b339112c41696031be46e7fb1d449340fe92d6915f791db58de64",
+      "storage/agent_discard.py": "69c6c570162e2c7dc2cdde4b53f6840866fad50ae738f85f9f3f18c4f8d5e859",
+      "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+      "storage/agent_volumes.py": "e03ad2df9bfe657b2a959bc3019247a3769f0dbb1e6a5802a875171a9cddf041",
+      "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+      "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+      "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+      "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+      "storage/install-dev.py": "d6e233ccc1e893ee64220ddc1436127b32434778db9b44820f359560465f33db",
+      "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+      "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+      "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+      "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+      "storage/migrations/004.sql": "bde5c2068fbe9ecf03a077e911d03e6d67737a6cf9b5912c4fc55944926eaf7d",
+      "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+      "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+      "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+      "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+      "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+      "web/src/catalogue.jsx": "fc200154f3acaf5140a30d68b653bb61a194d369cec5ac0a5a3c2d8af5fe3aa9",
+      "web/src/function.jsx": "0b1879912afbf861c404caa66c3efc8fbd06e030482278f0035a24744149fe42",
+      "web/src/invocation-urls.jsx": "55f42b164e0a428e2c2f113fc114a72bbe9c8d789c3fe2a0c7891384ade1dd7e",
+      "web/src/main.jsx": "0a65c22728d6310e98520c40d06dc799308f6685a5c740f2b2536e4296706a97",
+      "web/src/management.jsx": "c284f91151ea503c17f8fda04698b3f838f02225c91930bb031764be4bd13ac3",
+      "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+      "web/src/observations.jsx": "7d2c5ae495f35046e51468ba1900511408646b233df37e8b6f6f657b0544d099",
+      "web/src/publications.jsx": "008c847e63af831d74df6369d97f52d58118f977f7a59d91becaaf0e7d26dae7",
+      "web/src/storage.jsx": "efa3f329b6bb7db4d65c514ec1eabb6e6eab3750e5084dce7a454f3d5b0a6ac1",
+      "web/src/style.css": "4494de0960664c3e9ed05d8db16c217ffdf0e51d921ff64f42eff9fdff842dd2",
+      "web/src/ui.jsx": "249980be87bf60ff542e1551b6ef1d21a4884764d5fe5b7b646268cf486fb5ba",
+      "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+    },
+    "component_to_deployment_document_changes": {
+      "docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md": {
+        "before": "3407da738594877ec5b58c8da10c87c36788d662b7aca98b586468a897bf38d6",
+        "after": "fef018040caf9092006c55a81b5ac3aafbb18cff9fe070986675ceb813aefdbf"
+      }
+    },
+    "component_to_deployment_added_operator": {
+      "e2e/function-version-migration008-deploy.py": "859f835688b405cf758eac95e64d19c0819849b40d58734dc0b876d89add0d0f"
+    }
+  },
+  "build": {
+    "path": "docs/evidence/function-version-migration008-checkpoint-dev-2026-11-09.json",
+    "sha256": "e7370c101f0592c0535baaa360bafcb6f7db50c57b300b3d10d7ba8378bd5e1b",
+    "old_image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+    "new_image": "sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4",
+    "only_backend_change": "migrations/008_function_versions.sql",
+    "compiled_web_unchanged": true,
+    "embedded": {
+      "backend": {
+        "app/validator.py": "ea4eb2ff5dedec23be52e3e1fa4e17b8e2182065bf001210cbd3cb6a4108f62f",
+        "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+        "app/storage_management.py": "16ccc130423f8d9c5bc75e8e7ff2d65c86b99ce9ec111b4c2efabb9292972ed3",
+        "app/main.py": "9733d7e56c57d72fb26f35e67131f0bd1fd2ab20b36a184865e3f9b780242a94",
+        "app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+        "app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+        "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+        "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+        "app/db.py": "242a5688d94e1464c0b0343368caca6e6dec8bb25de45e63e406f71b7d223552",
+        "app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+        "app/function_versions.py": "d2df18c725c248cc63fbc833164b9e474ed2e07f72944e8d0695a106f09bb967",
+        "app/catalogue.py": "d24cde9ca3f3068400018b288cb4dba6c074edc00cd978bdb668d431e43002fe",
+        "app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+        "app/execution.py": "5064920dc6d20f2be449e06aaed017734e900513b4764d09843fb6b8214e3208",
+        "app/deployments.py": "5d913135b5ade6d841acdd777448c2270772c71f4b4911108d562e1f763ffa90",
+        "app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+        "app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+        "app/invocation_routes.py": "04beae967b5208401cafbf0f6921b4bbf44f55d6465854ae1a706b2a4ec3289b",
+        "app/models.py": "a3c7f50ecef756d4e624eba693218aa0a9a37bc833df84c583758e5baa53d496",
+        "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+        "app/invocation_urls.py": "589af8b943ed6956e0fbe6cc8a896b480d933117bdd9d975a7096e710955f488",
+        "app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+        "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+        "migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+        "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+        "migrations/008_function_versions.sql": "93adc5a2607c3932462762650698e14b2367285a5931902ab51dfdcbd64080c3",
+        "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+        "migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+        "migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+        "migrations/007_function_code_hash.sql": "f8c80a480c1d22c593198888f80d9b8b2b4bef2853be6f6b1227fea2b9fce412",
+        "function_code_hash.py": "dd2b64c375639d4ffc35eb508233263122adc8f19f3f56bb15e3cfef6e37d23f"
+      },
+      "web": {
+        "favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+        "index.html": "90431f0e1cc1c660637365b5b425eae6f30377a0395af38b37e0bf68f6becca1",
+        "assets/index-DlXE_L19.css": "ff44f5f2ce44faf349a41a61af99041f674d25e3a7556e4183a27a67d3625c5f",
+        "assets/index-Bm51TwKw.js": "2f30cbe761fbdece55224e3221ee73fc7b2bc83127cce726039596554daaece6"
+      }
+    }
+  },
+  "deployment": {
+    "completed": true,
+    "started_at_ns": 1794248705678388754,
+    "ended_at_ns": 1794248717643852759,
+    "exit_code": 0,
+    "report": {
+      "completed": true,
+      "backup": "/srv/p2enjoy-serverless/qualification-history/migration008-deployment-backup-b6c39eaeb4c447f2a7aab719902f938c",
+      "backup_sha256": "17965cc35c8802d9fd346e5f9fde6d51e8c23743bd099cce06de2f763e930e11",
+      "before": {
+        "tables": {
+          "audit_events": {
+            "rows": 15438,
+            "sha256": "08eefc8a21842009c8e2064a554a0f6e84807e6327245cf1966deaca0d9a3fcb"
+          },
+          "deployments": {
+            "rows": 3058,
+            "sha256": "68610441cd0bf8bbf9726a8d4931146c9e29d960adaf7a71f4c129e19c50a254"
+          },
+          "execution_instances": {
+            "rows": 0,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "function_operations": {
+            "rows": 0,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "function_versions": {
+            "rows": 960,
+            "sha256": "b9aa4a7795f0ec8f6bc69f76e1a0df9b4f38fc8502c4f9c03ee26370bb60acd7"
+          },
+          "functions": {
+            "rows": 1216,
+            "sha256": "c892165e4e71f1b2d440e797eec401a98a2e1cc3fab3d8aa1386f4e372779a1b"
+          },
+          "invocations": {
+            "rows": 4528,
+            "sha256": "4028e06f0ae22fdabf73b207912b57d699b03d8840946388074a054929a49b42"
+          },
+          "login_flows": {
+            "rows": 0,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "login_rate": {
+            "rows": 1,
+            "sha256": "dd9471584b6cc1e576b6ad7ef48f07140e027db096bd9e60c194e2146706932d"
+          },
+          "namespaces": {
+            "rows": 338,
+            "sha256": "79570ff51767a777bb9e43c82db844c0f6e1e91d3cf658947663be53fec422aa"
+          },
+          "revisions": {
+            "rows": 1696,
+            "sha256": "d0b32e43ef7debd7c187d10a4bfb6013ec82045fcb491f3089c2f7f8ab3722b8"
+          },
+          "schema_migrations": {
+            "rows": 8,
+            "sha256": "08d27db4d22afd2f6f5a322a1389319ac3f33d58a0fc349462db8254d0e5cb4a"
+          },
+          "security_metadata": {
+            "rows": 2,
+            "sha256": "8231a4633a7c0e23ebe264264cd160cb1e3db4294a2c5102e32c183e29f27166"
+          },
+          "service_tokens": {
+            "rows": 938,
+            "sha256": "0a6109c68e140d2593e9fb626e62c746a68724b1ff97eed5e88a1f9e3dff35ed"
+          },
+          "services": {
+            "rows": 415,
+            "sha256": "e6218c38c2fe6677f885d3d4d113e46f4f8c6dc3c1eb1f2ffe943bdf8551e62e"
+          },
+          "sessions": {
+            "rows": 7,
+            "sha256": "f9f6398ef7d74418d0f0fe661fc303224a9e47de0d27fc5adddfabeaed377466"
+          },
+          "storage_commands": {
+            "rows": 536,
+            "sha256": "0292448bf6b3a0ea99a058f23e116ad8ec7e84cddc7be86c9b91005105998f5e"
+          }
+        },
+        "schema_sha256": "c4e77e43b7b81826afc7a7b03ddbfff168cecf3c1fc699e12f63cd3a306d1982",
+        "versions": [
+          "001_control.sql",
+          "002_login_limits.sql",
+          "003_deployments.sql",
+          "004_function_operations.sql",
+          "005_execution.sql",
+          "006_storage_commands.sql",
+          "007_function_code_hash.sql",
+          "008_function_versions.sql"
+        ],
+        "integrity": "ok",
+        "foreign_keys": []
+      },
+      "identity": {
+        "folder": "/run/serverless-control-image-rollback-b6c39eaeb4c447f2a7aab719902f938c",
+        "old": {
+          "id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+          "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+          "started_at": "2026-11-09T16:53:43.245115994Z",
+          "health": "healthy"
+        },
+        "new_image": "sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4",
+        "reference": {
+          "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+          "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+          "started_at": "2026-11-06T15:49:39.578107028Z",
+          "health": "healthy"
+        },
+        "configuration": {
+          "mounts": [
+            {
+              "Type": "bind",
+              "Source": "/run/user/1001/docker.sock",
+              "Destination": "/docker.sock",
+              "RW": true,
+              "Propagation": "rprivate"
+            },
+            {
+              "Type": "bind",
+              "Source": "/etc/spark",
+              "Destination": "/spark",
+              "RW": false,
+              "Propagation": "rprivate"
+            },
+            {
+              "Type": "bind",
+              "Source": "/srv/p2enjoy-serverless/state",
+              "Destination": "/state",
+              "RW": true,
+              "Propagation": "rprivate"
+            },
+            {
+              "Type": "bind",
+              "Source": "/srv/p2enjoy-serverless/storage-channel",
+              "Destination": "/storage-agent",
+              "RW": false,
+              "Propagation": "rprivate"
+            }
+          ],
+          "host": {
+            "NetworkMode": "host",
+            "ReadonlyRootfs": true,
+            "Memory": 536870912,
+            "MemorySwap": 1073741824,
+            "NanoCpus": 1000000000,
+            "PidsLimit": 64,
+            "CapDrop": [
+              "ALL"
+            ],
+            "SecurityOpt": [
+              "no-new-privileges:true"
+            ],
+            "Tmpfs": {
+              "/tmp": "size=16m,mode=1777,noexec,nosuid"
+            },
+            "Init": true,
+            "RestartPolicy": {
+              "Name": "unless-stopped",
+              "MaximumRetryCount": 0
+            },
+            "PortBindings": {}
+          },
+          "environment_sha256": "dbe4f3d3fe93e94d1ce6b2c48780c4ec5fe4af1034edd79de6e35ac16a068735",
+          "command": [
+            "python",
+            "-B",
+            "-m",
+            "uvicorn",
+            "app.main:app",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            "18090",
+            "--workers",
+            "1",
+            "--no-access-log",
+            "--no-proxy-headers"
+          ],
+          "entrypoint": null
+        },
+        "official_sha256": {
+          "/etc/spark/env": "ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d",
+          "/run/spark/secrets": "b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5",
+          "/etc/spark/routes": "a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e"
+        },
+        "compose_sha256": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+        "operator_sha256": "859f835688b405cf758eac95e64d19c0819849b40d58734dc0b876d89add0d0f"
+      },
+      "database_restored": false,
+      "after": {
+        "tables": {
+          "audit_events": {
+            "rows": 15438,
+            "sha256": "08eefc8a21842009c8e2064a554a0f6e84807e6327245cf1966deaca0d9a3fcb"
+          },
+          "deployments": {
+            "rows": 3058,
+            "sha256": "68610441cd0bf8bbf9726a8d4931146c9e29d960adaf7a71f4c129e19c50a254"
+          },
+          "execution_instances": {
+            "rows": 0,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "function_operations": {
+            "rows": 0,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "function_versions": {
+            "rows": 960,
+            "sha256": "b9aa4a7795f0ec8f6bc69f76e1a0df9b4f38fc8502c4f9c03ee26370bb60acd7"
+          },
+          "functions": {
+            "rows": 1216,
+            "sha256": "c892165e4e71f1b2d440e797eec401a98a2e1cc3fab3d8aa1386f4e372779a1b"
+          },
+          "invocations": {
+            "rows": 4528,
+            "sha256": "4028e06f0ae22fdabf73b207912b57d699b03d8840946388074a054929a49b42"
+          },
+          "login_flows": {
+            "rows": 0,
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "login_rate": {
+            "rows": 1,
+            "sha256": "dd9471584b6cc1e576b6ad7ef48f07140e027db096bd9e60c194e2146706932d"
+          },
+          "namespaces": {
+            "rows": 338,
+            "sha256": "79570ff51767a777bb9e43c82db844c0f6e1e91d3cf658947663be53fec422aa"
+          },
+          "revisions": {
+            "rows": 1696,
+            "sha256": "d0b32e43ef7debd7c187d10a4bfb6013ec82045fcb491f3089c2f7f8ab3722b8"
+          },
+          "schema_migrations": {
+            "rows": 8,
+            "sha256": "08d27db4d22afd2f6f5a322a1389319ac3f33d58a0fc349462db8254d0e5cb4a"
+          },
+          "security_metadata": {
+            "rows": 2,
+            "sha256": "8231a4633a7c0e23ebe264264cd160cb1e3db4294a2c5102e32c183e29f27166"
+          },
+          "service_tokens": {
+            "rows": 938,
+            "sha256": "0a6109c68e140d2593e9fb626e62c746a68724b1ff97eed5e88a1f9e3dff35ed"
+          },
+          "services": {
+            "rows": 415,
+            "sha256": "e6218c38c2fe6677f885d3d4d113e46f4f8c6dc3c1eb1f2ffe943bdf8551e62e"
+          },
+          "sessions": {
+            "rows": 7,
+            "sha256": "f9f6398ef7d74418d0f0fe661fc303224a9e47de0d27fc5adddfabeaed377466"
+          },
+          "storage_commands": {
+            "rows": 536,
+            "sha256": "0292448bf6b3a0ea99a058f23e116ad8ec7e84cddc7be86c9b91005105998f5e"
+          }
+        },
+        "schema_sha256": "c4e77e43b7b81826afc7a7b03ddbfff168cecf3c1fc699e12f63cd3a306d1982",
+        "versions": [
+          "001_control.sql",
+          "002_login_limits.sql",
+          "003_deployments.sql",
+          "004_function_operations.sql",
+          "005_execution.sql",
+          "006_storage_commands.sql",
+          "007_function_code_hash.sql",
+          "008_function_versions.sql"
+        ],
+        "integrity": "ok",
+        "foreign_keys": []
+      },
+      "control": {
+        "id": "e661516bf5bf4e7b7a24760ec6b3d779b25d3aa0f114df0abbf743901cb48535",
+        "image": "sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4",
+        "started_at": "2026-11-09T18:25:10.056771655Z",
+        "health": "healthy"
+      },
+      "all_tables_unchanged": true,
+      "reference_unchanged": true,
+      "official_files_unchanged": true,
+      "guard_states": {
+        "timer": {
+          "LoadState": "not-found",
+          "ActiveState": "inactive"
+        },
+        "service": {
+          "LoadState": "not-found",
+          "ActiveState": "inactive"
+        }
+      }
+    },
+    "report_sha256": "ef795268b1c2510ad15f44c515f624c1f8284322c18999ca9f9c9d87fb04c819",
+    "log_sha256": "bd9eca502ce3c09e7f3a73ea01005ca0378337fd7001b3d63f1c4666ca9053cd",
+    "sources_identical_before_after": true,
+    "adapter_images_unchanged": true
+  },
+  "public_regressions": [
+    {
+      "name": "function-versions-api",
+      "completed": true,
+      "started_at_ns": 1794248797221254434,
+      "exit_code": 0,
+      "log_sha256": "521bdfae5cc695572206f074cf5a2d01de08ebaea684fc714c05cac869463d57",
+      "groups": 12,
+      "report_sha256": "473b115f36f1340b14b5666e6dbae659b55a5a813e1e7336b3924bf8838d3d46",
+      "report": {
+        "target": "https://serverless.lelabs.tech",
+        "prefix": "function-versions-cbcb1f5d",
+        "completed": true,
+        "cleanup": true,
+        "cleanup_errors": [],
+        "skipped": 0,
+        "checks": [
+          {
+            "name": "Droits Create : premier upload pr\u00e9par\u00e9, doublon et refus d\u2019un autre code",
+            "status": "passed"
+          },
+          {
+            "name": "Premi\u00e8re promotion : seul A b\u00e9n\u00e9ficie de Create, stable et pilote distincts",
+            "status": "passed"
+          },
+          {
+            "name": "S\u00e9lecteurs, port\u00e9e et \u00e9v\u00e9nements : refus constants et pr\u00e9flight sans invocation",
+            "status": "passed"
+          },
+          {
+            "name": "D\u00e9duplication : paquet recompress\u00e9 et renommage sans nouvelle version",
+            "status": "passed"
+          },
+          {
+            "name": "Promotion et rollback : descripteur s\u00e9lectionn\u00e9, marqueur initial inchang\u00e9",
+            "status": "passed"
+          },
+          {
+            "name": "Minimum=maximum=1 : une instance pr\u00eate c\u00e8de sa place au pilote",
+            "status": "passed"
+          },
+          {
+            "name": "Archivage, remplacement et d\u00e9sactivation : Create ne retrouve pas sa promotion",
+            "status": "passed"
+          },
+          {
+            "name": "Attente et appel admis : archive refuse la file, delete attend le consommateur",
+            "status": "passed"
+          },
+          {
+            "name": "R\u00e9importation explicite : m\u00eame tag, nouvelle conservation, date initiale",
+            "status": "passed"
+          },
+          {
+            "name": "Vingt hashes conserv\u00e9s : doublon admis, nouveau contenu refus\u00e9",
+            "status": "passed"
+          },
+          {
+            "name": "Uploads identiques r\u00e9ellement concurrents : un seul hash et artefact conserv\u00e9",
+            "status": "passed"
+          },
+          {
+            "name": "Import r\u00e9el refus\u00e9 : aucune version suppl\u00e9mentaire ni activation",
+            "status": "passed"
+          }
+        ],
+        "evidence": [
+          {
+            "first_hash": "af9d65a8e46d6cdbe2e274f9ae8790a8968818f63e06f4b1e0801f63c38c929d",
+            "revision_id": "bdeed02b-3e26-4720-b8a4-8f847460db99",
+            "duplicate_revision_id": "bdeed02b-3e26-4720-b8a4-8f847460db99"
+          },
+          {
+            "stable_hash": "af9d65a8e46d6cdbe2e274f9ae8790a8968818f63e06f4b1e0801f63c38c929d",
+            "pilot_hash": "5b19624a4cd997a77d2dfca96f92cead3904fe0e4b17209df6595c8c71c756da",
+            "instances": [
+              {
+                "id": "7997ff01-cdd3-4464-a91a-6ad39c98838d",
+                "hash": "af9d65a8e46d6cdbe2e274f9ae8790a8968818f63e06f4b1e0801f63c38c929d",
+                "revision_id": "bdeed02b-3e26-4720-b8a4-8f847460db99"
+              },
+              {
+                "id": "287d6acd-e298-48d3-89e1-7d29638875c4",
+                "hash": "5b19624a4cd997a77d2dfca96f92cead3904fe0e4b17209df6595c8c71c756da",
+                "revision_id": "7f0db979-2e09-460a-bf9e-f4cf23005444"
+              }
+            ]
+          },
+          {
+            "completed_admitted_invocation": "2db5eee2-66bb-479c-add8-51d0580da275",
+            "deleted_hash": "5b19624a4cd997a77d2dfca96f92cead3904fe0e4b17209df6595c8c71c756da"
+          },
+          {
+            "simultaneous_validating": [
+              {
+                "id": "0f30b5d6-881c-41b4-a7f4-d80cf96e140e",
+                "state": "validating"
+              },
+              {
+                "id": "bd25f752-a436-4324-949e-73fcdb87b7e9",
+                "state": "validating"
+              }
+            ],
+            "code_hash": "e2796e2817c7b45d2598869e953e3ce818c10ccdb539df9bbaccdc1c8514c987",
+            "revision_id": "0f30b5d6-881c-41b4-a7f4-d80cf96e140e"
+          },
+          {
+            "deduplication_native": {
+              "function_id": "84b806cf-8fb4-4b2d-9975-ed7f95be91ad",
+              "namespace_id": "346068dc-27ed-48d4-9a62-4e96d3d147c7",
+              "revisions": [
+                {
+                  "id": "bdeed02b-3e26-4720-b8a4-8f847460db99",
+                  "code_hash": "af9d65a8e46d6cdbe2e274f9ae8790a8968818f63e06f4b1e0801f63c38c929d",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "7f0db979-2e09-460a-bf9e-f4cf23005444",
+                  "code_hash": "5b19624a4cd997a77d2dfca96f92cead3904fe0e4b17209df6595c8c71c756da",
+                  "stored_bytes": 0,
+                  "deleted_at": 1794248923.342166
+                },
+                {
+                  "id": "61e3c01d-dd0c-4fa6-ba37-d43fa8c01712",
+                  "code_hash": "5b19624a4cd997a77d2dfca96f92cead3904fe0e4b17209df6595c8c71c756da",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "3e5e48ac-2f83-4b01-85cc-702fba0c6f6d",
+                  "code_hash": "d2235e147fc3cd782fff9d52683befa0c6434c93adc8daeec956ea3adbfa9e03",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "274b1b9f-8e42-4f85-965b-27ffec2d4972",
+                  "code_hash": "664aef681791f31375de4b852a35a513f98235d7bf5d152d72fbd671ac72d3f0",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "c66c637e-9f27-4952-8f8e-6b87362ad4fd",
+                  "code_hash": "39db32da8bbe41ebd346eb1734f05a463c1bee7088cdb51d8aeac5b0e87a6272",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "df23d17a-8444-4b8a-8e86-f8411cf52d15",
+                  "code_hash": "b3258e0be7a767a537586db50920a74dd37be34773cc83c1796b0f94b1f57dfe",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "d632f96e-527b-43d5-ba42-c47b9e6762f0",
+                  "code_hash": "6c38f4e435b8bc5b39c01474e070909161f590e5921b43ec2e35ae1d8ea3eab3",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "5ccd255f-b9c4-4bf2-bb3d-0ca159e54d46",
+                  "code_hash": "8c332738748a4655bf4972cb6d03f4b7f7012148ab19f92a4625c96624e84022",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "907c6cc9-da65-4cf2-8ff0-605da1ea7e81",
+                  "code_hash": "b9fe74cb7ddc73615435461131dd220c2460f55f02fe327dd7ee772f27a92ea4",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "9a0542ea-97a3-4194-8ed5-c0fb3da9fd2a",
+                  "code_hash": "313b6794d724ead5bd5204d53142e0fd34c7cadc66d83cb51aa9acaa831789b4",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "bbd97e9c-d980-4111-a6b0-ee10b6c5b284",
+                  "code_hash": "b1dfa8c636328e27efc58c4edf8961e42b0cc034b5d617a04fe83db918c4558a",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "424f34c4-8db2-4ea8-97b8-7990b3fd65a2",
+                  "code_hash": "064d0906b476885824629d1f3af76708c142bc409cb6db85da0194eda230c446",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "c2aca5db-e988-4271-ac8f-6b893a48c420",
+                  "code_hash": "3f99cdcb5b6ba09d24cba9423bfa293e2ec960810507435881c4a6d12f1dbada",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "7968004d-0cae-4076-935b-6ad3ca45c131",
+                  "code_hash": "5c63856830295c980a163fdf8ba956d74972f5be9d9805bb26303fa3c2748c23",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "7e2492b9-39ed-4b0f-80e7-2be14ceb95cd",
+                  "code_hash": "7b87b2403c01f4f178fbf3373d7487308c9d5ac11d6bbe7fb199637a4f56cf91",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "3f53c3a2-1211-4696-a582-d5b7a4915440",
+                  "code_hash": "b2e3918108436b4ede3e733a3440fc73a0ae56e60c134c331fd5fcfb7b4f7ed1",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "9209744c-2dd9-43ca-9e9a-86b62480f449",
+                  "code_hash": "050ba7ca3337d2be72bff3442bce409aff1917dc987971e7a0d4cc0f6b3cf831",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "e983679d-84b2-4f49-869c-903ff95fad39",
+                  "code_hash": "fe9dbfe984156b5d645ee07a3421e886f8b42a04eca2aac7400165df6943c12a",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "04f80941-e277-43a2-aaf8-08d436accd87",
+                  "code_hash": "70b8ac163243d0e251eb2c836edb625fd126928e85a9d7dbf148b6bb81d674d0",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                },
+                {
+                  "id": "71c9eb86-ac2e-48b5-82cb-469499368c86",
+                  "code_hash": "0715e4cb6011af9eaa13feb6ded4bf3d6347f0b6b03c9cdc1e7b2b1571309bf7",
+                  "stored_bytes": 0,
+                  "deleted_at": 1794248969.781233
+                },
+                {
+                  "id": "0f30b5d6-881c-41b4-a7f4-d80cf96e140e",
+                  "code_hash": "e2796e2817c7b45d2598869e953e3ce818c10ccdb539df9bbaccdc1c8514c987",
+                  "stored_bytes": 20480,
+                  "deleted_at": null
+                }
+              ],
+              "candidates": [
+                {
+                  "id": "bdeed02b-3e26-4720-b8a4-8f847460db99",
+                  "state": "published",
+                  "revision_id": "bdeed02b-3e26-4720-b8a4-8f847460db99",
+                  "code_hash": "af9d65a8e46d6cdbe2e274f9ae8790a8968818f63e06f4b1e0801f63c38c929d",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "3cd02c3b-1072-40ef-b3a4-6975a1197588",
+                  "state": "published",
+                  "revision_id": "bdeed02b-3e26-4720-b8a4-8f847460db99",
+                  "code_hash": "af9d65a8e46d6cdbe2e274f9ae8790a8968818f63e06f4b1e0801f63c38c929d",
+                  "code_changed": 0,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "59dc3711-227d-4e5c-8b55-3e5fc6f7d67c",
+                  "state": "failed",
+                  "revision_id": null,
+                  "code_hash": null,
+                  "code_changed": null,
+                  "version_restored": null,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "7f0db979-2e09-460a-bf9e-f4cf23005444",
+                  "state": "published",
+                  "revision_id": "7f0db979-2e09-460a-bf9e-f4cf23005444",
+                  "code_hash": "5b19624a4cd997a77d2dfca96f92cead3904fe0e4b17209df6595c8c71c756da",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "bfc6fb39-a801-4910-82d7-a01646b6e72b",
+                  "state": "published",
+                  "revision_id": "bdeed02b-3e26-4720-b8a4-8f847460db99",
+                  "code_hash": "af9d65a8e46d6cdbe2e274f9ae8790a8968818f63e06f4b1e0801f63c38c929d",
+                  "code_changed": 0,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "d77f5629-bd9f-4738-8fe4-c9b5b895973b",
+                  "state": "published",
+                  "revision_id": "bdeed02b-3e26-4720-b8a4-8f847460db99",
+                  "code_hash": "af9d65a8e46d6cdbe2e274f9ae8790a8968818f63e06f4b1e0801f63c38c929d",
+                  "code_changed": 0,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "ae3f011e-db7f-4ad0-bdf0-494f7c032aa6",
+                  "state": "failed",
+                  "revision_id": null,
+                  "code_hash": null,
+                  "code_changed": null,
+                  "version_restored": null,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "423d5303-dee4-4672-9fbc-aed53787e80e",
+                  "state": "failed",
+                  "revision_id": null,
+                  "code_hash": null,
+                  "code_changed": null,
+                  "version_restored": null,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "61e3c01d-dd0c-4fa6-ba37-d43fa8c01712",
+                  "state": "published",
+                  "revision_id": "61e3c01d-dd0c-4fa6-ba37-d43fa8c01712",
+                  "code_hash": "5b19624a4cd997a77d2dfca96f92cead3904fe0e4b17209df6595c8c71c756da",
+                  "code_changed": 0,
+                  "version_restored": 1,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "3e5e48ac-2f83-4b01-85cc-702fba0c6f6d",
+                  "state": "published",
+                  "revision_id": "3e5e48ac-2f83-4b01-85cc-702fba0c6f6d",
+                  "code_hash": "d2235e147fc3cd782fff9d52683befa0c6434c93adc8daeec956ea3adbfa9e03",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "274b1b9f-8e42-4f85-965b-27ffec2d4972",
+                  "state": "published",
+                  "revision_id": "274b1b9f-8e42-4f85-965b-27ffec2d4972",
+                  "code_hash": "664aef681791f31375de4b852a35a513f98235d7bf5d152d72fbd671ac72d3f0",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "c66c637e-9f27-4952-8f8e-6b87362ad4fd",
+                  "state": "published",
+                  "revision_id": "c66c637e-9f27-4952-8f8e-6b87362ad4fd",
+                  "code_hash": "39db32da8bbe41ebd346eb1734f05a463c1bee7088cdb51d8aeac5b0e87a6272",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "df23d17a-8444-4b8a-8e86-f8411cf52d15",
+                  "state": "published",
+                  "revision_id": "df23d17a-8444-4b8a-8e86-f8411cf52d15",
+                  "code_hash": "b3258e0be7a767a537586db50920a74dd37be34773cc83c1796b0f94b1f57dfe",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "d632f96e-527b-43d5-ba42-c47b9e6762f0",
+                  "state": "published",
+                  "revision_id": "d632f96e-527b-43d5-ba42-c47b9e6762f0",
+                  "code_hash": "6c38f4e435b8bc5b39c01474e070909161f590e5921b43ec2e35ae1d8ea3eab3",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "5ccd255f-b9c4-4bf2-bb3d-0ca159e54d46",
+                  "state": "published",
+                  "revision_id": "5ccd255f-b9c4-4bf2-bb3d-0ca159e54d46",
+                  "code_hash": "8c332738748a4655bf4972cb6d03f4b7f7012148ab19f92a4625c96624e84022",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "907c6cc9-da65-4cf2-8ff0-605da1ea7e81",
+                  "state": "published",
+                  "revision_id": "907c6cc9-da65-4cf2-8ff0-605da1ea7e81",
+                  "code_hash": "b9fe74cb7ddc73615435461131dd220c2460f55f02fe327dd7ee772f27a92ea4",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "9a0542ea-97a3-4194-8ed5-c0fb3da9fd2a",
+                  "state": "published",
+                  "revision_id": "9a0542ea-97a3-4194-8ed5-c0fb3da9fd2a",
+                  "code_hash": "313b6794d724ead5bd5204d53142e0fd34c7cadc66d83cb51aa9acaa831789b4",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "bbd97e9c-d980-4111-a6b0-ee10b6c5b284",
+                  "state": "published",
+                  "revision_id": "bbd97e9c-d980-4111-a6b0-ee10b6c5b284",
+                  "code_hash": "b1dfa8c636328e27efc58c4edf8961e42b0cc034b5d617a04fe83db918c4558a",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "424f34c4-8db2-4ea8-97b8-7990b3fd65a2",
+                  "state": "published",
+                  "revision_id": "424f34c4-8db2-4ea8-97b8-7990b3fd65a2",
+                  "code_hash": "064d0906b476885824629d1f3af76708c142bc409cb6db85da0194eda230c446",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "c2aca5db-e988-4271-ac8f-6b893a48c420",
+                  "state": "published",
+                  "revision_id": "c2aca5db-e988-4271-ac8f-6b893a48c420",
+                  "code_hash": "3f99cdcb5b6ba09d24cba9423bfa293e2ec960810507435881c4a6d12f1dbada",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "7968004d-0cae-4076-935b-6ad3ca45c131",
+                  "state": "published",
+                  "revision_id": "7968004d-0cae-4076-935b-6ad3ca45c131",
+                  "code_hash": "5c63856830295c980a163fdf8ba956d74972f5be9d9805bb26303fa3c2748c23",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "7e2492b9-39ed-4b0f-80e7-2be14ceb95cd",
+                  "state": "published",
+                  "revision_id": "7e2492b9-39ed-4b0f-80e7-2be14ceb95cd",
+                  "code_hash": "7b87b2403c01f4f178fbf3373d7487308c9d5ac11d6bbe7fb199637a4f56cf91",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "3f53c3a2-1211-4696-a582-d5b7a4915440",
+                  "state": "published",
+                  "revision_id": "3f53c3a2-1211-4696-a582-d5b7a4915440",
+                  "code_hash": "b2e3918108436b4ede3e733a3440fc73a0ae56e60c134c331fd5fcfb7b4f7ed1",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "9209744c-2dd9-43ca-9e9a-86b62480f449",
+                  "state": "published",
+                  "revision_id": "9209744c-2dd9-43ca-9e9a-86b62480f449",
+                  "code_hash": "050ba7ca3337d2be72bff3442bce409aff1917dc987971e7a0d4cc0f6b3cf831",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "e983679d-84b2-4f49-869c-903ff95fad39",
+                  "state": "published",
+                  "revision_id": "e983679d-84b2-4f49-869c-903ff95fad39",
+                  "code_hash": "fe9dbfe984156b5d645ee07a3421e886f8b42a04eca2aac7400165df6943c12a",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "04f80941-e277-43a2-aaf8-08d436accd87",
+                  "state": "published",
+                  "revision_id": "04f80941-e277-43a2-aaf8-08d436accd87",
+                  "code_hash": "70b8ac163243d0e251eb2c836edb625fd126928e85a9d7dbf148b6bb81d674d0",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "71c9eb86-ac2e-48b5-82cb-469499368c86",
+                  "state": "published",
+                  "revision_id": "71c9eb86-ac2e-48b5-82cb-469499368c86",
+                  "code_hash": "0715e4cb6011af9eaa13feb6ded4bf3d6347f0b6b03c9cdc1e7b2b1571309bf7",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "c2853317-4d82-481f-a918-c5cc5ecf29ca",
+                  "state": "published",
+                  "revision_id": "bdeed02b-3e26-4720-b8a4-8f847460db99",
+                  "code_hash": "af9d65a8e46d6cdbe2e274f9ae8790a8968818f63e06f4b1e0801f63c38c929d",
+                  "code_changed": 0,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "9415672b-759b-4793-abb6-c6c0258119c8",
+                  "state": "failed",
+                  "revision_id": null,
+                  "code_hash": null,
+                  "code_changed": null,
+                  "version_restored": null,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "0f30b5d6-881c-41b4-a7f4-d80cf96e140e",
+                  "state": "published",
+                  "revision_id": "0f30b5d6-881c-41b4-a7f4-d80cf96e140e",
+                  "code_hash": "e2796e2817c7b45d2598869e953e3ce818c10ccdb539df9bbaccdc1c8514c987",
+                  "code_changed": 1,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                },
+                {
+                  "id": "bd25f752-a436-4324-949e-73fcdb87b7e9",
+                  "state": "published",
+                  "revision_id": "0f30b5d6-881c-41b4-a7f4-d80cf96e140e",
+                  "code_hash": "e2796e2817c7b45d2598869e953e3ce818c10ccdb539df9bbaccdc1c8514c987",
+                  "code_changed": 0,
+                  "version_restored": 0,
+                  "reserved_bytes": 0,
+                  "configuration_present": 0
+                }
+              ],
+              "paths": {
+                "907c6cc9-da65-4cf2-8ff0-605da1ea7e81": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 376596,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "423d5303-dee4-4672-9fbc-aed53787e80e": {
+                  "exists": false
+                },
+                "7e2492b9-39ed-4b0f-80e7-2be14ceb95cd": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 377814,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "d77f5629-bd9f-4738-8fe4-c9b5b895973b": {
+                  "exists": false
+                },
+                "df23d17a-8444-4b8a-8e86-f8411cf52d15": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 375801,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "c66c637e-9f27-4952-8f8e-6b87362ad4fd": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 375710,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "e983679d-84b2-4f49-869c-903ff95fad39": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 378359,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "9415672b-759b-4793-abb6-c6c0258119c8": {
+                  "exists": false
+                },
+                "3e5e48ac-2f83-4b01-85cc-702fba0c6f6d": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 373088,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "71c9eb86-ac2e-48b5-82cb-469499368c86": {
+                  "exists": false
+                },
+                "7f0db979-2e09-460a-bf9e-f4cf23005444": {
+                  "exists": false
+                },
+                "59dc3711-227d-4e5c-8b55-3e5fc6f7d67c": {
+                  "exists": false
+                },
+                "bbd97e9c-d980-4111-a6b0-ee10b6c5b284": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 376776,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "d632f96e-527b-43d5-ba42-c47b9e6762f0": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 375931,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "7968004d-0cae-4076-935b-6ad3ca45c131": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 377637,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "bd25f752-a436-4324-949e-73fcdb87b7e9": {
+                  "exists": false
+                },
+                "424f34c4-8db2-4ea8-97b8-7990b3fd65a2": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 375534,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "274b1b9f-8e42-4f85-965b-27ffec2d4972": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 374875,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "9a0542ea-97a3-4194-8ed5-c0fb3da9fd2a": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 376560,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "04f80941-e277-43a2-aaf8-08d436accd87": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 377705,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "3cd02c3b-1072-40ef-b3a4-6975a1197588": {
+                  "exists": false
+                },
+                "c2853317-4d82-481f-a918-c5cc5ecf29ca": {
+                  "exists": false
+                },
+                "9209744c-2dd9-43ca-9e9a-86b62480f449": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 377949,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "5ccd255f-b9c4-4bf2-bb3d-0ca159e54d46": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 376349,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "0f30b5d6-881c-41b4-a7f4-d80cf96e140e": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 379706,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "bdeed02b-3e26-4720-b8a4-8f847460db99": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 294590,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "ae3f011e-db7f-4ad0-bdf0-494f7c032aa6": {
+                  "exists": false
+                },
+                "61e3c01d-dd0c-4fa6-ba37-d43fa8c01712": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 374638,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "c2aca5db-e988-4271-ac8f-6b893a48c420": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 377513,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                },
+                "bfc6fb39-a801-4910-82d7-a01646b6e72b": {
+                  "exists": false
+                },
+                "3f53c3a2-1211-4696-a582-d5b7a4915440": {
+                  "exists": true,
+                  "device": 129,
+                  "inode": 377670,
+                  "mode": 448,
+                  "archive_exists": true,
+                  "code_exists": true
+                }
+              }
+            },
+            "canonical_revision_id": "0f30b5d6-881c-41b4-a7f4-d80cf96e140e"
+          },
+          {
+            "purged_function_id": "84b806cf-8fb4-4b2d-9975-ed7f95be91ad",
+            "operation_id": "4d88d9e3-ed12-4db8-a291-8badf86acaf2"
+          }
+        ],
+        "namespace_id": "346068dc-27ed-48d4-9a62-4e96d3d147c7",
+        "function_ids": [
+          "84b806cf-8fb4-4b2d-9975-ed7f95be91ad"
+        ]
+      },
+      "image": "sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4",
+      "adapter_images": {
+        "p2enjoy-adapter:dev": "sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106",
+        "p2enjoy-adapter-e2e:dev": "sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c"
+      },
+      "source_epoch": "deployment-and-public-regression",
+      "sources_identical_before_after": true,
+      "report_metadata_before": {
+        "sampled_at_ns": 1794248797221114875,
+        "mtime_ns": 1794239195286845844,
+        "sha256": "38d6539249bb20f47d25c39546db8e00a81992664f94c978133ae8fa64b0dded"
+      },
+      "report_metadata_after": {
+        "sampled_at_ns": 1794248984860204291,
+        "mtime_ns": 1794248984187835360,
+        "sha256": "473b115f36f1340b14b5666e6dbae659b55a5a813e1e7336b3924bf8838d3d46"
+      }
+    },
+    {
+      "name": "function-versions-cli",
+      "completed": true,
+      "started_at_ns": 1794248985480296636,
+      "exit_code": 0,
+      "log_sha256": "8533b549d3800fb50ce7bef5dd974c6a586811eb7742d02ad546534ae5f06841",
+      "groups": 5,
+      "report_sha256": "b6ba9e0ef268d62128f8a7269275ac4e73bad84f67d7ea50916d20ce4d596573",
+      "report": {
+        "target": "https://serverless.lelabs.tech",
+        "execution": "host-python",
+        "completed": true,
+        "cleanup": true,
+        "cleanup_errors": [],
+        "checks": [
+          {
+            "name": "CLI compl\u00e8te : publication et promotion explicite du premier hash",
+            "status": "passed"
+          },
+          {
+            "name": "CLI code seul scoped : provider non r\u00e9solu, ressources/variables/secrets conserv\u00e9s",
+            "status": "passed"
+          },
+          {
+            "name": "CLI : r\u00e9upload identique et promotion par un jeton limit\u00e9 \u00e0 la fonction",
+            "status": "passed"
+          },
+          {
+            "name": "CLI Read : publication et promotion refus\u00e9es sans d\u00e9placer la cible",
+            "status": "passed"
+          },
+          {
+            "name": "CLI rollback, promotion sans changement et hash invalide",
+            "status": "passed"
+          }
+        ],
+        "skipped": 0,
+        "evidence": [
+          {
+            "invoked_domain": "functions.lelabs.tech",
+            "code_hash": "526e56c18c73893cb2b903f9839520387f495bd0cd8d9ba700d0d5fdc6d87b79",
+            "invocation_id": "251647ca-ee83-4917-8f2c-f5eb6386462f"
+          },
+          {
+            "invoked_domain": "serverless.lelabs.tech",
+            "code_hash": "526e56c18c73893cb2b903f9839520387f495bd0cd8d9ba700d0d5fdc6d87b79",
+            "invocation_id": "47be6e42-4cc9-45bb-b719-6de907591ee9"
+          },
+          {
+            "invoked_domain": "functions.lelabs.tech",
+            "code_hash": "10d568c5ec18d24e6812a48a6d5af676785ce413d45f11266b0728069a638469",
+            "invocation_id": "52a28214-b334-4192-8f0d-b76633e02915"
+          },
+          {
+            "invoked_domain": "serverless.lelabs.tech",
+            "code_hash": "10d568c5ec18d24e6812a48a6d5af676785ce413d45f11266b0728069a638469",
+            "invocation_id": "de9b6816-9cf0-47d3-ab1d-67d2a2b4906e"
+          },
+          {
+            "invoked_domain": "functions.lelabs.tech",
+            "code_hash": "526e56c18c73893cb2b903f9839520387f495bd0cd8d9ba700d0d5fdc6d87b79",
+            "invocation_id": "665ca3bb-9970-447f-aab8-4c902f8e35cf"
+          },
+          {
+            "invoked_domain": "serverless.lelabs.tech",
+            "code_hash": "526e56c18c73893cb2b903f9839520387f495bd0cd8d9ba700d0d5fdc6d87b79",
+            "invocation_id": "38b8e37b-30c0-4539-b386-061f72a02ccd"
+          },
+          {
+            "purged_function_id": "9509547e-974f-440c-8691-c4e151e80928",
+            "operation_id": "8f64b1aa-d262-4542-8430-1729f0800904"
+          }
+        ],
+        "namespace_id": "03697cc6-8a3f-440f-8dd2-607f34efe645",
+        "service_id": "d03ca2f6-0cf9-4427-8771-501a65052d38",
+        "function_ids": [
+          "9509547e-974f-440c-8691-c4e151e80928"
+        ]
+      },
+      "image": "sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4",
+      "adapter_images": {
+        "p2enjoy-adapter:dev": "sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106",
+        "p2enjoy-adapter-e2e:dev": "sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c"
+      },
+      "source_epoch": "deployment-and-public-regression",
+      "sources_identical_before_after": true,
+      "report_metadata_before": {
+        "sampled_at_ns": 1794248985480197151,
+        "mtime_ns": 1794239255462953418,
+        "sha256": "16aaf5381f4e9b4b972688e7b0d97f10caf692525b3fb7d301bacbc716862296"
+      },
+      "report_metadata_after": {
+        "sampled_at_ns": 1794249045546350870,
+        "mtime_ns": 1794249044403930384,
+        "sha256": "b6ba9e0ef268d62128f8a7269275ac4e73bad84f67d7ea50916d20ce4d596573"
+      }
+    }
+  ],
+  "native": {
+    "completed": true,
+    "physical": {
+      "completed": true,
+      "target": "infra-serverless DEV",
+      "campaigns": {
+        "346068dc-27ed-48d4-9a62-4e96d3d147c7": [
+          "84b806cf-8fb4-4b2d-9975-ed7f95be91ad"
+        ],
+        "03697cc6-8a3f-440f-8dd2-607f34efe645": [
+          "9509547e-974f-440c-8691-c4e151e80928"
+        ]
+      },
+      "functions": {
+        "84b806cf-8fb4-4b2d-9975-ed7f95be91ad": {
+          "control": {
+            "id": "84b806cf-8fb4-4b2d-9975-ed7f95be91ad",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "4d88d9e3-ed12-4db8-a291-8badf86acaf2",
+          "result_version": 1794248981.8988032,
+          "agent_receipt": {
+            "operation_id": "4d88d9e3-ed12-4db8-a291-8badf86acaf2",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        },
+        "9509547e-974f-440c-8691-c4e151e80928": {
+          "control": {
+            "id": "9509547e-974f-440c-8691-c4e151e80928",
+            "function_deleted": 1,
+            "function_purged": 1,
+            "revision_detached": 1,
+            "configuration_empty": 1,
+            "environment_empty": 1,
+            "service_deleted": 1,
+            "guard_absent": 1,
+            "instances_absent": 1,
+            "active_calls_absent": 1,
+            "pending_commands_absent": 1,
+            "revision_content_cleared": 1,
+            "deployment_content_cleared": 1
+          },
+          "operation_id": "8f64b1aa-d262-4542-8430-1729f0800904",
+          "result_version": 1794249042.3074658,
+          "agent_receipt": {
+            "operation_id": "8f64b1aa-d262-4542-8430-1729f0800904",
+            "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+            "kind": "purge",
+            "expected_version": 2,
+            "version": 3
+          }
+        }
+      },
+      "global_control_reservations": {
+        "instances": 0,
+        "cpu_nanos": 0,
+        "memory_mib": 0
+      },
+      "global_storage_allocated_bytes": 0,
+      "physical": {
+        "artifacts_absent": true,
+        "backings_absent": true,
+        "mount_directories_absent": true,
+        "mounts_absent": true,
+        "known_execution_channels_absent": true,
+        "global_trash_empty": true,
+        "global_validation_channels_empty": true,
+        "global_execution_channels_empty": true,
+        "containers_absent_84b806cf-8fb4-4b2d-9975-ed7f95be91ad": true,
+        "networks_absent_84b806cf-8fb4-4b2d-9975-ed7f95be91ad": true,
+        "containers_absent_9509547e-974f-440c-8691-c4e151e80928": true,
+        "networks_absent_9509547e-974f-440c-8691-c4e151e80928": true,
+        "global_validators_absent": true
+      },
+      "artifact_ids": [
+        "04f80941-e277-43a2-aaf8-08d436accd87",
+        "0a6ecade-a4af-4ab9-b35c-8513bba02233",
+        "0f30b5d6-881c-41b4-a7f4-d80cf96e140e",
+        "274b1b9f-8e42-4f85-965b-27ffec2d4972",
+        "3cd02c3b-1072-40ef-b3a4-6975a1197588",
+        "3e5e48ac-2f83-4b01-85cc-702fba0c6f6d",
+        "3f53c3a2-1211-4696-a582-d5b7a4915440",
+        "423d5303-dee4-4672-9fbc-aed53787e80e",
+        "424f34c4-8db2-4ea8-97b8-7990b3fd65a2",
+        "59dc3711-227d-4e5c-8b55-3e5fc6f7d67c",
+        "5ccd255f-b9c4-4bf2-bb3d-0ca159e54d46",
+        "61e3c01d-dd0c-4fa6-ba37-d43fa8c01712",
+        "71c9eb86-ac2e-48b5-82cb-469499368c86",
+        "7968004d-0cae-4076-935b-6ad3ca45c131",
+        "7e2492b9-39ed-4b0f-80e7-2be14ceb95cd",
+        "7f0db979-2e09-460a-bf9e-f4cf23005444",
+        "85e3b66f-86f8-4334-948e-8f959b91a74f",
+        "907c6cc9-da65-4cf2-8ff0-605da1ea7e81",
+        "9209744c-2dd9-43ca-9e9a-86b62480f449",
+        "9415672b-759b-4793-abb6-c6c0258119c8",
+        "9a0542ea-97a3-4194-8ed5-c0fb3da9fd2a",
+        "9d035fb6-5b5e-40c9-8b6a-72e2e68bda05",
+        "ae3f011e-db7f-4ad0-bdf0-494f7c032aa6",
+        "aec0fd78-ac4f-4554-9f33-ca5297ee984f",
+        "bbd97e9c-d980-4111-a6b0-ee10b6c5b284",
+        "bd25f752-a436-4324-949e-73fcdb87b7e9",
+        "bdeed02b-3e26-4720-b8a4-8f847460db99",
+        "bfc6fb39-a801-4910-82d7-a01646b6e72b",
+        "c2853317-4d82-481f-a918-c5cc5ecf29ca",
+        "c2aca5db-e988-4271-ac8f-6b893a48c420",
+        "c66c637e-9f27-4952-8f8e-6b87362ad4fd",
+        "d632f96e-527b-43d5-ba42-c47b9e6762f0",
+        "d77f5629-bd9f-4738-8fe4-c9b5b895973b",
+        "df23d17a-8444-4b8a-8e86-f8411cf52d15",
+        "e983679d-84b2-4f49-869c-903ff95fad39"
+      ],
+      "instance_ids": [
+        "287d6acd-e298-48d3-89e1-7d29638875c4",
+        "2a915106-1dc0-47a9-8902-ed75d3ca0a71",
+        "2c65afde-7863-4586-8449-a672f6b525ce",
+        "36f6c914-0bfd-4a38-ba40-3f7cf72763f0",
+        "5826109a-28e8-424d-a2a6-6a43727d6f2d",
+        "5d9f4d24-6031-440f-91af-cb322f60a365",
+        "674facc3-4e28-458d-bfcb-66a9118d675d",
+        "7997ff01-cdd3-4464-a91a-6ad39c98838d",
+        "a0b88625-3b78-4173-bc4f-f59b1f7f5c87",
+        "b384caa9-aa00-4937-a121-cab13b00ce77",
+        "c174bd74-ba3e-4d59-baa8-ec837334aa3a",
+        "e32c81a2-5519-44dc-b8b2-3919112343b6",
+        "e8971302-2021-4ce8-9264-d2383446695c",
+        "ec02f9e3-40f3-4ab4-ab14-046abfbde596"
+      ],
+      "secrets": [
+        {
+          "function_id": "84b806cf-8fb4-4b2d-9975-ed7f95be91ad",
+          "secrets_empty": true
+        },
+        {
+          "function_id": "9509547e-974f-440c-8691-c4e151e80928",
+          "secrets_empty": true
+        }
+      ],
+      "control_image": "sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4"
+    },
+    "global_counts": {
+      "active_functions": 0,
+      "instances": 0,
+      "active_calls": 0,
+      "active_deployments": 0,
+      "reserved_bytes": 0,
+      "operations": 0
+    },
+    "invocation_states": {
+      "84b806cf-8fb4-4b2d-9975-ed7f95be91ad": {
+        "rejected": 1,
+        "succeeded": 10
+      },
+      "9509547e-974f-440c-8691-c4e151e80928": {
+        "succeeded": 6
+      }
+    },
+    "migrations": [
+      "001_control.sql",
+      "002_login_limits.sql",
+      "003_deployments.sql",
+      "004_function_operations.sql",
+      "005_execution.sql",
+      "006_storage_commands.sql",
+      "007_function_code_hash.sql",
+      "008_function_versions.sql"
+    ],
+    "success_receipt": {
+      "control": {
+        "id": "e661516bf5bf4e7b7a24760ec6b3d779b25d3aa0f114df0abbf743901cb48535",
+        "image": "sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4",
+        "started_at": "2026-11-09T18:25:10.056771655Z",
+        "health": "healthy"
+      },
+      "completed": true
+    },
+    "mutators": [
+      {
+        "launch_intent": true,
+        "joined": true,
+        "pgid": 2977999,
+        "pid": 2977999
+      }
+    ],
+    "guard_states": {
+      "timer": {
+        "LoadState": "not-found",
+        "ActiveState": "inactive"
+      },
+      "service": {
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "MainPID": "0"
+      }
+    },
+    "official_sha256": {
+      "/etc/spark/env": "ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d",
+      "/run/spark/secrets": "b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5",
+      "/etc/spark/routes": "a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e"
+    },
+    "backup_unchanged": true,
+    "services": [
+      {
+        "id": "e661516bf5bf4e7b7a24760ec6b3d779b25d3aa0f114df0abbf743901cb48535",
+        "image": "sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4",
+        "started_at": "2026-11-09T18:25:10.056771655Z",
+        "health": "healthy"
+      },
+      {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "started_at": "2026-11-06T15:49:39.578107028Z",
+        "health": "healthy"
+      }
+    ],
+    "embedded": {
+      "backend": {
+        "app/validator.py": "ea4eb2ff5dedec23be52e3e1fa4e17b8e2182065bf001210cbd3cb6a4108f62f",
+        "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+        "app/storage_management.py": "16ccc130423f8d9c5bc75e8e7ff2d65c86b99ce9ec111b4c2efabb9292972ed3",
+        "app/main.py": "9733d7e56c57d72fb26f35e67131f0bd1fd2ab20b36a184865e3f9b780242a94",
+        "app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+        "app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+        "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+        "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+        "app/db.py": "242a5688d94e1464c0b0343368caca6e6dec8bb25de45e63e406f71b7d223552",
+        "app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+        "app/function_versions.py": "d2df18c725c248cc63fbc833164b9e474ed2e07f72944e8d0695a106f09bb967",
+        "app/catalogue.py": "d24cde9ca3f3068400018b288cb4dba6c074edc00cd978bdb668d431e43002fe",
+        "app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+        "app/execution.py": "5064920dc6d20f2be449e06aaed017734e900513b4764d09843fb6b8214e3208",
+        "app/deployments.py": "5d913135b5ade6d841acdd777448c2270772c71f4b4911108d562e1f763ffa90",
+        "app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+        "app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+        "app/invocation_routes.py": "04beae967b5208401cafbf0f6921b4bbf44f55d6465854ae1a706b2a4ec3289b",
+        "app/models.py": "a3c7f50ecef756d4e624eba693218aa0a9a37bc833df84c583758e5baa53d496",
+        "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+        "app/invocation_urls.py": "589af8b943ed6956e0fbe6cc8a896b480d933117bdd9d975a7096e710955f488",
+        "app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+        "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+        "migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+        "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+        "migrations/008_function_versions.sql": "93adc5a2607c3932462762650698e14b2367285a5931902ab51dfdcbd64080c3",
+        "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+        "migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+        "migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+        "migrations/007_function_code_hash.sql": "f8c80a480c1d22c593198888f80d9b8b2b4bef2853be6f6b1227fea2b9fce412",
+        "function_code_hash.py": "dd2b64c375639d4ffc35eb508233263122adc8f19f3f56bb15e3cfef6e37d23f"
+      },
+      "web": {
+        "favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+        "index.html": "90431f0e1cc1c660637365b5b425eae6f30377a0395af38b37e0bf68f6becca1",
+        "assets/index-DlXE_L19.css": "ff44f5f2ce44faf349a41a61af99041f674d25e3a7556e4183a27a67d3625c5f",
+        "assets/index-Bm51TwKw.js": "2f30cbe761fbdece55224e3221ee73fc7b2bc83127cce726039596554daaece6"
+      }
+    },
+    "https_assets": {
+      "favicon.svg": "0b0693872549bd6a49d735b267d92e600e03edd5cf18fd095c603dabf432d31f",
+      "index.html": "90431f0e1cc1c660637365b5b425eae6f30377a0395af38b37e0bf68f6becca1",
+      "assets/index-DlXE_L19.css": "ff44f5f2ce44faf349a41a61af99041f674d25e3a7556e4183a27a67d3625c5f",
+      "assets/index-Bm51TwKw.js": "2f30cbe761fbdece55224e3221ee73fc7b2bc83127cce726039596554daaece6"
+    }
+  },
+  "excluded_deployment_attempt": {
+    "path": ".local/e2e/migration008-deployment-preflight-interrupted-1794248679545378725",
+    "files": {
+      "migration008-deployment.log": "995f8bc95bd2f1cdc68997a402a2264503aaeddfc702f545ea5a2ff48aeebc55",
+      "operator.py": "9cd4244a2b5a3aee5c77ea4717a3094e481fb1a28b2d1ce62b9907972147ae5f",
+      "native.json": "13e335a6adbdd18ee7a4210ee6d34cce84314e6cc6e3bffa6c617eed4a53bada",
+      "migration008-deployment-checkpoint.json": "5d0f6097ce743e70a680bd2dd7156553942b4d241510c4fe1673b0d4d5092a56"
+    },
+    "native": {
+      "completed": true,
+      "failure_before_guard_and_replacement": true,
+      "private_backup": "/srv/p2enjoy-serverless/qualification-history/migration008-deployment-backup-b9c55de6e4264744a321acb809fa75fd",
+      "backup_sha256": "17965cc35c8802d9fd346e5f9fde6d51e8c23743bd099cce06de2f763e930e11",
+      "operator_folder": "/run/serverless-control-image-rollback-b9c55de6e4264744a321acb809fa75fd",
+      "guard_states": {
+        "timer": {
+          "LoadState": "not-found",
+          "ActiveState": "inactive"
+        },
+        "service": {
+          "LoadState": "not-found",
+          "ActiveState": "inactive"
+        }
+      },
+      "services": [
+        {
+          "id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+          "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+          "started_at": "2026-11-09T16:53:43.245115994Z",
+          "health": "healthy"
+        },
+        {
+          "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+          "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+          "started_at": "2026-11-06T15:49:39.578107028Z",
+          "health": "healthy"
+        }
+      ]
+    },
+    "counted_in_groups": false
+  },
+  "collector_diagnostic": {
+    "initial_request": "/index.html",
+    "http_status": 404,
+    "corrected_canonical_request": "/",
+    "application_code_changed": false,
+    "counted_in_groups": false
+  },
+  "spark_note_proposals": {
+    "completed": true,
+    "notes": {
+      "README.md": {
+        "path": "/etc/spark/notes/README.md.?",
+        "sha256": "abf779a5f8649fdfe5efb5b4534234f12a9ab73ec2063fd8e7df8528f7dabe3a",
+        "active_sha256": "68231a5bc5cd7b7a7521e435c67b6d1117fd56fbca3092d9483ea3cbd86d04b3",
+        "previous_proposal_sha256": "7638ee9ddafb33ceb83d37492d083556cef7fde4ffdb372517718a392ca7445f",
+        "proposed": true,
+        "adoption_claimed": false
+      },
+      "CONTRIBUTORS.md": {
+        "path": "/etc/spark/notes/CONTRIBUTORS.md.?",
+        "sha256": "d8f9908212b8202188340b3d448bbee559809231f809421a3bab6780657c5d81",
+        "active_sha256": "b6ee5681dca28cced5e57008b8b2002e11680ee0506be045b98458302f324f66",
+        "previous_proposal_sha256": "6f9e611ecf44ff439a3cd785a4e6fa289ca6da627a3d075613cd3650d5354479",
+        "proposed": true,
+        "adoption_claimed": false
+      },
+      "INSTALL.md": {
+        "path": "/etc/spark/notes/INSTALL.md.?",
+        "sha256": "ee4ae5642220ccd4f05d4bbe1474578cad45ff214bb4726c17f8a2e9dd8fc771",
+        "active_sha256": "8f1506c07b936669f16990f31eb9469fda6724c40ff2c6a8e50f9ace26f52d65",
+        "previous_proposal_sha256": "6e0a3fb99f20f89ce24accb01c81d3ad194067a187079ffa9a1f9d5da13f4d7a",
+        "proposed": true,
+        "adoption_claimed": false
+      }
+    }
+  },
+  "delivery_document_changes": {
+    "docs/FUNCTION_VERSION_EXECUTION.md": {
+      "tested_sha256": "5dbacde00b4c5f2995400093199566b8d3d96d6edd23499c97ba9826c077e657",
+      "delivery_sha256": "75552f1f8bd1a5e4c50c537d7d685ea55bf27ca599b7afe8a0dd7f8e25a2068e"
+    },
+    "docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md": {
+      "tested_sha256": "fef018040caf9092006c55a81b5ac3aafbb18cff9fe070986675ceb813aefdbf",
+      "delivery_sha256": "d422c55c0bf4a055d22041732f1159d4e765ca36e17f8e21f89f03569ca8d3ab"
+    },
+    "docs/SCHEMA.md": {
+      "tested_sha256": "d586d568464d0ae72b9c08fd821a5e05efb209637c847dd81985b0bcc1f0e307",
+      "delivery_sha256": "6b54ddfd496de191e49c75f56a517e5bc8a99959ab1761e5817fecb5ca3e6d30"
+    }
+  },
+  "qualified_executable_sources_unchanged": true,
+  "review": {
+    "agent": "function_versions_contract_review",
+    "read_only": true,
+    "blocking_findings_after_fixes": 0,
+    "found_and_corrected": [
+      "Control absence between Compose removal and creation is distinguished from Docker errors.",
+      "Unjoined mutator process groups persist and prevent concurrent recovery."
+    ],
+    "functional_claim": "Only retained E2E results provide functional evidence."
+  },
+  "limitations": [
+    "SLS-074 remains in progress: publication/promotion/deletion interruption windows, engaged historical purges, unknown-first then known-hash variant and complete schema008 regression remain.",
+    "Native-copy guard and deployment rollback guard were armed and normally cancelled; independent triggering, owner loss and guard-own failures are not qualified here.",
+    "Deployment backup is retained without automatic database restoration.",
+    "Compiled UI is byte-identical; no fresh visual journey or screenshot claim.",
+    "No Git remote configured; no push."
+  ]
+}

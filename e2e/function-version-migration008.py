@@ -1,11 +1,12 @@
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md
-# @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md#invariants-et-matrice-négative
+# @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md#invariants-et-matrice-négative | docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md#verrou-et-interruption-native
 """Real application startup on private faulty copies of the genuine schema007 backup."""
 from contextlib import closing,contextmanager,nullcontext
 import hashlib,json,os,re,shutil,socket,sqlite3,subprocess,sys,tempfile,time
 from pathlib import Path
 from uuid import UUID,uuid4
 from control_database import control_owner,ControlWriter
+from function_version_migration_wal import interrupted_wal_copy,stopped_start_command,resume_wrapper
 
 ROOT=Path('/srv/p2enjoy-serverless')
 assert os.geteuid()==0 and socket.gethostname()=='infra-serverless','dev_spark_required'
@@ -73,16 +74,21 @@ def owned(record):
     assert all(v['Destination'] in ('/state','/tmp') for v in value['Mounts']) and value['HostConfig']['NetworkMode']=='none'
     if record['id'] is not None:assert value['Id']==record['id'],'proof_container_replaced'
     return value
-def start(label,directory,command_override=None):
+def start(label,directory,command_override=None,*,paused=False):
     name='serverless-migration008-'+label+'-'+nonce;assert lookup(name) is None,'proof_container_name_taken'
     record={'name':name,'id':None,'directory':str(directory)};containers.append(record)
     compose=work/'compose.json';compose.write_text(json.dumps({'services':{'control':{'image':image,'container_name':name,'env_file':['/etc/spark/env','/run/spark/secrets'],
-        'labels':{'tech.p2enjoy.serverless.migration-proof':nonce},'network_mode':'none','read_only':True,'cap_drop':['ALL'],'security_opt':['no-new-privileges:true'],'mem_limit':'512m','cpus':1,'pids_limit':64,
+        'labels':{'tech.p2enjoy.serverless.migration-proof':nonce},'network_mode':'none','init':False,'read_only':True,'cap_drop':['ALL'],'security_opt':['no-new-privileges:true'],'mem_limit':'512m','cpus':1,'pids_limit':64,
         'tmpfs':['/tmp:size=16m,mode=1777,noexec,nosuid'],'volumes':[str(directory)+':/state']}}}));compose.chmod(0o644)
     if command_override is not None:
         definition=json.loads(compose.read_text());definition['services']['control']['command']=command_override;compose.write_text(json.dumps(definition))
     run(DOCKER+['compose','-p','serverless-migration008-'+nonce,'-f',str(compose),'up','-d','--no-build'])
     created=owned(record);assert created is not None,'proof_container_creation_unknown';record['id']=created['Id']
+    if paused:return name,created['State'],None
+    return exited(name,directory)
+
+def exited(name,directory):
+    record=next(v for v in containers if v['name']==name);assert owned(record) is not None
     state=None;deadline=time.monotonic()+40
     while True:
         state=json.loads(run(DOCKER+['inspect','--format','{{json .State}}',name]))
@@ -207,10 +213,24 @@ try:
         'missing-retained-inventory':("UPDATE revisions SET inventory_json='[]' WHERE id=?",(active,),'user-defined function raised exception'),
         'changed-retained-inventory':('UPDATE revisions SET inventory_json=? WHERE id=?',(json.dumps([{**v,'sha256':('0'*64 if v['sha256']!='0'*64 else '1'*64)} if i==0 else v for i,v in enumerate(inventory)]),active),'historical_code_hash_mismatch'),
         'orphan-service-token':('UPDATE service_tokens SET service_id=? WHERE id=?',(str(uuid4()),token),'historical_foreign_key_required')}
-    selected=list(faults)+['positive','writer-lock','constraints'] if selection=='rejections-and-controls' else list(faults) if selection=='all-rejections' else [selection];assert all(v in {*faults,'positive','writer-lock','constraints'} for v in selected)
+    selected=list(faults)+['positive','writer-lock','constraints','wal-interruption'] if selection=='complete-component' else list(faults)+['positive','writer-lock','constraints'] if selection=='rejections-and-controls' else list(faults) if selection=='all-rejections' else [selection];assert all(v in {*faults,'positive','writer-lock','constraints','wal-interruption'} for v in selected)
     observations.append({'source_sha256':source_sha,'historical_tables_verified':True,'source_versions':versions,'source_image':expected['source_image'],'active_revision_id':active,'selected_scenarios':selected})
     for label in selected:
         directory,path=copy_database(label)
+        if label=='wal-interruption':
+            try:
+                before=snapshot(path);name,state,_=start(label,directory,stopped_start_command(DOCKER,image),paused=True)
+                record=next(v for v in containers if v['name']==name)
+                with interrupted_wal_copy(DOCKER,record,image,nonce) as native:
+                    after=snapshot(path);assert before==after,'interrupted_migration_changed_database'
+                    run(DOCKER+['start',record['id']]);resumed=resume_wrapper(DOCKER,record,image,nonce)
+                    same,state,raw=exited(name,directory);assert same==name and state['ExitCode']!=0 and 'FileNotFoundError' in raw and 'in reconcile_docker' in raw
+                    migrated=verify_upgrade(path);assert owned(record)['Id']==native['same_container_id']
+                    native.update(rollback_snapshot=after,explicit_retry={'container_id':record['id'],'wrapper_resume':resumed,'migration':migrated,'exit_code':state['ExitCode'],'socket_intentionally_not_mounted':True,'log_sha256':hashlib.sha256(raw.encode()).hexdigest()})
+                assert native['container_removed'];remove(name)
+                observations.append({'scenario':label,'before':before,'native':native});checks.append({'name':label,'status':'passed'});print('PASS',label,flush=True);save();continue
+            except BaseException as error:
+                checks.append({'name':label,'status':'failed','error':type(error).__name__});raise
         if label in ('positive','writer-lock','constraints'):
             try:
                 details={}

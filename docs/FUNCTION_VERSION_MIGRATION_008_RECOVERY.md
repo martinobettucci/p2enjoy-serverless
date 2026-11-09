@@ -190,7 +190,39 @@ officiels inchangés. Elle refuse tout conteneur étranger : image, labels,
 configuration effective, référence et fichiers officiels doivent correspondre.
 Le backup n'est jamais restauré automatiquement : cela pourrait effacer une
 écriture légitime. Les commandes Compose sont bornées, le verrou partagé ne
-couvre que leurs opérations bornées et le reçu terminal. La garde nominale
+couvre que leurs opérations bornées et le reçu terminal. Chaque mutateur porte
+une intention persistée puis son groupe de processus ; une fin non jointe
+interdit toute nouvelle mutation, dans le pilote comme dans la garde. Une
+intention dont le lancement reste inconnu est conservée pour diagnostic, sans
+rejeu. Une absence du contrôle n’autorise la reprise que sous intention de
+remplacement connue ; une autre erreur Docker ne vaut jamais absence. La garde nominale
 est désarmée après santé et invariants confirmés ; son déclenchement autonome
 ne sera pas déduit de ce parcours nominal. Les replays publics API12 et CLI5
 suivent en série, avec vérification physique des fonctions purgées.
+
+
+## Bascule et régressions qualifiées
+
+La [preuve de livraison](evidence/function-version-migration008-recovery-dev-2026-11-09.json)
+retient dix groupes de composant et17 groupes publics distincts, sans addition
+des précédents replays. La bascule sur277 sources remplace uniquement l'image
+par def45648, conteneur e661516b, démarré à2026-11-09T18:25:10.056771655Z. Le
+backup natif est recoupé avant remplacement ; les17 tables et le schéma déjà008
+sont strictement identiques après. La référence, la configuration et les deux
+routes permanentes ne changent pas. La garde est désarmée et le mutateur joint.
+
+Les12 groupes API puis5 CLI passent sur la même image et les mêmes277 sources :
+16 invocations réussies et un rejet attendu, deux fonctions purgées physiquement,
+réservations/opérations/instances/appels actifs nuls. Les31 backends et les quatre
+fichiers HTTPS correspondent à l'image construite. Le web compilé reste identique ;
+aucun nouveau parcours ou examen visuel n'est revendiqué.
+
+Une première tentative de bascule s'est arrêtée avant garde et avant remplacement
+sur l'appel invalide Path.chown. Elle conserve son journal, son pilote exact, son
+backup et un recoupement du contrôle inchangé ; la correction utilise os.chown.
+Le premier recoupement web a demandé /index.html et reçu404 ; le recoupement
+final emploie l'entrée publique canonique /. Ces diagnostics ne sont pas
+transformés en groupes réussis. Les pertes du traceur, déclenchements autonomes
+et pannes propres des deux gardes restent non qualifiés. Historiques de purge
+engagée, premier hash inconnu puis connu, autres pannes et campagne complète
+restent ouverts ; SLS-074 reste en cours.

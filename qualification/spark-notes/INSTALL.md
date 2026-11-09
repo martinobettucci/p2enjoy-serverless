@@ -456,7 +456,7 @@ Ces trois notes sont proposées individuellement, sans adoption revendiquée.
 
 ## Noms des validateurs — SLS-076 qualifiée
 
-Le contrôle008 sert19cfe884642a et nomme ses validateurs
+Lors de la preuve076, le contrôle008 sert19cfe884642a et nomme ses validateurs
 serverless-code-validator-UUID. L’ancien p2-v est repris par labels après
 interruption réelle, sans redémarrer l’ancienne image avant la nouvelle.
 Preuve : docs/evidence/validator-names-dev-2026-11-09.json. Quatre groupes
@@ -474,10 +474,10 @@ restent au backlog. Aucun secret/variable/route nouveau ; ces trois notes
 sont proposées individuellement, sans adoption revendiquée.
 
 
-## Dernière reprise du contrôle qualifiée
+## Reprise historique du contrôle avant les gardes008
 
 Le contrôle serverless-api garde son ID21545c4f et son image19cfe884 ; son
-démarrage courant est2026-11-09T16:53:43.245115994Z après le cycle SIGKILL de
+démarrage après ce cycle est2026-11-09T16:53:43.245115994Z après le cycle SIGKILL de
 qualification074. La garde a restitué le seul répertoire candidat avant docker
 start du même conteneur. Le candidat publié reste published, sa réservation
 est libérée et une nouvelle déduplication réussit. Les cinq appels retrouvent
@@ -485,3 +485,20 @@ les compteurs data/cache1–5 ; la fonction est purgée et les ressources active
 libérées. Aucune migration, variable, route ou nouvelle image. La référence,
 les31 backends et les fichiers officiels restent identiques. Preuve :
 docs/evidence/function-version-duplicate-recovery-dev-2026-11-09.json.
+
+
+## Gardes008 et image actuelle
+
+Le contrôle courant serverless-api est e661516b, image def45648f9e7, démarré
+2026-11-09T18:25:10.056771655Z. Seul le préfixe de première transition008 change
+parmi31 backends ; le web reste identique. Dix groupes sur vraies copies007
+qualifient refus et coupure WAL avant commit/reprise du même conteneur. La
+bascule conserve les17 tables et le schéma déjà008 ; un backup SQLite natif
+privé est conservé dans `qualification-history/migration008-deployment-backup-b6c39eaeb4c447f2a7aab719902f938c`. Ne pas restaurer automatiquement cette base.
+
+Douze groupes API puis cinq CLI passent sur l'image servie,16 appels réussissent
+et un refus attendu est conservé. Deux fonctions purgées physiquement, ressources
+actives nulles, garde d'image désarmée et mutateur joint. Référence et fichiers
+officiels/routes restent identiques. Preuve : docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json. Les pertes propres des gardes, les
+purges engagées et autres critères restent dans SLS-074. Ces notes sont proposées
+individuellement ; leur adoption n'est pas revendiquée.

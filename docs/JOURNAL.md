@@ -4628,3 +4628,33 @@ La bascule suivante est tranchée avant code dans le contrat : sauvegarde native
 repos, remplacement d'image seulement sur base déjà008, hashes de toutes les
 tables et du schéma recoupés, garde indépendante de retour à19cf sans restauration
 DB automatique. Les replays API12/CLI5 sont distincts et restent à exécuter.
+
+
+## 2026-11-09 — Bascule008 et régressions publiques
+
+La revue du pilote corrige avant opération deux fenêtres : contrôle absent entre
+retrait/création Compose et récupération avant jonction des descendants du
+mutateur. Les intentions/PGID non joints sont persistés et refusent une seconde
+mutation. La revue finale ne relève plus de blocage ; les pannes propres de
+garde ne sont pas déduites du nominal. Le premier lancement s'arrête ensuite
+avant garde sur Path.chown inexistant. Pilote, log, backup et état servi inchangé
+sont archivés ; os.chown corrige ce défaut d'opérateur.
+
+La relance explicite bascule sur def45648, conteneur e661516b, démarré
+2026-11-09T18:25:10.056771655Z. Backup natif privé vérifié,17 tables et schéma008
+identiques avant/après, garde désarmée et mutateur joint. La référence, les
+fichiers officiels et routes restent inchangés. Sur277 sources figées,12 groupes
+API puis5 CLI passent,16 appels réussissent et un refus attendu est conservé.
+Les deux fonctions sont purgées physiquement, compteurs actifs/réservations nuls.
+31 backends et4 fichiers HTTPS recoupés avec le build ; le premier collecteur
+avait interrogé /index.html au lieu de /, diagnostic404 corrigé sans modifier
+le service. Manuel/web inchangés, aucun parcours UI frais revendiqué.
+
+Les dix groupes de composant restent liés à276 sources ; le nouveau pilote et
+les décisions de bascule définissent l'époque277, avec les mêmes sources produit
+et image candidate. Les essais interrompus et anciens replays ne gonflent pas
+les27 groupes retenus. Preuve : evidence/function-version-migration008-recovery-dev-2026-11-09.json.
+SLS-074 reste[~] : gardes propres, purges engagées, premier hash inconnu puis
+connu, autres pannes et campagne complète. Aucun registre d'incohérences présent
+ni nouveau cas d'arbitrage externe ; les défauts internes sont corrigés dans
+l'unité. Aucun remote Git configuré.

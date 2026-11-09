@@ -1,30 +1,42 @@
 # Qualification de la plateforme
 
-## Refus de migration008 — checkpoint de candidate
+## Refus et reprise de migration008
 
-`function-version-migration008-build.py` construit une candidate depuis les
-sources synchronisées, conserve l'image servie et recoupe31 fichiers backend
-et le web. `function-version-migration008-run.py rejections-and-controls IMAGE_SHA256`
-lance neuf groupes en série sur des copies privées de la vraie sauvegarde007.
-Le helper `function-version-migration008.py` utilise le propriétaire SQLite,
-le vrai uvicorn dans Docker et les fichiers officiels, réseau none, sans socket
-ni volume vivant. Un échec ultérieur de socket ne vaut pas refus de migration.
-Les refus exigent le rollback exact ; le témoin exige008 appliquée, données
-historiques et backfills conservés. Le groupe de contraintes emploie la vraie
-SQLite de l'image et annule chaque mutation attendue, avec contrôles positifs.
+`function-version-migration008-build.py` conserve l'image servie, construit la
+candidate et recoupe31 fichiers backend et le web. Depuis la racine synchronisée :
 
-Le [checkpoint](../docs/evidence/function-version-migration008-checkpoint-dev-2026-11-09.json)
-passe neuf groupes, zéro échec/skip, sur275 sources : six refus, témoin,
-verrou/reprise, contraintes (14 refus internes/3 contrôles non additionnés).
-Il conserve la reproduction rouge sur19cfe884 et le premier replay de six refus
-dans leurs époques distinctes. Candidate def45648f9e7, seul008 différent parmi31
-backends, web identique, conteneurs/copies retirés et sauvegarde/services inchangés.
-Les pilotes refusent les rapports préexistants. Rapport natif :
-control/function-version-migration008.json ; checkpoint et build : .local/e2e.
-Le [contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md) donne les commandes.
-La candidate n'est pas servie ; l'interruption WAL et sa garde ne sont pas
-implémentées ici. Bascule, replays publics, historique de purge engagé et variante
-premier hash inconnu suivi d'un connu restent distincts. Aucun parcours UI frais.
+```sh
+python3 -B e2e/function-version-migration008-run.py complete-component sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4
+```
+
+Les dix groupes s'exécutent en série sur copies privées de la vraie sauvegarde007.
+Le helper utilise le propriétaire SQLite et le vrai uvicorn/Docker, réseau none,
+sans socket ni volume vivant. Un échec ultérieur de socket ne vaut pas refus.
+Les six refus exigent le rollback exact ; témoin, verrou/reprise et contraintes
+recoupent données et backfills. Les14 refus SQL et3 contrôles internes du dernier
+ne gonflent pas le total. `function_version_migration_wal.py` observe un vrai
+pwrite64 sans modifier ses résultats, coupe après écriture d'une frame non
+commise, recoupe mort native9/Docker137,007 intact puis008 sur le même conteneur.
+Sa garde reste armée jusqu'à suppression confirmée, puis est désarmée.
+
+La [preuve finale](../docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json)
+conserve276 sources pour le composant et277 pour bascule/API/CLI. Le pilote
+`function-version-migration008-deploy.py` s'exécute comme root uniquement sur
+le SPARK autorisé : backup SQLite natif, contrôle du repos, remplacement de
+l'image et garde indépendante de retour d'image sans restauration DB.
+Cette opération est bornée aux images exactes19cfe884/def45648 et refuse un
+rapport préexistant. Elle n'est pas une commande générique de mise à jour.
+Les17 tables et le schéma déjà008 sont identiques après bascule ;12 groupes API
+et5 CLI passent ensuite, avec deux fonctions physiquement purgées. Les trois
+essais WAL et l'essai de bascule arrêté avant garde restent archivés séparément.
+
+Les rapports natifs sont control/function-version-migration008.json et
+control/function-version-migration008-deploy.json ; checkpoints dans .local/e2e.
+Les pilotes refusent de les écraser. La reproduction rouge et le premier replay
+neuf restent dans leurs époques distinctes. Le [contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md)
+borne ce qui est qualifié : nominal et désarmement, sans prétendre éprouver les
+pertes propres des gardes. Purges engagées, premier hash inconnu puis connu,
+autres pannes et campagne complète restent nécessaires. Aucun nouveau parcours UI.
 
 ## Reprise des paquets dédupliqués — complément SLS-074
 

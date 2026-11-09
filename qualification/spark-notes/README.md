@@ -429,7 +429,7 @@ Ces trois notes sont proposées individuellement, sans adoption revendiquée.
 
 ## Noms des validateurs — SLS-076 qualifiée
 
-Le contrôle008 sert19cfe884642a et nomme ses validateurs
+Lors de la preuve076, le contrôle008 sert19cfe884642a et nomme ses validateurs
 serverless-code-validator-UUID. L’ancien p2-v est repris par labels après
 interruption réelle, sans redémarrer l’ancienne image avant la nouvelle.
 Preuve : docs/evidence/validator-names-dev-2026-11-09.json. Quatre groupes
@@ -457,3 +457,20 @@ par garde indépendante après SIGKILL du contrôle et du helper. Même conteneu
 21545c4f et configuration, nouveau démarrage attendu le2026-11-09 à16:53:43UTC.
 Données/cache1–5 conservés, fonction purgée physiquement et deux gardes terminées.
 SLS-074 reste en cours pour les autres fenêtres et la régression complète.
+
+
+## Gardes008 et image actuelle
+
+Le contrôle courant serverless-api est e661516b, image def45648f9e7, démarré
+2026-11-09T18:25:10.056771655Z. Seul le préfixe de première transition008 change
+parmi31 backends ; le web reste identique. Dix groupes sur vraies copies007
+qualifient refus et coupure WAL avant commit/reprise du même conteneur. La
+bascule conserve les17 tables et le schéma déjà008 ; un backup SQLite natif
+privé est conservé dans `qualification-history/migration008-deployment-backup-b6c39eaeb4c447f2a7aab719902f938c`. Ne pas restaurer automatiquement cette base.
+
+Douze groupes API puis cinq CLI passent sur l'image servie,16 appels réussissent
+et un refus attendu est conservé. Deux fonctions purgées physiquement, ressources
+actives nulles, garde d'image désarmée et mutateur joint. Référence et fichiers
+officiels/routes restent identiques. Preuve : docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json. Les pertes propres des gardes, les
+purges engagées et autres critères restent dans SLS-074. Ces notes sont proposées
+individuellement ; leur adoption n'est pas revendiquée.
