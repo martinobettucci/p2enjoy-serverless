@@ -1,4 +1,5 @@
 # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#artefact
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_CODE_HASH.md#format-v1
 # Package selected real files; neither load a handler nor execute a build.
 import hashlib
 import json
@@ -100,7 +101,8 @@ def package_function(root,function,destination,manifest_path,manifest_identity,o
                 after=os.fstat(fd)
                 if (before.st_ino,before.st_size,before.st_mtime_ns,before.st_ctime_ns)!=(after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns):
                     raise ManifestError('Un fichier a changé pendant le packaging : '+relative)
-                inventory.append({'path':relative,'size':size,'sha256':digest.hexdigest()})
+                inventory.append({'path':relative,'size':size,'sha256':digest.hexdigest(),
+                                  'mode':oct(0o555 if before.st_mode&0o111 else 0o444)})
             finally:os.close(fd)
             if destination.tell()>MAX_ZIP:raise ManifestError('ZIP supérieur à 64 Mio.')
     size=destination.tell()

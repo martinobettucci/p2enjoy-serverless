@@ -790,3 +790,20 @@ Notes : README, CONTRIBUTORS, INSTALL proposés individuellement. Configuration 
 fichiers officiels, services, images et démarrages inchangés ; aucun build. Mode
 du relevé retiré puis restitué à 0640, contenu/inode/mtime identiques, ctime changée.
 Autres fautes de source et pages UI/CLI sur six domaines restent à qualifier.
+
+
+## Identité canonique des paquets — 9 novembre
+
+Le calculateur serverless-code-hash et l’inventaire exécutable du packager sont
+qualifiés : sept groupes ciblés, 45 de régression et neuf invocations Docker,
+Deux époques de 222 sources sont figées. Les deux contextes de build sont prouvés
+(deux/onze fichiers).
+Les douze fonctions de régression sont supprimées, leurs volumes purgés ;
+33 archives de code restent conservées et recoupées. Les dix-neuf conteneurs runtime des
+essais, 37 clients nommés et leurs canaux/dossiers sont absents. Deux essais arrêtés restent
+distincts du replay. [Preuve](evidence/function-code-hash-dev-2026-11-09.json).
+Variables : aucun ajout. Secrets : aucun ajout. Routes/DNS : aucun changement.
+Notes : README, CONTRIBUTORS, INSTALL proposés individuellement. Configuration :
+deux fichiers officiels et services/démarrages inchangés ; aucun .env, ENV/ARG
+ou environment de configuration ajouté. Seules les images de calcul/packaging
+sont construites. Déduplication, promotion et appel public par hash restent en cours.

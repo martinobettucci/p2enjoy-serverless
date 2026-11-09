@@ -262,3 +262,18 @@ empreintes ; 42 sont réexécutés après correction des seuls clients de preuve
 Les sources produit et images restent identiques dans les deux époques.
 Le recoupement lie les 27 fichiers embarqués, quatre fichiers web HTTPS,
 91 fonctions purgées et les variables/secrets de quinze services effacés.
+
+
+## Calcul canonique des paquets — première étape SLS-074
+
+La bibliothèque racine `function_code_hash.py` et sa CLI calculent l’identité
+SHA256 à partir du vrai ZIP extrait et d’un descripteur d’exécution public.
+Le [format v1](../docs/FUNCTION_CODE_HASH.md) distingue contenu exécutable et
+métadonnées de transport. Depuis control sur DEV, comme spark-docker, exécuter
+en série `bash code-hash-dev.sh build` puis `bash code-hash-dev.sh test`.
+Le rapport natif est `control/function-code-hash-proof.json`. Le calculateur
+ne sert aucun port et ne modifie pas le contrôle en service.
+La [preuve](../docs/evidence/function-code-hash-dev-2026-11-09.json) passe
+52 groupes dont sept ciblés, neuf invocations Docker et 222 sources. La future
+déduplication/promotion/sélection par hash reste dans SLS-074 ; aucune migration
+ni modification du pointeur actif n’est livrée par ce composant.

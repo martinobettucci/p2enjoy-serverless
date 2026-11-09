@@ -86,7 +86,9 @@ par ce client et les statuts documentaires, jamais par le calculateur/packager.
 
 [Preuve](evidence/function-code-hash-dev-2026-11-09.json) : sept groupes ciblés
 et 45 de régression réussis, zéro échec/skip sur les campagnes retenues.
-222 sources figées, calculateur et cinq modules des deux images CLI recoupés.
+Deux époques de 222 sources sont explicites : sept groupes rejoués après nommage
+des clients, 45 conservés aux clients inchangés. Le produit et les images restent
+identiques ; calculateur et cinq modules des deux images CLI sont recoupés.
 Neuf invocations réelles passent dans les deux images Node ; les changements
 de dépendance et de handler sont observés dans les réponses. ZIP réordonné,
 recompressé, daté autrement et renommage implicite conservent leur hash.
@@ -101,8 +103,10 @@ entre ces essais et le replay vert ; les époques du client restent explicites.
 La collecte readonly corrige aussi son interprétation de container inspect :
 l’absence native est code 1, tableau vide et No such container pour le bon ID.
 
-Les dix conteneurs des essais (neuf du replay, un antérieur), canaux et dossiers
-sont absents. La régression authentifiée supprime douze fonctions et leurs parents,
+Les dix-neuf conteneurs des essais (neuf du replay nommé, neuf du checkpoint
+intermédiaire et un partiel), 37 clients nommés, canaux et dossiers sont absents.
+Le checkpoint intermédiaire n’ajoute aucun groupe au total retenu.
+La régression authentifiée supprime douze fonctions et leurs parents,
 purge leurs volumes et conserve 33 archives de code, vérifiées fichier par fichier.
 Les deux preuves de contexte COPY et builds sont séparées des 52 groupes.
 Services, démarrages, configurations officielles et routes restent inchangés.

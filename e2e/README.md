@@ -849,3 +849,22 @@ si la restitution ne peut être confirmée. Une fonction purgée, parents suppri
 un appel et garde finie sont recoupés : [preuve](../docs/evidence/invocation-source-ui-dev-2026-11-09.json),
 212 sources et images identiques. Autres fautes de source et branches d’erreur
 du client restent distinctes ; aucune réponse/route n’est substituée.
+
+
+## Identité canonique de paquet
+
+`bash control/code-hash-dev.sh test`, comme spark-docker dans le seul SPARK DEV,
+lance `function-code-hash.py`. Sept groupes traversent les vrais packager,
+extracteur, calculateur et CLI d’instance Node. Neuf invocations observent les
+handlers/dépendances. Réordre/recompression/renommage, changements réels, Unicode
+et refus de ZIP/descripteur sont vérifiés sans simulation. Le rapport natif est
+`control/function-code-hash-proof.json` ; ses temporaires et canaux courts sont
+suivis sous control, puis retirés. Les 24/14 groupes Docker de l’adaptateur et
+sept de publication authentifiée sont conservés avec leurs 222 sources figées.
+Le replay nommé des sept groupes a sa propre époque, produit/images identiques.
+[Preuve](../docs/evidence/function-code-hash-dev-2026-11-09.json) : 52 groupes retenus,
+deux essais arrêtés distincts, dix-neuf conteneurs runtime et 37 clients nommés
+absents, douze
+fonctions supprimées et volumes purgés ; 33 archives de code restent conservées
+et vérifiées. Les prérequis de build/contexte ne sont pas ajoutés au total.
+Cette preuve de composant ne qualifie pas les futurs appels publics par hash.

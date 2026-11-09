@@ -68,8 +68,12 @@ correspond à ses 15 chapitres et 46 paragraphes. Les autres extensions restent
 Le [versionnement par hash](docs/FUNCTION_VERSIONS.md), suivi dans SLS-074,
 complète l’historique et le rollback existants : déduplication des uploads
 identiques, invocation d’un hash précis, archivage de version et publication
-pour un pilote sans déplacer la cible par défaut. Cette extension est spécifiée
-et reste à implémenter.
+pour un pilote sans déplacer la cible par défaut. Son [calcul canonique](docs/FUNCTION_CODE_HASH.md)
+est implémenté et qualifié : sept groupes ciblés, 45 de régression et neuf
+invocations Docker. Les sept groupes sont rejoués après nommage des clients ;
+les 45 régressions restent dans leur époque distincte, sur les mêmes sources
+produit et images. Déduplication, promotion séparée et appels par hash restent
+à implémenter ; l’API en service conserve son comportement actuel.
 
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.

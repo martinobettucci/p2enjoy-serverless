@@ -402,3 +402,19 @@ uniques / 489 groupes et six prérequis, avec 447 groupes conservés aux clients
 inchangés puis 42 réexécutés. Les deux époques de sources sont distinctes et
 les images produit/CLI restent identiques. Les 98 captures, le manuel 15/46,
 les 91 fonctions suivies purgées et les ressources libérées sont recoupés.
+
+
+## Identité canonique du code — composant SLS-074
+
+`function_code_hash.py` constitue la bibliothèque commune d’identité du paquet.
+Sa CLI opérateur utilise l’extracteur borné, puis l’inventaire vérifié et le
+descripteur handler/runtime/architecture/image/événements. Le format v1 et la
+normalisation sont dans [FUNCTION_CODE_HASH](FUNCTION_CODE_HASH.md). Le packager
+conserve maintenant le mode exécutable, sans prétendre connaître hors connexion
+l’image du serveur. Aucun schéma ou API de version ne change dans cette étape.
+L’image serverless-code-hash ne sert aucun port, utilise les deux env_file de
+cellule et un contexte limité à deux sources. Le contexte de l’adaptateur est
+limité à onze feuilles. La preuve réelle réunit sept groupes du composant et
+45 de régression, neuf appels Docker et 222 sources ; le contrôle reste le même.
+Les étapes de registre, déduplication, promotion explicite, sélection/pools et
+console restent définies dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md).

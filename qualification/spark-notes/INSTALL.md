@@ -309,3 +309,20 @@ parents supprimés, mode 0640 et source/configurations/services inchangés.
 Preuve : docs/evidence/invocation-source-ui-dev-2026-11-09.json.
 Aucune variable/secret, route/DNS ou build ajouté. Autres fautes/six domaines
 restent ouverts. Notes proposées individuellement sans adoption annoncée.
+
+
+## Identité canonique du paquet — composant qualifié
+
+Bibliothèque function_code_hash.py et CLI Docker d’extraction : sept groupes
+ciblés, 45 de régression et neuf invocations réelles sur 222 sources. Contextes
+de build limités et prouvés, deux essais arrêtés conservés séparément. Dix-neuf
+conteneurs runtime, 37 clients nommés et leurs canaux sont absents. Douze fonctions supprimées
+et volumes purgés ; 33 archives de code conservées vérifiées.
+Preuve : docs/evidence/function-code-hash-dev-2026-11-09.json.
+Aucune variable/secret ou route/DNS ajouté. Services et configuration officiels
+inchangés ; seules les images calcul/packaging sont reconstruites. L’API garde
+son comportement actuel ; déduplication/promotion/appels par hash restent en cours.
+Notes proposées individuellement, sans adoption revendiquée.
+
+Sept groupes rejoués après nommage explicite ; 45 conservés aux clients inchangés,
+deux époques de 222 sources et mêmes sources produit/images.

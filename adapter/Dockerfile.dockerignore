@@ -1,13 +1,22 @@
 # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#outil-et-manifeste
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_CODE_HASH.md#construction-isolée
 *
 !adapter/
-!adapter/*.py
+adapter/**
+!adapter/__init__.py
+!adapter/__main__.py
+!adapter/archive.py
+!adapter/deploy.py
+!adapter/manifest.py
 !adapter/requirements.txt
 !e2e/
+e2e/**
 !e2e/adapter.py
 !e2e/adapter-deploy-public.py
 !qualification/
+qualification/**
 !qualification/package.json
 !qualification/serverless.platform.yml
 !qualification/src/
-!qualification/src/**
+qualification/src/**
+!qualification/src/handlers.cjs

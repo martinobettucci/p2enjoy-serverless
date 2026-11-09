@@ -91,3 +91,17 @@ avec les deux images Docker reconstruites en série et figées avant/après chaq
 campagne. Les cinq modules CLI embarqués correspondent aux sources. Cette
 réussite ne qualifie pas les pages supplémentaires ; les pertes de lecture
 sont établies séparément par le complément de transport.
+
+
+## Inventaire exécutable et identité canonique
+
+L’inventaire de chaque fichier empaqueté contient aussi `mode`, normalisé à
+`0o444` ou `0o555`, en accord avec le vrai ZIP et l’extracteur serveur. Le
+[calcul canonique](../docs/FUNCTION_CODE_HASH.md) est qualifié séparément avec
+le vrai runtime : sept groupes ciblés et 45 de régression, dont les sept
+publications authentifiées et les deux campagnes CLI Docker. Le packager hors
+connexion ne connaît pas l’image immuable du serveur et n’annonce pas encore
+un tag complet. La commande deploy garde sa publication actuelle ; le parcours
+code seul/promotion explicite sera raccordé dans les étapes suivantes de SLS-074.
+Le filtre Docker autorise les onze seuls fichiers nécessaires aux deux stages,
+prouvés par COPY du contexte complet sans ouvrir les sauvegardes privées.

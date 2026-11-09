@@ -1,0 +1,84 @@
+{
+  "completed": true,
+  "target": "infra-serverless DEV",
+  "scope": "Twelve exact documentation files only; no deletion, code, services, configuration, routes or DNS.",
+  "backup_directory": "/srv/p2enjoy-serverless/.document-backup-code-hash-e17bfc3daf9c40ce85b62715b1380bf5",
+  "files": {
+    "CHANGELOG.md": {
+      "before_sha256": "593afa5db224541f6991957d49d6106bd67b0a50f90954c17dfa779913864916",
+      "after_sha256": "44cd9d59a4fd0820937d764af8027fbed1a6acc4be11d6111d08176f10096903",
+      "prior_bytes_preserved": true
+    },
+    "README.md": {
+      "before_sha256": "8272597aa42af4f32ca012759ae9d823aba6714222e3a709dd3628fe10add57c",
+      "after_sha256": "5bec80638548310e224231a97d1372b0282ec72d90202423ff850b9c36303e47",
+      "prior_bytes_preserved": true
+    },
+    "adapter/README.md": {
+      "before_sha256": "36000e4ea15342889f9db019ab58c1b9354097ddd326707af06ac4f809396f05",
+      "after_sha256": "4b4d1e7669bb7ec993c314fc84a531bf0a73efd3e6f2e6bfcfbb943926a3026c",
+      "prior_bytes_preserved": true
+    },
+    "control/README.md": {
+      "before_sha256": "0daf1b289d6f7b433c8af5df69e8347620c140bf0ea346e99152375fada45545",
+      "after_sha256": "519b046c2724062137256b963b58f604e44aed7b791c99ff0b4343179cba28df",
+      "prior_bytes_preserved": true
+    },
+    "docs/BACKLOG.md": {
+      "before_sha256": "900b000462e33478d510c938a927bedf9d091b05193cb93de94070b1d2226d95",
+      "after_sha256": "0d0f4b2fa8f7c8b793bd7496ee79c4c34db251c13a97bbc870c8cccc2bc1d44e",
+      "prior_bytes_preserved": true
+    },
+    "docs/DAT.md": {
+      "before_sha256": "eb0b675fa8a438c149a052fa42b920db8f2e81f29381f0e86d9b306993d55a51",
+      "after_sha256": "c4d36b57713e2e50aae233a30a4c9d012ea76c30034cd15d25a4fd108526b391",
+      "prior_bytes_preserved": true
+    },
+    "docs/FUNCTION_CODE_HASH.md": {
+      "before_sha256": "e2eaffcd9c436bbd27726102b9723410bf51ff60c76e64047184384f21269442",
+      "after_sha256": "66206dbc7c0cb64fdf2ee2a7c90f3926f53d9ae06b37a342f89d2e592ee40204",
+      "prior_bytes_preserved": true
+    },
+    "docs/FUNCTION_VERSIONS.md": {
+      "before_sha256": "deaaa75ae9e848535a2a7c17da90e47776f1a3c577b95ecea1a9963d4514e7ad",
+      "after_sha256": "a28cce6b6ffadf807ab957dbaaa584f3757dddd67339cdc155d2ad56beaae6f5",
+      "prior_bytes_preserved": true
+    },
+    "docs/JOURNAL.md": {
+      "before_sha256": "d6725a35a40e79bc7530e6e405b8ad48379f657f98726b73d0a746c740cf3dcb",
+      "after_sha256": "97fa514d8904b97f01fc06df42a4bce4e85c3999632feb93a5a5fe159af2a8b2",
+      "prior_bytes_preserved": true
+    },
+    "docs/PLATFORM_DEV.md": {
+      "before_sha256": "6e165ed9ecdb12e260b8a50bd0bbd862fd2a6bbe9b41bc6a4abc2844251da4fd",
+      "after_sha256": "ec666a2c27348afe5020272ed31b7a1e47f102649a500109f8c7d6a4bbe44552",
+      "prior_bytes_preserved": true
+    },
+    "docs/evidence/function-code-hash-dev-2026-11-09.json": {
+      "before_sha256": null,
+      "after_sha256": "b73bc3bd99e7c1ba1dda3656ecc7ad6e2f8c3303790fcb28a38bd5e6a04e7863",
+      "prior_bytes_preserved": false
+    },
+    "e2e/README.md": {
+      "before_sha256": "b1bada844af245ded6d26a16a959763d40a0d13fa7b37854bf511b0f6104925e",
+      "after_sha256": "ce4dfd058e14300750b784f6b15dfe1405edff81b0f9b06c3999b2e6e3e6c63a",
+      "prior_bytes_preserved": true
+    }
+  },
+  "source_delivery": {
+    "source_files": 222,
+    "local_remote_equal": true,
+    "documents_verified": 12,
+    "image": "sha256:7b52f630b7f071a9fc7659298039b7bfcfe3579ed6fb962ebf0a63db8259f490",
+    "adapter_images": {
+      "p2enjoy-adapter:dev": "sha256:13cc9b52821fce8e35deb6d62de9252dec6c6fe813c2004c1f4a5fe1828a0c63",
+      "p2enjoy-adapter-e2e:dev": "sha256:97948e0b4de1aac35d4920a7905098a5266e5df55df0fe8196ceace197db6068"
+    },
+    "qualified_groups": 52,
+    "source_epochs": 2,
+    "only_post_execution_indexed_deltas": [
+      "docs/FUNCTION_CODE_HASH.md",
+      "docs/FUNCTION_VERSIONS.md"
+    ]
+  }
+}

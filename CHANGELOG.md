@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Identité canonique des paquets : bibliothèque commune et CLI d’extraction
+  Docker qualifiées par sept groupes ciblés et 45 de régression, sur 222 sources.
+  Inventaire du packager enrichi du mode exécutable ; neuf invocations réelles.
+  Contextes de build bornés aux fichiers requis ; deux essais arrêtés conservés
+  séparément. Le versionnement public complet SLS-074 reste en cours.
+
 - Refus de lecture dans la console : trois groupes navigateur passent sur
   212 sources, depuis création/publication UI jusqu’au vrai source_forbidden,
   retrait des anciennes adresses/copies/succès, restauration et invocation

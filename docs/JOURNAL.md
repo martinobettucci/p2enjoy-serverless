@@ -3733,3 +3733,32 @@ La revue visuelle personnelle inspecte les cinq fichiers exacts et leurs copies
 avec SHA/mtimes concordants, sans défaut bloquant. Le refus tient dans le vrai
 viewport mobile ; les vues restaurées et l’initiale desktop sont pleine page.
 Aucun contour de focus visible : ne pas confondre avec l’assertion DOM passée.
+
+
+## 2026-11-09 — Calcul canonique qualifié
+
+Le replay vert passe sept groupes et neuf invocations sur 222 sources/images
+figées ; le packager et l’extracteur calculent le même tag. Les propriétés de
+recompression/renommage, modifications et refus sont exercées réellement. Le
+second arrêt était un ZipInfo source modifié avant lecture ; le client lit puis
+copie ses métadonnées avant recompression. Les deux essais restent distincts,
+sans compter leur groupe partiel dans les sept retenus. Les 24/14 groupes CLI
+Docker puis les sept publications authentifiées passent : total 52.
+La collecte readonly recoupe dix conteneurs absents (neuf du replay et un
+antérieur), canaux/dossiers retirés, douze fonctions supprimées avec volumes
+purgés et 33 archives de code conservées. Les cinq modules des deux images CLI
+correspondent aux sources ; services/routes/configurations restent identiques.
+Le collecteur attendait un stdout vide/No such object pour inspect ; la lecture
+native montre []/No such container. Son assertion est corrigée sur ce format,
+sans relancer les campagnes. Le composant est qualifié ; SLS-074 reste en cours
+pour registre/déduplication, promotion, sélection/pools et console/manuel.
+
+
+Le nommage explicite des clients Docker est corrigé avant commit du code. Les
+sept groupes sont rejoués avec 37 clients serverless-code-packager/identity,
+proches de leur rôle ; les 45 régressions aux clients inchangés restent conservées.
+Deux époques de 222 sources diffèrent par le seul client ciblé et deux statuts
+Markdown, mêmes sources produit et images. Le checkpoint vert antérieur n’est
+pas ajouté au total. La collecte recoupe dix-neuf conteneurs runtime (neuf
+nouveaux, neuf intermédiaires, un partiel), les 37 clients nommés et leurs
+canaux absents ; douze fonctions/volumes et 33 archives gardent leur état vérifié.
