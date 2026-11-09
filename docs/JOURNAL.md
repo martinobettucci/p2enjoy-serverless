@@ -3555,3 +3555,18 @@ dans un fichier privé 0600 hors Git, suivant le mécanisme de reprise déjà ut
 par le banc ; ne jamais y mettre le fournisseur ou les identifiants. Cela rend
 possible la fermeture ultérieure de la seule session créée, après perte du
 contexte navigateur. Le rapport reste incomplet tant qu’elle n’est pas confirmée.
+
+## 2026-11-09 — Premier essai alias arrêté après connexion réelle
+
+Le groupe de redirections anonymes passe. Le desktop entre par l’alias,
+effectue le vrai SSO et affiche le catalogue connecté ; deux JPEG sont produits.
+La vérification de déconnexion s’arrête avec Error, sans message ni stack
+enregistrés. La phase précise n’est pas capturée dans cette première version.
+Le nettoyage indique session fermée ; la lecture native confirme l’absence de
+son digest et du flow propre, avec contrôle, routes et fichiers officiels inchangés.
+L’essai et ses deux sources exactes sont archivés, sans succès reconstitué.
+
+Décision de diagnostic avant correction : conserver seulement une phase nommée
+et une classe prédéfinie d’erreur navigateur, afin d’identifier la mesure qui
+échoue sans journaliser les messages contenant potentiellement les identifiants.
+Le prochain essai reste une campagne réelle, sans substitution de réponse.

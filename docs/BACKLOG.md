@@ -530,6 +530,9 @@ La prochaine preuve suit [l’entrée publique de l’alias](INVOCATION_URLS.md#
 redirections HTTPS et absence de cookie sur l’alias, puis véritables connexions
 et déconnexions UI desktop/mobile depuis son accueil. Trois groupes et six
 captures prévus, sans changement de routes ; ce résultat reste à éprouver.
+Le premier essai atteint la console après SSO puis s’arrête à la vérification
+de déconnexion desktop ; sa session et son flow sont recoupés fermés. Conserver
+l’essai incomplet et préciser le diagnostic sans exposer les messages de saisie.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,

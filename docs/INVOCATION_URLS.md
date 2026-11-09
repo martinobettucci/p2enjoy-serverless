@@ -691,3 +691,11 @@ Si un parcours s’arrête après connexion, fermer sa seule session par l’API
 avec son cookie/CSRF en mémoire avant de fermer son contexte ; ne toucher à
 aucune session antérieure. Ne créer aucune fonction ni donnée métier.
 Le résultat de ce complément et ses six captures ne sont pas encore acquis.
+
+Le premier essai passe les redirections anonymes et atteint la console après
+SSO, puis s’arrête dans la vérification de déconnexion desktop. Il reste
+incomplet, avec seulement la classe d’erreur conservée pour protéger les saisies.
+Sa seule session est fermée et son flow absent, recoupés nativement ; aucun
+changement de route. Le diagnostic suivant conserve des phases nommées et des
+classes d’erreur prédéfinies, jamais les messages ou stacks Playwright. Ne
+déduire aucune réussite de déconnexion UI de ce premier groupe arrêté.
