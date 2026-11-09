@@ -5154,3 +5154,14 @@ succeeded. La collecte native distinguera absence de réservation, état durable
 et succès sans réponse après déconnexion admise. La revue a corrigé le compte
 sept en ajoutant l'appel A pendant piloteB et demandé de relever aussi les
 en-têtes du vrai HTTP/2 ; aucun résultat E2E encore acquis pour cette tranche.
+
+### Première collecte invocation/stockage : en-têtes absents sur vrai502 du proxy
+
+Les deux clients ont terminé15+31groupes et leurs18purges, mais la collecte
+finale s'arrête sur l'exigence d'un UUID pour tout transport. Le rapport conserve
+107réponses, dont un POST502 sans UUID/hash ; le SIGKILL réel du contrôle a coupé
+cette connexion et le proxy répond lui-même. Ce n'est pas une ligne d'invocation
+à fabriquer ni une absence à ignorer. Avant correction du collecteur : préciser
+le contrat d'une identité locale de connexion, liée au témoin natif running et
+au même appel interrupted, avec statuts transport/durable distincts. Conserver
+l'essai arrêté et ses purges séparément puis rejouer la chaîne maintenue complète.

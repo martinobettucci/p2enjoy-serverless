@@ -81,6 +81,13 @@ des handlers réussis : seul l'état durable et handler_started font autorité.
 L'appel client abandonné après admission peut terminer succeeded sans réponse
 reçue ; son UUID observé running puis succeeded est conservé séparément.
 
+Une réponse502 du proxy pendant le SIGKILL peut aussi ne porter aucun UUID
+d'invocation ni hash. Le client doit relier sa propre connexion, par identifiant
+local, au témoin natif du handler running au moment de la coupure, puis au même
+appel devenu interrupted. Conserver séparément statut transport et statut durable.
+Une règle générale acceptant toute réponse502 sans identifiant est interdite.
+La perte de réponse n'est jamais comptée comme succès handler.
+
 Dix-huit fonctions attendues dans deux namespaces sont purgées entièrement par
 les API :2 stockage et16 invocation. Recouper agent, volumes, code, registre,
 baux, instances, réseaux et canaux. Préserver les5 982 artefacts antérieurs,
