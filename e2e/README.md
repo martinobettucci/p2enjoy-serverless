@@ -1,5 +1,20 @@
 # Qualification de la plateforme
 
+## Pause et reprise d’une requête réelle
+
+`node e2e/invocation-request-pause.mjs` publie sa fixture originale dans le SPARK
+DEV, puis retient le vrai GET HTTPS du catalogue après réception sur 18090.
+Deux groupes passent : libération explicite et SIGKILL du traceur avec reprise
+confirmée par son programme indépendant. La même requête termine à 200, avec
+deux domaines ; sa fin n’est pas datée par rapport au SIGCONT de la garde.
+Le helper `invocation-request-pause.py` ne remplace aucune réponse et conserve
+le contrôle et son démarrage. SSH root et session SSO réelle sont requis.
+Le collecteur recoupe deux fonctions purgées dans deux namespaces et quatre
+gardes finies, en incluant séparément le premier essai interrompu et son
+diagnostic. [Preuve](../docs/evidence/invocation-request-pause-dev-2026-11-09.json).
+Les fautes propres du pilote et la survie du parcours UI pendant réapplication
+de routes restent à éprouver ; aucun changement de routes dans ces deux groupes.
+
 ## Catalogue global SLS-067 qualifié
 
 `node e2e/function-catalogue-api.mjs` passe huit groupes avec 32 fonctions,

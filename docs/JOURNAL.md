@@ -3476,3 +3476,26 @@ correction : reconnaître un timer déchargé uniquement par LoadState=not-found
 et ActiveState=inactive, sans accepter d’autre erreur. Confirmer ensuite la fin
 du service indépendant avant tout nettoyage. La preuve initiale reste incomplète ;
 le diagnostic et le futur replay ne seront pas ajoutés à ses groupes réussis.
+
+
+## 2026-11-09 — Deux reprises réelles passées après correction du timer
+
+Le replay termine à zéro : GET retenu puis libéré, et SIGKILL du traceur retenu
+puis reprise indépendante de la même requête. Chaque réponse réelle porte 200,
+la révision attendue et les deux domaines. Les 205 sources et images restent
+identiques avant/après ; aucun changement de route ou configuration.
+Le collecteur recoupe deux fonctions purgées dans deux namespaces, quatre helpers
+absents et quatre paires timer/service inactives ; contrôle non tracé, PID,
+naissance, cgroup, conteneur et démarrage inchangés. Les originaux des programmes
+et reçus sont conservés. L’essai initial reste échoué ; le diagnostic reproduit
+HTTP 200 puis stop.timer code 5 et n’est pas un groupe de replay. Les états natifs
+not-found/inactive confirment sa cause. La récupération et son purge sont
+recoupées séparément ; aucun succès ancien n’est reconstitué.
+Le parcours UI public vide, ses connexions Caddy et les autres fautes du pilote
+restent à éprouver. Aucun rendu UI n’a changé dans ce complément.
+
+Précision de portée relue : le GET survit au SIGKILL du traceur et le programme
+indépendant confirme réellement l’identité, la santé et l’absence de traceur.
+Le client ne date pas la réponse par rapport au SIGCONT de la garde ; la preuve
+n’attribue donc pas au timer la cause exclusive de la libération. Ce bornage
+documentaire ne requalifie aucun événement non mesuré.

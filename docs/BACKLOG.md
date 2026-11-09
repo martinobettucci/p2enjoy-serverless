@@ -512,10 +512,13 @@ NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,
 six fonctions purgées dans deux namespaces et six gardes terminées.
 [Preuve du module commun](evidence/invocation-native-observer-dev-2026-11-08.json).
 La pause/libération puis le SIGKILL du traceur et la reprise indépendante de
-la vraie requête sont implémentés et restent à qualifier. Le premier essai
-s’arrête au désarmement d’un timer déjà collecté ; le diagnostic réel distinct
-reproduit HTTP 200 puis le refus du second arrêt. Corriger la reconnaissance
-native d’une unité absente, conserver cet échec et rejouer les deux scénarios.
+la vraie requête passent maintenant leurs deux groupes réels, sur 205 sources.
+La [preuve](evidence/invocation-request-pause-dev-2026-11-09.json) conserve le
+premier essai arrêté au désarmement et son diagnostic séparé ; le replay corrige
+la reconnaissance native du timer absent. Deux fonctions sont purgées dans deux
+namespaces et les quatre gardes sont terminées, contrôle inchangé et non tracé.
+La survie de la connexion UI pendant réapplication Caddy et les erreurs propres
+du pilote restent à qualifier.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,

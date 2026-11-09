@@ -98,7 +98,10 @@ la restauration indépendante après SIGKILL du pilote et le catalogue API local
 vide. Sept appels exécutent Docker depuis les URL émises ; les deux routes sont
 rétablies à 18090 TLS et la fonction de campagne est purgée. La source perturbée,
 le vide dans le parcours UI public et la pagination UI/CLI sur six domaines
-restent à éprouver. La
+restent à éprouver. La [barrière native](docs/evidence/invocation-request-pause-dev-2026-11-09.json)
+passe deux groupes supplémentaires : libération du vrai GET HTTPS et reprise
+après SIGKILL du traceur, sans redémarrage du contrôle. Le parcours UI pendant
+changement des routes reste distinct. La
 [régression complète](docs/evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes en série et 467 groupes, sans échec ni test ignoré :
 186 sources recoupées avant/après chaque phase, 79 captures fraîches recoupées

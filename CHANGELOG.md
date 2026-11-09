@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Pause/reprise native d’un vrai GET HTTPS : deux groupes E2E passent sur
+  205 sources, dont SIGKILL du traceur et reprise indépendante. Le contrôle
+  conserve son démarrage ; deux fonctions sont purgées et quatre gardes finies.
+  Le premier essai arrêté sur un timer déjà collecté et son diagnostic restent
+  distincts du replay. Le parcours UI vide public reste à qualifier.
+
 - Cinq cycles réels des deux routes qualifiés : pagination API, alias vers
   18091 avec reprise explicite puis perte du pilote, retrait/rétablissement
   et deux ports vers 18091 avec catalogue vide local réel. Sept invocations

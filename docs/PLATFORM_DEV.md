@@ -670,9 +670,9 @@ Les pannes exercent des redémarrages du contrôle ; la référence conserve son
 identité, son image et son démarrage. Les deux routes et les fichiers officiels
 restent inchangés. Les trois notes restent justes, avec leurs empreintes actives
 et proposées inchangées. [Preuve](evidence/invocation-native-observer-dev-2026-11-08.json).
-Le nouveau protocole pause/libération reste à implémenter et l’échéance de
-garde est désormais vérifiée sur la résolution native rétablie, selon le
-complément ci-dessous.
+L’extraction seule ne qualifie pas la pause/libération : ses deux preuves
+ultérieures sont décrites plus bas. L’échéance de garde est également vérifiée
+sur la résolution native rétablie dans le complément ci-dessous.
 
 ## Trois déclencheurs de garde vérifiés sans perturbation
 
@@ -699,3 +699,17 @@ conserve les données natives exactes, ainsi que le premier arrêt de collecte
 sur les seuls horodatages arrondis pendant le passage JSON JavaScript.
 Les trois notes sont reproposées. Le vide UI public, les sources perturbées
 et les pages suivantes UI/CLI restent ouverts dans SLS-066.
+
+
+## Pause/reprise native du 9 novembre
+
+Deux groupes réels qualifient libération du GET HTTPS retenu et SIGKILL du
+traceur avec reprise indépendante, sur 205 sources et les mêmes images.
+La [preuve](evidence/invocation-request-pause-dev-2026-11-09.json) distingue
+l’essai initial arrêté sur le timer déjà collecté, sa récupération et le
+diagnostic du replay positif. Deux fonctions sont purgées dans deux namespaces,
+quatre gardes finies ; contrôle non tracé et sans redémarrage, référence inchangée.
+Variables : aucun ajout. Secrets : aucun ajout. Routes : aucun changement,
+les deux domaines à 18090 TLS. Notes : README, CONTRIBUTORS et INSTALL actualisées
+comme propositions. Configuration : seuls les deux fichiers officiels existants,
+aucun nouvel env/ARG ni build. Le vide du parcours UI public reste à qualifier.

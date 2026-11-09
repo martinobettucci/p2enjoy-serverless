@@ -378,10 +378,37 @@ Les 27 fichiers embarqués correspondent toujours au contrôle. Leurs pannes
 recréent de vrais arrêts/reprises du contrôle, avec référence inchangée.
 
 Cette extraction et ses neuf régressions sont vérifiées ; le nouveau protocole
-de pause/libération et ses scénarios ne sont pas encore implémentés. Le premier
+de pause/libération est désormais implémenté et ses deux premiers scénarios
+sont qualifiés dans le complément ci-dessous. Le premier
 essai d’échéance reste conservé incomplet. L’invalidation locale n’avait pas
 rétabli le DNS ; après expiration du cache en amont, la reprise positive des
 trois déclencheurs est qualifiée ci-dessus. Aucun domaine ni réponse n’est forcé.
+
+## Pause et reprise natives qualifiées
+
+Le [replay du 9 novembre](evidence/invocation-request-pause-dev-2026-11-09.json)
+passe deux groupes réels sur 205 sources inchangées : GET HTTPS canonique retenu
+après recvfrom puis libéré, et SIGKILL du traceur au même point suivi de la reprise
+avec confirmation de reprise par son programme indépendant. Dans les deux cas,
+la même requête admise termine
+à 200 avec la révision attendue et les deux domaines du registre réel.
+Le scénario de perte confirme la survie du GET et l’exécution indépendante ;
+il ne date pas la réponse par rapport au SIGCONT et ne prouve pas que le timer
+soit la cause exclusive de sa libération.
+Le correctif reconnaît le timer collecté par son état natif explicite ; les reçus
+conservent ses codes d’arrêt, et le service indépendant est fini avant nettoyage.
+
+Le premier essai échoué et le diagnostic HTTP 200 suivi du refus de désarmement
+restent distincts et ne sont pas comptés dans ces deux succès. Les deux fonctions
+des deux namespaces sont purgées ; les quatre helpers et quatre paires timer/service
+sont absents ou inactifs. Le contrôle conserve PID, naissance, conteneur, image,
+démarrage et cgroup, sans traceur ; référence et configuration officielle inchangées.
+Aucun changement de route, DNS, variable, secret ou build dans ce complément.
+
+Ce résultat fournit la barrière préalable au parcours UI vide public ; il ne
+prouve pas encore la survie de sa connexion pendant réapplication Caddy.
+Échéance sans commande, EOF, commande partielle/trop longue, conflits/refus et
+autres erreurs propres du pilote restent à éprouver. SLS-066 demeure ouverte.
 
 ## Suite complète de preuve
 

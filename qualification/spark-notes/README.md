@@ -185,8 +185,7 @@ La première échéance échouée et son diagnostic DNS restent conservés sépa
 Après expiration du cache négatif en amont, les deux domaines résolvent
 nativement vers l’adresse attendue ; aucune adresse ni aucun résolveur n’est
 forcé dans les tests. Preuve : docs/evidence/invocation-route-guard-dev-2026-11-08.json.
-Les perturbations réelles passent les cinq cycles ci-dessous ; la pause native
-et le parcours UI public vide restent à éprouver dans SLS-066.
+Les perturbations réelles passent les cinq cycles ci-dessous ; le parcours UI public vide et les fautes de source restent à éprouver dans SLS-066.
 Aucune nouvelle variable, secret, route ou image applicative dans cette étape.
 Ces trois notes restent proposées, sans adoption revendiquée.
 
@@ -207,3 +206,19 @@ services sont inchangés. Le vide UI public, les fautes de source et la seconde
 page UI/CLI restent ouverts. Les quatre alias temporaires de pagination sont
 une proposition locale en attente d’autorisation, sans création DNS ni route.
 Ces trois notes sont proposées individuellement, sans adoption revendiquée.
+
+
+## Pause et reprise natives — deux groupes qualifiés
+
+Le vrai GET HTTPS est retenu après recvfrom puis libéré. Il survit aussi au
+SIGKILL du traceur, avec confirmation de reprise par le programme indépendant. Les deux groupes passent sur 205 sources ;
+la même requête termine à 200 avec deux domaines, sans mesure de sa fin par
+rapport au SIGCONT de garde. Le timer déjà collecté est
+reconnu uniquement par son absence/inactivité natives. L’essai initial arrêté
+et le diagnostic restent distincts du replay. Deux fonctions sont purgées dans
+deux namespaces ; quatre helpers et quatre paires timer/service sont terminés.
+Contrôle non tracé, PID/démarrage/images et configuration officielle inchangés.
+Preuve : docs/evidence/invocation-request-pause-dev-2026-11-09.json.
+Aucune route, DNS, variable, secret ni build nouveau. Le parcours UI public vide,
+les fautes propres du pilote, la source et la pagination UI/CLI restent ouverts.
+Ces notes sont proposées, sans adoption revendiquée.
