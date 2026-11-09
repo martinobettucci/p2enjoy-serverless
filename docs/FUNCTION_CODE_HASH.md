@@ -54,3 +54,16 @@ descripteur. Invoquer le code extrait et observer ses résultats ; comparer les
 hashs du packager et de l’extracteur par le même algorithme. Vérifier absence de
 ressources après nettoyage et l’image de contrôle inchangée. Ce checkpoint seul
 ne qualifie pas déduplication, promotion, migration ou invocation publique épinglée.
+
+## Construction isolée
+
+Le calculateur n’admet dans son contexte que function_code_hash.py et
+control/app/artifacts.py, vérifiés par un vrai COPY complet du contexte.
+Le build de l’adaptateur est également borné aux cinq modules Python, requirements,
+deux clients E2E et trois fichiers de qualification explicitement nécessaires.
+Les ancêtres réinclus sont réexclus avant leurs feuilles ; aucune réinclusion
+récursive ou dossier de sauvegarde privé n’appartient au contexte. Ce resserrement
+répond au build réellement refusé sur une sauvegarde root privée, qui reste intacte.
+Les preuves de contexte/build sont des prérequis, distincts des groupes fonctionnels.
+Le rapport natif et ses fichiers temporaires vivent sous control, répertoire
+de travail du compte opérateur ; ne pas supposer la racine du dépôt inscriptible.

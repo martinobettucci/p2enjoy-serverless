@@ -14,6 +14,14 @@ Aucun hash complet hors connexion sans image serveur connue ; aucune fusion
 des références historiques ni hash inventé pour les tombstones purgés.
 Le périmètre complet et la promotion explicite demandée sont conservés.
 
+La première construction de l’adaptateur échoue avant image sur une sauvegarde
+root privée dans le contexte. Ne pas en changer les droits ni la supprimer.
+Décision : autoriser explicitement les onze seuls fichiers requis, avec preuve
+COPY complète. Le calculateur a déjà passé sa preuve de contexte à deux sources ;
+ses précontrôles de script arrêtés restent distincts. Le dépôt distant appartient
+à root et n’est pas inscriptible par l’opérateur : rapport et temporaires du
+client natif sont placés dans control avant son premier essai fonctionnel.
+
 ## 2026-11-08 — Qualification transversale du stockage public
 
 Le replay sur les sources fonctionnelles ae03204 termine à zéro : 29 campagnes,
