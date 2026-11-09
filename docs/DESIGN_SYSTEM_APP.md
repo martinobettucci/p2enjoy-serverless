@@ -320,3 +320,6 @@ Le catalogue est lu après le candidat suivi et avant la confirmation finale de
 la fonction. Une publication de code seul n’ayant pas d’effet sur l’ETag parent,
 cet ordre empêche l’arrêt du polling sur une liste antérieure au candidat publié.
 Le hash demandé d’une réimportation reste lisible dans son suivi, même en échec.
+Après refus, la commande de correction reçoit le focus une fois redevenue
+disponible. Une désactivation temporaire ne laisse pas le clavier sur le body ;
+la confirmation dans le flux attend aussi la levée du fieldset désactivé.

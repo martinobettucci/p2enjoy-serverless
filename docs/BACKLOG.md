@@ -748,6 +748,11 @@ non vides passe5 groupes. La revue confirme un autre défaut de lecture UI :
 catalogue lu avant candidat puis ETag inchangé peut arrêter trop tôt le polling
 d’une publication externe. L’ordre candidat→catalogue→fonction confirmée est
 retenu avant correction et doit être éprouvé dans le vrai parcours navigateur.
+Le premier replay UI passe4 groupes puis établit une perte de focus après un
+vrai404, malgré saisie/confirmation conservées. Le retour de focus après
+réactivation est corrigé pour dialog et confirmation intégrée ; les scénarios
+404 et409 concurrent doivent passer avant qualification. Le rapport partiel et
+son nettoyage restent distincts ; aucun groupe UI final n’est encore revendiqué.
 La revue statique du pipeline a révélé le passage possible d’un validateur
 déjà en attente après un nettoyage incomplet ; le verrou est corrigé, et la
 preuve réelle de ce refus rejoint les critères de FUNCTION_VERSION_EXECUTION.

@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 2026-11-09 — Refus UI réel : focus perdu après réactivation
+
+Le replay avec corps durable passe quatre groupes puis échoue sur le retrait
+avec remplacement inconnu : le vrai DELETE404 conserve valeurs et confirmation,
+mais le bouton désactivé pendant l’envoi laisse le focus hors du dialog.
+La fonction est purgée et le rapport partiel reste distinct. Correction retenue
+avant code : restaurer une seule fois le focus sur la commande de correction
+après réactivation, sans déplacer un succès ni un utilisateur déjà en saisie.
+Le même mécanisme est appliqué aux confirmations dans le flux, en attendant que
+leur contrôle soit réellement disponible. Le parcours ajoute un vrai409 de
+promotion après modification concurrente du CPU pour éprouver ce second cas.
+Le client échoue aussi explicitement si son collecteur contient un pageerror.
+
 ## 2026-11-09 — Premier parcours008 UI interrompu : corps observé trop tard
 
 Le premier groupe s’arrête après un vrai PUT200 : response.json demande un corps
