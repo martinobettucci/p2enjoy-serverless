@@ -84,6 +84,21 @@ refus d’accès et bornes. Un redémarrage réel confirme la persistance sans r
 des identités déjà migrées. Les hash attendus viennent des vrais paquets extraits,
 pas d’un inventaire envoyé par le client à l’API.
 
+`function-version-migration-faults.py` démarre aussi la vraie application dans
+des conteneurs sans réseau sur des copies privées du backup 006 : inventaire
+absent/invalide et descripteur invalide. Chaque refus doit précéder l’ouverture
+HTTP et annuler entièrement 007. Une copie migrée par la vraie bibliothèque
+éprouve les contraintes SQLite (hash requis, format et immutabilité, y compris
+NULL), avec insertion valide témoin et rollback des seules écritures de sonde.
+Le backup d’origine et la base partagée ne sont jamais modifiés par ce client.
+
+Avant la régression commune, les clients HTTP de preuve de démarrage, le
+concurrent de verrou et les conteneurs sources des fixtures runtime reçoivent
+un nom de responsabilité explicite avec suffixe d’unicité. La règle locale
+de nommage s’applique aussi à ces anciens clients. Les vues desktop/mobile
+du chapitre Gérer les révisions ciblent directement le nouveau paragraphe,
+en complément de la comparaison de contenu du manuel entier.
+
 La qualification UI part de l’accueil et des formulaires, publie réellement,
 copie le hash au clavier, constate le refus natif du presse-papiers et inspecte
 desktop/mobile. Le manuel compilé est recoupé. Les campagnes de publication et

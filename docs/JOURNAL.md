@@ -1,5 +1,28 @@
 # Journal de cadrage
 
+## 2026-11-09 — Registre migré et préparation de la régression
+
+007 est appliquée sur DEV après sauvegarde native : quinze tables antérieures
+conservées, fichiers de fixture et configuration agent identiques. Sept groupes
+de refus/contraintes, quatre API, un après redémarrage et trois UI passent.
+Le manuel compilé concorde avec sa source (47 paragraphes). La revue visuelle
+des six vues du registre et quatorze du guide est favorable ; elle demande une
+vue directe du nouveau paragraphe, ajoutée avant le replay commun. Le contrôle
+reste sur la même image pendant ces corrections de clients.
+
+Les essais arrêtés restent distincts : compilation JSX, premier démarrage de
+faute sans diagnostic attendu, puis trois démarrages de parcours UI incomplets.
+Deux créations de parents ont nécessité une reprise publique explicite, reçus
+conservés ; le nettoyage de leurs seules ressources est confirmé. Le client UI
+enregistre maintenant ses créations et ne déclare plus une fin complète sans
+UUID. Les trois fonctions du registre sont supprimées/purgées, recoupées
+nativement. Son reste local readonly est retiré par le vrai nettoyeur sûr.
+
+L’inspection des campagnes communes identifie encore des noms Docker par défaut
+dans les anciens clients HTTP et conteneurs sources de fixtures. Appliquer la
+règle de responsabilité déjà obligatoire avant de les relancer. Cette correction
+ne change aucun comportement produit ni nombre de groupes attendu.
+
 ## 2026-11-09 — Reprise additive des identités historiques
 
 L’étape 1 de SLS-074 est qualifiée. La revue du flux montre que les UUID de
