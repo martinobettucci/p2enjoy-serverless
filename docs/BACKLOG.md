@@ -872,7 +872,8 @@ recoupés. Raccordement : SLS-065 et prochain changement de console.
 ## SLS-076 — Nom explicite des conteneurs de validation du code
 
 Statut : [~] — correction du nom et campagne réelle en préparation ; aucun
-nouveau déploiement ni résultat acquis à ce stade.
+groupe qualifié à ce stade. Image700148c52531 construite et contrôle remis
+en service manuellement après l’arrêt du premier essai sur le cwd de Compose.
 
 Le pilote `control/app/validator.py:136` nomme actuellement ses conteneurs
 `p2-v-` suivi d’un UUID. Le nom ne décrit pas leur responsabilité pour un
@@ -899,3 +900,6 @@ avant code : construction à contrôle actif, stable/données/cache, ancien
 validateur produit par upload réellement interrompu, bascule gardée vers la
 nouvelle image, trois issues d’import observées puis régressions36/12/5.
 La garde utilise exclusivement Compose DEV et les deux fichiers officiels.
+Le [premier essai](VALIDATOR_NAMES.md#premier-essai-et-correction-du-répertoire-de-travail)
+produit bien un ancien validateur mais échoue à la remise en service du banc.
+Sa fonction est purgée ; le replay complet après correction du cwd reste à faire.

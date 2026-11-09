@@ -89,3 +89,30 @@ assets web, manuel, référence/runtime/CLI et configurations inchangés.
 
 Aucune réussite n’est acquise à ce stade. SLS-074, ses autres pannes et ses
 régressions complètes conservent leur périmètre ; SLS-076 ne les clôture pas.
+
+## Premier essai et correction du répertoire de travail
+
+La construction700148c52531 conserve les31 fichiers backend, sauf validator.py,
+et des fichiers web strictement identiques ; elle ne redémarre aucun service.
+Après un premier départ sans session SSO, le cycle réel produit un p2-v depuis
+un upload HTTPS puis tue l’ancien contrôle. Sa reprise échoue : Compose lancé
+par spark-docker depuis /root retourne « stat .: permission denied ». Le
+précontrôle config --quiet reproduit ce refus sans mutation. L’intention de
+remplacement reste incertaine, aucune seconde création automatique n’est lancée.
+
+Le principal vérifie ID/image/StartedAt/137, configuration et références puis
+remet explicitement le contrôle en service depuis le répertoire du projet.
+Le candidat interrompu est repris, la cible/configuration conservées et la
+seule fonction de cet essai purgée par les API. Ce cycle reste échoué : sa
+remise en service manuelle n’est pas attribuée à la garde.
+
+Décision avant correction : tous les sous-processus Docker/Compose de cet
+opérateur utilisent explicitement le répertoire du projet lisible par
+spark-docker. La garde figée est exécutée dans ce même contexte. Pour obtenir
+un replay complet, remettre temporairement la véritable image008 retenue
+before-validator-names au repos, avec le même schéma008 et les mêmes fichiers
+officiels, puis reconstruire/revérifier la candidate et refaire tout le cycle.
+Il ne s’agit pas d’un retour de schéma. Cette restauration est bornée au seul
+contrôle ; runtime, stockage et CLI ne sont pas recréés. Sources, images,
+première coupure, remise en service et nettoyages restent dans leurs époques
+distinctes ; aucune réussite partielle n’est ajoutée au replay à venir.

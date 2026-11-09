@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 2026-11-09 — Reprise076 interrompue puis contrôle rétabli
+
+Construction700148c52531 réussie sur258 sources ; un seul backend diffère,
+validator.py, et les assets web sont identiques. Aucun service ne redémarre à
+la construction. Après renouvellement SSO, le cycle produit un vrai p2-v puis
+interrompt l’ancien contrôle. La reprise échoue à Compose depuis /root, que
+spark-docker ne peut résoudre : config --quiet reproduit « stat .: permission
+denied ». Le principal compare les identités/configurations, rétablit700148
+explicitement depuis control et confirme santé/fichiers officiels/référence.
+Le candidat est failed/control_interrupted, réserve/canal/conteneur retirés,
+cible/configuration/révisions conservées. La fonction de l’essai est purgée par
+API ; le cycle demeure échoué, sans succès de garde. Le contrat fixe avant
+correction un cwd explicite et le replay depuis la véritable image008 retenue.
+
 ## 2026-11-09 — Reprise par le nommage des validateurs
 
 Le tour précédent qualifie la pagination six domaines et commet ef4a900 ;
