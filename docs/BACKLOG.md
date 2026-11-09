@@ -752,6 +752,12 @@ saisie et focus après réactivation. Le dialog conserve son contexte quand sa
 carte quitte la page pendant une publication réelle. Les messages de publication
 sont recoupés au PUT réel, au GET durable et au rendu ; aucun corps PUT navigateur
 n’est déclaré observé. Les pannes et la régression complète restent ouvertes.
+La prochaine preuve porte sur les cinq comportements CLI déjà qualifiés sur
+le poste, dans chacune des deux images Docker DEV, selon
+[le contrat de transport privé](FUNCTION_VERSION_EXECUTION.md#cli-conteneurisée-authentifiée).
+Leurs campagnes et nettoyages restent séparés ; aucun cumul ne les présente
+comme dix comportements fonctionnels nouveaux. Pannes et suite complète restent
+obligatoires après ce complément.
 La revue statique du pipeline a révélé le passage possible d’un validateur
 déjà en attente après un nettoyage incomplet ; le verrou est corrigé, et la
 preuve réelle de ce refus rejoint les critères de FUNCTION_VERSION_EXECUTION.

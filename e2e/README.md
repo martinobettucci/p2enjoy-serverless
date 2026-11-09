@@ -38,6 +38,16 @@ par l’API authentifiée et recoupe le message réellement affiché par la cons
 Le corps PUT n’est pas déclaré observé ; les essais de collecte CDP incomplets
 sont conservés avec leurs nettoyages, distincts du replay.
 
+### Commandes CLI authentifiées dans les images — préparation
+
+`node e2e/function-versions-cli.mjs --docker cli`, puis séparément
+`node e2e/function-versions-cli.mjs --docker qualification`, rejouent les cinq
+groupes dans les deux images DEV. SSH vers le seul SPARK et vraie session SSO
+sont requis. `function-version-cli-container.py` reçoit les données privées sur
+stdin ; les sources et images sont recoupées, le conteneur est borné et son
+absence est vérifiée. Les rapports CLI Docker distincts n’écrasent pas le rapport
+hôte du checkpoint71. Aucune réussite n’est déclarée avant ces exécutions.
+
 ## Pause et reprise d’une requête réelle
 
 `node e2e/invocation-request-pause.mjs` publie sa fixture originale dans le SPARK

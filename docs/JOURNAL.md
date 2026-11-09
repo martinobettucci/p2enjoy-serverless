@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 2026-11-09 — Décision : qualifier les commandes authentifiées dans leurs images
+
+Le checkpoint372f5b8 qualifie les cinq comportements CLI depuis Python sur le
+poste. Les38 groupes des images ne qualifient que packaging et refus publics.
+Le complément conserve le même scénario et choisit un transport stdin privé
+vers un helper du seul SPARK DEV ; chaque commande s’exécute dans l’image CLI
+immuable sélectionnée, avec recoupement de ses modules. Cela évite d’assimiler
+une installation Python locale au contenu réellement livré dans Docker.
+
+Les fichiers originaux sont reçus dans un tmpfs, les jetons restent en mémoire
+et hors argv/Config.Env. Le wrapper conteneur borne son propre enfant ; le
+helper vérifie sa disparition, sans rejeu HTTP. Chaque image a son service et
+son rapport. Les dix exécutions complètent une matrice de cinq comportements,
+sans gonfler leur couverture fonctionnelle. Cette décision précède le code.
+
 ## 2026-11-09 — Checkpoint008 ciblé :71 groupes,28 captures et nettoyage natif
 
 La campagne console passe six groupes complets après la simplification de

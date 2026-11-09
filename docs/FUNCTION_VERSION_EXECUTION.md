@@ -240,6 +240,35 @@ restent des références techniques complémentaires. Les états de copie/lectur
 focus, mobile et refus suivent le design existant. Le manuel canonique est
 modifié avec les comportements effectivement construits et déployés.
 
+## CLI conteneurisée authentifiée
+
+Le même scénario de cinq groupes est exécuté séparément depuis le poste et
+depuis chacune des images DEV `p2enjoy-adapter:dev` et `p2enjoy-adapter-e2e:dev`.
+Chaque campagne utilise son propre service, ses jetons et ses fichiers originaux,
+puis purge sa fonction par les API. Ces dix exécutions dans deux environnements
+complètent la matrice des cinq comportements ; elles ne deviennent pas dix
+comportements nouveaux ni une qualification du reste de SLS-074.
+
+Le navigateur/client orchestrateur reste sur le poste. Pour une commande CLI,
+il transmet par stdin SSH privé le manifeste, les deux sources de qualification,
+les arguments et les seules valeurs éphémères requises. Le helper du SPARK DEV
+lance un client Docker nommé pour la publication/promotion et identifié par son
+image immuable. Les modules exécutés et la bibliothèque canonique sont recoupés
+avec les sources du dépôt. Aucun jeton ou secret éphémère ne passe dans argv,
+un fichier, Docker Config.Env ou les reçus ; la CLI reçoit ces valeurs dans
+l’environnement de son processus enfant après lecture de stdin. La configuration
+de déploiement du client reste issue des deux fichiers officiels de cellule.
+
+Le client a un système de fichiers readonly et un tmpfs de travail borné ; les
+sources reçues y sont écrites et empaquetées par la vraie CLI. Il ne lance aucun
+serveur. Les limites CPU/RAM/PID et de durée sont explicites. Le processus dans
+le conteneur borne indépendamment son enfant CLI, puis quitte, même si le helper
+SSH disparaît. Le helper attend la fin, vérifie la disparition du conteneur et
+nettoie uniquement son nom exact en cas d’erreur. Aucune commande HTTP de mutation
+n’est rejouée. Une image, source, disparition ou session absente fait échouer la
+campagne. Les sorties sont refusées avant restitution si elles portent les
+valeurs privées envoyées ; les rapports ne gardent que les preuves expurgées.
+
 ## Preuves réelles
 
 Conserver les critères de FUNCTION_VERSIONS et ajouter les cas discriminants :
