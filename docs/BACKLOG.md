@@ -792,13 +792,23 @@ Les31 fichiers backend, images et configuration officielle sont inchangés. Les
 arrêts sur SSO puis champ de diagnostic erroné restent séparés, sans groupe vert.
 La revue a fermé la fenêtre lstat/chmod du helper par descripteur épinglé avant
 la faute. La vérification physique de la garde de validation est donc acquise ;
-capacité4, autres pannes, migrations perturbées et régression complète restent
+les autres pannes, migrations perturbées et la régression complète restent
 obligatoires avant clôture074.
 
-La prochaine preuve ciblée suit [la capacité des uploads](FUNCTION_VERSION_UPLOAD_CAPACITY.md) :
-quatre admissions réelles, cinquième429 avant réception, attente sur des imports
-Docker réels, convergence d'un seul hash et relance explicite du candidat refusé.
-Elle reste à exécuter ; aucun comportement supplémentaire n'est déclaré qualifié.
+La [capacité des uploads](FUNCTION_VERSION_UPLOAD_CAPACITY.md) est maintenant
+[qualifiée](evidence/function-version-upload-capacity-dev-2026-11-09.json) :
+quatre groupes sur267 sources figées et la même19cfe884. Quatre admissions
+réservent1 997 570 048 octets ; le cinquième429 conserve prepared/réservation0,
+sans artefact. Un vrai candidat attend encore lors d'un relevé commencé après
+31,43s. Quatre create/destroy natifs confirment un seul validateur à la fois ;
+A expire normalement et B/C/D convergent vers un hash/UUID, avec un seul créateur.
+La relance explicite du même cinquième candidat réutilise ce hash après validation.
+Quatre appels conservent cible, ETag, configuration chiffrée et compteurs data/cache1–4.
+La fonction finale et les deux fonctions des essais précédents sont physiquement
+purgées ; compteurs actifs/réservations nuls,31 fichiers backend et services conservés.
+L'essai de collecte interrompu et le replay intermédiaire restent distincts,
+sans addition de groupes. Les pertes de réponses de création du banc et l'instant
+du callback de maintenance ne sont pas qualifiés par cette preuve.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

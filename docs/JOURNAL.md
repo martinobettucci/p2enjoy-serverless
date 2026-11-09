@@ -4445,3 +4445,27 @@ encore un diagnostic trop optimiste : toute création tentée sans identité
 retrouvée après réponse perdue conserve cleanup=false. Le prochain replay
 qualifiera le client livré, sans additionner les groupes du replay intermédiaire.
 La perte de réponse elle-même reste une branche distincte non éprouvée ici.
+
+## 2026-11-09 — Capacité074 qualifiée sur19cfe884
+
+Le replay final passe quatre groupes, zéro échec/skip, sur267 sources figées.
+Quatre uploads réservent1 997 570 048 octets, E reçoit429/Retry-After5 avant
+réception et reste préparé sans artefact. Le relevé tardif commence après31,43s,
+avec candidat encore en attente ; le GET santé de cette fenêtre prend11,15ms.
+Cette mesure ne prétend pas observer le callback de maintenance. A finit en
+validation_timeout avec nettoyage confirmé ; B/C/D produisent un hash/UUID,
+un créateur et deux réutilisations. Les quatre create/destroy natifs confirment
+un seul validateur à la fois, puis la relance explicite de E le réutilise.
+
+Quatre appels Docker (stable, stable, pilote épinglé, stable) conservent cible,
+ETag, configuration/secret et compteurs data/cache1–4. Les trois fonctions des
+essais sont purgées et recoupées physiquement avec leurs parents/jetons,
+artefacts, volumes, canaux et conteneurs/réseaux. Les compteurs actifs et les
+réservations sont nuls. Services, démarrages, images,31 backends et empreintes
+des fichiers officiels restent identiques. La revue finale ne relève aucun
+défaut bloquant ; aucun registre d'incohérence n'est ouvert. Aucun nouveau
+parcours UI ni build n'est revendiqué. Le premier échec et le replay vert
+intermédiaire sont conservés sans additionner leurs groupes. Preuve :
+evidence/function-version-upload-capacity-dev-2026-11-09.json. Les pertes de
+réponse du banc, autres pannes, migrations perturbées et régression complète
+restent ouvertes dans SLS-074. Aucun remote Git n'est configuré.

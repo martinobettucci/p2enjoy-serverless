@@ -98,6 +98,13 @@ validation et reprise indépendante après SIGKILL, avec cinq invocations.
 Les autres pannes et la régression complète restent ouvertes.
 La preuve359 et ses captures décrivent le checkpoint007.
 
+Le [complément de capacité](docs/evidence/function-version-upload-capacity-dev-2026-11-09.json)
+passe quatre groupes sur267 sources : quatre uploads réellement admis, cinquième429,
+attente supérieure30s, validations Docker sérialisées, convergence et relance
+explicite. Quatre appels conservent stable/pilote et compteurs données/cache1–4.
+Les trois fonctions des essais sont physiquement purgées. Image19cfe884,
+configuration officielle et services restent identiques ; SLS-074 reste en cours.
+
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.
 

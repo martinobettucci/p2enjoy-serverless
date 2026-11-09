@@ -52,6 +52,8 @@ def source_hashes():
     files += [ROOT/'docs/FUNCTION_VERSION_EXECUTION.md',ROOT/'docs/SCHEMA.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_VALIDATION_RECOVERY.md#campagne-et-preuves
     files += [ROOT/'docs/FUNCTION_VERSION_VALIDATION_RECOVERY.md']
+    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md#preuves-et-limites
+    files += [ROOT/'docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
 def metadata(path):

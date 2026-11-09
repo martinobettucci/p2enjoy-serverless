@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- Capacité des uploads qualifiée sur le contrôle DEV008 inchangé : quatre groupes
+  réels, quatre admissions et cinquième429 avant réception, attente supérieure30s,
+  un validateur Docker à la fois, convergence puis relance explicite du candidat
+  refusé. Quatre appels conservent la cible promue et les compteurs données/cache1–4.
+  Trois fonctions des essais purgées physiquement ;267 sources figées et mêmes
+  images/services/configuration. Le premier essai incomplet et le replay
+  intermédiaire ne gonflent pas les quatre groupes finaux. SLS-074 reste en cours.
+  [Preuve](docs/evidence/function-version-upload-capacity-dev-2026-11-09.json).
+
 - Conteneurs de validation nommés `serverless-code-validator-<uuid>` en DEV.
   L’image19cfe884642a reprend aussi les anciens p2-v après interruption réelle.
   Quatre groupes ciblés et36/12/5 régressions passent, soit57 sans échec/skip,

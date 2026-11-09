@@ -1,5 +1,42 @@
 # Qualification de la plateforme
 
+## Capacité des uploads — complément SLS-074
+
+Depuis la racine du dépôt, après synchronisation des sources dans le seul SPARK
+DEV et préparation de la session SSO normale, exécuter en série :
+
+```sh
+python3 -B e2e/function-version-upload-capacity-run.py
+```
+
+Le pilote utilise `function-version-upload-capacity.mjs` et le helper distant
+en lecture seule `function-version-upload-capacity-inspect.py`. Il refuse les
+rapports déjà présents : conserver l'essai précédent avant toute relance.
+Le rapport privé est `.local/e2e/function-version-upload-capacity.json`, son
+recoupement complet porte le suffixe `-checkpoint.json`. Contrat :
+[FUNCTION_VERSION_UPLOAD_CAPACITY](../docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md).
+Le précontrôle exige le repos et la capacité réelle pour quatre réservations,
+puis les API créent, publient et promeuvent explicitement une version stable.
+
+La [preuve finale](../docs/evidence/function-version-upload-capacity-dev-2026-11-09.json)
+passe quatre groupes sur267 sources figées : quatre uploads admis, cinquième429
+sans artefact, attente encore présente après31,43s, vrai timeout de A et convergence
+des trois paquets identiques. Les événements create/destroy confirment un seul
+validateur à la fois ; le candidat refusé est ensuite relancé explicitement.
+Quatre invocations Docker retrouvent stable/pilote, secret par empreinte et
+compteurs data/cache1–4. Le contrôle19cfe884, les31 backends, la référence et les
+fichiers officiels sont conservés. Aucun build ni parcours UI nouveau.
+
+Le premier essai échoue pendant la lecture exec du marqueur ; sa cause précise
+n'est pas reconstituée. Le polling final n'utilise plus exec ; l'observation
+initiale exige A vivant et son marqueur. Un replay vert intermédiaire précède
+le dernier durcissement du nettoyage à identité inconnue. Ces deux époques
+restent séparées et leurs groupes ne sont pas additionnés au replay final.
+Les trois fonctions sont physiquement purgées dans leurs trois namespaces,
+et tous les compteurs actifs/réservations sont à zéro. Les pertes de réponse
+du banc et les transitions rares d'observation n'ont qu'une revue statique ;
+les autres pannes et la régression complète restent au backlog SLS-074.
+
 ## Nommage des validateurs — SLS-076 qualifiée
 
 Le [contrat](../docs/VALIDATOR_NAMES.md) fixe le préfixe explicite et la reprise

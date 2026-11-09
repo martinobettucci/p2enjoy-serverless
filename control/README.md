@@ -323,3 +323,13 @@ web restent identiques. Les trois fonctions du replay sont physiquement purgées
 plus la fonction de l’arrêt initial recoupée séparément. Les cinq pilotes de
 préparation à collecte sont dans e2e, selon le [contrat](../docs/VALIDATOR_NAMES.md).
 L’expiration propre de la garde et les autres pannes008 restent distinctes.
+
+## Capacité des uploads qualifiée sur la même image
+
+Le [complément074](../docs/evidence/function-version-upload-capacity-dev-2026-11-09.json)
+passe quatre groupes sur267 sources et19cfe884 conservée : quatre admissions,
+cinquième429 avant réception, attente supérieure30s, validations sérialisées,
+convergence par hash et relance explicite. Quatre appels préservent stable,
+configuration et données/cache ; les trois fonctions des essais sont purgées.
+Aucune migration, nouvelle variable, modification de service ou reconstruction
+d'image. Commande et limites dans [e2e](../e2e/README.md#capacité-des-uploads--complément-sls-074).
