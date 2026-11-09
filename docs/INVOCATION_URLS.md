@@ -148,8 +148,9 @@ functions.lelabs.tech vers 18090 en TLS, après vérification de disponibilité 
 nom dans la console ; qualifier les deux domaines et l’entrée SSO canonique.
 Retargeter temporairement seulement ces deux routes vers 18091 pour éprouver
 l’exclusion de l’autre port et l’absence de domaine applicable, puis rétablir
-18090. Retirer et rétablir l’alias pour qualifier son retrait réel. Le mode clair
-et les quatre domaines supplémentaires ne font pas partie de l’autorisation reçue.
+18090. Retirer et rétablir l’alias pour qualifier son retrait réel. Le mode clair reste hors autorisation. Le9 novembre2026, le responsable autorise
+les quatre alias temporaires détaillés dans [le plan de pagination](INVOCATION_DOMAINS_PAGINATION.md),
+uniquement18090TLS et leurs A exacts vers51.158.54.202 TTL300, puis nettoyage.
 Aucun autre SPARK ni route
 n’est modifié, aucun fichier/configuration système de FORGE n’est administré.
 
@@ -170,9 +171,10 @@ explicites dans SLS-066.
 
 La proposition courante à deux domaines suffit au multi-domaine et à la
 pagination API avec limit=1, pas à une seconde page console/CLI. Ces deux
-preuves demandent six domaines réels : quatre alias supplémentaires devront
-être inclus explicitement dans le périmètre autorisé avant création. Elles
-restent ouvertes tant que ces routes ne sont pas disponibles. La CLI consulte
+preuves demandent six domaines réels : les quatre alias supplémentaires ont
+maintenant leur autorisation explicite, leurs DNS et nettoyage compris, selon
+CLAUDE_PROJECT et le plan de pagination. Elles restent ouvertes tant que ces
+routes ne sont pas réellement disponibles et les parcours courants éprouvés. La CLI consulte
 par cinq comme la console, plutôt que d’exiger vingt et un domaines pour
 éprouver son changement de page.
 

@@ -16,6 +16,16 @@
   `functions.lelabs.tech` vers `18091` pour éprouver le filtrage. Revenir à
   `18090` avec garde de restauration. Cette autorisation ne couvre aucune
   administration de FORGE ni d’un autre SPARK.
+  Extension explicitement autorisée le9 novembre2026 pour la seconde page
+  réelle SLS-066 : créer temporairement les seules routes
+  `functions-pagination-1.lelabs.tech`, `functions-pagination-2.lelabs.tech`,
+  `functions-pagination-3.lelabs.tech`, `functions-pagination-4.lelabs.tech`
+  sur ce même SPARK vers18090 en TLS, avec leurs seuls enregistrements A exacts
+  dans lelabs.tech vers51.158.54.202, TTL300. Les quatre routes et les quatre A
+  créés pour cette preuve sont retirés après les tests. Précontrôler les conflits,
+  conserver identifiants et valeurs pour le nettoyage, ne pas reprendre une
+  propriété modifiée. Cette extension n’autorise aucun autre domaine, type DNS,
+  SPARK, détour de ces nouveaux alias ou administration système de FORGE.
 - Appliquer le contrat de configuration et les propositions `.?` du SPARK.
 - Un seul build, test ou scénario à la fois ; attendre sa fin complète.
 - Aucun mock, stub, faux serveur, interception réseau ou remplacement d'une

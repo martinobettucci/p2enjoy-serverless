@@ -515,16 +515,18 @@ sources, les fichiers natifs exacts et l’arrêt initial du collecteur sur les
 seuls horodatages arrondis par JavaScript. La revue finale en lecture seule
 ne constate aucun défaut bloquant. Ce checkpoint est qualifié ; SLS-066 reste ouverte.
 
-Pour les pages UI/CLI de cinq domaines, les quatre alias temporaires
-functions-pagination-1 à functions-pagination-4.lelabs.tech sont proposés :
-18090 TLS et A exacts vers la même infrastructure, puis nettoyage de ces seuls
-objets. Le précontrôle normal les trouve libres, sans mutation. Le
-[plan concret](INVOCATION_DOMAINS_PAGINATION.md) attend une extension explicite
-d’autorisation. Le contrôle automatique a refusé l’écriture de la proposition
-distante hors du périmètre à deux noms ; la commande n’a pas démarré. Le texte
-local est prêt, et la demande asynchrone d’extension est en attente. Aucun
-nouveau DNS ni route n’est créé avant réponse explicite.
-Pendant cette attente, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
+Pour les pages UI/CLI de cinq domaines, le responsable autorise explicitement
+le9 novembre2026 les quatre alias temporaires functions-pagination-1 à
+functions-pagination-4.lelabs.tech sur le seul infra-serverless :18090TLS,
+A exacts vers51.158.54.202 TTL300, puis retrait de ces seuls objets créés.
+Le [plan autorisé](INVOCATION_DOMAINS_PAGINATION.md) et CLAUDE_PROJECT portent
+ce périmètre. Une nouvelle vérification de disponibilité précède toute création ;
+identifiants/valeurs sont conservés pour un nettoyage qui refuse une propriété
+changée. Aucun alias ni DNS supplémentaire n’est déjà revendiqué appliqué.
+Le refus automatique d’écriture de proposition précédait cette extension ; il
+reste historique. L’attente d’autorisation est levée, les preuves six domaines
+restent à produire avec les comportements courants de version/promotion008.
+Pendant l’attente antérieure, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
 sont préparées sur la requête canonique, sans changer de route. L’extraction de
 NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,
 six fonctions purgées dans deux namespaces et six gardes terminées.

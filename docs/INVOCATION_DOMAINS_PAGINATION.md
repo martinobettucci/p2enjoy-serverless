@@ -1,11 +1,13 @@
 # Quatre alias temporaires pour la pagination réelle
 
-Proposition opératoire de SLS-066, non appliquée. Le périmètre actuellement
-autorisé porte sur les seuls serverless.lelabs.tech et functions.lelabs.tech.
+Plan opératoire de SLS-066, autorisé explicitement par le responsable le9
+novembre2026 et non encore appliqué. L’extension porte exactement sur les quatre
+alias temporaires, leurs routes18090TLS, leurs A vers51.158.54.202 TTL300 et leur
+retrait après qualification. Les deux domaines permanents restent en place.
 La seconde page de cinq domaines de la console et de la CLI exige six domaines
 réels ; aucune duplication de ligne ou réponse simulée ne remplace ces noms.
 
-## Proposition concrète
+## Plan autorisé
 
 Les quatre noms suivants décrivent leur usage de qualification de pagination :
 
@@ -32,20 +34,22 @@ créer aucun nouveau cache négatif avant publication.
 ## Autorisation et garde-fous d’application
 
 L’autorisation explicite de ces quatre noms, de leur DNS et de leur nettoyage
-est requise avant toute création. La proposition est conservée localement dans
-ce dépôt, avec le [texte des quatre routes](INVOCATION_DOMAINS_PAGINATION.routes.txt).
-Le contrôle d’approbation automatique a refusé son écriture dans routes.? :
-les quatre noms dépassent le périmètre actuellement autorisé, même sous forme
-de proposition persistante. La commande n’a pas démarré ; aucun fichier distant,
-registre de routes ou DNS n’a été modifié par cette tentative. La demande
-d’extension est présentée au responsable ; aucune réponse n’est présumée.
+est reçue et reportée dans CLAUDE_PROJECT et le backlog. Le
+[texte des quatre routes](INVOCATION_DOMAINS_PAGINATION.routes.txt) est conservé
+comme description, sans valoir application. Le refus automatique de son écriture
+antérieure dans routes.? précédait cette extension ; la commande n’avait pas
+démarré et aucun objet n’avait été modifié par cette tentative. Il ne constitue
+plus une attente de réponse du responsable.
 
-Après autorisation : nouvelle lecture de disponibilité et des valeurs exactes,
+Avant application : nouvelle lecture de disponibilité et des valeurs exactes,
 créations par la console normale, aucun remplacement de valeur différente ni
 rejeu aveugle après réponse perdue. Attendre les vraies résolutions et HTTPS
 vérifiés. Conserver les identifiants et valeurs DNS exacts pour ne retirer que
 ce qui est créé et toujours possédé au nettoyage. Une identité ou valeur changée
 interrompt cette suppression ; ne jamais reprendre une propriété étrangère.
+Le périmètre ne couvre aucun autre nom, type DNS ou SPARK. Les nouveaux alias
+restent18090TLS ; leur cycle borné est création, qualification puis retrait.
+Aucun de ces gestes ne vaut administration système de FORGE.
 
 La preuve réutilisera les fonctions originales du dépôt. Parcours UI depuis
 l’accueil, seconde page de cinq puis un domaine, copies natives et invocations

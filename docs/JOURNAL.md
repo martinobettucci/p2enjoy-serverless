@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 2026-11-09 — Autorisation reçue pour les quatre alias temporaires de pagination
+
+Le responsable autorise les seuls functions-pagination-1 à4.lelabs.tech,
+leurs routes18090TLS sur infra-serverless et leurs A exacts vers51.158.54.202,
+TTL300, suivis de leur retrait après tests. Le contrat local, le plan et SLS-066
+sont mis à jour avant opération. L’ancien refus automatique précédait cette
+extension ; aucune nouvelle demande d’accord n’est nécessaire pour ce périmètre.
+
+La disponibilité doit être relue ; une propriété étrangère ou modifiée n’est
+jamais reprise. Les identifiants et valeurs des objets créés guideront le
+nettoyage. Les deux domaines permanents et l’origine SSO restent inchangés.
+Aucun alias n’est encore créé ou déclaré qualifié. La reprise de la pagination
+UI/CLI à six domaines suit le checkpoint de validation, en conservant les
+semantiques008 de publication et promotion séparées.
+
 ## 2026-11-09 — Boucle d’incohérences : nom des validateurs converti en SLS-076
 
 Après le commit3a5734d et ses quatre groupes ciblés, l’unique entrée du registre
