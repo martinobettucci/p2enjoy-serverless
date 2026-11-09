@@ -30,7 +30,10 @@ service/fonction pendant validation restent réellement éprouvés.
 L'ancien cas de capacité suppose à tort un seul upload admis. Le contrat008
 admet jusqu'à quatre uploads et sérialise leur validation. Deux candidats déjà
 préparés et deux vrais uploads doivent être observables : le premier en validation,
-le second admis en attente, puis deux publications terminales. Le paquet déjà
+le second admis en attente, puis deux publications terminales. Une lecture native
+couplée doit constater les deux lignes validating et leurs réservations positives,
+avec un seul validateur Docker vivant lié au premier candidat ; deux lectures
+HTTP successives ne suffisent pas à prouver cette fenêtre. Le paquet déjà
 connu réutilise sa révision/hash sans déplacer la cible. Le cas complet de quatre
 admissions et cinquième429 possède sa preuve dédiée ; cette tranche ne le remplace
 ni ne le réadditionne. Un rejeu du candidat terminal reste409.
@@ -75,6 +78,12 @@ rapport sont recoupées ; un échec arrête la matrice, aucun skip ou rejeu auto
 Les processus et requêtes engagés sont joints, les UUID de campagne conservés.
 Les diagnostics supplémentaires enregistrent phase/type/code/coordonnées et
 empreinte, sans message brut pouvant citer un secret.
+
+Les deux clients utilisent la purge publique complète après suppression de leur
+fonction ; leur ancien helper de purge directe de volumes ne suffit pas à
+prouver effacement du code et reçu de décision du contrôle. Les empreintes
+des révisions avant purge sont conservées comme telles, pas comme archives
+encore présentes. Les helpers historiques ne changent pas de comportement.
 
 La collecte finale indépendante lit les quatre fonctions des deux campagnes,
 leurs reçus de purge, révisions, candidats, réservations, invocations et baux.

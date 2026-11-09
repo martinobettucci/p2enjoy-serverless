@@ -5013,3 +5013,20 @@ séparer ce prérequis des groupes. Les anciens rapports sont conservés avant
 régénération. La tranche n'affirme pas clôturer la régression complète008.
 Contrat : FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md. Aucun build/configuration
 ou route nouveau, aucune modification des sources des bancs006/007.
+
+
+## 2026-11-09 — Preuve d'attente et nettoyage de la tranche
+
+La revue préalable confirme la conservation des55/11/10groupes et des refus,
+mais signale qu'une lecture successive des deux états validating ne prouve pas
+leur simultanéité. Décision : réutiliser le lecteur natif de capacité, borné au
+namespace deploy exact, pour exiger les deux réservations et le seul validateur
+vivant lié au premier UUID. Une fenêtre manquée reste un échec, pas un skip.
+
+La lecture des finally révèle que les anciens clients purgent seulement les
+volumes par l'agent et gardent le code. Pour les quatre purges complètes promises
+par cette tranche, les deux clients passent maintenant par les routes publiques
+d'archive/purge et conservent leurs snapshots avant purge. L'ancien helper
+partagé reste inchangé pour les autres bancs. Le lecteur physique accepte les
+deux préfixes exacts deploy/publication-api, avec ses contrôles stricts conservés.
+Aucun test encore exécuté sur ce code. Ces précisions sont persistées avant code.
