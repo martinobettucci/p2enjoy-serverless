@@ -4542,3 +4542,10 @@ le verrou, la coupure native avant commit et les reprises. Si le défaut est
 confirmé, les gardes seront ajoutées dans la transaction de première transition008,
 selon le précédent007 ;009 seule ne peut annuler un008 déjà commis. Les bases
 déjà008 ne réexécutent rien. Aucun code de correction n'est encore écrit.
+
+La reproduction réelle échoue au critère attendu : la copie active-code-without-charge
+porte008 commise sur19cfe884, puis uvicorn sort3 avec FileNotFoundError du socket
+non monté. Le diagnostic de refus historique est absent. Le rapport conserve
+274 sources, les sept/huit marqueurs avant/après et les empreintes des tables ;
+cleanup=true, original et contrôle/référence/fichiers officiels inchangés.
+La correction conditionnelle prévue est donc appliquée à la première transition008.
