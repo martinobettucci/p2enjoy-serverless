@@ -4429,3 +4429,12 @@ de test. L'attente supérieure30s ne sera pas présentée comme une observation
 directe du callback de maintenance. Contrat : FUNCTION_VERSION_UPLOAD_CAPACITY.md.
 Sources/images, intégrité stable et purge seront recoupées avant clôture de ce
 complément ; SLS-074 reste en cours. Aucun remote Git n'est configuré.
+
+Le premier essai de capacité passe les quatre admissions et le429 puis échoue
+dans la collecte : exec du marqueur refuse alors que le même conteneur existe
+encore. Les requêtes sont jointes et la fonction purgée ; le recoupement physique
+est conservé avec le rapport incomplet, sans ajouter son groupe au futur replay.
+Le collecteur distinguera désormais explicitement200/Running=false de404 lors
+de cette transition ; un conteneur encore vivant restera bloquant. L'erreur
+initiale ne consignait pas Running après l'échec : sa cause précise n'est donc
+pas affirmée rétrospectivement. Le produit et ses images restent inchangés.

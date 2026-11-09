@@ -58,3 +58,9 @@ après. Cette campagne backend n'ajoute aucun comportement ni parcours UI ;
 aucune nouvelle vérification visuelle n'est revendiquée. Les autres fautes,
 migrations perturbées et la campagne complète restent obligatoires dans SLS-074.
 Les rapports et commandes reproductibles sont documentés après exécution réelle.
+
+L'inspection suit les transitions réelles : après un échec de lecture du marqueur
+par exec, elle relit le même identifiant dans Docker. Un404 confirme sa disparition ;
+un200 avec Running=false confirme son arrêt, conservé dans le relevé. Un conteneur
+encore vivant reste une erreur de collecte. L'observation initiale exige toujours
+A vivant et son marqueur présent. Cette règle ne remplace aucune réponse Docker.
