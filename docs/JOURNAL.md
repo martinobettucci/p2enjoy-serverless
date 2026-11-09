@@ -4764,3 +4764,21 @@ identité inconnue puis connue, autres interruptions et campagne complète.
 Preuve : evidence/function-version-purge-correlation008-dev-2026-11-09.json.
 Manuel/UI inchangés ; aucun nouveau parcours visuel revendiqué. Aucun registre
 d'incohérences présent ni arbitrage externe ; aucun remote Git configuré.
+
+
+## 2026-11-09 — Premier hash inconnu : hypothèse corrigée avant code
+
+Le tour précédent est une progression :42 groupes et commit6b27e19. L'exploration
+readonly établit que delete-révision006 conserve inventory/events, comme les sept
+versions antérieures consultées ; A/B/deleteA ne crée donc pas un hash inconnu.
+La purge globale006 efface ces champs sur une fonction déjà supprimée, sans route
+de restauration. Cette hypothèse ne doit pas devenir un faux résultat API.
+
+Décision persistée dans FUNCTION_VERSION_UNKNOWN_FIRST : témoin entièrementAPI
+et variante de données sur installation privée arrêtée, avec sauvegarde intacte.
+La variante efface seulement inventory/events de A déjà supprimée/bytes0, sans
+artefact, B active et autres lignes inchangées. Vraie007 puis008, appels Docker,
+marqueurs, Create/Read/Update, données/cache et restart sont éprouvés ensuite.
+Deuxfenêtres7groupes et une restitution indépendante3groupes sont prévues.
+Le nouveau mode garde ses propres noms et garde, les anciens modes restent
+compatibles.17groupes non encore exécutés ; aucun changement produit présumé.

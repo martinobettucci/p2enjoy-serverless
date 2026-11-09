@@ -882,6 +882,15 @@ aucune addition rétroactive. Les autres interruptions, premier hash inconnu pui
 connu et campagne complète restent nécessaires ; SLS-074 conserve[~].
 Preuve : [corrélations007](evidence/function-version-purge-correlation008-dev-2026-11-09.json).
 
+Le [premier hash inconnu](FUNCTION_VERSION_UNKNOWN_FIRST.md) est décidé avant
+code : le vrai API006 conserve l'inventaire de A supprimée. Le témoin API réel
+et la variante de données anciennes contrôlée sont donc distincts. La variante
+retire seulement les deux métadonnées de A déjà sans code, dans l'installation
+privée arrêtée, sauvegarde API intacte. Vraies images006→007→008, invocations,
+marqueurs, refus Create/Read, piloteUpdate et persistance sont prévus dans deux
+fenêtres de7groupes, plus3 de restitution indépendante.17groupes prévus, pas
+encore exécutés ; aucune clôture ni résultat API fictif attribué à l'historique.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;
