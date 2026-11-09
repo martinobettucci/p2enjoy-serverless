@@ -4417,3 +4417,15 @@ les corps réellement exécutés et ont leur provenance propre au relevé de
 livraison ; le gel258 des clients n’est pas réécrit. Preuve :
 evidence/validator-names-dev-2026-11-09.json. Les autres pannes et la régression
 complète008 restent dans SLS-074 ; le goal conserve son périmètre intégral.
+
+## 2026-11-09 — Preuve de capacité074 décidée
+
+Le prochain banc éprouve la limite existante de quatre uploads avec cinq
+candidats de code seul, une vraie expiration d'import et trois imports12s
+identiques en attente. Le cinquième reste préparé après429, puis est relancé
+explicitement après convergence. Cette solution utilise les fixtures originales
+existantes et les événements Docker ; elle n'ajoute aucun mécanisme applicatif
+de test. L'attente supérieure30s ne sera pas présentée comme une observation
+directe du callback de maintenance. Contrat : FUNCTION_VERSION_UPLOAD_CAPACITY.md.
+Sources/images, intégrité stable et purge seront recoupées avant clôture de ce
+complément ; SLS-074 reste en cours. Aucun remote Git n'est configuré.

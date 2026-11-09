@@ -795,6 +795,11 @@ la faute. La vérification physique de la garde de validation est donc acquise ;
 capacité4, autres pannes, migrations perturbées et régression complète restent
 obligatoires avant clôture074.
 
+La prochaine preuve ciblée suit [la capacité des uploads](FUNCTION_VERSION_UPLOAD_CAPACITY.md) :
+quatre admissions réelles, cinquième429 avant réception, attente sur des imports
+Docker réels, convergence d'un seul hash et relance explicite du candidat refusé.
+Elle reste à exécuter ; aucun comportement supplémentaire n'est déclaré qualifié.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;
