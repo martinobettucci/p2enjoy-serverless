@@ -903,14 +903,26 @@ excluent la première matrice interrompue, le ciblé vert3 et la matrice verte a
 le dernier durcissement des diagnostics. La lecture du corps interrompue reste
 une branche distincte non provoquée par le nominal502 à corps vide.
 
-Les [réponses perdues des décisions de version](FUNCTION_VERSION_STATE_TRANSPORT.md)
-sont la prochaine unité décidée : neuf groupes réels prévus, avant traitement et
-après commit/avant réponse pour promote, archive et delete avec remplacement.
-La CLI promote doit retourner unknown sans rejeu, recoupé par ses deux connexions
-HTTPS natives. Les archives/suppressions passent par HTTPS ; un cas éprouve la
-perte de l'observateur et sa garde indépendante. Les16 appels prévus recoupent
-compteurs données/cache et versions réimportées. Aucun résultat encore acquis ;
-SLS-074 reste[~]. La barrière après delete ne prétend pas précéder son nettoyage.
+Les [réponses perdues des décisions de version](evidence/function-version-state-transport-dev-2026-11-09.json) passent9 groupes
+sur290 sources figées : promotion par la vraie CLI, archivage et suppression
+avec remplacement, chacun avant traitement puis après décision avant réponse.
+Les six SIGKILL sont constatés nativement et par Docker137 ; même conteneur/image
+redémarrés, référence et fichiers officiels conservés. La CLI retourne unknown
+avec exactement deux connexions HTTPS, sans rejeu. Avant traitement, métier
+inchangé puis relance explicite ; après commit, pointeur/état/ETag/audit persistés
+ensemble sans renvoi. Le delete est observé après sa tentative de nettoyage,
+sans prétendre une interruption avant effacement physique.
+
+Seize appels réussis retrouvent les handlers A/B, configuration, secret par
+empreinte et compteurs données/cache1–16 après les reprises. Les réimports B
+gardent hash et date initiale ; les premiers marqueurs restent immuables.
+Une perte SIGKILL de l'observateur éprouve la garde indépendante sans mutation.
+Les sept gardes et helpers sont terminés ; les six arrêts ont leurs reçus root.
+Une fonction est purgée publiquement, volumes/artefacts et ressources actives
+absents. Les deux bootstraps arrêtés avant garde restent archivés avec leurs
+purges physiques, zéro groupe ajouté. Aucun produit/UI/manuel ni configuration
+modifié ; la lecture sous-propriétaire recoupe les31 backends et le web.
+SLS-074 reste[~] pour les autres interruptions et la régression complète008.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

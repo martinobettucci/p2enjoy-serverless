@@ -334,3 +334,27 @@ Les scénarios sont séquentiels et utilisent les vrais composants. Les attentes
 historiques qui supposent l’activation à l’upload ou vingt doublons sont adaptées
 au nouveau comportement ; les bancs des anciennes images restent historiques.
 Aucun succès conditionnel, mock, stub ou réponse remplacée.
+
+
+## Décisions de version et réponse perdue
+
+Les [réponses perdues des décisions de version](evidence/function-version-state-transport-dev-2026-11-09.json) passent9 groupes
+sur290 sources figées : promotion par la vraie CLI, archivage et suppression
+avec remplacement, chacun avant traitement puis après décision avant réponse.
+Les six SIGKILL sont constatés nativement et par Docker137 ; même conteneur/image
+redémarrés, référence et fichiers officiels conservés. La CLI retourne unknown
+avec exactement deux connexions HTTPS, sans rejeu. Avant traitement, métier
+inchangé puis relance explicite ; après commit, pointeur/état/ETag/audit persistés
+ensemble sans renvoi. Le delete est observé après sa tentative de nettoyage,
+sans prétendre une interruption avant effacement physique.
+
+Seize appels réussis retrouvent les handlers A/B, configuration, secret par
+empreinte et compteurs données/cache1–16 après les reprises. Les réimports B
+gardent hash et date initiale ; les premiers marqueurs restent immuables.
+Une perte SIGKILL de l'observateur éprouve la garde indépendante sans mutation.
+Les sept gardes et helpers sont terminés ; les six arrêts ont leurs reçus root.
+Une fonction est purgée publiquement, volumes/artefacts et ressources actives
+absents. Les deux bootstraps arrêtés avant garde restent archivés avec leurs
+purges physiques, zéro groupe ajouté. Aucun produit/UI/manuel ni configuration
+modifié ; la lecture sous-propriétaire recoupe les31 backends et le web.
+SLS-074 reste[~] pour les autres interruptions et la régression complète008.

@@ -4917,3 +4917,52 @@ requise avant archivage. Correction décidée : conserver les snapshots de refus
 avant assertion, comparer tout le métier à l'identique et exiger précisément
 six audits request.denied supplémentaires, avec anciennes entrées conservées.
 Cet essai reste séparé du replay, zéro groupe ajouté. Aucun arrêt ni garde lancé.
+
+
+Le second bootstrap confirme le métier inchangé et les six audits, puis échoue
+sur leurs empreintes attendues : le routeur API monté journalise son modèle
+interne /functions/{key}/versions/{code_hash}, sans le préfixe public /api. La
+lecture ciblée des six detail_json confirme statuts403/428 et trois modèles
+exacts. Le banc conserve désormais les deux snapshots avant assertion. Aucune
+garde ni coupure ; purge physique confirmée et deuxième époque archivée.
+Correction technique de la seule chaîne attendue, sans changement produit.
+
+
+## 2026-11-09 — Décisions de version sous coupure qualifiées
+
+Les [réponses perdues des décisions de version](evidence/function-version-state-transport-dev-2026-11-09.json) passent9 groupes
+sur290 sources figées : promotion par la vraie CLI, archivage et suppression
+avec remplacement, chacun avant traitement puis après décision avant réponse.
+Les six SIGKILL sont constatés nativement et par Docker137 ; même conteneur/image
+redémarrés, référence et fichiers officiels conservés. La CLI retourne unknown
+avec exactement deux connexions HTTPS, sans rejeu. Avant traitement, métier
+inchangé puis relance explicite ; après commit, pointeur/état/ETag/audit persistés
+ensemble sans renvoi. Le delete est observé après sa tentative de nettoyage,
+sans prétendre une interruption avant effacement physique.
+
+Seize appels réussis retrouvent les handlers A/B, configuration, secret par
+empreinte et compteurs données/cache1–16 après les reprises. Les réimports B
+gardent hash et date initiale ; les premiers marqueurs restent immuables.
+Une perte SIGKILL de l'observateur éprouve la garde indépendante sans mutation.
+Les sept gardes et helpers sont terminés ; les six arrêts ont leurs reçus root.
+Une fonction est purgée publiquement, volumes/artefacts et ressources actives
+absents. Les deux bootstraps arrêtés avant garde restent archivés avec leurs
+purges physiques, zéro groupe ajouté. Aucun produit/UI/manuel ni configuration
+modifié ; la lecture sous-propriétaire recoupe les31 backends et le web.
+SLS-074 reste[~] pour les autres interruptions et la régression complète008.
+
+La collecte indépendante recoupe reçus d'arrêt/restitution, identités/naissances,
+fin des sept timers/services, seize invocations SQLite et purge physique. Le
+contrôle garde e661516b/def45648 avec démarrage final 2026-11-09T20:51:15.542532163Z ; la référence
+n'a pas redémarré. Les époques sources et les six audits initiaux attendus sont
+explicites. Aucune nouvelle qualification visuelle ; aucun registre d'incohérences
+présent ou arbitrage requis. Aucun remote Git configuré.
+
+
+La relecture finale en lecture seule confirme le livrable sans défaut bloquant :
+preuve SHA256 e47f5b1cc3b506748b2a94558ebe59bb7565ce7d6d835cc682babe18d022cbe5,
+neuf groupes, seize invocations, sept gardes et six arrêts natifs9/Docker137.
+Après synchronisation,290 sources correspondent au SPARK ; seuls deux documents
+de résultat diffèrent de l'époque qualifiée, aucun exécutable. Contrôles statiques
+Python/Node, JSON, champs sensibles et diff valides, distincts des groupes E2E.
+Les deux essais de bootstrap et leurs nettoyages restent exclus du total retenu.

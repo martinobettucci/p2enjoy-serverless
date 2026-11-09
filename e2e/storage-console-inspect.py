@@ -14,6 +14,8 @@
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md#preuves-et-limites
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_DUPLICATE_RECOVERY.md#preuves-et-limites
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_DUPLICATE_RECOVERY.md#preuves-et-limites
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_STATE_TRANSPORT.md#livraison-et-limites
+# @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_STATE_TRANSPORT.md#livraison-et-limites
 """Read-only physical recoup of completed, API-created storage console campaigns.
 
 Run as root on the DEV SPARK with one JSON argument mapping namespace UUIDs
@@ -68,7 +70,7 @@ with read_control(state / 'control.sqlite3') as db:
         row = db.execute('SELECT name,deleted_at FROM namespaces WHERE id=?', (namespace,)).fetchone()
         # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_ROUTE_CYCLES.md#responsabilités-et-nettoyage
         # @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_ROUTE_CYCLES.md#responsabilités-et-nettoyage
-        assert row and row['deleted_at'] is not None and re.fullmatch(r'(?:(storage-console-api|storage-ui|storage-recovery|storage-validation|service-configuration|service-transport|invocation-url-transport|invocation-addresses(?:-ui)?|invocation-route-cycles|invocation-route-pause|source-access|invocation-pagination-(?:ui|cli)|validator-names|function-versions|version-cli|version-upload-capacity|version-duplicate-recovery)-[0-9a-f]{8}|function-catalogue-(?:api|ui)-[0-9a-f]{8}(?:-[a-z0-9_-]{1,32})?)', row['name']), 'owned_campaign_required'
+        assert row and row['deleted_at'] is not None and re.fullmatch(r'(?:(storage-console-api|storage-ui|storage-recovery|storage-validation|service-configuration|service-transport|invocation-url-transport|invocation-addresses(?:-ui)?|invocation-route-cycles|invocation-route-pause|source-access|invocation-pagination-(?:ui|cli)|validator-names|function-versions|version-cli|version-upload-capacity|version-duplicate-recovery|version-state-transport)-[0-9a-f]{8}|function-catalogue-(?:api|ui)-[0-9a-f]{8}(?:-[a-z0-9_-]{1,32})?)', row['name']), 'owned_campaign_required'
         actual = {r[0] for r in db.execute('SELECT f.id FROM functions f JOIN services s ON s.id=f.service_id WHERE s.namespace_id=?', (namespace,))}
         assert actual == set(functions), 'campaign_inventory_mismatch'
         assert not db.execute('SELECT 1 FROM services WHERE namespace_id=? AND deleted_at IS NULL', (namespace,)).fetchone(), 'live_campaign_service'

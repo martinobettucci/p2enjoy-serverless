@@ -3,8 +3,8 @@
 Complément de [SLS-074](BACKLOG.md#sls-074), de
 [FUNCTION_VERSION_EXECUTION](FUNCTION_VERSION_EXECUTION.md#promotion-et-droits)
 et du [précédent de transport réel](SERVICE_CONFIGURATION_URLS.md#preuve-de-transport).
-Statut : spécifié, pas encore qualifié. Aucun changement produit prévu avant
-les résultats du banc.
+Statut : banc implémenté et qualifié en DEV par les neuf groupes ci-dessous.
+Aucun changement produit révélé par cette unité.
 
 ## Décision et frontières
 
@@ -118,3 +118,40 @@ Create interrompues, autres fenêtres de publication et la régression complète
 restent dans SLS-074. Aucun nouveau parcours UI, manuel, migration ou build
 produit n'est prévu pour cette unité. Toute correction produit révélée est
 spécifiée et reproduite avant changement, puis qualifiée séparément.
+
+
+## Résultats retenus
+
+Les [réponses perdues des décisions de version](evidence/function-version-state-transport-dev-2026-11-09.json) passent9 groupes
+sur290 sources figées : promotion par la vraie CLI, archivage et suppression
+avec remplacement, chacun avant traitement puis après décision avant réponse.
+Les six SIGKILL sont constatés nativement et par Docker137 ; même conteneur/image
+redémarrés, référence et fichiers officiels conservés. La CLI retourne unknown
+avec exactement deux connexions HTTPS, sans rejeu. Avant traitement, métier
+inchangé puis relance explicite ; après commit, pointeur/état/ETag/audit persistés
+ensemble sans renvoi. Le delete est observé après sa tentative de nettoyage,
+sans prétendre une interruption avant effacement physique.
+
+Seize appels réussis retrouvent les handlers A/B, configuration, secret par
+empreinte et compteurs données/cache1–16 après les reprises. Les réimports B
+gardent hash et date initiale ; les premiers marqueurs restent immuables.
+Une perte SIGKILL de l'observateur éprouve la garde indépendante sans mutation.
+Les sept gardes et helpers sont terminés ; les six arrêts ont leurs reçus root.
+Une fonction est purgée publiquement, volumes/artefacts et ressources actives
+absents. Les deux bootstraps arrêtés avant garde restent archivés avec leurs
+purges physiques, zéro groupe ajouté. Aucun produit/UI/manuel ni configuration
+modifié ; la lecture sous-propriétaire recoupe les31 backends et le web.
+SLS-074 reste[~] pour les autres interruptions et la régression complète008.
+
+Les six refus initiaux sont403/428 et ajoutent exactement six request.denied :
+leurs statuts et modèles de route internes sont comparés par SHA, toutes les
+anciennes entrées et autres données métier conservées. Les deux premiers essais
+s'étaient arrêtés sur cet attendu du banc : égalité globale des audits, puis
+préfixe public /api ajouté à tort au modèle interne. Les snapshots, sources et
+nettoyages sont conservés séparément. Aucun défaut produit n'est attribué à ces
+écarts. Les corrections de garde/verrou/diagnostics précèdent la campagne.
+
+Le démarrage final du contrôle est 2026-11-09T20:51:15.542532163Z. Les branches de timeout du client
+Docker, de secours SSH et de nettoyage en erreur restent non provoquées ; les
+revues statiques n'en constituent pas une preuve E2E. Le cas indépendant nominal
+n'éprouve pas une panne propre de son restaurateur.

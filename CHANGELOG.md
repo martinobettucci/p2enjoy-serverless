@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Décisions de version sous perte réelle de réponse qualifiées :9 groupes,
+  six coupures natives promotion CLI/archivage/suppression, garde indépendante,
+  16 appels persistants et sept gardes terminées. Métier/audit atomiques,
+  CLI unknown sans rejeu, dates des réimports conservées ; une fonction purgée.
+  Deux bootstraps interrompus et purgés restent distincts. Même image produit.
+  [Preuve](docs/evidence/function-version-state-transport-dev-2026-11-09.json).
+
 - Première identité de code inconnue puis version connue qualifiée :17 groupes
   réels006→007→008, témoin API et variante de données préparée déclarés distincts.
   Marqueurs, droits, B stable/C pilote et23 appels recoupés ; deux purges publiques
