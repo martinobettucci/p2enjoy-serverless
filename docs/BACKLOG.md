@@ -731,6 +731,9 @@ autorité d’état par hash, première promotion durable, déduplication avec n
 admission/pools et raccordements CLI/UI livrés ensemble. Les nouveaux critères
 incluent le droit Create après désactivation, les handlers A/B et le cas
 minimum=maximum=1 ; les exigences existantes ne sont pas réduites.
+La revue statique du pipeline a révélé le passage possible d’un validateur
+déjà en attente après un nettoyage incomplet ; le verrou est corrigé, et la
+preuve réelle de ce refus rejoint les critères de FUNCTION_VERSION_EXECUTION.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

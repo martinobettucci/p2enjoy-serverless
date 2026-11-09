@@ -288,3 +288,26 @@ réponse, les droits, le nettoyage et le presse-papiers exact restent des preuve
 d’assertions ; les images pleines pages prolongent leur viewport. Aucun défaut
 visuel bloquant confirmé. Promotion, déduplication et appels par hash restent
 planifiés dans la suite de SLS-074.
+
+## Publication et sélection par hash en préparation
+
+La prochaine image suit [FUNCTION_VERSION_EXECUTION](FUNCTION_VERSION_EXECUTION.md).
+Les cartes sont groupées par hash, paginées par cinq côté serveur, avec cible par
+défaut, disponibilité et date initiale. Les UUID d’alias restent dans les
+métadonnées. Les commandes nomment leur version et leur fonction. Promotion et
+archivage/suppression se confirment dans le flux ; restauration simple suit
+le §6.24. Une promotion emploie le bouton primaire, la suppression le destructif.
+
+Retirer la cible courante ouvre un dialog limité à son remplacement : hash
+disponible à saisir ou désactivation explicite, puis confirmation. Réimporter
+une version supprimée ouvre le dialog ZIP/handler associé au hash et aux
+événements conservés. Les refus conservent saisie et confirmation ; les cartes
+stables ne sont pas remontées à chaque lecture, mais le retour de copie l’est.
+
+Chaque carte disponible mène à ses adresses versionnées, avec sélection dans
+la query partageable. La facette nomme hash sélectionné et cible courante ; un
+lien explicite retrouve la cible par défaut. Les sélections invalides donnent
+leur refus, y compris après redirection canonique depuis un alias de domaine.
+Instances et invocations montrent hash demandé/résolu et alias technique réel.
+Ces changements sont préparés dans le dépôt ; le checkpoint007 reste déployé
+jusqu’à la bascule et sa qualification réelle.

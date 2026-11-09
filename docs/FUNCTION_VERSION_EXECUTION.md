@@ -214,6 +214,14 @@ Le résultat indique code_changed, hash préparé et cible observée, sans prés
 publié comme promu. Le catalogue après upload est demandé pour le hash retenu ;
 une panne facultative de ce catalogue ne rejoue pas la publication réussie.
 
+La console groupe et pagine côté serveur cinq versions par hash. La carte
+disponible mène aux adresses avec `?version=HASH`. Le retour à la cible par défaut
+est un geste explicite ; une redirection canonique conserve aussi une sélection
+invalide sous une forme refusée, sans l’effacer au profit du défaut. Un retrait
+de cible recueille remplacement ou désactivation dans un dialog puis confirme.
+La restauration d’une archive conservée est directe et auditée ; la réimportation
+recueille un vrai ZIP lié au hash et à son descripteur conservé.
+
 La facette de code présente des versions par hash, cible par défaut, état et dates.
 Elle permet publication puis promotion séparées, archive/restore/delete et
 réimportation explicite ; les confirmations nomment fonction et hash. Les UUID
@@ -233,6 +241,8 @@ Conserver les critères de FUNCTION_VERSIONS et ajouter les cas discriminants :
   sur réupload identique ; recompression et renommage sans nouvelle version ;
 - doublon disponible au plafond, nouveau hash refusé, convergence réelle et
   responsabilité du paquet réutilisé sous EACCES/SIGKILL avec reprise des octets ;
+- validation dont le conteneur ne peut être retiré avec un second upload déjà
+  admis : aucun autre validateur ne démarre avant réconciliation confirmée ;
 - Read/CRUD, portées, révocation, origine/IP, préflight, hash mal formé/inconnu/
   archivé/supprimé : aucun code de repli ni fuite avant autorisation ;
 - état archivé pendant attente, suppression pendant appel vivant, fin et nettoyage,
