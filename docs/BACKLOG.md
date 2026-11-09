@@ -708,6 +708,11 @@ normale, droits, redémarrage, coût de collecte mesuré et inspection des graph
 
 Statut : [~] — composant d’identité canonique qualifié ; déduplication et invocation par tag absentes.
 
+Checkpoint en préparation : [registre persistant](FUNCTION_VERSION_REGISTRY.md),
+migration additive des identités, conservation des alias et lecture/copie du hash.
+Les uploads continuent actuellement à activer leur révision ; la déduplication
+et la promotion séparée constituent la suite de cette même unité.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;

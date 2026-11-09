@@ -22,6 +22,10 @@ SLS-074 conserve tous ses critères, dans quatre étapes dépendantes :
 Le premier checkpoint ne change ni l’API en service ni son pointeur actif et ne
 livre pas encore les appels par hash. Son calculateur est une brique commune du
 pipeline, pas un serveur parallèle. Les étapes suivantes restent nécessaires.
+Le premier checkpoint de l’étape 2 est le [registre additif](FUNCTION_VERSION_REGISTRY.md) :
+backfill transactionnel, alias historiques conservés, lecture groupée et hash
+copiable. Il précède la déduplication et la promotion distincte, qui restent
+obligatoires dans cette même étape.
 L’étape 1 est [qualifiée](evidence/function-code-hash-dev-2026-11-09.json) :
 sept groupes ciblés et 45 de régression, neuf invocations Docker et 222 sources.
 Les sept groupes sont rejoués après nommage explicite des clients ; les 45

@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 2026-11-09 — Reprise additive des identités historiques
+
+L’étape 1 de SLS-074 est qualifiée. La revue du flux montre que les UUID de
+révision sont référencés par candidats, invocations et instances : une fusion
+des doublons historiques détruirait ces liens. Décision persistée avant code :
+ajouter le hash canonique immuable, conserver les alias et le pointeur actif,
+exposer le groupement Read et la copie du hash. Le
+[contrat de registre](FUNCTION_VERSION_REGISTRY.md) fixe migration, permissions,
+preuve avant/après et sauvegarde. Les tombstones déjà purgés sans inventaire
+restent sans hash ; aucune identité n’est inventée. Ce checkpoint prépare la
+déduplication/promotion explicite, sans les déclarer livrées ni les abandonner.
+La suite reste celle des quatre étapes de FUNCTION_VERSIONS. Aucun remote Git
+n’est configuré ; les commits de cette décision restent locaux.
+
 ## 2026-11-09 — Démarrage de SLS-074
 
 Les compléments EACCES API/UI sont committés et qualifiés. Sans autorité pour
