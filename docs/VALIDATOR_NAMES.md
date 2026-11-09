@@ -66,6 +66,11 @@ est incertain mais la nouvelle image est déjà présente, la reprise attend la
 santé de ce même ID ; elle ne le recrée pas. Montages, réseau, limites,
 commande et empreinte d’environnement effectif sont comparés avant/après.
 L’environnement lui-même n’est jamais imprimé ni conservé dans la preuve.
+Le client choisit et persiste l’identifiant unique de garde avant l’appel
+d’interruption. Une perte de stdout ne peut donc pas effacer son identité ;
+une remise en service non confirmée bloque le nettoyage et conserve la fixture.
+Un timer déjà collecté n’est reconnu absent qu’après LoadState=not-found et
+ActiveState=inactive natifs ; un code non nul seul ne suffit pas.
 
 Les réponses d’upload interrompues restent des issues de transport, corrélées
 ensuite au candidat durable. Un échec conserve ses reçus et déclenche le suivi
