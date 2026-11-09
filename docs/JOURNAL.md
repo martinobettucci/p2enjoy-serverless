@@ -1,5 +1,23 @@
 # Journal de cadrage
 
+## 2026-11-09 — Décision : éprouver la garde de validation sous deux fautes physiques
+
+L’exploration confirme le précédent065 : refus errno13 du socket Docker avec
+garde indépendante. Il prouve container_removed=false mais rend l’absence de
+second create insuffisante, puisque Docker est inaccessible au contrôle. Le
+refus précis de B après verrou, request_rejected et validation NULL distinguent
+la garde d’un appel qui échouerait génériquement dans docker.image.
+
+Le complément retenu ajoute le retrait de permission du seul canal de A : Docker
+reste disponible, A retire son conteneur puis son rmtree échoue. Le journal
+Docker doit ne montrer aucun create de B. Cette exception n’est pas présentée
+comme un résultat container_removed=false. Les deux fautes exigent A/B déjà
+validating et un marqueur réel d’import, et gardent le service au repos hors
+fonction de campagne. Le socket est restitué explicitement, le canal par garde
+indépendante après SIGKILL du helper. La maintenance reprend normalement ; une
+nouvelle publication/invocation puis un doublon éprouvent sa réouverture.
+Les quatre groupes et leur préparation stable sont spécifiés avant le code.
+
 ## 2026-11-09 — CLI authentifiée qualifiée dans ses deux images DEV
 
 Les cinq mêmes groupes passent successivement dans les images77a3c302 et

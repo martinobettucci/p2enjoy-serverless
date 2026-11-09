@@ -281,6 +281,9 @@ valeurs privées envoyées ; les rapports ne gardent que les preuves expurgées.
 
 ## Preuves réelles
 
+La [preuve de nettoyage avec attente](FUNCTION_VERSION_VALIDATION_RECOVERY.md)
+précise les deux fautes physiques et le discriminant de la garde avant validation.
+
 Conserver les critères de FUNCTION_VERSIONS et ajouter les cas discriminants :
 
 - premier upload A avec Create, appel sans tag refusé, appel A par hash réussi ;

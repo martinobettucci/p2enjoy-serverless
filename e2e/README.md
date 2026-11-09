@@ -54,6 +54,17 @@ avec zéro groupe réussi et ses parents nettoyés. Compose DEV lit les valeurs
 citées des fichiers officiels ; aucun fichier de cellule n’est modifié. Les
 pannes propres du helper et ses délais restent non qualifiés par ces scénarios.
 
+### Nettoyage de validation avec un upload en attente — préparation
+
+`node e2e/function-version-validation.mjs` vise quatre groupes réels : défaut
+socket et reprise, défaut du canal isolé et reprise après SIGKILL du helper.
+Il utilise la session SSO et SSH root du seul SPARK DEV, exige sa quiescence et
+arme une garde indépendante avant chaque changement de permission. Contrat :
+[FUNCTION_VERSION_VALIDATION_RECOVERY](../docs/FUNCTION_VERSION_VALIDATION_RECOVERY.md).
+Le second upload doit déjà être admis ; son refus503 précis et les événements
+Docker évitent une preuve vide. Le scénario reste à exécuter et ne qualifie pas
+encore ces comportements. La préparation stable est distincte des quatre groupes.
+
 ## Pause et reprise d’une requête réelle
 
 `node e2e/invocation-request-pause.mjs` publie sa fixture originale dans le SPARK

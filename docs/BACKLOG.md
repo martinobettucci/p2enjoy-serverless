@@ -765,6 +765,12 @@ changer la cellule. Le rapport incomplet reste séparé. Les dix exécutions
 complètent cinq comportements dans deux images et ne sont pas revendiquées
 comme dix comportements nouveaux. Les pannes du helper, ses délais indépendants,
 les fautes de publication/migration et la suite complète restent nécessaires.
+La prochaine campagne suit [FUNCTION_VERSION_VALIDATION_RECOVERY](FUNCTION_VERSION_VALIDATION_RECOVERY.md) :
+A/B réellement admis, nettoyage du conteneur refusé par le socket puis erreur
+locale de nettoyage du canal avec Docker accessible. B doit recevoir le503
+spécifique avant validation, request_rejected et aucun diagnostic de validation.
+Les événements Docker bornés, troisième refus avant admission, garde indépendante
+sous SIGKILL et reprise normale sans redémarrage complètent les quatre groupes.
 La revue statique du pipeline a révélé le passage possible d’un validateur
 déjà en attente après un nettoyage incomplet ; le verrou est corrigé, et la
 preuve réelle de ce refus rejoint les critères de FUNCTION_VERSION_EXECUTION.
