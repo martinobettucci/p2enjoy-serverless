@@ -227,8 +227,8 @@ vérifiée par les assertions du parcours. Les vues après perte de réponse
 montrent l’état relu ; elles ne prouvent pas seules la perte ou l’absence de
 rejeu. Les vues sans session peuvent conserver la structure déjà chargée.
 Le catalogue de stockage affiche aussi des archives historiques ; son total
-ne représente pas les seules fonctions du replay. Les limites de routes,
-source inaccessible et pagination du catalogue d’adresses restent ouvertes.
+ne représente pas les seules fonctions du replay. Les limites de routes, source refusée et pagination du catalogue d’adresses
+sont traitées par leurs compléments distincts ; les autres fautes restent ouvertes.
 
 ## Catalogue global SLS-067 qualifié
 
@@ -328,3 +328,24 @@ Le hash demandé d’une réimportation reste lisible dans son suivi, même en �
 Après refus, la commande de correction reçoit le focus une fois redevenue
 disponible. Une désactivation temporaire ne laisse pas le clavier sur le body ;
 la confirmation dans le flux attend aussi la levée du fieldset désactivé.
+
+
+## Deux pages réelles des domaines — qualification008
+
+La [preuve six domaines](evidence/invocation-pagination-dev-2026-11-09.json)
+recoupe trois groupes UI depuis l’accueil : formulaires, vraie publication puis
+promotion explicite, cinq domaines et le sixième sur la seconde page. Les copies
+natives sont invoquées, la sélection par hash reste présente sur les deux pages
+mobiles et le focus revient au titre après navigation clavier. Les deux boutons
+restent présents, désactivés à leurs extrémités.
+
+Les sept JPEG sont inspectés personnellement : première/seconde page desktop,
+pagination dans son viewport1440×1000, première/seconde page mobile390px et deux
+viewports390×844. Ces deux derniers fichiers sont identiques par SHA. Les noms,
+hash et URL complets reviennent à la ligne sans élargir la page ; les pleines
+pages prolongent leur viewport et les listes demandent un défilement vertical.
+La première page mobile mesure3733px de haut ; elle n’est pas présentée comme
+simultanément visible. Aucun défaut visuel bloquant constaté. Les images ne
+prouvent pas seules les copies, appels, droits, pertes ou nettoyages : leurs
+assertions et reçus natifs restent dans la preuve. Les anciennes captures
+citées plus haut conservent leur périmètre historique.

@@ -130,6 +130,39 @@ normale. Un accès absent est une erreur de prérequis, jamais un test ignoré.
 
 ## Adresses d’appel SLS-066
 
+### Pagination réelle sur six domaines — campagne qualifiée
+
+Le [plan autorisé](../docs/INVOCATION_DOMAINS_PAGINATION.md) borne quatre alias
+temporaires à infra-serverless,18090TLS et quatre A exacts. L’opérateur
+`invocation-pagination-domains.py` utilise la console normale locale existante,
+sans administration système de Forge. Ses reçus privés conservent intentions
+et identités ; aucun appel de mutation n’est automatiquement répété.
+
+Le pilote `python3 -B e2e/invocation-pagination-suite.py --guard-prerequisites`
+éprouve d’abord release, échéance et perte du propriétaire, sans créer d’objets.
+Puis, séparément, `--campaign` exige le même gel de sources/images, crée les
+quatre alias, attend DNS natif et TLS réel, exécute UI puis CLI, recoupe les
+purges physiques et termine par la perte réelle du propriétaire et le retrait
+indépendant. L’exécution nécessite la console normale sur127.0.0.1:5175,
+SSH root du seul SPARK, Node/Playwright/Python et une session SSO admin fraîche.
+Les rapports existants doivent être conservés avant un nouvel essai.
+
+`invocation-pagination.mjs ui DOSSIER_GARDE` et `cli DOSSIER_GARDE` sont les
+clients internes, trois groupes chacun. Le CLI passe d’abord les deux pages,
+rejoue la frontière historique six avec révocation réelle, puis retire une
+route temporaire connue avant la septième connexion pour faire changer le
+catalogue. Le helper natif conserve sa frontière six par défaut. Les captures
+JPEG, logs et reçus vivent sous.local/e2e ; leurs assertions ne remplacent pas
+leur inspection visuelle. Le [replay qualifié](../docs/evidence/invocation-pagination-dev-2026-11-09.json)
+passe huit groupes (deux de cycle, trois UI, trois CLI) et trois prérequis de
+garde distincts, sur253 sources figées. Quatorze invocations Docker, sept JPEG
+inspectés, deux fonctions physiquement purgées et quatre routes/A retirés
+indépendamment après SIGKILL du propriétaire sont recoupés. Les deux captures
+viewport mobiles sont identiques par SHA. Le premier A créé puis retiré par le
+principal reste un essai arrêté sans groupe UI/CLI ; les deux époques de garde
+antérieures ne s’ajoutent pas au total. La transition d’état de zone après
+écriture est corrigée ; les pannes résiduelles du banc restent non qualifiées.
+
 `node e2e/invocation-route-cycles.mjs` exerce les seules deux routes autorisées
 depuis la console normale existante : cinq groupes réels passent, sept appels
 Docker des URL émises, quatre gardes terminées et une fonction purgée dans un
@@ -138,8 +171,8 @@ fixture, l’armement et la restauration. La
 [preuve](../docs/evidence/invocation-route-cycles-dev-2026-11-09.json) recoupe
 203 sources, le catalogue à deux/un/zéro domaines et le nouvel identifiant
 d’alias après retrait/rétablissement. Les ports finaux restent 18090 TLS.
-Le vide UI public est qualifié séparément ci-dessous ; les pages suivantes UI/CLI
-sur six domaines restent à éprouver.
+Le vide UI public et les pages UI/CLI sur six domaines sont qualifiés par leurs
+compléments distincts, décrits dans ce guide.
 
 `native_control_observer.py` porte la classe pure partagée avec le pilote
 historique `service-transport-observer.py`. Son corps est déplacé sans changement.
@@ -196,8 +229,8 @@ Le [checkpoint](../docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 réunit ces quatorze groupes, 36 régressions et 38 groupes dans les deux images
 CLI reconstruites, soit 88. Chaque commande est liée à ses sources et image. Il ne constitue
 pas une suite complète de plateforme ni une qualification multi-domaines.
-Les sources perturbées, six domaines
-réels pour une seconde page restent à éprouver. Les cycles de routes sont
+Les autres fautes de source restent à éprouver ; la seconde page UI/CLI réelle
+sur six domaines est qualifiée par son complément distinct ci-dessus. Les cycles de routes sont
 qualifiés séparément dans le complément à cinq groupes décrit ci-dessus.
 Aucun de ces manques n’est converti en test ignoré dans les campagnes exécutées.
 

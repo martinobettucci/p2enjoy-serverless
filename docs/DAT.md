@@ -437,3 +437,18 @@ limité à onze feuilles. La preuve réelle réunit sept groupes du composant et
 45 de régression, neuf appels Docker et 222 sources ; le contrôle reste le même.
 Les étapes de registre, déduplication, promotion explicite, sélection/pools et
 console restent définies dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md).
+
+
+## Pagination des domaines — complément ciblé008
+
+Le [plan autorisé](INVOCATION_DOMAINS_PAGINATION.md) fournit quatre routes/A
+temporaires réels via la console normale, puis leur retrait borné. Le produit
+ne change pas : le catalogue garde cinq domaines par page, la CLI vérifie
+SHA/total/révision entre ses deux GET et conserve le succès de publication si
+ce catalogue change. La [preuve](evidence/invocation-pagination-dev-2026-11-09.json)
+qualifie huit groupes de cycle/UI/CLI et trois prérequis distincts, 14 appels
+Docker, sept captures inspectées et deux purges physiques sur253 sources.
+Les quatre routes/A sont retirés indépendamment après perte réelle du
+propriétaire ; contrôle/référence, images, démarrages et configurations
+permanentes sont conservés. Les autres fautes et la régression complète008
+restent des unités de preuve distinctes.

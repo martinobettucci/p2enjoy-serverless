@@ -93,7 +93,7 @@ Le contrôle et la référence sont sains, l’agent actif, les réservations et
 allocations globales à zéro. Les archives historiques étrangères restent conservées.
 
 La preuve native du Host est acquise en boucle locale. Le couple de domaines TLS, son retrait d’alias et ses détours sont vérifiés ; restent
-seconde page sur six domaines et source perturbée.
+les autres fautes de source. Les pages sur six domaines sont qualifiées dans leur complément ci-dessous.
 Le GET CLI 401 après publication est qualifié séparément ci-dessous. Le build nominal CLI est
 qualifié ; sa branche d’expiration/perte SSH reste à éprouver. SLS-066 demeure
 ouverte. L’alias functions.lelabs.tech vers 18090 TLS est appliqué par la
@@ -177,7 +177,7 @@ et recoupées nativement. Sources de preuve :
 docs/evidence/invocation-domains-dev-2026-11-08.json. Ce complément ne clôture
 pas SLS-066. Les cinq cycles ultérieurs qualifient retrait, détours et API locale
 vide local ; le complément UI ci-dessous qualifie le parcours public vide.
-Source perturbée et pages UI/CLI sur six domaines restent ouvertes.
+Les pages UI/CLI sur six domaines sont qualifiées dans leur complément ; les autres fautes de source restent ouvertes.
 
 La première déclaration est conservée comme interrompue pendant une comparaison
 trop stricte de applied_at ; sa reprise en lecture seule vérifie les propriétés
@@ -216,10 +216,10 @@ Les deux routes sont rétablies à 18090 TLS ; la recréation renouvelle l’ide
 de l’alias. Preuve : docs/evidence/invocation-route-cycles-dev-2026-11-09.json.
 
 Aucun build, variable ou secret ajouté ; les deux fichiers officiels et les
-services sont inchangés. Le vide UI public est qualifié ci-dessous ; les fautes
-de source et la seconde
-page UI/CLI restent ouverts. Les quatre alias temporaires de pagination sont
-une proposition locale en attente d’autorisation, sans création DNS ni route.
+services sont inchangés. Le vide UI public et les pages UI/CLI sont qualifiés
+par leurs compléments distincts. Les quatre alias temporaires, expressément
+autorisés, ont été créés puis retirés après leur campagne. Les autres fautes de
+source restent ouvertes.
 Ces trois notes sont proposées individuellement, sans adoption revendiquée.
 
 
@@ -235,8 +235,9 @@ deux namespaces ; quatre helpers et quatre paires timer/service sont terminés.
 Contrôle non tracé, PID/démarrage/images et configuration officielle inchangés.
 Preuve : docs/evidence/invocation-request-pause-dev-2026-11-09.json.
 Aucune route, DNS, variable, secret ni build nouveau dans ce complément natif.
-Le parcours public vide est qualifié ci-dessous ; fautes propres du pilote, source
-et pagination UI/CLI restent ouverts.
+Le parcours public vide et la pagination UI/CLI sont qualifiés par leurs
+compléments distincts ; les fautes propres du pilote et les autres fautes de
+source restent ouvertes.
 Ces notes sont proposées, sans adoption revendiquée.
 
 
@@ -252,7 +253,8 @@ purgée dans son namespace ; helper natif, timer/service et garde de routes sont
 terminés. Contrôle non tracé et sans redémarrage, référence/configuration inchangées.
 Preuve : docs/evidence/invocation-empty-ui-dev-2026-11-09.json.
 Aucun domaine/DNS, variable, secret ni build nouveau. Les erreurs propres du
-client, les fautes de source et les pages sur six domaines restent à éprouver.
+client et les autres fautes de source restent à éprouver. Les pages sur six
+domaines sont qualifiées dans leur complément distinct.
 Ces notes sont proposées individuellement, sans adoption revendiquée.
 
 
@@ -267,8 +269,8 @@ six captures sont inspectées. Deux sessions/flows du replay sont fermés, plus
 les deux autres des essais arrêtés conservés séparément. Aucun cookie de reprise
 nominal, donnée métier, route, DNS, variable, secret ou build nouveau.
 Preuve : docs/evidence/invocation-alias-entry-dev-2026-11-09.json.
-Services et fichiers officiels inchangés ; fautes de source, six domaines et
-pannes propres du client restent ouverts. Ces notes sont proposées sans adoption.
+Services et fichiers officiels inchangés ; autres fautes de source et pannes
+propres du client restent ouvertes. Les six domaines ont leur preuve distincte. Ces notes sont proposées sans adoption.
 
 
 ## Garde des permissions du relevé — trois groupes
@@ -307,8 +309,8 @@ JPEG frais. Après restitution explicite, une URL copiée invoque Docker.
 Une invocation, une fonction purgée et garde finie recoupées nativement ;
 parents supprimés, mode 0640 et source/configurations/services inchangés.
 Preuve : docs/evidence/invocation-source-ui-dev-2026-11-09.json.
-Aucune variable/secret, route/DNS ou build ajouté. Autres fautes/six domaines
-restent ouverts. Notes proposées individuellement sans adoption annoncée.
+Aucune variable/secret, route/DNS ou build ajouté dans ce complément. Les
+autres fautes restent ouvertes ; les six domaines ont leur preuve distincte. Notes proposées individuellement sans adoption annoncée.
 
 
 ## Identité canonique du paquet — composant qualifié
@@ -428,3 +430,25 @@ officiels restent inchangés. Aucun build, variable, secret ou route nouveau.
 Les arrêts de prérequis et du premier client restent distincts. Autres pannes
 et régression complète restent ouvertes ; les trois notes sont proposées,
 sans adoption revendiquée.
+
+
+## Pagination réelle sur six domaines — complément qualifié
+
+Le responsable autorise quatre alias temporaires functions-pagination-1 à4,
+18090TLS, et leurs A exacts, puis leur retrait. La preuve
+docs/evidence/invocation-pagination-dev-2026-11-09.json passe huit groupes de
+cycle/UI/CLI, trois prérequis de garde distincts,14 invocations et sept JPEG
+inspectés sur253 sources figées. La console montre cinq domaines puis un,
+conserve le hash mobile et invoque les copies natives. La CLI parcourt ses
+deux pages ; publication conservée après vrai401 ou changement réel entre
+pages, sans adresses partielles ni rejeu.
+
+Deux fonctions sont physiquement purgées, avec volumes/artefacts/canaux et
+conteneurs/réseaux absents. Après SIGKILL réel du propriétaire, la garde retire
+indépendamment les quatre routes et quatre A ; deux domaines permanents, DNS
+et HTTPS restent inchangés. Contrôle/référence, démarrages, images,31 fichiers
+backend et deux fichiers officiels de configuration sont conservés. Aucune
+variable, secret ou construction d’image ajouté. L’essai DNS interrompu et
+son retrait explicite restent distincts ; état de zone en transition corrigé
+dans le banc. Les autres fautes maintiennent SLS-066 ouverte.
+Ces trois notes sont proposées individuellement, sans adoption revendiquée.

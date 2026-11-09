@@ -4335,3 +4335,27 @@ Markdown, mêmes sources produit et images. Le checkpoint vert antérieur n’es
 pas ajouté au total. La collecte recoupe dix-neuf conteneurs runtime (neuf
 nouveaux, neuf intermédiaires, un partiel), les 37 clients nommés et leurs
 canaux absents ; douze fonctions/volumes et 33 archives gardent leur état vérifié.
+
+
+## 2026-11-09 — Pagination réelle six domaines qualifiée
+
+Le gel final253 sources passe les trois prérequis sans objets, puis huit groupes
+de cycle/UI/CLI sur les mêmes images. Quatre alias18090TLS et leurs A exacts sont
+créés par la console normale ; DNS natif/certificats sont vérifiés. UI5+1 depuis
+l’accueil, promotion008, copies/appels, clavier et hash mobile passent. CLI7/6/7
+connexions natives : deux pages, défaut6 sans argument avec vrai401, puis retrait
+d’une route entre pages donnant invocation_catalogue_changed sans perdre le
+succès de publication. Aucun syscall/résultat/réponse substitué, aucun rejeu.
+
+Quatorze invocations et deux purges physiques sont recoupées, volumes, canaux,
+artefacts, conteneurs/réseaux absents et ressources globales à zéro. SIGKILL réel
+du propriétaire, puis garde indépendante sans requête explicite : quatre routes
+et quatre A retirés,16 réponses de mutation connues, deux domaines permanents
+et leurs DNS/HTTPS conservés. Contrôle/référence, démarrages/images,31 fichiers
+backend et deux fichiers de configuration officiels restent identiques. Sept
+JPEG inspectés individuellement, dont deux viewports mobiles identiques par SHA ;
+aucun défaut visuel bloquant observé. L’essai A1 interrompu et deux anciennes
+époques de prérequis restent distincts, sans groupes ajoutés au total retenu.
+Les revues ciblées sont sans défaut bloquant après corrections. Aucun registre
+d’incohérence nouveau ; SLS-066 reste en cours pour ses fautes résiduelles.
+Preuve : evidence/invocation-pagination-dev-2026-11-09.json. Aucun remote Git.

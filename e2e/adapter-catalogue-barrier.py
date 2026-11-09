@@ -1,6 +1,8 @@
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#révocation-avant-le-get-facultatif
 # @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#révocation-avant-le-get-facultatif
-"""Pause the real adapter before its sixth HTTPS connect; never rewrite a syscall.
+# @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_DOMAINS_PAGINATION.md#cycle-borné-et-preuves-retenues
+# @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_DOMAINS_PAGINATION.md#cycle-borné-et-preuves-retenues
+"""Pause the real adapter before its sixth or seventh HTTPS connect.
 
 All helpers share this contract. Native ABI: Linux x86_64 ptrace(2),
 https://man7.org/linux/man-pages/man2/ptrace.2.html.
@@ -23,7 +25,10 @@ def emit(value):
 
 def main():
     assert platform.system() == 'Linux' and platform.machine() == 'x86_64', 'linux_x86_64_required'
-    manifest, service = sys.argv[1:]
+    assert len(sys.argv) in (3, 4), 'manifest_service_and_optional_boundary_required'
+    manifest, service = sys.argv[1:3]
+    boundary = int(sys.argv[3]) if len(sys.argv) == 4 else 6
+    assert boundary in (6, 7), 'authorized_boundary_required'
     assert str(UUID(service)) == service and Path(manifest).is_file()
     assert os.environ.get('P2_SERVERLESS_URL') == 'https://serverless.lelabs.tech'
     credential = os.environ.get('P2_SERVERLESS_TOKEN', '')
@@ -62,7 +67,7 @@ def main():
         os.set_blocking(fd, False)
     reaped, armed, gated, pending = False, False, False, False
     attempts, exits = 0, []
-    deadline = time.monotonic() + 180
+    deadline = time.monotonic() + (240 if boundary == 7 else 180)
 
     def drain():
         for fd in list(open_pipes):
@@ -113,13 +118,13 @@ def main():
                             os.close(fd)
                         if int.from_bytes(address[:2], 'little') in (2, 10) and int.from_bytes(address[2:4], 'big') == 443:
                             attempts += 1; pending = True
-                            assert attempts <= 6, 'unexpected_extra_https_attempt'
-                            if attempts == 6:
-                                assert len(exits) == 5 and all(value in (0, -115) for value in exits), 'five_prior_connects_required'
+                            assert attempts <= boundary, 'unexpected_extra_https_attempt'
+                            if attempts == boundary:
+                                assert len(exits) == boundary - 1 and all(value in (0, -115) for value in exits), 'prior_connects_required'
                                 gated = True
-                                emit({'event': 'gated', 'boundary': 'before-sixth-https-connect',
+                                emit({'event': 'gated', 'boundary': 'before-sixth-https-connect' if boundary == 6 else 'before-seventh-https-connect',
                                       'child_pid': pid, 'https_connect_attempts': attempts, 'prior_connect_results': exits})
-                                release_end = min(deadline, time.monotonic() + 20)
+                                release_end = min(deadline, time.monotonic() + (90 if boundary == 7 else 20))
                                 release = bytearray()
                                 while not release.endswith(b'\n'):
                                     remaining = release_end - time.monotonic()
@@ -140,7 +145,7 @@ def main():
         stdout = pipes[stdout_read].decode('utf-8', errors='strict')
         stderr = pipes[stderr_read].decode('utf-8', errors='strict')
         assert credential not in stdout and credential not in stderr, 'adapter_credential_exposure'
-        assert gated and attempts == len(exits) == 6 and all(value in (0, -115) for value in exits)
+        assert gated and attempts == len(exits) == boundary and all(value in (0, -115) for value in exits)
         emit({'event': 'finished', 'exit_code': code, 'stdout': stdout, 'stderr': stderr,
               'https_connect_attempts': attempts, 'connect_results': exits, 'child_reaped': True})
     finally:

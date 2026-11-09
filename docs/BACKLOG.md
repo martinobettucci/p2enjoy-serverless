@@ -454,7 +454,8 @@ restitué. Fonction purgée et garde terminée recoupées nativement. Le
 groupes sur 212 sources : création/publication depuis l’accueil, refus rendu
 desktop/mobile sans anciennes adresses/copies/succès, restitution et invocation
 de l’URL copiée. Une fonction purgée et garde terminée recoupées nativement.
-Les autres fautes de source et les pages UI/CLI sur six domaines restent ouvertes.
+Les pages UI/CLI sur six domaines sont qualifiées par le complément ci-dessous ;
+les autres fautes de source restent ouvertes.
 
 Découvrir les routes effectivement affectées à la passerelle dans le SPARK,
 calculer les adresses par fonction et événement HTTP, les afficher et les
@@ -519,30 +520,20 @@ Pour les pages UI/CLI de cinq domaines, le responsable autorise explicitement
 le9 novembre2026 les quatre alias temporaires functions-pagination-1 à
 functions-pagination-4.lelabs.tech sur le seul infra-serverless :18090TLS,
 A exacts vers51.158.54.202 TTL300, puis retrait de ces seuls objets créés.
-Le [plan autorisé](INVOCATION_DOMAINS_PAGINATION.md) et CLAUDE_PROJECT portent
-ce périmètre. Une nouvelle vérification de disponibilité précède toute création ;
-identifiants/valeurs sont conservés pour un nettoyage qui refuse une propriété
-changée. Aucun alias ni DNS supplémentaire n’est déjà revendiqué appliqué.
-Le refus automatique d’écriture de proposition précédait cette extension ; il
-reste historique. L’attente d’autorisation est levée, les preuves six domaines
-restent à produire avec les comportements courants de version/promotion008.
-Le [nouveau précontrôle](evidence/invocation-pagination-authorized-preflight-dev-2026-11-09.json)
-confirme quatre noms libres et22 entrées DNS, sans mutation. L’opération normale
-de retrait DNS existe et impose de retirer la route auparavant. Les clients et
-la garde de nettoyage restent à préparer avant création et qualification.
-Le [cycle borné](INVOCATION_DOMAINS_PAGINATION.md#cycle-borné-et-preuves-retenues)
-fixe avant code les trois prérequis de garde sans objets, les identités de
-création, le retrait indépendant final après perte réelle du propriétaire et
-les parcours UI5+1/CLI2pages. Le changement de catalogue CLI retire une route
-temporaire connue avant le septième connect réel ; aucune réponse substituée.
-Ces preuves sont en préparation, sans création des quatre alias à ce stade.
-Un premier essai a ensuite créé le seul A1 puis s’est arrêté avant toute route
-ou groupe UI/CLI ; son retrait explicite est confirmé. Le relevé exigeait à
-tort une zone active immédiatement après écriture. Le
-[contrat corrigé](INVOCATION_DOMAINS_PAGINATION.md#relevé-dns-après-écriture)
-sépare cet état transitoire de l’identité des objets. Les trois prérequis de
-garde passés sur253 sources restent dans leur première époque ; ils seront
-rejoués après correction avant de créer à nouveau les quatre alias.
+Le [plan appliqué](INVOCATION_DOMAINS_PAGINATION.md) et CLAUDE_PROJECT portent
+ce périmètre. La [preuve six domaines](evidence/invocation-pagination-dev-2026-11-09.json)
+passe huit groupes : deux de cycle, trois UI et trois CLI ; trois prérequis
+sans objets restent distincts. Les253 sources et images sont figées, les14
+invocations et deux purges physiques recoupées, les sept captures inspectées.
+Les quatre routes/A sont retirés indépendamment après SIGKILL réel du
+propriétaire ; les deux configurations permanentes et leurs HTTPS restent
+identiques. La CLI parcourt deux pages et conserve son succès après vrai401
+ou changement réel entre pages, sans adresses partielles ni rejeu.
+Le premier essai A1 s’arrête avant toute route/UI/CLI ; le principal retire ce
+seul A et confirme l’absence des objets temporaires. Le relevé de transition
+DNS est corrigé, sans relâcher les identités. Cet essai et les deux époques
+antérieures de garde restent exclus du total. Les branches de perte de réponse,
+verrou suspendu et panne durable de console ne sont pas déclarées qualifiées.
 Pendant l’attente antérieure, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
 sont préparées sur la requête canonique, sans changer de route. L’extraction de
 NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,
@@ -589,7 +580,8 @@ canonique ; sa correction et la preuve native du Host sont définies dans
 INVOCATION_URLS. Le client de panne corrigé passe 55 groupes ; les huit groupes API
 passent avec le vrai Host en boucle locale, puis dans la suite complète.
 Les compléments qualifient les routes publiques, leur état vide UI et l’entrée
-SSO depuis l’alias. Restent les fautes de source, les six domaines et la branche
+SSO depuis l’alias. Les six domaines ont leur preuve distincte ci-dessus.
+Restent les autres fautes de source et la branche
 d’expiration/perte SSH du build borné, dont seul le parcours nominal est qualifié.
 
 Le [complément de transport](evidence/invocation-url-transport-dev-2026-11-08.json)

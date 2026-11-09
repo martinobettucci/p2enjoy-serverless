@@ -1,7 +1,10 @@
 # Quatre alias temporaires pour la pagination réelle
 
 Plan opératoire de SLS-066, autorisé explicitement par le responsable le9
-novembre2026 et non encore appliqué. L’extension porte exactement sur les quatre
+novembre2026, appliqué puis retiré après qualification. Le
+[replay](evidence/invocation-pagination-dev-2026-11-09.json) passe huit groupes
+de cycle/UI/CLI et trois prérequis distincts, avec14 invocations et sept captures
+inspectées. Les quatre routes et quatre A sont absents en fin de campagne. L’extension porte exactement sur les quatre
 alias temporaires, leurs routes18090TLS, leurs A vers51.158.54.202 TTL300 et leur
 retrait après qualification. Les deux domaines permanents restent en place.
 La seconde page de cinq domaines de la console et de la CLI exige six domaines
@@ -55,7 +58,8 @@ La preuve réutilisera les fonctions originales du dépôt. Parcours UI depuis
 l’accueil, seconde page de cinq puis un domaine, copies natives et invocations
 réelles ; CLI parcourant les deux pages et conservant le succès de publication
 si le catalogue change après sa première page. Les scénarios et leurs sources
-seront figés avant exécution. Aucun de ces résultats n’est encore acquis.
+sont figés avant/après le replay qualifié. Les échecs antérieurs restent
+distincts et les fautes résiduelles du pilote ne sont pas déclarées acquises.
 
 
 ## Précontrôle après autorisation et contrat de retrait
@@ -129,8 +133,8 @@ est retiré par la garde finale. Les anciens clients à six connexions conserven
 leur valeur par défaut et doivent être rejoués pour ce changement du traceur.
 
 La campagne est figée par empreintes avant exécution. Les preuves de garde,
-création/TLS, UI et CLI sont distinctes ; aucun groupe n’est encore déclaré
-réussi par le présent contrat. Les nettoyages de fonctions passent par les API
+création/TLS, UI et CLI restent distinctes ; leurs résultats sont liés dans
+la preuve du replay. Les nettoyages de fonctions passent par les API
 normales puis sont recoupés avec les artefacts natifs, sans compter une simple
 suppression logique comme purge physique.
 
@@ -152,5 +156,32 @@ la comparaison des identifiants, noms, types, valeurs et TTL. Les lectures
 postérieures et le nettoyage restent possibles pendant cette transition.
 Les diagnostics du banc conservent désormais phase et emplacement d’échec
 expurgés, et une erreur de nettoyage ne doit plus masquer l’erreur initiale
-dans le rapport. Les trois prérequis seront rejoués après correction, sur le
-même gel que la campagne effective. Aucun nouvel essai n’est encore qualifié.
+dans le rapport. Les trois prérequis sont rejoués après correction, sur le
+même gel de253 sources que la campagne effective qualifiée. Les deux époques
+antérieures ne sont pas ajoutées aux trois groupes retenus.
+
+
+## Résultat recoupé
+
+Le replay passe huit groupes : création des quatre alias et vrais DNS/TLS,
+trois parcours UI5+1, trois CLI et retrait indépendant final. Les trois groupes
+sans objets sont des prérequis distincts. La CLI observe7/6/7 connexions natives,
+sans réponse ni syscall substitué ; le défaut six est exercé sans argument
+optionnel. Les quatorze invocations sont corrélées à SQLite, y compris hash
+demandé/résolu. Deux fonctions sont supprimées puis purgées, avec reçus de
+stockage, artefacts, volumes, canaux, conteneurs et réseaux absents.
+
+Les16 mutations ont des réponses connues. Le retrait anticipé d’une route pour
+le changement de catalogue compte dans les quatre suppressions finales ; elle
+n’est pas recréée. Les quatre A exacts sont retirés ensuite. La garde termine
+après SIGKILL réel du propriétaire, sans demande explicite. Les deux domaines
+permanents, DNS, identifiants et propriétés matérielles sont conservés ; leurs
+HTTPS restent sains. Contrôle/référence, démarrages, images et deux fichiers de
+configuration officiels restent identiques, comme les31 fichiers backend.
+
+Sept JPEG sont inspectés individuellement : pages desktop/mobile et pagination
+dans leurs vrais viewports. Deux fichiers mobiles sont identiques par SHA ;
+les pleines pages prolongent le viewport. Aucun défaut visuel bloquant observé.
+SLS-066 reste ouverte pour ses autres fautes de source et de pilotes ; ni le
+verrou suspendu, ni la panne durable de console, ni une réponse de mutation
+perdue ne sont injectés par ce replay.

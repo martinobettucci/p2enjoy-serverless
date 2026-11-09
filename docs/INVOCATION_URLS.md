@@ -19,8 +19,11 @@ passe ensuite 35 campagnes et 467 groupes, sans échec ni test ignoré. L’unit
 reste en qualification. Le [complément de cinq cycles](evidence/invocation-route-cycles-dev-2026-11-09.json)
 qualifie les changements des deux routes autorisées et le vide de l’API locale.
 Le [parcours public vide](evidence/invocation-empty-ui-dev-2026-11-09.json)
-passe ensuite trois groupes ; les pages suivantes UI/CLI et les autres preuves
-résiduelles ci-dessous restent ouvertes.
+passe ensuite trois groupes. La [pagination réelle six domaines](evidence/invocation-pagination-dev-2026-11-09.json)
+qualifie huit groupes de cycle/UI/CLI, avec trois prérequis de garde distincts,
+14 invocations et sept captures inspectées. Les quatre routes/A temporaires
+sont retirés après SIGKILL réel du propriétaire ; les autres preuves résiduelles
+ci-dessous restent ouvertes.
 
 ## Source officielle et limites
 
@@ -173,8 +176,9 @@ La proposition courante à deux domaines suffit au multi-domaine et à la
 pagination API avec limit=1, pas à une seconde page console/CLI. Ces deux
 preuves demandent six domaines réels : les quatre alias supplémentaires ont
 maintenant leur autorisation explicite, leurs DNS et nettoyage compris, selon
-CLAUDE_PROJECT et le plan de pagination. Elles restent ouvertes tant que ces
-routes ne sont pas réellement disponibles et les parcours courants éprouvés. La CLI consulte
+CLAUDE_PROJECT et le plan de pagination. Elles sont maintenant qualifiées
+par le complément six domaines, après création réelle puis retrait de ces
+quatre routes/A ; les deux domaines permanents sont conservés. La CLI consulte
 par cinq comme la console, plutôt que d’exiger vingt et un domaines pour
 éprouver son changement de page.
 
@@ -256,8 +260,8 @@ replay positif. Aucun de ces essais n’est réécrit en réussite.
 
 Ce premier complément à deux domaines ne prouve pas le retrait ni les détours ;
 ils sont qualifiés par les cinq cycles ultérieurs, avec le vide de l’API locale.
-Le parcours UI public vide est qualifié par le complément ultérieur. Restent
-la source indisponible et les pages suivantes sur six domaines. L’entrée
+Le parcours UI public vide est qualifié par le complément ultérieur. La source refusée et les pages suivantes sur six domaines sont qualifiées
+par leurs compléments distincts ; les autres fautes de source restent ouvertes. L’entrée
 HTML/SSO depuis l’alias est qualifiée dans le complément public ci-dessous.
 La preuve native du Host/redirection reste
 celle de la boucle locale. Les scénarios résiduels et leur garde maintiennent
@@ -670,7 +674,8 @@ Les deux fichiers originaux de la garde conservent leurs nanosecondes exactes
 en texte UTF-8 avec SHA. Les cinq captures ont leur fenêtre de fraîcheur ; leur
 inspection et la revue finale sont consignées dans la preuve. Ce checkpoint
 ne couvre ni la perte de confirmation propre au nouveau client, ni les fautes
-de source, ni les pages UI/CLI sur six domaines. SLS-066 demeure ouverte.
+de source, ni les pages UI/CLI sur six domaines. Ces dernières ont leur preuve
+distincte six domaines ; SLS-066 demeure ouverte pour les autres fautes.
 
 ## Entrée publique de l’alias et SSO réel
 
@@ -755,4 +760,25 @@ de reprise n’est créé dans ces parcours. Aucune fonction, route, DNS, variab
 secret ni image modifiée ; services et fichiers officiels restent inchangés.
 La première phase non localisée et le diagnostic logout-body restent incomplets ;
 aucun de leurs groupes n’est ajouté aux trois succès du replay. Les pannes
-propres du client et du tampon CDP, la source et les six domaines restent ouverts.
+propres du client et du tampon CDP ainsi que les autres fautes de source restent
+ouvertes ; les six domaines sont qualifiés par leur complément distinct.
+
+
+## Pagination réelle sur six domaines qualifiée
+
+Le [plan de cycle](INVOCATION_DOMAINS_PAGINATION.md#cycle-borné-et-preuves-retenues)
+est appliqué sur le seul SPARK autorisé. La
+[preuve](evidence/invocation-pagination-dev-2026-11-09.json) passe huit groupes :
+deux de création/retrait, trois UI et trois CLI. Trois prérequis de garde sans
+objets restent distincts. Le contrôle008 et les images CLI ne changent pas ;
+253 sources sont recoupées avant/après chaque phase. Les quatorze invocations
+Docker, sept captures inspectées et deux purges physiques sont corrélées.
+
+Après les deux pages CLI, la vraie révocation401 conserve la publication ;
+un retrait de route entre les pages donne invocation_catalogue_changed sans
+adresses partielles ni rejeu. La garde retire indépendamment les quatre routes
+et quatre A après la perte réelle du propriétaire. Les deux configurations
+permanentes et leurs HTTPS restent inchangés. L’essai arrêté après le premier
+A et son retrait explicite ne devient pas un succès de garde ; les époques de
+prérequis antérieures ne sont pas ajoutées au total. Les pannes résiduelles
+énoncées dans le plan maintiennent SLS-066 en cours.

@@ -123,8 +123,12 @@ sept nouvelles captures sont inspectées. Les [cinq cycles de routes](docs/evide
 qualifient ensuite le retrait/rétablissement de l’alias, les détours vers 18091,
 la restauration indépendante après SIGKILL du pilote et le catalogue API local
 vide. Sept appels exécutent Docker depuis les URL émises ; les deux routes sont
-rétablies à 18090 TLS et la fonction de campagne est purgée. La source perturbée,
-la pagination UI/CLI sur six domaines restent à éprouver. La
+rétablies à 18090 TLS et la fonction de campagne est purgée. La [pagination réelle sur six domaines](docs/evidence/invocation-pagination-dev-2026-11-09.json)
+passe huit groupes de cycle/UI/CLI et trois prérequis de garde distincts, avec
+14 invocations, sept captures inspectées et deux fonctions purgées. Les quatre
+routes/A temporaires sont retirés par garde indépendante après SIGKILL réel
+du propriétaire ; les deux domaines permanents restent18090TLS. Les autres
+fautes de source restent à éprouver. La
 [garde de permissions](docs/evidence/invocation-source-guard-dev-2026-11-09.json)
 passe trois groupes réels préalables : EACCES, release, perte ou suspension du
 helper et restitution du même fichier. Le [refus API](docs/evidence/invocation-source-api-dev-2026-11-09.json)

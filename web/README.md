@@ -83,8 +83,11 @@ transport déclaré. Les copies natives ont leurs confirmations et refus ; une
 erreur de consultation retire les anciennes adresses. Le manuel contient le
 chapitre correspondant. Le [checkpoint SLS-066](../docs/evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 passe six groupes propres au parcours navigateur et ses régressions, avec
-sept captures inspectées. Les pages suivantes et les changements réels de
-routes restent à qualifier ; aucune preuve simulée ne les remplace.
+sept captures inspectées. Les changements réels de routes sont qualifiés par les cinq cycles ultérieurs.
+Le [complément six domaines](../docs/evidence/invocation-pagination-dev-2026-11-09.json)
+passe trois groupes UI008 : accueil/formulaires, promotion explicite, cinq puis
+un domaine, clavier/copies/appels réels et sélection par hash mobile. Les sept
+JPEG sont inspectés ; les autres fautes restent ouvertes.
 La [régression complète](../docs/evidence/invocation-urls-regressions-dev-2026-11-08.json)
 recoupe 79 captures fraîches de l’ensemble des parcours : 61 observations
 visuelles et 18 identités SHA avec les références inspectées, sans défaut

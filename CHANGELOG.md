@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- Pagination réelle sur six domaines qualifiée en DEV : huit groupes de
+  cycle/UI/CLI, trois prérequis de garde distincts, 14 invocations et sept
+  captures inspectées. La CLI conserve la publication après changement réel
+  entre pages et après révocation401. Quatre routes/A temporaires retirés
+  indépendamment après SIGKILL du propriétaire ; deux fonctions purgées
+  physiquement, 253 sources figées et mêmes services/images. L’essai DNS arrêté
+  et son retrait explicite restent distincts du replay. SLS-066 reste ouverte.
+  [Preuve](docs/evidence/invocation-pagination-dev-2026-11-09.json).
+
 - Versionnement par hash en qualification DEV008 : upload préparé, déduplication,
   promotion explicite, pools et sélection épinglée, archivage et réimportation.
   Le checkpoint ciblé réunit71 groupes :2 migration/reprise,12 API,5 CLI
@@ -94,7 +103,8 @@
   dans deux namespaces, sept captures inspectées. Le premier reçu de déclaration
   interrompu et le départ API sur session expirée restent séparés. La reprise
   de vérification n’envoie aucune mutation. Les cycles de retrait/détours sont qualifiés ci-dessus ; SLS-066 reste ouverte
-  pour la source perturbée et les pages suivantes sur six domaines.
+  pour les autres fautes de source et de pilotes. La pagination sur six domaines
+  est qualifiée par son complément distinct ci-dessus.
   [Preuve](docs/evidence/invocation-domains-dev-2026-11-08.json).
 
 - Catalogue global SLS-067 qualifié en DEV : accueil Fonctions, recherche

@@ -101,14 +101,17 @@ deux vrais 502 après publication, succès/UUID conservés, six connexions sans
 rejeu et invocation Docker après reprise. Le
 [complément de révocation](../docs/evidence/invocation-url-refusal-dev-2026-11-08.json)
 qualifie le vrai GET 401 après publication, avec succès/UUID conservés et
-six connexions sans rejeu ; un autre Read invoque Docker. Les pages suivantes
-restent à éprouver ; le 403 n’est pas revendiqué. [Contrat](../docs/INVOCATION_URLS.md).
+six connexions sans rejeu ; un autre Read invoque Docker. Les pages suivantes sont désormais qualifiées par le
+[complément six domaines](../docs/evidence/invocation-pagination-dev-2026-11-09.json) :
+deux vrais GET, six URL épinglées invoquées, changement natif entre pages avec
+succès de publication conservé, puis frontière six sans argument optionnel et
+vrai401. Trois groupes CLI passent sur le contrôle008 ; le403 reste non revendiqué. [Contrat](../docs/INVOCATION_URLS.md).
 Les campagnes courantes sont aussi rejouées dans la
 [suite de 35 campagnes / 467 groupes](../docs/evidence/invocation-urls-regressions-dev-2026-11-08.json),
 avec les deux images Docker reconstruites en série et figées avant/après chaque
 campagne. Les cinq modules CLI embarqués correspondent aux sources. Cette
-réussite ne qualifie pas les pages supplémentaires ; les pertes de lecture
-sont établies séparément par le complément de transport.
+réussite historique ne qualifie pas les pages supplémentaires ; leur preuve
+est le complément six domaines, distinct des pertes de lecture du transport.
 
 
 ## Inventaire exécutable et identité canonique
