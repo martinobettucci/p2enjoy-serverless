@@ -706,7 +706,12 @@ normale, droits, redémarrage, coût de collecte mesuré et inspection des graph
 <a id="sls-074"></a>
 ## SLS-074 — Versions par hash, appels épinglés et pilote de code
 
-Statut : [ ] — demande et contrat définis ; déduplication et invocation par tag absentes.
+Statut : [~] — identité canonique en cours ; déduplication et invocation par tag absentes.
+
+Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
+Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
+vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;
+les trois étapes suivantes et tous les critères ci-dessous restent nécessaires.
 
 Contrat : [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md). Une nouvelle version n’est
 créée que si le paquet exécutable a changé ; son tag public est son hash SHA256

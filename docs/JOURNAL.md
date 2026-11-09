@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 2026-11-09 — Démarrage de SLS-074
+
+Les compléments EACCES API/UI sont committés et qualifiés. Sans autorité pour
+les quatre alias de pagination, poursuivre la demande indépendante de versions.
+L’exploration confirme le descripteur historique complet dans revisions, mais
+un upload active immédiatement le code et le moteur utilise le handler courant.
+Le packager connaît le bit exécutable du ZIP sans encore l’exposer dans son
+inventaire. Décision : qualifier d’abord le format canonique commun et le
+pipeline packaging/extraction/Docker, puis registre/promotion, admission/pools
+et console/CLI/régression. Le plan et le format sont persistés avant code.
+Aucun hash complet hors connexion sans image serveur connue ; aucune fusion
+des références historiques ni hash inventé pour les tombstones purgés.
+Le périmètre complet et la promotion explicite demandée sont conservés.
+
 ## 2026-11-08 — Qualification transversale du stockage public
 
 Le replay sur les sources fonctionnelles ae03204 termine à zéro : 29 campagnes,

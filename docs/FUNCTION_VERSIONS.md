@@ -1,10 +1,27 @@
 # Versions de fonction identifiées par leur code
 
 Contrat de [SLS-074](BACKLOG.md#sls-074), demandé le 8 novembre 2026.
-Cette extension est à implémenter. Le produit possède déjà des révisions
+Cette extension est en cours. Le produit possède déjà des révisions
 immuables, leur historique et une activation permettant le rollback ; il ne
 fournit pas encore la déduplication par contenu, les tags d’invocation ni
 l’archivage individuel décrit ici. Le manuel reste celui du comportement livré.
+
+## Ordre de réalisation
+
+SLS-074 conserve tous ses critères, dans quatre étapes dépendantes :
+
+1. Identité canonique commune, bit exécutable du packager, CLI opérateur et
+   preuve packaging/extraction/Docker : [format v1](FUNCTION_CODE_HASH.md).
+2. Registre/migration, déduplication, disponibilité, publication sans promotion
+   et promotion explicite ; conserver aussi les références historiques doublons.
+3. Sélection/admission/pools par hash et descripteur sélectionné, budgets communs,
+   archivage/nettoyage et raccordement CLI.
+4. Console, adresses, manuel et preuves API/CLI/UI, puis régression complète.
+   La preuve cron dépend aussi de SLS-050 encore non implémentée.
+
+Le premier checkpoint ne change ni l’API en service ni son pointeur actif et ne
+livre pas encore les appels par hash. Son calculateur est une brique commune du
+pipeline, pas un serveur parallèle. Les étapes suivantes restent nécessaires.
 
 ## Identité et déduplication
 
