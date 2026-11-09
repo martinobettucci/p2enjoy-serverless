@@ -713,11 +713,16 @@ migration additive des identités, conservation des alias et lecture/copie du ha
 Les uploads continuent actuellement à activer leur révision ; la déduplication
 et la promotion séparée constituent la suite de cette même unité.
 
-Revue de migration : le premier backfill refuse actuellement une purge 006
-déjà décidée dont les fichiers ne sont pas encore retirés. La
-[correction et ses preuves](FUNCTION_VERSION_PURGE_UPGRADE.md) sont décidées ;
-le registre d’incohérences suit sa résolution. L’upgrade au repos est éprouvé,
-la reprise de cet état intermédiaire reste à qualifier avant clôture.
+La [reprise des purges 006 engagées](FUNCTION_VERSION_PURGE_UPGRADE.md) est
+corrigée et passe 31 groupes ciblés : deux phases réelles, perte du pilote et
+vingt refus de corrélation sur copies du véritable état intermédiaire.
+L’upgrade au repos conserve sa preuve distincte de 328 groupes. La régression
+commune de la nouvelle image et le replay 003 → 007 restent à terminer avant
+la livraison du checkpoint ; SLS-074 demeure en cours. La première régression
+sur l’image finale s’arrête au gate function-storage avec SQLITE_BUSY_RECOVERY ;
+les 55 groupes précédents et les 46 ciblés/historiques restent distincts.
+L’observation RO persistante est spécifiée dans ADMISSION, sans changer le
+produit ni rejouer une mutation incertaine ; son replay reste à terminer.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

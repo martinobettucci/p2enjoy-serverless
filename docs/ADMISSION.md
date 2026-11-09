@@ -270,3 +270,24 @@ et ses writers de contention doivent donc être encadrés de la même manière.
 Cette règle évite que le banc crée WAL/SHM sous une autre identité avant leur
 changement de propriétaire. Elle ne change pas les permissions de la base et
 ne supprime pas les fichiers WAL pour rétablir un test.
+
+
+### Observation durable des intentions par les gardes
+
+Les gardes commit ouvrent une connexion réelle de lecture CONTROL, sous son
+propriétaire, et terminent une première lecture avant d’annoncer watching.
+Elles conservent cette connexion en autocommit pendant l’observation, sans BEGIN
+ni snapshot retenu : chaque curseur est consommé et fermé, et in_transaction
+reste faux. Cela évite les ouvertures/fermetures à chaque milliseconde autour
+d’un redémarrage. L’attente porte toujours sur la même intention réelle et sa
+storage_version ; les writers, signaux et décisions ne changent pas.
+La connexion est fermée sous son propriétaire dans le finally, avec les signaux
+d’interruption différés jusqu’à la fin de la fermeture. Aucun PUT n’est rejoué
+automatiquement quand son scénario n’a pas atteint sa décision attendue.
+
+Un SQLITE_BUSY_RECOVERY a été observé sur un BEGIN IMMEDIATE après SIGKILL,
+avant l’observation du gate commit. Le site appelant exact n’est pas conservé
+par le diagnostic courant. Le changement du poller ne vaut pas attribution
+rétrospective de cette course à l’instrumentation ni correction du moteur SQLite.
+Référence : https://www.sqlite.org/rescode.html#busy_recovery et
+https://www.sqlite.org/wal.html#sometimes_queries_return_sqlite_busy_in_wal_mode.

@@ -1,5 +1,54 @@
 # Journal de cadrage
 
+## 2026-11-09 — Régression arrêtée : récupération WAL avant le gate attendu
+
+La campagne finale sur fe75c9e7 passe ses 46 groupes ciblés et historiques puis
+55 groupes d’exploitation. function-storage s’arrête au onzième groupe : le
+helper attend storage_version non NULL, mais le PUT rend un vrai503. Le log
+corrélé porte SQLITE_BUSY_RECOVERY, db.py/transaction/ligne41. Il ne conserve
+pas le site appelant : une erreur avant reserve ou dans execution.drain est
+possible ; l’absence finale d’intention ne tranche pas. Le writer CONTROL
+volontaire du helper n’a jamais été pris. Aucune reprise après commit n’est
+comptée pour ce cas. Le rapport incomplet reste conservé séparément.
+
+Le relevé natif vérifie deux fonctions supprimées et purgées côté agent, sans
+volumes/baux/intention restante et contrôle sain. cleanup=false reste exact dans
+le rapport initial car le helper sort en erreur ; le relevé ultérieur établit
+séparément le nettoyage physique. Les sources et l’image restent celles du gel.
+
+Décision avant code : conserver une vraie connexion RO autocommit pour observer
+CONTROL, effectuer une première lecture avant watching et fermer chaque curseur
+sans retenir de transaction. Les accès et la fermeture restent sous l’identité
+du propriétaire ; signaux de fermeture différés. Conserver exactement les
+prédicats, verrous REGISTRY/CONTROL, signaux et requêtes HTTPS, sans rejeu du PUT.
+Ce changement réduit le renouvellement des connexions, sans prétendre prouver
+la cause rétrospective de SQLITE_BUSY_RECOVERY. Rejouer function-storage puis
+la suite commune ; garder les époques de clients et le premier arrêt distincts.
+La documentation SQLite consultée décrit les concurrences de récupération et
+de dernière fermeture en mode WAL ; ADMISSION porte les références primaires.
+
+## 2026-11-09 — Purge006 reprise par007 : trente et un groupes ciblés passent
+
+La correction est déployée sur DEV, image 78eb24d7. Le premier backfill
+reconnaît la seule décision durable fortement corrélée, conserve une identité
+inconnue et ne modifie ni compteur ni garde. La bascule d’une installation déjà
+007 conserve exactement ses 1 494 UUID/hashes, dont 1 233 connus.
+
+Les deux vraies fenêtres artifacts et volumes passent quatre groupes chacune ;
+la perte du pilote ajoute trois groupes avec restauration indépendante. Les
+mêmes originaux, données, artefacts et configuration sont restitués ; gardes
+finies. Vingt démarrages sur copies privées du vrai backup intermédiaire
+refusent chaque corrélation rompue et annulent intégralement007. Les seize
+premiers cas restent archivés comme époque antérieure, sans double comptage.
+
+La revue a corrigé un scénario bloqué prématurément par le vrai trigger de
+pointeur et ajouté opération/services dissociés avec un second service réellement
+créé par API. Aucun défaut backend résiduel relevé dans cette revue bornée.
+Le cas de pointeur combine une révision disponible, sans prétendre isoler la
+clause SQL sur le pointeur. SLS-074-PURGE-006 est retirée du registre après ses
+preuves ciblées ; la régression commune et003→007 restent à rejouer. Le statut
+de SLS-074 reste en cours ; promotion, déduplication et appel par hash suivent.
+
 ## 2026-11-09 — Purge 006 engagée : refus et reprise désormais reproduits
 
 La référence 006 est reconstruite depuis f56d79e : 47 sources produit comparées
