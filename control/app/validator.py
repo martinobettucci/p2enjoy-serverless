@@ -1,4 +1,5 @@
 # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#chargeur-et-validation-docker
+# @spec docs/BACKLOG.md#sls-076 | docs/DEPLOYMENT_NAMES.md#conteneurs-de-validation | docs/VALIDATOR_NAMES.md
 """Real Docker/Unix-HTTP validation; no daemon SDK, shell or business env inheritance."""
 import argparse
 import asyncio
@@ -133,7 +134,7 @@ async def validate_async(*,docker_socket,image,code,work,handler,environment,sec
     protocol=channel/'control.sock'
     if len(os.fsencode(protocol))>100:
         channel.rmdir();raise ValidationError('socket_path_limit')
-    name='p2-v-'+uuid4().hex
+    name='serverless-code-validator-'+uuid4().hex
     container=None;removed=False;result=None;server=None
     started=time.monotonic();deadline=started+15
     def remaining():

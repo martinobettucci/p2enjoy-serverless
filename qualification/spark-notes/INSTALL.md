@@ -403,7 +403,7 @@ résiduel. Le premier lanceur direct est remplacé par Compose DEV pour lire les
 valeurs citées des deux fichiers officiels, qui ne changent pas. Les pannes du
 helper CLI conteneurisé et la régression complète restent ouvertes ; SLS-074 demeure en cours.
 
-Image contrôle courante :178394abb337, référence007 retenue sous
+Image du checkpoint008 avant nommage :178394abb337, référence007 retenue sous
 before-function-version-promotions. Après migration008 commise, ne pas remettre
 seule une ancienne image : une restauration exige base, artefacts et volumes
 cohérents. La sauvegarde native privée avant008 est conservée sous
@@ -452,3 +452,23 @@ variable, secret ou construction d’image ajouté. L’essai DNS interrompu et
 son retrait explicite restent distincts ; état de zone en transition corrigé
 dans le banc. Les autres fautes maintiennent SLS-066 ouverte.
 Ces trois notes sont proposées individuellement, sans adoption revendiquée.
+
+
+## Noms des validateurs — SLS-076 qualifiée
+
+Le contrôle008 sert19cfe884642a et nomme ses validateurs
+serverless-code-validator-UUID. L’ancien p2-v est repris par labels après
+interruption réelle, sans redémarrer l’ancienne image avant la nouvelle.
+Preuve : docs/evidence/validator-names-dev-2026-11-09.json. Quatre groupes
+ciblés et36/12/5 régressions passent, soit57. Cinq appels conservent hash,
+cible, configuration et compteurs données/cache1 à5. Trois fonctions du replay
+sont physiquement purgées ; l’essai initial et sa fonction restent distincts.
+
+Les31 backends ne diffèrent que par validator ; web compilé, runtime de
+référence, fichiers officiels et routes sont conservés. La garde est armée
+avant SIGKILL, puis la reprise réussit explicitement et timer/service sont
+inactifs. Son expiration et sa propre perte ne sont pas revendiquées testées.
+Les cinq pilotes maintenus de préparation à collecte sont sous e2e, selon
+docs/VALIDATOR_NAMES.md. Les autres pannes et la régression complète008
+restent au backlog. Aucun secret/variable/route nouveau ; ces trois notes
+sont proposées individuellement, sans adoption revendiquée.

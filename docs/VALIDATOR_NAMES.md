@@ -1,6 +1,7 @@
 # Noms d’exploitation des validateurs Docker
 
-Unité [SLS-076](BACKLOG.md#sls-076), en préparation. Contrat de responsabilité :
+Unité [SLS-076](BACKLOG.md#sls-076), déployée et qualifiée en DEV.
+[Preuve des57 groupes](evidence/validator-names-dev-2026-11-09.json). Contrat de responsabilité :
 [DEPLOYMENT_NAMES](DEPLOYMENT_NAMES.md#conteneurs-de-validation). Le seul
 changement produit est le préfixe `serverless-code-validator-`, suivi du même
 UUID aléatoire hexadécimal. Labels, isolation, protocole, délais, suppression
@@ -87,8 +88,9 @@ avant/après chaque phase. La bascule explique seule la différence d’image
 contrôle ; comparaison du backend limitée au préfixe/commentaire de validator,
 assets web, manuel, référence/runtime/CLI et configurations inchangés.
 
-Aucune réussite n’est acquise à ce stade. SLS-074, ses autres pannes et ses
-régressions complètes conservent leur périmètre ; SLS-076 ne les clôture pas.
+Le replay qualifie quatre groupes ciblés et53 connexes, sans échec ni skip,
+sur258 sources figées. SLS-074, ses autres pannes et ses régressions complètes
+conservent leur périmètre ; SLS-076 ne les clôture pas.
 
 ## Commandes reproductibles du banc
 
@@ -117,7 +119,7 @@ emballés et documents de résultat ont leur relevé de livraison distinct.
 
 Les rapports existants ne sont jamais effacés automatiquement. Un replay
 historique exige l’installation au repos et la remise explicite de la vraie
-image retained before-validator-names par Compose DEV, avec sauvegarde native
+image retenue before-validator-names par Compose DEV, avec sauvegarde native
 et vérification préalable des images/configurations. Il ne faut pas lancer
 ces commandes sur une installation utilisée par d’autres fonctions.
 
@@ -139,11 +141,36 @@ remise en service manuelle n’est pas attribuée à la garde.
 
 Décision avant correction : tous les sous-processus Docker/Compose de cet
 opérateur utilisent explicitement le répertoire du projet lisible par
-spark-docker. La garde figée est exécutée dans ce même contexte. Pour obtenir
-un replay complet, remettre temporairement la véritable image008 retenue
-before-validator-names au repos, avec le même schéma008 et les mêmes fichiers
-officiels, puis reconstruire/revérifier la candidate et refaire tout le cycle.
+spark-docker. La garde figée est exécutée dans ce même contexte. Pour le replay,
+la véritable image008 retenue before-validator-names est remise au repos, avec
+le même schéma008 et les mêmes fichiers officiels, puis la candidate est
+reconstruite/revérifiée et tout le cycle est rejoué.
 Il ne s’agit pas d’un retour de schéma. Cette restauration est bornée au seul
 contrôle ; runtime, stockage et CLI ne sont pas recréés. Sources, images,
 première coupure, remise en service et nettoyages restent dans leurs époques
-distinctes ; aucune réussite partielle n’est ajoutée au replay à venir.
+distinctes ; aucune réussite partielle n’est ajoutée au replay qualifié.
+
+
+## Résultat du replay
+
+L’image19cfe884642a sert le contrôle008 avec le nouveau préfixe. Quatre groupes
+ciblés passent, puis36 validations Docker,12 groupes API versions et cinq CLI.
+Les trois noms vivants sont relus avec leurs marqueurs, labels, montages et
+limites réelles. L’import refusé et le timeout n’ajoutent pas de version ;
+l’import identique réutilise hash/alias. Les conteneurs/canaux sont retirés.
+
+L’orphelin p2-v provient de l’image178394 réellement servie et d’un upload HTTPS.
+Après SIGKILL du seul contrôle, son ID reste présent ; le programme de reprise
+vérifie ancien StartedAt/137 puis démarre19cfe884 par Compose DEV. Le candidat
+est failed/control_interrupted, sans réserve ni artefact. La remise en service
+du replay est explicite, avec timer armé auparavant puis service/timer inactifs ;
+son expiration et sa propre perte ne sont pas revendiquées testées.
+
+Cinq invocations ciblées conservent la cible/hash, configuration, secret et
+compteurs données/cache1 à5. Trois fonctions du replay sont physiquement purgées,
+avec reçus liés, volumes/artefacts/canaux/conteneurs/réseaux absents. Les22
+invocations observées sur ces trois fonctions comprennent21 succès et un refus
+attendu de la campagne API. Ressources/réservations et allocations inscrites sont
+à zéro ; le runtime de référence conserve ID/image/démarrage. Les31 fichiers
+backend ne diffèrent du checkpoint précédent que par validator ; le web compilé
+est identique. Aucun nouveau parcours UI ni capture fraîche n’est revendiqué.

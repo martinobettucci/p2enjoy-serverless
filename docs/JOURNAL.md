@@ -4397,3 +4397,23 @@ aucun défaut visuel bloquant observé. L’essai A1 interrompu et deux ancienne
 Les revues ciblées sont sans défaut bloquant après corrections. Aucun registre
 d’incohérence nouveau ; SLS-066 reste en cours pour ses fautes résiduelles.
 Preuve : evidence/invocation-pagination-dev-2026-11-09.json. Aucun remote Git.
+
+
+## 2026-11-09 — Nommage076 qualifié sur19cfe884642a
+
+Le replay passe quatre groupes ciblés puis36 validations Docker,12 API versions
+et cinq CLI, sur258 sources figées. Vrai p2-v produit par upload sur178394,
+SIGKILL du contrôle avec garde armée, reprise explicite par19cfe884 puis trois
+imports succès/refus/timeout au nouveau nom. Cinq appels retrouvent cible/hash,
+configuration/secret et compteurs données/cache1 à5. Les trois fonctions du
+replay sont physiquement purgées, avec40 artefacts/19 instances corrélés, volumes,
+canaux, conteneurs et réseaux absents ; réservations/allocations inscrites zéro.
+Les22 appels observés comprennent21 succès et le refus API attendu. Timer/service
+inactifs ; aucune expiration ou perte de garde n’est revendiquée. Runtime de
+référence et fichiers officiels conservés,31 backends recoupés, web identique.
+Les deux essais arrêtés restent distincts, dont la première fonction purgée
+séparément après récupération manuelle. Les cinq pilotes maintenus reprennent
+les corps réellement exécutés et ont leur provenance propre au relevé de
+livraison ; le gel258 des clients n’est pas réécrit. Preuve :
+evidence/validator-names-dev-2026-11-09.json. Les autres pannes et la régression
+complète008 restent dans SLS-074 ; le goal conserve son périmètre intégral.

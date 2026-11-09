@@ -345,3 +345,11 @@ restent des prérequis sans groupes artificiels. L’[arrêt initial](docs/evide
 après 388 groupes est conservé séparément ; le replay complet termine à zéro.
 Les trois notes SPARK sont maintenues dans `qualification/spark-notes/` et leur
 proposition finale est recoupée ; leur adoption n’est pas revendiquée.
+
+
+Le [nommage des validateurs](docs/VALIDATOR_NAMES.md) est déployé et qualifié
+sur l’image19cfe884642a : `serverless-code-validator-<uuid>`, avec reprise des
+anciens p2-v par labels. Les57 groupes réels, cinq appels de conservation et
+les purges des trois fonctions du replay sont recoupés dans la
+[preuve](docs/evidence/validator-names-dev-2026-11-09.json). Ce complément ne
+clôture pas les autres pannes ni la régression complète des versions008.

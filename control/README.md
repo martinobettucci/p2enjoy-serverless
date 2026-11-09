@@ -310,3 +310,16 @@ encore la révision ; déduplication/promotion et invocation par hash suivent.
 repos conserve ses 328 groupes et son backup natif distincts. Les commandes DEV
 restent build puis up ; vérifier l’image portée réellement après la bascule.
 Les références006 et courante sont conservées sous des tags de responsabilité.
+
+
+## Noms des validateurs qualifiés
+
+Le contrôle sert maintenant19cfe884642a, schéma008 inchangé. Ses validateurs
+portent `serverless-code-validator-<uuid>` ; les labels reprennent aussi les
+anciens noms après interruption. La [preuve076](../docs/evidence/validator-names-dev-2026-11-09.json)
+passe57 groupes : ancien orphelin réel, trois imports observés, puis36/12/5
+régressions. Les31 fichiers backend ne diffèrent que par validator ; les assets
+web restent identiques. Les trois fonctions du replay sont physiquement purgées,
+plus la fonction de l’arrêt initial recoupée séparément. Les cinq pilotes de
+préparation à collecte sont dans e2e, selon le [contrat](../docs/VALIDATOR_NAMES.md).
+L’expiration propre de la garde et les autres pannes008 restent distinctes.

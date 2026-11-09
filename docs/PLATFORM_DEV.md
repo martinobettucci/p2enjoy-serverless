@@ -856,3 +856,24 @@ L’agent de stockage et le runtime de référence restent ceux déjà qualifié
 Aucune variable, secret ou route nouvelle ; trois notes d’exploitation proposées
 individuellement, sans adoption revendiquée. Aucun réglage de service ou daemon
 permanent ajouté. Le manuel compilé est celui du dépôt,47 paragraphes.
+
+
+## Baseline du nommage des validateurs qualifié
+
+Le contrôle008 sert19cfe884642a. Seul le préfixe du validateur change dans le
+backend : serverless-code-validator-UUID. Le web compilé est byte-identique,
+les31 fichiers backend sont recoupés et les deux fichiers de configuration,
+routes et runtime de référence restent inchangés. La
+[preuve076](evidence/validator-names-dev-2026-11-09.json) passe57 groupes, avec
+trois fonctions du replay purgées et cinq appels de conservation données/cache.
+La reprise d’un vrai ancien p2-v est attribuée à cette image après SIGKILL ;
+son timer est armé mais la remise en service réussie est explicite.
+
+L’image178394 reste sous p2enjoy-control:before-validator-names. Le premier
+cycle arrêté sur le cwd de Compose, sa remise en service manuelle700148, la
+purge de sa seule fonction puis la restauration temporaire178394 au repos
+restent séparés du replay. Une sauvegarde SQLite native008 avant ce replay
+est conservée sous state/backups/validator-names-before-replay-*.sqlite3.
+Aucun retour de schéma n’est effectué. Les commandes de qualification et la
+provenance des pilotes maintenus sont dans VALIDATOR_NAMES. Aucun secret,
+variable ou route nouveau ; trois notes proposées, sans adoption revendiquée.

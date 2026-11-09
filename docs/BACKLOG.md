@@ -871,15 +871,14 @@ recoupés. Raccordement : SLS-065 et prochain changement de console.
 <a id="sls-076"></a>
 ## SLS-076 — Nom explicite des conteneurs de validation du code
 
-Statut : [~] — correction du nom et campagne réelle en préparation ; aucun
-groupe qualifié à ce stade. Image700148c52531 construite et contrôle remis
-en service manuellement après l’arrêt du premier essai sur le cwd de Compose.
+Statut : [x] — nom explicite déployé en DEV sur19cfe884642a,57 groupes réels
+réussis, trois fonctions du replay physiquement purgées et garde terminée.
+Le premier essai échoué et son nettoyage restent distincts.
 
-Le pilote `control/app/validator.py:136` nomme actuellement ses conteneurs
-`p2-v-` suivi d’un UUID. Le nom ne décrit pas leur responsabilité pour un
-exploitant, contrairement au contrat local de nommage. Le fichier embarqué
-est recoupé avec la source dans la preuve de reprise de validation ; aucun
-défaut d’exécution, d’isolation ou de propriété n’est attribué à ce nom.
+Le pilote `control/app/validator.py` emploie maintenant
+`serverless-code-validator-<uuid>`. L’ancien p2-v ne décrivait pas sa
+responsabilité pour un exploitant. Le changement porte uniquement sur le nom ;
+le protocole, les labels, l’isolation et les délais restent identiques.
 
 Employer `serverless-code-validator-<uuid>`, qui désigne le rôle et l’usage,
 sans changer le label d’installation, le kind validation, l’unicité ni la
@@ -902,4 +901,16 @@ nouvelle image, trois issues d’import observées puis régressions36/12/5.
 La garde utilise exclusivement Compose DEV et les deux fichiers officiels.
 Le [premier essai](VALIDATOR_NAMES.md#premier-essai-et-correction-du-répertoire-de-travail)
 produit bien un ancien validateur mais échoue à la remise en service du banc.
-Sa fonction est purgée ; le replay complet après correction du cwd reste à faire.
+Sa fonction est purgée et son arrêt reste exclu. Le
+[replay qualifié](evidence/validator-names-dev-2026-11-09.json) passe quatre
+groupes ciblés et36/12/5 régressions, sur258 sources figées. Les imports
+succès/refus/timeout portent le nouveau nom et sont supprimés ; l’ancien
+validateur est repris par la nouvelle image après vrai SIGKILL. Cinq appels
+conservent hash, cible, configuration et compteurs données/cache1 à5. Trois
+fonctions du replay sont purgées, plus celle de l’arrêt recoupée séparément.
+Les31 fichiers backend ne diffèrent que par validator ; assets web, fichiers
+officiels et runtime de référence sont conservés. La garde est armée puis
+libérée explicitement ; ses propres pannes/échéance ne sont pas revendiquées.
+Les cinq pilotes maintenus et documents de résultat ont un relevé de livraison
+distinct du gel258 des clients, avec provenance des corps réellement exécutés.
+SLS-074 et la régression complète008 restent en cours.

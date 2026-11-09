@@ -54,11 +54,13 @@ de cette migration ne supprime de volume ni ne change le schéma SQLite.
 
 ## Conteneurs de validation
 
-[SLS-076](BACKLOG.md#sls-076), à réaliser : le nom attendu est
+[SLS-076](BACKLOG.md#sls-076) est déployée et qualifiée en DEV : le nom est
 `serverless-code-validator-<uuid>`. Il distingue le conteneur qui charge et
 vérifie le code reçu du runtime de référence, de l’instance qui invoque une
-fonction et du client qui effectue une qualification. Le préfixe actuel p2-v
-reste déployé tant que cette unité n’a pas son image et ses preuves réelles.
+fonction et du client qui effectue une qualification. Le préfixe p2-v reste
+présent seulement dans les images historiques retenues. La
+[preuve](evidence/validator-names-dev-2026-11-09.json) passe57 groupes réels,
+dont les trois issues d’import et la reprise d’un ancien validateur authentique.
 
 L’installation et le kind validation restent les autorités de réconciliation,
 y compris pour les conteneurs de l’ancien préfixe. Le nom unique conserve son

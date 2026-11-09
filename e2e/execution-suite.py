@@ -38,6 +38,8 @@ def source_hashes():
     files += [ROOT/name for name in ['docs/INVOCATION_URLS.md','adapter/Dockerfile','adapter/Dockerfile.dockerignore',
                                     'adapter/compose.spark.yml','adapter/dev.sh','qualification/package.json']]
     files += [ROOT/'docs/INVOCATION_DOMAINS_PAGINATION.md']
+    # @spec docs/BACKLOG.md#sls-076 | docs/VALIDATOR_NAMES.md#preuves-et-limites
+    files += [ROOT/'docs/VALIDATOR_NAMES.md',ROOT/'docs/DEPLOYMENT_NAMES.md']
     files += [ROOT/name for name in ['docs/FUNCTION_CATALOGUE.md','docs/CONSOLE_USABILITY.md','docs/EXECUTION.md','docs/INVOCATION_ROUTE_CYCLES.md','docs/INVOCATION_SOURCE_PERMISSIONS.md']]
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_CODE_HASH.md
     files += [ROOT/name for name in ['function_code_hash.py','docs/FUNCTION_CODE_HASH.md','docs/FUNCTION_VERSIONS.md',

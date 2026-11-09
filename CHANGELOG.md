@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- Conteneurs de validation nommés `serverless-code-validator-<uuid>` en DEV.
+  L’image19cfe884642a reprend aussi les anciens p2-v après interruption réelle.
+  Quatre groupes ciblés et36/12/5 régressions passent, soit57 sans échec/skip,
+  avec cinq appels conservant données/cache, hash et configuration. Trois
+  fonctions du replay sont physiquement purgées. Web/runtime/configuration
+  conservés ; le premier arrêt Compose et son retrait restent séparés.
+  [Preuve](docs/evidence/validator-names-dev-2026-11-09.json).
+
 - Pagination réelle sur six domaines qualifiée en DEV : huit groupes de
   cycle/UI/CLI, trois prérequis de garde distincts, 14 invocations et sept
   captures inspectées. La CLI conserve la publication après changement réel

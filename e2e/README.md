@@ -1,5 +1,31 @@
 # Qualification de la plateforme
 
+## Nommage des validateurs — SLS-076 qualifiée
+
+Le [contrat](../docs/VALIDATOR_NAMES.md) fixe le préfixe explicite et la reprise
+des anciens noms par labels. `node e2e/validator-names.mjs` exige la nouvelle
+image construite mais l’ancien contrôle encore servi, une session SSO réelle
+et SSH root du seul SPARK. Le premier groupe observe le vrai p2-v d’un upload
+HTTPS, arme la garde, interrompt le contrôle puis démarre la nouvelle image
+avant toute ancienne reprise. Trois autres groupes éprouvent un import réussi
+dédupliqué, un refus et un timeout, avec noms/marqueurs/isolation vivants relus.
+Les compteurs données/cache, configuration et cible stable sont recoupés.
+
+`validator-names-operator.py` est l’opérateur interne : observation, interruption
+gardée et remise en service Compose DEV. Il refuse une inspection incertaine,
+une configuration différente ou une seconde création aveugle. Les rapports
+préexistants doivent être conservés avant essai. Les
+[cinq commandes maintenues](../docs/VALIDATOR_NAMES.md#commandes-reproductibles-du-banc)
+préparent, construisent, exécutent, rejouent les régressions et collectent la
+preuve depuis la racine. Le
+[replay qualifié](../docs/evidence/validator-names-dev-2026-11-09.json) passe57
+groupes : quatre ciblés et36/12/5 connexes, sur258 sources figées. Trois
+fonctions du replay sont purgées ; cinq appels conservent les compteurs1 à5.
+Le départ SSO et l’arrêt Compose cwd sont distincts, sans groupe ajouté au
+replay. Le web est byte-identique ; aucune capture/UI fraîche n’est revendiquée.
+Les pilotes maintenus ont leurs corps exécutés et leur provenance dans le
+relevé de livraison, distinct de l’époque258 des clients.
+
 ## Migration et exécution des versions par hash — checkpoint ciblé008
 
 `node e2e/function-versions-upgrade.mjs prepare` crée par les API du vrai

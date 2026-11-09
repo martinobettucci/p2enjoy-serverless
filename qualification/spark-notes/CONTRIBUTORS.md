@@ -20,7 +20,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:178394abb337bd70ca9c18a139fc65ab2c1f83d3ad41eed5d5bf79bed2dc0f5e`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 
@@ -472,7 +472,7 @@ résiduel. Le premier lanceur direct est remplacé par Compose DEV pour lire les
 valeurs citées des deux fichiers officiels, qui ne changent pas. Les pannes du
 helper CLI conteneurisé et la régression complète restent ouvertes ; SLS-074 demeure en cours.
 
-Image contrôle courante :178394abb337, référence007 retenue sous
+Image du checkpoint008 avant nommage :178394abb337, référence007 retenue sous
 before-function-version-promotions. Après migration008 commise, ne pas remettre
 seule une ancienne image : une restauration exige base, artefacts et volumes
 cohérents. La sauvegarde native privée avant008 est conservée sous
@@ -521,3 +521,23 @@ variable, secret ou construction d’image ajouté. L’essai DNS interrompu et
 son retrait explicite restent distincts ; état de zone en transition corrigé
 dans le banc. Les autres fautes maintiennent SLS-066 ouverte.
 Ces trois notes sont proposées individuellement, sans adoption revendiquée.
+
+
+## Noms des validateurs — SLS-076 qualifiée
+
+Le contrôle008 sert19cfe884642a et nomme ses validateurs
+serverless-code-validator-UUID. L’ancien p2-v est repris par labels après
+interruption réelle, sans redémarrer l’ancienne image avant la nouvelle.
+Preuve : docs/evidence/validator-names-dev-2026-11-09.json. Quatre groupes
+ciblés et36/12/5 régressions passent, soit57. Cinq appels conservent hash,
+cible, configuration et compteurs données/cache1 à5. Trois fonctions du replay
+sont physiquement purgées ; l’essai initial et sa fonction restent distincts.
+
+Les31 backends ne diffèrent que par validator ; web compilé, runtime de
+référence, fichiers officiels et routes sont conservés. La garde est armée
+avant SIGKILL, puis la reprise réussit explicitement et timer/service sont
+inactifs. Son expiration et sa propre perte ne sont pas revendiquées testées.
+Les cinq pilotes maintenus de préparation à collecte sont sous e2e, selon
+docs/VALIDATOR_NAMES.md. Les autres pannes et la régression complète008
+restent au backlog. Aucun secret/variable/route nouveau ; ces trois notes
+sont proposées individuellement, sans adoption revendiquée.
