@@ -731,6 +731,23 @@ autorité d’état par hash, première promotion durable, déduplication avec n
 admission/pools et raccordements CLI/UI livrés ensemble. Les nouveaux critères
 incluent le droit Create après désactivation, les handlers A/B et le cas
 minimum=maximum=1 ; les exigences existantes ne sont pas réduites.
+Le contrôle008 est déployé pour qualification : deux groupes migration/reprise et
+douze groupes API passent, avec sources240 recoupées et deux fonctions purgées.
+La préparation007 et le nettoyage sont des prérequis distincts. Les images CLI
+sont reconstruites ;24 groupes plan/package et14 de refus publics passent. Les
+parcours CLI authentifiés, UI/visuels, pannes et régression complète restent
+ouverts ; cette avancée ne clôture pas SLS-074.
+Les cinq groupes CLI authentifiés passent aussi depuis le processus Python du
+poste : pilote scoped sans résolution provider, configuration conservée,
+promotion/rollback, refus Read et six invocations sur les deux domaines.
+Ils ne sont pas présentés comme exécutés dans les images ; cette déclinaison
+reste à éprouver. La revue ajoute les gardes d’URL non vides et un relevé natif
+des dossiers/réservations du doublon avant purge, au-delà de sa convergence SQL.
+Ce replay API avec relevé physique passe12 groupes ; la CLI rejouée avec URL
+non vides passe5 groupes. La revue confirme un autre défaut de lecture UI :
+catalogue lu avant candidat puis ETag inchangé peut arrêter trop tôt le polling
+d’une publication externe. L’ordre candidat→catalogue→fonction confirmée est
+retenu avant correction et doit être éprouvé dans le vrai parcours navigateur.
 La revue statique du pipeline a révélé le passage possible d’un validateur
 déjà en attente après un nettoyage incomplet ; le verrou est corrigé, et la
 preuve réelle de ce refus rejoint les critères de FUNCTION_VERSION_EXECUTION.

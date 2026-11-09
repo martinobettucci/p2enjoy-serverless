@@ -1,9 +1,10 @@
 # Publication, promotion et exécution d’une version par hash
 
 Spécification de la suite de [SLS-074](BACKLOG.md#sls-074), après le
-[registre qualifié](FUNCTION_VERSION_REGISTRY.md). Ce document décrit la prochaine
-implémentation ; le contrôle actuellement déployé reste au checkpoint007 et
-active encore les uploads. Les critères de [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md)
+[registre qualifié](FUNCTION_VERSION_REGISTRY.md). Le contrôle008 est déployé en DEV pour qualification :
+publication et promotion sont séparées, et la sélection par hash est raccordée.
+La migration réelle et sa reprise passent deux groupes ciblés, puis douze groupes
+API passent sur240 sources recoupées. Les autres preuves restent ouvertes. Les critères de [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md)
 restent tous applicables.
 
 ## Livraison cohérente
@@ -221,6 +222,12 @@ invalide sous une forme refusée, sans l’effacer au profit du défaut. Un retr
 de cible recueille remplacement ou désactivation dans un dialog puis confirme.
 La restauration d’une archive conservée est directe et auditée ; la réimportation
 recueille un vrai ZIP lié au hash et à son descripteur conservé.
+Le suivi lit le candidat avant le catalogue de versions, puis confirme l’ETag
+de fonction après ce catalogue. Un candidat terminal published ne peut ainsi
+arrêter son polling sur un catalogue lu avant sa publication : le code seul ne
+change pas l’ETag du parent. Les refus de préparation restent dans le formulaire ;
+après prise en charge de l’envoi, son suivi porte les refus d’upload et le hash
+de réimportation demandé, sans renvoi automatique du ZIP.
 
 La facette de code présente des versions par hash, cible par défaut, état et dates.
 Elle permet publication puis promotion séparées, archive/restore/delete et

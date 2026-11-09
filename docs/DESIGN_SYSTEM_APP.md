@@ -169,7 +169,7 @@ textuelle. Mesure absente, zéro et collecte interrompue ont des états distinct
 Ces parcours appliquent les règles du socle sur clavier, focus, confirmations,
 retour d’erreur, mobile et vérification visuelle.
 
-## Versions par hash et pilote à réaliser
+## Versions par hash et pilote en qualification
 
 [SLS-074](FUNCTION_VERSIONS.md) complète la facette Code et révisions : hash
 complet copiable avec retour à la ligne, cible courante et disponibilité de
@@ -183,8 +183,8 @@ ne sont pas présentés comme ayant changé de code.
 
 Le client HTTP propose cible courante ou hash explicite et montre la version
 effectivement appelée. Ses exemples copiés conservent le tag choisi. Une version
-indisponible affiche le refus réel sans substitution. Ces parcours restent
-planifiés ; aucune commande absente du backend n’est ajoutée aux écrans actuels.
+indisponible affiche le refus réel sans substitution. Ces parcours sont déployés en qualification008 ; les preuves navigateur et
+visuelles restent à produire sur cette image.
 
 ## Adresses d’appel SLS-066 en qualification
 
@@ -267,7 +267,7 @@ cadre précédemment chargé ; les mesures absentes restent distinctes des zéro
 Aucun défaut visuel bloquant confirmé. La fiche d’archive Purgée porte encore
 le titre Archives conservées ; cette remarque mineure est suivie dans SLS-075.
 Les totaux d’archives incluent l’historique et ne représentent pas seulement
-les jeux de cette preuve. Les modes pilote et versions par hash restent planifiés.
+les jeux de cette preuve. Les modes pilote et versions par hash sont en qualification008.
 
 ## Identité du code dans les révisions
 
@@ -286,12 +286,12 @@ Les captures du manuel cadrent directement le paragraphe sur desktop/mobile ;
 son contenu servi correspond à 15 chapitres et 47 paragraphes. Les pertes de
 réponse, les droits, le nettoyage et le presse-papiers exact restent des preuves
 d’assertions ; les images pleines pages prolongent leur viewport. Aucun défaut
-visuel bloquant confirmé. Promotion, déduplication et appels par hash restent
-planifiés dans la suite de SLS-074.
+visuel bloquant confirmé. Cette preuve007 reste historique ; promotion, déduplication et appels par hash
+sont désormais déployés pour qualification dans la suite de SLS-074.
 
-## Publication et sélection par hash en préparation
+## Publication et sélection par hash en qualification
 
-La prochaine image suit [FUNCTION_VERSION_EXECUTION](FUNCTION_VERSION_EXECUTION.md).
+L’image008 DEV suit [FUNCTION_VERSION_EXECUTION](FUNCTION_VERSION_EXECUTION.md).
 Les cartes sont groupées par hash, paginées par cinq côté serveur, avec cible par
 défaut, disponibilité et date initiale. Les UUID d’alias restent dans les
 métadonnées. Les commandes nomment leur version et leur fonction. Promotion et
@@ -301,7 +301,9 @@ le §6.24. Une promotion emploie le bouton primaire, la suppression le destructi
 Retirer la cible courante ouvre un dialog limité à son remplacement : hash
 disponible à saisir ou désactivation explicite, puis confirmation. Réimporter
 une version supprimée ouvre le dialog ZIP/handler associé au hash et aux
-événements conservés. Les refus conservent saisie et confirmation ; les cartes
+événements conservés. Les refus de préparation et de mutation conservent saisie
+et confirmation ; les erreurs d’upload après prise en charge restent dans le
+suivi de tentative. Les cartes
 stables ne sont pas remontées à chaque lecture, mais le retour de copie l’est.
 
 Chaque carte disponible mène à ses adresses versionnées, avec sélection dans
@@ -309,5 +311,12 @@ la query partageable. La facette nomme hash sélectionné et cible courante ; un
 lien explicite retrouve la cible par défaut. Les sélections invalides donnent
 leur refus, y compris après redirection canonique depuis un alias de domaine.
 Instances et invocations montrent hash demandé/résolu et alias technique réel.
-Ces changements sont préparés dans le dépôt ; le checkpoint007 reste déployé
-jusqu’à la bascule et sa qualification réelle.
+Ces changements sont déployés sur le contrôle008 DEV. Le build passe ; les
+parcours API ne constituent pas une preuve visuelle. Les scénarios de focus,
+refus conservé et dialog dont la carte sort de page restent à éprouver dans le
+navigateur avant qualification UI.
+
+Le catalogue est lu après le candidat suivi et avant la confirmation finale de
+la fonction. Une publication de code seul n’ayant pas d’effet sur l’ETag parent,
+cet ordre empêche l’arrêt du polling sur une liste antérieure au candidat publié.
+Le hash demandé d’une réimportation reste lisible dans son suivi, même en échec.

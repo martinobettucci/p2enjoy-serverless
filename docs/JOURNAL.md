@@ -1,5 +1,45 @@
 # Journal de cadrage
 
+## 2026-11-09 — Décision avant correction : cohérence terminale du suivi
+
+La revue confirme un entrelacement réel : versions lues, publication de code
+commise sans changer updated_at de fonction, candidat ensuite lu published,
+puis ETag parent identique. Le suivi pouvait arrêter son polling sur l’ancien
+catalogue. L’ordre retenu est fonction, candidats/candidat suivi, versions,
+fonction confirmée. La transaction du candidat published précède alors la
+lecture du catalogue ; aucune atomicité globale entre lectures n’est revendiquée.
+Le hash de réimportation est aussi affiché dans le suivi après prise en charge
+de l’envoi, dont une erreur ne rouvre ni ne renvoie automatiquement le ZIP.
+
+Les replays API12 avec relevé physique du doublon et CLI5 avec URL non vides
+passent sur242 sources et les mêmes images. La CLI authentifiée tourne sur le
+poste ; les38 groupes des images restent distincts. UI, pannes et suite complète
+restent ouverts. Ces décisions sont persistées avant la correction du frontend.
+
+## 2026-11-09 — Contrôle008 en qualification : migration et API réelles
+
+Les décisions5f40d13,175cf7d et2a838b9 précèdent leurs implémentations. L’image
+ba64364e est déployée sur le seul SPARK DEV, après préparation007 A/A/B et
+sauvegarde native privée du contrôle, du registre agent, des artefacts et des
+fichiers données/cache. L’image007 reste nommée. Deux groupes passent après
+migration et redémarrage réel ; le premier essai, arrêté sur session SSO expirée
+avant scénario, reste séparé. Le renouvellement utilise le vrai SSO.
+
+La campagne API passe12 groupes sur240 sources inchangées : Create initial,
+promotion A/B, sélection et préflight, déduplication/recompression/renommage,
+minimum=maximum1, archive/remplacement/désactivation, file refusée, suppression
+pendant appel admis, nettoyage, réimportation, plafond20 et convergence de deux
+uploads réellement en validation. Les deux fonctions sont purgées par les API.
+Les builds CLI passent ensuite24 groupes plan/package et14 refus publics ; leur
+publication authentifiée et les parcours UI restent à qualifier.
+
+La revue statique a fait corriger le passage d’un validateur attendant après
+nettoyage incomplet, un champ de résultat CLI absent, le focus après refus et la
+conservation des confirmations. Le dialog de retrait est détenu hors de la carte
+paginée et conserve son ETag initial. Le build Vite passe ; ces corrections UI
+et les pannes de nettoyage exigent encore leurs vrais scénarios. La régression
+commune et SLS-074 restent ouvertes. Aucun nouveau paramètre de cellule ni route.
+
 ## 2026-11-09 — Décision avant code : publication et exécution par hash
 
 Après0c79a11 qualifié, la suite de SLS-074 est spécifiée dans
