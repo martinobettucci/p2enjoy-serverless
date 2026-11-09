@@ -9,8 +9,11 @@
   Les28 captures sont inspectées ; manuel15 chapitres/52 paragraphes. Les vrais
   refus409/404 conservent le focus, et le suivi de publication relit le candidat
   avant le catalogue. Dix fonctions sont purgées,31 sources backend identiques
-  entre époques. Pannes, CLI authentifiée dans les images et régression complète
-  restent ouvertes ; SLS-074 n’est pas clôturée.
+  entre époques. Le complément CLI authentifié passe cinq groupes par image,
+  vingt commandes et douze invocations, sur245 sources. Deux fonctions de plus
+  sont purgées ; aucun client, définition ou réseau/volume Compose résiduel.
+  Les valeurs citées de cellule sont lues par Compose DEV. Les pannes et la
+  régression complète restent ouvertes ; SLS-074 n’est pas clôturée.
 
 - Registre persistant du hash des révisions : migration 007, alias historiques,
   lecture Read groupée et copie native dans la console.359 groupes réels passent

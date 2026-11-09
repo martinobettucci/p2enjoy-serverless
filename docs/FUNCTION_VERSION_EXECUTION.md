@@ -11,6 +11,13 @@ identiques entre campagnes API/CLI/UI. Les28 captures sont inspectées, dix
 fonctions purgées, contrôle et stockage au repos. Les autres preuves restent ouvertes. Les critères de [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md)
 restent tous applicables.
 
+Le [complément CLI Docker](evidence/function-version-cli-images-dev-2026-11-09.json)
+passe cinq groupes par image, vingt commandes et douze invocations. Les245
+sources sont figées ; produit/images/configuration restent ceux du checkpoint71.
+Deux fonctions supplémentaires sont purgées et les vingt clients ont disparu.
+Ce complément qualifie les environnements, sans dix comportements nouveaux.
+Les pertes du helper et l’expiration de ses délais restent à éprouver.
+
 ## Livraison cohérente
 
 La publication sans promotion est raccordée à l’admission par hash avant sa

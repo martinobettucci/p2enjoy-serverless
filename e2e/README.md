@@ -23,8 +23,9 @@ le recoupement physique du doublon avant purge est ajouté après la revue.
 `node e2e/function-versions-cli.mjs` passe cinq groupes authentifiés par le vrai
 processus Python du poste, avec six appels des URL émises sur les deux domaines.
 Cette exécution est distincte des24 groupes plan/package et14 refus publics
-dans les deux images CLI. La déclinaison authentifiée dans ces images, les
-pannes et régression complète restent nécessaires. Les six groupes UI et huit
+dans les deux images CLI. La déclinaison authentifiée passe désormais cinq
+groupes par image, selon le complément ci-dessous ; pannes et régression complète
+restent nécessaires. Les six groupes UI et huit
 du manuel passent désormais, avec28 captures inspectées et nettoyage natif de
 dix fonctions. Le [checkpoint71](../docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
 conserve séparément les images, sources et essais interrompus.
@@ -38,7 +39,7 @@ par l’API authentifiée et recoupe le message réellement affiché par la cons
 Le corps PUT n’est pas déclaré observé ; les essais de collecte CDP incomplets
 sont conservés avec leurs nettoyages, distincts du replay.
 
-### Commandes CLI authentifiées dans les images — préparation
+### Commandes CLI authentifiées dans les images — cinq groupes par image
 
 `node e2e/function-versions-cli.mjs --docker cli`, puis séparément
 `node e2e/function-versions-cli.mjs --docker qualification`, rejouent les cinq
@@ -46,7 +47,12 @@ groupes dans les deux images DEV. SSH vers le seul SPARK et vraie session SSO
 sont requis. `function-version-cli-container.py` reçoit les données privées sur
 stdin ; les sources et images sont recoupées, le conteneur est borné et son
 absence est vérifiée. Les rapports CLI Docker distincts n’écrasent pas le rapport
-hôte du checkpoint71. Aucune réussite n’est déclarée avant ces exécutions.
+hôte du checkpoint71. Le [complément qualifié](../docs/evidence/function-version-cli-images-dev-2026-11-09.json)
+recoupe245 sources avant/après, vingt clients disparus, douze invocations sur les
+deux domaines et deux fonctions purgées. Le premier essai direct est conservé
+avec zéro groupe réussi et ses parents nettoyés. Compose DEV lit les valeurs
+citées des fichiers officiels ; aucun fichier de cellule n’est modifié. Les
+pannes propres du helper et ses délais restent non qualifiés par ces scénarios.
 
 ## Pause et reprise d’une requête réelle
 

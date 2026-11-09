@@ -11,7 +11,12 @@ publics passent. Cinq groupes authentifiés passent aussi depuis le processus
 Python du poste : code seul scoped, configuration conservée, déduplication,
 promotion/rollback et refus Read, avec six invocations sur les deux domaines.
 Cette preuve du [checkpoint008](../docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
-est distincte de son exécution dans les deux images CLI, encore à éprouver.
+est complétée par les [deux campagnes Docker authentifiées](../docs/evidence/function-version-cli-images-dev-2026-11-09.json) :
+cinq groupes par image, vingt commandes dans leurs vrais conteneurs et douze
+invocations sur les deux domaines. Modules, fichiers empaquetés, images et
+nettoyages sont recoupés. Le premier essai de lecture littérale des env-file est
+conservé ; le lanceur utilise maintenant Compose DEV et son parseur normal.
+Les pannes du lanceur et la régression complète restent ouvertes.
 
 Implémentation SLS-030 en cours. Contrat : [DEPLOYMENT](../docs/DEPLOYMENT.md).
 Hôte Linux, Python 3.13+ et PyYAML 6.0.3 ; les archives utilisent ZIP de la bibliothèque
@@ -116,6 +121,7 @@ publications authentifiées et les deux campagnes CLI Docker. Le packager hors
 connexion ne connaît pas l’image immuable du serveur et n’annonce pas encore
 un tag complet. La commande deploy vérifie le hash retourné avec l’image immuable
 réellement validée ; elle publie sans promouvoir. Les modes code seul et promotion
-explicite sont déployés en DEV et qualifiés depuis le poste dans le checkpoint008.
+explicite sont déployés en DEV, qualifiés depuis le poste dans le checkpoint008
+et dans les deux images par son complément CLI Docker.
 Le filtre Docker autorise les onze seuls fichiers nécessaires aux deux stages,
 prouvés par COPY du contexte complet sans ouvrir les sauvegardes privées.

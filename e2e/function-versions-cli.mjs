@@ -2,23 +2,50 @@
 // @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#preuves-réelles
 import assert from 'node:assert/strict';
 import {randomUUID,createHash} from 'node:crypto';
-import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,mkdtemp,cp,rm,readdir} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {request} from 'playwright';
 
 const root=new URL('../',import.meta.url),out=new URL('../.local/e2e/',import.meta.url),base='https://serverless.lelabs.tech';
+const options=process.argv.slice(2),dockerMode=options.length?options[1]:null;
+assert(options.length===0||(options.length===2&&options[0]==='--docker'&&['cli','qualification'].includes(dockerMode)),'expected_docker_cli_or_qualification');
+const reportName=dockerMode?`function-versions-cli-docker-${dockerMode}.json`:'function-versions-cli.json';
 const checks=[],evidence=[],cleanupErrors=[],tokens=[],secret='cli-version-private-'+randomUUID();
-let api,caller,session,namespace,service,fn,work,manifest,publisher,scoped,reader,a,b,completed=false,cleanup=false;
+let api,caller,session,namespace,service,fn,work,manifest,publisher,scoped,reader,a,b,executionImage,completed=false,cleanup=false;
 await mkdir(out,{recursive:true,mode:0o700});
-async function save(){await writeFile(new URL('function-versions-cli.json',out),JSON.stringify({target:base,completed:completed&&cleanup,cleanup,cleanup_errors:cleanupErrors,
-  checks,skipped:0,evidence,namespace_id:namespace?.id,function_ids:fn?[fn.id]:[]},null,2)+'\n',{mode:0o600});}
+async function save(){await writeFile(new URL(reportName,out),JSON.stringify({target:base,execution:dockerMode?`docker-${dockerMode}`:'host-python',image:executionImage,completed:completed&&cleanup,cleanup,cleanup_errors:cleanupErrors,
+  checks,skipped:0,evidence,namespace_id:namespace?.id,service_id:service?.id,function_ids:fn?[fn.id]:[]},null,2)+'\n',{mode:0o600});}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}}
 async function call(path,{method='GET',body,headers={},status=200}={}){const r=await api.fetch(path,{method,data:body,headers:{Origin:base,'X-CSRF-Token':session?.csrf_token,...headers}});
   assert([status].flat().includes(r.status()),`${method} ${path}: ${r.status()}`);const text=await r.text();assert(!text.includes(secret));return JSON.parse(text);}
 async function until(action){const end=Date.now()+120000;while(Date.now()<end){const v=await action();if(v)return v;await new Promise(resolve=>setTimeout(resolve,150));}assert.fail('real_lifecycle_deadline');}
 async function credential(name,rights,extra={}){const row=await call(`/api/services/${service.id}/tokens`,{method:'POST',status:201,body:{name,rights,...extra}});tokens.push(row);return row.token;}
+async function executeInContainer(args,token){
+  const modules={},files={};
+  for(const name of (await readdir(new URL('adapter/',root))).filter(n=>n.endsWith('.py')))
+    modules['adapter/'+name]=createHash('sha256').update(await readFile(new URL('adapter/'+name,root))).digest('hex');
+  modules['function_code_hash.py']=createHash('sha256').update(await readFile(new URL('function_code_hash.py',root))).digest('hex');
+  for(const name of ['serverless.yml','function-versions.cjs','version-marker.json'])files[name]=await readFile(new URL(name,work),'utf8');
+  const mapped=args.map(value=>value===new URL('serverless.yml',work).pathname?'/tmp/serverless-cli-project/serverless.yml':value);
+  const payload=JSON.stringify({args:mapped,target:base,token,secret,files,modules});
+  const result=await new Promise(resolve=>{
+    let inputError;const child=execFile('ssh',['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','spark-docker@10.77.0.24',
+      `python3 -B /srv/p2enjoy-serverless/e2e/function-version-cli-container.py ${dockerMode}`],{timeout:240000,maxBuffer:6*1024*1024},
+      (error,stdout,stderr)=>resolve({error:error??inputError,stdout,stderr}));
+    child.stdin.on('error',error=>{inputError=error;});child.stdin.end(payload);
+  });
+  for(const value of [token,secret])assert(!result.stdout.includes(value)&&!result.stderr.includes(value),'container_transport_private_output');
+  assert.equal(result.stderr,'','container_transport_stderr');
+  const receipt=JSON.parse(result.stdout);
+  if(receipt.protocol_error){evidence.push({container_transport_error:{type:receipt.protocol_error,stage:receipt.stage}});await save();}
+  assert.equal(result.error?.code??0,0,'container_transport_exit');assert(!receipt.protocol_error&&receipt.container_absent&&receipt.compose_definition_absent,'container_command_and_cleanup');
+  assert.match(receipt.image,/^sha256:[0-9a-f]{64}$/);executionImage??=receipt.image;assert.equal(receipt.image,executionImage,'image_changed_during_campaign');
+  assert.deepEqual(receipt.modules,modules);assert.deepEqual(receipt.files,Object.fromEntries(Object.entries(files).map(([name,text])=>[name,createHash('sha256').update(text).digest('hex')])));
+  evidence.push({cli_container:{image:receipt.image,name:receipt.container_name,absent:true,command:args[0],code_only:args.includes('--code-only'),exit_code:receipt.exit_code,modules:receipt.modules,files:receipt.files,python:receipt.python,compose_stderr:receipt.compose_stderr,compose_definition_absent:true}});await save();
+  return {error:receipt.exit_code?{code:receipt.exit_code}:null,stdout:receipt.stdout,stderr:receipt.stderr};
+}
 async function execute(args,token,success=true){const env={...process.env,P2_SERVERLESS_URL:base,P2_SERVERLESS_TOKEN:token,QUALIFICATION_SYNTHETIC_SECRET:secret};delete env.UNRESOLVED_VERSION_PILOT_VALUE;
-  const result=await new Promise(resolve=>execFile('python3',['-B','-m','adapter',...args],{cwd:root.pathname,env,timeout:180000,maxBuffer:4*1024*1024},
+  const result=dockerMode?await executeInContainer(args,token):await new Promise(resolve=>execFile('python3',['-B','-m','adapter',...args],{cwd:root.pathname,env,timeout:180000,maxBuffer:4*1024*1024},
     (error,stdout,stderr)=>resolve({error,stdout,stderr})));
   assert.equal(result.error?.code??0,success?0:1,'real_cli_exit');assert(!result.stderr.includes('Traceback'));
   for(const sensitive of [secret,token])assert(!result.stdout.includes(sensitive)&&!result.stderr.includes(sensitive),'cli_credential_exposed');

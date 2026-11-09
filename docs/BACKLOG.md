@@ -743,8 +743,8 @@ et nettoyage migration sont des prérequis non additionnés. Les essais UI
 interrompus et les premiers replays verts restent distincts, sans gonfler71.
 
 Les cinq groupes CLI passent depuis Python sur le poste, avec six invocations
-des URL des deux domaines ; leur déclinaison authentifiée dans les deux images
-reste à éprouver. La convergence API est recoupée physiquement avant purge :
+des URL des deux domaines. Leur déclinaison authentifiée dans les deux images
+passe désormais cinq groupes par image, détaillés ci-dessous. La convergence API est recoupée physiquement avant purge :
 révision canonique conservée, paquet réutilisé effacé, réservations à zéro.
 Le catalogue UI est lu après le candidat ; le suivi termine avec le nouveau hash
 sans mutation d’ETag parent. Les vrais refus409/404 conservent confirmation,
@@ -752,15 +752,19 @@ saisie et focus après réactivation. Le dialog conserve son contexte quand sa
 carte quitte la page pendant une publication réelle. Les messages de publication
 sont recoupés au PUT réel, au GET durable et au rendu ; aucun corps PUT navigateur
 n’est déclaré observé. Les pannes et la régression complète restent ouvertes.
-La prochaine preuve porte sur les cinq comportements CLI déjà qualifiés sur
-le poste, dans chacune des deux images Docker DEV, selon
-[le contrat de transport privé](FUNCTION_VERSION_EXECUTION.md#cli-conteneurisée-authentifiée).
-Le premier lanceur direct s’arrête avant scénario sur la lecture littérale de
-l’origine citée dans le fichier officiel. Les objets et clients sont nettoyés ;
-le replay utilisera Compose DEV et son parseur normal, sans changer la cellule.
-Leurs campagnes et nettoyages restent séparés ; aucun cumul ne les présente
-comme dix comportements fonctionnels nouveaux. Pannes et suite complète restent
-obligatoires après ce complément.
+Le [complément CLI Docker](evidence/function-version-cli-images-dev-2026-11-09.json)
+passe cinq groupes par image sur245 sources figées : vingt conteneurs CLI,
+douze invocations réelles et deux fonctions supplémentaires purgées. Les six
+modules embarqués, trois fichiers de projet, images et nettoyages sont recoupés.
+Le contrôle, la référence, les images et la configuration officielle sont
+inchangés. Aucun client, réseau/volume Compose ou définition temporaire ne reste.
+Les douze fonctions des campagnes008 sont purgées, l’essai initial n’en a créé
+aucune et ses parents sont supprimés. Le premier lanceur direct échoue sur la
+lecture littérale de l’origine citée ; le replay passe par Compose DEV sans
+changer la cellule. Le rapport incomplet reste séparé. Les dix exécutions
+complètent cinq comportements dans deux images et ne sont pas revendiquées
+comme dix comportements nouveaux. Les pannes du helper, ses délais indépendants,
+les fautes de publication/migration et la suite complète restent nécessaires.
 La revue statique du pipeline a révélé le passage possible d’un validateur
 déjà en attente après un nettoyage incomplet ; le verrou est corrigé, et la
 preuve réelle de ce refus rejoint les critères de FUNCTION_VERSION_EXECUTION.

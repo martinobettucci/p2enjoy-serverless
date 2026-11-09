@@ -462,8 +462,13 @@ réunit71 groupes :2 migration/reprise,12 API,5 CLI authentifiés depuis le post
 inspectées ; manuel15 chapitres/52 paragraphes. Dix fonctions sont purgées,
 les dossiers d’artefacts absents et les ressources actives à zéro. Les31 fichiers
 Python/SQL backend sont identiques entre époques API/CLI/UI. Les preuves007
-ci-dessus restent historiques. Les modes authentifiés dans les images CLI,
-les pannes et la régression complète restent ouverts ; SLS-074 demeure en cours.
+ci-dessus restent historiques. Le complément CLI authentifié passe désormais
+cinq groupes par image, vingt commandes et douze invocations sur245 sources :
+docs/evidence/function-version-cli-images-dev-2026-11-09.json. Deux nouvelles
+fonctions sont purgées ; aucun client, réseau/volume ou définition Compose
+résiduel. Le premier lanceur direct est remplacé par Compose DEV pour lire les
+valeurs citées des deux fichiers officiels, qui ne changent pas. Les pannes du
+helper et la régression complète restent ouvertes ; SLS-074 demeure en cours.
 
 Image contrôle courante :178394abb337, référence007 retenue sous
 before-function-version-promotions. Après migration008 commise, ne pas remettre

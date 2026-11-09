@@ -157,8 +157,10 @@ alias/cible et données/cache après migration puis redémarrage ; douze groupes
 complètent ce premier checkpoint. Le
 [checkpoint ciblé008](evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
 ajoute5 groupes CLI authentifiés depuis le poste,6 UI,8 manuel et38 packaging/refus
-CLI Docker. Les preuves007 restent historiques. Les refus/reprises de008, la CLI
-authentifiée dans ses images et la régression complète restent requis.
+CLI Docker. Le [complément CLI](evidence/function-version-cli-images-dev-2026-11-09.json)
+qualifie ensuite cinq groupes authentifiés par image, sans changement de schéma
+ni produit. Les preuves007 restent historiques. Les refus/reprises de008 et la
+régression complète restent requis.
 
 ## Registre local de stockage
 

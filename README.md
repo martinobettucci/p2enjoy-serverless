@@ -87,8 +87,12 @@ Le [checkpoint ciblé008](docs/evidence/function-version-execution-checkpoint-de
 réunit71 groupes :2 migration/reprise,12 API,5 CLI authentifiés depuis le poste,
 6 UI,8 manuel et38 packaging/refus dans les images CLI. Les28 nouvelles captures
 sont inspectées ; le manuel comporte15 chapitres et52 paragraphes. Les dix
-fonctions des campagnes et essais interrompus sont purgées. Les modes authentifiés
-dans les images CLI, les pannes et la régression complète restent ouverts.
+fonctions des campagnes et essais interrompus sont purgées. Le
+[complément CLI Docker](docs/evidence/function-version-cli-images-dev-2026-11-09.json)
+passe ensuite les mêmes cinq groupes dans chacune des deux images : vingt
+commandes et douze invocations réelles, deux nouvelles fonctions purgées. Il
+complète la matrice d’environnements sans ajouter dix comportements nouveaux.
+Les pannes et la régression complète restent ouvertes.
 La preuve359 et ses captures décrivent le checkpoint007.
 
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une

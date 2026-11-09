@@ -1,5 +1,28 @@
 # Journal de cadrage
 
+## 2026-11-09 — CLI authentifiée qualifiée dans ses deux images DEV
+
+Les cinq mêmes groupes passent successivement dans les images77a3c302 et
+a986c0d0, sur245 sources figées. Les vingt commandes exécutent les vrais modules
+embarqués et leurs six empreintes sont recoupées ; les trois fichiers de projet
+sont reçus dans le tmpfs puis réellement empaquetés. Douze invocations des URL
+des deux domaines confirment handlers, hashes et configuration conservée.
+
+Le recoupement natif confirme les deux nouvelles fonctions purgées, leurs
+parents supprimés et les vingt conteneurs absents. Aucun réseau/volume Compose,
+définition temporaire, bail, montage ou appel actif ne reste. Les douze fonctions
+de toutes les campagnes008 sont purgées. Le premier essai direct n’avait créé
+aucune fonction ; son service et namespace sont confirmés supprimés. Le premier
+collecteur RO oubliait initial_namespace ; son NameError est corrigé puis la
+lecture complète passe, sans mutation de données ni service.
+
+La revue statique ne relève aucun défaut résiduel. Aucune interface ou image
+produit ne change ; les31 fichiers backend, la référence, les démarrages et les
+fichiers officiels restent identiques au checkpoint71. Les cinq comportements
+dans deux environnements sont dix exécutions, pas dix comportements nouveaux.
+Les pannes du helper, les délais et les critères restants074 restent ouverts.
+Le manuel et ses captures du checkpoint71 restent applicables sans nouveau build.
+
 ## 2026-11-09 — CLI Docker : respecter la lecture Compose des fichiers de cellule
 
 Le premier essai s’arrête avant un groupe validé, sans fonction publiée ; les
