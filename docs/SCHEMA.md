@@ -127,7 +127,7 @@ l’activation à l’upload ni l’admission d’invocations.
 
 ## Autorité des versions et promotions
 
-La migration 008 prévue pour SLS-074 ajoute `function_versions`, clé primaire
+La migration 008 de SLS-074 ajoute `function_versions`, clé primaire
 `(function_id, code_hash)` : `revision_id` canonique référencé, `created_at`
 initial, `state` available/archived/deleted et `updated_at`. L’alias canonique
 doit appartenir à la même fonction et porter le même hash. Les UUID historiques
@@ -151,9 +151,14 @@ Les instances conservent leur UUID d’alias physique ; leur hash est lu dans la
 révision immuable, sans nouveau champ positionnel. Les insertions concernées
 nomment explicitement leurs colonnes.
 
-Cette migration est préparée avec publication sans activation, promotion et
-admission par hash ; elle n’est pas encore installée en DEV. Le checkpoint007
-et ses preuves conservent leur comportement historique.
+Cette migration est installée en qualification DEV avec publication sans
+activation, promotion et admission par hash. Deux groupes réels recoupent
+alias/cible et données/cache après migration puis redémarrage ; douze groupes API
+complètent ce premier checkpoint. Le
+[checkpoint ciblé008](evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
+ajoute5 groupes CLI authentifiés depuis le poste,6 UI,8 manuel et38 packaging/refus
+CLI Docker. Les preuves007 restent historiques. Les refus/reprises de008, la CLI
+authentifiée dans ses images et la régression complète restent requis.
 
 ## Registre local de stockage
 

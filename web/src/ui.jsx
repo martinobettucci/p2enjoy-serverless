@@ -56,7 +56,8 @@ export function Pagination({page, size, count, change}) {
   </nav>;
 }
 
-export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirmationLabel = 'Confirmer la création', children, onSubmit, onClose, confirmation}) {
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md
+export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirmationLabel = 'Confirmer la création', confirmationTone = 'primary', preserveConfirmationOnError = false, focusTarget, children, onSubmit, onClose, confirmation}) {
   const [value, setValue] = useState(initial);
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -68,12 +69,17 @@ export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirm
   const discardRef = useRef(null);
   const reviewRef = useRef(null);
   const previousPanel = useRef(false);
+  const focusAfterError = useRef(false);
   const dirty = JSON.stringify(value) !== JSON.stringify(initial);
   useEffect(() => {
     ref.current.showModal();
     document.body.classList.add('dialog-open');
     (ref.current.querySelector('input:not([readonly]),textarea,select') || ref.current.querySelector('button'))?.focus();
-    return () => {document.body.classList.remove('dialog-open'); origin.current?.focus();};
+    return () => {
+      document.body.classList.remove('dialog-open');
+      const target=origin.current?.isConnected && !origin.current.matches(':disabled') ? origin.current : focusTarget?.current;
+      target?.focus();
+    };
   }, []);
   useEffect(() => {
     if (discard) discardRef.current?.focus();
@@ -81,6 +87,12 @@ export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirm
     else if (previousPanel.current) ref.current.querySelector('input:not([readonly]),textarea,select')?.focus();
     previousPanel.current=discard || review;
   }, [discard,review]);
+  useLayoutEffect(() => {
+    if (!busy && error && focusAfterError.current) {
+      const target=review ? reviewRef.current : ref.current?.querySelector('input:not([readonly]),textarea,select,button');
+      if (target?.isConnected && !target.matches(':disabled')) {focusAfterError.current=false;target.focus();}
+    }
+  });
   function close() {if (!busy) {if (dirty) setDiscard(true); else onClose();}}
   async function submit(event,confirmed=false) {
     event?.preventDefault();
@@ -88,7 +100,7 @@ export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirm
     if (confirmation && !confirmed) {setReview(true);return;}
     setBusy(true); setError(null);
     try {await onSubmit(value); onClose();}
-    catch (err) {setError(err);setReview(false);}
+    catch (err) {focusAfterError.current=true;setError(err);if (!preserveConfirmationOnError) setReview(false);}
     finally {setBusy(false);}
   }
   return <dialog ref={ref} aria-labelledby={heading} onCancel={event => {event.preventDefault(); close();}}>
@@ -101,7 +113,7 @@ export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirm
           <button className="danger" type="button" onClick={onClose}>Abandonner</button>
         </div></div> : review ? <div className="confirm" role="group" aria-label="Confirmation de l’opération">
           <p>{confirmation(value)}</p><div className="actions"><button ref={reviewRef} type="button" onClick={() => setReview(false)} disabled={busy}>Revenir à la saisie</button>
-            <button className="primary" type="button" disabled={busy} onClick={() => submit(null,true)}>{busy ? 'Enregistrement…' : confirmationLabel}</button></div>
+            <button className={confirmationTone} type="button" disabled={busy} onClick={() => submit(null,true)}>{busy ? 'Enregistrement…' : confirmationLabel}</button></div>
         </div> : <div className="dialog-actions"><button type="button" onClick={close} disabled={busy}>Annuler</button>
         <button className="primary" disabled={busy}>{busy ? 'Enregistrement…' : submitLabel}</button></div>}
     </form>
@@ -109,7 +121,8 @@ export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirm
 }
 
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#console-et-manuel | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md
-export function Confirm({label, message, action, name, disabled=false, focusTarget}) {
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md
+export function Confirm({label, message, action, name, disabled=false, focusTarget, tone='danger'}) {
   const [open, setOpen] = useState(false);
   const [typed, setTyped] = useState('');
   const [busy, setBusy] = useState(false);
@@ -117,6 +130,7 @@ export function Confirm({label, message, action, name, disabled=false, focusTarg
   const opener = useRef(null);
   const target = useRef(null);
   const restoreFocus = useRef(false);
+  const focusAfterError = useRef(false);
   const explanation = useId();
   useEffect(() => {if (open) target.current?.focus();}, [open]);
   useLayoutEffect(() => {
@@ -125,12 +139,17 @@ export function Confirm({label, message, action, name, disabled=false, focusTarg
       if (node?.isConnected) {node.focus();restoreFocus.current=false;}
     }
   }, [open,busy,disabled,focusTarget]);
+  useLayoutEffect(() => {
+    if (open && !busy && error && focusAfterError.current && target.current?.isConnected && !target.current.matches(':disabled')) {
+      focusAfterError.current=false;target.current.focus();
+    }
+  });
   function cancel() {if (!busy) {restoreFocus.current=true;setOpen(false); setTyped(''); setError(null);}}
   async function run() {
     if (busy || disabled || Boolean(name && typed !== name)) return;
     setBusy(true); setError(null);
     try {await action();restoreFocus.current=true;setOpen(false);setTyped('');}
-    catch (err) {setError(err);}
+    catch (err) {focusAfterError.current=true;setError(err);}
     finally {setBusy(false);}
   }
   return <div className="confirmation"><button ref={opener} disabled={disabled || busy} onClick={() => open ? cancel() : setOpen(true)} aria-expanded={open}>{label}</button>
@@ -139,7 +158,7 @@ export function Confirm({label, message, action, name, disabled=false, focusTarg
         <input ref={target} disabled={busy} value={typed} onChange={e => setTyped(e.target.value)} autoComplete="off"/>
       </Field>}
       <ErrorMessage error={error}/><div className="actions"><button ref={name ? undefined : target} onClick={cancel} disabled={busy}>Annuler</button>
-      <button className="danger" aria-describedby={explanation} onClick={run} disabled={disabled || busy || Boolean(name && typed !== name)}>{busy ? 'Traitement…' : label}</button></div>
+      <button className={tone} aria-describedby={explanation} onClick={run} disabled={disabled || busy || Boolean(name && typed !== name)}>{busy ? 'Traitement…' : label}</button></div>
     </div>}
   </div>;
 }

@@ -1,5 +1,18 @@
 # Adaptateur P2Enjoy
 
+La livraison SLS-074 en qualification DEV propose `deploy --code-only` (fonctions déjà
+créées, configuration conservée) et `promote --function UUID --code-hash HASH`.
+Le déploiement publie sans promouvoir ; son rapport distingue hash, code nouveau
+ou réutilisé et cible observée. Le catalogue demandé après publication vise ce
+hash explicite. Le calculateur canonique commun est inclus dans les deux images
+pour vérifier l’identité depuis l’inventaire empaqueté et l’image validée.
+Les deux images CLI sont reconstruites ;24 groupes plan/package et14 refus
+publics passent. Cinq groupes authentifiés passent aussi depuis le processus
+Python du poste : code seul scoped, configuration conservée, déduplication,
+promotion/rollback et refus Read, avec six invocations sur les deux domaines.
+Cette preuve du [checkpoint008](../docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
+est distincte de son exécution dans les deux images CLI, encore à éprouver.
+
 Implémentation SLS-030 en cours. Contrat : [DEPLOYMENT](../docs/DEPLOYMENT.md).
 Hôte Linux, Python 3.13+ et PyYAML 6.0.3 ; les archives utilisent ZIP de la bibliothèque
 standard. Les handlers sont préparés par le projet avant le packaging.
@@ -101,7 +114,8 @@ L’inventaire de chaque fichier empaqueté contient aussi `mode`, normalisé à
 le vrai runtime : sept groupes ciblés et 45 de régression, dont les sept
 publications authentifiées et les deux campagnes CLI Docker. Le packager hors
 connexion ne connaît pas l’image immuable du serveur et n’annonce pas encore
-un tag complet. La commande deploy garde sa publication actuelle ; le parcours
-code seul/promotion explicite sera raccordé dans les étapes suivantes de SLS-074.
+un tag complet. La commande deploy vérifie le hash retourné avec l’image immuable
+réellement validée ; elle publie sans promouvoir. Les modes code seul et promotion
+explicite sont déployés en DEV et qualifiés depuis le poste dans le checkpoint008.
 Le filtre Docker autorise les onze seuls fichiers nécessaires aux deux stages,
 prouvés par COPY du contexte complet sans ouvrir les sauvegardes privées.

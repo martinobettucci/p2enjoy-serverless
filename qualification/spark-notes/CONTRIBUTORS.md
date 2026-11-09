@@ -6,7 +6,7 @@ Le dépôt de travail est `/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-server
 
 La configuration consommée vient exclusivement de `/etc/spark/env` et `/run/spark/secrets`. Proposer les changements dans les fichiers voisins `.?`, puis utiliser la console SPARK pour les appliquer. La même procédure s’applique aux trois notes. Aucun `.env`, secret en dépôt ou surcharge de conteneur de substitution.
 
-Le contrôle conserve sa base et ses artefacts dans `/srv/p2enjoy-serverless/state`. La clé `SERVERLESS_MASTER_KEY` reste liée à cette base. Le schéma courant porte les migrations 001 à 006 ; les sauvegardes natives avant 005 et 006 et leurs vérifications sont décrites dans `docs/PLATFORM_DEV.md`. Les écritures postérieures empêchent une restauration implicite. SLS-031 ne demande aucune nouvelle migration.
+Le contrôle conserve sa base et ses artefacts dans `/srv/p2enjoy-serverless/state`. La clé `SERVERLESS_MASTER_KEY` reste liée à cette base. Le schéma courant porte les migrations001 à008. Les sauvegardes natives avant005/006 sont décrites dans `docs/PLATFORM_DEV.md` ; celles avant008 et sa migration ciblée sont recoupées dans `docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json`. Les écritures postérieures empêchent une restauration implicite. SLS-031 ne demande aucune nouvelle migration.
 
 L’agent possède `/srv/p2enjoy-serverless/storage-state`, schéma 004. Son canal `/srv/p2enjoy-serverless/storage-channel` est privé et monté readonly dans le contrôle. Ne jamais monter les backings natifs dans un workload : acquérir un bail et utiliser son chemin FUSE. Budget logique 32768 Mio, marge physique 8192 Mio, plafond 64 montages. Les valeurs officielles restent l’autorité.
 
@@ -20,7 +20,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:7b52f630b7f071a9fc7659298039b7bfcfe3579ed6fb962ebf0a63db8259f490`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:738a2b89bafc5439c941400520f7f310bb66030ab06afb7b575a572e1047cb61` ; son image cliente E2E est `sha256:0850958b525f69a54b01ebbb290f705ea60ce8303cbed96a98b13589d731676b`.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:178394abb337bd70ca9c18a139fc65ab2c1f83d3ad41eed5d5bf79bed2dc0f5e`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 
@@ -411,15 +411,15 @@ Sept groupes rejoués après nommage explicite ; 45 conservés aux clients incha
 deux époques de 222 sources et mêmes sources produit/images.
 
 
-## Registre persistant de l’identité du code
+## Registre007 de l’identité du code — historique
 
 La migration 007 et le cache code_hash sont déployés. Les alias UUID historiques
 et la cible courante sont conservés ; le premier backfill reconnaît aussi les
 purges 006 décidées et fortement corrélées, sans inventer de hash ni retirer les
 compteurs/gardes avant leur nettoyage normal. La carte Code et révisions montre
 et copie le hash complet. GET /api/functions/{id}/versions fournit une lecture
-Read/admin groupée et paginée, sans code ni secrets. Les uploads activent encore
-leur révision ; déduplication, promotion distincte et appel par hash suivent.
+Read/admin groupée et paginée, sans code ni secrets. À ce checkpoint007, les uploads activaient encore
+leur révision. Le checkpoint008 ci-dessous décrit le fonctionnement actuel.
 
 Preuve : docs/evidence/function-version-registry-dev-2026-11-09.json. 359 groupes
 sur deux époques de 233 sources aux mêmes fichiers produit et image, dont 46 ciblés
@@ -430,7 +430,7 @@ WAL, son nettoyage natif et le replay 15 groupes du poller sont conservés sépa
 Les six fonctions du registre sont purgées dans six namespaces recoupés ; les
 régressions ont leur propre nettoyage dans leurs rapports.
 
-Image courante : fe75c9e7, conservée aussi sous
+Image de ce checkpoint007 : fe75c9e7, conservée aussi sous
 p2enjoy-control:purge-recovery-reference. La référence 006 est reconstruite depuis
 le vrai Git f56d79e, vérifiée et conservée sous historical-schema-006. Vérifier
 l’image effectivement portée après build/up ; si up garde l’ancien conteneur,
@@ -444,3 +444,34 @@ Les fichiers officiels, l’agent et le runtime de référence sont conservés ;
 daemon permanent nouveau. Les trois notes sont proposées individuellement,
 sans revendiquer leur adoption. Configuration par les deux fichiers de cellule ;
 aucun .env, ENV/ARG ou environment de configuration ajouté.
+
+
+## Versions par hash — checkpoint ciblé008
+
+Le contrôle008 prépare une version sans la promouvoir. L’upload identique
+réutilise son hash disponible et sa date ; un hash archivé se restaure
+explicitement, un hash supprimé se réimporte avec son ZIP validé. Promouvoir
+choisit la cible des appels sans tag ; les pilotes utilisent le hash explicite.
+Le rollback de code conserve ressources, variables/secrets et volumes courants.
+Les appels déjà admis terminent avec leur snapshot ; les pools des versions
+partagent les budgets et limites de leur fonction.
+
+La preuve docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json
+réunit71 groupes :2 migration/reprise,12 API,5 CLI authentifiés depuis le poste,
+6 UI,8 manuel et38 packaging/refus dans les images CLI. Les28 captures sont
+inspectées ; manuel15 chapitres/52 paragraphes. Dix fonctions sont purgées,
+les dossiers d’artefacts absents et les ressources actives à zéro. Les31 fichiers
+Python/SQL backend sont identiques entre époques API/CLI/UI. Les preuves007
+ci-dessus restent historiques. Les modes authentifiés dans les images CLI,
+les pannes et la régression complète restent ouverts ; SLS-074 demeure en cours.
+
+Image contrôle courante :178394abb337, référence007 retenue sous
+before-function-version-promotions. Après migration008 commise, ne pas remettre
+seule une ancienne image : une restauration exige base, artefacts et volumes
+cohérents. La sauvegarde native privée avant008 est conservée sous
+/srv/p2enjoy-serverless/qualification-history/.
+
+Aucune variable, secret ou route ajouté ; les deux domaines TLS restent18090.
+Configuration par les deux fichiers officiels de cellule, aucun .env, ENV/ARG ou
+environment de configuration. Agent et runtime de référence sont conservés.
+Les trois notes sont proposées individuellement ; leur adoption n’est pas revendiquée.

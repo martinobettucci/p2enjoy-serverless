@@ -1,4 +1,5 @@
 // @spec docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md | docs/DESIGN_SYSTEM_APP.md
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#sélection-http-et-admission | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md#consulter-les-instances-et-les-journaux
 import React, {useEffect, useRef, useState} from 'react';
 import {ChevronLeft, ChevronRight, RefreshCw} from 'lucide-react';
 import {api} from './api';
@@ -80,7 +81,7 @@ function Instance({row}) {
   return <article aria-label={`Instance ${row.id}`}>
     <div className="observation-heading"><h3 className="mono">{row.id}</h3><State value={row.state}/></div>
     <Facts values={[
-      ['Révision',reference(row.revision_id)],['Création',stamp(row.created_at)],
+      ['Hash du code',reference(row.code_hash)],['Révision interne',reference(row.revision_id)],['Création',stamp(row.created_at)],
       ['CPU alloué',`${number(row.cpu_nanos,1e9)} CPU`],['Mémoire allouée',`${number(row.memory_mib)} Mio`],
       ['Mémoire consommée',metrics?.memory_usage_bytes == null ? 'Indisponible' : `${number(metrics.memory_usage_bytes,1024 ** 2)} Mio`],
       ['Temps CPU cumulé',metrics?.cpu_usage_ns == null ? 'Indisponible' : `${number(metrics.cpu_usage_ns,1e9)} s`],
@@ -97,7 +98,8 @@ function Invocation({row}) {
     <p className="muted">Reçue le {stamp(row.created_at)}{row.http_status != null && <> · HTTP {row.http_status}</>}</p>
     <details className="invocation-details"><summary>Détails et journal</summary><div className="stack">
       <Facts values={[
-        ['Révision',reference(row.revision_id)],['Instance',reference(row.instance_id)],
+        ['Sélection demandée',row.requested_code_hash ? reference(row.requested_code_hash) : 'Cible par défaut'],
+        ['Hash exécuté',reference(row.resolved_code_hash)],['Révision interne',reference(row.revision_id)],['Instance',reference(row.instance_id)],
         ['Mise en file',stamp(row.queued_at)],['Admission',stamp(row.admitted_at)],
         ['Envoi au runtime',stamp(row.dispatched_at)],['Fin',stamp(row.completed_at)],
         ['Démarrage du handler confirmé',row.handler_started === true ? 'Oui' : row.handler_started === false ? 'Non' : 'Non confirmé'],

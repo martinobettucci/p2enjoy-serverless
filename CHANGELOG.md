@@ -2,6 +2,16 @@
 
 ## [Non publié]
 
+- Versionnement par hash en qualification DEV008 : upload préparé, déduplication,
+  promotion explicite, pools et sélection épinglée, archivage et réimportation.
+  Le checkpoint ciblé réunit71 groupes :2 migration/reprise,12 API,5 CLI
+  authentifiés depuis le poste,6 UI,8 manuel et38 packaging/refus CLI Docker.
+  Les28 captures sont inspectées ; manuel15 chapitres/52 paragraphes. Les vrais
+  refus409/404 conservent le focus, et le suivi de publication relit le candidat
+  avant le catalogue. Dix fonctions sont purgées,31 sources backend identiques
+  entre époques. Pannes, CLI authentifiée dans les images et régression complète
+  restent ouvertes ; SLS-074 n’est pas clôturée.
+
 - Registre persistant du hash des révisions : migration 007, alias historiques,
   lecture Read groupée et copie native dans la console.359 groupes réels passent
   sur l’image finale, avec69 captures recoupées et manuel15 chapitres/47 paragraphes.

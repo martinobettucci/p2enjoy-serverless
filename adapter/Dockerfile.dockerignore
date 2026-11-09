@@ -1,6 +1,7 @@
 # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#outil-et-manifeste
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_CODE_HASH.md#construction-isolée
 *
+!function_code_hash.py
 !adapter/
 adapter/**
 !adapter/__init__.py

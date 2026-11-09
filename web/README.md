@@ -1,5 +1,15 @@
 # Console web
 
+La suite SLS-074 est déployée pour qualification en DEV : versions groupées par hash,
+publication/promotion séparées, archive/restore/delete, réimportation explicite
+et adresses épinglées. Le manuel source accompagne ces changements. Le build
+Vite local et Docker passent ; six groupes navigateur et huit du manuel passent
+dans le [checkpoint008](../docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json),
+avec28 captures inspectées. Les vrais409/404 conservent confirmation, saisie et
+focus ; un dialog reste ouvert lorsque sa carte quitte la page pendant une
+publication externe. Pannes et régression complète restent à éprouver.
+Le checkpoint007 ci-dessous reste historique.
+
 Console React/Vite servie par le contrôle sur la même origine. Contrats :
 [CONTROL](../docs/CONTROL.md), [design du produit](../docs/DESIGN_SYSTEM_APP.md)
 et [socle visuel](../docs/DESIGN_SYSTEM.md).

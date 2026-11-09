@@ -1,10 +1,12 @@
 # Versions de fonction identifiées par leur code
 
 Contrat de [SLS-074](BACKLOG.md#sls-074), demandé le 8 novembre 2026.
-Cette extension est en cours. Le produit possède déjà des révisions
-immuables, leur historique et une activation permettant le rollback ; il ne
-fournit pas encore la déduplication par contenu, les tags d’invocation ni
-l’archivage individuel décrit ici. Le manuel reste celui du comportement livré.
+Cette extension est en cours de qualification sur le contrôle008 DEV.
+Déduplication, promotion séparée, sélection/pools par hash et gestion d’état sont
+implémentés, avec console, CLI et manuel adaptés. La migration et les API passent
+leurs premiers scénarios réels ; les preuves CLI/UI, les pannes et la régression
+complète restent nécessaires avant clôture. Le checkpoint007 qualifié reste
+conservé comme référence historique.
 
 ## Ordre de réalisation
 

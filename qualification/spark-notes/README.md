@@ -13,7 +13,7 @@ Ce SPARK héberge la plateforme de fonctions Docker sur l’infrastructure de d�
 
 Le SSO LeLabs exige les rôles `verified` et `admin`. La console gère namespaces, services, fonctions, politiques d’origine/IP, variables, secrets et jetons CRUD limités au service ou à certaines fonctions.
 
-L’adaptateur Python lit `serverless.yml`, prépare des archives et publie les fonctions par HTTPS. Le contrôle valide réellement le handler dans Node/Docker, conserve les révisions et fournit historique et rollback. Le rollback du code conserve les réglages applicatifs et les volumes courants.
+L’adaptateur Python lit `serverless.yml`, prépare des archives et publie les fonctions par HTTPS. Le contrôle valide réellement le handler dans Node/Docker, conserve les versions par hash et fournit promotion, historique et rollback. Le rollback du code conserve les réglages applicatifs et les volumes courants.
 
 Les créations, changements de quotas, publications et suppressions sont raccordés à l’agent réel. La décision durable du contrôle et l’objet sont commis ensemble. Avant cette décision, une interruption reprend l’abandon ; après, elle confirme la mutation. La suppression archive données et cache en conservant leur allocation. Leur purge est distincte.
 
@@ -29,7 +29,7 @@ La publication de code conserve côté serveur les ressources, variables, secret
 
 La qualification `python3 -B e2e/execution-suite.py --scope publication` passe 18 campagnes en série et 312 groupes réels, sans échec ni cas ignoré. Elle réunit moteur et console sans répéter les campagnes communes. La preuve `docs/evidence/publication-console-dev-2026-11-07.json` recoupe sources, image, rapports frais, captures relues, archives et ressources nettoyées. Les pannes de nettoyage sont éprouvées sur les seules révisions de campagne, avec garde indépendante puis maintenance normale.
 
-Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses quinze chapitres et 47 paragraphes viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.
+Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses quinze chapitres et52 paragraphes viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.
 
 L’agent de stockage dispose maintenant d’effacements corrélés : reçu durable,
 répétition sans second vidage et reprise après erreur physique ou interruption.
@@ -315,15 +315,15 @@ Sept groupes rejoués après nommage explicite ; 45 conservés aux clients incha
 deux époques de 222 sources et mêmes sources produit/images.
 
 
-## Registre persistant de l’identité du code
+## Registre007 de l’identité du code — historique
 
 La migration 007 et le cache code_hash sont déployés. Les alias UUID historiques
 et la cible courante sont conservés ; le premier backfill reconnaît aussi les
 purges 006 décidées et fortement corrélées, sans inventer de hash ni retirer les
 compteurs/gardes avant leur nettoyage normal. La carte Code et révisions montre
 et copie le hash complet. GET /api/functions/{id}/versions fournit une lecture
-Read/admin groupée et paginée, sans code ni secrets. Les uploads activent encore
-leur révision ; déduplication, promotion distincte et appel par hash suivent.
+Read/admin groupée et paginée, sans code ni secrets. À ce checkpoint007, les uploads activaient encore
+leur révision. Le checkpoint008 ci-dessous décrit le fonctionnement actuel.
 
 Preuve : docs/evidence/function-version-registry-dev-2026-11-09.json. 359 groupes
 sur deux époques de 233 sources aux mêmes fichiers produit et image, dont 46 ciblés
@@ -334,7 +334,7 @@ WAL, son nettoyage natif et le replay 15 groupes du poller sont conservés sépa
 Les six fonctions du registre sont purgées dans six namespaces recoupés ; les
 régressions ont leur propre nettoyage dans leurs rapports.
 
-Image courante : fe75c9e7, conservée aussi sous
+Image de ce checkpoint007 : fe75c9e7, conservée aussi sous
 p2enjoy-control:purge-recovery-reference. La référence 006 est reconstruite depuis
 le vrai Git f56d79e, vérifiée et conservée sous historical-schema-006. Vérifier
 l’image effectivement portée après build/up ; si up garde l’ancien conteneur,
@@ -348,3 +348,34 @@ Les fichiers officiels, l’agent et le runtime de référence sont conservés ;
 daemon permanent nouveau. Les trois notes sont proposées individuellement,
 sans revendiquer leur adoption. Configuration par les deux fichiers de cellule ;
 aucun .env, ENV/ARG ou environment de configuration ajouté.
+
+
+## Versions par hash — checkpoint ciblé008
+
+Le contrôle008 prépare une version sans la promouvoir. L’upload identique
+réutilise son hash disponible et sa date ; un hash archivé se restaure
+explicitement, un hash supprimé se réimporte avec son ZIP validé. Promouvoir
+choisit la cible des appels sans tag ; les pilotes utilisent le hash explicite.
+Le rollback de code conserve ressources, variables/secrets et volumes courants.
+Les appels déjà admis terminent avec leur snapshot ; les pools des versions
+partagent les budgets et limites de leur fonction.
+
+La preuve docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json
+réunit71 groupes :2 migration/reprise,12 API,5 CLI authentifiés depuis le poste,
+6 UI,8 manuel et38 packaging/refus dans les images CLI. Les28 captures sont
+inspectées ; manuel15 chapitres/52 paragraphes. Dix fonctions sont purgées,
+les dossiers d’artefacts absents et les ressources actives à zéro. Les31 fichiers
+Python/SQL backend sont identiques entre époques API/CLI/UI. Les preuves007
+ci-dessus restent historiques. Les modes authentifiés dans les images CLI,
+les pannes et la régression complète restent ouverts ; SLS-074 demeure en cours.
+
+Image contrôle courante :178394abb337, référence007 retenue sous
+before-function-version-promotions. Après migration008 commise, ne pas remettre
+seule une ancienne image : une restauration exige base, artefacts et volumes
+cohérents. La sauvegarde native privée avant008 est conservée sous
+/srv/p2enjoy-serverless/qualification-history/.
+
+Aucune variable, secret ou route ajouté ; les deux domaines TLS restent18090.
+Configuration par les deux fichiers officiels de cellule, aucun .env, ENV/ARG ou
+environment de configuration. Agent et runtime de référence sont conservés.
+Les trois notes sont proposées individuellement ; leur adoption n’est pas revendiquée.

@@ -11,6 +11,8 @@ import time
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Query, Request
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel
+from .function_versions import default_code_hash,live_function,selected_revision
 
 ROUTES = Path('/spark/routes')
 MAX_BYTES = 64 * 1024
@@ -75,21 +77,25 @@ def routes(db, identity, settings):
 
     @api.get('/api/functions/{key}/invocation-urls')
     async def catalogue(request: Request, key: UUID, limit: int = Query(5, ge=1, le=20),
-                        offset: int = Query(0, ge=0, le=10000)):
+                        offset: int = Query(0, ge=0, le=10000),version:str|None=None):
         function_id = str(key)
         initial = db.one('SELECT service_id FROM functions WHERE id=? AND deleted_at IS NULL', (function_id,))
         authorization = await identity.operation(request, initial['service_id'] if initial else '', 'read', function_id)
         if not initial: raise HTTPException(404, 'Fonction introuvable.')
-        # One snapshot binds the active pointer to precisely that revision's events.
+        # One authorized snapshot binds the requested/default selector, its events
+        # and the separately observed promoted target. No fallback by hash.
         with closing(db.connect()) as connection:
             connection.execute('BEGIN')
-            row = connection.execute('''SELECT f.id, f.service_id, r.id AS revision_id, r.events_json
-                FROM functions f JOIN services s ON s.id=f.service_id AND s.deleted_at IS NULL
-                JOIN namespaces n ON n.id=s.namespace_id AND n.deleted_at IS NULL
-                LEFT JOIN revisions r ON r.id=f.active_revision_id AND r.function_id=f.id AND r.deleted_at IS NULL
-                WHERE f.id=? AND f.deleted_at IS NULL''', (function_id,)).fetchone()
-            if not row: raise HTTPException(404, 'Fonction ou service introuvable.')
-            identity.recheck(connection, authorization, row['service_id'], 'read', function_id)
+            function=live_function(connection,function_id)
+            identity.recheck(connection, authorization, function['service_id'], 'read', function_id)
+            if len(request.query_params.getlist('version'))>1:
+                from .invocation_http import InvocationError
+                raise InvocationError(404,'version_unavailable')
+            revision=selected_revision(connection,function,version)
+            row={'service_id':function['service_id'],'revision_id':revision['id'] if revision else None,
+                 'events_json':revision['events_json'] if revision else '{}',
+                 'code_hash':revision['code_hash'] if revision else None,
+                 'default_code_hash':default_code_hash(connection,function)}
         server = request.scope.get('server')
         if not server or not isinstance(server[1], int) or not 1 <= server[1] <= 65535:
             source = {'state': 'unavailable', 'observed_at': time.time(), 'error_code': 'gateway_port_unavailable'}
@@ -103,11 +109,13 @@ def routes(db, identity, settings):
             urls = {}
             if row['revision_id']:
                 for event in json.loads(row['events_json']).get('http', []):
-                    path = '/invoke/' + function_id + ('' if event.get('implicit') else '/' + event['path'])
+                    path = '/invoke/' + function_id + ('@'+version if version is not None else '') + ('' if event.get('implicit') else '/' + event['path'])
                     methods = urls.setdefault(path, set()); methods.update(event['methods'])
             items.append({**domain, 'urls': [{'url': domain['origin'] + path, 'methods': sorted(methods)}
                                             for path, methods in sorted(urls.items())]})
         return {'function_id': function_id, 'service_id': row['service_id'], 'revision_id': row['revision_id'],
+                'code_hash':row['code_hash'],'default_code_hash':row['default_code_hash'],
+                'selection':'version' if version is not None else 'default',
                 'function_state': 'published' if row['revision_id'] else 'draft',
                 'console_url': settings.public_url + '/console/functions/' + function_id + '/invocation-urls',
                 'source': source, 'items': items, 'total': len(concrete), 'limit': limit, 'offset': offset,

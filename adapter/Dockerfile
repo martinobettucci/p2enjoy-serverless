@@ -4,6 +4,8 @@ WORKDIR /app
 COPY adapter/requirements.txt ./requirements.txt
 RUN python -m pip install --no-cache-dir --disable-pip-version-check --require-hashes -r requirements.txt
 COPY adapter/*.py ./adapter/
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel
+COPY function_code_hash.py ./function_code_hash.py
 ENTRYPOINT ["python", "-B", "-m", "adapter"]
 
 FROM cli AS qualification

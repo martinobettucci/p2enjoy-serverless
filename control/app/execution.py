@@ -21,6 +21,8 @@ from .storage_client import StorageError
 from .validator import Docker,ValidationError
 from .function_operations import storage_configuration
 from .invocation_http import InvocationError,declared_path,event_envelope,policy_allows
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#sélection-http-et-admission
+from .function_versions import selected_revision
 
 logger=logging.getLogger('p2enjoy.control')
 ACTIVE=('receiving','queued','admitted','running')
@@ -36,6 +38,9 @@ class WaitingCall:
     origin:str|None
     source_ip:str
     future:object
+    requested_code_hash:str|None=None
+    resolved_code_hash:str|None=None
+    generation:str|None=None
     payload:object=None
     deadline:float|None=None
     attempted:bool=False
@@ -60,41 +65,45 @@ class Execution:
         if cpu>self.settings.function_cpu_nanos or memory>self.settings.function_memory_mib or count>self.settings.function_instance_limit:
             raise InvocationError(409,'minimum_budget_exceeded')
 
-    def current(self,db,function_id):
+    def current(self,db,function_id,code_hash=None,*,resolve=True):
         function=db.execute('SELECT * FROM functions WHERE id=? AND deleted_at IS NULL',(function_id,)).fetchone()
         if not function:raise InvocationError(404,'function_not_found')
         service=db.execute('SELECT * FROM services WHERE id=? AND deleted_at IS NULL',(function['service_id'],)).fetchone()
         if not service:raise InvocationError(404,'service_not_found')
-        revision=db.execute('SELECT * FROM revisions WHERE id=? AND deleted_at IS NULL',(function['active_revision_id'],)).fetchone()
-        return dict(function),dict(service),dict(revision) if revision else None
+        revision=selected_revision(db,function,code_hash) if resolve else None
+        return dict(function),dict(service),revision
 
     def snapshot(self,function,service,revision):
         if not revision:raise InvocationError(409,'function_not_deployed')
-        config=json.loads(function['config_json'])
+        config=json.loads(function['config_json'])|{'handler':revision['handler'],'runtime':revision['runtime']}
         environment,secrets=self.deployments.effective(service,{'environment':json.loads(function['environment_json']),'secrets':self.vault.open(function['secrets_cipher'])})
-        snapshot={'function_id':function['id'],'revision_id':revision['id'],'name':function['name'],'config':config,
+        snapshot={'function_id':function['id'],'revision_id':revision['id'],'code_hash':revision['code_hash'],'name':function['name'],'config':config,
                   'environment':environment,'secrets':secrets,'image':revision['image_id']}
-        generation=hashlib.sha256(json.dumps(snapshot,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+        semantic={key:value for key,value in snapshot.items() if key!='revision_id'}
+        generation=hashlib.sha256(json.dumps(semantic,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
         return snapshot,generation
 
     def check_call(self,db,call):
-        function,service,revision=self.current(db,call.function_id)
+        function,service,_=self.current(db,call.function_id,resolve=False)
         self.identity.recheck(db,call.authorization,service['id'],'read',function['id'])
         if not policy_allows(json.loads(service['policy_json']),call.origin,call.source_ip):raise InvocationError(403,'network_policy_denied')
         self.operations.function_available(db,function['id'])
+        revision=selected_revision(db,function,call.requested_code_hash)
         path=declared_path(revision,call.path,call.method)
         return function,service,revision,path
 
-    def receive(self,function_id,authorization,method,path,origin,source_ip):
+    def receive(self,function_id,authorization,method,path,origin,source_ip,code_hash=None):
         if self.closing or not self.reconciled:raise InvocationError(503,'execution_unavailable')
-        call=WaitingCall(str(uuid4()),function_id,authorization,method,path,origin,source_ip,asyncio.get_running_loop().create_future())
+        call=WaitingCall(str(uuid4()),function_id,authorization,method,path,origin,source_ip,
+                         asyncio.get_running_loop().create_future(),requested_code_hash=code_hash)
         with self.db.transaction(busy_timeout=0) as db:
             function,service,_,_=self.check_call(db,call)
             total=db.execute("SELECT count(*) FROM invocations WHERE state IN ('receiving','queued')").fetchone()[0]
             per_function=db.execute("SELECT count(*) FROM invocations WHERE function_id=? AND state IN ('receiving','queued')",(function_id,)).fetchone()[0]
             if total>=self.settings.waiting_call_limit or per_function>=self.settings.function_waiting_call_limit:raise InvocationError(429,'queue_full')
-            db.execute("INSERT INTO invocations(id,actor_kind,actor_id,service_id,function_id,state,created_at,handler_started) VALUES(?,?,?,?,?,'receiving',?,0)",
-                       (call.id,authorization.actor.kind,authorization.actor.id,service['id'],function_id,time.time()))
+            db.execute("""INSERT INTO invocations(id,actor_kind,actor_id,service_id,function_id,state,created_at,handler_started,requested_code_hash)
+                VALUES(?,?,?,?,?,'receiving',?,0,?)""",
+                (call.id,authorization.actor.kind,authorization.actor.id,service['id'],function_id,time.time(),code_hash))
         self.waiting[call.id]=call
         return call
 
@@ -137,7 +146,9 @@ class Execution:
 
     def reserve(self,db,snapshot,generation):
         identifier=str(uuid4());config=snapshot['config'];now=time.time()
-        db.execute("INSERT INTO execution_instances VALUES(?,?,?,?,?,?,'starting',?,?,NULL,?,NULL)",
+        db.execute("""INSERT INTO execution_instances
+            (id,function_id,revision_id,generation,cpu_nanos,memory_mib,state,snapshot_cipher,created_at,ready_at,last_used_at,error_code)
+            VALUES(?,?,?,?,?,?,'starting',?,?,NULL,?,NULL)""",
             (identifier,snapshot['function_id'],snapshot['revision_id'],generation,math.ceil(config['cpu']*1000000000),config['memory_mib'],self.vault.seal(snapshot),now,now))
         return identifier
 
@@ -152,6 +163,7 @@ class Execution:
                 first=db.execute("SELECT id FROM invocations WHERE function_id=? AND state IN ('receiving','queued') ORDER BY created_at,id LIMIT 1",(function['id'],)).fetchone()
                 active=db.execute("SELECT count(*) FROM invocations WHERE function_id=? AND state IN ('admitted','running')",(function['id'],)).fetchone()[0]
                 snapshot,generation=self.snapshot(function,service,revision);config=snapshot['config']
+                call.generation=generation
                 rows=db.execute('SELECT * FROM execution_instances WHERE function_id=?',(function['id'],)).fetchall()
                 exclusive=any(self.vault.open(row['snapshot_cipher'])['config']['storage']['data']['enabled'] and
                     self.vault.open(row['snapshot_cipher'])['config']['storage']['concurrency']=='exclusive' for row in rows if row['state']=='busy')
@@ -161,10 +173,13 @@ class Execution:
                 if unavailable or (ready is None and (len(rows)>=config['max_instances'] or not self.capacity(db,config))):
                     if time.monotonic()>=call.deadline:raise InvocationError(429,'queue_timeout')
                     return
+                if ready:snapshot=self.vault.open(ready['snapshot_cipher'])
                 identifier=ready['id'] if ready else self.reserve(db,snapshot,generation)
                 db.execute("UPDATE execution_instances SET state='busy',last_used_at=? WHERE id=?",(time.time(),identifier))
-                db.execute("UPDATE invocations SET state='admitted',revision_id=?,instance_id=?,admitted_at=? WHERE id=?",(revision['id'],identifier,time.time(),call.id))
+                db.execute("""UPDATE invocations SET state='admitted',revision_id=?,resolved_code_hash=?,instance_id=?,admitted_at=? WHERE id=?""",
+                           (snapshot['revision_id'],snapshot['code_hash'],identifier,time.time(),call.id))
             call.admitted=True;self.waiting.pop(call.id,None)
+            call.resolved_code_hash=snapshot['code_hash']
             payload=call.payload;call.payload=None
             event=event_envelope(call.method,path,*payload,call.source_ip,call.id)
             self.launch(identifier,self.run_call(identifier,snapshot,call,event))
@@ -353,49 +368,81 @@ class Execution:
         await self.recover()
         self.task=asyncio.create_task(self.maintain())
 
+    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#pools-minima-et-budgets
     async def tick(self):
-        # Retire stale generations and excess idle instances before filling minima.
-        current={}
+        # All available versions keep valid pools. Only the explicitly promoted
+        # target receives a minimum; an admitted call owns its immutable snapshot.
+        current={};available={}
         with self.db.transaction(busy_timeout=0) as db:
-            for function in db.execute('SELECT id FROM functions WHERE deleted_at IS NULL AND active_revision_id IS NOT NULL').fetchall():
+            for function in db.execute('SELECT id FROM functions WHERE deleted_at IS NULL').fetchall():
                 try:
-                    fn,service,revision=self.current(db,function['id']);snapshot,generation=self.snapshot(fn,service,revision)
-                    self.operations.function_available(db,fn['id']);current[fn['id']]=(snapshot,generation)
+                    fn,service,default=self.current(db,function['id'])
+                    self.operations.function_available(db,fn['id'])
+                    versions=db.execute("SELECT code_hash FROM function_versions WHERE function_id=? AND state='available'",(fn['id'],)).fetchall()
+                    generations={}
+                    for version in versions:
+                        revision=selected_revision(db,fn,version['code_hash'])
+                        snapshot,generation=self.snapshot(fn,service,revision)
+                        generations[generation]=snapshot
+                    available[fn['id']]=generations
+                    if default:
+                        snapshot,generation=self.snapshot(fn,service,default)
+                        current[fn['id']]=(snapshot,generation)
                 except HTTPException:continue
-        counts={}
-        for row in self.db.all('SELECT * FROM execution_instances ORDER BY last_used_at DESC,id'):
+        rows=self.db.all('SELECT * FROM execution_instances ORDER BY last_used_at DESC,id')
+        counts={};generation_counts={}
+        for row in rows:
+            counts[row['function_id']]=counts.get(row['function_id'],0)+1
+            if row['state'] in ('starting','ready','busy'):
+                generation_counts[row['generation']]=generation_counts.get(row['generation'],0)+1
+        for row in rows:
             if row['id'] in self.workers or row['id'] in self.retiring:continue
             if row['state'] in ('starting','busy'):
                 self.launch(row['id'],self.reconcile_orphan(row['id']));continue
-            target=current.get(row['function_id']);counts[row['function_id']]=counts.get(row['function_id'],0)+1
-            stale=not target or target[1]!=row['generation']
-            excess=target and counts[row['function_id']]>target[0]['config']['min_instances']
-            idle=target and time.time()-row['last_used_at']>=target[0]['config']['idle_seconds']
-            over_max=target and counts[row['function_id']]>target[0]['config']['max_instances']
+            target=current.get(row['function_id'])
+            snapshot=available.get(row['function_id'],{}).get(row['generation'])
+            stale=snapshot is None
+            minimum=target[0]['config']['min_instances'] if target and target[1]==row['generation'] else 0
+            excess=generation_counts.get(row['generation'],0)>minimum
+            idle=snapshot and time.time()-row['last_used_at']>=snapshot['config']['idle_seconds']
+            over_max=snapshot and counts[row['function_id']]>snapshot['config']['max_instances']
             if row['state'] in ('cleanup_failed','draining') or (row['state']=='ready' and (stale or over_max or (excess and idle))):
                 self.schedule_retirement(row['id'])
-        # Admission never awaits a Docker operation; each accepted call owns its task.
+                counts[row['function_id']]-=1
+                generation_counts[row['generation']]=max(0,generation_counts.get(row['generation'],0)-1)
+        # Admission precedes prewarming. The receiving/queued count stays common
+        # to every code hash and each call is reauthorized by attempt().
         for call in tuple(self.waiting.values()):
             if call.rejection:self.reject(call,*call.rejection)
             else:self.attempt(call)
+        demands={}
+        for call in self.waiting.values():
+            if call.payload is not None and not call.rejection and call.generation:
+                demands.setdefault(call.function_id,call.generation)
         for function_id,(snapshot,generation) in current.items():
-            if self.retry_at.get(function_id,0)>time.monotonic():continue
+            if function_id in demands or self.retry_at.get(function_id,0)>time.monotonic():continue
             with self.db.transaction(busy_timeout=0) as db:
-                rows=db.execute('SELECT state,generation FROM execution_instances WHERE function_id=?',(function_id,)).fetchall()
+                reservations=db.execute('SELECT state,generation FROM execution_instances WHERE function_id=?',(function_id,)).fetchall()
                 config=snapshot['config']
-                present=sum(row['generation']==generation and row['state'] in ('starting','ready','busy') for row in rows)
-                if present>=config['min_instances'] or len(rows)>=config['max_instances'] or not self.capacity(db,config):continue
+                present=sum(row['generation']==generation and row['state'] in ('starting','ready','busy') for row in reservations)
+                if present>=config['min_instances'] or len(reservations)>=config['max_instances'] or not self.capacity(db,config):continue
                 identifier=self.reserve(db,snapshot,generation)
             self.launch(identifier,self.warm(identifier,snapshot))
-        # Reclaim the oldest ready excess under real queue/minimum pressure.
-        pressure=any(call.payload is not None for call in self.waiting.values()) or any(
-            self.db.one("SELECT count(*) AS n FROM execution_instances WHERE function_id=? AND generation=? AND state IN ('starting','ready','busy')",(key,generation))['n']<snapshot['config']['min_instances'] for key,(snapshot,generation) in current.items())
-        if pressure:
+        missing={key for key,(snapshot,generation) in current.items() if key not in demands and
+            self.db.one("SELECT count(*) AS n FROM execution_instances WHERE function_id=? AND generation=? AND state IN ('starting','ready','busy')",(key,generation))['n']<snapshot['config']['min_instances']}
+        if demands or missing:
             for row in self.db.all("SELECT * FROM execution_instances WHERE state='ready' ORDER BY last_used_at,id"):
                 if row['id'] in self.workers or row['id'] in self.retiring:continue
-                target=current.get(row['function_id']);minimum=target[0]['config']['min_instances'] if target else 0
+                target=current.get(row['function_id'])
+                minimum=target[0]['config']['min_instances'] if target else 0
                 count=self.db.one("SELECT count(*) AS n FROM execution_instances WHERE function_id=? AND state IN ('ready','busy','starting')",(row['function_id'],))['n']
-                if count>minimum:self.schedule_retirement(row['id']);break
+                needed=demands.get(row['function_id'])
+                if needed is None and row['function_id'] in missing:needed=target[1]
+                # A ready wrong-version instance may yield its place even at
+                # min=max=1. Busy calls are never candidates for reclamation.
+                if ((needed is not None and row['generation']!=needed) or
+                        (row['function_id'] not in demands and count>minimum)):
+                    self.schedule_retirement(row['id']);break
         with self.db.transaction(busy_timeout=0) as db:
             db.execute('DELETE FROM invocations WHERE completed_at IS NOT NULL AND completed_at<?',(time.time()-7*86400,))
             db.execute('DELETE FROM invocations WHERE id IN (SELECT id FROM invocations WHERE completed_at IS NOT NULL ORDER BY completed_at DESC,id DESC LIMIT -1 OFFSET 10000)')

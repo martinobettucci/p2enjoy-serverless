@@ -9,7 +9,10 @@ import re
 import ssl
 import stat
 from urllib.parse import urlsplit
-from uuid import UUID
+from uuid import UUID,uuid4
+
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel
+from function_code_hash import code_hash,PackageIdentityError
 
 from .archive import MAX_ZIP,open_source,package
 
@@ -149,13 +152,14 @@ def configure_service(client,service,target,configuration,report):
 
 
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#api-et-calcul-commun
-def invocation_urls(client,function_id,service_id,revision_id):
+def invocation_urls(client,function_id,service_id,revision_id,code_hash):
     """Optional post-publication metadata, with a stable source across pages."""
     items=[];fingerprint=None;total=None
     for offset in range(0,513,5):
-        page=client.request('GET',f'/api/functions/{function_id}/invocation-urls?limit=5&offset={offset}')
+        page=client.request('GET',f'/api/functions/{function_id}/invocation-urls?version={code_hash}&limit=5&offset={offset}')
         if (page.get('function_id')!=function_id or page.get('service_id')!=service_id or
-                page.get('revision_id')!=revision_id or page.get('function_state')!='published'):
+                page.get('revision_id')!=revision_id or page.get('function_state')!='published' or
+                page.get('selection')!='version' or page.get('code_hash')!=code_hash):
             raise DeploymentError('invocation_catalogue_changed')
         source=page.get('source')
         if not isinstance(source,dict):raise DeploymentError('invalid_invocation_catalogue')
@@ -179,7 +183,7 @@ def invocation_urls(client,function_id,service_id,revision_id):
                 raise DeploymentError('invalid_invocation_catalogue')
             for entry in entries:
                 if not isinstance(entry,dict):raise DeploymentError('invalid_invocation_catalogue')
-                address=entry.get('url');methods=entry.get('methods');prefix=item['origin']+'/invoke/'+function_id
+                address=entry.get('url');methods=entry.get('methods');prefix=item['origin']+'/invoke/'+function_id+'@'+code_hash
                 if (not isinstance(address,str) or not (address==prefix or
                         (address.startswith(prefix+'/') and re.fullmatch(r'[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*',address[len(prefix)+1:]))) or
                         not isinstance(methods,list) or not methods or len(methods)>7 or
@@ -188,16 +192,39 @@ def invocation_urls(client,function_id,service_id,revision_id):
                     raise DeploymentError('invalid_invocation_catalogue')
             items.append(item)
         if offset+len(rows)>=total:
-            return {'state':'available','revision_id':revision_id,'source_sha256':fingerprint,'items':items,'total':total}
+            return {'state':'available','revision_id':revision_id,'code_hash':code_hash,'selection':'version',
+                    'source_sha256':fingerprint,'items':items,'total':total}
     raise DeploymentError('invocation_catalogue_limit')
 
 
-def deploy(plan,manifest,service):
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel
+def publication_identity(published,function,artifact):
+    validation=published.get('validation')
+    if not isinstance(validation,dict):raise DeploymentError('invalid_publication_response',uncertain=True)
+    try:
+        expected=code_hash(artifact['inventory'],{'handler':function['config']['handler'],'runtime':function['config']['runtime'],
+            'architecture':'linux-x64','image_id':validation.get('image_id'),'events':function['events']})['code_hash']
+    except PackageIdentityError:raise DeploymentError('invalid_publication_descriptor',uncertain=True) from None
+    if published.get('code_hash')!=expected:raise DeploymentError('publication_hash_mismatch',uncertain=True)
+    if type(published.get('code_changed')) is not bool or type(published.get('version_restored')) is not bool:
+        raise DeploymentError('invalid_publication_response',uncertain=True)
+    if 'default_code_hash_at_publication' not in published:
+        raise DeploymentError('invalid_publication_response',uncertain=True)
+    target=published['default_code_hash_at_publication']
+    if target is not None and (not isinstance(target,str) or not re.fullmatch('[0-9a-f]{64}',target)):
+        raise DeploymentError('invalid_publication_response',uncertain=True)
+    return expected
+
+
+def deploy(plan,manifest,service,*,code_only=False):
     report={'service':plan['service'],'completed':False,'results':[],'warnings':plan['warnings'],
-            'service_configuration':{'state':'preserved'}}
+            'service_configuration':{'state':'preserved'},'mode':'code_only' if code_only else 'complete'}
     try:
         identifier(service);report['service_id']=service;client=Client()
         for function in plan['functions']:
+            if code_only:
+                json_payload({'handler':function['config']['handler'],'events':function['events']})
+                continue
             json_payload({name:function[name] for name in ('config','configuration','events')})
             common=plan.get('service_configuration',{})
             effective={category:common.get(category,{})|function['configuration'][category] for category in ('environment','secrets')}
@@ -205,12 +232,12 @@ def deploy(plan,manifest,service):
             # The runtime bootstrap uses escaped JSON, which can exceed UTF-8 transport bytes.
             if len(json.dumps({'handler':'x'*256,'environment':effective['environment']|effective['secrets']}).encode())>256*1024:
                 raise DeploymentError('configuration_body_too_large')
-        json_payload(plan.get('service_configuration',{}))
+        if not code_only:json_payload(plan.get('service_configuration',{}))
         descriptor=package(plan,manifest.parent,manifest.parent/'.serverless-p2',manifest)
         target=client.request('GET','/api/services/'+service)
         if target.get('id')!=service or target.get('name')!=plan['service']:raise DeploymentError('service_mismatch')
         existing=list_functions(client,service)
-        configure_service(client,service,target,plan.get('service_configuration',{}),report)
+        if not code_only:configure_service(client,service,target,plan.get('service_configuration',{}),report)
     except DeploymentError as error:
         report['error']=error.public();return report
     for function in plan['functions']:
@@ -223,6 +250,7 @@ def deploy(plan,manifest,service):
                 current=function_row(client.request('GET','/api/functions/'+key),service,function['name'])
                 if current['id']!=key:raise DeploymentError('invalid_function_response')
             else:
+                if code_only:raise DeploymentError('code_only_function_not_found')
                 mutation=True
                 current=function_row(client.request('POST','/api/services/'+service+'/functions',
                     body={'name':function['name'],'config':function['config']},expected=201),service,function['name'])
@@ -230,14 +258,26 @@ def deploy(plan,manifest,service):
                 mutation=False
             row['function_id']=key
             mutation=True
-            candidate=client.request('POST','/api/functions/'+key+'/deployments',
-                body={name:function[name] for name in ('config','configuration','events')},version=current['updated_at'],expected=201)
+            if code_only:
+                row['deployment_id']=str(uuid4())
+                candidate=client.request('POST','/api/functions/'+key+'/code-deployments',
+                    body={'deployment_id':row['deployment_id'],'handler':function['config']['handler'],'events':function['events']},
+                    version=current['updated_at'],expected=201)
+                if candidate.get('id')!=row['deployment_id']:raise DeploymentError('invalid_candidate_response',uncertain=True)
+            else:
+                candidate=client.request('POST','/api/functions/'+key+'/deployments',
+                    body={name:function[name] for name in ('config','configuration','events')},version=current['updated_at'],expected=201)
             candidate_id=identifier(candidate.get('id'));row['deployment_id']=candidate_id
             if candidate.get('function_id')!=key or candidate.get('state')!='prepared':raise DeploymentError('invalid_candidate_response')
             published=client.request('PUT','/api/deployments/'+candidate_id+'/artifact',archive=content)
             if published.get('id')!=candidate_id or published.get('function_id')!=key or published.get('state')!='published':
                 raise DeploymentError('invalid_publication_response')
-            row['revision_id']=identifier(published.get('revision_id'));row['state']='published'
+            row['revision_id']=identifier(published.get('revision_id'))
+            row['code_hash']=publication_identity(published,function,descriptor['artifacts'][function['name']])
+            row['code_changed']=published['code_changed'];row['version_restored']=published['version_restored']
+            row['default_code_hash_at_publication']=published['default_code_hash_at_publication']
+            row['function_version_at_publication']=published.get('result_function_version')
+            row['state']='published'
         except DeploymentError as error:
             # A malformed successful mutation response can follow a committed write.
             row['state']='unknown' if error.uncertain or (mutation and error.status is None and error.code.startswith('invalid_')) else 'failed'
@@ -247,8 +287,33 @@ def deploy(plan,manifest,service):
         # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#api-et-calcul-commun
         # No optional GET failure can reclassify an already committed publication.
         if row['state']=='published':
-            try:row['invocation_urls']=invocation_urls(client,key,service,row['revision_id'])
+            try:row['invocation_urls']=invocation_urls(client,key,service,row['revision_id'],row['code_hash'])
             except DeploymentError as error:
                 row['invocation_urls']={'state':'unavailable','error':error.public()}
     report['completed']=all(row['state']=='published' for row in report['results'])
+    return report
+
+
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#promotion-et-droits | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel
+def promote(function_id,selected_hash):
+    report={'function_id':function_id,'code_hash':selected_hash,'completed':False,'state':'failed'}
+    mutation=False
+    try:
+        identifier(function_id)
+        if not isinstance(selected_hash,str) or not re.fullmatch('[0-9a-f]{64}',selected_hash):
+            raise DeploymentError('invalid_code_hash')
+        client=Client()
+        current=client.request('GET','/api/functions/'+function_id)
+        service=identifier(current.get('service_id'));function_row(current,service)
+        if current['id']!=function_id:raise DeploymentError('invalid_function_response')
+        mutation=True
+        result=client.request('POST',f'/api/functions/{function_id}/versions/{selected_hash}/promote',version=current['updated_at'])
+        if (result.get('function_id')!=function_id or result.get('code_hash')!=selected_hash or
+                result.get('default_code_hash')!=selected_hash or type(result.get('changed')) is not bool):
+            raise DeploymentError('invalid_promotion_response',uncertain=True)
+        report.update(state='promoted',completed=True,revision_id=identifier(result.get('revision_id')),
+                      function_version=result.get('function_version'),changed=result['changed'])
+    except DeploymentError as error:
+        report['state']='unknown' if error.uncertain or (mutation and error.status is None and error.code.startswith('invalid_')) else 'failed'
+        report['error']=error.public()
     return report

@@ -706,12 +706,13 @@ normale, droits, redémarrage, coût de collecte mesuré et inspection des graph
 <a id="sls-074"></a>
 ## SLS-074 — Versions par hash, appels épinglés et pilote de code
 
-Statut : [~] — composant d’identité canonique qualifié ; déduplication et invocation par tag absentes.
+Statut : [~] — publication, promotion et invocation par hash déployées en DEV ; checkpoint ciblé008 qualifié, pannes et régression complète en cours.
 
 Checkpoint livré et qualifié : [registre persistant](FUNCTION_VERSION_REGISTRY.md),
 migration additive des identités, conservation des alias et lecture/copie du hash.
-Les uploads continuent actuellement à activer leur révision ; la déduplication
-et la promotion séparée constituent la suite de cette même unité.
+Ce checkpoint007 est historique. Le contrôle008 sépare désormais publication
+et promotion, déduplique et admet les appels épinglés ; sa qualification complète
+reste dans cette même unité.
 
 La [preuve du registre](evidence/function-version-registry-dev-2026-11-09.json)
 passe 359 groupes : 46 ciblés/historiques et 313 dans 18 campagnes communes, sur deux
@@ -731,28 +732,26 @@ autorité d’état par hash, première promotion durable, déduplication avec n
 admission/pools et raccordements CLI/UI livrés ensemble. Les nouveaux critères
 incluent le droit Create après désactivation, les handlers A/B et le cas
 minimum=maximum=1 ; les exigences existantes ne sont pas réduites.
-Le contrôle008 est déployé pour qualification : deux groupes migration/reprise et
-douze groupes API passent, avec sources240 recoupées et deux fonctions purgées.
-La préparation007 et le nettoyage sont des prérequis distincts. Les images CLI
-sont reconstruites ;24 groupes plan/package et14 de refus publics passent. Les
-parcours CLI authentifiés, UI/visuels, pannes et régression complète restent
-ouverts ; cette avancée ne clôture pas SLS-074.
-Les cinq groupes CLI authentifiés passent aussi depuis le processus Python du
-poste : pilote scoped sans résolution provider, configuration conservée,
-promotion/rollback, refus Read et six invocations sur les deux domaines.
-Ils ne sont pas présentés comme exécutés dans les images ; cette déclinaison
-reste à éprouver. La revue ajoute les gardes d’URL non vides et un relevé natif
-des dossiers/réservations du doublon avant purge, au-delà de sa convergence SQL.
-Ce replay API avec relevé physique passe12 groupes ; la CLI rejouée avec URL
-non vides passe5 groupes. La revue confirme un autre défaut de lecture UI :
-catalogue lu avant candidat puis ETag inchangé peut arrêter trop tôt le polling
-d’une publication externe. L’ordre candidat→catalogue→fonction confirmée est
-retenu avant correction et doit être éprouvé dans le vrai parcours navigateur.
-Le premier replay UI passe4 groupes puis établit une perte de focus après un
-vrai404, malgré saisie/confirmation conservées. Le retour de focus après
-réactivation est corrigé pour dialog et confirmation intégrée ; les scénarios
-404 et409 concurrent doivent passer avant qualification. Le rapport partiel et
-son nettoyage restent distincts ; aucun groupe UI final n’est encore revendiqué.
+Le [checkpoint ciblé008](evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
+réunit71 groupes :2 migration/reprise,12 API,5 CLI authentifiés depuis le poste,
+6 UI,8 manuel et38 packaging/refus dans les images CLI. Les époques239/242/244
+sources sont explicites ; les31 sources backend sont identiques entre API/CLI/UI.
+Les28 captures sont inspectées ; le manuel correspond à15 chapitres/52 paragraphes.
+Dix fonctions, dont celles des essais interrompus, sont purgées ; instances,
+appels, opérations, réservations et montages actifs sont à zéro. Préparation007
+et nettoyage migration sont des prérequis non additionnés. Les essais UI
+interrompus et les premiers replays verts restent distincts, sans gonfler71.
+
+Les cinq groupes CLI passent depuis Python sur le poste, avec six invocations
+des URL des deux domaines ; leur déclinaison authentifiée dans les deux images
+reste à éprouver. La convergence API est recoupée physiquement avant purge :
+révision canonique conservée, paquet réutilisé effacé, réservations à zéro.
+Le catalogue UI est lu après le candidat ; le suivi termine avec le nouveau hash
+sans mutation d’ETag parent. Les vrais refus409/404 conservent confirmation,
+saisie et focus après réactivation. Le dialog conserve son contexte quand sa
+carte quitte la page pendant une publication réelle. Les messages de publication
+sont recoupés au PUT réel, au GET durable et au rendu ; aucun corps PUT navigateur
+n’est déclaré observé. Les pannes et la régression complète restent ouvertes.
 La revue statique du pipeline a révélé le passage possible d’un validateur
 déjà en attente après un nettoyage incomplet ; le verrou est corrigé, et la
 preuve réelle de ce refus rejoint les critères de FUNCTION_VERSION_EXECUTION.

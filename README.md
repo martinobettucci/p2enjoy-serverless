@@ -81,8 +81,15 @@ Read groupée et hash complet copiable dans la console. Sa
 dont 47 nouvelles inspections et 22 références identiques par SHA. Le manuel
 compilé comporte 15 chapitres et 47 paragraphes. Le checkpoint antérieur au repos
 conserve ses 328 groupes dans son époque distincte ; ils ne s’ajoutent pas comme
-groupes uniques au total 359. Déduplication, promotion séparée et appels par hash
-restent à implémenter ; les uploads activent encore leur révision.
+groupes uniques au total 359. Le contrôle008 est maintenant déployé pour qualification : déduplication,
+promotion séparée, sélection/pools par hash et gestion d’état sont implémentés.
+Le [checkpoint ciblé008](docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
+réunit71 groupes :2 migration/reprise,12 API,5 CLI authentifiés depuis le poste,
+6 UI,8 manuel et38 packaging/refus dans les images CLI. Les28 nouvelles captures
+sont inspectées ; le manuel comporte15 chapitres et52 paragraphes. Les dix
+fonctions des campagnes et essais interrompus sont purgées. Les modes authentifiés
+dans les images CLI, les pannes et la régression complète restent ouverts.
+La preuve359 et ses captures décrivent le checkpoint007.
 
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.

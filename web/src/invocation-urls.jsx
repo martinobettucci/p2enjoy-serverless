@@ -1,9 +1,11 @@
 // @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#console-et-domaine-canonique | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md#adresses-d-appel
 // Read the shared catalogue; copy feedback belongs only to the current observation.
 import React, {useEffect, useRef, useState} from 'react';
 import {ChevronLeft, ChevronRight, Copy, RefreshCw} from 'lucide-react';
 import {api} from './api';
 import {Badge, ErrorMessage, Facts, Success} from './ui';
+import {withCatalogue} from './catalogue';
 
 const size = 5;
 const sourceErrors = {
@@ -34,6 +36,8 @@ function Address({entry}) {
 }
 
 export function InvocationUrls({functionId}) {
+  const parameters=new URLSearchParams(location.search),selections=parameters.getAll('version');
+  const selectedVersion=selections.length ? (selections.length===1 ? selections[0] : 'invalid') : null;
   const [page,setPage] = useState(0), [revision,setRevision] = useState(0);
   const [state,setState] = useState({loading:true,data:null,error:null});
   const heading = useRef(null), inFlight = useRef(true), restoreFocus = useRef(false);
@@ -42,7 +46,7 @@ export function InvocationUrls({functionId}) {
     const controller = new AbortController();
     inFlight.current = true;
     setState({loading:true,data:null,error:null});
-    api(`/api/functions/${functionId}/invocation-urls?limit=${size}&offset=${page * size}`,{signal:controller.signal})
+    api(`/api/functions/${functionId}/invocation-urls?limit=${size}&offset=${page * size}${selectedVersion===null ? '' : '&version='+encodeURIComponent(selectedVersion)}`,{signal:controller.signal})
       .then(data => {
         if (!current) return;
         const last = Math.max(0,Math.ceil(data.total / size) - 1);
@@ -51,10 +55,11 @@ export function InvocationUrls({functionId}) {
       }).catch(error => {
         if (!current) return;
         if (!error.status) error.message = 'Impossible de consulter les adresses. Vérifiez la connexion puis réessayez.';
+        if (error.message==='version_unavailable') error.message='La version demandée est inconnue, archivée ou supprimée.';
         inFlight.current = false;setState({loading:false,data:null,error});
       });
     return () => {current=false;controller.abort();};
-  },[functionId,page,revision]);
+  },[functionId,page,revision,selectedVersion]);
   useEffect(() => {
     if (!state.loading && restoreFocus.current) {restoreFocus.current=false;heading.current?.focus();}
   },[state]);
@@ -73,15 +78,19 @@ export function InvocationUrls({functionId}) {
     <div className="section-heading"><h2 id="invocation-urls-title" ref={heading} tabIndex={-1}>Adresses d’appel</h2>
       <button disabled={state.loading} onClick={refresh}><RefreshCw aria-hidden="true"/>Actualiser</button></div>
     <p><a href="/console/manual#adresses-d-appel">Consulter le manuel des adresses d’appel</a></p>
+    <div className="actions"><a href={withCatalogue(`/console/functions/${functionId}/code`)}>Choisir une version dans Code et révisions</a>
+      {selectedVersion!==null && <a href={withCatalogue(`/console/functions/${functionId}/invocation-urls`)}>Utiliser la cible par défaut</a>}</div>
     {state.loading && <p className="empty" role="status">Consultation des adresses…</p>}
     <ErrorMessage error={state.error}/>
     {data && <>
       <Facts values={[
         ['Relevé des domaines',stamp(data.source.observed_at)],
-        ['Révision appelée sans tag',data.revision_id ? <span className="mono">{data.revision_id}</span> : 'Aucune révision active'],
+        ['Sélection',data.selection==='version' ? 'Hash explicite' : 'Cible par défaut'],
+        ['Hash sélectionné',data.code_hash ? <span className="mono">{data.code_hash}</span> : 'Aucune version promue'],
+        ['Cible par défaut',data.default_code_hash ? <span className="mono">{data.default_code_hash}</span> : 'Aucune version promue'],
       ]}/>
       {data.source.state !== 'available' ? <div className="notice error" role="alert"><p>{sourceErrors[data.source.error_code] || 'Relevé des domaines indisponible.'} Actualisez ; si le problème persiste, contactez l’administrateur du SPARK.</p></div> : <>
-        {data.function_state === 'draft' ? <p className="empty">Fonction brouillon : publiez une révision dans Code et révisions pour obtenir ses adresses.</p> :
+        {data.function_state === 'draft' ? <p className="empty">Aucune cible par défaut. Dans Code et révisions, choisissez les adresses d’un hash disponible ou promouvez une version.</p> :
           !data.total ? <p className="empty">Aucun domaine d’appel applicable. Demandez une route vers la passerelle à l’administrateur du SPARK, puis actualisez.</p> :
             <ul className="observation-list">{data.items.map(item => <li key={`${item.origin}-${data.revision_id}-${data.source.sha256}-${revision}`}>
               <div className="observation-heading"><h3>{item.domain}</h3><Badge>{item.transport === 'https' ? 'HTTPS déclaré' : 'HTTP déclaré'}</Badge></div>

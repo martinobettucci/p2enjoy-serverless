@@ -3,8 +3,12 @@
 Spécification de la suite de [SLS-074](BACKLOG.md#sls-074), après le
 [registre qualifié](FUNCTION_VERSION_REGISTRY.md). Le contrôle008 est déployé en DEV pour qualification :
 publication et promotion sont séparées, et la sélection par hash est raccordée.
-La migration réelle et sa reprise passent deux groupes ciblés, puis douze groupes
-API passent sur240 sources recoupées. Les autres preuves restent ouvertes. Les critères de [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md)
+Le [checkpoint ciblé](evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
+réunit71 groupes réels :2 migration/reprise,12 API,5 CLI authentifiés depuis le
+poste,6 UI,8 manuel et38 packaging/refus dans les images CLI. Les époques de
+sources et images restent distinctes ; les31 fichiers backend sont recoupés
+identiques entre campagnes API/CLI/UI. Les28 captures sont inspectées, dix
+fonctions purgées, contrôle et stockage au repos. Les autres preuves restent ouvertes. Les critères de [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md)
 restent tous applicables.
 
 ## Livraison cohérente

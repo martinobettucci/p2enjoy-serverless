@@ -10,11 +10,12 @@ L’invocation du code publié passe la [preuve du moteur](evidence/execution-de
 Expiration, budget et interruption pendant nettoyage restent à qualifier.
 Le parcours UI est spécifié dans [CONSOLE_PUBLICATION](CONSOLE_PUBLICATION.md).
 
-L’extension [SLS-074 — versions par hash](FUNCTION_VERSIONS.md) est spécifiée
-mais non implémentée : déduplication par paquet exécutable, appel épinglé,
-publication sans activation, archivage individuel et conservation d’un pilote
-avec une version stable. Les routes et preuves actuelles décrites ici restent
-celles des révisions à UUID et de l’activation existante.
+L’extension [SLS-074 — versions par hash](FUNCTION_VERSIONS.md) est déployée
+pour qualification008 : déduplication par paquet, appel épinglé, publication
+sans promotion et gestion des versions. Le [contrat d’exécution](FUNCTION_VERSION_EXECUTION.md)
+définit l’autorité par hash, les pools et les commandes CLI/UI. Les preuves
+antérieures citées ici décrivent les checkpoints avant cette séparation ; elles
+ne qualifient pas les nouveaux comportements.
 
 ## Outil et manifeste
 
@@ -227,7 +228,8 @@ puis chiffrées en base ; elles ne font pas partie du ZIP ni de son inventaire.
    Le contrôle vérifie l'identité avant de lire le flux, le borne, extrait
    dans un répertoire neuf et lance la validation Docker.
 3. Après validation, une transaction courte revérifie droits, état de la
-   fonction et version attendue, puis publie la révision et sa configuration.
+   fonction et version attendue, puis conserve le hash et sa configuration demandée.
+   La promotion distincte choisit la cible sans tag ; l’upload ne la déplace pas.
    Un conflit conserve intégralement la fonction précédemment active.
 
 Le candidat conserve aussi la version du service utilisée pour ses variables
@@ -240,8 +242,8 @@ documentées dans CONTROL.
 Create autorise la première révision d'un brouillon sans révision publiée ;
 Update autorise les suivantes. Le candidat appartient à son créateur : seul
 ce créateur encore autorisé, ou un administrateur, peut envoyer son artefact.
-Les candidats simultanés d'une même fonction ne peuvent tous deux publier
-sur la même version. Révocation du jeton, suppression ou modification pendant
+Des candidats de code simultanés à configuration inchangée peuvent converger
+vers le même hash et le même alias. Révocation du jeton, suppression ou modification pendant
 la validation interdisent sa publication. Les candidats échoués gardent un
 diagnostic borné, sans code ni secret dans les réponses d'erreur.
 
@@ -250,8 +252,9 @@ chaque fonction d'un service et échoue si l'une échoue ; elle ne promet pas
 une transaction globale sur toutes les fonctions. Une fonction nouvellement
 créée peut rester brouillon après un upload refusé.
 
-Une seule extraction/validation est admise à la fois sur le SPARK initial ;
-la suivante reçoit 429 et Retry-After. Les candidats en attente sont bornés
+Quatre uploads peuvent être admis ; leurs validations Docker sont sérialisées
+avec recontrôle du nettoyage avant lancement. La capacité dépassée donne429 et
+Retry-After. Les candidats en attente sont bornés
 à 64 au total et huit par fonction. Le stockage d'artefacts dispose d'un
 budget global de 4096 Mio par défaut, ajustable via la cellule sous
 SERVERLESS_ARTIFACT_BUDGET_MIB ; réservation avant extraction et restitution
@@ -268,10 +271,10 @@ les volumes. Il ne restaure pas d'anciens secrets.
 
 `GET /api/functions/{id}/revisions` fournit l'historique selon Read.
 `POST /api/functions/{id}/rollback` exige Update et If-Match.
-Les révisions inactives et non utilisées peuvent être supprimées explicitement
-avec Update ; vingt révisions conservées par fonction constituent la limite
-initiale. La publication refuse de dépasser ce plafond sans purger silencieusement
-l'historique.
+Les versions peuvent être archivées/restaurées ou supprimées avec Update et
+If-Match. La cible exige remplacement disponible ou désactivation explicite ;
+les consommateurs admis terminent avant effacement. Vingt hashes disponibles
+ou archivés constituent la limite ; un doublon reste admis après validation.
 
 ### Intégration au contrôle
 
@@ -285,7 +288,8 @@ l'endpoint implicite portant le nom de fonction.
 `GET /api/deployments/{id}` permet au créateur encore détenteur du droit
 initial, ou à un admin, de suivre l'état et le diagnostic expurgé. Une seconde
 réception du même candidat est refusée. `DELETE /api/functions/{id}/revisions/{revision}`
-exige Update et refuse la révision active. Les lectures d'historique sont
+exige Update et If-Match, résout le groupe du hash et refuse la cible active.
+Les lectures d'historique sont
 paginées et n'incluent pas les inventaires complets des archives.
 
 L'autorisation de publication s'effectue en deux temps : revalidation SSO
@@ -294,7 +298,7 @@ Un admin reste lié à sa session exacte et à la version du jeton vérifiée ;
 un jeton de service est relu par ID et empreinte, avec ses droits et sa portée.
 Aucun appel HTTP ou Docker ni seconde transaction d'identité ne s'exécute
 sous le verrou de publication. La fermeture de session et la révocation
-concurrentes empêchent donc l'activation du candidat.
+concurrentes empêchent donc sa publication.
 
 Le contrôle prend un verrou de processus exclusif sur son état. Au démarrage,
 il reprend uniquement les validations portant son UUID d'installation et le

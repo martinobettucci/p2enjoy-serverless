@@ -181,10 +181,10 @@ et suppression sont des actions distinctes par version, avec confirmations
 dans le flux selon le socle. Les appels déjà admis et les pools d’autres versions
 ne sont pas présentés comme ayant changé de code.
 
-Le client HTTP propose cible courante ou hash explicite et montre la version
-effectivement appelée. Ses exemples copiés conservent le tag choisi. Une version
-indisponible affiche le refus réel sans substitution. Ces parcours sont déployés en qualification008 ; les preuves navigateur et
-visuelles restent à produire sur cette image.
+Le client HTTP prévu par SLS-071 devra proposer cible courante ou hash explicite
+et montrer la version effectivement appelée. La facette Adresses d’appel livre
+déjà les URL épinglées et le refus sans substitution ; ses parcours008 sont
+recoupés dans le checkpoint ciblé ci-dessous.
 
 ## Adresses d’appel SLS-066 en qualification
 
@@ -311,10 +311,15 @@ la query partageable. La facette nomme hash sélectionné et cible courante ; un
 lien explicite retrouve la cible par défaut. Les sélections invalides donnent
 leur refus, y compris après redirection canonique depuis un alias de domaine.
 Instances et invocations montrent hash demandé/résolu et alias technique réel.
-Ces changements sont déployés sur le contrôle008 DEV. Le build passe ; les
-parcours API ne constituent pas une preuve visuelle. Les scénarios de focus,
-refus conservé et dialog dont la carte sort de page restent à éprouver dans le
-navigateur avant qualification UI.
+Le [checkpoint ciblé008](evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
+passe six groupes UI et huit du manuel. Les28 JPEG sont inspectés : desktop,
+mobile390px, tablette et corps agrandi200%. Les refus409/404 conservent
+confirmation, saisie et focus ; le dialog garde son hash quand sa carte quitte
+la page. Les messages nouvelle/réutilisée/réimportée et le presse-papiers sont
+recoupés avec leurs effets réels. Aucune superposition bloquante ni débordement
+horizontal observé. Les listes longues exigent un défilement vertical ; les
+captures pleines pages complètent leurs viewports. Les pannes et régressions
+complètes restent ouvertes.
 
 Le catalogue est lu après le candidat suivi et avant la confirmation finale de
 la fonction. Une publication de code seul n’ayant pas d’effet sur l’ETag parent,

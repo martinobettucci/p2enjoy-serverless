@@ -115,16 +115,16 @@ une nouvelle valeur.
 
 | Droit | Usage |
 | --- | --- |
-| Create | Créer une fonction et sa première révision |
+| Create | Créer une fonction, publier puis promouvoir son premier hash une seule fois |
 | Read | Lire les objets autorisés et invoquer les fonctions |
-| Update | Modifier configuration, secrets et révisions |
+| Update | Modifier configuration et secrets ; publier, promouvoir et gérer les versions suivantes |
 | Delete | Supprimer les fonctions autorisées |
 
 Les appels portent `X-Serverless-Token`. L'en-tête `Authorization` reste
 disponible pour l'authentification métier du handler. La publication du code
 s’effectue dans **Code et révisions**, avec la commande `deploy` de l’adaptateur
 ou avec l’API.
-Les fonctions publiées sont invocables. Leurs instances et journaux se
+Les hashes disponibles sont invocables ; la cible sans tag exige une promotion. Leurs instances et journaux se
 consultent dans les facettes Instances et Invocations de la fiche de fonction.
 
 ## Publier une archive dans la console
@@ -136,6 +136,8 @@ Confirmer l’archive et la fonction affichées. Les ressources, variables, secr
 volumes et routes courants sont conservés ; le déploiement d’un manifeste complet
 avec l’adaptateur permet aussi de modifier ces paramètres.
 
+Une publication prépare un hash disponible sans le promouvoir. Le résultat
+distingue nouvelle version, code inchangé et version réimportée.
 La tentative affiche son identifiant et les états réellement observés : attente
 d’archive, réception, validation, publication ou échec. **Validation et journal**
 ouvre le résultat de chargement et les traces expurgées. **Actualiser** relit l’état.
@@ -156,27 +158,43 @@ son message reste visible jusqu’à résolution de cette opération.
 
 ## Gérer les révisions
 
-**Code et révisions** affiche la révision active et les révisions conservées par
-pages de cinq. Les métadonnées donnent le handler, le runtime, l’espace stocké,
-l’empreinte SHA256 de l’archive et ses événements. **Activer cette révision**
-revient au code choisi après confirmation, en conservant les ressources, variables,
-secrets et volumes courants. Les événements de cette révision redeviennent actifs.
+**Code et révisions** présente les versions par hash, par pages de cinq. Chaque
+carte indique sa disponibilité, sa date initiale, son handler, le runtime et
+l’espace réellement conservé. **Métadonnées de la version** ouvre les événements,
+l’image Node et les références internes des alias historiques. La cible par
+défaut est nommée séparément ; sans première promotion, elle est absente.
 
 Le **Hash du code** identifie le contenu exécutable, ses dépendances, son handler
 et son descripteur d’exécution. Deux archives recompressées du même paquet ont
 le même hash, même si le SHA256 de leurs octets ZIP diffère. **Copier le hash du
 code** copie ses 64 caractères ; si le navigateur refuse, sélectionner le texte
-affiché et le copier. Actualiser retire la confirmation de copie. Plusieurs
-révisions historiques peuvent porter le même hash. La publication actuelle
-active encore la nouvelle révision ; les appels par hash et la promotion séparée
-seront ajoutés avec la suite du versionnement.
+affiché et le copier. Actualiser retire la confirmation de copie. Un upload
+identique réutilise le hash disponible et sa date initiale ; il ne crée pas de
+nouvelle version et ne déplace pas la cible par défaut.
 
-**Supprimer cette révision** retire définitivement une archive de code inactive.
-La révision active ne peut pas être supprimée ; une instance qui utilise encore
-une ancienne révision peut également empêcher sa suppression. Attendre son arrêt,
-puis actualiser. En cas de réponse perdue, relire l’historique avant toute nouvelle
-opération. Un nettoyage physique peut rester à reprendre alors que la révision
-est déjà retirée de la liste ; le message du serveur le précise.
+**Promouvoir cette version** demande confirmation du hash et de la fonction,
+puis choisit la cible des appels sans tag. Publier A, le promouvoir, puis publier
+B permet de conserver A pour les appels courants et d’essayer B depuis
+**Adresses de cette version**. Promouvoir B bascule ensuite les appels sans tag ;
+promouvoir de nouveau A réalise le rollback. Ressources, variables, secrets,
+volumes et données restent courants. Les appels déjà admis terminent avec leur
+code et leur configuration d’admission.
+
+**Archiver cette version** conserve son paquet mais refuse ses nouveaux appels,
+y compris ceux en attente. **Restaurer cette version** la rend disponible sans
+la promouvoir. **Supprimer cette version** retire son accès puis attend la fin
+de ses consommateurs pour effacer le code ; le hash et son historique restent
+visibles. Pour archiver ou supprimer la cible courante, choisir un autre hash
+disponible de la fonction ou désactiver explicitement les appels sans tag,
+puis confirmer. Les autres hashes disponibles restent appelables.
+
+**Réimporter cette version** demande le ZIP original d’un hash supprimé. Le
+handler et les événements conservés sont repris ; le serveur recalcule et exige
+le même hash, après terminaison du nettoyage antérieur. Une archive conservée se
+restaure directement. Un upload normal ne restaure pas silencieusement une
+version archivée ou supprimée. En cas de réponse perdue, relire la tentative et
+le catalogue avant toute nouvelle opération ; une publication incertaine n’est
+jamais renvoyée automatiquement.
 
 ## Publier le code avec l’adaptateur
 
@@ -195,7 +213,7 @@ retire. Dans une fonction, une clé à null retire sa surcharge et rétablit
 l’héritage. Les secrets ne figurent pas dans le plan ou le rapport.
 
 Le rapport distingue la configuration commune des publications individuelles.
-Si une fonction refuse son nouveau code, elle conserve son ancienne révision ;
+Si une fonction refuse son nouveau code, sa cible par défaut est conservée ;
 la configuration commune déjà appliquée reste utilisée. Corriger l’import puis
 relancer le déploiement. Un refus de modification commune arrête la commande
 avant toute publication de fonction.
@@ -205,13 +223,29 @@ est inconnue après une rupture réseau. Dans ce dernier cas, consulter le
 candidat indiqué avant de relancer. Les valeurs de configuration restent
 absentes des sorties et des descripteurs locaux.
 
-La plateforme accepte jusqu'à 64 candidats en attente, avec huit par fonction.
-Une fonction conserve vingt révisions. Au plafond, l'upload est refusé avant
-réception ; supprimer explicitement une révision inactive permet de publier
-de nouveau. Après interruption du contrôle pendant réception ou validation,
-le candidat devient `failed` avec `control_interrupted`. Consulter son état
-avant de préparer une nouvelle publication ; la révision active précédente
-reste conservée.
+Pour un pilote de code, lancer `python3 -m adapter deploy --code-only --config
+serverless.yml --service UUID_DU_SERVICE`. Les fonctions doivent déjà exister.
+Ce mode transmet seulement code, handler et événements ; il conserve la
+configuration du service et des fonctions, sans résoudre les valeurs de variables
+ou secrets inutilisées. Le rapport fournit `code_hash`, `code_changed`, la
+révision interne conservée et la cible observée au moment de publication.
+La CLI vérifie le hash depuis son paquet et le descripteur validé par le contrôle.
+
+Promouvoir séparément avec `python3 -m adapter promote --function
+UUID_DE_FONCTION --code-hash HASH_COMPLET`. La commande relit la fonction et
+contrôle sa version avant décision. Elle ne charge pas le manifeste. La première
+promotion du premier hash exige Create ; toutes les suivantes exigent Update,
+même après désactivation de la cible. Read reste nécessaire aux lectures CLI.
+
+La plateforme accepte jusqu’à 64 candidats en attente, avec huit par fonction,
+et quatre uploads simultanément admis ; une seule validation Docker s’exécute à
+la fois. Une fonction conserve vingt hashes disponibles ou archivés. Un doublon
+disponible reste admis au plafond après réception, extraction et validation ; un
+nouveau hash est refusé sans déplacer la cible. Supprimer une version libère sa
+place, puis ses octets après nettoyage confirmé. Les réservations temporaires et
+la marge disque restent nécessaires même pour un paquet identique.
+Après interruption du contrôle pendant réception ou validation, le candidat
+échoue sans publication automatique ; consulter son état avant toute relance.
 
 ## Consulter les instances et les journaux
 
@@ -222,7 +256,8 @@ mesures disponibles. Le temps CPU est cumulé depuis la création de l’instanc
 
 **Invocations** présente les appels les plus récents, leur état et leur statut
 HTTP séparément. Ouvrir « Détails et journal » pour lire la chronologie,
-la révision, l’instance, le diagnostic et les traces expurgées. « Non confirmé »
+le hash demandé et exécuté, la révision interne, l’instance, le diagnostic et
+les traces expurgées. La sélection sans tag est nommée « Cible par défaut ». « Non confirmé »
 signifie que le début du handler n’a pas été observé avec certitude. Une réponse
 métier HTTP 503 peut correspondre à une exécution terminée normalement.
 
@@ -236,9 +271,12 @@ peuvent être conservés pour retrouver la même fonction.
 
 Depuis le service, choisir **Adresses d’appel** sous le nom de la fonction,
 ou ouvrir cette facette dans sa fiche. Les domaines sont présentés par pages
-de cinq avec les méthodes et chemins de la révision active. **Actualiser**
-relit les domaines et cette révision ; un brouillon n’a aucune adresse à appeler.
-Une activation ou un rollback change les chemins proposés après actualisation.
+de cinq avec les méthodes et chemins de la sélection affichée. Par défaut, ils
+suivent la cible promue. Depuis **Code et révisions**, **Adresses de cette version**
+fixe un hash dans l’adresse de la page, même avant sa première promotion.
+**Utiliser la cible par défaut** retire explicitement cette sélection.
+**Actualiser** relit domaines, sélection et cible courante. Une version inconnue,
+archivée ou supprimée affiche un refus sans proposer les URL d’un autre code.
 
 **Copier l’adresse** copie l’URL complète. **Copier l’exemple curl** copie une
 commande avec `VOTRE_JETON` à remplacer par un jeton Read du service. **Exemple curl**
@@ -253,19 +291,28 @@ demande une route vers la passerelle. Un domaine générique sans hôte concret
 n’offre pas d’adresse copiable. La console et le SSO gardent leur adresse
 canonique ; les domaines supplémentaires servent aux appels.
 
-Le résultat de `deploy` expose également `invocation_urls` pour chaque fonction
-publiée. Si cette consultation échoue ou si les domaines/la révision changent
+Le résultat de `deploy` expose également `invocation_urls` pour le hash publié
+de chaque fonction, avec son suffixe explicite. Si cette consultation échoue ou si les domaines/la révision changent
 pendant la lecture, la publication reste réussie et le rapport signale seulement
 les adresses indisponibles. Consulter la facette puis actualiser, sans republier
 le code pour obtenir ses adresses.
 
 ## Invoquer et suivre une fonction
 
-Après publication, appeler `/invoke/UUID_DE_FONCTION` si le manifeste déclare
+Après promotion, appeler `/invoke/UUID_DE_FONCTION` si le manifeste déclare
 un alias implicite, ou `/invoke/UUID_DE_FONCTION/chemin` pour un chemin déclaré.
 La méthode HTTP doit figurer dans cette déclaration. Envoyer le jeton du service
 dans `X-Serverless-Token` ; une session administrateur seule n’autorise pas
 l’invocation. L’authentification métier peut rester dans `Authorization`.
+
+Pour fixer un code disponible, appeler `/invoke/UUID_DE_FONCTION@HASH_COMPLET`
+ou `/invoke/UUID_DE_FONCTION@HASH_COMPLET/chemin`. Le hash est constitué de 64
+caractères hexadécimaux minuscules ; une abréviation ou un tag indisponible est
+refusé. Les contrôles de jeton, portée, origine et IP restent identiques. La
+réponse après admission porte `X-Serverless-Code-Hash`, corrélé avec son journal.
+Stable et pilote partagent volumes, limites d’instances, concurrence et budgets.
+Les minima préchauffent uniquement la cible promue ; un appel pilote peut faire
+arrêter une instance prête pour obtenir sa place, sans interrompre un appel actif.
 
 Le délai de file précède le délai maximal d’exécution. Une file pleine ou
 une attente expirée donne 429 ; un dépassement du délai d’exécution donne 504.

@@ -1,6 +1,6 @@
 # Qualification de la plateforme
 
-## Migration et exécution des versions par hash en préparation
+## Migration et exécution des versions par hash — checkpoint ciblé008
 
 `node e2e/function-versions-upgrade.mjs prepare` crée par les API du vrai
 checkpoint007 des alias A/A/B, un rollback et des données/cache. Il exige la
@@ -13,8 +13,7 @@ distincte et séquentielle ; les rapports incomplets restent des échecs.
 
 La fixture originale `qualification/artifacts/function-versions.cjs` est
 empaquetée, publiée et exécutée par Docker. Le client ne l’importe pas. Ce banc
-est en préparation : sa présence ne qualifie ni la migration008 ni les autres
-critères de [FUNCTION_VERSION_EXECUTION](../docs/FUNCTION_VERSION_EXECUTION.md#preuves-réelles).
+qualifie le périmètre ciblé décrit ci-dessous ; les autres critères restent dans [FUNCTION_VERSION_EXECUTION](../docs/FUNCTION_VERSION_EXECUTION.md#preuves-réelles).
 
 Le premier replay008 passe les quatre phases, dont préparation et nettoyage
 distincts des deux scénarios migration/reprise. `node e2e/function-versions-api.mjs`
@@ -25,14 +24,19 @@ le recoupement physique du doublon avant purge est ajouté après la revue.
 processus Python du poste, avec six appels des URL émises sur les deux domaines.
 Cette exécution est distincte des24 groupes plan/package et14 refus publics
 dans les deux images CLI. La déclinaison authentifiée dans ces images, les
-parcours UI, pannes et régression complète restent nécessaires.
+pannes et régression complète restent nécessaires. Les six groupes UI et huit
+du manuel passent désormais, avec28 captures inspectées et nettoyage natif de
+dix fonctions. Le [checkpoint71](../docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
+conserve séparément les images, sources et essais interrompus.
 
 `node e2e/function-versions-ui.mjs` part de l’accueil et des formulaires, puis
 éprouve versions, presse-papiers natif, promotions, retraits/réimportations et
 dialog conservé pendant la publication réelle d’un sixième hash. Le premier
 essai est incomplet sur un corps PUT200 évincé avant sa lecture ; son nettoyage
-réel est confirmé. Le client reprend le tampon CDP durable borné du précédent
-alias/SSO et lit les réponses immédiatement ; aucune réponse n’est remplacée.
+réel est confirmé. La preuve observe le PUT réel (URL et statut), relit son candidat durable
+par l’API authentifiée et recoupe le message réellement affiché par la console.
+Le corps PUT n’est pas déclaré observé ; les essais de collecte CDP incomplets
+sont conservés avec leurs nettoyages, distincts du replay.
 
 ## Pause et reprise d’une requête réelle
 

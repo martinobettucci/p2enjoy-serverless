@@ -1,5 +1,17 @@
 # Plan de contrôle
 
+Le contrôle008 est déployé en qualification DEV selon
+[FUNCTION_VERSION_EXECUTION](../docs/FUNCTION_VERSION_EXECUTION.md). L’upload
+prépare un hash et la promotion explicite choisit la cible sans tag ; pools et
+états sont gérés par hash sous les limites communes. Le
+[checkpoint ciblé](../docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json)
+réunit71 groupes dont2 migration/reprise,12 API,5 CLI authentifiés depuis le poste,
+6 UI et8 manuel, plus38 packaging/refus dans les images CLI. Les31 fichiers
+Python/SQL embarqués sont identiques entre époques API/CLI/UI. Dix fonctions sont
+purgées, sans instance ni opération active. Pannes, déclinaison CLI authentifiée
+dans les images et régression complète restent ouvertes ; les preuves007 citées
+ci-dessous restent historiques.
+
 Le conteneur `serverless-api` sert l’API et la console à
 `https://serverless.lelabs.tech`, sur le port interne 18090.
 Les [noms d’exploitation](../docs/DEPLOYMENT_NAMES.md) distinguent ce service

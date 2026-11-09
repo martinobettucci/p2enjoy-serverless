@@ -1,5 +1,35 @@
 # Journal de cadrage
 
+## 2026-11-09 — Checkpoint008 ciblé :71 groupes,28 captures et nettoyage natif
+
+La campagne console passe six groupes complets après la simplification de
+collecte, puis le manuel passe huit groupes :15 chapitres,52 paragraphes et
+empreinte cdb0b9df recoupés. Les28 JPEG sont inspectés : lecture, hashes longs,
+états, confirmations et erreurs restent utilisables sur desktop/mobile/tablette
+et texte agrandi. Les assertions de focus restent distinctes de cette inspection.
+La revue statique bornée du client ne relève pas de faux succès ou vacuité.
+
+La preuve ciblée008 réunit71 groupes, sans addition des replays :2 migration/
+reprise,12 API,5 CLI authentifiés depuis le poste,6 UI,8 manuel et38 packaging/
+refus dans les images. Les sources239/242/244 et les images ba64364e/178394ab
+restent distinctes ; les31 fichiers Python/SQL backend sont recoupés identiques.
+Le collecteur natif confirme dix fonctions purgées, leurs dossiers de code
+absents, zéro fonction active, instance, appel, candidat, opération ou montage.
+Son premier SyntaxError local de délimiteur est corrigé avant toute exécution
+distante ; aucune donnée n’est modifiée par cette collecte.
+
+Les quatre essais UI interrompus sont archivés avec leurs nettoyages. La seule
+régression produit trouvée par ces essais, le focus après refus, est corrigée et
+rejouée. Aucun registre d’incohérences hors unité n’est présent ni alimenté.
+Pannes, CLI authentifiée dans les images, migrations perturbées et régression
+complète restent nécessaires ; SLS-074 et l’objectif autonome restent actifs.
+Le cron conserve son unité050 et l’exigence de ne suivre que la cible promue.
+La revue documentaire corrige aussi le schéma déclaré courant dans la note
+CONTRIBUTORS, resté001–006 ; sa proposition et son empreinte sont renouvelées.
+L’essai de sauvegarde initial conserve un contrôle SQLite privé0700 identifié
+sous control/.function-version-native-backup-a1jdbo0a ; il est incomplet et
+non substituable à la sauvegarde008 complète, sans suppression revendiquée.
+
 ## 2026-11-09 — Borner la preuve UI à la publication durable et à son rendu
 
 Le troisième replay reste incomplet sur la collecte CDP du PUT de réimportation,

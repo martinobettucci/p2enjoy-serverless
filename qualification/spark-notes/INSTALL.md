@@ -4,7 +4,7 @@ Entrée HTTPS : https://serverless.lelabs.tech. La console utilise le SSO LeLabs
 
 ## Accès des projets
 
-Un administrateur crée un namespace, un service puis des jetons de plateforme. Les clients utilisent `X-Serverless-Token`. Le droit Create permet une création et première publication ; Update permet les modifications et publications suivantes ; Delete supprime une fonction. Read permet les lectures autorisées et les invocations, quelle que soit leur méthode HTTP. Une portée par fonction interdit les opérations globales du service.
+Un administrateur crée un namespace, un service puis des jetons de plateforme. Les clients utilisent `X-Serverless-Token`. Le droit Create permet une création, première publication et première promotion de ce hash ; Update permet les modifications et versions suivantes ; Delete supprime une fonction. Read permet les lectures autorisées et les invocations, quelle que soit leur méthode HTTP. Une portée par fonction interdit les opérations globales du service.
 
 L’en-tête métier `Authorization` reste réservé au handler. Les règles d’origine web et d’IP sont appliquées par la passerelle, puis relues avant admission. Une origine web n’est pas une preuve d’identité d’un client hors navigateur.
 
@@ -33,7 +33,7 @@ L’API `/api/services/{id}/configuration` accepte `replace_secrets: true` avec
 un mapping `secrets` explicite ; sans ce champ, les secrets se modifient par clé.
 Les lectures ne renvoient jamais leurs valeurs enregistrées.
 
-L’historique se lit sous `/api/functions/{id}/revisions`. Le rollback rétablit une révision connue sans rétablir les anciens réglages ni les volumes. La facette Code et révisions propose la publication d’un ZIP et de son handler, le suivi, l’abandon d’une préparation, l’activation et la suppression de révisions. Les réglages et secrets courants sont conservés côté serveur lors de cette publication du code. L’entrée publique est `/invoke/{function_id}` pour un alias implicite, ou `/invoke/{function_id}/{chemin}` pour un chemin déclaré. Elle exige Read dans `X-Serverless-Token` ; le cookie administrateur ne remplace pas ce jeton.
+Le catalogue se lit sous `/api/functions/{id}/versions`, les alias historiques sous `/revisions`. Code et révisions propose publication, promotion, archivage, restauration, suppression et réimportation explicite par hash. Les réglages et secrets courants sont conservés côté serveur lors de cette publication du code. L’entrée publique est `/invoke/{function_id}` pour un alias implicite, ou `/invoke/{function_id}/{chemin}` pour un chemin déclaré. Elle exige Read dans `X-Serverless-Token` ; le cookie administrateur ne remplace pas ce jeton.
 
 ## Quotas, décisions et erreurs
 
@@ -56,7 +56,7 @@ Les paramètres d’exécution sont appliqués par le moteur. File pleine ou exp
 
 La console inscrit l’UUID du candidat dans son adresse avant d’envoyer la préparation. Après interruption réseau, fermeture ou rechargement, consulter cette même adresse avant de recommencer. Une préparation en attente d’archive peut être abandonnée explicitement ; le navigateur ne renvoie pas automatiquement le ZIP.
 
-Supprimer une révision inactive demande confirmation. Un 503 peut signifier que sa suppression logique est enregistrée mais que le nettoyage physique attend encore ; relire l’historique. La révision active reste protégée et les révisions utilisées par une instance ne peuvent pas être supprimées.
+Supprimer une version demande confirmation. La cible courante exige remplacement disponible ou désactivation explicite. La suppression retire les nouveaux appels ; le nettoyage physique attend les consommateurs déjà admis. Relire le catalogue et son état de nettoyage avant réimportation.
 
 Le manuel d’usage est accessible dans la navigation, à /console/manual. Il décrit les parcours disponibles, les droits, la publication, les révisions, les limites et le diagnostic. Sa source unique est `docs/manual.md`, construite et vérifiée avec la version de la console.
 
@@ -328,15 +328,15 @@ Sept groupes rejoués après nommage explicite ; 45 conservés aux clients incha
 deux époques de 222 sources et mêmes sources produit/images.
 
 
-## Registre persistant de l’identité du code
+## Registre007 de l’identité du code — historique
 
 La migration 007 et le cache code_hash sont déployés. Les alias UUID historiques
 et la cible courante sont conservés ; le premier backfill reconnaît aussi les
 purges 006 décidées et fortement corrélées, sans inventer de hash ni retirer les
 compteurs/gardes avant leur nettoyage normal. La carte Code et révisions montre
 et copie le hash complet. GET /api/functions/{id}/versions fournit une lecture
-Read/admin groupée et paginée, sans code ni secrets. Les uploads activent encore
-leur révision ; déduplication, promotion distincte et appel par hash suivent.
+Read/admin groupée et paginée, sans code ni secrets. À ce checkpoint007, les uploads activaient encore
+leur révision. Le checkpoint008 ci-dessous décrit le fonctionnement actuel.
 
 Preuve : docs/evidence/function-version-registry-dev-2026-11-09.json. 359 groupes
 sur deux époques de 233 sources aux mêmes fichiers produit et image, dont 46 ciblés
@@ -347,7 +347,7 @@ WAL, son nettoyage natif et le replay 15 groupes du poller sont conservés sépa
 Les six fonctions du registre sont purgées dans six namespaces recoupés ; les
 régressions ont leur propre nettoyage dans leurs rapports.
 
-Image courante : fe75c9e7, conservée aussi sous
+Image de ce checkpoint007 : fe75c9e7, conservée aussi sous
 p2enjoy-control:purge-recovery-reference. La référence 006 est reconstruite depuis
 le vrai Git f56d79e, vérifiée et conservée sous historical-schema-006. Vérifier
 l’image effectivement portée après build/up ; si up garde l’ancien conteneur,
@@ -361,3 +361,48 @@ Les fichiers officiels, l’agent et le runtime de référence sont conservés ;
 daemon permanent nouveau. Les trois notes sont proposées individuellement,
 sans revendiquer leur adoption. Configuration par les deux fichiers de cellule ;
 aucun .env, ENV/ARG ou environment de configuration ajouté.
+
+
+## Pilote et promotion explicite
+
+`deploy --code-only --config serverless.yml --service UUID_DU_SERVICE` publie
+seulement le code de fonctions existantes, sans résoudre ni modifier le provider.
+`python3 -m adapter promote --function UUID --code-hash HASH` choisit la cible
+sans tag ; Read et Create première promotion, sinon Update, sont requis.
+L’invocation épinglée est /invoke/UUID@HASH, suivie du chemin déclaré.
+Le hash est complet,64 hexadécimaux minuscules ; inconnu/archivé/supprimé est
+refusé sans repli. X-Serverless-Code-Hash indique le code réellement admis.
+Le catalogue /api/functions/UUID/invocation-urls?version=HASH calcule ses URL
+depuis les seules routes officielles du SPARK. Les mutations incertaines ne
+se rejouent pas automatiquement ; relire candidat, catalogue et fonction.
+
+
+## Versions par hash — checkpoint ciblé008
+
+Le contrôle008 prépare une version sans la promouvoir. L’upload identique
+réutilise son hash disponible et sa date ; un hash archivé se restaure
+explicitement, un hash supprimé se réimporte avec son ZIP validé. Promouvoir
+choisit la cible des appels sans tag ; les pilotes utilisent le hash explicite.
+Le rollback de code conserve ressources, variables/secrets et volumes courants.
+Les appels déjà admis terminent avec leur snapshot ; les pools des versions
+partagent les budgets et limites de leur fonction.
+
+La preuve docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json
+réunit71 groupes :2 migration/reprise,12 API,5 CLI authentifiés depuis le poste,
+6 UI,8 manuel et38 packaging/refus dans les images CLI. Les28 captures sont
+inspectées ; manuel15 chapitres/52 paragraphes. Dix fonctions sont purgées,
+les dossiers d’artefacts absents et les ressources actives à zéro. Les31 fichiers
+Python/SQL backend sont identiques entre époques API/CLI/UI. Les preuves007
+ci-dessus restent historiques. Les modes authentifiés dans les images CLI,
+les pannes et la régression complète restent ouverts ; SLS-074 demeure en cours.
+
+Image contrôle courante :178394abb337, référence007 retenue sous
+before-function-version-promotions. Après migration008 commise, ne pas remettre
+seule une ancienne image : une restauration exige base, artefacts et volumes
+cohérents. La sauvegarde native privée avant008 est conservée sous
+/srv/p2enjoy-serverless/qualification-history/.
+
+Aucune variable, secret ou route ajouté ; les deux domaines TLS restent18090.
+Configuration par les deux fichiers officiels de cellule, aucun .env, ENV/ARG ou
+environment de configuration. Agent et runtime de référence sont conservés.
+Les trois notes sont proposées individuellement ; leur adoption n’est pas revendiquée.

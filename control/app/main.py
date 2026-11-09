@@ -220,6 +220,14 @@ def canonical_entry(request,path):
                 elif name=='catalogue':
                     try:selected[name]=catalogue_query(value)
                     except ValueError:pass
+            # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel
+            if path.endswith('/invocation-urls'):
+                versions=[value for name,value in parameters if name=='version']
+                if versions:
+                    # Even an invalid/duplicate selector must remain a refused
+                    # explicit selection instead of becoming the default view.
+                    selected['version']=versions[0] if len(versions)==1 and len(versions[0])<=256 else 'invalid'
+                elif request.url.query and not parameters:selected['version']='invalid'
             if path=='/console/functions':
                 try:selected.update(dict(parse_qsl(catalogue_query(urlencode([(k,v) for k,v in parameters if k!='catalogue'])))))
                 except ValueError:pass

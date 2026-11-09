@@ -16,6 +16,9 @@ Les variantes de `artifacts/` sont des modules originaux destinés au vrai
 chargeur de plateforme : ESM, CommonJS, dépendance YAML et défauts d'import
 intentionnels. `invoke.cjs` et `invoke.mjs` ajoutent les handlers d’invocation,
 les gros corps et les pannes réellement déclenchées dans Docker.
+`function-versions.cjs` sert la migration et le pilote par hash : exports primary
+et secondary, marqueur de paquet, écritures données/cache, délai réel et empreinte
+du secret effectif. Il est publié par les API et exécuté dans le runtime isolé.
 `service-configuration.cjs` expose des valeurs publiques et une empreinte de
 secret pour qualifier les valeurs communes du service et les surcharges par
 la passerelle réelle ; la valeur secrète n’est pas renvoyée.

@@ -103,21 +103,22 @@ class StorageManagement:
             raise StorageError('artifact_instance_retained')
         if self.db.one("SELECT 1 FROM deployments WHERE function_id=? AND state IN ('prepared','receiving','validating')",(key,)):
             raise StorageError('artifact_candidate_retained')
-        deployment.busy=True
+        deployment.cleaning=True
         try:
             if deployment.cleanup_error:
                 await blocking(deployment.reconcile_docker)
                 await deployment.clean_channels()
             rows=self.db.all('SELECT id FROM revisions WHERE function_id=? AND deleted_at IS NOT NULL',(key,))
-            rows+=self.db.all("SELECT id FROM deployments WHERE function_id=? AND state IN ('failed','expired') AND id NOT IN (SELECT id FROM revisions)",(key,))
+            # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#publication-et-déduplication
+            rows+=self.db.all("SELECT id FROM deployments WHERE function_id=? AND state IN ('failed','expired','published') AND id NOT IN (SELECT id FROM revisions)",(key,))
             for item in rows:
                 await blocking(deployment.remove,deployment.root,str(UUID(item['id'])))
                 with self.db.transaction() as db:
                     db.execute('UPDATE revisions SET stored_bytes=0 WHERE id=? AND function_id=? AND deleted_at IS NOT NULL',(item['id'],key))
-                    db.execute("UPDATE deployments SET reserved_bytes=0 WHERE id=? AND function_id=? AND state IN ('failed','expired')",(item['id'],key))
+                    db.execute("UPDATE deployments SET reserved_bytes=0 WHERE id=? AND function_id=? AND state IN ('failed','expired','published')",(item['id'],key))
             return True
         except (OSError,ArtifactError,ValidationError,RuntimeError):raise StorageError('artifact_cleanup_pending') from None
-        finally:deployment.busy=False
+        finally:deployment.cleaning=False
 
     async def resolve(self,row):
         command=self.db.one('SELECT * FROM storage_commands WHERE id=?',(row['id'],))
@@ -188,6 +189,8 @@ class StorageManagement:
                 now=max(time.time(),function['updated_at']+0.000001)
                 db.execute('UPDATE functions SET updated_at=? WHERE id=?',(now,key))
                 if kind=='purge':
+                    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#archivage-restauration-et-suppression
+                    db.execute("UPDATE function_versions SET state='deleted',updated_at=? WHERE function_id=?",(now,key))
                     db.execute("UPDATE functions SET config_json='{}',environment_json='{}',secrets_cipher=? WHERE id=?",(self.vault.seal({}),key))
                     db.execute("UPDATE revisions SET deleted_at=coalesce(deleted_at,?),inventory_json='[]',events_json='{}' WHERE function_id=?",(now,key))
                     db.execute("UPDATE deployments SET configuration_cipher=NULL,events_json='{}',validation_json=NULL WHERE function_id=?",(key,))

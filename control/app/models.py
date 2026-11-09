@@ -186,12 +186,17 @@ class DeploymentCreate(Strict):
     config:FunctionConfig
     configuration:Configuration=Field(default_factory=Configuration)
     events:Events=Field(default_factory=Events)
+    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#publication-et-déduplication
+    restore_code_hash:str|None=Field(default=None,pattern=r'^[0-9a-f]{64}$')
 
 
 # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md
 class CodeDeploymentCreate(Strict):
     handler:str=Field(min_length=3,max_length=256)
     deployment_id:UUID
+    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#publication-et-déduplication
+    events:Events|None=None
+    restore_code_hash:str|None=Field(default=None,pattern=r'^[0-9a-f]{64}$')
 
     @field_validator('handler')
     @classmethod
@@ -201,3 +206,15 @@ class CodeDeploymentCreate(Strict):
 
 class Rollback(Strict):
     revision_id:UUID
+
+
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#archivage-restauration-et-suppression
+class VersionDisposition(Strict):
+    replacement_code_hash:str|None=Field(default=None,pattern=r'^[0-9a-f]{64}$')
+    disable_default:bool=False
+
+    @model_validator(mode='after')
+    def exclusive_target(self):
+        if self.replacement_code_hash is not None and self.disable_default:
+            raise ValueError('Choisissez une version de remplacement ou la désactivation de la cible.')
+        return self
