@@ -176,3 +176,8 @@ Le timer de 120 secondes et les règles de conservation/nettoyage sont ceux du
 client API. Le client ne retient ni n’intercepte la requête et ne modifie aucune
 route ou réponse. Cinq JPEG frais sont personnellement relus avant qualification.
 Les autres fautes de source et branches de récupération demeurent distinctes.
+
+Le client prend en charge immédiatement le rejet de chaque attente HTTP créée
+avant un clic, sans changer son résultat nominal. Il suit ces promesses et les
+joint après fermeture du navigateur ; une erreur de clic ne doit pas provoquer
+un rejet non géré pendant la restitution ou empêcher l’écriture du rapport.
