@@ -410,6 +410,40 @@ prouve pas encore la survie de sa connexion pendant réapplication Caddy.
 Échéance sans commande, EOF, commande partielle/trop longue, conflits/refus et
 autres erreurs propres du pilote restent à éprouver. SLS-066 demeure ouverte.
 
+## Parcours public du catalogue vide sous vraies routes
+
+Le prochain client navigateur réutilise le préfixe possédé invocation-route-pause,
+avec nonce dans les descriptions du namespace et du service request-pause-fixture,
+et la fonction route-entry attendue par le pilote natif. Il crée ces objets et
+publie le ZIP original depuis l’accueil, par les formulaires et la navigation
+normale. Les lectures API servent au recoupement et au nettoyage ; elles ne
+remplacent pas la création, la publication ou l’accès à la facette dans le parcours.
+
+Trois groupes sérialisés :
+
+1. Création/publication UI puis facette Adresses d’appel à deux domaines, avec
+   capture desktop du catalogue initial.
+2. Armer d’abord la garde des deux routes, puis la pause native. Le bouton
+   Actualiser engage le vrai GET HTTPS. Après sa barrière recv complète,
+   détourner les deux seules routes autorisées vers 18091 via la console normale
+   et sa projection officielle. Libérer le même GET, exiger son vrai 200 avec
+   source disponible, total zéro, révision identique. L’interface affiche l’aide
+   Aucun domaine d’appel applicable, sans anciennes URL ni actions de copie ;
+   inspecter les captures desktop et mobile, le focus et l’absence de débordement.
+3. Confirmer la fin de la pause, restaurer les routes et attendre la fin de leur
+   garde avec les deux HTTPS sains. Actualiser par l’UI, retrouver les deux
+   domaines et exécuter Docker depuis une URL copiée, avec le jeton Read scoped.
+   Recouper les captures de retour et la révision réelle du handler.
+
+Sur toute erreur, libérer/confirmer d’abord le contrôle avant d’attendre la
+restauration des routes, qui dépend de sa santé HTTPS. Une identité ou mutation
+inconnue interdit le nettoyage ; conserver la fixture et les diagnostics.
+Supprimer/purger seulement les UUID possédés après fin des deux gardes, puis
+recouper nativement le stockage. Aucun fichier source de routes, résultat de
+GET ou transport n’est substitué. L’application et ses images ne changent pas.
+La survie effective de la connexion pendant la réapplication Caddy est une issue
+de ce vrai test ; elle n’est pas présumée par le contrat.
+
 ## Suite complète de preuve
 
 Le scope `invocation-urls` de `e2e/execution-suite.py` compose l’union

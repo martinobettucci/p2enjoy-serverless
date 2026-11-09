@@ -3499,3 +3499,15 @@ indépendant confirme réellement l’identité, la santé et l’absence de tra
 Le client ne date pas la réponse par rapport au SIGCONT de la garde ; la preuve
 n’attribue donc pas au timer la cause exclusive de la libération. Ce bornage
 documentaire ne requalifie aucun événement non mesuré.
+
+## 2026-11-09 — Contrat du parcours UI public vide
+
+Après la qualification de la pause, la prochaine preuve crée/publie par l’UI
+depuis l’accueil, puis retient le GET du bouton Actualiser. La garde de routes
+est armée avant la pause ; les deux routes sont détournées normalement et le
+même GET est libéré. Exiger réponse réelle 200/source disponible/total zéro,
+état vide utile sans URL périmée sur desktop/mobile, puis restauration et
+invocation de l’URL copiée. Le contrôle doit être libéré avant d’attendre la
+santé HTTPS des routes restaurées. Les deux gardes doivent être terminées avant
+purge. Cette décision est persistée avant le client ; la survie de connexion
+Caddy et les captures restent à prouver, sans changement applicatif.
