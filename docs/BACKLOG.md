@@ -924,6 +924,26 @@ purges physiques, zéro groupe ajouté. Aucun produit/UI/manuel ni configuration
 modifié ; la lecture sous-propriétaire recoupe les31 backends et le web.
 SLS-074 reste[~] pour les autres interruptions et la régression complète008.
 
+La prochaine étape est l'adaptation fidèle de la régression courante008.
+L'exploration source du scope publication constate18 campagnes/313 groupes
+historiques, sans inclusion automatique des nouveaux clients SLS-074. Les attentes
+à adapter sont identifiées dans control-operations, deployments, code-publications,
+adapter-deploy, publication-recovery, function-storage, public-invocations,
+execution-ui et publication-ui. Conserver tous leurs contrôles de droits, pannes,
+quota, consommateurs, persistance, parcours et rendu ; aucun scénario n'est retiré
+pour obtenir du vert. Les sources006/007 des bancs historiques restent inchangées.
+L'upgrade de storage-legacy-recovery doit seulement nommer sa cible008 explicitement.
+
+Ordre décidé : adapter d'abord migrations/fixtures/publications API/CLI et leurs
+refus, puis stockage/invocations et reprise, puis les parcours de console ;
+rejouer chaque campagne modifiée avant le gel et la suite complète en série.
+La matrice finale doit inventorier les clients SLS-074, distinguer prérequis,
+époques et captures, et compter les groupes réellement retenus sans figer le
+total à313. Les21 anciens groupes de publication UI ne sont pas remplacés par
+les six nouveaux parcours ciblés. Sources et discriminants de l'exploration
+sont consignés au journal du9novembre ; aucun résultat de cette adaptation
+n'est encore acquis. Le statut reste[~].
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;

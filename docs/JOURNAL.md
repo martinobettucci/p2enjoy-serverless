@@ -4966,3 +4966,32 @@ Après synchronisation,290 sources correspondent au SPARK ; seuls deux documents
 de résultat diffèrent de l'époque qualifiée, aucun exécutable. Contrôles statiques
 Python/Node, JSON, champs sensibles et diff valides, distincts des groupes E2E.
 Les deux essais de bootstrap et leurs nettoyages restent exclus du total retenu.
+
+
+## 2026-11-09 — Préparation de la régression complète008
+
+Après le commit qualifié4c7c7da, l'exploration factory_explorer en lecture seule
+identifie les attentes encore007 du scope publication :18 campagnes/313 groupes
+historiques, sans les nouveaux clients SLS-074. Constats recoupés dans le dépôt :
+control-operations.py139 exige sept migrations ; code-publications.mjs70 et127
+présentent l'upload comme actif ; publication-recovery.mjs233–245 attend vingt
+UUID pour vingt ZIP identiques ; function-storage.mjs252–271 confond conservation
+du code et application de quotas ; publication-ui.mjs31–32 cherche les anciennes
+cartes par UUID et ses scénarios198–220 attendent les anciens résultats de retrait.
+
+Le rapport complète la cartographie : deployments.mjs140/207, adapter-deploy.mjs94,
+public-invocations.mjs101/249, execution-ui.mjs101 et storage-legacy-recovery.mjs47/91.
+Une suppression008 n'est pas adaptée par le seul ajout d'If-Match : l'appel admis
+garde son snapshot, la version cesse d'être disponible et cleanup_pending peut
+précéder l'effacement. La cible doit être promue explicitement pour les fixtures
+qui en ont besoin. Le plafond se prouve sur vingt hashes distincts, doublon admis
+et nouveau contenu refusé. Le code/API008 restent l'autorité ; une contradiction
+produit éventuelle sera reproduite et traitée comme telle, sans assouplir le test.
+
+Décision de séquence persistée au backlog avant code : API/CLI/migrations, puis
+stockage/invocations/reprise, puis console, campagnes ciblées et enfin gel/suite
+complète sérielle avec captures réelles. Ne pas réécrire globalement SCHEMA_007 :
+les parties source des véritables bancs006/007 restent historiques. Les21 groupes
+publication-ui gardent leurs pannes, confirmations, relectures, pagination et
+nettoyages ; les six parcours ciblés008 ne suffisent pas à les remplacer.
+Aucune adaptation ni preuve de cette nouvelle étape n'est encore exécutée.
