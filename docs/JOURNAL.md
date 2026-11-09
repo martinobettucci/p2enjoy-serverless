@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 2026-11-09 — Revue avant faute : épingler l’inode des permissions
+
+La revue trouve une fenêtre lstat→chmod du helper, pour la mise en faute et la
+restitution du socket. Elle pourrait toucher un remplacement avant de constater
+le changement. Aucune permission n’a encore été modifiée. La correction retenue
+épingle le répertoire par descripteur et utilise fchmod ; le socket est ouvert
+avec O_PATH/NOFOLLOW, vérifié par fstat puis changé via sa référence procfs de
+ce même descripteur. Le restorer autonome vérifie lui aussi avant mutation ; il
+refuse un remplacement sans le modifier. Les modes et identités sont recoupés
+sur le descripteur après changement. La lecture du Python réellement embarqué
+confirme aussi que le défaut de nettoyage du socket privé est journalisé par
+asyncio avant le retrait Docker ; la preuve physique du canal reste nécessaire.
+
 ## 2026-11-09 — Décision : éprouver la garde de validation sous deux fautes physiques
 
 L’exploration confirme le précédent065 : refus errno13 du socket Docker avec

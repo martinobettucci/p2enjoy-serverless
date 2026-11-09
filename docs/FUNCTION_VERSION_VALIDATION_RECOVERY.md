@@ -53,7 +53,14 @@ restent inchangés. Les octets de A ne sont pas libérés avant la réconciliati
 
 ## Restitution et reprise
 
-La permission initiale est enregistrée avec type, device/inode, UID/GID. Une
+La permission initiale est enregistrée avec type, device/inode, UID/GID.
+Chaque mutation vise un inode épinglé : descripteur de répertoire et fchmod,
+ou socket ouvert O_PATH/NOFOLLOW puis référence /proc/self/fd du même descripteur.
+Le type et l’identité sont vérifiés par fstat avant de changer le mode ; un
+remplacement de chemin est refusé sans le modifier. Ces mécanismes Linux sont
+décrits par [open(2)](https://man7.org/linux/man-pages/man2/open.2.html) et
+[proc_pid_fd(5)](https://man7.org/linux/man-pages/man5/proc_pid_fd.5.html).
+Une
 garde systemd indépendante est armée et vérifiée avant le retrait de permission.
 La restitution normale du socket conserve cette identité. Pour le canal, le
 scénario tue réellement le helper par SIGKILL ; la garde restitue l’inode attendu
