@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 2026-11-09 — Premier parcours008 UI interrompu : corps observé trop tard
+
+Le premier groupe s’arrête après un vrai PUT200 : response.json demande un corps
+déjà évincé du cache d’inspection Chromium. La fonction est purgée, le namespace
+supprimé et le rapport reste incomplet, sans groupe validé. Le précédent du POST
+de déconnexion utilise Network.configureDurableMessages avec tampon borné.
+Avant correction du client : lire le corps réel immédiatement à sa réception,
+activer ce stockage de diagnostic dans le navigateur authentifié et ne recueillir
+aucune saisie, en-tête secret ou URL OIDC. Le transport et ses réponses ne sont
+pas remplacés. Le produit et les assertions restent inchangés.
+
 ## 2026-11-09 — Décision avant correction : cohérence terminale du suivi
 
 La revue confirme un entrelacement réel : versions lues, publication de code

@@ -1,5 +1,39 @@
 # Qualification de la plateforme
 
+## Migration et exécution des versions par hash en préparation
+
+`node e2e/function-versions-upgrade.mjs prepare` crée par les API du vrai
+checkpoint007 des alias A/A/B, un rollback et des données/cache. Il exige la
+session SSO normale, conserve son état privé en0600 et refuse de le remplacer.
+Après sauvegarde native, construction et bascule du seul contrôle DEV vers008,
+`verify` recoupe alias, cible, marqueurs historiques, appels sans tag et épinglés,
+puis données/cache. `persist` exige un redémarrage réel préalable ; `cleanup`
+supprime et purge les objets par les API puis leurs parents. Chaque phase est
+distincte et séquentielle ; les rapports incomplets restent des échecs.
+
+La fixture originale `qualification/artifacts/function-versions.cjs` est
+empaquetée, publiée et exécutée par Docker. Le client ne l’importe pas. Ce banc
+est en préparation : sa présence ne qualifie ni la migration008 ni les autres
+critères de [FUNCTION_VERSION_EXECUTION](../docs/FUNCTION_VERSION_EXECUTION.md#preuves-réelles).
+
+Le premier replay008 passe les quatre phases, dont préparation et nettoyage
+distincts des deux scénarios migration/reprise. `node e2e/function-versions-api.mjs`
+passe douze groupes. Son helper `function-version-artifacts.py` lit uniquement
+les artefacts et réservations de l’UUID exact dans son namespace de campagne ;
+le recoupement physique du doublon avant purge est ajouté après la revue.
+`node e2e/function-versions-cli.mjs` passe cinq groupes authentifiés par le vrai
+processus Python du poste, avec six appels des URL émises sur les deux domaines.
+Cette exécution est distincte des24 groupes plan/package et14 refus publics
+dans les deux images CLI. La déclinaison authentifiée dans ces images, les
+parcours UI, pannes et régression complète restent nécessaires.
+
+`node e2e/function-versions-ui.mjs` part de l’accueil et des formulaires, puis
+éprouve versions, presse-papiers natif, promotions, retraits/réimportations et
+dialog conservé pendant la publication réelle d’un sixième hash. Le premier
+essai est incomplet sur un corps PUT200 évincé avant sa lecture ; son nettoyage
+réel est confirmé. Le client reprend le tampon CDP durable borné du précédent
+alias/SSO et lit les réponses immédiatement ; aucune réponse n’est remplacée.
+
 ## Pause et reprise d’une requête réelle
 
 `node e2e/invocation-request-pause.mjs` publie sa fixture originale dans le SPARK
