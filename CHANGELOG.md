@@ -2,6 +2,16 @@
 
 ## [Non publié]
 
+- Reprise des paquets dédupliqués qualifiée en DEV : quatre groupes, cinq appels,
+  commits200 sous EACCES avec réservation conservée puis nettoyage normal, et
+  reprise après SIGKILL du contrôle et du helper par garde indépendante.
+  Même ID/image/configuration, nouveau démarrage attendu, référence et fichiers
+  officiels conservés ; données/cache1–5 et nouvelle déduplication confirmés.
+  Une fonction purgée physiquement, deux gardes terminées, ressources actives et
+  réservations nulles. 271 sources figées ; pertes SSH, faute propre de garde
+  et coupure pendant unlink restent distinctes, SLS-074 en cours.
+  [Preuve](docs/evidence/function-version-duplicate-recovery-dev-2026-11-09.json).
+
 - Capacité des uploads qualifiée sur le contrôle DEV008 inchangé : quatre groupes
   réels, quatre admissions et cinquième429 avant réception, attente supérieure30s,
   un validateur Docker à la fois, convergence puis relance explicite du candidat

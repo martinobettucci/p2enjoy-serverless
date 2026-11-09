@@ -80,8 +80,12 @@ preuve du signal reçu par le helper.
 Quatre groupes : publication sous EACCES, reprise normale, publication conservée
 après SIGKILL du contrôle, puis reprise indépendante et nouvelle déduplication.
 Préparation stable et purge ne sont pas ajoutées au nombre de groupes.
-Le client maintenu et son helper seront sous e2e, avec rapports privés séparés
-des autres campagnes. Toute requête ouverte est jointe même en cas d'échec.
+Le client `e2e/function-version-duplicate-recovery.mjs` et son helper
+`function-version-duplicate-recovery-operator.py` ont leurs rapports privés
+séparés des autres campagnes. Depuis la racine, après synchronisation et session
+SSO réelle, lancer `python3 -B e2e/function-version-duplicate-recovery-run.py`.
+Le pilote refuse de remplacer un rapport existant. Toute requête ouverte est
+jointe même en cas d'échec.
 Une permission ou reprise non confirmée conserve la fixture et cleanup=false.
 
 La preuve lie sources/images avant et après, réponses HTTPS, états SQL lus sous
@@ -91,3 +95,25 @@ La version S et son archive sont recoupées avant/après chaque faute. Aucun
 fichier officiel, résultat de protocole ou appel système n'est remplacé. Aucune
 modification UI ni nouvelle image n'est attendue. Les autres pannes/migrations
 et la campagne complète restent dans SLS-074.
+
+## Résultat ciblé
+
+La [preuve DEV](evidence/function-version-duplicate-recovery-dev-2026-11-09.json)
+passe les quatre groupes sur 271 sources figées, avec cinq invocations et
+compteurs data/cache de 1 à 5. Chaque doublon garde 499 392 512 octets réservés
+après son commit200 sous EACCES. Le premier reprend par maintenance sans nouveau
+démarrage. Le second reste published après ExitCode137 ; le parent confirme
+SIGKILL9 du helper et la garde systemd exécute indépendamment la restitution
+puis docker start. Son résultat est recoupé dans le journal natif de son unité.
+Le même ID/image/configuration de contrôle est conservé, avec un nouveau démarrage
+attendu ; le runtime de référence reste identique. Un troisième doublon se
+publie et se nettoie normalement après reprise, toujours sur S.
+
+La fonction et ses parents sont purgés par les API puis recoupés physiquement :
+artefacts, volumes, canaux, conteneurs/réseaux absents, helpers et unités terminés,
+compteurs actifs et réservations nuls. Les 31 backends correspondent à l'image
+19cfe884 inchangée ; les fichiers officiels sont conservés. Aucun essai interrompu
+ni groupe ignoré. Cette section et le raccord de commande sont documentaires,
+postérieurs au gel271 ; les sources exécutables qualifiées restent identiques.
+Les pertes SSH, remplacements d'inode et pannes propres de garde ont une revue
+statique ; leur exécution et les autres fenêtres restent nécessaires.

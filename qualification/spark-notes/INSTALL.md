@@ -472,3 +472,16 @@ Les cinq pilotes maintenus de préparation à collecte sont sous e2e, selon
 docs/VALIDATOR_NAMES.md. Les autres pannes et la régression complète008
 restent au backlog. Aucun secret/variable/route nouveau ; ces trois notes
 sont proposées individuellement, sans adoption revendiquée.
+
+
+## Dernière reprise du contrôle qualifiée
+
+Le contrôle serverless-api garde son ID21545c4f et son image19cfe884 ; son
+démarrage courant est2026-11-09T16:53:43.245115994Z après le cycle SIGKILL de
+qualification074. La garde a restitué le seul répertoire candidat avant docker
+start du même conteneur. Le candidat publié reste published, sa réservation
+est libérée et une nouvelle déduplication réussit. Les cinq appels retrouvent
+les compteurs data/cache1–5 ; la fonction est purgée et les ressources actives
+libérées. Aucune migration, variable, route ou nouvelle image. La référence,
+les31 backends et les fichiers officiels restent identiques. Preuve :
+docs/evidence/function-version-duplicate-recovery-dev-2026-11-09.json.

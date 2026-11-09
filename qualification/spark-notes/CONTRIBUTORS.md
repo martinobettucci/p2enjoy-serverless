@@ -541,3 +541,15 @@ Les cinq pilotes maintenus de préparation à collecte sont sous e2e, selon
 docs/VALIDATOR_NAMES.md. Les autres pannes et la régression complète008
 restent au backlog. Aucun secret/variable/route nouveau ; ces trois notes
 sont proposées individuellement, sans adoption revendiquée.
+
+
+## Preuve de reprise des uploads dédupliqués
+
+Depuis la racine synchronisée, avec la session SSO réelle et le seul SPARK DEV
+au repos : python3 -B e2e/function-version-duplicate-recovery-run.py. Le pilote
+refuse un rapport préexistant. Quatre groupes et cinq appels passent sur271
+sources figées, sans échec/skip ; contrôle et référence gardent leurs images.
+Le helper natif vise le seul inode candidat ; sa garde est armée avant chmod.
+Le superviseur recoupe le SIGKILL par waitpid/PID/naissance et le journal systemd
+recoupe la reprise indépendante. Les pertes SSH et pannes propres de garde
+restent à éprouver. Contrat : docs/FUNCTION_VERSION_DUPLICATE_RECOVERY.md.

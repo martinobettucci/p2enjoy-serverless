@@ -1,0 +1,2659 @@
+{
+  "completed": true,
+  "target": "infra-serverless DEV",
+  "scope": "SLS-074 duplicate publication with real EACCES, ordinary maintenance and post-commit SIGKILL recovery by independent guard",
+  "unique_groups": 4,
+  "failures": 0,
+  "skipped": 0,
+  "checkpoint": {
+    "completed": true,
+    "started_at_ns": 1794243102979477965,
+    "ended_at_ns": 1794243268925009572,
+    "exit_code": 0,
+    "before": {
+      "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+      "source_sha256": {
+        "adapter/Dockerfile": "231a482220d5122d10ba3c5442722c8dd369aa344de76f6a5b506babd0332d49",
+        "adapter/Dockerfile.dockerignore": "315ec77408e7aecfc430478d68d393b5c2cf9976b0b8f9cef2ba7adcdf4809b3",
+        "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+        "adapter/__main__.py": "2136336dc7913aa79d7a1efc683cb56ca0e82d061e15ff08f49ac2926105d409",
+        "adapter/archive.py": "7a7951e080174dd6cdaa642cb82a9e9ddbb8717f77a9628cf44fa0826e918dc7",
+        "adapter/compose.spark.yml": "cf76088598e5b6bea10d3291471739e7ef172aaa5ab27d1a3d5cf18e63edfe1e",
+        "adapter/deploy.py": "3fa4a78b12622b8b0990fb1898172b9772d631c04a23acec91fb4f5d9e160b4e",
+        "adapter/dev.sh": "d0b37fd798554644d35e452d0ebbed0bb18f4222aaf992fcd524121ad26e0e7d",
+        "adapter/manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+        "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+        "control/Dockerfile": "c9bab4f4152f41afe7b2df77c385aac381fc5c115c5810b70942d82c0ecc8801",
+        "control/Dockerfile.code-hash": "c536c2e44711a4cfa2e49fdc5e5eecb368bc3d343b974576a9c818dd28388c25",
+        "control/Dockerfile.code-hash.dockerignore": "c398f16041a438058e570f393de11c22a307d0bc3da0a2a147a0feb52e24f0a0",
+        "control/Dockerfile.dockerignore": "6f26c0cf25683e6084bd58715095fefedf39f88fa5da68c17828ea414cd43f80",
+        "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+        "control/app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+        "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+        "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+        "control/app/catalogue.py": "d24cde9ca3f3068400018b288cb4dba6c074edc00cd978bdb668d431e43002fe",
+        "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+        "control/app/db.py": "242a5688d94e1464c0b0343368caca6e6dec8bb25de45e63e406f71b7d223552",
+        "control/app/deployments.py": "5d913135b5ade6d841acdd777448c2270772c71f4b4911108d562e1f763ffa90",
+        "control/app/execution.py": "5064920dc6d20f2be449e06aaed017734e900513b4764d09843fb6b8214e3208",
+        "control/app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+        "control/app/function_versions.py": "d2df18c725c248cc63fbc833164b9e474ed2e07f72944e8d0695a106f09bb967",
+        "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+        "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+        "control/app/invocation_routes.py": "04beae967b5208401cafbf0f6921b4bbf44f55d6465854ae1a706b2a4ec3289b",
+        "control/app/invocation_urls.py": "589af8b943ed6956e0fbe6cc8a896b480d933117bdd9d975a7096e710955f488",
+        "control/app/main.py": "9733d7e56c57d72fb26f35e67131f0bd1fd2ab20b36a184865e3f9b780242a94",
+        "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+        "control/app/models.py": "a3c7f50ecef756d4e624eba693218aa0a9a37bc833df84c583758e5baa53d496",
+        "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+        "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+        "control/app/storage_management.py": "16ccc130423f8d9c5bc75e8e7ff2d65c86b99ce9ec111b4c2efabb9292972ed3",
+        "control/app/validator.py": "ea4eb2ff5dedec23be52e3e1fa4e17b8e2182065bf001210cbd3cb6a4108f62f",
+        "control/code-hash-dev.sh": "6dbf84e1e081b307ab717919d64127e7f7a0787e340048f559d1e7b473db9998",
+        "control/compose.code-hash.spark.yml": "5ddfa60a5369f28834f41beb2cbd15ed801756ed833afe9ca229935dffe7374e",
+        "control/compose.spark.yml": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+        "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+        "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+        "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+        "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+        "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+        "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+        "control/migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+        "control/migrations/007_function_code_hash.sql": "f8c80a480c1d22c593198888f80d9b8b2b4bef2853be6f6b1227fea2b9fce412",
+        "control/migrations/008_function_versions.sql": "14f0a45b57ca4b6a0f25979d9d459a350f60b0644898f2c4400e3d1374d08423",
+        "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+        "docs/CONSOLE_PUBLICATION.md": "d710833cc0849871379e18b93c4f4d9d7003644a110ab72edb3dc6129a9bf10d",
+        "docs/CONSOLE_STORAGE.md": "71e9f9b3afe4a63021a812cd0abb1d314bc62fe4672765ade0f9f641fb604f8b",
+        "docs/CONSOLE_USABILITY.md": "6d47d2c010909223fa3884c7abd327c6c33429389ff20fa2171b66086d299c14",
+        "docs/DEPLOYMENT_NAMES.md": "6d44fc5c15e667d86e873c3c042f6bf0453866ccc73b69de23077f663330e771",
+        "docs/DESIGN_SYSTEM_APP.md": "1c2ca434d27fa6cb67ec93aea95a0ee56bec1331c0b1a7c9be13a393dafbce42",
+        "docs/EXECUTION.md": "8890c0587763a4f11fcf09f50f7e9d50cbbd708f1291942c1098a694726ccccc",
+        "docs/FUNCTION_CATALOGUE.md": "b4cd231f0843f88a094457f53cbb67594038fc7bbab3a00bf3f3ce05b3b2b3cc",
+        "docs/FUNCTION_CODE_HASH.md": "66206dbc7c0cb64fdf2ee2a7c90f3926f53d9ae06b37a342f89d2e592ee40204",
+        "docs/FUNCTION_VERSIONS.md": "82b416742c8541ef7fde265b91616960cfaffaa989ee84a8cd90403653f9232e",
+        "docs/FUNCTION_VERSION_DUPLICATE_RECOVERY.md": "86e16b0a5d1869ed6081c25c3dee3b8a97bc51be6827e015d0da41d754d14e9b",
+        "docs/FUNCTION_VERSION_EXECUTION.md": "7af8a7362d467df7c993a95702a8ff21f4d0969729db3d66f279eb97a7c30bcd",
+        "docs/FUNCTION_VERSION_PURGE_UPGRADE.md": "de623e329938e0f08414bc5e221b0340088667d96cdcb2c63140d90021012a71",
+        "docs/FUNCTION_VERSION_REGISTRY.md": "d63a53b75af20d091f7a368ebc269a451c918bcc87a25382e541acd01614eb52",
+        "docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md": "9798ed44ede07c4ccd0ca2ee1452c8d012e8897c258c3337091dbb3e7650c7b6",
+        "docs/FUNCTION_VERSION_VALIDATION_RECOVERY.md": "94fe2897777809c5e408aa4e3b869a34b1c695dff0962d66fb07563e2c5274b9",
+        "docs/INVOCATION_DOMAINS_PAGINATION.md": "20865d34b6d7adeb59f49745071fe4b338229c41ffde86b890cb90063588f417",
+        "docs/INVOCATION_ROUTE_CYCLES.md": "b721643aae599b1e1d9397ccd274375f87bfcd6fdefdf5115399a53cfa378019",
+        "docs/INVOCATION_SOURCE_PERMISSIONS.md": "abba2d226cb30d5d5a7822cce85c6d81b237270b585e9dc28e7e73c258102c29",
+        "docs/INVOCATION_URLS.md": "9ad03a4042e80d2d178082b66fbe61ba4f85ce5f30c1599e51dae033508b64dc",
+        "docs/SCHEMA.md": "010c4449a92775abaef7de464135847dd4b4d52955bdf0d6224a95011bf29316",
+        "docs/STORAGE_LEGACY_PROOF.md": "e40167bb448cd7912560c83342a25a24fd4d58eb54127dc190941dfc7ba6056f",
+        "docs/VALIDATOR_NAMES.md": "31fa0e657632963481d3ad6b597f671120d35e241247475cfaa23d29c70d9d80",
+        "docs/manual.md": "cdb0b9df6aa6ae0e65f46364168976a05afe4c4a8f80d9c3c438f13bc41727a7",
+        "e2e/adapter-catalogue-barrier.py": "850a69b3df1ef2621fb7520bc1ebb887951e5301eec6bd7d6bdcba5cd9e4d836",
+        "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+        "e2e/adapter-deploy.mjs": "e8246c0b475920c6b23a4f5f8f095ac864644c5d958c4aea2d8d2d3f9bc46fda",
+        "e2e/adapter.py": "564c89a4d842e3e2c68c5d261fa687b06e9106035b5820d084415fcbeff8b1a2",
+        "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+        "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+        "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+        "e2e/console-navigation.mjs": "fdeb0ae858f8e3bda017b89ba11f27746022b8d705d3abd2e283376687404ba1",
+        "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+        "e2e/control-operations.py": "38d6762af9a24df11fed79c78c6e8724fffd181e789db29407f228c61db05adb",
+        "e2e/control-ui.mjs": "cac83c5293d5b56015baaf642659b0e728d07d10cb13cd3b9801401393e370b2",
+        "e2e/control_database.py": "1ad3e24a98a61e9f131fc68eff96043ba8110d26876ef6079a0c9061cfb216e7",
+        "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+        "e2e/dev-sso-sessions.mjs": "e302e8113514566377bc568fbbcea514a0215692fc97c39671e6439b6e2f24fb",
+        "e2e/execution-faults.py": "7f879b8d9702f7c0d9654a8064d797cc60b95ec17f97b69091acff69bdc58fea",
+        "e2e/execution-suite.py": "17ceb179fcf9515c2aeca97bae6a3e7dc0d0d0472b2d00edc1d092a34ee3cdf3",
+        "e2e/execution-ui.mjs": "523f5b807dc83e66a8690b265d398e9a5cc5e27c6f1ed67b3ad848985798857f",
+        "e2e/function-catalogue-api.mjs": "05c721279fa15133b262575b43600016e65559296cef5bcd204cb3783a6efe4d",
+        "e2e/function-catalogue-completion.py": "286785d180ae0053bdbdd1a14612929b4bbed93085d102a662e633d86b8f68c1",
+        "e2e/function-catalogue-ui.mjs": "54adf64abbf17062e213c7be9d26397e69e3dcaeae471814c1c562102746ca2b",
+        "e2e/function-code-hash.py": "47e4c05a28e9827377c725f7feea8e55e235a433425831b28f495d42aa0ef43a",
+        "e2e/function-storage-faults.py": "55dbf75b9f898c1802948d7488774007365d6dd37f8df741991a396eb3d414ce",
+        "e2e/function-storage.mjs": "99f85f10cf3bbfa59cb2b65d7e0cc7cbdd6bae2d6671fa611607857d5380abef",
+        "e2e/function-version-artifacts.py": "f8aec4f4b16b05378a140ad65fd194d0808288e2265845e618e848701f67dbf3",
+        "e2e/function-version-cli-container.py": "250e773493784f74da3f3f79673b993b3b358c3f2f825cf39f2bab7892183fd8",
+        "e2e/function-version-control-build.py": "792c5d75c7498b0440a6f835734ef9d06fa6c4a0683f61f15645e683c1c31537",
+        "e2e/function-version-duplicate-recovery-operator.py": "4383023f605535fc347371afe6d98c128f0f8a854959353ea2627027a8bfb88d",
+        "e2e/function-version-duplicate-recovery-run.py": "22d616c00fffe01c8c5bcc07c12b66c6a49098d5d70e824f7404725529b363bd",
+        "e2e/function-version-duplicate-recovery.mjs": "aea606b97b2f68036831df3010b9d98d90eccd21b1db7b03403ed827cfa0bca3",
+        "e2e/function-version-migration-faults.py": "87260cf36025a3faaa44e256499e6cb0de3d6bad8c2e1521d3146b532da6d4c3",
+        "e2e/function-version-purge-correlation.py": "9df4204f732760f8b158a4f2d62653cc9bc4c863b8c2b1ec173d6b3da65768fd",
+        "e2e/function-version-purge-upgrade.mjs": "1f4a00b151e2bc48d1139cd7bef34a420a112821b376b94479de622fb3f03a7e",
+        "e2e/function-version-registry-native.py": "b08bde3138d18c8f7d1a6857dd0e3165c5409ff1e4261893d40c6948af156c2e",
+        "e2e/function-version-registry-ui.mjs": "67336f1e9f1dd5caf1d48ca51fc5f684f1d488336211fa8fc07815470679e62d",
+        "e2e/function-version-registry.mjs": "5ad264a6e5ea74501dd3433eaa1c89b22ce191bb68ba212ab5b3d8f9ae741cbc",
+        "e2e/function-version-upload-capacity-inspect.py": "10ca49e464f247d0b840ea056cf9dc84f095feeef88744e0ba3a70139c4942c8",
+        "e2e/function-version-upload-capacity-run.py": "67c7c8a2f7c9fc00e4d7ce94b0dbb44efbd8f1726575b1476e897de39aab20f0",
+        "e2e/function-version-upload-capacity.mjs": "2c50e985fd8fc668702699ee3e9f3a8536547e1ad6647642e3b0cf49b419f452",
+        "e2e/function-version-validation-faults.py": "b2ee79feca16270ccda5f1e2d341747dd41b9491149a192060754aa642e2ae13",
+        "e2e/function-version-validation.mjs": "9035d6c20f1eb2d14d13bac752e88312c69c334b6c29f43e7de9dc265f8a1d9d",
+        "e2e/function-versions-api.mjs": "a2fdb22d85bfb283a9cac1d87811239412a078b83b56f7b601c64547c2d3f1eb",
+        "e2e/function-versions-cli.mjs": "b58335221bb9c259b56ad098db85815406b7e56fd05da5adb777672c960cc987",
+        "e2e/function-versions-ui.mjs": "8be7b84a11e277c39d7371c6e597a7cb036d4bebf3c2d2cc5cc09705692aacaa",
+        "e2e/function-versions-upgrade.mjs": "758e963d3b42496f6e9fa3a01bb921eebeb3ab25d01f3c127316d9bf8d56fb07",
+        "e2e/instance-lifecycle.py": "ae59e1db5201da3474fbcbb92eda41a706e1f5172333e5a4a58812b3524ff453",
+        "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+        "e2e/invocation-alias-entry.mjs": "d5f44e206d8f186d40dda75b7809af3d8f39473d494ea9680b5afb4ba94a3830",
+        "e2e/invocation-domain-console.py": "8075b767b44ea1b8779d4b9855835faab83e3d73f4c7b47f2c1cd5e25f6fbdeb",
+        "e2e/invocation-empty-ui.mjs": "24bc11d02047c33b144569744628a28808b813c18ee19f533bd000dab86eaf36",
+        "e2e/invocation-pagination-domains.py": "293bda6a42bb4707350a70cba566e52be088f58d9fdbe3462330bf973d7723f0",
+        "e2e/invocation-pagination-native.py": "ea5e360511f0c89687e8cd99cf377fb5afa152a3cdd74660532d9ebed6c9e0f6",
+        "e2e/invocation-pagination-suite.py": "34253f0ba443eefe78b5d383435470ad09476c768baafa6727af4947abc20577",
+        "e2e/invocation-pagination.mjs": "5e4149514b1bc7439fbdd2794b826ac8e226652fc5c1c1ad9ec2abf213454d75",
+        "e2e/invocation-request-pause.mjs": "8b42765e23edf8d6cfb30f54c57c69a0a4e20431a6f9886751dcd30a6375be1b",
+        "e2e/invocation-request-pause.py": "d5f9e785f8983823315bef6dd9c9d525e8162e63d3a6f432fc0af29543339956",
+        "e2e/invocation-route-cycles.mjs": "acefd3e53616c5441d66cc22abed1e9e9b4ebf9823271fa823715f010fd90638",
+        "e2e/invocation-route-guard.py": "0f7c0d18d3a6a47ce4b8bec6b55c2a34014393d9bf81558a8500a7dca877860a",
+        "e2e/invocation-route-lifecycle.py": "ee1723fdf388ce45485fb35be801283d357d15394aaa28332c30605a06d629a8",
+        "e2e/invocation-source-api.mjs": "51df57d03e94726187290bf9dfa83e6424b012a018fe390a3261a4d2d08bf914",
+        "e2e/invocation-source-guard.mjs": "4f442376377c0060fa177c785a532dbfbc4d2dac73905e7bd1857a374b14c555",
+        "e2e/invocation-source-permissions.py": "7ff67f350fae6260ff5f3889a2ebf2a26d2d758c0898708bee69af45802f0288",
+        "e2e/invocation-source-ui.mjs": "4e58702fda698c2a14948e5ce78b28d797c43846bf9e3c955b9c918e4e1293c2",
+        "e2e/invocation-url-adapter-build.py": "e84f45820028c4a1d3737dfbe486520ce3b106ba0dbe821c9875fc8dcda418bd",
+        "e2e/invocation-url-host.py": "77630bfb1f726f7fd0a48949792db6f02547d09b0e3b822139b1c795b050b22f",
+        "e2e/invocation-url-transport.mjs": "94c7b74bf4d6332347a565ee81d069caad91393fcd22261d01814e98fede25d1",
+        "e2e/invocation-urls-ui.mjs": "c4bcce034b1390d2da63d47882427615caabdb04d5d5d91cb2452140ef10a747",
+        "e2e/invocation-urls.mjs": "7438964baccdc56effecb06bfc1064403f2797168aeca909c2ec2f2aa47d7e12",
+        "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+        "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+        "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+        "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+        "e2e/manual-ui.mjs": "71034673e310c4dc6083d89b845f3cefda8a9c48f8fd34010e288d96649dafba",
+        "e2e/native_control_observer.py": "3a2c23bd5245935155ebfac4950edc4bad3696b1bf34f0973a3e96e4d91777cd",
+        "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7",
+        "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+        "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+        "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+        "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+        "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+        "e2e/publication-fixtures.mjs": "b994a9332a39f952e8f20c9d5e5b3ad7efddf5ed690d4359d12c481926c44438",
+        "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+        "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+        "e2e/publication-ui.mjs": "ea1659f486a84c9c1a5b1a529a1bd70f76e372a09bcbc7d5b5f9ce92c9f77e32",
+        "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+        "e2e/runtime-instances.py": "1672ee7f45b5fb5574cdea34110f38c9d3257ffb5be8c48fcd3c2495b8e26fe4",
+        "e2e/runtime-validation.py": "fcb95b1a59a89d82d94f629448252dfed5b24bf5b7d95c6ff5325c388a009233",
+        "e2e/service-configuration.mjs": "50c01b89800f36045e296d47c73ca624ee62245058a4547bd49dea56c8e961e7",
+        "e2e/service-transport-observer.py": "261d16ef4296b053ea099db09679ef6551d68dbad6fc90d97be503db3e371889",
+        "e2e/service-transport.mjs": "424912a5caed927a9a9deb23af10fb4f6d690cf7b5c56fc15ace5ca2dd6a080d",
+        "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+        "e2e/storage-command-faults.py": "8cacdc0036114a95948f31136bb9dea8ecb4df6ec21c76b5dd299cd1ba4cc498",
+        "e2e/storage-command-recovery.mjs": "57c5e1fead1fc90549f1b732617d5b786bd442f302f21396f5e2fa178e1d8b81",
+        "e2e/storage-console-api.mjs": "548888014f4823205f40e86cb9d03b3747e6901f7a620946b51dc0b9069ec569",
+        "e2e/storage-console-inspect.py": "bd13af24504d9f11224a58be09ac32e8cbd3a8334f53572e44e7db98be875700",
+        "e2e/storage-console-ui.mjs": "18e00505efe0e95d9b992da80fe3704ff8373aac9053498afac69ec6b8328f5e",
+        "e2e/storage-decision-recovery.mjs": "d0514f70ff857d602196ace1af09944f975fb6d7d7e64e3b86bbb4b4cefb40fb",
+        "e2e/storage-discard.py": "bd167df38ebe45089538a9b6ec7fe6b98fd7fc88616375179ce611887f3e51d7",
+        "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+        "e2e/storage-legacy-build.py": "1f93643e4c3543d2a6ac74160eab4b59ba2689be6f447a1b5d8cee975f7ae125",
+        "e2e/storage-legacy-environment.py": "97b53bff916ce176ca9550dc3ae9da3609acd6a5f652937e4f1f16b119865a8e",
+        "e2e/storage-legacy-recovery.mjs": "8e19c8762daf2a29ba3f38b54d4187b7aabdaba89c377f97381d3a5e5c663289",
+        "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+        "e2e/storage-suite-inspect.py": "9c567593bd92a584877e00c96c36a6efc59b1e9012377bb3502c8eee908ec285",
+        "e2e/storage-validation-faults.py": "78a95d848cca13dd190391b5ff03266d0a3b5a7eae40355700496da90e89ba0d",
+        "e2e/storage-validation-recovery.mjs": "78a37c4334c488f25cb20b7978914dad7f908fd45743757e88cc59f8c0afb4fa",
+        "e2e/validator-names-build.py": "3e6763efffb1369c0165dbce11701fa8ba1234d412497fd7f25983bfdb8383ac",
+        "e2e/validator-names-collect.py": "fb97dc674fdbcf6adcc1e63d114d123cc224f68f2f68574867268eb535bd40be",
+        "e2e/validator-names-operator.py": "31bf16411245c114ef8ad7183bbe96d823473ca1af5c95ee94878c1ed54737e9",
+        "e2e/validator-names-prepare.py": "cca9109e953910c536c873763c75e96dca845294e813cd77073b7290fabed005",
+        "e2e/validator-names-regressions.py": "e51ca0adcffdb9e8ac2e01fd8558113b788e021a3dc0a4060c06389906fde150",
+        "e2e/validator-names-run.py": "f583020e4c8c693f9c2e4cd5bb7667ab1c668e9b7987fdb8a400d22f5ad74679",
+        "e2e/validator-names.mjs": "42a827d48de710cce26972afa1d084d66329046ff4facc8bb32c02c0cda2c7b6",
+        "function_code_hash.py": "dd2b64c375639d4ffc35eb508233263122adc8f19f3f56bb15e3cfef6e37d23f",
+        "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+        "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+        "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+        "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+        "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+        "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+        "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+        "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+        "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+        "qualification/artifacts/function-version-pilot-delay.mjs": "f303803602fe7184f52484b8daf02036e8f4e958258ed8d7456ed80f51fdc02f",
+        "qualification/artifacts/function-versions.cjs": "71203f00306dce13dfe3d24e72c8f562468e27c1af042370f88eb75ca9859790",
+        "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+        "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+        "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+        "qualification/artifacts/invocation-addresses.cjs": "d92d814fbd8d07343e491f013b5199e8e8454b5f54244c044c287665ccdb1a6f",
+        "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+        "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+        "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+        "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+        "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+        "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+        "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+        "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+        "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+        "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+        "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+        "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+        "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+        "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+        "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+        "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+        "qualification/artifacts/service-configuration.cjs": "0a9bf83c6dffc76544491abdda0d14b9dbf0ebc767c60c29b063e893c2c22e70",
+        "qualification/artifacts/storage-console.cjs": "5e8e2199fa7605f8d00407c92537b175e072f47ce4d6fd42b116ef1a87de873f",
+        "qualification/artifacts/storage-validation-delay.mjs": "91dbcf7480341d8596a6300a026de792217a3f23bb217adf6e974cf4b97f79b3",
+        "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+        "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+        "qualification/artifacts/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31",
+        "qualification/artifacts/version-dependency.cjs": "338860f83f269aa9a254bd56563d08fd6f2057effb2dff266307ec0b2427c8d9",
+        "qualification/artifacts/version-identity.cjs": "aab1051943e2f4272fb58063a75f873a4ae0f7f04daf80cd364e5307f6a07aba",
+        "qualification/artifacts/version-registry.cjs": "ea05d3d1398ba24616751f0587fcec5bb34a67ca4fed9911e5964baaf81fd261",
+        "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+        "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+        "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+        "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+        "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+        "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+        "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+        "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+        "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+        "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+        "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+        "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+        "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+        "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+        "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+        "storage/agent.py": "689a45bc367b339112c41696031be46e7fb1d449340fe92d6915f791db58de64",
+        "storage/agent_discard.py": "69c6c570162e2c7dc2cdde4b53f6840866fad50ae738f85f9f3f18c4f8d5e859",
+        "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+        "storage/agent_volumes.py": "e03ad2df9bfe657b2a959bc3019247a3769f0dbb1e6a5802a875171a9cddf041",
+        "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+        "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+        "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+        "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+        "storage/install-dev.py": "d6e233ccc1e893ee64220ddc1436127b32434778db9b44820f359560465f33db",
+        "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+        "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+        "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+        "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+        "storage/migrations/004.sql": "bde5c2068fbe9ecf03a077e911d03e6d67737a6cf9b5912c4fc55944926eaf7d",
+        "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+        "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+        "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+        "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+        "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+        "web/src/catalogue.jsx": "fc200154f3acaf5140a30d68b653bb61a194d369cec5ac0a5a3c2d8af5fe3aa9",
+        "web/src/function.jsx": "0b1879912afbf861c404caa66c3efc8fbd06e030482278f0035a24744149fe42",
+        "web/src/invocation-urls.jsx": "55f42b164e0a428e2c2f113fc114a72bbe9c8d789c3fe2a0c7891384ade1dd7e",
+        "web/src/main.jsx": "0a65c22728d6310e98520c40d06dc799308f6685a5c740f2b2536e4296706a97",
+        "web/src/management.jsx": "c284f91151ea503c17f8fda04698b3f838f02225c91930bb031764be4bd13ac3",
+        "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+        "web/src/observations.jsx": "7d2c5ae495f35046e51468ba1900511408646b233df37e8b6f6f657b0544d099",
+        "web/src/publications.jsx": "008c847e63af831d74df6369d97f52d58118f977f7a59d91becaaf0e7d26dae7",
+        "web/src/storage.jsx": "efa3f329b6bb7db4d65c514ec1eabb6e6eab3750e5084dce7a454f3d5b0a6ac1",
+        "web/src/style.css": "4494de0960664c3e9ed05d8db16c217ffdf0e51d921ff64f42eff9fdff842dd2",
+        "web/src/ui.jsx": "249980be87bf60ff542e1551b6ef1d21a4884764d5fe5b7b646268cf486fb5ba",
+        "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+      },
+      "adapter_images": {
+        "p2enjoy-adapter:dev": "sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106",
+        "p2enjoy-adapter-e2e:dev": "sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c"
+      },
+      "report": {
+        "sampled_at_ns": 1794243102979450945,
+        "mtime_ns": null,
+        "sha256": null
+      }
+    },
+    "after": {
+      "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+      "source_sha256": {
+        "adapter/Dockerfile": "231a482220d5122d10ba3c5442722c8dd369aa344de76f6a5b506babd0332d49",
+        "adapter/Dockerfile.dockerignore": "315ec77408e7aecfc430478d68d393b5c2cf9976b0b8f9cef2ba7adcdf4809b3",
+        "adapter/__init__.py": "c37e1a06eb058ff3328d992441d456105259d7ec5ec3c82313eacae53d825a47",
+        "adapter/__main__.py": "2136336dc7913aa79d7a1efc683cb56ca0e82d061e15ff08f49ac2926105d409",
+        "adapter/archive.py": "7a7951e080174dd6cdaa642cb82a9e9ddbb8717f77a9628cf44fa0826e918dc7",
+        "adapter/compose.spark.yml": "cf76088598e5b6bea10d3291471739e7ef172aaa5ab27d1a3d5cf18e63edfe1e",
+        "adapter/deploy.py": "3fa4a78b12622b8b0990fb1898172b9772d631c04a23acec91fb4f5d9e160b4e",
+        "adapter/dev.sh": "d0b37fd798554644d35e452d0ebbed0bb18f4222aaf992fcd524121ad26e0e7d",
+        "adapter/manifest.py": "a31fe93ffee3c3cecf4ab02e10bcae938a73a23f866a970e8dbd749a3fddc8d2",
+        "adapter/requirements.txt": "cdbe44f5c0b7a933a3a795e3cbfefc83e4f560efa05de1e0720bb84a76667f51",
+        "control/Dockerfile": "c9bab4f4152f41afe7b2df77c385aac381fc5c115c5810b70942d82c0ecc8801",
+        "control/Dockerfile.code-hash": "c536c2e44711a4cfa2e49fdc5e5eecb368bc3d343b974576a9c818dd28388c25",
+        "control/Dockerfile.code-hash.dockerignore": "c398f16041a438058e570f393de11c22a307d0bc3da0a2a147a0feb52e24f0a0",
+        "control/Dockerfile.dockerignore": "6f26c0cf25683e6084bd58715095fefedf39f88fa5da68c17828ea414cd43f80",
+        "control/app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+        "control/app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+        "control/app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+        "control/app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+        "control/app/catalogue.py": "d24cde9ca3f3068400018b288cb4dba6c074edc00cd978bdb668d431e43002fe",
+        "control/app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+        "control/app/db.py": "242a5688d94e1464c0b0343368caca6e6dec8bb25de45e63e406f71b7d223552",
+        "control/app/deployments.py": "5d913135b5ade6d841acdd777448c2270772c71f4b4911108d562e1f763ffa90",
+        "control/app/execution.py": "5064920dc6d20f2be449e06aaed017734e900513b4764d09843fb6b8214e3208",
+        "control/app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+        "control/app/function_versions.py": "d2df18c725c248cc63fbc833164b9e474ed2e07f72944e8d0695a106f09bb967",
+        "control/app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+        "control/app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+        "control/app/invocation_routes.py": "04beae967b5208401cafbf0f6921b4bbf44f55d6465854ae1a706b2a4ec3289b",
+        "control/app/invocation_urls.py": "589af8b943ed6956e0fbe6cc8a896b480d933117bdd9d975a7096e710955f488",
+        "control/app/main.py": "9733d7e56c57d72fb26f35e67131f0bd1fd2ab20b36a184865e3f9b780242a94",
+        "control/app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+        "control/app/models.py": "a3c7f50ecef756d4e624eba693218aa0a9a37bc833df84c583758e5baa53d496",
+        "control/app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+        "control/app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+        "control/app/storage_management.py": "16ccc130423f8d9c5bc75e8e7ff2d65c86b99ce9ec111b4c2efabb9292972ed3",
+        "control/app/validator.py": "ea4eb2ff5dedec23be52e3e1fa4e17b8e2182065bf001210cbd3cb6a4108f62f",
+        "control/code-hash-dev.sh": "6dbf84e1e081b307ab717919d64127e7f7a0787e340048f559d1e7b473db9998",
+        "control/compose.code-hash.spark.yml": "5ddfa60a5369f28834f41beb2cbd15ed801756ed833afe9ca229935dffe7374e",
+        "control/compose.spark.yml": "dab42cf4c3f0b83889506e27d33b7a052c58de6b72ea9284182612090a66c69d",
+        "control/dev.sh": "d01cf3fa9755c48259bc56ca5b480eae711f52703e3aeb38c7beb35c1e16d58a",
+        "control/migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+        "control/migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+        "control/migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+        "control/migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+        "control/migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+        "control/migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+        "control/migrations/007_function_code_hash.sql": "f8c80a480c1d22c593198888f80d9b8b2b4bef2853be6f6b1227fea2b9fce412",
+        "control/migrations/008_function_versions.sql": "14f0a45b57ca4b6a0f25979d9d459a350f60b0644898f2c4400e3d1374d08423",
+        "control/requirements.txt": "3cf300e72cbdddffac38e2c23a6cc2284744c52fa87d2e5f95a398cb1db92c91",
+        "docs/CONSOLE_PUBLICATION.md": "d710833cc0849871379e18b93c4f4d9d7003644a110ab72edb3dc6129a9bf10d",
+        "docs/CONSOLE_STORAGE.md": "71e9f9b3afe4a63021a812cd0abb1d314bc62fe4672765ade0f9f641fb604f8b",
+        "docs/CONSOLE_USABILITY.md": "6d47d2c010909223fa3884c7abd327c6c33429389ff20fa2171b66086d299c14",
+        "docs/DEPLOYMENT_NAMES.md": "6d44fc5c15e667d86e873c3c042f6bf0453866ccc73b69de23077f663330e771",
+        "docs/DESIGN_SYSTEM_APP.md": "1c2ca434d27fa6cb67ec93aea95a0ee56bec1331c0b1a7c9be13a393dafbce42",
+        "docs/EXECUTION.md": "8890c0587763a4f11fcf09f50f7e9d50cbbd708f1291942c1098a694726ccccc",
+        "docs/FUNCTION_CATALOGUE.md": "b4cd231f0843f88a094457f53cbb67594038fc7bbab3a00bf3f3ce05b3b2b3cc",
+        "docs/FUNCTION_CODE_HASH.md": "66206dbc7c0cb64fdf2ee2a7c90f3926f53d9ae06b37a342f89d2e592ee40204",
+        "docs/FUNCTION_VERSIONS.md": "82b416742c8541ef7fde265b91616960cfaffaa989ee84a8cd90403653f9232e",
+        "docs/FUNCTION_VERSION_DUPLICATE_RECOVERY.md": "86e16b0a5d1869ed6081c25c3dee3b8a97bc51be6827e015d0da41d754d14e9b",
+        "docs/FUNCTION_VERSION_EXECUTION.md": "7af8a7362d467df7c993a95702a8ff21f4d0969729db3d66f279eb97a7c30bcd",
+        "docs/FUNCTION_VERSION_PURGE_UPGRADE.md": "de623e329938e0f08414bc5e221b0340088667d96cdcb2c63140d90021012a71",
+        "docs/FUNCTION_VERSION_REGISTRY.md": "d63a53b75af20d091f7a368ebc269a451c918bcc87a25382e541acd01614eb52",
+        "docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md": "9798ed44ede07c4ccd0ca2ee1452c8d012e8897c258c3337091dbb3e7650c7b6",
+        "docs/FUNCTION_VERSION_VALIDATION_RECOVERY.md": "94fe2897777809c5e408aa4e3b869a34b1c695dff0962d66fb07563e2c5274b9",
+        "docs/INVOCATION_DOMAINS_PAGINATION.md": "20865d34b6d7adeb59f49745071fe4b338229c41ffde86b890cb90063588f417",
+        "docs/INVOCATION_ROUTE_CYCLES.md": "b721643aae599b1e1d9397ccd274375f87bfcd6fdefdf5115399a53cfa378019",
+        "docs/INVOCATION_SOURCE_PERMISSIONS.md": "abba2d226cb30d5d5a7822cce85c6d81b237270b585e9dc28e7e73c258102c29",
+        "docs/INVOCATION_URLS.md": "9ad03a4042e80d2d178082b66fbe61ba4f85ce5f30c1599e51dae033508b64dc",
+        "docs/SCHEMA.md": "010c4449a92775abaef7de464135847dd4b4d52955bdf0d6224a95011bf29316",
+        "docs/STORAGE_LEGACY_PROOF.md": "e40167bb448cd7912560c83342a25a24fd4d58eb54127dc190941dfc7ba6056f",
+        "docs/VALIDATOR_NAMES.md": "31fa0e657632963481d3ad6b597f671120d35e241247475cfaa23d29c70d9d80",
+        "docs/manual.md": "cdb0b9df6aa6ae0e65f46364168976a05afe4c4a8f80d9c3c438f13bc41727a7",
+        "e2e/adapter-catalogue-barrier.py": "850a69b3df1ef2621fb7520bc1ebb887951e5301eec6bd7d6bdcba5cd9e4d836",
+        "e2e/adapter-deploy-public.py": "07db28fc7b3746c6e028ff4fb3c1409424fada1d472120b8d5b507fe7df84b18",
+        "e2e/adapter-deploy.mjs": "e8246c0b475920c6b23a4f5f8f095ac864644c5d958c4aea2d8d2d3f9bc46fda",
+        "e2e/adapter.py": "564c89a4d842e3e2c68c5d261fa687b06e9106035b5820d084415fcbeff8b1a2",
+        "e2e/artifacts.py": "d1154a70cc0bf0fd00750cf96f43209b953d652ba71e64af5993fdcebd206497",
+        "e2e/authorize.mjs": "87a8b3f527d7c3bba54e6c1a5ceefc796c85be9bcba90a3631260a6628e34bbb",
+        "e2e/code-publications.mjs": "901dd0144ef9d2e509b810e75694ee74836510b20c6e922b42bdc9322ff0a79d",
+        "e2e/console-navigation.mjs": "fdeb0ae858f8e3bda017b89ba11f27746022b8d705d3abd2e283376687404ba1",
+        "e2e/control-admin.mjs": "edc3d31cdc767bdcb80c8953c1c2272e42913d7fe7873631f407f3c640d033ce",
+        "e2e/control-operations.py": "38d6762af9a24df11fed79c78c6e8724fffd181e789db29407f228c61db05adb",
+        "e2e/control-ui.mjs": "cac83c5293d5b56015baaf642659b0e728d07d10cb13cd3b9801401393e370b2",
+        "e2e/control_database.py": "1ad3e24a98a61e9f131fc68eff96043ba8110d26876ef6079a0c9061cfb216e7",
+        "e2e/deployments.mjs": "83a774fffa22dc81b43a3b01ce0af620fd0b6ec7202646a50bd3a0dc9b32cf93",
+        "e2e/dev-sso-sessions.mjs": "e302e8113514566377bc568fbbcea514a0215692fc97c39671e6439b6e2f24fb",
+        "e2e/execution-faults.py": "7f879b8d9702f7c0d9654a8064d797cc60b95ec17f97b69091acff69bdc58fea",
+        "e2e/execution-suite.py": "17ceb179fcf9515c2aeca97bae6a3e7dc0d0d0472b2d00edc1d092a34ee3cdf3",
+        "e2e/execution-ui.mjs": "523f5b807dc83e66a8690b265d398e9a5cc5e27c6f1ed67b3ad848985798857f",
+        "e2e/function-catalogue-api.mjs": "05c721279fa15133b262575b43600016e65559296cef5bcd204cb3783a6efe4d",
+        "e2e/function-catalogue-completion.py": "286785d180ae0053bdbdd1a14612929b4bbed93085d102a662e633d86b8f68c1",
+        "e2e/function-catalogue-ui.mjs": "54adf64abbf17062e213c7be9d26397e69e3dcaeae471814c1c562102746ca2b",
+        "e2e/function-code-hash.py": "47e4c05a28e9827377c725f7feea8e55e235a433425831b28f495d42aa0ef43a",
+        "e2e/function-storage-faults.py": "55dbf75b9f898c1802948d7488774007365d6dd37f8df741991a396eb3d414ce",
+        "e2e/function-storage.mjs": "99f85f10cf3bbfa59cb2b65d7e0cc7cbdd6bae2d6671fa611607857d5380abef",
+        "e2e/function-version-artifacts.py": "f8aec4f4b16b05378a140ad65fd194d0808288e2265845e618e848701f67dbf3",
+        "e2e/function-version-cli-container.py": "250e773493784f74da3f3f79673b993b3b358c3f2f825cf39f2bab7892183fd8",
+        "e2e/function-version-control-build.py": "792c5d75c7498b0440a6f835734ef9d06fa6c4a0683f61f15645e683c1c31537",
+        "e2e/function-version-duplicate-recovery-operator.py": "4383023f605535fc347371afe6d98c128f0f8a854959353ea2627027a8bfb88d",
+        "e2e/function-version-duplicate-recovery-run.py": "22d616c00fffe01c8c5bcc07c12b66c6a49098d5d70e824f7404725529b363bd",
+        "e2e/function-version-duplicate-recovery.mjs": "aea606b97b2f68036831df3010b9d98d90eccd21b1db7b03403ed827cfa0bca3",
+        "e2e/function-version-migration-faults.py": "87260cf36025a3faaa44e256499e6cb0de3d6bad8c2e1521d3146b532da6d4c3",
+        "e2e/function-version-purge-correlation.py": "9df4204f732760f8b158a4f2d62653cc9bc4c863b8c2b1ec173d6b3da65768fd",
+        "e2e/function-version-purge-upgrade.mjs": "1f4a00b151e2bc48d1139cd7bef34a420a112821b376b94479de622fb3f03a7e",
+        "e2e/function-version-registry-native.py": "b08bde3138d18c8f7d1a6857dd0e3165c5409ff1e4261893d40c6948af156c2e",
+        "e2e/function-version-registry-ui.mjs": "67336f1e9f1dd5caf1d48ca51fc5f684f1d488336211fa8fc07815470679e62d",
+        "e2e/function-version-registry.mjs": "5ad264a6e5ea74501dd3433eaa1c89b22ce191bb68ba212ab5b3d8f9ae741cbc",
+        "e2e/function-version-upload-capacity-inspect.py": "10ca49e464f247d0b840ea056cf9dc84f095feeef88744e0ba3a70139c4942c8",
+        "e2e/function-version-upload-capacity-run.py": "67c7c8a2f7c9fc00e4d7ce94b0dbb44efbd8f1726575b1476e897de39aab20f0",
+        "e2e/function-version-upload-capacity.mjs": "2c50e985fd8fc668702699ee3e9f3a8536547e1ad6647642e3b0cf49b419f452",
+        "e2e/function-version-validation-faults.py": "b2ee79feca16270ccda5f1e2d341747dd41b9491149a192060754aa642e2ae13",
+        "e2e/function-version-validation.mjs": "9035d6c20f1eb2d14d13bac752e88312c69c334b6c29f43e7de9dc265f8a1d9d",
+        "e2e/function-versions-api.mjs": "a2fdb22d85bfb283a9cac1d87811239412a078b83b56f7b601c64547c2d3f1eb",
+        "e2e/function-versions-cli.mjs": "b58335221bb9c259b56ad098db85815406b7e56fd05da5adb777672c960cc987",
+        "e2e/function-versions-ui.mjs": "8be7b84a11e277c39d7371c6e597a7cb036d4bebf3c2d2cc5cc09705692aacaa",
+        "e2e/function-versions-upgrade.mjs": "758e963d3b42496f6e9fa3a01bb921eebeb3ab25d01f3c127316d9bf8d56fb07",
+        "e2e/instance-lifecycle.py": "ae59e1db5201da3474fbcbb92eda41a706e1f5172333e5a4a58812b3524ff453",
+        "e2e/instance-limit-guard.py": "cfd08b6e64a0c020fcfffc5ac5350abe55fb109e74fe650bebc1833ea6b27b25",
+        "e2e/invocation-alias-entry.mjs": "d5f44e206d8f186d40dda75b7809af3d8f39473d494ea9680b5afb4ba94a3830",
+        "e2e/invocation-domain-console.py": "8075b767b44ea1b8779d4b9855835faab83e3d73f4c7b47f2c1cd5e25f6fbdeb",
+        "e2e/invocation-empty-ui.mjs": "24bc11d02047c33b144569744628a28808b813c18ee19f533bd000dab86eaf36",
+        "e2e/invocation-pagination-domains.py": "293bda6a42bb4707350a70cba566e52be088f58d9fdbe3462330bf973d7723f0",
+        "e2e/invocation-pagination-native.py": "ea5e360511f0c89687e8cd99cf377fb5afa152a3cdd74660532d9ebed6c9e0f6",
+        "e2e/invocation-pagination-suite.py": "34253f0ba443eefe78b5d383435470ad09476c768baafa6727af4947abc20577",
+        "e2e/invocation-pagination.mjs": "5e4149514b1bc7439fbdd2794b826ac8e226652fc5c1c1ad9ec2abf213454d75",
+        "e2e/invocation-request-pause.mjs": "8b42765e23edf8d6cfb30f54c57c69a0a4e20431a6f9886751dcd30a6375be1b",
+        "e2e/invocation-request-pause.py": "d5f9e785f8983823315bef6dd9c9d525e8162e63d3a6f432fc0af29543339956",
+        "e2e/invocation-route-cycles.mjs": "acefd3e53616c5441d66cc22abed1e9e9b4ebf9823271fa823715f010fd90638",
+        "e2e/invocation-route-guard.py": "0f7c0d18d3a6a47ce4b8bec6b55c2a34014393d9bf81558a8500a7dca877860a",
+        "e2e/invocation-route-lifecycle.py": "ee1723fdf388ce45485fb35be801283d357d15394aaa28332c30605a06d629a8",
+        "e2e/invocation-source-api.mjs": "51df57d03e94726187290bf9dfa83e6424b012a018fe390a3261a4d2d08bf914",
+        "e2e/invocation-source-guard.mjs": "4f442376377c0060fa177c785a532dbfbc4d2dac73905e7bd1857a374b14c555",
+        "e2e/invocation-source-permissions.py": "7ff67f350fae6260ff5f3889a2ebf2a26d2d758c0898708bee69af45802f0288",
+        "e2e/invocation-source-ui.mjs": "4e58702fda698c2a14948e5ce78b28d797c43846bf9e3c955b9c918e4e1293c2",
+        "e2e/invocation-url-adapter-build.py": "e84f45820028c4a1d3737dfbe486520ce3b106ba0dbe821c9875fc8dcda418bd",
+        "e2e/invocation-url-host.py": "77630bfb1f726f7fd0a48949792db6f02547d09b0e3b822139b1c795b050b22f",
+        "e2e/invocation-url-transport.mjs": "94c7b74bf4d6332347a565ee81d069caad91393fcd22261d01814e98fede25d1",
+        "e2e/invocation-urls-ui.mjs": "c4bcce034b1390d2da63d47882427615caabdb04d5d5d91cb2452140ef10a747",
+        "e2e/invocation-urls.mjs": "7438964baccdc56effecb06bfc1064403f2797168aeca909c2ec2f2aa47d7e12",
+        "e2e/login-capacity.py": "229eca7ab0aff63f80e885e78133fcdb98b597c614fa99e29eb4e73441b43b13",
+        "e2e/login-limits.py": "1accc95320a9f0353ed620092acdc9812391680d34b2d2a01771226f9b725fab",
+        "e2e/login-ui.mjs": "293f08fe4ad904cdd12f01f76ffeeda4fd10a5021a3d69ac58215f49f3367c15",
+        "e2e/managed-storage.py": "407dd5a8494118b1765c68f4ea150a99d6466cb41114167746aa6b6a1da5b8ee",
+        "e2e/manual-ui.mjs": "71034673e310c4dc6083d89b845f3cefda8a9c48f8fd34010e288d96649dafba",
+        "e2e/native_control_observer.py": "3a2c23bd5245935155ebfac4950edc4bad3696b1bf34f0973a3e96e4d91777cd",
+        "e2e/package-lock.json": "63e60834f415ac95bd6250f245953679c0d9397bfa443302b947518945cdc0b7",
+        "e2e/package.json": "8ad357ec814dc328fc1ddd36e71d0c736522441d61a4e99aee99baabc5c123ae",
+        "e2e/proxy.py": "bda50de4b7e959a10dbe721b9f1826becc87bf59217c1e77267a4c3c03015401",
+        "e2e/public-invocations.mjs": "08d412a9a4c705cb25cfacf2af8d28c5a62a56eaa616b36daa689667c058dacf",
+        "e2e/public.py": "7173c3b2170a9fa036cf5fa1c7dad9c99b102f3d607fc5cfd5fa95721aa65316",
+        "e2e/publication-cleanup-fault.py": "a08e0ad1edaeb7932a761c14dfe5c145afc1a29afa4a2858aa2f88a072d1c7c7",
+        "e2e/publication-fixtures.mjs": "b994a9332a39f952e8f20c9d5e5b3ad7efddf5ed690d4359d12c481926c44438",
+        "e2e/publication-recovery.mjs": "f6c53fb2cd27309ba306ca9177b2fb6cd4415bcc565f3c5f9fd06c2b77fabcd9",
+        "e2e/publication-state.py": "8ee38077422f7e428850d733929e40485e9e5e22f62b25ffe9c3f4c8890a530f",
+        "e2e/publication-ui.mjs": "ea1659f486a84c9c1a5b1a529a1bd70f76e372a09bcbc7d5b5f9ce92c9f77e32",
+        "e2e/report-interruption.py": "ff081e961c272a2e8b7cd2dc8362c2af3cff4cbf45e961b0661e6744b82dbc84",
+        "e2e/runtime-instances.py": "1672ee7f45b5fb5574cdea34110f38c9d3257ffb5be8c48fcd3c2495b8e26fe4",
+        "e2e/runtime-validation.py": "fcb95b1a59a89d82d94f629448252dfed5b24bf5b7d95c6ff5325c388a009233",
+        "e2e/service-configuration.mjs": "50c01b89800f36045e296d47c73ca624ee62245058a4547bd49dea56c8e961e7",
+        "e2e/service-transport-observer.py": "261d16ef4296b053ea099db09679ef6551d68dbad6fc90d97be503db3e371889",
+        "e2e/service-transport.mjs": "424912a5caed927a9a9deb23af10fb4f6d690cf7b5c56fc15ace5ca2dd6a080d",
+        "e2e/storage-archives.mjs": "6d621fb583991eaa274445a5490fc7bc9128865541ff8a2f5bd4f0e2e98ca391",
+        "e2e/storage-command-faults.py": "8cacdc0036114a95948f31136bb9dea8ecb4df6ec21c76b5dd299cd1ba4cc498",
+        "e2e/storage-command-recovery.mjs": "57c5e1fead1fc90549f1b732617d5b786bd442f302f21396f5e2fa178e1d8b81",
+        "e2e/storage-console-api.mjs": "548888014f4823205f40e86cb9d03b3747e6901f7a620946b51dc0b9069ec569",
+        "e2e/storage-console-inspect.py": "bd13af24504d9f11224a58be09ac32e8cbd3a8334f53572e44e7db98be875700",
+        "e2e/storage-console-ui.mjs": "18e00505efe0e95d9b992da80fe3704ff8373aac9053498afac69ec6b8328f5e",
+        "e2e/storage-decision-recovery.mjs": "d0514f70ff857d602196ace1af09944f975fb6d7d7e64e3b86bbb4b4cefb40fb",
+        "e2e/storage-discard.py": "bd167df38ebe45089538a9b6ec7fe6b98fd7fc88616375179ce611887f3e51d7",
+        "e2e/storage-installation.py": "fedd99a0ad68185e51367eaaa25f46c3f744559f125ff16fa7a8e95ab20c696b",
+        "e2e/storage-legacy-build.py": "1f93643e4c3543d2a6ac74160eab4b59ba2689be6f447a1b5d8cee975f7ae125",
+        "e2e/storage-legacy-environment.py": "97b53bff916ce176ca9550dc3ae9da3609acd6a5f652937e4f1f16b119865a8e",
+        "e2e/storage-legacy-recovery.mjs": "8e19c8762daf2a29ba3f38b54d4187b7aabdaba89c377f97381d3a5e5c663289",
+        "e2e/storage-preparations.py": "0c231e8f55fb5615997af327eed3bf16c019a757fc1875e720bbd9ccdd4573cf",
+        "e2e/storage-suite-inspect.py": "9c567593bd92a584877e00c96c36a6efc59b1e9012377bb3502c8eee908ec285",
+        "e2e/storage-validation-faults.py": "78a95d848cca13dd190391b5ff03266d0a3b5a7eae40355700496da90e89ba0d",
+        "e2e/storage-validation-recovery.mjs": "78a37c4334c488f25cb20b7978914dad7f908fd45743757e88cc59f8c0afb4fa",
+        "e2e/validator-names-build.py": "3e6763efffb1369c0165dbce11701fa8ba1234d412497fd7f25983bfdb8383ac",
+        "e2e/validator-names-collect.py": "fb97dc674fdbcf6adcc1e63d114d123cc224f68f2f68574867268eb535bd40be",
+        "e2e/validator-names-operator.py": "31bf16411245c114ef8ad7183bbe96d823473ca1af5c95ee94878c1ed54737e9",
+        "e2e/validator-names-prepare.py": "cca9109e953910c536c873763c75e96dca845294e813cd77073b7290fabed005",
+        "e2e/validator-names-regressions.py": "e51ca0adcffdb9e8ac2e01fd8558113b788e021a3dc0a4060c06389906fde150",
+        "e2e/validator-names-run.py": "f583020e4c8c693f9c2e4cd5bb7667ab1c668e9b7987fdb8a400d22f5ad74679",
+        "e2e/validator-names.mjs": "42a827d48de710cce26972afa1d084d66329046ff4facc8bb32c02c0cda2c7b6",
+        "function_code_hash.py": "dd2b64c375639d4ffc35eb508233263122adc8f19f3f56bb15e3cfef6e37d23f",
+        "qualification/artifacts/await.mjs": "1811376c9ede15356e9022ce58b2e259ba80b969bff9cab7029a98ac3e70f77c",
+        "qualification/artifacts/default-object.mjs": "8369cd161d3c7a09b9f4ab89f652e6bcb9b1d41dc8f067da9d597c73d9f0c5f1",
+        "qualification/artifacts/dependency.cjs": "56f9df5b1bc62249b2ff36e7bbc67ba3e92b79aaf211601cdb3ff422033dc96c",
+        "qualification/artifacts/deployment-delay.mjs": "ab8d7e1e5a0fa7452d9429d52935f42a010f323618ecdb047fd09a1157f13f8e",
+        "qualification/artifacts/descendant.cjs": "9a75fd11b3cc19170fd09ff13a30938b5d14a8039999183a562fb8134a75db8d",
+        "qualification/artifacts/detected.js": "72943cb91f0b3776236e62f72442187c84d90bd9f4231bdb5f0c658c87837ceb",
+        "qualification/artifacts/early-exit.cjs": "337647165a64aded56ef7003f9ec9d323e8b1e9afbf0561a2d4e6599782d7355",
+        "qualification/artifacts/environment.cjs": "4c39ca2073db9183eda826f97e2232ddfd6dcab7cef2515052ab0dcc632280a0",
+        "qualification/artifacts/esm-marker.mjs": "06e43c7b91c4c72cd1cbbf202456d7685912a73966a490646988b5517d974e6f",
+        "qualification/artifacts/function-version-pilot-delay.mjs": "f303803602fe7184f52484b8daf02036e8f4e958258ed8d7456ed80f51fdc02f",
+        "qualification/artifacts/function-versions.cjs": "71203f00306dce13dfe3d24e72c8f562468e27c1af042370f88eb75ca9859790",
+        "qualification/artifacts/good.cjs": "29bd1b19fe8398bd5ab511e8b784432f07abee17faa70bc0198490183226b882",
+        "qualification/artifacts/good.mjs": "8b81fcde41638c2cc5374a7f1fcbc8f5eb244df31124c398f1ded51c93573df1",
+        "qualification/artifacts/inherited.cjs": "0440049981799385657d5e18b4c7e747fd53cf468b9b9b55c63eb36265e139a5",
+        "qualification/artifacts/invocation-addresses.cjs": "d92d814fbd8d07343e491f013b5199e8e8454b5f54244c044c287665ccdb1a6f",
+        "qualification/artifacts/invoke.cjs": "927d53a9f9376c223c74ad941bfe2074c1fb5e9c4ba9518f59ae48422ba75a6f",
+        "qualification/artifacts/invoke.mjs": "d88da293798b816510bae816d32045e6b3a1e45318ddccf722b5862d89da3d5d",
+        "qualification/artifacts/legacy.js": "150fe35e1f8c70dbb3002d475944391001695de22f1995a8765c8ccf847e0d7a",
+        "qualification/artifacts/log-secret-then-throw.cjs": "6b40b3d8e74548a6cc4d8f26a0aebfe10002869fa0e694a752427edeea567885",
+        "qualification/artifacts/logs-binary.cjs": "f4f3f7e330ad67274231d211bdd22ca4ee4df0ef6b7b5f8cd429c9a6eb45df58",
+        "qualification/artifacts/logs-boundary.cjs": "e5a4e647034e7a379389a4a2feab3067feacd657f2dfabf8156f97b2b32487fc",
+        "qualification/artifacts/logs-overlap.cjs": "419f6520fada1adf74354bdf25106ecde6462535e2c7b49fdc39dce1d89f9b70",
+        "qualification/artifacts/logs.cjs": "92bfdf56821c80d0745525f233f996f7562827ce8a9363da167c0c8974f1990b",
+        "qualification/artifacts/loop.cjs": "13aed84a77b2019a06c62627458b2afad67f7d71249d5bfcef4cc8cea83598a9",
+        "qualification/artifacts/malformed-result.mjs": "bb6706bc45bb1f5e22164bd28724bb7d3851298621e5ece62082f05a60308cbb",
+        "qualification/artifacts/missing-dependency.cjs": "a2680da6b3e5a7aed88124818753b294cd73aa1723e90ab64624de6eb9d87139",
+        "qualification/artifacts/observation.cjs": "b27a620c3638f326354ac0a753d74aa466f416b03651017fc3f4d4b6257cff38",
+        "qualification/artifacts/only-function.cjs": "a21adda99671599491a26a7ad126e5578ff70ef39e3d22b2b7e72de26124a6f9",
+        "qualification/artifacts/partial-connection.mjs": "f341f27838d6f81199cb33b481e3c16b351cb72973b34ba3c91402695a4665c4",
+        "qualification/artifacts/public-invocation.cjs": "361de4a1add6db3b06edd1627cafaf256be7971f4a6a0ea7e65434f76e6617cb",
+        "qualification/artifacts/publication.cjs": "a2c347f5747a70403569700401543681d680a6ba641b7f30cb4ab1c5ebd78bc2",
+        "qualification/artifacts/service-configuration.cjs": "0a9bf83c6dffc76544491abdda0d14b9dbf0ebc767c60c29b063e893c2c22e70",
+        "qualification/artifacts/storage-console.cjs": "5e8e2199fa7605f8d00407c92537b175e072f47ce4d6fd42b116ef1a87de873f",
+        "qualification/artifacts/storage-validation-delay.mjs": "91dbcf7480341d8596a6300a026de792217a3f23bb217adf6e974cf4b97f79b3",
+        "qualification/artifacts/then.mjs": "6595121cd6a5a08a616abf4bc234927c8477ac36b72d66dd7ece08cfbd0e80a6",
+        "qualification/artifacts/throws.cjs": "4bbdd1dcb11fb143bcaab8a5ff9fc669bb34e4f4cc2feaeccd90a863f90bdc75",
+        "qualification/artifacts/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31",
+        "qualification/artifacts/version-dependency.cjs": "338860f83f269aa9a254bd56563d08fd6f2057effb2dff266307ec0b2427c8d9",
+        "qualification/artifacts/version-identity.cjs": "aab1051943e2f4272fb58063a75f873a4ae0f7f04daf80cd364e5307f6a07aba",
+        "qualification/artifacts/version-registry.cjs": "ea05d3d1398ba24616751f0587fcec5bb34a67ca4fed9911e5964baaf81fd261",
+        "qualification/artifacts/volume-operations.cjs": "84fc30b0a33d2f8e8869511a8ef19d9df17faddb12ca77415c3047f0b7d9bb66",
+        "qualification/package.json": "4824debee8072edcd72c737ebeb9fd6803c12505e138f80b97140a24249ec262",
+        "qualification/serverless.platform.yml": "3ad954a7e9f7c953672393c6eae2344cb85976b64ca5a687436e0ed8583dd4fe",
+        "qualification/src/handlers.cjs": "ff9f66ce9f56f3e02734a1099a93a96999c00cc1a2f859a950d857239b632af2",
+        "runtime/Dockerfile": "755dd5276311bb6ed23ebe7bb1501e2032828d3b4869bf7468a33d184de1e29a",
+        "runtime/compose.spark.yml": "ce4cd59f50c7e13a4e894560dbe01cf9669b01c3c3debecad92aa25a36fef771",
+        "runtime/dev.sh": "6af8db0ea6f03a5fdfb77c7e1cf76cd073365c8f17df275efb8ce4ddb3770735",
+        "runtime/invoke-child.mjs": "d37769f6ac2525e4a979b9649f697f021ac1596375e2c41a0e585e8f2cbf8669",
+        "runtime/invoke-response.mjs": "de7a56f03d97b08e840288fc1c4d91cffd251fb29ec6a5329fe0c80ff1dcaa6a",
+        "runtime/invoke-supervisor.mjs": "b6f1f1a65067c69df292d67f308260c538bcf1c438ff4605e57635563f0d2ea0",
+        "runtime/loader.mjs": "8013796ebdf4dff754fe065f18c1c1798dcd245ac7a626792155fb280f1658d3",
+        "runtime/validate-child.mjs": "beeca5f4a0caf0112bd72b73b7f0a2d73495be5c4186b634a1cb7904d7cfe0fa",
+        "runtime/validate-supervisor.mjs": "eda536f89bf7c8124b006df43aa0d1f2b8704aa0cfba2b7f37cf5a6260f51632",
+        "storage/Dockerfile": "efa7aad9926e9030bd4ca9a4755aa9c12ddc401c31fabb197c48d63cb5245026",
+        "storage/agent-proof.py": "a66aafabfad03b262b62b7ee59979721e91a7aa700952670e55db19eb732f87a",
+        "storage/agent.py": "689a45bc367b339112c41696031be46e7fb1d449340fe92d6915f791db58de64",
+        "storage/agent_discard.py": "69c6c570162e2c7dc2cdde4b53f6840866fad50ae738f85f9f3f18c4f8d5e859",
+        "storage/agent_system.py": "b809344152d6c283eeaa82dac5b154c43e0f339e1b2c478e7c17131bcfefcd22",
+        "storage/agent_volumes.py": "e03ad2df9bfe657b2a959bc3019247a3769f0dbb1e6a5802a875171a9cddf041",
+        "storage/client.py": "ec40736f7a607cf537a2b6643a7e8234adaf3cc43ec87d77b6f670315b8286b4",
+        "storage/dev.sh": "9b36479bba56f58a8e6ad9ca3cf99ce15fcd0c0bcd985ad591127779c14bb82a",
+        "storage/go.mod": "07a52d32d6641a59bdf2c2cfbee6913bd818e64a3ad39815ee2c94b5a955e0b9",
+        "storage/go.sum": "212ed4611cdcc900dad2b97ee6d1f0cebc02c1ca2fee6a02d9e7a80506e7fb9b",
+        "storage/install-dev.py": "d6e233ccc1e893ee64220ddc1436127b32434778db9b44820f359560465f33db",
+        "storage/main.go": "13d730f37a7295c43a6902cabe868ee545c2a922b614a028a8940ce4dd0ec347",
+        "storage/migrations/001.sql": "0ad82c5fa87b55777de96508f4c7390534e017b7fa433796c0b2b087f740cf3e",
+        "storage/migrations/002.sql": "664719fa81e4951ab649e447f4a7ccf1f9ee9bc7c2b4438ce38eb5fe9d78f295",
+        "storage/migrations/003.sql": "3c74f5d1e459e78c3cf1a8d55eb34188aba0129b8f520b7fa4b96465052134f4",
+        "storage/migrations/004.sql": "bde5c2068fbe9ecf03a077e911d03e6d67737a6cf9b5912c4fc55944926eaf7d",
+        "storage/prove.py": "43d357e155448e5299b1b8e8b511a8b7d936ae7850a3089d0df4599abc930407",
+        "web/index.html": "3270267d22ba74cfc48d4fc896e2eba957da2c83afe7b49e226026617ea97721",
+        "web/package-lock.json": "c237cc01aacd787490333d8ac9b616ef667301f09e8e99141b192a68e29d9e9b",
+        "web/package.json": "de87731f5db6b54a485154b48afc68f8e7f22eec77b6f5c19ddb436a1f983ad8",
+        "web/src/api.js": "209aad9a31f13b02e85080b8a368a6733ec5ad277f721a283a164bbfd1528331",
+        "web/src/catalogue.jsx": "fc200154f3acaf5140a30d68b653bb61a194d369cec5ac0a5a3c2d8af5fe3aa9",
+        "web/src/function.jsx": "0b1879912afbf861c404caa66c3efc8fbd06e030482278f0035a24744149fe42",
+        "web/src/invocation-urls.jsx": "55f42b164e0a428e2c2f113fc114a72bbe9c8d789c3fe2a0c7891384ade1dd7e",
+        "web/src/main.jsx": "0a65c22728d6310e98520c40d06dc799308f6685a5c740f2b2536e4296706a97",
+        "web/src/management.jsx": "c284f91151ea503c17f8fda04698b3f838f02225c91930bb031764be4bd13ac3",
+        "web/src/manual.jsx": "14553a011db7a2b0121b15dfff9d8b9ffff731d8085ad358166d26450e301e7f",
+        "web/src/observations.jsx": "7d2c5ae495f35046e51468ba1900511408646b233df37e8b6f6f657b0544d099",
+        "web/src/publications.jsx": "008c847e63af831d74df6369d97f52d58118f977f7a59d91becaaf0e7d26dae7",
+        "web/src/storage.jsx": "efa3f329b6bb7db4d65c514ec1eabb6e6eab3750e5084dce7a454f3d5b0a6ac1",
+        "web/src/style.css": "4494de0960664c3e9ed05d8db16c217ffdf0e51d921ff64f42eff9fdff842dd2",
+        "web/src/ui.jsx": "249980be87bf60ff542e1551b6ef1d21a4884764d5fe5b7b646268cf486fb5ba",
+        "web/vite.config.mjs": "c15657476b062972ea6674013b742cf1d14e2fcb4479477784aae1a7505bbd67"
+      },
+      "adapter_images": {
+        "p2enjoy-adapter:dev": "sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106",
+        "p2enjoy-adapter-e2e:dev": "sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c"
+      },
+      "report": {
+        "sampled_at_ns": 1794243267492032687,
+        "mtime_ns": 1794243266844618319,
+        "sha256": "392039d6cfe12fbf0394be33cf9076f4cd6703a8950d8cf084a0b7e70a9a4091"
+      }
+    },
+    "report": {
+      "target": "https://serverless.lelabs.tech",
+      "prefix": "version-duplicate-recovery-8d54441a",
+      "completed": true,
+      "cleanup": true,
+      "cleanup_errors": [],
+      "request_join_errors": [],
+      "skipped": 0,
+      "checks": [
+        {
+          "name": "Doublon publi\u00e9200 sous EACCES avec responsabilit\u00e9 conserv\u00e9e",
+          "status": "passed"
+        },
+        {
+          "name": "Restitution explicite et maintenance sans red\u00e9marrage",
+          "status": "passed"
+        },
+        {
+          "name": "Commit du doublon conserv\u00e9 apr\u00e8s SIGKILL du contr\u00f4le",
+          "status": "passed"
+        },
+        {
+          "name": "Garde ind\u00e9pendante, reprise du candidat publi\u00e9 et nouvelle d\u00e9duplication",
+          "status": "passed"
+        }
+      ],
+      "evidence": [
+        {
+          "invocation_id": "b128e9fd-9268-4e0d-a5cb-b6b684293887",
+          "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+          "counter": 1
+        },
+        {
+          "refused_candidate_id": "e5e1ae6d-3b17-44b2-9928-4b1c3a691a3e",
+          "refusals": [
+            {
+              "status": 503,
+              "error": "Un nettoyage de d\u00e9ploiement doit \u00eatre repris.",
+              "retry_after": null
+            }
+          ],
+          "untouched": {
+            "observed_at_ns": "1794243133903469299",
+            "candidate": {
+              "id": "e5e1ae6d-3b17-44b2-9928-4b1c3a691a3e",
+              "state": "prepared",
+              "error_code": null,
+              "reserved_bytes": 0,
+              "revision_id": null,
+              "code_hash": null,
+              "code_changed": null,
+              "configuration_empty": 0,
+              "validation": null
+            },
+            "function": {
+              "active_revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "updated_at": 1794243111.1165643,
+              "configuration_sha256": "2ef3dfa48e1e0f18cfa921d0df31c0e9eda8305de4e3e6903b450f4c697d0375"
+            },
+            "revisions": [
+              {
+                "id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "stored_bytes": 20480,
+                "deleted_at": null
+              }
+            ],
+            "versions": [
+              {
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "state": "available"
+              }
+            ],
+            "paths": {
+              "17189cb9-ea0a-404a-bcd4-d8391619caa8": {
+                "exists": true,
+                "identity": [
+                  129,
+                  277095,
+                  1001,
+                  1001
+                ],
+                "mode": 448,
+                "files": {
+                  "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                  "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                  "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                }
+              },
+              "e5e1ae6d-3b17-44b2-9928-4b1c3a691a3e": {
+                "exists": false
+              }
+            },
+            "validators": [],
+            "channels": []
+          }
+        },
+        {
+          "invocation_id": "c8c9a405-ddb1-430c-8ad2-5bbb03018184",
+          "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+          "counter": 2
+        },
+        {
+          "fault": "normal",
+          "duplicate_id": "9da4f6fb-218d-4e32-92bb-42e1211fdd68",
+          "published": {
+            "id": "9da4f6fb-218d-4e32-92bb-42e1211fdd68",
+            "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+            "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+            "code_changed": false
+          },
+          "retained": {
+            "observed_at_ns": "1794243133295603776",
+            "candidate": {
+              "id": "9da4f6fb-218d-4e32-92bb-42e1211fdd68",
+              "state": "published",
+              "error_code": null,
+              "reserved_bytes": 499392512,
+              "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+              "code_changed": 0,
+              "configuration_empty": 1,
+              "validation": {
+                "valid": true,
+                "container_removed": true,
+                "elapsed_seconds": 6.654
+              }
+            },
+            "function": {
+              "active_revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "updated_at": 1794243111.1165643,
+              "configuration_sha256": "2ef3dfa48e1e0f18cfa921d0df31c0e9eda8305de4e3e6903b450f4c697d0375"
+            },
+            "revisions": [
+              {
+                "id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "stored_bytes": 20480,
+                "deleted_at": null
+              }
+            ],
+            "versions": [
+              {
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "state": "available"
+              }
+            ],
+            "paths": {
+              "9da4f6fb-218d-4e32-92bb-42e1211fdd68": {
+                "exists": true,
+                "identity": [
+                  129,
+                  281521,
+                  1001,
+                  1001
+                ],
+                "mode": 0,
+                "files": {
+                  "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                  "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                  "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                }
+              },
+              "17189cb9-ea0a-404a-bcd4-d8391619caa8": {
+                "exists": true,
+                "identity": [
+                  129,
+                  277095,
+                  1001,
+                  1001
+                ],
+                "mode": 448,
+                "files": {
+                  "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                  "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                  "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                }
+              }
+            },
+            "validators": [],
+            "channels": []
+          }
+        },
+        {
+          "guard": {
+            "unit": "serverless-restore-duplicate-code-80180578c06641bbb7b35e5ce6db98e6",
+            "kind": "normal",
+            "restored": {
+              "trigger": "explicit",
+              "candidate_id": "9da4f6fb-218d-4e32-92bb-42e1211fdd68",
+              "helper_pid": 2938498,
+              "helper_birth": "486104654",
+              "permission": {
+                "identity": [
+                  129,
+                  281521,
+                  1001,
+                  1001
+                ],
+                "previous_mode": 0,
+                "mode": 448
+              },
+              "restart_performed": false,
+              "completed": true,
+              "control_id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+              "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+              "started_at": "2026-11-09T15:39:30.438265996Z",
+              "reference_unchanged": true,
+              "official_unchanged": true
+            },
+            "states": {
+              "timer": {
+                "LoadState": "not-found",
+                "ActiveState": "inactive"
+              },
+              "service": {
+                "LoadState": "not-found",
+                "ActiveState": "inactive",
+                "MainPID": "0"
+              }
+            },
+            "helper_exit": 0,
+            "helper_sigkill": null,
+            "helper_termination": {
+              "event": "helper-terminated",
+              "pid": 2938498,
+              "birth": "486104654",
+              "signaled": false,
+              "signal": null,
+              "exit_code": 0
+            },
+            "identity": {
+              "function_id": "09d26f59-24d4-41a5-b78f-75291b25eaa7",
+              "namespace_id": "288e51b2-a169-42cd-a0dc-f538344f081b",
+              "candidate_id": "9da4f6fb-218d-4e32-92bb-42e1211fdd68",
+              "state": "/srv/p2enjoy-serverless/state",
+              "artifact_identity": [
+                129,
+                281521,
+                1001,
+                1001
+              ],
+              "artifact_mode": 448,
+              "control": {
+                "id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+                "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+                "started_at": "2026-11-09T15:39:30.438265996Z",
+                "running": true,
+                "health": "healthy",
+                "configuration": {
+                  "mounts": [
+                    {
+                      "Type": "bind",
+                      "Source": "/run/user/1001/docker.sock",
+                      "Destination": "/docker.sock",
+                      "RW": true,
+                      "Propagation": "rprivate"
+                    },
+                    {
+                      "Type": "bind",
+                      "Source": "/etc/spark",
+                      "Destination": "/spark",
+                      "RW": false,
+                      "Propagation": "rprivate"
+                    },
+                    {
+                      "Type": "bind",
+                      "Source": "/srv/p2enjoy-serverless/state",
+                      "Destination": "/state",
+                      "RW": true,
+                      "Propagation": "rprivate"
+                    },
+                    {
+                      "Type": "bind",
+                      "Source": "/srv/p2enjoy-serverless/storage-channel",
+                      "Destination": "/storage-agent",
+                      "RW": false,
+                      "Propagation": "rprivate"
+                    }
+                  ],
+                  "host": {
+                    "NetworkMode": "host",
+                    "ReadonlyRootfs": true,
+                    "Memory": 536870912,
+                    "MemorySwap": 1073741824,
+                    "NanoCpus": 1000000000,
+                    "PidsLimit": 64,
+                    "CapDrop": [
+                      "ALL"
+                    ],
+                    "SecurityOpt": [
+                      "no-new-privileges:true"
+                    ],
+                    "Tmpfs": {
+                      "/tmp": "size=16m,mode=1777,noexec,nosuid"
+                    }
+                  },
+                  "environment_sha256": "dbe4f3d3fe93e94d1ce6b2c48780c4ec5fe4af1034edd79de6e35ac16a068735",
+                  "command": [
+                    "python",
+                    "-B",
+                    "-m",
+                    "uvicorn",
+                    "app.main:app",
+                    "--host",
+                    "0.0.0.0",
+                    "--port",
+                    "18090",
+                    "--workers",
+                    "1",
+                    "--no-access-log",
+                    "--no-proxy-headers"
+                  ],
+                  "entrypoint": null
+                }
+              },
+              "reference": {
+                "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+                "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+                "started_at": "2026-11-06T15:49:39.578107028Z",
+                "running": true,
+                "health": "healthy",
+                "configuration": {
+                  "mounts": [
+                    {
+                      "Type": "volume",
+                      "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-cache/_data",
+                      "Destination": "/app/.state/cache",
+                      "RW": true,
+                      "Propagation": ""
+                    },
+                    {
+                      "Type": "volume",
+                      "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-data/_data",
+                      "Destination": "/app/.state/data",
+                      "RW": true,
+                      "Propagation": ""
+                    }
+                  ],
+                  "host": {
+                    "NetworkMode": "p2enjoy-qualification-dev_default",
+                    "ReadonlyRootfs": true,
+                    "Memory": 402653184,
+                    "MemorySwap": 805306368,
+                    "NanoCpus": 500000000,
+                    "PidsLimit": 96,
+                    "CapDrop": [
+                      "ALL"
+                    ],
+                    "SecurityOpt": [
+                      "no-new-privileges:true"
+                    ],
+                    "Tmpfs": {
+                      "/tmp": "size=32m,mode=1777"
+                    }
+                  },
+                  "environment_sha256": "d2bb120146278b450d0a5b2307b360e5206169582e83b0dacc501f2e5f7d1129",
+                  "command": [
+                    "node",
+                    "runner/server.cjs"
+                  ],
+                  "entrypoint": [
+                    "docker-entrypoint.sh"
+                  ]
+                }
+              },
+              "docker": [
+                "runuser",
+                "-u",
+                "spark-docker",
+                "--",
+                "docker",
+                "--host",
+                "unix:///run/user/1001/docker.sock"
+              ],
+              "allow_restart": false,
+              "delay_seconds": 90,
+              "helper_pid": 2938498,
+              "helper_birth": "486104654",
+              "helper_path": "/srv/p2enjoy-serverless/e2e/function-version-duplicate-recovery-operator.py",
+              "lock_identity": [
+                1048696,
+                108688
+              ],
+              "restore_sha256": "7b480230a53ea879ab53a5ba0f0d8055fe2c85e8aebc40e6d6c4b3260dcdb5af",
+              "armed_monotonic": 4861048.051914712,
+              "official_sha256": {
+                "/etc/spark/env": "ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d",
+                "/run/spark/secrets": "b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5",
+                "/etc/spark/routes": "a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e"
+              }
+            }
+          }
+        },
+        {
+          "invocation_id": "c41a8e49-caaf-40ac-84f0-0c19a729cc89",
+          "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+          "counter": 3
+        },
+        {
+          "recovered": "normal",
+          "duplicate_id": "9da4f6fb-218d-4e32-92bb-42e1211fdd68",
+          "cleaned": {
+            "observed_at_ns": "1794243161273170197",
+            "candidate": {
+              "id": "9da4f6fb-218d-4e32-92bb-42e1211fdd68",
+              "state": "published",
+              "error_code": null,
+              "reserved_bytes": 0,
+              "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+              "code_changed": 0,
+              "configuration_empty": 1,
+              "validation": {
+                "valid": true,
+                "container_removed": true,
+                "elapsed_seconds": 6.654
+              }
+            },
+            "function": {
+              "active_revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "updated_at": 1794243111.1165643,
+              "configuration_sha256": "2ef3dfa48e1e0f18cfa921d0df31c0e9eda8305de4e3e6903b450f4c697d0375"
+            },
+            "revisions": [
+              {
+                "id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "stored_bytes": 20480,
+                "deleted_at": null
+              }
+            ],
+            "versions": [
+              {
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "state": "available"
+              }
+            ],
+            "paths": {
+              "9da4f6fb-218d-4e32-92bb-42e1211fdd68": {
+                "exists": false
+              },
+              "17189cb9-ea0a-404a-bcd4-d8391619caa8": {
+                "exists": true,
+                "identity": [
+                  129,
+                  277095,
+                  1001,
+                  1001
+                ],
+                "mode": 448,
+                "files": {
+                  "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                  "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                  "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                }
+              }
+            },
+            "validators": [],
+            "channels": []
+          },
+          "services": [
+            {
+              "id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+              "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+              "started_at": "2026-11-09T15:39:30.438265996Z",
+              "running": true,
+              "health": "healthy",
+              "configuration": {
+                "mounts": [
+                  {
+                    "Type": "bind",
+                    "Source": "/run/user/1001/docker.sock",
+                    "Destination": "/docker.sock",
+                    "RW": true,
+                    "Propagation": "rprivate"
+                  },
+                  {
+                    "Type": "bind",
+                    "Source": "/etc/spark",
+                    "Destination": "/spark",
+                    "RW": false,
+                    "Propagation": "rprivate"
+                  },
+                  {
+                    "Type": "bind",
+                    "Source": "/srv/p2enjoy-serverless/state",
+                    "Destination": "/state",
+                    "RW": true,
+                    "Propagation": "rprivate"
+                  },
+                  {
+                    "Type": "bind",
+                    "Source": "/srv/p2enjoy-serverless/storage-channel",
+                    "Destination": "/storage-agent",
+                    "RW": false,
+                    "Propagation": "rprivate"
+                  }
+                ],
+                "host": {
+                  "NetworkMode": "host",
+                  "ReadonlyRootfs": true,
+                  "Memory": 536870912,
+                  "MemorySwap": 1073741824,
+                  "NanoCpus": 1000000000,
+                  "PidsLimit": 64,
+                  "CapDrop": [
+                    "ALL"
+                  ],
+                  "SecurityOpt": [
+                    "no-new-privileges:true"
+                  ],
+                  "Tmpfs": {
+                    "/tmp": "size=16m,mode=1777,noexec,nosuid"
+                  }
+                },
+                "environment_sha256": "dbe4f3d3fe93e94d1ce6b2c48780c4ec5fe4af1034edd79de6e35ac16a068735",
+                "command": [
+                  "python",
+                  "-B",
+                  "-m",
+                  "uvicorn",
+                  "app.main:app",
+                  "--host",
+                  "0.0.0.0",
+                  "--port",
+                  "18090",
+                  "--workers",
+                  "1",
+                  "--no-access-log",
+                  "--no-proxy-headers"
+                ],
+                "entrypoint": null
+              }
+            },
+            {
+              "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+              "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+              "started_at": "2026-11-06T15:49:39.578107028Z",
+              "running": true,
+              "health": "healthy",
+              "configuration": {
+                "mounts": [
+                  {
+                    "Type": "volume",
+                    "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-cache/_data",
+                    "Destination": "/app/.state/cache",
+                    "RW": true,
+                    "Propagation": ""
+                  },
+                  {
+                    "Type": "volume",
+                    "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-data/_data",
+                    "Destination": "/app/.state/data",
+                    "RW": true,
+                    "Propagation": ""
+                  }
+                ],
+                "host": {
+                  "NetworkMode": "p2enjoy-qualification-dev_default",
+                  "ReadonlyRootfs": true,
+                  "Memory": 402653184,
+                  "MemorySwap": 805306368,
+                  "NanoCpus": 500000000,
+                  "PidsLimit": 96,
+                  "CapDrop": [
+                    "ALL"
+                  ],
+                  "SecurityOpt": [
+                    "no-new-privileges:true"
+                  ],
+                  "Tmpfs": {
+                    "/tmp": "size=32m,mode=1777"
+                  }
+                },
+                "environment_sha256": "d2bb120146278b450d0a5b2307b360e5206169582e83b0dacc501f2e5f7d1129",
+                "command": [
+                  "node",
+                  "runner/server.cjs"
+                ],
+                "entrypoint": [
+                  "docker-entrypoint.sh"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "refused_candidate_id": "856b120f-5b45-44a0-a9ec-3e37a7961540",
+          "refusals": [
+            {
+              "status": 503,
+              "error": "Un nettoyage de d\u00e9ploiement doit \u00eatre repris.",
+              "retry_after": null
+            }
+          ],
+          "untouched": {
+            "observed_at_ns": "1794243183726002598",
+            "candidate": {
+              "id": "856b120f-5b45-44a0-a9ec-3e37a7961540",
+              "state": "prepared",
+              "error_code": null,
+              "reserved_bytes": 0,
+              "revision_id": null,
+              "code_hash": null,
+              "code_changed": null,
+              "configuration_empty": 0,
+              "validation": null
+            },
+            "function": {
+              "active_revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "updated_at": 1794243111.1165643,
+              "configuration_sha256": "2ef3dfa48e1e0f18cfa921d0df31c0e9eda8305de4e3e6903b450f4c697d0375"
+            },
+            "revisions": [
+              {
+                "id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "stored_bytes": 20480,
+                "deleted_at": null
+              }
+            ],
+            "versions": [
+              {
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "state": "available"
+              }
+            ],
+            "paths": {
+              "17189cb9-ea0a-404a-bcd4-d8391619caa8": {
+                "exists": true,
+                "identity": [
+                  129,
+                  277095,
+                  1001,
+                  1001
+                ],
+                "mode": 448,
+                "files": {
+                  "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                  "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                  "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                }
+              },
+              "856b120f-5b45-44a0-a9ec-3e37a7961540": {
+                "exists": false
+              }
+            },
+            "validators": [],
+            "channels": []
+          }
+        },
+        {
+          "interruption": {
+            "unit": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf",
+            "identity": {
+              "function_id": "09d26f59-24d4-41a5-b78f-75291b25eaa7",
+              "namespace_id": "288e51b2-a169-42cd-a0dc-f538344f081b",
+              "candidate_id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+              "state": "/srv/p2enjoy-serverless/state",
+              "artifact_identity": [
+                129,
+                285968,
+                1001,
+                1001
+              ],
+              "artifact_mode": 448,
+              "control": {
+                "id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+                "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+                "started_at": "2026-11-09T15:39:30.438265996Z",
+                "running": true,
+                "health": "healthy",
+                "configuration": {
+                  "mounts": [
+                    {
+                      "Type": "bind",
+                      "Source": "/run/user/1001/docker.sock",
+                      "Destination": "/docker.sock",
+                      "RW": true,
+                      "Propagation": "rprivate"
+                    },
+                    {
+                      "Type": "bind",
+                      "Source": "/etc/spark",
+                      "Destination": "/spark",
+                      "RW": false,
+                      "Propagation": "rprivate"
+                    },
+                    {
+                      "Type": "bind",
+                      "Source": "/srv/p2enjoy-serverless/state",
+                      "Destination": "/state",
+                      "RW": true,
+                      "Propagation": "rprivate"
+                    },
+                    {
+                      "Type": "bind",
+                      "Source": "/srv/p2enjoy-serverless/storage-channel",
+                      "Destination": "/storage-agent",
+                      "RW": false,
+                      "Propagation": "rprivate"
+                    }
+                  ],
+                  "host": {
+                    "NetworkMode": "host",
+                    "ReadonlyRootfs": true,
+                    "Memory": 536870912,
+                    "MemorySwap": 1073741824,
+                    "NanoCpus": 1000000000,
+                    "PidsLimit": 64,
+                    "CapDrop": [
+                      "ALL"
+                    ],
+                    "SecurityOpt": [
+                      "no-new-privileges:true"
+                    ],
+                    "Tmpfs": {
+                      "/tmp": "size=16m,mode=1777,noexec,nosuid"
+                    }
+                  },
+                  "environment_sha256": "dbe4f3d3fe93e94d1ce6b2c48780c4ec5fe4af1034edd79de6e35ac16a068735",
+                  "command": [
+                    "python",
+                    "-B",
+                    "-m",
+                    "uvicorn",
+                    "app.main:app",
+                    "--host",
+                    "0.0.0.0",
+                    "--port",
+                    "18090",
+                    "--workers",
+                    "1",
+                    "--no-access-log",
+                    "--no-proxy-headers"
+                  ],
+                  "entrypoint": null
+                }
+              },
+              "reference": {
+                "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+                "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+                "started_at": "2026-11-06T15:49:39.578107028Z",
+                "running": true,
+                "health": "healthy",
+                "configuration": {
+                  "mounts": [
+                    {
+                      "Type": "volume",
+                      "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-cache/_data",
+                      "Destination": "/app/.state/cache",
+                      "RW": true,
+                      "Propagation": ""
+                    },
+                    {
+                      "Type": "volume",
+                      "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-data/_data",
+                      "Destination": "/app/.state/data",
+                      "RW": true,
+                      "Propagation": ""
+                    }
+                  ],
+                  "host": {
+                    "NetworkMode": "p2enjoy-qualification-dev_default",
+                    "ReadonlyRootfs": true,
+                    "Memory": 402653184,
+                    "MemorySwap": 805306368,
+                    "NanoCpus": 500000000,
+                    "PidsLimit": 96,
+                    "CapDrop": [
+                      "ALL"
+                    ],
+                    "SecurityOpt": [
+                      "no-new-privileges:true"
+                    ],
+                    "Tmpfs": {
+                      "/tmp": "size=32m,mode=1777"
+                    }
+                  },
+                  "environment_sha256": "d2bb120146278b450d0a5b2307b360e5206169582e83b0dacc501f2e5f7d1129",
+                  "command": [
+                    "node",
+                    "runner/server.cjs"
+                  ],
+                  "entrypoint": [
+                    "docker-entrypoint.sh"
+                  ]
+                }
+              },
+              "docker": [
+                "runuser",
+                "-u",
+                "spark-docker",
+                "--",
+                "docker",
+                "--host",
+                "unix:///run/user/1001/docker.sock"
+              ],
+              "allow_restart": true,
+              "delay_seconds": 45,
+              "helper_pid": 2940279,
+              "helper_birth": "486109687",
+              "helper_path": "/srv/p2enjoy-serverless/e2e/function-version-duplicate-recovery-operator.py",
+              "lock_identity": [
+                1048696,
+                109005
+              ],
+              "restore_sha256": "7b480230a53ea879ab53a5ba0f0d8055fe2c85e8aebc40e6d6c4b3260dcdb5af",
+              "armed_monotonic": 4861098.299479579,
+              "official_sha256": {
+                "/etc/spark/env": "ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d",
+                "/run/spark/secrets": "b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5",
+                "/etc/spark/routes": "a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e"
+              }
+            },
+            "states": {
+              "timer": {
+                "LoadState": "loaded",
+                "ActiveState": "active"
+              },
+              "service": {
+                "LoadState": "loaded",
+                "ActiveState": "inactive",
+                "MainPID": "0"
+              }
+            },
+            "restored": null,
+            "interrupted": {
+              "exit_code": 137,
+              "control_id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+              "old_started_at": "2026-11-09T15:39:30.438265996Z",
+              "candidate": {
+                "observed_at_ns": "1794243184580598877",
+                "candidate": {
+                  "id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+                  "state": "published",
+                  "error_code": null,
+                  "reserved_bytes": 499392512,
+                  "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                  "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                  "code_changed": 0,
+                  "configuration_empty": 1,
+                  "validation": {
+                    "valid": true,
+                    "container_removed": true,
+                    "elapsed_seconds": 6.582
+                  }
+                },
+                "function": {
+                  "active_revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                  "updated_at": 1794243111.1165643,
+                  "configuration_sha256": "2ef3dfa48e1e0f18cfa921d0df31c0e9eda8305de4e3e6903b450f4c697d0375"
+                },
+                "revisions": [
+                  {
+                    "id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                    "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                    "stored_bytes": 20480,
+                    "deleted_at": null
+                  }
+                ],
+                "versions": [
+                  {
+                    "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                    "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                    "state": "available"
+                  }
+                ],
+                "paths": {
+                  "fd082201-a501-4e4b-9b5f-bdbd36e857d8": {
+                    "exists": true,
+                    "identity": [
+                      129,
+                      285968,
+                      1001,
+                      1001
+                    ],
+                    "mode": 0,
+                    "files": {
+                      "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                      "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                      "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                    }
+                  },
+                  "17189cb9-ea0a-404a-bcd4-d8391619caa8": {
+                    "exists": true,
+                    "identity": [
+                      129,
+                      277095,
+                      1001,
+                      1001
+                    ],
+                    "mode": 448,
+                    "files": {
+                      "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                      "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                      "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                    }
+                  }
+                },
+                "validators": [],
+                "channels": []
+              }
+            }
+          }
+        },
+        {
+          "fault": "restart",
+          "duplicate_id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+          "published": {
+            "id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+            "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+            "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+            "code_changed": false
+          },
+          "retained": {
+            "observed_at_ns": "1794243183149016345",
+            "candidate": {
+              "id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+              "state": "published",
+              "error_code": null,
+              "reserved_bytes": 499392512,
+              "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+              "code_changed": 0,
+              "configuration_empty": 1,
+              "validation": {
+                "valid": true,
+                "container_removed": true,
+                "elapsed_seconds": 6.582
+              }
+            },
+            "function": {
+              "active_revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "updated_at": 1794243111.1165643,
+              "configuration_sha256": "2ef3dfa48e1e0f18cfa921d0df31c0e9eda8305de4e3e6903b450f4c697d0375"
+            },
+            "revisions": [
+              {
+                "id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "stored_bytes": 20480,
+                "deleted_at": null
+              }
+            ],
+            "versions": [
+              {
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "state": "available"
+              }
+            ],
+            "paths": {
+              "fd082201-a501-4e4b-9b5f-bdbd36e857d8": {
+                "exists": true,
+                "identity": [
+                  129,
+                  285968,
+                  1001,
+                  1001
+                ],
+                "mode": 0,
+                "files": {
+                  "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                  "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                  "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                }
+              },
+              "17189cb9-ea0a-404a-bcd4-d8391619caa8": {
+                "exists": true,
+                "identity": [
+                  129,
+                  277095,
+                  1001,
+                  1001
+                ],
+                "mode": 448,
+                "files": {
+                  "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                  "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                  "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                }
+              }
+            },
+            "validators": [],
+            "channels": []
+          }
+        },
+        {
+          "guard": {
+            "unit": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf",
+            "kind": "restart",
+            "restored": {
+              "trigger": "independent",
+              "candidate_id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+              "helper_pid": 2940279,
+              "helper_birth": "486109687",
+              "helper_already_absent": true,
+              "permission": {
+                "identity": [
+                  129,
+                  285968,
+                  1001,
+                  1001
+                ],
+                "previous_mode": 0,
+                "mode": 448
+              },
+              "restart_performed": true,
+              "completed": true,
+              "control_id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+              "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+              "started_at": "2026-11-09T16:53:43.245115994Z",
+              "reference_unchanged": true,
+              "official_unchanged": true
+            },
+            "states": {
+              "timer": {
+                "LoadState": "not-found",
+                "ActiveState": "inactive"
+              },
+              "service": {
+                "LoadState": "not-found",
+                "ActiveState": "inactive",
+                "MainPID": "0"
+              }
+            },
+            "helper_exit": 1,
+            "helper_sigkill": {
+              "event": "helper-sigkill",
+              "pid": 2940279,
+              "birth": "486109687"
+            },
+            "helper_termination": {
+              "event": "helper-terminated",
+              "pid": 2940279,
+              "birth": "486109687",
+              "signaled": true,
+              "signal": 9,
+              "exit_code": null
+            },
+            "identity": {
+              "function_id": "09d26f59-24d4-41a5-b78f-75291b25eaa7",
+              "namespace_id": "288e51b2-a169-42cd-a0dc-f538344f081b",
+              "candidate_id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+              "state": "/srv/p2enjoy-serverless/state",
+              "artifact_identity": [
+                129,
+                285968,
+                1001,
+                1001
+              ],
+              "artifact_mode": 448,
+              "control": {
+                "id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+                "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+                "started_at": "2026-11-09T15:39:30.438265996Z",
+                "running": true,
+                "health": "healthy",
+                "configuration": {
+                  "mounts": [
+                    {
+                      "Type": "bind",
+                      "Source": "/run/user/1001/docker.sock",
+                      "Destination": "/docker.sock",
+                      "RW": true,
+                      "Propagation": "rprivate"
+                    },
+                    {
+                      "Type": "bind",
+                      "Source": "/etc/spark",
+                      "Destination": "/spark",
+                      "RW": false,
+                      "Propagation": "rprivate"
+                    },
+                    {
+                      "Type": "bind",
+                      "Source": "/srv/p2enjoy-serverless/state",
+                      "Destination": "/state",
+                      "RW": true,
+                      "Propagation": "rprivate"
+                    },
+                    {
+                      "Type": "bind",
+                      "Source": "/srv/p2enjoy-serverless/storage-channel",
+                      "Destination": "/storage-agent",
+                      "RW": false,
+                      "Propagation": "rprivate"
+                    }
+                  ],
+                  "host": {
+                    "NetworkMode": "host",
+                    "ReadonlyRootfs": true,
+                    "Memory": 536870912,
+                    "MemorySwap": 1073741824,
+                    "NanoCpus": 1000000000,
+                    "PidsLimit": 64,
+                    "CapDrop": [
+                      "ALL"
+                    ],
+                    "SecurityOpt": [
+                      "no-new-privileges:true"
+                    ],
+                    "Tmpfs": {
+                      "/tmp": "size=16m,mode=1777,noexec,nosuid"
+                    }
+                  },
+                  "environment_sha256": "dbe4f3d3fe93e94d1ce6b2c48780c4ec5fe4af1034edd79de6e35ac16a068735",
+                  "command": [
+                    "python",
+                    "-B",
+                    "-m",
+                    "uvicorn",
+                    "app.main:app",
+                    "--host",
+                    "0.0.0.0",
+                    "--port",
+                    "18090",
+                    "--workers",
+                    "1",
+                    "--no-access-log",
+                    "--no-proxy-headers"
+                  ],
+                  "entrypoint": null
+                }
+              },
+              "reference": {
+                "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+                "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+                "started_at": "2026-11-06T15:49:39.578107028Z",
+                "running": true,
+                "health": "healthy",
+                "configuration": {
+                  "mounts": [
+                    {
+                      "Type": "volume",
+                      "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-cache/_data",
+                      "Destination": "/app/.state/cache",
+                      "RW": true,
+                      "Propagation": ""
+                    },
+                    {
+                      "Type": "volume",
+                      "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-data/_data",
+                      "Destination": "/app/.state/data",
+                      "RW": true,
+                      "Propagation": ""
+                    }
+                  ],
+                  "host": {
+                    "NetworkMode": "p2enjoy-qualification-dev_default",
+                    "ReadonlyRootfs": true,
+                    "Memory": 402653184,
+                    "MemorySwap": 805306368,
+                    "NanoCpus": 500000000,
+                    "PidsLimit": 96,
+                    "CapDrop": [
+                      "ALL"
+                    ],
+                    "SecurityOpt": [
+                      "no-new-privileges:true"
+                    ],
+                    "Tmpfs": {
+                      "/tmp": "size=32m,mode=1777"
+                    }
+                  },
+                  "environment_sha256": "d2bb120146278b450d0a5b2307b360e5206169582e83b0dacc501f2e5f7d1129",
+                  "command": [
+                    "node",
+                    "runner/server.cjs"
+                  ],
+                  "entrypoint": [
+                    "docker-entrypoint.sh"
+                  ]
+                }
+              },
+              "docker": [
+                "runuser",
+                "-u",
+                "spark-docker",
+                "--",
+                "docker",
+                "--host",
+                "unix:///run/user/1001/docker.sock"
+              ],
+              "allow_restart": true,
+              "delay_seconds": 45,
+              "helper_pid": 2940279,
+              "helper_birth": "486109687",
+              "helper_path": "/srv/p2enjoy-serverless/e2e/function-version-duplicate-recovery-operator.py",
+              "lock_identity": [
+                1048696,
+                109005
+              ],
+              "restore_sha256": "7b480230a53ea879ab53a5ba0f0d8055fe2c85e8aebc40e6d6c4b3260dcdb5af",
+              "armed_monotonic": 4861098.299479579,
+              "official_sha256": {
+                "/etc/spark/env": "ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d",
+                "/run/spark/secrets": "b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5",
+                "/etc/spark/routes": "a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e"
+              }
+            }
+          }
+        },
+        {
+          "invocation_id": "d77f6890-5cf6-4919-8a64-35108346ddeb",
+          "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+          "counter": 4
+        },
+        {
+          "invocation_id": "6636fa6d-c4d9-4cca-bc81-b2a6a950e8da",
+          "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+          "counter": 5
+        },
+        {
+          "post_restart_duplicate": {
+            "id": "0f8f1110-d3a1-486a-9b7a-70f14c033311",
+            "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+            "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11"
+          },
+          "native": {
+            "observed_at_ns": "1794243251112182404",
+            "candidate": {
+              "id": "0f8f1110-d3a1-486a-9b7a-70f14c033311",
+              "state": "published",
+              "error_code": null,
+              "reserved_bytes": 0,
+              "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+              "code_changed": 0,
+              "configuration_empty": 1,
+              "validation": {
+                "valid": true,
+                "container_removed": true,
+                "elapsed_seconds": 6.192
+              }
+            },
+            "function": {
+              "active_revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "updated_at": 1794243111.1165643,
+              "configuration_sha256": "2ef3dfa48e1e0f18cfa921d0df31c0e9eda8305de4e3e6903b450f4c697d0375"
+            },
+            "revisions": [
+              {
+                "id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "stored_bytes": 20480,
+                "deleted_at": null
+              }
+            ],
+            "versions": [
+              {
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "state": "available"
+              }
+            ],
+            "paths": {
+              "17189cb9-ea0a-404a-bcd4-d8391619caa8": {
+                "exists": true,
+                "identity": [
+                  129,
+                  277095,
+                  1001,
+                  1001
+                ],
+                "mode": 448,
+                "files": {
+                  "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                  "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                  "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                }
+              },
+              "0f8f1110-d3a1-486a-9b7a-70f14c033311": {
+                "exists": false
+              }
+            },
+            "validators": [],
+            "channels": []
+          }
+        },
+        {
+          "recovered": "restart",
+          "duplicate_id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+          "cleaned": {
+            "observed_at_ns": "1794243230285697352",
+            "candidate": {
+              "id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+              "state": "published",
+              "error_code": null,
+              "reserved_bytes": 0,
+              "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+              "code_changed": 0,
+              "configuration_empty": 1,
+              "validation": {
+                "valid": true,
+                "container_removed": true,
+                "elapsed_seconds": 6.582
+              }
+            },
+            "function": {
+              "active_revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+              "updated_at": 1794243111.1165643,
+              "configuration_sha256": "2ef3dfa48e1e0f18cfa921d0df31c0e9eda8305de4e3e6903b450f4c697d0375"
+            },
+            "revisions": [
+              {
+                "id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "stored_bytes": 20480,
+                "deleted_at": null
+              }
+            ],
+            "versions": [
+              {
+                "code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11",
+                "revision_id": "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+                "state": "available"
+              }
+            ],
+            "paths": {
+              "fd082201-a501-4e4b-9b5f-bdbd36e857d8": {
+                "exists": false
+              },
+              "17189cb9-ea0a-404a-bcd4-d8391619caa8": {
+                "exists": true,
+                "identity": [
+                  129,
+                  277095,
+                  1001,
+                  1001
+                ],
+                "mode": 448,
+                "files": {
+                  "archive.zip": "80b657c936f7f31e21a6125f39cf9f305eebc1730bbdb3ff71c944ec49e8e292",
+                  "code/validation-mode.json": "ff55c7dc3f0dec09a18a893d115b901909d563cbeba4501d88bf3239119a1853",
+                  "code/validator-observation.mjs": "c9b85a23c292f133ccee6c0ec76c21e3f810aa123711c4d87f97baf1d78c2a31"
+                }
+              }
+            },
+            "validators": [],
+            "channels": []
+          },
+          "services": [
+            {
+              "id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+              "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+              "started_at": "2026-11-09T16:53:43.245115994Z",
+              "running": true,
+              "health": "healthy",
+              "configuration": {
+                "mounts": [
+                  {
+                    "Type": "bind",
+                    "Source": "/run/user/1001/docker.sock",
+                    "Destination": "/docker.sock",
+                    "RW": true,
+                    "Propagation": "rprivate"
+                  },
+                  {
+                    "Type": "bind",
+                    "Source": "/etc/spark",
+                    "Destination": "/spark",
+                    "RW": false,
+                    "Propagation": "rprivate"
+                  },
+                  {
+                    "Type": "bind",
+                    "Source": "/srv/p2enjoy-serverless/state",
+                    "Destination": "/state",
+                    "RW": true,
+                    "Propagation": "rprivate"
+                  },
+                  {
+                    "Type": "bind",
+                    "Source": "/srv/p2enjoy-serverless/storage-channel",
+                    "Destination": "/storage-agent",
+                    "RW": false,
+                    "Propagation": "rprivate"
+                  }
+                ],
+                "host": {
+                  "NetworkMode": "host",
+                  "ReadonlyRootfs": true,
+                  "Memory": 536870912,
+                  "MemorySwap": 1073741824,
+                  "NanoCpus": 1000000000,
+                  "PidsLimit": 64,
+                  "CapDrop": [
+                    "ALL"
+                  ],
+                  "SecurityOpt": [
+                    "no-new-privileges:true"
+                  ],
+                  "Tmpfs": {
+                    "/tmp": "size=16m,mode=1777,noexec,nosuid"
+                  }
+                },
+                "environment_sha256": "dbe4f3d3fe93e94d1ce6b2c48780c4ec5fe4af1034edd79de6e35ac16a068735",
+                "command": [
+                  "python",
+                  "-B",
+                  "-m",
+                  "uvicorn",
+                  "app.main:app",
+                  "--host",
+                  "0.0.0.0",
+                  "--port",
+                  "18090",
+                  "--workers",
+                  "1",
+                  "--no-access-log",
+                  "--no-proxy-headers"
+                ],
+                "entrypoint": null
+              }
+            },
+            {
+              "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+              "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+              "started_at": "2026-11-06T15:49:39.578107028Z",
+              "running": true,
+              "health": "healthy",
+              "configuration": {
+                "mounts": [
+                  {
+                    "Type": "volume",
+                    "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-cache/_data",
+                    "Destination": "/app/.state/cache",
+                    "RW": true,
+                    "Propagation": ""
+                  },
+                  {
+                    "Type": "volume",
+                    "Source": "/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-data/_data",
+                    "Destination": "/app/.state/data",
+                    "RW": true,
+                    "Propagation": ""
+                  }
+                ],
+                "host": {
+                  "NetworkMode": "p2enjoy-qualification-dev_default",
+                  "ReadonlyRootfs": true,
+                  "Memory": 402653184,
+                  "MemorySwap": 805306368,
+                  "NanoCpus": 500000000,
+                  "PidsLimit": 96,
+                  "CapDrop": [
+                    "ALL"
+                  ],
+                  "SecurityOpt": [
+                    "no-new-privileges:true"
+                  ],
+                  "Tmpfs": {
+                    "/tmp": "size=32m,mode=1777"
+                  }
+                },
+                "environment_sha256": "d2bb120146278b450d0a5b2307b360e5206169582e83b0dacc501f2e5f7d1129",
+                "command": [
+                  "node",
+                  "runner/server.cjs"
+                ],
+                "entrypoint": [
+                  "docker-entrypoint.sh"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "purged_function_id": "09d26f59-24d4-41a5-b78f-75291b25eaa7",
+          "operation_id": "580ca10c-b065-4917-ba06-468f283c38fe"
+        }
+      ],
+      "namespace_id": "288e51b2-a169-42cd-a0dc-f538344f081b",
+      "service_id": "7d320050-d247-4a83-bb6a-9e41cb907045",
+      "function_ids": [
+        "09d26f59-24d4-41a5-b78f-75291b25eaa7"
+      ]
+    },
+    "log_sha256": "ef833b4a9373fd2c328cc0afe43ce44b0fa3bfe0bb71b99139d62066820d0a90",
+    "native": {
+      "completed": true,
+      "physical": {
+        "completed": true,
+        "target": "infra-serverless DEV",
+        "campaigns": {
+          "288e51b2-a169-42cd-a0dc-f538344f081b": [
+            "09d26f59-24d4-41a5-b78f-75291b25eaa7"
+          ]
+        },
+        "functions": {
+          "09d26f59-24d4-41a5-b78f-75291b25eaa7": {
+            "control": {
+              "id": "09d26f59-24d4-41a5-b78f-75291b25eaa7",
+              "function_deleted": 1,
+              "function_purged": 1,
+              "revision_detached": 1,
+              "configuration_empty": 1,
+              "environment_empty": 1,
+              "service_deleted": 1,
+              "guard_absent": 1,
+              "instances_absent": 1,
+              "active_calls_absent": 1,
+              "pending_commands_absent": 1,
+              "revision_content_cleared": 1,
+              "deployment_content_cleared": 1
+            },
+            "operation_id": "580ca10c-b065-4917-ba06-468f283c38fe",
+            "result_version": 1794243265.724137,
+            "agent_receipt": {
+              "operation_id": "580ca10c-b065-4917-ba06-468f283c38fe",
+              "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+              "kind": "purge",
+              "expected_version": 2,
+              "version": 3
+            }
+          }
+        },
+        "global_control_reservations": {
+          "instances": 0,
+          "cpu_nanos": 0,
+          "memory_mib": 0
+        },
+        "global_storage_allocated_bytes": 0,
+        "physical": {
+          "artifacts_absent": true,
+          "backings_absent": true,
+          "mount_directories_absent": true,
+          "mounts_absent": true,
+          "known_execution_channels_absent": true,
+          "global_trash_empty": true,
+          "global_validation_channels_empty": true,
+          "global_execution_channels_empty": true,
+          "containers_absent_09d26f59-24d4-41a5-b78f-75291b25eaa7": true,
+          "networks_absent_09d26f59-24d4-41a5-b78f-75291b25eaa7": true,
+          "global_validators_absent": true
+        },
+        "artifact_ids": [
+          "0f8f1110-d3a1-486a-9b7a-70f14c033311",
+          "17189cb9-ea0a-404a-bcd4-d8391619caa8",
+          "856b120f-5b45-44a0-a9ec-3e37a7961540",
+          "9da4f6fb-218d-4e32-92bb-42e1211fdd68",
+          "e5e1ae6d-3b17-44b2-9928-4b1c3a691a3e",
+          "fd082201-a501-4e4b-9b5f-bdbd36e857d8"
+        ],
+        "instance_ids": [
+          "0d7f8bcf-0aea-48fe-a843-0bf7d55e0724",
+          "5fc799fe-1419-4609-8f39-41571f99ad64",
+          "7c8d2733-96d0-4706-9300-5420404a7be9",
+          "940bea31-c03f-4997-bd3d-ad53ef5d8c63",
+          "ea061baa-bcd8-4b57-9571-c2e108d02988"
+        ],
+        "secrets": [
+          {
+            "function_id": "09d26f59-24d4-41a5-b78f-75291b25eaa7",
+            "secrets_empty": true
+          }
+        ],
+        "control_image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470"
+      },
+      "global_counts": {
+        "active_functions": 0,
+        "instances": 0,
+        "active_calls": 0,
+        "active_deployments": 0,
+        "reserved_bytes": 0,
+        "operations": 0
+      },
+      "invocations": [
+        {
+          "id": "b128e9fd-9268-4e0d-a5cb-b6b684293887",
+          "state": "succeeded",
+          "handler_started": 1,
+          "requested_code_hash": null,
+          "resolved_code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11"
+        },
+        {
+          "id": "c8c9a405-ddb1-430c-8ad2-5bbb03018184",
+          "state": "succeeded",
+          "handler_started": 1,
+          "requested_code_hash": null,
+          "resolved_code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11"
+        },
+        {
+          "id": "c41a8e49-caaf-40ac-84f0-0c19a729cc89",
+          "state": "succeeded",
+          "handler_started": 1,
+          "requested_code_hash": null,
+          "resolved_code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11"
+        },
+        {
+          "id": "d77f6890-5cf6-4919-8a64-35108346ddeb",
+          "state": "succeeded",
+          "handler_started": 1,
+          "requested_code_hash": null,
+          "resolved_code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11"
+        },
+        {
+          "id": "6636fa6d-c4d9-4cca-bc81-b2a6a950e8da",
+          "state": "succeeded",
+          "handler_started": 1,
+          "requested_code_hash": null,
+          "resolved_code_hash": "e50ddc1d19ff918b9f79b41f80caa8f84cbe65e8e22944ef8d2772432225cf11"
+        }
+      ],
+      "migrations": [
+        "001_control.sql",
+        "002_login_limits.sql",
+        "003_deployments.sql",
+        "004_function_operations.sql",
+        "005_execution.sql",
+        "006_storage_commands.sql",
+        "007_function_code_hash.sql",
+        "008_function_versions.sql"
+      ],
+      "services": [
+        {
+          "name": "/serverless-api",
+          "id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+          "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+          "started_at": "2026-11-09T16:53:43.245115994Z",
+          "health": "healthy"
+        },
+        {
+          "name": "/serverless-runtime-reference",
+          "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+          "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+          "started_at": "2026-11-06T15:49:39.578107028Z",
+          "health": "healthy"
+        }
+      ],
+      "guards": [
+        {
+          "unit": "serverless-restore-duplicate-code-80180578c06641bbb7b35e5ce6db98e6",
+          "states": {
+            "timer": {
+              "LoadState": "not-found",
+              "ActiveState": "inactive"
+            },
+            "service": {
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "MainPID": "0"
+            }
+          },
+          "helper_original_birth_absent": true,
+          "restored": {
+            "trigger": "explicit",
+            "candidate_id": "9da4f6fb-218d-4e32-92bb-42e1211fdd68",
+            "helper_pid": 2938498,
+            "helper_birth": "486104654",
+            "permission": {
+              "identity": [
+                129,
+                281521,
+                1001,
+                1001
+              ],
+              "previous_mode": 0,
+              "mode": 448
+            },
+            "restart_performed": false,
+            "completed": true,
+            "control_id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+            "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+            "started_at": "2026-11-09T15:39:30.438265996Z",
+            "reference_unchanged": true,
+            "official_unchanged": true
+          },
+          "restore_sha256": "7b480230a53ea879ab53a5ba0f0d8055fe2c85e8aebc40e6d6c4b3260dcdb5af"
+        },
+        {
+          "unit": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf",
+          "states": {
+            "timer": {
+              "LoadState": "not-found",
+              "ActiveState": "inactive"
+            },
+            "service": {
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "MainPID": "0"
+            }
+          },
+          "helper_original_birth_absent": true,
+          "restored": {
+            "trigger": "independent",
+            "candidate_id": "fd082201-a501-4e4b-9b5f-bdbd36e857d8",
+            "helper_pid": 2940279,
+            "helper_birth": "486109687",
+            "helper_already_absent": true,
+            "permission": {
+              "identity": [
+                129,
+                285968,
+                1001,
+                1001
+              ],
+              "previous_mode": 0,
+              "mode": 448
+            },
+            "restart_performed": true,
+            "completed": true,
+            "control_id": "21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7",
+            "image": "sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470",
+            "started_at": "2026-11-09T16:53:43.245115994Z",
+            "reference_unchanged": true,
+            "official_unchanged": true
+          },
+          "restore_sha256": "7b480230a53ea879ab53a5ba0f0d8055fe2c85e8aebc40e6d6c4b3260dcdb5af"
+        }
+      ],
+      "backend_sha256": {
+        "app/validator.py": "ea4eb2ff5dedec23be52e3e1fa4e17b8e2182065bf001210cbd3cb6a4108f62f",
+        "app/auth.py": "416f8261dff4cf632094d5bd3fe2f956944489623119b4a62241a6afa33d2b13",
+        "app/storage_management.py": "16ccc130423f8d9c5bc75e8e7ff2d65c86b99ce9ec111b4c2efabb9292972ed3",
+        "app/main.py": "9733d7e56c57d72fb26f35e67131f0bd1fd2ab20b36a184865e3f9b780242a94",
+        "app/storage_client.py": "ac7a6897d3638bd109024dcb758b7218521a7e089895fad7f1df6fee9b3be104",
+        "app/invocation_http.py": "9b3064d3d2d37d9aba8eeadf71326d0d8d969b4c3225495f8474c0531849530d",
+        "app/__init__.py": "97b528d99c990688eeacfb6c0eed446e433d16166f9aaf4618b60c39889a12b3",
+        "app/network.py": "4d4a1fb4d9982c768345c1ffeefbb131a4434a8d29a6fd43a63b8c0d3bcf44ba",
+        "app/db.py": "242a5688d94e1464c0b0343368caca6e6dec8bb25de45e63e406f71b7d223552",
+        "app/api.py": "77c85fa34dd5216cd6c83a78049904e46f28727f1c0d50aebef3b08db5a61fec",
+        "app/function_versions.py": "d2df18c725c248cc63fbc833164b9e474ed2e07f72944e8d0695a106f09bb967",
+        "app/catalogue.py": "d24cde9ca3f3068400018b288cb4dba6c074edc00cd978bdb668d431e43002fe",
+        "app/managed_instances.py": "a069c4fd224f2b1d61bc512785c49a78ac87e3233111c69aa269ed75e43855ba",
+        "app/execution.py": "5064920dc6d20f2be449e06aaed017734e900513b4764d09843fb6b8214e3208",
+        "app/deployments.py": "5d913135b5ade6d841acdd777448c2270772c71f4b4911108d562e1f763ffa90",
+        "app/function_operations.py": "d874c45778681a356346985f4f2be56324f5645538df6132e6ce988f696d8345",
+        "app/instances.py": "3697eb4946316588a02bc1db7dada0d372a88b1ac406266b347727793ed3676c",
+        "app/invocation_routes.py": "04beae967b5208401cafbf0f6921b4bbf44f55d6465854ae1a706b2a4ec3289b",
+        "app/models.py": "a3c7f50ecef756d4e624eba693218aa0a9a37bc833df84c583758e5baa53d496",
+        "app/artifacts.py": "5508b2af5c682f896026f90db8a2385d5fb0b2537cc1e993d2eef3fd5e9e5787",
+        "app/invocation_urls.py": "589af8b943ed6956e0fbe6cc8a896b480d933117bdd9d975a7096e710955f488",
+        "app/config.py": "e26ea2b24bb25034f22161be6d899af6e963c18a0c0303a35c6e1f84518e1137",
+        "migrations/003_deployments.sql": "45c9dcd1dacef2c993a94a8d44c41a7a0e9094729445a18b1b0047d3042626ec",
+        "migrations/007_function_code_hash.sql": "f8c80a480c1d22c593198888f80d9b8b2b4bef2853be6f6b1227fea2b9fce412",
+        "migrations/002_login_limits.sql": "4db06c11050e00076d84c08480dc187c58d2c51ea73d58a03ae72452653f23c5",
+        "migrations/001_control.sql": "7fb9947325538a803b7c44e2c8dd524ca78c87daeae44d89f00b894b4b2a4928",
+        "migrations/008_function_versions.sql": "14f0a45b57ca4b6a0f25979d9d459a350f60b0644898f2c4400e3d1374d08423",
+        "migrations/006_storage_commands.sql": "3b426a606595988fc70ba7e9778ab864d7e410a35b0884332d0a9a2d0b828859",
+        "migrations/004_function_operations.sql": "210035e4dc3f6a8b3fe579940e65a1e856143e6438b7db3d94b8c3bed0607c56",
+        "migrations/005_execution.sql": "44c25094f4d8b502db28b7a9c72d7c05fad791f010781fba0eae294f63e07933",
+        "function_code_hash.py": "dd2b64c375639d4ffc35eb508233263122adc8f19f3f56bb15e3cfef6e37d23f"
+      },
+      "public_health": {
+        "serverless.lelabs.tech": {
+          "status": "ok",
+          "component": "control",
+          "version": "0.1.0-dev"
+        },
+        "functions.lelabs.tech": {
+          "status": "ok",
+          "component": "control",
+          "version": "0.1.0-dev"
+        }
+      },
+      "official_sha256": {
+        "/etc/spark/env": "ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d",
+        "/run/spark/secrets": "b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5",
+        "/etc/spark/routes": "a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e"
+      }
+    }
+  },
+  "native_guard_journals": {
+    "completed": true,
+    "guards": [
+      {
+        "unit": "serverless-restore-duplicate-code-80180578c06641bbb7b35e5ce6db98e6",
+        "kind": "normal",
+        "receipt_sha256": "a8961d71ce844b7711cdd6d8941bcaff136b9a1859af8e658523d404e4a1598d",
+        "receipt_mtime_ns": 1794243159659951477,
+        "journal_entries": [],
+        "independent_executions": []
+      },
+      {
+        "unit": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf",
+        "kind": "restart",
+        "receipt_sha256": "4e23d408fcd4e8fcd95415182aab0a96edd2b70f3960b3d60151ded8fe5182e9",
+        "receipt_mtime_ns": 1794243228640513248,
+        "journal_entries": [
+          {
+            "__REALTIME_TIMESTAMP": "1794243223008705",
+            "_PID": "1",
+            "_SYSTEMD_UNIT": "init.scope",
+            "MESSAGE": "Started serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service - [systemd-run] /usr/bin/python3 -I /run/serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf/restore.py /run/serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf independent."
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243223178403",
+            "_PID": "2941384",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243223206104",
+            "_PID": "2941384",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243223212294",
+            "_PID": "2941397",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243223364723",
+            "_PID": "2941397",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243223372406",
+            "_PID": "2941464",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243223402237",
+            "_PID": "2941464",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243223733553",
+            "_PID": "2941477",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243223762631",
+            "_PID": "2941477",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243224070674",
+            "_PID": "2941497",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243224120173",
+            "_PID": "2941497",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243224431330",
+            "_PID": "2941509",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243224461504",
+            "_PID": "2941509",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243224768221",
+            "_PID": "2941538",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243224794001",
+            "_PID": "2941538",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243225101147",
+            "_PID": "2941552",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243225129409",
+            "_PID": "2941552",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243225435808",
+            "_PID": "2941574",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243225461820",
+            "_PID": "2941574",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243225769521",
+            "_PID": "2941587",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243225809388",
+            "_PID": "2941587",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243226115826",
+            "_PID": "2941609",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243226143235",
+            "_PID": "2941609",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243226449825",
+            "_PID": "2941623",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243226487965",
+            "_PID": "2941623",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243226796941",
+            "_PID": "2941644",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243226825644",
+            "_PID": "2941644",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243227214711",
+            "_PID": "2941661",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243227246424",
+            "_PID": "2941661",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243227580338",
+            "_PID": "2941677",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243227606784",
+            "_PID": "2941677",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243227918023",
+            "_PID": "2941697",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243227945279",
+            "_PID": "2941697",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243228257020",
+            "_PID": "2941711",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243228286303",
+            "_PID": "2941711",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243228597427",
+            "_PID": "2941751",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session opened for user spark-docker(uid=1001) by (uid=0)"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243228629251",
+            "_PID": "2941751",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "pam_unix(runuser:session): session closed for user spark-docker"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243228640629",
+            "_PID": "2941380",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "{\"trigger\": \"independent\", \"candidate_id\": \"fd082201-a501-4e4b-9b5f-bdbd36e857d8\", \"helper_pid\": 2940279, \"helper_birth\": \"486109687\", \"helper_already_absent\": true, \"permission\": {\"identity\": [129, 285968, 1001, 1001], \"previous_mode\": 0, \"mode\": 448}, \"restart_performed\": true, \"completed\": true, \"control_id\": \"21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7\", \"image\": \"sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470\", \"started_at\": \"2026-11-09T16:53:43.245115994Z\", \"reference_unchanged\": true, \"official_unchanged\": true}"
+          },
+          {
+            "__REALTIME_TIMESTAMP": "1794243228654514",
+            "_PID": "1",
+            "_SYSTEMD_UNIT": "init.scope",
+            "MESSAGE": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service: Deactivated successfully."
+          }
+        ],
+        "independent_executions": [
+          {
+            "__REALTIME_TIMESTAMP": "1794243228640629",
+            "_PID": "2941380",
+            "_SYSTEMD_UNIT": "serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf.service",
+            "MESSAGE": "{\"trigger\": \"independent\", \"candidate_id\": \"fd082201-a501-4e4b-9b5f-bdbd36e857d8\", \"helper_pid\": 2940279, \"helper_birth\": \"486109687\", \"helper_already_absent\": true, \"permission\": {\"identity\": [129, 285968, 1001, 1001], \"previous_mode\": 0, \"mode\": 448}, \"restart_performed\": true, \"completed\": true, \"control_id\": \"21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7\", \"image\": \"sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470\", \"started_at\": \"2026-11-09T16:53:43.245115994Z\", \"reference_unchanged\": true, \"official_unchanged\": true}"
+          }
+        ]
+      }
+    ]
+  },
+  "native_journal_collection_program": "guards=[{'unit': 'serverless-restore-duplicate-code-80180578c06641bbb7b35e5ce6db98e6', 'kind': 'normal', 'restored': {'trigger': 'explicit', 'candidate_id': '9da4f6fb-218d-4e32-92bb-42e1211fdd68', 'helper_pid': 2938498, 'helper_birth': '486104654', 'permission': {'identity': [129, 281521, 1001, 1001], 'previous_mode': 0, 'mode': 448}, 'restart_performed': False, 'completed': True, 'control_id': '21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7', 'image': 'sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470', 'started_at': '2026-11-09T15:39:30.438265996Z', 'reference_unchanged': True, 'official_unchanged': True}, 'states': {'timer': {'LoadState': 'not-found', 'ActiveState': 'inactive'}, 'service': {'LoadState': 'not-found', 'ActiveState': 'inactive', 'MainPID': '0'}}, 'helper_exit': 0, 'helper_sigkill': None, 'helper_termination': {'event': 'helper-terminated', 'pid': 2938498, 'birth': '486104654', 'signaled': False, 'signal': None, 'exit_code': 0}, 'identity': {'function_id': '09d26f59-24d4-41a5-b78f-75291b25eaa7', 'namespace_id': '288e51b2-a169-42cd-a0dc-f538344f081b', 'candidate_id': '9da4f6fb-218d-4e32-92bb-42e1211fdd68', 'state': '/srv/p2enjoy-serverless/state', 'artifact_identity': [129, 281521, 1001, 1001], 'artifact_mode': 448, 'control': {'id': '21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7', 'image': 'sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470', 'started_at': '2026-11-09T15:39:30.438265996Z', 'running': True, 'health': 'healthy', 'configuration': {'mounts': [{'Type': 'bind', 'Source': '/run/user/1001/docker.sock', 'Destination': '/docker.sock', 'RW': True, 'Propagation': 'rprivate'}, {'Type': 'bind', 'Source': '/etc/spark', 'Destination': '/spark', 'RW': False, 'Propagation': 'rprivate'}, {'Type': 'bind', 'Source': '/srv/p2enjoy-serverless/state', 'Destination': '/state', 'RW': True, 'Propagation': 'rprivate'}, {'Type': 'bind', 'Source': '/srv/p2enjoy-serverless/storage-channel', 'Destination': '/storage-agent', 'RW': False, 'Propagation': 'rprivate'}], 'host': {'NetworkMode': 'host', 'ReadonlyRootfs': True, 'Memory': 536870912, 'MemorySwap': 1073741824, 'NanoCpus': 1000000000, 'PidsLimit': 64, 'CapDrop': ['ALL'], 'SecurityOpt': ['no-new-privileges:true'], 'Tmpfs': {'/tmp': 'size=16m,mode=1777,noexec,nosuid'}}, 'environment_sha256': 'dbe4f3d3fe93e94d1ce6b2c48780c4ec5fe4af1034edd79de6e35ac16a068735', 'command': ['python', '-B', '-m', 'uvicorn', 'app.main:app', '--host', '0.0.0.0', '--port', '18090', '--workers', '1', '--no-access-log', '--no-proxy-headers'], 'entrypoint': None}}, 'reference': {'id': '475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620', 'image': 'sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2', 'started_at': '2026-11-06T15:49:39.578107028Z', 'running': True, 'health': 'healthy', 'configuration': {'mounts': [{'Type': 'volume', 'Source': '/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-cache/_data', 'Destination': '/app/.state/cache', 'RW': True, 'Propagation': ''}, {'Type': 'volume', 'Source': '/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-data/_data', 'Destination': '/app/.state/data', 'RW': True, 'Propagation': ''}], 'host': {'NetworkMode': 'p2enjoy-qualification-dev_default', 'ReadonlyRootfs': True, 'Memory': 402653184, 'MemorySwap': 805306368, 'NanoCpus': 500000000, 'PidsLimit': 96, 'CapDrop': ['ALL'], 'SecurityOpt': ['no-new-privileges:true'], 'Tmpfs': {'/tmp': 'size=32m,mode=1777'}}, 'environment_sha256': 'd2bb120146278b450d0a5b2307b360e5206169582e83b0dacc501f2e5f7d1129', 'command': ['node', 'runner/server.cjs'], 'entrypoint': ['docker-entrypoint.sh']}}, 'docker': ['runuser', '-u', 'spark-docker', '--', 'docker', '--host', 'unix:///run/user/1001/docker.sock'], 'allow_restart': False, 'delay_seconds': 90, 'helper_pid': 2938498, 'helper_birth': '486104654', 'helper_path': '/srv/p2enjoy-serverless/e2e/function-version-duplicate-recovery-operator.py', 'lock_identity': [1048696, 108688], 'restore_sha256': '7b480230a53ea879ab53a5ba0f0d8055fe2c85e8aebc40e6d6c4b3260dcdb5af', 'armed_monotonic': 4861048.051914712, 'official_sha256': {'/etc/spark/env': 'ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d', '/run/spark/secrets': 'b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5', '/etc/spark/routes': 'a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e'}}}, {'unit': 'serverless-restore-duplicate-code-17f8f72a98ae453da1a8d5a87d720fcf', 'kind': 'restart', 'restored': {'trigger': 'independent', 'candidate_id': 'fd082201-a501-4e4b-9b5f-bdbd36e857d8', 'helper_pid': 2940279, 'helper_birth': '486109687', 'helper_already_absent': True, 'permission': {'identity': [129, 285968, 1001, 1001], 'previous_mode': 0, 'mode': 448}, 'restart_performed': True, 'completed': True, 'control_id': '21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7', 'image': 'sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470', 'started_at': '2026-11-09T16:53:43.245115994Z', 'reference_unchanged': True, 'official_unchanged': True}, 'states': {'timer': {'LoadState': 'not-found', 'ActiveState': 'inactive'}, 'service': {'LoadState': 'not-found', 'ActiveState': 'inactive', 'MainPID': '0'}}, 'helper_exit': 1, 'helper_sigkill': {'event': 'helper-sigkill', 'pid': 2940279, 'birth': '486109687'}, 'helper_termination': {'event': 'helper-terminated', 'pid': 2940279, 'birth': '486109687', 'signaled': True, 'signal': 9, 'exit_code': None}, 'identity': {'function_id': '09d26f59-24d4-41a5-b78f-75291b25eaa7', 'namespace_id': '288e51b2-a169-42cd-a0dc-f538344f081b', 'candidate_id': 'fd082201-a501-4e4b-9b5f-bdbd36e857d8', 'state': '/srv/p2enjoy-serverless/state', 'artifact_identity': [129, 285968, 1001, 1001], 'artifact_mode': 448, 'control': {'id': '21545c4ff55c19e4f37cab62711b39beedb5d8b37e290c6debaeec84ed4c79e7', 'image': 'sha256:19cfe884642a26f3e7dc0edb80505ecd11bacc3b07bcd931e68a08439063e470', 'started_at': '2026-11-09T15:39:30.438265996Z', 'running': True, 'health': 'healthy', 'configuration': {'mounts': [{'Type': 'bind', 'Source': '/run/user/1001/docker.sock', 'Destination': '/docker.sock', 'RW': True, 'Propagation': 'rprivate'}, {'Type': 'bind', 'Source': '/etc/spark', 'Destination': '/spark', 'RW': False, 'Propagation': 'rprivate'}, {'Type': 'bind', 'Source': '/srv/p2enjoy-serverless/state', 'Destination': '/state', 'RW': True, 'Propagation': 'rprivate'}, {'Type': 'bind', 'Source': '/srv/p2enjoy-serverless/storage-channel', 'Destination': '/storage-agent', 'RW': False, 'Propagation': 'rprivate'}], 'host': {'NetworkMode': 'host', 'ReadonlyRootfs': True, 'Memory': 536870912, 'MemorySwap': 1073741824, 'NanoCpus': 1000000000, 'PidsLimit': 64, 'CapDrop': ['ALL'], 'SecurityOpt': ['no-new-privileges:true'], 'Tmpfs': {'/tmp': 'size=16m,mode=1777,noexec,nosuid'}}, 'environment_sha256': 'dbe4f3d3fe93e94d1ce6b2c48780c4ec5fe4af1034edd79de6e35ac16a068735', 'command': ['python', '-B', '-m', 'uvicorn', 'app.main:app', '--host', '0.0.0.0', '--port', '18090', '--workers', '1', '--no-access-log', '--no-proxy-headers'], 'entrypoint': None}}, 'reference': {'id': '475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620', 'image': 'sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2', 'started_at': '2026-11-06T15:49:39.578107028Z', 'running': True, 'health': 'healthy', 'configuration': {'mounts': [{'Type': 'volume', 'Source': '/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-cache/_data', 'Destination': '/app/.state/cache', 'RW': True, 'Propagation': ''}, {'Type': 'volume', 'Source': '/home/spark-docker/.local/share/docker/volumes/p2enjoy-qualification-dev_qualification-data/_data', 'Destination': '/app/.state/data', 'RW': True, 'Propagation': ''}], 'host': {'NetworkMode': 'p2enjoy-qualification-dev_default', 'ReadonlyRootfs': True, 'Memory': 402653184, 'MemorySwap': 805306368, 'NanoCpus': 500000000, 'PidsLimit': 96, 'CapDrop': ['ALL'], 'SecurityOpt': ['no-new-privileges:true'], 'Tmpfs': {'/tmp': 'size=32m,mode=1777'}}, 'environment_sha256': 'd2bb120146278b450d0a5b2307b360e5206169582e83b0dacc501f2e5f7d1129', 'command': ['node', 'runner/server.cjs'], 'entrypoint': ['docker-entrypoint.sh']}}, 'docker': ['runuser', '-u', 'spark-docker', '--', 'docker', '--host', 'unix:///run/user/1001/docker.sock'], 'allow_restart': True, 'delay_seconds': 45, 'helper_pid': 2940279, 'helper_birth': '486109687', 'helper_path': '/srv/p2enjoy-serverless/e2e/function-version-duplicate-recovery-operator.py', 'lock_identity': [1048696, 109005], 'restore_sha256': '7b480230a53ea879ab53a5ba0f0d8055fe2c85e8aebc40e6d6c4b3260dcdb5af', 'armed_monotonic': 4861098.299479579, 'official_sha256': {'/etc/spark/env': 'ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d', '/run/spark/secrets': 'b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5', '/etc/spark/routes': 'a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e'}}}]\n\nimport hashlib,json,os,re,socket,subprocess\nfrom pathlib import Path\nassert os.geteuid()==0 and socket.gethostname()=='infra-serverless'\nresults=[]\nfor guard in guards:\n unit=guard['unit'];assert re.fullmatch(r'serverless-restore-duplicate-code-[0-9a-f]{32}',unit)\n folder=Path('/run')/unit;receipt=json.loads((folder/'restored.json').read_text());assert receipt==guard['restored']\n raw=subprocess.check_output(['journalctl','--no-pager','-o','json','-u',unit+'.service'],text=True,timeout=20)\n entries=[];executions=[]\n for line in raw.splitlines():\n  value=json.loads(line);message=value.get('MESSAGE','');entry={k:value[k] for k in ('__REALTIME_TIMESTAMP','_PID','_SYSTEMD_UNIT','MESSAGE') if k in value};entries.append(entry)\n  if isinstance(message,str) and message.startswith('{'):\n   emitted=json.loads(message)\n   if emitted.get('completed'):\n    assert emitted==receipt and value['_SYSTEMD_UNIT']==unit+'.service' and int(value['_PID'])>0;executions.append(entry)\n if guard['kind']=='restart':assert len(executions)==1 and receipt['trigger']=='independent'\n else:assert not executions and receipt['trigger']=='explicit'\n results.append({'unit':unit,'kind':guard['kind'],'receipt_sha256':hashlib.sha256((folder/'restored.json').read_bytes()).hexdigest(),'receipt_mtime_ns':(folder/'restored.json').stat().st_mtime_ns,'journal_entries':entries,'independent_executions':executions})\nprint(json.dumps({'completed':True,'guards':results}))\n",
+  "native_journal_collection_sha256": "4606b1ed76f1745c9cde259e7b017212db4b0518c368bfed2672c450756924e1",
+  "review": {
+    "read_only": true,
+    "blocking_findings_remaining": 0
+  },
+  "limitations": [
+    "No SIGKILL during an unlink: interruption is after publication and failed cleanup.",
+    "External SSH-loss recovery, replaced-inode refusal and guard own-failure paths have static review only.",
+    "No new UI journey or product image: backend and web sources are unchanged.",
+    "Other faults, disturbed migrations and full008 regressions remain in SLS-074."
+  ],
+  "delivery_document_changes": {
+    "docs/FUNCTION_VERSION_DUPLICATE_RECOVERY.md": {
+      "tested_sha256": "86e16b0a5d1869ed6081c25c3dee3b8a97bc51be6827e015d0da41d754d14e9b",
+      "delivered_sha256": "2bd9e677d2567d9ac999083a2a787113a29621090fedbed2d96626946fca6ba7",
+      "reason": "Commands reference and observed result, after the frozen campaign."
+    }
+  },
+  "qualified_executable_sources_unchanged": true,
+  "spark_note_proposals": {
+    "completed": true,
+    "actual_notes_unchanged": true,
+    "adoption_claimed": false,
+    "notes": {
+      "README.md": {
+        "proposal_sha256": "7638ee9ddafb33ceb83d37492d083556cef7fde4ffdb372517718a392ca7445f",
+        "actual_sha256": "68231a5bc5cd7b7a7521e435c67b6d1117fd56fbca3092d9483ea3cbd86d04b3",
+        "proposed": true
+      },
+      "CONTRIBUTORS.md": {
+        "proposal_sha256": "6f9e611ecf44ff439a3cd785a4e6fa289ca6da627a3d075613cd3650d5354479",
+        "actual_sha256": "b6ee5681dca28cced5e57008b8b2002e11680ee0506be045b98458302f324f66",
+        "proposed": true
+      },
+      "INSTALL.md": {
+        "proposal_sha256": "6e0a3fb99f20f89ce24accb01c81d3ad194067a187079ffa9a1f9d5da13f4d7a",
+        "actual_sha256": "8f1506c07b936669f16990f31eb9469fda6724c40ff2c6a8e50f9ace26f52d65",
+        "proposed": true
+      }
+    }
+  }
+}

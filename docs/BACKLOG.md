@@ -810,10 +810,20 @@ L'essai de collecte interrompu et le replay intermédiaire restent distincts,
 sans addition de groupes. Les pertes de réponses de création du banc et l'instant
 du callback de maintenance ne sont pas qualifiés par cette preuve.
 
-Le prochain complément suit [la reprise des paquets dédupliqués](FUNCTION_VERSION_DUPLICATE_RECOVERY.md) :
-commit200 avec nettoyage EACCES réel, responsabilité des octets conservée,
-reprise normale puis SIGKILL du contrôle après commit et restitution/redémarrage
-par garde indépendante après perte du helper. Cette preuve reste à produire.
+La [reprise des paquets dédupliqués](FUNCTION_VERSION_DUPLICATE_RECOVERY.md) est
+[qualifiée](evidence/function-version-duplicate-recovery-dev-2026-11-09.json) :
+quatre groupes sur 271 sources figées, cinq appels et compteurs données/cache1–5.
+Deux commits200 identiques conservent chacun 499 392 512 octets réservés sous
+EACCES du seul répertoire candidat. La première restitution reprend par maintenance
+sans redémarrage. Après le second commit, SIGKILL du contrôle (137), signal9 du
+helper recoupé par waitpid, puis garde indépendante qui restitue et démarre le
+même ID/image/configuration. Le candidat reste published, ses octets sont retirés
+et une nouvelle déduplication réussit. La fonction est purgée physiquement,
+les unités/helpers sont terminés et les compteurs actifs/réservations nuls.
+Les fichiers officiels,31 backends et référence sont conservés. Le journal natif
+recoupe l'exécution indépendante ; aucune coupure pendant unlink, perte SSH ou
+panne propre de la garde n'est déduite de cette preuve. Ces fenêtres, les autres
+pannes, migrations perturbées et la régression complète restent ouvertes.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

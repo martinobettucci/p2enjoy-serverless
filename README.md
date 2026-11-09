@@ -105,6 +105,14 @@ explicite. Quatre appels conservent stable/pilote et compteurs données/cache1�
 Les trois fonctions des essais sont physiquement purgées. Image19cfe884,
 configuration officielle et services restent identiques ; SLS-074 reste en cours.
 
+La [reprise des doublons](docs/evidence/function-version-duplicate-recovery-dev-2026-11-09.json)
+ajoute quatre groupes réels sur 271 sources : publication200 sous EACCES,
+réservation conservée, nettoyage par maintenance, puis SIGKILL après commit et
+restitution/redémarrage indépendants du même contrôle. Cinq appels conservent
+la version et les compteurs données/cache1–5. La fonction est purgée physiquement,
+les deux gardes sont terminées et les ressources actives sont libérées. L'image
+reste19cfe884 ; les autres pannes et la campagne complète restent dans SLS-074.
+
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.
 

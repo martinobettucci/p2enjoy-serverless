@@ -4494,3 +4494,38 @@ Le précédent réel du banc de validation rend255 côté SSH lors d'un SIGKILL
 distant ; ce code transport ne prouve pas le signal. Le nouveau helper sera
 donc supervisé par un parent waitpid, avec signal natif, PID et naissance
 recoupés, avant la première exécution de la faute.
+
+## 2026-11-09 — Reprise du doublon074 qualifiée
+
+La première campagne réelle passe quatre groupes et cinq invocations, zéro
+échec/skip, sur271 sources figées et19cfe884. Deux doublons rendent200 après
+validation réussie tout en gardant chacun499 392 512 octets réservés sous EACCES.
+La permission cible le seul parent candidat, par inode épinglé, et errno13 est
+constaté depuis le contrôle sans capacités. Fichiers du doublon et archive
+canonique restent identiques. Santé503 spécifique et refus pré-admission sont
+recoupés ; S reste invocable pendant la faute. La première restitution reprend
+par maintenance sans nouveau démarrage.
+
+Après le second commit constaté, le contrôle exact est tué en137 ; le candidat
+reste published. Le parent du helper confirme WIFSIGNALED/SIGKILL9 avec PID et
+naissance. La garde45s s'exécute indépendamment, son JSON étant recoupé dans le
+journal natif de son unité ; elle restitue le même inode puis démarre le même
+conteneur21545c4f, image/configuration conservées. Nouveau StartedAt attendu :
+2026-11-09T16:53:43.245115994Z. Le démarrage nettoie le candidat publié et libère
+sa réservation ; un nouveau doublon réutilise S et se nettoie normalement.
+
+Les compteurs data/cache continuent1–5 ; cible, ETag, configuration/secret,
+référence,31 backends et fichiers officiels sont conservés. La fonction et ses
+parents/jeton sont purgés par les API, puis recoupés : artefacts, volumes, canaux,
+conteneurs/réseaux absents, deux helpers/unités terminés, compteurs actifs et
+réservations nuls. La revue a corrigé les chemins externes avant lancement ;
+leur perte SSH, les inodes remplacés et fautes propres de garde restent non
+éprouvés. Aucune coupure pendant unlink ni nouvelle UI n'est revendiquée. Le
+raccord de commande et le résultat du contrat sont postérieurs au gel271 ;
+aucune source exécutable ne change. Preuve :
+evidence/function-version-duplicate-recovery-dev-2026-11-09.json. SLS-074 reste
+en cours pour ses autres pannes/migrations et la régression complète. Aucun remote.
+
+Les trois notes SPARK sont actualisées dans leurs modèles et proposées dans
+leurs voisins .? après contrôle de propriété du contenu précédent. Leurs notes
+réelles restent identiques ; aucune adoption n'est revendiquée.

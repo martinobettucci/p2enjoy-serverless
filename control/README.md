@@ -333,3 +333,16 @@ convergence par hash et relance explicite. Quatre appels préservent stable,
 configuration et données/cache ; les trois fonctions des essais sont purgées.
 Aucune migration, nouvelle variable, modification de service ou reconstruction
 d'image. Commande et limites dans [e2e](../e2e/README.md#capacité-des-uploads--complément-sls-074).
+
+## Reprise des doublons qualifiée
+
+La [preuve074](../docs/evidence/function-version-duplicate-recovery-dev-2026-11-09.json)
+passe quatre groupes sur271 sources, avec cinq appels et données/cache1–5.
+Un paquet réutilisé reste réservé après commit200 si son ouverture est refusée
+pendant le nettoyage. La maintenance reprend après restitution. Le second cycle
+coupe le contrôle après commit ; la garde indépendante restitue puis démarre
+le même conteneur, qui conserve published et termine le nettoyage. Le helper
+SIGKILL est recoupé par waitpid, la garde dans son journal systemd. Une fonction
+purgée physiquement, deux gardes terminées ; même19cfe884/configuration et
+référence, nouveau démarrage du contrôle attendu. Aucune migration ni variable
+ajoutée. Commande et limites dans [e2e](../e2e/README.md#reprise-des-paquets-dédupliqués--complément-sls-074).

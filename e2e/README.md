@@ -1,5 +1,38 @@
 # Qualification de la plateforme
 
+## Reprise des paquets dédupliqués — complément SLS-074
+
+Depuis la racine, après synchronisation dans le seul SPARK DEV et préparation
+de la session SSO réelle, lancer :
+
+```sh
+python3 -B e2e/function-version-duplicate-recovery-run.py
+```
+
+Le client HTTPS `function-version-duplicate-recovery.mjs` utilise son opérateur
+`function-version-duplicate-recovery-operator.py`. Il exige le repos, crée ses
+objets par l'API et publie la fixture originale validator-observation en mode
+success. Le helper observe son vrai marqueur, arme une garde, puis retire les
+permissions du seul répertoire du doublon. Le contrôle doit publier200 et
+conserver réservation/paquet jusqu'au nettoyage. Le premier cycle restitue
+explicitement ; le second interrompt le contrôle après commit puis tue le
+helper. Son parent recoupe waitpid/signal9/PID/naissance ; la garde indépendante
+restitue avant docker start du même conteneur. Contrat :
+[FUNCTION_VERSION_DUPLICATE_RECOVERY](../docs/FUNCTION_VERSION_DUPLICATE_RECOVERY.md).
+
+Les rapports `.local/e2e/function-version-duplicate-recovery.json` et
+`-checkpoint.json` doivent être conservés avant relance ; le pilote refuse
+de les écraser. La [preuve](../docs/evidence/function-version-duplicate-recovery-dev-2026-11-09.json)
+passe quatre groupes, cinq invocations et les compteurs data/cache1–5, sur271
+sources figées et19cfe884. Un dernier doublon se nettoie normalement après reprise.
+Le journal natif recoupe le résultat de la garde systemd ; les31 backends,
+configurations et référence sont conservés. Le contrôle possède un nouveau
+démarrage attendu. Une fonction est physiquement purgée, les deux gardes et leurs
+helpers terminés, les ressources actives/réservations nulles. Les mises à jour
+de résultat du contrat suivent ce gel, sans changement de code exécutable.
+Pertes SSH, inode remplacé, pannes propres de garde et SIGKILL pendant unlink
+restent des preuves distinctes ; aucun nouveau parcours UI n'est revendiqué.
+
 ## Capacité des uploads — complément SLS-074
 
 Depuis la racine du dépôt, après synchronisation des sources dans le seul SPARK

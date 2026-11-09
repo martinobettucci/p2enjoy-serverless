@@ -445,3 +445,15 @@ Les cinq pilotes maintenus de préparation à collecte sont sous e2e, selon
 docs/VALIDATOR_NAMES.md. Les autres pannes et la régression complète008
 restent au backlog. Aucun secret/variable/route nouveau ; ces trois notes
 sont proposées individuellement, sans adoption revendiquée.
+
+
+## Reprise des paquets identiques qualifiée
+
+La preuve docs/evidence/function-version-duplicate-recovery-dev-2026-11-09.json
+passe quatre groupes et cinq appels sur le contrôle008/image19cfe884. Les
+paquets dédupliqués restent réservés sous EACCES jusqu'à leur effacement confirmé.
+La maintenance reprend sans redémarrage ; un second cycle après commit reprend
+par garde indépendante après SIGKILL du contrôle et du helper. Même conteneur
+21545c4f et configuration, nouveau démarrage attendu le2026-11-09 à16:53:43UTC.
+Données/cache1–5 conservés, fonction purgée physiquement et deux gardes terminées.
+SLS-074 reste en cours pour les autres fenêtres et la régression complète.
