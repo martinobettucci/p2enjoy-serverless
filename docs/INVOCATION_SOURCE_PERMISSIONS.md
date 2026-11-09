@@ -151,3 +151,28 @@ La fonction est purgée, son service et son namespace supprimés ; absence physi
 helper/timer/service terminés, même fichier/mode 0640 et configurations/services
 inchangés sont confirmés nativement. Ctime change comme attendu. Le rendu UI,
 les autres classes de source et les branches d’échec de récupération restent ouverts.
+
+## Parcours navigateur du refus de lecture
+
+`invocation-source-ui.mjs` éprouve trois groupes distincts de la preuve API.
+Depuis l’accueil normal, créer namespace/service/fonction par les formulaires,
+puis publier le ZIP original par Code et révisions. Même propriété nonce/scope
+que le client API, une seule fonction et aucune opération active avant faute.
+
+1. Ouvrir Adresses d’appel, observer les deux domaines, copier réellement une
+   adresse et constater son succès ; conserver une capture desktop initiale.
+2. Armer la garde qualifiée avant chmod puis confirmer errno 13. Cliquer
+   Actualiser, attendre sa vraie réponse HTTP 200/source_forbidden, révision
+   inchangée, items/total vides. L’alerte explique « Lecture des domaines refusée. »
+   et propose actualisation/contact administrateur ; aucune ancienne adresse,
+   commande de copie ou réussite ne demeure. Vérifier le focus DOM sur le titre,
+   l’absence de débordement et captures desktop 1440/mobile 390. Les captures
+   ne prouvent pas seules les interactions ni un contour de focus visible.
+3. Restitution explicite et fin des processus/unités, puis Actualiser retrouve
+   les deux domaines. Captures mobile/desktop, copie native et invocation HTTPS
+   du handler Docker à l’URL copiée. Recouper cette invocation et la purge physique.
+
+Le timer de 120 secondes et les règles de conservation/nettoyage sont ceux du
+client API. Le client ne retient ni n’intercepte la requête et ne modifie aucune
+route ou réponse. Cinq JPEG frais sont personnellement relus avant qualification.
+Les autres fautes de source et branches de récupération demeurent distinctes.
