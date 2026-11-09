@@ -45,7 +45,13 @@ Une garde serverless-restore-version-state-UUID est armée avant ptrace. Son
 programme figé conserve ID/image du contrôle, PID/naissance/cgroup du processus,
 identité de la référence et verrou de mutation. Elle peut tuer le seul observateur
 exact, libérer une suspension puis démarrer le contrôle original. Le verrou
-joint toute mutation d'arrêt avant restauration. Préfixes, UUID, propriétaire,
+joint toute mutation d'arrêt avant restauration. Un programme d'arrêt figé hérite
+explicitement de son FD, attend le vrai client Docker borné, puis écrit un reçu
+root avant de le libérer. Si cet arrêt a été demandé, la restauration exige son
+reçu de succès avec Docker137 ; une issue inconnue interdit de redémarrer le
+contrôle et n'est jamais présentée comme stop_mutator_joined. Timer et service
+doivent être inactifs avant la fenêtre suivante, et le helper local est joint
+avec une borne explicite. Préfixes, UUID, propriétaire,
 droits et absence de remplacement sont vérifiés. Aucun fichier officiel, route,
 variable ou secret de cellule n'est modifié.
 

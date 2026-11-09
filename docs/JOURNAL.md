@@ -4890,3 +4890,17 @@ déclaré interrompu. Réutiliser NativeObserver, garder un appelant et restaura
 propres au scope des versions ; aucun script historique modifié. Publier d'abord
 le contrat FUNCTION_VERSION_STATE_TRANSPORT et ce découpage, puis écrire le banc.
 Aucun besoin de nouvelle configuration, route, image produit ou accès externe.
+
+
+## 2026-11-09 — Revue préalable du banc de décisions
+
+Avant essai, la revue relève deux P1 : garde service pas jointe et verrou libéré
+malgré un mutateur d'arrêt potentiellement vivant ; deux P2 : jonction SSH sans
+borne et date initiale de B non comparée après chaque réimport. La première
+restitution attend maintenant timer/service inactifs. Décision pour l'arrêt :
+un petit programme figé conserve le FD hérité jusqu'à jonction du client Docker
+borné et reçu root de succès/137. Le restaurateur refuse le redémarrage si une
+demande d'arrêt n'a pas ce reçu, plutôt que confondre processus terminé et
+mutation réussie. Les attentes locales sont bornées, avec secours indépendant
+scopé ; marqueurs et date initiale sont comparés à l'état initial après réimport.
+Ces corrections du banc précèdent tout essai ; aucun résultat E2E n'est acquis.
