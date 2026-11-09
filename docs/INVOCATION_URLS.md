@@ -657,3 +657,32 @@ en texte UTF-8 avec SHA. Les cinq captures ont leur fenêtre de fraîcheur ; leu
 inspection et la revue finale sont consignées dans la preuve. Ce checkpoint
 ne couvre ni la perte de confirmation propre au nouveau client, ni les fautes
 de source, ni les pages UI/CLI sur six domaines. SLS-066 demeure ouverte.
+
+## Entrée publique de l’alias et SSO réel
+
+Le prochain complément n’administre aucune route. Il utilise le HTTPS réel de
+functions.lelabs.tech et trois groupes sérialisés :
+
+1. Requêtes publiques sans suivre les redirections : accueil et auth/login
+   renvoient 303 vers les destinations fixes de serverless.lelabs.tech ; une
+   entrée console ne conserve pas un paramètre de retour étranger. Aucun cookie
+   de flow/session n’est posé sur l’alias. Son API session reste une API, à 200
+   avec authenticated=false pour ce client anonyme, sans redirection HTML.
+2. Navigateur desktop neuf, entrée par l’accueil de l’alias, page anonyme sur
+   le domaine canonique puis clic Se connecter avec le SSO. Vrai fournisseur,
+   code+PKCE S256 et redirect_uri canonique, saisie privée autorisée, retour au
+   catalogue Fonctions. Vérifier cookie plateforme host-only sécurisé uniquement
+   sur la canonique ; se déconnecter par la confirmation UI et constater la
+   session fermée. Captures accueil, console connectée et retour déconnecté.
+3. Même parcours intégral dans un nouveau contexte mobile 390×844, menu normal
+   pour se déconnecter, trois nouvelles captures et absence de débordement.
+
+Les identifiants sont reçus seulement par stdin privée et gardés en mémoire.
+Ne journaliser ni URL d’autorisation complète, state, nonce, code, cookie,
+jeton ni erreur Playwright pouvant reprendre la saisie. Le rapport conserve
+uniquement les métadonnées publiques et empreintes des deux sessions propres
+pour recouper leur révocation en lecture native. Aucun storageState n’est écrit.
+Si un parcours s’arrête après connexion, fermer sa seule session par l’API normale
+avec son cookie/CSRF en mémoire avant de fermer son contexte ; ne toucher à
+aucune session antérieure. Ne créer aucune fonction ni donnée métier.
+Le résultat de ce complément et ses six captures ne sont pas encore acquis.

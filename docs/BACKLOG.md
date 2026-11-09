@@ -526,6 +526,10 @@ de l’URL copiée. Les trois groupes passent sur 206 sources et les mêmes imag
 une fonction est purgée dans son namespace et les deux gardes sont terminées.
 La [preuve](evidence/invocation-empty-ui-dev-2026-11-09.json) recoupe le vrai
 200/total zéro, les cinq captures et la restauration, avec revue finale.
+La prochaine preuve suit [l’entrée publique de l’alias](INVOCATION_URLS.md#entrée-publique-de-lalias-et-sso-réel) :
+redirections HTTPS et absence de cookie sur l’alias, puis véritables connexions
+et déconnexions UI desktop/mobile depuis son accueil. Trois groupes et six
+captures prévus, sans changement de routes ; ce résultat reste à éprouver.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,

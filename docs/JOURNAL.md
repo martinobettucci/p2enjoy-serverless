@@ -3537,3 +3537,14 @@ Les cinq JPEG sont inspectés personnellement par le relecteur visuel ; le
 principal corrobore les deux états vides. Le focus DOM est testé, sans attribuer
 aux JPEG un contour de focus absent. La capture mobile restaurée est une pleine
 page de 1548 pixels de haut issue du viewport de 844 pixels.
+
+## 2026-11-09 — Contrat de l’entrée publique de l’alias
+
+Après le vide public qualifié, trois groupes doivent éprouver l’alias HTTPS
+et l’origine SSO canonique : redirections/API anonymes, puis connexion et
+déconnexion réelles depuis l’accueil en desktop et mobile. Deux contextes neufs,
+six captures après les étapes visibles, credentials seulement en mémoire sur
+stdin privée. Aucune URL sensible ou erreur de saisie n’est journalisée ; les
+deux seules sessions créées seront fermées et leur révocation recoupée par
+empreintes. Pas de donnée métier ni d’administration d’infrastructure. Décision
+persistée avant le client, succès et captures non présumés.
