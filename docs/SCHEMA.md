@@ -135,6 +135,14 @@ et la cible active ne sont pas fusionnés ni remplacés pendant la migration.
 Les règles de sélection et de conservation sont définies dans
 [FUNCTION_VERSION_EXECUTION](FUNCTION_VERSION_EXECUTION.md#autorité-persistante-et-migration).
 
+La première transition008 vérifie son entrée007 dans la même transaction,
+avant transformation : cible active conservée et appartenant à une fonction
+vivante, références étrangères et cache canonique. Le recalcul reprend la
+reconnaissance stricte de purge007 ; un tombstone légitime conserve son cache
+connu ou inconnu. Une incohérence annule la transition sans réparation implicite.
+Les installations déjà008 ne la rejouent pas. Les [refus et interruptions](FUNCTION_VERSION_MIGRATION_008_RECOVERY.md)
+restent en cours de qualification sur une nouvelle image.
+
 `functions` reçoit `first_published_code_hash` et `first_promoted_at`, nullable
 avant le premier succès correspondant et immuable une fois renseigné. L’historique
 antérieur établit une promotion passée dès qu’une révision existe, même si son

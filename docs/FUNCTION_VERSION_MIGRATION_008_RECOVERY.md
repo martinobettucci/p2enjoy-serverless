@@ -63,7 +63,9 @@ une nouvelle tentative explicite doit appliquer008 normalement.
 Pour l'interruption avant commit, un wrapper natif s'arrête par SIGSTOP puis
 exec le véritable uvicorn de l'image. Un traceur lit les métadonnées du premier
 pwrite64 de sa WAL privée : FD/inode exact, en-tête de frame24 octets, numéro de
-page positif et taille de commit nulle. Il laisse ce syscall s'exécuter, constate
+page positif et taille de commit nulle. Cette frontière précède le marqueur de
+commit WAL ; l'instruction SQL COMMIT peut déjà être en cours. Le thread écrivain
+doit être unique dans cette phase. Il laisse ce syscall s'exécuter, constate
 sa sortie réelle, puis interrompt ce seul conteneur par SIGKILL avant la suite.
 Il ne lit pas les pages métier, ne modifie ni registres, buffers ni résultats.
 Le statut de mort natif et l'ExitCode137 Docker sont recoupés. La base doit

@@ -4549,3 +4549,10 @@ non monté. Le diagnostic de refus historique est absent. Le rapport conserve
 274 sources, les sept/huit marqueurs avant/après et les empreintes des tables ;
 cleanup=true, original et contrôle/référence/fichiers officiels inchangés.
 La correction conditionnelle prévue est donc appliquée à la première transition008.
+
+Le préfixe SQL de garde est écrit, sans changer les champs de008 ni la base
+servie. Il réemploie le calculateur et la corrélation de purge007, et conserve
+les caches de tombstones légitimes quand le calcul retourne une identité inconnue.
+La frontière native à éprouver est précisée avant marqueur de commit WAL ; SQL
+COMMIT peut déjà être en cours. L'image corrigée doit encore être construite et
+qualifiée avant toute bascule DEV.
