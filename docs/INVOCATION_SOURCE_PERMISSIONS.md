@@ -74,3 +74,21 @@ sans anciennes URL/copies, avec focus et captures desktop/mobile. Restituer,
 actualiser puis invoquer l’URL copiée. Purger seulement la fixture possédée après
 fin des gardes, puis recouper le stockage nativement. Source manquante/changée
 et pannes propres du nouvel opérateur restent distinctes. Aucun résultat acquis.
+
+
+## Observation des signaux et conservation des tentatives
+
+La sortie SSH seule, notamment 255, ne prouve pas le signal reçu par le helper.
+Un parent de preuve distant lance le vrai helper comme enfant et observe son
+waitpid avec WUNTRACED : arrêt SIGSTOP puis terminaison SIGKILL, ou sortie normale
+pour release. Recouper le PID observé avec celui de la garde. Le parent ne lit
+pas le protocole stdin du helper, ne modifie aucun fichier et ne rejoue rien.
+Exiger sa fin normale et les statuts noyau attendus dans le client de preuve.
+
+Chaque tentative de restauration produit un fichier de reçu unique immuable,
+y compris si Docker/santé échouent après retour du mode. Une récupération ne
+remplace jamais le reçu initial ; l’observation courante sélectionne la dernière
+tentative terminée par horloge monotone, tout l’historique restant disponible.
+Le programme et le contexte systemd doivent disposer de la capacité DAC d’ouvrir
+la source 000. Le précontrôle transitoire réel confirme cette capacité et la fin
+de son unité ; ce constat ne remplace pas les restaurations à éprouver.

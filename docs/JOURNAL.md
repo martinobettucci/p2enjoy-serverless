@@ -3633,3 +3633,16 @@ refus API/UI. Nanosecondes en chaînes décimales, ctime observée peut changer.
 Une projection concurrente n’est jamais adoptée comme l’ancienne identité.
 L’exploration readonly confirme les précédents et pièges ; aucun succès de
 faute ou récupération n’est déduit du précontrôle.
+
+
+### Revue avant exécution de la garde de permissions
+
+Deux lacunes de preuve sont corrigées avant tout chmod : observer SIGSTOP et
+SIGKILL par waitpid d’un parent réel, sans confondre une sortie SSH avec le
+signal de l’enfant ; conserver chaque tentative de restauration en reçu
+immuable pour qu’une récupération n’efface pas la validation initiale échouée.
+Le parent est un observateur natif, pas un serveur ou résultat substitué.
+Le contrat est complété avant les lignes de code correspondantes.
+Le contexte root systemd est éprouvé readonly dans une unité transitoire :
+CapEff 000001ffffffffff, capacité DAC présente et unité terminée. Aucun mode du
+fichier de routes n’a été modifié. Les trois restitutions restent à qualifier.
