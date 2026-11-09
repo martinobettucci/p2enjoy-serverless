@@ -4869,3 +4869,24 @@ recoupe les17 groupes,23 appels, deux purges et la restitution indépendante.
 Après synchronisation,286 sources correspondent au SPARK : zéro écart exécutable,
 six documents de résultat déclarés seulement. Les contrôles statiques Python/Node,
 JSON, champs sensibles et diff passent ; ils ne sont pas ajoutés aux groupes E2E.
+
+
+## 2026-11-09 — Décisions de version avec réponse perdue
+
+L'unité précédente constitue un progrès vérifié : commit aeed771,17 groupes
+réels et restitution finale conservée. Lecture actuelle : arbre propre, même
+contrôle e661516b/def45648 sain, référence saine, zéro fonction/instance/appel actif.
+L'exploration factory_explorer confirme que promote et disposition décident dans
+une transaction, mais delete attend ensuite clean avant réponse. Les12 groupes
+API008 n'ont pas de coupure de ces réponses ; la CLI promote dispose déjà de
+unknown sans boucle de rejeu. Le précédent SLS031 distingue recv avant traitement
+et send après commit par ptrace en lecture seule avec garde indépendante.
+
+Décision : une unité de neuf groupes pour promotion CLI, archivage et suppression
+HTTPS, deux frontières chacune, plus préparation/garde/nettoyage. Archivage et
+suppression de B courant remplacent par A : le pointeur et l'état sont ainsi
+éprouvés ensemble. Le nettoyage physique entre décision et réponse n'est pas
+déclaré interrompu. Réutiliser NativeObserver, garder un appelant et restaurateur
+propres au scope des versions ; aucun script historique modifié. Publier d'abord
+le contrat FUNCTION_VERSION_STATE_TRANSPORT et ce découpage, puis écrire le banc.
+Aucun besoin de nouvelle configuration, route, image produit ou accès externe.

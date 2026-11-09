@@ -903,6 +903,15 @@ excluent la première matrice interrompue, le ciblé vert3 et la matrice verte a
 le dernier durcissement des diagnostics. La lecture du corps interrompue reste
 une branche distincte non provoquée par le nominal502 à corps vide.
 
+Les [réponses perdues des décisions de version](FUNCTION_VERSION_STATE_TRANSPORT.md)
+sont la prochaine unité décidée : neuf groupes réels prévus, avant traitement et
+après commit/avant réponse pour promote, archive et delete avec remplacement.
+La CLI promote doit retourner unknown sans rejeu, recoupé par ses deux connexions
+HTTPS natives. Les archives/suppressions passent par HTTPS ; un cas éprouve la
+perte de l'observateur et sa garde indépendante. Les16 appels prévus recoupent
+compteurs données/cache et versions réimportées. Aucun résultat encore acquis ;
+SLS-074 reste[~]. La barrière après delete ne prétend pas précéder son nettoyage.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;
