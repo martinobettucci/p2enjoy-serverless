@@ -61,8 +61,11 @@ Une vraie transaction BEGIN IMMEDIATE ouverte sur une autre copie doit faire
 échouer le démarrage au délai SQLite, sans changement logique. Après libération,
 une nouvelle tentative explicite doit appliquer008 normalement.
 
-Pour l'interruption avant commit, un wrapper natif s'arrête par SIGSTOP puis
-exec le véritable uvicorn de l'image. Un traceur lit les métadonnées du premier
+Pour l'interruption avant commit, un wrapper natif PID1 crée un enfant unique
+puis attend sa terminaison. Cet enfant s'arrête réellement par SIGSTOP avant
+d'exécuter le véritable uvicorn de l'image. Le traceur identifie ce seul enfant
+depuis le PID initial Docker, sa parenté, sa naissance et son cgroup ; le PID1
+superviseur n'est pas supposé être l'écrivain SQLite. Un traceur lit les métadonnées du premier
 pwrite64 de sa WAL privée : FD/inode exact, en-tête de frame24 octets, numéro de
 page positif et taille de commit nulle. Cette frontière précède le marqueur de
 commit WAL ; l'instruction SQL COMMIT peut déjà être en cours. Le thread écrivain

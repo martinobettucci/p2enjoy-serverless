@@ -4595,3 +4595,12 @@ traceur exact. Cette prise en charge couvre aussi le wrapper SIGSTOP du second
 démarrage ; elle ne s'arrête pas à la première coupure. Les métadonnées de frame
 WAL sont lues sans toucher aux pages ni aux résultats de syscall. La candidate
 reste non servie pendant cette qualification.
+
+Les deux premiers essais natifs restent en échec : le premier lit Entrypoint
+comme une clé obligatoire alors que Docker l'omet ; il s'arrête avant création.
+Le second ne constate pas l'arrêtT du wrapper avant disparition de son PID,
+sans attachement ni coupure WAL. Les nettoyages sont confirmés et le contrôle
+servi est identique. Le modèle est précisé avant code : PID1 attend un enfant
+unique, l'enfant s'arrête puis exec uvicorn ; sa parenté/naissance/cgroup sont
+recoupés avant trace. La cause exacte de l'absence du premier arrêtT n'est pas
+affirmée rétrospectivement.
