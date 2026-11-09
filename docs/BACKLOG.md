@@ -438,6 +438,13 @@ Statut : [~] — catalogue, console et résultat CLI déployés en DEV ; régres
 complète de 35 campagnes / 467 groupes réussie, qualification multi-domaines
 et résiduelle ouverte.
 
+La source refusée suit le [contrat de permissions réelles](INVOCATION_SOURCE_PERMISSIONS.md) :
+précontrôle natif positif, chmod du seul fichier officiel sans édition du
+contenu, programme figé de restauration et garde systemd avant toute faute.
+Trois preuves sérialisées de garde (release, SIGKILL, SIGSTOP) précèdent les refus
+API/UI. Chmod modifie ctime, qui reste une observation ; aucune identité
+concurrente n’est adoptée. Cette étape est spécifiée, non qualifiée.
+
 Découvrir les routes effectivement affectées à la passerelle dans le SPARK,
 calculer les adresses par fonction et événement HTTP, les afficher et les
 rendre copiables dans la console ainsi que dans le résultat de déploiement.

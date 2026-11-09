@@ -3612,3 +3612,24 @@ Markdown postérieur, les six JPEG/fraîcheurs, les quatre sessions/flows fermé
 et les deux époques d’essais arrêtés. Aucun défaut bloquant ; le corps public
 de déconnexion réel de 41 octets et son SHA concordent avec les deux indicateurs
 vrais. Les limites de rendu et d’observation restent explicites.
+
+
+## 2026-11-09 — Précontrôle et décision du refus réel de lecture des routes
+
+Le tour précédent a produit preuves et commits : progrès, sans attente. Git
+est propre à la reprise, HEAD 9a88f83. SLS-066 poursuit la source réellement
+refusée ; les quatre alias supplémentaires ne sont toujours pas autorisés.
+
+Précontrôle readonly réel : routes régulier root:1001, mode 0640, 779 octets,
+SHA a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e.
+Le contrôle lit les mêmes octets, UID/GID internes zéro, CapEff zéro et montage
+/spark readonly. Image/démarrage concordent avec la preuve précédente.
+
+Décision avant code : chmod du fichier officiel ouvert, sans édition/remplacement,
+garde systemd armée d’abord avec programme figé et SHA privé, verrou global et
+identités strictes. Restitution du mode prioritaire avant vérification Docker,
+puis lecture/santé. Tester release, SIGKILL et SIGSTOP du seul helper avant les
+refus API/UI. Nanosecondes en chaînes décimales, ctime observée peut changer.
+Une projection concurrente n’est jamais adoptée comme l’ancienne identité.
+L’exploration readonly confirme les précédents et pièges ; aucun succès de
+faute ou récupération n’est déduit du précontrôle.

@@ -1,5 +1,10 @@
 # Adresses d’appel des fonctions
 
+La prochaine qualification de source suit le
+[contrat de refus réel de lecture](INVOCATION_SOURCE_PERMISSIONS.md) : permissions
+du fichier officiel seulement, garde indépendante avant chmod et trois preuves
+de restitution avant les parcours API/UI. Aucun résultat de cette étape acquis.
+
 Contrat SLS-066. Catalogue, console, CLI et montage readonly sont déployés sur
 le SPARK DEV. Le [checkpoint](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)
 passe 88 groupes réels sur le seul domaine alors affecté. La
