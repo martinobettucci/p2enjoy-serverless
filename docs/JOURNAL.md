@@ -3646,3 +3646,23 @@ Le contrat est complété avant les lignes de code correspondantes.
 Le contexte root systemd est éprouvé readonly dans une unité transitoire :
 CapEff 000001ffffffffff, capacité DAC présente et unité terminée. Aucun mode du
 fichier de routes n’a été modifié. Les trois restitutions restent à qualifier.
+
+
+## 2026-11-09 — Trois gardes du relevé réel passent
+
+Les trois scénarios terminent à zéro sur 210 sources/images identiques : nouvel
+open EACCES après chmod du fichier officiel, release, SIGKILL et SIGSTOP réels
+du helper. Le parent voit SIGSTOP puis SIGKILL, ou SIGKILL seul, par waitpid ;
+les PID concordent avec les identités de garde. Trois programmes figés et reçus
+immuables sont conservés. La lecture native confirme fin de tous helpers et
+unités, même nom/inode/sha/taille/uid/gid/mtime, mode 0640 et ctime modifiée.
+Les deux HTTPS restent sains ; services, démarrages, routes/env/secrets inchangés.
+Aucune fonction créée. Cette preuve qualifie la garde, pas encore le catalogue
+API ou son rendu UI sous source_forbidden. Les erreurs propres restent ouvertes.
+
+La revue finale recoupe les trois groupes, 210 sources et leurs deux seuls
+contrats Markdown postérieurs, les signaux noyau, trois copies/reçus exacts,
+la restitution des métadonnées attendues et la fin des unités. Aucun défaut
+bloquant. Elle confirme la limite : cette preuve ne qualifie pas encore le
+refus public source_forbidden, son rendu UI ou une récupération après validation
+Docker ratée. Aucun rendu ni manuel applicatif modifié dans ce complément.

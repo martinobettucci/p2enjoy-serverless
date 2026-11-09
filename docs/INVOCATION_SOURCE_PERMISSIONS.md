@@ -4,7 +4,8 @@ Complément de SLS-066. Cible unique : `/etc/spark/routes` du SPARK DEV
 infra-serverless, monté readonly sous `/spark/routes` dans le contrôle.
 Le précontrôle du 9 novembre confirme un fichier régulier root:1001, mode
 0640, 779 octets/SHA identiques depuis le contrôle sans capacités effectives.
-Il ne prouve pas encore un refus ou une restitution.
+Il ne prouve pas à lui seul un refus ou une restitution. Les trois preuves de
+garde ultérieures sont qualifiées ci-dessous ; les parcours API/UI restent ouverts.
 
 ## Périmètre et invariants
 
@@ -73,7 +74,8 @@ fault-active, Actualiser affiche Lecture des domaines refusée et son aide,
 sans anciennes URL/copies, avec focus et captures desktop/mobile. Restituer,
 actualiser puis invoquer l’URL copiée. Purger seulement la fixture possédée après
 fin des gardes, puis recouper le stockage nativement. Source manquante/changée
-et pannes propres du nouvel opérateur restent distinctes. Aucun résultat acquis.
+et pannes propres du nouvel opérateur restent distinctes. Ces parcours API/UI
+ne sont pas encore qualifiés par les trois preuves de garde.
 
 
 ## Observation des signaux et conservation des tentatives
@@ -92,3 +94,16 @@ tentative terminée par horloge monotone, tout l’historique restant disponible
 Le programme et le contexte systemd doivent disposer de la capacité DAC d’ouvrir
 la source 000. Le précontrôle transitoire réel confirme cette capacité et la fin
 de son unité ; ce constat ne remplace pas les restaurations à éprouver.
+
+## Trois gardes réelles qualifiées le 9 novembre
+
+La [preuve](evidence/invocation-source-guard-dev-2026-11-09.json) passe les trois
+cas en série sur 210 sources et les mêmes images. Chaque faute donne un nouvel
+open réel du contrôle à errno 13, puis lecture normale après restitution.
+Le parent observe nativement SIGSTOP puis SIGKILL pour le helper suspendu,
+SIGKILL pour celui qui se tue et sortie zéro pour release ; leurs PID concordent.
+Trois reçus immuables et copies figées sont recoupés ; helpers, timers/services
+terminés, deux HTTPS sains. Nom, inode, contenu, propriétaire/groupe, mode 0640 et
+mtime restent ceux d’origine ; ctime change comme attendu. Services, démarrages,
+routes et fichiers de configuration restent inchangés, aucune fonction créée.
+Le refus public source_forbidden et son rendu UI restent à éprouver ensuite.

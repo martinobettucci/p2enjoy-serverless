@@ -3,7 +3,8 @@
 La prochaine qualification de source suit le
 [contrat de refus réel de lecture](INVOCATION_SOURCE_PERMISSIONS.md) : permissions
 du fichier officiel seulement, garde indépendante avant chmod et trois preuves
-de restitution avant les parcours API/UI. Aucun résultat de cette étape acquis.
+de restitution avant les parcours API/UI. Les trois gardes passent sur le SPARK ;
+le résultat public source_forbidden et son rendu UI restent à éprouver.
 
 Contrat SLS-066. Catalogue, console, CLI et montage readonly sont déployés sur
 le SPARK DEV. Le [checkpoint](evidence/invocation-urls-checkpoint-dev-2026-11-08.json)

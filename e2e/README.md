@@ -77,7 +77,7 @@ Synchroniser le module dans le même répertoire E2E avant le pilote consommateu
 La [preuve d’extraction](../docs/evidence/invocation-native-observer-dev-2026-11-08.json)
 passe `node e2e/invocation-url-transport.mjs` puis `node e2e/service-transport.mjs`
 en série : neuf groupes, 201 sources recoupées, six fonctions purgées et six
-gardes terminées. Le nouveau pilote pause/libération reste à implémenter ;
+gardes terminées. Le pilote pause/libération est qualifié dans son complément ci-dessus ;
 l’ancien mode `catalogue-before` conserve son comportement de destruction.
 
 La garde des cycles de routes reste en qualification. Depuis ce dépôt sur le
@@ -110,8 +110,8 @@ son rejeu. Le premier reçu incomplet reste conservé.
 `verify-installed-alias` est la reprise en lecture seule de ce reçu précis :
 identités, DNS et propriétés matérielles, puis véritables HTTPS des deux noms,
 sans renvoyer les créations. Aucun de ces clients ne constitue un chemin
-d’administration de FORGE. Les retraits/détours et pages sur six domaines
-restent à éprouver séparément ; SLS-066 demeure ouverte.
+d’administration de FORGE. Les retraits/détours sont qualifiés par les cinq cycles ; les pages sur six
+domaines restent à éprouver séparément et SLS-066 demeure ouverte.
 
 Exécuter séparément et en série `node e2e/invocation-urls.mjs` puis
 `node e2e/invocation-urls-ui.mjs`, avec la session SSO réelle préparée selon
@@ -805,3 +805,18 @@ n’écrit aucun cookie ; un échec de fermeture conserve uniquement son cookie
 plateforme propre en 0600 pour reprise, avec nettoyage déclaré incomplet. Cette
 branche et les autres pannes du client restent à éprouver. Aucune route/donnée
 métier/configuration/image changée dans ce complément.
+
+
+## Garde du refus réel de lecture du relevé
+
+`node e2e/invocation-source-guard.mjs` exige SSH root vers le seul SPARK DEV et
+l’installation au repos, sans fonction active. Les trois cas sérialisés passent :
+release, SIGKILL puis SIGSTOP du helper. `invocation-source-permissions.py` arme
+le programme figé systemd avant chmod 000 du seul fichier officiel ; le contrôle
+ouvre réellement sa source avec errno 13. Le parent distant observe les signaux
+par waitpid, la garde restitue le mode d’origine et chaque reçu reste immuable.
+Trois helpers et timers/services terminés, contenu/inode/mtime/mode 0640 restitués
+et deux HTTPS sains sont recoupés dans la
+[preuve](../docs/evidence/invocation-source-guard-dev-2026-11-09.json), sur 210 sources.
+Ctime change comme attendu. Les futurs parcours de catalogue API/UI ne sont pas
+qualifiés par ces trois groupes de garde ; aucune fonction ni route n’est créée.

@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Garde du refus de lecture des routes : trois groupes réels passent sur
+  210 sources, chmod du seul fichier officiel, EACCES du contrôle puis mode
+  0640/lecture/santé restitués après release, SIGKILL ou SIGSTOP du helper.
+  Signaux noyau et reçus immuables recoupés ; aucun contenu ou service modifié.
+
 - Entrée publique de l’alias : trois groupes HTTPS/SSO réels passent sur
   207 sources, avec login/logout desktop/mobile et six captures inspectées.
   Les deux sessions du replay et celles des deux essais de mesure arrêtés sont
@@ -16,7 +21,7 @@
   205 sources, dont SIGKILL du traceur et reprise indépendante. Le contrôle
   conserve son démarrage ; deux fonctions sont purgées et quatre gardes finies.
   Le premier essai arrêté sur un timer déjà collecté et son diagnostic restent
-  distincts du replay. Le parcours UI vide public reste à qualifier.
+  distincts du replay. Le parcours UI vide public est qualifié par son complément ci-dessus.
 
 - Cinq cycles réels des deux routes qualifiés : pagination API, alias vers
   18091 avec reprise explicite puis perte du pilote, retrait/rétablissement
@@ -29,7 +34,7 @@
 - Traceur natif partagé extrait sans changement de son corps : quatre groupes
   transport des adresses et cinq de configuration passent sur 201 sources,
   six fonctions purgées dans deux namespaces et six gardes terminées. Aucun
-  nouveau build applicatif ; le futur pilote de pause/libération reste à écrire.
+  nouveau build applicatif ; le pilote de pause/libération est qualifié dans son complément.
   [Preuve](docs/evidence/invocation-native-observer-dev-2026-11-08.json).
 
 - Trois déclencheurs de garde vérifiés sans perturbation : restauration
@@ -45,8 +50,8 @@
   domaines. Huit groupes API/CLI et six UI passent ; quatre fonctions purgées
   dans deux namespaces, sept captures inspectées. Le premier reçu de déclaration
   interrompu et le départ API sur session expirée restent séparés. La reprise
-  de vérification n’envoie aucune mutation. SLS-066 reste ouverte pour retrait,
-  détours avec garde, source perturbée et pages suivantes sur six domaines.
+  de vérification n’envoie aucune mutation. Les cycles de retrait/détours sont qualifiés ci-dessus ; SLS-066 reste ouverte
+  pour la source perturbée et les pages suivantes sur six domaines.
   [Preuve](docs/evidence/invocation-domains-dev-2026-11-08.json).
 
 - Catalogue global SLS-067 qualifié en DEV : accueil Fonctions, recherche

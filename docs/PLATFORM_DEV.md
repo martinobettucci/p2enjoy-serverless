@@ -745,3 +745,18 @@ Variables : aucun ajout. Secrets : aucun ajout. Routes/DNS : aucun changement.
 Notes : README, CONTRIBUTORS, INSTALL proposés individuellement. Configuration :
 deux fichiers officiels et services inchangés, aucun env/ARG ni build nouveau.
 Aucune donnée métier créée. Source perturbée et six domaines restent ouverts.
+
+
+## Garde de permissions du relevé — 9 novembre
+
+Trois groupes réels passent sur 210 sources et les mêmes images. Chmod 000 du
+seul fichier officiel /etc/spark/routes, nouvel open du contrôle à errno 13,
+release/SIGKILL/SIGSTOP du helper et restitution indépendante sont éprouvés.
+Les signaux sont observés par waitpid ; trois helpers/timers/services terminés
+et reçus immuables sont recoupés. Le fichier garde nom, inode, contenu, uid/gid,
+mtime et mode 0640 ; ctime change. Contrôle/référence et démarrages inchangés.
+[Preuve](evidence/invocation-source-guard-dev-2026-11-09.json).
+Variables : aucun ajout. Secrets : aucun ajout. Routes/DNS : aucun changement.
+Notes : README, CONTRIBUTORS, INSTALL proposés. Configuration : env/secrets
+officiels inchangés, aucun build. Programmes/reçus et verrou de preuve sous /run,
+aucun daemon permanent. Les refus API/UI sont la prochaine étape non qualifiée.

@@ -256,3 +256,17 @@ nominal, donnée métier, route, DNS, variable, secret ou build nouveau.
 Preuve : docs/evidence/invocation-alias-entry-dev-2026-11-09.json.
 Services et fichiers officiels inchangés ; fautes de source, six domaines et
 pannes propres du client restent ouverts. Ces notes sont proposées sans adoption.
+
+
+## Garde des permissions du relevé — trois groupes
+
+Le seul fichier officiel de routes subit chmod 000, puis le contrôle constate
+réellement errno 13. Les trois scénarios release/SIGKILL/SIGSTOP passent sur
+210 sources, mêmes images. Signaux noyau observés, copies figées et reçus
+immuables ; trois helpers/timers/services terminés. Nom/inode/contenu/uid/gid,
+mode 0640 et mtime restitués ; ctime change comme attendu. Deux HTTPS sains et
+services/démarrages inchangés. Preuve :
+docs/evidence/invocation-source-guard-dev-2026-11-09.json.
+Aucun workload, route/DNS, variable, secret ou build nouveau. Reçus/programmes
+de preuve et verrou privés sous /run ; aucun daemon permanent. Les refus API/UI
+restent à qualifier. Ces notes sont proposées, sans adoption revendiquée.

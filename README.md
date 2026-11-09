@@ -97,7 +97,10 @@ qualifient ensuite le retrait/rétablissement de l’alias, les détours vers 18
 la restauration indépendante après SIGKILL du pilote et le catalogue API local
 vide. Sept appels exécutent Docker depuis les URL émises ; les deux routes sont
 rétablies à 18090 TLS et la fonction de campagne est purgée. La source perturbée,
-la pagination UI/CLI sur six domaines restent à éprouver. La [barrière native](docs/evidence/invocation-request-pause-dev-2026-11-09.json)
+la pagination UI/CLI sur six domaines restent à éprouver. La
+[garde de permissions](docs/evidence/invocation-source-guard-dev-2026-11-09.json)
+passe trois groupes réels préalables : EACCES, release, perte ou suspension du
+helper et restitution du même fichier. Le refus API/UI reste distinct. La [barrière native](docs/evidence/invocation-request-pause-dev-2026-11-09.json)
 passe deux groupes supplémentaires : libération du vrai GET HTTPS et reprise
 après SIGKILL du traceur, sans redémarrage du contrôle. Le [parcours UI vide](docs/evidence/invocation-empty-ui-dev-2026-11-09.json)
 passe ensuite trois groupes : vrai GET navigateur conservé pendant changement

@@ -443,7 +443,10 @@ précontrôle natif positif, chmod du seul fichier officiel sans édition du
 contenu, programme figé de restauration et garde systemd avant toute faute.
 Trois preuves sérialisées de garde (release, SIGKILL, SIGSTOP) précèdent les refus
 API/UI. Chmod modifie ctime, qui reste une observation ; aucune identité
-concurrente n’est adoptée. Cette étape est spécifiée, non qualifiée.
+concurrente n’est adoptée. La [garde est qualifiée](evidence/invocation-source-guard-dev-2026-11-09.json) :
+trois groupes réels passent sur 210 sources, avec errno 13, signaux noyau observés,
+mode/lecture/santé restitués et trois helpers/timers/services terminés. Les
+parcours API/UI sous refus et les autres fautes de source restent à éprouver.
 
 Découvrir les routes effectivement affectées à la passerelle dans le SPARK,
 calculer les adresses par fonction et événement HTTP, les afficher et les
@@ -558,7 +561,8 @@ des pannes est arrêté après 51 groupes à cause d’un client suivant la redi
 canonique ; sa correction et la preuve native du Host sont définies dans
 INVOCATION_URLS. Le client de panne corrigé passe 55 groupes ; les huit groupes API
 passent avec le vrai Host en boucle locale, puis dans la suite complète.
-Les preuves de routes publiques restent ouvertes, ainsi que la branche
+Les compléments qualifient les routes publiques, leur état vide UI et l’entrée
+SSO depuis l’alias. Restent les fautes de source, les six domaines et la branche
 d’expiration/perte SSH du build borné, dont seul le parcours nominal est qualifié.
 
 Le [complément de transport](evidence/invocation-url-transport-dev-2026-11-08.json)
