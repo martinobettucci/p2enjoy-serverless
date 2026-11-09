@@ -4469,3 +4469,16 @@ intermédiaire sont conservés sans additionner leurs groupes. Preuve :
 evidence/function-version-upload-capacity-dev-2026-11-09.json. Les pertes de
 réponse du banc, autres pannes, migrations perturbées et régression complète
 restent ouvertes dans SLS-074. Aucun remote Git n'est configuré.
+
+## 2026-11-09 — Reprise du doublon074 décidée
+
+Après la capacité, le prochain banc porte sur les octets réutilisés : le commit
+published doit survivre à un EACCES de son seul répertoire temporaire, avec
+réservation conservée. L'import original déjà chargé fournit la fenêtre réelle,
+sans modifier le validateur. Une garde est armée avant toute permission retirée.
+Le premier cycle restitue explicitement puis observe la maintenance ; le second
+coupe le seul contrôle après le commit constaté, tue le helper et exige la
+restitution puis le redémarrage indépendants du même conteneur. Il ne sera pas
+présenté comme une coupure au milieu d'un unlink. Contrat :
+FUNCTION_VERSION_DUPLICATE_RECOVERY.md. Produit/images/configuration restent
+inchangés attendu ; SLS-074 conserve son périmètre complet. Aucun remote Git.

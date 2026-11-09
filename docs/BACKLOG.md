@@ -810,6 +810,11 @@ L'essai de collecte interrompu et le replay intermédiaire restent distincts,
 sans addition de groupes. Les pertes de réponses de création du banc et l'instant
 du callback de maintenance ne sont pas qualifiés par cette preuve.
 
+Le prochain complément suit [la reprise des paquets dédupliqués](FUNCTION_VERSION_DUPLICATE_RECOVERY.md) :
+commit200 avec nettoyage EACCES réel, responsabilité des octets conservée,
+reprise normale puis SIGKILL du contrôle après commit et restitution/redémarrage
+par garde indépendante après perte du helper. Cette preuve reste à produire.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;
