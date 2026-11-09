@@ -160,5 +160,5 @@ Ce document conserve la qualification006→007. Le complément
 éprouve ensuite22 groupes sur def45648 : sources006/007 et phasesvolumes/artifacts,
 restitution indépendante et refus avant interruption. Il distingue identitéNULL
 et hash connu conservé dans le registre deleted. Les anciens31 groupes ciblés
-ne sont pas réadditionnés au total22. Les refus de corrélation sur copie007
-restent une preuve distincte à exécuter.
+ne sont pas réadditionnés au total22. Les [refus sur copies007](evidence/function-version-purge-correlation008-dev-2026-11-09.json)
+passent depuis42 groupes distincts, sans les ajouter à l’ancien total31.

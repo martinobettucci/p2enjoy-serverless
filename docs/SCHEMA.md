@@ -146,8 +146,10 @@ du même conteneur. L'image def45648f9e7 est servie en DEV ; la bascule conserve
 exactement les17 tables et le schéma déjà008, puis12 groupes API et5 CLI passent.
 Les [purges engagées006/007→008](FUNCTION_VERSION_PURGE_MIGRATION_008.md) passent22
 groupes, avec cachesNULL/connus et registre deleted, puis reçu et octets repris.
-Les refus de corrélation007, le premier hash inconnu suivi d'un connu et les
-pannes propres de garde restent ouverts ; SLS-074 reste en cours.
+Les [refus de corrélation007](evidence/function-version-purge-correlation008-dev-2026-11-09.json)
+passent42 groupes, dont40 rollbacks007 exacts et2 migrations/reprises008 positives.
+Le premier hash inconnu suivi d’un connu et les pannes propres de garde restent
+ouverts ; SLS-074 reste en cours.
 
 `functions` reçoit `first_published_code_hash` et `first_promoted_at`, nullable
 avant le premier succès correspondant et immuable une fois renseigné. L’historique

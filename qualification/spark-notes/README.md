@@ -471,7 +471,7 @@ privé est conservé dans `qualification-history/migration008-deployment-backup-
 Douze groupes API puis cinq CLI passent sur l'image servie,16 appels réussissent
 et un refus attendu est conservé. Deux fonctions purgées physiquement, ressources
 actives nulles, garde d'image désarmée et mutateur joint. Référence et fichiers
-officiels/routes restent identiques. Preuve : docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json. Les pertes propres des gardes, les refus de corrélation007 et autres critères
+officiels/routes restent identiques. Preuve : docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json. Les pertes propres des gardes, les autres interruptions et critères
 restent dans SLS-074. Ces notes sont proposées
 individuellement ; leur adoption n'est pas revendiquée.
 
@@ -490,5 +490,21 @@ Cinq gardes inactives, drivers et ressources temporaires absents, actifs nuls ;
 référence, configuration et routes restent identiques. La source007 est conservée
 sous p2enjoy-control:historical-schema-007 avec attestation root liée à la preuve
 du registre. Aucun changement produit, migration supplémentaire, variable, secret
-ou route. Les refus de corrélation007 et autres critères restent dans SLS-074.
+ou route. Les autres interruptions et critères restent dans SLS-074.
 Notes proposées individuellement, sans adoption revendiquée.
+
+
+## Corrélations de purge007 éprouvées
+
+La preuve docs/evidence/function-version-purge-correlation008-dev-2026-11-09.json
+passe42 groupes sur283 sources :40 refus transactionnels et2 témoins migrés008
+puis redémarrés dans le même conteneur, depuis les vrais backups007 volumes/
+artifacts. Snapshots007 exacts après refus, anciennes colonnes des16 tables et
+registre deleted/hash/dates conservés après succès. Socket absent ensuite :
+preuve de démarrage/migration, sans disponibilité HTTP de la copie.
+
+Backups, WAL vides et SHM conservés ;42 conteneurs/copies retirés. Contrôle
+e661516b/def45648, démarrage18:52:49UTC, référence,17 tables vivantes et fichiers
+officiels inchangés, actifs nuls. Aucun déploiement/configuration/route nouveau.
+Première identité inconnue puis connue, autres interruptions et campagne complète
+restent dans SLS-074. Ces notes restent proposées, sans adoption revendiquée.

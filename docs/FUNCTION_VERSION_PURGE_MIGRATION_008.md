@@ -75,7 +75,7 @@ vide créé avant le refus est retiré uniquement après identité, propriétair
 mode et absence de journal vérifiés. Les services, leurs démarrages, les fichiers
 officiels et les identités des répertoires restent strictement identiques.
 Ces trois groupes portent leur propre époque documentaire et ne transforment
-pas les essais interrompus en succès. Total prévu22, dont19 fenêtres et3 refus.
+pas les essais interrompus en succès. Total prévu22, dont19 groupes de fenêtres et3 refus.
 
 ## Refus de corrélation sur copies007
 
@@ -161,7 +161,7 @@ n'est introduite par ce banc ; aucune nouvelle qualification visuelle n'en déco
 ## Résultats qualifiés
 
 La [preuve](evidence/function-version-purge-migration008-dev-2026-11-09.json)
-retient22 groupes sans échec/skip :19 fenêtres sur280 sources puis3 refus sur281
+retient22 groupes sans échec/skip :19 groupes de fenêtres sur280 sources puis3 refus sur281
 sources. L'attestation007 compare29 backends historiques et conserve tag et reçu
 root. Sa première tentative arrêtée avant reçu sur Path.open(opener) reste
 archivée ; builtinsopen corrige le pilote, sans changement produit ou de service.
@@ -179,5 +179,38 @@ Les trois refus vérifient strictement tables, services et démarrages inchangé
 le premier retire son seul dossier vide créé avant refus. Aucune garde armée.
 Les31 backends et quatre fichiers HTTPS du contrôle restitué sont identiques
 au checkpoint précédent. Aucun nouveau parcours visuel ou changement du manuel.
-Les refus de corrélation sur copies007, la variante premier hash inconnu puis
-connu, les autres pannes et la campagne complète restent ouverts dans SLS-074.
+Les corrélations007 sont qualifiées par le complément ci-dessous ; la variante
+premier hash inconnu puis connu, les autres pannes et la campagne complète restent
+ouvertes dans SLS-074.
+
+
+## Résultats des corrélations007
+
+La [preuve](evidence/function-version-purge-correlation008-dev-2026-11-09.json)
+retient42 groupes sans échec/skip sur283 sources figées. Les deux sauvegardes007
+réelles des phases volumes/artifacts fournissent chacune20 refus et1 témoin.
+Les38 refus UDF et2 CHECK du pointeur sont observés avant transformation008,
+avec snapshots logiques/schéma/tables strictement identiques en007. Le cas du
+pointeur reste explicitement combiné, sous le vrai trigger d'entrée.
+
+Les témoins conservent les anciennes colonnes des16 tables, le hash connu, sa
+version deleted, premières dates/hash et backfills. Après008, chaque même
+conteneur redémarre et conserve exactement cet état. Son échec ultérieur sur
+reconcile_docker faute de socket n'est pas une disponibilité HTTP. La reprise
+publique de la purge est portée par la preuve22 précédente, qui n'est pas
+réadditionnée au total42.
+
+Les archives principales, WAL0 et SHM32768 restent identiques par SHA, taille,
+mode et identité. Aucun sidecar n'est effacé ou checkpointé. Les42 conteneurs
+et leurs copies sont retirés. Le contrôle e661516b/def45648, la référence, leurs
+démarrages, les17 tables vivantes et fichiers officiels restent identiques ;
+aucun bail/montage/intention ni ressource active. Les31 backends et quatre
+fichiers HTTPS correspondent à l'image courante précédente.
+
+Le premier essai artifacts s'était arrêté avant copie/conteneur sur une
+précondition trop stricte d'absence de sidecars. Il reste archivé, zéro groupe
+ajouté ; la lecture immutable avec WAL vide attesté corrige le banc. Une sortie
+avant rapport distant reste désormais explicite dans le checkpoint du lanceur.
+Les pertes/timeouts du banc et nettoyages en erreur ne sont pas déduits de ces
+parcours. Première identité inconnue puis connue, autres interruptions et
+campagne complète restent ouvertes dans SLS-074.

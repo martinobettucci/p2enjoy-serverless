@@ -386,5 +386,26 @@ temporaire par la garde. Les cinq restitutions retrouvent exactement les17 table
 le registre de stockage et5982 fichiers d'artefacts originaux ; les cinq unités
 sont inactives. Le contrôle original e661516b conserve def45648, avec démarrage
 courant2026-11-09T18:52:49.904838248Z. Référence, configuration et routes inchangées,
-ressources actives nulles, aucune nouvelle image produit ni migration. Les refus
-de corrélation sur copies007 et autres pannes restent nécessaires dans SLS-074.
+ressources actives nulles, aucune nouvelle image produit ni migration. Les autres pannes restent nécessaires dans SLS-074 ; les corrélations007 sont
+qualifiées dans le complément ci-dessous.
+
+
+## Refus des corrélations de purge007
+
+La [preuve](../docs/evidence/function-version-purge-correlation008-dev-2026-11-09.json)
+retient42 groupes sur283 sources :20 copies fautées et1 témoin par phase, depuis
+les deux backups007 réellement créés par les fenêtres volumes/artifacts. Chaque
+refus garde exactement schéma, tables et marqueurs007 ;38 diagnostics UDF et2
+CHECK historical_active_version_required sont recoupés. Les deux témoins appliquent008 puis le même
+conteneur redémarre avec un état008 strictement identique. L'échec attendu sur
+le socket absent survient après migration et ne vaut pas succès HTTP.
+
+Les anciennes colonnes des16 tables et le registre deleted/hash connu sont
+recoupés. Les archives principales, WAL vides et SHM sont conservés par SHA,
+taille, identité et droits ; aucun checkpoint ou retrait de sidecar. Les42
+conteneurs de copie sont retirés, aucune ressource de copie ni bail/montage.
+Le contrôle e661516b/def45648 et son démarrage18:52:49UTC, la référence, les17
+tables vivantes et fichiers officiels restent identiques. Aucun déploiement
+produit. Un essai arrêté avant copie sur l'absence supposée de sidecars reste
+archivé séparément. Première identité inconnue puis connue, autres interruptions
+et campagne complète restent ouvertes dans SLS-074.

@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Refus de corrélations de purge007 qualifiés sur l'image008 courante :42 groupes,
+  40 rollbacks007 exacts et2 témoins migrés/rejoués dans le même conteneur. Les
+  anciennes colonnes des16 tables, hashes/dates et registre deleted sont recoupés.
+  Backups/WAL vides/SHM intacts,42 conteneurs/copies retirés,17 tables et services
+  vivants inchangés, actifs nuls. L'essai arrêté avant copie reste distinct.
+  [Preuve](docs/evidence/function-version-purge-correlation008-dev-2026-11-09.json).
+
 - Reprise des purges historiques jusqu'à008 qualifiée :22 groupes réels, dont
   quatre fenêtres006/007→008 en volumes/artifacts, une restitution indépendante
   après perte du pilote et trois refus avant interruption. HashesNULL/connus,

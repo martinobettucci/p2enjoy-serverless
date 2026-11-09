@@ -1,5 +1,33 @@
 # Qualification de la plateforme
 
+## Corrélations007 refusées avant transformation008
+
+Depuis la racine synchronisée, sur le seul SPARK DEV au repos, exécuter en série :
+
+```sh
+python3 -B e2e/function-version-purge-correlation008-run.py artifacts
+python3 -B e2e/function-version-purge-correlation008-run.py volumes
+```
+
+Les deux pilotes refusent d'écraser leurs rapports. Ils sélectionnent les backups
+007 réellement produits par la [preuve précédente](../docs/evidence/function-version-purge-migration008-dev-2026-11-09.json).
+L'opérateur function-version-purge-correlation008.py ouvre l'archive immutable,
+recoupe SHA et tables, conserve le WAL vide et le SHM éventuel. Seules des copies
+privées sont altérées, contraintes actives, puis démarrées avec le vrai uvicorn
+et l'image courante. Aucun socket, port, agent ou volume vivant n'est monté.
+
+Les rapports natifs sont control/function-version-purge-correlation008-PHASE.json ;
+rapports et checkpoints privés sous .local/e2e. Chaque phase compte20 refus et1
+témoin avec relance du même ID. Le [contrat](../docs/FUNCTION_VERSION_PURGE_MIGRATION_008.md#refus-de-corrélation-sur-copies007)
+borne les diagnostics attendus et le cas combiné du pointeur actif. La
+[preuve](../docs/evidence/function-version-purge-correlation008-dev-2026-11-09.json)
+passe42 groupes sur283 sources : rollback007 exact, anciennes colonnes des16
+tables conservées dans les témoins008, reprise identique. La panne de socket
+postérieure attendue n'est pas un refus ni une disponibilité HTTP. Archives et
+sidecars inchangés, copies retirées,17 tables/contrôle/référence/démarrages et
+fichiers officiels vivants identiques ; actifs nuls. L'essai initial arrêté
+avant copie reste distinct. Pas de nouveau parcours UI ni déploiement produit.
+
 ## Purges historiques vers008
 
 Le [contrat](../docs/FUNCTION_VERSION_PURGE_MIGRATION_008.md) réutilise la fenêtre
@@ -39,8 +67,8 @@ HashesNULL/connus, dates/UUID, garde et commande corrélées, registre deleted e
 charge sont recoupés. Les17 tables et5982 artefacts originaux sont conservés,
 référence/configuration/routes inchangées et actifs nuls. Les cinq gardes sont
 inactives. L'essai d'attestation interrompu reste séparé, sans groupe ajouté.
-Aucun parcours UI frais ; refus de corrélation007, première identité inconnue
-suivie d'une connue et autres pannes restent ouverts.
+Aucun parcours UI frais ; les corrélations007 sont qualifiées ci-dessus. Première
+identité inconnue suivie d’une connue et autres pannes restent ouvertes.
 
 ## Refus et reprise de migration008
 
@@ -78,7 +106,7 @@ Les pilotes refusent de les écraser. La reproduction rouge et le premier replay
 neuf restent dans leurs époques distinctes. Le [contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md)
 borne ce qui est qualifié : nominal et désarmement, sans prétendre éprouver les
 pertes propres des gardes. Le complément de purges ci-dessus couvre leurs reprises normales ; premier
-hash inconnu puis connu, refus de corrélation007, autres pannes et campagne
+hash inconnu puis connu, autres pannes et campagne
 complète restent nécessaires. Aucun nouveau parcours UI.
 
 ## Reprise des paquets dédupliqués — complément SLS-074

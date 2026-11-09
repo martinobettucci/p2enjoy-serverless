@@ -129,8 +129,11 @@ HashesNULL/connus, anciens champs, registre deleted, reçus et octets sont recou
 Les quatre purges normales terminent ; la cinquième installation temporaire est
 retirée par restitution gardée. Originaux,17 tables et5982 artefacts sont conservés.
 Même image et même conteneur original, nouveau démarrage attendu ; cinq gardes
-inactives et ressources actives nulles. Les refus de corrélation sur copies007
-et la variante premier hash inconnu puis connu restent à éprouver.
+inactives et ressources actives nulles. Les [corrélations007](docs/evidence/function-version-purge-correlation008-dev-2026-11-09.json)
+passent ensuite42 groupes de composant sur283 sources :40 refus transactionnels
+et2 témoins avec relance du même conteneur. Les backups/sidecars,17 tables et
+services vivants restent identiques, copies retirées. La variante premier hash
+inconnu puis connu et les autres pannes restent à éprouver.
 
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.

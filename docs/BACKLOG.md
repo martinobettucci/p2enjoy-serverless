@@ -843,7 +843,7 @@ fichiers HTTPS recoupés, référence/configuration/routes conservées, actifs n
 Les trois essais WAL et l'essai de bascule arrêté avant garde sont séparés du
 total. Les gardes nominales sont désarmées ; leur déclenchement autonome et leurs
 pannes propres ne sont pas qualifiés par ce parcours. Le jeu ne contient pas
-premier hash inconnu puis connu ; cette variante, les refus de corrélation007,
+premier hash inconnu puis connu ; cette variante,
 les autres pannes et la régression complète restent nécessaires. Statut conservé[~].
 
 Le [replay de purges historiques008](FUNCTION_VERSION_PURGE_MIGRATION_008.md)
@@ -862,16 +862,25 @@ originaux identiques après les cinq restitutions, gardes inactives et ressource
 actives nulles. Le contrôle e661516b conserve def45648 ; démarrage courant
 2026-11-09T18:52:49.904838248Z attendu après restitution. Référence/configuration/
 routes inchangées, nouvelle construction produit inutile, manuel/web inchangés.
-L'essai d'attestation interrompu est séparé, sans groupe ajouté. Les refus de
-corrélation007, première identité inconnue puis connue et autres pannes restent
+L'essai d'attestation interrompu est séparé, sans groupe ajouté. Première identité inconnue puis connue et autres pannes restent
 nécessaires ; statut[~]. Preuve : [purges008](evidence/function-version-purge-migration008-dev-2026-11-09.json).
 
 La matrice de [corrélations007](FUNCTION_VERSION_PURGE_MIGRATION_008.md#refus-de-corrélation-sur-copies007)
-est décidée avant code : vingt altérations de corrélation par phase et un témoin
-positif avec relance du même conteneur, soit42 groupes prévus. Les deux sources
-sont les sauvegardes007 réellement produites par les fenêtres précédentes ;
-aucun état historique n'est fabriqué. Refus transactionnels sur copies isolées,
-contraintes réelles et services vivants inchangés. Campagne encore à exécuter.
+est qualifiée :42 groupes sur283 sources,40 refus et2 témoins depuis les backups
+007 volumes/artifacts réels. Trente-huit refus UDF et deux CHECK actifs conservent
+exactement snapshots logiques/schéma/tables007 ; les contraintes restent actives.
+Les témoins conservent les anciennes colonnes des16 tables, le hash connu, version
+deleted, dates et backfills puis redémarrent le même conteneur sans changement008.
+La panne attendue de socket vient ensuite, sans disponibilité HTTP revendiquée.
+
+Archives principales, WAL0 et SHM32768 conservés par SHA/identité/mode ;42
+conteneurs et copies retirés. Les17 tables du contrôle servi, ID/image/démarrage,
+référence et fichiers officiels restent strictement identiques, actifs nuls.
+L'essai initial arrêté avant copie est séparé, zéro groupe ajouté. Le banc
+historique006 et les22 groupes de reprise publique restent dans leurs époques ;
+aucune addition rétroactive. Les autres interruptions, premier hash inconnu puis
+connu et campagne complète restent nécessaires ; SLS-074 conserve[~].
+Preuve : [corrélations007](evidence/function-version-purge-correlation008-dev-2026-11-09.json).
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

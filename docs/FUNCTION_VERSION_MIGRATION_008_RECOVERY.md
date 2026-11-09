@@ -225,5 +225,11 @@ Le premier recoupement web a demandé /index.html et reçu404 ; le recoupement
 final emploie l'entrée publique canonique /. Ces diagnostics ne sont pas
 transformés en groupes réussis. Les pertes du traceur, déclenchements autonomes
 et pannes propres des deux gardes restent non qualifiés. Les purges engagées sont depuis éprouvées par le complément008. Premier hash
-inconnu puis connu, refus de corrélation007, autres pannes et campagne complète
+inconnu puis connu, autres pannes et campagne complète
 restent ouverts ; SLS-074 reste en cours.
+
+
+Les refus de corrélation007 ont depuis leur [preuve dédiée](evidence/function-version-purge-correlation008-dev-2026-11-09.json) :
+42 groupes sur les vrais backups volumes/artifacts,40 rollbacks exacts et2
+témoins avec restart identique. L'installation servie reste inchangée. Ce
+complément n'est pas ajouté aux27 groupes du présent checkpoint.

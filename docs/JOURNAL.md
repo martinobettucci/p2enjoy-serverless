@@ -4743,3 +4743,24 @@ Décision avant correction : accepter un WAL absent ou vide régulier appartenan
 tailles des bases et sidecars avant/après. Un WAL non vide reste refusé ; ne pas
 effacer ces fichiers pour forcer une précondition. Les tables de la base doivent
 toujours correspondre à la preuve historique protégée.
+
+
+## 2026-11-09 — Corrélations007 qualifiées
+
+Artifacts puis volumes passent21 groupes chacune sur283 sources strictement
+figées :40 refus transactionnels et2 témoins avec relance du même ID. Les38
+diagnostics UDF et2 CHECK actifs attendus sont observés, sans registre008 après
+refus ; snapshots007 exacts. Les témoins conservent anciennes colonnes16 tables,
+hash connu, version deleted, dates et backfills, puis état008 exact au restart.
+Le socket absent après migration reste un diagnostic de composant, pas HTTP.
+
+Le collecteur natif confirme backups et sidecars inchangés, copies/conteneurs
+retirés,17 tables vivantes et services/configuration/démarrages identiques,
+stockage sans bail/montage/pending et actifs nuls. Les31 backends et4 fichiers
+HTTPS sont identiques au checkpoint22 précédent. L'essai interrompu avant copie
+est conservé ; aucun groupe ajouté. Le runner conserve désormais l'absence de
+rapport distant comme issue explicite. SLS-074 reste[~] pour la variante première
+identité inconnue puis connue, autres interruptions et campagne complète.
+Preuve : evidence/function-version-purge-correlation008-dev-2026-11-09.json.
+Manuel/UI inchangés ; aucun nouveau parcours visuel revendiqué. Aucun registre
+d'incohérences présent ni arbitrage externe ; aucun remote Git configuré.
