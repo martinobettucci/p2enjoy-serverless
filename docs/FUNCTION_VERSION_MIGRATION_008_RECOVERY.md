@@ -70,6 +70,10 @@ pwrite64 de sa WAL privée : FD/inode exact, en-tête de frame24 octets, numéro
 page positif et taille de commit nulle. Cette frontière précède le marqueur de
 commit WAL ; l'instruction SQL COMMIT peut déjà être en cours. Le thread écrivain
 doit être unique dans cette phase. Il laisse ce syscall s'exécuter, constate
+La vue /proc/PID/mem est rouverte en lecture seule après l'exec, lorsque
+l'écrivain est arrêté à l'entrée de son écriture WAL ; le descripteur de mémoire
+ouvert avant exec n'est pas réutilisé pour les adresses de la nouvelle image.
+Le traceur laisse ce syscall s'exécuter, constate
 sa sortie réelle, puis interrompt ce seul conteneur par SIGKILL avant la suite.
 Il ne lit pas les pages métier, ne modifie ni registres, buffers ni résultats.
 Le statut de mort natif et l'ExitCode137 Docker sont recoupés. La base doit

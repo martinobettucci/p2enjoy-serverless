@@ -4604,3 +4604,10 @@ servi est identique. Le modèle est précisé avant code : PID1 attend un enfant
 unique, l'enfant s'arrête puis exec uvicorn ; sa parenté/naissance/cgroup sont
 recoupés avant trace. La cause exacte de l'absence du premier arrêtT n'est pas
 affirmée rétrospectivement.
+
+Le troisième essai observe l'enfant arrêté, arme la garde et atteint l'entrée
+d'un pwrite64 de24 octets sur l'inode WAL privé. La lecture de l'en-tête échoue
+avant exécution de cette écriture : la vue mémoire ouverte avant exec renvoie
+une longueur nulle. Le banc doit rouvrir /proc/PID/mem sur la nouvelle image
+pendant l'arrêt natif, avant lecture. Aucune frontière WAL n'est déclarée
+qualifiée ; le conteneur/copie sont retirés et le contrôle servi reste identique.
