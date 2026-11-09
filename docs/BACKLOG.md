@@ -871,7 +871,8 @@ recoupés. Raccordement : SLS-065 et prochain changement de console.
 <a id="sls-076"></a>
 ## SLS-076 — Nom explicite des conteneurs de validation du code
 
-Statut : [ ] — constat de la boucle de reprise074, converti en unité bornée.
+Statut : [~] — correction du nom et campagne réelle en préparation ; aucun
+nouveau déploiement ni résultat acquis à ce stade.
 
 Le pilote `control/app/validator.py:136` nomme actuellement ses conteneurs
 `p2-v-` suivi d’un UUID. Le nom ne décrit pas leur responsabilité pour un
@@ -893,3 +894,8 @@ puis absence du conteneur et de son canal ; éprouver une reprise d’un ancien
 validateur p2-v réel après interruption. Recouper images, aliases/hashes,
 pointeurs, données/cache et configuration conservés. Rejouer les campagnes
 connexes et maintenir les notes du SPARK ; aucun changement de route ni secret.
+Le [plan séquentiel](VALIDATOR_NAMES.md#plan-séquentiel-avant-code) est persisté
+avant code : construction à contrôle actif, stable/données/cache, ancien
+validateur produit par upload réellement interrompu, bascule gardée vers la
+nouvelle image, trois issues d’import observées puis régressions36/12/5.
+La garde utilise exclusivement Compose DEV et les deux fichiers officiels.

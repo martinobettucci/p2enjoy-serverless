@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 2026-11-09 — Reprise par le nommage des validateurs
+
+Le tour précédent qualifie la pagination six domaines et commet ef4a900 ;
+l’arbre est propre et aucun remote n’est configuré. L’unité suivante est076,
+avant extension des régressions008, pour corriger le préfixe p2-v explicitement
+contraire au nommage d’exploitation. Le plan VALIDATOR_NAMES est écrit avant
+code : conserver l’ancienne image, construire à service actif, produire un
+véritable orphelin historique par upload HTTPS et SIGKILL gardé du contrôle,
+puis démarrer d’abord la nouvelle image et inspecter sa reprise. Trois imports
+success/refus/timeout et les régressions36/12/5 suivent. Stable/configuration/
+volumes et images non concernées sont conservés et recoupés. Aucun résultat
+de076 n’est encore acquis ; le périmètre du goal reste intégral.
+
 ## 2026-11-09 — Premier essai DNS arrêté et objet retiré
 
 Les trois prérequis réels de garde passent sans objets sur253 sources. Le premier
