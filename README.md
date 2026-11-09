@@ -451,3 +451,27 @@ anciens p2-v par labels. Les57 groupes réels, cinq appels de conservation et
 les purges des trois fonctions du replay sont recoupés dans la
 [preuve](docs/evidence/validator-names-dev-2026-11-09.json). Ce complément ne
 clôture pas les autres pannes ni la régression complète des versions008.
+
+La [tranche CLI et reprise008](docs/evidence/function-version-cli-recovery-regressions-dev-2026-11-09.json)
+passe 11 groupes réels sur 296 sources figées : sept déploiement/promotion CLI et
+quatre plafonds/reprises. Le prérequis SSO réel reste distinct. Les 68 appels CLI
+recoupent hash, UUID et présence du secret commun ; huit appels de reprise
+comparent aussi marqueur, configuration et empreinte du secret. Vingt codes
+réellement distincts remplissent le plafond ; un doublon est admis sans nouvelle
+version ni changement de cible, un nouveau hash est refusé puis admis après retrait.
+
+Deux SIGKILL du contrôle sont constatés nativement et par Docker137, en réception
+partielle puis avec validateur Docker vivant lié au candidat, à son installation
+et à l'image runtime configurée. La seconde perte du helper déclenche réellement
+la restitution indépendante. Les candidats deviennent failed/control_interrupted,
+sans réservation, configuration temporaire, code, validateur ou canal restant.
+La cible stable, les premiers marqueurs et la configuration privée sont conservés ;
+les uploads suivants restent pilotes jusqu'à promotion explicite.
+
+Les 22 fonctions sont purgées publiquement dans deux namespaces ; 76 invocations
+réussies uniques, dont 27 épinglées, sont recoupées en base. Helpers, timers et
+services des deux gardes sont terminés. Les 5 982 artefacts antérieurs et fichiers
+officiels restent identiques ; contrôle de même CID/image, démarrage attendu
+2026-11-09T22:00:26.747122276Z, référence inchangée. Aucun build produit, changement
+d'UI/manuel ni nouvelle preuve visuelle. Les autres clients, les pannes propres
+du banc et la régression complète008 restent dans SLS-074, toujours [~].

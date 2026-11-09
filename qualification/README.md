@@ -186,3 +186,14 @@ Les scénarios restent séquentiels. Les scénarios de contention et de saturati
 attendent leur fin et nettoient leurs ressources. Le relais propage les vrais
 statuts 500, 504 et 429 de ses pairs. L'admission est observée via la santé.
 Aucun serveur de substitution n'est utilisé.
+
+## Fixture originale des reprises de publication
+
+`artifacts/publication-recovery.cjs` renvoie le marqueur du paquet, l'UUID de
+requête, le libellé effectif et le SHA du secret synthétique. Un délai d'import
+Node optionnel de 8 s, borné par le module, permet d'observer un vrai validateur
+vivant. Le client empaquette ce module avec un marqueur différent par code et
+256 Kio aléatoires pour la réception partielle. Il passe seulement par les API
+et Docker. Huit invocations, les plafonds et deux reprises passent dans la
+[tranche dédiée](../docs/evidence/function-version-cli-recovery-regressions-dev-2026-11-09.json),
+avec dix fonctions purgées et garde indépendante après perte réelle du helper.

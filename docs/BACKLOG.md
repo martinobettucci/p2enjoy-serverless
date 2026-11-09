@@ -968,14 +968,30 @@ Les anciens rapports restent préservés par SHA. Aucun build produit ni nouveau
 parcours visuel ; les autres clients et la régression complète restent dans
 SLS-074, toujours[~].
 
-La [tranche CLI et reprise008](FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md) est
-spécifiée avant code : sept groupes CLI et quatre de plafonds/reprise, avec76
-invocations prévues et22 fonctions purgées. Les onze fonctions paginées passent
-par publication/promotion séparées ; vingt hashes distincts, doublon au plafond
-et nouveau contenu refusé remplacent l'ancien comptage d'UUID. Réception partielle
-et validation Docker sont interrompues sous garde liée au CID ; la seconde
-restitution est indépendante après perte du helper. Aucun résultat encore acquis.
-Les autres clients, l'expiration et la suite complète restent[~].
+La [tranche CLI et reprise008](evidence/function-version-cli-recovery-regressions-dev-2026-11-09.json)
+passe 11 groupes réels sur 296 sources figées : sept déploiement/promotion CLI et
+quatre plafonds/reprises. Le prérequis SSO réel reste distinct. Les 68 appels CLI
+recoupent hash, UUID et présence du secret commun ; huit appels de reprise
+comparent aussi marqueur, configuration et empreinte du secret. Vingt codes
+réellement distincts remplissent le plafond ; un doublon est admis sans nouvelle
+version ni changement de cible, un nouveau hash est refusé puis admis après retrait.
+
+Deux SIGKILL du contrôle sont constatés nativement et par Docker137, en réception
+partielle puis avec validateur Docker vivant lié au candidat, à son installation
+et à l'image runtime configurée. La seconde perte du helper déclenche réellement
+la restitution indépendante. Les candidats deviennent failed/control_interrupted,
+sans réservation, configuration temporaire, code, validateur ou canal restant.
+La cible stable, les premiers marqueurs et la configuration privée sont conservés ;
+les uploads suivants restent pilotes jusqu'à promotion explicite.
+
+Les 22 fonctions sont purgées publiquement dans deux namespaces ; 76 invocations
+réussies uniques, dont 27 épinglées, sont recoupées en base. Helpers, timers et
+services des deux gardes sont terminés. Les 5 982 artefacts antérieurs et fichiers
+officiels restent identiques ; contrôle de même CID/image, démarrage attendu
+2026-11-09T22:00:26.747122276Z, référence inchangée. Aucun build produit, changement
+d'UI/manuel ni nouvelle preuve visuelle. Les autres clients, les pannes propres
+du banc et la régression complète008 restent dans SLS-074, toujours [~].
+
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

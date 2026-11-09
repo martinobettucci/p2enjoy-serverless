@@ -128,3 +128,15 @@ explicite sont déployés en DEV, qualifiés depuis le poste dans le checkpoint0
 et dans les deux images par son complément CLI Docker.
 Le filtre Docker autorise les onze seuls fichiers nécessaires aux deux stages,
 prouvés par COPY du contexte complet sans ouvrir les sauvegardes privées.
+
+## Replay008 des onze fonctions paginées
+
+Les sept groupes de `node e2e/adapter-deploy.mjs` passent dans la
+[tranche CLI/reprise](../docs/evidence/function-version-cli-recovery-regressions-dev-2026-11-09.json).
+Soixante-huit appels réels encadrent publication, promotion Create/Update,
+déduplication après résultat partiel et réparation du même brouillon. Les onze
+hashes B n'altèrent pas la cible A avant promotion ; les UUID sont conservés.
+Douze fonctions sont complètement purgées par l'API publique. Le secret commun
+est contrôlé par présence dans Echo ; aucune vérification de valeur par empreinte
+n'est attribuée à cette fixture. Le pilote maintenu et son entrée SSO privée sont
+documentés dans e2e/README.md ; aucun nouveau comportement CLI n'est implémenté.

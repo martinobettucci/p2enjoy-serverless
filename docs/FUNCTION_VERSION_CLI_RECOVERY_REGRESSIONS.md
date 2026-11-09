@@ -2,7 +2,7 @@
 
 Suite de [SLS-074](BACKLOG.md#sls-074), après la
 [première tranche](FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md). Statut :
-spécifiée avant code, pas encore qualifiée. Conserver les sept groupes
+qualifiée par la campagne DEV de onze groupes ci-dessous. Conserver les sept groupes
 adapter-deploy et les quatre groupes publication-recovery, soit onze groupes.
 Aucun changement produit prévu avant les résultats du banc.
 
@@ -104,3 +104,38 @@ du nominal. Expiration réelle, marge disque, autres clients API/stockage et
 régression complète de console restent dans SLS-074. Aucun nouveau parcours visuel
 ni changement du manuel n'est prévu ; toute correction produit découverte est
 reproduite et spécifiée avant code. Cette tranche ne clôture pas le projet global.
+
+## Résultat qualifié sur DEV
+
+La [tranche CLI et reprise008](evidence/function-version-cli-recovery-regressions-dev-2026-11-09.json)
+passe 11 groupes réels sur 296 sources figées : sept déploiement/promotion CLI et
+quatre plafonds/reprises. Le prérequis SSO réel reste distinct. Les 68 appels CLI
+recoupent hash, UUID et présence du secret commun ; huit appels de reprise
+comparent aussi marqueur, configuration et empreinte du secret. Vingt codes
+réellement distincts remplissent le plafond ; un doublon est admis sans nouvelle
+version ni changement de cible, un nouveau hash est refusé puis admis après retrait.
+
+Deux SIGKILL du contrôle sont constatés nativement et par Docker137, en réception
+partielle puis avec validateur Docker vivant lié au candidat, à son installation
+et à l'image runtime configurée. La seconde perte du helper déclenche réellement
+la restitution indépendante. Les candidats deviennent failed/control_interrupted,
+sans réservation, configuration temporaire, code, validateur ou canal restant.
+La cible stable, les premiers marqueurs et la configuration privée sont conservés ;
+les uploads suivants restent pilotes jusqu'à promotion explicite.
+
+Les 22 fonctions sont purgées publiquement dans deux namespaces ; 76 invocations
+réussies uniques, dont 27 épinglées, sont recoupées en base. Helpers, timers et
+services des deux gardes sont terminés. Les 5 982 artefacts antérieurs et fichiers
+officiels restent identiques ; contrôle de même CID/image, démarrage attendu
+2026-11-09T22:00:26.747122276Z, référence inchangée. Aucun build produit, changement
+d'UI/manuel ni nouvelle preuve visuelle. Les autres clients, les pannes propres
+du banc et la régression complète008 restent dans SLS-074, toujours [~].
+
+Le pilote maintenu est e2e/function-version-cli-recovery-regressions.py. Son entrée
+SSO privée alimente uniquement le prérequis normal ; les deux campagnes s'exécutent
+en série. Leurs anciens rapports sont archivés avec SHA, sans copies de cookies.
+Les fenêtres et reçus root des deux unités sont recoupés indépendamment par la
+collecte finale. Les trois notes SPARK restent des propositions, sans adoption.
+Les changements documentaires de livraison ont une époque séparée ; les sources
+exécutables qualifiées ne changent pas. Aucun échec de cette campagne à ajouter
+au total, ni nouveau succès attribué aux branches propres non provoquées.

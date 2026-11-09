@@ -1328,3 +1328,44 @@ Le parcours UI courant est node e2e/function-version-registry-ui.mjs, après
 préparation SSO normale. La suite commune reste
 python3 -B e2e/execution-suite.py --scope publication. Les assertions de schéma
 attendent 001–007 ; le banc storage-legacy conserve son vrai départ 001–003.
+
+## Régression008 CLI, capacité et reprises
+
+Depuis la racine, lancer `python3 -B e2e/function-version-cli-recovery-regressions.py`.
+Le lecteur terminal demande le JSON username/password sans écho ; le secret
+n'est ni argument, ni variable, ni fichier. Le prérequis SSO réel crée deux
+sessions plateforme privées, distinctes des onze groupes. Ne lancer aucun autre
+banc en même temps. Le pilote exige l'installation DEV au repos et conserve les
+anciens rapports avant le replay. Il refuse une réutilisation de son rapport
+brut sans archivage explicite.
+
+La [tranche CLI et reprise008](../docs/evidence/function-version-cli-recovery-regressions-dev-2026-11-09.json)
+passe 11 groupes réels sur 296 sources figées : sept déploiement/promotion CLI et
+quatre plafonds/reprises. Le prérequis SSO réel reste distinct. Les 68 appels CLI
+recoupent hash, UUID et présence du secret commun ; huit appels de reprise
+comparent aussi marqueur, configuration et empreinte du secret. Vingt codes
+réellement distincts remplissent le plafond ; un doublon est admis sans nouvelle
+version ni changement de cible, un nouveau hash est refusé puis admis après retrait.
+
+Deux SIGKILL du contrôle sont constatés nativement et par Docker137, en réception
+partielle puis avec validateur Docker vivant lié au candidat, à son installation
+et à l'image runtime configurée. La seconde perte du helper déclenche réellement
+la restitution indépendante. Les candidats deviennent failed/control_interrupted,
+sans réservation, configuration temporaire, code, validateur ou canal restant.
+La cible stable, les premiers marqueurs et la configuration privée sont conservés ;
+les uploads suivants restent pilotes jusqu'à promotion explicite.
+
+Les 22 fonctions sont purgées publiquement dans deux namespaces ; 76 invocations
+réussies uniques, dont 27 épinglées, sont recoupées en base. Helpers, timers et
+services des deux gardes sont terminés. Les 5 982 artefacts antérieurs et fichiers
+officiels restent identiques ; contrôle de même CID/image, démarrage attendu
+2026-11-09T22:00:26.747122276Z, référence inchangée. Aucun build produit, changement
+d'UI/manuel ni nouvelle preuve visuelle. Les autres clients, les pannes propres
+du banc et la régression complète008 restent dans SLS-074, toujours [~].
+
+L'opérateur publication-recovery-operator.py est limité au namespace exact et
+aux UUID fonction/candidat ; il arme sa garde avant envoi, lie l'arrêt au CID et
+joint son mutateur. Une restitution incertaine conserve les fixtures. Les deux
+fenêtres physiques ne qualifient pas toutes les pannes propres du banc. Les
+inventaires pre_purge_revisions sont pris avant effacement et ne désignent pas
+des archives conservées après la purge publique.
