@@ -59,6 +59,14 @@ contrôle. Les résultats incertains sont relus, jamais convertis en succès
 automatique. La garde doit être désarmée et sa fin confirmée après reprise.
 L’interruption sous ce garde-fou vise un seul contrôle008 DEV sans migration.
 
+Un échec d’inspection Docker, y compris une absence inattendue, n’autorise
+aucune recréation. L’ancien ID doit être arrêté en137 avec son StartedAt initial.
+Une intention synchronisée précède l’unique commande Compose. Si son résultat
+est incertain mais la nouvelle image est déjà présente, la reprise attend la
+santé de ce même ID ; elle ne le recrée pas. Montages, réseau, limites,
+commande et empreinte d’environnement effectif sont comparés avant/après.
+L’environnement lui-même n’est jamais imprimé ni conservé dans la preuve.
+
 Les réponses d’upload interrompues restent des issues de transport, corrélées
 ensuite au candidat durable. Un échec conserve ses reçus et déclenche le suivi
 de remise en service avant le nettoyage des objets. Le nominal de cette garde
