@@ -67,3 +67,9 @@ répond au build réellement refusé sur une sauvegarde root privée, qui reste 
 Les preuves de contexte/build sont des prérequis, distincts des groupes fonctionnels.
 Le rapport natif et ses fichiers temporaires vivent sous control, répertoire
 de travail du compte opérateur ; ne pas supposer la racine du dépôt inscriptible.
+
+Les canaux Unix utilisent un répertoire temporaire propre `code-hash-ipc-`
+directement sous control : le chemin complet, y compris le sous-répertoire du
+pilote et control.sock, doit tenir dans la borne native. Leur suivi/nettoyage
+reste indépendant du dossier de code. Le rapport conserve les codes d’erreur
+du diagnostic et distingue résultat fonctionnel de nettoyage confirmé.

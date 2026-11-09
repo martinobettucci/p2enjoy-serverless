@@ -22,6 +22,14 @@ ses précontrôles de script arrêtés restent distincts. Le dépôt distant app
 à root et n’est pas inscriptible par l’opérateur : rapport et temporaires du
 client natif sont placés dans control avant son premier essai fonctionnel.
 
+Premier essai fonctionnel arrêté dans le premier groupe : hash packager/extracteur
+identique, mais aucune invocation réussie. Reproduction séparée : la CLI réelle
+retourne socket_path_limit et confirme son nettoyage sans conteneur. Le chemin
+imbriqué du canal dépasse la borne Unix. Décision : canal court propre sous
+control, suivi séparément du code ; conserver les codes de diagnostic et le
+résultat du nettoyage même après échec. L’essai et ses 222 sources restent
+archivés séparément avant correction et replay intégral des sept groupes.
+
 ## 2026-11-08 — Qualification transversale du stockage public
 
 Le replay sur les sources fonctionnelles ae03204 termine à zéro : 29 campagnes,
