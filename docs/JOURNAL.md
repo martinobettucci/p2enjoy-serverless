@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 2026-11-09 — Première faute réelle restituée ; corriger la lecture du diagnostic
+
+Le premier lancement s’arrête sans objet sur une session SSO expirée, puis le
+SSO réel renouvelle ses deux sessions privées. Le lancement suivant atteint
+la faute socket et ses réponses422/503, mais le client lit detail au lieu du
+champ error établi par main.http_error. Aucun groupe n’est validé. Le socket
+est restitué par inode épinglé, sa garde est inactive, la fonction et ses parents
+sont purgés ; le rapport et le gel248 restent conservés séparément.
+
+La correction conserve les diagnostics attendus et lit leur champ public réel.
+Les reçus du helper gardent aussi PID/naissance pour recouper sa disparition
+après restitution, sans chercher d’autres processus. Aucun code produit ne change.
+
 ## 2026-11-09 — Revue avant faute : épingler l’inode des permissions
 
 La revue trouve une fenêtre lstat→chmod du helper, pour la mise en faute et la
