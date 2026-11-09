@@ -3548,3 +3548,10 @@ stdin privée. Aucune URL sensible ou erreur de saisie n’est journalisée ; le
 deux seules sessions créées seront fermées et leur révocation recoupée par
 empreintes. Pas de donnée métier ni d’administration d’infrastructure. Décision
 persistée avant le client, succès et captures non présumés.
+
+Précision avant implémentation : le parcours nominal n’écrit aucun cookie.
+Si la déconnexion échoue, conserver uniquement le cookie plateforme propre
+dans un fichier privé 0600 hors Git, suivant le mécanisme de reprise déjà utilisé
+par le banc ; ne jamais y mettre le fournisseur ou les identifiants. Cela rend
+possible la fermeture ultérieure de la seule session créée, après perte du
+contexte navigateur. Le rapport reste incomplet tant qu’elle n’est pas confirmée.

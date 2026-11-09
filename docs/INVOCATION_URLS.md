@@ -681,7 +681,12 @@ Les identifiants sont reçus seulement par stdin privée et gardés en mémoire.
 Ne journaliser ni URL d’autorisation complète, state, nonce, code, cookie,
 jeton ni erreur Playwright pouvant reprendre la saisie. Le rapport conserve
 uniquement les métadonnées publiques et empreintes des deux sessions propres
-pour recouper leur révocation en lecture native. Aucun storageState n’est écrit.
+pour recouper leur révocation en lecture native. Aucun storageState fournisseur
+n’est écrit ; le parcours nominal n’écrit aucun cookie. Si une fermeture de
+session échoue, conserver uniquement son cookie plateforme canonique dans un
+fichier privé 0600 de reprise, hors Git, puis signaler le nettoyage incomplet.
+Ce fichier permet de fermer cette seule session par l’API normale, puis est
+supprimé après confirmation ; aucun cookie fournisseur n’y entre.
 Si un parcours s’arrête après connexion, fermer sa seule session par l’API normale
 avec son cookie/CSRF en mémoire avant de fermer son contexte ; ne toucher à
 aucune session antérieure. Ne créer aucune fonction ni donnée métier.
