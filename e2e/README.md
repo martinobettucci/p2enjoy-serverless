@@ -781,3 +781,27 @@ sont recoupés dans la [preuve](../docs/evidence/invocation-empty-ui-dev-2026-11
 namespace, helper et garde de routes terminés. Une mutation non confirmée
 conserve la fixture même après restauration de secours. Cette branche propre
 du client reste à éprouver ; aucun résultat réseau n’est substitué.
+
+
+## Entrée publique de l’alias et vrai SSO
+
+`node e2e/invocation-alias-entry.mjs` exige un JSON username/password sur stdin
+privée. Le lecteur du banc masque l’écho et transmet ce JSON au seul processus
+enfant ; depuis un terminal, sans mettre les valeurs dans la commande :
+
+```sh
+python3 -B -c 'import runpy,subprocess; r=runpy.run_path("e2e/execution-suite.py"); c=r["private_credentials"](); raise SystemExit(subprocess.run(["node","e2e/invocation-alias-entry.mjs"],input=c).returncode)'
+```
+
+Trois groupes passent : redirections HTTPS/API anonymes de l’alias, puis vrais
+login/logout UI desktop et mobile depuis son accueil. Le POST de déconnexion
+est observé sans interception via CDP durable, pour conserver son vrai corps
+après navigation. Les assertions signed_out/sso_signed_out restent exigées.
+[Preuve](../docs/evidence/invocation-alias-entry-dev-2026-11-09.json) : 207 sources
+figées, six JPEG inspectés et deux sessions/flows fermés ; deux essais arrêtés
+avec deux autres sessions fermées sont conservés séparément. Aucun cookie
+fournisseur, identifiant ou URL sensible n’est enregistré. Le parcours nominal
+n’écrit aucun cookie ; un échec de fermeture conserve uniquement son cookie
+plateforme propre en 0600 pour reprise, avec nettoyage déclaré incomplet. Cette
+branche et les autres pannes du client restent à éprouver. Aucune route/donnée
+métier/configuration/image changée dans ce complément.

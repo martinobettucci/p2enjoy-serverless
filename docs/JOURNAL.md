@@ -3586,3 +3586,29 @@ protocole local livré avec Playwright décrivent la conservation hors renderer
 pour survivre aux navigations. Aucun résultat ni transport n’est substitué ;
 les assertions signed_out/sso_signed_out, état anonyme et cookies supprimés
 restent exigées. Ne recueillir aucun corps de saisie, en-tête secret ou URL OIDC.
+
+
+## 2026-11-09 — Trois groupes alias/SSO réels passent avec observation durable
+
+Le replay passe les redirections/API anonymes et les deux parcours UI desktop
+et mobile depuis l’alias. Vrai fournisseur, code/PKCE S256, retour canonique,
+cookie plateforme sécurisé seulement sur la canonique. Le POST de déconnexion
+est le même que celui du clic UI ; CDP durable lit son vrai corps terminé à 200
+avec signed_out et sso_signed_out vrais. Aucun résultat n’est remplacé ou rejoué.
+Les 207 sources et images restent identiques. Six JPEG sont inspectés, quatre
+SHA distincts : les paires accueil/retour sont identiques, sans réemploi des
+essais précédents. Le principal corrobore les deux captures mobiles connecté/
+déconnecté. La pleine page connectée mobile mesure 1102 pixels, viewport 844.
+
+La lecture native confirme les deux sessions et flows du replay absents. Les
+deux autres des essais arrêtés sont également fermés, recoupés séparément ;
+aucun succès n’est reconstruit pour ces essais. Aucun fichier de reprise nominal,
+fonction, route, DNS, variable, secret ou build nouveau. Services et configuration
+officielle restent inchangés. Les erreurs propres du client, de son tampon CDP,
+les fautes de source et les pages UI/CLI sur six domaines restent à éprouver.
+
+La revue finale recoupe les trois groupes, les 207 sources et leur seul contrat
+Markdown postérieur, les six JPEG/fraîcheurs, les quatre sessions/flows fermés
+et les deux époques d’essais arrêtés. Aucun défaut bloquant ; le corps public
+de déconnexion réel de 41 octets et son SHA concordent avec les deux indicateurs
+vrais. Les limites de rendu et d’observation restent explicites.

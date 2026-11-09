@@ -102,7 +102,10 @@ passe deux groupes supplémentaires : libération du vrai GET HTTPS et reprise
 après SIGKILL du traceur, sans redémarrage du contrôle. Le [parcours UI vide](docs/evidence/invocation-empty-ui-dev-2026-11-09.json)
 passe ensuite trois groupes : vrai GET navigateur conservé pendant changement
 des routes, rendus desktop/mobile, restauration puis invocation d’une URL copiée.
-La fonction est purgée et les deux gardes sont finies. La
+La fonction est purgée et les deux gardes sont finies. L’[entrée SSO par l’alias](docs/evidence/invocation-alias-entry-dev-2026-11-09.json)
+passe trois groupes supplémentaires : redirections canoniques et connexions/
+déconnexions réelles desktop/mobile, six captures inspectées et sessions propres
+fermées. Les deux essais de mesure interrompus restent séparés du replay. La
 [régression complète](docs/evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes en série et 467 groupes, sans échec ni test ignoré :
 186 sources recoupées avant/après chaque phase, 79 captures fraîches recoupées

@@ -109,7 +109,7 @@ def verify_report(name,path,is_remote,expected_hash):
                      'adapter-docker':24,'adapter-public-docker':14})
     expected.update({'function-catalogue-api':8,'function-catalogue-ui':14})
     # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_ROUTE_CYCLES.md#cinq-groupes-e2e-sérialisés
-    expected.update({'invocation-route-cycles':5,'invocation-request-pause':2,'invocation-empty-ui':3})
+    expected.update({'invocation-route-cycles':5,'invocation-request-pause':2,'invocation-empty-ui':3,'invocation-alias-entry':3})
     checks=result.get('checks',result.get('results'))
     assert isinstance(checks,list) and len(checks)==expected[name],'Nombre de groupes inattendu'
     if name=='login-ui':assert all(isinstance(row,str) and row for row in checks)

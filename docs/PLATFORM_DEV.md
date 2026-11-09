@@ -729,3 +729,19 @@ Variables : aucun ajout. Secrets : aucun ajout. Routes : deux détours temporair
 restaurés, aucun domaine/DNS nouveau. Notes : README, CONTRIBUTORS, INSTALL
 proposés individuellement. Configuration : deux fichiers officiels inchangés,
 aucun nouvel env/ARG ni build. Source perturbée et six domaines restent ouverts.
+
+
+## Alias public et SSO — 9 novembre
+
+Trois groupes passent sur 207 sources et les mêmes images : redirections réelles
+de functions.lelabs.tech vers la canonique, API session anonyme sans redirection,
+puis connexion et déconnexion UI desktop/mobile via le vrai fournisseur.
+Le POST réel de déconnexion est observé par CDP durable ; ses deux indicateurs
+sont vrais malgré la navigation. Six captures sont inspectées. Deux sessions
+et flows du replay sont absents nativement, ainsi que les deux autres des
+essais arrêtés, conservés séparément.
+[Preuve](evidence/invocation-alias-entry-dev-2026-11-09.json).
+Variables : aucun ajout. Secrets : aucun ajout. Routes/DNS : aucun changement.
+Notes : README, CONTRIBUTORS, INSTALL proposés individuellement. Configuration :
+deux fichiers officiels et services inchangés, aucun env/ARG ni build nouveau.
+Aucune donnée métier créée. Source perturbée et six domaines restent ouverts.

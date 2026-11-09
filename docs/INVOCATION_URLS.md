@@ -244,8 +244,9 @@ replay positif. Aucun de ces essais n’est réécrit en réussite.
 Ce premier complément à deux domaines ne prouve pas le retrait ni les détours ;
 ils sont qualifiés par les cinq cycles ultérieurs, avec le vide de l’API locale.
 Le parcours UI public vide est qualifié par le complément ultérieur. Restent
-la source indisponible, les pages suivantes sur six domaines et l’entrée
-HTML/SSO depuis l’alias public. La preuve native du Host/redirection reste
+la source indisponible et les pages suivantes sur six domaines. L’entrée
+HTML/SSO depuis l’alias est qualifiée dans le complément public ci-dessous.
+La preuve native du Host/redirection reste
 celle de la boucle locale. Les scénarios résiduels et leur garde maintiennent
 SLS-066 ouverte. Le mode clair n’a pas été activé.
 
@@ -690,7 +691,8 @@ supprimé après confirmation ; aucun cookie fournisseur n’y entre.
 Si un parcours s’arrête après connexion, fermer sa seule session par l’API normale
 avec son cookie/CSRF en mémoire avant de fermer son contexte ; ne toucher à
 aucune session antérieure. Ne créer aucune fonction ni donnée métier.
-Le résultat de ce complément et ses six captures ne sont pas encore acquis.
+Les trois groupes passent dans le replay qualifié ci-dessous ; ses six captures
+sont inspectées. Les deux essais arrêtés restent séparés de ce résultat.
 
 Le premier essai passe les redirections anonymes et atteint la console après
 SSO, puis s’arrête dans la vérification de déconnexion desktop. Il reste
@@ -714,3 +716,30 @@ Référence primaire : [protocole Chromium Network](https://raw.githubuserconten
 configureDurableMessages et getResponseBody ; le protocole livré avec Playwright
 déclare les mêmes commandes. Une commande absente ou un corps perdu fait échouer
 le scénario ; aucune vérification n’est ignorée.
+
+
+## Alias HTTPS et SSO — replay qualifié
+
+Le [replay du 9 novembre](evidence/invocation-alias-entry-dev-2026-11-09.json)
+passe trois groupes sur 207 sources et les mêmes images. Les vraies réponses
+HTTPS de l’alias redirigent accueil/login/console vers les destinations canoniques
+fixes, sans cookie sur l’alias. Son API session anonyme répond 200 sans redirection.
+Les deux contextes neufs desktop/mobile entrent par l’alias, se connectent au vrai
+fournisseur avec code/PKCE S256 et retour canonique, puis se déconnectent par l’UI.
+Le même POST de déconnexion est lu par l’observation CDP durable : HTTP 200 et
+signed_out/sso_signed_out vrais ; état anonyme et cookies supprimés ensuite.
+
+Six JPEG frais sont personnellement inspectés, avec quatre empreintes distinctes :
+les retours déconnectés sont visuellement identiques aux accueils correspondants.
+Chaque fichier est néanmoins inspecté. La capture connectée mobile est une
+pleine page de 1102 pixels, issue du viewport 390×844. Les JPEG n’incluent ni
+barre d’adresse, ni saisie fournisseur, ni confirmation ouverte ; URL, PKCE,
+cookies et résultat réel sont des assertions distinctes du client.
+
+Le recoupement natif confirme les deux sessions et flows propres absents après
+replay, plus les deux sessions/flows des essais arrêtés séparément. Aucun fichier
+de reprise n’est créé dans ces parcours. Aucune fonction, route, DNS, variable,
+secret ni image modifiée ; services et fichiers officiels restent inchangés.
+La première phase non localisée et le diagnostic logout-body restent incomplets ;
+aucun de leurs groupes n’est ajouté aux trois succès du replay. Les pannes
+propres du client et du tampon CDP, la source et les six domaines restent ouverts.

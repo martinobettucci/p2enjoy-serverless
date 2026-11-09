@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Entrée publique de l’alias : trois groupes HTTPS/SSO réels passent sur
+  207 sources, avec login/logout desktop/mobile et six captures inspectées.
+  Les deux sessions du replay et celles des deux essais de mesure arrêtés sont
+  fermées et recoupées séparément. Aucune route ou configuration modifiée.
+
 - Catalogue vide du parcours public : trois groupes UI réels passent sur
   206 sources. Le GET navigateur survit au détour des deux routes ; aide vide
   desktop/mobile, restauration et invocation de l’URL copiée sont vérifiées.

@@ -241,3 +241,18 @@ Preuve : docs/evidence/invocation-empty-ui-dev-2026-11-09.json.
 Aucun domaine/DNS, variable, secret ni build nouveau. Les erreurs propres du
 client, les fautes de source et les pages sur six domaines restent à éprouver.
 Ces notes sont proposées individuellement, sans adoption revendiquée.
+
+
+## Alias public et vrai SSO — trois groupes qualifiés
+
+L’alias redirige accueil/login/console vers la canonique sans y poser de cookie ;
+son API session anonyme reste à 200 sans redirection. Les contextes desktop et
+mobile entrent par son accueil, se connectent au vrai SSO puis se déconnectent
+par l’UI. Le même POST réel est observé par CDP durable : 200, signed_out et
+sso_signed_out vrais. Trois groupes passent sur 207 sources et les mêmes images ;
+six captures sont inspectées. Deux sessions/flows du replay sont fermés, plus
+les deux autres des essais arrêtés conservés séparément. Aucun cookie de reprise
+nominal, donnée métier, route, DNS, variable, secret ou build nouveau.
+Preuve : docs/evidence/invocation-alias-entry-dev-2026-11-09.json.
+Services et fichiers officiels inchangés ; fautes de source, six domaines et
+pannes propres du client restent ouverts. Ces notes sont proposées sans adoption.

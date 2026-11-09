@@ -529,13 +529,17 @@ La [preuve](evidence/invocation-empty-ui-dev-2026-11-09.json) recoupe le vrai
 La prochaine preuve suit [l’entrée publique de l’alias](INVOCATION_URLS.md#entrée-publique-de-lalias-et-sso-réel) :
 redirections HTTPS et absence de cookie sur l’alias, puis véritables connexions
 et déconnexions UI desktop/mobile depuis son accueil. Trois groupes et six
-captures prévus, sans changement de routes ; ce résultat reste à éprouver.
+captures passent maintenant sur 207 sources dans le
+[replay qualifié](evidence/invocation-alias-entry-dev-2026-11-09.json), sans changement
+de routes. Les six JPEG sont inspectés ; deux sessions/flows du replay et deux
+autres des essais arrêtés sont recoupés fermés, distinctement.
 Le premier essai atteint la console après SSO puis s’arrête à la vérification
 de déconnexion desktop ; sa session et son flow sont recoupés fermés. Conserver
 l’essai incomplet et préciser le diagnostic sans exposer les messages de saisie.
 Le diagnostic distinct confirme HTTP 200 puis corps indisponible à la lecture
-tardive après navigation. Garder les deux essais arrêtés ; observer durablement
-le même POST réel par CDP, sans réduire les assertions de déconnexion.
+tardive après navigation. Les deux essais arrêtés sont conservés. Le même POST réel est désormais lu par
+CDP durable, avec signed_out/sso_signed_out vrais et toutes les assertions de
+déconnexion conservées. Les erreurs propres de ce client restent à éprouver.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,
