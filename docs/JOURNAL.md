@@ -2,17 +2,20 @@
 
 ## 2026-11-09 — Fenêtre retenue pour les deux phases de purge
 
-La campagne commune passe ses 18 campagnes/313groupes sur229sources, avec
-63captures recoupées. Le checkpoint au repos totalise328groupes avec ses cibles
+La campagne commune passe ses 18 campagnes / 313 groupes sur 229 sources, avec
+63 captures recoupées. Le checkpoint au repos totalise 328 groupes avec ses cibles
 spécifiques ; la migration de purge reste ouverte. Le recoupement natif confirme
-1133identités connues et261tombstones inconnus, cinq fonctions purgées dans cinq
-namespaces,29fichiers embarqués et deux assetsHTTPS conformes.
+1 133 identités connues et 261 tombstones inconnus, cinq fonctions purgées dans cinq
+namespaces, 29 fichiers embarqués et deux assets HTTPS conformes.
 
 L’exploration confirme que la garde historique accepte les volumes unmounted
 sans bail, montage ni intention agent. Pour éprouver l’entrée en phasevolumes,
 on synchronise le vrai sweep par une commande de cache terminée avant de
 supprimer/purger la fonction ; le contrôle est arrêté avant le sweep suivant,
-sans modifier la phase parSQL. Le démarrage007 devra reprendre l’agent réel.
+sans modifier la phase par SQL. Sa responsabilité de requête a déjà engagé
+l’agent : attendre sa fin réelle après arrêt du contrôle conserve une décision
+en phase volumes dans ce dernier, sans intention agent restante. Le démarrage
+007 devra reprendre ce reçu terminé et poursuivre la purge du code.
 Pour artifacts, son effacement sera déjà terminé et seul le code sera retenu.
 Le contrat ciblé précise ces deux cas, les noms de responsabilité et la copie
 privée des vrais états pour les refus de corrélation. Aucun nouveau comportement

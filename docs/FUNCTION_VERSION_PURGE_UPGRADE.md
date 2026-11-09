@@ -50,13 +50,15 @@ compteurs, l’inventaire effacé, la garde et le reçu plutôt que simuler ces 
 
 Pour la phase `artifacts`, attendre la fin de l’agent et le reçu de contrôle
 encore pending. Pour `volumes`, synchroniser le sweep réel par un vidage de cache
-terminé, puis supprimer la fonction et engager sa purge : le POST produit la
-décision avant le sweep suivant. Arrêter le contrôle alors que son reçu est
-encore en `volumes`, puis vérifier ce même état après arrêt. Les volumes de cette
-fixture sont désactivés et archivés : aucune instance, aucun bail/montage, aucune
-intention agent en cours. Des lignes de volumes unmounted peuvent encore exister ;
-le restaurateur les admet déjà comme non référencées. La nouvelle image doit
-alors reprendre aussi l’effacement réel par l’agent. Si la fenêtre attendue
+terminé, puis supprimer la fonction et engager sa purge. La responsabilité du
+POST engage réellement l’agent et peut recevoir son état pending avant la fin du
+worker. Arrêter le contrôle alors que son reçu est encore en `volumes`, puis
+vérifier ce même état après arrêt. L’agent continue et termine indépendamment ;
+attendre son reçu terminé, l’absence de volumes/baux/pending et de montages avant
+la migration et le contrôle des références. Le nouveau contrôle reprend ainsi
+la décision déjà terminée côté agent, encore en `volumes` côté contrôle. Les
+volumes de cette fixture sont désactivés et aucune instance ne la consomme.
+Si la fenêtre attendue
 n’existe pas, le scénario échoue ; aucun passage n’est déclaré ou ignoré
 conditionnellement. La phase n’est jamais changée par SQL pour fabriquer le cas.
 
