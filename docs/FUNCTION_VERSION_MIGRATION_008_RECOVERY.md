@@ -109,8 +109,8 @@ interruption/reprise, contraintes puis régressions liées en série. Construire
 et recouper la nouvelle image avant toute bascule du seul contrôle DEV ; sauvegarder
 l'état courant et vérifier l'absence d'effets de migration sur la base008 déjà
 servie. Les campagnes publiques de versions et CLI doivent passer sur cette image.
-Les pannes de publication, purges historiques engagées et la campagne complète
-restent nécessaires dans SLS-074. Aucun nouveau parcours UI n'est attendu.
+Les pannes de publication et la campagne complète restent nécessaires dans
+SLS-074. Les purges historiques ont depuis leur [preuve008](FUNCTION_VERSION_PURGE_MIGRATION_008.md). Aucun nouveau parcours UI n'est attendu.
 
 ## Checkpoint de refus et contrôles positifs
 
@@ -170,8 +170,9 @@ python3 -B e2e/function-version-migration008-run.py complete-component sha256:de
 
 Le déclenchement indépendant après perte du traceur et les pannes propres de
 garde ne sont pas qualifiés par ce nominal. La candidate reste non servie à
-ce checkpoint. Les purges engagées, la variante premier hash inconnu puis connu
-et la campagne complète restent ouvertes dans SLS-074.
+ce checkpoint. Les purges engagées sont depuis éprouvées par le complément008 ;
+la variante premier hash inconnu puis connu et la campagne complète restent
+ouvertes dans SLS-074.
 
 ## Bascule du contrôle déjà008
 
@@ -223,6 +224,6 @@ backup et un recoupement du contrôle inchangé ; la correction utilise os.chown
 Le premier recoupement web a demandé /index.html et reçu404 ; le recoupement
 final emploie l'entrée publique canonique /. Ces diagnostics ne sont pas
 transformés en groupes réussis. Les pertes du traceur, déclenchements autonomes
-et pannes propres des deux gardes restent non qualifiés. Historiques de purge
-engagée, premier hash inconnu puis connu, autres pannes et campagne complète
+et pannes propres des deux gardes restent non qualifiés. Les purges engagées sont depuis éprouvées par le complément008. Premier hash
+inconnu puis connu, refus de corrélation007, autres pannes et campagne complète
 restent ouverts ; SLS-074 reste en cours.

@@ -490,7 +490,7 @@ docs/evidence/function-version-duplicate-recovery-dev-2026-11-09.json.
 ## Gardes008 et image actuelle
 
 Le contrôle courant serverless-api est e661516b, image def45648f9e7, démarré
-2026-11-09T18:25:10.056771655Z. Seul le préfixe de première transition008 change
+2026-11-09T18:52:49.904838248Z. Seul le préfixe de première transition008 change
 parmi31 backends ; le web reste identique. Dix groupes sur vraies copies007
 qualifient refus et coupure WAL avant commit/reprise du même conteneur. La
 bascule conserve les17 tables et le schéma déjà008 ; un backup SQLite natif
@@ -499,6 +499,24 @@ privé est conservé dans `qualification-history/migration008-deployment-backup-
 Douze groupes API puis cinq CLI passent sur l'image servie,16 appels réussissent
 et un refus attendu est conservé. Deux fonctions purgées physiquement, ressources
 actives nulles, garde d'image désarmée et mutateur joint. Référence et fichiers
-officiels/routes restent identiques. Preuve : docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json. Les pertes propres des gardes, les
-purges engagées et autres critères restent dans SLS-074. Ces notes sont proposées
+officiels/routes restent identiques. Preuve : docs/evidence/function-version-migration008-recovery-dev-2026-11-09.json. Les pertes propres des gardes, les refus de corrélation007 et autres critères
+restent dans SLS-074. Ces notes sont proposées
 individuellement ; leur adoption n'est pas revendiquée.
+
+
+## Purges historiques008 qualifiées
+
+Preuve : docs/evidence/function-version-purge-migration008-dev-2026-11-09.json.
+Vingt-deux groupes réels passent : quatre fenêtres006/007→008, volumes/artifacts,
+une restitution indépendante après perte du pilote, puis trois refus avant
+interruption. CacheNULL/connu, UUID/dates, registre deleted et anciens champs
+recoupés ; quatre purges terminées, cinquième installation temporaire retirée
+par garde. Les17 tables, le registre et5982 artefacts originaux sont conservés.
+
+Le contrôle e661516b garde def45648, démarrage courant2026-11-09T18:52:49.904838248Z.
+Cinq gardes inactives, drivers et ressources temporaires absents, actifs nuls ;
+référence, configuration et routes restent identiques. La source007 est conservée
+sous p2enjoy-control:historical-schema-007 avec attestation root liée à la preuve
+du registre. Aucun changement produit, migration supplémentaire, variable, secret
+ou route. Les refus de corrélation007 et autres critères restent dans SLS-074.
+Notes proposées individuellement, sans adoption revendiquée.

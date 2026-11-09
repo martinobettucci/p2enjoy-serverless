@@ -2,6 +2,16 @@
 
 ## [Non publié]
 
+- Reprise des purges historiques jusqu'à008 qualifiée :22 groupes réels, dont
+  quatre fenêtres006/007→008 en volumes/artifacts, une restitution indépendante
+  après perte du pilote et trois refus avant interruption. HashesNULL/connus,
+  UUID/dates, registre deleted et anciens champs conservés ; quatre purges
+  terminées et persistantes, cinquième installation temporaire retirée par garde.
+  Les17 tables, le registre de stockage et5982 artefacts originaux sont identiques.
+  Même image def45648/ID e661516b, nouveau démarrage attendu, cinq gardes inactives,
+  actifs nuls. Les essais interrompus restent distincts ; SLS-074 reste en cours.
+  [Preuve](docs/evidence/function-version-purge-migration008-dev-2026-11-09.json).
+
 - Gardes de première transition008 déployées en DEV : refus de cible active
   incohérente, références orphelines et cache altéré, défaut reproduit avant
   correction. Dix groupes réels sur copies007 couvrent refus, témoin, verrou,

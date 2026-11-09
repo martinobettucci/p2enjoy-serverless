@@ -61,9 +61,11 @@ WAL. La correction de première transition ne réexécute rien sur une base déj
 Sa [preuve de reprise](evidence/function-version-migration008-recovery-dev-2026-11-09.json)
 passe dix groupes de composant (six refus, témoin, verrou/reprise, contraintes,
 SIGKILL WAL/reprise), puis12 API et5 CLI sur def45648f9e7 déployée. La bascule
-conserve les17 tables et le schéma déjà008. Les purges historiques engagées,
-la variante premier hash inconnu puis connu, les pannes propres des gardes et
-la campagne complète restent nécessaires ; SLS-074 conserve son statut[~].
+conserve les17 tables et le schéma déjà008. Le [complément de purges008](FUNCTION_VERSION_PURGE_MIGRATION_008.md)
+passe22 groupes, dont006/007→008 avec identitéNULL/connue, persistance et
+restitution indépendante. Les refus de corrélation007, la variante premier hash
+inconnu puis connu, les pannes propres des gardes et la campagne complète restent
+nécessaires ; SLS-074 conserve son statut[~].
 
 `functions.first_published_code_hash` identifie la première publication réussie.
 `functions.first_promoted_at` établit durablement qu’une promotion a déjà existé.

@@ -1,5 +1,47 @@
 # Qualification de la plateforme
 
+## Purges historiques vers008
+
+Le [contrat](../docs/FUNCTION_VERSION_PURGE_MIGRATION_008.md) réutilise la fenêtre
+historique gardée avec les vraies images006/007. Depuis la racine synchronisée,
+exécuter chaque commande après la fin complète de la précédente :
+
+```sh
+python3 -B e2e/function-version-schema007-reference.py
+python3 -B e2e/function-version-purge-migration008-run.py 006 artifacts
+python3 -B e2e/function-version-purge-migration008-run.py 006 volumes
+python3 -B e2e/function-version-purge-migration008-run.py 007 artifacts
+python3 -B e2e/function-version-purge-migration008-run.py 007 volumes
+python3 -B e2e/function-version-purge-migration008-run.py 007 artifacts --restore-with-guard
+```
+
+Les cinq commandes de fenêtre reçoivent les identifiants SSO autorisés sur stdin
+masquée, jamais en argument ou fichier. L'attestation007 compare29 backends à la
+preuve du registre et conserve un tag/receipt root protégé, sans changer le
+contrôle servi. Les pilotes refusent leurs rapports préexistants ; conserver
+l'essai précédent avant relance. Rapports : .local/e2e/function-version-purge-
+SOURCE-to-008-upgrade-PHASE[-guard]{,-checkpoint}.json. Le helper distant est
+storage-legacy-environment.py, avec source et cible explicites. Ses modes
+historiques restent006→007 et refusent une cible implicite incompatible avant
+armement, arrêt ou déplacement.
+
+La preuve des refus s'exécute comme root uniquement dans le SPARK autorisé :
+`python3 -B /srv/p2enjoy-serverless/e2e/function-version-purge-migration008-preflight.py`.
+Son rapport natif est control/function-version-purge-migration008-preflight.json.
+Les trois cas confirment services/démarrages, tables, répertoires et configuration
+strictement identiques ; seuls les répertoires vides exactement reconnus sont retirés.
+
+La [preuve consolidée](../docs/evidence/function-version-purge-migration008-dev-2026-11-09.json)
+retient19 groupes sur280 sources et3 refus sur281 sources, mêmes exécutables
+communs et image def45648. Les quatre fenêtres normales terminent la purge et
+son restart ; la cinquième restitue indépendamment après perte du pilote.
+HashesNULL/connus, dates/UUID, garde et commande corrélées, registre deleted et
+charge sont recoupés. Les17 tables et5982 artefacts originaux sont conservés,
+référence/configuration/routes inchangées et actifs nuls. Les cinq gardes sont
+inactives. L'essai d'attestation interrompu reste séparé, sans groupe ajouté.
+Aucun parcours UI frais ; refus de corrélation007, première identité inconnue
+suivie d'une connue et autres pannes restent ouverts.
+
 ## Refus et reprise de migration008
 
 `function-version-migration008-build.py` conserve l'image servie, construit la
@@ -35,8 +77,9 @@ control/function-version-migration008-deploy.json ; checkpoints dans .local/e2e.
 Les pilotes refusent de les écraser. La reproduction rouge et le premier replay
 neuf restent dans leurs époques distinctes. Le [contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md)
 borne ce qui est qualifié : nominal et désarmement, sans prétendre éprouver les
-pertes propres des gardes. Purges engagées, premier hash inconnu puis connu,
-autres pannes et campagne complète restent nécessaires. Aucun nouveau parcours UI.
+pertes propres des gardes. Le complément de purges ci-dessus couvre leurs reprises normales ; premier
+hash inconnu puis connu, refus de corrélation007, autres pannes et campagne
+complète restent nécessaires. Aucun nouveau parcours UI.
 
 ## Reprise des paquets dédupliqués — complément SLS-074
 

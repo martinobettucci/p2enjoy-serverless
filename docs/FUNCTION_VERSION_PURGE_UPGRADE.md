@@ -151,3 +151,14 @@ image n’était plus disponible dans l’inventaire Docker. La nouvelle est
 conservée sous p2enjoy-control:purge-recovery-reference avant sa recréation
 explicite par Compose ; les 1494 UUID/hashes existants sont inchangés. Un up qui
 avait gardé l’ancien conteneur a été détecté par le contrôle d’identité.
+
+
+## Reprise ultérieure vers008
+
+Ce document conserve la qualification006→007. Le complément
+[FUNCTION_VERSION_PURGE_MIGRATION_008](FUNCTION_VERSION_PURGE_MIGRATION_008.md)
+éprouve ensuite22 groupes sur def45648 : sources006/007 et phasesvolumes/artifacts,
+restitution indépendante et refus avant interruption. Il distingue identitéNULL
+et hash connu conservé dans le registre deleted. Les anciens31 groupes ciblés
+ne sont pas réadditionnés au total22. Les refus de corrélation sur copie007
+restent une preuve distincte à exécuter.

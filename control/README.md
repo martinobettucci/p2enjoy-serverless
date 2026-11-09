@@ -357,7 +357,7 @@ commise ; rollback007 exact et relance du même conteneur appliquent008.
 Les2882 publications et4418 invocations historiques sont recoupées. Les replays
 ne s'ajoutent pas aux anciens checkpoints comme comportements nouveaux.
 
-Le contrôle sert désormais def45648f9e7, conteneur e661516b, démarré le
+La bascule vers def45648f9e7 crée le conteneur e661516b le
 2026-11-09T18:25:10.056771655Z. Le seul delta parmi31 backends est le préfixe008,
 le web reste identique. La base déjà008 n'a pas rejoué ce script ; ses17 tables
 et son schéma sont strictement identiques avant/après remplacement. Le backup
@@ -366,6 +366,25 @@ natif privé est conservé dans `qualification-history/migration008-deployment-b
 Les deux fonctions publiques sont purgées,16 appels réussissent et un refus
 attendu est conservé. Gardes désarmées, référence et fichiers officiels inchangés,
 ressources actives nulles. L'essai arrêté avant garde sur une erreur du pilote
-est conservé séparément. Les pertes propres des gardes, historiques de purge
-engagés, variante premier hash inconnu puis connu et autres pannes restent
-à éprouver selon [le contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md).
+est conservé séparément. Les pertes propres des gardes, variante premier hash inconnu puis connu et
+autres pannes restent à éprouver selon [le contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md).
+
+
+## Purges historiques reprises jusqu'à008
+
+La [preuve](../docs/evidence/function-version-purge-migration008-dev-2026-11-09.json)
+passe22 groupes : quatre fenêtres006/007→008 en volumes/artifacts, une fenêtre
+007/artifacts avec restitution indépendante après perte du pilote, puis trois
+refus de paramètres avant garde/arrêt/déplacement. Les identités inconnues
+restentNULL ; les hashes connus restent attachés aux mêmes révisions et dates
+dans une version deleted. Les anciens champs sont conservés ; seules phase et
+erreur de l'opération exacte peuvent progresser vers artifacts sous EACCES.
+
+Les quatre fenêtres normales terminent leur purge et persistent après restart.
+La cinquième conserve la purge pendant migration puis retire l'installation
+temporaire par la garde. Les cinq restitutions retrouvent exactement les17 tables,
+le registre de stockage et5982 fichiers d'artefacts originaux ; les cinq unités
+sont inactives. Le contrôle original e661516b conserve def45648, avec démarrage
+courant2026-11-09T18:52:49.904838248Z. Référence, configuration et routes inchangées,
+ressources actives nulles, aucune nouvelle image produit ni migration. Les refus
+de corrélation sur copies007 et autres pannes restent nécessaires dans SLS-074.

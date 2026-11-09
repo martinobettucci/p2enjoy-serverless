@@ -144,8 +144,10 @@ Les installations déjà008 ne la rejouent pas. Les [refus et interruptions](FUN
 passent dix groupes sur copies historiques, dont interruption WAL puis reprise
 du même conteneur. L'image def45648f9e7 est servie en DEV ; la bascule conserve
 exactement les17 tables et le schéma déjà008, puis12 groupes API et5 CLI passent.
-Les historiques de purge engagée, le premier hash inconnu suivi d'un connu et
-les pannes propres de garde restent ouverts ; SLS-074 reste en cours.
+Les [purges engagées006/007→008](FUNCTION_VERSION_PURGE_MIGRATION_008.md) passent22
+groupes, avec cachesNULL/connus et registre deleted, puis reçu et octets repris.
+Les refus de corrélation007, le premier hash inconnu suivi d'un connu et les
+pannes propres de garde restent ouverts ; SLS-074 reste en cours.
 
 `functions` reçoit `first_published_code_hash` et `first_promoted_at`, nullable
 avant le premier succès correspondant et immuable une fois renseigné. L’historique

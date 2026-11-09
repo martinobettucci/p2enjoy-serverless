@@ -90,3 +90,28 @@ les trois notes proposées au SPARK, sans adoption implicite.
 La variante premier hash inconnu suivi d'un connu, les autres fenêtres de panne
 et la campagne complète restent dans SLS-074. Aucune évolution UI ou du manuel
 n'est introduite par ce banc ; aucune nouvelle qualification visuelle n'en découle.
+
+
+## Résultats qualifiés
+
+La [preuve](evidence/function-version-purge-migration008-dev-2026-11-09.json)
+retient22 groupes sans échec/skip :19 fenêtres sur280 sources puis3 refus sur281
+sources. L'attestation007 compare29 backends historiques et conserve tag et reçu
+root. Sa première tentative arrêtée avant reçu sur Path.open(opener) reste
+archivée ; builtinsopen corrige le pilote, sans changement produit ou de service.
+
+Les quatre fenêtres normales conservent exactement cacheNULL/connu, UUID/dates,
+garde et charge, puis terminent purge et restart. La cinquième conserve ces faits
+pendant008 puis restitue par garde indépendante après perte du pilote. Les cinq
+restitutions retrouvent17 tables et5982 artefacts originaux identiques, ainsi que
+le registre de stockage. Le contrôle e661516b garde def45648, avec démarrage
+2026-11-09T18:52:49.904838248Z. Les cinq gardes sont inactives, drivers absents,
+référence et fichiers officiels conservés, aucun consommateur temporaire ni
+ressource active. Les sauvegardes privées d'entrée restent en0600 et identiques.
+
+Les trois refus vérifient strictement tables, services et démarrages inchangés ;
+le premier retire son seul dossier vide créé avant refus. Aucune garde armée.
+Les31 backends et quatre fichiers HTTPS du contrôle restitué sont identiques
+au checkpoint précédent. Aucun nouveau parcours visuel ou changement du manuel.
+Les refus de corrélation sur copies007, la variante premier hash inconnu puis
+connu, les autres pannes et la campagne complète restent ouverts dans SLS-074.

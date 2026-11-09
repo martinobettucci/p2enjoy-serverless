@@ -1,6 +1,7 @@
 # @spec docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md
 # @verifies docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md#fenêtre-et-conservation-des-données
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#preuves-à-terminer
+# @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_MIGRATION_008.md#matrice-réelle
 """DEV-only historical installation window with an independent identity-based restore."""
 from contextlib import closing
 import fcntl
@@ -36,6 +37,7 @@ LOCK_PATH = Path('/run/serverless-archive-migration.lock')
 SCHEMA_006 = ['001_control.sql', '002_login_limits.sql', '003_deployments.sql',
               '004_function_operations.sql', '005_execution.sql', '006_storage_commands.sql']
 SCHEMA_007 = SCHEMA_006 + ['007_function_code_hash.sql']
+SCHEMA_008 = SCHEMA_007 + ['008_function_versions.sql']
 SCHEMA_006_REVISION = 'f56d79ebe3d1d84731bfd262d1e6a9d5b5a680c0'
 
 
@@ -408,12 +410,14 @@ def purge_upgrade_observation(item, function):
     control = Path(item['paths']['state']) / 'control.sqlite3'
     registry = Path(item['paths']['storage']) / 'registry.sqlite3'
     hashed = any(row['name'] == 'code_hash' for row in rows(item, control, 'PRAGMA table_info(revisions)'))
-    observation['function'] = rows(item, control, '''SELECT id,service_id,deleted_at,updated_at,active_revision_id
-        FROM functions WHERE id=?''', (function,))[0]
-    revisions = rows(item, control, '''SELECT id,stored_bytes,deleted_at,inventory_json,events_json,archive_sha256'''
+    versioned = observation['versions'] == SCHEMA_008
+    observation['function'] = rows(item, control, 'SELECT id,service_id,deleted_at,updated_at,active_revision_id'
+        + (',first_published_code_hash,first_promoted_at' if versioned else '') + ' FROM functions WHERE id=?', (function,))[0]
+    observation['version_registry'] = rows(item,control,'SELECT function_id,code_hash,revision_id,created_at,state,updated_at FROM function_versions WHERE function_id=? ORDER BY code_hash',(function,)) if versioned else None
+    revisions = rows(item, control, '''SELECT id,stored_bytes,deleted_at,created_at,inventory_json,events_json,archive_sha256'''
         + (',code_hash' if hashed else '') + ' FROM revisions WHERE function_id=? ORDER BY id', (function,))
     observation['has_code_hash_column'] = hashed
-    observation['code'] = [{**{key:row[key] for key in ('id','stored_bytes','deleted_at','archive_sha256')},
+    observation['code'] = [{**{key:row[key] for key in ('id','stored_bytes','deleted_at','created_at','archive_sha256')},
         'empty_inventory':json.loads(row['inventory_json']) == [], 'empty_events':json.loads(row['events_json']) == {},
         'code_hash':row.get('code_hash')} for row in revisions]
     observation['purge_commands'] = rows(item, control, '''SELECT id,function_id,service_id,installation_id,kind,state,phase,
@@ -432,7 +436,8 @@ def stopped_purge_input(item, journal, function, phase):
     assert phase in ('volumes', 'artifacts') and item.get('mode') == 'function-version-purge'
     assert item['denied']['function_id'] == function and not item.get('upgraded')
     before = purge_upgrade_observation(item, function)
-    assert before['versions'] == SCHEMA_006 and not before['has_code_hash_column']
+    assert before['versions'] == (SCHEMA_007 if item.get('source_schema')=='007' else SCHEMA_006)
+    assert before['has_code_hash_column'] == (item.get('source_schema')=='007')
     assert len(before['purge_commands']) == len(before['purge_guards']) == len(before['code']) == 1
     request, guard = before['purge_commands'][0], before['purge_guards'][0]
     assert request['state'] == 'pending' and request['phase'] == phase and request['id'] == guard['id']
@@ -458,6 +463,54 @@ def stopped_purge_input(item, journal, function, phase):
               'backup':str(backup),'backup_sha256':hashlib.sha256(backup.read_bytes()).hexdigest(),'backup_mode':stat.S_IMODE(backup.stat().st_mode)}
     item['purge_input'] = result;atomic(journal,item)
     return result
+
+
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_MIGRATION_008.md#matrice-réelle
+def verify_purge_version_migration(item,fixture,after):
+    before=fixture['observation'];assert len(before['code'])==len(after['code'])==1
+    old,new=before['code'][0],after['code'][0]
+    assert new==old,'migration_changed_purge_revision'
+    assert after['function']=={**before['function'],'first_published_code_hash':old['code_hash'],'first_promoted_at':old['created_at']}
+    assert len(after['purge_commands'])==1
+    prior,current=before['purge_commands'][0],after['purge_commands'][0]
+    assert {k:v for k,v in current.items() if k not in ('phase','error_code')}=={k:v for k,v in prior.items() if k not in ('phase','error_code')},'purge_command_identity_changed'
+    assert (current['phase'],current['error_code'])==(prior['phase'],prior['error_code']) or (prior['phase']=='volumes' and current['phase']=='artifacts' and current['error_code']=='artifact_cleanup_pending')
+    assert after['purge_guards']==before['purge_guards'],'purge_guard_changed'
+    if old['code_hash'] is None:assert after['version_registry']==[],'invented_unknown_version'
+    else:
+        assert re.fullmatch(r'[0-9a-f]{64}',old['code_hash'])
+        assert after['version_registry']==[{'function_id':fixture['function_id'],'code_hash':old['code_hash'],'revision_id':old['id'],'created_at':old['created_at'],'state':'deleted','updated_at':old['created_at']}]
+    control=Path(item['paths']['state'])/'control.sqlite3'
+    backup=Path(fixture['backup'])
+    with control_owner(control),closing(sqlite3.connect('file:'+str(backup)+'?mode=ro',uri=True)) as historical,closing(sqlite3.connect('file:'+str(control)+'?mode=ro',uri=True)) as migrated:
+        preserved=[]
+        historical.execute('BEGIN');migrated.execute('BEGIN')
+        permitted=[]
+        for (table,) in historical.execute("SELECT name FROM sqlite_schema WHERE type='table' ORDER BY name"):
+            if table=='schema_migrations':continue
+            assert re.fullmatch(r'[a-zA-Z_][a-zA-Z_0-9]*',table)
+            columns=[v[1] for v in historical.execute('PRAGMA table_info('+table+')')]
+            projection=','.join(columns);query='SELECT '+projection+' FROM '+table
+            previous=[dict(zip(columns,v)) for v in historical.execute(query)]
+            actual=[dict(zip(columns,v)) for v in migrated.execute(query)]
+            if table in ('storage_commands','function_operations'):
+                old_row=[v for v in previous if v['id']==prior['id']];new_row=[v for v in actual if v['id']==prior['id']]
+                assert len(old_row)==len(new_row)==1,'correlated_purge_row_missing'
+                old_row,new_row=old_row[0],new_row[0]
+                allowed=('phase','error_code') if table=='storage_commands' else ('error_code',)
+                assert new_row['error_code']==current['error_code'],'purge_diagnostic_changed_during_observation'
+                if table=='storage_commands':assert new_row['phase']==current['phase']
+                for key in allowed:
+                    if new_row[key]!=old_row[key]:
+                        assert prior['phase']=='volumes' and current['phase']=='artifacts' and current['error_code']=='artifact_cleanup_pending','unexpected_purge_transition'
+                        permitted.append({'table':table,'id':prior['id'],'column':key,'before':old_row[key],'after':new_row[key]})
+                        new_row[key]=old_row[key]
+            encode=lambda records:sorted(json.dumps(v,sort_keys=True,default=lambda raw:raw.hex()) for v in records)
+            assert encode(previous)==encode(actual),'historical_columns_changed:'+table
+            preserved.append(table)
+    after['old_column_conservation']={'tables':preserved,'source_schema':item['source_schema'],'new_storage_command_phase_observed':current['phase'],'permitted_correlated_changes':permitted}
+    deployments=rows(item,control,'SELECT id,revision_id,code_hash,code_only FROM deployments WHERE function_id=?',(fixture['function_id'],))
+    assert len(deployments)==1 and deployments[0]['revision_id']==old['id'] and deployments[0]['code_hash']==old['code_hash'] and deployments[0]['code_only']==0
 
 
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
@@ -533,12 +586,19 @@ def main():
     assert mode in ('partial', 'historical', 'function-version-purge')
     old_image = sys.argv[3]
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', old_image)
+    options=sys.argv[4:]
+    assert len(options)==len(set(options)) and set(options)<={'--source-schema007','--target-schema008'}
+    assert not options or mode=='function-version-purge'
+    source_schema='007' if '--source-schema007' in options else '006'
+    target_schema='008' if '--target-schema008' in options else '007'
+    assert source_schema!='007' or target_schema=='008','source007_requires_explicit_target008'
     if mode == 'function-version-purge':
-        attestation = HISTORY / 'function-version-schema006-image.json';info = attestation.lstat()
-        assert stat.S_ISREG(info.st_mode) and info.st_uid == 0 and not info.st_mode & 0o022, 'protected_schema006_attestation_required'
-        reference = json.loads(attestation.read_text())
-        assert reference['completed'] and reference['revision'] == SCHEMA_006_REVISION
-        assert reference['schema_migrations'] == SCHEMA_006 and reference['image'] == old_image, 'known_schema006_image_required'
+        attestation = HISTORY / ('function-version-schema'+source_schema+'-image.json');info = attestation.lstat()
+        assert stat.S_ISREG(info.st_mode) and info.st_uid == 0 and not info.st_mode & 0o022, 'protected_historical_attestation_required'
+        reference = json.loads(attestation.read_text());assert reference['completed']
+        if source_schema=='006':assert reference['revision'] == SCHEMA_006_REVISION
+        else:assert reference['schema']=='007' and reference['registry_proof_sha256']==hashlib.sha256((BASE/'docs/evidence/function-version-registry-dev-2026-11-09.json').read_bytes()).hexdigest()
+        assert reference['schema_migrations'] == (SCHEMA_007 if source_schema=='007' else SCHEMA_006) and reference['image'] == old_image, 'known_historical_image_required'
     account = pwd.getpwnam('spark-docker')
     settings = {}
     for line in Path('/etc/spark/env').read_text().splitlines():
@@ -574,7 +634,7 @@ def main():
                value['mode'] in ((0o700, 0o750) if key == 'state' else (0o700,))
                for key, value in originals.items()), 'official_directory_permissions'
     item = {'campaign': campaign, 'work': str(work), 'paths': paths, 'original_dirs': originals,
-            'mode':mode, 'historical_image':old_image,
+            'mode':mode, 'historical_image':old_image,'source_schema':source_schema,'target_schema':target_schema,
             'namespace_name':('code-purge-migration-' if mode == 'function-version-purge' else 'legacy-') + campaign[:8],
             'lock_identity': [lock_info.st_dev, lock_info.st_ino],
             'uid': account.pw_uid, 'gid': account.pw_gid, 'configuration': hashes(),
@@ -586,6 +646,9 @@ def main():
     item['reference'] = container(item, 'serverless-runtime-reference')
     assert item['original']['status'] == 'healthy' and item['reference']['running']
     item['installation'] = rows(item, Path(paths['state']) / 'control.sqlite3', "SELECT value FROM security_metadata WHERE name='installation-id'")[0]['value']
+    if mode=='function-version-purge':
+        actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
+        assert actual==(SCHEMA_008 if target_schema=='008' else SCHEMA_007),'explicit_target_schema_mismatch'
     quiet_control(item)
     no_references(item, allow_original=True)
     assert agent_call(item, {'op': 'health'})['healthy']
@@ -667,8 +730,9 @@ def main():
                     item['migration_refused'] = True;atomic(journal,item)
                     result = {**result,'rollback_complete':True,'before':fixture,'after':after}
                 else:
-                    assert after['versions'] == SCHEMA_007 and after['has_code_hash_column']
-                    assert all(row['code_hash'] is None and row['empty_inventory'] and row['empty_events'] for row in after['code'])
+                    assert after['versions'] == (SCHEMA_008 if item.get('target_schema')=='008' else SCHEMA_007) and after['has_code_hash_column']
+                    assert all(row['code_hash']==previous['code_hash'] and row['empty_inventory'] and row['empty_events'] for row,previous in zip(after['code'],fixture['observation']['code']))
+                    if item.get('target_schema')=='008':verify_purge_version_migration(item,fixture,after)
                     assert artifacts(item) == fixture['artifact_sha256'], 'migrated_purge_changed_retained_artifacts'
                     result = {'container':result,'before':fixture,'after':after,'anonymous_api_readable':True}
             elif op == 'resume-historical':

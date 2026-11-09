@@ -843,16 +843,28 @@ fichiers HTTPS recoupés, référence/configuration/routes conservées, actifs n
 Les trois essais WAL et l'essai de bascule arrêté avant garde sont séparés du
 total. Les gardes nominales sont désarmées ; leur déclenchement autonome et leurs
 pannes propres ne sont pas qualifiés par ce parcours. Le jeu ne contient pas
-premier hash inconnu puis connu ; cette variante, les purges engagées, les autres
-pannes et la régression complète restent nécessaires. Statut conservé[~].
+premier hash inconnu puis connu ; cette variante, les refus de corrélation007,
+les autres pannes et la régression complète restent nécessaires. Statut conservé[~].
 
 Le [replay de purges historiques008](FUNCTION_VERSION_PURGE_MIGRATION_008.md)
-est décidé avant code : quatre fenêtres réelles006/007→008, en volumes/artifacts,
-puis restitution indépendante007→008 après perte du pilote. Références d'images
-attestées, cachesNULL/connus et registre deleted vérifiés, reçu et octets repris,
-originaux restitués par identité. Les19 groupes de fenêtres passent sur280 sources ; recoupement final en cours.
-Trois refus source/cible avant interruption complètent la matrice prévue22,
-encore à éprouver. Aucune clôture de SLS-074 n’en est déduite.
+est qualifié par22 groupes : quatre fenêtres006/007→008 en volumes/artifacts,
+une restitution indépendante007/artifacts après perte du pilote, puis trois
+refus source/cible avant armement/arrêt/déplacement. Les19 groupes de fenêtres portent280
+sources ; les3 refus281 sources, avec mêmes exécutables communs. L'attestation007
+recoupe29 backends historiques, image et tag conservés. Les identitésNULL ne sont
+pas inventées ; les hashes connus, UUID/dates et registre deleted sont conservés.
+Les anciens champs des tables restent identiques sauf phase/erreur de la purge
+exactement corrélée. Les quatre purges normales terminent et persistent après
+restart ; la cinquième installation temporaire est retirée par garde.
+
+Le recoupement retrouve les17 tables, le registre de stockage et5982 artefacts
+originaux identiques après les cinq restitutions, gardes inactives et ressources
+actives nulles. Le contrôle e661516b conserve def45648 ; démarrage courant
+2026-11-09T18:52:49.904838248Z attendu après restitution. Référence/configuration/
+routes inchangées, nouvelle construction produit inutile, manuel/web inchangés.
+L'essai d'attestation interrompu est séparé, sans groupe ajouté. Les refus de
+corrélation007, première identité inconnue puis connue et autres pannes restent
+nécessaires ; statut[~]. Preuve : [purges008](evidence/function-version-purge-migration008-dev-2026-11-09.json).
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

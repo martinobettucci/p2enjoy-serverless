@@ -4687,3 +4687,27 @@ cible implicite007 sur008, source007 sans cible008 explicite, image007 présent�
 comme006. Ils doivent précéder garde/arrêt/déplacement et conserver strictement
 services/configuration/répertoires. Total attendu22, avec époque documentaire
 distincte après les19 fenêtres ; aucun changement produit.
+
+
+## 2026-11-09 — Purges historiques008 et refus qualifiés
+
+Les cinq fenêtres passent19 groupes sur280 sources figées ; aucun échec/skip.
+006 conserveNULL,007 conserve son hash dans une version deleted, mêmes UUID/dates
+et anciens champs. La revue a renforcé la comparaison de toutes les commandes,
+avec seules progressions phase/erreur de l'UUIDpurge permises. Quatre fenêtres
+terminent purge et restart ; la cinquième restitue indépendamment après perte du
+pilote. Le collecteur recoupe17 tables, registre et5982 artefacts originaux,
+cinq gardes inactives, backups0600 identiques et drivers absents. Le contrôle
+e661516b garde def45648 avec démarrage2026-11-09T18:52:49.904838248Z ; référence et
+fichiers officiels inchangés, actifs nuls. Les31 backends et4 fichiers HTTPS
+sont identiques à la livraison précédente.
+
+Les trois refus source/cible passent sur281 sources, après ajout de leur pilote
+et du contrat, sans changement aux exécutables communs. Tables, services et
+démarrages restent strictement identiques ; aucune garde armée. L'essai initial
+d'attestation reste séparé. Total22, sans addition des anciens replays. SLS-074
+reste[~] : refus de corrélation007, premier hash inconnu puis connu, autres
+interruptions et campagne complète. Manuel/web inchangés, pas d'UI fraîche.
+Preuve : evidence/function-version-purge-migration008-dev-2026-11-09.json.
+Aucun registre d'incohérences présent ; les défauts de banc sont corrigés dans
+l'unité sans arbitrage externe. Aucun remote Git configuré.

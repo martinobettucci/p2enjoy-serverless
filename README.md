@@ -121,8 +121,16 @@ données et2882/4418 backfills. L'image corrigée def45648f9e7 est ensuite dépl
 sur DEV avec sauvegarde native ; les17 tables et le schéma déjà008 sont identiques
 après remplacement. Les12 groupes API et5 CLI passent, avec16 invocations
 réussies et un refus attendu. Deux fonctions sont purgées physiquement. Les
-gardes nominales sont désarmées ; leurs pannes propres, les purges historiques
-engagées et la régression complète restent ouvertes dans SLS-074.
+gardes nominales sont désarmées ; leurs pannes propres et la régression complète
+restent ouvertes dans SLS-074. Le [complément de purges historiques008](docs/evidence/function-version-purge-migration008-dev-2026-11-09.json)
+passe22 groupes réels : quatre fenêtres006/007→008 en volumes/artifacts, une
+restitution indépendante après perte du pilote et trois refus avant interruption.
+HashesNULL/connus, anciens champs, registre deleted, reçus et octets sont recoupés.
+Les quatre purges normales terminent ; la cinquième installation temporaire est
+retirée par restitution gardée. Originaux,17 tables et5982 artefacts sont conservés.
+Même image et même conteneur original, nouveau démarrage attendu ; cinq gardes
+inactives et ressources actives nulles. Les refus de corrélation sur copies007
+et la variante premier hash inconnu puis connu restent à éprouver.
 
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.
