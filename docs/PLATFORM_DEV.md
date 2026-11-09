@@ -697,7 +697,7 @@ les deux fichiers officiels restent inchangés. Aucun build applicatif ni DNS
 supplémentaire n’est appliqué. La [preuve](evidence/invocation-route-cycles-dev-2026-11-09.json)
 conserve les données natives exactes, ainsi que le premier arrêt de collecte
 sur les seuls horodatages arrondis pendant le passage JSON JavaScript.
-Les trois notes sont reproposées. Le vide UI public, les sources perturbées
+Les trois notes sont reproposées. Le vide UI public est qualifié par le complément ultérieur ; les sources perturbées
 et les pages suivantes UI/CLI restent ouverts dans SLS-066.
 
 
@@ -712,4 +712,20 @@ quatre gardes finies ; contrôle non tracé et sans redémarrage, référence in
 Variables : aucun ajout. Secrets : aucun ajout. Routes : aucun changement,
 les deux domaines à 18090 TLS. Notes : README, CONTRIBUTORS et INSTALL actualisées
 comme propositions. Configuration : seuls les deux fichiers officiels existants,
-aucun nouvel env/ARG ni build. Le vide du parcours UI public reste à qualifier.
+aucun nouvel env/ARG ni build. Les deux groupes seuls ne qualifient pas le vide UI
+public, qui passe le complément suivant.
+
+
+## Parcours public du catalogue vide — 9 novembre
+
+Trois groupes réels passent sur 206 sources et les mêmes images. Le GET du vrai
+bouton Actualiser survit au détour normal des deux routes vers 18091, termine
+à 200/total zéro et rend l’aide vide sur desktop/mobile. Après restauration
+18090 TLS, l’UI retrouve les deux domaines et l’URL copiée invoque Docker.
+Une fonction est purgée dans son namespace ; helper, timer/service et garde
+de routes sont finis. Contrôle non tracé et sans redémarrage, référence inchangée.
+[Preuve](evidence/invocation-empty-ui-dev-2026-11-09.json).
+Variables : aucun ajout. Secrets : aucun ajout. Routes : deux détours temporaires
+restaurés, aucun domaine/DNS nouveau. Notes : README, CONTRIBUTORS, INSTALL
+proposés individuellement. Configuration : deux fichiers officiels inchangés,
+aucun nouvel env/ARG ni build. Source perturbée et six domaines restent ouverts.

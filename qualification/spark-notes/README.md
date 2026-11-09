@@ -163,7 +163,8 @@ révisions et rollback. Leurs quatre fonctions sont purgées dans deux namespace
 et recoupées nativement. Sources de preuve :
 docs/evidence/invocation-domains-dev-2026-11-08.json. Ce complément ne clôture
 pas SLS-066. Les cinq cycles ultérieurs qualifient retrait, détours et API locale
-vide ; source perturbée, parcours UI vide et pages UI/CLI sur six domaines restent ouverts.
+vide local ; le complément UI ci-dessous qualifie le parcours public vide.
+Source perturbée et pages UI/CLI sur six domaines restent ouvertes.
 
 La première déclaration est conservée comme interrompue pendant une comparaison
 trop stricte de applied_at ; sa reprise en lecture seule vérifie les propriétés
@@ -185,7 +186,7 @@ La première échéance échouée et son diagnostic DNS restent conservés sépa
 Après expiration du cache négatif en amont, les deux domaines résolvent
 nativement vers l’adresse attendue ; aucune adresse ni aucun résolveur n’est
 forcé dans les tests. Preuve : docs/evidence/invocation-route-guard-dev-2026-11-08.json.
-Les perturbations réelles passent les cinq cycles ci-dessous ; le parcours UI public vide et les fautes de source restent à éprouver dans SLS-066.
+Les perturbations réelles passent les cinq cycles ci-dessous ; le parcours public vide est qualifié ci-dessous, les fautes de source restent à éprouver.
 Aucune nouvelle variable, secret, route ou image applicative dans cette étape.
 Ces trois notes restent proposées, sans adoption revendiquée.
 
@@ -202,7 +203,8 @@ Les deux routes sont rétablies à 18090 TLS ; la recréation renouvelle l’ide
 de l’alias. Preuve : docs/evidence/invocation-route-cycles-dev-2026-11-09.json.
 
 Aucun build, variable ou secret ajouté ; les deux fichiers officiels et les
-services sont inchangés. Le vide UI public, les fautes de source et la seconde
+services sont inchangés. Le vide UI public est qualifié ci-dessous ; les fautes
+de source et la seconde
 page UI/CLI restent ouverts. Les quatre alias temporaires de pagination sont
 une proposition locale en attente d’autorisation, sans création DNS ni route.
 Ces trois notes sont proposées individuellement, sans adoption revendiquée.
@@ -219,6 +221,23 @@ et le diagnostic restent distincts du replay. Deux fonctions sont purgées dans
 deux namespaces ; quatre helpers et quatre paires timer/service sont terminés.
 Contrôle non tracé, PID/démarrage/images et configuration officielle inchangés.
 Preuve : docs/evidence/invocation-request-pause-dev-2026-11-09.json.
-Aucune route, DNS, variable, secret ni build nouveau. Le parcours UI public vide,
-les fautes propres du pilote, la source et la pagination UI/CLI restent ouverts.
+Aucune route, DNS, variable, secret ni build nouveau dans ce complément natif.
+Le parcours public vide est qualifié ci-dessous ; fautes propres du pilote, source
+et pagination UI/CLI restent ouverts.
 Ces notes sont proposées, sans adoption revendiquée.
+
+
+## Catalogue public vide — trois groupes qualifiés
+
+Création/publication depuis l’accueil par les formulaires, vrai GET du bouton
+Actualiser retenu pendant détour normal des deux routes vers 18091, puis réponse
+200/source disponible/total zéro. Les cinq JPEG sont inspectés : aide vide utile
+sans URL/copie sur desktop et mobile, retour lisible des deux domaines après
+restauration 18090 TLS. L’adresse copiée invoque réellement le handler Docker.
+Trois groupes passent sur 206 sources et les mêmes images. Une fonction est
+purgée dans son namespace ; helper natif, timer/service et garde de routes sont
+terminés. Contrôle non tracé et sans redémarrage, référence/configuration inchangées.
+Preuve : docs/evidence/invocation-empty-ui-dev-2026-11-09.json.
+Aucun domaine/DNS, variable, secret ni build nouveau. Les erreurs propres du
+client, les fautes de source et les pages sur six domaines restent à éprouver.
+Ces notes sont proposées individuellement, sans adoption revendiquée.

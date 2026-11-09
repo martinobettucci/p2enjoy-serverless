@@ -6,9 +6,10 @@ passe 88 groupes réels sur le seul domaine alors affecté. La
 [régression complète](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe ensuite 35 campagnes et 467 groupes, sans échec ni test ignoré. L’unité
 reste en qualification. Le [complément de cinq cycles](evidence/invocation-route-cycles-dev-2026-11-09.json)
-qualifie les changements des deux routes autorisées et le vide de l’API locale ;
-les pages suivantes UI/CLI, le vide du parcours UI public et les autres preuves
-résiduelles ci-dessous restent ouverts.
+qualifie les changements des deux routes autorisées et le vide de l’API locale.
+Le [parcours public vide](evidence/invocation-empty-ui-dev-2026-11-09.json)
+passe ensuite trois groupes ; les pages suivantes UI/CLI et les autres preuves
+résiduelles ci-dessous restent ouvertes.
 
 ## Source officielle et limites
 
@@ -151,7 +152,8 @@ avant de terminer ; ne pas confondre panne DNS/TLS avec retrait du registre.
 Un appel de catalogue déjà reçu peut être retenu nativement avant sa lecture
 pendant le changement réel de routes, puis rendu sur sa connexion HTTPS admise.
 Ce chemin permet d’observer l’état vide dans l’UI sans registre, DNS ni réponse
-substitués. Il reste à qualifier ; une impossibilité ne devient pas un succès
+substitués et passe les trois groupes du complément public ci-dessous.
+Pour les preuves résiduelles, une impossibilité ne devient pas un succès
 ni une dispense de preuve. Les limites d’accès et les preuves manquantes restent
 explicites dans SLS-066.
 
@@ -241,8 +243,8 @@ replay positif. Aucun de ces essais n’est réécrit en réussite.
 
 Ce premier complément à deux domaines ne prouve pas le retrait ni les détours ;
 ils sont qualifiés par les cinq cycles ultérieurs, avec le vide de l’API locale.
-Restent la source indisponible, le vide du parcours UI public,
-les pages suivantes sur six domaines et l’entrée
+Le parcours UI public vide est qualifié par le complément ultérieur. Restent
+la source indisponible, les pages suivantes sur six domaines et l’entrée
 HTML/SSO depuis l’alias public. La preuve native du Host/redirection reste
 celle de la boucle locale. Les scénarios résiduels et leur garde maintiennent
 SLS-066 ouverte. Le mode clair n’a pas été activé.
@@ -288,15 +290,15 @@ Les scénarios suivent leur fonction originale de qualification et ne nettoient
 que ses objets. Rapports, identités, changements effectifs et nettoyages sont
 conservés par scénario ; aucune réussite n’est déduite d’un seul fichier prêt.
 
-L’état vide dans la console publique reste une preuve distincte. Un futur
-pilote de pause retiendra le vrai GET admis après sa réception et avant lecture
-du fichier officiel, selon le précédent NativeObserver. Il devra libérer la
-requête, sans commande cut, destruction du contrôle, modification de mémoire,
-registre ou résultat système. La survie de la connexion pendant la réapplication
-normale de Caddy reste à éprouver. Le mode catalogue-before historique n’est
+L’état vide dans la console publique possède sa preuve distincte ci-dessous.
+Le pilote de pause retient le vrai GET admis après sa réception et avant lecture
+du fichier officiel, selon le précédent NativeObserver, puis libère la requête,
+sans commande cut, destruction du contrôle, modification de mémoire, registre
+ou résultat système. La survie de sa connexion pendant la réapplication normale
+de Caddy est éprouvée par les trois groupes UI. Le mode catalogue-before historique n’est
 pas réutilisé tel quel : il détruit le contrôle et sa garde ne rétablit pas
 les routes. Les perturbations sont qualifiées par les cinq cycles du 9 novembre ;
-cette pause publique reste à implémenter et à qualifier.
+sa pause et le parcours public sont qualifiés dans les compléments ci-dessous.
 
 Le [premier checkpoint de garde](evidence/invocation-route-guard-checkpoint-dev-2026-11-08.json)
 passe la restauration explicite puis le SIGKILL réel du pilote sans demande
@@ -405,8 +407,9 @@ sont absents ou inactifs. Le contrôle conserve PID, naissance, conteneur, image
 démarrage et cgroup, sans traceur ; référence et configuration officielle inchangées.
 Aucun changement de route, DNS, variable, secret ou build dans ce complément.
 
-Ce résultat fournit la barrière préalable au parcours UI vide public ; il ne
-prouve pas encore la survie de sa connexion pendant réapplication Caddy.
+Ces deux groupes fournissent la barrière préalable. La survie du GET navigateur
+pendant réapplication Caddy est qualifiée séparément par les trois groupes UI
+ci-dessous.
 Échéance sans commande, EOF, commande partielle/trop longue, conflits/refus et
 autres erreurs propres du pilote restent à éprouver. SLS-066 demeure ouverte.
 
@@ -442,7 +445,7 @@ Supprimer/purger seulement les UUID possédés après fin des deux gardes, puis
 recouper nativement le stockage. Aucun fichier source de routes, résultat de
 GET ou transport n’est substitué. L’application et ses images ne changent pas.
 La survie effective de la connexion pendant la réapplication Caddy est une issue
-de ce vrai test ; elle n’est pas présumée par le contrat.
+de ce vrai test ; son résultat qualifié est décrit ci-dessous.
 
 ## Suite complète de preuve
 
@@ -487,8 +490,9 @@ et 18 réemplois par identité SHA256 avec une référence inspectée. Le manuel
 servi correspond à ses 14 chapitres et 43 paragraphes. Les catalogues globaux
 peuvent conserver des archives historiques étrangères à ces fonctions purgées.
 
-Restent les cycles de routes et leur TLS, les pages console/CLI sur six domaines
-et la source officielle réellement perturbée. Le refus 401 après publication
+Ces 35 campagnes ne qualifient pas elles-mêmes les cycles de routes et leur TLS,
+éprouvés par les compléments ultérieurs. Restent les pages console/CLI sur six
+domaines et la source officielle réellement perturbée. Le refus 401 après publication
 CLI est qualifié dans le complément de révocation ci-dessous. La preuve native
 du Host est acquise sur
 la boucle locale ; elle ne qualifie pas un alias HTTPS public. Le build nominal
@@ -631,3 +635,25 @@ conservé dans cette version. Ses deux fonctions et deux gardes sont recoupées
 nettoyées séparément. Le replay réussi ne prouve aucune correction du produit.
 La conservation nominale des diagnostics est exécutée ; ses branches sensibles,
 illisibles et les pannes propres du pilote restent non éprouvées. SLS-066 reste ouverte.
+
+
+## Catalogue public vide — trois groupes réels passés
+
+Le [complément du 9 novembre](evidence/invocation-empty-ui-dev-2026-11-09.json)
+passe trois groupes sur 206 sources et les mêmes images avant/après. Namespace,
+service et fonction sont créés depuis l’accueil par les formulaires ; le ZIP est
+publié dans Code et révisions. Le GET du bouton Actualiser, réellement retenu
+après recvfrom, survit à la réapplication normale des deux routes vers 18091.
+La même réponse navigateur termine à 200 : source disponible, zéro domaine,
+même révision. Desktop et mobile affichent l’aide utile sans anciennes URL
+ni actions de copie. Les routes sont restaurées à 18090 TLS, l’UI retrouve deux
+domaines et l’adresse copiée exécute réellement le handler Docker attendu.
+
+La fonction est purgée dans son namespace, avec reçus/absences physiques recoupés.
+Le helper natif, son timer/service et la garde de routes sont terminés ; contrôle
+non tracé et sans redémarrage, référence/configuration officielles inchangées.
+Les deux fichiers originaux de la garde conservent leurs nanosecondes exactes
+en texte UTF-8 avec SHA. Les cinq captures ont leur fenêtre de fraîcheur ; leur
+inspection et la revue finale sont consignées dans la preuve. Ce checkpoint
+ne couvre ni la perte de confirmation propre au nouveau client, ni les fautes
+de source, ni les pages UI/CLI sur six domaines. SLS-066 demeure ouverte.

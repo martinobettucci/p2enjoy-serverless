@@ -12,8 +12,9 @@ le contrôle et son démarrage. SSH root et session SSO réelle sont requis.
 Le collecteur recoupe deux fonctions purgées dans deux namespaces et quatre
 gardes finies, en incluant séparément le premier essai interrompu et son
 diagnostic. [Preuve](../docs/evidence/invocation-request-pause-dev-2026-11-09.json).
-Les fautes propres du pilote et la survie du parcours UI pendant réapplication
-de routes restent à éprouver ; aucun changement de routes dans ces deux groupes.
+Ces deux groupes ne modifient aucune route. Le complément UI ci-dessous prouve
+la survie de la connexion pendant réapplication ; les fautes propres du pilote
+restent à éprouver.
 
 ## Catalogue global SLS-067 qualifié
 
@@ -67,7 +68,8 @@ fixture, l’armement et la restauration. La
 [preuve](../docs/evidence/invocation-route-cycles-dev-2026-11-09.json) recoupe
 203 sources, le catalogue à deux/un/zéro domaines et le nouvel identifiant
 d’alias après retrait/rétablissement. Les ports finaux restent 18090 TLS.
-Le vide UI public et les pages suivantes UI/CLI sur six domaines restent distincts.
+Le vide UI public est qualifié séparément ci-dessous ; les pages suivantes UI/CLI
+sur six domaines restent à éprouver.
 
 `native_control_observer.py` porte la classe pure partagée avec le pilote
 historique `service-transport-observer.py`. Son corps est déplacé sans changement.
@@ -765,3 +767,17 @@ avant/après et le même contrôle. Ses quatre fonctions sont purgées dans deux
 namespaces distincts, recoupés par `storage-console-inspect.py`. La preuve complète
 conserve les deux phases et les mises à jour documentaires de statut postérieures.
 Le manuel et l’application ne changent pas dans ce complément de qualification.
+
+
+## Catalogue vide du vrai parcours public
+
+`node e2e/invocation-empty-ui.mjs` crée et publie depuis l’accueil et les formulaires.
+Il retient le GET du bouton Actualiser, détourne les deux routes autorisées vers
+18091 via la console normale, puis libère la même requête. Les trois groupes
+passent : création/publication, vrai 200/total zéro avec état vide desktop/mobile,
+restauration et invocation de l’URL copiée. Cinq JPEG frais et les reçus natifs
+sont recoupés dans la [preuve](../docs/evidence/invocation-empty-ui-dev-2026-11-09.json).
+206 sources et images identiques avant/après ; une fonction purgée dans son
+namespace, helper et garde de routes terminés. Une mutation non confirmée
+conserve la fixture même après restauration de secours. Cette branche propre
+du client reste à éprouver ; aucun résultat réseau n’est substitué.

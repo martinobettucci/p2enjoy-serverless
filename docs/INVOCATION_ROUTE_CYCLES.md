@@ -99,6 +99,7 @@ et restent l’autorité pour les nanosecondes. Aucune donnée applicative, rép
 route ou résultat de scénario n’est remplacé. La seconde collecte est en lecture
 seule ; les cinq scénarios ne sont pas artificiellement rejoués ou requalifiés.
 
-Le catalogue vide est prouvé sur le vrai HTTP local, pas encore dans le parcours
-UI public retenu. Les six domaines UI/CLI et les pannes propres du nouveau pilote
-restent ouverts dans SLS-066.
+Ces cinq groupes prouvent le catalogue vide sur le vrai HTTP local. Le
+[complément UI public](evidence/invocation-empty-ui-dev-2026-11-09.json) qualifie
+ensuite son GET retenu et ses rendus. Les six domaines UI/CLI et les pannes
+propres du nouveau pilote restent ouverts dans SLS-066.

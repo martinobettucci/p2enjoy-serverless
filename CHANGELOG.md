@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Catalogue vide du parcours public : trois groupes UI réels passent sur
+  206 sources. Le GET navigateur survit au détour des deux routes ; aide vide
+  desktop/mobile, restauration et invocation de l’URL copiée sont vérifiées.
+  Une fonction purgée et les deux gardes terminées sont recoupées nativement.
+
 - Pause/reprise native d’un vrai GET HTTPS : deux groupes E2E passent sur
   205 sources, dont SIGKILL du traceur et reprise indépendante. Le contrôle
   conserve son démarrage ; deux fonctions sont purgées et quatre gardes finies.

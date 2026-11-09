@@ -3511,3 +3511,29 @@ invocation de l’URL copiée. Le contrôle doit être libéré avant d’attend
 santé HTTPS des routes restaurées. Les deux gardes doivent être terminées avant
 purge. Cette décision est persistée avant le client ; la survie de connexion
 Caddy et les captures restent à prouver, sans changement applicatif.
+
+
+## 2026-11-09 — Catalogue vide public éprouvé sur trois groupes
+
+Le client crée/publie par les formulaires depuis l’accueil. Le vrai GET navigateur
+du bouton Actualiser est retenu après recvfrom, puis les deux routes sont
+détournées via la console normale vers 18091. La même réponse finit à 200, source
+disponible, zéro domaine et révision inchangée. Desktop/mobile affichent l’aide
+vide sans anciennes adresses ni actions. Après restauration 18090 TLS, l’UI
+retrouve deux domaines et l’adresse copiée exécute Docker. Les trois groupes
+passent sur 206 sources/images inchangées ; cinq JPEG frais sont produits.
+
+La lecture native recoupe une fonction purgée dans son namespace, helper absent,
+timer/service inactifs, garde de routes finie avec reprise explicite, contrôle
+non tracé et sans redémarrage. Les deux reçus locaux de routes sont conservés
+en UTF-8 exact avec SHA, sans arrondi des nanosecondes. Aucun nouveau domaine,
+DNS, variable, secret ni build. Les erreurs propres du client, les fautes de
+source et les pages sur six domaines restent distinctes et non qualifiées.
+
+La revue finale recoupe les trois groupes, 206 sources, deux seuls contrats
+Markdown postérieurs, cinq captures/empreintes et reçus natifs ; aucun défaut
+bloquant. Le reliquat documentaire parlant d’un futur pilote est retiré.
+Les cinq JPEG sont inspectés personnellement par le relecteur visuel ; le
+principal corrobore les deux états vides. Le focus DOM est testé, sans attribuer
+aux JPEG un contour de focus absent. La capture mobile restaurée est une pleine
+page de 1548 pixels de haut issue du viewport de 844 pixels.

@@ -1,0 +1,66 @@
+{
+  "completed": true,
+  "target": "infra-serverless DEV",
+  "scope": "Nine exact documentation files only; no deletion, code, services, configuration, routes or DNS.",
+  "backup_directory": "/srv/p2enjoy-serverless/.document-backup-empty-ui-4c7316e664274e48b37c2d598c1bd30c",
+  "files": {
+    "CHANGELOG.md": {
+      "before_sha256": "5df80e57f6e97214a63e6e5c5a15f114255f711f431e960f42cabfc81aa1a873",
+      "after_sha256": "2df3b5e1e5a050477f092497b38ecba5d2bce21a0dbc886a779e1f04ded2750e",
+      "prior_bytes_preserved": true
+    },
+    "README.md": {
+      "before_sha256": "5d537286e881466bccf18891c89ab17b2b86d1d633436ef39ba82a57ad96ad31",
+      "after_sha256": "5bf8e3bf023eb854954f81ffea0be78a66bd956e74b1b175a598c3a77b731a38",
+      "prior_bytes_preserved": true
+    },
+    "docs/BACKLOG.md": {
+      "before_sha256": "ee737a29e2b751a0352044243e7a87dfc6af90827311fb3c33f7796e889d36d2",
+      "after_sha256": "df8b049d655cd78719234ada20dd2336cf593d7a80678fb684f5c21cd957425f",
+      "prior_bytes_preserved": true
+    },
+    "docs/INVOCATION_ROUTE_CYCLES.md": {
+      "before_sha256": "5c230fb1e76d3c355af72467c923baed6f2f81b6a68bfd71dc919ba039cc6d02",
+      "after_sha256": "b721643aae599b1e1d9397ccd274375f87bfcd6fdefdf5115399a53cfa378019",
+      "prior_bytes_preserved": true
+    },
+    "docs/INVOCATION_URLS.md": {
+      "before_sha256": "68bbc0be529e94d04f2faecf852bcf7421d0e677e6db57f89bc7251060791ee3",
+      "after_sha256": "3407da74ea236dc46ed7a1bda94dada76334fec6da9b5e768345f74826594a86",
+      "prior_bytes_preserved": true
+    },
+    "docs/JOURNAL.md": {
+      "before_sha256": "4bcd7ac93ffeb84687a78ca66b590140395133952b30423d03e5afbc7cae6aba",
+      "after_sha256": "3070fbcea2cdf027da8c19622e67ca649acbfcb5e8f9abaf5603cc6c12434b21",
+      "prior_bytes_preserved": true
+    },
+    "docs/PLATFORM_DEV.md": {
+      "before_sha256": "79b535c8c6e77311d344a682e476e29b849c2c1a0797b3c19444136a74ee2418",
+      "after_sha256": "69f6000e4c33b896cc0ea94ce5358dfeeeb42d0cafeee73fff120b016fdf36f9",
+      "prior_bytes_preserved": true
+    },
+    "docs/evidence/invocation-empty-ui-dev-2026-11-09.json": {
+      "before_sha256": null,
+      "after_sha256": "ad9114d0ed13a3c35db5ce1eb8710b534c38f511844bd47ec3575bcc55162a29",
+      "prior_bytes_preserved": false
+    },
+    "e2e/README.md": {
+      "before_sha256": "1ceb94954e189e8cafe1715991e167f74d91b226454871c43ab5fac335d9e121",
+      "after_sha256": "020c1c10ba27822c1ecf750b2884f0567b829ca0f262a0cb31317391b0245440",
+      "prior_bytes_preserved": true
+    }
+  },
+  "source_delivery": {
+    "source_files": 206,
+    "local_remote_equal": true,
+    "image": "sha256:7b52f630b7f071a9fc7659298039b7bfcfe3579ed6fb962ebf0a63db8259f490",
+    "adapter_images": {
+      "p2enjoy-adapter:dev": "sha256:738a2b89bafc5439c941400520f7f310bb66030ab06afb7b575a572e1047cb61",
+      "p2enjoy-adapter-e2e:dev": "sha256:0850958b525f69a54b01ebbb290f705ea60ce8303cbed96a98b13589d731676b"
+    },
+    "only_post_execution_indexed_deltas": [
+      "docs/INVOCATION_URLS.md",
+      "docs/INVOCATION_ROUTE_CYCLES.md"
+    ]
+  }
+}

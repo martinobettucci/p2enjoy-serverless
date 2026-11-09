@@ -475,7 +475,7 @@ Les cinq cycles suivent le [contrat de garde et cycles](INVOCATION_URLS.md#garde
 garde sans perturbation, mort du pilote après détour d’alias confirmé,
 retrait/rétablissement puis deux ports détournés et catalogue vide local réel.
 Le vide UI public exige ensuite sa propre pause/libération native, distincte
-du pilote historique de destruction ; cette preuve UI n’est pas encore acquise.
+du pilote historique de destruction ; ses trois groupes UI sont qualifiés ci-dessous.
 
 Les trois déclencheurs de garde sans perturbation sont vérifiés : restauration
 explicite, SIGKILL réel du pilote avec restauration indépendante et échéance
@@ -517,12 +517,15 @@ La [preuve](evidence/invocation-request-pause-dev-2026-11-09.json) conserve le
 premier essai arrêté au désarmement et son diagnostic séparé ; le replay corrige
 la reconnaissance native du timer absent. Deux fonctions sont purgées dans deux
 namespaces et les quatre gardes sont terminées, contrôle inchangé et non tracé.
-La survie de la connexion UI pendant réapplication Caddy et les erreurs propres
-du pilote restent à qualifier.
+La survie de la connexion UI pendant réapplication Caddy passe les trois groupes
+suivants ; les erreurs propres du pilote restent à qualifier.
 Le [parcours public suivant](INVOCATION_URLS.md#parcours-public-du-catalogue-vide-sous-vraies-routes)
 fixe ses trois groupes : création/publication UI, GET retenu et vrai affichage
 vide sous deux routes détournées, puis restauration/actualisation et invocation
-de l’URL copiée. Ce résultat n’est pas encore acquis.
+de l’URL copiée. Les trois groupes passent sur 206 sources et les mêmes images ;
+une fonction est purgée dans son namespace et les deux gardes sont terminées.
+La [preuve](evidence/invocation-empty-ui-dev-2026-11-09.json) recoupe le vrai
+200/total zéro, les cinq captures et la restauration, avec revue finale.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,
