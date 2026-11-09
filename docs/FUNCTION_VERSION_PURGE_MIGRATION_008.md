@@ -77,6 +77,67 @@ officiels et les identités des répertoires restent strictement identiques.
 Ces trois groupes portent leur propre époque documentaire et ne transforment
 pas les essais interrompus en succès. Total prévu22, dont19 fenêtres et3 refus.
 
+## Refus de corrélation sur copies007
+
+Décision : partir des deux sauvegardes007 réelles, en volumes et artifacts,
+produites par les fenêtres précédentes et identifiées dans leur preuve. Vérifier
+journal root restauré, source007, empreinte de backup, propriétaire1001/mode0600,
+sept migrations et cache connu. Les originaux s'ouvrent en lecture immutable ;
+chaque mutation porte uniquement sur une copie privée conservant les contraintes
+réelles. Aucun marqueur de schéma ni état de purge n'est fabriqué pour la source.
+
+Chaque phase comprend vingt refus et un témoin positif, soit42 groupes au total :
+
+| Copie fautée | Altération réelle attendue |
+| --- | --- |
+| missing-purge-guard | Garde retirée |
+| different-operation-id | UUID de garde différent |
+| aborted-purge-guard | Décision abort |
+| different-guard-function | Fonction de garde différente |
+| different-guard-service | Autre service réel de la fixture |
+| different-command-service | Autre service de commande |
+| different-function-service | Autre service de fonction |
+| different-guard-kind | Garde clear-cache |
+| different-command-kind | Commande clear-cache |
+| uncommitted-command | Commande preparing |
+| before-purge-phase | Phase draining |
+| different-installation | Installation différente |
+| different-result-version | Version résultante différente |
+| different-command-version | Version attendue de commande différente |
+| different-guard-version | Version attendue de garde différente |
+| function-not-deleted | Fonction redevenue vivante |
+| function-has-active-pointer | Révision rendue non supprimée puis pointeur actif |
+| revision-not-deleted | Révision redevenue non supprimée |
+| events-not-cleared | Valeur d'événements différente de la purge |
+| inventory-not-purge-value | Inventaire JSON vide de représentation différente |
+
+Le cas pointeur respecte le trigger007 en rendant aussi la révision non supprimée ;
+il prouve ce cas combiné. Il doit être refusé par historical_active_version_required.
+Les autres cas attendent le refus UDF de l'inventaire historique, avant008. Toutes
+les références étrangères restent valides : un autre service réel est réutilisé.
+Les contraintes restent activées pendant les altérations et chaque entrée copiée
+est vérifiée avant démarrage.
+
+Le véritable uvicorn de l'image servie démarre dans Docker, sous les deux env_file
+officiels, réseau none, readonly, mémoire512M/CPU1/PIDs64. Seuls la copie/state et
+un tmpfs sont montés ; aucun socket ou volume vivant. Chaque refus exige une
+sortie non nulle, le diagnostic exact, aucune application prête, sept marqueurs,
+aucun registre008 et un snapshot logique/schéma/tables strictement identique à la
+copie fautée avant démarrage. Un échec ultérieur de socket n'est pas un refus.
+
+Le témoin non fauté applique008, conserve les anciennes colonnes des seize tables,
+UUID, hash connu, garde/commande et dates ; la version est deleted et les nouveaux
+champs de publication/invocation correspondent au vrai cache. Son échec attendu
+sur reconcile_docker faute de socket vient après la migration et n'est pas un
+succès HTTP. Une relance explicite du même conteneur conserve exactement l'état008
+sans rejouer la migration. Ce témoin constitue un seul groupe par phase.
+
+Chaque conteneur est identifié par nom/ID/image/labels/montage avant suppression.
+Les rapports refusent l'écrasement. Copies retirées, backups originaux identiques,
+contrôle servi/référence/démarrages/configuration et compteurs actifs identiques
+avant/après. Une panne du banc arrête la campagne et conserve son échec ; aucun
+rejeu automatique ou skip. Aucun nouveau déploiement produit n'est prévu.
+
 ## Livraison et limites
 
 Recouper l'image courante avant/après, ses fichiers embarqués, la référence,

@@ -4711,3 +4711,20 @@ interruptions et campagne complète. Manuel/web inchangés, pas d'UI fraîche.
 Preuve : evidence/function-version-purge-migration008-dev-2026-11-09.json.
 Aucun registre d'incohérences présent ; les défauts de banc sont corrigés dans
 l'unité sans arbitrage externe. Aucun remote Git configuré.
+
+
+## 2026-11-09 — Décision des refus de corrélation007
+
+Le tour précédent est une progression :22 groupes qualifiés et commitbb7b5fc.
+L'état frais confirme contrôle e661516b/def45648 sain, démarrage18:52:49UTC et
+référence inchangée. Les backups007 volumes/artifacts des vrais parcours sont
+présents, empreintes conformes et journaux restaurés. Le banc historique de vingt
+corrélations ne couvre que006 avant007 ; il n'est pas requalifié implicitement.
+
+Le nouveau complément part de ces copies007 sous les contraintes SQLite réelles,
+avec20 refus et1 témoin par phase. La cible active est un cas combiné conforme au
+trigger d'entrée, attendu sur le CHECK nommé ; les19autres attendent le vrai refus
+UDF. Le témoin applique008 puis redémarre le même conteneur isolé, données008
+strictement identiques. Sources privées immutables, socket volontairement absent
+après migration, services/configuration vivants conservés.42 groupes prévus,
+encore non exécutés ; décision persistée avant dépendance de code.

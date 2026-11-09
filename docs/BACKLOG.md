@@ -866,6 +866,13 @@ L'essai d'attestation interrompu est séparé, sans groupe ajouté. Les refus de
 corrélation007, première identité inconnue puis connue et autres pannes restent
 nécessaires ; statut[~]. Preuve : [purges008](evidence/function-version-purge-migration008-dev-2026-11-09.json).
 
+La matrice de [corrélations007](FUNCTION_VERSION_PURGE_MIGRATION_008.md#refus-de-corrélation-sur-copies007)
+est décidée avant code : vingt altérations de corrélation par phase et un témoin
+positif avec relance du même conteneur, soit42 groupes prévus. Les deux sources
+sont les sauvegardes007 réellement produites par les fenêtres précédentes ;
+aucun état historique n'est fabriqué. Refus transactionnels sur copies isolées,
+contraintes réelles et services vivants inchangés. Campagne encore à exécuter.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;
