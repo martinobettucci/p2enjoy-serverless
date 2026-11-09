@@ -533,6 +533,9 @@ captures prévus, sans changement de routes ; ce résultat reste à éprouver.
 Le premier essai atteint la console après SSO puis s’arrête à la vérification
 de déconnexion desktop ; sa session et son flow sont recoupés fermés. Conserver
 l’essai incomplet et préciser le diagnostic sans exposer les messages de saisie.
+Le diagnostic distinct confirme HTTP 200 puis corps indisponible à la lecture
+tardive après navigation. Garder les deux essais arrêtés ; observer durablement
+le même POST réel par CDP, sans réduire les assertions de déconnexion.
 
 La [suite `invocation-urls`](evidence/invocation-urls-regressions-dev-2026-11-08.json)
 passe 35 campagnes / 467 groupes, zéro échec/skip, avec six prérequis non comptés,

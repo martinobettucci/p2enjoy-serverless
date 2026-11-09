@@ -699,3 +699,18 @@ Sa seule session est fermée et son flow absent, recoupés nativement ; aucun
 changement de route. Le diagnostic suivant conserve des phases nommées et des
 classes d’erreur prédéfinies, jamais les messages ou stacks Playwright. Ne
 déduire aucune réussite de déconnexion UI de ce premier groupe arrêté.
+
+Le diagnostic réel distinct identifie logout-body/response_body_unavailable,
+après le HTTP 200 du POST normal ; sa session et son flow sont également fermés.
+La page navigue après ce POST, ce qui rend sa réponse ancienne indisponible à
+la lecture tardive du client. Conserver ces deux essais incomplets séparément.
+Le correctif de preuve observe le même POST via CDP Network et son tampon de
+réponses durable, activé uniquement après connexion et borné en mémoire. Lire
+le corps réel après loadingFinished, sans interception, renvoi, remplacement,
+pause de la page ou modification applicative. Exiger encore signed_out et
+sso_signed_out vrais, session anonyme et cookies supprimés après la confirmation
+UI. Ne collecter ni corps de login, headers d’authentification ni URL sensible.
+Référence primaire : [protocole Chromium Network](https://raw.githubusercontent.com/ChromeDevTools/devtools-protocol/master/pdl/domains/Network.pdl),
+configureDurableMessages et getResponseBody ; le protocole livré avec Playwright
+déclare les mêmes commandes. Une commande absente ou un corps perdu fait échouer
+le scénario ; aucune vérification n’est ignorée.

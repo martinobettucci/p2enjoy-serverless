@@ -3570,3 +3570,19 @@ Décision de diagnostic avant correction : conserver seulement une phase nommée
 et une classe prédéfinie d’erreur navigateur, afin d’identifier la mesure qui
 échoue sans journaliser les messages contenant potentiellement les identifiants.
 Le prochain essai reste une campagne réelle, sans substitution de réponse.
+
+## 2026-11-09 — Lecture du corps de déconnexion perdue après navigation
+
+Le second essai réel reproduit le défaut de mesure : phase logout-body,
+classe prédéfinie response_body_unavailable, statut du POST déjà lu à 200.
+La lecture native confirme sa seule session et son flow absents ; configuration,
+routes et contrôle inchangés. Il reste incomplet, séparé du premier et sans
+succès desktop reconstitué. Le code UI navigue après avoir traité sa réponse.
+
+Décision avant correction : observer le même POST dans le navigateur par CDP
+Network.configureDurableMessages/getResponseBody, tampon borné après connexion,
+puis lire son vrai corps terminé. La documentation primaire Chromium et le
+protocole local livré avec Playwright décrivent la conservation hors renderer
+pour survivre aux navigations. Aucun résultat ni transport n’est substitué ;
+les assertions signed_out/sso_signed_out, état anonyme et cookies supprimés
+restent exigées. Ne recueillir aucun corps de saisie, en-tête secret ou URL OIDC.
