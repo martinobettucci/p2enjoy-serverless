@@ -4658,3 +4658,16 @@ SLS-074 reste[~] : gardes propres, purges engagées, premier hash inconnu puis
 connu, autres pannes et campagne complète. Aucun registre d'incohérences présent
 ni nouveau cas d'arbitrage externe ; les défauts internes sont corrigés dans
 l'unité. Aucun remote Git configuré.
+
+
+## 2026-11-09 — Décision de reprise des purges vers008
+
+Le tour précédent constitue une progression : bascule def45648 et27 groupes
+qualifiés. L'état frais confirme ce contrôle sain, la référence inchangée et les
+anciennes fenêtres toutes restaurées. Les images006 ee4da401 et007 fe75c9e7 sont
+présentes. Le banc existant s'arrête explicitement à007 ; il ne vaut pas preuve
+008. Le nouveau contrat FUNCTION_VERSION_PURGE_MIGRATION_008 retient les vrais
+parcours006/007→008 avec entrée volumes/artifacts et restitution gardée, plus
+perte du pilote en007/artifacts. La source007 est attestée depuis les SHA de la
+preuve du registre avant toute interruption. Dix-neuf groupes prévus, pas encore
+exécutés. Les options explicites conservent le contrat des anciens modes.

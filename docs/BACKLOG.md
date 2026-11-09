@@ -846,6 +846,13 @@ pannes propres ne sont pas qualifiés par ce parcours. Le jeu ne contient pas
 premier hash inconnu puis connu ; cette variante, les purges engagées, les autres
 pannes et la régression complète restent nécessaires. Statut conservé[~].
 
+Le [replay de purges historiques008](FUNCTION_VERSION_PURGE_MIGRATION_008.md)
+est décidé avant code : quatre fenêtres réelles006/007→008, en volumes/artifacts,
+puis restitution indépendante007→008 après perte du pilote. Références d'images
+attestées, cachesNULL/connus et registre deleted vérifiés, reçu et octets repris,
+originaux restitués par identité. Dix-neuf groupes prévus, encore non exécutés ;
+aucune clôture de SLS-074 n'en est déduite.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;
