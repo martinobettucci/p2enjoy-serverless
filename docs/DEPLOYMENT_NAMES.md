@@ -50,3 +50,17 @@ la vérification de la nouvelle entrée HTTPS et du retour SSO accepté.
 Un retour aux anciens noms utilise les mêmes projets, services et montages.
 Un retour d’URL exige une route et des URL OIDC encore autorisées. Aucun geste
 de cette migration ne supprime de volume ni ne change le schéma SQLite.
+
+
+## Conteneurs de validation
+
+[SLS-076](BACKLOG.md#sls-076), à réaliser : le nom attendu est
+`serverless-code-validator-<uuid>`. Il distingue le conteneur qui charge et
+vérifie le code reçu du runtime de référence, de l’instance qui invoque une
+fonction et du client qui effectue une qualification. Le préfixe actuel p2-v
+reste déployé tant que cette unité n’a pas son image et ses preuves réelles.
+
+L’installation et le kind validation restent les autorités de réconciliation,
+y compris pour les conteneurs de l’ancien préfixe. Le nom unique conserve son
+rôle de secours si la réponse de création Docker est perdue. Aucune donnée
+applicative, valeur secrète ou nom de client n’entre dans ce nom.

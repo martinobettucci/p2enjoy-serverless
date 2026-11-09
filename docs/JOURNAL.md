@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 2026-11-09 — Boucle d’incohérences : nom des validateurs converti en SLS-076
+
+Après le commit3a5734d et ses quatre groupes ciblés, l’unique entrée du registre
+est instruite. Le nom p2-v est confirmé à validator.py136 et contredit la règle
+locale demandant responsabilité et usage lisibles. Son comportement de
+validation reste correct. Une correction impose une nouvelle image et des
+preuves propres ; l’issue est donc conversion en SLS-076, avec préfixe
+serverless-code-validator et conservation des labels/reprises historiques.
+L’entrée quitte le registre, sans modification du produit ni de sa preuve248.
+Aucun cas d’arbitrage externe n’est nécessaire ; le registre est vide après
+cette conversion. Les autres travaux du backlog restent ouverts.
+
 ## 2026-11-09 — Quatre groupes de reprise de validation qualifiés
 
 Le replay passe quatre groupes sur248 sources figées : défaut du retrait Docker,

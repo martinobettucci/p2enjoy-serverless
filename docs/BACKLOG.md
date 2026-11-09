@@ -855,3 +855,30 @@ E2E : ouvrir une vraie archive après suppression de ses parents, observer le
 titre en état conservé puis effectuer sa purge réelle et relire titre/badge,
 volumes, code et reçu. Captures desktop/mobile, noms complets, focus et guide
 recoupés. Raccordement : SLS-065 et prochain changement de console.
+
+
+<a id="sls-076"></a>
+## SLS-076 — Nom explicite des conteneurs de validation du code
+
+Statut : [ ] — constat de la boucle de reprise074, converti en unité bornée.
+
+Le pilote `control/app/validator.py:136` nomme actuellement ses conteneurs
+`p2-v-` suivi d’un UUID. Le nom ne décrit pas leur responsabilité pour un
+exploitant, contrairement au contrat local de nommage. Le fichier embarqué
+est recoupé avec la source dans la preuve de reprise de validation ; aucun
+défaut d’exécution, d’isolation ou de propriété n’est attribué à ce nom.
+
+Employer `serverless-code-validator-<uuid>`, qui désigne le rôle et l’usage,
+sans changer le label d’installation, le kind validation, l’unicité ni la
+suppression de secours par nom. La réconciliation par labels doit continuer
+à retirer les validateurs encore nommés p2-v après interruption. Le runtime,
+les instances de fonctions, leurs noms et le calcul du hash de code ne changent
+pas de responsabilité. Contrat : [Noms d’exploitation](DEPLOYMENT_NAMES.md#conteneurs-de-validation).
+
+Cette correction reconstruit l’image du contrôle ; elle est séparée des preuves
+074 dont le produit était figé. E2E réel : inspecter le nom/rôle d’un validateur
+vivant issu d’un upload HTTPS, import réussi, import refusé et expiration,
+puis absence du conteneur et de son canal ; éprouver une reprise d’un ancien
+validateur p2-v réel après interruption. Recouper images, aliases/hashes,
+pointeurs, données/cache et configuration conservés. Rejouer les campagnes
+connexes et maintenir les notes du SPARK ; aucun changement de route ni secret.

@@ -2685,11 +2685,24 @@
     "notes": "Three proposals updated and hash-checked; active notes unchanged, adoption not claimed"
   },
   "inconsistency_registry": {
-    "present": true,
+    "present": false,
     "review_finding_fixed_within_unit": true,
-    "open_out_of_scope": [
-      "Container validation name p2-v does not describe its role; loop to convert after this checkpoint commit"
-    ]
+    "resolution": {
+      "issue": "Abbreviated validator container name p2-v",
+      "outcome": "converted_to_backlog_unit",
+      "unit": "SLS-076",
+      "contract": "docs/DEPLOYMENT_NAMES.md#conteneurs-de-validation",
+      "after_targeted_checkpoint_commit": "3a5734d",
+      "product_unchanged": true,
+      "remote_document_receipt": {
+        "completed": true,
+        "file": "docs/INCONSISTENCY_REPORT.md",
+        "before_sha256": "88f73fe117b981c0380eec97c4face9cd427055ca747c14df9726d984c51d5df",
+        "after": null,
+        "retained_backup": "/srv/p2enjoy-serverless/.source-backup-validation-name-resolution-21e4b9e957d2430fb1688146c13096ca/INCONSISTENCY_REPORT.md",
+        "no_service_or_configuration_change": true
+      }
+    }
   },
   "git_remote_configured": false,
   "remaining": [
