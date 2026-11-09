@@ -73,6 +73,14 @@ les appels interrompus ne sont pas comptés comme succès handler. Le nombre exa
 des succès publics sera établi par le rapport, sans le supposer à partir des
 seules fonctions utilitaires.
 
+Le contrôle génère aussi un UUID de réponse avant toute réservation pour les
+refus d'identité/route/limite et pour les préflights ; cet UUID n'est alors pas
+une ligne invocations. La collecte doit le distinguer explicitement des appels
+persistés et ne pas fabriquer un état. Les résultats métier non2xx peuvent être
+des handlers réussis : seul l'état durable et handler_started font autorité.
+L'appel client abandonné après admission peut terminer succeeded sans réponse
+reçue ; son UUID observé running puis succeeded est conservé séparément.
+
 Dix-huit fonctions attendues dans deux namespaces sont purgées entièrement par
 les API :2 stockage et16 invocation. Recouper agent, volumes, code, registre,
 baux, instances, réseaux et canaux. Préserver les5 982 artefacts antérieurs,

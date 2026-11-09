@@ -5145,3 +5145,12 @@ Collecter tous les vrais transports d'invocation et joindre les purges publiques
 La garde de plafond d'instances existante peut recréer le contrôle, donc l'identité
 CID finale n'est pas présentée comme stable ; image/configuration/référence le sont.
 Contrat FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS persisté avant code.
+
+### Discriminants du relevé d'invocation avant collecte
+
+Lecture de invocation_routes : l'UUID d'une réponse peut précéder la réservation
+(auth/route/limite/préflight), et une réponse métier404/507 peut être un handler
+succeeded. La collecte native distinguera absence de réservation, état durable
+et succès sans réponse après déconnexion admise. La revue a corrigé le compte
+sept en ajoutant l'appel A pendant piloteB et demandé de relever aussi les
+en-têtes du vrai HTTP/2 ; aucun résultat E2E encore acquis pour cette tranche.
