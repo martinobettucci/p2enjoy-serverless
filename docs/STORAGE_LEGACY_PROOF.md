@@ -20,7 +20,7 @@ cette différence et conserve les deux empreintes, sans qualifier les fichiers
 entiers d’identiques.
 
 Le passage ancien → actuel utilise l’image immuable du contrôle actuellement
-déployé, qui applique normalement 004–006. L’ancienne API ne doit jamais voir la
+déployé, qui applique normalement 004–007. L’ancienne API ne doit jamais voir la
 base actuelle : ses INSERT sans liste de colonnes n’offrent pas de compatibilité
 descendante. Aucun retour à l’ancien code après migration des données temporaires.
 
@@ -84,7 +84,7 @@ La preuve exige publication, validation réussie et conteneur retiré avant DELE
 Elle vérifie le schéma 001–003 et l’absence des fonctions dans le vrai registre agent.
 
 Après bascule vers l’image actuelle, la même base et la même clé conservent la
-session, les UUID et les révisions. Les six migrations sont constatées, puis
+session, les UUID et les révisions. Les sept migrations sont constatées, puis
 `/api/session` confirme l’authentification. Les archives contiennent du code réel
 et exposent `storage.registered=false`, distinct d’un registre connu sans volumes.
 
@@ -99,6 +99,16 @@ et exposent `storage.registered=false`, distinct d’un registre connu sans volu
   temporaire doit conserver cette décision et ce diagnostic.
 
 ## Nettoyage et preuve finale
+
+Le [complément de migration de purge 006](FUNCTION_VERSION_PURGE_UPGRADE.md)
+réutilise cette fenêtre dans un mode distinct, l’image006 réellement conservée
+et un namespace de responsabilité propre. Les modes `partial` et `historical`
+ci-dessus restent inchangés. L’attente de leur upgrade reste une santé verte ;
+seul le mode de purge dispose des observations natives de refus/rollback, de la
+reprise006 avant commit007 et d’une attente API lisible pendant EACCES. Le
+relâchement de permissions utilise un descripteur vérifié avec fchown en dernier.
+Ce complément reste à qualifier ; la campagne003→007 doit être rejouée après
+les extensions du helper.
 
 La commande contradictoire reste volontairement non terminée. Elle n’est ni
 abandonnée par SQL ni qualifiée de purge réussie. Son installation temporaire

@@ -1,5 +1,23 @@
 # Journal de cadrage
 
+## 2026-11-09 — Fenêtre retenue pour les deux phases de purge
+
+La campagne commune passe ses 18 campagnes/313groupes sur229sources, avec
+63captures recoupées. Le checkpoint au repos totalise328groupes avec ses cibles
+spécifiques ; la migration de purge reste ouverte. Le recoupement natif confirme
+1133identités connues et261tombstones inconnus, cinq fonctions purgées dans cinq
+namespaces,29fichiers embarqués et deux assetsHTTPS conformes.
+
+L’exploration confirme que la garde historique accepte les volumes unmounted
+sans bail, montage ni intention agent. Pour éprouver l’entrée en phasevolumes,
+on synchronise le vrai sweep par une commande de cache terminée avant de
+supprimer/purger la fonction ; le contrôle est arrêté avant le sweep suivant,
+sans modifier la phase parSQL. Le démarrage007 devra reprendre l’agent réel.
+Pour artifacts, son effacement sera déjà terminé et seul le code sera retenu.
+Le contrat ciblé précise ces deux cas, les noms de responsabilité et la copie
+privée des vrais états pour les refus de corrélation. Aucun nouveau comportement
+produit n’est encore appliqué par cette décision.
+
 ## 2026-11-09 — Décision de reprise d’une purge 006 pendant le backfill
 
 La revue trouve un état 006 légitime que le backfill actuel refuse : purge

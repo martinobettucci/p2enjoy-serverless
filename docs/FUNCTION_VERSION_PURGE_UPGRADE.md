@@ -49,13 +49,16 @@ Une vraie publication Node/Docker précède suppression et purge publiques.
 compteurs, l’inventaire effacé, la garde et le reçu plutôt que simuler ces états.
 
 Pour la phase `artifacts`, attendre la fin de l’agent et le reçu de contrôle
-encore pending. Pour `volumes`, utiliser de vrais fichiers à effacer : après
-`start-discard` pending, l’agent peut terminer avant le prochain sweep du contrôle.
-Le helper constate alors reçu agent terminé, absence de volumes/baux/pending
-agent et commande de contrôle encore en `volumes`, puis arrête immédiatement
-le contrôle. Cette garde avant arrêt préserve les préconditions du restaurateur.
-Si la fenêtre attendue n’existe pas, le scénario échoue ; aucun passage n’est
-déclaré ou ignoré conditionnellement.
+encore pending. Pour `volumes`, synchroniser le sweep réel par un vidage de cache
+terminé, puis supprimer la fonction et engager sa purge : le POST produit la
+décision avant le sweep suivant. Arrêter le contrôle alors que son reçu est
+encore en `volumes`, puis vérifier ce même état après arrêt. Les volumes de cette
+fixture sont désactivés et archivés : aucune instance, aucun bail/montage, aucune
+intention agent en cours. Des lignes de volumes unmounted peuvent encore exister ;
+le restaurateur les admet déjà comme non référencées. La nouvelle image doit
+alors reprendre aussi l’effacement réel par l’agent. Si la fenêtre attendue
+n’existe pas, le scénario échoue ; aucun passage n’est déclaré ou ignoré
+conditionnellement. La phase n’est jamais changée par SQL pour fabriquer le cas.
 
 Une attente « API lisible » explicite vérifie image/ID/vie du seul conteneur
 temporaire et le vrai GET anonyme `/api/session` avec Host canonique. Elle ne
@@ -84,6 +87,13 @@ immédiate est normale ; le reçu public et les octets à zéro confirment la fi
    nouvelle fenêtre reste compatible avec la garde indépendante.
 5. Rejouer les campagnes concernées sur la nouvelle image, y compris le banc
    003 → 007 ; conserver séparément la campagne précédente sur l’ancienne image.
+
+Le mode de fenêtre porte un nom de responsabilité propre, avec namespace
+`code-purge-migration-<nonce>`, service/contrôle temporaire identifiés et garde
+privée. Les modes historiques conservent leurs conventions et leurs contrôles.
+Les copies des vrais états 006 retenus sont sauvegardées par SQLite sous leur
+propriétaire, en 0600, hors des répertoires temporaires ensuite retirés. Elles
+permettent les fautes de corrélation sans altérer l’installation partagée.
 
 Si 007 est annulée, conserver la base 006 et reprendre l’ancienne image : une
 restauration de sauvegarde risquerait de revenir avant la purge déjà décidée.
