@@ -4482,3 +4482,10 @@ restitution puis le redémarrage indépendants du même conteneur. Il ne sera pa
 présenté comme une coupure au milieu d'un unlink. Contrat :
 FUNCTION_VERSION_DUPLICATE_RECOVERY.md. Produit/images/configuration restent
 inchangés attendu ; SLS-074 conserve son périmètre complet. Aucun remote Git.
+
+La revue avant exécution distingue restitution normale du helper et récupération
+externe après perte SSH : cette dernière doit joindre le helper d'origine avant
+de restituer/désarmer, pour empêcher un chmod tardif. Le flag de restitution ne
+précède jamais la confirmation des unités. Les timers sont vérifiés inactifs
+sans leur inventer MainPID ; les services chargés exigent MainPID0. Ces règles
+sont persistées avant correction du banc ; aucune faute n'a encore été lancée.

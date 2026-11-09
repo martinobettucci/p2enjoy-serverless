@@ -64,6 +64,12 @@ réel et ne rejoue pas aveuglément une opération à issue inconnue. Les config
 officielles et les montages sont recoupés sans enregistrer leurs valeurs privées.
 La restitution explicite du premier cycle et l'expiration indépendante du second
 sont distinguées dans leurs reçus ; timers/services/helpers doivent terminer.
+Une récupération externe après perte SSH termine et joint d'abord le helper
+exact par PID/naissance/arguments, comme la garde indépendante. La restitution
+normale appelée par le helper ne le termine pas lui-même. Le drapeau de
+restitution confirmée n'est posé qu'après vérification des reçus et des unités.
+Un timer inactif n'expose pas nécessairement MainPID ; cette propriété est
+exigée pour un service chargé, ou son absence confirmée par LoadState=not-found.
 
 ## Preuves et limites
 
