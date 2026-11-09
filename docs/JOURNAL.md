@@ -4671,3 +4671,19 @@ parcours006/007→008 avec entrée volumes/artifacts et restitution gardée, plu
 perte du pilote en007/artifacts. La source007 est attestée depuis les SHA de la
 preuve du registre avant toute interruption. Dix-neuf groupes prévus, pas encore
 exécutés. Les options explicites conservent le contrat des anciens modes.
+
+
+## 2026-11-09 — Fenêtres de purge008 vertes, refus à éprouver
+
+Les cinq fenêtres passent19 groupes sur280 sources figées. Les quatre normales
+terminent purge et restart ; la cinquième source007/artifacts restitue via la
+garde indépendante après perte du pilote. Le recoupement natif reste à finir.
+La première attestation s'était arrêtée sur Path.open(opener) avant création
+du reçu ; source/log/rapport sont conservés séparément, builtinsopen corrige
+l'appel et l'attestation verte confirme29 backends et services inchangés.
+
+Avant le code de preuve complémentaire, trois refus réels du banc sont décidés :
+cible implicite007 sur008, source007 sans cible008 explicite, image007 présentée
+comme006. Ils doivent précéder garde/arrêt/déplacement et conserver strictement
+services/configuration/répertoires. Total attendu22, avec époque documentaire
+distincte après les19 fenêtres ; aucun changement produit.

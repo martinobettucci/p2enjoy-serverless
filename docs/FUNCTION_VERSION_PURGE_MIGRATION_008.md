@@ -64,6 +64,19 @@ hash connu ou inconnu. Le mode indépendant joint le pilote par pidfd/naissance,
 laisse la garde figée restaurer les originaux et vérifie ses reçus et unités.
 Les autres pertes ou pannes propres de garde ne sont pas déduites de ce cas.
 
+## Refus avant la fenêtre
+
+Après les cinq fenêtres figées, trois groupes supplémentaires exercent le vrai
+opérateur avec des paramètres invalides : cible implicite007 sur installation008,
+source007 sans cible008 explicite et image007 présentée comme source006. Chaque
+refus doit précéder armement, arrêt et déplacement ; aucun événement guard-armed,
+aucun journal de restitution ni unité active. Un éventuel répertoire de travail
+vide créé avant le refus est retiré uniquement après identité, propriétaire,
+mode et absence de journal vérifiés. Les services, leurs démarrages, les fichiers
+officiels et les identités des répertoires restent strictement identiques.
+Ces trois groupes portent leur propre époque documentaire et ne transforment
+pas les essais interrompus en succès. Total prévu22, dont19 fenêtres et3 refus.
+
 ## Livraison et limites
 
 Recouper l'image courante avant/après, ses fichiers embarqués, la référence,

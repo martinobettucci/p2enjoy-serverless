@@ -850,8 +850,9 @@ Le [replay de purges historiques008](FUNCTION_VERSION_PURGE_MIGRATION_008.md)
 est décidé avant code : quatre fenêtres réelles006/007→008, en volumes/artifacts,
 puis restitution indépendante007→008 après perte du pilote. Références d'images
 attestées, cachesNULL/connus et registre deleted vérifiés, reçu et octets repris,
-originaux restitués par identité. Dix-neuf groupes prévus, encore non exécutés ;
-aucune clôture de SLS-074 n'en est déduite.
+originaux restitués par identité. Les19 groupes de fenêtres passent sur280 sources ; recoupement final en cours.
+Trois refus source/cible avant interruption complètent la matrice prévue22,
+encore à éprouver. Aucune clôture de SLS-074 n’en est déduite.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
