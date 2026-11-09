@@ -69,7 +69,7 @@ superviseur n'est pas supposé être l'écrivain SQLite. Un traceur lit les mét
 pwrite64 de sa WAL privée : FD/inode exact, en-tête de frame24 octets, numéro de
 page positif et taille de commit nulle. Cette frontière précède le marqueur de
 commit WAL ; l'instruction SQL COMMIT peut déjà être en cours. Le thread écrivain
-doit être unique dans cette phase. Il laisse ce syscall s'exécuter, constate
+doit être unique dans cette phase.
 La vue /proc/PID/mem est rouverte en lecture seule après l'exec, lorsque
 l'écrivain est arrêté à l'entrée de son écriture WAL ; le descripteur de mémoire
 ouvert avant exec n'est pas réutilisé pour les adresses de la nouvelle image.
@@ -145,8 +145,52 @@ d'écraser leurs rapports : conserver l'essai précédent local et distant avant
 relance. Le rapport natif est control/function-version-migration008.json ; le
 checkpoint et le build sont dans .local/e2e. Les bases privées ne sont pas publiées.
 
-La candidate n'est pas servie. L'interruption WAL, ses reprises et sa garde ne
-sont pas encore implémentées dans ce banc. Elles précèdent la bascule DEV, les
-régressions publiques et la clôture de ce complément. Les purges engagées et
-autres critères de SLS-074 restent ouverts. Les résultats ajoutés ici sont
-postérieurs au gel275 et ne modifient aucun code exécutable qualifié.
+Ce checkpoint de neuf groupes précède l'extension WAL ci-dessous. Ses275
+sources et sa preuve restent conservées dans leur époque, sans addition des
+replays au nombre de comportements uniques.
+
+
+## Interruption WAL qualifiée sur copie privée
+
+La [preuve native](evidence/function-version-migration008-wal-dev-2026-11-09.json)
+rejoue dix groupes sur276 sources figées : les neuf précédents et la coupure WAL.
+Après exec observé et réouverture de la mémoire, le véritable pwrite64 écrit24
+octets à l'offset32 de la WAL identifiée, page48, taille de commit nulle.
+Le SIGKILL du conteneur est recoupé par la mort native9 de l'écrivain et Docker137.
+Le snapshot007 logique et son schéma sont strictement identiques après coupure ;
+le même conteneur est redémarré puis applique008 avec les mêmes conservations
+et2882/4418 backfills. Le conteneur est retiré, son absence confirmée et la garde
+désarmée. Sauvegarde originale, services vivants et fichiers officiels restent
+identiques. Les trois essais interrompus et le ciblé vert restent séparés, sans
+gonfler le total dix. La commande complète est :
+
+```sh
+python3 -B e2e/function-version-migration008-run.py complete-component sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4
+```
+
+Le déclenchement indépendant après perte du traceur et les pannes propres de
+garde ne sont pas qualifiés par ce nominal. La candidate reste non servie à
+ce checkpoint. Les purges engagées, la variante premier hash inconnu puis connu
+et la campagne complète restent ouvertes dans SLS-074.
+
+## Bascule du contrôle déjà008
+
+Décision : remplacer uniquement l'image du contrôle DEV19cfe884 par def45648,
+après sauvegarde SQLite native et vérification du repos. La base est déjà008 :
+le script corrigé ne doit pas être rejoué et aucune migration009 n'est ajoutée.
+Le pilote conserve un backup privé, propriétaire spark-docker/mode0600, sans
+restauration automatique des données. Il recoupe toutes les tables et le schéma
+avant/après ; une éventuelle activité SSO ne vaut pas conservation et fait
+échouer cette assertion, avec diagnostic par table sans contenu sensible.
+
+Avant Compose up, une garde systemd indépendante bornée est armée. Si le pilote
+perd son issue avant le reçu de succès, elle remet uniquement le tag de l'image
+précédente et recrée le seul contrôle avec le manifeste et les deux env_file
+officiels inchangés. Elle refuse tout conteneur étranger : image, labels,
+configuration effective, référence et fichiers officiels doivent correspondre.
+Le backup n'est jamais restauré automatiquement : cela pourrait effacer une
+écriture légitime. Les commandes Compose sont bornées, le verrou partagé ne
+couvre que leurs opérations bornées et le reçu terminal. La garde nominale
+est désarmée après santé et invariants confirmés ; son déclenchement autonome
+ne sera pas déduit de ce parcours nominal. Les replays publics API12 et CLI5
+suivent en série, avec vérification physique des fonctions purgées.

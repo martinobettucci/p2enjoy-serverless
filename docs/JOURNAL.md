@@ -4608,6 +4608,23 @@ affirmée rétrospectivement.
 Le troisième essai observe l'enfant arrêté, arme la garde et atteint l'entrée
 d'un pwrite64 de24 octets sur l'inode WAL privé. La lecture de l'en-tête échoue
 avant exécution de cette écriture : la vue mémoire ouverte avant exec renvoie
-une longueur nulle. Le banc doit rouvrir /proc/PID/mem sur la nouvelle image
+une longueur différente de24. Le banc doit rouvrir /proc/PID/mem sur la nouvelle image
 pendant l'arrêt natif, avant lecture. Aucune frontière WAL n'est déclarée
 qualifiée ; le conteneur/copie sont retirés et le contrôle servi reste identique.
+
+
+## 2026-11-09 — Coupure WAL verte et décision de bascule008
+
+Le ciblé natif passe, puis le replay complet passe dix groupes sur276 sources.
+Frame WAL page48/offset32/commit0 réellement écrite24 octets ; mort9 et Docker137,
+rollback007 exact, relance du même ID et008 vérifiée. Copies retirées et garde
+désarmée ; contrôle19cf et référence inchangés. Les trois essais interrompus
+restent archivés ; ni eux ni le ciblé ne s'ajoutent au total dix. La revue dédiée
+en lecture seule ne relève pas de blocage ; le déclenchement indépendant de
+garde et ses propres pannes restent non qualifiés. Preuve native conservée dans
+evidence/function-version-migration008-wal-dev-2026-11-09.json.
+
+La bascule suivante est tranchée avant code dans le contrat : sauvegarde native,
+repos, remplacement d'image seulement sur base déjà008, hashes de toutes les
+tables et du schéma recoupés, garde indépendante de retour à19cf sans restauration
+DB automatique. Les replays API12/CLI5 sont distincts et restent à exécuter.
