@@ -4728,3 +4728,18 @@ UDF. Le témoin applique008 puis redémarre le même conteneur isolé, données0
 strictement identiques. Sources privées immutables, socket volontairement absent
 après migration, services/configuration vivants conservés.42 groupes prévus,
 encore non exécutés ; décision persistée avant dépendance de code.
+
+
+## 2026-11-09 — Précontrôle des sidecars du backup007
+
+Le premier lancement artifacts s'arrête avant copie/conteneur/rapport distant :
+le précontrôle exigeait l'absence de sidecars. Les deux véritables backups portent
+un WAL de0octet et un SHM de32768octets, propriétaire1001, laissés par la lecture
+antérieure. SHA des bases conformes, contrôle ID/image/démarrage identique et
+aucun conteneur de campagne. Cet essai reste interrompu, zéro groupe retenu.
+
+Décision avant correction : accepter un WAL absent ou vide régulier appartenant
+à1001, relever sans modifier le SHM, lire le backup immutable et recouper SHA/
+tailles des bases et sidecars avant/après. Un WAL non vide reste refusé ; ne pas
+effacer ces fichiers pour forcer une précondition. Les tables de la base doivent
+toujours correspondre à la preuve historique protégée.

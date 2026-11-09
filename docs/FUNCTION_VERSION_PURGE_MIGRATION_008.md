@@ -82,8 +82,12 @@ pas les essais interrompus en succès. Total prévu22, dont19 fenêtres et3 refu
 Décision : partir des deux sauvegardes007 réelles, en volumes et artifacts,
 produites par les fenêtres précédentes et identifiées dans leur preuve. Vérifier
 journal root restauré, source007, empreinte de backup, propriétaire1001/mode0600,
-sept migrations et cache connu. Les originaux s'ouvrent en lecture immutable ;
-chaque mutation porte uniquement sur une copie privée conservant les contraintes
+sept migrations et cache connu. Les originaux s'ouvrent en lecture immutable ; un WAL présent doit être vide,
+régulier, non symlink et appartenir au propriétaire1001. Le SHM éventuel est
+relevé puis conservé : il n'est pas une source de pages pour cette lecture. Les
+empreintes et tailles des sidecars sont recoupées avant/après ; aucune suppression
+ou checkpoint de l'archive. Un WAL non vide reste un refus. Chaque mutation porte
+uniquement sur une copie privée conservant les contraintes
 réelles. Aucun marqueur de schéma ni état de purge n'est fabriqué pour la source.
 
 Chaque phase comprend vingt refus et un témoin positif, soit42 groupes au total :
@@ -113,7 +117,8 @@ Chaque phase comprend vingt refus et un témoin positif, soit42 groupes au total
 
 Le cas pointeur respecte le trigger007 en rendant aussi la révision non supprimée ;
 il prouve ce cas combiné. Il doit être refusé par historical_active_version_required.
-Les autres cas attendent le refus UDF de l'inventaire historique, avant008. Toutes
+Les autres cas attendent le refus UDF de l'inventaire historique, avant toute
+transformation de008. Toutes
 les références étrangères restent valides : un autre service réel est réutilisé.
 Les contraintes restent activées pendant les altérations et chaque entrée copiée
 est vérifiée avant démarrage.
