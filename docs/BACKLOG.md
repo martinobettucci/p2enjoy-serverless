@@ -713,6 +713,12 @@ migration additive des identités, conservation des alias et lecture/copie du ha
 Les uploads continuent actuellement à activer leur révision ; la déduplication
 et la promotion séparée constituent la suite de cette même unité.
 
+Revue de migration : le premier backfill refuse actuellement une purge 006
+déjà décidée dont les fichiers ne sont pas encore retirés. La
+[correction et ses preuves](FUNCTION_VERSION_PURGE_UPGRADE.md) sont décidées ;
+le registre d’incohérences suit sa résolution. L’upgrade au repos est éprouvé,
+la reprise de cet état intermédiaire reste à qualifier avant clôture.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;

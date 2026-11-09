@@ -1,5 +1,23 @@
 # Journal de cadrage
 
+## 2026-11-09 — Décision de reprise d’une purge 006 pendant le backfill
+
+La revue trouve un état 006 légitime que le backfill actuel refuse : purge
+commise, inventaire/événements effacés et code encore comptabilisé. Décision :
+conserver un hash inconnu uniquement pour la décision durable fortement
+corrélée, puis laisser son résolveur terminer. Une simple levée du contrôle
+des octets accepterait des incohérences inexpliquées ; elle est écartée.
+Le [contrat ciblé](FUNCTION_VERSION_PURGE_UPGRADE.md) et l’entrée
+SLS-074-PURGE-006 précèdent toute correction. Ils distinguent référence
+refusée, reprise 006 sans restauration après rollback, upgrade corrigé et
+downgrade après commit. Le banc existant et sa garde sont réutilisés.
+
+Cette décision documentaire indépendante est enregistrée pendant la régression
+sur 229 sources produit/tests/fixtures/manuel figées. Aucun de ces fichiers
+n’est modifié ; le nouveau contrat ne sera ajouté à leur index qu’après la
+fin de cette campagne. Les résultats courants ne qualifieront pas rétroactivement
+la correction à venir. SLS-074 et le goal restent ouverts.
+
 ## 2026-11-09 — Registre migré et préparation de la régression
 
 007 est appliquée sur DEV après sauvegarde native : quinze tables antérieures
