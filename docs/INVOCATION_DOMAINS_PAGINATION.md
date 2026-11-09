@@ -56,3 +56,26 @@ l’accueil, seconde page de cinq puis un domaine, copies natives et invocations
 réelles ; CLI parcourant les deux pages et conservant le succès de publication
 si le catalogue change après sa première page. Les scénarios et leurs sources
 seront figés avant exécution. Aucun de ces résultats n’est encore acquis.
+
+
+## Précontrôle après autorisation et contrat de retrait
+
+Le [précontrôle autorisé](evidence/invocation-pagination-authorized-preflight-dev-2026-11-09.json)
+retrouve les quatre noms libres, sans mutation ni requête DNS native sur ces
+noms absents. L’inventaire normal de lelabs.tech retourne22 entrées, aucune de
+ces quatre étiquettes ; les quatre ajouts restent sous la limite100 du relevé
+actuel. Ce relevé ne prouve ni création, ni résolution, ni certificat des alias.
+
+La console normale expose DELETE /api/dns/record avec zone, name et type. Elle
+relit l’enregistrement, l’adresse de la Forge et les routes avant suppression ;
+elle refuse notamment un DNS encore servi par une route. Le nettoyage retire
+donc d’abord les seules routes créées, puis les seuls A exacts encore conformes
+à leurs identifiants/nom/type/valeur/TTL enregistrés. Aucun autre type ou nom de
+zone n’est retiré. Les deux routes et DNS permanents sont recoupés inchangés.
+Une disparition ou modification inattendue reste un diagnostic, pas une preuve
+d’appartenance ni une autorisation de remplacement.
+
+Les clients et la garde de nettoyage sont préparés avant création ; les étapes
+et réponses incertaines sont persistées. La campagne UI/CLI emploie les
+sémantiques008 de publication sans promotion et de sélection de version.
+Le contrôle et ses images n’ont pas besoin d’être reconstruits pour ces alias.

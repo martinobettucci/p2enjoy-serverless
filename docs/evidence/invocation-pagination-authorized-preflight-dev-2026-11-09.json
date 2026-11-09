@@ -1,0 +1,93 @@
+{
+  "unit": "SLS-066",
+  "stage": "authorized_readonly_preflight",
+  "authorization_commit": "c4c9ecc",
+  "read_only": true,
+  "mutation_count": 0,
+  "applied": false,
+  "qualified_e2e": false,
+  "route_and_dns_availability": {
+    "completed": true,
+    "read_only": true,
+    "mutation_count": 0,
+    "authorization_commit": "c4c9ecc",
+    "observed_at_ns": 1794233598616211456,
+    "spark": {
+      "id": "77dd528d87a0b1edcdad87ad",
+      "name": "infra-serverless",
+      "ipv4_address": "10.77.0.24"
+    },
+    "permanent_routes": [
+      {
+        "id": "2aedd847cd94ddf80ee9aa89",
+        "domain": "serverless.lelabs.tech",
+        "spark_id": "77dd528d87a0b1edcdad87ad",
+        "spark_name": "infra-serverless",
+        "ipv4_address": "10.77.0.24",
+        "target_port": 18090,
+        "tls": 1,
+        "enabled": 1,
+        "applied_at": "2026-11-09T00:10:00+00:00"
+      },
+      {
+        "id": "7675e21bc259fa79ef276c40",
+        "domain": "functions.lelabs.tech",
+        "spark_id": "77dd528d87a0b1edcdad87ad",
+        "spark_name": "infra-serverless",
+        "ipv4_address": "10.77.0.24",
+        "target_port": 18090,
+        "tls": 1,
+        "enabled": 1,
+        "applied_at": "2026-11-09T00:10:00+00:00"
+      }
+    ],
+    "temporary_domains": [
+      {
+        "domain": "functions-pagination-1.lelabs.tech",
+        "route_match": null,
+        "dns_current": null,
+        "ttl": 300
+      },
+      {
+        "domain": "functions-pagination-2.lelabs.tech",
+        "route_match": null,
+        "dns_current": null,
+        "ttl": 300
+      },
+      {
+        "domain": "functions-pagination-3.lelabs.tech",
+        "route_match": null,
+        "dns_current": null,
+        "ttl": 300
+      },
+      {
+        "domain": "functions-pagination-4.lelabs.tech",
+        "route_match": null,
+        "dns_current": null,
+        "ttl": 300
+      }
+    ],
+    "all_names_free": true,
+    "native_dns_not_queried": true,
+    "cleanup_api_still_to_verify": true
+  },
+  "dns_cleanup_readiness": {
+    "read_only": true,
+    "observed_at_ns": 1794233942555637724,
+    "zone": "lelabs.tech",
+    "records_returned": 22,
+    "provider_page_size_in_console_source": 100,
+    "list_below_page_limit_with_four_new_records": true,
+    "matching_records": [],
+    "cleanup_endpoint_inspected": "DELETE /api/dns/record",
+    "cleanup_order": "owned routes first, then exact owned A records",
+    "no_mutation": true
+  },
+  "created_objects": [],
+  "next": [
+    "Prepare scoped route/DNS ownership receipts and independent cleanup",
+    "Adapt real UI/CLI pagination scenarios to publication/promotion008",
+    "Create four A and four TLS routes through normal console after fresh checks",
+    "Verify native DNS/TLS, execute both real pages, remove only owned objects"
+  ]
+}

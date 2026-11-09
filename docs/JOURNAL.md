@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 2026-11-09 — Quatre noms libres et retrait normal disponible
+
+Le précontrôle suivant l’autorisationc4c9ecc ne fait aucune mutation : les
+quatre rapprochements de routes sont vides, les quatre A absents, et le relevé
+normal retourne22 entrées sans autre type portant ces noms. Le compte reste
+sous la limite100 du relevé même avec les quatre A. Aucun nom absent n’est
+interrogé par le résolveur natif, pour éviter son cache négatif.
+
+La lecture des sources de la console normale confirme DELETE dns/record et sa
+garde : elle relit zone et routes, refuse un nom encore servi et cible le couple
+nom/type exact. Le retrait sera route puis A avec identifiants/valeurs frais.
+La préparation des clients008 et d’une garde précède toute création ; aucun
+alias supplémentaire n’est encore appliqué ou déclaré E2E qualifié. Aucun code
+ou service de FORGE n’est modifié par cette lecture de référence.
+
 ## 2026-11-09 — Autorisation reçue pour les quatre alias temporaires de pagination
 
 Le responsable autorise les seuls functions-pagination-1 à4.lelabs.tech,

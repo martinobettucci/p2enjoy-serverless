@@ -526,6 +526,10 @@ changée. Aucun alias ni DNS supplémentaire n’est déjà revendiqué appliqu�
 Le refus automatique d’écriture de proposition précédait cette extension ; il
 reste historique. L’attente d’autorisation est levée, les preuves six domaines
 restent à produire avec les comportements courants de version/promotion008.
+Le [nouveau précontrôle](evidence/invocation-pagination-authorized-preflight-dev-2026-11-09.json)
+confirme quatre noms libres et22 entrées DNS, sans mutation. L’opération normale
+de retrait DNS existe et impose de retirer la route auparavant. Les clients et
+la garde de nettoyage restent à préparer avant création et qualification.
 Pendant l’attente antérieure, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
 sont préparées sur la requête canonique, sans changer de route. L’extraction de
 NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,
