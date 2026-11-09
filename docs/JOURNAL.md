@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 2026-11-09 — CLI Docker : respecter la lecture Compose des fichiers de cellule
+
+Le premier essai s’arrête avant un groupe validé, sans fonction publiée ; les
+objets sont nettoyés et aucun client Docker ne reste présent. Le diagnostic
+natif confirme que SERVERLESS_PUBLIC_URL est cité dans le fichier officiel :
+la valeur littérale diffère de l’origine attendue, sa lecture parsée concorde.
+Le lanceur direct docker --env-file ne respecte donc pas le format déjà consommé
+par les services Compose. La configuration de cellule n’est pas à modifier.
+
+Décision avant correction : employer Compose DEV avec les deux env_file
+normaux, image immuable, mêmes bornes et network_mode bridge, sans réseau ni
+volume de projet créé. Sa définition temporaire ne contient aucune valeur
+privée et est retirée à la fin. Le rapport arrêté reste séparé. Les erreurs du
+wrapper portent une étape statique de diagnostic, sans restituer les entrées.
 ## 2026-11-09 — Décision : qualifier les commandes authentifiées dans leurs images
 
 Le checkpoint372f5b8 qualifie les cinq comportements CLI depuis Python sur le

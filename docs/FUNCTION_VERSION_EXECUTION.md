@@ -252,8 +252,11 @@ comportements nouveaux ni une qualification du reste de SLS-074.
 Le navigateur/client orchestrateur reste sur le poste. Pour une commande CLI,
 il transmet par stdin SSH privé le manifeste, les deux sources de qualification,
 les arguments et les seules valeurs éphémères requises. Le helper du SPARK DEV
-lance un client Docker nommé pour la publication/promotion et identifié par son
-image immuable. Les modules exécutés et la bibliothèque canonique sont recoupés
+lance par Compose, profil DEV, un client Docker nommé pour la publication/
+promotion et identifié par son image immuable. Les deux env_file sont lus avec
+la même sémantique que les services existants, y compris les valeurs citées. La
+définition temporaire ne porte que les contraintes et l’image ; elle est retirée
+à la fin. network_mode bridge évite de créer un réseau Compose de campagne. Les modules exécutés et la bibliothèque canonique sont recoupés
 avec les sources du dépôt. Aucun jeton ou secret éphémère ne passe dans argv,
 un fichier, Docker Config.Env ou les reçus ; la CLI reçoit ces valeurs dans
 l’environnement de son processus enfant après lecture de stdin. La configuration

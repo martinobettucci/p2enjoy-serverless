@@ -755,6 +755,9 @@ n’est déclaré observé. Les pannes et la régression complète restent ouver
 La prochaine preuve porte sur les cinq comportements CLI déjà qualifiés sur
 le poste, dans chacune des deux images Docker DEV, selon
 [le contrat de transport privé](FUNCTION_VERSION_EXECUTION.md#cli-conteneurisée-authentifiée).
+Le premier lanceur direct s’arrête avant scénario sur la lecture littérale de
+l’origine citée dans le fichier officiel. Les objets et clients sont nettoyés ;
+le replay utilisera Compose DEV et son parseur normal, sans changer la cellule.
 Leurs campagnes et nettoyages restent séparés ; aucun cumul ne les présente
 comme dix comportements fonctionnels nouveaux. Pannes et suite complète restent
 obligatoires après ce complément.
