@@ -38,7 +38,13 @@ une preuve de cette correction.
 ## Banc historique réel et borné
 
 Réutiliser la fenêtre gardée de `storage-legacy-environment.py`, avec l’image
-006 réellement conservée, les fichiers officiels de cellule et le SSO normal.
+006 construite depuis le véritable arbre Git
+`f56d79ebe3d1d84731bfd262d1e6a9d5b5a680c0`, les fichiers officiels de cellule
+et le SSO normal. Ses sources produit sont comparées au checkpoint conservé
+avant le registre, ses six migrations et ses fichiers embarqués sont vérifiés.
+Le tag dédié `p2enjoy-control:historical-schema-006` et une attestation root
+protégée conservent cette référence, sans modifier le tag du contrôle en service.
+Vérifier l’image et l’attestation avant d’arrêter un service ou déplacer un original.
 Les originaux, leurs tables et artefacts, la configuration et l’exécuteur de
 référence sont restaurés par la garde existante, sans administration de FORGE.
 Les modes historiques actuels gardent leur attente de santé verte.
@@ -96,6 +102,13 @@ privée. Les modes historiques conservent leurs conventions et leurs contrôles.
 Les copies des vrais états 006 retenus sont sauvegardées par SQLite sous leur
 propriétaire, en 0600, hors des répertoires temporaires ensuite retirés. Elles
 permettent les fautes de corrélation sans altérer l’installation partagée.
+
+La première tentative n’a démarré aucun contrôle historique : l’ancien digest
+de l’image006 n’était plus présent dans Docker. Ses originaux sont entièrement
+restaurés et le rapport reste en échec, zéro groupe compté. Reconstituer la vraie
+image depuis ses sources figées est un prérequis de build, jamais une doublure.
+Les prochaines procédures d’upgrade doivent nommer et conserver l’image de
+retour avant bascule ; la simple mémorisation d’un digest ne garantit pas sa présence.
 
 Si 007 est annulée, conserver la base 006 et reprendre l’ancienne image : une
 restauration de sauvegarde risquerait de revenir avant la purge déjà décidée.

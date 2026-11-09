@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 2026-11-09 — Prérequis de l’image006 et première restauration
+
+La première fenêtre de purge a armé sa garde et conservé les originaux, puis
+Compose a refusé le démarrage historique : l’image006
+7b52f630b7f071a9fc7659298039b7bfcfe3579ed6fb962ebf0a63db8259f490
+n’est plus présente. Le Compose est valide. Zéro groupe n’est compté ; mêmes
+répertoires, tables, artefacts, configuration et exécuteur sont restaurés,
+contrôle/agent sains, timer/service inactifs. Le défaut de préflight est corrigé
+avant une nouvelle fenêtre.
+
+Décision persistée : reconstruire le véritable arbre006 de f56d79e, comparer
+les sources produit au checkpoint antérieur et les fichiers réellement embarqués,
+conserver un tag historique explicite et une attestation root. La fenêtre exige
+cette attestation et la présence du digest avant tout arrêt. Aucun état SQL n’est
+fabriqué, aucune dépendance remplacée et le tag courant du contrôle reste intact.
+Le digest seul ne suffit pas à conserver une image de retour.
+
 ## 2026-11-09 — Fenêtre retenue pour les deux phases de purge
 
 La campagne commune passe ses 18 campagnes / 313 groupes sur 229 sources, avec
