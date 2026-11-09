@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 2026-11-09 — Premier essai DNS arrêté et objet retiré
+
+Les trois prérequis réels de garde passent sans objets sur253 sources. Le premier
+cycle effectif s’arrête après le seul POST DNSA1 réussi, avant création de route
+ou groupe UI/CLI. La garde indépendante échoue aussi pendant son relevé. Le
+principal compare l’ID/valeur du seul A1, le retire par la console normale puis
+recoupe son absence et les configurations permanentes. La relecture immédiate
+après DELETE échoue exactement sur l’assertion zone active du helper historique ;
+la suivante annonce active et aucun A temporaire. L’erreur première n’a conservé
+que son type, ce qui ne prouve pas son emplacement exact. Avant correction, le
+contrat sépare état transitoire de zone et propriété des enregistrements, et
+impose de préserver erreur initiale et erreur de nettoyage distinctement.
+L’essai reste incomplet avec zéro groupe fonctionnel, sans faux nettoyage
+indépendant ; les prérequis seront rejoués après la correction du banc.
+
 ## 2026-11-09 — Cycle de retrait des alias de pagination
 
 L’autorisation des quatre alias est acquise. Avant code, le plan opératoire

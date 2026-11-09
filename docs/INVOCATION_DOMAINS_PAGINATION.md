@@ -133,3 +133,24 @@ création/TLS, UI et CLI sont distinctes ; aucun groupe n’est encore déclaré
 réussi par le présent contrat. Les nettoyages de fonctions passent par les API
 normales puis sont recoupés avec les artefacts natifs, sans compter une simple
 suppression logique comme purge physique.
+
+## Relevé DNS après écriture
+
+Le premier essai s’arrête après le succès du seul POST A1, sans route créée
+ni groupe UI/CLI. La garde échoue à son tour pendant le relevé. Le retrait
+explicite du seul A1 est confirmé ; sa relecture immédiate révèle le contrôle
+erroné : le fournisseur n’annonce momentanément pas la zone active après une
+écriture, puis le relevé suivant l’annonce active et sans ces quatre A. Les
+configurations permanentes n’ont pas changé. Les reçus incomplets et le retrait
+du principal sont conservés séparément ; aucun nettoyage indépendant réussi
+n’est attribué à cet essai.
+
+Décision avant correction : exiger une zone configurée et présente à chaque
+relevé, et son état active seulement au précontrôle initial avant création.
+L’état de publication de zone est une observation ; il ne remplace jamais
+la comparaison des identifiants, noms, types, valeurs et TTL. Les lectures
+postérieures et le nettoyage restent possibles pendant cette transition.
+Les diagnostics du banc conservent désormais phase et emplacement d’échec
+expurgés, et une erreur de nettoyage ne doit plus masquer l’erreur initiale
+dans le rapport. Les trois prérequis seront rejoués après correction, sur le
+même gel que la campagne effective. Aucun nouvel essai n’est encore qualifié.

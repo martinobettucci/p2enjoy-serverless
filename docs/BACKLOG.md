@@ -536,6 +536,13 @@ création, le retrait indépendant final après perte réelle du propriétaire e
 les parcours UI5+1/CLI2pages. Le changement de catalogue CLI retire une route
 temporaire connue avant le septième connect réel ; aucune réponse substituée.
 Ces preuves sont en préparation, sans création des quatre alias à ce stade.
+Un premier essai a ensuite créé le seul A1 puis s’est arrêté avant toute route
+ou groupe UI/CLI ; son retrait explicite est confirmé. Le relevé exigeait à
+tort une zone active immédiatement après écriture. Le
+[contrat corrigé](INVOCATION_DOMAINS_PAGINATION.md#relevé-dns-après-écriture)
+sépare cet état transitoire de l’identité des objets. Les trois prérequis de
+garde passés sur253 sources restent dans leur première époque ; ils seront
+rejoués après correction avant de créer à nouveau les quatre alias.
 Pendant l’attente antérieure, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
 sont préparées sur la requête canonique, sans changer de route. L’extraction de
 NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,
