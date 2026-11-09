@@ -53,6 +53,29 @@ propriétaire, contraintes activées et transaction unique, après vérification
 pointeur B et de l'absence d'artefact A. L'UPDATE doit toucher exactement A ;
 les autres champs et lignes sont conservés. Aucun cache007 n'est réécrit.
 
+## Restitution avec consommateur vivant
+
+Le nouveau mode exécute des handlers et peut conserver un consommateur après
+perte du contrôle. Sa garde retire d'abord le seul contrôle temporaire puis les
+instances de cette installation privée, avant d'arrêter l'agent. Chaque instance
+est liée à ses labels installation/fonction/révision/instance, au namespace de
+campagne, à sa révision SQLite et à son bind de code privé ; image et ID sont
+recoupés. Aucun conteneur étranger n'est une cible admissible.
+
+Les réseaux portent les mêmes identités et ne sont retirés que sans consommateur.
+Les baux sont limités à l'installation et aux fonctions de ce namespace ; après
+absence confirmée des consommateurs Docker, ils sont libérés par le protocole
+réel de l'agent, avec reçu et absence vérifiés. Intentions et résultats sont
+persistés dans le journal root. Le registre vivant n'est jamais corrigé par SQL.
+L'agent n'est arrêté qu'après ce nettoyage et avant la vérification no_references.
+Les anciens modes conservent leur chemin de restauration.
+
+Le troisième groupe indépendant observe un vrai appel008 running/handler_started,
+son instance et ses baux, puis déclenche la garde. Il joint l'appel et le pilote,
+recoupe le reçu indépendant et les retraits d'instances/réseaux/baux avant reprise
+des originaux. Un appel terminé200 avant la coupure invalide cette fenêtre.
+Les pannes propres de cette garde ne sont pas déduites du succès de ce cas.
+
 ## Matrice publique et marqueurs
 
 Deux fenêtres normales de sept groupes chacune :
@@ -74,8 +97,8 @@ Deux fenêtres normales de sept groupes chacune :
    et agent sains, ressources temporaires absentes et garde désarmée.
 
 Une troisième fenêtre de trois groupes reprend la variante inconnue jusqu'à008
-puis éprouve la restitution indépendante après perte réelle du pilote. Elle
-retire son installation temporaire ; elle ne compte pas comme purge publique
+puis éprouve la restitution indépendante après perte réelle du pilote pendant
+un vrai appel retardé dont le handler est observé démarré. Elle retire son installation temporaire ; elle ne compte pas comme purge publique
 terminée. Total prévu17 groupes, sans ajouter les campagnes antérieures.
 
 Le témoin garde A connue et deleted dans le registre. La variante conserve

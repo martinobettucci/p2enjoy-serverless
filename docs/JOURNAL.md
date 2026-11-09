@@ -4782,3 +4782,15 @@ marqueurs, Create/Read/Update, données/cache et restart sont éprouvés ensuite
 Deuxfenêtres7groupes et une restitution indépendante3groupes sont prévues.
 Le nouveau mode garde ses propres noms et garde, les anciens modes restent
 compatibles.17groupes non encore exécutés ; aucun changement produit présumé.
+
+
+## 2026-11-09 — Restitution du nouveau mode avec appel vivant
+
+Le nouveau mode historique exécute des handlers avec volumes ; la restitution
+existante ne sait retirer que des validateurs. Avant code, décision d'étendre
+uniquement ce mode : retirer contrôleur puis instances privées vérifiées par
+labels/namespace/révision/bind/image, réseaux sans consommateur, et libérer leurs
+baux par l'agent réel avant son arrêt. Intentions/résultats restent dans le
+journal root, aucune ligne de bail effacée par SQL. La troisième fenêtre teste
+ce chemin sur un appel retardé réellement démarré ; un200 avant coupure est un
+échec de fenêtre. Les anciens modes et les originaux restent hors de ces cibles.
