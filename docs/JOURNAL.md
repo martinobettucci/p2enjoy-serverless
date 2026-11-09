@@ -5131,3 +5131,17 @@ runtime tiré de Config.Env est exigé à observed et gated. Revue finale sans
 nouveau bloquant. Syntaxe contrôlée séparément des onze groupes E2E, zéro skip.
 Aucune source produit modifiée. Aucune route ou administration FORGE dans cette
 tranche. Sans remote Git configuré, livraison locale et synchronisation ciblée.
+
+## Tranche invocation/stockage008 : décision avant code
+
+L'exploration readonly identifie une confusion code/ressources dans le groupe
+ZIP du stockage (même paquet attendu comme nouvelle version) et des publications
+encore autoactivées dans le helper d'invocation. Le retrait UUID sans If-Match
+et le drainage supposé après promotion ne correspondent plus aux pools par hash.
+Décision : conserver15+31 groupes et leurs vrais défauts de stockage/exécution,
+mais ajouter codeA/codeB et7appels au groupe quota/rollback, promouvoir explicitement,
+éprouver le pilote et supprimer logiquement A encore consommé après promotionB.
+Collecter tous les vrais transports d'invocation et joindre les purges publiques.
+La garde de plafond d'instances existante peut recréer le contrôle, donc l'identité
+CID finale n'est pas présentée comme stable ; image/configuration/référence le sont.
+Contrat FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS persisté avant code.

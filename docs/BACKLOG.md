@@ -993,6 +993,14 @@ d'UI/manuel ni nouvelle preuve visuelle. Les autres clients, les pannes propres
 du banc et la régression complète008 restent dans SLS-074, toujours [~].
 
 
+La [tranche invocation/stockage008](FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md)
+est spécifiée avant code :46 groupes conservés (15 stockage et31 invocation),
+sept appels Echo ajoutés pour les versions A/B et le rollback, promotions
+explicites et retrait différé d'un hash encore consommé. Les18 fonctions seront
+purgées par les API complètes ; les opérateurs existants conservent leurs limites.
+Aucune preuve encore acquise pour cette tranche ; console et historique restent
+à adapter séparément.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;
