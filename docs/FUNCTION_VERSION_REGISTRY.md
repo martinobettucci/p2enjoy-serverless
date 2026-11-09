@@ -16,7 +16,13 @@ le contrôle accepte des requêtes. Un inventaire ou descripteur invalide fait
 
 Un tombstone déjà purgé, supprimé, sans octet conservé et dont l’inventaire
 a été effacé reste à `NULL` : le contenu inconnu ne peut être reconstitué.
-Une révision active ou encore stockée ne bénéficie jamais de cette exception.
+Une révision active ou dont le code reste disponible ne bénéficie jamais de cette
+exception. La correction en qualification reconnaît aussi une purge 006 déjà
+décidée et fortement corrélée : fonction supprimée sans pointeur, même opération,
+service, propriétaire et versions de commande/garde. Le code déjà retiré du
+catalogue garde alors une identité inconnue pendant son nettoyage, sans effacer
+ses compteurs ni contourner sa garde. Les critères et la preuve des phases
+volumes/artifacts sont définis dans [FUNCTION_VERSION_PURGE_UPGRADE](FUNCTION_VERSION_PURGE_UPGRADE.md).
 Les nouveaux inserts exigent un hash canonique ; un hash connu ne peut être
 modifié ni effacé, y compris lors d’une purge ultérieure.
 
@@ -67,6 +73,8 @@ de fonction effectivement purgée. Effectuer une sauvegarde native SQLite avec
 `Connection.backup`, intégrité vérifiée, et relever les anciennes colonnes,
 inventaires de fichiers et configuration/volumes sous leur propriétaire.
 La sauvegarde est privée au SPARK, jamais copiée dans les preuves publiques.
+La référence historique 006 est reconstruite depuis son arbre Git vérifié et
+conservée sous un tag dédié ; sa présence est contrôlée avant toute bascule.
 
 Construire et démarrer uniquement le contrôle DEV par ses commandes normales.
 Ne pas revenir à une ancienne image seule après migration : une restauration

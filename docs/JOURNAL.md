@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 2026-11-09 — Purge 006 engagée : refus et reprise désormais reproduits
+
+La référence 006 est reconstruite depuis f56d79e : 47 sources produit comparées
+au checkpoint, 28 fichiers embarqués conformes, tag courant inchangé et attestation
+root. Son image est ee4da4018ab5475917f396ef82f80a62ea59dbeca2705c453717c9d9d520b5ff.
+Le parcours réel artifacts passe quatre groupes de diagnostic, sans qualifier
+la fonctionnalité encore défectueuse : SSO, publication Node, suppression/purge
+publique sous EACCES, vrai refus 007, rollback complet (lignes et schéma), reprise
+de 006 sur la même base, relâchement et fin normale puis upgrade sain. Les
+originaux sont restaurés. Aucun état SQL de purge n’a été fabriqué.
+
+La correction décidée peut maintenant être appliquée : le seul état de purge
+durable corrélé reçoit une identité inconnue, en conservant compteurs et garde.
+Les installations déjà en 007 ne recalculent pas leurs hashes. Les deux phases
+d’entrée et les refus de corrélation doivent encore être éprouvés sur la nouvelle
+image ; le checkpoint précédent et le diagnostic restent leurs propres époques.
+
 ## 2026-11-09 — Prérequis de l’image006 et première restauration
 
 La première fenêtre de purge a armé sa garde et conservé les originaux, puis
