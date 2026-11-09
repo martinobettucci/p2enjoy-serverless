@@ -1,6 +1,7 @@
 # Identité canonique du paquet de fonction
 
-Première étape de [SLS-074](BACKLOG.md#sls-074), en cours d’implémentation.
+Première étape de [SLS-074](BACKLOG.md#sls-074), implémentée et qualifiée sur DEV.
+Le versionnement public complet reste en cours.
 `function_code_hash.py` porte l’algorithme commun, bibliothèque standard seule.
 L’extracteur et le packager restent les autorités de leurs fichiers réellement
 lus. Aucun hash fourni par un client ne constitue une preuve serveur.
@@ -73,3 +74,37 @@ directement sous control : le chemin complet, y compris le sous-répertoire du
 pilote et control.sock, doit tenir dans la borne native. Leur suivi/nettoyage
 reste indépendant du dossier de code. Le rapport conserve les codes d’erreur
 du diagnostic et distingue résultat fonctionnel de nettoyage confirmé.
+
+Les conteneurs clients portent un nom de responsabilité explicite :
+serverless-code-packager ou serverless-code-identity, suivi du nonce de campagne
+et du numéro de client. La correction de ces noms après qualification entraîne
+le replay des sept groupes concernés. Les 45 régressions aux clients inchangés
+sont conservées avec leurs empreintes et images ; les époques diffèrent seulement
+par ce client et les statuts documentaires, jamais par le calculateur/packager.
+
+## Qualification du 9 novembre
+
+[Preuve](evidence/function-code-hash-dev-2026-11-09.json) : sept groupes ciblés
+et 45 de régression réussis, zéro échec/skip sur les campagnes retenues.
+222 sources figées, calculateur et cinq modules des deux images CLI recoupés.
+Neuf invocations réelles passent dans les deux images Node ; les changements
+de dépendance et de handler sont observés dans les réponses. ZIP réordonné,
+recompressé, daté autrement et renommage implicite conservent leur hash.
+Source/dépendance/exécutable/descripteur modifiés changent le hash ; Unicode,
+binaire, vide et refus réels sont exercés.
+
+Deux essais fonctionnels arrêtés restent distincts : aucun groupe validé avant
+socket_path_limit, puis un groupe passé avant une mutation involontaire de
+ZipInfo dans le client de recompression. Correction : lire les octets et copier
+les métadonnées avant modification. Aucun code du calculateur n’est changé
+entre ces essais et le replay vert ; les époques du client restent explicites.
+La collecte readonly corrige aussi son interprétation de container inspect :
+l’absence native est code 1, tableau vide et No such container pour le bon ID.
+
+Les dix conteneurs des essais (neuf du replay, un antérieur), canaux et dossiers
+sont absents. La régression authentifiée supprime douze fonctions et leurs parents,
+purge leurs volumes et conserve 33 archives de code, vérifiées fichier par fichier.
+Les deux preuves de contexte COPY et builds sont séparées des 52 groupes.
+Services, démarrages, configurations officielles et routes restent inchangés.
+Ce résultat qualifie le composant : registre/déduplication, promotion, sélection
+publique par hash, migration et parcours de console restent à implémenter.
