@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 2026-11-09 — Pilotes de qualification076 maintenus dans le dépôt
+
+Le replay ciblé4 puis les régressions36/12/5 passent ; la collecte physique
+recoupe trois fonctions purgées et cinq appels de conservation. Avant livraison,
+les cinq pilotes de préparation/construction, exécution, régression et collecte
+sont conservés sous e2e avec les corps effectivement exécutés et leurs traces,
+pour que les commandes ne dépendent pas de scripts temporaires.local. Le seul
+sélecteur Git variable du préparateur est épinglé sur ef4a900, dont le validator
+est byte-identique à celui effectivement recoupé. La preuve distingue le gel258
+des cas exécutés et le relevé final des pilotes emballés/documents de résultat.
+
 ## 2026-11-09 — Reprise076 interrompue puis contrôle rétabli
 
 Construction700148c52531 réussie sur258 sources ; un seul backend diffère,

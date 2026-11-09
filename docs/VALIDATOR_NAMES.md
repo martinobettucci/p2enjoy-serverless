@@ -90,6 +90,37 @@ assets web, manuel, référence/runtime/CLI et configurations inchangés.
 Aucune réussite n’est acquise à ce stade. SLS-074, ses autres pannes et ses
 régressions complètes conservent leur périmètre ; SLS-076 ne les clôture pas.
 
+## Commandes reproductibles du banc
+
+Depuis la racine du dépôt, chaque commande attend la fin de la précédente :
+
+1. `python3 -B e2e/validator-names-prepare.py` recoupe l’ancien contrôle sain
+   et conserve son image. Il exige le vrai checkpoint antérieur au nommage ;
+   la source historique est épinglée au commit ef4a900, pas au HEAD futur.
+2. `python3 -B e2e/validator-names-build.py` construit avec le manifeste DEV
+   puis inspecte l’image sans démarrer son serveur. Il conserve le reçu attendu
+   par le client, backend/web et continuité des services.
+3. `python3 -B e2e/validator-names-run.py` fige les sources et exécute les quatre
+   groupes du client HTTPS, avec sa garde et ses nettoyages publics.
+4. `python3 -B e2e/validator-names-regressions.py` conserve les anciens rapports
+   puis rejoue les36/12/5 groupes en série, avec leurs gels avant/après.
+5. `python3 -B e2e/validator-names-collect.py` recoupe les trois purges et les
+   reçus natifs. Il ne remplace pas les assertions des clients.
+
+Ces cinq pilotes maintenus reprennent les corps réellement exécutés par le
+principal ; leurs copies temporaires et leurs empreintes sont liées dans la
+preuve. Leurs commentaires de traçabilité ne modifient pas leur code exécuté.
+Le sélecteur Git du premier pilote est figé sur le checkpoint historique dont
+les octets correspondent exactement à ceux vérifiés pendant la campagne.
+Les sources de cette qualification restent dans leur époque258 ; les pilotes
+emballés et documents de résultat ont leur relevé de livraison distinct.
+
+Les rapports existants ne sont jamais effacés automatiquement. Un replay
+historique exige l’installation au repos et la remise explicite de la vraie
+image retained before-validator-names par Compose DEV, avec sauvegarde native
+et vérification préalable des images/configurations. Il ne faut pas lancer
+ces commandes sur une installation utilisée par d’autres fonctions.
+
 ## Premier essai et correction du répertoire de travail
 
 La construction700148c52531 conserve les31 fichiers backend, sauf validator.py,
