@@ -825,6 +825,12 @@ recoupe l'exécution indépendante ; aucune coupure pendant unlink, perte SSH ou
 panne propre de la garde n'est déduite de cette preuve. Ces fenêtres, les autres
 pannes, migrations perturbées et la régression complète restent ouvertes.
 
+Le prochain complément suit [les refus et reprises de008](FUNCTION_VERSION_MIGRATION_008_RECOVERY.md) :
+copies du véritable historique007, refus transactionnels des incohérences,
+verrou réel et SIGKILL avant commit de la WAL privée. Reproduire d'abord le
+refus manquant sur19cfe884, puis corriger uniquement la première transition,
+qualifier la nouvelle image et rejouer les campagnes publiques liées. En cours.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;

@@ -4529,3 +4529,16 @@ en cours pour ses autres pannes/migrations et la régression complète. Aucun re
 Les trois notes SPARK sont actualisées dans leurs modèles et proposées dans
 leurs voisins .? après contrôle de propriété du contenu précédent. Leurs notes
 réelles restent identiques ; aucune adoption n'est revendiquée.
+
+## 2026-11-09 — Refus et reprise de008 décidés
+
+La lecture constate que008 ne revalide pas le cache007 ni la disponibilité de
+la cible active avant son INSERT, ses triggers étant ajoutés après reprise des
+lignes. Le cas stored_bytes=0 sur un alias actif reste atteignable avec les
+contraintes007 intactes. Le prochain test doit reproduire le refus manquant
+sur une copie de la véritable sauvegarde007, sans toucher au contrôle servi.
+Le contrat FUNCTION_VERSION_MIGRATION_008_RECOVERY.md fixe six entrées fautées,
+le verrou, la coupure native avant commit et les reprises. Si le défaut est
+confirmé, les gardes seront ajoutées dans la transaction de première transition008,
+selon le précédent007 ;009 seule ne peut annuler un008 déjà commis. Les bases
+déjà008 ne réexécutent rien. Aucun code de correction n'est encore écrit.
