@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Catalogue sous refus réel de lecture : quatre groupes API passent sur
+  211 sources, diagnostic source_forbidden borné, six refus d’autorisation,
+  appels Docker par les deux domaines pendant EACCES puis catalogue restitué.
+  Quatre invocations, une fonction purgée et garde terminée recoupées nativement.
+  Le rendu UI de cette panne reste à qualifier.
+
 - Garde du refus de lecture des routes : trois groupes réels passent sur
   210 sources, chmod du seul fichier officiel, EACCES du contrôle puis mode
   0640/lecture/santé restitués après release, SIGKILL ou SIGSTOP du helper.

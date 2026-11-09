@@ -283,3 +283,16 @@ docs/evidence/invocation-source-guard-dev-2026-11-09.json.
 Aucun workload, route/DNS, variable, secret ou build nouveau. Reçus/programmes
 de preuve et verrou privés sous /run ; aucun daemon permanent. Les refus API/UI
 restent à qualifier. Ces notes sont proposées, sans adoption revendiquée.
+
+
+## Catalogue sous refus de lecture — quatre groupes API
+
+Quatre groupes réels passent sur 211 sources et les mêmes images. Publication
+par adaptateur, errno 13 du contrôle, diagnostic source_forbidden borné pour
+Read/admin et six refus sans diagnostic. Les deux URL connues exécutent Docker
+pendant la faute ; restitution explicite puis même catalogue et deux appels.
+Quatre invocations et une fonction purgée sont recoupées, helper et unités finis.
+Source d’origine au mode 0640, contenu/inode/mtime inchangés ; ctime changée.
+Preuve : docs/evidence/invocation-source-api-dev-2026-11-09.json.
+Aucun ajout de variable/secret, changement route/DNS, service ou build. Le rendu
+UI et les autres fautes restent ouverts. Notes proposées sans adoption annoncée.

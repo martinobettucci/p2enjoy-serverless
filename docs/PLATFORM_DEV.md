@@ -760,3 +760,18 @@ Variables : aucun ajout. Secrets : aucun ajout. Routes/DNS : aucun changement.
 Notes : README, CONTRIBUTORS, INSTALL proposés. Configuration : env/secrets
 officiels inchangés, aucun build. Programmes/reçus et verrou de preuve sous /run,
 aucun daemon permanent. Les refus API/UI sont la prochaine étape non qualifiée.
+
+
+## Catalogue sous EACCES réel — 9 novembre
+
+Quatre groupes API passent sur 211 sources et les mêmes images : publication
+originale via adaptateur, source_forbidden borné pour Read/admin, six refus
+sans diagnostic, appels HTTPS des deux domaines pendant EACCES et catalogue
+identique après restitution explicite. Quatre invocations réussies, une fonction
+purgée et un helper/timer/service terminés sont recoupés nativement.
+[Preuve](evidence/invocation-source-api-dev-2026-11-09.json).
+Variables : aucun ajout. Secrets : aucun ajout. Routes/DNS : aucun changement.
+Notes : README, CONTRIBUTORS, INSTALL proposés individuellement. Configuration :
+env/secrets, images, services et démarrages inchangés ; aucun build. Seul le mode
+du relevé est temporairement retiré puis restitué à 0640, contenu/inode/mtime
+inchangés et ctime modifiée. Rendu UI et autres fautes de source encore ouverts.

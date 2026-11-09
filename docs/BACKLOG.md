@@ -445,8 +445,12 @@ Trois preuves sérialisées de garde (release, SIGKILL, SIGSTOP) précèdent les
 API/UI. Chmod modifie ctime, qui reste une observation ; aucune identité
 concurrente n’est adoptée. La [garde est qualifiée](evidence/invocation-source-guard-dev-2026-11-09.json) :
 trois groupes réels passent sur 210 sources, avec errno 13, signaux noyau observés,
-mode/lecture/santé restitués et trois helpers/timers/services terminés. Les
-parcours API/UI sous refus et les autres fautes de source restent à éprouver.
+mode/lecture/santé restitués et trois helpers/timers/services terminés. Le
+[complément API](evidence/invocation-source-api-dev-2026-11-09.json) passe quatre
+groupes sur 211 sources : source_forbidden pour Read/admin, six refus sans
+diagnostic, quatre appels Docker dont deux pendant EACCES, catalogue initial
+restitué. Fonction purgée et garde terminée recoupées nativement. Le parcours
+UI sous refus et les autres fautes de source restent à éprouver.
 
 Découvrir les routes effectivement affectées à la passerelle dans le SPARK,
 calculer les adresses par fonction et événement HTTP, les afficher et les

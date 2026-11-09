@@ -100,7 +100,10 @@ rétablies à 18090 TLS et la fonction de campagne est purgée. La source pertur
 la pagination UI/CLI sur six domaines restent à éprouver. La
 [garde de permissions](docs/evidence/invocation-source-guard-dev-2026-11-09.json)
 passe trois groupes réels préalables : EACCES, release, perte ou suspension du
-helper et restitution du même fichier. Le refus API/UI reste distinct. La [barrière native](docs/evidence/invocation-request-pause-dev-2026-11-09.json)
+helper et restitution du même fichier. Le [refus API](docs/evidence/invocation-source-api-dev-2026-11-09.json)
+passe ensuite quatre groupes : diagnostic borné, droits vérifiés avant lecture,
+invocations réelles pendant EACCES et catalogue restitué ; une fonction purgée.
+Le rendu UI reste à qualifier. La [barrière native](docs/evidence/invocation-request-pause-dev-2026-11-09.json)
 passe deux groupes supplémentaires : libération du vrai GET HTTPS et reprise
 après SIGKILL du traceur, sans redémarrage du contrôle. Le [parcours UI vide](docs/evidence/invocation-empty-ui-dev-2026-11-09.json)
 passe ensuite trois groupes : vrai GET navigateur conservé pendant changement

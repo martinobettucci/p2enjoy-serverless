@@ -820,3 +820,17 @@ et deux HTTPS sains sont recoupés dans la
 [preuve](../docs/evidence/invocation-source-guard-dev-2026-11-09.json), sur 210 sources.
 Ctime change comme attendu. Les futurs parcours de catalogue API/UI ne sont pas
 qualifiés par ces trois groupes de garde ; aucune fonction ni route n’est créée.
+
+
+## Catalogue public sous EACCES réel
+
+`node e2e/invocation-source-api.mjs` exige une session administrateur réelle,
+l’installation au repos et les helpers du SPARK synchronisés. Quatre groupes
+passent en série : publication via adaptateur, source_forbidden sous chmod du
+fichier officiel avec garde préalablement qualifiée, droits avant diagnostic,
+appels Docker pendant la faute puis catalogue et appels restitués. Le scope
+JSON distant est cité pour OpenSSH. La fixture est conservée si la restitution
+ne peut être confirmée. Une fonction purgée, quatre appels et garde terminée
+sont recoupés en lecture seule : [preuve](../docs/evidence/invocation-source-api-dev-2026-11-09.json),
+211 sources et images identiques. Aucun rendu UI ou autre classe de source
+n’est qualifié par ces quatre groupes.

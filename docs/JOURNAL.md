@@ -3666,3 +3666,19 @@ la restitution des métadonnées attendues et la fin des unités. Aucun défaut
 bloquant. Elle confirme la limite : cette preuve ne qualifie pas encore le
 refus public source_forbidden, son rendu UI ou une récupération après validation
 Docker ratée. Aucun rendu ni manuel applicatif modifié dans ce complément.
+
+
+## 2026-11-09 — Catalogue public sous refus réel de lecture
+
+Le contrat des quatre groupes est committé avant leur client. Revue statique
+sans défaut bloquant, installation bornée de quatre fichiers avec sauvegardes,
+puis paire SSO réelle renouvelée avant la campagne. Les quatre groupes passent
+sur 211 sources/images identiques : publication par adaptateur, EACCES natif,
+catalogue unavailable/source_forbidden pour Read/admin et six refus sans source,
+appels Docker des deux URL connues pendant la faute, restitution explicite et
+même catalogue/révision puis deux appels. Aucun échec ni skip. Les quatre appels
+sont recoupés en SQLite ; fonction purgée, service et namespace supprimés,
+ressources absentes.
+Le helper et les unités sont terminés, même fichier/mode/mtime, ctime changée.
+Services/démarrages/routes/env/secrets inchangés. Le rendu UI reste à éprouver.
+Preuve : evidence/invocation-source-api-dev-2026-11-09.json.

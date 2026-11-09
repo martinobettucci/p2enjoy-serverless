@@ -5,7 +5,8 @@ infra-serverless, monté readonly sous `/spark/routes` dans le contrôle.
 Le précontrôle du 9 novembre confirme un fichier régulier root:1001, mode
 0640, 779 octets/SHA identiques depuis le contrôle sans capacités effectives.
 Il ne prouve pas à lui seul un refus ou une restitution. Les trois preuves de
-garde ultérieures sont qualifiées ci-dessous ; les parcours API/UI restent ouverts.
+garde ultérieures sont qualifiées ci-dessous. Le complément API passe aussi ;
+le rendu UI reste à qualifier.
 
 ## Périmètre et invariants
 
@@ -135,3 +136,18 @@ la campagne. Le nettoyage conserve la fixture si la restitution n’est pas
 confirmée ; sinon DELETE/purge normaux et recoupement physique en lecture seule.
 Conserver les reçus figés et empreintes des sources/images avant/après.
 Ce complément ne qualifie ni le rendu UI ni les autres classes de panne source.
+
+## Catalogue API qualifié le 9 novembre
+
+Les quatre groupes passent sur 211 sources et les mêmes images, sans échec
+ni test ignoré : [preuve](evidence/invocation-source-api-dev-2026-11-09.json).
+Une fonction originale est publiée par l’adaptateur. Sous EACCES confirmé,
+Read et administrateur reçoivent HTTP 200/unavailable/source_forbidden sans
+adresse ni métadonnée interne ; six refus restent 401/403 sans diagnostic.
+Les deux URL connues appellent réellement le handler pendant la faute. Après
+restitution explicite, le catalogue/relevé/révision identiques et deux nouveaux
+appels sont vérifiés. Les quatre invocations réussies sont recoupées en SQLite.
+La fonction est purgée, son service et son namespace supprimés ; absence physique des ressources,
+helper/timer/service terminés, même fichier/mode 0640 et configurations/services
+inchangés sont confirmés nativement. Ctime change comme attendu. Le rendu UI,
+les autres classes de source et les branches d’échec de récupération restent ouverts.
