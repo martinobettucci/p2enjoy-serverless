@@ -1,5 +1,5 @@
 // @spec docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle
-// @verifies docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle
+// @verifies docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle | docs/ADMISSION.md#observation-durable-des-intentions-par-les-gardes
 // Real HTTPS administration, actual SSO session, host agent, Docker and process failures.
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
@@ -101,6 +101,8 @@ async function fault(mode,fn){
       assert.equal(identities.length,mode==='commit'?1:2);
       const registryIdentities=events.filter(row=>row.event==='registry-writer-identity');
       assert.equal(registryIdentities.length,1);identities.push(...registryIdentities);
+      const observers=events.filter(row=>row.event==='control-observer-ready');assert.equal(observers.length,1);
+      assert.equal(observers[0].autocommit,true);identities.push(...observers);
       for(const row of identities){assert(row.effective_uid>0);assert(row.effective_gid>0);assert.equal(row.operator_uid,0);
         assert(Object.values(row.sidecar_uids).every(uid=>uid===row.effective_uid));}
     }
@@ -131,7 +133,8 @@ try{
     const evidence=await remote('registry-close-interruption',fn);
     assert.equal(evidence.interruption_deferred,true);assert.equal(evidence.writer_closed,true);
     assert.equal(evidence.writer_reacquired,true);assert.equal(evidence.operator_uid,0);
-    for(const identity of [evidence.writer_identity,evidence.replacement_identity]){
+    assert(evidence.observer_interruption_deferred&&evidence.observer_closed&&evidence.observer_reopened&&evidence.observer_autocommit);
+    for(const identity of [evidence.writer_identity,evidence.replacement_identity,evidence.observer_identity,evidence.replacement_observer_identity]){
       assert(identity.effective_uid>0);assert(identity.effective_gid>0);
       assert(Object.values(identity.sidecar_uids).every(uid=>uid===identity.effective_uid));
     }

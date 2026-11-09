@@ -1,15 +1,18 @@
 # Reprendre une purge engagée pendant le premier upgrade du registre
 
-Complément de [SLS-074](BACKLOG.md#sls-074), à réaliser après la campagne
-commune en cours. Le registre actuel et son upgrade 006 → 007 au repos sont
-éprouvés ; ce document prépare la correction d’un état intermédiaire 006 valide.
+Complément de [SLS-074](BACKLOG.md#sls-074), implémenté et vérifié par 31 groupes
+ciblés réels. Le registre et son upgrade 006 → 007 au repos sont éprouvés ; la
+correction accepte aussi les états intermédiaires 006 valides décrits ici.
+La régression commune 313 groupes et le replay 003→007 de 5 groupes passent
+sur l’image finale fe75c9e7. La [preuve du registre](evidence/function-version-registry-dev-2026-11-09.json)
+conserve les deux constructions, les époques de clients et leurs diagnostics.
 
 ## Constat et décision
 
 La décision durable de purge efface inventaire et événements avant l’effacement
 physique. Une interruption laisse donc légitimement `inventory_json=[]`,
 `events_json={}`, une révision supprimée et des octets encore comptabilisés.
-Le backfill actuel refuse cette ligne avant que le résolveur puisse reprendre.
+Le backfill de la première image 007 refusait cette ligne avant la reprise du résolveur.
 Ce n’est pas un inventaire de code invocable à reconstruire : sa fonction est
 déjà supprimée et sa purge décidée. Une installation déjà migrée garde son hash
 et ne réexécute pas 007 ; le défaut concerne le premier passage depuis 006.
@@ -80,7 +83,8 @@ ouvre le dossier NOFOLLOW, vérifie device/inode, restaure son mode par fchmod
 pendant qu’il appartient encore à root, puis fchown en dernier. Sa disparition
 immédiate est normale ; le reçu public et les octets à zéro confirment la fin.
 
-## Preuves à terminer
+<a id="preuves-à-terminer"></a>
+## Contrat de preuve
 
 1. Référence actuelle : vraie purge 006 retenue, refus de 007, rollback complet,
    reprise de 006 sans restauration de base, relâchement et fin normale.
@@ -114,3 +118,36 @@ Si 007 est annulée, conserver la base 006 et reprendre l’ancienne image : une
 restauration de sauvegarde risquerait de revenir avant la purge déjà décidée.
 Si 007 est commise, le downgrade exige le plan cohérent base/fichiers/volumes
 et ancienne image ; une ancienne image seule ne constitue pas un retour arrière.
+
+## Résultats ciblés
+
+L’image corrigée `78eb24d7c082b76f0f9081b24a4c3f2fcffd4b486e84248f37948c6274c57781`
+passe les deux fenêtres de quatre groupes, en artifacts et volumes, puis trois
+groupes avec perte du pilote et restauration indépendante. Les 36 864 octets
+du code restent comptabilisés, son identité inconnue reste NULL et sa garde
+subsiste pendant EACCES ; le relâchement termine la purge et le restart conserve
+le reçu. Les originaux, données, artefacts, configuration et référence sont
+identiques après chaque restauration ; timers et services de garde sont inactifs.
+
+Vingt copies du véritable backup artifacts éprouvent chaque corrélation rompue,
+dont UUID d’opération, trois services et versions. Le second service est créé
+par la vraie API avant la fixture. Chaque application refuse au démarrage et
+annule intégralement sa migration. La sauvegarde originale reste inchangée.
+Le cas « pointeur actif » comprend aussi une révision non supprimée pour
+respecter le vrai trigger SQLite ; il prouve le refus de cet état combiné,
+sans prétendre isoler la seule clause SQL du pointeur.
+
+Les seize premiers contre-exemples constituent une époque de client distincte,
+conservée avant le complément à vingt, sans les additionner au total courant.
+Le diagnostic antérieur de quatre groupes reste sur l’image précédente et ne
+qualifie pas rétroactivement la correction. Le checkpoint au repos conserve
+également ses 328 groupes et sa propre époque de sources.
+
+
+Les 31 groupes ciblés sont rejoués sur l’image finale fe75c9e7. Une reconstruction
+après commentaire de traçabilité a changé l’identifiant d’image ; ses 34 fichiers
+applicatifs et leurs modes sont identiques au conteneur précédent. L’ancienne
+image n’était plus disponible dans l’inventaire Docker. La nouvelle est
+conservée sous p2enjoy-control:purge-recovery-reference avant sa recréation
+explicite par Compose ; les 1494 UUID/hashes existants sont inchangés. Un up qui
+avait gardé l’ancien conteneur a été détecté par le contrôle d’identité.

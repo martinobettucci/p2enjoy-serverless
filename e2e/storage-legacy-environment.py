@@ -1,5 +1,6 @@
 # @spec docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md
 # @verifies docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md#fenêtre-et-conservation-des-données
+# @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#preuves-à-terminer
 """DEV-only historical installation window with an independent identity-based restore."""
 from contextlib import closing
 import fcntl
@@ -31,20 +32,25 @@ TEMP = 'serverless-api-archive-migration'
 OFFICIAL = ['/etc/spark/env', '/run/spark/secrets', '/etc/spark/routes']
 LOCK = None
 LOCK_PATH = Path('/run/serverless-archive-migration.lock')
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
+SCHEMA_006 = ['001_control.sql', '002_login_limits.sql', '003_deployments.sql',
+              '004_function_operations.sql', '005_execution.sql', '006_storage_commands.sql']
+SCHEMA_007 = SCHEMA_006 + ['007_function_code_hash.sql']
+SCHEMA_006_REVISION = 'f56d79ebe3d1d84731bfd262d1e6a9d5b5a680c0'
 
 
 def emit(value):
     print(json.dumps(value), flush=True)
 
 
-def command(args, allowed=(0,)):
+def command(args, allowed=(0,), *, combined_output=False):
     # The native timeout and inherited flock survive a killed Python/SSH driver.
     result = subprocess.run(['timeout', '--signal=KILL', '40s', *args],
                             capture_output=True, text=True, timeout=45,
                             cwd=BASE,
                             pass_fds=() if LOCK is None else (LOCK,))
     assert result.returncode in allowed, 'bounded_operator_command_failed: ' + args[0]
-    return result.stdout.strip()
+    return (result.stdout + result.stderr if combined_output else result.stdout).strip()
 
 
 def atomic(path, value):
@@ -313,8 +319,25 @@ def restore(item, journal, independent):
     return result
 
 
-def start_control(item, journal, image):
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
+def anonymous_api_readable(item):
+    program = '''import json,urllib.request,urllib.error
+request=urllib.request.Request('http://127.0.0.1:18090/api/session',headers={'Host':'serverless.lelabs.tech'})
+try:
+ with urllib.request.urlopen(request,timeout=2) as response:
+  available=response.status==200 and json.load(response).get('authenticated') is False
+except (OSError,ValueError,urllib.error.URLError):available=False
+print(json.dumps({'available':available}))
+'''
+    result = command(item['docker'] + ['exec', TEMP, 'python', '-B', '-c', program], (0, 1))
+    return bool(result and json.loads(result)['available'])
+
+
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
+def start_control(item, journal, image, *, readiness='healthy'):
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', image)
+    assert readiness in ('healthy', 'anonymous-api', 'migration-refusal')
+    if readiness != 'healthy':assert item.get('mode') == 'function-version-purge'
     assert not item.get('restored')
     assert all(not same(path, item['original_dirs'][key]) for key, path in item['paths'].items())
     source = (BASE / 'control/compose.spark.yml').read_text()
@@ -330,10 +353,30 @@ def start_control(item, journal, image):
     os.chown(compose, 0, item['gid'])
     docker(item, 'compose', '--env-file', '/etc/spark/env', '--env-file', '/run/spark/secrets',
            '-f', str(compose), 'up', '-d', '--no-build')
-    current = until(lambda: (value if (value := container(item, TEMP))['status'] == 'healthy' else None), 'temporary_control_unhealthy')
+    if readiness == 'migration-refusal':
+        def exited():
+            state = json.loads(docker(item, 'inspect', '--format', '{{json .State}}', TEMP))
+            return state if state['Status'] == 'exited' else None
+        state = until(exited, 'migration_refusal_missing', 30)
+        assert state['ExitCode'] != 0, 'migration_refusal_exit_required'
+        current = container(item,TEMP)
+        assert current['image'] == image and not current['running'] and current['id'] != item['original']['id']
+        identifier = rows(item,Path(item['paths']['state']) / 'control.sqlite3',"SELECT value FROM security_metadata WHERE name='installation-id'")[0]['value']
+        assert identifier == item['temporary_installation'] and identifier != item['installation']
+        logs = command(item['docker'] + ['logs', TEMP], combined_output=True)
+        assert 'user-defined function raised exception' in logs and 'Application startup complete.' not in logs
+        return {'container': current, 'installation_id':identifier, 'migration_refused': True, 'exit_code': state['ExitCode'],
+                'udf_error_seen': True, 'log_sha256': hashlib.sha256(logs.encode()).hexdigest()}
+    def ready():
+        value = container(item, TEMP)
+        assert value['running'], 'temporary_control_exited_before_readiness'
+        if readiness == 'healthy':return value if value['status'] == 'healthy' else None
+        return value if anonymous_api_readable(item) else None
+    current = until(ready, 'temporary_control_unavailable')
     assert current['image'] == image
     identifier = rows(item, Path(item['paths']['state']) / 'control.sqlite3', "SELECT value FROM security_metadata WHERE name='installation-id'")[0]['value']
     assert str(UUID(identifier)) == identifier and identifier != item['installation']
+    if item.get('temporary_installation'):assert identifier == item['temporary_installation'], 'temporary_installation_changed'
     item['temporary_installation'] = identifier
     atomic(journal, item)
     return current
@@ -345,7 +388,7 @@ def inspect_function(item, function):
     registry = Path(item['paths']['storage']) / 'registry.sqlite3'
     owner = rows(item, control, '''SELECT n.name FROM functions f JOIN services s ON s.id=f.service_id
                  JOIN namespaces n ON n.id=s.namespace_id WHERE f.id=?''', (function,))
-    assert owner == [{'name': 'legacy-' + item['campaign'][:8]}], 'foreign_function'
+    assert owner == [{'name': item.get('namespace_name', 'legacy-' + item['campaign'][:8])}], 'foreign_function'
     versions = [row['version'] for row in rows(item, control, 'SELECT version FROM schema_migrations ORDER BY version')]
     new = '006_storage_commands.sql' in versions
     revisions = rows(item, control, 'SELECT id,stored_bytes,deleted_at FROM revisions WHERE function_id=?', (function,))
@@ -358,12 +401,107 @@ def inspect_function(item, function):
             'reserved_bytes': rows(item, control, 'SELECT coalesce(sum(reserved_bytes),0) AS bytes FROM deployments WHERE function_id=?', (function,))[0]['bytes']}
 
 
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
+def purge_upgrade_observation(item, function):
+    assert item.get('mode') == 'function-version-purge'
+    observation = inspect_function(item, function)
+    control = Path(item['paths']['state']) / 'control.sqlite3'
+    registry = Path(item['paths']['storage']) / 'registry.sqlite3'
+    hashed = any(row['name'] == 'code_hash' for row in rows(item, control, 'PRAGMA table_info(revisions)'))
+    observation['function'] = rows(item, control, '''SELECT id,service_id,deleted_at,updated_at,active_revision_id
+        FROM functions WHERE id=?''', (function,))[0]
+    revisions = rows(item, control, '''SELECT id,stored_bytes,deleted_at,inventory_json,events_json,archive_sha256'''
+        + (',code_hash' if hashed else '') + ' FROM revisions WHERE function_id=? ORDER BY id', (function,))
+    observation['has_code_hash_column'] = hashed
+    observation['code'] = [{**{key:row[key] for key in ('id','stored_bytes','deleted_at','archive_sha256')},
+        'empty_inventory':json.loads(row['inventory_json']) == [], 'empty_events':json.loads(row['events_json']) == {},
+        'code_hash':row.get('code_hash')} for row in revisions]
+    observation['purge_commands'] = rows(item, control, '''SELECT id,function_id,service_id,installation_id,kind,state,phase,
+        storage_absent,expected_function_version,result_version,error_code FROM storage_commands
+        WHERE function_id=? AND kind='purge' ORDER BY created_at,id''', (function,))
+    observation['purge_guards'] = rows(item, control, '''SELECT id,function_id,service_id,kind,decision,storage_version,
+        expected_function_version,expected_service_version FROM function_operations WHERE function_id=?''', (function,))
+    observation['installation_id'] = rows(item, control, "SELECT value FROM security_metadata WHERE name='installation-id'")[0]['value']
+    observation['agent_volumes'] = rows(item, registry, 'SELECT kind,phase FROM volumes WHERE function_id=? ORDER BY kind', (function,))
+    observation['agent_leases'] = rows(item, registry, 'SELECT consumer_id FROM leases WHERE function_id=?', (function,))
+    return observation
+
+
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#preuves-à-terminer
+def stopped_purge_input(item, journal, function, phase):
+    assert phase in ('volumes', 'artifacts') and item.get('mode') == 'function-version-purge'
+    assert item['denied']['function_id'] == function and not item.get('upgraded')
+    before = purge_upgrade_observation(item, function)
+    assert before['versions'] == SCHEMA_006 and not before['has_code_hash_column']
+    assert len(before['purge_commands']) == len(before['purge_guards']) == len(before['code']) == 1
+    request, guard = before['purge_commands'][0], before['purge_guards'][0]
+    assert request['state'] == 'pending' and request['phase'] == phase and request['id'] == guard['id']
+    assert guard['decision'] == 'commit' and guard['kind'] == 'purge'
+    assert before['function']['deleted_at'] and before['function']['active_revision_id'] is None
+    assert before['code'][0]['empty_inventory'] and before['code'][0]['empty_events'] and before['code'][0]['stored_bytes'] > 0
+    assert before['artifacts'][before['code'][0]['id']]
+    current = container(item, TEMP);assert current['image'] == item['historical_image'] and current['running']
+    docker(item, 'rm', '-f', TEMP)
+    stopped = purge_upgrade_observation(item, function)
+    assert stopped['purge_commands'][0]['phase'] == phase, 'requested_purge_phase_already_advanced'
+    def agent_finished():
+        value = purge_upgrade_observation(item, function)
+        return value if (len(value['agent']) == 1 and value['agent'][0]['state'] == 'purged' and
+            value['agent'][0]['pending_json'] is None and not value['agent_volumes'] and not value['agent_leases']) else None
+    drained = until(agent_finished, 'temporary_agent_purge_not_finished')
+    assert drained['purge_commands'][0]['phase'] == phase
+    no_references(item)
+    folder = Path(item['work']) / 'purge-inputs';folder.mkdir(mode=0o700, exist_ok=True);os.chown(folder,item['uid'],item['gid'])
+    backup = folder / (phase + '-control.sqlite3')
+    tables = database_snapshot(item, 'state', backup)
+    result = {'phase':phase,'function_id':function,'observation':drained,'tables':tables,'schema_objects':schema_objects(item),'artifact_sha256':artifacts(item),
+              'backup':str(backup),'backup_sha256':hashlib.sha256(backup.read_bytes()).hexdigest(),'backup_mode':stat.S_IMODE(backup.stat().st_mode)}
+    item['purge_input'] = result;atomic(journal,item)
+    return result
+
+
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
+def schema_objects(item):
+    objects = rows(item,Path(item['paths']['state']) / 'control.sqlite3',
+        "SELECT type,name,tbl_name,sql FROM sqlite_schema WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name")
+    return [{key:row[key] for key in ('type','name','tbl_name')} |
+            {'sql_sha256':hashlib.sha256((row['sql'] or '').encode()).hexdigest()} for row in objects]
+
+
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
+def release_purge_artifact(item, journal, function):
+    assert item.get('mode') == 'function-version-purge' and item['denied']['function_id'] == function
+    assert not item['denied'].get('released')
+    observation = purge_upgrade_observation(item,function)
+    assert len(observation['purge_commands']) == len(observation['purge_guards']) == 1
+    request, guard = observation['purge_commands'][0], observation['purge_guards'][0]
+    assert request['state'] == 'pending' and request['phase'] == 'artifacts' and request['id'] == guard['id'] and guard['decision'] == 'commit'
+    previous = item['denied']['identity'];path = Path(item['denied']['path'])
+    fd = os.open(path,os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        current = os.fstat(fd)
+        assert (current.st_dev,current.st_ino,current.st_uid,current.st_gid,stat.S_IMODE(current.st_mode)) == (previous['device'],previous['inode'],0,0,0o500)
+        os.fchmod(fd,previous['mode'])
+        os.fchown(fd,previous['uid'],previous['gid'])
+        after = os.fstat(fd)
+        assert (after.st_dev,after.st_ino,after.st_uid,after.st_gid,stat.S_IMODE(after.st_mode)) == (previous['device'],previous['inode'],previous['uid'],previous['gid'],previous['mode'])
+    finally:os.close(fd)
+    item['denied']['released'] = True;atomic(journal,item)
+    return {'released':True,'function_id':function,'descriptor_identity_confirmed':True,'owner_changed_last':True}
+
+
 def main():
     global LOCK
     assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
     mode, campaign = sys.argv[1:3]
     assert str(UUID(campaign)) == campaign
-    work = HISTORY / ('storage-absence-' + campaign)
+    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
+    candidates = [HISTORY / (prefix + campaign) for prefix in ('storage-absence-', 'function-version-purge-')]
+    if mode in ('restore', 'status'):
+        existing = [path for path in candidates if (path / 'restore.json').exists()]
+        assert len(existing) <= 1, 'ambiguous_campaign_window'
+        work = existing[0] if existing else candidates[0]
+    else:work = candidates[1] if mode == 'function-version-purge' else candidates[0]
     journal = work / 'restore.json'
     if mode in ('restore', 'status'):
         if mode == 'status' and not journal.exists():
@@ -373,7 +511,9 @@ def main():
         assert item['campaign'] == campaign and item['work'] == str(work)
         if mode == 'status':
             emit({'restored': item.get('restored', False), 'restoration': item.get('restoration'),
-                  'driver_alive': alive(item), 'unit': item['unit']})
+                  'driver_alive': alive(item), 'unit': item['unit'],
+                  'timer_state':command(['systemctl','is-active',item['unit'] + '.timer'],(0,3,4)),
+                  'service_state':command(['systemctl','is-active',item['unit'] + '.service'],(0,3,4))})
             return
         if alive(item):
             fd = os.pidfd_open(item['driver_pid'])
@@ -390,9 +530,15 @@ def main():
         item = json.loads(journal.read_text())
         restore(item, journal, True)
         return
-    assert mode in ('partial', 'historical')
+    assert mode in ('partial', 'historical', 'function-version-purge')
     old_image = sys.argv[3]
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', old_image)
+    if mode == 'function-version-purge':
+        attestation = HISTORY / 'function-version-schema006-image.json';info = attestation.lstat()
+        assert stat.S_ISREG(info.st_mode) and info.st_uid == 0 and not info.st_mode & 0o022, 'protected_schema006_attestation_required'
+        reference = json.loads(attestation.read_text())
+        assert reference['completed'] and reference['revision'] == SCHEMA_006_REVISION
+        assert reference['schema_migrations'] == SCHEMA_006 and reference['image'] == old_image, 'known_schema006_image_required'
     account = pwd.getpwnam('spark-docker')
     settings = {}
     for line in Path('/etc/spark/env').read_text().splitlines():
@@ -408,13 +554,17 @@ def main():
         assert Path(path).is_absolute() and str(Path(path).resolve()) == path
         assert Path(path).parent == BASE, 'dedicated_official_directory_required'
     assert len(set(paths.values())) == 3
+    # Check the actual local image before any stop, guard, backup or directory move.
+    image_id = command(['runuser','-u','spark-docker','--','docker','--host',
+        'unix://' + settings['SERVERLESS_DOCKER_SOCKET_HOST'],'image','inspect','--format','{{.Id}}',old_image])
+    assert image_id == old_image, 'historical_image_missing'
     HISTORY.mkdir(mode=0o755, exist_ok=True)
     assert HISTORY.resolve() == HISTORY and HISTORY.stat().st_uid == 0
     LOCK = os.open(LOCK_PATH, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
     lock_info = os.fstat(LOCK)
     assert stat.S_ISREG(lock_info.st_mode) and lock_info.st_uid == 0 and stat.S_IMODE(lock_info.st_mode) == 0o600
     fcntl.flock(LOCK, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    for previous in HISTORY.glob('storage-absence-*/restore.json'):
+    for previous in [*HISTORY.glob('storage-absence-*/restore.json'), *HISTORY.glob('function-version-purge-*/restore.json')]:
         assert json.loads(previous.read_text()).get('restored'), 'previous_window_not_restored'
     work.mkdir(mode=0o750)
     os.chown(work, 0, account.pw_gid)
@@ -424,10 +574,13 @@ def main():
                value['mode'] in ((0o700, 0o750) if key == 'state' else (0o700,))
                for key, value in originals.items()), 'official_directory_permissions'
     item = {'campaign': campaign, 'work': str(work), 'paths': paths, 'original_dirs': originals,
+            'mode':mode, 'historical_image':old_image,
+            'namespace_name':('code-purge-migration-' if mode == 'function-version-purge' else 'legacy-') + campaign[:8],
             'lock_identity': [lock_info.st_dev, lock_info.st_ino],
             'uid': account.pw_uid, 'gid': account.pw_gid, 'configuration': hashes(),
             'docker': ['runuser', '-u', 'spark-docker', '--', 'docker', '--host', 'unix://' + settings['SERVERLESS_DOCKER_SOCKET_HOST']],
-            'unit': 'serverless-restore-archive-migration-' + campaign, 'project': 'archive-migration-' + campaign,
+            'unit': ('serverless-restore-version-purge-' if mode == 'function-version-purge' else 'serverless-restore-archive-migration-') + campaign,
+            'project': ('function-version-purge-' if mode == 'function-version-purge' else 'archive-migration-') + campaign,
             'driver_pid': os.getpid(), 'driver_birth': Path('/proc/self/stat').read_text().rsplit(')', 1)[1].split()[19]}
     item['original'] = container(item, 'serverless-api')
     item['reference'] = container(item, 'serverless-runtime-reference')
@@ -447,7 +600,7 @@ def main():
              '/usr/bin/python3', '-B', str(work / 'storage-legacy-environment.py'), 'restore', campaign])
     assert command(['systemctl', 'is-active', item['unit'] + '.timer']) == 'active'
     emit({'event': 'guard-armed', 'unit': item['unit'], 'campaign': campaign,
-          'current_image': item['original']['image']})
+          'current_image': item['original']['image'], 'original_id':item['original']['id']})
     try:
         docker(item, 'stop', '--time', '15', item['original']['id'])
         assert not container(item, item['original']['id'])['running']
@@ -498,6 +651,40 @@ def main():
                 docker(item, 'restart', TEMP)
                 # A deliberately contradictory pending command degrades health; API remains readable.
                 result = container(item, TEMP)
+            # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#preuves-à-terminer
+            elif op in ('upgrade-readable', 'upgrade-refusal'):
+                assert item.get('mode') == 'function-version-purge' and not item.get('upgraded')
+                fixture = stopped_purge_input(item,journal,request['function_id'],request['phase'])
+                item['upgraded'] = True;atomic(journal,item)
+                result = start_control(item,journal,item['original']['image'],
+                    readiness='migration-refusal' if op == 'upgrade-refusal' else 'anonymous-api')
+                after = purge_upgrade_observation(item,request['function_id'])
+                if op == 'upgrade-refusal':
+                    assert after['versions'] == SCHEMA_006 and not after['has_code_hash_column']
+                    assert database_snapshot(item,'state') == fixture['tables'], 'refused_migration_changed_rows'
+                    assert schema_objects(item) == fixture['schema_objects'], 'refused_migration_changed_schema'
+                    assert artifacts(item) == fixture['artifact_sha256'], 'refused_migration_changed_artifacts'
+                    item['migration_refused'] = True;atomic(journal,item)
+                    result = {**result,'rollback_complete':True,'before':fixture,'after':after}
+                else:
+                    assert after['versions'] == SCHEMA_007 and after['has_code_hash_column']
+                    assert all(row['code_hash'] is None and row['empty_inventory'] and row['empty_events'] for row in after['code'])
+                    assert artifacts(item) == fixture['artifact_sha256'], 'migrated_purge_changed_retained_artifacts'
+                    result = {'container':result,'before':fixture,'after':after,'anonymous_api_readable':True}
+            elif op == 'resume-historical':
+                assert item.get('mode') == 'function-version-purge' and item.get('migration_refused')
+                before = purge_upgrade_observation(item,request['function_id'])
+                assert before['versions'] == SCHEMA_006 and not before['has_code_hash_column'], 'downgrade_after_migration_forbidden'
+                assert database_snapshot(item,'state') == item['purge_input']['tables']
+                assert schema_objects(item) == item['purge_input']['schema_objects'], 'historical_resume_schema_changed'
+                docker(item,'rm','-f',TEMP)
+                result = start_control(item,journal,item['historical_image'],readiness='anonymous-api')
+                item['upgraded'] = False;item['migration_refused'] = False;atomic(journal,item)
+                result = {'container':result,'same_database_resumed':True,'after':purge_upgrade_observation(item,request['function_id'])}
+            elif op == 'inspect-purge-upgrade':
+                result = purge_upgrade_observation(item,request['function_id'])
+            elif op == 'release-artifact':
+                result = release_purge_artifact(item,journal,request['function_id'])
             elif op == 'inspect':
                 result = inspect_function(item, request['function_id'])
             elif op == 'deny-artifact':

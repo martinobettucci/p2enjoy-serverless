@@ -162,6 +162,15 @@ l’empreinte SHA256 de l’archive et ses événements. **Activer cette révisi
 revient au code choisi après confirmation, en conservant les ressources, variables,
 secrets et volumes courants. Les événements de cette révision redeviennent actifs.
 
+Le **Hash du code** identifie le contenu exécutable, ses dépendances, son handler
+et son descripteur d’exécution. Deux archives recompressées du même paquet ont
+le même hash, même si le SHA256 de leurs octets ZIP diffère. **Copier le hash du
+code** copie ses 64 caractères ; si le navigateur refuse, sélectionner le texte
+affiché et le copier. Actualiser retire la confirmation de copie. Plusieurs
+révisions historiques peuvent porter le même hash. La publication actuelle
+active encore la nouvelle révision ; les appels par hash et la promotion séparée
+seront ajoutés avec la suite du versionnement.
+
 **Supprimer cette révision** retire définitivement une archive de code inactive.
 La révision active ne peut pas être supprimée ; une instance qui utilise encore
 une ancienne révision peut également empêcher sa suppression. Attendre son arrêt,

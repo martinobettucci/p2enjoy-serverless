@@ -55,6 +55,25 @@ Linux. Résultat complet : [audit](evidence/storage-dependencies-2026-11-05.txt)
 
 ### Client de publication
 
+Le [registre d’identité de code](FUNCTION_VERSION_REGISTRY.md) raccorde le
+calculateur commun au contrôle : cache immuable dans chaque révision (migration
+007), reprise des inventaires antérieurs avant admission HTTP et regroupement
+des alias historiques pour la lecture Read. Le contrôle conserve un seul état
+SQLite et ses UUID ; aucun service supplémentaire. Les nouvelles publications
+calculent leur identité sur l’extraction et l’image réellement validées. La
+console affiche et copie le hash, distinct de l’empreinte ZIP. Le pointeur actif
+reste celui du comportement actuel jusqu’au checkpoint de promotion explicite.
+Pour le premier passage depuis 006, la correction qualifiée reconnaît
+la seule purge déjà décidée dont commande, garde, installation et versions
+concordent. Son identité reste inconnue et ses compteurs sont conservés jusqu’à
+la fin normale du nettoyage ; les autres inventaires absents restent refusés.
+Le [banc de reprise](FUNCTION_VERSION_PURGE_UPGRADE.md) distingue le refus réel
+de l’image précédente, les upgrades retenus dans volumes/artifacts et les
+contre-exemples sur copies privées de la véritable base intermédiaire.
+La [preuve finale](evidence/function-version-registry-dev-2026-11-09.json)
+passe 359 groupes et recoupe les 69 captures, le manuel compilé et le nettoyage.
+Le checkpoint au repos antérieur reste dans sa propre époque de qualification.
+
 `adapter/deploy.py` utilise HTTPS de la bibliothèque standard avec validation
 TLS et sans suivi des redirections. Le packaging et les corps JSON sont
 vérifiés avant mutation ; les valeurs résolues restent en mémoire. Chaque

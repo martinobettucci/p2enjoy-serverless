@@ -708,21 +708,24 @@ normale, droits, redémarrage, coût de collecte mesuré et inspection des graph
 
 Statut : [~] — composant d’identité canonique qualifié ; déduplication et invocation par tag absentes.
 
-Checkpoint en préparation : [registre persistant](FUNCTION_VERSION_REGISTRY.md),
+Checkpoint livré et qualifié : [registre persistant](FUNCTION_VERSION_REGISTRY.md),
 migration additive des identités, conservation des alias et lecture/copie du hash.
 Les uploads continuent actuellement à activer leur révision ; la déduplication
 et la promotion séparée constituent la suite de cette même unité.
 
-La [reprise des purges 006 engagées](FUNCTION_VERSION_PURGE_UPGRADE.md) est
-corrigée et passe 31 groupes ciblés : deux phases réelles, perte du pilote et
-vingt refus de corrélation sur copies du véritable état intermédiaire.
-L’upgrade au repos conserve sa preuve distincte de 328 groupes. La régression
-commune de la nouvelle image et le replay 003 → 007 restent à terminer avant
-la livraison du checkpoint ; SLS-074 demeure en cours. La première régression
-sur l’image finale s’arrête au gate function-storage avec SQLITE_BUSY_RECOVERY ;
-les 55 groupes précédents et les 46 ciblés/historiques restent distincts.
-L’observation RO persistante est spécifiée dans ADMISSION, sans changer le
-produit ni rejouer une mutation incertaine ; son replay reste à terminer.
+La [preuve du registre](evidence/function-version-registry-dev-2026-11-09.json)
+passe 359 groupes : 46 ciblés/historiques et 313 dans 18 campagnes communes, sur deux
+époques de 233 sources aux mêmes fichiers produit et image. Les 69 captures
+recoupées comprennent 47 nouvelles inspections et 22 références SHA identiques.
+Manuel 15 chapitres/47 paragraphes, six fonctions du registre purgées dans six
+namespaces recoupés, 29 fichiers Python/SQL embarqués et deux assets HTTPS conformes.
+L’upgrade au repos conserve sa preuve antérieure 328 groupes, sans addition comme
+groupes uniques au total 359. La [reprise des purges 006](FUNCTION_VERSION_PURGE_UPGRADE.md)
+passe 31 groupes ciblés sur l’image finale ; le banc 003→007 passe 5 groupes.
+Le premier arrêt SQLITE_BUSY_RECOVERY reste conservé avec son nettoyage natif ;
+le poller RO persistant passe 15 groupes ciblés puis la suite complète. Les deux
+entrées du registre d’incohérences sont retirées après leurs preuves ; le
+versionnement complet reste en cours pour les étapes suivantes.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

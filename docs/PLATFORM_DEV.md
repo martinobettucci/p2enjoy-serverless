@@ -391,7 +391,34 @@ La commande reste `python3 -B e2e/execution-suite.py --scope console` et inclut
 désormais `manual-ui`. SLS-062 est clos ; les autres unités du backlog et
 l’objectif global restent ouverts.
 
-## Baseline des reçus d’effacement
+## Upgrade du registre d’identité de code
+
+L’upgrade 007 est déployé et qualifié en DEV ; il suit [FUNCTION_VERSION_REGISTRY](FUNCTION_VERSION_REGISTRY.md#déploiement-et-retour-arrière).
+Le client `node e2e/function-version-registry.mjs prepare` produit sur 006 une
+fonction A/A/B réactivée vers le second A et une autre fonction purgée. Le helper
+`e2e/function-version-registry-native.py backup` reçoit uniquement leurs trois
+UUID de portée sur stdin, crée une sauvegarde SQLite privée et relève toutes
+les anciennes colonnes, les artefacts et le registre agent. Aucun secret ne
+figure dans ses sorties. Après build/up normaux du contrôle DEV, le mode verify
+compare ces colonnes et fichiers avant les requêtes de qualification.
+Les phases verify/persist/cleanup du client exercent l’API et les vraies
+invocations ; persist suit un redémarrage réel du contrôle. Les commandes
+`node e2e/function-version-registry-ui.mjs` et `node e2e/manual-ui.mjs` qualifient
+la console et le guide. Aucun réglage de cellule, route ou secret nouveau.
+La référence 006 est conservée sous le tag historique vérifié avant toute
+bascule. Si la transaction 007 est annulée, reprendre 006 sur la même base
+préserve les décisions de purge déjà prises. Dès que 007 est commise, restaurer
+exige arrêt du contrôle, base et fichiers/volumes correspondants ainsi que
+l’ancienne image ; une image seule ne suffit pas.
+La correction des purges engagées suit [son banc dédié](FUNCTION_VERSION_PURGE_UPGRADE.md) :
+`node e2e/function-version-purge-upgrade.mjs upgrade artifacts`, puis `upgrade volumes`
+et `upgrade artifacts --restore-with-guard`, séparément avec le SSO réel sur
+stdin privée. Le client `e2e/function-version-purge-correlation.py` s’exécute
+comme spark-docker avec l’UUID et la phase d’un véritable backup intermédiaire.
+Il n’altère que ses copies et vérifie le refus transactionnel de chaque
+corrélation rompue. Aucun nouveau réglage ni secret.
+
+## Baseline des reçus d’effacement — checkpoint historique
 
 Le paquet `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4` est installé le 7 novembre.
 La migration 004 du registre agent est appliquée après sauvegarde native
@@ -807,3 +834,25 @@ Notes : README, CONTRIBUTORS, INSTALL proposés individuellement. Configuration 
 deux fichiers officiels et services/démarrages inchangés ; aucun .env, ENV/ARG
 ou environment de configuration ajouté. Seules les images de calcul/packaging
 sont construites. Déduplication, promotion et appel public par hash restent en cours.
+
+
+## Baseline du registre d’identité de code qualifié
+
+Le contrôle sert l’image fe75c9e7, migrations 001–007, après vérification de la
+conservation des1494 identités existantes. La référence de retour de cette
+construction est nommée p2enjoy-control:purge-recovery-reference. La preuve
+[evidence/function-version-registry-dev-2026-11-09.json](evidence/function-version-registry-dev-2026-11-09.json)
+recoupe359 groupes, deux époques de 233 sources aux mêmes fichiers produit/image,
+69 captures et les ressources nettoyées. Les 328 groupes du premier upgrade au
+repos restent dans leur époque antérieure. Le premier arrêt commun, le replay
+15 groupes du poller et la suite 313réussie sont conservés séparément.
+
+Après build/up, comparer impérativement l’image réellement portée par
+serverless-api à celle attendue. Si up conserve l’ancien conteneur, utiliser
+Compose avec les deux --env-file officiels, compose.spark.yml et
+up -d --force-recreate --wait --wait-timeout 90, puis confirmer image/santé.
+Ne pas perdre la référence nommée avant une future reconstruction.
+L’agent de stockage et le runtime de référence restent ceux déjà qualifiés.
+Aucune variable, secret ou route nouvelle ; trois notes d’exploitation proposées
+individuellement, sans adoption revendiquée. Aucun réglage de service ou daemon
+permanent ajouté. Le manuel compilé est celui du dépôt,47 paragraphes.

@@ -42,6 +42,9 @@ def source_hashes():
     files += [ROOT/name for name in ['function_code_hash.py','docs/FUNCTION_CODE_HASH.md','docs/FUNCTION_VERSIONS.md',
                                     'control/Dockerfile.code-hash','control/Dockerfile.code-hash.dockerignore',
                                     'control/compose.code-hash.spark.yml','control/code-hash-dev.sh']]
+    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#preuves-réelles-requises
+    files += [ROOT/'docs/FUNCTION_VERSION_REGISTRY.md']
+    files += [ROOT/'docs/FUNCTION_VERSION_PURGE_UPGRADE.md']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
 def metadata(path):

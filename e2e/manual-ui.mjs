@@ -2,6 +2,7 @@
 // @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md | docs/DESIGN_SYSTEM_APP.md
 // @verifies docs/BACKLOG.md#sls-062 | docs/CONSOLE_MANUAL.md#preuves-attendues | docs/CONSOLE_STORAGE.md#console-et-manuel
+// @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#console-et-manuel
 import assert from 'node:assert/strict';
 import {readFile,writeFile,rename,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -88,6 +89,7 @@ try {
     assert.equal(await page.evaluate(() => scrollY),0);await fits();await capture('desktop');
     await chapter('Retrouver une fonction');await fits();await capture('catalogue-desktop');
     await chapter('Donner un accès à un service');await fits();await capture('rights-desktop');
+    await chapter('Gérer les révisions');await page.locator('.manual-content p').filter({hasText:'Le Hash du code identifie le contenu exécutable'}).scrollIntoViewIfNeeded();await fits();await capture('code-hash-desktop');
     await chapter('Consulter et vider le cache');await fits();await capture('cache-desktop');
     await chapter('Consulter les archives et les purger');await fits();await capture('archives-desktop');
   });
@@ -104,6 +106,7 @@ try {
     const cataloguePosition=await page.evaluate(()=>scrollY);
     await page.mouse.wheel(0,500);await page.waitForFunction(previous=>scrollY>previous,cataloguePosition);await fits();await capture('catalogue-return-mobile');
     await chapter('Donner un accès à un service');await fits();await capture('rights-mobile');
+    await chapter('Gérer les révisions');await page.locator('.manual-content p').filter({hasText:'Le Hash du code identifie le contenu exécutable'}).scrollIntoViewIfNeeded();await fits();await capture('code-hash-mobile');
     await chapter('Publier le code avec l’adaptateur');await fits();await capture('command-mobile');
     await chapter('Consulter et vider le cache');await fits();await capture('cache-mobile');
     await chapter('Consulter les archives et les purger');await fits();await capture('archives-mobile');

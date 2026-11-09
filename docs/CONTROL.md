@@ -121,6 +121,8 @@ origine/IP et la gestion de jetons sont réservées aux sessions admin.
 - `/api/functions/{id}/deployments`, `/api/deployments/{id}` et sa route
   `/artifact` : préparation, état et réception ZIP authentifiée. Historique,
   rollback et suppression sous `/api/functions/{id}/revisions` et `/rollback`,
+  identité canonique des révisions et catalogue Read groupé
+  `/api/functions/{id}/versions` selon [FUNCTION_VERSION_REGISTRY](FUNCTION_VERSION_REGISTRY.md),
   selon le [contrat de publication](DEPLOYMENT.md). Ces routes sont déployées
   en DEV, avec qualification authentifiée encore ouverte.
 - `/api/services/{id}/tokens`, `/api/tokens/{id}/revoke` et

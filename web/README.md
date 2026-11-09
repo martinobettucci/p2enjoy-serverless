@@ -98,3 +98,15 @@ Deux époques de clients restent déclarées. Les 98 images sont inspectées, do
 seize du catalogue avec les trois positions de table mobile et le dialog en
 viewport. Les noms complets restent lisibles sans élargir le document.
 La remarque mineure de titre d’archive après purge est suivie dans SLS-075.
+
+
+## Hash du code dans les révisions
+
+La carte montre le hash64 complet, distinct du SHA des octets ZIP, et sa copie
+native avec confirmation/refus utiles. Le résultat disparaît à la prochaine
+observation. Le manuel canonique est compilé avec la console :15 chapitres et
+47 paragraphes recoupés. La [preuve](../docs/evidence/function-version-registry-dev-2026-11-09.json)
+qualifie trois groupes ciblés et les régressions ; six nouvelles captures hash,
+dont deux viewports réels. Avec les campagnes communes :69 captures recoupées,
+47 nouvelles inspections et 22 références SHA strictes. L’upload garde son activation
+actuelle ; la promotion distincte et les appels par hash restent en cours.

@@ -7,6 +7,19 @@ import sqlite3
 import time
 import uuid
 
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#migration-et-conservation
+from function_code_hash import code_hash, PackageIdentityError
+
+
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#constat-et-décision
+def historical_code_hash(inventory,handler,runtime,architecture,image_id,events,stored_bytes,deleted_at,active,purge_committed=False):
+    files=json.loads(inventory)
+    if files==[] and deleted_at is not None and not active and (stored_bytes==0 or purge_committed):
+        return None
+    if not files:raise PackageIdentityError('historical_inventory_missing')
+    return code_hash(files,{'handler':handler,'runtime':runtime,'architecture':architecture,
+                            'image_id':image_id,'events':json.loads(events)})['code_hash']
+
 
 class Database:
     def __init__(self,root: Path):
@@ -47,6 +60,7 @@ class Database:
     def migrate(self):
         db=self.connect()
         try:
+            db.create_function('historical_code_hash',10,historical_code_hash,deterministic=True)
             db.execute('PRAGMA journal_mode=WAL')
             db.execute('CREATE TABLE IF NOT EXISTS schema_migrations (version TEXT PRIMARY KEY, applied_at REAL NOT NULL)')
             for path in sorted((Path(__file__).parent.parent/'migrations').glob('*.sql')):

@@ -15,6 +15,9 @@ import time
 from urllib.parse import urlencode
 from uuid import UUID,uuid4
 
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#migration-et-conservation
+from function_code_hash import code_hash
+
 from fastapi import APIRouter,HTTPException,Query,Request
 from starlette.requests import ClientDisconnect
 
@@ -314,9 +317,14 @@ class Deployments:
                 if storage_changed:self.operations.verify(db,operation,function,service)
                 now=time.time();config=configuration['config'];values=configuration['configuration']
                 self.operations.minimum_budget(db,function['id'],config)
-                db.execute('INSERT INTO revisions VALUES (?,?,?,?,?,?,?,?,?,?,?,NULL)',
+                # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#migration-et-conservation
+                identity=code_hash(extracted['inventory'],{'handler':config['handler'],'runtime':config['runtime'],
+                    'architecture':'linux-x64','image_id':validation['image_id'],'events':json.loads(current['events_json'])})['code_hash']
+                db.execute('''INSERT INTO revisions
+                    (id,function_id,handler,runtime,architecture,image_id,archive_sha256,inventory_json,events_json,stored_bytes,created_at,deleted_at,code_hash)
+                    VALUES (?,?,?,?,?,?,?,?,?,?,?,NULL,?)''',
                     (key,function['id'],config['handler'],config['runtime'],'linux-x64',validation['image_id'],extracted['archive_sha256'],
-                     json.dumps(extracted['inventory']),current['events_json'],stored,now))
+                     json.dumps(extracted['inventory']),current['events_json'],stored,now,identity))
                 db.execute('UPDATE functions SET config_json=?,environment_json=?,secrets_cipher=?,active_revision_id=?,updated_at=? WHERE id=?',
                     (json.dumps(config),json.dumps(values['environment']),self.vault.seal({k:v for k,v in values['secrets'].items() if v is not None}),key,now,function['id']))
                 db.execute("UPDATE deployments SET state='published',reserved_bytes=0,configuration_cipher=NULL,validation_json=?,completed_at=?,revision_id=? WHERE id=?",
@@ -430,14 +438,63 @@ class Deployments:
             operation=str(uuid4())
             async with self.operations.responsibility(operation):return await self.upload(request,key,operation)
 
+        # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#lecture-autorisée
+        async def read_authorization(request,key):
+            function=self.database.one('SELECT service_id FROM functions WHERE id=? AND deleted_at IS NULL',(str(key),))
+            authorization=await self.identity.operation(request,function['service_id'] if function else '','read',str(key))
+            if not function:raise HTTPException(404,'Fonction introuvable.')
+            return authorization
+
+        def readable_function(db,authorization,key):
+            function=db.execute('''SELECT f.* FROM functions f
+                JOIN services s ON s.id=f.service_id AND s.deleted_at IS NULL
+                JOIN namespaces n ON n.id=s.namespace_id AND n.deleted_at IS NULL
+                WHERE f.id=? AND f.deleted_at IS NULL''',(str(key),)).fetchone()
+            if not function:raise HTTPException(404,'Fonction ou service introuvable.')
+            self.identity.recheck(db,authorization,function['service_id'],'read',str(key))
+            return function
+
         @api.get('/functions/{key}/revisions')
         async def revisions(request:Request,key:UUID,limit:int=Query(20,ge=1,le=100),offset:int=Query(0,ge=0,le=10000)):
-            function=self.database.one('SELECT * FROM functions WHERE id=? AND deleted_at IS NULL',(str(key),))
-            await self.identity.authorize(request,function['service_id'] if function else '','read',str(key))
-            if not function:raise HTTPException(404,'Fonction introuvable.')
-            rows=self.database.all('SELECT id,function_id,handler,runtime,architecture,image_id,archive_sha256,events_json,stored_bytes,created_at FROM revisions WHERE function_id=? AND deleted_at IS NULL ORDER BY created_at DESC,id LIMIT ? OFFSET ?',(str(key),limit,offset))
-            for row in rows:row['events']=json.loads(row.pop('events_json'));row['active']=row['id']==function['active_revision_id']
-            return {'items':rows}
+            authorization=await read_authorization(request,key)
+            with closing(self.database.connect()) as db:
+                db.execute('BEGIN')
+                function=readable_function(db,authorization,key)
+                rows=[dict(row) for row in db.execute('''SELECT id,function_id,handler,runtime,architecture,image_id,
+                    archive_sha256,events_json,stored_bytes,created_at,code_hash FROM revisions
+                    WHERE function_id=? AND deleted_at IS NULL ORDER BY created_at DESC,id LIMIT ? OFFSET ?''',(str(key),limit,offset))]
+                for row in rows:row['events']=json.loads(row.pop('events_json'));row['active']=row['id']==function['active_revision_id']
+                return {'items':rows}
+
+        @api.get('/functions/{key}/versions')
+        async def versions(request:Request,key:UUID,limit:int=Query(5,ge=1,le=100),offset:int=Query(0,ge=0,le=10000)):
+            authorization=await read_authorization(request,key)
+            with closing(self.database.connect()) as db:
+                db.execute('BEGIN')
+                function=readable_function(db,authorization,key);active=function['active_revision_id']
+                current=db.execute('SELECT code_hash FROM revisions WHERE id=? AND function_id=?',(active,str(key))).fetchone()
+                total=db.execute('SELECT count(DISTINCT code_hash) FROM revisions WHERE function_id=?',(str(key),)).fetchone()[0]
+                rows=db.execute('''WITH aliases AS (
+                    SELECT id,code_hash,created_at,
+                           CASE WHEN deleted_at IS NULL AND stored_bytes>0 THEN 1 ELSE 0 END AS available,
+                           CASE WHEN id=? THEN 1 ELSE 0 END AS active
+                    FROM revisions WHERE function_id=? AND code_hash IS NOT NULL
+                ), ranked AS (
+                    SELECT *,row_number() OVER (PARTITION BY code_hash ORDER BY active DESC,available DESC,created_at,id) AS position,
+                        count(*) OVER (PARTITION BY code_hash) AS revision_count,
+                        min(created_at) OVER (PARTITION BY code_hash) AS first_created_at,
+                        max(available) OVER (PARTITION BY code_hash) AS any_available,
+                        max(active) OVER (PARTITION BY code_hash) AS any_active
+                    FROM aliases
+                ) SELECT code_hash,id AS revision_id,revision_count,first_created_at AS created_at,any_available,any_active
+                    FROM ranked WHERE position=1 ORDER BY first_created_at DESC,code_hash LIMIT ? OFFSET ?''',
+                    (active,str(key),limit,offset)).fetchall()
+                items=[]
+                for entry in rows:
+                    item=dict(entry);item['state']='available' if item.pop('any_available') else 'deleted'
+                    item['active']=bool(item.pop('any_active'));items.append(item)
+                return {'function_id':str(key),'service_id':function['service_id'],'active_revision_id':active,
+                        'active_code_hash':current['code_hash'] if current else None,'items':items,'total':total,'limit':limit,'offset':offset}
 
         @api.post('/functions/{key}/rollback')
         async def rollback(request:Request,key:UUID,data:Rollback):

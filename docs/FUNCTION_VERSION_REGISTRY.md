@@ -17,7 +17,7 @@ le contrôle accepte des requêtes. Un inventaire ou descripteur invalide fait
 Un tombstone déjà purgé, supprimé, sans octet conservé et dont l’inventaire
 a été effacé reste à `NULL` : le contenu inconnu ne peut être reconstitué.
 Une révision active ou dont le code reste disponible ne bénéficie jamais de cette
-exception. La correction en qualification reconnaît aussi une purge 006 déjà
+exception. La correction qualifiée reconnaît aussi une purge 006 déjà
 décidée et fortement corrélée : fonction supprimée sans pointeur, même opération,
 service, propriétaire et versions de commande/garde. Le code déjà retiré du
 catalogue garde alors une identité inconnue pendant son nettoyage, sans effacer
@@ -115,3 +115,35 @@ de schéma concernées sont rejouées en série ; les listes de migrations atten
 Rapports incomplets et erreurs restent conservés séparément ; aucune simulation,
 interception réseau ou réussite conditionnelle. L’API, Docker, SQLite et l’agent
 de stockage sont ceux du seul SPARK DEV. Le checkpoint ne clôt pas SLS-074.
+
+
+## Qualification du checkpoint
+
+Le [recoupement final](evidence/function-version-registry-dev-2026-11-09.json)
+passe 359 groupes : 46 ciblés/historiques et 313 dans 18 campagnes communes, sur
+l’image fe75c9e7 et 233 sources. Deux époques de clients ne diffèrent que par
+control_database et les deux clients function-storage ; les fichiers produit
+et l’image sont identiques. Les 69 captures sont fraîches :47 nouvelles images
+inspectées,22 concordances SHA avec des références inspectées. Le manuel servi
+correspond à 15 chapitres/47 paragraphes et à son empreinte b60e9c1a.
+
+La première campagne au repos sur l’image précédente reste conservée avec ses
+328 groupes et la sauvegarde native avant HTTP. Elle prouve le premier backfill,
+les alias A/A/B, la cible, les données et la lecture groupée. La correction de
+purge 006 est qualifiée séparément par les vraies fenêtres volumes/artifacts,
+la perte du pilote et 20 refus de corrélation. Les assets web sont identiques
+entre ces images ; seules les sources produit db.py et 007 et un commentaire
+UI diffèrent de l’ancien checkpoint. Les contraintes SQLite sont rejouées.
+
+La première régression finale s’est arrêtée sur SQLITE_BUSY_RECOVERY avant
+l’observation du gate attendu ; rapport et nettoyage natif restent distincts.
+Le replay ciblé 15 groupes, puis toute la suite 313, passent après stabilisation
+de l’observation RO. Aucun PUT incertain n’est rejoué et la cause rétrospective
+exacte n’est pas attribuée. Le [contrat des gardes](ADMISSION.md#observation-durable-des-intentions-par-les-gardes)
+décrit cette correction de client. Les six fonctions du registre sont purgées
+dans six namespaces recoupés ; les originaux historiques, l’exécuteur de
+référence, les deux routes 18090 TLS et les fichiers officiels sont conservés.
+Les fonctions de régression ont leur propre nettoyage dans les rapports.
+
+Ce checkpoint est livré ; SLS-074 demeure en cours pour la déduplication,
+la promotion, l’admission par hash et l’archivage de versions.

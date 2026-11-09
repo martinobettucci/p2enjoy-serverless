@@ -72,8 +72,17 @@ pour un pilote sans déplacer la cible par défaut. Son [calcul canonique](docs/
 est implémenté et qualifié : sept groupes ciblés, 45 de régression et neuf
 invocations Docker. Les sept groupes sont rejoués après nommage des clients ;
 les 45 régressions restent dans leur époque distincte, sur les mêmes sources
-produit et images. Déduplication, promotion séparée et appels par hash restent
-à implémenter ; l’API en service conserve son comportement actuel.
+produit et images. Le [registre persistant](docs/FUNCTION_VERSION_REGISTRY.md) est maintenant
+implémenté et qualifié : migration 007, alias historiques conservés, lecture
+Read groupée et hash complet copiable dans la console. Sa
+[preuve](docs/evidence/function-version-registry-dev-2026-11-09.json) passe
+359 groupes sur deux époques de clients, avec la même image applicative :
+46 ciblés/historiques et 313 de régression. Les 69 captures sont recoupées,
+dont 47 nouvelles inspections et 22 références identiques par SHA. Le manuel
+compilé comporte 15 chapitres et 47 paragraphes. Le checkpoint antérieur au repos
+conserve ses 328 groupes dans son époque distincte ; ils ne s’ajoutent pas comme
+groupes uniques au total 359. Déduplication, promotion séparée et appels par hash
+restent à implémenter ; les uploads activent encore leur révision.
 
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.

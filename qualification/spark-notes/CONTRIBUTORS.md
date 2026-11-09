@@ -409,3 +409,38 @@ Notes proposées individuellement, sans adoption revendiquée.
 
 Sept groupes rejoués après nommage explicite ; 45 conservés aux clients inchangés,
 deux époques de 222 sources et mêmes sources produit/images.
+
+
+## Registre persistant de l’identité du code
+
+La migration 007 et le cache code_hash sont déployés. Les alias UUID historiques
+et la cible courante sont conservés ; le premier backfill reconnaît aussi les
+purges 006 décidées et fortement corrélées, sans inventer de hash ni retirer les
+compteurs/gardes avant leur nettoyage normal. La carte Code et révisions montre
+et copie le hash complet. GET /api/functions/{id}/versions fournit une lecture
+Read/admin groupée et paginée, sans code ni secrets. Les uploads activent encore
+leur révision ; déduplication, promotion distincte et appel par hash suivent.
+
+Preuve : docs/evidence/function-version-registry-dev-2026-11-09.json. 359 groupes
+sur deux époques de 233 sources aux mêmes fichiers produit et image, dont 46 ciblés
+et historiques et 313 communs. 69 captures recoupées : 47 nouvelles inspections,
+22 références SHA identiques. Le manuel servi correspond à 15 chapitres et
+47 paragraphes. L’ancien checkpoint au repos 328 reste distinct. Le premier arrêt
+WAL, son nettoyage natif et le replay 15 groupes du poller sont conservés séparément.
+Les six fonctions du registre sont purgées dans six namespaces recoupés ; les
+régressions ont leur propre nettoyage dans leurs rapports.
+
+Image courante : fe75c9e7, conservée aussi sous
+p2enjoy-control:purge-recovery-reference. La référence 006 est reconstruite depuis
+le vrai Git f56d79e, vérifiée et conservée sous historical-schema-006. Vérifier
+l’image effectivement portée après build/up ; si up garde l’ancien conteneur,
+recréer explicitement le seul contrôle par Compose, avec les deux env-file
+officiels, puis confirmer image/santé. Après 007 commise, le retour à une image
+antérieure exige base/fichiers/volumes cohérents ; après rollback de 007 refusée,
+reprendre 006 sur la même base préserve les décisions déjà prises.
+
+Aucune variable, secret ou route ajouté. Les deux domaines TLS restent sur 18090.
+Les fichiers officiels, l’agent et le runtime de référence sont conservés ; aucun
+daemon permanent nouveau. Les trois notes sont proposées individuellement,
+sans revendiquer leur adoption. Configuration par les deux fichiers de cellule ;
+aucun .env, ENV/ARG ou environment de configuration ajouté.

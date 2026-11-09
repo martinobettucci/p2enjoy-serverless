@@ -1,6 +1,6 @@
 // @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md | docs/DESIGN_SYSTEM_APP.md
 import React, {useEffect, useRef, useState} from 'react';
-import {ChevronLeft, ChevronRight, RefreshCw} from 'lucide-react';
+import {ChevronLeft, ChevronRight, Copy, RefreshCw} from 'lucide-react';
 import {api} from './api';
 import {Badge, Confirm, DialogForm, ErrorMessage, Facts, Field, Section, Success} from './ui';
 
@@ -168,7 +168,7 @@ export function CodePublications({functionId,onFunction}) {
       <div className="section-heading"><h2 id="revisions-heading" tabIndex={-1} ref={historyHeading}>Révisions conservées</h2></div>
       {data && <>
         {!data.revisions.length ? <p className="empty">Aucune révision publiée.</p> : <ul className="observation-list">
-          {data.revisions.slice(revisionPage*size,(revisionPage+1)*size).map(row => <li key={row.id}><Revision row={row} disabled={locked}
+          {data.revisions.slice(revisionPage*size,(revisionPage+1)*size).map(row => <li key={`${row.id}:${state.loadedAt}:${state.loading}`}><Revision row={row} disabled={locked}
             activate={() => mutate(() => api(`/api/functions/${functionId}/rollback`,{method:'POST',headers:{'If-Match':String(data.fn.updated_at)},body:{revision_id:row.id}}),'Révision activée. La configuration courante est conservée.')}
             remove={() => mutate(() => api(`/api/functions/${functionId}/revisions/${row.id}`,{method:'DELETE'}),'Révision supprimée.')}/></li>)}
         </ul>}
@@ -229,10 +229,22 @@ function Candidate({row,disabled,abandon}) {
   </article>;
 }
 
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#console-et-manuel | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md#gérer-les-révisions
 function Revision({row,disabled,activate,remove}) {
+  const [copied,setCopied]=useState(false),[copyError,setCopyError]=useState(null),[copying,setCopying]=useState(false);
+  async function copyHash() {
+    if(copying || disabled)return;
+    setCopying(true);setCopied(false);setCopyError(null);
+    try {await navigator.clipboard.writeText(row.code_hash);setCopied(true);}
+    catch {setCopyError(new Error('Copie refusée. Sélectionnez et copiez le hash affiché.'));}
+    finally {setCopying(false);}
+  }
   return <article aria-label={`Révision ${row.id}`}>
     <div className="observation-heading"><h3 className="mono">{row.id}</h3><Badge tone={row.active ? 'success' : 'neutral'}>{row.active ? 'Active' : 'Inactive'}</Badge></div>
     <p className="muted">Publiée le {stamp(row.created_at)}</p>
+    <Facts values={[["Hash du code",row.code_hash ? reference(row.code_hash) : 'Identité indisponible']]}/>
+    {row.code_hash && <div className="actions"><button disabled={disabled || copying} onClick={copyHash}><Copy aria-hidden="true"/>Copier le hash du code</button></div>}
+    <Success>{copied ? 'Hash du code copié.' : ''}</Success><ErrorMessage error={copyError}/>
     <Facts values={[["Handler",reference(row.handler)],['Runtime',row.runtime],['Espace stocké',`${new Intl.NumberFormat('fr-FR').format(row.stored_bytes)} octets`]]}/>
     <details className="invocation-details"><summary>Métadonnées de la révision</summary><div className="stack">
       <Facts values={[

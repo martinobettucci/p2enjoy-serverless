@@ -4,6 +4,7 @@ from contextlib import closing,contextmanager
 import os
 from pathlib import Path
 import pwd
+import signal
 import sqlite3
 import threading
 
@@ -63,3 +64,49 @@ class ControlWriter:
 
     def __enter__(self):return self
     def __exit__(self,*error):self.close()
+
+
+# @spec docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#observation-durable-des-intentions-par-les-gardes
+class ControlObserver:
+    """Keep one real connection open without retaining a read transaction."""
+    def __init__(self,path):
+        self.path=Path(path);self.db=None;self.identity=None;self.interruption_pending=False
+
+    def open(self):
+        assert self.db is None,'control_observer_already_open'
+        previous=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGHUP,signal.SIGTERM,signal.SIGINT})
+        try:
+            with control_owner(self.path):
+                db=sqlite3.connect('file:'+str(self.path)+'?mode=ro',uri=True,timeout=2,isolation_level=None)
+                try:
+                    db.row_factory=sqlite3.Row
+                    with closing(db.execute('SELECT version FROM schema_migrations LIMIT 1')) as cursor:
+                        assert cursor.fetchall(),'control_observer_schema_required'
+                    assert not db.in_transaction,'control_observer_transaction_retained'
+                    self.identity={'effective_uid':os.geteuid(),'effective_gid':os.getegid(),
+                        'sidecar_uids':{suffix:Path(str(self.path)+suffix).stat().st_uid for suffix in ('-wal','-shm')}}
+                    self.db=db
+                except BaseException:db.close();raise
+        finally:signal.pthread_sigmask(signal.SIG_SETMASK,previous)
+
+    def rows(self,sql,args=()):
+        assert self.db is not None,'control_observer_not_open'
+        with control_owner(self.path):
+            assert not self.db.in_transaction,'control_observer_transaction_retained'
+            with closing(self.db.execute(sql,args)) as cursor:result=[dict(row) for row in cursor.fetchall()]
+            assert not self.db.in_transaction,'control_observer_transaction_retained'
+            return result
+
+    def close(self,interrupt=False):
+        if self.db is None:return
+        previous=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGHUP,signal.SIGTERM,signal.SIGINT})
+        try:
+            with control_owner(self.path):
+                if interrupt:
+                    os.kill(os.getpid(),signal.SIGTERM)
+                    self.interruption_pending=signal.SIGTERM in signal.sigpending()
+                    assert self.interruption_pending,'operator_signal_not_queued'
+                db,self.db=self.db,None
+                try:assert not db.in_transaction,'control_observer_transaction_retained'
+                finally:db.close()
+        finally:signal.pthread_sigmask(signal.SIG_SETMASK,previous)

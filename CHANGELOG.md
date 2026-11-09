@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- Registre persistant du hash des révisions : migration 007, alias historiques,
+  lecture Read groupée et copie native dans la console.359 groupes réels passent
+  sur l’image finale, avec69 captures recoupées et manuel15 chapitres/47 paragraphes.
+  Les purges 006 engagées reprennent sans hash inventé, compteur effacé ni garde
+  contournée. Le banc 003→007 et les refus de corrélation sont éprouvés. Le premier
+  arrêt WAL est conservé ; les gardes utilisent une observation RO persistante
+  qualifiée sous SIGTERM et SIGKILL. Déduplication/promotion/appels par hash restent
+  dans SLS-074. Déploiement DEV uniquement.
+
 - Identité canonique des paquets : bibliothèque commune et CLI d’extraction
   Docker qualifiées par sept groupes ciblés et 45 de régression, sur 222 sources.
   Inventaire du packager enrichi du mode exécutable ; neuf invocations réelles.

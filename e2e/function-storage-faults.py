@@ -1,5 +1,5 @@
 # @spec docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle
-# @verifies docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle
+# @verifies docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle | docs/ADMISSION.md#observation-durable-des-intentions-par-les-gardes
 """DEV-only real process gates and filesystem consumers for the HTTPS campaign."""
 from contextlib import closing,suppress
 import json
@@ -15,7 +15,7 @@ import subprocess
 import sys
 import time
 from uuid import UUID,uuid4
-from control_database import control_owner,ControlWriter
+from control_database import control_owner,ControlWriter,ControlObserver
 
 assert os.getuid()==0 and Path('/etc/hostname').read_text().strip()=='infra-serverless'
 ROOT=Path('/srv/p2enjoy-serverless');UNIT='p2enjoy-storage-dev.service'
@@ -184,6 +184,7 @@ if mode=='registry-close-interruption':
     def interrupted(signum,frame):raise InterruptedError('operator_interrupted')
     signal.signal(signal.SIGTERM,interrupted)
     writer=RegistryWriter();replacement=RegistryWriter();caught=False
+    observer=ControlObserver(CONTROL);replacement_observer=ControlObserver(CONTROL)
     try:
         writer.begin()
         try:writer.close(interrupt=True)
@@ -196,11 +197,27 @@ if mode=='registry-close-interruption':
         with control_owner(CONTROL):
             assert replacement.db.in_transaction,'registry_writer_not_reacquired'
         replacement.close()
+        observer.open();observer.rows('SELECT id FROM functions WHERE id=?',(identifier,));caught=False
+        try:observer.close(interrupt=True)
+        except InterruptedError:
+            caught=True
+            assert observer.db is None and os.geteuid()==0,'interruption_before_observer_close'
+        assert caught and observer.interruption_pending,'observer_interruption_missing'
+        replacement_observer.open()
+        assert replacement_observer.rows('SELECT id FROM functions WHERE id=?',(identifier,))==[{'id':identifier}]
+        replacement_observer.close()
         emit({'interruption_deferred':True,'writer_closed':writer.db is None,'writer_reacquired':True,
-            'writer_identity':writer.identity,'replacement_identity':replacement.identity,'operator_uid':os.geteuid()})
+            'writer_identity':writer.identity,'replacement_identity':replacement.identity,'operator_uid':os.geteuid(),
+            'observer_interruption_deferred':observer.interruption_pending,'observer_closed':observer.db is None,
+            'observer_reopened':True,'observer_autocommit':True,'observer_identity':observer.identity,
+            'replacement_observer_identity':replacement_observer.identity})
     finally:
         try:writer.close()
-        finally:replacement.close()
+        finally:
+            try:replacement.close()
+            finally:
+                try:observer.close()
+                finally:replacement_observer.close()
 elif mode=='empty-resolution-busy':
     with ControlWriter(CONTROL) as writer:
         emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
@@ -290,13 +307,15 @@ elif mode in ('write','read','hold-lease'):
     finally:
         clean_consumer(record_path)
 elif mode in ('prepare','commit','commit-database-busy','watchdog'):
-    pidfd=None;paused=False;writer=None;registry_writer=None;guard=None
+    pidfd=None;paused=False;writer=None;registry_writer=None;guard=None;observer=None
     def interrupted(signum,frame):raise InterruptedError('operator_interrupted')
     for signum in (signal.SIGHUP,signal.SIGTERM,signal.SIGINT):signal.signal(signum,interrupted)
     try:
         pid=int(command(['systemctl','show','--property=MainPID','--value',UNIT]));pidfd=os.pidfd_open(pid)
         guard=recovery_guard(pid,5 if mode=='watchdog' else 110)
         if mode in ('commit','commit-database-busy'):
+            observer=ControlObserver(CONTROL);observer.open()
+            emit({'event':'control-observer-ready',**observer.identity,'autocommit':True,'operator_uid':os.geteuid()})
             registry_writer=RegistryWriter();registry_writer.begin()
             emit({'event':'registry-writer-identity',**registry_writer.identity,'operator_uid':os.geteuid()})
         emit({'event':'watching'});deadline=time.monotonic()+25;operation=None
@@ -308,7 +327,7 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
             raise SystemExit(0)
         while time.monotonic()<deadline:
             if registry_writer:
-                pending=rows(CONTROL,'SELECT id FROM function_operations WHERE function_id=? AND storage_version IS NOT NULL AND decision=\'undecided\'',(identifier,))
+                pending=observer.rows('SELECT id FROM function_operations WHERE function_id=? AND storage_version IS NOT NULL AND decision=\'undecided\'',(identifier,))
                 if pending:
                     operation=pending[0]['id'];break
                 time.sleep(.001);continue
@@ -337,7 +356,7 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
             writer.close();writer=None
             deadline=time.monotonic()+5
             while True:
-                pending=rows(CONTROL,'SELECT decision FROM function_operations WHERE id=?',(operation,))
+                pending=observer.rows('SELECT decision FROM function_operations WHERE id=?',(operation,))
                 if pending and pending[0]['decision']=='commit':break
                 assert time.monotonic()<deadline,'commit_not_observed'
                 time.sleep(.001)
@@ -346,7 +365,8 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
         emit({'event':'paused','phase':mode,'operation_id':operation})
         action=input_command()
         if action=='kill-control':
-            row=rows(CONTROL,'SELECT decision FROM function_operations WHERE id=?',(operation,))
+            row=(observer.rows('SELECT decision FROM function_operations WHERE id=?',(operation,)) if observer else
+                 rows(CONTROL,'SELECT decision FROM function_operations WHERE id=?',(operation,)))
             assert row and row[0]['decision']==('undecided' if mode=='prepare' else 'commit')
             command(DOCKER+['kill','--signal','KILL','serverless-api'])
             state=json.loads(command(DOCKER+['inspect','--format','{{json .State}}','serverless-api']))
@@ -359,7 +379,10 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
             try:
                 if registry_writer:registry_writer.close()
             finally:
-                if writer:writer.close()
+                try:
+                    if writer:writer.close()
+                finally:
+                    if observer:observer.close()
         finally:
             if pidfd is not None:
                 try:

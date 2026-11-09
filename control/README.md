@@ -277,3 +277,18 @@ La [preuve](../docs/evidence/function-code-hash-dev-2026-11-09.json) passe
 52 groupes dont sept ciblés, neuf invocations Docker et 222 sources. La future
 déduplication/promotion/sélection par hash reste dans SLS-074 ; aucune migration
 ni modification du pointeur actif n’est livrée par ce composant.
+
+
+## Registre persistant du code — checkpoint SLS-074
+
+La migration 007 conserve les UUID et remplit code_hash depuis l’inventaire et
+le descripteur réels ; les tombstones et les purges 006 corrélées restent inconnus.
+GET /api/functions/{id}/versions groupe les alias, avec Read/admin, pagination
+bornée et snapshot autorisé. La console copie le hash complet. L’upload active
+encore la révision ; déduplication/promotion et invocation par hash suivent.
+[Contrat](../docs/FUNCTION_VERSION_REGISTRY.md) et
+[preuve](../docs/evidence/function-version-registry-dev-2026-11-09.json) :359 groupes,
+69 captures, deux époques de clients et même image finale. Le premier passage au
+repos conserve ses 328 groupes et son backup natif distincts. Les commandes DEV
+restent build puis up ; vérifier l’image portée réellement après la bascule.
+Les références006 et courante sont conservées sous des tags de responsabilité.

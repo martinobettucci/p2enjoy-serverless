@@ -14,6 +14,8 @@ COPY control/requirements.txt ./
 RUN python -m pip install --no-cache-dir --disable-pip-version-check --require-hashes -r requirements.txt
 COPY control/app ./app
 COPY control/migrations ./migrations
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#migration-et-conservation
+COPY function_code_hash.py ./function_code_hash.py
 COPY --from=console /web/dist ./web
 EXPOSE 18090
 CMD ["python", "-B", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "18090", "--workers", "1", "--no-access-log", "--no-proxy-headers"]

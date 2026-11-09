@@ -868,3 +868,39 @@ absents, douze
 fonctions supprimées et volumes purgés ; 33 archives de code restent conservées
 et vérifiées. Les prérequis de build/contexte ne sont pas ajoutés au total.
 Cette preuve de composant ne qualifie pas les futurs appels publics par hash.
+
+
+## Registre du hash : migrations et campagnes réelles
+
+[Contrat du registre](../docs/FUNCTION_VERSION_REGISTRY.md) et
+[banc de purge 006](../docs/FUNCTION_VERSION_PURGE_UPGRADE.md).
+Le checkpoint passe 359 groupes : 46 ciblés/historiques et 313communs,69 captures,
+deux époques de clients aux mêmes fichiers produit et image. Le checkpoint au
+repos antérieur328reste distinct. Le replay ciblé du poller 15est déjà repris
+dans la suite commune ; il n’est pas additionné au total 359.
+
+Depuis le poste, construire la vraie référence006 par
+python3 -B e2e/function-version-control-build.py. Les clients maintenus
+function-version-purge-upgrade.mjs prennent upgrade artifacts, upgrade volumes,
+ou upgrade artifacts --restore-with-guard, séparément. Ils créent leurs données
+via les API, passent le SSO réel, publient dans Docker et restaurent les originaux.
+Leur JSON username/password arrive seulement par stdin protégée. Pour conserver
+la saisie terminal sans écho, le lecteur de la suite peut envelopper un client :
+
+```sh
+python3 -B -c 'import runpy,subprocess; r=runpy.run_path("e2e/execution-suite.py"); credentials=r["private_credentials"](); result=subprocess.run(["node","e2e/function-version-purge-upgrade.mjs","upgrade","artifacts"],input=credentials); credentials=None; raise SystemExit(result.returncode)'
+```
+
+La copie privée du vrai backup intermédiaire sert ensuite à
+function-version-purge-correlation.py UUID artifacts, exécuté comme spark-docker
+dans le SPARK :20 refus de vrai démarrage, rollback intégral et original inchangé.
+function-version-migration-faults.py éprouve aussi les six inventaires/descripteurs
+invalides et les contraintes SQLite. Les copies n’ont ni réseau ni socket Docker.
+
+Le parcours function-version-registry.mjs prepare/verify/persist correspond au
+premier upgrade depuis006 : A/A/B, rollback, données et cache avant/après. prepare
+se lance avant007 ; ce n’est pas une reconstitution SQL sur une base déjà migrée.
+Le parcours UI courant est node e2e/function-version-registry-ui.mjs, après
+préparation SSO normale. La suite commune reste
+python3 -B e2e/execution-suite.py --scope publication. Les assertions de schéma
+attendent 001–007 ; le banc storage-legacy conserve son vrai départ 001–003.

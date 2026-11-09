@@ -268,3 +268,23 @@ Aucun défaut visuel bloquant confirmé. La fiche d’archive Purgée porte enco
 le titre Archives conservées ; cette remarque mineure est suivie dans SLS-075.
 Les totaux d’archives incluent l’historique et ne représentent pas seulement
 les jeux de cette preuve. Les modes pilote et versions par hash restent planifiés.
+
+## Identité du code dans les révisions
+
+Le [registre SLS-074](FUNCTION_VERSION_REGISTRY.md#console-et-manuel) ajoute à la
+carte existante une donnée Facts « Hash du code » complète, police mono avec
+retour à la ligne natif, et le bouton texte/icône Lucide « Copier le hash du
+code ». Success et ErrorMessage portent le résultat du vrai presse-papiers.
+Le texte reste sélectionnable après refus. Le résultat appartient à l’observation
+courante : relecture, changement de page ou de facette le retire. Aucun token
+visuel nouveau ni exception au socle. La
+[preuve du registre](evidence/function-version-registry-dev-2026-11-09.json)
+recoupe69 captures fraîches :47 nouvelles images inspectées et 22 identités SHA
+avec des références inspectées. Les six images ciblées du hash montrent copie,
+refus natif et reprise, dont deux vrais viewports relus aussi par le principal.
+Les captures du manuel cadrent directement le paragraphe sur desktop/mobile ;
+son contenu servi correspond à 15 chapitres et 47 paragraphes. Les pertes de
+réponse, les droits, le nettoyage et le presse-papiers exact restent des preuves
+d’assertions ; les images pleines pages prolongent leur viewport. Aucun défaut
+visuel bloquant confirmé. Promotion, déduplication et appels par hash restent
+planifiés dans la suite de SLS-074.

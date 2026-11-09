@@ -207,7 +207,8 @@ try:
     image=run(['docker','image','inspect','--format','{{.Id}}','p2enjoy-runtime:dev']).strip()
     fixture_image=run(['docker','image','inspect','--format','{{.Id}}','p2enjoy-runtime-qualification:dev']).strip()
     work=Path(tempfile.mkdtemp(prefix='il-',dir=ROOT/'state'));code=work/'code';code.mkdir()
-    fixture=run(['docker','create','--network','none',fixture_image]).strip()
+    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#preuves-réelles-requises
+    fixture=run(['docker','create','--name','serverless-lifecycle-fixture-source-'+installation[:8],'--network','none',fixture_image]).strip()
     run(['docker','cp',fixture+':/fixtures/.',str(code)]);run(['docker','rm',fixture]);fixture=None
     def expired(signum,frame):raise TimeoutError('Échéance indépendante de campagne')
     signal.signal(signal.SIGALRM,expired);signal.alarm(90)

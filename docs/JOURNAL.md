@@ -1,5 +1,83 @@
 # Journal de cadrage
 
+## 2026-11-09 — Registre additif qualifié :359 groupes et 69 captures
+
+Le replay commun passe18 campagnes/313 groupes, zéro échec/skip, après les 46
+ciblés et historiques sur la même image fe75c9e7. Deux époques de 233 sources ne
+diffèrent que par les trois clients de garde ; fichiers produit et image
+identiques. Les 15 groupes ciblés du poller sont déjà repris dans313, sans
+addition aux 359. Le premier arrêt55+function-storage incomplet et son nettoyage
+natif restent séparés. Le checkpoint au repos 328sur l’image antérieure reste
+conservé comme preuve du premier backfill, sans addition comme groupes uniques.
+
+Les 69 captures sont fraîches et recoupées :47 nouvelles inspections,22 identités
+SHA avec références inspectées. Le principal a aussi vu les deux viewports du
+hash, le namespace mobile long, la confirmation mobile et le paragraphe du
+manuel. Le contenu servi correspond à 15 chapitres/47 paragraphes et au SHA b60e9c1a.
+La collecte native vérifie six fonctions du registre purgées dans six namespaces,
+1133 hashes historiques recomputés et 261 tombstones inconnus,29 sources embarquées,
+deux assets HTTPS, aucune ressource active, configuration/routes/référence
+conservées. Les régressions portent leur propre nettoyage et leurs rapports.
+
+Le code et ses preuves sont prêts pour le commit du checkpoint additif.
+Déduplication, promotion distincte et appels par hash restent les prochains
+travaux de SLS-074 ; le goal global demeure actif. Les notes SPARK sont proposées
+individuellement ; aucun remote n’est configuré pour le push.
+
+## 2026-11-09 — Flux relevés pour déduplication, promotion et appel par hash
+
+L’exploration en lecture seule de SLS-074 retrouve l’autorité de publication
+à deployments.upload : hash calculé après validation, puis insertion UUID et
+changement simultané de configuration/pointeur. verify compte actuellement
+les UUID avant extraction, tandis que clean_candidate ne nettoie que failed
+ou expired. Une réutilisation publiée vers un ancien UUID doit conserver sa
+propre responsabilité de nettoyage et ses octets jusqu’à effacement confirmé.
+La garde de purge doit continuer à protéger ces artefacts.
+
+La première publication réussie reste identifiable par le candidat published,
+required_right=create et revision_id, avec ses dates, son acteur et l’audit
+transactionnel. L’absence de pointeur actif ne prouve pas l’absence de promotion
+antérieure ; Create doit rester limité à la première promotion de cette version,
+y compris si Update a préparé B entre-temps. Le schéma actuel ne représente pas
+expressément la nouvelle autorité de promotion. Ces faits seront intégrés à la
+spécification de la prochaine implémentation, avant son code.
+
+Une publication non promue ne peut pas encore être essayée : l’entrée UUID,
+le préflight et Execution.current ne résolvent que l’active. Le snapshot prend
+encore le handler courant ; le pilote épinglé devra prendre tout le descripteur
+de la version choisie avec les ressources/configurations courantes. tick retire
+les générations autres que l’active ; les budgets restent heureusement communs
+à la fonction. La CLI exige aussi que published soit active et son validateur
+d’URL ne reconnaît pas UUID@hash. Les attentes des clients de publication,
+plafond et UI devront suivre le nouveau contrat ; le banc historique006 garde
+sa sémantique originale. Aucun comportement de ces étapes n’est livré par le
+registre additif en qualification, et aucune décision de modèle n’est déléguée.
+
+Le préflight documentaire d’ADMISSION a également détecté cinq lignes de règle
+d’identité SQLite absentes sur le SPARK par rapport au précédent arbre local.
+La livraison s’est arrêtée sans écrire. Le diff exact a été inspecté, la copie
+conservée et son empreinte vérifiée avant sauvegarde/remplacement ; aucune
+base, permission de données ou configuration de cellule n’a été modifiée.
+
+## 2026-11-09 — Observation persistante : quinze scénarios réels réussis
+
+Le replay ciblé de function-storage passe quinze groupes sur la même image
+fe75c9e7 et 233 sources recoupées. Quatre gardes commit ouvrent effectivement
+leur observateur RO avant watching ; les vraies intentions puis décisions sont
+observées. Le SIGKILL après commit et la reprise conservent le quota enregistré.
+La fermeture du lecteur sous SIGTERM réel, son identité et sa réouverture sont
+également éprouvées. Aucun writer, signal ou prédicat de gate n’a été retiré,
+aucun PUT n’a été rejoué automatiquement. Nettoyage complet et santé finale à
+zéro allocation/bail/pending/montage. La revue statique ne relève pas de défaut
+indispensable. SLS-050-GATE-WAL est retirée après cette preuve ciblée.
+
+Le précédent SQLITE_BUSY_RECOVERY reste un fait distinct dont le site appelant
+exact n’est pas attribué. Son rapport en échec et son relevé natif sont conservés.
+La suite commune est à rejouer ; les 46 groupes du registre, de purge, du banc
+historique et du parcours UI restent dans leur époque de clients antérieure,
+avec les mêmes fichiers produit et image. Le seul écart de clients concerne
+control_database.py et les deux clients function-storage.
+
 ## 2026-11-09 — Régression arrêtée : récupération WAL avant le gate attendu
 
 La campagne finale sur fe75c9e7 passe ses 46 groupes ciblés et historiques puis

@@ -17,6 +17,7 @@ ROOT=Path('/srv/p2enjoy-serverless/control')
 (ROOT/'.proof-control-operations.json').write_text('{"completed":false,"error":"Campagne non terminée"}\n')
 checks=[];completed=False
 project='p2enjoy-control-proof-'+uuid.uuid4().hex[:10]
+http_clients=0
 work=Path(tempfile.mkdtemp(prefix='operations-',dir=ROOT))
 state=work/'state';state.mkdir(mode=0o700)
 compose=work/'compose.json'
@@ -72,6 +73,9 @@ def logs(container):
 
 
 def request(path,expected,method='GET',body=None):
+    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#preuves-réelles-requises
+    global http_clients
+    http_clients+=1
     program='''import urllib.request,urllib.error,json
 class NoRedirect(urllib.request.HTTPRedirectHandler):
  def redirect_request(self,*args):return None
@@ -80,7 +84,7 @@ try:r=client.open(urllib.request.Request('http://control:18090'+%r,method=%r,dat
 except urllib.error.HTTPError as e:r=e
 print(json.dumps({'status':r.status,'request_id':r.headers.get('X-Request-ID'),'body':r.read().decode()}))
 '''%(path,method,json.dumps(body).encode() if body is not None else None,canonical_host)
-    result=run(['docker','run','--rm','--network',project+'_default','--read-only',
+    result=run(['docker','run','--rm','--name','serverless-control-http-client-'+project.rsplit('-',1)[-1]+'-'+str(http_clients),'--network',project+'_default','--read-only',
                 '--cap-drop','ALL','--security-opt','no-new-privileges:true','--pids-limit','32',
                 '--memory','128m',image,'python','-B','-c',program],timeout=30)
     response=json.loads(result.stdout)
@@ -131,9 +135,10 @@ try:
     passed('Même image réelle, entrée HTTP et confinement Docker')
     metadata=json.loads(run(['docker','exec',container,'python','-B','-c',
         'import sqlite3,json; db=sqlite3.connect("/state/control.sqlite3"); print(json.dumps({"versions":[r[0] for r in db.execute("SELECT version FROM schema_migrations ORDER BY version")],"installation":db.execute("SELECT value FROM security_metadata WHERE name=?",("installation-id",)).fetchone()[0],"integrity":db.execute("PRAGMA integrity_check").fetchone()[0]}))']).stdout)
-    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql'] and metadata['integrity']=='ok'
-    uuid.UUID(metadata['installation']);passed('Six migrations réelles, intégrité SQLite et UUID d’installation')
-    competing=run(base+['run','--rm','--no-deps','control'],timeout=20,check=False)
+    # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#migration-et-conservation
+    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql'] and metadata['integrity']=='ok'
+    uuid.UUID(metadata['installation']);passed('Sept migrations réelles, intégrité SQLite et UUID d’installation')
+    competing=run(base+['run','--rm','--name','serverless-control-lock-contender-'+project.rsplit('-',1)[-1],'--no-deps','control'],timeout=20,check=False)
     assert competing.returncode!=0 and 'Un contrôle possède déjà cet état' in competing.stderr
     ready(container);passed('Second contrôle réel refusé par le verrou exclusif')
     for key in ('SERVERLESS_PUBLIC_URL','OIDC_ISSUER','OIDC_CLIENT_ID','OIDC_CLIENT_SECRET','SERVERLESS_MASTER_KEY'):
@@ -233,7 +238,7 @@ try:client.open(urllib.request.Request('http://control:18090/auth/retour?state='
 except urllib.error.HTTPError as r:assert r.code==401
 else:raise AssertionError('Callback non refusé')
 '''.replace('HOST',repr(canonical_host))
-    run(['docker','run','--rm','--network',project+'_default','--read-only','--cap-drop','ALL',image,'python','-B','-c',program])
+    run(['docker','run','--rm','--name','serverless-control-cookie-client-'+project.rsplit('-',1)[-1],'--network',project+'_default','--read-only','--cap-drop','ALL',image,'python','-B','-c',program])
     logs(container)
     passed('Écriture reprise et aucune valeur secrète dans les journaux')
     marker='validation-sensitive-'+uuid.uuid4().hex

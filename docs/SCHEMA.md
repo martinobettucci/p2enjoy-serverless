@@ -105,6 +105,26 @@ de la révision choisie, avec les ressources et secrets courants.
 Les invocations, instances et exécutions planifiées recevront leurs migrations
 dans SLS-040/050.
 
+## Identité du code des révisions
+
+La migration 007 ajoute `revisions.code_hash`, SHA256 canonique nullable pour
+les tombstones historiques déjà purgés sans inventaire et les purges 006
+engagées dont la décision est fortement corrélée. Le calcul commun
+est enregistré sur la connexion de migration avant son script transactionnel.
+Un inventaire invalide ou absent pour un code conservé/actif annule la migration.
+La reconnaissance d’une purge en attente exige fonction supprimée sans pointeur,
+inventaire/événements effacés, commande et garde de même UUID, fonction et service,
+décision commit, état pending dans volumes/artifacts, installation et versions
+concordantes. Elle conserve les octets et la garde jusqu’au nettoyage normal,
+selon [le contrat de reprise](FUNCTION_VERSION_PURGE_UPGRADE.md).
+Les inserts futurs exigent un hash complet valide ; un hash connu est immuable.
+L’index `(function_id,code_hash,created_at,id)` conserve les doublons UUID
+historiques, leurs références et le pointeur actif. L’API `/versions` regroupe
+ces alias dans un même snapshot autorisé sans exposer leur code.
+Le [contrat de reprise](FUNCTION_VERSION_REGISTRY.md) fixe sélection, pagination,
+sauvegarde, retour arrière et preuves. Cette migration ne change encore ni
+l’activation à l’upload ni l’admission d’invocations.
+
 ## Registre local de stockage
 
 SLS-050 utilise une base distincte, possédée exclusivement par l’agent de

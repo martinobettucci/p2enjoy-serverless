@@ -84,10 +84,11 @@ try{
         evidence.push({scenario:'historical-archive',function_id:fn.id,revision_id:candidate.id,archive_sha256:bundle.sha256,validation:published.validation,physical});
       }
     });
-    await check('Migration réelle 001–003 vers 001–006 : session et archives conservées',async()=>{
+    // @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#migration-et-conservation
+    await check('Migration réelle 001–003 vers 001–007 : session et archives conservées',async()=>{
       const current=await operation('upgrade');assert.equal(current.image,currentImage);
       session=await call('/api/session');assert(session.authenticated);
-      for(const fn of functions){const row=await call('/api/archives/'+fn.id);assert(row.artifact_bytes>0&&row.storage.available&&!row.storage.registered);const physical=await operation('inspect',{function_id:fn.id});assert.equal(physical.versions.length,6);assert.deepEqual(physical.agent,[]);evidence.push({scenario:'migrated-archive',function_id:fn.id,physical});}
+      for(const fn of functions){const row=await call('/api/archives/'+fn.id);assert(row.artifact_bytes>0&&row.storage.available&&!row.storage.registered);const physical=await operation('inspect',{function_id:fn.id});assert.equal(physical.versions.length,7);assert.deepEqual(physical.agent,[]);evidence.push({scenario:'migrated-archive',function_id:fn.id,physical});}
     });
     await check('Archive sans registre : purge terminée, absence persistée et aucun reçu agent inventé',async()=>{
       const fn=functions[0],action=await purge(fn);const done=await receipt(action.id,row=>row.state==='completed');
