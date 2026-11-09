@@ -1,5 +1,30 @@
 # Journal de cadrage
 
+## 2026-11-09 — Décision avant code : publication et exécution par hash
+
+Après0c79a11 qualifié, la suite de SLS-074 est spécifiée dans
+FUNCTION_VERSION_EXECUTION. La publication non promue est raccordée à une vraie
+admission épinglée avant bascule. La table function_versions porte l’état et une
+révision canonique, sans fusion des alias ; les marqueurs première publication /
+première promotion empêchent de rendre Create à une cible désactivée. Le hash
+reste canoniquev1. Les anciennes publications ont réellement été activées et
+sont migrées comme promotions passées, sans déplacer leur pointeur.
+
+Le code seul ne modifie pas le parent/configuration ; son catalogue et ses dates
+font autorité pour le nouveau code. Le contrôle calcule le hash avant le plafond
+définitif et conserve la responsabilité du paquet réutilisé jusqu’à son effacement.
+Le déploiement complet garde sa mutation de configuration séparée ; aucun upload
+ne change la cible. Les droits Create/Update sont revérifiés à la décision.
+
+La sélection résout le descripteur du hash à l’admission, conserve les budgets
+communs et les volumes par UUID, et n’exécute aucun repli. Tous les pools encore
+available restent utilisables. Une demande pilote peut retirer une instance
+stable prête dans le cas minimum=maximum=1 ; aucun appel vivant n’est interrompu.
+Les minima sont restaurés sous budgets, sans créer un second cron de pilote.
+La CLI, les URL, la console et le manuel accompagnent la même bascule. Le contrat
+choisit ces règles plutôt qu’un upload préparé impossible à invoquer ou une
+inférence de première promotion depuis un pointeur momentanément NULL.
+
 ## 2026-11-09 — Registre additif qualifié :359 groupes et 69 captures
 
 Le replay commun passe18 campagnes/313 groupes, zéro échec/skip, après les 46

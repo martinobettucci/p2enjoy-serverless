@@ -726,6 +726,11 @@ Le premier arrêt SQLITE_BUSY_RECOVERY reste conservé avec son nettoyage natif 
 le poller RO persistant passe 15 groupes ciblés puis la suite complète. Les deux
 entrées du registre d’incohérences sont retirées après leurs preuves ; le
 versionnement complet reste en cours pour les étapes suivantes.
+La prochaine livraison suit [FUNCTION_VERSION_EXECUTION](FUNCTION_VERSION_EXECUTION.md) :
+autorité d’état par hash, première promotion durable, déduplication avec nettoyage,
+admission/pools et raccordements CLI/UI livrés ensemble. Les nouveaux critères
+incluent le droit Create après désactivation, les handlers A/B et le cas
+minimum=maximum=1 ; les exigences existantes ne sont pas réduites.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

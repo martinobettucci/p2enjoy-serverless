@@ -125,6 +125,36 @@ Le [contrat de reprise](FUNCTION_VERSION_REGISTRY.md) fixe sélection, paginatio
 sauvegarde, retour arrière et preuves. Cette migration ne change encore ni
 l’activation à l’upload ni l’admission d’invocations.
 
+## Autorité des versions et promotions
+
+La migration 008 prévue pour SLS-074 ajoute `function_versions`, clé primaire
+`(function_id, code_hash)` : `revision_id` canonique référencé, `created_at`
+initial, `state` available/archived/deleted et `updated_at`. L’alias canonique
+doit appartenir à la même fonction et porter le même hash. Les UUID historiques
+et la cible active ne sont pas fusionnés ni remplacés pendant la migration.
+Les règles de sélection et de conservation sont définies dans
+[FUNCTION_VERSION_EXECUTION](FUNCTION_VERSION_EXECUTION.md#autorité-persistante-et-migration).
+
+`functions` reçoit `first_published_code_hash` et `first_promoted_at`, nullable
+avant le premier succès correspondant et immuable une fois renseigné. L’historique
+antérieur établit une promotion passée dès qu’une révision existe, même si son
+hash a été perdu après purge. Désactiver une cible ne rétablit donc jamais le
+droit de première promotion Create.
+
+`deployments` reçoit `code_hash`, `code_changed`, `version_restored`,
+`result_function_version`, `default_code_hash_at_publication`, `restore_code_hash`
+et `code_only`. Les résultats décrivent la décision de publication, pas la cible
+présente. Une réservation de candidat published réutilisé reste comptée jusqu’au
+nettoyage confirmé. `invocations` reçoit `requested_code_hash` et
+`resolved_code_hash` ; le résolu historique est repris depuis sa révision connue.
+Les instances conservent leur UUID d’alias physique ; leur hash est lu dans la
+révision immuable, sans nouveau champ positionnel. Les insertions concernées
+nomment explicitement leurs colonnes.
+
+Cette migration est préparée avec publication sans activation, promotion et
+admission par hash ; elle n’est pas encore installée en DEV. Le checkpoint007
+et ses preuves conservent leur comportement historique.
+
 ## Registre local de stockage
 
 SLS-050 utilise une base distincte, possédée exclusivement par l’agent de

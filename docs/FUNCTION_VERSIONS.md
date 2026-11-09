@@ -26,6 +26,10 @@ Le premier checkpoint de l’étape 2 est le [registre additif](FUNCTION_VERSION
 backfill transactionnel, alias historiques conservés, lecture groupée et hash
 copiable. Il précède la déduplication et la promotion distincte, qui restent
 obligatoires dans cette même étape.
+La [livraison publication/promotion/exécution](FUNCTION_VERSION_EXECUTION.md)
+couple la suite de l’étape2 et l’admission/pools de l’étape3, avec les parcours
+CLI/UI indispensables pour essayer le pilote. Tous les critères de l’étape4
+restent requis ; ce regroupement empêche un upload préparé sans chemin d’appel.
 L’étape 1 est [qualifiée](evidence/function-code-hash-dev-2026-11-09.json) :
 sept groupes ciblés et 45 de régression, neuf invocations Docker et 222 sources.
 Les sept groupes sont rejoués après nommage explicite des clients ; les 45
