@@ -4995,3 +4995,21 @@ les parties source des véritables bancs006/007 restent historiques. Les21 group
 publication-ui gardent leurs pannes, confirmations, relectures, pagination et
 nettoyages ; les six parcours ciblés008 ne suffisent pas à les remplacer.
 Aucune adaptation ni preuve de cette nouvelle étape n'est encore exécutée.
+
+
+## 2026-11-09 — Première tranche de régression008 décidée
+
+L'arbre est propre au commit8277333. Lecture des clients et du vrai upload :
+la validation est sérialisée sous validation_lock mais live_uploads admet quatre
+candidats ; deployments.mjs attend encore429 au deuxième. En008 un code seul
+conserve updated_at/cible, donc la course abandon/publication n'active jamais
+le candidat gagnant. Une préparation avec événements stable doit être promue
+avant que le code seul suivant hérite de ces événements. Ces adaptations sont
+requises par le produit existant, aucun nouveau comportement produit n'est décidé.
+
+Décision persistée avant code : trois clients,55+11+10groupes, sept invocations
+réelles et quatre fonctions purgées. Réutiliser dev-sso-sessions depuis l'accueil,
+séparer ce prérequis des groupes. Les anciens rapports sont conservés avant
+régénération. La tranche n'affirme pas clôturer la régression complète008.
+Contrat : FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md. Aucun build/configuration
+ou route nouveau, aucune modification des sources des bancs006/007.

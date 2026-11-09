@@ -944,6 +944,14 @@ les six nouveaux parcours ciblés. Sources et discriminants de l'exploration
 sont consignés au journal du9novembre ; aucun résultat de cette adaptation
 n'est encore acquis. Le statut reste[~].
 
+La [première tranche de régression008](FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md)
+est décidée : control-operations55, deployments11 et code-publications10, soit76
+groupes prévus avec un prérequis SSO distinct. Les uploads sont distingués des
+promotions, l'admission en attente remplace l'ancien refus au second upload,
+rollback et sept invocations réelles sont recoupés ; suppressions UUID avec
+ETag et quatre fonctions purgées. Aucun résultat encore acquis ni réduction des
+autres critères. Les autres clients et la suite complète restent à réaliser.
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;
