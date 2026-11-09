@@ -54,7 +54,7 @@ avec zéro groupe réussi et ses parents nettoyés. Compose DEV lit les valeurs
 citées des fichiers officiels ; aucun fichier de cellule n’est modifié. Les
 pannes propres du helper et ses délais restent non qualifiés par ces scénarios.
 
-### Nettoyage de validation avec un upload en attente — préparation
+### Nettoyage de validation avec un upload en attente — quatre groupes
 
 `node e2e/function-version-validation.mjs` vise quatre groupes réels : défaut
 socket et reprise, défaut du canal isolé et reprise après SIGKILL du helper.
@@ -62,8 +62,13 @@ Il utilise la session SSO et SSH root du seul SPARK DEV, exige sa quiescence et
 arme une garde indépendante avant chaque changement de permission. Contrat :
 [FUNCTION_VERSION_VALIDATION_RECOVERY](../docs/FUNCTION_VERSION_VALIDATION_RECOVERY.md).
 Le second upload doit déjà être admis ; son refus503 précis et les événements
-Docker évitent une preuve vide. Le scénario reste à exécuter et ne qualifie pas
-encore ces comportements. La préparation stable est distincte des quatre groupes.
+Docker évitent une preuve vide. Le [replay qualifié](../docs/evidence/function-version-validation-recovery-dev-2026-11-09.json)
+passe quatre groupes, cinq invocations et deux restitutions ; la préparation
+stable reste distincte des groupes. Les248 sources sont recoupées, le contrôle
+ne redémarre pas. Deux fonctions sont purgées, y compris celle de l’essai sur la
+mauvaise clé detail, corrigée vers error. L’arrêt SSO antérieur ne crée aucun
+objet. Les helpers, unités, canaux et artefacts du replay sont recoupés absents ;
+les autres pannes et la régression complète restent ouvertes.
 
 ## Pause et reprise d’une requête réelle
 

@@ -12,8 +12,12 @@
   entre époques. Le complément CLI authentifié passe cinq groupes par image,
   vingt commandes et douze invocations, sur245 sources. Deux fonctions de plus
   sont purgées ; aucun client, définition ou réseau/volume Compose résiduel.
-  Les valeurs citées de cellule sont lues par Compose DEV. Les pannes et la
-  régression complète restent ouvertes ; SLS-074 n’est pas clôturée.
+  Les valeurs citées de cellule sont lues par Compose DEV. Quatre groupes de
+  reprise validation passent sous refus réel du socket et du canal isolé :
+  second upload refusé avant validation, octets conservés, garde indépendante
+  après SIGKILL et reprise normale, avec cinq invocations. Deux fonctions sont
+  purgées et deux gardes du replay terminées. Les autres pannes et la régression
+  complète restent ouvertes ; SLS-074 n’est pas clôturée.
 
 - Registre persistant du hash des révisions : migration 007, alias historiques,
   lecture Read groupée et copie native dans la console.359 groupes réels passent

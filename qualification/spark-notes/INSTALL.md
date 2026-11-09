@@ -399,7 +399,7 @@ docs/evidence/function-version-cli-images-dev-2026-11-09.json. Deux nouvelles
 fonctions sont purgées ; aucun client, réseau/volume ou définition Compose
 résiduel. Le premier lanceur direct est remplacé par Compose DEV pour lire les
 valeurs citées des deux fichiers officiels, qui ne changent pas. Les pannes du
-helper et la régression complète restent ouvertes ; SLS-074 demeure en cours.
+helper CLI conteneurisé et la régression complète restent ouvertes ; SLS-074 demeure en cours.
 
 Image contrôle courante :178394abb337, référence007 retenue sous
 before-function-version-promotions. Après migration008 commise, ne pas remettre
@@ -411,3 +411,20 @@ Aucune variable, secret ou route ajouté ; les deux domaines TLS restent18090.
 Configuration par les deux fichiers officiels de cellule, aucun .env, ENV/ARG ou
 environment de configuration. Agent et runtime de référence sont conservés.
 Les trois notes sont proposées individuellement ; leur adoption n’est pas revendiquée.
+
+
+## Reprise de validation sous faute — quatre groupes qualifiés
+
+La preuve docs/evidence/function-version-validation-recovery-dev-2026-11-09.json
+passe quatre groupes sur248 sources : A/B admis, refus socket puis canal isolé,
+B refusé avant validation et reprise normale sans redémarrer le contrôle. Le
+canal est restitué par garde indépendante après SIGKILL du helper. Les deux
+fenêtres Docker ne montrent que le create de A ; cinq invocations retrouvent
+stable/pilote, configuration et données/cache. Deux fonctions d’essai/replay
+sont purgées et leurs artefacts absents, deux helpers/gardes du replay terminés,
+réservations et ressources actives à zéro. Le socket conserve inode/UID/GID/mode
+après restitution. Les31 fichiers backend, images, démarrages et fichiers
+officiels restent inchangés. Aucun build, variable, secret ou route nouveau.
+Les arrêts de prérequis et du premier client restent distincts. Autres pannes
+et régression complète restent ouvertes ; les trois notes sont proposées,
+sans adoption revendiquée.

@@ -765,15 +765,24 @@ changer la cellule. Le rapport incomplet reste séparé. Les dix exécutions
 complètent cinq comportements dans deux images et ne sont pas revendiquées
 comme dix comportements nouveaux. Les pannes du helper, ses délais indépendants,
 les fautes de publication/migration et la suite complète restent nécessaires.
-La prochaine campagne suit [FUNCTION_VERSION_VALIDATION_RECOVERY](FUNCTION_VERSION_VALIDATION_RECOVERY.md) :
-A/B réellement admis, nettoyage du conteneur refusé par le socket puis erreur
-locale de nettoyage du canal avec Docker accessible. B doit recevoir le503
-spécifique avant validation, request_rejected et aucun diagnostic de validation.
-Les événements Docker bornés, troisième refus avant admission, garde indépendante
-sous SIGKILL et reprise normale sans redémarrage complètent les quatre groupes.
-La revue statique du pipeline a révélé le passage possible d’un validateur
-déjà en attente après un nettoyage incomplet ; le verrou est corrigé, et la
-preuve réelle de ce refus rejoint les critères de FUNCTION_VERSION_EXECUTION.
+La [preuve de nettoyage avec attente](evidence/function-version-validation-recovery-dev-2026-11-09.json)
+passe quatre groupes sur248 sources figées, avec cinq invocations. A/B sont
+réellement admis avant la faute ; B reçoit le503 précis avant validation,
+request_rejected et validation NULL. Le refus global du socket laisse le
+conteneur présent ; l’exception du canal isolé le retire et laisse Docker
+accessible. Le journal de chaque fenêtre ne porte que le create de A. Le
+pipeline reprend par maintenance normale, sans redémarrage, après restitution
+explicite puis indépendante après SIGKILL du helper. Le pilote est publié puis
+réutilisé, avec stable et données/cache préservés.
+Deux fonctions (essai interrompu et replay) sont purgées ;13 candidats et trois
+révisions n’ont plus d’artefact, les parents sont supprimés, les jetons révoqués.
+Les deux helpers et gardes du replay sont terminés ; compteurs actifs à zéro.
+Les31 fichiers backend, images et configuration officielle sont inchangés. Les
+arrêts sur SSO puis champ de diagnostic erroné restent séparés, sans groupe vert.
+La revue a fermé la fenêtre lstat/chmod du helper par descripteur épinglé avant
+la faute. La vérification physique de la garde de validation est donc acquise ;
+capacité4, autres pannes, migrations perturbées et régression complète restent
+obligatoires avant clôture074.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

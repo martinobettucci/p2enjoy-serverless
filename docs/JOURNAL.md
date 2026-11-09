@@ -1,5 +1,27 @@
 # Journal de cadrage
 
+## 2026-11-09 — Quatre groupes de reprise de validation qualifiés
+
+Le replay passe quatre groupes sur248 sources figées : défaut du retrait Docker,
+reprise explicite, défaut du canal isolé et reprise après SIGKILL du helper.
+Les deux A/B sont admis avant faute. B prend le refus précis avant validation
+avec request_rejected et validation NULL ; C reste non admis. Les événements
+Docker ne montrent que le create de A dans chaque fenêtre, y compris sous
+refus de canal où Docker fonctionne. Les octets de A restent comptés jusqu’à
+leur disparition réelle par maintenance, sans redémarrage du contrôle.
+
+Cinq invocations corrèlent hashes demandé/résolu, données et cache ; le pilote
+est créé puis réutilisé sans déplacer S. Le relevé natif confirme les deux
+fonctions purgées,13 candidats et trois révisions sans artefact, parents supprimés
+et jetons révoqués. Les deux helpers du replay sont absents, leurs deux gardes
+inactives, les canaux/validateurs et réservations à zéro. Le socket a retrouvé
+inode, UID/GID et mode ;31 sources backend, images, démarrages et fichiers
+officiels sont inchangés. Les premiers arrêts SSO et clé detail erronée restent
+séparés. Le registre hors unité signale le nom abrégé p2-v des validateurs,
+à convertir après ce commit. La fenêtre de mutation de permission relevée en
+revue est corrigée dans cette unité.
+Aucune UI ou source du manuel ne change. Les autres critères074 restent ouverts.
+
 ## 2026-11-09 — Première faute réelle restituée ; corriger la lecture du diagnostic
 
 Le premier lancement s’arrête sans objet sur une session SSO expirée, puis le

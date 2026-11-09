@@ -12,8 +12,11 @@ purgées, sans instance ni opération active. Le
 [complément CLI Docker](../docs/evidence/function-version-cli-images-dev-2026-11-09.json)
 passe cinq groupes par image, avec vingt clients disparus, douze invocations et
 deux fonctions supplémentaires purgées. Produit, images et fichiers officiels
-restent identiques. Pannes et régression complète restent ouvertes ; les
-preuves007 citées ci-dessous restent historiques.
+restent identiques. Le [complément de validation](../docs/evidence/function-version-validation-recovery-dev-2026-11-09.json)
+passe quatre groupes sous refus socket/canal et reprise avec garde indépendante,
+plus cinq invocations. Les deux fonctions des essais/replay sont purgées ; le
+contrôle ne redémarre pas. Les autres pannes et la régression complète restent
+ouvertes ; les preuves007 citées ci-dessous restent historiques.
 
 Le conteneur `serverless-api` sert l’API et la console à
 `https://serverless.lelabs.tech`, sur le port interne 18090.

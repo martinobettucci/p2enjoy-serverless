@@ -18,6 +18,12 @@ Deux fonctions supplémentaires sont purgées et les vingt clients ont disparu.
 Ce complément qualifie les environnements, sans dix comportements nouveaux.
 Les pertes du helper et l’expiration de ses délais restent à éprouver.
 
+Le [nettoyage avec un upload déjà admis](evidence/function-version-validation-recovery-dev-2026-11-09.json)
+passe ensuite quatre groupes sous refus réel du socket et du canal, avec cinq
+invocations et restitution indépendante après SIGKILL du helper. Les réservations
+restent comptées jusqu’au nettoyage normal ; deux fonctions de campagne sont
+purgées. Ce complément ne qualifie pas les autres pannes de SLS-074.
+
 ## Livraison cohérente
 
 La publication sans promotion est raccordée à l’admission par hash avant sa

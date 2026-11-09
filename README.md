@@ -92,7 +92,10 @@ fonctions des campagnes et essais interrompus sont purgées. Le
 passe ensuite les mêmes cinq groupes dans chacune des deux images : vingt
 commandes et douze invocations réelles, deux nouvelles fonctions purgées. Il
 complète la matrice d’environnements sans ajouter dix comportements nouveaux.
-Les pannes et la régression complète restent ouvertes.
+Le [nettoyage avec attente](docs/evidence/function-version-validation-recovery-dev-2026-11-09.json)
+passe quatre groupes supplémentaires ciblés : refus socket/canal, garde de
+validation et reprise indépendante après SIGKILL, avec cinq invocations.
+Les autres pannes et la régression complète restent ouvertes.
 La preuve359 et ses captures décrivent le checkpoint007.
 
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une

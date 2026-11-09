@@ -3,7 +3,9 @@
 Complément de [SLS-074](BACKLOG.md#sls-074), du
 [contrat de publication](FUNCTION_VERSION_EXECUTION.md#publication-et-déduplication)
 et de ses [preuves réelles](FUNCTION_VERSION_EXECUTION.md#preuves-réelles).
-La garde du verrou est implémentée ; sa preuve physique reste à produire.
+La garde du verrou est implémentée et sa [preuve physique](evidence/function-version-validation-recovery-dev-2026-11-09.json)
+passe quatre groupes sur248 sources figées, avec cinq invocations et deux gardes
+terminées. Le produit et ses images restent identiques au checkpoint CLI précédent.
 
 ## Périmètre et quiescence
 
@@ -91,3 +93,27 @@ les API. Aucun résultat de protocole, appel système ou réponse n’est rempla
 La bibliothèque d’observation SQLite garde l’identité réelle du propriétaire.
 Aucune nouvelle interface, image ou configuration de déploiement n’est requise.
 Les autres pannes et la régression complète restent ouvertes dans SLS-074.
+
+## Résultat ciblé
+
+Le replay complet passe les quatre groupes : conteneur non retiré sous refus du
+socket, reprise explicite, exception du canal isolé avec Docker disponible, puis
+reprise par garde indépendante après SIGKILL du helper. Chaque fenêtre Docker
+ne porte que le create du validateur A. B reçoit le503 précis avant validation,
+request_rejected et validation NULL ; C reste prepared, sans réservation, puis
+est abandonné explicitement. La première reprise publie le pilote, la seconde
+réutilise son hash et sa révision. Cinq invocations sont corrélées dans la base,
+avec les hashes demandé/résolu et les compteurs données/cache attendus.
+
+Le recoupement natif confirme les deux fonctions purgées (essai interrompu et
+replay), leurs13 candidats et trois révisions sans artefact conservé, parents
+supprimés et jetons révoqués. Les deux helpers du replay sont absents, leurs
+unités inactives, les canaux/validateurs absents et les compteurs actifs à zéro.
+Le socket garde son inode, UID/GID et mode initiaux ; les31 fichiers backend,
+les images, démarrages et fichiers officiels sont inchangés.
+
+L’arrêt sur session SSO expirée ne crée aucun objet. Le premier essai physique
+s’arrête sur la mauvaise clé detail du client, corrigée vers error ; il n’a
+aucun groupe validé et son nettoyage est confirmé. Ces rapports restent
+séparés du replay. Les autres pannes et la suite complète ne sont pas qualifiées
+par ces quatre groupes. Aucune interface ni manuel ne change dans ce complément.
