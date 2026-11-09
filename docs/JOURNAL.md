@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 2026-11-09 — Focus vérifié, collecte CDP directe du PUT
+
+Le replay178394ab passe quatre groupes, dont le vrai409 de promotion et son
+focus conservé. Le DELETE404 du groupe suivant conserve aussi le focus et les
+valeurs ; la réimportation renvoie200, puis Response.json de Playwright trouve
+encore son cache évincé. Le nettoyage est terminé. Les neuf captures et le
+rapport incomplet sont conservés séparément, sans reconstituer le groupe.
+
+La collecte est précisée avant code : sur la même session CDP qui possède le
+tampon durable, corréler PUT/requestId, statut et loadingFinished, puis lire le
+corps réel par Network.getResponseBody. Vérifier URL/statut avec le waiter de
+réponse, borner le corps et ne conserver que taille/empreinte et métadonnées
+publiques de publication. Cela applique intégralement le précédent alias/SSO.
+
 ## 2026-11-09 — Refus UI réel : focus perdu après réactivation
 
 Le replay avec corps durable passe quatre groupes puis échoue sur le retrait
