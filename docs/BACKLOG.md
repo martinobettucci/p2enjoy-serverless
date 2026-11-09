@@ -530,6 +530,12 @@ Le [nouveau précontrôle](evidence/invocation-pagination-authorized-preflight-d
 confirme quatre noms libres et22 entrées DNS, sans mutation. L’opération normale
 de retrait DNS existe et impose de retirer la route auparavant. Les clients et
 la garde de nettoyage restent à préparer avant création et qualification.
+Le [cycle borné](INVOCATION_DOMAINS_PAGINATION.md#cycle-borné-et-preuves-retenues)
+fixe avant code les trois prérequis de garde sans objets, les identités de
+création, le retrait indépendant final après perte réelle du propriétaire et
+les parcours UI5+1/CLI2pages. Le changement de catalogue CLI retire une route
+temporaire connue avant le septième connect réel ; aucune réponse substituée.
+Ces preuves sont en préparation, sans création des quatre alias à ce stade.
 Pendant l’attente antérieure, les [preuves de pause/libération natives](INVOCATION_URLS.md#barrière-native-de-pause-et-libération)
 sont préparées sur la requête canonique, sans changer de route. L’extraction de
 NativeObserver est vérifiée par ses neuf régressions réelles : 201 sources,

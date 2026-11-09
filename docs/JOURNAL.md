@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 2026-11-09 — Cycle de retrait des alias de pagination
+
+L’autorisation des quatre alias est acquise. Avant code, le plan opératoire
+fixe une garde indépendante bornée, reçus privés atomiques, vérification des
+identités avant retrait et absence de rejeu automatique. Une réponse inconnue
+reste un diagnostic à instruire, pas une propriété adoptée. Trois prérequis
+sans objets précèdent la création ; la campagne réelle finit par la perte de
+son propriétaire et le retrait indépendant. Les limites de verrou suspendu,
+console indisponible et absence de comparaison atomique serveur sont explicites.
+Le traceur CLI conserve son défaut six connexions et accepte une frontière
+sept pour le vrai changement entre pages. Parcours008, captures, purges natives
+et gel des sources sont requis. Aucun résultat fonctionnel supplémentaire ni
+nouvel alias n’est revendiqué à ce stade.
+
 ## 2026-11-09 — Quatre noms libres et retrait normal disponible
 
 Le précontrôle suivant l’autorisationc4c9ecc ne fait aucune mutation : les

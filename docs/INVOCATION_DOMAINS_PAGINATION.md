@@ -79,3 +79,57 @@ Les clients et la garde de nettoyage sont préparés avant création ; les étap
 et réponses incertaines sont persistées. La campagne UI/CLI emploie les
 sémantiques008 de publication sans promotion et de sélection de version.
 Le contrôle et ses images n’ont pas besoin d’être reconstruits pour ces alias.
+
+## Cycle borné et preuves retenues
+
+Décision du9 novembre2026 avant implémentation : un opérateur dédié conserve
+dans un dossier privé0700 le relevé initial, les intentions avant écriture et
+les réponses connues, avec écritures atomiques et synchronisées. Il ne gère que
+les quatre noms ci-dessus. Un processus indépendant, armé avant toute création,
+observe l’identité PID/date de naissance du propriétaire, une demande explicite
+et une échéance monotone maximale de30 minutes. Une seule mutation est permise
+à la fois sous verrou ; chaque appel console est borné à45 secondes. Si le
+verrou reste inaccessible60 secondes, la garde produit un échec explicite et
+ne prétend pas avoir nettoyé. La suspension de l’écrivain et la panne durable
+de la console restent des limites à qualifier séparément.
+
+La garde retire les objets dont la réponse de création et l’identité relue sont
+connues. Une réponse perdue n’autorise ni répétition ni adoption automatique
+d’un objet : elle exige un relevé et une décision du principal. Avant chaque
+suppression, la route et le DNS sont relus et comparés à leurs identifiants et
+valeurs enregistrés. Un changement de propriété entraîne un diagnostic ; les
+autres objets encore connus peuvent être retirés. Une absence n’est attendue
+que si un retrait réussi est déjà enregistré. Le retrait normal reste routes
+puis A. Les deux configurations permanentes, leurs DNS et leurs HTTPS sont
+recoupés avant/après ; applied_at des routes est une observation, sans être
+une configuration. Les requêtes normales de suppression ne fournissent pas de
+comparaison atomique avec le relevé client ; cette limite n’est pas masquée.
+
+Trois prérequis réels sans objets temporaires éprouvent la demande explicite,
+l’échéance et la perte du propriétaire. La campagne effective conserve ensuite
+un propriétaire vivant et termine par sa perte réelle après les parcours,
+pour éprouver le retrait indépendant des objets effectivement créés. Aucun
+rejeu automatique d’une création ou suppression n’est prévu.
+
+Le navigateur part de l’accueil, crée namespace/service/fonction et publie une
+archive originale par les formulaires. Il promeut explicitement son hash008.
+La première page affiche cinq domaines distincts et la seconde un ; navigation
+clavier, copies natives, appels Docker des URL et rendus desktop/mobile sont
+recoupés. Les captures doivent être inspectées personnellement.
+
+La CLI publie une fonction originale dans un service vide sans configuration
+commune : six URL distinctes issues de ses deux GET de catalogue sont attendues.
+Un second déploiement conserve le succès et ses identifiants si le catalogue
+change après la première page. Le traceur natif existant est paramétré pour
+retenir le septième connect HTTPS, après les six précédents ; aucun argument,
+résultat, paquet ou réponse n’est modifié. À cette frontière, l’opérateur retire
+une seule route temporaire déjà créée et connue, puis libère le vrai appel.
+Ce retrait appartient au nettoyage ; la route n’est pas recréée. Le DNS restant
+est retiré par la garde finale. Les anciens clients à six connexions conservent
+leur valeur par défaut et doivent être rejoués pour ce changement du traceur.
+
+La campagne est figée par empreintes avant exécution. Les preuves de garde,
+création/TLS, UI et CLI sont distinctes ; aucun groupe n’est encore déclaré
+réussi par le présent contrat. Les nettoyages de fonctions passent par les API
+normales puis sont recoupés avec les artefacts natifs, sans compter une simple
+suppression logique comme purge physique.
