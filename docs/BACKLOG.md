@@ -968,6 +968,15 @@ Les anciens rapports restent préservés par SHA. Aucun build produit ni nouveau
 parcours visuel ; les autres clients et la régression complète restent dans
 SLS-074, toujours[~].
 
+La [tranche CLI et reprise008](FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md) est
+spécifiée avant code : sept groupes CLI et quatre de plafonds/reprise, avec76
+invocations prévues et22 fonctions purgées. Les onze fonctions paginées passent
+par publication/promotion séparées ; vingt hashes distincts, doublon au plafond
+et nouveau contenu refusé remplacent l'ancien comptage d'UUID. Réception partielle
+et validation Docker sont interrompues sous garde liée au CID ; la seconde
+restitution est indépendante après perte du helper. Aucun résultat encore acquis.
+Les autres clients, l'expiration et la suite complète restent[~].
+
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le
 vrai packager, extracteur et runtime Docker. Il laisse l’API en service inchangée ;

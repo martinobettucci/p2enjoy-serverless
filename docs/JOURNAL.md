@@ -5076,3 +5076,24 @@ deux documents de résultat déclarés seulement. Les archives locales/natives
 des anciens rapports sont relues et restent identiques par SHA. Contrôles
 statiques Python/Node, JSON, champs sensibles et diff valides, distincts des76
 groupes. Les trois notes restent des propositions, sans adoption revendiquée.
+
+
+## 2026-11-09 — Tranche CLI et reprise008 décidée
+
+Le commit2c526b7 est propre et constitue un progrès vérifié76groupes. Lecture
+des deux clients suivants : adapter-deploy attend encore l'activation à l'upload ;
+publication-recovery compte vingt ZIP identiques comme vingt versions, refuse
+le doublon au plafond et tue/redémarre le contrôle par nom sans garde indépendante.
+L'exploration readonly confirme les fenêtres existantes de192Kio receiving et
+validateur vivant/codebind validating. Les programmes figés RESTORE/KILL_CONTROL
+du transport ont les identités/verrou/reçus nécessaires, mais leurs modes
+promotion/archive/delete ne sont pas directement réutilisables pour upload.
+
+Décision persistée : garder7+4groupes, vraie CLI promote et68appels paginés ;
+vingt paquets réellement distincts, fixture originale dédiée à l'identité et au
+secret,8appels de reprise. Un opérateur propre au namespace publication-recovery
+réutilise les briques figées avec scope et garde avant envoi. Réception : reprise
+explicite ; validation : perte réelle du helper et restitution indépendante.
+Deux coupures natives sont distinguées des76invocations ;22purges complètes.
+Contrat FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS, aucun code client de référence
+ni configuration de cellule modifié, aucune implémentation encore qualifiée.
