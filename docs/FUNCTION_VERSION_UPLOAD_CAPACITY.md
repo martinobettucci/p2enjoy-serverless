@@ -51,6 +51,10 @@ Le prérequis stable et le nettoyage ne gonflent pas ces quatre groupes.
 `function-version-upload-capacity-inspect.py` relève réservations, artefacts,
 validateurs et événements natifs pour les seuls UUID du namespace. Les appels
 HTTPS sont joints même en cas d'échec. Aucun échec n'est transformé en succès.
+Après une création à résultat inconnu, le client redécouvre l'identité dans le
+périmètre exact de campagne ; s'il ne la retrouve pas, il conserve un nettoyage
+non confirmé. L'absence immédiate dans une liste ne prouve pas l'absence d'un
+commit distant encore en cours. Cette branche de perte reste à éprouver séparément.
 
 La collecte finale recoupe la purge physique, les parents supprimés, le jeton
 révoqué, l'absence de validateurs/canaux/instances et les sources/images avant et

@@ -4438,3 +4438,10 @@ Le collecteur distinguera désormais explicitement200/Running=false de404 lors
 de cette transition ; un conteneur encore vivant restera bloquant. L'erreur
 initiale ne consignait pas Running après l'échec : sa cause précise n'est donc
 pas affirmée rétrospectivement. Le produit et ses images restent inchangés.
+
+Le premier replay complet passe quatre groupes, quatre appels et la purge
+physique, sur267 sources et19cfe884 inchangée. Avant livraison, la relecture ferme
+encore un diagnostic trop optimiste : toute création tentée sans identité
+retrouvée après réponse perdue conserve cleanup=false. Le prochain replay
+qualifiera le client livré, sans additionner les groupes du replay intermédiaire.
+La perte de réponse elle-même reste une branche distincte non éprouvée ici.
