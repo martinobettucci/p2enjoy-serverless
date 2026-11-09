@@ -366,8 +366,7 @@ natif privé est conservé dans `qualification-history/migration008-deployment-b
 Les deux fonctions publiques sont purgées,16 appels réussissent et un refus
 attendu est conservé. Gardes désarmées, référence et fichiers officiels inchangés,
 ressources actives nulles. L'essai arrêté avant garde sur une erreur du pilote
-est conservé séparément. Les pertes propres des gardes, variante premier hash inconnu puis connu et
-autres pannes restent à éprouver selon [le contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md).
+est conservé séparément. Les pertes propres des gardes et autres pannes restent à éprouver selon [le contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md).
 
 
 ## Purges historiques reprises jusqu'à008
@@ -384,8 +383,8 @@ Les quatre fenêtres normales terminent leur purge et persistent après restart.
 La cinquième conserve la purge pendant migration puis retire l'installation
 temporaire par la garde. Les cinq restitutions retrouvent exactement les17 tables,
 le registre de stockage et5982 fichiers d'artefacts originaux ; les cinq unités
-sont inactives. Le contrôle original e661516b conserve def45648, avec démarrage
-courant2026-11-09T18:52:49.904838248Z. Référence, configuration et routes inchangées,
+sont inactives. Le contrôle original e661516b conserve def45648, avec démarrage de ce checkpoint
+2026-11-09T18:52:49.904838248Z. Référence, configuration et routes inchangées,
 ressources actives nulles, aucune nouvelle image produit ni migration. Les autres pannes restent nécessaires dans SLS-074 ; les corrélations007 sont
 qualifiées dans le complément ci-dessous.
 
@@ -407,5 +406,23 @@ conteneurs de copie sont retirés, aucune ressource de copie ni bail/montage.
 Le contrôle e661516b/def45648 et son démarrage18:52:49UTC, la référence, les17
 tables vivantes et fichiers officiels restent identiques. Aucun déploiement
 produit. Un essai arrêté avant copie sur l'absence supposée de sidecars reste
-archivé séparément. Première identité inconnue puis connue, autres interruptions
-et campagne complète restent ouvertes dans SLS-074.
+archivé séparément. Les autres interruptions et la campagne complète restent ouvertes dans SLS-074.
+
+
+## Première identité inconnue : migrations et appels réels
+
+La [première identité inconnue](../docs/evidence/function-version-unknown-first-dev-2026-11-09.json) passe17 groupes sur286 sources :
+un témoin entièrement issu des API006, une variante de données anciennes déclarée
+qui retire seulement deux métadonnées de A déjà supprimée dans la copie privée,
+puis une restitution indépendante pendant un handler008 observé actif. Les vraies
+images006→007→008 conservent pointeur B, UUID/dates et marqueurs ; le premier hash
+resteNULL dans la variante, sans rétablir les droits Create. C pilote reste
+invocable par hash, B demeure stable jusqu'à promotion explicite. Deux purges
+publiques terminent ; la troisième installation temporaire est retirée par garde.
+Les23 appels réussis recoupent configuration, secret par empreinte et compteurs
+données/cache. Les originaux,17 tables et5982 artefacts sont conservés ; même
+contrôle def45648/e661516b, nouveau démarrage attendu 2026-11-09T20:16:45.245982432Z. La garde indépendante
+retire exactement une instance, un réseau et un bail par le vrai agent ; les trois
+gardes sont inactives, ressources actives nulles. Les essais antérieurs restent
+séparés du replay final. Les pannes propres de garde, autres interruptions et
+la régression complète008 restent dans SLS-074, toujours[~].

@@ -123,7 +123,8 @@ groupes d'alias,261 tombstones inconnus et141 alias supprimés au cache connu.
 Les backfills de2882 publications et4418 invocations sont recoupés, ainsi que
 les cibles, premiers hash/dates, états et révisions canoniques. Cet historique
 ne contient aucun premier hash inconnu suivi d'un hash connu : cette variante
-positive reste à éprouver sur un historique réel approprié.
+est depuis qualifiée dans le complément dédié, avec préparation déclarée distincte
+du témoin entièrement public.
 
 La candidate def45648f9e7 ne diffère du contrôle servi19cfe884 que par le script008,
 parmi31 fichiers backend recoupés ; le web compilé est identique. Les images,
@@ -171,8 +172,7 @@ python3 -B e2e/function-version-migration008-run.py complete-component sha256:de
 Le déclenchement indépendant après perte du traceur et les pannes propres de
 garde ne sont pas qualifiés par ce nominal. La candidate reste non servie à
 ce checkpoint. Les purges engagées sont depuis éprouvées par le complément008 ;
-la variante premier hash inconnu puis connu et la campagne complète restent
-ouvertes dans SLS-074.
+la campagne complète reste ouverte dans SLS-074.
 
 ## Bascule du contrôle déjà008
 
@@ -224,12 +224,30 @@ backup et un recoupement du contrôle inchangé ; la correction utilise os.chown
 Le premier recoupement web a demandé /index.html et reçu404 ; le recoupement
 final emploie l'entrée publique canonique /. Ces diagnostics ne sont pas
 transformés en groupes réussis. Les pertes du traceur, déclenchements autonomes
-et pannes propres des deux gardes restent non qualifiés. Les purges engagées sont depuis éprouvées par le complément008. Premier hash
-inconnu puis connu, autres pannes et campagne complète
-restent ouverts ; SLS-074 reste en cours.
+et pannes propres des deux gardes restent non qualifiés. Les purges engagées sont depuis éprouvées par le complément008. Les autres pannes et la campagne complète
+restent ouvertes ; SLS-074 reste en cours.
 
 
 Les refus de corrélation007 ont depuis leur [preuve dédiée](evidence/function-version-purge-correlation008-dev-2026-11-09.json) :
 42 groupes sur les vrais backups volumes/artifacts,40 rollbacks exacts et2
 témoins avec restart identique. L'installation servie reste inchangée. Ce
 complément n'est pas ajouté aux27 groupes du présent checkpoint.
+
+
+## Complément première identité inconnue
+
+La [première identité inconnue](evidence/function-version-unknown-first-dev-2026-11-09.json) passe17 groupes sur286 sources :
+un témoin entièrement issu des API006, une variante de données anciennes déclarée
+qui retire seulement deux métadonnées de A déjà supprimée dans la copie privée,
+puis une restitution indépendante pendant un handler008 observé actif. Les vraies
+images006→007→008 conservent pointeur B, UUID/dates et marqueurs ; le premier hash
+resteNULL dans la variante, sans rétablir les droits Create. C pilote reste
+invocable par hash, B demeure stable jusqu'à promotion explicite. Deux purges
+publiques terminent ; la troisième installation temporaire est retirée par garde.
+Les23 appels réussis recoupent configuration, secret par empreinte et compteurs
+données/cache. Les originaux,17 tables et5982 artefacts sont conservés ; même
+contrôle def45648/e661516b, nouveau démarrage attendu 2026-11-09T20:16:45.245982432Z. La garde indépendante
+retire exactement une instance, un réseau et un bail par le vrai agent ; les trois
+gardes sont inactives, ressources actives nulles. Les essais antérieurs restent
+séparés du replay final. Les pannes propres de garde, autres interruptions et
+la régression complète008 restent dans SLS-074, toujours[~].

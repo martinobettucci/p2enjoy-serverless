@@ -513,7 +513,7 @@ interruption. CacheNULL/connu, UUID/dates, registre deleted et anciens champs
 recoupés ; quatre purges terminées, cinquième installation temporaire retirée
 par garde. Les17 tables, le registre et5982 artefacts originaux sont conservés.
 
-Le contrôle e661516b garde def45648, démarrage courant2026-11-09T18:52:49.904838248Z.
+Le contrôle e661516b garde def45648, démarrage du checkpoint précédent2026-11-09T18:52:49.904838248Z.
 Cinq gardes inactives, drivers et ressources temporaires absents, actifs nuls ;
 référence, configuration et routes restent identiques. La source007 est conservée
 sous p2enjoy-control:historical-schema-007 avec attestation root liée à la preuve
@@ -534,5 +534,26 @@ preuve de démarrage/migration, sans disponibilité HTTP de la copie.
 Backups, WAL vides et SHM conservés ;42 conteneurs/copies retirés. Contrôle
 e661516b/def45648, démarrage18:52:49UTC, référence,17 tables vivantes et fichiers
 officiels inchangés, actifs nuls. Aucun déploiement/configuration/route nouveau.
-Première identité inconnue puis connue, autres interruptions et campagne complète
-restent dans SLS-074. Ces notes restent proposées, sans adoption revendiquée.
+Les autres interruptions et la campagne complète restent dans SLS-074. Ces notes restent proposées, sans adoption revendiquée.
+
+
+## Première identité inconnue et restitution avec handler vivant
+
+La [première identité inconnue](docs/evidence/function-version-unknown-first-dev-2026-11-09.json) passe17 groupes sur286 sources :
+un témoin entièrement issu des API006, une variante de données anciennes déclarée
+qui retire seulement deux métadonnées de A déjà supprimée dans la copie privée,
+puis une restitution indépendante pendant un handler008 observé actif. Les vraies
+images006→007→008 conservent pointeur B, UUID/dates et marqueurs ; le premier hash
+resteNULL dans la variante, sans rétablir les droits Create. C pilote reste
+invocable par hash, B demeure stable jusqu'à promotion explicite. Deux purges
+publiques terminent ; la troisième installation temporaire est retirée par garde.
+Les23 appels réussis recoupent configuration, secret par empreinte et compteurs
+données/cache. Les originaux,17 tables et5982 artefacts sont conservés ; même
+contrôle def45648/e661516b, nouveau démarrage attendu 2026-11-09T20:16:45.245982432Z. La garde indépendante
+retire exactement une instance, un réseau et un bail par le vrai agent ; les trois
+gardes sont inactives, ressources actives nulles. Les essais antérieurs restent
+séparés du replay final. Les pannes propres de garde, autres interruptions et
+la régression complète008 restent dans SLS-074, toujours[~].
+
+Notes proposées seulement, sans adoption revendiquée. Le démarrage courant
+du contrôle est 2026-11-09T20:16:45.245982432Z ; la référence conserve son démarrage.

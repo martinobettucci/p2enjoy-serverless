@@ -842,9 +842,8 @@ un refus attendu. Deux fonctions sont purgées physiquement ;31 backends et4
 fichiers HTTPS recoupés, référence/configuration/routes conservées, actifs nuls.
 Les trois essais WAL et l'essai de bascule arrêté avant garde sont séparés du
 total. Les gardes nominales sont désarmées ; leur déclenchement autonome et leurs
-pannes propres ne sont pas qualifiés par ce parcours. Le jeu ne contient pas
-premier hash inconnu puis connu ; cette variante,
-les autres pannes et la régression complète restent nécessaires. Statut conservé[~].
+pannes propres ne sont pas qualifiés par ce parcours. Le jeu de ce checkpoint ne contient pas premier hash inconnu puis connu ;
+le complément dédié ci-dessous le qualifie. Les autres pannes et la régression complète restent nécessaires. Statut conservé[~].
 
 Le [replay de purges historiques008](FUNCTION_VERSION_PURGE_MIGRATION_008.md)
 est qualifié par22 groupes : quatre fenêtres006/007→008 en volumes/artifacts,
@@ -859,11 +858,10 @@ restart ; la cinquième installation temporaire est retirée par garde.
 
 Le recoupement retrouve les17 tables, le registre de stockage et5982 artefacts
 originaux identiques après les cinq restitutions, gardes inactives et ressources
-actives nulles. Le contrôle e661516b conserve def45648 ; démarrage courant
+actives nulles. Le contrôle e661516b conserve def45648 ; démarrage de ce checkpoint
 2026-11-09T18:52:49.904838248Z attendu après restitution. Référence/configuration/
 routes inchangées, nouvelle construction produit inutile, manuel/web inchangés.
-L'essai d'attestation interrompu est séparé, sans groupe ajouté. Première identité inconnue puis connue et autres pannes restent
-nécessaires ; statut[~]. Preuve : [purges008](evidence/function-version-purge-migration008-dev-2026-11-09.json).
+L'essai d'attestation interrompu est séparé, sans groupe ajouté. Les autres pannes restent nécessaires ; statut[~]. Preuve : [purges008](evidence/function-version-purge-migration008-dev-2026-11-09.json).
 
 La matrice de [corrélations007](FUNCTION_VERSION_PURGE_MIGRATION_008.md#refus-de-corrélation-sur-copies007)
 est qualifiée :42 groupes sur283 sources,40 refus et2 témoins depuis les backups
@@ -878,18 +876,32 @@ conteneurs et copies retirés. Les17 tables du contrôle servi, ID/image/démarr
 référence et fichiers officiels restent strictement identiques, actifs nuls.
 L'essai initial arrêté avant copie est séparé, zéro groupe ajouté. Le banc
 historique006 et les22 groupes de reprise publique restent dans leurs époques ;
-aucune addition rétroactive. Les autres interruptions, premier hash inconnu puis
-connu et campagne complète restent nécessaires ; SLS-074 conserve[~].
+aucune addition rétroactive. Les autres interruptions et la campagne complète restent nécessaires ; SLS-074 conserve[~].
 Preuve : [corrélations007](evidence/function-version-purge-correlation008-dev-2026-11-09.json).
 
-Le [premier hash inconnu](FUNCTION_VERSION_UNKNOWN_FIRST.md) est décidé avant
-code : le vrai API006 conserve l'inventaire de A supprimée. Le témoin API réel
-et la variante de données anciennes contrôlée sont donc distincts. La variante
-retire seulement les deux métadonnées de A déjà sans code, dans l'installation
-privée arrêtée, sauvegarde API intacte. Vraies images006→007→008, invocations,
-marqueurs, refus Create/Read, piloteUpdate et persistance sont prévus dans deux
-fenêtres de7groupes, plus3 de restitution indépendante.17groupes prévus, pas
-encore exécutés ; aucune clôture ni résultat API fictif attribué à l'historique.
+La [première identité inconnue](evidence/function-version-unknown-first-dev-2026-11-09.json) passe17 groupes sur286 sources :
+un témoin entièrement issu des API006, une variante de données anciennes déclarée
+qui retire seulement deux métadonnées de A déjà supprimée dans la copie privée,
+puis une restitution indépendante pendant un handler008 observé actif. Les vraies
+images006→007→008 conservent pointeur B, UUID/dates et marqueurs ; le premier hash
+resteNULL dans la variante, sans rétablir les droits Create. C pilote reste
+invocable par hash, B demeure stable jusqu'à promotion explicite. Deux purges
+publiques terminent ; la troisième installation temporaire est retirée par garde.
+Les23 appels réussis recoupent configuration, secret par empreinte et compteurs
+données/cache. Les originaux,17 tables et5982 artefacts sont conservés ; même
+contrôle def45648/e661516b, nouveau démarrage attendu 2026-11-09T20:16:45.245982432Z. La garde indépendante
+retire exactement une instance, un réseau et un bail par le vrai agent ; les trois
+gardes sont inactives, ressources actives nulles. Les essais antérieurs restent
+séparés du replay final. Les pannes propres de garde, autres interruptions et
+la régression complète008 restent dans SLS-074, toujours[~].
+
+Le témoin API006 conserve l'inventaire de A supprimée : cette API ne produit pas
+à elle seule A inconnue/B connue. Le backup API et la variante préparée restent
+séparés, avec comparaison de toutes les anciennes colonnes. La préparation
+n'est jamais attribuée à une capacité publique historique. Les17 groupes finaux
+excluent la première matrice interrompue, le ciblé vert3 et la matrice verte avant
+le dernier durcissement des diagnostics. La lecture du corps interrompue reste
+une branche distincte non provoquée par le nominal502 à corps vide.
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

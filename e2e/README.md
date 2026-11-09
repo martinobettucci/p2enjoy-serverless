@@ -1,5 +1,42 @@
 # Qualification de la plateforme
 
+## Première identité inconnue et versions ultérieures connues
+
+Depuis la racine synchronisée, sur le seul SPARK DEV au repos, exécuter en série :
+
+```sh
+python3 -B e2e/function-version-unknown-first-run.py preserved-first
+python3 -B e2e/function-version-unknown-first-run.py unknown-first-tombstone
+python3 -B e2e/function-version-unknown-first-run.py unknown-first-tombstone --restore-with-guard
+```
+
+Les pilotes reçoivent le JSON SSO sur stdin masquée et refusent les rapports déjà
+présents. Ils utilisent la référence006 construite et la007 attestée ; aucune
+image produit nouvelle. Le contrat [UNKNOWN_FIRST](../docs/FUNCTION_VERSION_UNKNOWN_FIRST.md)
+distingue le témoin public et la préparation déclarée, dont seuls inventory_json
+et events_json de A changent sous contraintes. Rapports et checkpoints privés :
+.local/e2e/function-version-history-VARIANT[-guard]{,-checkpoint}.json.
+Les trois backups natifs de chaque fenêtre sont conservés sous history-inputs,
+avec SHA, propriétaire1001 et mode0600. Les erreurs du client conservent identité,
+coordonnées et empreinte, jamais corps brut ni pile contenant des données privées.
+Une promesse terminale couvre GET et lecture du corps avant sa jonction finale.
+
+La [première identité inconnue](../docs/evidence/function-version-unknown-first-dev-2026-11-09.json) passe17 groupes sur286 sources :
+un témoin entièrement issu des API006, une variante de données anciennes déclarée
+qui retire seulement deux métadonnées de A déjà supprimée dans la copie privée,
+puis une restitution indépendante pendant un handler008 observé actif. Les vraies
+images006→007→008 conservent pointeur B, UUID/dates et marqueurs ; le premier hash
+resteNULL dans la variante, sans rétablir les droits Create. C pilote reste
+invocable par hash, B demeure stable jusqu'à promotion explicite. Deux purges
+publiques terminent ; la troisième installation temporaire est retirée par garde.
+Les23 appels réussis recoupent configuration, secret par empreinte et compteurs
+données/cache. Les originaux,17 tables et5982 artefacts sont conservés ; même
+contrôle def45648/e661516b, nouveau démarrage attendu 2026-11-09T20:16:45.245982432Z. La garde indépendante
+retire exactement une instance, un réseau et un bail par le vrai agent ; les trois
+gardes sont inactives, ressources actives nulles. Les essais antérieurs restent
+séparés du replay final. Les pannes propres de garde, autres interruptions et
+la régression complète008 restent dans SLS-074, toujours[~].
+
 ## Corrélations007 refusées avant transformation008
 
 Depuis la racine synchronisée, sur le seul SPARK DEV au repos, exécuter en série :
@@ -67,8 +104,8 @@ HashesNULL/connus, dates/UUID, garde et commande corrélées, registre deleted e
 charge sont recoupés. Les17 tables et5982 artefacts originaux sont conservés,
 référence/configuration/routes inchangées et actifs nuls. Les cinq gardes sont
 inactives. L'essai d'attestation interrompu reste séparé, sans groupe ajouté.
-Aucun parcours UI frais ; les corrélations007 sont qualifiées ci-dessus. Première
-identité inconnue suivie d’une connue et autres pannes restent ouvertes.
+Aucun parcours UI frais ; les corrélations007 sont qualifiées ci-dessus. Le complément premier hash inconnu est qualifié ci-dessus ;
+les autres pannes restent ouvertes.
 
 ## Refus et reprise de migration008
 
@@ -105,8 +142,7 @@ control/function-version-migration008-deploy.json ; checkpoints dans .local/e2e.
 Les pilotes refusent de les écraser. La reproduction rouge et le premier replay
 neuf restent dans leurs époques distinctes. Le [contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md)
 borne ce qui est qualifié : nominal et désarmement, sans prétendre éprouver les
-pertes propres des gardes. Le complément de purges ci-dessus couvre leurs reprises normales ; premier
-hash inconnu puis connu, autres pannes et campagne
+pertes propres des gardes. Le complément de purges ci-dessus couvre leurs reprises normales ; les autres pannes et la campagne
 complète restent nécessaires. Aucun nouveau parcours UI.
 
 ## Reprise des paquets dédupliqués — complément SLS-074

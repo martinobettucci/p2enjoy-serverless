@@ -132,8 +132,24 @@ Même image et même conteneur original, nouveau démarrage attendu ; cinq garde
 inactives et ressources actives nulles. Les [corrélations007](docs/evidence/function-version-purge-correlation008-dev-2026-11-09.json)
 passent ensuite42 groupes de composant sur283 sources :40 refus transactionnels
 et2 témoins avec relance du même conteneur. Les backups/sidecars,17 tables et
-services vivants restent identiques, copies retirées. La variante premier hash
-inconnu puis connu et les autres pannes restent à éprouver.
+services vivants restent identiques, copies retirées. Le complément de première identité inconnue est qualifié ci-dessous ;
+les autres pannes restent à éprouver.
+
+La [première identité inconnue](docs/evidence/function-version-unknown-first-dev-2026-11-09.json) passe17 groupes sur286 sources :
+un témoin entièrement issu des API006, une variante de données anciennes déclarée
+qui retire seulement deux métadonnées de A déjà supprimée dans la copie privée,
+puis une restitution indépendante pendant un handler008 observé actif. Les vraies
+images006→007→008 conservent pointeur B, UUID/dates et marqueurs ; le premier hash
+resteNULL dans la variante, sans rétablir les droits Create. C pilote reste
+invocable par hash, B demeure stable jusqu'à promotion explicite. Deux purges
+publiques terminent ; la troisième installation temporaire est retirée par garde.
+Les23 appels réussis recoupent configuration, secret par empreinte et compteurs
+données/cache. Les originaux,17 tables et5982 artefacts sont conservés ; même
+contrôle def45648/e661516b, nouveau démarrage attendu 2026-11-09T20:16:45.245982432Z. La garde indépendante
+retire exactement une instance, un réseau et un bail par le vrai agent ; les trois
+gardes sont inactives, ressources actives nulles. Les essais antérieurs restent
+séparés du replay final. Les pannes propres de garde, autres interruptions et
+la régression complète008 restent dans SLS-074, toujours[~].
 
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.

@@ -65,7 +65,8 @@ conserve les17 tables et le schéma déjà008. Le [complément de purges008](FUN
 passe22 groupes, dont006/007→008 avec identitéNULL/connue, persistance et
 restitution indépendante. Les [corrélations007](evidence/function-version-purge-correlation008-dev-2026-11-09.json)
 passent42 groupes de composant :40 refus et2 témoins avec restart du même ID.
-La variante premier hash inconnu puis connu, les pannes propres des gardes et
+Le [complément première identité inconnue](FUNCTION_VERSION_UNKNOWN_FIRST.md)
+est qualifié par17 groupes. Les pannes propres des gardes et
 la campagne complète restent
 nécessaires ; SLS-074 conserve son statut[~].
 

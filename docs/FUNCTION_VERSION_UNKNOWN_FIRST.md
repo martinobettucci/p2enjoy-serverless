@@ -112,7 +112,8 @@ promotion, redémarrage et suppression/purge. Les deux flux gardent leurs UUID.
 Les appels exécutent le handler original function-versions.cjs dans le vrai
 runtime Docker, avec compteur/data et compteur/cache, variables et secret par
 empreinte. Le header de hash est exigé seulement après008. Les contrôles d'accès
-utilisent de vrais jetons Create/Read/Update limités à la fonction. Une erreur
+utilisent un vrai jeton Create au niveau service et des jetons Read/Update
+limités à la fonction, conformément au contrat existant. Une erreur
 ou une fenêtre manquée reste un échec conservé, aucun skip ni rejeu automatique.
 
 ## Livraison et limites
@@ -127,3 +128,33 @@ Aucun nouveau parcours UI ni changement de manuel attendu. Les autres fenêtres
 d'interruption, pannes propres de garde et la régression complète restent dans
 SLS-074. Les garde-fous déjà qualifiés sur les autres modes ne remplacent pas
 les preuves du nouveau mode.
+
+
+## Résultats retenus
+
+La [première identité inconnue](evidence/function-version-unknown-first-dev-2026-11-09.json) passe17 groupes sur286 sources :
+un témoin entièrement issu des API006, une variante de données anciennes déclarée
+qui retire seulement deux métadonnées de A déjà supprimée dans la copie privée,
+puis une restitution indépendante pendant un handler008 observé actif. Les vraies
+images006→007→008 conservent pointeur B, UUID/dates et marqueurs ; le premier hash
+resteNULL dans la variante, sans rétablir les droits Create. C pilote reste
+invocable par hash, B demeure stable jusqu'à promotion explicite. Deux purges
+publiques terminent ; la troisième installation temporaire est retirée par garde.
+Les23 appels réussis recoupent configuration, secret par empreinte et compteurs
+données/cache. Les originaux,17 tables et5982 artefacts sont conservés ; même
+contrôle def45648/e661516b, nouveau démarrage attendu 2026-11-09T20:16:45.245982432Z. La garde indépendante
+retire exactement une instance, un réseau et un bail par le vrai agent ; les trois
+gardes sont inactives, ressources actives nulles. Les essais antérieurs restent
+séparés du replay final. Les pannes propres de garde, autres interruptions et
+la régression complète008 restent dans SLS-074, toujours[~].
+
+Le replay final suit la correction de diagnostics du seul client de preuve :
+GET et lecture de corps ont un gestionnaire terminal immédiat, JSON non conforme,
+stdin du pilote, readiness et assertions conservent un diagnostic borné sans
+message brut ni pile privée. L'interruption observée reçoit502 avec corps vide ;
+son format nonJSON est conservé. Le rejet lors du tout premier essai est resté
+sans code précis ; sa cause n'est pas rétrospectivement inventée. Les trois
+époques précédentes sont archivées, sans groupes additionnés au total final.
+Les erreurs propres du banc, dont coupure pendant lecture du corps et échec de
+nettoyage indépendant, restent distinctes ; les revues statiques ne valent pas
+leur qualification E2E. Aucun code produit, manuel ou parcours UI modifié.

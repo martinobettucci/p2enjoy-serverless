@@ -4794,3 +4794,78 @@ baux par l'agent réel avant son arrêt. Intentions/résultats restent dans le
 journal root, aucune ligne de bail effacée par SQL. La troisième fenêtre teste
 ce chemin sur un appel retardé réellement démarré ; un200 avant coupure est un
 échec de fenêtre. Les anciens modes et les originaux restent hors de ces cibles.
+
+
+## 2026-11-09 — Revue du nouveau mode avant exécution
+
+La préparation des jetons est corrigée contre TokenCreate : le champ est
+function_ids ; Create exige le service entier, Read/Update peuvent être limités
+à la fonction. Le contrat du banc est aligné, sans changement d'autorisation.
+La revue relève aussi la restauration d'un fichier SQLite temporaire présent
+sans security_metadata : vérifier l'existence de la table avant lecture et
+confirmer no_references si l'installation n'est pas encore créée. Aucune identité
+ne sera inventée pour nettoyer des ressources. Les fenêtres ne sont pas lancées.
+
+
+## 2026-11-09 — Première matrice arrêtée sur un appel refusé
+
+Les deux fenêtres normales passent14groupes sur286sources ; la troisième passe
+sa préparation/migration puis échoue avant le déclenchement indépendant : l'appel
+reste rejected/handler_started0. Le diagnostic de refus n'était pas exporté par
+l'observateur, et l'issue HTTP du pending n'était pas conservée après échec. La
+cause précise n'est donc pas affirmée. La restitution normale est confirmée,
+originaux sains et trois gardes inactives ; aucune restitution indépendante
+qualifiée. Sources, rapports et reçus restent archivés, sans requalifier l'essai.
+
+Le diagnostic exporte maintenant error_code/http_status et dates de l'invocation,
+et conserve l'issue HTTP/transport du pending, avec hash de réponse et seul code
+public borné. Le même appel sera rejoué pour identifier le refus réel avant toute
+correction de comportement ; aucun réglage d'admission ni serveur modifié.
+
+
+## 2026-11-09 — Revue des diagnostics du client historique
+
+La matrice17 est verte sur286 sources, avant le dernier durcissement du client.
+Elle est archivée séparément. La revue signale une promesse GET dont le rejet de
+lecture du corps n'était pas couvert immédiatement, un catch JSON vide, des
+erreurs stdin/readiness absorbées et des assertions réduites au seul nom.
+Correction du seul client de preuve : catch terminal sur toute la promesse,
+format nonJSON explicite, phase/type/code/coordonnées et empreinte du message,
+sans message brut ni pile privée. Aucun paramètre d'admission, handler ou produit
+modifié. Un replay17 frais sur ces sources est requis avant livraison. Les
+branches d'erreur propres non provoquées restent distinctes de la preuve nominale.
+
+
+## 2026-11-09 — Première identité inconnue qualifiée
+
+La [première identité inconnue](evidence/function-version-unknown-first-dev-2026-11-09.json) passe17 groupes sur286 sources :
+un témoin entièrement issu des API006, une variante de données anciennes déclarée
+qui retire seulement deux métadonnées de A déjà supprimée dans la copie privée,
+puis une restitution indépendante pendant un handler008 observé actif. Les vraies
+images006→007→008 conservent pointeur B, UUID/dates et marqueurs ; le premier hash
+resteNULL dans la variante, sans rétablir les droits Create. C pilote reste
+invocable par hash, B demeure stable jusqu'à promotion explicite. Deux purges
+publiques terminent ; la troisième installation temporaire est retirée par garde.
+Les23 appels réussis recoupent configuration, secret par empreinte et compteurs
+données/cache. Les originaux,17 tables et5982 artefacts sont conservés ; même
+contrôle def45648/e661516b, nouveau démarrage attendu 2026-11-09T20:16:45.245982432Z. La garde indépendante
+retire exactement une instance, un réseau et un bail par le vrai agent ; les trois
+gardes sont inactives, ressources actives nulles. Les essais antérieurs restent
+séparés du replay final. Les pannes propres de garde, autres interruptions et
+la régression complète008 restent dans SLS-074, toujours[~].
+
+Revue bornée factory_reviewer : P1 promesse du corps HTTP non jointe et P2
+handlers vides/cause d'assertion perdue corrigés dans le client, puis replay17
+sur sources figées. La matrice précédente verte est conservée sans addition ;
+le premier essai rouge et le ciblé vert3 restent séparés. Le rouge ancien avait
+un appel rejeté avant handler, sans code conservé ; cause exacte inconnue.
+Aucun registre INCONSISTENCY_REPORT présent ni arbitrage externe. Aucun remote
+Git configuré. Pas de build produit ni de vérification visuelle nouvelle.
+
+
+La relecture finale en lecture seule ne relève aucun défaut bloquant. La preuve
+SHA256 fddc6447aff6177acc4f591ca11b8dbd323770f60466c944387a4e493e6a76f4
+recoupe les17 groupes,23 appels, deux purges et la restitution indépendante.
+Après synchronisation,286 sources correspondent au SPARK : zéro écart exécutable,
+six documents de résultat déclarés seulement. Les contrôles statiques Python/Node,
+JSON, champs sensibles et diff passent ; ils ne sont pas ajoutés aux groupes E2E.

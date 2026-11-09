@@ -1,0 +1,108 @@
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UNKNOWN_FIRST.md
+// @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UNKNOWN_FIRST.md#matrice-publique-et-marqueurs
+// Real historical API control plus an explicitly prepared tombstone-data variant.
+import assert from 'node:assert/strict';
+import {randomUUID,createHash} from 'node:crypto';
+import {readFile,writeFile,mkdir,mkdtemp,cp,rm,rename} from 'node:fs/promises';
+import {spawn,execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {createInterface} from 'node:readline';
+import {chromium,request} from 'playwright';
+
+const run=promisify(execFile),base='https://serverless.lelabs.tech',root=new URL('../',import.meta.url),out=new URL('../.local/e2e/',import.meta.url);
+const variant=process.argv[2],guarded=process.argv[3]==='--restore-with-guard';
+assert(['preserved-first','unknown-first-tombstone'].includes(variant));assert.equal(process.argv.length,guarded?4:3);
+assert(!guarded||variant==='unknown-first-tombstone');
+const campaign=randomUUID(),prefix='code-first-unknown-'+campaign.slice(0,8),stem='function-version-history-'+variant+(guarded?'-guard':''),report=new URL(stem+'.json',out);
+const helper='/srv/p2enjoy-serverless/e2e/storage-legacy-environment.py',ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
+const checks=[],evidence=[],events=[],cleanupErrors=[],tokens=[],calls=[],diagnostics={restart:{attempts:0,last:null}};const secret='history-code-private-'+randomUUID();
+let browser,credentials,child,ended=false,exitCode,driverStderr='',armed,admin,caller,session,namespace,service,fn,work,a,b,hashB,hashC,expectedFirst,firstPromoted,
+    createToken,updateToken,readToken,completed=false,cleanup=false,counter=0,pending;
+// @spec CLAUDE.md#18-gestion-des-erreurs-et-régressions
+// Only bounded error identity and source coordinates; never payloads or raw stacks.
+function diagnostic(error){
+  const safe=value=>typeof value==='string'&&/^[A-Za-z_][A-Za-z0-9_ :<>=!.-]{0,79}$/.test(value)?value:undefined;
+  const location=String(error?.stack??'').match(/function-version-unknown-first\.mjs:(\d+):(\d+)/);
+  return {name:safe(error?.name)??'UnknownError',code:safe(error?.code),operator:safe(error?.operator),
+    source:location?{line:Number(location[1]),column:Number(location[2])}:undefined,
+    message_sha256:createHash('sha256').update(String(error?.message??'')).digest('hex')};
+}
+async function save(){const p=new URL(stem+'.pending',out);await writeFile(p,JSON.stringify({target:base,campaign,variant,guarded,completed:completed&&cleanup&&!cleanupErrors.length,cleanup,skipped:0,checks,evidence,events,diagnostics,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,service_id:service?.id,function_id:fn?.id,invocation_calls:calls},null,2)+'\n',{mode:0o600});await rename(p,report);}
+async function until(action,message,seconds=120){const end=Date.now()+seconds*1000;while(Date.now()<end){const value=await action();if(value)return value;await new Promise(r=>setTimeout(r,100));}assert.fail(message);}
+async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:diagnostic(error)});throw error;}finally{await save();}}
+async function remoteStatus(){return JSON.parse((await run('ssh',[...ssh,'python3','-B',helper,'status',campaign],{timeout:30000,maxBuffer:1048576})).stdout);}
+async function event(name){return until(()=>{const found=events.find(v=>v.event===name);assert(found||!ended,'driver_stopped_before_'+name);return found;},'driver_event_missing',180);}
+async function operation(op,fields={}){assert(!ended);const offset=events.length;child.stdin.write(JSON.stringify({op,...fields})+'\n');return until(()=>{const found=events.slice(offset).find(v=>v.event==='result'&&v.op===op);assert(found||!ended,'driver_stopped_during_'+op);return found?.value;},'operator_response_missing',180);}
+async function observe(){return operation('history-observe',{function_id:fn.id});}
+async function call(path,{method='GET',body,bytes,token,headers={},status=200}={}){
+  const r=await(token?caller:admin).fetch(path,{method,data:bytes??body,headers:{...(token?{'X-Serverless-Token':token}:{Origin:base,'X-CSRF-Token':session?.csrf_token??''}),...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});
+  assert([status].flat().includes(r.status()),`${method} ${path}: ${r.status()}`);const text=await r.text();assert(!text.includes(secret),'secret_exposed');return JSON.parse(text);
+}
+async function current(){return call(`/api/functions/${fn.id}`);}
+async function idle(){await until(async()=>!(await call(`/api/functions/${fn.id}/instances`)).items.length,'instances_not_released');}
+async function bundle(value){const folder=new URL('code-'+value+'/',work);await mkdir(folder);await cp(new URL('../qualification/artifacts/function-versions.cjs',import.meta.url),new URL('function-versions.cjs',folder));await writeFile(new URL('version-marker.json',folder),JSON.stringify({value}));
+  const config=new URL('serverless.yml',folder);await writeFile(config,JSON.stringify({service:'historical-code-identity',provider:{name:'p2enjoy',runtime:'nodejs24.x'},functions:{probe:{handler:'function-versions.primary'}},package:{patterns:['!**','function-versions.cjs','version-marker.json']}}));
+  await run('python3',['-B','-m','adapter','package','--config',config.pathname],{cwd:root.pathname});const descriptor=JSON.parse(await readFile(new URL('.serverless-p2/deployment.json',folder),'utf8'));return new URL('.serverless-p2/'+descriptor.artifacts.probe.file,folder).pathname;}
+async function prepare({token,status=201}={}){const row=await current();return call(`/api/functions/${fn.id}/code-deployments`,{method:'POST',token,status,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:'function-versions.primary'}});}
+async function publish(file,token){const candidate=await prepare({token});const result=await call(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes:await readFile(file),token});assert.equal(result.state,'published');assert(result.validation.valid&&result.validation.container_removed);return result;}
+async function invoke(marker,{hash,requireHash=false,status=200,delay=0}={}){const path=`/invoke/${fn.id}${hash?'@'+hash:''}${delay?'?delay_ms='+delay:''}`;const response=await caller.get(path,{headers:{'X-Serverless-Token':readToken.token,Authorization:'Bearer qualification-business-identity'}});assert.equal(response.status(),status,path);const body=await response.json();assert(!JSON.stringify(body).includes(secret));
+  if(status===200){assert.equal(body.marker,marker);assert.equal(body.handler,'primary');assert.equal(body.common,'service-value');assert.equal(body.local,'function-value');assert.equal(body.secret_sha256,createHash('sha256').update(secret).digest('hex'));assert(body.authorization_present);counter++;assert.equal(body.counter,counter);assert.equal(body.cacheCounter,counter);if(requireHash)assert.equal(response.headers()['x-serverless-code-hash'],hash??hashB);
+    calls.push({id:body.id,marker,hash:requireHash?response.headers()['x-serverless-code-hash']:null,counter,cache_counter:body.cacheCounter});}
+  return body;}
+async function mutate(hash,action,{token=updateToken.token,body={},status=200}={}){const row=await current();return call(`/api/functions/${fn.id}/versions/${hash}/${action}`,{method:'POST',token,body,status,headers:{'If-Match':String(row.updated_at)}});}
+async function markers(){const row=await current();assert.equal(row.first_published_code_hash,expectedFirst);assert.equal(row.first_promoted_at,firstPromoted);return row;}
+async function credential(name,rights){const value=await call(`/api/services/${service.id}/tokens`,{method:'POST',status:201,body:{name,rights,...(rights.includes('create')?{}:{function_ids:[fn.id]})}});tokens.push(value);return value;}
+async function restoreNow(independent=false){
+  if(independent){assert.equal(armed.unit,'serverless-restore-code-history-'+campaign);assert((await remoteStatus()).driver_alive);await run('ssh',[...ssh,'systemctl','start',armed.unit+'.service'],{timeout:180000,maxBuffer:1048576});}
+  else if(!ended&&!child.stdin.writableEnded)child.stdin.end(JSON.stringify({op:'restore'})+'\n');
+  await until(()=>ended,'driver_not_joined',180);let state=await remoteStatus();if(!state.restored){await run('ssh',[...ssh,'python3','-B',helper,'restore',campaign],{timeout:240000,maxBuffer:1048576});}
+  state=await until(async()=>{const v=await remoteStatus();return v.restored&&!v.driver_alive&&['inactive','unknown'].includes(v.timer_state)&&['inactive','unknown'].includes(v.service_state)?v:false;},'restoration_incomplete',180);
+  const v=state.restoration;assert(v.databases_identical&&v.artifacts_identical&&v.configuration_unchanged&&v.agent_healthy&&v.control_healthy&&v.reference_unchanged&&v.temporary_directories_removed);assert.equal(v.original_id,armed.original_id);assert.equal(v.image,armed.current_image);assert.equal(v.independent,independent);assert(independent?exitCode!==0:exitCode===0);
+  cleanup=true;evidence.push({scenario:'original-installation-restored',independent,driver_exit_code:exitCode,...state});await save();return state;
+}
+await mkdir(out,{recursive:true,mode:0o700});await assert.rejects(readFile(report),e=>e.code==='ENOENT','preserve_previous_report');await save();
+try{
+  const reference=JSON.parse(await readFile(new URL('function-version-control-schema006-build.json',out),'utf8'));assert(reference.completed&&reference.current_tag_unchanged&&reference.revision==='f56d79ebe3d1d84731bfd262d1e6a9d5b5a680c0');
+  const input=createInterface({input:process.stdin});console.log('Identifiants SSO attendus sur stdin privée.');credentials=await new Promise((resolve,reject)=>input.once('line',line=>{try{resolve(JSON.parse(line));}catch{reject(new Error('invalid_private_input'));}finally{input.close();}}));
+  child=spawn('ssh',[...ssh,'python3','-B',helper,'function-version-unknown-first',campaign,reference.image,'--target-schema008'],{stdio:['pipe','pipe','pipe']});createInterface({input:child.stdout}).on('line',line=>{try{events.push(JSON.parse(line));}catch{events.push({event:'invalid-driver-output'});}});child.stderr.on('data',b=>{driverStderr=(driverStderr+b.toString()).slice(-12000);});child.stdin.on('error',error=>events.push({event:'driver-stdin-error',diagnostic:diagnostic(error)}));child.on('close',code=>{ended=true;exitCode=code;});child.on('error',error=>{events.push({event:'driver-process-error',diagnostic:diagnostic(error)});ended=true;exitCode=-1;});
+  armed=await event('guard-armed');await event('historical-ready');
+  await check('API006 : A/B exécutées, A supprimée sans effacer son inventaire',async()=>{
+    browser=await chromium.launch({headless:true});const context=await browser.newContext({locale:'fr-FR'}),page=await context.newPage();await page.goto(base);await page.getByRole('link',{name:'Se connecter avec le SSO'}).click();await page.waitForURL('https://oauth.lelabs.tech/**');await page.locator('input[name=username]').fill(credentials.username);await page.locator('input[type=password]').fill(credentials.password);credentials=null;await page.locator('input[type=submit],button[type=submit]').first().click();await page.waitForURL(base+'/**',{timeout:90000});await page.getByRole('heading',{name:'Fonctions',exact:true}).waitFor();const storage=await context.storageState();storage.cookies=storage.cookies.filter(c=>c.domain==='serverless.lelabs.tech');storage.origins=[];admin=await request.newContext({baseURL:base,storageState:storage,timeout:180000});caller=await request.newContext({baseURL:base,timeout:180000});await browser.close();browser=null;
+    session=await call('/api/session');assert(session.authenticated);namespace=await call('/api/namespaces',{method:'POST',status:201,body:{name:prefix}});await save();service=await call(`/api/namespaces/${namespace.id}/services`,{method:'POST',status:201,body:{name:'historical-code-identity'}});await call(`/api/services/${service.id}/configuration`,{method:'PUT',body:{environment:{VERSIONS_COMMON:'service-value'},secrets:{VERSIONS_SECRET:secret}}});
+    fn=await call(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name:'retained-version-history',config:{handler:'function-versions.primary',cpu:.05,memory_mib:128,idle_seconds:0,min_instances:0,max_instances:1,timeout_seconds:10,storage:{concurrency:'shared',data:{enabled:true,quota_mib:8},cache:{enabled:true,quota_mib:8}}},configuration:{environment:{VERSIONS_LOCAL:'function-value',VERSIONS_PERSIST:'yes'}}}});await save();
+    createToken=await credential('initial-code-only',['create']);updateToken=await credential('manage-existing-code',['update']);readToken=await credential('invoke-history',['read']);work=new URL((await mkdtemp(new URL('first-code-history-',out).pathname))+'/','file:');a=await publish(await bundle('A'));await invoke('A');await idle();b=await publish(await bundle('B'));await invoke('B');await idle();await call(`/api/functions/${fn.id}/revisions/${a.revision_id}`,{method:'DELETE'});
+    const source=await observe();assert.equal(source.versions.length,6);assert.equal(source.function.active_revision_id,b.revision_id);assert(source.history[0].deleted_at&&source.history[0].stored_bytes===0&&!source.history[0].inventory_empty);assert.equal(source.artifacts[a.revision_id],false);assert.equal(source.history[1].id,b.revision_id);evidence.push({scenario:'genuine-api006-history',physical:source});
+  });
+  await check('Vraies007 puis008 : variante déclarée, marqueurs et backfills conservés',async()=>{
+    const stage7=await operation('history-prepare007',{function_id:fn.id,variant});assert.equal(stage7.after.versions.length,7);hashB=stage7.after.history[1].code_hash;assert.match(hashB,/^[a-f0-9]{64}$/);expectedFirst=stage7.after.history[0].code_hash;assert.equal(expectedFirst===null,variant==='unknown-first-tombstone');firstPromoted=stage7.after.history[0].created_at;await invoke('B');await idle();
+    const stage8=await operation('history-upgrade008',{function_id:fn.id});assert.equal(stage8.after.versions.length,8);assert.equal(stage8.after.function.first_published_code_hash,expectedFirst);assert.equal(stage8.after.function.first_promoted_at,firstPromoted);assert.equal(stage8.after.function.active_revision_id,b.revision_id);assert.equal(stage8.after.version_registry.length,expectedFirst===null?1:2);assert.equal(stage8.preserved_tables.length,16);evidence.push({scenario:'declared-input-and-migrations',stage007:stage7,stage008:stage8});
+  });
+  if(guarded){
+    await check('Garde indépendante : appel réellement démarré, consommateurs joints et originaux restitués',async()=>{
+      const prior=new Set(calls.map(v=>v.id));pending=caller.get(`/invoke/${fn.id}?delay_ms=8000`,{headers:{'X-Serverless-Token':readToken.token}}).then(async r=>{const text=await r.text();let code,format;try{const body=JSON.parse(text);format='json';if(typeof body?.error==='string'&&/^[a-z_]{1,64}$/.test(body.error))code=body.error;}catch(error){format={kind:'non_json',diagnostic:diagnostic(error)};}return {status:r.status(),error_code:code,response_format:format,response_sha256:createHash('sha256').update(text).digest('hex')};}).catch(error=>({transport_error:diagnostic(error)}));
+      const active=await until(async()=>{const v=await observe();const call=v.invocations.find(x=>!prior.has(x.id)&&x.state==='running'&&x.handler_started===1);return call&&v.instances.some(x=>x.id===call.instance_id)&&v.leases.some(x=>x.consumer_id===call.instance_id)?v:false;},'real_started_handler_window_missing',30);
+      const state=await restoreNow(true),outcome=await pending;assert.notEqual(outcome.status,200,'handler_completed_before_interruption');evidence.push({scenario:'active-handler-interrupted',before:active,outcome,restored:state.restored});
+    });
+  }else{
+    await check('Lecture008 et appels : B par défaut/hash, marqueurs et données/cache conservés',async()=>{
+      const row=await markers();assert.equal(row.active_revision_id,b.revision_id);const list=await call(`/api/functions/${fn.id}/versions`,{token:readToken.token});assert.equal(list.total,expectedFirst===null?1:2);assert.equal(list.active_code_hash,hashB);assert.equal(list.first_published_code_hash,expectedFirst);await invoke('B',{requireHash:true});await invoke('B',{hash:hashB,requireHash:true});evidence.push({scenario:'registry-and-invocations',registry:list});
+    });
+    await check('Create/Read refusés, Update publie C pilote sans déplacer B ni remplir le premier hash',async()=>{
+      await prepare({token:createToken.token,status:403});await prepare({token:readToken.token,status:403});await mutate(hashB,'promote',{token:createToken.token,status:403});await mutate(hashB,'promote',{token:readToken.token,status:403});const c=await publish(await bundle('C'),updateToken.token);assert(c.code_changed);hashC=c.code_hash;assert.notEqual(hashC,hashB);const row=await markers();assert.equal(row.active_revision_id,b.revision_id);await mutate(hashC,'promote',{token:createToken.token,status:403});await invoke('C',{hash:hashC,requireHash:true});await invoke('B',{requireHash:true});evidence.push({scenario:'later-code-preserves-markers',hash_c:hashC,first_published_code_hash:expectedFirst,first_promoted_at:firstPromoted});
+    });
+    await check('Désactivation/restauration : aucun droit Create retrouvé, promotion Update valide',async()=>{
+      await idle();await mutate(hashB,'archive',{body:{disable_default:true}});assert.equal((await markers()).active_revision_id,null);await invoke(null,{status:409});await mutate(hashB,'promote',{token:createToken.token,status:403});await mutate(hashB,'restore');await mutate(hashB,'promote',{token:createToken.token,status:403});await mutate(hashB,'promote');await markers();await invoke('B',{requireHash:true});
+    });
+    await check('Restart008 et purge publique : compteurs persistants, marqueurs conservés, artefacts/volumes retirés',async()=>{
+      await idle();await operation('restart');await until(async()=>{diagnostics.restart.attempts++;try{const r=await admin.get('/api/session',{timeout:3000});diagnostics.restart.last={phase:'http',status:r.status()};if(r.status()!==200)return false;const v=await r.json();diagnostics.restart.last={phase:'session',authenticated:v.authenticated===true};if(!v.authenticated)return false;session=v;return true;}catch(error){diagnostics.restart.last={phase:'request-or-body',error:diagnostic(error)};return false;}},'restart_api_unavailable');await markers();await invoke('B',{requireHash:true});await invoke('C',{hash:hashC,requireHash:true});await idle();await call(`/api/functions/${fn.id}`,{method:'DELETE'});await until(async()=>!(await call(`/api/archives/${fn.id}`)).storage_operation,'archive_not_settled');const row=await call(`/api/archives/${fn.id}`),op=await call(`/api/archives/${fn.id}/purge`,{method:'POST',status:[200,202],headers:{'If-Match':String(row.updated_at)},body:{operation_id:randomUUID(),confirm_name:row.name}});await until(async()=>{const v=await call(`/api/storage-operations/${op.id}`);assert.notEqual(v.state,'aborted');return v.state==='completed';},'purge_not_completed');
+      const physical=await observe();assert.equal(physical.function.first_published_code_hash,expectedFirst);assert.equal(physical.function.first_promoted_at,firstPromoted);assert(physical.history.every(v=>v.stored_bytes===0)&&Object.values(physical.artifacts).every(v=>!v));assert.deepEqual(physical.instances,[]);assert.deepEqual(physical.leases,[]);assert.equal(physical.agent[0].state,'purged');evidence.push({scenario:'public-purge-completed',operation_id:op.id,physical});for(const t of tokens)await call(`/api/tokens/${t.id}/revoke`,{method:'POST'});await call(`/api/services/${service.id}`,{method:'DELETE'});await call(`/api/namespaces/${namespace.id}`,{method:'DELETE'});
+    });
+    await check('Installation originale restituée par identité, tables, artefacts et configuration',async()=>{await restoreNow();});
+  }
+  assert(!events.some(v=>v.event==='invalid-driver-output'));completed=true;
+}catch(error){const cause=diagnostic(error);evidence.push({scenario:'campaign-error',error:cause});throw new Error('function_version_history_campaign_failed',{cause:new Error(JSON.stringify(cause))});}
+finally{
+  credentials=null;try{await browser?.close();}catch(e){cleanupErrors.push({step:'browser',error:diagnostic(e)});}
+  if(child&&!cleanup){try{const state=await remoteStatus();if(state.not_started){assert(ended&&!armed);cleanup=true;}else{if(!ended&&!child.stdin.writableEnded)child.stdin.end(JSON.stringify({op:'restore'})+'\n');await until(()=>ended,'driver_not_joined_on_failure',180);let v=await remoteStatus();if(!v.restored){await run('ssh',[...ssh,'python3','-B',helper,'restore',campaign],{timeout:240000,maxBuffer:1048576});v=await remoteStatus();}assert(v.restored&&v.restoration.databases_identical&&v.restoration.artifacts_identical&&!v.driver_alive);cleanup=true;evidence.push({scenario:'restored-after-failure',...v});}}catch(e){cleanupErrors.push({step:'restoration',error:diagnostic(e)});}}
+  if(pending)evidence.push({scenario:'pending-call-terminal',outcome:await pending});try{await admin?.dispose();await caller?.dispose();if(work)await rm(work,{recursive:true});if(driverStderr)await writeFile(new URL(stem+'-driver.log',out),driverStderr,{mode:0o600});}catch(e){cleanupErrors.push({step:'clients-or-files',error:diagnostic(e)});}await save();assert.deepEqual(cleanupErrors,[],'history_cleanup_incomplete');
+}

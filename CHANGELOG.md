@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Première identité de code inconnue puis version connue qualifiée :17 groupes
+  réels006→007→008, témoin API et variante de données préparée déclarés distincts.
+  Marqueurs, droits, B stable/C pilote et23 appels recoupés ; deux purges publiques
+  et une restitution indépendante avec instance/réseau/bail retirés. Originaux
+  conservés, même image produit. Diagnostics du client durcis puis matrice rejouée.
+  [Preuve](docs/evidence/function-version-unknown-first-dev-2026-11-09.json).
+
 - Refus de corrélations de purge007 qualifiés sur l'image008 courante :42 groupes,
   40 rollbacks007 exacts et2 témoins migrés/rejoués dans le même conteneur. Les
   anciennes colonnes des16 tables, hashes/dates et registre deleted sont recoupés.

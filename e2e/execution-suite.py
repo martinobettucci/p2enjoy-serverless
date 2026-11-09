@@ -60,6 +60,8 @@ def source_hashes():
     files += [ROOT/'docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_MIGRATION_008.md#livraison-et-limites
     files += [ROOT/'docs/FUNCTION_VERSION_PURGE_MIGRATION_008.md']
+    # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UNKNOWN_FIRST.md#livraison-et-limites
+    files += [ROOT/'docs/FUNCTION_VERSION_UNKNOWN_FIRST.md']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
 def metadata(path):

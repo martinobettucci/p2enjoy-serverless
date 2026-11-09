@@ -148,8 +148,11 @@ Les [purges engagées006/007→008](FUNCTION_VERSION_PURGE_MIGRATION_008.md) pas
 groupes, avec cachesNULL/connus et registre deleted, puis reçu et octets repris.
 Les [refus de corrélation007](evidence/function-version-purge-correlation008-dev-2026-11-09.json)
 passent42 groupes, dont40 rollbacks007 exacts et2 migrations/reprises008 positives.
-Le premier hash inconnu suivi d’un connu et les pannes propres de garde restent
-ouverts ; SLS-074 reste en cours.
+Le [premier hash inconnu suivi d’un connu](FUNCTION_VERSION_UNKNOWN_FIRST.md)
+passe17 groupes, avec témoin API et préparation de données déclarée distincts.
+first_published_code_hash resteNULL et first_promoted_at garde la date de A,
+même après C, retrait, restauration, promotion, restart et purge. Les pannes
+propres de garde restent ouvertes ; SLS-074 reste en cours.
 
 `functions` reçoit `first_published_code_hash` et `first_promoted_at`, nullable
 avant le premier succès correspondant et immuable une fois renseigné. L’historique
