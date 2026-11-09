@@ -283,3 +283,16 @@ Source d’origine au mode 0640, contenu/inode/mtime inchangés ; ctime changée
 Preuve : docs/evidence/invocation-source-api-dev-2026-11-09.json.
 Aucun ajout de variable/secret, changement route/DNS, service ou build. Le rendu
 UI et les autres fautes restent ouverts. Notes proposées sans adoption annoncée.
+
+
+## Refus de lecture dans la console — trois groupes navigateur
+
+Trois groupes réels passent sur 212 sources et les mêmes images, depuis
+l’accueil/formulaires/publication jusqu’à source_forbidden puis reprise.
+Alerte utile desktop/mobile, anciennes adresses/copies/succès absents ; cinq
+JPEG frais. Après restitution explicite, une URL copiée invoque Docker.
+Une invocation, une fonction purgée et garde finie recoupées nativement ;
+parents supprimés, mode 0640 et source/configurations/services inchangés.
+Preuve : docs/evidence/invocation-source-ui-dev-2026-11-09.json.
+Aucune variable/secret, route/DNS ou build ajouté. Autres fautes/six domaines
+restent ouverts. Notes proposées individuellement sans adoption annoncée.

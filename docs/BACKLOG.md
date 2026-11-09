@@ -449,8 +449,12 @@ mode/lecture/santé restitués et trois helpers/timers/services terminés. Le
 [complément API](evidence/invocation-source-api-dev-2026-11-09.json) passe quatre
 groupes sur 211 sources : source_forbidden pour Read/admin, six refus sans
 diagnostic, quatre appels Docker dont deux pendant EACCES, catalogue initial
-restitué. Fonction purgée et garde terminée recoupées nativement. Le parcours
-UI sous refus et les autres fautes de source restent à éprouver.
+restitué. Fonction purgée et garde terminée recoupées nativement. Le
+[parcours UI](evidence/invocation-source-ui-dev-2026-11-09.json) passe trois
+groupes sur 212 sources : création/publication depuis l’accueil, refus rendu
+desktop/mobile sans anciennes adresses/copies/succès, restitution et invocation
+de l’URL copiée. Une fonction purgée et garde terminée recoupées nativement.
+Les autres fautes de source et les pages UI/CLI sur six domaines restent ouvertes.
 
 Découvrir les routes effectivement affectées à la passerelle dans le SPARK,
 calculer les adresses par fonction et événement HTTP, les afficher et les

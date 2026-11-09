@@ -5,8 +5,8 @@ infra-serverless, monté readonly sous `/spark/routes` dans le contrôle.
 Le précontrôle du 9 novembre confirme un fichier régulier root:1001, mode
 0640, 779 octets/SHA identiques depuis le contrôle sans capacités effectives.
 Il ne prouve pas à lui seul un refus ou une restitution. Les trois preuves de
-garde ultérieures sont qualifiées ci-dessous. Le complément API passe aussi ;
-le rendu UI reste à qualifier.
+garde ultérieures sont qualifiées ci-dessous. Les compléments API et UI passent
+aussi, sur leurs propres sources figées et preuves distinctes.
 
 ## Périmètre et invariants
 
@@ -181,3 +181,21 @@ Le client prend en charge immédiatement le rejet de chaque attente HTTP créée
 avant un clic, sans changer son résultat nominal. Il suit ces promesses et les
 joint après fermeture du navigateur ; une erreur de clic ne doit pas provoquer
 un rejet non géré pendant la restitution ou empêcher l’écriture du rapport.
+
+## Parcours navigateur qualifié le 9 novembre
+
+Trois groupes passent sur 212 sources et les mêmes images :
+[preuve](evidence/invocation-source-ui-dev-2026-11-09.json). Création/publication
+depuis l’accueil et les formulaires, copie initiale réussie, puis vraie faute
+errno 13. Le GET d’Actualiser donne 200/source_forbidden ; l’alerte utile est
+rendue, les anciennes adresses/copies/succès sont absents. Focus DOM sur le titre
+et absence de débordement sont vérifiés séparément des captures. Après
+restitution explicite, Actualiser retrouve deux domaines et une URL copiée
+invoque réellement Docker. Cette invocation réussie, la purge physique de la
+fonction et la suppression des parents sont recoupées nativement ; helper et
+unités finis, même fichier/mode/mtime et services/configurations inchangés.
+Cinq JPEG frais sont personnellement inspectés, sans défaut visuel bloquant.
+Les vues restaurées et l’initiale desktop sont pleine page ; leurs contenus ne
+tiennent pas tous simultanément dans leur viewport. Aucun contour de focus
+n’est visible dans les JPEG ; le focus DOM est une assertion distincte. Ces
+images ne qualifient pas les autres classes de source ou branches d’erreur du client.

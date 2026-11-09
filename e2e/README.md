@@ -834,3 +834,18 @@ ne peut être confirmée. Une fonction purgée, quatre appels et garde terminée
 sont recoupés en lecture seule : [preuve](../docs/evidence/invocation-source-api-dev-2026-11-09.json),
 211 sources et images identiques. Aucun rendu UI ou autre classe de source
 n’est qualifié par ces quatre groupes.
+
+
+## Refus réel de lecture dans la console
+
+`node e2e/invocation-source-ui.mjs` crée et publie depuis l’accueil normal et
+les formulaires. Trois groupes passent : catalogue initial avec copie réussie,
+vrai EACCES du relevé puis Actualiser/alerte sans ancien résultat, restitution
+et invocation Docker de l’URL copiée. Cinq JPEG frais sont conservés avec SHA
+et mtimes ; focus DOM et mesures de débordement sont des assertions distinctes.
+Les attentes HTTP sont suivies immédiatement et jointes après fermeture du
+navigateur. Une garde qualifiée précède la faute ; la fixture reste conservée
+si la restitution ne peut être confirmée. Une fonction purgée, parents supprimés,
+un appel et garde finie sont recoupés : [preuve](../docs/evidence/invocation-source-ui-dev-2026-11-09.json),
+212 sources et images identiques. Autres fautes de source et branches d’erreur
+du client restent distinctes ; aucune réponse/route n’est substituée.

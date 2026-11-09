@@ -3682,3 +3682,24 @@ ressources absentes.
 Le helper et les unités sont terminés, même fichier/mode/mtime, ctime changée.
 Services/démarrages/routes/env/secrets inchangés. Le rendu UI reste à éprouver.
 Preuve : evidence/invocation-source-api-dev-2026-11-09.json.
+
+
+## 2026-11-09 — Refus réel de lecture dans la console
+
+Contrat navigateur committé avant code. La revue détecte des attentes HTTP
+non jointes si un clic échoue ; contrat et correctif watch/jonction avant le
+premier essai, revue ciblée sans défaut restant. Aucun essai fonctionnel arrêté.
+Trois groupes passent sur 212 sources/images identiques, zéro échec/skip/erreur
+JavaScript : accueil/formulaires/publication, copie initiale, vrai errno 13 puis
+GET d’Actualiser 200/source_forbidden. Alerte utile, anciennes adresses/copies/
+succès retirés, focus DOM et débordement vérifiés. Après restitution explicite,
+les deux domaines reviennent et l’URL copiée invoque Docker. Une invocation
+succeeded, fonction purgée et parents supprimés sont recoupés nativement ;
+helper/unités finis, source restaurée et services/configurations inchangés.
+Cinq JPEG frais conservés ; deux vues de refus inspectées par le principal.
+Preuve : evidence/invocation-source-ui-dev-2026-11-09.json.
+
+La revue visuelle personnelle inspecte les cinq fichiers exacts et leurs copies
+avec SHA/mtimes concordants, sans défaut bloquant. Le refus tient dans le vrai
+viewport mobile ; les vues restaurées et l’initiale desktop sont pleine page.
+Aucun contour de focus visible : ne pas confondre avec l’assertion DOM passée.

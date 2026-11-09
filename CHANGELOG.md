@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Refus de lecture dans la console : trois groupes navigateur passent sur
+  212 sources, depuis création/publication UI jusqu’au vrai source_forbidden,
+  retrait des anciennes adresses/copies/succès, restauration et invocation
+  de l’URL copiée. Cinq JPEG frais, une fonction purgée et garde finie recoupés.
+
 - Catalogue sous refus réel de lecture : quatre groupes API passent sur
   211 sources, diagnostic source_forbidden borné, six refus d’autorisation,
   appels Docker par les deux domaines pendant EACCES puis catalogue restitué.

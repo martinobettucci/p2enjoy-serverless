@@ -775,3 +775,18 @@ Notes : README, CONTRIBUTORS, INSTALL proposés individuellement. Configuration 
 env/secrets, images, services et démarrages inchangés ; aucun build. Seul le mode
 du relevé est temporairement retiré puis restitué à 0640, contenu/inode/mtime
 inchangés et ctime modifiée. Rendu UI et autres fautes de source encore ouverts.
+
+
+## Refus réel dans la console — 9 novembre
+
+Trois groupes navigateur passent sur 212 sources et les mêmes images, depuis
+l’accueil/formulaires/publication jusqu’au refus réel et à la reprise. L’alerte
+source_forbidden s’affiche en desktop/mobile sans anciennes adresses/copies/
+succès. Après restitution, l’URL copiée appelle réellement Docker. Une fonction
+purgée, parents supprimés, invocation et garde terminée recoupés nativement.
+[Preuve](evidence/invocation-source-ui-dev-2026-11-09.json), cinq JPEG frais.
+Variables : aucun ajout. Secrets : aucun ajout. Routes/DNS : aucun changement.
+Notes : README, CONTRIBUTORS, INSTALL proposés individuellement. Configuration :
+fichiers officiels, services, images et démarrages inchangés ; aucun build. Mode
+du relevé retiré puis restitué à 0640, contenu/inode/mtime identiques, ctime changée.
+Autres fautes de source et pages UI/CLI sur six domaines restent à qualifier.
