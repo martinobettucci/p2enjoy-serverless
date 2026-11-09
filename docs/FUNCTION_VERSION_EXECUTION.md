@@ -203,6 +203,12 @@ Une consultation versionnée peut fournir les URL du premier upload non promu.
 Sans paramètre, la réponse conserve les URL sans suffixe de la cible courante.
 
 La CLI propose publication pilote de code/descripteur seul et promotion explicite.
+`deploy --code-only` exige les fonctions déjà créées et ne résout pas les valeurs
+provider/variables/secrets inutilisées ; il publie les handlers et événements du
+manifeste sans changer leur configuration. `promote --function UUID --code-hash HASH`
+relit la fonction puis exige son If-Match, sans manifeste ni promotion automatique.
+La CLI compare le hash retourné au calcul canonique de son inventaire empaqueté,
+du descripteur demandé et de l’image réellement validée par le contrôle.
 Le déploiement complet garde ses mutations de configuration rapportées séparément.
 Le résultat indique code_changed, hash préparé et cible observée, sans présenter
 publié comme promu. Le catalogue après upload est demandé pour le hash retenu ;
