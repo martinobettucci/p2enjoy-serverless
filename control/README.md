@@ -346,3 +346,14 @@ SIGKILL est recoupé par waitpid, la garde dans son journal systemd. Une fonctio
 purgée physiquement, deux gardes terminées ; même19cfe884/configuration et
 référence, nouveau démarrage du contrôle attendu. Aucune migration ni variable
 ajoutée. Commande et limites dans [e2e](../e2e/README.md#reprise-des-paquets-dédupliqués--complément-sls-074).
+
+## Candidate avec gardes de migration008
+
+Le [checkpoint](../docs/evidence/function-version-migration008-checkpoint-dev-2026-11-09.json)
+reproduit sur19cfe884 l'absence de refus d'un alias actif à zéro octet, puis
+éprouve la candidate def45648f9e7 : neuf groupes sur copies privées du véritable007,
+six refus, témoin conservé, verrou/reprise et contraintes. Le seul delta backend
+est le préfixe de garde008 ; le web est identique. Cette première transition
+reste sautée par les bases déjà008. La candidate n'est pas servie et les services
+sont conservés. Interruption WAL et sa garde, bascule et replays publics restent
+à terminer selon [le contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md).

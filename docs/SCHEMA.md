@@ -141,7 +141,9 @@ vivante, références étrangères et cache canonique. Le recalcul reprend la
 reconnaissance stricte de purge007 ; un tombstone légitime conserve son cache
 connu ou inconnu. Une incohérence annule la transition sans réparation implicite.
 Les installations déjà008 ne la rejouent pas. Les [refus et interruptions](FUNCTION_VERSION_MIGRATION_008_RECOVERY.md)
-restent en cours de qualification sur une nouvelle image.
+restent en cours : neuf groupes de refus/témoin/verrou/contraintes passent sur
+la candidate def45648f9e7 non servie ; interruption WAL, bascule et replays restent
+à terminer. Le contrôle servi reste19cfe884.
 
 `functions` reçoit `first_published_code_hash` et `first_promoted_at`, nullable
 avant le premier succès correspondant et immuable une fois renseigné. L’historique

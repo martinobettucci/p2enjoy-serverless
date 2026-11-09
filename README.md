@@ -113,6 +113,14 @@ la version et les compteurs données/cache1–5. La fonction est purgée physiqu
 les deux gardes sont terminées et les ressources actives sont libérées. L'image
 reste19cfe884 ; les autres pannes et la campagne complète restent dans SLS-074.
 
+Un [checkpoint de migration008](docs/evidence/function-version-migration008-checkpoint-dev-2026-11-09.json)
+reproduit puis corrige l'acceptation d'un historique007 incohérent. La candidate
+def45648f9e7 passe neuf groupes réels sur copies privées : six refus, témoin,
+verrou/reprise et contraintes. Les anciennes données et les backfills de2882
+publications/4418 invocations sont conservés. Elle n'est pas servie : interruption
+WAL, bascule et régressions publiques restent à terminer. Les services actuels,
+la sauvegarde originale et les fichiers officiels sont inchangés.
+
 Pour SLS-074, un upload prépare une version disponible par hash ; seule une
 promotion explicite change la version appelée sans tag, selon le choix confirmé.
 

@@ -825,11 +825,21 @@ recoupe l'exécution indépendante ; aucune coupure pendant unlink, perte SSH ou
 panne propre de la garde n'est déduite de cette preuve. Ces fenêtres, les autres
 pannes, migrations perturbées et la régression complète restent ouvertes.
 
-Le prochain complément suit [les refus et reprises de008](FUNCTION_VERSION_MIGRATION_008_RECOVERY.md) :
-copies du véritable historique007, refus transactionnels des incohérences,
-verrou réel et SIGKILL avant commit de la WAL privée. Reproduire d'abord le
-refus manquant sur19cfe884, puis corriger uniquement la première transition,
-qualifier la nouvelle image et rejouer les campagnes publiques liées. En cours.
+Le [complément008](FUNCTION_VERSION_MIGRATION_008_RECOVERY.md) a reproduit le
+refus manquant sur19cfe884 : un alias actif avec stored_bytes=0 était migré.
+La correction de première transition est construite dans la candidate def45648f9e7,
+non servie. Son [checkpoint](evidence/function-version-migration008-checkpoint-dev-2026-11-09.json)
+passe neuf groupes sur275 sources : six refus transactionnels, témoin historique007,
+verrou/reprise et contraintes (14 refus SQL/3 contrôles, non additionnés).
+Les anciennes colonnes des16 tables,863 groupes/219 doublons,261 tombstones
+inconnus et141 alias supprimés au hash connu restent conservés ;2882 publications
+et4418 invocations ont leurs nouveaux hash recoupés. Le jeu réel ne contient
+pas la variante premier hash inconnu puis hash connu ; elle reste à éprouver.
+Les31 backends ne diffèrent que par008, web identique. Conteneurs/copies retirés,
+sauvegarde et services/référence/fichiers officiels conservés, compteurs actifs nuls.
+La coupure avant commit WAL et sa garde restent à implémenter, puis à qualifier
+avant bascule et replays publics sur la candidate. Purges historiques engagées,
+autres pannes et régression complète restent nécessaires. Statut conservé[~].
 
 Ordre de réalisation persisté dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md#ordre-de-réalisation).
 Premier checkpoint : [format et preuve du hash](FUNCTION_CODE_HASH.md), via le

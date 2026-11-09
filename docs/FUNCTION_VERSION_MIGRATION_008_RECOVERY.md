@@ -46,10 +46,11 @@ sur l'image19cfe884, avant toute correction. Son échec reste séparé du replay
 
 ## Correction de la première transition
 
-Si le défaut est reproduit, ajouter les gardes au début du script008, dans sa
-transaction existante, avant les ALTER/INSERT. Une table temporaire à CHECK
-nommés et le calculateur déjà enregistré suffisent ; aucun nouveau format ni
-migration009 n'est introduit. Une migration suivante seule ne peut annuler un
+Le défaut est reproduit sur19cfe884 : un alias actif sans octets déclarés est
+migré, puis le démarrage isolé échoue plus tard sur son socket absent. Les gardes
+sont ajoutées au début du script008, dans sa transaction existante, avant les
+ALTER/INSERT. Une table temporaire à CHECK nommés et le calculateur déjà enregistré
+sont utilisés ; aucun nouveau format ni migration009 n'est introduit. Une migration suivante seule ne peut annuler un
 commit008 déjà réalisé. Le précédent007 suit cette même correction de première
 transition. Les installations déjà marquées008 sautent le script et conservent
 leurs données ; les preuves distinguent l'ancienne et la nouvelle image.
@@ -93,3 +94,42 @@ l'état courant et vérifier l'absence d'effets de migration sur la base008 déj
 servie. Les campagnes publiques de versions et CLI doivent passer sur cette image.
 Les pannes de publication, purges historiques engagées et la campagne complète
 restent nécessaires dans SLS-074. Aucun nouveau parcours UI n'est attendu.
+
+## Checkpoint de refus et contrôles positifs
+
+Le [checkpoint](evidence/function-version-migration008-checkpoint-dev-2026-11-09.json)
+passe neuf groupes, sans échec ni skip, sur275 sources figées : six refus,
+témoin007 réel, verrou/reprise et contraintes. Les quatorze refus SQL et trois
+contrôles internes du dernier groupe ne sont pas ajoutés au total neuf.
+Le témoin conserve les anciennes colonnes des seize tables,863 groupes dont219
+groupes d'alias,261 tombstones inconnus et141 alias supprimés au cache connu.
+Les backfills de2882 publications et4418 invocations sont recoupés, ainsi que
+les cibles, premiers hash/dates, états et révisions canoniques. Cet historique
+ne contient aucun premier hash inconnu suivi d'un hash connu : cette variante
+positive reste à éprouver sur un historique réel approprié.
+
+La candidate def45648f9e7 ne diffère du contrôle servi19cfe884 que par le script008,
+parmi31 fichiers backend recoupés ; le web compilé est identique. Les images,
+ID, démarrages, environnements, fichiers officiels et compteurs actifs du contrôle
+et de la référence restent identiques. La sauvegarde originale est inchangée,
+les conteneurs/copies sont retirés. La reproduction rouge et le premier replay
+de six refus sont séparés, sans gonfler le total.
+
+Commandes depuis la racine synchronisée, avec SSH vers le seul SPARK DEV :
+
+```sh
+python3 -B e2e/function-version-migration008-build.py
+python3 -B e2e/function-version-migration008-run.py rejections-and-controls sha256:def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4
+```
+
+La seconde commande rejoue l'image conservée de ce checkpoint ; après une autre
+construction, passer l'empreinte retournée par son build. Les pilotes refusent
+d'écraser leurs rapports : conserver l'essai précédent local et distant avant
+relance. Le rapport natif est control/function-version-migration008.json ; le
+checkpoint et le build sont dans .local/e2e. Les bases privées ne sont pas publiées.
+
+La candidate n'est pas servie. L'interruption WAL, ses reprises et sa garde ne
+sont pas encore implémentées dans ce banc. Elles précèdent la bascule DEV, les
+régressions publiques et la clôture de ce complément. Les purges engagées et
+autres critères de SLS-074 restent ouverts. Les résultats ajoutés ici sont
+postérieurs au gel275 et ne modifient aucun code exécutable qualifié.

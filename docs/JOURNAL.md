@@ -4556,3 +4556,30 @@ les caches de tombstones légitimes quand le calcul retourne une identité incon
 La frontière native à éprouver est précisée avant marqueur de commit WAL ; SQL
 COMMIT peut déjà être en cours. L'image corrigée doit encore être construite et
 qualifiée avant toute bascule DEV.
+
+## 2026-11-09 — Checkpoint de refus008 sur candidate
+
+La candidate def45648f9e74490a18c5d05f79681d838fbd10fdb519bc8942f9fffe4decbe4
+est construite sans modifier le contrôle servi19cfe884, conservé sous un tag de
+référence. Les31 fichiers backend ne diffèrent que par008 et le web est identique.
+Le premier replay six refus est vert ; l'extension rejoue ces six et ajoute
+témoin, verrou/reprise et contraintes. Neuf groupes sur275 sources passent sans
+échec/skip ; les14 refus SQL et3 contrôles du dernier groupe ne gonflent pas neuf.
+
+Le témoin conserve les anciennes colonnes des16 tables,863 groupes dont219
+groupes d'alias,261 tombstones inconnus et141 alias supprimés au hash connu.
+Les nouveaux champs de2882 publications et4418 invocations, les cibles, premières
+dates/hash et choix canoniques sont recoupés. Aucun premier hash inconnu suivi
+d'un connu n'existe dans ce jeu : cette variante reste non couverte. La copie
+migre avant son échec volontaire ultérieur à reconcile_docker faute de socket,
+sans le confondre avec un refus. Un vrai writer BEGIN IMMEDIATE provoque le refus
+SQLite puis une relance explicite applique008 après libération.
+
+Les copies/conteneurs sont retirés, la sauvegarde007 originale reste identique,
+le contrôle et la référence gardent ID/image/démarrage/environnement/santé, les
+fichiers officiels et compteurs actifs restent identiques. Le rouge initial et
+le replay six sont archivés séparément. La reprise avant commit WAL et sa garde
+ne sont pas encore implémentées ; candidate non servie, bascule et replays publics
+restent à faire. Le complément et SLS-074 restent[~]. Preuve :
+evidence/function-version-migration008-checkpoint-dev-2026-11-09.json. Les résultats
+documentaires suivent le gel275, sans changement exécutable. Aucun remote Git.

@@ -1,4 +1,42 @@
--- @spec docs/BACKLOG.md#sls-074 | docs/SCHEMA.md#autorité-des-versions-et-promotions | docs/FUNCTION_VERSION_EXECUTION.md#autorité-persistante-et-migration
+-- @spec docs/BACKLOG.md#sls-074 | docs/SCHEMA.md#autorité-des-versions-et-promotions | docs/FUNCTION_VERSION_EXECUTION.md#autorité-persistante-et-migration | docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md#correction-de-la-première-transition
+-- Reject inconsistent007 input inside the same transaction as the first008
+-- transition. Already applied installations do not replay this migration.
+CREATE TEMP TABLE function_version_migration_checks (
+ active_valid INTEGER CONSTRAINT historical_active_version_required CHECK(active_valid=1),
+ references_valid INTEGER CONSTRAINT historical_foreign_key_required CHECK(references_valid=1),
+ code_hash_valid INTEGER CONSTRAINT historical_code_hash_mismatch CHECK(code_hash_valid=1)
+);
+INSERT INTO function_version_migration_checks(active_valid)
+SELECT NOT EXISTS (
+ SELECT 1 FROM functions f LEFT JOIN revisions r ON r.id=f.active_revision_id
+ WHERE f.active_revision_id IS NOT NULL AND
+  (f.deleted_at IS NOT NULL OR r.id IS NULL OR r.function_id!=f.id OR
+   r.deleted_at IS NOT NULL OR r.stored_bytes<=0 OR r.code_hash IS NULL)
+);
+INSERT INTO function_version_migration_checks(references_valid)
+SELECT NOT EXISTS(SELECT 1 FROM pragma_foreign_key_check);
+-- The same canonical calculation and exact pending-purge recognition as007.
+-- A legitimate purged identity may be unknown; its previous cache stays intact.
+INSERT INTO function_version_migration_checks(code_hash_valid)
+SELECT NOT EXISTS (
+ SELECT 1 FROM revisions WHERE code_hash IS NOT coalesce(historical_code_hash(
+    inventory_json,handler,runtime,architecture,image_id,events_json,stored_bytes,deleted_at,
+    EXISTS(SELECT 1 FROM functions f WHERE f.active_revision_id=revisions.id),
+    EXISTS(
+        SELECT 1 FROM functions f
+        JOIN function_operations o ON o.function_id=f.id AND o.service_id=f.service_id
+        JOIN storage_commands c ON c.id=o.id AND c.function_id=f.id AND c.service_id=f.service_id
+        WHERE f.id=revisions.function_id AND f.deleted_at IS NOT NULL
+          AND f.active_revision_id IS NULL
+          AND revisions.inventory_json='[]' AND revisions.events_json='{}'
+          AND o.kind='purge' AND o.decision='commit'
+          AND c.kind='purge' AND c.state='pending' AND c.phase IN ('volumes','artifacts')
+          AND c.installation_id=(SELECT value FROM security_metadata WHERE name='installation-id')
+          AND c.result_version=f.updated_at
+          AND c.expected_function_version=o.expected_function_version)),code_hash)
+);
+DROP TABLE function_version_migration_checks;
+
 ALTER TABLE functions ADD COLUMN first_published_code_hash TEXT
  CHECK(first_published_code_hash IS NULL OR (length(first_published_code_hash)=64 AND first_published_code_hash NOT GLOB '*[^0-9a-f]*'));
 ALTER TABLE functions ADD COLUMN first_promoted_at REAL;

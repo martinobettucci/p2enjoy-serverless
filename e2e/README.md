@@ -1,5 +1,31 @@
 # Qualification de la plateforme
 
+## Refus de migration008 — checkpoint de candidate
+
+`function-version-migration008-build.py` construit une candidate depuis les
+sources synchronisées, conserve l'image servie et recoupe31 fichiers backend
+et le web. `function-version-migration008-run.py rejections-and-controls IMAGE_SHA256`
+lance neuf groupes en série sur des copies privées de la vraie sauvegarde007.
+Le helper `function-version-migration008.py` utilise le propriétaire SQLite,
+le vrai uvicorn dans Docker et les fichiers officiels, réseau none, sans socket
+ni volume vivant. Un échec ultérieur de socket ne vaut pas refus de migration.
+Les refus exigent le rollback exact ; le témoin exige008 appliquée, données
+historiques et backfills conservés. Le groupe de contraintes emploie la vraie
+SQLite de l'image et annule chaque mutation attendue, avec contrôles positifs.
+
+Le [checkpoint](../docs/evidence/function-version-migration008-checkpoint-dev-2026-11-09.json)
+passe neuf groupes, zéro échec/skip, sur275 sources : six refus, témoin,
+verrou/reprise, contraintes (14 refus internes/3 contrôles non additionnés).
+Il conserve la reproduction rouge sur19cfe884 et le premier replay de six refus
+dans leurs époques distinctes. Candidate def45648f9e7, seul008 différent parmi31
+backends, web identique, conteneurs/copies retirés et sauvegarde/services inchangés.
+Les pilotes refusent les rapports préexistants. Rapport natif :
+control/function-version-migration008.json ; checkpoint et build : .local/e2e.
+Le [contrat](../docs/FUNCTION_VERSION_MIGRATION_008_RECOVERY.md) donne les commandes.
+La candidate n'est pas servie ; l'interruption WAL et sa garde ne sont pas
+implémentées ici. Bascule, replays publics, historique de purge engagé et variante
+premier hash inconnu suivi d'un connu restent distincts. Aucun parcours UI frais.
+
 ## Reprise des paquets dédupliqués — complément SLS-074
 
 Depuis la racine, après synchronisation dans le seul SPARK DEV et préparation

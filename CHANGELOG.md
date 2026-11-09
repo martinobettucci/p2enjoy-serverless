@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- Gardes de première transition008 dans une candidate non servie : refus d'une
+  cible active incohérente, de références orphelines ou d'un cache de hash altéré.
+  Le défaut est reproduit sur19cfe884 avant correction. La candidate def45648f9e7
+  passe neuf groupes sur copies007 réelles : six refus, témoin, verrou/reprise
+  et contraintes. Données historiques et2882/4418 backfills recoupés ; sauvegarde
+  et services conservés, web identique. Coupure WAL, bascule et régressions restent
+  à terminer ; SLS-074 reste en cours.
+  [Checkpoint](docs/evidence/function-version-migration008-checkpoint-dev-2026-11-09.json).
+
 - Reprise des paquets dédupliqués qualifiée en DEV : quatre groupes, cinq appels,
   commits200 sous EACCES avec réservation conservée puis nettoyage normal, et
   reprise après SIGKILL du contrôle et du helper par garde indépendante.
