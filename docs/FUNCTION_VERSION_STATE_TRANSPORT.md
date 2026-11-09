@@ -69,7 +69,9 @@ Neuf groupes prévus, exécutés séquentiellement :
 1. Depuis l'accueil et le vrai SSO, créer namespace/service/fonction/configuration,
    publier A/B par l'adaptateur et les API, promouvoir A, invoquer A/B ; refus
    directs de mutations avec Read et sans If-Match. Variables, secret par empreinte
-   et authentification métier sont recoupés.
+   et authentification métier sont recoupés. Les six refus initiaux conservent
+   toutes les données métier et ajoutent exactement six audits request.denied ;
+   ces audits de sécurité ne sont pas confondus avec une mutation de version.
 2. Perte de l'observateur suspendu et restauration indépendante, sans mutation.
 3. Promotion B par la CLI : perte avant traitement ; A et ETag/audit inchangés,
    CLI unknown sans rejeu, puis relance explicite réussie et appels B/A.

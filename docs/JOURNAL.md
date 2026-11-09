@@ -4904,3 +4904,16 @@ demande d'arrêt n'a pas ce reçu, plutôt que confondre processus terminé et
 mutation réussie. Les attentes locales sont bornées, avec secours indépendant
 scopé ; marqueurs et date initiale sont comparés à l'état initial après réimport.
 Ces corrections du banc précèdent tout essai ; aucun résultat E2E n'est acquis.
+
+
+## 2026-11-09 — Premier essai de transport arrêté avant coupure
+
+Le bootstrap est rouge sur le snapshot après six refus directs, avant création
+d'une garde ou attachement natif. La lecture ciblée de la base confirme les six
+audits request.denied attendus par main.py ; le banc exigeait à tort égalité de
+tous les audits. Aucun défaut produit établi. La campagne déclare cleanup=true,
+fonction purgée et parents supprimés ; une collecte physique indépendante est
+requise avant archivage. Correction décidée : conserver les snapshots de refus
+avant assertion, comparer tout le métier à l'identique et exiger précisément
+six audits request.denied supplémentaires, avec anciennes entrées conservées.
+Cet essai reste séparé du replay, zéro groupe ajouté. Aucun arrêt ni garde lancé.
