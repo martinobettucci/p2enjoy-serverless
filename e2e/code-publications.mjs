@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md
 // @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md
 // @verifies docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
 import assert from 'node:assert/strict';
@@ -7,19 +9,22 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {request} from 'playwright';
 import {publicationArchive} from './publication-fixtures.mjs';
-import {purgeStorageArchive} from './storage-archives.mjs';
 
 const base='https://serverless.lelabs.tech',output=new URL('../.local/e2e/',import.meta.url);
-const report=new URL('code-publications.json',output),checks=[],cleanupErrors=[],pending=[],functions=[],services=[],retained=[],storageArchives=[];
+const report=new URL('code-publications.json',output),checks=[],cleanupErrors=[],pending=[],functions=[],services=[],retained=[],storageArchives=[],evidence=[],invocations=[];
 const prefix='publication-api-'+randomUUID().slice(0,8),secret='publication-private-'+randomUUID();
 let admin,caller,session,namespace,work,completed=false,cleanup=false;
-async function save(){const temporary=new URL('code-publications.pending',output);await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),retained_archives:retained,storage_archives:storageArchives},null,2)+'\n');await rename(temporary,report);}
-async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}}
+async function save(){const temporary=new URL('code-publications.pending',output);await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,evidence,invocations,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),pre_purge_revisions:retained,storage_archives:storageArchives},null,2)+'\n');await rename(temporary,report);}
+function diagnostic(error){const safe=v=>typeof v==='string'&&/^[A-Za-z_][A-Za-z0-9_ :<>=!.-]{0,79}$/.test(v)?v:undefined;const location=String(error?.stack??'').match(/(?:deployments|code-publications)\.mjs:(\d+):(\d+)/);return {name:safe(error?.name)??'UnknownError',code:safe(error?.code),operator:safe(error?.operator),source:location?{line:Number(location[1]),column:Number(location[2])}:undefined,message_sha256:createHash('sha256').update(String(error?.message??'')).digest('hex')};}
+async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}catch(error){checks.push({name,status:'failed',error:diagnostic(error)});throw error;}}
 async function response(url,{method='GET',body,bytes,token,anonymous=false,headers={}}={}){
   const client=token||anonymous?caller:admin;
   return client.fetch(url,{method,data:bytes??body,headers:{...(token?{'X-Serverless-Token':token}:anonymous?{}:{Origin:base,'X-CSRF-Token':session.csrf_token}),...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});
 }
 async function call(url,options={}){const result=await response(url,options);assert.equal(result.status(),options.status??200,`${options.method??'GET'} ${url}: ${result.status()}`);const text=await result.text();assert(!text.includes(secret),'Secret exposé');return JSON.parse(text);}
+async function purgeArchive(fn){await until(async()=>!(await call(`/api/archives/${fn.id}`)).storage_operation,'archive_not_settled');const row=await call(`/api/archives/${fn.id}`);const response=await admin.post(`/api/archives/${fn.id}/purge`,{headers:{Origin:base,'X-CSRF-Token':session.csrf_token,'If-Match':String(row.updated_at)},data:{operation_id:randomUUID(),confirm_name:row.name}});assert([200,202].includes(response.status()));const op=await response.json();await until(async()=>{const v=await call(`/api/storage-operations/${op.id}`);assert.notEqual(v.state,'aborted');return v.state==='completed';},'public_purge_not_completed');const final=await call(`/api/archives/${fn.id}`);assert(final.purged_at&&final.artifact_bytes===0&&!final.storage_operation);return {function_id:fn.id,namespace_id:namespace.id,operation_id:op.id,purged:true,artifact_bytes:final.artifact_bytes};}
+async function promote(fn,published,credential){const row=await current(fn);return call(`/api/functions/${fn.id}/versions/${published.code_hash}/promote`,{method:'POST',token:credential,headers:{'If-Match':String(row.updated_at)}});}
+async function invoke(fn,version,read,path,{method='GET',revision,label,memory,count}={}){const r=await response(`/invoke/${fn.id}${path}`,{method,token:read,body:method==='POST'?{}:undefined});assert.equal(r.status(),200);const text=await r.text();assert(!text.includes(secret));const value=JSON.parse(text);assert.equal(value.revision,revision);assert.equal(value.functionVersion,version.revision_id);assert.equal(value.label,label);assert.equal(String(value.memory),memory);assert.equal(value.count,count);assert.equal(value.secret_sha256,createHash('sha256').update(secret).digest('hex'));assert.equal(r.headers()['x-serverless-code-hash'],version.code_hash);invocations.push({id:r.headers()['x-serverless-request-id'],function_id:fn.id,requested_code_hash:path.startsWith('@')?version.code_hash:null,resolved_code_hash:version.code_hash});return value;}
 async function current(fn){return call(`/api/functions/${fn.id}`);}
 async function token(service,rights,extra={}){return call(`/api/services/${service.id}/tokens`,{method:'POST',status:201,body:{name:randomUUID(),rights,...extra}});}
 async function prepare(fn,credential,handler='publication.handler',id=randomUUID()){
@@ -66,21 +71,27 @@ try{
     await call(`/api/functions/${fn.id}/deployments?limit=0`,{status:422});await call(`/api/functions/${fn.id}/deployments?offset=10001`,{status:422});
   });
   await check('Première publication Create : secret, ressources et volume réellement invoqués',async()=>{
-    await upload(first,firstArchive,create.token);
-    const row=await current(fn);assert.equal(row.active_revision_id,first.id);assert.deepEqual(row.config,fn.config);assert.deepEqual(row.environment,fn.environment);
-    const value=await call(`/invoke/${fn.id}?mode=counter`,{method:'POST',token:read.token,body:{}});
-    assert.equal(value.revision,'first');assert.equal(value.functionVersion,first.id);assert.equal(String(value.memory),'256');assert.equal(value.label,'initial');assert.equal(value.count,1);
-    assert.equal(value.secret_sha256,createHash('sha256').update(secret).digest('hex'));
+    const firstPublished=await upload(first,firstArchive,create.token);
+    let row=await current(fn);assert.equal(row.active_revision_id,null);assert.deepEqual(row.config,fn.config);assert.deepEqual(row.environment,fn.environment);
+    await call(`/invoke/${fn.id}`,{token:read.token,status:409});
+    await invoke(fn,firstPublished,read.token,'@'+firstPublished.code_hash+'?mode=counter',{method:'POST',revision:'first',label:'initial',memory:'256',count:1});
+    await promote(fn,firstPublished,create.token);row=await current(fn);assert.equal(row.active_revision_id,firstPublished.revision_id);
+    await invoke(fn,firstPublished,read.token,'?mode=counter',{revision:'first',label:'initial',memory:'256',count:1});
+    evidence.push({scenario:'first-code-with-explicit-create-promotion',code_hash:firstPublished.code_hash,revision_id:firstPublished.revision_id});
     await call(endpoint,{method:'POST',token:create.token,status:403,headers:{'If-Match':String(row.updated_at)},body:{handler:'publication.handler',deployment_id:randomUUID()}});
     await call(endpoint,{method:'POST',token:scoped.token,status:403,headers:{'If-Match':String(row.updated_at)},body:{handler:'publication.handler',deployment_id:randomUUID()}});
   });
   await check('Publication de code Update : configuration, événements et données conservés',async()=>{
     const before=await current(fn),events={http:[{path:'stable',methods:['GET','POST'],implicit:false}],schedules:[{cron:'0 1 * * *',enabled:false,timezone:'UTC'}]};
     const baseline=await call(`/api/functions/${fn.id}/deployments`,{method:'POST',status:201,headers:{'If-Match':String(before.updated_at)},body:{config:{...before.config,memory_mib:384},configuration:{environment:{PUBLIC_LABEL:'custom'},secrets:{QUALIFICATION_SYNTHETIC_SECRET:secret}},events}});
-    await upload(baseline,firstArchive);const snapshot=await current(fn),candidate=await prepare(fn,update.token);await upload(candidate,nextArchive,update.token);
-    const after=await current(fn);assert.deepEqual(after.config,snapshot.config);assert.deepEqual(after.environment,snapshot.environment);assert.deepEqual(after.secret_names,snapshot.secret_names);
-    const history=await call(`/api/functions/${fn.id}/revisions`);assert.deepEqual(history.items.find(row=>row.id===candidate.id).events,events);
-    const value=await call(`/invoke/${fn.id}/stable?mode=counter`,{token:read.token});assert.equal(value.revision,'next');assert.equal(value.functionVersion,candidate.id);assert.equal(value.count,1);assert.equal(value.label,'custom');assert.equal(String(value.memory),'384');assert.equal(value.secret_sha256,createHash('sha256').update(secret).digest('hex'));
+    const stable=await upload(baseline,firstArchive);assert.equal((await current(fn)).active_revision_id,before.active_revision_id);await promote(fn,stable);
+    const snapshot=await current(fn),candidate=await prepare(fn,update.token),pilot=await upload(candidate,nextArchive,update.token);
+    const after=await current(fn);assert.deepEqual(after.config,snapshot.config);assert.deepEqual(after.environment,snapshot.environment);assert.deepEqual(after.secret_names,snapshot.secret_names);assert.equal(after.active_revision_id,stable.revision_id);assert.equal(after.updated_at,snapshot.updated_at);
+    const history=await call(`/api/functions/${fn.id}/revisions`);assert.deepEqual(history.items.find(row=>row.id===pilot.revision_id).events,events);
+    await invoke(fn,stable,read.token,'/stable?mode=counter',{revision:'first',label:'custom',memory:'384',count:1});
+    await invoke(fn,pilot,read.token,'@'+pilot.code_hash+'/stable?mode=counter',{revision:'next',label:'custom',memory:'384',count:1});
+    await promote(fn,pilot,update.token);await invoke(fn,pilot,read.token,'/stable?mode=counter',{revision:'next',label:'custom',memory:'384',count:1});
+    evidence.push({scenario:'code-only-pilot-preserves-default-and-configuration',stable_hash:stable.code_hash,pilot_hash:pilot.code_hash,stable_revision_id:stable.revision_id,pilot_revision_id:pilot.revision_id});
     await call(`/invoke/${fn.id}`,{token:read.token,status:404});
   });
   await check('Abandon après changement de configuration : propriété, secret effacé et sans rejeu',async()=>{
@@ -124,7 +135,7 @@ try{
     const first=await finish(uploadResult),second=await finish(abandonResult);for(const response of [first,second])assert(!(await response.text()).includes(secret));assert.deepEqual([first.status(),second.status()].sort(),[200,409]);
     const state=await call(`/api/deployments/${candidate.id}`),after=await current(fn);
     if(second.status()===200){assert.equal(state.error_code,'candidate_abandoned');assert.equal(after.active_revision_id,before.active_revision_id);}
-    else{assert.equal(state.state,'published');assert.equal(after.active_revision_id,candidate.id);}
+    else{assert.equal(state.state,'published');assert.equal(after.active_revision_id,before.active_revision_id);assert.equal(state.revision_id,before.active_revision_id);assert.equal(state.code_changed,false);}
     const slowCandidate=await prepare(fn,update.token,slow.handler),uploading=join(upload(slowCandidate,slow,update.token));
     await until(async()=> (await call(`/api/deployments/${slowCandidate.id}`)).state==='validating','Validation non observée');
     await call(`/api/deployments/${slowCandidate.id}`,{method:'DELETE',token:update.token,status:409});await finish(uploading);
@@ -140,10 +151,10 @@ try{
     assert(state.candidates.every(row=>['failed','published'].includes(row.state)&&row.configuration_present===0&&row.reserved_bytes===0));
   });
   completed=true;
-}catch(error){if(!checks.some(row=>row.status==='failed'))checks.push({name:'Préparation ou fin',status:'failed',error:error.name});console.error(error.name,error.message);process.exitCode=1;}
+}catch(error){if(!checks.some(row=>row.status==='failed'))checks.push({name:'Préparation ou fin',status:'failed',error:error.name});evidence.push({scenario:'campaign-error',diagnostic:diagnostic(error)});console.error(JSON.stringify(diagnostic(error)));process.exitCode=1;}
 finally{
   await Promise.all(pending);
-  const failure=(step,id,error)=>cleanupErrors.push({step,id,error:error.name,message:error.message});
+  const failure=(step,id,error)=>cleanupErrors.push({step,id,diagnostic:diagnostic(error)});
   // Recover resources by exact names if a creation response was lost.
   if(session?.authenticated)try{
     if(!namespace)namespace=(await call('/api/namespaces?limit=100')).items.find(row=>row.name===prefix);
@@ -156,13 +167,13 @@ finally{
   }catch(error){failure('identification',namespace?.id,error);}
   for(const fn of functions){
     try{const revisions=await call(`/api/functions/${fn.id}/revisions?limit=100`);retained.push(...revisions.items.map(row=>({function_id:fn.id,id:row.id,archive_sha256:row.archive_sha256})));}catch(error){failure('historique',fn.id,error);}
-    try{await call(`/api/functions/${fn.id}`,{method:'DELETE'});}catch(error){failure('suppression',fn.id,error);}
-    try{storageArchives.push(await purgeStorageArchive(fn.id,namespace.id));}catch(error){failure('purge',fn.id,error);}
+    try{await until(async()=>!(await call(`/api/functions/${fn.id}/instances`)).items.length,'instances_not_released_before_cleanup');await call(`/api/functions/${fn.id}`,{method:'DELETE'});}catch(error){failure('suppression',fn.id,error);}
+    try{storageArchives.push(await purgeArchive(fn));}catch(error){failure('purge',fn.id,error);}
   }
   for(const row of services)try{await call(`/api/services/${row.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push('service:'+error.name);}
   if(namespace)try{await call(`/api/namespaces/${namespace.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push('namespace:'+error.name);}
   if(work)try{await rm(work,{recursive:true,force:true});}catch(error){failure('fichiers',null,error);}
   try{await admin?.dispose();}catch(error){failure('session-admin',null,error);}
   try{await caller?.dispose();}catch(error){failure('session-appels',null,error);}
-  cleanup=true;await save();if(!completed||cleanupErrors.length)process.exitCode=1;
+  cleanup=cleanupErrors.length===0;await save();if(!completed||cleanupErrors.length)process.exitCode=1;
 }

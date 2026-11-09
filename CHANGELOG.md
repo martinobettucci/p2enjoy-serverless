@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- Première tranche de régression008 des publications qualifiée :76 groupes,
+ 55 de composant et21 HTTPS, prérequis SSO distinct ; sept appels Docker et
+  quatre fonctions purgées publiquement. Promotion Create explicite, pilote,
+  rollback, attente native de deux admissions et déduplication sont recoupés.
+  Services, fichiers officiels et5982 artefacts antérieurs restent identiques.
+  [Preuve](docs/evidence/function-version-publication-regressions-dev-2026-11-09.json).
+
 - Décisions de version sous perte réelle de réponse qualifiées :9 groupes,
   six coupures natives promotion CLI/archivage/suppression, garde indépendante,
   16 appels persistants et sept gardes terminées. Métier/audit atomiques,

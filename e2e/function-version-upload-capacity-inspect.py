@@ -1,6 +1,8 @@
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md#publications-complètes
+# @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md#publications-complètes
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md#scénario-et-assertions
-"""Read-only native observations of one exact DEV upload-capacity campaign."""
+"""Read-only native admissions, validators and capacity for exact DEV campaigns."""
 import hashlib,http.client,json,os,re,shlex,shutil,socket,subprocess,sys,time
 from pathlib import Path
 from uuid import UUID
@@ -21,7 +23,8 @@ def command(args):return subprocess.check_output(args,text=True,timeout=25).stri
 with read_control(state/'control.sqlite3') as db:
     db.execute('BEGIN')
     owner=db.execute('SELECT n.name FROM functions f JOIN services s ON s.id=f.service_id JOIN namespaces n ON n.id=s.namespace_id WHERE f.id=? AND n.id=?',(function,namespace)).fetchone()
-    assert owner and re.fullmatch(r'version-upload-capacity-[0-9a-f]{8}',owner['name']),'owned_campaign_required'
+    assert owner and re.fullmatch(r'(?:version-upload-capacity|deploy)-[0-9a-f]{8}',owner['name']),'owned_campaign_required'
+    if owner['name'].startswith('deploy-'):assert mode=='inspect','deployment_observation_only'
     assert not db.execute('SELECT 1 FROM functions WHERE deleted_at IS NULL AND id!=?',(function,)).fetchone(),'foreign_active_function'
     installation=db.execute("SELECT value FROM security_metadata WHERE name='installation-id'").fetchone()[0]
     candidates=[dict(v) for v in db.execute('SELECT id,state,error_code,reserved_bytes,revision_id,code_hash,code_changed,validation_json FROM deployments WHERE function_id=? ORDER BY created_at,id',(function,))]

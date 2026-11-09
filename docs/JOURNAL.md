@@ -5030,3 +5030,49 @@ d'archive/purge et conservent leurs snapshots avant purge. L'ancien helper
 partagé reste inchangé pour les autres bancs. Le lecteur physique accepte les
 deux préfixes exacts deploy/publication-api, avec ses contrôles stricts conservés.
 Aucun test encore exécuté sur ce code. Ces précisions sont persistées avant code.
+
+
+## 2026-11-09 — Première régression publications008 qualifiée
+
+La [première tranche de régression008](evidence/function-version-publication-regressions-dev-2026-11-09.json) passe76 groupes sur292
+sources figées :55 contrôles du vrai composant Docker et21 groupes HTTPS des
+publications complètes/code seul. Le prérequis SSO réel reste distinct. Les huit
+migrations, intégrité, verrou et refus de configuration sont conservés ; les11
+et10 groupes de publication gardent droits, propriété, conflits, révocation,
+import réel, abandon, course et pagination.
+
+Upload et promotion sont distingués, y compris première promotion Create. Une
+observation native recoupe deux candidats validating/réservés et le seul validateur
+vivant du premier ; le doublon réutilise le hash et la révision canonique sans
+changer la cible. Rollback et pilote sont réellement invoqués. Sept appels
+recoupés en base vérifient hashes demandés/résolus, handlers et configuration.
+Les cinq appels de code seul vérifient l’empreinte du secret ; les deux appels
+de publication complète contrôlent sa présence puis son absence. Le compteur
+POST reste1 lors des GET après promotion.
+
+Quatre fonctions sont purgées par l'API publique, code/volumes/réservations absents
+et parents supprimés. Les empreintes avant purge ne prétendent pas représenter
+des archives encore conservées. Les5982 artefacts antérieurs et les services,
+ID/images/démarrages, fichiers officiels et backend/web embarqués restent identiques.
+Les anciens rapports restent préservés par SHA. Aucun build produit ni nouveau
+parcours visuel ; les autres clients et la régression complète restent dans
+SLS-074, toujours[~].
+
+La collecte indépendante confirme les sept invocations et quatre reçus de purge
+complets, intégrité/FK, zéro ressource active et aucun conteneur de composant
+conservé. Le contrôle e661516b/def45648 et son démarrage20:51:15UTC restent
+identiques, ainsi que la référence. Les ressources web embarquées et31 backends
+sont identiques au checkpoint de transport. Les autres clients et la suite
+complète restent à adapter/qualifier. Aucun registre d'incohérences présent,
+aucun arbitrage externe ni remote Git configuré.
+
+
+La relecture finale borne explicitement les secrets : cinq appels code seul
+contrôlent leur empreinte, deux appels complets contrôlent présence puis absence.
+Aucun défaut restant relevé. Preuve SHA256
+d7685b90fa7a54a512f69efbd0d46f905fc9581d8813fe07a4a732872d6f433f.
+Après synchronisation,292 sources correspondent au SPARK : zéro écart exécutable,
+deux documents de résultat déclarés seulement. Les archives locales/natives
+des anciens rapports sont relues et restent identiques par SHA. Contrôles
+statiques Python/Node, JSON, champs sensibles et diff valides, distincts des76
+groupes. Les trois notes restent des propositions, sans adoption revendiquée.

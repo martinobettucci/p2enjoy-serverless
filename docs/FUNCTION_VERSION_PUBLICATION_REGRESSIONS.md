@@ -2,7 +2,7 @@
 
 Première tranche de la régression complète de [SLS-074](BACKLOG.md#sls-074),
 selon [FUNCTION_VERSION_EXECUTION](FUNCTION_VERSION_EXECUTION.md#preuves-réelles).
-Statut : décidée avant code, pas encore qualifiée. Les autres clients courants
+Statut : première tranche implémentée et qualifiée en DEV par76 groupes. Les autres clients courants
 et les parcours de console restent dans la matrice complète à réaliser.
 
 ## Périmètre et fidélité
@@ -97,3 +97,37 @@ publication-recovery, les consommateurs vivants de public-invocations, la consol
 ou la suite complète. Elle maintient SLS-074[~], sans nouveau résultat visuel
 ni changement de manuel. Toute contradiction produit révélée est reproduite et
 spécifiée avant correction ; un test n'est jamais assoupli pour obtenir du vert.
+
+
+## Résultats retenus
+
+La [première tranche de régression008](evidence/function-version-publication-regressions-dev-2026-11-09.json) passe76 groupes sur292
+sources figées :55 contrôles du vrai composant Docker et21 groupes HTTPS des
+publications complètes/code seul. Le prérequis SSO réel reste distinct. Les huit
+migrations, intégrité, verrou et refus de configuration sont conservés ; les11
+et10 groupes de publication gardent droits, propriété, conflits, révocation,
+import réel, abandon, course et pagination.
+
+Upload et promotion sont distingués, y compris première promotion Create. Une
+observation native recoupe deux candidats validating/réservés et le seul validateur
+vivant du premier ; le doublon réutilise le hash et la révision canonique sans
+changer la cible. Rollback et pilote sont réellement invoqués. Sept appels
+recoupés en base vérifient hashes demandés/résolus, handlers et configuration.
+Les cinq appels de code seul vérifient l’empreinte du secret ; les deux appels
+de publication complète contrôlent sa présence puis son absence. Le compteur
+POST reste1 lors des GET après promotion.
+
+Quatre fonctions sont purgées par l'API publique, code/volumes/réservations absents
+et parents supprimés. Les empreintes avant purge ne prétendent pas représenter
+des archives encore conservées. Les5982 artefacts antérieurs et les services,
+ID/images/démarrages, fichiers officiels et backend/web embarqués restent identiques.
+Les anciens rapports restent préservés par SHA. Aucun build produit ni nouveau
+parcours visuel ; les autres clients et la régression complète restent dans
+SLS-074, toujours[~].
+
+Les clients et le pilote ont été relus avant campagne. La preuve d'attente
+exige le relevé natif couplé, au lieu de deux états lus séparément. Le pilote
+joint son processus local même après une erreur de capture et déclare une issue
+distante inconnue si cette jonction expire. Ces branches d'erreur propres du
+pilote restent distinctes : leur revue statique ne vaut pas qualification E2E.
+Les sources de la partie006/007 des bancs historiques ne sont pas réécrites.

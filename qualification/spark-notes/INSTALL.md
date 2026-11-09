@@ -584,3 +584,33 @@ SLS-074 reste[~] pour les autres interruptions et la régression complète008.
 
 Démarrage courant du contrôle : 2026-11-09T20:51:15.542532163Z. Ces notes restent
 proposées sans adoption ; configuration et routes inchangées.
+
+
+## Première régression courante des publications008
+
+La [première tranche de régression008](docs/evidence/function-version-publication-regressions-dev-2026-11-09.json) passe76 groupes sur292
+sources figées :55 contrôles du vrai composant Docker et21 groupes HTTPS des
+publications complètes/code seul. Le prérequis SSO réel reste distinct. Les huit
+migrations, intégrité, verrou et refus de configuration sont conservés ; les11
+et10 groupes de publication gardent droits, propriété, conflits, révocation,
+import réel, abandon, course et pagination.
+
+Upload et promotion sont distingués, y compris première promotion Create. Une
+observation native recoupe deux candidats validating/réservés et le seul validateur
+vivant du premier ; le doublon réutilise le hash et la révision canonique sans
+changer la cible. Rollback et pilote sont réellement invoqués. Sept appels
+recoupés en base vérifient hashes demandés/résolus, handlers et configuration.
+Les cinq appels de code seul vérifient l’empreinte du secret ; les deux appels
+de publication complète contrôlent sa présence puis son absence. Le compteur
+POST reste1 lors des GET après promotion.
+
+Quatre fonctions sont purgées par l'API publique, code/volumes/réservations absents
+et parents supprimés. Les empreintes avant purge ne prétendent pas représenter
+des archives encore conservées. Les5982 artefacts antérieurs et les services,
+ID/images/démarrages, fichiers officiels et backend/web embarqués restent identiques.
+Les anciens rapports restent préservés par SHA. Aucun build produit ni nouveau
+parcours visuel ; les autres clients et la régression complète restent dans
+SLS-074, toujours[~].
+
+Ces notes restent proposées, sans adoption. Contrôle courant inchangé :
+2026-11-09T20:51:15.542532163Z ; référence inchangée.

@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md#périmètre-et-fidélité
+# @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md#périmètre-et-fidélité
 # @spec docs/BACKLOG.md#sls-020 | docs/CONTROL.md#preuves
 # @verifies docs/BACKLOG.md#sls-020 | docs/CONTROL.md#configuration | docs/SCHEMA.md
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#preuve-native-du-host-et-des-clients-de-panne
@@ -136,8 +138,8 @@ try:
     metadata=json.loads(run(['docker','exec',container,'python','-B','-c',
         'import sqlite3,json; db=sqlite3.connect("/state/control.sqlite3"); print(json.dumps({"versions":[r[0] for r in db.execute("SELECT version FROM schema_migrations ORDER BY version")],"installation":db.execute("SELECT value FROM security_metadata WHERE name=?",("installation-id",)).fetchone()[0],"integrity":db.execute("PRAGMA integrity_check").fetchone()[0]}))']).stdout)
     # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#migration-et-conservation
-    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql'] and metadata['integrity']=='ok'
-    uuid.UUID(metadata['installation']);passed('Sept migrations réelles, intégrité SQLite et UUID d’installation')
+    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql','008_function_versions.sql'] and metadata['integrity']=='ok'
+    uuid.UUID(metadata['installation']);passed('Huit migrations réelles, intégrité SQLite et UUID d’installation')
     competing=run(base+['run','--rm','--name','serverless-control-lock-contender-'+project.rsplit('-',1)[-1],'--no-deps','control'],timeout=20,check=False)
     assert competing.returncode!=0 and 'Un contrôle possède déjà cet état' in competing.stderr
     ready(container);passed('Second contrôle réel refusé par le verrou exclusif')

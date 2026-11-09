@@ -1,7 +1,8 @@
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md
 // @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
 // @verifies docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#préparation-validation-et-publication
 // Uses the real SSO session, normal management API, adapter and Docker validation.
-import {purgeStorageArchive} from './storage-archives.mjs';
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
@@ -35,7 +36,7 @@ try {
     error:'Session SSO administrateur réelle indisponible',checks:[],skipped:0})+'\n');
   throw error;
 }
-const storageArchives=[],cleanupErrors=[];
+const storageArchives=[],cleanupErrors=[],evidence=[],invocations=[],uploads=[];
 const checks=[],functions=[],services=[],tokens=[],archives=[];
 let namespace,work,completed=false,clean=false;
 const prefix='deploy-'+randomUUID().slice(0,8),secret='qa-private-'+randomUUID();
@@ -45,16 +46,17 @@ async function call(url,{method='GET',body,bytes,token,headers={},status=200,ano
   const response=await client.fetch(url,{method,data:bytes??body,
     headers:{...(token?{'X-Serverless-Token':token}:anonymous?{}:{Origin:base,'X-CSRF-Token':session.csrf_token}),
       ...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});
-  assert.equal(response.status(),status,`${method} ${url}: attendu ${status}, reçu ${response.status()}`);
+  assert([status].flat().includes(response.status()),`${method} ${url}: attendu ${status}, reçu ${response.status()}`);
   const text=await response.text();assert(!text.includes(secret),'Secret exposé dans une réponse');
   return JSON.parse(text);
 }
+function diagnostic(error){const safe=v=>typeof v==='string'&&/^[A-Za-z_][A-Za-z0-9_ :<>=!.-]{0,79}$/.test(v)?v:undefined;const location=String(error?.stack??'').match(/(?:deployments|code-publications)\.mjs:(\d+):(\d+)/);return {name:safe(error?.name)??'UnknownError',code:safe(error?.code),operator:safe(error?.operator),source:location?{line:Number(location[1]),column:Number(location[2])}:undefined,message_sha256:createHash('sha256').update(String(error?.message??'')).digest('hex')};}
 async function check(name,action) {
   try {await action();checks.push({name,status:'passed'});console.log('PASS',name);}
-  catch(error){checks.push({name,status:'failed',error:error.name});throw error;}
+  catch(error){checks.push({name,status:'failed',error:diagnostic(error)});throw error;}
 }
 function pendingUpload(promise) {
-  return promise.then(value=>({value}),error=>({error}));
+  const handled=promise.then(value=>({value}),error=>({error}));uploads.push(handled);return handled;
 }
 async function finishUpload(pending) {
   const result=await pending;if(result.error)throw result.error;return result.value;
@@ -65,10 +67,16 @@ async function token(service,name,rights) {
 }
 async function create(service,name) {
   const row=await call(`/api/services/${service.id}/functions`,{method:'POST',status:201,
-    body:{name,config:{handler:'src/handlers.echo',memory_mib:128,timeout_seconds:2}}});
+    body:{name,config:{handler:'src/handlers.echo',memory_mib:128,timeout_seconds:2,idle_seconds:0}}});
   functions.push(row);return row;
 }
 async function current(fn){return call(`/api/functions/${fn.id}`);}
+async function until(action,message,seconds=120){const end=Date.now()+seconds*1000;while(Date.now()<end){const v=await action();if(v)return v;await new Promise(resolve=>setTimeout(resolve,100));}assert.fail(message);}
+async function admissions(fn){const {stdout}=await run('ssh',['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24','python3','-B','/srv/p2enjoy-serverless/e2e/function-version-upload-capacity-inspect.py','inspect',fn.id,namespace.id],{timeout:30000,maxBuffer:4*1024*1024});return JSON.parse(stdout);}
+async function purgeArchive(fn){await until(async()=>!(await call(`/api/archives/${fn.id}`)).storage_operation,'archive_not_settled');const row=await call(`/api/archives/${fn.id}`);const op=await call(`/api/archives/${fn.id}/purge`,{method:'POST',status:[200,202],headers:{'If-Match':String(row.updated_at)},body:{operation_id:randomUUID(),confirm_name:row.name}});await until(async()=>{const v=await call(`/api/storage-operations/${op.id}`);assert.notEqual(v.state,'aborted');return v.state==='completed';},'public_purge_not_completed');const final=await call(`/api/archives/${fn.id}`);assert(final.purged_at&&final.artifact_bytes===0&&!final.storage_operation);return {function_id:fn.id,namespace_id:namespace.id,operation_id:op.id,purged:true,artifact_bytes:final.artifact_bytes};}
+async function promote(fn,published,credential){const row=await current(fn);return call(`/api/functions/${fn.id}/versions/${published.code_hash}/promote`,{method:'POST',token:credential,headers:{'If-Match':String(row.updated_at)}});}
+async function idle(fn){const end=Date.now()+30000;while(Date.now()<end){if(!(await call(`/api/functions/${fn.id}/instances`)).items.length)return;await new Promise(resolve=>setTimeout(resolve,100));}assert.fail('instances_not_released');}
+async function invokeEcho(fn,read,version,tag,secretPresent,{hash=false}={}){const response=await caller.post(`/invoke/${fn.id}${hash?'@'+version.code_hash:''}`,{data:{},headers:{'X-Serverless-Token':read,'X-Qualification-Tag':tag}});assert.equal(response.status(),200);assert.equal(response.headers()['x-serverless-code-hash'],version.code_hash);const body=await response.json();assert.equal(body.tag,tag);assert.equal(body.method,'POST');assert.equal(body.secretPresent,secretPresent);invocations.push({id:body.requestId,function_id:fn.id,requested_code_hash:hash?version.code_hash:null,resolved_code_hash:version.code_hash});await idle(fn);}
 async function prepare(fn,credential,overrides={}) {
   const row=await current(fn);
   return call(`/api/functions/${fn.id}/deployments`,{method:'POST',status:201,token:credential,
@@ -137,10 +145,14 @@ try {
   await check('Première publication par Create, lecture expurgée et historique Read',async()=>{
     const candidate=await prepare(fn,createOnly);first=await upload(candidate,ordinary,createOnly);
     assert.equal(first.state,'published');assert(first.validation.valid&&first.validation.container_removed);
-    const row=await current(fn);assert.equal(row.active_revision_id,first.revision_id);
+    let row=await current(fn);assert.equal(row.active_revision_id,null);assert.equal(first.default_code_hash_at_publication,null);
     assert.deepEqual(row.secret_names,['QUALIFICATION_SYNTHETIC_SECRET']);
+    const unpromoted=await call(`/api/functions/${fn.id}/revisions`,{token:read});assert.equal(unpromoted.items.length,1);assert.equal(unpromoted.items[0].active,false);
+    await call(`/invoke/${fn.id}`,{token:read,status:409});await invokeEcho(fn,read,first,'prepared-code',true,{hash:true});
+    const promoted=await promote(fn,first,createOnly);assert(promoted.changed);row=await current(fn);assert.equal(row.active_revision_id,first.revision_id);
     const history=await call(`/api/functions/${fn.id}/revisions`,{token:read});
     assert.equal(history.items.length,1);assert(history.items[0].active);assert.equal(history.items[0].archive_sha256,ordinaryHash);assert(!('inventory_json' in history.items[0]));
+    evidence.push({scenario:'first-publication-and-create-promotion',code_hash:first.code_hash,revision_id:first.revision_id,published_without_default:true});
     await call(`/api/functions/${fn.id}/deployments`,{method:'POST',body:{config:row.config},token:createOnly,
       headers:{'If-Match':String(row.updated_at)},status:403});
   });
@@ -182,14 +194,16 @@ try {
     } finally {await finishUpload(pending);}
     const currentRow=await current(fn);assert.equal(currentRow.active_revision_id,first.revision_id);assert.equal(currentRow.config.memory_mib,384);
   });
-  await check('Admission unique et état consultable pendant un véritable chargement',async()=>{
+  await check('Deux uploads admis : attente consultable, déduplication et promotion séparée',async()=>{
     const row=await current(fn),candidate=await prepare(fn,update,{config:{...row.config,handler:'src/deployment-delay.handler'}});
-    const waiting=await prepare(fn,update);
-    const pending=pendingUpload(upload(candidate,slow,update));
-    try {await waitValidating(candidate,update);await upload(waiting,ordinary,update,429);}
-    finally {second=await finishUpload(pending);}
+    const waiting=await prepare(fn,update);const firstUpload=pendingUpload(upload(candidate,slow,update));let secondUpload,duplicate;
+    try {await waitValidating(candidate,update);secondUpload=pendingUpload(upload(waiting,ordinary,update));const observed=await until(async()=>{const v=await admissions(fn),one=v.candidates.find(v=>v.id===candidate.id),two=v.candidates.find(v=>v.id===waiting.id);return one?.state==='validating'&&two?.state==='validating'&&one.reserved_bytes>0&&two.reserved_bytes>0&&v.validators.length===1&&v.validators[0].candidate_id===candidate.id&&v.validators[0].running&&v.disappeared_during_observation.length===0?v:false;},'simultaneous_admission_window_missing',20);evidence.push({scenario:'native-two-admissions-one-validator',first_candidate_id:candidate.id,waiting_candidate_id:waiting.id,observed});assert.equal((await current(fn)).active_revision_id,first.revision_id);}
+    finally {second=await finishUpload(firstUpload);if(secondUpload)duplicate=await finishUpload(secondUpload);}
     assert.equal(second.state,'published');assert(second.validation.valid&&second.validation.container_removed);
-    await upload(waiting,ordinary,update,409);
+    assert(duplicate&&duplicate.validation.valid&&duplicate.validation.container_removed);assert.equal(duplicate.state,'published');assert.equal(duplicate.code_changed,false);assert.equal(duplicate.revision_id,first.revision_id);assert.equal(duplicate.code_hash,first.code_hash);assert.notEqual(duplicate.id,duplicate.revision_id);
+    assert.equal((await current(fn)).active_revision_id,first.revision_id);await upload(waiting,ordinary,update,409);
+    await promote(fn,second,update);assert.equal((await current(fn)).active_revision_id,second.revision_id);
+    evidence.push({scenario:'admitted-upload-and-duplicate',new_hash:second.code_hash,duplicate_hash:duplicate.code_hash,canonical_revision_id:duplicate.revision_id,duplicate_candidate_id:duplicate.id});
   });
   await check('Handler immuable hors déploiement, rollback et configuration courante conservée',async()=>{
     let row=await current(fn);
@@ -199,13 +213,17 @@ try {
     await call(`/api/functions/${fn.id}/rollback`,{method:'POST',token:update,body:{revision_id:first.revision_id},headers:{'If-Match':String(row.updated_at)}});
     const restored=await current(fn);assert.equal(restored.active_revision_id,first.revision_id);assert.equal(restored.config.handler,'src/handlers.echo');
     assert.equal(restored.config.cpu,.5);assert.equal(restored.environment.CURRENT,'kept');assert.deepEqual(restored.secret_names,['CURRENT_SECRET']);
+    await invokeEcho(fn,read,first,'rollback-executed',false);
     const history=await call(`/api/functions/${fn.id}/revisions`,{token:read});
     assert.equal(history.items.find(row=>row.active).archive_sha256,ordinaryHash);
     assert.equal(history.items.find(row=>row.id===second.revision_id).archive_sha256,slowHash);
   });
-  await check('Suppression explicite des seules révisions inactives',async()=>{
-    await call(`/api/functions/${fn.id}/revisions/${first.revision_id}`,{method:'DELETE',token:update,status:409});
-    await call(`/api/functions/${fn.id}/revisions/${second.revision_id}`,{method:'DELETE',token:update});
+  await check('Suppression UUID : droits, ETag, cible active et effacement inactif',async()=>{
+    const row=await current(fn),active=`/api/functions/${fn.id}/revisions/${first.revision_id}`,inactive=`/api/functions/${fn.id}/revisions/${second.revision_id}`;
+    await call(inactive,{method:'DELETE',token:read,headers:{'If-Match':String(row.updated_at)},status:403});
+    await call(inactive,{method:'DELETE',token:update,status:428});await call(inactive,{method:'DELETE',token:update,headers:{'If-Match':'0'},status:409});
+    await call(active,{method:'DELETE',token:update,headers:{'If-Match':String(row.updated_at)},status:409});
+    const removed=await call(inactive,{method:'DELETE',token:update,headers:{'If-Match':String(row.updated_at)}});assert(removed.deleted&&removed.state==='deleted'&&typeof removed.cleanup_pending==='boolean');await until(async()=>{const v=(await call(`/api/functions/${fn.id}/versions?limit=100`,{token:read})).items.find(v=>v.code_hash===second.code_hash);return v?.state==='deleted'&&v.stored_bytes===0;},'inactive_version_cleanup_incomplete');evidence.push({scenario:'inactive-uuid-delete',cleanup_pending_at_response:removed.cleanup_pending,code_hash:second.code_hash});
     const history=await call(`/api/functions/${fn.id}/revisions`,{token:read});assert.deepEqual(history.items.map(row=>row.id),[first.revision_id]);
   });
   await check('Huit candidats maximum par fonction',async()=>{
@@ -216,14 +234,16 @@ try {
       headers:{'If-Match':String(row.updated_at)},status:429});
   });
   completed=true;
-} finally {
+} catch(error){evidence.push({scenario:'campaign-error',diagnostic:diagnostic(error)});throw new Error('deployments008_failed',{cause:new Error(JSON.stringify(diagnostic(error)))});}
+finally {
+  for(const pending of uploads)await pending;
   try {
     for(const fn of functions.reverse()) {
       try{
         const history=await call(`/api/functions/${fn.id}/revisions`);
         for(const row of history.items)archives.push({function_id:fn.id,revision_id:row.id});
-        await call(`/api/functions/${fn.id}`,{method:'DELETE'});
-        storageArchives.push(await purgeStorageArchive(fn.id,namespace.id));
+        await idle(fn);await call(`/api/functions/${fn.id}`,{method:'DELETE'});
+        storageArchives.push(await purgeArchive(fn));
       }catch(error){cleanupErrors.push('function:'+fn.id+':'+error.name);}
     }
     for(const token of tokens){try{await call(`/api/tokens/${token.id}/revoke`,{method:'POST'});}catch(error){cleanupErrors.push('token:'+token.id+':'+error.name);}}
@@ -234,7 +254,7 @@ try {
   } finally {
     await admin.dispose();await caller.dispose();
     await writeFile(report,JSON.stringify({completed:completed&&clean,checks,cleanup:clean,skipped:0,
-      retained_archives:archives,storage_archives:storageArchives,cleanupErrors,function_ids:functions.map(f=>f.id),namespace_id:namespace?.id,remaining_proofs:['Expiration, limites globales et révisions','Reprise après crash pendant upload/validation','Déconnexion admin concurrente','UI et déploiement CLI complet','Code exécuté après rollback et valeur secrète conservée sous le même nom','Arrêt pendant nettoyage et exclusivité du contrôle']},null,2)+'\n');
+      pre_purge_revisions:archives,storage_archives:storageArchives,cleanupErrors,evidence,invocations,function_ids:functions.map(f=>f.id),namespace_id:namespace?.id,remaining_proofs:['Expiration, limites globales et révisions','Reprise après crash pendant upload/validation','Déconnexion admin concurrente','UI et déploiement CLI complet','Valeur secrète conservée sous le même nom','Arrêt pendant nettoyage et exclusivité du contrôle']},null,2)+'\n');
   }
 }
 assert(completed&&clean);
