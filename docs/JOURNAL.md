@@ -4489,3 +4489,8 @@ de restituer/désarmer, pour empêcher un chmod tardif. Le flag de restitution n
 précède jamais la confirmation des unités. Les timers sont vérifiés inactifs
 sans leur inventer MainPID ; les services chargés exigent MainPID0. Ces règles
 sont persistées avant correction du banc ; aucune faute n'a encore été lancée.
+
+Le précédent réel du banc de validation rend255 côté SSH lors d'un SIGKILL
+distant ; ce code transport ne prouve pas le signal. Le nouveau helper sera
+donc supervisé par un parent waitpid, avec signal natif, PID et naissance
+recoupés, avant la première exécution de la faute.

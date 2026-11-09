@@ -70,6 +70,10 @@ normale appelée par le helper ne le termine pas lui-même. Le drapeau de
 restitution confirmée n'est posé qu'après vérification des reçus et des unités.
 Un timer inactif n'expose pas nécessairement MainPID ; cette propriété est
 exigée pour un service chargé, ou son absence confirmée par LoadState=not-found.
+Un superviseur parent relève la terminaison du helper par waitpid : PID,
+naissance et WIFSIGNALED/SIGKILL sont recoupés avec l'identité de la garde.
+Le code de sortie du transport SSH est conservé séparément et ne sert pas de
+preuve du signal reçu par le helper.
 
 ## Preuves et limites
 
