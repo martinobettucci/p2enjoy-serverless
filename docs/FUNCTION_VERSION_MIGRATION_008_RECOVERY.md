@@ -78,6 +78,16 @@ que le conteneur privé exact, identifié par son nom, ID, image et montage.
 Une perte du traceur ne laisse pas de processus suspendu indéfiniment. Les
 scénarios de perte propre de cette garde restent distincts du nominal.
 
+Le module natif prend en charge le conteneur depuis son wrapper arrêté jusqu'à
+sa suppression confirmée après relance. Il garde le timer armé pendant le retour
+à007, le redémarrage du même ID et la vérification008. Sa restitution normale
+retire le seul conteneur privé sous verrou, inscrit un reçu terminal puis désarme.
+Une garde déjà déclenchée relit ce reçu après acquisition du même verrou et ne
+signale plus le parent. Sinon elle vérifie ID/image/labels/bind avant de joindre
+le traceur exact par pidfd/naissance/empreinte d'arguments, puis retire cette
+copie. Une disparition native déjà confirmée reste distincte d'une suppression.
+Le contrôle servi et la référence ne sont jamais des cibles admissibles.
+
 ## Résultats et régression
 
 Le témoin007 non fauté applique008 par le vrai démarrage avant l'échec attendu

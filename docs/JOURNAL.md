@@ -4583,3 +4583,15 @@ ne sont pas encore implémentées ; candidate non servie, bascule et replays pub
 restent à faire. Le complément et SLS-074 restent[~]. Preuve :
 evidence/function-version-migration008-checkpoint-dev-2026-11-09.json. Les résultats
 documentaires suivent le gel275, sans changement exécutable. Aucun remote Git.
+
+## 2026-11-09 — Fenêtre native WAL décidée
+
+Le checkpoint neuf est conservé avant extension. Le module d'observation gardera
+le conteneur privé sous garde jusqu'à sa suppression, après retour007 puis
+relance008 du même ID. La fin normale retire la copie sous verrou, écrit le reçu
+terminal puis désarme ; la garde indépendante ne peut plus tuer le parent après
+ce reçu. Avant un retrait forcé elle vérifie ID/image/labels/bind et joint le
+traceur exact. Cette prise en charge couvre aussi le wrapper SIGSTOP du second
+démarrage ; elle ne s'arrête pas à la première coupure. Les métadonnées de frame
+WAL sont lues sans toucher aux pages ni aux résultats de syscall. La candidate
+reste non servie pendant cette qualification.
