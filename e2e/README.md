@@ -1511,3 +1511,20 @@ et retour de hash. Le handler d'allocation attend20s pour recouper Docker.
 Prévoir environ15 minutes. Le lecteur `schedule-memory-inspect.py` accepte les
 trois UUID exacts et vérifie les purges physiques. Aucun budget officiel modifié.
 Contrat et discriminants : [SCHEDULE_MEMORY_VERSION](../docs/SCHEDULE_MEMORY_VERSION.md).
+
+## Files pleines des tirs planifiés
+
+`node e2e/schedule-queues.mjs`, seul sur le SPARK au repos et avec une session
+SSO réelle, crée neuf fonctions originales puis observe trois fenêtres UTC.
+Seize vrais POST HTTPS au corps incomplet remplissent la file de la première
+cible ;128 répartis sur huit fonctions remplissent ensuite la file globale,
+avec zéro réception sur la seconde cible. Les deux tirs doivent être refusés
+queue_full sans invocation ; les clients sont déconnectés/rejoints avant les
+succès HTTP et planifiés suivants. Prévoir environ15 minutes d'horloge réelle.
+
+Le lecteur strict `schedule-queue-inspect.py` accepte les neuf UUID et leurs
+instances connues ; `--waiting` relève seulement SQL RO, sous propriétaire,
+pour recouper les files dans le délai normal30s. Après les neuf purges publiques,
+`--purged` recoupe ressources physiques, artefacts et backend embarqué. Sources
+et images sont figées pendant la campagne ; aucun budget officiel modifié,
+aucune dépendance à la garde SLS-099. Contrat : [SCHEDULE_QUEUES](../docs/SCHEDULE_QUEUES.md).
