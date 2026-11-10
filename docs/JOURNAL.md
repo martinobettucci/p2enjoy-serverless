@@ -5613,3 +5613,14 @@ sans changement » contredirait le contrat de restitution. La revue spécialisé
 en lecture seule est recoupée par l'agent principal ; aucune unité doublon ni
 décision produit ajoutée. L'unique entrée quitte le registre, supprimé car vide.
 SLS-099 reste ouverte et préalable au test du plafond global de SLS-078.
+
+## 10 novembre2026 — Autorité de restitution du plafond
+
+Reprise099 : main propre/synchronisée ; GET console env/suggestions200, plafond32.
+L'exploration source recoupée établit que les écritures console n'ont pas de
+précondition sur l'entrée active ; updated_at est à la seconde. Décision avant
+code : refuser la baisse dans le helper tant que l'autorité ne sait pas comparer
+une version active dans sa transaction. Une relecture client laisse une course
+et n'est pas retenue comme garantie. Contrat INSTANCE_LIMIT_RESTORATION : preuve
+réelle du refus sans mutation d'abord ; restitution indépendante et tous ses
+scénarios restent requis après capacité externe. FORGE ne sera pas modifiée.

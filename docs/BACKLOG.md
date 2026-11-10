@@ -69,7 +69,7 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
-| 1 | [SLS-099](#sls-099) Restitution du plafond d'instances de qualification | Corriger | `[ ]` | SLS-040 | cette unité |
+| 1 | [SLS-099](#sls-099) Restitution du plafond d'instances de qualification | Corriger | `[~]` | capacité conditionnelle externe | [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
@@ -115,6 +115,7 @@ la réponse est livré sans attendre.
 | Budget de cellule CPU/RAM pour les minima de la référence (au moins 1,5 CPU et 2 Gio) | 4 (proposition `.?` au propriétaire du SPARK) | La campagne complète de [SLS-080](#sls-080) | Adaptateur, fixtures, 12 des 13 fonctions à un budget plus bas, preuves hors budget |
 | Autorité d'installation temporaire pour rejouer le guide | 4 | [SLS-079](#sls-079) | Rédaction du guide, tableau de configuration comparé au code |
 | Comptes SSO de test (non vérifié, vérifié, admin) et rotation de clé réelle | 4 | Preuves de [SLS-089](#sls-089) | Correctifs et tests de composants |
+| Écriture conditionnelle de l'entrée active dans la console SPARK | 4 (capacité externe ; FORGE hors périmètre) | Restitution garantie [SLS-099](#sls-099), test du plafond global de SLS-078 | Refus préventif du helper ; autres preuves SLS-078 et unités indépendantes |
 
 ## Suivi des demandes du responsable
 
@@ -2038,9 +2039,11 @@ substitution ; manuel et matrice de parité mis à jour avec la livraison.
 <a id="sls-099"></a>
 ## SLS-099 — Restitution du plafond d'instances de qualification
 
-Statut : [ ] — défaut du helper relevé par lecture le10 novembre2026, sans
-écrasement réel provoqué. Nature : Corriger. Dépend de : SLS-040. Ordre : 1,
+Statut : [~] — correction en cours ; pas de précondition d'écriture active dans
+la console normale examinée, capacité externe nécessaire. Aucun écrasement réel
+provoqué. Nature : Corriger. Dépend de : SLS-040. Ordre : 1,
 préalable à la preuve du plafond global de SLS-078.
+Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md).
 
 Constat : e2e/instance-limit-guard.py restaure32 dans finally sans vérifier la
 valeur active ; une édition concurrente peut être écrasée. Le délai180s n'est
