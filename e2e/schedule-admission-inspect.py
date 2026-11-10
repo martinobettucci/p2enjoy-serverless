@@ -14,7 +14,10 @@ assert len(campaign['function_ids']) == 5
 assert len(set(campaign['function_ids'])) == 5
 assert all(str(UUID(v)) == v for v in campaign['function_ids'])
 purged = len(sys.argv) == 3 and sys.argv[2] == '--purged'
-program = 'campaign=' + repr(campaign) + '\npurged=' + repr(purged) + '\n' + r'''
+idle_call = sys.argv[3] if len(sys.argv) == 4 and sys.argv[2] == '--idle' else None
+assert len(sys.argv) == 2 or purged or idle_call
+if idle_call:assert str(UUID(idle_call)) == idle_call
+program = 'campaign=' + repr(campaign) + '\npurged=' + repr(purged) + '\nidle_call=' + repr(idle_call) + '\n' + r'''
 import hashlib,json,re,socket,subprocess,sys,shlex,os,time
 from pathlib import Path
 assert os.geteuid()==0 and socket.gethostname()=='infra-serverless'
@@ -23,7 +26,7 @@ for line in Path('/etc/spark/env').read_text().splitlines():
  fields=shlex.split(line,comments=True)
  if len(fields)==1 and fields[0].startswith('SERVERLESS_STORAGE_ROOT_HOST='):settings['storage_root']=fields[0].split('=',1)[1]
 sys.path.insert(0,str(root/'e2e'))
-from control_database import read_control,control_owner
+from control_database import read_control,control_owner,ControlObserver
 from contextlib import closing
 import sqlite3
 ids=campaign['function_ids'];marks=','.join('?' for _ in ids)
@@ -40,6 +43,30 @@ with read_control(root/'state/control.sqlite3') as db:
  instances=[dict(v) for v in db.execute('SELECT id,function_id,revision_id,cpu_nanos,memory_mib,state,created_at,ready_at,last_used_at FROM execution_instances WHERE function_id IN ('+marks+') ORDER BY id',ids)]
  cursor=db.execute('SELECT window_at FROM schedule_cursor WHERE singleton=1').fetchone()[0]
  counts={n:db.execute(q).fetchone()[0] for n,q in {'functions':'SELECT count(*) FROM functions WHERE deleted_at IS NULL','instances':'SELECT count(*) FROM execution_instances','operations':'SELECT count(*) FROM function_operations','active_calls':"SELECT count(*) FROM invocations WHERE state IN ('receiving','queued','admitted','running')",'reserved_bytes':'SELECT coalesce(sum(reserved_bytes),0) FROM deployments'}.items()}
+if idle_call:
+ call=next(v for v in invocations if v['id']==idle_call);assert call['completed_at'] and call['state']=='succeeded' and call['instance_id']
+ with read_control(root/'state/control.sqlite3') as db:
+  config=json.loads(db.execute('SELECT config_json FROM functions WHERE id=?',(call['function_id'],)).fetchone()[0])
+ idle=config['idle_seconds'];assert idle==10 and config['min_instances']==0
+ reader=ControlObserver(root/'state/control.sqlite3');reader.open()
+ def sample():
+  started=time.time();rows=reader.rows('SELECT id,state,last_used_at FROM execution_instances WHERE id=? AND function_id=?',(call['instance_id'],call['function_id']))
+  return {'started_at':started,'finished_at':time.time(),'items':rows}
+ try:
+  first=sample();assert len(first['items'])==1 and first['items'][0]['state']=='ready','first_idle_observation_missing'
+  initial=first['items'][0];threshold=initial['last_used_at']+idle;assert first['finished_at']<threshold
+  last=first;deadline=time.monotonic()+30
+  while True:
+   current=sample()
+   if not current['items']:
+    assert current['started_at']>=threshold-.1,'retired_before_idle'
+    assert current['finished_at']<=threshold+10,'idle_retirement_late'
+    print(json.dumps({'completed':True,'scenario':'measured-idle-retirement','function_id':call['function_id'],'invocation_id':idle_call,'instance_id':call['instance_id'],'idle_seconds':idle,'threshold':threshold,'first':first,'last_present':last,'first_absent':current,'observer_joined':True}));break
+   assert current['items'][0]['last_used_at']==initial['last_used_at'],'idle_instance_reused'
+   last=current;assert time.monotonic()<deadline and current['finished_at']<=threshold+10
+   time.sleep(.05)
+ finally:reader.close()
+ sys.exit(0)
 D=['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock']
 services=json.loads(subprocess.check_output(D+['inspect','serverless-api','serverless-runtime-reference'],text=True));assert all(v['State']['Health']['Status']=='healthy' for v in services)
 containers=[]
