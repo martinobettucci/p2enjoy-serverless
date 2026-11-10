@@ -12,6 +12,11 @@
 
 ### Planifications en cours de qualification
 
+- Refus pendant un vidage de cache qualifié sur322 sources : vraie faute bornée,
+  commande commit/pending, tir refused_unavailable sans invocation, restitution
+  connue puis prochain tir sain avec donnée conservée et cache vide. Quatre
+  groupes, trois handlers réussis, une purge et une garde terminées ; SLS-078 ouverte.
+
 - Files pleines qualifiées sur319 sources par quatre groupes réels :16 attentes
   individuelles puis128 globales, deux tirs queue_full sans invocation,144
   déconnexions avant handler et quatre succès après libération. Neuf fonctions

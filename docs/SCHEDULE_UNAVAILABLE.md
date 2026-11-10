@@ -78,3 +78,29 @@ Cette campagne ne provoque ni SIGKILL du helper ni arrêt du contrôle ; leurs
 preuves antérieures restent distinctes. Aucun budget, fichier officiel,
 migration, UI/manuel ou image produit modifié. Plafond global (SLS-099),
 rétention réelle, états UI et régression complète gardent SLS-078 ouverte.
+
+## Résultats qualifiés
+
+La [preuve DEV du10 novembre2026](evidence/schedule-unavailable-dev-2026-11-10.json),
+client5cb8564, passe quatre groupes sur322 sources figées et même image b9ad872a.
+À20:55UTC, commande clear-cache pending/volumes/storage_io_error et garde commit,
+cache du même inode root/mode000, contenu conservé, aucune instance ni bail.
+Le tir devient refused_unavailable/execution_unavailable, lienNULL et aucune
+invocation supplémentaire ; le curseur a franchi sa fenêtre.
+
+Après restitution explicite confirmée, le même UUID termine sans nouveau POST :
+version agent1 connue dans la garde et l'intention, reçu expected1/version2,
+opération retirée, donnée identique et cache vidé. Configuration et génération
+planifiée sont conservées. À21:00, le tir du même hash réussit, POST/corps{},
+donnée conservée et cacheNULL recoupés dans son journal. Un HTTP sain relit ces
+valeurs ; le premier tir reste refusé, sans rejeu. Total : deux tirs, trois
+invocations réussies (deux HTTP/une planifiée).
+
+La fonction est purgée publiquement ; code/volumes/conteneur/réseau/canal/bail
+absents, compteurs nuls, helper et unités terminés. Les34 backends,5982 artefacts,
+images/services/démarrages et fichiers officiels sont conservés. Aucun build
+produit, UI/manuel ou capture nouveau. La revue préalable a corrigé jonction
+SSH, erreurs de flux et chaîne des versions ; leurs pannes propres ne sont pas
+prétendues provoquées par cette campagne nominale. Maximum sous HTTP non exclusif,
+réutilisation préchauffée, plafond global (SLS-099), rétention, UI et régression
+restent à recouper avant clôture078.

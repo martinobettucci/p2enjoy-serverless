@@ -373,5 +373,22 @@ Les144 déconnexions sont terminales499 sans admission ni handler. Deux POST sai
 puis deux prochains tirs réussissent ; quatre tirs et148 invocations au total,
 aucun rejeu. Neuf fonctions purgées physiquement, actifs/réservations nuls,
 34 backends,5982 artefacts et services/configuration conservés. Aucun produit,
-budget, UI/manuel ou capture modifié. Restent plafond global (SLS-099), refus
-d'indisponibilité, rétention réelle, états UI et régression complète.
+budget, UI/manuel ou capture modifié. Le refus d'indisponibilité suit ci-dessous ;
+maximum sous HTTP non exclusif, réutilisation préchauffée, plafond global (SLS-099),
+rétention réelle, états UI et régression complète restent ouverts.
+
+## Commande de cache en cours et prochain tir
+
+La [preuve du10 novembre2026](evidence/schedule-unavailable-dev-2026-11-10.json)
+passe quatre groupes sur322 sources, client5cb8564 et même image b9ad872a.
+Le [plan et ses résultats](SCHEDULE_UNAVAILABLE.md#résultats-qualifiés) recoupent
+20:55/21:00UTC : vrai cache refusé par permissions sous garde, clear-cache
+commit/pending/storage_io_error, tir refused_unavailable sans invocation.
+Restitution explicite connue, même commande terminée sans nouveau POST, chaîne
+des versions agent1→2 et donnée conservée/cache vide ; prochain tir et HTTP sains.
+
+Deux tirs, trois handlers réussis, une purge physique et garde terminée, aucun
+rejeu. Les322 sources,34 backends,5982 artefacts et identités/images/démarrages/
+fichiers officiels sont conservés. Aucun contrôle ou agent arrêté, budget,
+image produit, UI/manuel ou capture modifié. Les autres preuves nommées ci-dessus
+gardent SLS-078 ouverte ; les pannes propres du banc ne sont pas déduites du nominal.

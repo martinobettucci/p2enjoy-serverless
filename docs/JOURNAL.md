@@ -5679,3 +5679,25 @@ donne refused_unavailable/execution_unavailable sans invocation. Plan
 SCHEDULE_UNAVAILABLE persisté avant code : une fonction originale, données/cache
 réels, faute proche W, restitution explicite connue puis prochain tir W+300.
 Aucun arrêt de l'agent/contrôle, budget ou configuration changé ;099 reste distinct.
+
+## 10 novembre2026 — Tir refusé sous vidage de cache qualifié
+
+Client5cb8564 : quatre groupes passent sur322 sources, fenêtres20:55/21:00UTC.
+Sous vraie permission cache refusée : même inode/contenu, clear-cache commit et
+pending/volumes/storage_io_error, tir refused_unavailable/execution_unavailable
+sans invocation ni réservation. Restitution explicite connue, même reçu terminé
+sans nouveau POST, chaîne agent1→2, configuration/génération/donnée conservées,
+cache vidé. Prochain tir et HTTP sains, refus initial inchangé, aucun rejeu.
+
+Collecte indépendante : deux tirs, trois handlers réussis (deux HTTP/une
+planifiée), une purge physique, helper/unités terminés et compteurs actifs nuls.
+Même contrôle/référence/configuration,34 backends et5982 artefacts conservés.
+Preuve : evidence/schedule-unavailable-dev-2026-11-10.json. Aucun build produit,
+arrêt contrôle/agent, changement UI/manuel ou capture. Les trois corrections de
+revue concernent le pilote : jonction bornée, erreurs de flux, version agent ;
+leurs pannes propres ne sont pas prétendues éprouvées.
+
+Reprendre078 : précontrôle du maximum d'une fonction sous HTTP non exclusif et
+réutilisation d'instance préchauffée pour un tir, puis rétention réelle, états UI
+et régression complète. Le plafond global reste dépendant de099. Les critères
+restent ouverts ; aucune entrée nouvelle du registre d'incohérences.

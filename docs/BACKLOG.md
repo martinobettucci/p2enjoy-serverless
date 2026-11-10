@@ -1518,10 +1518,14 @@ Les [files pleines](evidence/schedule-queues-dev-2026-11-10.json) passent quatre
 groupes sur319 sources : plafonds réels16/128, deux tirs queue_full sans invocation,
 144 réceptions déconnectées avant handler, deux succès HTTP puis deux planifiés.
 Neuf fonctions purgées physiquement ; aucun budget modifié. [Plan et résultats](SCHEDULE_QUEUES.md).
-Les indisponibilités résiduelles, plafond global d'instances, rétention, états UI
-et régression restent ouverts ; aucune clôture de SLS-078.4/.5 sur cette tranche.
-Suite d'indisponibilité : [SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md), à
-qualifier par une vraie commande cache-clear en cours et sa reprise après restitution.
+Le [refus sous commande de cache](evidence/schedule-unavailable-dev-2026-11-10.json)
+passe quatre groupes sur322 sources : garde commit/pending sous storage_io_error,
+tir refused_unavailable sans invocation, même reçu terminé après restitution,
+prochain tir et données conservés. Trois handlers réussis, une fonction purgée
+et garde terminée. [Plan et résultats](SCHEDULE_UNAVAILABLE.md).
+Restent à recouper pour les tirs : maximum d'une fonction occupée par HTTP
+non exclusif et réutilisation préchauffée ; plafond global d'instances (SLS-099),
+rétention réelle, états UI et régression complète. SLS-078.4/.5 restent ouvertes.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.

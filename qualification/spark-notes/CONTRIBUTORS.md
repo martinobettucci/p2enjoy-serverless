@@ -803,3 +803,9 @@ quatre tirs/148 invocations dont144 déconnexions avant handler et quatre succè
 Deux refus queue_full sans invocation, neuf purges physiques,34 backends et5982
 artefacts conservés ; aucun rebuild produit ni budget changé. Preuve :
 `docs/evidence/schedule-queues-dev-2026-11-10.json`. SLS-078 reste ouverte.
+
+Indisponibilité planifiée qualifiée au client5cb8564 : quatre groupes/322 sources,
+deux tirs/trois invocations réussies, une commande cache reprise sans nouveau POST,
+une purge physique et garde terminée. Le reçu agent1→2 et la donnée conservée
+sont recoupés ; mêmes services/fichiers,34 backends et5982 artefacts. Preuve :
+`docs/evidence/schedule-unavailable-dev-2026-11-10.json`. Critères078 résiduels ouverts.

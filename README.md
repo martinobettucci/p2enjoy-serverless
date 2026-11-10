@@ -43,6 +43,10 @@ Les [files pleines des tirs](docs/evidence/schedule-queues-dev-2026-11-10.json)
 passent quatre groupes sur319 sources :16 réceptions individuelles,128 globales,
 deux refus sans invocation puis deux succès HTTP et deux planifiés après libération.
 Les144 réceptions déconnectées et les neuf purges physiques sont recoupées.
+Le [refus sous vidage de cache](docs/evidence/schedule-unavailable-dev-2026-11-10.json)
+passe quatre groupes sur322 sources : commande réellement pending, tir refusé
+sans invocation, même reçu terminé après restitution puis prochain tir sain.
+Trois handlers conservent la donnée ; fonction purgée et garde terminée.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

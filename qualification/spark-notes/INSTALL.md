@@ -729,3 +729,9 @@ ouverte ; ne pas utiliser le nominal historique comme garde concurrente qualifi�
 déconnexions rejointes, prochains appels/tirs sains et neuf purges physiques.
 Le lecteur `schedule-queue-inspect.py --waiting` est réservé au banc avec ses
 neuf UUID ; aucun budget ni fichier officiel changé. Restent les critères078 résiduels.
+
+`node e2e/schedule-unavailable.mjs` passe quatre groupes sur20:55/21:00UTC : cache
+refusé par permissions sous la garde existante100s, vraie commande pending,
+refus sans invocation, restitution explicite et reprise du même reçu puis tir sain.
+La purge attend la restitution connue ; fonction et ressources absentes, garde
+terminée. Aucun contrôle/agent arrêté ni budget changé. Contrat SCHEDULE_UNAVAILABLE.

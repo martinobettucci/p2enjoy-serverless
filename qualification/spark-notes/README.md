@@ -698,3 +698,9 @@ une cible puis128 globales avec autre cible libre, deux refus queue_full sans
 invocation,144 déconnexions avant handler et quatre succès après libération.
 Neuf fonctions purgées, mêmes services/fichiers et5982 artefacts. Preuve :
 docs/evidence/schedule-queues-dev-2026-11-10.json. Les autres critères078 restent ouverts.
+
+Le refus pendant un vidage de cache passe quatre groupes sur322 sources : vraie
+commande pending sous faute bornée, tir refusé sans invocation, restitution connue
+puis même reçu terminé et prochain tir sain. Trois handlers conservent la donnée,
+cache vidé, fonction purgée et garde terminée. Preuve :
+docs/evidence/schedule-unavailable-dev-2026-11-10.json. SLS-078 reste ouverte.
