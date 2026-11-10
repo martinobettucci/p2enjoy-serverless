@@ -69,6 +69,7 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
+| 1 | [SLS-099](#sls-099) Restitution du plafond d'instances de qualification | Corriger | `[ ]` | SLS-040 | cette unité |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
@@ -1507,6 +1508,8 @@ antérieurs et leurs dix purges restent séparés. [Plan et résultats](SCHEDULE
 SLS-078.4/.5 restent ouvertes pour les précontrôles planifiés RAM/instances,
 les autres refus avant admission et la rétention ; états UI et régression complète
 restent ouverts. Aucun changement produit ni nouvelle capture dans ce complément.
+Suite RAM/version : [SCHEDULE_MEMORY_VERSION](SCHEDULE_MEMORY_VERSION.md), à qualifier.
+La preuve du plafond global dépend de la correction SLS-099 ; RAM/version restent livrables.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.
@@ -2027,3 +2030,29 @@ Critères d'acceptation :
 Tests exigés : validation par les API réelles, déploiement de manifeste avec
 noms, prévisions comparées et invocation planifiée sur l'horloge réelle, sans
 substitution ; manuel et matrice de parité mis à jour avec la livraison.
+
+
+<a id="sls-099"></a>
+## SLS-099 — Restitution du plafond d'instances de qualification
+
+Statut : [ ] — défaut du helper relevé par lecture le10 novembre2026, sans
+écrasement réel provoqué. Nature : Corriger. Dépend de : SLS-040. Ordre : 1,
+préalable à la preuve du plafond global de SLS-078.
+
+Constat : e2e/instance-limit-guard.py restaure32 dans finally sans vérifier la
+valeur active ; une édition concurrente peut être écrasée. Le délai180s n'est
+pas une garde indépendante et SIGKILL du helper n'exécute pas finally.
+
+Critères d'acceptation :
+
+- [ ] SLS-099.1 Correction documentée avant code, autorité bornée au seul SPARK
+  infra-serverless et à SERVERLESS_FUNCTION_INSTANCE_LIMIT, API console normale.
+- [ ] SLS-099.2 Restitution corrélée à l'application possédée, valeur concurrente
+  conservée et issue inconnue signalée ; aucune adoption silencieuse.
+- [ ] SLS-099.3 Restitution indépendante après perte réelle du helper, attente de
+  fin des processus/gardes et valeur officielle/consommée cohérente.
+- [ ] SLS-099.4 Parcours nominal32→2→32, EOF/SIGTERM, SIGKILL et édition concurrente
+  réellement éprouvés, sans mocks ; mêmes autres configurations et référence.
+
+Le scénario nominal historique reste conservé. Ses pannes ne sont pas déduites
+de ce succès. Aucun changement de FORGE ni profil PREPROD/PROD.

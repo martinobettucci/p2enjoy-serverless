@@ -5562,3 +5562,15 @@ ultérieurs sont conservés. Preuve : evidence/schedule-admission-dev-2026-11-10
 Reprendre078 : précontrôles planifiés RAM/instances, autres refus avant admission,
 rétention réelle, états UI et régression complète. Les critères restent ouverts ;
 aucun nouveau registre d'incohérences.
+
+
+## 10 novembre2026 — Préparer RAM et changement de version en file
+
+Reprise078 après admission CPU qualifiée : SPARK au repos, mêmes services et
+configuration. Le plan SCHEDULE_MEMORY_VERSION fixe trois fonctions originales
+et trois fenêtres : refus RAM sans invocation, promotion B après réception A
+en file, puis prochains tirs après libération/retour A. Aucun budget officiel
+modifié. Le plafond global suit séparément : la revue du helper historique
+révèle une restitution sans contrôle de la valeur concurrente et sans garde
+indépendante après SIGKILL ; constat inscrit au registre et dans SLS-099 avant
+correction. La console normale est disponible ; aucun plafond encore changé.
