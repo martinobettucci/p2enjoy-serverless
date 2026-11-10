@@ -5749,3 +5749,10 @@ privé conservé. Le banc récupère désormais l'UUID dans l'URL de destination
 comme invocation-pagination, et retrouve ses propres identités avant nettoyage
 si la préparation est interrompue. Ce passage ne prouve aucun état de tir ni
 le défaut de pagination ; son rapport reste distinct, sans groupe ajouté.
+
+Le passage500a7ae/b30168bb atteint six handlers réussis à21:55UTC et purge ses
+deux fonctions. Il s'arrête avant le scénario401 : le banc lisait le compteur
+de cartes dès le changement de rang, avant la réponse de la seconde page.
+La capture montre encore cinq cartes pendant cette transition ; elle ne prouve
+pas le contenu final. Le banc attend désormais le vrai GET200 du bon offset
+avant de lire cartes et focus. Ce passage n'est pas un succès de pagination.
