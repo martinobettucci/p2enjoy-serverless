@@ -5574,3 +5574,23 @@ modifié. Le plafond global suit séparément : la revue du helper historique
 révèle une restitution sans contrôle de la valeur concurrente et sans garde
 indépendante après SIGKILL ; constat inscrit au registre et dans SLS-099 avant
 correction. La console normale est disponible ; aucun plafond encore changé.
+
+## 10 novembre2026 — RAM et changement de version avant admission qualifiés
+
+Client510d820 : cinq groupes réussis sur316 sources figées, fenêtres19:40/45/50UTC.
+Le refus RAM est isolé :256Mio réservés+8192Mio demandés dépassent8192 ; CPU et
+places restent disponibles. Aucun lien/invocation/instance créé pour ce tir.
+Le tir A queued est refusé après promotion B sans cron, sans admission ni handler ;
+le HTTP admis A termine avec compteur1, lecture B compteur1. Après retrait du
+minimum, ressources globales/nulles et canal préchauffé recoupés avant le tir RAM.
+Celui-ci réussit avec plafond Docker8192Mio/0,05CPU, contexte8192Mio, handler20,006s.
+Retour A puis tir suivant compteur2 ; refus relus sans rejeu.
+
+Collecte native : quatre tirs, cinq invocations dont quatre handlers réussis,
+trois purges physiques, actifs/réservations nuls. Même contrôle/référence,
+IDs/images/démarrages/fichiers officiels,34 backends et5982 artefacts conservés.
+Aucun produit, budget officiel, UI/manuel ni capture modifié. Preuve :
+evidence/schedule-memory-version-dev-2026-11-10.json. Les contrôles source du
+registre suivent après ces preuves ; SLS-099 reste un préalable au plafond global.
+Reprendre078 : plafond global, refus résiduels, rétention réelle, états UI et
+régression complète. La campagne complète n'est pas prétendue rejouée.

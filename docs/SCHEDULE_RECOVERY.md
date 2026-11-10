@@ -115,5 +115,7 @@ checkpoints précédents ne sont pas ajoutés à ce total ni prétendus rejoués
 Les autres branches de secours du banc ne sont pas qualifiées par ce passage.
 Recouvrement, CPU, stockage exclusif/file/deadline/extinction sont ensuite
 qualifiés dans [SCHEDULE_ADMISSION](SCHEDULE_ADMISSION.md#résultats-qualifiés).
-Précontrôles RAM/instances, autres refus avant admission, rétention, états UI
-complémentaires et régression complète restent ouverts : SLS-078[~].
+RAM et changement de version avant admission sont qualifiés ensuite dans
+[SCHEDULE_MEMORY_VERSION](SCHEDULE_MEMORY_VERSION.md#résultats-qualifiés).
+Plafond global d'instances, refus résiduels, rétention, états UI complémentaires
+et régression complète restent ouverts : SLS-078[~].

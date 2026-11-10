@@ -125,3 +125,7 @@ antérieurs, identités/images/démarrages et fichiers officiels sont conservés
 Les deux essais restent séparés du total : cinq fonctions initiales purgées,
 puis cinq purgées avant fenêtre sans tir ni invocation. Aucun build produit,
 changement UI/manuel ou capture nouvelle. Les autres critères078 restent ouverts.
+
+La [suite RAM/version](SCHEDULE_MEMORY_VERSION.md#résultats-qualifiés) qualifie
+ensuite le refus mémoire isolé et le changement de hash après réception en file.
+Le plafond global d'instances dépend de SLS-099 ; les critères résiduels restent ouverts.

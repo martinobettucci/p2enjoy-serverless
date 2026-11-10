@@ -1505,11 +1505,14 @@ groupes sur313 sources : deux refus CPU sans invocation, deux files exclusives,
 deadline après démarrage, recouvrement315s, deux extinctions mesurées et prochain
 tir sans rejeu. Sept handlers réussis, cinq fonctions purgées ; les deux essais
 antérieurs et leurs dix purges restent séparés. [Plan et résultats](SCHEDULE_ADMISSION.md).
-SLS-078.4/.5 restent ouvertes pour les précontrôles planifiés RAM/instances,
-les autres refus avant admission et la rétention ; états UI et régression complète
-restent ouverts. Aucun changement produit ni nouvelle capture dans ce complément.
-Suite RAM/version : [SCHEDULE_MEMORY_VERSION](SCHEDULE_MEMORY_VERSION.md), à qualifier.
-La preuve du plafond global dépend de la correction SLS-099 ; RAM/version restent livrables.
+La [suite RAM/version](evidence/schedule-memory-version-dev-2026-11-10.json)
+passe cinq groupes sur316 sources : refus RAM sans invocation, changement A→B
+après réception en file sans handler, allocation réelle8192Mio puis retour A,
+compteur conservé et aucun rejeu. Quatre handlers réussis, trois fonctions purgées.
+[Plan et résultats](SCHEDULE_MEMORY_VERSION.md).
+SLS-078.4/.5 restent ouvertes pour le plafond global d'instances (préalable
+SLS-099), autres refus résiduels et rétention ; états UI et régression complète
+restent ouverts. Aucun changement produit, budget officiel ni nouvelle capture.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.

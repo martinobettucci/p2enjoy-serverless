@@ -709,5 +709,12 @@ rétention, états UI et régression complète restent à qualifier.
 baux, CPU refusé sans invocation, files exclusives avec succès/expiration,
 deadline après démarrage, recouvrement315s, extinctions mesurées, prochain tir
 normal et cinq purges. Plan : SCHEDULE_ADMISSION. Aucun budget, fichier officiel,
-image ou migration modifié. Les précontrôles RAM/instances et autres refus,
-rétention, états UI et régression complète restent ouverts.
+image ou migration modifié. Le complément ci-dessous qualifie la RAM ; plafond
+global d'instances, refus résiduels, rétention, états UI et régression complète
+restent ouverts.
+
+`node e2e/schedule-memory-version.mjs` passe cinq groupes sur trois fenêtres :
+refus RAM isolé, changement A→B en file, libération des réservations et canaux,
+prochain tir8192Mio réel, retour A compteur2 puis trois purges publiques.
+Aucune variable, route, image ou migration modifiée. Le plafond global suit
+la garde SLS-099 ; les autres preuves résiduelles restent dans SLS-078.

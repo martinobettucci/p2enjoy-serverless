@@ -784,3 +784,10 @@ Neuf invocations dont sept handlers réussis, cinq purges physiques et compteurs
 nuls ; même contrôle/référence/configuration et5982 artefacts conservés. Les
 deux essais restent séparés, dix autres fonctions purgées. Aucun rebuild produit.
 Preuve : `docs/evidence/schedule-admission-dev-2026-11-10.json`.
+
+La RAM et le changement de version avant admission sont qualifiés au client510d820 :
+cinq groupes/316 sources, quatre tirs/cinq invocations, quatre handlers réussis,
+trois purges physiques et compteurs nuls. Vrai plafond Docker8192Mio/0,05CPU,
+compteur données1→1→2 au passage A/B/A, aucun rejeu des refus. Même produit,
+référence, configuration officielle et5982 artefacts. Preuve :
+`docs/evidence/schedule-memory-version-dev-2026-11-10.json`.

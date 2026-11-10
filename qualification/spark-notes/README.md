@@ -676,5 +676,13 @@ L'admission passe cinq groupes sur313 sources : deux refus CPU sans invocation,
 files exclusives, deadline après démarrage, handler315s sans recouvrement et
 extinctions idle10s mesurées. Sept handlers réussis, cinq fonctions purgées ;
 essais antérieurs et leurs nettoyages restent séparés. Preuve :
-docs/evidence/schedule-admission-dev-2026-11-10.json. Précontrôles RAM/instances,
-autres refus, rétention, états UI et régression complète restent ouverts.
+docs/evidence/schedule-admission-dev-2026-11-10.json. Le complément RAM/version
+ci-dessous qualifie la mémoire ; plafond global d'instances, refus résiduels,
+rétention, états UI et régression complète restent ouverts.
+
+La suite RAM/version passe cinq groupes sur316 sources : refus mémoire sans
+invocation, A reçue en file puis refusée après promotion B, plafond Docker8192Mio
+observé au prochain tir, retour A compteur2 et aucun rejeu. Quatre handlers
+réussis, trois fonctions purgées ; mêmes services/configuration et5982 artefacts.
+Preuve : docs/evidence/schedule-memory-version-dev-2026-11-10.json. Plafond global
+d'instances (garde SLS-099), refus résiduels, rétention et états UI restent ouverts.

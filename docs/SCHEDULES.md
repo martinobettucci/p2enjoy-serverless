@@ -238,7 +238,7 @@ compilé concorde avec16 chapitres et56 paragraphes : SLS-096 est clos.
 
 Le cycle promotions/retour de hash/retrait et suppression autour des fenêtres,
 puis les coupures et reprises sont qualifiés séparément ci-dessous. Reprendre
-dans cette unité : précontrôles planifiés RAM/instances et autres refus avant admission ;
+dans cette unité : plafond global d'instances et refus résiduels avant admission ;
 rétention réelle, dont l'invocation source conservée jusqu'à clôture ; états
 UI vide/erreur/longs et pagination. La régression complète reste à exécuter.
 Les noms de mois et de jours sont suivis séparément dans SLS-098.
@@ -339,5 +339,23 @@ et les lectures API ne présentent plus de planification. Actifs/réservations n
 34 backends et5982 artefacts conservés, identités/images/démarrages et fichiers
 officiels inchangés. Les deux essais et leurs dix fonctions purgées restent hors
 total, dont un arrêt avant fenêtre sans tir/invocation. Aucun build produit,
-UI/manuel modifié ni capture nouvelle. SLS-078 reste[~] pour les précontrôles
-RAM/instances, autres refus avant admission, rétention, états UI et régression complète.
+UI/manuel modifié ni capture nouvelle. Le complément RAM/version suit ci-dessous ;
+plafond global, refus résiduels, rétention, états UI et régression complète restent ouverts.
+
+## Budget mémoire et hash changé avant admission
+
+La [preuve du10 novembre2026](evidence/schedule-memory-version-dev-2026-11-10.json)
+passe cinq groupes sur316 sources figées, même produit b9ad872a. Le
+[plan et les résultats](SCHEDULE_MEMORY_VERSION.md#résultats-qualifiés) rapprochent
+les fenêtres19:40/45/50UTC : refus mémoire sans invocation avec CPU/places encore
+disponibles ; A réellement en file puis rejected/schedule_changed après promotion
+B sans cron ; HTTP admis A terminé, données conservées au passage B puis retour A.
+Après libération, le handler mémoire20s est observé avec plafond Docker8192Mio et
+contexte8192Mio,0,05CPU ; le prochain tir A retrouve compteur2. Aucun rejeu.
+
+Quatre tirs, cinq invocations dont quatre handlers réussis, trois purges physiques
+et ressources nulles sont recoupés. Les316 sources,34 backends,5982 artefacts,
+identités/images/démarrages et fichiers officiels sont conservés. Aucun build
+produit, budget officiel, UI/manuel ou capture nouveau. Le plafond global suit
+SLS-099 pour sa garde ; refus résiduels, rétention, états UI et régression complète
+gardent SLS-078 ouverte.

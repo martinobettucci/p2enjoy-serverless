@@ -30,8 +30,12 @@ L'[admission planifiée](docs/evidence/schedule-admission-dev-2026-11-10.json)
 passe cinq groupes distincts : refus CPU sans invocation, files exclusives,
 deadline après démarrage, recouvrement315s et extinction mesurée. Sept handlers
 réussis et cinq fonctions purgées ; les deux essais antérieurs restent séparés.
-Précontrôles RAM/instances, autres refus, rétention, états UI et régression complète
-restent à éprouver dans SLS-078.
+La [suite RAM/version](docs/evidence/schedule-memory-version-dev-2026-11-10.json)
+qualifie cinq groupes supplémentaires : refus mémoire sans invocation, changement
+de hash pendant la file, vraie allocation8192Mio, libération puis prochains tirs
+sans rejeu. Quatre handlers réussis et trois fonctions purgées. Plafond global
+d'instances, refus résiduels, rétention, états UI et régression complète restent
+à éprouver dans SLS-078 ; la garde du plafond est suivie dans SLS-099.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

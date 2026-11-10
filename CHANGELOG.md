@@ -27,6 +27,11 @@
   d'un handler315s et deux extinctions idle10s mesurées nativement. Sept handlers
   réussis, cinq fonctions purgées ; essais incomplets nettoyés et conservés séparément.
   Précontrôles RAM/instances, autres refus, rétention, UI et régression restent ouverts.
+- RAM et changement de version en file qualifiés par cinq groupes sur316 sources :
+  refus mémoire sans invocation, A rejetée après promotion B, allocation réelle8192Mio,
+  retour A avec compteur conservé et aucun rejeu. Quatre handlers réussis, trois
+  fonctions purgées. Plafond global d'instances et critères résiduels restent ouverts ;
+  la correction de sa garde de qualification est suivie dans SLS-099.
 
 
 ### Méthode, parité Scaleway et planifications (documentation)

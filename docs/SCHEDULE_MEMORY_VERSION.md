@@ -47,3 +47,28 @@ termine ses appels et nettoie avant toute relance explicite.
 Le plafond global d'instances suit séparément la correction de la garde
 [SLS-099](BACKLOG.md#sls-099). Rétention, états UI et régression complète restent
 ouverts ; cette campagne ne clôture pas SLS-078.
+
+## Résultats qualifiés
+
+La [preuve DEV du10 novembre2026](evidence/schedule-memory-version-dev-2026-11-10.json)
+passe cinq groupes sur316 sources figées, client510d820 et même image b9ad872a.
+Fenêtres19:40/45/50UTC. Avant W,256Mio,0,1CPU et deux instances sont réservés ;
+la cible8192Mio ne tient pas en mémoire, alors que CPU et places restent disponibles.
+Son tir est refused_capacity/schedule_capacity sans invocation ni instance.
+
+Le tir A en file est observé avant promotion B. Il devient rejected/schedule_changed,
+sans admission ni handler, avec tir refused_changed. Le HTTP admis A termine
+après la promotion, compteur1 ; la lecture B retrouve compteur1. Minimum et
+instances sont retirés, réseaux/canaux/baux absents avant W+300, y compris le canal
+du minimum sans invocation. Le prochain tir RAM réussit : conteneur réellement
+observé8192Mio/0,05CPU, contexte8192Mio, handler20,006s et seule réservation globale.
+Après retour explicite A, son tir W+600 réussit avec compteur2. Aucun rejeu des
+deux refus ni tir des planifications retirées.
+
+Collecte indépendante : quatre tirs, cinq invocations dont quatre handlers
+réussis (deux planifiés/deux HTTP), une réception rejetée sans handler, trois
+purges physiques et compteurs nuls. Les34 backends,5982 artefacts antérieurs,
+contrôle/référence (ID/image/démarrage) et fichiers officiels sont identiques.
+Aucun build produit, budget officiel, UI/manuel ou capture modifié. Le plafond
+global d'instances, autres refus résiduels, rétention, états UI et régression
+complète restent ouverts ; SLS-099 porte la correction préalable de sa garde.
