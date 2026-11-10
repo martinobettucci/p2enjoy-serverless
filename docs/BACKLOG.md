@@ -1163,10 +1163,15 @@ réécriture d'historique. Les limites de détection restent explicites.
 
 ### SLS-077 — Retirer le briefing privé avant publication
 
-Statut : [~] Autorisé le10 novembre2026, avant modification.
+Statut : [x] Réalisé et vérifié le10 novembre2026.
 
 Exclure docs/dev-spark.md par .gitignore, conserver sa copie locale et retirer
 son chemin de tout l'historique et de toutes les références Git locales.
 [Contrat](GIT_HISTORY_REWRITE.md) : sauvegarde privée, remappage des trois
 lectures Git historiques, preuves datées conservées, comparaison des arbres,
 absence du blob, collecte des objets inaccessibles et archive publique contrôlée.
+
+Retrait vérifié sur263 commits et deux instantanés internes de type tree :
+autres entrées et métadonnées conservées, briefing local intact et ignoré,
+blob absent après collecte, trois sélecteurs historiques remappés et101fichiers
+relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-10.json).

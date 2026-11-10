@@ -31,3 +31,18 @@ excluant seulement ce chemin ; vérifier les parents, auteurs, dates et messages
 Les sources historiques sélectionnées doivent conserver exactement leurs objets
 control/web/manual/validator. Vérifier aussi git fsck, l'archive de publication,
 l'état propre et l'absence de remote. Les vérifications utilisent le vrai dépôt.
+
+## Résultat
+
+Le retrait est réalisé :263 commits remappés, deux références Codex de type tree
+nettoyées et référence de sauvegarde Git retirée. Tous les arbres conservent
+leurs autres entrées ; auteurs, dates, messages et parents sont préservés.
+Le blob du briefing est absent de la base d'objets après expiration des anciens
+reflogs et collecte. La copie locale reste identique et couverte par .gitignore.
+Les trois nouvelles lectures Git sélectionnent les mêmes objets historiques ;
+101 fichiers sont relus par les vrais git archive/show, sans lancer de service.
+
+[Table des commits](GIT_HISTORY_REWRITE_MAP.json) et
+[preuve](evidence/git-history-private-briefing-removed-2026-11-10.json).
+Les sauvegardes privées sont uniquement dans .local ignoré. Aucun remote n'est
+configuré et aucune publication n'est effectuée par cette opération.

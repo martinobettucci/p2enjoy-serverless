@@ -181,3 +181,8 @@ retire exactement une instance, un réseau et un bail par le vrai agent ; les tr
 gardes sont inactives, ressources actives nulles. Les essais antérieurs restent
 séparés du replay final. Les pannes propres de garde, autres interruptions et
 la régression complète008 restent dans SLS-074, toujours[~].
+
+Après le retrait du briefing privé de l'historique, les lectures Git historiques
+utilisent les commits remappés. L'identité revision des attestations reste celle
+des preuves datées ; source_revision précise le commit effectivement lu. Voir
+[réécriture Git](GIT_HISTORY_REWRITE.md) et sa table de correspondance.

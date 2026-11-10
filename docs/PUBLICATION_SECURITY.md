@@ -48,6 +48,8 @@ docs/OIDC_DEV.txt et docs/OIDC_DEV.llms.txt contiennent la déclaration et les
 points d'entrée publics du client, sans son secret. Les identifiants de client,
 issuer et URL de retour ne sont pas des mots de passe.
 
-Aucune réécriture d'historique, rotation d'accès ou publication effectuée par
-cet audit. Le résultat décrit les vérifications ciblées réalisées, sans
+Le complément autorisé de réécriture est réalisé : docs/dev-spark.md est
+localement ignoré et absent de tout l'historique et de la base d'objets Git.
+Ses autres coordonnées DEV dans les scripts et preuves restent présentes.
+Aucune rotation d'accès ou publication effectuée par cette opération. Le résultat décrit les vérifications ciblées réalisées, sans
 certifier une absence absolue de secret inconnu.

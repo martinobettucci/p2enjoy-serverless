@@ -1420,3 +1420,8 @@ la connexion exacte coupée pendant SIGKILL ; aucune tolérance générale aux50
 Les états failed/interrupted/rejected attendus sont des comportements éprouvés,
 pas des groupes ignorés. Les pertes et délais propres du pilote et des anciens
 opérateurs restent distincts de leurs cas réellement provoqués.
+
+Après le retrait du briefing privé de l'historique, les lectures Git historiques
+utilisent les commits remappés. L'identité revision des attestations reste celle
+des preuves datées ; source_revision précise le commit effectivement lu. Voir
+[réécriture Git](../docs/GIT_HISTORY_REWRITE.md) et sa table de correspondance.

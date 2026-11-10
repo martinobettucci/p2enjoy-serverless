@@ -509,3 +509,8 @@ pages de contrat reçoivent les résultats dans l'index de sources. Les opérate
 historiques conservent leurs limites. Aucun nouveau parcours visuel ni changement
 produit/UI/manuel ; console, historique et régression complète008 restent ouverts.
 SLS-074 conserve [~].
+
+Le briefing d'exploitation `docs/dev-spark.md` est fourni localement par le
+propriétaire du SPARK et ignoré par Git. Son retrait de l'historique public et
+la correspondance des commits sont documentés dans
+[la préparation Git](docs/GIT_HISTORY_REWRITE.md).

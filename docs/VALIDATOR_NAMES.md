@@ -174,3 +174,8 @@ attendu de la campagne API. Ressources/réservations et allocations inscrites so
 à zéro ; le runtime de référence conserve ID/image/démarrage. Les31 fichiers
 backend ne diffèrent du checkpoint précédent que par validator ; le web compilé
 est identique. Aucun nouveau parcours UI ni capture fraîche n’est revendiqué.
+
+Après le retrait du briefing privé de l'historique, les lectures Git historiques
+utilisent les commits remappés. L'identité revision des attestations reste celle
+des preuves datées ; source_revision précise le commit effectivement lu. Voir
+[réécriture Git](GIT_HISTORY_REWRITE.md) et sa table de correspondance.

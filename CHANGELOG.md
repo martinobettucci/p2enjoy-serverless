@@ -5,7 +5,8 @@
 ### Préparation de la publication GitHub
 
 - Le briefing privé docs/dev-spark.md devient un fichier local ignoré ; son
-  retrait de l'historique est autorisé et suivi dans GIT_HISTORY_REWRITE.
+  retrait des263 commits et des instantanés internes est vérifié. Les lectures
+  Git historiques sont remappées et les preuves datées conservées.
 
 
 - Première tranche de régression008 des publications qualifiée :76 groupes,

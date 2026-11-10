@@ -1,0 +1,52 @@
+{
+  "completed": true,
+  "scope": "Remove docs/dev-spark.md from all local Git references and reachable history before public publication",
+  "rewritten_commits": 263,
+  "tree_references_sanitized": 2,
+  "other_tree_entries_unchanged": true,
+  "authors_dates_messages_parents_preserved": true,
+  "private_file_locally_preserved_and_ignored": true,
+  "private_blob_absent_from_object_database": true,
+  "private_path_absent_from_history": true,
+  "backup_refs_removed": 1,
+  "old_reflogs_expired": true,
+  "unreachable_objects_collected": true,
+  "git_fsck_strict_passed": true,
+  "historical_git_sources": [
+    {
+      "script": "e2e/storage-legacy-build.py",
+      "historical_identity": "93f88e5c543be4ad41e4ca22d08cbedbabec73c5",
+      "source_revision": "eb6cbf328d56a68f4f6f565a2cc7818b917c5c9f",
+      "unchanged_objects": {
+        "control": "04b26ffd427b4d797bb11356baac61642e3851f2",
+        "web": "def1249b2f5f82c98f15281e7b44b93a11426d74"
+      },
+      "archive_or_show_files_verified": 39
+    },
+    {
+      "script": "e2e/function-version-control-build.py",
+      "historical_identity": "f56d79ebe3d1d84731bfd262d1e6a9d5b5a680c0",
+      "source_revision": "a2f5bbd5a26f93f352f30d8bab5de33f6a271138",
+      "unchanged_objects": {
+        "control": "695fe9277371d609f78ff2443555af33a980415d",
+        "web": "14672da19be3875afcc2b81245b0d7e33735fd42",
+        "docs/manual.md": "563a2add7dd8589ee2dcd94170b4cdfae1ceb682"
+      },
+      "archive_or_show_files_verified": 61
+    },
+    {
+      "script": "e2e/validator-names-prepare.py",
+      "historical_identity": "ef4a900eba8045d9e767c25900361243331ebcb5",
+      "source_revision": "ab7018fdbcc8a9cfcc218e93e805f4e19c118d6b",
+      "unchanged_objects": {
+        "control/app/validator.py": "5d2d9419296704e36abaa2a8cd02676b1b2c16e9"
+      },
+      "archive_or_show_files_verified": 1
+    }
+  ],
+  "real_git_files_verified": 101,
+  "private_backups_kept_under_ignored_local_directory": true,
+  "application_services_changed": false,
+  "remote_configured": false,
+  "published": false
+}

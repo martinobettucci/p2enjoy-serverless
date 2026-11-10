@@ -5226,3 +5226,18 @@ Sauvegarde bundle et copie privée du fichier sous .local, empreintes relevées.
 Trois lectures Git épinglées sont à remapper ; les attestations existantes
 conservent leur identité historique et les preuves datées ne sont pas réécrites.
 Décision et vérifications persistées dans GIT_HISTORY_REWRITE avant opération.
+
+### Retrait du briefing privé appliqué
+
+Le filtre réécrit263 commits et conserve exactement leurs arbres horsbriefing,
+auteurs/dates/messages/parents. Le contrôle des références révèle que les deux
+références internes Codex pointent vers des trees, pas des commits : elles sont
+nettoyées séparément et comparées entrée par entrée. La sauvegarde privée inclut
+bundle et pack de tous les objets de référence. La référence refs/original,
+les reflogs anciens et les objets inaccessibles sont retirés ; le blob privé
+n'existe plus dans la base Git et fsck --full --strict réussit. Le fichier local
+reste identique, avec son mode d'origine, et ignoré.
+Les trois sélecteurs de sources sont remappés ; les identités d'attestations
+anciennes restent stables et source_revision précise la lecture actuelle.
+101 fichiers des vrais Gitarchive/show sont vérifiés, sansbuild ni déploiement.
+Aucun remote créé. Table et preuve conservées dans le dépôt publiable.

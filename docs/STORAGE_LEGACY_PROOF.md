@@ -122,3 +122,8 @@ restauration complète, registres et artefacts originaux recoupés, même image 
 de contrôle, agent et API sains, exécuteur de référence intact, configuration
 officielle inchangée et gardes inactives. La qualification de l’unité reste ouverte
 jusqu’aux régressions communes et à la mise à jour des notes SPARK.
+
+Après le retrait du briefing privé de l'historique, les lectures Git historiques
+utilisent les commits remappés. L'identité revision des attestations reste celle
+des preuves datées ; source_revision précise le commit effectivement lu. Voir
+[réécriture Git](GIT_HISTORY_REWRITE.md) et sa table de correspondance.
