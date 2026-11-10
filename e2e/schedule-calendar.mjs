@@ -73,11 +73,12 @@ try{
   }
  });
  await check('Prévisions réelles : dimanche0/7, date impossible et prochain29février',async()=>{
-  const fn=functions[2],before=await native(),data=await api(`/api/functions/${fn.id}/schedules`),after=await native(),observedAt=Date.now()/1000;
-  forecasts.push({before_cursor:before.cursor,after_cursor:after.cursor,observed_at:observedAt,data});
+  const fn=functions[2],before=await native(),startedAt=Date.now()/1000,data=await api(`/api/functions/${fn.id}/schedules`),after=await native(),observedAt=Date.now()/1000;
+  forecasts.push({before_cursor:before.cursor,after_cursor:after.cursor,started_at:startedAt,observed_at:observedAt,data});
   // Bracket a real cursor advance during the API request. A nominal awaiting
   // its unprocessed boundary is eligible even when wall-clock time passed it.
-  const anchors=index=>[Math.max(before.cursor,data.items[index].activated_at),Math.max(after.cursor,Math.floor(observedAt/300)*300,data.items[index].activated_at)];
+  const oldestEligible=time=>{const boundary=Math.floor(time/300)*300;return boundary-(time-boundary<=5?300:0);};
+  const anchors=index=>[Math.max(before.cursor,oldestEligible(startedAt),data.items[index].activated_at),Math.max(after.cursor,oldestEligible(observedAt),data.items[index].activated_at)];
   const followingSunday=anchor=>{const date=new Date(anchor*1000);let slot=Date.UTC(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate(),12)/1000+((7-date.getUTCDay())%7)*86400;if(slot<=anchor)slot+=7*86400;return slot;};
   const followingLeapDay=anchor=>{let year=new Date(anchor*1000).getUTCFullYear(),date;do{date=new Date(Date.UTC(year++,1,29));}while(date.getUTCMonth()!==1||date.getUTCDate()!==29||date.getTime()/1000<=anchor);return date.getTime()/1000;};
   assert.deepEqual(data.items[2].next,data.items[3].next);const sunday=data.items[2].next;assert(sunday);assert(anchors(2).map(followingSunday).includes(sunday.nominal_at));assert.equal(sunday.coalesced,1);assert.equal(sunday.window_at,sunday.nominal_at);
