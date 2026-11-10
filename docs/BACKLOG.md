@@ -1520,6 +1520,8 @@ groupes sur319 sources : plafonds réels16/128, deux tirs queue_full sans invoca
 Neuf fonctions purgées physiquement ; aucun budget modifié. [Plan et résultats](SCHEDULE_QUEUES.md).
 Les indisponibilités résiduelles, plafond global d'instances, rétention, états UI
 et régression restent ouverts ; aucune clôture de SLS-078.4/.5 sur cette tranche.
+Suite d'indisponibilité : [SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md), à
+qualifier par une vraie commande cache-clear en cours et sa reprise après restitution.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.

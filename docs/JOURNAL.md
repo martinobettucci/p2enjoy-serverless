@@ -5669,3 +5669,13 @@ commit avant INSERT d'invocation, puis reprise après restitution et prochain ti
 Lire storage-command-faults.py et storage_management.py, persister le contrat
 avant code ; rien de ce scénario n'a encore été exécuté. Plafond global attend099,
 rétention réelle, états UI et régression complète restent également ouverts.
+
+## 10 novembre2026 — Préparer le refus sous commande de cache
+
+Reprise078 à3d00958, arbre propre et main synchronisée. Lecture du helper et du
+dispatch : deny-cache borné100s/85s laisse la commande publique pending/volumes
+sous storage_io_error ; la garde commit bloque receive avant INSERT, ce qui
+donne refused_unavailable/execution_unavailable sans invocation. Plan
+SCHEDULE_UNAVAILABLE persisté avant code : une fonction originale, données/cache
+réels, faute proche W, restitution explicite connue puis prochain tir W+300.
+Aucun arrêt de l'agent/contrôle, budget ou configuration changé ;099 reste distinct.
