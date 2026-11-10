@@ -1494,6 +1494,8 @@ douze refus et prévisions calendaires, trois fonctions purgées.
 Nature : Développer. Dépend de : SLS-040 (admission), SLS-074 (cible promue).
 Débloque : SLS-080, SLS-081, SLS-073. Ordre : 1.
 Contrat : [SCHEDULES](SCHEDULES.md).
+Plan opératoire des coupures réelles : [SCHEDULE_RECOVERY](SCHEDULE_RECOVERY.md),
+à réaliser puis qualifier ; aucun résultat de reprise encore déclaré.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.

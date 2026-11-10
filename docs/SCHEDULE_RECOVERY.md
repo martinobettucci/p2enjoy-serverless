@@ -1,0 +1,82 @@
+# Reprise réelle des tirs planifiés
+
+Preuves de [SLS-078](BACKLOG.md#sls-078), selon le contrat
+[SCHEDULES](SCHEDULES.md#réalisation-du-moteur-et-migration-009). Décisions
+opératoires du10 novembre2026, avant le code du pilote. Aucun changement du
+moteur, de son horloge, de ses dépendances ou de ses réponses.
+
+## Périmètre et frontières
+
+Le contrôle DEV est le seul processus applicatif arrêté. Une fonction originale,
+créée/publiée/promue par HTTPS dans un namespace `scheduled-functions-<UUID court>`,
+porte `*/5 * * * *`. Installation au repos avant armement : cette seule fonction
+vivante, aucun upload en cours, appel actif, instance, bail ou réservation.
+Le runtime de référence, les fichiers officiels et les autres archives sont
+conservés. Un backup SQLite natif privé est créé avant la première faute.
+
+Le pilote reconnaît ces frontières par la vraie base, jamais par un délai seul :
+
+- **Avant réclamation** : processus suspendu avant la frontière UTC visée,
+  curseur antérieur, aucun tir ni invocation de cette fenêtre. Après SIGKILL,
+  relire ces mêmes absences avant toute reprise ; ne pas revendiquer une
+  interruption au milieu du COMMIT.
+- **Réclamation acquise** : curseur à la frontière, tir exact `claimed`,
+  `invocation_id=NULL`, aucune invocation liée. Arrêt à un syscall natif entre
+  commit de réclamation et réception ; après mort, les mêmes identifiants et
+  états doivent être récupérables. Reprise : `failed/control_interrupted`,
+  jamais de nouvelle invocation pour ce tir.
+- **Invocation liée** : curseur à la frontière, tir `dispatched` et invocation
+  exacte persistés ensemble, avant démarrage du handler. Reprise : invocation
+  interrompue et tir réconcilié terminal, sans nouvel envoi.
+
+Les deux dernières frontières sont observées par `NativeObserver` et une
+connexion SQLite RO persistante `ControlObserver`, sans transaction retenue.
+Les métadonnées des syscalls de fichiers suffisent à choisir des arrêts
+candidats ; le snapshot SQL exact décide si la frontière est acquise. Aucun
+registre, tampon, retour système, résultat SQL ou code applicatif n'est remplacé.
+Motif : le chemin claim→receive est synchrone et possède deux commits distincts ;
+un endpoint artificiel n'éprouverait pas cette fenêtre réelle.
+
+## Garde et restitution
+
+Avant suspension, créer une garde systemd indépendante, dossier root0700 et
+identité figée : SPARK, UUID fonction/namespace, CID/image du contrôle,
+PID/naissance/cgroup, référence, empreintes des fichiers officiels et programmes
+d'arrêt/restitution. Nom : `serverless-restore-schedule-<UUID>`.
+
+Les programmes d'arrêt/restitution déjà utilisés pour les décisions de versions
+sont extraits comme chaînes littérales par AST ; seul leur préfixe de dossier
+est adapté. Aucun import opérationnel du pilote historique. Leurs verrous de
+mutation, pidfd, reçus atomiques, attente de fin du client Docker et refus d'une
+issue d'arrêt inconnue sont conservés. Le programme de restitution vérifie les
+identités avant de démarrer le même CID et attend sa santé ainsi que celle de
+la référence ; il ne restaure ni ne réécrit la base.
+
+Pour le prérequis de perte d'observateur sans faute : garde12s.
+Pour un arrêt court : garde80s, observation native bornée45s, commande de coupe
+attendue8s. Pour l'arrêt couvrant trois frontières : garde680s et attente
+bornée du client jusqu'à la troisième frontière passée ; état arrêté constaté
+durant l'attente. La restitution explicite attend la fin de l'observateur et
+désarme timer/service. Une perte réelle de l'observateur avant faute éprouve
+d'abord la restitution indépendante. En cas d'échec, conserver l'état inconnu
+et le reçu, puis résoudre avant toute autre faute.
+
+## Campagne séquentielle
+
+1. Garde sans arrêt du contrôle : observateur suspendu, SIGKILL de l'observateur,
+   restitution indépendante et identité/démarrage du contrôle conservés.
+2. Arrêt avant réclamation couvrant trois frontières réelles : contrôle arrêté
+   à chacune ; reprise avec exactement un `skipped_downtime` par fenêtre, sans
+   invocation ; frontière suivante réellement exécutée.
+3. Arrêt après réclamation durable : absence d'invocation avant/après mort,
+   état terminal après reprise, puis prochain tir normal avec le même code.
+4. Arrêt après lien durable : invocation interrompue et tir réconcilié,
+   aucune substitution/reprise du handler, puis prochain tir normal.
+5. Purge par les API publiques, recoupement natif des tirs/invocations, générations,
+   artefacts et ressources ; toutes les gardes/helpers terminés. Sources et
+   image identiques avant/après, nouveaux démarrages attendus du seul contrôle.
+
+Les états attendus après coupure ne sont pas des tests ignorés. Les branches
+propres du pilote ne sont qualifiées que si réellement provoquées. Cette
+campagne ne clôture pas les critères de saturation, recouvrement, exclusif,
+rétention, UI et régression complète de SLS-078.

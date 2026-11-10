@@ -5450,3 +5450,14 @@ Scaleway est revérifiée ; noms de mois/jours toujours suivis dans SLS-098.
 Reprendre SLS-078 : SIGKILL autour de claim et reprise multi-fenêtres,
 recouvrement, saturation, exclusif, rétention, états UI et régression complète.
 Le registre d'incohérences reste absent ; aucune nouvelle unité hors périmètre.
+
+## 10 novembre2026 — Préparer les coupures natives des planifications
+
+Le contrôle DEV est sain, sans fonction ni consommateur actif ; même image,
+référence, fichiers officiels et artefacts que le calendrier qualifié. Le plan
+SCHEDULE_RECOVERY fixe avant code les frontières SQL observées (avant fenêtre,
+claim acquis, invocation liée), garde indépendante et trois fenêtres manquées.
+Les programmes historiques d'arrêt/restitution sont réutilisés par extraction
+AST des seuls littéraux, avec adaptation du préfixe de dossier et conservation
+de leurs gardes d'identité et de fin de mutation. Motif : exercer les vrais
+commits sans endpoint ni résultat substitué. Aucune faute n'est encore lancée.
