@@ -50,11 +50,13 @@ que marqueurs, compteurs et métadonnées publiques. Aucun jeton n'est conservé
 dans le rapport. Mesurer l'extinction normale après idle pour les deux fonctions
 exclusives, et l'absence de ressources du handler expiré avant son appel sain.
 Le délai idle de10s laisse relever une instance ready et last_used_at après
-terminaison malgré le coût des statistiques Docker de l'API. Ensuite, relever
-les intervalles de chaque lecture jusqu'à disparition : aucune disparition
+terminaison malgré le coût des statistiques Docker de l'API. Ensuite, un observateur SQLite RO persistant sur le SPARK relève à50ms
+les intervalles horodatés de chaque lecture jusqu'à disparition : aucune disparition
 plus de0,1s avant last_used_at+10s, disparition au plus10s après cette borne.
 Conserver premier/dernier relevé positif et première absence ; une simple absence
-finale ne qualifie pas l'extinction temporelle.
+finale ne qualifie pas l'extinction temporelle. Les bornes s'appliquent aux
+lectures natives, sans déduire l'instant SQL d'un retour réseau client ; le
+processus de lecture est borné et rejoint avant la suite.
 
 Fin : attendre les appels réellement terminaux, révoquer les jetons, archiver et
 purger les cinq fonctions par leurs API, supprimer les parents. Recouper code,

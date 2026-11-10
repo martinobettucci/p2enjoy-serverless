@@ -5511,3 +5511,7 @@ mesurer instance ready/last_used_at puis disparition, avec tolérance explicite
 de0,1s avant et10s après la borne. Motif : les statistiques Docker de la lecture
 API coûtent du temps ; constater seulement une absence tardive ne prouve pas
 le délai configuré. Cette précision précède la modification du client.
+
+La mesure d'extinction est recoupée par un observateur SQLite RO persistant
+horodaté dans le SPARK, lectures50ms et fin bornée. Une réponse API dont
+l'intervalle traverse le seuil ne prouve pas à elle seule la borne0,1s.
