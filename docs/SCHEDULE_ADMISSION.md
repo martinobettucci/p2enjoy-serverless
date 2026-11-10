@@ -20,7 +20,7 @@ consommateurs réels, jamais des réponses ou réservations fabriquées.
 | Capacité CPU |1 CPU,128 Mio,min0,max1,idle0 ; aucune instance prête | À W et W+300, budget réellement occupé par les autres appels : refused_capacity/schedule_capacity, invocation_idNULL et aucune invocation de ces slots. Après libération, nouveau tir W+600 réussi, aucun retry des refus |
 | Exclusif avec admission |0,125 CPU,128 Mio,données2Mio exclusives,concurrence1,deadline45s,file30s,idle10s,min0,max1 | HTTP Read déjà running avant W, bail réel et écriture compteur1 ; il attend jusqu'à W+10. Tir planifié lié queued sans handler, puis admis après HTTP, compteur2 sur le même volume, succeeded |
 | Exclusif avec expiration | Même allocation, file2s,idle10s ; HTTP actif jusqu'à W+20 | Tir lié à une vraie invocation rejetée queue_timeout, handler non démarré, firing refused_capacity avec UUID. HTTP encore actif au refus ; lecture réelle ultérieure retrouve compteur1. Aucun rejeu après libération |
-| Deadline |0,125 CPU,128 Mio,timeout0,5s,idle0,min0,max1 ; handler planifié attend5s | Invocation failed/invocation_timeout, handler démarré et conteneur recyclé ; aucun marqueur de fin. Appel HTTP suivant immédiat réellement réussi |
+| Deadline |0,125 CPU,128 Mio,timeout3s,idle0,min0,max1 ; handler planifié attend5s | Invocation failed/invocation_timeout, handler démarré et conteneur recyclé ; aucun marqueur de fin. Appel HTTP suivant immédiat réellement réussi |
 
 Le handler exclusif attend une date de libération fournie dans le payload HTTP,
 sur l'horloge normale du runtime. Motif : maintenir une occupation réelle de part
@@ -67,3 +67,19 @@ explicite. Aucun retry automatique de la campagne ou des invocations.
 
 Cette tranche ne qualifie pas la rétention, les états UI complémentaires ni la
 régression complète ; SLS-078 reste[~] jusqu'à leurs preuves.
+
+
+## Premier essai et réglage de la preuve de deadline
+
+Le premier essai au client93ec58b passe le groupe de publications/occupants puis
+s'arrête sur la deadline0,5s : failed/invocation_timeout avec handler_startedNULL
+et journal vide. Le démarrage n'est donc pas observé ; le cas après démarrage
+exigé ne peut pas être déclaré prouvé. Le contrôle reste conforme à sa deadline,
+qui inclut le lancement de l'enfant d'invocation.
+
+Après fin réelle du handler315s, les cinq fonctions sont purgées physiquement,
+sans erreur de nettoyage ;313 sources et image sont identiques avant/après.
+Le rapport UUIDc9b925d3 et son relevé diagnostic restent conservés, hors total du
+replay. Le délai d'essai est porté à3s pour laisser observer le vrai démarrage
+sous0,125CPU ; le handler attend toujours5s et les assertions après démarrage
+restent obligatoires. Aucun produit ni configuration officielle modifié.
