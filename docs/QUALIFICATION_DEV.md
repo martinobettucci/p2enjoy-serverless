@@ -6,7 +6,8 @@ sont exclus de toute modification ou déploiement.
 
 ## Cible et accès
 
-Le seul SPARK autorisé est celui décrit dans [dev-spark.md](dev-spark.md).
+Le seul SPARK autorisé est celui décrit dans le briefing local `docs/dev-spark.md`,
+fourni par le propriétaire et ignoré par Git : il est absent d'un clone du dépôt.
 Utiliser `spark-docker` pour Docker. Root prépare les répertoires et exécute les
 helpers de perturbation bornés documentés dans [e2e/README.md](../e2e/README.md),
 avec gardes indépendantes et contrôle de l’identité de chaque ressource.

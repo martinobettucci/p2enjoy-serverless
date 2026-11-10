@@ -237,6 +237,13 @@ contrôle sa version avant décision. Elle ne charge pas le manifeste. La premi�
 promotion du premier hash exige Create ; toutes les suivantes exigent Update,
 même après désactivation de la cible. Read reste nécessaire aux lectures CLI.
 
+Les événements `schedule` du manifeste (cron à cinq champs, UTC) sont acceptés et
+enregistrés avec la fonction, mais la plateforme ne les déclenche pas encore :
+une fonction qui dépend d’une exécution planifiée ne s’exécutera pas toute seule.
+La commande `plan` les affiche comme les autres événements : leur présence ne
+garantit pas leur exécution. Tant que l’ordonnanceur n’est pas livré, déclencher la fonction par un appel
+HTTP explicite depuis un planificateur extérieur à la plateforme.
+
 La plateforme accepte jusqu’à 64 candidats en attente, avec huit par fonction,
 et quatre uploads simultanément admis ; une seule validation Docker s’exécute à
 la fois. Une fonction conserve vingt hashes disponibles ou archivés. Un doublon
