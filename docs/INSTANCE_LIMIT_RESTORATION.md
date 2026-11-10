@@ -62,3 +62,17 @@ est supprimé par l'API réelle. Sources locales/distantes et image sont recoup�
 L'évolution conditionnelle de la console est un accès/capacité externe, cas4 de
 CLAUDE : l'administration et la modification de FORGE sont interdites ici.
 Le propriétaire fournit cette capacité ; ce dépôt n'altère aucun code de FORGE.
+
+## Résultat ciblé du10 novembre2026
+
+La [preuve DEV](evidence/instance-limit-safety-dev-2026-11-10.json), client6e573c0,
+passe deux groupes réels et deux refus restore/EOF, zéro skip/erreur de nettoyage.
+Les317 sources locales/distantes sont figées avant/après, mêmes images contrôle
+et CLI. Plafond32/CPU1/RAM8192, quatre fichiers officiels/proposition et les deux
+services (ID/image/démarrage/santé) restent identiques. Le namespace est supprimé
+par HTTPS et recoupé en base ; aucun service associé ni ressource active restante.
+Les5982 artefacts antérieurs conservent leur empreinte d'inventaire.
+
+Ce résultat qualifie uniquement le refus préventif. Aucun cycle32→2→32, SIGTERM,
+SIGKILL ou conflit d'écriture n'est attribué à ce correctif. La demande de capacité
+conditionnelle est transmise ; les autres preuves SLS-078 restent livrables.

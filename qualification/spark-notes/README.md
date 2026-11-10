@@ -686,3 +686,9 @@ observé au prochain tir, retour A compteur2 et aucun rejeu. Quatre handlers
 réussis, trois fonctions purgées ; mêmes services/configuration et5982 artefacts.
 Preuve : docs/evidence/schedule-memory-version-dev-2026-11-10.json. Plafond global
 d'instances (garde SLS-099), refus résiduels, rétention et états UI restent ouverts.
+
+Le helper du plafond refuse désormais toute baisse avant mutation : la console
+examinée n'a pas de précondition sur l'entrée active. Deux groupes réels restore/EOF
+passent sur317 sources, namespace supprimé, fichiers/budgets/services conservés.
+Preuve : docs/evidence/instance-limit-safety-dev-2026-11-10.json. La restitution
+indépendante reste à réaliser après capacité externe (SLS-099).

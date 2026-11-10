@@ -791,3 +791,9 @@ trois purges physiques et compteurs nuls. Vrai plafond Docker8192Mio/0,05CPU,
 compteur données1→1→2 au passage A/B/A, aucun rejeu des refus. Même produit,
 référence, configuration officielle et5982 artefacts. Preuve :
 `docs/evidence/schedule-memory-version-dev-2026-11-10.json`.
+
+SLS-099 : le client6e573c0 passe deux groupes de refus préventif restore/EOF,
+317 sources et images figées. Aucun budget modifié, service recréé ou proposition
+écrite ; namespace nettoyé et5982 artefacts conservés. La capacité conditionnelle
+de la console reste externe ; restitution et pannes ne sont pas qualifiées.
+Preuve : `docs/evidence/instance-limit-safety-dev-2026-11-10.json`.

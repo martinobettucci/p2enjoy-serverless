@@ -5624,3 +5624,18 @@ une version active dans sa transaction. Une relecture client laisse une course
 et n'est pas retenue comme garantie. Contrat INSTANCE_LIMIT_RESTORATION : preuve
 réelle du refus sans mutation d'abord ; restitution indépendante et tous ses
 scénarios restent requis après capacité externe. FORGE ne sera pas modifiée.
+
+## 10 novembre2026 — Refus préventif du plafond qualifié
+
+Client6e573c0 : deux groupes réels passent, restore et EOF refusés avant mutation.
+Les317 sources et images sont identiques avant/après ; plafond32, CPU1, RAM8192,
+fichiers officiels/proposition et deux services ID/image/démarrage conservés.
+Namespace créé/supprimé par HTTPS, suppression recoupée en base, compteurs actifs
+nuls et5982 artefacts identiques. Aucun build produit, UI/manuel ou capture.
+Preuve : evidence/instance-limit-safety-dev-2026-11-10.json.
+
+SLS-099 reste[~] pour la capacité conditionnelle externe demandée (cas4, FORGE
+hors périmètre), puis garde indépendante et tous les cycles nominaux/pannes.
+Le refus n'est pas une restitution qualifiée ; aucun écrasement/SIGKILL n'est
+prétendu reproduit. Reprendre les preuves indépendantes SLS-078 : refus résiduels,
+rétention, états UI et régression ; le plafond global attend099.

@@ -6,8 +6,9 @@
 
 - Le helper refuse la baisse avant toute mutation tant que la console SPARK ne
   sait pas conditionner l'écriture à la version active. Le test E2E du refus est
-  ajouté ; sa preuve reste à exécuter. Restitution indépendante et scénarios de
-  panne restent ouverts dans SLS-099, sans modification de FORGE.
+  ajouté et passe deux groupes réels restore/EOF sur317 sources, namespace
+  supprimé, budgets/services/fichiers conservés. Restitution indépendante et
+  scénarios de panne restent ouverts dans SLS-099, sans modification de FORGE.
 
 ### Planifications en cours de qualification
 

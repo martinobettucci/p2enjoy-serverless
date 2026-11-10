@@ -2044,6 +2044,10 @@ la console normale examinée, capacité externe nécessaire. Aucun écrasement r
 provoqué. Nature : Corriger. Dépend de : SLS-040. Ordre : 1,
 préalable à la preuve du plafond global de SLS-078.
 Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md).
+Refus préventif implémenté et [vérifié en DEV](evidence/instance-limit-safety-dev-2026-11-10.json) :
+deux groupes réels, deux refus restore/EOF avant mutation,317 sources figées,
+namespace supprimé et recoupé nativement ; budgets/services/fichiers et5982
+artefacts conservés. Les cycles de restitution et pannes restent non qualifiés.
 
 Constat : e2e/instance-limit-guard.py restaure32 dans finally sans vérifier la
 valeur active ; une édition concurrente peut être écrasée. Le délai180s n'est
@@ -2051,7 +2055,7 @@ pas une garde indépendante et SIGKILL du helper n'exécute pas finally.
 
 Critères d'acceptation :
 
-- [ ] SLS-099.1 Correction documentée avant code, autorité bornée au seul SPARK
+- [x] SLS-099.1 Contrat d36e645 avant code6e573c0 et [preuve du refus](evidence/instance-limit-safety-dev-2026-11-10.json). Correction documentée avant code, autorité bornée au seul SPARK
   infra-serverless et à SERVERLESS_FUNCTION_INSTANCE_LIMIT, API console normale.
 - [ ] SLS-099.2 Restitution corrélée à l'application possédée, valeur concurrente
   conservée et issue inconnue signalée ; aucune adoption silencieuse.

@@ -718,3 +718,8 @@ refus RAM isolé, changement A→B en file, libération des réservations et can
 prochain tir8192Mio réel, retour A compteur2 puis trois purges publiques.
 Aucune variable, route, image ou migration modifiée. Le plafond global suit
 la garde SLS-099 ; les autres preuves résiduelles restent dans SLS-078.
+
+`node e2e/instance-limit-safety.mjs` qualifie deux groupes restore/EOF : le helper
+refuse avant écriture, sans recréation ni modification de proposition. La console
+doit fournir une précondition active avant reprise des tests32→2→32. SLS-099 reste
+ouverte ; ne pas utiliser le nominal historique comme garde concurrente qualifiée.
