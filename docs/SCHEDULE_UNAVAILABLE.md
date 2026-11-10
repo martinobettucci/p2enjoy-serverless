@@ -57,7 +57,8 @@ invocations réussies (HTTP préparatoire, planifiée, HTTP de lecture).
 Quatre groupes : préparation réelle, commande/refus sous faute, restitution et
 prochain tir, purge publique et absence physique. Le lecteur natif strict accepte
 un namespace, un UUID et une seule unité de garde ; SQLite sous propriétaire,
-identités des répertoires/records, états agent/commande et contrôle, ressources,+processus exact du helper et unités systemd. Aucun secret ni corps privé dans
+identités des répertoires/records, états agent/commande et contrôle, ressources,
+processus exact du helper et unités systemd. Aucun secret ni corps privé dans
 les journaux ou rapports.
 
 Après restitution connue seulement : révoquer le jeton, archiver/purger par API,

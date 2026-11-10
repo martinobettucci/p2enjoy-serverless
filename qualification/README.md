@@ -208,3 +208,12 @@ vivant. Le client empaquette ce module avec un marqueur différent par code et
 et Docker. Huit invocations, les plafonds et deux reprises passent dans la
 [tranche dédiée](../docs/evidence/function-version-cli-recovery-regressions-dev-2026-11-09.json),
 avec dix fonctions purgées et garde indépendante après perte réelle du helper.
+
+## Fixture de planification pendant un vidage de cache
+
+`artifacts/scheduled-storage.cjs` écrit et synchronise les seuls records de
+données/cache demandés par le POST HTTPS, puis renvoie leur contenu avec
+l'UUID et les métadonnées publiques d'exécution. Le journal du tir suivant
+recoupe la donnée conservée et le cache absent après sa commande réelle.
+Le client `node e2e/schedule-unavailable.mjs` passe par les API de plateforme,
+Docker et FUSE ; contrat : [SCHEDULE_UNAVAILABLE](../docs/SCHEDULE_UNAVAILABLE.md).

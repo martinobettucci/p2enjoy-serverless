@@ -1528,3 +1528,20 @@ pour recouper les files dans le délai normal30s. Après les neuf purges publiqu
 `--purged` recoupe ressources physiques, artefacts et backend embarqué. Sources
 et images sont figées pendant la campagne ; aucun budget officiel modifié,
 aucune dépendance à la garde SLS-099. Contrat : [SCHEDULE_QUEUES](../docs/SCHEDULE_QUEUES.md).
+
+## Tir pendant un vidage de cache en cours
+
+`node e2e/schedule-unavailable.mjs`, seul sur le SPARK au repos avec une vraie
+session SSO, publie une fonction originale avec données/cache synchronisés.
+Le helper existant storage-command-faults.py arme sa garde100s avant de refuser
+les permissions du seul cache. Une commande cache-clear reste alors réellement
+pending sous storage_io_error ; le tir doit être refused_unavailable sans
+invocation. La restitution connue précède la fin du même reçu et le prochain
+tir réussi, données conservées et cache vidé. Prévoir deux fenêtres réelles,
+environ10 minutes ; aucun budget ni fichier officiel modifié.
+
+`schedule-unavailable-inspect.py` accepte le seul UUID du namespace
+storage-recovery et la seule unité de garde : SQL RO, inode/modes/empreintes,
+commande/intention/reçu agent, processus exact, unités et ressources physiques.
+En cas de restitution inconnue, le banc conserve les ressources et échoue ;
+aucune purge n'est tentée. Contrat : [SCHEDULE_UNAVAILABLE](../docs/SCHEDULE_UNAVAILABLE.md).
