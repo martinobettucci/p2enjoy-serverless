@@ -12,6 +12,11 @@
 
 ### Planifications en cours de qualification
 
+- Maximum individuel et réutilisation qualifiés sur325 sources : refus sans
+  invocation sous HTTP non exclusif, minimum déjà prêt réutilisé puis deux
+  instances/CID conservés à la frontière suivante. Quatre groupes, quatre
+  handlers réussis, deux purges physiques ; aucun budget de cellule changé.
+
 - Refus pendant un vidage de cache qualifié sur322 sources : vraie faute bornée,
   commande commit/pending, tir refused_unavailable sans invocation, restitution
   connue puis prochain tir sain avec donnée conservée et cache vide. Quatre

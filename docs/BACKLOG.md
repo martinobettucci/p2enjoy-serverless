@@ -1512,7 +1512,7 @@ après réception en file sans handler, allocation réelle8192Mio puis retour A,
 compteur conservé et aucun rejeu. Quatre handlers réussis, trois fonctions purgées.
 [Plan et résultats](SCHEDULE_MEMORY_VERSION.md).
 SLS-078.4/.5 restent ouvertes pour le plafond global d'instances (préalable
-SLS-099), autres refus résiduels et rétention ; états UI et régression complète
+SLS-099) et rétention ; états UI et régression complète
 restent ouverts. Aucun changement produit, budget officiel ni nouvelle capture.
 Les [files pleines](evidence/schedule-queues-dev-2026-11-10.json) passent quatre
 groupes sur319 sources : plafonds réels16/128, deux tirs queue_full sans invocation,
@@ -1523,11 +1523,13 @@ passe quatre groupes sur322 sources : garde commit/pending sous storage_io_error
 tir refused_unavailable sans invocation, même reçu terminé après restitution,
 prochain tir et données conservés. Trois handlers réussis, une fonction purgée
 et garde terminée. [Plan et résultats](SCHEDULE_UNAVAILABLE.md).
-Restent à recouper pour les tirs : maximum d'une fonction occupée par HTTP
-non exclusif et réutilisation préchauffée ; plafond global d'instances (SLS-099),
-rétention réelle, états UI et régression complète. SLS-078.4/.5 restent ouvertes.
-Suite du maximum/réutilisation : [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md),
-à qualifier sans modification des budgets de cellule.
+Le [maximum et la réutilisation](evidence/schedule-instance-reuse-dev-2026-11-10.json)
+passent quatre groupes sur325 sources : HTTP non exclusif au maximum1, budgets
+globaux libres et refus sans invocation ; minimum préchauffé puis deux mêmes
+instances/CID à W+300, générations/configurations identiques. Quatre handlers
+réussis, deux purges physiques. [Plan et résultats](SCHEDULE_INSTANCE_REUSE.md).
+Restent plafond global d'instances (SLS-099), rétention réelle, états UI,
+critère adaptateur.7 et régression complète. SLS-078.4/.5/.6/.7 restent ouvertes.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.

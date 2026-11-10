@@ -5710,3 +5710,23 @@ budgets globaux libres ; une instance ready est réutilisable. Contrat
 SCHEDULE_INSTANCE_REUSE avant code : deux fonctions originales, minimum prêt
 sans invocation et HTTP actif autour de W, refus isolé puis réutilisation des
 mêmes instances/CID à W+300. Aucun budget officiel ni garde099 utilisé.
+
+## 10 novembre2026 — Maximum et réutilisation planifiés qualifiés
+
+Client832b20e : quatre groupes passent sur325 sources, fenêtres21:20/21:25UTC.
+Minimum prêt sans invocation, HTTP non exclusif actif sur maximum1 ; seules deux
+instances,0,1CPU/256Mio réservés, files vides et plafonds globaux libres. Refus
+schedule_capacity sans invocation pendant le HTTP, premier tir sur minimum
+préchauffé, HTTP terminé sur même instance ; deux prochains tirs sur les mêmes
+UUID/CID. Générations/configurations et hashes/slots recoupés, refus inchangé.
+
+Collecte indépendante : quatre tirs, quatre handlers réussis (un HTTP/trois
+planifiés), deux purges physiques, minima/idles libérés et compteurs nuls.
+Même contrôle/référence/configuration,34 backends et5982 artefacts conservés.
+Preuve : evidence/schedule-instance-reuse-dev-2026-11-10.json. Aucun build produit,
+UI/manuel ou capture nouveau. La revue a fait renforcer génération/configuration
+et premier tir avant lancement ; aucune panne propre du banc prétendue provoquée.
+
+Reprendre078 : rétention réelle (sept jours/10000 tirs, source d'un tir non
+terminal), états UI vide/erreur/longs/pagination, critère adaptateur.7 puis
+régression complète. Le plafond global attend099 ; unité toujours[~].

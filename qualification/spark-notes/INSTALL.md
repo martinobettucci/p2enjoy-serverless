@@ -735,3 +735,9 @@ refusé par permissions sous la garde existante100s, vraie commande pending,
 refus sans invocation, restitution explicite et reprise du même reçu puis tir sain.
 La purge attend la restitution connue ; fonction et ressources absentes, garde
 terminée. Aucun contrôle/agent arrêté ni budget changé. Contrat SCHEDULE_UNAVAILABLE.
+
+`node e2e/schedule-instance-reuse.mjs` passe quatre groupes sur21:20/21:25UTC :
+HTTP non exclusif au maximum, refus sans invocation avec budgets globaux libres,
+minimum préchauffé puis deux mêmes instances/CID réutilisés. Libération min0/idle0
+avant promotion sans cron et deux purges publiques ; aucun budget officiel changé.
+Contrat SCHEDULE_INSTANCE_REUSE ; rétention/UI/adaptateur.7/régression restent ouverts.

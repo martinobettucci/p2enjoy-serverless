@@ -704,3 +704,9 @@ commande pending sous faute bornée, tir refusé sans invocation, restitution co
 puis même reçu terminé et prochain tir sain. Trois handlers conservent la donnée,
 cache vidé, fonction purgée et garde terminée. Preuve :
 docs/evidence/schedule-unavailable-dev-2026-11-10.json. SLS-078 reste ouverte.
+
+Maximum individuel et réutilisation passent quatre groupes sur325 sources :
+refus sans invocation sous HTTP non exclusif, minimum prêt servi puis deux
+mêmes instances/CID à la frontière suivante. Quatre handlers réussis, deux
+purges physiques ; services/configuration et5982 artefacts conservés. Preuve :
+docs/evidence/schedule-instance-reuse-dev-2026-11-10.json. Critères078 résiduels ouverts.

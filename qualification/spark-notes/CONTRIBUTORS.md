@@ -809,3 +809,9 @@ deux tirs/trois invocations réussies, une commande cache reprise sans nouveau P
 une purge physique et garde terminée. Le reçu agent1→2 et la donnée conservée
 sont recoupés ; mêmes services/fichiers,34 backends et5982 artefacts. Preuve :
 `docs/evidence/schedule-unavailable-dev-2026-11-10.json`. Critères078 résiduels ouverts.
+
+Maximum/réutilisation qualifiés au client832b20e : quatre groupes/325 sources,
+quatre tirs et quatre handlers réussis (un HTTP/trois planifiés), deux instances/CID
+réutilisés et deux purges physiques. Générations/configurations conservées ;
+mêmes services/fichiers,34 backends et5982 artefacts. Preuve :
+`docs/evidence/schedule-instance-reuse-dev-2026-11-10.json`. SLS-078 reste ouverte.

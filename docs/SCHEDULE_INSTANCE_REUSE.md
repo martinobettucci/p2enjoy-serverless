@@ -55,3 +55,28 @@ réutilisation aux prochains tirs, deux purges publiques/absence physique.
 Ce complément ne clôture pas SLS-078 : plafond global (SLS-099), rétention réelle,
 états UI et régression complète restent ouverts. Aucun produit, budget, image,
 migration ou comportement UI/manuel modifié.
+
+## Résultats qualifiés
+
+La [preuve DEV du10 novembre2026](evidence/schedule-instance-reuse-dev-2026-11-10.json),
+client832b20e, passe quatre groupes sur325 sources et même image b9ad872a.
+Fenêtres21:20/21:25UTC. Avant W : deux instances réservent0,1CPU/256Mio, files
+vides et budgets globaux libres. Le minimum ready n'a encore aucune invocation ;
+l'autre instance est busy sous HTTP non exclusif et déjà au maximum1.
+
+À21:20, la cible occupée reçoit refused_capacity/schedule_capacity sans
+invocation, tandis que le HTTP reste running. Le premier tir du minimum utilise
+l'instance et le CID relevés avant W. Après terminaison HTTP, son instance devient
+ready avec même CID ; générations et configurations restent identiques.
+À21:25, les deux tirs réutilisent exactement ces deux instances/CID. Le refus
+reste inchangé, sans rejeu. Quatre tirs et quatre handlers réussis : un HTTP,
+trois planifiés. Identifiants, hashes et slots sont recoupés.
+
+Minima/idles libérés par PUT normal avant promotion sans cron, puis deux purges
+publiques ; code/volumes/conteneurs/réseaux/canaux/baux absents, compteurs nuls.
+Les34 backends,5982 artefacts et services/images/démarrages/fichiers officiels
+sont conservés. Aucun build produit, UI/manuel ou capture nouveau. La revue a
+renforcé les comparaisons de générations/configurations et la corrélation du
+premier tir avant lancement ; les pannes propres du banc ne sont pas déduites
+du nominal. Plafond global (SLS-099), rétention réelle, états UI, adaptateur.7 et
+régression complète gardent l'unité ouverte.

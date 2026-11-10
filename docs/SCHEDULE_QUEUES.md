@@ -57,8 +57,10 @@ compteurs nuls,5982 artefacts antérieurs, sources/backend/images/services et
 fichiers officiels conservés. Un échec conserve sa preuve, déconnecte et rejoint
 ses requêtes, puis nettoie avant toute relance explicite.
 
-Ce complément ne clôture pas SLS-078 : plafond global d'instances (SLS-099),
-autres indisponibilités, rétention réelle, états UI et régression restent ouverts.
+Ce complément ne clôture pas SLS-078. Le refus sous commande de stockage et le
+maximum/réutilisation sont qualifiés séparément dans [SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md)
+et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md). Plafond global (SLS-099),
+rétention réelle, états UI, adaptateur.7 et régression restent ouverts.
 
 ## Résultats qualifiés
 

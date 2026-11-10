@@ -70,5 +70,7 @@ réussis (deux planifiés/deux HTTP), une réception rejetée sans handler, troi
 purges physiques et compteurs nuls. Les34 backends,5982 artefacts antérieurs,
 contrôle/référence (ID/image/démarrage) et fichiers officiels sont identiques.
 Aucun build produit, budget officiel, UI/manuel ou capture modifié. Le plafond
-global d'instances, autres refus résiduels, rétention, états UI et régression
-complète restent ouverts ; SLS-099 porte la correction préalable de sa garde.
+global d'instances, rétention, états UI, adaptateur.7 et régression complète
+restent ouverts ; SLS-099 porte la correction préalable de sa garde. Les autres
+refus et la réutilisation sont qualifiés dans [SCHEDULE_QUEUES](SCHEDULE_QUEUES.md),
+[SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md) et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md).

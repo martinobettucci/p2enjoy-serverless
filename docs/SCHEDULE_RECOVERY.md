@@ -117,5 +117,8 @@ Recouvrement, CPU, stockage exclusif/file/deadline/extinction sont ensuite
 qualifiés dans [SCHEDULE_ADMISSION](SCHEDULE_ADMISSION.md#résultats-qualifiés).
 RAM et changement de version avant admission sont qualifiés ensuite dans
 [SCHEDULE_MEMORY_VERSION](SCHEDULE_MEMORY_VERSION.md#résultats-qualifiés).
-Plafond global d'instances, refus résiduels, rétention, états UI complémentaires
-et régression complète restent ouverts : SLS-078[~].
+Files pleines, commande de stockage et maximum/réutilisation sont ensuite
+qualifiés dans [SCHEDULE_QUEUES](SCHEDULE_QUEUES.md),
+[SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md) et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md).
+Plafond global (SLS-099), rétention, états UI, adaptateur.7 et régression restent
+ouverts : SLS-078[~].

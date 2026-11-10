@@ -101,6 +101,6 @@ absents, compteurs nuls, helper et unités terminés. Les34 backends,5982 artefa
 images/services/démarrages et fichiers officiels sont conservés. Aucun build
 produit, UI/manuel ou capture nouveau. La revue préalable a corrigé jonction
 SSH, erreurs de flux et chaîne des versions ; leurs pannes propres ne sont pas
-prétendues provoquées par cette campagne nominale. Maximum sous HTTP non exclusif,
-réutilisation préchauffée, plafond global (SLS-099), rétention, UI et régression
-restent à recouper avant clôture078.
+prétendues provoquées par cette campagne nominale. Maximum sous HTTP non exclusif
+et réutilisation sont qualifiés ensuite dans [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md).
+Plafond global (SLS-099), rétention, UI, adaptateur.7 et régression restent ouverts.

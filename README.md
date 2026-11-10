@@ -34,7 +34,7 @@ La [suite RAM/version](docs/evidence/schedule-memory-version-dev-2026-11-10.json
 qualifie cinq groupes supplémentaires : refus mémoire sans invocation, changement
 de hash pendant la file, vraie allocation8192Mio, libération puis prochains tirs
 sans rejeu. Quatre handlers réussis et trois fonctions purgées. Plafond global
-d'instances, refus résiduels, rétention, états UI et régression complète restent
+d'instances, rétention, états UI et régression complète restent
 à éprouver dans SLS-078 ; la garde du plafond est suivie dans SLS-099.
 Cette garde refuse désormais la baisse avant mutation, en attendant une capacité
 conditionnelle de la console SPARK : [contrat et limite externe](docs/INSTANCE_LIMIT_RESTORATION.md).
@@ -47,6 +47,10 @@ Le [refus sous vidage de cache](docs/evidence/schedule-unavailable-dev-2026-11-1
 passe quatre groupes sur322 sources : commande réellement pending, tir refusé
 sans invocation, même reçu terminé après restitution puis prochain tir sain.
 Trois handlers conservent la donnée ; fonction purgée et garde terminée.
+Le [maximum individuel et la réutilisation](docs/evidence/schedule-instance-reuse-dev-2026-11-10.json)
+passent quatre groupes sur325 sources : refus sous HTTP non exclusif avec budgets
+globaux libres, minimum préchauffé puis deux instances/CID réutilisés à la frontière
+suivante. Quatre handlers réussis et deux purges physiques ; SLS-078 reste ouverte.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

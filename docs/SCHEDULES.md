@@ -238,7 +238,7 @@ compilé concorde avec16 chapitres et56 paragraphes : SLS-096 est clos.
 
 Le cycle promotions/retour de hash/retrait et suppression autour des fenêtres,
 puis les coupures et reprises sont qualifiés séparément ci-dessous. Reprendre
-dans cette unité : plafond global d'instances et refus résiduels avant admission ;
+dans cette unité : plafond global d'instances ;
 rétention réelle, dont l'invocation source conservée jusqu'à clôture ; états
 UI vide/erreur/longs et pagination. La régression complète reste à exécuter.
 Les noms de mois et de jours sont suivis séparément dans SLS-098.
@@ -340,7 +340,8 @@ et les lectures API ne présentent plus de planification. Actifs/réservations n
 officiels inchangés. Les deux essais et leurs dix fonctions purgées restent hors
 total, dont un arrêt avant fenêtre sans tir/invocation. Aucun build produit,
 UI/manuel modifié ni capture nouvelle. Le complément RAM/version suit ci-dessous ;
-plafond global, refus résiduels, rétention, états UI et régression complète restent ouverts.
+les autres refus et la réutilisation sont qualifiés ci-dessous. Plafond global,
+rétention, états UI, adaptateur.7 et régression complète restent ouverts.
 
 ## Budget mémoire et hash changé avant admission
 
@@ -357,8 +358,8 @@ Quatre tirs, cinq invocations dont quatre handlers réussis, trois purges physiq
 et ressources nulles sont recoupés. Les316 sources,34 backends,5982 artefacts,
 identités/images/démarrages et fichiers officiels sont conservés. Aucun build
 produit, budget officiel, UI/manuel ou capture nouveau. Le plafond global suit
-SLS-099 pour sa garde ; refus résiduels, rétention, états UI et régression complète
-gardent SLS-078 ouverte.
+SLS-099 pour sa garde. Les compléments ci-dessous qualifient les autres refus et
+la réutilisation ; rétention, états UI, adaptateur.7 et régression restent ouverts.
 
 ## Files individuelles et globales pleines
 
@@ -373,9 +374,9 @@ Les144 déconnexions sont terminales499 sans admission ni handler. Deux POST sai
 puis deux prochains tirs réussissent ; quatre tirs et148 invocations au total,
 aucun rejeu. Neuf fonctions purgées physiquement, actifs/réservations nuls,
 34 backends,5982 artefacts et services/configuration conservés. Aucun produit,
-budget, UI/manuel ou capture modifié. Le refus d'indisponibilité suit ci-dessous ;
-maximum sous HTTP non exclusif, réutilisation préchauffée, plafond global (SLS-099),
-rétention réelle, états UI et régression complète restent ouverts.
+budget, UI/manuel ou capture modifié. Les compléments d'indisponibilité et de
+maximum/réutilisation suivent ci-dessous. Plafond global (SLS-099), rétention,
+états UI, adaptateur.7 et régression complète restent ouverts.
 
 ## Commande de cache en cours et prochain tir
 
@@ -390,5 +391,22 @@ des versions agent1→2 et donnée conservée/cache vide ; prochain tir et HTTP 
 Deux tirs, trois handlers réussis, une purge physique et garde terminée, aucun
 rejeu. Les322 sources,34 backends,5982 artefacts et identités/images/démarrages/
 fichiers officiels sont conservés. Aucun contrôle ou agent arrêté, budget,
-image produit, UI/manuel ou capture modifié. Les autres preuves nommées ci-dessus
-gardent SLS-078 ouverte ; les pannes propres du banc ne sont pas déduites du nominal.
+image produit, UI/manuel ou capture modifié. Le maximum et la réutilisation
+suivent ci-dessous ; les autres critères restent ouverts. Les pannes propres du
+banc ne sont pas déduites du nominal.
+
+## Maximum individuel et instances déjà prêtes
+
+La [preuve du10 novembre2026](evidence/schedule-instance-reuse-dev-2026-11-10.json)
+passe quatre groupes sur325 sources, client832b20e et même image b9ad872a.
+Le [plan et les résultats](SCHEDULE_INSTANCE_REUSE.md#résultats-qualifiés) recoupent
+21:20/21:25UTC : maximum1 occupé par HTTP non exclusif avec budgets globaux libres,
+refus sans invocation et minimum déjà prêt réutilisé. Après le HTTP, deux mêmes
+instances/CID sont ready puis servent les deux prochains tirs. Générations,
+configurations, hashes et slots sont conservés/corrélés ; aucun rejeu du refus.
+
+Quatre tirs, quatre handlers réussis (un HTTP/trois planifiés), deux purges
+physiques et ressources nulles. Les34 backends,5982 artefacts et services/
+configuration sont identiques ; aucun produit/UI/manuel ou capture modifié.
+Restent plafond global (SLS-099), rétention réelle, états UI, critère adaptateur.7
+et régression complète avant clôture078.
