@@ -86,7 +86,7 @@ déjà prise et documentée, avec motif).
 
 | Fonctionnalité Scaleway | État de la plateforme | Unité ou décision |
 | --- | --- | --- |
-| CRON : UTC, au plus une fois par minute, arguments JSON envoyés en `POST` sur `/` | **À livrer** avec une résolution de **5 minutes** voulue par le responsable (écart de précision assumé) | [SLS-078](BACKLOG.md#sls-078), [SLS-081](BACKLOG.md#sls-081) |
+| CRON : UTC, au plus une fois par minute, arguments JSON envoyés en `POST` sur `/` | **Partiel, en qualification** : moteur de manifeste déployé, résolution de **5 minutes** voulue par le responsable ; arguments de jobs et noms de mois/jours à livrer | [SLS-078](BACKLOG.md#sls-078), [SLS-081](BACKLOG.md#sls-081), [SLS-098](BACKLOG.md#sls-098) |
 | Queue (Scaleway Queues) : retry jusqu'à 3 fois si statut ≥ 300, 10 messages en vol | **À livrer** plus tard ; aucun service de messagerie dans le SPARK DEV | [SLS-085](BACKLOG.md#sls-085) |
 | NATS : un appel par message du sujet | **À livrer** plus tard, même dépendance | [SLS-085](BACKLOG.md#sls-085) |
 
@@ -121,3 +121,9 @@ Cette matrice est mise à jour avec chaque unité qu'elle cite. Sa clôture exig
 que toute ligne soit **Livré**, **Sans objet** ou **Écart assumé** avec preuve
 E2E sur le SPARK DEV, ou qu'une ligne restante soit portée par une unité ouverte
 dont le blocage externe est nommé.
+
+Revue ciblée du 10 novembre 2026 (SLS-078) : [déclencheurs de fonctions](https://www.scaleway.com/en/docs/serverless-functions/how-to/add-trigger-to-a-function/)
+et [référence des crons](https://www.scaleway.com/en/docs/serverless-jobs/reference-content/cron-schedules/)
+consultées à nouveau. UTC et POST sur `/` confirmés ; l'écart des noms de
+mois/jours devient SLS-098. Cette revue ciblée ne renouvelle pas la preuve des
+autres lignes de la matrice.

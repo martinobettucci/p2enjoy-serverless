@@ -84,6 +84,7 @@ bloquée est sautée et son blocage est nommé.
 | 8 | [SLS-084](#sls-084) Runtimes supplémentaires | Développer | `[ ]` | SLS-083 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | 8 | [SLS-086](#sls-086) Répartition du trafic entre versions | Développer | `[ ]` | SLS-074, SLS-073 | [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
 | 8 | [SLS-087](#sls-087) Conditions d'accès horaire et user-agent | Développer | `[ ]` | SLS-040 | [PLATFORM](PLATFORM.md) |
+| 8 | [SLS-098](#sls-098) Noms de mois et jours dans les crons | Développer | `[ ]` | SLS-078 | [SCHEDULES](SCHEDULES.md), [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | 9 | [SLS-097](#sls-097) API de gestion documentée (OpenAPI) | Développer | `[ ]` | unités 3 à 8 | [CONTROL](CONTROL.md) |
 | 10 | [SLS-090](#sls-090) Pannes résiduelles de publication | Qualifier | `[ ]` | SLS-030 | [DEPLOYMENT](DEPLOYMENT.md) |
 | 10 | [SLS-091](#sls-091) Rétention et nettoyage du moteur d'exécution | Qualifier | `[ ]` | SLS-040 | [EXECUTION](EXECUTION.md) |
@@ -114,7 +115,6 @@ la réponse est livré sans attendre.
 | Budget de cellule CPU/RAM pour les minima de la référence (au moins 1,5 CPU et 2 Gio) | 4 (proposition `.?` au propriétaire du SPARK) | La campagne complète de [SLS-080](#sls-080) | Adaptateur, fixtures, 12 des 13 fonctions à un budget plus bas, preuves hors budget |
 | Autorité d'installation temporaire pour rejouer le guide | 4 | [SLS-079](#sls-079) | Rédaction du guide, tableau de configuration comparé au code |
 | Comptes SSO de test (non vérifié, vérifié, admin) et rotation de clé réelle | 4 | Preuves de [SLS-089](#sls-089) | Correctifs et tests de composants |
-| Identifiants de push GitHub | 4 | Publication des commits | Tout le travail local, commité |
 
 ## Suivi des demandes du responsable
 
@@ -1981,3 +1981,28 @@ Tests exigés : unitaire de génération, intégration de comparaison routes/sch
 refusé sans droit, E2E de lecture du schéma depuis une session administrateur.
 
 À mettre à jour : `CONTROL.md`, manuel, parité, `SCHEMA.md` si besoin.
+
+<a id="sls-098"></a>
+## SLS-098 — Noms de mois et de jours des expressions cron
+
+Statut : [ ] — écart découvert lors de la revue de parité SLS-078 du 10 novembre 2026.
+Nature : Développer. Dépend de : SLS-078. Ordre : 8.
+Contrat à compléter avant code dans [SCHEDULES](SCHEDULES.md).
+
+Constat : la [référence Scaleway des crons](https://www.scaleway.com/en/docs/serverless-jobs/reference-content/cron-schedules/)
+accepte les noms de mois et de jours (`DEC`, `MON-FRI`, `WED`). Le contrat
+numérique actuel de la plateforme les refuse. Cet écart est distinct de la
+résolution de cinq minutes explicitement choisie.
+
+Critères d'acceptation :
+
+- [ ] SLS-098.1 Même grammaire de noms dans l'adaptateur, le contrôle, le moteur et
+  les aperçus ; listes, plages, pas et règle jour/semaine cohérents.
+- [ ] SLS-098.2 Refus explicite des noms inconnus et combinaisons invalides ;
+  déclarations numériques historiques conservées.
+- [ ] SLS-098.3 Équivalence des aperçus numériques/nommés et tir réel du jour et
+  du mois courants sur les handlers Docker, avec publication/promotion normale.
+
+Tests exigés : validation par les API réelles, déploiement de manifeste avec
+noms, prévisions comparées et invocation planifiée sur l'horloge réelle, sans
+substitution ; manuel et matrice de parité mis à jour avec la livraison.
