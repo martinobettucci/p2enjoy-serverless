@@ -462,4 +462,6 @@ calcul UTC, partagés par la validation des événements et le moteur. Migration
 avant l'admission interne, rétention et reprise sans envoi des fenêtres manquées.
 La facette Planifications consomme les lectures Read de ce registre, jamais un
 second calcul de planning côté navigateur. Voir [SCHEDULES](SCHEDULES.md).
-Implémentation en cours de qualification, sans preuve complète revendiquée.
+Moteur déployé en DEV ; premier checkpoint de22 groupes réels recoupé dans
+[la preuve](evidence/schedules-checkpoint-dev-2026-11-10.json). La qualification
+complète des planifications et de la plateforme reste ouverte.

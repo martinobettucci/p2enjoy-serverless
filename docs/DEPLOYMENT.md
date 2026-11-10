@@ -464,3 +464,10 @@ migrations et la santé. La migration initialise les générations existantes au
 moment de l'installation, sans rattrapage. L'ancienne image reste conservée.
 L'unité est en qualification ; reprise et preuve temporelle sont définies dans
 [SCHEDULES](SCHEDULES.md). Aucun retour automatique de base n'est prévu.
+
+Le10 novembre2026, la bascule DEV applique009 après sauvegarde native privée ;
+la correction suivante sert `sha256:b9ad872abad15d787524a1dd0c2d1d32200069a85364114ca342d468757734d7`.
+Le [checkpoint](evidence/schedules-checkpoint-dev-2026-11-10.json) lie sauvegardes,
+images,34 sources Python/SQL et web servi ; manuel conforme. Les fichiers
+officiels,5982 artefacts et runtime de référence sont conservés. Les trois notes
+sont proposées en `.?`, sans adoption revendiquée.

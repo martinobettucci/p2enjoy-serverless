@@ -2,8 +2,8 @@
 
 Revue du10 novembre2026, après signalement du responsable sur les demandes
 manquantes. Périmètre : conversation, spécifications, backlog et sources du
-dépôt courant. Cette revue ne constitue pas une nouvelle campagne E2E ni une
-vérification de disponibilité de l'installation distante.
+dépôt courant. Les constats initiaux viennent de la revue statique ; les livraisons suivantes
+sont actualisées ci-dessous avec leurs preuves DEV propres.
 
 ## Ce qui manque dans le produit
 
@@ -18,7 +18,7 @@ contrats existent :
 | Client HTTP intégré par fonction, type Postman | Catalogue d'URL/copie présent ; facette de test, requête et réponse interactives absentes | SLS-071 |
 | Logging d'exploitation | Logs par invocation présents ; recherche, période, suivi, export et vue de service absents | SLS-072 |
 | Monitoring | Relevés Docker ponctuels présents ; séries historiques, tableaux de bord et alertes absents | SLS-073 |
-| Planifications (crons) du manifeste | Acceptées et stockées, **jamais déclenchées** ; aucun avertissement de l'adaptateur (limite désormais dite dans le manuel) | SLS-078 |
+| Planifications (crons) du manifeste | Moteur et facette déployés ; [checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json) de six groupes ciblés ; pannes, saturation, cycles de versions et qualification complète ouverts | SLS-078 |
 | Jobs serverless : payload fixe, gabarits composés dans l'UI, crontab par fenêtres de 5 minutes | Absents | SLS-081 |
 | Parité avec toutes les fonctionnalités de Scaleway Serverless | Matrice sourcée établie ; limites, en-têtes, runtimes, déclencheurs de messages et autres écarts ouverts | SLS-082 à SLS-088 |
 | Compatibilité démontrée du projet de référence | Audit et matrice faits ; fixtures et preuves absentes ; capacité CPU à adapter | SLS-080 |

@@ -5368,3 +5368,30 @@ l'admission. Le travail est découpé en moteur/API puis facette et preuves rée
 sans clôture intermédiaire de l'unité. Le push initial a été refusé par la revue
 automatique (ancienne consigne de publication humaine) ; demande explicite en
 attente, travail local autorisé poursuivi. Aucun service n'est encore modifié.
+
+## 10 novembre 2026 — Premier moteur de planification réel, manuel conforme
+
+SLS-078 est codée et déployée en DEV avec009 : générations transactionnelles,
+curseur, réclamation, admission interne commune, historique Read et facette.
+Revue : prévision d'un nominal encore en attente corrigée, grammaire Unicode
+antérieure conservée après reproduction du422, source d'un tir protégée de la
+rétention avant clôture. Ce dernier garde attend encore sa faute temporelle.
+
+Sur l'image corrigée b9ad872a :6 groupes ciblés,8 manuel et8 publics passent en
+série. Les5 groupes du premier essai restent séparés. Douze handlers au total
+(5 initiaux,7 replay),9 fonctions purgées physiquement dans3 namespaces,34
+sources embarquées et4 ressources HTTPS recoupées ;5982 artefacts et fichiers
+officiels/référence conservés, budgets libérés. Vingt et une captures courantes
+et3 initiales observées. Manuel16 chapitres/56 paragraphes conforme : SLS-096
+close. Preuve : evidence/schedules-checkpoint-dev-2026-11-10.json.
+
+L'autorisation explicite de push a levé le refus initial. HTTPS sans identifiants ;
+l'accès SSH existant authentifie martinobettucci, origin utilise ce transport
+vers le même dépôt et les commits sont poussés. Trois notes proposées en.? sans
+adoption revendiquée. Aucun nouveau paramètre, secret ni route.
+
+Reprendre SLS-078 : cycles de cible, SIGKILL/arrêt multi-fenêtres, recouvrement,
+saturation/exclusif, grammaire complète, rétention et états UI complémentaires.
+La régression complète n'est pas exécutée ; les preuves de clôture restent
+ouvertes. Écart de parité noms de mois/jours inscrit en SLS-098 avant traitement.
+Registre d'incohérences absent ; aucun défaut extérieur traité implicitement.

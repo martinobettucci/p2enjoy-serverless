@@ -4,10 +4,11 @@
 
 ### Planifications en cours de qualification
 
-- Moteur UTC par fenêtres de cinq minutes, réclamation et historique durables
+- Moteur déployé en DEV : fenêtres de cinq minutes, réclamation et historique durables
   (migration 009), admission interne commune au moteur Docker, sans rejeu.
-- Lectures Read, facette Planifications et manuel mis à jour ; construction et
-  preuves réelles encore en cours, SLS-078 reste `[~]`.
+- Lectures Read, facette Planifications et manuel reconstruits ;
+  premier checkpoint de22 groupes réels qualifié,21 captures inspectées.
+  SLS-096 est corrigée ; SLS-078 reste `[~]` pour ses critères résiduels.
 
 
 ### Méthode, parité Scaleway et planifications (documentation)
@@ -22,9 +23,8 @@
   squelette uniforme avec critères cochables et tests exigés, restes de
   qualification extraits en unités SLS-089 à SLS-097. `docs/OBJECTIF_AUTONOME.md`
   porte un goal permanent qui repart du backlog, sans liste d'unités.
-- Le manuel indique que les planifications du manifeste sont enregistrées mais pas
-  encore déclenchées ; la console déployée l'affichera à sa prochaine reconstruction.
-  Aucun comportement applicatif ne change dans cette entrée.
+- Le manuel est reconstruit avec la console et décrit désormais le moteur de
+  planification déployé en DEV ; sa concordance est vérifiée dans SLS-096.
 
 ### Réconciliation des demandes et de la livraison
 

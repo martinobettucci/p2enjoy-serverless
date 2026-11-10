@@ -59,3 +59,13 @@ Rejouer séquentiellement les parcours publics, de connexion, de gestion et de
 consultation, affectés par la navigation commune. Les rapports identifient sources,
 image et résultat de chaque groupe ; les contrôles de dépendances restent distincts
 des preuves fonctionnelles.
+
+## Concordance rétablie avec009
+
+SLS-096 est corrigée le10 novembre2026 avec la reconstruction du contrôle et du
+manuel : [preuve](evidence/schedules-checkpoint-dev-2026-11-10.json). Huit groupes
+du manuel passent sur l'image b9ad872a,16 chapitres et56 paragraphes comparés
+intégralement, empreinte source égale au guide servi. Les16 captures du guide
+sont inspectées sur desktop, mobile, tablette et corps agrandi. Chaque nouvelle
+modification du manuel doit à nouveau reconstruire/déployer la console et
+rejouer cette concordance dans sa propre livraison.

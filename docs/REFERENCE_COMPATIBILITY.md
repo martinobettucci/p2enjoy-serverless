@@ -44,7 +44,7 @@ campagne E2E de [Preuves attendues](#preuves-attendues).
 | `memoryLimit` 128/256 Mio, `timeout` en chaîne `120s`/`300s`/`10s` | Pris en charge | — |
 | `minScale` 0 à 2, `maxScale` 1 à 5 | Pris en charge | [Capacité](#capacité) |
 | `httpOption`, `privacy: public`, `custom_domains` | Exigent `--accept-provider-differences` ; ignorés | HTTPS imposé ; jeton obligatoire ; adresses issues des domaines du SPARK |
-| `events: schedule` (2 fonctions) | Acceptés et enregistrés | **Jamais déclenchés** avant [SLS-078](BACKLOG.md#sls-078) ; voir [Planifications](#planifications) |
+| `events: schedule` (2 fonctions) | Acceptés et enregistrés | Moteur déployé, première preuve réelle dans [SLS-078](BACKLOG.md#sls-078) ; compatibilité des expressions de la référence encore à qualifier ; voir [Planifications](#planifications) |
 | `events` HTTP absents | Endpoint implicite `/invoke/{id}` | Les clients passent d'un domaine par fonction à une adresse par UUID |
 
 ## Contrat des handlers
@@ -88,8 +88,9 @@ Deux fonctions de la référence sont planifiées : une chaque jour de lundi à 
 à 21 h 00 UTC (`0 21 * * 1-6`) et une chaque heure de 7 h à 20 h UTC, de lundi à
 samedi (`0 7-20 * * 1-6`). Elles tombent sur des frontières de 5 minutes : la
 résolution de [SCHEDULES](SCHEDULES.md) ne les décale pas. Leurs handlers lisent
-un corps JSON ; le tir envoie `{}` en `POST`. Sans [SLS-078](BACKLOG.md#sls-078), ces
-deux fonctions ne s'exécutent jamais : c'est un écart **bloquant** de compatibilité.
+un corps JSON ; le tir envoie `{}` en `POST`. Le moteur de [SLS-078](BACKLOG.md#sls-078) a son premier checkpoint réel.
+Les deux expressions de la référence et leurs fixtures originales restent à
+qualifier ; ce checkpoint ne démontre pas leur compatibilité complète.
 
 ## Adaptations côté client
 

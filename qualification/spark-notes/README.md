@@ -21,7 +21,7 @@ Les créations, changements de quotas, publications et suppressions sont raccord
 
 Le moteur public exécute les fonctions publiées avec un jeton Read. Il réserve CPU, mémoire et place d’instance avant Docker, applique minimum/maximum/concurrence et extinction après inactivité, puis réconcilie ses ressources au redémarrage sans rejouer les appels incertains. Les générations de code et configuration conservent les appels déjà admis ; les changements de stockage drainent les instances au repos et refusent les invocations actives.
 
-La passerelle applique les politiques d’origine/IP et CORS. Les API d’observation exposent états, allocations, mesures Docker et journaux expurgés. Les facettes Instances et Invocations montrent les allocations, mesures, états et journaux expurgés dans la fiche de fonction. La facette Code et révisions permet de publier un ZIP, suivre ou abandonner une préparation, consulter les métadonnées, activer et supprimer les révisions. Les commandes publiques de purge/cache et le catalogue d’archives sont déployés et qualifiés dans SLS-065. Les crons, cycles SSO et pannes résiduelles sont recensés dans le backlog.
+La passerelle applique les politiques d’origine/IP et CORS. Les API d’observation exposent états, allocations, mesures Docker et journaux expurgés. Les facettes Instances et Invocations montrent les allocations, mesures, états et journaux expurgés dans la fiche de fonction. La facette Code et révisions permet de publier un ZIP, suivre ou abandonner une préparation, consulter les métadonnées, activer et supprimer les révisions. Les commandes publiques de purge/cache et le catalogue d’archives sont déployés et qualifiés dans SLS-065. Le moteur de planification et sa facette sont déployés ; leur qualification complète, les cycles SSO et les pannes résiduelles sont recensés dans le backlog.
 
 Preuve moteur : `docs/evidence/execution-dev-2026-11-06.json` dans le dépôt du projet. Elle recoupe sources, image, rapports, archives, ressources web et configuration officielle. Les campagnes sont sérielles, sans mock, doublure ou test ignoré. Les archives de code conservées sont distinguées des volumes de qualification explicitement purgés.
 
@@ -650,3 +650,13 @@ produit/UI/manuel ; console, historique et régression complète008 restent ouve
 SLS-074 conserve [~].
 
 Notes toujours proposées, sans adoption implicite.
+
+## Planifications — checkpoint du 10 novembre 2026
+
+Les crons du manifeste de la version promue sont déclenchés par fenêtres UTC
+de cinq minutes, avec réclamation et historique durables, sans rejeu. La facette
+Planifications affiche prochains créneaux et résultats. Le checkpoint corrigé
+passe six groupes réels, plus huit du manuel et huit publics. SLS-078 reste en
+qualification pour promotions, interruptions, recouvrement, saturation,
+rétention et états de console complémentaires. Le manuel affiché est recoupé
+à sa source : seize chapitres et 56 paragraphes.

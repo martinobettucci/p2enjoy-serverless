@@ -487,7 +487,7 @@ les31 backends et les fichiers officiels restent identiques. Preuve :
 docs/evidence/function-version-duplicate-recovery-dev-2026-11-09.json.
 
 
-## Gardes008 et image actuelle
+## Gardes008 — checkpoint du 9 novembre 2026
 
 Le contrôle courant serverless-api est e661516b, image def45648f9e7, démarré
 2026-11-09T18:52:49.904838248Z. Seul le préfixe de première transition008 change
@@ -678,3 +678,16 @@ produit/UI/manuel ; console, historique et régression complète008 restent ouve
 SLS-074 conserve [~].
 
 Notes toujours proposées, sans adoption implicite.
+
+## Consulter les planifications — 10 novembre 2026
+
+Depuis une fonction, ouvrir Planifications ; la modification des crons reste
+dans le manifeste puis publication/promotion. Les lectures Read sont
+`GET /api/functions/{UUID}/schedules` et `/schedule-firings?limit=20&offset=0`.
+Le handler reçoit POST sur `/`, corps `{}`, en-têtes `x-p2enjoy-trigger: schedule`
+et `x-p2enjoy-schedule-slot`. Les tirs internes n'utilisent pas de jeton ni les
+politiques d'origine/IP, mais passent par les admissions et quotas du moteur.
+Les nouveaux appels HTTP conservent leurs règles et leur jeton obligatoire.
+Le guide compilé décrit les fenêtres et les états, dont absence de rattrapage
+et de rejeu. Six groupes réels passent ; les preuves de pannes, retours de hash,
+recouvrement et saturation restent ouvertes dans SLS-078.

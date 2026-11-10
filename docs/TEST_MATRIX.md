@@ -92,9 +92,31 @@ séparément, en série ; ces preuves ne remplacent pas celles de l'API publique
 | Nettoyage physique refusé, garde et reprise | EACCES Docker réel, 503 après suppression logique, SIGKILL/SIGSTOP du helper et maintenance normale |
 | Publication enregistrée avec confirmation de stockage retardée | Suspension bornée de l’agent, 503 réel, décision conservée puis quota confirmé |
 | Liste/suivi cohérents et succès antérieur retiré | Observation DOM atomique et cinq gestes indépendants après succès réel |
-| Manuel maintenu et affiché | Huit groupes de `e2e/manual-ui.mjs`, SHA256, onze chapitres, 28 paragraphes, tableau, clavier et formats d’écran |
+| Manuel au checkpoint SLS-063 du7 novembre | Huit groupes de `e2e/manual-ui.mjs`, SHA256, onze chapitres, 28 paragraphes, tableau, clavier et formats d’écran |
 | Régression commune | `python3 -B e2e/execution-suite.py --scope publication` : 18 campagnes, 312 groupes, zéro échec/skip |
 
 La [preuve finale](evidence/publication-console-dev-2026-11-07.json) recoupe les
 rapports frais avec les sources et l’image, les 54 captures inspectées, les
 archives conservées, le nettoyage et les notes appliquées au SPARK.
+
+## Planifications et concordance du manuel — SLS-078/096
+
+Checkpoint courant : [preuve009](evidence/schedules-checkpoint-dev-2026-11-10.json).
+Exécuter en série, après connexion SSO réelle :
+
+1. `node e2e/schedules.mjs` : six groupes, deux frontières UTC réelles, cron
+   Unicode, prévision nominal passé/frontière future, fusion, droits, pilote,
+   état désactivé, handler Docker et console depuis l'accueil.
+2. `node e2e/manual-ui.mjs` : huit groupes ; concordance du SHA,16 chapitres et
+   56 paragraphes, tableau, focus, ancres, formats et session.
+3. `python3 -B e2e/public.py` : huit groupes publics.
+
+Vingt-deux groupes courants uniques ; cinq groupes d'une première image restent
+distincts, ainsi que le refus Unicode reproduit avant correction. Les neuf
+fonctions de tous les essais sont recoupées purgées. Vingt et une captures
+courantes sont inspectées ; SLS-096 est clos. Les scénarios de panne, cycles de
+versions, grammaire complète, recouvrement, saturation, exclusif, rétention et
+états UI complémentaires restent à exécuter pour SLS-078. Cette tranche ne
+remplace aucune campagne de régression de la plateforme. La campagne complète
+SLS-095 doit inclure ces nouveaux clients et cibler les migrations réellement
+installées, en conservant les bancs historiques008 dans leur périmètre propre.

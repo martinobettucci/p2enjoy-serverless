@@ -69,7 +69,6 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
-| 1 | [SLS-096](#sls-096) Manuel déployé conforme à sa source | Corriger | `[ ]` | — (même build que SLS-078) | [CONSOLE_MANUAL](CONSOLE_MANUAL.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
@@ -412,7 +411,8 @@ recoupe aussi les régressions et la console. Les admissions et observations API
 de la [preuve du moteur](evidence/execution-dev-2026-11-06.json). Les
 commandes publiques de purge/cache et leurs vues de console sont déployées
 et qualifiées dans SLS-065. Les crons sont portés par [SLS-078](#sls-078) et les
-jobs de console par [SLS-081](#sls-081) ; aucun tir n’existe aujourd’hui.
+jobs de console par [SLS-081](#sls-081). Le moteur a son premier checkpoint
+réel dans SLS-078 ; les jobs de console restent absents.
 Les quotas préparés et leurs reçus sont
 implémentés ; la preuve initiale de dix groupes vérifie décisions, réservations, SIGKILL pendant
 préparation et reprise d'abandon partiel avec conservation des données.
@@ -1482,8 +1482,10 @@ relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-1
 <a id="sls-078"></a>
 ## SLS-078 — Moteur de planification des crons
 
-Statut : [~] — moteur, migration 009, lectures API et facette codés ; construction,
-déploiement et preuves E2E en cours. Aucun critère de clôture encore acquis.
+Statut : [~] — moteur, migration 009, lectures API et facette déployés en DEV ;
+[premier checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json) : six groupes ciblés,
+huit du manuel et huit publics. Le manuel conforme SLS-096 est clos ; les critères
+restants de cette unité demeurent ouverts.
 Nature : Développer. Dépend de : SLS-040 (admission), SLS-074 (cible promue).
 Débloque : SLS-080, SLS-081, SLS-073. Ordre : 1.
 Contrat : [SCHEDULES](SCHEDULES.md).
@@ -1493,7 +1495,7 @@ de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de
 
 Critères d'acceptation :
 
-- [ ] SLS-078.1 Réveil aux frontières UTC de 5 minutes ; un créneau nominal de la fenêtre
+- [x] SLS-078.1 Preuve : [checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json). Réveil aux frontières UTC de 5 minutes ; un créneau nominal de la fenêtre
   écoulée est lancé à la frontière suivante ; jamais en avance ; retard consigné.
 - [ ] SLS-078.2 Plusieurs créneaux d'une même fenêtre fusionnés en un tir (`coalesced`) ;
   syntaxe cinq champs (listes, plages, pas, `*`, dimanche 0 ou 7) ; jour du mois OU jour de
@@ -1945,17 +1947,18 @@ Critères d'acceptation :
 <a id="sls-096"></a>
 ## SLS-096 — Manuel déployé conforme à sa source
 
-Statut : [ ] — la source `docs/manual.md` a été complétée sans reconstruire la console ; le
-manuel affiché diffère de sa source, ce qui invalide la concordance de SLS-062.
+Statut : [x] — console reconstruite et déployée avec la source courante ; huit
+parcours réels du manuel passent, seize chapitres et 56 paragraphes concordent,
+seize captures du guide inspectées. [Preuve](evidence/schedules-checkpoint-dev-2026-11-10.json).
 Nature : Corriger. Dépend de : — (même build que SLS-078). Ordre : 1.
 Contrat : [CONSOLE_MANUAL](CONSOLE_MANUAL.md).
 
 Critères d'acceptation :
 
-- [ ] SLS-096.1 La console est reconstruite et déployée avec le manuel courant.
-- [ ] SLS-096.2 Le test de concordance entre le guide affiché et `docs/manual.md` passe sur
+- [x] SLS-096.1 La console est reconstruite et déployée avec le manuel courant.
+- [x] SLS-096.2 Le test de concordance entre le guide affiché et `docs/manual.md` passe sur
   l'image déployée.
-- [ ] SLS-096.3 Règle de maintien : chaque unité qui modifie `docs/manual.md` redéploie la
+- [x] SLS-096.3 Règle de maintien : chaque unité qui modifie `docs/manual.md` redéploie la
   console dans la même livraison (critère commun 7).
 
 Tests exigés : concordance des chapitres et paragraphes, E2E depuis l'accueil réel qui ouvre

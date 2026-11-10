@@ -10,8 +10,8 @@ configurés dans la console ([SLS-081](BACKLOG.md#sls-081),
 
 L'adaptateur valide `schedule.rate` (cron à cinq champs) et `schedule.enabled`,
 le contrôle les enregistre dans les événements de la révision. Le moteur, sa
-migration 009, ses lectures API et sa facette sont maintenant codés ; déploiement
-et qualification réelle sont en cours, sans clôture de l'unité. Le projet de référence en dépend :
+migration 009, ses lectures API et sa facette sont déployés en DEV. Leur premier
+checkpoint réel est qualifié ; les preuves restantes gardent l’unité ouverte. Le projet de référence en dépend :
 deux de ses treize fonctions sont planifiées
 ([compatibilité](REFERENCE_COMPATIBILITY.md#planifications)).
 
@@ -216,3 +216,29 @@ Trois écarts du premier code restent dans SLS-078 avant clôture :
 Ces correctifs ne remplacent aucun critère initial. La première campagne
 conserve son image et son commit ; une correction produit impose une nouvelle
 image et un replay des scénarios affectés.
+
+## Premier checkpoint réel et reprise
+
+[Preuve du 10 novembre 2026](evidence/schedules-checkpoint-dev-2026-11-10.json) :
+six groupes de planification sur l'image corrigée b9ad872a, huit du manuel et
+huit publics, soit22 groupes uniques retenus. Les deux frontières de cinq
+minutes, fusion à la minute, instant UTC, déclaration désactivée, pilote non
+promu, droits Read/refus et POST JSON sans jeton sont vérifiés. La prévision d'un
+nominal déjà passé garde sa frontière future ; le cron Unicode est accepté et
+réellement exécuté après reproduction du422 sur l'image précédente.
+
+Le recoupement retrouve12 handlers réussis :5 du premier checkpoint et7 du
+replay corrigé (dont2 partis à une frontière avant celle retenue par le scénario).
+Les5 groupes initiaux ne s'ajoutent pas aux22 groupes courants. Neuf fonctions
+sont purgées physiquement dans trois namespaces, sans réservation ni génération
+active. Les5982 artefacts antérieurs, configuration officielle et référence sont
+conservés ;34 sources embarquées et quatre ressources web servies sont recoupées.
+Les21 JPEG courants sont inspectés, plus les trois initiaux distincts. Le manuel
+compilé concorde avec16 chapitres et56 paragraphes : SLS-096 est clos.
+
+Reprendre dans cette unité : promotions/retour de hash/retrait et suppression
+autour des fenêtres ; SIGKILL et arrêt multi-fenêtres ; recouvrement, saturation
+et stockage exclusif occupé ; grammaire complète et règle jour/semaine ;
+rétention réelle, dont l'invocation source conservée jusqu'à clôture ; états
+UI vide/erreur/longs et pagination. La régression complète reste à exécuter.
+Les noms de mois et de jours sont suivis séparément dans SLS-098.

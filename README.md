@@ -3,13 +3,19 @@
 **La plateforme demandée n'est pas encore entièrement livrée.** Favoris,
 actions en masse, éditeur de code intégré, client HTTP par fonction, journaux
 avancés et monitoring historique restent à implémenter. Le moteur des crons du manifeste est
-codé et sa qualification DEV est en cours ; les jobs de console, la compatibilité
+déployé et sa qualification DEV est en cours ; les jobs de console, la compatibilité
 complète du projet de référence, la parité avec Scaleway Serverless
 ([matrice](docs/SCALEWAY_PARITY.md)) et un guide d'exploitation rejoué restent à
 livrer. Le moteur, la gestion, les versions et les preuves ciblées ne clôturent pas
 ces demandes. Voir [l'état réel de livraison](docs/DEMANDES_ET_LIVRAISON.md) et le
 [registre des unités ouvertes](docs/BACKLOG.md#registre-des-unités-ouvertes), qui
 porte l'ordre de reprise, avant les checkpoints techniques détaillés ci-dessous.
+
+Le [premier checkpoint de planification](docs/evidence/schedules-checkpoint-dev-2026-11-10.json)
+qualifie22 groupes réels :6 ciblés,8 du manuel,8 publics. La facette Planifications
+est disponible ; le manuel servi correspond à16 chapitres et56 paragraphes.
+Les pannes, cycles de promotion, saturation et autres critères de SLS-078 restent
+ouverts. SLS-096 (concordance du manuel) est corrigée et vérifiée.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

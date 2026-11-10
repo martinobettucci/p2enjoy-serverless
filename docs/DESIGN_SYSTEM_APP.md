@@ -359,3 +359,12 @@ nouveau. Les états de tir portent un libellé français, les créneaux et front
 portent UTC, les empreintes complètes restent sélectionnables et reviennent à la
 ligne. Les listes d'historique ont cinq éléments et restaurent le focus au titre
 après changement de page. Le rendu et les parcours restent à qualifier.
+
+Le [checkpoint du10 novembre](evidence/schedules-checkpoint-dev-2026-11-10.json)
+recoupe cinq JPEG de la facette et seize du manuel, tous inspectés. Desktop et
+mobile390px : noms et hash lisibles avec retour à la ligne, états nommés et pas
+de débordement mesuré. Les deux captures desktop de la facette ont le même cadrage ;
+la lecture de l'historique mobile nécessite son défilement. Les fenêtres réelles
+et le presse-papiers ne sont pas déduits des images. États vides, erreurs, longs
+noms et seconde page de tirs restent à qualifier. Le guide sert16 chapitres et
+56 paragraphes ; tablette et corps de texte200% sont aussi inspectés.

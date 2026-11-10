@@ -233,3 +233,14 @@ applicable. Le catalogue ne vérifie pas la disponibilité ou le certificat.
 Le [contrat SLS-066](INVOCATION_URLS.md) décrit réponse, bornes et limites.
 Le checkpoint sur le domaine courant est déployé ; ses preuves résiduelles
 restent ouvertes. Aucun secret, code ou contenu de variable dans cette lecture.
+
+## Planifications du manifeste
+
+SLS-078, déployée en qualification DEV :
+`GET /api/functions/{id}/schedules` donne les déclarations de la cible promue
+(index, activation, expression, hash, prochain nominal/frontière, dernier tir).
+`GET /api/functions/{id}/schedule-firings?limit=20&offset=0` lit l'historique
+paginé, limit1–100, offset0–10000. Read limité à cette fonction ou session admin,
+autorisation avant lecture et relecture transactionnelle. Aucun endpoint de
+création de tir artificiel. Invocations expose trigger, schedule_firing_id,
+schedule_origin, schedule_expression et schedule_slot. Voir [SCHEDULES](SCHEDULES.md).
