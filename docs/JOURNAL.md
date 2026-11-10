@@ -5538,3 +5538,27 @@ promus sans schedule, listes vides et lectures API vides ; aucune correction du
 moteur. Cinq purges et absence physique recoupées, zéro tir/invocation, compteurs
 nuls. Rapport cff86db6, checkpoint et reçu de nettoyage externe conservés
 séparément, aucun groupe ajouté. La relance complète reste nécessaire.
+
+## 10 novembre2026 — Admission planifiée qualifiée sur trois fenêtres réelles
+
+Client aaf4103 : cinq groupes réussis,313 sources figées, fenêtres19:00/05/10UTC.
+Deux refus CPU sans invocation ; deux vraies files derrière HTTP exclusifs,
+dont une réussite compteur2 et une expiration sans effet compteur1 ; deadline3s
+après démarrage,504 durable puis appel HTTP sain. Deux extinctions idle10s
+mesurées côté SQL vers10,59/10,54s. Handler long encore actif à la seconde
+frontière, skipped_overlap sans invocation, puis terminaison315,099s. Le prochain
+tir CPU réussit après libération ; aucun rejeu des refus/recouvrement. Les cinq
+générations courantes au hash sans cron sont vides, comme les lectures API.
+
+Recoupement natif : huit tirs, neuf invocations dont sept handlers réussis
+(trois planifiés/quatre HTTP), cinq purges physiques, actifs/réservations nuls.
+Les deux essais restent distincts, avec leurs dix purges ; celui arrêté avant
+fenêtre ne compte aucun tir/invocation. Même contrôle/référence, IDs/images/
+démarrages/configuration,34 backends et5982 artefacts conservés. Aucun build
+produit, UI/manuel modifié ou capture. Le journal historique5517lignes est
+restauré à l'identique après l'écrasement documentaire accidentel ; ses ajouts
+ultérieurs sont conservés. Preuve : evidence/schedule-admission-dev-2026-11-10.json.
+
+Reprendre078 : précontrôles planifiés RAM/instances, autres refus avant admission,
+rétention réelle, états UI et régression complète. Les critères restent ouverts ;
+aucun nouveau registre d'incohérences.

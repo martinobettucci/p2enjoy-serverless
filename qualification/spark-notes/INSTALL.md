@@ -692,7 +692,7 @@ Le guide compilé décrit les fenêtres et les états, dont absence de rattrapag
 et de rejeu. Six groupes réels passent ; le complément
 `node e2e/schedule-versions.mjs` passe cinq groupes pour promotions/retour de hash,
 retrait, désactivation et suppression sur quatre frontières réelles. Les preuves
-de recouvrement et saturation restent ouvertes dans SLS-078.
+résiduelles d'admission restent ouvertes dans SLS-078.
 `node e2e/schedule-calendar.mjs` passe cinq groupes distincts pour la grammaire
 numérique : plan/package, refus, prévisions puis huit tirs de fenêtre recoupés.
 Dimanche0/7 et29février sont des aperçus API qualifiés ; leur horloge n'est pas modifiée.
@@ -702,5 +702,12 @@ Dimanche0/7 et29février sont des aperçus API qualifiés ; leur horloge n'est p
 arrêt multi-fenêtres, claim puis lien interrompus sans rejeu, prochains tirs
 normaux, purge et fin des quatre gardes. Le plan SCHEDULE_RECOVERY porte les
 prérequis et les frontières. Ne pas restaurer les backups de la campagne : la
-reprise qualifiée conserve la base écrite. Recouvrement, saturation, exclusif,
+reprise qualifiée conserve la base écrite. Les autres admissions,
 rétention, états UI et régression complète restent à qualifier.
+
+`node e2e/schedule-admission.mjs` passe cinq groupes réels : occupants HTTP et
+baux, CPU refusé sans invocation, files exclusives avec succès/expiration,
+deadline après démarrage, recouvrement315s, extinctions mesurées, prochain tir
+normal et cinq purges. Plan : SCHEDULE_ADMISSION. Aucun budget, fichier officiel,
+image ou migration modifié. Les précontrôles RAM/instances et autres refus,
+rétention, états UI et régression complète restent ouverts.

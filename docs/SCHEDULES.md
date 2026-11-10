@@ -238,8 +238,7 @@ compilé concorde avec16 chapitres et56 paragraphes : SLS-096 est clos.
 
 Le cycle promotions/retour de hash/retrait et suppression autour des fenêtres,
 puis les coupures et reprises sont qualifiés séparément ci-dessous. Reprendre
-dans cette unité : recouvrement, saturation
-et stockage exclusif occupé ;
+dans cette unité : précontrôles planifiés RAM/instances et autres refus avant admission ;
 rétention réelle, dont l'invocation source conservée jusqu'à clôture ; états
 UI vide/erreur/longs et pagination. La régression complète reste à exécuter.
 Les noms de mois et de jours sont suivis séparément dans SLS-098.
@@ -295,7 +294,8 @@ sont recoupées ; réservations et actifs nuls,34 backends conformes,5982 artefa
 antérieurs et identités/images/démarrages/fichiers officiels conservés.
 Aucun changement produit, manuel ou interface, aucune nouvelle capture.
 SLS-078.2 est qualifiée ; le complément de coupures suit ci-dessous.
-Recouvrement, saturation, exclusif, rétention, états UI et régression complète restent ouverts.
+Le complément d'admission ci-dessous qualifie recouvrement, CPU et exclusif ;
+les autres admissions, rétention, états UI et régression complète restent ouverts.
 
 
 ## Coupures natives et reprise sans rejeu
@@ -318,5 +318,26 @@ est purgée physiquement, quatre sauvegardes natives intègres, quatre gardes et
 helpers terminés, actifs/réservations à zéro. Les5982 artefacts antérieurs et34
 backends sont recoupés. Aucun build produit, UI/manuel modifié ou capture nouvelle ;
 les précédentes campagnes ne sont pas prétendues rejouées. SLS-078 reste[~]
-pour recouvrement, saturation, exclusif/file/deadline/extinction, rétention,
-états UI complémentaires et régression complète.
+pour les autres admissions, rétention, états UI complémentaires et régression complète.
+
+## Recouvrement, CPU et stockage exclusif
+
+La [preuve du10 novembre2026](evidence/schedule-admission-dev-2026-11-10.json)
+passe cinq groupes sur313 sources figées, client aaf4103 et même produit b9ad872a.
+Le [plan et ses résultats](SCHEDULE_ADMISSION.md#résultats-qualifiés) recoupent les
+fenêtres19:00/05/10UTC : handler315,099s encore actif à la seconde frontière,
+skipped_overlap sans invocation ; deux refus CPU sans invocation puis prochain
+tir réussi après libération ; deux files derrière HTTP exclusifs, l'une réussie
+sur les mêmes données, l'autre expirée sans handler ni effet ; deadline3s après
+démarrage,504 durable puis appel sain. Les deux extinctions idle10s sont mesurées
+par SQL RO dans le SPARK, vers10,59/10,54s après last_used_at.
+
+Neuf invocations dont sept handlers réussis (trois planifiés/quatre HTTP), huit
+tirs et cinq purges physiques sont recoupés. Les refus et le recouvrement ne sont
+pas rejoués ; les générations courantes au hash sans cron portent schedules vide
+et les lectures API ne présentent plus de planification. Actifs/réservations nuls,
+34 backends et5982 artefacts conservés, identités/images/démarrages et fichiers
+officiels inchangés. Les deux essais et leurs dix fonctions purgées restent hors
+total, dont un arrêt avant fenêtre sans tir/invocation. Aucun build produit,
+UI/manuel modifié ni capture nouvelle. SLS-078 reste[~] pour les précontrôles
+RAM/instances, autres refus avant admission, rétention, états UI et régression complète.

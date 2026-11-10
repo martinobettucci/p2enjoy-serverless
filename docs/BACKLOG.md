@@ -1499,10 +1499,14 @@ passent cinq groupes sur310 sources : garde indépendante, trois SIGKILL aux
 frontières SQL, trois fenêtres manquées sans rattrapage, trois tirs suivants
 réussis. Une fonction purgée physiquement ; quatre gardes terminées. Le
 [plan et les résultats](SCHEDULE_RECOVERY.md) gardent les autres preuves ouvertes.
-SLS-078.4/.5 restent à qualifier pour recouvrement, saturation, exclusif,
-file/deadline/extinction et rétention ; états UI et régression complète restent ouverts.
-Campagne opératoire admission/recouvrement : [SCHEDULE_ADMISSION](SCHEDULE_ADMISSION.md),
-à réaliser et qualifier.
+L'[admission réelle](evidence/schedule-admission-dev-2026-11-10.json) passe cinq
+groupes sur313 sources : deux refus CPU sans invocation, deux files exclusives,
+deadline après démarrage, recouvrement315s, deux extinctions mesurées et prochain
+tir sans rejeu. Sept handlers réussis, cinq fonctions purgées ; les deux essais
+antérieurs et leurs dix purges restent séparés. [Plan et résultats](SCHEDULE_ADMISSION.md).
+SLS-078.4/.5 restent ouvertes pour les précontrôles planifiés RAM/instances,
+les autres refus avant admission et la rétention ; états UI et régression complète
+restent ouverts. Aucun changement produit ni nouvelle capture dans ce complément.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.

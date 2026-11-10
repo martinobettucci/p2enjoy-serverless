@@ -777,3 +777,10 @@ aucun rejeu. Quatre sauvegardes privées before-schedule-recovery-* sont intègr
 quatre gardes/helpers terminés, fonction purgée et réservations nulles. Même
 CID/image, nouveaux démarrages attendus du seul contrôle. Preuve :
 `docs/evidence/schedule-recovery-dev-2026-11-10.json`. Les autres critères078 restent ouverts.
+
+L'admission planifiée est qualifiée au client aaf4103, cinq groupes/313 sources :
+CPU sans invocation, exclusif/file/deadline, overlap315s et extinction mesurée.
+Neuf invocations dont sept handlers réussis, cinq purges physiques et compteurs
+nuls ; même contrôle/référence/configuration et5982 artefacts conservés. Les
+deux essais restent séparés, dix autres fonctions purgées. Aucun rebuild produit.
+Preuve : `docs/evidence/schedule-admission-dev-2026-11-10.json`.

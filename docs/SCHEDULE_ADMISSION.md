@@ -65,8 +65,9 @@ antérieurs conservés,34 backends et sources/images/configuration inchangés.
 Un échec conserve son rapport, termine ses appels puis nettoie avant toute relance
 explicite. Aucun retry automatique de la campagne ou des invocations.
 
-Cette tranche ne qualifie pas la rétention, les états UI complémentaires ni la
-régression complète ; SLS-078 reste[~] jusqu'à leurs preuves.
+Cette tranche ne qualifie pas les précontrôles planifiés RAM/instances, les autres
+refus avant admission, la rétention, les états UI complémentaires ni la régression
+complète ; SLS-078 reste[~] jusqu'à leurs preuves.
 
 
 ## Premier essai et réglage de la preuve de deadline
@@ -93,3 +94,34 @@ par PID/naissance ; cinq fonctions purgées publiquement, aucun tir ni invocatio
 compteurs nuls et physique recoupé. Rapport cff86db6 et reçu de nettoyage distincts,
 zéro groupe ajouté. La campagne entière est à rejouer après correction de cette
 assertion ; le schéma et le moteur ne changent pas.
+
+## Résultats qualifiés
+
+La [preuve DEV du10 novembre2026](evidence/schedule-admission-dev-2026-11-10.json)
+passe cinq groupes sur313 sources figées, client aaf4103 et même image b9ad872a.
+Fenêtres19:00,19:05 et19:10 UTC. Les deux HTTP sont observés avant W avec leurs
+conteneurs0,125CPU/128Mio et leurs baux exclusifs. À W, les deux tirs sont liés
+à des invocations queued sans handler. L'un attend puis réussit avec compteur2
+après le HTTP compteur1, dans la même instance ; l'autre est rejected/queue_timeout,
+sans handler, tandis que son HTTP reste running. La lecture ultérieure du volume
+retrouve compteur1, sans effet du tir refusé.
+
+Le tir deadline expire après démarrage réellement observé, failed/invocation_timeout
+et504, sans marqueur de fin ; l'appel HTTP suivant réussit. Les extinctions idle10s
+sont mesurées nativement à environ10,59 et10,54s après last_used_at. À W+300,
+le handler long est toujours running dans la même instance ; le nouveau tir est
+skipped_overlap sans invocation. Le premier termine après315,099s.
+
+La cible1CPU est refused_capacity/schedule_capacity sans invocation aux deux
+premières fenêtres. Après libération, son nouveau tir W+600 réussit. Les refus
+et le recouvrement sont relus sans rejeu ; les cinq générations courantes suivent
+les hashes promus sans cron et portent schedules vide, lectures API vides.
+
+La collecte indépendante recoupe neuf invocations : sept handlers réussis
+(trois planifiés, quatre HTTP), une expiration de file sans handler et un timeout
+d'exécution. Huit tirs, deux mesures d'extinction, cinq purges publiques avec
+absence physique, ressources/réservations nulles. Les34 backends,5982 artefacts
+antérieurs, identités/images/démarrages et fichiers officiels sont conservés.
+Les deux essais restent séparés du total : cinq fonctions initiales purgées,
+puis cinq purgées avant fenêtre sans tir ni invocation. Aucun build produit,
+changement UI/manuel ou capture nouvelle. Les autres critères078 restent ouverts.

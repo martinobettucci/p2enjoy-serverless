@@ -661,7 +661,7 @@ distinct de cinq groupes qualifie pilote, promotion, retour de hash, retrait,
 désactivation et suppression ; les appels admis terminent avec leur code initial.
 La grammaire numérique passe aussi cinq groupes distincts : huit tirs de fenêtre,
 fusion et règle jour/semaine, douze refus et prévisions calendaires réelles.
-SLS-078 reste en qualification pour recouvrement, saturation,
+SLS-078 reste en qualification pour les autres admissions,
 rétention et états de console complémentaires. Le manuel affiché est recoupé
 à sa source : seize chapitres et 56 paragraphes.
 
@@ -671,3 +671,10 @@ après perte réelle de l'observateur, trois SIGKILL aux frontières SQL, trois 
 manquées sans invocation ni rattrapage, trois prochains tirs réussis. Une fonction
 purgée, quatre gardes terminées ; même image, référence et fichiers officiels.
 Preuve : docs/evidence/schedule-recovery-dev-2026-11-10.json.
+
+L'admission passe cinq groupes sur313 sources : deux refus CPU sans invocation,
+files exclusives, deadline après démarrage, handler315s sans recouvrement et
+extinctions idle10s mesurées. Sept handlers réussis, cinq fonctions purgées ;
+essais antérieurs et leurs nettoyages restent séparés. Preuve :
+docs/evidence/schedule-admission-dev-2026-11-10.json. Précontrôles RAM/instances,
+autres refus, rétention, états UI et régression complète restent ouverts.

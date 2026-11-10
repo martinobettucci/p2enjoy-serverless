@@ -22,6 +22,11 @@
   absence de rejeu et trois prochains tirs réussis. Garde indépendante éprouvée
   après perte de l'observateur ; quatre gardes terminées, une fonction purgée.
   Même produit/image, référence et configuration conservées ; SLS-078 reste ouverte.
+- Admission planifiée qualifiée par cinq groupes sur313 sources : deux refus CPU
+  sans invocation, deux files exclusives, deadline après démarrage, recouvrement
+  d'un handler315s et deux extinctions idle10s mesurées nativement. Sept handlers
+  réussis, cinq fonctions purgées ; essais incomplets nettoyés et conservés séparément.
+  Précontrôles RAM/instances, autres refus, rétention, UI et régression restent ouverts.
 
 
 ### Méthode, parité Scaleway et planifications (documentation)

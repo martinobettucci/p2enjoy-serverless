@@ -25,8 +25,13 @@ prévisions calendaires ; SLS-078.2 est qualifiée.
 Les [coupures et reprises](docs/evidence/schedule-recovery-dev-2026-11-10.json)
 passent cinq groupes distincts : garde indépendante, trois SIGKILL du contrôle,
 fenêtres manquées sans rattrapage, absence de rejeu et trois tirs suivants réussis.
-Une fonction est purgée physiquement, quatre gardes terminées. Recouvrement,
-saturation, exclusif, rétention, états UI et régression complète restent à éprouver.
+Une fonction est purgée physiquement, quatre gardes terminées.
+L'[admission planifiée](docs/evidence/schedule-admission-dev-2026-11-10.json)
+passe cinq groupes distincts : refus CPU sans invocation, files exclusives,
+deadline après démarrage, recouvrement315s et extinction mesurée. Sept handlers
+réussis et cinq fonctions purgées ; les deux essais antérieurs restent séparés.
+Précontrôles RAM/instances, autres refus, rétention, états UI et régression complète
+restent à éprouver dans SLS-078.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

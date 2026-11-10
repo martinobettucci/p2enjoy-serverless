@@ -113,5 +113,7 @@ terminés. Les5982 artefacts antérieurs et34 fichiers backend sont conservés.
 Aucun build produit, changement d'interface/manuel ni nouvelle capture. Les
 checkpoints précédents ne sont pas ajoutés à ce total ni prétendus rejoués.
 Les autres branches de secours du banc ne sont pas qualifiées par ce passage.
-Recouvrement, saturation, stockage exclusif/file/deadline/extinction, rétention,
-états UI complémentaires et régression complète restent ouverts : SLS-078[~].
+Recouvrement, CPU, stockage exclusif/file/deadline/extinction sont ensuite
+qualifiés dans [SCHEDULE_ADMISSION](SCHEDULE_ADMISSION.md#résultats-qualifiés).
+Précontrôles RAM/instances, autres refus avant admission, rétention, états UI
+complémentaires et régression complète restent ouverts : SLS-078[~].
