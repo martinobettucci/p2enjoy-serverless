@@ -1493,3 +1493,14 @@ conteneurs, réseaux, baux, canaux et allocations ; après les purges publiques,
 il vérifie les artefacts antérieurs et les sources embarquées. Chaque rapport
 privé porte un UUID ; un échec est conservé et les appels sont terminés avant
 nettoyage, sans rejeu automatique.
+
+Le complément RAM/version se lance ensuite, seul :
+`node e2e/schedule-memory-version.mjs`. Il exige la session SSO réelle, le SPARK
+au repos et les budgets1CPU/8192Mio/32instances. Un minimum128Mio et un HTTP
+exclusif occupent réellement le budget avant W ; la cible8192Mio est refusée
+sans invocation. Le tir en file est refusé après promotion du pilote sans cron,
+puis les deux fonctions réussissent aux fenêtres suivantes après libération
+et retour de hash. Le handler d'allocation attend20s pour recouper Docker.
+Prévoir environ15 minutes. Le lecteur `schedule-memory-inspect.py` accepte les
+trois UUID exacts et vérifie les purges physiques. Aucun budget officiel modifié.
+Contrat et discriminants : [SCHEDULE_MEMORY_VERSION](../docs/SCHEDULE_MEMORY_VERSION.md).

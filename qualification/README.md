@@ -29,6 +29,10 @@ pendant l'appel admis, puis vérifie son marqueur et son hash après terminaison
 attente315s, écritures synchronisées sur le volume exclusif, attente HTTP jusqu'à
 une date réelle et dépassement de deadline. La campagne correspondante vit dans
 `e2e/schedule-admission.mjs` ; elle passe par la publication et la passerelle.
+`scheduled-memory.cjs` expose une allocation pendant20 secondes et restitue
+la mémoire déclarée au contexte ; `e2e/schedule-memory-version.mjs` recoupe son
+vrai plafond Docker8192Mio après un refus RAM, et réutilise le handler exclusif
+pour le changement de version avant admission.
 `volume-operations.cjs` écrit, relit, supprime et sature réellement les volumes
 /data et /cache ; il conserve l’errno Linux EDQUOT (-122), que Node expose
 actuellement sous code UNKNOWN. Leur campagne se lance séparément selon
