@@ -5461,3 +5461,35 @@ Les programmes historiques d'arrêt/restitution sont réutilisés par extraction
 AST des seuls littéraux, avec adaptation du préfixe de dossier et conservation
 de leurs gardes d'identité et de fin de mutation. Motif : exercer les vrais
 commits sans endpoint ni résultat substitué. Aucune faute n'est encore lancée.
+
+
+## 10 novembre2026 — Coupures réelles du moteur planifié qualifiées
+
+La campagne e2ced96 passe cinq groupes sur310 sources figées : perte SIGKILL de
+l'observateur avec restitution indépendante, arrêt avant fenêtre couvrant trois
+frontières, coupe après claim durable sans invocation, coupe après lien receiving
+avant handler, puis purge physique. Trois SIGKILL du contrôle sont confirmés
+nativement et Docker137 ; aucun état SQL substitué, aucune horloge modifiée.
+
+Les trois fenêtres17:40/45/50 restent skipped_downtime sans invocation ; les
+créneaux18:00 et18:10 sont failed/control_interrupted, le second avec l'unique
+invocation interrupted avant handler. Les prochains tirs17:55,18:05 et18:15
+réussissent. Les créneaux interrompus sont relus après ces handlers, sans rejeu.
+Les cinq groupes restent distincts des checkpoints précédents non rejoués.
+
+Revue avant campagne : linked exige état actif et completed_atNULL ; cleanup
+reprend après archivage ; les fenêtres manquées sont recontrôlées après le prochain
+tir normal. Ces renforts du banc précèdent son lancement. La collecte native
+vérifie les quatre backups intègres, reçus d'arrêt/restitution, absence de helpers,
+timers/services inactifs, fonction/parents purgés et ressources absentes.
+Même CID/image du contrôle, trois changements de démarrage attendus ; référence,
+fichiers officiels,5982 artefacts et34 backends conservés. Aucun produit, UI,
+manuel ou image modifié. Preuve : evidence/schedule-recovery-dev-2026-11-10.json.
+
+SLS-078 reste[~] : recouvrement, saturation, stockage exclusif occupé, file,
+deadline/extinction, rétention, états UI et régression complète. L'exploration
+lecture seule du prochain lot est recoupée dans receive/claim_window/finish et
+FunctionConfig : distinguer le refused_capacity sans invocation (schedule_capacity)
+du queue_timeout après réception liée ; pour overlap, exiger running/handler_started
+à la seconde frontière, une simple file ne suffit pas. Aucun choix ni code de
+cette prochaine campagne n'est livré ici. Aucun nouveau registre d'incohérences.

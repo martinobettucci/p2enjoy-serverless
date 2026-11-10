@@ -1494,8 +1494,13 @@ douze refus et prévisions calendaires, trois fonctions purgées.
 Nature : Développer. Dépend de : SLS-040 (admission), SLS-074 (cible promue).
 Débloque : SLS-080, SLS-081, SLS-073. Ordre : 1.
 Contrat : [SCHEDULES](SCHEDULES.md).
-Plan opératoire des coupures réelles : [SCHEDULE_RECOVERY](SCHEDULE_RECOVERY.md),
-à réaliser puis qualifier ; aucun résultat de reprise encore déclaré.
+Les [coupures et reprises réelles](evidence/schedule-recovery-dev-2026-11-10.json)
+passent cinq groupes sur310 sources : garde indépendante, trois SIGKILL aux
+frontières SQL, trois fenêtres manquées sans rattrapage, trois tirs suivants
+réussis. Une fonction purgée physiquement ; quatre gardes terminées. Le
+[plan et les résultats](SCHEDULE_RECOVERY.md) gardent les autres preuves ouvertes.
+SLS-078.4/.5 restent à qualifier pour recouvrement, saturation, exclusif,
+file/deadline/extinction et rétention ; états UI et régression complète restent ouverts.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.

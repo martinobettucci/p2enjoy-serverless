@@ -17,6 +17,11 @@
   huit tirs de fenêtre, fusion et règle jour/semaine, douze refus d'expressions,
   prévisions dimanche0/7 et dates limites. SLS-078.2 est qualifiée ; premier
   passage et rejeu final conservent leurs rapports et leurs purges séparés.
+- Coupures natives du contrôle et reprise qualifiées par cinq groupes réels :
+  trois SIGKILL aux frontières SQL, trois fenêtres manquées sans invocation,
+  absence de rejeu et trois prochains tirs réussis. Garde indépendante éprouvée
+  après perte de l'observateur ; quatre gardes terminées, une fonction purgée.
+  Même produit/image, référence et configuration conservées ; SLS-078 reste ouverte.
 
 
 ### Méthode, parité Scaleway et planifications (documentation)

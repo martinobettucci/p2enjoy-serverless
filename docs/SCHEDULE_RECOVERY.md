@@ -80,3 +80,38 @@ Les états attendus après coupure ne sont pas des tests ignorés. Les branches
 propres du pilote ne sont qualifiées que si réellement provoquées. Cette
 campagne ne clôture pas les critères de saturation, recouvrement, exclusif,
 rétention, UI et régression complète de SLS-078.
+
+
+## Résultats réels du10 novembre2026
+
+La [preuve DEV](evidence/schedule-recovery-dev-2026-11-10.json) passe cinq groupes
+sur310 sources figées, client e2ced96 et même image b9ad872a. La garde indépendante
+restitue la santé après SIGKILL réel de l'observateur, sans redémarrer le contrôle.
+Les trois coupes du contrôle sont confirmées par waitpid et Docker137 ; mêmes
+CID/image, nouveaux démarrages attendus. La référence et les fichiers officiels
+restent identiques.
+
+- Avant réclamation à17:40 UTC : curseur17:35, aucun tir ni invocation avant et
+  après mort. Le contrôle reste arrêté aux frontières17:40,17:45 et17:50 ; après
+  reprise, trois skipped_downtime sans invocation. Le handler de17:55 réussit ;
+  les trois fenêtres restent ignorées après ce prochain réveil.
+- Réclamation acquise à18:00 : tir claimed et curseur persistés, aucun lien ni
+  invocation avant/après mort. À la reprise : failed/control_interrupted ; le
+  handler de18:05 réussit, aucun envoi tardif du tir réclamé.
+- Lien acquis à18:10 : tir dispatched et invocation receiving, sans date de fin
+  ni démarrage du handler. Après mort, mêmes UUID/états ; à la reprise, invocation
+  interrupted/control_interrupted et tir failed. Le handler de18:15 réussit ;
+  une seule invocation demeure pour le créneau interrompu, aucun rejeu.
+
+Les trois handlers réussis et l'unique invocation interrompue avant handler sont
+recoupés dans la base native. La fonction est purgée par HTTPS ; code, volumes,
+conteneurs, réseaux, canaux et réservations sont absents. Les quatre sauvegardes
+SQLite restent intègres et inchangées depuis leur création ; les quatre
+helpers/timers/services sont
+terminés. Les5982 artefacts antérieurs et34 fichiers backend sont conservés.
+
+Aucun build produit, changement d'interface/manuel ni nouvelle capture. Les
+checkpoints précédents ne sont pas ajoutés à ce total ni prétendus rejoués.
+Les autres branches de secours du banc ne sont pas qualifiées par ce passage.
+Recouvrement, saturation, stockage exclusif/file/deadline/extinction, rétention,
+états UI complémentaires et régression complète restent ouverts : SLS-078[~].

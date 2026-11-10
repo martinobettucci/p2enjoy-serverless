@@ -661,6 +661,13 @@ distinct de cinq groupes qualifie pilote, promotion, retour de hash, retrait,
 désactivation et suppression ; les appels admis terminent avec leur code initial.
 La grammaire numérique passe aussi cinq groupes distincts : huit tirs de fenêtre,
 fusion et règle jour/semaine, douze refus et prévisions calendaires réelles.
-SLS-078 reste en qualification pour interruptions, recouvrement, saturation,
+SLS-078 reste en qualification pour recouvrement, saturation,
 rétention et états de console complémentaires. Le manuel affiché est recoupé
 à sa source : seize chapitres et 56 paragraphes.
+
+
+Le complément de coupures passe cinq groupes sur310 sources : garde indépendante
+après perte réelle de l'observateur, trois SIGKILL aux frontières SQL, trois fenêtres
+manquées sans invocation ni rattrapage, trois prochains tirs réussis. Une fonction
+purgée, quatre gardes terminées ; même image, référence et fichiers officiels.
+Preuve : docs/evidence/schedule-recovery-dev-2026-11-10.json.

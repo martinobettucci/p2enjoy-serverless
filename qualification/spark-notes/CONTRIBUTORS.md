@@ -769,3 +769,11 @@ La grammaire numérique est qualifiée sur308 sources : cinq groupes du client
 final, huit tirs de fenêtre et trois fonctions purgées. Le premier passage et
 ses trois purges sont distincts. Preuve :
 `docs/evidence/schedule-calendar-dev-2026-11-10.json`. Même produit et configuration.
+
+
+La reprise des crons est qualifiée sans rebuild produit : cinq groupes sur310
+sources, trois coupes natives du contrôle, trois handlers suivants réussis et
+aucun rejeu. Quatre sauvegardes privées before-schedule-recovery-* sont intègres ;
+quatre gardes/helpers terminés, fonction purgée et réservations nulles. Même
+CID/image, nouveaux démarrages attendus du seul contrôle. Preuve :
+`docs/evidence/schedule-recovery-dev-2026-11-10.json`. Les autres critères078 restent ouverts.

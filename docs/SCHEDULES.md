@@ -236,8 +236,9 @@ conservés ;34 sources embarquées et quatre ressources web servies sont recoup�
 Les21 JPEG courants sont inspectés, plus les trois initiaux distincts. Le manuel
 compilé concorde avec16 chapitres et56 paragraphes : SLS-096 est clos.
 
-Le cycle promotions/retour de hash/retrait et suppression autour des fenêtres
-est qualifié séparément ci-dessous. Reprendre dans cette unité : SIGKILL et arrêt multi-fenêtres ; recouvrement, saturation
+Le cycle promotions/retour de hash/retrait et suppression autour des fenêtres,
+puis les coupures et reprises sont qualifiés séparément ci-dessous. Reprendre
+dans cette unité : recouvrement, saturation
 et stockage exclusif occupé ;
 rétention réelle, dont l'invocation source conservée jusqu'à clôture ; états
 UI vide/erreur/longs et pagination. La régression complète reste à exécuter.
@@ -293,5 +294,29 @@ hors total des cinq groupes retenus : l'assertion de borne temporelle a ensuite
 sont recoupées ; réservations et actifs nuls,34 backends conformes,5982 artefacts
 antérieurs et identités/images/démarrages/fichiers officiels conservés.
 Aucun changement produit, manuel ou interface, aucune nouvelle capture.
-SLS-078.2 est qualifiée ; interruptions, recouvrement, saturation, exclusif,
-rétention, états UI et régression complète restent ouverts.
+SLS-078.2 est qualifiée ; le complément de coupures suit ci-dessous.
+Recouvrement, saturation, exclusif, rétention, états UI et régression complète restent ouverts.
+
+
+## Coupures natives et reprise sans rejeu
+
+La [preuve du10 novembre2026](evidence/schedule-recovery-dev-2026-11-10.json)
+passe cinq groupes,310 sources figées et même image b9ad872a. Le
+[plan opératoire](SCHEDULE_RECOVERY.md#résultats-réels-du10-novembre2026) conserve
+les frontières exactes : avant réclamation à17:40 UTC et arrêt couvrant trois
+fenêtres ; claim acquis sans invocation à18:00 ; lien dispatched/receiving avant
+handler à18:10. Waitpid confirme les SIGKILL, Docker rapporte137 et les snapshots
+SQL sont identiques avant/après mort. La reprise produit trois skipped_downtime,
+un failed/control_interrupted sans invocation et une invocation interrupted avec
+tir failed, sans rejeu. Les handlers de17:55,18:05 et18:15 réussissent ; les
+créneaux interrompus sont relus après ces prochains tirs.
+
+La perte réelle de l'observateur qualifie d'abord la restitution indépendante,
+sans redémarrage du contrôle. Les trois coupes changent seulement son démarrage,
+pas son CID/image ; référence et configuration officielle conservées. Une fonction
+est purgée physiquement, quatre sauvegardes natives intègres, quatre gardes et
+helpers terminés, actifs/réservations à zéro. Les5982 artefacts antérieurs et34
+backends sont recoupés. Aucun build produit, UI/manuel modifié ou capture nouvelle ;
+les précédentes campagnes ne sont pas prétendues rejouées. SLS-078 reste[~]
+pour recouvrement, saturation, exclusif/file/deadline/extinction, rétention,
+états UI complémentaires et régression complète.

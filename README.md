@@ -17,11 +17,16 @@ est disponible ; le manuel servi correspond à16 chapitres et56 paragraphes.
 Un [complément de cinq groupes](docs/evidence/schedule-versions-dev-2026-11-10.json)
 qualifie les cycles de promotion/retour de hash, le retrait des crons et l'arrêt
 après désactivation ou suppression, en conservant les appels admis.
-Les pannes, saturation et autres critères de SLS-078 restent ouverts.
+Les critères résiduels de SLS-078 restent ouverts.
 SLS-096 (concordance du manuel) est corrigée et vérifiée.
 La [grammaire numérique des crons](docs/evidence/schedule-calendar-dev-2026-11-10.json)
 passe aussi cinq groupes distincts : fusion, règle jour/semaine, refus et
 prévisions calendaires ; SLS-078.2 est qualifiée.
+Les [coupures et reprises](docs/evidence/schedule-recovery-dev-2026-11-10.json)
+passent cinq groupes distincts : garde indépendante, trois SIGKILL du contrôle,
+fenêtres manquées sans rattrapage, absence de rejeu et trois tirs suivants réussis.
+Une fonction est purgée physiquement, quatre gardes terminées. Recouvrement,
+saturation, exclusif, rétention, états UI et régression complète restent à éprouver.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

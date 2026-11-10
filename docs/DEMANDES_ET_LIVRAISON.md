@@ -18,7 +18,7 @@ contrats existent :
 | Client HTTP intégré par fonction, type Postman | Catalogue d'URL/copie présent ; facette de test, requête et réponse interactives absentes | SLS-071 |
 | Logging d'exploitation | Logs par invocation présents ; recherche, période, suivi, export et vue de service absents | SLS-072 |
 | Monitoring | Relevés Docker ponctuels présents ; séries historiques, tableaux de bord et alertes absents | SLS-073 |
-| Planifications (crons) du manifeste | Moteur et facette déployés ; [checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json), [cycle des versions](evidence/schedule-versions-dev-2026-11-10.json) et [grammaire numérique](evidence/schedule-calendar-dev-2026-11-10.json) qualifiés séparément ; pannes, saturation et qualification complète ouvertes | SLS-078 |
+| Planifications (crons) du manifeste | Moteur et facette déployés ; [checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json), [cycle des versions](evidence/schedule-versions-dev-2026-11-10.json) [grammaire numérique](evidence/schedule-calendar-dev-2026-11-10.json) et [coupures/reprises](evidence/schedule-recovery-dev-2026-11-10.json) qualifiés séparément ; recouvrement, saturation, exclusif, rétention, états UI et qualification complète ouverts | SLS-078 |
 | Jobs serverless : payload fixe, gabarits composés dans l'UI, crontab par fenêtres de 5 minutes | Absents | SLS-081 |
 | Parité avec toutes les fonctionnalités de Scaleway Serverless | Matrice sourcée établie ; limites, en-têtes, runtimes, déclencheurs de messages et autres écarts ouverts | SLS-082 à SLS-088 |
 | Compatibilité démontrée du projet de référence | Audit et matrice faits ; fixtures et preuves absentes ; capacité CPU à adapter | SLS-080 |
