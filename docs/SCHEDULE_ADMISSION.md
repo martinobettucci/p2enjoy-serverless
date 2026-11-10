@@ -18,8 +18,8 @@ consommateurs réels, jamais des réponses ou réservations fabriquées.
 | --- | --- | --- |
 | Handler long |0,125 CPU,128 Mio,deadline360s,idle0,min0,max1 ; handler planifié315s | À W+300, premier appel encore running/handler_started, même instance Docker ; second tir skipped_overlap sans invocation. Premier appel ensuite succeeded, durée du handler supérieure300s |
 | Capacité CPU |1 CPU,128 Mio,min0,max1,idle0 ; aucune instance prête | À W et W+300, budget réellement occupé par les autres appels : refused_capacity/schedule_capacity, invocation_idNULL et aucune invocation de ces slots. Après libération, nouveau tir W+600 réussi, aucun retry des refus |
-| Exclusif avec admission |0,125 CPU,128 Mio,données2Mio exclusives,concurrence1,deadline45s,file30s,idle2s,min0,max1 | HTTP Read déjà running avant W, bail réel et écriture compteur1 ; il attend jusqu'à W+10. Tir planifié lié queued sans handler, puis admis après HTTP, compteur2 sur le même volume, succeeded |
-| Exclusif avec expiration | Même allocation, file2s ; HTTP actif jusqu'à W+20 | Tir lié à une vraie invocation rejetée queue_timeout, handler non démarré, firing refused_capacity avec UUID. HTTP encore actif au refus ; lecture réelle ultérieure retrouve compteur1. Aucun rejeu après libération |
+| Exclusif avec admission |0,125 CPU,128 Mio,données2Mio exclusives,concurrence1,deadline45s,file30s,idle10s,min0,max1 | HTTP Read déjà running avant W, bail réel et écriture compteur1 ; il attend jusqu'à W+10. Tir planifié lié queued sans handler, puis admis après HTTP, compteur2 sur le même volume, succeeded |
+| Exclusif avec expiration | Même allocation, file2s,idle10s ; HTTP actif jusqu'à W+20 | Tir lié à une vraie invocation rejetée queue_timeout, handler non démarré, firing refused_capacity avec UUID. HTTP encore actif au refus ; lecture réelle ultérieure retrouve compteur1. Aucun rejeu après libération |
 | Deadline |0,125 CPU,128 Mio,timeout0,5s,idle0,min0,max1 ; handler planifié attend5s | Invocation failed/invocation_timeout, handler démarré et conteneur recyclé ; aucun marqueur de fin. Appel HTTP suivant immédiat réellement réussi |
 
 Le handler exclusif attend une date de libération fournie dans le payload HTTP,
@@ -49,6 +49,12 @@ instance/conteneur, réservations et baux. Les journaux originaux ne contiennent
 que marqueurs, compteurs et métadonnées publiques. Aucun jeton n'est conservé
 dans le rapport. Mesurer l'extinction normale après idle pour les deux fonctions
 exclusives, et l'absence de ressources du handler expiré avant son appel sain.
+Le délai idle de10s laisse relever une instance ready et last_used_at après
+terminaison malgré le coût des statistiques Docker de l'API. Ensuite, relever
+les intervalles de chaque lecture jusqu'à disparition : aucune disparition
+plus de0,1s avant last_used_at+10s, disparition au plus10s après cette borne.
+Conserver premier/dernier relevé positif et première absence ; une simple absence
+finale ne qualifie pas l'extinction temporelle.
 
 Fin : attendre les appels réellement terminaux, révoquer les jetons, archiver et
 purger les cinq fonctions par leurs API, supprimer les parents. Recouper code,

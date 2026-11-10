@@ -5505,3 +5505,9 @@ cible1CPU refusée sans invocation, deux HTTP exclusifs avec admission/expiratio
 de file, deadline réelle. Motif : distinguer les refus avant réception des refus
 liés, puis prouver absence de rejeu et prochain tir après libération. Aucun
 produit ni horloge modifié ; la campagne et ses preuves restent à réaliser.
+
+Revue avant lancement : le délai idle des deux cas exclusifs est fixé à10s pour
+mesurer instance ready/last_used_at puis disparition, avec tolérance explicite
+de0,1s avant et10s après la borne. Motif : les statistiques Docker de la lecture
+API coûtent du temps ; constater seulement une absence tardive ne prouve pas
+le délai configuré. Cette précision précède la modification du client.
