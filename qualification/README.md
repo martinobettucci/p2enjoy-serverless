@@ -25,6 +25,10 @@ la passerelle réelle ; la valeur secrète n’est pas renvoyée.
 `scheduled-versions.cjs` fournit deux handlers originaux A/B qui attendent
 vingt secondes : le cycle E2E des planifications change réellement la cible
 pendant l'appel admis, puis vérifie son marqueur et son hash après terminaison.
+`scheduled-admission.cjs` fournit les handlers originaux d'admission planifiée :
+attente315s, écritures synchronisées sur le volume exclusif, attente HTTP jusqu'à
+une date réelle et dépassement de deadline. La campagne correspondante vit dans
+`e2e/schedule-admission.mjs` ; elle passe par la publication et la passerelle.
 `volume-operations.cjs` écrit, relit, supprime et sature réellement les volumes
 /data et /cache ; il conserve l’errno Linux EDQUOT (-122), que Node expose
 actuellement sous code UNKNOWN. Leur campagne se lance séparément selon

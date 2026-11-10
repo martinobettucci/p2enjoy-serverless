@@ -1480,3 +1480,16 @@ backup privé, identités, reçus de coupe et restitution dans ses dossiers born
 Le client conserve chaque rapport UUID et ses stderr privés, restitue toutes
 les gardes avant nettoyage, puis purge par HTTPS et recoupe l'absence physique.
 Un échec conserve son rapport et n'entraîne aucun rejeu automatique.
+
+La campagne d'admission se lance séparément : `node e2e/schedule-admission.mjs`.
+Elle exige le SPARK au repos et les budgets1CPU/8192Mio/32instances relevés dans
+[SCHEDULE_ADMISSION](../docs/SCHEDULE_ADMISSION.md). Cinq fonctions originales
+sont publiées avant une fenêtre commune : handler315s, cible1CPU, deux volumes
+exclusifs occupés par de vrais HTTP et dépassement du délai d'exécution. Les
+deux frontières suivantes éprouvent recouvrement et reprise après libération.
+Prévoir15 minutes d'horloge réelle. Aucun budget ni fichier officiel modifié.
+Le lecteur `schedule-admission-inspect.py` recoupe les cinq UUID, SQL RO,
+conteneurs, réseaux, baux, canaux et allocations ; après les purges publiques,
+il vérifie les artefacts antérieurs et les sources embarquées. Chaque rapport
+privé porte un UUID ; un échec est conservé et les appels sont terminés avant
+nettoyage, sans rejeu automatique.
