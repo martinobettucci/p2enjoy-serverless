@@ -25,6 +25,13 @@ indépendante100s précède la faute, le helper attend au plus85s ; aucune duré
 n'est changée. L'agent reste vivant ; seul le backing cache identifié devient
 root/mode000. L'identité du même répertoire et les contenus sont recoupés sous faute.
 
+Le client SSH possède son groupe de processus, un délai de connexion10s et des
+keepalives10s/2. Sa jonction locale est bornée à135s ; après dépassement, arrêter
+le seul groupe client possédé et attendre sa fin au plus10s. Cette borne dépasse
+la garde100s, sans prétendre que son échéance prouve la restitution. Erreurs de
+trame/stdin ramenées dans le flux async, jamais levées hors du finally. Un reçu
+manquant ou une jonction inconnue interdit le nettoyage métier.
+
 ## Refus et reprise
 
 Envoyer une seule commande `POST /api/functions/{id}/cache-clear`, UUID neuf et
