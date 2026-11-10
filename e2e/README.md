@@ -1,5 +1,23 @@
 # Qualification de la plateforme
 
+## États de console des planifications
+
+`node e2e/schedule-console.mjs`, seul sur le SPARK au repos avec session SSO
+réelle, part de l'accueil et crée ses deux fonctions par les formulaires. Une
+fonction vide et une fonction au nom63 ; six crons publiés/promus par l'API de
+code seul donnent six vrais tirs à une frontière UTC. Le navigateur vérifie
+deux pages5+1, clavier/focus, mobile et un vrai refus401 après retrait temporaire
+des cookies, puis Réessayer après restitution. Prévoir une frontière réelle,
+environ cinq minutes ; minimum0,3CPU/768Mio, budgets officiels inchangés.
+
+Chaque rapport et capture JPEG portent leur UUID. Le premier essai doit échouer
+si le produit conserve sa pagination après erreur ; il ne devient pas un succès
+conditionnel. Les minima sont libérés, les deux fonctions purgées publiquement,
+puis le lecteur strict schedule-instance-reuse-inspect.py recoupe l'absence
+physique, les5982 artefacts antérieurs et les34 backends. Contrat :
+[SCHEDULE_CONSOLE](../docs/SCHEDULE_CONSOLE.md). Les images demandent une inspection
+visuelle distincte ; les assertions ne prouvent pas la lisibilité.
+
 ## Régression008 du contrôle et des publications
 
 Depuis la racine synchronisée, sur le seul SPARK DEV au repos :
