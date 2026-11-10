@@ -1,5 +1,7 @@
 // @spec docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle
 // @verifies docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle | docs/ADMISSION.md#observation-durable-des-intentions-par-les-gardes
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md
 // Real HTTPS administration, actual SSO session, host agent, Docker and process failures.
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
@@ -22,7 +24,7 @@ await writeFile(report,JSON.stringify({completed:false,cleanup:false,skipped:0})
 const state=JSON.parse(await readFile(path.join(output,'admin-session.json'),'utf8'));
 const admin=await request.newContext({baseURL:base,storageState:state,timeout:180000});
 const caller=await request.newContext({baseURL:base,timeout:180000});
-const checks=[],functions=[],tokens=[],faults=[],pending=[],storageArchives=[],cleanupErrors=[],requestOutcomes=[];
+const checks=[],functions=[],tokens=[],faults=[],pending=[],storageArchives=[],cleanupErrors=[],requestOutcomes=[],invocations=[],publicationEvidence=[];
 let session,namespace,service,work,completed=false,needsStart=false;
 
 async function call(url,{method='GET',body,bytes,token,headers={},status=200}={}) {
@@ -49,18 +51,23 @@ async function remote(mode,fn,extra=[]){
   const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,mode,...(fn?[fn.id]:[]),...extra],{timeout:120000,maxBuffer:1024*1024});
   return JSON.parse(stdout.trim().split('\n').at(-1));
 }
+function diagnostic(error){const location=String(error?.stack??'').match(/function-storage\.mjs:(\d+):(\d+)/);return {name:error?.name??'UnknownError',operator:error?.operator,source:location?{line:Number(location[1]),column:Number(location[2])}:undefined,message_sha256:createHash('sha256').update(String(error?.message??'')).digest('hex')};}
+async function until(action,message){const end=Date.now()+45000;while(Date.now()<end){const v=await action();if(v)return v;await new Promise(r=>setTimeout(r,100));}assert.fail(message);}
+async function invokeCode(fn,published,credential,pinned=false){const tag=randomUUID(),response=await caller.get(`/invoke/${fn.id}${pinned?'@'+published.code_hash:''}`,{headers:{'X-Serverless-Token':credential,'X-Qualification-Tag':tag}});assert.equal(response.status(),200);const value=await response.json();assert.equal(value.tag,tag);assert.equal(value.secretPresent,false);assert.equal(value.requestId,response.headers()['x-serverless-request-id']);assert.equal(response.headers()['x-serverless-code-hash'],published.code_hash);invocations.push({id:value.requestId,function_id:fn.id,requested_code_hash:pinned?published.code_hash:null,resolved_code_hash:published.code_hash});await until(async()=>!(await object(`/api/functions/${fn.id}/instances`)).items.length,'runtime_instances_not_released');}
+async function promoteCode(fn,published){const row=await current(fn);await object(`/api/functions/${fn.id}/versions/${published.code_hash}/promote`,{method:'POST',headers:{'If-Match':String(row.updated_at)}});assert.equal((await current(fn)).active_revision_id,published.revision_id);}
+async function purgeArchive(fn){await until(async()=>!(await object(`/api/archives/${fn.id}`)).storage_operation,'archive_not_settled');const row=await object(`/api/archives/${fn.id}`);const response=await admin.post(`/api/archives/${fn.id}/purge`,{headers:{Origin:base,'X-CSRF-Token':session.csrf_token,'If-Match':String(row.updated_at)},data:{operation_id:randomUUID(),confirm_name:row.name}});assert([200,202].includes(response.status()));const op=await response.json();await until(async()=>{const v=await object(`/api/storage-operations/${op.id}`);assert.notEqual(v.state,'aborted');return v.state==='completed';},'public_purge_not_completed');const after=await object(`/api/archives/${fn.id}`);assert(after.purged_at&&after.artifact_bytes===0&&!after.storage_operation);return {function_id:fn.id,namespace_id:namespace.id,operation_id:op.id,purged:true,artifact_bytes:after.artifact_bytes};}
 async function check(name,action){
   try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}
-  catch(error){checks.push({name,status:'failed',error:error.name});throw error;}
+  catch(error){checks.push({name,status:'failed',error:diagnostic(error)});throw error;}
 }
 async function token(rights){
-  const value=await object(`/api/services/${service.id}/tokens`,{method:'POST',status:201,body:{name:'storage-mutation',rights}});
+  const value=await object(`/api/services/${service.id}/tokens`,{method:'POST',status:201,body:{name:rights.length===1&&rights[0]==='read'?'invoke-published-storage-code':'storage-mutation',rights}});
   tokens.push(value);return value;
 }
 const volumes=(data=2,cache=2)=>({data:{enabled:true,quota_mib:data},cache:{enabled:true,quota_mib:cache},concurrency:'exclusive'});
 async function create(name,storage=volumes()){
   const fn=await object(`/api/services/${service.id}/functions`,{method:'POST',status:201,
-    body:{name,config:{handler:'src/handlers.echo',storage}}});functions.push(fn);return fn;
+    body:{name,config:{handler:'src/handlers.echo',idle_seconds:0,storage}}});functions.push(fn);return fn;
 }
 async function update(fn,storage,{credential,status=200}={}){
   const row=await current(fn);
@@ -88,7 +95,7 @@ async function fault(mode,fn){
   const events=[];let ended=false,code=null;
   const lines=createInterface({input:child.stdout});lines.on('line',line=>events.push(JSON.parse(line)));
   child.stderr.resume();
-  const done=new Promise(resolve=>{child.on('exit',value=>{ended=true;code=value;resolve(value);});child.on('error',()=>{ended=true;code=-1;resolve(-1);});});
+  const done=new Promise(resolve=>{child.on('close',value=>{ended=true;code=value;resolve(value);});child.on('error',()=>{ended=true;code=-1;resolve(-1);});});
   const handle={child,done,events,expectedTermination:false,get exitCode(){return code;},async wait(event){
     const end=Date.now()+35000;
     while(Date.now()<end){const value=events.find(row=>row.event===event);if(value)return value;
@@ -239,6 +246,8 @@ try{
     work=await mkdtemp(path.join(root,'.local/storage-publication-'));
     await cp(path.join(root,'qualification/src'),path.join(work,'src'),{recursive:true});
     await cp(path.join(root,'qualification/package.json'),path.join(work,'package.json'));
+    await writeFile(path.join(work,'src/storage-version.json'),JSON.stringify({revision:'A'}));
+    const invokeToken=(await token(['read'])).token;
     const manifest={service:'storage-publication',provider:{name:'p2enjoy',runtime:'nodejs24.x'},functions:{probe:{handler:'src/handlers.echo'}},package:{patterns:['!**','src/**','package.json']}};
     await writeFile(path.join(work,'serverless.yml'),JSON.stringify(manifest));
     await run('python3',['-B','-m','adapter','package','--config',path.join(work,'serverless.yml')],{cwd:root});
@@ -249,7 +258,8 @@ try{
       body:{config:{...before.config,storage:volumes(6,3)}}});
     const published=await object(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes});assert.equal(published.state,'published');
     let row=await current(fn),actual=await remote('inspect',fn);
-    assert.equal(row.active_revision_id,published.revision_id);assert.equal(actual.storage.volumes.data.quota_bytes,6*1024**2);
+    assert.equal(row.active_revision_id,null);assert.equal(published.code_changed,true);assert.equal(actual.storage.volumes.data.quota_bytes,6*1024**2);
+    await invokeCode(fn,published,invokeToken,true);await promoteCode(fn,published);await invokeCode(fn,published,invokeToken);row=await current(fn);
     assert.equal(actual.operation,null);
     const next=await object(`/api/functions/${fn.id}/deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},
       body:{config:{...row.config,storage:volumes(7,3)}}});
@@ -261,14 +271,17 @@ try{
       assert.equal(response.headers['x-serverless-operation-id'],phase.operation_id);
       const candidateState=await object(`/api/deployments/${next.id}`);
       assert.equal(candidateState.state,'published');assert(candidateState.revision_id);
-      row=await current(fn);assert.equal(row.active_revision_id,candidateState.revision_id);
-      assert.notEqual(row.active_revision_id,published.revision_id);
+      assert.equal(candidateState.code_changed,false);assert.equal(candidateState.code_hash,published.code_hash);assert.equal(candidateState.revision_id,published.revision_id);
+      row=await current(fn);assert.equal(row.active_revision_id,published.revision_id);publicationEvidence.push({scenario:'quota-commit-with-duplicate-code',candidate_id:next.id,canonical_revision_id:published.revision_id,code_hash:published.code_hash,operation_id:phase.operation_id});
     }finally{await held.release();}
     await healthy();actual=await remote('inspect',fn);const receipt=actual.receipt.operation_id;
     assert.equal(actual.operation,null);assert.equal(actual.storage.volumes.data.quota_bytes,7*1024**2);
+    await invokeCode(fn,published,invokeToken);
+    await writeFile(path.join(work,'src/storage-version.json'),JSON.stringify({revision:'B'}));await run('python3',['-B','-m','adapter','package','--config',path.join(work,'serverless.yml')],{cwd:root});const nextDescriptor=JSON.parse(await readFile(path.join(work,'.serverless-p2/deployment.json'),'utf8')),nextBytes=await readFile(path.join(work,'.serverless-p2',nextDescriptor.artifacts.probe.file));
+    row=await current(fn);const pilotCandidate=await object(`/api/functions/${fn.id}/deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{config:row.config}});const pilot=await object(`/api/deployments/${pilotCandidate.id}/artifact`,{method:'PUT',bytes:nextBytes});assert.equal(pilot.code_changed,true);assert.notEqual(pilot.code_hash,published.code_hash);assert.equal((await current(fn)).active_revision_id,published.revision_id);await invokeCode(fn,published,invokeToken);await invokeCode(fn,pilot,invokeToken,true);await promoteCode(fn,pilot);await invokeCode(fn,pilot,invokeToken);row=await current(fn);
     await call(`/api/functions/${fn.id}/rollback`,{method:'POST',headers:{'If-Match':String(row.updated_at)},body:{revision_id:published.revision_id}});
     actual=await remote('inspect',fn);assert.equal(actual.receipt.operation_id,receipt);
-    row=await current(fn);assert.equal(row.active_revision_id,published.revision_id);assert.equal(row.config.storage.data.quota_mib,7);
+    row=await current(fn);assert.equal(row.active_revision_id,published.revision_id);assert.equal(row.config.storage.data.quota_mib,7);await invokeCode(fn,published,invokeToken);assert.equal(invocations.length,7);publicationEvidence.push({scenario:'distinct-code-promotion-and-legacy-rollback',stable_hash:published.code_hash,pilot_hash:pilot.code_hash,storage_operation_id:receipt});
     assert.equal(JSON.parse((await remote('read',fn)).result).bytes,1310720);
   });
   await check('Suppression HTTPS : archive réelle conservant les données et l’allocation',async()=>{
@@ -300,7 +313,7 @@ try{
         const response=await admin.get(`/api/functions/${fn.id}`);
         if(response.status()===200)await call(`/api/functions/${fn.id}`,{method:'DELETE'});
         else assert.equal(response.status(),404);
-        storageArchives.push({function_id:fn.id,...await remote('purge',fn)});
+        storageArchives.push(await purgeArchive(fn));
       }catch(error){cleanupErrors.push('function:'+fn.id+':'+error.name);}
     }
     for(const credential of tokens){try{await call(`/api/tokens/${credential.id}/revoke`,{method:'POST'});}catch(error){cleanupErrors.push('token:'+error.name);}}
@@ -313,7 +326,7 @@ try{
   catch(error){cleanupErrors.push('health:'+error.name);}
   await writeFile(report,JSON.stringify({completed:completed&&!cleanupErrors.length,cleanup:!cleanupErrors.length,
     failed:Number(!completed||Boolean(cleanupErrors.length)),skipped:0,checks,cleanup_errors:cleanupErrors,functions:functions.map(f=>f.id),
-    namespace_id:namespace?.id,service_id:service?.id,requests:requestOutcomes,
+    namespace_id:namespace?.id,service_id:service?.id,requests:requestOutcomes,invocations,publication_evidence:publicationEvidence,
     storage_archives:storageArchives,faults:faults.map(f=>({expected_termination:f.expectedTermination,exit_code:f.exitCode,events:f.events})),final_health:finalHealth},null,2)+'\n');
   await admin.dispose();await caller.dispose();assert.deepEqual(cleanupErrors,[],'Nettoyage de campagne incomplet');
 }

@@ -1369,3 +1369,54 @@ joint son mutateur. Une restitution incertaine conserve les fixtures. Les deux
 fenêtres physiques ne qualifient pas toutes les pannes propres du banc. Les
 inventaires pre_purge_revisions sont pris avant effacement et ne désignent pas
 des archives conservées après la purge publique.
+
+## Régression008 des invocations et des mutations de stockage
+
+Depuis la racine : `python3 -B e2e/function-version-invocation-storage-regressions.py`.
+Le JSON SSO est saisi sur stdin sans écho ; aucune valeur ne passe dans les
+arguments ou rapports. Le pilote exige DEV au repos, conserve les rapports
+antérieurs, lance le prérequis puis les deux clients en série. Les opérateurs
+existants et la console normale du SPARK sont nécessaires ; aucun autre banc
+ne doit tourner. Le rapport brut ne peut pas être écrasé sans archivage explicite.
+
+La [tranche invocation/stockage008](../docs/evidence/function-version-invocation-storage-regressions-dev-2026-11-10.json)
+passe 46 groupes réels sur 298 sources figées : 15 mutations de stockage et
+31 invocations publiques. Le prérequis SSO reste distinct. Sept appels Echo
+recoupent A pilote/promue, doublon malgré quota modifié, B pilote/promue et
+rollback A. Quota7 Mio, reçu de stockage et fichiers données/cache sont conservés.
+La confirmation indisponible conserve son vrai503 et sa décision acquise.
+
+Pendant un handler A observé actif, publier B ne déplace pas la cible. Après
+promotion B, retirer A empêche ses nouvelles admissions tout en laissant finir
+son instantané ; le nettoyage reste en attente puis efface A après libération.
+Les31 groupes conservent ACL, HTTP/Lambda, politiques origine/IP, files, minima,
+quotas, concurrence, budgets réels, contention SQLite, arrêts et réceptions bornées.
+Le plafond d'instances est appliqué puis restitué par la console du seul SPARK.
+
+La collecte recoupe 85 handlers succeeded, dont78 publics et7 Echo ; deux réponses
+métier non2xx et un succès après déconnexion restent classés selon l'état durable.
+Les107 réponses publiques comprennent16 UUID avant réservation. Le vrai502 du
+proxy sans UUID est lié par l'identité locale de sa connexion au témoin natif
+running puis au même appel interrupted ; son statut durable503 reste distinct.
+
+Les18 fonctions finales sont purgées par les API. L'essai initial avait passé
+46 groupes mais échoué à la collecte de ce502 ; il reste séparé et ne s'ajoute
+pas au total. Ses18 fonctions sont également purgées : les36 sont recoupées
+physiquement dans quatre namespaces. Les5 982 artefacts antérieurs, fichiers
+officiels, images, backend/web et référence sont conservés. Les budgets consommés
+sont rétablis à32 instances,1 CPU et8 192 Mio, sans garde active. La recréation
+attendue du contrôle change son CID et son démarrage, pas son image.
+
+Les sources exécutables du replay restent celles livrées ; seules les deux
+pages de contrat reçoivent les résultats dans l'index de sources. Les opérateurs
+historiques conservent leurs limites. Aucun nouveau parcours visuel ni changement
+produit/UI/manuel ; console, historique et régression complète008 restent ouverts.
+SLS-074 conserve [~].
+
+La collecte lie tous les handlers succeeded à un transport reçu, aux sept appels
+Echo ou à l'unique succès détaché observé. Une réponse avant réservation garde
+son UUID sans ligne d'invocation inventée. Un502 sans UUID exige le témoin de
+la connexion exacte coupée pendant SIGKILL ; aucune tolérance générale aux502.
+Les états failed/interrupted/rejected attendus sont des comportements éprouvés,
+pas des groupes ignorés. Les pertes et délais propres du pilote et des anciens
+opérateurs restent distincts de leurs cas réellement provoqués.

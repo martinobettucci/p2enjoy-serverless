@@ -11,7 +11,8 @@ import https from 'node:https';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {request} from 'playwright';
-import {purgeStorageArchive} from './storage-archives.mjs';
+// @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md
 
 const run=promisify(execFile),root=fileURLToPath(new URL('../',import.meta.url));
 const output=path.join(root,'.local/e2e'),report=path.join(output,'public-invocations.json');
@@ -19,7 +20,7 @@ const base='https://serverless.lelabs.tech',prefix='invocation-'+randomUUID().sl
 await mkdir(output,{recursive:true,mode:0o700});await writeFile(report,JSON.stringify({completed:false,cleanup:false,skipped:0})+'\n');
 const state=JSON.parse(await readFile(path.join(output,'admin-session.json'),'utf8'));
 const admin=await request.newContext({baseURL:base,storageState:state,timeout:120000});
-const checks=[],functions=[],tokens=[],archives=[],storageArchives=[],cleanupErrors=[],pending=[],outcomes=[];
+const checks=[],functions=[],tokens=[],archives=[],storageArchives=[],cleanupErrors=[],pending=[],outcomes=[],invocationTransports=[],publications=[],versionEvidence=[];
 const guards=[],operatorEvidence=[],additionalServices=[];
 const deletedFunctions=new Set();
 const ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
@@ -28,23 +29,24 @@ let session,namespace,service,work,completed=false,readonly,operator;
 const secret='invocation-secret-'+randomUUID();
 function resources(){return {namespace_id:namespace?.id??null,service_id:service?.id??null,additional_service_ids:additionalServices.map(row=>row.id),function_ids:functions.map(fn=>fn.id),token_ids:tokens.map(t=>t.id)};}
 async function saveReport(value){const temporary=report+'.pending';await writeFile(temporary,JSON.stringify(value,null,2)+'\n',{mode:0o600});await rename(temporary,report);}
-async function checkpoint(){await saveReport({completed:false,cleanup:false,skipped:0,checks,resources:resources(),deleted_function_ids:[...deletedFunctions],retained_archives:archives,storage_archives:storageArchives});}
+async function checkpoint(){await saveReport({completed:false,cleanup:false,skipped:0,checks,resources:resources(),deleted_function_ids:[...deletedFunctions],pre_purge_revisions:archives,storage_archives:storageArchives,invocation_transports:invocationTransports,publications,version_evidence:versionEvidence});}
 async function manage(url,{method='GET',body,bytes,status=200,token,headers={}}={}){
   const response=await admin.fetch(url,{method,data:bytes??body,headers:{...(token?{'X-Serverless-Token':token}:{Origin:base,'X-CSRF-Token':session.csrf_token}),...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});
   assert.equal(response.status(),status,`${method} ${url}: ${response.status()} au lieu de ${status}`);
   const text=await response.text();assert(!text.includes(secret),'Secret dans les métadonnées');return JSON.parse(text);
 }
 function start(url,{method='GET',body,bytes,token=readonly,headers={},open=false}={}){
+  const clientRequestId=randomUUID();
   const payload=bytes??(body===undefined?undefined:Buffer.from(JSON.stringify(body)));
   const transport={connected:false,status:null,error:null};
   let req;const promise=new Promise((resolve,reject)=>{
     req=https.request(base+url,{method,headers:{...(token?{'X-Serverless-Token':token}:{}),...(payload?{'Content-Length':payload.length}:{}),...(body!==undefined?{'Content-Type':'application/json'}:{}),...headers}},res=>{
-      transport.status=res.statusCode;const chunks=[];res.on('data',chunk=>chunks.push(chunk));res.on('end',()=>resolve({status:res.statusCode,headers:res.headers,rawHeaders:res.rawHeaders,bytes:Buffer.concat(chunks)}));res.on('error',reject);
+      transport.status=res.statusCode;const chunks=[];res.on('data',chunk=>chunks.push(chunk));res.on('end',()=>{const match=url.match(/^\/invoke\/([0-9a-f-]{36})(?:@([0-9a-f]{64}))?(?:[/?]|$)/);if(match)invocationTransports.push({client_request_id:clientRequestId,id:res.headers['x-serverless-request-id']??null,function_id:match[1],method,status:res.statusCode,requested_code_hash:match[2]??null,resolved_code_hash:res.headers['x-serverless-code-hash']??null});resolve({status:res.statusCode,headers:res.headers,rawHeaders:res.rawHeaders,bytes:Buffer.concat(chunks)});});res.on('error',reject);
     });req.on('socket',socket=>{transport.connected=!socket.connecting;if(socket.connecting)socket.once('secureConnect',()=>{transport.connected=true;});});
     req.on('error',error=>{transport.error=error.code??error.name;reject(error);});req.setTimeout(45000,()=>req.destroy(new Error('request_timeout')));if(open)req.flushHeaders();else req.end(payload);
   });
   const settled=promise.then(value=>({value}),error=>({error}));pending.push(settled);
-  return {promise,settled,transport,abort:()=>req.destroy(),end:bytes=>req.end(bytes)};
+  return {clientRequestId,promise,settled,transport,abort:()=>req.destroy(),end:bytes=>req.end(bytes)};
 }
 async function invoke(fn,options={}){
   const {status=200,suffix='',...rest}=options;const value=await start(`/invoke/${fn.id}${suffix}`,rest).promise;
@@ -52,7 +54,7 @@ async function invoke(fn,options={}){
   assert.equal(value.status,status,`Invocation attendue ${status}, reçue ${value.status}`);
   return {...value,json:()=>JSON.parse(value.bytes.toString())};
 }
-async function check(name,action){try{await action();checks.push({name,status:'passed'});await checkpoint();console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:error.name});await checkpoint();throw error;}}
+async function check(name,action){try{await action();checks.push({name,status:'passed'});await checkpoint();console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:diagnostic(error)});await checkpoint();throw error;}}
 async function until(action,message,seconds=20){const end=Date.now()+seconds*1000;while(Date.now()<end){const result=await action();if(result)return result;await new Promise(r=>setTimeout(r,100));}assert.fail(message);}
 async function current(fn){return manage(`/api/functions/${fn.id}`);}
 async function instances(fn){return (await manage(`/api/functions/${fn.id}/instances`)).items;}
@@ -95,12 +97,16 @@ async function packageCode(revision){
   const descriptor=JSON.parse(await readFile(path.join(project,'.serverless-p2/deployment.json'),'utf8'));
   return readFile(path.join(project,'.serverless-p2',descriptor.artifacts.probe.file));
 }
-async function publish(fn,bytes,overrides={}){
+async function publish(fn,bytes,overrides={},activate=true){
   const row=await current(fn),candidate=await manage(`/api/functions/${fn.id}/deployments`,{method:'POST',status:201,token:operator,headers:{'If-Match':String(row.updated_at)},
     body:{config:{...row.config,...overrides},configuration:{environment:{PUBLIC_LABEL:'first'},secrets:{QUALIFICATION_SYNTHETIC_SECRET:secret}},events:{http:[{path:'probe',methods:['GET','POST','PUT','PATCH','DELETE','HEAD','OPTIONS'],implicit:true}]}}});
-  const result=await manage(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',token:operator,bytes});archives.push(result.revision_id);await checkpoint();return result.revision_id;
+  const result=await manage(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',token:operator,bytes});assert.equal(result.state,'published');assert.match(result.code_hash,/^[0-9a-f]{64}$/);assert.equal((await current(fn)).active_revision_id,row.active_revision_id);publications.push({function_id:fn.id,candidate_id:candidate.id,revision_id:result.revision_id,code_hash:result.code_hash,code_changed:result.code_changed,previous_default_revision_id:row.active_revision_id});archives.push(result.revision_id);if(activate)await promote(fn,result.revision_id);await checkpoint();return result.revision_id;
 }
 
+function publishedVersion(fn,id){const value=publications.find(v=>v.function_id===fn.id&&v.revision_id===id);assert(value,'published_version_not_tracked');return value;}
+async function promote(fn,id){const value=publishedVersion(fn,id);const row=await current(fn);await manage(`/api/functions/${fn.id}/versions/${value.code_hash}/promote`,{method:'POST',token:operator,headers:{'If-Match':String(row.updated_at)}});assert.equal((await current(fn)).active_revision_id,id);}
+async function purgeArchive(fn){await until(async()=>!(await manage(`/api/archives/${fn.id}`)).storage_operation,'archive_not_settled');const row=await manage(`/api/archives/${fn.id}`);const response=await admin.post(`/api/archives/${fn.id}/purge`,{headers:{Origin:base,'X-CSRF-Token':session.csrf_token,'If-Match':String(row.updated_at)},data:{operation_id:randomUUID(),confirm_name:row.name}});assert([200,202].includes(response.status()));const op=await response.json();await until(async()=>{const value=await manage(`/api/storage-operations/${op.id}`);assert.notEqual(value.state,'aborted');return value.state==='completed';},'public_purge_not_completed',60);const after=await manage(`/api/archives/${fn.id}`);assert(after.purged_at&&after.artifact_bytes===0&&!after.storage_operation);return {function_id:fn.id,namespace_id:namespace.id,operation_id:op.id,purged:true,artifact_bytes:after.artifact_bytes};}
+function diagnostic(error){const location=String(error?.stack??'').match(/public-invocations\.mjs:(\d+):(\d+)/);return {name:error?.name??'UnknownError',operator:error?.operator,source:location?{line:Number(location[1]),column:Number(location[2])}:undefined,message_sha256:createHash('sha256').update(String(error?.message??'')).digest('hex')};}
 try{
   session=await (await admin.get('/api/session')).json();assert(session.authenticated,'Session SSO réelle requise');
   work=await mkdtemp(path.join(output,'invocation-code-'));const firstCode=await packageCode('first'),secondCode=await packageCode('second');
@@ -183,7 +189,7 @@ try{
   });
   await check('Génération de configuration, code publié et rollback exécutés',async()=>{
     await update(fn,{}, {environment:{PUBLIC_LABEL:'updated'},secrets:{QUALIFICATION_SYNTHETIC_SECRET:secret}});
-    assert.equal((await invoke(fn)).json().label,'updated');const second=await publish(fn,secondCode);assert.equal((await invoke(fn)).json().revision,'second');
+    assert.equal((await invoke(fn)).json().label,'updated');const second=await publish(fn,secondCode,{},false);assert.equal((await invoke(fn)).json().revision,'first');const pilot=publishedVersion(fn,second);assert.equal((await invoke(fn,{suffix:'@'+pilot.code_hash})).json().revision,'second');await promote(fn,second);assert.equal((await invoke(fn)).json().revision,'second');versionEvidence.push({scenario:'generation-pilot-and-explicit-promotion',stable_revision_id:firstRevision,pilot_revision_id:second,pilot_hash:pilot.code_hash});
     const row=await current(fn);await manage(`/api/functions/${fn.id}/rollback`,{method:'POST',headers:{'If-Match':String(row.updated_at)},body:{revision_id:firstRevision}});
     assert.equal((await invoke(fn)).json().revision,'first');assert.notEqual(second,firstRevision);
   });
@@ -221,7 +227,7 @@ try{
     await update(fn,{storage});const active=start(`/invoke/${fn.id}?mode=counter`,{method:'POST',body:{ms:1500}});
     const row=await until(async()=>(await history(fn)).find(row=>row.state==='running'&&row.handler_started),'Handler non observé');
     active.abort();assert((await active.settled).error);
-    await until(async()=>(await history(fn)).some(item=>item.id===row.id&&item.state==='succeeded'),'Appel détaché non terminé');
+    await until(async()=>(await history(fn)).some(item=>item.id===row.id&&item.state==='succeeded'),'Appel détaché non terminé');outcomes.push({transport:'disconnected-after-admission',invocation_id:row.id,function_id:fn.id,completed_without_response:true});
     assert.equal((await invoke(fn,{suffix:'?mode=counter'})).json().count,1);
   });
   await check('Stockage public : quota Linux, réduction refusée et conservation après drainage',async()=>{
@@ -242,15 +248,18 @@ try{
     const row=await current(fn);await manage(`/api/functions/${fn.id}`,{method:'PUT',status:409,body:{name:row.name,config:{...row.config,storage:{...storage,data:{enabled:true,quota_mib:3}}}}});
     await manage(`/api/functions/${fn.id}`,{method:'DELETE',status:409});assert.equal((await active.promise).status,200);assert.equal((await current(fn)).config.storage.data.quota_mib,2);
   });
-  await check('Publication pendant un appel : ancienne révision retenue et nouvelles admissions basculées',async()=>{
-    const old=(await current(fn)).active_revision_id;
-    const active=start(`/invoke/${fn.id}?mode=delay`,{method:'POST',body:{ms:3500}});
-    await until(async()=>(await history(fn)).some(row=>row.state==='running'&&row.handler_started),'Ancienne invocation non observée');
-    const next=await publish(fn,secondCode);await manage(`/api/functions/${fn.id}/revisions/${old}`,{method:'DELETE',status:409});
-    const following=start(`/invoke/${fn.id}`);assert.equal(JSON.parse((await active.promise).bytes).context.functionVersion,old);assert.equal(JSON.parse((await following.promise).bytes).context.functionVersion,next);
-    await until(async()=>(await instances(fn)).every(row=>row.revision_id!==old),'Ancienne référence non drainée');
-    await manage(`/api/functions/${fn.id}/revisions/${old}`,{method:'DELETE'});archives.splice(archives.indexOf(old),1);
-    assert.equal((await invoke(fn,{suffix:'?mode=counter'})).json().count,1);
+  await check('Publication et promotion pendant appel : instantané conservé puis retrait différé du hash',async()=>{
+    const old=(await current(fn)).active_revision_id,oldVersion=publishedVersion(fn,old);
+    const active=start(`/invoke/${fn.id}?mode=delay`,{method:'POST',body:{ms:7000}});
+    const admitted=await until(async()=>(await history(fn)).find(row=>row.state==='running'&&row.handler_started),'Ancienne invocation non observée');
+    const next=await publish(fn,secondCode,{},false);const pilot=publishedVersion(fn,next);assert.equal((await current(fn)).active_revision_id,old);
+    let currentRow=await current(fn);await manage(`/api/functions/${fn.id}/revisions/${old}`,{method:'DELETE',status:409,headers:{'If-Match':String(currentRow.updated_at)}});
+    await promote(fn,next);assert((await history(fn)).some(row=>row.id===admitted.id&&row.state==='running'&&row.handler_started));
+    currentRow=await current(fn);const removed=await manage(`/api/functions/${fn.id}/revisions/${old}`,{method:'DELETE',headers:{'If-Match':String(currentRow.updated_at)}});assert.equal(removed.state,'deleted');assert.equal(removed.cleanup_pending,true);
+    const following=start(`/invoke/${fn.id}`);assert.equal(JSON.parse((await active.promise).bytes).context.functionVersion,old);assert.equal(JSON.parse((await following.promise).bytes).context.functionVersion,next);await invoke(fn,{suffix:'@'+oldVersion.code_hash,status:404});
+    await until(async()=>!(await instances(fn)).some(row=>row.revision_id===old),'Ancienne référence non drainée');
+    await until(async()=>{const versions=await manage(`/api/functions/${fn.id}/versions?limit=100`);return versions.items.some(row=>row.code_hash===oldVersion.code_hash&&row.state==='deleted'&&row.stored_bytes===0);},'Ancien code non effacé');
+    assert.equal((await invoke(fn,{suffix:'?mode=counter'})).json().count,1);versionEvidence.push({scenario:'running-snapshot-and-deferred-version-removal',invocation_id:admitted.id,stable_revision_id:old,stable_hash:oldVersion.code_hash,pilot_revision_id:next,pilot_hash:pilot.code_hash,cleanup_pending_at_decision:removed.cleanup_pending});
   });
   await check('Budget CPU global et limites réellement transmises à Docker',async()=>{
     const peer=await create('budget-peer',{queue_timeout_seconds:.25});await publish(peer,firstCode);
@@ -303,9 +312,9 @@ try{
     const before=(await invoke(fn,{suffix:'?mode=counter'})).json().count;
     const active=start(`/invoke/${fn.id}?mode=counter`,{method:'POST',body:{ms:10000}});
     await until(async()=>(await history(fn)).some(row=>row.state==='running'&&row.handler_started),'Handler à interrompre non observé');
-    const events=await remote('crash-control',fn);assert(events.some(row=>row.event==='control-killed'));await active.settled;await healthy();
+    const events=await remote('crash-control',fn);assert(events.some(row=>row.event==='control-killed'));const interruptedTransport=await active.settled;assert(interruptedTransport.error||interruptedTransport.value.status===502);await healthy();
     const row=events.find(row=>row.event==='control-killed').before.invocations.find(row=>row.state==='running'&&row.handler_started);
-    const recovered=(await history(fn)).find(item=>item.id===row.id);assert.equal(recovered.state,'interrupted');assert.equal(recovered.handler_started,true);assert.equal((await instances(fn)).length,0);
+    const recovered=(await history(fn)).find(item=>item.id===row.id);versionEvidence.push({scenario:'control-crash-transport',client_request_id:active.clientRequestId,function_id:fn.id,invocation_id:row.id,outcome:interruptedTransport.error?{kind:'transport-error',code:interruptedTransport.error.code??interruptedTransport.error.name}:{kind:'http',status:interruptedTransport.value.status,response_id:interruptedTransport.value.headers['x-serverless-request-id']??null,resolved_code_hash:interruptedTransport.value.headers['x-serverless-code-hash']??null}});assert.equal(recovered.state,'interrupted');assert.equal(recovered.handler_started,true);assert.equal((await instances(fn)).length,0);
     assert.equal((await invoke(fn,{suffix:'?mode=counter'})).json().count,before+1);await invoke(fn);
   });
   await check('Observations : droits Read, portée fonction/service, révocation, expiration et pagination',async()=>{
@@ -412,12 +421,12 @@ try{
     }finally{request.abort();}
   });
   await check('Réception HTTP/2 bornée et refus immédiat sans fin du corps',async()=>{
-    const {connect}=await import('node:http2');const connection=connect(base);
-    const begin=Date.now();let status;const chunks=[];
+    const {connect}=await import('node:http2');const connection=connect(base);let connectionClosed=false;connection.once('close',()=>{connectionClosed=true;});
+    const begin=Date.now();let status,responseHeaders;const chunks=[];
     const request=connection.request({':method':'POST',':path':`/invoke/${fn.id}`,'x-serverless-token':readonly,'content-length':'16','content-type':'application/json'},{endStream:false});
-    const result=new Promise((resolve,reject)=>{request.on('response',headers=>status=headers[':status']);request.on('data',chunk=>chunks.push(chunk));request.on('end',resolve);request.on('error',reject);request.setTimeout(40000,()=>{reject(new Error('h2_timeout'));request.close();});});
-    try{await result;assert.equal(status,408);assert.equal(JSON.parse(Buffer.concat(chunks)).error,'body_timeout');assert(Date.now()-begin>=29000);outcomes.push({transport:'h2',status,elapsed_ms:Date.now()-begin,body_left_open:true});}
-    finally{request.close();connection.close();}
+    const result=new Promise((resolve,reject)=>{request.on('response',headers=>{responseHeaders=headers;status=headers[':status'];});request.on('data',chunk=>chunks.push(chunk));request.on('end',resolve);request.on('error',reject);request.setTimeout(40000,()=>{reject(new Error('h2_timeout'));request.close();});});
+    try{await result;invocationTransports.push({client_request_id:randomUUID(),transport:'h2',id:responseHeaders['x-serverless-request-id']??null,function_id:fn.id,method:'POST',status,requested_code_hash:null,resolved_code_hash:responseHeaders['x-serverless-code-hash']??null});assert.equal(status,408);assert.equal(JSON.parse(Buffer.concat(chunks)).error,'body_timeout');assert(Date.now()-begin>=29000);outcomes.push({transport:'h2',status,elapsed_ms:Date.now()-begin,body_left_open:true});}
+    finally{request.close();connection.close();try{await until(()=>connectionClosed,'h2_connection_not_joined',5);}catch(error){connection.destroy();await until(()=>connectionClosed,'h2_connection_not_destroyed',5);throw error;}}
   });
   await check('Plafond global d’instances appliqué par la console, isolé des budgets CPU et mémoire',async()=>{
     await until(async()=>{for(const item of functions)if((await instances(item)).length)return false;return true;},'Instances précédentes encore présentes',40);
@@ -438,7 +447,7 @@ try{
   });
   completed=true;
 }finally{
-  for(const guard of guards)try{await guard.release();}catch(error){cleanupErrors.push({step:'guard',error:error.name});}
+  for(const guard of guards)try{await guard.release();}catch(error){cleanupErrors.push({step:'guard',error:diagnostic(error)});}
   await Promise.all(pending);
   for(const fn of functions.reverse()){
     try{
@@ -449,15 +458,15 @@ try{
         await until(async()=>(await history(fn)).every(row=>!['receiving','queued','admitted','running'].includes(row.state)),'Invocation serveur encore active au nettoyage',35);
         await manage(`/api/functions/${fn.id}`,{method:'DELETE'});deletedFunctions.add(fn.id);await checkpoint();
       }
-      storageArchives.push(await purgeStorageArchive(fn.id,namespace.id));
+      storageArchives.push(await purgeArchive(fn));
       const observed=(await remote('inspect',fn))[0];assert.equal(observed.instances.length,0);assert.equal(observed.containers.length,0);assert.equal(observed.networks.length,0);assert.equal(observed.leases.length,0);assert.equal(observed.reserved_channel_count,0);assert.equal(observed.active_invocations,0);assert.equal(observed.unreferenced_channel_count,0);
-    }catch(error){cleanupErrors.push({step:'function',id:fn.id,error:error.name});}
+    }catch(error){cleanupErrors.push({step:'function',id:fn.id,error:diagnostic(error)});}
   }
-  for(const t of tokens){try{await manage(`/api/tokens/${t.id}/revoke`,{method:'POST'});}catch(error){cleanupErrors.push({step:'token',id:t.id,error:error.name});}}
-  for(const extra of additionalServices)try{await manage(`/api/services/${extra.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push({step:'additional-service',id:extra.id,error:error.name});}
-  if(service)try{await manage(`/api/services/${service.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push({step:'service',id:service.id,error:error.name});}
-  if(namespace)try{await manage(`/api/namespaces/${namespace.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push({step:'namespace',id:namespace.id,error:error.name});}
+  for(const t of tokens){try{await manage(`/api/tokens/${t.id}/revoke`,{method:'POST'});}catch(error){cleanupErrors.push({step:'token',id:t.id,error:diagnostic(error)});}}
+  for(const extra of additionalServices)try{await manage(`/api/services/${extra.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push({step:'additional-service',id:extra.id,error:diagnostic(error)});}
+  if(service)try{await manage(`/api/services/${service.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push({step:'service',id:service.id,error:diagnostic(error)});}
+  if(namespace)try{await manage(`/api/namespaces/${namespace.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push({step:'namespace',id:namespace.id,error:diagnostic(error)});}
   if(work)await rm(work,{recursive:true,force:true});await admin.dispose();
-  const result={completed:completed&&!cleanupErrors.length,cleanup:!cleanupErrors.length,checks,failed:Math.max(completed?0:1,checks.filter(r=>r.status==='failed').length)+(cleanupErrors.length?1:0),skipped:0,cleanupErrors,resources:resources(),deleted_function_ids:[...deletedFunctions],storage_archives:storageArchives,retained_archives:archives,request_outcomes:outcomes,operator_evidence:operatorEvidence,guards:guards.map(g=>g.events)};
+  const result={completed:completed&&!cleanupErrors.length,cleanup:!cleanupErrors.length,checks,failed:Math.max(completed?0:1,checks.filter(r=>r.status==='failed').length)+(cleanupErrors.length?1:0),skipped:0,cleanupErrors,resources:resources(),deleted_function_ids:[...deletedFunctions],storage_archives:storageArchives,pre_purge_revisions:archives,invocation_transports:invocationTransports,publications,version_evidence:versionEvidence,request_outcomes:outcomes,operator_evidence:operatorEvidence,guards:guards.map(g=>g.events)};
   assert(!JSON.stringify(result).includes(secret));await saveReport(result);assert.equal(cleanupErrors.length,0,'Nettoyage incomplet');
 }
