@@ -197,3 +197,22 @@ sont qualifiées UTC, les hash complets reviennent à la ligne, les données ne
 reposent pas sur la couleur. Aucun contrôle d'édition de cron de manifeste :
 leur modification passe par la publication/promotion réelle. Ces décisions sont
 persistées avant le composant ; captures depuis l'accueil exigées avant clôture.
+
+### Compléments de revue du premier checkpoint
+
+Trois écarts du premier code restent dans SLS-078 avant clôture :
+
+- La prévision inclut un nominal déjà écoulé lorsque sa frontière effective est
+  encore future ; elle part du curseur de fenêtres et de l'activation, et non
+  seulement de l'heure courante. Une lecture entre nominal et frontière est
+  recoupée au tir réel.
+- La grammaire numérique accepte les chiffres décimaux Unicode déjà acceptés
+  par l'adaptateur et le contrôle antérieur ; une déclaration migrée ne doit
+  pas empêcher la progression des autres fenêtres.
+- La rétention d'invocations conserve toute source d'un tir non terminal ;
+  l'ordre des tâches de maintenance ne peut pas rendre sa clôture impossible.
+  La preuve temporelle de cette fenêtre de rétention reste requise.
+
+Ces correctifs ne remplacent aucun critère initial. La première campagne
+conserve son image et son commit ; une correction produit impose une nouvelle
+image et un replay des scénarios affectés.
