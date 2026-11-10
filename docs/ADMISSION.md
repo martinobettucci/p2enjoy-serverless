@@ -12,6 +12,11 @@ SERVERLESS_FUNCTION_INSTANCE_LIMIT (32, de 1 à 256),
 SERVERLESS_WAITING_CALL_LIMIT (128, de 1 à 4096) et
 SERVERLESS_FUNCTION_WAITING_CALL_LIMIT (16, de 1 à 256, <= plafond global).
 La première configuration DEV conserve ces défauts sur la cellule de 16 Gio.
+Le test qui abaisse temporairement le plafond d'instances dépend de
+[SLS-099](INSTANCE_LIMIT_RESTORATION.md). Le helper refuse actuellement cette
+baisse avant mutation : la console ne fournit pas de précondition atomique sur
+l'entrée active. Les preuves nominales antérieures ne qualifient pas sa
+restitution concurrente ni indépendante.
 CPU est réservé en nano-CPU entiers, par arrondi supérieur, avant Docker.
 Les minima de toutes les fonctions actives de gestion, brouillons compris,
 doivent tenir simultanément dans les trois budgets. Seules les fonctions ayant

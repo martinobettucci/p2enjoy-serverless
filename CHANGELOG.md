@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+### Garde du plafond d'instances
+
+- Le helper refuse la baisse avant toute mutation tant que la console SPARK ne
+  sait pas conditionner l'écriture à la version active. Le test E2E du refus est
+  ajouté ; sa preuve reste à exécuter. Restitution indépendante et scénarios de
+  panne restent ouverts dans SLS-099, sans modification de FORGE.
+
 ### Planifications en cours de qualification
 
 - Moteur déployé en DEV : fenêtres de cinq minutes, réclamation et historique durables

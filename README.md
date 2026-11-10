@@ -36,6 +36,9 @@ de hash pendant la file, vraie allocation8192Mio, libération puis prochains tir
 sans rejeu. Quatre handlers réussis et trois fonctions purgées. Plafond global
 d'instances, refus résiduels, rétention, états UI et régression complète restent
 à éprouver dans SLS-078 ; la garde du plafond est suivie dans SLS-099.
+Cette garde refuse désormais la baisse avant mutation, en attendant une capacité
+conditionnelle de la console SPARK : [contrat et limite externe](docs/INSTANCE_LIMIT_RESTORATION.md).
+Les anciens succès du plafond restent historiques ; son rejeu est bloqué par ce prérequis.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

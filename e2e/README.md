@@ -1044,13 +1044,20 @@ présentes avant fermeture. Le code 143 d’Uvicorn n’est accepté qu’avec s
 de lifespan observée ; SIGKILL reste un scénario séparé. Les gardes indépendantes
 redémarrent le contrôle en cas de perte du pilote.
 
-`instance-limit-guard.py`, piloté par cette même campagne, applique temporairement
-32 → 2 par les propositions et l’API normale de la console SPARK locale, puis
-restaure 32 et recrée le contrôle. Il refuse une proposition préexistante sur
-cette clé, des fonctions étrangères ou des consommateurs actifs. Garder cette
-clé sans édition concurrente pendant la campagne. La console locale est donc
-un prérequis de preuve ; son absence fait échouer la campagne. Les budgets CPU
-et mémoire officiels et consommés sont recoupés pour isoler le plafond testé.
+Le nominal historique de `instance-limit-guard.py` appliquait32→2 puis32 par
+propositions/API console et recréation du contrôle. La correction SLS-099 refuse
+maintenant cette baisse avant mutation : la console examinée ne fournit pas de
+précondition sur l'entrée active, indispensable à une restitution qui conserve
+une édition concurrente. Les campagnes dépendantes échouent sur ce prérequis ;
+leurs anciens succès restent historiques. Contrat et suite de restitution :
+[INSTANCE_LIMIT_RESTORATION](../docs/INSTANCE_LIMIT_RESTORATION.md).
+
+`node e2e/instance-limit-safety.mjs`, depuis le poste avec session SSO réelle,
+qualifie le refus avant mutation sur le SPARK au repos : namespace original,
+entrées restore puis EOF, budgets/fichiers/propositions/services identiques,
+suppression réelle du namespace. `python3 -B e2e/instance-limit-guard.py UUID
+--inspect` effectue seulement le précontrôle natif et console. Cette preuve
+ne qualifie pas la restitution indépendante, SIGKILL ou une édition concurrente.
 
 Le rapport `.local/e2e/public-invocations.json` conserve des checkpoints atomiques,
 les identifiants créés, les archives de code retenues, les gardes et les erreurs.
