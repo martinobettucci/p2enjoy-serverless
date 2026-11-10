@@ -5321,3 +5321,40 @@ reconstruction. Lien mort vers le briefing privé corrigé.
 exécuté sans écriture ni envoi. Aucun build, déploiement ni E2E de plateforme dans
 cette passe : tout comportement nouveau reste non livré. Le push n'a pas pu être
 effectué depuis cet environnement faute d'identifiants GitHub.
+
+## 10 novembre 2026 — Le backlog devient la source unique des unités
+
+**Problème.** Le responsable constate que le backlog n'alimente pas correctement le
+travail : ce qui reste à développer ou à corriger n'y était qu'en partie sous forme
+d'unités. Les reliquats de qualification de SLS-020, 030, 040, 050, 066 et 074
+n'étaient que des phrases (« reste à qualifier ») dans des paragraphes de preuves ;
+les unités 068 à 073 n'avaient ni critères cochables ni tests exigés ; l'ordre de
+reprise vivait dans `docs/OBJECTIF_AUTONOME.md` et le texte du goal listait des unités
+à l'instant de l'écriture.
+
+**Décisions** (motifs : un seul endroit par information, moindre coût pour l'agent
+suivant, réversibilité).
+
+1. Le backlog porte un registre des unités ouvertes (ordre, nature, dépendances,
+   contrat), des critères communs, une table des décisions et autorités en attente.
+   Écartées : un fichier de suivi séparé (deuxième source qui diverge), déplacer les
+   unités terminées (ancres `#sls-NNN` citées par le code, plus de 600 références).
+2. Chaque reliquat devient une unité de nature Qualifier ou Corriger : SLS-089 (SSO),
+   090 (publication), 091 (moteur), 092 (stockage), 093 (URL d'appel), 094 (versions),
+   plus SLS-095 (campagne complète de clôture), SLS-096 (manuel déployé conforme à sa
+   source, invalidé par l'édition de `docs/manual.md` sans reconstruction) et SLS-097
+   (API documentée, ligne « Partiel » de la parité qui n'avait pas d'unité). Les
+   parentes restent `[~]` avec « Reste à faire » vers l'enfant.
+3. Les unités ouvertes suivent un squelette : statut, nature, dépendances, ordre,
+   contrat, résultat attendu, critères cochables identifiés, tests exigés (unitaires,
+   API, E2E, visuel), documents à mettre à jour.
+4. Le goal destiné à l'agent est permanent : il repart du registre du backlog et des
+   documents du dépôt, sans nommer d'unité ni d'ordre. L'ordre n'existe plus que dans
+   le registre.
+
+**Conséquences.** `docs/OBJECTIF_AUTONOME.md`, `docs/DEMANDES_ET_LIVRAISON.md` et le
+README renvoient au registre. Aucun code ni comportement ne change.
+
+**Vérifications.** Liens et ancres des cinq documents modifiés : zéro défaut. Le texte
+des unités terminées est inchangé hors lignes de statut et pointeurs « Reste à faire »
+(comparaison au commit précédent).

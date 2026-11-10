@@ -1,29 +1,128 @@
 # Backlog
 
-## État réel de livraison — revue du10 novembre2026
+Le backlog est l'**unique source des unités à développer, corriger ou qualifier**.
+Un agent qui reprend le travail part du [registre des unités ouvertes](#registre-des-unités-ouvertes),
+prend l'unité de plus petit ordre non terminée, lit son contrat, puis la livre
+avec les [critères communs](#critères-communs-à-toutes-les-unités). Les
+documents [demandes et livraison](DEMANDES_ET_LIVRAISON.md) et
+[objectif autonome](OBJECTIF_AUTONOME.md) renvoient ici ; ils ne portent aucun
+ordre ni aucun statut propre.
 
-[Demandes confirmées et état réel](DEMANDES_ET_LIVRAISON.md).
-Six demandes explicites sont spécifiées mais pas implémentées : favoris
-(SLS-068), opérations en masse (069), éditeur de code (070), client HTTP (071),
-journaux avancés (072) et monitoring historique (073). Les crons ne déclenchent
-pas encore ([SLS-078](#sls-078)), les jobs de console n’existent pas
-([SLS-081](#sls-081)) et la compatibilité d'exploitation du projet de référence
-reste à démontrer ([SLS-080](#sls-080)). L’objectif est la parité avec Scaleway
-Serverless ([SLS-082](#sls-082)) et un guide d’exploitation rejoué
-([SLS-079](#sls-079)). Les écarts SSO et la campagne complète008 restent ouverts.
-Ces absences sont dans le périmètre obligatoire ; les preuves ciblées ne les
-remplacent pas. La reprise doit rendre concret le parcours éditer/publier/tester/
-diagnostiquer (070/071/072), sans retirer les autres exigences confirmées.
+## Alimentation du backlog
+
+- Toute demande, tout défaut, tout écart de parité et tout reste de qualification
+  devient une **unité identifiée** dès sa réception, avec sa nature, ses
+  dépendances, ses critères cochables et ses tests. Une phrase « reste à
+  qualifier » ou « à poursuivre » dans le récit d'une unité n'est pas un suivi :
+  elle devient une unité du registre.
+- Quatre natures : **Développer** (fonctionnalité absente), **Corriger** (défaut ou
+  comportement non conforme au contrat), **Qualifier** (le code existe, des
+  preuves contractuelles manquent), **Décision** (le dépôt ne permet pas de
+  trancher, cas d'arbitrage nommé).
+- Les récits de preuves (campagnes, empreintes, nettoyages) vivent dans
+  `docs/evidence/` et `docs/JOURNAL.md`. L'unité garde le résultat attendu, les
+  critères, les tests exigés et un lien vers la preuve la plus récente.
+- Statuts : `[ ]` non commencé, `[~]` implémenté ou en cours mais insuffisamment
+  vérifié, `[x]` terminé et intégralement vérifié. Un critère coché `[x]` porte sa
+  preuve. Une unité passe à `[x]` quand tous ses critères le sont et que ses
+  documents, seed, schéma et manuel ont suivi.
+- Une unité parente restée `[~]` désigne l'unité enfant qui porte son reste à
+  faire ; elle passe à `[x]` quand l'enfant l'est et que ses propres critères
+  restent prouvés par la campagne de clôture ([SLS-095](#sls-095)).
+- Les ancres `#sls-NNN` sont stables : le code et les tests les citent
+  (`@spec`, `@verifies`). Une unité n'est ni renumérotée ni déplacée.
+
+## Critères communs à toutes les unités
+
+Ils complètent la Definition of Done de `CLAUDE.md` et ne sont pas répétés dans
+chaque unité.
+
+1. **Contrat d'abord.** Spécification, décisions et motifs sont écrits et commités
+   avant le code qui en dépend ; chaque fichier porte `@spec` / `@verifies` vers
+   l'unité et les chapitres.
+2. **Cible.** SPARK DEV uniquement ; jamais PREPROD/PROD ; la référence client est
+   en lecture seule ; les fixtures sont originales.
+3. **Tests propres à l'unité**, sans mock ni test ignoré : un test unitaire, un test
+   d'API ou d'intégration quand une API, une base, un service ou une autorisation
+   est en jeu, un test E2E sur le code réellement déployé, un scénario à la fois.
+4. **Autorisations** : toute règle d'accès est refusée côté serveur et prouvée par
+   requête directe avec les vrais droits du profil concerné.
+5. **Interface** : lecture préalable des deux design systems ; parcours depuis
+   l'accueil, connecté par le vrai SSO, à la souris et au clavier ; états
+   chargement, vide, erreur, données longues, mobile ; captures JPEG inspectées sur
+   ordinateur et mobile ; `docs/DESIGN_SYSTEM_APP.md` à jour.
+6. **Pannes et reprise** quand l'opération est durable : réponse perdue, SIGKILL du
+   contrôle, redémarrage, absence de rejeu, ressources physiques restituées.
+7. **Documents dans le même changement** : manuel (`docs/manual.md`, affiché par la
+   console), `SCHEMA.md` et migration versionnée, seed, `DAT.md`, README,
+   `CHANGELOG.md` sous « Non publié », contrat de déploiement, matrice
+   [SCALEWAY_PARITY](SCALEWAY_PARITY.md), ce backlog.
+8. **Preuve = code déployé** : sources et images de la preuve identiques à ce qui
+   est installé sur le SPARK DEV ; nettoyage des ressources de test recoupé.
+
+## Registre des unités ouvertes
+
+Tri par **ordre de reprise**. Les unités terminées sont plus bas, dans leur détail.
+« Dépend de » liste ce qui doit être livré avant ; une unité dont la dépendance est
+bloquée est sautée et son blocage est nommé.
+
+| Ordre | Unité | Nature | Statut | Dépend de | Contrat |
+| --- | --- | --- | --- | --- | --- |
+| 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[ ]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
+| 1 | [SLS-096](#sls-096) Manuel déployé conforme à sa source | Corriger | `[ ]` | — (même build que SLS-078) | [CONSOLE_MANUAL](CONSOLE_MANUAL.md) |
+| 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
+| 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
+| 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
+| 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
+| 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
+| 5 | [SLS-083](#sls-083) Limites et en-têtes alignés sur Scaleway | Développer | `[ ]` | SLS-040 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md), [EXECUTION](EXECUTION.md) |
+| 5 | [SLS-080](#sls-080) Compatibilité du projet de référence | Développer | `[~]` | SLS-078, SLS-083 | [REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md) |
+| 6 | [SLS-068](#sls-068) Favoris personnels | Développer | `[ ]` | SLS-067 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#favoris-personnels) |
+| 6 | [SLS-069](#sls-069) Renommage et suppression en masse | Développer | `[ ]` | SLS-067, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#opérations-en-masse) |
+| 6 | [SLS-075](#sls-075) Titre de la fiche d'archive après purge | Corriger | `[ ]` | SLS-065 | cette unité |
+| 7 | [SLS-073](#sls-073) Monitoring historique et alertes | Développer | `[ ]` | SLS-072, SLS-078 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#monitoring-et-alertes) |
+| 8 | [SLS-084](#sls-084) Runtimes supplémentaires | Développer | `[ ]` | SLS-083 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
+| 8 | [SLS-086](#sls-086) Répartition du trafic entre versions | Développer | `[ ]` | SLS-074, SLS-073 | [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
+| 8 | [SLS-087](#sls-087) Conditions d'accès horaire et user-agent | Développer | `[ ]` | SLS-040 | [PLATFORM](PLATFORM.md) |
+| 9 | [SLS-097](#sls-097) API de gestion documentée (OpenAPI) | Développer | `[ ]` | unités 3 à 8 | [CONTROL](CONTROL.md) |
+| 10 | [SLS-090](#sls-090) Pannes résiduelles de publication | Qualifier | `[ ]` | SLS-030 | [DEPLOYMENT](DEPLOYMENT.md) |
+| 10 | [SLS-091](#sls-091) Rétention et nettoyage du moteur d'exécution | Qualifier | `[ ]` | SLS-040 | [EXECUTION](EXECUTION.md) |
+| 10 | [SLS-092](#sls-092) Stockage : acquisition partielle, marge, registre | Qualifier | `[ ]` | SLS-050 | [STORAGE_AGENT](STORAGE_AGENT.md) |
+| 10 | [SLS-093](#sls-093) Fautes de source et de transport des URL d'appel | Qualifier | `[ ]` | SLS-066 | [INVOCATION_URLS](INVOCATION_URLS.md) |
+| 10 | [SLS-094](#sls-094) Pannes, console et régression de SLS-074 | Qualifier | `[ ]` | SLS-074 | [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
+| 11 | [SLS-079](#sls-079) Guide d'exploitation rejoué | Développer | `[ ]` | unités 1 à 10 | [OPERATIONS](OPERATIONS.md) |
+| 12 | [SLS-095](#sls-095) Campagne complète et clôture | Qualifier | `[ ]` | toutes | [TEST_MATRIX](TEST_MATRIX.md) |
+| — | [SLS-085](#sls-085) Déclencheurs de file et NATS | Décision | `[ ]` | choix du courtier | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
+| — | [SLS-088](#sls-088) Serverless Jobs en conteneur | Décision | `[ ]` | choix des images | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
+
+Unités parentes encore `[~]` et unités qui portent leur reste à faire :
+[SLS-001](#sls-001) → toutes ; [SLS-020](#sls-020) → SLS-089 ;
+[SLS-030](#sls-030) → SLS-090 et SLS-080 ; [SLS-040](#sls-040) → SLS-091 ;
+[SLS-050](#sls-050) → SLS-078 et SLS-092 ; [SLS-060](#sls-060) → SLS-068 à SLS-073,
+SLS-081 et SLS-095 ; [SLS-066](#sls-066) → SLS-093 ;
+[SLS-074](#sls-074) → SLS-094 ; [SLS-082](#sls-082) → SLS-083 à SLS-088 et SLS-097.
+
+## Décisions et autorités en attente
+
+Seuls les cas de la demande d'arbitrage figurent ici. Ce qui reste livrable sans
+la réponse est livré sans attendre.
+
+| Point | Cas | Ce qui bloque | Livrable sans la réponse |
+| --- | --- | --- | --- |
+| Courtier de messages pour Queue/NATS | 4 (infrastructure du SPARK) et éventuellement 2 | [SLS-085](#sls-085) | Tout le reste du registre |
+| Origine des images de conteneur des Serverless Jobs | 3 (choix de produit) | [SLS-088](#sls-088) | Tout le reste du registre ; les jobs de console (SLS-081) sont distincts |
+| Budget de cellule CPU/RAM pour les minima de la référence (au moins 1,5 CPU et 2 Gio) | 4 (proposition `.?` au propriétaire du SPARK) | La campagne complète de [SLS-080](#sls-080) | Adaptateur, fixtures, 12 des 13 fonctions à un budget plus bas, preuves hors budget |
+| Autorité d'installation temporaire pour rejouer le guide | 4 | [SLS-079](#sls-079) | Rédaction du guide, tableau de configuration comparé au code |
+| Comptes SSO de test (non vérifié, vérifié, admin) et rotation de clé réelle | 4 | Preuves de [SLS-089](#sls-089) | Correctifs et tests de composants |
+| Identifiants de push GitHub | 4 | Publication des commits | Tout le travail local, commité |
 
 ## Suivi des demandes du responsable
 
 Toute demande produit, correction ou contrainte reçue est inscrite ici dès sa
-réception, dans l’unité existante correspondante ou dans une nouvelle unité
-identifiée. Chaque unité précise le résultat attendu, ses critères et les
-preuves requises. Les corrections complètent le contrat existant ; elles ne
-disparaissent pas derrière une nouvelle reformulation. Les statuts restent
-`[ ]` non commencé, `[~]` en cours ou insuffisamment vérifié, `[x]` terminé et
-vérifié. Les valeurs de secrets ne sont jamais consignées dans le backlog.
+réception, dans l'unité existante correspondante ou dans une nouvelle unité
+identifiée. Les corrections complètent le contrat existant ; elles ne
+disparaissent pas derrière une nouvelle reformulation. Les valeurs de secrets ne
+sont jamais consignées dans le backlog. L'état d'une demande se lit dans l'unité.
 
 Les demandes confirmées sont rattachées aux unités suivantes. Leur état et
 leurs preuves font autorité dans le détail de chaque unité.
@@ -42,7 +141,7 @@ leurs preuves font autorité dans le détail de chaque unité.
 | Restrictions par origine web et/ou IP, configurables au niveau service | [SLS-040](#sls-040), [PLATFORM](PLATFORM.md) |
 | CPU, mémoire, concurrence, durée maximale d’exécution et délai d’arrêt après inactivité | [SLS-040](#sls-040), [SLS-060](#sls-060), [EXECUTION](EXECUTION.md) |
 | Disque par identifiant stable, données permanentes et cache configurables, quotas, archive et purge | [SLS-010](#sls-010), [SLS-050](#sls-050), [SLS-064](#sls-064), [SLS-065](#sls-065) |
-| Manuel d’usage maintenu et consultable dans l’application | [SLS-062](#sls-062), [CONSOLE_MANUAL](CONSOLE_MANUAL.md) ; mise à jour avec chaque livraison |
+| Manuel d’usage maintenu et consultable dans l’application | [SLS-062](#sls-062), [SLS-096](#sls-096) (manuel déployé conforme à sa source), [CONSOLE_MANUAL](CONSOLE_MANUAL.md) ; mise à jour avec chaque livraison |
 | Chemins d’appel calculés depuis les domaines réellement affectés au SPARK | [SLS-066](#sls-066) |
 | Recherche, filtres et catalogue opérationnel | [SLS-067](#sls-067) |
 | Favoris personnels | [SLS-068](#sls-068) |
@@ -58,6 +157,10 @@ leurs preuves font autorité dans le détail de chaque unité.
 | Répliquer toutes les fonctionnalités de Scaleway Serverless | [SLS-082](#sls-082) et unités 083 à 088, [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | Compatibilité du projet de référence établie par contrats et fixtures | [SLS-080](#sls-080), [REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md) |
 | Exploitation complète et reproductible, guide rejoué | [SLS-079](#sls-079), [OPERATIONS](OPERATIONS.md) |
+| Écarts SSO identifiés par la revue du contrat OIDC (attente, azp, rotation de clé) | [SLS-089](#sls-089) |
+| Restes de qualification : pannes de publication, moteur, stockage, URL d’appel, versions | [SLS-090](#sls-090) à [SLS-094](#sls-094) |
+| API de gestion complète et documentée (parité Scaleway) | [SLS-097](#sls-097) |
+| Campagne complète en série, zéro échec et zéro test ignoré, preuves = code déployé | [SLS-095](#sls-095) |
 
 ## SLS-000
 
@@ -118,7 +221,8 @@ non encore implémentées.
 
 ## SLS-001
 
-Statut : [~] — objectif autonome actif ; réalisation détaillée ci-dessous.
+Statut : [~] — réalisation par les unités du [registre](#registre-des-unités-ouvertes) ;
+clôturée par [SLS-095](#sls-095).
 
 Spécifier puis livrer par unités cohérentes les fonctions confirmées du produit :
 SSO admin, namespaces/services/functions, jetons CRUD et invocations avec jeton,
@@ -169,6 +273,7 @@ session authentifiée et l’API administrateur des namespaces répond 200.
 ## SLS-020
 
 Statut : [~] — contrôle et console initiale déployés ; qualification en cours.
+Reste à faire : [SLS-089](#sls-089).
 
 API Python/SQLite avec migrations, SSO admin réel, sessions/CSRF, CRUD des
 namespaces/services/fonctions et tokens. E2E : persistance après redémarrage,
@@ -199,7 +304,9 @@ réussie. La durée de 300 secondes se mesure sur le jeton réellement émis.
 
 ## SLS-030
 
-Statut : [~] — publication API/CLI, plafonds de candidats/révisions et deux reprises après SIGKILL qualifiés ; autres limites ouvertes ; interface livrée par SLS-063.
+Statut : [~] — publication API/CLI, plafonds de candidats/révisions et deux reprises après SIGKILL qualifiés ; interface livrée par SLS-063.
+Reste à faire : [SLS-090](#sls-090) (pannes de publication) et [SLS-080](#sls-080)
+(compatibilité du projet de référence).
 
 Packaging YAML, héritage, upload immuable, secrets chiffrés, validation du
 handler, CJS/ESM et dépendances réelles. E2E : déployer le service témoin par
@@ -254,7 +361,8 @@ la [campagne publique](evidence/execution-dev-2026-11-06.json).
 
 ## SLS-040
 
-Statut : [~] — admissions publiques et reprises éprouvées ; preuves résiduelles ouvertes ; vues de consultation livrées par SLS-061.
+Statut : [~] — admissions publiques et reprises éprouvées ; vues de consultation livrées par SLS-061.
+Reste à faire : [SLS-091](#sls-091).
 
 Invocation authentifiée, limites réelles, admission atomique, min/max/idle,
 deadline, descendants, drainage et réconciliation. CORS/IP ET/OU côté backend.
@@ -280,7 +388,9 @@ d’exécution sont livrées et vérifiées par SLS-061.
 
 ## SLS-050
 
-Statut : [~] — agent local installé en DEV ; raccordements et preuves de reprise à poursuivre.
+Statut : [~] — agent local installé en DEV ; raccordements et reprises principaux qualifiés.
+Reste à faire : [SLS-078](#sls-078) (crons) et [SLS-092](#sls-092) (acquisition partielle,
+marge physique, registre).
 
 Volumes par ID, quotas et modes, archive/purge, crons UTC, logs bornés et
 métriques. E2E : concurrence, saturation disque, cache, déploiement/rollback,
@@ -313,7 +423,9 @@ restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls compos
 
 ## SLS-060
 
-Statut : [~] — gestion, exécutions, manuel, publication et purge/cache présents ; crons, ergonomie avancée et qualification transversale restent ouverts.
+Statut : [~] — gestion, exécutions, manuel, publication et purge/cache présents.
+Reste à faire : [SLS-068](#sls-068) à [SLS-073](#sls-073), [SLS-078](#sls-078),
+[SLS-081](#sls-081) et la campagne de [SLS-095](#sls-095).
 
 Parcours d'administration sur les API réelles : connexion, objets, jetons,
 code, variables/secrets, limites, état, stockage, historique et journaux.
@@ -462,8 +574,8 @@ de la FORGE ni les autres scénarios résiduels de SLS-030.
 ## SLS-066 — Afficher les URL d’appel issues des domaines du SPARK
 
 Statut : [~] — catalogue, console et résultat CLI déployés en DEV ; régression
-complète de 35 campagnes / 467 groupes réussie, qualification multi-domaines
-et résiduelle ouverte.
+complète de 35 campagnes / 467 groupes réussie, qualification multi-domaines faite.
+Reste à faire : [SLS-093](#sls-093).
 
 La source refusée suit le [contrat de permissions réelles](INVOCATION_SOURCE_PERMISSIONS.md) :
 précontrôle natif positif, chmod du seul fichier officiel sans édition du
@@ -671,80 +783,238 @@ dans SLS-075. SLS-066 conserve ses preuves indépendantes.
 <a id="sls-068"></a>
 ## SLS-068 — Favoris personnels persistants
 
-Statut : [ ] — contrat défini, implémentation à réaliser.
-
-Épingler et ordonner namespaces/services/fonctions par identité SSO stable,
-avec persistance entre appareils et traitement des objets devenus indisponibles.
+Statut : [ ] — contrat défini, rien d'implémenté (aucune route, table ni écran).
+Nature : Développer. Dépend de : SLS-067. Ordre : 6.
 Contrat : [favoris](CONSOLE_USABILITY.md#favoris-personnels).
-E2E : deux sessions réelles du même compte, isolation entre comptes réels,
-renommage/suppression/retrait d’accès, redémarrage et parcours clavier/mobile.
+
+Résultat attendu : une personne épingle et ordonne namespaces, services et fonctions ;
+ses favoris la suivent entre appareils.
+
+Critères d'acceptation :
+
+- [ ] SLS-068.1 Table et migration versionnée : favori = identité SSO stable + type + UUID de
+  l'objet + rang ; unicité par personne et objet ; suppression en cascade avec l'objet.
+- [ ] SLS-068.2 API : lister, ajouter, retirer, réordonner (atomique) ; les favoris ne
+  portent que des UUID, donc suivent un renommage.
+- [ ] SLS-068.3 Un objet supprimé ou devenu inaccessible apparaît « indisponible » sans
+  nom ni détail pour une identité qui n'y a plus droit ; la personne peut retirer la
+  référence.
+- [ ] SLS-068.4 Les jetons techniques de service ne lisent ni ne modifient les favoris
+  d'un administrateur.
+- [ ] SLS-068.5 Interface : étoile sur liste et fiche, section « Favoris » dans la navigation,
+  réordonnancement au clavier et à la souris, états vide, erreur, long nom, mobile.
+
+Tests exigés :
+
+- Unitaires : ordre, unicité, réordonnancement, projection d'un objet indisponible.
+- API / intégration : isolation entre deux comptes réels, droits par requête directe,
+  concurrence de deux réordonnancements, persistance après redémarrage du contrôle.
+- E2E depuis l'accueil réel : deux sessions du même compte voient les mêmes favoris,
+  deux comptes ne se voient pas, renommage, suppression et retrait d'accès d'un objet
+  favori, parcours clavier et mobile, captures inspectées.
+
+À mettre à jour : `SCHEMA.md`, seed (favoris de démonstration par profil), manuel,
+`DESIGN_SYSTEM_APP.md`, parité sans objet (ergonomie du produit), `CHANGELOG.md`.
 
 <a id="sls-069"></a>
 ## SLS-069 — Renommage et suppression en masse
 
-Statut : [ ] — contrat défini, implémentation à réaliser.
+Statut : [ ] — contrat défini, actions individuelles seulement aujourd'hui.
+Nature : Développer. Dépend de : SLS-067, SLS-074. Ordre : 6.
+Contrat : [opérations en masse](CONSOLE_USABILITY.md#opérations-en-masse).
 
-Sélection explicite, aperçu, droits et versions, renommage atomique et suivi
-durable de suppression par objet. Préserver UUID, révisions et volumes ; fournir
-la correspondance de manifeste pour l’adaptateur après renommage. Contrat :
-[opérations en masse](CONSOLE_USABILITY.md#opérations-en-masse).
-E2E : sélection multi-pages, collisions/échanges de noms, version obsolète,
-limite du lot, fonctions occupées, parents non vides, résultat partiel, reprise
-après réponse perdue/SIGKILL, redéploiement exporté et état physique des données.
+Résultat attendu : sélectionner explicitement des fonctions, services ou namespaces,
+prévisualiser, puis renommer ou supprimer en lot avec un résultat suivi par objet.
+
+Critères d'acceptation :
+
+- [ ] SLS-069.1 Sélection par type d'objet, page ou éléments explicites, au plus 256 UUID
+  avec leurs versions ; une nouvelle recherche n'étend jamais la sélection.
+- [ ] SLS-069.2 Renommage : préfixe, suffixe, remplacement de texte, correction
+  individuelle ; aperçu ancien/nouveau nom ; validation serveur des droits, des
+  versions, de la grammaire et des collisions (échanges de noms compris) ; lot atomique.
+- [ ] SLS-069.3 UUID, volumes, jetons, historiques et révisions conservés ; appels admis
+  inchangés, appels suivants sur le nouveau nom.
+- [ ] SLS-069.4 Export de manifeste après renommage avec `p2enjoy.function_id`
+  (adaptateur : UUID résolu avant le nom, appartenance au service vérifiée) ; un nouveau
+  déploiement du manifeste exporté conserve UUID et volumes.
+- [ ] SLS-069.5 Suppression : effets présentés avant confirmation ; fonction = archivage
+  (la purge reste une action administrateur distincte) ; parents occupés soumis à leurs
+  règles ; état par objet (terminé, refusé, en attente, interrompu), consultable après
+  rechargement.
+- [ ] SLS-069.6 Reprise d'une opération corrélée après réponse perdue ou SIGKILL : aucune
+  suppression appliquée deux fois, aucun objet ressuscité après échec partiel.
+
+Tests exigés :
+
+- Unitaires : grammaire, collisions, échanges, limite de 256, calcul d'aperçu.
+- API / intégration : version obsolète (409), droits par requête directe, fonctions
+  occupées, parents non vides, résultat partiel, idempotence de reprise.
+- E2E depuis l'accueil réel : sélection multi-pages, collisions, résultat partiel,
+  SIGKILL pendant le lot, redéploiement du manifeste exporté, état physique des
+  volumes et du code, captures desktop et mobile.
+
+À mettre à jour : `SCHEMA.md` et migration (opérations de lot), contrat de l'adaptateur
+(`p2enjoy.function_id`) dans `DEPLOYMENT.md`, seed, manuel, `DESIGN_SYSTEM_APP.md`.
 
 <a id="sls-070"></a>
 ## SLS-070 — Édition du code et du handler dans la console
 
-Statut : [ ] — contrat défini, implémentation à réaliser.
+Statut : [ ] — contrat défini ; aujourd'hui seulement l'upload ZIP et le champ handler.
+Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
+Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler).
 
-Arborescence de fichiers, édition texte, handler, brouillon persistant, diff et
-publication par le pipeline réel de révisions immuables. Contrat :
-[éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler).
-E2E : lecture autorisée/refusée, modification et export CJS/ESM, conflits,
-contenus binaires/volumineux, chemins invalides, import réellement défaillant,
-publication puis invocation Docker, rollback, rechargement et perte de réponse.
+Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
+handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de
+révisions immuables et tester le résultat.
+
+Critères d'acceptation :
+
+- [ ] SLS-070.1 Arborescence de la version choisie, lecture d'un fichier texte, binaires et
+  dépendances identifiés comme tels, limites de taille appliquées côté serveur.
+- [ ] SLS-070.2 Accès aux sources réservé aux droits de publication (Create sur un
+  brouillon initial, Update sur une fonction publiée, session administratrice) ; le
+  jeton Read seul n'accède ni aux sources ni à leur téléchargement.
+- [ ] SLS-070.3 Brouillon persistant côté serveur, rattaché à une révision de base ;
+  conflit de version détecté ; saisies non enregistrées signalées avant de quitter.
+- [ ] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
+  invalides refusés.
+- [ ] SLS-070.5 Publication par le pipeline de validation Docker existant, hash et
+  déduplication de SLS-074 ; un import refusé conserve la version active et le brouillon,
+  avec diagnostic consultable ; handler CJS/ESM validé avec les vrais modules.
+- [ ] SLS-070.6 Après publication : lien vers le test de SLS-071, promotion explicite ou
+  pilote, retour à un hash précédent.
+
+Tests exigés :
+
+- Unitaires : arborescence, diff, chemins, limites, calcul du paquet reconstruit.
+- API / intégration : droits par requête directe (Read refusé), conflits, contenu
+  volumineux et binaire, paquet identique dédupliqué.
+- E2E depuis l'accueil réel : modifier un handler CJS puis ESM, publier, invoquer en
+  Docker et lire la nouvelle réponse, import réellement défaillant, rollback,
+  rechargement, perte de réponse pendant la publication, captures desktop et mobile.
+
+À mettre à jour : `SCHEMA.md` et migration (brouillons), manuel, `DESIGN_SYSTEM_APP.md`
+(éditeur, diff), seed (fonction éditable), parité (onglet de code).
 
 <a id="sls-071"></a>
 ## SLS-071 — Client HTTP intégré par fonction
 
-Statut : [ ] — contrat défini, implémentation à réaliser.
+Statut : [ ] — contrat défini ; aujourd'hui seulement le catalogue d'URL et la copie.
+Nature : Développer. Dépend de : SLS-066, SLS-074. Ordre : 3.
+Contrat : [client HTTP](CONSOLE_USABILITY.md#client-http-par-fonction).
 
-Facette Tester avec méthode, URL calculée, paramètres, en-têtes, corps, réponse,
-durée et lien vers l’appel et ses journaux. Contextes serveur et navigateur
-explicites ; vrais jetons Read, politiques et authentification métier. Contrat :
-[client HTTP](CONSOLE_USABILITY.md#client-http-par-fonction).
-E2E : appels réels, corps texte/JSON/binaire, CORS/origine/IP, droits et expiration,
-destinations interdites/redirections, erreur/timeout/annulation, corrélation,
-expurgation des identifiants et rendu sur ordinateur/mobile.
+Résultat attendu : une facette Tester par fonction, de type client HTTP : composer une
+requête, l'envoyer par la vraie passerelle, lire la réponse et retrouver l'appel et ses
+journaux.
+
+Critères d'acceptation :
+
+- [ ] SLS-071.1 Méthode, URL calculée (cible courante ou hash disponible), paramètres, en-têtes,
+  corps texte, JSON ou fichier ; réponse avec statut, en-têtes, corps, durée, hash
+  effectivement appelé et identifiant de requête ; réponse volumineuse ou binaire bornée
+  avec téléchargement.
+- [ ] SLS-071.2 Contexte **serveur** (appel émis par le serveur de console, destinations limitées
+  aux adresses de cette installation et à `/invoke/UUID[@HASH]`, redirections non suivies,
+  cookies de console non transmis) et contexte **navigateur** (CORS depuis la vraie origine),
+  explicitement distingués.
+- [ ] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
+  après quinze minutes ; valeur en mémoire de la page, absente des exemples copiés, journaux,
+  erreurs, préférences et historique.
+- [ ] SLS-071.4 Annulation qui distingue l'arrêt de l'attente de l'issue du handler déjà
+  admis ; aucun rejeu automatique d'une invocation incertaine ; refus de la passerelle
+  restitués fidèlement.
+- [ ] SLS-071.5 Lien de la réponse vers l'invocation et ses journaux ([SLS-072](#sls-072)) ;
+  exemple cURL copiable sans secret.
+
+Tests exigés :
+
+- Unitaires : construction de requête, bornes de réponse, expurgation, validation de destination.
+- API / intégration : destinations interdites, redirections, expiration et révocation du jeton,
+  droits par requête directe, politiques origine/IP évaluées sur l'IP réelle de l'appel.
+- E2E depuis l'accueil réel : appels réels texte, JSON, binaire, CORS réussi et refusé, timeout,
+  annulation, corrélation avec l'invocation, hash demandé indisponible sans repli, captures
+  desktop et mobile.
+
+À mettre à jour : manuel, `DESIGN_SYSTEM_APP.md`, parité (onglet Test), seed.
 
 <a id="sls-072"></a>
-## SLS-072 — Journaux recherchables et corrélation d’exploitation
+## SLS-072 — Journaux recherchables et corrélation d'exploitation
 
-Statut : [ ] — extension des journaux d’invocation existants à réaliser.
+Statut : [ ] — journaux par invocation présents ; vues, recherche, suivi et export absents.
+Nature : Développer. Dépend de : SLS-061, SLS-074. Ordre : 3.
+Contrat : [journaux](CONSOLE_USABILITY.md#journaux-et-corrélation).
 
-Vues fonction/service, période, sévérité connue, recherche, suivi activable,
-export et corrélation appel/révision/instance/publication. Collecte, taille et
-rétention bornées. Contrat : [journaux](CONSOLE_USABILITY.md#journaux-et-corrélation).
-E2E : vrais logs texte/JSON et erreurs Docker, droits, secrets expurgés,
-troncature/rétention, pagination/recherche, suivi interrompu puis repris,
-redémarrage, export et diagnostic depuis un appel déclenché dans la console.
+Résultat attendu : retrouver et suivre les journaux d'une fonction ou d'un service sur une
+période, et passer d'une ligne à l'appel, à la version et à l'instance concernés.
+
+Critères d'acceptation :
+
+- [ ] SLS-072.1 Vues fonction et service : période, sévérité lorsqu'elle est connue (sinon non
+  renseignée), état, identifiant d'appel, recherche texte ; pagination.
+- [ ] SLS-072.2 Suivi des nouveaux événements activable et pausable, repris après coupure.
+- [ ] SLS-072.3 Corrélation fonction, service, version et hash exécuté, instance, requête,
+  chronologie ; événements de plateforme (publication, démarrage, extinction, délai
+  dépassé, opération de stockage) retrouvables ; erreurs de code distinguées des refus
+  d'admission et des défaillances d'infrastructure.
+- [ ] SLS-072.4 Collecte, taille, rétention, historique interrogé et exports bornés ; troncature,
+  rétention expirée et collecte indisponible signalées ; secrets expurgés ; valeurs
+  d'authentification et corps métier non journalisés.
+- [ ] SLS-072.5 Export respectant les droits ; texte échappé, clavier et mobile.
+
+Tests exigés :
+
+- Unitaires : analyse texte/JSON, expurgation, bornes, pagination.
+- API / intégration : droits par requête directe, secrets absents, rétention, redémarrage.
+- E2E depuis l'accueil réel : logs réels texte et JSON d'un handler Docker, erreur de code,
+  refus d'admission, troncature, suivi interrompu puis repris, export, diagnostic depuis
+  un appel déclenché dans la console, captures desktop et mobile.
+
+À mettre à jour : `SCHEMA.md` et migration, manuel, `DESIGN_SYSTEM_APP.md`, parité
+(journaux), seed.
 
 <a id="sls-073"></a>
 ## SLS-073 — Monitoring historique et alertes dans la console
 
-Statut : [ ] — extension des relevés Docker existants à réaliser.
+Statut : [ ] — relevés Docker ponctuels présents ; séries, tableaux de bord et alertes absents.
+Nature : Développer. Dépend de : SLS-072, SLS-078. Ordre : 7.
+Contrat : [monitoring](CONSOLE_USABILITY.md#monitoring-et-alertes).
 
-Tableaux de bord plateforme/namespace/service/fonction, séries d’appels,
-latences/erreurs/refus, CPU/mémoire/stockage, santé et alertes à seuils
-configurables. Contrat : [monitoring](CONSOLE_USABILITY.md#monitoring-et-alertes).
-E2E : charge réelle et pannes, valeurs agrégées recoupées aux appels et mesures,
-échantillons insuffisants/collecte indisponible, rétention, seuils et retour à la
-normale, droits, redémarrage, coût de collecte mesuré et inspection des graphes.
+Résultat attendu : voir l'évolution de l'activité et des ressources par plateforme,
+namespace, service et fonction, et être alerté quand un seuil est franchi.
+
+Critères d'acceptation :
+
+- [ ] SLS-073.1 Séries historiques : appels, erreurs, refus, délais dépassés, latence et
+  percentiles avec taille d'échantillon, attente, démarrages à froid, instances, CPU,
+  mémoire, stockage ; unité, période, source ; allocation, plafond et consommation
+  distingués ; donnée manquante ou échantillon insuffisant indiqués.
+- [ ] SLS-073.2 Santé du contrôle, du moteur Docker, de l'agent de stockage et des nettoyages en
+  attente ; tirs de planification et jobs ([SLS-078](#sls-078)) visibles.
+- [ ] SLS-073.3 Seuils configurables, alertes avec état, début, fin, lien vers objets et journaux ;
+  déduplication ; retour à la normale visible.
+- [ ] SLS-073.4 Collecte et agrégation sur mesures réelles, rétention et budget bornés, coût
+  mesuré sur le SPARK ; intervalle et lacunes affichés ; rafraîchissement suspendable ;
+  vues partageables par URL.
+- [ ] SLS-073.5 Droits côté serveur par périmètre.
+
+Tests exigés :
+
+- Unitaires : agrégation, percentiles, rétention, déduplication d'alerte.
+- API / intégration : valeurs recoupées aux appels et aux mesures, droits par requête
+  directe, redémarrage du collecteur.
+- E2E depuis l'accueil réel : charge réelle et panne provoquées, franchissement et retour
+  sous seuil, collecte indisponible, graphes inspectés sur ordinateur et mobile, coût de
+  collecte mesuré.
+
+À mettre à jour : `SCHEMA.md` et migration, manuel, `DESIGN_SYSTEM_APP.md` (graphes,
+alertes), parité (métriques, alertes), seed.
 
 <a id="sls-074"></a>
 ## SLS-074 — Versions par hash, appels épinglés et pilote de code
 
-Statut : [~] — publication, promotion et invocation par hash déployées en DEV ; checkpoint ciblé008 qualifié, pannes et régression complète en cours.
+Statut : [~] — publication, promotion et invocation par hash déployées en DEV ; checkpoint ciblé008 qualifié.
+Reste à faire : [SLS-094](#sls-094) (pannes, console, régression complète).
 
 Checkpoint livré et qualifié : [registre persistant](FUNCTION_VERSION_REGISTRY.md),
 migration additive des identités, conservation des alias et lecture/copie du hash.
@@ -1105,28 +1375,33 @@ perdue/SIGKILL et nettoyage physique. Parcours UI complets, captures et manuel
 compilé requis. Dépendances : SLS-030/040/063 ; raccordements SLS-066/070 à SLS-073.
 
 <a id="sls-075"></a>
-## SLS-075 — Nommer la fiche d’archive sans ambiguïté après purge
+## SLS-075 — Nommer la fiche d'archive sans ambiguïté après purge
 
-Statut : [ ] — correction mineure issue de la revue SLS-067, à réaliser avec
-une prochaine livraison UI et sa nouvelle qualification.
+Statut : [ ] — défaut mineur issu de la revue SLS-067, aucune défaillance de purge.
+Nature : Corriger. Dépend de : SLS-065. Ordre : 6, avec la prochaine livraison de console.
 
-Le titre actuel « Archives conservées » apparaît aussi au-dessus de l’état
-Purgée, de zéro révision et zéro Mio. Le badge et le reçu sont corrects ; aucune
-défaillance de purge n’est constatée. Source : `web/src/storage.jsx:96` ;
-capture contrôlée `storage-ui-purged-mobile.jpg`, empreinte
-`ae744c550e6e636e91163047b3768840f310d943d728a621102bee6121fa2285`.
+Constat : le titre « Archives conservées » apparaît aussi au-dessus de l'état Purgée,
+de zéro révision et zéro Mio. Source : `web/src/storage.jsx:96` ; capture contrôlée
+`storage-ui-purged-mobile.jpg`, empreinte
+`ae744c550e6e636e91163047b3768840f310d943d728a621102bee6121fa2285`. Le badge et le
+reçu sont corrects.
 
-Employer un titre neutre décrivant la fiche, par exemple « Archive de la
-fonction », et conserver les états Conservée/Purge en cours/Purgée dans le
-badge. Ne changer ni rétention, ni commandes, ni allocation pour ce libellé.
-La correction concerne un composant antérieur au catalogue ; elle requiert une
-nouvelle image de console, donc elle est séparée de la preuve produit figée.
+Critères d'acceptation :
 
-E2E : ouvrir une vraie archive après suppression de ses parents, observer le
-titre en état conservé puis effectuer sa purge réelle et relire titre/badge,
-volumes, code et reçu. Captures desktop/mobile, noms complets, focus et guide
-recoupés. Raccordement : SLS-065 et prochain changement de console.
+- [ ] SLS-075.1 Titre neutre qui décrit la fiche (« Archive de la fonction ») ; états
+  Conservée, Purge en cours et Purgée portés par le badge seul.
+- [ ] SLS-075.2 Aucun changement de rétention, de commande ou d'allocation.
 
+Tests exigés :
+
+- Unitaire : rendu du titre pour les trois états.
+- E2E depuis l'accueil réel : ouvrir une vraie archive après suppression de ses parents,
+  lire titre et badge en état conservé, effectuer la purge réelle, relire titre, badge,
+  volumes, code et reçu ; captures desktop et mobile, noms complets, focus.
+
+À mettre à jour : manuel si le libellé y figure, `DESIGN_SYSTEM_APP.md` si le libellé y
+est référencé. Nécessite une nouvelle image de console : preuve séparée des preuves
+produit figées.
 
 <a id="sls-076"></a>
 ## SLS-076 — Nom explicite des conteneurs de validation du code
@@ -1207,149 +1482,502 @@ relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-1
 <a id="sls-078"></a>
 ## SLS-078 — Moteur de planification des crons
 
-Statut : [ ] — contrat défini ([SCHEDULES](SCHEDULES.md)), moteur à réaliser. La
-limite est déjà dite dans le manuel (`docs/manual.md`, chapitre de l’adaptateur) ;
-la console déployée affichera ce texte à sa prochaine reconstruction.
+Statut : [ ] — contrat défini ([SCHEDULES](SCHEDULES.md)) ; aucun composant ne déclenche
+les `events: - schedule` acceptés et stockés. La limite est dite dans le manuel.
+Nature : Développer. Dépend de : SLS-040 (admission), SLS-074 (cible promue).
+Débloque : SLS-080, SLS-081, SLS-073. Ordre : 1.
+Contrat : [SCHEDULES](SCHEDULES.md).
 
-Déclencher réellement les `events: - schedule` du manifeste : expression UTC à cinq
-champs contrôlée **par fenêtres de 5 minutes** (décalage de 0 à 5 minutes, jamais de
-tir en avance, créneaux d’une même fenêtre fusionnés), cible = version promue,
-corps `{}` en `POST /`, aucun rejeu ni rattrapage, recouvrement évité, refus de
-capacité consigné, enregistrement durable de chaque tir. `plan` et `deploy`
-avertissent explicitement tant que le moteur n’est pas déployé. Moteur commun aux
-planifications du manifeste et aux jobs de console ([SLS-081](#sls-081)).
-Dépendances : SLS-040 (admission), SLS-074 (cible promue). Unlocks : SLS-080.
+Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
+de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.
 
-E2E : liste détaillée dans [SCHEDULES](SCHEDULES.md#preuves-e2e-attendues), dont
-SIGKILL du contrôle autour de la réclamation, arrêt sur plusieurs fenêtres,
-recouvrement, saturation, promotion/retour de hash/pilote, fonction désactivée ou
-supprimée, droits par requêtes directes, parcours UI et captures.
+Critères d'acceptation :
+
+- [ ] SLS-078.1 Réveil aux frontières UTC de 5 minutes ; un créneau nominal de la fenêtre
+  écoulée est lancé à la frontière suivante ; jamais en avance ; retard consigné.
+- [ ] SLS-078.2 Plusieurs créneaux d'une même fenêtre fusionnés en un tir (`coalesced`) ;
+  syntaxe cinq champs (listes, plages, pas, `*`, dimanche 0 ou 7) ; jour du mois OU jour de
+  la semaine quand les deux sont restreints.
+- [ ] SLS-078.3 Cible = version promue (pilote jamais déclenché) ; promotion, retour à un hash
+  ou retrait de la planification remplace l'ensemble à l'instant de la décision ;
+  `enabled: false` sans tir ; fonction désactivée, supprimée ou archivée sans tir.
+- [ ] SLS-078.4 Événement HTTP v1 synthétique `POST /`, corps `{}`, en-têtes
+  `x-p2enjoy-trigger` et `x-p2enjoy-schedule-slot`, sans jeton ni politique origine/IP,
+  par la même admission que les appels HTTP (budgets, file, concurrence, verrou de
+  stockage, deadline, extinction).
+- [ ] SLS-078.5 Enregistrement durable de chaque tir (états `claimed`, `dispatched`,
+  `succeeded`, `failed`, `skipped_downtime`, `skipped_overlap`, `refused_*`) ; réclamation
+  avant envoi ; aucun rejeu ni rattrapage ; recouvrement évité ; refus de capacité consigné
+  sans retry.
+- [ ] SLS-078.6 L'invocation porte `trigger: schedule`, l'origine, l'expression et le créneau ;
+  la fiche de fonction affiche les planifications actives (prochain tir, dernier résultat,
+  état) en lecture avec le droit Read.
+- [ ] SLS-078.7 Adaptateur : `plan` et `deploy` avertissent par fonction planifiée tant que le
+  moteur n'est pas déployé ; l'avertissement et la phrase du manuel disparaissent avec le
+  déploiement du moteur, dans le même changement.
+
+Tests exigés :
+
+- Unitaires : calcul des créneaux, fenêtres, fusion, grammaire, OU jour/semaine.
+- API / intégration : table des tirs, droits par requête directe, migration, reprise
+  après redémarrage.
+- E2E sur l'horloge réelle (liste complète dans
+  [SCHEDULES](SCHEDULES.md#preuves-e2e-attendues)) : `*/5`, `* * * * *`, instant précis,
+  pilote/promotion/retour de hash, désactivation et suppression, SIGKILL du contrôle autour de
+  la réclamation, arrêt sur plusieurs fenêtres, recouvrement, saturation, stockage exclusif
+  occupé, parcours UI et captures. Tous les objets d'un scénario sont créés avant la
+  frontière suivante.
+
+À mettre à jour : `SCHEMA.md` et migration, seed (fonctions planifiées), manuel (retrait de la
+limite), `DESIGN_SYSTEM_APP.md`, `DEPLOYMENT.md`, parité (CRON), README.
 
 <a id="sls-079"></a>
 ## SLS-079 — Exploitation complète et reproductible
 
-Statut : [ ] — contrat défini ([OPERATIONS](OPERATIONS.md)), guide à écrire et à rejouer.
+Statut : [ ] — contrat défini ([OPERATIONS](OPERATIONS.md)) ; informations dispersées dans les
+comptes rendus de campagne, guide absent.
+Nature : Développer (documentation rejouée). Dépend de : unités 1 à 10, pour rejouer l'état
+stable le plus tardif. Ordre : 11.
 
-Un guide unique : prérequis, configuration (tableau de toutes les variables),
-installation depuis zéro, mise à jour, redémarrage et reprise, sauvegarde et
-restauration, secrets et rotation, persistance, intégration au SPARK, diagnostic,
-purge. README ramené à une porte d’entrée ; notes de la cellule du SPARK réduites à
-leur usage ; récits de campagne conservés au journal. E2E : le guide est rejoué sur
-une installation temporaire distincte (pas de preuve par relecture), cinq symptômes
-du tableau de diagnostic sont provoqués, le tableau de configuration est comparé au
-code, un relecteur extérieur exécute les chapitres 3 à 6. Un blocage d’autorité du
-SPARK est nommé, pas contourné.
+Résultat attendu : un seul guide pour une personne qui n'a pas suivi le développement.
+
+Critères d'acceptation :
+
+- [ ] SLS-079.1 Les onze chapitres de [OPERATIONS](OPERATIONS.md#contenu-exigé-du-guide) rédigés :
+  prérequis, configuration, installation, mise à jour, reprise, sauvegarde, secrets,
+  persistance, intégration au SPARK, diagnostic, purge.
+- [ ] SLS-079.2 Tableau de **toutes** les variables et secrets (rôle, format, obligatoire, défaut,
+  exemple) comparé mécaniquement au code qui les lit.
+- [ ] SLS-079.3 README ramené à une porte d'entrée ; notes de la cellule du SPARK réduites à leur
+  usage ; récits de campagne déplacés au journal, jamais supprimés.
+- [ ] SLS-079.4 Guide rejoué sur une installation temporaire distincte : installation depuis
+  zéro, mise à jour, redémarrage forcé, sauvegarde, destruction partielle, restauration,
+  purge ; au moins cinq symptômes du tableau de diagnostic provoqués pour de vrai.
+- [ ] SLS-079.5 Un relecteur qui n'a pas suivi le développement exécute les chapitres 3 à 6 sans aide.
+
+Tests exigés : le rejeu est la preuve ; chaque commande est exécutée ou, si destructive,
+exécutée dans l'installation temporaire ; un test automatique compare le tableau de
+configuration au code ; aucune preuve par relecture. Si l'autorité du SPARK ne permet pas
+l'installation temporaire, le blocage est nommé ici ([Décisions](#décisions-et-autorités-en-attente)),
+sans preuve partielle.
+
+À mettre à jour : README, `DEPLOYMENT.md`, `PLATFORM_DEV.md`, notes SPARK, `DAT.md`, manuel si
+l'exploitant y renvoie.
 
 <a id="sls-080"></a>
 ## SLS-080 — Compatibilité du projet de référence
 
-Statut : [~] — audit et matrice faits le 10 novembre 2026 ([REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md)) ;
-adaptations, fixtures et preuves E2E à réaliser.
+Statut : [~] — audit et matrice faits le 10 novembre 2026
+([REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md)) ; adaptations, fixtures et preuves
+E2E à réaliser.
+Nature : Développer. Dépend de : SLS-078, SLS-083. Ordre : 5. Portée du reste de SLS-030.
 
-Réaliser les adaptations décidées : CPU dérivé du palier mémoire Scaleway quand
-`p2enjoy.cpu` est absent, avertissements clairs de l’adaptateur (options ignorées,
-conversion Node, planifications), guide d’intégration client. Produire des fixtures
-originales à treize fonctions fidèles aux contrats (jamais de copie du client),
-les publier par la vraie CLI, les invoquer par les adresses copiées de la console,
-prouver CORS et `Authorization` métier, l’accès sortant réel et sa frontière, les
-budgets (y compris le refus 409), les deux planifications et la fidélité des
-fixtures par comparaison avec le `plan` des manifestes réels. Dépendances : SLS-078,
-SLS-083. Campagne exécutée seule (budgets partagés). Un budget de cellule insuffisant
-est une proposition `.?` au propriétaire du SPARK, nommée si elle bloque.
+Résultat attendu : prouver, avec des fixtures originales déployées et invoquées, qu'un
+projet de la forme de la référence se publie et s'exécute sur la plateforme.
+
+Critères d'acceptation :
+
+- [ ] SLS-080.1 CPU dérivé du palier mémoire Scaleway (70 mvCPU par 128 Mio) quand `p2enjoy.cpu`
+  est absent ; `p2enjoy.cpu` l'emporte.
+- [ ] SLS-080.2 Avertissements de l'adaptateur : options ignorées, conversion Node 20 vers 24,
+  planifications ; guide d'intégration client (adresse de base, `/invoke/{UUID}`,
+  `X-Serverless-Token`, build Node 24, origines, abandon de `privacy`/`httpOption`/
+  `custom_domains`).
+- [ ] SLS-080.3 Fixtures originales à treize fonctions fidèles aux contrats (mémoires, délais,
+  minima et maxima, `provider.secret`/`env`, trois options ignorées, `node20` converti, deux
+  planifications, handlers `(event, context, cb)` avec `JSON.parse(event.body)`, CORS
+  construit par le handler, `OPTIONS`, appels entre fonctions avec jeton). Jamais de copie
+  du client.
+- [ ] SLS-080.4 Publication complète par `adapter deploy` avec les deux drapeaux, rapport lu ;
+  mise à jour, rollback, pilote, redéploiement ; budgets CPU/RAM/instances constatés avant
+  et après, y compris le refus 409 d'un budget insuffisant.
+- [ ] SLS-080.5 Invocation de chaque fonction par l'adresse copiée de la console, jeton Read,
+  origine autorisée depuis un vrai navigateur (préflight sans `Access-Control-*` du handler),
+  autre origine ou IP refusée, `Authorization` métier reçu par le handler.
+- [ ] SLS-080.6 Accès sortant réel vers des dépendances réelles démarrées pour l'essai (HTTP,
+  PostgreSQL, courrier) puis purgées ; l'instance n'atteint ni le contrôle, ni l'agent de
+  stockage, ni le socket Docker.
+- [ ] SLS-080.7 Les deux planifications tirent aux frontières attendues sur la version promue.
+- [ ] SLS-080.8 `plan` exécuté en lecture seule sur les manifestes réels de la référence et
+  comparé aux fixtures, pour que celles-ci restent fidèles.
+
+Tests exigés : campagne E2E exécutée **seule** (budgets partagés), captures des écrans
+concernés sur ordinateur et mobile. Un budget de cellule insuffisant est une proposition
+`.?` au propriétaire du SPARK, nommée si elle bloque.
+
+À mettre à jour : `REFERENCE_COMPATIBILITY.md`, manuel (adaptateur), parité, `DEPLOYMENT.md`.
 
 <a id="sls-081"></a>
 ## SLS-081 — Jobs serverless de la console
 
-Statut : [ ] — contrat défini ([SERVERLESS_JOBS](SERVERLESS_JOBS.md)), à réaliser.
+Statut : [ ] — contrat défini ([SERVERLESS_JOBS](SERVERLESS_JOBS.md)), rien d'implémenté.
+Nature : Développer. Dépend de : SLS-078, SLS-072. Ordre : 4.
 
-Demande du responsable : exécuter une fonction avec un payload fixe et quelques
-gabarits composés dans l’UI, selon une expression crontab contrôlée par fenêtres de
-5 minutes. Définition par fonction (nom, expression, endpoint, payload à gabarits,
-activation), éditeur d’expression avec phrase et cinq prochains tirs, éditeur JSON avec
-palette de gabarits et aperçu du corps exact, historique des tirs au vocabulaire des
-exécutions Scaleway, « Exécuter maintenant », droits Read/Update vérifiés côté
-serveur, API de prévisualisation, migration, seed, manuel, `DESIGN_SYSTEM_APP.md`.
-Ne pas confondre avec les Serverless Jobs en conteneur de Scaleway ([SLS-088](#sls-088)).
-Dépendance : SLS-078. E2E : liste détaillée dans
-[SERVERLESS_JOBS](SERVERLESS_JOBS.md#preuves-e2e-attendues).
+Demande du responsable : exécuter une fonction avec un payload fixe et quelques gabarits
+composés dans l'UI, selon une expression crontab contrôlée par fenêtres de 5 minutes. À ne
+pas confondre avec les Serverless Jobs en conteneur ([SLS-088](#sls-088)).
+
+Critères d'acceptation :
+
+- [ ] SLS-081.1 Définition par fonction : nom unique, description, activation, expression UTC,
+  endpoint POST de la version promue (défaut `/`), payload JSON de 64 Kio au plus ;
+  16 jobs par fonction, 512 par installation ; `updated_at` en `If-Match`.
+- [ ] SLS-081.2 Gabarits : liste fermée, remplacés dans les valeurs texte, valeur exacte typée,
+  `{{{{` littéral, gabarit inconnu refusé à l'enregistrement, aucun secret ni expression.
+- [ ] SLS-081.3 Onglet Jobs : modèles d'expression, phrase en français, cinq prochains tirs
+  (nominal et effectif), éditeur JSON validé en direct avec compteur, palette de gabarits
+  insérable souris et clavier, aperçu du corps exact, choix de l'endpoint ; erreurs serveur
+  près du champ sans perte de saisie.
+- [ ] SLS-081.4 Liste par fonction et par service : nom, phrase, état, prochain tir, dernier
+  résultat ; états vide, erreur, chargement, longs noms, mobile.
+- [ ] SLS-081.5 Historique des tirs au vocabulaire Scaleway (`succeeded`, `failed` avec raison,
+  `quota_exceeded`, `skipped_*`) avec lien vers l'invocation et ses journaux ;
+  `refused_endpoint` et job « à corriger » si une promotion retire l'endpoint.
+- [ ] SLS-081.6 « Exécuter maintenant » : tir `manual` sous les mêmes admissions, 409 pendant un
+  tir du même job, droit Update.
+- [ ] SLS-081.7 API (liste, création, lecture, modification, suppression, exécution, historique,
+  prévisualisation sans enregistrement) ; droits Read/Update côté serveur ; mutations
+  auditées.
+
+Tests exigés :
+
+- Unitaires : gabarits, typage, grammaire, aperçu des tirs.
+- API / intégration : refus (JSON invalide, gabarit inconnu, 64 Kio + 1, 17e job, cron hors
+  grammaire, 409 de version, doublon), droits par requête directe (Read, jeton d'une autre
+  fonction, session non administratrice), aucun secret dans les réponses ni journaux.
+- E2E depuis l'accueil réel (liste complète dans
+  [SERVERLESS_JOBS](SERVERLESS_JOBS.md#preuves-e2e-attendues)) : création par l'UI, corps exact
+  reçu au tir, aucun tir en avance, fusion, modification et suppression prises en compte,
+  promotion et retour de hash, SIGKILL, saturation, captures desktop et mobile.
+
+À mettre à jour : `SCHEMA.md` et migration, seed (jobs de démonstration), manuel,
+`DESIGN_SYSTEM_APP.md` (éditeur, palette, liste de tirs), `DEPLOYMENT.md`, parité.
 
 <a id="sls-082"></a>
 ## SLS-082 — Parité fonctionnelle avec Scaleway Serverless
 
-Statut : [~] — matrice sourcée relevée le 10 novembre 2026 ([SCALEWAY_PARITY](SCALEWAY_PARITY.md)) ;
-écarts portés par les unités ci-dessous.
+Statut : [~] — matrice sourcée relevée le 10 novembre 2026
+([SCALEWAY_PARITY](SCALEWAY_PARITY.md)) ; écarts portés par les unités ci-dessous.
+Nature : Qualifier (suivi). Ordre : suit les unités qu'elle référence.
 
 Demande du responsable : répliquer toutes les fonctionnalités de Scaleway Serverless.
-Unité de suivi : tenir la matrice à jour avec chaque livraison, revérifier la
-documentation de Scaleway à chaque revue, exposer l’API de gestion de façon
-documentée (schéma OpenAPI aujourd’hui désactivé), clore lorsque chaque ligne est
-Livrée, Sans objet ou Écart assumé avec preuve E2E, ou portée par une unité ouverte
-dont le blocage externe est nommé. Unités : 078, 081 (déclencheurs), 070 à 073
-(éditeur, test, journaux, monitoring), 083 à 088.
+
+Critères d'acceptation :
+
+- [ ] SLS-082.1 Chaque ligne de la matrice est Livré, Sans objet ou Écart assumé avec preuve E2E,
+  ou portée par une unité ouverte dont le blocage externe est nommé.
+- [ ] SLS-082.2 La matrice est mise à jour dans le même changement que chaque livraison.
+- [ ] SLS-082.3 La documentation de Scaleway est revérifiée à chaque revue de la matrice.
+
+Unités qui portent les écarts : SLS-070 à 073 (code, test, journaux, métriques), 078 et 081
+(déclencheurs), 083 (limites, en-têtes), 084 (runtimes), 085 (messages), 086 (trafic),
+087 (conditions d'accès), 088 (jobs en conteneur), 097 (API documentée).
 
 <a id="sls-083"></a>
 ## SLS-083 — Aligner les limites et les en-têtes sur Scaleway
 
-Statut : [ ] — écarts relevés, contrat à compléter dans [EXECUTION](EXECUTION.md) avant le code.
+Statut : [ ] — écarts relevés ; contrat à compléter dans [EXECUTION](EXECUTION.md) avant le code.
+Nature : Développer. Dépend de : SLS-040. Débloque : SLS-080, SLS-084. Ordre : 5.
 
-Corps de requête 6 Mio (1 Mio aujourd’hui), archive ZIP 100 Mio et code 500 Mio (64 et
-256 Mio), 200 variables et 200 secrets de 64 Kio (128 clés de 16 Kio), disque
-temporaire de 1 Gio par instance (`/tmp` tmpfs de 16 Mio), jusqu’à 50 instances sous
-réserve du budget de cellule, en-têtes `X-Forwarded-For`, `X-Forwarded-Proto`,
-`X-Real-IP` (écrasé par la passerelle) et `X-Request-ID`. Chaque relèvement mesure son
-coût mémoire/disque/temps, respecte les budgets et la marge disque, garde la
-validation côté serveur et met à jour modèle, schéma, manuel et parité. E2E : valeur
-limite exacte acceptée et suivante refusée pour chaque grandeur, saturation, en-têtes
-reçus par le handler et valeurs usurpées écrasées, récupération des ressources.
+Critères d'acceptation :
+
+- [ ] SLS-083.1 Corps de requête entrant de 6 Mio (1 Mio aujourd'hui).
+- [ ] SLS-083.2 Archive ZIP de 100 Mio et code de 500 Mio (64 et 256 Mio aujourd'hui).
+- [ ] SLS-083.3 200 variables et 200 secrets de 64 Kio par catégorie (128 clés de 16 Kio).
+- [ ] SLS-083.4 Disque temporaire de 1 Gio par instance (`/tmp` tmpfs de 16 Mio).
+- [ ] SLS-083.5 Jusqu'à 50 instances par fonction, sous réserve du budget de cellule.
+- [ ] SLS-083.6 En-têtes `X-Forwarded-For`, `X-Forwarded-Proto`, `X-Real-IP` (écrasé par la
+  passerelle, valeurs usurpées ignorées) et `X-Request-ID` injectés au handler.
+- [ ] SLS-083.7 Chaque relèvement mesure son coût mémoire, disque et temps, respecte budgets et
+  marge disque, garde sa validation côté serveur ; modèle, schéma, manuel et parité à jour.
+
+Tests exigés :
+
+- Unitaires : bornes de chaque grandeur, calcul des en-têtes.
+- API / intégration : valeur limite exacte acceptée et suivante refusée pour chaque grandeur.
+- E2E : en-têtes reçus par un vrai handler, valeurs usurpées écrasées, saturation et
+  restitution des ressources, publication et invocation aux nouvelles limites.
+
+À mettre à jour : `EXECUTION.md`, `SCHEMA.md` si le modèle change, manuel, parité, seed.
 
 <a id="sls-084"></a>
 ## SLS-084 — Runtimes supplémentaires
 
-Statut : [ ] — contrat à écrire.
+Statut : [ ] — contrat à écrire dans [SCALEWAY_PARITY](SCALEWAY_PARITY.md) et
+[EXECUTION](EXECUTION.md) avant le code (ordre : écrire, persister, puis réaliser).
+Nature : Développer. Dépend de : SLS-083. Ordre : 8.
 
-Node 22 et 26 nativement, puis Python, Go, PHP et Rust comme chez Scaleway. Chaque
-runtime exige son image, le protocole du superviseur dans son langage, la validation
-d’import, le calcul de hash de code et les mêmes limites que Node. Ordre : Node 22/26,
-Python, puis Go/PHP/Rust. E2E par runtime : publication, invocation, erreurs, délai,
-mémoire, stockage, journaux, hash stable.
+Résultat attendu : les runtimes de Scaleway, dans l'ordre Node 22 et 26, Python, puis Go,
+PHP et Rust.
+
+Critères d'acceptation, **par runtime** :
+
+- [ ] SLS-084.1 Image, protocole du superviseur dans le langage, validation d'import, calcul du
+  hash de code et mêmes limites que Node.
+- [ ] SLS-084.2 Adaptateur : sélection du runtime sans conversion implicite ; Node 20 et 22
+  restent une conversion explicite tant qu'ils ne sont pas natifs.
+
+Tests exigés : par runtime, publication, invocation, erreurs, délai, mémoire, stockage, journaux
+et hash stable en E2E ; unitaires du protocole ; budget d'images mesuré.
+
+À mettre à jour : `EXECUTION.md`, manuel, parité, `DAT.md`, seed.
 
 <a id="sls-085"></a>
 ## SLS-085 — Déclencheurs de file de messages et NATS
 
-Statut : [ ] — contrat à écrire ; **dépend d’une décision d’infrastructure**.
+Statut : [ ] — **décision d'infrastructure requise** ([cas 4](#décisions-et-autorités-en-attente)) ;
+contrat à écrire après la décision.
+Nature : Décision. Hors ordre.
 
-Un appel par message d’une file ou d’un sujet NATS, pression arrière, 10 messages en vol,
-relance jusqu’à 3 fois sur statut ≥ 300. Aucun service de messagerie n’existe dans le
-SPARK DEV : quel courtier fournir est une décision d’autorité et d’infrastructure
-(cas 4 de la demande d’arbitrage), à poser avant l’unité.
+Un appel par message d'une file ou d'un sujet NATS, pression arrière, 10 messages en vol,
+relance jusqu'à 3 fois sur statut ≥ 300. Aucun service de messagerie n'existe dans le SPARK
+DEV : quel courtier fournir relève du responsable du SPARK.
+
+Critères d'acceptation après décision : à écrire avec le contrat (livraison, ordre, relance,
+mise en file morte, droits, quotas), preuves sur un vrai courtier démarré sur le SPARK DEV.
 
 <a id="sls-086"></a>
 ## SLS-086 — Répartition du trafic entre versions
 
-Statut : [ ] — contrat à écrire.
+Statut : [ ] — contrat à écrire dans [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) avant le code.
+Nature : Développer. Dépend de : SLS-074, SLS-073. Ordre : 8.
 
-Répartir un pourcentage des appels sans tag entre la cible promue et un pilote,
-comme la mise à jour progressive de Scaleway, au-dessus du registre de versions
-SLS-074. Pas de répartition silencieuse : pourcentage explicite, observable, corrélé
-au hash exécuté, retour arrière immédiat.
+Résultat attendu : répartir un pourcentage des appels sans tag entre la cible promue et un
+pilote, comme la mise à jour progressive de Scaleway.
+
+Critères d'acceptation :
+
+- [ ] SLS-086.1 Pourcentage explicite, défini et modifié par un droit Update, jamais implicite.
+- [ ] SLS-086.2 Hash exécuté corrélé dans les invocations, journaux et monitoring.
+- [ ] SLS-086.3 Retour arrière immédiat ; appels épinglés par hash inchangés.
+- [ ] SLS-086.4 Répartition conforme au pourcentage sur un échantillon mesuré, bornes 0 et 100.
+
+Tests exigés : unitaires du tirage, API avec droits par requête directe, E2E sur deux handlers
+distincts avec comptage des hash exécutés, captures.
+
+À mettre à jour : `FUNCTION_VERSIONS.md`, `SCHEMA.md`, manuel, parité, seed.
 
 <a id="sls-087"></a>
-## SLS-087 — Conditions d’accès supplémentaires
+## SLS-087 — Conditions d'accès supplémentaires
 
-Statut : [ ] — contrat à écrire.
+Statut : [ ] — contrat à écrire dans [PLATFORM](PLATFORM.md) avant le code.
+Nature : Développer. Dépend de : SLS-040. Ordre : 8.
 
-Compléter les politiques origine/IP par une plage horaire et un user-agent, comme les
-conditions IAM de Scaleway, avec combinaison explicite, refus côté passerelle,
-préflight cohérent et rappel que l’user-agent n’atteste aucune identité.
+Résultat attendu : compléter les politiques origine/IP par une plage horaire et un
+user-agent, comme les conditions IAM de Scaleway.
+
+Critères d'acceptation :
+
+- [ ] SLS-087.1 Combinaison explicite avec origine/IP (ET/OU), évaluée côté passerelle.
+- [ ] SLS-087.2 Plage horaire en UTC ; user-agent par motif ; refus consigné.
+- [ ] SLS-087.3 Préflight cohérent avec les conditions ; le manuel rappelle que l'user-agent
+  n'atteste aucune identité.
+
+Tests exigés : unitaires de la combinaison, E2E par requêtes directes avec vraies horloge et
+en-têtes, préflight navigateur, captures de l'éditeur de politique.
+
+À mettre à jour : `PLATFORM.md`, `SCHEMA.md`, manuel, `DESIGN_SYSTEM_APP.md`, parité, seed.
 
 <a id="sls-088"></a>
 ## SLS-088 — Serverless Jobs en conteneur
 
-Statut : [ ] — contrat à écrire ; **choix de produit probable**.
+Statut : [ ] — **choix de produit** ([cas 3](#décisions-et-autorités-en-attente)) ; contrat à écrire
+après la décision.
+Nature : Décision. Hors ordre.
 
-Lots en conteneur jusqu’à 24 heures : image, commande et arguments, relances
-jusqu’à cinq fois, stockage éphémère, secrets externes, fuseau d’horaire, lancement et arrêt
-manuels, statuts et raisons. Exige un registre d’images et un runtime conteneur
-généraliste que la plateforme n’a pas. À distinguer des jobs de console
-([SLS-081](#sls-081)), qui planifient des fonctions. Si l’origine des images n’est pas
-déductible du dépôt, c’est un choix de produit à soumettre (cas 3).
+Lots en conteneur jusqu'à 24 heures : image, commande et arguments, relances jusqu'à cinq
+fois, stockage éphémère, secrets externes, fuseau d'horaire, lancement et arrêt manuels,
+statuts et raisons. Exige un registre d'images et un runtime conteneur généraliste que la
+plateforme n'a pas. À distinguer des jobs de console ([SLS-081](#sls-081)).
+
+Critères d'acceptation après décision : à écrire avec le contrat, preuves sur un vrai
+conteneur de lot sur le SPARK DEV.
+
+<a id="sls-089"></a>
+## SLS-089 — Défauts SSO : attente, azp, rotation de clé
+
+Statut : [ ] — travaux identifiés par la revue du contrat OIDC, non implémentés ; aucune
+preuve déclarée.
+Nature : Corriger. Dépend de : SLS-020. Ordre : 2. Reste à faire de SLS-020.
+Contrat : [sso](sso.md), [CONTROL](CONTROL.md), [PLATFORM](PLATFORM.md).
+
+Critères d'acceptation :
+
+- [ ] SLS-089.1 Un compte sans rôle `verified`/`admin` voit un **état d'attente** distinct d'une
+  erreur technique, avec la conduite à tenir.
+- [ ] SLS-089.2 L'`azp` de l'ID token est contrôlé en complément de l'audience.
+- [ ] SLS-089.3 Un nouveau `kid` qui arrive dans la fenêtre anti-refresh JWKS de deux secondes
+  donne une réponse temporaire qui préserve la session au lieu de la fermer.
+- [ ] SLS-089.4 La durée de 300 secondes se mesure sur le jeton réellement émis.
+
+Tests exigés :
+
+- Unitaires : décision d'état d'attente, validation `azp`, gestion du `kid` inconnu.
+- API / intégration : jetons forgés avec mauvais `azp`, mauvaise audience, `kid` inconnu.
+- E2E depuis l'accueil réel avec vrais comptes (non vérifié, vérifié, admin) et rotation de
+  clé réelle maîtrisée ; captures desktop et mobile de l'état d'attente. Si les comptes ou la
+  rotation ne sont pas fournis, nommer le blocage ([cas 4](#décisions-et-autorités-en-attente)),
+  livrer correctifs et tests de composants, ne rien déclarer prouvé.
+
+À mettre à jour : `sso.md`, `CONTROL.md`, manuel, `DESIGN_SYSTEM_APP.md`, seed.
+
+<a id="sls-090"></a>
+## SLS-090 — Pannes résiduelles de publication
+
+Statut : [ ] — scénarios nommés dans SLS-030, jamais éprouvés.
+Nature : Qualifier. Dépend de : SLS-030. Ordre : 10. Reste à faire de SLS-030.
+
+Critères d'acceptation, un groupe E2E réel par ligne, sur l'image déployée :
+
+- [ ] SLS-090.1 Expiration d'un candidat.
+- [ ] SLS-090.2 Budget et marge disque.
+- [ ] SLS-090.3 Déconnexion concurrente du client.
+- [ ] SLS-090.4 Arrêt pendant le nettoyage.
+- [ ] SLS-090.5 Rupture après envoi de la CLI.
+- [ ] SLS-090.6 Modification locale concurrente pendant `deploy`.
+- [ ] SLS-090.7 Réponse trop grande.
+- [ ] SLS-090.8 Redirection.
+- [ ] SLS-090.9 Panne de la FORGE (rebond) pendant une publication, sans écriture sur la FORGE.
+
+Un défaut révélé est corrigé avec un test qui échoue avant correction. Tests exigés :
+unitaires des garde-fous touchés, E2E réels, ressources restituées recoupées.
+
+À mettre à jour : `DEPLOYMENT.md`, manuel si un message change.
+
+<a id="sls-091"></a>
+## SLS-091 — Rétention et nettoyage du moteur d'exécution
+
+Statut : [ ] — chemins nommés dans SLS-040, sans preuve ciblée.
+Nature : Qualifier. Dépend de : SLS-040. Ordre : 10. Reste à faire de SLS-040.
+
+Critères d'acceptation :
+
+- [ ] SLS-091.1 Rétention à sept jours et 10 000 observations prouvée par franchissement réel des
+  deux bornes.
+- [ ] SLS-091.2 Chemins résiduels de nettoyage et de reprise après interruption prouvés (SIGKILL
+  pendant nettoyage, reprise sans doublon ni perte).
+
+Tests exigés : unitaires de la rétention, E2E sur horloge et volume réels, ressources
+restituées recoupées.
+
+À mettre à jour : `EXECUTION.md`.
+
+<a id="sls-092"></a>
+## SLS-092 — Stockage : acquisition partielle, marge physique, panne du registre
+
+Statut : [ ] — scénarios nommés dans SLS-050, jamais éprouvés.
+Nature : Qualifier. Dépend de : SLS-050. Ordre : 10. Reste à faire de SLS-050 (avec les
+crons de SLS-078).
+
+Critères d'acceptation :
+
+- [ ] SLS-092.1 Acquisition partielle après interruption : reprise sans perte, sans doublon.
+- [ ] SLS-092.2 Marge physique de disque : refus propre, aucune corruption, ressources restituées.
+- [ ] SLS-092.3 Pannes du registre durable : décisions cohérentes après reprise.
+
+Tests exigés : E2E réels sur l'agent de stockage et le contrôle, unitaires des protocoles
+touchés, recoupement physique des volumes. Aucune clôture de SLS-050 ne repose sur les seuls
+composants.
+
+À mettre à jour : `STORAGE_AGENT.md`, `DEPLOYMENT.md`.
+
+<a id="sls-093"></a>
+## SLS-093 — Fautes de source et de transport des URL d'appel
+
+Statut : [ ] — branches nommées dans SLS-066, non qualifiées.
+Nature : Qualifier. Dépend de : SLS-066. Ordre : 10. Reste à faire de SLS-066.
+
+Critères d'acceptation :
+
+- [ ] SLS-093.1 Fautes de source restantes (perte de réponse, verrou suspendu, panne durable de la
+  console) : le catalogue reste cohérent, aucune adresse partielle, aucun rejeu.
+- [ ] SLS-093.2 Expiration et perte SSH du build borné.
+- [ ] SLS-093.3 Erreurs propres du pilote de preuve et du client de diagnostic.
+- [ ] SLS-093.4 Refus 403 distinct des coupures ; nettoyage après réponses perdues du nouveau
+  client ; sortie excessive et lancement.
+
+Tests exigés : E2E réels sous les routes autorisées du seul SPARK, gardes de restauration
+vérifiées, captures des états d'erreur.
+
+À mettre à jour : `INVOCATION_URLS.md`, manuel si un message change.
+
+<a id="sls-094"></a>
+## SLS-094 — Pannes, console et régression de SLS-074
+
+Statut : [ ] — l'unité parente SLS-074 reste `[~]` pour ces reliquats.
+Nature : Qualifier. Dépend de : SLS-074. Ordre : 10. Reste à faire de SLS-074.
+
+Critères d'acceptation :
+
+- [ ] SLS-094.1 Parcours UI complets de versions (publication, pilote, promotion, retour à un
+  hash, archivage, restauration, suppression) depuis l'accueil, captures et manuel compilé.
+- [ ] SLS-094.2 Pannes propres du banc et autres interruptions encore nommées dans SLS-074.
+- [ ] SLS-094.3 Régression complète de la migration 008 sur le code final, sans échec ni test
+  ignoré.
+- [ ] SLS-094.4 Historique des versions affiché et cohérent avec le registre.
+
+Tests exigés : E2E réels, recoupement physique du code et des volumes, sources et images
+identiques à l'installation.
+
+À mettre à jour : `FUNCTION_VERSIONS.md`, manuel, `DESIGN_SYSTEM_APP.md`.
+
+<a id="sls-095"></a>
+## SLS-095 — Campagne complète et clôture
+
+Statut : [ ] — dernière unité ; aucune campagne complète ne vaut tant que les autres sont ouvertes.
+Nature : Qualifier. Dépend de : toutes. Ordre : 12. Clôture SLS-001 et SLS-060.
+
+Critères d'acceptation :
+
+- [ ] SLS-095.1 Toutes les autres unités sont `[x]`, ou une décision/autorité nommée dans le
+  registre explique celles qui restent.
+- [ ] SLS-095.2 Campagne complète exécutée **en série** sur le code déployé : zéro échec, zéro
+  test ignoré, sources et images recoupées avec l'installation.
+- [ ] SLS-095.3 Toutes les captures de la campagne inspectées ; manuel affiché conforme à
+  `docs/manual.md`.
+- [ ] SLS-095.4 Matrice [SCALEWAY_PARITY](SCALEWAY_PARITY.md) : chaque ligne Livré, Sans objet ou
+  Écart assumé prouvé.
+- [ ] SLS-095.5 Documents relus : plus aucune mention de blocage levé, d'incohérence résolue, de
+  limite disparue ni de statut périmé ; `CHANGELOG.md`, contrat de déploiement et seed à jour.
+
+À mettre à jour : `TEST_MATRIX.md`, README, journal, compte rendu final de `CLAUDE.md` §25.
+
+<a id="sls-096"></a>
+## SLS-096 — Manuel déployé conforme à sa source
+
+Statut : [ ] — la source `docs/manual.md` a été complétée sans reconstruire la console ; le
+manuel affiché diffère de sa source, ce qui invalide la concordance de SLS-062.
+Nature : Corriger. Dépend de : — (même build que SLS-078). Ordre : 1.
+Contrat : [CONSOLE_MANUAL](CONSOLE_MANUAL.md).
+
+Critères d'acceptation :
+
+- [ ] SLS-096.1 La console est reconstruite et déployée avec le manuel courant.
+- [ ] SLS-096.2 Le test de concordance entre le guide affiché et `docs/manual.md` passe sur
+  l'image déployée.
+- [ ] SLS-096.3 Règle de maintien : chaque unité qui modifie `docs/manual.md` redéploie la
+  console dans la même livraison (critère commun 7).
+
+Tests exigés : concordance des chapitres et paragraphes, E2E depuis l'accueil réel qui ouvre
+le manuel, captures desktop et mobile.
+
+<a id="sls-097"></a>
+## SLS-097 — API de gestion documentée (OpenAPI)
+
+Statut : [ ] — routes décrites dans [CONTROL](CONTROL.md) ; schéma OpenAPI désactivé.
+Nature : Développer. Dépend de : unités 3 à 8 (pour documenter les routes finales). Ordre : 9.
+
+Résultat attendu : la parité « API complète et documentée » de la matrice.
+
+Critères d'acceptation :
+
+- [ ] SLS-097.1 Schéma OpenAPI généré, exposé aux seuls administrateurs authentifiés, complet
+  pour toutes les routes de gestion et de jetons.
+- [ ] SLS-097.2 Exemples de requêtes et de réponses sans secret ; codes d'erreur documentés.
+- [ ] SLS-097.3 Un test compare le schéma aux routes réellement montées (aucune route absente
+  ni inventée).
+
+Tests exigés : unitaire de génération, intégration de comparaison routes/schéma, accès direct
+refusé sans droit, E2E de lecture du schéma depuis une session administrateur.
+
+À mettre à jour : `CONTROL.md`, manuel, parité, `SCHEMA.md` si besoin.

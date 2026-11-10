@@ -8,8 +8,12 @@
   méthode ; CloudWorker est adapté au SPARK DEV dans `CLAUDE_PROJECT.md`.
 - Contrats persistés : moteur de planification (SLS-078), jobs de console avec
   gabarits (SLS-081), parité sourcée avec Scaleway Serverless (SLS-082 à 088),
-  compatibilité du projet de référence (SLS-080), exploitation (SLS-079), plan de
-  reprise `docs/OBJECTIF_AUTONOME.md`.
+  compatibilité du projet de référence (SLS-080), exploitation (SLS-079).
+- Backlog réorganisé en source unique du travail : registre des unités ouvertes
+  (nature, ordre, dépendances), critères communs, décisions en attente, unités au
+  squelette uniforme avec critères cochables et tests exigés, restes de
+  qualification extraits en unités SLS-089 à SLS-097. `docs/OBJECTIF_AUTONOME.md`
+  porte un goal permanent qui repart du backlog, sans liste d'unités.
 - Le manuel indique que les planifications du manifeste sont enregistrées mais pas
   encore déclenchées ; la console déployée l'affichera à sa prochaine reconstruction.
   Aucun comportement applicatif ne change dans cette entrée.

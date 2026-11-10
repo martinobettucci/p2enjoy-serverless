@@ -71,15 +71,14 @@ hash restent épinglés. CONSOLE_USABILITY rangeait encore la recherche parmi le
 travaux absents et annonçait une campagne de routes déjà exécutée ; ces synthèses
 sont actualisées. La qualification globale reste ouverte.
 
-## Priorité de reprise
+## Ordre de reprise
 
-L'ordre détaillé est dans [OBJECTIF_AUTONOME](OBJECTIF_AUTONOME.md) : moteur de
-planification (SLS-078), puis le parcours éditer→publier→tester→diagnostiquer
-(SLS-070, 071, 072), les jobs de console (SLS-081), les limites et la compatibilité
-de la référence (SLS-083, 080), favoris et opérations en masse (SLS-068, 069),
-monitoring (SLS-073), guide d'exploitation rejoué (SLS-079), clôture de SLS-074,
-066 et des écarts SSO, enfin les unités de parité restantes (SLS-084 à 088). La
-compatibilité du manifeste de référence, les écarts SSO et la campagne E2E
-complète demeurent des critères de clôture, pas des demandes optionnelles. Les
-vérifications accompagnent ces livraisons et restent liées aux sources et images
-effectivement testées.
+Le [registre des unités ouvertes](BACKLOG.md#registre-des-unités-ouvertes) du
+backlog porte l'ordre, la nature, les dépendances et les critères de chaque
+unité ; ce document ne porte ni ordre ni statut. Les demandes ci-dessus y sont
+des unités, comme les écarts SSO ([SLS-089](BACKLOG.md#sls-089)), les restes de
+qualification ([SLS-090 à 094](BACKLOG.md#sls-090)), le manuel déployé
+([SLS-096](BACKLOG.md#sls-096)), l'API documentée ([SLS-097](BACKLOG.md#sls-097)) et
+la campagne complète de clôture ([SLS-095](BACKLOG.md#sls-095)). La compatibilité
+du manifeste de référence, les écarts SSO et la campagne E2E complète demeurent
+des critères de clôture, pas des demandes optionnelles.

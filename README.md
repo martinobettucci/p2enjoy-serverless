@@ -8,8 +8,8 @@ complète du projet de référence, la parité avec Scaleway Serverless
 ([matrice](docs/SCALEWAY_PARITY.md)) et un guide d'exploitation rejoué restent à
 livrer. Le moteur, la gestion, les versions et les preuves ciblées ne clôturent pas
 ces demandes. Voir [l'état réel de livraison](docs/DEMANDES_ET_LIVRAISON.md) et le
-[plan de reprise](docs/OBJECTIF_AUTONOME.md) avant les checkpoints techniques
-détaillés ci-dessous.
+[registre des unités ouvertes](docs/BACKLOG.md#registre-des-unités-ouvertes), qui
+porte l'ordre de reprise, avant les checkpoints techniques détaillés ci-dessous.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification
