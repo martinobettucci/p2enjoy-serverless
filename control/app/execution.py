@@ -467,8 +467,8 @@ class Execution:
                         (row['function_id'] not in demands and count>minimum)):
                     self.schedule_retirement(row['id']);break
         with self.db.transaction(busy_timeout=0) as db:
-            db.execute('DELETE FROM invocations WHERE completed_at IS NOT NULL AND completed_at<?',(time.time()-7*86400,))
-            db.execute('DELETE FROM invocations WHERE id IN (SELECT id FROM invocations WHERE completed_at IS NOT NULL ORDER BY completed_at DESC,id DESC LIMIT -1 OFFSET 10000)')
+            db.execute('DELETE FROM invocations WHERE completed_at IS NOT NULL AND completed_at<? AND NOT EXISTS (SELECT 1 FROM schedule_firings t WHERE t.invocation_id=invocations.id AND t.completed_at IS NULL)',(time.time()-7*86400,))
+            db.execute('DELETE FROM invocations WHERE id IN (SELECT id FROM invocations WHERE completed_at IS NOT NULL AND NOT EXISTS (SELECT 1 FROM schedule_firings t WHERE t.invocation_id=invocations.id AND t.completed_at IS NULL) ORDER BY completed_at DESC,id DESC LIMIT -1 OFFSET 10000)')
 
     async def maintain(self):
         while not self.closing:

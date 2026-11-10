@@ -13,7 +13,7 @@ from fastapi import APIRouter, HTTPException, Query, Request
 
 from .auth import Actor
 from .invocation_http import InvocationError
-from .schedule_calendar import boundary, compile_cron, next_slot, window_slots
+from .schedule_calendar import boundary, compile_cron, next_firing, window_slots
 
 logger = logging.getLogger('p2enjoy.control')
 
@@ -195,6 +195,12 @@ class Schedules:
                 db.execute('BEGIN')
                 self.authorized_function(db,authorization,key)
                 generation = db.execute('SELECT * FROM schedule_generations WHERE function_id=? AND retired_at IS NULL',(str(key),)).fetchone()
+                now = time.time()
+                cursor = db.execute('SELECT window_at FROM schedule_cursor WHERE singleton=1').fetchone()[0]
+                # A nominal earlier than now may still belong to the next
+                # unprocessed five-minute window. Never forecast a recovered gap.
+                oldest = boundary(now) - (300 if now - boundary(now) <= 5 else 0)
+                after = max(cursor,self.recovery_until,oldest,generation['activated_at'] if generation else now)
                 items = []
                 if generation:
                     for index, item in enumerate(json.loads(generation['events_json'])['schedules']):
@@ -202,7 +208,7 @@ class Schedules:
                             ORDER BY window_at DESC,id DESC LIMIT 1''',(generation['id'],index)).fetchone()
                         items.append(dict(item, index=index, origin='manifest', code_hash=generation['code_hash'],
                                           activated_at=generation['activated_at'],
-                                          next=next_slot(compile_cron(item['cron']),time.time()) if item['enabled'] else None,
+                                          next=next_firing(compile_cron(item['cron']),after) if item['enabled'] else None,
                                           last_firing=dict(last) if last else None))
                 return {'function_id':str(key),'timezone':'UTC','resolution_seconds':300,'items':items}
 

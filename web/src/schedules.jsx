@@ -12,7 +12,7 @@ const states = {
   refused_capacity:['Refusé : capacité indisponible','danger'], refused_changed:['Refusé : planification remplacée','neutral'],
   refused_unavailable:['Refusé : moteur indisponible','danger'],
 };
-const stamp = value => value == null ? 'Non observé' : new Date(value * 1000).toISOString().replace('T',' ').replace('.000Z',' UTC');
+const stamp = value => value == null ? 'Non observé' : new Date(value * 1000).toISOString().replace('T',' ').replace('Z',' UTC');
 const code = value => <span className="mono">{value}</span>;
 function State({value}) {
   const [label,tone] = states[value] || ['État inconnu','neutral'];

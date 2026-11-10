@@ -8,6 +8,7 @@ import {readFile,writeFile,mkdir,mkdtemp,rename,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {request,chromium} from 'playwright';
+const regressionOnly=process.argv.includes('--unicode-regression-only');
 const base='https://serverless.lelabs.tech',out=new URL('../.local/e2e/',import.meta.url),root=new URL('../',import.meta.url);
 const run=promisify(execFile),checks=[],captures={},functions=[],cleanupErrors=[],firings=[];
 let admin,caller,session,namespace,service,token,updateToken,work,browser,context,page,completed=false;
@@ -60,21 +61,29 @@ try {
     for(const cron of ['61 * * * *','* * * *','1-0 * * * *','*/0 * * * *','* * * * SUN']){
       await call(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:422,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:'scheduled-event.handler',events:{http:[],schedules:[{cron,enabled:true,timezone:'UTC'}]}}});
     }
-    const published=await publish(fn,{http:[],schedules:[{cron:'*/5 * * * *',enabled:true,timezone:'UTC'}]});fn.hash=published.code_hash;
+    const published=await publish(fn,{http:[],schedules:[{cron:'*/٥ * * * *',enabled:true,timezone:'UTC'}]});fn.hash=published.code_hash;
     assert.equal((await call(`/api/functions/${fn.id}/schedules`)).items.length,0);assert.equal((await call(`/api/functions/${fn.id}/schedule-firings`)).total,0);
     await promote(fn,fn.hash);
   });
+  if(!regressionOnly){
   let boundary;
   await check('Déclarations UTC, absence de HTTP, planification désactivée et préparation avant frontière',async()=>{
     // Complete all mutations before choosing the first fully eligible window.
     const second=functions[1];let result=await publish(second,{http:[],schedules:[{cron:'* * * * *',enabled:true,timezone:'UTC'}]});second.hash=result.code_hash;await promote(second,second.hash);
     const third=functions[2];boundary=(Math.floor(Date.now()/300000)+1)*300;
-    if(boundary-Date.now()/1000<45) boundary+=300;
-    const nominal=new Date(boundary*1000);const expression=`${nominal.getUTCMinutes()} ${nominal.getUTCHours()} * * ${nominal.getUTCDay()}`;
+    if(boundary-Date.now()/1000<120) boundary+=300;
+    const nominal=new Date((boundary-60)*1000);const expression=`${nominal.getUTCMinutes()} ${nominal.getUTCHours()} * * ${nominal.getUTCDay()}`;
     result=await publish(third,{http:[],schedules:[{cron:expression,enabled:true,timezone:'UTC'},{cron:'* * * * *',enabled:false,timezone:'UTC'}]});third.hash=result.code_hash;await promote(third,third.hash);
     for(const fn of functions){const data=await call(`/api/functions/${fn.id}/schedules`,{credential:token.token});assert(data.items.length);assert.equal(data.items[0].code_hash,fn.hash);assert(data.items[0].next.nominal_at*1000>Date.now()-1000);}
     assert.equal((await call(`/api/functions/${third.id}/schedules`)).items[1].next,null);
     assert(Date.now()/1000<boundary,'fixtures_must_precede_boundary');
+  });
+  await check('Nominal passé et frontière future : prévision conservée sans tir en avance',async()=>{
+    await until(async()=>Date.now()/1000>=boundary-59,(boundary-58)*1000);
+    const data=await call(`/api/functions/${functions[2].id}/schedules`);
+    assert.equal(data.items[0].next.nominal_at,boundary-60);assert.equal(data.items[0].next.window_at,boundary);
+    assert.equal((await call(`/api/functions/${functions[2].id}/schedule-firings`)).total,0);
+    assert(Date.now()/1000<boundary);
   });
   await check('Horloge réelle : premier tir, POST /, corps JSON, jetons absents et politique HTTP non appliquée',async()=>{
     for(const fn of functions){
@@ -96,13 +105,14 @@ try {
     await page.getByRole('link',{name:functions[1].name,exact:true}).click();
     await page.getByRole('navigation',{name:'Fonction',exact:true}).getByRole('link',{name:'Planifications',exact:true}).click();
     await page.getByRole('heading',{name:'Planifications du manifeste',exact:true}).waitFor();
-    await page.getByText('* * * * *',{exact:true}).first().waitFor();await fits();await capture('desktop');
-    await page.setViewportSize({width:390,height:844});await fits();await capture('mobile');
+    await page.getByText('* * * * *',{exact:true}).first().waitFor();await fits();await capture('desktop');await page.getByRole('heading',{name:'Historique des tirs',exact:true}).scrollIntoViewIfNeeded();await capture('history-desktop');
+    await page.setViewportSize({width:390,height:844});await page.getByRole('heading',{name:'Planifications du manifeste',exact:true}).scrollIntoViewIfNeeded();await fits();await capture('mobile');await page.getByRole('heading',{name:'Historique des tirs',exact:true}).scrollIntoViewIfNeeded();await capture('history-mobile');
     const menu=page.getByRole('button',{name:'Menu',exact:true});if(await menu.isVisible())await menu.click();
     await page.getByRole('link',{name:'Manuel d’usage',exact:true}).click();await page.getByRole('article',{name:'Guide d’utilisation'}).waitFor();
     const article=page.getByRole('article',{name:'Guide d’utilisation'});const bytes=await readFile(new URL('../docs/manual.md',import.meta.url));assert.equal(await article.getAttribute('data-manual-sha256'),createHash('sha256').update(bytes).digest('hex'));
     await page.getByRole('navigation',{name:'Sommaire',exact:true}).getByRole('link',{name:'Planifications du manifeste',exact:true}).click();await capture('manual-mobile');assert.deepEqual(faults,[]);
   });
+  }
   completed=true;
 } finally {
   await context?.close();await browser?.close();

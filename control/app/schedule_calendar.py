@@ -34,7 +34,7 @@ def compile_cron(expression):
     for part, (low, high) in zip(parts, BOUNDS):
         values = set()
         for item in part.split(','):
-            match = re.fullmatch(r'(\*|[0-9]+(?:-[0-9]+)?)(?:/([0-9]+))?', item)
+            match = re.fullmatch(r'(\*|\d+(?:-\d+)?)(?:/(\d+))?', item)
             if not match:
                 raise ValueError('Champ cron invalide.')
             base, raw_step = match.groups()
@@ -80,3 +80,12 @@ def next_slot(cron, after):
                 if slot > after and cron.matches(slot):
                     return {'nominal_at': slot, 'window_at': boundary(slot + 299)}
     return None
+
+
+def next_firing(cron, after):
+    """Forecast the coalesced nominal actually retained by the next window."""
+    first = next_slot(cron, after)
+    if first is None:
+        return None
+    slots = window_slots(cron, first['window_at'], after)
+    return {'nominal_at':slots[-1], 'window_at':first['window_at'], 'coalesced':len(slots)}
