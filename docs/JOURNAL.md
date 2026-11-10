@@ -5648,3 +5648,24 @@ instance isolent donc les plafonds d'attente. Plan SCHEDULE_QUEUES avant code :
 neuf fonctions originales,16 réceptions sur cible0 à W,128 réparties sur0–7
 avec cible8 libre à W+300, puis deux tirs sains W+600. Les vrais corps incomplets
 et leur délai30s restent inchangés. Aucun budget, image ou configuration modifié.
+
+## 10 novembre2026 — Files pleines planifiées qualifiées
+
+Client8ebbf66 : quatre groupes passent sur319 sources, fenêtres20:25/30/35UTC.
+Seize réceptions individuelles puis128 globales (cible libre) produisent deux
+tirs queue_full sans invocation, sans consommer les budgets d'instances/CPU/RAM.
+Relevés avant expiration30s ;144 déconnexions terminales499 sans handler,
+connexions rejointes, deux HTTP puis deux tirs suivants réussis, aucun rejeu.
+Collecte indépendante : quatre tirs,148 invocations, quatre handlers réussis,
+neuf purges physiques, actifs/réservations nuls. Même contrôle/référence et
+fichiers officiels,34 backends et5982 artefacts conservés. Preuve :
+evidence/schedule-queues-dev-2026-11-10.json. Aucun build produit, UI/manuel ou capture.
+
+La revue avant lancement a corrigé révocation POST, attente d'archive et nettoyage
+du namespace sans service ; aucune faute de ces branches n'est prétendue provoquée.
+SLS-078 reste ouverte. Reprendre refused_unavailable : l'exploration source trouve
+un scénario cache-clear réellement pending sous deny-cache, function_operations
+commit avant INSERT d'invocation, puis reprise après restitution et prochain tir.
+Lire storage-command-faults.py et storage_management.py, persister le contrat
+avant code ; rien de ce scénario n'a encore été exécuté. Plafond global attend099,
+rétention réelle, états UI et régression complète restent également ouverts.

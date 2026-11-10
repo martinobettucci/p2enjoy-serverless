@@ -359,3 +359,19 @@ identités/images/démarrages et fichiers officiels sont conservés. Aucun build
 produit, budget officiel, UI/manuel ou capture nouveau. Le plafond global suit
 SLS-099 pour sa garde ; refus résiduels, rétention, états UI et régression complète
 gardent SLS-078 ouverte.
+
+## Files individuelles et globales pleines
+
+La [preuve du10 novembre2026](evidence/schedule-queues-dev-2026-11-10.json)
+passe quatre groupes sur319 sources, client8ebbf66 et même image b9ad872a.
+Le [plan et ses résultats](SCHEDULE_QUEUES.md#résultats-qualifiés) recoupent les
+fenêtres20:25/30/35UTC :16 HTTP incomplets sur la première cible, puis128 répartis
+sur huit fonctions avec seconde cible libre. Deux tirs queue_full sans invocation,
+CPU/RAM/instances disponibles ; les relevés précèdent les échéances normales30s.
+
+Les144 déconnexions sont terminales499 sans admission ni handler. Deux POST sains
+puis deux prochains tirs réussissent ; quatre tirs et148 invocations au total,
+aucun rejeu. Neuf fonctions purgées physiquement, actifs/réservations nuls,
+34 backends,5982 artefacts et services/configuration conservés. Aucun produit,
+budget, UI/manuel ou capture modifié. Restent plafond global (SLS-099), refus
+d'indisponibilité, rétention réelle, états UI et régression complète.

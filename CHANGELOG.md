@@ -12,6 +12,11 @@
 
 ### Planifications en cours de qualification
 
+- Files pleines qualifiées sur319 sources par quatre groupes réels :16 attentes
+  individuelles puis128 globales, deux tirs queue_full sans invocation,144
+  déconnexions avant handler et quatre succès après libération. Neuf fonctions
+  purgées ; mêmes services/fichiers et5982 artefacts conservés. SLS-078 reste ouverte.
+
 - Moteur déployé en DEV : fenêtres de cinq minutes, réclamation et historique durables
   (migration 009), admission interne commune au moteur Docker, sans rejeu.
 - Lectures Read, facette Planifications et manuel reconstruits ;

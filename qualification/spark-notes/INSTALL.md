@@ -723,3 +723,9 @@ la garde SLS-099 ; les autres preuves résiduelles restent dans SLS-078.
 refuse avant écriture, sans recréation ni modification de proposition. La console
 doit fournir une précondition active avant reprise des tests32→2→32. SLS-099 reste
 ouverte ; ne pas utiliser le nominal historique comme garde concurrente qualifiée.
+
+`node e2e/schedule-queues.mjs` passe quatre groupes sur les trois fenêtres réelles
+20:25/30/35UTC : vrais corps HTTPS incomplets, files16/128, refus sans invocation,
+déconnexions rejointes, prochains appels/tirs sains et neuf purges physiques.
+Le lecteur `schedule-queue-inspect.py --waiting` est réservé au banc avec ses
+neuf UUID ; aucun budget ni fichier officiel changé. Restent les critères078 résiduels.

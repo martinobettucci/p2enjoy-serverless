@@ -59,3 +59,26 @@ ses requêtes, puis nettoie avant toute relance explicite.
 
 Ce complément ne clôture pas SLS-078 : plafond global d'instances (SLS-099),
 autres indisponibilités, rétention réelle, états UI et régression restent ouverts.
+
+## Résultats qualifiés
+
+La [preuve DEV](evidence/schedule-queues-dev-2026-11-10.json), client8ebbf66,
+passe quatre groupes sur319 sources figées, même image b9ad872a et budgets
+inchangés. Fenêtres20:25/30/35UTC. Le refus individuel est observé avec16
+réceptions présentes, environ14s avant la première échéance normale ; le refus
+global avec128 réparties16×8 et zéro sur la cible, plus ancienne réception âgée
+d'environ19s. Les deux tirs sont refused_capacity/queue_full, lienNULL et aucune
+invocation planifiée ; zéro instance et budget CPU/RAM disponible.
+
+Les144 HTTP incomplets deviennent disconnected/client_disconnected/499 sans
+admission ni handler ; leurs connexions sont rejointes. Deux HTTP complets puis
+deux tirs20:35 réussissent en Docker ; les deux refus initiaux restent inchangés,
+aucun rejeu. Total natif : quatre tirs,148 invocations, quatre handlers réussis.
+Neuf purges publiques et absence physique recoupées, ressources actives nulles.
+Les34 backends,5982 artefacts antérieurs et identités/images/démarrages/fichiers
+officiels sont conservés. Aucun build produit, UI/manuel ou capture modifié.
+
+La revue avant lancement a fait corriger la route de révocation, l'attente de
+confirmation d'archive et le nettoyage d'un namespace sans service. Aucun échec
+de ces branches n'est prétendu provoqué ; les fautes propres du banc et la
+régression complète restent distinctes de cette campagne nominale réussie.

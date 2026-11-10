@@ -39,6 +39,10 @@ d'instances, refus résiduels, rétention, états UI et régression complète re
 Cette garde refuse désormais la baisse avant mutation, en attendant une capacité
 conditionnelle de la console SPARK : [contrat et limite externe](docs/INSTANCE_LIMIT_RESTORATION.md).
 Les anciens succès du plafond restent historiques ; son rejeu est bloqué par ce prérequis.
+Les [files pleines des tirs](docs/evidence/schedule-queues-dev-2026-11-10.json)
+passent quatre groupes sur319 sources :16 réceptions individuelles,128 globales,
+deux refus sans invocation puis deux succès HTTP et deux planifiés après libération.
+Les144 réceptions déconnectées et les neuf purges physiques sont recoupées.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

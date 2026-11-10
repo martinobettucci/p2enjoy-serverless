@@ -692,3 +692,9 @@ examinée n'a pas de précondition sur l'entrée active. Deux groupes réels res
 passent sur317 sources, namespace supprimé, fichiers/budgets/services conservés.
 Preuve : docs/evidence/instance-limit-safety-dev-2026-11-10.json. La restitution
 indépendante reste à réaliser après capacité externe (SLS-099).
+
+Les files planifiées passent quatre groupes sur319 sources :16 réceptions sur
+une cible puis128 globales avec autre cible libre, deux refus queue_full sans
+invocation,144 déconnexions avant handler et quatre succès après libération.
+Neuf fonctions purgées, mêmes services/fichiers et5982 artefacts. Preuve :
+docs/evidence/schedule-queues-dev-2026-11-10.json. Les autres critères078 restent ouverts.

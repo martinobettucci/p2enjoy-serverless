@@ -797,3 +797,9 @@ SLS-099 : le client6e573c0 passe deux groupes de refus préventif restore/EOF,
 écrite ; namespace nettoyé et5982 artefacts conservés. La capacité conditionnelle
 de la console reste externe ; restitution et pannes ne sont pas qualifiées.
 Preuve : `docs/evidence/instance-limit-safety-dev-2026-11-10.json`.
+
+Files planifiées qualifiées au client8ebbf66 : quatre groupes/319 sources,
+quatre tirs/148 invocations dont144 déconnexions avant handler et quatre succès.
+Deux refus queue_full sans invocation, neuf purges physiques,34 backends et5982
+artefacts conservés ; aucun rebuild produit ni budget changé. Preuve :
+`docs/evidence/schedule-queues-dev-2026-11-10.json`. SLS-078 reste ouverte.
