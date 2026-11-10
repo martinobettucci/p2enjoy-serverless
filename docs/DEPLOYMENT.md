@@ -454,3 +454,13 @@ Pour l'extraction : [format ZIP PKWARE](https://pkware.cachefly.net/webdocs/case
 [décompression zlib](https://docs.python.org/3.14/library/zlib.html#zlib.Decompress.decompress).
 Le format du module est constaté via les
 [hooks de chargement Node](https://github.com/nodejs/node/blob/v24.x/doc/api/module.md#moduleregisterhooksoptions).
+
+## Planifications — migration 009
+
+SLS-078 ajoute au contrôle le moteur de fenêtres UTC, sans nouveau service,
+paramètre, secret ou route SPARK. Reconstruire le contrôle (console et manuel
+inclus), sauvegarder SQLite nativement avant la bascule DEV, vérifier neuf
+migrations et la santé. La migration initialise les générations existantes au
+moment de l'installation, sans rattrapage. L'ancienne image reste conservée.
+L'unité est en qualification ; reprise et preuve temporelle sont définies dans
+[SCHEDULES](SCHEDULES.md). Aucun retour automatique de base n'est prévu.

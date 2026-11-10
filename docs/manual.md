@@ -237,12 +237,37 @@ contrôle sa version avant décision. Elle ne charge pas le manifeste. La premi�
 promotion du premier hash exige Create ; toutes les suivantes exigent Update,
 même après désactivation de la cible. Read reste nécessaire aux lectures CLI.
 
-Les événements `schedule` du manifeste (cron à cinq champs, UTC) sont acceptés et
-enregistrés avec la fonction, mais la plateforme ne les déclenche pas encore :
-une fonction qui dépend d’une exécution planifiée ne s’exécutera pas toute seule.
-La commande `plan` les affiche comme les autres événements : leur présence ne
-garantit pas leur exécution. Tant que l’ordonnanceur n’est pas livré, déclencher la fonction par un appel
-HTTP explicite depuis un planificateur extérieur à la plateforme.
+## Planifications du manifeste
+
+Les événements `schedule` du manifeste utilisent une expression cron numérique
+à cinq champs, en UTC (listes, plages, pas et `*`, dimanche 0 ou 7). La plateforme
+contrôle ces expressions aux frontières de cinq minutes : un créneau prévu à
+12:02 part à 12:05, jamais avant. Plusieurs créneaux de la même fenêtre sont
+fusionnés en un tir ; leur nombre figure dans l'historique. Quand jour du mois et
+jour de semaine sont tous deux restreints, l'un ou l'autre suffit.
+
+Ouvrir une fonction puis **Planifications** pour consulter les déclarations de
+sa version promue, le prochain créneau nominal, sa frontière de lancement et le
+dernier résultat. **Actualiser** relit ces observations. L'**Historique des tirs**
+présente les créneaux, le retard mesuré, le hash du code et le résultat ; ses
+pages et le lien d'invocation permettent de retrouver les journaux. Une expression
+se modifie dans le manifeste, puis par publication et promotion de la nouvelle
+version. Un upload pilote seul ne crée aucun déclenchement. Une promotion ou un
+retour à un hash remplace les planifications de la version précédente.
+
+Le corps reçu par le handler est la chaîne JSON `{}`, avec méthode `POST`, chemin
+`/`, en-têtes `x-p2enjoy-trigger: schedule` et `x-p2enjoy-schedule-slot` en UTC.
+Aucun jeton plateforme n'est transmis. Les restrictions d'origine/IP concernent
+les clients HTTP ; un tir interne conserve les budgets, la concurrence, le verrou
+de stockage, la file et le délai d'exécution des fonctions. Une déclaration
+`enabled: false`, une cible désactivée ou une fonction supprimée ne déclenche
+plus de nouveau travail. Un appel déjà admis conserve son code et termine.
+
+Il n'y a aucun rattrapage ni rejeu automatique : après un arrêt, les fenêtres
+manquées sont marquées « Ignoré pendant l'arrêt ». Si le tir précédent de la même
+planification tourne encore, le suivant est ignoré pour recouvrement. Une capacité
+insuffisante est consignée comme refus. Un échec ou une interruption n'assure
+pas l'absence d'effets métier : vérifier l'invocation avant toute relance manuelle.
 
 La plateforme accepte jusqu’à 64 candidats en attente, avec huit par fonction,
 et quatre uploads simultanément admis ; une seule validation Docker s’exécute à

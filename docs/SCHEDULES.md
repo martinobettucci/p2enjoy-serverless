@@ -9,9 +9,9 @@ configurés dans la console ([SLS-081](BACKLOG.md#sls-081),
 ## État constaté
 
 L'adaptateur valide `schedule.rate` (cron à cinq champs) et `schedule.enabled`,
-le contrôle les enregistre dans les événements de la révision. **Aucun composant
-ne les déclenche.** Aucun avertissement n'est émis à la publication ; le manuel
-et le README décrivent cette limite. Le projet de référence en dépend :
+le contrôle les enregistre dans les événements de la révision. Le moteur, sa
+migration 009, ses lectures API et sa facette sont maintenant codés ; déploiement
+et qualification réelle sont en cours, sans clôture de l'unité. Le projet de référence en dépend :
 deux de ses treize fonctions sont planifiées
 ([compatibilité](REFERENCE_COMPATIBILITY.md#planifications)).
 

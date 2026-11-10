@@ -2,8 +2,8 @@
 
 **La plateforme demandée n'est pas encore entièrement livrée.** Favoris,
 actions en masse, éditeur de code intégré, client HTTP par fonction, journaux
-avancés et monitoring historique restent à implémenter. Les crons du manifeste
-sont enregistrés mais **jamais déclenchés** ; les jobs de console, la compatibilité
+avancés et monitoring historique restent à implémenter. Le moteur des crons du manifeste est
+codé et sa qualification DEV est en cours ; les jobs de console, la compatibilité
 complète du projet de référence, la parité avec Scaleway Serverless
 ([matrice](docs/SCALEWAY_PARITY.md)) et un guide d'exploitation rejoué restent à
 livrer. Le moteur, la gestion, les versions et les preuves ciblées ne clôturent pas

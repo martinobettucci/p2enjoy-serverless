@@ -98,6 +98,9 @@ function Invocation({row}) {
     <p className="muted">Reçue le {stamp(row.created_at)}{row.http_status != null && <> · HTTP {row.http_status}</>}</p>
     <details className="invocation-details"><summary>Détails et journal</summary><div className="stack">
       <Facts values={[
+        // @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULES.md#contrat | docs/manual.md#planifications-du-manifeste
+        ['Déclencheur',row.trigger === 'schedule' ? 'Planification du manifeste' : 'Appel HTTP'],
+        ...(row.trigger === 'schedule' ? [['Expression UTC',reference(row.schedule_expression)],['Créneau nominal UTC',new Date(row.schedule_slot * 1000).toISOString()]] : []),
         ['Sélection demandée',row.requested_code_hash ? reference(row.requested_code_hash) : 'Cible par défaut'],
         ['Hash exécuté',reference(row.resolved_code_hash)],['Révision interne',reference(row.revision_id)],['Instance',reference(row.instance_id)],
         ['Mise en file',stamp(row.queued_at)],['Admission',stamp(row.admitted_at)],

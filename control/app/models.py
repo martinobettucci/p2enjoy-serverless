@@ -150,18 +150,9 @@ class ScheduleEvent(Strict):
     @field_validator('cron')
     @classmethod
     def schedule(cls,value):
-        parts=value.split()
-        if len(parts)!=5:raise ValueError('Cron attendu : cinq champs numériques.')
-        for part,(low,high) in zip(parts,[(0,59),(0,23),(1,31),(1,12),(0,7)]):
-            for item in part.split(','):
-                match=re.fullmatch(r'(\*|\d+(?:-\d+)?)(?:/(\d+))?',item)
-                if not match:raise ValueError('Champ cron invalide.')
-                base,step=match.groups()
-                if step is not None and not 1<=int(step)<=high-low+1:raise ValueError('Pas cron hors limites.')
-                if base!='*':
-                    numbers=[int(n) for n in base.split('-')]
-                    if not all(low<=n<=high for n in numbers) or numbers[0]>numbers[-1]:raise ValueError('Plage cron invalide.')
-        return ' '.join(parts)
+        # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULES.md#réalisation-du-moteur-et-migration-009
+        from .schedule_calendar import compile_cron
+        return compile_cron(value).expression
 
 
 class Events(Strict):

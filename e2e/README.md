@@ -1425,3 +1425,16 @@ Après le retrait du briefing privé de l'historique, les lectures Git historiqu
 utilisent les commits remappés. L'identité revision des attestations reste celle
 des preuves datées ; source_revision précise le commit effectivement lu. Voir
 [réécriture Git](../docs/GIT_HISTORY_REWRITE.md) et sa table de correspondance.
+
+## Planifications réelles SLS-078
+
+Sur la version du contrôle reconstruite avec la migration 009, session réelle
+préparée par `dev-sso-sessions.mjs`, exécuter depuis la racine :
+`node e2e/schedules.mjs`. Le client crée ses fonctions originales et jetons par
+HTTPS, publie/promet des déclarations sans route HTTP, attend deux frontières
+UTC réelles, recoupe les événements consignés par les handlers Docker, ouvre
+la facette depuis l'accueil et le manuel, puis archive/purge ses ressources.
+Chaque essai porte un UUID, un rapport privé distinct et ses captures JPEG ;
+un prérequis absent échoue. Cette première campagne ne couvre pas encore les
+promotions multiples, les interruptions, le recouvrement, la saturation ou tous
+les états UI de [SCHEDULES](../docs/SCHEDULES.md#preuves-e2e-attendues).

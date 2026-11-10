@@ -24,6 +24,8 @@ from .deployments import Deployments
 from .function_operations import FunctionOperations
 from .storage_management import StorageManagement
 from .execution import Execution
+# @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULES.md#réalisation-du-moteur-et-migration-009
+from .schedules import Schedules
 from .invocation_routes import routes as invocation_routes,gateway_error
 from .network import forwarded_addresses
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md
@@ -60,6 +62,7 @@ operations=FunctionOperations(settings,database)
 deployments=Deployments(settings,database,identity,vault,operations)
 execution=Execution(settings,database,identity,vault,operations,deployments)
 operations.execution=execution
+schedules=Schedules(execution)
 # @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md
 storage_management=StorageManagement(database,identity,vault,operations,deployments)
 operations.discards=storage_management
@@ -81,11 +84,14 @@ async def lifespan(app):
         await deployments.ready()
         await operations.ready(deployments.installation)
         await execution.ready(deployments.installation)
+        await schedules.ready()
         yield
     finally:
         try:
-            try:await operations.close()
-            finally:await execution.close()
+            try:await schedules.close()
+            finally:
+                try:await operations.close()
+                finally:await execution.close()
         finally:
             await deployments.close()
             await identity.close()
@@ -96,6 +102,7 @@ app.add_middleware(BodyLimit)
 app.include_router(router(database,identity,vault,operations))
 app.include_router(deployments.routes())
 app.include_router(invocation_routes(execution))
+app.include_router(schedules.routes())
 app.include_router(storage_management.routes())
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#api-et-calcul-commun
 app.include_router(invocation_url_routes(database,identity,settings))
@@ -196,6 +203,7 @@ async def health():
     database.one('SELECT 1')
     if deployments.cleanup_error:raise HTTPException(503,'Le nettoyage des artefacts doit être repris.')
     if operations.cleanup_error or not operations.agent_ready:raise HTTPException(503,'Le stockage des fonctions doit être rétabli ou réconcilié.')
+    if schedules.maintenance_error:raise HTTPException(503,'Les planifications doivent être réconciliées.')
     if not execution.healthy():raise HTTPException(503,'Les instances doivent être réconciliées avant la reprise.')
     return {'status':'ok','component':'control','version':'0.1.0-dev'}
 

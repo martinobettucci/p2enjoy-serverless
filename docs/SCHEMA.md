@@ -294,3 +294,17 @@ phase nullable, storage_absent booléen, expected_function_version, result_versi
 completed_at et error_code nullable. Un index function_id/created_at sert la
 dernière commande. Les résultats terminaux restent consultables ; la garde
 active reste exclusivement dans function_operations. Aucun secret n’est copié.
+
+## Générations et tirs planifiés
+
+Migration 009, SLS-078, codée et en cours de qualification :
+`schedule_generations` conserve id interne entier, fonction, révision/hash, événements,
+activation et retrait ; une seule génération courante par fonction. Des triggers
+suivent le pointeur actif et la suppression logique dans leur transaction. Le
+curseur unique `schedule_cursor` garde la dernière fenêtre de 300 secondes acquise.
+`schedule_firings` conserve UUID, génération, fonction, index, origine, expression,
+hash, nominal, frontière, nombre fusionné, état, réclamation, dispatch, fin, retard,
+lien d'invocation et diagnostic. Unicité génération/index/fenêtre et invocation.
+`invocations` ajoute trigger (http par défaut), schedule_firing_id, schedule_origin,
+schedule_expression et schedule_slot. Aucun corps ou secret supplémentaire.
+Rétention, reprise, droits et premier démarrage : [SCHEDULES](SCHEDULES.md#réalisation-du-moteur-et-migration-009).

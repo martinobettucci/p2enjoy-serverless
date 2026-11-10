@@ -23,6 +23,8 @@ from .function_operations import storage_configuration
 from .invocation_http import InvocationError,declared_path,event_envelope,policy_allows
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#sélection-http-et-admission
 from .function_versions import selected_revision
+# @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULES.md#réalisation-du-moteur-et-migration-009
+from .schedules import ScheduleAuthorization,check_schedule
 
 logger=logging.getLogger('p2enjoy.control')
 ACTIVE=('receiving','queued','admitted','running')
@@ -85,11 +87,15 @@ class Execution:
 
     def check_call(self,db,call):
         function,service,_=self.current(db,call.function_id,resolve=False)
-        self.identity.recheck(db,call.authorization,service['id'],'read',function['id'])
-        if not policy_allows(json.loads(service['policy_json']),call.origin,call.source_ip):raise InvocationError(403,'network_policy_denied')
+        # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULES.md#contrat
+        scheduled=isinstance(call.authorization,ScheduleAuthorization)
+        if scheduled:check_schedule(db,call,function)
+        else:
+            self.identity.recheck(db,call.authorization,service['id'],'read',function['id'])
+            if not policy_allows(json.loads(service['policy_json']),call.origin,call.source_ip):raise InvocationError(403,'network_policy_denied')
         self.operations.function_available(db,function['id'])
         revision=selected_revision(db,function,call.requested_code_hash)
-        path=declared_path(revision,call.path,call.method)
+        path='/' if scheduled else declared_path(revision,call.path,call.method)
         return function,service,revision,path
 
     def receive(self,function_id,authorization,method,path,origin,source_ip,code_hash=None):
@@ -97,13 +103,30 @@ class Execution:
         call=WaitingCall(str(uuid4()),function_id,authorization,method,path,origin,source_ip,
                          asyncio.get_running_loop().create_future(),requested_code_hash=code_hash)
         with self.db.transaction(busy_timeout=0) as db:
-            function,service,_,_=self.check_call(db,call)
+            function,service,revision,_=self.check_call(db,call)
+            # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULES.md#réalisation-du-moteur-et-migration-009
+            scheduled=isinstance(authorization,ScheduleAuthorization)
+            firing=check_schedule(db,call,function) if scheduled else None
+            if scheduled:
+                snapshot,generation=self.snapshot(function,service,revision)
+                rows=db.execute('SELECT id,generation,state FROM execution_instances WHERE function_id=?',(function_id,)).fetchall()
+                ready=any(row['generation']==generation and row['state']=='ready' and row['id'] in self.instances and row['id'] not in self.workers and row['id'] not in self.retiring for row in rows)
+                busy=any(row['state']=='busy' for row in rows)
+                exclusive=snapshot['config']['storage']['data']['enabled'] and snapshot['config']['storage']['concurrency']=='exclusive'
+                if not ready and not (busy and exclusive) and (len(rows)>=snapshot['config']['max_instances'] or not self.capacity(db,snapshot['config'])):
+                    raise InvocationError(429,'schedule_capacity')
             total=db.execute("SELECT count(*) FROM invocations WHERE state IN ('receiving','queued')").fetchone()[0]
             per_function=db.execute("SELECT count(*) FROM invocations WHERE function_id=? AND state IN ('receiving','queued')",(function_id,)).fetchone()[0]
             if total>=self.settings.waiting_call_limit or per_function>=self.settings.function_waiting_call_limit:raise InvocationError(429,'queue_full')
             db.execute("""INSERT INTO invocations(id,actor_kind,actor_id,service_id,function_id,state,created_at,handler_started,requested_code_hash)
                 VALUES(?,?,?,?,?,'receiving',?,0,?)""",
                 (call.id,authorization.actor.kind,authorization.actor.id,service['id'],function_id,time.time(),code_hash))
+            if scheduled:
+                db.execute("""UPDATE invocations SET trigger='schedule',schedule_firing_id=?,schedule_origin=?,
+                    schedule_expression=?,schedule_slot=? WHERE id=?""",(firing['id'],firing['origin'],firing['expression'],firing['nominal_at'],call.id))
+                now=time.time()
+                db.execute("UPDATE schedule_firings SET state='dispatched',invocation_id=?,dispatched_at=?,delay_seconds=? WHERE id=?",
+                    (call.id,now,now-firing['nominal_at'],firing['id']))
         self.waiting[call.id]=call
         return call
 

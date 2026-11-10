@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+### Planifications en cours de qualification
+
+- Moteur UTC par fenêtres de cinq minutes, réclamation et historique durables
+  (migration 009), admission interne commune au moteur Docker, sans rejeu.
+- Lectures Read, facette Planifications et manuel mis à jour ; construction et
+  preuves réelles encore en cours, SLS-078 reste `[~]`.
+
+
 ### Méthode, parité Scaleway et planifications (documentation)
 
 - `docs/.routine` et le rôle `factory_verifier` sont restaurés à l'identique de la

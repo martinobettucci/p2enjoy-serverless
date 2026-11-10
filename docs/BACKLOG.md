@@ -68,7 +68,7 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[ ]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
+| 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 1 | [SLS-096](#sls-096) Manuel déployé conforme à sa source | Corriger | `[ ]` | — (même build que SLS-078) | [CONSOLE_MANUAL](CONSOLE_MANUAL.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
@@ -1482,8 +1482,8 @@ relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-1
 <a id="sls-078"></a>
 ## SLS-078 — Moteur de planification des crons
 
-Statut : [ ] — contrat défini ([SCHEDULES](SCHEDULES.md)) ; aucun composant ne déclenche
-les `events: - schedule` acceptés et stockés. La limite est dite dans le manuel.
+Statut : [~] — moteur, migration 009, lectures API et facette codés ; construction,
+déploiement et preuves E2E en cours. Aucun critère de clôture encore acquis.
 Nature : Développer. Dépend de : SLS-040 (admission), SLS-074 (cible promue).
 Débloque : SLS-080, SLS-081, SLS-073. Ordre : 1.
 Contrat : [SCHEDULES](SCHEDULES.md).

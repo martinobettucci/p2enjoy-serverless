@@ -452,3 +452,14 @@ Les quatre routes/A sont retirés indépendamment après perte réelle du
 propriétaire ; contrôle/référence, images, démarrages et configurations
 permanentes sont conservés. Les autres fautes et la régression complète008
 restent des unités de preuve distinctes.
+
+## Planification du contrôle
+
+SLS-078 intègre `app/schedules.py` au processus unique du contrôle, après la
+réconciliation d'exécution. `schedule_calendar.py` fournit la grammaire et le
+calcul UTC, partagés par la validation des événements et le moteur. Migration
+009 et générations transactionnelles attachées au pointeur promu ; réclamation
+avant l'admission interne, rétention et reprise sans envoi des fenêtres manquées.
+La facette Planifications consomme les lectures Read de ce registre, jamais un
+second calcul de planning côté navigateur. Voir [SCHEDULES](SCHEDULES.md).
+Implémentation en cours de qualification, sans preuve complète revendiquée.
