@@ -27,7 +27,7 @@
       "path": ".claude/agents/factory-verifier.md",
       "upstream_blob": "784517ae4131ac5e1018e07c0ee8daba3c5bbb90",
       "mode": "100644",
-      "installed_sha256": "e4699edf31ad3e121823bc562e2f51a61802a72abdb506c56a4c83f4fa446a50",
+      "installed_sha256": "185225d07f9c8860e0dca15756d81c2b1db640b2678c41cf3177d6d0e20b31c5",
       "adapted": true
     },
     {
@@ -55,7 +55,7 @@
       "path": ".codex/agents/factory-verifier.toml",
       "upstream_blob": "3cf98960d7a7e2e525d99017b87e3e9a425d9449",
       "mode": "100644",
-      "installed_sha256": "6c46cc8f993e4e8037a30407af2643ad39c9713dfee0e82da4661031644541b0",
+      "installed_sha256": "1cb968a38846f2d98759c6812cf777348db49d51d80a2a92f98c488fafe7a8b4",
       "adapted": true
     },
     {
@@ -118,8 +118,8 @@
       "path": "docs/.routine",
       "upstream_blob": "715d2d3c1109e84d5a8d1e33edb99245a6a66e46",
       "mode": "100644",
-      "installed_sha256": "8f47c298f193f3361ff42dd6c51e9dc1c8cf9b9b87e87923d951020dc479c87f",
-      "adapted": true
+      "installed_sha256": "a03d06712c9564a8f6c713467f54ab159cf59253dcf26e648f882eb920d03c40",
+      "adapted": false
     },
     {
       "path": "docs/CloudWorker.md",
@@ -213,7 +213,13 @@
     "mode": "standard",
     "core.hooksPath": ".githooks"
   },
-  "routine_active": false,
-  "verifier_role": "read-only analysis; root runs every test",
-  "date": "2026-11-05"
+  "verifier_role": "upstream role restored (targeted proof execution on a stabilised tree, Bash allowed); only the traceability header is adapted; proofs touching the SPARK DEV stay with the principal agent",
+  "date": "2026-11-05",
+  "routine_file": "identical to upstream blob 715d2d3c1109e84d5a8d1e33edb99245a6a66e46",
+  "scheduled_execution": "not configured by this repository; a session triggered by docs/.routine applies docs/CloudWorker.md within the limits of CLAUDE_PROJECT.md",
+  "restoration": {
+    "date": "2026-11-10",
+    "reason": "docs/.routine had been replaced by an inactive stub and the verifier role downgraded to read-only without the manager asking for it",
+    "upstream_main_checked": "886ba5a28a834a5f08fd1a01ec8dd78787317559"
+  }
 }

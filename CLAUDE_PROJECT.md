@@ -38,8 +38,11 @@
 - Cette instruction utilisateur remplace les tests unitaires obligatoires et
   les mocks parfois autorisés par le contrat global. Les contrôles statiques
   restent distincts des preuves fonctionnelles.
-- L'agent principal est le seul écrivain. Les délégations de revue sont en
-  lecture seule, sans lancement de tests ni opération distante.
+- L'agent principal est le seul écrivain. Les explorateurs, relecteurs et
+  résolveurs travaillent en lecture seule, sans lancement de tests ni opération
+  distante. Le vérificateur de la méthode peut exécuter une preuve ciblée locale
+  sur un arbre stabilisé ; toute preuve ou opération qui touche le SPARK DEV ou
+  un service partagé reste exécutée par l'agent principal, seul et en série.
 - Aucun résultat du banc ne prouve la compatibilité complète du client ni une
   fonction de plateforme qui n'existe pas encore.
 
@@ -91,13 +94,29 @@ selon `docs/CONSOLE_MANUAL.md` ; aucune copie éditoriale parallèle n’est mai
 La qualification recoupe son contenu et son empreinte avec l’application déployée.
 
 La méthode est importée depuis `P2Enjoy/software-factory-base` ; provenance et
-adaptations : `docs/METHODE.md`. La routine planifiée est inactive. Aucun
-bootstrap de FORGE, démon local, contournement TLS ou lancement PREPROD/PROD
-mentionné dans CloudWorker n'est applicable ici. Les opérations restent
-limitées au SPARK DEV autorisé et à son contrat normal de configuration.
-Les preuves Git utilisent des dépôts jetables locaux. Aucun remote du produit
-n'est créé ni poussé implicitement. L'absence de remote est signalée.
+adaptations : `docs/METHODE.md`. `docs/.routine` est celui de la méthode, sans
+modification ; ce dépôt ne planifie rien lui-même.
 
-La consigne de commits de la méthode s'applique avec l'identité configurée du
-responsable. L'absence de remote n'autorise pas à en inventer un : la preuve
-locale et le commit sont conservés, et l'absence de push est déclarée.
+### Adaptation de CloudWorker
+
+Une session déclenchée par `docs/.routine` lit `docs/CloudWorker.md` en entier
+et l'applique, sauf les passages propres à une machine éphémère dont la pile est
+locale, remplacés comme suit :
+
+- le démarrage du démon Docker, le contournement du proxy TLS, l'installation de
+  Node et le démarrage d'une pile locale (§2) ne s'appliquent pas : la pile est
+  le SPARK DEV, joint par les commandes du README, avec sa configuration
+  officielle. Aucun bootstrap de FORGE ni lancement PREPROD/PROD ;
+- le seed et la ligne de base se rejouent sur le SPARK DEV, en série, avec les
+  fonctions et jetons de qualification créés par les API réelles et purgés
+  ensuite ;
+- le choix de l'unité, la branche `main`, les commits poussés sur `origin/main`,
+  la boucle de résolution du registre, la campagne complète, le compte rendu et
+  la garde de fin de session s'appliquent sans changement.
+
+### Remote et commits
+
+Le remote `origin` (`main`) est configuré. Chaque commit validé est poussé
+immédiatement. La consigne de commits de la méthode s'applique avec l'identité
+configurée du responsable. Les preuves des garde-fous Git utilisent des dépôts
+jetables locaux et ne touchent pas à `origin`.

@@ -26,9 +26,17 @@ revue, traitement des incohérences, campagne complète et documentation.
 L'agent principal écrit et opère seul ; les délégations de cette session sont
 en lecture seule. Les scénarios sont séquentiels.
 
-La routine planifiée n'est pas activée. CloudWorker est importé comme contrat
-global ; son bootstrap d'hôte et ses opérations Git ne sont pas exécutés par
-la seule présence du document. Le README porte les commandes locales.
+`docs/.routine` est le fichier de la méthode, identique octet pour octet à
+l'original (blob `715d2d3c1109e84d5a8d1e33edb99245a6a66e46`). Ce dépôt ne
+configure aucune planification : la présence du fichier ne lance rien. Une
+session déclenchée par `docs/.routine` applique `docs/CloudWorker.md` avec les
+adaptations de [CLAUDE_PROJECT.md](../CLAUDE_PROJECT.md#adaptation-de-cloudworker) :
+la pile à démarrer, à peupler et à prouver est le SPARK DEV, pas un Docker
+local, et les commandes viennent du README.
+
+Le rôle `factory_verifier` est celui de la méthode : exécution et analyse d'une
+preuve ciblée sur un arbre stabilisé. Les preuves qui touchent le SPARK DEV ou
+tout service partagé restent exécutées par l'agent principal, seul et en série.
 
 ## Validation
 
@@ -47,6 +55,6 @@ leur présence sur disque.
 Les 26 fichiers du socle retenus et le complément local AUTOMATION sont présents.
 Les empreintes et adaptations sont dans `evidence/factory-import.json`.
 Les hooks standard sont activés dans le Git initialisé par le responsable.
-Le harnais réel des garde-fous obtient 45 succès et zéro échec. Aucun remote
-n'est configuré : il n'existe donc pas de destination de publication à pousser.
+Le harnais réel des garde-fous obtient 45 succès et zéro échec. Le remote
+`origin` (branche `main`) est configuré ; chaque commit validé est poussé.
 La qualification du code est enregistrée indépendamment de cette publication.
