@@ -83,3 +83,13 @@ Le rapport UUIDc9b925d3 et son relevé diagnostic restent conservés, hors total
 replay. Le délai d'essai est porté à3s pour laisser observer le vrai démarrage
 sous0,125CPU ; le handler attend toujours5s et les assertions après démarrage
 restent obligatoires. Aucun produit ni configuration officielle modifié.
+
+La relance b00d6f3 est arrêtée avant sa première fenêtre après lecture de009 :
+une promotion sans cron conserve une génération courante avec schedules vide.
+Exiger zéro génération courante était une erreur du banc. La preuve correcte
+exige cinq générations courantes au hash sans schedule promu, chacune avec
+une liste vide, et zéro déclaration exposée par l'API. Le client est arrêté
+par PID/naissance ; cinq fonctions purgées publiquement, aucun tir ni invocation,
+compteurs nuls et physique recoupé. Rapport cff86db6 et reçu de nettoyage distincts,
+zéro groupe ajouté. La campagne entière est à rejouer après correction de cette
+assertion ; le schéma et le moteur ne changent pas.

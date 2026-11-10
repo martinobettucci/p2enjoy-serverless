@@ -5530,3 +5530,11 @@ Avant correction du banc : deadline d'essai3s, travail réel5s et assertion de
 démarrage conservée. Motif : éprouver le timeout après démarrage observable
 plutôt qu'un lancement interrompu trop tôt. La campagne complète doit être
 rejouée ; aucun résultat des groupes non achevés n'est déclaré acquis.
+
+La relance b00d6f3 est arrêtée avant fenêtre, PID/naissance du seul client local
+vérifiés, après constat d'une assertion contraire à009 : une génération courante
+vide reste légitime après promotion sans cron. La preuve exige les cinq hashes
+promus sans schedule, listes vides et lectures API vides ; aucune correction du
+moteur. Cinq purges et absence physique recoupées, zéro tir/invocation, compteurs
+nuls. Rapport cff86db6, checkpoint et reçu de nettoyage externe conservés
+séparément, aucun groupe ajouté. La relance complète reste nécessaire.
