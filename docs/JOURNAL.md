@@ -5165,3 +5165,18 @@ cette connexion et le proxy répond lui-même. Ce n'est pas une ligne d'invocati
 le contrat d'une identité locale de connexion, liée au témoin natif running et
 au même appel interrupted, avec statuts transport/durable distincts. Conserver
 l'essai arrêté et ses purges séparément puis rejouer la chaîne maintenue complète.
+
+## 10 novembre 2026 — Audit de confidentialité pour une publication GitHub
+
+Question du responsable : présence de secrets empêchant de rendre le projet
+public. Scan de l'arbre et de l'historique accessible (475 fichiers / 1 969blobs,
+environ107Mo), comparaison privée des deux valeurs connues et recoupement des
+candidats avec quatre variables confidentielles du SPARK sans exporter leurs
+valeurs. Aucun secret exploitable détecté ; candidats classés en fixtures,
+préfixes générés, libellés et intégrités de dépendances. Sessions locales ignorées.
+Le dossier dev-spark et les coordonnées des bancs sont suivis : données
+opérationnelles réelles, distinctes des secrets d'accès. Résultat et limites
+persistés dans PUBLICATION_SECURITY ; demande suivie par SLS-077.
+Les46groupes de régression invocation/stockage ont entretemps terminé leur
+replay corrigé et collecte native (85handlers succeeded,18purges) ; leur
+livraison documentaire reste à terminer après cette réponse au responsable.

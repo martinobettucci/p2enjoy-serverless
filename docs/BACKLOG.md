@@ -1120,3 +1120,16 @@ libérée explicitement ; ses propres pannes/échéance ne sont pas revendiquée
 Les cinq pilotes maintenus et documents de résultat ont un relevé de livraison
 distinct du gel258 des clients, avec provenance des corps réellement exécutés.
 SLS-074 et la régression complète008 restent en cours.
+
+## SLS-077 — Audit des secrets avant publication publique
+
+Statut : [x] Audit initial effectué le 10 novembre 2026.
+
+Demande : vérifier si des secrets empêchent une publication publique sur GitHub.
+[Résultat et périmètre](PUBLICATION_SECURITY.md) : 475 fichiers de travail et
+1 969 blobs historiques accessibles contrôlés ; aucun secret exploitable détecté,
+valeurs connues absentes et aucun candidat correspondant aux quatre variables
+confidentielles actives du SPARK. Les sessions restent dans .local ignoré.
+Les coordonnées d'exploitation DEV sont suivies et restent à arbitrer avant
+une éventuelle préparation publique. L'audit n'engage aucune publication ni
+réécriture d'historique. Les limites de détection restent explicites.
