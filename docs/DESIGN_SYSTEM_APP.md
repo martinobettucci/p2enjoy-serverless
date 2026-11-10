@@ -349,3 +349,13 @@ simultanément visible. Aucun défaut visuel bloquant constaté. Les images ne
 prouvent pas seules les copies, appels, droits, pertes ou nettoyages : leurs
 assertions et reçus natifs restent dans la preuve. Les anciennes captures
 citées plus haut conservent leur périmètre historique.
+
+## Planifications du manifeste SLS-078
+
+La facette **Planifications** est une destination de lecture de la fonction,
+selon [SCHEDULES](SCHEDULES.md#facette-planifications). Elle compose les sections,
+Facts, badges, états Resource et pagination existants ; aucun token ni écart
+nouveau. Les états de tir portent un libellé français, les créneaux et frontières
+portent UTC, les empreintes complètes restent sélectionnables et reviennent à la
+ligne. Les listes d'historique ont cinq éléments et restaurent le focus au titre
+après changement de page. Le rendu et les parcours restent à qualifier.

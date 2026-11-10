@@ -178,3 +178,22 @@ Déploiement : image du contrôle reconstruite, sauvegarde SQLite native préala
 application de 009 au redémarrage DEV ; aucune variable, route ou secret nouveau.
 L'ancienne image est conservée ; revenir avant 009 exige une restauration explicite
 avec prise en compte des écritures nouvelles, jamais une rétro-migration automatique.
+
+## Facette Planifications
+
+La fiche de fonction ajoute le lien **Planifications**, destination
+`/console/functions/{UUID}/schedules`, qui conserve le contexte de retour au
+catalogue. Deux sections en lecture : **Planifications du manifeste** et
+**Historique des tirs**. Les déclarations présentent expression complète, UTC,
+activation, prochain nominal et prochaine frontière effective, hash promu et
+dernier résultat ; une déclaration désactivée nomme son état et n'affiche aucun
+prochain tir. Les tirs sont paginés par cinq, avec état français, nominal,
+départ/retard réel, nombre de créneaux fusionnés, hash et UUID d'invocation lié.
+Le lien rejoint la facette Invocations ; aucun clic de lecture ne lance un tir.
+Un lien au chapitre Adaptateur du manuel porte l'explication des fenêtres.
+Actualiser relit les deux sections ; chargement et erreur retirent les anciennes
+valeurs. Pagination remet le focus au titre d'historique après lecture. Les dates
+sont qualifiées UTC, les hash complets reviennent à la ligne, les données ne
+reposent pas sur la couleur. Aucun contrôle d'édition de cron de manifeste :
+leur modification passe par la publication/promotion réelle. Ces décisions sont
+persistées avant le composant ; captures depuis l'accueil exigées avant clôture.
