@@ -5741,3 +5741,11 @@ execution-ui ; aucune panne réseau substituée ni coupure de service. Le total
 conservé par schedules.jsx en erreur est à éprouver contre le contrat existant.
 Deux fonctions seulement, minimum total0,3CPU/768Mio, budgets inchangés ; chaque
 essai conservé et purges physiques attendues. Aucun résultat nouveau encore.
+
+Le premier essai au client90d3c2a s'arrête avant service/fonction/tir : corps
+de réponse201 indisponible après navigation du navigateur. Le namespace vide
+c287b6cc est retrouvé par son nom exact et supprimé par l'API publique ; reçu
+privé conservé. Le banc récupère désormais l'UUID dans l'URL de destination,
+comme invocation-pagination, et retrouve ses propres identités avant nettoyage
+si la préparation est interrompue. Ce passage ne prouve aucun état de tir ni
+le défaut de pagination ; son rapport reste distinct, sans groupe ajouté.
