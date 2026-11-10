@@ -65,6 +65,7 @@ try{
  for(const fn of functions){try{await purge(fn);}catch(error){cleanupErrors.push({function_id:fn.id,error:diagnostic(error)});}}
  if(reader){try{await api(`/api/tokens/${reader.id}/revoke`,{method:'POST'});}catch(error){cleanupErrors.push({stage:'revoke',error:diagnostic(error)});}}
  if(service&&!cleanupErrors.length){try{await api(`/api/services/${service.id}`,{method:'DELETE'});await api(`/api/namespaces/${namespace.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push({stage:'parents',error:diagnostic(error)});}}
+ if(namespace&&!service&&!cleanupErrors.length){try{await api(`/api/namespaces/${namespace.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push({stage:'namespace-without-service',error:diagnostic(error)});}}
  if(functions.length===9){try{nativeAfterPurge=await native('--purged');cleanup=nativeAfterPurge.completed&&!cleanupErrors.length;}catch(error){cleanupErrors.push({stage:'physical',error:diagnostic(error)});}}
  await save();if(work)await rm(work,{recursive:true,force:true});await caller?.dispose();await admin?.dispose();
 }
