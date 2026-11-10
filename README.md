@@ -1,5 +1,13 @@
 # P2Enjoy Serverless
 
+**La plateforme demandée n'est pas encore entièrement livrée.** Favoris,
+actions en masse, éditeur de code intégré, client HTTP par fonction, journaux
+avancés et monitoring historique restent à implémenter. Les crons et la
+compatibilité complète du projet de référence restent incomplets. Le moteur,
+la gestion, les versions et les preuves ciblées ne clôturent pas ces demandes.
+Voir [l'état réel de livraison](docs/DEMANDES_ET_LIVRAISON.md) avant les
+checkpoints techniques détaillés ci-dessous.
+
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification
 dans **[control/](control/README.md)** et **[web/](web/README.md)**. Une première

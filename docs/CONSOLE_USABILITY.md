@@ -11,8 +11,10 @@ La console possède la hiérarchie namespaces/services/fonctions, la publication
 ZIP avec handler, les révisions, les instances et les invocations. Les journaux
 expurgés se consultent dans le détail d’une invocation. Les mesures Docker
 actuelles sont des relevés manuels ; l’allocation et la consommation sont
-distinctes. Recherche globale, favoris, actions en masse, éditeur de fichiers,
-client HTTP intégré et monitoring historique restent à implémenter.
+distinctes. Le catalogue et la recherche globale SLS-067 sont implémentés et
+qualifiés à leur checkpoint. Favoris, actions en masse, éditeur de fichiers,
+client HTTP intégré, journaux avancés et monitoring historique restent à
+implémenter. Le [suivi des demandes](DEMANDES_ET_LIVRAISON.md) expose ces absences.
 
 Le parcours cible est : retrouver une fonction, lire sa configuration effective,
 modifier son code, publier, appeler sa véritable URL puis retrouver les journaux
@@ -190,11 +192,11 @@ révision. Les dates, filtres et liens permettent de partager le même diagnosti
 ## Livraison et preuves
 
 SLS-031 et SLS-065 sont qualifiées. Les URL SLS-066 sont déployées ; leurs
-preuves résiduelles de routes restent ouvertes. Le catalogue SLS-067 est
+preuves résiduelles de source restent ouvertes. Le catalogue SLS-067 est
 qualifié : 37 campagnes uniques / 489 groupes, deux époques de clients sur les
-mêmes images, 98 captures inspectées. L’autorisation bornée de console du SPARK
-est reçue pour la prochaine campagne de routes. Puis favoris, opérations en masse,
-éditeur/client HTTP et journaux/monitoring. Cette progression ne clôture ni
+mêmes images, 98 captures inspectées. Les campagnes de routes à deux puis six domaines ont été exécutées ; SLS-066
+conserve d'autres preuves résiduelles de source. Favoris, opérations en masse,
+éditeur/client HTTP et journaux/monitoring restent absents de l'implémentation. Cette progression ne clôture ni
 ne dispense les preuves restantes de SLS-066. Les vues de journaux et mesures
 existantes restent le socle des parcours intermédiaires.
 

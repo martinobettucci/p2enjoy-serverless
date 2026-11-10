@@ -11,10 +11,12 @@ Un namespace contient des services. Un service correspond à un déploiement
 et un nom unique dans son parent. Une fonction garde son UUID, ses données et
 son historique lors d'un changement de code. Les révisions sont immuables.
 
-Le [contrat des versions par hash](FUNCTION_VERSIONS.md), à livrer dans SLS-074,
-ajoute une identité de code déterministe, la déduplication des uploads, les
-appels d’une version précise et le pilote sans activation. Cette extension
-complète les révisions et le rollback existants ; elle reste à implémenter.
+Le [contrat des versions par hash](FUNCTION_VERSIONS.md), implémenté sur le
+contrôle008 dans SLS-074, ajoute une identité de code déterministe, la
+déduplication, les appels d'une version précise et le pilote sans promotion.
+API, CLI et console sont présentes ; la qualification complète reste ouverte.
+L'upload prépare une version, seule une promotion explicite change la cible
+appelée sans tag.
 
 La console et l'API de gestion partagent les mêmes règles d'autorisation.
 Les namespaces et services sont administrés par le SSO ; leurs fonctions
@@ -103,8 +105,10 @@ atomiquement les ressources avant démarrage. La marge du contrôle est exclue
 du budget des fonctions. Un timeout recycle le conteneur entier pour terminer
 les descendants. Docker ne redémarre pas seul une instance retirée du moteur.
 
-Un redéploiement laisse finir les appels déjà admis sur l'ancienne révision
-dans leur deadline ; les suivants utilisent la nouvelle. Un crash du contrôle
+Un upload prépare sa version sans déplacer la cible courante. La promotion
+explicite change la cible des nouveaux appels sans tag ; les appels déjà admis
+terminent leur instantané dans leur deadline. Les appels portant un hash restent
+épinglés à cette version tant qu'elle est disponible. Un crash du contrôle
 entraîne une réconciliation des seuls conteneurs étiquetés comme lui appartenant.
 Une invocation interrompue n'est jamais rejouée automatiquement : ses effets
 métier peuvent avoir eu lieu. Les crons utilisent UTC par défaut, un événement

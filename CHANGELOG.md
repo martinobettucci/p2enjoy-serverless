@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+### Réconciliation des demandes et de la livraison
+
+- Vue explicite des fonctions encore absentes : favoris, masse, éditeur, client
+  HTTP, journaux avancés et monitoring ; crons et compatibilité de référence
+  incomplets. Les synthèses de versionnement, recherche et routes sont corrigées.
+- Le README et le backlog exposent ces manques avant les checkpoints de tests.
+
+
 ### Préparation de la publication GitHub
 
 - Le briefing privé docs/dev-spark.md devient un fichier local ignoré ; son

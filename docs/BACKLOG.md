@@ -1,5 +1,17 @@
 # Backlog
 
+## État réel de livraison — revue du10 novembre2026
+
+[Demandes confirmées et état réel](DEMANDES_ET_LIVRAISON.md).
+Six demandes explicites sont spécifiées mais pas implémentées : favoris
+(SLS-068), opérations en masse (069), éditeur de code (070), client HTTP (071),
+journaux avancés (072) et monitoring historique (073). Les crons ne déclenchent
+pas encore (050), et la compatibilité d'exploitation du projet de référence
+reste à démontrer (030). Les écarts SSO et la campagne complète008 restent ouverts.
+Ces absences sont dans le périmètre obligatoire ; les preuves ciblées ne les
+remplacent pas. La reprise doit rendre concret le parcours éditer/publier/tester/
+diagnostiquer (070/071/072), sans retirer les autres exigences confirmées.
+
 ## Suivi des demandes du responsable
 
 Toute demande produit, correction ou contrainte reçue est inscrite ici dès sa
@@ -286,7 +298,7 @@ restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls compos
 
 ## SLS-060
 
-Statut : [~] — gestion, exécutions, manuel et publication livrés ; qualifications de purge/cache, crons, ergonomie avancée et campagne transversale ouverts.
+Statut : [~] — gestion, exécutions, manuel, publication et purge/cache présents ; crons, ergonomie avancée et qualification transversale restent ouverts.
 
 Parcours d'administration sur les API réelles : connexion, objets, jetons,
 code, variables/secrets, limites, état, stockage, historique et journaux.

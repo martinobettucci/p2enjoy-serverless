@@ -5241,3 +5241,21 @@ Les trois sélecteurs de sources sont remappés ; les identités d'attestations
 anciennes restent stables et source_revision précise la lecture actuelle.
 101 fichiers des vrais Gitarchive/show sont vérifiés, sansbuild ni déploiement.
 Aucun remote créé. Table et preuve conservées dans le dépôt publiable.
+
+## 10 novembre2026 — Revue des demandes après signalement d'oubli
+
+Le responsable signale que des spécifications et demandes semblent oubliées.
+La revue compare conversation, table de traçabilité, contrats, routes, modèles
+et composants. Les demandes explicites examinées sont inscrites ; six gros
+blocs UI restent toutefois totalement absents (068–073), les crons sont seulement
+déclarés et la compatibilité du projet de référence n'est pas démontrée. Le
+volume des preuves de moteur/stockage/versionnement masquait ces manques dans
+les comptes rendus. Cela ne vaut pas livraison du produit demandé.
+Écarts documentaires corrigés : PLATFORM disait hash à implémenter et bascule
+au redéploiement ; CONSOLE_USABILITY annonçait recherche absente et campagne de
+routes encore future. Les contrats redeviennent cohérents avec008 et ses limites.
+Une vue DEMANDES_ET_LIVRAISON et une alerte en tête README/backlog exposent les
+absences, les parties présentes et la qualification encore ouverte. Le parcours
+éditeur→publication→testeur→journaux reprend priorité, toutes les autres demandes
+restant obligatoires. Aucun nouveau comportement applicatif testé ou livré par
+cette revue documentaire ; aucune disponibilité distante réaffirmée sans preuve.
