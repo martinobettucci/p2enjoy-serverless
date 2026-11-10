@@ -1466,3 +1466,17 @@ combinaisons du OU jour/semaine, heures et mois. Les déclarations exclues ne
 doivent produire aucun tir de cette fenêtre. Les éventuels tirs préparatoires
 restent distincts. Le lecteur natif existant recoupe les identités et la purge
 publique des trois fonctions ; les rapports portent leur préfixe UUID propre.
+
+La reprise du moteur se qualifie ensuite par `node e2e/schedule-recovery.mjs`.
+Le [plan de coupures](../docs/SCHEDULE_RECOVERY.md) décrit les prérequis et les
+frontières observées. Le client utilise une session SSO réelle, publie une seule
+fonction originale, éprouve d'abord la garde indépendante après SIGKILL du
+traceur, puis coupe le contrôle DEV avant réclamation pendant trois fenêtres,
+après réclamation durable et après lien de l'invocation avant son handler.
+Chaque reprise est suivie d'une prochaine frontière exécutée normalement.
+Prévoir environ40 minutes d'horloge réelle. Le pilote natif
+`schedule-recovery-operator.py` doit être synchronisé sur le SPARK ; il conserve
+backup privé, identités, reçus de coupe et restitution dans ses dossiers bornés.
+Le client conserve chaque rapport UUID et ses stderr privés, restitue toutes
+les gardes avant nettoyage, puis purge par HTTPS et recoupe l'absence physique.
+Un échec conserve son rapport et n'entraîne aucun rejeu automatique.
