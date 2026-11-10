@@ -1545,3 +1545,18 @@ storage-recovery et la seule unité de garde : SQL RO, inode/modes/empreintes,
 commande/intention/reçu agent, processus exact, unités et ressources physiques.
 En cas de restitution inconnue, le banc conserve les ressources et échoue ;
 aucune purge n'est tentée. Contrat : [SCHEDULE_UNAVAILABLE](../docs/SCHEDULE_UNAVAILABLE.md).
+
+## Maximum individuel et instances planifiées déjà prêtes
+
+`node e2e/schedule-instance-reuse.mjs`, seul sur le SPARK au repos avec session
+SSO réelle, publie deux fonctions originales : minimum1 préchauffé sans appel,
+et maximum1 occupé par un HTTP non exclusif. À la première frontière, le minimum
+est réutilisé et l'autre tir refuse sans invocation, budgets globaux encore libres.
+À la suivante, les deux tirs utilisent exactement les mêmes instances/CID.
+Quatre groupes, deux fenêtres réelles (environ10 minutes) ; les minima et idles
+sont libérés avant les deux purges publiques. Aucun budget de cellule changé.
+
+Le lecteur `schedule-instance-reuse-inspect.py` recoupe les deux UUID, files,
+réservations, Docker, baux et canaux, y compris le préchauffage sans invocation.
+Sources/images figées, nettoyage après terminaison des HTTP, aucun mock ni skip.
+Contrat : [SCHEDULE_INSTANCE_REUSE](../docs/SCHEDULE_INSTANCE_REUSE.md).

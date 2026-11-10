@@ -217,3 +217,12 @@ l'UUID et les métadonnées publiques d'exécution. Le journal du tir suivant
 recoupe la donnée conservée et le cache absent après sa commande réelle.
 Le client `node e2e/schedule-unavailable.mjs` passe par les API de plateforme,
 Docker et FUSE ; contrat : [SCHEDULE_UNAVAILABLE](../docs/SCHEDULE_UNAVAILABLE.md).
+
+## Fixture du maximum et de la réutilisation planifiés
+
+`artifacts/scheduled-capacity.cjs` attend au plus45s sur une date de libération
+fournie au HTTP ; les tirs planifiés terminent immédiatement. Ses marqueurs
+publics recoupent UUID, trigger/slot, méthode/corps et dates de début/fin dans
+le runtime réel. Le client `node e2e/schedule-instance-reuse.mjs` compare les
+instances/CID avant et après les frontières ; contrat :
+[SCHEDULE_INSTANCE_REUSE](../docs/SCHEDULE_INSTANCE_REUSE.md).
