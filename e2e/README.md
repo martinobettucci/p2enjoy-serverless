@@ -1454,3 +1454,15 @@ artefacts originaux et fichiers officiels. Les rapports privés portent le
 préfixe `scheduled-functions-<UUID court>` ; les éventuels tirs préparatoires
 restent distincts des quatre fenêtres retenues. Aucun état Git ou service
 n'est modifié par le lecteur natif.
+
+La grammaire numérique se qualifie séparément par
+`node e2e/schedule-calendar.mjs`, avec la session SSO réelle et le SPARK au repos.
+Le client passe par les commandes réelles plan/package, publie leurs événements
+et promeut trois fonctions utilisant le handler original scheduled-event.cjs.
+Il prépare une fenêtre UTC complète avant ses nominaux, vérifie les refus422
+des expressions invalides, compare les prévisions dimanche0/7, date impossible
+et29février, puis recoupe huit handlers attendus : listes, plages, pas,
+combinaisons du OU jour/semaine, heures et mois. Les déclarations exclues ne
+doivent produire aucun tir de cette fenêtre. Les éventuels tirs préparatoires
+restent distincts. Le lecteur natif existant recoupe les identités et la purge
+publique des trois fonctions ; les rapports portent leur préfixe UUID propre.
