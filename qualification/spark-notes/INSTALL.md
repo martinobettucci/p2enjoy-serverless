@@ -693,3 +693,6 @@ et de rejeu. Six groupes réels passent ; le complément
 `node e2e/schedule-versions.mjs` passe cinq groupes pour promotions/retour de hash,
 retrait, désactivation et suppression sur quatre frontières réelles. Les preuves
 de pannes, recouvrement et saturation restent ouvertes dans SLS-078.
+`node e2e/schedule-calendar.mjs` passe cinq groupes distincts pour la grammaire
+numérique : plan/package, refus, prévisions puis huit tirs de fenêtre recoupés.
+Dimanche0/7 et29février sont des aperçus API qualifiés ; leur horloge n'est pas modifiée.

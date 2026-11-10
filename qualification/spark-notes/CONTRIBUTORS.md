@@ -764,3 +764,8 @@ Le cycle des versions planifiées est qualifié sans nouveau déploiement :
 `docs/evidence/schedule-versions-dev-2026-11-10.json`, cinq groupes sur307 sources,
 cinq handlers, trois fonctions purgées. ID/images/démarrages, configuration
 officielle et5982 artefacts conservés, actifs et réservations à zéro.
+
+La grammaire numérique est qualifiée sur308 sources : cinq groupes du client
+final, huit tirs de fenêtre et trois fonctions purgées. Le premier passage et
+ses trois purges sont distincts. Preuve :
+`docs/evidence/schedule-calendar-dev-2026-11-10.json`. Même produit et configuration.

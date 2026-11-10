@@ -238,7 +238,7 @@ compilé concorde avec16 chapitres et56 paragraphes : SLS-096 est clos.
 
 Le cycle promotions/retour de hash/retrait et suppression autour des fenêtres
 est qualifié séparément ci-dessous. Reprendre dans cette unité : SIGKILL et arrêt multi-fenêtres ; recouvrement, saturation
-et stockage exclusif occupé ; grammaire complète et règle jour/semaine ;
+et stockage exclusif occupé ;
 rétention réelle, dont l'invocation source conservée jusqu'à clôture ; états
 UI vide/erreur/longs et pagination. La régression complète reste à exécuter.
 Les noms de mois et de jours sont suivis séparément dans SLS-098.
@@ -267,3 +267,31 @@ ressources actives et réservations à zéro. Aucun build produit, changement
 d'interface ou de manuel ; aucune nouvelle capture revendiquée. Les22 groupes
 du checkpoint précédent restent séparés, sans rejeu prétendu. SLS-078.3 est
 qualifiée ; l'unité reste ouverte pour ses autres critères.
+
+## Grammaire numérique et calendrier
+
+Le [rejeu du 10 novembre2026](evidence/schedule-calendar-dev-2026-11-10.json)
+passe cinq groupes sur308 sources figées, client7b2c99e et même image b9ad872a.
+Plan/package réels, événements publiés puis promus : listes de minutes et
+d'heures, plage avec pas, pas sur nombre, mois par plage et pas. À17:15 UTC,
+huit handlers recoupent les nominaux et leur fusion ; jour seul vrai, semaine
+seule vraie et les deux vrais déclenchent une seule fois. Les deux faux,
+jour faux/semaine `*` et mois exclu ne produisent aucun tir de cette fenêtre.
+
+Les API réelles refusent douze expressions invalides. Leurs prévisions donnent
+le même prochain dimanche pour0 et7, aucune date pour le31février et le
+prochain29février exact. Ces dates futures sont des aperçus qualifiés, sans
+invocation prétendue ces jours-là. Les assertions encadrent la lecture par le
+curseur, l'activation et la borne temporelle d'éligibilité, pour conserver un
+nominal en attente et exclure un nominal trop ancien.
+
+Le replay final compte15 handlers réussis :8 de la fenêtre retenue et7
+préparatoires, distingués. Trois fonctions sont purgées physiquement. Le premier
+passage vert au client98f747c conserve ses propres15 handlers et trois purges,
+hors total des cinq groupes retenus : l'assertion de borne temporelle a ensuite
+été renforcée et la campagne entière rejouée. Les six fonctions des deux essais
+sont recoupées ; réservations et actifs nuls,34 backends conformes,5982 artefacts
+antérieurs et identités/images/démarrages/fichiers officiels conservés.
+Aucun changement produit, manuel ou interface, aucune nouvelle capture.
+SLS-078.2 est qualifiée ; interruptions, recouvrement, saturation, exclusif,
+rétention, états UI et régression complète restent ouverts.

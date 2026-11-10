@@ -13,6 +13,10 @@
   pilote, promotion, retour de hash, retrait, désactivation et suppression ;
   cinq handlers conservent leur code admis, trois fonctions purgées physiquement.
   SLS-078.3 est qualifiée sur la même image ; les autres critères restent ouverts.
+- Grammaire numérique qualifiée par cinq groupes réels sur le client final :
+  huit tirs de fenêtre, fusion et règle jour/semaine, douze refus d'expressions,
+  prévisions dimanche0/7 et dates limites. SLS-078.2 est qualifiée ; premier
+  passage et rejeu final conservent leurs rapports et leurs purges séparés.
 
 
 ### Méthode, parité Scaleway et planifications (documentation)

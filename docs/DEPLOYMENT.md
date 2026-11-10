@@ -477,3 +477,9 @@ qualifie cinq groupes sans nouvelle construction ni redémarrage : les mêmes
 ID/images/démarrages et fichiers officiels sont recoupés avant/après. Les trois
 fonctions de campagne sont purgées,5982 artefacts antérieurs conservés ; aucun
 paramètre ou schéma supplémentaire. Les autres preuves de SLS-078 restent ouvertes.
+
+La [grammaire numérique](evidence/schedule-calendar-dev-2026-11-10.json) passe
+cinq groupes sur le client final et308 sources figées, sans build ni redémarrage.
+Les mêmes identités et fichiers officiels sont conservés ; trois fonctions du
+rejeu et trois du premier passage sont purgées,5982 artefacts antérieurs intacts.
+Les prévisions de dates futures ne sont pas des invocations à ces dates.

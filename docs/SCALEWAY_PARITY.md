@@ -86,9 +86,13 @@ déjà prise et documentée, avec motif).
 
 | Fonctionnalité Scaleway | État de la plateforme | Unité ou décision |
 | --- | --- | --- |
-| CRON : UTC, au plus une fois par minute, arguments JSON envoyés en `POST` sur `/` | **Partiel, en qualification** : moteur de manifeste déployé, résolution de **5 minutes** voulue par le responsable ; arguments de jobs et noms de mois/jours à livrer | [SLS-078](BACKLOG.md#sls-078), [SLS-081](BACKLOG.md#sls-081), [SLS-098](BACKLOG.md#sls-098) |
+| CRON : UTC, au plus une fois par minute, arguments JSON envoyés en `POST` sur `/` | **Partiel, en qualification** : moteur de manifeste déployé, [grammaire numérique qualifiée](evidence/schedule-calendar-dev-2026-11-10.json), résolution de **5 minutes** voulue par le responsable ; arguments de jobs et noms de mois/jours à livrer | [SLS-078](BACKLOG.md#sls-078), [SLS-081](BACKLOG.md#sls-081), [SLS-098](BACKLOG.md#sls-098) |
 | Queue (Scaleway Queues) : retry jusqu'à 3 fois si statut ≥ 300, 10 messages en vol | **À livrer** plus tard ; aucun service de messagerie dans le SPARK DEV | [SLS-085](BACKLOG.md#sls-085) |
 | NATS : un appel par message du sujet | **À livrer** plus tard, même dépendance | [SLS-085](BACKLOG.md#sls-085) |
+
+La [référence des crons](https://www.scaleway.com/en/docs/serverless-jobs/reference-content/cron-schedules/)
+est revérifiée le10 novembre2026 avec le complément numérique : les exemples
+nommés `WED`, `MON-FRI` et `DEC` maintiennent l'écart SLS-098 ouvert.
 
 ### Exploitation
 

@@ -19,6 +19,9 @@ qualifie les cycles de promotion/retour de hash, le retrait des crons et l'arrê
 après désactivation ou suppression, en conservant les appels admis.
 Les pannes, saturation et autres critères de SLS-078 restent ouverts.
 SLS-096 (concordance du manuel) est corrigée et vérifiée.
+La [grammaire numérique des crons](docs/evidence/schedule-calendar-dev-2026-11-10.json)
+passe aussi cinq groupes distincts : fusion, règle jour/semaine, refus et
+prévisions calendaires ; SLS-078.2 est qualifiée.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

@@ -130,3 +130,15 @@ après suppression au-delà du404 public. [Preuve](evidence/schedule-versions-de
 Même image, ID et démarrages,34 backends, configuration officielle et5982
 artefacts conservés ; aucune nouvelle preuve visuelle. Les22 groupes précédents
 ne sont pas rejoués ni ajoutés à ces cinq groupes. SLS-078.3 est qualifiée.
+
+Grammaire numérique : `node e2e/schedule-calendar.mjs`, cinq groupes du client
+final7b2c99e sur308 sources figées. À17:15 UTC, huit tirs et leurs fusions
+recoupent listes/plages/pas, OU jour/semaine, heure/mois ; les déclarations
+exclues n'ont aucun tir. Douze422 réels et les prévisions dimanche0/7,
+31février impossible et prochain29février complètent cette
+[preuve](evidence/schedule-calendar-dev-2026-11-10.json). Les dates futures
+sont des aperçus API, sans handler prétendu ces jours-là. Quinze handlers du
+replay, dont sept préparatoires ; trois fonctions purgées. Le premier passage
+vert, puis renforcé sur sa borne d'aperçu, conserve15 autres handlers et trois
+purges, sans addition de groupes. Même image/ID/démarrages,34 backends et5982
+artefacts conservés ; aucune nouvelle capture. SLS-078.2 est qualifiée.

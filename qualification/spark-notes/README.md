@@ -659,6 +659,8 @@ Planifications affiche prochains créneaux et résultats. Le checkpoint corrigé
 passe six groupes réels, plus huit du manuel et huit publics. Un complément
 distinct de cinq groupes qualifie pilote, promotion, retour de hash, retrait,
 désactivation et suppression ; les appels admis terminent avec leur code initial.
+La grammaire numérique passe aussi cinq groupes distincts : huit tirs de fenêtre,
+fusion et règle jour/semaine, douze refus et prévisions calendaires réelles.
 SLS-078 reste en qualification pour interruptions, recouvrement, saturation,
 rétention et états de console complémentaires. Le manuel affiché est recoupé
 à sa source : seize chapitres et 56 paragraphes.

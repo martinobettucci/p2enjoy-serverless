@@ -5427,3 +5427,26 @@ L'exploration en lecture seule identifie les transactions claim/curseur puis
 invocation/lien et les arrêts syscall qui les séparent. Le helper HTTP existant
 ne reconnaît pas cette fenêtre interne ; un observateur natif dédié reste à
 réaliser et éprouver, sans endpoint artificiel ni modification des résultats.
+
+## 10 novembre2026 — Grammaire des crons et calendrier réels
+
+SLS-078.2 reprend son contrat existant. Le client98f747c passe cinq groupes,
+puis sa borne d'aperçu est renforcée après revue : curseur, activation et
+éligibilité temporelle encadrent la vraie requête, sans supposer tout nominal
+strictement futur. Le client final7b2c99e repasse les cinq groupes sur308 sources
+figées. À17:15 UTC : huit handlers pour listes/plages/pas et règle jour OU
+semaine, fusions et négatifs recoupés en base ; douze422, dimanche0/7,
+date impossible et29février vérifiés via les API réelles. Les dates futures
+sont des prévisions, pas des exécutions prétendues à ces dates.
+
+Chaque campagne compte15 handlers, dont7 préparatoires et8 de sa fenêtre.
+Le premier passage reste distinct du replay retenu, sans addition des groupes.
+Six fonctions purgées physiquement dans deux namespaces,34 backends conformes,
+5982 artefacts et identités/images/démarrages/fichiers officiels conservés,
+actifs et réservations à zéro. Aucun produit, UI, manuel ni image modifié.
+Preuve : evidence/schedule-calendar-dev-2026-11-10.json. La référence cron
+Scaleway est revérifiée ; noms de mois/jours toujours suivis dans SLS-098.
+
+Reprendre SLS-078 : SIGKILL autour de claim et reprise multi-fenêtres,
+recouvrement, saturation, exclusif, rétention, états UI et régression complète.
+Le registre d'incohérences reste absent ; aucune nouvelle unité hors périmètre.

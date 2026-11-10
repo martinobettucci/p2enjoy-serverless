@@ -1488,6 +1488,9 @@ huit du manuel et huit publics. Le manuel conforme SLS-096 est clos ; les critè
 restants de cette unité demeurent ouverts. Le [cycle des versions planifiées](evidence/schedule-versions-dev-2026-11-10.json)
 qualifie séparément cinq groupes : pilote, promotion, retour de hash, retrait,
 désactivation et suppression ; les appels admis conservent leur code.
+La [grammaire numérique](evidence/schedule-calendar-dev-2026-11-10.json) est
+qualifiée par cinq autres groupes sur le client final : huit tirs de la fenêtre,
+douze refus et prévisions calendaires, trois fonctions purgées.
 Nature : Développer. Dépend de : SLS-040 (admission), SLS-074 (cible promue).
 Débloque : SLS-080, SLS-081, SLS-073. Ordre : 1.
 Contrat : [SCHEDULES](SCHEDULES.md).
@@ -1499,7 +1502,7 @@ Critères d'acceptation :
 
 - [x] SLS-078.1 Preuve : [checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json). Réveil aux frontières UTC de 5 minutes ; un créneau nominal de la fenêtre
   écoulée est lancé à la frontière suivante ; jamais en avance ; retard consigné.
-- [ ] SLS-078.2 Plusieurs créneaux d'une même fenêtre fusionnés en un tir (`coalesced`) ;
+- [x] SLS-078.2 Preuve : [calendrier numérique](evidence/schedule-calendar-dev-2026-11-10.json). Plusieurs créneaux d'une même fenêtre fusionnés en un tir (`coalesced`) ;
   syntaxe cinq champs (listes, plages, pas, `*`, dimanche 0 ou 7) ; jour du mois OU jour de
   la semaine quand les deux sont restreints.
 - [x] SLS-078.3 Preuve : [cycle réel des versions](evidence/schedule-versions-dev-2026-11-10.json). Cible = version promue (pilote jamais déclenché) ; promotion, retour à un hash
