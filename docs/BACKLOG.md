@@ -1514,6 +1514,8 @@ compteur conservé et aucun rejeu. Quatre handlers réussis, trois fonctions pur
 SLS-078.4/.5 restent ouvertes pour le plafond global d'instances (préalable
 SLS-099), autres refus résiduels et rétention ; états UI et régression complète
 restent ouverts. Aucun changement produit, budget officiel ni nouvelle capture.
+Suite des refus de files : [SCHEDULE_QUEUES](SCHEDULE_QUEUES.md), à qualifier sur
+les plafonds réels16 par fonction/128 globaux, sans modifier ces budgets.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.

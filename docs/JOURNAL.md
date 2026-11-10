@@ -5639,3 +5639,12 @@ hors périmètre), puis garde indépendante et tous les cycles nominaux/pannes.
 Le refus n'est pas une restitution qualifiée ; aucun écrasement/SIGKILL n'est
 prétendu reproduit. Reprendre les preuves indépendantes SLS-078 : refus résiduels,
 rétention, états UI et régression ; le plafond global attend099.
+
+## 10 novembre2026 — Préparer les refus des files planifiées
+
+Reprise078, main propre à e405c5f, aucune capacité externe encore fournie pour099.
+Lecture du moteur : schedule_capacity précède queue_full ; des réceptions sans
+instance isolent donc les plafonds d'attente. Plan SCHEDULE_QUEUES avant code :
+neuf fonctions originales,16 réceptions sur cible0 à W,128 réparties sur0–7
+avec cible8 libre à W+300, puis deux tirs sains W+600. Les vrais corps incomplets
+et leur délai30s restent inchangés. Aucun budget, image ou configuration modifié.
