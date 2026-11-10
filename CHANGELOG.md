@@ -2,6 +2,18 @@
 
 ## [Non publié]
 
+### Méthode, parité Scaleway et planifications (documentation)
+
+- `docs/.routine` et le rôle `factory_verifier` sont restaurés à l'identique de la
+  méthode ; CloudWorker est adapté au SPARK DEV dans `CLAUDE_PROJECT.md`.
+- Contrats persistés : moteur de planification (SLS-078), jobs de console avec
+  gabarits (SLS-081), parité sourcée avec Scaleway Serverless (SLS-082 à 088),
+  compatibilité du projet de référence (SLS-080), exploitation (SLS-079), plan de
+  reprise `docs/OBJECTIF_AUTONOME.md`.
+- Le manuel indique que les planifications du manifeste sont enregistrées mais pas
+  encore déclenchées ; la console déployée l'affichera à sa prochaine reconstruction.
+  Aucun comportement applicatif ne change dans cette entrée.
+
 ### Réconciliation des demandes et de la livraison
 
 - Vue explicite des fonctions encore absentes : favoris, masse, éditeur, client

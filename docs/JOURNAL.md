@@ -5259,3 +5259,65 @@ absences, les parties présentes et la qualification encore ouverte. Le parcours
 éditeur→publication→testeur→journaux reprend priorité, toutes les autres demandes
 restant obligatoires. Aucun nouveau comportement applicatif testé ou livré par
 cette revue documentaire ; aucune disponibilité distante réaffirmée sans preuve.
+
+## 10 novembre 2026 — Écarts de méthode, parité Scaleway, crons et jobs
+
+**Problème.** Le responsable demande de vérifier ce qui a été raté des demandes,
+signale que `docs/.routine` n'a pas été reporté depuis sa méthode, puis précise
+trois demandes : les « serverless jobs » (payload fixe, gabarits composés dans
+l'UI, expression crontab contrôlée par fenêtres de 5 minutes), l'idée générale de
+répliquer toutes les fonctionnalités de Scaleway Serverless, et l'exploitation
+reproductible.
+
+**Observations.** `docs/.routine` existait mais avait été remplacé par un texte
+« routine inactive » (224 octets contre 1 884 à l'original, blob `715d2d3c`) sans
+demande du responsable ni entrée de journal ; le rôle `factory_verifier` avait été
+amputé de Bash ; deux documents affirmaient l'absence de remote alors qu'`origin`
+existe. `CloudWorker.md`, `CLAUDE.md` et `DESIGN_SYSTEM.md` étaient identiques à
+l'original, dont `main` n'a pas bougé. Le projet de référence planifie deux de ses
+treize fonctions (`0 21 * * 1-6`, `0 7-20 * * 1-6`) : l'adaptateur les accepte, rien
+ne les déclenche, sans avertissement. `adapter plan` sur les manifestes réels
+passe seulement avec `--runtime node24 --accept-provider-differences`. Ses handlers
+ont besoin de sorties réseau (HTTPS, PostgreSQL, RPC, SMTP), de `JSON.parse` sur
+chaque corps, et construisent leur propre CORS que la passerelle retire. Les
+minima totalisent 14 instances ; au CPU par défaut de l'adaptateur (0,25) cela
+demande 3,5 CPU pour un budget de 1 CPU par défaut dans le code. Les limites de
+la plateforme sont plus basses que celles de Scaleway (corps 1 Mio contre 6,
+archive 64 Mio contre 100, variables 128 × 16 Kio contre 200 × 64 Kio) et
+`X-Real-IP`, `X-Forwarded-*`, `X-Request-ID` ne sont pas injectés.
+
+**Décisions** (motifs : simplicité uniforme, moindre coût utilisateur, réversibilité).
+
+1. `docs/.routine` et `factory_verifier` sont restaurés à l'identique ; seule
+   l'en-tête de traçabilité est adaptée. CloudWorker s'applique avec les
+   adaptations de CLAUDE_PROJECT (pile = SPARK DEV). Autres issues écartées :
+   laisser le stub (contraire à la demande), supprimer CloudWorker (document de
+   méthode intouchable).
+2. Un seul moteur de planification pour les crons du manifeste et les jobs de la
+   console, fenêtres de 5 minutes alignées UTC, jamais en avance, créneaux fusionnés
+   dans une fenêtre, aucun rattrapage ni rejeu. Écartées : une scrutation à la
+   seconde (coût, non demandée), deux ordonnanceurs (comportements divergents).
+3. Les jobs sont le déclencheur CRON avec arguments JSON de Scaleway : payload à
+   gabarits d'une liste fermée, sans secret ni expression ; ils suivent la version
+   promue ; corps envoyé en `POST` sur `/`, comme Scaleway.
+4. Le CPU par défaut de l'adaptateur dérive du palier mémoire Scaleway
+   (70 mvCPU par 128 Mio) quand `p2enjoy.cpu` est absent ; l'écart de budget de
+   cellule est une proposition `.?`. Écarté : conserver 0,25 CPU pour toutes les instances, qui refuse la publication complète de la référence.
+5. La parité avec Scaleway est suivie par une matrice sourcée (documentation
+   open source de Scaleway, le site refusant l'accès automatisé) et des unités
+   083 à 088. Le jeton obligatoire (pas de fonction publique anonyme), les routes
+   de domaines du SPARK et la résolution de 5 minutes sont des écarts assumés.
+6. Le guide d'exploitation n'est pas écrit à partir de commandes non rejouées :
+   SLS-079 impose un rejeu sur une installation temporaire.
+
+**Conséquences.** Unités SLS-078 à SLS-088 ajoutées, contrats SCHEDULES,
+SERVERLESS_JOBS, SCALEWAY_PARITY, REFERENCE_COMPATIBILITY, OPERATIONS persistés, plan
+OBJECTIF_AUTONOME avec le texte du goal. Le manuel dit que les planifications ne
+sont pas encore déclenchées ; la console déployée l'affichera à sa prochaine
+reconstruction. Lien mort vers le briefing privé corrigé.
+
+**Vérifications.** Harnais réel des garde-fous Git rejoué après la restauration :
+45 succès, zéro échec. Audit de la référence en lecture seule ; `adapter plan`
+exécuté sans écriture ni envoi. Aucun build, déploiement ni E2E de plateforme dans
+cette passe : tout comportement nouveau reste non livré. Le push n'a pas pu être
+effectué depuis cet environnement faute d'identifiants GitHub.

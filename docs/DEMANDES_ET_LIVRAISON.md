@@ -7,7 +7,8 @@ vérification de disponibilité de l'installation distante.
 
 ## Ce qui manque dans le produit
 
-Six demandes explicites restent à implémenter, même si leurs contrats existent :
+Onze demandes explicites restent à implémenter ou à démontrer, même si leurs
+contrats existent :
 
 | Demande | État constaté | Suivi |
 | --- | --- | --- |
@@ -17,16 +18,22 @@ Six demandes explicites restent à implémenter, même si leurs contrats existen
 | Client HTTP intégré par fonction, type Postman | Catalogue d'URL/copie présent ; facette de test, requête et réponse interactives absentes | SLS-071 |
 | Logging d'exploitation | Logs par invocation présents ; recherche, période, suivi, export et vue de service absents | SLS-072 |
 | Monitoring | Relevés Docker ponctuels présents ; séries historiques, tableaux de bord et alertes absents | SLS-073 |
-
-Deux points structurants restent également incomplets : les schedules sont
-acceptés et stockés, mais aucun ordonnanceur ne déclenche les crons (SLS-050) ;
-la compatibilité d'exploitation avec le projet de référence n'a pas sa matrice
-complète ni sa démonstration par contrats reproduits dans les fixtures originales
-(SLS-030). Les nombreux tests du moteur ne ferment pas ces deux exigences.
+| Planifications (crons) du manifeste | Acceptées et stockées, **jamais déclenchées** ; aucun avertissement de l'adaptateur (limite désormais dite dans le manuel) | SLS-078 |
+| Jobs serverless : payload fixe, gabarits composés dans l'UI, crontab par fenêtres de 5 minutes | Absents | SLS-081 |
+| Parité avec toutes les fonctionnalités de Scaleway Serverless | Matrice sourcée établie ; limites, en-têtes, runtimes, déclencheurs de messages et autres écarts ouverts | SLS-082 à SLS-088 |
+| Compatibilité démontrée du projet de référence | Audit et matrice faits ; fixtures et preuves absentes ; capacité CPU à adapter | SLS-080 |
+| Exploitation complète et reproductible | Informations dispersées dans des comptes rendus de campagne ; guide rejoué absent | SLS-079 |
 
 Ces travaux appartiennent au périmètre confirmé. Ils n'attendent pas une nouvelle
 demande du responsable. Une unité inscrite dans le backlog n'est pas une unité
 livrée, et un nombre de groupes de tests ne mesure pas la couverture du produit.
+
+## Méthode importée
+
+`docs/.routine` et le rôle `factory_verifier` avaient été remplacés par des
+versions affaiblies sans que le responsable l'ait demandé. Ils sont restaurés à
+l'identique de l'original le 10 novembre 2026 ; voir
+[SLS-000](BACKLOG.md#sls-000) et [METHODE](METHODE.md).
 
 ## Traçabilité des autres demandes
 
@@ -66,10 +73,13 @@ sont actualisées. La qualification globale reste ouverte.
 
 ## Priorité de reprise
 
-Le parcours encore manquant éditer→publier→tester→diagnostiquer doit redevenir
-visible dans l'avancement : SLS-070, SLS-071 et SLS-072. Favoris, opérations en
-masse, monitoring et crons restent obligatoires dans SLS-068/069/073/050.
-La compatibilité du manifeste de référence, les écarts SSO et la campagne E2E
-complète demeurent des critères de clôture, pas des demandes optionnelles.
-Les vérifications accompagnent ces livraisons et restent liées aux sources et
-images effectivement testées.
+L'ordre détaillé est dans [OBJECTIF_AUTONOME](OBJECTIF_AUTONOME.md) : moteur de
+planification (SLS-078), puis le parcours éditer→publier→tester→diagnostiquer
+(SLS-070, 071, 072), les jobs de console (SLS-081), les limites et la compatibilité
+de la référence (SLS-083, 080), favoris et opérations en masse (SLS-068, 069),
+monitoring (SLS-073), guide d'exploitation rejoué (SLS-079), clôture de SLS-074,
+066 et des écarts SSO, enfin les unités de parité restantes (SLS-084 à 088). La
+compatibilité du manifeste de référence, les écarts SSO et la campagne E2E
+complète demeurent des critères de clôture, pas des demandes optionnelles. Les
+vérifications accompagnent ces livraisons et restent liées aux sources et images
+effectivement testées.

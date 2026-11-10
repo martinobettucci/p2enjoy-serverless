@@ -2,11 +2,14 @@
 
 **La plateforme demandée n'est pas encore entièrement livrée.** Favoris,
 actions en masse, éditeur de code intégré, client HTTP par fonction, journaux
-avancés et monitoring historique restent à implémenter. Les crons et la
-compatibilité complète du projet de référence restent incomplets. Le moteur,
-la gestion, les versions et les preuves ciblées ne clôturent pas ces demandes.
-Voir [l'état réel de livraison](docs/DEMANDES_ET_LIVRAISON.md) avant les
-checkpoints techniques détaillés ci-dessous.
+avancés et monitoring historique restent à implémenter. Les crons du manifeste
+sont enregistrés mais **jamais déclenchés** ; les jobs de console, la compatibilité
+complète du projet de référence, la parité avec Scaleway Serverless
+([matrice](docs/SCALEWAY_PARITY.md)) et un guide d'exploitation rejoué restent à
+livrer. Le moteur, la gestion, les versions et les preuves ciblées ne clôturent pas
+ces demandes. Voir [l'état réel de livraison](docs/DEMANDES_ET_LIVRAISON.md) et le
+[plan de reprise](docs/OBJECTIF_AUTONOME.md) avant les checkpoints techniques
+détaillés ci-dessous.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

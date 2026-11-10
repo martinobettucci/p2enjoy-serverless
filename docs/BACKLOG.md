@@ -6,8 +6,11 @@
 Six demandes explicites sont spécifiées mais pas implémentées : favoris
 (SLS-068), opérations en masse (069), éditeur de code (070), client HTTP (071),
 journaux avancés (072) et monitoring historique (073). Les crons ne déclenchent
-pas encore (050), et la compatibilité d'exploitation du projet de référence
-reste à démontrer (030). Les écarts SSO et la campagne complète008 restent ouverts.
+pas encore ([SLS-078](#sls-078)), les jobs de console n’existent pas
+([SLS-081](#sls-081)) et la compatibilité d'exploitation du projet de référence
+reste à démontrer ([SLS-080](#sls-080)). L’objectif est la parité avec Scaleway
+Serverless ([SLS-082](#sls-082)) et un guide d’exploitation rejoué
+([SLS-079](#sls-079)). Les écarts SSO et la campagne complète008 restent ouverts.
 Ces absences sont dans le périmètre obligatoire ; les preuves ciblées ne les
 remplacent pas. La reprise doit rendre concret le parcours éditer/publier/tester/
 diagnostiquer (070/071/072), sans retirer les autres exigences confirmées.
@@ -49,11 +52,21 @@ leurs preuves font autorité dans le détail de chaque unité.
 | Logging, recherche et corrélation des journaux | [SLS-072](#sls-072) |
 | Monitoring historique et alertes | [SLS-073](#sls-073) |
 | Version par hash du code changé, upload identique dédupliqué, invocation épinglée, rollback et pilote stable | [SLS-074](#sls-074), [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
+| Méthode importée fidèlement : `docs/.routine` et rôles d’origine | [SLS-000](#sls-000), [METHODE](METHODE.md) |
+| Planifications (crons) du manifeste, réellement déclenchées | [SLS-078](#sls-078), [SCHEDULES](SCHEDULES.md) |
+| Jobs serverless : payload fixe, gabarits composés dans l’UI, expression crontab contrôlée par fenêtres de 5 minutes | [SLS-081](#sls-081), [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
+| Répliquer toutes les fonctionnalités de Scaleway Serverless | [SLS-082](#sls-082) et unités 083 à 088, [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
+| Compatibilité du projet de référence établie par contrats et fixtures | [SLS-080](#sls-080), [REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md) |
+| Exploitation complète et reproductible, guide rejoué | [SLS-079](#sls-079), [OPERATIONS](OPERATIONS.md) |
 
 ## SLS-000
 
 Statut : [x] — socle importé, hooks standard activés, 45 contrôles Git réels
 réussis. Provenance : [factory-import.json](evidence/factory-import.json).
+`docs/.routine` et le rôle `factory_verifier` sont identiques à l’original (seule
+l’en-tête de traçabilité est adaptée) depuis le 10 novembre 2026 ; le harnais a
+été rejoué : 45 succès, zéro échec. CloudWorker s’applique avec les adaptations de
+[CLAUDE_PROJECT](../CLAUDE_PROJECT.md#adaptation-de-cloudworker).
 
 Importer le socle opérationnel de `P2Enjoy/software-factory-base` au commit
 `886ba5a28a834a5f08fd1a01ec8dd78787317559`, sans formation, publication de
@@ -197,6 +210,8 @@ en lecture seule du manifeste, des contrats de handlers, dépendances, événeme
 variables et secrets ; matrice des comportements pris en charge, adaptations
 nécessaires et écarts bloquants. Reproduire ces contrats avec des fixtures
 originales du dépôt et les déployer/invoquer réellement sur la plateforme.
+L’audit et la matrice sont faits (10 novembre) ; les fixtures et leurs preuves
+E2E relèvent de [SLS-080](#sls-080).
 La preuve identifie les adaptations nécessaires au client, dont le jeton
 d’invocation ; les résultats du banc seuls ne valent pas compatibilité complète.
 La déduplication des uploads, le hash public, la publication sans activation
@@ -286,8 +301,8 @@ La [preuve du raccordement](evidence/function-storage-dev-2026-11-06.json)
 recoupe aussi les régressions et la console. Les admissions et observations API sont éprouvées par les 31 groupes publics
 de la [preuve du moteur](evidence/execution-dev-2026-11-06.json). Les
 commandes publiques de purge/cache et leurs vues de console sont déployées
-et qualifiées dans SLS-065. Les crons restent
-à réaliser.
+et qualifiées dans SLS-065. Les crons sont portés par [SLS-078](#sls-078) et les
+jobs de console par [SLS-081](#sls-081) ; aucun tir n’existe aujourd’hui.
 Les quotas préparés et leurs reçus sont
 implémentés ; la preuve initiale de dix groupes vérifie décisions, réservations, SIGKILL pendant
 préparation et reprise d'abandon partiel avec conservation des données.
@@ -1187,3 +1202,154 @@ Retrait vérifié sur263 commits et deux instantanés internes de type tree :
 autres entrées et métadonnées conservées, briefing local intact et ignoré,
 blob absent après collecte, trois sélecteurs historiques remappés et101fichiers
 relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-10.json).
+
+
+<a id="sls-078"></a>
+## SLS-078 — Moteur de planification des crons
+
+Statut : [ ] — contrat défini ([SCHEDULES](SCHEDULES.md)), moteur à réaliser. La
+limite est déjà dite dans le manuel (`docs/manual.md`, chapitre de l’adaptateur) ;
+la console déployée affichera ce texte à sa prochaine reconstruction.
+
+Déclencher réellement les `events: - schedule` du manifeste : expression UTC à cinq
+champs contrôlée **par fenêtres de 5 minutes** (décalage de 0 à 5 minutes, jamais de
+tir en avance, créneaux d’une même fenêtre fusionnés), cible = version promue,
+corps `{}` en `POST /`, aucun rejeu ni rattrapage, recouvrement évité, refus de
+capacité consigné, enregistrement durable de chaque tir. `plan` et `deploy`
+avertissent explicitement tant que le moteur n’est pas déployé. Moteur commun aux
+planifications du manifeste et aux jobs de console ([SLS-081](#sls-081)).
+Dépendances : SLS-040 (admission), SLS-074 (cible promue). Unlocks : SLS-080.
+
+E2E : liste détaillée dans [SCHEDULES](SCHEDULES.md#preuves-e2e-attendues), dont
+SIGKILL du contrôle autour de la réclamation, arrêt sur plusieurs fenêtres,
+recouvrement, saturation, promotion/retour de hash/pilote, fonction désactivée ou
+supprimée, droits par requêtes directes, parcours UI et captures.
+
+<a id="sls-079"></a>
+## SLS-079 — Exploitation complète et reproductible
+
+Statut : [ ] — contrat défini ([OPERATIONS](OPERATIONS.md)), guide à écrire et à rejouer.
+
+Un guide unique : prérequis, configuration (tableau de toutes les variables),
+installation depuis zéro, mise à jour, redémarrage et reprise, sauvegarde et
+restauration, secrets et rotation, persistance, intégration au SPARK, diagnostic,
+purge. README ramené à une porte d’entrée ; notes de la cellule du SPARK réduites à
+leur usage ; récits de campagne conservés au journal. E2E : le guide est rejoué sur
+une installation temporaire distincte (pas de preuve par relecture), cinq symptômes
+du tableau de diagnostic sont provoqués, le tableau de configuration est comparé au
+code, un relecteur extérieur exécute les chapitres 3 à 6. Un blocage d’autorité du
+SPARK est nommé, pas contourné.
+
+<a id="sls-080"></a>
+## SLS-080 — Compatibilité du projet de référence
+
+Statut : [~] — audit et matrice faits le 10 novembre 2026 ([REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md)) ;
+adaptations, fixtures et preuves E2E à réaliser.
+
+Réaliser les adaptations décidées : CPU dérivé du palier mémoire Scaleway quand
+`p2enjoy.cpu` est absent, avertissements clairs de l’adaptateur (options ignorées,
+conversion Node, planifications), guide d’intégration client. Produire des fixtures
+originales à treize fonctions fidèles aux contrats (jamais de copie du client),
+les publier par la vraie CLI, les invoquer par les adresses copiées de la console,
+prouver CORS et `Authorization` métier, l’accès sortant réel et sa frontière, les
+budgets (y compris le refus 409), les deux planifications et la fidélité des
+fixtures par comparaison avec le `plan` des manifestes réels. Dépendances : SLS-078,
+SLS-083. Campagne exécutée seule (budgets partagés). Un budget de cellule insuffisant
+est une proposition `.?` au propriétaire du SPARK, nommée si elle bloque.
+
+<a id="sls-081"></a>
+## SLS-081 — Jobs serverless de la console
+
+Statut : [ ] — contrat défini ([SERVERLESS_JOBS](SERVERLESS_JOBS.md)), à réaliser.
+
+Demande du responsable : exécuter une fonction avec un payload fixe et quelques
+gabarits composés dans l’UI, selon une expression crontab contrôlée par fenêtres de
+5 minutes. Définition par fonction (nom, expression, endpoint, payload à gabarits,
+activation), éditeur d’expression avec phrase et cinq prochains tirs, éditeur JSON avec
+palette de gabarits et aperçu du corps exact, historique des tirs au vocabulaire des
+exécutions Scaleway, « Exécuter maintenant », droits Read/Update vérifiés côté
+serveur, API de prévisualisation, migration, seed, manuel, `DESIGN_SYSTEM_APP.md`.
+Ne pas confondre avec les Serverless Jobs en conteneur de Scaleway ([SLS-088](#sls-088)).
+Dépendance : SLS-078. E2E : liste détaillée dans
+[SERVERLESS_JOBS](SERVERLESS_JOBS.md#preuves-e2e-attendues).
+
+<a id="sls-082"></a>
+## SLS-082 — Parité fonctionnelle avec Scaleway Serverless
+
+Statut : [~] — matrice sourcée relevée le 10 novembre 2026 ([SCALEWAY_PARITY](SCALEWAY_PARITY.md)) ;
+écarts portés par les unités ci-dessous.
+
+Demande du responsable : répliquer toutes les fonctionnalités de Scaleway Serverless.
+Unité de suivi : tenir la matrice à jour avec chaque livraison, revérifier la
+documentation de Scaleway à chaque revue, exposer l’API de gestion de façon
+documentée (schéma OpenAPI aujourd’hui désactivé), clore lorsque chaque ligne est
+Livrée, Sans objet ou Écart assumé avec preuve E2E, ou portée par une unité ouverte
+dont le blocage externe est nommé. Unités : 078, 081 (déclencheurs), 070 à 073
+(éditeur, test, journaux, monitoring), 083 à 088.
+
+<a id="sls-083"></a>
+## SLS-083 — Aligner les limites et les en-têtes sur Scaleway
+
+Statut : [ ] — écarts relevés, contrat à compléter dans [EXECUTION](EXECUTION.md) avant le code.
+
+Corps de requête 6 Mio (1 Mio aujourd’hui), archive ZIP 100 Mio et code 500 Mio (64 et
+256 Mio), 200 variables et 200 secrets de 64 Kio (128 clés de 16 Kio), disque
+temporaire de 1 Gio par instance (`/tmp` tmpfs de 16 Mio), jusqu’à 50 instances sous
+réserve du budget de cellule, en-têtes `X-Forwarded-For`, `X-Forwarded-Proto`,
+`X-Real-IP` (écrasé par la passerelle) et `X-Request-ID`. Chaque relèvement mesure son
+coût mémoire/disque/temps, respecte les budgets et la marge disque, garde la
+validation côté serveur et met à jour modèle, schéma, manuel et parité. E2E : valeur
+limite exacte acceptée et suivante refusée pour chaque grandeur, saturation, en-têtes
+reçus par le handler et valeurs usurpées écrasées, récupération des ressources.
+
+<a id="sls-084"></a>
+## SLS-084 — Runtimes supplémentaires
+
+Statut : [ ] — contrat à écrire.
+
+Node 22 et 26 nativement, puis Python, Go, PHP et Rust comme chez Scaleway. Chaque
+runtime exige son image, le protocole du superviseur dans son langage, la validation
+d’import, le calcul de hash de code et les mêmes limites que Node. Ordre : Node 22/26,
+Python, puis Go/PHP/Rust. E2E par runtime : publication, invocation, erreurs, délai,
+mémoire, stockage, journaux, hash stable.
+
+<a id="sls-085"></a>
+## SLS-085 — Déclencheurs de file de messages et NATS
+
+Statut : [ ] — contrat à écrire ; **dépend d’une décision d’infrastructure**.
+
+Un appel par message d’une file ou d’un sujet NATS, pression arrière, 10 messages en vol,
+relance jusqu’à 3 fois sur statut ≥ 300. Aucun service de messagerie n’existe dans le
+SPARK DEV : quel courtier fournir est une décision d’autorité et d’infrastructure
+(cas 4 de la demande d’arbitrage), à poser avant l’unité.
+
+<a id="sls-086"></a>
+## SLS-086 — Répartition du trafic entre versions
+
+Statut : [ ] — contrat à écrire.
+
+Répartir un pourcentage des appels sans tag entre la cible promue et un pilote,
+comme la mise à jour progressive de Scaleway, au-dessus du registre de versions
+SLS-074. Pas de répartition silencieuse : pourcentage explicite, observable, corrélé
+au hash exécuté, retour arrière immédiat.
+
+<a id="sls-087"></a>
+## SLS-087 — Conditions d’accès supplémentaires
+
+Statut : [ ] — contrat à écrire.
+
+Compléter les politiques origine/IP par une plage horaire et un user-agent, comme les
+conditions IAM de Scaleway, avec combinaison explicite, refus côté passerelle,
+préflight cohérent et rappel que l’user-agent n’atteste aucune identité.
+
+<a id="sls-088"></a>
+## SLS-088 — Serverless Jobs en conteneur
+
+Statut : [ ] — contrat à écrire ; **choix de produit probable**.
+
+Lots en conteneur jusqu’à 24 heures : image, commande et arguments, relances
+jusqu’à cinq fois, stockage éphémère, secrets externes, fuseau d’horaire, lancement et arrêt
+manuels, statuts et raisons. Exige un registre d’images et un runtime conteneur
+généraliste que la plateforme n’a pas. À distinguer des jobs de console
+([SLS-081](#sls-081)), qui planifient des fonctions. Si l’origine des images n’est pas
+déductible du dépôt, c’est un choix de produit à soumettre (cas 3).
