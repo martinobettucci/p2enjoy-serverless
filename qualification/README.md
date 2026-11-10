@@ -22,6 +22,9 @@ du secret effectif. Il est publié par les API et exécuté dans le runtime isol
 `service-configuration.cjs` expose des valeurs publiques et une empreinte de
 secret pour qualifier les valeurs communes du service et les surcharges par
 la passerelle réelle ; la valeur secrète n’est pas renvoyée.
+`scheduled-versions.cjs` fournit deux handlers originaux A/B qui attendent
+vingt secondes : le cycle E2E des planifications change réellement la cible
+pendant l'appel admis, puis vérifie son marqueur et son hash après terminaison.
 `volume-operations.cjs` écrit, relit, supprime et sature réellement les volumes
 /data et /cache ; il conserve l’errno Linux EDQUOT (-122), que Node expose
 actuellement sous code UNKNOWN. Leur campagne se lance séparément selon

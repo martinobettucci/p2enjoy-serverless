@@ -1485,7 +1485,9 @@ relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-1
 Statut : [~] — moteur, migration 009, lectures API et facette déployés en DEV ;
 [premier checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json) : six groupes ciblés,
 huit du manuel et huit publics. Le manuel conforme SLS-096 est clos ; les critères
-restants de cette unité demeurent ouverts.
+restants de cette unité demeurent ouverts. Le [cycle des versions planifiées](evidence/schedule-versions-dev-2026-11-10.json)
+qualifie séparément cinq groupes : pilote, promotion, retour de hash, retrait,
+désactivation et suppression ; les appels admis conservent leur code.
 Nature : Développer. Dépend de : SLS-040 (admission), SLS-074 (cible promue).
 Débloque : SLS-080, SLS-081, SLS-073. Ordre : 1.
 Contrat : [SCHEDULES](SCHEDULES.md).
@@ -1500,7 +1502,7 @@ Critères d'acceptation :
 - [ ] SLS-078.2 Plusieurs créneaux d'une même fenêtre fusionnés en un tir (`coalesced`) ;
   syntaxe cinq champs (listes, plages, pas, `*`, dimanche 0 ou 7) ; jour du mois OU jour de
   la semaine quand les deux sont restreints.
-- [ ] SLS-078.3 Cible = version promue (pilote jamais déclenché) ; promotion, retour à un hash
+- [x] SLS-078.3 Preuve : [cycle réel des versions](evidence/schedule-versions-dev-2026-11-10.json). Cible = version promue (pilote jamais déclenché) ; promotion, retour à un hash
   ou retrait de la planification remplace l'ensemble à l'instant de la décision ;
   `enabled: false` sans tir ; fonction désactivée, supprimée ou archivée sans tir.
 - [ ] SLS-078.4 Événement HTTP v1 synthétique `POST /`, corps `{}`, en-têtes

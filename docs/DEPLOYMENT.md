@@ -471,3 +471,9 @@ Le [checkpoint](evidence/schedules-checkpoint-dev-2026-11-10.json) lie sauvegard
 images,34 sources Python/SQL et web servi ; manuel conforme. Les fichiers
 officiels,5982 artefacts et runtime de référence sont conservés. Les trois notes
 sont proposées en `.?`, sans adoption revendiquée.
+
+Le [complément des versions planifiées](evidence/schedule-versions-dev-2026-11-10.json)
+qualifie cinq groupes sans nouvelle construction ni redémarrage : les mêmes
+ID/images/démarrages et fichiers officiels sont recoupés avant/après. Les trois
+fonctions de campagne sont purgées,5982 artefacts antérieurs conservés ; aucun
+paramètre ou schéma supplémentaire. Les autres preuves de SLS-078 restent ouvertes.

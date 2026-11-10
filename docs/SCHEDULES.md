@@ -236,9 +236,34 @@ conservés ;34 sources embarquées et quatre ressources web servies sont recoup�
 Les21 JPEG courants sont inspectés, plus les trois initiaux distincts. Le manuel
 compilé concorde avec16 chapitres et56 paragraphes : SLS-096 est clos.
 
-Reprendre dans cette unité : promotions/retour de hash/retrait et suppression
-autour des fenêtres ; SIGKILL et arrêt multi-fenêtres ; recouvrement, saturation
+Le cycle promotions/retour de hash/retrait et suppression autour des fenêtres
+est qualifié séparément ci-dessous. Reprendre dans cette unité : SIGKILL et arrêt multi-fenêtres ; recouvrement, saturation
 et stockage exclusif occupé ; grammaire complète et règle jour/semaine ;
 rétention réelle, dont l'invocation source conservée jusqu'à clôture ; états
 UI vide/erreur/longs et pagination. La régression complète reste à exécuter.
 Les noms de mois et de jours sont suivis séparément dans SLS-098.
+
+## Cycle réel des versions planifiées
+
+La [preuve du 10 novembre 2026](evidence/schedule-versions-dev-2026-11-10.json)
+passe cinq groupes distincts sur307 sources identiques avant/après et la même
+image b9ad872a. Quatre frontières réelles :16:30,16:35,16:40 et16:45 UTC.
+La fonction principale exécute A tandis que B reste pilote, puis B après
+promotion, puis A après archivage de B avec remplacement explicite. La promotion
+d'un hash sans planification arrête les tirs. Chaque mutation a lieu pendant
+le handler de vingt secondes déjà admis ; celui-ci termine avec son code initial.
+
+Deux autres fonctions exécutent A à la première frontière, puis leur cible est
+désactivée ou leur fonction supprimée. Le curseur natif franchit la quatrième
+frontière sans nouveau tir ni invocation pour elles, sans génération active.
+Le404 de lecture après suppression n'est pas utilisé comme preuve d'absence.
+Les cinq handlers attendus et leurs hashes sont recoupés en base. Trois fonctions
+sont purgées par les API publiques, puis volumes et code contrôlés physiquement.
+
+Les34 fichiers backend embarqués concordent avec les sources ; identités,
+images, démarrages du contrôle et de la référence ainsi que fichiers officiels
+sont identiques au relevé initial. Les5982 artefacts antérieurs sont conservés,
+ressources actives et réservations à zéro. Aucun build produit, changement
+d'interface ou de manuel ; aucune nouvelle capture revendiquée. Les22 groupes
+du checkpoint précédent restent séparés, sans rejeu prétendu. SLS-078.3 est
+qualifiée ; l'unité reste ouverte pour ses autres critères.

@@ -9,6 +9,10 @@
 - Lectures Read, facette Planifications et manuel reconstruits ;
   premier checkpoint de22 groupes réels qualifié,21 captures inspectées.
   SLS-096 est corrigée ; SLS-078 reste `[~]` pour ses critères résiduels.
+- Cycle des versions planifiées qualifié séparément par cinq groupes E2E réels :
+  pilote, promotion, retour de hash, retrait, désactivation et suppression ;
+  cinq handlers conservent leur code admis, trois fonctions purgées physiquement.
+  SLS-078.3 est qualifiée sur la même image ; les autres critères restent ouverts.
 
 
 ### Méthode, parité Scaleway et planifications (documentation)

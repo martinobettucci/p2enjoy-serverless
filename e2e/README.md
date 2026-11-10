@@ -1438,3 +1438,19 @@ Chaque essai porte un UUID, un rapport privé distinct et ses captures JPEG ;
 un prérequis absent échoue. Cette première campagne ne couvre pas encore les
 promotions multiples, les interruptions, le recouvrement, la saturation ou tous
 les états UI de [SCHEDULES](../docs/SCHEDULES.md#preuves-e2e-attendues).
+
+Le cycle des versions planifiées se lance séparément, après la fin de cette
+campagne : `node e2e/schedule-versions.mjs`. La session SSO réelle reste requise.
+Le client publie les handlers originaux `scheduled-versions.cjs`, prépare B
+comme pilote puis observe quatre frontières réelles : A, B après promotion,
+A après archivage de B avec remplacement, puis aucun tir après promotion d'un
+code sans planification. Les mutations ont lieu pendant les vingt secondes
+du handler déjà admis ; son code initial doit terminer. Deux autres fonctions
+éprouvent la désactivation de cible et la suppression après leur premier tir.
+Le lecteur `schedule-versions-inspect.py` recoupe leurs invocations et tirs
+natifs, y compris ceux de la fonction supprimée devenue inaccessible par API.
+Après purge publique, il vérifie volumes, code, ressources, sources embarquées,
+artefacts originaux et fichiers officiels. Les rapports privés portent le
+préfixe `scheduled-functions-<UUID court>` ; les éventuels tirs préparatoires
+restent distincts des quatre fenêtres retenues. Aucun état Git ou service
+n'est modifié par le lecteur natif.

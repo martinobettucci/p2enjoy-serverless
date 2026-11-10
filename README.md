@@ -14,8 +14,11 @@ porte l'ordre de reprise, avant les checkpoints techniques détaillés ci-dessou
 Le [premier checkpoint de planification](docs/evidence/schedules-checkpoint-dev-2026-11-10.json)
 qualifie22 groupes réels :6 ciblés,8 du manuel,8 publics. La facette Planifications
 est disponible ; le manuel servi correspond à16 chapitres et56 paragraphes.
-Les pannes, cycles de promotion, saturation et autres critères de SLS-078 restent
-ouverts. SLS-096 (concordance du manuel) est corrigée et vérifiée.
+Un [complément de cinq groupes](docs/evidence/schedule-versions-dev-2026-11-10.json)
+qualifie les cycles de promotion/retour de hash, le retrait des crons et l'arrêt
+après désactivation ou suppression, en conservant les appels admis.
+Les pannes, saturation et autres critères de SLS-078 restent ouverts.
+SLS-096 (concordance du manuel) est corrigée et vérifiée.
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

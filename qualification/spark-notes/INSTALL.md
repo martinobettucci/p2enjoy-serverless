@@ -689,5 +689,7 @@ et `x-p2enjoy-schedule-slot`. Les tirs internes n'utilisent pas de jeton ni les
 politiques d'origine/IP, mais passent par les admissions et quotas du moteur.
 Les nouveaux appels HTTP conservent leurs règles et leur jeton obligatoire.
 Le guide compilé décrit les fenêtres et les états, dont absence de rattrapage
-et de rejeu. Six groupes réels passent ; les preuves de pannes, retours de hash,
-recouvrement et saturation restent ouvertes dans SLS-078.
+et de rejeu. Six groupes réels passent ; le complément
+`node e2e/schedule-versions.mjs` passe cinq groupes pour promotions/retour de hash,
+retrait, désactivation et suppression sur quatre frontières réelles. Les preuves
+de pannes, recouvrement et saturation restent ouvertes dans SLS-078.

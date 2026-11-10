@@ -656,7 +656,9 @@ Notes toujours proposées, sans adoption implicite.
 Les crons du manifeste de la version promue sont déclenchés par fenêtres UTC
 de cinq minutes, avec réclamation et historique durables, sans rejeu. La facette
 Planifications affiche prochains créneaux et résultats. Le checkpoint corrigé
-passe six groupes réels, plus huit du manuel et huit publics. SLS-078 reste en
-qualification pour promotions, interruptions, recouvrement, saturation,
+passe six groupes réels, plus huit du manuel et huit publics. Un complément
+distinct de cinq groupes qualifie pilote, promotion, retour de hash, retrait,
+désactivation et suppression ; les appels admis terminent avec leur code initial.
+SLS-078 reste en qualification pour interruptions, recouvrement, saturation,
 rétention et états de console complémentaires. Le manuel affiché est recoupé
 à sa source : seize chapitres et 56 paragraphes.

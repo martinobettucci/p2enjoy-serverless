@@ -18,7 +18,7 @@ contrats existent :
 | Client HTTP intégré par fonction, type Postman | Catalogue d'URL/copie présent ; facette de test, requête et réponse interactives absentes | SLS-071 |
 | Logging d'exploitation | Logs par invocation présents ; recherche, période, suivi, export et vue de service absents | SLS-072 |
 | Monitoring | Relevés Docker ponctuels présents ; séries historiques, tableaux de bord et alertes absents | SLS-073 |
-| Planifications (crons) du manifeste | Moteur et facette déployés ; [checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json) de six groupes ciblés ; pannes, saturation, cycles de versions et qualification complète ouverts | SLS-078 |
+| Planifications (crons) du manifeste | Moteur et facette déployés ; [checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json) de six groupes ciblés et [cycle des versions](evidence/schedule-versions-dev-2026-11-10.json) de cinq groupes ; pannes, saturation et qualification complète ouvertes | SLS-078 |
 | Jobs serverless : payload fixe, gabarits composés dans l'UI, crontab par fenêtres de 5 minutes | Absents | SLS-081 |
 | Parité avec toutes les fonctionnalités de Scaleway Serverless | Matrice sourcée établie ; limites, en-têtes, runtimes, déclencheurs de messages et autres écarts ouverts | SLS-082 à SLS-088 |
 | Compatibilité démontrée du projet de référence | Audit et matrice faits ; fixtures et preuves absentes ; capacité CPU à adapter | SLS-080 |
@@ -55,7 +55,7 @@ l'identique de l'original le 10 novembre 2026 ; voir
 | Manuel maintenu et affiché dans l'application | Source canonique docs/manual.md et compilation UI | Doit suivre les futures fonctions, pas annoncer les absentes comme disponibles |
 | Recherche, filtres et catalogue | API et UI présents ; SLS-067 qualifiée à son checkpoint | La recherche n'inclut pas les valeurs secrètes |
 | Versions par hash, doublon inchangé, retour arrière | Registre, déduplication, promotions et UI/CLI présents | Qualification complète008 et certains scénarios restent ouverts ; SLS-074 |
-| Pilote par hash et cible stable sans tag | Upload sans promotion, invocation exacte du hash, promotion explicite | Les prochains crons doivent suivre la cible promue, pas tous les pilotes |
+| Pilote par hash et cible stable sans tag | Upload sans promotion, invocation exacte du hash, promotion explicite | Les crons suivent la cible promue ; pilote, promotion et retour de hash éprouvés dans SLS-078.3 |
 | Tous les comportements testés E2E sans mocks | Bancs réels et critères transversaux présents | La campagne complète de l'état008 n'est pas terminée ; ne pas déclarer toute la plateforme qualifiée |
 | SPARK DEV, FORGE limitée, référence client en lecture seule | Contraintes dans CLAUDE_PROJECT et unités | Aucun lancement PREPROD/PROD autorisé |
 | Noms significatifs et domaine/port choisis | Règle du contrat local, noms d'exploitation et routes | Les anciennes preuves gardent leurs noms historiques datés |

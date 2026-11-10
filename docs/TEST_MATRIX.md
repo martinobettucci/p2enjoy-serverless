@@ -114,9 +114,19 @@ Exécuter en série, après connexion SSO réelle :
 Vingt-deux groupes courants uniques ; cinq groupes d'une première image restent
 distincts, ainsi que le refus Unicode reproduit avant correction. Les neuf
 fonctions de tous les essais sont recoupées purgées. Vingt et une captures
-courantes sont inspectées ; SLS-096 est clos. Les scénarios de panne, cycles de
-versions, grammaire complète, recouvrement, saturation, exclusif, rétention et
+courantes sont inspectées ; SLS-096 est clos. Les scénarios de panne,
+grammaire complète, recouvrement, saturation, exclusif, rétention et
 états UI complémentaires restent à exécuter pour SLS-078. Cette tranche ne
 remplace aucune campagne de régression de la plateforme. La campagne complète
 SLS-095 doit inclure ces nouveaux clients et cibler les migrations réellement
 installées, en conservant les bancs historiques008 dans leur périmètre propre.
+
+Complément indépendant : `node e2e/schedule-versions.mjs`, cinq groupes sur307
+sources figées, quatre frontières réelles, cinq handlers et trois fonctions
+physiquement purgées. Pilote, promotion, retour par archivage avec remplacement,
+retrait, désactivation et suppression sont recoupés ; les appels déjà admis
+terminent avec leur hash initial. L'inspection native vérifie l'absence de tirs
+après suppression au-delà du404 public. [Preuve](evidence/schedule-versions-dev-2026-11-10.json).
+Même image, ID et démarrages,34 backends, configuration officielle et5982
+artefacts conservés ; aucune nouvelle preuve visuelle. Les22 groupes précédents
+ne sont pas rejoués ni ajoutés à ces cinq groupes. SLS-078.3 est qualifiée.

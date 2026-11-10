@@ -759,3 +759,8 @@ automatiquement. Construire puis appliquer seulement la pile DEV du contrôle.
 Après déploiement : neuf migrations, santé, concordance du manuel, sources et
 images, preuve temporelle du chapitre SCHEDULES. La régression complète de la
 plateforme reste à rejouer ; ce checkpoint n'est pas sa clôture.
+
+Le cycle des versions planifiées est qualifié sans nouveau déploiement :
+`docs/evidence/schedule-versions-dev-2026-11-10.json`, cinq groupes sur307 sources,
+cinq handlers, trois fonctions purgées. ID/images/démarrages, configuration
+officielle et5982 artefacts conservés, actifs et réservations à zéro.

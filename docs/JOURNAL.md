@@ -5395,3 +5395,35 @@ saturation/exclusif, grammaire complète, rétention et états UI complémentair
 La régression complète n'est pas exécutée ; les preuves de clôture restent
 ouvertes. Écart de parité noms de mois/jours inscrit en SLS-098 avant traitement.
 Registre d'incohérences absent ; aucun défaut extérieur traité implicitement.
+
+## 10 novembre 2026 — Cycle des versions planifiées sur l'horloge réelle
+
+Le contrat existant SLS-078 couvre ce complément, sans nouvelle décision produit.
+Le nouveau client HTTPS et les handlers originaux scheduled-versions passent
+cinq groupes sur307 sources figées, de16:30 à16:45 UTC. A stable/B pilote,
+promotion B, archivage B avec remplacement A, promotion sans planification ;
+les trois mutations pendant un handler admis conservent son code initial.
+Deux fonctions distinctes sont désactivée/supprimée après leur premier tir.
+La lecture native au-delà de la dernière frontière prouve l'absence de nouveau
+tir/invocation et de génération active ; le404 public n'est pas la preuve.
+
+La revue du client a corrigé avant lancement trois défauts : absence après
+suppression seulement déduite d'un404, compteur absolu ignorant les frontières
+préparatoires, namespace laissé si la création du service échoue. Le premier
+gel a refusé sept sources distantes anciennes avant toute création d'objet ;
+chacune a été retrouvée exactement dans Git, sauvegardée puis réalignée.
+Ce précontrôle n'est pas un groupe E2E ajouté.
+
+Les cinq handlers sont succeeded ; trois fonctions sont purgées par API puis
+recoupées physiquement. Les34 fichiers backend embarqués, ID/images/démarrages,
+fichiers officiels et5982 artefacts sont conservés, actifs/réservations à zéro.
+Aucun changement produit, UI ou manuel, aucune nouvelle capture. Les22 groupes
+antérieurs ne sont pas rejoués ni additionnés. Preuve :
+evidence/schedule-versions-dev-2026-11-10.json. SLS-078.3 est qualifiée ;
+SIGKILL, arrêt multi-fenêtres, grammaire complète, recouvrement, saturation,
+stockage exclusif, rétention, états UI et régression complète restent à faire.
+
+L'exploration en lecture seule identifie les transactions claim/curseur puis
+invocation/lien et les arrêts syscall qui les séparent. Le helper HTTP existant
+ne reconnaît pas cette fenêtre interne ; un observateur natif dédié reste à
+réaliser et éprouver, sans endpoint artificiel ni modification des résultats.
