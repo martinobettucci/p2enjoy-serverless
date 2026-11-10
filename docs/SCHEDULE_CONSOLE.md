@@ -57,3 +57,18 @@ aucun rejeu automatique après échec. Sources figées pendant chaque campagne.
 
 La rétention réelle, le plafond global lié à SLS-099, le critère adaptateur.7 et
 la régression complète restent des preuves distinctes dans SLS-078.
+
+## Reproduction avant correctif
+
+Le client2f8f989/fcfa3675 observe six succès à22:00UTC, puis les pages5+1,
+clavier/focus et mobile. Le vrai401 retire les cartes mais laisse « Page2 sur2 »
+sous « Historique indisponible ». La capture mobile et son SHA sont conservés
+dans le rapport privé. Ce passage échoue volontairement au contrat existant ;
+les deux fonctions sont purgées, six tirs et six invocations recoupés, compteurs
+actifs à zéro. Les deux préparations antérieures restent distinctes.
+
+Le correctif retire le total affiché dès le début de lecture et en erreur.
+Le rang interne reste conservé afin que Réessayer relise la même page, après
+restitution des cookies. Il n'ajoute ni donnée métier ni token visuel. Le manuel
+décrit ce retrait et la reprise ; nouvelle image et replay réel requis avant
+toute qualification du correctif.

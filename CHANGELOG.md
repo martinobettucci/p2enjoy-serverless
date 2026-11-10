@@ -12,6 +12,10 @@
 
 ### Planifications en cours de qualification
 
+- La facette retire sa pagination périmée pendant une lecture ou après erreur,
+  en conservant la page demandée pour Réessayer. Le vrai401 a reproduit le défaut ;
+  correctif et manuel sont à déployer puis requalifier sur une nouvelle image.
+
 - Maximum individuel et réutilisation qualifiés sur325 sources : refus sans
   invocation sous HTTP non exclusif, minimum déjà prêt réutilisé puis deux
   instances/CID conservés à la frontière suivante. Quatre groupes, quatre

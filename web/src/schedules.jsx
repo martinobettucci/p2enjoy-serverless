@@ -25,7 +25,7 @@ export function FunctionSchedules({functionId}) {
   useEffect(() => {
     const controller = new AbortController(); let current = true;
     inFlight.current = true;
-    setState(previous => ({loading:true,total:previous.total}));
+    setState({loading:true,total:0});
     async function load() {
       try {
         const declarations = await api(`/api/functions/${functionId}/schedules`,{signal:controller.signal});
@@ -35,7 +35,7 @@ export function FunctionSchedules({functionId}) {
         if (page > last) {setPage(last);return;}
         setState({loading:false,declarations,history,total:history.total});
       } catch (error) {
-        if (current) setState(previous => ({loading:false,error,total:previous.total}));
+        if (current) setState({loading:false,error,total:0});
       } finally {if (current) inFlight.current = false;}
     }
     load();

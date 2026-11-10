@@ -5756,3 +5756,10 @@ de cartes dès le changement de rang, avant la réponse de la seconde page.
 La capture montre encore cinq cartes pendant cette transition ; elle ne prouve
 pas le contenu final. Le banc attend désormais le vrai GET200 du bon offset
 avant de lire cartes et focus. Ce passage n'est pas un succès de pagination.
+
+Le client2f8f989/fcfa3675 reproduit le défaut produit après six succès22:00UTC :
+pages5+1, focus clavier, lien d'invocation et mobile passent, puis le vrai401
+laisse Page2sur2 sous Historique indisponible. Capture mobile inspectée par le
+principal, bfa162c5f2cb ; deux fonctions purgées et compteurs actifs nuls.
+Le plan SCHEDULE_CONSOLE autorise déjà le retrait de ce total ; le correctif
+garde seulement le rang interne pour reprendre la même page après Réessayer.

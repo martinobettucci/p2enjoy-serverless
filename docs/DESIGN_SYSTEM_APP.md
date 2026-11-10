@@ -359,6 +359,8 @@ nouveau. Les états de tir portent un libellé français, les créneaux et front
 portent UTC, les empreintes complètes restent sélectionnables et reviennent à la
 ligne. Les listes d'historique ont cinq éléments et restaurent le focus au titre
 après changement de page. Le rendu et les parcours restent à qualifier.
+Chargement et erreur retirent aussi le total et le rang affichés ; Réessayer
+conserve la page demandée en interne et la présente après une lecture réussie.
 
 Le [checkpoint du10 novembre](evidence/schedules-checkpoint-dev-2026-11-10.json)
 recoupe cinq JPEG de la facette et seize du manuel, tous inspectés. Desktop et

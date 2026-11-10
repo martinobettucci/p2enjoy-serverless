@@ -1534,6 +1534,9 @@ Le [plan de qualification de console](SCHEDULE_CONSOLE.md) prépare les états
 vides, noms longs, six vrais tirs sur deux pages et un refus401 suivi de reprise.
 La pagination conservée après une lecture en erreur est à vérifier/corriger
 dans cette unité ; aucun succès nouveau n'est encore revendiqué.
+Le client2f8f989 reproduit le défaut sous un vrai401 après six tirs réussis et
+les deux pages : « Historique indisponible » conserve « Page2 sur2 ». Deux
+fonctions purgées ; le correctif et son replay restent nécessaires.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.

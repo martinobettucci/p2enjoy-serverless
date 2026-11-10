@@ -248,7 +248,9 @@ jour de semaine sont tous deux restreints, l'un ou l'autre suffit.
 
 Ouvrir une fonction puis **Planifications** pour consulter les déclarations de
 sa version promue, le prochain créneau nominal, sa frontière de lancement et le
-dernier résultat. **Actualiser** relit ces observations. L'**Historique des tirs**
+dernier résultat. **Actualiser** relit ces observations. Pendant la lecture ou
+en cas d'erreur, les anciennes valeurs et leur pagination sont retirées.
+**Réessayer** relit la même page après résolution du problème. L'**Historique des tirs**
 présente les créneaux, le retard mesuré, le hash du code et le résultat ; ses
 pages et le lien d'invocation permettent de retrouver les journaux. Une expression
 se modifie dans le manifeste, puis par publication et promotion de la nouvelle
