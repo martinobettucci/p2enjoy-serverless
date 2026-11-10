@@ -5493,3 +5493,15 @@ FunctionConfig : distinguer le refused_capacity sans invocation (schedule_capaci
 du queue_timeout après réception liée ; pour overlap, exiger running/handler_started
 à la seconde frontière, une simple file ne suffit pas. Aucun choix ni code de
 cette prochaine campagne n'est livré ici. Aucun nouveau registre d'incohérences.
+
+
+## 10 novembre2026 — Préparer les admissions planifiées réelles
+
+Reprise078 après les coupures qualifiées : état DEV sain, actifs et réservations
+à zéro, mêmes CID/images/démarrages/configuration,5982 artefacts conservés. Budgets
+effectifs1CPU/8192Mio/32instances,128attentes dont16 par fonction. Le plan
+SCHEDULE_ADMISSION fixe cinq fonctions avant une fenêtre commune : handler315s,
+cible1CPU refusée sans invocation, deux HTTP exclusifs avec admission/expiration
+de file, deadline réelle. Motif : distinguer les refus avant réception des refus
+liés, puis prouver absence de rejeu et prochain tir après libération. Aucun
+produit ni horloge modifié ; la campagne et ses preuves restent à réaliser.
