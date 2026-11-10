@@ -5594,3 +5594,22 @@ evidence/schedule-memory-version-dev-2026-11-10.json. Les contrôles source du
 registre suivent après ces preuves ; SLS-099 reste un préalable au plafond global.
 Reprendre078 : plafond global, refus résiduels, rétention réelle, états UI et
 régression complète. La campagne complète n'est pas prétendue rejouée.
+
+## 10 novembre2026 — Restitution du plafond convertie en unité SLS-099
+
+Boucle du registre après les preuves RAM/version vertes : l'entrée sur
+`e2e/instance-limit-guard.py` reçoit l'issue « convertie en unité », par rattachement
+à SLS-099 déjà créée avant ces preuves. Le bon sens exige qu'une restitution
+préserve une modification concurrente et survive à la perte de l'observateur ;
+le précédent des gardes indépendantes de reprise confirme cette exigence.
+La lecture de `apply`/`finally` confirme l'écart : restauration32 sans comparaison
+de la valeur officielle et absence de garde indépendante après SIGKILL.
+
+SLS-099 reprend le constat, sa mesure et les preuves réelles attendues : cycle
+32→2→32, EOF, SIGTERM, SIGKILL et conservation d'une valeur concurrente, sur le
+seul SPARK autorisé via sa console normale. Aucune correction ni panne de cette
+garde n'est prétendue testée ici. L'issue « corrigée » manque sa preuve ; « tranchée
+sans changement » contredirait le contrat de restitution. La revue spécialisée
+en lecture seule est recoupée par l'agent principal ; aucune unité doublon ni
+décision produit ajoutée. L'unique entrée quitte le registre, supprimé car vide.
+SLS-099 reste ouverte et préalable au test du plafond global de SLS-078.
