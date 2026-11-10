@@ -62,7 +62,7 @@ with control_owner(root/'state/control.sqlite3'),closing(sqlite3.connect('file:'
  leases=[dict(v) for v in db.execute('SELECT consumer_id,function_id,config_json FROM leases WHERE function_id IN ('+marks+') ORDER BY consumer_id',ids)]
  agent=[dict(v) for v in db.execute('SELECT id,state,version,pending_json FROM functions WHERE id=?',ids)]
  for item in agent:
-  pending=json.loads(item.pop('pending_json') or 'null');item['pending']={k:pending.get(k) for k in ('operation_id','kind','expected_version','phase','error_code')} if pending else None
+  pending=json.loads(item.pop('pending_json') or 'null');item['pending']={k:pending.get(k) for k in ('operation_id','operation','kind','expected_version','phase','error_code')} if pending else None
  receipts=[dict(v) for v in db.execute('SELECT operation_id,kind,expected_version,version FROM discard_receipts WHERE function_id=?',ids)]
 records={}
 for kind in ('data','cache'):
