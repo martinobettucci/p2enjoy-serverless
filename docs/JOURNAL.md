@@ -5730,3 +5730,14 @@ et premier tir avant lancement ; aucune panne propre du banc prétendue provoqu�
 Reprendre078 : rétention réelle (sept jours/10000 tirs, source d'un tir non
 terminal), états UI vide/erreur/longs/pagination, critère adaptateur.7 puis
 régression complète. Le plafond global attend099 ; unité toujours[~].
+
+## 10 novembre2026 — Préparer les états de console des planifications
+
+Reprise à11c10ab, arbre propre et main synchronisée. Deux design systems lus
+intégralement. SCHEDULE_CONSOLE persiste avant code les formulaires depuis
+l'accueil, nom63, six tirs réels sur deux pages et le protocole cookies réels
+retirés/restitués :401 puis Réessayer200 sur la même fiche. Le précédent est
+execution-ui ; aucune panne réseau substituée ni coupure de service. Le total
+conservé par schedules.jsx en erreur est à éprouver contre le contrat existant.
+Deux fonctions seulement, minimum total0,3CPU/768Mio, budgets inchangés ; chaque
+essai conservé et purges physiques attendues. Aucun résultat nouveau encore.

@@ -1,0 +1,59 @@
+# Qualification des planifications dans la console
+
+Complément de [SLS-078](BACKLOG.md#sls-078) et de la
+[facette Planifications](SCHEDULES.md#facette-planifications). Décisions du
+10 novembre2026, avant code ; ce document ne clôture aucun critère.
+
+## Parcours réel
+
+Le navigateur entre par l'accueil HTTPS avec sa session SSO réelle. Il crée son
+namespace, service et deux fonctions par les formulaires normaux. L'une reste
+sans publication pour les états vides ; l'autre porte un nom de63 caractères.
+La publication de ses crons passe par les API publiques de code seul : la console
+ne propose pas de saisie des événements du manifeste. Le paquet est produit par
+l'adaptateur réel, avec le handler original `scheduled-event.cjs` du dépôt.
+
+Six expressions numériques distinctes, dont une longue liste, sont promues
+avant une même frontière UTC de cinq minutes. Six instances minimales prêtes,
+0,05CPU/128Mio chacune, permettent six handlers réels sans saturer le maximum
+de fonction. Leur somme0,3CPU/768Mio reste dans les budgets officiels. Aucun
+budget, route, secret ou service partagé n'est modifié. Après les six succès,
+l'historique réel a deux pages de cinq et un tirs. Les lectures ne doivent pas
+changer les tirs ni les invocations.
+
+La campagne observe déclarations, prochain nominal/frontière, dernier résultat,
+hash complet et lien d'invocation ; elle vérifie première/seconde page, retour
+clavier, focus au titre d'historique et conservation du contexte de catalogue.
+Desktop1440×1000 et vrai viewport mobile390×844 : noms et expressions complets,
+absence de débordement de page, boutons accessibles aux extrémités, captures
+JPEG pleine page et dans leur viewport à inspecter individuellement.
+
+## Erreur réelle et reprise
+
+Le protocole existant de `execution-ui.mjs` est réutilisé : sauvegarder en mémoire
+les vrais cookies du navigateur, les retirer, cliquer Actualiser, constater le
+GET401 du contrôle, puis remettre les mêmes cookies dans un `finally`.
+Réessayer doit relire les deux endpoints200 et rétablir les mêmes données.
+Il n'y a ni interception réseau, ni faux résultat, ni déconnexion serveur.
+Ce scénario prouve un refus d'authentification réel, pas une panne503.
+
+Le contrat existant retire les anciennes valeurs en chargement et en erreur,
+y compris le total et le rang de pagination devenus non confirmés. Le composant
+actuel semble garder ce dernier total ; la première exécution doit constater
+l'état réel et échouer si une pagination périmée subsiste. L'essai et son
+nettoyage restent distincts du replay d'un éventuel correctif. Masquer seulement
+les cartes en conservant un ancien « Page2 sur2 » ne satisfait pas ce contrat.
+
+## Nettoyage et preuves
+
+Les cookies sont restitués avant toute purge. Les minima et l'idle sont ramenés
+à zéro par l'API publique ; l'absence d'instances est observée avant suppression.
+Les deux fonctions sont archivées puis purgées par les API normales, parents
+supprimés. Le lecteur strict existant des deux fonctions recoupe SQL RO,
+invocations, tirs, Docker, baux, réseaux, canaux, purges physiques et5982 artefacts
+antérieurs. Identités/images/démarrages, fichiers officiels et sources embarquées
+sont comparés au prérelevé. Chaque essai garde son rapport UUID et ses captures ;
+aucun rejeu automatique après échec. Sources figées pendant chaque campagne.
+
+La rétention réelle, le plafond global lié à SLS-099, le critère adaptateur.7 et
+la régression complète restent des preuves distinctes dans SLS-078.
