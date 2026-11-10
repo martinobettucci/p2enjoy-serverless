@@ -5701,3 +5701,12 @@ Reprendre078 : précontrôle du maximum d'une fonction sous HTTP non exclusif et
 réutilisation d'instance préchauffée pour un tir, puis rétention réelle, états UI
 et régression complète. Le plafond global reste dépendant de099. Les critères
 restent ouverts ; aucune entrée nouvelle du registre d'incohérences.
+
+## 10 novembre2026 — Préparer maximum et réutilisation planifiés
+
+Reprise078 à a6c8c82, arbre propre/main synchronisée. Source receive : une
+instance busy non exclusive au maximum1 refuse avant invocation, même avec
+budgets globaux libres ; une instance ready est réutilisable. Contrat
+SCHEDULE_INSTANCE_REUSE avant code : deux fonctions originales, minimum prêt
+sans invocation et HTTP actif autour de W, refus isolé puis réutilisation des
+mêmes instances/CID à W+300. Aucun budget officiel ni garde099 utilisé.

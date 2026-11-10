@@ -1526,6 +1526,8 @@ et garde terminée. [Plan et résultats](SCHEDULE_UNAVAILABLE.md).
 Restent à recouper pour les tirs : maximum d'une fonction occupée par HTTP
 non exclusif et réutilisation préchauffée ; plafond global d'instances (SLS-099),
 rétention réelle, états UI et régression complète. SLS-078.4/.5 restent ouvertes.
+Suite du maximum/réutilisation : [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md),
+à qualifier sans modification des budgets de cellule.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.
