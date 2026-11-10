@@ -1160,3 +1160,13 @@ confidentielles actives du SPARK. Les sessions restent dans .local ignoré.
 Les coordonnées d'exploitation DEV sont suivies et restent à arbitrer avant
 une éventuelle préparation publique. L'audit n'engage aucune publication ni
 réécriture d'historique. Les limites de détection restent explicites.
+
+### SLS-077 — Retirer le briefing privé avant publication
+
+Statut : [~] Autorisé le10 novembre2026, avant modification.
+
+Exclure docs/dev-spark.md par .gitignore, conserver sa copie locale et retirer
+son chemin de tout l'historique et de toutes les références Git locales.
+[Contrat](GIT_HISTORY_REWRITE.md) : sauvegarde privée, remappage des trois
+lectures Git historiques, preuves datées conservées, comparaison des arbres,
+absence du blob, collecte des objets inaccessibles et archive publique contrôlée.

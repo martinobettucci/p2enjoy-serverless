@@ -5216,3 +5216,13 @@ pages de contrat reçoivent les résultats dans l'index de sources. Les opérate
 historiques conservent leurs limites. Aucun nouveau parcours visuel ni changement
 produit/UI/manuel ; console, historique et régression complète008 restent ouverts.
 SLS-074 conserve [~].
+
+## 10 novembre2026 — Retrait du briefing privé de l'historique autorisé
+
+Le responsable demande explicitement .gitignore pour dev-spark puis réécriture
+de l'historique, avant de publier lui-même. Arbre initial propre, aucun remote,
+261 commits accessibles et trois références locales dont deux références Codex.
+Sauvegarde bundle et copie privée du fichier sous .local, empreintes relevées.
+Trois lectures Git épinglées sont à remapper ; les attestations existantes
+conservent leur identité historique et les preuves datées ne sont pas réécrites.
+Décision et vérifications persistées dans GIT_HISTORY_REWRITE avant opération.
