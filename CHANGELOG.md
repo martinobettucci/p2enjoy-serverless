@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+### Préparation de la publication GitHub
+
+- Le briefing privé docs/dev-spark.md devient un fichier local ignoré ; son
+  retrait de l'historique est autorisé et suivi dans GIT_HISTORY_REWRITE.
+
+
 - Première tranche de régression008 des publications qualifiée :76 groupes,
  55 de composant et21 HTTPS, prérequis SSO distinct ; sept appels Docker et
   quatre fonctions purgées publiquement. Promotion Create explicite, pilote,

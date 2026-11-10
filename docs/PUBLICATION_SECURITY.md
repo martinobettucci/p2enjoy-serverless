@@ -37,10 +37,10 @@ artefacts privés de qualification ; il doit rester hors du dépôt public et de
 archives de diffusion. Aucun fichier de session, .env réel ou clé privée suivi
 n'a été trouvé.
 
-docs/dev-spark.md est suivi. Il contient adresses, comptes, rebond SSH,
+L'audit initial identifiait docs/dev-spark.md comme suivi. Il contient adresses, comptes, rebond SSH,
 empreinte de clé publique et détails de cellule. Ces données exposent la
-configuration DEV ; elles méritent une décision de confidentialité et une
-éventuelle version publique générique. Les coordonnées DEV apparaissent aussi
+configuration DEV ; le responsable a autorisé leur retrait avec le fichier.
+La procédure et ses contrôles sont dans GIT_HISTORY_REWRITE.md. Les coordonnées DEV apparaissent aussi
 dans les scripts, notes et preuves : retirer ce seul fichier ne les retire pas
 de l'ensemble du dépôt ni de son historique.
 

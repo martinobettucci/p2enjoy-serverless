@@ -253,3 +253,6 @@ coverage/
 .state/
 .local/
 .serverless-p2/
+
+# Private SPARK deployment briefing
+/docs/dev-spark.md
