@@ -117,3 +117,64 @@ suivante, puis observés ensemble ; une attente est bornée par l'événement ob
   résultat, vide, long nom, mobile), captures inspectées ;
 - fixtures originales reproduisant les deux fonctions planifiées de la référence
   ([REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md#planifications)).
+
+## Réalisation du moteur et migration 009
+
+Décision de réalisation du 10 novembre 2026, avant code. Le premier checkpoint
+livre le calcul commun, la migration, le moteur et ses lectures API ; la facette
+et sa qualification visuelle suivent dans cette même unité, qui reste `[~]`
+jusqu'à toutes ses preuves. Il ne constitue pas une clôture de SLS-078.
+
+- `schedule_calendar.py` compile les cinq champs sans dépendance supplémentaire.
+  Un pas sur un nombre (`5/10`) progresse de ce nombre à la borne du champ ;
+  un pas sur une plage reste dans cette plage. Un champ littéralement `*` est
+  non restreint pour la règle jour/mois OU semaine ; les autres sont restreints.
+  Le créneau retenu est le dernier nominal de la fenêtre, `coalesced` compte
+  tous les nominaux éligibles. Activation exclusive, retrait inclusif : aucun
+  créneau antérieur à la promotion n'est rattrapé.
+- La migration 009 conserve des générations de planifications `manifest`
+  (fonction, révision, hash, événements, dates d'activation et de retrait).
+  Des triggers SQLite suivent le pointeur promu dans la transaction de la
+  décision ; une mutation de variables ou un upload pilote ne les remplace pas.
+  Les pointeurs déjà présents démarrent à l'application de 009, sans rattrapage.
+- Un curseur durable global enregistre la dernière frontière traitée. Le premier
+  démarrage initialise ce curseur à la frontière précédente ; aux reprises, les
+  frontières écoulées sont marquées `skipped_downtime`, jamais envoyées. Le
+  traitement avance par lots bornés pour ne pas bloquer le contrôle lors d'un
+  arrêt long. Un saut d'horloge en arrière ne recalcule pas une fenêtre acquise.
+- Une réclamation porte un UUID et une unicité génération/index/fenêtre.
+  L'invocation est liée au tir dans sa transaction de réception, après la
+  réclamation. Une réclamation interrompue sans invocation devient
+  `failed/control_interrupted` ; un lien présent se réconcilie à l'état durable
+  de l'invocation. Aucun de ces états ne provoque de nouvel envoi.
+- L'entrée interne est inaccessible par HTTP. Elle relit la génération promue,
+  les parents et les intentions de stockage à la réception puis à l'admission.
+  Elle fournit `POST /`, JSON `{}` même sans événement HTTP déclaré, sans jeton,
+  et conserve la file, les réservations, les deadlines et le pilote Docker
+  existants. Une promotion avant admission refuse l'ancien tir ; après admission
+  l'instantané termine normalement.
+- Pour le cas de saturation sans invocation demandé par les preuves, le contrôle
+  vérifie avant création qu'une instance prête de la bonne génération est
+  utilisable ou qu'une nouvelle réservation tient dans les budgets. Si aucune
+  place n'existe, seul le tir `refused_capacity` est conservé. Ce précontrôle
+  réutilise le calcul de capacité du moteur ; l'admission atomique reste l'autorité
+  finale. Un stockage exclusif occupé conserve l'attente bornée ordinaire.
+- `invocations` reçoit `trigger` (défaut `http`), `schedule_firing_id`,
+  `schedule_origin`, `schedule_expression` et `schedule_slot`. Les valeurs de
+  corps et les secrets ne sont pas copiés dans le registre de tirs.
+- `GET /api/functions/{id}/schedules` expose les déclarations courantes, leur
+  index, hash, activation, état et prochain nominal/effectif ;
+  `GET /api/functions/{id}/schedule-firings` expose l'historique (pagination
+  20 par défaut, 1–100, offset 0–10000). Read sur cette fonction ou session admin
+  obligatoire, vérifié avant lecture. Aucun endpoint public de déclenchement
+  artificiel ni de réglage de l'horloge n'est ajouté.
+- Le moteur clôture les tirs depuis les invocations terminales. Rétention sept
+  jours et 10 000 tirs terminaux ; actifs conservés. Les générations retirées
+  sont supprimées après leur rétention lorsqu'aucun tir ne les référence.
+  Le moteur démarre après la reprise d'exécution et s'arrête avant elle.
+  Une maintenance impossible dégrade `/healthz`, sans rejouer les tirs.
+
+Déploiement : image du contrôle reconstruite, sauvegarde SQLite native préalable,
+application de 009 au redémarrage DEV ; aucune variable, route ou secret nouveau.
+L'ancienne image est conservée ; revenir avant 009 exige une restauration explicite
+avec prise en compte des écritures nouvelles, jamais une rétro-migration automatique.

@@ -5358,3 +5358,13 @@ README renvoient au registre. Aucun code ni comportement ne change.
 **Vérifications.** Liens et ancres des cinq documents modifiés : zéro défaut. Le texte
 des unités terminées est inchangé hors lignes de statut et pointeurs « Reste à faire »
 (comparaison au commit précédent).
+
+## 10 novembre 2026 — Reprise SLS-078 : moteur de planification
+
+Le registre désigne les crons comme première unité. Contrat SCHEDULES complété
+avant code : générations attachées transactionnellement à la cible promue,
+curseur de fenêtres, réclamation durable et entrée interne réutilisant
+l'admission. Le travail est découpé en moteur/API puis facette et preuves réelles,
+sans clôture intermédiaire de l'unité. Le push initial a été refusé par la revue
+automatique (ancienne consigne de publication humaine) ; demande explicite en
+attente, travail local autorisé poursuivi. Aucun service n'est encore modifié.
