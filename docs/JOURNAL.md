@@ -5953,3 +5953,13 @@ statique finale confirme les quatre groupes et leur portée limitée à la captu
 Prochaine reprise078 : scénario discriminant de concurrence planifiée,
 adaptateur.7, pannes/régressions du banc et préparations des autres témoins
 de rétention ; replay d’âge à partir du18 novembre03:30:26UTC.
+
+## 11 novembre2026 — Concurrence planifiée isolée du maximum
+
+Reprise main1f20834 propre, synchronisée ; SPARK DEV sain, deux services seulement.
+Le tour de clarification précédent n'a pas changé l'état du projet.
+Le contrat SCHEDULE_CONCURRENCY fixe deux fonctions identiques maximum3/shared,
+concurrence1/2 et deux HTTP actifs à une vraie frontière : attente sans handler
+contre deuxième instance et succès simultané. Ce discriminant manque aux preuves
+maximum1/exclusif ; il complète078.4 sans nouvelle fonctionnalité produit.
+Quatre groupes, même fixture et lecteur natif existants, puis purges publiques.
