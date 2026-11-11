@@ -1754,4 +1754,7 @@ Contrat : [SCHEDULE_FIRING_VOLUME](../docs/SCHEDULE_FIRING_VOLUME.md).
 Le [replay31b9102](../docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 passe quatre groupes sur340sources :256 tirs06:15UTC, sauvegarde protégée,
 16 purges et restitution. L'essai27221ea échoué est conservé séparément.
-Éligibilité numérique09:30UTC ; rétention et régressions restent requises.
+Éligibilité numérique09:30UTC. Les
+[vingt groupes de garde/options/sûreté](../docs/evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
+passent sur les mêmes340sources après la capture. Rétention, pannes du lecteur
+de copie et futur replay restent requis.

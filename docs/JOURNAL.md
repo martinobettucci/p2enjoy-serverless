@@ -6084,3 +6084,14 @@ ne révèle pas l'errno de l'essai27221ea, conservé en preuve échouée sépar�
 Copie privée gardée pour39 fenêtres réelles, éligible09:30UTC ce11 novembre.
 Enregistrer les preuves avant les restitutions/options de garde à rejouer sur
 ce helper ; la borne numérique, les pannes et les sept jours restent ouverts.
+
+Les régressions355453b passent toutes, même index340 et images :11 reprises
+release/EOF/SIGTERM/SIGKILL/échéance/partial,3 refus/options/défaut900, puis6
+consommateur actif/diagnostic indisponible/namespace étranger. Journaux natifs
+partiels60 et code figé recoupés. Connexions fermées avant restitutions et gardes
+jointes ; aucun défaut confirmé à l'audit de la preuve de capture. Bilan24 groupes
+de l'étape (4+20),2 handlers réussis et16 purges publiques dans la capture ;
+l'essai27221ea reste exclu. Restent copies/replays sous panne, borne des tirs,
+source protégée sous borne numérique, sept jours et campagne complète. La
+copie des tirs devient éligible09:30UTC ; continuer les travaux indépendants
+pendant le délai réel, sans retoucher les sauvegardes conservées.

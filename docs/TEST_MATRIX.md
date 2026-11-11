@@ -200,8 +200,16 @@ avec identifiants SSO sur stdin privée, passe
 sur340sources31b9102 :256 tirs réels à06:15UTC, deux handlers/254 refus sans
 invocation, copie native protégée,16 purges et restitution jointe. Le premier
 essai27221ea échoué reste distinct. Éligibilité après39 fenêtres :09:30UTC le
-11 novembre. Ni borne10000 ni sept jours revendiqués ; régressions du helper,
-pannes propres et replay encore requis.
+11 novembre. Ni borne10000 ni sept jours revendiqués ; pannes de copie native
+et replay encore requis.
+
+Les [régressions355453b](evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
+passent20 groupes sur les mêmes340sources : cinq modes de
+`instance-limit-environment.mjs` puis `storage-legacy-recovery.mjs --partial`
+(11 groupes), `instance-limit-guard-options.py` (3), et trois modes de
+`instance-limit-admission.mjs` (`--consumer-loss`, `--observer-unavailable`,
+`--foreign-namespace`,6 groupes). Chaque commande est terminée avant la suivante.
+Total de l'étape24, sans réattribuer les anciennes preuves ni compter l'essai échoué.
 
 ## Plafond global isolé — SLS-099
 

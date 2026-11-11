@@ -28,7 +28,10 @@ La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native
 privée puis16 purges et restitution. Son replay après39 fenêtres manquées devient
-éligible le11 novembre09:30UTC ; rétention et régressions du helper restent à qualifier.
+éligible le11 novembre09:30UTC. Les
+[vingt groupes de restitution/sûreté](docs/evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
+passent ensuite sur les mêmes340sources ; rétention, pannes du lecteur natif et
+futur replay restent à qualifier.
 La [borne des observations HTTP](docs/evidence/invocation-retention-volume-dev-2026-11-11.json)
 passe trois groupes réels sur337sources :10016 handlers/5008 par fonction,
 exacts10000 survivants et16 plus anciens retirés, deux purges et restitution.

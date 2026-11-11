@@ -6062,15 +6062,20 @@
     "fresh_installation": true,
     "dates_fabricated": false,
     "global_firing_count_retention_qualified": false,
-    "guard_regressions_on_this_helper_qualified": false,
-    "new_reader_faults_qualified": false,
+    "guard_regressions_on_this_helper_qualified": true,
     "full_platform_campaign": false,
-    "capture_preparation_only": true
+    "capture_preparation_only": true,
+    "native_snapshot_interruptions_qualified": false
   },
   "limitations": [
     "Préparation seule ; replay après39 fenêtres réelles encore requis.",
     "L’erreur SQLite exacte du premier essai reste inconnue.",
-    "Régressions du helper modifié et pannes propres encore requises.",
-    "Source protégée sous borne numérique et sept jours distincts encore ouverts."
-  ]
+    "Source protégée sous borne numérique et sept jours distincts encore ouverts.",
+    "Pannes propres du lecteur natif et futur replay restent à qualifier."
+  ],
+  "guard_regressions": {
+    "path": "docs/evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json",
+    "sha256": "dfc946c93ec517cd333df640ff377aaf1e476ccfd8edeeba1bdcc621f8f938bf",
+    "groups": 20
+  }
 }

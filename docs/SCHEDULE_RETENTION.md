@@ -77,8 +77,10 @@ préparation : sauvegarde native de256 déclarations actives, puis39 fenêtres
 manquées réellement écoulées avant replay gardé. La
 [préparation31b9102](evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 passe quatre groupes sur340sources,256 tirs06:15UTC et16 purges/restitution ;
-replay éligible09:30UTC le11 novembre. Régressions du helper et futur replay
-restent à qualifier ; aucune date métier n'est modifiée.
+replay éligible09:30UTC le11 novembre. Les
+[vingt groupes du helper](evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
+passent sur les mêmes340sources ; pannes du lecteur de copie et futur replay
+restent à qualifier. Aucune date métier n'est modifiée.
 
 
 ## Premier essai et frontière d’attachement

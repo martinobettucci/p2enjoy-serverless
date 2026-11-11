@@ -10,7 +10,8 @@
   réels31b9102 sur340sources :256 tirs06:15UTC dont2 handlers/254 refus,
   sauvegarde vérifiée,16 purges et restitution. Premier essai échoué sous
   OperationalError conservé séparément, cause exacte non attribuée. Éligibilité
-  numérique09:30UTC ; rétention et régressions du helper restent ouvertes.
+  numérique09:30UTC. Vingt groupes de restitution/options/sûreté passent sur les
+  mêmes340sources ; rétention, lecteur natif sous panne et replay restent ouverts.
 
 ### Qualification en volume des invocations
 

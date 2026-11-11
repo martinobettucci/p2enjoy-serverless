@@ -59,7 +59,8 @@ hérité, comme aux autres commandes bornées. La garde attend donc sa jonction
 avant tout renommage de restitution, même si le pilote meurt pendant la copie.
 Alarme native30s, commande timeout40s et lecture client bornée ; aucun lecteur
 externe ne poursuit sa copie pendant la restitution. Les options de garde ne
-changent pas ; les restitutions historiques restent à rejouer après ce raccordement.
+changent pas ; les restitutions historiques font partie de la qualification
+de ce raccordement.
 
 Après capture, archiver/purger les16 fonctions par les API, supprimer les parents,
 recouper l'absence physique du code, volumes, canaux et consommateurs, puis
@@ -110,8 +111,27 @@ Curseur C=06:15UTC,256 déclarations par fenêtre : éligibilité au premier rep
 numérique le11 novembre2026 à09:30UTC, après39 fenêtres réellement écoulées.
 Les16 fonctions sont purgées par API, code/volumes/canaux/consommateurs absents,
 originaux restitués et pilote/gardes terminés. L'essai27221ea reste échoué et
-hors total. Les régressions du helper modifié et pannes propres restent à éprouver ;
-la capture ne qualifie pas la rétention, le futur replay ni les sept jours.
+hors total. Les régressions du helper sont qualifiées ci-dessous ; les pannes
+du lecteur de copie restent à éprouver. La capture ne qualifie pas la rétention,
+le futur replay ni les sept jours.
+
+## Restitutions et sûreté qualifiées
+
+La [preuve du helper355453b](evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
+passe20 groupes sur les mêmes340sources que la capture31b9102, sans nouvelle
+image :11 pour release/EOF/SIGTERM/SIGKILL/échéance120s et reprise partielle60s,
+trois pour les refus de paramètres et le défaut900 réellement programmé/restitué,
+six pour perte avec consommateur actif, diagnostic Docker indisponible et refus
+du namespace étranger. Les trois derniers cas passent aussi par un vrai SSO.
+Le journal natif partiel confirme60s et le même SHA de helper figé.
+
+Les connexions d'observation ne retiennent aucune transaction ; les pilotes et
+gardes sont joints, les originaux restitués à chaque fenêtre. Le retrait des
+consommateurs après perte ne vaut pas purge métier. Les quatre groupes de
+capture gardent leurs16 purges publiques distinctes :24 groupes de cette étape,
+sans addition des sous-assertions ni de l'essai initial échoué. Les interruptions
+pendant la copie native elle-même, le replay, les bornes et sept jours restent
+ouverts ; aucune campagne complète de plateforme n'est revendiquée.
 
 ## Éligibilité et replay à qualifier
 
