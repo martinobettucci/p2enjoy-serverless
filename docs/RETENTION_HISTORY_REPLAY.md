@@ -85,10 +85,12 @@ Le lecteur `retention-history-replay.py` démarre Compose et attache l'observate
 natif au Python unique (PID/naissance/cgroup) avant d'attendre la santé. Il ne
 remplace ni tampons, registres, SQL, résultats système, horloge ou ordonnanceur.
 Observation25s, alarme35s, commande40s avec verrou hérité et jonction imposée.
-Les lectures SQLite aux frontières close/fcntl/fdatasync sont limitées aux
-descripteurs réels du contrôle SQLite et de ses sidecars, reconnus par /proc
-en lecture seule à l’entrée du syscall. Les fermetures des fichiers importés
-ne déclenchent pas de requêtes sur les témoins. Le reçu conserve le nombre
+Les lectures SQLite se déclenchent aux frontières fdatasync des descripteurs
+réels du contrôle SQLite et de ses sidecars, reconnus par /proc en lecture
+seule à l’entrée du syscall. Les fermetures et verrouillages de lecture ne
+déclenchent pas de requêtes sur les témoins : le démarrage de la vraie capture
+contient beaucoup de consultations historiques. Les états doivent toujours
+être observés commis ; toute frontière manquée reste un échec. Le reçu conserve le nombre
 de stops et de frontières SQLite, ainsi que le diagnostic d’échec si la
 frontière n’est pas acquise ; aucun délai n’est élargi pour masquer un échec.
 Préparer le reçu durable avant reprise ; détacher dans finally. Si une frontière

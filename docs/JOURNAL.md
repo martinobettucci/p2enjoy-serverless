@@ -6472,3 +6472,16 @@ Décision avant code : interroger les témoins aux seules frontières des vrais
 descripteurs SQLite, et conserver compteurs/diagnostic terminal. Le surcoût
 des lectures pendant les imports est une hypothèse, pas une cause établie.
 La limite25s reste identique ; nouveau préflight explicite requis.
+
+### 11novembre2026 — Mesure du coût des lectures natives du replay
+
+Le second préflight8cf1553f au client549723a échoue aussi sous25s. Le nouveau
+reçu conserve41424 stops et5842 frontières des vrais descripteurs SQLite ;
+l'état initial contient toujours l'instance ready et le tir non clos. Le
+filtre des fichiers importés ne suffit donc pas. Restitution nominale confirmée,
+source scellée vérifiée et copie retirée. Aucun groupe retenu.
+Décision avant code : observer les frontières fdatasync uniquement, à l'image
+du premier discriminant du loader de volume. Les SELECT/verrouillages des
+nombreuses lignes historiques de démarrage ne justifient aucune lecture de
+témoins ; les commits utiles doivent toujours être acquis dans25s. Aucune
+horloge, donnée, tâche applicative ni valeur système remplacée.

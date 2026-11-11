@@ -15,5 +15,6 @@ Le premier préflight source échoue sur native_stop_not_observed ; restitution
 nominale et contrôle natif final réussis. Le lecteur interrogeait les témoins
 sur toutes les fermetures de fichiers, y compris les imports de démarrage.
 Limiter ces lectures aux descripteurs SQLite réels et conserver des compteurs
-et le diagnostic terminal. Le rôle de ce surcoût dans le délai reste une
-hypothèse à vérifier par le nouveau préflight, sans augmenter les25s.
+et le diagnostic terminal. Le second essai mesure41424 stops et5842 frontières SQLite avant expiration.
+Limiter les lectures à fdatasync, sans augmenter25s ; un nouveau préflight
+reste requis. Le rôle précis de chaque coût ne se déduit pas des compteurs.
