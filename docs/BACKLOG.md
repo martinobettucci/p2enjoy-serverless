@@ -2431,10 +2431,11 @@ ouverts.
 <a id="sls-100"></a>
 ## SLS-100 — Identité visuelle distincte pour Serverless
 
-Statut : [ ] — demande du responsable reçue le11 novembre2026, avant implémentation.
+Statut : [ ] — demande et motif de remplacement spécifiés, avant implémentation.
 Nature : Corriger. Dépend de : SLS-020. Ordre :2.
-Contrat : cette unité et [design du produit](DESIGN_SYSTEM_APP.md), à compléter
-avec le motif retenu avant le code.
+Contrat : cette unité ; reporter le motif ci-dessous dans le
+[design du produit](DESIGN_SYSTEM_APP.md) avant le code, une fois le gel de la
+campagne active levé.
 
 Constat : la foudre de `web/public/favicon.svg`, également affichée dans la
 marque de la console par `web/src/main.jsx`, est déjà utilisée par une autre
@@ -2442,8 +2443,16 @@ application interne. La plateforme doit posséder une identité distincte.
 
 Résultat attendu : un pictogramme vectoriel propre à Serverless, lié à son usage
 de fonctions conteneurisées, cohérent avec la charte P2Enjoy et reconnaissable
-aux petites dimensions. Le choix du motif est réversible et sera tranché sans
-demande d'arbitrage supplémentaire.
+aux petites dimensions.
+
+Décision du11 novembre2026, avant code : trois blocs reliés par deux branches,
+en blanc sur la pastille bleue P2Enjoy existante. Les blocs évoquent les fonctions
+et leurs relations ; la silhouette se distingue de la foudre et reste simple à
+16px. Un SVG autonome partagé par le favicon et la marque suffit : aucune police,
+dépendance, animation ou copie de dessin dans un composant. Le texte P2Enjoy
+Serverless reste le libellé accessible ; le SVG de marque est décoratif à côté.
+Ce choix est réversible. Un dessin isométrique détaillé est écarté parce qu'il
+ajouterait des traits difficiles à lire en favicon.
 
 Critères d'acceptation :
 

@@ -7120,3 +7120,13 @@ invocation-source-retention-detach-volume-dev-2026-11-11, garder l'ancienne
 preuve348. Le publisher impose identité exacte des observations vivantes et
 du reçu terminal. Aucun autre test, build ou déploiement pendant cette campagne.
 Âge18novembre et campagne complète restent requis ; SLS-100 reste au registre.
+
+### 11 novembre2026 — Motif de l'icône tranché avant implémentation
+
+SLS-100 retient trois blocs reliés, blancs sur la pastille bleue existante :
+fonctions et relations lisibles en petit format, silhouette distincte de la
+foudre signalée. Un SVG commun au favicon et à la marque, texte accessible
+conservé ; détails isométriques écartés pour la lisibilité16px. Les deux design
+systems ont été lus intégralement. Décision persistée dans le backlog ; le
+design du produit, indexé par le test actif, sera complété après son terminal.
+Aucun SVG, client E2E ou fichier applicatif modifié pendant le nominal courant.
