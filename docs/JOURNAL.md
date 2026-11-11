@@ -6341,3 +6341,20 @@ avantD+150. Contrat corrigé : demande nominale avantD+110, retrait temporaire
 mesuré avantD+240, restitution/jonction avantD+270. Un retard invalide la preuve
 sans arrêter le secours. Revalidation de naissance après pidfd_open requise avant
 SIGKILL. Aucune modification aux346sources de la campagne active.
+
+### 11novembre2026 — Interruption du volume source et restitution recoupée
+
+Handle87135 absent à la reprise10:58UTC, rapport local arrêté à9730 réponses,
+aucun groupe terminé. Le relevé distant avant retrait contient9883 succeeded,
+zéro tir et deux instances ; restauration nominale terminée, garde inactive et
+pilote mort. Deux conteneurs/réseaux/baux retirés. Sources346 et images avant/après
+identiques ; contrôle original sain redémarré10:27:08UTC, référence inchangée,
+5982 artefacts, actifs/baux/intentions à zéro. Cause de l'interruption non établie ;
+aucun succès numérique ni purge métier attribué. Rapport incomplet, état terminal
+et brut conservés.
+
+Décision avant code pour reprendre : worker systemd utilisateur local transitoire,
+indépendant du terminal, même client Node ; passage SSO par socket mémoire
+authentifié UID/PID, aucune valeur sensible persistée. Compte rendu privé durable
+et contrôle du processus réel par une seconde commande. Aucun nouveau test
+engagé avant clôture constatée de l'essai précédent ; aucune source d'âge publiée.

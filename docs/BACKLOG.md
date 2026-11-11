@@ -1625,6 +1625,14 @@ Les [cinq groupes de garde2700](evidence/source-retention-guard-options-dev-2026
 passent sur346sources : quatre refus avant mutation et programmation/restitution
 réelles. Collecte initiale en échec de glob, rapport E2E terminé0 recoupé sans
 rejeu ; aucune preuve de rétention ni d'expiration2700 déduite.
+L'[essai source028d134d](evidence/invocation-source-retention-interrupted-dev-2026-11-11.json) est interrompu :
+9730 réponses locales,9883 succès natifs avant retrait et aucun tir ; zéro groupe
+retenu. Même346sources/images et originaux restitués, cause non établie.
+Le [pilote durable](INVOCATION_SOURCE_RETENTION_VOLUME.md#essai-interrompu-et-pilote-durable)
+est décidé avant code : tâche utilisateur locale transitoire, identifiants SSO
+en mémoire par socket authentifié, mêmes clients et dépendances réels, relevés
+avant/après et vérification indépendante du processus. Implémentation et preuve
+restent requises avant reprise du nominal ; aucun rejeu automatique de l'essai.
 Le [replay d'âge](RETENTION_HISTORY_REPLAY.md) a son contrat explicite : les deux
 captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
 capturée, garde120, observation avant santé et contrôles stricts d'identité à

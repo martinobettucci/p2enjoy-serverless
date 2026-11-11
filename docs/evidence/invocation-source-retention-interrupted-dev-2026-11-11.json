@@ -1,0 +1,80 @@
+{
+  "format": "p2enjoy-serverless-interrupted-source-retention-v1",
+  "classification": "interrupted_no_retention_qualification",
+  "completed": false,
+  "unit": "SLS-078.5",
+  "unit_complete": false,
+  "source_commit": "e07f1c3ddec2fec04fab0a865dd5b51a89fc0d56",
+  "campaign": "028d134d-c9b9-40ef-8888-952006b0416c",
+  "counts": {
+    "functional_groups": 0,
+    "sources": 346,
+    "http_responses_saved": 9730,
+    "native_terminal_invocations_before_cleanup": 9883,
+    "native_firings_before_cleanup": 0,
+    "removed_containers": 2,
+    "removed_networks": 2,
+    "released_leases": 2
+  },
+  "same_sources_and_images_before_after": true,
+  "local_handle_missing": true,
+  "cause": "not_established",
+  "restoration": {
+    "agent_healthy": true,
+    "artifacts_identical": true,
+    "configuration_unchanged": true,
+    "control_healthy": true,
+    "databases_identical": true,
+    "directories_identical": true,
+    "event": "restored",
+    "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+    "independent": false,
+    "original_id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+    "reference_unchanged": true,
+    "temporary_directories_removed": true
+  },
+  "timer_state": "inactive",
+  "service_state": "inactive",
+  "driver_alive": false,
+  "final_native_state": {
+    "completed": true,
+    "services": [
+      {
+        "id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-11T10:27:08.466973173Z"
+      },
+      {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-06T15:49:39.578107028Z"
+      }
+    ],
+    "counts": {
+      "live_functions": 0,
+      "active_invocations": 0,
+      "instances": 0,
+      "operations": 0,
+      "reserved_bytes": 0,
+      "active_deployments": 0,
+      "leases": 0,
+      "pending_storage": 0
+    },
+    "artifact_files": 5982,
+    "agent_service": "active",
+    "control_health_http": 200,
+    "active_restoration_units": 0
+  },
+  "no_retention_qualification": true,
+  "raw": {
+    "path": "invocation-source-retention-interrupted-dev-2026-11-11.raw.json.gz",
+    "bytes": 631712,
+    "sha256": "2811cb59441dffcabbd47ed75b65e41e47534e327d491bb1283861ca1b4baecd",
+    "uncompressed_bytes": 6242085,
+    "uncompressed_sha256": "dce8ce6baf476d83e915f2cfd24b06b63278f563803dc87147dcdc7700a3f29d"
+  }
+}

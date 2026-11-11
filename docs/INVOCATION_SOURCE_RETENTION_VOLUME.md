@@ -81,3 +81,35 @@ n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant so
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
 rejouer les tests. Charge10000, frontières, pannes propres et régressions restent
 à qualifier ; aucun succès de rétention déduit de ces cinq groupes.
+
+## Essai interrompu et pilote durable
+
+L'[essai028d134d](evidence/invocation-source-retention-interrupted-dev-2026-11-11.json) reste interrompu :
+9730 réponses sauvegardées localement,9883 invocations succeeded dans le relevé
+natif avant retrait, aucun tir et aucun groupe terminé. Handle local disparu,
+cause non établie. Restitution nominale du pilote distant, deux conteneurs/réseaux/
+baux retirés, mêmes originaux et346sources/images après recoupement. Aucun
+succès de rétention ni purge métier déduit de cet essai.
+
+Décision avant code : le prochain lanceur est une tâche systemd utilisateur locale
+transitoire `serverless-source-retention-proof-UUID`, indépendante du terminal
+qui la crée. Il exécute le même client Node, sans serveur ni dépendance de
+remplacement. Il ne planifie aucune récurrence et ne modifie pas FORGE.
+Délai global3600s, client borné3000s et garde distante2700s restent distincts.
+Le service n'est jamais déclaré terminé sur la seule disparition de son handle.
+
+Une entrée privée lit les identifiants sur stdin masquée puis les transmet en
+mémoire à la tâche par socket AF_UNIX. Vérifier UID et PID du serveur contre
+MainPID systemd avant transmission ; le serveur vérifie l'UID du client et borne
+la taille et l'attente. Aucun secret dans fichier, argument, environnement,
+journal ou reçu ; le socket ne persiste aucun contenu. Le canal se ferme après
+un message et les valeurs sont abandonnées après transmission au client Node.
+
+Le worker conserve checkpoint et progression privés, sources/images avant/après,
+rapport Node original, code retour et état terminal systemd. Les résultats ne
+comptent que si les trois groupes, les10001 réponses HTTP, la source planifiée et
+la restitution réelle réussissent. Un worker interrompu reste un échec ; vérifier
+la restitution distante avant toute autre opération. Le lanceur de contrôle se
+termine après réception, puis un processus distinct doit constater le même
+MainPID/naissance/cgroup vivant : preuve réelle d'indépendance du terminal.
+Aucune réussite nouvelle acquise par cette décision.

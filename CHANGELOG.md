@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+### Essai de volume source interrompu
+
+- [Essai028d134d](docs/evidence/invocation-source-retention-interrupted-dev-2026-11-11.json) :9730 réponses
+  locales sauvegardées,9883 succès natifs avant retrait, zéro tir et aucun groupe
+  terminé. Source346/images recoupées, originaux restitués et consommateurs
+  retirés ; cause non établie. Pilote durable transitoire spécifié avant code,
+  aucune rétention qualifiée par cet essai.
+
 ### Source de tir sous la borne d'invocations — en préparation
 
 - Client de charge réelle, handler original et observateur natif implémentés
