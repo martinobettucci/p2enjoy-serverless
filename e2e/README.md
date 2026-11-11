@@ -1663,7 +1663,9 @@ SLS-099 est close ; ces preuves ne remplacent pas la campagne globale.
 `node e2e/schedule-retention-capture.mjs` exige une session SSO réelle fraîche
 dans le canal privé habituel et le helper synchronisé sur DEV. Il publie une
 fonction originale, exécute un témoin HTTP, puis capture à la frontière */5
-une invocation réussie dont le tir reste dispatched/non clos. Le SQLite backup
+une invocation réussie dont le tir reste dispatched/non clos. Le traceur
+s’attache après running/handler_started du handler original à réponse2s,
+sans instrumenter son démarrage froid. Le SQLite backup
 utilise une source RO ; hash exécuté, créneau et logs reçus sont recoupés dans
 la sauvegarde. Le contrôle est repris sans SIGKILL, même CID/image/démarrage.
 

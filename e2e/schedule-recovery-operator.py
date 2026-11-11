@@ -201,6 +201,16 @@ try:
     if mode != 'watchdog':
         while time.time() < window-(1.5 if mode == 'before' else .4):
             time.sleep(.01)
+    if mode == 'terminal-capture':
+        running_deadline = time.monotonic()+30
+        while True:
+            started = reader.rows('SELECT id,state,handler_started,completed_at FROM invocations WHERE function_id=? AND schedule_slot=?', (function_id, window))
+            assert not any(v['completed_at'] is not None for v in started), 'running_capture_frontier_missed'
+            if len(started)==1 and started[0]['state']=='running' and started[0]['handler_started']:
+                emit({'event':'handler-running-before-observation', 'invocation':started[0], 'observed_at':time.time()})
+                break
+            assert time.monotonic()<running_deadline, 'handler_not_started_before_observation'
+            time.sleep(.05)
     observer.start()
     if mode == 'watchdog':
         emit({'event':'suspended', 'unit':unit})
@@ -270,7 +280,7 @@ try:
             assert all(source_call[k]==v for k,v in extra.items()), 'captured_runtime_observation_changed'
             assert extra['resolved_code_hash']==captured_firing['code_hash'] and extra['schedule_slot']==window and extra['trigger']=='schedule'
             received = json.loads(extra['logs'].strip())
-            assert received=={'marker':'scheduled-original-A','request_id':captured_call['id'],'method':'POST','path':'/',
+            assert received=={'marker':'scheduled-retention-source','request_id':captured_call['id'],'method':'POST','path':'/',
                               'body':{},'trigger':'schedule','slot':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime(window)),
                               'authorization_present':False,'platform_token_present':False}, 'captured_handler_metadata_invalid'
             captured_call.update(extra)

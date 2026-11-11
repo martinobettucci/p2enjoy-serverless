@@ -226,3 +226,13 @@ publics recoupent UUID, trigger/slot, méthode/corps et dates de début/fin dans
 le runtime réel. Le client `node e2e/schedule-instance-reuse.mjs` compare les
 instances/CID avant et après les frontières ; contrat :
 [SCHEDULE_INSTANCE_REUSE](../docs/SCHEDULE_INSTANCE_REUSE.md).
+
+
+## Fixture de capture de rétention
+
+`artifacts/scheduled-retention.cjs` attend réellement deux secondes puis répond
+avec les métadonnées du tir. Le pilote attend running/handler_started avant
+d’attacher son observateur natif ; le démarrage froid reste libre. Le backup
+pris après succès et avant clôture vieillit ensuite sur l’horloge réelle, selon
+[SCHEDULE_RETENTION](../docs/SCHEDULE_RETENTION.md). Le client de capture est
+`node e2e/schedule-retention-capture.mjs`, avec SSO réel et purge publique.
