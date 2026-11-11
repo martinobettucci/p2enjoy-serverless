@@ -7099,3 +7099,24 @@ Audit RO final sans défaut matériel : tailles/SHA,355sources, même worker
 terminal puis arrêté, trois handlers réussis exactement, quatre gardes/purge,
 captures et brut sans secret recoupés. Aucun test supplémentaire ni qualification
 d'âge ou de nominal numérique déduits de la revue.
+
+### 11 novembre2026 — Nominal numérique courant lancé après restitution
+
+Le worker existant invocation-source-retention-worker.py lance en série le
+nominal caf8c362-794d-4dc4-a399-a412fe2d6863 à20:34UTC, commit6de2a86. Lanceur
+terminé0, même PID3440900/naissance64743860 confirmé vivant dans son propre
+cgroup après disparition du lanceur. Phase real_e2e_running/completedfalse ;
+355sources/images exactement identiques aux cinq historiques et au bounded.
+Aucun succès numérique déduit du lancement. Garder ce gel jusqu'à son terminal.
+
+Reprise : python3 -B e2e/invocation-source-retention-worker.py status
+caf8c362-794d-4dc4-a399-a412fe2d6863. Checkpoint privé sous .local/e2e/
+source-retention-worker-caf8c362-794d-4dc4-a399-a412fe2d6863/checkpoint.json ;
+rapport invocation-source-retention-volume-c3d4f6ce-aa58-47dc-aa81-aa273b263d4f.json.
+Ne pas relancer si l'observation expire. Attendre MainPID0/Result/Code/Status,
+puis finish du même UUID ; recouper originaux/captures, publier par
+.local/publish-source-retention-detach-nominal.py sous le nouveau nom
+invocation-source-retention-detach-volume-dev-2026-11-11, garder l'ancienne
+preuve348. Le publisher impose identité exacte des observations vivantes et
+du reçu terminal. Aucun autre test, build ou déploiement pendant cette campagne.
+Âge18novembre et campagne complète restent requis ; SLS-100 reste au registre.

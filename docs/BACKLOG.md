@@ -1814,6 +1814,11 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   10 496→10 000/exacts496 retirés en12,758s, témoins conservés,35,679s/1 et
   40,010s/124 avec nettoyages joints. Six nouveaux handlers distincts des copies.
   Historique final qualifié ci-dessus ; nominal numérique complet encore requis.
+  Le worker nominal caf8c362-794d-4dc4-a399-a412fe2d6863 est lancé au commit
+  6de2a86, même gel355/images que l'historique et le bounded. Son PID3440900/
+  naissance64743860 est confirmé vivant après sortie du lanceur, phase
+  real_e2e_running ; aucun résultat numérique encore qualifié. Attendre son
+  terminal réel puis finish avant une autre campagne ou un redéploiement.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 
