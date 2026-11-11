@@ -27,6 +27,17 @@ HISTORY = ROOT / 'qualification-history'
 MODULE = Path(__file__)
 
 
+class BlockingNativeObserver(NativeObserver):
+    """Wait for the actual kernel stop without a per-syscall polling delay."""
+    def wait(self, deadline):
+        assert time.monotonic() < deadline, 'native_stop_not_observed'
+        _, status = os.waitpid(self.pid, 0)
+        assert os.WIFSTOPPED(status), 'control_exited_during_observation'
+        self.stopped = True
+        assert time.monotonic() < deadline, 'native_stop_not_observed'
+        return os.WSTOPSIG(status)
+
+
 def sha(path):
     value = hashlib.sha256()
     with path.open('rb') as stream:
@@ -288,7 +299,7 @@ def observe(campaign, fd):
         cgroup = Path('/proc', str(pid), 'cgroup').read_text()
         assert cgroup == Path('/proc', str(init), 'cgroup').read_text(), 'controller_cgroup_mismatch'
         birth = Path('/proc', str(pid), 'stat').read_text().rsplit(')', 1)[1].split()[19]
-        observer = NativeObserver(pid)
+        observer = BlockingNativeObserver(pid)
         observer.start()
         assert Path('/proc', str(pid), 'stat').read_text().rsplit(')', 1)[1].split()[19] == birth
         receipt.update(container_id=row['Id'], image=row['Image'], init_pid=init, pid=pid, birth=birth,
@@ -302,8 +313,24 @@ def observe(campaign, fd):
         expected_before = 256 * (1 + wanted_windows)
         pending = None
         deadline = time.monotonic() + 25
-        observer.resume()
         before = None
+        initial_stop = sample()
+        receipt['initial_stop'] = initial_stop
+        assert initial_stop['cursor'] <= wanted_cursor, 'recovery_frontier_already_passed'
+        near_end = initial_stop['cursor'] >= wanted_cursor - 300
+        if initial_stop['cursor'] == wanted_cursor:
+            assert initial_stop['count'] == expected_before, 'before_retention_frontier_missed'
+            before = sample(full=True)
+            check_rows(before)
+            receipt['before'] = before
+            atomic(result_path, receipt)
+            if mode == 'preflight':
+                assert time.monotonic() < deadline, 'native_observation_deadline'
+                receipt.update(completed=True, count_retention_qualified=False, observed_at=time.time(),
+                               observation_seconds=25-(deadline-time.monotonic()))
+                atomic(result_path, receipt)
+                return receipt
+        observer.resume()
         while True:
             stopped = observer.wait(deadline)
             if stopped != signal.SIGTRAP | 0x80:
@@ -313,9 +340,10 @@ def observe(campaign, fd):
             phase, data = observer.info()
             if phase == 1:
                 pending = data[0]
-            eligible = pending in ((3, 72, 75) if mode == 'preflight' or before else (75,))
+            eligible = pending == 75 or (before is not None and pending in (3, 72)) or (mode == 'preflight' and near_end and pending == 3)
             if eligible and phase in (1, 2):
                 value = sample()
+                near_end = value['cursor'] >= wanted_cursor - 300
                 assert value['cursor'] <= wanted_cursor, 'recovery_frontier_already_passed'
                 if before is None and value['cursor'] == wanted_cursor:
                     assert value['count'] == expected_before, 'before_retention_frontier_missed'
@@ -335,7 +363,9 @@ def observe(campaign, fd):
                     break
             observer.resume()
         assert time.time() < boundary + 270, 'replay_next_window_too_close'
-        receipt.update(completed=True, count_retention_qualified=mode == 'count', observed_at=time.time())
+        assert time.monotonic() < deadline, 'native_observation_deadline'
+        receipt.update(completed=True, count_retention_qualified=mode == 'count', observed_at=time.time(),
+                       observation_seconds=25-(deadline-time.monotonic()))
         atomic(result_path, receipt)
         return receipt
     finally:

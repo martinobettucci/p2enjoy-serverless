@@ -1585,8 +1585,8 @@ Essai7757065 : copie achevée, observation expirée sur le PID init Docker ;
 Sélection du processus Python unique, même cgroup que init, alignée sur
 l'opérateur historique ; replay encore requis. Cet essai ne qualifie pas le préflight.
 Essai dad8031 : contrôleur Python identifié, expiration25s après4 fenêtres
-récupérées sur15. Corriger le coût du poller natif (pause1ms par stop) par une
-attente waitpid bloquante, délais25/35/40 inchangés ; aucune frontière qualifiée.
+récupérées sur15. Attente waitpid bloquante et lectures RO réduites implémentées,
+délais25/35/40 inchangés ; aucune frontière qualifiée, replay encore requis.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

@@ -14,6 +14,8 @@
   Second préflight : copie réussie mais PID init observé ; sélection corrigée
   vers le contrôleur Python unique dans le même cgroup. Essai échoué conservé,
   qualification explicite encore requise.
+  Attentes natives bloquantes et lectures RO ciblées pour limiter le coût du
+  traceur au démarrage, délais25/35/40 inchangés ; troisième essai expiré conservé.
 
 ### Préparation de la borne globale des tirs
 
