@@ -1533,6 +1533,10 @@ vieillissement réel : invocation terminale liée à un tir non clos et témoin
 HTTP antérieur, sauvegarde native privée ; aucune preuve des sept jours encore.
 Premier essai de capture03:20UTC échoué avant handler sous traceur ; originaux
 restitués et fixture purgée. Attacher après démarrage réel reste à qualifier.
+La [capture5056167](evidence/schedule-retention-capture-dev-2026-11-11.json) passe
+quatre groupes sur331sources : sauvegarde authentique, même contrôle repris,
+fixture purgée. Épreuve d’âge au plus tôt le18 novembre2026 à03:30:26.355818UTC.
+Pannes propres et régressions historiques du nouveau mode restent requises.
 Le recoupement078.4 identifie aussi une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Ce scénario
 reste requis dans cette même unité avant de cocher.4.

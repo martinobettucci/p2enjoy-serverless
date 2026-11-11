@@ -1675,4 +1675,6 @@ le rapport UUID .local/e2e/schedule-retention-capture-*.json porte la date réel
 éligible sept jours plus tard. Aucun réglage d’horloge ni SQL de préparation.
 Une capture réussie ne prouve ni les sept jours ni10000 objets : ces campagnes
 restent requises dans [SCHEDULE_RETENTION](../docs/SCHEDULE_RETENTION.md).
-Implémentation relue, première exécution réelle encore à faire.
+La [capture réelle5056167](../docs/evidence/schedule-retention-capture-dev-2026-11-11.json)
+passe quatre groupes sur331sources. Âge éligible le18 novembre2026 à03:30:26UTC ;
+les propres pannes et régressions du helper restent à exercer.

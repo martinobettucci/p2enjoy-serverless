@@ -76,3 +76,31 @@ de vieillissement n’est retenue. Le diagnostic ne reconstitue pas l’exceptio
 interne exacte du runtime. La correction borne l’observation à la fin du handler :
 attendre son démarrage réel sans traceur, puis observer sa réponse et son commit.
 Le délai de garde et le délai d’observation ne sont pas augmentés.
+
+
+## Capture qualifiée le11 novembre2026
+
+La [preuve5056167](evidence/schedule-retention-capture-dev-2026-11-11.json) passe
+quatre groupes sur331sources figées et imagec59b8616 : SSO et vrai HTTP témoin,
+capture RO du succès non encore clos, reprise du même contrôle sans redémarrage,
+purge publique et absence physique. Le tir03:30UTC, son invocation et les logs
+recoupent le même hash/UUID/créneau.5990 fichiers d’artefacts sont copiés et
+vérifiés ; le registre privé est sauvegardé au repos. Les timers/services sont
+inactifs et le pilote est terminé. L’essai894df09 reste échoué et hors total.
+
+Capture privée schedule-retention-9a2a4cd1eb134c20b4e1c5a1a1bdc7c0. Le premier
+instant éligible est le18 novembre2026 à03:30:26.355818UTC. Le vieillissement
+reste réel et incomplet ; aucune rétention ni borne10000 n’est déclarée prouvée.
+
+Conserver aussi les deux images contrôle/runtime par export Docker natif dans
+ce dossier privé, avec leurs SHA et identités d’image. Cela protège le replay
+d’un remplacement futur des tags. Passer les deux sauvegardes SQLite en lecture
+seule et placer le dossier sous propriétaire root0700, sans modifier aucun
+octet ni mode des artefacts copiés. Un reçu privé recoupe les empreintes de
+capture, registre et inventaire avant/après. Cette conservation ne démarre
+aucun conteneur et n’administre pas FORGE.
+
+Restent : pannes propres de la capture et régressions du helper historique,
+pilote gardé de replay, vieillissement des tirs terminaux/générations retirées,
+protection après passage réel de rétention, bornes10000, concurrence078.4,
+adaptateur078.7 et campagne complète.

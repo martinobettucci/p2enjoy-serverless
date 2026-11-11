@@ -5932,3 +5932,14 @@ deux secondes ; aucun allongement du délai ni du démarrage applicatif.
 La cause interne précise du refus runtime n’est pas reconstruite.
 Recoupement078.4 : les admissions ont leurs témoins, mais concurrence propre
 sans maximum ni exclusivité demande encore son scénario discriminant.
+
+
+Capture5056167 réussie à03:30UTC : quatre groupes,331sources et mêmec59b8616.
+L’invocation succeeded conserve son tir dispatched/non clos dans le backup RO ;
+hash/UUID/créneau/logs et témoin HTTP antérieur sont recoupés. Le même contrôle
+reprend sans redémarrage, la garde est terminée et la fonction est purgée.
+Capture privée9a2a4cd1,5990 artefacts vérifiés ; âge éligible le18 novembre2026
+à03:30:26.355818UTC. Préserver les deux images par export Docker et les copies
+SQLite en lecture seule avant les prochains builds. Aucune preuve sept jours
+ni10000 objets ; propres pannes, régressions, replay et autres critères078
+restent ouverts. Preuve schedule-retention-capture-dev-2026-11-11.json.

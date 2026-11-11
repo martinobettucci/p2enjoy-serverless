@@ -7,7 +7,9 @@
 - Mode de capture native d’une invocation réussie encore source d’un tir non
   clos, avec témoin HTTP réel, sauvegarde RO et copie privée des artefacts et
   du registre. Reprise immédiate du même contrôle et purge API de la fixture.
-  Implémenté et relu ; qualification initiale puis vieillissement réel requis.
+  Capture initiale qualifiée par quatre groupes réels sur331sources, même
+  contrôle repris sans redémarrage et fixture purgée. Vieillissement éligible
+  le18 novembre2026 à03:30:26UTC ; preuve d’âge et borne10000 restent requises.
 
 ### Qualification du plafond d’instances
 
