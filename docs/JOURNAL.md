@@ -6059,3 +6059,14 @@ la restitution si le pilote disparaît. Le lancer via une opération RO bornée 
 helper, avec son verrou hérité, assure la jonction par la garde existante sans
 nouvelle coordination globale. Alarme30s/timeout40s ; ce raccordement rend les
 régressions de restitution nécessaires avant de qualifier le helper modifié.
+
+Essai27221ea/850e184c réel terminé en échec : frontière06:00UTC,2 handlers
+succeeded,172 refused_capacity et82 failed/execution_unavailable. Logs de
+maintenance OperationalError ; source340 stable, SQLite intègre/propriétaire
+1001, espace disponible. Aucun errno conservé, donc aucune causalité affirmée.
+Restitution de secours réussie, pas de capture ni purge métier revendiquée.
+Décision avant correction : reprendre ControlObserver existant dans la fenêtre
+instance-limit, connexion RO/autocommit ouverte après démarrage et fermée avant
+restitution, au lieu d'ouvrir/fermer à chaque lecture capacity. Conserver les
+assertions256/2/254 et rendre l'échec immédiat sur autre état terminal. Rejouer
+explicitement après ce changement, sans relance automatique d'un échec.

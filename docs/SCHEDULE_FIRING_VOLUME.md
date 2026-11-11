@@ -71,6 +71,28 @@ authentiques ; sauvegarde native vérifiée/protégée ;16 purges et restitution
 Le rapport conserve les sources/images avant/après, dates et empreintes. Cette
 préparation seule ne qualifie ni la borne10000, ni l'âge, ni les pannes du client.
 
+## Premier essai et observation durable
+
+L'essai27221ea à06:00UTC a produit deux handlers réussis,172 refus de capacité
+et82 tirs failed/execution_unavailable. Les journaux signalent OperationalError
+dans les maintenances planification/exécution ; SQLite est intègre et les
+fichiers appartiennent au bon propriétaire. L'errno et le site exact ne sont
+pas capturés : ne pas attribuer rétrospectivement l'échec à une cause certaine.
+Aucune sauvegarde validée ni purge métier n'est retenue. La restitution de
+secours conserve registres, artefacts, configuration et référence d'origine.
+
+Le poller capacity ouvrait/fermait des connexions RO successives autour du
+dispatch de256 tirs. Appliquer au seul mode instance-limit l'observateur durable
+déjà défini par [ADMISSION](ADMISSION.md#observation-durable-des-intentions-par-les-gardes) :
+ouvrir après démarrage une connexion CONTROL sous propriétaire, en autocommit,
+sans transaction retenue ; réutiliser ses lectures puis la fermer dans finally
+avant toute restitution. La garde indépendante n'en dépend pas. Motif : réduire
+les courses de fin de connexion pendant l'observation, sans délai SQL modifié,
+sans réécriture de registre et sans changer l'admission applicative. Cela reste
+un correctif du banc à éprouver, pas une preuve de cause ni une correction SQLite.
+Le client doit aussi échouer immédiatement sur un état terminal inattendu en
+conservant le relevé, au lieu d'attendre la fin du délai d'observation.
+
 ## Éligibilité et replay à qualifier
 
 Relever dans la sauvegarde le curseur réel C=W et le nombre initial T0=256.
