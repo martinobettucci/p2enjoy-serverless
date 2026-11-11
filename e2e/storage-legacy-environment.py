@@ -918,13 +918,26 @@ def main():
             assert item.get('mode') == 'instance-limit' and len(sys.argv) == 4
             requested={'SIGTERM':signal.SIGTERM,'SIGKILL':signal.SIGKILL}[sys.argv[3]]
             assert alive(item),'driver_must_be_alive'
+            started=time.monotonic()
+            signal_receipt={'campaign':campaign,'driver_pid':item['driver_pid'],
+                'driver_birth':item['driver_birth'],'signal':int(requested),'driver_dead':False}
             fd=os.pidfd_open(item['driver_pid'])
             try:
                 assert alive(item),'driver_identity_changed'
                 signal.pidfd_send_signal(fd,requested)
-                assert select.select([fd],[],[],10)[0],'driver_not_terminated'
+                signal_receipt['pidfd_readable']=bool(select.select([fd],[],[],10)[0])
+                try:
+                    status=Path('/proc',str(item['driver_pid']),'stat').read_text().rsplit(')',1)[1].split()
+                    signal_receipt['state_after_pidfd']={'state':status[0],'birth':status[19]}
+                except (FileNotFoundError,ProcessLookupError):
+                    signal_receipt['state_after_pidfd']=None
+                atomic(work/'driver-signal.json',signal_receipt)
+                assert signal_receipt['pidfd_readable'],'driver_not_terminated'
+                until(lambda:not alive(item),'driver_still_alive_after_pidfd',5)
+                signal_receipt.update(driver_dead=True,termination_seconds=time.monotonic()-started)
+                atomic(work/'driver-signal.json',signal_receipt)
             finally:os.close(fd)
-            emit({'event':'driver-signalled','signal':int(requested),'driver_dead':not alive(item)})
+            emit({'event':'driver-signalled',**signal_receipt})
             return
         if alive(item):
             fd = os.pidfd_open(item['driver_pid'])

@@ -50,7 +50,7 @@ try{
   else if(mode==='eof')child.stdin.end();
   else if(mode==='sigterm'||mode==='sigkill'){
    const signal=await remote('signal-driver',campaign,mode==='sigterm'?'SIGTERM':'SIGKILL');
-   assert(signal.driver_dead);assert.equal(signal.signal,mode==='sigterm'?15:9);events.push(signal);
+   events.push(signal);await save();assert(signal.driver_dead);assert.equal(signal.signal,mode==='sigterm'?15:9);
   }
   restoration=await until(async()=>{const value=await remote('status',campaign);return value.restored&&!value.driver_alive&&['inactive','unknown'].includes(value.timer_state)&&['inactive','unknown'].includes(value.service_state)?value:false;},'originals_not_restored',220);
   const value=restoration.restoration;
