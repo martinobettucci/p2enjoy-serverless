@@ -6170,3 +6170,11 @@ une copie active, sans attendre900s ni présenter ce déclenchement comme éché
 Sortie privée incomplète distincte, jamais source de replay ; source6:15 et sa
 date inchangées. Contrat SCHEDULE_CAPTURE_INTERRUPTION persisté ; code et preuves
 restent requis après les régressions du helper courant.
+
+Les20 régressions du helper fb79fe6 passent sur les mêmes342sources que le
+pilote e53b0d9 :11 reprises/partial,3 options/défaut900,6 consommateur/diagnostic/
+namespace étranger. Sources/images figées, reçu partiel60 et SHA du helper
+recoupés ; originaux restitués et unités jointes. Bilan29 groupes de l'étape,
+aucun défaut confirmé à l'audit des neuf preuves propres. Restent le mode count
+après09:30UTC et la frontière de capture initiale spécifiée séparément ; les
+preuves à sept jours et la campagne complète gardent SLS-078 ouverte.

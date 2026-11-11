@@ -864,13 +864,18 @@
     "source_unchanged": true,
     "copies_discarded_after_restore": true,
     "native_snapshot_capture_interruptions_qualified": false,
-    "historical_guard_regressions_on_current_helper_qualified": false,
+    "historical_guard_regressions_on_current_helper_qualified": true,
     "numeric_replay_qualified": false,
     "full_platform_campaign": false
   },
   "limitations": [
     "Chargement sous borne et pertes qualifiés ; aucune preuve10000 ni sept jours.",
     "Le mode count reste à exécuter après39 fenêtres réellement écoulées.",
-    "Régressions historiques du helper courant et pannes du copieur de capture initial encore requises."
-  ]
+    "Interruptions du copieur de capture initial et mode numérique encore requis."
+  ],
+  "guard_regressions": {
+    "path": "docs/evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json",
+    "sha256": "8ab034587f05f41cbb9bb245d65e2e113bc7a0bc94e0580ad4315f5b67862feb",
+    "groups": 20
+  }
 }

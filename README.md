@@ -35,8 +35,10 @@ futur replay restent à qualifier.
 Le pilote [de replay](docs/SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie)
 est qualifié sous la borne par [neuf groupes](docs/evidence/schedule-firing-replay-preflight-dev-2026-11-11.json)
 sur342sources : chargement4864 tirs, nouveau SSO/64 pages API, refus et pertes
-réelles, source conservée et restitutions. Le mode numérique et les régressions
-historiques restent requis ; le moteur applicatif et ses images sont inchangés.
+réelles, source conservée et restitutions. Les
+[vingt régressions historiques](docs/evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
+passent sur les mêmes342sources. Mode numérique et interruption du copieur
+initial restent requis ; moteur applicatif et images inchangés.
 La [borne des observations HTTP](docs/evidence/invocation-retention-volume-dev-2026-11-11.json)
 passe trois groupes réels sur337sources :10016 handlers/5008 par fonction,
 exacts10000 survivants et16 plus anciens retirés, deux purges et restitution.

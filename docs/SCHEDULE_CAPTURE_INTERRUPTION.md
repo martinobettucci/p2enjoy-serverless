@@ -24,7 +24,7 @@ Le callback ne modifie aucune donnée, date, registre ou résultat système.
 La voie normale conserve sa copie complète sans callback de faute.
 
 La sortie interrompue porte un nom distinct :
-qualification-history/schedule-firing-capture-interrupted-<UUID court complet>.
+qualification-history/schedule-firing-capture-interrupted-<32hex de campagne>.
 Elle est privée sous spark-docker0700 à ce stade, sans les protections finales
 d'une capture terminée. Le reçu identifie campagne, fenêtre, témoins source,
 pages restantes/totales, dossier et inode de sortie, PID/naissance du copieur et

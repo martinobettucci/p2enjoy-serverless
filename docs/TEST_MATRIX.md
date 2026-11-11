@@ -216,7 +216,11 @@ Le pilote `node e2e/schedule-firing-volume-replay.mjs MODE` passe
 sur342sources e53b0d9 : invalid1 (huit refus), not-eligible1, preflight3,
 seed-loss2 et observer-loss2.4864 tirs et64 pages API, zéro nouveau handler,
 sources scellées conservées, restitutions jointes. Les trois essais échoués
-restent exclus. Count après39 fenêtres et régressions du helper courant restent requis.
+restent exclus. Les
+[vingt régressions du helper courant](evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
+passent sur les mêmes342sources :11 restitutions,3 options et6 sûreté/consommateur.
+Étape29 groupes (9+20). Count après39 fenêtres et interruption du copieur initial
+restent requis ; aucun résultat numérique ou d'âge déduit du préflight.
 
 ## Plafond global isolé — SLS-099
 

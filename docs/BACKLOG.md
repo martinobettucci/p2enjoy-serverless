@@ -1577,22 +1577,25 @@ est spécifié avant code : source scellée vérifiée avant arrêt, copie atomi
 CONTROL en dernier, observation native de deux états au même curseur. Préflight,
 refus avant mutation/éligibilité, pertes pendant copie/observation et replay
 numérique implémentés ; qualification sous borne et pertes ci-dessous, mode
-count et régressions historiques encore requis.
+count et interruption du copieur initial encore requis.
 Premier essai0e29293 : huit refus et refus avant éligibilité passent, préflight
 échoué avant publication CONTROL sur TypeError dans l'écriture du reçu ;
-originaux restitués. Appel Path.open/opener corrigé ; replay explicite encore requis.
+originaux restitués. Appel Path.open/opener corrigé dans le replay qualifié ci-dessous.
 Essai7757065 : copie achevée, observation expirée sur le PID init Docker ;
 3840 tirs réels et deux invocations initiales constatés avant restitution.
 Sélection du processus Python unique, même cgroup que init, alignée sur
-l'opérateur historique ; replay encore requis. Cet essai ne qualifie pas le préflight.
+l'opérateur historique dans le replay qualifié ci-dessous. Cet essai reste échoué.
 Essai dad8031 : contrôleur Python identifié, expiration25s après4 fenêtres
 récupérées sur15. Attente waitpid bloquante et lectures RO réduites implémentées,
-délais25/35/40 inchangés ; aucune frontière qualifiée, replay encore requis.
+délais25/35/40 inchangés ; cet essai reste échoué et distinct du replay ci-dessous.
 Le [replaye53b0d9](evidence/schedule-firing-replay-preflight-dev-2026-11-11.json)
 passe neuf groupes sur342sources : refus avant mutation/éligibilité,4864 tirs
 issus de18 fenêtres manquées, SSO/64 pages API, pertes copie/observateur et
 restitutions indépendantes. Aucun handler nouveau ; source identique. Les trois
-essais échoués restent séparés. Mode count et régressions historiques encore requis.
+essais échoués restent séparés. Les
+[vingt régressions historiques](evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
+passent ensuite sur les mêmes342sources ; mode count et interruption du copieur
+initial encore requis, aucune rétention déduite du préflight.
 L'[interruption du copieur de capture](SCHEDULE_CAPTURE_INTERRUPTION.md) est
 spécifiée avant code : nominal puis perte réelle pendant SQLite backup,
 garde vivante bloquée par le verrou, SIGKILL/jonction et restitution indépendante.

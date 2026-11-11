@@ -270,4 +270,17 @@ est lié en gzip ; trois essais échoués sont conservés et exclus des neuf gro
 
 Le mode count et ses deux frontières au-delà10000 restent à qualifier après
 09:30UTC. Les neuf groupes ne prouvent pas la rétention numérique ; les
-régressions historiques du helper courant restent distinctes et requises.
+régressions historiques du helper courant sont qualifiées séparément ci-dessous.
+
+## Régressions historiques du pilote qualifiées
+
+La [preuve342sources](evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
+passe20 groupes distincts :11 reprises release/EOF/SIGTERM/SIGKILL/échéance120s
+et partielle60s, trois options/refus/défaut900 et six consommateur actif/diagnostic
+indisponible/namespace étranger. Le helper figé et les342sources sont identiques
+à l'époque des neuf groupes propres ; images conservées et originaux restitués
+à chaque fenêtre, pilotes et gardes joints. Le reçu natif partiel confirme60s.
+
+Soit29 groupes de l'étape, sans recomptage des assertions ou des essais échoués.
+Le mode count après39 fenêtres, les interruptions du copieur initial et les sept
+jours restent ouverts ; aucune campagne complète de plateforme revendiquée.

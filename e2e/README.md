@@ -1784,5 +1784,7 @@ n'est acquise par cette implémentation. Contrat :
 Le [replaye53b0d9](../docs/evidence/schedule-firing-replay-preflight-dev-2026-11-11.json)
 passe neuf groupes sur342sources : invalid/not-eligible, préflight de18 fenêtres
 et4864 tirs,64 pages API après SSO, deux pertes et restitutions indépendantes.
-Observation4,46s ; source conservée. Le mode count et les régressions historiques
-restent à exécuter ; les trois tentatives échouées sont conservées séparément.
+Observation4,46s ; source conservée. Les
+[vingt régressions historiques](../docs/evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
+passent sur les mêmes342sources. Count et interruption du copieur initial restent
+à exécuter ; les trois tentatives échouées sont conservées séparément.
