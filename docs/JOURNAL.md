@@ -5786,3 +5786,16 @@ Les trois essais antérieurs et leurs nettoyages restent séparés, sans ajouter
 leurs12 handlers ou quatre purges aux six handlers/deux purges courants.
 SLS-078.6 est qualifiée ; restent plafond global099, rétention réelle,
 adaptateur.7 et régression complète. Aucune autre unité clôturée.
+
+
+## 11 novembre2026 — Retirer la dépendance de qualification à FORGE
+
+Reprise après contestation du responsable : le CAS demandé protégeait la
+restitution d’une mutation introduite par le banc, pas le moteur. Demande
+retirée partout dans les contrats courants. Décision099 avant code : réutiliser
+la fenêtre DEV gardée du banc historique, même image courante et données neuves,
+avec le seul plafond2 fixé dans son conteneur. Les variables officielles restent
+intactes ; SSO réel depuis l’accueil, HTTP, tir planifié et pannes du pilote
+restent à éprouver. Aucun résultat nouveau déduit du refus préventif historique.
+Les résultats de console19groupes/326sources précédents sont recoupés et poussés
+séparément dans610bc16 ; aucun nouveau test fonctionnel exécuté pour cette lecture.

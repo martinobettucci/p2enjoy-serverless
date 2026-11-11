@@ -1061,13 +1061,12 @@ présentes avant fermeture. Le code 143 d’Uvicorn n’est accepté qu’avec s
 de lifespan observée ; SIGKILL reste un scénario séparé. Les gardes indépendantes
 redémarrent le contrôle en cas de perte du pilote.
 
-Le nominal historique de `instance-limit-guard.py` appliquait32→2 puis32 par
-propositions/API console et recréation du contrôle. La correction SLS-099 refuse
-maintenant cette baisse avant mutation : la console examinée ne fournit pas de
-précondition sur l'entrée active, indispensable à une restitution qui conserve
-une édition concurrente. Les campagnes dépendantes échouent sur ce prérequis ;
-leurs anciens succès restent historiques. Contrat et suite de restitution :
-[INSTANCE_LIMIT_RESTORATION](../docs/INSTANCE_LIMIT_RESTORATION.md).
+Le nominal historique de `instance-limit-guard.py` appliquait32→2 puis32.
+Le helper maintenu refuse cette mutation. SLS-099 remplace le scénario par une
+installation DEV temporaire de la même image, plafonnée à2 au démarrage, sans
+écriture de variable officielle. L’évolution conditionnelle de FORGE n’est
+plus un prérequis ; le nouveau mode et son raccordement restent à réaliser.
+[Contrat et preuves exigées](../docs/INSTANCE_LIMIT_RESTORATION.md).
 
 `node e2e/instance-limit-safety.mjs`, depuis le poste avec session SSO réelle,
 qualifie le refus avant mutation sur le SPARK au repos : namespace original,

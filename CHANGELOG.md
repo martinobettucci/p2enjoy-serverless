@@ -2,13 +2,11 @@
 
 ## [Non publié]
 
-### Garde du plafond d'instances
+### Qualification du plafond d’instances
 
-- Le helper refuse la baisse avant toute mutation tant que la console SPARK ne
-  sait pas conditionner l'écriture à la version active. Le test E2E du refus est
-  ajouté et passe deux groupes réels restore/EOF sur317 sources, namespace
-  supprimé, budgets/services/fichiers conservés. Restitution indépendante et
-  scénarios de panne restent ouverts dans SLS-099, sans modification de FORGE.
+- Décision SLS-099 corrigée : retirer la demande d’évolution de FORGE et préparer
+  un déploiement DEV isolé, même image, plafond2 au démarrage. Le refus préventif
+  historique reste qualifié ; nouveau mode, reprises et E2E restent à réaliser.
 
 ### Planifications en cours de qualification
 

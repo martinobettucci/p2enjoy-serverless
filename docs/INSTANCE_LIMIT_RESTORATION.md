@@ -1,78 +1,97 @@
-# Restitution du plafond d'instances de qualification
+# Qualification isolée du plafond d’instances
 
 Contrat de correction de [SLS-099](BACKLOG.md#sls-099), préalable au test du
-plafond global de SLS-078. Cible unique : SPARK DEV infra-serverless ; clé unique :
-`SERVERLESS_FUNCTION_INSTANCE_LIMIT`. Toute écriture passe par la console normale.
+plafond global de [SLS-078](SCHEDULES.md). Cible unique : SPARK DEV
+infra-serverless. Aucun changement de FORGE ni écriture de variable officielle.
 
-## Autorité de comparaison
+## Décision du 11 novembre 2026
 
-Mesure du10 novembre2026 : GET de l'environnement et des suggestions répondent200,
-plafond32, origine spark. Les sources de sparkd montrent que PUT env lit seulement
-value/secret ; suggestions/apply vérifie le SHA de la proposition, puis importe
-sans condition sur l'entrée active. L'UPDATE de poser porte seulement WHERE id.
-updated_at est à la seconde. Ces observations ne prouvent aucune course provoquée.
+Le scénario abandonné abaissait le plafond officiel de32 à2, puis réécrivait32.
+Sa restitution pouvait écraser une édition concurrente. Le refus préventif a
+été qualifié, mais demander une écriture conditionnelle à FORGE était une
+mauvaise dépendance : elle protégeait une mutation introduite par le test,
+pas une nécessité du moteur. Cette demande est retirée.
 
-Une lecture de2 suivie d'une écriture de32 peut donc écraser une édition entre
-les deux. Un verrou local de garde, un second GET ou un contrôle après écriture
-ne garantit pas la conservation de cette édition. Aucun de ces palliatifs n'est
-retenu comme correction de SLS-099.2.
+Qualifier la même règle sur une installation temporaire de la plateforme,
+configurée dès son démarrage avec un plafond de deux instances. Le plafond de
+l’installation habituelle reste32. Le budget1CPU empêcherait de tester isolément
+32 instances à0,05CPU chacune : le refus CPU interviendrait en premier.
 
-La capacité nécessaire est une version d'entrée active, modifiée à chaque
-mutation, et une précondition vérifiée par l'autorité dans la même transaction
-que l'écriture. Un conflit ne modifie ni le registre ni la projection. Une valeur
-revenue à2 après d'autres mutations doit également être distinguée. Le SHA de
-proposition continue à protéger la proposition ; il ne remplace pas cette version.
+## Installation temporaire réelle
 
-## Refus avant toute mutation
+Réutiliser la fenêtre gardée de `e2e/storage-legacy-environment.py`, décrite dans
+[STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md#fenêtre-et-conservation-des-données),
+avec un mode distinct `instance-limit`. Aucun ancien serveur ni fausse dépendance :
+l’image immuable est exactement celle du contrôle servi, avec ses migrations,
+son SSO, son ordonnanceur, son runtime Docker et son agent de stockage réels.
 
-Tant que cette capacité n'est pas fournie et qualifiée, le helper maintenu refuse
-la baisse32→2 : sortie2, événement `instance-limit-blocked`, code fixe
-`active_environment_precondition_unavailable`, zéro mutation. Il vérifie d'abord
-l'identité du SPARK, le namespace de campagne `invocation-<8hex>`, l'absence de
-fonction étrangère, appel/instance/opération/réservation active, la cohérence
-officielle/consommée et la santé des deux services. Aucune proposition n'est
-écrite et aucun Compose n'est lancé, même sur EOF ou réception de `restore`.
+- Précontrôle au repos, sauvegardes natives et identités des trois répertoires
+  contrôle/artefacts, stockage et canal ; référence conservée en fonctionnement.
+- Garde indépendante armée avant arrêt du contrôle habituel et de l’agent.
+  Les originaux sont conservés par renommage, puis des répertoires neufs
+  appartenant au propriétaire réel sont placés aux mêmes chemins. La nouvelle
+  installation reçoit son UUID par le démarrage applicatif normal.
+- Le conteneur `serverless-api-instance-limit` sert temporairement le même18090
+  par les routes HTTPS existantes. Le contrôle habituel est arrêté et conservé
+  par ID ; il ne partage aucune base ni aucun volume avec cette installation.
+- Les deux fichiers officiels restent les sources de configuration et de secrets.
+  La définition Compose temporaire fixe uniquement
+  `SERVERLESS_FUNCTION_INSTANCE_LIMIT: "2"` pour son propre conteneur.
+  Cette configuration de déploiement DEV est explicite ; aucun fichier `.env`,
+  proposition `.?`, PUT console ou réglage de test dans le code applicatif.
+- Le banc vérifie la valeur réellement consommée2, les budgets CPU/RAM inchangés,
+  l’égalité de l’image au contrôle habituel et les identités distinctes des données.
+- Nouvelle connexion SSO normale depuis l’accueil public, sans transfert de session
+  ni insertion SQL. Les objets, jetons, publications et promotions passent par
+  les vraies API ; les handlers originaux sont exécutés dans Docker.
 
-Le nominal historique est conservé dans ses preuves et son commit source ; il
-n'est pas attribué au helper corrigé. Les campagnes qui ont besoin d'abaisser le
-plafond échouent explicitement sur ce prérequis. Elles ne sont ni ignorées ni
-annoncées réussies. Les preuves indépendantes continuent.
+Cette fenêtre interrompt temporairement la console DEV habituelle, comme le
+banc historique existant. Les commandes de preuve sont strictement en série.
+Le client E2E sollicite le déploiement ; il ne démarre aucun serveur applicatif
+local ni ne remplace le calcul d’admission.
 
-## Suite après capacité externe
+## Scénarios requis
 
-La restitution indépendante reste à réaliser après définition du vrai protocole
-conditionnel : garde armée avant baisse, identité/version de l'application,
-mutation et restitution sérialisées, aucun rejeu d'une réponse inconnue,
-fin des processus/gardes attendue. Une édition concurrente produit une issue de
-conflit explicite ; elle n'est ni remplacée ni adoptée silencieusement.
+1. Deux fonctions à0,25CPU/128Mio occupent deux instances réelles ; la troisième
+   ne peut pas démarrer, alors que ses CPU/RAM tiendraient encore. Son appel
+   HTTP expire en file avec429, sans handler ni troisième conteneur.
+2. Une mutation de minimum3 est refusée409 sans changer la fonction ; après
+   libération des deux appels, la troisième s’exécute et les budgets se libèrent.
+3. À une vraie frontière UTC, le tir planifié d’une troisième fonction est
+   `refused_capacity`, sans invocation. Après libération, le prochain tir
+   réussit sans rejeu du précédent ; événements et hash exécuté recoupés.
+4. Restitution nominale puis EOF, SIGTERM et SIGKILL réels du pilote : originaux
+   retrouvés par identité, même contrôle/image avec redémarrage attendu, agent
+   sain, référence inchangée, fichiers officiels/propositions conservés.
+5. Perte du pilote avec un vrai consommateur Docker : retirer uniquement les
+   conteneurs/réseaux de l’installation temporaire, libérer ses baux par le
+   véritable agent avant l’arrêt de celui-ci, puis restaurer les originaux.
 
-Les preuves exigées restent intégralement32→2→32, EOF, SIGTERM, perte SIGKILL du
-helper, échéance et édition concurrente (dont retour à la même valeur). Elles
-recoupent valeur active, valeur consommée, autres configurations et référence.
-Aucune clôture de SLS-099 sur le seul refus préventif.
+La garde reprend celle du banc existant : code figé, journal durable, verrou
+hérité des commandes bornées, jonction avant restitution, identités vérifiées.
+Un répertoire inconnu ou une modification officielle inattendue interdit une
+restitution aveugle et reste un échec explicite ; aucune valeur n’est réécrite.
+Le retrait complet de l’installation temporaire après panne n’est pas présenté
+comme une purge métier réussie. Les purges du nominal passent par les API.
 
-## Preuve ciblée du refus
+## Intégration et portée des preuves
 
-Un namespace original est créé par l'API administrateur réelle. Le vrai helper
-est exécuté avec l'entrée `restore`, puis avec EOF ; chacun doit refuser avant
-mutation. Les relevés natifs avant/après doivent conserver fichiers officiels,
-propositions, services (ID/image/démarrage), budgets et compteurs. Le namespace
-est supprimé par l'API réelle. Sources locales/distantes et image sont recoupées.
+Le cas de plafond est déplacé du scénario qui modifiait la cellule vers cette
+campagne dédiée ; toutes ses assertions sont conservées. La suite publique
+et la matrice complète doivent appeler cette campagne : aucun test supprimé,
+ignoré ou annoncé réussi par sa seule séparation. Le refus de l’ancien helper
+reste maintenu tant que ses appelants ne sont pas remplacés.
 
-L'évolution conditionnelle de la console est un accès/capacité externe, cas4 de
-CLAUDE : l'administration et la modification de FORGE sont interdites ici.
-Le propriétaire fournit cette capacité ; ce dépôt n'altère aucun code de FORGE.
+Avant clôture : tests propres du nouveau mode, cas HTTP et planifié, reprises,
+purges et recoupement des originaux, puis campagnes connexes. Sources locales,
+distantes et embarquées, images, rapports et nettoyages sont liés à chaque époque.
+Aucune preuve nouvelle n’est acquise par cette décision documentaire.
 
-## Résultat ciblé du10 novembre2026
+## Preuve historique du refus préventif
 
-La [preuve DEV](evidence/instance-limit-safety-dev-2026-11-10.json), client6e573c0,
-passe deux groupes réels et deux refus restore/EOF, zéro skip/erreur de nettoyage.
-Les317 sources locales/distantes sont figées avant/après, mêmes images contrôle
-et CLI. Plafond32/CPU1/RAM8192, quatre fichiers officiels/proposition et les deux
-services (ID/image/démarrage/santé) restent identiques. Le namespace est supprimé
-par HTTPS et recoupé en base ; aucun service associé ni ressource active restante.
-Les5982 artefacts antérieurs conservent leur empreinte d'inventaire.
-
-Ce résultat qualifie uniquement le refus préventif. Aucun cycle32→2→32, SIGTERM,
-SIGKILL ou conflit d'écriture n'est attribué à ce correctif. La demande de capacité
-conditionnelle est transmise ; les autres preuves SLS-078 restent livrables.
+La [preuve du10 novembre2026](evidence/instance-limit-safety-dev-2026-11-10.json),
+client6e573c0, passe deux groupes réels restore/EOF avant mutation sur317 sources.
+Le namespace est supprimé, budgets32/1CPU/8192Mio, services, quatre fichiers
+et5982 artefacts antérieurs conservés. Elle qualifie uniquement ce refus,
+pas le déploiement temporaire, les pannes ni la restitution indépendante.
+Le nominal32→2→32 antérieur garde sa propre époque ; il n’est pas rejoué.

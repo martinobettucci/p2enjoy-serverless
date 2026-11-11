@@ -69,7 +69,7 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
-| 1 | [SLS-099](#sls-099) Restitution du plafond d'instances de qualification | Corriger | `[~]` | capacité conditionnelle externe | [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md) |
+| 1 | [SLS-099](#sls-099) Qualification isolée du plafond d'instances | Corriger | `[~]` | SLS-040 | [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
@@ -115,7 +115,6 @@ la réponse est livré sans attendre.
 | Budget de cellule CPU/RAM pour les minima de la référence (au moins 1,5 CPU et 2 Gio) | 4 (proposition `.?` au propriétaire du SPARK) | La campagne complète de [SLS-080](#sls-080) | Adaptateur, fixtures, 12 des 13 fonctions à un budget plus bas, preuves hors budget |
 | Autorité d'installation temporaire pour rejouer le guide | 4 | [SLS-079](#sls-079) | Rédaction du guide, tableau de configuration comparé au code |
 | Comptes SSO de test (non vérifié, vérifié, admin) et rotation de clé réelle | 4 | Preuves de [SLS-089](#sls-089) | Correctifs et tests de composants |
-| Écriture conditionnelle de l'entrée active dans la console SPARK | 4 (capacité externe ; FORGE hors périmètre) | Restitution garantie [SLS-099](#sls-099), test du plafond global de SLS-078 | Refus préventif du helper ; autres preuves SLS-078 et unités indépendantes |
 
 ## Suivi des demandes du responsable
 
@@ -2064,32 +2063,34 @@ substitution ; manuel et matrice de parité mis à jour avec la livraison.
 
 
 <a id="sls-099"></a>
-## SLS-099 — Restitution du plafond d'instances de qualification
+## SLS-099 — Qualification isolée du plafond d’instances
 
-Statut : [~] — correction en cours ; pas de précondition d'écriture active dans
-la console normale examinée, capacité externe nécessaire. Aucun écrasement réel
-provoqué. Nature : Corriger. Dépend de : SLS-040. Ordre : 1,
-préalable à la preuve du plafond global de SLS-078.
+Statut : [~] — dépendance à une évolution de FORGE retirée le11 novembre2026 ;
+installation temporaire et preuves à réaliser. Nature : Corriger. Dépend de :
+SLS-040. Ordre :1, préalable à la preuve du plafond global de SLS-078.
 Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md).
-Refus préventif implémenté et [vérifié en DEV](evidence/instance-limit-safety-dev-2026-11-10.json) :
-deux groupes réels, deux refus restore/EOF avant mutation,317 sources figées,
-namespace supprimé et recoupé nativement ; budgets/services/fichiers et5982
-artefacts conservés. Les cycles de restitution et pannes restent non qualifiés.
 
-Constat : e2e/instance-limit-guard.py restaure32 dans finally sans vérifier la
-valeur active ; une édition concurrente peut être écrasée. Le délai180s n'est
-pas une garde indépendante et SIGKILL du helper n'exécute pas finally.
+Constat : le test abaissait32→2 puis réécrivait32, avec un risque d’écrasement
+concurrent et sans restitution indépendante. Le refus préventif est
+[vérifié historiquement](evidence/instance-limit-safety-dev-2026-11-10.json).
+La correction retenue élimine cette mutation : même image réelle, installation
+DEV temporaire à plafond2 dès son démarrage, données originales mises à l’abri,
+SSO/API/Docker/agent réels. Aucun besoin d’évolution de FORGE.
 
-Critères d'acceptation :
+Critères d’acceptation :
 
-- [x] SLS-099.1 Contrat d36e645 avant code6e573c0 et [preuve du refus](evidence/instance-limit-safety-dev-2026-11-10.json). Correction documentée avant code, autorité bornée au seul SPARK
-  infra-serverless et à SERVERLESS_FUNCTION_INSTANCE_LIMIT, API console normale.
-- [ ] SLS-099.2 Restitution corrélée à l'application possédée, valeur concurrente
-  conservée et issue inconnue signalée ; aucune adoption silencieuse.
-- [ ] SLS-099.3 Restitution indépendante après perte réelle du helper, attente de
-  fin des processus/gardes et valeur officielle/consommée cohérente.
-- [ ] SLS-099.4 Parcours nominal32→2→32, EOF/SIGTERM, SIGKILL et édition concurrente
-  réellement éprouvés, sans mocks ; mêmes autres configurations et référence.
+- [x] SLS-099.1 Décision et périmètre persistés avant le code ; ancienne demande
+  externe retirée. La preuve historique des deux refus reste distincte.
+- [ ] SLS-099.2 Déploiement isolé à plafond2, même image que le contrôle habituel,
+  CPU/RAM inchangés ; zéro écriture de variable/proposition officielle.
+- [ ] SLS-099.3 Restitution indépendante des répertoires et services après perte
+  réelle du pilote, même avec un consommateur Docker ; processus/gardes terminés,
+  originaux conservés, aucun retrait d’une ressource étrangère.
+- [ ] SLS-099.4 Deux instances réelles puis refus HTTP de la troisième, minimum3
+  refusé sans mutation, prochain appel sain ; refus planifié sans invocation,
+  prochain tir sain sans rejeu. Nominal, EOF, SIGTERM et SIGKILL éprouvés.
+- [ ] SLS-099.5 Campagne dédiée raccordée à la suite publique et à la matrice,
+  toutes les assertions précédentes conservées ; régressions connexes réussies.
 
-Le scénario nominal historique reste conservé. Ses pannes ne sont pas déduites
-de ce succès. Aucun changement de FORGE ni profil PREPROD/PROD.
+Les anciens succès32→2→32 et le refus préventif ne qualifient pas ces nouveaux
+critères. L’unité reste ouverte jusqu’aux preuves sur le vrai déploiement.
