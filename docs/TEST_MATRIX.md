@@ -290,3 +290,13 @@ n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant so
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
 rejouer les tests. Charge10000, frontières, pannes propres et régressions restent
 à qualifier ; aucun succès de rétention déduit de ces cinq groupes.
+
+## Pilote durable du volume source — SLS-078.5
+
+`python3 -B e2e/source-retention-worker-loss.py` : vrai SSO et appels sous
+worker utilisateur indépendant, SIGKILL MainPID et résultat signal9 finalisé
+comme échec, puis retrait de deux consommateurs et restitution native. Trois
+groupes requis, pas de mock ni rétention déduite. Ensuite le nominal utilise
+`invocation-source-retention-worker.py start`, contrôlé par `status UUID` et
+`finish UUID` après fin réelle. Checkpoint, code Node, état système et sources/
+images avant/après doivent concorder. Implémentation acquise, preuves à exécuter.

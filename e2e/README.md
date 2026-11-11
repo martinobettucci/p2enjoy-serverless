@@ -1849,3 +1849,27 @@ n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant so
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
 rejouer les tests. Charge10000, frontières, pannes propres et régressions restent
 à qualifier ; aucun succès de rétention déduit de ces cinq groupes.
+
+## Pilote durable de la preuve longue des sources
+
+`python3 -B e2e/invocation-source-retention-worker.py start` lit les identifiants
+SSO sur stdin privée puis lance une seule tâche systemd utilisateur locale,
+sans récurrence. Elle exécute le client E2E réel et conserve son checkpoint
+dans `.local/e2e/source-retention-worker-UUID/`. Après la sortie du lanceur,
+`status UUID` relit MainPID/naissance/cgroup ; une absence de handle ne vaut
+pas résultat. `finish UUID` conserve le vrai résultat systemd après la fin du
+worker, puis arrête cette seule unité. Une finalisation interrompue reprend
+depuis son reçu sans lancer de nouveau test.
+
+Service oneshot borné3600s, Node3000s et garde distante2700s ; identifiants transmis
+en mémoire par canal Unix authentifié, aucune valeur sensible persistée. Aucun
+autre scénario n'est lancé pendant la tâche. En cas d'échec/interruption, vérifier
+la restitution autoritative du SPARK avant toute autre opération. Implémentation
+et syntaxe acquises ; preuve d'indépendance et nominal restent à qualifier.
+
+Avant le nominal, `python3 -B e2e/source-retention-worker-loss.py` reçoit aussi
+les identifiants privés, lance le vrai worker et attend des réponses et deux
+fonctions, puis SIGKILL son seul MainPID. Il exige le résultat système signal9,
+la finalisation en échec, deux consommateurs retirés et les originaux restitués
+avec sources/images identiques. Trois groupes attendus ; aucune rétention ni
+purge métier n'est attribuée à cette panne.

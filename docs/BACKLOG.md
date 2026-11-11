@@ -1631,8 +1631,12 @@ retenu. Même346sources/images et originaux restitués, cause non établie.
 Le [pilote durable](INVOCATION_SOURCE_RETENTION_VOLUME.md#essai-interrompu-et-pilote-durable)
 est décidé avant code : tâche utilisateur locale transitoire, identifiants SSO
 en mémoire par socket authentifié, mêmes clients et dépendances réels, relevés
-avant/après et vérification indépendante du processus. Implémentation et preuve
-restent requises avant reprise du nominal ; aucun rejeu automatique de l'essai.
+avant/après et vérification indépendante du processus. Lanceur oneshot et finalisation durable implémentés, syntaxe contrôlée ; preuve
+d'indépendance et nominal restent requis. Aucun rejeu automatique de l'essai.
+Le client de perte du worker est implémenté : SSO/appels réels, SIGKILL ciblé,
+finalisation de l'échec et restauration recoupée en trois groupes. Ce scénario
+et le nouveau nominal restent à qualifier ; les cinq groupes de garde existants
+gardent leur époque346 distincte.
 Le [replay d'âge](RETENTION_HISTORY_REPLAY.md) a son contrat explicite : les deux
 captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
 capturée, garde120, observation avant santé et contrôles stricts d'identité à
