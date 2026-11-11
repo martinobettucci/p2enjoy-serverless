@@ -6393,3 +6393,10 @@ Décision avant correction : inventaire Docker immédiatement avant la faute, pu
 absence réelle de chaque conteneur/réseau/bail et installation temporaire après
 restitution ; conserver séparément les retraits enregistrés par la garde. Ne pas
 attribuer un acteur non observé. Persister le relevé terminal avant assertion.
+
+Inventaire du client de perte corrigé : lecture Docker seule avant SIGKILL,
+identités installation/fonction/révision/image et réseaux recoupées ; après
+restitution, absence de chaque ID observé, de toute ressource d'installation et
+de tout bail cible. Les retraits de la garde restent des faits séparés ; aucune
+assertion sur un acteur non observé. Relevé terminal sauvegardé avant assertions.
+Syntaxe contrôlée ; nouveau cas réel encore requis.

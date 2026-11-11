@@ -300,3 +300,6 @@ groupes requis, pas de mock ni rétention déduite. Ensuite le nominal utilise
 `invocation-source-retention-worker.py start`, contrôlé par `status UUID` et
 `finish UUID` après fin réelle. Checkpoint, code Node, état système et sources/
 images avant/après doivent concorder. Implémentation acquise, preuves à exécuter.
+Le premier essai200ea30 reste échoué et exclu ; le contrôle corrigé relève les
+identifiants Docker réels avant faute puis leur absence et celle des baux après
+restitution, en distinguant les retraits explicites de la garde.
