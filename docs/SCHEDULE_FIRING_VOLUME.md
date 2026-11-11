@@ -161,7 +161,7 @@ Décision du11 novembre2026 avant code. Étendre uniquement le mode instance-lim
 avec la paire explicite --firing-history=schedule-firing-volume-<32hex> et
 --firing-observation=preflight|count|seed-loss|observer-loss. Refuser toute option
 isolée, ambiguë, inconnue, hors mode ou identifiant non canonique avant création
-de fenêtre. Modes nominaux : garde900 ; modes de perte : garde120 explicite.
+de fenêtre. Tous les modes de replay exigent la garde120 explicite.
 Le client est e2e/schedule-firing-volume-replay.mjs ; le module opérateur natif
 est e2e/schedule_firing_volume_replay.py. Ce sont des outils DEV, sans réglage
 supplémentaire du moteur applicatif, du runtime, du SSO ou de FORGE.
@@ -193,8 +193,13 @@ fermer/détacher avant restitution comme pour les fenêtres déjà qualifiées.
 
 ## Observation du replay et preuves propres
 
-D est la frontière réelle du démarrage. Démarrer dans la première partie d'une
-fenêtre, garder une marge avant D+300 et échouer si le créneau suivant est atteint :
+D est la frontière réelle du démarrage. Armer entre D+10 et D+120 ; la garde120
+indépendante retire ainsi la copie avant D+300 même si le client reste bloqué
+pendant SSO ou les lectures. Le défaut900 des autres usages reste inchangé.
+Motif : empêcher les générations actives de lancer le créneau suivant pendant
+un pilote bloqué ; une simple vérification d'horloge dans le client ne suffit pas.
+Démarrer dans cette première partie de fenêtre, garder une marge avant D+300
+et échouer si le créneau suivant est atteint :
 aucun nouveau handler ne doit être lancé. La préflight exige1 à38 fenêtres manquées
 et un total encore inférieur à10000 ; count exige au moins39 fenêtres manquées.
 Les témoins doivent rester plus jeunes que sept jours. Un refus d'éligibilité

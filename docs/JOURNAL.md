@@ -6109,3 +6109,10 @@ elles ne valent pas preuve10000. Le futur count observera les états commis avan
 après pruning au même curseur, puis SSO/API, santé et restitution. Garder le
 premier lot critique complet, pas un seuil au milieu du lot. Contrat détaillé
 SCHEDULE_FIRING_VOLUME persisté avant le nouveau module et le raccordement.
+
+Relecture du délai du replay : imposer120s aussi au nominal, explicitement,
+avec armement D+10..D+120 avant le démarrage. Une garde900 ne garantirait pas
+l'absence d'un nouveau créneau si le client restait bloqué en SSO/API. La garde
+120 retire la copie avant D+300 ; un dépassement fait échouer la preuve, sans
+handler nouveau ni remise en cause du défaut900 des autres usages. Contrat
+révisé avant l'ajustement du raccordement et avant le nouveau client.
