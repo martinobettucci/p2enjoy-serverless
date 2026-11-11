@@ -1572,6 +1572,11 @@ replay numérique le11 novembre09:30UTC. Les
 passent ensuite sur les mêmes340sources :11 reprises,3 options/défaut900 et6
 avec consommateur/diagnostic indisponible/namespace étranger. Copie native sous
 panne et futur replay restent requis ; aucune rétention déduite de la préparation.
+Le [chargement/replay gardé](SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie)
+est spécifié avant code : source scellée vérifiée avant arrêt, copie atomique
+CONTROL en dernier, observation native de deux états au même curseur. Préflight,
+refus avant mutation/éligibilité, pertes pendant copie/observation et replay
+numérique restent à implémenter et qualifier.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

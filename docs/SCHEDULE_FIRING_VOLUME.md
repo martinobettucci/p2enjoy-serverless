@@ -142,7 +142,7 @@ réelle D>=C+39*300, soit3h15 après C. Ce délai est mesuré sur l'horloge du S
 jamais remplacé par une date injectée. Les témoins restent âgés de moins de sept
 jours pour isoler la borne numérique. Chaque fonction reste sous10000 tirs.
 
-Le futur pilote de replay doit être spécifié et qualifié avant son usage :
+Le pilote de replay décrit ci-dessous doit être qualifié avant son usage :
 fenêtre gardée exclusive, données/registre/artefacts copiés avant démarrage de
 l'image capturée, originaux conservés et aucun consommateur original partagé.
 Ne pas réutiliser une seconde base avec le registre actif de la plateforme.
@@ -154,3 +154,82 @@ fenêtres par passage ; un relevé au milieu d'un lot ne suffit pas. Recouper
 fenêtres, générations/indices, absence de nouvelles invocations, dates authentiques,
 portée globale et absence de rejeu. Le mécanisme d'observation natif et ses pannes
 restent à qualifier ; aucun succès n'est déduit de ce plan ou de la capture.
+
+## Chargement gardé de la copie
+
+Décision du11 novembre2026 avant code. Étendre uniquement le mode instance-limit
+avec la paire explicite --firing-history=schedule-firing-volume-<32hex> et
+--firing-observation=preflight|count|seed-loss|observer-loss. Refuser toute option
+isolée, ambiguë, inconnue, hors mode ou identifiant non canonique avant création
+de fenêtre. Modes nominaux : garde900 ; modes de perte : garde120 explicite.
+Le client est e2e/schedule-firing-volume-replay.mjs ; le module opérateur natif
+est e2e/schedule_firing_volume_replay.py. Ce sont des outils DEV, sans réglage
+supplémentaire du moteur applicatif, du runtime, du SSO ou de FORGE.
+
+Avant tout arrêt, vérifier le reçu public de capture, sa copie privée terminée,
+les propriétaires/modes root0700/root0400, chemins canoniques et absence de liens,
+SHA/intégrité des deux SQLite fermées, témoins256/16/2 exacts, inventaire des
+artefacts et exports d'images immuables. Les bases scellées sont ouvertes RO
+immutable, sans créer de sidecar ; aucun fichier source n'est modifié. Vérifier
+registre sans bail, probe, volume monté ou intention pendante. L'image contrôle
+doit être celle capturée et celle servie ; le runtime doit correspondre au reçu.
+Un prérequis absent échoue ; aucune substitution d'image ni capture fabriquée.
+
+Le journal de la nouvelle fenêtre lie namespace_name et temporary_installation
+aux témoins capturés, différents de l'installation originale, avant toute copie.
+Après renommage des trois originaux et installation des trois remplacements
+déjà journalisés, copier les artefacts puis le registre puis CONTROL. Les deux
+SQLite passent par fichier temporaire, fsync et rename atomique ; CONTROL est
+publié en dernier, complet et sous propriétaire spark-docker0600. Les sources
+restent scellées. Aucune donnée métier, date, génération ou UUID n'est réécrit.
+Les commandes de copie héritent du verrou et sont bornées40s.
+
+Motif de cet ordre : avant publication CONTROL, la restitution existante peut
+lire le registre sans références sous le propriétaire de original-state ; après
+publication, la base entière permet le contrôle d'appartenance. Aucun remplacement
+inutilisé n'est peuplé et aucune base tronquée n'est exposée. Ouvrir la connexion
+RO durable après copie complète, avant démarrage de l'agent et du contrôle ; la
+fermer/détacher avant restitution comme pour les fenêtres déjà qualifiées.
+
+## Observation du replay et preuves propres
+
+D est la frontière réelle du démarrage. Démarrer dans la première partie d'une
+fenêtre, garder une marge avant D+300 et échouer si le créneau suivant est atteint :
+aucun nouveau handler ne doit être lancé. La préflight exige1 à38 fenêtres manquées
+et un total encore inférieur à10000 ; count exige au moins39 fenêtres manquées.
+Les témoins doivent rester plus jeunes que sept jours. Un refus d'éligibilité
+est vérifié séparément avant cette date ; il ne devient pas un succès numérique.
+
+Armer NativeObserver sur le PID/naissance exact du conteneur créé avant l'attente
+healthy. Une attache tardive ne donne aucun succès : elle fait échouer le cas.
+Le traceur ne change aucun registre, tampon ou retour système. Limiter les
+lectures SQL aux frontières natives utiles, avec connexion RO/autocommit ; les
+syscalls ne valent jamais preuve seuls, seuls les prédicats SQL observés décident.
+Après le lot critique complet, observer les lignes encore visibles en lecture
+commise avant la suppression commise, puis les10000 UUID exacts au même curseur.
+Les fdatasync et fermetures de descripteurs servent de points d'observation ;
+si la frontière n'est pas observable, conserver l'échec sans relance automatique.
+
+Pour count, le premier lot qui franchit la borne finit après
+min(D-C,40*300) secondes de curseur. Vérifier toutes ses fenêtres,256 déclarations
+par fenêtre, les256 témoins initiaux inchangés, tous les nouveaux tirs en
+skipped_downtime et exactement les deux invocations initiales. Recalculer les
+survivants depuis completed_at DESC,id DESC et comparer aux UUID réellement
+relus après commit. Chaque fonction reste individuellement sous10000. Conserver
+les vecteurs complets et leur rapport brut compressé, pas seulement des compteurs.
+
+Après détachement, attendre santé et fin de récupération au curseur D ; nouvelle
+connexion SSO depuis l'accueil, lectures API paginées des16 fonctions recoupées
+avec le relevé natif. Puis restitution des originaux, jonction des processus/
+gardes et nouvelle vérification des sources scellées. Trois groupes nominaux :
+chargement/observation native ; SSO/lectures réelles sans handler nouveau ;
+restitution/source inchangée. Le préflight ne qualifie pas la borne numérique.
+
+Qualifier séparément les refus d'options/source avant mutation, le refus count
+avant39 fenêtres, la perte après publication du registre mais avant CONTROL et
+la perte après attache réelle de l'observateur. Ces deux pertes tuent réellement
+le pilote et le mutateur, gardent un reçu privé du point atteint, puis exigent
+la restitution indépendante120s et la source inchangée ; elles ne sont ni
+purges métier ni succès de handler. Timeout40s et verrou hérité imposent la
+jonction du mutateur avant restauration. Les nouveaux cas et les régressions
+historiques doivent passer avant de qualifier le pilote ; SLS-078 reste ouverte.

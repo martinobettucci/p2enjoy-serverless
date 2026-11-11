@@ -6095,3 +6095,17 @@ l'essai27221ea reste exclu. Restent copies/replays sous panne, borne des tirs,
 source protégée sous borne numérique, sept jours et campagne complète. La
 copie des tirs devient éligible09:30UTC ; continuer les travaux indépendants
 pendant le délai réel, sans retoucher les sauvegardes conservées.
+
+### Pilote de replay de la borne des tirs
+
+Décision avant code : réutiliser la fenêtre instance-limit par option de source
+scellée explicite et mode d'observation. Vérifier avant arrêt, conserver UUID et
+namespace capturés, peupler uniquement les remplacements déjà renommés ; artefacts
+puis registre atomique puis CONTROL atomique en dernier. Motif : le restore doit
+rester possible après perte pendant copie sans lire une SQLite tronquée ni devoir
+retirer un remplacement inutilisé non vide. Verrou hérité et timeout40s conservés.
+Préflight avant39 fenêtres et pertes réelles qualifient le chargement/observateur ;
+elles ne valent pas preuve10000. Le futur count observera les états commis avant/
+après pruning au même curseur, puis SSO/API, santé et restitution. Garder le
+premier lot critique complet, pas un seuil au milieu du lot. Contrat détaillé
+SCHEDULE_FIRING_VOLUME persisté avant le nouveau module et le raccordement.
