@@ -7265,3 +7265,8 @@ implémenté. La référence et les services sont seulement lus pendant l'explor
 Le contrat CONSOLE_PUBLICATION conserve ses preuves historiques mais sa lecture
 courante est corrigée : SLS-074 est livrée, publication séparée de la promotion,
 catalogue paginé par hash. Il ne décrit plus ces gestes comme restant à coder.
+
+La revue du serveur en cours relève que la borne du corps doit aussi précéder
+l’allocation JSON : décision complémentaire avant correction, quatre réceptions
+autorisées au plus, dans la garde de lecteurs, délai de30secondes et408.
+Aucune qualification serveur revendiquée avant déploiement et vrais E2E.

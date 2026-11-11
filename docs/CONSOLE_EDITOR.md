@@ -77,6 +77,10 @@ DEFLATE classique sans ZIP64 ; les modes et octets conservés sont repris, les
 métadonnées de transport n'entrent pas dans l'identité canonique. Il n'ajoute
 aucune dépendance. La réservation et la marge de1Gio restent celles du pipeline.
 Les sauvegardes de brouillon gardent aussi cette marge avant une écriture WAL.
+La capacité des quatre lecteurs est acquise avant réception du JSON autorisé ;
+la réception et son décodage disposent de 30 secondes. Une admission refusée ne
+lit pas le corps et un dépassement renvoie408. La garde est libérée après
+annulation/jonction, afin de borner aussi les gros enregistrements concurrents.
 
 ## Persistance, concurrence et conservation
 
