@@ -1741,7 +1741,9 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   deux vrais handlers, SIGSTOP après attache/reçu et avant assertion10002 ;
   acteur indépendant SIGCONT après vraie alarme35+.5 ou suspension jusqu'au
   vrai timeout40. Statuts opérateur/wrapper/helper distincts, TracerPid0 mesuré
-  avant retrait du contrôle, nettoyages et ressources recoupés. Code/E2E requis.
+  avant retrait du contrôle, nettoyages et ressources recoupés. Code implémenté :
+  portes SIGSTOP, acteur indépendant, reçu de commande et deux options du client ;
+  syntaxes contrôlées, revue et E2E encore requis. Les valeurs35/40 restent inchangées.
 - [ ] Attente native partagée de 25 s : défaut reproduit puis borne corrigée
   qualifiée sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
   avant detach. Le waitpid bloquant dépassait sa borne ; la correction attend

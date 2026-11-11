@@ -13,18 +13,129 @@ const run=promisify(execFile),campaign=randomUUID(),base='https://serverless.lel
 const ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
 const helper='/srv/p2enjoy-serverless/e2e/storage-legacy-environment.py',out=new URL('../.local/e2e/',import.meta.url);
 const options=process.argv.slice(2),observerRefusal=options.length===1&&options[0]==='--observer-refusal';
-assert(options.length===0||observerRefusal,'unknown_source_retention_options');
-const report=new URL((observerRefusal?'invocation-source-observer-refusal-':'invocation-source-retention-volume-')+campaign+'.json',out),events=[],checks=[],observations=[],functions=[],responses=[],producers=[];
+const observerDeadline=options.length===1&&options[0]==='--observer-global-deadline'?'global-alarm':options.length===1&&options[0]==='--observer-command-timeout'?'command-timeout':null;
+const observerDiagnostic=observerRefusal||Boolean(observerDeadline);
+assert(options.length===0||observerDiagnostic,'unknown_source_retention_options');
+const report=new URL((observerDeadline?'invocation-source-observer-'+observerDeadline+'-':observerRefusal?'invocation-source-observer-refusal-':'invocation-source-retention-volume-')+campaign+'.json',out),events=[],checks=[],observations=[],functions=[],responses=[],producers=[];
 const driverErrors=[];
 let caller,stopProducing=false,saveQueue=Promise.resolve(),window,lastCall;
 let child,ended=false,exitCode=null,browser,context,admin,session,namespace,service,reader,work,archive,completed=false,cleanup=false,failure=null,restoration;
-function save(){saveQueue=saveQueue.then(async()=>{const p=new URL(report.pathname+'.pending','file:');await writeFile(p,JSON.stringify({campaign,mode:observerRefusal?'observer-refusal':'count',completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,responses,function_ids:functions.map(v=>v.id),namespace_id:namespace?.id,exit_code:exitCode,failure,restoration},null,2)+'\n',{mode:0o600});await rename(p,report);});return saveQueue;}
+function save(){saveQueue=saveQueue.then(async()=>{const p=new URL(report.pathname+'.pending','file:');await writeFile(p,JSON.stringify({campaign,mode:observerDeadline??(observerRefusal?'observer-refusal':'count'),completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,responses,function_ids:functions.map(v=>v.id),namespace_id:namespace?.id,exit_code:exitCode,failure,restoration},null,2)+'\n',{mode:0o600});await rename(p,report);});return saveQueue;}
 async function until(action,message,seconds=90){const deadline=Date.now()+seconds*1000;while(Date.now()<deadline){const v=await action();if(v)return v;await new Promise(r=>setTimeout(r,250));}assert.fail(message);}
 async function event(name){return until(()=>{const v=events.find(v=>v.event===name);assert(v||!ended,'deployment_driver_stopped');return v;},'deployment_event_missing',150);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}finally{await save();}}
 async function operation(op,extra={}){const offset=events.length;assert(!ended);child.stdin.write(JSON.stringify({op,...extra})+'\n');const found=await until(()=>{const v=events.slice(offset).find(v=>v.event==='result'&&v.op===op);assert(v||!ended,'deployment_driver_stopped');return v;},'operator_observation_missing');const value=found.value;if(op==='capacity')found.value={installation_id:value.installation_id,instances:value.instances.length,containers:value.containers.length,invocations:value.invocations.length};return value;}
 async function capacity(){return operation('capacity');}
 async function remote(op,...args){try{const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,op,campaign,...args],{timeout:60000,maxBuffer:12*1024*1024});return JSON.parse(stdout.trim().split('\n').at(-1));}catch(error){error.operator=op;await writeFile(new URL('source-retention-operator-'+campaign+'-'+op+'.stderr',out),String(error.stderr??''),{mode:0o600});throw error;}}
+
+// @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40
+// @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40
+async function deadlineConsumersBefore(initial){
+ const expected={campaign,functions:functions.map(v=>v.id),instances:initial.instances,runtime_image:initial.containers[0].image};
+ const program='expected='+JSON.stringify(JSON.stringify(expected))+'\nexpected=__import__("json").loads(expected)\n'+String.raw`
+import json,os,socket,sqlite3,stat,subprocess,sys,time
+from contextlib import closing
+from pathlib import Path
+from uuid import UUID
+assert os.geteuid()==0 and socket.gethostname()=='infra-serverless' and str(UUID(expected['campaign']))==expected['campaign']
+work=Path('/srv/p2enjoy-serverless/qualification-history')/('instance-limit-'+expected['campaign']);info=work.lstat()
+assert work.resolve()==work and info.st_uid==0 and stat.S_IMODE(info.st_mode)==0o750
+item=json.loads((work/'restore.json').read_text());assert item['mode']=='instance-limit' and item['guard_seconds']==2700 and not item.get('restored')
+installation=item['temporary_installation'];assert str(UUID(installation))==installation and installation!=item['installation']
+def docker(*args):return subprocess.check_output(item['docker']+list(args),text=True,timeout=15)
+identifiers=docker('ps','-aq','--no-trunc','--filter','label=tech.p2enjoy.serverless.installation='+installation).split();assert len(identifiers)==2
+by_function={v['function_id']:v for v in expected['instances']};assert len(by_function)==2
+containers=[];networks={};prefix='tech.p2enjoy.serverless.'
+for value in json.loads(docker('inspect',*identifiers)):
+ labels=value['Config']['Labels'];function,revision,consumer=(labels[prefix+k] for k in ('function','revision','instance'))
+ assert labels[prefix+'installation']==installation and labels[prefix+'kind']=='instance' and function in expected['functions']
+ assert value['Image']==expected['runtime_image'] and value['State']['Running']
+ assert by_function[function]['id']==consumer and by_function[function]['revision_id']==revision
+ network_ids=[v['NetworkID'] for v in value['NetworkSettings']['Networks'].values()];assert len(network_ids)==1
+ containers.append({'id':value['Id'],'image':value['Image'],'function_id':function,'revision_id':revision,'consumer_id':consumer,'network_ids':network_ids})
+ for identifier in network_ids:
+  network=json.loads(docker('network','inspect',identifier))[0];labels=network['Labels']
+  assert labels[prefix+'installation']==installation and labels[prefix+'kind']=='instance-network'
+  assert labels[prefix+'function']==function and labels[prefix+'revision']==revision and labels[prefix+'instance']==consumer
+  assert set(network['Containers'])=={value['Id']};networks[identifier]={'id':identifier,'function_id':function,'revision_id':revision,'consumer_id':consumer}
+assert len(networks)==2 and len({v['consumer_id'] for v in containers})==2
+sys.path.insert(0,'/srv/p2enjoy-serverless/e2e');from control_database import control_owner
+with control_owner(Path(item['paths']['state'])/'control.sqlite3'),closing(sqlite3.connect('file:'+str(Path(item['paths']['storage'])/'registry.sqlite3')+'?mode=ro',uri=True)) as db:
+ db.row_factory=sqlite3.Row;leases=[dict(v) for v in db.execute('SELECT consumer_id,installation_id,function_id FROM leases WHERE installation_id=?',(installation,))]
+assert len(leases)==2 and {v['consumer_id'] for v in leases}=={v['consumer_id'] for v in containers}
+for lease in leases:assert lease['function_id']==next(v['function_id'] for v in containers if v['consumer_id']==lease['consumer_id'])
+print(json.dumps({'completed':True,'installation_id':installation,'containers':containers,'networks':list(networks.values()),'leases':leases,'sampled_at':time.time()}))
+`;
+ return new Promise((resolve,reject)=>{const p=execFile('ssh',[...ssh,'python3 -B -'],{timeout:60000,maxBuffer:2*1024*1024},(error,stdout)=>error?reject(error):resolve(JSON.parse(stdout)));p.stdin.on('error',reject);p.stdin.end(program);});
+}
+
+async function deadlineEvidence(){
+ const program='campaign='+JSON.stringify(campaign)+'\n'+String.raw`
+import hashlib,json,os,socket,stat
+from pathlib import Path
+from uuid import UUID
+assert os.geteuid()==0 and socket.gethostname()=='infra-serverless' and str(UUID(campaign))==campaign
+work=Path('/srv/p2enjoy-serverless/qualification-history')/('instance-limit-'+campaign)
+info=work.lstat();assert work.resolve()==work and info.st_uid==0 and stat.S_IMODE(info.st_mode)==0o750
+item=json.loads((work/'restore.json').read_text());assert item['campaign']==campaign and item['mode']=='instance-limit' and item['guard_seconds']==2700 and item['restored']
+result={'completed':True,'files':{},'metadata':{}}
+for name in ('source-retention-observation.json','source-observer-command.json','source-observer-deadline-identity.json','source-observer-actor.json','source-observer-actor-ready.json'):
+ p=work/name;info=p.lstat();assert stat.S_ISREG(info.st_mode) and info.st_uid==0 and stat.S_IMODE(info.st_mode)==0o600
+ raw=p.read_bytes();result['files'][name]=json.loads(raw);result['metadata'][name]={'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'mode':stat.S_IMODE(info.st_mode),'uid':info.st_uid}
+for name in ('source-observer-command.stdout','source-observer-command.stderr'):
+ p=work/name;info=p.lstat();assert stat.S_ISREG(info.st_mode) and info.st_uid==0 and stat.S_IMODE(info.st_mode)==0o600
+ raw=p.read_bytes();result['metadata'][name]={'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}
+print(json.dumps(result))
+`;
+ return new Promise((resolve,reject)=>{const p=execFile('ssh',[...ssh,'python3 -B -'],{timeout:30000,maxBuffer:4*1024*1024},(error,stdout)=>error?reject(error):resolve(JSON.parse(stdout)));p.stdin.on('error',reject);p.stdin.end(program);});
+}
+async function proveObserverDeadline(initial){
+ let heartbeat=0;
+ await until(async()=>{assert(!ended,'guard_ended_before_cron');if(Date.now()-heartbeat>10000){assert((await api('/api/session')).authenticated);heartbeat=Date.now();}return Date.now()/1000>=window-1;},'real_cron_boundary_not_reached',480);
+ assert(Date.now()/1000<window-.2,'last_http_start_frontier_missed');startLastCall();
+ child.stdin.write(JSON.stringify({op:'observe-source-retention',functions:functions.map(v=>v.id),window,deadline_fault:observerDeadline})+'\n');
+ await until(()=>ended,'deadline_operator_and_driver_not_joined',100);
+ const driverStderr=Buffer.concat(driverErrors);await writeFile(new URL('source-observer-'+observerDeadline+'-driver-'+campaign+'.stderr',out),driverStderr,{mode:0o600});
+ assert.equal(exitCode,1);restoration=events.find(v=>v.event==='restored');
+ assert(restoration&&restoration.databases_identical&&restoration.artifacts_identical&&restoration.configuration_unchanged&&restoration.reference_unchanged&&restoration.temporary_directories_removed&&restoration.control_healthy);assert.equal(restoration.independent,false);
+ const evidence=await deadlineEvidence(),files=evidence.files,measured=files['source-retention-observation.json'],command=files['source-observer-command.json'],identity=files['source-observer-deadline-identity.json'],actor=files['source-observer-actor.json'];
+ const status=await remote('status'),last=await lastCall;
+ observations.push({scenario:'source-observer-deadline-terminal',deadline_mode:observerDeadline,evidence,terminal_status:status,last_http:last.error?{error_type:last.error.name}:{response:last.value}});await save();
+ assert.equal(measured.completed,false);assert(measured.inherited_guard_lock);assert.deepEqual(measured.initial_counts,{total:2,terminal:0});assert.equal(measured.running.length,2);
+ assert(measured.running.every(v=>v.handler_started&&v.state==='running'&&v.completed_at===null));assert.deepEqual(measured.running.map(v=>v.function_id).sort(),functions.map(v=>v.id).sort());
+ const scheduled=measured.running.find(v=>v.function_id===functions[1].id),http=measured.running.find(v=>v.function_id===functions[0].id),firing=measured.initial.firing;
+ assert.equal(http.trigger,'http');assert.equal(scheduled.trigger,'schedule');assert.deepEqual(measured.initial.invocations.map(v=>v.id).sort(),measured.running.map(v=>v.id).sort());
+ assert(firing&&firing.function_id===functions[1].id&&firing.window_at===window&&firing.state==='dispatched'&&firing.completed_at===null&&firing.invocation_id===scheduled.id);
+ assert.equal(measured.initial.invocations.find(v=>v.id===scheduled.id).schedule_firing_id,firing.id);
+ const gate=measured.deadline_fault;assert.equal(gate.mode,observerDeadline);assert.equal(gate.operator.pid,measured.operator.pid);assert.equal(gate.operator.birth,measured.operator.birth);assert.equal(measured.after_attach.tracer_pid,gate.operator.pid);
+ assert.equal(gate.control.pid,measured.pid);assert.equal(gate.control.birth,measured.birth);assert.equal(gate.container_id,measured.container_id);assert.equal(identity.operator_source_sha256,createHash('sha256').update(await readFile(new URL('invocation-source-retention-observer.py',import.meta.url))).digest('hex'));
+ assert(gate.wrapper_deadline_monotonic-gate.alarm_deadline_monotonic-.5>=2);
+ assert(actor.completed&&actor.pidfd_closed&&actor.operator_pidfd_readable);assert.equal(actor.mode,observerDeadline);assert.equal(actor.operator.birth,gate.operator.birth);assert.equal(actor.stopped.state,'T');assert.equal(actor.deadline_sample.state,'T');assert((actor.deadline_sample.pending|actor.deadline_sample.shared_pending)&8192);
+ assert(actor.deadline_sample_monotonic>=gate.alarm_deadline_monotonic+.5);assert.notEqual(actor.actor.pid,gate.operator.pid);assert.notEqual(actor.actor.cgroup,gate.operator.cgroup);assert(actor.actor.cgroup.includes(gate.unit));
+ assert.equal(actor.control_after_exit.pid,measured.pid);assert.equal(actor.control_after_exit.birth,measured.birth);assert.equal(actor.control_after_exit.tracer_pid,0);
+ assert(command.completed&&!command.rescue_used&&command.wrapper_joined&&command.wrapper_pidfd_readable&&command.operator_absent);assert.equal(command.phase,'finished');assert.deepEqual(command.argv.slice(0,5),['timeout','--verbose','--foreground','--signal=KILL','40s']);
+ assert.equal(command.control_before_restore.pid,measured.pid);assert.equal(command.control_before_restore.birth,measured.birth);assert.equal(command.control_before_restore.tracer_pid,0);
+ assert.equal(command.stdout_sha256,evidence.metadata['source-observer-command.stdout'].sha256);assert.equal(command.stderr_sha256,evidence.metadata['source-observer-command.stderr'].sha256);
+ assert.equal(command.actor_terminal.MainPID,'0');assert.equal(command.actor_terminal.Result,'success');assert.equal(command.actor_terminal.ExecMainCode,'1');assert.equal(command.actor_terminal.ExecMainStatus,'0');assert.equal(command.actor_joined.ActiveState,'inactive');assert.equal(command.actor_joined.MainPID,'0');
+ if(observerDeadline==='global-alarm'){
+  assert.equal(command.returncode,1);assert(command.duration>=35&&command.duration<40);assert(!command.timeout_kill_reported);assert.equal(actor.signals_sent.length,1);assert.equal(actor.signals_sent[0].signal,18);assert(actor.signals_sent[0].pidfd);
+  assert.equal(measured.failure_type,'TimeoutError');assert.equal(measured.reason,'native_observation_deadline');assert.deepEqual(measured.primary_failure,{type:'TimeoutError',reason:'native_observation_deadline'});assert(!measured.cleanup_errors?.length);
+  assert.equal(measured.after_detach.pid,measured.pid);assert.equal(measured.after_detach.birth,measured.birth);assert.equal(measured.after_detach.tracer_pid,0);assert(measured.reader_closed&&measured.observer_memory_closed);
+  assert(driverStderr.includes(Buffer.from('source_retention_observation_failed:native_observation_deadline')));
+ }else{
+  assert.equal(command.returncode,137);assert(command.duration>=40&&command.duration<43);assert(command.timeout_kill_reported);assert.equal(actor.signals_sent.length,0);
+  for(const key of ['after_detach','reader_closed','observer_memory_closed','failure_type'])assert(!(key in measured));assert.equal(evidence.metadata['source-observer-command.stdout'].bytes,0);
+  assert(driverStderr.includes(Buffer.from('source_retention_command_exit:137')));
+ }
+ assert(status.restored&&!status.driver_alive&&['inactive','unknown'].includes(status.timer_state)&&['inactive','unknown'].includes(status.service_state));
+ const before=observations.find(v=>v.scenario==='source-deadline-consumers-before').native,consumers=status.consumer_cleanup;assert(before.completed&&consumers);
+ assert.equal(before.containers.length,2);assert.equal(before.networks.length,2);assert.equal(before.leases.length,2);
+ for(const call of measured.initial.invocations){const prior=before.containers.find(v=>v.function_id===call.function_id);assert(prior);assert.equal(call.instance_id,prior.consumer_id);assert.equal(call.revision_id,prior.revision_id);}
+ for(const current of consumers.containers){const prior=before.containers.find(v=>v.id===current.id);assert(prior);assert.equal(current.consumer_id,prior.consumer_id);assert.equal(current.image,prior.image);assert.equal(current.kind,'instance');}
+ for(const identifier of consumers.networks)assert(before.networks.some(v=>v.id===identifier));
+ for(const lease of consumers.leases)assert(before.leases.some(v=>v.consumer_id===lease.consumer_id&&v.function_id===lease.function_id&&v.installation_id===lease.installation_id));
+ const physical=await physicalCleanup();observations.push({scenario:'physically-absent-after-deadline',physical,helper_exit_code:exitCode,helper_stderr_sha256:createHash('sha256').update(driverStderr).digest('hex'),retention_qualified:false});cleanup=true;
+}
 
 async function api(url,{method='GET',body,bytes,status=200,headers={}}={}){const r=await admin.fetch(base+url,{method,data:bytes??body,headers:{Origin:base,'X-CSRF-Token':session?.csrf_token,...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});assert([status].flat().includes(r.status()),`${method} ${url}: ${r.status()}`);return r.json();}
 async function publish(fn){const row=await api(`/api/functions/${fn.id}`),candidate=await api(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:fn.config.handler,events:{http:[{path:'probe',methods:['POST'],implicit:true}],schedules:fn.schedules??[]}}});const result=await api(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes:archive});assert.equal(result.state,'published');fn.revision_id=result.revision_id;fn.deployment_id=candidate.id;return result.code_hash;}
@@ -81,20 +192,20 @@ await mkdir(out,{recursive:true,mode:0o700});await save();let credentials;
 try{
  assert(!process.stdin.isTTY,'private_pipe_required');const input=createInterface({input:process.stdin});credentials=await new Promise((resolve,reject)=>{input.once('line',line=>{try{assert(line.length<=8192);resolve(JSON.parse(line));}catch{reject(new Error('private_input_invalid'));}finally{input.close();}});input.once('close',()=>reject(new Error('private_input_missing')));});assert(credentials?.username&&credentials?.password);
  const image=(await run('ssh',[...ssh,'runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock','inspect','--format','{{.Image}}','serverless-api'],{timeout:20000})).stdout.trim();assert.match(image,/^sha256:[a-f0-9]{64}$/);
- child=spawn('ssh',[...ssh,'python3','-B',helper,'instance-limit',campaign,image,'--guard-seconds=2700'],{stdio:['pipe','pipe','pipe']});createInterface({input:child.stdout}).on('line',line=>{try{events.push(JSON.parse(line));}catch{events.push({event:'invalid-driver-output'});}});child.stderr.on('data',chunk=>{if(observerRefusal)driverErrors.push(chunk);});child.stdin.on('error',()=>{});child.on('close',code=>{ended=true;exitCode=code;});child.on('error',()=>{ended=true;exitCode=-1;});
+ child=spawn('ssh',[...ssh,'python3','-B',helper,'instance-limit',campaign,image,'--guard-seconds=2700'],{stdio:['pipe','pipe','pipe']});createInterface({input:child.stdout}).on('line',line=>{try{events.push(JSON.parse(line));}catch{events.push({event:'invalid-driver-output'});}});child.stderr.on('data',chunk=>{if(observerDiagnostic)driverErrors.push(chunk);});child.stdin.on('error',()=>{});child.on('close',code=>{ended=true;exitCode=code;});child.on('error',()=>{ended=true;exitCode=-1;});
  let initial,before,after;
  await check('SSO réel et deux instances préchauffées dans une installation isolée de même image',async()=>{
   const armed=await event('guard-armed'),ready=await event('instance-limit-ready');assert.equal(armed.guard_seconds,2700);assert(armed.timer_schedule.includes('OnActiveUSec=45min'));assert.equal(ready.container.image,image);assert.equal(ready.capacity.invocations.length,0);
   browser=await chromium.launch({headless:true});context=await browser.newContext({locale:'fr-FR'});const page=await context.newPage();await page.goto(base);await page.getByRole('link',{name:'Se connecter avec le SSO',exact:true}).click();await page.waitForURL('https://oauth.lelabs.tech/**');await page.locator('input[name=username]').fill(credentials.username);await page.locator('input[type=password]').fill(credentials.password);credentials=null;await page.locator('input[type=submit],button[type=submit]').first().click();await page.waitForURL(base+'/**',{timeout:90000});await page.getByRole('heading',{name:'Fonctions',exact:true}).waitFor();admin=context.request;session=await api('/api/session');assert(session.authenticated);caller=await request.newContext({timeout:30000});
   namespace=await api('/api/namespaces',{method:'POST',status:201,body:{name:'instance-limit-'+campaign.slice(0,8)}});service=await api(`/api/namespaces/${namespace.id}/services`,{method:'POST',status:201,body:{name:'protected-invocation-history'}});reader=await api(`/api/services/${service.id}/tokens`,{method:'POST',status:201,body:{name:'invoke-history-observations',rights:['read']}});
-  window=observerRefusal?Math.ceil((Date.now()/1000+120)/300)*300:Math.floor(Date.now()/300000)*300+2100;
+  window=observerDiagnostic?Math.ceil((Date.now()/1000+120)/300)*300:Math.floor(Date.now()/300000)*300+2100;
   work=await mkdtemp(new URL('retention-observation-code-',out).pathname);archive=(await publicationArchive(work,'retention-volume','protected-retention-observation.handler',['protected-retention-observation.cjs'])).bytes;
   for(const name of ['first-retention-stream','second-retention-stream']){const fn=await api(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'protected-retention-observation.handler',cpu:.5,memory_mib:128,timeout_seconds:10,idle_seconds:0,min_instances:1,max_instances:1,concurrency:1,queue_timeout_seconds:30,storage:{concurrency:'shared',data:{enabled:false,quota_mib:2},cache:{enabled:false,quota_mib:2}}}}});functions.push(fn);if(functions.length===2){const date=new Date(window*1000);fn.schedules=[{cron:`${date.getUTCMinutes()} ${date.getUTCHours()} * * *`,enabled:true,timezone:'UTC'}];}await save();fn.hash=await publish(fn);await promote(fn,fn.hash);}
-  initial=await until(async()=>{const s=await capacity();return s.instances.length===2&&s.instances.every(v=>v.state==='ready')?s:false;},'two_warm_instances_missing');terminal(initial,0);assert.equal(initial.instances.reduce((n,v)=>n+v.cpu_nanos,0),1000000000);assert.equal(initial.instances.reduce((n,v)=>n+v.memory_mib,0),256);assert.equal(initial.containers.length,2);for(const c of initial.containers)assert(c.running&&c.cpu_nanos===500000000&&c.memory_bytes===128*1024**2);observations.push({scenario:'initial-warm-instances',native:initial});
-  if(observerRefusal){assert(Date.now()/1000<window-30,'preparation_margin_before_cron_exhausted');assert.equal(responses.length,0);observations.push({scenario:'underfilled-history-before-boundary',window,native:initial});await save();return;}
+  initial=await until(async()=>{const s=await capacity();return s.instances.length===2&&s.instances.every(v=>v.state==='ready')?s:false;},'two_warm_instances_missing');terminal(initial,0);assert.equal(initial.instances.reduce((n,v)=>n+v.cpu_nanos,0),1000000000);assert.equal(initial.instances.reduce((n,v)=>n+v.memory_mib,0),256);assert.equal(initial.containers.length,2);for(const c of initial.containers)assert(c.running&&c.cpu_nanos===500000000&&c.memory_bytes===128*1024**2);observations.push({scenario:'initial-warm-instances',native:initial});if(observerDeadline){const consumers=await deadlineConsumersBefore(initial);observations.push({scenario:'source-deadline-consumers-before',native:consumers});}
+  if(observerDiagnostic){assert(Date.now()/1000<window-30,'preparation_margin_before_cron_exhausted');assert.equal(responses.length,0);observations.push({scenario:'underfilled-history-before-boundary',window,native:initial});await save();return;}
   await streams(0,5000);assert.equal(responses.length,10000);before=await capacity();terminal(before,10000);assert.deepEqual(before.invocations.map(v=>v.id).sort(),responses.map(v=>v.id).sort());for(const fn of functions)assert.equal(responses.filter(v=>v.function_id===fn.id).length,5000);assert(Date.now()/1000<window-60,'production_margin_before_cron_exhausted');observations.push({scenario:'ten-thousand-ordinary-invocations',window,native:before});await save();
  });
- if(!observerRefusal){
+ if(!observerDiagnostic){
  await check('Source exclue avant clôture puis recomptée : trois ensembles exacts10002→10001→10000',async()=>{
   let heartbeat=0;
   await until(async()=>{assert(!ended,'guard_ended_before_cron');if(Date.now()-heartbeat>10000){assert((await api('/api/session')).authenticated);heartbeat=Date.now();}return Date.now()/1000>=window-1;},'real_cron_boundary_not_reached',2400);
@@ -112,6 +223,8 @@ try{
   await api(`/api/services/${service.id}`,{method:'DELETE'});await api(`/api/namespaces/${namespace.id}`,{method:'DELETE'});const state=await capacity();assert.equal(state.instances.length,0);assert.equal(state.containers.length,0);assert(state.functions.every(v=>v.deleted_at));const physical=await physicalCleanup();observations.push({scenario:'purged-before-restoration',physical,invocations_preserved:state.invocations.length});
   child.stdin.end(JSON.stringify({op:'restore'})+'\n');restoration=await event('restored');assert(restoration.databases_identical&&restoration.artifacts_identical&&restoration.configuration_unchanged&&restoration.reference_unchanged&&restoration.temporary_directories_removed);assert.equal(restoration.independent,false);await until(()=>ended,'deployment_not_joined',30);assert.equal(exitCode,0);const status=await remote('status');assert(status.restored&&!status.driver_alive&&['inactive','unknown'].includes(status.timer_state)&&['inactive','unknown'].includes(status.service_state));observations.push({scenario:'restore-joined',restored:true,driver_alive:status.driver_alive,timer_state:status.timer_state,service_state:status.service_state});cleanup=true;
  });
+ }else if(observerDeadline){
+ await check('Borne réelle '+observerDeadline+' après attache et restitution jointe',()=>proveObserverDeadline(initial));
  }else{
  await check('Historique insuffisant après attache : refus réel, détachement et lecteur fermé, restitution jointe',async()=>{
   let heartbeat=0;

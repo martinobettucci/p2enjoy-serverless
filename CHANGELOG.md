@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Banc de l'opérateur source : deux fautes réelles après attachement,
+  expiration35 après SIGSTOP/SIGCONT indépendant et coupure de commande40.
+  Statuts distincts conservés, contrôle libéré mesuré avant restauration,
+  acteur joint et erreurs de nettoyage séparées. Implémenté ; E2E encore requis.
+
 - Banc natif de mesure25s sur un vrai contrôle temporaire gelé par Docker,
   dégel indépendant28s et restitution120. Mesure primaire et erreurs de
   nettoyage séparées. [Trois groupes de reproduction](docs/evidence/native-observer-deadline-reproduce-dev-2026-11-11.json)

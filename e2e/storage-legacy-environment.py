@@ -1234,13 +1234,20 @@ def main():
                 assert result['completed'], 'native_deadline_measurement_incomplete'
             elif op == 'observe-source-retention':
                 assert item.get('mode') == 'instance-limit' and item['guard_seconds'] == 2700
-                assert set(request) == {'op','functions','window'}
+                assert set(request) in ({'op','functions','window'}, {'op','functions','window','deadline_fault'})
+                if 'deadline_fault' in request:
+                    assert request['deadline_fault'] in ('global-alarm', 'command-timeout')
                 identifiers = request['functions']
                 assert len(identifiers) == len(set(identifiers)) == 2
                 assert all(isinstance(v,str) and str(UUID(v)) == v for v in identifiers)
                 assert type(request['window']) is int and request['window'] % 300 == 0
-                result = json.loads(command(['python3','-B',str(BASE/'e2e/invocation-source-retention-observer.py'),
-                    campaign,','.join(identifiers),str(request['window']),'--lock-fd',str(LOCK)], (0,1), foreground_timeout=True))
+                # @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40
+                if 'deadline_fault' in request:
+                    from source_observer_deadlines import run_command
+                    result = run_command(campaign, request['deadline_fault'], LOCK, identifiers, request['window'])
+                else:
+                    result = json.loads(command(['python3','-B',str(BASE/'e2e/invocation-source-retention-observer.py'),
+                        campaign,','.join(identifiers),str(request['window']),'--lock-fd',str(LOCK)], (0,1), foreground_timeout=True))
                 assert result['completed'], 'source_retention_observation_failed:' + str(result.get('reason') or result.get('failure_type'))
             elif op == 'firing-replay-state':
                 assert mode == 'instance-limit' and item.get('firing_replay') and set(request)=={'op'}

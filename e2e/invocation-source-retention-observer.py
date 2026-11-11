@@ -111,6 +111,10 @@ def observe(args, receipt, target):
         receipt['initial_counts'] = {'total': len(initial['invocations']),
                                      'terminal': sum(v['completed_at'] is not None for v in initial['invocations'])}
         atomic(target, receipt)
+        # @spec docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40
+        if args.deadline_fault:
+            from source_observer_deadlines import arm
+            arm(args.campaign, args.deadline_fault, receipt, target)
         assert receipt['initial_counts'] == {'total': 10002, 'terminal': 10000}, 'retention_history_incomplete'
         assert initial['firing'] and initial['firing']['state'] == 'dispatched' and initial['firing']['completed_at'] is None
         source_id = initial['firing']['invocation_id']
@@ -164,21 +168,39 @@ def observe(args, receipt, target):
                 elif counts['total'] < 10001 and protected is None:
                     raise AssertionError('protected_gc_frontier_missed')
             observer.resume()
+    except BaseException as error:
+        receipt['primary_failure'] = {'type': type(error).__name__,
+            'reason': str(error) if isinstance(error, (AssertionError, TimeoutError)) else None}
+        if receipt.get('inherited_guard_lock'):
+            atomic(target, receipt)
+        raise
     finally:
         try:
             try:
                 if observer:
-                    observer.detach()
+                    try:
+                        observer.detach()
+                    except BaseException as error:
+                        receipt.setdefault('cleanup_errors', []).append({'step': 'detach', 'type': type(error).__name__})
+                        raise
             finally:
                 if receipt.get('inherited_guard_lock'):
-                    detached = traced_process(pid)
-                    receipt['after_detach'] = detached
-                    receipt['observer_memory_closed'] = observer is None or observer.memory is None
-                    assert detached['birth'] == birth and detached['tracer_pid'] == 0, 'native_tracer_retained'
-                    assert receipt['observer_memory_closed'], 'native_memory_descriptor_retained'
+                    try:
+                        detached = traced_process(pid)
+                        receipt['after_detach'] = detached
+                        receipt['observer_memory_closed'] = observer is None or observer.memory is None
+                        assert detached['birth'] == birth and detached['tracer_pid'] == 0, 'native_tracer_retained'
+                        assert receipt['observer_memory_closed'], 'native_memory_descriptor_retained'
+                    except BaseException as error:
+                        receipt.setdefault('cleanup_errors', []).append({'step': 'detach-state', 'type': type(error).__name__})
+                        raise
         finally:
             try:
-                reader.close()
+                try:
+                    reader.close()
+                except BaseException as error:
+                    receipt.setdefault('cleanup_errors', []).append({'step': 'reader', 'type': type(error).__name__})
+                    raise
                 receipt['reader_closed'] = reader.db is None
             finally:
                 if receipt.get('inherited_guard_lock'):
@@ -191,16 +213,18 @@ def main():
     parser.add_argument('functions')
     parser.add_argument('window', type=int)
     parser.add_argument('--lock-fd', type=int, required=True)
+    parser.add_argument('--deadline-fault', choices=('global-alarm', 'command-timeout'))
     args = parser.parse_args()
     receipt = {'completed': False}
     target = ROOT / 'qualification-history' / ('instance-limit-' + args.campaign) / 'source-retention-observation.json'
     signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(TimeoutError('native_observation_deadline')))
     signal.alarm(35)
+    receipt['global_alarm_started_monotonic'] = time.monotonic()
     try:
         print(json.dumps(observe(args, receipt, target)))
     except BaseException as error:
         receipt.update(completed=False, failure_type=type(error).__name__,
-                       reason=str(error) if isinstance(error, AssertionError) else None)
+                       reason=str(error) if isinstance(error, (AssertionError, TimeoutError)) else None)
         # Only an already validated window may receive a diagnostic file.
         if receipt.get('inherited_guard_lock'):
             atomic(target, receipt)

@@ -2070,3 +2070,21 @@ détachement/lecteur fermés et ressources physiquement absentes. Quatre
 restitutions jointes/captures canoniques conservées. Brut33 679 951/gzip2 063 211.
 Le nominal complet10 002→10 001→10 000 de la source protégée reste à rejouer
 sur cette époque ; ces onze groupes ne remplacent ni ce nominal ni les autres pannes.
+
+## Pannes propres de l'opérateur source35/40
+
+Le client `invocation-source-retention-volume.mjs` accepte deux nouvelles options
+exclusives : `--observer-global-deadline` et `--observer-command-timeout`.
+Il reçoit le SSO sur stdin privée, prépare les deux vrais handlers du mode
+de refus puis déclenche une suspension native après attachement et reçu durable.
+Exécuter un seul mode à la fois sur le SPARK DEV au repos.
+
+Le module `source_observer_deadlines.py` arme un acteur systemd indépendant
+figé qui confirme l'étatT et SIGALRM pending. Le premier mode reprend le seul
+opérateur par pidfd après l'échéance réelle35+.5 ; le second le laisse arrêté
+jusqu'au vrai timeout40. Le helper conserve le code de la commande et mesure
+TracerPid0 avant restauration, puis joint l'acteur. Le client distingue ces
+statuts, recoupe les deux handlers au point de porte et l'absence physique
+après restitution. Deux groupes attendus par mode. Implémenté, non encore
+qualifié en E2E ; aucune rétention ni réussite métier déduite de ces pannes.
+Contrat : [bornes source35/40](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40).

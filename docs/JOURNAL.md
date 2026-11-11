@@ -6869,3 +6869,20 @@ Nominal source10 002→10 001→10 000 sur cette époque,35/40 propres, detach e
 erreur, reprise historique du helper modifié, âge18novembre et campagne finale
 restent requis dans078.5. Contrat35/40 poussé f59275b, aucun code de ces deux
 modes encore appliqué ; notes d'implémentation privées,353sources restées figées.
+
+### 11 novembre2026 — Pannes source35/40 implémentées
+
+Reprise du contrat f59275b après fin et recoupement du SPARK : module dédié
+source_observer_deadlines, deux options exclusives du client et commande de
+faute bornée dans le helper. Après les deux vrais running/attachement, acteur
+indépendant figé/prêt puis SIGSTOP réel. Reprise35+.5 par pidfd ou vrai KILL40,
+statut de commande conservé avant refus et TracerPid0 avant retrait du contrôle.
+Erreur primaire/cleanup séparés ; mémoire/lecteur explicitement vérifiés dans
+le seul cas35. Acteur terminal conservé avant jonction. Syntaxes Python/Node
+et Python embarqué contrôlées ; revue/E2E des deux modes encore requis.
+
+Revue RO intégrée : jonction de l'acteur dans un finally indépendant même si
+un relevé échoue. Inventaire natif pré-faute des deux conteneurs/réseaux/baux,
+lié aux deux instances/révisions ; le relevé tardif du restorer doit être un
+sous-ensemble exact et l'absence physique finale est exigée. Aucun retrait
+déjà effectué par un autre acteur n'est attribué à la garde.
