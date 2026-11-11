@@ -244,6 +244,12 @@ def restore(item, journal, independent):
             assert len(candidates) == 1
             definition = json.loads(docker(item, 'inspect', candidates[0]))[0]
             assert definition['Config']['Labels']['com.docker.compose.project'] == item['project']
+            # @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#perte-avec-consommateur-et-raccordement--réalisation
+            if (item.get('mode') == 'instance-limit' and item.get('temporary_installation')
+                    and definition['State']['Running'] and 'before_consumer_cleanup' not in item):
+                item['before_consumer_cleanup'] = instance_limit_observation(item)
+                item['before_consumer_cleanup']['sampled_at'] = time.time()
+                atomic(journal,item)
             docker(item, 'rm', '-f', candidates[0])
         if item.get('mode') in ('function-version-unknown-first','instance-limit'):cleanup_history_consumers(item,journal)
         command(['systemctl', 'stop', AGENT])
@@ -764,7 +770,9 @@ def main():
             emit({'restored': item.get('restored', False), 'restoration': item.get('restoration'),
                   'driver_alive': alive(item), 'unit': item['unit'],
                   'timer_state':command(['systemctl','is-active',item['unit'] + '.timer'],(0,3,4)),
-                  'service_state':command(['systemctl','is-active',item['unit'] + '.service'],(0,3,4))})
+                  'service_state':command(['systemctl','is-active',item['unit'] + '.service'],(0,3,4)),
+                  **({'before_consumer_cleanup':item.get('before_consumer_cleanup'),
+                      'consumer_cleanup':item.get('history_cleanup')} if item.get('mode')=='instance-limit' else {})})
             return
         if mode == 'signal-driver':
             assert item.get('mode') == 'instance-limit' and len(sys.argv) == 4

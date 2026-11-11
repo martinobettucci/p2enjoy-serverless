@@ -1610,3 +1610,11 @@ purges publiques et restitution des originaux :
 Ne pas le lancer en parallèle d’un autre banc. La perte avec un consommateur
 et le raccordement à la suite publique restent requis ; l’ancien cas refuse
 encore son prérequis au lieu de devenir un test ignoré.
+
+
+Le mode `node e2e/instance-limit-admission.mjs --consumer-loss` utilise l’entrée
+privée SSO habituelle et une garde120s. Il démarre un handler45s vers85s après
+armement, puis tue réellement le pilote. La garde doit observer le même appel
+encore running avant retrait, enlever son conteneur/réseau, libérer son bail et
+restituer les originaux. Le retrait des données temporaires ne vaut pas purge
+métier ni succès du handler. Ce mode est implémenté, non encore qualifié.
