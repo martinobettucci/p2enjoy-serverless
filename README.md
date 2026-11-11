@@ -23,14 +23,14 @@ La [capture de rétention](docs/evidence/schedule-retention-capture-dev-2026-11-
 passe quatre groupes réels : succès sauvegardé avant clôture du tir, reprise du
 même contrôle et purge de la fixture. Images et données privées sont conservées ;
 l’épreuve après sept jours devient éligible le18 novembre à03:30:26UTC.
-La rétention à sept jours et la borne10000 des tirs restent à vérifier.
+La rétention à sept jours reste à vérifier ; la borne10000 des tirs est qualifiée ci-dessous.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native
 privée puis16 purges et restitution. Son replay après39 fenêtres manquées devient
 éligible le11 novembre09:30UTC. Les
 [vingt groupes de restitution/sûreté](docs/evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
-passent ensuite sur les mêmes340sources ; la rétention numérique reste à qualifier.
+passent ensuite sur les mêmes340sources ; la préparation seule ne qualifie pas la rétention numérique.
 Le chargement et la perte du copieur sont qualifiés séparément ci-dessous.
 Le pilote [de replay](docs/SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie)
 est qualifié sous la borne par [neuf groupes](docs/evidence/schedule-firing-replay-preflight-dev-2026-11-11.json)
@@ -39,7 +39,12 @@ réelles, source conservée et restitutions. Les
 [vingt régressions historiques](docs/evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
 passent sur les mêmes342sources. Un [complément sur deux lots](docs/evidence/schedule-firing-replay-two-batches-dev-2026-11-11.json)
 passe trois groupes supplémentaires :36 fenêtres manquées,9472 tirs,96 pages API
-et restitution, sur les mêmes342sources courantes. Le mode numérique reste requis.
+et restitution, sur les mêmes342sources courantes. Le
+[franchissement numérique](docs/evidence/schedule-firing-retention-count-dev-2026-11-11.json)
+passe ensuite trois groupes sur ces mêmes342sources :39 fenêtres manquées,
+10240→10000 tirs au même curseur09:30UTC, exacts240 plus anciens retirés,
+112 pages API et restitution. Chaque fonction avait640 tirs : la borne globale
+est discriminée de la borne individuelle. Source protégée et sept jours restent ouverts.
 L'[interruption pendant la capture](docs/evidence/schedule-capture-interruption-dev-2026-11-11.json)
 passe cinq groupes sur342sources dbb840b :256 tirs08:50UTC, copie normale puis
 perte du pilote pendant backup SQLite, garde bloquée2,043s, SIGKILL/jonction et

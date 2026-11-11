@@ -2,12 +2,22 @@
 
 ## [Non publié]
 
+### Borne globale des tirs qualifiée
+
+- Trois groupes E2E ef8cb3f sur342sources inchangées :39 fenêtres réellement
+  manquées à09:30UTC,10240→10000 tirs au même curseur, exacts240 plus anciens
+  retirés. Chaque fonction avait640 tirs ;112 pages API après SSO concordent
+  avec le relevé natif, observation10,82s et restitution jointe. Deux invocations
+  initiales seules, source conservée. [Preuve](docs/evidence/schedule-firing-retention-count-dev-2026-11-11.json).
+  Sources d'invocation protégées sous borne, sept jours et régression complète
+  restent ouverts ; SLS-078.5 n'est pas clôturée.
+
 ### Rejeu réel sur deux lots de récupération
 
 - Trois groupes E2E e23e820 sur342sources inchangées :36 fenêtres réellement
   manquées à09:15UTC,9472 tirs/37 fenêtres complètes, observation native9,94s,
   deux invocations initiales seules,96 pages API après SSO et restitution.
-  La borne numérique reste ouverte jusqu'au test après09:30UTC.
+  Ce préflight ne prouve pas la borne ; son franchissement est qualifié ci-dessus.
 
 ### Interruption du copieur de capture
 
@@ -30,7 +40,7 @@
   observation4,46s, SSO/64 pages API, refus et deux pertes avec restitution
   indépendante. Vingt régressions historiques passent sur les mêmes sources.
   Les trois essais échoués et leurs corrections sont conservés séparément.
-  Mode count encore requis ; copie interrompue qualifiée séparément ci-dessus. Aucune image
+  Mode count qualifié séparément ci-dessus ; copie interrompue également. Aucune image
   ni comportement applicatif modifié par ce pilote.
 
 ### Préparation de la borne globale des tirs
@@ -42,7 +52,7 @@
   sauvegarde vérifiée,16 purges et restitution. Premier essai échoué sous
   OperationalError conservé séparément, cause exacte non attribuée. Éligibilité
   numérique09:30UTC. Vingt groupes de restitution/options/sûreté passent sur les
-  mêmes340sources ; rétention, lecteur natif sous panne et replay restent ouverts.
+  mêmes340sources ; replay numérique et copie interrompue ont leurs preuves distinctes ci-dessus.
 
 ### Qualification en volume des invocations
 
@@ -52,7 +62,7 @@
   réels qualifiés sur337sources : exacts10000 survivants sur10016, deux purges et
   restitution des originaux. Quatorze groupes de garde/options passent ensuite,
   époques337/338 aux mêmes sources communes ; âge, sources
-  protégées sous borne et plafond des tirs restent à qualifier.
+  protégées sous borne restent à qualifier ; plafond des tirs qualifié séparément ci-dessus.
 
 ### Qualification distincte de la concurrence planifiée
 

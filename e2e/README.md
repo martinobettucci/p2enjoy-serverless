@@ -1756,8 +1756,8 @@ passe quatre groupes sur340sources :256 tirs06:15UTC, sauvegarde protégée,
 16 purges et restitution. L'essai27221ea échoué est conservé séparément.
 Éligibilité numérique09:30UTC. Les
 [vingt groupes de garde/options/sûreté](../docs/evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
-passent sur les mêmes340sources après la capture. Rétention et replay numérique
-restent requis ; la copie interrompue est qualifiée séparément ci-dessous.
+passent sur les mêmes340sources après la capture. Replay numérique et copie
+interrompue sont qualifiés séparément ci-dessous ; âge et source protégée restent ouverts.
 
 ## Replay gardé de la borne des tirs
 
@@ -1786,7 +1786,7 @@ passe neuf groupes sur342sources : invalid/not-eligible, préflight de18 fenêtr
 et4864 tirs,64 pages API après SSO, deux pertes et restitutions indépendantes.
 Observation4,46s ; source conservée. Les
 [vingt régressions historiques](../docs/evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
-passent sur les mêmes342sources. Count reste à exécuter ; interruption du copieur
+passent sur les mêmes342sources. Count qualifié séparément ci-dessous ; interruption du copieur
 initial qualifiée ci-dessous. Les trois tentatives échouées sont conservées séparément.
 
 
@@ -1807,7 +1807,7 @@ passent sur342sources dbb840b. Les
 [vingt régressions](../docs/evidence/schedule-capture-guard-regressions-dev-2026-11-11.json)
 passent sur les mêmes sources :11 restitutions/partial,3 options/défaut900,6
 consommateur/diagnostic/namespace étranger. Total25 pour cette étape ; bornes
-numérique et âge restent ouverts.
+numérique et âge ne sont pas déduits de ces groupes ; numérique qualifié ci-dessous.
 Voir le [contrat](../docs/SCHEDULE_CAPTURE_INTERRUPTION.md).
 
 
@@ -1815,3 +1815,14 @@ Le [préflight e23e820 sur deux lots](../docs/evidence/schedule-firing-replay-tw
 passe trois groupes sur342sources courantes à09:15UTC :36 fenêtres manquées,
 9472 tirs, observation9,94s,96 pages API et restitution. Il reste sous10000 ;
 le mode count est réservé à l'éligibilité réelle09:30UTC de la source6:15.
+
+## Résultat du mode count
+
+Le mode `node e2e/schedule-firing-volume-replay.mjs count` passe
+[trois groupes réels](../docs/evidence/schedule-firing-retention-count-dev-2026-11-11.json)
+sur342sources ef8cb3f :39 fenêtres réellement manquées,10240→10000 tirs au même
+curseur09:30UTC,240 plus anciens exactement retirés. Chaque fonction avait640
+tirs avant borne ;112 pages API après SSO concordent avec les survivants natifs.
+Observation10,82s, deux invocations initiales seules, restitution jointe et source
+scellée inchangée. Source protégée sous borne, sept jours et campagne complète
+restent ouverts ;078.5 reste non clôturée.

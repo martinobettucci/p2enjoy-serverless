@@ -189,7 +189,7 @@ est réellement programmée puis restituée, sans prétendre son expiration.
 L'expiration réelle est couverte séparément à120s et la reprise partielle à60s.
 
 Soit17 groupes pour cette étape, sans recomptage des assertions internes.
-La borne des tirs, la source protégée sous borne numérique, les sept jours,
+La borne des tirs a sa preuve distincte ci-dessous. La source protégée sous borne numérique, les sept jours,
 les pannes propres des nouveaux clients et la campagne complète restent ouverts.
 
 ## Préparation de la borne des tirs — SLS-078.5
@@ -200,7 +200,7 @@ avec identifiants SSO sur stdin privée, passe
 sur340sources31b9102 :256 tirs réels à06:15UTC, deux handlers/254 refus sans
 invocation, copie native protégée,16 purges et restitution jointe. Le premier
 essai27221ea échoué reste distinct. Éligibilité après39 fenêtres :09:30UTC le
-11 novembre. Ni borne10000 ni sept jours revendiqués ; replay numérique encore requis.
+11 novembre. Cette préparation ne prouve ni10000 ni sept jours ; replay numérique qualifié ci-dessous.
 La frontière de copie interrompue est qualifiée séparément ci-dessous.
 
 Les [régressions355453b](evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
@@ -219,7 +219,7 @@ sources scellées conservées, restitutions jointes. Les trois essais échoués
 restent exclus. Les
 [vingt régressions du helper courant](evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
 passent sur les mêmes342sources :11 restitutions,3 options et6 sûreté/consommateur.
-Étape29 groupes (9+20). Count après39 fenêtres reste requis ; aucun résultat numérique ou d'âge déduit du préflight.
+Étape29 groupes (9+20). Count après39 fenêtres qualifié séparément ci-dessous ; aucun résultat numérique ou d'âge déduit du préflight.
 
 Le [complément e23e820 sur deux lots](evidence/schedule-firing-replay-two-batches-dev-2026-11-11.json)
 passe trois groupes sur342sources courantes :36 fenêtres manquées/9472 tirs,
@@ -258,3 +258,14 @@ groupe historique --partial. Treize fonctions HTTP et trois isolées purgées,
 originaux restitués, zéro écriture officielle. Le parent plafond conserve ses
 quatre détails ;42 groupes parents ou45 feuilles, sans addition des deux.
 La campagne complète de plateforme reste requise pour sa clôture globale.
+
+## Borne globale des tirs — SLS-078.5
+
+Le mode `node e2e/schedule-firing-volume-replay.mjs count` passe
+[trois groupes réels](evidence/schedule-firing-retention-count-dev-2026-11-11.json)
+sur342sources ef8cb3f :39 fenêtres réellement manquées,10240→10000 tirs au même
+curseur09:30UTC,240 plus anciens exactement retirés. Chaque fonction avait640
+tirs avant borne ;112 pages API après SSO concordent avec les survivants natifs.
+Observation10,82s, deux invocations initiales seules, restitution jointe et source
+scellée inchangée. Source protégée sous borne, sept jours et campagne complète
+restent ouverts ;078.5 reste non clôturée.

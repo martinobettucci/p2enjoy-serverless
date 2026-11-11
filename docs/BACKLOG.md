@@ -1551,14 +1551,14 @@ sur10016, installation isolée existante et garde1800s explicite. La
 trois groupes réels sur337sources :10016 handlers, exacts10000 survivants,
 deux purges et restitution complète. Rapport intégral compressé conservé.
 Les [quatorze groupes de garde](evidence/invocation-retention-guard-regressions-dev-2026-11-11.json)
-passent : onze restitutions120/partial et trois options/défaut900. Sources de tir non clos sous borne numérique,
-borne des tirs planifiés et sept jours restent à qualifier.
+passent : onze restitutions120/partial et trois options/défaut900. Sources de tir non clos sous borne numérique
+et sept jours restent à qualifier ; borne des tirs qualifiée ci-dessous.
 La [préparation de la borne des tirs](SCHEDULE_FIRING_VOLUME.md) est spécifiée :
 16 fonctions/16 déclarations chacune dans l'installation isolée existante,
 256 premiers tirs authentiques puis sauvegarde native de générations actives.
 Le futur replay après39 fenêtres réellement écoulées devra franchir10000 sans
 injection SQL ni horloge remplacée. Client et lecteur natif avec jonction par
-verrou hérité et régressions qualifiés ci-dessous ; replay numérique reste à qualifier ; interruption du lecteur qualifiée ci-dessous.
+verrou hérité, régressions, replay numérique et interruption du lecteur qualifiés ci-dessous.
 Premier [essai27221ea](evidence/schedule-firing-volume-capture-failed-dev-2026-11-11.json)
 à06:00UTC échoué :2 succès/172 refus/82 failed sous
 OperationalError, originaux restitués, aucune capture validée dans cet essai.
@@ -1570,13 +1570,13 @@ replay numérique le11 novembre09:30UTC. Les
 [vingt groupes de restitution/options/sûreté](evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
 passent ensuite sur les mêmes340sources :11 reprises,3 options/défaut900 et6
 avec consommateur/diagnostic indisponible/namespace étranger. Copie native sous
-panne et futur replay restent requis ; aucune rétention déduite de la préparation.
+panne et replay sont qualifiés séparément ci-dessous ; aucune rétention déduite de la préparation.
 Le [chargement/replay gardé](SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie)
 est spécifié avant code : source scellée vérifiée avant arrêt, copie atomique
 CONTROL en dernier, observation native de deux états au même curseur. Préflight,
 refus avant mutation/éligibilité, pertes pendant copie/observation et replay
 numérique implémentés ; qualification sous borne et pertes ci-dessous, mode
-count encore requis ; interruption du copieur initial qualifiée ci-dessous.
+count qualifié séparément ci-dessous ; interruption du copieur initial également.
 Premier essai0e29293 : huit refus et refus avant éligibilité passent, préflight
 échoué avant publication CONTROL sur TypeError dans l'écriture du reçu ;
 originaux restitués. Appel Path.open/opener corrigé dans le replay qualifié ci-dessous.
@@ -1593,7 +1593,7 @@ issus de18 fenêtres manquées, SSO/64 pages API, pertes copie/observateur et
 restitutions indépendantes. Aucun handler nouveau ; source identique. Les trois
 essais échoués restent séparés. Les
 [vingt régressions historiques](evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
-passent ensuite sur les mêmes342sources ; mode count encore requis, aucune rétention déduite du préflight.
+passent ensuite sur les mêmes342sources ; count qualifié séparément ci-dessous, aucune rétention déduite du préflight.
 La frontière de capture initiale est qualifiée séparément ci-dessous.
 Le [préflight sur deux lots](evidence/schedule-firing-replay-two-batches-dev-2026-11-11.json)
 passe trois groupes sur342sources e23e820 à09:15UTC :36 fenêtres manquées,
@@ -1607,8 +1607,13 @@ indépendante. Le premier essai c5fcb1d échoué reste séparé ; son groupe tim
 orphelin recevait SIGHUP, reproduit nativement et corrigé par foreground limité
 au copieur. Les deux captures et la sortie partielle sont recoupées ; aucune
 purge métier après perte. Les [vingt régressions](evidence/schedule-capture-guard-regressions-dev-2026-11-11.json) passent sur les mêmes342sources.
-Le mode count, les sources protégées sous borne, les sept jours et la campagne
-complète restent requis ; cette preuve ne clôture pas078.5.
+Le [mode count ef8cb3f](evidence/schedule-firing-retention-count-dev-2026-11-11.json)
+passe trois groupes sur342sources inchangées :39 fenêtres réellement manquées,
+10240→10000 tirs au même curseur09:30UTC, exacts240 plus anciens retirés,
+640 tirs par fonction avant borne. Observation10,82s,112 pages API après SSO,
+deux invocations initiales seules, source intacte et restitution nominale jointe.
+La borne globale des tirs est qualifiée. Sources protégées sous borne, sept jours
+et campagne complète restent requis ;078.5 reste ouvert.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

@@ -6266,3 +6266,21 @@ non close conserve une ancienne ligne ready et deux namespaces actifs dont
 lelabs vide ; l'autre n'a ni fonction active ni instance. Faits persistés sans
 nouveau groupe fonctionnel. Le futur loader doit garder l'exclusivité stricte
 et qualifier recover avant d'assouplir les refus d'identité clonée.
+
+### 11novembre2026 — Borne globale des tirs franchie
+
+Le mode count ef8cb3f passe trois groupes sur342sources identiques, mêmes images.
+D09:30UTC après39 fenêtres manquées réelles :10240→10000 tirs au même curseur,
+exacts240 plus anciens retirés,16 fonctions à640 tirs avant borne. Les9984
+skipped_downtime restent,254 refus deviennent14 et les deux succès restent ;
+aucun nouveau handler. Observation10,822922s sous25s, nouveau SSO/112 pages API
+recoupées, restitution nominale jointe et source scellée inchangée. Preuve publique
+et brut complet compressé conservés, audit RO sans contradiction. Les trois groupes
+de préflight09:15 restent distincts. Source protégée sous borne, sept jours,
+pilotes d'âge et régression complète restent ouverts ;078.5 non clôturée.
+
+Contrôle natif final : mêmes contrôle68a8a0b2/imagec59b8616, démarrage attendu
+09:30:56UTC ; référence475be494 et son démarrage du6novembre inchangés. Deux
+conteneurs healthy, agent actif, healthz200 ; fonctions vivantes, appels actifs,
+instances, opérations, déploiements actifs, réservations, baux et intentions
+pendantes à zéro.5982 artefacts conservés, aucune unité de restitution active.

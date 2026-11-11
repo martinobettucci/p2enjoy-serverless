@@ -131,10 +131,10 @@ gardes sont joints, les originaux restitués à chaque fenêtre. Le retrait des
 consommateurs après perte ne vaut pas purge métier. Les quatre groupes de
 capture gardent leurs16 purges publiques distinctes :24 groupes de cette étape,
 sans addition des sous-assertions ni de l'essai initial échoué. Le replay
-numérique, les bornes et sept jours restent ouverts ; la copie interrompue est
+numérique est qualifié séparément ci-dessous ; les sept jours restent ouverts. La copie interrompue est
 qualifiée séparément ci-dessous. Aucune campagne complète de plateforme revendiquée.
 
-## Éligibilité et replay à qualifier
+## Éligibilité et protocole de replay
 
 Relever dans la sauvegarde le curseur réel C=W et le nombre initial T0=256.
 Avec256 déclarations actives par fenêtre, calculer
@@ -269,8 +269,8 @@ originaux restitués, processus et unités joints. Aucune nouvelle fonction,
 invocation ou purge métier revendiquée dans ce replay. Le rapport brut complet
 est lié en gzip ; trois essais échoués sont conservés et exclus des neuf groupes.
 
-Le mode count et ses deux frontières au-delà10000 restent à qualifier après
-09:30UTC. Les neuf groupes ne prouvent pas la rétention numérique ; les
+Le mode count et ses deux frontières au-delà10000 sont qualifiés séparément ci-dessous.
+Les neuf groupes ne prouvent pas la rétention numérique ; les
 régressions historiques du helper courant sont qualifiées séparément ci-dessous.
 
 ## Régressions historiques du pilote qualifiées
@@ -283,7 +283,7 @@ indisponible/namespace étranger. Le helper figé et les342sources sont identiqu
 à chaque fenêtre, pilotes et gardes joints. Le reçu natif partiel confirme60s.
 
 Soit29 groupes de l'étape, sans recomptage des assertions ou des essais échoués.
-Le mode count après39 fenêtres et les sept jours restent ouverts ;
+Le mode count après39 fenêtres est qualifié ci-dessous ; les sept jours restent ouverts ;
 l’interruption du copieur initial est qualifiée séparément ci-dessous.
 Aucune campagne complète de plateforme revendiquée.
 
@@ -309,4 +309,26 @@ L'observation native termine en9,938675s sous25s ;37 fenêtres complètes de256 
 592 par fonction. Nouveau SSO,96 pages API exhaustives et restitution nominale
 jointe ; source scellée et fichiers officiels inchangés. Ce complément exerce
 la récupération au-delà d'un lot, sans résultat de rétention numérique. Le
-franchissement reste à exécuter après09:30UTC ; les preuves d'âge restent ouvertes.
+franchissement est qualifié ci-dessous ; les preuves d'âge restent ouvertes.
+
+## Franchissement réel de la borne qualifié
+
+La [preuve ef8cb3f](evidence/schedule-firing-retention-count-dev-2026-11-11.json)
+passe trois groupes sur342sources identiques avant/après, mêmes images :39 fenêtres
+réellement manquées entre C06:15UTC et D09:30UTC. Le relevé commis avant rétention
+contient10240 tirs/40 fenêtres de256 ; le suivant, au même curseur, conserve
+exactement les10000 UUID les plus récents selon completed_at DESC,id DESC.
+Les240 plus anciens sont exactement retirés. Chacune des16 fonctions avait640
+tirs avant rétention ; aucune n'atteint individuellement10000.
+
+Les9984 skipped_downtime restent ; les254 refus initiaux deviennent14, les deux
+succès initiaux restent. Les deux invocations et leurs générations sont inchangées,
+aucun nouveau handler n'est exécuté. L'observation native dure10,822922s sous25s.
+Après nouveau SSO depuis l'accueil,112 pages API concordent intégralement avec
+les10000 lignes natives. Restitution nominale jointe, originaux et source scellée
+conservés ; vecteurs complets dans le brut compressé lié à la preuve. Les captures,
+préflights et essais échoués gardent leurs époques et leur comptage distincts.
+
+Cette preuve qualifie la borne globale des tirs. Elle ne qualifie pas la source
+d'invocation protégée sous borne, les sept jours ni la campagne complète ;
+SLS-078.5 et SLS-078 restent ouverts.

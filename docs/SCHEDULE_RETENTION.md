@@ -70,7 +70,7 @@ est qualifiée par10016 vrais appels/5008 par fonction : exacts10000 survivants,
 16 plus anciens retirés, deux purges publiques et restitution des originaux.
 Trois groupes sur337sources ; quatorze groupes de garde/options sont qualifiés
 séparément. Cela ne qualifie pas les sources de tir non clos sous la borne
-numérique, les10000 tirs planifiés ni les sept jours.
+numérique ni les sept jours ; la borne des tirs a sa preuve distincte ci-dessous.
 
 La [borne des tirs](SCHEDULE_FIRING_VOLUME.md) a son protocole distinct de
 préparation : sauvegarde native de256 déclarations actives, puis39 fenêtres
@@ -80,7 +80,12 @@ passe quatre groupes sur340sources,256 tirs06:15UTC et16 purges/restitution ;
 replay éligible09:30UTC le11 novembre. Les
 [vingt groupes du helper](evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
 passent sur les mêmes340sources. La [copie interrompue](evidence/schedule-capture-interruption-dev-2026-11-11.json)
-est qualifiée par cinq groupes sur342sources ; replay numérique reste à qualifier. Aucune date métier n'est modifiée.
+est qualifiée par cinq groupes sur342sources. Le
+[replay numérique](evidence/schedule-firing-retention-count-dev-2026-11-11.json) passe trois groupes
+sur342sources :10240→10000 tirs,240 plus anciens retirés au même curseur09:30UTC,
+640 tirs initiaux par fonction,112 pages API et restitution jointe. Cette borne
+globale est qualifiée ; source protégée sous borne et sept jours restent ouverts.
+Aucune date métier n'est modifiée.
 
 
 ## Premier essai et frontière d’attachement
@@ -119,7 +124,7 @@ aucun conteneur et n’administre pas FORGE.
 
 Restent : pannes propres de la capture et régressions du helper historique,
 pilote gardé de replay, vieillissement des tirs terminaux/générations retirées,
-protection après passage réel de rétention, bornes10000 et campagne complète.
+protection après passage réel de rétention, source protégée sous borne10000 et campagne complète.
 Concurrence078.4 et adaptateur078.7 ont leurs preuves distinctes du11 novembre.
 
 

@@ -460,3 +460,14 @@ Le [raccordement de l'adaptateur](SCHEDULE_ADAPTER.md#résultat-qualifié) quali
 séparément078.7 : quatre processus CLI, un tir04:05UTC et une déclaration
 désactivée sans appel. Rétention réelle, pannes propres et régression complète
 gardent078.5 et l'unité ouvertes.
+
+## Borne globale des tirs qualifiée
+
+Le mode `node e2e/schedule-firing-volume-replay.mjs count` passe
+[trois groupes réels](evidence/schedule-firing-retention-count-dev-2026-11-11.json)
+sur342sources ef8cb3f :39 fenêtres réellement manquées,10240→10000 tirs au même
+curseur09:30UTC,240 plus anciens exactement retirés. Chaque fonction avait640
+tirs avant borne ;112 pages API après SSO concordent avec les survivants natifs.
+Observation10,82s, deux invocations initiales seules, restitution jointe et source
+scellée inchangée. Source protégée sous borne, sept jours et campagne complète
+restent ouverts ;078.5 reste non clôturée.
