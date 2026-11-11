@@ -6116,3 +6116,10 @@ l'absence d'un nouveau créneau si le client restait bloqué en SSO/API. La gard
 120 retire la copie avant D+300 ; un dépassement fait échouer la preuve, sans
 handler nouveau ni remise en cause du défaut900 des autres usages. Contrat
 révisé avant l'ajustement du raccordement et avant le nouveau client.
+
+La revue identifie un décalage possible entre le contrôle de fenêtre initial et
+l'armement après précontrôles. Lier désormais la décision de démarrage à la vraie
+activation monotone du timer, relevée après armement et persistée, avec même D
+exigé dans l'observateur. Un armement hors fenêtre ou une marge dépassée échoue
+dans le finally gardé avant tout arrêt/copie servie. Aucun autre défaut confirmé
+par cette revue ; qualification réelle encore requise.

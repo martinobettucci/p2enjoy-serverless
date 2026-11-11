@@ -198,6 +198,12 @@ indépendante retire ainsi la copie avant D+300 même si le client reste bloqué
 pendant SSO ou les lectures. Le défaut900 des autres usages reste inchangé.
 Motif : empêcher les générations actives de lancer le créneau suivant pendant
 un pilote bloqué ; une simple vérification d'horloge dans le client ne suffit pas.
+Après armement, relever ActiveEnterTimestampMonotonic du timer et le recouper
+avec les horloges monotone/réelle du SPARK. Persister l'instant d'activation et
+sa frontière dans le journal. Refuser tout démarrage si l'activation est hors
+D+10..D+120, si la frontière a changé ou si la marge D+150 est dépassée. Ces
+contrôles se font dans le try/finally de restitution, après les précontrôles,
+avant l'arrêt des originaux ; un contrôle tardif n'autorise aucune copie servie.
 Démarrer dans cette première partie de fenêtre, garder une marge avant D+300
 et échouer si le créneau suivant est atteint :
 aucun nouveau handler ne doit être lancé. La préflight exige1 à38 fenêtres manquées
