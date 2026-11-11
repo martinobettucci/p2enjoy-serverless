@@ -285,3 +285,46 @@ Ce refus qualifie une panne après attache et son nettoyage normal. Il ne
 qualifie pas une erreur de detach, l'alarme 35 s, la coupure 40 s, l'attente
 native 25 s sans événement ni l'âge de sept jours. Le nominal numérique garde
 sa preuve distincte au commit d860cc5 ; la campagne complète reste requise.
+
+## Pertes avant la commande de capture
+
+Décision du 11 novembre 2026 avant code, pour les pannes de capture initiale
+encore ouvertes dans SLS-078.5. Étendre uniquement le client
+`e2e/schedule-retention-capture.mjs` avec deux options exclusives :
+`--eof-after-gate` et `--observer-loss-after-gate`. Sans option, le nominal
+conserve sa capture et ses quatre groupes. Aucun changement de l'opérateur,
+du handler, du moteur ni des captures canoniques déjà conservées.
+
+Les deux cas reprennent la même préparation réelle : connexion SSO normale,
+fonction publiée/promue, HTTP témoin terminé puis vrai cron UTC. Attendre le
+handler running puis le point gated, avec invocation succeeded et tir encore
+dispatched/non clos, hash et UUID recoupés. La commande capture n'est pas envoyée :
+aucun dossier schedule-retention supplémentaire ne doit être produit par ces cas.
+
+- EOF : fermer réellement stdin du helper à ce point ; conserver son code 1 et
+  son assertion capture_command_required. Exiger la restitution normale par
+  finally, même CID/image/démarrage et configuration, TracerPid réel à zéro du
+  même PID/naissance ; pilote terminé et timer/service joints.
+- Perte : un acteur SSH root distinct ouvre le pidfd du seul helper désigné
+  dans identity.json, après recoupement du mode, des UUID, de l'argv exacte,
+  du PID/naissance/cgroup du contrôle et de son TracerPid égal au helper.
+  Envoyer un seul SIGKILL par pidfd, confirmer la mort par ce même descripteur,
+  puis mesurer le TracerPid zéro du contrôle encore identique. Attendre la
+  vraie garde indépendante de 80 secondes, sans la remplacer par rescue ;
+  recouper son reçu puis joindre timer/service. Conserver le vrai code SSH,
+  sans le transformer en 137 lorsqu'il vaut 255.
+
+Après chaque faute : attendre la clôture normale du même tir, une seule
+invocation liée et les mêmes deux appels HTTP/cron, sans rejeu. Archiver/purger
+la fixture par les API réelles et vérifier code, canaux, conteneurs, réseaux,
+baux et volumes absents. Les captures canoniques et leurs empreintes restent
+inchangées ; le banc n'en déduit ni rétention d'âge ni sauvegarde interrompue.
+
+Quatre groupes par cas : préparation/témoin HTTP ; faute exacte après gated
+et restitution ; contrôle repris/tir clos sans rejeu ; purge physique. Les
+captures interrompues pendant backup ou copie et les régressions historiques
+du helper demeurent distinctes. Une erreur conserve le rapport et interdit
+la relance automatique. Le prérequis SSO est fourni par le client existant
+`dev-sso-sessions.mjs`, identifiants en mémoire et seuls cookies de plateforme
+conservés dans les fichiers privés habituels. Ces cas ne remplacent pas la
+campagne complète et ne clôturent pas SLS-078.5.

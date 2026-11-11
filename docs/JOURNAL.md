@@ -6676,3 +6676,13 @@ Deux seuls fichiers observateur/client diffèrent de la preuve des 25 groupes ;
 helper inchangé. Ce refus ne qualifie ni erreur de detach, ni délais 35/40,
 ni attente native 25 sans événement, ni rétention numérique/âge. Ces restes
 et la campagne complète maintiennent 078.5 ouverte. Aucun changement UI/produit.
+
+### 11 novembre 2026 — Pannes propres de la capture initiale
+
+Reprise de 078.5 : le helper schedule-recovery-operator est distinct des
+fenêtres déjà requalifiées. Décision : deux options du client de capture,
+EOF puis SIGKILL réel du seul helper après gated, sans commande capture.
+Garde existante 80 s et opérateur inchangés ; vérifier même contrôle repris,
+TracerPid zéro, tir clos sans rejeu, purge physique et captures canoniques
+conservées. Quatre groupes attendus par cas ; E2E encore requis. Backup/copie
+interrompus, régressions historiques et autres restes restent ouverts.

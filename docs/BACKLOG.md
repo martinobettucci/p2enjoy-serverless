@@ -1695,6 +1695,11 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
 - [ ] Capture initiale `schedule-recovery-operator.py` : pannes propres et
   régressions de ce helper distinct, non couvertes par la matrice de
   `storage-legacy-environment.py`.
+  Deux premiers parcours spécifiés dans
+  [Pertes avant capture](SCHEDULE_RETENTION.md#pertes-avant-la-commande-de-capture) :
+  EOF et SIGKILL du helper après le vrai point gated, garde 80 s, même contrôle
+  sans redémarrage, tir clos sans rejeu et purge réelle. E2E encore requis ;
+  backup/copie interrompus et régressions historiques restent distincts.
 - [x] Observateur source sous borne : [refus réel après attachement](evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
   qualifié par deux groupes au commit 956498a, sur 351 sources figées. Deux
   handlers HTTP/cron running, tir et UUID recoupés ; TracerPid 471960 puis zéro
