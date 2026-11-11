@@ -180,6 +180,7 @@ def observe(args, receipt, target):
                 if observer:
                     entered = time.monotonic()
                     receipt['detach_started_monotonic'] = entered
+                    receipt['detach_signal_mask_before'] = sorted(int(v) for v in signal.pthread_sigmask(signal.SIG_BLOCK,set()))
                     try:
                         observer.detach()
                     except BaseException as error:
@@ -188,6 +189,8 @@ def observe(args, receipt, target):
                             'entered_monotonic': entered, 'finished_monotonic': time.monotonic(),
                             'duration': time.monotonic()-entered})
                         raise
+                    finally:
+                        receipt['detach_signal_mask_after'] = sorted(int(v) for v in signal.pthread_sigmask(signal.SIG_BLOCK,set()))
             finally:
                 if receipt.get('inherited_guard_lock'):
                     try:

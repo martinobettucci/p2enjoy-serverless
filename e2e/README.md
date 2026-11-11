@@ -2118,8 +2118,12 @@ deux services sains, actifs nuls,5982artefacts et aucune garde finale.
 `node e2e/invocation-source-retention-volume.mjs --observer-detach-failure`
 reçoit le SSO sur stdin privée et prépare les deux handlers réels. Après
 attache, un acteur indépendant figé est prêt avant Docker pause ; la vraie
-reprise ptrace doit donner WNOHANG0. Le refus naturel d'historique entraîne
-alors la vraie attente5 de detach et son exception, sans remplacement de méthode.
+reprise ptrace doit donner WNOHANG0. Le premier essai échoué a montré que
+Docker pause seul laisse detach réussir. Le mode corrigé arme un point SIGSTOP
+optionnel dans le vrai wait appelé par detach, après calcul de son échéance5.
+Le reçu porte cette échéance ; l’acteur recoupeT puis envoie SIGCONT par pidfd
+après échéance+.25. La vraie vérification de délai doit alors lever, sans
+remplacement de méthode ni exception injectée.
 Le client exige lecteur/mémoire fermés malgré l'erreur, mort de l'opérateur,
 Trace0 encore gelé puis dégel et jonction de l'acteur avant restitution.
 Un secours15s interdit le succès ; l'unité30 est attendue avant arrêt. Deux

@@ -1740,7 +1740,8 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   qualifié ; originaux restitués. Décision révisée : vrai SIGSTOP au point
   optionnel d’entrée dans wait5, reçu d’échéance réel, SIGCONT indépendant après
   échéance+.25 ; erreur réelle de wait, lecteur fermé, mort/Trace0 puis dégel.
-  Correction et E2E dédié/refus sans option requis ; classe partagée à requalifier.
+  Correction implémentée, syntaxes contrôlées ; E2E dédié/refus sans option
+  requis et consommateurs de la classe partagée à requalifier.
 - [x] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
   [Contrat décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40) :

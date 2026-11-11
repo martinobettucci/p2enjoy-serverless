@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import select
 import shutil
+import signal
 import subprocess
 import sys
 import time
@@ -37,7 +38,8 @@ def arm(campaign, receipt, target, observer):
         'operator':own,'control':control,'container_id':receipt['container_id'],'image':receipt['image'],
         'window':receipt['window'],'function_ids':sorted(v['function_id'] for v in receipt['running']),
         'operator_source_sha256':sha(ROOT/'e2e/invocation-source-retention-observer.py'),
-        'actor_source_sha256':sha(frozen),'wrapper_deadline_monotonic':wrapper['deadline_monotonic']}
+        'actor_source_sha256':sha(frozen),'wait_source_sha256':sha(ROOT/'e2e/schedule_firing_volume_replay.py'),
+        'wrapper_deadline_monotonic':wrapper['deadline_monotonic']}
     atomic(work/'source-observer-deadline-identity.json', identity)
     command(['systemd-run','--quiet','--no-block','--unit='+identity['unit'],
         '--property=Type=oneshot','--property=RemainAfterExit=yes','--property=TimeoutStartSec=30',
@@ -62,6 +64,27 @@ def arm(campaign, receipt, target, observer):
     if waited:observer.stopped=os.WIFSTOPPED(status)
     atomic(target,receipt)
     assert waited==0, 'detach_stop_already_pending'
+    observer.detach_failure_campaign=campaign
+
+
+def pause_wait(campaign, observer, deadline):
+    """Hold this real wait past its caller's real deadline using native signals."""
+    entered=time.monotonic()
+    work,item,helper=context(campaign)
+    identity=json.loads((work/'source-observer-deadline-identity.json').read_text())
+    assert identity['campaign']==campaign and identity['mode']=='detach-failure'
+    own=process(os.getpid()); assert own['pid']==identity['operator']['pid'] and own['birth']==identity['operator']['birth']
+    assert observer.pid==identity['control']['pid'] and observer.attached and not observer.stopped and observer.memory is None
+    assert sha(ROOT/'e2e/schedule_firing_volume_replay.py')==identity['wait_source_sha256']
+    assert same_control(item,helper,identity)['tracer_pid']==own['pid']
+    assert definition(item,identity['container_id'])['State']['Paused']
+    assert 0<deadline-entered<=5 and time.monotonic()<deadline, 'detach_wait_gate_deadline_missed'
+    gate={'campaign':campaign,'operator':own,'control':identity['control'],'entered_monotonic':entered,
+        'deadline_monotonic':deadline,'memory_closed':True,'observer_stopped':False,
+        'signal_mask':sorted(int(v) for v in signal.pthread_sigmask(signal.SIG_BLOCK,set())),
+        'signal':int(signal.SIGSTOP),'wait_source_sha256':identity['wait_source_sha256']}
+    atomic(work/'source-detach-wait-stop.json',gate)
+    os.kill(os.getpid(),signal.SIGSTOP)
 
 
 def actor(campaign):
@@ -70,6 +93,7 @@ def actor(campaign):
     assert identity['campaign']==campaign and identity['mode']=='detach-failure'
     assert sha(__file__)==identity['actor_source_sha256']
     assert sha(ROOT/'e2e/invocation-source-retention-observer.py')==identity['operator_source_sha256']
+    assert sha(ROOT/'e2e/schedule_firing_volume_replay.py')==identity['wait_source_sha256']
     own = process(os.getpid()); expected=identity['operator']
     assert identity['unit'] in own['cgroup'] and own['cgroup']!=expected['cgroup']
     assert process(expected['pid'])['birth']==expected['birth']
@@ -78,8 +102,27 @@ def actor(campaign):
         'operator':expected,'signals_sent':[],'rescue_used':False}
     try:
         assert process(expected['pid'])['birth']==expected['birth']
+        end=time.monotonic()+15
         atomic(work/'source-observer-actor-ready.json',dict(receipt,completed=True))
-        exited = bool(select.select([descriptor],[],[],15)[0])
+        gate_path=work/'source-detach-wait-stop.json'
+        while not gate_path.exists():
+            assert time.monotonic()<end and not select.select([descriptor],[],[],.01)[0], 'detach_wait_gate_missing'
+        gate=json.loads(gate_path.read_text())
+        assert gate['campaign']==campaign and gate['operator']['pid']==expected['pid'] and gate['operator']['birth']==expected['birth']
+        assert gate['wait_source_sha256']==identity['wait_source_sha256'] and gate['memory_closed'] and not gate['observer_stopped']
+        assert 0<gate['deadline_monotonic']-gate['entered_monotonic']<=5 and gate['signal']==int(signal.SIGSTOP)
+        while True:
+            stopped=process(expected['pid']); assert stopped['birth']==expected['birth']
+            if stopped['state']=='T':break
+            assert time.monotonic()<end and not select.select([descriptor],[],[],.01)[0], 'detach_operator_not_stopped'
+        receipt['wait_gate']=gate;receipt['stopped']=stopped
+        resume_at=gate['deadline_monotonic']+.25
+        remaining=resume_at-time.monotonic();assert remaining>0 and resume_at<end, 'detach_resume_frontier_missed'
+        assert not select.select([descriptor],[],[],remaining)[0], 'detach_operator_exited_before_resume'
+        signal.pidfd_send_signal(descriptor,signal.SIGCONT)
+        receipt['signals_sent'].append({'signal':int(signal.SIGCONT),'monotonic':time.monotonic(),'pidfd':True})
+        atomic(work/'source-observer-actor.json',receipt)
+        exited = bool(select.select([descriptor],[],[],max(0,end-time.monotonic()))[0])
         receipt['operator_pidfd_readable']=exited
         receipt['operator_exit_observed_monotonic']=time.monotonic()
         receipt['rescue_used']=not exited
@@ -93,6 +136,12 @@ def actor(campaign):
         receipt['failure']={'type':type(error).__name__,'reason':str(error) if isinstance(error,AssertionError) else None}
     finally:
         try:
+            if not select.select([descriptor],[],[],0)[0]:
+                current=process(expected['pid']);assert current['birth']==expected['birth']
+                if current['state']=='T':
+                    signal.pidfd_send_signal(descriptor,signal.SIGCONT)
+                    receipt['rescue_used']=True;receipt['completed']=False
+                    receipt.setdefault('rescue_signals',[]).append({'signal':int(signal.SIGCONT),'pidfd':True,'monotonic':time.monotonic()})
             same_control(item,helper,identity)
             if definition(item,identity['container_id'])['State']['Paused']:
                 receipt['thaw_started_monotonic']=time.monotonic()

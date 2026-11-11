@@ -3,7 +3,8 @@
 ## [Non publié]
 
 - Banc de fermeture du lecteur sous erreur native de detach : vrai Docker pause,
-  reprise ptrace et attente5, erreurs distinctes puis dégel indépendant et
+  reprise ptrace, point SIGSTOP optionnel dans l’attente5 puis SIGCONT indépendant
+  après son échéance réelle, erreurs distinctes puis dégel indépendant et
   restitution. Mode dédié implémenté, syntaxes contrôlées ; E2E encore requis.
 
 - Banc de l'opérateur source : deux fautes réelles après attachement,

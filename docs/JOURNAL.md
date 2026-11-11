@@ -6985,3 +6985,12 @@ l'opérateur ; acteur indépendant confirmeT et reprend par pidfd après cette
 exception injectée ni changement de méthode detach, algorithme ou minuterie.
 Le secours reprend aussi l'opérateur avant dégel et disqualifie le succès.
 Requalifier cas dédié/refus, puis les consommateurs de la classe partagée.
+
+Correction implémentée : attribut de faute du seul observateur, point natif
+SIGSTOP dans wait après masque SIGCHLD, échéance reçue inchangée et reçu durable.
+Acteur confirmeT, SIGCONT pidfd après deadline+.25 puis mort/Trace0 et dégel.
+Secours reprend aussi le seul opérateur arrêté et reste disqualifiant.
+Méthode detach inchangée, syntaxe Python/Node valide ; revue et E2E requis.
+Revue RO du correctif sans défaut matériel. Le reçu mesure aussi les masques
+avant/après detach et SIGCHLD bloqué au point de faute ; le client exige le
+masque initial restitué. Contrôles syntaxiques valides ; nouveau cas à exécuter.

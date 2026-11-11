@@ -34,6 +34,12 @@ class BlockingNativeObserver(NativeObserver):
         previous_mask = signal.pthread_sigmask(signal.SIG_BLOCK, set())
         try:
             signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGCHLD})
+            # @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#fermeture-du-lecteur-malgré-une-erreur-native-de-detach
+            fault_campaign = getattr(self, 'detach_failure_campaign', None)
+            if fault_campaign:
+                self.detach_failure_campaign = None
+                from source_observer_detach_failure import pause_wait
+                pause_wait(fault_campaign, self, deadline)
             while True:
                 assert time.monotonic() < deadline, 'native_stop_not_observed'
                 waited, status = os.waitpid(self.pid, os.WNOHANG)

@@ -133,7 +133,11 @@ async function proveObserverDeadline(initial){
   assert.equal(measured.cleanup_errors[1].reason,'native_tracer_retained');assert.equal(measured.after_detach.tracer_pid,gate.operator.pid);assert.equal(measured.after_detach.birth,gate.control.birth);
   assert(measured.reader_closed&&measured.observer_memory_closed);assert(actor.paused_after_exit&&!actor.paused_after_thaw&&!actor.rescue_used);
   assert(actor.thaw_started_monotonic>=actor.operator_exit_observed_monotonic);assert(actor.operator_exit_observed_monotonic>=detached.finished_monotonic);
-  assert.equal(actor.signals_sent.length,0);assert(driverStderr.includes(Buffer.from('source_retention_observation_failed:native_tracer_retained')));
+  assert.equal(actor.stopped.state,'T');assert.equal(actor.signals_sent.length,1);assert.equal(actor.signals_sent[0].signal,18);assert(actor.signals_sent[0].pidfd);
+  assert.equal(actor.wait_gate.operator.pid,gate.operator.pid);assert.equal(actor.wait_gate.operator.birth,gate.operator.birth);assert(actor.wait_gate.memory_closed&&!actor.wait_gate.observer_stopped);
+  assert.deepEqual(measured.detach_signal_mask_before,measured.detach_signal_mask_after);assert(!measured.detach_signal_mask_before.includes(17));assert(actor.wait_gate.signal_mask.includes(17));
+  assert(actor.signals_sent[0].monotonic>=actor.wait_gate.deadline_monotonic+.25);assert(detached.entered_monotonic<=actor.wait_gate.entered_monotonic);
+  assert(driverStderr.includes(Buffer.from('source_retention_observation_failed:native_tracer_retained')));
  }else if(observerDeadline==='global-alarm'){
   assert.equal(command.returncode,1);assert(command.duration>=35&&command.duration<40);assert(!command.timeout_kill_reported);assert.equal(actor.signals_sent.length,1);assert.equal(actor.signals_sent[0].signal,18);assert(actor.signals_sent[0].pidfd);
   assert.equal(measured.failure_type,'TimeoutError');assert.equal(measured.reason,'native_observation_deadline');assert.deepEqual(measured.primary_failure,{type:'TimeoutError',reason:'native_observation_deadline'});assert(!measured.cleanup_errors?.length);
