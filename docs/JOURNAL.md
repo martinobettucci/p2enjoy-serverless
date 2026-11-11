@@ -6846,3 +6846,26 @@ vrai timeout40. Ne changer aucune minuterie. Mesurer la marge réelle au moins2s
 préserver exception primaire et nettoyages, code wrapper avant refus et TracerPid0
 avant retrait du contrôle. Deux groupes par cas, code/E2E à faire après la fin
 des consommateurs ; aucun résultat acquis et aucun succès métier exigé pendant pause.
+
+### 11 novembre2026 — Onze groupes consommateurs qualifiés
+
+Campagne96dcca0 sur353sources/images identiques à bounded46e216d, quatre cas
+sériels. Borne des tirs17:15 :132fenêtres manquées, frontière native après40,
+10 496→10 000 au même curseur/exacts496plus anciens retirés,13,526s. Source
+préflight17:20 :9,189s, témoins conservés. Terminal préflight17:25 :0,005624s,
+témoins conservés. SSO/API et restitutions passent pour ces neuf groupes.
+
+Refus source17:30 : deux vrais handlers HTTP/cron running, aucun HTTP ordinaire,
+attachement puis refus retention_history_incomplete, TracerPid0, lecteur/mémoire
+fermés. Helper1 préservé/client0, deux conteneurs/réseaux/baux retirés et neuf
+contrôles d'absence physique. Deux groupes supplémentaires, restitution jointe.
+Les invocations copiées des captures ne sont pas des exécutions nouvelles.
+Brut33 679 951/gzip2 063 211 ; le collecteur a d'abord lu physical au lieu de
+checks et a été corrigé avant publication, sans rejeu ni modification des rapports.
+
+État final : mêmes conteneurs/images, contrôle démarré17:30:07, référence
+inchangée, deux services sains, actifs à zéro,5 982artefacts et aucune garde.
+Nominal source10 002→10 001→10 000 sur cette époque,35/40 propres, detach en
+erreur, reprise historique du helper modifié, âge18novembre et campagne finale
+restent requis dans078.5. Contrat35/40 poussé f59275b, aucun code de ces deux
+modes encore appliqué ; notes d'implémentation privées,353sources restées figées.

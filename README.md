@@ -40,6 +40,13 @@ copie interrompue après 1/5 990 fichiers, deux gardes indépendantes puis nomin
 rejoué. Six handlers réussis, trois purges, dossiers partiels conservés et
 captures canoniques inchangées. Six refus d'options sont contrôlés séparément.
 Les autres pannes de l'observateur, l'âge et la campagne complète restent ouverts.
+L'[attente native25s](docs/evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
+du banc est corrigée et qualifiée sur353sources :25,000182s contre28,202336s
+dans la reproduction, masque et alarme globale conservés. Les
+[onze groupes de consommateurs](docs/evidence/native-observer-consumers-dev-2026-11-11.json)
+passent ensuite sur la même époque :10 496→10 000tirs, préflights des deux
+captures et refus après attachement, avec SSO/API et restitutions. Le nominal
+numérique source protégé, les pannes propres35/40 et l'âge restent ouverts.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native

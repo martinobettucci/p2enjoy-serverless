@@ -349,6 +349,34 @@ services sains, actifs à zéro et5 982 artefacts conservés. La borne isolée
 est qualifiée ; les consommateurs de la classe, les pannes35/40 propres à
 l'opérateur source, detach en erreur, l'âge et la campagne finale restent ouverts.
 
+### Régressions des consommateurs sur les mêmes353sources
+
+Les [onze groupes96dcca0](evidence/native-observer-consumers-dev-2026-11-11.json)
+passent sur les mêmes353sources/images que la borne isolée, identiques
+avant/après. Quatre campagnes réelles et sérielles :
+
+- Borne des tirs, trois groupes :132fenêtres réellement manquées ; observation
+  de la frontière limitée aux40 premières,10 496→10 000 au même curseur,
+  exacts496plus anciens retirés. Observation13,526s, nouveau SSO/lectures
+  paginées, reprise finale au curseur courant et restitution.
+- Source protégée, trois groupes : capture canonique reprise en préflight,
+  observation9,189s, mêmes témoins avant sept jours, nouveau SSO/API et
+  restitution. Capture conservée.
+- Historique terminal, trois groupes : capture canonique exacte, préflight
+  observé en0,005624s, nouveau SSO/API, restitution et source conservée.
+- Refus source, deux groupes : aucun HTTP ordinaire, mais deux vrais handlers
+  HTTP/cron running ; refus après attache, TracerPid0 et lecteur/mémoire fermés.
+  Helper échoué1 conservé, client0, deux conteneurs/réseaux/baux retirés et
+  neuf contrôles physiques réussis, restitution jointe.
+
+Brut33 679 951octets/gzip2 063 211. Les invocations déjà présentes dans les
+captures ne sont pas recomptées comme des handlers nouveaux ; seuls les deux
+handlers de la campagne de refus démarrent pendant ces quatre replays. Deux
+services sains, actifs à zéro,5 982artefacts conservés et aucune garde finale.
+Cette preuve qualifie ces consommateurs ; le nominal numérique complet de la
+source protégée reste à rejouer sur cette époque, ainsi que35/40 propres,
+detach en erreur, l'âge réel et la campagne complète. Aucune modification UI/produit.
+
 ## Pannes propres de l'alarme35 et de la commande40
 
 Décision du11 novembre2026 avant code, pour le reste078.5 déjà inscrit. Reprendre

@@ -2055,4 +2055,18 @@ preuve constate le défaut. Les
 [trois groupes bounded46e216d](../docs/evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
 passent ensuite sur353sources/images identiques :25,000182s, masque/handler
 préservés, alarme restante cohérente et restitution réelle. Régressions des
-consommateurs encore requises ; ni35/40 propres à l'opérateur ni rétention prouvés.
+consommateurs qualifiées séparément ci-dessous ; ni35/40 propres à l'opérateur
+ni rétention prouvés par cette borne isolée.
+
+Les [onze groupes consommateurs96dcca0](../docs/evidence/native-observer-consumers-dev-2026-11-11.json)
+passent sur les mêmes353sources/images que bounded : trois de
+`schedule-firing-volume-replay.mjs count`, trois de
+`retention-history-replay.mjs source preflight`, trois du même client
+`terminal preflight`, deux de `invocation-source-retention-volume.mjs --observer-refusal`.
+Toutes ces commandes reçoivent le SSO sur stdin privée et s'exécutent en série.
+10 496→10 000tirs/exacts496plus anciens retirés, observation13,526s ; préflights
+source9,189s et terminal0,005624s ; refus naturel après deux vrais running,
+détachement/lecteur fermés et ressources physiquement absentes. Quatre
+restitutions jointes/captures canoniques conservées. Brut33 679 951/gzip2 063 211.
+Le nominal complet10 002→10 001→10 000 de la source protégée reste à rejouer
+sur cette époque ; ces onze groupes ne remplacent ni ce nominal ni les autres pannes.

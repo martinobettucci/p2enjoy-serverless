@@ -10,7 +10,12 @@
   sigtimedwait, sans modifier l'alarme globale. Les
   [trois groupes bounded](docs/evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
   passent sur353sources46e216d :25,000182s, masque/handler conservés, alarme
-  restante cohérente et originaux restitués. Consommateurs encore à requalifier.
+  restante cohérente et originaux restitués. Les
+  [onze groupes consommateurs](docs/evidence/native-observer-consumers-dev-2026-11-11.json)
+  passent ensuite sur la même époque : borne des tirs10 496→10 000/exacts496
+  retirés, préflights source/terminal et refus après attache, avec SSO/API,
+  sources conservées, ressources absentes et restitutions. Nominal numérique
+  source protégé et autres pannes encore à requalifier.
 
 ### Interruptions de sauvegarde et de copie qualifiées
 

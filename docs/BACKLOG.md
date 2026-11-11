@@ -1750,10 +1750,10 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   [Banc décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#mesure-de-lattente-native-sans-événement) :
   contrôle temporaire vide réel, Docker pause après attache, WNOHANG sans statut,
   vraie attente25s et dégel indépendant28s confirmé avant detach, alarme35 et
-  commande40 inchangées. Mesurer le défaut avant toute correction ; code/E2E requis.
+  commande40 inchangées. Reproduction et correction sont qualifiées ci-dessous.
   Banc implémenté (client `native-observer-deadline.mjs` modes reproduce/bounded,
   opérateur dédié et commande strictement limitée au helper instance-limit120).
-  Syntaxes contrôlées ; reproduction réelle qualifiée ci-dessous, correction ouverte.
+  Syntaxes contrôlées ; reproduction réelle et borne isolée qualifiées ci-dessous.
   [Reproduction c64fdd7](evidence/native-observer-deadline-reproduce-dev-2026-11-11.json)
   trois groupes sur353sources : vrai délai25 dépassé à28,202s après dégel,
   alarme35 non expirée. Nettoyage/acteur joints et originaux restitués. Décision
@@ -1762,7 +1762,13 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   [trois groupes bounded46e216d](evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
   passent sur353sources/images identiques :25,000182s, masque[] identique,
   handler35 inchangé/reste34,902→9,902s, acteur joint et originaux restitués.
-  Régressions des consommateurs encore requises avant clôture de ce reste.
+  Les [onze groupes consommateurs96dcca0](evidence/native-observer-consumers-dev-2026-11-11.json)
+  passent ensuite sur les mêmes353sources/images : borne des tirs10 496→10 000
+  en13,526s/exacts496retirés, préflights source9,189s et terminal0,005624s,
+  refus après attache avec lecteur fermé/TracerPid0 et deux consommateurs
+  physiquement retirés. SSO/API et quatre restitutions joints ; les deux
+  captures canoniques sont conservées. Reste le nominal numérique complet
+  de la source protégée sur cette époque avant clôture de ce reste.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 

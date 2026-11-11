@@ -443,3 +443,15 @@ avant detach, acteur terminal/joint, TracerPid0/mémoire/lecteur fermés et
 originaux restitués. Aucun handler exécuté ; seules classe partagée et deux
 fichiers du probe diffèrent de la reproduction. Consommateurs et pannes35/40
 restent à qualifier ; aucune rétention ni campagne complète déduite.
+
+## Consommateurs de l'observateur corrigé
+
+Les [onze groupes96dcca0](evidence/native-observer-consumers-dev-2026-11-11.json)
+passent sur353sources/images identiques, même époque que bounded46e216d :
+trois borne des tirs (10 496→10 000, exacts496retirés,13,526s), trois source
+préflight9,189s, trois terminal préflight0,005624s, deux refus source après
+attache/fermeture/TracerPid0 et absence physique. Quatre campagnes sérielles,
+SSO/API réels, captures canoniques conservées et restitutions jointes.
+Deux nouveaux handlers running dans le seul cas de refus ; les témoins copiés
+ne sont pas recomptés. Le préflight ne prouve pas sept jours. Nominal numérique
+source protégée, pannes35/40, detach en erreur et campagne complète restent requis.
