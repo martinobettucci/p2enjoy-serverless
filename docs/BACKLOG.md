@@ -1540,7 +1540,8 @@ fixture purgée. Épreuve d’âge au plus tôt le18 novembre2026 à03:30:26.355
 Pannes propres et régressions historiques du nouveau mode restent requises.
 La [capture de témoins terminaux/retirés](SCHEDULE_RETENTION.md#capture-des-tirs-terminaux-et-générations-retirées)
 réutilise les objets purgés de la vraie campagne CLI04:05UTC, sans mutation ni
-nouveau service. Décision persistée ; opérateur et capture restent à qualifier.
+nouveau service. Opérateur implémenté, syntaxe contrôlée ; capture réelle et
+vieillissement restent à qualifier.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

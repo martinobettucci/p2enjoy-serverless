@@ -17,6 +17,11 @@
 
 ### Preuve de rétention des planifications
 
+- Opérateur de conservation des tirs déjà terminés et générations retirées :
+  vrais témoins des purges CLI, sauvegardes natives privées et artefacts exacts,
+  images exportées recoupées, sans interruption des services. Implémenté ;
+  capture réelle et vieillissement restent à qualifier.
+
 - Mode de capture native d’une invocation réussie encore source d’un tir non
   clos, avec témoin HTTP réel, sauvegarde RO et copie privée des artefacts et
   du registre. Reprise immédiate du même contrôle et purge API de la fixture.

@@ -1,5 +1,17 @@
 # Qualification de la plateforme
 
+## Conservation des témoins terminaux de rétention
+
+Après la campagne CLI réussie et ses purges, au repos sur le seul SPARK DEV :
+`python3 -B e2e/schedule-terminal-history-capture.py`. Le chemin de preuve peut
+être fourni par `--evidence docs/evidence/adapter-schedules-dev-2026-11-11.json`.
+L'opérateur relit les témoins exacts puis conserve des sauvegardes natives,
+artefacts et références aux images déjà exportées dans un dossier privé UUID.
+Trois groupes de préparation, aucun service arrêté ni original modifié ; le
+rapport UUID sous .local/e2e porte les dates réelles d'éligibilité après sept jours.
+Une capture réussie ne qualifie pas la rétention : son replay gardé reste requis.
+Contrat : [SCHEDULE_RETENTION](../docs/SCHEDULE_RETENTION.md#capture-des-tirs-terminaux-et-générations-retirées).
+
 ## Planifications publiées par la CLI
 
 `node e2e/adapter-schedules.mjs`, après le prérequis SSO réel décrit ci-dessous,
