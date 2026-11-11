@@ -6131,3 +6131,11 @@ opener, argument réservé à open() natif ; sa signature locale confirme le dé
 La restitution normale conserve bases/artefacts/configuration/référence et retire
 les remplacements. Les modes de perte n'ont pas été lancés. Corriger cet appel
 sans changer le contrat ni les assertions, puis rejouer explicitement.
+
+Essai7757065/c1596786 : copie terminée, traceur attaché mais attente25s expirée,
+sans gate. Reçu après restitution :3840 tirs (3584 skipped_downtime,254 refus,
+2 succès initiaux), deux invocations ; original restitué et source conservée.
+Le module sélectionnait State.Pid, alors que Compose active init:true. La
+sélection historique recherche déjà le Python uvicorn unique dans ses descendants.
+Appliquer cette sélection et comparer cgroup/naissance avant observation ;
+conserver cet échec séparé, sans lui attribuer une qualification de frontière.
