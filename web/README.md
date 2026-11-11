@@ -1,5 +1,12 @@
 # Console web
 
+L'icône SLS-100 est corrigée dans les sources : trois blocs reliés partagent
+`public/favicon.svg` pour le favicon et la marque. Sa construction, son déploiement
+et sa qualification réelle restent à exécuter. `node e2e/application-icon.mjs`
+depuis la racine prend les identifiants SSO sur stdin privée et vérifie quatre
+groupes accueil/SSO/navigation desktop/mobile, avec quatre captures JPEG ; les
+relevés d'octets servis restent distincts de l'inspection visuelle16/32px.
+
 La suite SLS-074 est déployée pour qualification en DEV : versions groupées par hash,
 publication/promotion séparées, archive/restore/delete, réimportation explicite
 et adresses épinglées. Le manuel source accompagne ces changements. Le build

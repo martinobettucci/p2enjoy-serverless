@@ -2439,7 +2439,7 @@ ouverts.
 <a id="sls-100"></a>
 ## SLS-100 — Identité visuelle distincte pour Serverless
 
-Statut : [~] — motif spécifié, implémentation et qualification en cours.
+Statut : [~] — SVG et client E2E implémentés ; build, déploiement et preuves visuelles à exécuter.
 Nature : Corriger. Dépend de : SLS-020. Ordre :2.
 Contrat : cette unité et
 [identité du produit](DESIGN_SYSTEM_APP.md#serverless-identity).

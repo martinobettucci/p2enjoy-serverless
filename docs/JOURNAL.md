@@ -7166,3 +7166,17 @@ parcours SSO/navigation desktop/mobile et captures JPEG fraîches ; inspection
 16/32px distincte des captures applicatives. Les parcours du manuel textuel ne
 changent pas. Implémentation et preuves restent à faire ; aucun succès UI déduit
 de la spécification.
+
+### 11 novembre2026 — SVG Serverless et son parcours E2E implémentés
+
+Le SVG central remplace la foudre par trois blocs reliés ; sa route et les deux
+consommateurs restent les mêmes. Nouveau client application-icon.mjs : quatre
+groupes réels accueil/SSO/navigation/déconnexion desktop/mobile, fichier servi
+recoupé par SHA/no-store, image décorative et texte accessible, menu clavier et
+quatre JPEG dans leurs viewports. Identifiants en mémoire, erreurs expurgées.
+Syntaxe Node et diff vérifiés, sans les compter comme preuve E2E. La ligne de
+base native au repos est conservée dans .local/e2e/application-icon-before.json,
+favicon précédent0b069387 ; build, déploiement, E2E et inspection restent requis.
+Revue RO contre les deux design systems sans défaut matériel : parcours
+desktop/mobile, source unique, cache et confidentialité cohérents. Cette revue
+reste statique et ne qualifie ni le rendu ni l'exécution E2E.

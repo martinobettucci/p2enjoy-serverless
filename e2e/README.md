@@ -1,5 +1,21 @@
 # Qualification de la plateforme
 
+## Identité visuelle Serverless
+
+`node e2e/application-icon.mjs` prend le JSON SSO sur stdin privée, transmis en
+mémoire par le lanceur ; jamais en argument, environnement ou fichier. Quatre
+groupes réels depuis l'accueil : marque/favicon anonyme puis connexion SSO,
+navigation au clavier vers le manuel et déconnexion, sur1440×1000 et390×844.
+Le tiroir mobile et sa restitution de focus sont parcourus normalement.
+
+Le rapport unique `application-icon-UUID.json` sous `.local/e2e/` recoupe le SVG
+réellement servi, son SHA et no-store ; quatre JPEG dans leurs viewports sont
+générés. L'inspection16/32px du SVG servi complète ces captures, sans être
+présentée comme une vue applicative. Contrat :
+[SLS-100](../docs/BACKLOG.md#sls-100) et
+[identité du produit](../docs/DESIGN_SYSTEM_APP.md#serverless-identity).
+Client implémenté, syntaxe vérifiée ; aucune réussite E2E encore revendiquée.
+
 ## Borne globale des 10000 invocations
 
 `node e2e/invocation-retention-volume.mjs` reçoit le JSON SSO sur stdin privée.

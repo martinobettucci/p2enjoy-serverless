@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Nouvelle icône Serverless : trois blocs reliés, dans l'unique SVG utilisé
+  par le favicon et la marque de l'accueil/console. Le client E2E dédié suit
+  l'accueil, le vrai SSO, la navigation et la déconnexion sur desktop/mobile,
+  avec vérification du fichier servi et captures JPEG. Implémentation présente ;
+  construction, déploiement et qualification visuelle encore requis dans SLS-100.
+
 - [Nominal numérique courant](docs/evidence/invocation-source-retention-detach-volume-dev-2026-11-11.json)
   qualifié : trois groupes sur355sources6de2a86, identiques au bounded et à
   l'historique.10001 HTTP et un cron réels,10002→10001 non clos→10000 clos,
