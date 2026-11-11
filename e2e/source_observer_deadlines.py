@@ -246,6 +246,9 @@ def run_command(campaign, mode, lock, functions, window):
     receipt.update(phase='running', wrapper=process(child.pid), argv=args); atomic(path, receipt)
     primary_error = None
     try:
+        receipt['wrapper_executable_sha256'] = sha(Path('/proc',str(child.pid),'exe'))
+        atomic(path, receipt)
+        assert receipt['wrapper_executable_sha256'] == binary_identity['sha256'], 'source_timeout_binary_changed'
         try:
             stdout, stderr = child.communicate(timeout=45)
         except subprocess.TimeoutExpired:

@@ -114,6 +114,7 @@ async function proveObserverDeadline(initial){
  assert.equal(actor.control_after_exit.pid,measured.pid);assert.equal(actor.control_after_exit.birth,measured.birth);assert.equal(actor.control_after_exit.tracer_pid,0);
  assert(command.completed&&!command.rescue_used&&command.wrapper_joined&&command.wrapper_pidfd_readable&&command.operator_absent);assert.equal(command.phase,'finished');assert.deepEqual(command.argv.slice(0,5),['timeout','--verbose','--foreground','--signal=KILL','40s']);
  assert(command.timeout_binary.path.startsWith('/'));assert.match(command.timeout_binary.sha256,/^[a-f0-9]{64}$/);assert(command.timeout_binary.version.startsWith('timeout '));assert.equal(command.timeout_signal,9);
+ assert.equal(command.wrapper_executable_sha256,command.timeout_binary.sha256);
  assert.equal(command.control_before_restore.pid,measured.pid);assert.equal(command.control_before_restore.birth,measured.birth);assert.equal(command.control_before_restore.tracer_pid,0);
  assert.equal(command.stdout_sha256,evidence.metadata['source-observer-command.stdout'].sha256);assert.equal(command.stderr_sha256,evidence.metadata['source-observer-command.stderr'].sha256);
  assert.equal(command.actor_terminal.MainPID,'0');assert.equal(command.actor_terminal.Result,'success');assert.equal(command.actor_terminal.ExecMainCode,'1');assert.equal(command.actor_terminal.ExecMainStatus,'0');assert.equal(command.actor_joined.ActiveState,'inactive');assert.equal(command.actor_joined.MainPID,'0');
