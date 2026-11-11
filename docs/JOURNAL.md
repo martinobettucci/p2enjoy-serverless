@@ -7022,3 +7022,24 @@ Brut98832/gzip38328. Les six consommateurs sont lancés en série au même gel ;
 CP privé native-detach-consumer-regressions-e78a583b67ab4d8ca9ece975b829021d.
 Ne modifier aucun code indexé pendant la campagne. Nominal numérique complet,
 historique final, âge18novembre et campagne complète restent ouverts.
+
+### 11 novembre2026 — Quinze groupes des consommateurs courants
+
+Six campagnes sérielles au même gel355 que bounded : count19:20 avec157fenêtres
+manquées, frontière après40,10 496→10 000/exacts496 retirés en12,758454s ;
+source préflight19:25 en9,476869s ; terminal19:30 en0,005154s ; refus19:35 ;
+alarme19:40 en35,679350s/1 ; commande19:45 en40,009936s/wrapper124.
+SSO/API, captures canoniques, nettoyages et restitutions recoupés. Six handlers
+nouveaux, les observations copiées ne sont pas des exécutions supplémentaires.
+
+Quinze groupes réussis, brut34040469/gzip2154883. Trace0 avant retrait et
+acteurs joints pour35/40 ; neuf contrôles physiques et sept exacts passent.
+Originaux restitués, contrôle démarré19:45:45UTC, référence inchangée,
+2services sains, actifs/baux nuls,5982artefacts, aucune garde. Audit RO bounded
+sans défaut, masques/alarme/dégel et355sources recoupés. Registre d'incohérences
+absent. Reprendre : historique final du helper en worker durable --no-block,
+puis nominal numérique source ; âge18novembre et campagne complète restent requis.
+Audit RO final des quinze groupes sans défaut matériel : six rapports/brut/SHA,
+355sources identiques au bounded, exacts496retraits, six nouveaux UUID de handlers,
+captures conservées,35/40 et9+7contrôles physiques recoupés. Aucun test ajouté
+par la revue ; périmètre de rétention/âge restant explicitement ouvert.

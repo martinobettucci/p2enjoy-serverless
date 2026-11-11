@@ -562,3 +562,28 @@ seule les consommateurs modifiés, le nominal numérique, l'âge ni078.5 entièr
 Ordre des preuves restantes : borne25 sans faute, consommateurs count/source/
 terminal/refus/35/40, historique final du helper puis nominal source numérique.
 Les captures canoniques d'âge restent conservées jusqu'au18novembre.
+
+### Classe courante et six consommateurs requalifiés
+
+La [borne25 courante](evidence/native-observer-detach-bounded-dev-2026-11-11.json)
+passe trois groupes sur355sources4ad78da :25,000300307s sans armer la faute,
+masque/handler conservés, alarme restante cohérente, dégel avant detach et
+restitution. Les [quinze groupes consommateurs](evidence/native-observer-detach-consumers-dev-2026-11-11.json)
+passent ensuite sur les mêmes355sources/images, en six campagnes sérielles :
+
+- count19:20 :157fenêtres réellement manquées, frontière observée après40,
+  10 496→10 000 au même curseur et exacts496 plus anciens retirés,12,758454s ;
+- source préflight19:25 :9,476869s, témoins et capture canonique conservés ;
+- terminal préflight19:30 :0,005154s, témoins et capture conservés ;
+- refus19:35 : erreur naturelle, lecteur fermé et absence physique ;
+- alarme19:40 :35,679350s/commande1, mémoire/lecteur fermés ;
+- commande19:45 :40,009936s/wrapper124, diagnostic KILL et opérateur absent.
+
+SSO/API, ressources et restitutions passent. Les deux derniers cas mesurent
+Trace0 avant retrait, joignent les acteurs et vérifient neuf contrôles
+physiques et sept exacts ; aucun waitstatus137 du fils n'est déduit. Six
+handlers réellement démarrés, distincts des observations copiées des captures.
+Brut34040469/gzip2154883 pour les consommateurs. Originaux restitués, contrôle
+démarré19:45:45UTC, référence inchangée, deux services sains, actifs/baux nuls,
+5982artefacts et aucune garde. Nominal numérique complet, historique final,
+âge18novembre et campagne complète restent requis ;078.5 reste ouverte.

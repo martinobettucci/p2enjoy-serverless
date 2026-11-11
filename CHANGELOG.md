@@ -10,7 +10,9 @@
   initial restitué, dégel sans secours et refus sans option rejoué. Le premier
   essai sans exception reste échoué. [Bounded courant](docs/evidence/native-observer-detach-bounded-dev-2026-11-11.json)
   repasse trois groupes à25,000300s, masque/alarme conservés et dégel avant
-  detach ; consommateurs et nominal restent requis.
+  detach. [Quinze groupes consommateurs](docs/evidence/native-observer-detach-consumers-dev-2026-11-11.json)
+  passent au même gel355 : count10 496→10 000, préflights, refus,35/40 et
+  restitutions. Nominal numérique complet, historique final et âge restent requis.
 
 - Banc de l'opérateur source : deux fautes réelles après attachement,
   expiration35 après SIGSTOP/SIGCONT indépendant et coupure de commande40.

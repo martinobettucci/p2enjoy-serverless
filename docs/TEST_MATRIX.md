@@ -442,7 +442,7 @@ masque[] restitué, handler d'alarme conservé/reste34,902→9,902s. Dégel rée
 avant detach, acteur terminal/joint, TracerPid0/mémoire/lecteur fermés et
 originaux restitués. Aucun handler exécuté ; seules classe partagée et deux
 fichiers du probe diffèrent de la reproduction. Consommateurs et pannes35/40
-restent à qualifier ; aucune rétention ni campagne complète déduite.
+ont leurs replays distincts ci-dessous ; aucune rétention ni campagne complète déduite.
 
 ## Consommateurs de l'observateur corrigé
 
@@ -454,8 +454,8 @@ attache/fermeture/TracerPid0 et absence physique. Quatre campagnes sérielles,
 SSO/API réels, captures canoniques conservées et restitutions jointes.
 Deux nouveaux handlers running dans le seul cas de refus ; les témoins copiés
 ne sont pas recomptés. Le préflight ne prouve pas sept jours. Nominal numérique
-source protégée, detach en erreur et campagne complète restent requis ; les
-bornes35/40 sont qualifiées séparément ci-dessous.
+source protégée et campagne complète restent requis ; detach en erreur et
+bornes35/40 sont qualifiés séparément ci-dessous.
 
 ## Bornes propres de l'opérateur source35/40
 
@@ -477,5 +477,17 @@ historique final, âge réel et campagne complète restent dans078.5.
 wait5 après SIGSTOP/SIGCONT à5,255s, primaire conservée et lecteur/mémoire fermés,
 masque[] restitué après SIGCHLD17 bloqué. Mort/Trace0 puis dégel sans secours,
 acteur joint,9+7contrôles physiques et originaux restitués. Premier essai sans
-exception exclu. Consommateurs, nominal numérique, historique final, âge réel
-et campagne complète restent requis ;078.5 reste ouverte.
+exception exclu. Consommateurs qualifiés ci-dessous ; nominal numérique,
+historique final, âge réel et campagne complète restent requis ;078.5 reste ouverte.
+
+## Consommateurs courants après la faute de detach
+
+[Bounded courant](evidence/native-observer-detach-bounded-dev-2026-11-11.json),
+trois groupes25,000300s, puis [six campagnes/quinze groupes](evidence/native-observer-detach-consumers-dev-2026-11-11.json)
+au même gel355sources/images : count19:20 (157fenêtres,10 496→10 000/exacts496
+retirés,12,758454s), source préflight19:25(9,476869s), terminal19:30(0,005154s),
+refus19:35,35/1 à19:40 et40/124 à19:45. SSO/API, captures conservées,
+acteurs/ressources joints et restitutions passent. Six handlers nouveaux
+seulement, distincts des copies ; même imagec59b8616, originaux sains,5982artefacts
+et aucune garde. Nominal source numérique, historique final, sept jours et
+campagne complète restent requis.

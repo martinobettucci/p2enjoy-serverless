@@ -2134,5 +2134,16 @@ La [preuve b5f0825](../docs/evidence/source-observer-detach-failure-dev-2026-11-
 passe quatre groupes sur355sources : erreur native de detach après5,255s,
 lecteur/mémoire fermés, masque restitué, dégel sans secours puis refus sans
 option rejoué. Neuf contrôles physiques et sept exacts passent, originaux
-restitués. L'essai sans exception reste échoué. La classe partagée doit encore
-repasser bounded puis count, préflights source/terminal, refus,35/40 et nominal.
+restitués. L'essai sans exception reste échoué. Bounded et les six consommateurs
+sont qualifiés ci-dessous ; nominal numérique complet encore requis.
+
+Les [trois groupes bounded courants](../docs/evidence/native-observer-detach-bounded-dev-2026-11-11.json)
+passent sans faute à25,000300s, puis les [quinze groupes consommateurs](../docs/evidence/native-observer-detach-consumers-dev-2026-11-11.json)
+passent au même gel355 : `schedule-firing-volume-replay.mjs count`, puis
+`retention-history-replay.mjs source preflight` et `terminal preflight`, puis
+`invocation-source-retention-volume.mjs --observer-refusal`, `--observer-global-deadline`
+et `--observer-command-timeout`, toujours en série. Exacts496 tirs retirés,
+témoins conservés, mêmes bornes35/40, nettoyages et restitutions passent.
+Six handlers nouveaux seulement ; les témoins copiés restent distincts.
+Nominal source numérique complet, historique final, âge et campagne complète
+restent à exécuter ; les époques antérieures restent préservées séparément.

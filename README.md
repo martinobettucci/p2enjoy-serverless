@@ -56,8 +56,11 @@ Binaire réel recoupé par SHA de /proc ; les deux essais échoués sont exclus.
 La [fermeture après erreur de detach](docs/evidence/source-observer-detach-failure-dev-2026-11-11.json)
 passe quatre groupes sur355sources b5f0825 : erreur native5,255s, lecteur fermé,
 masque restitué, dégel indépendant et refus sans option rejoué. Le premier essai
-sans exception reste exclu. Consommateurs courants, nominal numérique, historique
-final, âge et campagne complète restent ouverts.
+sans exception reste exclu. Les [trois groupes bounded courants](docs/evidence/native-observer-detach-bounded-dev-2026-11-11.json)
+repassent à25,000300s, puis les [quinze groupes consommateurs](docs/evidence/native-observer-detach-consumers-dev-2026-11-11.json)
+au même gel355 : borne des tirs10 496→10 000/exacts496 retirés, préflights
+source/terminal, refus et35/40 avec restitutions. Nominal numérique complet,
+historique final, âge et campagne complète restent ouverts.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native

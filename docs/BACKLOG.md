@@ -1745,7 +1745,8 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   conservée, mémoire/lecteur fermés, masque[] restitué après SIGCHLD17 bloqué.
   Acteur reprend après échéance+.25, constate mort/Trace0 puis dégèle sans
   secours ; neuf contrôles physiques et sept exacts passent, refus sans option
-  rejoué, originaux restitués. Consommateurs de la classe partagée à requalifier.
+  rejoué, originaux restitués. Les quinze groupes consommateurs courants
+  sont qualifiés ci-dessous ; nominal numérique complet encore requis.
 - [x] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
   [Contrat décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40) :
@@ -1801,8 +1802,11 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   de la source protégée sur cette époque avant clôture de ce reste.
   Après le point de faute detach, [bounded courant](evidence/native-observer-detach-bounded-dev-2026-11-11.json)
   repasse trois groupes sur355sources :25,000300s, masque/alarme conservés,
-  dégel avant detach et restitution. Six consommateurs en cours au même gel ;
-  nominal numérique et historique final encore requis.
+  dégel avant detach et restitution. Les [quinze groupes courants](evidence/native-observer-detach-consumers-dev-2026-11-11.json)
+  passent au même gel355 : six campagnes count/préflights/refus/35/40,
+  10 496→10 000/exacts496 retirés en12,758s, témoins conservés,35,679s/1 et
+  40,010s/124 avec nettoyages joints. Six nouveaux handlers distincts des copies.
+  Nominal numérique complet et historique final encore requis.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 
