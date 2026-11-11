@@ -1744,6 +1744,12 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   avant retrait du contrôle, nettoyages et ressources recoupés. Code implémenté :
   portes SIGSTOP, acteur indépendant, reçu de commande et deux options du client ;
   syntaxes contrôlées, revue et E2E encore requis. Les valeurs35/40 restent inchangées.
+  [Premier essai ad70d47 échoué](evidence/source-observer-deadline-failed-dev-2026-11-11.json),
+  zéro groupe qualifié : alarme35,719s et restitution acquises, mais assertion
+  d'inventaire rejetant les remplacements légitimes du minimum1. Correction
+  décidée dans le contrat : identités natives initiales et tardives corrélées
+  aux mêmes fonctions/révisions, puis absence physique de leur union. Code et
+  replays35/40/refus requis ; neuf contrôles physiques non atteints dans cet essai.
 - [ ] Attente native partagée de 25 s : défaut reproduit puis borne corrigée
   qualifiée sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
   avant detach. Le waitpid bloquant dépassait sa borne ; la correction attend

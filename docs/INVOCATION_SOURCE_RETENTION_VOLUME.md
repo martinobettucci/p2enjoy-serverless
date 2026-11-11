@@ -421,3 +421,28 @@ réseaux et baux avant faute puis leur absence physique, les originaux identique
 gardes et processus joints. Deux groupes par cas : préparation réelle, puis
 faute exacte et restitution. Aucun résultat ne découle de cette spécification ;
 ces pannes ne qualifient ni rétention, ni boucle25, ni erreur de detach.
+
+### Remplacements après suspension et inventaire de restitution
+
+L'[essai ad70d47](evidence/source-observer-deadline-failed-dev-2026-11-11.json)
+reste échoué, zéro groupe qualifié : vraie alarme levée après35,719s, lecteur
+fermé et contrôle détaché, mais assertion finale limitée aux deux instances
+initiales. Après reprise, les délais des handlers expirent et le moteur crée
+des remplacements pour maintenir minimum1. Ces identités nouvelles sont légitimes.
+
+Décision avant correction : conserver l'inventaire initial et enrichir, pour
+ces deux seuls modes de faute, le reçu natif du nettoyage avec les labels
+installation/fonction/révision/instance, image, montage code et réseaux de chaque
+ressource tardive. Le contrôle temporaire est retiré avant cet inventaire :
+aucune nouvelle instance ne peut ensuite être créée par lui. Valider les
+remplacements contre les mêmes deux fonctions/révisions et l'image runtime,
+sans exiger qu'ils portent les anciens identifiants. Les réseaux et baux
+peuvent survivre au retrait antérieur de leur conteneur ; conserver leur
+corrélation native au lieu d'exiger des classes de même taille.
+
+Après restitution, exiger par lectures réelles l'absence de tous les CID,
+réseaux et consommateurs de l'union initiale/tardive, de leurs canaux et de
+toute ressource Docker portant l'installation temporaire. Les neuf contrôles
+physiques existants restent exigés. Les retraits enregistrés par la garde
+restent distincts des absences déjà acquises. Ne modifier ni minima, ni délais,
+ni assertions des modes nominal et observer-refusal pour éviter ces remplacements.

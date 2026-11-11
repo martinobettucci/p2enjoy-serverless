@@ -6883,6 +6883,20 @@ et Python embarqué contrôlées ; revue/E2E des deux modes encore requis.
 
 Revue RO intégrée : jonction de l'acteur dans un finally indépendant même si
 un relevé échoue. Inventaire natif pré-faute des deux conteneurs/réseaux/baux,
-lié aux deux instances/révisions ; le relevé tardif du restorer doit être un
-sous-ensemble exact et l'absence physique finale est exigée. Aucun retrait
+lié aux deux instances/révisions ; l'absence physique finale est exigée. Aucun retrait
 déjà effectué par un autre acteur n'est attribué à la garde.
+
+### 11 novembre2026 — Inventaire des remplacements après alarme
+
+Essai ad70d47 à17:55UTC échoué, conservé sans groupe qualifié. Le vrai SIGALRM
+donne TimeoutError à35,718735s ; lecteur/mémoire fermés, TracerPid0, acteur
+joint et originaux restitués. L'assertion à la ligne134 impose à tort que les
+ressources tardives soient un sous-ensemble initial : le moteur a déjà remplacé
+les deux instances expirées pour maintenir minimum1. Neuf contrôles physiques
+non atteints ; état global final sain,5982artefacts et aucune garde.
+
+Décision persistée avant code : enrichir le reçu natif pour ces deux modes,
+corréler les remplacements aux mêmes fonctions/révisions/runtime/installation,
+vérifier l'absence exacte de l'union initiale/tardive après restitution et garder
+les neuf contrôles existants. Aucun changement des minima ou temporisations,
+aucun retrait antérieur attribué à la garde. Rejouer35,40 puis refus sans option.
