@@ -24,6 +24,10 @@ passe quatre groupes réels : succès sauvegardé avant clôture du tir, reprise
 même contrôle et purge de la fixture. Images et données privées sont conservées ;
 l’épreuve après sept jours devient éligible le18 novembre à03:30:26UTC.
 La rétention elle-même et les bornes10000 restent à vérifier.
+La [capture des témoins terminaux](docs/evidence/schedule-terminal-history-capture-dev-2026-11-11.json)
+ajoute trois groupes de préparation sur335sources : un tir terminé et deux
+générations retirées conservés en privé, éligibles ensemble le18 novembre à
+04:05:13UTC. Aucun contrôle d'âge n'est encore revendiqué.
 La [grammaire numérique des crons](docs/evidence/schedule-calendar-dev-2026-11-10.json)
 passe aussi cinq groupes distincts : fusion, règle jour/semaine, refus et
 prévisions calendaires ; SLS-078.2 est qualifiée.

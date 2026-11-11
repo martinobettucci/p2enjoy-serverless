@@ -19,8 +19,9 @@
 
 - Opérateur de conservation des tirs déjà terminés et générations retirées :
   vrais témoins des purges CLI, sauvegardes natives privées et artefacts exacts,
-  images exportées recoupées, sans interruption des services. Implémenté ;
-  capture réelle et vieillissement restent à qualifier.
+  images exportées recoupées, sans interruption des services. Capture qualifiée
+  par trois groupes réels sur335sources ; borne commune d'âge le18 novembre2026
+  à04:05:13UTC. Vieillissement, effacement et pannes restent à qualifier.
 
 - Mode de capture native d’une invocation réussie encore source d’un tir non
   clos, avec témoin HTTP réel, sauvegarde RO et copie privée des artefacts et

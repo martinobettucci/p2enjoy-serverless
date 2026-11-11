@@ -161,6 +161,14 @@ Le [rapprochement d'admission](SCHEDULES.md#admission-commune-qualifiée) coche0
 sans recomptage des groupes historiques ; la CLI qualifie078.7. La capture de
 rétention5056167 reste éligible au replay d'âge le18 novembre03:30:26UTC seulement.
 
+`python3 -B e2e/schedule-terminal-history-capture.py` complète cette préparation :
+[trois groupes réels](evidence/schedule-terminal-history-capture-dev-2026-11-11.json),
+335sources, tir terminal et générations99/100 retirées conservés, dont une sans
+tir. Ce sont les témoins authentiques de la campagne CLI précédente, sans nouvel
+appel ou fonction créé. SQLite natives intègres,5982 artefacts, images exportées
+et services recoupés ; borne commune d'âge18 novembre04:05:13.358459UTC.
+L'âge, l'effacement, les pannes propres et les bornes10000 restent à éprouver.
+
 ## Plafond global isolé — SLS-099
 
 Commande publique canonique : `python3 -B e2e/public-invocations-suite.py`,

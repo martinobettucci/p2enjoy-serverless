@@ -60,8 +60,8 @@ fonction. Dépasser ces bornes exige de vrais appels et de vraies fenêtres sur
 plusieurs fonctions ; chaque fonction doit rester individuellement sous10000
 pour distinguer la portée globale. Les sources des tirs non clos restent hors
 du comptage éligible des invocations. Les générations retirées et les tirs déjà
-terminaux doivent aussi franchir sept jours réels. Leur préparation reste à
-réaliser ; aucun résultat ne découle de la seule capture initiale.
+terminaux doivent aussi franchir sept jours réels. Leur capture complémentaire
+est qualifiée ci-dessous ; aucun résultat d'âge ne découle des seules captures.
 
 SLS-078 reste[~] jusqu’à ces preuves et à sa régression complète.
 
@@ -161,3 +161,20 @@ qualifier avant usage, doit observer la suppression du tir terminal ancien et
 des générations retirées, dont celle sans tir, sur la même image capturée.
 Cette préparation ne prouve ni les sept jours, ni les bornes10000, ni la reprise
 après panne du futur replay. Les données privées sont conservées jusqu'à preuve.
+
+### Témoins terminaux capturés
+
+La [preuve39862b9](evidence/schedule-terminal-history-capture-dev-2026-11-11.json)
+passe trois groupes de préparation réels sur335sources, mêmec59b8616. Capture
+privée `schedule-terminal-history-a3993b7d64f14650933cf03960c3d3b0` : un tir
+terminal succeeded et générations99/100 retirées, dont99 sans tir ; métadonnées
+strictement identiques à la campagne CLI. Les deux sauvegardes sont intègres et
+root0400,5982 artefacts copiés aux mêmes SHA/taille/mode, exports contrôle/runtime
+existants recoupés. Même contrôle/référence, images/démarrages et fichiers
+officiels ; aucun arrêt, nouveau handler ou fonction créée pour cette capture.
+
+Éligibilité réelle : tir18 novembre2026 à04:05:09.014643UTC ; générations99 et100
+à04:05:11.530622UTC et04:05:13.358459UTC. La borne commune est cette dernière
+date. La capture de source non close5056167 garde sa propre borne03:30:26UTC.
+Ces trois groupes prouvent la conservation initiale ; l'âge, l'effacement,
+les bornes10000, les interruptions propres et les replays restent ouverts.

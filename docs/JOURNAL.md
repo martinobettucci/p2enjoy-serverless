@@ -5998,3 +5998,12 @@ sans tir. Contrat SCHEDULE_RETENTION complété avant code : opérateur de lectu
 et sauvegarde native uniquement, copies privées/inventaires et exports d'images
 existants vérifiés. Aucun redémarrage, aucune date fabriquée ; éligibilités
 séparées, replay gardé et pannes restent à qualifier.
+
+Capture39862b9 réussie : trois groupes de préparation,335sources, mêmec59b8616.
+Un tir terminal et deux générations retirées issus de CLI91d4606,5982 artefacts,
+deux SQLite intègres/root0400 et exports d'images antérieurs recoupés. Capture
+privée a3993b7d ; borne commune d'âge18 novembre04:05:13.358459UTC. Services,
+démarrages et fichiers officiels inchangés ; aucun nouveau handler/fonction.
+Les trois groupes ne qualifient ni l'âge ni les bornes10000. Reprendre078.5
+par les bornes globales réelles, les pannes/régressions de capture et les pilotes
+gardés de replay ; ne pas attendre l'âge pour ces travaux indépendants.
