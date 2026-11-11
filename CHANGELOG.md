@@ -2,13 +2,17 @@
 
 ## [Non publié]
 
-### Pertes avant capture de rétention — en qualification
+### EOF et perte du pilote avant capture qualifiés
 
 - Deux parcours du client existant ferment son canal ou tuent son seul helper
   après observation du vrai succès cron, avant la commande de capture.
   Restitution normale ou garde indépendante 80 s, mêmes UUID/dates, captures
   canoniques conservées et purge physique exigées. Opérateur et produit
-  inchangés ; implémenté et relu, preuve E2E encore requise.
+  inchangés. Les [huit groupes de panne](docs/evidence/schedule-retention-gate-losses-dev-2026-11-11.json)
+  et les [quatre du nominal](docs/evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
+  passent sur 351 sources/images identiques ; trois refus CLI précoces sont
+  vérifiés séparément. Captures canoniques conservées et trois purges physiques.
+  Backup/copie interrompus, régressions historiques et âge restent ouverts.
 
 
 ### Refus de l'observateur source après attachement qualifié

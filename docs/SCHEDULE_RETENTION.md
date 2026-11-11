@@ -122,8 +122,8 @@ octet ni mode des artefacts copiés. Un reçu privé recoupe les empreintes de
 capture, registre et inventaire avant/après. Cette conservation ne démarre
 aucun conteneur et n’administre pas FORGE.
 
-Restent : pannes propres de la capture initiale et régressions de son helper
-distinct schedule-recovery-operator.py, vieillissement des tirs terminaux/générations retirées,
+Restent : interruptions pendant backup/copie de la capture initiale et
+régressions de son helper distinct schedule-recovery-operator.py, vieillissement des tirs terminaux/générations retirées,
 protection après passage réel de rétention à sept jours et campagne complète.
 La source protégée sous borne10000 a sa preuve distincte ci-dessous.
 Concurrence078.4 et adaptateur078.7 ont leurs preuves distinctes du11 novembre.
@@ -328,3 +328,24 @@ la relance automatique. Le prérequis SSO est fourni par le client existant
 `dev-sso-sessions.mjs`, identifiants en mémoire et seuls cookies de plateforme
 conservés dans les fichiers privés habituels. Ces cas ne remplacent pas la
 campagne complète et ne clôturent pas SLS-078.5.
+
+### EOF, perte du pilote et nominal rejoué qualifiés
+
+La [preuve 20ffc09](evidence/schedule-retention-gate-losses-dev-2026-11-11.json)
+passe huit groupes (quatre par cas) sur 351 sources/images figées. EOF après
+le point gated donne le vrai code 1 ; SIGKILL du seul helper est confirmé par
+pidfd et SSH 255, suivi de la garde indépendante 80 s. TracerPid 477828/479746
+puis zéro du même contrôle 472612/naissance 502712875, même démarrage 15:00:08 UTC.
+Les deux UUID/dates restent identiques, tirs clos sans rejeu et deux purges
+physiques terminées. Aucun nouveau dossier de capture dans ces deux cas ;
+les inventaires canoniques sont identiques avant/après. Revue RO : RAS.
+
+Le [nominal rejoué](evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
+passe ensuite quatre groupes sur la même époque : vraie capture RO du succès
+avant clôture, reprise sans redémarrage et purge publique. Trois refus CLI
+précoces (option inconnue, options multiples, doublon) passent séparément,
+sans groupe E2E ajouté. La capture privée 9d2956df25784454a8a2b6da271b2d39 est
+un témoin de non-régression ; elle ne remplace pas les deux sources canoniques,
+et ses images ne sont pas exportées. Les dates d'éligibilité initiales du
+18 novembre restent inchangées. Ces preuves ne couvrent pas backup/copie
+interrompus, les cinq régressions historiques ni l'âge réel.

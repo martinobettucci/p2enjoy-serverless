@@ -6691,3 +6691,21 @@ Implémentation dans le client existant, opérateur inchangé. Revue RO sans
 défaut bloquant ; deux renforts intégrés avant E2E : inventaire physique des
 dossiers/captures canoniques avant/après et mêmes UUID/dates HTTP/source après
 restitution. Syntaxe Node contrôlée ; les deux parcours restent à exécuter.
+
+### 11 novembre 2026 — Pertes avant capture et nominal qualifiés
+
+Client 20ffc09, 351 sources/images identiques : EOF au cron 15:20 puis SIGKILL
+au cron 15:25 passent huit groupes, audit RO RAS. Codes 1/255 conservés,
+pidfd confirme le seul helper tué ; TracerPid 477828/479746 puis zéro du même
+contrôle 472612/502712875, démarrage 15:00:08 inchangé. Garde indépendante 80 s
+jointe, mêmes UUID/dates, deux purges et captures canoniques inchangées.
+
+Le nominal 15:30 passe quatre groupes sur la même époque ; trois refus CLI
+précoces sont contrôlés séparément. Nouvelle capture privée de non-régression
+9d2956df25784454a8a2b6da271b2d39, 5 990 artefacts copiés ; troisième fonction
+purgée. Elle ne remplace aucune source d'âge. Contrôle final deux services
+sains, actifs à zéro, 5 982 artefacts, aucune garde. Bruts pannes 265 654/gzip
+83 682 octets ; nominal/options 197 426/gzip 74 500. Aucun produit/UI modifié.
+Reprendre les cinq groupes historiques de schedule-recovery.mjs, puis les
+interruptions propres de backup/copie et autres restes 078.5 ; âge toujours
+au 18 novembre. Aucun résultat de ces restes n'est acquis par les douze groupes.

@@ -24,6 +24,11 @@ passe quatre groupes réels : succès sauvegardé avant clôture du tir, reprise
 même contrôle et purge de la fixture. Images et données privées sont conservées ;
 l’épreuve après sept jours devient éligible le18 novembre à03:30:26UTC.
 La rétention à sept jours reste à vérifier ; la borne10000 des tirs est qualifiée ci-dessous.
+Les [deux pertes avant capture](docs/evidence/schedule-retention-gate-losses-dev-2026-11-11.json)
+passent huit groupes, et le [nominal rejoué](docs/evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
+quatre, sur les mêmes 351 sources et images. Même contrôle sans redémarrage,
+captures canoniques conservées et trois fixtures purgées ; interruptions pendant
+copie/backup et régressions historiques restent ouvertes.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native

@@ -1975,6 +1975,13 @@ faute après le cron réussi mais tir non clos, reprise sans rejeu, purge physiq
 Le deuxième cas tue le seul helper par pidfd et attend sa garde indépendante
 80 s ; le contrôle garde son PID/démarrage. Le client recoupe les inventaires
 réels des captures canoniques avant/après et les deux UUID/dates des appels.
-Implémenté, syntaxe contrôlée, revue RO renforcée ; preuve E2E encore requise.
-Le nominal sans option conserve sa capture et ses quatre groupes. Contrat :
+Les [huit groupes réels](../docs/evidence/schedule-retention-gate-losses-dev-2026-11-11.json)
+passent au client 20ffc09 sur 351 sources, puis les
+[quatre du nominal](../docs/evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
+sur la même époque et les mêmes images. Les trois refus CLI d'options sont
+mesurés séparément avant création de rapport ; aucun groupe E2E ajouté.
+Les mêmes UUID/dates et démarrage du contrôle sont conservés, trois fonctions
+purgées physiquement, captures canoniques inchangées. Backup/copie interrompus,
+régressions historiques et âge restent ouverts. Le nominal sans option garde
+sa capture de non-régression ; elle ne remplace aucune source canonique d'âge. Contrat :
 [SCHEDULE_RETENTION](../docs/SCHEDULE_RETENTION.md#pertes-avant-la-commande-de-capture).

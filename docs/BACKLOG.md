@@ -1537,7 +1537,11 @@ est qualifié par la capture suivante.
 La [capture5056167](evidence/schedule-retention-capture-dev-2026-11-11.json) passe
 quatre groupes sur331sources : sauvegarde authentique, même contrôle repris,
 fixture purgée. Épreuve d’âge au plus tôt le18 novembre2026 à03:30:26.355818UTC.
-Pannes propres et régressions historiques du nouveau mode restent requises.
+Les [pertes avant capture](evidence/schedule-retention-gate-losses-dev-2026-11-11.json)
+passent huit groupes sur 351 sources, puis le
+[nominal rejoué](evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
+quatre groupes sur le même client 20ffc09. Interruptions backup/copie et
+régressions historiques du helper restent requises.
 La [capture de témoins terminaux/retirés](SCHEDULE_RETENTION.md#capture-des-tirs-terminaux-et-générations-retirées)
 réutilise les objets purgés de la vraie campagne CLI04:05UTC, sans mutation ni
 nouveau service. [Capture39862b9](evidence/schedule-terminal-history-capture-dev-2026-11-11.json)
@@ -1695,11 +1699,13 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
 - [ ] Capture initiale `schedule-recovery-operator.py` : pannes propres et
   régressions de ce helper distinct, non couvertes par la matrice de
   `storage-legacy-environment.py`.
-  Deux premiers parcours spécifiés dans
-  [Pertes avant capture](SCHEDULE_RETENTION.md#pertes-avant-la-commande-de-capture) :
-  EOF et SIGKILL du helper après le vrai point gated, garde 80 s, même contrôle
-  sans redémarrage, tir clos sans rejeu et purge réelle. E2E encore requis ;
-  backup/copie interrompus et régressions historiques restent distincts.
+  [EOF et SIGKILL après gated](evidence/schedule-retention-gate-losses-dev-2026-11-11.json)
+  qualifiés par huit groupes au client 20ffc09 : même contrôle sans redémarrage,
+  TracerPid réel puis zéro, garde indépendante 80 s, mêmes UUID/dates et deux
+  purges physiques. Le [nominal](evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
+  passe quatre groupes sur les mêmes 351 sources/images ; trois refus CLI
+  précoces sont vérifiés séparément. Les captures canoniques restent conservées.
+  Restent backup/copie interrompus et cinq régressions historiques distinctes.
 - [x] Observateur source sous borne : [refus réel après attachement](evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
   qualifié par deux groupes au commit 956498a, sur 351 sources figées. Deux
   handlers HTTP/cron running, tir et UUID recoupés ; TracerPid 471960 puis zéro

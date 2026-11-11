@@ -392,3 +392,13 @@ Ce refus qualifie une panne après attache et son nettoyage normal. Il ne
 qualifie pas une erreur de detach, l'alarme 35 s, la coupure 40 s, l'attente
 native 25 s sans événement ni l'âge de sept jours. Le nominal numérique garde
 sa preuve distincte au commit d860cc5 ; la campagne complète reste requise.
+
+## Pertes avant la capture initiale et non-régression nominale
+
+[Huit groupes de panne](evidence/schedule-retention-gate-losses-dev-2026-11-11.json),
+puis [quatre nominaux](evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
+passent sur 351 sources au client 20ffc09, mêmes images. EOF 1, SIGKILL pidfd/SSH
+255, TracerPid réel puis zéro, garde indépendante 80 s, mêmes UUID/dates et
+captures canoniques conservées ; trois purges physiques. Les trois refus CLI
+précoces restent un contrôle local distinct, non ajouté aux douze groupes E2E.
+Backup/copie interrompus, historique du helper et âge réel non qualifiés ici.
