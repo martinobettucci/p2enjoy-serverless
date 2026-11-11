@@ -114,3 +114,27 @@ et artefacts originaux comparés avant le redémarrage attendu du même contrôl
 Référence inchangée. Aucune fonction ni session SSO créée par ces dix groupes.
 Les admissions HTTP/cron, la perte avec consommateur et le raccordement à la
 suite restent à qualifier ; aucun succès de ces scénarios n’est déduit ici.
+
+
+## Admissions réelles qualifiées le11 novembre2026
+
+La [preuve d’admission](evidence/instance-limit-admission-dev-2026-11-11.json),
+clientf2d48d6, passe quatre groupes sur328 sources figées, même imagec59b8616.
+Nouvelle connexion SSO depuis l’accueil ; trois fonctions originales publiées
+et promues. Deux handlers occupent deux conteneurs à0,25CPU/128Mio chacun ;
+la troisième admission expire429/queue_timeout, sans handler ni troisième instance,
+alors que les budgets CPU/RAM restent libres. Minimum3 est refusé409 sans
+changer updated_at. Après libération, le troisième appel réussit au hash attendu.
+
+À01:35UTC, deux nouveaux appels HTTP occupent les deux places et le tir est
+refused_capacity/schedule_capacity sans invocation. À01:40UTC, le tir suivant
+réussit au hash planifié, POST/JSON{}, sans authentification injectée. Le premier
+refus reste strictement identique ; aucun rejeu. Sept invocations au total,
+dont six handlers réussis et une réception rejetée, deux tirs. Les trois purges
+publiques terminent, puis la fenêtre retire ses données temporaires et restitue
+les originaux. Même contrôle/image avec redémarrage attendu, agent sain,
+référence et fichiers officiels/proposition conservés ; zéro écriture de variable.
+
+Les dix groupes de fenêtre gardent leur époque327 distincte ; ils ne sont pas
+réattribués au client328. Restent la perte avec consommateur vivant, le transfert
+du cas depuis la suite publique et ses régressions. SLS-099 reste[~].

@@ -1603,5 +1603,10 @@ l’accueil. Trois fonctions originales sont publiées par les API : deux occupe
 le plafond, la troisième doit être refusée malgré les budgets CPU/RAM libres.
 Le client vérifie aussi minimum3 refusé409, appel sain après libération, refus
 à une vraie frontière cron puis prochain tir réussi sans rejeu, et trois purges.
-Prévoir deux frontières UTC et la fenêtre gardée900s. Ce nouveau client est
-implémenté, pas encore qualifié ; ne pas le lancer en parallèle d’un autre banc.
+Prévoir deux frontières UTC et la fenêtre gardée900s. Ce client passe quatre groupes sur328sources, six handlers réussis,
+refus planifié01:35UTC sans invocation puis succès01:40UTC sans rejeu, trois
+purges publiques et restitution des originaux :
+[preuve](../docs/evidence/instance-limit-admission-dev-2026-11-11.json).
+Ne pas le lancer en parallèle d’un autre banc. La perte avec un consommateur
+et le raccordement à la suite publique restent requis ; l’ancien cas refuse
+encore son prérequis au lieu de devenir un test ignoré.

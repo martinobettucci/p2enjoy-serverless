@@ -5816,3 +5816,23 @@ minimum3 refusé, prochain appel puis prochain tir sains et purges publiques.
 Sa première exécution reste à faire ; perte avec consommateur et raccordement
 à la suite restent requis avant clôture099. L’ancien helper reste sans écriture,
 sans attente d’une évolution FORGE. Les premiers dix groupes gardent leur époque327.
+
+
+## 11 novembre2026 — Plafond HTTP et planifié qualifié sans mutation de cellule
+
+Clientf2d48d6,328sources figées et même imagec59b8616 : quatre groupes passent
+avec nouveau SSO réel depuis l’accueil, trois fonctions originales publiées,
+deux conteneurs à0,25CPU/128Mio puis troisième429 sans handler ; minimum3 refusé409
+sans mutation, prochain appel sain après libération. À01:35UTC, le tir refuse
+schedule_capacity sans invocation ; à01:40UTC, prochain tir réussi au hash voulu,
+POST/JSON{}, refus antérieur inchangé. Sept invocations dont six handlers réussis.
+Trois purges publiques terminent, données temporaires retirées, mêmes originaux
+et image rétablis avec redémarrage attendu. Agent sain, référence et configuration
+conservées ; aucun PUT de variable ou proposition. Preuve instance-limit-admission-dev-2026-11-11.json.
+
+Reprendre099 par la perte du pilote avec un consommateur vivant, puis transférer
+le cas bloquant de public-invocations vers la campagne isolée et raccorder la
+matrice/suite, avec leurs régressions. Critères.2/.4 prouvés ;.3/.5 restent ouverts,
+pas de campagne complète relancée tant que cet ancien prérequis est maintenu.
+Aucune fonctionnalité produit ni migration/UI/manuel modifiés pendant cette
+qualification ; les dix groupes de fenêtre gardent leur époque327 distincte.

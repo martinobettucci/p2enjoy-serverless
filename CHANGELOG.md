@@ -8,8 +8,11 @@
   un déploiement DEV isolé, même image, plafond2 au démarrage. Le refus préventif
   historique reste qualifié. Nouveau mode temporaire et client E2E de restitution
   qualifiés par dix groupes réels sur327sources : nominal, EOF, SIGTERM, SIGKILL,
-  échéance, originaux conservés. Client HTTP/cron implémenté, non encore qualifié ;
-  perte avec consommateur et raccordement restent à faire.
+  échéance, originaux conservés. Le client HTTP/cron passe ensuite quatre groupes
+  sur328sources avec SSO réel : six handlers réussis, troisième appel refusé429,
+  minimum3 refusé409, tir refusé01:35UTC sans invocation et prochain succès01:40UTC
+  sans rejeu, trois purges publiques et restitution. Perte avec consommateur et
+  raccordement à la suite restent à faire ; SLS-099 reste ouverte.
 
 ### Planifications en cours de qualification
 

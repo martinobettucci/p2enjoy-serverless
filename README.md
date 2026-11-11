@@ -39,8 +39,11 @@ d'instances, rétention et régression complète restent
 Le déploiement isolé de la même image, plafonné à deux sans modifier les variables
 officielles, passe dix groupes de démarrage/restitution (nominal, EOF, SIGTERM,
 SIGKILL, échéance) : [preuve](docs/evidence/instance-limit-environment-dev-2026-11-11.json).
-La demande d’évolution de FORGE est retirée ; admissions HTTP/cron, perte avec
-consommateur et raccordement à la suite restent ouverts dans SLS-099.
+La [campagne d’admission](docs/evidence/instance-limit-admission-dev-2026-11-11.json)
+ajoute quatre groupes sur328sources : SSO réel, deux handlers occupés, refus du
+troisième, minimum3 refusé, reprise HTTP, refus cron01:35UTC puis succès01:40UTC
+sans rejeu et trois purges publiques. La demande d’évolution de FORGE est retirée ;
+perte avec consommateur et raccordement à la suite restent ouverts dans SLS-099.
 Les [files pleines des tirs](docs/evidence/schedule-queues-dev-2026-11-10.json)
 passent quatre groupes sur319 sources :16 réceptions individuelles,128 globales,
 deux refus sans invocation puis deux succès HTTP et deux planifiés après libération.

@@ -1541,6 +1541,12 @@ backends,5982 artefacts, services et fichiers officiels conservés pendant repla
 SLS-078.6 est qualifiée ; rétention, plafond global099, adaptateur.7 et régression
 complète gardent l'unité ouverte.
 
+Le [plafond global en installation isolée](evidence/instance-limit-admission-dev-2026-11-11.json)
+est maintenant qualifié séparément : quatre groupes, tir refusé01:35UTC sans
+invocation puis succès01:40UTC sans rejeu. SLS-099 reste ouverte pour la perte
+avec consommateur et le raccordement à la suite ; les critères.4/.5 ne sont
+pas clôturés sur ce seul complément.
+
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.
 
@@ -2066,7 +2072,7 @@ substitution ; manuel et matrice de parité mis à jour avec la livraison.
 ## SLS-099 — Qualification isolée du plafond d’instances
 
 Statut : [~] — dépendance à une évolution de FORGE retirée le11 novembre2026 ;
-déploiement isolé et cinq restitutions qualifiés ; admissions en cours. Nature : Corriger. Dépend de :
+déploiement isolé, cinq restitutions et admissions HTTP/cron qualifiés ; perte avec consommateur et raccordement ouverts. Nature : Corriger. Dépend de :
 SLS-040. Ordre :1, préalable à la preuve du plafond global de SLS-078.
 Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md).
 
@@ -2086,7 +2092,7 @@ Critères d’acceptation :
 - [ ] SLS-099.3 Restitution indépendante des répertoires et services après perte
   réelle du pilote, même avec un consommateur Docker ; processus/gardes terminés,
   originaux conservés, aucun retrait d’une ressource étrangère.
-- [ ] SLS-099.4 Deux instances réelles puis refus HTTP de la troisième, minimum3
+- [x] SLS-099.4 [Quatre groupes réels](evidence/instance-limit-admission-dev-2026-11-11.json),328sources, six handlers réussis ; cinq restitutions dans la preuve327. Deux instances réelles puis refus HTTP de la troisième, minimum3
   refusé sans mutation, prochain appel sain ; refus planifié sans invocation,
   prochain tir sain sans rejeu. Nominal, EOF, SIGTERM et SIGKILL éprouvés.
 - [ ] SLS-099.5 Campagne dédiée raccordée à la suite publique et à la matrice,
@@ -2095,6 +2101,8 @@ Critères d’acceptation :
 Les anciens succès32→2→32 et le refus préventif ne qualifient pas ces nouveaux
 critères. L’unité reste ouverte jusqu’aux preuves sur le vrai déploiement.
 
-Le client `instance-limit-admission.mjs` implémente le SSO réel, les refus HTTP
-et planifié, le prochain tir et les purges ; sa première exécution reste à faire.
-Les dix groupes de fenêtre n’ont créé aucune fonction et ne qualifient pas.3/.4/.5.
+Le client `instance-limit-admission.mjs` passe quatre groupes avec SSO réel,
+refus HTTP/planifié, prochain tir et trois purges publiques. Les dix groupes de
+fenêtre sans consommateur restent distincts ;.3 et.5 restent à qualifier.
+L’ancien scénario public refuse encore son prérequis : aucun succès global
+n’est annoncé avant son remplacement et le raccordement du nouveau client.
