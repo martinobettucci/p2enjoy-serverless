@@ -408,7 +408,7 @@ def observe(campaign,fd):
                 receipt['syscall_stops']+=1
                 if phase==1:
                     pending=data[0]
-                    database_boundary=pending in (3,72,75) and database_descriptor(data[1])
+                    database_boundary=pending==75 and database_descriptor(data[1])
                 if database_boundary and phase in (1,2):
                     receipt['database_boundaries']+=1
                     value=read_state(reader,source)

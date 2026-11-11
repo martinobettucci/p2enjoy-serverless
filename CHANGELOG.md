@@ -10,8 +10,9 @@
   Syntaxe contrôlée ; préflights, refus, pertes et régressions restent à exécuter.
   Les sept jours ne sont pas encore éligibles. Deux refus d’âge passent ;
   le premier préflight source est arrêté sur délai natif avec originaux
-  restitués. Lectures limitées aux descripteurs SQLite réels et compteurs/
-  diagnostic terminal ajoutés ; nouveau préflight requis.
+  restitués. Le second mesure41424 stops/5842 frontières avant expiration.
+  Lectures limitées aux synchronisations des descripteurs SQLite réels,
+  compteurs/diagnostic terminal conservés ; nouveau préflight requis.
 
 ### Source planifiée protégée sous la borne qualifiée
 
