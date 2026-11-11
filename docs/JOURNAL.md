@@ -6545,3 +6545,8 @@ conservés avant POST ; même réconciliation API en nominal et en secours. Seul
 l'objet de nom exact, absent du témoin, confirmé vide est retirable ; liste
 tronquée/ambiguë refusée. Le nominal exercera réellement cette recherche API,
 sans prétendre une perte de transport qui n'aurait pas été provoquée.
+
+Le correctif est implémenté et relu : même recherche API en nominal/secours,
+réponse POST seulement recoupée. Aucun nouveau défaut confirmé ; la perte de
+transport n'a pas été exécutée et n'est pas revendiquée. Syntaxes Node/Python
+contrôlées ; scénario réel de périmètre encore requis.

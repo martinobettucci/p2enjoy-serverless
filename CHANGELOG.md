@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+### Refus du périmètre cloné — en qualification
+
+- Nouveau mode client foreign-namespace : SSO/API, namespace de fixture
+  conservé au refus de restitution, DELETE API ciblé puis restitution explicite.
+  Même helper/image, aucun élargissement d'autorité ; quatre groupes implémentés
+  et syntaxe contrôlée, E2E réel encore requis.
+
 ### Replay jeune et pertes des témoins de rétention qualifiés
 
 - [Treize groupes réels](docs/evidence/retention-history-replay-preflight-dev-2026-11-11.json)

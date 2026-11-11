@@ -15,8 +15,10 @@ from uuid import uuid4
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('kind', choices=['source', 'terminal'])
-    parser.add_argument('mode', choices=['invalid', 'not-eligible', 'preflight', 'age', 'seed-loss', 'observer-loss'])
+    parser.add_argument('mode', choices=['invalid', 'not-eligible', 'preflight', 'age', 'seed-loss', 'observer-loss', 'foreign-namespace'])
     args = parser.parse_args()
+    if args.mode == 'foreign-namespace' and args.kind != 'source':
+        parser.error('foreign-namespace requires the live source capture')
     root = Path(__file__).resolve().parent.parent
     suite = runpy.run_path(str(root / 'e2e/execution-suite.py'))
     out = root / '.local/e2e'
@@ -35,7 +37,7 @@ def main():
         checkpoint.chmod(0o600)
 
     save()
-    credentials = suite['private_credentials']() if args.mode in ('preflight', 'age') else None
+    credentials = suite['private_credentials']() if args.mode in ('preflight', 'age', 'foreign-namespace') else None
     try:
         with (out / (name + '.stdout')).open('xb') as stdout, (out / (name + '.stderr')).open('xb') as stderr:
             os.fchmod(stdout.fileno(), 0o600)
@@ -53,7 +55,7 @@ def main():
         state['after'] = after
         assert all(before[key] == after[key] for key in ('source_sha256', 'image', 'adapter_images')), 'sources_or_images_changed'
         assert process.returncode == 0 and report['completed'] and report['cleanup'] and not report['failure'] and report['skipped'] == 0
-        expected = 1 if args.mode in ('invalid', 'not-eligible') else 2 if args.mode in ('seed-loss', 'observer-loss') else 3
+        expected = 1 if args.mode in ('invalid', 'not-eligible') else 2 if args.mode in ('seed-loss', 'observer-loss') else 4 if args.mode == 'foreign-namespace' else 3
         assert len(report['checks']) == expected and all(row['status'] == 'passed' for row in report['checks'])
         state['completed'] = True
     except BaseException as error:
