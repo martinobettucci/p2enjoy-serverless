@@ -6949,3 +6949,14 @@ Audit RO final sans défaut matériel : SHA/tailles du brut, trois rapports
 originaux,354sources du commit exécuté,6groupes/3campagnes, unions exactes
 initiales/remplacements et9+7contrôles recoupés. Aucun test supplémentaire
 compté par la revue. Reste suivant : erreur réelle de detach et fermeture du lecteur.
+
+### 11 novembre2026 — Décision du cas detach en erreur
+
+Exploration RO vérifiée dans les sources : detach ferme la mémoire puis appelle
+le vrai wait5 si stopped=false ; AssertionError sort de son except OSError.
+Le probe natif existant établit Docker pause/resume/WNOHANG0. Décision avant code :
+même préparation à deux handlers, acteur indépendant prêt avant pause, reprise
+ptrace sans statut puis refus naturel d'historique. Exiger erreur detach5–7s,
+lecteur fermé malgré detach-state refusé, puis mort de l'opérateur/Trace0 et
+dégel par acteur avant restitution. Secours15 explicite interdit un succès.
+Ne toucher ni méthode detach ni délais ; mode E2E propre puis refus sans option.

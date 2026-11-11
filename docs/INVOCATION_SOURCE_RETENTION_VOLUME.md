@@ -493,3 +493,39 @@ référence inchangée, deux services sains, actifs/baux à zéro,5982artefacts 
 aucune garde. Les bornes propres35/40 sont qualifiées ; detach en erreur,
 nominal numérique courant, reprise historique finale, âge18novembre et
 campagne complète restent requis dans078.5.
+
+## Fermeture du lecteur malgré une erreur native de detach
+
+Décision du11novembre2026 avant code pour le reste078.5 inscrit. Ajouter le
+mode explicite `--observer-detach-failure` à la même préparation authentique
+à deux handlers, sans HTTP ordinaires. Après attache et reçu initial, armer
+un acteur indépendant figé, prêt avec pidfd de l'opérateur, limité au même
+CID/PID/naissance/image du contrôle temporaire. Il ne prend pas le verrou.
+
+Confirmer Docker pause du contrôle pendant l'arrêt initial ptrace, puis appeler
+le vrai observer.resume et exiger waitpid(WNOHANG)=0. Un statut déjà présent
+invalide le scénario. Persister Paused=true, identités et absence de statut ;
+laisser ensuite la vraie assertion d'historique insuffisant lever. Le finally
+appelle la méthode detach inchangée : fermeture de /proc/PID/mem, vrai
+PTRACE_INTERRUPT et vraie attente5s sur le contrôle gelé. Exiger son exception
+AssertionError/native_stop_not_observed et durée5–7s, pas une exception injectée.
+Aucune méthode, réponse système, ligne SQL ou minuterie n'est remplacée.
+
+Conserver séparément l'erreur primaire retention_history_incomplete, l'erreur
+de detach avec entrée/sortie monotones et raison, puis le refus consécutif
+native_tracer_retained dans detach-state. Malgré ces erreurs, le finally extérieur
+doit effectivement fermer le lecteur SQLite et enregistrer reader_closed=true ;
+le descripteur mémoire doit aussi être fermé. L'opérateur/helper restent échoués1.
+Le TracerPid encore égal à l'opérateur dans son finally n'est pas présenté comme
+un detach réussi : après sa mort, l'acteur constate son pidfd terminé et le même
+contrôle TracerPid0, encore Paused=true, avant de le dégeler réellement.
+
+L'acteur est armé avant pause, attend au plus15s la mort de l'opérateur, et
+dégèle aussi en secours si cette borne expire : ce secours est explicite et
+interdit le succès de la preuve. Son unité oneshot bornée30s, son résultat réel
+et sa jonction précèdent la restitution du helper. La commande40/alarme35,
+les minima et les chemins sans cette option sont conservés. Le reçu natif des
+ressources tardives et l'absence de l'union initiale/tardive s'appliquent aussi
+à ce mode ; ne pas imposer un nombre de remplacements. Deux groupes réels :
+préparation SSO/deux handlers, puis exception detach/lecteur fermé/dégel/restitution.
+Rejouer ensuite le refus sans option ; nominal numérique et âge restent distincts.
