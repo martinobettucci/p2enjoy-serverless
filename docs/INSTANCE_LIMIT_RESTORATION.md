@@ -293,3 +293,17 @@ inchangés. La durée choisie et la programmation réelle du timer sont exposée
 dans guard-armed. Le nominal1800 et les régressions ciblées doivent être
 qualifiés sur le helper modifié ; les succès099 antérieurs gardent leur époque.
 Cette réutilisation n'ajoute ni mutation de variable officielle ni règle produit.
+
+## Confirmation de terminaison après signal
+
+Le pidfd du pilote est ouvert puis son PID/naissance revérifié avant le signal.
+Sa disponibilité en lecture est une étape ; le succès exige aussi que le même
+pilote ne soit plus vivant selon le témoin /proc existant. Après le réveil
+pidfd borné10s, attendre cette condition au plus5s sans renvoyer de signal.
+Conserver le pidfd pendant la confirmation, puis seulement fermer et émettre
+driver_dead=true. Un dépassement reste un échec avec garde de restitution.
+
+Le reçu privé driver-signal.json conserve signal, PID/naissance, réveil pidfd,
+état /proc immédiatement après ce réveil et confirmation finale/temps mesuré.
+Le client conserve le reçu avant ses assertions. Cette correction renforce
+la confirmation ; elle ne remplace pas un signal réel ni une restitution.

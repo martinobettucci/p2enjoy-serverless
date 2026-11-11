@@ -6590,3 +6590,17 @@ originaux, sources/images recoupées, aucune suite lancée après l'échec.
 Décision avant code : conserver stderr privé, opérateur/code/signal et empreinte
 d'erreur dans le client d'environnement. Aucun retry ni succès déduit de la
 restitution seule ; nouveau rejeu explicite requis.
+
+### 11novembre2026 — Confirmation SIGKILL après réveil pidfd
+
+Le rejeu ciblé8e562297 au clientf155885 termine en échec sur
+assert(signal.driver_dead), contrairement au précédent Error indétaillé.
+Le helper attend le réveil pidfd mais émet aussitôt un nouveau témoin /proc ;
+la confirmation finale n'est donc pas acquise. La cause du premier Error
+reste inconnue ; ne pas la confondre avec cette assertion. Originaux
+restitués par le secours, aucune suite lancée.
+Décision avant code : maintenir le pidfd et attendre de façon bornée le
+témoin driver_dead après réveil, sans second signal ; conserver état après
+réveil et reçu final avant assertion. Le scénario ne doit pas déclarer
+le pilote terminé si la condition reste fausse. Rejeu SIGKILL puis matrice
+complète requis.

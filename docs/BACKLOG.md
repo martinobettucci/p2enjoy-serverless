@@ -1684,7 +1684,9 @@ indépendante recoupée, zéro groupe compté. La reprise avec terminal attaché
 passe release/EOF/SIGTERM puis échoue sur un Error non détaillé du signal
 SIGKILL ; originaux restitués, matrice incomplète. Conserver le diagnostic
 privé et les champs opérateur/code/signal avant le prochain rejeu, sans relance
-automatique ni retrait d'assertion.
+automatique ni retrait d'assertion. Le rejeu ciblé échoue sur driver_dead non
+confirmé après réveil pidfd ; confirmation /proc bornée et reçu conservé
+à corriger selon INSTANCE_LIMIT_RESTORATION, puis rejeux requis.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.
