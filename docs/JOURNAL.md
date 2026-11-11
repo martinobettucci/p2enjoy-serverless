@@ -6149,3 +6149,11 @@ local à waitpid bloquant réel, sans modifier la bibliothèque partagée ni les
 résultats système ; bornes25s/alarme35s/commande40s conservées. Réduire aussi les
 lectures RO avant la fin du lot aux sync utiles, puis fermetures, et conserver
 les prédicats exacts. Cette correction d'instrumentation reste à éprouver.
+
+Replaye53b0d9/cda4c3ed réussi : neuf groupes propres sur342sources. Les huit
+refus/source et le refus avant39 fenêtres précèdent toute mutation. Préflight
+07:45UTC :18 fenêtres,4864 tirs, deux appels initiaux seuls ; observation4,46s,
+SSO et64 pages exhaustives. Deux SIGKILL de pilote/mutateur aux points réels
+registre avant CONTROL et observateur attaché ; restitutions indépendantes120s,
+source identique, services et gardes joints. Trois essais échoués exclus. Les
+régressions du helper courant et le mode count après09:30UTC restent à exécuter.

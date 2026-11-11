@@ -211,6 +211,13 @@ passent20 groupes sur les mêmes340sources : cinq modes de
 `--foreign-namespace`,6 groupes). Chaque commande est terminée avant la suivante.
 Total de l'étape24, sans réattribuer les anciennes preuves ni compter l'essai échoué.
 
+Le pilote `node e2e/schedule-firing-volume-replay.mjs MODE` passe
+[neuf groupes propres](evidence/schedule-firing-replay-preflight-dev-2026-11-11.json)
+sur342sources e53b0d9 : invalid1 (huit refus), not-eligible1, preflight3,
+seed-loss2 et observer-loss2.4864 tirs et64 pages API, zéro nouveau handler,
+sources scellées conservées, restitutions jointes. Les trois essais échoués
+restent exclus. Count après39 fenêtres et régressions du helper courant restent requis.
+
 ## Plafond global isolé — SLS-099
 
 Commande publique canonique : `python3 -B e2e/public-invocations-suite.py`,

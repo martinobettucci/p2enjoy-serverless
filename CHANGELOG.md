@@ -7,8 +7,8 @@
 - Chargement vérifié d'une copie scellée dans la fenêtre existante, publication
   atomique de CONTROL en dernier et observation native avant l'attente de santé.
   Garde120 explicite pour retirer la copie avant le prochain créneau ; préflight,
-  refus et pertes réelles sont implémentés. Qualification propre et replay
-  numérique encore requis ; aucun changement du moteur applicatif ou d'image.
+  refus et pertes réelles sont qualifiés ci-dessous. Replay numérique et
+  régressions historiques encore requis ; aucun changement applicatif ou d'image.
   Premier préflight échoué avant CONTROL sur l'appel Path.open/opener, corrigé ;
   restitution complète confirmée, essai conservé séparément.
   Second préflight : copie réussie mais PID init observé ; sélection corrigée
@@ -16,6 +16,9 @@
   qualification explicite encore requise.
   Attentes natives bloquantes et lectures RO ciblées pour limiter le coût du
   traceur au démarrage, délais25/35/40 inchangés ; troisième essai expiré conservé.
+  Replaye53b0d9 qualifié sous borne : neuf groupes sur342sources,4864 tirs de18
+  fenêtres, observation4,46s, SSO/64 pages API et deux pertes avec restitution
+  indépendante. Mode count et régressions historiques encore requis.
 
 ### Préparation de la borne globale des tirs
 

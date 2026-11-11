@@ -251,3 +251,23 @@ la restitution indépendante120s et la source inchangée ; elles ne sont ni
 purges métier ni succès de handler. Timeout40s et verrou hérité imposent la
 jonction du mutateur avant restauration. Les nouveaux cas et les régressions
 historiques doivent passer avant de qualifier le pilote ; SLS-078 reste ouverte.
+
+## Chargement et pertes qualifiés
+
+Le [replaye53b0d9](evidence/schedule-firing-replay-preflight-dev-2026-11-11.json)
+passe neuf groupes sur342sources figées, mêmes imagesc59b8616/1e64b4af : huit
+refus de paramètres/source, refus count avant éligibilité, préflight nominal et
+deux pertes réelles. Les refus ne créent aucune fenêtre. À07:45UTC,18 fenêtres
+réellement manquées donnent4864 tirs ; observation4,46s sous la borne25s,
+deux invocations initiales seules. Nouveau SSO puis64 pages API exhaustives
+recoupées ; source scellée identique après restitution.
+
+Les pertes après registre/avant CONTROL et après attache au Python tuent
+réellement pilote et mutateur ; garde120 indépendante, sources conservées,
+originaux restitués, processus et unités joints. Aucune nouvelle fonction,
+invocation ou purge métier revendiquée dans ce replay. Le rapport brut complet
+est lié en gzip ; trois essais échoués sont conservés et exclus des neuf groupes.
+
+Le mode count et ses deux frontières au-delà10000 restent à qualifier après
+09:30UTC. Les neuf groupes ne prouvent pas la rétention numérique ; les
+régressions historiques du helper courant restent distinctes et requises.

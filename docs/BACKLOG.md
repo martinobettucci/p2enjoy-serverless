@@ -1576,7 +1576,8 @@ Le [chargement/replay gardé](SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-
 est spécifié avant code : source scellée vérifiée avant arrêt, copie atomique
 CONTROL en dernier, observation native de deux états au même curseur. Préflight,
 refus avant mutation/éligibilité, pertes pendant copie/observation et replay
-numérique implémentés ; qualification propre encore requise.
+numérique implémentés ; qualification sous borne et pertes ci-dessous, mode
+count et régressions historiques encore requis.
 Premier essai0e29293 : huit refus et refus avant éligibilité passent, préflight
 échoué avant publication CONTROL sur TypeError dans l'écriture du reçu ;
 originaux restitués. Appel Path.open/opener corrigé ; replay explicite encore requis.
@@ -1587,6 +1588,11 @@ l'opérateur historique ; replay encore requis. Cet essai ne qualifie pas le pr�
 Essai dad8031 : contrôleur Python identifié, expiration25s après4 fenêtres
 récupérées sur15. Attente waitpid bloquante et lectures RO réduites implémentées,
 délais25/35/40 inchangés ; aucune frontière qualifiée, replay encore requis.
+Le [replaye53b0d9](evidence/schedule-firing-replay-preflight-dev-2026-11-11.json)
+passe neuf groupes sur342sources : refus avant mutation/éligibilité,4864 tirs
+issus de18 fenêtres manquées, SSO/64 pages API, pertes copie/observateur et
+restitutions indépendantes. Aucun handler nouveau ; source identique. Les trois
+essais échoués restent séparés. Mode count et régressions historiques encore requis.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.
