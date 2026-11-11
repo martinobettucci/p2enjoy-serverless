@@ -5866,3 +5866,20 @@ La seconde revue révèle aussi le catch trop large : les refus d’appartenance
 restent obligatoires, seule la panne technique d’exec est récupérable. Ajouter
 la preuve API d’un namespace étranger conservé avant suppression autorisée de
 l’objet synthétique et restitution. Ces constats restent dans099, aucun test parallèle.
+
+
+## 11 novembre2026 — Sûreté consommateur qualifiée et suite publique raccordée
+
+126a775 passe trois campagnes sérialisées, six groupes sur328sources : appel
+vivant après perte du pilote puis retrait de son conteneur/réseau/bail ; Docker
+pause réel, exec refusé et restitution poursuivie ; namespace étranger refusé,
+préservé puis seule fixture supprimée par API avant restitution. Deux gardes
+indépendantes retirent deux consommateurs ; originaux et référence conservés.
+Revue confirme les deux P2 fermés structurellement ; preuve effective liée.
+L’essai f47de76f reste séparé et échoué, reçu natif de restitution confirmé.
+
+Le raccordement public conserve tous les contrôles : client HTTP30 nettoyé avant
+plafond isolé4, rapport public31 avec détails de sa dernière unité, SSO par entrée
+privée et snapshots. Nouveau rapport HTTP distinct, commande canonique Python,
+transmission des identifiants dans la suite générale. Implémentation à éprouver
+sur le gel final ;099.3 est qualifiée,.5 reste ouverte. Aucun produit/migration/UI.

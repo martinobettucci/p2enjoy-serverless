@@ -209,7 +209,7 @@ ces budgets. Les réservations ne sont restituées qu’après destruction et
 libération confirmées, y compris pour les anciennes générations. La santé
 est dégradée si cette réconciliation ne peut pas finir.
 
-`node e2e/public-invocations.mjs` qualifie l’entrée réelle, les files, les
+`python3 -B e2e/public-invocations-suite.py` qualifie l’entrée réelle, les files, les
 générations, les budgets, le stockage et les reprises. Ses 31 groupes passent,
 avec 221 groupes de régression, dans la [preuve du moteur](../docs/evidence/execution-dev-2026-11-06.json).
 Les 55 groupes de configuration/panne, les 14 de stockage, les composants

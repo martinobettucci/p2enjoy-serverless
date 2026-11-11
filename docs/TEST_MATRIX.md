@@ -142,3 +142,21 @@ replay, dont sept préparatoires ; trois fonctions purgées. Le premier passage
 vert, puis renforcé sur sa borne d'aperçu, conserve15 autres handlers et trois
 purges, sans addition de groupes. Même image/ID/démarrages,34 backends et5982
 artefacts conservés ; aucune nouvelle capture. SLS-078.2 est qualifiée.
+
+
+## Plafond global isolé — SLS-099
+
+Commande publique canonique : `python3 -B e2e/public-invocations-suite.py`,
+identifiants SSO sur stdin privée. Le lanceur prépare des sessions réelles,
+exécute les trente groupes HTTP et leur nettoyage, puis les quatre groupes
+isolés. Le rapport public conserve31 groupes :30 HTTP et le groupe parent du
+plafond, dont quatre détails sont conservés sans double comptage.
+`node e2e/public-invocations.mjs` seul produit le rapport HTTP de trente groupes ;
+il ne constitue plus la campagne publique complète.
+
+Preuves ciblées distinctes : cinq modes de `instance-limit-environment.mjs`
+(dix groupes), `instance-limit-admission.mjs` (quatre groupes), puis ses modes
+`--consumer-loss`, `--observer-unavailable`, `--foreign-namespace` (six groupes).
+Mêmes image réelle, moteur, agent, Docker et SSO ; aucune mutation des variables
+officielles. Les époques et les essais arrêtés restent séparés dans leurs preuves.
+Le lanceur raccordé et les régressions sur le helper final restent à exécuter.

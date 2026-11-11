@@ -19,8 +19,9 @@ Le refus de l’ancien helper reste historique ; l’évolution de FORGE n’est
 plus un prérequis. Le déploiement et cinq restitutions passent dix groupes réels ;
 les admissions HTTP/cron passent quatre groupes distincts sur328sources : deux
 places occupées, troisième429, minimum3 refusé409, tir refusé sans invocation
-puis prochain tir réussi sans rejeu. La perte avec consommateur et le raccordement
-à la suite restent ouverts dans SLS-099.
+puis prochain tir réussi sans rejeu. La perte avec consommateur, le diagnostic sous pause et le refus d’un namespace
+étranger passent six groupes distincts ; le raccordement est implémenté et sa
+régression reste ouverte dans SLS-099.
 CPU est réservé en nano-CPU entiers, par arrondi supérieur, avant Docker.
 Les minima de toutes les fonctions actives de gestion, brouillons compris,
 doivent tenir simultanément dans les trois budgets. Seules les fonctions ayant

@@ -205,3 +205,27 @@ demande la restitution et exige son refus sans retrait du contrôle temporaire
 ni disparition de ce namespace. Le client supprime ensuite son propre objet
 de faute par API avant une restitution explicite réussie. Ce parcours ne
 s’attribue ni suppression d’un objet tiers ni succès du premier refus.
+
+
+## Consommateur, pause et propriété qualifiés
+
+La [preuve126a775](evidence/instance-limit-consumer-restoration-dev-2026-11-11.json)
+passe six groupes sur328sources figées : SSO et perte avec consommateur,
+SSO et diagnostic refusé sous Docker pause, SSO et namespace étranger conservé.
+Deux vrais appels sont encore running au témoin requis ; deux conteneurs,
+deux réseaux et deux baux sont retirés/libérés par les gardes, originaux rétablis.
+Le mode pause conserve son erreur d’exec sans bloquer la restitution. Le mode
+étranger refuse effectivement avant tout effacement, puis sa seule fixture
+est supprimée par API avant restitution. Processus et gardes sont terminés.
+
+L’essai f47de76f au client7d9425e reste arrêté sur une erreur opérateur non
+reconstituée par son diagnostic initial. Sa restauration native est confirmée,
+mais aucun de ses groupes ne s’ajoute aux six retenus. Le stderr des nouveaux
+appels opérateur reste privé ; aucune donnée SSO n’est exportée.
+
+Le lanceur `e2e/public-invocations-suite.py` est maintenant implémenté, pas
+encore qualifié : prérequis SSO réel distinct, HTTP30 avec purge, puis plafond4
+et restitution ;31 groupes parents, détail4 sans double comptage. Les images
+et sources sont recoupées avant chaque phase et après la dernière. L’ancien
+helper ne participe plus à la campagne publique. Régression à exécuter avant
+clôture099 ; les preuves précédentes gardent leurs époques distinctes.

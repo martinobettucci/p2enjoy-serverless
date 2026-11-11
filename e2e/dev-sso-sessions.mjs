@@ -1,3 +1,4 @@
+// @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#intégration-et-portée-des-preuves
 // @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
@@ -46,10 +47,10 @@ async function signIn(browser,credentials,filename){
 }
 async function main(){
   const args=process.argv.slice(2);
-  assert(args.length===0||(args.length===1&&['--for-storage-decisions','--for-invocation-urls'].includes(args[0])),'invalid_sso_purpose');
-  const purpose=args[0]==='--for-storage-decisions'?'storage-decisions':args[0]==='--for-invocation-urls'?'invocation-urls':'suite-start';
+  assert(args.length===0||(args.length===1&&['--for-storage-decisions','--for-invocation-urls','--for-public-invocations'].includes(args[0])),'invalid_sso_purpose');
+  const purpose=args[0]==='--for-storage-decisions'?'storage-decisions':args[0]==='--for-invocation-urls'?'invocation-urls':args[0]==='--for-public-invocations'?'public-invocations':'suite-start';
   await mkdir(output,{recursive:true,mode:0o700});
-  const report=new URL(purpose==='storage-decisions'?'dev-sso-decision-sessions.json':purpose==='invocation-urls'?'dev-sso-invocation-sessions.json':'dev-sso-sessions.json',output);
+  const report=new URL(purpose==='storage-decisions'?'dev-sso-decision-sessions.json':purpose==='invocation-urls'?'dev-sso-invocation-sessions.json':purpose==='public-invocations'?'dev-sso-public-sessions.json':'dev-sso-sessions.json',output);
   await writeFile(report,JSON.stringify({completed:false,purpose})+'\n',{mode:0o600});
   let credentials=await credentialsFromStdin(),browser;
   try{

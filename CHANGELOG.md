@@ -8,7 +8,8 @@
   nativement par la garde, retrait corrélé Docker/réseau/bail. Une erreur de
   capture Docker exec ne bloque plus la restitution ; refus de propriété et
   lectures SQLite obligatoires restent stricts. Scénarios Docker pause et
-  namespace étranger ajoutés ; qualification en cours.
+  namespace étranger passent six groupes réels sur328sources. Raccordement
+  public implémenté : HTTP30 puis plafond4, rapport31 avec détails ; régression à faire.
 
 - Décision SLS-099 corrigée : retirer la demande d’évolution de FORGE et préparer
   un déploiement DEV isolé, même image, plafond2 au démarrage. Le refus préventif

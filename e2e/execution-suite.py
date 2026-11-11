@@ -112,7 +112,7 @@ CASES=[
  ('adapter-deploy',['node','e2e/adapter-deploy.mjs'],'.local/e2e/adapter-deploy.json',False),
  ('publication-recovery',['node','e2e/publication-recovery.mjs'],'.local/e2e/publication-recovery.json',False),
  ('public',['python3','-B','e2e/public.py'],'.local/e2e/public.json',False),
- ('public-invocations',['node','e2e/public-invocations.mjs'],'.local/e2e/public-invocations.json',False),
+ ('public-invocations',['python3','-B','e2e/public-invocations-suite.py'],'.local/e2e/public-invocations.json',False),
 ]
 
 def read_report(path,is_remote,expected_hash):
@@ -285,9 +285,11 @@ def main():
                     assert all(v['physical']['completed'] and v['services_cleared'] for v in value['catalogue'].values())
             else:raise AssertionError('Prérequis inconnu')
         record['fresh_report_verified']=True;record['report_content_verified']=True;save()
-    credentials=None
+    # @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#intégration-et-portée-des-preuves
+    credentials=private_credentials() if storage_console or any(row[0]=='public-invocations' for row in cases) else None
+    if not storage_console and credentials is not None:
+        execute('dev-sso-sessions',['node','e2e/dev-sso-sessions.mjs'],'.local/e2e/dev-sso-sessions.json',False,count=False,private_input=credentials)
     if storage_console:
-        credentials=private_credentials()
         execute('dev-sso-sessions',['node','e2e/dev-sso-sessions.mjs'],'.local/e2e/dev-sso-sessions.json',False,count=False,private_input=credentials)
         execute('storage-legacy-build',['python3','-B','e2e/storage-legacy-build.py'],'.local/e2e/storage-legacy-build.json',False,count=False)
         if extended:
@@ -300,7 +302,7 @@ def main():
         if storage_console and name=='storage-decision-recovery':
             execute('dev-sso-decision-sessions',['node','e2e/dev-sso-sessions.mjs','--for-storage-decisions'],
                     '.local/e2e/dev-sso-decision-sessions.json',False,count=False,private_input=credentials)
-        execute(name,command,path,is_remote,private_input=credentials if name=='storage-legacy-recovery' else None)
+        execute(name,command,path,is_remote,private_input=credentials if name in ('storage-legacy-recovery','public-invocations') else None)
     credentials=None
     if storage_console:
         execute('storage-console-physical',['python3','-B','e2e/storage-suite-inspect.py',str(report.relative_to(ROOT))],

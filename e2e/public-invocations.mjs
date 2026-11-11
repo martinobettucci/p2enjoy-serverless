@@ -15,7 +15,7 @@ import {request} from 'playwright';
 // @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md
 
 const run=promisify(execFile),root=fileURLToPath(new URL('../',import.meta.url));
-const output=path.join(root,'.local/e2e'),report=path.join(output,'public-invocations.json');
+const output=path.join(root,'.local/e2e'),report=path.join(output,'public-invocations-http.json');
 const base='https://serverless.lelabs.tech',prefix='invocation-'+randomUUID().slice(0,8);
 await mkdir(output,{recursive:true,mode:0o700});await writeFile(report,JSON.stringify({completed:false,cleanup:false,skipped:0})+'\n');
 const state=JSON.parse(await readFile(path.join(output,'admin-session.json'),'utf8'));
@@ -70,15 +70,6 @@ async function holdWriter(fn){
   const locked=await until(async()=>{assert(!ended,'Garde SQL interrompue');return events.find(row=>row.event==='writer-locked');},'Verrou écrivain non observé');
   assert(locked.identity.effective_uid>0);assert(locked.identity.effective_gid>0);assert.equal(locked.operator_uid,0);
   assert(Object.values(locked.identity.sidecar_uids).every(uid=>uid===locked.identity.effective_uid));return handle;
-}
-async function lowerInstanceLimit(){
-  const child=spawn('python3',['-B',path.join(root,'e2e/instance-limit-guard.py'),namespace.id],{stdio:['pipe','pipe','pipe']});
-  const events=[];let ended=false;
-  createInterface({input:child.stdout}).on('line',line=>events.push(JSON.parse(line)));child.stderr.resume();
-  const done=new Promise(resolve=>{child.on('exit',code=>{ended=true;resolve(code);});child.on('error',()=>{ended=true;resolve(-1);});});
-  const guard={events,done,async release(){if(!ended)child.stdin.end('restore\n');assert.equal(await done,0,'Plafond de cellule non restauré');assert(events.some(row=>row.event==='instance-limit-restored'&&row.official==='32'&&row.consumed==='32'));}};guards.push(guard);
-  await until(async()=>{assert(!ended,'Configuration de cellule refusée');return events.some(row=>row.event==='instance-limit-applied'&&row.official==='2'&&row.consumed==='2');},'Plafond temporaire non appliqué',150);
-  return guard;
 }
 async function update(fn,overrides,configuration={environment:{PUBLIC_LABEL:'first'},secrets:{QUALIFICATION_SYNTHETIC_SECRET:secret}}){
   const row=await current(fn);return manage(`/api/functions/${fn.id}`,{method:'PUT',headers:{'If-Match':String(row.updated_at)},body:{name:row.name,config:{...row.config,...overrides},configuration}});
@@ -428,23 +419,8 @@ try{
     try{await result;invocationTransports.push({client_request_id:randomUUID(),transport:'h2',id:responseHeaders['x-serverless-request-id']??null,function_id:fn.id,method:'POST',status,requested_code_hash:null,resolved_code_hash:responseHeaders['x-serverless-code-hash']??null});assert.equal(status,408);assert.equal(JSON.parse(Buffer.concat(chunks)).error,'body_timeout');assert(Date.now()-begin>=29000);outcomes.push({transport:'h2',status,elapsed_ms:Date.now()-begin,body_left_open:true});}
     finally{request.close();connection.close();try{await until(()=>connectionClosed,'h2_connection_not_joined',5);}catch(error){connection.destroy();await until(()=>connectionClosed,'h2_connection_not_destroyed',5);throw error;}}
   });
-  await check('Plafond global d’instances appliqué par la console, isolé des budgets CPU et mémoire',async()=>{
-    await until(async()=>{for(const item of functions)if((await instances(item)).length)return false;return true;},'Instances précédentes encore présentes',40);
-    const guard=await lowerInstanceLimit();
-    try{
-      const fleet=[];for(let i=0;i<3;i++){const item=await create('global-instance-limit-'+i,{cpu:.25,memory_mib:128,idle_seconds:0,queue_timeout_seconds:.25});await publish(item,firstCode);fleet.push(item);}
-      const pair=fleet.slice(0,2).map(item=>start(`/invoke/${item.id}?mode=delay`,{method:'POST',body:{ms:7000}}));
-      await until(async()=>{for(const item of fleet.slice(0,2))if(!(await history(item)).some(row=>row.state==='running'&&row.handler_started))return false;return true;},'Deux instances actives non observées');
-      const first=(await remote('inspect',fleet[0]))[0],second=(await remote('inspect',fleet[1]))[0];assert.equal(first.instances.length+second.instances.length,2);assert.equal(first.containers.length+second.containers.length,2);
-      for(const observed of [first,second])assert.deepEqual(observed.global_reservations,{instances:2,cpu_nanos:500000000,memory_mib:256});
-      assert.equal(first.instances[0].cpu_nanos+second.instances[0].cpu_nanos,500000000);assert.equal(first.instances[0].memory_mib+second.instances[0].memory_mib,256);
-      assert.equal((await invoke(fleet[2],{status:429})).json().error,'queue_timeout');assert.equal((await instances(fleet[2])).length,0);
-      const before=await current(fleet[2]);await manage(`/api/functions/${fleet[2].id}`,{method:'PUT',status:409,body:{name:before.name,config:{...before.config,cpu:.05,min_instances:3,max_instances:3}}});assert.equal((await current(fleet[2])).updated_at,before.updated_at);
-      assert((await Promise.all(pair.map(item=>item.promise))).every(row=>row.status===200));
-      await until(async()=>{for(const item of fleet.slice(0,2))if((await instances(item)).length)return false;return true;},'Plafond non restitué');
-      await invoke(fleet[2]);await until(async()=>(await instances(fleet[2])).length===0,'Troisième instance non retirée');
-    }finally{await guard.release();await healthy();}
-  });
+  // @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#intégration-et-portée-des-preuves
+  // The count-limit group runs after this campaign's cleanup in public-invocations-suite.py.
   completed=true;
 }finally{
   for(const guard of guards)try{await guard.release();}catch(error){cleanupErrors.push({step:'guard',error:diagnostic(error)});}

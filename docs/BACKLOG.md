@@ -2072,7 +2072,7 @@ substitution ; manuel et matrice de parité mis à jour avec la livraison.
 ## SLS-099 — Qualification isolée du plafond d’instances
 
 Statut : [~] — dépendance à une évolution de FORGE retirée le11 novembre2026 ;
-déploiement isolé, cinq restitutions et admissions HTTP/cron qualifiés ; mode de perte avec consommateur implémenté, non encore qualifié ; raccordement ouvert. Nature : Corriger. Dépend de :
+déploiement isolé, cinq restitutions et admissions HTTP/cron qualifiés ; perte avec consommateur et refus d’autorité qualifiés ; raccordement implémenté, régression publique à exécuter. Nature : Corriger. Dépend de :
 SLS-040. Ordre :1, préalable à la preuve du plafond global de SLS-078.
 Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md).
 
@@ -2089,7 +2089,7 @@ Critères d’acceptation :
   externe retirée. La preuve historique des deux refus reste distincte.
 - [x] SLS-099.2 [Dix groupes réels](evidence/instance-limit-environment-dev-2026-11-11.json),327sources. Déploiement isolé à plafond2, même image que le contrôle habituel,
   CPU/RAM inchangés ; zéro écriture de variable/proposition officielle.
-- [ ] SLS-099.3 Restitution indépendante des répertoires et services après perte
+- [x] SLS-099.3 [Six groupes réels](evidence/instance-limit-consumer-restoration-dev-2026-11-11.json),328sources : consommateur, pause et refus étranger. Restitution indépendante des répertoires et services après perte
   réelle du pilote, même avec un consommateur Docker ; processus/gardes terminés,
   originaux conservés, aucun retrait d’une ressource étrangère.
 - [x] SLS-099.4 [Quatre groupes réels](evidence/instance-limit-admission-dev-2026-11-11.json),328sources, six handlers réussis ; cinq restitutions dans la preuve327. Deux instances réelles puis refus HTTP de la troisième, minimum3
@@ -2104,5 +2104,7 @@ critères. L’unité reste ouverte jusqu’aux preuves sur le vrai déploiement
 Le client `instance-limit-admission.mjs` passe quatre groupes avec SSO réel,
 refus HTTP/planifié, prochain tir et trois purges publiques. Les dix groupes de
 fenêtre sans consommateur restent distincts ;.3 et.5 restent à qualifier.
-L’ancien scénario public refuse encore son prérequis : aucun succès global
-n’est annoncé avant son remplacement et le raccordement du nouveau client.
+L’orchestration publique est implémentée : HTTP30 puis plafond isolé4, rapport31
+avec détail du dernier groupe ; sa première exécution reste à faire. Les deux
+P2 de revue sont corrigés et les trois modes de sûreté passent six groupes.
+SLS-099.5 reste ouverte jusqu’au rejeu public et aux régressions du helper.

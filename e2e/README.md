@@ -632,7 +632,7 @@ racine : `node e2e/service-configuration.mjs`, `python3 -B e2e/adapter.py`,
 `python3 -B e2e/adapter-deploy-public.py`, `node e2e/adapter-deploy.mjs`,
 `node e2e/deployments.mjs`, `node e2e/control-admin.mjs`,
 `node e2e/control-ui.mjs`, `node e2e/manual-ui.mjs`,
-`node e2e/function-storage.mjs`, puis `node e2e/public-invocations.mjs`.
+`node e2e/function-storage.mjs`, puis `python3 -B e2e/public-invocations-suite.py`.
 Le client de refus public requiert `QUALIFICATION_SYNTHETIC_SECRET`, une valeur
 synthétique privée de qualification fournie au processus. Il ne doit pas recevoir
 de secret métier. Cette suite compte 153 groupes ; les images de CLI sont ensuite
@@ -849,7 +849,7 @@ node e2e/deployments.mjs
 node e2e/adapter-deploy.mjs
 node e2e/publication-recovery.mjs
 node e2e/function-storage.mjs
-node e2e/public-invocations.mjs
+python3 -B e2e/public-invocations-suite.py
 ```
 
 `python3 e2e/proxy.py --expected-proxy 10.77.0.1` s'exécute depuis le poste et
@@ -1629,3 +1629,14 @@ attendu, exige le refus de restitution et sa présence par API, puis supprime
 ce seul objet par API avant restitution. Les refus d’autorité ne sont jamais
 capturés comme diagnostic facultatif. Le stderr des seuls appels SSH opérateur
 est conservé en0600 pour diagnostiquer une erreur de transport sans l’exposer.
+
+
+Le raccordement public est implémenté, à qualifier :
+`python3 -B e2e/public-invocations-suite.py` reçoit le JSON SSO privé, prépare
+ses deux sessions normales, exécute HTTP30, attend ses purges, puis plafond4.
+Il conserve un rapport public31 et le détail du dernier groupe, avec snapshots,
+rapports UUID isolés et archivage du rapport précédent. Le client HTTP seul
+`node e2e/public-invocations.mjs` écrit public-invocations-http.json et ne prouve
+que ses trente groupes. La suite générale transmet l’entrée privée au lanceur.
+Les trois modes de sûreté passent six groupes sur328sources :
+[preuve](../docs/evidence/instance-limit-consumer-restoration-dev-2026-11-11.json).
