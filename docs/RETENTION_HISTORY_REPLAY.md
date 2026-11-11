@@ -87,8 +87,14 @@ SSO par stdin privée. Quatre groupes : chargement/observation ; SSO/API ;
 namespace hors périmètre préservé au refus ; restitution explicite après retrait
 de la seule fixture. Aucune nouvelle option du helper ni relaxation de portée.
 
-Après le SSO, créer par API un namespace vide au nom de campagne, conserver
-son UUID et son nom. Demander restore via le helper normal : celui-ci termine
+Après le SSO, lire la liste initiale des namespaces et la recouper avec les
+UUID canoniques. Avant POST, conserver ce témoin et le nom composé avec l'UUID
+complet de campagne. Créer par API un namespace vide ; retrouver ensuite sa
+seule correspondance exacte par API, exiger un UUID absent du témoin initial,
+confirmer nom/UUID et absence de services. Ce même chemin de réconciliation
+est utilisé en nominal et en secours si la réponse POST est indéterminée ;
+une liste tronquée, plusieurs correspondances ou un objet ambigu interdisent
+DELETE. La réponse POST n'est pas l'unique source d'autorité pour le nettoyage. Demander restore via le helper normal : celui-ci termine
 le pilote, puis doit refuser avec foreign_namespace avant retrait du contrôle
 temporaire. Vérifier le pilote terminé, restored=false, le même conteneur
 temporaire encore en marche, l'original arrêté et l'objet visible par API.
@@ -101,7 +107,8 @@ restitution, vérifier sources/captures/images/configuration et originaux, pilot
 et garde terminés, copies retirées. En cas d'erreur, tenter le retrait API de
 la seule fixture créée avant le secours ; un objet inconnu reste une interdiction
 de restitution, jamais un prétexte à effacer des données. La fonctionnalité est
-spécifiée ici ; le nouveau mode doit être implémenté puis qualifié réellement.
+implémentée dans le client et le lanceur, syntaxe contrôlée ; sa qualification
+réelle reste requise.
 
 ## Observation du premier passage réel
 

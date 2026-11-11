@@ -1672,7 +1672,11 @@ indépendantes et originaux/captures conservés. Les [dates natives](evidence/re
 confirment les absences sousD+240 et restitutions sousD+270, sans groupe ajouté.
 Régressions du helper encore requises ; aucune preuve d'âge avant le18novembre. Le nouveau contrôle d'appartenance clonée doit aussi
 être éprouvé sous namespace étranger avant clôture, avec conservation de cet
-objet au premier refus puis retrait de la seule fixture et restitution.
+objet au premier refus puis retrait de la seule fixture et restitution. Le
+mode client foreign-namespace est implémenté, syntaxe contrôlée, quatre groupes
+réels à exécuter ; helper et image applicative inchangés. Le nom complet et
+les UUID initiaux sont conservés avant POST ; la réconciliation API nominale
+et de secours doit permettre le retrait ciblé malgré une réponse indéterminée.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

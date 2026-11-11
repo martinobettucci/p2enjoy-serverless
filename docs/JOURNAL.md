@@ -6535,3 +6535,13 @@ puis DELETE API de la fixture et restitution explicite. Quatre groupes, même
 garde120/limitesUTC ; independent=true ne devient pas une expiration de timer.
 Le secours tente le retrait de sa seule fixture avant restore ; aucun nettoyage
 SQL ni nouvelle autorisation de propriété. Aucun résultat nouveau acquis.
+
+### 11novembre2026 — Revue du résultat indéterminé de création de fixture
+
+La revue RO relève qu'une affectation d'UUID seulement après réponse POST
+pourrait laisser un namespace créé sans reçu, puis bloquer la restitution.
+Décision avant correction : témoin initial des UUID et nom de campagne complet
+conservés avant POST ; même réconciliation API en nominal et en secours. Seul
+l'objet de nom exact, absent du témoin, confirmé vide est retirable ; liste
+tronquée/ambiguë refusée. Le nominal exercera réellement cette recherche API,
+sans prétendre une perte de transport qui n'aurait pas été provoquée.
