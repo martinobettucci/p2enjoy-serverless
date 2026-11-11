@@ -9,7 +9,10 @@ preuves sérielles, aucune date ni ligne métier fabriquée, aucune horloge remp
 Le mode terminal-capture de schedule-recovery-operator.py reprend les précontrôles,
 le traceur natif et la garde indépendante déjà qualifiés. Une seule fonction
 vivante, dans scheduled-functions-<UUID court>, porte */5 * * * * ; données/cache
-désactivés. Un vrai appel HTTP terminé avant le tir fournit le témoin non protégé.
+désactivés. Le handler original scheduled-retention attend réellement deux
+secondes avant sa réponse, pour rendre son état running observable. Le pilote
+attend handler_started/running par lecture RO avant d’attacher le traceur :
+le démarrage froid Docker reste exécuté à sa vitesse normale. Un vrai appel HTTP terminé avant le tir fournit le témoin non protégé.
 Le traceur ne remplace aucun registre, tampon ou résultat système. Il suspend
 le contrôle seulement lorsque les lectures natives confirment le tir exact
 dispatched/non clos et son invocation succeeded, handler démarré, completed_at
@@ -61,3 +64,15 @@ terminaux doivent aussi franchir sept jours réels. Leur préparation reste à
 réaliser ; aucun résultat ne découle de la seule capture initiale.
 
 SLS-078 reste[~] jusqu’à ces preuves, au critère adaptateur.7 et à sa régression.
+
+
+## Premier essai et frontière d’attachement
+
+Le premier essai894df09 atteint le tir03:20UTC mais échoue avant le handler :
+invocation failed/runtime_unavailable, handler_started=0, puis expiration du
+traceur45s. Il avait attaché le traceur avant le démarrage froid. Les originaux
+et gardes sont rétablis et la fixture est purgée ; aucune capture ni preuve
+de vieillissement n’est retenue. Le diagnostic ne reconstitue pas l’exception
+interne exacte du runtime. La correction borne l’observation à la fin du handler :
+attendre son démarrage réel sans traceur, puis observer sa réponse et son commit.
+Le délai de garde et le délai d’observation ne sont pas augmentés.

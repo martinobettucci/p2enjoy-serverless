@@ -1531,6 +1531,11 @@ SLS-078.4/.5/.7 restent à clôturer après recoupement de tous leurs critères.
 La [capture de rétention authentique](SCHEDULE_RETENTION.md) prépare le
 vieillissement réel : invocation terminale liée à un tir non clos et témoin
 HTTP antérieur, sauvegarde native privée ; aucune preuve des sept jours encore.
+Premier essai de capture03:20UTC échoué avant handler sous traceur ; originaux
+restitués et fixture purgée. Attacher après démarrage réel reste à qualifier.
+Le recoupement078.4 identifie aussi une preuve non discriminante : concurrence
+planifiée isolée du maximum individuel et du stockage exclusif. Ce scénario
+reste requis dans cette même unité avant de cocher.4.
 La [console des planifications](evidence/schedule-console-dev-2026-11-10.json)
 passe19 groupes sur326 sources : trois ciblés, huit du manuel et huit publics
 rejoués. Six handlers réels22:10UTC, pages5+1, vide, nom63, clavier/focus et mobile.

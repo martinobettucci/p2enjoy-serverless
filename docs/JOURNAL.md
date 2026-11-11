@@ -5921,3 +5921,14 @@ la fixture : contrat SCHEDULE_RETENTION avant code. Le replay après sept jours
 exigera une fenêtre exclusive gardée protégeant les originaux du même
 installation-id ; une seconde base seule est exclue. Aucun vieillissement
 ni passage de rétention n’est encore prouvé.
+
+
+Premier essai de capture894df09 : HTTP témoin réussi, tir03:20UTC
+failed/runtime_unavailable avant handler, traceur arrêté sur native_stop_not_observed
+après45s. Garde et pilote terminés, même contrôle sain et fonction purgée.
+Conserver rapport9b7ea49c et checkpointca4fb421 comme échec. Décision ciblée :
+attacher après running/handler_started réel, fixture originale répondant après
+deux secondes ; aucun allongement du délai ni du démarrage applicatif.
+La cause interne précise du refus runtime n’est pas reconstruite.
+Recoupement078.4 : les admissions ont leurs témoins, mais concurrence propre
+sans maximum ni exclusivité demande encore son scénario discriminant.
