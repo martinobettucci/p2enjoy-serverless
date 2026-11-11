@@ -23,7 +23,14 @@ La [capture de rétention](docs/evidence/schedule-retention-capture-dev-2026-11-
 passe quatre groupes réels : succès sauvegardé avant clôture du tir, reprise du
 même contrôle et purge de la fixture. Images et données privées sont conservées ;
 l’épreuve après sept jours devient éligible le18 novembre à03:30:26UTC.
-La rétention elle-même et les bornes10000 restent à vérifier.
+La rétention à sept jours et la borne10000 des tirs restent à vérifier.
+La [borne des observations HTTP](docs/evidence/invocation-retention-volume-dev-2026-11-11.json)
+passe trois groupes réels sur337sources :10016 handlers/5008 par fonction,
+exacts10000 survivants et16 plus anciens retirés, deux purges et restitution.
+Le [complément de gardes](docs/evidence/invocation-retention-guard-regressions-dev-2026-11-11.json)
+passe14 groupes supplémentaires : restitutions, déplacements partiels, refus
+de paramètres et défaut900. Sources protégées sous borne et campagne complète
+restent à qualifier ; le rapport brut complet du volume est conservé en gzip.
 La [capture des témoins terminaux](docs/evidence/schedule-terminal-history-capture-dev-2026-11-11.json)
 ajoute trois groupes de préparation sur335sources : un tir terminé et deux
 générations retirées conservés en privé, éligibles ensemble le18 novembre à

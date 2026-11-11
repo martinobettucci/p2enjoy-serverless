@@ -1550,8 +1550,8 @@ sur10016, installation isolée existante et garde1800s explicite. La
 [preuve228a99c](evidence/invocation-retention-volume-dev-2026-11-11.json) passe
 trois groupes réels sur337sources :10016 handlers, exacts10000 survivants,
 deux purges et restitution complète. Rapport intégral compressé conservé.
-Les onze groupes de restitution120/partial passent ; complément défaut900 et
-refus d'options implémenté, preuve encore requise. Sources de tir non clos sous borne numérique,
+Les [quatorze groupes de garde](evidence/invocation-retention-guard-regressions-dev-2026-11-11.json)
+passent : onze restitutions120/partial et trois options/défaut900. Sources de tir non clos sous borne numérique,
 borne des tirs planifiés et sept jours restent à qualifier.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario

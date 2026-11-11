@@ -90,4 +90,19 @@ natifs complets. Les trois groupes ne sont pas recomptés par ses sous-assertion
 Portée : borne numérique des observations HTTP terminales ordinaires. Les
 sources de tir non clos sous cette borne, les10000 tirs planifiés, les sept
 jours et les replays gardés restent à qualifier. Les régressions de restitution
-du helper modifié sont en cours et gardent leur propre preuve.
+du helper modifié sont qualifiées séparément ci-dessous.
+
+## Gardes et options qualifiées
+
+La [preuve des gardes](evidence/invocation-retention-guard-regressions-dev-2026-11-11.json)
+passe14 groupes : dix pour release/EOF/SIGTERM/SIGKILL/échéance à120s, un pour
+la perte après premier renommage à60s, trois pour deux refus d'options avant
+mutation et le défaut900 réellement programmé/restitué. Le journal natif de
+partial confirme60s et le même SHA de helper figé. Les deux refus ne créent
+aucun répertoire et conservent les identités complètes des services.
+
+Deux époques :337sources pour les onze régressions,338 pour les trois options ;
+les337 sources communes, le helper et les images sont identiques. Le volume
+à1800s garde sa propre preuve de trois groupes :17 groupes au total de cette
+étape, sans addition des assertions internes. Les pannes propres des nouveaux
+clients ne sont pas déduites des nominaux ; aucune campagne complète revendiquée.

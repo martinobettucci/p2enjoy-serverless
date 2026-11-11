@@ -6032,3 +6032,12 @@ et source337 figés. Compléter la couverture du seul changement de garde :
 défaut900 en vraie fenêtre, refus120+1800 et refus1800 hors mode, avant toute
 mutation pour ces deux refus. Contrat complété avant le client dédié ; aucun
 nouveau comportement produit ni nouvelle option du helper.
+
+Complément0d4328a passé : trois groupes sur338sources, deux refus avant création
+de fenêtre et défaut900/15min réellement programmé puis restitué. Les11 groupes
+précédents restent à337sources ; sources communes et helper identiques.
+Relevé natif confirmepartial60 et son code figé. Bilan de l'étape :17 groupes,
+10016 handlers réels du seul volume, deux purges, originaux et services sains,
+tous pilotes/gardes joints. Aucun défaut confirmé à la revue du volume.
+Restent078.5 : borne des tirs, source protégée sous borne numérique, pannes propres,
+replays et sept jours. Ne pas attendre l'âge pour préparer les autres preuves.

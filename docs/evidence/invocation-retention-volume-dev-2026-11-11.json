@@ -1045,7 +1045,11 @@
   },
   "limitations": [
     "La preuve concerne les observations terminales HTTP non liées à un tir actif.",
-    "Borne10000 des tirs, protection de la source sous borne numérique, sept jours, pannes propres et replays restent à qualifier.",
-    "Régressions du helper modifié en cours, conservées dans une preuve distincte."
-  ]
+    "Borne10000 des tirs, protection de la source sous borne numérique, sept jours, pannes propres et replays restent à qualifier."
+  ],
+  "guard_regressions": {
+    "path": "docs/evidence/invocation-retention-guard-regressions-dev-2026-11-11.json",
+    "sha256": "a67fa57e9ff33ab8197e972f1c53ac11ace97217861b033fa6f806720b5e8a48",
+    "groups": 14
+  }
 }

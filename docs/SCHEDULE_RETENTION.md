@@ -65,6 +65,13 @@ est qualifiée ci-dessous ; aucun résultat d'âge ne découle des seules captur
 
 SLS-078 reste[~] jusqu’à ces preuves et à sa régression complète.
 
+La [borne numérique HTTP ordinaire](INVOCATION_RETENTION_VOLUME.md#franchissement-réel-qualifié)
+est qualifiée par10016 vrais appels/5008 par fonction : exacts10000 survivants,
+16 plus anciens retirés, deux purges publiques et restitution des originaux.
+Trois groupes sur337sources ; quatorze groupes de garde/options sont qualifiés
+séparément. Cela ne qualifie pas les sources de tir non clos sous la borne
+numérique, les10000 tirs planifiés ni les sept jours.
+
 
 ## Premier essai et frontière d’attachement
 

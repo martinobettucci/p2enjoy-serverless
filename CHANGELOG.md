@@ -8,7 +8,8 @@
   la borne globale10000 et nettoyage avec restitution de l'installation d'origine.
   Garde explicite1800s pour ce scénario ; autres durées conservées. Trois groupes
   réels qualifiés sur337sources : exacts10000 survivants sur10016, deux purges et
-  restitution des originaux. Régressions du helper en cours ; âge, sources
+  restitution des originaux. Quatorze groupes de garde/options passent ensuite,
+  époques337/338 aux mêmes sources communes ; âge, sources
   protégées sous borne et plafond des tirs restent à qualifier.
 
 ### Qualification distincte de la concurrence planifiée

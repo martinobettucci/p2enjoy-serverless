@@ -169,6 +169,29 @@ appel ou fonction créé. SQLite natives intègres,5982 artefacts, images export
 et services recoupés ; borne commune d'âge18 novembre04:05:13.358459UTC.
 L'âge, l'effacement, les pannes propres et les bornes10000 restent à éprouver.
 
+## Borne globale des invocations — SLS-078.5/091.1
+
+`node e2e/invocation-retention-volume.mjs` passe
+[trois groupes réels](evidence/invocation-retention-volume-dev-2026-11-11.json)
+sur337sources :10016 handlers HTTP réussis,5008 par fonction, puis exactement
+les10000 observations les plus récentes conservées et les16 plus anciennes
+supprimées. Les deux fonctions sont purgées et les originaux restitués. Les
+relevés complets restent dans le rapport brut compressé lié par cette preuve.
+
+Les [régressions des gardes](evidence/invocation-retention-guard-regressions-dev-2026-11-11.json)
+passent14 groupes distincts : cinq modes de
+`node e2e/instance-limit-environment.mjs` (release, eof, sigterm, sigkill,
+deadline), puis `node e2e/storage-legacy-recovery.mjs --partial` et
+`python3 -B e2e/instance-limit-guard-options.py`. Onze groupes à337sources,
+trois à338 ; toutes les sources communes et les images sont identiques.
+Les refus de paramètres précèdent toute fenêtre ; la garde par défaut900s
+est réellement programmée puis restituée, sans prétendre son expiration.
+L'expiration réelle est couverte séparément à120s et la reprise partielle à60s.
+
+Soit17 groupes pour cette étape, sans recomptage des assertions internes.
+La borne des tirs, la source protégée sous borne numérique, les sept jours,
+les pannes propres des nouveaux clients et la campagne complète restent ouverts.
+
 ## Plafond global isolé — SLS-099
 
 Commande publique canonique : `python3 -B e2e/public-invocations-suite.py`,
