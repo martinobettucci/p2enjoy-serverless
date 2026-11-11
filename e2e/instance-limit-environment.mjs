@@ -2,7 +2,7 @@
 // @verifies docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#scénarios-requis
 // Real deployment and kernel signals; no application server or dependency substitute.
 import assert from 'node:assert/strict';
-import {randomUUID} from 'node:crypto';
+import {randomUUID,createHash} from 'node:crypto';
 import {mkdir,writeFile,rename} from 'node:fs/promises';
 import {spawn,execFile} from 'node:child_process';
 import {promisify} from 'node:util';
@@ -17,7 +17,11 @@ const helper='/srv/p2enjoy-serverless/e2e/storage-legacy-environment.py';
 const output=new URL('../.local/e2e/',import.meta.url);
 const report=new URL(`instance-limit-environment-${mode}-${campaign}.json`,output);
 const events=[],checks=[];let child,ended=false,exitCode=null,completed=false,cleanup=false,failure=null,restoration;
-async function remote(...args){const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,...args],{timeout:60000,maxBuffer:2*1024*1024});return JSON.parse(stdout);}
+async function remote(...args){try{const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,...args],{timeout:60000,maxBuffer:2*1024*1024});return JSON.parse(stdout);}catch(error){
+ assert(['signal-driver','status','restore'].includes(args[0]));
+ error.operator=args[0];error.stderr_sha256=createHash('sha256').update(String(error.stderr??'')).digest('hex');
+ await writeFile(new URL(`instance-limit-environment-${mode}-${campaign}-${args[0]}.stderr`,output),String(error.stderr??''),{mode:0o600});throw error;
+}}
 async function save(){const pending=new URL(report.pathname+'.pending','file:');await writeFile(pending,JSON.stringify({campaign,mode,completed,cleanup,skipped:0,checks,events,exit_code:exitCode,failure,restoration},null,2)+'\n',{mode:0o600});await rename(pending,report);}
 async function until(action,message,seconds=180){const deadline=Date.now()+seconds*1000;while(Date.now()<deadline){const value=await action();if(value)return value;await new Promise(r=>setTimeout(r,500));}assert.fail(message);}
 async function event(name){return until(()=>{const value=events.find(v=>v.event===name);assert(value||!ended,`driver_stopped_before_${name}`);return value;},`missing_${name}`);}
@@ -59,7 +63,7 @@ try{
   assert.equal((await http.get('/healthz')).status(),200);cleanup=true;
  });
  completed=true;
-}catch(error){failure={type:error.name,...(error.name==='AssertionError'?{message:error.message}:{})};}
+}catch(error){failure={type:error.name,operator:error.operator,code:error.code,signal:error.signal,stderr_sha256:error.stderr_sha256,...(error.name==='AssertionError'?{message:error.message}:{})};}
 finally{
  if(!cleanup&&child){
   child.stdin.end();
