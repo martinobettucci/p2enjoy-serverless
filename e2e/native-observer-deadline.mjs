@@ -63,7 +63,11 @@ try{
   if(mode==='reproduce'){
    assert(wait.duration>26&&wait.duration<33);
    assert(wait.finished_monotonic>=measurement.thaw_deadline_monotonic);
-  }else assert(wait.duration>=25&&wait.duration<26);
+  }else{
+   assert(wait.duration>=25&&wait.duration<26);
+   assert.deepEqual(wait.signal_mask_after,wait.signal_mask_before);assert(wait.alarm_handler_unchanged&&wait.sigchld_handler_default);
+   assert(wait.global_alarm_remaining_after>0);assert(Math.abs(wait.global_alarm_remaining-wait.global_alarm_remaining_after-wait.duration)<0.05);
+  }
   assert.equal((await http.get('/healthz')).status(),200);
  });
  await check('Restitution réelle après mesure, données et configuration originales conservées',async()=>{

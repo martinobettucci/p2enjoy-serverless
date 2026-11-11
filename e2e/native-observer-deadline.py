@@ -152,14 +152,21 @@ def measure(args):
         assert waited == 0, 'native_stop_already_pending'
         entered = time.monotonic(); remaining = signal.getitimer(signal.ITIMER_REAL)[0]
         assert remaining > 30 and activated+28-entered > 26, 'native_wait_setup_margin_exhausted'
+        mask = signal.pthread_sigmask(signal.SIG_BLOCK, set())
+        alarm_handler = signal.getsignal(signal.SIGALRM)
         receipt['wait'] = {'entered_monotonic': entered, 'deadline_monotonic': entered+25,
-                           'global_alarm_remaining': remaining, 'returned': False}
+                           'global_alarm_remaining': remaining, 'returned': False,
+                           'signal_mask_before': sorted(int(v) for v in mask),
+                           'sigchld_handler_default': signal.getsignal(signal.SIGCHLD) == signal.SIG_DFL}
         atomic(path, receipt)
         try:
             receipt['wait'].update(signal=observer.wait(entered+25), returned=True)
         except BaseException as error:
             receipt['wait'].update(exception={'type': type(error).__name__, 'message': str(error)})
         receipt['wait'].update(finished_monotonic=time.monotonic(), duration=time.monotonic()-entered)
+        receipt['wait'].update(signal_mask_after=sorted(int(v) for v in signal.pthread_sigmask(signal.SIG_BLOCK, set())),
+            global_alarm_remaining_after=signal.getitimer(signal.ITIMER_REAL)[0],
+            alarm_handler_unchanged=signal.getsignal(signal.SIGALRM) is alarm_handler)
         # Persist the primary observation before thaw or detach can fail.
         atomic(work/'native-wait-finished.json', receipt['wait']); atomic(path, receipt)
     except BaseException as error:

@@ -28,14 +28,28 @@ MODULE = Path(__file__)
 
 
 class BlockingNativeObserver(NativeObserver):
-    """Wait for the actual kernel stop without a per-syscall polling delay."""
+    """Wait for real child notifications with a monotonic deadline, without polling."""
+    # @spec docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#dépassement-reproduit-et-décision-de-correction
     def wait(self, deadline):
-        assert time.monotonic() < deadline, 'native_stop_not_observed'
-        _, status = os.waitpid(self.pid, 0)
-        assert os.WIFSTOPPED(status), 'control_exited_during_observation'
-        self.stopped = True
-        assert time.monotonic() < deadline, 'native_stop_not_observed'
-        return os.WSTOPSIG(status)
+        previous_mask = signal.pthread_sigmask(signal.SIG_BLOCK, set())
+        try:
+            signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGCHLD})
+            while True:
+                assert time.monotonic() < deadline, 'native_stop_not_observed'
+                waited, status = os.waitpid(self.pid, os.WNOHANG)
+                if waited:
+                    assert os.WIFSTOPPED(status), 'control_exited_during_observation'
+                    self.stopped = True
+                    assert time.monotonic() < deadline, 'native_stop_not_observed'
+                    return os.WSTOPSIG(status)
+                remaining = deadline-time.monotonic()
+                assert remaining > 0, 'native_stop_not_observed'
+                # Blocking SIGCHLD before waitpid avoids losing a stop between
+                # the status check and sigtimedwait. Other children only wake
+                # this loop; their statuses never stand in for this control.
+                signal.sigtimedwait({signal.SIGCHLD}, remaining)
+        finally:
+            signal.pthread_sigmask(signal.SIG_SETMASK, previous_mask)
 
 
 def sha(path):

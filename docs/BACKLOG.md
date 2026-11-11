@@ -1753,7 +1753,8 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   trois groupes sur353sources : vrai délai25 dépassé à28,202s après dégel,
   alarme35 non expirée. Nettoyage/acteur joints et originaux restitués. Décision
   de correction bornée par vrais SIGCHLD/sigtimedwait, sans changer l'alarme35 ;
-  correction, mesure bounded et régressions de consommateurs encore requises.
+  correction implémentée avec masque restauré dans finally ; mesure bounded
+  et régressions de consommateurs encore requises.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 

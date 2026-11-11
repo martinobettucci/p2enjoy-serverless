@@ -6,7 +6,9 @@
   dégel indépendant28s et restitution120. Mesure primaire et erreurs de
   nettoyage séparées. [Trois groupes de reproduction](docs/evidence/native-observer-deadline-reproduce-dev-2026-11-11.json)
   confirment le dépassement25 à28,202s au dégel ; alarme35 non expirée,
-  acteur joint et originaux restitués. Correction/mesure bounded encore requises.
+  acteur joint et originaux restitués. Correction implémentée par SIGCHLD et
+  sigtimedwait, sans modifier l'alarme globale ; mesure bounded et régressions
+  de consommateurs encore requises.
 
 ### Interruptions de sauvegarde et de copie qualifiées
 

@@ -6816,3 +6816,10 @@ Brut97 935/gzip38 061. Décision persistée avant correction : bloquer SIGCHLD
 localement, waitpid WNOHANG puis sigtimedwait avec reste monotone, masque restauré
 et aucun changement de handler/timer SIGALRM. Mesure bounded25–26, contrôle
 du masque et alarme puis régressions de consommateurs à faire ;078.5 ouverte.
+
+Correction implémentée après conservation de la reproduction : même classe,
+attente des vrais SIGCHLD après waitpid WNOHANG avec échéance monotone, aucun
+sleep ni changement de timer/handler global. Masque restauré par finally sur
+retour et exception. Le probe bounded mesure maintenant les masques avant/après,
+le handler d'alarme conservé et le temps restant35. Syntaxes contrôlées ;
+borne réelle et régressions des consommateurs encore à exécuter.
