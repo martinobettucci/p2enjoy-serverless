@@ -84,7 +84,7 @@ est qualifiée par cinq groupes sur342sources. Le
 [replay numérique](evidence/schedule-firing-retention-count-dev-2026-11-11.json) passe trois groupes
 sur342sources :10240→10000 tirs,240 plus anciens retirés au même curseur09:30UTC,
 640 tirs initiaux par fonction,112 pages API et restitution jointe. Cette borne
-globale est qualifiée ; source protégée sous borne et sept jours restent ouverts.
+globale est qualifiée ; source protégée sous borne qualifiée séparément ci-dessous, sept jours encore ouverts.
 Aucune date métier n'est modifiée.
 
 
@@ -124,7 +124,8 @@ aucun conteneur et n’administre pas FORGE.
 
 Restent : pannes propres de la capture et régressions du helper historique,
 pilote gardé de replay, vieillissement des tirs terminaux/générations retirées,
-protection après passage réel de rétention, source protégée sous borne10000 et campagne complète.
+protection après passage réel de rétention à sept jours et campagne complète.
+La source protégée sous borne10000 a sa preuve distincte ci-dessous.
 Concurrence078.4 et adaptateur078.7 ont leurs preuves distinctes du11 novembre.
 
 
@@ -219,3 +220,21 @@ contre les originaux. Les refus d'identité clonée du helper de volume ne peuve
 être simplement retirés : l'autorisation exige la fenêtre exclusive du contrat,
 les répertoires privés reconnus et les consommateurs originaux absents. Un
 pilote dédié, ses refus et ses pannes restent à implémenter/qualifier avant l'âge.
+
+## Source protégée sous borne qualifiée
+
+La [preuve d860cc5](evidence/invocation-source-retention-volume-dev-2026-11-11.json) passe trois groupes
+sur348sources identiques avant/après et les mêmes images.10001 réponses HTTP
+réelles et un handler cron donnent10002 observations terminales,5001 par fonction.
+Le passage de rétention retire exactement le plus ancien HTTP et conserve10001
+lignes, source incluse mais hors comptage tant que le tir reste strictement non
+clos. Après clôture normale du même tir, le deuxième plus ancien HTTP est retiré :
+10000 lignes, source désormais comptée et strictement inchangée. Les trois vecteurs
+complets sont recoupés par completed_at DESC,id DESC ; observation12,335898s sous25s.
+
+Deux purges publiques et contrôles physiques d'absence terminent, puis restitution
+nominale jointe des originaux. Le vrai worker oneshot quitte0 ; son résultat
+systemd success/Code1/Status0 est conservé avant arrêt de l'unité.348sources/images
+inchangées, configuration et référence conservées. Le brut complet compressé
+contient les vecteurs et reçus ; essais interrompu/échoué exclus. Sept jours,
+pannes propres résiduelles et campagne complète restent ouverts :078.5 non clôturée.

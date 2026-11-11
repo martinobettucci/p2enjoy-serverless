@@ -79,8 +79,9 @@ puis programmation2700s et restitution nominale jointe. Même contrôle/image,
 configuration et référence conservés, pilote et garde terminés. L'expiration2700
 n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant son
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
-rejouer les tests. Charge10000, frontières, pannes propres et régressions restent
-à qualifier ; aucun succès de rétention déduit de ces cinq groupes.
+rejouer les tests. Charge10000 et frontières sont qualifiées séparément ci-dessous ;
+pannes propres et régressions restent requises. Ces cinq groupes seuls ne prouvent
+pas la rétention.
 
 ## Essai interrompu et pilote durable
 
@@ -162,4 +163,22 @@ avant faute puis réellement absents après restitution ; les deux retraits de
 chaque classe sont aussi enregistrés par la garde dans ce cas. Restitution
 indépendante terminée, mêmes données/configuration/images et référence, garde
 et unité locale jointes. Le premier essai échoué reste exclu. Ces trois groupes
-qualifient la perte et sa restitution ; nominal long et rétention restent requis.
+qualifient la perte et sa restitution ; nominal numérique qualifié séparément ci-dessous, sept jours encore requis.
+
+## Source protégée sous borne qualifiée
+
+La [preuve d860cc5](evidence/invocation-source-retention-volume-dev-2026-11-11.json) passe trois groupes
+sur348sources identiques avant/après et les mêmes images.10001 réponses HTTP
+réelles et un handler cron donnent10002 observations terminales,5001 par fonction.
+Le passage de rétention retire exactement le plus ancien HTTP et conserve10001
+lignes, source incluse mais hors comptage tant que le tir reste strictement non
+clos. Après clôture normale du même tir, le deuxième plus ancien HTTP est retiré :
+10000 lignes, source désormais comptée et strictement inchangée. Les trois vecteurs
+complets sont recoupés par completed_at DESC,id DESC ; observation12,335898s sous25s.
+
+Deux purges publiques et contrôles physiques d'absence terminent, puis restitution
+nominale jointe des originaux. Le vrai worker oneshot quitte0 ; son résultat
+systemd success/Code1/Status0 est conservé avant arrêt de l'unité.348sources/images
+inchangées, configuration et référence conservées. Le brut complet compressé
+contient les vecteurs et reçus ; essais interrompu/échoué exclus. Sept jours,
+pannes propres résiduelles et campagne complète restent ouverts :078.5 non clôturée.

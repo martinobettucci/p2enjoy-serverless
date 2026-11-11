@@ -332,3 +332,12 @@ préflights et essais échoués gardent leurs époques et leur comptage distinct
 Cette preuve qualifie la borne globale des tirs. Elle ne qualifie pas la source
 d'invocation protégée sous borne, les sept jours ni la campagne complète ;
 SLS-078.5 et SLS-078 restent ouverts.
+
+### Qualification distincte de la source
+
+Le [nominal de source protégée](evidence/invocation-source-retention-volume-dev-2026-11-11.json) passe trois
+groupes sur348sources d860cc5 :10001 HTTP et un cron,10002→10001 avec tir non
+clos puis10000 après clôture. Exacts deux plus anciens HTTP retirés, source
+inchangée,5001 lignes par fonction avant borne, observation12,34s, deux purges
+publiques et restitution nominale jointe. Sept jours et campagne complète restent
+ouverts ; cette preuve ne clôture pas078.5.

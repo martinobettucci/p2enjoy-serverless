@@ -1757,7 +1757,7 @@ passe quatre groupes sur340sources :256 tirs06:15UTC, sauvegarde protégée,
 Éligibilité numérique09:30UTC. Les
 [vingt groupes de garde/options/sûreté](../docs/evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
 passent sur les mêmes340sources après la capture. Replay numérique et copie
-interrompue sont qualifiés séparément ci-dessous ; âge et source protégée restent ouverts.
+interrompue et source protégée sous borne sont qualifiées séparément ci-dessous ; âge encore ouvert.
 
 ## Replay gardé de la borne des tirs
 
@@ -1837,7 +1837,7 @@ d'un cron permet d'observer10002→10001 (source protégée), puis10000 après c
 `python3 -B e2e/source-retention-guard-options.py` éprouve la durée2700 programmée
 et quatre refus de combinaisons avant mutation. Exécuter un seul scénario à la
 fois sur le SPARK DEV au repos. Les frontières manquées sont des échecs sans
-rejeu automatique ; nominal, pannes propres et régressions restent à qualifier.
+rejeu automatique ; nominal qualifié ci-dessous, pannes propres résiduelles et régressions encore requises.
 
 ### Garde2700 et refus qualifiés
 
@@ -1847,8 +1847,9 @@ puis programmation2700s et restitution nominale jointe. Même contrôle/image,
 configuration et référence conservés, pilote et garde terminés. L'expiration2700
 n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant son
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
-rejouer les tests. Charge10000, frontières, pannes propres et régressions restent
-à qualifier ; aucun succès de rétention déduit de ces cinq groupes.
+rejouer les tests. Charge10000 et frontières sont qualifiées séparément ci-dessous ;
+pannes propres et régressions restent requises. Ces cinq groupes seuls ne prouvent
+pas la rétention.
 
 ## Pilote durable de la preuve longue des sources
 
@@ -1865,7 +1866,7 @@ Service oneshot borné3600s, Node3000s et garde distante2700s ; identifiants tra
 en mémoire par canal Unix authentifié, aucune valeur sensible persistée. Aucun
 autre scénario n'est lancé pendant la tâche. En cas d'échec/interruption, vérifier
 la restitution autoritative du SPARK avant toute autre opération. Implémentation
-et syntaxe acquises ; preuve d'indépendance et nominal restent à qualifier.
+et syntaxe acquises ; indépendance et nominal qualifiés séparément ci-dessous.
 
 Avant le nominal, `python3 -B e2e/source-retention-worker-loss.py` reçoit aussi
 les identifiants privés, lance le vrai worker et attend des réponses et deux
@@ -1884,4 +1885,13 @@ avant faute puis réellement absents après restitution ; les deux retraits de
 chaque classe sont aussi enregistrés par la garde dans ce cas. Restitution
 indépendante terminée, mêmes données/configuration/images et référence, garde
 et unité locale jointes. Le premier essai échoué reste exclu. Ces trois groupes
-qualifient la perte et sa restitution ; nominal long et rétention restent requis.
+qualifient la perte et sa restitution ; nominal numérique qualifié séparément ci-dessous, sept jours encore requis.
+
+## Nominal de source protégée qualifié
+
+Le [nominal de source protégée](../docs/evidence/invocation-source-retention-volume-dev-2026-11-11.json) passe trois
+groupes sur348sources d860cc5 :10001 HTTP et un cron,10002→10001 avec tir non
+clos puis10000 après clôture. Exacts deux plus anciens HTTP retirés, source
+inchangée,5001 lignes par fonction avant borne, observation12,34s, deux purges
+publiques et restitution nominale jointe. Sept jours et campagne complète restent
+ouverts ; cette preuve ne clôture pas078.5.

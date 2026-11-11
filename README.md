@@ -44,7 +44,8 @@ et restitution, sur les mêmes342sources courantes. Le
 passe ensuite trois groupes sur ces mêmes342sources :39 fenêtres manquées,
 10240→10000 tirs au même curseur09:30UTC, exacts240 plus anciens retirés,
 112 pages API et restitution. Chaque fonction avait640 tirs : la borne globale
-est discriminée de la borne individuelle. Source protégée et sept jours restent ouverts.
+est discriminée de la borne individuelle. La source protégée a sa preuve distincte
+ci-dessous ; les sept jours restent ouverts.
 L'[interruption pendant la capture](docs/evidence/schedule-capture-interruption-dev-2026-11-11.json)
 passe cinq groupes sur342sources dbb840b :256 tirs08:50UTC, copie normale puis
 perte du pilote pendant backup SQLite, garde bloquée2,043s, SIGKILL/jonction et
@@ -58,16 +59,20 @@ passe trois groupes réels sur337sources :10016 handlers/5008 par fonction,
 exacts10000 survivants et16 plus anciens retirés, deux purges et restitution.
 Le [complément de gardes](docs/evidence/invocation-retention-guard-regressions-dev-2026-11-11.json)
 passe14 groupes supplémentaires : restitutions, déplacements partiels, refus
-de paramètres et défaut900. Sources protégées sous borne et campagne complète
-restent à qualifier ; le rapport brut complet du volume est conservé en gzip.
+de paramètres et défaut900. La source protégée sous borne est qualifiée ci-dessous ;
+âge et campagne complète restent ouverts. Le brut du volume est conservé en gzip.
 Le [discriminant de source protégée](docs/INVOCATION_SOURCE_RETENTION_VOLUME.md)
 a son client, son handler original et son observateur natif :10002→10001 avant
 clôture du tir puis10000 après clôture. Garde2700 explicite du seul mode isolé ;
-nominal, pannes et régressions restent à qualifier. Le
+le nominal est qualifié ci-dessous ; pannes propres et régressions restent ouvertes. Le
 [pilote durable](docs/evidence/source-retention-worker-loss-dev-2026-11-11.json) passe trois
 groupes de perte réelle sur348sources :512 réponses, SIGKILL9 conservé comme
 échec, deux consommateurs physiquement absents et restitution indépendante.
-Le nominal de rétention reste ouvert.
+Le [nominal d860cc5](docs/evidence/invocation-source-retention-volume-dev-2026-11-11.json) passe aussi
+trois groupes sur348sources :10001 HTTP et un cron réels,10002→10001 avec tir
+non clos puis10000 après clôture. Exacts deux plus anciens HTTP retirés, source
+strictement conservée, deux purges publiques et restitution nominale jointe.
+La protection sous borne est qualifiée ; les sept jours restent ouverts.
 La [capture des témoins terminaux](docs/evidence/schedule-terminal-history-capture-dev-2026-11-11.json)
 ajoute trois groupes de préparation sur335sources : un tir terminé et deux
 générations retirées conservés en privé, éligibles ensemble le18 novembre à

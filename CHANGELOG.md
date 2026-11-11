@@ -2,13 +2,23 @@
 
 ## [Non publié]
 
+### Source planifiée protégée sous la borne qualifiée
+
+- [Trois groupes réels](docs/evidence/invocation-source-retention-volume-dev-2026-11-11.json) d860cc5
+  sur348sources :10001 HTTP et un cron,10002→10001 tant que le tir reste ouvert,
+  puis10000 après clôture. Exacts premier/deuxième plus anciens HTTP retirés,
+  source inchangée et5001 observations par fonction avant borne. Observation
+  native12,335898s sous25s ; deux purges publiques et restitution nominale jointe.
+  Résultat systemd réel success/Code1/Status0 conservé puis unité arrêtée.
+  Sept jours, pannes propres résiduelles et campagne complète restent ouverts.
+
 ### Perte du pilote durable qualifiée
 
 - [Trois groupes réels](docs/evidence/source-retention-worker-loss-dev-2026-11-11.json)
   bbe9d0e sur348sources :512 réponses, contrôleur disparu/cgroup indépendant,
   SIGKILL9 enregistré en échec, deux conteneurs/réseaux/baux avant faute puis
   absents et originaux restitués indépendamment. Premier essai échoué exclu.
-  Nominal long et rétention restent à qualifier.
+  Le nominal numérique est qualifié séparément ci-dessus ; sept jours restent ouverts.
 
 ### Essai de volume source interrompu
 
@@ -16,16 +26,16 @@
   locales sauvegardées,9883 succès natifs avant retrait, zéro tir et aucun groupe
   terminé. Source346/images recoupées, originaux restitués et consommateurs
   retirés ; cause non établie. Pilote durable oneshot implémenté,
-  résultat système conservé avant collecte ; indépendance et nouveau nominal à
-  qualifier. Aucune rétention qualifiée par cet essai.
+  résultat système conservé avant collecte ; indépendance et nominal qualifiés
+  séparément ci-dessus. Aucune rétention qualifiée par cet essai.
 
-### Source de tir sous la borne d'invocations — en préparation
+### Préparation de la source sous borne
 
 - Client de charge réelle, handler original et observateur natif implémentés
   pour10002→10001 avant clôture du tir puis10000 après clôture, avec UUID exacts.
   Garde explicite2700 du seul mode isolé, défauts historiques conservés ; client
   dédié aux quatre refus et à l'armement/restauration2700. Syntaxe contrôlée,
-  nominal et pannes restent à éprouver ; aucune règle applicative modifiée.
+  nominal qualifié séparément ci-dessus, pannes résiduelles encore requises ; aucune règle applicative modifiée.
   Les [cinq groupes de garde](docs/evidence/source-retention-guard-options-dev-2026-11-11.json)
   passent sur346sources : quatre refus avant mutation et programmation/restitution
  2700. Échec du collecteur local conservé, rapport E2E terminé recoupé sans rejeu ;

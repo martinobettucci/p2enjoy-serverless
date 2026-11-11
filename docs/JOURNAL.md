@@ -6413,3 +6413,24 @@ indépendamment les originaux.348sources/images égales avant/après, contrôle
 original sain redémarré11:35:01UTC, référence inchangée et5982 artefacts, actifs
 à zéro. Premier essai exclu. Preuve et brut compressé conservés ; nouveau nominal
 long encore requis, aucune rétention déduite de ces trois groupes.
+
+### 11novembre2026 — Source protégée sous la borne numérique qualifiée
+
+Le worker durable b509a404 passe le nominal sur348sources d860cc5 :10001 HTTP
+et un cron réels, deux fonctions à5001 observations chacune avant borne. Trois
+frontières commises à12:10UTC :10002→10001 avec même tir dispatched/non clos,
+puis10000 après clôture ; exacts premier/deuxième plus anciens HTTP retirés et
+source strictement identique. Observation12,335897814s sous25s. Deux purges
+publiques et absence physique, restitution nominale jointe. Code Node0 puis
+worker réel systemd success/Code1/Status0, reçu durable et unité locale arrêtée.
+Trois groupes retenus, brut83,03Mo/gzip4,22Mo, audit RO indépendant sans contradiction.
+Les essais interrompu et échoué restent exclus ; perte qualifiée par ses trois
+groupes distincts, pas de double comptage. SLS-091 passe[~] pour ce résultat
+numérique partagé ; âge et nettoyage résiduel encore ouverts.
+
+Contrôle final DEV : contrôle original68a8a0b2/imagec59b8616 sain, redémarrage
+attendu12:10:42UTC ; référence475be494 inchangée depuis6novembre, deux conteneurs
+healthy, agent actif et healthz200. Fonctions vivantes/appels/instances/opérations/
+déploiements actifs/réservations/baux/intentions à zéro,5982 artefacts conservés,
+aucune unité de restitution active. SLS-078 reste[~] pour les preuves d'âge,
+pannes propres résiduelles et régression complète ; rien n'est déclaré clos.

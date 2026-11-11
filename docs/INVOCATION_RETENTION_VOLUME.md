@@ -88,8 +88,8 @@ est déterministe (mtime0). Il contient les10016 réponses et les deux relevés
 natifs complets. Les trois groupes ne sont pas recomptés par ses sous-assertions.
 
 Portée : borne numérique des observations HTTP terminales ordinaires. Les
-sources de tir non clos sous cette borne, les10000 tirs planifiés, les sept
-jours et les replays gardés restent à qualifier. Les régressions de restitution
+sources de tir non clos et les10000 tirs planifiés ont leurs preuves distinctes
+liées ci-dessous ; sept jours et replays d'âge restent à qualifier. Les régressions de restitution
 du helper modifié sont qualifiées séparément ci-dessous.
 
 ## Gardes et options qualifiées
@@ -106,3 +106,12 @@ les337 sources communes, le helper et les images sont identiques. Le volume
 à1800s garde sa propre preuve de trois groupes :17 groupes au total de cette
 étape, sans addition des assertions internes. Les pannes propres des nouveaux
 clients ne sont pas déduites des nominaux ; aucune campagne complète revendiquée.
+
+### Qualification distincte de la source
+
+Le [nominal de source protégée](evidence/invocation-source-retention-volume-dev-2026-11-11.json) passe trois
+groupes sur348sources d860cc5 :10001 HTTP et un cron,10002→10001 avec tir non
+clos puis10000 après clôture. Exacts deux plus anciens HTTP retirés, source
+inchangée,5001 lignes par fonction avant borne, observation12,34s, deux purges
+publiques et restitution nominale jointe. Sept jours et campagne complète restent
+ouverts ; cette preuve ne clôture pas078.5.

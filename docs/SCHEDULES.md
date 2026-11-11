@@ -469,5 +469,14 @@ sur342sources ef8cb3f :39 fenêtres réellement manquées,10240→10000 tirs au 
 curseur09:30UTC,240 plus anciens exactement retirés. Chaque fonction avait640
 tirs avant borne ;112 pages API après SSO concordent avec les survivants natifs.
 Observation10,82s, deux invocations initiales seules, restitution jointe et source
-scellée inchangée. Source protégée sous borne, sept jours et campagne complète
-restent ouverts ;078.5 reste non clôturée.
+scellée inchangée. Source protégée sous borne qualifiée séparément ci-dessous ;
+sept jours et campagne complète restent ouverts,078.5 non clôturée.
+
+### Qualification distincte de la source
+
+Le [nominal de source protégée](evidence/invocation-source-retention-volume-dev-2026-11-11.json) passe trois
+groupes sur348sources d860cc5 :10001 HTTP et un cron,10002→10001 avec tir non
+clos puis10000 après clôture. Exacts deux plus anciens HTTP retirés, source
+inchangée,5001 lignes par fonction avant borne, observation12,34s, deux purges
+publiques et restitution nominale jointe. Sept jours et campagne complète restent
+ouverts ; cette preuve ne clôture pas078.5.

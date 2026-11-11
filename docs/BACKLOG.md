@@ -86,7 +86,7 @@ bloquée est sautée et son blocage est nommé.
 | 8 | [SLS-098](#sls-098) Noms de mois et jours dans les crons | Développer | `[ ]` | SLS-078 | [SCHEDULES](SCHEDULES.md), [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | 9 | [SLS-097](#sls-097) API de gestion documentée (OpenAPI) | Développer | `[ ]` | unités 3 à 8 | [CONTROL](CONTROL.md) |
 | 10 | [SLS-090](#sls-090) Pannes résiduelles de publication | Qualifier | `[ ]` | SLS-030 | [DEPLOYMENT](DEPLOYMENT.md) |
-| 10 | [SLS-091](#sls-091) Rétention et nettoyage du moteur d'exécution | Qualifier | `[ ]` | SLS-040 | [EXECUTION](EXECUTION.md) |
+| 10 | [SLS-091](#sls-091) Rétention et nettoyage du moteur d'exécution | Qualifier | `[~]` | SLS-040 | [EXECUTION](EXECUTION.md) |
 | 10 | [SLS-092](#sls-092) Stockage : acquisition partielle, marge, registre | Qualifier | `[ ]` | SLS-050 | [STORAGE_AGENT](STORAGE_AGENT.md) |
 | 10 | [SLS-093](#sls-093) Fautes de source et de transport des URL d'appel | Qualifier | `[ ]` | SLS-066 | [INVOCATION_URLS](INVOCATION_URLS.md) |
 | 10 | [SLS-094](#sls-094) Pannes, console et régression de SLS-074 | Qualifier | `[ ]` | SLS-074 | [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
@@ -1612,15 +1612,15 @@ passe trois groupes sur342sources inchangées :39 fenêtres réellement manquée
 10240→10000 tirs au même curseur09:30UTC, exacts240 plus anciens retirés,
 640 tirs par fonction avant borne. Observation10,82s,112 pages API après SSO,
 deux invocations initiales seules, source intacte et restitution nominale jointe.
-La borne globale des tirs est qualifiée. Sources protégées sous borne, sept jours
-et campagne complète restent requis ;078.5 reste ouvert.
+La borne globale des tirs est qualifiée. La source protégée sous borne est qualifiée
+ci-dessous ; sept jours et campagne complète restent requis,078.5 reste ouvert.
 Le [discriminant des sources sous borne](INVOCATION_SOURCE_RETENTION_VOLUME.md)
 est décidé avant code :10001 HTTP+source non close →10000 HTTP+source, puis
 9999 HTTP+source après clôture. Les retraits des deux plus anciens ordinaires
 prouvent les deux comptages. Installation isolée à2, garde2700 explicite pour
 la charge/attente réelles, deux fonctions et aucune date/ligne fabriquée.
 Client, handler original et observateur natif sont implémentés ; syntaxe contrôlée.
-Nominal, pannes et régressions restent requis ; aucun succès déduit du code.
+Nominal qualifié séparément ci-dessous ; pannes résiduelles et régressions restent requises, aucun succès déduit du seul code.
 Les [cinq groupes de garde2700](evidence/source-retention-guard-options-dev-2026-11-11.json)
 passent sur346sources : quatre refus avant mutation et programmation/restitution
 réelles. Collecte initiale en échec de glob, rapport E2E terminé0 recoupé sans
@@ -1632,22 +1632,28 @@ Le [pilote durable](INVOCATION_SOURCE_RETENTION_VOLUME.md#essai-interrompu-et-pi
 est décidé avant code : tâche utilisateur locale transitoire, identifiants SSO
 en mémoire par socket authentifié, mêmes clients et dépendances réels, relevés
 avant/après et vérification indépendante du processus. Lanceur oneshot et finalisation durable implémentés, syntaxe contrôlée ; preuve
-d'indépendance et nominal restent requis. Aucun rejeu automatique de l'essai.
+d'indépendance et nominal qualifiés ci-dessous. Aucun rejeu automatique de l'essai.
 Le client de perte du worker est implémenté : SSO/appels réels, SIGKILL ciblé,
 finalisation de l'échec et restauration recoupée en trois groupes. Ce scénario
-et le nouveau nominal restent à qualifier ; les cinq groupes de garde existants
+et le nominal sont qualifiés ci-dessous ; les cinq groupes de garde existants
 gardent leur époque346 distincte.
 L'[essai worker200ea30](evidence/source-retention-worker-loss-failed-dev-2026-11-11.json) reste échoué :
 511 réponses, indépendance et signal9 acquis, mais assertion exigeant deux
 retraits Docker par la garde alors qu'elle trouve déjà zéro conteneur. Deux
 réseaux/baux retirés, originaux et348sources conservés ; zéro groupe compté.
 Correction spécifiée : inventaire réel avant faute, absence de tous les UUID
-après restitution, retraits par acteur conservés séparément ; nouveau cas requis.
+après restitution, retraits par acteur conservés séparément ; nouveau cas qualifié ci-dessous.
 Le [nouveau cas de perte bbe9d0e](evidence/source-retention-worker-loss-dev-2026-11-11.json)
 passe trois groupes sur348sources :512 réponses, indépendance réelle et SIGKILL9
 finalisé comme échec, deux conteneurs/réseaux/baux observés puis absents, restitution
-indépendante et sources/images identiques. Premier essai exclu ; nominal long et
-rétention restent requis.
+indépendante et sources/images identiques. Premier essai exclu. Le
+[nominal d860cc5](evidence/invocation-source-retention-volume-dev-2026-11-11.json) passe trois autres groupes
+sur les mêmes348sources :10001 HTTP et un cron,10002→10001 avec tir strictement
+non clos puis10000 après clôture. Deux plus anciens HTTP exactement retirés,
+source inchangée,5001 observations par fonction avant borne, observation12,34s.
+Deux purges publiques et restitution nominale jointe ; worker success/Code1/Status0
+réel conservé puis arrêté. La source protégée sous borne est qualifiée ; âge,
+pannes propres résiduelles et campagne complète restent ouverts,078.5 non clôturée.
 Le [replay d'âge](RETENTION_HISTORY_REPLAY.md) a son contrat explicite : les deux
 captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
 capturée, garde120, observation avant santé et contrôles stricts d'identité à
@@ -2045,7 +2051,8 @@ unitaires des garde-fous touchés, E2E réels, ressources restituées recoupées
 <a id="sls-091"></a>
 ## SLS-091 — Rétention et nettoyage du moteur d'exécution
 
-Statut : [ ] — chemins nommés dans SLS-040, sans preuve ciblée.
+Statut : [~] — bornes numériques HTTP et protection de source qualifiées ;
+sept jours et nettoyage résiduel restent ouverts.
 Nature : Qualifier. Dépend de : SLS-040. Ordre : 10. Reste à faire de SLS-040.
 
 Critères d'acceptation :
@@ -2053,8 +2060,10 @@ Critères d'acceptation :
 - [ ] SLS-091.1 Rétention à sept jours et 10 000 observations prouvée par franchissement réel des
   deux bornes.
   La [borne numérique HTTP ordinaire](evidence/invocation-retention-volume-dev-2026-11-11.json)
-  est qualifiée par10016 appels/5008 par fonction dans SLS-078 ; source protégée
-  et preuve des sept jours restent requises avant de cocher ce critère.
+  est qualifiée par10016 appels/5008 par fonction dans SLS-078. La
+  [source protégée sous borne](evidence/invocation-source-retention-volume-dev-2026-11-11.json) est aussi
+  qualifiée :10002→10001 non clos→10000 clos. La preuve des sept jours reste
+  requise avant de cocher ce critère.
 - [ ] SLS-091.2 Chemins résiduels de nettoyage et de reprise après interruption prouvés (SIGKILL
   pendant nettoyage, reprise sans doublon ni perte).
 
