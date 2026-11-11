@@ -11,6 +11,12 @@ ces demandes. Voir [l'état réel de livraison](docs/DEMANDES_ET_LIVRAISON.md) e
 [registre des unités ouvertes](docs/BACKLOG.md#registre-des-unités-ouvertes), qui
 porte l'ordre de reprise, avant les checkpoints techniques détaillés ci-dessous.
 
+L'[icône Serverless](docs/evidence/application-icon-dev-2026-11-11.json) est remplacée et déployée
+sur779aef7b : trois blocs reliés, source commune au favicon et à la marque.
+29groupes réels passent,26captures sont inspectées, contraste9,03:1 et lisibilité
+16/32px recoupés. Le backend et les autres ressources web restent identiques.
+SLS-100 est clôturée ; les autres demandes conservent leur état au registre.
+
 Le [premier checkpoint de planification](docs/evidence/schedules-checkpoint-dev-2026-11-10.json)
 qualifie22 groupes réels :6 ciblés,8 du manuel,8 publics. La facette Planifications
 est disponible ; le manuel servi correspond à16 chapitres et56 paragraphes.

@@ -491,3 +491,11 @@ purgées,34 backends et5982 artefacts conservés. L'unité078 reste ouverte pour
 rétention, adaptateur.7 et régression complète. Le [plafond global099](../docs/evidence/instance-limit-public-integration-dev-2026-11-11.json)
 est qualifié sur la même image, par installation isolée sans écriture officielle. Les checkpoints
 cités plus haut conservent leur image et leur époque historique.
+
+## Identité visuelle déployée le11novembre2026
+
+L'image779aef7b remplacec59b8616 pour la seule modification de favicon.svg.
+Les34fichiers backend et les trois autres ressources web sont identiques ; les
+neuf migrations restent inchangées. [SLS-100](../docs/evidence/application-icon-dev-2026-11-11.json)
+passe29groupes réels et26captures inspectées. Le contrôle est recréé après backup
+SQLite natif ; la référence, les5982artefacts et fichiers officiels sont conservés.

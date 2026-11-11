@@ -521,3 +521,14 @@ finalisation, liées au SHA terminal :2services sains, actifs/baux nuls,5982arte
 et aucune garde. Captures canoniques inchangées. Brut83048624octets/gzip4228693 ;
 ancienne preuve348 préservée. La borne native partagée et son nominal sont
 qualifiés ; âge18novembre et campagne complète restent requis,078.5 non clôturée.
+
+## SLS-100 — Icône Serverless distincte qualifiée
+
+[29groupes réels](evidence/application-icon-dev-2026-11-11.json) sur356sourcesb1ee473/image779aef7b :
+4accueil/SSO/navigation/déconnexion desktop/mobile,8manuel,8publics,9connexion.
+26captures inspectées (4par le principal,22par le vérificateur), previews16/32/64
+et contraste9,03:1 ; source SVG servie recoupée par SHA/no-store. Les34backends et
+les trois autres ressources web restent identiques. Le manuel sert16chapitres/
+56paragraphes conformes à sa source. Configuration, référence et5982artefacts
+conservés ;2services sains, actifs/baux nuls et aucune garde. SLS-100 clôturée,
+la campagne complète de plateforme et l'âge réel de078 restent distincts.

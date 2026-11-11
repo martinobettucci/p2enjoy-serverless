@@ -7180,3 +7180,32 @@ favicon précédent0b069387 ; build, déploiement, E2E et inspection restent req
 Revue RO contre les deux design systems sans défaut matériel : parcours
 desktop/mobile, source unique, cache et confidentialité cohérents. Cette revue
 reste statique et ne qualifie ni le rendu ni l'exécution E2E.
+
+### 11 novembre2026 — Icône SLS-100 déployée et qualifiée
+
+b1ee473 remplace la foudre par trois blocs reliés. BuildDEV terminé0, backup
+SQLite natif puis seule bascule du contrôle vers779aef7b/e4fecab5 à21:22:52UTC.
+34backends et trois autres ressources web identiques ; seul favicon.svg change,
+SHA7d98024b. Quatre groupes dédiés réels depuis l'accueil/SSO/navigation/déconnexion
+desktop/mobile, puis8manuel/8publics/9connexion :29groupes au même gel356/image.
+26captures inspectées : quatre par le principal,22par le vérificateur ; trois
+recoupements personnels supplémentaires ne sont pas recomptés. Previews du SVG
+servi à16/32/64 distinctes des capturesapp, contraste9,027527:1, aucun défaut
+visuel bloquant confirmé. Le manuel reste16chapitres/56paragraphes conforme à
+sa source inchangée. Revue code RO et revue visuelle sans défaut matériel.
+
+État final :2services sains, contrôle779aef7b/e4fecab5, référence475b inchangée,
+actifs/baux nuls, agent actif,5982artefacts/manifest et fichiers officiels inchangés,
+aucune garde. Preuve application-icon-dev-2026-11-11.json, brut382551/gzip152743.
+SLS-100 passe[x]. Seul DESIGN_SYSTEM_APP indexé est actualisé après les campagnes
+pour leurs résultats ; transition SHA avant/après déclarée, exécutables/images
+inchangés. Aucun autre code applicatif, schéma, secret ou route modifié.
+Prochaine reprise : SLS-089 (ordre2), lire CONTROL/sso et ses prérequis externes ;
+trancher/livrer le correctif indépendant avant de demander une intervention.
+SLS-078 reste en attente d'âge18novembre puis campagne complète. Les autres
+unités du registre restent ouvertes ; le goal n'est pas terminé.
+Audit RO final de la preuve sans défaut matériel :29groupes,356SHA testés au
+commitb1ee473, seule transition documentaire déclarée,26captures et3rendus,
+SVG servi/embarqué,34backends/3autresassets inchangés et préservation native
+recoupés. Brut382551/gzip152743 vérifié sans secret détecté. Cette revue ne
+qualifie ni la plateforme entière ni les sept jours.

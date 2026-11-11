@@ -69,7 +69,6 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
-| 2 | [SLS-100](#sls-100) Identité visuelle distincte pour Serverless | Corriger | `[ ]` | SLS-020 | cette unité ; [DESIGN_SYSTEM_APP](DESIGN_SYSTEM_APP.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
@@ -99,7 +98,7 @@ bloquée est sautée et son blocage est nommé.
 SLS-078 est temporairement bloquée par le vieillissement réel des deux captures,
 au plus tôt le18 novembre2026 à03:30:26 puis04:05:13UTC ; la campagne complète
 suit ces preuves. Les reprises et bornes numériques courantes sont qualifiées.
-Pendant cette attente, la prochaine unité indépendante du registre est SLS-100.
+Cette attente ne bloque pas les unités indépendantes du registre ; SLS-100 est livrée.
 
 Unités parentes encore `[~]` et unités qui portent leur reste à faire :
 [SLS-001](#sls-001) → toutes ; [SLS-020](#sls-020) → SLS-089 ;
@@ -2439,14 +2438,14 @@ ouverts.
 <a id="sls-100"></a>
 ## SLS-100 — Identité visuelle distincte pour Serverless
 
-Statut : [~] — SVG et client E2E implémentés ; build, déploiement et preuves visuelles à exécuter.
+Statut : [x] — déployée en DEV sur779aef7b et vérifiée :29groupes réels,26captures inspectées.
 Nature : Corriger. Dépend de : SLS-020. Ordre :2.
 Contrat : cette unité et
 [identité du produit](DESIGN_SYSTEM_APP.md#serverless-identity).
 
-Constat : la foudre de `web/public/favicon.svg`, également affichée dans la
-marque de la console par `web/src/main.jsx`, est déjà utilisée par une autre
-application interne. La plateforme doit posséder une identité distincte.
+Constat initial : l'ancienne foudre de `web/public/favicon.svg`, également
+affichée dans la marque de la console par `web/src/main.jsx`, était déjà utilisée
+par une autre application interne. Le remplacement livre une identité distincte.
 
 Résultat attendu : un pictogramme vectoriel propre à Serverless, lié à son usage
 de fonctions conteneurisées, cohérent avec la charte P2Enjoy et reconnaissable
@@ -2461,19 +2460,21 @@ Serverless reste le libellé accessible ; le SVG de marque est décoratif à cô
 Ce choix est réversible. Un dessin isométrique détaillé est écarté parce qu'il
 ajouterait des traits difficiles à lire en favicon.
 
+Preuve commune aux quatre critères : [qualification DEV](evidence/application-icon-dev-2026-11-11.json).
+
 Critères d'acceptation :
 
-- [ ] SLS-100.1 Remplacer la foudre dans toutes les utilisations de la marque
+- [x] SLS-100.1 Remplacer la foudre dans toutes les utilisations de la marque
   applicative courante, notamment le favicon, l'accueil de connexion et la
   console. Conserver une seule source SVG pour ces représentations.
-- [ ] SLS-100.2 Vérifier la lisibilité du motif à16 et32px, son contraste,
+- [x] SLS-100.2 Vérifier la lisibilité du motif à16 et32px, son contraste,
   l'absence de débordement sur ordinateur/mobile et le libellé accessible de la
   marque ; les images décoratives restent ignorées des lecteurs d'écran.
-- [ ] SLS-100.3 Construire et déployer sur le SPARK DEV, puis parcourir l'accueil,
+- [x] SLS-100.3 Construire et déployer sur le SPARK DEV, puis parcourir l'accueil,
   la connexion SSO réelle et la console à la souris et au clavier. Recouper le
   favicon effectivement servi avec la source et inspecter les captures JPEG
   fraîches de l'accueil et de la console sur ordinateur/mobile.
-- [ ] SLS-100.4 Mettre à jour le design du produit, le changelog, les preuves et
+- [x] SLS-100.4 Mettre à jour le design du produit, le changelog, les preuves et
   références visuelles concernées ; conserver la traçabilité des captures
   historiques et vérifier les parcours connexes sur la nouvelle image.
 
@@ -2482,3 +2483,12 @@ ressource ni interception ; contrôles du fichier servi distincts de l'inspectio
 visuelle. Une campagne active doit finir et être restituée avant toute
 modification de ses sources gelées, construction ou redéploiement. Le nominal
 caf8c362 est maintenant terminé, finalisé et restitué ; ce gel est levé.
+
+La nouvelle image conserve les34 fichiers backend et les trois autres ressources
+web ; seul favicon.svg change. Contraste blanc/bleu9,03:1, SVG servi recoupé par
+SHA,26 captures inspectées (quatre dédiées par le principal,22 de régression par
+le vérificateur), previews16/32/64 distinctes des captures applicatives. Les
+29groupes comprennent4 ciblés,8manuel,8publics,9connexion ; aucun mock ni skip.
+Les5982artefacts et fichiers officiels sont inchangés ;2services sains, actifs/
+baux nuls, référence inchangée et aucune garde. Le manuel conserve ses16chapitres
+et56paragraphes, recoupés avec sa source inchangée.

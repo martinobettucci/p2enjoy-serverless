@@ -14,7 +14,13 @@ générés. L'inspection16/32px du SVG servi complète ces captures, sans être
 présentée comme une vue applicative. Contrat :
 [SLS-100](../docs/BACKLOG.md#sls-100) et
 [identité du produit](../docs/DESIGN_SYSTEM_APP.md#serverless-identity).
-Client implémenté, syntaxe vérifiée ; aucune réussite E2E encore revendiquée.
+La [preuve DEV](../docs/evidence/application-icon-dev-2026-11-11.json) passe4groupes dédiés puis
+25de régression :8manuel,8publics,9connexion, sur356sourcesb1ee473 et la même
+image779aef7b.26captures sont inspectées ; contraste de l'asset9,03:1 et rendus
+16/32/64 recoupés. Les34backends et les trois autres ressources web sont identiques.
+Le seul document indexé actualisé après qualification est le design du produit,
+pour ses résultats et références ; cette transition documentaire est explicitée
+dans la preuve. Aucune ressource servie n'est modifiée après les campagnes.
 
 ## Borne globale des 10000 invocations
 

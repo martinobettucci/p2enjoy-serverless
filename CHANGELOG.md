@@ -2,11 +2,12 @@
 
 ## [Non publié]
 
-- Nouvelle icône Serverless : trois blocs reliés, dans l'unique SVG utilisé
-  par le favicon et la marque de l'accueil/console. Le client E2E dédié suit
-  l'accueil, le vrai SSO, la navigation et la déconnexion sur desktop/mobile,
-  avec vérification du fichier servi et captures JPEG. Implémentation présente ;
-  construction, déploiement et qualification visuelle encore requis dans SLS-100.
+- Icône Serverless déployée en DEV : trois blocs reliés remplacent la foudre
+  dans le favicon et la marque de l'accueil/console, via un SVG unique.
+  [29groupes réels](docs/evidence/application-icon-dev-2026-11-11.json) passent sur779aef7b ;
+  26captures sont inspectées, previews16/32/64 et contraste9,03:1 recoupés.
+  Les34backends et les trois autres ressources web sont identiques ; données,
+  référence et fichiers officiels conservés. SLS-100 est clôturée.
 
 - [Nominal numérique courant](docs/evidence/invocation-source-retention-detach-volume-dev-2026-11-11.json)
   qualifié : trois groupes sur355sources6de2a86, identiques au bounded et à

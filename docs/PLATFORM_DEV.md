@@ -898,3 +898,13 @@ natif se trouve sous qualification-history/before-schedule-console-pagination-
 ed7cf567e50640f494062ea1ed73806c ; son empreinte et les reçus sont dans la preuve.
 Aucune variable, secret ou route nouveau. Les notes README/CONTRIBUTORS/INSTALL
 sont proposées dans les fichiers.? ; aucune adoption n'est revendiquée.
+
+## Icône Serverless livrée en DEV
+
+La [preuve SLS-100](evidence/application-icon-dev-2026-11-11.json) recoupe le build, le backup
+SQLite natif et la bascule vers779aef7b, contrôle e4fecab5 démarré le11novembre2026
+à21:22:52UTC. La seule différence web est favicon.svg ;34backends et neuf migrations
+restent identiques.29groupes E2E passent et26captures sont inspectées. Référence,
+5982artefacts et fichiers officiels conservés ; services sains et ressources
+actives nulles. Retour arrière de cette livraison visuelle : recréer le contrôle
+avec l'image précédentec59b8616 ; aucune restauration de base n'est nécessaire.
