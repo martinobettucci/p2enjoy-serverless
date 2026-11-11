@@ -6,7 +6,8 @@
 
 - Décision SLS-099 corrigée : retirer la demande d’évolution de FORGE et préparer
   un déploiement DEV isolé, même image, plafond2 au démarrage. Le refus préventif
-  historique reste qualifié ; nouveau mode, reprises et E2E restent à réaliser.
+  historique reste qualifié. Nouveau mode temporaire et client E2E de restitution
+  implémentés, non encore vérifiés sur le SPARK ; admissions et raccordement restent à faire.
 
 ### Planifications en cours de qualification
 

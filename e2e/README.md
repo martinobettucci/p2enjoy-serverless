@@ -1576,3 +1576,21 @@ Le lecteur `schedule-instance-reuse-inspect.py` recoupe les deux UUID, files,
 réservations, Docker, baux et canaux, y compris le préchauffage sans invocation.
 Sources/images figées, nettoyage après terminaison des HTTP, aucun mock ni skip.
 Contrat : [SCHEDULE_INSTANCE_REUSE](../docs/SCHEDULE_INSTANCE_REUSE.md).
+
+
+## Installation isolée pour le plafond global — SLS-099
+
+Le mode `instance-limit` de storage-legacy-environment.py réutilise la fenêtre
+DEV gardée, mais démarre exactement l’image servie avec des données neuves et
+le seul plafond2 dans son conteneur temporaire. Aucun PUT de variable officielle.
+La route18090 sert temporairement cette installation ; le contrôle habituel
+est conservé arrêté. Contrat : [INSTANCE_LIMIT_RESTORATION](../docs/INSTANCE_LIMIT_RESTORATION.md).
+
+Depuis le poste, après synchronisation du helper sur le seul SPARK DEV au repos,
+exécuter séparément `node e2e/instance-limit-environment.mjs release`, puis `eof`,
+`sigterm`, `sigkill` et `deadline`. Chaque commande crée son rapport UUID privé,
+refuse toute simulation et attend la fin de la garde et du pilote. Les trois
+pertes/échéance utilisent une vraie garde120s ; prévoir environ deux minutes
+par cas. Ce client ne qualifie que déploiement/restitution sans consommateur,
+pas encore les admissions HTTP/cron ni la perte avec un handler actif.
+Ces nouveaux tests sont implémentés, pas encore vérifiés sur le SPARK.

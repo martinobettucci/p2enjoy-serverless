@@ -3,7 +3,9 @@
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#preuves-à-terminer
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_MIGRATION_008.md#matrice-réelle
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UNKNOWN_FIRST.md#matrice-publique-et-marqueurs
-"""DEV-only historical installation window with an independent identity-based restore."""
+# @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#installation-temporaire-réelle
+# @verifies docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#scénarios-requis
+"""DEV-only isolated installations with an independent identity-based restore."""
 from contextlib import closing
 import fcntl
 import hashlib
@@ -86,6 +88,7 @@ def hashes():
 
 
 def temporary_control_name(item):
+    if item.get('mode') == 'instance-limit':return 'serverless-api-instance-limit'
     return 'serverless-api-code-history' if item.get('mode')=='function-version-unknown-first' else TEMP
 
 
@@ -242,7 +245,7 @@ def restore(item, journal, independent):
             definition = json.loads(docker(item, 'inspect', candidates[0]))[0]
             assert definition['Config']['Labels']['com.docker.compose.project'] == item['project']
             docker(item, 'rm', '-f', candidates[0])
-        if item.get('mode')=='function-version-unknown-first':cleanup_history_consumers(item,journal)
+        if item.get('mode') in ('function-version-unknown-first','instance-limit'):cleanup_history_consumers(item,journal)
         command(['systemctl', 'stop', AGENT])
         assert command(['systemctl', 'is-active', AGENT], (0, 3)) == 'inactive'
         # Recover temporary installation identity even if the driver died before recording it.
@@ -291,6 +294,9 @@ def restore(item, journal, independent):
         atomic(journal, item)
     assert all(same(path, item['original_dirs'][key]) for key, path in item['paths'].items())
     assert hashes() == item['configuration'], 'official_configuration_changed'
+    if item.get('mode') == 'instance-limit':
+        proposal=Path('/etc/spark/env.?')
+        assert (hashlib.sha256(proposal.read_bytes()).hexdigest() if proposal.exists() else None) == item['proposal_sha256'], 'official_proposal_changed'
     command(['systemctl', 'start', AGENT])
     assert command(['systemctl', 'is-active', AGENT]) == 'active'
     until(lambda: agent_ready(item), 'restored_agent_unhealthy')
@@ -355,6 +361,12 @@ def start_control(item, journal, image, *, readiness='healthy'):
     source = source.replace('    image: p2enjoy-control:dev\n', '    image: ' + image + '\n')
     source = source.replace('    build:\n      context: ..\n      dockerfile: control/Dockerfile\n', '')
     source = source.replace('    restart: unless-stopped\n', '    restart: "no"\n')
+    # @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#installation-temporaire-réelle
+    if item.get('mode') == 'instance-limit':
+        assert image == item['original']['image'], 'same_served_image_required'
+        assert source.count('    network_mode: host\n') == 1 and '    environment:' not in source
+        source = source.replace('    network_mode: host\n',
+            '    environment:\n      SERVERLESS_FUNCTION_INSTANCE_LIMIT: "2"\n    network_mode: host\n')
     compose = Path(item['work']) / 'compose.yml'
     compose.write_text(source)
     os.chmod(compose, 0o640)
@@ -549,6 +561,7 @@ def release_purge_artifact(item, journal, function):
     return {'released':True,'function_id':function,'descriptor_identity_confirmed':True,'owner_changed_last':True}
 
 
+# @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#scénarios-requis
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UNKNOWN_FIRST.md#restitution-avec-consommateur-vivant
 def cleanup_history_consumers(item,journal):
     state=Path(item['paths']['state']);registry=Path(item['paths']['storage'])/'registry.sqlite3'
@@ -696,20 +709,52 @@ def upgrade_history008(item,journal,function):
     return {'container':current,'before':before,'after':after,'input007':backup,'preserved_tables':compare_history_columns(item,backup)}
 
 
+
+# @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#scénarios-requis
+def instance_limit_observation(item):
+    """Read the real consumed budgets, database and native Docker identities only."""
+    assert item.get('mode') == 'instance-limit' and not item.get('restored')
+    current=container(item,temporary_control_name(item))
+    assert current['image']==item['original']['image'] and current['running']
+    assert not container(item,item['original']['id'])['running']
+    assert all(same(path,item['replacement_dirs'][key]) for key,path in item['paths'].items())
+    assert hashes()==item['configuration'],'official_configuration_changed'
+    keys=('SERVERLESS_FUNCTION_INSTANCE_LIMIT','SERVERLESS_FUNCTION_CPU_BUDGET','SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB')
+    program='import os,json;print(json.dumps({k:os.environ[k] for k in '+repr(keys)+'}))'
+    budgets=json.loads(docker(item,'exec',temporary_control_name(item),'python','-B','-c',program))
+    assert budgets==dict(zip(keys,('2','1','8192'))),'isolated_consumed_budgets_required'
+    control=Path(item['paths']['state'])/'control.sqlite3'
+    namespace=rows(item,control,'SELECT id,name FROM namespaces WHERE deleted_at IS NULL')
+    assert all(v['name']==item['namespace_name'] for v in namespace),'foreign_namespace'
+    functions=rows(item,control,'SELECT id,name,deleted_at FROM functions')
+    instances=rows(item,control,'SELECT id,function_id,revision_id,state,cpu_nanos,memory_mib FROM execution_instances ORDER BY id')
+    invocations=rows(item,control,'SELECT id,function_id,state,trigger,error_code,handler_started,instance_id,completed_at FROM invocations ORDER BY id')
+    firings=rows(item,control,'SELECT id,function_id,state,error_code,invocation_id,window_at FROM schedule_firings ORDER BY id')
+    identifiers=docker(item,'ps','-aq','--filter','label=tech.p2enjoy.serverless.installation='+item['temporary_installation']).split()
+    definitions=json.loads(docker(item,'inspect',*identifiers)) if identifiers else []
+    containers=[{'id':v['Id'],'image':v['Image'],'running':v['State']['Running'],
+        'kind':v['Config']['Labels'].get('tech.p2enjoy.serverless.kind'),
+        'instance_id':v['Config']['Labels'].get('tech.p2enjoy.serverless.instance'),
+        'cpu_nanos':v['HostConfig']['NanoCpus'],'memory_bytes':v['HostConfig']['Memory']} for v in definitions]
+    return {'budgets':budgets,'container':current,'installation_id':item['temporary_installation'],
+        'functions':functions,'instances':instances,'invocations':invocations,'firings':firings,
+        'containers':containers,'official_configuration_unchanged':True,'original_control_stopped':True}
+
+
 def main():
     global LOCK
     assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
     mode, campaign = sys.argv[1:3]
     assert str(UUID(campaign)) == campaign
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
-    candidates = [HISTORY / (prefix + campaign) for prefix in ('storage-absence-', 'function-version-purge-', 'function-version-unknown-first-')]
-    if mode in ('restore', 'status'):
+    candidates = [HISTORY / (prefix + campaign) for prefix in ('storage-absence-', 'function-version-purge-', 'function-version-unknown-first-', 'instance-limit-')]
+    if mode in ('restore', 'status', 'signal-driver'):
         existing = [path for path in candidates if (path / 'restore.json').exists()]
         assert len(existing) <= 1, 'ambiguous_campaign_window'
         work = existing[0] if existing else candidates[0]
-    else:work = candidates[2] if mode=='function-version-unknown-first' else candidates[1] if mode == 'function-version-purge' else candidates[0]
+    else:work = candidates[3] if mode=='instance-limit' else candidates[2] if mode=='function-version-unknown-first' else candidates[1] if mode == 'function-version-purge' else candidates[0]
     journal = work / 'restore.json'
-    if mode in ('restore', 'status'):
+    if mode in ('restore', 'status', 'signal-driver'):
         if mode == 'status' and not journal.exists():
             emit({'restored': False, 'not_started': True, 'campaign': campaign})
             return
@@ -720,6 +765,18 @@ def main():
                   'driver_alive': alive(item), 'unit': item['unit'],
                   'timer_state':command(['systemctl','is-active',item['unit'] + '.timer'],(0,3,4)),
                   'service_state':command(['systemctl','is-active',item['unit'] + '.service'],(0,3,4))})
+            return
+        if mode == 'signal-driver':
+            assert item.get('mode') == 'instance-limit' and len(sys.argv) == 4
+            requested={'SIGTERM':signal.SIGTERM,'SIGKILL':signal.SIGKILL}[sys.argv[3]]
+            assert alive(item),'driver_must_be_alive'
+            fd=os.pidfd_open(item['driver_pid'])
+            try:
+                assert alive(item),'driver_identity_changed'
+                signal.pidfd_send_signal(fd,requested)
+                assert select.select([fd],[],[],10)[0],'driver_not_terminated'
+            finally:os.close(fd)
+            emit({'event':'driver-signalled','signal':int(requested),'driver_dead':not alive(item)})
             return
         if alive(item):
             fd = os.pidfd_open(item['driver_pid'])
@@ -736,12 +793,14 @@ def main():
         item = json.loads(journal.read_text())
         restore(item, journal, True)
         return
-    assert mode in ('partial', 'historical', 'function-version-purge','function-version-unknown-first')
+    assert mode in ('partial', 'historical', 'function-version-purge','function-version-unknown-first','instance-limit')
     old_image = sys.argv[3]
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', old_image)
     options=sys.argv[4:]
-    assert len(options)==len(set(options)) and set(options)<={'--source-schema007','--target-schema008'}
-    assert not options or mode in ('function-version-purge','function-version-unknown-first')
+    assert len(options)==len(set(options)) and set(options)<={'--source-schema007','--target-schema008','--guard-seconds=120'}
+    assert not options or mode in ('function-version-purge','function-version-unknown-first','instance-limit')
+    if mode=='instance-limit':assert set(options)<={'--guard-seconds=120'}
+    else:assert '--guard-seconds=120' not in options
     source_schema='007' if '--source-schema007' in options else '006'
     target_schema='008' if '--target-schema008' in options else '007'
     assert source_schema!='007' or target_schema=='008','source007_requires_explicit_target008'
@@ -785,7 +844,7 @@ def main():
     lock_info = os.fstat(LOCK)
     assert stat.S_ISREG(lock_info.st_mode) and lock_info.st_uid == 0 and stat.S_IMODE(lock_info.st_mode) == 0o600
     fcntl.flock(LOCK, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    for previous in [*HISTORY.glob('storage-absence-*/restore.json'), *HISTORY.glob('function-version-purge-*/restore.json'), *HISTORY.glob('function-version-unknown-first-*/restore.json')]:
+    for previous in [*HISTORY.glob('storage-absence-*/restore.json'), *HISTORY.glob('function-version-purge-*/restore.json'), *HISTORY.glob('function-version-unknown-first-*/restore.json'), *HISTORY.glob('instance-limit-*/restore.json')]:
         assert json.loads(previous.read_text()).get('restored'), 'previous_window_not_restored'
     work.mkdir(mode=0o750)
     os.chown(work, 0, account.pw_gid)
@@ -803,11 +862,25 @@ def main():
             'unit': ('serverless-restore-code-history-' if mode=='function-version-unknown-first' else 'serverless-restore-version-purge-' if mode == 'function-version-purge' else 'serverless-restore-archive-migration-') + campaign,
             'project': ('function-version-unknown-first-' if mode=='function-version-unknown-first' else 'function-version-purge-' if mode == 'function-version-purge' else 'archive-migration-') + campaign,
             'driver_pid': os.getpid(), 'driver_birth': Path('/proc/self/stat').read_text().rsplit(')', 1)[1].split()[19]}
+    if mode == 'instance-limit':
+        item.update(namespace_name='instance-limit-' + campaign[:8],
+            unit='serverless-restore-instance-limit-' + campaign,
+            project='instance-limit-' + campaign, source_schema='009', target_schema='009')
     if intermediary:item['intermediate_image']=intermediary['image']
     item['original'] = container(item, 'serverless-api')
     item['reference'] = container(item, 'serverless-runtime-reference')
     assert item['original']['status'] == 'healthy' and item['reference']['running']
     item['installation'] = rows(item, Path(paths['state']) / 'control.sqlite3', "SELECT value FROM security_metadata WHERE name='installation-id'")[0]['value']
+    if mode == 'instance-limit':
+        assert old_image == item['original']['image'], 'same_served_image_required'
+        assert settings['SERVERLESS_FUNCTION_INSTANCE_LIMIT'] == '32', 'official_limit32_required'
+        assert settings['SERVERLESS_FUNCTION_CPU_BUDGET'] == '1'
+        assert settings['SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB'] == '8192'
+        actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
+        assert actual == SCHEMA_008 + ['009_schedules.sql'], 'current_schema009_required'
+        proposal=Path('/etc/spark/env.?')
+        item['proposal_sha256']=hashlib.sha256(proposal.read_bytes()).hexdigest() if proposal.exists() else None
+
     if mode in ('function-version-purge','function-version-unknown-first'):
         actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
         assert actual==(SCHEMA_008 if target_schema=='008' else SCHEMA_007),'explicit_target_schema_mismatch'
@@ -820,7 +893,7 @@ def main():
         os.chmod(work / name, 0o600)
     atomic(journal, item)
     command(['systemd-run', '--quiet', '--collect', '--unit=' + item['unit'],
-             '--on-active=' + ('60s' if mode == 'partial' else '900s'),
+             '--on-active=' + ('60s' if mode == 'partial' else '120s' if '--guard-seconds=120' in options else '900s'),
              '--timer-property=AccuracySec=100ms', '--timer-property=RandomizedDelaySec=0',
              '/usr/bin/python3', '-B', str(work / 'storage-legacy-environment.py'), 'restore', campaign])
     assert command(['systemctl', 'is-active', item['unit'] + '.timer']) == 'active'
@@ -859,13 +932,19 @@ def main():
             os.rename(replacement, path)
         command(['systemctl', 'start', AGENT])
         current = start_control(item, journal, old_image)
-        emit({'event': 'historical-ready', 'container': current, 'installation_id': item['temporary_installation']})
+        emit({'event': 'instance-limit-ready' if mode == 'instance-limit' else 'historical-ready',
+              'container': current, 'installation_id': item['temporary_installation'],
+              **({'capacity': instance_limit_observation(item)} if mode == 'instance-limit' else {})})
         for line in sys.stdin:
             request = json.loads(line)
             op = request['op']
             if op == 'restore':
                 break
-            if op in ('history-observe','history-prepare007','history-upgrade008'):
+            if mode == 'instance-limit':assert op == 'capacity', 'instance_limit_read_or_restore_only'
+            if op == 'capacity':
+                assert mode == 'instance-limit'
+                result = instance_limit_observation(item)
+            elif op in ('history-observe','history-prepare007','history-upgrade008'):
                 assert item.get('mode')=='function-version-unknown-first'
                 if op=='history-observe':result=history_observation(item,request['function_id'])
                 elif op=='history-prepare007':result=prepare_history007(item,journal,request)

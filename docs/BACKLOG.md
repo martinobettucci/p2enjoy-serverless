@@ -2066,7 +2066,7 @@ substitution ; manuel et matrice de parité mis à jour avec la livraison.
 ## SLS-099 — Qualification isolée du plafond d’instances
 
 Statut : [~] — dépendance à une évolution de FORGE retirée le11 novembre2026 ;
-installation temporaire et preuves à réaliser. Nature : Corriger. Dépend de :
+mode temporaire et client de restitution implémentés, preuves à réaliser. Nature : Corriger. Dépend de :
 SLS-040. Ordre :1, préalable à la preuve du plafond global de SLS-078.
 Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md).
 
