@@ -1940,7 +1940,7 @@ passe 25 groupes sur 351 sources identiques avant/après : onze fenêtres/partie
 trois options/défaut 900, cinq options 2700 et six consommateur vivant/pause/
 namespace. Onze campagnes distinctes, images conservées. Les confirmations
 SIGTERM (15) et SIGKILL (9) ont pidfd lisible puis pilote absent de /proc, mesurées
-10, 765 ms et 28, 345 ms ; gardes de 120 s et restitutions attendues jointes. Les
+10,765 ms et 28,345 ms ; gardes de 120 s et restitutions attendues jointes. Les
 options 900/2700 s sont programmées puis restituées, pas laissées expirer.
 
 Les trois essais antérieurs sont exclus ; le ciblé SIGKILL de deux groupes n'est pas ajouté
@@ -1949,3 +1949,12 @@ redémarrage à 14:26:18 UTC, référence inchangée, deux services sains, actif
 et aucune garde. Cette preuve qualifie les fenêtres communes ; pannes
 propres de capture et d'observateur source, âge et campagne complète restent
 ouverts dans 078.5. Les preuves antérieures conservent leurs époques distinctes.
+
+### Refus après attachement de l'observateur source
+
+Le parcours `node e2e/invocation-source-retention-volume.mjs --observer-refusal`
+est spécifié dans [son contrat](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#refus-réel-après-attachement-de-lobservateur).
+Il utilisera le SSO privé sur stdin, deux vrais handlers sans production de
+10 000 appels, le refus naturel du même opérateur et le code 1 du helper avec
+restitution réelle. Implémentation et preuve E2E encore requises ; ne pas le
+compter comme succès de rétention ni comme test des délais 35/40 secondes.

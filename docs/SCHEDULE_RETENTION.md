@@ -251,7 +251,7 @@ passe 25 groupes sur 351 sources identiques avant/après : onze fenêtres/partie
 trois options/défaut 900, cinq options 2700 et six consommateur vivant/pause/
 namespace. Onze campagnes distinctes, images conservées. Les confirmations
 SIGTERM (15) et SIGKILL (9) ont pidfd lisible puis pilote absent de /proc, mesurées
-10, 765 ms et 28, 345 ms ; gardes de 120 s et restitutions attendues jointes. Les
+10,765 ms et 28,345 ms ; gardes de 120 s et restitutions attendues jointes. Les
 options 900/2700 s sont programmées puis restituées, pas laissées expirer.
 
 Les trois essais antérieurs sont exclus ; le ciblé SIGKILL de deux groupes n'est pas ajouté

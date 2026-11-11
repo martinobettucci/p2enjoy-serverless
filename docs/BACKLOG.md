@@ -1698,7 +1698,10 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
 - [ ] Observateur source sous borne : erreur réelle après attachement,
   détachement mesuré par `TracerPid` à zéro et lecteur explicitement fermé avant retour.
   Un historique insuffisant avec deux vrais handlers peut éprouver ce chemin ;
-  il ne prouve pas la rétention numérique.
+  il ne prouve pas la rétention numérique. Décision persistée dans
+  `INVOCATION_SOURCE_RETENTION_VOLUME.md#refus-réel-après-attachement-de-lobservateur` :
+  mode client explicite, opérateur nominal inchangé dans ses assertions,
+  diagnostic après attach et fermeture indépendante de detach. E2E encore requis.
 - [ ] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
 - [ ] Attente native partagée de 25 s : mesurer le comportement sans événement

@@ -192,7 +192,7 @@ passe 25 groupes sur 351 sources identiques avant/après : onze fenêtres/partie
 trois options/défaut 900, cinq options 2700 et six consommateur vivant/pause/
 namespace. Onze campagnes distinctes, images conservées. Les confirmations
 SIGTERM (15) et SIGKILL (9) ont pidfd lisible puis pilote absent de /proc, mesurées
-10, 765 ms et 28, 345 ms ; gardes de 120 s et restitutions attendues jointes. Les
+10,765 ms et 28,345 ms ; gardes de 120 s et restitutions attendues jointes. Les
 options 900/2700 s sont programmées puis restituées, pas laissées expirer.
 
 Les trois essais antérieurs sont exclus ; le ciblé SIGKILL de deux groupes n'est pas ajouté
@@ -201,3 +201,44 @@ redémarrage à 14:26:18 UTC, référence inchangée, deux services sains, actif
 et aucune garde. Cette preuve qualifie les fenêtres communes ; pannes
 propres de capture et d'observateur source, âge et campagne complète restent
 ouverts dans 078.5. Les preuves antérieures conservent leurs époques distinctes.
+
+## Refus réel après attachement de l'observateur
+
+Décision du 11 novembre 2026, avant code, pour le reste SLS-078.5 déjà inscrit
+au backlog : ajouter au client existant le mode explicite `--observer-refusal`.
+Le mode nominal conserve ses 10 000 appels, sa fenêtre de 30 à 35 minutes et
+ses trois frontières. Le mode de refus utilise les deux mêmes fonctions et
+le même handler original, mais ne produit aucun HTTP ordinaire. Il choisit
+un prochain créneau UTC à au moins 120 secondes et prépare les deux vraies
+instances avant W-30. À W-1, un HTTP attend W+3 ; le vrai cron attend aussi W+3.
+
+L'opérateur est celui du nominal, sans option de faute ni remplacement : il
+constate les deux handlers running, s'attache au même processus Python exact,
+puis sa vérification de 10 002 observations refuse naturellement l'historique
+qui ne contient que deux appels. Nommer ce refus `retention_history_incomplete`.
+Conserver avant l'assertion le PID/naissance de l'opérateur, le TracerPid réel,
+les deux identités d'appel et les comptes initiaux. Aucun enregistrement de
+capture, donnée SQL, horloge, code applicatif ou résultat système n'est modifié.
+
+Dans le finally de cet opérateur, fermer le lecteur SQLite même si detach
+lève. Conserver les résultats effectivement constatés : même PID/naissance du
+contrôle, TracerPid égal à zéro après detach, descripteur mémoire fermé,
+connexion du lecteur passée à None après retour effectif de close. Un drapeau
+attached=false ne suffit pas. Un défaut de nettoyage demeure un échec. Ces
+mesures concernent aussi les retours nominaux et restent privées dans la fenêtre
+validée ; le reçu final imprimé doit être écrit après ce nettoyage.
+
+Le helper existant conserve son refus, son code 1 et son finally de restitution :
+aucune nouvelle opération ni dérogation à completed n'est ajoutée. Le client
+attend sa fin, lit le reçu durable de l'opérateur et son état terminal via SSH,
+recoupe les deux consommateurs réels avant faute puis leur absence physique,
+les réseaux, baux, artefacts et canaux, ainsi que la restitution des originaux,
+les mêmes données/configuration/images et la référence. Les deux appels lancés
+sont joints ; l'issue de leur réponse pendant restitution reste enregistrée.
+
+Deux groupes : SSO/préparation réelle sans appel ordinaire ; refus naturel après
+attache, fermeture/détachement mesurés, code 1 conservé et restitution jointe.
+Le client de qualification peut réussir ce scénario de refus, mais l'opérateur
+et le helper restent explicitement échoués. Cette preuve n'ajoute aucun succès
+de rétention numérique, de purge métier ou d'expiration 35/40 secondes. Syntaxe
+et revue ne valent pas E2E ; les autres pannes et l'âge réel restent ouverts.
