@@ -151,3 +151,15 @@ les retraits explicitement enregistrés par la garde, sans lui attribuer ceux
 qu'elle a trouvés déjà effectués. Le nombre de consommateurs initial reste deux ;
 la propriété à prouver est leur absence finale et la restitution des originaux.
 Le relevé terminal est persisté avant ses assertions, même si une assertion échoue.
+
+### Perte du pilote durable qualifiée
+
+La [preuve bbe9d0e](evidence/source-retention-worker-loss-dev-2026-11-11.json) passe trois groupes
+sur348sources figées :512 réponses HTTP réelles, contrôleur initial terminé et
+worker indépendant recoupé, SIGKILL MainPID avec résultat signal/Code2/Status9
+conservé comme échec. Deux conteneurs/réseaux et consommateurs sont inventoriés
+avant faute puis réellement absents après restitution ; les deux retraits de
+chaque classe sont aussi enregistrés par la garde dans ce cas. Restitution
+indépendante terminée, mêmes données/configuration/images et référence, garde
+et unité locale jointes. Le premier essai échoué reste exclu. Ces trois groupes
+qualifient la perte et sa restitution ; nominal long et rétention restent requis.

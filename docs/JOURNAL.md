@@ -6400,3 +6400,16 @@ restitution, absence de chaque ID observé, de toute ressource d'installation et
 de tout bail cible. Les retraits de la garde restent des faits séparés ; aucune
 assertion sur un acteur non observé. Relevé terminal sauvegardé avant assertions.
 Syntaxe contrôlée ; nouveau cas réel encore requis.
+
+### Perte du worker corrigé qualifiée
+
+Les trois groupes bbe9d0e passent sur348sources figées, même imagec59b8616.
+Worker0a68e00c,512 réponses sauvegardées et deux identités physiques complètes
+avant faute, contrôleur initial disparu et cgroup indépendant recoupé. SIGKILL
+réel donne Resultsignal/Code2/Status9 ; reçu finaliséfalse et unité locale arrêtée.
+Deux conteneurs/réseaux/consommateurs avant faute sont tous absents après reprise,
+plus aucun objet de l'installation temporaire ; garde retire ici2/2/2 et restitue
+indépendamment les originaux.348sources/images égales avant/après, contrôle
+original sain redémarré11:35:01UTC, référence inchangée et5982 artefacts, actifs
+à zéro. Premier essai exclu. Preuve et brut compressé conservés ; nouveau nominal
+long encore requis, aucune rétention déduite de ces trois groupes.

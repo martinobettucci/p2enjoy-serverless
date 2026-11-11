@@ -1873,3 +1873,15 @@ fonctions, puis SIGKILL son seul MainPID. Il exige le résultat système signal9
 la finalisation en échec, deux consommateurs retirés et les originaux restitués
 avec sources/images identiques. Trois groupes attendus ; aucune rétention ni
 purge métier n'est attribuée à cette panne.
+
+### Perte du pilote durable qualifiée
+
+La [preuve bbe9d0e](../docs/evidence/source-retention-worker-loss-dev-2026-11-11.json) passe trois groupes
+sur348sources figées :512 réponses HTTP réelles, contrôleur initial terminé et
+worker indépendant recoupé, SIGKILL MainPID avec résultat signal/Code2/Status9
+conservé comme échec. Deux conteneurs/réseaux et consommateurs sont inventoriés
+avant faute puis réellement absents après restitution ; les deux retraits de
+chaque classe sont aussi enregistrés par la garde dans ce cas. Restitution
+indépendante terminée, mêmes données/configuration/images et référence, garde
+et unité locale jointes. Le premier essai échoué reste exclu. Ces trois groupes
+qualifient la perte et sa restitution ; nominal long et rétention restent requis.

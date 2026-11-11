@@ -303,3 +303,15 @@ images avant/après doivent concorder. Implémentation acquise, preuves à exéc
 Le premier essai200ea30 reste échoué et exclu ; le contrôle corrigé relève les
 identifiants Docker réels avant faute puis leur absence et celle des baux après
 restitution, en distinguant les retraits explicites de la garde.
+
+### Perte du pilote durable qualifiée
+
+La [preuve bbe9d0e](evidence/source-retention-worker-loss-dev-2026-11-11.json) passe trois groupes
+sur348sources figées :512 réponses HTTP réelles, contrôleur initial terminé et
+worker indépendant recoupé, SIGKILL MainPID avec résultat signal/Code2/Status9
+conservé comme échec. Deux conteneurs/réseaux et consommateurs sont inventoriés
+avant faute puis réellement absents après restitution ; les deux retraits de
+chaque classe sont aussi enregistrés par la garde dans ce cas. Restitution
+indépendante terminée, mêmes données/configuration/images et référence, garde
+et unité locale jointes. Le premier essai échoué reste exclu. Ces trois groupes
+qualifient la perte et sa restitution ; nominal long et rétention restent requis.

@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+### Perte du pilote durable qualifiée
+
+- [Trois groupes réels](docs/evidence/source-retention-worker-loss-dev-2026-11-11.json)
+  bbe9d0e sur348sources :512 réponses, contrôleur disparu/cgroup indépendant,
+  SIGKILL9 enregistré en échec, deux conteneurs/réseaux/baux avant faute puis
+  absents et originaux restitués indépendamment. Premier essai échoué exclu.
+  Nominal long et rétention restent à qualifier.
+
 ### Essai de volume source interrompu
 
 - [Essai028d134d](docs/evidence/invocation-source-retention-interrupted-dev-2026-11-11.json) :9730 réponses

@@ -1643,6 +1643,11 @@ retraits Docker par la garde alors qu'elle trouve déjà zéro conteneur. Deux
 réseaux/baux retirés, originaux et348sources conservés ; zéro groupe compté.
 Correction spécifiée : inventaire réel avant faute, absence de tous les UUID
 après restitution, retraits par acteur conservés séparément ; nouveau cas requis.
+Le [nouveau cas de perte bbe9d0e](evidence/source-retention-worker-loss-dev-2026-11-11.json)
+passe trois groupes sur348sources :512 réponses, indépendance réelle et SIGKILL9
+finalisé comme échec, deux conteneurs/réseaux/baux observés puis absents, restitution
+indépendante et sources/images identiques. Premier essai exclu ; nominal long et
+rétention restent requis.
 Le [replay d'âge](RETENTION_HISTORY_REPLAY.md) a son contrat explicite : les deux
 captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
 capturée, garde120, observation avant santé et contrôles stricts d'identité à
