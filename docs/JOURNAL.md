@@ -6907,3 +6907,17 @@ temporaire déjà retiré. Le client valide les identités et les retraits décl
 puis relit Docker, registre et canaux pour l'union initiale/tardive et toute
 l'installation. Les neuf contrôles existants restent séparés. Syntaxes Python,
 quatre programmes embarqués et Node valides ; aucun succès E2E encore acquis.
+
+### 11 novembre2026 — Statut du timeout réel corrigé dans le contrat
+
+Matrice f22d217 arrêtée :35 réussit deux groupes à18:15,40 échoue à18:20
+sur le code124 exigé à tort137. Aucun groupe qualifié compté pour cette matrice.
+Le timeout réel coupe après40,013982s, KILL journalisé, opérateur absent,
+TracerPid0 et acteur joint avant restitution. Le client n'atteint pas ses
+contrôles physiques40 ; état global sain,5982artefacts et aucune garde ensuite.
+
+Binaire DEV identifié en lecture seule : uutils0.10.0, chemin résolu et SHA
+consignés au contrat, source primaire recoupée. Décision avant code : attendre
+le vrai124 du wrapper, conserver signal/durée/pidfd et identité du binaire ;
+aucune conversion de code ni option pour forcer137. Essai et rapports conservés,
+puis replays35/40/refus requis. Aucun produit ou réglage moteur modifié.

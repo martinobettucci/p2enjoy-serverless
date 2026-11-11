@@ -408,8 +408,9 @@ sinon le scénario échoue sans allonger les durées.
   ni écriture finale de l'opérateur tué n'est revendiquée.
 
 Le helper conserve un reçu propre de la commande native avant refus, sans
-extrapoler son code depuis celui du helper. Le statut attendu137 est à mesurer,
-pas à fabriquer. Le helper doit ensuite échouer1 et restituer les originaux ;
+extrapoler son code depuis celui du helper. Le code du wrapper est à mesurer,
+pas à déduire de SIGKILL : avec le binaire réel du SPARK, sans preserve-status,
+timeout retourne124 à l'expiration. Le helper doit ensuite échouer1 et restituer les originaux ;
 son erreur reste distincte de l'exception source et du résultat de l'acteur.
 Préserver séparément erreur primaire et erreurs de nettoyage. Conserver les
 résultats systemd terminaux avant jonction des seules unités de l'acteur.
@@ -446,3 +447,24 @@ toute ressource Docker portant l'installation temporaire. Les neuf contrôles
 physiques existants restent exigés. Les retraits enregistrés par la garde
 restent distincts des absences déjà acquises. Ne modifier ni minima, ni délais,
 ni assertions des modes nominal et observer-refusal pour éviter ces remplacements.
+
+### Code réel du wrapper timeout
+
+L'[essai f22d217](evidence/source-observer-timeout-status-failed-dev-2026-11-11.json)
+reste une matrice échouée, zéro groupe qualifié dans son bilan :35 passe ses
+contrôles, mais40 échoue sur124 attendu à tort137. La commande réelle dure
+40,013982s, rapporte l'envoi KILL, joint le wrapper et constate l'opérateur
+absent/TracerPid0 avant restitution. Les contrôles physiques du client40 ne
+sont pas atteints ; l'état global final est sain et les originaux sont restitués.
+
+Décision avant code : conserver la même commande40 et son échec réel124,
+le signal demandé9, la durée, le diagnostic natif KILL, le pidfd terminé et
+l'absence du processus. Ne pas convertir124 en137, ni ajouter preserve-status
+pour obtenir le nombre initialement attendu. Le reçu conservera le chemin
+résolu, la version et le SHA du vrai binaire timeout. Le relevé DEV identifie
+uutils0.10.0, /usr/lib/cargo/bin/coreutils/timeout, SHA
+f84e76ea4da1e0c4e92254bd0d7dccdabe2c8b3098e734f27997dae3ee5d8e02.
+La [source primaire uutils0.10.0](https://github.com/uutils/coreutils/blob/0.10.0/src/uu/timeout/src/timeout.rs)
+retourne CommandTimedOut sans preserve-status après expiration ; le statut du
+wrapper ne doit pas être présenté comme un statut individuel du fils Python.
+Rejouer35/40/refus après correction, sans réutiliser la matrice échouée.

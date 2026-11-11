@@ -1751,6 +1751,10 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   aux mêmes fonctions/révisions, puis absence physique de leur union. Code
   corrigé et syntaxes contrôlées ; replays35/40/refus requis. Les neuf contrôles
   physiques ne sont pas atteints dans l'essai échoué.
+  [Matrice f22d217 arrêtée](evidence/source-observer-timeout-status-failed-dev-2026-11-11.json) :
+  35 passe,40 retourne réellement124 après40,014s mais le client attend137.
+  Zéro groupe qualifié dans ce bilan ; statut wrapper distinct de celui du fils,
+  identité du binaire à conserver et même commande à rejouer après correction.
 - [ ] Attente native partagée de 25 s : défaut reproduit puis borne corrigée
   qualifiée sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
   avant detach. Le waitpid bloquant dépassait sa borne ; la correction attend
