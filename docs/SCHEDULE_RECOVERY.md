@@ -151,3 +151,14 @@ SHA du checkpoint avant d'arrêter cette seule unité. Un checkpoint completed
 ne suffit pas si le worker échoue. Une perte reste un échec conservé, sans
 relance automatique ; recouper d'abord les restaurations réelles. Ce lanceur
 ne change aucun scénario ni aucun critère et n'ajoute pas de groupe E2E.
+
+### Observation du lancement en cours
+
+Le premier lancement du 11 novembre a bien créé son worker ; le client de
+lancement a ensuite expiré après 20 s parce que systemd-run attendait la fin
+du oneshot. L'unité, son MainPID 510223/naissance 63038117 et son cgroup sont
+recoupés vivants après la fin de ce client ; aucun rejeu n'est lancé. Décision :
+le prochain lancement doit employer `systemd-run --no-block` pour rendre
+l'acceptation immédiatement, puis observer l'unité. Le code figé du worker
+courant reste inchangé jusqu'à son résultat terminal. La récupération de
+l'observation est conservée séparément de l'échec du client de lancement.

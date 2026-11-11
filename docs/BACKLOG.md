@@ -1708,7 +1708,9 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   Restent backup/copie interrompus et cinq régressions historiques distinctes.
   Rejeu historique préparé avec le même client, dans un oneshot utilisateur
   local indépendant du terminal ; [contrat de suivi](SCHEDULE_RECOVERY.md#exécution-indépendante-du-terminal).
-  Son résultat reste à établir.
+  Worker lancé et vivant après timeout de son client de lancement (20 s),
+  identité recoupée sans relance ; résultat des cinq groupes encore en cours.
+  Corriger le prochain lancement avec `--no-block` après la fin du worker figé.
 - [x] Observateur source sous borne : [refus réel après attachement](evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
   qualifié par deux groupes au commit 956498a, sur 351 sources figées. Deux
   handlers HTTP/cron running, tir et UUID recoupés ; TracerPid 471960 puis zéro

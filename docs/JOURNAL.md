@@ -6717,3 +6717,10 @@ persistée avant lanceur : oneshot systemd utilisateur local, sessions réelles
 préparées avant lancement, client inchangé, suivi PID/naissance/cgroup puis
 résultat terminal conservé avant arrêt. Durées et assertions inchangées ;
 aucune réussite acquise. Sources/images à figer pour toute la campagne.
+
+Le lancement du worker 854305018784436fbffd4a1aa3bbdd72 est effectif ; le client
+systemd-run expire après 20 s, car il attend la fin du oneshot. Recoupement
+réel : unité activating/start, MainPID 510223, naissance 63038117, même cgroup,
+premier groupe garde indépendant passé. L'observation est récupérée sans
+relance ; aucun résultat final acquis. Décision pour le prochain lancement :
+`--no-block`, à appliquer après la fin de ce worker dont le code reste figé.
