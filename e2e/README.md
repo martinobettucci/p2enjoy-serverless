@@ -1623,3 +1623,9 @@ Le mode `--observer-unavailable` exerce la même perte avec Docker pause réel d
 contrôle temporaire : relevé positif avant suspension, exec refusé pour la
 garde, erreur de capture explicite et restitution attendue. Le nominal conserve
 son exigence de témoin complet. Ces deux modes sont à qualifier séparément.
+
+Le mode `--foreign-namespace` crée un namespace synthétique hors du périmètre
+attendu, exige le refus de restitution et sa présence par API, puis supprime
+ce seul objet par API avant restitution. Les refus d’autorité ne sont jamais
+capturés comme diagnostic facultatif. Le stderr des seuls appels SSH opérateur
+est conservé en0600 pour diagnostiquer une erreur de transport sans l’exposer.

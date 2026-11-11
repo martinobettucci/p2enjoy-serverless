@@ -250,9 +250,9 @@ def restore(item, journal, independent):
                 try:
                     item['before_consumer_cleanup'] = instance_limit_observation(item)
                     item['before_consumer_cleanup']['sampled_at'] = time.time()
-                except Exception as error:
-                    # A diagnostic cannot replace the ownership checks or block their cleanup.
-                    item['consumer_cleanup_observation_error'] = {'type':type(error).__name__}
+                except InstanceLimitObservationUnavailable as error:
+                    # Ownership refusals are never optional diagnostics.
+                    item['consumer_cleanup_observation_error'] = {'type':str(error)}
                 atomic(journal,item)
             docker(item, 'rm', '-f', candidates[0])
         if item.get('mode') in ('function-version-unknown-first','instance-limit'):cleanup_history_consumers(item,journal)
@@ -583,6 +583,9 @@ def cleanup_history_consumers(item,journal):
         no_references(item);item['history_cleanup']={'installation_not_created':True,'consumers_absent':True};atomic(journal,item);return
     installation=ids[0]['value'];assert str(UUID(installation))==installation and installation!=item['installation']
     if item.get('temporary_installation'):assert installation==item['temporary_installation']
+    if item.get('mode') == 'instance-limit':
+        namespaces=rows(item,state/'control.sqlite3','SELECT name FROM namespaces WHERE deleted_at IS NULL')
+        assert all(v['name']==item['namespace_name'] for v in namespaces),'foreign_namespace'
     functions={v['id']:v['name'] for v in rows(item,state/'control.sqlite3','''SELECT f.id,f.name FROM functions f
         JOIN services s ON s.id=f.service_id JOIN namespaces n ON n.id=s.namespace_id WHERE n.name=?''',(item['namespace_name'],))}
     revisions={v['id']:v for v in rows(item,state/'control.sqlite3','SELECT id,function_id,image_id FROM revisions')}
@@ -720,6 +723,11 @@ def upgrade_history008(item,journal,function):
 
 
 
+# @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#refus-dappartenance-obligatoire
+class InstanceLimitObservationUnavailable(RuntimeError):
+    """A technical exec failure, never a failed ownership precondition."""
+
+
 # @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#scénarios-requis
 def instance_limit_observation(item):
     """Read the real consumed budgets, database and native Docker identities only."""
@@ -729,13 +737,16 @@ def instance_limit_observation(item):
     assert not container(item,item['original']['id'])['running']
     assert all(same(path,item['replacement_dirs'][key]) for key,path in item['paths'].items())
     assert hashes()==item['configuration'],'official_configuration_changed'
-    keys=('SERVERLESS_FUNCTION_INSTANCE_LIMIT','SERVERLESS_FUNCTION_CPU_BUDGET','SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB')
-    program='import os,json;print(json.dumps({k:os.environ[k] for k in '+repr(keys)+'}))'
-    budgets=json.loads(docker(item,'exec',temporary_control_name(item),'python','-B','-c',program))
-    assert budgets==dict(zip(keys,('2','1','8192'))),'isolated_consumed_budgets_required'
     control=Path(item['paths']['state'])/'control.sqlite3'
     namespace=rows(item,control,'SELECT id,name FROM namespaces WHERE deleted_at IS NULL')
     assert all(v['name']==item['namespace_name'] for v in namespace),'foreign_namespace'
+    keys=('SERVERLESS_FUNCTION_INSTANCE_LIMIT','SERVERLESS_FUNCTION_CPU_BUDGET','SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB')
+    program='import os,json;print(json.dumps({k:os.environ[k] for k in '+repr(keys)+'}))'
+    try:
+        budgets=json.loads(docker(item,'exec',temporary_control_name(item),'python','-B','-c',program))
+    except (AssertionError,subprocess.SubprocessError,json.JSONDecodeError) as error:
+        raise InstanceLimitObservationUnavailable(type(error).__name__) from None
+    assert budgets==dict(zip(keys,('2','1','8192'))),'isolated_consumed_budgets_required'
     functions=rows(item,control,'SELECT id,name,deleted_at FROM functions')
     instances=rows(item,control,'SELECT id,function_id,revision_id,state,cpu_nanos,memory_mib FROM execution_instances ORDER BY id')
     invocations=rows(item,control,'SELECT id,function_id,state,trigger,error_code,handler_started,instance_id,completed_at FROM invocations ORDER BY id')
