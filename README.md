@@ -46,7 +46,14 @@ dans la reproduction, masque et alarme globale conservés. Les
 [onze groupes de consommateurs](docs/evidence/native-observer-consumers-dev-2026-11-11.json)
 passent ensuite sur la même époque :10 496→10 000tirs, préflights des deux
 captures et refus après attachement, avec SSO/API et restitutions. Le nominal
-numérique source protégé, les pannes propres35/40 et l'âge restent ouverts.
+numérique source protégé et l'âge restent ouverts ; les pannes propres35/40
+ont leur preuve distincte ci-dessous.
+Les [six groupes source35/40](docs/evidence/source-observer-deadlines-dev-2026-11-11.json)
+passent sur354sources e45126b :35,684s/TimeoutError,40,010s/wrapper124,
+processus/acteurs joints et ressources initiales/remplacements physiquement
+absents, puis refus sans option rejoué. Trois refus CLI restent séparés.
+Binaire réel recoupé par SHA de /proc ; les deux essais échoués sont exclus.
+Detach en erreur, nominal numérique courant, âge et campagne complète restent ouverts.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native

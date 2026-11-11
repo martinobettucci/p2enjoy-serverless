@@ -2085,8 +2085,8 @@ opérateur par pidfd après l'échéance réelle35+.5 ; le second le laisse arr�
 jusqu'au vrai timeout40. Le helper conserve le code de la commande et mesure
 TracerPid0 avant restauration, puis joint l'acteur. Le client distingue ces
 statuts, recoupe les deux handlers au point de porte et l'absence physique
-après restitution. Deux groupes attendus par mode. Implémenté, non encore
-qualifié en E2E ; aucune rétention ni réussite métier déduite de ces pannes.
+après restitution. Deux groupes par mode sont qualifiés par la preuve e45126b
+ci-dessous ; aucune rétention ni réussite métier déduite de ces pannes.
 Contrat : [bornes source35/40](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40).
 
 Le premier essai35 est conservé comme échoué : après expiration des handlers,
@@ -2095,11 +2095,20 @@ Le reçu natif des seuls modes35/40 porte désormais les identités tardives,
 labels, montage et réseaux ; le client les corrèle aux mêmes fonctions/révisions
 et exige l'absence exacte de l'union initiale/tardive après restitution, en plus
 des neuf contrôles physiques existants. Minima et délais restent inchangés.
-Correction implémentée, replays E2E35/40 et refus sans option encore requis.
+Correction implémentée et replays E2E35/40/refus qualifiés ci-dessous.
 
 Le wrapper timeout est identifié par chemin/version/SHA dans chaque reçu.
 Sans preserve-status, le vrai binaire DEV retourne124 à l'échéance40 ; le
 signal demandé KILL9 et le résultat du wrapper sont distincts. Le premier
 replay échoue sur l'ancienne attente137, conserve son échec et sa restitution.
 Le client corrigé exige124, durée40–43s, diagnostic KILL, opérateur absent,
-TracerPid0 avant retrait et contrôles physiques ; les replays restent requis.
+TracerPid0 avant retrait et contrôles physiques ; les replays passent ci-dessous.
+
+Les [six groupes e45126b](../docs/evidence/source-observer-deadlines-dev-2026-11-11.json)
+qualifient désormais35/40 et le refus sans option sur354sources/images figées :
+35,683720s/TimeoutError avec lecteur fermé ;40,009839s/wrapper124 et opérateur
+absent. TracerPid0 avant retrait, acteurs joints, neuf contrôles physiques et
+sept vérifications exactes de l'union initiale/remplacements. Trois refus CLI
+séparés ne gonflent pas les groupes. Les deux essais échoués sont exclus ;
+aucun waitstatus137 du fils, rétention ni âge déduit. Originaux restitués,
+deux services sains, actifs nuls,5982artefacts et aucune garde finale.

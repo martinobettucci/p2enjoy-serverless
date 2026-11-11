@@ -1735,7 +1735,7 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   des deux conteneurs/réseaux/baux. Aucun succès de rétention numérique ajouté.
 - [ ] Fermeture du lecteur lorsque detach lui-même échoue : finally renforcé,
   mais ce cas n'est pas provoqué par le refus d'historique ci-dessus.
-- [ ] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
+- [x] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
   [Contrat décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40) :
   deux vrais handlers, SIGSTOP après attache/reçu et avant assertion10002 ;
@@ -1743,18 +1743,24 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   vrai timeout40. Statuts opérateur/wrapper/helper distincts, TracerPid0 mesuré
   avant retrait du contrôle, nettoyages et ressources recoupés. Code implémenté :
   portes SIGSTOP, acteur indépendant, reçu de commande et deux options du client ;
-  syntaxes contrôlées, revue et E2E encore requis. Les valeurs35/40 restent inchangées.
+  [Six groupes e45126b](evidence/source-observer-deadlines-dev-2026-11-11.json)
+  qualifiés sur354sources/images identiques :35,683720s avec TimeoutError et
+  lecteur fermé ;40,009839s avec vrai wrapper124, KILL rapporté, opérateur
+  absent et TracerPid0 avant retrait. Acteurs joints, union initiale/tardive
+  physiquement absente (neuf contrôles existants et sept contrôles exacts),
+  puis refus sans option rejoué. Trois refus CLI séparés, zéro groupe ajouté.
+  Les valeurs35/40 restent inchangées ; aucun waitstatus137 du fils déduit.
   [Premier essai ad70d47 échoué](evidence/source-observer-deadline-failed-dev-2026-11-11.json),
   zéro groupe qualifié : alarme35,719s et restitution acquises, mais assertion
   d'inventaire rejetant les remplacements légitimes du minimum1. Correction
   décidée dans le contrat : identités natives initiales et tardives corrélées
   aux mêmes fonctions/révisions, puis absence physique de leur union. Code
-  corrigé et syntaxes contrôlées ; replays35/40/refus requis. Les neuf contrôles
+  corrigé et qualifié par le replay ci-dessus. Les neuf contrôles
   physiques ne sont pas atteints dans l'essai échoué.
   [Matrice f22d217 arrêtée](evidence/source-observer-timeout-status-failed-dev-2026-11-11.json) :
   35 passe,40 retourne réellement124 après40,014s mais le client attend137.
   Zéro groupe qualifié dans ce bilan ; statut wrapper distinct de celui du fils,
-  identité du binaire à conserver et même commande à rejouer après correction.
+  identité du binaire conservée et même commande rejouée dans la preuve finale.
 - [ ] Attente native partagée de 25 s : défaut reproduit puis borne corrigée
   qualifiée sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
   avant detach. Le waitpid bloquant dépassait sa borne ; la correction attend

@@ -454,4 +454,18 @@ attache/fermeture/TracerPid0 et absence physique. Quatre campagnes sérielles,
 SSO/API réels, captures canoniques conservées et restitutions jointes.
 Deux nouveaux handlers running dans le seul cas de refus ; les témoins copiés
 ne sont pas recomptés. Le préflight ne prouve pas sept jours. Nominal numérique
-source protégée, pannes35/40, detach en erreur et campagne complète restent requis.
+source protégée, detach en erreur et campagne complète restent requis ; les
+bornes35/40 sont qualifiées séparément ci-dessous.
+
+## Bornes propres de l'opérateur source35/40
+
+Les [six groupes e45126b](evidence/source-observer-deadlines-dev-2026-11-11.json)
+passent sur354sources/images identiques :35/TimeoutError en35,683720s,
+40/wrapper124 en40,009839s, puis refus sans option. Le binaire timeout réel
+est recoupé par /proc/SHA ; aucun waitstatus137 du fils n'est déduit.
+Trace0 avant retrait, acteurs terminaux/joints et union initiale/remplacements
+(quatre CID/réseaux/consommateurs par faute) physiquement absente : neuf
+contrôles historiques et sept exacts. Trois refus CLI comptent zéro groupe ;
+les deux essais échoués restent exclus. Deux services sains, actifs à zéro,
+5982artefacts et aucune garde finale. Detach en erreur, nominal numérique,
+historique final, âge réel et campagne complète restent dans078.5.

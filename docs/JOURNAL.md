@@ -6925,3 +6925,27 @@ puis replays35/40/refus requis. Aucun produit ou réglage moteur modifié.
 Correction implémentée : reçu du chemin/version/SHA du timeout réel avant son
 lancement ; client40 attend exactement124 et le refus124 du helper, avec tous
 les contrôles de durée/signal/processus conservés. Syntaxes valides ; E2E requis.
+
+### 11 novembre2026 — Six groupes source35/40 qualifiés
+
+Replay e45126b sur354sources/images identiques avant/après :35 à18:30,
+40 à18:35, refus sans option à18:40UTC, deux groupes chacun. Alarme réelle
+35,683720s/TimeoutError, lecteur/mémoire fermés ; commande40,009839s/wrapper124,
+KILL rapporté, opérateur absent. Le SHA de /proc/wrapper/exe recoupe le binaire
+uutils0.10.0 identifié. Aucun waitstatus individuel137 du fils n'est déduit.
+
+Trace0 avant retrait, acteurs terminaux joints, union initiale/remplacements
+(quatre CID/réseaux/consommateurs par cas) physiquement absente, neuf contrôles
+existants et sept exacts. Refus naturel et nettoyage normal repassent ; trois
+refus CLI séparés ajoutent zéro groupe. Brut466439/gzip156743, deux essais
+échoués exclus. Originaux restitués, contrôle démarré18:40:06UTC, référence
+inchangée, deux services sains, actifs/baux à zéro,5982artefacts, aucune garde.
+
+078.5 reste ouverte : provoquer detach en erreur, rejouer nominal numérique
+courant et historique final du helper, puis âge réel18novembre et campagne
+complète. Aucune modification produit/UI/manuel ni de configuration officielle.
+
+Audit RO final sans défaut matériel : SHA/tailles du brut, trois rapports
+originaux,354sources du commit exécuté,6groupes/3campagnes, unions exactes
+initiales/remplacements et9+7contrôles recoupés. Aucun test supplémentaire
+compté par la revue. Reste suivant : erreur réelle de detach et fermeture du lecteur.

@@ -5,12 +5,16 @@
 - Banc de l'opérateur source : deux fautes réelles après attachement,
   expiration35 après SIGSTOP/SIGCONT indépendant et coupure de commande40.
   Statuts distincts conservés, contrôle libéré mesuré avant restauration,
-  acteur joint et erreurs de nettoyage séparées. Implémenté ; E2E encore requis.
+  acteur joint et erreurs de nettoyage séparées. [Six groupes E2E réels](docs/evidence/source-observer-deadlines-dev-2026-11-11.json)
+  passent sur354sources e45126b :35,684s/TimeoutError et40,010s/wrapper124,
+  identité du binaire réellement exécuté, union initiale/remplacements absente
+  puis refus sans option rejoué. Trois refus CLI distincts, zéro groupe ajouté.
   Premier essai35 échoué sur l'inventaire des remplacements du minimum1,
   [conservé sans succès](docs/evidence/source-observer-deadline-failed-dev-2026-11-11.json).
   Correction de preuve implémentée : corrélation native des identités initiales
   et tardives, absence physique de leur union ; aucun réglage moteur modifié.
-  Syntaxes contrôlées, replays35/40 et refus encore requis.
+  Deux essais échoués conservés et exclus ; aucune rétention ni âge qualifié
+  par ces pannes. Le statut124 du wrapper reste distinct de celui du fils.
 
 - Banc natif de mesure25s sur un vrai contrôle temporaire gelé par Docker,
   dégel indépendant28s et restitution120. Mesure primaire et erreurs de

@@ -468,3 +468,28 @@ La [source primaire uutils0.10.0](https://github.com/uutils/coreutils/blob/0.10.
 retourne CommandTimedOut sans preserve-status après expiration ; le statut du
 wrapper ne doit pas être présenté comme un statut individuel du fils Python.
 Rejouer35/40/refus après correction, sans réutiliser la matrice échouée.
+
+### Bornes35/40 et régression qualifiées
+
+La [preuve e45126b](evidence/source-observer-deadlines-dev-2026-11-11.json)
+passe six groupes réels sur354sources/images identiques avant/après :
+35 à18:30UTC,40 à18:35UTC, refus sans option à18:40UTC. L'alarme donne
+TimeoutError/native_observation_deadline après35,683720s, lecteur/mémoire
+fermés. Le timeout40 retourne réellement124 après40,009839s, diagnostic KILL
+et opérateur absent ; aucune fermeture Python ni waitstatus individuel137
+n'en sont déduits. Chemin/version/SHA du binaire sont liés au SHA de l'exécutable
+réel du wrapper lu dans /proc.
+
+Les deux cas mesurent TracerPid0 du même contrôle avant restitution et joignent
+leurs acteurs. L'union des deux instances initiales et des deux remplacements
+est physiquement absente : quatre CID/réseaux/consommateurs par cas, neuf
+contrôles existants et sept contrôles exacts supplémentaires. Le refus sans
+option conserve son erreur d'historique, lecteur fermé et retrait des deux
+consommateurs. Trois refus CLI précoces sont distincts, sans groupe E2E ajouté.
+
+Brut466439octets/gzip156743. Les deux matrices échouées restent exclues.
+Originaux restitués, même contrôle/image, démarrage18:40:06UTC attendu,
+référence inchangée, deux services sains, actifs/baux à zéro,5982artefacts et
+aucune garde. Les bornes propres35/40 sont qualifiées ; detach en erreur,
+nominal numérique courant, reprise historique finale, âge18novembre et
+campagne complète restent requis dans078.5.
