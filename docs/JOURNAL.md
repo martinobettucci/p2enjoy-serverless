@@ -6823,3 +6823,15 @@ sleep ni changement de timer/handler global. Masque restauré par finally sur
 retour et exception. Le probe bounded mesure maintenant les masques avant/après,
 le handler d'alarme conservé et le temps restant35. Syntaxes contrôlées ;
 borne réelle et régressions des consommateurs encore à exécuter.
+
+### 11 novembre 2026 — Borne25 corrigée qualifiée isolément
+
+Trois groupes46e216d sur353sources/images identiques :25,000182476s contre
+28,202336s avant correction. Même vraie pause/WNOHANG0, masque[] avant/après,
+handlerSIGALRM conservé/reste34,902153→9,901989s cohérent. Dégel indépendant
+confirmé avant detach, service terminal Code1/Status0/success puis joint,
+TracerPid0, mémoire et lecteur fermés. Revue RO RAS, brut98 371/gzip38 128.
+Originaux restitués, deux services sains, actifs à zéro et5 982 artefacts,
+aucun handler exécuté. Trois seuls fichiers diffèrent de la reproduction.
+Borne isolée qualifiée ; régressions des consommateurs à exécuter,35/40 propres,
+detach en erreur, sept jours et campagne finale toujours ouverts dans078.5.

@@ -7,8 +7,10 @@
   nettoyage séparées. [Trois groupes de reproduction](docs/evidence/native-observer-deadline-reproduce-dev-2026-11-11.json)
   confirment le dépassement25 à28,202s au dégel ; alarme35 non expirée,
   acteur joint et originaux restitués. Correction implémentée par SIGCHLD et
-  sigtimedwait, sans modifier l'alarme globale ; mesure bounded et régressions
-  de consommateurs encore requises.
+  sigtimedwait, sans modifier l'alarme globale. Les
+  [trois groupes bounded](docs/evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
+  passent sur353sources46e216d :25,000182s, masque/handler conservés, alarme
+  restante cohérente et originaux restitués. Consommateurs encore à requalifier.
 
 ### Interruptions de sauvegarde et de copie qualifiées
 

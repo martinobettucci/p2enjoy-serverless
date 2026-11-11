@@ -1737,10 +1737,10 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   mais ce cas n'est pas provoqué par le refus d'historique ci-dessus.
 - [ ] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
-- [ ] Attente native partagée de 25 s : mesurer le comportement sans événement
-  sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
-  avant detach. Le dépassement est une hypothèse à reproduire : waitpid est
-  bloquant et ne relit l'échéance qu'avant/après. Une preuve de ce composant
+- [ ] Attente native partagée de 25 s : défaut reproduit puis borne corrigée
+  qualifiée sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
+  avant detach. Le waitpid bloquant dépassait sa borne ; la correction attend
+  de vrais SIGCHLD avec sigtimedwait. Une preuve de ce composant
   ne vaut pas preuve de toute la boucle de rétention.
   [Banc décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#mesure-de-lattente-native-sans-événement) :
   contrôle temporaire vide réel, Docker pause après attache, WNOHANG sans statut,
@@ -1753,8 +1753,11 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   trois groupes sur353sources : vrai délai25 dépassé à28,202s après dégel,
   alarme35 non expirée. Nettoyage/acteur joints et originaux restitués. Décision
   de correction bornée par vrais SIGCHLD/sigtimedwait, sans changer l'alarme35 ;
-  correction implémentée avec masque restauré dans finally ; mesure bounded
-  et régressions de consommateurs encore requises.
+  correction implémentée avec masque restauré dans finally. Les
+  [trois groupes bounded46e216d](evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
+  passent sur353sources/images identiques :25,000182s, masque[] identique,
+  handler35 inchangé/reste34,902→9,902s, acteur joint et originaux restitués.
+  Régressions des consommateurs encore requises avant clôture de ce reste.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 

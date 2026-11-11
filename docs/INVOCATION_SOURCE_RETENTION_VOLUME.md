@@ -332,3 +332,19 @@ avec son temps restant cohérent et son handler conservé. Puis dégel indépend
 détachement réel et restitution comme dans la reproduction. Rejouer ensuite
 les consommateurs et scénarios connexes de la classe ; cette borne isolée ne
 clôture ni078.5 ni les pannes35/40 propres de l'opérateur source.
+
+### Borne corrigée qualifiée isolément
+
+Les [trois groupes46e216d](evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
+passent sur353sources/images identiques : même pause réelle et WNOHANG0,
+attente levée à25,000182476s avant le secours28. Masque[] avant/après,
+handlerSIGALRM conservé ; alarme restante34,902153→9,901989s, cohérente avec
+la durée mesurée. Le vrai service indépendant dégèle le contrôle avant detach,
+termine success/Code1/Status0 et est joint. TracerPid0, mémoire/lecteur fermés,
+originaux restitués et aucune erreur de nettoyage.
+
+Seuls les deux fichiers du probe et la classe partagée changent depuis la
+reproduction c64fdd7. Brut98 371/gzip38 128. Aucun handler exécuté ; deux
+services sains, actifs à zéro et5 982 artefacts conservés. La borne isolée
+est qualifiée ; les consommateurs de la classe, les pannes35/40 propres à
+l'opérateur source, detach en erreur, l'âge et la campagne finale restent ouverts.

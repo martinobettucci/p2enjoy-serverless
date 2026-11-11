@@ -2051,4 +2051,8 @@ Les [trois groupes reproduce c64fdd7](../docs/evidence/native-observer-deadline-
 passent sur353sources/images inchangées : dépassement25 effectivement mesuré
 à28,202s, après le dégel indépendant28 et avant l'alarme35. Acteur joint,
 Trace0/mémoire/lecteur fermés et originaux restitués ; aucun handler. Cette
-preuve constate le défaut ; correction, bounded et consommateurs restent requis.
+preuve constate le défaut. Les
+[trois groupes bounded46e216d](../docs/evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
+passent ensuite sur353sources/images identiques :25,000182s, masque/handler
+préservés, alarme restante cohérente et restitution réelle. Régressions des
+consommateurs encore requises ; ni35/40 propres à l'opérateur ni rétention prouvés.

@@ -435,3 +435,11 @@ Alarme35 non expirée, terminal acteur/jonction, dégel avant detach,
 TracerPid0, mémoire/lecteur fermés et originaux restitués. Aucun handler.
 Cette preuve confirme le défaut d'attente, sans qualifier sa correction,
 les expirations35/40 de l'opérateur source ou une rétention.
+
+Les [trois groupes bounded46e216d](evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
+passent ensuite sur353sources/images identiques :25,000182s avant le secours28,
+masque[] restitué, handler d'alarme conservé/reste34,902→9,902s. Dégel réel
+avant detach, acteur terminal/joint, TracerPid0/mémoire/lecteur fermés et
+originaux restitués. Aucun handler exécuté ; seules classe partagée et deux
+fichiers du probe diffèrent de la reproduction. Consommateurs et pannes35/40
+restent à qualifier ; aucune rétention ni campagne complète déduite.
