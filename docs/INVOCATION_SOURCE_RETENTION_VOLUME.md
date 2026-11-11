@@ -120,4 +120,13 @@ puis arrête cette seule unité et recoupe sa disparition/inactivité. Une autre
 commande `status UUID` recoupe le cgroup vivant dans /proc avec celui du reçu,
 en plus du PID et de sa naissance. Une interruption finale du worker interdit
 la réussite même si Node avait écrit completed=true.
+Avant le nouveau nominal long, qualifier la perte réelle du worker avec le même
+client : connexion SSO, deux fonctions/instances et au moins un checkpoint de
+réponses réelles, puis SIGKILL du seul MainPID de cette unité utilisateur. Le vrai
+résultat systemd doit être signal/9 et finish doit conserver/finaliser l'échec,
+même si le worker n'a pas pu écrire finished_at_ns. Recouper le nettoyage distant
+et les originaux avant de poursuivre ; aucune purge métier ni rétention déduite.
+Trois groupes : lancement/indépendance ; SIGKILL/résultat exact ; restitution et
+sources/images inchangées. Pas de faux worker, faux serveur ou réponse remplacée.
+L'écriture atomique synchronise le fichier et son dossier avant arrêt de l'unité.
 Aucune réussite nouvelle acquise par cette décision.

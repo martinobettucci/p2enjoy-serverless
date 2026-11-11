@@ -6364,3 +6364,17 @@ et cgroup simplement recopié identifiés. Décision persistée : oneshot borné
 TimeoutStartSec3600, RemainAfterExit jusqu'à capture du vrai résultat par finish ;
 MainPID0 et ExecMainCode/Status recoupés avant arrêt de cette seule unité. status
 relit aussi /proc/PID/cgroup. Aucun worker ou nouveau test encore lancé.
+
+Pilote invocation-source-retention-worker implémenté : tâche oneshot utilisateur,
+canal privé UID/PID, checkpoint et logs privés, entrées fermées après transmission,
+comparaison MainPID/naissance/cgroup depuis une autre commande. finish journalise
+le vrai résultat système avant arrêt ; une finalisation interrompue reprend son
+reçu, sans rejouer le client. Syntaxe seulement ; aucune tâche ni campagne encore
+lancée. Brouillons du replay d'âge gardés dans.local, non livrés.
+
+Complément avant code du test de perte : SIGKILL réel du MainPID du worker
+pendant le vrai client après réponses/instances, résultat système signal9 et
+finalisation de l'échec sans finished_at_ns, puis nettoyage/identités distantes
+recoupés. Trois groupes distincts, aucune rétention déduite. Persistance du
+dossier après rename ajoutée au worker ; contrôles réels Type/RemainAfterExit/
+délais/cgroup et disparition du contrôleur initial conservés dans les reçus.
