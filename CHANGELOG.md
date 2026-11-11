@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+### Confirmation des signaux du pilote — en qualification
+
+- Le helper exige la fin du même pilote après le réveil pidfd, avec attente
+  bornée et reçu durable. Le client conserve le reçu avant assertion et les
+  erreurs opérateur en privé. Syntaxes contrôlées et revue RO sans défaut ;
+  rejeu réel ciblé puis matrice encore requis. Les essais échoués sont conservés.
+
 ### Refus du périmètre cloné qualifié
 
 - Nouveau mode client foreign-namespace : SSO/API, namespace de fixture

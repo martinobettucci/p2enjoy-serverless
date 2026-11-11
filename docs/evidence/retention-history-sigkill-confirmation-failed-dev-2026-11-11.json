@@ -1,0 +1,70 @@
+{
+  "format": "p2enjoy-serverless-driver-confirmation-failed-v1",
+  "completed": false,
+  "unit": "SLS-078.5",
+  "unit_complete": false,
+  "counted_groups": 0,
+  "source_commit": "f1558857d9a23d3f1a6c5416754ac77c11a6134b",
+  "source_files": 351,
+  "sources_images_unchanged": true,
+  "failure": {
+    "type": "AssertionError",
+    "operator": "==",
+    "code": "ERR_ASSERTION",
+    "message": "The expression evaluated to a falsy value:\n\n  assert(signal.driver_dead)\n"
+  },
+  "restoration": {
+    "event": "restored",
+    "independent": true,
+    "original_id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+    "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+    "directories_identical": true,
+    "databases_identical": true,
+    "artifacts_identical": true,
+    "configuration_unchanged": true,
+    "agent_healthy": true,
+    "control_healthy": true,
+    "reference_unchanged": true,
+    "temporary_directories_removed": true
+  },
+  "final_native_state": {
+    "completed": true,
+    "services": [
+      {
+        "id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-11T13:53:50.396537954Z"
+      },
+      {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-06T15:49:39.578107028Z"
+      }
+    ],
+    "counts": {
+      "live_functions": 0,
+      "active_invocations": 0,
+      "instances": 0,
+      "operations": 0,
+      "reserved_bytes": 0,
+      "active_deployments": 0,
+      "leases": 0,
+      "pending_storage": 0
+    },
+    "artifact_files": 5982,
+    "agent_service": "active",
+    "control_health_http": 200,
+    "active_restoration_units": 0
+  },
+  "raw": {
+    "path": "retention-history-sigkill-confirmation-failed-dev-2026-11-11.raw.json.gz",
+    "bytes": 36534,
+    "sha256": "9a90198e9e054d3547ea8ecad06bbd3ab10400eb446ea31364e5ef3b2038c6d4",
+    "uncompressed_bytes": 87491,
+    "uncompressed_sha256": "8485019a571976c98c21508912eab9db53c78c303d790920c03484c4faf59e0e"
+  }
+}
