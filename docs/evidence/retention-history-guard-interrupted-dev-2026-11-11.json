@@ -1,0 +1,109 @@
+{
+  "format": "p2enjoy-serverless-retention-guard-interruption-v1",
+  "completed": false,
+  "collection_completed": true,
+  "unit": "SLS-078.5",
+  "unit_complete": false,
+  "counted_groups": 0,
+  "recorded_launcher_exit_code": 143,
+  "cause_unestablished": true,
+  "source_commit": "f73c9ab06cd7e1c46467aee67822ca9503b291d9",
+  "source_files": 351,
+  "sources_images_unchanged": true,
+  "original_restored": true,
+  "native_status": {
+    "restored": true,
+    "restoration": {
+      "agent_healthy": true,
+      "artifacts_identical": true,
+      "configuration_unchanged": true,
+      "control_healthy": true,
+      "databases_identical": true,
+      "directories_identical": true,
+      "event": "restored",
+      "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+      "independent": true,
+      "original_id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+      "reference_unchanged": true,
+      "temporary_directories_removed": true
+    },
+    "driver_alive": false,
+    "unit": "serverless-restore-instance-limit-9e4f8fd7-3ad2-4fe0-9fb3-9980cf732f89",
+    "timer_state": "inactive",
+    "service_state": "inactive",
+    "before_consumer_cleanup": {
+      "budgets": {
+        "SERVERLESS_FUNCTION_CPU_BUDGET": "1",
+        "SERVERLESS_FUNCTION_INSTANCE_LIMIT": "2",
+        "SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB": "8192"
+      },
+      "container": {
+        "id": "7dc7acc73888cfbcce60f17f566cd590a4a916e8a7771cf59aacca7f5b8d199c",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "running": true,
+        "started_at": "2026-11-11T13:38:04.657646002Z",
+        "status": "healthy"
+      },
+      "containers": [],
+      "firings": [],
+      "functions": [],
+      "installation_id": "2d7ff3e0-0aef-4e9a-8ff3-5ceeb02f07a4",
+      "instances": [],
+      "invocations": [],
+      "official_configuration_unchanged": true,
+      "original_control_stopped": true,
+      "sampled_at": 1794404399.5158277
+    },
+    "consumer_cleanup": {
+      "containers": [],
+      "installation_id": "2d7ff3e0-0aef-4e9a-8ff3-5ceeb02f07a4",
+      "leases": [],
+      "networks": [],
+      "released_consumers": [],
+      "removed_containers": [],
+      "removed_networks": []
+    },
+    "observation_error": null,
+    "before_observer_fault": null
+  },
+  "final_native_state": {
+    "completed": true,
+    "services": [
+      {
+        "id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-11T13:40:03.500257968Z"
+      },
+      {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-06T15:49:39.578107028Z"
+      }
+    ],
+    "counts": {
+      "live_functions": 0,
+      "active_invocations": 0,
+      "instances": 0,
+      "operations": 0,
+      "reserved_bytes": 0,
+      "active_deployments": 0,
+      "leases": 0,
+      "pending_storage": 0
+    },
+    "artifact_files": 5982,
+    "agent_service": "active",
+    "control_health_http": 200,
+    "active_restoration_units": 0
+  },
+  "raw": {
+    "path": "retention-history-guard-interrupted-dev-2026-11-11.raw.json.gz",
+    "bytes": 107915,
+    "sha256": "72eb07030561f813e33dcaccab27905d9742d6a9dbe8d1ca0f8c61369d859cd2",
+    "uncompressed_bytes": 267710,
+    "uncompressed_sha256": "e192c01d4d5982cda12ec614c3860773efe6ab6117170713b0f7e52a3cb8f5cf"
+  }
+}

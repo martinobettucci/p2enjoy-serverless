@@ -1677,7 +1677,10 @@ arrêté, retrait API de la seule fixture puis restitution explicite.351sources
 avant/après, deux clients seuls changés par rapport aux treize groupes ; helper
 et images inchangés. Réconciliation nominale réellement exercée, perte de
 réponse HTTP non provoquée. Régressions du helper encore requises et aucune
-preuve d'âge avant le18novembre ;078.5 reste ouverte.
+preuve d'âge avant le18novembre ;078.5 reste ouverte. La
+[première matrice](evidence/retention-history-guard-interrupted-dev-2026-11-11.json)
+termine localement143 pendant SIGTERM, cause non établie ; restauration
+indépendante recoupée, zéro groupe compté, reprise explicite encore requise.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

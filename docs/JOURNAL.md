@@ -6568,3 +6568,14 @@ Contrôle final sain mêmeCID/image redémarré13:31:07UTC, référence inchang�
 2healthy, actifs0,5982 artefacts, agent actif/healthz200 et aucune garde.
 Reste : régressions du helper, pannes propres résiduelles et âge réel ;078.5
 conserve son statut ouvert.
+
+### 11novembre2026 — Lanceur de régression interrompu, originaux restitués
+
+La matrice99a7c275 lancée sans terminal attaché termine localement143 pendant
+SIGTERM, cause non établie. Release/EOF avaient terminé, mais le rapport de
+SIGTERM et la matrice restent incomplets ; aucun groupe compté dans ce bilan.
+Processus locaux de cette campagne absents, garde distante et restauration
+indépendante réellement terminées.351sources/images recoupées après, contrôle
+original sain redémarré13:40:03UTC, référence inchangée,5982 artefacts et actifs0.
+Rapports originaux et collecte conservés sans réécriture. Reprise explicite
+de la même matrice avec terminal attaché ; aucun scénario ou assertion retiré.
