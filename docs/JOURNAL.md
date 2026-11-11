@@ -7277,3 +7277,9 @@ code-only par le pipeline existant. La revue P1 de réception est corrigée ;
 la publication rejoint aussi le propriétaire operations.responsibility comme
 le vrai endpoint ZIP. Les scénarios E2E et fixtures originales sont ajoutés ;
 construction/déploiement/proofs non encore exécutés, UI non implémentée.
+
+Premier E2E serveur070 :12groupes réussis puis timeout réel45s au client des
+corps partiels. Logs natifs : un429 et quatre408, aucune erreur ; deux fonctions
+purgées, zéro brouillon/artefact propre restant. Défaut070.7 enregistré avant
+correction du client de preuve ; passage à un socket TLS réel/HTTP1 explicite
+pour recevoir l’issue sans ClientRequest inachevé. Aucun succès prématuré.

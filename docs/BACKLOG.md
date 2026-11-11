@@ -896,6 +896,10 @@ Critères d'acceptation :
   avec diagnostic consultable ; handler CJS/ESM validé avec les vrais modules.
 - [ ] SLS-070.6 Après publication : lien vers le test de SLS-071, promotion explicite ou
   pilote, retour à un hash précédent.
+- [ ] SLS-070.7 Réception des gros enregistrements bornée avant allocation : quatre
+  corps partiels, cinquième refusé avant corps, délai30s puis capacité libérée.
+  Premier E2E échoué sur timeout client45s ; les logs réels portent429 et quatre408.
+  Le client de preuve doit recevoir l’issue complète, sans substituer la passerelle.
 
 Tests exigés :
 

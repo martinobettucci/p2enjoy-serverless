@@ -233,3 +233,20 @@ lecture native limitée à son namespace et dépendance YAML2.9.1 issue du
 conteneur de référence inchangé. Les fixtures CJS/ESM sont dans le dépôt.
 Aucun résultat E2E n’est annoncé avant exécution ; les quotas globaux, la
 concurrence purge/lecture, les interruptions et l’interface restent à qualifier.
+
+### Investigation de réception partielle —12novembre2026
+
+Le premier passage a réussi12groupes puis échoué au13e sur le délai socket
+client45s. Les logs natifs portent un429 et quatre408, sans erreur serveur ;
+ils ne remplacent pas les réponses HTTPS absentes du rapport. Les deux fonctions
+sont purgées et l’intégrité physique est recoupée. Le défaut est enregistré
+sous070.7, sans clôture des bornes de réception.
+
+Le client de preuve utilisera un vrai socket TLS vérifié avec une requête
+HTTP/1.1 explicite, Connection:close, Content-Length8Mio et zéro octet de corps
+pour la cinquième demande. Il lira les en-têtes et la longueur réelle de réponse
+sous64Kio, avec délai45s et jonction de tous les sockets. Cela évite de faire
+dépendre la lecture d’un ClientRequest Node dont l’envoi reste volontairement
+incomplet. Aucun serveur, réponse, horloge ou dépendance n’est substitué ; la
+passerelle HTTPS et l’API déployées restent effectivement traversées. Toute
+absence de réponse demeure un échec et impose une nouvelle investigation.
