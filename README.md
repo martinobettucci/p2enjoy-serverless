@@ -32,6 +32,10 @@ privée puis16 purges et restitution. Son replay après39 fenêtres manquées de
 [vingt groupes de restitution/sûreté](docs/evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
 passent ensuite sur les mêmes340sources ; rétention, pannes du lecteur natif et
 futur replay restent à qualifier.
+Le pilote [de replay](docs/SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie)
+est implémenté : chargement atomique de la source scellée, préflight, deux
+frontières natives et pertes réelles. Il attend ses preuves propres avant
+usage numérique ; le moteur applicatif et ses images restent inchangés.
 La [borne des observations HTTP](docs/evidence/invocation-retention-volume-dev-2026-11-11.json)
 passe trois groupes réels sur337sources :10016 handlers/5008 par fonction,
 exacts10000 survivants et16 plus anciens retirés, deux purges et restitution.

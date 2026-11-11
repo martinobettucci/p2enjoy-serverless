@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+### Pilote de replay de la borne des tirs
+
+- Chargement vérifié d'une copie scellée dans la fenêtre existante, publication
+  atomique de CONTROL en dernier et observation native avant l'attente de santé.
+  Garde120 explicite pour retirer la copie avant le prochain créneau ; préflight,
+  refus et pertes réelles sont implémentés. Qualification propre et replay
+  numérique encore requis ; aucun changement du moteur applicatif ou d'image.
+
 ### Préparation de la borne globale des tirs
 
 - Client E2E de capture d'une première fenêtre réelle de256 déclarations et

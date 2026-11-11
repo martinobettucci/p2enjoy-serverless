@@ -1758,3 +1758,25 @@ passe quatre groupes sur340sources :256 tirs06:15UTC, sauvegarde protégée,
 [vingt groupes de garde/options/sûreté](../docs/evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
 passent sur les mêmes340sources après la capture. Rétention, pannes du lecteur
 de copie et futur replay restent requis.
+
+## Replay gardé de la borne des tirs
+
+Synchroniser les sources, puis exécuter seul et en série sur le SPARK DEV au
+repos : `node e2e/schedule-firing-volume-replay.mjs MODE`.
+
+| MODE | Portée et prérequis réels |
+| --- | --- |
+| invalid | Huit refus de paramètres/source, avant création de fenêtre ; un groupe |
+| not-eligible | Refus count avant39 fenêtres ; à exécuter avant la date réelle d'éligibilité, un groupe |
+| preflight |1 à38 fenêtres manquées ; chargement/observation, SSO/API, restitution ; trois groupes |
+| seed-loss | SIGKILL du pilote et du copieur après registre, avant CONTROL ; deux groupes |
+| observer-loss | SIGKILL après attache réelle du traceur ; deux groupes |
+| count | Après39 fenêtres ; observations complètes avant/après pruning au même curseur, SSO/API, restitution ; trois groupes |
+
+Les modes preflight/count reçoivent le JSON SSO sur stdin privée. Les autres
+n'en demandent pas. Le client attend si nécessaire la première partie d'une
+fenêtre avant mutation ; la garde120 est ensuite obligatoire pour tous les
+replays. Les copies privées restent scellées, les rapports UUID sous .local/e2e.
+Un prérequis absent échoue, sans skip ni relance automatique. Aucune qualification
+n'est acquise par cette implémentation. Contrat :
+[SCHEDULE_FIRING_VOLUME](../docs/SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie).

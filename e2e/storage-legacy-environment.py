@@ -63,6 +63,31 @@ def command(args, allowed=(0,), *, combined_output=False):
     return (result.stdout + result.stderr if combined_output else result.stdout).strip()
 
 
+# @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie
+def firing_replay_command(operation, identifier):
+    args = ['python3', '-B', str(BASE / 'e2e/schedule_firing_volume_replay.py'), operation, identifier]
+    if operation != 'verify':
+        assert LOCK is not None
+        args += ['--lock-fd', str(LOCK)]
+    result = json.loads(command(args, (0, 1)))
+    assert 'failure_type' not in result, 'firing_replay_error:' + str(result.get('reason') or result.get('failure_type'))
+    return result
+
+
+def firing_replay_receipts(item):
+    if 'firing_replay' not in item:
+        return {}
+    result = {'source': item['firing_replay']['source'], 'mode': item['firing_replay']['mode']}
+    for key in ('armed_at','armed_boundary','timer_active_monotonic_us'):
+        if key in item['firing_replay']:
+            result[key]=item['firing_replay'][key]
+    for label, name in [('seed', 'firing-replay-seed.json'), ('observation', 'firing-replay-observation.json')]:
+        path = Path(item['work']) / name
+        if path.exists():
+            result[label] = json.loads(path.read_text())
+    return result
+
+
 def atomic(path, value):
     temporary = path.with_suffix('.pending')
     with open(temporary, 'w', opener=lambda p, flags: os.open(p, flags, 0o600)) as stream:
@@ -367,8 +392,9 @@ print(json.dumps({'available':available}))
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
 def start_control(item, journal, image, *, readiness='healthy'):
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', image)
-    assert readiness in ('healthy', 'anonymous-api', 'migration-refusal')
-    if readiness != 'healthy':assert item.get('mode') == 'function-version-purge'
+    assert readiness in ('healthy', 'anonymous-api', 'migration-refusal', 'firing-replay')
+    if readiness == 'firing-replay':assert item.get('mode') == 'instance-limit' and item.get('firing_replay')
+    elif readiness != 'healthy':assert item.get('mode') == 'function-version-purge'
     assert not item.get('restored')
     assert all(not same(path, item['original_dirs'][key]) for key, path in item['paths'].items())
     source = (BASE / 'control/compose.spark.yml').read_text()
@@ -388,8 +414,12 @@ def start_control(item, journal, image, *, readiness='healthy'):
     compose.write_text(source)
     os.chmod(compose, 0o640)
     os.chown(compose, 0, item['gid'])
-    docker(item, 'compose', '--env-file', '/etc/spark/env', '--env-file', '/run/spark/secrets',
-           '-f', str(compose), 'up', '-d', '--no-build')
+    if readiness == 'firing-replay':
+        result = firing_replay_command('observe', item['campaign'])
+        assert result['completed'] and result['mode'] == item['firing_replay']['mode']
+    else:
+        docker(item, 'compose', '--env-file', '/etc/spark/env', '--env-file', '/run/spark/secrets',
+               '-f', str(compose), 'up', '-d', '--no-build')
     if readiness == 'migration-refusal':
         def exited():
             state = json.loads(docker(item, 'inspect', '--format', '{{json .State}}', temporary_control_name(item)))
@@ -407,7 +437,7 @@ def start_control(item, journal, image, *, readiness='healthy'):
     def ready():
         value = container(item, temporary_control_name(item))
         assert value['running'], 'temporary_control_exited_before_readiness'
-        if readiness == 'healthy':return value if value['status'] == 'healthy' else None
+        if readiness in ('healthy','firing-replay'):return value if value['status'] == 'healthy' else None
         return value if anonymous_api_readable(item) else None
     current = until(ready, 'temporary_control_unavailable')
     assert current['image'] == image
@@ -796,7 +826,8 @@ def main():
                   **({'before_consumer_cleanup':item.get('before_consumer_cleanup'),
                       'consumer_cleanup':item.get('history_cleanup'),
                       'observation_error':item.get('consumer_cleanup_observation_error'),
-                      'before_observer_fault':item.get('before_observer_fault')} if item.get('mode')=='instance-limit' else {})})
+                      'before_observer_fault':item.get('before_observer_fault')} if item.get('mode')=='instance-limit' else {}),
+                  **({'firing_replay':firing_replay_receipts(item)} if item.get('firing_replay') else {})})
             return
         if mode == 'signal-driver':
             assert item.get('mode') == 'instance-limit' and len(sys.argv) == 4
@@ -829,13 +860,28 @@ def main():
     old_image = sys.argv[3]
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', old_image)
     options=sys.argv[4:]
-    assert len(options)==len(set(options)) and set(options)<={'--source-schema007','--target-schema008','--guard-seconds=120','--guard-seconds=1800'}
+    history_options=[v for v in options if v.startswith('--firing-history=')]
+    observation_options=[v for v in options if v.startswith('--firing-observation=')]
+    firing_options=set(history_options+observation_options)
+    assert len(options)==len(set(options)) and set(options)-firing_options<={'--source-schema007','--target-schema008','--guard-seconds=120','--guard-seconds=1800'}
     assert not options or mode in ('function-version-purge','function-version-unknown-first','instance-limit')
     guard_options=set(options)&{'--guard-seconds=120','--guard-seconds=1800'}
     assert len(guard_options)<=1,'one_guard_duration_required'
-    if mode=='instance-limit':assert set(options)<=guard_options
+    if mode=='instance-limit':assert set(options)<=guard_options|firing_options
     else:assert not guard_options,'guard_duration_requires_instance_limit'
+    assert not firing_options or mode=='instance-limit','firing_replay_requires_instance_limit'
+    assert len(history_options)<=1 and len(observation_options)<=1,'one_firing_replay_source_required'
+    assert bool(history_options)==bool(observation_options),'firing_replay_option_pair_required'
+    firing_replay=None
+    if history_options:
+        match=re.fullmatch('--firing-history=(schedule-firing-volume-[a-f0-9]{32})',history_options[0])
+        assert match,'canonical_capture_required'
+        observation=observation_options[0].split('=',1)[1]
+        assert observation in ('preflight','count','seed-loss','observer-loss'),'unknown_firing_observation'
+        firing_replay={'capture_id':match[1],'mode':observation}
     guard_seconds=60 if mode=='partial' else 120 if '--guard-seconds=120' in options else 1800 if '--guard-seconds=1800' in options else 900
+    if firing_replay:
+        assert guard_seconds==120,'firing_replay_guard_duration'
     source_schema='007' if '--source-schema007' in options else '006'
     target_schema='008' if '--target-schema008' in options else '007'
     assert source_schema!='007' or target_schema=='008','source007_requires_explicit_target008'
@@ -873,6 +919,25 @@ def main():
     image_id = command(['runuser','-u','spark-docker','--','docker','--host',
         'unix://' + settings['SERVERLESS_DOCKER_SOCKET_HOST'],'image','inspect','--format','{{.Id}}',old_image])
     assert image_id == old_image, 'historical_image_missing'
+    if firing_replay:
+        source=firing_replay_command('verify',firing_replay['capture_id'])
+        assert source['images']['control']['image']==old_image,'captured_control_image_required'
+        assert source['images']['runtime']['image']==settings['SERVERLESS_RUNTIME_IMAGE'],'captured_runtime_image_required'
+        def replay_timing():
+            now=time.time();missed=(int(now//300)*300-source['cursor'])//300
+            assert source['oldest_completed_at']>now-604700,'capture_too_old_for_numeric_proof'
+            if firing_replay['mode']=='preflight':assert 1<=missed<=38,'preflight_requires_below_count_limit'
+            if firing_replay['mode']=='count':assert missed>=39,'numeric_replay_not_yet_eligible'
+        replay_timing()
+        if not 10<=time.time()%300<=120:
+            emit({'event':'replay-waiting-window','sampled_at':time.time()})
+        while not 10<=time.time()%300<=120:
+            if select.select([sys.stdin],[],[],1)[0]:
+                assert not sys.stdin.readline(),'unexpected_command_before_replay_window'
+                emit({'event':'replay-cancelled-before-mutation'})
+                return
+        replay_timing()
+        firing_replay['source']=source
     HISTORY.mkdir(mode=0o755, exist_ok=True)
     assert HISTORY.resolve() == HISTORY and HISTORY.stat().st_uid == 0
     LOCK = os.open(LOCK_PATH, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
@@ -915,6 +980,11 @@ def main():
         assert actual == SCHEMA_008 + ['009_schedules.sql'], 'current_schema009_required'
         proposal=Path('/etc/spark/env.?')
         item['proposal_sha256']=hashlib.sha256(proposal.read_bytes()).hexdigest() if proposal.exists() else None
+        if firing_replay:
+            assert firing_replay['source']['installation_id']!=item['installation'],'original_installation_cannot_be_replayed'
+            item['firing_replay']=firing_replay
+            item['namespace_name']=firing_replay['source']['namespace_name']
+            item['temporary_installation']=firing_replay['source']['installation_id']
 
     if mode in ('function-version-purge','function-version-unknown-first'):
         actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
@@ -936,6 +1006,16 @@ def main():
           'current_image': item['original']['image'], 'original_id':item['original']['id'],
           'guard_seconds':guard_seconds,'timer_schedule':command(['systemctl','show',item['unit']+'.timer','--property=TimersMonotonic','--value'])})
     try:
+        if firing_replay:
+            activation=int(command(['systemctl','show',item['unit']+'.timer','--property=ActiveEnterTimestampMonotonic','--value']))
+            age=time.monotonic()-activation/1000000
+            assert activation>0 and 0<=age<60,'fresh_guard_activation_required'
+            armed_at=time.time()-age
+            armed_boundary=int(armed_at//300)*300
+            assert 10<=armed_at-armed_boundary<=120,'guard_activation_outside_replay_window'
+            assert int(time.time()//300)*300==armed_boundary and time.time()<armed_boundary+150,'replay_arm_margin_expired'
+            item['firing_replay'].update(armed_at=armed_at,armed_boundary=armed_boundary,timer_active_monotonic_us=activation)
+            atomic(journal,item)
         docker(item, 'stop', '--time', '15', item['original']['id'])
         assert not container(item, item['original']['id'])['running']
         command(['systemctl', 'stop', AGENT])
@@ -966,23 +1046,32 @@ def main():
             item.pop('creating_replacement')
             atomic(journal, item)
             os.rename(replacement, path)
+        if firing_replay:
+            result=firing_replay_command('seed',campaign)
+            assert result['completed'] and result['control_published'],'firing_replay_seed_incomplete'
+            CONTROL_READER=ControlObserver(Path(paths['state'])/'control.sqlite3')
+            CONTROL_READER.open()
         command(['systemctl', 'start', AGENT])
-        current = start_control(item, journal, old_image)
-        if mode == 'instance-limit':
+        current = start_control(item, journal, old_image,readiness='firing-replay' if firing_replay else 'healthy')
+        if mode == 'instance-limit' and CONTROL_READER is None:
             CONTROL_READER = ControlObserver(Path(paths['state']) / 'control.sqlite3')
             CONTROL_READER.open()
         emit({'event': 'instance-limit-ready' if mode == 'instance-limit' else 'historical-ready',
               'container': current, 'installation_id': item['temporary_installation'],
-              **({'capacity': instance_limit_observation(item)} if mode == 'instance-limit' else {})})
+              **({'capacity': instance_limit_observation(item)} if mode == 'instance-limit' else {}),
+              **({'firing_replay':firing_replay_receipts(item)} if firing_replay else {})})
         for line in sys.stdin:
             request = json.loads(line)
             op = request['op']
             if op == 'restore':
                 break
-            if mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history'), 'instance_limit_operation_required'
+            if mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state'), 'instance_limit_operation_required'
             if op == 'capacity':
                 assert mode == 'instance-limit'
                 result = instance_limit_observation(item)
+            elif op == 'firing-replay-state':
+                assert mode == 'instance-limit' and item.get('firing_replay') and set(request)=={'op'}
+                result=firing_replay_command('inspect',campaign)
             elif op == 'capture-firing-history':
                 assert mode == 'instance-limit' and set(request) == {'op','function_ids','window'}
                 identifiers = request['function_ids']
