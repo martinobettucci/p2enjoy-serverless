@@ -55,9 +55,9 @@ def emit(value):
     print(json.dumps(value), flush=True)
 
 
-def command(args, allowed=(0,), *, combined_output=False):
+def command(args, allowed=(0,), *, combined_output=False, foreground_timeout=False):
     # The native timeout and inherited flock survive a killed Python/SSH driver.
-    result = subprocess.run(['timeout', '--signal=KILL', '40s', *args],
+    result = subprocess.run(['timeout', *(['--foreground'] if foreground_timeout else []), '--signal=KILL', '40s', *args],
                             capture_output=True, text=True, timeout=45,
                             cwd=BASE,
                             pass_fds=() if LOCK is None else (LOCK,))
@@ -1083,7 +1083,7 @@ def main():
                 assert type(request['window']) is int and request['window'] > 0 and request['window'] % 300 == 0
                 result = json.loads(command(['python3','-B',str(BASE/'e2e/schedule-firing-volume-snapshot.py'),
                     '--campaign',campaign,'--functions',','.join(identifiers),'--window',str(request['window']),
-                    '--lock-fd',str(LOCK)] + (['--loss',request['loss']] if 'loss' in request else [])))
+                    '--lock-fd',str(LOCK)] + (['--loss',request['loss']] if 'loss' in request else []), foreground_timeout=True))
                 assert result['completed'], 'firing_history_capture_failed'
             elif op == 'pause-observation':
                 assert mode == 'instance-limit' and 'before_observer_fault' not in item

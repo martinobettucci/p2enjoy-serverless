@@ -28,8 +28,13 @@ async function operation(op,body={}){const offset=events.length;assert(!ended);c
 async function capacity(){return operation('capacity');}
 async function remote(op,extra=[]){try{const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,op,campaign,...extra],{timeout:150000,maxBuffer:8*1024*1024});return JSON.parse(stdout.trim().split('\n').at(-1));}catch(error){await writeFile(new URL('firing-volume-'+campaign+'-'+op+'.stderr',out),String(error.stderr??''),{mode:0o600});throw error;}}
 async function copyOperator(action){
- const {stdout}=await run('ssh',[...ssh,'python3','-B','/srv/p2enjoy-serverless/e2e/schedule-firing-volume-snapshot.py','--campaign',campaign,'--action',action],{timeout:45000,maxBuffer:2*1024*1024});
- const value=JSON.parse(stdout.trim().split('\n').at(-1));assert(value.completed,'copy_operator_incomplete');return value;
+ try{
+  const {stdout}=await run('ssh',[...ssh,'python3','-B','/srv/p2enjoy-serverless/e2e/schedule-firing-volume-snapshot.py','--campaign',campaign,'--action',action],{timeout:45000,maxBuffer:2*1024*1024});
+  const value=JSON.parse(stdout.trim().split('\n').at(-1));assert(value.completed,'copy_operator_incomplete');return value;
+ }catch(error){
+  let diagnostic;try{const value=JSON.parse(String(error.stdout??'').trim().split('\n').at(-1));if(value.completed===false&&typeof value.failure_type==='string')diagnostic={failure_type:value.failure_type,failure_reason:value.failure_reason,errno:value.errno,source_line:value.source_line};}catch{}
+  observations.push({scenario:'copy-operator-failed',action,diagnostic});await save();throw error;
+ }
 }
 async function api(url,{method='GET',body,bytes,status=200,headers={}}={}){const response=await admin.fetch(base+url,{method,data:bytes??body,headers:{Origin:base,'X-CSRF-Token':session?.csrf_token,...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});assert([status].flat().includes(response.status()),`${method} ${url}: ${response.status()}`);return response.json();}
 async function publish(fn){const row=await api(`/api/functions/${fn.id}`),candidate=await api(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:fn.config.handler,events:{http:[],schedules:Array.from({length:16},()=>({cron:'*/5 * * * *',enabled:true,timezone:'UTC'}))}}});fn.deployment_id=candidate.id;const result=await api(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes:archive});assert.equal(result.state,'published');fn.revision_id=result.revision_id;return result.code_hash;}

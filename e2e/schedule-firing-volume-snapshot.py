@@ -21,6 +21,7 @@ import sqlite3
 import stat
 import subprocess
 import time
+import traceback
 from uuid import UUID
 
 from control_database import control_owner, read_control
@@ -192,7 +193,7 @@ def stop_during_backup(folder, item, live, args, remaining, total):
     copier = process_identity(os.getpid())
     wrapper = process_identity(os.getppid())
     wrapper_argv = Path('/proc', str(wrapper['pid']), 'cmdline').read_bytes().split(b'\0')[:-1]
-    assert wrapper_argv[:3] == [b'timeout', b'--signal=KILL', b'40s'], 'bounded_wrapper_required'
+    assert wrapper_argv[:4] == [b'timeout', b'--foreground', b'--signal=KILL', b'40s'], 'bounded_wrapper_required'
     assert wrapper['parent'] == item['driver_pid'], 'wrapper_driver_mismatch'
     durable_point(folder, {'campaign': args.campaign, 'window': args.window,
         'point': 'control-backup', 'created_at': time.time(),
@@ -499,7 +500,9 @@ def main():
         signal.alarm(0)
     except BaseException as error:
         print(json.dumps({'completed': False, 'failure_type': type(error).__name__,
-                          'failure_reason': str(error) if isinstance(error, AssertionError) else None}))
+                          'failure_reason': str(error) if isinstance(error, AssertionError) else None,
+                          'errno': getattr(error, 'errno', None),
+                          'source_line': traceback.extract_tb(error.__traceback__)[-1].lineno}))
         raise SystemExit(1)
 
 
