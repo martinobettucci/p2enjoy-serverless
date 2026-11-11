@@ -1954,7 +1954,7 @@ ouverts dans 078.5. Les preuves antérieures conservent leurs époques distincte
 
 Le parcours `node e2e/invocation-source-retention-volume.mjs --observer-refusal`
 est spécifié dans [son contrat](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#refus-réel-après-attachement-de-lobservateur).
-Il utilisera le SSO privé sur stdin, deux vrais handlers sans production de
+Il utilise le SSO privé sur stdin, deux vrais handlers sans production de
 10 000 appels, le refus naturel du même opérateur et le code 1 du helper avec
-restitution réelle. Implémentation et preuve E2E encore requises ; ne pas le
+restitution réelle. Implémenté, syntaxe contrôlée ; preuve E2E encore requise. Ne pas le
 compter comme succès de rétention ni comme test des délais 35/40 secondes.

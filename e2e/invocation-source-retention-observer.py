@@ -23,6 +23,15 @@ FIELDS = '''id,function_id,revision_id,instance_id,state,error_code,http_status,
     handler_started,completed_at,logs,trigger,resolved_code_hash,schedule_firing_id,schedule_slot'''
 
 
+def traced_process(pid):
+    process = Path('/proc', str(pid))
+    birth = process.joinpath('stat').read_text().rsplit(')', 1)[1].split()[19]
+    status = process.joinpath('status').read_text().splitlines()
+    tracer = int(next(line.split(':', 1)[1] for line in status if line.startswith('TracerPid:')))
+    assert process.joinpath('stat').read_text().rsplit(')', 1)[1].split()[19] == birth
+    return {'pid': pid, 'birth': birth, 'tracer_pid': tracer}
+
+
 def observe(args, receipt, target):
     assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
     assert str(UUID(args.campaign)) == args.campaign
@@ -91,12 +100,18 @@ def observe(args, receipt, target):
             time.sleep(.01)
         receipt.update(campaign=args.campaign, window=args.window, pid=pid, birth=birth,
                        container_id=current['id'], image=current['image'], running=active,
-                       inherited_guard_lock=True)
+                       inherited_guard_lock=True, operator=traced_process(os.getpid()))
         observer = BlockingNativeObserver(pid)
         observer.start()
-        assert Path('/proc', str(pid), 'stat').read_text().rsplit(')', 1)[1].split()[19] == birth
+        attached = traced_process(pid)
+        receipt['after_attach'] = attached
+        assert attached['birth'] == birth and attached['tracer_pid'] == os.getpid(), 'native_tracer_identity_changed'
         initial = state()
-        assert len(initial['invocations']) == 10002 and sum(v['completed_at'] is not None for v in initial['invocations']) == 10000
+        receipt['initial'] = initial
+        receipt['initial_counts'] = {'total': len(initial['invocations']),
+                                     'terminal': sum(v['completed_at'] is not None for v in initial['invocations'])}
+        atomic(target, receipt)
+        assert receipt['initial_counts'] == {'total': 10002, 'terminal': 10000}, 'retention_history_incomplete'
         assert initial['firing'] and initial['firing']['state'] == 'dispatched' and initial['firing']['completed_at'] is None
         source_id = initial['firing']['invocation_id']
         assert source_id in {v['id'] for v in active if v['trigger'] == 'schedule' and v['function_id'] == ids[1]}
@@ -150,9 +165,24 @@ def observe(args, receipt, target):
                     raise AssertionError('protected_gc_frontier_missed')
             observer.resume()
     finally:
-        if observer:
-            observer.detach()
-        reader.close()
+        try:
+            try:
+                if observer:
+                    observer.detach()
+            finally:
+                if receipt.get('inherited_guard_lock'):
+                    detached = traced_process(pid)
+                    receipt['after_detach'] = detached
+                    receipt['observer_memory_closed'] = observer is None or observer.memory is None
+                    assert detached['birth'] == birth and detached['tracer_pid'] == 0, 'native_tracer_retained'
+                    assert receipt['observer_memory_closed'], 'native_memory_descriptor_retained'
+        finally:
+            try:
+                reader.close()
+                receipt['reader_closed'] = reader.db is None
+            finally:
+                if receipt.get('inherited_guard_lock'):
+                    atomic(target, receipt)
 
 
 def main():
@@ -169,7 +199,8 @@ def main():
     try:
         print(json.dumps(observe(args, receipt, target)))
     except BaseException as error:
-        receipt.update(failure_type=type(error).__name__, reason=str(error) if isinstance(error, AssertionError) else None)
+        receipt.update(completed=False, failure_type=type(error).__name__,
+                       reason=str(error) if isinstance(error, AssertionError) else None)
         # Only an already validated window may receive a diagnostic file.
         if receipt.get('inherited_guard_lock'):
             atomic(target, receipt)

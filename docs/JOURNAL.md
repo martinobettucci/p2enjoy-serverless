@@ -6646,3 +6646,14 @@ refuse après attache ; conserver ce diagnostic avant assertion, mesurer le
 TracerPid final et fermer le lecteur dans un finally indépendant de detach.
 Le helper reste inchangé et échoue normalement avec restitution. Deux groupes
 ciblés prévus, aucune preuve de rétention ni d'expiration ; E2E à exécuter.
+
+Implémentation du même contrat : diagnostic écrit avant l'assertion, compte
+insuffisant nommé, TracerPid et fermeture mémoire/lecteur effectivement mesurés.
+Toute exception remet completed à false, y compris une erreur de nettoyage
+après acquisition des frontières. Le mode client conserve le code 1 et le
+stderr privé de l'assertion du helper puis contrôle l'absence physique des
+consommateurs et baux. Syntaxes Python/Node contrôlées ; E2E encore requis.
+
+Revue RO sans défaut bloquant ; son point P2 est intégré avant E2E : le client
+recoupe explicitement les déclencheurs HTTP/schedule, les deux UUID running
+avec initial, et le tir de B au créneau W dispatched/non clos lié à son appel.

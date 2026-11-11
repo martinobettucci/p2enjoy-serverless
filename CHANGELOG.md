@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+### Refus de l'observateur source — en qualification
+
+- Un mode explicite utilise deux vrais handlers et le refus naturel d'un
+  historique insuffisant. L'observateur conserve son attache et ses comptes
+  avant assertion, mesure le TracerPid après detach et ferme le lecteur SQLite
+  dans un finally indépendant. Le helper conserve son code 1 et sa restitution.
+  Implémenté, syntaxe contrôlée ; preuve E2E encore requise.
+
+
 ### Confirmation des signaux et fenêtres de restitution qualifiées
 
 - Le helper exige la fin du même pilote après le réveil pidfd, avec attente
