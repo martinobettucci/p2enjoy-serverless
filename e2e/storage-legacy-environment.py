@@ -716,6 +716,17 @@ def cleanup_history_consumers(item,journal):
     assert expected_runtime and re.fullmatch(r'sha256:[a-f0-9]{64}',expected_runtime)
     owned=docker(item,'ps','-aq','--filter','label=tech.p2enjoy.serverless.installation='+installation).split()
     records=[];consumers=set()
+    # @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#remplacements-après-suspension-et-inventaire-de-restitution
+    deadline_scope=item.get('source_observer_deadline_scope')
+    identities={'containers':[],'networks':[],'instances':[]} if deadline_scope else None
+    if deadline_scope:
+        assert item['mode']=='instance-limit' and item['guard_seconds']==2700
+        assert deadline_scope['mode'] in ('global-alarm','command-timeout')
+        assert set(functions)==set(deadline_scope['functions']) and len(functions)==2
+        identities['instances']=rows(item,state/'control.sqlite3',
+            'SELECT id,function_id,revision_id,state FROM execution_instances')
+        assert all(v['function_id'] in functions and v['revision_id'] in revisions and
+            revisions[v['revision_id']]['function_id']==v['function_id'] for v in identities['instances'])
     for identifier in owned:
         value=json.loads(docker(item,'inspect',identifier))[0];labels=value['Config']['Labels'];kind=labels.get('tech.p2enjoy.serverless.kind');mounts={v['Destination']:v['Source'] for v in value['Mounts']}
         assert labels['tech.p2enjoy.serverless.installation']==installation and value['Image']==expected_runtime
@@ -729,6 +740,12 @@ def cleanup_history_consumers(item,journal):
             assert candidate in candidates and candidates[candidate] in functions and code==state/'artifacts'/candidate/'code'
             consumer=None
         records.append({'id':value['Id'],'image':value['Image'],'kind':kind,'consumer_id':consumer})
+        if identities is not None:
+            assert kind=='instance'
+            identities['containers'].append({'id':value['Id'],'installation_id':installation,
+                'function_id':function,'revision_id':revision,'consumer_id':consumer,
+                'image':value['Image'],'code_path':mounts['/code'],
+                'network_ids':[v['NetworkID'] for v in value['NetworkSettings']['Networks'].values()]})
     networks=docker(item,'network','ls','-q','--filter','label=tech.p2enjoy.serverless.installation='+installation,'--filter','label=tech.p2enjoy.serverless.kind=instance-network').split()
     net_records=[]
     for identifier in networks:
@@ -738,6 +755,12 @@ def cleanup_history_consumers(item,journal):
         assert revisions[labels['tech.p2enjoy.serverless.revision']]['function_id']==labels['tech.p2enjoy.serverless.function']
         assert str(UUID(labels['tech.p2enjoy.serverless.instance']))==labels['tech.p2enjoy.serverless.instance']
         net_records.append(value['Id'])
+        if identities is not None:
+            identities['networks'].append({'id':value['Id'],'installation_id':installation,
+                'function_id':labels['tech.p2enjoy.serverless.function'],
+                'revision_id':labels['tech.p2enjoy.serverless.revision'],
+                'consumer_id':labels['tech.p2enjoy.serverless.instance'],
+                'container_ids':sorted(value['Containers'])})
     leases=rows(item,registry,'SELECT consumer_id,installation_id,function_id FROM leases') if registry.exists() else []
     for lease in leases:
         assert lease['installation_id']==installation and lease['function_id'] in functions
@@ -745,6 +768,7 @@ def cleanup_history_consumers(item,journal):
         declared=rows(item,state/'control.sqlite3','SELECT id FROM execution_instances WHERE id=? AND function_id=?',(lease['consumer_id'],lease['function_id']))
         assert declared or lease['consumer_id'] in consumers,'unowned_history_lease'
     item['history_cleanup']={'installation_id':installation,'containers':records,'networks':net_records,'leases':leases,'removed_containers':[],'removed_networks':[],'released_consumers':[]}
+    if identities is not None:item['history_cleanup']['native_identities']=identities
     atomic(journal,item)
     for value in records:
         docker(item,'rm','-f',value['id']);assert not docker(item,'ps','-aq','--filter','id='+value['id'])
@@ -1244,6 +1268,8 @@ def main():
                 # @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40
                 if 'deadline_fault' in request:
                     from source_observer_deadlines import run_command
+                    item['source_observer_deadline_scope']={'mode':request['deadline_fault'],'functions':identifiers}
+                    atomic(journal,item)
                     result = run_command(campaign, request['deadline_fault'], LOCK, identifiers, request['window'])
                 else:
                     result = json.loads(command(['python3','-B',str(BASE/'e2e/invocation-source-retention-observer.py'),

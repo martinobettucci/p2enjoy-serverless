@@ -29,7 +29,6 @@ async function capacity(){return operation('capacity');}
 async function remote(op,...args){try{const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,op,campaign,...args],{timeout:60000,maxBuffer:12*1024*1024});return JSON.parse(stdout.trim().split('\n').at(-1));}catch(error){error.operator=op;await writeFile(new URL('source-retention-operator-'+campaign+'-'+op+'.stderr',out),String(error.stderr??''),{mode:0o600});throw error;}}
 
 // @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40
-// @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40
 async function deadlineConsumersBefore(initial){
  const expected={campaign,functions:functions.map(v=>v.id),instances:initial.instances,runtime_image:initial.containers[0].image};
  const program='expected='+JSON.stringify(JSON.stringify(expected))+'\nexpected=__import__("json").loads(expected)\n'+String.raw`
@@ -131,10 +130,68 @@ async function proveObserverDeadline(initial){
  const before=observations.find(v=>v.scenario==='source-deadline-consumers-before').native,consumers=status.consumer_cleanup;assert(before.completed&&consumers);
  assert.equal(before.containers.length,2);assert.equal(before.networks.length,2);assert.equal(before.leases.length,2);
  for(const call of measured.initial.invocations){const prior=before.containers.find(v=>v.function_id===call.function_id);assert(prior);assert.equal(call.instance_id,prior.consumer_id);assert.equal(call.revision_id,prior.revision_id);}
- for(const current of consumers.containers){const prior=before.containers.find(v=>v.id===current.id);assert(prior);assert.equal(current.consumer_id,prior.consumer_id);assert.equal(current.image,prior.image);assert.equal(current.kind,'instance');}
- for(const identifier of consumers.networks)assert(before.networks.some(v=>v.id===identifier));
- for(const lease of consumers.leases)assert(before.leases.some(v=>v.consumer_id===lease.consumer_id&&v.function_id===lease.function_id&&v.installation_id===lease.installation_id));
- const physical=await physicalCleanup();observations.push({scenario:'physically-absent-after-deadline',physical,helper_exit_code:exitCode,helper_stderr_sha256:createHash('sha256').update(driverStderr).digest('hex'),retention_qualified:false});cleanup=true;
+ // @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#remplacements-après-suspension-et-inventaire-de-restitution
+ // A minimum of one legitimately creates new instances after protocol deadlines expire.
+ const native=consumers.native_identities;assert(native);assert.equal(consumers.installation_id,before.installation_id);
+ const known=new Map(before.containers.map(v=>[v.function_id,v]));
+ const sameFunction=value=>{const prior=known.get(value.function_id);assert(prior);assert.equal(value.revision_id,prior.revision_id);assert.match(value.consumer_id??value.id,/^[a-f0-9-]{36}$/);};
+ for(const instance of native.instances)sameFunction(instance);
+ for(const current of consumers.containers){
+  const value=native.containers.find(v=>v.id===current.id);assert(value);sameFunction(value);
+  assert.equal(value.installation_id,before.installation_id);assert.equal(current.consumer_id,value.consumer_id);
+  assert.equal(current.image,known.get(value.function_id).image);assert.equal(value.image,current.image);assert.equal(current.kind,'instance');
+  assert.equal(value.code_path,`/srv/p2enjoy-serverless/state/artifacts/${value.revision_id}/code`);
+  assert(native.instances.some(v=>v.id===value.consumer_id&&v.function_id===value.function_id&&v.revision_id===value.revision_id));
+  for(const id of value.network_ids)assert(native.networks.some(v=>v.id===id&&v.consumer_id===value.consumer_id&&v.function_id===value.function_id&&v.revision_id===value.revision_id));
+ }
+ assert.equal(native.containers.length,consumers.containers.length);assert.equal(new Set(native.containers.map(v=>v.id)).size,native.containers.length);
+ assert.deepEqual(native.networks.map(v=>v.id).sort(),[...consumers.networks].sort());
+ for(const network of native.networks){sameFunction(network);assert.equal(network.installation_id,before.installation_id);for(const id of network.container_ids)assert(native.containers.some(v=>v.id===id&&v.consumer_id===network.consumer_id));}
+ for(const lease of consumers.leases){assert.equal(lease.installation_id,before.installation_id);assert(known.has(lease.function_id));assert(native.instances.some(v=>v.id===lease.consumer_id&&v.function_id===lease.function_id)||native.containers.some(v=>v.consumer_id===lease.consumer_id&&v.function_id===lease.function_id));}
+ assert.deepEqual([...consumers.removed_containers].sort(),consumers.containers.map(v=>v.id).sort());assert.deepEqual([...consumers.removed_networks].sort(),[...consumers.networks].sort());assert.deepEqual([...consumers.released_consumers].sort(),consumers.leases.map(v=>v.consumer_id).sort());
+ const physical=await physicalCleanup(),exact=await deadlineResourcesAbsent(before,consumers);
+ observations.push({scenario:'physically-absent-after-deadline',physical,exact,helper_exit_code:exitCode,helper_stderr_sha256:createHash('sha256').update(driverStderr).digest('hex'),retention_qualified:false});cleanup=true;
+}
+
+// @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#remplacements-après-suspension-et-inventaire-de-restitution
+async function deadlineResourcesAbsent(before,consumers){
+ const native=consumers.native_identities,input={installation:before.installation_id,
+  containers:[...new Set([...before.containers,...native.containers].map(v=>v.id))],
+  networks:[...new Set([...before.networks,...native.networks].map(v=>v.id))],
+  instances:[...new Set([...before.containers.map(v=>v.consumer_id),...native.instances.map(v=>v.id),...native.containers.map(v=>v.consumer_id),...native.networks.map(v=>v.consumer_id),...consumers.leases.map(v=>v.consumer_id)])]};
+ const program='expected='+JSON.stringify(JSON.stringify(input))+'\nexpected=__import__("json").loads(expected)\n'+String.raw`
+import json,os,re,shlex,socket,sqlite3,subprocess,sys
+from contextlib import closing
+from pathlib import Path
+from uuid import UUID
+assert os.geteuid()==0 and socket.gethostname()=='infra-serverless'
+assert str(UUID(expected['installation']))==expected['installation']
+assert all(re.fullmatch('[a-f0-9]{64}',v) for key in ('containers','networks') for v in expected[key])
+assert all(str(UUID(v))==v for v in expected['instances'])
+settings={}
+for line in Path('/etc/spark/env').read_text().splitlines():
+ fields=shlex.split(line,comments=True)
+ if len(fields)==1 and '=' in fields[0]:
+  k,v=fields[0].split('=',1)
+  if k in ('SERVERLESS_STATE_HOST_PATH','SERVERLESS_STORAGE_ROOT_HOST'):settings[k]=v
+state=Path(settings['SERVERLESS_STATE_HOST_PATH']);storage=Path(settings['SERVERLESS_STORAGE_ROOT_HOST'])
+D=['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock']
+def docker(*args):return subprocess.check_output(D+list(args),text=True,timeout=15).split()
+containers=set(docker('ps','-aq','--no-trunc'));networks=set(docker('network','ls','-q','--no-trunc'))
+checks={'exact_containers_absent':not containers.intersection(expected['containers']),
+ 'exact_networks_absent':not networks.intersection(expected['networks']),
+ 'installation_containers_absent':not docker('ps','-aq','--filter','label=tech.p2enjoy.serverless.installation='+expected['installation']),
+ 'installation_networks_absent':not docker('network','ls','-q','--filter','label=tech.p2enjoy.serverless.installation='+expected['installation']),
+ 'all_instance_channels_absent':all(not os.path.lexists(state/'execution'/v) for v in expected['instances'])}
+sys.path.insert(0,'/srv/p2enjoy-serverless/e2e');from control_database import control_owner
+with control_owner(state/'control.sqlite3'),closing(sqlite3.connect('file:'+str(storage/'registry.sqlite3')+'?mode=ro',uri=True)) as db:
+ leases=list(db.execute('SELECT consumer_id,installation_id FROM leases'))
+checks['all_instance_leases_absent']=not {v[0] for v in leases}.intersection(expected['instances'])
+checks['installation_leases_absent']=all(v[1]!=expected['installation'] for v in leases)
+print(json.dumps({'completed':all(checks.values()),'checks':checks,'expected':expected}))
+`;
+ const result=await new Promise((resolve,reject)=>{const p=execFile('ssh',[...ssh,'python3 -B -'],{timeout:60000,maxBuffer:2*1024*1024},(error,stdout)=>error?reject(error):resolve(JSON.parse(stdout)));p.stdin.on('error',reject);p.stdin.end(program);});
+ observations.push({scenario:'deadline-exact-resource-absence',native:result});await save();assert(result.completed);return result;
 }
 
 async function api(url,{method='GET',body,bytes,status=200,headers={}}={}){const r=await admin.fetch(base+url,{method,data:bytes??body,headers:{Origin:base,'X-CSRF-Token':session?.csrf_token,...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});assert([status].flat().includes(r.status()),`${method} ${url}: ${r.status()}`);return r.json();}

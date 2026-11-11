@@ -8,8 +8,9 @@
   acteur joint et erreurs de nettoyage séparées. Implémenté ; E2E encore requis.
   Premier essai35 échoué sur l'inventaire des remplacements du minimum1,
   [conservé sans succès](docs/evidence/source-observer-deadline-failed-dev-2026-11-11.json).
-  Correction de preuve décidée : corrélation native des identités initiales et
-  tardives, absence physique de leur union ; aucun réglage moteur modifié.
+  Correction de preuve implémentée : corrélation native des identités initiales
+  et tardives, absence physique de leur union ; aucun réglage moteur modifié.
+  Syntaxes contrôlées, replays35/40 et refus encore requis.
 
 - Banc natif de mesure25s sur un vrai contrôle temporaire gelé par Docker,
   dégel indépendant28s et restitution120. Mesure primaire et erreurs de

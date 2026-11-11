@@ -6900,3 +6900,10 @@ corréler les remplacements aux mêmes fonctions/révisions/runtime/installation
 vérifier l'absence exacte de l'union initiale/tardive après restitution et garder
 les neuf contrôles existants. Aucun changement des minima ou temporisations,
 aucun retrait antérieur attribué à la garde. Rejouer35,40 puis refus sans option.
+
+Correction implémentée : reçu tardif réservé au scope35/40 dans le helper,
+labels/code/réseaux et instances natives conservés avant nettoyage, contrôle
+temporaire déjà retiré. Le client valide les identités et les retraits déclarés,
+puis relit Docker, registre et canaux pour l'union initiale/tardive et toute
+l'installation. Les neuf contrôles existants restent séparés. Syntaxes Python,
+quatre programmes embarqués et Node valides ; aucun succès E2E encore acquis.

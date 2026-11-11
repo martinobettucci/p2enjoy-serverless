@@ -2088,3 +2088,11 @@ statuts, recoupe les deux handlers au point de porte et l'absence physique
 après restitution. Deux groupes attendus par mode. Implémenté, non encore
 qualifié en E2E ; aucune rétention ni réussite métier déduite de ces pannes.
 Contrat : [bornes source35/40](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40).
+
+Le premier essai35 est conservé comme échoué : après expiration des handlers,
+les minima créent deux remplacements, rejetés à tort par l'assertion initiale.
+Le reçu natif des seuls modes35/40 porte désormais les identités tardives,
+labels, montage et réseaux ; le client les corrèle aux mêmes fonctions/révisions
+et exige l'absence exacte de l'union initiale/tardive après restitution, en plus
+des neuf contrôles physiques existants. Minima et délais restent inchangés.
+Correction implémentée, replays E2E35/40 et refus sans option encore requis.

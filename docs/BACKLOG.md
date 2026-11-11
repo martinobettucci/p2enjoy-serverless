@@ -1748,8 +1748,9 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   zéro groupe qualifié : alarme35,719s et restitution acquises, mais assertion
   d'inventaire rejetant les remplacements légitimes du minimum1. Correction
   décidée dans le contrat : identités natives initiales et tardives corrélées
-  aux mêmes fonctions/révisions, puis absence physique de leur union. Code et
-  replays35/40/refus requis ; neuf contrôles physiques non atteints dans cet essai.
+  aux mêmes fonctions/révisions, puis absence physique de leur union. Code
+  corrigé et syntaxes contrôlées ; replays35/40/refus requis. Les neuf contrôles
+  physiques ne sont pas atteints dans l'essai échoué.
 - [ ] Attente native partagée de 25 s : défaut reproduit puis borne corrigée
   qualifiée sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
   avant detach. Le waitpid bloquant dépassait sa borne ; la correction attend
