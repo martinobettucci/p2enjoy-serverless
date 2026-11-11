@@ -60,3 +60,30 @@ aucun nouveau lecteur SQL ou endpoint applicatif. Rapports locaux UUID privés,
 numéros/UUID/dates conservés, sortie de progression bornée. Identifiants SSO
 par stdin privée et jeton en mémoire seulement. Sources/images avant et après
 doivent concorder ; aucune nouvelle UI, migration, image ou variable officielle.
+
+## Franchissement réel qualifié
+
+La [preuve228a99c](evidence/invocation-retention-volume-dev-2026-11-11.json)
+passe trois groupes sur337sources, même imagec59b8616.10016 handlers réussis,
+5008 par fonction. Le relevé avant borne conserve9984 observations ; après
+les32 appels supplémentaires et la maintenance normale, exactement10000 UUID
+restent, les16 plus anciens sont absents. Le tri par dates réelles/id et les
+comptes natifs par fonction sont rapprochés de toutes les réponses HTTP.
+Les10016 observations proviennent exactement des deux instances préchauffées.
+
+Deux purges publiques terminées, code/volumes/conteneurs/réseaux/canaux absents,
+restitution des originaux et timer/service joints. Même contrôle/image et
+référence, redémarrage attendu du contrôle ; données, artefacts et configurations
+officielles conservés. Le parcours complet dure1554,343s, préparation et
+nettoyage compris ; aucun débit stable ou maximum de plateforme n'en est déduit.
+
+Le rapport intégral de10265074 octets est conservé dans
+[l'archive JSON gzip](evidence/invocation-retention-volume-dev-2026-11-11.raw.json.gz),
+sans secret. SHA du JSON décompressé et de l'archive sont dans la preuve ; gzip
+est déterministe (mtime0). Il contient les10016 réponses et les deux relevés
+natifs complets. Les trois groupes ne sont pas recomptés par ses sous-assertions.
+
+Portée : borne numérique des observations HTTP terminales ordinaires. Les
+sources de tir non clos sous cette borne, les10000 tirs planifiés, les sept
+jours et les replays gardés restent à qualifier. Les régressions de restitution
+du helper modifié sont en cours et gardent leur propre preuve.

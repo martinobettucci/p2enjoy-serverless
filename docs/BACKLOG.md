@@ -1546,9 +1546,12 @@ conservés en privé avec5982 artefacts et images vérifiées. Borne commune d'�
 18 novembre2026 à04:05:13.358459UTC ; vieillissement et replay restent à qualifier.
 La [borne globale des invocations](INVOCATION_RETENTION_VOLUME.md) est spécifiée :
 deux fonctions/5008 appels réels chacune,9984 observations avant borne puis10000
-sur10016, installation isolée existante et garde1800s explicite. Client et option
-implémentés, syntaxe contrôlée ; preuve DEV et régressions encore requises.
-Ne qualifie ni la borne des tirs ni les sept jours.
+sur10016, installation isolée existante et garde1800s explicite. La
+[preuve228a99c](evidence/invocation-retention-volume-dev-2026-11-11.json) passe
+trois groupes réels sur337sources :10016 handlers, exacts10000 survivants,
+deux purges et restitution complète. Rapport intégral compressé conservé.
+Régressions du helper en cours. Sources de tir non clos sous borne numérique,
+borne des tirs planifiés et sept jours restent à qualifier.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.
@@ -1948,6 +1951,9 @@ Critères d'acceptation :
 
 - [ ] SLS-091.1 Rétention à sept jours et 10 000 observations prouvée par franchissement réel des
   deux bornes.
+  La [borne numérique HTTP ordinaire](evidence/invocation-retention-volume-dev-2026-11-11.json)
+  est qualifiée par10016 appels/5008 par fonction dans SLS-078 ; source protégée
+  et preuve des sept jours restent requises avant de cocher ce critère.
 - [ ] SLS-091.2 Chemins résiduels de nettoyage et de reprise après interruption prouvés (SIGKILL
   pendant nettoyage, reprise sans doublon ni perte).
 

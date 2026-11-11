@@ -6016,3 +6016,13 @@ fixe le relevé9984, puis10016réponses et exacts10000 UUID les plus récents,
 nettoyage/public et restitution. Réutiliser capacity et la garde existants ;
 seule option explicite1800s ajoutée, durées900/120/partial60 inchangées et à
 rejouer pour les chemins touchés. Décision avant code ; aucune preuve acquise.
+
+Volume228a99c réussi : trois groupes,337sources et mêmec59b8616. Deux fonctions
+cpu0,5/min1 préchauffées,10016 vrais handlers/5008 chacune ;9984 lignes avant
+borne puis exacts10000 UUID les plus récents,16 retirés. Deux seuls instance_id
+pour toutes les lignes, logs échantillons et réponses corrélés. Deux purges
+publiques, absence physique, originaux/data/artefacts/configuration restitués,
+garde1800 jointe ;1554,343s incluant préparation/nettoyage. Rapport intégral
+10Mo archivé en gzip déterministe, SHA conservés. Régressions120/partial lancées
+en série après fin du volume ; ne pas conclure avant leur jonction.
+Source protégée sous borne numérique, borne des tirs et sept jours restent ouverts.

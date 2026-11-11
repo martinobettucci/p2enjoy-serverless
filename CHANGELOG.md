@@ -6,8 +6,10 @@
 
 - Client de10016 appels réels répartis sur deux fonctions, relevés avant/après
   la borne globale10000 et nettoyage avec restitution de l'installation d'origine.
-  Garde explicite1800s pour ce scénario ; autres durées conservées. Implémenté,
-  syntaxe contrôlée ; preuve DEV et régressions du helper encore requises.
+  Garde explicite1800s pour ce scénario ; autres durées conservées. Trois groupes
+  réels qualifiés sur337sources : exacts10000 survivants sur10016, deux purges et
+  restitution des originaux. Régressions du helper en cours ; âge, sources
+  protégées sous borne et plafond des tirs restent à qualifier.
 
 ### Qualification distincte de la concurrence planifiée
 
