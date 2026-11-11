@@ -1,10 +1,12 @@
 # P2Enjoy Serverless
 
-Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) sont implémentées,
-avant déploiement et qualification : attente de droits explicite, azp ID token,
-réponse temporaire JWKS et renouvellement reçu conservé chiffré sans autorisation.
-Le client E2E attend l'expiration réelle du JWT ; les profils sans droits et la
-rotation réelle demeurent des prérequis externes, sans preuve déclarée à ce stade.
+Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) sont déployées en DEV
+sur e81007c5. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
+JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
+manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans
+droits, négatifs azp/aud et rotation/pending503 restent non éprouvés ; l’unité
+reste ouverte. Le manuel servi correspond à 16 chapitres et 57 paragraphes.
 
 **La plateforme demandée n'est pas encore entièrement livrée.** Favoris,
 actions en masse, éditeur de code intégré, client HTTP par fonction, journaux
@@ -25,7 +27,7 @@ SLS-100 est clôturée ; les autres demandes conservent leur état au registre.
 
 Le [premier checkpoint de planification](docs/evidence/schedules-checkpoint-dev-2026-11-10.json)
 qualifie22 groupes réels :6 ciblés,8 du manuel,8 publics. La facette Planifications
-est disponible ; le manuel servi correspond à16 chapitres et56 paragraphes.
+est disponible ; le manuel servi correspond à 16 chapitres et56 paragraphes.
 Un [complément de cinq groupes](docs/evidence/schedule-versions-dev-2026-11-10.json)
 qualifie les cycles de promotion/retour de hash, le retrait des crons et l'arrêt
 après désactivation ou suppression, en conservant les appels admis.

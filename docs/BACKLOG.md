@@ -118,7 +118,7 @@ la réponse est livré sans attendre.
 | Origine des images de conteneur des Serverless Jobs | 3 (choix de produit) | [SLS-088](#sls-088) | Tout le reste du registre ; les jobs de console (SLS-081) sont distincts |
 | Budget de cellule CPU/RAM pour les minima de la référence (au moins 1,5 CPU et 2 Gio) | 4 (proposition `.?` au propriétaire du SPARK) | La campagne complète de [SLS-080](#sls-080) | Adaptateur, fixtures, 12 des 13 fonctions à un budget plus bas, preuves hors budget |
 | Autorité d'installation temporaire pour rejouer le guide | 4 | [SLS-079](#sls-079) | Rédaction du guide, tableau de configuration comparé au code |
-| Comptes SSO de test (non vérifié, vérifié, admin) et rotation de clé réelle | 4 | Preuves de [SLS-089](#sls-089) | Correctifs et tests de composants |
+| Deux profils SSO (non vérifié, verified seul), refus azp/aud sous signature réelle et rotation de clé maîtrisée | 4 | Critères 089.1/.2/.3 de [SLS-089](#sls-089) | Correctifs déployés, nominal admin/renouvellement et300 s qualifiés ; vues publiques inspectées |
 
 ## Suivi des demandes du responsable
 
@@ -2170,9 +2170,11 @@ conteneur de lot sur le SPARK DEV.
 <a id="sls-089"></a>
 ## SLS-089 — Défauts SSO : attente, azp, rotation de clé
 
-Statut : [~] — corrections implémentées selon
-[SSO_SESSION_RECOVERY](SSO_SESSION_RECOVERY.md) ; déploiement et preuves à venir.
-Les profils réels sans droits et la rotation réelle restent tributaires du cas4.
+Statut : [~] — corrections déployées en DEV sur e81007c5 ;
+[preuve partielle DEV](evidence/sso-session-recovery-dev-2026-11-11.json) : 33 groupes sur 359 sources, 30 captures recoupées.
+089.4 est qualifié ; 089.1/.2/.3 restent ouverts. Les vrais profils sans droits,
+les refus azp/aud sous signature réelle et la rotation/pending503 restent à
+éprouver ; les accès externes indispensables relèvent du cas 4.
 Nature : Corriger. Dépend de : SLS-020. Ordre : 2. Reste à faire de SLS-020.
 Contrat : [sso](sso.md), [CONTROL](CONTROL.md), [PLATFORM](PLATFORM.md),
 [SSO_SESSION_RECOVERY](SSO_SESSION_RECOVERY.md).
@@ -2184,7 +2186,10 @@ Critères d'acceptation :
 - [ ] SLS-089.2 L'`azp` de l'ID token est contrôlé en complément de l'audience.
 - [ ] SLS-089.3 Un nouveau `kid` qui arrive dans la fenêtre anti-refresh JWKS de deux secondes
   donne une réponse temporaire qui préserve la session au lieu de la fermer.
-- [ ] SLS-089.4 La durée de 300 secondes se mesure sur le jeton réellement émis.
+- [x] SLS-089.4 La durée de 300 secondes se mesure sur le jeton réellement émis.
+  [preuve partielle DEV](evidence/sso-session-recovery-dev-2026-11-11.json) : deux JWT RS256 vérifiés, exp − iat = 300, nouveau iat après
+  l’expiration du premier ; 300,659 s mesurées, cookie/sujet/CSRF et échéance
+  absolue conservés, puis ancien cookie refusé après déconnexion.
 
 Tests exigés :
 
@@ -2469,7 +2474,7 @@ Critères d'acceptation :
 - [x] SLS-100.1 Remplacer la foudre dans toutes les utilisations de la marque
   applicative courante, notamment le favicon, l'accueil de connexion et la
   console. Conserver une seule source SVG pour ces représentations.
-- [x] SLS-100.2 Vérifier la lisibilité du motif à16 et32px, son contraste,
+- [x] SLS-100.2 Vérifier la lisibilité du motif à 16 et32px, son contraste,
   l'absence de débordement sur ordinateur/mobile et le libellé accessible de la
   marque ; les images décoratives restent ignorées des lecteurs d'écran.
 - [x] SLS-100.3 Construire et déployer sur le SPARK DEV, puis parcourir l'accueil,

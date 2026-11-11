@@ -19,7 +19,12 @@ Le rapport UUID conserve explicitement les preuves absentes : comptes sans
 `verified`, `verified` seul, refus azp discriminant et rotation réelle de clé.
 Ces prérequis externes sont dans SLS-089 ; aucun skip ne les remplace. Les six
 JPEG demandent leur inspection distincte. Contrat :
-[SSO_SESSION_RECOVERY](../docs/SSO_SESSION_RECOVERY.md).
+[SSO_SESSION_RECOVERY](../docs/SSO_SESSION_RECOVERY.md). La
+[preuve partielle DEV](../docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+passe ces 8 groupes puis 25de régression sur 359 sources et e81007c5. 30 captures
+recoupées, dont2du chapitre Se connecter ajoutant0 groupe. Les300 s et le
+renouvellement après expiration initiale sont qualifiés ; les profils/rotation
+et refus azp/aud restent non éprouvés, sans prétendre clore SLS-089.
 
 ## Identité visuelle Serverless
 

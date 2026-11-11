@@ -57,8 +57,11 @@ comptent jusqu'à libération confirmée ; contrôle et validations sont distinc
 ## Connexion
 
 Les corrections SLS-089 sont implémentées selon
-[attente et reprise SSO](SSO_SESSION_RECOVERY.md) ; leur déploiement et leurs
-preuves restent à faire. Le backlog garde leurs critères ouverts.
+[attente et reprise SSO](SSO_SESSION_RECOVERY.md), déployées sur e81007c5. La
+[preuve partielle DEV](evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes : nominal administrateur,300 s
+sur les vrais JWT et renouvellement après expiration initiale, attente publique
+et régressions. Le backlog garde089.1/.2/.3 ouverts : les vrais profils sans
+droits, refus azp/aud et rotation/pending503 restent à éprouver.
 
 L'intégration DEV suit le [contrat du client créé](OIDC_DEV.llms.txt).
 Le fournisseur annonce des jetons d'accès de 300 secondes ; l'application

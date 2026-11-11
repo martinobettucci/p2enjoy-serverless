@@ -2,11 +2,13 @@
 
 ## [Non publié]
 
-- SLS-089 : attente de droits, validation azp de l'ID token et reprise sous
-  indisponibilité JWKS implémentées après contrat dédié. Renouvellement reçu
-  conservé chiffré sans autorisation tant qu'il n'est pas validé. Client E2E
-  et lecteur du vrai JWT prêts ; déploiement et preuves à venir. Les profils
-  SSO sans droits et la rotation réelle demandent un accès externe.
+- SLS-089 : corrections déployées en DEV sur e81007c5 après contrat dédié.
+  [33groupes réels](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+  passent sur 359 sources : attente publique desktop/mobile, vrai SSO admin,
+  deux JWT signés de 300 s, renouvellement après expiration et déconnexion, puis
+  25 régressions. 30 captures recoupées ; manuel : 16 chapitres et 57 paragraphes.
+  Le critère 089.4 est qualifié ; vrais profils sans droits, refus azp/aud et
+  rotation/pending503 restent non éprouvés. L’unité089 reste ouverte.
 
 - Icône Serverless déployée en DEV : trois blocs reliés remplacent la foudre
   dans le favicon et la marque de l'accueil/console, via un SVG unique.

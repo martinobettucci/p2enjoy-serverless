@@ -1,5 +1,13 @@
 # Plan de contrôle
 
+SLS-089 est déployée sur e81007c5, après sauvegarde native SQLite et sans
+changement de schéma ou configuration de cellule. La [preuve partielle](../docs/evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes
+sur 359 sources : 8 ciblés SSO, 8 du manuel, 8 publics, 9 de connexion. 30 captures sont recoupées,
+manuel : 16 chapitres et 57 paragraphes. Seul 089.4 est qualifié : durée réelle 300 s et
+renouvellement après expiration. Les profils sans droits, négatifs azp/aud et
+rotation/pending503 restent ouverts. Les checkpoints ci-dessous gardent leur
+image et leur époque historiques.
+
 Le contrôle008 est déployé en qualification DEV selon
 [FUNCTION_VERSION_EXECUTION](../docs/FUNCTION_VERSION_EXECUTION.md). L’upload
 prépare un hash et la promotion explicite choisit la cible sans tag ; pools et

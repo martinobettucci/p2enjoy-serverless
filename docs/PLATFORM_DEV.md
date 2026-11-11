@@ -908,3 +908,15 @@ restent identiques.29groupes E2E passent et26captures sont inspectées. Référe
 5982artefacts et fichiers officiels conservés ; services sains et ressources
 actives nulles. Retour arrière de cette livraison visuelle : recréer le contrôle
 avec l'image précédentec59b8616 ; aucune restauration de base n'est nécessaire.
+
+## Corrections SSO déployées le11 novembre2026
+
+Le contrôle e81007c5 est sain après sauvegarde native de la base, neuf migrations
+inchangées, et source 359 au commit1ac2523. La [preuve partielle DEV](evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes :
+8 ciblés, 8 du manuel, 8 publics, 9 de connexion. Deux JWT réellement vérifiés portent300 s ;
+le refresh est demandé après l’expiration initiale, mêmes cookie/sujet/CSRF et
+échéance absolue. 30 captures recoupées.34 fichiers backend et4 ressources web servis
+concordent avec la construction ;5 982 artefacts, fichiers officiels et référence
+conservés, actifs/baux/préparations nuls, aucune garde. Seul le critère 089.4 est
+clos ; les vrais profils sans droits, refus azp/aud, rotation et pending503
+restent à éprouver. Le détail du déploiement et du backup est dans la preuve.

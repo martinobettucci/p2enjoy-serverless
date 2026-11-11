@@ -92,12 +92,24 @@ restent conservées dans leur époque, avant ce changement de marque.
 ## Attente de droits SSO en qualification SLS-089
 
 Le [contrat](SSO_SESSION_RECOVERY.md#attente-de-droits) réutilise la carte publique
-448px, sa marque unique et ses espacements. L'attente porte un titre explicite,
-un texte neutre et l'action **Vérifier mon accès** ; elle ne porte ni alerte rouge
-ni navigation d'administration. La vérification technique temporairement
-indisponible conserve une erreur et une action **Réessayer**. Ces nouveaux états
-sont implémentés et attendent leurs captures ; les profils réels manquants ne
-sont pas remplacés par une capture d'URL publique.
+448px, sa marque unique et ses espacements. L’attente porte un titre explicite,
+un texte neutre et l’action **Vérifier mon accès**, sans alerte rouge ni navigation
+d’administration. Elle ne consulte ni session ni CSRF, même ouverte manuellement
+par un administrateur. La vérification technique temporairement indisponible
+propose **Réessayer** ; sa branche 503 réelle n’est pas encore qualifiée.
+
+La [preuve partielle DEV](evidence/sso-session-recovery-dev-2026-11-11.json) sur e81007c5 passe 33 groupes : 8 ciblés,
+8 du manuel, 8 publics, 9 de connexion. 30 captures recoupées : 6 ciblées par le principal
+(dont console après renouvellement identique par SHA à l’initiale), 24 ouvertes
+individuellement par le vérificateur (16 JPEG manuel, 6 PNG connexion, 2 JPEG du
+chapitre Se connecter). Les deux vues de chapitre ajoutent 0 groupe. Manuel servi :
+16 chapitres et 57 paragraphes. Attente neutre lisible en 1440×1000 et 390×844, actions
+visibles, aucun défaut visuel bloquant confirmé ; texte à 200 % et tableau contenus.
+Les 6 PNG login n’ont pas de SHA déclaré dans leur rapport : leurs octets actuels
+et mtime dans la phase sont recoupés séparément. Les autres JPEG correspondent
+aux SHA déclarés. Aucune vue 503 réelle, aucun refus de profil sans rôle et aucune
+rotation de signature ne sont prouvés par ces images. Les interactions restent
+étayées par les assertions E2E. Les captures historiques gardent leur époque.
 
 ## Noms longs dans la navigation
 

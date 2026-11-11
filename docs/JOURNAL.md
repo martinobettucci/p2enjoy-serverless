@@ -7222,3 +7222,24 @@ rotation réelle requièrent toujours un accès externe ; aucun faux fournisseur
 n'est prévu. La durée300s doit être mesurée sur le vrai jeton, avec une attente
 réelle. L'exploration déléguée reste en lecture seule ; le principal tranche,
 écrit et opère tous les services/tests en série.
+
+## Qualification partielle SLS-089 et conservation DEV
+
+Le11 novembre2026, les corrections du commit1ac2523 sont construites puis
+déployées sur e81007c5 après backup natif. La [preuve partielle DEV](evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes
+(8 ciblés, 8 du manuel, 8 publics, 9 de connexion),359 sources identiques avant/après chaque
+phase. Deux vrais JWT RS256 portent exp − iat = 300 ; iat renouvelé après expiration
+initiale,300,659 s mesurées, cookie/sujet/CSRF et échéance absolue conservés puis
+déconnexion définitive. 30 captures recoupées : 6 du principal et24 du vérificateur ;
+les6 PNG login sont liés par octets/mtime de phase, pas par SHA déclaré du client.
+Les2 captures de chapitre ajoutent 0 groupe. Manuel compilé16 chapitres et 57 paragraphes.
+34 fichiers backend/4 ressources web recoupés ;5 982 artefacts et fichiers officiels conservés, 2 services
+sains, actifs/baux nuls et aucune garde. Le préflight de copie avait refusé
+PLATFORM/sso absents ; absence vérifiée en lecture seule, puis copie effectuée,
+sans mutation avant le refus.089.4 est clos,089.1/.2/.3 restent ouverts : profils
+réels sans droits, refus azp/aud, rotation et pending503 non éprouvés. Les
+corrections de revue portent sur absence de fetch session en attente, concordance
+du sujet avant les rôles, puis attente après l’expiration effective. Aucun mock
+ni skip, aucune API admin Keycloak. La source indexée DESIGN_SYSTEM_APP est
+actualisée après campagne pour ces résultats ; le pont documentaire est consigné
+dans la preuve, sans modification de code ou d’image servie.

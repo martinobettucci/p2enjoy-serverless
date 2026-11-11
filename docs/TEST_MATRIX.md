@@ -532,3 +532,16 @@ les trois autres ressources web restent identiques. Le manuel sert16chapitres/
 56paragraphes conformes à sa source. Configuration, référence et5982artefacts
 conservés ;2services sains, actifs/baux nuls et aucune garde. SLS-100 clôturée,
 la campagne complète de plateforme et l'âge réel de078 restent distincts.
+
+## SSO : durée réelle et renouvellement, SLS-089 partielle
+
+`node e2e/sso-session-recovery.mjs` reçoit le JSON SSO par stdin privée. Huit
+groupes réels, puis8 du manuel/8 publics/9 de connexion, soit33 au gel de 359 sources, commit 1ac2523 et image
+e81007c5 : [preuve partielle DEV](evidence/sso-session-recovery-dev-2026-11-11.json). Les deux JWT signés mesurent300 s ;
+300,659 s d’attente et inspection, nouveau iat après expiration initiale, même
+cookie/sujet/CSRF et échéance absolue, déconnexion puis ancien cookie refusé.
+Les4 attentes sont des pages publiques, sans décision de rôle. 30 captures
+recoupées, dont2de chapitre ajoutant0 groupe ; 16 chapitres et 57 paragraphes compilés.
+Les négatifs azp/aud, les vrais profils sans droits et la rotation/pending503
+restent non éprouvés ; aucune vue 503 réelle inspectée. L’unité089 reste [~],
+son seul critère 089.4 passe [x].
