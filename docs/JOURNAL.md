@@ -6191,3 +6191,18 @@ SHA/identité, la partielle protégée après jonction. Le secours reste un éch
 Contrôles syntaxiques réussis ; aucune preuve E2E de cette nouvelle frontière
 encore acquise. Prochaine action : revue bornée, livraison des sources identiques
 sur le seul SPARK DEV puis cinq groupes réels en série.
+
+
+### Essai de copie interrompue08:40UTC et groupe orphelin
+
+c5fcb1d,342sources identiques avant/après : trois groupes passent (SSO,256 tirs,
+copie complète), le quatrième échoue après mort du pilote ; secours restitue
+originaux, configuration, référence et santé. Le reçu partiel confirme1page sur141
+copiée avant SIGSTOP ; aucune qualification de perte retenue. Le diagnostic natif
+reproduit SIGHUP lors de l'orphelinage du groupe créé par timeout (worker4096844,
+groupe4096843), sans application/service modifié. Décision écrite avant code :
+foreground uniquement pour capture-firing-history, même verrou et délai40s ;
+aucun traitement artificiel des signaux. Conserver aussi type/errno/ligne des
+futurs échecs opérateur. Preuve échouée et brut compressé conservés ; source6:15
+intacte. Rejouer les cinq groupes après correction, jamais déduire leur succès
+du seul diagnostic noyau.

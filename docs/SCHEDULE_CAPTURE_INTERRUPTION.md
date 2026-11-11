@@ -72,3 +72,25 @@ Cette preuve qualifie l'interruption pendant la copie CONTROL et l'attente du
 verrou hérité. Elle ne vaut ni rétention10000, ni sept jours, ni interruption à
 chaque instruction du copieur. Le scénario et les régressions pertinentes doivent
 passer avant de qualifier cette frontière ; SLS-078 reste ouverte.
+
+
+## Groupe de processus du copieur
+
+Le premier essai c5fcb1d produit les256 tirs08:40UTC et sa capture complète,
+puis perd le copieur après SIGKILL du pilote. Le détail d'erreur du premier
+opérateur n'est pas conservé ; la fenêtre est restituée par secours, essai échoué.
+Un diagnostic natif séparé, sans application ni service modifié, reproduit le
+mécanisme : enfant en State=T, mort de son parent puis SIGHUP reçu dans le groupe
+créé par timeout. Un groupe arrêté devenu orphelin ne conserve pas son SIGSTOP.
+
+Décision avant correction : la seule commande capture-firing-history emploie
+`timeout --foreground --signal=KILL 40s`. Le copieur et le wrapper héritent
+encore du même verrou et du groupe de la session SSH ; le wrapper ne crée plus
+le groupe dont l'orphelinage tue le copieur. Le mode normal emploie le même
+lancement ; les autres commandes gardent leur comportement. La commande native
+est un copieur Python sans descendants pendant backup ; ses sous-commandes de
+précontrôle sont RO et bornées. SIGKILL du copieur et jonction du wrapper restent
+obligatoires avant restitution. Aucun gestionnaire qui simule ou masque un
+signal n'est ajouté au copieur. La preuve doit constater que State=T persiste
+après perte du pilote, puis exécuter tous les cinq groupes et les régressions.
+Les erreurs natives suivantes conservent type, errno et ligne, sans donnée privée.

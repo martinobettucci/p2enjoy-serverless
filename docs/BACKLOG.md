@@ -1599,6 +1599,9 @@ initial encore requis, aucune rétention déduite du préflight.
 L'[interruption du copieur de capture](SCHEDULE_CAPTURE_INTERRUPTION.md) est
 spécifiée avant code : nominal puis perte réelle pendant SQLite backup,
 garde vivante bloquée par le verrou, SIGKILL/jonction et restitution indépendante.
+Le premier essai c5fcb1d passe trois groupes puis échoue après perte du pilote ;
+le groupe timeout orphelin reçoit SIGHUP, reproduit par diagnostic natif.
+Le lancement foreground est décidé avant correction ; qualification encore requise.
 Le mode --copy-loss est implémenté, non encore qualifié ; il ne remplace ni le seed-loss déjà prouvé
 ni la source scellée6:15UTC.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
