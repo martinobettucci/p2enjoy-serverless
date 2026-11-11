@@ -1,6 +1,6 @@
 # Qualification de la plateforme
 
-## Sources et brouillons de code — campagne en préparation
+## Sources et brouillons de code — première tranche qualifiée
 
 `node e2e/code-editor.mjs` reçoit le JSON SSO sur stdin privée. Il utilise le
 vrai accueil puis SSO, les vraies API HTTPS et les conteneurs Docker. Le helper
@@ -16,8 +16,14 @@ rétention de base supprimée et purges publiques. Le lecteur natif accepte le
 seul UUID namespace et ne renvoie ni source, ni chiffrement, ni jeton.
 Les rapports UUID ne sont pas écrasés. Une erreur est conservée ; aucun rejeu
 silencieux. Quotas globaux/par acteur/chiffrement, interruptions, purge contre
-lecteur et interface restent des preuves distinctes. Aucun résultat annoncé
-avant exécution. Contrat : [CONSOLE_EDITOR](../docs/CONSOLE_EDITOR.md).
+lecteur et interface restent des preuves distinctes. La [première tranche](../docs/evidence/code-editor-server-dev-2026-11-12.json)
+passe20groupes ciblés puis25régressions sur367sourcesa983b2f et7c5c6f4b,
+22captures inspectées, huit invocations natives recoupées, quatre fonctions
+des deux passages purgées et5982artefacts originaux intacts. Le premier passage
+a échoué au13e groupe sur le client ClientRequest45s ; cet échec est conservé
+et n’ajoute aucun groupe aux45réussis. Le vrai client TLS corrigé reçoit429
+en107ms sans corps et quatre408 après30s ; les cinq UUID sont recoupés dans
+les logs serveur. Seul070.7 est clôturé. Contrat : [CONSOLE_EDITOR](../docs/CONSOLE_EDITOR.md).
 
 ## Attente de droits et renouvellement SSO
 

@@ -62,7 +62,7 @@ déjà prise et documentée, avec motif).
 | Fonctionnalité Scaleway | État de la plateforme | Unité ou décision |
 | --- | --- | --- |
 | Déploiement par Serverless Framework | **Livré** : adaptateur lisant `serverless.yml` sans exécuter de plugin | [SLS-030](BACKLOG.md#sls-030), [SLS-080](BACKLOG.md#sls-080) |
-| Éditeur de code en ligne et import ZIP | ZIP **livré** ; éditeur **à livrer** | [SLS-070](BACKLOG.md#sls-070) |
+| Éditeur de code en ligne et import ZIP | ZIP **livré** ; serveur de brouillons partiellement qualifié (45groupes), éditeur UI **à livrer** | [SLS-070](BACKLOG.md#sls-070) |
 | Mise à jour progressive sans interruption | **Livré** : promotion atomique, appels admis terminés, instance précédente drainée | [SLS-074](BACKLOG.md#sls-074) |
 | Répartition du trafic entre versions | **Partiel** : appel épinglé par hash et pilote, sans pourcentage | [SLS-086](BACKLOG.md#sls-086) |
 | Terraform / OpenTofu | **Sans objet** : l'API REST du contrôle suffit à l'automatisation | — |

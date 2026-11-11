@@ -1,7 +1,13 @@
 # P2Enjoy Serverless
 
-Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) sont déployées en DEV
-sur e81007c5. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+Le [serveur de l’éditeur SLS-070](docs/CONSOLE_EDITOR.md) est déployé en DEV sur
+7c5c6f4b avec dix migrations. Sa [première preuve](docs/evidence/code-editor-server-dev-2026-11-12.json)
+passe45groupes réels, dont20ciblés et25régressions, et huit invocations Docker
+CJS/ESM avec YAML packagé. La facette de console, les quotas globaux et les
+interruptions restent à réaliser/qualifier ; seul le critère070.7 est clôturé.
+
+Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
+sur e81007c5 et sont conservées dans l’image courante7c5c6f4b. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
 passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
 JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
 manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans
@@ -19,10 +25,12 @@ ces demandes. Voir [l'état réel de livraison](docs/DEMANDES_ET_LIVRAISON.md) e
 [registre des unités ouvertes](docs/BACKLOG.md#registre-des-unités-ouvertes), qui
 porte l'ordre de reprise, avant les checkpoints techniques détaillés ci-dessous.
 
-L'[icône Serverless](docs/evidence/application-icon-dev-2026-11-11.json) est remplacée et déployée
-sur779aef7b : trois blocs reliés, source commune au favicon et à la marque.
+L'[icône Serverless](docs/evidence/application-icon-dev-2026-11-11.json) remplace la foudre
+par trois blocs reliés, source commune au favicon et à la marque. Qualifiée
+sur779aef7b, elle est conservée dans l’image courante.
 29groupes réels passent,26captures sont inspectées, contraste9,03:1 et lisibilité
-16/32px recoupés. Le backend et les autres ressources web restent identiques.
+16/32px recoupés. Durant cette qualification dédiée, le backend et les autres
+ressources web étaient identiques avant/après.
 SLS-100 est clôturée ; les autres demandes conservent leur état au registre.
 
 Le [premier checkpoint de planification](docs/evidence/schedules-checkpoint-dev-2026-11-10.json)
@@ -245,11 +253,6 @@ dont saturation, concurrence et reprise après interruption. Son agent local
 de volumes est installé en DEV ; les baux, budgets et reprises font l’objet
 de campagnes réelles de composant. Leur raccordement aux admissions publiques
 est désormais déployé et éprouvé par la campagne publique.
-
-Le [serveur de l’éditeur SLS-070](docs/CONSOLE_EDITOR.md) est implémenté avec une
-migration additive010 ; sa bascule et sa qualification restent à exécuter.
-La facette de console n’est pas encore proposée. Les critères du registre
-restent ouverts ; le contrat distingue les preuves serveur des parcours UI.
 
 ## Objectif
 

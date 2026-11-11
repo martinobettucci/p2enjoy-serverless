@@ -313,7 +313,7 @@ lien d'invocation et diagnostic. Unicité génération/index/fenêtre et invocat
 schedule_expression et schedule_slot. Aucun corps ou secret supplémentaire.
 Rétention, reprise, droits et premier démarrage : [SCHEDULES](SCHEDULES.md#réalisation-du-moteur-et-migration-009).
 
-## Brouillons de code — migration010 implémentée, à appliquer
+## Brouillons de code — migration010 appliquée en DEV
 
 SLS-070 est spécifiée avant code dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md).
 La table `code_drafts` conserve UUID, function_id, actor_kind/id,
@@ -323,5 +323,9 @@ et last_publication_version. Unicité fonction/propriétaire, compteur positif,
 base de la même fonction ; références aux objets et index de rétention par base.
 Les modifications sont chiffrées, bornées et n'altèrent pas le code immuable.
 Les champs de suivi sont attachés à la préparation dans sa transaction. La purge
-confirmée retire les brouillons avec sa décision. La migration est implémentée mais pas encore appliquée en DEV ; aucune donnée
-existante n'est transformée.
+confirmée retire les brouillons avec sa décision. La migration est appliquée en
+DEV après sauvegarde native ; aucune donnée existante n'est transformée.
+
+La [preuve serveur070](evidence/code-editor-server-dev-2026-11-12.json) vérifie dix migrations et intégrité,
+puis brouillons chiffrés, rétention et suppression après abandon/
+purge sur les vrais objets. Les reprises et quotas globaux restent non qualifiés.

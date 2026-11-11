@@ -70,7 +70,7 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
-| 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
+| 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -869,8 +869,9 @@ Tests exigés :
 ## SLS-070 — Édition du code et du handler dans la console
 
 Statut : [~] — contrat détaillé persisté dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
-avant code. Serveur et migration010 implémentés ; construction, bascule et preuves
-à exécuter. La facette Éditeur reste à implémenter ; aucun critère n'est clôturé.
+avant code. Serveur et migration010 déployés sur7c5c6f4b ;
+[45groupes réels](evidence/code-editor-server-dev-2026-11-12.json) qualifient une première tranche serveur,
+dont070.7. La facette Éditeur et les autres preuves restent à réaliser.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 dépend de
@@ -896,10 +897,13 @@ Critères d'acceptation :
   avec diagnostic consultable ; handler CJS/ESM validé avec les vrais modules.
 - [ ] SLS-070.6 Après publication : lien vers le test de SLS-071, promotion explicite ou
   pilote, retour à un hash précédent.
-- [ ] SLS-070.7 Réception des gros enregistrements bornée avant allocation : quatre
-  corps partiels, cinquième refusé avant corps, délai30s puis capacité libérée.
-  Premier E2E échoué sur timeout client45s ; les logs réels portent429 et quatre408.
-  Le client de preuve doit recevoir l’issue complète, sans substituer la passerelle.
+- [x] SLS-070.7 Réception des gros enregistrements bornée avant allocation :
+  quatre corps partiels, cinquième429 en107ms avec0octet de corps ; quatre408
+  après30,140–30,197s, requêtes exactes recoupées dans les logs natifs. Lecture
+  rétablie et purges complètes prouvent la libération. La [preuve](evidence/code-editor-server-dev-2026-11-12.json)
+  conserve aussi le premier échec du client ClientRequest45s, sans le compter
+  dans les45groupes réussis. Client TLS réel avec Connection:close, aucun rejeu.
+
 
 Tests exigés :
 

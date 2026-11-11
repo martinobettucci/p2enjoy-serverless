@@ -2,8 +2,9 @@
 
 La tranche serveur [SLS-070](../docs/CONSOLE_EDITOR.md) ajoute les sources,
 brouillons chiffrés et publication du code enregistré par le pipeline Docker
-courant. Migration010 implémentée, déploiement et E2E à exécuter. La facette
-Éditeur de la console reste à réaliser ; aucune clôture de critère revendiquée.
+courant. Migration010 déployée sur7c5c6f4b ; [45groupes réels](../docs/evidence/code-editor-server-dev-2026-11-12.json)
+qualifient une première tranche. Seul070.7 est clôturé ; facette Éditeur,
+quotas globaux et interruptions restent à réaliser/qualifier.
 
 SLS-089 est déployée sur e81007c5, après sauvegarde native SQLite et sans
 changement de schéma ou configuration de cellule. La [preuve partielle](../docs/evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes

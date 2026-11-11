@@ -481,3 +481,9 @@ protège les entrées/sorties du nettoyage et de la purge ; aucun verrou SQLite
 n'est tenu pendant la reconstruction. La copie des dépendances dans chaque
 brouillon est écartée. La bibliothèque standard suffit ; aucune dépendance,
 service ni variable de cellule supplémentaire. Implémentation encore absente.
+
+Première réalisation serveur010 déployée sur7c5c6f4b et [partiellement qualifiée](evidence/code-editor-server-dev-2026-11-12.json)
+le12novembre2026 local :20groupes ciblés et25régressions, données et référence
+conservées. Les lecteurs réels retiennent les fichiers, les patches sont
+chiffrés, l’envoi réutilise operations.responsibility et le pipeline Docker.
+La facette Éditeur, les limites globales et les reprises gardent leur reste à faire.

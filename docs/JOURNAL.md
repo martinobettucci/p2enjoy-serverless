@@ -7283,3 +7283,30 @@ corps partiels. Logs natifs : un429 et quatre408, aucune erreur ; deux fonctions
 purgées, zéro brouillon/artefact propre restant. Défaut070.7 enregistré avant
 correction du client de preuve ; passage à un socket TLS réel/HTTP1 explicite
 pour recevoir l’issue sans ClientRequest inachevé. Aucun succès prématuré.
+
+## Première tranche serveur070 qualifiée et limitée
+
+Le12novembre2026 local : sauvegarde native avant bascule9→10migrations,
+image7c5c6f4b saine et sources recoupées.20groupes ciblés sur367sourcesa983b2f,
+puis8manuel/8public/9connexion, tous en série. Huit invocations natives réussies,
+quatre publications dont déduplication et pilote, un import cassé sans toucher
+la cible ; base supprimée retenue puis réellement effacée après abandon.
+Cinq requêtes TLS exactes :429en107ms sans corps, quatre408après30s et capacité
+libérée. Le premier échec du client45s reste archivé et hors des45groupes.
+
+Les22captures de régression sont ouvertes individuellement par le vérificateur :
+16JPG liés au SHA déclaré,6PNG par mtime dans leur phase et SHA actuel, pas par
+un SHA inexistant dans login-ui. Aucun défaut visuel bloquant, aucune vue Éditeur
+revendiquée. Manuel16chapitres/57paragraphes inchangé. Les36sources serveur,
+quatre ressources HTTPS,5982artefacts antérieurs, référence et configurations
+sont identiques avant/après ; quatre fonctions de deux passages purgées, zéro
+brouillon/activité/bail/opération restant. Seul070.7 clôturé, reste de070 ouvert.
+Preuve : [serveur éditeur](evidence/code-editor-server-dev-2026-11-12.json). Les documents de résultat indexés
+sont reliés à l’époque testée dans cette preuve ; aucun code/image/manuel servi
+ne change après la campagne. Prochaine unité utile : poursuite de070, facette UI
+et preuves globales/reprises ;071 reste requis pour le lien Tester.
+
+La revue finale recoupe les45groupes, sources/images,22captures et nettoyage.
+La formulation de SCHEMA est limitée aux résultats explicitement présents dans
+la preuve : dix migrations et intégrité, sans revendiquer un reçu FK séparé
+absent de l’archive. Le raw gelé reste inchangé ; son SHA est vérifié.

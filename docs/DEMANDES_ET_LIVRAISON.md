@@ -14,7 +14,7 @@ contrats existent :
 | --- | --- | --- |
 | Favoris personnels persistants | Aucune route, persistance ou interface de favoris | SLS-068 |
 | Renommage et suppression en masse | Actions individuelles seulement ; sélection, aperçu et traitement de lot absents | SLS-069 |
-| Éditer le code et le handler sur place | Upload ZIP et champ handler présents ; arborescence, éditeur, brouillons et diff absents | SLS-070 |
+| Éditer le code et le handler sur place | Upload ZIP présent ; serveur sources/brouillons/diff partiellement qualifié par45groupes ; facette Éditeur et preuves complémentaires à livrer | SLS-070 |
 | Client HTTP intégré par fonction, type Postman | Catalogue d'URL/copie présent ; facette de test, requête et réponse interactives absentes | SLS-071 |
 | Logging d'exploitation | Logs par invocation présents ; recherche, période, suivi, export et vue de service absents | SLS-072 |
 | Monitoring | Relevés Docker ponctuels présents ; séries historiques, tableaux de bord et alertes absents | SLS-073 |

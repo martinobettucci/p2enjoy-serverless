@@ -3,8 +3,9 @@
 Contrat de réalisation [SLS-070](BACKLOG.md#sls-070), décidé le11 novembre2026
 avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler)
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
-Le serveur et la migration010 sont implémentés, sans qualification à ce stade.
-La facette console reste à implémenter. Les critères du backlog restent ouverts.
+Le serveur et la migration010 sont déployés et partiellement qualifiés en DEV
+par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La facette console reste à implémenter.
+Seul070.7 est clôturé ; les autres critères restent ouverts.
 
 ## Parcours et droits
 
@@ -227,12 +228,12 @@ fixture éditable sont mis à jour avec le comportement effectivement livré.
 ## Réalisation en cours
 
 Le serveur `control/app/code_editor.py` expose les sources, patches chiffrés,
-diffs et publication par le pipeline réel. La migration010 reste à appliquer
-sur DEV. Le client `e2e/code-editor.mjs` prépare une campagne propre, avec
+diffs et publication par le pipeline réel. La migration010 est appliquée
+sur DEV, avec sauvegarde native préalable et intégrité vérifiée. Le client `e2e/code-editor.mjs` prépare une campagne propre, avec
 lecture native limitée à son namespace et dépendance YAML2.9.1 issue du
 conteneur de référence inchangé. Les fixtures CJS/ESM sont dans le dépôt.
-Aucun résultat E2E n’est annoncé avant exécution ; les quotas globaux, la
-concurrence purge/lecture, les interruptions et l’interface restent à qualifier.
+Le résultat de première tranche est consigné ci-dessous. Les quotas globaux,
+la concurrence purge/lecture, les interruptions et l’interface restent à qualifier.
 
 ### Investigation de réception partielle —12novembre2026
 
@@ -250,3 +251,45 @@ dépendre la lecture d’un ClientRequest Node dont l’envoi reste volontaireme
 incomplet. Aucun serveur, réponse, horloge ou dépendance n’est substitué ; la
 passerelle HTTPS et l’API déployées restent effectivement traversées. Toute
 absence de réponse demeure un échec et impose une nouvelle investigation.
+
+## Première tranche serveur qualifiée —12novembre2026
+
+La [preuve DEV](evidence/code-editor-server-dev-2026-11-12.json) lie367sourcesa983b2f et l’image7c5c6f4b,
+36fichiers serveur embarqués et quatre ressources HTTPS identiques avant/après.
+20groupes ciblés puis8manuel/8public/9connexion passent strictement en série.
+Huit invocations réussies ont leurs lignes natives, quatre publications réussies
+et un import réellement cassé ; les candidats sont terminaux et leurs valeurs
+confidentielles/diagnostics purgés selon le contrat de purge. Les deux fonctions
+du passage réussi et les deux du premier échec sont purgées physiquement.
+
+Le paquet original contient238fichiers, YAML2.9.1 réel, Unicode, CRLF, texte
+sans fin de ligne, binaire et bit exécutable. La reconstruction inchangée retrouve
+le même hash et la même révision ; le pilote, sa promotion, le rollback et ESM
+sont réellement invoqués. Les bornes1Mio/+1,4Mio/+1 et128chemins/+1 passent ;
+Read/Create historique/portée/CSRF, conflit, no-op et rechargement sont éprouvés.
+Une base supprimée reste intégralement lisible et comptée via les brouillons,
+puis son abandon libère effectivement les fichiers. Les purges retirent aussi
+le brouillon Create initial devenu inaccessible après publication.
+
+Les cinq requêtes TLS exactes ont leurs refus natifs : cinquième429 en107ms,
+zéro octet de corps envoyé ; quatre408 entre30,140 et30,197s. Le premier client
+ClientRequest avait expiré45s malgré les refus enregistrés côté serveur : son
+échec est conservé et n’est pas compté dans les45groupes. Le client TLS corrigé
+lit de vraies réponses complètes et joint toutes ses connexions.
+
+Les22captures de régression sont inspectées individuellement :16JPG liés par
+SHA déclaré,6PNG liés par leurs octets actuels et leur fraîcheur dans la phase
+login (le rapport login ne déclare pas leur SHA). Aucun défaut visuel bloquant ;
+ces vues ne qualifient aucune facette Éditeur. Le manuel reste16chapitres et
+57paragraphes, inchangé et effectivement servi. Aucun contenu d’éditeur annoncé
+à tort dans ce guide. Les5982artefacts antérieurs, la référence et les fichiers
+officiels sont conservés ; contrôle/stockage sains, zéro ressource active.
+
+Restent à livrer/éprouver : interface complète, recherche dans le fichier et
+avertissements de saisie, lien Tester071, quotas128globaux/32acteur/64Miochiffrés,
+corps JSON8Mio/+1, ZIP64Mio/256Mio/20000entrées aux bornes, fichier hors limite
+conservé, diff2000lignes/
+128Kio aux bornes, sélection archivée, révocation en cours de lecture, publication
+perdue/SIGKILL et reprise de brouillon après redémarrage, purge sous lecteur vivant,
+fixture proposée dans la console et campagne complète de régression. Les critères
+070.1–.6 restent ouverts ; cette tranche ne prétend pas clore SLS-070.

@@ -484,7 +484,7 @@ Les mêmes identités et fichiers officiels sont conservés ; trois fonctions du
 rejeu et trois du premier passage sont purgées,5982 artefacts antérieurs intacts.
 Les prévisions de dates futures ne sont pas des invocations à ces dates.
 
-## Brouillons de code — migration010 à réaliser
+## Brouillons de code — migration010 déployée en DEV
 
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md) prévoit une migration additive du contrôle
 et sa reconstruction console/manuel. Avant bascule DEV : sauvegarde SQLite
@@ -493,5 +493,16 @@ migrations, intégrité, droits de source, code/volumes et fichiers officiels
 conservés. Aucune variable ou route SPARK nouvelle. Un retour à l'image009
 ne doit pas ignorer des brouillons et leurs références ; arrêter le contrôle
 et restaurer une sauvegarde cohérente seulement sur décision explicite, jamais
-automatiquement. L'ancienne image reste disponible ;010 est codée et reste
-à appliquer. Le déploiement et les preuves restent à exécuter.
+automatiquement. L'ancienne image reste disponible ;010 est appliquée en DEV.
+Les45groupes de première tranche sont recoupés ci-dessous ; les preuves restantes
+de070 et l’interface gardent leur état ouvert.
+
+Le12novembre2026 local, bascule de e81007c5 vers7c5c6f4b, conteneur3f95082c.
+Sauvegarde native avant bascule : qualification-history/before-code-editor-server-
+c4078381689a4c7a84b1075cfdbbef0f, SHA256b8aa04a6abf30944e903ce2fe5a5725d88292b333f003028909f7f1023319adc.
+Dix migrations et intégrité, ancien contenu métier conservé ; aucun nouveau
+paramètre, secret ou route. La [preuve](evidence/code-editor-server-dev-2026-11-12.json) recoupe20groupes ciblés
+puis25régressions,36sources embarquées/quatre web HTTPS,5982artefacts originaux
+et référence inchangés. Quatre fonctions propres aux deux passages sont purgées ;
+zéro brouillon/appel/instance/opération/candidat/bail restant. Les captures
+canoniques de rétention009 sont conservées ; aucun replay ancien n’est annoncé.

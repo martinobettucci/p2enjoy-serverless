@@ -5,8 +5,10 @@
 - SLS-070 : contrat complet de l’éditeur persisté avant code : brouillons privés,
   droits de publication, diff, base retenue, limites et pipeline Docker réel.
   Sources, patches chiffrés/versionnés, diff, reconstruction ZIP et migration010
-  implémentés. Bascule DEV et campagne réelle à exécuter ; interface à réaliser.
-  Aucun résultat E2E revendiqué avant exécution.
+  déployés sur7c5c6f4b. [45groupes réels](docs/evidence/code-editor-server-dev-2026-11-12.json) sur367sources,
+  huit invocations Docker CJS/ESM/YAML,22captures de régression inspectées,
+  données/référence/configuration conservées ; seul070.7 clôturé. La facette
+  console, quotas globaux et interruptions restent à réaliser/qualifier.
 
 - SLS-089 : corrections déployées en DEV sur e81007c5 après contrat dédié.
   [33groupes réels](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
