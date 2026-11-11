@@ -182,3 +182,14 @@ Les interruptions de backup/copie sont qualifiées ensuite dans
 Les cinq groupes ci-dessus conservent leur époque7ed2abe, avant les changements
 du helper/client bca96ab. L'âge réel et la campagne complète restent ouverts ;
 aucune modification produit ou UI dans cette étape.
+
+### Lancement courant avec --no-block
+
+Le lancement du11novembre à19:50UTC emploie maintenant --no-block et son client
+termine0. Le même worker3016607/naissance64482164 est observé vivant après la
+sortie du lanceur, dans l'unité transitoire serverless-schedule-recovery-proof-ee45e27fdc8344c1b5e6c22a6959291f.
+Gel355sources ef98a9f ; premier groupe de garde passé, campagne complète encore
+en cours. Checkpoint privé : .local/e2e/schedule-recovery-current-ee45e27fdc8344c1b5e6c22a6959291f/checkpoint.json.
+Seul le résultat réel terminal puis finish de cette même unité permettront
+une qualification. Aucun redémarrage sur timeout d'observation ; le nominal
+numérique source attend la fin et la restitution de ce rejeu.

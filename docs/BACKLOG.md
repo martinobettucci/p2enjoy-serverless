@@ -1726,7 +1726,10 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   local indépendant du terminal ; [contrat de suivi](SCHEDULE_RECOVERY.md#exécution-indépendante-du-terminal).
   Même worker vivant après timeout du client de lancement (20 s), puis
   résultat systemd terminal et arrêt recoupés. `--no-block` est ajouté au
-  lanceur privé pour le prochain lancement ; ce nominal reste à exercer.
+  lanceur privé ; son lancement courant est accepté et le worker réel est
+  observé vivant après sortie du client. Campagne finale en cours au gel355
+  ef98a9f, checkpoint local schedule-recovery-current-ee45e27fdc8344c1b5e6c22a6959291f.
+  Résultat terminal et cinq groupes encore requis ; aucun autre test en parallèle.
 - [x] Observateur source sous borne : [refus réel après attachement](evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
   qualifié par deux groupes au commit 956498a, sur 351 sources figées. Deux
   handlers HTTP/cron running, tir et UUID recoupés ; TracerPid 471960 puis zéro

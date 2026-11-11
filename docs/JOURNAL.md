@@ -7043,3 +7043,20 @@ Audit RO final des quinze groupes sans défaut matériel : six rapports/brut/SHA
 355sources identiques au bounded, exacts496retraits, six nouveaux UUID de handlers,
 captures conservées,35/40 et9+7contrôles physiques recoupés. Aucun test ajouté
 par la revue ; périmètre de rétention/âge restant explicitement ouvert.
+
+### 11 novembre2026 — Rejeu historique final lancé et vivant
+
+Lancement --no-block accepté le19:50UTC : client de lancement terminé0,
+worker local3016607/naissance64482164 encore vivant après sa sortie, même
+cgroup de l'unité serverless-schedule-recovery-proof-ee45e27fdc8344c1b5e6c22a6959291f.
+Le checkpoint est .local/e2e/schedule-recovery-current-ee45e27fdc8344c1b5e6c22a6959291f/checkpoint.json,
+stage running/completedfalse, gel355sources ef98a9f. Premier groupe de garde
+passé dans scheduled-functions-4ff60259.json ; aucun bilan de cinq groupes
+encore qualifié. Aucun autre test ne doit démarrer pendant ce worker.
+
+Reprise : python3 -B .local/schedule-recovery-current.py status
+schedule-recovery-current-ee45e27fdc8344c1b5e6c22a6959291f. Attendre le résultat
+réel MainPID0/Code/Status avant finish du même identifiant ; une perte de handle
+ne vaut ni arrêt ni autorisation de relancer. Recouper originaux/captures et
+résultat terminal, puis seulement poursuivre le nominal numérique source.
+Le goal reste actif ; les autres unités du registre gardent leur périmètre.
