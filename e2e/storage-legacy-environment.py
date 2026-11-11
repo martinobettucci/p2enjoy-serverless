@@ -247,8 +247,12 @@ def restore(item, journal, independent):
             # @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#perte-avec-consommateur-et-raccordement--réalisation
             if (item.get('mode') == 'instance-limit' and item.get('temporary_installation')
                     and definition['State']['Running'] and 'before_consumer_cleanup' not in item):
-                item['before_consumer_cleanup'] = instance_limit_observation(item)
-                item['before_consumer_cleanup']['sampled_at'] = time.time()
+                try:
+                    item['before_consumer_cleanup'] = instance_limit_observation(item)
+                    item['before_consumer_cleanup']['sampled_at'] = time.time()
+                except Exception as error:
+                    # A diagnostic cannot replace the ownership checks or block their cleanup.
+                    item['consumer_cleanup_observation_error'] = {'type':type(error).__name__}
                 atomic(journal,item)
             docker(item, 'rm', '-f', candidates[0])
         if item.get('mode') in ('function-version-unknown-first','instance-limit'):cleanup_history_consumers(item,journal)
@@ -772,7 +776,9 @@ def main():
                   'timer_state':command(['systemctl','is-active',item['unit'] + '.timer'],(0,3,4)),
                   'service_state':command(['systemctl','is-active',item['unit'] + '.service'],(0,3,4)),
                   **({'before_consumer_cleanup':item.get('before_consumer_cleanup'),
-                      'consumer_cleanup':item.get('history_cleanup')} if item.get('mode')=='instance-limit' else {})})
+                      'consumer_cleanup':item.get('history_cleanup'),
+                      'observation_error':item.get('consumer_cleanup_observation_error'),
+                      'before_observer_fault':item.get('before_observer_fault')} if item.get('mode')=='instance-limit' else {})})
             return
         if mode == 'signal-driver':
             assert item.get('mode') == 'instance-limit' and len(sys.argv) == 4
@@ -948,10 +954,20 @@ def main():
             op = request['op']
             if op == 'restore':
                 break
-            if mode == 'instance-limit':assert op == 'capacity', 'instance_limit_read_or_restore_only'
+            if mode == 'instance-limit':assert op in ('capacity','pause-observation'), 'instance_limit_operation_required'
             if op == 'capacity':
                 assert mode == 'instance-limit'
                 result = instance_limit_observation(item)
+            elif op == 'pause-observation':
+                assert mode == 'instance-limit' and 'before_observer_fault' not in item
+                item['before_observer_fault'] = instance_limit_observation(item)
+                item['before_observer_fault']['sampled_at'] = time.time()
+                atomic(journal,item)
+                target=item['before_observer_fault']['container']['id']
+                docker(item,'pause',target)
+                paused=json.loads(docker(item,'inspect',target))[0]
+                assert paused['Id']==target and paused['State']['Paused']
+                result={'paused':True,'id':target,'before':item['before_observer_fault']}
             elif op in ('history-observe','history-prepare007','history-upgrade008'):
                 assert item.get('mode')=='function-version-unknown-first'
                 if op=='history-observe':result=history_observation(item,request['function_id'])

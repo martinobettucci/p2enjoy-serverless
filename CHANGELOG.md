@@ -5,7 +5,8 @@
 ### Qualification du plafond d’instances
 
 - Mode de perte du pilote avec consommateur actif implémenté : témoin acquis
-  nativement par la garde, retrait corrélé Docker/réseau/bail. Qualification à faire.
+  nativement par la garde, retrait corrélé Docker/réseau/bail. Une erreur de
+  capture ne bloque plus la restitution ; scénario Docker pause ajouté. Qualification à faire.
 
 - Décision SLS-099 corrigée : retirer la demande d’évolution de FORGE et préparer
   un déploiement DEV isolé, même image, plafond2 au démarrage. Le refus préventif

@@ -1618,3 +1618,8 @@ armement, puis tue réellement le pilote. La garde doit observer le même appel
 encore running avant retrait, enlever son conteneur/réseau, libérer son bail et
 restituer les originaux. Le retrait des données temporaires ne vaut pas purge
 métier ni succès du handler. Ce mode est implémenté, non encore qualifié.
+
+Le mode `--observer-unavailable` exerce la même perte avec Docker pause réel du
+contrôle temporaire : relevé positif avant suspension, exec refusé pour la
+garde, erreur de capture explicite et restitution attendue. Le nominal conserve
+son exigence de témoin complet. Ces deux modes sont à qualifier séparément.
