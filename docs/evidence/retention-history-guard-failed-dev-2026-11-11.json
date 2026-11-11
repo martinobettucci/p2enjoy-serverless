@@ -1,0 +1,56 @@
+{
+  "format": "p2enjoy-serverless-retention-guard-failed-v1",
+  "completed": false,
+  "unit": "SLS-078.5",
+  "unit_complete": false,
+  "counted_groups": 0,
+  "failed_case": "sigkill",
+  "source_commit": "578edec38698a3a947ae2191a73cc86b1bb75169",
+  "source_files": 351,
+  "sources_images_unchanged": true,
+  "cause_unestablished": true,
+  "failure": {
+    "type": "Error"
+  },
+  "original_restored": true,
+  "final_native_state": {
+    "completed": true,
+    "services": [
+      {
+        "id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-11T13:47:22.980717105Z"
+      },
+      {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-06T15:49:39.578107028Z"
+      }
+    ],
+    "counts": {
+      "live_functions": 0,
+      "active_invocations": 0,
+      "instances": 0,
+      "operations": 0,
+      "reserved_bytes": 0,
+      "active_deployments": 0,
+      "leases": 0,
+      "pending_storage": 0
+    },
+    "artifact_files": 5982,
+    "agent_service": "active",
+    "control_health_http": 200,
+    "active_restoration_units": 0
+  },
+  "raw": {
+    "path": "retention-history-guard-failed-dev-2026-11-11.raw.json.gz",
+    "bytes": 143235,
+    "sha256": "081be37a9f96a6479f56c19c2375dd31c676a6d1b52a7a341577eb407cc4959a",
+    "uncompressed_bytes": 351728,
+    "uncompressed_sha256": "619b0394a90137dfd4122ba49b5c3830ec31cc5d0792c1bb197ec1699e11b2c3"
+  }
+}
