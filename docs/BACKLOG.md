@@ -1551,8 +1551,9 @@ sur10016, installation isolée existante et garde1800s explicite. La
 trois groupes réels sur337sources :10016 handlers, exacts10000 survivants,
 deux purges et restitution complète. Rapport intégral compressé conservé.
 Les [quatorze groupes de garde](evidence/invocation-retention-guard-regressions-dev-2026-11-11.json)
-passent : onze restitutions120/partial et trois options/défaut900. Sources de tir non clos sous borne numérique
-et sept jours restent à qualifier ; borne des tirs qualifiée ci-dessous.
+passent : onze restitutions120/partial et trois options/défaut900. La source de tir
+non clos sous borne numérique a sa preuve distincte ci-dessous ; sept jours encore
+ouverts et borne des tirs qualifiée ci-dessous.
 La [préparation de la borne des tirs](SCHEDULE_FIRING_VOLUME.md) est spécifiée :
 16 fonctions/16 déclarations chacune dans l'installation isolée existante,
 256 premiers tirs authentiques puis sauvegarde native de générations actives.
@@ -1657,15 +1658,18 @@ pannes propres résiduelles et campagne complète restent ouverts,078.5 non clô
 Le [replay d'âge](RETENTION_HISTORY_REPLAY.md) a son contrat explicite : les deux
 captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
 capturée, garde120, observation avant santé et contrôles stricts d'identité à
-chaque démarrage/restitution. Preflights jeunes, refus et pertes du nouveau
-loader sont implémentés, contrôlés syntaxiquement et restent à qualifier sur le
-SPARK DEV. Premier refus d'âge arrêté avant fenêtre sur une hypothèse de
-propriétaire JSON erronée : fichiers sources réellement root0600. Corriger
-l'admission des deux seuls JSON historiques, garder les captures inchangées,
-puis rejouer le refus et les préflights. Les deux refus d’âge corrigés passent ;
-le premier préflight source échoue sur délai natif, originaux restitués.
-Lectures aux seuls descripteurs SQLite et diagnostic à corriger/qualifier,
-sans allonger25s. Aucune preuve d'âge avant le18novembre.
+chaque démarrage/restitution. Les
+[neuf groupes cbdcf4a](evidence/retention-history-replay-preflight-dev-2026-11-11.json)
+passent sur351sources : huit refus d'options et deux refus d'âge en trois groupes,
+les deux préflights en six groupes avec vrai SSO/API et restitutions nominales.
+Source9,859s/149251 stops/sept frontières fdatasync ; deux témoins conservés et même
+tir clos sans nouveau handler. Tir terminal et générations retirées conservés
+dans l'autre copie. [Quatre essais échoués](evidence/retention-history-replay-failed-dev-2026-11-11.json)
+exclus ; métadonnées historiques et filtre des lectures corrigés et vérifiés.
+Pertes propres et régressions du helper restent requises ; aucune preuve d'âge
+avant le18novembre. Le nouveau contrôle d'appartenance clonée doit aussi
+être éprouvé sous namespace étranger avant clôture, avec conservation de cet
+objet au premier refus puis retrait de la seule fixture et restitution.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

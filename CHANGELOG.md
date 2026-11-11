@@ -2,17 +2,17 @@
 
 ## [Non publié]
 
-### Replay des témoins de rétention — en qualification
+### Replay jeune des témoins de rétention qualifié
 
-- Loader des deux captures authentiques, observations natives jeune/âge, client
-  SSO/API et pertes réelles avant CONTROL ou après attache implémentés. Identité
-  clonée limitée à la fenêtre exclusive et garde120, originaux conservés.
-  Syntaxe contrôlée ; préflights, refus, pertes et régressions restent à exécuter.
-  Les sept jours ne sont pas encore éligibles. Deux refus d’âge passent ;
-  le premier préflight source est arrêté sur délai natif avec originaux
-  restitués. Le second mesure41424 stops/5842 frontières avant expiration.
-  Lectures limitées aux synchronisations des descripteurs SQLite réels,
-  compteurs/diagnostic terminal conservés ; nouveau préflight requis.
+- [Neuf groupes réels](docs/evidence/retention-history-replay-preflight-dev-2026-11-11.json)
+  sur351sources cbdcf4a : huit refus d'options, deux refus avant sept jours,
+  chargements des deux captures authentiques, SSO/API et restitutions nominales.
+  Source non close observée en9,859s,149251 stops et sept frontières fdatasync ;
+  tir clos normalement et témoins jeunes conservés, aucun nouveau handler.
+  [Quatre essais échoués](docs/evidence/retention-history-replay-failed-dev-2026-11-11.json)
+  restent exclus : hypothèse de propriétaire, reçu absent, deux délais natifs.
+  Originaux/configuration/images et captures préservées, copies temporaires retirées.
+  Pertes, régressions historiques et sept jours restent ouverts.
 
 ### Source planifiée protégée sous la borne qualifiée
 

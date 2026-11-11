@@ -1,0 +1,114 @@
+{
+  "format": "p2enjoy-serverless-retention-replay-failed-v1",
+  "completed": false,
+  "unit": "SLS-078.5",
+  "unit_complete": false,
+  "counts": {
+    "failed_attempts": 4,
+    "counted_groups": 0
+  },
+  "cases": [
+    {
+      "kind": "source",
+      "mode": "not-eligible",
+      "source_commit": "00ffa473184d7567eaef2c9c39ccd0ebeef60402",
+      "diagnosis": "legacy_json_owner_assumption",
+      "source_files": 351,
+      "sources_images_unchanged": true,
+      "exit_code": 1,
+      "counted_groups": 0
+    },
+    {
+      "kind": "terminal",
+      "mode": "not-eligible",
+      "source_commit": "9cb3447aee39488a94e9b3fcdb0787276aa1a8ad",
+      "diagnosis": "canonical_public_receipt_not_delivered",
+      "source_files": 351,
+      "sources_images_unchanged": true,
+      "exit_code": 1,
+      "counted_groups": 0
+    },
+    {
+      "kind": "source",
+      "mode": "preflight",
+      "source_commit": "9cb3447aee39488a94e9b3fcdb0787276aa1a8ad",
+      "diagnosis": "native_stop_not_observed",
+      "source_files": 351,
+      "sources_images_unchanged": true,
+      "exit_code": 1,
+      "counted_groups": 0
+    },
+    {
+      "kind": "source",
+      "mode": "preflight",
+      "source_commit": "549723a86d7f3eea319a146ac8fa7ad53ffc9e2b",
+      "diagnosis": "native_stop_not_observed_41424_stops_5842_boundaries",
+      "source_files": 351,
+      "sources_images_unchanged": true,
+      "exit_code": 1,
+      "counted_groups": 0
+    }
+  ],
+  "restoration": {
+    "agent_healthy": true,
+    "artifacts_identical": true,
+    "configuration_unchanged": true,
+    "control_healthy": true,
+    "databases_identical": true,
+    "directories_identical": true,
+    "event": "restored",
+    "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+    "independent": false,
+    "original_id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+    "reference_unchanged": true,
+    "restored_at": 1794400909.6244018,
+    "temporary_control_absent_at": 1794400898.8668776,
+    "temporary_control_removed_at": 1794400898.705626,
+    "temporary_directories_removed": true
+  },
+  "native_state_after_first_preflight": {
+    "completed": true,
+    "services": [
+      {
+        "id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-11T12:41:43.463712628Z"
+      },
+      {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-06T15:49:39.578107028Z"
+      }
+    ],
+    "counts": {
+      "live_functions": 0,
+      "active_invocations": 0,
+      "instances": 0,
+      "operations": 0,
+      "reserved_bytes": 0,
+      "active_deployments": 0,
+      "leases": 0,
+      "pending_storage": 0
+    },
+    "artifact_files": 5982,
+    "agent_service": "active",
+    "control_health_http": 200,
+    "active_restoration_units": 0
+  },
+  "scope": {
+    "no_success_claimed": true,
+    "seven_day_retention_qualified": false,
+    "full_platform_campaign": false
+  },
+  "raw": {
+    "path": "retention-history-replay-failed-dev-2026-11-11.raw.json.gz",
+    "bytes": 145604,
+    "sha256": "aa15f99b772f91910adbf42bf81faebbe48fc3cc2886b6d9e3cab6e429004c4e",
+    "uncompressed_bytes": 400616,
+    "uncompressed_sha256": "617711128695575f2bd50a1c7e21e6ec94a0f46685f8f026ebd4689a51acc5d9"
+  }
+}

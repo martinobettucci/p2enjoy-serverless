@@ -6485,3 +6485,23 @@ du premier discriminant du loader de volume. Les SELECT/verrouillages des
 nombreuses lignes historiques de démarrage ne justifient aucune lecture de
 témoins ; les commits utiles doivent toujours être acquis dans25s. Aucune
 horloge, donnée, tâche applicative ni valeur système remplacée.
+
+### 11novembre2026 — Deux préflights de rétention qualifiés
+
+Le client cbdcf4a passe neuf groupes sur351sources figées : huit refus
+d'options et deux refus d'âge prématuré en trois groupes, puis trois groupes
+pour chaque capture jeune. Source70b58114 observée9,859243795s/149251stops/
+7frontières fdatasync : témoins strictement conservés, ancienne instance récupérée,
+même tir clos normalement sans nouvel appel. Terminal6b8b5e1e accepte ses
+témoins à l'arrêt initial sans instance, puis santé, SSO/API et archives
+recoupés ; aucune maintenance d'âge ni DELETE déduit de ce préflight jeune.
+Les deux restitutions nominales et les captures sources sont recoupées.
+
+Les quatre essais échoués et leur brut restent distincts, zéro groupe compté.
+Collecteur local corrigé pour l'absence normale de restoration dans les refus
+avant mutation ; aucun E2E rejoué pour cette correction de collecte. Contrôle
+final natif sain, même CID/image et démarrage13:00:40UTC, référence inchangée,
+2healthy, agent actif, healthz200,5982 artefacts, actifs0 et aucune garde.
+Les deux entrées d'incohérence sont résolues par les refus/préflights réels et
+retirées du registre. Pertes, sûreté du contexte cloné sous namespace étranger,
+régressions et échéance réelle des sept jours gardent078.5 ouverte.

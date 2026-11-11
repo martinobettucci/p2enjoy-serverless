@@ -219,7 +219,9 @@ faire reprendre normalement l'ancienne ligne ready, sans créer de consommateur
 contre les originaux. Les refus d'identité clonée du helper de volume ne peuvent
 être simplement retirés : l'autorisation exige la fenêtre exclusive du contrat,
 les répertoires privés reconnus et les consommateurs originaux absents. Un
-pilote dédié, ses refus et ses pannes restent à implémenter/qualifier avant l'âge.
+pilote dédié et ses refus sont qualifiés par les
+[neuf groupes cbdcf4a](evidence/retention-history-replay-preflight-dev-2026-11-11.json).
+Ses pertes et régressions restent à qualifier avant l'âge.
 
 ## Source protégée sous borne qualifiée
 

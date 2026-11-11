@@ -77,8 +77,10 @@ La [capture des témoins terminaux](docs/evidence/schedule-terminal-history-capt
 ajoute trois groupes de préparation sur335sources : un tir terminé et deux
 générations retirées conservés en privé, éligibles ensemble le18 novembre à
 04:05:13UTC. Aucun contrôle d'âge n'est encore revendiqué. Le
-[loader de replay](docs/RETENTION_HISTORY_REPLAY.md) est implémenté et contrôlé
-syntaxiquement ; préflights jeunes, refus, pertes et régressions restent à qualifier.
+[loader de replay](docs/RETENTION_HISTORY_REPLAY.md) passe
+[neuf groupes réels](docs/evidence/retention-history-replay-preflight-dev-2026-11-11.json)
+sur351sources : huit refus d'options, deux refus d'âge et les deux préflights
+avec nouveau SSO/API et restitutions. Pertes et régressions restent à qualifier.
 La [grammaire numérique des crons](docs/evidence/schedule-calendar-dev-2026-11-10.json)
 passe aussi cinq groupes distincts : fusion, règle jour/semaine, refus et
 prévisions calendaires ; SLS-078.2 est qualifiée.

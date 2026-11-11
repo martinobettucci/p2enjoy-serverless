@@ -1915,5 +1915,7 @@ images, copie CONTROL en dernier et observe les commits réels avant santé. Le
 helper historique autorise ce seul clonage d'installation dans une fenêtre
 exclusive ; les modes sans options gardent leurs refus d'identité antérieurs.
 Échéances communes : source18novembre03:30:26.355818UTC ; terminale04:05:13.358459UTC.
-Code implémenté et syntaxe vérifiée ; aucun mode de replay encore qualifié.
+[Neuf groupes cbdcf4a](../docs/evidence/retention-history-replay-preflight-dev-2026-11-11.json)
+qualifient les refus et les deux préflights sur351sources, avec nouveau SSO/API
+et restitutions nominales ; pertes et régressions restent requises.
 Les preuves de captures et de borne numérique restent dans leurs époques distinctes.

@@ -148,5 +148,29 @@ consommateurs absents et mêmes originaux restitués, source inchangée. Les gar
 historiques touchées repassent sur le helper final. Une copie de capture non close
 ou une donnée inconnue ne devient jamais source de replay.
 
-Ce contrat ne qualifie ni le loader, ni les pannes, ni les sept jours. Les preuves
-existantes de captures, de volume et de leurs gardes gardent leurs époques distinctes.
+## Préflights jeunes et refus qualifiés
+
+La [preuve cbdcf4a](evidence/retention-history-replay-preflight-dev-2026-11-11.json)
+passe neuf groupes sur351sources : huit refus d'options et deux refus d'âge
+regroupés en trois groupes ; chargement, SSO/API et restitution pour chacune
+des deux sources en six groupes. Bases/artefacts/images et reçus canoniques
+sont vérifiés ; les captures restent strictement inchangées.
+
+Source non close : observation9,859244s,149251 stops et sept frontières fdatasync.
+Ces sept points sont des entrées/sorties observées, pas sept syscalls distincts.
+L'ancienne instance disparaît par recover, les deux invocations réussies restent
+identiques et le même tir se clôt normalement à une nouvelle date réelle ;
+aucun nouvel appel. Pour la seconde source sans instance, le premier arrêt
+conserve les témoins ; après santé et SSO, tir/générations/archives sont recoupés.
+Ce contrôle jeune ne prouve pas un DELETE ni un passage de rétention d'âge.
+
+Deux restitutions nominales jointes, mêmes originaux et référence, fichiers
+officiels inchangés ; contrôle natif final à13:00:40UTC, deux conteneurs sains,
+agent actif, healthz200,5982 artefacts et tous actifs à zéro. Les
+[quatre essais échoués](evidence/retention-history-replay-failed-dev-2026-11-11.json)
+restent séparés : mauvais propriétaire attendu, reçu canonique absent du SPARK,
+puis deux expirations de l'observateur. Aucun de leurs groupes n'est compté.
+
+Pertes copie/observateur, refus du namespace étranger dans le nouveau contexte
+cloné et régressions historiques restent requis. L'âge réel et la campagne
+complète restent ouverts ; les preuves antérieures gardent leurs époques distinctes.
