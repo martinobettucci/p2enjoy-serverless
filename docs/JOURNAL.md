@@ -6139,3 +6139,13 @@ Le module sélectionnait State.Pid, alors que Compose active init:true. La
 sélection historique recherche déjà le Python uvicorn unique dans ses descendants.
 Appliquer cette sélection et comparer cgroup/naissance avant observation ;
 conserver cet échec séparé, sans lui attribuer une qualification de frontière.
+
+Essai dad8031/1bd494c7 : PID Python distinct de init, même cgroup et naissance
+recoupés ; observation expirée25s sans gate. Avant restitution :1280 tirs dont
+1024 skipped_downtime, deux invocations initiales, source conservée. Le wait()
+partagé poll avec sleep1ms à chaque stop ; au démarrage et pendant les UUID/SQL,
+cette cadence ralentit l'observation de tous les syscalls. Décision : observateur
+local à waitpid bloquant réel, sans modifier la bibliothèque partagée ni les
+résultats système ; bornes25s/alarme35s/commande40s conservées. Réduire aussi les
+lectures RO avant la fin du lot aux sync utiles, puis fermetures, et conserver
+les prédicats exacts. Cette correction d'instrumentation reste à éprouver.

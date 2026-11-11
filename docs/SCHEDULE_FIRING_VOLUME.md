@@ -217,6 +217,12 @@ healthy. Une attache tardive ne donne aucun succès : elle fait échouer le cas.
 Le traceur ne change aucun registre, tampon ou retour système. Limiter les
 lectures SQL aux frontières natives utiles, avec connexion RO/autocommit ; les
 syscalls ne valent jamais preuve seuls, seuls les prédicats SQL observés décident.
+Le pilote attend les stops avec waitpid bloquant réel, sans pause ajoutée par
+syscall ; la bibliothèque partagée n'est pas modifiée. Délais d'observation25s,
+alarme native35s et commande40s conservés. Avant la fin du lot, éviter les
+lectures SQL sur chaque fermeture de fichier de l'import Python ; consulter les
+sync, puis les fermetures proches du curseur attendu. Aucun résultat système
+n'est substitué et aucun état SQL n'est fabriqué.
 Après le lot critique complet, observer les lignes encore visibles en lecture
 commise avant la suppression commise, puis les10000 UUID exacts au même curseur.
 Les fdatasync et fermetures de descripteurs servent de points d'observation ;
