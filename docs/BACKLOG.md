@@ -1593,6 +1593,11 @@ passe neuf groupes sur342sources : refus avant mutation/éligibilité,4864 tirs
 issus de18 fenêtres manquées, SSO/64 pages API, pertes copie/observateur et
 restitutions indépendantes. Aucun handler nouveau ; source identique. Les trois
 essais échoués restent séparés. Mode count et régressions historiques encore requis.
+L'[interruption du copieur de capture](SCHEDULE_CAPTURE_INTERRUPTION.md) est
+spécifiée avant code : nominal puis perte réelle pendant SQLite backup,
+garde vivante bloquée par le verrou, SIGKILL/jonction et restitution indépendante.
+Elle reste à implémenter/qualifier ; elle ne remplace ni le seed-loss déjà prouvé
+ni la source scellée6:15UTC.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

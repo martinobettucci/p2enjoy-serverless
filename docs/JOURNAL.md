@@ -6157,3 +6157,16 @@ SSO et64 pages exhaustives. Deux SIGKILL de pilote/mutateur aux points réels
 registre avant CONTROL et observateur attaché ; restitutions indépendantes120s,
 source identique, services et gardes joints. Trois essais échoués exclus. Les
 régressions du helper courant et le mode count après09:30UTC restent à exécuter.
+
+### Frontière restante du copieur de capture initiale
+
+Décision avant code : exercer dans une fenêtre réelle le nominal puis une
+interruption dans SQLite backup via son callback progress natif (pages=1).
+SIGSTOP du copieur sous propriétaire SQLite, reçu privé durable, SIGKILL du
+pilote et déclenchement explicite du vrai garde déjà armé. Constater deux secondes
+de verrou occupé et d'originaux conservés avant SIGKILL/jonction du copieur ET
+wrapper puis restitution indépendante. Motif : qualifier la jonction pendant
+une copie active, sans attendre900s ni présenter ce déclenchement comme échéance.
+Sortie privée incomplète distincte, jamais source de replay ; source6:15 et sa
+date inchangées. Contrat SCHEDULE_CAPTURE_INTERRUPTION persisté ; code et preuves
+restent requis après les régressions du helper courant.
