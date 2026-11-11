@@ -1,6 +1,8 @@
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RECOVERY.md#périmètre-et-frontières | docs/SCHEDULE_RECOVERY.md#garde-et-restitution
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RECOVERY.md#campagne-séquentielle
-"""Observe real scheduler commits and interrupt only the owned DEV control."""
+# @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RETENTION.md#capture-authentique-avant-vieillissement
+# @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RETENTION.md#capture-authentique-avant-vieillissement
+"""Observe real scheduler commits, capture retention witnesses or interrupt owned DEV."""
 import ast
 from contextlib import closing
 import fcntl
@@ -11,6 +13,7 @@ from pathlib import Path
 import platform
 import re
 import select
+import shutil
 import shlex
 import signal
 import socket
@@ -60,7 +63,7 @@ def finish_guard(unit):
 
 assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless' and platform.machine() == 'x86_64', 'dev_spark_required'
 mode, function_id, namespace = sys.argv[1:4]
-assert mode in ('before', 'claimed', 'linked', 'watchdog', 'inspect', 'restore', 'rescue', 'evidence')
+assert mode in ('before', 'claimed', 'linked', 'watchdog', 'inspect', 'restore', 'rescue', 'evidence', 'terminal-capture')
 assert str(UUID(function_id)) == function_id and str(UUID(namespace)) == namespace
 root = Path('/srv/p2enjoy-serverless')
 values = {}
@@ -233,6 +236,11 @@ try:
                     firing = gated['firings'][0]
                     if mode == 'claimed' and firing['state'] == 'claimed' and firing['invocation_id'] is None and not gated['invocations']:
                         break
+                    if (mode == 'terminal-capture' and firing['state'] == 'dispatched' and firing['completed_at'] is None
+                            and len(gated['invocations']) == 1 and firing['invocation_id'] == gated['invocations'][0]['id']
+                            and gated['invocations'][0]['state'] == 'succeeded'
+                            and gated['invocations'][0]['handler_started'] and gated['invocations'][0]['completed_at'] is not None):
+                        break
                     if (mode == 'linked' and firing['state'] == 'dispatched' and len(gated['invocations']) == 1
                             and firing['invocation_id'] == gated['invocations'][0]['id']
                             and gated['invocations'][0]['state'] in ('receiving', 'queued')
@@ -241,6 +249,74 @@ try:
                         break
             observer.resume()
     emit({'event':'gated', 'mode':mode, 'checkpoint':gated, 'durable':durable()})
+    # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RETENTION.md#capture-authentique-avant-vieillissement
+    if mode == 'terminal-capture':
+        assert select.select([sys.stdin], [], [], 8)[0] and sys.stdin.readline().strip() == 'capture', 'capture_command_required'
+        capture = root/'qualification-history'/('schedule-retention-'+uuid4().hex)
+        capture.mkdir(mode=0o700)
+        os.chown(capture, owner.st_uid, owner.st_gid)
+        snapshot = capture/'control.sqlite3'
+        with control_owner(control), closing(sqlite3.connect('file:'+str(control)+'?mode=ro', uri=True)) as source, closing(sqlite3.connect(snapshot)) as destination:
+            source.backup(destination)
+            assert destination.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
+            destination.row_factory = sqlite3.Row
+            captured_firing = dict(destination.execute('SELECT * FROM schedule_firings WHERE id=?', (gated['firings'][0]['id'],)).fetchone())
+            captured_call = dict(destination.execute('SELECT id,state,handler_started,completed_at,schedule_firing_id FROM invocations WHERE id=?', (captured_firing['invocation_id'],)).fetchone())
+            assert captured_firing == gated['firings'][0] and captured_call == gated['invocations'][0], 'captured_terminal_predicate_changed'
+            witnesses = [dict(v) for v in destination.execute("SELECT id,state,trigger,completed_at,handler_started FROM invocations WHERE function_id=? AND trigger='http' AND state='succeeded' AND handler_started=1 AND completed_at<?", (function_id, captured_call['completed_at']))]
+            assert len(witnesses) == 1, 'one_genuine_http_witness_required'
+            extra = dict(destination.execute('SELECT resolved_code_hash,schedule_slot,trigger,logs FROM invocations WHERE id=?', (captured_call['id'],)).fetchone())
+            source_call = next(v for v in durable()['invocations'] if v['id']==captured_call['id'])
+            assert all(source_call[k]==v for k,v in extra.items()), 'captured_runtime_observation_changed'
+            assert extra['resolved_code_hash']==captured_firing['code_hash'] and extra['schedule_slot']==window and extra['trigger']=='schedule'
+            received = json.loads(extra['logs'].strip())
+            assert received=={'marker':'scheduled-original-A','request_id':captured_call['id'],'method':'POST','path':'/',
+                              'body':{},'trigger':'schedule','slot':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime(window)),
+                              'authorization_present':False,'platform_token_present':False}, 'captured_handler_metadata_invalid'
+            captured_call.update(extra)
+
+        os.chmod(snapshot, 0o600)
+        receipt = {'event':'retention-captured', 'capture_id':capture.name, 'backup_sha256':sha(snapshot),
+                   'captured_at':time.time(), 'firing':captured_firing, 'invocation':captured_call,
+                   'http_witness':witnesses[0], 'eligible_after':max(captured_call['completed_at'], witnesses[0]['completed_at'])+7*86400+1,
+                   'source_read_only':True, 'dates_unchanged':True, 'image':current['Image']}
+        observer.detach()
+        emit({'event':'control-resumed-after-capture', 'capture_id':capture.name})
+        deadline = time.monotonic()+45
+        while True:
+            live = durable()
+            settled = next(v for v in live['firings'] if v['id']==captured_firing['id'])
+            if settled['state']=='succeeded' and settled['completed_at'] is not None and not reader.rows('SELECT id FROM execution_instances'):
+                break
+            assert time.monotonic()<deadline, 'capture_source_not_settled_after_resume'
+            time.sleep(.1)
+        assert len([v for v in live['invocations'] if v['schedule_slot']==window])==1, 'capture_source_replayed'
+        artifact_root = control.parent/'artifacts'
+        def inventory(directory):
+            result = {}
+            for path in sorted(directory.rglob('*')):
+                info = path.lstat()
+                assert stat.S_ISDIR(info.st_mode) or stat.S_ISREG(info.st_mode), 'capture_artifact_type'
+                if stat.S_ISREG(info.st_mode):
+                    result[str(path.relative_to(directory))]={'sha256':sha(path), 'bytes':info.st_size, 'mode':stat.S_IMODE(info.st_mode)}
+            return result
+        before_artifacts = inventory(artifact_root)
+        assert shutil.disk_usage(capture).free > sum(v['bytes'] for v in before_artifacts.values())*2+1024**3, 'capture_disk_margin_required'
+        shutil.copytree(artifact_root, capture/'artifacts', copy_function=shutil.copy2)
+        assert inventory(artifact_root)==before_artifacts==inventory(capture/'artifacts'), 'capture_artifacts_changed'
+        with control_owner(control), closing(sqlite3.connect('file:'+str(registry)+'?mode=ro', uri=True)) as source, closing(sqlite3.connect(capture/'registry.sqlite3')) as destination:
+            assert source.execute('SELECT count(*) FROM leases').fetchone()[0]==0, 'capture_registry_must_be_quiet'
+            source.backup(destination)
+            assert destination.execute('PRAGMA integrity_check').fetchone()[0]=='ok'
+        os.chmod(capture/'registry.sqlite3', 0o600)
+        receipt.update(registry_sha256=sha(capture/'registry.sqlite3'), artifact_files=len(before_artifacts),
+                       artifact_inventory_sha256=hashlib.sha256(json.dumps(before_artifacts,sort_keys=True).encode()).hexdigest(),
+                       completed_after_resume=settled, private_capture_preserved=True)
+        (capture/'artifacts.json').write_text(json.dumps(before_artifacts,sort_keys=True)+'\n')
+        (capture/'capture.json').write_text(json.dumps(receipt)+'\n')
+        os.chmod(capture/'artifacts.json',0o600);os.chmod(capture/'capture.json',0o600)
+        emit(receipt)
+        raise SystemExit(0)
     assert select.select([sys.stdin], [], [], 8)[0] and sys.stdin.readline().strip() == 'cut', 'cut_command_required'
     fcntl.flock(lock, fcntl.LOCK_EX)
     try:

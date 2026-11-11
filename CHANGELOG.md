@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+### Preuve de rétention des planifications
+
+- Mode de capture native d’une invocation réussie encore source d’un tir non
+  clos, avec témoin HTTP réel, sauvegarde RO et copie privée des artefacts et
+  du registre. Reprise immédiate du même contrôle et purge API de la fixture.
+  Implémenté et relu ; qualification initiale puis vieillissement réel requis.
+
 ### Qualification du plafond d’instances
 
 - Mode de perte du pilote avec consommateur actif implémenté : témoin acquis

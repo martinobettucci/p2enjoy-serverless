@@ -1656,3 +1656,21 @@ sont exécutées en série. Seize fonctions purgées, zéro écriture officielle
 originaux restitués et gardes terminées. Les époques327/328 restent distinctes ;
 le premier essai HTTP échoué après17 groupes n’est pas compté comme réussi.
 SLS-099 est close ; ces preuves ne remplacent pas la campagne globale.
+
+
+## Capture authentique de rétention — SLS-078
+
+`node e2e/schedule-retention-capture.mjs` exige une session SSO réelle fraîche
+dans le canal privé habituel et le helper synchronisé sur DEV. Il publie une
+fonction originale, exécute un témoin HTTP, puis capture à la frontière */5
+une invocation réussie dont le tir reste dispatched/non clos. Le SQLite backup
+utilise une source RO ; hash exécuté, créneau et logs reçus sont recoupés dans
+la sauvegarde. Le contrôle est repris sans SIGKILL, même CID/image/démarrage.
+
+Le helper conserve sous qualification-history une copie privée du contrôle,
+du registre et des artefacts vérifiés. La fixture active est purgée par API ;
+le rapport UUID .local/e2e/schedule-retention-capture-*.json porte la date réelle
+éligible sept jours plus tard. Aucun réglage d’horloge ni SQL de préparation.
+Une capture réussie ne prouve ni les sept jours ni10000 objets : ces campagnes
+restent requises dans [SCHEDULE_RETENTION](../docs/SCHEDULE_RETENTION.md).
+Implémentation relue, première exécution réelle encore à faire.
