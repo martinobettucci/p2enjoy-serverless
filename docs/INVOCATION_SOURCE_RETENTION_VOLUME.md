@@ -348,3 +348,48 @@ reproduction c64fdd7. Brut98 371/gzip38 128. Aucun handler exécuté ; deux
 services sains, actifs à zéro et5 982 artefacts conservés. La borne isolée
 est qualifiée ; les consommateurs de la classe, les pannes35/40 propres à
 l'opérateur source, detach en erreur, l'âge et la campagne finale restent ouverts.
+
+## Pannes propres de l'alarme35 et de la commande40
+
+Décision du11 novembre2026 avant code, pour le reste078.5 déjà inscrit. Reprendre
+la préparation authentique à deux handlers HTTP/cron du mode observer-refusal,
+sans appels ordinaires. Après attache et premier reçu durable (deux running,
+tir dispatched/non clos, mêmes UUID), un mode de faute explicite arrête le vrai
+opérateur par SIGSTOP avant l'assertion10002 et avant la boucle25. Le nominal
+et le refus sans option gardent leur flux. Aucune exception ni minuterie n'est
+remplacée ; les limites35/40 restent celles du code réel.
+
+Le reçu de porte porte les identités/PID/naissances, SHA, point monotone, vrai
+getitimer et masque de signaux. Un acteur systemd indépendant, figé et prêt avant
+SIGSTOP, ouvre un pidfd sur cet opérateur exact et confirme son étatT. Il ne
+prend pas le verrou de fenêtre. La marge entre le début réel de timeout40,
+l'armement de35 et la reprise prévue doit laisser au moins2s pour nettoyage ;
+sinon le scénario échoue sans allonger les durées.
+
+- Alarme35 : l'acteur attend l'échéance réelle calculée depuis le timer restant,
+  augmentée de0,5s, recoupe SIGALRM pending dans SigPnd/ShdPnd, puis envoie un
+  seul SIGCONT par pidfd. La reprise délivre le vrai SIGALRM ; conserver
+  TimeoutError/native_observation_deadline avant nettoyage, puis même contrôle
+  TracerPid0, mémoire/lecteur fermés et aucune erreur de nettoyage. Le retard
+  lié à SIGSTOP est mesuré : ne pas prétendre une exécution de Python à35,000s.
+- Commande40 : l'acteur confirme la même suspension et le signal pending mais
+  n'envoie pas SIGCONT. Le vrai timeout --foreground --signal=KILL40s termine
+  l'opérateur. Conserver son code réel avant assertion du helper, sa durée,
+  wrapper joint et opérateur absent. Mesurer PID/naissance/TracerPid0 du même
+  contrôle avant que restore ne le retire. Aucune fermeture Python explicite
+  ni écriture finale de l'opérateur tué n'est revendiquée.
+
+Le helper conserve un reçu propre de la commande native avant refus, sans
+extrapoler son code depuis celui du helper. Le statut attendu137 est à mesurer,
+pas à fabriquer. Le helper doit ensuite échouer1 et restituer les originaux ;
+son erreur reste distincte de l'exception source et du résultat de l'acteur.
+Préserver séparément erreur primaire et erreurs de nettoyage. Conserver les
+résultats systemd terminaux avant jonction des seules unités de l'acteur.
+
+Les fonctions ont leurs limites réelles : l'HTTP peut échouer pendant la pause ;
+conserver ce résultat et les deux identités running au point de porte sans
+annoncer un succès métier. Pour chaque cas, recouper les deux conteneurs,
+réseaux et baux avant faute puis leur absence physique, les originaux identiques,
+gardes et processus joints. Deux groupes par cas : préparation réelle, puis
+faute exacte et restitution. Aucun résultat ne découle de cette spécification ;
+ces pannes ne qualifient ni rétention, ni boucle25, ni erreur de detach.

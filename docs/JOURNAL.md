@@ -6835,3 +6835,14 @@ Originaux restitués, deux services sains, actifs à zéro et5 982 artefacts,
 aucun handler exécuté. Trois seuls fichiers diffèrent de la reproduction.
 Borne isolée qualifiée ; régressions des consommateurs à exécuter,35/40 propres,
 detach en erreur, sept jours et campagne finale toujours ouverts dans078.5.
+
+### 11 novembre2026 — Décision des pannes source35/40
+
+Les régressions consommateurs restent actives et leurs353sources figées.
+Décision avant code suivant : après deux vrais handlers et attachement durable,
+SIGSTOP réel de l'opérateur avant assertion10002/boucle25. Acteur indépendant
+déjà prêt/pidfd : SIGALRM pending puis SIGCONT35+.5, ou aucun réveil jusqu'au
+vrai timeout40. Ne changer aucune minuterie. Mesurer la marge réelle au moins2s,
+préserver exception primaire et nettoyages, code wrapper avant refus et TracerPid0
+avant retrait du contrôle. Deux groupes par cas, code/E2E à faire après la fin
+des consommateurs ; aucun résultat acquis et aucun succès métier exigé pendant pause.

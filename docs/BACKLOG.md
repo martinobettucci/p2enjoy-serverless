@@ -1737,6 +1737,11 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   mais ce cas n'est pas provoqué par le refus d'historique ci-dessus.
 - [ ] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
+  [Contrat décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40) :
+  deux vrais handlers, SIGSTOP après attache/reçu et avant assertion10002 ;
+  acteur indépendant SIGCONT après vraie alarme35+.5 ou suspension jusqu'au
+  vrai timeout40. Statuts opérateur/wrapper/helper distincts, TracerPid0 mesuré
+  avant retrait du contrôle, nettoyages et ressources recoupés. Code/E2E requis.
 - [ ] Attente native partagée de 25 s : défaut reproduit puis borne corrigée
   qualifiée sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
   avant detach. Le waitpid bloquant dépassait sa borne ; la correction attend
