@@ -5908,3 +5908,16 @@ conservés, agent sain et gardes/helpers terminés. SLS-099 est close ; demande
 FORGE retirée. Aucun produit, schéma, UI ou manuel modifié. SLS-078 demeure
 ouverte pour rétention réelle, adaptateur.7 et campagne complète ; ses critères
 restants devront être recoupés avant clôture.
+
+
+## 11 novembre2026 — Reprise078 : démarrer le vieillissement réel
+
+Main51f5c68 propre/synchronisée après clôture099. Reprendre rétention et
+adaptateur.7. Exploration vérifiée : deux transactions distinctes donnent
+invocation succeeded/fin réelle puis tir encore dispatched ; les deux bornes
+10000 sont globales. Capture native RO après ce prédicat, témoin HTTP réel,
+reprise immédiate sans SIGKILL, fichiers privés immuables et purge publique de
+la fixture : contrat SCHEDULE_RETENTION avant code. Le replay après sept jours
+exigera une fenêtre exclusive gardée protégeant les originaux du même
+installation-id ; une seconde base seule est exclue. Aucun vieillissement
+ni passage de rétention n’est encore prouvé.

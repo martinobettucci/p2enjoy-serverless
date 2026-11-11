@@ -1528,6 +1528,9 @@ instances/CID à W+300, générations/configurations identiques. Quatre handlers
 réussis, deux purges physiques. [Plan et résultats](SCHEDULE_INSTANCE_REUSE.md).
 Restent rétention réelle, critère adaptateur.7 et régression complète ;
 SLS-078.4/.5/.7 restent à clôturer après recoupement de tous leurs critères.
+La [capture de rétention authentique](SCHEDULE_RETENTION.md) prépare le
+vieillissement réel : invocation terminale liée à un tir non clos et témoin
+HTTP antérieur, sauvegarde native privée ; aucune preuve des sept jours encore.
 La [console des planifications](evidence/schedule-console-dev-2026-11-10.json)
 passe19 groupes sur326 sources : trois ciblés, huit du manuel et huit publics
 rejoués. Six handlers réels22:10UTC, pages5+1, vide, nom63, clavier/focus et mobile.
