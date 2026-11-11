@@ -8,6 +8,9 @@
   lecteur/copieur natif RO raccordé au verrou hérité de la fenêtre existante.
   Copies privées, images vérifiées et16 purges publiques prévues ; implémenté,
   qualification de capture, restitutions et futur replay encore requise.
+  Premier essai réel échoué sous OperationalError ; le mode isolé conserve
+  désormais une connexion RO d'observation jusqu'à sa restitution. Cause exacte
+  non attribuée ; le scénario conserve ses assertions et attend son replay.
 
 ### Qualification en volume des invocations
 

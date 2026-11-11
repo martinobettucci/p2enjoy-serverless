@@ -73,7 +73,8 @@ préparation seule ne qualifie ni la borne10000, ni l'âge, ni les pannes du cli
 
 ## Premier essai et observation durable
 
-L'essai27221ea à06:00UTC a produit deux handlers réussis,172 refus de capacité
+L'[essai27221ea](evidence/schedule-firing-volume-capture-failed-dev-2026-11-11.json)
+à06:00UTC a produit deux handlers réussis,172 refus de capacité
 et82 tirs failed/execution_unavailable. Les journaux signalent OperationalError
 dans les maintenances planification/exécution ; SQLite est intègre et les
 fichiers appartiennent au bon propriétaire. L'errno et le site exact ne sont

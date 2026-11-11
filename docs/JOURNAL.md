@@ -6070,3 +6070,7 @@ instance-limit, connexion RO/autocommit ouverte après démarrage et fermée ava
 restitution, au lieu d'ouvrir/fermer à chaque lecture capacity. Conserver les
 assertions256/2/254 et rendre l'échec immédiat sur autre état terminal. Rejouer
 explicitement après ce changement, sans relance automatique d'un échec.
+
+La revue relève que le global doit être détaché avant close() : une exception
+de fermeture laisserait sinon restore() diriger ses lectures vers l'observateur
+déjà fermé. Corriger ce chemin avant exécution ; restitution dans finally conservée.

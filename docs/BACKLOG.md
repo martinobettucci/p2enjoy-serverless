@@ -1559,7 +1559,8 @@ La [préparation de la borne des tirs](SCHEDULE_FIRING_VOLUME.md) est spécifié
 Le futur replay après39 fenêtres réellement écoulées devra franchir10000 sans
 injection SQL ni horloge remplacée. Client et lecteur natif implémentés avec
 jonction par verrou hérité ; préparation, régressions et replay restent à qualifier.
-Premier essai27221ea à06:00UTC échoué :2 succès/172 refus/82 failed sous
+Premier [essai27221ea](evidence/schedule-firing-volume-capture-failed-dev-2026-11-11.json)
+à06:00UTC échoué :2 succès/172 refus/82 failed sous
 OperationalError, originaux restitués, aucune capture validée. Appliquer au
 poller du mode isolé l'observateur RO durable existant ; cause exacte non établie.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence

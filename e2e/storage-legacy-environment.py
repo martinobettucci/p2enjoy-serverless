@@ -31,7 +31,7 @@ import time
 from uuid import UUID
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from control_database import control_owner
+from control_database import ControlObserver, control_owner
 
 BASE = Path('/srv/p2enjoy-serverless')
 HISTORY = BASE / 'qualification-history'
@@ -39,6 +39,7 @@ AGENT = 'p2enjoy-storage-dev.service'
 TEMP = 'serverless-api-archive-migration'
 OFFICIAL = ['/etc/spark/env', '/run/spark/secrets', '/etc/spark/routes']
 LOCK = None
+CONTROL_READER = None
 LOCK_PATH = Path('/run/serverless-archive-migration.lock')
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
 SCHEMA_006 = ['001_control.sql', '002_login_limits.sql', '003_deployments.sql',
@@ -110,6 +111,8 @@ def container(item, name):
 
 
 def rows(item, path, query, args=()):
+    if CONTROL_READER is not None and Path(path) == CONTROL_READER.path:
+        return CONTROL_READER.rows(query, args)
     with control_owner(Path(item['paths']['state']) / 'control.sqlite3'):
         with closing(sqlite3.connect('file:' + str(path) + '?mode=ro', uri=True, timeout=2)) as db:
             db.row_factory = sqlite3.Row
@@ -767,7 +770,7 @@ def instance_limit_observation(item):
 
 
 def main():
-    global LOCK
+    global LOCK, CONTROL_READER
     assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
     mode, campaign = sys.argv[1:3]
     assert str(UUID(campaign)) == campaign
@@ -965,6 +968,9 @@ def main():
             os.rename(replacement, path)
         command(['systemctl', 'start', AGENT])
         current = start_control(item, journal, old_image)
+        if mode == 'instance-limit':
+            CONTROL_READER = ControlObserver(Path(paths['state']) / 'control.sqlite3')
+            CONTROL_READER.open()
         emit({'event': 'instance-limit-ready' if mode == 'instance-limit' else 'historical-ready',
               'container': current, 'installation_id': item['temporary_installation'],
               **({'capacity': instance_limit_observation(item)} if mode == 'instance-limit' else {})})
@@ -1080,7 +1086,12 @@ def main():
                 raise AssertionError('unknown_campaign_operation')
             emit({'event': 'result', 'op': op, 'value': result})
     finally:
-        restore(item, journal, False)
+        try:
+            if CONTROL_READER is not None:
+                reader, CONTROL_READER = CONTROL_READER, None
+                reader.close()
+        finally:
+            restore(item, journal, False)
 
 
 def lock_available(fd):
