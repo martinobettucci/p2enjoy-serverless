@@ -493,5 +493,5 @@ migrations, intégrité, droits de source, code/volumes et fichiers officiels
 conservés. Aucune variable ou route SPARK nouvelle. Un retour à l'image009
 ne doit pas ignorer des brouillons et leurs références ; arrêter le contrôle
 et restaurer une sauvegarde cohérente seulement sur décision explicite, jamais
-automatiquement. L'ancienne image reste disponible ;010 n'est pas encore codée
-ni appliquée. Le déploiement et les preuves restent à exécuter.
+automatiquement. L'ancienne image reste disponible ;010 est codée et reste
+à appliquer. Le déploiement et les preuves restent à exécuter.

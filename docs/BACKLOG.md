@@ -868,8 +868,9 @@ Tests exigés :
 <a id="sls-070"></a>
 ## SLS-070 — Édition du code et du handler dans la console
 
-Statut : [ ] — contrat détaillé persisté dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md),
-avant code ; aujourd'hui seulement l'upload ZIP et le champ handler.
+Statut : [~] — contrat détaillé persisté dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
+avant code. Serveur et migration010 implémentés ; construction, bascule et preuves
+à exécuter. La facette Éditeur reste à implémenter ; aucun critère n'est clôturé.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 dépend de

@@ -1,5 +1,24 @@
 # Qualification de la plateforme
 
+## Sources et brouillons de code — campagne en préparation
+
+`node e2e/code-editor.mjs` reçoit le JSON SSO sur stdin privée. Il utilise le
+vrai accueil puis SSO, les vraies API HTTPS et les conteneurs Docker. Le helper
+`code-editor-package.py` reprend uniquement la dépendance YAML2.9.1 déjà
+installée dans la référence inchangée et les handlers originaux editor.cjs/mjs.
+Le paquet conserve Unicode, CRLF, absence de fin de ligne, mode exécutable et
+binaire. Aucune dépendance de substitution, interception réseau ou seed SQL.
+
+Le scénario couvre droits et portée, sauvegarde privée/conflits/no-op, bornes
+1Mio/4Mio/128chemins, quatre corps HTTPS réellement partiels puis429/408,
+déduplication et invocations pilote/CJS/ESM, promotion/rollback, import cassé,
+rétention de base supprimée et purges publiques. Le lecteur natif accepte le
+seul UUID namespace et ne renvoie ni source, ni chiffrement, ni jeton.
+Les rapports UUID ne sont pas écrasés. Une erreur est conservée ; aucun rejeu
+silencieux. Quotas globaux/par acteur/chiffrement, interruptions, purge contre
+lecteur et interface restent des preuves distinctes. Aucun résultat annoncé
+avant exécution. Contrat : [CONSOLE_EDITOR](../docs/CONSOLE_EDITOR.md).
+
 ## Attente de droits et renouvellement SSO
 
 `node e2e/sso-session-recovery.mjs` reçoit les identifiants du compte autorisé

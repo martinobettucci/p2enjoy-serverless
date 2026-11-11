@@ -3,7 +3,8 @@
 Contrat de réalisation [SLS-070](BACKLOG.md#sls-070), décidé le11 novembre2026
 avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler)
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
-L'éditeur n'est pas encore implémenté. Les critères du backlog restent ouverts.
+Le serveur et la migration010 sont implémentés, sans qualification à ce stade.
+La facette console reste à implémenter. Les critères du backlog restent ouverts.
 
 ## Parcours et droits
 
@@ -222,3 +223,13 @@ physique sont recoupés ; aucun mock, serveur de remplacement ou test ignoré.
 La validation de chaque borne représente sa propre preuve ; les preuves qui
 manquent maintiennent l'unité ouverte. Le manuel canonique, la parité et la
 fixture éditable sont mis à jour avec le comportement effectivement livré.
+
+## Réalisation en cours
+
+Le serveur `control/app/code_editor.py` expose les sources, patches chiffrés,
+diffs et publication par le pipeline réel. La migration010 reste à appliquer
+sur DEV. Le client `e2e/code-editor.mjs` prépare une campagne propre, avec
+lecture native limitée à son namespace et dépendance YAML2.9.1 issue du
+conteneur de référence inchangé. Les fixtures CJS/ESM sont dans le dépôt.
+Aucun résultat E2E n’est annoncé avant exécution ; les quotas globaux, la
+concurrence purge/lecture, les interruptions et l’interface restent à qualifier.

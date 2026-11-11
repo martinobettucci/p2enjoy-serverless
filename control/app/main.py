@@ -21,6 +21,8 @@ from .auth import Identity,SESSION_COOKIE,FLOW_COOKIE,AccessPending
 from .config import Settings,Vault
 from .db import Database,audit
 from .deployments import Deployments
+# @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md
+from .code_editor import CodeEditor
 from .function_operations import FunctionOperations
 from .storage_management import StorageManagement
 from .execution import Execution
@@ -48,7 +50,7 @@ class BodyLimit:
             if message['type']=='http.request':
                 total+=len(message.get('body',b''))
                 state=scope.get('state',{})
-                limit=64*1024**2 if state.get('artifact_upload_authorized') is True else 1024**2 if state.get('invocation_authorized') is True else 256*1024
+                limit=64*1024**2 if state.get('artifact_upload_authorized') is True else 8*1024**2 if state.get('source_edit_authorized') is True else 1024**2 if state.get('invocation_authorized') is True else 256*1024
                 if total>limit:raise HTTPException(413,'Le corps de requête dépasse sa limite autorisée.')
             return message
         await self.app(scope,limited,send)
@@ -101,6 +103,8 @@ app=FastAPI(title='P2Enjoy Serverless',lifespan=lifespan,docs_url=None,redoc_url
 app.add_middleware(BodyLimit)
 app.include_router(router(database,identity,vault,operations))
 app.include_router(deployments.routes())
+# @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#api
+app.include_router(CodeEditor(deployments).routes())
 app.include_router(invocation_routes(execution))
 app.include_router(schedules.routes())
 app.include_router(storage_management.routes())

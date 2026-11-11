@@ -190,6 +190,8 @@ class StorageManagement:
                 db.execute('UPDATE functions SET updated_at=? WHERE id=?',(now,key))
                 if kind=='purge':
                     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#archivage-restauration-et-suppression
+                    # @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#persistance-concurrence-et-conservation
+                    db.execute('DELETE FROM code_drafts WHERE function_id=?',(key,))
                     db.execute("UPDATE function_versions SET state='deleted',updated_at=? WHERE function_id=?",(now,key))
                     db.execute("UPDATE functions SET config_json='{}',environment_json='{}',secrets_cipher=? WHERE id=?",(self.vault.seal({}),key))
                     db.execute("UPDATE revisions SET deleted_at=coalesce(deleted_at,?),inventory_json='[]',events_json='{}' WHERE function_id=?",(now,key))

@@ -1,7 +1,7 @@
 # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle | docs/SCHEMA.md#déploiements-et-révisions
 """Authenticated publication, bounded admission and installation-owned recovery."""
 import asyncio
-from contextlib import closing,suppress
+from contextlib import closing,suppress,contextmanager
 import fcntl
 import json
 import logging
@@ -81,9 +81,21 @@ class Deployments:
         self.operations=operations
         # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#publication-et-déduplication
         self.live_uploads=set();self.validation_lock=asyncio.Lock();self.versions=FunctionVersions(self)
+        # @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#persistance-concurrence-et-conservation
+        self.source_readers=0
 
     @property
-    def busy(self):return self.cleaning or bool(self.live_uploads)
+    def busy(self):return self.cleaning or bool(self.live_uploads) or self.source_readers>0
+
+    # @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#persistance-concurrence-et-conservation
+    @contextmanager
+    def source_reader(self):
+        # Event-loop owned: acquisition precedes every await; blocking() joins IO before release.
+        if self.cleaning or self.source_readers>=4:
+            raise HTTPException(429,'Les lecteurs de code sont occupés.',headers={'Retry-After':'2'})
+        self.source_readers+=1
+        try:yield
+        finally:self.source_readers-=1
 
     async def start(self):
         self.lock=os.open(self.settings.state_dir/'control.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
@@ -184,11 +196,13 @@ class Deployments:
                         AND v.code_hash=revisions.code_hash AND v.state='deleted')
                     AND NOT EXISTS(SELECT 1 FROM execution_instances i WHERE i.revision_id=revisions.id)
                     AND NOT EXISTS(SELECT 1 FROM functions f WHERE f.active_revision_id=revisions.id)
+                    AND NOT EXISTS(SELECT 1 FROM code_drafts d WHERE d.base_revision_id=revisions.id)
                     AND NOT EXISTS(SELECT 1 FROM function_operations o WHERE o.function_id=revisions.function_id AND o.kind='purge')''',
                     (time.time(),))
             for row in self.database.all('SELECT id,function_id FROM revisions WHERE deleted_at IS NOT NULL AND stored_bytes>0'):
                 if self.purge_holds_artifacts(row['function_id']):continue
                 if self.database.one('SELECT 1 FROM execution_instances WHERE revision_id=?',(row['id'],)):continue
+                if self.database.one('SELECT 1 FROM code_drafts WHERE base_revision_id=?',(row['id'],)):continue
                 await blocking(self.remove,self.root,str(UUID(row['id'])))
                 with self.database.transaction() as db:db.execute('UPDATE revisions SET stored_bytes=0 WHERE id=? AND deleted_at IS NOT NULL',(row['id'],))
             if startup:
@@ -313,9 +327,9 @@ class Deployments:
             if process.returncode is None:
                 process.kill();await joined(process.communicate())
 
-    async def upload(self,request,key,operation):
+    async def upload(self,request,key,operation,*,archive_stream=None):
         row=await self.read_candidate(request,key);authorization=await self.access(request,row)
-        if request.headers.get('content-type','').split(';',1)[0].strip().lower()!='application/zip':
+        if archive_stream is None and request.headers.get('content-type','').split(';',1)[0].strip().lower()!='application/zip':
             raise HTTPException(415,'Un corps application/zip est requis.')
         if self.cleaning or len(self.live_uploads)>=4:
             raise HTTPException(429,'La capacité de publication est occupée.',headers={'Retry-After':'5'})
@@ -341,7 +355,7 @@ class Deployments:
             size=0
             with (path/'archive.zip').open('xb') as stream:
                 async with asyncio.timeout(120):
-                    async for chunk in request.stream():
+                    async for chunk in (archive_stream if archive_stream is not None else request.stream()):
                         size+=len(chunk)
                         if size>MAX_ZIP:raise HTTPException(413,'L’archive dépasse 64 Mio.')
                         await blocking(stream.write,chunk)
@@ -452,7 +466,7 @@ class Deployments:
             raise
 
     # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#parcours-et-conservation
-    async def prepare(self,request,key,data):
+    async def prepare(self,request,key,data,*,editor_draft=None):
         function=self.database.one('SELECT * FROM functions WHERE id=? AND deleted_at IS NULL',(str(key),))
         right='update' if self.database.one('SELECT 1 FROM revisions WHERE function_id=?',(str(key),)) else 'create'
         authorization=await self.identity.operation(request,function['service_id'] if function else '',right,str(key))
@@ -487,6 +501,13 @@ class Deployments:
                  VALUES (?,?,?,?,?,?,?,?,?,?,?,0,?,?,?,?)''',
                 (candidate,str(key),service['id'],authorization.actor.kind,authorization.actor.id,function['updated_at'],service['updated_at'],
                  self.vault.seal({'config':config,'configuration':values}),json.dumps(events),right,'prepared',now,now+3600,int(code_only),data.restore_code_hash))
+            # @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#publication-et-réponses-perdues
+            if editor_draft is not None:
+                draft_id,draft_version=editor_draft
+                updated=db.execute('''UPDATE code_drafts SET last_deployment_id=?,last_publication_version=?
+                    WHERE id=? AND function_id=? AND actor_kind=? AND actor_id=? AND version=?''',
+                    (candidate,draft_version,draft_id,str(key),authorization.actor.kind,authorization.actor.id,draft_version)).rowcount
+                if updated!=1:raise HTTPException(409,'Le brouillon a changé pendant sa reconstruction. Aucun candidat créé.')
             audit(db,authorization.actor,'deployment.prepare',str(key),service['id'],{'deployment_id':candidate})
         return self.public(self.candidate(candidate))
 

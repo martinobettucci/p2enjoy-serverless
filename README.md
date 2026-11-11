@@ -246,6 +246,11 @@ de volumes est installé en DEV ; les baux, budgets et reprises font l’objet
 de campagnes réelles de composant. Leur raccordement aux admissions publiques
 est désormais déployé et éprouvé par la campagne publique.
 
+Le [serveur de l’éditeur SLS-070](docs/CONSOLE_EDITOR.md) est implémenté avec une
+migration additive010 ; sa bascule et sa qualification restent à exécuter.
+La facette de console n’est pas encore proposée. Les critères du registre
+restent ouverts ; le contrat distingue les preuves serveur des parcours UI.
+
 ## Objectif
 
 Exploiter et déployer les projets P2Enjoy avec une compatibilité Lambda ciblée,

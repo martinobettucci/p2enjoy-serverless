@@ -4,7 +4,9 @@
 
 - SLS-070 : contrat complet de l’éditeur persisté avant code : brouillons privés,
   droits de publication, diff, base retenue, limites et pipeline Docker réel.
-  Migration010 et interface à réaliser ; aucun résultat fonctionnel revendiqué.
+  Sources, patches chiffrés/versionnés, diff, reconstruction ZIP et migration010
+  implémentés. Bascule DEV et campagne réelle à exécuter ; interface à réaliser.
+  Aucun résultat E2E revendiqué avant exécution.
 
 - SLS-089 : corrections déployées en DEV sur e81007c5 après contrat dédié.
   [33groupes réels](docs/evidence/sso-session-recovery-dev-2026-11-11.json)

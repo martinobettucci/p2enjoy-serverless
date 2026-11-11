@@ -7270,3 +7270,10 @@ La revue du serveur en cours relève que la borne du corps doit aussi précéder
 l’allocation JSON : décision complémentaire avant correction, quatre réceptions
 autorisées au plus, dans la garde de lecteurs, délai de30secondes et408.
 Aucune qualification serveur revendiquée avant déploiement et vrais E2E.
+
+Le12novembre2026, première tranche serveur SLS-070 : migration010, sources
+autorisées, patches chiffrés versionnés, diff borné, rétention et publication
+code-only par le pipeline existant. La revue P1 de réception est corrigée ;
+la publication rejoint aussi le propriétaire operations.responsibility comme
+le vrai endpoint ZIP. Les scénarios E2E et fixtures originales sont ajoutés ;
+construction/déploiement/proofs non encore exécutés, UI non implémentée.
