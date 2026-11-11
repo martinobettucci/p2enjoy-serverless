@@ -79,6 +79,30 @@ conserve ce contrôle. Avant tout retrait Docker, namespace/fonction/révision/i
 labels et montage /code doivent correspondre exactement aux données temporaires.
 Lelabs reste vide. Toute ressource inconnue interdit le retrait/restitution aveugle.
 
+## Refus du périmètre cloné
+
+Le mode client `foreign-namespace` reprend la source vivante en mode helper
+`preflight`, avec garde120 et mêmes limites UTC. Il reçoit les identifiants
+SSO par stdin privée. Quatre groupes : chargement/observation ; SSO/API ;
+namespace hors périmètre préservé au refus ; restitution explicite après retrait
+de la seule fixture. Aucune nouvelle option du helper ni relaxation de portée.
+
+Après le SSO, créer par API un namespace vide au nom de campagne, conserver
+son UUID et son nom. Demander restore via le helper normal : celui-ci termine
+le pilote, puis doit refuser avec foreign_namespace avant retrait du contrôle
+temporaire. Vérifier le pilote terminé, restored=false, le même conteneur
+temporaire encore en marche, l'original arrêté et l'objet visible par API.
+Supprimer ce seul namespace par API, vérifier son absence, puis demander une
+restitution explicite avant D+110. Son independent=true décrit l'appel hors du
+pilote ; ce cas n'est pas une nouvelle preuve d'expiration du timer.
+
+Conserver les diagnostics du refus, les identités natives et les dates. Après
+restitution, vérifier sources/captures/images/configuration et originaux, pilotes
+et garde terminés, copies retirées. En cas d'erreur, tenter le retrait API de
+la seule fixture créée avant le secours ; un objet inconnu reste une interdiction
+de restitution, jamais un prétexte à effacer des données. La fonctionnalité est
+spécifiée ici ; le nouveau mode doit être implémenté puis qualifié réellement.
+
 ## Observation du premier passage réel
 
 Le lecteur `retention-history-replay.py` démarre Compose et attache l'observateur

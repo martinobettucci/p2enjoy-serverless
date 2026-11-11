@@ -6524,3 +6524,14 @@ final même CID/image, démarrage attendu13:12:18UTC, référence inchangée,2he
 healthz200, agent actif,5982 artefacts, actifs0 et aucune garde. Namespace étranger
 du contexte cloné, régressions historiques et propres résiduelles, sept jours
 et campagne complète restent ouverts ; SLS-078 et SLS-091 restent[~].
+
+### 11novembre2026 — Qualification du périmètre cloné avant restitution
+
+Après les treize groupes,078.5 reprend le refus de namespace étranger sur le
+contexte cloné. Décision avant code : nouveau mode client foreign-namespace,
+helper preflight inchangé ; création API de sa seule fixture vide, premier
+restore refusé avant retrait du contrôle, objet conservé et pilote terminé,
+puis DELETE API de la fixture et restitution explicite. Quatre groupes, même
+garde120/limitesUTC ; independent=true ne devient pas une expiration de timer.
+Le secours tente le retrait de sa seule fixture avant restore ; aucun nettoyage
+SQL ni nouvelle autorisation de propriété. Aucun résultat nouveau acquis.
