@@ -305,3 +305,30 @@ et tous les processus joints. Trois groupes attendus par campagne : installation
 mesure de défaut ou borne corrigée explicitement choisie, restitution. Aucun
 résultat n'est acquis par cette spécification ; 35/40 propres à l'opérateur
 source, erreur de detach et rétention restent des preuves distinctes.
+
+### Dépassement reproduit et décision de correction
+
+La [reproduction c64fdd7](evidence/native-observer-deadline-reproduce-dev-2026-11-11.json)
+passe trois groupes sur353sources/images identiques. Sans statut en attente,
+le vrai wait25 reste bloqué28,202s : l'erreur native_stop_not_observed arrive
+après le dégel systemd28 du contrôle temporaire. L'alarme globale avait encore
+34,903s à l'entrée ; ce n'est pas une expiration35. Même PID/naissance,
+TracerPid0 après dégel confirmé, mémoire/lecteur fermés, acteur terminal
+success/Code1/Status0 joint et originaux restitués. Aucun handler exécuté.
+
+Décision avant code : remplacer l'attente waitpid bloquante de cette classe
+par une attente de vrais SIGCHLD bornée. Bloquer temporairement SIGCHLD dans
+le thread, consulter waitpid(WNOHANG) avant chaque attente, puis utiliser
+sigtimedwait avec le temps monotone restant. Un signal d'un autre enfant ne
+vaut jamais arrêt du contrôle : seul le waitpid de son PID décide. Restaurer
+le masque initial dans un finally. Ne modifier ni handler SIGALRM ni minuterie
+globale, pour conserver le délai35 et les interruptions propres du caller.
+Cette approche évite une temporisation à chaque syscall et ne réserve aucun
+second timer global ; aucun signal ou retour système n'est fabriqué.
+
+Le même probe bounded doit ensuite échouer à25–26s sans attendre le secours28,
+mesurer le masque de signaux identique avant/après, l'alarme35 encore active
+avec son temps restant cohérent et son handler conservé. Puis dégel indépendant,
+détachement réel et restitution comme dans la reproduction. Rejouer ensuite
+les consommateurs et scénarios connexes de la classe ; cette borne isolée ne
+clôture ni078.5 ni les pannes35/40 propres de l'opérateur source.

@@ -1748,7 +1748,12 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   commande40 inchangées. Mesurer le défaut avant toute correction ; code/E2E requis.
   Banc implémenté (client `native-observer-deadline.mjs` modes reproduce/bounded,
   opérateur dédié et commande strictement limitée au helper instance-limit120).
-  Syntaxes contrôlées ; reproduction réelle et éventuelle correction non acquises.
+  Syntaxes contrôlées ; reproduction réelle qualifiée ci-dessous, correction ouverte.
+  [Reproduction c64fdd7](evidence/native-observer-deadline-reproduce-dev-2026-11-11.json)
+  trois groupes sur353sources : vrai délai25 dépassé à28,202s après dégel,
+  alarme35 non expirée. Nettoyage/acteur joints et originaux restitués. Décision
+  de correction bornée par vrais SIGCHLD/sigtimedwait, sans changer l'alarme35 ;
+  correction, mesure bounded et régressions de consommateurs encore requises.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 

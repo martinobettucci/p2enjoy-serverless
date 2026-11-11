@@ -4,7 +4,9 @@
 
 - Banc natif de mesure25s sur un vrai contrôle temporaire gelé par Docker,
   dégel indépendant28s et restitution120. Mesure primaire et erreurs de
-  nettoyage séparées ; implémenté, reproduction E2E encore requise.
+  nettoyage séparées. [Trois groupes de reproduction](docs/evidence/native-observer-deadline-reproduce-dev-2026-11-11.json)
+  confirment le dépassement25 à28,202s au dégel ; alarme35 non expirée,
+  acteur joint et originaux restitués. Correction/mesure bounded encore requises.
 
 ### Interruptions de sauvegarde et de copie qualifiées
 

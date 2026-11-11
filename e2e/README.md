@@ -2043,6 +2043,12 @@ restitution. Le mode `bounded` est destiné à la mesure après correction :
 expiration entre25 et26s, même dégel sûr et même restitution. Aucun mode ne
 fabrique d'événement ni de données SQL. Exécuter seul sur le SPARK DEV au repos ;
 aucune session SSO nécessaire pour ce diagnostic du composant natif. Les budgets
-35/40s ne changent pas. Implémenté, E2E encore requis ; ces contrôles ne
+35/40s ne changent pas. Ces contrôles ne
 qualifient ni l'opérateur source complet ni sa rétention. Contrat :
 [attente sans événement](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#mesure-de-lattente-native-sans-événement).
+
+Les [trois groupes reproduce c64fdd7](../docs/evidence/native-observer-deadline-reproduce-dev-2026-11-11.json)
+passent sur353sources/images inchangées : dépassement25 effectivement mesuré
+à28,202s, après le dégel indépendant28 et avant l'alarme35. Acteur joint,
+Trace0/mémoire/lecteur fermés et originaux restitués ; aucun handler. Cette
+preuve constate le défaut ; correction, bounded et consommateurs restent requis.

@@ -425,3 +425,13 @@ Six refus d'options client/helper réel sont séparés, sans groupe E2E ajouté.
 Seuls deux fichiers helper/client changent depuis l'époque historique7ed2abe ;
 les cinq groupes de reprise ne sont pas déclarés rejoués ici. Autres pannes
 d'observation, sept jours et campagne complète restent ouverts.
+
+## Délai natif sans événement — reproduction
+
+Les [trois groupes c64fdd7](evidence/native-observer-deadline-reproduce-dev-2026-11-11.json)
+passent sur353sources/images identiques : vrai contrôle temporaire gelé,
+WNOHANG0, attente25 qui ne lève qu'à28,202s après dégel indépendant28.
+Alarme35 non expirée, terminal acteur/jonction, dégel avant detach,
+TracerPid0, mémoire/lecteur fermés et originaux restitués. Aucun handler.
+Cette preuve confirme le défaut d'attente, sans qualifier sa correction,
+les expirations35/40 de l'opérateur source ou une rétention.

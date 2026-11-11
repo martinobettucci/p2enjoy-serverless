@@ -6803,3 +6803,16 @@ Revue RO intégrée avant reproduction : attendre la fin réelle du service de
 dégel après son reçu, joindre sa seule unité dans un finally même sur refus,
 et persister les états failed avant reset. Stderr privé/SHA du driver conservé
 pour diagnostic ; aucune erreur anticipée de wait n'est encore corrigée.
+
+### 11 novembre 2026 — Dépassement25 reproduit
+
+Trois groupes c64fdd7 sur353sources/images identiques : contrôle temporaire
+vide réellement gelé, waitpid WNOHANG0 puis vraie attente25 retourne en erreur
+après28,202s, suite au dégel systemd28. Alarme globale encore34,903s à l'entrée,
+pas une expiration35. Acteur indépendant en system.slice, terminal Code1/Status0,
+jonction avant detach, TracerPid0, mémoire et lecteur fermés. Originaux restitués,
+deux services sains, actifs à zéro, 5 982 artefacts ; aucun handler exécuté.
+Brut97 935/gzip38 061. Décision persistée avant correction : bloquer SIGCHLD
+localement, waitpid WNOHANG puis sigtimedwait avec reste monotone, masque restauré
+et aucun changement de handler/timer SIGALRM. Mesure bounded25–26, contrôle
+du masque et alarme puis régressions de consommateurs à faire ;078.5 ouverte.
