@@ -69,6 +69,7 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
+| 2 | [SLS-100](#sls-100) Identité visuelle distincte pour Serverless | Corriger | `[ ]` | SLS-020 | cette unité ; [DESIGN_SYSTEM_APP](DESIGN_SYSTEM_APP.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
@@ -134,6 +135,7 @@ leurs preuves font autorité dans le détail de chaque unité.
 | Toutes les fonctionnalités livrées testées E2E sur les vrais composants, sans mock ni skip | [QLF-001](#qlf-001), [SLS-001](#sls-001), critères E2E de chaque unité |
 | SPARK DEV autorisé, FORGE limitée au rebond, référence client en lecture seule, aucun lancement PREPROD/PROD | [Contrat local](../CLAUDE_PROJECT.md), [QUALIFICATION_DEV](QUALIFICATION_DEV.md) ; contraintes de toutes les unités |
 | Noms significatifs par fonction et usage, domaine `serverless.lelabs.tech`, route sur 18090 | [SLS-011](#sls-011), [DEPLOYMENT_NAMES](DEPLOYMENT_NAMES.md), règle de nommage du contrat local |
+| Remplacer la foudre, déjà utilisée par une autre application interne, par une icône propre à Serverless | [SLS-100](#sls-100) |
 | SSO réel, rôles verified/admin, namespaces, services, fonctions et gestion des jetons CRUD de service | [SLS-020](#sls-020), [SLS-060](#sls-060), [CONTROL](CONTROL.md) |
 | Jeton Read pour invoquer, droits Create/Update/Delete, authentification métier indépendante | [SLS-020](#sls-020), [SLS-030](#sls-030), [SLS-040](#sls-040), [PLATFORM](PLATFORM.md) |
 | Jetons, variables et secrets au niveau service, avec surcharges par fonction | [SLS-020](#sls-020), [SLS-031](#sls-031), [configuration commune](SERVICE_CONFIGURATION_URLS.md) |
@@ -2418,3 +2420,41 @@ L’échec initial après17 groupes HTTP reste exclu ; le budget de polling
 d’effacement couvre maintenant les deux périodes normales de maintenance.
 Aucun produit/UI/schéma/manuel modifié ; SLS-078 et la campagne globale restent
 ouverts.
+
+<a id="sls-100"></a>
+## SLS-100 — Identité visuelle distincte pour Serverless
+
+Statut : [ ] — demande du responsable reçue le11 novembre2026, avant implémentation.
+Nature : Corriger. Dépend de : SLS-020. Ordre :2.
+Contrat : cette unité et [design du produit](DESIGN_SYSTEM_APP.md), à compléter
+avec le motif retenu avant le code.
+
+Constat : la foudre de `web/public/favicon.svg`, également affichée dans la
+marque de la console par `web/src/main.jsx`, est déjà utilisée par une autre
+application interne. La plateforme doit posséder une identité distincte.
+
+Résultat attendu : un pictogramme vectoriel propre à Serverless, lié à son usage
+de fonctions conteneurisées, cohérent avec la charte P2Enjoy et reconnaissable
+aux petites dimensions. Le choix du motif est réversible et sera tranché sans
+demande d'arbitrage supplémentaire.
+
+Critères d'acceptation :
+
+- [ ] SLS-100.1 Remplacer la foudre dans toutes les utilisations de la marque
+  applicative courante, notamment le favicon, l'accueil de connexion et la
+  console. Conserver une seule source SVG pour ces représentations.
+- [ ] SLS-100.2 Vérifier la lisibilité du motif à16 et32px, son contraste,
+  l'absence de débordement sur ordinateur/mobile et le libellé accessible de la
+  marque ; les images décoratives restent ignorées des lecteurs d'écran.
+- [ ] SLS-100.3 Construire et déployer sur le SPARK DEV, puis parcourir l'accueil,
+  la connexion SSO réelle et la console à la souris et au clavier. Recouper le
+  favicon effectivement servi avec la source et inspecter les captures JPEG
+  fraîches de l'accueil et de la console sur ordinateur/mobile.
+- [ ] SLS-100.4 Mettre à jour le design du produit, le changelog, les preuves et
+  références visuelles concernées ; conserver la traçabilité des captures
+  historiques et vérifier les parcours connexes sur la nouvelle image.
+
+Tests exigés : E2E sur l'application réellement déployée, sans substitution de
+ressource ni interception ; contrôles du fichier servi distincts de l'inspection
+visuelle. Le test historique déjà actif doit finir et être restitué avant toute
+modification de ses sources gelées, construction ou redéploiement.

@@ -7060,3 +7060,15 @@ réel MainPID0/Code/Status avant finish du même identifiant ; une perte de hand
 ne vaut ni arrêt ni autorisation de relancer. Recouper originaux/captures et
 résultat terminal, puis seulement poursuivre le nominal numérique source.
 Le goal reste actif ; les autres unités du registre gardent leur périmètre.
+
+### 11 novembre2026 — Demande d'une icône Serverless distincte
+
+Le responsable signale que la foudre est déjà utilisée par une autre application
+interne. Demande inscrite dans SLS-100, ordre2 du registre, avant tout code :
+remplacement commun au favicon et à la marque de l'accueil/console, motif
+vectoriel lié aux fonctions conteneurisées, lisibilité en petit format et
+qualification réelle desktop/mobile. Le SVG courant est la source partagée par
+le favicon et `brand` dans main.jsx. Statut non commencé ; aucun remplacement ni
+déploiement revendiqué. Le worker historique ee45e27f est toujours vivant au
+moment de cette inscription ; ses sources/image restent figées jusqu'à son
+résultat terminal et sa restitution.
