@@ -6,11 +6,11 @@
 
 - Client E2E de capture d'une première fenêtre réelle de256 déclarations et
   lecteur/copieur natif RO raccordé au verrou hérité de la fenêtre existante.
-  Copies privées, images vérifiées et16 purges publiques prévues ; implémenté,
-  qualification de capture, restitutions et futur replay encore requise.
-  Premier essai réel échoué sous OperationalError ; le mode isolé conserve
-  désormais une connexion RO d'observation jusqu'à sa restitution. Cause exacte
-  non attribuée ; le scénario conserve ses assertions et attend son replay.
+  Le mode isolé conserve une connexion RO jusqu'à sa restitution. Quatre groupes
+  réels31b9102 sur340sources :256 tirs06:15UTC dont2 handlers/254 refus,
+  sauvegarde vérifiée,16 purges et restitution. Premier essai échoué sous
+  OperationalError conservé séparément, cause exacte non attribuée. Éligibilité
+  numérique09:30UTC ; rétention et régressions du helper restent ouvertes.
 
 ### Qualification en volume des invocations
 

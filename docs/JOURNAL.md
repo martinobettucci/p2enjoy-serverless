@@ -6074,3 +6074,13 @@ explicitement après ce changement, sans relance automatique d'un échec.
 La revue relève que le global doit être détaché avant close() : une exception
 de fermeture laisserait sinon restore() diriger ses lectures vers l'observateur
 déjà fermé. Corriger ce chemin avant exécution ; restitution dans finally conservée.
+
+Replay31b9102/5d3595f2 réussi : quatre groupes sur340sources, frontière06:15UTC,
+2 handlers succeeded/254 refus schedule_capacity. Connexion RO durable, lecture
+native verrou hérité et sauvegardes/artefacts/images vérifiés ;16 purges publiques,
+absence physique et restitution complète, gardes jointes. Journal natif relevé
+avant retrait du contrôle temporaire : aucune erreur de maintenance. Le succès
+ne révèle pas l'errno de l'essai27221ea, conservé en preuve échouée séparée.
+Copie privée gardée pour39 fenêtres réelles, éligible09:30UTC ce11 novembre.
+Enregistrer les preuves avant les restitutions/options de garde à rejouer sur
+ce helper ; la borne numérique, les pannes et les sept jours restent ouverts.

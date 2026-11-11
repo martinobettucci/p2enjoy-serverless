@@ -25,9 +25,10 @@ même contrôle et purge de la fixture. Images et données privées sont conserv
 l’épreuve après sept jours devient éligible le18 novembre à03:30:26UTC.
 La rétention à sept jours et la borne10000 des tirs restent à vérifier.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
-implémentée :16 fonctions/16 déclarations, sauvegarde native privée d'une vraie
-fenêtre, puis purges et restitution. Son exécution et le replay après39 fenêtres
-manquées restent à qualifier ; aucune nouvelle preuve n'est déduite du code.
+qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
+sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native
+privée puis16 purges et restitution. Son replay après39 fenêtres manquées devient
+éligible le11 novembre09:30UTC ; rétention et régressions du helper restent à qualifier.
 La [borne des observations HTTP](docs/evidence/invocation-retention-volume-dev-2026-11-11.json)
 passe trois groupes réels sur337sources :10016 handlers/5008 par fonction,
 exacts10000 survivants et16 plus anciens retirés, deux purges et restitution.

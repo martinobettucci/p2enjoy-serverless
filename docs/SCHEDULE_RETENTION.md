@@ -74,7 +74,10 @@ numérique, les10000 tirs planifiés ni les sept jours.
 
 La [borne des tirs](SCHEDULE_FIRING_VOLUME.md) a son protocole distinct de
 préparation : sauvegarde native de256 déclarations actives, puis39 fenêtres
-manquées réellement écoulées avant replay gardé. Cette préparation et le replay
+manquées réellement écoulées avant replay gardé. La
+[préparation31b9102](evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
+passe quatre groupes sur340sources,256 tirs06:15UTC et16 purges/restitution ;
+replay éligible09:30UTC le11 novembre. Régressions du helper et futur replay
 restent à qualifier ; aucune date métier n'est modifiée.
 
 

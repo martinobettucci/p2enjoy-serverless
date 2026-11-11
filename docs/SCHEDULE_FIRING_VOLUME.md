@@ -94,6 +94,25 @@ un correctif du banc à éprouver, pas une preuve de cause ni une correction SQL
 Le client doit aussi échouer immédiatement sur un état terminal inattendu en
 conservant le relevé, au lieu d'attendre la fin du délai d'observation.
 
+## Capture qualifiée le11 novembre2026
+
+Le [replay31b9102](evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
+passe quatre groupes sur340sources figées, même imagec59b8616. À06:15UTC :
+256 tirs, deux handlers succeeded et254 refus schedule_capacity sans invocation.
+Les256 lignes natives,16 générations actives, deux appels et logs sont recoupés
+dans la sauvegarde intègre ; artefacts et exports immuables vérifiés. Le lecteur
+confirme son verrou hérité et ses copies protégées. Aucun échec de maintenance
+dans le relevé de journal de cette fenêtre ; la cause de l'essai précédent
+reste inconnue. Rapport brut intégral conservé en gzip, hors secrets.
+
+Capture privée schedule-firing-volume-5d3595f228964f4e848a8974004e8c0f.
+Curseur C=06:15UTC,256 déclarations par fenêtre : éligibilité au premier replay
+numérique le11 novembre2026 à09:30UTC, après39 fenêtres réellement écoulées.
+Les16 fonctions sont purgées par API, code/volumes/canaux/consommateurs absents,
+originaux restitués et pilote/gardes terminés. L'essai27221ea reste échoué et
+hors total. Les régressions du helper modifié et pannes propres restent à éprouver ;
+la capture ne qualifie pas la rétention, le futur replay ni les sept jours.
+
 ## Éligibilité et replay à qualifier
 
 Relever dans la sauvegarde le curseur réel C=W et le nombre initial T0=256.

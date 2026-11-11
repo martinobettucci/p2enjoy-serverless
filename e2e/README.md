@@ -1750,3 +1750,8 @@ sur le SPARK DEV au repos, après synchronisation des sources. Le rapport UUID
 porte l'instant réel d'éligibilité après39 fenêtres manquées. La commande
 prépare la preuve ; elle ne teste pas encore le futur replay ni la borne10000.
 Contrat : [SCHEDULE_FIRING_VOLUME](../docs/SCHEDULE_FIRING_VOLUME.md).
+
+Le [replay31b9102](../docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
+passe quatre groupes sur340sources :256 tirs06:15UTC, sauvegarde protégée,
+16 purges et restitution. L'essai27221ea échoué est conservé séparément.
+Éligibilité numérique09:30UTC ; rétention et régressions restent requises.

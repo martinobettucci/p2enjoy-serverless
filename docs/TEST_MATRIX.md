@@ -192,6 +192,17 @@ Soit17 groupes pour cette étape, sans recomptage des assertions internes.
 La borne des tirs, la source protégée sous borne numérique, les sept jours,
 les pannes propres des nouveaux clients et la campagne complète restent ouverts.
 
+## Préparation de la borne des tirs — SLS-078.5
+
+`node e2e/schedule-firing-volume-capture.mjs`, seul sur le SPARK DEV au repos,
+avec identifiants SSO sur stdin privée, passe
+[quatre groupes](evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
+sur340sources31b9102 :256 tirs réels à06:15UTC, deux handlers/254 refus sans
+invocation, copie native protégée,16 purges et restitution jointe. Le premier
+essai27221ea échoué reste distinct. Éligibilité après39 fenêtres :09:30UTC le
+11 novembre. Ni borne10000 ni sept jours revendiqués ; régressions du helper,
+pannes propres et replay encore requis.
+
 ## Plafond global isolé — SLS-099
 
 Commande publique canonique : `python3 -B e2e/public-invocations-suite.py`,

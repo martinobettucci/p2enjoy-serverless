@@ -1557,12 +1557,16 @@ La [préparation de la borne des tirs](SCHEDULE_FIRING_VOLUME.md) est spécifié
 16 fonctions/16 déclarations chacune dans l'installation isolée existante,
 256 premiers tirs authentiques puis sauvegarde native de générations actives.
 Le futur replay après39 fenêtres réellement écoulées devra franchir10000 sans
-injection SQL ni horloge remplacée. Client et lecteur natif implémentés avec
-jonction par verrou hérité ; préparation, régressions et replay restent à qualifier.
+injection SQL ni horloge remplacée. Client et lecteur natif avec jonction par
+verrou hérité qualifiés ci-dessous ; régressions et replay restent à qualifier.
 Premier [essai27221ea](evidence/schedule-firing-volume-capture-failed-dev-2026-11-11.json)
 à06:00UTC échoué :2 succès/172 refus/82 failed sous
-OperationalError, originaux restitués, aucune capture validée. Appliquer au
-poller du mode isolé l'observateur RO durable existant ; cause exacte non établie.
+OperationalError, originaux restitués, aucune capture validée dans cet essai.
+Observateur RO durable existant appliqué au poller ; cause exacte non établie.
+Le [replay31b9102](evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
+passe quatre groupes sur340sources :256 tirs à06:15UTC,2 handlers/254 refus,
+sauvegarde privée vérifiée,16 purges et restitution. Première éligibilité du
+replay numérique le11 novembre09:30UTC ; régressions du helper encore requises.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.
