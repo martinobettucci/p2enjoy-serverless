@@ -1557,7 +1557,8 @@ La [préparation de la borne des tirs](SCHEDULE_FIRING_VOLUME.md) est spécifié
 16 fonctions/16 déclarations chacune dans l'installation isolée existante,
 256 premiers tirs authentiques puis sauvegarde native de générations actives.
 Le futur replay après39 fenêtres réellement écoulées devra franchir10000 sans
-injection SQL ni horloge remplacée. Préparation et replay restent à qualifier.
+injection SQL ni horloge remplacée. Client et lecteur natif implémentés avec
+jonction par verrou hérité ; préparation, régressions et replay restent à qualifier.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

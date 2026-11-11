@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+### Préparation de la borne globale des tirs
+
+- Client E2E de capture d'une première fenêtre réelle de256 déclarations et
+  lecteur/copieur natif RO raccordé au verrou hérité de la fenêtre existante.
+  Copies privées, images vérifiées et16 purges publiques prévues ; implémenté,
+  qualification de capture, restitutions et futur replay encore requise.
+
 ### Qualification en volume des invocations
 
 - Client de10016 appels réels répartis sur deux fonctions, relevés avant/après

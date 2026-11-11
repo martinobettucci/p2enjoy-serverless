@@ -1734,3 +1734,19 @@ restent requises dans [SCHEDULE_RETENTION](../docs/SCHEDULE_RETENTION.md).
 La [capture réelle5056167](../docs/evidence/schedule-retention-capture-dev-2026-11-11.json)
 passe quatre groupes sur331sources. Âge éligible le18 novembre2026 à03:30:26UTC ;
 les propres pannes et régressions du helper restent à exercer.
+
+## Préparation de la borne des tirs planifiés
+
+`node e2e/schedule-firing-volume-capture.mjs` reçoit le JSON SSO sur stdin privée,
+ouvre la fenêtre instance-limit900s du même contrôle et publie/promet16 fonctions
+portant chacune16 crons. Une frontière UTC réelle doit donner256 tirs, deux
+handlers réussis et254 refus de capacité. Le helper lance ensuite le lecteur
+`schedule-firing-volume-snapshot.py` avec son verrou hérité : sauvegardes SQLite
+RO, artefacts et images immuables vérifiés, copies privées conservées. Les16
+fonctions sont purgées par les API avant restitution et jonction des gardes.
+
+Prévoir jusqu'à deux frontières UTC pour préparer les promotions ; lancer seul,
+sur le SPARK DEV au repos, après synchronisation des sources. Le rapport UUID
+porte l'instant réel d'éligibilité après39 fenêtres manquées. La commande
+prépare la preuve ; elle ne teste pas encore le futur replay ni la borne10000.
+Contrat : [SCHEDULE_FIRING_VOLUME](../docs/SCHEDULE_FIRING_VOLUME.md).

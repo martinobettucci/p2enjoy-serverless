@@ -7,6 +7,8 @@
 # @verifies docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#scénarios-requis
 # @spec docs/BACKLOG.md#sls-078 | docs/INVOCATION_RETENTION_VOLUME.md#installation-réelle-et-garde
 # @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_RETENTION_VOLUME.md#installation-réelle-et-garde
+# @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#préparation-authentique-et-conservation
+# @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#préparation-authentique-et-conservation
 """DEV-only isolated installations with an independent identity-based restore."""
 from contextlib import closing
 import fcntl
@@ -971,10 +973,20 @@ def main():
             op = request['op']
             if op == 'restore':
                 break
-            if mode == 'instance-limit':assert op in ('capacity','pause-observation'), 'instance_limit_operation_required'
+            if mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history'), 'instance_limit_operation_required'
             if op == 'capacity':
                 assert mode == 'instance-limit'
                 result = instance_limit_observation(item)
+            elif op == 'capture-firing-history':
+                assert mode == 'instance-limit' and set(request) == {'op','function_ids','window'}
+                identifiers = request['function_ids']
+                assert len(identifiers) == len(set(identifiers)) == 16
+                assert all(isinstance(v,str) and str(UUID(v)) == v for v in identifiers)
+                assert type(request['window']) is int and request['window'] > 0 and request['window'] % 300 == 0
+                result = json.loads(command(['python3','-B',str(BASE/'e2e/schedule-firing-volume-snapshot.py'),
+                    '--campaign',campaign,'--functions',','.join(identifiers),'--window',str(request['window']),
+                    '--lock-fd',str(LOCK)]))
+                assert result['completed'], 'firing_history_capture_failed'
             elif op == 'pause-observation':
                 assert mode == 'instance-limit' and 'before_observer_fault' not in item
                 item['before_observer_fault'] = instance_limit_observation(item)
