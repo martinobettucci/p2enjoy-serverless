@@ -2439,11 +2439,10 @@ ouverts.
 <a id="sls-100"></a>
 ## SLS-100 — Identité visuelle distincte pour Serverless
 
-Statut : [ ] — demande et motif de remplacement spécifiés, avant implémentation.
+Statut : [~] — motif spécifié, implémentation et qualification en cours.
 Nature : Corriger. Dépend de : SLS-020. Ordre :2.
-Contrat : cette unité ; reporter le motif ci-dessous dans le
-[design du produit](DESIGN_SYSTEM_APP.md) avant le code, une fois le gel de la
-campagne active levé.
+Contrat : cette unité et
+[identité du produit](DESIGN_SYSTEM_APP.md#serverless-identity).
 
 Constat : la foudre de `web/public/favicon.svg`, également affichée dans la
 marque de la console par `web/src/main.jsx`, est déjà utilisée par une autre
@@ -2480,5 +2479,6 @@ Critères d'acceptation :
 
 Tests exigés : E2E sur l'application réellement déployée, sans substitution de
 ressource ni interception ; contrôles du fichier servi distincts de l'inspection
-visuelle. Le test historique déjà actif doit finir et être restitué avant toute
-modification de ses sources gelées, construction ou redéploiement.
+visuelle. Une campagne active doit finir et être restituée avant toute
+modification de ses sources gelées, construction ou redéploiement. Le nominal
+caf8c362 est maintenant terminé, finalisé et restitué ; ce gel est levé.

@@ -58,6 +58,29 @@ Leurs empreintes figurent dans la [preuve de stockage](evidence/function-storage
 Les captures restent sous `.local/e2e/`. Le nom maximal est vérifié à 390 px,
 avec `scrollWidth <= innerWidth`, depuis la création dans la console.
 
+<a id="serverless-identity"></a>
+## Identité Serverless SLS-100 — correction en cours
+
+Le remplacement demandé est spécifié avant implémentation dans
+[SLS-100](BACKLOG.md#sls-100) : trois blocs blancs reliés par deux branches sur la
+pastille bleue P2Enjoy existante. Les blocs représentent les fonctions et leurs
+relations ; la silhouette simple vise la lisibilité à16px. Les détails
+isométriques sont écartés pour conserver cette lisibilité.
+
+`web/public/favicon.svg` reste la source unique du favicon et de la marque
+affichée à l'accueil et dans la navigation. Le texte P2Enjoy Serverless fournit
+le libellé ; l'image adjacente garde son `alt` vide. Le fichier est autonome,
+sans police, animation ou ressource extérieure. Sa route existante est conservée,
+avec le `Cache-Control: no-store` déjà appliqué par le contrôle.
+
+La livraison reconstruit l'image du contrôle avec les dépendances verrouillées,
+puis vérifie les parcours depuis l'accueil, la connexion SSO, la navigation
+desktop/mobile et le fichier réellement servi. Les captures JPEG fraîches de
+l'accueil et de la console sont inspectées ; une inspection distincte du SVG à
+16/32px complète les vues applicatives. Les anciennes captures conservent leur
+époque. Le manuel textuel garde ses parcours, puisque leurs gestes ne changent
+pas. Qualification et références visuelles de ce remplacement restent à produire.
+
 ## Noms longs dans la navigation
 
 Le fil d’Ariane conserve les noms complets des namespaces, services et
