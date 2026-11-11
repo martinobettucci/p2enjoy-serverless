@@ -1544,7 +1544,9 @@ reste requis dans cette même unité avant de cocher.4.
 Le [scénario discriminant](SCHEDULE_CONCURRENCY.md) compare concurrence1/2 à
 maximum3, stockage partagé et budgets libres, pendant deux vrais HTTP à W.
 Client `e2e/schedule-concurrency.mjs` implémenté ; contrôle de syntaxe réussi,
-preuve E2E sur DEV et revue restent à exécuter.
+premier essai03:50UTC échoué sur l'observation après fin du handler, deux purges
+physiques réussies. Observer désormais le handler cron pendant cinq secondes
+et conserver les relevés avant assertion ; replay DEV requis.
 La [console des planifications](evidence/schedule-console-dev-2026-11-10.json)
 passe19 groupes sur326 sources : trois ciblés, huit du manuel et huit publics
 rejoués. Six handlers réels22:10UTC, pages5+1, vide, nom63, clavier/focus et mobile.

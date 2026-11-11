@@ -56,7 +56,7 @@ parallèle. Le lecteur a relevé son instance, mais le détail du relevé n'éta
 pas persisté avant l'assertion ; le nombre observé exact n'est pas reconstruit.
 Les deux fonctions sont purgées et les ressources nulles. Source du moteur :
 une demande en attente peut faire retirer une instance ready d'une autre
-fonction, même avant idle60s (`ExecutionEngine.tick`, réclamation de capacité).
+fonction, même avant idle60s (`Execution.tick`, réclamation de capacité).
 Le délai idle ne garantit donc pas la conservation pour ce relevé tardif.
 Observer le vrai handler pendant ses cinq secondes d'exécution, puis sa fin ;
 aucune modification d'admission, de deadline ou d'horloge. Rapport et checkpoint

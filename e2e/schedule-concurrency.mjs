@@ -11,12 +11,12 @@ const base='https://serverless.lelabs.tech',root=new URL('../',import.meta.url),
 const prefix='scheduled-functions-'+randomUUID().slice(0,8),report=new URL(prefix+'.json',out),checks=[],functions=[],observations=[],cleanupErrors=[],knownInstances={},pending=[];
 const digest=value=>createHash('sha256').update(value).digest('hex');
 let admin,caller,session,namespace,service,reader,work,archive,window,completed=false,cleanup=false,nativeBeforePurge,nativeAfterPurge,campaignFailure;
-function diagnostic(error){return {name:error.name,message_sha256:digest(String(error.message)),location:String(error.stack??'').match(/schedule-concurrency\.mjs:\d+:\d+/)?.[0]};}
+function diagnostic(error){return {name:error.name,message_sha256:digest(String(error.message)),...(typeof error.actual==='number'&&typeof error.expected==='number'?{actual:error.actual,expected:error.expected}:{}),location:String(error.stack??'').match(/schedule-concurrency\.mjs:\d+:\d+/)?.[0]};}
 async function save(){const p=new URL(prefix+'.pending',out);await writeFile(p,JSON.stringify({completed:completed&&cleanup&&!cleanupErrors.length,cleanup,skipped:0,checks,cleanup_errors:cleanupErrors,failure:campaignFailure,namespace_id:namespace?.id,service_id:service?.id,function_ids:functions.map(v=>v.id),functions:functions.map(v=>({id:v.id,name:v.name,config:v.config,code_hash:v.code_hash,disabled_hash:v.disabled_hash})),token_id:reader?.id,known_instances:knownInstances,window,fixture_sha256:archive?digest(archive):null,observations,native_before_purge:nativeBeforePurge,native_after_purge:nativeAfterPurge},null,2)+'\n',{mode:0o600});await rename(p,report);}
 async function until(action,message,deadline=Date.now()+60000){while(Date.now()<deadline){const v=await action();if(v)return v;await new Promise(r=>setTimeout(r,100));}assert.fail(message);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:diagnostic(error)});throw error;}finally{await save();}}
 async function api(path,{method='GET',body,bytes,status=200,headers={}}={}){const r=await admin.fetch(path,{method,data:bytes??body,headers:{Origin:base,'X-CSRF-Token':session?.csrf_token??'',...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});assert([status].flat().includes(r.status()),`${method} ${path}: ${r.status()}`);const text=await r.text();if(reader)assert(!text.includes(reader.token),'private_token_exposed');return JSON.parse(text);}
-async function native(purged=false){const v=JSON.parse((await run('python3',['-B','e2e/schedule-instance-reuse-inspect.py',JSON.stringify({namespace_id:namespace.id,function_ids:functions.map(v=>v.id),known_instances:knownInstances}),...(purged?['--purged']:[])],{cwd:root.pathname,timeout:120000,maxBuffer:8*1024*1024})).stdout);Object.assign(knownInstances,v.known_instances);return v;}
+async function native(purged=false){const v=JSON.parse((await run('python3',['-B','e2e/schedule-instance-reuse-inspect.py',JSON.stringify({namespace_id:namespace.id,function_ids:functions.map(v=>v.id),known_instances:knownInstances}),...(purged?['--purged']:[])],{cwd:root.pathname,timeout:120000,maxBuffer:8*1024*1024})).stdout);Object.assign(knownInstances,v.known_instances);observations.push({scenario:purged?'native-purged':'native-sample',native:v});await save();return v;}
 const calls=async fn=>(await api(`/api/functions/${fn.id}/invocations?limit=100`)).items;
 const firings=async fn=>(await api(`/api/functions/${fn.id}/schedule-firings?limit=100`)).items;
 const instances=async fn=>(await api(`/api/functions/${fn.id}/instances`)).items;
@@ -34,8 +34,8 @@ try{
  admin=await request.newContext({baseURL:base,storageState:JSON.parse(await readFile(new URL('admin-session.json',out),'utf8')),timeout:90000});
  caller=await request.newContext({baseURL:base,timeout:90000});session=await api('/api/session');assert(session.authenticated,'real_sso_required');
  work=new URL((await mkdtemp(new URL(prefix+'-',out).pathname))+'/','file:');
- await writeFile(new URL('scheduled-capacity.cjs',work),await readFile(new URL('../qualification/artifacts/scheduled-capacity.cjs',import.meta.url)));
- await writeFile(new URL('serverless.yml',work),JSON.stringify({service:'scheduled-concurrency',provider:{name:'p2enjoy',runtime:'nodejs24.x'},functions:{probe:{handler:'scheduled-capacity.handler'}},package:{patterns:['!**','*.cjs']}}));
+ await writeFile(new URL('scheduled-concurrency.cjs',work),await readFile(new URL('../qualification/artifacts/scheduled-concurrency.cjs',import.meta.url)));
+ await writeFile(new URL('serverless.yml',work),JSON.stringify({service:'scheduled-concurrency',provider:{name:'p2enjoy',runtime:'nodejs24.x'},functions:{probe:{handler:'scheduled-concurrency.handler'}},package:{patterns:['!**','*.cjs']}}));
  await run('python3',['-B','-m','adapter','package','--config',new URL('serverless.yml',work).pathname],{cwd:root.pathname});
  const manifest=JSON.parse(await readFile(new URL('.serverless-p2/deployment.json',work),'utf8'));archive=await readFile(new URL('.serverless-p2/'+manifest.artifacts.probe.file,work));
  let tasks,httpCalls,initial,waitingCall,parallelCall;
@@ -43,7 +43,7 @@ try{
   namespace=await api('/api/namespaces',{method:'POST',status:201,body:{name:prefix}});await save();
   service=await api(`/api/namespaces/${namespace.id}/services`,{method:'POST',status:201,body:{name:'scheduled-concurrency'}});
   for(const [name,concurrency] of [['serialized-http-and-schedule',1],['parallel-http-and-schedule',2]]){
-   const fn=await api(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'scheduled-capacity.handler',cpu:.05,memory_mib:128,timeout_seconds:60,idle_seconds:60,min_instances:0,max_instances:3,concurrency,queue_timeout_seconds:30,storage:{concurrency:'shared',data:{enabled:false,quota_mib:2},cache:{enabled:false,quota_mib:2}}}}});
+   const fn=await api(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'scheduled-concurrency.handler',cpu:.05,memory_mib:128,timeout_seconds:60,idle_seconds:60,min_instances:0,max_instances:3,concurrency,queue_timeout_seconds:30,storage:{concurrency:'shared',data:{enabled:false,quota_mib:2},cache:{enabled:false,quota_mib:2}}}}});
    functions.push(fn);await save();fn.code_hash=await publish(fn,true);fn.disabled_hash=await publish(fn,false);assert.notEqual(fn.code_hash,fn.disabled_hash);
   }
   assert.deepEqual({...functions[0].config,concurrency:2},functions[1].config);
@@ -66,16 +66,19 @@ try{
  await check('Concurrence1 en file et concurrence2 réussie pendant les mêmes HTTP actifs',async()=>{
   waitingCall=await until(async()=>(await calls(functions[0])).find(v=>v.trigger==='schedule'&&v.schedule_slot===window&&v.state==='queued'),'serialized_schedule_not_queued',(window+8)*1000);
   assert(!waitingCall.handler_started&&!waitingCall.admitted_at&&!waitingCall.instance_id);
-  const fire=await scheduled(functions[1],window);parallelCall=(await calls(functions[1])).find(v=>v.id===fire.invocation_id);assert(parallelCall);witness(parallelCall,functions[1]);
-  const during=await native();assert(during.sample_finished_at<window+20);assert.deepEqual(during.functions,initial.functions);assert.deepEqual(during.generations,initial.generations);assert.equal(during.counts.instances,3);assert.equal(during.counts.active_calls,3);assert.equal(during.counts.waiting_calls,1);
+  parallelCall=await until(async()=>(await calls(functions[1])).find(v=>v.trigger==='schedule'&&v.schedule_slot===window&&v.state==='running'&&v.handler_started),'parallel_schedule_not_running',(window+8)*1000);
+  const during=await native();assert(during.sample_finished_at<window+20);assert.deepEqual(during.functions,initial.functions);assert.deepEqual(during.generations,initial.generations);assert.equal(during.counts.instances,3);assert.equal(during.counts.active_calls,4);assert.equal(during.counts.waiting_calls,1);
   for(const call of httpCalls){const row=during.invocations.find(v=>v.id===call.id);assert.equal(row.state,'running');assert(row.handler_started&&!row.completed_at);}
   const waiting=during.invocations.find(v=>v.id===waitingCall.id);assert.equal(waiting.state,'queued');assert(!waiting.admitted_at&&!waiting.handler_started&&!waiting.instance_id);
   const queuedFire=during.firings.find(v=>v.invocation_id===waiting.id);assert(queuedFire);assert.equal(queuedFire.state,'dispatched');assert.equal(queuedFire.window_at,window);
   assert.equal(during.instances.filter(v=>v.function_id===functions[0].id).length,1);assert.equal(during.instances.filter(v=>v.function_id===functions[1].id).length,2);
-  assert.notEqual(parallelCall.instance_id,httpCalls[1].instance_id);assert(parallelCall.completed_at<window+20);
+  assert.notEqual(parallelCall.instance_id,httpCalls[1].instance_id);const executing=during.invocations.find(v=>v.id===parallelCall.id);assert.equal(executing.state,'running');assert(executing.handler_started&&!executing.completed_at);
   for(const instance of during.instances){const container=during.containers.find(v=>v.instance_id===instance.id);assert(container?.running);assert.equal(container.cpu_nanos,50000000);assert.equal(container.memory_bytes,128*1024**2);}
   assert.equal(during.containers.length,3);assert.equal(during.firings.length,2);assert.equal(during.invocations.length,4);
-  observations.push({scenario:'different-concurrency-same-boundary',queued_call:waitingCall,parallel_firing:fire,parallel_call:parallelCall,native:during});
+  observations.push({scenario:'different-concurrency-same-boundary',queued_call:waitingCall,parallel_call:parallelCall,native:during});await save();
+  const fire=await scheduled(functions[1],window);parallelCall=(await calls(functions[1])).find(v=>v.id===fire.invocation_id);witness(parallelCall,functions[1]);assert(parallelCall.completed_at<window+20);
+  for(const [i,fn] of functions.entries()){const row=(await calls(fn)).find(v=>v.id===httpCalls[i].id);assert.equal(row.state,'running');assert(!row.completed_at);}
+  observations.push({scenario:'parallel-finished-before-http',parallel_firing:fire,parallel_call:parallelCall});
  });
  await check('Tir sérialisé réussi après libération, quatre appels et aucun rejeu',async()=>{
   const responses=[];for(const task of tasks){const result=await task;if(result.error)throw result.error;responses.push(result.value);}

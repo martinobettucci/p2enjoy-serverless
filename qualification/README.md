@@ -33,6 +33,9 @@ une date réelle et dépassement de deadline. La campagne correspondante vit dan
 la mémoire déclarée au contexte ; `e2e/schedule-memory-version.mjs` recoupe son
 vrai plafond Docker8192Mio après un refus RAM, et réutilise le handler exclusif
 pour le changement de version avant admission.
+`scheduled-concurrency.cjs` occupe réellement les HTTP jusqu'à une date bornée
+et les crons pendant cinq secondes : `e2e/schedule-concurrency.mjs` observe
+les conteneurs pendant le handler, avant toute réclamation d'une instance ready.
 `volume-operations.cjs` écrit, relit, supprime et sature réellement les volumes
 /data et /cache ; il conserve l’errno Linux EDQUOT (-122), que Node expose
 actuellement sous code UNKNOWN. Leur campagne se lance séparément selon
