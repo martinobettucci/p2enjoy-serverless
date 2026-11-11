@@ -19,6 +19,11 @@ qualifie les cycles de promotion/retour de hash, le retrait des crons et l'arrê
 après désactivation ou suppression, en conservant les appels admis.
 Les critères résiduels de SLS-078 restent ouverts.
 SLS-096 (concordance du manuel) est corrigée et vérifiée.
+La [capture de rétention](docs/evidence/schedule-retention-capture-dev-2026-11-11.json)
+passe quatre groupes réels : succès sauvegardé avant clôture du tir, reprise du
+même contrôle et purge de la fixture. Images et données privées sont conservées ;
+l’épreuve après sept jours devient éligible le18 novembre à03:30:26UTC.
+La rétention elle-même et les bornes10000 restent à vérifier.
 La [grammaire numérique des crons](docs/evidence/schedule-calendar-dev-2026-11-10.json)
 passe aussi cinq groupes distincts : fusion, règle jour/semaine, refus et
 prévisions calendaires ; SLS-078.2 est qualifiée.
