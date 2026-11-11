@@ -8,7 +8,9 @@
   restitution. [Quatre groupes réels](docs/evidence/source-observer-detach-failure-dev-2026-11-11.json)
   passent sur355sources b5f0825 : erreur5,255s, lecteur/mémoire fermés, masque
   initial restitué, dégel sans secours et refus sans option rejoué. Le premier
-  essai sans exception reste échoué ; consommateurs et nominal restent requis.
+  essai sans exception reste échoué. [Bounded courant](docs/evidence/native-observer-detach-bounded-dev-2026-11-11.json)
+  repasse trois groupes à25,000300s, masque/alarme conservés et dégel avant
+  detach ; consommateurs et nominal restent requis.
 
 - Banc de l'opérateur source : deux fautes réelles après attachement,
   expiration35 après SIGSTOP/SIGCONT indépendant et coupure de commande40.

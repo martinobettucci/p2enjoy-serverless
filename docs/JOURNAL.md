@@ -7012,3 +7012,13 @@ le18novembre et campagne complète restent dans078.5, toujours ouverte.
 Audit RO final sans défaut matériel : brut/rapports/SHA355sources recoupés,
 4groupes, signaux/échéance/masques, fermeture et9+7contrôles physiques conformes.
 Aucune qualification supplémentaire déduite de l'audit.
+
+### 11 novembre2026 — Borne25 sans faute rejouée
+
+Trois groupes sur355sources courantes4ad78da : vraie attente25,000300307s,
+masques/handler global conservés et alarme restante cohérente ; dégel avant
+detach, acteur joint et originaux restitués. Aucun handler ni rétention qualifié.
+Brut98832/gzip38328. Les six consommateurs sont lancés en série au même gel ;
+CP privé native-detach-consumer-regressions-e78a583b67ab4d8ca9ece975b829021d.
+Ne modifier aucun code indexé pendant la campagne. Nominal numérique complet,
+historique final, âge18novembre et campagne complète restent ouverts.

@@ -1799,6 +1799,10 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   physiquement retirés. SSO/API et quatre restitutions joints ; les deux
   captures canoniques sont conservées. Reste le nominal numérique complet
   de la source protégée sur cette époque avant clôture de ce reste.
+  Après le point de faute detach, [bounded courant](evidence/native-observer-detach-bounded-dev-2026-11-11.json)
+  repasse trois groupes sur355sources :25,000300s, masque/alarme conservés,
+  dégel avant detach et restitution. Six consommateurs en cours au même gel ;
+  nominal numérique et historique final encore requis.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 
