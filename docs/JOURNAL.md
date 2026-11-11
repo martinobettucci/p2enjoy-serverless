@@ -7130,3 +7130,27 @@ conservé ; détails isométriques écartés pour la lisibilité16px. Les deux d
 systems ont été lus intégralement. Décision persistée dans le backlog ; le
 design du produit, indexé par le test actif, sera complété après son terminal.
 Aucun SVG, client E2E ou fichier applicatif modifié pendant le nominal courant.
+
+### 11 novembre2026 — Nominal numérique courant terminé et restitué
+
+caf8c362 termine réellement0 à21:05UTC, trois groupes au gel3556de2a86,
+identique au bounded et à l'historique.10001 HTTP+cron réels,5001 lignes par
+fonction :10002→10001 non clos→10000 clos, exacts premier/deuxième plus anciens
+HTTP retirés, source strictement identique. Observation12,410435700s sous25s.
+Deux purges publiques, restitution nominale jointe ; résultat réel
+MainPID0/Resultsuccess/Code1/Status0 conservé puis finish/unité arrêtée.
+Collectes fraîches post-finalisation avec début/fin, SHA terminal et provenance
+checker/inventaire : contrôle original68a8/imagec59 démarré21:05:42UTC,
+référence475b inchangée,2services sains, actifs/baux nuls,5982artefacts, aucune
+garde ; captures canoniques intactes. Brut83048624/gzip4228693, ancienne preuve348
+conservée. Le reste de borne native partagée est coché ;078.5 garde âge18novembre
+et campagne complète. Cette attente d'âge bloque temporairement078 : prochaine
+unité indépendante SLS-100, remplacement de l'icône. Motif déjà persisté041a3d8 ;
+lire le contrat100, reporter sa décision dans DESIGN_SYSTEM_APP avant code,
+construire/déployer puis E2E/inspection réelle de l'accueil et de la console.
+Aucune modification applicative, migration ni capture visuelle dans ce nominal.
+Audit RO final sans défaut matériel :83 048624octets/4 228693gzip et SHA,
+355sources identiques au bounded/historique, ensembles exacts et deux retraits,
+3groupes/2purges/9contrôles physiques, même worker terminal puis arrêté et
+collectes fraîches post-finalisation recoupés. Vrai brut et JSON embarqués sans
+secret détecté ; aucune preuve d'âge ou clôture078.5 déduite de cette revue.

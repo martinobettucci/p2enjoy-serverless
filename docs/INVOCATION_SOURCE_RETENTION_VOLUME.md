@@ -81,7 +81,7 @@ configuration et référence conservés, pilote et garde terminés. L'expiration
 n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant son
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
 rejouer les tests. Charge10000 et frontières sont qualifiées séparément ci-dessous ;
-pannes propres encore requises et régressions communes qualifiées séparément.
+pannes propres et régressions communes qualifiées séparément ci-dessous.
 Ces cinq groupes seuls ne prouvent
 pas la rétention.
 
@@ -183,7 +183,8 @@ nominale jointe des originaux. Le vrai worker oneshot quitte0 ; son résultat
 systemd success/Code1/Status0 est conservé avant arrêt de l'unité.348sources/images
 inchangées, configuration et référence conservées. Le brut complet compressé
 contient les vecteurs et reçus ; essais interrompu/échoué exclus. Sept jours,
-pannes propres résiduelles et campagne complète restent ouverts :078.5 non clôturée.
+campagne complète restent ouverts :078.5 non clôturée. Les pannes propres ont
+leurs preuves distinctes ci-dessous.
 
 ## Régressions finales des fenêtres de restitution
 
@@ -346,8 +347,8 @@ originaux restitués et aucune erreur de nettoyage.
 Seuls les deux fichiers du probe et la classe partagée changent depuis la
 reproduction c64fdd7. Brut98 371/gzip38 128. Aucun handler exécuté ; deux
 services sains, actifs à zéro et5 982 artefacts conservés. La borne isolée
-est qualifiée ; les consommateurs de la classe, les pannes35/40 propres à
-l'opérateur source, detach en erreur, l'âge et la campagne finale restent ouverts.
+est qualifiée ; consommateurs de la classe,35/40 et detach en erreur ont leurs
+preuves distinctes ci-dessous. Âge et campagne finale restent ouverts.
 
 ### Régressions des consommateurs sur les mêmes353sources
 
@@ -373,9 +374,9 @@ Brut33 679 951octets/gzip2 063 211. Les invocations déjà présentes dans les
 captures ne sont pas recomptées comme des handlers nouveaux ; seuls les deux
 handlers de la campagne de refus démarrent pendant ces quatre replays. Deux
 services sains, actifs à zéro,5 982artefacts conservés et aucune garde finale.
-Cette preuve qualifie ces consommateurs ; le nominal numérique complet de la
-source protégée reste à rejouer sur cette époque, ainsi que35/40 propres,
-detach en erreur, l'âge réel et la campagne complète. Aucune modification UI/produit.
+Cette preuve conserve son époque353. Le nominal numérique complet de la classe
+courante,35/40 propres et detach en erreur sont qualifiés séparément ci-dessous ;
+âge réel et campagne complète restent requis. Aucune modification UI/produit.
 
 ## Pannes propres de l'alarme35 et de la commande40
 
@@ -491,8 +492,8 @@ Brut466439octets/gzip156743. Les deux matrices échouées restent exclues.
 Originaux restitués, même contrôle/image, démarrage18:40:06UTC attendu,
 référence inchangée, deux services sains, actifs/baux à zéro,5982artefacts et
 aucune garde. Les bornes propres35/40 sont qualifiées ; detach en erreur et
-reprise historique finale ont leurs preuves distinctes ci-dessous. Nominal
-numérique courant, âge18novembre et campagne complète restent requis dans078.5.
+reprise historique finale et nominal numérique courant ont leurs preuves
+distinctes ci-dessous. Âge18novembre et campagne complète restent requis dans078.5.
 
 ## Fermeture du lecteur malgré une erreur native de detach
 
@@ -538,8 +539,8 @@ interdit tout succès. Unité oneshot30s, jonction bornée30 de ce seul mode, du
 35/40 et minima inchangés. Les ressources tardives et l'absence exacte de l'union
 initiale/tardive restent exigées sans imposer un nombre de remplacements.
 Deux groupes : préparation SSO/deux handlers, puis vraie erreur/lecteur fermé/
-dégel/restitution ; refus sans option à rejouer. Nominal numérique, consommateurs
-de la classe partagée et âge sont des preuves distinctes, toujours requises.
+dégel/restitution, puis refus sans option. Nominal numérique et consommateurs de
+la classe partagée sont qualifiés séparément ci-dessous ; âge encore requis.
 
 ### Erreur native de detach et lecteur fermé qualifiés
 
@@ -560,8 +561,8 @@ et aucune garde. Cette preuve clôt le cas lecteur/detach, sans qualifier à ell
 seule les consommateurs modifiés, le nominal numérique, l'âge ni078.5 entière.
 
 La borne25 sans faute, les consommateurs count/source/terminal/refus/35/40 et
-l'historique final du helper sont qualifiés séparément ci-dessous. Le nominal
-source numérique courant reste requis.
+l'historique final du helper et le nominal source numérique courant sont
+qualifiés séparément ci-dessous.
 Les captures canoniques d'âge restent conservées jusqu'au18novembre.
 
 ### Classe courante et six consommateurs requalifiés
@@ -586,8 +587,8 @@ physiques et sept exacts ; aucun waitstatus137 du fils n'est déduit. Six
 handlers réellement démarrés, distincts des observations copiées des captures.
 Brut34040469/gzip2154883 pour les consommateurs. Originaux restitués, contrôle
 démarré19:45:45UTC, référence inchangée, deux services sains, actifs/baux nuls,
-5982artefacts et aucune garde. Historique final qualifié ci-dessous ; nominal
-numérique complet, âge18novembre et campagne complète restent requis ;078.5 reste ouverte.
+5982artefacts et aucune garde. Historique final et nominal numérique complet
+qualifiés ci-dessous ; âge18novembre et campagne complète restent requis,078.5 ouverte.
 
 ### Reprise historique sur les sources courantes
 
@@ -598,3 +599,20 @@ suivants réussis sans rejeu ; claimed sans invocation, linked interrompu avant
 handler. Trois handlers réussis, quatre gardes terminées et une purge physique.
 Worker réel terminal0 puis arrêté, originaux et captures canoniques conservés.
 Cette régression ne qualifie pas le nominal numérique source courant ni l'âge.
+
+## Nominal numérique de la classe courante qualifié
+
+La [preuve6de2a86](evidence/invocation-source-retention-detach-volume-dev-2026-11-11.json) passe trois groupes
+sur355sources/images identiques au bounded et à l'historique final.10001 réponses
+HTTP et un cron réels donnent10002 observations terminales,5001 par fonction.
+Le tir non clos garde sa source hors comptage :10001 lignes après retrait du
+plus ancien HTTP. Après clôture normale, le deuxième plus ancien HTTP disparaît :
+10000 lignes et source strictement identique, désormais comptée. Les trois vecteurs
+sont recoupés exactement ; observation12,410435700s sous25s.
+
+Deux purges publiques et restitution nominale jointe ; même worker réel terminal0,
+reçu conservé puis unité arrêtée. Collectes natives/captures fraîches après cette
+finalisation, liées au SHA terminal :2services sains, actifs/baux nuls,5982artefacts
+et aucune garde. Captures canoniques inchangées. Brut83048624octets/gzip4228693 ;
+ancienne preuve348 préservée. La borne native partagée et son nominal sont
+qualifiés ; âge18novembre et campagne complète restent requis,078.5 non clôturée.

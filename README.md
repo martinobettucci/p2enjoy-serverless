@@ -39,15 +39,16 @@ passent ensuite douze groupes au commit bca96ab : progrès SQLite 16/4 837 pages
 copie interrompue après 1/5 990 fichiers, deux gardes indépendantes puis nominal
 rejoué. Six handlers réussis, trois purges, dossiers partiels conservés et
 captures canoniques inchangées. Six refus d'options sont contrôlés séparément.
-Les autres pannes de l'observateur, l'âge et la campagne complète restent ouverts.
+Les pannes de l'observateur ont leurs preuves distinctes ci-dessous ; âge et
+campagne complète restent ouverts.
 L'[attente native25s](docs/evidence/native-observer-deadline-bounded-dev-2026-11-11.json)
 du banc est corrigée et qualifiée sur353sources :25,000182s contre28,202336s
 dans la reproduction, masque et alarme globale conservés. Les
 [onze groupes de consommateurs](docs/evidence/native-observer-consumers-dev-2026-11-11.json)
 passent ensuite sur la même époque :10 496→10 000tirs, préflights des deux
 captures et refus après attachement, avec SSO/API et restitutions. Le nominal
-numérique source protégé et l'âge restent ouverts ; les pannes propres35/40
-ont leur preuve distincte ci-dessous.
+numérique courant et les pannes propres35/40 ont leurs preuves distinctes
+ci-dessous ; l'âge reste ouvert.
 Les [six groupes source35/40](docs/evidence/source-observer-deadlines-dev-2026-11-11.json)
 passent sur354sources e45126b :35,684s/TimeoutError,40,010s/wrapper124,
 processus/acteurs joints et ressources initiales/remplacements physiquement
@@ -59,8 +60,8 @@ masque restitué, dégel indépendant et refus sans option rejoué. Le premier e
 sans exception reste exclu. Les [trois groupes bounded courants](docs/evidence/native-observer-detach-bounded-dev-2026-11-11.json)
 repassent à25,000300s, puis les [quinze groupes consommateurs](docs/evidence/native-observer-detach-consumers-dev-2026-11-11.json)
 au même gel355 : borne des tirs10 496→10 000/exacts496 retirés, préflights
-source/terminal, refus et35/40 avec restitutions. Nominal numérique complet,
-âge et campagne complète restent ouverts. Le
+source/terminal, refus et35/40 avec restitutions. Le nominal numérique courant
+est qualifié ci-dessous ; âge et campagne complète restent ouverts. Le
 [rejeu historique final](docs/evidence/schedule-recovery-detach-regression-dev-2026-11-11.json)
 passe cinq groupes au même gel355 : trois coupures137, trois tirs suivants
 réussis sans rejeu, quatre gardes jointes et une purge physique. Worker réel
@@ -105,7 +106,7 @@ de paramètres et défaut900. La source protégée sous borne est qualifiée ci-
 Le [discriminant de source protégée](docs/INVOCATION_SOURCE_RETENTION_VOLUME.md)
 a son client, son handler original et son observateur natif :10002→10001 avant
 clôture du tir puis10000 après clôture. Garde2700 explicite du seul mode isolé ;
-le nominal est qualifié ci-dessous ; pannes propres encore ouvertes,
+nominal et pannes propres sont qualifiés séparément ci-dessous,
 fenêtres communes requalifiées par les vingt-cinq groupes liés ci-dessous. Le
 [pilote durable](docs/evidence/source-retention-worker-loss-dev-2026-11-11.json) passe trois
 groupes de perte réelle sur348sources :512 réponses, SIGKILL9 conservé comme
@@ -704,3 +705,9 @@ Le briefing d'exploitation `docs/dev-spark.md` est fourni localement par le
 propriétaire du SPARK et ignoré par Git. Son retrait de l'historique public et
 la correspondance des commits sont documentés dans
 [la préparation Git](docs/GIT_HISTORY_REWRITE.md).
+
+Le [nominal courant de source protégée](docs/evidence/invocation-source-retention-detach-volume-dev-2026-11-11.json)
+passe trois groupes sur355sources :10001 HTTP et un cron,10002→10001 non clos→10000
+clos, exacts deux plus anciens HTTP retirés et source conservée. Observation12,410436s,
+deux purges et restitution nominale jointe, worker terminal0 puis arrêté. Les
+captures canoniques restent intactes ; âge18novembre et campagne complète encore requis.

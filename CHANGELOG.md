@@ -2,11 +2,21 @@
 
 ## [Non publié]
 
+- [Nominal numérique courant](docs/evidence/invocation-source-retention-detach-volume-dev-2026-11-11.json)
+  qualifié : trois groupes sur355sources6de2a86, identiques au bounded et à
+  l'historique.10001 HTTP et un cron réels,10002→10001 non clos→10000 clos,
+  exacts deux plus anciens HTTP retirés et source strictement conservée.
+  Observation12,410436s, deux purges publiques et restitution nominale jointe ;
+  worker réel terminal0 puis arrêté, collectes fraîches après finalisation.
+  La borne native partagée est requalifiée ; sept jours et campagne complète
+  restent ouverts dans078.5.
+
 - [Rejeu historique final](docs/evidence/schedule-recovery-detach-regression-dev-2026-11-11.json)
   qualifié : cinq groupes au gel355 ef98a9f, trois coupures137 et trois tirs
   suivants réussis sans rejeu. Quatre gardes jointes, une fonction purgée et
   captures canoniques conservées ; worker réellement terminé0 puis arrêté.
-  Nominal numérique source courant, sept jours et campagne complète restent requis.
+  Nominal numérique source courant qualifié séparément ci-dessus ; sept jours et
+  campagne complète restent requis.
 
 - Banc de fermeture du lecteur sous erreur native de detach : vrai Docker pause,
   reprise ptrace, point SIGSTOP optionnel dans l’attente5 puis SIGCONT indépendant
@@ -18,8 +28,8 @@
   repasse trois groupes à25,000300s, masque/alarme conservés et dégel avant
   detach. [Quinze groupes consommateurs](docs/evidence/native-observer-detach-consumers-dev-2026-11-11.json)
   passent au même gel355 : count10 496→10 000, préflights, refus,35/40 et
-  restitutions. Historique final qualifié séparément ci-dessus ; nominal numérique
-  complet et âge restent requis.
+  restitutions. Historique final et nominal numérique courant sont qualifiés
+  séparément ci-dessus ; âge et campagne complète restent requis.
 
 - Banc de l'opérateur source : deux fautes réelles après attachement,
   expiration35 après SIGSTOP/SIGCONT indépendant et coupure de commande40.
@@ -47,8 +57,8 @@
   [onze groupes consommateurs](docs/evidence/native-observer-consumers-dev-2026-11-11.json)
   passent ensuite sur la même époque : borne des tirs10 496→10 000/exacts496
   retirés, préflights source/terminal et refus après attache, avec SSO/API,
-  sources conservées, ressources absentes et restitutions. Nominal numérique
-  source protégé et autres pannes encore à requalifier.
+  sources conservées, ressources absentes et restitutions. Le nominal numérique
+  courant et les autres pannes ont leurs preuves distinctes ci-dessus.
 
 ### Interruptions de sauvegarde et de copie qualifiées
 

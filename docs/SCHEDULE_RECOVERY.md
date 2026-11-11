@@ -202,4 +202,22 @@ avant arrêt de la seule unité. Checkpoint privé :
 .local/e2e/schedule-recovery-current-ee45e27fdc8344c1b5e6c22a6959291f/checkpoint.json.
 Brut682440octets/gzip85987 ; images,355sources et captures canoniques inchangées.
 Deux services sains, actifs/baux nuls,5982artefacts et aucune garde. Le nominal
-numérique source courant, l'âge réel et la campagne complète restent requis.
+numérique courant est qualifié séparément ci-dessous ; âge et campagne complète
+restent requis.
+
+## Nominal numérique de la classe courante qualifié
+
+La [preuve6de2a86](evidence/invocation-source-retention-detach-volume-dev-2026-11-11.json) passe trois groupes
+sur355sources/images identiques au bounded et à l'historique final.10001 réponses
+HTTP et un cron réels donnent10002 observations terminales,5001 par fonction.
+Le tir non clos garde sa source hors comptage :10001 lignes après retrait du
+plus ancien HTTP. Après clôture normale, le deuxième plus ancien HTTP disparaît :
+10000 lignes et source strictement identique, désormais comptée. Les trois vecteurs
+sont recoupés exactement ; observation12,410435700s sous25s.
+
+Deux purges publiques et restitution nominale jointe ; même worker réel terminal0,
+reçu conservé puis unité arrêtée. Collectes natives/captures fraîches après cette
+finalisation, liées au SHA terminal :2services sains, actifs/baux nuls,5982artefacts
+et aucune garde. Captures canoniques inchangées. Brut83048624octets/gzip4228693 ;
+ancienne preuve348 préservée. La borne native partagée et son nominal sont
+qualifiés ; âge18novembre et campagne complète restent requis,078.5 non clôturée.

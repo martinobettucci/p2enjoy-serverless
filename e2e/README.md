@@ -1837,8 +1837,8 @@ d'un cron permet d'observer10002→10001 (source protégée), puis10000 après c
 `python3 -B e2e/source-retention-guard-options.py` éprouve la durée2700 programmée
 et quatre refus de combinaisons avant mutation. Exécuter un seul scénario à la
 fois sur le SPARK DEV au repos. Les frontières manquées sont des échecs sans
-rejeu automatique ; nominal qualifié ci-dessous, pannes propres résiduelles
-encore requises et régressions communes qualifiées séparément.
+rejeu automatique ; nominal, pannes propres et régressions communes ont leurs
+preuves distinctes ci-dessous.
 
 ### Garde2700 et refus qualifiés
 
@@ -1849,7 +1849,7 @@ configuration et référence conservés, pilote et garde terminés. L'expiration
 n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant son
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
 rejouer les tests. Charge10000 et frontières sont qualifiées séparément ci-dessous ;
-pannes propres encore requises et régressions communes qualifiées séparément.
+pannes propres et régressions communes qualifiées séparément ci-dessous.
 Ces cinq groupes seuls ne prouvent
 pas la rétention.
 
@@ -2068,8 +2068,8 @@ Toutes ces commandes reçoivent le SSO sur stdin privée et s'exécutent en sér
 source9,189s et terminal0,005624s ; refus naturel après deux vrais running,
 détachement/lecteur fermés et ressources physiquement absentes. Quatre
 restitutions jointes/captures canoniques conservées. Brut33 679 951/gzip2 063 211.
-Le nominal complet10 002→10 001→10 000 de la source protégée reste à rejouer
-sur cette époque ; ces onze groupes ne remplacent ni ce nominal ni les autres pannes.
+Le nominal complet10 002→10 001→10 000 de la classe courante a sa preuve355
+distincte ci-dessous ; ces onze groupes ne remplacent ni ce nominal ni les pannes propres.
 
 ## Pannes propres de l'opérateur source35/40
 
@@ -2135,7 +2135,7 @@ passe quatre groupes sur355sources : erreur native de detach après5,255s,
 lecteur/mémoire fermés, masque restitué, dégel sans secours puis refus sans
 option rejoué. Neuf contrôles physiques et sept exacts passent, originaux
 restitués. L'essai sans exception reste échoué. Bounded et les six consommateurs
-sont qualifiés ci-dessous ; nominal numérique complet encore requis.
+et le nominal numérique complet sont qualifiés ci-dessous.
 
 Les [trois groupes bounded courants](../docs/evidence/native-observer-detach-bounded-dev-2026-11-11.json)
 passent sans faute à25,000300s, puis les [quinze groupes consommateurs](../docs/evidence/native-observer-detach-consumers-dev-2026-11-11.json)
@@ -2145,8 +2145,8 @@ passent au même gel355 : `schedule-firing-volume-replay.mjs count`, puis
 et `--observer-command-timeout`, toujours en série. Exacts496 tirs retirés,
 témoins conservés, mêmes bornes35/40, nettoyages et restitutions passent.
 Six handlers nouveaux seulement ; les témoins copiés restent distincts.
-Nominal source numérique complet, âge et campagne complète restent à exécuter ;
-l'historique final est qualifié ci-dessous, les époques antérieures sont conservées.
+Nominal numérique et historique final qualifiés ci-dessous ; âge et campagne
+complète restent à exécuter, les époques antérieures sont conservées.
 
 ## Rejeu historique final après les consommateurs courants
 
@@ -2157,3 +2157,20 @@ jointes et une purge physique. Worker local indépendant réellement terminé0,
 reçu terminal conservé puis unité arrêtée ; originaux/captures conservés.
 Ce rejeu clôt le reste historique du helper, pas le nominal numérique courant,
 les sept jours ni la campagne complète de078.5.
+
+## Nominal numérique de la classe courante qualifié
+
+La [preuve6de2a86](../docs/evidence/invocation-source-retention-detach-volume-dev-2026-11-11.json) passe trois groupes
+sur355sources/images identiques au bounded et à l'historique final.10001 réponses
+HTTP et un cron réels donnent10002 observations terminales,5001 par fonction.
+Le tir non clos garde sa source hors comptage :10001 lignes après retrait du
+plus ancien HTTP. Après clôture normale, le deuxième plus ancien HTTP disparaît :
+10000 lignes et source strictement identique, désormais comptée. Les trois vecteurs
+sont recoupés exactement ; observation12,410435700s sous25s.
+
+Deux purges publiques et restitution nominale jointe ; même worker réel terminal0,
+reçu conservé puis unité arrêtée. Collectes natives/captures fraîches après cette
+finalisation, liées au SHA terminal :2services sains, actifs/baux nuls,5982artefacts
+et aucune garde. Captures canoniques inchangées. Brut83048624octets/gzip4228693 ;
+ancienne preuve348 préservée. La borne native partagée et son nominal sont
+qualifiés ; âge18novembre et campagne complète restent requis,078.5 non clôturée.

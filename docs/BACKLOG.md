@@ -96,6 +96,11 @@ bloquée est sautée et son blocage est nommé.
 | — | [SLS-085](#sls-085) Déclencheurs de file et NATS | Décision | `[ ]` | choix du courtier | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | — | [SLS-088](#sls-088) Serverless Jobs en conteneur | Décision | `[ ]` | choix des images | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 
+SLS-078 est temporairement bloquée par le vieillissement réel des deux captures,
+au plus tôt le18 novembre2026 à03:30:26 puis04:05:13UTC ; la campagne complète
+suit ces preuves. Les reprises et bornes numériques courantes sont qualifiées.
+Pendant cette attente, la prochaine unité indépendante du registre est SLS-100.
+
 Unités parentes encore `[~]` et unités qui portent leur reste à faire :
 [SLS-001](#sls-001) → toutes ; [SLS-020](#sls-020) → SLS-089 ;
 [SLS-030](#sls-030) → SLS-090 et SLS-080 ; [SLS-040](#sls-040) → SLS-091 ;
@@ -1753,7 +1758,7 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   Acteur reprend après échéance+.25, constate mort/Trace0 puis dégèle sans
   secours ; neuf contrôles physiques et sept exacts passent, refus sans option
   rejoué, originaux restitués. Les quinze groupes consommateurs courants
-  sont qualifiés ci-dessous ; nominal numérique complet encore requis.
+  et le nominal numérique complet sont qualifiés ci-dessous.
 - [x] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
   [Contrat décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40) :
@@ -1780,7 +1785,7 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   35 passe,40 retourne réellement124 après40,014s mais le client attend137.
   Zéro groupe qualifié dans ce bilan ; statut wrapper distinct de celui du fils,
   identité du binaire conservée et même commande rejouée dans la preuve finale.
-- [ ] Attente native partagée de 25 s : défaut reproduit puis borne corrigée
+- [x] Attente native partagée de 25 s : défaut reproduit puis borne corrigée
   qualifiée sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
   avant detach. Le waitpid bloquant dépassait sa borne ; la correction attend
   de vrais SIGCHLD avec sigtimedwait. Une preuve de ce composant
@@ -1805,20 +1810,23 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   en13,526s/exacts496retirés, préflights source9,189s et terminal0,005624s,
   refus après attache avec lecteur fermé/TracerPid0 et deux consommateurs
   physiquement retirés. SSO/API et quatre restitutions joints ; les deux
-  captures canoniques sont conservées. Reste le nominal numérique complet
-  de la source protégée sur cette époque avant clôture de ce reste.
+  captures canoniques sont conservées. Le nominal numérique complet de la
+  classe courante a sa preuve355 distincte ci-dessous ; l'époque353 reste conservée.
   Après le point de faute detach, [bounded courant](evidence/native-observer-detach-bounded-dev-2026-11-11.json)
   repasse trois groupes sur355sources :25,000300s, masque/alarme conservés,
   dégel avant detach et restitution. Les [quinze groupes courants](evidence/native-observer-detach-consumers-dev-2026-11-11.json)
   passent au même gel355 : six campagnes count/préflights/refus/35/40,
   10 496→10 000/exacts496 retirés en12,758s, témoins conservés,35,679s/1 et
   40,010s/124 avec nettoyages joints. Six nouveaux handlers distincts des copies.
-  Historique final qualifié ci-dessus ; nominal numérique complet encore requis.
-  Le worker nominal caf8c362-794d-4dc4-a399-a412fe2d6863 est lancé au commit
-  6de2a86, même gel355/images que l'historique et le bounded. Son PID3440900/
-  naissance64743860 est confirmé vivant après sortie du lanceur, phase
-  real_e2e_running ; aucun résultat numérique encore qualifié. Attendre son
-  terminal réel puis finish avant une autre campagne ou un redéploiement.
+  Historique final qualifié ci-dessus. Le [nominal courant](evidence/invocation-source-retention-detach-volume-dev-2026-11-11.json)
+  passe trois groupes6de2a86, mêmes355sources/images que bounded et historique :
+  10001 HTTP et un cron,5001 observations par fonction,10002→10001 tant que le
+  tir reste non clos puis10000 après clôture. Exacts deux plus anciens HTTP
+  retirés, source strictement conservée ; observation12,410436s. Deux purges
+  publiques et restitution nominale jointe. Même worker3440900/naissance64743860
+  réellement terminal0 puis arrêté ; collectes natives et captures fraîches
+  après finalisation,2services sains, actifs/baux nuls,5982artefacts et aucune garde.
+  Les anciens essais restent distincts ; ce résultat ne qualifie pas sept jours.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 
