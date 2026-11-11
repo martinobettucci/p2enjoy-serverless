@@ -1735,10 +1735,12 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   des deux conteneurs/réseaux/baux. Aucun succès de rétention numérique ajouté.
 - [ ] Fermeture du lecteur lorsque detach lui-même échoue : finally renforcé,
   preuve native [décidée avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#fermeture-du-lecteur-malgré-une-erreur-native-de-detach).
-  Deux vrais handlers, Docker pause après attache/resume/WNOHANG0, refus naturel
-  puis vraie exception wait5 de detach ; lecteur fermé malgré erreur, mort/Trace0
-  et dégel indépendant avant restitution. Mode dédié implémenté, syntaxes
-  contrôlées ; E2E dédié et refus sans option encore requis.
+  [Premier essai34b8815 échoué](evidence/source-observer-detach-failed-dev-2026-11-11.json) :
+  Docker pause seul laisse detach réussir, aucune exception observée. Zéro groupe
+  qualifié ; originaux restitués. Décision révisée : vrai SIGSTOP au point
+  optionnel d’entrée dans wait5, reçu d’échéance réel, SIGCONT indépendant après
+  échéance+.25 ; erreur réelle de wait, lecteur fermé, mort/Trace0 puis dégel.
+  Correction et E2E dédié/refus sans option requis ; classe partagée à requalifier.
 - [x] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
   [Contrat décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40) :

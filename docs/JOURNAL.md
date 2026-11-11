@@ -6970,3 +6970,18 @@ car unpause peut prendre10s ; l'attente3 des modes35/40 reste inchangée.
 Revue RO finale : correction de jonction confirmée, aucun autre défaut matériel.
 Faute/attente natives inchangées, secours15 disqualifiant, identité du seul
 contrôle temporaire et vérifications physiques conservées. E2E à exécuter.
+
+### 11 novembre2026 — Docker pause ne provoque pas l'erreur de detach
+
+Essai34b8815 à18:55UTC échoué,355sources/images identiques : pause vraie et
+WNOHANG0, mais detach réussit immédiatement, lecteur/mémoire fermés, Trace0,
+commande1 en1,606436s. Acteur joint après dégel et originaux restitués,5982artefacts,
+actifs nuls ; zéro groupe qualifié, contrôles physiques client non atteints.
+
+Décision révisée avant code : point natif optionnel à l'entrée du vrai wait
+appelé par detach, après son échéance5 calculée. Reçu/identités puis SIGSTOP de
+l'opérateur ; acteur indépendant confirmeT et reprend par pidfd après cette
+échéance+.25. La vraie vérification de délai lève ensuite ; aucun faux retour,
+exception injectée ni changement de méthode detach, algorithme ou minuterie.
+Le secours reprend aussi l'opérateur avant dégel et disqualifie le succès.
+Requalifier cas dédié/refus, puis les consommateurs de la classe partagée.

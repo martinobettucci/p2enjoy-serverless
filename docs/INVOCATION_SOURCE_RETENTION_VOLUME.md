@@ -496,36 +496,47 @@ campagne complète restent requis dans078.5.
 
 ## Fermeture du lecteur malgré une erreur native de detach
 
-Décision du11novembre2026 avant code pour le reste078.5 inscrit. Ajouter le
-mode explicite `--observer-detach-failure` à la même préparation authentique
-à deux handlers, sans HTTP ordinaires. Après attache et reçu initial, armer
-un acteur indépendant figé, prêt avec pidfd de l'opérateur, limité au même
-CID/PID/naissance/image du contrôle temporaire. Il ne prend pas le verrou.
+L'[essai34b8815](evidence/source-observer-detach-failed-dev-2026-11-11.json)
+reste échoué, zéro groupe qualifié. Docker pause et WNOHANG0 sont observés,
+mais detach réussit sans exception : TracerPid0, mémoire/lecteur fermés et
+commande1 en1,606436s. L'acteur dégèle après mort de l'opérateur et les originaux
+sont restitués. Les contrôles physiques du client ne sont pas atteints ; état
+final sain,5982artefacts et aucune garde. La pause du contrôle seule ne suffit
+pas à empêcher le traitement de PTRACE_INTERRUPT sur ce SPARK.
 
-Confirmer Docker pause du contrôle pendant l'arrêt initial ptrace, puis appeler
-le vrai observer.resume et exiger waitpid(WNOHANG)=0. Un statut déjà présent
-invalide le scénario. Persister Paused=true, identités et absence de statut ;
-laisser ensuite la vraie assertion d'historique insuffisant lever. Le finally
-appelle la méthode detach inchangée : fermeture de /proc/PID/mem, vrai
-PTRACE_INTERRUPT et vraie attente5s sur le contrôle gelé. Exiger son exception
-AssertionError/native_stop_not_observed et durée5–7s, pas une exception injectée.
-Aucune méthode, réponse système, ligne SQL ou minuterie n'est remplacée.
+Décision révisée avant code : garder le mode explicite --observer-detach-failure,
+les deux vrais handlers et le refus naturel d'historique. Armer l'acteur figé
+indépendant avec pidfd avant Docker pause. Après attache/pause, la vraie reprise
+ptrace doit encore donner WNOHANG0. Affecter au seul observateur de cette faute
+un point de suspension au prochain wait. La méthode detach reste inchangée.
+
+Dans BlockingNativeObserver.wait, après calcul de son échéance par detach et
+blocage natif de SIGCHLD, ce point optionnel conserve l'échéance reçue, le temps
+monotone, les identités et mémoire déjà fermée, puis envoie un vrai SIGSTOP à
+l'opérateur. L'algorithme d'attente, son échéance5, SIGALRM35 et timeout40 ne
+changent pas ; aucune exception, réponse système ni horloge n'est fabriquée.
+Sans ce mode, aucun point de suspension n'est armé et le flux reste ordinaire.
+
+L'acteur recoupe le reçu d'entrée et l'étatT du même opérateur. Il attend
+l'échéance5 réelle plus0,25s, puis envoie un seul SIGCONT par pidfd. À la reprise,
+la vraie vérification d'échéance de wait doit lever native_stop_not_observed,
+mesurée5–7s dans detach. Une reprise avant échéance, un statut déjà présent
+avant la faute ou un reçu non corrélé invalide la campagne.
 
 Conserver séparément l'erreur primaire retention_history_incomplete, l'erreur
-de detach avec entrée/sortie monotones et raison, puis le refus consécutif
-native_tracer_retained dans detach-state. Malgré ces erreurs, le finally extérieur
-doit effectivement fermer le lecteur SQLite et enregistrer reader_closed=true ;
-le descripteur mémoire doit aussi être fermé. L'opérateur/helper restent échoués1.
-Le TracerPid encore égal à l'opérateur dans son finally n'est pas présenté comme
-un detach réussi : après sa mort, l'acteur constate son pidfd terminé et le même
-contrôle TracerPid0, encore Paused=true, avant de le dégeler réellement.
+de detach avec entrée/sortie monotones et raison, puis native_tracer_retained
+dans detach-state. Le finally extérieur doit effectivement fermer le lecteur
+SQLite et enregistrer reader_closed=true ; la mémoire doit aussi être fermée.
+L'opérateur/helper restent échoués1. Le TracerPid encore présent dans ce finally
+n'est pas présenté comme un detach réussi : après mort de l'opérateur, l'acteur
+constate pidfd terminé et même contrôle TracerPid0 encore Paused=true, puis le
+dégèle réellement. Son résultat et sa jonction précèdent la restitution.
 
-L'acteur est armé avant pause, attend au plus15s la mort de l'opérateur, et
-dégèle aussi en secours si cette borne expire : ce secours est explicite et
-interdit le succès de la preuve. Son unité oneshot bornée30s, son résultat réel
-et sa jonction précèdent la restitution du helper. La commande40/alarme35,
-les minima et les chemins sans cette option sont conservés. Le reçu natif des
-ressources tardives et l'absence de l'union initiale/tardive s'appliquent aussi
-à ce mode ; ne pas imposer un nombre de remplacements. Deux groupes réels :
-préparation SSO/deux handlers, puis exception detach/lecteur fermé/dégel/restitution.
-Rejouer ensuite le refus sans option ; nominal numérique et âge restent distincts.
+L'acteur borne à15s l'attente totale de la faute. En échec, il reprend par pidfd
+le seul opérateur encore arrêté et dégèle le contrôle ; ce secours explicite
+interdit tout succès. Unité oneshot30s, jonction bornée30 de ce seul mode, durées
+35/40 et minima inchangés. Les ressources tardives et l'absence exacte de l'union
+initiale/tardive restent exigées sans imposer un nombre de remplacements.
+Deux groupes : préparation SSO/deux handlers, puis vraie erreur/lecteur fermé/
+dégel/restitution ; refus sans option à rejouer. Nominal numérique, consommateurs
+de la classe partagée et âge sont des preuves distinctes, toujours requises.
