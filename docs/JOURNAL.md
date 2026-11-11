@@ -6994,3 +6994,21 @@ Méthode detach inchangée, syntaxe Python/Node valide ; revue et E2E requis.
 Revue RO du correctif sans défaut matériel. Le reçu mesure aussi les masques
 avant/après detach et SIGCHLD bloqué au point de faute ; le client exige le
 masque initial restitué. Contrôles syntaxiques valides ; nouveau cas à exécuter.
+
+### 11 novembre2026 — Erreur native de detach qualifiée
+
+Quatre groupes b5f0825 sur355sources/images identiques : faute19:10UTC puis
+refus normal19:15. SIGSTOP au vrai wait5, SIGCONT pidfd après son échéance+.25,
+AssertionError/native_stop_not_observed en5,255020512s. Primaire historique
+conservée puis detach-state refusé ; mémoire/lecteur fermés, masque[] restitué
+après SIGCHLD17 bloqué. Acteur constate mort/Trace0 puis dégèle sans secours,
+termine0 et est joint.9+7contrôles physiques passent ; essai34b8815 exclu.
+
+Brut250841/gzip80995. Originaux restitués, contrôle démarré19:15:07UTC,
+référence inchangée,2services sains, actifs/baux nuls,5982artefacts, aucune garde.
+Reprendre : bounded sans faute, six consommateurs sériels(count, préflights,
+refus,35/40), historique final du helper puis nominal numérique source. Âge réel
+le18novembre et campagne complète restent dans078.5, toujours ouverte.
+Audit RO final sans défaut matériel : brut/rapports/SHA355sources recoupés,
+4groupes, signaux/échéance/masques, fermeture et9+7contrôles physiques conformes.
+Aucune qualification supplémentaire déduite de l'audit.

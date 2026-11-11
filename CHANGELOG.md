@@ -5,7 +5,10 @@
 - Banc de fermeture du lecteur sous erreur native de detach : vrai Docker pause,
   reprise ptrace, point SIGSTOP optionnel dans l’attente5 puis SIGCONT indépendant
   après son échéance réelle, erreurs distinctes puis dégel indépendant et
-  restitution. Mode dédié implémenté, syntaxes contrôlées ; E2E encore requis.
+  restitution. [Quatre groupes réels](docs/evidence/source-observer-detach-failure-dev-2026-11-11.json)
+  passent sur355sources b5f0825 : erreur5,255s, lecteur/mémoire fermés, masque
+  initial restitué, dégel sans secours et refus sans option rejoué. Le premier
+  essai sans exception reste échoué ; consommateurs et nominal restent requis.
 
 - Banc de l'opérateur source : deux fautes réelles après attachement,
   expiration35 après SIGSTOP/SIGCONT indépendant et coupure de commande40.

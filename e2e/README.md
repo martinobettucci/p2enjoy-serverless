@@ -2127,5 +2127,12 @@ remplacement de méthode ni exception injectée.
 Le client exige lecteur/mémoire fermés malgré l'erreur, mort de l'opérateur,
 Trace0 encore gelé puis dégel et jonction de l'acteur avant restitution.
 Un secours15s interdit le succès ; l'unité30 est attendue avant arrêt. Deux
-groupes, puis rejouer le refus sans option. Implémenté, E2E encore requis.
+groupes, puis refus sans option : les quatre passent dans la preuve ci-dessous.
 Contrat : [nettoyage malgré erreur](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#fermeture-du-lecteur-malgré-une-erreur-native-de-detach).
+
+La [preuve b5f0825](../docs/evidence/source-observer-detach-failure-dev-2026-11-11.json)
+passe quatre groupes sur355sources : erreur native de detach après5,255s,
+lecteur/mémoire fermés, masque restitué, dégel sans secours puis refus sans
+option rejoué. Neuf contrôles physiques et sept exacts passent, originaux
+restitués. L'essai sans exception reste échoué. La classe partagée doit encore
+repasser bounded puis count, préflights source/terminal, refus,35/40 et nominal.

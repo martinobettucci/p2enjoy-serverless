@@ -1733,15 +1733,19 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   du même contrôle 470002/naissance, mémoire et lecteur fermés. Helper terminé
   1 après son refus naturel, restitution nominale jointe et absence physique
   des deux conteneurs/réseaux/baux. Aucun succès de rétention numérique ajouté.
-- [ ] Fermeture du lecteur lorsque detach lui-même échoue : finally renforcé,
+- [x] Fermeture du lecteur lorsque detach lui-même échoue : finally renforcé,
   preuve native [décidée avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#fermeture-du-lecteur-malgré-une-erreur-native-de-detach).
   [Premier essai34b8815 échoué](evidence/source-observer-detach-failed-dev-2026-11-11.json) :
   Docker pause seul laisse detach réussir, aucune exception observée. Zéro groupe
   qualifié ; originaux restitués. Décision révisée : vrai SIGSTOP au point
   optionnel d’entrée dans wait5, reçu d’échéance réel, SIGCONT indépendant après
   échéance+.25 ; erreur réelle de wait, lecteur fermé, mort/Trace0 puis dégel.
-  Correction implémentée, syntaxes contrôlées ; E2E dédié/refus sans option
-  requis et consommateurs de la classe partagée à requalifier.
+  [Quatre groupes b5f0825](evidence/source-observer-detach-failure-dev-2026-11-11.json)
+  qualifiés sur355sources : vraie erreur detach5,255021s, erreur primaire
+  conservée, mémoire/lecteur fermés, masque[] restitué après SIGCHLD17 bloqué.
+  Acteur reprend après échéance+.25, constate mort/Trace0 puis dégèle sans
+  secours ; neuf contrôles physiques et sept exacts passent, refus sans option
+  rejoué, originaux restitués. Consommateurs de la classe partagée à requalifier.
 - [x] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
   [Contrat décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40) :

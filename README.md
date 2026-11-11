@@ -53,7 +53,11 @@ passent sur354sources e45126b :35,684s/TimeoutError,40,010s/wrapper124,
 processus/acteurs joints et ressources initiales/remplacements physiquement
 absents, puis refus sans option rejoué. Trois refus CLI restent séparés.
 Binaire réel recoupé par SHA de /proc ; les deux essais échoués sont exclus.
-Detach en erreur, nominal numérique courant, âge et campagne complète restent ouverts.
+La [fermeture après erreur de detach](docs/evidence/source-observer-detach-failure-dev-2026-11-11.json)
+passe quatre groupes sur355sources b5f0825 : erreur native5,255s, lecteur fermé,
+masque restitué, dégel indépendant et refus sans option rejoué. Le premier essai
+sans exception reste exclu. Consommateurs courants, nominal numérique, historique
+final, âge et campagne complète restent ouverts.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native

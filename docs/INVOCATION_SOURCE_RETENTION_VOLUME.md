@@ -540,3 +540,25 @@ initiale/tardive restent exigées sans imposer un nombre de remplacements.
 Deux groupes : préparation SSO/deux handlers, puis vraie erreur/lecteur fermé/
 dégel/restitution ; refus sans option à rejouer. Nominal numérique, consommateurs
 de la classe partagée et âge sont des preuves distinctes, toujours requises.
+
+### Erreur native de detach et lecteur fermé qualifiés
+
+Les [quatre groupes b5f0825](evidence/source-observer-detach-failure-dev-2026-11-11.json)
+passent sur355sources/images identiques avant/après : faute à19:10UTC puis refus
+sans option à19:15. Vrai SIGSTOP après entrée dans wait et échéance5 calculée
+par detach ; SIGCONT pidfd après échéance+.25. La vraie exception de délai
+survient après5,255020512s ; erreur primaire d'historique conservée, puis
+native_tracer_retained pendant le finally. Mémoire/lecteur fermés malgré ces
+erreurs, masque[] restitué après SIGCHLD17 bloqué au point de faute.
+
+L'acteur constate ensuite opérateur mort et même contrôle Trace0 encore gelé,
+puis dégèle sans secours, termine0 et est joint. Neuf contrôles physiques et
+sept exacts passent ; le refus sans option conserve son chemin normal. L'essai
+34b8815 sans exception reste exclu. Brut250841/gzip80995 ; originaux restitués,
+contrôle démarré19:15:07UTC, référence inchangée, actifs/baux nuls,5982artefacts
+et aucune garde. Cette preuve clôt le cas lecteur/detach, sans qualifier à elle
+seule les consommateurs modifiés, le nominal numérique, l'âge ni078.5 entière.
+
+Ordre des preuves restantes : borne25 sans faute, consommateurs count/source/
+terminal/refus/35/40, historique final du helper puis nominal source numérique.
+Les captures canoniques d'âge restent conservées jusqu'au18novembre.

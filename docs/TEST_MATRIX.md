@@ -467,5 +467,15 @@ Trace0 avant retrait, acteurs terminaux/joints et union initiale/remplacements
 (quatre CID/réseaux/consommateurs par faute) physiquement absente : neuf
 contrôles historiques et sept exacts. Trois refus CLI comptent zéro groupe ;
 les deux essais échoués restent exclus. Deux services sains, actifs à zéro,
-5982artefacts et aucune garde finale. Detach en erreur, nominal numérique,
+5982artefacts et aucune garde finale. Detach en erreur est qualifié ci-dessous ; nominal numérique,
 historique final, âge réel et campagne complète restent dans078.5.
+
+## Lecteur fermé malgré l'erreur native de detach
+
+[Quatre groupes b5f0825](evidence/source-observer-detach-failure-dev-2026-11-11.json),
+355sources/images identiques : faute19:10 et refus19:15UTC. Vraie exception de
+wait5 après SIGSTOP/SIGCONT à5,255s, primaire conservée et lecteur/mémoire fermés,
+masque[] restitué après SIGCHLD17 bloqué. Mort/Trace0 puis dégel sans secours,
+acteur joint,9+7contrôles physiques et originaux restitués. Premier essai sans
+exception exclu. Consommateurs, nominal numérique, historique final, âge réel
+et campagne complète restent requis ;078.5 reste ouverte.
