@@ -5,6 +5,8 @@
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UNKNOWN_FIRST.md#matrice-publique-et-marqueurs
 # @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#installation-temporaire-réelle
 # @verifies docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#scénarios-requis
+# @spec docs/BACKLOG.md#sls-078 | docs/INVOCATION_RETENTION_VOLUME.md#installation-réelle-et-garde
+# @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_RETENTION_VOLUME.md#installation-réelle-et-garde
 """DEV-only isolated installations with an independent identity-based restore."""
 from contextlib import closing
 import fcntl
@@ -822,10 +824,13 @@ def main():
     old_image = sys.argv[3]
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', old_image)
     options=sys.argv[4:]
-    assert len(options)==len(set(options)) and set(options)<={'--source-schema007','--target-schema008','--guard-seconds=120'}
+    assert len(options)==len(set(options)) and set(options)<={'--source-schema007','--target-schema008','--guard-seconds=120','--guard-seconds=1800'}
     assert not options or mode in ('function-version-purge','function-version-unknown-first','instance-limit')
-    if mode=='instance-limit':assert set(options)<={'--guard-seconds=120'}
-    else:assert '--guard-seconds=120' not in options
+    guard_options=set(options)&{'--guard-seconds=120','--guard-seconds=1800'}
+    assert len(guard_options)<=1,'one_guard_duration_required'
+    if mode=='instance-limit':assert set(options)<=guard_options
+    else:assert not guard_options,'guard_duration_requires_instance_limit'
+    guard_seconds=60 if mode=='partial' else 120 if '--guard-seconds=120' in options else 1800 if '--guard-seconds=1800' in options else 900
     source_schema='007' if '--source-schema007' in options else '006'
     target_schema='008' if '--target-schema008' in options else '007'
     assert source_schema!='007' or target_schema=='008','source007_requires_explicit_target008'
@@ -886,7 +891,7 @@ def main():
             'docker': ['runuser', '-u', 'spark-docker', '--', 'docker', '--host', 'unix://' + settings['SERVERLESS_DOCKER_SOCKET_HOST']],
             'unit': ('serverless-restore-code-history-' if mode=='function-version-unknown-first' else 'serverless-restore-version-purge-' if mode == 'function-version-purge' else 'serverless-restore-archive-migration-') + campaign,
             'project': ('function-version-unknown-first-' if mode=='function-version-unknown-first' else 'function-version-purge-' if mode == 'function-version-purge' else 'archive-migration-') + campaign,
-            'driver_pid': os.getpid(), 'driver_birth': Path('/proc/self/stat').read_text().rsplit(')', 1)[1].split()[19]}
+            'guard_seconds':guard_seconds, 'driver_pid': os.getpid(), 'driver_birth': Path('/proc/self/stat').read_text().rsplit(')', 1)[1].split()[19]}
     if mode == 'instance-limit':
         item.update(namespace_name='instance-limit-' + campaign[:8],
             unit='serverless-restore-instance-limit-' + campaign,
@@ -918,12 +923,13 @@ def main():
         os.chmod(work / name, 0o600)
     atomic(journal, item)
     command(['systemd-run', '--quiet', '--collect', '--unit=' + item['unit'],
-             '--on-active=' + ('60s' if mode == 'partial' else '120s' if '--guard-seconds=120' in options else '900s'),
+             '--on-active=' + str(guard_seconds) + 's',
              '--timer-property=AccuracySec=100ms', '--timer-property=RandomizedDelaySec=0',
              '/usr/bin/python3', '-B', str(work / 'storage-legacy-environment.py'), 'restore', campaign])
     assert command(['systemctl', 'is-active', item['unit'] + '.timer']) == 'active'
     emit({'event': 'guard-armed', 'unit': item['unit'], 'campaign': campaign,
-          'current_image': item['original']['image'], 'original_id':item['original']['id']})
+          'current_image': item['original']['image'], 'original_id':item['original']['id'],
+          'guard_seconds':guard_seconds,'timer_schedule':command(['systemctl','show',item['unit']+'.timer','--property=TimersMonotonic','--value'])})
     try:
         docker(item, 'stop', '--time', '15', item['original']['id'])
         assert not container(item, item['original']['id'])['running']

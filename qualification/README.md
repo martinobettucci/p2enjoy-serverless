@@ -36,6 +36,9 @@ pour le changement de version avant admission.
 `scheduled-concurrency.cjs` occupe réellement les HTTP jusqu'à une date bornée
 et les crons pendant cinq secondes : `e2e/schedule-concurrency.mjs` observe
 les conteneurs pendant le handler, avant toute réclamation d'une instance ready.
+`retention-observation.cjs` renvoie et journalise un numéro de séquence et son
+requestId ; la campagne de volume exécute10016 vrais handlers pour éprouver
+la borne globale des observations, avec5008 appels par fonction.
 `volume-operations.cjs` écrit, relit, supprime et sature réellement les volumes
 /data et /cache ; il conserve l’errno Linux EDQUOT (-122), que Node expose
 actuellement sous code UNKNOWN. Leur campagne se lance séparément selon

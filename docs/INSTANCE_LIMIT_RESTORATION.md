@@ -282,3 +282,14 @@ attendus, référence conservée, agent sain, helpers et gardes terminés. Aucun
 fichier officiel ni proposition réécrit. Cette clôture porte la sûreté du
 banc et son raccordement ; SLS-078 et la campagne complète de plateforme
 restent ouvertes. Aucun produit, schéma, UI ou manuel n’a changé.
+
+## Réutilisation pour la rétention en volume
+
+[INVOCATION_RETENTION_VOLUME](INVOCATION_RETENTION_VOLUME.md) réutilise cette
+installation isolée à plafond2, avec deux fonctions cpu0,5 et un plus grand
+nombre d'appels. L'option explicite `--guard-seconds=1800` est réservée à ce
+mode et incompatible avec120 ; défaut900, option120 et partial60 restent
+inchangés. La durée choisie et la programmation réelle du timer sont exposées
+dans guard-armed. Le nominal1800 et les régressions ciblées doivent être
+qualifiés sur le helper modifié ; les succès099 antérieurs gardent leur époque.
+Cette réutilisation n'ajoute ni mutation de variable officielle ni règle produit.

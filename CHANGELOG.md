@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+### Qualification en volume des invocations
+
+- Client de10016 appels réels répartis sur deux fonctions, relevés avant/après
+  la borne globale10000 et nettoyage avec restitution de l'installation d'origine.
+  Garde explicite1800s pour ce scénario ; autres durées conservées. Implémenté,
+  syntaxe contrôlée ; preuve DEV et régressions du helper encore requises.
+
 ### Qualification distincte de la concurrence planifiée
 
 - Client E2E comparant concurrence1/2 avec maximum3 et stockage partagé, à une

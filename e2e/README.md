@@ -1,5 +1,18 @@
 # Qualification de la plateforme
 
+## Borne globale des 10000 invocations
+
+`node e2e/invocation-retention-volume.mjs` reçoit le JSON SSO sur stdin privée.
+Seul sur le SPARK DEV au repos, il ouvre l'installation isolée de même image,
+garde1800s, puis exécute5008 vrais HTTP sur chacune de deux fonctions cpu0,5.
+Le relevé9984 avant borne et le relevé10000 après10016 réponses permettent de
+vérifier les exacts UUID conservés par date de fin/id, sous10000 par fonction.
+Trois groupes : préparation, volume réel, purges/restitution des originaux.
+Prévoir jusqu'à30minutes de fenêtre DEV ; le débit réel n'est pas présumé.
+Les deux flux sont joints avant tout nettoyage, les réponses libérées et la
+progression sauvegardée par lots. Rapports UUID sous .local/e2e.
+Contrat : [INVOCATION_RETENTION_VOLUME](../docs/INVOCATION_RETENTION_VOLUME.md).
+
 ## Conservation des témoins terminaux de rétention
 
 Après la campagne CLI réussie et ses purges, au repos sur le seul SPARK DEV :
