@@ -59,8 +59,8 @@ ses requêtes, puis nettoie avant toute relance explicite.
 
 Ce complément ne clôture pas SLS-078. Le refus sous commande de stockage et le
 maximum/réutilisation sont qualifiés séparément dans [SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md)
-et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md). Plafond global (SLS-099),
-rétention réelle, adaptateur.7 et régression restent ouverts.
+et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md). Rétention réelle et régression restent ouvertes ; plafond099 et adaptateur.7
+sont qualifiés séparément.
 
 ## Résultats qualifiés
 

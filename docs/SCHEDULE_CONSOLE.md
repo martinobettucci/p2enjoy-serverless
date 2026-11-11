@@ -55,8 +55,8 @@ antérieurs. Identités/images/démarrages, fichiers officiels et sources embarq
 sont comparés au prérelevé. Chaque essai garde son rapport UUID et ses captures ;
 aucun rejeu automatique après échec. Sources figées pendant chaque campagne.
 
-La rétention réelle, le plafond global lié à SLS-099, le critère adaptateur.7 et
-la régression complète restent des preuves distinctes dans SLS-078.
+Rétention réelle et régression complète restent ouvertes dans SLS-078. Plafond099
+et adaptateur.7 ont leurs preuves distinctes.
 
 ## Reproduction avant correctif
 

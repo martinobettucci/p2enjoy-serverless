@@ -103,7 +103,7 @@ produit, UI/manuel ou capture nouveau. La revue préalable a corrigé jonction
 SSH, erreurs de flux et chaîne des versions ; leurs pannes propres ne sont pas
 prétendues provoquées par cette campagne nominale. Maximum sous HTTP non exclusif
 et réutilisation sont qualifiés ensuite dans [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md).
-Plafond global (SLS-099), rétention, adaptateur.7 et régression restent ouverts.
+Rétention et régression restent ouvertes ; plafond099 et adaptateur.7 sont qualifiés.
 
 Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) qualifie
 les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image

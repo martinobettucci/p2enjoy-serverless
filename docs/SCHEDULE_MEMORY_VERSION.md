@@ -69,9 +69,8 @@ Collecte indépendante : quatre tirs, cinq invocations dont quatre handlers
 réussis (deux planifiés/deux HTTP), une réception rejetée sans handler, trois
 purges physiques et compteurs nuls. Les34 backends,5982 artefacts antérieurs,
 contrôle/référence (ID/image/démarrage) et fichiers officiels sont identiques.
-Aucun build produit, budget officiel, UI/manuel ou capture modifié. Le plafond
-global d'instances, rétention, adaptateur.7 et régression complète
-restent ouverts ; SLS-099 porte la correction préalable de sa garde. Les autres
+Aucun build produit, budget officiel, UI/manuel ou capture modifié. Rétention et régression complète restent ouvertes ; plafond global099 et
+adaptateur.7 ont leurs preuves distinctes. Les autres
 refus et la réutilisation sont qualifiés dans [SCHEDULE_QUEUES](SCHEDULE_QUEUES.md),
 [SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md) et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md).
 

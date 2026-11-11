@@ -238,8 +238,8 @@ compilé concorde avec16 chapitres et56 paragraphes : SLS-096 est clos.
 
 Le cycle promotions/retour de hash/retrait et suppression autour des fenêtres,
 puis les coupures et reprises sont qualifiés séparément ci-dessous. Reprendre
-dans cette unité : plafond global d'instances ;
-rétention réelle, dont l'invocation source conservée jusqu'à clôture.
+dans cette unité : rétention réelle, dont l'invocation source conservée jusqu'à
+clôture. Le plafond global d'instances est qualifié dans SLS-099.
 Le complément de console ci-dessous qualifie vide/erreur/longs et pagination.
 La régression complète reste à exécuter.
 Les noms de mois et de jours sont suivis séparément dans SLS-098.
@@ -341,8 +341,8 @@ et les lectures API ne présentent plus de planification. Actifs/réservations n
 officiels inchangés. Les deux essais et leurs dix fonctions purgées restent hors
 total, dont un arrêt avant fenêtre sans tir/invocation. Aucun build produit,
 UI/manuel modifié ni capture nouvelle. Le complément RAM/version suit ci-dessous ;
-les autres refus et la réutilisation sont qualifiés ci-dessous. Plafond global,
-rétention, adaptateur.7 et régression complète restent ouverts.
+les autres refus et la réutilisation sont qualifiés ci-dessous. Rétention et
+régression complète restent ouvertes ; plafond099 et adaptateur.7 sont qualifiés.
 
 ## Budget mémoire et hash changé avant admission
 
@@ -358,9 +358,8 @@ contexte8192Mio,0,05CPU ; le prochain tir A retrouve compteur2. Aucun rejeu.
 Quatre tirs, cinq invocations dont quatre handlers réussis, trois purges physiques
 et ressources nulles sont recoupés. Les316 sources,34 backends,5982 artefacts,
 identités/images/démarrages et fichiers officiels sont conservés. Aucun build
-produit, budget officiel, UI/manuel ou capture nouveau. Le plafond global suit
-SLS-099 pour sa garde. Les compléments ci-dessous qualifient les autres refus et
-la réutilisation ; rétention, adaptateur.7 et régression restent ouverts.
+produit, budget officiel, UI/manuel ou capture nouveau. Le plafond global est qualifié par SLS-099. Les compléments ci-dessous qualifient les autres refus et
+la réutilisation ; rétention et régression restent ouvertes.
 
 ## Files individuelles et globales pleines
 
@@ -376,8 +375,8 @@ puis deux prochains tirs réussissent ; quatre tirs et148 invocations au total,
 aucun rejeu. Neuf fonctions purgées physiquement, actifs/réservations nuls,
 34 backends,5982 artefacts et services/configuration conservés. Aucun produit,
 budget, UI/manuel ou capture modifié. Les compléments d'indisponibilité et de
-maximum/réutilisation suivent ci-dessous. Plafond global (SLS-099), rétention,
-adaptateur.7 et régression complète restent ouverts.
+maximum/réutilisation suivent ci-dessous. Rétention et régression complète restent ouvertes ; plafond099 et adaptateur.7
+sont qualifiés.
 
 ## Commande de cache en cours et prochain tir
 
@@ -409,8 +408,7 @@ configurations, hashes et slots sont conservés/corrélés ; aucun rejeu du refu
 Quatre tirs, quatre handlers réussis (un HTTP/trois planifiés), deux purges
 physiques et ressources nulles. Les34 backends,5982 artefacts et services/
 configuration sont identiques ; aucun produit/UI/manuel ou capture modifié.
-Restent plafond global (SLS-099), rétention réelle, critère adaptateur.7
-et régression complète avant clôture078.
+Restent rétention réelle et régression complète avant clôture078.
 
 
 ## Console et reprise après refus de session
@@ -432,5 +430,33 @@ manuel servi concorde avec16 chapitres/56 paragraphes ; trois vues ciblent son
 paragraphe modifié. Les limites des pleines pages et du cadrage après reprise
 sont explicites dans la preuve. Les34 backends,5982 artefacts et services sont
 identiques pendant le replay ; ressources actives nulles. SLS-078.6 est qualifiée.
-Restent plafond global lié à099, rétention réelle, adaptateur.7 et régression
-complète avant clôture078.
+Restent rétention réelle et régression complète avant clôture078.
+
+## Admission commune qualifiée
+
+Recoupement du11 novembre2026 pour078.4 : chaque ligne est prouvée par sa
+campagne réelle. Les époques et images historiques restent distinctes ; ce
+rapprochement n'est pas un rejeu de ces campagnes sur l'image courante.
+
+| Élément du contrat | Preuve réelle |
+| --- | --- |
+| POST/, JSON{}, trigger/slot, aucun jeton, politique origine/IP restrictive contournée seulement pour le tir interne | [Checkpoint](evidence/schedules-checkpoint-dev-2026-11-10.json), groupe des événements reçus par le handler |
+| CPU, stockage exclusif et file bornée, deadline après démarrage, extinction idle10s | [Admission](evidence/schedule-admission-dev-2026-11-10.json) |
+| Refus RAM puis allocation Docker8192Mio, hash changé en file | [RAM/version](evidence/schedule-memory-version-dev-2026-11-10.json) |
+| Files pleines16 individuelles/128 globales, libération et prochain tir sans rejeu | [Files](evidence/schedule-queues-dev-2026-11-10.json) |
+| Commande de stockage pending, refus sans invocation puis reprise | [Indisponibilité](evidence/schedule-unavailable-dev-2026-11-10.json) |
+| Maximum individuel non exclusif, minima et réutilisation par ID/CID | [Instances](evidence/schedule-instance-reuse-dev-2026-11-10.json) |
+| Plafond global d'instances avec CPU/RAM libres, installation isolée même image | [Raccordement099](evidence/instance-limit-public-integration-dev-2026-11-11.json) |
+| Concurrence1/2 isolée de maximum3/shared, deux HTTP et deux crons | [Concurrence](evidence/schedule-concurrency-dev-2026-11-11.json), quatre groupes à03:55UTC |
+
+Le mapping backend courant du checkpoint initial contient34 SHA identiques aux
+sources actuelles ; son superviseur runtime, lu au commit7701c97, est identique.
+Les42 sources contrôle/migrations/runtime des époques d'admission, RAM, files,
+indisponibilité et maximum sont aussi identiques. Les six sources centrales
+concordent avec099 et le nouveau scénario. Ce contrôle statique établit la
+continuité du code, sans ajouter de groupe E2E aux preuves conservées.
+
+Le [raccordement de l'adaptateur](SCHEDULE_ADAPTER.md#résultat-qualifié) qualifie
+séparément078.7 : quatre processus CLI, un tir04:05UTC et une déclaration
+désactivée sans appel. Rétention réelle, pannes propres et régression complète
+gardent078.5 et l'unité ouvertes.

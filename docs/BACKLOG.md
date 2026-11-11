@@ -1509,8 +1509,8 @@ passe cinq groupes sur316 sources : refus RAM sans invocation, changement A→B
 après réception en file sans handler, allocation réelle8192Mio puis retour A,
 compteur conservé et aucun rejeu. Quatre handlers réussis, trois fonctions purgées.
 [Plan et résultats](SCHEDULE_MEMORY_VERSION.md).
-SLS-078.4/.5 restent à clôturer avec l’ensemble de leurs preuves, dont la
-rétention réelle ; les preuves du plafond global sont liées ci-dessous.
+SLS-078.4 est qualifiée par le recoupement ci-dessous ;.5 reste ouverte pour
+la rétention réelle. Les preuves du plafond global sont liées ci-dessous.
 Aucun changement produit, budget officiel ni nouvelle capture.
 Les [files pleines](evidence/schedule-queues-dev-2026-11-10.json) passent quatre
 groupes sur319 sources : plafonds réels16/128, deux tirs queue_full sans invocation,
@@ -1526,8 +1526,8 @@ passent quatre groupes sur325 sources : HTTP non exclusif au maximum1, budgets
 globaux libres et refus sans invocation ; minimum préchauffé puis deux mêmes
 instances/CID à W+300, générations/configurations identiques. Quatre handlers
 réussis, deux purges physiques. [Plan et résultats](SCHEDULE_INSTANCE_REUSE.md).
-Restent rétention réelle, critère adaptateur.7 et régression complète ;
-SLS-078.4/.5/.7 restent à clôturer après recoupement de tous leurs critères.
+Restent rétention réelle et régression complète dans078.5 ; les critères.4/.7
+sont qualifiés par leurs preuves rapprochées ci-dessous.
 La [capture de rétention authentique](SCHEDULE_RETENTION.md) prépare le
 vieillissement réel : invocation terminale liée à un tir non clos et témoin
 HTTP antérieur, sauvegarde native privée ; aucune preuve des sept jours encore.
@@ -1538,9 +1538,9 @@ La [capture5056167](evidence/schedule-retention-capture-dev-2026-11-11.json) pas
 quatre groupes sur331sources : sauvegarde authentique, même contrôle repris,
 fixture purgée. Épreuve d’âge au plus tôt le18 novembre2026 à03:30:26.355818UTC.
 Pannes propres et régressions historiques du nouveau mode restent requises.
-Le recoupement078.4 identifie aussi une preuve non discriminante : concurrence
-planifiée isolée du maximum individuel et du stockage exclusif. Ce scénario
-reste requis dans cette même unité avant de cocher.4.
+Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
+planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
+qualifié ci-dessous résout ce manque avant clôture du critère.4.
 Le [scénario discriminant](SCHEDULE_CONCURRENCY.md) compare concurrence1/2 à
 maximum3, stockage partagé et budgets libres, pendant deux vrais HTTP à W.
 Client `e2e/schedule-concurrency.mjs` implémenté ; contrôle de syntaxe réussi,
@@ -1549,8 +1549,10 @@ physiques réussies. Observer désormais le handler cron pendant cinq secondes
 et conserver les relevés avant assertion : [replay08d1512](evidence/schedule-concurrency-dev-2026-11-11.json)
 qualifié par quatre groupes sur333sources à03:55UTC, quatre handlers et deux purges.
 Le [raccordement CLI](SCHEDULE_ADAPTER.md) de.7 est implémenté dans
-`e2e/adapter-schedules.mjs` ; syntaxe contrôlée, preuve plan/deploy/promote vers
-un vrai tir et déclaration désactivée encore requise.
+`e2e/adapter-schedules.mjs` et [qualifié](evidence/adapter-schedules-dev-2026-11-11.json) :
+quatre groupes sur334sources, plan/deploy/deux promotions et un vrai tir04:05UTC ;
+déclaration désactivée sans appel, deux purges physiques. Critères.4 et.7 qualifiés
+après recoupement ci-dessous ; rétention et régression complète restent ouvertes.
 La [console des planifications](evidence/schedule-console-dev-2026-11-10.json)
 passe19 groupes sur326 sources : trois ciblés, huit du manuel et huit publics
 rejoués. Six handlers réels22:10UTC, pages5+1, vide, nom63, clavier/focus et mobile.
@@ -1560,7 +1562,7 @@ sur l'imageb9 et les essais du banc, hors total courant. Correctif24d81c7, image
 c59b8616 et manuel conforme16 chapitres/56 paragraphes.31 captures recoupées :
 17 inspections personnelles et14 références SHA. Deux fonctions purgées ;34
 backends,5982 artefacts, services et fichiers officiels conservés pendant replay.
-SLS-078.6 est qualifiée ; rétention, adaptateur.7 et régression complète
+SLS-078.6 est qualifiée ; rétention et régression complète
 gardent l’unité ouverte.
 
 Le [plafond global en installation isolée](evidence/instance-limit-admission-dev-2026-11-11.json)
@@ -1582,7 +1584,7 @@ Critères d'acceptation :
 - [x] SLS-078.3 Preuve : [cycle réel des versions](evidence/schedule-versions-dev-2026-11-10.json). Cible = version promue (pilote jamais déclenché) ; promotion, retour à un hash
   ou retrait de la planification remplace l'ensemble à l'instant de la décision ;
   `enabled: false` sans tir ; fonction désactivée, supprimée ou archivée sans tir.
-- [ ] SLS-078.4 Événement HTTP v1 synthétique `POST /`, corps `{}`, en-têtes
+- [x] SLS-078.4 Preuves rapprochées : [admission commune](SCHEDULES.md#admission-commune-qualifiée), dernier discriminant [concurrence](evidence/schedule-concurrency-dev-2026-11-11.json). Événement HTTP v1 synthétique `POST /`, corps `{}`, en-têtes
   `x-p2enjoy-trigger` et `x-p2enjoy-schedule-slot`, sans jeton ni politique origine/IP,
   par la même admission que les appels HTTP (budgets, file, concurrence, verrou de
   stockage, deadline, extinction).
@@ -1593,7 +1595,7 @@ Critères d'acceptation :
 - [x] SLS-078.6 Preuve : [console et reprise401→200](evidence/schedule-console-dev-2026-11-10.json), lectures Read du checkpoint initial. L'invocation porte `trigger: schedule`, l'origine, l'expression et le créneau ;
   la fiche de fonction affiche les planifications actives (prochain tir, dernier résultat,
   état) en lecture avec le droit Read.
-- [ ] SLS-078.7 Adaptateur : `plan` et `deploy` avertissent par fonction planifiée tant que le
+- [x] SLS-078.7 Preuve : [CLI et tir réel](evidence/adapter-schedules-dev-2026-11-11.json). Adaptateur : `plan` et `deploy` avertissent par fonction planifiée tant que le
   moteur n'est pas déployé ; l'avertissement et la phrase du manuel disparaissent avec le
   déploiement du moteur, dans le même changement.
 

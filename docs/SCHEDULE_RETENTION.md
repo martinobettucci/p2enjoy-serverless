@@ -63,7 +63,7 @@ du comptage éligible des invocations. Les générations retirées et les tirs d
 terminaux doivent aussi franchir sept jours réels. Leur préparation reste à
 réaliser ; aucun résultat ne découle de la seule capture initiale.
 
-SLS-078 reste[~] jusqu’à ces preuves, au critère adaptateur.7 et à sa régression.
+SLS-078 reste[~] jusqu’à ces preuves et à sa régression complète.
 
 
 ## Premier essai et frontière d’attachement
@@ -102,8 +102,8 @@ aucun conteneur et n’administre pas FORGE.
 
 Restent : pannes propres de la capture et régressions du helper historique,
 pilote gardé de replay, vieillissement des tirs terminaux/générations retirées,
-protection après passage réel de rétention, bornes10000, concurrence078.4,
-adaptateur078.7 et campagne complète.
+protection après passage réel de rétention, bornes10000 et campagne complète.
+Concurrence078.4 et adaptateur078.7 ont leurs preuves distinctes du11 novembre.
 
 
 ### Conservation native vérifiée

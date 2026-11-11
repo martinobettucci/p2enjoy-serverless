@@ -46,8 +46,9 @@ fichiers officiels identiques. Aucun build produit ni changement UI/manuel.
 
 Quatre groupes : préparation et occupation ; observation discriminante à W ;
 succès après libération sans rejeu ; purges publiques et absence physique.
-La rétention, l'adaptateur.7, les pannes propres du banc et la régression complète
-restent dans SLS-078 ; ce scénario ne les qualifie pas.
+La rétention, les pannes propres du banc et la régression complète restent dans
+SLS-078 ; ce scénario ne les qualifie pas. L'adaptateur.7 a sa preuve distincte
+dans [SCHEDULE_ADAPTER](SCHEDULE_ADAPTER.md).
 
 ## Premier essai et fenêtre d'observation
 

@@ -5977,3 +5977,14 @@ succès parallèle avant HTTP, admission sérialisée après son HTTP. Deux tirs
 quatre handlers, deux purges physiques, originaux/services conservés. Premier
 essai exclu. SCHEDULE_ADAPTER fixe ensuite la preuve manquante.7 : vraie CLI
 plan/deploy/promote, avertissement privacy conservé, activé/désactivé à W.
+
+CLI91d4606 : quatre groupes réussis,334sources et mêmec59b8616 ; plan/deploy
+et deux promotions, un vrai tir04:05UTC, disabled sans appel, deux purges physiques.
+La revue ne trouve pas de défaut confirmé ; processus du poste, aucune exécution
+dans les images CLI prétendue.078.7 qualifiée. Recoupement principal des34
+backends et runtime du checkpoint, puis42 sources de chaque admission historique,
+confirme leur identité actuelle ; matrice de078.4 dans SCHEDULES, critère coché.
+Ce rapprochement n'est pas un rejeu. Aucun produit/UI/manuel/migration modifié.
+Reste078.5 : préparer les témoins terminal/retiré à vieillir, bornes10000,
+pannes/régressions des nouveaux bancs et pilote de replay. Capture de source
+éligible seulement le18 novembre03:30:26UTC ; campagne complète non exécutée.

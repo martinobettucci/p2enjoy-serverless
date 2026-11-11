@@ -120,8 +120,8 @@ RAM et changement de version avant admission sont qualifiés ensuite dans
 Files pleines, commande de stockage et maximum/réutilisation sont ensuite
 qualifiés dans [SCHEDULE_QUEUES](SCHEDULE_QUEUES.md),
 [SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md) et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md).
-Plafond global (SLS-099), rétention, adaptateur.7 et régression restent
-ouverts : SLS-078[~].
+Rétention et régression restent ouvertes : SLS-078[~]. Plafond099 et
+adaptateur.7 sont qualifiés séparément.
 
 Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) qualifie
 les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image

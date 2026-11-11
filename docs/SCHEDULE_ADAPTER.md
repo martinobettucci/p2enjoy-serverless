@@ -39,3 +39,16 @@ Chaque relevé est persisté avant assertion ; rapports privés UUID, secrets
 uniquement en mémoire des processus, aucun rejeu automatique d'une mutation.
 Un échec rejoint ses processus et nettoie les objets déjà créés ; la reprise
 ne transforme pas ce premier essai en réussite.
+
+## Résultat qualifié
+
+La [preuve91d4606](evidence/adapter-schedules-dev-2026-11-11.json) passe quatre
+groupes sur334sources figées et l'imagec59b8616. Quatre vrais processus Python :
+plan, deploy et deux promote. Les deux fonctions restent pilotes avant promotion.
+À04:05UTC, le seul cron actif réussit sur son hash publié ; curseur au-delà de W,
+déclaration désactivée sans tir ni invocation. POST/corps{}, UUID, trigger/slot
+et logs du handler sont recoupés. Le diagnostic privacy est conservé ; aucun
+avertissement de moteur absent dans les sorties ou la limitation du manuel.
+Deux purges publiques et absence physique,5982 artefacts antérieurs, backend,
+services/images/démarrages et fichiers officiels conservés. Aucune image reconstruite,
+aucun parcours visuel nouveau. Le critère078.7 est qualifié ; l'unité reste ouverte.

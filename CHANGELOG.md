@@ -11,7 +11,9 @@
 
 - Client de qualification CLI des crons : plan/deploy/promote réels, cron actif
   et désactivé, diagnostics et manuel recoupés, puis deux purges publiques.
-  Implémenté ; exécution DEV encore requise.
+  Quatre groupes réels réussis à04:05UTC sur334sources ; quatre processus CLI,
+  un handler et deux purges physiques. Critères078.4 et078.7 qualifiés par leurs
+  preuves distinctes ; rétention et régression complète restent ouvertes.
 
 ### Preuve de rétention des planifications
 

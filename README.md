@@ -71,7 +71,13 @@ rejoués. Six vrais tirs22:10UTC donnent les pages5+1 ; vide, nom63, clavier,
 mobile et vrai401→Réessayer200 passent après correction de la pagination périmée.
 Nouvelle imagec59b8616 avec manuel conforme16 chapitres/56 paragraphes ;31 captures
 recoupées (17 inspections,14 références SHA), deux purges physiques. SLS-078.6
-est qualifiée ; rétention, adaptateur.7 et régression restent ouverts.
+est qualifiée ; rétention et régression restent ouvertes.
+Les compléments [concurrence](docs/evidence/schedule-concurrency-dev-2026-11-11.json)
+et [CLI des crons](docs/evidence/adapter-schedules-dev-2026-11-11.json) passent
+quatre groupes chacun à03:55/04:05UTC, sources333/334 et même imagec59b8616.
+Cinq handlers réussis, quatre fonctions du replay purgées ; l'essai initial
+de concurrence et ses deux purges restent séparés. Critères078.4 et.7 qualifiés ;
+la rétention réelle et la campagne complète gardent l'unité ouverte.
 
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK

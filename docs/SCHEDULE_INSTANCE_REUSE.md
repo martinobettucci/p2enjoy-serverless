@@ -78,8 +78,8 @@ Les34 backends,5982 artefacts et services/images/démarrages/fichiers officiels
 sont conservés. Aucun build produit, UI/manuel ou capture nouveau. La revue a
 renforcé les comparaisons de générations/configurations et la corrélation du
 premier tir avant lancement ; les pannes propres du banc ne sont pas déduites
-du nominal. Plafond global (SLS-099), rétention réelle, adaptateur.7 et
-régression complète gardent l'unité ouverte.
+du nominal. Rétention réelle et régression complète gardent l'unité ouverte ; plafond099
+et adaptateur.7 ont leurs preuves distinctes.
 
 Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) qualifie
 les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image

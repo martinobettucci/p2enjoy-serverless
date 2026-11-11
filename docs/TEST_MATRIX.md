@@ -114,9 +114,10 @@ Exécuter en série, après connexion SSO réelle :
 Vingt-deux groupes courants uniques ; cinq groupes d'une première image restent
 distincts, ainsi que le refus Unicode reproduit avant correction. Les neuf
 fonctions de tous les essais sont recoupées purgées. Vingt et une captures
-courantes sont inspectées ; SLS-096 est clos. Les scénarios de panne,
-grammaire complète, recouvrement, saturation, exclusif, rétention et
-états UI complémentaires restent à exécuter pour SLS-078. Cette tranche ne
+courantes sont inspectées ; SLS-096 est clos. Grammaire, coupures, recouvrement,
+saturation, exclusif et états UI ont leurs preuves distinctes dans
+[SCHEDULES](SCHEDULES.md). Rétention et régression complète restent ouvertes.
+Cette tranche ne
 remplace aucune campagne de régression de la plateforme. La campagne complète
 SLS-095 doit inclure ces nouveaux clients et cibler les migrations réellement
 installées, en conservant les bancs historiques008 dans leur périmètre propre.
@@ -143,6 +144,22 @@ vert, puis renforcé sur sa borne d'aperçu, conserve15 autres handlers et trois
 purges, sans addition de groupes. Même image/ID/démarrages,34 backends et5982
 artefacts conservés ; aucune nouvelle capture. SLS-078.2 est qualifiée.
 
+
+## Concurrence et adaptateur des crons — SLS-078.4/.7
+
+Commandes en série après le prérequis SSO réel :
+
+| Client | Preuve distincte du11 novembre2026 |
+| --- | --- |
+| `node e2e/schedule-concurrency.mjs` | [Quatre groupes](evidence/schedule-concurrency-dev-2026-11-11.json),333sources, quatre handlers, deux purges ; observation simultanée HTTP/cron à03:55UTC |
+| `node e2e/adapter-schedules.mjs` | [Quatre groupes](evidence/adapter-schedules-dev-2026-11-11.json),334sources, plan/deploy/deux promote, un handler à04:05UTC, deux purges |
+
+Les sources produit et images sont conservées entre les deux époques ; les
+index de clients diffèrent. L'essai initial échoué de concurrence et ses deux
+purges restent exclus. Aucun replay global ou parcours visuel nouveau prétendu.
+Le [rapprochement d'admission](SCHEDULES.md#admission-commune-qualifiée) coche078.4
+sans recomptage des groupes historiques ; la CLI qualifie078.7. La capture de
+rétention5056167 reste éligible au replay d'âge le18 novembre03:30:26UTC seulement.
 
 ## Plafond global isolé — SLS-099
 
