@@ -5799,3 +5799,20 @@ intactes ; SSO réel depuis l’accueil, HTTP, tir planifié et pannes du pilote
 restent à éprouver. Aucun résultat nouveau déduit du refus préventif historique.
 Les résultats de console19groupes/326sources précédents sont recoupés et poussés
 séparément dans610bc16 ; aucun nouveau test fonctionnel exécuté pour cette lecture.
+
+
+## 11 novembre2026 — Fenêtre de plafond isolée qualifiée
+
+Code65ae2bc, même imagec59b8616 et327sources figées avant/après chaque mode :
+release, EOF, SIGTERM, SIGKILL et échéance passent dix groupes réels. Trois
+restitutions indépendantes ; même contrôle original redémarré, agent sain,
+référence intacte, registres/artefacts comparés avant redémarrage, fichiers
+et proposition officiels conservés. Les dix groupes n’ont créé ni fonction
+ni connexion SSO. Preuve instance-limit-environment-dev-2026-11-11.json.
+
+Client d’admission HTTP/cron ajouté sans changement produit : vrai SSO depuis
+l’accueil, trois fonctions publiées, refus de compte distinct des CPU/RAM,
+minimum3 refusé, prochain appel puis prochain tir sains et purges publiques.
+Sa première exécution reste à faire ; perte avec consommateur et raccordement
+à la suite restent requis avant clôture099. L’ancien helper reste sans écriture,
+sans attente d’une évolution FORGE. Les premiers dix groupes gardent leur époque327.

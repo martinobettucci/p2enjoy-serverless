@@ -16,7 +16,8 @@ La preuve du plafond global relève de
 [SLS-099](INSTANCE_LIMIT_RESTORATION.md) : installation DEV temporaire de la même
 image à plafond2 dès le démarrage, sans mutation des variables officielles.
 Le refus de l’ancien helper reste historique ; l’évolution de FORGE n’est
-plus un prérequis. Cette nouvelle campagne reste à réaliser.
+plus un prérequis. Le déploiement et cinq restitutions passent dix groupes réels ;
+les admissions HTTP/cron et la perte avec consommateur restent à qualifier.
 CPU est réservé en nano-CPU entiers, par arrondi supérieur, avant Docker.
 Les minima de toutes les fonctions actives de gestion, brouillons compris,
 doivent tenir simultanément dans les trois budgets. Seules les fonctions ayant

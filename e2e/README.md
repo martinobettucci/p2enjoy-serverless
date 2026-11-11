@@ -1065,7 +1065,8 @@ Le nominal historique de `instance-limit-guard.py` appliquait32→2 puis32.
 Le helper maintenu refuse cette mutation. SLS-099 remplace le scénario par une
 installation DEV temporaire de la même image, plafonnée à2 au démarrage, sans
 écriture de variable officielle. L’évolution conditionnelle de FORGE n’est
-plus un prérequis ; le nouveau mode et son raccordement restent à réaliser.
+plus un prérequis ; le nouveau mode passe dix groupes de fenêtre. Les admissions
+et son raccordement restent à qualifier.
 [Contrat et preuves exigées](../docs/INSTANCE_LIMIT_RESTORATION.md).
 
 `node e2e/instance-limit-safety.mjs`, depuis le poste avec session SSO réelle,
@@ -1593,4 +1594,14 @@ refuse toute simulation et attend la fin de la garde et du pilote. Les trois
 pertes/échéance utilisent une vraie garde120s ; prévoir environ deux minutes
 par cas. Ce client ne qualifie que déploiement/restitution sans consommateur,
 pas encore les admissions HTTP/cron ni la perte avec un handler actif.
-Ces nouveaux tests sont implémentés, pas encore vérifiés sur le SPARK.
+Ces cinq modes passent dix groupes réels sur327sources :
+[preuve](../docs/evidence/instance-limit-environment-dev-2026-11-11.json).
+
+`node e2e/instance-limit-admission.mjs` reçoit ensuite les identifiants SSO sur
+stdin privée, ouvre une nouvelle fenêtre du même mode et se connecte depuis
+l’accueil. Trois fonctions originales sont publiées par les API : deux occupent
+le plafond, la troisième doit être refusée malgré les budgets CPU/RAM libres.
+Le client vérifie aussi minimum3 refusé409, appel sain après libération, refus
+à une vraie frontière cron puis prochain tir réussi sans rejeu, et trois purges.
+Prévoir deux frontières UTC et la fenêtre gardée900s. Ce nouveau client est
+implémenté, pas encore qualifié ; ne pas le lancer en parallèle d’un autre banc.

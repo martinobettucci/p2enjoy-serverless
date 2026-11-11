@@ -36,10 +36,11 @@ de hash pendant la file, vraie allocation8192Mio, libération puis prochains tir
 sans rejeu. Quatre handlers réussis et trois fonctions purgées. Plafond global
 d'instances, rétention et régression complète restent
 à éprouver dans SLS-078 ; la garde du plafond est suivie dans SLS-099.
-La qualification du plafond sera isolée dans un déploiement temporaire de la
-même image, configuré à deux instances dès le démarrage, sans modifier le plafond
-officiel du SPARK : [contrat](docs/INSTANCE_LIMIT_RESTORATION.md). La demande
-antérieure d’évolution de FORGE est retirée ; cette nouvelle preuve reste à réaliser.
+Le déploiement isolé de la même image, plafonné à deux sans modifier les variables
+officielles, passe dix groupes de démarrage/restitution (nominal, EOF, SIGTERM,
+SIGKILL, échéance) : [preuve](docs/evidence/instance-limit-environment-dev-2026-11-11.json).
+La demande d’évolution de FORGE est retirée ; admissions HTTP/cron, perte avec
+consommateur et raccordement à la suite restent ouverts dans SLS-099.
 Les [files pleines des tirs](docs/evidence/schedule-queues-dev-2026-11-10.json)
 passent quatre groupes sur319 sources :16 réceptions individuelles,128 globales,
 deux refus sans invocation puis deux succès HTTP et deux planifiés après libération.

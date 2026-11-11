@@ -3,9 +3,9 @@
 # @spec docs/BACKLOG.md#sls-040 | docs/ADMISSION.md#budgets-et-attente
 """Inspect the real DEV limit and refuse an unconditionally restored mutation.
 
-The normal console has no active-entry write precondition. A client-side GET
-cannot close that race. Until an authoritative conditional protocol is supplied
-and qualified, this helper performs no writes, proposals or Compose commands.
+The old shared-variable scenario is intentionally disabled. The isolated DEV
+installation described in the contract replaces it; no external console feature
+is required. This compatibility helper performs only its read-only preflight.
 """
 import argparse
 import json

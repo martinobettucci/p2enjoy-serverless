@@ -87,7 +87,13 @@ purges et recoupement des originaux, puis campagnes connexes. Sources locales,
 distantes et embarquées, images, rapports et nettoyages sont liés à chaque époque.
 Aucune preuve nouvelle n’est acquise par cette décision documentaire.
 
-## Preuve historique du refus préventif
+## Refus avant toute mutation
+
+L’ancien helper reste désactivé pour ses appelants non encore migrés. Il peut
+inspecter la cellule, mais ne modifie ni variable ni proposition. Il n’attend
+plus une évolution externe : le nouveau parcours le remplace.
+
+### Preuve ciblée du refus
 
 La [preuve du10 novembre2026](evidence/instance-limit-safety-dev-2026-11-10.json),
 client6e573c0, passe deux groupes réels restore/EOF avant mutation sur317 sources.
@@ -95,3 +101,16 @@ Le namespace est supprimé, budgets32/1CPU/8192Mio, services, quatre fichiers
 et5982 artefacts antérieurs conservés. Elle qualifie uniquement ce refus,
 pas le déploiement temporaire, les pannes ni la restitution indépendante.
 Le nominal32→2→32 antérieur garde sa propre époque ; il n’est pas rejoué.
+
+
+## Déploiement et restitutions qualifiés le11 novembre2026
+
+La [preuve de fenêtre](evidence/instance-limit-environment-dev-2026-11-11.json)
+passe dix groupes sur327 sources figées : même imagec59b8616, installation neuve
+à plafond2 et HTTPS, puis restitution nominale, EOF, SIGTERM, SIGKILL et échéance.
+Les trois dernières sont réellement indépendantes du pilote ; timers/services
+et processus sont terminés. Fichiers officiels/proposition conservés ; registres
+et artefacts originaux comparés avant le redémarrage attendu du même contrôle.
+Référence inchangée. Aucune fonction ni session SSO créée par ces dix groupes.
+Les admissions HTTP/cron, la perte avec consommateur et le raccordement à la
+suite restent à qualifier ; aucun succès de ces scénarios n’est déduit ici.

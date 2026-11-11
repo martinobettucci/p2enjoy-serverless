@@ -2066,7 +2066,7 @@ substitution ; manuel et matrice de parité mis à jour avec la livraison.
 ## SLS-099 — Qualification isolée du plafond d’instances
 
 Statut : [~] — dépendance à une évolution de FORGE retirée le11 novembre2026 ;
-mode temporaire et client de restitution implémentés, preuves à réaliser. Nature : Corriger. Dépend de :
+déploiement isolé et cinq restitutions qualifiés ; admissions en cours. Nature : Corriger. Dépend de :
 SLS-040. Ordre :1, préalable à la preuve du plafond global de SLS-078.
 Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md).
 
@@ -2081,7 +2081,7 @@ Critères d’acceptation :
 
 - [x] SLS-099.1 Décision et périmètre persistés avant le code ; ancienne demande
   externe retirée. La preuve historique des deux refus reste distincte.
-- [ ] SLS-099.2 Déploiement isolé à plafond2, même image que le contrôle habituel,
+- [x] SLS-099.2 [Dix groupes réels](evidence/instance-limit-environment-dev-2026-11-11.json),327sources. Déploiement isolé à plafond2, même image que le contrôle habituel,
   CPU/RAM inchangés ; zéro écriture de variable/proposition officielle.
 - [ ] SLS-099.3 Restitution indépendante des répertoires et services après perte
   réelle du pilote, même avec un consommateur Docker ; processus/gardes terminés,
@@ -2094,3 +2094,7 @@ Critères d’acceptation :
 
 Les anciens succès32→2→32 et le refus préventif ne qualifient pas ces nouveaux
 critères. L’unité reste ouverte jusqu’aux preuves sur le vrai déploiement.
+
+Le client `instance-limit-admission.mjs` implémente le SSO réel, les refus HTTP
+et planifié, le prochain tir et les purges ; sa première exécution reste à faire.
+Les dix groupes de fenêtre n’ont créé aucune fonction et ne qualifient pas.3/.4/.5.
