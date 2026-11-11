@@ -6284,3 +6284,14 @@ Contrôle natif final : mêmes contrôle68a8a0b2/imagec59b8616, démarrage atten
 conteneurs healthy, agent actif, healthz200 ; fonctions vivantes, appels actifs,
 instances, opérations, déploiements actifs, réservations, baux et intentions
 pendantes à zéro.5982 artefacts conservés, aucune unité de restitution active.
+
+### 11novembre2026 — Discriminant de la source sous borne
+
+Décision persistée avant code : produire10000 HTTP réels sur deux fonctions,
+puis un HTTP et un cron terminant autour du même rendez-vous réel. Observer
+10002→10001 avec tir non clos, puis10000 après clôture ; chaque retrait exact
+d'un ancien HTTP rend le passage de maintenance discriminant. Les frontières
+naturelles restent à acquérir, sans garantie d'ordonnancement ni rejeu automatique.
+Garde explicite2700 pour charge et attente ; défauts historiques conservés.
+Exploration RO indépendante confirme le flux et ces limites ; aucune preuve
+fonctionnelle supplémentaire. Contrat INVOCATION_SOURCE_RETENTION_VOLUME ajouté.
