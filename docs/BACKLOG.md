@@ -1579,7 +1579,7 @@ refus avant mutation/éligibilité, pertes pendant copie/observation et replay
 numérique implémentés ; qualification propre encore requise.
 Premier essai0e29293 : huit refus et refus avant éligibilité passent, préflight
 échoué avant publication CONTROL sur TypeError dans l'écriture du reçu ;
-originaux restitués. Corriger l'appel Path.open/opener puis rejouer explicitement.
+originaux restitués. Appel Path.open/opener corrigé ; replay explicite encore requis.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

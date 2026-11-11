@@ -70,7 +70,7 @@ def firing_replay_command(operation, identifier):
         assert LOCK is not None
         args += ['--lock-fd', str(LOCK)]
     result = json.loads(command(args, (0, 1)))
-    assert 'failure_type' not in result, 'firing_replay_error:' + str(result.get('reason') or result.get('failure_type'))
+    assert 'failure_type' not in result, 'firing_replay_error:' + str(result.get('reason') or result.get('failure_type')) + ':line:' + str(result.get('source_line'))
     return result
 
 

@@ -9,6 +9,8 @@
   Garde120 explicite pour retirer la copie avant le prochain créneau ; préflight,
   refus et pertes réelles sont implémentés. Qualification propre et replay
   numérique encore requis ; aucun changement du moteur applicatif ou d'image.
+  Premier préflight échoué avant CONTROL sur l'appel Path.open/opener, corrigé ;
+  restitution complète confirmée, essai conservé séparément.
 
 ### Préparation de la borne globale des tirs
 

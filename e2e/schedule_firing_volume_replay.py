@@ -37,7 +37,7 @@ def sha(path):
 
 def atomic(path, value):
     pending = path.with_suffix('.pending')
-    with pending.open('w', opener=lambda p, flags: os.open(p, flags, 0o600)) as stream:
+    with open(pending, 'w', opener=lambda p, flags: os.open(p, flags, 0o600)) as stream:
         json.dump(value, stream)
         stream.flush()
         os.fsync(stream.fileno())
@@ -357,8 +357,14 @@ def main():
         print(json.dumps(result))
         signal.alarm(0)
     except BaseException as error:
+        trace=error.__traceback__
+        source_line=None
+        while trace is not None:
+            if Path(trace.tb_frame.f_code.co_filename)==MODULE:
+                source_line=trace.tb_lineno
+            trace=trace.tb_next
         print(json.dumps({'completed': False, 'failure_type': type(error).__name__,
-                          'reason': str(error) if isinstance(error, AssertionError) else None}))
+                          'source_line':source_line,'reason': str(error) if isinstance(error, AssertionError) else None}))
         raise SystemExit(1)
 
 
