@@ -7,7 +7,7 @@ import {mkdir,mkdtemp,readFile,writeFile,rename,rm} from 'node:fs/promises';
 import {createInterface} from 'node:readline';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
-import https from 'node:https';
+import tls from 'node:tls';
 import {chromium,request} from 'playwright';
 const exec=promisify(execFile),base='https://serverless.lelabs.tech';
 const out=new URL('../.local/e2e/',import.meta.url),id=randomUUID(),prefix='code-editor-'+id;
@@ -35,9 +35,32 @@ async function inspect(){return JSON.parse((await exec('python3',['-B','e2e/code
 async function until(action,label,seconds=90){const end=Date.now()+seconds*1000;while(Date.now()<end){const v=await action();if(v)return v;await new Promise(resolve=>setTimeout(resolve,300));}throw new Error(label);}
 async function invoke(hash,read,format,message){const r=await call(`/invoke/${fn.id}${hash?'@'+hash:''}`,{token:read});assert.equal(r.data.format,format);assert.equal(r.data.message,message);assert.equal(r.data.label,'configuration-conservée');assert.equal(r.data.binary_sha256,sha(Buffer.from(Array.from({length:4096},(_,i)=>i%256))));assert.match(r.headers['x-serverless-code-hash'],/^[0-9a-f]{64}$/);invocations.push({id:r.headers['x-serverless-request-id'],function_id:fn.id,hash:r.headers['x-serverless-code-hash'],format});}
 function partial(token,{sendBody=true}={}){
- let resolve,reject;const started=Date.now(),done=new Promise((a,b)=>{resolve=a;reject=b});
- const req=https.request(base+endpoint()+'/code-draft',{method:'PUT',headers:{'X-Serverless-Token':token,'If-Match':String(draft.version),'Content-Type':'application/json','Content-Length':'8388608'},timeout:45000},response=>{response.resume();response.on('end',()=>resolve({status:response.statusCode,elapsed_ms:Date.now()-started}));});
- done.catch(()=>{});req.on('error',reject);req.on('timeout',()=>req.destroy(new Error('slow_body_timeout')));req.flushHeaders();if(sendBody)req.write('{');return {req,done};
+ let resolve,reject,settled=false,received=Buffer.alloc(0),headerEnd=-1,length=null,status,requestId;
+ const started=Date.now(),done=new Promise((a,b)=>{resolve=a;reject=b});done.catch(()=>{});
+ const req=tls.connect({host:'serverless.lelabs.tech',port:443,servername:'serverless.lelabs.tech',rejectUnauthorized:true});
+ function fail(error){if(!settled){settled=true;reject(error);}req.destroy();}
+ function parse(){
+  try{
+   if(headerEnd<0){
+    const boundary=received.indexOf('\r\n\r\n');if(boundary<0)return;
+    headerEnd=boundary+4;const lines=received.subarray(0,boundary).toString('latin1').split('\r\n');
+    const match=lines.shift().match(/^HTTP\/1\.[01] (\d{3}) /);assert(match);status=Number(match[1]);
+    const headers=Object.fromEntries(lines.map(v=>{const n=v.indexOf(':');assert(n>0);return [v.slice(0,n).toLowerCase(),v.slice(n+1).trim()];}));
+    assert.match(headers['content-length']??'',/^\d+$/);length=Number(headers['content-length']);assert(length<=65536-headerEnd);
+    requestId=headers['x-request-id'];assert.match(requestId??'',/^[0-9a-f-]{36}$/);
+   }
+   if(received.length<headerEnd+length)return;
+   assert.equal(received.length,headerEnd+length);const body=JSON.parse(received.subarray(headerEnd).toString('utf8'));assert.equal(typeof body.error,'string');
+   settled=true;resolve({status,elapsed_ms:Date.now()-started,request_id:requestId,response_bytes:length,sent_body_bytes:sendBody?1:0});req.destroy();
+  }catch(error){fail(error);}
+ }
+ req.setTimeout(45000,()=>fail(new Error('slow_body_timeout')));
+ req.on('secureConnect',()=>{const lines=[`PUT ${endpoint()}/code-draft HTTP/1.1`,'Host: serverless.lelabs.tech',
+  `X-Serverless-Token: ${token}`,`If-Match: ${draft.version}`,'Content-Type: application/json','Content-Length: 8388608','Connection: close','',''];
+  req.write(lines.join('\r\n'));if(sendBody)req.write('{');});
+ req.on('data',chunk=>{if(received.length+chunk.length>65536)return fail(new Error('partial_response_limit'));received=Buffer.concat([received,chunk]);parse();});
+ req.on('error',fail);req.on('close',()=>{if(!settled)fail(new Error('partial_connection_closed'));});
+ return {req,done};
 }
 async function purge(row){
  const live=await admin.get(`/api/functions/${row.id}`);if(live.status()===200)await value(`/api/functions/${row.id}`,{method:'DELETE'});
