@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+### Rejeu réel sur deux lots de récupération
+
+- Trois groupes E2E e23e820 sur342sources inchangées :36 fenêtres réellement
+  manquées à09:15UTC,9472 tirs/37 fenêtres complètes, observation native9,94s,
+  deux invocations initiales seules,96 pages API après SSO et restitution.
+  La borne numérique reste ouverte jusqu'au test après09:30UTC.
+
 ### Interruption du copieur de capture
 
 - Mode E2E --copy-loss et inspection native du vrai backup SQLite partiel,

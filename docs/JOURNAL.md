@@ -6249,3 +6249,20 @@ opérations, déploiements actifs, réservations, baux et intentions pendantes �
 zéro ;5982 artefacts originaux présents, aucune unité de restitution active.
 Les342sources courantes sont encore exactement celles des preuves. Registre
 d'incohérences absent ; revue finale RO des5+20 sans contradiction factuelle.
+
+
+### 11novembre2026 — Rejeu sous borne au-delà d'un lot
+
+Le mode preflight existant e23e820 passe trois groupes sur342sources identiques,
+mêmes images. D09:15UTC,36 fenêtres manquées donnent9472 tirs/37 fenêtres de256,
+592 par fonction, deux appels initiaux seuls. Observation9,938675s sous25s,
+96 pages API après nouveau SSO, restitution jointe et source inchangée. Ce cas
+exerce les deux passages nécessaires sous la limite20 fenêtres ; aucun résultat
+numérique n'en découle. Le count reste prévu après09:30UTC sur cette même source.
+
+Inspection native des deux sources d'âge : même installation-id que l'original,
+registres sans volume/bail/probe/intention, zéro appel actif/réservation. La source
+non close conserve une ancienne ligne ready et deux namespaces actifs dont
+lelabs vide ; l'autre n'a ni fonction active ni instance. Faits persistés sans
+nouveau groupe fonctionnel. Le futur loader doit garder l'exclusivité stricte
+et qualifier recover avant d'assouplir les refus d'identité clonée.

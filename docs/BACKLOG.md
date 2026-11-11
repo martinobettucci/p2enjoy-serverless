@@ -1595,6 +1595,10 @@ essais échoués restent séparés. Les
 [vingt régressions historiques](evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
 passent ensuite sur les mêmes342sources ; mode count encore requis, aucune rétention déduite du préflight.
 La frontière de capture initiale est qualifiée séparément ci-dessous.
+Le [préflight sur deux lots](evidence/schedule-firing-replay-two-batches-dev-2026-11-11.json)
+passe trois groupes sur342sources e23e820 à09:15UTC :36 fenêtres manquées,
+9472 tirs, deux invocations initiales seules,96 pages API et restitution jointe.
+Observation9,94s sous25s, source inchangée ; aucune borne numérique qualifiée.
 L'[interruption du copieur de capture](SCHEDULE_CAPTURE_INTERRUPTION.md) est
 qualifiée par [cinq groupes](evidence/schedule-capture-interruption-dev-2026-11-11.json)
 sur342sources dbb840b : nominal08:50UTC, perte du pilote pendant backup SQLite,

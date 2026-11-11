@@ -1809,3 +1809,9 @@ passent sur les mêmes sources :11 restitutions/partial,3 options/défaut900,6
 consommateur/diagnostic/namespace étranger. Total25 pour cette étape ; bornes
 numérique et âge restent ouverts.
 Voir le [contrat](../docs/SCHEDULE_CAPTURE_INTERRUPTION.md).
+
+
+Le [préflight e23e820 sur deux lots](../docs/evidence/schedule-firing-replay-two-batches-dev-2026-11-11.json)
+passe trois groupes sur342sources courantes à09:15UTC :36 fenêtres manquées,
+9472 tirs, observation9,94s,96 pages API et restitution. Il reste sous10000 ;
+le mode count est réservé à l'éligibilité réelle09:30UTC de la source6:15.

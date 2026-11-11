@@ -1,0 +1,157 @@
+{
+  "format": "p2enjoy-serverless-retention-source-inspection-v1",
+  "inspection_complete": true,
+  "counts_as_functional_groups": 0,
+  "scope": {
+    "read_only_immutable_sqlite": true,
+    "age_retention_qualified": false,
+    "replay_qualified": false
+  },
+  "original_installation": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+  "captures": [
+    {
+      "capture_id": "schedule-retention-9a2a4cd1eb134c20b4e1c5a1a1bdc7c0",
+      "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+      "same_as_original": true,
+      "live_namespaces": [
+        {
+          "id": "db076736-d81c-432b-8ea7-9e867eb794fd",
+          "name": "lelabs"
+        },
+        {
+          "id": "95b9f0db-5012-4178-bf3d-7964e34be2bf",
+          "name": "scheduled-functions-e190a449"
+        }
+      ],
+      "live_functions": [
+        {
+          "id": "ba4ffa98-f0eb-4e97-8c68-644b3bf2ca00",
+          "name": "protected-source-and-expiring-http"
+        }
+      ],
+      "counts": {
+        "functions": 1354,
+        "invocations": 5644,
+        "schedule_generations": 92,
+        "schedule_firings": 107,
+        "execution_instances": 1,
+        "function_operations": 0,
+        "deployments": 3384
+      },
+      "active_calls": 0,
+      "reserved_bytes": 0,
+      "instances": [
+        {
+          "id": "4e1512cf-d0ec-445f-a3d2-3fd00d09cf30",
+          "function_id": "ba4ffa98-f0eb-4e97-8c68-644b3bf2ca00",
+          "state": "ready"
+        }
+      ],
+      "cursor": 1794367800,
+      "firing_states": {
+        "dispatched": 1,
+        "failed": 6,
+        "refused_capacity": 10,
+        "refused_changed": 1,
+        "refused_unavailable": 1,
+        "skipped_downtime": 3,
+        "skipped_overlap": 2,
+        "succeeded": 83
+      },
+      "active_generations": [
+        {
+          "id": 92,
+          "function_id": "ba4ffa98-f0eb-4e97-8c68-644b3bf2ca00",
+          "activated_at": 1794367554.9469798
+        }
+      ],
+      "registry_counts": {
+        "metadata": 1,
+        "functions": 2184,
+        "volumes": 0,
+        "leases": 0,
+        "probes": 0,
+        "configuration_receipts": 1427,
+        "discard_receipts": 583
+      },
+      "volume_phases": {},
+      "storage_pending": 0,
+      "volume_columns": [
+        "function_id",
+        "kind",
+        "quota",
+        "enabled",
+        "generation",
+        "phase",
+        "daemon_quota",
+        "daemon_pid",
+        "daemon_birth",
+        "daemon_boot",
+        "daemon_binary",
+        "usage",
+        "error"
+      ]
+    },
+    {
+      "capture_id": "schedule-terminal-history-a3993b7d64f14650933cf03960c3d3b0",
+      "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+      "same_as_original": true,
+      "live_namespaces": [
+        {
+          "id": "db076736-d81c-432b-8ea7-9e867eb794fd",
+          "name": "lelabs"
+        }
+      ],
+      "live_functions": [],
+      "counts": {
+        "functions": 1360,
+        "invocations": 5653,
+        "schedule_generations": 100,
+        "schedule_firings": 112,
+        "execution_instances": 0,
+        "function_operations": 0,
+        "deployments": 3394
+      },
+      "active_calls": 0,
+      "reserved_bytes": 0,
+      "instances": [],
+      "cursor": 1794370500,
+      "firing_states": {
+        "failed": 6,
+        "refused_capacity": 10,
+        "refused_changed": 1,
+        "refused_unavailable": 1,
+        "skipped_downtime": 3,
+        "skipped_overlap": 2,
+        "succeeded": 89
+      },
+      "active_generations": [],
+      "registry_counts": {
+        "metadata": 1,
+        "functions": 2190,
+        "volumes": 0,
+        "leases": 0,
+        "probes": 0,
+        "configuration_receipts": 1433,
+        "discard_receipts": 590
+      },
+      "volume_phases": {},
+      "storage_pending": 0,
+      "volume_columns": [
+        "function_id",
+        "kind",
+        "quota",
+        "enabled",
+        "generation",
+        "phase",
+        "daemon_quota",
+        "daemon_pid",
+        "daemon_birth",
+        "daemon_boot",
+        "daemon_binary",
+        "usage",
+        "error"
+      ]
+    }
+  ]
+}

@@ -195,3 +195,22 @@ officiels ; aucun arrêt, nouveau handler ou fonction créée pour cette capture
 date. La capture de source non close5056167 garde sa propre borne03:30:26UTC.
 Ces trois groupes prouvent la conservation initiale ; l'âge, l'effacement,
 les bornes10000, les interruptions propres et les replays restent ouverts.
+
+
+## Inspection des sources avant le pilote d'âge
+
+L'[inspection native RO](evidence/schedule-retention-source-inspection-dev-2026-11-11.json)
+mesure dans les deux SQLite scellées le même installation-id que l'original,
+0492c433-a9ed-43b2-bb0a-fa0482185757. La première conserve une fonction vivante,
+une ancienne ligne d'instance ready et les namespaces lelabs et scheduled-functions ;
+la seconde ne conserve aucune fonction vivante ni instance. Les bases sont
+intègres et ouvertes immutable, sans sidecar ; cette inspection compte zéro
+groupe fonctionnel et ne qualifie aucun replay.
+
+Les deux registres ont zéro volume, bail, probe ou intention pendante ; les
+contrôles ont zéro appel actif, opération ou réservation. Le futur pilote doit
+faire reprendre normalement l'ancienne ligne ready, sans créer de consommateur
+contre les originaux. Les refus d'identité clonée du helper de volume ne peuvent
+être simplement retirés : l'autorisation exige la fenêtre exclusive du contrat,
+les répertoires privés reconnus et les consommateurs originaux absents. Un
+pilote dédié, ses refus et ses pannes restent à implémenter/qualifier avant l'âge.

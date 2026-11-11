@@ -297,3 +297,16 @@ après SIGKILL/jonction. Le [contrat détaillé](SCHEDULE_CAPTURE_INTERRUPTION.m
 distingue la correction du groupe timeout orphelin et l'essai c5fcb1d échoué.
 Captures canonique et nominale conservées, sortie partielle protégée ; aucun
 nouveau résultat de rétention. Les [vingt régressions](evidence/schedule-capture-guard-regressions-dev-2026-11-11.json) passent sur les mêmes342sources.
+
+
+## Rejeu sous borne sur deux lots qualifié
+
+La [preuve e23e820](evidence/schedule-firing-replay-two-batches-dev-2026-11-11.json)
+passe trois groupes sur342sources et les mêmes images :36 fenêtres manquées
+au démarrage09:15UTC,9472 tirs au curseur final et toujours les deux invocations
+initiales. La limite20 fenêtres par passage impose ici deux lots de récupération.
+L'observation native termine en9,938675s sous25s ;37 fenêtres complètes de256 tirs,
+592 par fonction. Nouveau SSO,96 pages API exhaustives et restitution nominale
+jointe ; source scellée et fichiers officiels inchangés. Ce complément exerce
+la récupération au-delà d'un lot, sans résultat de rétention numérique. Le
+franchissement reste à exécuter après09:30UTC ; les preuves d'âge restent ouvertes.

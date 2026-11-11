@@ -37,7 +37,9 @@ est qualifié sous la borne par [neuf groupes](docs/evidence/schedule-firing-rep
 sur342sources : chargement4864 tirs, nouveau SSO/64 pages API, refus et pertes
 réelles, source conservée et restitutions. Les
 [vingt régressions historiques](docs/evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
-passent sur les mêmes342sources. Le mode numérique reste requis.
+passent sur les mêmes342sources. Un [complément sur deux lots](docs/evidence/schedule-firing-replay-two-batches-dev-2026-11-11.json)
+passe trois groupes supplémentaires :36 fenêtres manquées,9472 tirs,96 pages API
+et restitution, sur les mêmes342sources courantes. Le mode numérique reste requis.
 L'[interruption pendant la capture](docs/evidence/schedule-capture-interruption-dev-2026-11-11.json)
 passe cinq groupes sur342sources dbb840b :256 tirs08:50UTC, copie normale puis
 perte du pilote pendant backup SQLite, garde bloquée2,043s, SIGKILL/jonction et

@@ -221,6 +221,12 @@ restent exclus. Les
 passent sur les mêmes342sources :11 restitutions,3 options et6 sûreté/consommateur.
 Étape29 groupes (9+20). Count après39 fenêtres reste requis ; aucun résultat numérique ou d'âge déduit du préflight.
 
+Le [complément e23e820 sur deux lots](evidence/schedule-firing-replay-two-batches-dev-2026-11-11.json)
+passe trois groupes sur342sources courantes :36 fenêtres manquées/9472 tirs,
+observation9,94s, nouveau SSO/96 pages API, restitution/source inchangée. Ce
+complément ne qualifie ni10000 ni sept jours ; les trois groupes ne remplacent
+pas les neuf contrôles propres et les20 régressions historiques.
+
 ## Interruption du copieur initial — SLS-078.5
 
 `node e2e/schedule-firing-volume-capture.mjs --copy-loss` passe
