@@ -721,7 +721,7 @@ def cleanup_history_consumers(item,journal):
     identities={'containers':[],'networks':[],'instances':[]} if deadline_scope else None
     if deadline_scope:
         assert item['mode']=='instance-limit' and item['guard_seconds']==2700
-        assert deadline_scope['mode'] in ('global-alarm','command-timeout')
+        assert deadline_scope['mode'] in ('global-alarm','command-timeout','detach-failure')
         assert set(functions)==set(deadline_scope['functions']) and len(functions)==2
         identities['instances']=rows(item,state/'control.sqlite3',
             'SELECT id,function_id,revision_id,state FROM execution_instances')
@@ -1260,7 +1260,7 @@ def main():
                 assert item.get('mode') == 'instance-limit' and item['guard_seconds'] == 2700
                 assert set(request) in ({'op','functions','window'}, {'op','functions','window','deadline_fault'})
                 if 'deadline_fault' in request:
-                    assert request['deadline_fault'] in ('global-alarm', 'command-timeout')
+                    assert request['deadline_fault'] in ('global-alarm', 'command-timeout', 'detach-failure')
                 identifiers = request['functions']
                 assert len(identifiers) == len(set(identifiers)) == 2
                 assert all(isinstance(v,str) and str(UUID(v)) == v for v in identifiers)

@@ -13,7 +13,7 @@ const run=promisify(execFile),campaign=randomUUID(),base='https://serverless.lel
 const ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
 const helper='/srv/p2enjoy-serverless/e2e/storage-legacy-environment.py',out=new URL('../.local/e2e/',import.meta.url);
 const options=process.argv.slice(2),observerRefusal=options.length===1&&options[0]==='--observer-refusal';
-const observerDeadline=options.length===1&&options[0]==='--observer-global-deadline'?'global-alarm':options.length===1&&options[0]==='--observer-command-timeout'?'command-timeout':null;
+const observerDeadline=options.length===1&&options[0]==='--observer-global-deadline'?'global-alarm':options.length===1&&options[0]==='--observer-command-timeout'?'command-timeout':options.length===1&&options[0]==='--observer-detach-failure'?'detach-failure':null;
 const observerDiagnostic=observerRefusal||Boolean(observerDeadline);
 assert(options.length===0||observerDiagnostic,'unknown_source_retention_options');
 const report=new URL((observerDeadline?'invocation-source-observer-'+observerDeadline+'-':observerRefusal?'invocation-source-observer-refusal-':'invocation-source-retention-volume-')+campaign+'.json',out),events=[],checks=[],observations=[],functions=[],responses=[],producers=[];
@@ -108,9 +108,13 @@ async function proveObserverDeadline(initial){
  assert.equal(measured.initial.invocations.find(v=>v.id===scheduled.id).schedule_firing_id,firing.id);
  const gate=measured.deadline_fault;assert.equal(gate.mode,observerDeadline);assert.equal(gate.operator.pid,measured.operator.pid);assert.equal(gate.operator.birth,measured.operator.birth);assert.equal(measured.after_attach.tracer_pid,gate.operator.pid);
  assert.equal(gate.control.pid,measured.pid);assert.equal(gate.control.birth,measured.birth);assert.equal(gate.container_id,measured.container_id);assert.equal(identity.operator_source_sha256,createHash('sha256').update(await readFile(new URL('invocation-source-retention-observer.py',import.meta.url))).digest('hex'));
- assert(gate.wrapper_deadline_monotonic-gate.alarm_deadline_monotonic-.5>=2);
- assert(actor.completed&&actor.pidfd_closed&&actor.operator_pidfd_readable);assert.equal(actor.mode,observerDeadline);assert.equal(actor.operator.birth,gate.operator.birth);assert.equal(actor.stopped.state,'T');assert.equal(actor.deadline_sample.state,'T');assert((actor.deadline_sample.pending|actor.deadline_sample.shared_pending)&8192);
- assert(actor.deadline_sample_monotonic>=gate.alarm_deadline_monotonic+.5);assert.notEqual(actor.actor.pid,gate.operator.pid);assert.notEqual(actor.actor.cgroup,gate.operator.cgroup);assert(actor.actor.cgroup.includes(gate.unit));
+ assert(actor.completed&&actor.pidfd_closed&&actor.operator_pidfd_readable);assert.equal(actor.mode,observerDeadline);assert.equal(actor.operator.birth,gate.operator.birth);
+ if(observerDeadline!=='detach-failure'){
+  assert(gate.wrapper_deadline_monotonic-gate.alarm_deadline_monotonic-.5>=2);
+  assert.equal(actor.stopped.state,'T');assert.equal(actor.deadline_sample.state,'T');assert((actor.deadline_sample.pending|actor.deadline_sample.shared_pending)&8192);
+  assert(actor.deadline_sample_monotonic>=gate.alarm_deadline_monotonic+.5);
+ }
+ assert.notEqual(actor.actor.pid,gate.operator.pid);assert.notEqual(actor.actor.cgroup,gate.operator.cgroup);assert(actor.actor.cgroup.includes(gate.unit));
  assert.equal(actor.control_after_exit.pid,measured.pid);assert.equal(actor.control_after_exit.birth,measured.birth);assert.equal(actor.control_after_exit.tracer_pid,0);
  assert(command.completed&&!command.rescue_used&&command.wrapper_joined&&command.wrapper_pidfd_readable&&command.operator_absent);assert.equal(command.phase,'finished');assert.deepEqual(command.argv.slice(0,5),['timeout','--verbose','--foreground','--signal=KILL','40s']);
  assert(command.timeout_binary.path.startsWith('/'));assert.match(command.timeout_binary.sha256,/^[a-f0-9]{64}$/);assert(command.timeout_binary.version.startsWith('timeout '));assert.equal(command.timeout_signal,9);
@@ -118,7 +122,19 @@ async function proveObserverDeadline(initial){
  assert.equal(command.control_before_restore.pid,measured.pid);assert.equal(command.control_before_restore.birth,measured.birth);assert.equal(command.control_before_restore.tracer_pid,0);
  assert.equal(command.stdout_sha256,evidence.metadata['source-observer-command.stdout'].sha256);assert.equal(command.stderr_sha256,evidence.metadata['source-observer-command.stderr'].sha256);
  assert.equal(command.actor_terminal.MainPID,'0');assert.equal(command.actor_terminal.Result,'success');assert.equal(command.actor_terminal.ExecMainCode,'1');assert.equal(command.actor_terminal.ExecMainStatus,'0');assert.equal(command.actor_joined.ActiveState,'inactive');assert.equal(command.actor_joined.MainPID,'0');
- if(observerDeadline==='global-alarm'){
+ if(observerDeadline==='detach-failure'){
+  // @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#fermeture-du-lecteur-malgré-une-erreur-native-de-detach
+  assert.equal(command.returncode,1);assert(command.duration>=5&&command.duration<15);assert(!command.timeout_kill_reported);
+  assert.equal(measured.failure_type,'AssertionError');assert.equal(measured.reason,'native_tracer_retained');
+  assert.deepEqual(measured.primary_failure,{type:'AssertionError',reason:'retention_history_incomplete'});
+  assert(measured.detach_fault_pause.paused);assert.equal(measured.detach_fault_pending_status.pid,0);assert.equal(measured.detach_fault_pending_status.status,0);
+  assert.deepEqual(measured.cleanup_errors.map(v=>v.step),['detach','detach-state']);
+  const detached=measured.cleanup_errors[0];assert.equal(detached.type,'AssertionError');assert.equal(detached.reason,'native_stop_not_observed');assert(detached.duration>=5&&detached.duration<7);
+  assert.equal(measured.cleanup_errors[1].reason,'native_tracer_retained');assert.equal(measured.after_detach.tracer_pid,gate.operator.pid);assert.equal(measured.after_detach.birth,gate.control.birth);
+  assert(measured.reader_closed&&measured.observer_memory_closed);assert(actor.paused_after_exit&&!actor.paused_after_thaw&&!actor.rescue_used);
+  assert(actor.thaw_started_monotonic>=actor.operator_exit_observed_monotonic);assert(actor.operator_exit_observed_monotonic>=detached.finished_monotonic);
+  assert.equal(actor.signals_sent.length,0);assert(driverStderr.includes(Buffer.from('source_retention_observation_failed:native_tracer_retained')));
+ }else if(observerDeadline==='global-alarm'){
   assert.equal(command.returncode,1);assert(command.duration>=35&&command.duration<40);assert(!command.timeout_kill_reported);assert.equal(actor.signals_sent.length,1);assert.equal(actor.signals_sent[0].signal,18);assert(actor.signals_sent[0].pidfd);
   assert.equal(measured.failure_type,'TimeoutError');assert.equal(measured.reason,'native_observation_deadline');assert.deepEqual(measured.primary_failure,{type:'TimeoutError',reason:'native_observation_deadline'});assert(!measured.cleanup_errors?.length);
   assert.equal(measured.after_detach.pid,measured.pid);assert.equal(measured.after_detach.birth,measured.birth);assert.equal(measured.after_detach.tracer_pid,0);assert(measured.reader_closed&&measured.observer_memory_closed);

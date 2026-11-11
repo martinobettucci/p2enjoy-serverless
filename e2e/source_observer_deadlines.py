@@ -21,7 +21,7 @@ ROOT = Path('/srv/p2enjoy-serverless')
 sys.path.insert(0, str(ROOT/'e2e'))
 from schedule_firing_volume_replay import atomic
 
-MODES = ('global-alarm', 'command-timeout')
+MODES = ('global-alarm', 'command-timeout', 'detach-failure')
 
 
 def sha(path):
@@ -83,9 +83,12 @@ def same_control(item, helper, expected):
     return native
 
 
-def arm(campaign, mode, receipt, target):
+def arm(campaign, mode, receipt, target, observer=None):
     """Start a bounded independent actor, persist the actual gate, then SIGSTOP self."""
     assert mode in MODES
+    if mode == 'detach-failure':
+        from source_observer_detach_failure import arm as arm_detach_failure
+        return arm_detach_failure(campaign, receipt, target, observer)
     work, item, helper = context(campaign)
     wrapper = json.loads((work/'source-observer-command.json').read_text())
     assert wrapper['mode'] == mode and wrapper['campaign'] == campaign and wrapper['phase'] == 'running'
@@ -181,7 +184,7 @@ def actor(campaign):
 def join_actor(work, campaign, receipt):
     unit = unit_name(campaign)
     try:
-        end = time.monotonic()+3
+        end = time.monotonic()+(30 if receipt.get('mode')=='detach-failure' else 3)
         while True:
             state = unit_state(unit+'.service')
             if state.get('MainPID', '0') == '0' and state['SubState'] in ('exited', 'failed', 'dead'): break

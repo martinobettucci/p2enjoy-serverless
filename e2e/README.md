@@ -2112,3 +2112,16 @@ sept vérifications exactes de l'union initiale/remplacements. Trois refus CLI
 séparés ne gonflent pas les groupes. Les deux essais échoués sont exclus ;
 aucun waitstatus137 du fils, rétention ni âge déduit. Originaux restitués,
 deux services sains, actifs nuls,5982artefacts et aucune garde finale.
+
+## Lecteur fermé après une vraie erreur de detach
+
+`node e2e/invocation-source-retention-volume.mjs --observer-detach-failure`
+reçoit le SSO sur stdin privée et prépare les deux handlers réels. Après
+attache, un acteur indépendant figé est prêt avant Docker pause ; la vraie
+reprise ptrace doit donner WNOHANG0. Le refus naturel d'historique entraîne
+alors la vraie attente5 de detach et son exception, sans remplacement de méthode.
+Le client exige lecteur/mémoire fermés malgré l'erreur, mort de l'opérateur,
+Trace0 encore gelé puis dégel et jonction de l'acteur avant restitution.
+Un secours15s interdit le succès ; l'unité30 est attendue avant arrêt. Deux
+groupes, puis rejouer le refus sans option. Implémenté, E2E encore requis.
+Contrat : [nettoyage malgré erreur](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#fermeture-du-lecteur-malgré-une-erreur-native-de-detach).

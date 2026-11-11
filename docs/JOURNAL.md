@@ -6960,3 +6960,13 @@ ptrace sans statut puis refus naturel d'historique. Exiger erreur detach5–7s,
 lecteur fermé malgré detach-state refusé, puis mort de l'opérateur/Trace0 et
 dégel par acteur avant restitution. Secours15 explicite interdit un succès.
 Ne toucher ni méthode detach ni délais ; mode E2E propre puis refus sans option.
+
+Mode detach-failure implémenté : acteur figé prêt avant pause, vraie reprise
+ptrace/WNOHANG0 puis erreur native de detach mesurée, erreurs séparées et lecteur
+fermé par le finally existant. Le client exige l'enchaînement et l'absence des
+ressources. Syntaxes Python/Node et programmes embarqués valides ; E2E requis.
+Revue RO intégrée : jonction de cet acteur attend sa borne30 avant arrêt,
+car unpause peut prendre10s ; l'attente3 des modes35/40 reste inchangée.
+Revue RO finale : correction de jonction confirmée, aucun autre défaut matériel.
+Faute/attente natives inchangées, secours15 disqualifiant, identité du seul
+contrôle temporaire et vérifications physiques conservées. E2E à exécuter.

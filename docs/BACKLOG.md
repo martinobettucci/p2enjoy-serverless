@@ -1737,7 +1737,8 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   preuve native [décidée avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#fermeture-du-lecteur-malgré-une-erreur-native-de-detach).
   Deux vrais handlers, Docker pause après attache/resume/WNOHANG0, refus naturel
   puis vraie exception wait5 de detach ; lecteur fermé malgré erreur, mort/Trace0
-  et dégel indépendant avant restitution. Mode dédié et refus sans option requis.
+  et dégel indépendant avant restitution. Mode dédié implémenté, syntaxes
+  contrôlées ; E2E dédié et refus sans option encore requis.
 - [x] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
   [Contrat décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40) :

@@ -114,7 +114,7 @@ def observe(args, receipt, target):
         # @spec docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40
         if args.deadline_fault:
             from source_observer_deadlines import arm
-            arm(args.campaign, args.deadline_fault, receipt, target)
+            arm(args.campaign, args.deadline_fault, receipt, target, observer)
         assert receipt['initial_counts'] == {'total': 10002, 'terminal': 10000}, 'retention_history_incomplete'
         assert initial['firing'] and initial['firing']['state'] == 'dispatched' and initial['firing']['completed_at'] is None
         source_id = initial['firing']['invocation_id']
@@ -178,10 +178,15 @@ def observe(args, receipt, target):
         try:
             try:
                 if observer:
+                    entered = time.monotonic()
+                    receipt['detach_started_monotonic'] = entered
                     try:
                         observer.detach()
                     except BaseException as error:
-                        receipt.setdefault('cleanup_errors', []).append({'step': 'detach', 'type': type(error).__name__})
+                        receipt.setdefault('cleanup_errors', []).append({'step': 'detach', 'type': type(error).__name__,
+                            'reason': str(error) if isinstance(error, (AssertionError, TimeoutError)) else None,
+                            'entered_monotonic': entered, 'finished_monotonic': time.monotonic(),
+                            'duration': time.monotonic()-entered})
                         raise
             finally:
                 if receipt.get('inherited_guard_lock'):
@@ -192,7 +197,8 @@ def observe(args, receipt, target):
                         assert detached['birth'] == birth and detached['tracer_pid'] == 0, 'native_tracer_retained'
                         assert receipt['observer_memory_closed'], 'native_memory_descriptor_retained'
                     except BaseException as error:
-                        receipt.setdefault('cleanup_errors', []).append({'step': 'detach-state', 'type': type(error).__name__})
+                        receipt.setdefault('cleanup_errors', []).append({'step': 'detach-state', 'type': type(error).__name__,
+                            'reason': str(error) if isinstance(error, (AssertionError, TimeoutError)) else None})
                         raise
         finally:
             try:
@@ -213,7 +219,7 @@ def main():
     parser.add_argument('functions')
     parser.add_argument('window', type=int)
     parser.add_argument('--lock-fd', type=int, required=True)
-    parser.add_argument('--deadline-fault', choices=('global-alarm', 'command-timeout'))
+    parser.add_argument('--deadline-fault', choices=('global-alarm', 'command-timeout', 'detach-failure'))
     args = parser.parse_args()
     receipt = {'completed': False}
     target = ROOT / 'qualification-history' / ('instance-limit-' + args.campaign) / 'source-retention-observation.json'
