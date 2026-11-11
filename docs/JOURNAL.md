@@ -5943,3 +5943,13 @@ Capture privée9a2a4cd1,5990 artefacts vérifiés ; âge éligible le18 novembre
 SQLite en lecture seule avant les prochains builds. Aucune preuve sept jours
 ni10000 objets ; propres pannes, régressions, replay et autres critères078
 restent ouverts. Preuve schedule-retention-capture-dev-2026-11-11.json.
+
+
+Les deux exports Docker natifs de la capture sont terminés et recoupés :
+59558400/81080320 octets, empreintes des images/SQLite/inventaire conservées.
+Dossier root0700, bases0400, services identiques et healthy avant/après. Reçu
+privé copié sans secret dans la preuve publique, aucun groupe ajouté. Revue
+statique finale confirme les quatre groupes et leur portée limitée à la capture.
+Prochaine reprise078 : scénario discriminant de concurrence planifiée,
+adaptateur.7, pannes/régressions du banc et préparations des autres témoins
+de rétention ; replay d’âge à partir du18 novembre03:30:26UTC.

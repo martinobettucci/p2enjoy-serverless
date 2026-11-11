@@ -104,3 +104,21 @@ Restent : pannes propres de la capture et régressions du helper historique,
 pilote gardé de replay, vieillissement des tirs terminaux/générations retirées,
 protection après passage réel de rétention, bornes10000, concurrence078.4,
 adaptateur078.7 et campagne complète.
+
+
+### Conservation native vérifiée
+
+Les deux images ont été exportées en série par docker image save dans le
+dossier privé de capture : contrôle59558400 octets, runtime81080320 octets,
+SHA des archives dans la preuve liée. Les5990 artefacts et les deux SQLite
+restent aux empreintes acquises ; dossier root0700, sauvegardes SQLite0400.
+Les deux services sont healthy avec mêmes CID/images/démarrages avant/après
+ces exports. Le reçu preservation.json reste privé ; sa copie sans secret
+figure sous native_preservation dans la preuve publique. Aucun groupe
+fonctionnel supplémentaire n’est compté pour cette conservation.
+
+Pour le replay, lire capture.json et preservation.json dans le dossier privé ;
+vérifier SHA des SQLite, inventaire et archives avant toute copie. Les exports
+control-image.tar et runtime-image.tar conservent les images immuables malgré
+le remplacement ultérieur de leurs tags. Les originaux de capture restent en
+lecture seule ; tout replay utilise un autre dossier et son propre journal.

@@ -1364,5 +1364,45 @@
     "cleanup": true,
     "counted_as_success": false,
     "diagnostic": "native_stop_not_observed45s; invocation runtime_unavailable avant handler; exception interne non reconstituée"
+  },
+  "native_preservation": {
+    "completed": true,
+    "capture_id": "schedule-retention-9a2a4cd1eb134c20b4e1c5a1a1bdc7c0",
+    "images": {
+      "control": {
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "archive_sha256": "c426fbad98b2bd4834f94ac4d1667879ba57293328f48583f6e8cc7b78542fba",
+        "bytes": 59558400
+      },
+      "runtime": {
+        "image": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+        "archive_sha256": "f34b37fc1ef9467edaa80b8803c9bbc3d75e6c171873fdd3a88c68c3230722d4",
+        "bytes": 81080320
+      }
+    },
+    "backup_sha256": "38ce972f1cbc33e25643ae7773836e226aebaade623376acf6dfa2a012ce2f78",
+    "registry_sha256": "7307d8ca27de1ecdc646aef590d6c21b2a69ace7833b77ef26a0204c8fb9d43c",
+    "artifact_inventory_sha256": "ec12d047ce20c34837bb6f671c72d54e51bb28a869df422f19d73433f730f840",
+    "artifact_files": 5990,
+    "root_private_directory": true,
+    "sqlite_read_only": true,
+    "original_service_unchanged": true,
+    "services": [
+      {
+        "id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "started_at": "2026-11-11T02:56:33.564049866Z",
+        "running": true,
+        "health": "healthy"
+      },
+      {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "started_at": "2026-11-06T15:49:39.578107028Z",
+        "running": true,
+        "health": "healthy"
+      }
+    ],
+    "completed_at": 1794368060.2828157
   }
 }
