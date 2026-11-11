@@ -2,8 +2,9 @@
 
 Contrat de [SLS-078.5](BACKLOG.md#sls-078), partagé avec[SLS-091.1](BACKLOG.md#sls-091).
 Décision du11 novembre2026 avant code. Complète[SCHEDULE_RETENTION](SCHEDULE_RETENTION.md).
-L'observation numérique en cours garde ses346sources figées ; ce contrat ne
-change aucune de ses sources et ne constitue pas une preuve de replay.
+La borne numérique est qualifiée séparément sur348sources. Ce parcours d'âge
+garde ses preuves propres : ses préflights et pertes doivent être exécutés avant
+les épreuves à sept jours ; aucun résultat numérique ne les remplace.
 
 ## Sources exactes et exclusivité
 
@@ -113,7 +114,10 @@ récupération pour prouver les premiers passages d'âge. Aucun arrêt sélectif
 Le nominal termine ses lectures et demande la restitution avant D+110s. Pour une
 perte, la garde se déclenche à armed_at+120s, donc au plus D+180s ; exiger retrait
 réel du contrôle temporaire avant D+240s et restitution/jonction avant D+270s.
-Le reçu durable relève control_removed_at après suppression Docker. Un dépassement
+Le reçu durable relève control_removed_at après suppression Docker lorsqu’un
+contrôle a été créé, et control_absent_at après vérification effective de son
+absence dans tous les cas. Une perte avant CONTROL ne prétend pas supprimer un
+conteneur jamais démarré. Un dépassement
 invalide la preuve mais n'abandonne pas la restauration. Aucun nouveau créneau actif
 D+300 n'est permis ; un délai insuffisant reste un échec conservé.
 

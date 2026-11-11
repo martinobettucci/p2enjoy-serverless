@@ -6434,3 +6434,16 @@ healthy, agent actif et healthz200. Fonctions vivantes/appels/instances/opérati
 déploiements actifs/réservations/baux/intentions à zéro,5982 artefacts conservés,
 aucune unité de restitution active. SLS-078 reste[~] pour les preuves d'âge,
 pannes propres résiduelles et régression complète ; rien n'est déclaré clos.
+
+### 11novembre2026 — Intégration du replay des témoins authentiques
+
+La borne numérique est maintenant conservée dans b98afb6 ; reprise de078.5
+sur le chargement des captures d'âge. Le contrat RETENTION_HISTORY_REPLAY reste
+l'autorité : deux sources exactes, copie intégrale et CONTROL publié en dernier,
+identité clonée limitée à la fenêtre exclusive, image capturée et vrais services.
+Le reçu distingue une suppression effective du contrôle de sa simple absence
+confirmée après une perte avant démarrage. Préflights jeunes, refus et deux
+points de perte seront mesurés ; aucun résultat d'âge avant l'échéance réelle.
+La première revue des prototypes a corrigé la revérification PID/naissance
+après pidfd_open et les délais de retrait/restauration ; seconde revue RO avant
+les premières opérations. Aucune preuve nouvelle déduite de cette intégration.

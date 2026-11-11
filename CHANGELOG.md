@@ -39,7 +39,7 @@
   Les [cinq groupes de garde](docs/evidence/source-retention-guard-options-dev-2026-11-11.json)
   passent sur346sources : quatre refus avant mutation et programmation/restitution
  2700. Échec du collecteur local conservé, rapport E2E terminé recoupé sans rejeu ;
-  charge et frontières restent à qualifier.
+  charge et frontières qualifiées séparément ci-dessus ; pannes résiduelles ouvertes.
 
 ### Borne globale des tirs qualifiée
 
