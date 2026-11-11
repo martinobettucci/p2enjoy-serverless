@@ -5988,3 +5988,13 @@ Ce rapprochement n'est pas un rejeu. Aucun produit/UI/manuel/migration modifié.
 Reste078.5 : préparer les témoins terminal/retiré à vieillir, bornes10000,
 pannes/régressions des nouveaux bancs et pilote de replay. Capture de source
 éligible seulement le18 novembre03:30:26UTC ; campagne complète non exécutée.
+
+## 11 novembre2026 — Préparer les autres témoins de rétention
+
+Reprise main2ce51d0 propre et synchronisée. Le tour précédent est un progrès
+vérifié :078.4/.7 qualifiés. Pour078.5, conserver dès maintenant le tir terminal
+et les deux générations retirées issus des vraies purges CLI04:05UTC, dont une
+sans tir. Contrat SCHEDULE_RETENTION complété avant code : opérateur de lecture
+et sauvegarde native uniquement, copies privées/inventaires et exports d'images
+existants vérifiés. Aucun redémarrage, aucune date fabriquée ; éligibilités
+séparées, replay gardé et pannes restent à qualifier.

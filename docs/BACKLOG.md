@@ -1538,6 +1538,9 @@ La [capture5056167](evidence/schedule-retention-capture-dev-2026-11-11.json) pas
 quatre groupes sur331sources : sauvegarde authentique, même contrôle repris,
 fixture purgée. Épreuve d’âge au plus tôt le18 novembre2026 à03:30:26.355818UTC.
 Pannes propres et régressions historiques du nouveau mode restent requises.
+La [capture de témoins terminaux/retirés](SCHEDULE_RETENTION.md#capture-des-tirs-terminaux-et-générations-retirées)
+réutilise les objets purgés de la vraie campagne CLI04:05UTC, sans mutation ni
+nouveau service. Décision persistée ; opérateur et capture restent à qualifier.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

@@ -122,3 +122,42 @@ vérifier SHA des SQLite, inventaire et archives avant toute copie. Les exports
 control-image.tar et runtime-image.tar conservent les images immuables malgré
 le remplacement ultérieur de leurs tags. Les originaux de capture restent en
 lecture seule ; tout replay utilise un autre dossier et son propre journal.
+
+## Capture des tirs terminaux et générations retirées
+
+Décision du11 novembre2026, avant code. Réutiliser les objets authentiques de
+la preuve CLI91d4606 : un tir succeeded à04:05UTC et deux générations retirées
+par les purges publiques, dont une déclaration désactivée sans aucun tir.
+Leurs dates et UUID sont déjà recoupés dans la preuve ; ne créer aucune ligne
+et ne modifier aucune date. L'opérateur `e2e/schedule-terminal-history-capture.py`
+reçoit le chemin de cette preuve publique puis travaille sur le seul SPARK DEV.
+
+- Précontrôle SQL RO sous propriétaire et Docker : aucune fonction vivante,
+  invocation active, instance, opération, réservation ou bail ; contrôle et
+  référence healthy. Vérifier exactement les fonctions purgées, générations,
+  tir et invocation par rapport au relevé natif de la preuve fournie.
+- Sauvegarde SQLite native par connexion mode=ro, intégrité et même prédicat
+  dans la copie. Sauvegarde native du registre sans bail, copie exacte des
+  artefacts, inventaires SHA/taille/mode avant/après. Fichiers privés uniquement
+  sous un nouveau dossier UUID `qualification-history/schedule-terminal-history-*`.
+- Réutiliser les exports immuables de la capture source5056167, dont les SHA,
+  tailles et images doivent correspondre au contrôle courant et au runtime de
+  l'invocation témoin. Ne pas réexporter les images ni modifier ces archives.
+- Comparer les identités/démarrages/santés des services, fichiers officiels et
+  témoins avant/après. Fermer les copies, passer les SQLite en root0400 et le
+  dossier en root0700 ; écrire le reçu terminé en dernier. Une interruption
+  laisse seulement un dossier privé incomplet, sans effet sur les originaux.
+
+Ce mode ne suspend ni ne redémarre aucun service et ne rétablit aucune base ;
+aucune garde d'administration n'est nécessaire à cette lecture/copie. Son
+processus et SSH sont bornés ; aucune relance automatique après un échec.
+Le reçu public porte dates, identités et empreintes, jamais bases ou secrets.
+Trois groupes : préconditions et identité des vrais témoins ; sauvegardes et
+inventaires vérifiés ; fermeture/protection et conservation des originaux.
+
+L'éligibilité est calculée séparément pour le tir (`completed_at +604801`) et
+chaque génération (`retired_at +604801`). Le replay gardé, à spécifier et
+qualifier avant usage, doit observer la suppression du tir terminal ancien et
+des générations retirées, dont celle sans tir, sur la même image capturée.
+Cette préparation ne prouve ni les sept jours, ni les bornes10000, ni la reprise
+après panne du futur replay. Les données privées sont conservées jusqu'à preuve.
