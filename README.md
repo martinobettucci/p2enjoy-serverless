@@ -60,7 +60,11 @@ sans exception reste exclu. Les [trois groupes bounded courants](docs/evidence/n
 repassent à25,000300s, puis les [quinze groupes consommateurs](docs/evidence/native-observer-detach-consumers-dev-2026-11-11.json)
 au même gel355 : borne des tirs10 496→10 000/exacts496 retirés, préflights
 source/terminal, refus et35/40 avec restitutions. Nominal numérique complet,
-historique final, âge et campagne complète restent ouverts.
+âge et campagne complète restent ouverts. Le
+[rejeu historique final](docs/evidence/schedule-recovery-detach-regression-dev-2026-11-11.json)
+passe cinq groupes au même gel355 : trois coupures137, trois tirs suivants
+réussis sans rejeu, quatre gardes jointes et une purge physique. Worker réel
+terminé0 puis arrêté, originaux et captures canoniques conservés.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native

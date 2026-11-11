@@ -7072,3 +7072,30 @@ le favicon et `brand` dans main.jsx. Statut non commencé ; aucun remplacement n
 déploiement revendiqué. Le worker historique ee45e27f est toujours vivant au
 moment de cette inscription ; ses sources/image restent figées jusqu'à son
 résultat terminal et sa restitution.
+
+### 11 novembre2026 — Cinq groupes historiques courants terminés
+
+Le même worker ee45e27f/3016607 termine réellement0 à20:30UTC : cinq groupes
+au gel355 ef98a9f, sources/images identiques au bounded et aux quinze consommateurs.
+Trois coupures137 : échéances19:55/20:00/20:05 manquées sans invocation,
+claimed20:15 sans invocation, linked20:25 interrompu avant handler ; les trois
+tirs suivants20:10/20:20/20:30 réussissent sans rejeu. Trois handlers réussis,
+quatre gardes jointes, une purge physique. MainPID0/Resultsuccess/Code1/Status0
+conservés avant finish et arrêt de la même unité ; aucune relance.
+
+Preuve schedule-recovery-detach-regression-dev-2026-11-11.json et brut682440/
+gzip85987, ancienne preuve351 conservée. Originaux restitués : contrôle68a8/imagec59
+démarré20:25:03UTC, référence475b inchangée,2services sains, actifs/baux nuls,
+5982artefacts et aucune garde. Captures canoniques intégralement recoupées.
+Le reste historique du helper est coché ;078.5 reste ouverte. Prochaine action :
+nominal numérique source via le worker existant, conserver le même gel355,
+observer son identité réelle après sortie du lanceur puis son terminal avant
+finish ; publication sous un nouveau nom, jamais écraser la preuve348.
+Les deux publishers privés sont relus : identités exactes et SHA du collecteur
+renforcés avant utilisation, aucun test ajouté par cette revue. Âge18novembre
+et campagne complète restent requis, puis reprendre les unités indépendantes
+du registre, dont SLS-100 pour l'icône.
+Audit RO final sans défaut matériel : tailles/SHA,355sources, même worker
+terminal puis arrêté, trois handlers réussis exactement, quatre gardes/purge,
+captures et brut sans secret recoupés. Aucun test supplémentaire ni qualification
+d'âge ou de nominal numérique déduits de la revue.

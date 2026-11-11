@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- [Rejeu historique final](docs/evidence/schedule-recovery-detach-regression-dev-2026-11-11.json)
+  qualifié : cinq groupes au gel355 ef98a9f, trois coupures137 et trois tirs
+  suivants réussis sans rejeu. Quatre gardes jointes, une fonction purgée et
+  captures canoniques conservées ; worker réellement terminé0 puis arrêté.
+  Nominal numérique source courant, sept jours et campagne complète restent requis.
+
 - Banc de fermeture du lecteur sous erreur native de detach : vrai Docker pause,
   reprise ptrace, point SIGSTOP optionnel dans l’attente5 puis SIGCONT indépendant
   après son échéance réelle, erreurs distinctes puis dégel indépendant et
@@ -12,7 +18,8 @@
   repasse trois groupes à25,000300s, masque/alarme conservés et dégel avant
   detach. [Quinze groupes consommateurs](docs/evidence/native-observer-detach-consumers-dev-2026-11-11.json)
   passent au même gel355 : count10 496→10 000, préflights, refus,35/40 et
-  restitutions. Nominal numérique complet, historique final et âge restent requis.
+  restitutions. Historique final qualifié séparément ci-dessus ; nominal numérique
+  complet et âge restent requis.
 
 - Banc de l'opérateur source : deux fautes réelles après attachement,
   expiration35 après SIGSTOP/SIGCONT indépendant et coupure de commande40.

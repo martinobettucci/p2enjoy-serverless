@@ -2145,5 +2145,15 @@ passent au même gel355 : `schedule-firing-volume-replay.mjs count`, puis
 et `--observer-command-timeout`, toujours en série. Exacts496 tirs retirés,
 témoins conservés, mêmes bornes35/40, nettoyages et restitutions passent.
 Six handlers nouveaux seulement ; les témoins copiés restent distincts.
-Nominal source numérique complet, historique final, âge et campagne complète
-restent à exécuter ; les époques antérieures restent préservées séparément.
+Nominal source numérique complet, âge et campagne complète restent à exécuter ;
+l'historique final est qualifié ci-dessous, les époques antérieures sont conservées.
+
+## Rejeu historique final après les consommateurs courants
+
+Le même `node e2e/schedule-recovery.mjs` passe [cinq groupes](../docs/evidence/schedule-recovery-detach-regression-dev-2026-11-11.json)
+sur355sources ef98a9f, identiques au bounded et aux quinze consommateurs.
+Trois coupures137 et trois tirs suivants réussis sans rejeu, quatre gardes
+jointes et une purge physique. Worker local indépendant réellement terminé0,
+reçu terminal conservé puis unité arrêtée ; originaux/captures conservés.
+Ce rejeu clôt le reste historique du helper, pas le nominal numérique courant,
+les sept jours ni la campagne complète de078.5.

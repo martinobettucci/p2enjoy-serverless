@@ -1543,7 +1543,7 @@ Les [pertes avant capture](evidence/schedule-retention-gate-losses-dev-2026-11-1
 passent huit groupes sur 351 sources, puis le
 [nominal rejoué](evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
 quatre groupes sur le même client 20ffc09. Interruptions backup/copie et
-régressions historiques du helper restent requises.
+régressions historiques du helper ont leurs preuves distinctes ci-dessous.
 La [capture de témoins terminaux/retirés](SCHEDULE_RETENTION.md#capture-des-tirs-terminaux-et-générations-retirées)
 réutilise les objets purgés de la vraie campagne CLI04:05UTC, sans mutation ni
 nouveau service. [Capture39862b9](evidence/schedule-terminal-history-capture-dev-2026-11-11.json)
@@ -1698,7 +1698,7 @@ le 18 novembre ; 078.5 reste ouverte.
 
 Restes ciblés de 078.5, avant clôture et campagne complète :
 
-- [ ] Capture initiale `schedule-recovery-operator.py` : pannes propres et
+- [x] Capture initiale `schedule-recovery-operator.py` : pannes propres et
   régressions de ce helper distinct, non couvertes par la matrice de
   `storage-legacy-environment.py`.
   [EOF et SIGKILL après gated](evidence/schedule-retention-gate-losses-dev-2026-11-11.json)
@@ -1722,16 +1722,18 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   TracerPid0 et même contrôle sans redémarrage. Huit groupes de panne puis
   quatre du nominal, six handlers réussis et trois purges physiques. Six refus
   CLI séparés, dossiers partiels protégés et captures canoniques inchangées.
-  Les cinq historiques restent à leur époque7ed2abe ; leur rejeu sur le helper
-  modifié et la campagne finale restent requis.
+  Les cinq historiques7ed2abe conservent leur époque ; le rejeu sur le helper
+  final est qualifié ci-dessous. La campagne complète reste requise pour078.5.
   Rejeu historique préparé avec le même client, dans un oneshot utilisateur
   local indépendant du terminal ; [contrat de suivi](SCHEDULE_RECOVERY.md#exécution-indépendante-du-terminal).
-  Même worker vivant après timeout du client de lancement (20 s), puis
-  résultat systemd terminal et arrêt recoupés. `--no-block` est ajouté au
-  lanceur privé ; son lancement courant est accepté et le worker réel est
-  observé vivant après sortie du client. Campagne finale en cours au gel355
-  ef98a9f, checkpoint local schedule-recovery-current-ee45e27fdc8344c1b5e6c22a6959291f.
-  Résultat terminal et cinq groupes encore requis ; aucun autre test en parallèle.
+  Le [rejeu historique final](evidence/schedule-recovery-detach-regression-dev-2026-11-11.json)
+  passe cinq groupes au gel355 ef98a9f, identique au bounded et aux quinze
+  consommateurs : trois coupures137, trois échéances manquées sans invocation,
+  tir claimed sans invocation et tir linked interrompu avant handler, puis trois
+  tirs suivants réussis sans rejeu. Quatre gardes terminées et une purge physique.
+  Lancement --no-block accepté, même worker3016607/naissance64482164 confirmé
+  vivant puis réellement terminal0, reçu conservé avant arrêt. Deux services
+  sains, actifs/baux nuls,5982artefacts et captures canoniques inchangées.
 - [x] Observateur source sous borne : [refus réel après attachement](evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
   qualifié par deux groupes au commit 956498a, sur 351 sources figées. Deux
   handlers HTTP/cron running, tir et UUID recoupés ; TracerPid 471960 puis zéro
@@ -1811,7 +1813,7 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   passent au même gel355 : six campagnes count/préflights/refus/35/40,
   10 496→10 000/exacts496 retirés en12,758s, témoins conservés,35,679s/1 et
   40,010s/124 avec nettoyages joints. Six nouveaux handlers distincts des copies.
-  Nominal numérique complet et historique final encore requis.
+  Historique final qualifié ci-dessus ; nominal numérique complet encore requis.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 

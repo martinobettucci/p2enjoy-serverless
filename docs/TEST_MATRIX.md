@@ -468,7 +468,7 @@ Trace0 avant retrait, acteurs terminaux/joints et union initiale/remplacements
 contrôles historiques et sept exacts. Trois refus CLI comptent zéro groupe ;
 les deux essais échoués restent exclus. Deux services sains, actifs à zéro,
 5982artefacts et aucune garde finale. Detach en erreur est qualifié ci-dessous ; nominal numérique,
-historique final, âge réel et campagne complète restent dans078.5.
+âge réel et campagne complète restent dans078.5 ; historique final qualifié ci-dessous.
 
 ## Lecteur fermé malgré l'erreur native de detach
 
@@ -478,7 +478,8 @@ wait5 après SIGSTOP/SIGCONT à5,255s, primaire conservée et lecteur/mémoire f
 masque[] restitué après SIGCHLD17 bloqué. Mort/Trace0 puis dégel sans secours,
 acteur joint,9+7contrôles physiques et originaux restitués. Premier essai sans
 exception exclu. Consommateurs qualifiés ci-dessous ; nominal numérique,
-historique final, âge réel et campagne complète restent requis ;078.5 reste ouverte.
+âge réel et campagne complète restent requis ; historique final qualifié ci-dessous,
+078.5 reste ouverte.
 
 ## Consommateurs courants après la faute de detach
 
@@ -489,5 +490,17 @@ retirés,12,758454s), source préflight19:25(9,476869s), terminal19:30(0,005154s
 refus19:35,35/1 à19:40 et40/124 à19:45. SSO/API, captures conservées,
 acteurs/ressources joints et restitutions passent. Six handlers nouveaux
 seulement, distincts des copies ; même imagec59b8616, originaux sains,5982artefacts
-et aucune garde. Nominal source numérique, historique final, sept jours et
-campagne complète restent requis.
+et aucune garde. Nominal source numérique, sept jours et campagne complète
+restent requis ; historique final qualifié ci-dessous.
+
+## Reprise historique finale du helper courant
+
+[Cinq groupes ef98a9f](evidence/schedule-recovery-detach-regression-dev-2026-11-11.json)
+sur355sources/images identiques au bounded et aux quinze consommateurs.
+Trois coupures137, trois échéances manquées et trois tirs suivants réussis sans
+rejeu ; claimed sans invocation et linked interrompu avant handler. Trois
+handlers réussis, quatre gardes jointes, purge physique et captures conservées.
+Même worker réel terminé0, reçu terminal conservé puis unité arrêtée.
+Brut682440/gzip85987. Deux services sains, actifs/baux nuls,5982artefacts et
+aucune garde. Nominal numérique source courant, sept jours et campagne complète
+restent requis ;078.5 non clôturée.

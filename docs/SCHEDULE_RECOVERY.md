@@ -188,8 +188,18 @@ aucune modification produit ou UI dans cette étape.
 Le lancement du11novembre à19:50UTC emploie maintenant --no-block et son client
 termine0. Le même worker3016607/naissance64482164 est observé vivant après la
 sortie du lanceur, dans l'unité transitoire serverless-schedule-recovery-proof-ee45e27fdc8344c1b5e6c22a6959291f.
-Gel355sources ef98a9f ; premier groupe de garde passé, campagne complète encore
-en cours. Checkpoint privé : .local/e2e/schedule-recovery-current-ee45e27fdc8344c1b5e6c22a6959291f/checkpoint.json.
-Seul le résultat réel terminal puis finish de cette même unité permettront
-une qualification. Aucun redémarrage sur timeout d'observation ; le nominal
-numérique source attend la fin et la restitution de ce rejeu.
+Le [rejeu final](evidence/schedule-recovery-detach-regression-dev-2026-11-11.json)
+passe cinq groupes au gel355sources ef98a9f, identique au bounded et aux quinze
+consommateurs courants. Trois coupures Docker137 : échéances19:55/20:00/20:05UTC
+manquées sans invocation, tir claimed20:15 sans invocation, tir linked20:25
+interrompu avant handler. Les trois tirs suivants20:10/20:20/20:30 réussissent,
+sans rejeu. Trois handlers réussis au total, un appel lié interrompu avant
+démarrage, quatre gardes jointes et une fonction purgée physiquement.
+
+Le même worker3016607 termine réellement avec MainPID0, Result=success,
+ExecMainCode=1 et ExecMainStatus=0. Le reçu et le SHA du checkpoint sont conservés
+avant arrêt de la seule unité. Checkpoint privé :
+.local/e2e/schedule-recovery-current-ee45e27fdc8344c1b5e6c22a6959291f/checkpoint.json.
+Brut682440octets/gzip85987 ; images,355sources et captures canoniques inchangées.
+Deux services sains, actifs/baux nuls,5982artefacts et aucune garde. Le nominal
+numérique source courant, l'âge réel et la campagne complète restent requis.

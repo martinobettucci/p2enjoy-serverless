@@ -490,9 +490,9 @@ consommateurs. Trois refus CLI précoces sont distincts, sans groupe E2E ajouté
 Brut466439octets/gzip156743. Les deux matrices échouées restent exclues.
 Originaux restitués, même contrôle/image, démarrage18:40:06UTC attendu,
 référence inchangée, deux services sains, actifs/baux à zéro,5982artefacts et
-aucune garde. Les bornes propres35/40 sont qualifiées ; detach en erreur,
-nominal numérique courant, reprise historique finale, âge18novembre et
-campagne complète restent requis dans078.5.
+aucune garde. Les bornes propres35/40 sont qualifiées ; detach en erreur et
+reprise historique finale ont leurs preuves distinctes ci-dessous. Nominal
+numérique courant, âge18novembre et campagne complète restent requis dans078.5.
 
 ## Fermeture du lecteur malgré une erreur native de detach
 
@@ -559,8 +559,9 @@ contrôle démarré19:15:07UTC, référence inchangée, actifs/baux nuls,5982art
 et aucune garde. Cette preuve clôt le cas lecteur/detach, sans qualifier à elle
 seule les consommateurs modifiés, le nominal numérique, l'âge ni078.5 entière.
 
-Ordre des preuves restantes : borne25 sans faute, consommateurs count/source/
-terminal/refus/35/40, historique final du helper puis nominal source numérique.
+La borne25 sans faute, les consommateurs count/source/terminal/refus/35/40 et
+l'historique final du helper sont qualifiés séparément ci-dessous. Le nominal
+source numérique courant reste requis.
 Les captures canoniques d'âge restent conservées jusqu'au18novembre.
 
 ### Classe courante et six consommateurs requalifiés
@@ -585,5 +586,15 @@ physiques et sept exacts ; aucun waitstatus137 du fils n'est déduit. Six
 handlers réellement démarrés, distincts des observations copiées des captures.
 Brut34040469/gzip2154883 pour les consommateurs. Originaux restitués, contrôle
 démarré19:45:45UTC, référence inchangée, deux services sains, actifs/baux nuls,
-5982artefacts et aucune garde. Nominal numérique complet, historique final,
-âge18novembre et campagne complète restent requis ;078.5 reste ouverte.
+5982artefacts et aucune garde. Historique final qualifié ci-dessous ; nominal
+numérique complet, âge18novembre et campagne complète restent requis ;078.5 reste ouverte.
+
+### Reprise historique sur les sources courantes
+
+Les [cinq groupes ef98a9f](evidence/schedule-recovery-detach-regression-dev-2026-11-11.json)
+passent sur les mêmes355sources/images que la borne25 et les quinze consommateurs.
+Trois coupures137, trois échéances manquées sans invocation et trois tirs
+suivants réussis sans rejeu ; claimed sans invocation, linked interrompu avant
+handler. Trois handlers réussis, quatre gardes terminées et une purge physique.
+Worker réel terminal0 puis arrêté, originaux et captures canoniques conservés.
+Cette régression ne qualifie pas le nominal numérique source courant ni l'âge.
