@@ -2096,14 +2096,15 @@ Critères d’acceptation :
   refusé sans mutation, prochain appel sain ; refus planifié sans invocation,
   prochain tir sain sans rejeu. Nominal, EOF, SIGTERM et SIGKILL éprouvés.
 - [ ] SLS-099.5 Campagne dédiée raccordée à la suite publique et à la matrice,
-  toutes les assertions précédentes conservées ; régressions connexes réussies.
+  toutes les assertions précédentes conservées, dont le retrait natif après
+  le troisième appel avant toute promotion ; régressions connexes réussies.
 
 Les anciens succès32→2→32 et le refus préventif ne qualifient pas ces nouveaux
 critères. L’unité reste ouverte jusqu’aux preuves sur le vrai déploiement.
 
 Le client `instance-limit-admission.mjs` passe quatre groupes avec SSO réel,
 refus HTTP/planifié, prochain tir et trois purges publiques. Les dix groupes de
-fenêtre sans consommateur restent distincts ;.3 et.5 restent à qualifier.
+fenêtre sans consommateur restent distincts ;.5 reste à qualifier.
 L’orchestration publique est implémentée : HTTP30 puis plafond isolé4, rapport31
 avec détail du dernier groupe ; sa première exécution reste à faire. Les deux
 P2 de revue sont corrigés et les trois modes de sûreté passent six groupes.

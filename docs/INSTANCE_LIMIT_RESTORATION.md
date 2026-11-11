@@ -233,3 +233,13 @@ clôture099 ; les preuves précédentes gardent leurs époques distinctes.
 Le rejeu ciblé du raccordement utilise le scope `public-invocations` de la suite
 générale : même sélection CASES, même transmission privée et mêmes vérifications
 qu’en campagne complète, limitée ici au groupe public et à son prérequis SSO.
+
+
+### Conservation du contrôle de retrait après reprise HTTP
+
+La revue du raccordement relève une assertion historique à conserver dans099.5 :
+après le troisième appel réussi, attendre nativement zéro instance et zéro
+conteneur de cette fonction avant toute publication ou promotion. Une promotion
+pourrait sinon provoquer elle-même le drainage et masquer un défaut de retrait
+automatique avec idle_seconds=0. Le relevé est conservé dans la preuve du cas
+HTTP ; les quatre groupes et les31 groupes parents gardent leur comptage.

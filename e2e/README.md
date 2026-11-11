@@ -1607,9 +1607,8 @@ Prévoir deux frontières UTC et la fenêtre gardée900s. Ce client passe quatre
 refus planifié01:35UTC sans invocation puis succès01:40UTC sans rejeu, trois
 purges publiques et restitution des originaux :
 [preuve](../docs/evidence/instance-limit-admission-dev-2026-11-11.json).
-Ne pas le lancer en parallèle d’un autre banc. La perte avec un consommateur
-et le raccordement à la suite publique restent requis ; l’ancien cas refuse
-encore son prérequis au lieu de devenir un test ignoré.
+Ne pas le lancer en parallèle d’un autre banc. Le raccordement à la suite
+publique reste à qualifier ; les modes de sûreté sont qualifiés ci-dessous.
 
 
 Le mode `node e2e/instance-limit-admission.mjs --consumer-loss` utilise l’entrée
@@ -1617,12 +1616,13 @@ privée SSO habituelle et une garde120s. Il démarre un handler45s vers85s aprè
 armement, puis tue réellement le pilote. La garde doit observer le même appel
 encore running avant retrait, enlever son conteneur/réseau, libérer son bail et
 restituer les originaux. Le retrait des données temporaires ne vaut pas purge
-métier ni succès du handler. Ce mode est implémenté, non encore qualifié.
+métier ni succès du handler. Ce mode passe les deux groupes liés ci-dessous.
 
 Le mode `--observer-unavailable` exerce la même perte avec Docker pause réel du
 contrôle temporaire : relevé positif avant suspension, exec refusé pour la
 garde, erreur de capture explicite et restitution attendue. Le nominal conserve
-son exigence de témoin complet. Ces deux modes sont à qualifier séparément.
+son exigence de témoin complet. Ces deux modes passent chacun deux groupes
+distincts dans la preuve liée ci-dessous.
 
 Le mode `--foreign-namespace` crée un namespace synthétique hors du périmètre
 attendu, exige le refus de restitution et sa présence par API, puis supprime
