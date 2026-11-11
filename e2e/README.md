@@ -1788,3 +1788,19 @@ Observation4,46s ; source conservée. Les
 [vingt régressions historiques](../docs/evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
 passent sur les mêmes342sources. Count et interruption du copieur initial restent
 à exécuter ; les trois tentatives échouées sont conservées séparément.
+
+
+## Interruption pendant la copie SQLite de capture
+
+`node e2e/schedule-firing-volume-capture.mjs --copy-loss` reçoit le JSON SSO
+sur stdin privée et ouvre seul une fenêtre DEV900s. Les trois premiers groupes
+exercent le même nominal :16 publications,256 vrais tirs puis capture complète.
+Deux groupes supplémentaires arrêtent le copieur au premier progrès SQLite
+partiel, tuent le pilote, déclenchent le vrai service de garde et constatent
+son blocage pendant au moins2s. Après SIGKILL du copieur et jonction pidfd de
+son wrapper timeout, seule la garde restitue les originaux. Les copies normale
+et canonique6:15 sont recoupées ; la sortie partielle distincte est protégée et
+conservée, sans capture terminée ni purge métier prétendue. Les actions natives
+loss-point/block-guard/join-copy/rescue-copy/sealed-state sont réservées à ce journal de
+campagne, pas des commandes générales d'administration. Implémenté, preuve E2E
+encore requise : [contrat](../docs/SCHEDULE_CAPTURE_INTERRUPTION.md).

@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+### Interruption du copieur de capture
+
+- Mode E2E --copy-loss et inspection native du vrai backup SQLite partiel,
+  arrêt SIGSTOP, perte du pilote, observation du verrou pendant2s et jonction
+  pidfd du copieur/timeout avant restitution indépendante. Capture nominale et
+  source canonique conservées ; implémenté, qualification réelle encore requise.
+
 ### Pilote de replay de la borne des tirs
 
 - Chargement vérifié d'une source scellée, publication atomique de CONTROL en

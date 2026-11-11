@@ -6178,3 +6178,16 @@ recoupés ; originaux restitués et unités jointes. Bilan29 groupes de l'étape
 aucun défaut confirmé à l'audit des neuf preuves propres. Restent le mode count
 après09:30UTC et la frontière de capture initiale spécifiée séparément ; les
 preuves à sept jours et la campagne complète gardent SLS-078 ouverte.
+
+
+### Copieur de capture : implémentation de la frontière spécifiée
+
+Le client --copy-loss et les actions natives sont implémentés : backup pages=1
+avec arrêt réel au premier progrès partiel, reçu durable sous propriétaire,
+identités PID/naissance et verrou hérités, garde explicitement déclenchée et
+observée bloquée2s, SIGKILL/jonction du copieur et timeout. Le nominal est exercé
+dans la même fenêtre ; les captures complète et canonique sont recoupées par
+SHA/identité, la partielle protégée après jonction. Le secours reste un échec.
+Contrôles syntaxiques réussis ; aucune preuve E2E de cette nouvelle frontière
+encore acquise. Prochaine action : revue bornée, livraison des sources identiques
+sur le seul SPARK DEV puis cinq groupes réels en série.

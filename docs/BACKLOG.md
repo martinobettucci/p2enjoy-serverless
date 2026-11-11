@@ -1599,7 +1599,7 @@ initial encore requis, aucune rétention déduite du préflight.
 L'[interruption du copieur de capture](SCHEDULE_CAPTURE_INTERRUPTION.md) est
 spécifiée avant code : nominal puis perte réelle pendant SQLite backup,
 garde vivante bloquée par le verrou, SIGKILL/jonction et restitution indépendante.
-Elle reste à implémenter/qualifier ; elle ne remplace ni le seed-loss déjà prouvé
+Le mode --copy-loss est implémenté, non encore qualifié ; il ne remplace ni le seed-loss déjà prouvé
 ni la source scellée6:15UTC.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario

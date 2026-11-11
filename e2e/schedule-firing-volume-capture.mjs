@@ -1,5 +1,7 @@
 // @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#préparation-authentique-et-conservation
 // @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#préparation-authentique-et-conservation
+// @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_CAPTURE_INTERRUPTION.md
+// @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_CAPTURE_INTERRUPTION.md#éprouver-lattente-réelle-de-la-garde
 // Real SSO, API publications, UTC window, inherited-lock native backups and public purges.
 import assert from 'node:assert/strict';
 import {randomUUID,createHash} from 'node:crypto';
@@ -10,19 +12,25 @@ import {createInterface} from 'node:readline';
 import {chromium} from 'playwright';
 import {publicationArchive} from './publication-fixtures.mjs';
 
+const copyLoss=process.argv.includes('--copy-loss');
+assert(process.argv.slice(2).every(v=>v==='--copy-loss')&&process.argv.length<=3,'unknown_capture_option');
 const run=promisify(execFile),campaign=randomUUID(),base='https://serverless.lelabs.tech';
 const ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
 const helper='/srv/p2enjoy-serverless/e2e/storage-legacy-environment.py',out=new URL('../.local/e2e/',import.meta.url);
 const report=new URL('schedule-firing-volume-capture-'+campaign+'.json',out),events=[],checks=[],observations=[],functions=[];
 let child,ended=false,exitCode=null,browser,admin,session,namespace,service,work,archive,window,capture;
-let completed=false,cleanup=false,failure=null,restoration,saveQueue=Promise.resolve();
-function save(){saveQueue=saveQueue.then(async()=>{const pending=new URL(report.pathname+'.pending','file:');await writeFile(pending,JSON.stringify({campaign,completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,function_ids:functions.map(v=>v.id),namespace_id:namespace?.id,window,capture,exit_code:exitCode,failure,restoration},null,2)+'\n',{mode:0o600});await rename(pending,report);});return saveQueue;}
+let completed=false,cleanup=false,failure=null,restoration,copyPoint,copyJoined,guardBlocked,lossRequested=false,saveQueue=Promise.resolve();
+function save(){saveQueue=saveQueue.then(async()=>{const pending=new URL(report.pathname+'.pending','file:');await writeFile(pending,JSON.stringify({campaign,completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,function_ids:functions.map(v=>v.id),namespace_id:namespace?.id,window,capture,copy_loss:copyLoss,copy_point:copyPoint,copy_joined:copyJoined,guard_blocked:guardBlocked,exit_code:exitCode,failure,restoration},null,2)+'\n',{mode:0o600});await rename(pending,report);});return saveQueue;}
 async function until(action,message,seconds=90){const deadline=Date.now()+seconds*1000;while(Date.now()<deadline){const value=await action();if(value)return value;await new Promise(resolve=>setTimeout(resolve,250));}assert.fail(message);}
 async function event(name){return until(()=>{const value=events.find(v=>v.event===name);assert(value||!ended,'deployment_driver_stopped');return value;},'deployment_event_missing',150);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}finally{await save();}}
 async function operation(op,body={}){const offset=events.length;assert(!ended);child.stdin.write(JSON.stringify({op,...body})+'\n');return until(()=>{const value=events.slice(offset).find(v=>v.event==='result'&&v.op===op);assert(value||!ended,'deployment_driver_stopped');return value?.value;},'operator_observation_missing');}
 async function capacity(){return operation('capacity');}
-async function remote(op){try{const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,op,campaign],{timeout:150000,maxBuffer:8*1024*1024});return JSON.parse(stdout.trim().split('\n').at(-1));}catch(error){await writeFile(new URL('firing-volume-'+campaign+'-'+op+'.stderr',out),String(error.stderr??''),{mode:0o600});throw error;}}
+async function remote(op,extra=[]){try{const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,op,campaign,...extra],{timeout:150000,maxBuffer:8*1024*1024});return JSON.parse(stdout.trim().split('\n').at(-1));}catch(error){await writeFile(new URL('firing-volume-'+campaign+'-'+op+'.stderr',out),String(error.stderr??''),{mode:0o600});throw error;}}
+async function copyOperator(action){
+ const {stdout}=await run('ssh',[...ssh,'python3','-B','/srv/p2enjoy-serverless/e2e/schedule-firing-volume-snapshot.py','--campaign',campaign,'--action',action],{timeout:45000,maxBuffer:2*1024*1024});
+ const value=JSON.parse(stdout.trim().split('\n').at(-1));assert(value.completed,'copy_operator_incomplete');return value;
+}
 async function api(url,{method='GET',body,bytes,status=200,headers={}}={}){const response=await admin.fetch(base+url,{method,data:bytes??body,headers:{Origin:base,'X-CSRF-Token':session?.csrf_token,...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});assert([status].flat().includes(response.status()),`${method} ${url}: ${response.status()}`);return response.json();}
 async function publish(fn){const row=await api(`/api/functions/${fn.id}`),candidate=await api(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:fn.config.handler,events:{http:[],schedules:Array.from({length:16},()=>({cron:'*/5 * * * *',enabled:true,timezone:'UTC'}))}}});fn.deployment_id=candidate.id;const result=await api(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes:archive});assert.equal(result.state,'published');fn.revision_id=result.revision_id;return result.code_hash;}
 async function promote(fn){const row=await api(`/api/functions/${fn.id}`);await api(`/api/functions/${fn.id}/versions/${fn.hash}/promote`,{method:'POST',headers:{'If-Match':String(row.updated_at)}});}
@@ -78,13 +86,31 @@ try{
   for(const fn of functions){const generation=capture.witnesses.generations.find(v=>v.function_id===fn.id);assert(generation&&!generation.retired_at&&generation.code_hash===fn.hash);assert.equal(generation.revision_id,fn.revision_id);}
   console.log(JSON.stringify({event:'private-capture-preserved',capture_id:capture.capture_id,eligible_after:capture.eligible_after}));
  });
+ if(copyLoss){
+  await check('Perte du pilote pendant backup SQLite et garde réellement bloquée derrière le verrou',async()=>{
+   lossRequested=true;child.stdin.write(JSON.stringify({op:'capture-firing-history',function_ids:functions.map(v=>v.id),window,loss:'control-backup'})+'\n');
+   copyPoint=await copyOperator('loss-point');await save();assert(copyPoint.stopped);assert.equal(copyPoint.point.window,window);
+   const killed=await remote('signal-driver',['SIGKILL']);assert(killed.driver_dead&&killed.signal===9);observations.push({scenario:'driver-killed-during-backup',native:killed});
+   guardBlocked=await copyOperator('block-guard');assert(guardBlocked.blocked_seconds>=2&&guardBlocked.original_control_stopped);assert.equal(guardBlocked.timer_expiry_tested,false);await save();
+  });
+  await check('Copieur et timeout joints puis restitution indépendante et captures scellées identiques',async()=>{
+   copyJoined=await copyOperator('join-copy');await save();assert(copyJoined.copier_sigkill&&copyJoined.copier_joined&&copyJoined.wrapper_joined&&copyJoined.root_private_directory&&!copyJoined.capture_complete);assert.deepEqual(copyJoined.sealed_captures,copyPoint.sealed_captures);
+   const status=await until(async()=>{const value=await remote('status');return value.restored&&!value.driver_alive&&['inactive','unknown'].includes(value.timer_state)&&['inactive','unknown'].includes(value.service_state)?value:false;},'independent_copy_restoration_missing',150);
+   restoration=status.restoration;assert(restoration.independent&&restoration.databases_identical&&restoration.artifacts_identical&&restoration.configuration_unchanged&&restoration.reference_unchanged&&restoration.temporary_directories_removed&&restoration.control_healthy);
+   const native=status.before_consumer_cleanup;assert(native&&!status.observation_error);assert.equal(native.invocations.length,2);assert(native.invocations.every(v=>v.state==='succeeded'));assert.equal(native.instances.length,0);assert.equal(native.containers.length,0);assert.equal(native.firings.length,256);assert.equal(native.functions.length,16);assert(native.functions.every(v=>!v.deleted_at));
+   assert.equal(status.consumer_cleanup.removed_containers.length,0);assert.equal(status.consumer_cleanup.removed_networks.length,0);observations.push({scenario:'copy-loss-independent-restoration',native:status});
+   const sealed=await copyOperator('sealed-state');assert.deepEqual(sealed.sealed_captures,copyPoint.sealed_captures);assert.deepEqual(sealed.partial_files,copyJoined.partial_files);observations.push({scenario:'sealed-captures-after-restoration',native:sealed});
+   await until(()=>ended,'dead_deployment_not_joined',30);assert.notEqual(exitCode,0);cleanup=true;
+  });
+ }else{
  await check('16 purges publiques puis restitution des originaux et gardes jointes',async()=>{
   for(const fn of functions)await purge(fn);await api(`/api/services/${service.id}`,{method:'DELETE'});await api(`/api/namespaces/${namespace.id}`,{method:'DELETE'});const state=await capacity();assert.equal(state.instances.length,0);assert.equal(state.containers.length,0);assert(state.functions.every(v=>v.deleted_at));const physical=await physicalCleanup();assert(physical.completed);observations.push({scenario:'purged-before-restoration',physical});
   child.stdin.end(JSON.stringify({op:'restore'})+'\n');restoration=await event('restored');assert(restoration.databases_identical&&restoration.artifacts_identical&&restoration.configuration_unchanged&&restoration.reference_unchanged&&restoration.temporary_directories_removed);assert.equal(restoration.independent,false);await until(()=>ended,'deployment_not_joined',30);assert.equal(exitCode,0);const status=await remote('status');assert(status.restored&&!status.driver_alive&&['inactive','unknown'].includes(status.timer_state)&&['inactive','unknown'].includes(status.service_state));observations.push({scenario:'restore-joined',restored:true,driver_alive:status.driver_alive,timer_state:status.timer_state,service_state:status.service_state});cleanup=true;
- });completed=true;
+ });
+ }completed=true;
 }catch(error){failure={type:error.name,code:error.code,signal:error.signal,source_line:String(error.stack??'').match(/schedule-firing-volume-capture\.mjs:(\d+)/)?.[1],message_sha256:createHash('sha256').update(String(error.message)).digest('hex'),...(typeof error.actual==='number'&&typeof error.expected==='number'?{actual:error.actual,expected:error.expected}:{})};}
 finally{
- credentials=null;if(!cleanup&&child){child.stdin.end();try{restoration=await remote('restore');cleanup=Boolean(restoration.control_healthy&&restoration.configuration_unchanged);}catch(error){failure={...failure,restoration_error:error.name};}await until(()=>ended,'failed_deployment_not_joined',60).catch(()=>{cleanup=false;});}
+ credentials=null;if(!cleanup&&child){child.stdin.end();if(lossRequested&&!copyJoined){try{const rescue=await copyOperator('rescue-copy');observations.push({scenario:'failed-copy-rescue',native:rescue});}catch(error){observations.push({scenario:'failed-copy-rescue',failure_type:error.name});}}try{restoration=await remote('restore');cleanup=Boolean(restoration.control_healthy&&restoration.configuration_unchanged);}catch(error){failure={...failure,restoration_error:error.name};}await until(()=>ended,'failed_deployment_not_joined',60).catch(()=>{cleanup=false;});}
  await browser?.close();if(work)await rm(work,{recursive:true,force:true});await save();
 }
 assert(completed&&cleanup&&!failure,`schedule_firing_volume_capture_failed:${report.pathname}`);console.log(JSON.stringify({completed:true,groups:checks.length,capture_id:capture.capture_id,eligible_after:capture.eligible_after,report:report.pathname}));
