@@ -13,6 +13,13 @@ Les deux flux sont joints avant tout nettoyage, les réponses libérées et la
 progression sauvegardée par lots. Rapports UUID sous .local/e2e.
 Contrat : [INVOCATION_RETENTION_VOLUME](../docs/INVOCATION_RETENTION_VOLUME.md).
 
+Après fin/restauration de cette campagne, `python3 -B e2e/instance-limit-guard-options.py`
+éprouve trois groupes sans SSO : refus réel120+1800, refus1800 hors mode, puis
+installation réelle avec garde900 par omission et restitution nominale jointe.
+Les deux refus ne créent aucune fenêtre ; les cinq modes120 de
+`node e2e/instance-limit-environment.mjs MODE` et le cas historique
+`node e2e/storage-legacy-recovery.mjs --partial` restent des régressions distinctes.
+
 ## Conservation des témoins terminaux de rétention
 
 Après la campagne CLI réussie et ses purges, au repos sur le seul SPARK DEV :
