@@ -1706,6 +1706,10 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   passe quatre groupes sur les mêmes 351 sources/images ; trois refus CLI
   précoces sont vérifiés séparément. Les captures canoniques restent conservées.
   Restent backup/copie interrompus et cinq régressions historiques distinctes.
+  [Interruptions de copie](SCHEDULE_RETENTION.md#interruptions-pendant-sauvegarde-et-copie)
+  spécifiées : callback SQLite réel ou copy2 réel, SIGSTOP puis garde 80 s,
+  reçu par FD préouvert sous root et dossier partiel conservé. Code/E2E à faire
+  après le worker historique figé.
   Rejeu historique préparé avec le même client, dans un oneshot utilisateur
   local indépendant du terminal ; [contrat de suivi](SCHEDULE_RECOVERY.md#exécution-indépendante-du-terminal).
   Worker lancé et vivant après timeout de son client de lancement (20 s),

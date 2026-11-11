@@ -6724,3 +6724,12 @@ réel : unité activating/start, MainPID 510223, naissance 63038117, même cgrou
 premier groupe garde indépendant passé. L'observation est récupérée sans
 relance ; aucun résultat final acquis. Décision pour le prochain lancement :
 `--no-block`, à appliquer après la fin de ce worker dont le code reste figé.
+
+### 11 novembre 2026 — Décision des interruptions de copie
+
+078.5 : après la fin du rejeu figé, deux fautes explicites du mode de capture :
+SIGSTOP sur vrai progrès SQLite non final ou après vrai copy2 conforme, puis
+mise à mort/jonction par garde 80 s. FD root0600 préouvert pour le callback
+sous UID propriétaire ; aucune exigence de taille positive du SQLite partiel.
+Dossier incomplet et absence de manifeste final conservés ; captures canoniques
+inchangées. Quatre groupes par cas et nominal à rejouer ; code/E2E à faire.

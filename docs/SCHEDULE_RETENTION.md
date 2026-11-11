@@ -349,3 +349,55 @@ un témoin de non-régression ; elle ne remplace pas les deux sources canoniques
 et ses images ne sont pas exportées. Les dates d'éligibilité initiales du
 18 novembre restent inchangées. Ces preuves ne couvrent pas backup/copie
 interrompus, les cinq régressions historiques ni l'âge réel.
+
+## Interruptions pendant sauvegarde et copie
+
+Décision du 11 novembre 2026 avant code, pour le reste déjà inscrit de 078.5.
+Après le rejeu historique actif, ajouter deux options exclusives au seul mode
+terminal-capture : `--capture-loss=control-backup` et
+`--capture-loss=artifact-copy`. Sans option, conserver le parcours nominal.
+L'opérateur et son client sont modifiés après la fin du rejeu figé, jamais pendant.
+
+Les points de faute exécutent le vrai travail avant un SIGSTOP du helper :
+
+- Contrôle : appeler réellement `source.backup(destination,pages=16,progress=...)`.
+  Le premier callback non final conserve statut, total et restant bruts avec
+  `0 < remaining < total`. Les pages peuvent être en cache : aucune taille
+  physique positive de destination n'est exigée. Le contrôle reste tracé au
+  point acquis ; le fichier partiel n'est pas ouvert pour récupération SQLite.
+- Artefacts : une fonction de copie appelle réellement `shutil.copy2`, vérifie
+  le fichier obtenu, puis suspend après un fichier conforme et avant la fin
+  de l'arbre. Le reçu porte le chemin relatif, SHA/taille/mode et les nombres
+  copiés/attendus avec `0 < copied < expected`. Le contrôle est déjà détaché,
+  le même tir clos et aucune instance ne subsiste. Ce cas ne revendique pas
+  une interruption au milieu d'un fichier.
+
+Le callback SQLite s'exécute sous l'EUID propriétaire du contrôle. Préouvrir
+sous root un reçu 0600 dans le dossier protégé de la garde, synchroniser son
+entrée de répertoire, puis écrire complètement et fsync sur ce FD dans le
+callback. Aucun accès par chemin à /run n'est tenté sous l'EUID abaissé.
+Émettre le reçu réel après synchronisation, fermer le FD, puis SIGSTOP ; un
+SIGCONT inattendu termine en échec, sans publication de capture complète.
+Les backups préparatoire et du registre restent hors de ces hooks.
+
+Le client utilise le même SSO, HTTP témoin et vrai cron. Après la commande
+capture, il attend le point de faute, recoupe le reçu durable, le PID/naissance,
+l'état arrêté du helper et son EUID, puis le TracerPid attendu du contrôle.
+Attendre la véritable garde 80 s : elle doit tuer et joindre ce helper avant
+restitution. Conserver son signal et le vrai code SSH, mesurer TracerPid zéro
+et même contrôle/image/démarrage. SIGKILL saute le finally : aucune fermeture
+Python explicite de lecteur ni attente de flock n'est revendiquée.
+
+Chaque cas crée exactement son nouveau dossier partiel identifié. Après garde,
+conserver son inventaire brut et l'absence de manifeste final capture.json ou
+d'événement retention-captured. Le cas artefacts peut avoir émis
+control-resumed-after-capture ; il ne suit donc pas le refus avant commande.
+Les captures canoniques restent identiques. Protéger uniquement ces nouveaux
+artefacts de faute, sans changer leurs octets ; aucune source partielle ne
+remplace une source d'âge. Clôture normale du même tir, mêmes deux UUID/dates,
+purge publique et absence physique terminent chaque cas.
+
+Quatre groupes par cas : préparation réelle ; progrès interrompu et garde ;
+reprise sans rejeu et dossier partiel ; purge. Rejouer le nominal après ces
+options. Les preuves de chaque époque restent distinctes ; régression complète
+et âge réel restent requis avant clôture. Aucun succès acquis par ce contrat.
