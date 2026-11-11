@@ -6206,3 +6206,17 @@ aucun traitement artificiel des signaux. Conserver aussi type/errno/ligne des
 futurs échecs opérateur. Preuve échouée et brut compressé conservés ; source6:15
 intacte. Rejouer les cinq groupes après correction, jamais déduire leur succès
 du seul diagnostic noyau.
+
+
+### Copie interrompue qualifiée à08:50UTC
+
+dbb840b passe cinq groupes sur342sources identiques :256 tirs, sauvegarde normale,
+puis premier pas1/140 de backup, SIGSTOP maintenu après SIGKILL du pilote et17
+échantillons de garde bloquée2,043s. Wrapper âgé5,071773s lors du SIGKILL explicite,
+copieur et wrapper joints, seule la garde restitue bases/artefacts/configuration/
+référence et santé. Les deux captures et les fichiers partiels sont identiques
+après restitution, partiel protégé ; aucune intégrité du fichier SQLite0octet
+revendiquée. L'essai c5fcb1d reste exclu. Preuve et brut compressé conservés,
+audit RO des cinq groupes sans contradiction ;20 régressions historiques en cours.
+Reprendre ensuite le mode count après09:30UTC, sources protégées et sept jours ;
+SLS-078 reste ouverte et aucune campagne complète n'est revendiquée.

@@ -94,3 +94,24 @@ obligatoires avant restitution. Aucun gestionnaire qui simule ou masque un
 signal n'est ajouté au copieur. La preuve doit constater que State=T persiste
 après perte du pilote, puis exécuter tous les cinq groupes et les régressions.
 Les erreurs natives suivantes conservent type, errno et ligne, sans donnée privée.
+
+
+## Frontière de copie qualifiée
+
+La [preuve dbb840b](evidence/schedule-capture-interruption-dev-2026-11-11.json)
+passe cinq groupes réels sur342sources identiques avant/après, mêmes images.
+À08:50UTC :256 tirs, deux handlers réussis/254 refus, puis sauvegarde normale
+intègre et protégée. La seconde sauvegarde s'arrête au premier pas réel de140
+pages (139 restantes). Après SIGKILL du pilote,17 échantillons conservent State=T,
+verrou occupé, même garde vivante et répertoires inchangés pendant2,043045s.
+Le SIGKILL du copieur est envoyé lorsque le wrapper a5,071773s, sous40s ; les
+deux pidfd sont joints puis seule la garde restitue. Client exit0, pilote SSH255
+attendu, santé/bases/artefacts/configuration/référence conservés et unités inactives.
+
+Les captures canonique6:15 et nominale8:50 sont identiques aux trois relevés ;
+la sortie partielle est protégée en root0400/root0700 et conserve ses inodes/SHA.
+Son fichier SQLite principal a0octet, avec journal privé ; aucune intégrité de
+base partielle ni capture terminée revendiquée. Les16 fonctions temporaires
+restent non supprimées au retrait ; ce retrait n'est pas une purge métier.
+Le premier essai c5fcb1d reste échoué et exclu. Les régressions du helper corrigé
+sont en cours ; aucun timer900 expiré, borne numérique ou âge qualifié ici.

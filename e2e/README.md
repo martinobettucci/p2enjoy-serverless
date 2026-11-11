@@ -1756,8 +1756,8 @@ passe quatre groupes sur340sources :256 tirs06:15UTC, sauvegarde protégée,
 16 purges et restitution. L'essai27221ea échoué est conservé séparément.
 Éligibilité numérique09:30UTC. Les
 [vingt groupes de garde/options/sûreté](../docs/evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
-passent sur les mêmes340sources après la capture. Rétention, pannes du lecteur
-de copie et futur replay restent requis.
+passent sur les mêmes340sources après la capture. Rétention et replay numérique
+restent requis ; la copie interrompue est qualifiée séparément ci-dessous.
 
 ## Replay gardé de la borne des tirs
 
@@ -1786,8 +1786,8 @@ passe neuf groupes sur342sources : invalid/not-eligible, préflight de18 fenêtr
 et4864 tirs,64 pages API après SSO, deux pertes et restitutions indépendantes.
 Observation4,46s ; source conservée. Les
 [vingt régressions historiques](../docs/evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
-passent sur les mêmes342sources. Count et interruption du copieur initial restent
-à exécuter ; les trois tentatives échouées sont conservées séparément.
+passent sur les mêmes342sources. Count reste à exécuter ; interruption du copieur
+initial qualifiée ci-dessous. Les trois tentatives échouées sont conservées séparément.
 
 
 ## Interruption pendant la copie SQLite de capture
@@ -1802,5 +1802,6 @@ son wrapper timeout, seule la garde restitue les originaux. Les copies normale
 et canonique6:15 sont recoupées ; la sortie partielle distincte est protégée et
 conservée, sans capture terminée ni purge métier prétendue. Les actions natives
 loss-point/block-guard/join-copy/rescue-copy/sealed-state sont réservées à ce journal de
-campagne, pas des commandes générales d'administration. Implémenté, preuve E2E
-encore requise : [contrat](../docs/SCHEDULE_CAPTURE_INTERRUPTION.md).
+campagne, pas des commandes générales d'administration. Les [cinq groupes réels](../docs/evidence/schedule-capture-interruption-dev-2026-11-11.json)
+passent sur342sources dbb840b ; régressions historiques du correctif en cours.
+Voir le [contrat](../docs/SCHEDULE_CAPTURE_INTERRUPTION.md).

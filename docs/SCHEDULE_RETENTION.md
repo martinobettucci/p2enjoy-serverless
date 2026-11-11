@@ -79,8 +79,8 @@ manquées réellement écoulées avant replay gardé. La
 passe quatre groupes sur340sources,256 tirs06:15UTC et16 purges/restitution ;
 replay éligible09:30UTC le11 novembre. Les
 [vingt groupes du helper](evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
-passent sur les mêmes340sources ; pannes du lecteur de copie et futur replay
-restent à qualifier. Aucune date métier n'est modifiée.
+passent sur les mêmes340sources. La [copie interrompue](evidence/schedule-capture-interruption-dev-2026-11-11.json)
+est qualifiée par cinq groupes sur342sources ; replay numérique reste à qualifier. Aucune date métier n'est modifiée.
 
 
 ## Premier essai et frontière d’attachement

@@ -200,8 +200,8 @@ avec identifiants SSO sur stdin privée, passe
 sur340sources31b9102 :256 tirs réels à06:15UTC, deux handlers/254 refus sans
 invocation, copie native protégée,16 purges et restitution jointe. Le premier
 essai27221ea échoué reste distinct. Éligibilité après39 fenêtres :09:30UTC le
-11 novembre. Ni borne10000 ni sept jours revendiqués ; pannes de copie native
-et replay encore requis.
+11 novembre. Ni borne10000 ni sept jours revendiqués ; replay numérique encore requis.
+La frontière de copie interrompue est qualifiée séparément ci-dessous.
 
 Les [régressions355453b](evidence/schedule-firing-volume-guard-regressions-dev-2026-11-11.json)
 passent20 groupes sur les mêmes340sources : cinq modes de
@@ -219,8 +219,17 @@ sources scellées conservées, restitutions jointes. Les trois essais échoués
 restent exclus. Les
 [vingt régressions du helper courant](evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
 passent sur les mêmes342sources :11 restitutions,3 options et6 sûreté/consommateur.
-Étape29 groupes (9+20). Count après39 fenêtres et interruption du copieur initial
-restent requis ; aucun résultat numérique ou d'âge déduit du préflight.
+Étape29 groupes (9+20). Count après39 fenêtres reste requis ; aucun résultat numérique ou d'âge déduit du préflight.
+
+## Interruption du copieur initial — SLS-078.5
+
+`node e2e/schedule-firing-volume-capture.mjs --copy-loss` passe
+[cinq groupes](evidence/schedule-capture-interruption-dev-2026-11-11.json) sur342sources
+dbb840b : nominal complet, puis interruption au premier pas1/140 du vrai backup,
+perte du pilote, garde bloquée2,043s, SIGKILL à5,07s/40s et jonctions, restitution
+indépendante. Captures scellées identiques avant/après ; partiel protégé mais
+sans intégrité revendiquée. L'essai c5fcb1d échoué reste exclu. Régressions du
+helper corrigé en cours ; borne10000 et sept jours non qualifiés par ces groupes.
 
 ## Plafond global isolé — SLS-099
 

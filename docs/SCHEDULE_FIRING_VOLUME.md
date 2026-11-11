@@ -111,8 +111,9 @@ Curseur C=06:15UTC,256 déclarations par fenêtre : éligibilité au premier rep
 numérique le11 novembre2026 à09:30UTC, après39 fenêtres réellement écoulées.
 Les16 fonctions sont purgées par API, code/volumes/canaux/consommateurs absents,
 originaux restitués et pilote/gardes terminés. L'essai27221ea reste échoué et
-hors total. Les régressions du helper sont qualifiées ci-dessous ; les pannes
-du lecteur de copie restent à éprouver. La capture ne qualifie pas la rétention,
+hors total. Les régressions du helper sont qualifiées ci-dessous ; l’interruption
+pendant backup CONTROL est qualifiée dans SCHEDULE_CAPTURE_INTERRUPTION.
+La capture ne qualifie pas la rétention,
 le futur replay ni les sept jours.
 
 ## Restitutions et sûreté qualifiées
@@ -129,9 +130,9 @@ Les connexions d'observation ne retiennent aucune transaction ; les pilotes et
 gardes sont joints, les originaux restitués à chaque fenêtre. Le retrait des
 consommateurs après perte ne vaut pas purge métier. Les quatre groupes de
 capture gardent leurs16 purges publiques distinctes :24 groupes de cette étape,
-sans addition des sous-assertions ni de l'essai initial échoué. Les interruptions
-pendant la copie native elle-même, le replay, les bornes et sept jours restent
-ouverts ; aucune campagne complète de plateforme n'est revendiquée.
+sans addition des sous-assertions ni de l'essai initial échoué. Le replay
+numérique, les bornes et sept jours restent ouverts ; la copie interrompue est
+qualifiée séparément ci-dessous. Aucune campagne complète de plateforme revendiquée.
 
 ## Éligibilité et replay à qualifier
 
@@ -282,5 +283,17 @@ indisponible/namespace étranger. Le helper figé et les342sources sont identiqu
 à chaque fenêtre, pilotes et gardes joints. Le reçu natif partiel confirme60s.
 
 Soit29 groupes de l'étape, sans recomptage des assertions ou des essais échoués.
-Le mode count après39 fenêtres, les interruptions du copieur initial et les sept
-jours restent ouverts ; aucune campagne complète de plateforme revendiquée.
+Le mode count après39 fenêtres et les sept jours restent ouverts ;
+l’interruption du copieur initial est qualifiée séparément ci-dessous.
+Aucune campagne complète de plateforme revendiquée.
+
+
+## Interruption de la capture initiale qualifiée
+
+La [preuve propre](evidence/schedule-capture-interruption-dev-2026-11-11.json)
+passe cinq groupes sur342sources dbb840b : vraie fenêtre08:50UTC, capture normale,
+perte pendant backup natif puis garde bloquée2,043s et restitution indépendante
+après SIGKILL/jonction. Le [contrat détaillé](SCHEDULE_CAPTURE_INTERRUPTION.md#frontière-de-copie-qualifiée)
+distingue la correction du groupe timeout orphelin et l'essai c5fcb1d échoué.
+Captures canonique et nominale conservées, sortie partielle protégée ; aucun
+nouveau résultat de rétention. Régressions du helper corrigé en cours.

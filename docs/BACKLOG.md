@@ -1558,8 +1558,7 @@ La [préparation de la borne des tirs](SCHEDULE_FIRING_VOLUME.md) est spécifié
 256 premiers tirs authentiques puis sauvegarde native de générations actives.
 Le futur replay après39 fenêtres réellement écoulées devra franchir10000 sans
 injection SQL ni horloge remplacée. Client et lecteur natif avec jonction par
-verrou hérité et régressions qualifiés ci-dessous ; replay et pannes du lecteur
-de copie natif restent à qualifier.
+verrou hérité et régressions qualifiés ci-dessous ; replay numérique reste à qualifier ; interruption du lecteur qualifiée ci-dessous.
 Premier [essai27221ea](evidence/schedule-firing-volume-capture-failed-dev-2026-11-11.json)
 à06:00UTC échoué :2 succès/172 refus/82 failed sous
 OperationalError, originaux restitués, aucune capture validée dans cet essai.
@@ -1577,7 +1576,7 @@ est spécifié avant code : source scellée vérifiée avant arrêt, copie atomi
 CONTROL en dernier, observation native de deux états au même curseur. Préflight,
 refus avant mutation/éligibilité, pertes pendant copie/observation et replay
 numérique implémentés ; qualification sous borne et pertes ci-dessous, mode
-count et interruption du copieur initial encore requis.
+count encore requis ; interruption du copieur initial qualifiée ci-dessous.
 Premier essai0e29293 : huit refus et refus avant éligibilité passent, préflight
 échoué avant publication CONTROL sur TypeError dans l'écriture du reçu ;
 originaux restitués. Appel Path.open/opener corrigé dans le replay qualifié ci-dessous.
@@ -1594,16 +1593,18 @@ issus de18 fenêtres manquées, SSO/64 pages API, pertes copie/observateur et
 restitutions indépendantes. Aucun handler nouveau ; source identique. Les trois
 essais échoués restent séparés. Les
 [vingt régressions historiques](evidence/schedule-firing-replay-guard-regressions-dev-2026-11-11.json)
-passent ensuite sur les mêmes342sources ; mode count et interruption du copieur
-initial encore requis, aucune rétention déduite du préflight.
+passent ensuite sur les mêmes342sources ; mode count encore requis, aucune rétention déduite du préflight.
+La frontière de capture initiale est qualifiée séparément ci-dessous.
 L'[interruption du copieur de capture](SCHEDULE_CAPTURE_INTERRUPTION.md) est
-spécifiée avant code : nominal puis perte réelle pendant SQLite backup,
-garde vivante bloquée par le verrou, SIGKILL/jonction et restitution indépendante.
-Le premier essai c5fcb1d passe trois groupes puis échoue après perte du pilote ;
-le groupe timeout orphelin reçoit SIGHUP, reproduit par diagnostic natif.
-Le lancement foreground est décidé avant correction ; qualification encore requise.
-Le mode --copy-loss est implémenté, non encore qualifié ; il ne remplace ni le seed-loss déjà prouvé
-ni la source scellée6:15UTC.
+qualifiée par [cinq groupes](evidence/schedule-capture-interruption-dev-2026-11-11.json)
+sur342sources dbb840b : nominal08:50UTC, perte du pilote pendant backup SQLite,
+garde bloquée2,043s, SIGKILL du copieur à5,07s/40 puis jonctions et restitution
+indépendante. Le premier essai c5fcb1d échoué reste séparé ; son groupe timeout
+orphelin recevait SIGHUP, reproduit nativement et corrigé par foreground limité
+au copieur. Les deux captures et la sortie partielle sont recoupées ; aucune
+purge métier après perte. Régressions historiques du correctif en cours.
+Le mode count, les sources protégées sous borne, les sept jours et la campagne
+complète restent requis ; cette preuve ne clôture pas078.5.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

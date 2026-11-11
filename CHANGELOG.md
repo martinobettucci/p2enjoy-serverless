@@ -9,7 +9,9 @@
   pidfd du copieur/timeout avant restitution indépendante. Capture nominale et
   source canonique conservées. Premier essai échoué sous groupe timeout orphelin ;
   lancement foreground limité au copieur et diagnostics natifs conservés.
-  Implémenté, qualification réelle encore requise.
+  Cinq groupes réels dbb840b sur342sources :256 tirs08:50UTC, garde bloquée2,043s,
+  SIGKILL/jonction à5,07s/40, restitution indépendante et captures identiques.
+  Régressions historiques en cours ; aucune rétention déduite de ces groupes.
 
 ### Pilote de replay de la borne des tirs
 
@@ -20,7 +22,7 @@
   observation4,46s, SSO/64 pages API, refus et deux pertes avec restitution
   indépendante. Vingt régressions historiques passent sur les mêmes sources.
   Les trois essais échoués et leurs corrections sont conservés séparément.
-  Mode count et interruption du copieur initial encore requis ; aucune image
+  Mode count encore requis ; copie interrompue qualifiée séparément ci-dessus. Aucune image
   ni comportement applicatif modifié par ce pilote.
 
 ### Préparation de la borne globale des tirs
