@@ -138,3 +138,37 @@ référence et fichiers officiels/proposition conservés ; zéro écriture de va
 Les dix groupes de fenêtre gardent leur époque327 distincte ; ils ne sont pas
 réattribués au client328. Restent la perte avec consommateur vivant, le transfert
 du cas depuis la suite publique et ses régressions. SLS-099 reste[~].
+
+
+## Perte avec consommateur et raccordement — réalisation
+
+Décision du11 novembre2026 avant code. Le client d’admission ajoute un mode
+`--consumer-loss` : nouvelle fenêtre à garde120s, même SSO normal, fonction
+originale publiée, puis handler45s démarré vers85s après armement. Le pilote
+est tué par SIGKILL après observation running/handler_started et du conteneur.
+La garde capture elle-même l’état natif avant retrait du contrôle temporaire :
+le même appel doit encore tourner, avec sa fin normale encore future. Elle
+retire ensuite son conteneur/réseau et libère le bail réel. Le mode status
+retourne ces seuls relevés sans secret pour recouper identités, suppressions,
+libération et restitution indépendante. Les ressources étrangères restent
+refusées par les contrôles d’appartenance existants. Aucun succès métier ni
+purge publique n’est attribué à cette interruption et au retrait de ses données.
+
+La suite publique devient une orchestration en série : trente groupes HTTP
+existants, nettoyage complet, puis quatre groupes du plafond isolé. Le contrat
+historique du dernier groupe reste un groupe public parent portant le détail
+des quatre groupes isolés, sans addition des mêmes assertions au bilan.
+Le rapport public conserve ses31 groupes et ajoute le rapport isolé corrélé,
+avec ses trois fonctions dans une autre installation, distinctes des quinze
+fonctions HTTP. Le rapport HTTP seul porte un nom distinct et ne constitue
+pas une campagne publique complète. Une entrée privée SSO est nécessaire au
+lanceur ; elle n’entre ni dans ses arguments, ni dans les fichiers ou rapports.
+La suite générale transmet cette entrée au lanceur. Les anciens rapports
+restent conservés ; une étape échouée ou un nettoyage incertain invalide le
+rapport public et interdit la suite. Aucun ancien contrôle n’est ignoré.
+
+Qualification : perte réelle avec consommateur, puis orchestration publique
+complète sur sources figées. Les cinq modes de restitution sans consommateur
+sont rejoués sur le helper final ; le cas planifié repasse dans l’orchestration.
+Les régressions des modes historiques touchés restent nommées jusqu’à leur
+exécution. Aucune clôture sur le seul déplacement du test.

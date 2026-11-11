@@ -5836,3 +5836,14 @@ matrice/suite, avec leurs régressions. Critères.2/.4 prouvés ;.3/.5 restent o
 pas de campagne complète relancée tant que cet ancien prérequis est maintenu.
 Aucune fonctionnalité produit ni migration/UI/manuel modifiés pendant cette
 qualification ; les dix groupes de fenêtre gardent leur époque327 distincte.
+
+
+## 11 novembre2026 — Reprise099 : consommateur et suite publique
+
+Main56da08f propre et synchronisée, aucun commit en attente. Reprise des
+critères.3/.5 : mode de perte consommateur sur garde120s, témoin natif acquis
+par la garde avant retrait, puis reprise de tous les groupes publics dans
+une orchestration HTTP30 + plafond isolé4, conservant31 groupes parents et
+leurs détails. Le nettoyage précède le changement d’installation ; les quinze
+fonctions HTTP et les trois temporaires restent séparées. Contrat persisté
+avant code ; aucun résultat nouveau encore.
