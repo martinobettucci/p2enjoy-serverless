@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- Banc natif de mesure25s sur un vrai contrôle temporaire gelé par Docker,
+  dégel indépendant28s et restitution120. Mesure primaire et erreurs de
+  nettoyage séparées ; implémenté, reproduction E2E encore requise.
+
 ### Interruptions de sauvegarde et de copie qualifiées
 
 - Banc de capture : points de faute explicites après progrès SQLite non final

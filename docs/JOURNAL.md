@@ -6791,3 +6791,15 @@ attente25, alarme35/commande40 inchangées, erreur primaire persistée avant
 nettoyage et dégel confirmé avant detach. Trois groupes pour reproduction puis
 trois après correction si défaut confirmé ; aucune simulation d'événement,
 aucune qualification de rétention ni de délais propres35/40 par ce banc.
+
+Implémentation du probe et de son client : vrai wait partagé inchangé, dégel
+systemd28 figé/ciblé avec résultat terminal conservé, mesure primaire persistée
+avant cleanup, dégel confirmé avant detach, erreurs séparées et lecteur fermé.
+Le helper n'autorise cette commande que sur installation vide instance-limit120,
+sans replay. Modes reproduce/bounded et syntaxes Python/Node validés ;
+reproduction réelle encore à exécuter, aucun défaut déclaré confirmé.
+
+Revue RO intégrée avant reproduction : attendre la fin réelle du service de
+dégel après son reçu, joindre sa seule unité dans un finally même sur refus,
+et persister les états failed avant reset. Stderr privé/SHA du driver conservé
+pour diagnostic ; aucune erreur anticipée de wait n'est encore corrigée.

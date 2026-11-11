@@ -1746,6 +1746,9 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   contrôle temporaire vide réel, Docker pause après attache, WNOHANG sans statut,
   vraie attente25s et dégel indépendant28s confirmé avant detach, alarme35 et
   commande40 inchangées. Mesurer le défaut avant toute correction ; code/E2E requis.
+  Banc implémenté (client `native-observer-deadline.mjs` modes reproduce/bounded,
+  opérateur dédié et commande strictement limitée au helper instance-limit120).
+  Syntaxes contrôlées ; reproduction réelle et éventuelle correction non acquises.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 

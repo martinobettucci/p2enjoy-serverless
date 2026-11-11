@@ -1218,13 +1218,20 @@ def main():
             if op == 'restore':
                 break
             if retention_replay:assert op == 'retention-replay-state','retention_replay_operation_required'
-            elif mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention'), 'instance_limit_operation_required'
+            elif mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention','measure-native-deadline'), 'instance_limit_operation_required'
             if op == 'retention-replay-state':
                 assert retention_replay and set(request)=={'op'}
                 result=retention_replay_command('inspect',campaign)
             elif op == 'capacity':
                 assert mode == 'instance-limit'
                 result = instance_limit_observation(item)
+            # @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#mesure-de-lattente-native-sans-événement
+            elif op == 'measure-native-deadline':
+                assert item['mode'] == 'instance-limit' and item['guard_seconds'] == 120 and set(request) == {'op'}
+                assert not item.get('firing_replay') and not item.get('retention_replay')
+                result = json.loads(command(['python3','-B',str(BASE/'e2e/native-observer-deadline.py'),
+                    'measure',campaign,'--lock-fd',str(LOCK)], (0,1), foreground_timeout=True))
+                assert result['completed'], 'native_deadline_measurement_incomplete'
             elif op == 'observe-source-retention':
                 assert item.get('mode') == 'instance-limit' and item['guard_seconds'] == 2700
                 assert set(request) == {'op','functions','window'}

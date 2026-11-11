@@ -2028,3 +2028,21 @@ Gardes80 indépendantes jointes, TracerPid0, partiels protégés et captures
 canoniques conservées. Six refus CLI séparés ne comptent aucun groupe E2E.
 Brut491 114/gzip161 179 ; les cinq historiques de l'époque7ed2abe ne sont pas
 recomptés à cette époque. Autres pannes d'observation, âge et campagne finale ouverts.
+
+## Délai de l'observateur sans événement natif
+
+`node e2e/native-observer-deadline.mjs reproduce` ouvre le vrai contrôle
+temporaire vide de même image, garde120. Son opérateur dédié attaché consomme
+l'arrêt initial, arme un dégel systemd28s du seul conteneur temporaire puis
+confirme Docker pause et l'absence de statut en attente. Il appelle la vraie
+classe partagée avec échéance25s, conserve résultat et durée avant nettoyage,
+confirme le dégel et joint le service avant detach/fermeture du lecteur.
+
+Trois groupes attendus : installation, reproduction d'un dépassement réel,
+restitution. Le mode `bounded` est destiné à la mesure après correction :
+expiration entre25 et26s, même dégel sûr et même restitution. Aucun mode ne
+fabrique d'événement ni de données SQL. Exécuter seul sur le SPARK DEV au repos ;
+aucune session SSO nécessaire pour ce diagnostic du composant natif. Les budgets
+35/40s ne changent pas. Implémenté, E2E encore requis ; ces contrôles ne
+qualifient ni l'opérateur source complet ni sa rétention. Contrat :
+[attente sans événement](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#mesure-de-lattente-native-sans-événement).
