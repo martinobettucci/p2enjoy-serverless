@@ -6123,3 +6123,11 @@ activation monotone du timer, relevée après armement et persistée, avec même
 exigé dans l'observateur. Un armement hors fenêtre ou une marge dépassée échoue
 dans le finally gardé avant tout arrêt/copie servie. Aucun autre défaut confirmé
 par cette revue ; qualification réelle encore requise.
+
+Essai0e29293 de replay : les8 refus d'options/source et le refus numérique
+avant39 fenêtres passent (deux groupes). Préflight64eb379b échoué dans seed,
+avant CONTROL : TypeError. L'écriture atomique du reçu appelle Path.open avec
+opener, argument réservé à open() natif ; sa signature locale confirme le défaut.
+La restitution normale conserve bases/artefacts/configuration/référence et retire
+les remplacements. Les modes de perte n'ont pas été lancés. Corriger cet appel
+sans changer le contrat ni les assertions, puis rejouer explicitement.
