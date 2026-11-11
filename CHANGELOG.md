@@ -9,6 +9,10 @@
   Garde explicite2700 du seul mode isolé, défauts historiques conservés ; client
   dédié aux quatre refus et à l'armement/restauration2700. Syntaxe contrôlée,
   nominal et pannes restent à éprouver ; aucune règle applicative modifiée.
+  Les [cinq groupes de garde](docs/evidence/source-retention-guard-options-dev-2026-11-11.json)
+  passent sur346sources : quatre refus avant mutation et programmation/restitution
+ 2700. Échec du collecteur local conservé, rapport E2E terminé recoupé sans rejeu ;
+  charge et frontières restent à qualifier.
 
 ### Borne globale des tirs qualifiée
 

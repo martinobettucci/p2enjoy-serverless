@@ -6306,3 +6306,13 @@ Revue RO a identifié le mode du dossier de fenêtre :0750root/groupeDocker,
 corrigé avant campagne longue sans toucher aux permissions historiques. Contrat
 aligné sur W30..35min. Contrôles syntaxiques seulement ; aucune preuve E2E
 encore retenue, et risques de frontière manquée explicitement conservés.
+
+### Garde2700 qualifiée et incident du collecteur
+
+Les cinq groupes source-retention-guard-options passent sur346sources f59a8d3 :
+quatre refus sans fenêtre ni changement de service, puis timer45min réellement
+programmé et restitution nominale jointe. Le wrapper local finit1 après le test
+car son glob sélectionne aussi son checkpoint. Celui-ci est conservé intact ;
+le rapport E2E completed/exit0 et ses cinq groupes sont recoupés avec snapshot
+après, mêmes346sources/images, sans rejouer. Nouveau reçu de collecte distinct
+et brut intégral compressé publiés. Aucune expiration2700 ni rétention déduite.

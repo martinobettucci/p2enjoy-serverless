@@ -70,3 +70,14 @@ Trois groupes : SSO/préparation et10000 HTTP authentiques ; trois frontières e
 clôture sans rejeu ; purges et restitution. Les pannes propres du nouvel opérateur
 et les régressions du helper restent requises avant de qualifier sa sûreté.
 Aucun succès acquis par ce contrat ou par les contrôles syntaxiques.
+
+### Garde2700 et refus qualifiés
+
+La [preuve f59a8d3](evidence/source-retention-guard-options-dev-2026-11-11.json)
+passe cinq groupes sur346sources inchangées : quatre refus avant mutation,
+puis programmation2700s et restitution nominale jointe. Même contrôle/image,
+configuration et référence conservés, pilote et garde terminés. L'expiration2700
+n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant son
+checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
+rejouer les tests. Charge10000, frontières, pannes propres et régressions restent
+à qualifier ; aucun succès de rétention déduit de ces cinq groupes.

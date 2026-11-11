@@ -1621,6 +1621,10 @@ prouvent les deux comptages. Installation isolée à2, garde2700 explicite pour
 la charge/attente réelles, deux fonctions et aucune date/ligne fabriquée.
 Client, handler original et observateur natif sont implémentés ; syntaxe contrôlée.
 Nominal, pannes et régressions restent requis ; aucun succès déduit du code.
+Les [cinq groupes de garde2700](evidence/source-retention-guard-options-dev-2026-11-11.json)
+passent sur346sources : quatre refus avant mutation et programmation/restitution
+réelles. Collecte initiale en échec de glob, rapport E2E terminé0 recoupé sans
+rejeu ; aucune preuve de rétention ni d'expiration2700 déduite.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.
