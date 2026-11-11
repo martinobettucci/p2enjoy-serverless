@@ -1637,6 +1637,12 @@ Le client de perte du worker est implémenté : SSO/appels réels, SIGKILL cibl�
 finalisation de l'échec et restauration recoupée en trois groupes. Ce scénario
 et le nouveau nominal restent à qualifier ; les cinq groupes de garde existants
 gardent leur époque346 distincte.
+L'[essai worker200ea30](evidence/source-retention-worker-loss-failed-dev-2026-11-11.json) reste échoué :
+511 réponses, indépendance et signal9 acquis, mais assertion exigeant deux
+retraits Docker par la garde alors qu'elle trouve déjà zéro conteneur. Deux
+réseaux/baux retirés, originaux et348sources conservés ; zéro groupe compté.
+Correction spécifiée : inventaire réel avant faute, absence de tous les UUID
+après restitution, retraits par acteur conservés séparément ; nouveau cas requis.
 Le [replay d'âge](RETENTION_HISTORY_REPLAY.md) a son contrat explicite : les deux
 captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
 capturée, garde120, observation avant santé et contrôles stricts d'identité à

@@ -130,3 +130,24 @@ Trois groupes : lancement/indépendance ; SIGKILL/résultat exact ; restitution 
 sources/images inchangées. Pas de faux worker, faux serveur ou réponse remplacée.
 L'écriture atomique synchronise le fichier et son dossier avant arrêt de l'unité.
 Aucune réussite nouvelle acquise par cette décision.
+
+## Premier essai du worker et inventaire de retrait
+
+L'[essai200ea30](evidence/source-retention-worker-loss-failed-dev-2026-11-11.json) échoue au troisième groupe ;
+aucun de ses groupes n'est retenu dans un bilan de réussite.511 réponses réelles
+sauvegardées, indépendance confirmée et SIGKILL9 correctement finalisé en échec.
+La garde indépendante observe deux conteneurs avant retrait du contrôle ; son
+nettoyage trouve déjà zéro conteneur, puis retire deux réseaux et libère deux
+baux. Originaux et348sources/images recoupés, référence conservée. L'assertion
+exigeait deux retraits par la garde elle-même ; l'acteur du retrait préalable
+des conteneurs n'est pas établi par ces seuls relevés.
+
+Correction avant code : conserver par lecture Docker réelle les deux conteneurs,
+réseaux et identifiants de consommateurs juste avant SIGKILL, avec installation,
+fonction, révision et image recoupées. Après restitution, vérifier l'absence de
+chacun de ces identifiants, de tout conteneur/réseau étiqueté pour l'installation
+temporaire et de tout bail correspondant dans le registre réel. Garder séparément
+les retraits explicitement enregistrés par la garde, sans lui attribuer ceux
+qu'elle a trouvés déjà effectués. Le nombre de consommateurs initial reste deux ;
+la propriété à prouver est leur absence finale et la restitution des originaux.
+Le relevé terminal est persisté avant ses assertions, même si une assertion échoue.

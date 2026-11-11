@@ -6378,3 +6378,18 @@ finalisation de l'échec sans finished_at_ns, puis nettoyage/identités distante
 recoupés. Trois groupes distincts, aucune rétention déduite. Persistance du
 dossier après rename ajoutée au worker ; contrôles réels Type/RemainAfterExit/
 délais/cgroup et disparition du contrôleur initial conservés dans les reçus.
+
+### Essai de perte du worker200ea30 : assertion trop étroite
+
+Le workerd9ef7f91 exécute le vrai client3e5dcb8e :511 réponses enregistrées,
+contrôleur initial terminé, MainPID/naissance/cgroup indépendants recoupés. SIGKILL
+réel donne Resultsignal/Code2/Status9, finalisation false conservée avant collecte.
+Troisième groupe échoue car garde_removed_containers=0 au lieu de2 ; avant retrait
+du contrôle, deux conteneurs étaient présents. Deux réseaux et deux baux retirés,
+restitution indépendante complète,348sources/images égales, contrôle original sain
+redémarré11:23:11UTC et5982 artefacts conservés. Aucun groupe retenu.
+
+Décision avant correction : inventaire Docker immédiatement avant la faute, puis
+absence réelle de chaque conteneur/réseau/bail et installation temporaire après
+restitution ; conserver séparément les retraits enregistrés par la garde. Ne pas
+attribuer un acteur non observé. Persister le relevé terminal avant assertion.

@@ -1,0 +1,132 @@
+{
+  "format": "p2enjoy-serverless-worker-loss-failure-v1",
+  "completed": false,
+  "unit": "SLS-078.5",
+  "source_commit": "200ea305430730ae83b4f96b2f33930753c978b2",
+  "worker_id": "d9ef7f91-3f9e-4744-9e12-c3c4bff59e6c",
+  "campaign": "3e5dcb8e-126e-4a99-8ca4-5e0651a7c5e4",
+  "groups_counted_as_success": 0,
+  "checks": [
+    {
+      "name": "Vrai SSO, appels et deux fonctions sous worker indépendant du contrôleur",
+      "status": "passed"
+    },
+    {
+      "name": "SIGKILL réel et résultat système signal9 finalisé comme échec",
+      "status": "passed"
+    },
+    {
+      "name": "Deux consommateurs retirés, originaux restitués et sources/images identiques",
+      "status": "failed",
+      "type": "AssertionError"
+    }
+  ],
+  "counts": {
+    "sources": 348,
+    "real_http_responses_saved": 511,
+    "native_containers_before_control_removal": 2,
+    "guard_removed_containers": 0,
+    "guard_removed_networks": 2,
+    "guard_released_leases": 2
+  },
+  "systemd_finalization": {
+    "worker_id": "d9ef7f91-3f9e-4744-9e12-c3c4bff59e6c",
+    "completed": false,
+    "finalized": true,
+    "systemd_before_stop": {
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "Type": "oneshot",
+      "TimeoutStartUSec": "1h",
+      "TimeoutStopUSec": "1min",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "signal",
+      "ExecMainCode": "2",
+      "ExecMainStatus": "9",
+      "KillMode": "control-group"
+    },
+    "checkpoint_sha256": "afed63f82755102a4bbc642587a98b5322a849cb081e15cc6d87c2dfd3d60c58",
+    "main_process_ended": true,
+    "observed_at_ns": 1794396197104257576,
+    "stop_exit_code": 0,
+    "already_inactive_on_resume": false,
+    "systemd_after_stop": {
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "Type": "",
+      "TimeoutStartUSec": "1min 30s",
+      "TimeoutStopUSec": "1min 30s",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "KillMode": "control-group"
+    },
+    "finished_at_ns": 1794396197166970803
+  },
+  "restoration": {
+    "agent_healthy": true,
+    "artifacts_identical": true,
+    "configuration_unchanged": true,
+    "control_healthy": true,
+    "databases_identical": true,
+    "directories_identical": true,
+    "event": "restored",
+    "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+    "independent": true,
+    "original_id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+    "reference_unchanged": true,
+    "temporary_directories_removed": true
+  },
+  "driver_alive": false,
+  "timer_state": "inactive",
+  "service_state": "inactive",
+  "final_native_state": {
+    "completed": true,
+    "services": [
+      {
+        "id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-11T11:23:11.402763999Z"
+      },
+      {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "running": true,
+        "health": "healthy",
+        "started_at": "2026-11-06T15:49:39.578107028Z"
+      }
+    ],
+    "counts": {
+      "live_functions": 0,
+      "active_invocations": 0,
+      "instances": 0,
+      "operations": 0,
+      "reserved_bytes": 0,
+      "active_deployments": 0,
+      "leases": 0,
+      "pending_storage": 0
+    },
+    "artifact_files": 5982,
+    "agent_service": "active",
+    "control_health_http": 200,
+    "active_restoration_units": 0
+  },
+  "sources_images_unchanged": true,
+  "failure": "assertion_required_guard_itself_to_remove_two_containers",
+  "container_removal_actor_not_attributed": true,
+  "no_retention_qualification": true,
+  "raw": {
+    "path": "source-retention-worker-loss-failed-dev-2026-11-11.raw.json.gz",
+    "bytes": 88363,
+    "sha256": "94f29936bf55334fecad29e15b4e6fd1441652afc71586c52cff672ebc64391c",
+    "uncompressed_bytes": 459455,
+    "uncompressed_sha256": "aac70e39924e97189fb76b40e1e1983e2d8a58c566a6812566179da4736aec7f"
+  }
+}
