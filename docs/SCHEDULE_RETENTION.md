@@ -72,6 +72,11 @@ Trois groupes sur337sources ; quatorze groupes de garde/options sont qualifiés
 séparément. Cela ne qualifie pas les sources de tir non clos sous la borne
 numérique, les10000 tirs planifiés ni les sept jours.
 
+La [borne des tirs](SCHEDULE_FIRING_VOLUME.md) a son protocole distinct de
+préparation : sauvegarde native de256 déclarations actives, puis39 fenêtres
+manquées réellement écoulées avant replay gardé. Cette préparation et le replay
+restent à qualifier ; aucune date métier n'est modifiée.
+
 
 ## Premier essai et frontière d’attachement
 

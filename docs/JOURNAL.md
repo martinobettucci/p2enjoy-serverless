@@ -6041,3 +6041,15 @@ Relevé natif confirmepartial60 et son code figé. Bilan de l'étape :17 groupes
 tous pilotes/gardes joints. Aucun défaut confirmé à la revue du volume.
 Restent078.5 : borne des tirs, source protégée sous borne numérique, pannes propres,
 replays et sept jours. Ne pas attendre l'âge pour préparer les autres preuves.
+
+### Préparer la borne globale des tirs sans modifier l'horloge
+
+Décision : conserver une sauvegarde native d'installation isolée contenant
+16 fonctions/16 déclarations actives chacune, après sa première vraie fenêtre.
+La reprise normale après39 fenêtres écoulées peut dépasser10000 tirs terminaux
+skipped_downtime sans10000 handlers ni arrêt prolongé du contrôle habituel.
+Motif : tester la même borne globale sur des observations authentiques, en
+laissant l'horloge réelle produire les fenêtres. Réutiliser la garde900s inchangée
+et un lecteur/copieur RO séparé ; aucun nouveau réglage produit ou FORGE.
+Contrat SCHEDULE_FIRING_VOLUME écrit avant code. Capture, futur replay et ses
+pannes restent à qualifier séparément ; ne pas confondre préparation et borne.

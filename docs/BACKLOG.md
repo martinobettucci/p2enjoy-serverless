@@ -1553,6 +1553,11 @@ deux purges et restitution complète. Rapport intégral compressé conservé.
 Les [quatorze groupes de garde](evidence/invocation-retention-guard-regressions-dev-2026-11-11.json)
 passent : onze restitutions120/partial et trois options/défaut900. Sources de tir non clos sous borne numérique,
 borne des tirs planifiés et sept jours restent à qualifier.
+La [préparation de la borne des tirs](SCHEDULE_FIRING_VOLUME.md) est spécifiée :
+16 fonctions/16 déclarations chacune dans l'installation isolée existante,
+256 premiers tirs authentiques puis sauvegarde native de générations actives.
+Le futur replay après39 fenêtres réellement écoulées devra franchir10000 sans
+injection SQL ni horloge remplacée. Préparation et replay restent à qualifier.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.
