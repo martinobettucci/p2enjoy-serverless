@@ -1602,7 +1602,7 @@ garde bloquée2,043s, SIGKILL du copieur à5,07s/40 puis jonctions et restitutio
 indépendante. Le premier essai c5fcb1d échoué reste séparé ; son groupe timeout
 orphelin recevait SIGHUP, reproduit nativement et corrigé par foreground limité
 au copieur. Les deux captures et la sortie partielle sont recoupées ; aucune
-purge métier après perte. Régressions historiques du correctif en cours.
+purge métier après perte. Les [vingt régressions](evidence/schedule-capture-guard-regressions-dev-2026-11-11.json) passent sur les mêmes342sources.
 Le mode count, les sources protégées sous borne, les sept jours et la campagne
 complète restent requis ; cette preuve ne clôture pas078.5.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence

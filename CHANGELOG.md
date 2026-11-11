@@ -11,7 +11,8 @@
   lancement foreground limité au copieur et diagnostics natifs conservés.
   Cinq groupes réels dbb840b sur342sources :256 tirs08:50UTC, garde bloquée2,043s,
   SIGKILL/jonction à5,07s/40, restitution indépendante et captures identiques.
-  Régressions historiques en cours ; aucune rétention déduite de ces groupes.
+  Vingt régressions historiques passent sur les mêmes342sources :11 reprises,
+  3 options et6 sûreté. Bilan25 groupes ; aucune rétention déduite de ces groupes.
 
 ### Pilote de replay de la borne des tirs
 

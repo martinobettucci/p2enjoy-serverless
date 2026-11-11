@@ -296,4 +296,4 @@ perte pendant backup natif puis garde bloquée2,043s et restitution indépendant
 après SIGKILL/jonction. Le [contrat détaillé](SCHEDULE_CAPTURE_INTERRUPTION.md#frontière-de-copie-qualifiée)
 distingue la correction du groupe timeout orphelin et l'essai c5fcb1d échoué.
 Captures canonique et nominale conservées, sortie partielle protégée ; aucun
-nouveau résultat de rétention. Régressions du helper corrigé en cours.
+nouveau résultat de rétention. Les [vingt régressions](evidence/schedule-capture-guard-regressions-dev-2026-11-11.json) passent sur les mêmes342sources.

@@ -1803,5 +1803,9 @@ et canonique6:15 sont recoupées ; la sortie partielle distincte est protégée 
 conservée, sans capture terminée ni purge métier prétendue. Les actions natives
 loss-point/block-guard/join-copy/rescue-copy/sealed-state sont réservées à ce journal de
 campagne, pas des commandes générales d'administration. Les [cinq groupes réels](../docs/evidence/schedule-capture-interruption-dev-2026-11-11.json)
-passent sur342sources dbb840b ; régressions historiques du correctif en cours.
+passent sur342sources dbb840b. Les
+[vingt régressions](../docs/evidence/schedule-capture-guard-regressions-dev-2026-11-11.json)
+passent sur les mêmes sources :11 restitutions/partial,3 options/défaut900,6
+consommateur/diagnostic/namespace étranger. Total25 pour cette étape ; bornes
+numérique et âge restent ouverts.
 Voir le [contrat](../docs/SCHEDULE_CAPTURE_INTERRUPTION.md).

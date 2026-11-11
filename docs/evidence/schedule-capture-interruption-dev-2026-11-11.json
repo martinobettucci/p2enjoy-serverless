@@ -1152,9 +1152,14 @@
     "count_retention_qualified": false,
     "seven_day_retention_qualified": false,
     "all_copy_instructions_qualified": false,
-    "historical_regressions_on_current_helper_qualified": false,
+    "historical_regressions_on_current_helper_qualified": true,
     "full_platform_campaign": false,
     "product_changed": false,
     "ui_changed": false
+  },
+  "historical_regressions": {
+    "path": "schedule-capture-guard-regressions-dev-2026-11-11.json",
+    "sha256": "5046cf310595ed64e8c304634f15ab13509032469139bf2c4ab38678ad181cd9",
+    "groups": 20
   }
 }

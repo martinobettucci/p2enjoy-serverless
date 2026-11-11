@@ -6220,3 +6220,32 @@ revendiquée. L'essai c5fcb1d reste exclu. Preuve et brut compressé conservés,
 audit RO des cinq groupes sans contradiction ;20 régressions historiques en cours.
 Reprendre ensuite le mode count après09:30UTC, sources protégées et sept jours ;
 SLS-078 reste ouverte et aucune campagne complète n'est revendiquée.
+
+
+### Régressions du correctif de copie terminées
+
+Les20 groupes historiques passent sur les mêmes342sources que dbb840b :11
+restitutions/partial,3 options/défaut900,6 consommateur/diagnostic/namespace
+étranger. Avant/après chaque phase : mêmes sources/images, originaux restitués,
+pilotes et gardes terminés. Le reçu natif partiel confirme60s et le SHA du helper
+figé. Bilan25 groupes (5+20), premier essai échoué exclu, bruts compressés et
+liens vérifiés. La sortie partielle du premier essai est aussi protégée après
+vérification de mort de ses processus ; ses octets sont conservés.
+
+Exploration RO du reste : execution.tick exclut la source non close des deux
+DELETE, périodicité0,1s ; finish du scheduler se fait séparément toutes0,5s.
+La capture source existante ne contient que deux appels, le rapport de volume
+HTTP ne conserve pas une base avant suppression avec10001 éligibles. Leur simple
+combinaison ne prouve donc pas la protection sous borne. Aucun protocole ni
+succès supplémentaire n'est déduit ; ce discriminant reste dans078.5.
+Reprise : mode count à partir de09:30UTC sur la source6:15 conservée, puis source
+protégée, pilotes de vieillissement au18novembre et régression complète.
+
+
+Contrôle final DEV : même contrôle68a8a0b2/imagec59b8616, démarrage attendu
+09:05:23UTC, référence475be494 inchangée depuis le6novembre, deux services healthy,
+agent actif et /healthz200. Fonctions vivantes, appels actifs, instances,
+opérations, déploiements actifs, réservations, baux et intentions pendantes à
+zéro ;5982 artefacts originaux présents, aucune unité de restitution active.
+Les342sources courantes sont encore exactement celles des preuves. Registre
+d'incohérences absent ; revue finale RO des5+20 sans contradiction factuelle.

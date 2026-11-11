@@ -113,5 +113,21 @@ la sortie partielle est protégée en root0400/root0700 et conserve ses inodes/S
 Son fichier SQLite principal a0octet, avec journal privé ; aucune intégrité de
 base partielle ni capture terminée revendiquée. Les16 fonctions temporaires
 restent non supprimées au retrait ; ce retrait n'est pas une purge métier.
-Le premier essai c5fcb1d reste échoué et exclu. Les régressions du helper corrigé
-sont en cours ; aucun timer900 expiré, borne numérique ou âge qualifié ici.
+Le premier essai c5fcb1d reste échoué et exclu. Les [vingt régressions](evidence/schedule-capture-guard-regressions-dev-2026-11-11.json) passent sur les mêmes342sources ; aucun timer900 expiré, borne numérique ou âge qualifié ici.
+
+
+## Régressions du helper corrigé qualifiées
+
+La [preuve de régression](evidence/schedule-capture-guard-regressions-dev-2026-11-11.json)
+passe20 groupes sur les mêmes342sources que dbb840b :11 restitutions normales,
+EOF, SIGTERM, SIGKILL, échéance120 et déplacement partiel60 ; trois options/refus
+et défaut900 ; six avec consommateur actif, diagnostic indisponible et refus
+d'un namespace étranger. Sources/images recoupées avant/après chaque phase,
+originaux restitués et pilotes/gardes terminés ; le reçu partiel confirme60s et
+le SHA exact du helper figé. Les commits de preuve documentaire ne modifient pas
+les342sources ; leurs époques restent identifiées dans le rapport.
+
+Soit25 groupes pour cette étape : cinq propres et20 de régression, sans ajouter
+les trois groupes du premier essai échoué ni les assertions internes. La borne
+numérique, les sources protégées, les sept jours et la campagne complète restent
+ouverts ; aucune nouvelle image, migration, interface ou donnée de manuel.

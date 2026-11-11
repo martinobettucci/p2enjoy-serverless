@@ -42,8 +42,10 @@ L'[interruption pendant la capture](docs/evidence/schedule-capture-interruption-
 passe cinq groupes sur342sources dbb840b :256 tirs08:50UTC, copie normale puis
 perte du pilote pendant backup SQLite, garde bloquée2,043s, SIGKILL/jonction et
 restitution indépendante. Source6:15 et nouvelle capture inchangées ; premier
-essai échoué exclu. Régressions du helper corrigé en cours ; moteur et images
-applicatifs inchangés.
+essai échoué exclu. Les
+[vingt régressions](docs/evidence/schedule-capture-guard-regressions-dev-2026-11-11.json)
+passent sur les mêmes342sources, soit25 groupes pour cette étape ; moteur et
+images applicatifs inchangés.
 La [borne des observations HTTP](docs/evidence/invocation-retention-volume-dev-2026-11-11.json)
 passe trois groupes réels sur337sources :10016 handlers/5008 par fonction,
 exacts10000 survivants et16 plus anciens retirés, deux purges et restitution.

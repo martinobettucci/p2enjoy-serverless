@@ -228,8 +228,7 @@ passent sur les mêmes342sources :11 restitutions,3 options et6 sûreté/consomm
 dbb840b : nominal complet, puis interruption au premier pas1/140 du vrai backup,
 perte du pilote, garde bloquée2,043s, SIGKILL à5,07s/40s et jonctions, restitution
 indépendante. Captures scellées identiques avant/après ; partiel protégé mais
-sans intégrité revendiquée. L'essai c5fcb1d échoué reste exclu. Régressions du
-helper corrigé en cours ; borne10000 et sept jours non qualifiés par ces groupes.
+sans intégrité revendiquée. L'essai c5fcb1d échoué reste exclu. Les [vingt régressions](evidence/schedule-capture-guard-regressions-dev-2026-11-11.json) passent sur les mêmes342sources ; borne10000 et sept jours non qualifiés par ces groupes.
 
 ## Plafond global isolé — SLS-099
 
