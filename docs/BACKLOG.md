@@ -1625,6 +1625,11 @@ Les [cinq groupes de garde2700](evidence/source-retention-guard-options-dev-2026
 passent sur346sources : quatre refus avant mutation et programmation/restitution
 réelles. Collecte initiale en échec de glob, rapport E2E terminé0 recoupé sans
 rejeu ; aucune preuve de rétention ni d'expiration2700 déduite.
+Le [replay d'âge](RETENTION_HISTORY_REPLAY.md) a son contrat explicite : les deux
+captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
+capturée, garde120, observation avant santé et contrôles stricts d'identité à
+chaque démarrage/restitution. Preflights jeunes, refus et pertes du nouveau
+loader restent à implémenter/qualifier ; aucune preuve d'âge avant le18novembre.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

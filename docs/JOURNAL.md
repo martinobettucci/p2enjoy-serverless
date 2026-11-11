@@ -6316,3 +6316,14 @@ car son glob sélectionne aussi son checkpoint. Celui-ci est conservé intact ;
 le rapport E2E completed/exit0 et ses cinq groupes sont recoupés avec snapshot
 après, mêmes346sources/images, sans rejouer. Nouveau reçu de collecte distinct
 et brut intégral compressé publiés. Aucune expiration2700 ni rétention déduite.
+
+### Préparation du replay d'âge pendant la charge réelle
+
+Le processus de volume source028d134d reste actif sur346sources figées ; aucune
+source indexée ni service de cette campagne n'est modifié. Contrat d'âge séparé
+RETENTION_HISTORY_REPLAY écrit : deux sources exactes, même installation-id
+explicitement permis seulement sous exclusivité, source et images scellées,
+CONTROL publié en dernier, observation avant santé et restauration indépendante.
+Preflight jeune distinct des deux preuves éligibles le18novembre ; aucune
+preuve de reprise ou d'âge déduite de ce contrat. Les données d'origine et
+la source en cours de qualification numérique restent indépendantes.
