@@ -1706,6 +1706,9 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   passe quatre groupes sur les mêmes 351 sources/images ; trois refus CLI
   précoces sont vérifiés séparément. Les captures canoniques restent conservées.
   Restent backup/copie interrompus et cinq régressions historiques distinctes.
+  Rejeu historique préparé avec le même client, dans un oneshot utilisateur
+  local indépendant du terminal ; [contrat de suivi](SCHEDULE_RECOVERY.md#exécution-indépendante-du-terminal).
+  Son résultat reste à établir.
 - [x] Observateur source sous borne : [refus réel après attachement](evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
   qualifié par deux groupes au commit 956498a, sur 351 sources figées. Deux
   handlers HTTP/cron running, tir et UUID recoupés ; TracerPid 471960 puis zéro

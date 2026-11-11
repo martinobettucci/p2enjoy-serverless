@@ -127,3 +127,27 @@ Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) quali
 les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image
 c59b8616. Les preuves de ce document conservent leur image historique ; elles
 ne sont pas présentées comme rejouées par ce complément.
+
+## Exécution indépendante du terminal
+
+Décision du 11 novembre 2026 avant le lanceur du rejeu courant : cette campagne
+d'environ quarante minutes s'exécute dans une tâche systemd utilisateur locale
+transitoire `serverless-schedule-recovery-proof-UUID`. Le terminal qui la lance
+peut terminer ; seule l'observation réelle du processus ou de son résultat
+systemd décide si le travail continue ou est terminé. Aucun service applicatif
+local, dépendance de remplacement ou nouvelle récurrence n'est installé.
+
+Préparer les deux sessions privées par le parcours SSO existant avant lancement,
+puis exécuter le même `node e2e/schedule-recovery.mjs` avec ses fichiers de session
+habituels. Mot de passe en mémoire seulement, jamais argument, environnement,
+fichier, journal ni reçu. Les sorties et checkpoints sont privés. Sources et
+images sont figées et recoupées avant/après ; les originaux et captures de
+vieillissement restent conservés.
+
+Type=oneshot, TimeoutStartSec=3700 s et RemainAfterExit=yes ; client borné à
+3300 s, gardes distantes 12/80/680 s inchangées. Conserver PID/naissance/cgroup
+vivants, puis MainPID=0, Result, ExecMainCode et ExecMainStatus terminaux avec le
+SHA du checkpoint avant d'arrêter cette seule unité. Un checkpoint completed
+ne suffit pas si le worker échoue. Une perte reste un échec conservé, sans
+relance automatique ; recouper d'abord les restaurations réelles. Ce lanceur
+ne change aucun scénario ni aucun critère et n'ajoute pas de groupe E2E.

@@ -6709,3 +6709,11 @@ sains, actifs à zéro, 5 982 artefacts, aucune garde. Bruts pannes 265 654/gzip
 Reprendre les cinq groupes historiques de schedule-recovery.mjs, puis les
 interruptions propres de backup/copie et autres restes 078.5 ; âge toujours
 au 18 novembre. Aucun résultat de ces restes n'est acquis par les douze groupes.
+
+### 11 novembre 2026 — Rejeu historique du pilote de planification
+
+078.5 : reprise des cinq scénarios existants de schedule-recovery.mjs. Décision
+persistée avant lanceur : oneshot systemd utilisateur local, sessions réelles
+préparées avant lancement, client inchangé, suivi PID/naissance/cgroup puis
+résultat terminal conservé avant arrêt. Durées et assertions inchangées ;
+aucune réussite acquise. Sources/images à figer pour toute la campagne.
