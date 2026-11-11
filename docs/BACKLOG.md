@@ -1544,6 +1544,10 @@ nouveau service. [Capture39862b9](evidence/schedule-terminal-history-capture-dev
 qualifiée par trois groupes réels sur335sources ; tir et générations99/100
 conservés en privé avec5982 artefacts et images vérifiées. Borne commune d'âge :
 18 novembre2026 à04:05:13.358459UTC ; vieillissement et replay restent à qualifier.
+La [borne globale des invocations](INVOCATION_RETENTION_VOLUME.md) est spécifiée :
+deux fonctions/5008 appels réels chacune,9984 observations avant borne puis10000
+sur10016, installation isolée existante et garde1800s explicite. Code et preuves
+restent à exécuter ; ne qualifie ni la borne des tirs ni les sept jours.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

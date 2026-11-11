@@ -6007,3 +6007,12 @@ démarrages et fichiers officiels inchangés ; aucun nouveau handler/fonction.
 Les trois groupes ne qualifient ni l'âge ni les bornes10000. Reprendre078.5
 par les bornes globales réelles, les pannes/régressions de capture et les pilotes
 gardés de replay ; ne pas attendre l'âge pour ces travaux indépendants.
+
+## 11 novembre2026 — Franchissement réel de la borne d'invocations
+
+Reprise mainf3a7a3e propre. Le mode isolé existant à plafond2 suffit : deux
+fonctions cpu0,5/min=max=concurrence1,5008 HTTP réels chacune. INVOCATION_RETENTION_VOLUME
+fixe le relevé9984, puis10016réponses et exacts10000 UUID les plus récents,
+nettoyage/public et restitution. Réutiliser capacity et la garde existants ;
+seule option explicite1800s ajoutée, durées900/120/partial60 inchangées et à
+rejouer pour les chemins touchés. Décision avant code ; aucune preuve acquise.
