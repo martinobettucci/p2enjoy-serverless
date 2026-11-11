@@ -1662,7 +1662,10 @@ loader sont implémentés, contrôlés syntaxiquement et restent à qualifier su
 SPARK DEV. Premier refus d'âge arrêté avant fenêtre sur une hypothèse de
 propriétaire JSON erronée : fichiers sources réellement root0600. Corriger
 l'admission des deux seuls JSON historiques, garder les captures inchangées,
-puis rejouer le refus et les préflights. Aucune preuve d'âge avant le18novembre.
+puis rejouer le refus et les préflights. Les deux refus d’âge corrigés passent ;
+le premier préflight source échoue sur délai natif, originaux restitués.
+Lectures aux seuls descripteurs SQLite et diagnostic à corriger/qualifier,
+sans allonger25s. Aucune preuve d'âge avant le18novembre.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

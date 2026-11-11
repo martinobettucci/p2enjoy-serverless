@@ -6459,3 +6459,16 @@ Décision : accepter root0600 pour les deux seuls JSON connus de la première
 capture et retirer l'hypothèse UID1001 ; aucun chmod/chown ni réécriture de source.
 L'égalité aux reçus canoniques et l'inventaire restent obligatoires. Cet échec
 est conservé et ne compte pas comme refus d'âge qualifié.
+
+### 11novembre2026 — Premier préflight source arrêté sur délai natif
+
+Les deux refus d’âge passent sur9cb3447 après installation du reçu public
+terminal initialement absent du SPARK. Le premier préflight source bc9d150a
+charge la copie et attache le vrai Python, puis échoue sur native_stop_not_observed.
+Un groupe échoué, aucun groupe retenu ; restitution nominale et contrôle final
+natif réussis : mêmes contrôle/image, référence, fichiers,5982 artefacts, actifs0.
+Copie temporaire retirée ; ne pas prétendre relire son état après suppression.
+Décision avant code : interroger les témoins aux seules frontières des vrais
+descripteurs SQLite, et conserver compteurs/diagnostic terminal. Le surcoût
+des lectures pendant les imports est une hypothèse, pas une cause établie.
+La limite25s reste identique ; nouveau préflight explicite requis.
