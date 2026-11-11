@@ -293,3 +293,79 @@ conservé, diff2000lignes/
 perdue/SIGKILL et reprise de brouillon après redémarrage, purge sous lecteur vivant,
 fixture proposée dans la console et campagne complète de régression. Les critères
 070.1–.6 restent ouverts ; cette tranche ne prétend pas clore SLS-070.
+
+## Détail de la facette console —12novembre2026, avant code
+
+La route est `/console/functions/{UUID}/editor`. La navigation de fonction et
+les cartes de versions disponibles ou archivées proposent **Éditeur** ou
+**Modifier ce code**. `version=HASH` sélectionne explicitement une source en
+lecture. Sans sélection explicite, le brouillon personnel existant est ouvert ;
+sinon la source promue, ou le départ vide initial. `view=source|draft` conserve
+le choix de surface, `file=CHEMIN` le fichier ouvert, `deployment=UUID` le suivi.
+Ces paramètres ne contiennent jamais de code ni d’identifiant d’accès. Ils sont
+remplacés dans l’adresse sans ajouter d’entrées intermédiaires à l’historique.
+Le retour validé du catalogue est conservé. Le contexte courant reste monté
+pendant les relectures : aucun reload parent ne démonte une saisie inline.
+
+Les sections sont : contexte source/brouillon/cible, fichiers et contenu,
+comparaison du brouillon enregistré avec la cible, puis tentative suivie.
+Le choix de source est un dialog avec versions paginées par cinq ; supprimée
+n’est jamais choisissable. L’arborescence et le diff sont également paginés par
+cinq. Recherche de chemin explicite, navigation de dossiers et sélection de
+fichier restent distinctes de la recherche littérale dans son texte.
+Une base différente ne remplace jamais un brouillon existant : ouvrir celui-ci,
+ou l’abandonner explicitement avant de créer une autre base.
+
+Le fichier s’ouvre en lecture ; **Modifier le fichier** active la saisie.
+**Enregistrer le fichier** sauvegarde son seul contenu dans le brouillon.
+Le compteur porte sur les octets UTF-8, au plus1Mio ; l’état distingue saisie
+locale, brouillon enregistré et code publié. Ajouter un fichier demande son
+chemin dans le dialog existant, crée un texte vide puis permet son édition.
+Le handler possède son propre dialog. Retirer un texte, le rétablir depuis la
+base et abandonner le brouillon demandent leur confirmation nommée. Aucun
+bouton d’installation de dépendance ni de Tester071 n’est annoncé.
+
+Un textarea utilise des LF pour sa valeur API, selon le
+[standard HTML](https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element).
+Le modèle conserve donc le texte exact séparément de cette représentation :
+chaque modification identifie préfixe/suffixe inchangés dans la vue normalisée,
+les rattache à leurs positions dans le texte original et n’y remplace que la
+portion éditée. Les fins de ligne existantes restent exactes, même mixtes ;
+les nouvelles suivent la première forme rencontrée, LF pour un nouveau fichier.
+Aucune fin de ligne n’est ajoutée implicitement à la fin du fichier. La preuve
+passe par une vraie saisie navigateur puis relecture API/invocation, jamais par
+un import du calcul client présenté comme E2E.
+
+Une garde commune demande confirmation avant de perdre une saisie lors d’un
+changement de fichier/source/surface, d’un lien de navigation ou d’une déconnexion.
+Elle utilise un dialog natif unique ; annuler garde texte et focus. Rechargement,
+retour navigateur et fermeture utilisent aussi beforeunload natif. Les liens
+internes de défilement ne quittent pas la surface. Aucun code n’est persisté
+dans le stockage web. La déconnexion consulte la garde **avant** d’appeler le
+serveur. Les enregistrements en cours conservent les nouvelles frappes ; seule
+la valeur effectivement confirmée devient le contenu enregistré de référence.
+
+Un conflit ou une écriture incertaine conserve la saisie et bloque sa répétition.
+**Relire le brouillon serveur** récupère son résumé et son fichier sans écraser
+le texte local. Pour repartir d’une version différente, un geste explicite
+adopte la version relue, ou remplace la saisie par le contenu serveur après
+confirmation. Il n’y a ni fusion silencieuse ni changement de base automatique.
+Une réponse sans changement affiche **Contenu déjà enregistré**.
+
+La publication concerne seulement le brouillon enregistré et demande une
+confirmation nommant fonction, base et handler. L’UUID est inscrit avant POST,
+y compris lorsque la reconstruction n’a pas encore créé de candidat. Un404
+pendant la requête signifie **Préparation en cours**, pas un nouvel envoi.
+Après une issue incertaine, relire le même UUID, sans POST automatique. Une
+préparation orpheline se consulte et s’abandonne par la vraie API. Le composant
+candidat existant fournit états et diagnostics ; les adresses du hash et la
+facette Code et révisions donnent pilote, promotion et rollback réels.
+
+Disposition : arborescence de largeur240px (token de navigation existant) et
+contenu flexible sur grand écran, sections empilées sous1024px. Le textarea
+possède une hauteur de lecture locale26rem, police mono, fond distinct en
+lecture seule, défilement local signalé quand nécessaire. Noms et hashes
+complets reviennent à la ligne. Les champs de recherche ont leur libellé ;
+Précédent/Suivant sélectionnent l’occurrence et nomment sa ligne/colonne.
+Le manuel ajoutera un chapitre propre avec cette réalisation. Aucune API,
+migration, dépendance ou variable de cellule nouvelle.

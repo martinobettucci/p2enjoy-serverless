@@ -487,3 +487,8 @@ le12novembre2026 local :20groupes ciblés et25régressions, données et référe
 conservées. Les lecteurs réels retiennent les fichiers, les patches sont
 chiffrés, l’envoi réutilise operations.responsibility et le pipeline Docker.
 La facette Éditeur, les limites globales et les reprises gardent leur reste à faire.
+
+SLS-070 UI en préparation : la facette réutilise les API010 existantes. Une
+garde client protège les départs et la déconnexion avant mutation serveur ;
+le modèle texte garde ses octets/fins de ligne indépendamment de la vue DOM.
+Aucune nouvelle dépendance, migration ni valeur d’environnement.

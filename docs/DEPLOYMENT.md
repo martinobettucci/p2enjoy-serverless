@@ -506,3 +506,11 @@ puis25régressions,36sources embarquées/quatre web HTTPS,5982artefacts originau
 et référence inchangés. Quatre fonctions propres aux deux passages sont purgées ;
 zéro brouillon/appel/instance/opération/candidat/bail restant. Les captures
 canoniques de rétention009 sont conservées ; aucun replay ancien n’est annoncé.
+
+## Facette Éditeur070 — construction à venir
+
+La tranche UI requiert une nouvelle image du contrôle et le manuel reconstruit.
+Base DEV actuelle7c5c6f4b, schéma010 inchangé. Sauvegarde native avant bascule,
+référence/configurations/artefacts conservés ; mêmes deux env_file officiels,
+aucune route ou variable ajoutée. Preuves UI et régressions à exécuter après
+recoupement des exécutables et des ressources réellement servis.

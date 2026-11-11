@@ -7310,3 +7310,15 @@ La revue finale recoupe les45groupes, sources/images,22captures et nettoyage.
 La formulation de SCHEMA est limitée aux résultats explicitement présents dans
 la preuve : dix migrations et intégrité, sans revendiquer un reçu FK séparé
 absent de l’archive. Le raw gelé reste inchangé ; son SHA est vérifié.
+
+## Reprise SLS-070 — facette Éditeur
+
+Le12novembre2026, arbre propre55ecbed synchronisé ; précédente tranche = progrès
+réel,45groupes et serveur010 qualifié partiellement. Les contrats complets sont
+relus. L’exploration RO confirme les liens plein document, le suivi candidat
+réutilisable et l’absence de garde de navigation inline ; le reload parent
+remonterait le composant et perdrait la saisie. Décision complémentaire avant
+code : garder le contexte monté, protéger les départs/déconnexion, conserver
+exactement les fins de ligne malgré la normalisation DOM, et ne jamais rejouer
+une publication incertaine. Le détail UI est ajouté au contrat existant sans
+le réécrire. Pile DEV saine, dix migrations, aucun objet actif ni brouillon.

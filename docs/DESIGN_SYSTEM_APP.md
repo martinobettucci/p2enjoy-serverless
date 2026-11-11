@@ -460,3 +460,16 @@ La limite et la taille du fichier sont explicites ; binaire et hors limite ne
 se présentent pas comme un texte vide. Les modifications non enregistrées
 demandent un choix avant départ, sans effacer la saisie sur refus. Preuves et
 captures à produire ; aucune qualification visuelle revendiquée à ce stade.
+
+### Facette Éditeur — réalisation UI prévue
+
+Le détail est dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md#détail-de-la-facette-console--12novembre2026-avant-code).
+L’écart APP-DS-001 conserve lecture puis édition sur place. Sections séparées,
+arborescence240px et hauteur de lecture26rem (token local de composant), puis
+empilement sous1024px. Ces dimensions donnent une zone de code lisible sans
+comprimer la navigation ; elles ne modifient pas l’échelle d’espacement.
+Recherches nommées, occurrence sélectionnée, compteur UTF-8 et état de saisie
+restent près du fichier. Les textes binaires/hors limite n’ont pas de faux
+éditeur vide. Une garde native unique protège le départ ; beforeunload conserve
+son avertissement navigateur. Les refus et conflits gardent les saisies.
+Les captures et preuves de cette facette restent à produire.
