@@ -2,6 +2,17 @@
 
 ## [Non publié]
 
+### Reprise après coupure requalifiée sur les sources courantes
+
+- Les [cinq groupes historiques](docs/evidence/schedule-recovery-regression-dev-2026-11-11.json)
+  passent sur 351 sources 7ed2abe et les mêmes images : trois coupures 137,
+  trois tirs suivants réussis sans rejeu, quatre gardes jointes et une purge
+  physique. Quatre handlers réussis incluent le témoin initial ; un appel
+  lié est interrompu avant démarrage. Résultat systemd terminal conservé
+  avant arrêt ; timeout 20 s du lanceur conservé séparément, sans relance.
+  Captures canoniques inchangées. Backup/copie, âge réel et campagne complète
+  restent ouverts ; aucun changement produit/UI.
+
 ### EOF et perte du pilote avant capture qualifiés
 
 - Deux parcours du client existant ferment son canal ou tuent son seul helper

@@ -122,8 +122,8 @@ octet ni mode des artefacts copiés. Un reçu privé recoupe les empreintes de
 capture, registre et inventaire avant/après. Cette conservation ne démarre
 aucun conteneur et n’administre pas FORGE.
 
-Restent : interruptions pendant backup/copie de la capture initiale et
-régressions de son helper distinct schedule-recovery-operator.py, vieillissement des tirs terminaux/générations retirées,
+Restent : interruptions pendant backup/copie de la capture initiale,
+vieillissement des tirs terminaux/générations retirées,
 protection après passage réel de rétention à sept jours et campagne complète.
 La source protégée sous borne10000 a sa preuve distincte ci-dessous.
 Concurrence078.4 et adaptateur078.7 ont leurs preuves distinctes du11 novembre.
@@ -349,6 +349,14 @@ un témoin de non-régression ; elle ne remplace pas les deux sources canoniques
 et ses images ne sont pas exportées. Les dates d'éligibilité initiales du
 18 novembre restent inchangées. Ces preuves ne couvrent pas backup/copie
 interrompus, les cinq régressions historiques ni l'âge réel.
+
+Le [rejeu historique suivant](evidence/schedule-recovery-regression-dev-2026-11-11.json)
+passe les cinq groupes du helper distinct sur 351 sources 7ed2abe/images
+inchangées : trois coupures 137, trois tirs suivants sans rejeu, quatre gardes
+jointes et une purge physique. Quatre handlers réussis incluent le témoin
+initial. Résultat terminal systemd succès/Code1/Status0 conservé avant arrêt ;
+timeout du lanceur distinct, aucun redémarrage du worker. Revue RO RAS,
+captures canoniques conservées. Backup/copie et âge restent ouverts.
 
 ## Interruptions pendant sauvegarde et copie
 

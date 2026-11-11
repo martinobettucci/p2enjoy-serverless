@@ -402,3 +402,12 @@ passent sur 351 sources au client 20ffc09, mêmes images. EOF 1, SIGKILL pidfd/S
 captures canoniques conservées ; trois purges physiques. Les trois refus CLI
 précoces restent un contrôle local distinct, non ajouté aux douze groupes E2E.
 Backup/copie interrompus, historique du helper et âge réel non qualifiés ici.
+
+Le [rejeu historique courant](evidence/schedule-recovery-regression-dev-2026-11-11.json)
+qualifie ensuite cinq groupes sur les mêmes 351 sources 7ed2abe et images :
+trois coupures 137, trois tirs suivants, absence de rejeu, quatre gardes jointes
+et une purge physique. Quatre handlers réussis dont un initial, une invocation
+liée interrompue avant démarrage. Worker terminé systemd Code1/Status0/success,
+malgré timeout distinct 20 s de son lanceur ; aucun redémarrage du worker.
+Captures canoniques inchangées, deux services sains, actifs à zéro et 5 982
+artefacts. Pas de résultat backup/copie, sept jours ou campagne complète ajouté.

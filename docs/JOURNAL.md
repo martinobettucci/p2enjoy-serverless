@@ -6733,3 +6733,21 @@ mise à mort/jonction par garde 80 s. FD root0600 préouvert pour le callback
 sous UID propriétaire ; aucune exigence de taille positive du SQLite partiel.
 Dossier incomplet et absence de manifeste final conservés ; captures canoniques
 inchangées. Quatre groupes par cas et nominal à rejouer ; code/E2E à faire.
+
+### 11 novembre 2026 — Cinq régressions historiques terminées
+
+Le worker 854305018784436fbffd4a1aa3bbdd72 termine ses cinq groupes sur les
+351 sources 7ed2abe/images inchangées. Coupures 137 avant 15:55, claimed 16:15
+et linked 16:25 ; fenêtres 15:55/16:00/16:05 manquées sans invocation, puis
+succès 16:10/16:20/16:30 sans rejeu. Quatre handlers réussis incluent le succès
+initial 15:50 ; un appel lié receiving est interrompu avant handler_started.
+Quatre gardes jointes et une fonction purgée physiquement.
+
+Même worker PID510223/naissance63038117, résultat systemd success/Code1/Status0
+conservé avec SHA du checkpoint avant arrêt. Timeout 20 s du client de lancement
+maintenu comme échec séparé, pas de relance. Source privée figée copiée dans
+le dossier de preuve avant correction --no-block pour les prochains lancements ;
+ce prochain nominal n'est pas testé. Captures canoniques inchangées, deux
+services sains, contrôle démarré 16:25:03, référence inchangée, actifs à zéro,
+5 982 artefacts et aucune garde. Brut 803 835/gzip 91 578 octets. Les pannes
+de backup/copie, l'âge et la campagne complète maintiennent 078.5 ouverte.

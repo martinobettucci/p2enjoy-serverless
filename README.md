@@ -28,7 +28,12 @@ Les [deux pertes avant capture](docs/evidence/schedule-retention-gate-losses-dev
 passent huit groupes, et le [nominal rejoué](docs/evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
 quatre, sur les mêmes 351 sources et images. Même contrôle sans redémarrage,
 captures canoniques conservées et trois fixtures purgées ; interruptions pendant
-copie/backup et régressions historiques restent ouvertes.
+copie/backup restent ouvertes. Les
+[cinq régressions historiques](docs/evidence/schedule-recovery-regression-dev-2026-11-11.json)
+passent ensuite sur les mêmes 351 sources/images : trois coupures Docker 137,
+trois tirs suivants sans rejeu, quatre gardes jointes et une purge physique.
+Worker systemd terminé 0 malgré le timeout distinct de son client de lancement ;
+captures canoniques conservées. Backup/copie, âge et campagne complète restent ouverts.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native

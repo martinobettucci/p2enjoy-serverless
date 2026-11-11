@@ -1705,16 +1705,21 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   purges physiques. Le [nominal](evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
   passe quatre groupes sur les mêmes 351 sources/images ; trois refus CLI
   précoces sont vérifiés séparément. Les captures canoniques restent conservées.
-  Restent backup/copie interrompus et cinq régressions historiques distinctes.
+  Les [cinq régressions historiques](evidence/schedule-recovery-regression-dev-2026-11-11.json)
+  passent sur 351 sources 7ed2abe : trois coupures 137, trois tirs suivants,
+  quatre gardes jointes et une purge physique. Worker systemd terminé 0,
+  son lanceur expiré à 20 s conservé séparément, aucun rejeu. Les quatre
+  handlers réussis incluent un témoin initial ; un appel lié est interrompu
+  avant démarrage. Restent backup/copie interrompus.
   [Interruptions de copie](SCHEDULE_RETENTION.md#interruptions-pendant-sauvegarde-et-copie)
   spécifiées : callback SQLite réel ou copy2 réel, SIGSTOP puis garde 80 s,
   reçu par FD préouvert sous root et dossier partiel conservé. Code/E2E à faire
-  après le worker historique figé.
+  après le worker historique figé, désormais terminé.
   Rejeu historique préparé avec le même client, dans un oneshot utilisateur
   local indépendant du terminal ; [contrat de suivi](SCHEDULE_RECOVERY.md#exécution-indépendante-du-terminal).
-  Worker lancé et vivant après timeout de son client de lancement (20 s),
-  identité recoupée sans relance ; résultat des cinq groupes encore en cours.
-  Corriger le prochain lancement avec `--no-block` après la fin du worker figé.
+  Même worker vivant après timeout du client de lancement (20 s), puis
+  résultat systemd terminal et arrêt recoupés. `--no-block` est ajouté au
+  lanceur privé pour le prochain lancement ; ce nominal reste à exercer.
 - [x] Observateur source sous borne : [refus réel après attachement](evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
   qualifié par deux groupes au commit 956498a, sur 351 sources figées. Deux
   handlers HTTP/cron running, tir et UUID recoupés ; TracerPid 471960 puis zéro

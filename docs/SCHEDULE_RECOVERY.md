@@ -152,7 +152,7 @@ ne suffit pas si le worker échoue. Une perte reste un échec conservé, sans
 relance automatique ; recouper d'abord les restaurations réelles. Ce lanceur
 ne change aucun scénario ni aucun critère et n'ajoute pas de groupe E2E.
 
-### Observation du lancement en cours
+### Observation du lancement et résultat courant
 
 Le premier lancement du 11 novembre a bien créé son worker ; le client de
 lancement a ensuite expiré après 20 s parce que systemd-run attendait la fin
@@ -162,3 +162,20 @@ le prochain lancement doit employer `systemd-run --no-block` pour rendre
 l'acceptation immédiatement, puis observer l'unité. Le code figé du worker
 courant reste inchangé jusqu'à son résultat terminal. La récupération de
 l'observation est conservée séparément de l'échec du client de lancement.
+
+Le [rejeu courant](evidence/schedule-recovery-regression-dev-2026-11-11.json)
+termine ses cinq groupes sur les 351 sources du commit 7ed2abe, identiques
+avant/après, et les mêmes images applicatives. Trois coupures Docker 137,
+trois fenêtres manquées sans invocation, reprises claimed/linked sans rejeu
+et trois tirs suivants réussis. Quatre handlers réussissent au total, dont
+un témoin initial ; l'invocation liée est interrompue avant handler_started.
+Les quatre gardes sont jointes et la fonction est purgée physiquement.
+
+Le même worker 510223 termine avec Result=success, ExecMainCode=1 et
+ExecMainStatus=0 ; son résultat et le SHA du checkpoint sont conservés avant
+l'arrêt de l'unité. Le timeout du client de lancement reste un échec distinct,
+sans relance du worker ; le nominal du futur lancement --no-block n'est pas
+qualifié par cette campagne. Les captures canoniques sont inchangées,
+les deux services sont sains, actifs à zéro, 5 982 artefacts et aucune garde.
+Les interruptions de backup/copie, l'âge réel et la campagne complète restent
+ouverts ; aucune modification produit ou UI dans cette étape.

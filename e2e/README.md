@@ -1981,7 +1981,23 @@ passent au client 20ffc09 sur 351 sources, puis les
 sur la même époque et les mêmes images. Les trois refus CLI d'options sont
 mesurés séparément avant création de rapport ; aucun groupe E2E ajouté.
 Les mêmes UUID/dates et démarrage du contrôle sont conservés, trois fonctions
-purgées physiquement, captures canoniques inchangées. Backup/copie interrompus,
-régressions historiques et âge restent ouverts. Le nominal sans option garde
+purgées physiquement, captures canoniques inchangées. Backup/copie interrompus
+et âge restent ouverts ; le rejeu historique est qualifié ci-dessous. Le nominal sans option garde
 sa capture de non-régression ; elle ne remplace aucune source canonique d'âge. Contrat :
 [SCHEDULE_RETENTION](../docs/SCHEDULE_RETENTION.md#pertes-avant-la-commande-de-capture).
+
+## Rejeu courant de la reprise après coupure
+
+Les [cinq groupes historiques](../docs/evidence/schedule-recovery-regression-dev-2026-11-11.json)
+de `schedule-recovery.mjs` passent sur 351 sources 7ed2abe et les mêmes images :
+trois coupures Docker 137, trois fenêtres manquées, trois tirs suivants réussis,
+claimed/linked sans rejeu, quatre gardes jointes et une purge physique. Quatre
+handlers réussis au total incluent le témoin initial ; une invocation liée est
+interrompue avant handler_started. Captures canoniques inchangées.
+
+Le worker systemd local finit avec Code1/Status0/Resultsuccess ; son résultat
+est enregistré avant arrêt. Le client de lancement a expiré à 20 s, puis
+l'observation du même PID/naissance/cgroup a été récupérée sans redémarrage.
+Le futur lancement privé ajoute --no-block, sans preuve nominale supplémentaire.
+Brut 803 835 octets, gzip 91 578. Aucun produit/UI changé ; interruptions de
+copie/backup, âge et campagne complète restent ouverts.
