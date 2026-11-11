@@ -5970,3 +5970,10 @@ exacte inconnue. Nettoyage public et absence physique réussis. La demande
 queued peut réclamer une instance ready étrangère avant idle ; corriger la
 fenêtre de preuve, observer le handler cron réel pendant cinq secondes puis
 son succès avant HTTP. Persister chaque relevé natif avant assertion.
+
+Replay08d1512 : quatre groupes réussis à03:55UTC,333sources, mêmec59b8616.
+Trois conteneurs pendant deux HTTP et un cron running, second cron queued ;
+succès parallèle avant HTTP, admission sérialisée après son HTTP. Deux tirs,
+quatre handlers, deux purges physiques, originaux/services conservés. Premier
+essai exclu. SCHEDULE_ADAPTER fixe ensuite la preuve manquante.7 : vraie CLI
+plan/deploy/promote, avertissement privacy conservé, activé/désactivé à W.

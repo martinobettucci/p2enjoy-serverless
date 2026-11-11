@@ -6,7 +6,8 @@
 
 - Client E2E comparant concurrence1/2 avec maximum3 et stockage partagé, à une
   vraie frontière cron pendant deux HTTP actifs. Observation SQL/Docker native,
-  corrélations et deux purges publiques ; implémenté, preuve DEV encore requise.
+  corrélations et deux purges publiques. Quatre groupes réels réussis à03:55UTC
+  sur333sources ; essai initial échoué conservé séparément.
 
 ### Preuve de rétention des planifications
 

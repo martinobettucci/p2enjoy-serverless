@@ -61,3 +61,15 @@ Le délai idle ne garantit donc pas la conservation pour ce relevé tardif.
 Observer le vrai handler pendant ses cinq secondes d'exécution, puis sa fin ;
 aucune modification d'admission, de deadline ou d'horloge. Rapport et checkpoint
 initiaux sont conservés, sans réussite rétroactive.
+
+## Résultat qualifié
+
+La [preuve08d1512](evidence/schedule-concurrency-dev-2026-11-11.json) passe quatre
+groupes réels sur333sources et la même imagec59b8616, frontière03:55UTC.
+Le relevé natif retrouve trois conteneurs et quatre appels non terminaux :
+deux HTTP running, un cron queued sans handler, l'autre running. Celui-ci
+réussit avant son HTTP ; le cron sérialisé n'est admis qu'après la fin du sien.
+Quatre handlers réussis, deux tirs et aucun rejeu. Deux purges physiques,
+services/configurations et5982 artefacts conservés ; aucune nouvelle image.
+L'essai initial est exclu. Les pannes propres et la régression complète ne
+sont pas déduites de ce nominal.
