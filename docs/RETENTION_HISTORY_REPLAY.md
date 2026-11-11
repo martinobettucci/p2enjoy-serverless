@@ -17,7 +17,12 @@ Seules les deux captures authentiques publiées sont admises :
 Vérifier les reçus privés contre leur preuve publique canonique, les deux SHA
 SQLite, l'intégrité immutable/RO, l'absence de sidecars, l'inventaire complet des
 artefacts (SHA/taille/mode) et les deux exports d'images existants. Racines root0700,
-SQLite/reçus root0400, chemins canoniques sans lien. Aucun export ni copie source
+SQLite root0400, chemins canoniques sans lien. Les fichiers capture.json/artifacts.json
+de la première capture ont été créés0600 sous le propriétaire Docker ; seuls ces
+deux fichiers connus sont admis dans ce format, à l'intérieur de la racine privée
+root0700, avec égalité exacte aux empreintes/reçus canoniques. Ceux de la seconde
+capture, preservation.json et les exports restent root0400. Vérifier les métadonnées
+réelles avant usage, sans durcir ni réécrire les captures. Aucun export ni copie source
 réécrit. Pour la première capture, le reçu `retention-captured` est dans les événements
 du rapport public ; `completed_after_resume` décrit la reprise, jamais la sauvegarde.
 Le reçu séparé de préservation porte ses images. Pour la seconde, `receipt` porte
@@ -32,7 +37,8 @@ l'autre n'autorise aucune fonction vivante. Les lignes historiques restent intac
 Ces captures ont le même installation-id que les originaux. Le loader de volume
 continue de refuser cette égalité. Un parcours explicite de replay de rétention
 utilise la fenêtre exclusive existante : originaux arrêtés/conservés par identité,
-zéro conteneur/réseau/bail/volume original, répertoires neufs par rôle, agent sur
+zéro conteneur/réseau/bail/volume original, y compris les conteneurs arrêtés
+recherchés par installation-id et les réseaux étiquetés, répertoires neufs par rôle, agent sur
 le seul registre copié. La référence reste en fonctionnement. Même port HTTPS18090,
 aucune écriture de fichier officiel/proposition, aucune opération sur FORGE.
 

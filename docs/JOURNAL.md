@@ -6327,3 +6327,10 @@ CONTROL publié en dernier, observation avant santé et restauration indépendan
 Preflight jeune distinct des deux preuves éligibles le18novembre ; aucune
 preuve de reprise ou d'âge déduite de ce contrat. Les données d'origine et
 la source en cours de qualification numérique restent indépendantes.
+
+Précision avant code du loader d'âge : les deux JSON initiaux de la première
+capture ont été créés0600sous propriétaireDocker ; racine root0700 et SQLite
+root0400 les protègent. Le lecteur vérifiera ces métadonnées et reçus exacts
+sans réécrire la capture. Le clone doit aussi refuser les consommateurs Docker
+arrêtés et réseaux portant l'installation-id original : le contrôle des seuls
+montages des conteneurs running du helper général ne suffit pas à cette exception.
