@@ -1640,3 +1640,9 @@ rapports UUID isolés et archivage du rapport précédent. Le client HTTP seul
 que ses trente groupes. La suite générale transmet l’entrée privée au lanceur.
 Les trois modes de sûreté passent six groupes sur328sources :
 [preuve](../docs/evidence/instance-limit-consumer-restoration-dev-2026-11-11.json).
+
+Le scope ciblé `python3 -B e2e/execution-suite.py --scope public-invocations`
+exécute ce même raccordement via la suite générale, avec sa saisie SSO privée,
+ses prérequis, snapshots et vérification du rapport31. Rapport de suite :
+.local/e2e/public-invocations-regressions.json. Il ne remplace pas les autres
+scopes de la campagne complète.

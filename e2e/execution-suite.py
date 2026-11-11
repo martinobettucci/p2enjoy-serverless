@@ -184,14 +184,15 @@ def main():
     # @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
     # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--scope',choices=('engine','console','publication','storage','storage-console-focused','storage-console','invocation-urls','function-catalogue'),default='engine')
+    parser.add_argument('--scope',choices=('engine','console','publication','storage','storage-console-focused','storage-console','invocation-urls','function-catalogue','public-invocations'),default='engine')
     scope=parser.parse_args().scope
     report={'engine':REPORT,'console':ROOT/'.local/e2e/console-execution-regressions.json','publication':ROOT/'.local/e2e/publication-regressions.json',
             'storage':ROOT/'.local/e2e/storage-discard-regressions.json',
             'storage-console-focused':ROOT/'.local/e2e/storage-console-focused.json',
             'storage-console':ROOT/'.local/e2e/storage-console-regressions.json',
             'invocation-urls':ROOT/'.local/e2e/invocation-urls-regressions.json',
-            'function-catalogue':ROOT/'.local/e2e/function-catalogue-regressions.json'}[scope]
+            'function-catalogue':ROOT/'.local/e2e/function-catalogue-regressions.json',
+            'public-invocations':ROOT/'.local/e2e/public-invocations-regressions.json'}[scope]
     extended=scope in ('invocation-urls','function-catalogue')
     console_cases=[
         next(row for row in CASES if row[0]=='public'),
@@ -202,6 +203,7 @@ def main():
         ('manual-ui',['node','e2e/manual-ui.mjs'],'.local/e2e/manual-ui.json',False),
     ]
     cases=CASES if scope=='engine' else console_cases
+    if scope=='public-invocations':cases=[next(row for row in CASES if row[0]=='public-invocations')]
     if scope=='publication':
         cases=CASES+[row for row in console_cases if row[0] not in {case[0] for case in CASES}]
     # @spec docs/BACKLOG.md#sls-064 | docs/STORAGE_DISCARD.md#qualification-réelle

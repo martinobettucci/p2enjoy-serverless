@@ -229,3 +229,7 @@ et restitution ;31 groupes parents, détail4 sans double comptage. Les images
 et sources sont recoupées avant chaque phase et après la dernière. L’ancien
 helper ne participe plus à la campagne publique. Régression à exécuter avant
 clôture099 ; les preuves précédentes gardent leurs époques distinctes.
+
+Le rejeu ciblé du raccordement utilise le scope `public-invocations` de la suite
+générale : même sélection CASES, même transmission privée et mêmes vérifications
+qu’en campagne complète, limitée ici au groupe public et à son prérequis SSO.
