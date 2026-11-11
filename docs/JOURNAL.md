@@ -5883,3 +5883,28 @@ plafond isolé4, rapport public31 avec détails de sa dernière unité, SSO par 
 privée et snapshots. Nouveau rapport HTTP distinct, commande canonique Python,
 transmission des identifiants dans la suite générale. Implémentation à éprouver
 sur le gel final ;099.3 est qualifiée,.5 reste ouverte. Aucun produit/migration/UI.
+
+
+## 11 novembre2026 — Clôture099 par le vrai raccordement public
+
+Première exécution4f2f5af arrêtée après17 groupes HTTP sur « Ancien code non
+effacé », purge terminée. Le polling20s ne couvrait pas la maintenance30s ;
+décision6c4cc6f puis correction3a2f2db à60s, prédicat strict inchangé, aucune
+maintenance forcée. Revue : retrait idle0 avant promotion et documentation
+corrigés, aucun défaut résiduel confirmé dans ce périmètre.
+
+Le rejeu de la suite générale scope public-invocations passe31 parents avec
+HTTP30 puis plafond4, détail non recompté. Treize fonctions HTTP réellement
+créées/purgées (le plan antérieur annonçait quinze), puis trois isolées purgées.
+SSO réel, troisième429/minimum3 409, reprise HTTP et retrait natif sans promotion,
+tir02:40UTC refusé puis02:45UTC réussi sans rejeu. Cinq modes finaux repassent
+dix groupes, puis le chemin historique --partial un groupe. Les42 groupes
+parents, soit45 feuilles en développant le dernier parent public, portent
+329sources figées et la même imagec59b8616. Échec initial exclu, époques327/328
+conservées. Preuve instance-limit-public-integration-dev-2026-11-11.json.
+
+Originaux par identité, données/artefacts, référence et fichiers officiels
+conservés, agent sain et gardes/helpers terminés. SLS-099 est close ; demande
+FORGE retirée. Aucun produit, schéma, UI ou manuel modifié. SLS-078 demeure
+ouverte pour rétention réelle, adaptateur.7 et campagne complète ; ses critères
+restants devront être recoupés avant clôture.

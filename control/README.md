@@ -488,5 +488,6 @@ passe19 groupes réels : trois ciblés, huit manuel et huit publics ; six handle
 périmée corrigée et manuel servi conforme16 chapitres/56 paragraphes.31 captures
 recoupées,17 inspectées personnellement et14 références SHA ; deux fonctions
 purgées,34 backends et5982 artefacts conservés. L'unité078 reste ouverte pour
-rétention, plafond global099, adaptateur.7 et régression complète. Les checkpoints
+rétention, adaptateur.7 et régression complète. Le [plafond global099](../docs/evidence/instance-limit-public-integration-dev-2026-11-11.json)
+est qualifié sur la même image, par installation isolée sans écriture officielle. Les checkpoints
 cités plus haut conservent leur image et leur époque historique.

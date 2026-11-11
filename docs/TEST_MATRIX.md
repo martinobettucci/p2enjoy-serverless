@@ -159,4 +159,10 @@ Preuves ciblées distinctes : cinq modes de `instance-limit-environment.mjs`
 `--consumer-loss`, `--observer-unavailable`, `--foreign-namespace` (six groupes).
 Mêmes image réelle, moteur, agent, Docker et SSO ; aucune mutation des variables
 officielles. Les époques et les essais arrêtés restent séparés dans leurs preuves.
-Le lanceur raccordé et les régressions sur le helper final restent à exécuter.
+Le [rejeu final](evidence/instance-limit-public-integration-dev-2026-11-11.json)
+passe sur329sources et imagec59b8616 :31 groupes publics via le scope canonique
+`public-invocations` de la suite générale, dix groupes du helper final et un
+groupe historique --partial. Treize fonctions HTTP et trois isolées purgées,
+originaux restitués, zéro écriture officielle. Le parent plafond conserve ses
+quatre détails ;42 groupes parents ou45 feuilles, sans addition des deux.
+La campagne complète de plateforme reste requise pour sa clôture globale.

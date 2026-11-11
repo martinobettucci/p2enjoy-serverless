@@ -69,7 +69,6 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
-| 1 | [SLS-099](#sls-099) Qualification isolée du plafond d'instances | Corriger | `[~]` | SLS-040 | [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
@@ -1510,9 +1509,9 @@ passe cinq groupes sur316 sources : refus RAM sans invocation, changement A→B
 après réception en file sans handler, allocation réelle8192Mio puis retour A,
 compteur conservé et aucun rejeu. Quatre handlers réussis, trois fonctions purgées.
 [Plan et résultats](SCHEDULE_MEMORY_VERSION.md).
-SLS-078.4/.5 restent ouvertes pour le plafond global d'instances (préalable
-SLS-099) et rétention ; régression complète
-restent ouverts. Aucun changement produit, budget officiel ni nouvelle capture.
+SLS-078.4/.5 restent à clôturer avec l’ensemble de leurs preuves, dont la
+rétention réelle ; les preuves du plafond global sont liées ci-dessous.
+Aucun changement produit, budget officiel ni nouvelle capture.
 Les [files pleines](evidence/schedule-queues-dev-2026-11-10.json) passent quatre
 groupes sur319 sources : plafonds réels16/128, deux tirs queue_full sans invocation,
 144 réceptions déconnectées avant handler, deux succès HTTP puis deux planifiés.
@@ -1527,8 +1526,8 @@ passent quatre groupes sur325 sources : HTTP non exclusif au maximum1, budgets
 globaux libres et refus sans invocation ; minimum préchauffé puis deux mêmes
 instances/CID à W+300, générations/configurations identiques. Quatre handlers
 réussis, deux purges physiques. [Plan et résultats](SCHEDULE_INSTANCE_REUSE.md).
-Restent plafond global d'instances (SLS-099), rétention réelle,
-critère adaptateur.7 et régression complète. SLS-078.4/.5/.7 restent ouvertes.
+Restent rétention réelle, critère adaptateur.7 et régression complète ;
+SLS-078.4/.5/.7 restent à clôturer après recoupement de tous leurs critères.
 La [console des planifications](evidence/schedule-console-dev-2026-11-10.json)
 passe19 groupes sur326 sources : trois ciblés, huit du manuel et huit publics
 rejoués. Six handlers réels22:10UTC, pages5+1, vide, nom63, clavier/focus et mobile.
@@ -1538,14 +1537,14 @@ sur l'imageb9 et les essais du banc, hors total courant. Correctif24d81c7, image
 c59b8616 et manuel conforme16 chapitres/56 paragraphes.31 captures recoupées :
 17 inspections personnelles et14 références SHA. Deux fonctions purgées ;34
 backends,5982 artefacts, services et fichiers officiels conservés pendant replay.
-SLS-078.6 est qualifiée ; rétention, plafond global099, adaptateur.7 et régression
-complète gardent l'unité ouverte.
+SLS-078.6 est qualifiée ; rétention, adaptateur.7 et régression complète
+gardent l’unité ouverte.
 
 Le [plafond global en installation isolée](evidence/instance-limit-admission-dev-2026-11-11.json)
 est maintenant qualifié séparément : quatre groupes, tir refusé01:35UTC sans
-invocation puis succès01:40UTC sans rejeu. SLS-099 reste ouverte pour la perte
-avec consommateur et le raccordement à la suite ; les critères.4/.5 ne sont
-pas clôturés sur ce seul complément.
+invocation puis succès01:40UTC sans rejeu. Son [raccordement final](evidence/instance-limit-public-integration-dev-2026-11-11.json)
+réussit à02:40/02:45UTC, avec restitutions et régression historique ; SLS-099
+est close. Les critères.4/.5 ne sont pas clôturés sur ce seul complément.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.
@@ -2071,8 +2070,9 @@ substitution ; manuel et matrice de parité mis à jour avec la livraison.
 <a id="sls-099"></a>
 ## SLS-099 — Qualification isolée du plafond d’instances
 
-Statut : [~] — dépendance à une évolution de FORGE retirée le11 novembre2026 ;
-déploiement isolé, cinq restitutions et admissions HTTP/cron qualifiés ; perte avec consommateur et refus d’autorité qualifiés ; raccordement implémenté, régression publique à exécuter. Nature : Corriger. Dépend de :
+Statut : [x] — même image en installation isolée ; admissions HTTP/cron, sûreté
+consommateur et raccordement public qualifiés. Régressions du helper final et
+reprise historique réussies sur329sources. Nature : Corriger. Dépend de :
 SLS-040. Ordre :1, préalable à la preuve du plafond global de SLS-078.
 Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md).
 
@@ -2095,18 +2095,20 @@ Critères d’acceptation :
 - [x] SLS-099.4 [Quatre groupes réels](evidence/instance-limit-admission-dev-2026-11-11.json),328sources, six handlers réussis ; cinq restitutions dans la preuve327. Deux instances réelles puis refus HTTP de la troisième, minimum3
   refusé sans mutation, prochain appel sain ; refus planifié sans invocation,
   prochain tir sain sans rejeu. Nominal, EOF, SIGTERM et SIGKILL éprouvés.
-- [ ] SLS-099.5 Campagne dédiée raccordée à la suite publique et à la matrice,
+- [x] SLS-099.5 [Preuve finale](evidence/instance-limit-public-integration-dev-2026-11-11.json) :31 groupes publics (détail plafond4), dix groupes de garde et un historique. Campagne raccordée à la suite publique et à la matrice,
   toutes les assertions précédentes conservées, dont le retrait natif après
   le troisième appel avant toute promotion et le nettoyage différé dans un
   budget couvrant la maintenance normale ; régressions connexes réussies.
 
 Les anciens succès32→2→32 et le refus préventif ne qualifient pas ces nouveaux
-critères. L’unité reste ouverte jusqu’aux preuves sur le vrai déploiement.
+critères. L’unité est clôturée par les preuves sur le vrai déploiement.
 
-Le client `instance-limit-admission.mjs` passe quatre groupes avec SSO réel,
-refus HTTP/planifié, prochain tir et trois purges publiques. Les dix groupes de
-fenêtre sans consommateur restent distincts ;.5 reste à qualifier.
-L’orchestration publique est implémentée : HTTP30 puis plafond isolé4, rapport31
-avec détail du dernier groupe ; sa première exécution reste à faire. Les deux
-P2 de revue sont corrigés et les trois modes de sûreté passent six groupes.
-SLS-099.5 reste ouverte jusqu’au rejeu public et aux régressions du helper.
+Le raccordement passe dans le scope canonique de la suite générale, sur
+329sources et imagec59b8616. HTTP30 et ses treize purges précèdent plafond4
+et trois purges ; rapport31 parents, sans double comptage. Les cinq modes
+finaux repassent dix groupes, puis --partial historique un groupe. Tous les
+originaux et fichiers officiels sont conservés, gardes/helpers terminés.
+L’échec initial après17 groupes HTTP reste exclu ; le budget de polling
+d’effacement couvre maintenant les deux périodes normales de maintenance.
+Aucun produit/UI/schéma/manuel modifié ; SLS-078 et la campagne globale restent
+ouverts.

@@ -112,8 +112,9 @@ Les trois dernières sont réellement indépendantes du pilote ; timers/services
 et processus sont terminés. Fichiers officiels/proposition conservés ; registres
 et artefacts originaux comparés avant le redémarrage attendu du même contrôle.
 Référence inchangée. Aucune fonction ni session SSO créée par ces dix groupes.
-Les admissions HTTP/cron, la perte avec consommateur et le raccordement à la
-suite restent à qualifier ; aucun succès de ces scénarios n’est déduit ici.
+Les admissions HTTP/cron, la perte avec consommateur et le raccordement ont
+leurs preuves distinctes ci-dessous ; aucun de leurs succès n’est déduit de
+ces dix seuls groupes.
 
 
 ## Admissions réelles qualifiées le11 novembre2026
@@ -136,8 +137,8 @@ les originaux. Même contrôle/image avec redémarrage attendu, agent sain,
 référence et fichiers officiels/proposition conservés ; zéro écriture de variable.
 
 Les dix groupes de fenêtre gardent leur époque327 distincte ; ils ne sont pas
-réattribués au client328. Restent la perte avec consommateur vivant, le transfert
-du cas depuis la suite publique et ses régressions. SLS-099 reste[~].
+réattribués au client328. Les preuves suivantes couvrent la perte avec
+consommateur vivant, le transfert du cas public et ses régressions.
 
 
 ## Perte avec consommateur et raccordement — réalisation
@@ -159,7 +160,7 @@ existants, nettoyage complet, puis quatre groupes du plafond isolé. Le contrat
 historique du dernier groupe reste un groupe public parent portant le détail
 des quatre groupes isolés, sans addition des mêmes assertions au bilan.
 Le rapport public conserve ses31 groupes et ajoute le rapport isolé corrélé,
-avec ses trois fonctions dans une autre installation, distinctes des quinze
+avec ses trois fonctions dans une autre installation, distinctes des treize
 fonctions HTTP. Le rapport HTTP seul porte un nom distinct et ne constitue
 pas une campagne publique complète. Une entrée privée SSO est nécessaire au
 lanceur ; elle n’entre ni dans ses arguments, ni dans les fichiers ou rapports.
@@ -223,12 +224,12 @@ reconstituée par son diagnostic initial. Sa restauration native est confirmée,
 mais aucun de ses groupes ne s’ajoute aux six retenus. Le stderr des nouveaux
 appels opérateur reste privé ; aucune donnée SSO n’est exportée.
 
-Le lanceur `e2e/public-invocations-suite.py` est maintenant implémenté, pas
-encore qualifié : prérequis SSO réel distinct, HTTP30 avec purge, puis plafond4
+Le lanceur `e2e/public-invocations-suite.py` est qualifié par le rejeu final
+lié ci-dessous : prérequis SSO réel distinct, HTTP30 avec purge, puis plafond4
 et restitution ;31 groupes parents, détail4 sans double comptage. Les images
 et sources sont recoupées avant chaque phase et après la dernière. L’ancien
-helper ne participe plus à la campagne publique. Régression à exécuter avant
-clôture099 ; les preuves précédentes gardent leurs époques distinctes.
+helper ne participe plus à la campagne publique. La régression finale clôt099 ;
+les preuves précédentes gardent leurs époques distinctes.
 
 Le rejeu ciblé du raccordement utilise le scope `public-invocations` de la suite
 générale : même sélection CASES, même transmission privée et mêmes vérifications
@@ -255,4 +256,29 @@ permet pas de conclure à un défaut moteur. Dans099.5, conserver la même asser
 version deleted/stored_bytes=0 et lui donner60s, deux périodes de maintenance.
 Il s’agit d’une attente conditionnelle bornée, sans sommeil forcé ni appel de
 maintenance depuis le test. Les rapports échoués restent conservés et exclus
-du bilan de réussite ; une nouvelle campagne complète doit passer.
+du bilan de réussite ; la nouvelle campagne raccordée passe ci-dessous.
+
+
+## Raccordement et régressions qualifiés
+
+La [preuve finale3a2f2db](evidence/instance-limit-public-integration-dev-2026-11-11.json)
+clôt SLS-099 sur329sources figées, même imagec59b8616. Le scope public-invocations
+de la suite générale qualifie le vrai raccordement : prérequis SSO distinct,
+HTTP30 et treize purges, puis plafond isolé4 et trois purges. Le rapport public
+porte31 groupes parents ; ses quatre détails ne sont pas additionnés une
+seconde fois. Deux handlers occupent le plafond ;429 et409 attendus, troisième
+appel sain puis zéro instance/conteneur avant promotion. Tir02:40UTC refusé
+sans invocation, tir02:45UTC réussi sans rejeu ; restitution nominale terminée.
+
+Les cinq modes du helper final repassent dix groupes, puis la régression
+historique --partial passe un groupe : mort du pilote après le premier
+renommage et restitution indépendante. Les42 groupes comptés de cette époque
+comprennent31 parents publics,10 de garde et1 historique ;45 groupes feuilles
+si le parent plafond est remplacé par ses quatre détails. Les six groupes de
+sûreté328 ne sont pas recomptés ici. L’essai HTTP initial échoué reste exclu.
+
+Originaux retrouvés par identité, mêmes image/contrôle avec redémarrages
+attendus, référence conservée, agent sain, helpers et gardes terminés. Aucun
+fichier officiel ni proposition réécrit. Cette clôture porte la sûreté du
+banc et son raccordement ; SLS-078 et la campagne complète de plateforme
+restent ouvertes. Aucun produit, schéma, UI ou manuel n’a changé.

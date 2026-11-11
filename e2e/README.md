@@ -1065,8 +1065,8 @@ Le nominal historique de `instance-limit-guard.py` appliquait32→2 puis32.
 Le helper maintenu refuse cette mutation. SLS-099 remplace le scénario par une
 installation DEV temporaire de la même image, plafonnée à2 au démarrage, sans
 écriture de variable officielle. L’évolution conditionnelle de FORGE n’est
-plus un prérequis ; le nouveau mode passe dix groupes de fenêtre. Les admissions
-et son raccordement restent à qualifier.
+plus un prérequis ; fenêtre, admissions HTTP/cron, sûreté et raccordement sont
+qualifiés par les preuves SLS-099 liées en fin de document.
 [Contrat et preuves exigées](../docs/INSTANCE_LIMIT_RESTORATION.md).
 
 `node e2e/instance-limit-safety.mjs`, depuis le poste avec session SSO réelle,
@@ -1415,7 +1415,8 @@ promotion B, retirer A empêche ses nouvelles admissions tout en laissant finir
 son instantané ; le nettoyage reste en attente puis efface A après libération.
 Les31 groupes conservent ACL, HTTP/Lambda, politiques origine/IP, files, minima,
 quotas, concurrence, budgets réels, contention SQLite, arrêts et réceptions bornées.
-Le plafond d'instances est appliqué puis restitué par la console du seul SPARK.
+Cette époque historique utilisait la console du SPARK pour le plafond ; le
+parcours courant est l’installation isolée SLS-099 décrite ci-dessous.
 
 La collecte recoupe 85 handlers succeeded, dont78 publics et7 Echo ; deux réponses
 métier non2xx et un succès après déconnexion restent classés selon l'état durable.
@@ -1608,7 +1609,7 @@ refus planifié01:35UTC sans invocation puis succès01:40UTC sans rejeu, trois
 purges publiques et restitution des originaux :
 [preuve](../docs/evidence/instance-limit-admission-dev-2026-11-11.json).
 Ne pas le lancer en parallèle d’un autre banc. Le raccordement à la suite
-publique reste à qualifier ; les modes de sûreté sont qualifiés ci-dessous.
+publique et les modes de sûreté sont qualifiés par les preuves ci-dessous.
 
 
 Le mode `node e2e/instance-limit-admission.mjs --consumer-loss` utilise l’entrée
@@ -1631,7 +1632,7 @@ capturés comme diagnostic facultatif. Le stderr des seuls appels SSH opérateur
 est conservé en0600 pour diagnostiquer une erreur de transport sans l’exposer.
 
 
-Le raccordement public est implémenté, à qualifier :
+Le raccordement public est qualifié par la preuve finale liée ci-dessous :
 `python3 -B e2e/public-invocations-suite.py` reçoit le JSON SSO privé, prépare
 ses deux sessions normales, exécute HTTP30, attend ses purges, puis plafond4.
 Il conserve un rapport public31 et le détail du dernier groupe, avec snapshots,
@@ -1646,3 +1647,12 @@ exécute ce même raccordement via la suite générale, avec sa saisie SSO priv�
 ses prérequis, snapshots et vérification du rapport31. Rapport de suite :
 .local/e2e/public-invocations-regressions.json. Il ne remplace pas les autres
 scopes de la campagne complète.
+
+La [preuve finale329](../docs/evidence/instance-limit-public-integration-dev-2026-11-11.json)
+passe le scope public31 (HTTP30 nettoyé puis plafond4), les cinq modes finaux
+release/EOF/SIGTERM/SIGKILL/deadline (dix groupes), puis le chemin historique
+`node e2e/storage-legacy-recovery.mjs --partial` (un groupe). Toutes ces commandes
+sont exécutées en série. Seize fonctions purgées, zéro écriture officielle,
+originaux restitués et gardes terminées. Les époques327/328 restent distinctes ;
+le premier essai HTTP échoué après17 groupes n’est pas compté comme réussi.
+SLS-099 est close ; ces preuves ne remplacent pas la campagne globale.

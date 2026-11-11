@@ -33,9 +33,8 @@ réussis et cinq fonctions purgées ; les deux essais antérieurs restent sépar
 La [suite RAM/version](docs/evidence/schedule-memory-version-dev-2026-11-10.json)
 qualifie cinq groupes supplémentaires : refus mémoire sans invocation, changement
 de hash pendant la file, vraie allocation8192Mio, libération puis prochains tirs
-sans rejeu. Quatre handlers réussis et trois fonctions purgées. Plafond global
-d'instances, rétention et régression complète restent
-à éprouver dans SLS-078 ; la garde du plafond est suivie dans SLS-099.
+sans rejeu. Quatre handlers réussis et trois fonctions purgées. Rétention et régression
+complète restent à éprouver dans SLS-078 ; le plafond est qualifié ci-dessous.
 Le déploiement isolé de la même image, plafonné à deux sans modifier les variables
 officielles, passe dix groupes de démarrage/restitution (nominal, EOF, SIGTERM,
 SIGKILL, échéance) : [preuve](docs/evidence/instance-limit-environment-dev-2026-11-11.json).
@@ -44,8 +43,11 @@ ajoute quatre groupes sur328sources : SSO réel, deux handlers occupés, refus d
 troisième, minimum3 refusé, reprise HTTP, refus cron01:35UTC puis succès01:40UTC
 sans rejeu et trois purges publiques. La demande d’évolution de FORGE est retirée ;
 la [perte avec consommateur et les refus de sûreté](docs/evidence/instance-limit-consumer-restoration-dev-2026-11-11.json)
-passent six groupes distincts. Le raccordement à la suite publique est implémenté,
-sa régression reste ouverte dans SLS-099.
+passent six groupes distincts. Le [raccordement final](docs/evidence/instance-limit-public-integration-dev-2026-11-11.json)
+passe31 groupes publics, dix groupes de restitution et un historique sur329sources :
+HTTP30 puis plafond4, tir02:40UTC refusé et02:45UTC réussi sans rejeu, seize
+fonctions purgées et originaux conservés. SLS-099 est close ; aucune évolution
+de FORGE nécessaire.
 Les [files pleines des tirs](docs/evidence/schedule-queues-dev-2026-11-10.json)
 passent quatre groupes sur319 sources :16 réceptions individuelles,128 globales,
 deux refus sans invocation puis deux succès HTTP et deux planifiés après libération.
@@ -64,7 +66,7 @@ rejoués. Six vrais tirs22:10UTC donnent les pages5+1 ; vide, nom63, clavier,
 mobile et vrai401→Réessayer200 passent après correction de la pagination périmée.
 Nouvelle imagec59b8616 avec manuel conforme16 chapitres/56 paragraphes ;31 captures
 recoupées (17 inspections,14 références SHA), deux purges physiques. SLS-078.6
-est qualifiée ; rétention, plafond global, adaptateur.7 et régression restent ouverts.
+est qualifiée ; rétention, adaptateur.7 et régression restent ouverts.
 
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
@@ -555,7 +557,8 @@ promotion B, retirer A empêche ses nouvelles admissions tout en laissant finir
 son instantané ; le nettoyage reste en attente puis efface A après libération.
 Les31 groupes conservent ACL, HTTP/Lambda, politiques origine/IP, files, minima,
 quotas, concurrence, budgets réels, contention SQLite, arrêts et réceptions bornées.
-Le plafond d'instances est appliqué puis restitué par la console du seul SPARK.
+Cette preuve historique utilisait la console du SPARK pour le plafond ; le
+parcours courant est l’installation isolée SLS-099, sans écriture officielle.
 
 La collecte recoupe 85 handlers succeeded, dont78 publics et7 Echo ; deux réponses
 métier non2xx et un succès après déconnexion restent classés selon l'état durable.

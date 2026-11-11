@@ -9,7 +9,10 @@
   capture Docker exec ne bloque plus la restitution ; refus de propriété et
   lectures SQLite obligatoires restent stricts. Scénarios Docker pause et
   namespace étranger passent six groupes réels sur328sources. Raccordement
-  public implémenté : HTTP30 puis plafond4, rapport31 avec détails ; régression à faire.
+  public qualifié : HTTP30 puis plafond4, rapport31 avec détails ; dix groupes
+  de garde et un historique rejoués sur329sources. Seize fonctions purgées,
+  originaux conservés, SLS-099 close. Budget de polling d’effacement aligné
+  sur la maintenance normale ; retrait idle0 vérifié avant toute promotion.
 
 - Décision SLS-099 corrigée : retirer la demande d’évolution de FORGE et préparer
   un déploiement DEV isolé, même image, plafond2 au démarrage. Le refus préventif
@@ -18,8 +21,8 @@
   échéance, originaux conservés. Le client HTTP/cron passe ensuite quatre groupes
   sur328sources avec SSO réel : six handlers réussis, troisième appel refusé429,
   minimum3 refusé409, tir refusé01:35UTC sans invocation et prochain succès01:40UTC
-  sans rejeu, trois purges publiques et restitution. Perte avec consommateur et
-  raccordement à la suite restent à faire ; SLS-099 reste ouverte.
+  sans rejeu, trois purges publiques et restitution. Les preuves suivantes
+  qualifient consommateur et raccordement, sans addition de ces époques.
 
 ### Planifications en cours de qualification
 
