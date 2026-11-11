@@ -23,6 +23,10 @@ sont mutuellement exclusives et interdites aux autres modes. Journal et événem
 d'armement portent la durée ; relever aussi la programmation réelle du timer
 systemd. Garde indépendante, appartenance et programme figé sont inchangés.
 Le cas nominal1800 et les régressions ciblées120/partial doivent être éprouvés.
+Compléter par le défaut900 sans option et deux refus réels du helper avant
+toute fenêtre :120+1800 simultanés, et1800 hors mode instance-limit. Les refus
+ne créent aucun répertoire de campagne et conservent les identités des services.
+Le client de ces trois groupes est `e2e/instance-limit-guard-options.py`.
 
 ## Parcours et discriminants
 

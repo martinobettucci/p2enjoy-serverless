@@ -6026,3 +6026,9 @@ garde1800 jointe ;1554,343s incluant préparation/nettoyage. Rapport intégral
 10Mo archivé en gzip déterministe, SHA conservés. Régressions120/partial lancées
 en série après fin du volume ; ne pas conclure avant leur jonction.
 Source protégée sous borne numérique, borne des tirs et sept jours restent ouverts.
+
+Les cinq modes120 repassent dix groupes ; partial repasse un groupe, état
+et source337 figés. Compléter la couverture du seul changement de garde :
+défaut900 en vraie fenêtre, refus120+1800 et refus1800 hors mode, avant toute
+mutation pour ces deux refus. Contrat complété avant le client dédié ; aucun
+nouveau comportement produit ni nouvelle option du helper.
