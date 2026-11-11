@@ -6505,3 +6505,22 @@ final natif sain, même CID/image et démarrage13:00:40UTC, référence inchang�
 Les deux entrées d'incohérence sont résolues par les refus/préflights réels et
 retirées du registre. Pertes, sûreté du contexte cloné sous namespace étranger,
 régressions et échéance réelle des sept jours gardent078.5 ouverte.
+
+### 11novembre2026 — Pertes du loader de rétention qualifiées
+
+Au client3125ad1, mêmes351sources que cbdcf4a, les pertes seed5530c97d et
+observerf20503c1 passent deux groupes chacune : points durables réels, SIGKILL
+des pilotes/mutateurs puis gardes indépendantes120 et restitutions jointes.
+SSH termine255 ; aucun code natif137 n'est inventé. Les deux captures et images
+sont recoupées inchangées. Les journaux natifs mesurent seed : armementD+48,348,
+absenceD+168,804, restitutionD+178,383 ; observer : armementD+11,357, retrait
+D+132,296, absenceD+132,475, restitutionD+145,018. Aucun contrôle n'avait été
+créé lors de seed ; son removed_at reste NULL. Inspection séparée, zéro groupe.
+
+La preuve complète porte treize groupes en sept cas, brut671015/gzip256506,
+sans recomptage des assertions. Les neuf premiers conservent leur commitclient
+cbdcf4a et les quatre nouveaux3125ad1 ; index351 identique partout. Contrôle
+final même CID/image, démarrage attendu13:12:18UTC, référence inchangée,2healthy,
+healthz200, agent actif,5982 artefacts, actifs0 et aucune garde. Namespace étranger
+du contexte cloné, régressions historiques et propres résiduelles, sept jours
+et campagne complète restent ouverts ; SLS-078 et SLS-091 restent[~].

@@ -220,8 +220,9 @@ contre les originaux. Les refus d'identité clonée du helper de volume ne peuve
 être simplement retirés : l'autorisation exige la fenêtre exclusive du contrat,
 les répertoires privés reconnus et les consommateurs originaux absents. Un
 pilote dédié et ses refus sont qualifiés par les
-[neuf groupes cbdcf4a](evidence/retention-history-replay-preflight-dev-2026-11-11.json).
-Ses pertes et régressions restent à qualifier avant l'âge.
+[treize groupes](evidence/retention-history-replay-preflight-dev-2026-11-11.json),
+dont neuf refus/préflights et quatre pour les deux pertes/restaurations indépendantes.
+Namespace étranger du contexte cloné et régressions restent à qualifier avant l'âge.
 
 ## Source protégée sous borne qualifiée
 

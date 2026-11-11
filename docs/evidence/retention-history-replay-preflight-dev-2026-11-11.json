@@ -4,8 +4,8 @@
   "unit": "SLS-078.5",
   "unit_complete": false,
   "counts": {
-    "groups": 9,
-    "cases": 5,
+    "groups": 13,
+    "cases": 7,
     "source_files": 351,
     "skipped": 0
   },
@@ -592,6 +592,76 @@
         "age_retention_qualified": false,
         "observation_seconds": 0.005154738202691078
       }
+    },
+    {
+      "kind": "source",
+      "mode": "seed-loss",
+      "campaign": "5530c97d-ca43-4320-a927-c747d3baf411",
+      "source_commit": "3125ad1ddc3ad96650a0ff9419d46f656b15a227",
+      "groups": 2,
+      "checks": [
+        {
+          "name": "Perte réelle du pilote et du mutateur au point durable demandé",
+          "status": "passed"
+        },
+        {
+          "name": "Garde indépendante120, mêmes originaux et source scellée conservée",
+          "status": "passed"
+        }
+      ],
+      "restoration": {
+        "agent_healthy": true,
+        "artifacts_identical": true,
+        "configuration_unchanged": true,
+        "control_healthy": true,
+        "databases_identical": true,
+        "directories_identical": true,
+        "event": "restored",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "independent": true,
+        "original_id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+        "reference_unchanged": true,
+        "restored_at": 1794402478.3827097,
+        "temporary_control_absent_at": 1794402468.8042831,
+        "temporary_control_removed_at": null,
+        "temporary_directories_removed": true
+      },
+      "native_observation": null
+    },
+    {
+      "kind": "source",
+      "mode": "observer-loss",
+      "campaign": "f20503c1-0843-4285-a279-c7d03d0d7e28",
+      "source_commit": "3125ad1ddc3ad96650a0ff9419d46f656b15a227",
+      "groups": 2,
+      "checks": [
+        {
+          "name": "Perte réelle du pilote et du mutateur au point durable demandé",
+          "status": "passed"
+        },
+        {
+          "name": "Garde indépendante120, mêmes originaux et source scellée conservée",
+          "status": "passed"
+        }
+      ],
+      "restoration": {
+        "agent_healthy": true,
+        "artifacts_identical": true,
+        "configuration_unchanged": true,
+        "control_healthy": true,
+        "databases_identical": true,
+        "directories_identical": true,
+        "event": "restored",
+        "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+        "independent": true,
+        "original_id": "68a8a0b2554afcd235433c91ea0b4075555eb10becd5706f6c772aa074e5f7bb",
+        "reference_unchanged": true,
+        "restored_at": 1794402745.0175977,
+        "temporary_control_absent_at": 1794402732.4754603,
+        "temporary_control_removed_at": 1794402732.295995,
+        "temporary_directories_removed": true
+      },
+      "native_observation": null
     }
   ],
   "source_sha256": {
@@ -961,7 +1031,7 @@
         "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
         "running": true,
         "health": "healthy",
-        "started_at": "2026-11-11T13:00:40.175735537Z"
+        "started_at": "2026-11-11T13:12:18.700136775Z"
       },
       {
         "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
@@ -989,8 +1059,8 @@
   "scope": {
     "young_replay_qualified": true,
     "real_loss_qualified": {
-      "seed-loss": false,
-      "observer-loss": false
+      "seed-loss": true,
+      "observer-loss": true
     },
     "historical_guard_regressions_qualified": false,
     "seven_day_retention_qualified": false,
@@ -1000,9 +1070,9 @@
   },
   "raw": {
     "path": "retention-history-replay-preflight-dev-2026-11-11.raw.json.gz",
-    "bytes": 183596,
-    "sha256": "273a53d508f0c04efc546c2fea3007da1994db1f5f2625909b67c601ce716b5b",
-    "uncompressed_bytes": 490055,
-    "uncompressed_sha256": "d2098929aaaca4ea909e68230c261a4860b7f3389906683e511436110750861f"
+    "bytes": 256506,
+    "sha256": "7db6e64fab3874e634ad1e7202f1d293c47061502dba3b4ac9f188fa994867b8",
+    "uncompressed_bytes": 671015,
+    "uncompressed_sha256": "3009b5237640b060183040f6d5b71699de903b37617231b44468ccc021219c40"
   }
 }

@@ -2,17 +2,21 @@
 
 ## [Non publié]
 
-### Replay jeune des témoins de rétention qualifié
+### Replay jeune et pertes des témoins de rétention qualifiés
 
-- [Neuf groupes réels](docs/evidence/retention-history-replay-preflight-dev-2026-11-11.json)
-  sur351sources cbdcf4a : huit refus d'options, deux refus avant sept jours,
+- [Treize groupes réels](docs/evidence/retention-history-replay-preflight-dev-2026-11-11.json)
+  sur351sources : neuf au client cbdcf4a pour huit refus d'options, deux refus avant sept jours,
   chargements des deux captures authentiques, SSO/API et restitutions nominales.
   Source non close observée en9,859s,149251 stops et sept frontières fdatasync ;
   tir clos normalement et témoins jeunes conservés, aucun nouveau handler.
   [Quatre essais échoués](docs/evidence/retention-history-replay-failed-dev-2026-11-11.json)
   restent exclus : hypothèse de propriétaire, reçu absent, deux délais natifs.
   Originaux/configuration/images et captures préservées, copies temporaires retirées.
-  Pertes, régressions historiques et sept jours restent ouverts.
+  Quatre groupes supplémentaires au client3125ad1 sur les mêmes351sources
+  qualifient les pertes avant CONTROL et après attache, gardes120 indépendantes
+  et captures/originaux conservés. Les [dates natives](docs/evidence/retention-history-loss-timings-dev-2026-11-11.json)
+  sont recoupées séparément sans groupe ajouté. Namespace étranger du contexte
+  cloné, régressions historiques et sept jours restent ouverts.
 
 ### Source planifiée protégée sous la borne qualifiée
 

@@ -328,12 +328,15 @@ ouverts ; cette preuve ne clôture pas078.5.
 
 ## Replay des témoins encore jeunes — SLS-078.5
 
-[Neuf groupes cbdcf4a](evidence/retention-history-replay-preflight-dev-2026-11-11.json)
+[Treize groupes](evidence/retention-history-replay-preflight-dev-2026-11-11.json)
 sur351sources : trois groupes de refus (huit options et deux âges prématurés),
 six groupes pour les deux préflights avec vrai SSO/API et restitutions nominales.
 La source non close conserve ses deux appels, son instance est récupérée et
 son tir se clôt normalement, sans nouveau handler. Observation9,859s sous25s.
 La seconde source conserve tir terminal et générations ; aucun DELETE d'âge
 n'est revendiqué. Captures/images/originaux inchangés, copie retirée et garde jointe.
-Quatre essais échoués sont exclus et conservés en preuve distincte. Pertes,
-namespace étranger du contexte cloné, régressions et âge restent ouverts.
+Quatre essais échoués sont exclus et conservés en preuve distincte. Les deux
+pertes sur la source vivante ajoutent quatre groupes, avec gardes indépendantes120,
+source intacte et pilotes joints. Les bornes natives sont recoupées séparément,
+zéro groupe ajouté. Namespace étranger du contexte cloné, régressions et âge
+restent ouverts.

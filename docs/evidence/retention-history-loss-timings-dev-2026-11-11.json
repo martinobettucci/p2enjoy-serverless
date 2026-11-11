@@ -1,0 +1,40 @@
+{
+  "format": "p2enjoy-serverless-retention-loss-timing-inspection-v1",
+  "inspection_complete": true,
+  "functional_groups": 0,
+  "unit": "SLS-078.5",
+  "unit_complete": false,
+  "cases": [
+    {
+      "campaign": "5530c97d-ca43-4320-a927-c747d3baf411",
+      "journal_sha256": "5884f551bb38f357ce177b1f0a33433f738b3dfbfd903d00316ad97e28ae07f1",
+      "mode": "seed-loss",
+      "armed_at": 1794402348.3481283,
+      "armed_boundary": 1794402300,
+      "timer_active_monotonic_us": 5020268690534,
+      "temporary_control_removed_at": null,
+      "temporary_control_absent_at": 1794402468.8042831,
+      "restored_at": 1794402478.3827097,
+      "driver_alive": false,
+      "restored": true,
+      "independent": true,
+      "guard_seconds": 120
+    },
+    {
+      "campaign": "f20503c1-0843-4285-a279-c7d03d0d7e28",
+      "journal_sha256": "bc19e1efbd8838864a843b71ca946fd57eabbfa6831dfa4bb31ed21bf0aa4146",
+      "mode": "observer-loss",
+      "armed_at": 1794402611.357303,
+      "armed_boundary": 1794402600,
+      "timer_active_monotonic_us": 5020531699712,
+      "temporary_control_removed_at": 1794402732.295995,
+      "temporary_control_absent_at": 1794402732.4754603,
+      "restored_at": 1794402745.0175977,
+      "driver_alive": false,
+      "restored": true,
+      "independent": true,
+      "guard_seconds": 120
+    }
+  ],
+  "scope": "Read-only native journal inspection, correlated with the separate thirteen-group E2E proof."
+}

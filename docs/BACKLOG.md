@@ -1659,15 +1659,18 @@ Le [replay d'âge](RETENTION_HISTORY_REPLAY.md) a son contrat explicite : les de
 captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
 capturée, garde120, observation avant santé et contrôles stricts d'identité à
 chaque démarrage/restitution. Les
-[neuf groupes cbdcf4a](evidence/retention-history-replay-preflight-dev-2026-11-11.json)
-passent sur351sources : huit refus d'options et deux refus d'âge en trois groupes,
+[treize groupes](evidence/retention-history-replay-preflight-dev-2026-11-11.json)
+passent sur351sources identiques : huit refus d'options et deux refus d'âge en trois groupes,
 les deux préflights en six groupes avec vrai SSO/API et restitutions nominales.
 Source9,859s/149251 stops/sept frontières fdatasync ; deux témoins conservés et même
 tir clos sans nouveau handler. Tir terminal et générations retirées conservés
 dans l'autre copie. [Quatre essais échoués](evidence/retention-history-replay-failed-dev-2026-11-11.json)
 exclus ; métadonnées historiques et filtre des lectures corrigés et vérifiés.
-Pertes propres et régressions du helper restent requises ; aucune preuve d'âge
-avant le18novembre. Le nouveau contrôle d'appartenance clonée doit aussi
+Les deux pertes avant CONTROL et après attache passent quatre groupes
+supplémentaires au client3125ad1, sur les mêmes351sources ; gardes120 réellement
+indépendantes et originaux/captures conservés. Les [dates natives](evidence/retention-history-loss-timings-dev-2026-11-11.json)
+confirment les absences sousD+240 et restitutions sousD+270, sans groupe ajouté.
+Régressions du helper encore requises ; aucune preuve d'âge avant le18novembre. Le nouveau contrôle d'appartenance clonée doit aussi
 être éprouvé sous namespace étranger avant clôture, avec conservation de cet
 objet au premier refus puis retrait de la seule fixture et restitution.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence

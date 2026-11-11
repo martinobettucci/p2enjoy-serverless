@@ -150,8 +150,9 @@ ou une donnée inconnue ne devient jamais source de replay.
 
 ## Préflights jeunes et refus qualifiés
 
-La [preuve cbdcf4a](evidence/retention-history-replay-preflight-dev-2026-11-11.json)
-passe neuf groupes sur351sources : huit refus d'options et deux refus d'âge
+La [preuve des replays](evidence/retention-history-replay-preflight-dev-2026-11-11.json)
+passe treize groupes sur351sources identiques : neuf au client cbdcf4a pour huit refus
+d'options et deux refus d'âge
 regroupés en trois groupes ; chargement, SSO/API et restitution pour chacune
 des deux sources en six groupes. Bases/artefacts/images et reçus canoniques
 sont vérifiés ; les captures restent strictement inchangées.
@@ -171,6 +172,17 @@ agent actif, healthz200,5982 artefacts et tous actifs à zéro. Les
 restent séparés : mauvais propriétaire attendu, reçu canonique absent du SPARK,
 puis deux expirations de l'observateur. Aucun de leurs groupes n'est compté.
 
-Pertes copie/observateur, refus du namespace étranger dans le nouveau contexte
-cloné et régressions historiques restent requis. L'âge réel et la campagne
+Les deux pertes sur la source vivante passent quatre groupes supplémentaires
+au client3125ad1 : après publication du registre/avant CONTROL, puis après attache
+native au Python. SIGKILL des pilotes/mutateurs, canaux SSH255 sans attribution
+d'un code natif137, gardes120 indépendantes et mêmes originaux/captures restitués.
+Les [journaux natifs](evidence/retention-history-loss-timings-dev-2026-11-11.json)
+recoupent les bornes : seed arméD+48,348, contrôle absentD+168,804, restitution
+D+178,383 ; observateur arméD+11,357, retraitD+132,296, absenceD+132,475 et
+restitutionD+145,018. Le seed ne prétend aucun retrait de contrôle jamais créé.
+Ces inspections ajoutent zéro groupe aux treize. Le contrôle final13:12:18UTC
+conserve deux services sains, référence inchangée,5982 artefacts et tous actifs0.
+
+Refus du namespace étranger dans le nouveau contexte cloné et régressions
+historiques restent requis. L'âge réel et la campagne
 complète restent ouverts ; les preuves antérieures gardent leurs époques distinctes.
