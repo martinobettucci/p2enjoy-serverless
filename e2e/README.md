@@ -2096,3 +2096,10 @@ labels, montage et réseaux ; le client les corrèle aux mêmes fonctions/révis
 et exige l'absence exacte de l'union initiale/tardive après restitution, en plus
 des neuf contrôles physiques existants. Minima et délais restent inchangés.
 Correction implémentée, replays E2E35/40 et refus sans option encore requis.
+
+Le wrapper timeout est identifié par chemin/version/SHA dans chaque reçu.
+Sans preserve-status, le vrai binaire DEV retourne124 à l'échéance40 ; le
+signal demandé KILL9 et le résultat du wrapper sont distincts. Le premier
+replay échoue sur l'ancienne attente137, conserve son échec et sa restitution.
+Le client corrigé exige124, durée40–43s, diagnostic KILL, opérateur absent,
+TracerPid0 avant retrait et contrôles physiques ; les replays restent requis.

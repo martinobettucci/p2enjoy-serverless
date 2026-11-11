@@ -113,6 +113,7 @@ async function proveObserverDeadline(initial){
  assert(actor.deadline_sample_monotonic>=gate.alarm_deadline_monotonic+.5);assert.notEqual(actor.actor.pid,gate.operator.pid);assert.notEqual(actor.actor.cgroup,gate.operator.cgroup);assert(actor.actor.cgroup.includes(gate.unit));
  assert.equal(actor.control_after_exit.pid,measured.pid);assert.equal(actor.control_after_exit.birth,measured.birth);assert.equal(actor.control_after_exit.tracer_pid,0);
  assert(command.completed&&!command.rescue_used&&command.wrapper_joined&&command.wrapper_pidfd_readable&&command.operator_absent);assert.equal(command.phase,'finished');assert.deepEqual(command.argv.slice(0,5),['timeout','--verbose','--foreground','--signal=KILL','40s']);
+ assert(command.timeout_binary.path.startsWith('/'));assert.match(command.timeout_binary.sha256,/^[a-f0-9]{64}$/);assert(command.timeout_binary.version.startsWith('timeout '));assert.equal(command.timeout_signal,9);
  assert.equal(command.control_before_restore.pid,measured.pid);assert.equal(command.control_before_restore.birth,measured.birth);assert.equal(command.control_before_restore.tracer_pid,0);
  assert.equal(command.stdout_sha256,evidence.metadata['source-observer-command.stdout'].sha256);assert.equal(command.stderr_sha256,evidence.metadata['source-observer-command.stderr'].sha256);
  assert.equal(command.actor_terminal.MainPID,'0');assert.equal(command.actor_terminal.Result,'success');assert.equal(command.actor_terminal.ExecMainCode,'1');assert.equal(command.actor_terminal.ExecMainStatus,'0');assert.equal(command.actor_joined.ActiveState,'inactive');assert.equal(command.actor_joined.MainPID,'0');
@@ -122,9 +123,9 @@ async function proveObserverDeadline(initial){
   assert.equal(measured.after_detach.pid,measured.pid);assert.equal(measured.after_detach.birth,measured.birth);assert.equal(measured.after_detach.tracer_pid,0);assert(measured.reader_closed&&measured.observer_memory_closed);
   assert(driverStderr.includes(Buffer.from('source_retention_observation_failed:native_observation_deadline')));
  }else{
-  assert.equal(command.returncode,137);assert(command.duration>=40&&command.duration<43);assert(command.timeout_kill_reported);assert.equal(actor.signals_sent.length,0);
+  assert.equal(command.returncode,124);assert(command.duration>=40&&command.duration<43);assert(command.timeout_kill_reported);assert.equal(actor.signals_sent.length,0);
   for(const key of ['after_detach','reader_closed','observer_memory_closed','failure_type'])assert(!(key in measured));assert.equal(evidence.metadata['source-observer-command.stdout'].bytes,0);
-  assert(driverStderr.includes(Buffer.from('source_retention_command_exit:137')));
+  assert(driverStderr.includes(Buffer.from('source_retention_command_exit:124')));
  }
  assert(status.restored&&!status.driver_alive&&['inactive','unknown'].includes(status.timer_state)&&['inactive','unknown'].includes(status.service_state));
  const before=observations.find(v=>v.scenario==='source-deadline-consumers-before').native,consumers=status.consumer_cleanup;assert(before.completed&&consumers);

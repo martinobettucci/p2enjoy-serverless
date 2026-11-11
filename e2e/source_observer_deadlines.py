@@ -229,11 +229,14 @@ def run_command(campaign, mode, lock, functions, window):
     assert len(functions) == len(set(functions)) == 2 and all(str(UUID(v)) == v for v in functions)
     assert type(window) is int and window % 300 == 0
     held = os.fstat(lock); assert [held.st_dev, held.st_ino] == item['lock_identity']
+    binary = Path(shutil.which('timeout')).resolve(strict=True)
+    binary_identity = {'path': str(binary), 'sha256': sha(binary),
+        'version': command([str(binary), '--version']).splitlines()[0]}
     started = time.monotonic()
     path = work/'source-observer-command.json'
     receipt = {'completed': False, 'phase': 'prepared', 'campaign': campaign, 'mode': mode,
         'started_monotonic': started, 'deadline_monotonic': started+40, 'timeout_seconds': 40,
-        'timeout_signal': int(signal.SIGKILL), 'rescue_used': False}
+        'timeout_signal': int(signal.SIGKILL), 'timeout_binary': binary_identity, 'rescue_used': False}
     atomic(path, receipt)
     args = ['timeout', '--verbose', '--foreground', '--signal=KILL', '40s',
         'python3', '-B', str(ROOT/'e2e/invocation-source-retention-observer.py'), campaign,

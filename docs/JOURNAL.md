@@ -6921,3 +6921,7 @@ consignés au contrat, source primaire recoupée. Décision avant code : attendr
 le vrai124 du wrapper, conserver signal/durée/pidfd et identité du binaire ;
 aucune conversion de code ni option pour forcer137. Essai et rapports conservés,
 puis replays35/40/refus requis. Aucun produit ou réglage moteur modifié.
+
+Correction implémentée : reçu du chemin/version/SHA du timeout réel avant son
+lancement ; client40 attend exactement124 et le refus124 du helper, avec tous
+les contrôles de durée/signal/processus conservés. Syntaxes valides ; E2E requis.
