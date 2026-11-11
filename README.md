@@ -81,7 +81,8 @@ générations retirées conservés en privé, éligibles ensemble le18 novembre 
 [treize groupes réels](docs/evidence/retention-history-replay-preflight-dev-2026-11-11.json)
 sur351sources : neuf de refus/préflights avec nouveau SSO/API, puis quatre
 de pertes réelles avant CONTROL et après attache, restitutions indépendantes120s.
-Refus du contexte cloné sous namespace étranger et régressions restent à qualifier.
+Le [refus sous namespace supplémentaire](docs/evidence/retention-history-namespace-scope-dev-2026-11-11.json)
+passe aussi quatre groupes, dont deux préflights rejoués ; régressions encore requises.
 La [grammaire numérique des crons](docs/evidence/schedule-calendar-dev-2026-11-10.json)
 passe aussi cinq groupes distincts : fusion, règle jour/semaine, refus et
 prévisions calendaires ; SLS-078.2 est qualifiée.

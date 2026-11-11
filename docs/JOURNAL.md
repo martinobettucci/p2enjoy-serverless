@@ -6550,3 +6550,21 @@ Le correctif est implémenté et relu : même recherche API en nominal/secours,
 réponse POST seulement recoupée. Aucun nouveau défaut confirmé ; la perte de
 transport n'a pas été exécutée et n'est pas revendiquée. Syntaxes Node/Python
 contrôlées ; scénario réel de périmètre encore requis.
+
+### 11novembre2026 — Namespace supplémentaire conservé au refus
+
+Le client9f3e7da passe quatre groupes, dont deux préflights rejoués, sur351sources
+figées : SSO depuis accueil, fixture89b086a0 retrouvée par API hors baseline,
+restore code1/foreign_namespace avant retrait du temporaire5fa5297d, objet
+toujours présent et original68a8 arrêté. La seule fixture vide est supprimée
+par API et GET404, puis restitution explicite terminée. D=13:30UTC : création
+D+57,205, retraittempD+61,282, absenceD+61,492, restitutionD+74,183 ; timer
+arméD+11,120 pour120s. independent=true n'est pas une expiration.
+
+Deux clients seuls diffèrent de la preuve13 antérieure ; helper/image identiques.
+Preuve/brut114577/gzip39774 recoupés par revue RO, aucun défaut confirmé. La
+réconciliation nominale est exercée réellement ; aucune perte HTTP provoquée.
+Contrôle final sain mêmeCID/image redémarré13:31:07UTC, référence inchangée,
+2healthy, actifs0,5982 artefacts, agent actif/healthz200 et aucune garde.
+Reste : régressions du helper, pannes propres résiduelles et âge réel ;078.5
+conserve son statut ouvert.

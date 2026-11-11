@@ -338,5 +338,14 @@ n'est revendiqué. Captures/images/originaux inchangés, copie retirée et garde
 Quatre essais échoués sont exclus et conservés en preuve distincte. Les deux
 pertes sur la source vivante ajoutent quatre groupes, avec gardes indépendantes120,
 source intacte et pilotes joints. Les bornes natives sont recoupées séparément,
-zéro groupe ajouté. Namespace étranger du contexte cloné, régressions et âge
-restent ouverts.
+zéro groupe ajouté. Le contexte cloné sous namespace supplémentaire est
+qualifié séparément ci-dessous ; régressions et âge encore ouverts.
+
+### Refus du périmètre cloné
+
+[Quatre groupes9f3e7da](evidence/retention-history-namespace-scope-dev-2026-11-11.json),
+dont deux préflights rejoués, passent sur351sources. Objet API et même temporaire
+conservés au refus, original arrêté ; retrait de la seule fixture puis restitution
+explicite avant expiration du timer. Sources/captures/configuration/originaux
+conservés et gardes jointes. Deux clients seuls diffèrent de la preuve précédente.
+Perte HTTP non provoquée ; régressions historiques et âge restent ouverts.

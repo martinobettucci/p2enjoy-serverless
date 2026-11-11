@@ -222,7 +222,9 @@ les répertoires privés reconnus et les consommateurs originaux absents. Un
 pilote dédié et ses refus sont qualifiés par les
 [treize groupes](evidence/retention-history-replay-preflight-dev-2026-11-11.json),
 dont neuf refus/préflights et quatre pour les deux pertes/restaurations indépendantes.
-Namespace étranger du contexte cloné et régressions restent à qualifier avant l'âge.
+Le [namespace supplémentaire](evidence/retention-history-namespace-scope-dev-2026-11-11.json)
+a sa preuve distincte de quatre groupes, dont deux préflights rejoués ; les
+régressions restent à qualifier avant l'âge.
 
 ## Source protégée sous borne qualifiée
 

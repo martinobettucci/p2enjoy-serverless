@@ -1670,13 +1670,14 @@ Les deux pertes avant CONTROL et après attache passent quatre groupes
 supplémentaires au client3125ad1, sur les mêmes351sources ; gardes120 réellement
 indépendantes et originaux/captures conservés. Les [dates natives](evidence/retention-history-loss-timings-dev-2026-11-11.json)
 confirment les absences sousD+240 et restitutions sousD+270, sans groupe ajouté.
-Régressions du helper encore requises ; aucune preuve d'âge avant le18novembre. Le nouveau contrôle d'appartenance clonée doit aussi
-être éprouvé sous namespace étranger avant clôture, avec conservation de cet
-objet au premier refus puis retrait de la seule fixture et restitution. Le
-mode client foreign-namespace est implémenté, syntaxe contrôlée, quatre groupes
-réels à exécuter ; helper et image applicative inchangés. Le nom complet et
-les UUID initiaux sont conservés avant POST ; la réconciliation API nominale
-et de secours doit permettre le retrait ciblé malgré une réponse indéterminée.
+Le [refus du contexte cloné](evidence/retention-history-namespace-scope-dev-2026-11-11.json)
+passe quatre groupes au client9f3e7da, dont deux préflights rejoués : namespace
+supplémentaire présent après refus, même conteneur temporaire conservé et original
+arrêté, retrait API de la seule fixture puis restitution explicite.351sources
+avant/après, deux clients seuls changés par rapport aux treize groupes ; helper
+et images inchangés. Réconciliation nominale réellement exercée, perte de
+réponse HTTP non provoquée. Régressions du helper encore requises et aucune
+preuve d'âge avant le18novembre ;078.5 reste ouverte.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

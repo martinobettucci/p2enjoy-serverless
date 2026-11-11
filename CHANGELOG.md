@@ -2,12 +2,15 @@
 
 ## [Non publié]
 
-### Refus du périmètre cloné — en qualification
+### Refus du périmètre cloné qualifié
 
 - Nouveau mode client foreign-namespace : SSO/API, namespace de fixture
   conservé au refus de restitution, DELETE API ciblé puis restitution explicite.
-  Même helper/image, aucun élargissement d'autorité ; quatre groupes implémentés
-  et syntaxe contrôlée, E2E réel encore requis.
+  [Quatre groupes réels](docs/evidence/retention-history-namespace-scope-dev-2026-11-11.json)
+  passent au client9f3e7da sur351sources, dont deux préflights rejoués. Même
+  contrôle temporaire conservé au refus, objet API présent, seule fixture retirée,
+  restitution explicite et copies retirées. Helper/images inchangés ; deux seuls
+  clients diffèrent de l'époque des treize groupes. Transport perdu non éprouvé.
 
 ### Replay jeune et pertes des témoins de rétention qualifiés
 
@@ -22,8 +25,8 @@
   Quatre groupes supplémentaires au client3125ad1 sur les mêmes351sources
   qualifient les pertes avant CONTROL et après attache, gardes120 indépendantes
   et captures/originaux conservés. Les [dates natives](docs/evidence/retention-history-loss-timings-dev-2026-11-11.json)
-  sont recoupées séparément sans groupe ajouté. Namespace étranger du contexte
-  cloné, régressions historiques et sept jours restent ouverts.
+  sont recoupées séparément sans groupe ajouté. Le namespace supplémentaire a
+  sa preuve distincte ci-dessus ; régressions historiques et sept jours ouverts.
 
 ### Source planifiée protégée sous la borne qualifiée
 

@@ -1918,13 +1918,15 @@ exclusive ; les modes sans options gardent leurs refus d'identité antérieurs.
 [Treize groupes](../docs/evidence/retention-history-replay-preflight-dev-2026-11-11.json)
 qualifient neuf refus/préflights puis quatre groupes pour les pertes avant
 CONTROL et après attache, sur les mêmes351sources. SSO/API réels et restitutions
-nominales puis indépendantes120 ; captures inchangées. Namespace étranger du
-contexte cloné et régressions restent requis.
+nominales puis indépendantes120 ; captures inchangées. Le namespace supplémentaire
+a sa preuve distincte ci-dessous ; régressions encore requises.
 Les preuves de captures et de borne numérique restent dans leurs époques distinctes.
 
 `python3 -B e2e/retention-history-suite.py source foreign-namespace` reçoit
 le SSO sur stdin masquée, reprend la source en helper preflight, crée une
 seule fixture de namespace et vérifie son maintien au premier refus restore.
 Après DELETE API de cette fixture, une restitution explicite est recoupée ;
-independent=true ne qualifie pas une expiration du timer. Quatre groupes
-implémentés, syntaxe contrôlée, qualification réelle encore requise.
+independent=true décrit la restitution explicite avant expiration du timer. Les
+[quatre groupes9f3e7da](../docs/evidence/retention-history-namespace-scope-dev-2026-11-11.json)
+passent sur351sources, dont deux préflights rejoués. Réconciliation API exercée,
+HTTP perdu non provoqué ; sources et originaux conservés.

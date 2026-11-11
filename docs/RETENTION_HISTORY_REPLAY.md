@@ -107,8 +107,7 @@ restitution, vérifier sources/captures/images/configuration et originaux, pilot
 et garde terminés, copies retirées. En cas d'erreur, tenter le retrait API de
 la seule fixture créée avant le secours ; un objet inconnu reste une interdiction
 de restitution, jamais un prétexte à effacer des données. La fonctionnalité est
-implémentée dans le client et le lanceur, syntaxe contrôlée ; sa qualification
-réelle reste requise.
+qualifiée par quatre groupes réels, liés dans le résultat de périmètre ci-dessous.
 
 ## Observation du premier passage réel
 
@@ -214,6 +213,24 @@ restitutionD+145,018. Le seed ne prétend aucun retrait de contrôle jamais cré
 Ces inspections ajoutent zéro groupe aux treize. Le contrôle final13:12:18UTC
 conserve deux services sains, référence inchangée,5982 artefacts et tous actifs0.
 
-Refus du namespace étranger dans le nouveau contexte cloné et régressions
-historiques restent requis. L'âge réel et la campagne
+Le refus du namespace supplémentaire est qualifié séparément ci-dessous ;
+les régressions historiques restent requises. L'âge réel et la campagne
 complète restent ouverts ; les preuves antérieures gardent leurs époques distinctes.
+
+## Périmètre cloné qualifié
+
+La [preuve9f3e7da](evidence/retention-history-namespace-scope-dev-2026-11-11.json)
+passe quatre groupes, dont deux préflights rejoués et deux de périmètre. Les
+351sources sont identiques avant/après ; seuls les deux clients changent par
+rapport à l'époque des treize groupes, helper/image inchangés. Le vrai SSO
+et la recherche API retrouvent la fixture de nom UUID complet, absente des
+UUID canoniques et sans service. Restore refuse foreign_namespace/code1,
+l'objet reste visible, le même temporaire en marche et l'original arrêté.
+
+Après retrait API de cette seule fixture et GET404, restore explicite réussit
+et toutes les gardes/pilotes sont joints. D=13:30UTC : créationD+57,205,
+retrait du contrôleD+61,282, absenceD+61,492 et restitutionD+74,183 ; garde
+arméeD+11,120 pour120s. Ce succès précède son expiration. Sources/captures/
+originaux/configuration conservés, contrôle natif final13:31:07UTC,2healthy,
+actifs0,5982 artefacts et aucune garde. HTTP perdu, sept jours et campagne
+complète restent non qualifiés ; les régressions du helper restent requises.
