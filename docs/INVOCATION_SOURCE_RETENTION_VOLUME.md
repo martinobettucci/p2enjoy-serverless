@@ -267,3 +267,41 @@ Ce refus qualifie une panne après attache et son nettoyage normal. Il ne
 qualifie pas une erreur de detach, l'alarme 35 s, la coupure 40 s, l'attente
 native 25 s sans événement ni l'âge de sept jours. Le nominal numérique garde
 sa preuve distincte au commit d860cc5 ; la campagne complète reste requise.
+
+## Mesure de l'attente native sans événement
+
+Décision du 11 novembre 2026 avant code pour le reste078.5 inscrit : mesurer
+la vraie classe partagée `schedule_firing_volume_replay.BlockingNativeObserver`
+sur le contrôle temporaire vide du mode instance-limit existant, même image
+applicative et garde120. Cette preuve porte sur l'observateur, pas sur la
+rétention ni sur un handler ; aucun jeu de 10 000 lignes n'est fabriqué.
+
+Le probe valide la fenêtre, son verrou hérité, le contrôle original arrêté,
+les répertoires de remplacement et le CID/image/PID/naissance/cgroup du seul
+contrôle temporaire. Il ouvre le lecteur réel sous son propriétaire, attache
+l'observateur et consomme l'arrêt initial. Un timer systemd indépendant28s,
+code de dégel figé et reçu root0600, est armé avant Docker pause. Il cible
+uniquement ce CID/PID validé, sans attendre le verrou retenu par le probe.
+
+Après Paused=true confirmé, reprendre par PTRACE_SYSCALL et vérifier dans le
+processus traceur qu'aucun statut n'attend avec WNOHANG. Un statut immédiat
+est une précondition échouée, sans preuve d'absence d'événement. Persister
+l'entrée monotone, l'échéance25s, le temps restant de l'alarme globale35 et
+l'échéance réelle du timer ; exiger plus de26s avant son dégel programmé.
+Appeler ensuite la vraie méthode wait, sans remplacer waitpid ni les signaux.
+
+Conserver son résultat ou exception et sa durée avant tout nettoyage. Si le
+retour n'arrive qu'au dégel de secours après25s, il établit un dépassement,
+pas une expiration de l'alarme35. Après un retour anticipé, déclencher le
+même service indépendant de dégel puis attendre son reçu. Toujours confirmer
+Paused=false avant detach ; enregistrer séparément exception d'attente,
+erreurs de nettoyage, TracerPid final, mémoire et lecteur fermés. Conserver
+le résultat terminal du service avant de joindre timer/service.
+
+La commande extérieure reste bornée40s et la fenêtre120 possède sa restitution
+indépendante existante. Le client recoupe l'installation vide réelle, le reçu
+de mesure puis les originaux restitués, données/configuration/images identiques
+et tous les processus joints. Trois groupes attendus par campagne : installation,
+mesure de défaut ou borne corrigée explicitement choisie, restitution. Aucun
+résultat n'est acquis par cette spécification ; 35/40 propres à l'opérateur
+source, erreur de detach et rétention restent des preuves distinctes.

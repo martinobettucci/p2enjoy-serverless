@@ -6780,3 +6780,14 @@ Au total douze groupes, six handlers réussis, trois purges publiques/physiques.
 brut491 114/gzip161 179. Deux seuls fichiers diffèrent de la preuve historique
 7ed2abe, qui garde son époque. Autres pannes d'observateur, reprise historique
 sur helper modifié, sept jours et campagne complète restent requis dans078.5.
+
+### 11 novembre 2026 — Décision de mesure de l'attente25
+
+Le reste078.5 est une hypothèse de dépassement, pas un défaut déclaré acquis.
+Reprendre l'installation vide instance-limit/garde120, attacher la vraie classe
+BlockingNativeObserver, Docker pause confirmé puis resume/WNOHANG sans statut.
+Timer indépendant28s du seul contrôle temporaire, reçu et code figé ; vraie
+attente25, alarme35/commande40 inchangées, erreur primaire persistée avant
+nettoyage et dégel confirmé avant detach. Trois groupes pour reproduction puis
+trois après correction si défaut confirmé ; aucune simulation d'événement,
+aucune qualification de rétention ni de délais propres35/40 par ce banc.

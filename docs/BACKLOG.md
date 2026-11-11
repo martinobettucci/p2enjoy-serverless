@@ -1742,6 +1742,10 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   avant detach. Le dépassement est une hypothèse à reproduire : waitpid est
   bloquant et ne relit l'échéance qu'avant/après. Une preuve de ce composant
   ne vaut pas preuve de toute la boucle de rétention.
+  [Banc décidé avant code](INVOCATION_SOURCE_RETENTION_VOLUME.md#mesure-de-lattente-native-sans-événement) :
+  contrôle temporaire vide réel, Docker pause après attache, WNOHANG sans statut,
+  vraie attente25s et dégel indépendant28s confirmé avant detach, alarme35 et
+  commande40 inchangées. Mesurer le défaut avant toute correction ; code/E2E requis.
 - [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
   complète de clôture.
 
