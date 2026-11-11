@@ -1548,8 +1548,9 @@ premier essai03:50UTC échoué sur l'observation après fin du handler, deux pur
 physiques réussies. Observer désormais le handler cron pendant cinq secondes
 et conserver les relevés avant assertion : [replay08d1512](evidence/schedule-concurrency-dev-2026-11-11.json)
 qualifié par quatre groupes sur333sources à03:55UTC, quatre handlers et deux purges.
-Le [raccordement CLI](SCHEDULE_ADAPTER.md) de.7 est spécifié avant code ; preuve
-plan/deploy/promote vers un vrai tir et déclaration désactivée encore requise.
+Le [raccordement CLI](SCHEDULE_ADAPTER.md) de.7 est implémenté dans
+`e2e/adapter-schedules.mjs` ; syntaxe contrôlée, preuve plan/deploy/promote vers
+un vrai tir et déclaration désactivée encore requise.
 La [console des planifications](evidence/schedule-console-dev-2026-11-10.json)
 passe19 groupes sur326 sources : trois ciblés, huit du manuel et huit publics
 rejoués. Six handlers réels22:10UTC, pages5+1, vide, nom63, clavier/focus et mobile.

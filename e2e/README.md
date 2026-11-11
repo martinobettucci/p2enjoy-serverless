@@ -1,5 +1,16 @@
 # Qualification de la plateforme
 
+## Planifications publiées par la CLI
+
+`node e2e/adapter-schedules.mjs`, après le prérequis SSO réel décrit ci-dessous,
+exécute les processus Python plan/deploy/promote sur un manifeste original à
+deux fonctions. Le cron actif tire sur le hash publié à la frontière UTC,
+le cron désactivé reste sans appel. L'avertissement privacy est conservé ; celui
+de moteur absent est absent des sorties plan/deploy et du manuel. Quatre groupes,
+une frontière, deux purges publiques recoupées physiquement. La preuve concerne
+les processus du poste aux sources identiques à DEV ; aucun conteneur CLI lancé.
+Contrat : [SCHEDULE_ADAPTER](../docs/SCHEDULE_ADAPTER.md).
+
 ## Concurrence partagée entre HTTP et cron
 
 `node e2e/schedule-concurrency.mjs`, seul sur le SPARK DEV au repos, avec une

@@ -9,6 +9,10 @@
   corrélations et deux purges publiques. Quatre groupes réels réussis à03:55UTC
   sur333sources ; essai initial échoué conservé séparément.
 
+- Client de qualification CLI des crons : plan/deploy/promote réels, cron actif
+  et désactivé, diagnostics et manuel recoupés, puis deux purges publiques.
+  Implémenté ; exécution DEV encore requise.
+
 ### Preuve de rétention des planifications
 
 - Mode de capture native d’une invocation réussie encore source d’un tir non
