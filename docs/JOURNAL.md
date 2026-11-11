@@ -6447,3 +6447,15 @@ points de perte seront mesurés ; aucun résultat d'âge avant l'échéance rée
 La première revue des prototypes a corrigé la revérification PID/naissance
 après pidfd_open et les délais de retrait/restauration ; seconde revue RO avant
 les premières opérations. Aucune preuve nouvelle déduite de cette intégration.
+
+### 11novembre2026 — Refus du loader avant mutation : métadonnées historiques
+
+00ffa47 passe le groupe des huit refus d'options. Le refus d'âge source s'arrête
+avant toute fenêtre sur protected_source_file_required, zéro groupe ; sources
+351 et images identiques avant/après. Le relevé natif retrouve capture.json et
+artifacts.json root0600, alors que le prototype supposait UID1001/0600. SQLite,
+preservation et exports restent root0400, seconde capture entièrement root0400.
+Décision : accepter root0600 pour les deux seuls JSON connus de la première
+capture et retirer l'hypothèse UID1001 ; aucun chmod/chown ni réécriture de source.
+L'égalité aux reçus canoniques et l'inventaire restent obligatoires. Cet échec
+est conservé et ne compte pas comme refus d'âge qualifié.

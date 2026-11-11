@@ -1659,7 +1659,10 @@ captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
 capturée, garde120, observation avant santé et contrôles stricts d'identité à
 chaque démarrage/restitution. Preflights jeunes, refus et pertes du nouveau
 loader sont implémentés, contrôlés syntaxiquement et restent à qualifier sur le
-SPARK DEV. Aucune preuve d'âge avant le18novembre.
+SPARK DEV. Premier refus d'âge arrêté avant fenêtre sur une hypothèse de
+propriétaire JSON erronée : fichiers sources réellement root0600. Corriger
+l'admission des deux seuls JSON historiques, garder les captures inchangées,
+puis rejouer le refus et les préflights. Aucune preuve d'âge avant le18novembre.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

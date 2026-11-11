@@ -19,8 +19,8 @@ Vérifier les reçus privés contre leur preuve publique canonique, les deux SHA
 SQLite, l'intégrité immutable/RO, l'absence de sidecars, l'inventaire complet des
 artefacts (SHA/taille/mode) et les deux exports d'images existants. Racines root0700,
 SQLite root0400, chemins canoniques sans lien. Les fichiers capture.json/artifacts.json
-de la première capture ont été créés0600 sous le propriétaire Docker ; seuls ces
-deux fichiers connus sont admis dans ce format, à l'intérieur de la racine privée
+de la première capture sont root0600, selon le relevé natif du11novembre12:37UTC ;
+seuls ces deux fichiers connus sont admis dans ce format, à l’intérieur de la racine privée
 root0700, avec égalité exacte aux empreintes/reçus canoniques. Ceux de la seconde
 capture, preservation.json et les exports restent root0400. Vérifier les métadonnées
 réelles avant usage, sans durcir ni réécrire les captures. Aucun export ni copie source
