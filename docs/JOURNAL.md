@@ -5963,3 +5963,10 @@ concurrence1/2 et deux HTTP actifs à une vraie frontière : attente sans handle
 contre deuxième instance et succès simultané. Ce discriminant manque aux preuves
 maximum1/exclusif ; il complète078.4 sans nouvelle fonctionnalité produit.
 Quatre groupes, même fixture et lecteur natif existants, puis purges publiques.
+
+Premier essai b282bf2 à03:50UTC : préparation passée, total d'instances après
+succès parallèle différent de3 ; relevé pas persisté avant assertion, valeur
+exacte inconnue. Nettoyage public et absence physique réussis. La demande
+queued peut réclamer une instance ready étrangère avant idle ; corriger la
+fenêtre de preuve, observer le handler cron réel pendant cinq secondes puis
+son succès avant HTTP. Persister chaque relevé natif avant assertion.
