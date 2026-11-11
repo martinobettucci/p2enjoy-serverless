@@ -6579,3 +6579,14 @@ indépendante réellement terminées.351sources/images recoupées après, contr�
 original sain redémarré13:40:03UTC, référence inchangée,5982 artefacts et actifs0.
 Rapports originaux et collecte conservés sans réécriture. Reprise explicite
 de la même matrice avec terminal attaché ; aucun scénario ou assertion retiré.
+
+### 11novembre2026 — Reprise de matrice arrêtée sur diagnostic SIGKILL
+
+La reprise3027a95a avec terminal passe release/EOF/SIGTERM, puis son cas
+SIGKILL fe946034 échoue sur Error pendant signal-driver, avant reçu de signal.
+Le rapport ne conserve ni code, ni stderr, ni étape assez précise : la cause
+ne peut pas être reconstituée et reste non établie. Le secours restitue les
+originaux, sources/images recoupées, aucune suite lancée après l'échec.
+Décision avant code : conserver stderr privé, opérateur/code/signal et empreinte
+d'erreur dans le client d'environnement. Aucun retry ni succès déduit de la
+restitution seule ; nouveau rejeu explicite requis.
