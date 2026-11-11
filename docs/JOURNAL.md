@@ -6657,3 +6657,22 @@ consommateurs et baux. Syntaxes Python/Node contrôlées ; E2E encore requis.
 Revue RO sans défaut bloquant ; son point P2 est intégré avant E2E : le client
 recoupe explicitement les déclencheurs HTTP/schedule, les deux UUID running
 avec initial, et le tir de B au créneau W dispatched/non clos lié à son appel.
+
+### 11 novembre 2026 — Refus après attachement source qualifié
+
+Deux groupes réels passent au commit 956498a, 351 sources avant/après identiques,
+mêmes images. Campagne 72d69bdd-8fa9-4100-b4a4-f14c36ec68e4, créneau 15:00 UTC.
+Aucun HTTP ordinaire ; HTTP et cron running liés au tir de B. Refus naturel
+retention_history_incomplete après attache au contrôle 470002/502682872 :
+TracerPid 471960 puis zéro, lecteur et mémoire fermés. Opérateur explicitement
+échoué dans son reçu ; son code individuel non enregistré, helper réellement
+terminé 1 avec assertion exacte conservée en privé, client terminé 0.
+
+Deux conteneurs/réseaux/baux inventoriés puis retirés ; absence des canaux,
+artefacts et baux recoupée. Retour des originaux, garde/pilote joints, même
+contrôle/image redémarré 15:00:08 UTC, référence inchangée, deux services sains,
+actifs à zéro, 5 982 artefacts et aucune garde. Brut 103 954 octets/gzip 38 532.
+Deux seuls fichiers observateur/client diffèrent de la preuve des 25 groupes ;
+helper inchangé. Ce refus ne qualifie ni erreur de detach, ni délais 35/40,
+ni attente native 25 sans événement, ni rétention numérique/âge. Ces restes
+et la campagne complète maintiennent 078.5 ouverte. Aucun changement UI/produit.

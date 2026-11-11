@@ -1956,5 +1956,10 @@ Le parcours `node e2e/invocation-source-retention-volume.mjs --observer-refusal`
 est spécifié dans [son contrat](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#refus-réel-après-attachement-de-lobservateur).
 Il utilise le SSO privé sur stdin, deux vrais handlers sans production de
 10 000 appels, le refus naturel du même opérateur et le code 1 du helper avec
-restitution réelle. Implémenté, syntaxe contrôlée ; preuve E2E encore requise. Ne pas le
-compter comme succès de rétention ni comme test des délais 35/40 secondes.
+restitution réelle. Les [deux groupes 956498a](../docs/evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
+passent sur 351 sources identiques avant/après, sans changement d'image :
+HTTP/cron et tir recoupés, TracerPid puis zéro du même processus, lecteur et
+mémoire fermés, helper terminé 1 après refus et restitution jointe. Deux
+conteneurs/réseaux/baux réellement retirés et absence physique recoupée.
+Cette preuve ne qualifie ni la rétention, ni detach en échec, ni les délais
+35/40 secondes, ni l'attente native 25 sans événement.

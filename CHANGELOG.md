@@ -2,13 +2,17 @@
 
 ## [Non publié]
 
-### Refus de l'observateur source — en qualification
+### Refus de l'observateur source après attachement qualifié
 
 - Un mode explicite utilise deux vrais handlers et le refus naturel d'un
   historique insuffisant. L'observateur conserve son attache et ses comptes
   avant assertion, mesure le TracerPid après detach et ferme le lecteur SQLite
   dans un finally indépendant. Le helper conserve son code 1 et sa restitution.
-  Implémenté, syntaxe contrôlée ; preuve E2E encore requise.
+  La [preuve réelle](docs/evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
+  passe deux groupes sur 351 sources figées : HTTP/cron running, TracerPid réel
+  puis zéro du même processus, lecteur/mémoire fermés, code 1 du helper et
+  restitution jointe. Deux conteneurs/réseaux/baux absents ; pannes de detach,
+  délais 35/40 et âge réel restent ouverts.
 
 
 ### Confirmation des signaux et fenêtres de restitution qualifiées

@@ -1695,13 +1695,14 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
 - [ ] Capture initiale `schedule-recovery-operator.py` : pannes propres et
   régressions de ce helper distinct, non couvertes par la matrice de
   `storage-legacy-environment.py`.
-- [ ] Observateur source sous borne : erreur réelle après attachement,
-  détachement mesuré par `TracerPid` à zéro et lecteur explicitement fermé avant retour.
-  Un historique insuffisant avec deux vrais handlers peut éprouver ce chemin ;
-  il ne prouve pas la rétention numérique. Décision persistée dans
-  `INVOCATION_SOURCE_RETENTION_VOLUME.md#refus-réel-après-attachement-de-lobservateur` :
-  mode client explicite, opérateur nominal inchangé dans ses assertions,
-  diagnostic après attach et fermeture indépendante de detach. E2E encore requis.
+- [x] Observateur source sous borne : [refus réel après attachement](evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
+  qualifié par deux groupes au commit 956498a, sur 351 sources figées. Deux
+  handlers HTTP/cron running, tir et UUID recoupés ; TracerPid 471960 puis zéro
+  du même contrôle 470002/naissance, mémoire et lecteur fermés. Helper terminé
+  1 après son refus naturel, restitution nominale jointe et absence physique
+  des deux conteneurs/réseaux/baux. Aucun succès de rétention numérique ajouté.
+- [ ] Fermeture du lecteur lorsque detach lui-même échoue : finally renforcé,
+  mais ce cas n'est pas provoqué par le refus d'historique ci-dessus.
 - [ ] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
   avec processus/verrou joints et ressources physiques restituées.
 - [ ] Attente native partagée de 25 s : mesurer le comportement sans événement

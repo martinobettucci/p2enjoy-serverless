@@ -367,3 +367,28 @@ redémarrage à 14:26:18 UTC, référence inchangée, deux services sains, actif
 et aucune garde. Cette preuve qualifie les fenêtres communes ; pannes
 propres de capture et d'observateur source, âge et campagne complète restent
 ouverts dans 078.5. Les preuves antérieures conservent leurs époques distinctes.
+
+## Refus après attachement qualifié
+
+La [preuve 956498a](evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
+passe deux groupes sur 351 sources identiques avant/après. Le scénario du
+créneau réel 15:00 UTC ne produit aucun HTTP ordinaire : un vrai HTTP et un
+vrai cron sont running, leur tir/UUID/fonction recoupés. L'opérateur constate
+l'historique insuffisant après attache : TracerPid 471960 sur le contrôle
+470002/naissance 502682872, puis zéro après detach ; mémoire et lecteur fermés.
+Son reçu garde completed=false et AssertionError/retention_history_incomplete.
+Le code retour individuel de l'opérateur n'est pas enregistré ; celui du
+helper est bien 1, avec l'assertion exacte conservée en privé et son SHA.
+
+Le client de qualification termine 0 après ce refus attendu et la restitution
+nominale jointe, sans ajouter de succès de rétention ni de purge métier. Deux
+conteneurs, deux réseaux et deux baux sont corrélés puis retirés, canaux et
+artefacts absents. Contrôle final : même conteneur/image, redémarrage attendu
+15:00:08 UTC, référence inchangée, deux services sains, actifs à zéro, 5 982
+artefacts et aucune garde active. Seuls les deux fichiers de cet observateur/
+client diffèrent des 25 régressions précédentes ; helper et images inchangés.
+
+Ce refus qualifie une panne après attache et son nettoyage normal. Il ne
+qualifie pas une erreur de detach, l'alarme 35 s, la coupure 40 s, l'attente
+native 25 s sans événement ni l'âge de sept jours. Le nominal numérique garde
+sa preuve distincte au commit d860cc5 ; la campagne complète reste requise.

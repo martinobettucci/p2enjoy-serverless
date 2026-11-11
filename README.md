@@ -88,6 +88,10 @@ passe aussi quatre groupes, dont deux préflights rejoués. Les
 passent ensuite sur 351 sources : restitutions, options 900/2700 s, consommateur
 vivant, diagnostic Docker indisponible et namespace hors périmètre. Pannes
 propres de capture/observateur source, âge réel et campagne complète encore ouverts.
+Le [refus après attachement](docs/evidence/invocation-source-observer-refusal-dev-2026-11-11.json)
+passe ensuite deux groupes sur 351 sources : deux vrais handlers HTTP/cron,
+TracerPid à zéro après detach, lecteur fermé et restitution jointe. Les autres
+pannes d'observation et l'âge restent à qualifier.
 La [grammaire numérique des crons](docs/evidence/schedule-calendar-dev-2026-11-10.json)
 passe aussi cinq groupes distincts : fusion, règle jour/semaine, refus et
 prévisions calendaires ; SLS-078.2 est qualifiée.
