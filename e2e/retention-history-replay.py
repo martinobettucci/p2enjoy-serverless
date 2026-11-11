@@ -11,7 +11,6 @@ import hashlib
 import json
 import os
 from pathlib import Path
-import pwd
 import re
 import signal
 import socket
@@ -42,7 +41,7 @@ def protected_file(path, legacy_json=False):
     assert path.resolve() == path and stat.S_ISREG(info.st_mode), 'canonical_regular_file_required'
     permitted = {(0, 0o400)}
     if legacy_json:
-        permitted.add((pwd.getpwnam('spark-docker').pw_uid, 0o600))
+        permitted.add((0, 0o600))
     assert (info.st_uid, stat.S_IMODE(info.st_mode)) in permitted, 'protected_source_file_required'
 
 
