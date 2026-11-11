@@ -1895,3 +1895,25 @@ clos puis10000 après clôture. Exacts deux plus anciens HTTP retirés, source
 inchangée,5001 lignes par fonction avant borne, observation12,34s, deux purges
 publiques et restitution nominale jointe. Sept jours et campagne complète restent
 ouverts ; cette preuve ne clôture pas078.5.
+
+## Replay des témoins de rétention
+
+`python3 -B e2e/retention-history-suite.py source|terminal MODE` lance un seul
+cas et recoupe les sources/images avant et après. Son client
+`retention-history-replay.mjs` vérifie les deux
+captures canoniques selon [RETENTION_HISTORY_REPLAY](../docs/RETENTION_HISTORY_REPLAY.md).
+Un seul appel à la fois, SPARK DEV au repos. Modes : `invalid` (huit refus
+d'options avant mutation), `not-eligible` (refus réel avant sept jours),
+`preflight` (témoins encore jeunes), `age` (après échéance réelle), `seed-loss`
+et `observer-loss` (SIGKILL réel au point durable, garde indépendante120).
+Les modes preflight/age reçoivent par stdin privée les identifiants SSO, jamais
+par arguments ou environnement ; l'entrée ne doit pas être un terminal. Le
+lanceur habituel `private_credentials` masque la saisie avant transmission.
+
+Le module Python `retention-history-replay.py` vérifie les reçus/SQLite/artefacts/
+images, copie CONTROL en dernier et observe les commits réels avant santé. Le
+helper historique autorise ce seul clonage d'installation dans une fenêtre
+exclusive ; les modes sans options gardent leurs refus d'identité antérieurs.
+Échéances communes : source18novembre03:30:26.355818UTC ; terminale04:05:13.358459UTC.
+Code implémenté et syntaxe vérifiée ; aucun mode de replay encore qualifié.
+Les preuves de captures et de borne numérique restent dans leurs époques distinctes.

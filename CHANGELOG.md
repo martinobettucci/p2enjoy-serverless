@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+### Replay des témoins de rétention — en qualification
+
+- Loader des deux captures authentiques, observations natives jeune/âge, client
+  SSO/API et pertes réelles avant CONTROL ou après attache implémentés. Identité
+  clonée limitée à la fenêtre exclusive et garde120, originaux conservés.
+  Syntaxe contrôlée ; préflights, refus, pertes et régressions restent à exécuter.
+  Les sept jours ne sont pas encore éligibles.
+
 ### Source planifiée protégée sous la borne qualifiée
 
 - [Trois groupes réels](docs/evidence/invocation-source-retention-volume-dev-2026-11-11.json) d860cc5

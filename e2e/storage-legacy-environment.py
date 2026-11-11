@@ -13,6 +13,8 @@
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_CAPTURE_INTERRUPTION.md#éprouver-lattente-réelle-de-la-garde
 # @spec docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#parcours-réel
 # @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#parcours-réel
+# @spec docs/BACKLOG.md#sls-078 | docs/RETENTION_HISTORY_REPLAY.md
+# @verifies docs/BACKLOG.md#sls-078 | docs/RETENTION_HISTORY_REPLAY.md#parcours-gardé-distinct
 """DEV-only isolated installations with an independent identity-based restore."""
 from contextlib import closing
 import fcntl
@@ -78,6 +80,57 @@ def firing_replay_command(operation, identifier):
     return result
 
 
+# @spec docs/BACKLOG.md#sls-078 | docs/RETENTION_HISTORY_REPLAY.md
+def retention_replay_command(operation, identifier):
+    args = ['python3', '-B', str(BASE / 'e2e/retention-history-replay.py'), operation, identifier]
+    if operation != 'verify':
+        assert LOCK is not None
+        args += ['--lock-fd', str(LOCK)]
+    value = json.loads(command(args, (0, 1), foreground_timeout=True))
+    assert 'failure_type' not in value, 'retention_replay_error:' + str(value.get('reason') or value.get('failure_type'))
+    return value
+
+
+def retention_replay_receipts(item):
+    result = dict(item['retention_replay'])
+    for label, name in [('seed','retention-replay-seed.json'),('observation','retention-replay-observation.json')]:
+        path = Path(item['work']) / name
+        if path.exists():result[label] = json.loads(path.read_text())
+    return result
+
+
+# This code is frozen with the guard. A bool never grants clone ownership.
+def retention_clone_context(item, identifier):
+    assert item.get('mode') == 'instance-limit' and item.get('retention_replay') and not item.get('restored')
+    replay = item['retention_replay'];source = replay['source']
+    assert source['capture_id'] in ('schedule-retention-9a2a4cd1eb134c20b4e1c5a1a1bdc7c0',
+        'schedule-terminal-history-a3993b7d64f14650933cf03960c3d3b0'), 'canonical_retention_capture_required'
+    assert identifier == source['installation_id'] == item['temporary_installation'] == item['installation']
+    assert not container(item,item['original']['id'])['running'], 'original_control_must_be_stopped'
+    assert hashes() == item['configuration'], 'official_configuration_changed'
+    for name,path in item['paths'].items():
+        assert same(path,item['replacement_dirs'][name]) and not same(path,item['original_dirs'][name])
+        assert same(Path(item['work'])/('original-'+name),item['original_dirs'][name]), 'original_directory_identity_missing'
+    return source
+
+
+def retention_scope(item):
+    source = retention_clone_context(item,item['temporary_installation'])
+    control = Path(item['paths']['state'])/'control.sqlite3'
+    namespaces = rows(item,control,'SELECT id,name FROM namespaces WHERE deleted_at IS NULL ORDER BY id')
+    assert namespaces == sorted(source['namespaces'],key=lambda v:v['id']), 'foreign_namespace'
+    functions = rows(item,control,'SELECT id,name FROM functions WHERE deleted_at IS NULL ORDER BY id')
+    assert functions == sorted(source['live_functions'],key=lambda v:v['id']), 'foreign_function'
+    assert not rows(item,control,"SELECT f.id FROM functions f JOIN services s ON s.id=f.service_id JOIN namespaces n ON n.id=s.namespace_id WHERE n.name='lelabs' AND f.deleted_at IS NULL"),'lelabs_must_remain_empty'
+    return {v['id']:v['name'] for v in functions}
+
+
+def no_cloned_consumers(item):
+    installation = item['retention_replay']['source']['installation_id']
+    assert not docker(item,'ps','-aq','--filter','label=tech.p2enjoy.serverless.installation='+installation), 'original_consumer_container_retained'
+    assert not docker(item,'network','ls','-q','--filter','label=tech.p2enjoy.serverless.installation='+installation), 'original_consumer_network_retained'
+
+
 def firing_replay_receipts(item):
     if 'firing_replay' not in item:
         return {}
@@ -122,6 +175,7 @@ def hashes():
 
 
 def temporary_control_name(item):
+    if item.get('retention_replay'):return 'serverless-api-retention-replay'
     if item.get('mode') == 'instance-limit':return 'serverless-api-instance-limit'
     return 'serverless-api-code-history' if item.get('mode')=='function-version-unknown-first' else TEMP
 
@@ -291,6 +345,11 @@ def restore(item, journal, independent):
                     item['consumer_cleanup_observation_error'] = {'type':str(error)}
                 atomic(journal,item)
             docker(item, 'rm', '-f', candidates[0])
+            if item.get('retention_replay'):
+                item['retention_replay']['control_removed_at']=time.time();atomic(journal,item)
+        if item.get('retention_replay'):
+            assert not docker(item,'ps','-aq','--filter','name=^/'+temporary_control_name(item)+'$'), 'temporary_control_retained'
+            item['retention_replay']['control_absent_at']=time.time();atomic(journal,item)
         if item.get('mode') in ('function-version-unknown-first','instance-limit'):cleanup_history_consumers(item,journal)
         command(['systemctl', 'stop', AGENT])
         assert command(['systemctl', 'is-active', AGENT], (0, 3)) == 'inactive'
@@ -301,7 +360,11 @@ def restore(item, journal, independent):
             installation = rows(item, state / 'control.sqlite3', "SELECT value FROM security_metadata WHERE name='installation-id'") if tables else []
             if installation:
                 identifier = installation[0]['value']
-                assert str(UUID(identifier)) == identifier and identifier != item['installation']
+                assert str(UUID(identifier)) == identifier
+                if item.get('retention_replay'):
+                    retention_clone_context(item,identifier)
+                    assert not docker(item,'ps','-aq','--filter','label=tech.p2enjoy.serverless.installation='+identifier), 'retention_consumer_cleanup_incomplete'
+                else:assert identifier != item['installation']
                 owned = docker(item, 'ps', '-aq', '--filter', 'label=tech.p2enjoy.serverless.installation=' + identifier).split()
                 for identifier in owned:
                     definition = json.loads(docker(item, 'inspect', identifier))[0]
@@ -373,6 +436,8 @@ def restore(item, journal, independent):
               'artifacts_identical': 'baseline' in item, 'configuration_unchanged': True,
               'agent_healthy': True, 'control_healthy': True, 'reference_unchanged': True,
               'temporary_directories_removed': True}
+    if item.get('retention_replay'):
+        result.update(temporary_control_removed_at=item['retention_replay'].get('control_removed_at'),temporary_control_absent_at=item['retention_replay']['control_absent_at'],restored_at=time.time())
     item.update(restored=True, restoration=result)
     atomic(journal, item)
     emit(result)
@@ -396,8 +461,9 @@ print(json.dumps({'available':available}))
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
 def start_control(item, journal, image, *, readiness='healthy'):
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', image)
-    assert readiness in ('healthy', 'anonymous-api', 'migration-refusal', 'firing-replay')
-    if readiness == 'firing-replay':assert item.get('mode') == 'instance-limit' and item.get('firing_replay')
+    assert readiness in ('healthy', 'anonymous-api', 'migration-refusal', 'firing-replay','retention-replay')
+    if readiness == 'retention-replay':assert item.get('mode') == 'instance-limit' and item.get('retention_replay')
+    elif readiness == 'firing-replay':assert item.get('mode') == 'instance-limit' and item.get('firing_replay')
     elif readiness != 'healthy':assert item.get('mode') == 'function-version-purge'
     assert not item.get('restored')
     assert all(not same(path, item['original_dirs'][key]) for key, path in item['paths'].items())
@@ -410,7 +476,10 @@ def start_control(item, journal, image, *, readiness='healthy'):
     source = source.replace('    restart: unless-stopped\n', '    restart: "no"\n')
     # @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#installation-temporaire-réelle
     if item.get('mode') == 'instance-limit':
-        assert image == item['original']['image'], 'same_served_image_required'
+        if item.get('retention_replay'):
+            retention_clone_context(item,item['temporary_installation'])
+            assert image == item['retention_replay']['source']['images']['control']['image'], 'captured_control_image_required'
+        else:assert image == item['original']['image'], 'same_served_image_required'
         assert source.count('    network_mode: host\n') == 1 and '    environment:' not in source
         source = source.replace('    network_mode: host\n',
             '    environment:\n      SERVERLESS_FUNCTION_INSTANCE_LIMIT: "2"\n    network_mode: host\n')
@@ -418,7 +487,10 @@ def start_control(item, journal, image, *, readiness='healthy'):
     compose.write_text(source)
     os.chmod(compose, 0o640)
     os.chown(compose, 0, item['gid'])
-    if readiness == 'firing-replay':
+    if readiness == 'retention-replay':
+        result = retention_replay_command('observe',item['campaign'])
+        assert result['completed'] and result['mode'] == item['retention_replay']['mode']
+    elif readiness == 'firing-replay':
         result = firing_replay_command('observe', item['campaign'])
         assert result['completed'] and result['mode'] == item['firing_replay']['mode']
     else:
@@ -441,12 +513,14 @@ def start_control(item, journal, image, *, readiness='healthy'):
     def ready():
         value = container(item, temporary_control_name(item))
         assert value['running'], 'temporary_control_exited_before_readiness'
-        if readiness in ('healthy','firing-replay'):return value if value['status'] == 'healthy' else None
+        if readiness in ('healthy','firing-replay','retention-replay'):return value if value['status'] == 'healthy' else None
         return value if anonymous_api_readable(item) else None
     current = until(ready, 'temporary_control_unavailable')
     assert current['image'] == image
     identifier = rows(item, Path(item['paths']['state']) / 'control.sqlite3', "SELECT value FROM security_metadata WHERE name='installation-id'")[0]['value']
-    assert str(UUID(identifier)) == identifier and identifier != item['installation']
+    assert str(UUID(identifier)) == identifier
+    if item.get('retention_replay'):retention_clone_context(item,identifier)
+    else:assert identifier != item['installation']
     if item.get('temporary_installation'):assert identifier == item['temporary_installation'], 'temporary_installation_changed'
     item['temporary_installation'] = identifier
     atomic(journal, item)
@@ -622,19 +696,23 @@ def cleanup_history_consumers(item,journal):
     ids=rows(item,state/'control.sqlite3',"SELECT value FROM security_metadata WHERE name='installation-id'") if tables else []
     if not ids:
         no_references(item);item['history_cleanup']={'installation_not_created':True,'consumers_absent':True};atomic(journal,item);return
-    installation=ids[0]['value'];assert str(UUID(installation))==installation and installation!=item['installation']
+    installation=ids[0]['value'];assert str(UUID(installation))==installation
+    if item.get('retention_replay'):retention_clone_context(item,installation)
+    else:assert installation!=item['installation']
     if item.get('temporary_installation'):assert installation==item['temporary_installation']
-    if item.get('mode') == 'instance-limit':
+    if item.get('mode') == 'instance-limit' and not item.get('retention_replay'):
         namespaces=rows(item,state/'control.sqlite3','SELECT name FROM namespaces WHERE deleted_at IS NULL')
         assert all(v['name']==item['namespace_name'] for v in namespaces),'foreign_namespace'
     functions={v['id']:v['name'] for v in rows(item,state/'control.sqlite3','''SELECT f.id,f.name FROM functions f
         JOIN services s ON s.id=f.service_id JOIN namespaces n ON n.id=s.namespace_id WHERE n.name=?''',(item['namespace_name'],))}
+    if item.get('retention_replay'):functions=retention_scope(item)
     revisions={v['id']:v for v in rows(item,state/'control.sqlite3','SELECT id,function_id,image_id FROM revisions')}
     candidates={v['id']:v['function_id'] for v in rows(item,state/'control.sqlite3','SELECT id,function_id FROM deployments')}
     expected_runtime=None
     for line in Path('/etc/spark/env').read_text().splitlines():
         fields=shlex.split(line,comments=True)
         if len(fields)==1 and fields[0].startswith('SERVERLESS_RUNTIME_IMAGE='):expected_runtime=fields[0].split('=',1)[1]
+    if item.get('retention_replay'):expected_runtime=item['retention_replay']['source']['images']['runtime']['image']
     assert expected_runtime and re.fullmatch(r'sha256:[a-f0-9]{64}',expected_runtime)
     owned=docker(item,'ps','-aq','--filter','label=tech.p2enjoy.serverless.installation='+installation).split()
     records=[];consumers=set()
@@ -774,13 +852,15 @@ def instance_limit_observation(item):
     """Read the real consumed budgets, database and native Docker identities only."""
     assert item.get('mode') == 'instance-limit' and not item.get('restored')
     current=container(item,temporary_control_name(item))
-    assert current['image']==item['original']['image'] and current['running']
+    expected_image=item['retention_replay']['source']['images']['control']['image'] if item.get('retention_replay') else item['original']['image']
+    assert current['image']==expected_image and current['running']
     assert not container(item,item['original']['id'])['running']
     assert all(same(path,item['replacement_dirs'][key]) for key,path in item['paths'].items())
     assert hashes()==item['configuration'],'official_configuration_changed'
     control=Path(item['paths']['state'])/'control.sqlite3'
     namespace=rows(item,control,'SELECT id,name FROM namespaces WHERE deleted_at IS NULL')
-    assert all(v['name']==item['namespace_name'] for v in namespace),'foreign_namespace'
+    if item.get('retention_replay'):retention_scope(item)
+    else:assert all(v['name']==item['namespace_name'] for v in namespace),'foreign_namespace'
     keys=('SERVERLESS_FUNCTION_INSTANCE_LIMIT','SERVERLESS_FUNCTION_CPU_BUDGET','SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB')
     program='import os,json;print(json.dumps({k:os.environ[k] for k in '+repr(keys)+'}))'
     try:
@@ -831,7 +911,8 @@ def main():
                       'consumer_cleanup':item.get('history_cleanup'),
                       'observation_error':item.get('consumer_cleanup_observation_error'),
                       'before_observer_fault':item.get('before_observer_fault')} if item.get('mode')=='instance-limit' else {}),
-                  **({'firing_replay':firing_replay_receipts(item)} if item.get('firing_replay') else {})})
+                  **({'firing_replay':firing_replay_receipts(item)} if item.get('firing_replay') else {}),
+                  **({'retention_replay':retention_replay_receipts(item)} if item.get('retention_replay') else {})})
             return
         if mode == 'signal-driver':
             assert item.get('mode') == 'instance-limit' and len(sys.argv) == 4
@@ -867,15 +948,29 @@ def main():
     history_options=[v for v in options if v.startswith('--firing-history=')]
     observation_options=[v for v in options if v.startswith('--firing-observation=')]
     firing_options=set(history_options+observation_options)
-    assert len(options)==len(set(options)) and set(options)-firing_options<={'--source-schema007','--target-schema008','--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
+    retention_history=[v for v in options if v.startswith('--retention-history=')]
+    retention_observation=[v for v in options if v.startswith('--retention-observation=')]
+    retention_options=set(retention_history+retention_observation)
+    assert len(options)==len(set(options)) and set(options)-firing_options-retention_options<={'--source-schema007','--target-schema008','--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
     assert not options or mode in ('function-version-purge','function-version-unknown-first','instance-limit')
     guard_options=set(options)&{'--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
     assert len(guard_options)<=1,'one_guard_duration_required'
-    if mode=='instance-limit':assert set(options)<=guard_options|firing_options
+    if mode=='instance-limit':assert set(options)<=guard_options|firing_options|retention_options
     else:assert not guard_options,'guard_duration_requires_instance_limit'
     assert not firing_options or mode=='instance-limit','firing_replay_requires_instance_limit'
     assert len(history_options)<=1 and len(observation_options)<=1,'one_firing_replay_source_required'
     assert bool(history_options)==bool(observation_options),'firing_replay_option_pair_required'
+    assert not retention_options or mode=='instance-limit','retention_replay_requires_instance_limit'
+    assert not (retention_options and firing_options),'history_replays_are_exclusive'
+    assert len(retention_history)<=1 and len(retention_observation)<=1,'one_retention_replay_source_required'
+    assert bool(retention_history)==bool(retention_observation),'retention_replay_option_pair_required'
+    retention_replay=None
+    if retention_options:
+        identifier=retention_history[0].split('=',1)[1]
+        assert identifier in ('schedule-retention-9a2a4cd1eb134c20b4e1c5a1a1bdc7c0','schedule-terminal-history-a3993b7d64f14650933cf03960c3d3b0'),'canonical_retention_capture_required'
+        observation=retention_observation[0].split('=',1)[1]
+        assert observation in ('preflight','age','seed-loss','observer-loss'),'unknown_retention_observation'
+        retention_replay={'capture_id':identifier,'mode':observation}
     firing_replay=None
     if history_options:
         match=re.fullmatch('--firing-history=(schedule-firing-volume-[a-f0-9]{32})',history_options[0])
@@ -884,6 +979,7 @@ def main():
         assert observation in ('preflight','count','seed-loss','observer-loss'),'unknown_firing_observation'
         firing_replay={'capture_id':match[1],'mode':observation}
     guard_seconds=60 if mode=='partial' else 120 if '--guard-seconds=120' in options else 1800 if '--guard-seconds=1800' in options else 2700 if '--guard-seconds=2700' in options else 900
+    if retention_replay:assert guard_seconds==120,'retention_replay_guard_duration'
     if firing_replay:
         assert guard_seconds==120,'firing_replay_guard_duration'
     source_schema='007' if '--source-schema007' in options else '006'
@@ -942,6 +1038,23 @@ def main():
                 return
         replay_timing()
         firing_replay['source']=source
+    if retention_replay:
+        source=retention_replay_command('verify',retention_replay['capture_id'])
+        assert source['images']['control']['image']==old_image,'captured_control_image_required'
+        for role,image in source['images'].items():
+            assert command(['runuser','-u','spark-docker','--','docker','--host','unix://'+settings['SERVERLESS_DOCKER_SOCKET_HOST'],
+                'image','inspect','--format','{{.Id}}',image['image']])==image['image'],'captured_image_missing'
+        def retention_timing():
+            now=time.time()
+            if retention_replay['mode']=='age':assert now>=source['eligible_after'],'age_replay_not_yet_eligible'
+            if retention_replay['mode']=='preflight':assert now<source['earliest_eligible_after']-60,'young_preflight_no_longer_eligible'
+        retention_timing()
+        while not 10<=time.time()%300<=60:
+            if select.select([sys.stdin],[],[],1)[0]:
+                assert not sys.stdin.readline(),'unexpected_command_before_replay_window'
+                emit({'event':'retention-replay-cancelled-before-mutation'});return
+        retention_timing()
+        retention_replay['source']=source
     HISTORY.mkdir(mode=0o755, exist_ok=True)
     assert HISTORY.resolve() == HISTORY and HISTORY.stat().st_uid == 0
     LOCK = os.open(LOCK_PATH, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
@@ -976,12 +1089,13 @@ def main():
     assert item['original']['status'] == 'healthy' and item['reference']['running']
     item['installation'] = rows(item, Path(paths['state']) / 'control.sqlite3', "SELECT value FROM security_metadata WHERE name='installation-id'")[0]['value']
     if mode == 'instance-limit':
-        assert old_image == item['original']['image'], 'same_served_image_required'
-        assert settings['SERVERLESS_FUNCTION_INSTANCE_LIMIT'] == '32', 'official_limit32_required'
-        assert settings['SERVERLESS_FUNCTION_CPU_BUDGET'] == '1'
-        assert settings['SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB'] == '8192'
+        if not retention_replay:assert old_image == item['original']['image'], 'same_served_image_required'
+        if not retention_replay:
+            assert settings['SERVERLESS_FUNCTION_INSTANCE_LIMIT'] == '32', 'official_limit32_required'
+            assert settings['SERVERLESS_FUNCTION_CPU_BUDGET'] == '1'
+            assert settings['SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB'] == '8192'
         actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
-        assert actual == SCHEMA_008 + ['009_schedules.sql'], 'current_schema009_required'
+        if not retention_replay:assert actual == SCHEMA_008 + ['009_schedules.sql'], 'current_schema009_required'
         proposal=Path('/etc/spark/env.?')
         item['proposal_sha256']=hashlib.sha256(proposal.read_bytes()).hexdigest() if proposal.exists() else None
         if firing_replay:
@@ -990,6 +1104,12 @@ def main():
             item['namespace_name']=firing_replay['source']['namespace_name']
             item['temporary_installation']=firing_replay['source']['installation_id']
 
+    if retention_replay:
+        source=retention_replay['source'];assert source['installation_id']==item['installation'],'known_original_installation_required'
+        item.update(retention_replay=retention_replay,temporary_installation=source['installation_id'],
+            namespace_name=next((v['name'] for v in source['namespaces'] if v['name']!='lelabs'),'lelabs'),
+            unit='serverless-restore-retention-history-'+campaign,project='retention-history-replay-'+campaign)
+        no_cloned_consumers(item)
     if mode in ('function-version-purge','function-version-unknown-first'):
         actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
         assert actual==(SCHEMA_008 if target_schema=='008' else SCHEMA_007),'explicit_target_schema_mismatch'
@@ -1020,12 +1140,22 @@ def main():
             assert int(time.time()//300)*300==armed_boundary and time.time()<armed_boundary+150,'replay_arm_margin_expired'
             item['firing_replay'].update(armed_at=armed_at,armed_boundary=armed_boundary,timer_active_monotonic_us=activation)
             atomic(journal,item)
+        if retention_replay:
+            activation=int(command(['systemctl','show',item['unit']+'.timer','--property=ActiveEnterTimestampMonotonic','--value']))
+            assert activation>0,'guard_activation_missing'
+            age=time.clock_gettime(time.CLOCK_MONOTONIC)-activation/1000000
+            assert 0<=age<3,'guard_activation_not_recent'
+            armed_at=time.time()-age;boundary=int(armed_at//300)*300
+            assert 10<=armed_at-boundary<=60 and int(time.time()//300)*300==boundary,'retention_guard_activation_outside_window'
+            item['retention_replay'].update(armed_at=armed_at,armed_boundary=boundary,timer_active_monotonic_us=activation)
+            atomic(journal,item)
         docker(item, 'stop', '--time', '15', item['original']['id'])
         assert not container(item, item['original']['id'])['running']
         command(['systemctl', 'stop', AGENT])
         assert command(['systemctl', 'is-active', AGENT], (0, 3)) == 'inactive'
         quiet_control(item)
         no_references(item)
+        if retention_replay:no_cloned_consumers(item)
         backups = work / 'backups'
         backups.mkdir(mode=0o700)
         os.chown(backups, account.pw_uid, account.pw_gid)
@@ -1055,22 +1185,31 @@ def main():
             assert result['completed'] and result['control_published'],'firing_replay_seed_incomplete'
             CONTROL_READER=ControlObserver(Path(paths['state'])/'control.sqlite3')
             CONTROL_READER.open()
+        if retention_replay:
+            result=retention_replay_command('seed',campaign)
+            assert result['completed'] and result['control_published'],'retention_replay_seed_incomplete'
+            CONTROL_READER=ControlObserver(Path(paths['state'])/'control.sqlite3');CONTROL_READER.open()
         command(['systemctl', 'start', AGENT])
-        current = start_control(item, journal, old_image,readiness='firing-replay' if firing_replay else 'healthy')
+        current = start_control(item, journal, old_image,readiness='retention-replay' if retention_replay else 'firing-replay' if firing_replay else 'healthy')
         if mode == 'instance-limit' and CONTROL_READER is None:
             CONTROL_READER = ControlObserver(Path(paths['state']) / 'control.sqlite3')
             CONTROL_READER.open()
-        emit({'event': 'instance-limit-ready' if mode == 'instance-limit' else 'historical-ready',
+        emit({'event': 'retention-replay-ready' if retention_replay else 'instance-limit-ready' if mode == 'instance-limit' else 'historical-ready',
               'container': current, 'installation_id': item['temporary_installation'],
-              **({'capacity': instance_limit_observation(item)} if mode == 'instance-limit' else {}),
-              **({'firing_replay':firing_replay_receipts(item)} if firing_replay else {})})
+              **({'capacity': instance_limit_observation(item)} if mode == 'instance-limit' and not retention_replay else {}),
+              **({'firing_replay':firing_replay_receipts(item)} if firing_replay else {}),
+              **({'retention_replay':retention_replay_receipts(item)} if retention_replay else {})})
         for line in sys.stdin:
             request = json.loads(line)
             op = request['op']
             if op == 'restore':
                 break
-            if mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention'), 'instance_limit_operation_required'
-            if op == 'capacity':
+            if retention_replay:assert op == 'retention-replay-state','retention_replay_operation_required'
+            elif mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention'), 'instance_limit_operation_required'
+            if op == 'retention-replay-state':
+                assert retention_replay and set(request)=={'op'}
+                result=retention_replay_command('inspect',campaign)
+            elif op == 'capacity':
                 assert mode == 'instance-limit'
                 result = instance_limit_observation(item)
             elif op == 'observe-source-retention':

@@ -1658,7 +1658,8 @@ Le [replay d'âge](RETENTION_HISTORY_REPLAY.md) a son contrat explicite : les de
 captures canoniques sont clonées uniquement dans une fenêtre exclusive, image
 capturée, garde120, observation avant santé et contrôles stricts d'identité à
 chaque démarrage/restitution. Preflights jeunes, refus et pertes du nouveau
-loader restent à implémenter/qualifier ; aucune preuve d'âge avant le18novembre.
+loader sont implémentés, contrôlés syntaxiquement et restent à qualifier sur le
+SPARK DEV. Aucune preuve d'âge avant le18novembre.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.
