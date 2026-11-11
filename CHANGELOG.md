@@ -8,7 +8,10 @@
   SSO/API et pertes réelles avant CONTROL ou après attache implémentés. Identité
   clonée limitée à la fenêtre exclusive et garde120, originaux conservés.
   Syntaxe contrôlée ; préflights, refus, pertes et régressions restent à exécuter.
-  Les sept jours ne sont pas encore éligibles.
+  Les sept jours ne sont pas encore éligibles. Deux refus d’âge passent ;
+  le premier préflight source est arrêté sur délai natif avec originaux
+  restitués. Lectures limitées aux descripteurs SQLite réels et compteurs/
+  diagnostic terminal ajoutés ; nouveau préflight requis.
 
 ### Source planifiée protégée sous la borne qualifiée
 

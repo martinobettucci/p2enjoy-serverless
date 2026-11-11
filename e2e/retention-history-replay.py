@@ -350,8 +350,24 @@ def observe(campaign,fd):
                        cgroup_sha256=hashlib.sha256(cgroup.encode()).hexdigest(),observer_attached=True,native_stop=observer.stopped)
         atomic(target,receipt)
         if mode == 'observer-loss':kill_pair(item,target,receipt)
-        deadline = time.monotonic()+25
-        pending = None;protected = None
+        started = time.monotonic()
+        deadline = started+25
+        pending = None;protected = None;database_boundary = False
+        receipt.update(syscall_stops=0,database_boundaries=0)
+        control = Path(item['paths']['state'])/'control.sqlite3'
+        database_paths = [Path(str(control)+suffix) for suffix in ('','-wal','-shm')]
+        def database_descriptor(descriptor):
+            # Compare actual inodes; a container's /state path differs from its host mount.
+            path = Path('/proc',str(pid),'fd',str(descriptor))
+            try:
+                if Path(os.readlink(path)).name not in {p.name for p in database_paths}:return False
+                actual = path.stat()
+                for candidate in database_paths:
+                    try:expected = candidate.stat()
+                    except FileNotFoundError:continue
+                    if (actual.st_dev,actual.st_ino)==(expected.st_dev,expected.st_ino):return True
+                return False
+            except (FileNotFoundError,ProcessLookupError):return False
         def accepted(value):
             nonlocal protected
             if source['kind'] == 'terminal':
@@ -378,6 +394,7 @@ def observe(campaign,fd):
             return not value['invocations'] and fire['state']=='succeeded' and fire['completed_at'] is not None
         # Recovery may not have removed the ready line at the first native stop.
         first = read_state(reader,source);receipt['initial_stop']=first
+        atomic(target,receipt)
         if not first['instances'] and accepted(first):
             final=first
         else:
@@ -388,8 +405,12 @@ def observe(campaign,fd):
                     assert stopped not in (signal.SIGSTOP,signal.SIGTRAP)
                     observer.resume(stopped);continue
                 phase,data=observer.info()
-                if phase==1:pending=data[0]
-                if pending in (3,72,75) and phase in (1,2):
+                receipt['syscall_stops']+=1
+                if phase==1:
+                    pending=data[0]
+                    database_boundary=pending in (3,72,75) and database_descriptor(data[1])
+                if database_boundary and phase in (1,2):
+                    receipt['database_boundaries']+=1
                     value=read_state(reader,source)
                     if not value['instances'] and accepted(value):
                         final=value;break
@@ -403,6 +424,12 @@ def observe(campaign,fd):
                        observation_seconds=25-(deadline-time.monotonic()))
         atomic(target,receipt)
         return receipt
+    except BaseException as error:
+        receipt.update(failure_type=type(error).__name__,
+                       reason=str(error) if isinstance(error,AssertionError) else None,
+                       failed_at=time.time(),native_stop=bool(observer and observer.stopped))
+        atomic(target,receipt)
+        raise
     finally:
         if observer:observer.detach()
         reader.close()
