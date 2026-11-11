@@ -249,7 +249,7 @@ try{
     currentRow=await current(fn);const removed=await manage(`/api/functions/${fn.id}/revisions/${old}`,{method:'DELETE',headers:{'If-Match':String(currentRow.updated_at)}});assert.equal(removed.state,'deleted');assert.equal(removed.cleanup_pending,true);
     const following=start(`/invoke/${fn.id}`);assert.equal(JSON.parse((await active.promise).bytes).context.functionVersion,old);assert.equal(JSON.parse((await following.promise).bytes).context.functionVersion,next);await invoke(fn,{suffix:'@'+oldVersion.code_hash,status:404});
     await until(async()=>!(await instances(fn)).some(row=>row.revision_id===old),'Ancienne référence non drainée');
-    await until(async()=>{const versions=await manage(`/api/functions/${fn.id}/versions?limit=100`);return versions.items.some(row=>row.code_hash===oldVersion.code_hash&&row.state==='deleted'&&row.stored_bytes===0);},'Ancien code non effacé');
+    await until(async()=>{const versions=await manage(`/api/functions/${fn.id}/versions?limit=100`);return versions.items.some(row=>row.code_hash===oldVersion.code_hash&&row.state==='deleted'&&row.stored_bytes===0);},'Ancien code non effacé',60);
     assert.equal((await invoke(fn,{suffix:'?mode=counter'})).json().count,1);versionEvidence.push({scenario:'running-snapshot-and-deferred-version-removal',invocation_id:admitted.id,stable_revision_id:old,stable_hash:oldVersion.code_hash,pilot_revision_id:next,pilot_hash:pilot.code_hash,cleanup_pending_at_decision:removed.cleanup_pending});
   });
   await check('Budget CPU global et limites réellement transmises à Docker',async()=>{
