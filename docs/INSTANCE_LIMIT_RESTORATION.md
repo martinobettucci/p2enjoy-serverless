@@ -172,3 +172,20 @@ complète sur sources figées. Les cinq modes de restitution sans consommateur
 sont rejoués sur le helper final ; le cas planifié repasse dans l’orchestration.
 Les régressions des modes historiques touchés restent nommées jusqu’à leur
 exécution. Aucune clôture sur le seul déplacement du test.
+
+
+### Échec du relevé diagnostique
+
+La revue de b35ffcd constate qu’un échec docker-exec/SQLite du témoin ferait
+quitter la garde avant restitution. Corriger ce point dans099 : l’erreur de
+capture est persistée par son type, sans donnée sensible, puis la restitution
+continue sous ses contrôles d’identité/labels inchangés. Le nominal exige
+une capture complète ; un témoin manquant ne devient jamais une preuve réussie.
+
+Un mode `--observer-unavailable` suspend réellement le contrôle temporaire par
+Docker pause après un relevé positif et avant SIGKILL du pilote. L’exec doit
+alors être réellement refusé, tandis que la garde retire le conteneur suspendu,
+son consommateur/réseau/bail et restitue les originaux. Ce mode qualifie la
+restauration sous diagnostic indisponible ; il ne prétend pas une capture
+positive pendant la faute. La suspension est limitée à l’ID du contrôle isolé,
+jamais à celui du contrôle habituel. Réussites nominale et fautée sont distinctes.

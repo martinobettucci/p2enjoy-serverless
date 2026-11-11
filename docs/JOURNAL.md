@@ -5847,3 +5847,11 @@ une orchestration HTTP30 + plafond isolé4, conservant31 groupes parents et
 leurs détails. Le nettoyage précède le changement d’installation ; les quinze
 fonctions HTTP et les trois temporaires restent séparées. Contrat persisté
 avant code ; aucun résultat nouveau encore.
+
+
+Revue b35ffcd : P2 confirmé, le nouveau relevé diagnostique pouvait bloquer la
+garde sur échec d’exec/lecture. Correction décidée avant code : capture d’erreur
+explicite, restitution toujours contrôlée par identités, témoin obligatoire au
+nominal. Preuve ajoutée par Docker pause réel du seul contrôle temporaire ;
+l’exec indisponible ne doit empêcher ni retrait ni restitution. Aucun résultat
+E2E nouveau acquis par la revue.
