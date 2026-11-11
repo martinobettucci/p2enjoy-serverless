@@ -122,8 +122,8 @@ octet ni mode des artefacts copiés. Un reçu privé recoupe les empreintes de
 capture, registre et inventaire avant/après. Cette conservation ne démarre
 aucun conteneur et n’administre pas FORGE.
 
-Restent : interruptions pendant backup/copie de la capture initiale,
-vieillissement des tirs terminaux/générations retirées,
+Les interruptions pendant backup/copie de la capture initiale sont qualifiées
+ci-dessous. Restent le vieillissement des tirs terminaux/générations retirées,
 protection après passage réel de rétention à sept jours et campagne complète.
 La source protégée sous borne10000 a sa preuve distincte ci-dessous.
 Concurrence078.4 et adaptateur078.7 ont leurs preuves distinctes du11 novembre.
@@ -409,3 +409,33 @@ Quatre groupes par cas : préparation réelle ; progrès interrompu et garde ;
 reprise sans rejeu et dossier partiel ; purge. Rejouer le nominal après ces
 options. Les preuves de chaque époque restent distinctes ; régression complète
 et âge réel restent requis avant clôture. Aucun succès acquis par ce contrat.
+
+### Interruptions et nominal qualifiés sur bca96ab
+
+La [preuve réelle](evidence/schedule-retention-copy-losses-dev-2026-11-11.json)
+passe douze groupes sur 351 sources identiques avant/après et mêmes images :
+quatre par faute, puis quatre du nominal. Seuls le helper et son client ont
+changé depuis la preuve historique 7ed2abe ; celle-ci n'est pas présentée
+comme rejouée à cette nouvelle époque.
+
+Au cron 16:40, le callback SQLite conserve SQLITE_OK, total4 837/restant4 821,
+donc16 pages transférées sous UID1001 ; helper501398 arrêté, TracerPid501398.
+Le dossier partiel d94e50db78ac4bbf9df2a331a2d95991 conserve ses fichiers de
+0 et512 octets, mêmes SHA après perte, sans récupération SQLite. Au cron16:45,
+copy2 a copié un fichier conforme sur5 990 ; contrôle déjà détaché/TracerPid0,
+helper504389 arrêté sous root. Dossier cae03eb06adf4dbc81caf9418de29ad5 :
+backup de19 824 640 octets vérifié et artefact de4 484 octets conformes.
+
+Les deux gardes indépendantes80 tuent et joignent les helpers ; SSH255,
+contrôle même PID496826/naissance503222380, TracerPid0, mêmes CID/image/démarrage
+16:25:03, mêmes UUID/dates et tirs clos sans rejeu. Les seuls dossiers partiels
+nouveaux sont protégés root0700/fichiers0400, sans manifeste final ; les deux
+sources canoniques restent identiques. Six refus d'options, trois client et
+trois helper réel DEV, sont séparés et n'ajoutent aucun groupe E2E.
+
+Le nominal16:50 conserve la nouvelle capture b5c03cb518da4a35839c150ea2f9a75a
+de non-régression (5 990 artefacts), sans remplacer les sources d'âge et sans
+exporter ses images. Six handlers réussis et trois purges physiques sur les
+trois cas ; état final deux services sains, actifs à zéro, 5 982 artefacts et
+aucune garde. Brut491 114 octets/gzip161 179. Aucun produit/UI changé ;
+autres pannes de l'observateur, sept jours et campagne complète encore requis.

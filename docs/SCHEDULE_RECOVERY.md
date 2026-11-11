@@ -177,5 +177,8 @@ l'arrêt de l'unité. Le timeout du client de lancement reste un échec distinct
 sans relance du worker ; le nominal du futur lancement --no-block n'est pas
 qualifié par cette campagne. Les captures canoniques sont inchangées,
 les deux services sont sains, actifs à zéro, 5 982 artefacts et aucune garde.
-Les interruptions de backup/copie, l'âge réel et la campagne complète restent
-ouverts ; aucune modification produit ou UI dans cette étape.
+Les interruptions de backup/copie sont qualifiées ensuite dans
+[leur preuve distincte](evidence/schedule-retention-copy-losses-dev-2026-11-11.json).
+Les cinq groupes ci-dessus conservent leur époque7ed2abe, avant les changements
+du helper/client bca96ab. L'âge réel et la campagne complète restent ouverts ;
+aucune modification produit ou UI dans cette étape.

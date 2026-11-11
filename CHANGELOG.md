@@ -2,10 +2,16 @@
 
 ## [Non publié]
 
+### Interruptions de sauvegarde et de copie qualifiées
+
 - Banc de capture : points de faute explicites après progrès SQLite non final
   ou premier artefact réellement copié. Reçu synchronisé, SIGSTOP et vraie
   garde indépendante80, inspection/protection du dossier partiel et conservation
-  des captures canoniques. Implémenté ; E2E encore requis.
+  des captures canoniques. Les [douze groupes réels](docs/evidence/schedule-retention-copy-losses-dev-2026-11-11.json)
+  passent sur 351 sources bca96ab/images inchangées : 16/4 837 pages puis
+  1/5 990 fichiers, huit groupes de panne et quatre du nominal. Six handlers
+  réussis, trois purges physiques, même contrôle sans redémarrage ; six refus
+  CLI restent distincts, sans groupe ajouté. Âge et campagne complète ouverts.
 
 ### Reprise après coupure requalifiée sur les sources courantes
 
@@ -15,8 +21,8 @@
   physique. Quatre handlers réussis incluent le témoin initial ; un appel
   lié est interrompu avant démarrage. Résultat systemd terminal conservé
   avant arrêt ; timeout 20 s du lanceur conservé séparément, sans relance.
-  Captures canoniques inchangées. Backup/copie, âge réel et campagne complète
-  restent ouverts ; aucun changement produit/UI.
+  Captures canoniques inchangées. Backup/copie ont leur preuve distincte ci-dessus ;
+  âge réel et campagne complète restent ouverts ; aucun changement produit/UI.
 
 ### EOF et perte du pilote avant capture qualifiés
 
@@ -28,7 +34,8 @@
   et les [quatre du nominal](docs/evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
   passent sur 351 sources/images identiques ; trois refus CLI précoces sont
   vérifiés séparément. Captures canoniques conservées et trois purges physiques.
-  Backup/copie interrompus, régressions historiques et âge restent ouverts.
+  Backup/copie et régressions historiques ont leurs preuves distinctes ci-dessus ;
+  l'âge reste ouvert.
 
 
 ### Refus de l'observateur source après attachement qualifié

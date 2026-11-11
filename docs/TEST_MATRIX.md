@@ -411,3 +411,17 @@ liée interrompue avant démarrage. Worker terminé systemd Code1/Status0/succes
 malgré timeout distinct 20 s de son lanceur ; aucun redémarrage du worker.
 Captures canoniques inchangées, deux services sains, actifs à zéro et 5 982
 artefacts. Pas de résultat backup/copie, sept jours ou campagne complète ajouté.
+
+## Sauvegarde et copie initiales interrompues
+
+Les [douze groupes bca96ab](evidence/schedule-retention-copy-losses-dev-2026-11-11.json)
+passent sur 351 sources/images identiques : backup16/4 837 pages puis
+copy2 1/5 990 fichiers, helpers réellement en T, garde80 indépendante tuant
+et joignant chacun, TracerPid final0 du même contrôle sans redémarrage.
+Huit groupes de panne et quatre du nominal16:50, six handlers réussis,
+trois purges physiques. Partiels0+512 octets et19 824 640+4 484 octets
+conservés/protégés sans manifeste final ; captures canoniques inchangées.
+Six refus d'options client/helper réel sont séparés, sans groupe E2E ajouté.
+Seuls deux fichiers helper/client changent depuis l'époque historique7ed2abe ;
+les cinq groupes de reprise ne sont pas déclarés rejoués ici. Autres pannes
+d'observation, sept jours et campagne complète restent ouverts.

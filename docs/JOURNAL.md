@@ -6761,3 +6761,22 @@ avant/après garde indépendante80 et protection du seul dossier partiel nouveau
 Revue RO du candidat intégrée : refuser --capture-loss hors terminal-capture
 avant toute mutation. Python/Node et trois scripts Python embarqués contrôlés
 statiquement ; E2E des deux fautes, refus et nominal encore à exécuter.
+
+### 11 novembre 2026 — Douze groupes de copie qualifiés
+
+Commit bca96ab, 351 sources/images identiques avant/après : perte backup au
+cron16:40 (16/4 837 pages, UID1001) puis copy2 au cron16:45 (1/5 990 fichiers,
+root/contrôle déjà détaché). Deux helpers enT puis tués/joints par gardes80,
+SSH255, TracerPid0, contrôle même PID496826/naissance503222380/démarrage16:25:03.
+Partiels d94e… (0+512octets) et cae0… (19 824 640+4 484octets) conservés et
+protégés root0400, pas de manifeste final. Même tir clos, deux UUID/dates
+inchangés et captures canoniques conservées. Quatre groupes par faute.
+
+Le nominal16:50 passe quatre groupes ; capture de non-régression b5c03cb5…,
+5 990 artefacts, sans export d'images ni remplacement d'une source d'âge.
+Six refus CLI réels (trois client/trois helper DEV) séparés, zéro groupe ajouté.
+Au total douze groupes, six handlers réussis, trois purges publiques/physiques.
+État final deux services sains, actifs à zéro, 5 982 artefacts, aucune garde ;
+brut491 114/gzip161 179. Deux seuls fichiers diffèrent de la preuve historique
+7ed2abe, qui garde son époque. Autres pannes d'observateur, reprise historique
+sur helper modifié, sept jours et campagne complète restent requis dans078.5.

@@ -2017,5 +2017,14 @@ soit le fichier réellement copié/conforme. Le client inspecte le helper arrêt
 la trace du contrôle, puis la vraie garde tuant/joignant ce helper. Le nouveau
 dossier partiel est protégé et conservé sans manifeste final ; les deux sources
 canoniques restent identiques. Aucun accès de récupération au SQLite partiel.
-Sans option, rejouer ensuite le nominal ; ce code ne vaut pas encore preuve E2E.
+Sans option, rejouer ensuite le nominal.
 Contrat : [interruptions de copie](../docs/SCHEDULE_RETENTION.md#interruptions-pendant-sauvegarde-et-copie).
+
+Les [douze groupes bca96ab](../docs/evidence/schedule-retention-copy-losses-dev-2026-11-11.json)
+passent sur351sources/images identiques : deux pertes réelles (16/4 837 pages,
+1/5 990 fichiers) puis nominal16:50. Huit groupes de panne et quatre nominaux ;
+six handlers réussis, trois purges physiques, même contrôle sans redémarrage.
+Gardes80 indépendantes jointes, TracerPid0, partiels protégés et captures
+canoniques conservées. Six refus CLI séparés ne comptent aucun groupe E2E.
+Brut491 114/gzip161 179 ; les cinq historiques de l'époque7ed2abe ne sont pas
+recomptés à cette époque. Autres pannes d'observation, âge et campagne finale ouverts.

@@ -28,12 +28,18 @@ Les [deux pertes avant capture](docs/evidence/schedule-retention-gate-losses-dev
 passent huit groupes, et le [nominal rejoué](docs/evidence/schedule-retention-capture-regression-dev-2026-11-11.json)
 quatre, sur les mêmes 351 sources et images. Même contrôle sans redémarrage,
 captures canoniques conservées et trois fixtures purgées ; interruptions pendant
-copie/backup restent ouvertes. Les
+copie/backup qualifiées séparément ci-dessous. Les
 [cinq régressions historiques](docs/evidence/schedule-recovery-regression-dev-2026-11-11.json)
 passent ensuite sur les mêmes 351 sources/images : trois coupures Docker 137,
 trois tirs suivants sans rejeu, quatre gardes jointes et une purge physique.
 Worker systemd terminé 0 malgré le timeout distinct de son client de lancement ;
-captures canoniques conservées. Backup/copie, âge et campagne complète restent ouverts.
+captures canoniques conservées. Les
+[interruptions de sauvegarde et copie](docs/evidence/schedule-retention-copy-losses-dev-2026-11-11.json)
+passent ensuite douze groupes au commit bca96ab : progrès SQLite 16/4 837 pages,
+copie interrompue après 1/5 990 fichiers, deux gardes indépendantes puis nominal
+rejoué. Six handlers réussis, trois purges, dossiers partiels conservés et
+captures canoniques inchangées. Six refus d'options sont contrôlés séparément.
+Les autres pannes de l'observateur, l'âge et la campagne complète restent ouverts.
 La [préparation de la borne des tirs](docs/SCHEDULE_FIRING_VOLUME.md) est
 qualifiée par [quatre groupes réels](docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json)
 sur340sources :256 tirs à06:15UTC, deux handlers/254 refus, sauvegarde native

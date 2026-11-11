@@ -1710,12 +1710,18 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   quatre gardes jointes et une purge physique. Worker systemd terminé 0,
   son lanceur expiré à 20 s conservé séparément, aucun rejeu. Les quatre
   handlers réussis incluent un témoin initial ; un appel lié est interrompu
-  avant démarrage. Restent backup/copie interrompus.
+  avant démarrage. Les interruptions backup/copie sont qualifiées ci-dessous.
   [Interruptions de copie](SCHEDULE_RETENTION.md#interruptions-pendant-sauvegarde-et-copie)
   spécifiées : callback SQLite réel ou copy2 réel, SIGSTOP puis garde 80 s,
-  reçu par FD préouvert sous root et dossier partiel conservé. Helper/client
-  implémentés après le worker historique terminé, syntaxes contrôlées et
-  revue RO du candidat intégrée ; E2E des deux fautes et nominal à exécuter.
+  reçu par FD préouvert sous root et dossier partiel conservé. Les
+  [douze groupes bca96ab](evidence/schedule-retention-copy-losses-dev-2026-11-11.json)
+  passent sur 351 sources/images identiques : backup16/4 837 pages,
+  copy2 1/5 990 fichiers, deux helpers arrêtés puis tués/joints par gardes80,
+  TracerPid0 et même contrôle sans redémarrage. Huit groupes de panne puis
+  quatre du nominal, six handlers réussis et trois purges physiques. Six refus
+  CLI séparés, dossiers partiels protégés et captures canoniques inchangées.
+  Les cinq historiques restent à leur époque7ed2abe ; leur rejeu sur le helper
+  modifié et la campagne finale restent requis.
   Rejeu historique préparé avec le même client, dans un oneshot utilisateur
   local indépendant du terminal ; [contrat de suivi](SCHEDULE_RECOVERY.md#exécution-indépendante-du-terminal).
   Même worker vivant après timeout du client de lancement (20 s), puis
