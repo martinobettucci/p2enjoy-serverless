@@ -77,7 +77,7 @@ est inconnue, conserver les ressources et diagnostiquer sans purge ni relance.
 Cette campagne ne provoque ni SIGKILL du helper ni arrêt du contrôle ; leurs
 preuves antérieures restent distinctes. Aucun budget, fichier officiel,
 migration, UI/manuel ou image produit modifié. Plafond global (SLS-099),
-rétention réelle, états UI et régression complète gardent SLS-078 ouverte.
+rétention réelle et régression complète gardent SLS-078 ouverte.
 
 ## Résultats qualifiés
 
@@ -103,4 +103,9 @@ produit, UI/manuel ou capture nouveau. La revue préalable a corrigé jonction
 SSH, erreurs de flux et chaîne des versions ; leurs pannes propres ne sont pas
 prétendues provoquées par cette campagne nominale. Maximum sous HTTP non exclusif
 et réutilisation sont qualifiés ensuite dans [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md).
-Plafond global (SLS-099), rétention, UI, adaptateur.7 et régression restent ouverts.
+Plafond global (SLS-099), rétention, adaptateur.7 et régression restent ouverts.
+
+Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) qualifie
+les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image
+c59b8616. Les preuves de ce document conservent leur image historique ; elles
+ne sont pas présentées comme rejouées par ce complément.

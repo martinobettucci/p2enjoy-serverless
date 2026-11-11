@@ -815,3 +815,15 @@ quatre tirs et quatre handlers réussis (un HTTP/trois planifiés), deux instanc
 réutilisés et deux purges physiques. Générations/configurations conservées ;
 mêmes services/fichiers,34 backends et5982 artefacts. Preuve :
 `docs/evidence/schedule-instance-reuse-dev-2026-11-10.json`. SLS-078 reste ouverte.
+
+
+Console des planifications qualifiée surc59b8616 après backup SQLite natif :
+19 groupes/326 sources (trois console, huit manuel, huit publics), six handlers
+22:10UTC, deux pages5+1, vide/nom63/clavier/mobile et vrai401→Réessayer200.
+La pagination périmée est corrigée ; les deux fonctions et six instances connues
+sont purgées/retirées, actifs nuls.31 images recoupées :17 inspections et14 SHA
+identiques aux références inspectées. Guide conforme16 chapitres/56 paragraphes.
+Référence, neuf migrations,34 backends et5982 artefacts conservés ; fichiers
+officiels inchangés. Preuve docs/evidence/schedule-console-dev-2026-11-10.json.
+SLS-078.6 qualifiée ; plafond global099, rétention, adaptateur.7 et régression
+complète restent ouverts. Les preuves antérieures conservent leur image/époque.

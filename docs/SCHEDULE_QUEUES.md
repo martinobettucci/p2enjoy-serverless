@@ -60,7 +60,7 @@ ses requêtes, puis nettoie avant toute relance explicite.
 Ce complément ne clôture pas SLS-078. Le refus sous commande de stockage et le
 maximum/réutilisation sont qualifiés séparément dans [SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md)
 et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md). Plafond global (SLS-099),
-rétention réelle, états UI, adaptateur.7 et régression restent ouverts.
+rétention réelle, adaptateur.7 et régression restent ouverts.
 
 ## Résultats qualifiés
 
@@ -84,3 +84,8 @@ La revue avant lancement a fait corriger la route de révocation, l'attente de
 confirmation d'archive et le nettoyage d'un namespace sans service. Aucun échec
 de ces branches n'est prétendu provoqué ; les fautes propres du banc et la
 régression complète restent distinctes de cette campagne nominale réussie.
+
+Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) qualifie
+les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image
+c59b8616. Les preuves de ce document conservent leur image historique ; elles
+ne sont pas présentées comme rejouées par ce complément.

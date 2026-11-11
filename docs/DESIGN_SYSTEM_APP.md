@@ -358,7 +358,7 @@ Facts, badges, états Resource et pagination existants ; aucun token ni écart
 nouveau. Les états de tir portent un libellé français, les créneaux et frontières
 portent UTC, les empreintes complètes restent sélectionnables et reviennent à la
 ligne. Les listes d'historique ont cinq éléments et restaurent le focus au titre
-après changement de page. Le rendu et les parcours restent à qualifier.
+après changement de page. Les preuves sont détaillées ci-dessous.
 Chargement et erreur retirent aussi le total et le rang affichés ; Réessayer
 conserve la page demandée en interne et la présente après une lecture réussie.
 
@@ -368,5 +368,22 @@ mobile390px : noms et hash lisibles avec retour à la ligne, états nommés et p
 de débordement mesuré. Les deux captures desktop de la facette ont le même cadrage ;
 la lecture de l'historique mobile nécessite son défilement. Les fenêtres réelles
 et le presse-papiers ne sont pas déduits des images. États vides, erreurs, longs
-noms et seconde page de tirs restent à qualifier. Le guide sert16 chapitres et
+noms et seconde page sont qualifiés dans le complément ci-dessous. Le guide sert16 chapitres et
 56 paragraphes ; tablette et corps de texte200% sont aussi inspectés.
+
+
+## Deux pages et reprise des planifications qualifiées
+
+Le [complément](evidence/schedule-console-dev-2026-11-10.json) recoupe31 images :
+17 inspections personnelles (12 console, trois manuel ciblé, deux autres vues
+du guide) et14 identités SHA avec le checkpoint inspecté. Deux pages réelles5+1,
+nom63, expressions et hashes complets, focus au titre et commandes aux extrémités.
+Le vrai401 retire aussi la pagination ; Réessayer retrouve la page demandée.
+Desktop et390px restent sans débordement mesuré ni superposition bloquante.
+Les pleines pages prolongent leur viewport : mobiles7135/4568px ; leurs éléments
+fixes sont à la position de capture, pas simultanément visibles dans l'usage.
+Les vues de navigation dans leur viewport recoupent la disposition réelle.
+L'image après reprise montre les premières déclarations ; le rang2 et son unique
+tir sont recoupés par assertions. Le paragraphe du manuel se poursuit verticalement
+sur mobile. Aucun défaut visuel bloquant confirmé. Nouvelle imagec59b8616 ; guide
+conforme16 chapitres/56 paragraphes. Les preuves antérieures gardent leur époque.

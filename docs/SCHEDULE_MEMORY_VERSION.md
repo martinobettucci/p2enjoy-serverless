@@ -45,7 +45,7 @@ services et fichiers officiels identiques. Un échec conserve son rapport,
 termine ses appels et nettoie avant toute relance explicite.
 
 Le plafond global d'instances suit séparément la correction de la garde
-[SLS-099](BACKLOG.md#sls-099). Rétention, états UI et régression complète restent
+[SLS-099](BACKLOG.md#sls-099). Rétention et régression complète restent
 ouverts ; cette campagne ne clôture pas SLS-078.
 
 ## Résultats qualifiés
@@ -70,7 +70,12 @@ réussis (deux planifiés/deux HTTP), une réception rejetée sans handler, troi
 purges physiques et compteurs nuls. Les34 backends,5982 artefacts antérieurs,
 contrôle/référence (ID/image/démarrage) et fichiers officiels sont identiques.
 Aucun build produit, budget officiel, UI/manuel ou capture modifié. Le plafond
-global d'instances, rétention, états UI, adaptateur.7 et régression complète
+global d'instances, rétention, adaptateur.7 et régression complète
 restent ouverts ; SLS-099 porte la correction préalable de sa garde. Les autres
 refus et la réutilisation sont qualifiés dans [SCHEDULE_QUEUES](SCHEDULE_QUEUES.md),
 [SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md) et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md).
+
+Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) qualifie
+les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image
+c59b8616. Les preuves de ce document conservent leur image historique ; elles
+ne sont pas présentées comme rejouées par ce complément.

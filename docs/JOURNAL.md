@@ -5763,3 +5763,26 @@ laisse Page2sur2 sous Historique indisponible. Capture mobile inspectée par le
 principal, bfa162c5f2cb ; deux fonctions purgées et compteurs actifs nuls.
 Le plan SCHEDULE_CONSOLE autorise déjà le retrait de ce total ; le correctif
 garde seulement le rang interne pour reprendre la même page après Réessayer.
+
+
+## 10 novembre2026 — Console des planifications qualifiée
+
+Correctif24d81c7 relu, Vite local et buildDEV réussis. Déploiementc59b8616 après
+backup SQLite natif : neuf migrations, référence, fichiers officiels et5982
+artefacts conservés. Nouveau CID du contrôle attendu68a8a0b2554a ; le backend
+reste identique par ses34 sources. Huit groupes manuel et huit publics passent.
+Le replay0d77fcb7/client2f8f989 passe trois groupes et six handlers22:10UTC :
+formulaires depuis accueil, vide, nom63, dates/hash, pages5+1, lien d'invocation,
+clavier/focus/mobile ; vrai401 sans cartes ni pagination puis reprise200 de la
+même seconde page. Les lectures ne créent ni tir ni invocation. Deux purges
+physiques et six instances connues retirées, actifs nuls.
+
+La preuve schedule-console-dev-2026-11-10.json réunit19 groupes sur326 sources.
+31 images actives :17 inspections personnelles,14 identités SHA avec références
+inspectées. Les trois vues ciblées du guide montrent le texte modifié ; source
+servie conforme16 chapitres/56 paragraphes. Pleines pages, position des éléments
+fixes et cadrage après reprise sont qualifiés précisément dans la preuve.
+Les trois essais antérieurs et leurs nettoyages restent séparés, sans ajouter
+leurs12 handlers ou quatre purges aux six handlers/deux purges courants.
+SLS-078.6 est qualifiée ; restent plafond global099, rétention réelle,
+adaptateur.7 et régression complète. Aucune autre unité clôturée.

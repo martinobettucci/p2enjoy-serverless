@@ -2,7 +2,7 @@
 
 Complément de [SLS-078](BACKLOG.md#sls-078) et de la
 [facette Planifications](SCHEDULES.md#facette-planifications). Décisions du
-10 novembre2026, avant code ; ce document ne clôture aucun critère.
+10 novembre2026, avant code ; résultats du replay en fin de page. L’unité reste ouverte.
 
 ## Parcours réel
 
@@ -72,3 +72,23 @@ Le rang interne reste conservé afin que Réessayer relise la même page, après
 restitution des cookies. Il n'ajoute ni donnée métier ni token visuel. Le manuel
 décrit ce retrait et la reprise ; nouvelle image et replay réel requis avant
 toute qualification du correctif.
+
+
+## Résultats qualifiés
+
+La [preuve](evidence/schedule-console-dev-2026-11-10.json) conserve19 groupes
+sur326 sources figées : trois de console, huit manuel et huit publics rejoués.
+Client2f8f989, correctif24d81c7, imagec59b8616 : six succès22:10UTC, deux pages5+1,
+clavier/focus, vide/nom63/mobile, puis vrai401 sans ancienne pagination et reprise
+200 de la même seconde page. Tirs et invocations identiques après lectures.
+Deux purges physiques, six instances connues retirées, actifs nuls ; mêmes
+services/configuration,34 backends et5982 artefacts pendant replay. Le déploiement
+a sa sauvegarde native, conserve les neuf migrations et la référence.
+
+31 images recoupées :17 inspectées personnellement,14 identités SHA avec des
+références inspectées. Le manuel servi concorde avec16 chapitres/56 paragraphes ;
+son nouveau texte est lu sur desktop/mobile. Les pleines pages et la vue après
+reprise ont leurs limites de cadrage dans la preuve. Aucun défaut visuel bloquant.
+Les trois essais antérieurs sont séparés, dont12 handlers et quatre purges
+physiques dans les deux essais ayant atteint une frontière ; ils ne s'ajoutent
+pas aux six courants. SLS-078.6 est qualifiée, les autres restes restent ouverts.

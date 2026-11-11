@@ -239,8 +239,9 @@ compilé concorde avec16 chapitres et56 paragraphes : SLS-096 est clos.
 Le cycle promotions/retour de hash/retrait et suppression autour des fenêtres,
 puis les coupures et reprises sont qualifiés séparément ci-dessous. Reprendre
 dans cette unité : plafond global d'instances ;
-rétention réelle, dont l'invocation source conservée jusqu'à clôture ; états
-UI vide/erreur/longs et pagination. La régression complète reste à exécuter.
+rétention réelle, dont l'invocation source conservée jusqu'à clôture.
+Le complément de console ci-dessous qualifie vide/erreur/longs et pagination.
+La régression complète reste à exécuter.
 Les noms de mois et de jours sont suivis séparément dans SLS-098.
 
 ## Cycle réel des versions planifiées
@@ -295,7 +296,7 @@ antérieurs et identités/images/démarrages/fichiers officiels conservés.
 Aucun changement produit, manuel ou interface, aucune nouvelle capture.
 SLS-078.2 est qualifiée ; le complément de coupures suit ci-dessous.
 Le complément d'admission ci-dessous qualifie recouvrement, CPU et exclusif ;
-les autres admissions, rétention, états UI et régression complète restent ouverts.
+les autres admissions, rétention et régression complète restent ouverts.
 
 
 ## Coupures natives et reprise sans rejeu
@@ -318,7 +319,7 @@ est purgée physiquement, quatre sauvegardes natives intègres, quatre gardes et
 helpers terminés, actifs/réservations à zéro. Les5982 artefacts antérieurs et34
 backends sont recoupés. Aucun build produit, UI/manuel modifié ou capture nouvelle ;
 les précédentes campagnes ne sont pas prétendues rejouées. SLS-078 reste[~]
-pour les autres admissions, rétention, états UI complémentaires et régression complète.
+pour les autres preuves, dont rétention et régression complète.
 
 ## Recouvrement, CPU et stockage exclusif
 
@@ -341,7 +342,7 @@ officiels inchangés. Les deux essais et leurs dix fonctions purgées restent ho
 total, dont un arrêt avant fenêtre sans tir/invocation. Aucun build produit,
 UI/manuel modifié ni capture nouvelle. Le complément RAM/version suit ci-dessous ;
 les autres refus et la réutilisation sont qualifiés ci-dessous. Plafond global,
-rétention, états UI, adaptateur.7 et régression complète restent ouverts.
+rétention, adaptateur.7 et régression complète restent ouverts.
 
 ## Budget mémoire et hash changé avant admission
 
@@ -359,7 +360,7 @@ et ressources nulles sont recoupés. Les316 sources,34 backends,5982 artefacts,
 identités/images/démarrages et fichiers officiels sont conservés. Aucun build
 produit, budget officiel, UI/manuel ou capture nouveau. Le plafond global suit
 SLS-099 pour sa garde. Les compléments ci-dessous qualifient les autres refus et
-la réutilisation ; rétention, états UI, adaptateur.7 et régression restent ouverts.
+la réutilisation ; rétention, adaptateur.7 et régression restent ouverts.
 
 ## Files individuelles et globales pleines
 
@@ -376,7 +377,7 @@ aucun rejeu. Neuf fonctions purgées physiquement, actifs/réservations nuls,
 34 backends,5982 artefacts et services/configuration conservés. Aucun produit,
 budget, UI/manuel ou capture modifié. Les compléments d'indisponibilité et de
 maximum/réutilisation suivent ci-dessous. Plafond global (SLS-099), rétention,
-états UI, adaptateur.7 et régression complète restent ouverts.
+adaptateur.7 et régression complète restent ouverts.
 
 ## Commande de cache en cours et prochain tir
 
@@ -408,5 +409,28 @@ configurations, hashes et slots sont conservés/corrélés ; aucun rejeu du refu
 Quatre tirs, quatre handlers réussis (un HTTP/trois planifiés), deux purges
 physiques et ressources nulles. Les34 backends,5982 artefacts et services/
 configuration sont identiques ; aucun produit/UI/manuel ou capture modifié.
-Restent plafond global (SLS-099), rétention réelle, états UI, critère adaptateur.7
+Restent plafond global (SLS-099), rétention réelle, critère adaptateur.7
 et régression complète avant clôture078.
+
+
+## Console et reprise après refus de session
+
+La [preuve du10 novembre2026](evidence/schedule-console-dev-2026-11-10.json)
+qualifie19 groupes sur326 sources : trois de console, huit du manuel et huit
+publics rejoués, six handlers planifiés réussis à22:10UTC, deux purges physiques.
+Le [plan et la reproduction](SCHEDULE_CONSOLE.md) conservent les essais antérieurs :
+six tirs22:00UTC avaient confirmé la pagination périmée sous vrai401. Le
+correctif24d81c7 et le manuel sont reconstruits sur l'imagec59b8616, avec backup
+SQLite natif ; neuf migrations, référence et fichiers officiels conservés.
+
+Depuis l'accueil : formulaires, vide, nom63, dates/hash, pages5+1, lien d'invocation,
+clavier/focus et mobile390px passent. Le vrai401 retire cartes et pagination ;
+Réessayer retrouve la seconde page et son unique tir après restitution des mêmes
+cookies. Les lectures ne changent ni tirs ni invocations.31 captures recoupées :
+17 inspections personnelles,14 identités SHA avec références inspectées. Le
+manuel servi concorde avec16 chapitres/56 paragraphes ; trois vues ciblent son
+paragraphe modifié. Les limites des pleines pages et du cadrage après reprise
+sont explicites dans la preuve. Les34 backends,5982 artefacts et services sont
+identiques pendant le replay ; ressources actives nulles. SLS-078.6 est qualifiée.
+Restent plafond global lié à099, rétention réelle, adaptateur.7 et régression
+complète avant clôture078.

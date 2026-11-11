@@ -13,8 +13,9 @@
 ### Planifications en cours de qualification
 
 - La facette retire sa pagination périmée pendant une lecture ou après erreur,
-  en conservant la page demandée pour Réessayer. Le vrai401 a reproduit le défaut ;
-  correctif et manuel sont à déployer puis requalifier sur une nouvelle image.
+  en conservant la page demandée pour Réessayer. Vrai401 reproduit puis correctif
+  et manuel qualifiés surc59b8616 :19 groupes réels, six handlers22:10UTC, deux
+  purges et31 captures recoupées ; états vides, nom63, pages5+1 et reprise200.
 
 - Maximum individuel et réutilisation qualifiés sur325 sources : refus sans
   invocation sous HTTP non exclusif, minimum déjà prêt réutilisé puis deux

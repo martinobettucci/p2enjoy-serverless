@@ -129,3 +129,8 @@ changement UI/manuel ou capture nouvelle. Les autres critères078 restent ouvert
 La [suite RAM/version](SCHEDULE_MEMORY_VERSION.md#résultats-qualifiés) qualifie
 ensuite le refus mémoire isolé et le changement de hash après réception en file.
 Le plafond global d'instances dépend de SLS-099 ; les critères résiduels restent ouverts.
+
+Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) qualifie
+les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image
+c59b8616. Les preuves de ce document conservent leur image historique ; elles
+ne sont pas présentées comme rejouées par ce complément.

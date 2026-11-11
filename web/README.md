@@ -123,3 +123,16 @@ qualifie trois groupes ciblés et les régressions ; six nouvelles captures hash
 dont deux viewports réels. Avec les campagnes communes :69 captures recoupées,
 47 nouvelles inspections et 22 références SHA strictes. L’upload garde son activation
 actuelle ; la promotion distincte et les appels par hash restent en cours.
+
+
+## Console des planifications qualifiée le10 novembre2026
+
+Le contrôle sert désormaisc59b8616, migration009, après sauvegarde SQLite native.
+Le [complément de console](../docs/evidence/schedule-console-dev-2026-11-10.json)
+passe19 groupes réels : trois ciblés, huit manuel et huit publics ; six handlers
+22:10UTC, vide/nom63, pages5+1, clavier/mobile et vrai401→Réessayer200. Pagination
+périmée corrigée et manuel servi conforme16 chapitres/56 paragraphes.31 captures
+recoupées,17 inspectées personnellement et14 références SHA ; deux fonctions
+purgées,34 backends et5982 artefacts conservés. L'unité078 reste ouverte pour
+rétention, plafond global099, adaptateur.7 et régression complète. Les checkpoints
+cités plus haut conservent leur image et leur époque historique.

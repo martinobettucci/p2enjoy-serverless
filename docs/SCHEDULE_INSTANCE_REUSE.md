@@ -53,7 +53,7 @@ et libère les minima avant nettoyage, sans relance automatique.
 Quatre groupes : préparation/occupation, premier refus et succès préchauffé,
 réutilisation aux prochains tirs, deux purges publiques/absence physique.
 Ce complément ne clôture pas SLS-078 : plafond global (SLS-099), rétention réelle,
-états UI et régression complète restent ouverts. Aucun produit, budget, image,
+régression complète restent ouverts. Aucun produit, budget, image,
 migration ou comportement UI/manuel modifié.
 
 ## Résultats qualifiés
@@ -78,5 +78,10 @@ Les34 backends,5982 artefacts et services/images/démarrages/fichiers officiels
 sont conservés. Aucun build produit, UI/manuel ou capture nouveau. La revue a
 renforcé les comparaisons de générations/configurations et la corrélation du
 premier tir avant lancement ; les pannes propres du banc ne sont pas déduites
-du nominal. Plafond global (SLS-099), rétention réelle, états UI, adaptateur.7 et
+du nominal. Plafond global (SLS-099), rétention réelle, adaptateur.7 et
 régression complète gardent l'unité ouverte.
+
+Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) qualifie
+les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image
+c59b8616. Les preuves de ce document conservent leur image historique ; elles
+ne sont pas présentées comme rejouées par ce complément.

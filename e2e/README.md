@@ -10,9 +10,8 @@ deux pages5+1, clavier/focus, mobile et un vrai refus401 après retrait temporai
 des cookies, puis Réessayer après restitution. Prévoir une frontière réelle,
 environ cinq minutes ; minimum0,3CPU/768Mio, budgets officiels inchangés.
 
-Chaque rapport et capture JPEG portent leur UUID. Le premier essai doit échouer
-si le produit conserve sa pagination après erreur ; il ne devient pas un succès
-conditionnel. Les minima sont libérés, les deux fonctions purgées publiquement,
+Chaque rapport et capture JPEG portent leur UUID. Le scénario échoue
+si le produit conserve sa pagination après erreur ; aucun succès conditionnel. Les minima sont libérés, les deux fonctions purgées publiquement,
 puis le lecteur strict schedule-instance-reuse-inspect.py recoupe l'absence
 physique, les5982 artefacts antérieurs et les34 backends. Contrat :
 [SCHEDULE_CONSOLE](../docs/SCHEDULE_CONSOLE.md). Les images demandent une inspection

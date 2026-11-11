@@ -877,3 +877,24 @@ est conservée sous state/backups/validator-names-before-replay-*.sqlite3.
 Aucun retour de schéma n’est effectué. Les commandes de qualification et la
 provenance des pilotes maintenus sont dans VALIDATOR_NAMES. Aucun secret,
 variable ou route nouveau ; trois notes proposées, sans adoption revendiquée.
+
+
+## Console des planifications qualifiée le10 novembre2026
+
+Le contrôle sert désormaisc59b8616, migration009, après sauvegarde SQLite native.
+Le [complément de console](evidence/schedule-console-dev-2026-11-10.json)
+passe19 groupes réels : trois ciblés, huit manuel et huit publics ; six handlers
+22:10UTC, vide/nom63, pages5+1, clavier/mobile et vrai401→Réessayer200. Pagination
+périmée corrigée et manuel servi conforme16 chapitres/56 paragraphes.31 captures
+recoupées,17 inspectées personnellement et14 références SHA ; deux fonctions
+purgées,34 backends et5982 artefacts conservés. L'unité078 reste ouverte pour
+rétention, plafond global099, adaptateur.7 et régression complète. Les checkpoints
+cités plus haut conservent leur image et leur époque historique.
+
+Le déploiement de ce complément conserve les neuf migrations, les fichiers
+/etc/spark/env, /run/spark/secrets et /etc/spark/routes, ainsi que le runtime de
+référence. Seul le contrôle est recréé :68a8a0b2554a, imagec59b8616. Le backup
+natif se trouve sous qualification-history/before-schedule-console-pagination-
+ed7cf567e50640f494062ea1ed73806c ; son empreinte et les reçus sont dans la preuve.
+Aucune variable, secret ou route nouveau. Les notes README/CONTRIBUTORS/INSTALL
+sont proposées dans les fichiers.? ; aucune adoption n'est revendiquée.

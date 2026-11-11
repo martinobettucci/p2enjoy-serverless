@@ -703,14 +703,14 @@ arrêt multi-fenêtres, claim puis lien interrompus sans rejeu, prochains tirs
 normaux, purge et fin des quatre gardes. Le plan SCHEDULE_RECOVERY porte les
 prérequis et les frontières. Ne pas restaurer les backups de la campagne : la
 reprise qualifiée conserve la base écrite. Les autres admissions,
-rétention, états UI et régression complète restent à qualifier.
+rétention et régression complète restent à qualifier.
 
 `node e2e/schedule-admission.mjs` passe cinq groupes réels : occupants HTTP et
 baux, CPU refusé sans invocation, files exclusives avec succès/expiration,
 deadline après démarrage, recouvrement315s, extinctions mesurées, prochain tir
 normal et cinq purges. Plan : SCHEDULE_ADMISSION. Aucun budget, fichier officiel,
 image ou migration modifié. Le complément ci-dessous qualifie la RAM ; plafond
-global d'instances, refus résiduels, rétention, états UI et régression complète
+global d'instances, refus résiduels, rétention et régression complète
 restent ouverts.
 
 `node e2e/schedule-memory-version.mjs` passe cinq groupes sur trois fenêtres :
@@ -740,4 +740,16 @@ terminée. Aucun contrôle/agent arrêté ni budget changé. Contrat SCHEDULE_UN
 HTTP non exclusif au maximum, refus sans invocation avec budgets globaux libres,
 minimum préchauffé puis deux mêmes instances/CID réutilisés. Libération min0/idle0
 avant promotion sans cron et deux purges publiques ; aucun budget officiel changé.
-Contrat SCHEDULE_INSTANCE_REUSE ; rétention/UI/adaptateur.7/régression restent ouverts.
+Contrat SCHEDULE_INSTANCE_REUSE ; rétention/adaptateur.7/régression restent ouverts.
+
+
+Console des planifications qualifiée surc59b8616 après backup SQLite natif :
+19 groupes/326 sources (trois console, huit manuel, huit publics), six handlers
+22:10UTC, deux pages5+1, vide/nom63/clavier/mobile et vrai401→Réessayer200.
+La pagination périmée est corrigée ; les deux fonctions et six instances connues
+sont purgées/retirées, actifs nuls.31 images recoupées :17 inspections et14 SHA
+identiques aux références inspectées. Guide conforme16 chapitres/56 paragraphes.
+Référence, neuf migrations,34 backends et5982 artefacts conservés ; fichiers
+officiels inchangés. Preuve docs/evidence/schedule-console-dev-2026-11-10.json.
+SLS-078.6 qualifiée ; plafond global099, rétention, adaptateur.7 et régression
+complète restent ouverts. Les preuves antérieures conservent leur image/époque.

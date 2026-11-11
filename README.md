@@ -34,7 +34,7 @@ La [suite RAM/version](docs/evidence/schedule-memory-version-dev-2026-11-10.json
 qualifie cinq groupes supplémentaires : refus mémoire sans invocation, changement
 de hash pendant la file, vraie allocation8192Mio, libération puis prochains tirs
 sans rejeu. Quatre handlers réussis et trois fonctions purgées. Plafond global
-d'instances, rétention, états UI et régression complète restent
+d'instances, rétention et régression complète restent
 à éprouver dans SLS-078 ; la garde du plafond est suivie dans SLS-099.
 Cette garde refuse désormais la baisse avant mutation, en attendant une capacité
 conditionnelle de la console SPARK : [contrat et limite externe](docs/INSTANCE_LIMIT_RESTORATION.md).
@@ -51,6 +51,14 @@ Le [maximum individuel et la réutilisation](docs/evidence/schedule-instance-reu
 passent quatre groupes sur325 sources : refus sous HTTP non exclusif avec budgets
 globaux libres, minimum préchauffé puis deux instances/CID réutilisés à la frontière
 suivante. Quatre handlers réussis et deux purges physiques ; SLS-078 reste ouverte.
+La [console des planifications](docs/evidence/schedule-console-dev-2026-11-10.json)
+passe19 groupes sur326 sources : trois ciblés, huit du manuel et huit publics
+rejoués. Six vrais tirs22:10UTC donnent les pages5+1 ; vide, nom63, clavier,
+mobile et vrai401→Réessayer200 passent après correction de la pagination périmée.
+Nouvelle imagec59b8616 avec manuel conforme16 chapitres/56 paragraphes ;31 captures
+recoupées (17 inspections,14 références SHA), deux purges physiques. SLS-078.6
+est qualifiée ; rétention, plafond global, adaptateur.7 et régression restent ouverts.
+
 
 Plateforme de fonctions conteneurisées, destinée à être déployée dans un SPARK
 de FORGE. La console et le plan de contrôle sont en cours de qualification

@@ -79,7 +79,7 @@ et le reçu, puis résoudre avant toute autre faute.
 Les états attendus après coupure ne sont pas des tests ignorés. Les branches
 propres du pilote ne sont qualifiées que si réellement provoquées. Cette
 campagne ne clôture pas les critères de saturation, recouvrement, exclusif,
-rétention, UI et régression complète de SLS-078.
+rétention et régression complète de SLS-078.
 
 
 ## Résultats réels du10 novembre2026
@@ -120,5 +120,10 @@ RAM et changement de version avant admission sont qualifiés ensuite dans
 Files pleines, commande de stockage et maximum/réutilisation sont ensuite
 qualifiés dans [SCHEDULE_QUEUES](SCHEDULE_QUEUES.md),
 [SCHEDULE_UNAVAILABLE](SCHEDULE_UNAVAILABLE.md) et [SCHEDULE_INSTANCE_REUSE](SCHEDULE_INSTANCE_REUSE.md).
-Plafond global (SLS-099), rétention, états UI, adaptateur.7 et régression restent
+Plafond global (SLS-099), rétention, adaptateur.7 et régression restent
 ouverts : SLS-078[~].
+
+Le [complément de console](evidence/schedule-console-dev-2026-11-10.json) qualifie
+les états vides/erreur, nom63, pagination et reprise401→200 sur la nouvelle image
+c59b8616. Les preuves de ce document conservent leur image historique ; elles
+ne sont pas présentées comme rejouées par ce complément.

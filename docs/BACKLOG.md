@@ -1512,7 +1512,7 @@ après réception en file sans handler, allocation réelle8192Mio puis retour A,
 compteur conservé et aucun rejeu. Quatre handlers réussis, trois fonctions purgées.
 [Plan et résultats](SCHEDULE_MEMORY_VERSION.md).
 SLS-078.4/.5 restent ouvertes pour le plafond global d'instances (préalable
-SLS-099) et rétention ; états UI et régression complète
+SLS-099) et rétention ; régression complète
 restent ouverts. Aucun changement produit, budget officiel ni nouvelle capture.
 Les [files pleines](evidence/schedule-queues-dev-2026-11-10.json) passent quatre
 groupes sur319 sources : plafonds réels16/128, deux tirs queue_full sans invocation,
@@ -1528,15 +1528,19 @@ passent quatre groupes sur325 sources : HTTP non exclusif au maximum1, budgets
 globaux libres et refus sans invocation ; minimum préchauffé puis deux mêmes
 instances/CID à W+300, générations/configurations identiques. Quatre handlers
 réussis, deux purges physiques. [Plan et résultats](SCHEDULE_INSTANCE_REUSE.md).
-Restent plafond global d'instances (SLS-099), rétention réelle, états UI,
-critère adaptateur.7 et régression complète. SLS-078.4/.5/.6/.7 restent ouvertes.
-Le [plan de qualification de console](SCHEDULE_CONSOLE.md) prépare les états
-vides, noms longs, six vrais tirs sur deux pages et un refus401 suivi de reprise.
-La pagination conservée après une lecture en erreur est à vérifier/corriger
-dans cette unité ; aucun succès nouveau n'est encore revendiqué.
-Le client2f8f989 reproduit le défaut sous un vrai401 après six tirs réussis et
-les deux pages : « Historique indisponible » conserve « Page2 sur2 ». Deux
-fonctions purgées ; le correctif et son replay restent nécessaires.
+Restent plafond global d'instances (SLS-099), rétention réelle,
+critère adaptateur.7 et régression complète. SLS-078.4/.5/.7 restent ouvertes.
+La [console des planifications](evidence/schedule-console-dev-2026-11-10.json)
+passe19 groupes sur326 sources : trois ciblés, huit du manuel et huit publics
+rejoués. Six handlers réels22:10UTC, pages5+1, vide, nom63, clavier/focus et mobile.
+Le vrai401 retire cartes et pagination ; Réessayer retrouve la même seconde page.
+Le [plan et la reproduction](SCHEDULE_CONSOLE.md) conservent le défaut sous401
+sur l'imageb9 et les essais du banc, hors total courant. Correctif24d81c7, image
+c59b8616 et manuel conforme16 chapitres/56 paragraphes.31 captures recoupées :
+17 inspections personnelles et14 références SHA. Deux fonctions purgées ;34
+backends,5982 artefacts, services et fichiers officiels conservés pendant replay.
+SLS-078.6 est qualifiée ; rétention, plafond global099, adaptateur.7 et régression
+complète gardent l'unité ouverte.
 
 Résultat attendu : les planifications du manifeste s'exécutent réellement, par fenêtres
 de 5 minutes, sur la version promue ; un moteur unique servira aussi les jobs de console.
@@ -1559,7 +1563,7 @@ Critères d'acceptation :
   `succeeded`, `failed`, `skipped_downtime`, `skipped_overlap`, `refused_*`) ; réclamation
   avant envoi ; aucun rejeu ni rattrapage ; recouvrement évité ; refus de capacité consigné
   sans retry.
-- [ ] SLS-078.6 L'invocation porte `trigger: schedule`, l'origine, l'expression et le créneau ;
+- [x] SLS-078.6 Preuve : [console et reprise401→200](evidence/schedule-console-dev-2026-11-10.json), lectures Read du checkpoint initial. L'invocation porte `trigger: schedule`, l'origine, l'expression et le créneau ;
   la fiche de fonction affiche les planifications actives (prochain tir, dernier résultat,
   état) en lecture avec le droit Read.
 - [ ] SLS-078.7 Adaptateur : `plan` et `deploy` avertissent par fonction planifiée tant que le

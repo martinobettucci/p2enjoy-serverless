@@ -678,14 +678,14 @@ extinctions idle10s mesurées. Sept handlers réussis, cinq fonctions purgées ;
 essais antérieurs et leurs nettoyages restent séparés. Preuve :
 docs/evidence/schedule-admission-dev-2026-11-10.json. Le complément RAM/version
 ci-dessous qualifie la mémoire ; plafond global d'instances, refus résiduels,
-rétention, états UI et régression complète restent ouverts.
+rétention et régression complète restent ouverts.
 
 La suite RAM/version passe cinq groupes sur316 sources : refus mémoire sans
 invocation, A reçue en file puis refusée après promotion B, plafond Docker8192Mio
 observé au prochain tir, retour A compteur2 et aucun rejeu. Quatre handlers
 réussis, trois fonctions purgées ; mêmes services/configuration et5982 artefacts.
 Preuve : docs/evidence/schedule-memory-version-dev-2026-11-10.json. Plafond global
-d'instances (garde SLS-099), refus résiduels, rétention et états UI restent ouverts.
+d'instances (garde SLS-099), rétention et régression restent ouvertes.
 
 Le helper du plafond refuse désormais toute baisse avant mutation : la console
 examinée n'a pas de précondition sur l'entrée active. Deux groupes réels restore/EOF
@@ -710,3 +710,15 @@ refus sans invocation sous HTTP non exclusif, minimum prêt servi puis deux
 mêmes instances/CID à la frontière suivante. Quatre handlers réussis, deux
 purges physiques ; services/configuration et5982 artefacts conservés. Preuve :
 docs/evidence/schedule-instance-reuse-dev-2026-11-10.json. Critères078 résiduels ouverts.
+
+
+Console des planifications qualifiée surc59b8616 après backup SQLite natif :
+19 groupes/326 sources (trois console, huit manuel, huit publics), six handlers
+22:10UTC, deux pages5+1, vide/nom63/clavier/mobile et vrai401→Réessayer200.
+La pagination périmée est corrigée ; les deux fonctions et six instances connues
+sont purgées/retirées, actifs nuls.31 images recoupées :17 inspections et14 SHA
+identiques aux références inspectées. Guide conforme16 chapitres/56 paragraphes.
+Référence, neuf migrations,34 backends et5982 artefacts conservés ; fichiers
+officiels inchangés. Preuve docs/evidence/schedule-console-dev-2026-11-10.json.
+SLS-078.6 qualifiée ; plafond global099, rétention, adaptateur.7 et régression
+complète restent ouverts. Les preuves antérieures conservent leur image/époque.
