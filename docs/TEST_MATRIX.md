@@ -269,3 +269,13 @@ tirs avant borne ;112 pages API après SSO concordent avec les survivants natifs
 Observation10,82s, deux invocations initiales seules, restitution jointe et source
 scellée inchangée. Source protégée sous borne, sept jours et campagne complète
 restent ouverts ;078.5 reste non clôturée.
+
+## Source protégée sous borne — SLS-078.5
+
+Le [contrat discriminant](INVOCATION_SOURCE_RETENTION_VOLUME.md) exige trois
+ensembles natifs10002→10001→10000 et les deux plus anciens HTTP exactement
+retirés. Clients : `node e2e/invocation-source-retention-volume.mjs` (SSO privé),
+puis gardes `python3 -B e2e/source-retention-guard-options.py`, en série. Même
+image réelle,10000 HTTP initiaux sur deux fonctions et rendez-vous cron/HTTP.
+Implémentation et syntaxe acquises ; aucune preuve fonctionnelle encore retenue.
+Pannes propres et régressions connexes restent requises.

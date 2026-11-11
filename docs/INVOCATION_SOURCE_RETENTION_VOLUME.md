@@ -39,7 +39,7 @@ répondent immédiatement. Un dernier HTTP attend réellement jusqu'à `hold_unt
 le cron attend jusqu'au créneau reçu plus3s. Les deux attentes bornées à10s
 utilisent l'horloge réelle ; aucune valeur du temps ni ligne métier n'est injectée.
 
-Choisir avant publication un créneau UTC W situé31 à35min après la préparation.
+Choisir avant publication un créneau UTC W situé30 à35min après la préparation.
 Seule B porte un cron numérique minute/heure correspondant à W ; aucun tir ne
 peut précéder W après son activation. Produire5000 réponses HTTP par fonction,
 chacun des deux flux attend sa réponse avant l'appel suivant. Arrêter et joindre

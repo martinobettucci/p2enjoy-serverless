@@ -60,6 +60,10 @@ Le [complément de gardes](docs/evidence/invocation-retention-guard-regressions-
 passe14 groupes supplémentaires : restitutions, déplacements partiels, refus
 de paramètres et défaut900. Sources protégées sous borne et campagne complète
 restent à qualifier ; le rapport brut complet du volume est conservé en gzip.
+Le [discriminant de source protégée](docs/INVOCATION_SOURCE_RETENTION_VOLUME.md)
+a son client, son handler original et son observateur natif :10002→10001 avant
+clôture du tir puis10000 après clôture. Garde2700 explicite du seul mode isolé ;
+nominal, pannes et régressions restent à qualifier.
 La [capture des témoins terminaux](docs/evidence/schedule-terminal-history-capture-dev-2026-11-11.json)
 ajoute trois groupes de préparation sur335sources : un tir terminé et deux
 générations retirées conservés en privé, éligibles ensemble le18 novembre à

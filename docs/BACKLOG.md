@@ -1619,7 +1619,8 @@ est décidé avant code :10001 HTTP+source non close →10000 HTTP+source, puis
 9999 HTTP+source après clôture. Les retraits des deux plus anciens ordinaires
 prouvent les deux comptages. Installation isolée à2, garde2700 explicite pour
 la charge/attente réelles, deux fonctions et aucune date/ligne fabriquée.
-Implémentation, nominal et pannes restent requis ; aucun succès déduit du contrat.
+Client, handler original et observateur natif sont implémentés ; syntaxe contrôlée.
+Nominal, pannes et régressions restent requis ; aucun succès déduit du code.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

@@ -39,6 +39,10 @@ les conteneurs pendant le handler, avant toute réclamation d'une instance ready
 `retention-observation.cjs` renvoie et journalise un numéro de séquence et son
 requestId ; la campagne de volume exécute10016 vrais handlers pour éprouver
 la borne globale des observations, avec5008 appels par fonction.
+`protected-retention-observation.cjs` ajoute un rendez-vous réel borné pour le
+dernier HTTP et le cron : le client produit10000 HTTP puis observe la source
+exclue de la borne et recomptée après clôture. Le code et ses preuves restent
+dans `e2e/invocation-source-retention-volume.mjs` et son opérateur natif.
 `volume-operations.cjs` écrit, relit, supprime et sature réellement les volumes
 /data et /cache ; il conserve l’errno Linux EDQUOT (-122), que Node expose
 actuellement sous code UNKNOWN. Leur campagne se lance séparément selon

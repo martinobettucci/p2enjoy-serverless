@@ -11,6 +11,8 @@
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#préparation-authentique-et-conservation
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_CAPTURE_INTERRUPTION.md
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_CAPTURE_INTERRUPTION.md#éprouver-lattente-réelle-de-la-garde
+# @spec docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#parcours-réel
+# @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#parcours-réel
 """DEV-only isolated installations with an independent identity-based restore."""
 from contextlib import closing
 import fcntl
@@ -865,9 +867,9 @@ def main():
     history_options=[v for v in options if v.startswith('--firing-history=')]
     observation_options=[v for v in options if v.startswith('--firing-observation=')]
     firing_options=set(history_options+observation_options)
-    assert len(options)==len(set(options)) and set(options)-firing_options<={'--source-schema007','--target-schema008','--guard-seconds=120','--guard-seconds=1800'}
+    assert len(options)==len(set(options)) and set(options)-firing_options<={'--source-schema007','--target-schema008','--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
     assert not options or mode in ('function-version-purge','function-version-unknown-first','instance-limit')
-    guard_options=set(options)&{'--guard-seconds=120','--guard-seconds=1800'}
+    guard_options=set(options)&{'--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
     assert len(guard_options)<=1,'one_guard_duration_required'
     if mode=='instance-limit':assert set(options)<=guard_options|firing_options
     else:assert not guard_options,'guard_duration_requires_instance_limit'
@@ -881,7 +883,7 @@ def main():
         observation=observation_options[0].split('=',1)[1]
         assert observation in ('preflight','count','seed-loss','observer-loss'),'unknown_firing_observation'
         firing_replay={'capture_id':match[1],'mode':observation}
-    guard_seconds=60 if mode=='partial' else 120 if '--guard-seconds=120' in options else 1800 if '--guard-seconds=1800' in options else 900
+    guard_seconds=60 if mode=='partial' else 120 if '--guard-seconds=120' in options else 1800 if '--guard-seconds=1800' in options else 2700 if '--guard-seconds=2700' in options else 900
     if firing_replay:
         assert guard_seconds==120,'firing_replay_guard_duration'
     source_schema='007' if '--source-schema007' in options else '006'
@@ -1067,10 +1069,20 @@ def main():
             op = request['op']
             if op == 'restore':
                 break
-            if mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state'), 'instance_limit_operation_required'
+            if mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention'), 'instance_limit_operation_required'
             if op == 'capacity':
                 assert mode == 'instance-limit'
                 result = instance_limit_observation(item)
+            elif op == 'observe-source-retention':
+                assert item.get('mode') == 'instance-limit' and item['guard_seconds'] == 2700
+                assert set(request) == {'op','functions','window'}
+                identifiers = request['functions']
+                assert len(identifiers) == len(set(identifiers)) == 2
+                assert all(isinstance(v,str) and str(UUID(v)) == v for v in identifiers)
+                assert type(request['window']) is int and request['window'] % 300 == 0
+                result = json.loads(command(['python3','-B',str(BASE/'e2e/invocation-source-retention-observer.py'),
+                    campaign,','.join(identifiers),str(request['window']),'--lock-fd',str(LOCK)], (0,1), foreground_timeout=True))
+                assert result['completed'], 'source_retention_observation_failed:' + str(result.get('reason') or result.get('failure_type'))
             elif op == 'firing-replay-state':
                 assert mode == 'instance-limit' and item.get('firing_replay') and set(request)=={'op'}
                 result=firing_replay_command('inspect',campaign)

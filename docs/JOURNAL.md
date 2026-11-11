@@ -6295,3 +6295,14 @@ naturelles restent à acquérir, sans garantie d'ordonnancement ni rejeu automat
 Garde explicite2700 pour charge et attente ; défauts historiques conservés.
 Exploration RO indépendante confirme le flux et ces limites ; aucune preuve
 fonctionnelle supplémentaire. Contrat INVOCATION_SOURCE_RETENTION_VOLUME ajouté.
+
+### Implémentation du scénario de source protégée
+
+Client invocation-source-retention-volume, handler original à rendez-vous réel et
+observateur natif RO implémentés ; garde2700 et opération dédiée dans le helper
+isolé, autres durées et obligation120 pour replay conservées. Client cinq groupes
+de garde : quatre refus avant mutation et programmation/restitution2700 réelle.
+Revue RO a identifié le mode du dossier de fenêtre :0750root/groupeDocker,
+corrigé avant campagne longue sans toucher aux permissions historiques. Contrat
+aligné sur W30..35min. Contrôles syntaxiques seulement ; aucune preuve E2E
+encore retenue, et risques de frontière manquée explicitement conservés.

@@ -1826,3 +1826,15 @@ tirs avant borne ;112 pages API après SSO concordent avec les survivants natifs
 Observation10,82s, deux invocations initiales seules, restitution jointe et source
 scellée inchangée. Source protégée sous borne, sept jours et campagne complète
 restent ouverts ;078.5 reste non clôturée.
+
+## Source planifiée sous borne des invocations
+
+Contrat : [INVOCATION_SOURCE_RETENTION_VOLUME](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md).
+`node e2e/invocation-source-retention-volume.mjs` reçoit les identifiants SSO sur
+stdin privée et déploie une installation isolée de même image, garde2700s.
+Deux flux produisent10000 vrais HTTP ; le rendez-vous réel d'un dernier HTTP et
+d'un cron permet d'observer10002→10001 (source protégée), puis10000 après clôture.
+`python3 -B e2e/source-retention-guard-options.py` éprouve la durée2700 programmée
+et quatre refus de combinaisons avant mutation. Exécuter un seul scénario à la
+fois sur le SPARK DEV au repos. Les frontières manquées sont des échecs sans
+rejeu automatique ; nominal, pannes propres et régressions restent à qualifier.

@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+### Source de tir sous la borne d'invocations — en préparation
+
+- Client de charge réelle, handler original et observateur natif implémentés
+  pour10002→10001 avant clôture du tir puis10000 après clôture, avec UUID exacts.
+  Garde explicite2700 du seul mode isolé, défauts historiques conservés ; client
+  dédié aux quatre refus et à l'armement/restauration2700. Syntaxe contrôlée,
+  nominal et pannes restent à éprouver ; aucune règle applicative modifiée.
+
 ### Borne globale des tirs qualifiée
 
 - Trois groupes E2E ef8cb3f sur342sources inchangées :39 fenêtres réellement
