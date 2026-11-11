@@ -53,8 +53,13 @@ ces copies : racine root0700, SQLite et reçus root0400, aucun secret publié.
 Écrire le reçu terminé en dernier, vérifier de nouveau les services, fichiers
 officiels et témoins. Une interruption laisse un dossier incomplet, sans changer
 les sources ; elle ne constitue pas une capture réussie. Pas de reprise automatique.
-Ce lecteur ne modifie ni donnée active ni service ; la garde existante couvre
-la fenêtre. Son alarme native60s et SSH borné précèdent la restitution.
+Ce lecteur ne modifie ni donnée active ni service. Il est lancé par la seule
+opération capture-firing-history du pilote existant, qui lui transmet son verrou
+hérité, comme aux autres commandes bornées. La garde attend donc sa jonction
+avant tout renommage de restitution, même si le pilote meurt pendant la copie.
+Alarme native30s, commande timeout40s et lecture client bornée ; aucun lecteur
+externe ne poursuit sa copie pendant la restitution. Les options de garde ne
+changent pas ; les restitutions historiques restent à rejouer après ce raccordement.
 
 Après capture, archiver/purger les16 fonctions par les API, supprimer les parents,
 recouper l'absence physique du code, volumes, canaux et consommateurs, puis

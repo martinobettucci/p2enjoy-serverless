@@ -6053,3 +6053,9 @@ laissant l'horloge réelle produire les fenêtres. Réutiliser la garde900s inch
 et un lecteur/copieur RO séparé ; aucun nouveau réglage produit ou FORGE.
 Contrat SCHEDULE_FIRING_VOLUME écrit avant code. Capture, futur replay et ses
 pannes restent à qualifier séparément ; ne pas confondre préparation et borne.
+
+Exploration du raccordement : un lecteur SSH indépendant pourrait copier pendant
+la restitution si le pilote disparaît. Le lancer via une opération RO bornée du
+helper, avec son verrou hérité, assure la jonction par la garde existante sans
+nouvelle coordination globale. Alarme30s/timeout40s ; ce raccordement rend les
+régressions de restitution nécessaires avant de qualifier le helper modifié.
