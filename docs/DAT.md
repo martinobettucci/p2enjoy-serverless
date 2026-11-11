@@ -471,3 +471,13 @@ second calcul de planning côté navigateur. Voir [SCHEDULES](SCHEDULES.md).
 Moteur déployé en DEV ; premier checkpoint de22 groupes réels recoupé dans
 [la preuve](evidence/schedules-checkpoint-dev-2026-11-10.json). La qualification
 complète des planifications et de la plateforme reste ouverte.
+
+## Éditeur et brouillons prévus
+
+[CONSOLE_EDITOR](CONSOLE_EDITOR.md) spécifie SLS-070 avant code : couche de
+modifications chiffrées sur une révision immuable retenue, puis reconstruction
+ZIP bornée et réutilisation du vrai pipeline code-only. Une garde de lecteur
+protège les entrées/sorties du nettoyage et de la purge ; aucun verrou SQLite
+n'est tenu pendant la reconstruction. La copie des dépendances dans chaque
+brouillon est écartée. La bibliothèque standard suffit ; aucune dépendance,
+service ni variable de cellule supplémentaire. Implémentation encore absente.

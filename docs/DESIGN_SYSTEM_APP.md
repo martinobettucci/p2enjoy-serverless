@@ -440,3 +440,23 @@ L'image après reprise montre les premières déclarations ; le rang2 et son uni
 tir sont recoupés par assertions. Le paragraphe du manuel se poursuit verticalement
 sur mobile. Aucun défaut visuel bloquant confirmé. Nouvelle imagec59b8616 ; guide
 conforme16 chapitres/56 paragraphes. Les preuves antérieures gardent leur époque.
+
+## APP-DS-001 — Édition de source sur place, prévue pour SLS-070
+
+Décision du11 novembre2026 avant code ; socle§6.27. La facette Éditeur possède
+une destination propre et distingue source, brouillon enregistré et saisies.
+L'édition explicite d'un fichier s'effectue sur place pour conserver son
+arborescence et sa comparaison ; enfermer le code dans une modale retirerait
+ce contexte et comprimerait inutilement le travail. Le mode lecture précède
+Modifier, puis Enregistrer le brouillon. L'ajout, le handler et l'abandon
+réutilisent les dialogs et confirmations existants. Aucun formulaire général
+permanent ne mélange ces saisies avec les valeurs de production.
+
+Le [contrat](CONSOLE_EDITOR.md) fixe les états, bornes et gestes. Bureau :
+arborescence et fichier/diff ; mobile : sections empilées, code défilant dans
+sa surface, noms complets repliés dans le contexte. Police mono, tokens et
+composants existants, focus conservé, recherche nommée et sélection de résultat.
+La limite et la taille du fichier sont explicites ; binaire et hors limite ne
+se présentent pas comme un texte vide. Les modifications non enregistrées
+demandent un choix avant départ, sans effacer la saisie sur refus. Preuves et
+captures à produire ; aucune qualification visuelle revendiquée à ce stade.

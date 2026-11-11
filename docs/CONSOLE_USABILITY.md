@@ -84,6 +84,9 @@ une suppression ni ressusciter un objet après un échec partiel.
 
 ## Éditeur de code et handler
 
+Le [contrat détaillé](CONSOLE_EDITOR.md) fixe API, droits, brouillons privés,
+conservation de la base, bornes, diff, publication et preuves de SLS-070.
+
 SLS-070 ouvre l’arborescence du code d’une fonction avec édition des fichiers
 texte, recherche dans le fichier et réglage du handler. L’accès aux sources
 requiert les droits de publication existants : Create sur un brouillon initial,

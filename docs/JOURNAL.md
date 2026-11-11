@@ -7243,3 +7243,25 @@ du sujet avant les rôles, puis attente après l’expiration effective. Aucun m
 ni skip, aucune API admin Keycloak. La source indexée DESIGN_SYSTEM_APP est
 actualisée après campagne pour ces résultats ; le pont documentaire est consigné
 dans la preuve, sans modification de code ou d’image servie.
+
+## Décision SLS-070 : brouillons privés et pipeline immuable
+
+Le11 novembre2026, la pile réelle e81007c5 est vérifiée saine, neuf migrations,
+aucun appel/fonction/instance/candidat/opération actif. SLS-078 attend le18novembre ;
+089.1/.2/.3 attendent leurs accès externes,089.4 est qualifié. Le principal reprend
+SLS-070, après lecture des contrats et exploration RO du pipeline.
+
+Décision persistée avant code dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md) : brouillon
+privé par fonction/acteur, patch chiffré et version propre, base immuable retenue
+plutôt que ZIP dupliqué ; lecteurs joints avant nettoyage/purge. L'exploration
+confirme que code-only ne change pas l'ETag parent et que les événements de la
+base doivent être transmis explicitement. L'UUID candidat est connu avant POST,
+son lien au brouillon est atomique, aucun rejeu automatique. Le corps JSON1Mio
+de texte nécessite une borne dédiée après autorisation ; les autres JSON
+restent limités à256Kio. Le lien Tester attend071, sans commande fictive.
+La conception/API/bornes/E2E sont spécifiées ; aucun code éditeur n'est encore
+implémenté. La référence et les services sont seulement lus pendant l'exploration.
+
+Le contrat CONSOLE_PUBLICATION conserve ses preuves historiques mais sa lecture
+courante est corrigée : SLS-074 est livrée, publication séparée de la promotion,
+catalogue paginé par hash. Il ne décrit plus ces gestes comme restant à coder.

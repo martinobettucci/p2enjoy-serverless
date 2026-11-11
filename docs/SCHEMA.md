@@ -312,3 +312,16 @@ lien d'invocation et diagnostic. Unicité génération/index/fenêtre et invocat
 `invocations` ajoute trigger (http par défaut), schedule_firing_id, schedule_origin,
 schedule_expression et schedule_slot. Aucun corps ou secret supplémentaire.
 Rétention, reprise, droits et premier démarrage : [SCHEDULES](SCHEDULES.md#réalisation-du-moteur-et-migration-009).
+
+## Brouillons de code — migration010 prévue
+
+SLS-070 est spécifiée avant code dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md).
+La table prévue `code_drafts` conserve UUID, function_id, actor_kind/id,
+base_revision_id nullable, base_function_version, base_descriptor_json, handler,
+changes_cipher, change_bytes, version, created_at, updated_at, last_deployment_id
+et last_publication_version. Unicité fonction/propriétaire, compteur positif,
+base de la même fonction ; références aux objets et index de rétention par base.
+Les modifications sont chiffrées, bornées et n'altèrent pas le code immuable.
+Les champs de suivi sont attachés à la préparation dans sa transaction. La purge
+confirmée retire les brouillons avec sa décision. La migration n'est pas encore
+implémentée ni appliquée ; aucune donnée existante n'est transformée.

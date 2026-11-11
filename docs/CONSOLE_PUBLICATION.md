@@ -6,10 +6,12 @@ La [preuve finale](evidence/publication-console-dev-2026-11-07.json) recoupe
 18 campagnes en série, 312 groupes réels et 54 captures inspectées, sans échec
 ni test ignoré. Les deux incohérences de lecture sont corrigées et requalifiées.
 
-L’extension [SLS-074](FUNCTION_VERSIONS.md) est spécifiée séparément et reste
-à implémenter : versions par hash, code inchangé dédupliqué, invocation épinglée,
-publication sans activation et archivage/restauration par version. Elle prolonge
-les parcours ci-dessous ; les preuves SLS-063 ne couvrent pas ces nouveaux gestes.
+L’extension [SLS-074](FUNCTION_VERSION_EXECUTION.md) est implémentée et qualifiée
+par ses preuves propres : versions par hash, déduplication, invocation épinglée,
+publication sans activation et archivage/restauration. Le présent document
+conserve la preuve historique SLS-063 ; ses descriptions de révisions sont
+précisées ci-dessous par le contrat actuel. L’[éditeur SLS-070](CONSOLE_EDITOR.md)
+est spécifié avant code et réutilisera ce même pipeline.
 
 ## Parcours et conservation
 
@@ -21,7 +23,8 @@ handler, initialisé avec la valeur courante. Le récapitulatif confirme le nom
 de fonction, l’archive et le handler avant toute préparation.
 
 Cette publication conserve les ressources, variables, secrets, volumes et
-événements courants. Le serveur capture ces valeurs sous le verrou qui prépare
+événements de la cible courante, sauf événements explicitement fournis par
+le parcours de code. Le serveur capture ces valeurs sous le verrou qui prépare
 le candidat ; le navigateur ne reçoit ni ne ressaisit les valeurs des secrets.
 Seul le handler peut changer dans ce parcours. Le manifeste complet reste
 déployable par l’adaptateur. Les événements d’un brouillon reçoivent l’endpoint
@@ -49,8 +52,10 @@ Les trois opérations publiques ajoutées sont :
   les anciennes versions de configuration, afin de libérer aussi un candidat
   devenu périmé après modification de la fonction.
 
-Le schéma reste inchangé. La préparation complète utilisée par la CLI conserve
-son comportement de remplacement intégral. Les UUID sont normalisés par le
+SLS-063 n’avait pas modifié le schéma. Les migrations007/008 ont depuis ajouté
+l’identité et le catalogue des versions. La préparation complète utilisée par
+la CLI conserve son comportement de remplacement intégral, avec promotion
+explicite séparée de la publication. Les UUID sont normalisés par le
 modèle serveur ; aucun chemin client arbitraire n’est accepté.
 
 ## Suivi et réponses perdues
@@ -84,18 +89,23 @@ afin de ne pas les présenter comme confirmation du nouvel état consulté.
 
 ## Révisions
 
-La liste conserve les identifiants complets, handler/runtime, dates, SHA256,
-taille stockée et événements dans des détails de lecture. Les vingt révisions
-maximum sont chargées ensemble puis affichées par pages de cinq ; le pointeur
-actif reste identifiable même lorsqu’il vise une ancienne page. Les tentatives
-sont paginées côté serveur par cinq, avec leur total.
+Le catalogue courant présente les hashes complets, la cible promue, les états
+available/archived/deleted et les métadonnées des révisions conservées. Il est
+paginé côté serveur, comme les tentatives. Les alias internes de révision ne
+remplacent pas le hash de la version dans les adresses d’appel.
 
-**Activer cette révision** utilise le rollback existant et la version lue de la
-fonction. La confirmation rappelle que les réglages, variables, secrets et
-volumes courants sont conservés. **Supprimer cette révision** demande une
-confirmation ; l’active ne propose pas cette action. Le serveur refuse aussi
-les révisions utilisées par une instance. La dernière page se recale après
-suppression. Un conflit conserve le diagnostic et invite à actualiser.
+**Promouvoir** choisit la cible des appels sans tag ; la publication de code
+seul laisse cette cible et l’ETag de fonction inchangés. La confirmation nomme
+fonction et hash et conserve les réglages, variables, secrets et volumes
+courants. Un hash disponible peut être invoqué avant promotion. Archiver ou
+supprimer la cible exige une cible de remplacement ou sa désactivation
+explicite ; restaurer une archive ne la promeut pas. Les droits et conflits
+suivent [FUNCTION_VERSION_EXECUTION](FUNCTION_VERSION_EXECUTION.md).
+
+La suppression retire immédiatement la disponibilité d’invocation. Le nettoyage
+physique attend ses consommateurs réels ; les brouillons persistants de
+SLS-070 ajouteront leur référence de base à ces consommateurs. Une disparition
+du catalogue ne constitue pas à elle seule la preuve d’effacement des octets.
 
 Après une réponse perdue ou un 503 de mutation, l’écran relit l’état avant de
 permettre une nouvelle mutation. Une suppression peut déjà être enregistrée

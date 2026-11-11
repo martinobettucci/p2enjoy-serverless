@@ -483,3 +483,15 @@ cinq groupes sur le client final et308 sources figées, sans build ni redémarra
 Les mêmes identités et fichiers officiels sont conservés ; trois fonctions du
 rejeu et trois du premier passage sont purgées,5982 artefacts antérieurs intacts.
 Les prévisions de dates futures ne sont pas des invocations à ces dates.
+
+## Brouillons de code — migration010 à réaliser
+
+[CONSOLE_EDITOR](CONSOLE_EDITOR.md) prévoit une migration additive du contrôle
+et sa reconstruction console/manuel. Avant bascule DEV : sauvegarde SQLite
+native, image actuelle conservée et contrôle au repos. Après bascule : dix
+migrations, intégrité, droits de source, code/volumes et fichiers officiels
+conservés. Aucune variable ou route SPARK nouvelle. Un retour à l'image009
+ne doit pas ignorer des brouillons et leurs références ; arrêter le contrôle
+et restaurer une sauvegarde cohérente seulement sur décision explicite, jamais
+automatiquement. L'ancienne image reste disponible ;010 n'est pas encore codée
+ni appliquée. Le déploiement et les preuves restent à exécuter.

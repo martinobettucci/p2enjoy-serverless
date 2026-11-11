@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-070 : contrat complet de l’éditeur persisté avant code : brouillons privés,
+  droits de publication, diff, base retenue, limites et pipeline Docker réel.
+  Migration010 et interface à réaliser ; aucun résultat fonctionnel revendiqué.
+
 - SLS-089 : corrections déployées en DEV sur e81007c5 après contrat dédié.
   [33groupes réels](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
   passent sur 359 sources : attente publique desktop/mobile, vrai SSO admin,

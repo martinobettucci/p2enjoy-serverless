@@ -99,6 +99,8 @@ SLS-078 est temporairement bloquée par le vieillissement réel des deux capture
 au plus tôt le18 novembre2026 à03:30:26 puis04:05:13UTC ; la campagne complète
 suit ces preuves. Les reprises et bornes numériques courantes sont qualifiées.
 Cette attente ne bloque pas les unités indépendantes du registre ; SLS-100 est livrée.
+Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
+089.4 est qualifié. SLS-070 est la prochaine unité de développement indépendante.
 
 Unités parentes encore `[~]` et unités qui portent leur reste à faire :
 [SLS-001](#sls-001) → toutes ; [SLS-020](#sls-020) → SLS-089 ;
@@ -866,9 +868,12 @@ Tests exigés :
 <a id="sls-070"></a>
 ## SLS-070 — Édition du code et du handler dans la console
 
-Statut : [ ] — contrat défini ; aujourd'hui seulement l'upload ZIP et le champ handler.
+Statut : [ ] — contrat détaillé persisté dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md),
+avant code ; aujourd'hui seulement l'upload ZIP et le champ handler.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
-Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler).
+Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
+[CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 dépend de
+l'implémentation réelle SLS-071 ; il ne sera pas remplacé par une commande morte.
 
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de
