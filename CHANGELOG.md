@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+### Pertes avant capture de rétention — en qualification
+
+- Deux parcours du client existant ferment son canal ou tuent son seul helper
+  après observation du vrai succès cron, avant la commande de capture.
+  Restitution normale ou garde indépendante 80 s, mêmes UUID/dates, captures
+  canoniques conservées et purge physique exigées. Opérateur et produit
+  inchangés ; implémenté et relu, preuve E2E encore requise.
+
+
 ### Refus de l'observateur source après attachement qualifié
 
 - Un mode explicite utilise deux vrais handlers et le refus naturel d'un

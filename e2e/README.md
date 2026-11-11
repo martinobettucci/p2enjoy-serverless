@@ -1963,3 +1963,18 @@ mémoire fermés, helper terminé 1 après refus et restitution jointe. Deux
 conteneurs/réseaux/baux réellement retirés et absence physique recoupée.
 Cette preuve ne qualifie ni la rétention, ni detach en échec, ni les délais
 35/40 secondes, ni l'attente native 25 sans événement.
+
+## Pertes avant la capture initiale de rétention
+
+Le même client accepte deux options exclusives :
+`node e2e/schedule-retention-capture.mjs --eof-after-gate` et
+`node e2e/schedule-retention-capture.mjs --observer-loss-after-gate`.
+Préparer une session privée par le parcours SSO réel de `dev-sso-sessions.mjs`,
+puis exécuter un seul cas à la fois. Quatre groupes par cas : vrai témoin HTTP,
+faute après le cron réussi mais tir non clos, reprise sans rejeu, purge physique.
+Le deuxième cas tue le seul helper par pidfd et attend sa garde indépendante
+80 s ; le contrôle garde son PID/démarrage. Le client recoupe les inventaires
+réels des captures canoniques avant/après et les deux UUID/dates des appels.
+Implémenté, syntaxe contrôlée, revue RO renforcée ; preuve E2E encore requise.
+Le nominal sans option conserve sa capture et ses quatre groupes. Contrat :
+[SCHEDULE_RETENTION](../docs/SCHEDULE_RETENTION.md#pertes-avant-la-commande-de-capture).

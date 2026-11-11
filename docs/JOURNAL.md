@@ -6686,3 +6686,8 @@ Garde existante 80 s et opérateur inchangés ; vérifier même contrôle repris
 TracerPid zéro, tir clos sans rejeu, purge physique et captures canoniques
 conservées. Quatre groupes attendus par cas ; E2E encore requis. Backup/copie
 interrompus, régressions historiques et autres restes restent ouverts.
+
+Implémentation dans le client existant, opérateur inchangé. Revue RO sans
+défaut bloquant ; deux renforts intégrés avant E2E : inventaire physique des
+dossiers/captures canoniques avant/après et mêmes UUID/dates HTTP/source après
+restitution. Syntaxe Node contrôlée ; les deux parcours restent à exécuter.
