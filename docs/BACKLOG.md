@@ -2097,7 +2097,8 @@ Critères d’acceptation :
   prochain tir sain sans rejeu. Nominal, EOF, SIGTERM et SIGKILL éprouvés.
 - [ ] SLS-099.5 Campagne dédiée raccordée à la suite publique et à la matrice,
   toutes les assertions précédentes conservées, dont le retrait natif après
-  le troisième appel avant toute promotion ; régressions connexes réussies.
+  le troisième appel avant toute promotion et le nettoyage différé dans un
+  budget couvrant la maintenance normale ; régressions connexes réussies.
 
 Les anciens succès32→2→32 et le refus préventif ne qualifient pas ces nouveaux
 critères. L’unité reste ouverte jusqu’aux preuves sur le vrai déploiement.

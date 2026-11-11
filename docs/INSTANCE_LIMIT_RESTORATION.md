@@ -243,3 +243,16 @@ conteneur de cette fonction avant toute publication ou promotion. Une promotion
 pourrait sinon provoquer elle-même le drainage et masquer un défaut de retrait
 automatique avec idle_seconds=0. Le relevé est conservé dans la preuve du cas
 HTTP ; les quatre groupes et les31 groupes parents gardent leur comptage.
+
+
+### Budget du nettoyage différé dans la régression publique
+
+Le premier raccordement4f2f5af s’arrête après17 groupes HTTP réussis sur
+« Ancien code non effacé » ; la purge de sa fonction termine. Le test attendait
+20s après drainage, alors que la maintenance normale des déploiements tourne
+toutes les30s. Ce budget peut échouer avant le premier passage utile ; il ne
+permet pas de conclure à un défaut moteur. Dans099.5, conserver la même assertion
+version deleted/stored_bytes=0 et lui donner60s, deux périodes de maintenance.
+Il s’agit d’une attente conditionnelle bornée, sans sommeil forcé ni appel de
+maintenance depuis le test. Les rapports échoués restent conservés et exclus
+du bilan de réussite ; une nouvelle campagne complète doit passer.
