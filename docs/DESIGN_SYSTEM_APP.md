@@ -89,6 +89,16 @@ Les interactions, le cache et les réponses réseau restent prouvés par leurs
 assertions E2E ; les images seules ne les prouvent pas. Les captures historiques
 restent conservées dans leur époque, avant ce changement de marque.
 
+## Attente de droits SSO prévue dans SLS-089
+
+Le [contrat](SSO_SESSION_RECOVERY.md#attente-de-droits) réutilise la carte publique
+448px, sa marque unique et ses espacements. L'attente porte un titre explicite,
+un texte neutre et l'action **Vérifier mon accès** ; elle ne porte ni alerte rouge
+ni navigation d'administration. La vérification technique temporairement
+indisponible conserve une erreur et une action **Réessayer**. Ces nouveaux états
+attendent leur implémentation et leurs captures ; les profils réels manquants ne
+sont pas remplacés par une capture d'URL publique.
+
 ## Noms longs dans la navigation
 
 Le fil d’Ariane conserve les noms complets des namespaces, services et

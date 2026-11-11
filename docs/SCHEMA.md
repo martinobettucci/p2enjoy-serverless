@@ -35,6 +35,10 @@ transaction avant mutation, selon
 
 ## Identités
 
+L'évolution additive du payload chiffré de session pour SLS-089 est spécifiée
+dans [SSO_SESSION_RECOVERY](SSO_SESSION_RECOVERY.md#clés-et-renouvellement-temporairement-indisponibles).
+Elle ne requiert aucune migration ; elle reste à implémenter.
+
 - `service_tokens` : id, service_id, name, digest unique, prefix, rights_json,
   function_ids_json nullable, expires_at nullable, revoked_at nullable,
   created_at, last_used_at. Le jeton complet n'est jamais enregistré.

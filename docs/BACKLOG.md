@@ -2170,10 +2170,12 @@ conteneur de lot sur le SPARK DEV.
 <a id="sls-089"></a>
 ## SLS-089 — Défauts SSO : attente, azp, rotation de clé
 
-Statut : [ ] — travaux identifiés par la revue du contrat OIDC, non implémentés ; aucune
-preuve déclarée.
+Statut : [ ] — contrat de correction persisté dans
+[SSO_SESSION_RECOVERY](SSO_SESSION_RECOVERY.md) ; implémentation et preuves à venir.
+Les profils réels sans droits et la rotation réelle restent tributaires du cas4.
 Nature : Corriger. Dépend de : SLS-020. Ordre : 2. Reste à faire de SLS-020.
-Contrat : [sso](sso.md), [CONTROL](CONTROL.md), [PLATFORM](PLATFORM.md).
+Contrat : [sso](sso.md), [CONTROL](CONTROL.md), [PLATFORM](PLATFORM.md),
+[SSO_SESSION_RECOVERY](SSO_SESSION_RECOVERY.md).
 
 Critères d'acceptation :
 

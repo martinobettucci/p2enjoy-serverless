@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-089 : contrat d'attente de droits, validation azp de l'ID token et reprise
+  sous indisponibilité JWKS persisté avant code. Implémentation et preuves à venir ;
+  les profils SSO sans droits et la rotation réelle demandent un accès externe.
+
 - Icône Serverless déployée en DEV : trois blocs reliés remplacent la foudre
   dans le favicon et la marque de l'accueil/console, via un SVG unique.
   [29groupes réels](docs/evidence/application-icon-dev-2026-11-11.json) passent sur779aef7b ;

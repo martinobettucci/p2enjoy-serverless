@@ -56,6 +56,10 @@ comptent jusqu'à libération confirmée ; contrôle et validations sont distinc
 
 ## Connexion
 
+Les corrections SLS-089 sont spécifiées dans
+[attente et reprise SSO](SSO_SESSION_RECOVERY.md), avant implémentation.
+Leur statut et leurs preuves restent suivis au backlog.
+
 L'intégration DEV suit le [contrat du client créé](OIDC_DEV.llms.txt).
 Le fournisseur annonce des jetons d'accès de 300 secondes ; l'application
 respecte leur `exp` signé et renouvelle la session ordinaire avant expiration.

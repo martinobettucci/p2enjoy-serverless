@@ -7209,3 +7209,16 @@ commitb1ee473, seule transition documentaire déclarée,26captures et3rendus,
 SVG servi/embarqué,34backends/3autresassets inchangés et préservation native
 recoupés. Brut382551/gzip152743 vérifié sans secret détecté. Cette revue ne
 qualifie ni la plateforme entière ni les sept jours.
+# Décision SLS-089 : attente de droits et renouvellement conservé
+
+Le11 novembre2026, le principal retient le contrat
+[SSO_SESSION_RECOVERY](SSO_SESSION_RECOVERY.md) avant code : page publique
+informative plutôt que session partiellement autorisée, enum403 fixe, azp ID
+token contrôlé et503 pendant le cooldown JWKS. Le rafraîchissement reçu puis
+temporairement invérifiable est conservé chiffré comme pending, car perdre un
+refresh token tournant fermerait la session à la tentative suivante. Il
+n'autorise aucune requête avant revalidation. Les comptes sans droits et la
+rotation réelle requièrent toujours un accès externe ; aucun faux fournisseur
+n'est prévu. La durée300s doit être mesurée sur le vrai jeton, avec une attente
+réelle. L'exploration déléguée reste en lecture seule ; le principal tranche,
+écrit et opère tous les services/tests en série.
