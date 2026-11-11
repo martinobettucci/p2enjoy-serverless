@@ -11,6 +11,9 @@
   numérique encore requis ; aucun changement du moteur applicatif ou d'image.
   Premier préflight échoué avant CONTROL sur l'appel Path.open/opener, corrigé ;
   restitution complète confirmée, essai conservé séparément.
+  Second préflight : copie réussie mais PID init observé ; sélection corrigée
+  vers le contrôleur Python unique dans le même cgroup. Essai échoué conservé,
+  qualification explicite encore requise.
 
 ### Préparation de la borne globale des tirs
 

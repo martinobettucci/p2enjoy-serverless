@@ -211,7 +211,8 @@ et un total encore inférieur à10000 ; count exige au moins39 fenêtres manqué
 Les témoins doivent rester plus jeunes que sept jours. Un refus d'éligibilité
 est vérifié séparément avant cette date ; il ne devient pas un succès numérique.
 
-Armer NativeObserver sur le PID/naissance exact du conteneur créé avant l'attente
+Armer NativeObserver sur le Python uvicorn unique descendant du PID init Docker,
+même cgroup, avec sa naissance vérifiée, avant l'attente
 healthy. Une attache tardive ne donne aucun succès : elle fait échouer le cas.
 Le traceur ne change aucun registre, tampon ou retour système. Limiter les
 lectures SQL aux frontières natives utiles, avec connexion RO/autocommit ; les

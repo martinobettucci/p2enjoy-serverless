@@ -267,12 +267,32 @@ def observe(campaign, fd):
         row = definitions[0]
         assert row['State']['Running'] and row['Image'] == source['images']['control']['image']
         assert row['Config']['Labels']['com.docker.compose.project'] == item['project']
-        pid = row['State']['Pid']
+        init = row['State']['Pid']
+        find_deadline = time.monotonic() + 3
+        while True:
+            descendants = [init]
+            processes = []
+            try:
+                for parent in descendants:
+                    descendants.extend(int(v) for v in Path('/proc', str(parent), 'task', str(parent), 'children').read_text().split())
+                processes = [p for p in descendants if Path(os.readlink(f'/proc/{p}/exe')).name.startswith('python')
+                             and Path('/proc', str(p), 'cmdline').read_bytes().startswith(b'python\0-B\0-m\0uvicorn\0app.main:app\0')]
+            except (FileNotFoundError, ProcessLookupError):
+                pass
+            assert len(processes) <= 1, 'unique_control_process_required'
+            if processes:
+                break
+            assert time.monotonic() < find_deadline, 'control_process_missing'
+            time.sleep(.01)
+        pid = processes[0]
+        cgroup = Path('/proc', str(pid), 'cgroup').read_text()
+        assert cgroup == Path('/proc', str(init), 'cgroup').read_text(), 'controller_cgroup_mismatch'
         birth = Path('/proc', str(pid), 'stat').read_text().rsplit(')', 1)[1].split()[19]
         observer = NativeObserver(pid)
         observer.start()
         assert Path('/proc', str(pid), 'stat').read_text().rsplit(')', 1)[1].split()[19] == birth
-        receipt.update(container_id=row['Id'], image=row['Image'], pid=pid, birth=birth,
+        receipt.update(container_id=row['Id'], image=row['Image'], init_pid=init, pid=pid, birth=birth,
+                       cgroup_sha256=hashlib.sha256(cgroup.encode()).hexdigest(),
                        observer_attached=True, native_stop=observer.stopped)
         atomic(result_path, receipt)
         if mode == 'observer-loss':

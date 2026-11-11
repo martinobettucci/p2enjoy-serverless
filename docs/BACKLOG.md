@@ -1582,8 +1582,8 @@ Premier essai0e29293 : huit refus et refus avant éligibilité passent, préflig
 originaux restitués. Appel Path.open/opener corrigé ; replay explicite encore requis.
 Essai7757065 : copie achevée, observation expirée sur le PID init Docker ;
 3840 tirs réels et deux invocations initiales constatés avant restitution.
-Sélectionner le processus Python unique du contrôleur, même cgroup que init,
-comme l'opérateur historique. Cet essai ne qualifie pas le préflight.
+Sélection du processus Python unique, même cgroup que init, alignée sur
+l'opérateur historique ; replay encore requis. Cet essai ne qualifie pas le préflight.
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.
