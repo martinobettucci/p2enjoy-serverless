@@ -110,8 +110,12 @@ La première source conserve une génération active et un curseur ancien : apr�
 sept jours, la reprise normale peut consigner environ2016 fenêtres manquées par
 lots20, sans exécuter les handlers. Le test ne force ni ce curseur ni sa fin de
 récupération pour prouver les premiers passages d'âge. Aucun arrêt sélectif de tâche.
-Restituer avant D+150s ; aucun nouveau créneau actif n'est permis dans cette fenêtre.
-La garde120 reste le secours indépendant. Un délai insuffisant est un échec conservé.
+Le nominal termine ses lectures et demande la restitution avant D+110s. Pour une
+perte, la garde se déclenche à armed_at+120s, donc au plus D+180s ; exiger retrait
+réel du contrôle temporaire avant D+240s et restitution/jonction avant D+270s.
+Le reçu durable relève control_removed_at après suppression Docker. Un dépassement
+invalide la preuve mais n'abandonne pas la restauration. Aucun nouveau créneau actif
+D+300 n'est permis ; un délai insuffisant reste un échec conservé.
 
 ## Lecture publique, restitution et preuves propres
 

@@ -6334,3 +6334,10 @@ root0400 les protègent. Le lecteur vérifiera ces métadonnées et reçus exact
 sans réécrire la capture. Le clone doit aussi refuser les consommateurs Docker
 arrêtés et réseaux portant l'installation-id original : le contrôle des seuls
 montages des conteneurs running du helper général ne suffit pas à cette exception.
+
+Revue du brouillon d'âge : distinguer délai nominal et perte. Garde120 armée
+entreD+10et60 implique déclenchement jusqu'àD+180, pas une restitution finie
+avantD+150. Contrat corrigé : demande nominale avantD+110, retrait temporaire
+mesuré avantD+240, restitution/jonction avantD+270. Un retard invalide la preuve
+sans arrêter le secours. Revalidation de naissance après pidfd_open requise avant
+SIGKILL. Aucune modification aux346sources de la campagne active.
