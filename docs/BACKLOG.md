@@ -1543,7 +1543,8 @@ planifiée isolée du maximum individuel et du stockage exclusif. Ce scénario
 reste requis dans cette même unité avant de cocher.4.
 Le [scénario discriminant](SCHEDULE_CONCURRENCY.md) compare concurrence1/2 à
 maximum3, stockage partagé et budgets libres, pendant deux vrais HTTP à W.
-Décision persistée ; implémentation et preuve restent à exécuter.
+Client `e2e/schedule-concurrency.mjs` implémenté ; contrôle de syntaxe réussi,
+preuve E2E sur DEV et revue restent à exécuter.
 La [console des planifications](evidence/schedule-console-dev-2026-11-10.json)
 passe19 groupes sur326 sources : trois ciblés, huit du manuel et huit publics
 rejoués. Six handlers réels22:10UTC, pages5+1, vide, nom63, clavier/focus et mobile.

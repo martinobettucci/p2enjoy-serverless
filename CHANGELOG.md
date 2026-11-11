@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+### Qualification distincte de la concurrence planifiée
+
+- Client E2E comparant concurrence1/2 avec maximum3 et stockage partagé, à une
+  vraie frontière cron pendant deux HTTP actifs. Observation SQL/Docker native,
+  corrélations et deux purges publiques ; implémenté, preuve DEV encore requise.
+
 ### Preuve de rétention des planifications
 
 - Mode de capture native d’une invocation réussie encore source d’un tir non

@@ -1,5 +1,17 @@
 # Qualification de la plateforme
 
+## Concurrence partagée entre HTTP et cron
+
+`node e2e/schedule-concurrency.mjs`, seul sur le SPARK DEV au repos, avec une
+session administrateur préparée par `node e2e/dev-sso-sessions.mjs` (JSON SSO
+sur stdin privée), publie deux fonctions maximum3/shared dont seule la
+concurrence1/2 diffère. Deux vrais HTTP occupent la frontière UTC : le premier
+cron attend sans handler, le second réussit sur une deuxième instance avant
+la libération des HTTP. Quatre groupes, une frontière réelle, puis deux purges
+publiques et vérification physique. Le rapport UUID `scheduled-functions-*.json`
+porte l'observation native discriminante. Aucun budget officiel changé.
+Contrat : [SCHEDULE_CONCURRENCY](../docs/SCHEDULE_CONCURRENCY.md).
+
 ## États de console des planifications
 
 `node e2e/schedule-console.mjs`, seul sur le SPARK au repos avec session SSO
