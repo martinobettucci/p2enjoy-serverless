@@ -6604,3 +6604,14 @@ témoin driver_dead après réveil, sans second signal ; conserver état après
 réveil et reçu final avant assertion. Le scénario ne doit pas déclarer
 le pilote terminé si la condition reste fausse. Rejeu SIGKILL puis matrice
 complète requis.
+
+### 11novembre2026 — Confirmation renforcée et restitution SIGKILL qualifiées
+
+Le rejeu81210bfe passe deux groupes ciblés sur351sources : pidfd réveillé,
+pilote absent au témoin /proc, driver_dead=true après confirmation et reçu
+conservé avant assertion. Temps mesuré8,103ms, un seul SIGKILL. La garde120
+restitue indépendamment les originaux, pilote et garde joints, HTTPS sain.
+Ce succès ne requalifie pas les essais échoués ; la cause du premier Error
+reste inconnue. Sources/images identiques avant/après ; matrice complète à
+rejouer sur ce helper final, ces deux groupes ne seront pas recomptés en plus
+du même cas SIGKILL de la matrice.

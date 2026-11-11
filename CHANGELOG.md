@@ -7,7 +7,9 @@
 - Le helper exige la fin du même pilote après le réveil pidfd, avec attente
   bornée et reçu durable. Le client conserve le reçu avant assertion et les
   erreurs opérateur en privé. Syntaxes contrôlées et revue RO sans défaut ;
-  rejeu réel ciblé puis matrice encore requis. Les essais échoués sont conservés.
+  le [rejeu réel ciblé](docs/evidence/retention-history-sigkill-confirmation-dev-2026-11-11.json)
+  passe deux groupes avec garde indépendante. Matrice complète encore requise ;
+  essais échoués conservés.
 
 ### Refus du périmètre cloné qualifié
 
