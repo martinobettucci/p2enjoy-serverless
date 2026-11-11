@@ -6,6 +6,7 @@ from dataclasses import dataclass
 import hashlib
 import hmac
 import json
+import math
 import re
 import secrets
 import time
@@ -23,6 +24,17 @@ SESSION_COOKIE='__Host-p2-session'
 FLOW_COOKIE='__Host-p2-flow'
 SESSION_SECONDS=8*60*60
 FLOW_SECONDS=600
+JWKS_CACHE_SECONDS=300
+JWKS_REFRESH_BACKOFF_SECONDS=2
+
+
+# @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#attente-de-droits
+class AccessPending(HTTPException):
+    def __init__(self,requirement):
+        self.access_requirement=requirement
+        message=('Ce compte doit être vérifié par un administrateur du SSO.' if requirement=='verification'
+                 else 'Cette console est réservée aux administrateurs.')
+        super().__init__(403,message)
 
 
 def digest(value):
@@ -52,8 +64,8 @@ class Identity:
         self.http=httpx.AsyncClient(timeout=10,follow_redirects=False,trust_env=False)
         self.discovery=None
         self.keys={}
-        self.keys_at=0
-        self.keys_attempt_at=0
+        self.keys_at=None
+        self.keys_attempt_at=None
         self.key_lock=asyncio.Lock()
         self.refresh_locks=weakref.WeakValueDictionary()
 
@@ -83,20 +95,23 @@ class Identity:
         except (jwt.PyJWTError,ValueError):
             raise HTTPException(401,'Jeton SSO invalide.') from None
         async with self.key_lock:
-            now=time.time()
-            if now-self.keys_at>300 or kid not in self.keys:
-                if now-self.keys_attempt_at<2:
-                    if kid not in self.keys:raise HTTPException(401,'Clé de signature SSO inconnue.')
-                else:
-                    self.keys_attempt_at=now
-                    data=await self.discover()
-                    try:
-                        r=await self.http.get(data['jwks_uri']);r.raise_for_status()
-                        self.keys={k['kid']:jwt.PyJWK.from_dict(k) for k in r.json()['keys']
-                                   if k.get('use','sig')=='sig' and k.get('alg') in ('RS256','ES256')}
-                        self.keys_at=now
-                    except (httpx.HTTPError,ValueError,KeyError,jwt.PyJWTError):
-                        raise HTTPException(503,'Les clés du SSO sont indisponibles.') from None
+            # @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#clés-et-renouvellement-temporairement-indisponibles
+            now=time.monotonic()
+            if self.keys_at is None or now-self.keys_at>JWKS_CACHE_SECONDS or kid not in self.keys:
+                remaining=(JWKS_REFRESH_BACKOFF_SECONDS-(now-self.keys_attempt_at)
+                           if self.keys_attempt_at is not None else 0)
+                if remaining>0:
+                    raise HTTPException(503,'La vérification des clés SSO est temporairement indisponible.',
+                                        headers={'Retry-After':str(math.ceil(remaining))})
+                self.keys_attempt_at=now
+                data=await self.discover()
+                try:
+                    r=await self.http.get(data['jwks_uri']);r.raise_for_status()
+                    keys={k['kid']:jwt.PyJWK.from_dict(k) for k in r.json()['keys']
+                          if k.get('use','sig')=='sig' and k.get('alg') in ('RS256','ES256')}
+                    self.keys=keys;self.keys_at=time.monotonic()
+                except (httpx.HTTPError,ValueError,KeyError,jwt.PyJWTError):
+                    raise HTTPException(503,'Les clés du SSO sont indisponibles.') from None
             key=self.keys.get(kid)
             if not key or key.algorithm_name!=header['alg']:raise HTTPException(401,'Clé de signature SSO inconnue.')
             return key.key,header['alg']
@@ -108,7 +123,10 @@ class Identity:
                 audience=self.settings.client_id if id_token else None,
                 options={'require':['exp','iat','iss','sub','aud' if id_token else 'azp'],
                          'verify_aud':id_token},leeway=3)
-            if not id_token and claims.get('azp')!=self.settings.client_id:raise ValueError()
+            # @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#identité-du-destinataire
+            audience=claims.get('aud')
+            if (not id_token or 'azp' in claims or isinstance(audience,list) and len(audience)>1):
+                if claims.get('azp')!=self.settings.client_id:raise ValueError()
             if not isinstance(claims.get('sub'),str) or not claims['sub']:raise ValueError()
             return claims
         except (jwt.PyJWTError,ValueError):
@@ -119,9 +137,9 @@ class Identity:
         realm=claims.get('realm_access')
         roles=realm.get('roles',[]) if isinstance(realm,dict) else []
         if not isinstance(roles,list) or 'verified' not in roles:
-            raise HTTPException(403,'Ce compte doit être vérifié par un administrateur du SSO.')
+            raise AccessPending('verification')
         if 'admin' not in roles:
-            raise HTTPException(403,'Cette console est réservée aux administrateurs.')
+            raise AccessPending('administration')
 
     async def exchange(self,fields):
         data=await self.discover()
@@ -183,6 +201,9 @@ class Identity:
         access=await self.claims(tokens['access_token'])
         if identity['sub']!=access['sub'] or not hmac.compare_digest(str(identity.get('nonce','')).encode(),row['nonce'].encode()):
             raise HTTPException(401,'Les identités du retour SSO ne correspondent pas.')
+        # @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#attente-de-droits
+        previous=request.cookies.get(SESSION_COOKIE)
+        if previous:self.revoke_session(digest(previous))
         self.require_roles(access)
         session,csrf=secrets.token_urlsafe(32),secrets.token_urlsafe(32)
         now=time.time()
@@ -199,6 +220,14 @@ class Identity:
     def revoke_session(self,key):
         with self.db.transaction() as db:db.execute('DELETE FROM sessions WHERE digest=?',(key,))
 
+    # @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#clés-et-renouvellement-temporairement-indisponibles
+    def save_session_tokens(self,row,payload,access_expires_at):
+        with self.db.transaction() as db:
+            updated=db.execute('UPDATE sessions SET tokens_cipher=?,access_expires_at=? '
+                'WHERE digest=? AND tokens_cipher=? AND expires_at>?',
+                (self.vault.seal(payload),access_expires_at,row['digest'],row['tokens_cipher'],time.time())).rowcount
+        if not updated:raise HTTPException(401,'La session a été fermée ou modifiée.')
+
     async def session(self,request:Request):
         cookie=request.cookies.get(SESSION_COOKIE)
         if not cookie:raise HTTPException(401,'Connectez-vous à la console.')
@@ -213,21 +242,30 @@ class Identity:
                 raise HTTPException(401,'La session a expiré.')
             try:
                 payload=self.vault.open(row['tokens_cipher'])
-                if row['access_expires_at']<=time.time()+10:
-                    refresh=payload['tokens'].get('refresh_token')
-                    if not refresh:raise HTTPException(401,'Reconnectez-vous au SSO.')
-                    tokens=await self.exchange({'grant_type':'refresh_token','refresh_token':refresh})
-                    claims=await self.claims(tokens['access_token']);self.require_roles(claims)
+                # @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#clés-et-renouvellement-temporairement-indisponibles
+                pending=payload.get('pending_tokens')
+                if pending is not None or row['access_expires_at']<=time.time()+10:
+                    if pending is not None:tokens=pending
+                    else:
+                        refresh=payload['tokens'].get('refresh_token')
+                        if not refresh:raise HTTPException(401,'Reconnectez-vous au SSO.')
+                        tokens=await self.exchange({'grant_type':'refresh_token','refresh_token':refresh})
+                        if not tokens.get('refresh_token'):tokens['refresh_token']=refresh
+                    try:claims=await self.claims(tokens['access_token'])
+                    except HTTPException as error:
+                        if error.status_code==503 and pending is None:
+                            payload['pending_tokens']=tokens
+                            self.save_session_tokens(row,payload,row['access_expires_at'])
+                        raise
                     if claims['sub']!=row['subject']:raise HTTPException(401,'L’identité de la session a changé.')
-                    if not tokens.get('refresh_token'):tokens['refresh_token']=refresh
+                    self.require_roles(claims)
                     payload['tokens']=tokens
-                    with self.db.transaction() as db:
-                        updated=db.execute('UPDATE sessions SET tokens_cipher=?,access_expires_at=? WHERE digest=? AND expires_at>?',
-                            (self.vault.seal(payload),claims['exp'],key,time.time())).rowcount
-                    if not updated:raise HTTPException(401,'La session a été fermée.')
+                    payload.pop('pending_tokens',None)
+                    self.save_session_tokens(row,payload,claims['exp'])
                 else:
-                    claims=await self.claims(payload['tokens']['access_token']);self.require_roles(claims)
+                    claims=await self.claims(payload['tokens']['access_token'])
                 if claims['sub']!=row['subject']:raise HTTPException(401,'L’identité de la session a changé.')
+                self.require_roles(claims)
                 if row['expires_at']<=time.time():raise HTTPException(401,'La session a expiré.')
                 row['payload']=payload
                 return row
@@ -279,9 +317,11 @@ class Identity:
         try:
             data=await self.discover()
             payload=self.vault.open(row['tokens_cipher'])
+            # @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#clés-et-renouvellement-temporairement-indisponibles
+            tokens=payload.get('pending_tokens') or payload['tokens']
             r=await self.http.post(data['end_session_endpoint'],data={
                 'client_id':self.settings.client_id,'client_secret':self.settings.client_secret,
-                'refresh_token':payload['tokens'].get('refresh_token','')})
+                'refresh_token':tokens.get('refresh_token','')})
             remote_closed=r.status_code in (200,204)
         except (HTTPException,httpx.HTTPError,InvalidToken,KeyError,ValueError):remote_closed=False
         return {'signed_out':True,'sso_signed_out':remote_closed}

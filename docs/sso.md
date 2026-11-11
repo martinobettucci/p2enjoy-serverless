@@ -1,5 +1,12 @@
 # Intégrer une application à oauth.lelabs.tech
 
+Application Serverless : le [contrat SLS-089](SSO_SESSION_RECOVERY.md) complète
+ici la gestion des rôles par une page d'attente publique et la conservation
+chiffrée d'un renouvellement temporairement invérifiable. Les corrections sont
+implémentées, avec qualification encore ouverte au [backlog](BACKLOG.md#sls-089).
+Il n'existe aucun seed d'identités local ; les profils et clés restent ceux du
+vrai fournisseur, administrés hors de cette application.
+
 Pour les équipes qui branchent une application sur ce SSO.
 
 Le contrat du client effectivement créé pour ce projet est conservé dans

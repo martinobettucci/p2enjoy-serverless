@@ -69,7 +69,7 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
-| 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[ ]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
+| 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[ ]` | SLS-063, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[ ]` | SLS-066, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#client-http-par-fonction) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
@@ -2170,8 +2170,8 @@ conteneur de lot sur le SPARK DEV.
 <a id="sls-089"></a>
 ## SLS-089 — Défauts SSO : attente, azp, rotation de clé
 
-Statut : [ ] — contrat de correction persisté dans
-[SSO_SESSION_RECOVERY](SSO_SESSION_RECOVERY.md) ; implémentation et preuves à venir.
+Statut : [~] — corrections implémentées selon
+[SSO_SESSION_RECOVERY](SSO_SESSION_RECOVERY.md) ; déploiement et preuves à venir.
 Les profils réels sans droits et la rotation réelle restent tributaires du cas4.
 Nature : Corriger. Dépend de : SLS-020. Ordre : 2. Reste à faire de SLS-020.
 Contrat : [sso](sso.md), [CONTROL](CONTROL.md), [PLATFORM](PLATFORM.md),

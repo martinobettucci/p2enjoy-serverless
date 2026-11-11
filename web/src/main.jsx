@@ -21,7 +21,29 @@ function Login({error}) {
   </div></main>;
 }
 
-function App() {
+// @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#attente-de-droits | docs/DESIGN_SYSTEM_APP.md | docs/manual.md#se-connecter
+function AccessWaiting({reason}) {
+  const verification = reason === 'verification';
+  return <main className="login-page"><div className="login-card">{brand}
+    <div className="stack"><h1>Accès en attente</h1>
+      <p>{verification ? 'La console exige un compte vérifié.' : 'La console est réservée aux administrateurs.'}</p>
+      <p className="muted">{verification ? 'Demandez à un administrateur du SSO de vérifier votre compte.' : 'Si vous devez administrer cette plateforme, demandez à un administrateur du SSO de vous attribuer le rôle nécessaire.'}</p>
+      <p className="muted">Après son intervention, vérifiez à nouveau votre accès.</p></div>
+    <a className="button primary" href="/auth/login">Vérifier mon accès<ArrowRight aria-hidden="true"/></a>
+    <a href="/">Revenir à l’accueil</a>
+  </div></main>;
+}
+
+// @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#clés-et-renouvellement-temporairement-indisponibles | docs/DESIGN_SYSTEM_APP.md | docs/manual.md#se-connecter
+function SessionUnavailable({error,retry}) {
+  return <main className="login-page"><div className="login-card">{brand}
+    <div className="stack"><h1>Vérification temporairement indisponible</h1>
+      <p className="muted">Réessayez dans quelques instants pour vérifier votre session.</p></div>
+    <ErrorMessage error={error}/><button className="primary" type="button" onClick={retry}>Réessayer</button>
+  </div></main>;
+}
+
+function SessionApp() {
   const session = useResource('/api/session');
   const [authError] = useState(() => {
     const value = new URLSearchParams(location.hash.slice(1)).get('auth-error') || document.body.dataset.authError;
@@ -30,8 +52,15 @@ function App() {
   });
   useEffect(() => {sessionToken(session.data?.csrf_token);}, [session.data]);
   if (session.loading) return <main className="login-page"><div className="login-card">{brand}<p role="status">Vérification de la session…</p></div></main>;
+  if (session.error?.status === 503) return <SessionUnavailable error={session.error} retry={session.reload}/>;
   if (session.error || !session.data?.authenticated) return <Login error={session.error || authError}/>;
   return <Shell user={session.data.user}/>;
+}
+
+// @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#attente-de-droits | docs/DESIGN_SYSTEM_APP.md
+function App() {
+  const reason = location.pathname === '/auth/attente' ? new URLSearchParams(location.search).get('reason') : null;
+  return ['verification','administration'].includes(reason) ? <AccessWaiting reason={reason}/> : <SessionApp/>;
 }
 
 function Shell({user}) {

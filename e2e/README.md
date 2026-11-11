@@ -1,5 +1,26 @@
 # Qualification de la plateforme
 
+## Attente de droits et renouvellement SSO
+
+`node e2e/sso-session-recovery.mjs` reçoit les identifiants du compte autorisé
+sur stdin privée. Huit groupes : quatre vues publiques desktop/mobile, refus
+des motifs et alias canonique, vraie connexion administrateur, durée du JWT et
+renouvellement après attente réelle d'environ cinq minutes, puis déconnexion.
+Les quatre vues ne prouvent aucune décision de rôle. Les flows ouverts pour
+les liens de vérification sont annulés par leur vrai callback et consommés.
+
+Le lecteur `python3 -B e2e/sso-session-inspect.py DIGEST_DE_SESSION` lit cette
+seule session dans le conteneur installé et vérifie les JWT contre le vrai
+JWKS avec le code livré. Il ne renvoie que des métadonnées ; les jetons OAuth
+et la clé de chiffrement ne quittent pas Docker. Aucune mutation SQLite, clé
+privée de signature, horloge artificielle ou dépendance substituée.
+
+Le rapport UUID conserve explicitement les preuves absentes : comptes sans
+`verified`, `verified` seul, refus azp discriminant et rotation réelle de clé.
+Ces prérequis externes sont dans SLS-089 ; aucun skip ne les remplace. Les six
+JPEG demandent leur inspection distincte. Contrat :
+[SSO_SESSION_RECOVERY](../docs/SSO_SESSION_RECOVERY.md).
+
 ## Identité visuelle Serverless
 
 `node e2e/application-icon.mjs` prend le JSON SSO sur stdin privée, transmis en

@@ -1,5 +1,11 @@
 # P2Enjoy Serverless
 
+Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) sont implémentées,
+avant déploiement et qualification : attente de droits explicite, azp ID token,
+réponse temporaire JWKS et renouvellement reçu conservé chiffré sans autorisation.
+Le client E2E attend l'expiration réelle du JWT ; les profils sans droits et la
+rotation réelle demeurent des prérequis externes, sans preuve déclarée à ce stade.
+
 **La plateforme demandée n'est pas encore entièrement livrée.** Favoris,
 actions en masse, éditeur de code intégré, client HTTP par fonction, journaux
 avancés et monitoring historique restent à implémenter. Le moteur des crons du manifeste est

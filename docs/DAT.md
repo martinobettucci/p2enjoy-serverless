@@ -2,6 +2,12 @@
 
 ## Plateforme
 
+Le [complément SSO SLS-089](SSO_SESSION_RECOVERY.md) réutilise le seul contrôle
+et ses sessions chiffrées. La page publique d'attente ne monte aucun client de
+session. Le renouvellement pending reste dans le cipher existant, sans nouvelle
+table, variable ni service ; toute autorisation exige sa validation réelle.
+Les corrections sont implémentées, leur qualification est encore ouverte.
+
 Contrat de réalisation : [PLATFORM.md](PLATFORM.md). Le contrôle retenu est
 Python avec SQLite WAL local et un seul processus de coordination ; les
 transactions de réservation sont courtes et ne contiennent aucun appel Docker.

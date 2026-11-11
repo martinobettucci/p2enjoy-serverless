@@ -34,6 +34,8 @@ précise les écarts actuels et les preuves requises dans SLS-031 et SLS-066.
 
 Connexion au SSO réel selon `sso.md` : Authorization Code, PKCE S256, state,
 nonce, signature JWKS, issuer exact, expiration et `azp` du jeton d'accès.
+Le contrôle azp de l'ID token et la reprise temporaire JWKS suivent
+[SSO_SESSION_RECOVERY](SSO_SESSION_RECOVERY.md), en cours de qualification.
 La console exige `verified` et `admin`. Le cookie de session serveur est
 HttpOnly, Secure, SameSite=Lax ; les mutations de session exigent une preuve
 CSRF et une origine conforme. La déconnexion invalide la session serveur.

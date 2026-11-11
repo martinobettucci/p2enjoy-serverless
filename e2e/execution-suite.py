@@ -66,6 +66,8 @@ def source_hashes():
     files += [ROOT/'docs/FUNCTION_VERSION_STATE_TRANSPORT.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md#preuves-et-reprise
     files += [ROOT/'docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md']
+    # @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#qualification-réelle-et-données-de-test
+    files += [ROOT/'docs/SSO_SESSION_RECOVERY.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md#livraison-et-limites
     files += [ROOT/'docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#preuves-et-portée-des-opérateurs

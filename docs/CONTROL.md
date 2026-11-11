@@ -56,9 +56,9 @@ comptent jusqu'à libération confirmée ; contrôle et validations sont distinc
 
 ## Connexion
 
-Les corrections SLS-089 sont spécifiées dans
-[attente et reprise SSO](SSO_SESSION_RECOVERY.md), avant implémentation.
-Leur statut et leurs preuves restent suivis au backlog.
+Les corrections SLS-089 sont implémentées selon
+[attente et reprise SSO](SSO_SESSION_RECOVERY.md) ; leur déploiement et leurs
+preuves restent à faire. Le backlog garde leurs critères ouverts.
 
 L'intégration DEV suit le [contrat du client créé](OIDC_DEV.llms.txt).
 Le fournisseur annonce des jetons d'accès de 300 secondes ; l'application
@@ -66,8 +66,9 @@ respecte leur `exp` signé et renouvelle la session ordinaire avant expiration.
 La découverte et les clés publiques sont vérifiées réellement par le client
 E2E public. Cette découverte globale ne prouve pas les restrictions propres
 au client ni les rôles d'un compte ; ces preuves exigent les parcours SSO.
-Le contrôle complémentaire prévu pour l'ID token compare `azp` au client
-lorsque cette revendication est présente, en complément de l'audience ;
+Le contrôle complémentaire de l'ID token compare `azp` au client
+lorsque cette revendication est présente, en complément de l'audience ; avec
+plusieurs audiences, `azp` est obligatoire. Les refus discriminants restent à prouver ;
 voir [OIDC Core, validation de l'ID token](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation).
 
 - `GET /healthz` : santé technique et version, sans données d'identité.
@@ -80,6 +81,10 @@ voir [OIDC Core, validation de l'ID token](https://openid.net/specs/openid-conne
   expiration, audience et nonce) et
   access token (issuer, expiration, signature, azp et rôles verified/admin),
   puis session serveur et redirection accueil.
+- `GET /auth/attente?reason=verification|administration` : page publique
+  informative, sans session ni CSRF consultés par l'interface. Un rôle manquant
+  retourne403 `access_requirement` aux API ; un callback HTML valide redirige
+  vers cette page et ferme la session précédente de ce navigateur.
 - `POST /auth/logout` : CSRF, révocation locale et fin de session OIDC.
 
 Scopes demandés : openid, profile, email, sans offline_access. Cookies Secure,

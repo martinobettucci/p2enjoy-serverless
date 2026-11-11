@@ -12,8 +12,16 @@ peut être conservée pour y revenir. **Namespaces** ramène à la gestion.
 
 Ouvrir la console puis choisir **Se connecter**. La connexion se déroule sur
 le SSO lelabs ; le compte doit posséder les rôles `verified` et `admin`.
-Un refus de connexion revient à l'accueil avec son motif. La session de console
-expire au plus tard après huit heures ; la déconnexion la ferme immédiatement.
+Si un rôle manque, **Accès en attente** explique la demande à adresser à un
+administrateur du SSO : faire vérifier le compte, puis obtenir le rôle
+d'administration si vous devez exploiter la plateforme. Après son intervention,
+choisir **Vérifier mon accès**. L'attribution des rôles reste une intervention
+humaine ; la page d'attente ne donne accès à aucun objet de gestion.
+
+Une erreur de connexion revient à l'accueil avec son motif. Si la vérification
+de la session est temporairement indisponible, choisir **Réessayer** après
+quelques instants. La session de console expire au plus tard après huit heures ;
+la déconnexion la ferme immédiatement.
 
 ## Retrouver une fonction
 

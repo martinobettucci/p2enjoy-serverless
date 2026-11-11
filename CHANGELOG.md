@@ -2,9 +2,11 @@
 
 ## [Non publié]
 
-- SLS-089 : contrat d'attente de droits, validation azp de l'ID token et reprise
-  sous indisponibilité JWKS persisté avant code. Implémentation et preuves à venir ;
-  les profils SSO sans droits et la rotation réelle demandent un accès externe.
+- SLS-089 : attente de droits, validation azp de l'ID token et reprise sous
+  indisponibilité JWKS implémentées après contrat dédié. Renouvellement reçu
+  conservé chiffré sans autorisation tant qu'il n'est pas validé. Client E2E
+  et lecteur du vrai JWT prêts ; déploiement et preuves à venir. Les profils
+  SSO sans droits et la rotation réelle demandent un accès externe.
 
 - Icône Serverless déployée en DEV : trois blocs reliés remplacent la foudre
   dans le favicon et la marque de l'accueil/console, via un SVG unique.

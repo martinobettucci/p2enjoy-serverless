@@ -17,7 +17,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .api import router
-from .auth import Identity,SESSION_COOKIE,FLOW_COOKIE
+from .auth import Identity,SESSION_COOKIE,FLOW_COOKIE,AccessPending
 from .config import Settings,Vault
 from .db import Database,audit
 from .deployments import Deployments
@@ -162,14 +162,20 @@ async def http_error(request:Request,error:HTTPException):
                     audit(db,actor,'request.denied',key,service_id,{'status':error.status_code,'route':route})
             except sqlite3.Error:
                 logger.error(json.dumps({'event':'audit.unavailable','request_id':getattr(request.state,'request_id',None)}))
-    response=JSONResponse({'error':error.detail},status_code=error.status_code,headers=error.headers)
+    # @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#attente-de-droits
+    payload={'error':error.detail}
+    if isinstance(error,AccessPending):payload['access_requirement']=error.access_requirement
+    response=JSONResponse(payload,status_code=error.status_code,headers=error.headers)
     if request.url.path=='/auth/login' and 'text/html' in request.headers.get('accept',''):
         document=(web_root/'index.html').read_text().replace('<body>',
             '<body data-auth-error="'+html.escape(str(error.detail),quote=True)+'">',1)
         response=HTMLResponse(document,status_code=error.status_code,headers=error.headers)
     if request.url.path=='/auth/retour' and 'text/html' in request.headers.get('accept',''):
-        response=RedirectResponse(settings.public_url+'/#'+urlencode({'auth-error':str(error.detail)}),status_code=303)
+        destination=('/auth/attente?'+urlencode({'reason':error.access_requirement}) if isinstance(error,AccessPending)
+                     else '/#'+urlencode({'auth-error':str(error.detail)}))
+        response=RedirectResponse(settings.public_url+destination,status_code=303)
     if request.url.path=='/auth/retour':response.delete_cookie(FLOW_COOKIE,secure=True,httponly=True,samesite='lax',path='/')
+    if isinstance(error,AccessPending):response.delete_cookie(SESSION_COOKIE,secure=True,httponly=True,samesite='lax',path='/')
     return response
 
 
@@ -272,6 +278,15 @@ async def login(request:Request):return canonical_entry(request,'/auth/login') o
 
 @app.get('/auth/retour')
 async def callback(request:Request):return await identity.callback(request)
+
+
+# @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#attente-de-droits
+@app.get('/auth/attente')
+async def access_waiting(request:Request):
+    reason=request.query_params.get('reason')
+    if reason not in ('verification','administration'):raise HTTPException(400,'Motif d’attente inconnu.')
+    return (canonical_entry(request,'/auth/attente?'+urlencode({'reason':reason}))
+            or FileResponse(web_root/'index.html',media_type='text/html'))
 
 
 @app.post('/auth/logout')

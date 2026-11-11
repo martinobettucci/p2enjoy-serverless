@@ -17,6 +17,11 @@ export async function api(path, options = {}) {
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
+    // @spec docs/BACKLOG.md#sls-089 | docs/SSO_SESSION_RECOVERY.md#attente-de-droits
+    if (response.status === 403 && ['verification','administration'].includes(data.access_requirement)) {
+      const destination = '/auth/attente?reason=' + data.access_requirement;
+      if (location.pathname + location.search !== destination) location.assign(destination);
+    }
     const error = new Error(data.error || `Le serveur a refusé la requête (${response.status}).`);
     error.status = response.status;
     error.details = data.details;
