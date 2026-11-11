@@ -6358,3 +6358,9 @@ indépendant du terminal, même client Node ; passage SSO par socket mémoire
 authentifié UID/PID, aucune valeur sensible persistée. Compte rendu privé durable
 et contrôle du processus réel par une seconde commande. Aucun nouveau test
 engagé avant clôture constatée de l'essai précédent ; aucune source d'âge publiée.
+
+Revue du pilote durable avant lancement : collecte automatique trop précoce
+et cgroup simplement recopié identifiés. Décision persistée : oneshot borné
+TimeoutStartSec3600, RemainAfterExit jusqu'à capture du vrai résultat par finish ;
+MainPID0 et ExecMainCode/Status recoupés avant arrêt de cette seule unité. status
+relit aussi /proc/PID/cgroup. Aucun worker ou nouveau test encore lancé.

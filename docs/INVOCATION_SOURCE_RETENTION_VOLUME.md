@@ -112,4 +112,12 @@ la restitution réelle réussissent. Un worker interrompu reste un échec ; vér
 la restitution distante avant toute autre opération. Le lanceur de contrôle se
 termine après réception, puis un processus distinct doit constater le même
 MainPID/naissance/cgroup vivant : preuve réelle d'indépendance du terminal.
+Le service est oneshot : TimeoutStartSec3600 borne son exécution et
+RemainAfterExit conserve le résultat réel après la fin du processus. Aucune
+collecte automatique avant preuve : `finish UUID` exige MainPID0, état exited
+ou failed, ExecMainCode/ExecMainStatus et checkpoint cohérents, persiste le reçu,
+puis arrête cette seule unité et recoupe sa disparition/inactivité. Une autre
+commande `status UUID` recoupe le cgroup vivant dans /proc avec celui du reçu,
+en plus du PID et de sa naissance. Une interruption finale du worker interdit
+la réussite même si Node avait écrit completed=true.
 Aucune réussite nouvelle acquise par cette décision.
