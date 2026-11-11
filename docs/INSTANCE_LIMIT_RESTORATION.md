@@ -189,3 +189,19 @@ son consommateur/réseau/bail et restitue les originaux. Ce mode qualifie la
 restauration sous diagnostic indisponible ; il ne prétend pas une capture
 positive pendant la faute. La suspension est limitée à l’ID du contrôle isolé,
 jamais à celui du contrôle habituel. Réussites nominale et fautée sont distinctes.
+
+
+### Refus d’appartenance obligatoire
+
+La seconde revue confirme qu’un catch général pourrait absorber le refus
+`foreign_namespace`. Seule l’indisponibilité technique du Docker exec est
+capturée ; identités, configuration et lecture d’appartenance restent des
+préconditions obligatoires. Le namespace est vérifié avant l’exec et de nouveau
+après arrêt du contrôle, avant nettoyage des consommateurs. Les erreurs SQLite
+qui empêchent de connaître la propriété restent des refus de restitution.
+
+Le mode `--foreign-namespace` crée réellement un second namespace par API,
+demande la restitution et exige son refus sans retrait du contrôle temporaire
+ni disparition de ce namespace. Le client supprime ensuite son propre objet
+de faute par API avant une restitution explicite réussie. Ce parcours ne
+s’attribue ni suppression d’un objet tiers ni succès du premier refus.

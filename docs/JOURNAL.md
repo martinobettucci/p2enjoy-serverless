@@ -5855,3 +5855,14 @@ explicite, restitution toujours contrôlée par identités, témoin obligatoire 
 nominal. Preuve ajoutée par Docker pause réel du seul contrôle temporaire ;
 l’exec indisponible ne doit empêcher ni retrait ni restitution. Aucun résultat
 E2E nouveau acquis par la revue.
+
+
+Premier essai consommateur7d9425e/f47de76f arrêté après une erreur de transport
+opérateur non détaillée par le client ; ce n’est pas une réussite de campagne.
+Le reçu natif confirme ensuite restauration, guard/helper terminés, même appel
+running au passage de garde, un conteneur/réseau/bail retirés et originaux sains.
+Enrichir le diagnostic du seul SSH opérateur sans secret avant nouvelle exécution.
+La seconde revue révèle aussi le catch trop large : les refus d’appartenance
+restent obligatoires, seule la panne technique d’exec est récupérable. Ajouter
+la preuve API d’un namespace étranger conservé avant suppression autorisée de
+l’objet synthétique et restitution. Ces constats restent dans099, aucun test parallèle.
