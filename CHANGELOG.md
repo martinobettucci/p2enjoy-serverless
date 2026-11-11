@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Banc de capture : points de faute explicites après progrès SQLite non final
+  ou premier artefact réellement copié. Reçu synchronisé, SIGSTOP et vraie
+  garde indépendante80, inspection/protection du dossier partiel et conservation
+  des captures canoniques. Implémenté ; E2E encore requis.
+
 ### Reprise après coupure requalifiée sur les sources courantes
 
 - Les [cinq groupes historiques](docs/evidence/schedule-recovery-regression-dev-2026-11-11.json)

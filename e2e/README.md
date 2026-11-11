@@ -2001,3 +2001,21 @@ l'observation du même PID/naissance/cgroup a été récupérée sans redémarra
 Le futur lancement privé ajoute --no-block, sans preuve nominale supplémentaire.
 Brut 803 835 octets, gzip 91 578. Aucun produit/UI changé ; interruptions de
 copie/backup, âge et campagne complète restent ouverts.
+
+## Interruption de la sauvegarde et de la copie d'artefacts
+
+Le client `schedule-retention-capture.mjs` accepte aussi deux options exclusives :
+`--control-backup-loss` et `--artifact-copy-loss`. Préparer les sessions privées
+par le vrai parcours SSO, synchroniser helper/client, puis exécuter un seul cas
+à la fois sur le SPARK DEV au repos. Chaque cas exige quatre groupes : témoin
+HTTP, progrès réel interrompu avec garde indépendante 80 s, même contrôle et
+tir clos sans rejeu, purge physique. Les options correspondantes du helper
+`--capture-loss=control-backup|artifact-copy` sont réservées à terminal-capture.
+
+Le reçu root0600 précède SIGSTOP et porte soit le progrès SQLite non final,
+soit le fichier réellement copié/conforme. Le client inspecte le helper arrêté,
+la trace du contrôle, puis la vraie garde tuant/joignant ce helper. Le nouveau
+dossier partiel est protégé et conservé sans manifeste final ; les deux sources
+canoniques restent identiques. Aucun accès de récupération au SQLite partiel.
+Sans option, rejouer ensuite le nominal ; ce code ne vaut pas encore preuve E2E.
+Contrat : [interruptions de copie](../docs/SCHEDULE_RETENTION.md#interruptions-pendant-sauvegarde-et-copie).

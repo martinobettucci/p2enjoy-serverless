@@ -1713,8 +1713,9 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   avant démarrage. Restent backup/copie interrompus.
   [Interruptions de copie](SCHEDULE_RETENTION.md#interruptions-pendant-sauvegarde-et-copie)
   spécifiées : callback SQLite réel ou copy2 réel, SIGSTOP puis garde 80 s,
-  reçu par FD préouvert sous root et dossier partiel conservé. Code/E2E à faire
-  après le worker historique figé, désormais terminé.
+  reçu par FD préouvert sous root et dossier partiel conservé. Helper/client
+  implémentés après le worker historique terminé, syntaxes contrôlées et
+  revue RO du candidat intégrée ; E2E des deux fautes et nominal à exécuter.
   Rejeu historique préparé avec le même client, dans un oneshot utilisateur
   local indépendant du terminal ; [contrat de suivi](SCHEDULE_RECOVERY.md#exécution-indépendante-du-terminal).
   Même worker vivant après timeout du client de lancement (20 s), puis

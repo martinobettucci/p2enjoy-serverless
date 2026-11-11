@@ -6751,3 +6751,13 @@ ce prochain nominal n'est pas testé. Captures canoniques inchangées, deux
 services sains, contrôle démarré 16:25:03, référence inchangée, actifs à zéro,
 5 982 artefacts et aucune garde. Brut 803 835/gzip 91 578 octets. Les pannes
 de backup/copie, l'âge et la campagne complète maintiennent 078.5 ouverte.
+
+### 11 novembre 2026 — Points de faute de copie implémentés
+
+Après la fin du worker historique, intégration des deux options de copie dans
+le helper et son client existants. Callback backup réel sous UID propriétaire,
+FD root préouvert/synchronisé ; copy2 réel avant suspension ; inspection native
+avant/après garde indépendante80 et protection du seul dossier partiel nouveau.
+Revue RO du candidat intégrée : refuser --capture-loss hors terminal-capture
+avant toute mutation. Python/Node et trois scripts Python embarqués contrôlés
+statiquement ; E2E des deux fautes, refus et nominal encore à exécuter.

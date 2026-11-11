@@ -1,3 +1,4 @@
+# @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RETENTION.md#interruptions-pendant-sauvegarde-et-copie
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RECOVERY.md#périmètre-et-frontières | docs/SCHEDULE_RECOVERY.md#garde-et-restitution
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RECOVERY.md#campagne-séquentielle
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RETENTION.md#capture-authentique-avant-vieillissement
@@ -65,6 +66,14 @@ assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless' and plat
 mode, function_id, namespace = sys.argv[1:4]
 assert mode in ('before', 'claimed', 'linked', 'watchdog', 'inspect', 'restore', 'rescue', 'evidence', 'terminal-capture')
 assert str(UUID(function_id)) == function_id and str(UUID(namespace)) == namespace
+assert not any(v.startswith('--capture-loss') for v in sys.argv[4:]) or mode == 'terminal-capture', 'capture_loss_requires_terminal_capture'
+capture_loss = None
+if mode == 'terminal-capture':
+    options = sys.argv[5:]
+    assert not options or len(options) == 1 and options[0] in (
+        '--capture-loss=control-backup', '--capture-loss=artifact-copy'), 'capture_loss_option_required'
+    capture_loss = options[0].split('=', 1)[1] if options else None
+
 root = Path('/srv/p2enjoy-serverless')
 values = {}
 for line in Path('/etc/spark/env').read_text().splitlines():
@@ -179,6 +188,8 @@ item = {'function_id':function_id, 'namespace_id':namespace, 'window':window, 'm
         'reference':[reference['Id'], reference['Image'], reference['State']['StartedAt']], 'docker':docker, 'pid':pid, 'birth':birth(pid),
         'cgroup':Path('/proc', str(pid), 'cgroup').read_text(), 'helper_pid':os.getpid(), 'helper_birth':birth(os.getpid()),
         'lock_identity':[lock_info.st_dev, lock_info.st_ino]}
+if capture_loss:
+    item['capture_loss'] = capture_loss
 for name, content in [('identity.json', json.dumps(item)), ('restore.py', restore_program), ('kill.py', kill_program)]:
     path = folder/name
     path.write_text(content)
@@ -266,8 +277,54 @@ try:
         capture.mkdir(mode=0o700)
         os.chown(capture, owner.st_uid, owner.st_gid)
         snapshot = capture/'control.sqlite3'
+        # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RETENTION.md#interruptions-pendant-sauvegarde-et-copie
+        loss_fd = None
+        if capture_loss:
+            loss_fd = os.open(folder/'capture-loss.json', os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW, 0o600)
+            os.fsync(loss_fd)
+            directory_fd = os.open(folder, os.O_DIRECTORY)
+            try:
+                os.fsync(directory_fd)
+            finally:
+                os.close(directory_fd)
+
+        def pause_incomplete_copy(progress):
+            assert loss_fd is not None and capture_loss
+            descriptor = os.fstat(loss_fd)
+            receipt = {'event':'capture-copy-paused', 'phase':capture_loss,
+                       'capture_id':capture.name, 'capture_complete':False,
+                       'function_id':function_id, 'namespace_id':namespace, 'window':window,
+                       'helper_pid':os.getpid(), 'helper_birth':birth(os.getpid()),
+                       'control_pid':pid, 'control_birth':item['birth'],
+                       'operator_sha256':item['operator_sha256'], 'sampled_at':time.time(),
+                       'effective_uid':os.geteuid(), 'effective_gid':os.getegid(),
+                       'receipt_identity':[descriptor.st_dev,descriptor.st_ino],
+                       'progress':progress}
+            body = memoryview((json.dumps(receipt)+'\n').encode())
+            while body:
+                count = os.write(loss_fd, body)
+                assert count > 0, 'capture_loss_receipt_write_failed'
+                body = body[count:]
+            os.fsync(loss_fd)
+            os.close(loss_fd)
+            emit(receipt)
+            os.kill(os.getpid(), signal.SIGSTOP)
+            raise AssertionError('capture_fault_unexpectedly_resumed')
+
+        if capture_loss == 'control-backup':
+            with control_owner(control):
+                descriptor = os.open(snapshot, os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW, 0o600)
+                os.close(descriptor)
         with control_owner(control), closing(sqlite3.connect('file:'+str(control)+'?mode=ro', uri=True)) as source, closing(sqlite3.connect(snapshot)) as destination:
-            source.backup(destination)
+            if capture_loss == 'control-backup':
+                assert source.execute('PRAGMA page_count').fetchone()[0] > 16, 'capture_source_too_small_for_fault'
+                def incomplete_backup(status, remaining, total):
+                    assert status == sqlite3.SQLITE_OK and 0 < remaining < total, 'nonfinal_backup_progress_required'
+                    pause_incomplete_copy({'status':status, 'remaining':remaining, 'total':total,
+                                           'copied_pages':total-remaining, 'backup_complete':False})
+                source.backup(destination, pages=16, progress=incomplete_backup)
+            else:
+                source.backup(destination)
             assert destination.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
             destination.row_factory = sqlite3.Row
             captured_firing = dict(destination.execute('SELECT * FROM schedule_firings WHERE id=?', (gated['firings'][0]['id'],)).fetchone())
@@ -312,7 +369,27 @@ try:
             return result
         before_artifacts = inventory(artifact_root)
         assert shutil.disk_usage(capture).free > sum(v['bytes'] for v in before_artifacts.values())*2+1024**3, 'capture_disk_margin_required'
-        shutil.copytree(artifact_root, capture/'artifacts', copy_function=shutil.copy2)
+        if capture_loss == 'artifact-copy':
+            assert len(before_artifacts) > 1, 'multiple_artifacts_required_for_fault'
+            def incomplete_artifact_copy(source_path, destination_path):
+                copied_path = shutil.copy2(source_path, destination_path)
+                relative = str(Path(source_path).relative_to(artifact_root))
+                info = Path(destination_path).stat()
+                observed = {'sha256':sha(destination_path), 'bytes':info.st_size,
+                            'mode':stat.S_IMODE(info.st_mode)}
+                assert observed == before_artifacts[relative], 'copied_fault_artifact_changed'
+                copied_files = sum(1 for path in (capture/'artifacts').rglob('*') if path.is_file())
+                assert 0 < copied_files < len(before_artifacts), 'incomplete_artifact_tree_required'
+                # This first real copy must suspend; resuming is always an error.
+                pause_incomplete_copy({'copied_files':copied_files, 'expected_files':len(before_artifacts),
+                                       'file':{'path':relative, **observed},
+                                       'source_inventory_sha256':hashlib.sha256(json.dumps(before_artifacts,sort_keys=True).encode()).hexdigest(),
+                                       'control_backup_sha256':sha(snapshot), 'backup_complete':True,
+                                       'artifact_copy_complete':False})
+                return copied_path
+            shutil.copytree(artifact_root, capture/'artifacts', copy_function=incomplete_artifact_copy)
+        else:
+            shutil.copytree(artifact_root, capture/'artifacts', copy_function=shutil.copy2)
         assert inventory(artifact_root)==before_artifacts==inventory(capture/'artifacts'), 'capture_artifacts_changed'
         with control_owner(control), closing(sqlite3.connect('file:'+str(registry)+'?mode=ro', uri=True)) as source, closing(sqlite3.connect(capture/'registry.sqlite3')) as destination:
             assert source.execute('SELECT count(*) FROM leases').fetchone()[0]==0, 'capture_registry_must_be_quiet'
