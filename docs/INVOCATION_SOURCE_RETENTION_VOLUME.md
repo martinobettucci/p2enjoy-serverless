@@ -68,7 +68,8 @@ identités/images, configuration officielle et référence inchangées, garde jo
 
 Trois groupes : SSO/préparation et10000 HTTP authentiques ; trois frontières et
 clôture sans rejeu ; purges et restitution. Les pannes propres du nouvel opérateur
-et les régressions du helper restent requises avant de qualifier sa sûreté.
+restent requises avant de qualifier sa sûreté. Les régressions de sa fenêtre
+commune ont leur preuve distincte de 25 groupes ci-dessous.
 Aucun succès acquis par ce contrat ou par les contrôles syntaxiques.
 
 ### Garde2700 et refus qualifiés
@@ -80,7 +81,8 @@ configuration et référence conservés, pilote et garde terminés. L'expiration
 n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant son
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
 rejouer les tests. Charge10000 et frontières sont qualifiées séparément ci-dessous ;
-pannes propres et régressions restent requises. Ces cinq groupes seuls ne prouvent
+pannes propres encore requises et régressions communes qualifiées séparément.
+Ces cinq groupes seuls ne prouvent
 pas la rétention.
 
 ## Essai interrompu et pilote durable
@@ -182,3 +184,20 @@ systemd success/Code1/Status0 est conservé avant arrêt de l'unité.348sources/
 inchangées, configuration et référence conservées. Le brut complet compressé
 contient les vecteurs et reçus ; essais interrompu/échoué exclus. Sept jours,
 pannes propres résiduelles et campagne complète restent ouverts :078.5 non clôturée.
+
+## Régressions finales des fenêtres de restitution
+
+La [preuve au commit f908640](evidence/retention-history-guard-regressions-dev-2026-11-11.json)
+passe 25 groupes sur 351 sources identiques avant/après : onze fenêtres/partiel,
+trois options/défaut 900, cinq options 2700 et six consommateur vivant/pause/
+namespace. Onze campagnes distinctes, images conservées. Les confirmations
+SIGTERM (15) et SIGKILL (9) ont pidfd lisible puis pilote absent de /proc, mesurées
+10, 765 ms et 28, 345 ms ; gardes de 120 s et restitutions attendues jointes. Les
+options 900/2700 s sont programmées puis restituées, pas laissées expirer.
+
+Les trois essais antérieurs sont exclus ; le ciblé SIGKILL de deux groupes n'est pas ajouté
+au même cas de cette matrice. Le contrôle final garde le même conteneur 68a8 et image c59,
+redémarrage à 14:26:18 UTC, référence inchangée, deux services sains, actifs à zéro, 5 982 artefacts
+et aucune garde. Cette preuve qualifie les fenêtres communes ; pannes
+propres de capture et d'observateur source, âge et campagne complète restent
+ouverts dans 078.5. Les preuves antérieures conservent leurs époques distinctes.

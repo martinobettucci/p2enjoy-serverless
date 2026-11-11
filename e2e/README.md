@@ -1837,7 +1837,8 @@ d'un cron permet d'observer10002→10001 (source protégée), puis10000 après c
 `python3 -B e2e/source-retention-guard-options.py` éprouve la durée2700 programmée
 et quatre refus de combinaisons avant mutation. Exécuter un seul scénario à la
 fois sur le SPARK DEV au repos. Les frontières manquées sont des échecs sans
-rejeu automatique ; nominal qualifié ci-dessous, pannes propres résiduelles et régressions encore requises.
+rejeu automatique ; nominal qualifié ci-dessous, pannes propres résiduelles
+encore requises et régressions communes qualifiées séparément.
 
 ### Garde2700 et refus qualifiés
 
@@ -1848,7 +1849,8 @@ configuration et référence conservés, pilote et garde terminés. L'expiration
 n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant son
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
 rejouer les tests. Charge10000 et frontières sont qualifiées séparément ci-dessous ;
-pannes propres et régressions restent requises. Ces cinq groupes seuls ne prouvent
+pannes propres encore requises et régressions communes qualifiées séparément.
+Ces cinq groupes seuls ne prouvent
 pas la rétention.
 
 ## Pilote durable de la preuve longue des sources
@@ -1919,7 +1921,7 @@ exclusive ; les modes sans options gardent leurs refus d'identité antérieurs.
 qualifient neuf refus/préflights puis quatre groupes pour les pertes avant
 CONTROL et après attache, sur les mêmes351sources. SSO/API réels et restitutions
 nominales puis indépendantes120 ; captures inchangées. Le namespace supplémentaire
-a sa preuve distincte ci-dessous ; régressions encore requises.
+a sa preuve distincte ci-dessous ; régressions communes qualifiées plus bas.
 Les preuves de captures et de borne numérique restent dans leurs époques distinctes.
 
 `python3 -B e2e/retention-history-suite.py source foreign-namespace` reçoit
@@ -1930,3 +1932,20 @@ independent=true décrit la restitution explicite avant expiration du timer. Les
 [quatre groupes9f3e7da](../docs/evidence/retention-history-namespace-scope-dev-2026-11-11.json)
 passent sur351sources, dont deux préflights rejoués. Réconciliation API exercée,
 HTTP perdu non provoqué ; sources et originaux conservés.
+
+## Régressions finales des fenêtres de restitution
+
+La [preuve au commit f908640](../docs/evidence/retention-history-guard-regressions-dev-2026-11-11.json)
+passe 25 groupes sur 351 sources identiques avant/après : onze fenêtres/partiel,
+trois options/défaut 900, cinq options 2700 et six consommateur vivant/pause/
+namespace. Onze campagnes distinctes, images conservées. Les confirmations
+SIGTERM (15) et SIGKILL (9) ont pidfd lisible puis pilote absent de /proc, mesurées
+10, 765 ms et 28, 345 ms ; gardes de 120 s et restitutions attendues jointes. Les
+options 900/2700 s sont programmées puis restituées, pas laissées expirer.
+
+Les trois essais antérieurs sont exclus ; le ciblé SIGKILL de deux groupes n'est pas ajouté
+au même cas de cette matrice. Le contrôle final garde le même conteneur 68a8 et image c59,
+redémarrage à 14:26:18 UTC, référence inchangée, deux services sains, actifs à zéro, 5 982 artefacts
+et aucune garde. Cette preuve qualifie les fenêtres communes ; pannes
+propres de capture et d'observateur source, âge et campagne complète restent
+ouverts dans 078.5. Les preuves antérieures conservent leurs époques distinctes.

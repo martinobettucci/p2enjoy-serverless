@@ -277,8 +277,8 @@ ensembles natifs10002→10001→10000 et les deux plus anciens HTTP exactement
 retirés. Clients : `node e2e/invocation-source-retention-volume.mjs` (SSO privé),
 puis gardes `python3 -B e2e/source-retention-guard-options.py`, en série. Même
 image réelle,10000 HTTP initiaux sur deux fonctions et rendez-vous cron/HTTP.
-Implémentation et syntaxe acquises ; aucune preuve fonctionnelle encore retenue.
-Pannes propres et régressions connexes restent requises.
+Le nominal de trois groupes est qualifié séparément ci-dessous ; pannes
+propres encore requises et régressions de la fenêtre commune qualifiées par 25 groupes.
 
 ### Garde2700 et refus qualifiés
 
@@ -289,7 +289,8 @@ configuration et référence conservés, pilote et garde terminés. L'expiration
 n'est pas revendiquée. Le collecteur initial a échoué sur un glob incluant son
 checkpoint ; le rapport E2E terminé0 est conservé et recoupé avant/après sans
 rejouer les tests. Charge10000 et frontières sont qualifiées séparément ci-dessous ;
-pannes propres et régressions restent requises. Ces cinq groupes seuls ne prouvent
+pannes propres encore requises et régressions communes qualifiées séparément.
+Ces cinq groupes seuls ne prouvent
 pas la rétention.
 
 ## Pilote durable du volume source — SLS-078.5
@@ -348,4 +349,21 @@ dont deux préflights rejoués, passent sur351sources. Objet API et même tempor
 conservés au refus, original arrêté ; retrait de la seule fixture puis restitution
 explicite avant expiration du timer. Sources/captures/configuration/originaux
 conservés et gardes jointes. Deux clients seuls diffèrent de la preuve précédente.
-Perte HTTP non provoquée ; régressions historiques et âge restent ouverts.
+Perte HTTP non provoquée ; régressions communes qualifiées ci-dessous, âge ouvert.
+
+## Régressions finales des fenêtres de restitution
+
+La [preuve au commit f908640](evidence/retention-history-guard-regressions-dev-2026-11-11.json)
+passe 25 groupes sur 351 sources identiques avant/après : onze fenêtres/partiel,
+trois options/défaut 900, cinq options 2700 et six consommateur vivant/pause/
+namespace. Onze campagnes distinctes, images conservées. Les confirmations
+SIGTERM (15) et SIGKILL (9) ont pidfd lisible puis pilote absent de /proc, mesurées
+10, 765 ms et 28, 345 ms ; gardes de 120 s et restitutions attendues jointes. Les
+options 900/2700 s sont programmées puis restituées, pas laissées expirer.
+
+Les trois essais antérieurs sont exclus ; le ciblé SIGKILL de deux groupes n'est pas ajouté
+au même cas de cette matrice. Le contrôle final garde le même conteneur 68a8 et image c59,
+redémarrage à 14:26:18 UTC, référence inchangée, deux services sains, actifs à zéro, 5 982 artefacts
+et aucune garde. Cette preuve qualifie les fenêtres communes ; pannes
+propres de capture et d'observateur source, âge et campagne complète restent
+ouverts dans 078.5. Les preuves antérieures conservent leurs époques distinctes.

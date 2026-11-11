@@ -6615,3 +6615,25 @@ Ce succès ne requalifie pas les essais échoués ; la cause du premier Error
 reste inconnue. Sources/images identiques avant/après ; matrice complète à
 rejouer sur ce helper final, ces deux groupes ne seront pas recomptés en plus
 du même cas SIGKILL de la matrice.
+
+### 11 novembre 2026 — Vingt-cinq régressions finales de restitution
+
+La matrice finale f908640 passe 25 groupes sur 351 sources figées et 11 campagnes :
+fenêtre 57864a51 (11), défaut/options 681d0ae8 (3), volume 2700 e5dc0da7 (5),
+consommateurs 0dc00f89 (6). SIGTERM/SIGKILL confirmés par pidfd puis /proc absent,
+10, 765/28, 345 ms ; EOF, release, échéance 120 s et déplacement partiel 60 s réussis.
+Deux handlers réellement actifs sont interrompus dans les cas consommateur et
+Docker pause ; conteneurs/réseaux/baux corrélés puis retirés, diagnostic refusé
+sous pause sans empêcher la restitution. Namespace étranger préservé au refus.
+Options 900/2700 s réellement armées puis restituées, aucune expiration prétendue.
+
+Trois essais interrompu/échoués exclus ; le ciblé SIGKILL de deux groupes n'est pas ajouté.
+Brut 1 042 898 octets/gzip 398 660 octets recoupés par revue RO, aucune contradiction. Seuls
+clientenv/helper diffèrent du namespace (quatre groupes), aucune image produit changée.
+Contrôle final même conteneur/image avec redémarrage attendu à 14:26:18 UTC, référence
+inchangée, deux services sains, agent actif/healthz 200, 5 982 artefacts, actifs à zéro et aucune garde.
+Backlog 078.5 précise les restes distincts : capture initiale et son helper,
+erreur/détachement/lecteur de l'observateur source, alarme 35 s/coupure 40 s, attente
+native 25 s sans événement à mesurer, puis âge réel et campagne complète. Le
+risque d'un reader.close sauté si detach lève est à vérifier dans cette unité ;
+aucun résultat de panne n'est déduit de la lecture seule du code.

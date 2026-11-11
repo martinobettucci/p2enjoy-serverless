@@ -64,7 +64,8 @@ de paramètres et défaut900. La source protégée sous borne est qualifiée ci-
 Le [discriminant de source protégée](docs/INVOCATION_SOURCE_RETENTION_VOLUME.md)
 a son client, son handler original et son observateur natif :10002→10001 avant
 clôture du tir puis10000 après clôture. Garde2700 explicite du seul mode isolé ;
-le nominal est qualifié ci-dessous ; pannes propres et régressions restent ouvertes. Le
+le nominal est qualifié ci-dessous ; pannes propres encore ouvertes,
+fenêtres communes requalifiées par les vingt-cinq groupes liés ci-dessous. Le
 [pilote durable](docs/evidence/source-retention-worker-loss-dev-2026-11-11.json) passe trois
 groupes de perte réelle sur348sources :512 réponses, SIGKILL9 conservé comme
 échec, deux consommateurs physiquement absents et restitution indépendante.
@@ -82,7 +83,11 @@ générations retirées conservés en privé, éligibles ensemble le18 novembre 
 sur351sources : neuf de refus/préflights avec nouveau SSO/API, puis quatre
 de pertes réelles avant CONTROL et après attache, restitutions indépendantes120s.
 Le [refus sous namespace supplémentaire](docs/evidence/retention-history-namespace-scope-dev-2026-11-11.json)
-passe aussi quatre groupes, dont deux préflights rejoués ; régressions encore requises.
+passe aussi quatre groupes, dont deux préflights rejoués. Les
+[vingt-cinq régressions](docs/evidence/retention-history-guard-regressions-dev-2026-11-11.json)
+passent ensuite sur 351 sources : restitutions, options 900/2700 s, consommateur
+vivant, diagnostic Docker indisponible et namespace hors périmètre. Pannes
+propres de capture/observateur source, âge réel et campagne complète encore ouverts.
 La [grammaire numérique des crons](docs/evidence/schedule-calendar-dev-2026-11-10.json)
 passe aussi cinq groupes distincts : fusion, règle jour/semaine, refus et
 prévisions calendaires ; SLS-078.2 est qualifiée.

@@ -1676,19 +1676,39 @@ supplémentaire présent après refus, même conteneur temporaire conservé et o
 arrêté, retrait API de la seule fixture puis restitution explicite.351sources
 avant/après, deux clients seuls changés par rapport aux treize groupes ; helper
 et images inchangés. Réconciliation nominale réellement exercée, perte de
-réponse HTTP non provoquée. Régressions du helper encore requises et aucune
-preuve d'âge avant le18novembre ;078.5 reste ouverte. La
-[première matrice](evidence/retention-history-guard-interrupted-dev-2026-11-11.json)
-termine localement143 pendant SIGTERM, cause non établie ; restauration
-indépendante recoupée, zéro groupe compté. La reprise avec terminal attaché
-passe release/EOF/SIGTERM puis échoue sur un Error non détaillé du signal
-SIGKILL ; originaux restitués, matrice incomplète. Conserver le diagnostic
-privé et les champs opérateur/code/signal avant le prochain rejeu, sans relance
-automatique ni retrait d'assertion. Le rejeu ciblé échoue sur driver_dead non
-confirmé après réveil pidfd ; confirmation /proc bornée et reçu conservé
-corrigée selon INSTANCE_LIMIT_RESTORATION ; le [rejeu ciblé](evidence/retention-history-sigkill-confirmation-dev-2026-11-11.json)
-passe deux groupes avec confirmation et garde indépendante. Matrice complète
-encore requise, sans recomptage de ce même cas.
+réponse HTTP non provoquée. Les
+[vingt-cinq régressions finales](evidence/retention-history-guard-regressions-dev-2026-11-11.json)
+passent sur 351 sources au client f908640 : 11 groupes de fenêtre/partiel, 3 options
+et défaut 900, 5 options 2700, 6 consommateur/diagnostic indisponible/namespace.
+Originaux/images conservés, gardes/pilotes joints ; contrôles finaux : 2 services sains,
+actifs à zéro et 5 982 artefacts. Les trois essais interrompu/échoués restent
+[eux](evidence/retention-history-guard-interrupted-dev-2026-11-11.json)
+[aussi](evidence/retention-history-guard-failed-dev-2026-11-11.json)
+[exclus](evidence/retention-history-sigkill-confirmation-failed-dev-2026-11-11.json).
+Confirmation pidfd puis /proc renforcée, reçu conservé ; les deux groupes du
+[ciblé](evidence/retention-history-sigkill-confirmation-dev-2026-11-11.json)
+ne sont pas recomptés avec le SIGKILL de la matrice. Aucun âge réel avant
+le 18 novembre ; 078.5 reste ouverte.
+
+Restes ciblés de 078.5, avant clôture et campagne complète :
+
+- [ ] Capture initiale `schedule-recovery-operator.py` : pannes propres et
+  régressions de ce helper distinct, non couvertes par la matrice de
+  `storage-legacy-environment.py`.
+- [ ] Observateur source sous borne : erreur réelle après attachement,
+  détachement mesuré par `TracerPid` à zéro et lecteur explicitement fermé avant retour.
+  Un historique insuffisant avec deux vrais handlers peut éprouver ce chemin ;
+  il ne prouve pas la rétention numérique.
+- [ ] Observateur source : expiration de l'alarme de 35 s et coupure extérieure à 40 s
+  avec processus/verrou joints et ressources physiques restituées.
+- [ ] Attente native partagée de 25 s : mesurer le comportement sans événement
+  sur un vrai contrôle temporaire gelé, avec dégel indépendant confirmé
+  avant detach. Le dépassement est une hypothèse à reproduire : waitpid est
+  bloquant et ne relit l'échéance qu'avant/après. Une preuve de ce composant
+  ne vaut pas preuve de toute la boucle de rétention.
+- [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
+  complète de clôture.
+
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
 qualifié ci-dessous résout ce manque avant clôture du critère.4.

@@ -122,8 +122,8 @@ octet ni mode des artefacts copiés. Un reçu privé recoupe les empreintes de
 capture, registre et inventaire avant/après. Cette conservation ne démarre
 aucun conteneur et n’administre pas FORGE.
 
-Restent : pannes propres de la capture et régressions du helper historique,
-pilote gardé de replay, vieillissement des tirs terminaux/générations retirées,
+Restent : pannes propres de la capture initiale et régressions de son helper
+distinct schedule-recovery-operator.py, vieillissement des tirs terminaux/générations retirées,
 protection après passage réel de rétention à sept jours et campagne complète.
 La source protégée sous borne10000 a sa preuve distincte ci-dessous.
 Concurrence078.4 et adaptateur078.7 ont leurs preuves distinctes du11 novembre.
@@ -224,7 +224,7 @@ pilote dédié et ses refus sont qualifiés par les
 dont neuf refus/préflights et quatre pour les deux pertes/restaurations indépendantes.
 Le [namespace supplémentaire](evidence/retention-history-namespace-scope-dev-2026-11-11.json)
 a sa preuve distincte de quatre groupes, dont deux préflights rejoués ; les
-régressions restent à qualifier avant l'âge.
+régressions communes ont maintenant leur preuve de 25 groupes ci-dessous.
 
 ## Source protégée sous borne qualifiée
 
@@ -243,3 +243,20 @@ systemd success/Code1/Status0 est conservé avant arrêt de l'unité.348sources/
 inchangées, configuration et référence conservées. Le brut complet compressé
 contient les vecteurs et reçus ; essais interrompu/échoué exclus. Sept jours,
 pannes propres résiduelles et campagne complète restent ouverts :078.5 non clôturée.
+
+## Régressions finales des fenêtres de restitution
+
+La [preuve au commit f908640](evidence/retention-history-guard-regressions-dev-2026-11-11.json)
+passe 25 groupes sur 351 sources identiques avant/après : onze fenêtres/partiel,
+trois options/défaut 900, cinq options 2700 et six consommateur vivant/pause/
+namespace. Onze campagnes distinctes, images conservées. Les confirmations
+SIGTERM (15) et SIGKILL (9) ont pidfd lisible puis pilote absent de /proc, mesurées
+10, 765 ms et 28, 345 ms ; gardes de 120 s et restitutions attendues jointes. Les
+options 900/2700 s sont programmées puis restituées, pas laissées expirer.
+
+Les trois essais antérieurs sont exclus ; le ciblé SIGKILL de deux groupes n'est pas ajouté
+au même cas de cette matrice. Le contrôle final garde le même conteneur 68a8 et image c59,
+redémarrage à 14:26:18 UTC, référence inchangée, deux services sains, actifs à zéro, 5 982 artefacts
+et aucune garde. Cette preuve qualifie les fenêtres communes ; pannes
+propres de capture et d'observateur source, âge et campagne complète restent
+ouverts dans 078.5. Les preuves antérieures conservent leurs époques distinctes.

@@ -2,14 +2,19 @@
 
 ## [Non publié]
 
-### Confirmation des signaux du pilote — en qualification
+### Confirmation des signaux et fenêtres de restitution qualifiées
 
 - Le helper exige la fin du même pilote après le réveil pidfd, avec attente
   bornée et reçu durable. Le client conserve le reçu avant assertion et les
   erreurs opérateur en privé. Syntaxes contrôlées et revue RO sans défaut ;
   le [rejeu réel ciblé](docs/evidence/retention-history-sigkill-confirmation-dev-2026-11-11.json)
-  passe deux groupes avec garde indépendante. Matrice complète encore requise ;
-  essais échoués conservés.
+  passe deux groupes avec garde indépendante. La
+  [matrice complète du helper](docs/evidence/retention-history-guard-regressions-dev-2026-11-11.json)
+  passe ensuite 25 groupes sur 351 sources : 11 fenêtre/partiel, 3 options/défaut 900,
+  5 options 2700 et6 consommateurs/pause/namespace. Les deux groupes du ciblé ne sont pas ajoutés
+  au même SIGKILL de la matrice. Trois essais antérieurs exclus, originaux et
+  images conservés, contrôle final sain à 14:26:18 UTC (deux services, actifs à zéro, 5 982 artefacts).
+  Pannes propres de l'observateur source, âge et campagne complète ouverts.
 
 ### Refus du périmètre cloné qualifié
 
@@ -35,7 +40,8 @@
   qualifient les pertes avant CONTROL et après attache, gardes120 indépendantes
   et captures/originaux conservés. Les [dates natives](docs/evidence/retention-history-loss-timings-dev-2026-11-11.json)
   sont recoupées séparément sans groupe ajouté. Le namespace supplémentaire a
-  sa preuve distincte ci-dessus ; régressions historiques et sept jours ouverts.
+  sa preuve distincte ci-dessus ; les régressions communes sont maintenant
+  qualifiées séparément, sept jours encore ouverts.
 
 ### Source planifiée protégée sous la borne qualifiée
 
