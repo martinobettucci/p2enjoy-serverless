@@ -523,3 +523,10 @@ frappe arrivée après sa confirmation. L’enregistrement explicite du fichier
 reste le seul envoi qui accepte de nouvelles frappes, conservées comme saisies
 locales. Le scénario vérifiera ce mode pendant une vraie sauvegarde et un vrai
 retrait ; aucune latence ni réponse substituée n’est nécessaire.
+
+Le parcours de070.8 recharge aussi, après l’entrée normale et les publications,
+une URL de source inconnue pour obtenir un vrai404. Un enregistrement de handler
+inchangé fournit une confirmation ; Réessayer la lecture des fichiers doit la
+retirer même si la source reste404. Le dialog de choix d’un hash conservé rétablit
+ensuite la lecture et le brouillon existant. Cette épreuve ne substitue aucune
+réponse ni dépendance et ne prétend pas couvrir les sources archivées.

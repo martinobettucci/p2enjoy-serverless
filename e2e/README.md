@@ -17,6 +17,11 @@ changement produit.17invocations natives,41captures inspectées et8purges de
 fonctions recoupées ; manuel17chapitres/67paragraphes. Les premiers échecs du
 banc restent exclus. Quotas, reprises, limites et compléments UI gardent070ouverte.
 
+Le complément070.8 est en préparation : assertions de confirmation à la frappe,
+lecture et retry réel404, saisie pendant sauvegarde effective, lecture seule au
+retrait, puis choix de source depuis le vrai dialog. Les nouvelles assertions
+restent à exécuter ; le checkpoint57 conserve ses sources et son image datées.
+
 ## Sources et brouillons de code — première tranche qualifiée
 
 `node e2e/code-editor.mjs` reçoit le JSON SSO sur stdin privée. Il utilise le
