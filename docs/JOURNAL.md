@@ -7599,3 +7599,13 @@ publiée séparément avant correction. Décision : garder les métadonnées de 
 réponse courante même lorsque ses domaines sont refusés ; distinguer lecture,
 indisponibilité et absence confirmée. Deux témoins sans code/404 concurrent
 complètent le replay, sans mock ni changement du lecteur ou de sa garde.
+
+### 12 novembre2026 — Badge parent périmé pendant le replay source
+
+L’inspection des JPEG2f044b71 constate un badge Brouillon alors que la réponse
+courante porte function_state:published et que les vrais appels passent200.
+La fiche était ouverte avant la publication concurrente normale ; Actualiser
+les adresses relit sa facette sans actualiser ce badge parent. Le défaut est
+inscrit séparément dans SLS-101, sans modifier le périmètre du correctif071.2
+ni revendiquer un écran totalement cohérent. Spécification et correction de
+101 restent à réaliser après l’unité en cours.

@@ -73,6 +73,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[~]` | SLS-066, SLS-074 | [CONSOLE_TESTER](CONSOLE_TESTER.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
+| 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-060, SLS-071 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
 | 5 | [SLS-083](#sls-083) Limites et en-têtes alignés sur Scaleway | Développer | `[ ]` | SLS-040 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md), [EXECUTION](EXECUTION.md) |
 | 5 | [SLS-080](#sls-080) Compatibilité du projet de référence | Développer | `[~]` | SLS-078, SLS-083 | [REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md) |
@@ -2651,3 +2652,29 @@ le vérificateur), previews16/32/64 distinctes des captures applicatives. Les
 Les5982artefacts et fichiers officiels sont inchangés ;2services sains, actifs/
 baux nuls, référence inchangée et aucune garde. Le manuel conserve ses16chapitres
 et56paragraphes, recoupés avec sa source inchangée.
+
+<a id="sls-101"></a>
+## SLS-101 — État de fiche après publication concurrente
+
+Statut : [ ]. Nature : Corriger. Ordre :3. Dépend de : SLS-060, SLS-071.
+
+Constat réel pendant le replay071.2 : la fonction est ouverte sans code, puis
+publiée/promue par l’API normale tandis que Tester reste monté. Actualiser les
+adresses affiche le hash courant et les appels200 réels, mais le badge de fiche
+reste « Brouillon ». Le catalogue courant confirme function_state:published.
+Captures source-forbidden et selected-version-404 du passage2f044b71, référencées
+dans la preuve071.2 ; défaut visuel distinct de la correction de hash et non
+masqué par le succès des assertions du banc.
+
+Résultat attendu : la fiche ne conserve pas un état de publication contredit
+par une relecture explicite de sa fonction, tout en conservant la composition
+et les valeurs éphémères du testeur monté.
+
+- [ ] SLS-101.1 Spécifier la source autoritative et le moment de mise à jour du
+  badge parent ; ne pas déduire l’état d’une réussite HTTP ni d’un hash seul.
+- [ ] SLS-101.2 Publication/promotion concurrentes puis rafraîchissement réel :
+  badge cohérent avec les métadonnées courantes, sans rechargement du workspace,
+  perte de jeton ou de saisie, ni réémission d’une requête.
+- [ ] SLS-101.3 Éprouver E2E le défaut avant correction, le retour corrigé, les
+  refus de lecture et les autres facettes affectées ; captures desktop/mobile
+  inspectées, manuel/design et régressions communs actualisés.
