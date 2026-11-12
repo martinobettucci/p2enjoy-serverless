@@ -418,3 +418,27 @@ functions.lelabs.tech est légitime. La preuve compare désormais la copie à
 l’entrée exacte du catalogue courant, HTTPS et chemin/hash, puis l’invoque.
 La fonction et ses deux révisions sont physiquement purgées ; cet essai reste
 séparé du replay et ne clôture aucun critère.
+
+### Historique exact borné —décision avant correction
+
+La seconde revue confirme les quatre corrections mais relève qu’une copie
+intégrale par frappe alloue une mémoire non bornée. L’historique conservera
+uniquement les différences exactes (position, texte retiré et inséré), au plus
+64 gestes et8Mio de caractères UTF-16 comptés à deux octets par unité, cumulés
+sur annulation/rétablissement. Les états les plus éloignés sont retirés en
+premier. Le texte courant et les buffers natifs de Chromium restent distincts.
+
+Un undo/redo natif peut regrouper plusieurs frappes. Le modèle rejoue ses
+patches en mémoire jusqu’à retrouver exactement la représentation visible
+obtenue par le navigateur. Si ce geste dépasse l’historique disponible, il
+conserve le texte exact précédent, le réaffiche et annonce la limite ; aucune
+normalisation approximative n’est enregistrée. Compteurs et avertissement sont
+visibles dans la surface d’édition. Une nouvelle lecture/adoption de fichier
+réinitialise cet historique. La preuve vérifie les annulations natives déjà
+prévues,64 gestes/+1, la borne mémoire et le contenu relu par la vraie API.
+
+Le quatrième essai UI s’arrête sur la demande hors borne `limit=100` du client
+pour le catalogue d’adresses (borne réelle20) ; huit groupes acquis seulement
+sur cet essai, objets purgés. La consultation de recoupement utilisera la même
+page5 que la console. Ce défaut de banc et le changement d’historique imposent
+un nouveau gel de sources et une nouvelle image, sans addition des essais.
