@@ -15,6 +15,11 @@ IDs sûrs, réutilisation de l'émetteur normal de jeton et route d'observation 
 Aucune migration ni infrastructure nouvelle. Le préflight natif constate deux
 services sains, compteurs/baux nuls,5982artefacts et writer0DML fermé. Aucun test
 071 ni état implémenté n'est revendiqué avant code et déploiement.
+La revue du backend non déployé trouve un défaut de validation : `Key` devient
+ASCII après lower(), puis échoue dans l'encodage du nom original ; le finally
+réattendait cette exception avant de rendre la place.071.6 fixe le nom original
+ASCII et la jonction de toutes les tâches avant décrément garanti. Rejet et
+réutilisation de capacité seront éprouvés en E2E réel ; aucune panne déployée.
 
 ## 12novembre2026 — capacité réelle des brouillons qualifiée
 

@@ -143,6 +143,12 @@ Unicode/query/en-têtes, Authorization par empreinte, absence cookies/jeton de
 plateforme, statut métier non2xx, redirection vers une seconde vraie fonction
 dont le compteur doit rester inchangé, gros corps/réponse et attente réelle.
 Les API refusent sans émission les destinations étrangères et en-têtes réservés,
+notamment les noms Unicode qui deviennent ASCII après lower() (signe Kelvin).
+La validation porte sur le nom original ; la jonction annule d'abord les deux
+tâches, recueille leurs sorties puis restitue la capacité dans un finally externe,
+y compris si une tâche relève une exception inattendue. Cette correction de
+revue avant déploiement et ses appels suivants sont suivis dans071.6.
+Les tests couvrent aussi
 les modèles inconnus, mauvais CSRF/droits, bornes exactes/+1. Les versions A/B,
 archivage entre sélection et appel, jeton révoqué/expiré et politiques origine/IP
 passent par la vraie passerelle. L'expiration du jeton temporaire est vérifiée

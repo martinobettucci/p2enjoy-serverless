@@ -968,6 +968,10 @@ Critères d'acceptation :
   restitués fidèlement.
 - [ ] SLS-071.5 Lien de la réponse vers l'invocation et ses journaux ([SLS-072](#sls-072)) ;
   exemple cURL copiable sans secret.
+- [ ] SLS-071.6 En-têtes ASCII validés avant normalisation et jonction de toutes
+  les tâches avant restitution de capacité, même après exception inattendue.
+  Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
+  et empêcher le décrément du compteur. Refus422 et appels suivants sains à prouver.
 
 Tests exigés :
 
