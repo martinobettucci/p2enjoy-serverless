@@ -928,6 +928,13 @@ passe sept groupes puis refuse un événement natif après deux lectures retenue
 Six helpers/handlers et nettoyage complet sont recoupés ; zéro qualifié.
 Diagnostic brut et rapprochement des enfants hérités décidés avant code,
 avec nouveau passage sur workers fraîchement créés après redémarrage DEV gardé.
+Le [troisième passage qualifié](evidence/code-editor-read-concurrency-dev-2026-11-12.json)
+passe34groupes (9ciblés/25communs),414sources11b90326/imageb452ef16. Quatre FD/
+workers, trois clones avec arrêts enfants précoces, cinquième429 en63ms puis
+capacité rendue, six modes de secours et sept handlers sont recoupés ;22images
+inspectées. Trois fonctions/tokens, six parents et16helpers de tous les passages
+sont nettoyés ; deux échecs exclus.070.1–.5restent ouverts pour droits pendant IO,
+purge face à lecteur, reconstruction/ZIP, attentes UI et interruptions.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 est désormais

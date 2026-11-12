@@ -141,4 +141,8 @@ distinguée de la vérification de leur propriétaire pendant ouverture.
 Les trois notes SPARK et propositions sont conservées : image, installation,
 interfaces et configuration inchangées, aucune adoption revendiquée. Aucun
 build produit, migration, variable, secret ou route n’est nécessaire. Les
-ensembles2–4 et la campagne complète restent à produire ;070.1–.5 restent ouverts.
+parcours de l’ensemble2 sont désormais qualifiés par [43groupes](evidence/code-editor-console-focus-dev-2026-11-12.json).
+L’ensemble3 est engagé par les [34groupes des lecteurs vivants](evidence/code-editor-read-concurrency-dev-2026-11-12.json),
+quatre lecteurs et leurs restitutions. Droits pendantIO, purge face à lecteur,
+reconstruction/ZIP, attentes UI, ensemble4 et campagne complète restent à
+produire ;070.1–.5 restent ouverts.

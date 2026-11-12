@@ -10,7 +10,7 @@ L’invocation du code publié passe la [preuve du moteur](evidence/execution-de
 Expiration, budget et interruption pendant nettoyage restent à qualifier.
 Le parcours UI est spécifié dans [CONSOLE_PUBLICATION](CONSOLE_PUBLICATION.md).
 
-## Prochaine preuve de lecteurs — redémarrage DEV effectué
+## Lecteurs vivants — qualification ciblée DEV
 
 Le [second échec du banc](evidence/code-editor-reader-event-failed-dev-2026-11-12.json)
 laisse le contrôle sain au même CID/imageb452ef16 ; les ressources de campagne
@@ -21,7 +21,11 @@ imageb452ef16, configuration, schéma010, données, référence et5982artefacts 
 conservés ; son nouveau démarrage est2026-11-12T15:57:39.012887686Z. La santé et
 l’intégrité/FK sont recoupées après reprise. Le prochain passage prend cette
 nouvelle baseline. Aucune image, migration, variable, secret ou route à appliquer ;
-la qualification du répartiteur reste ouverte.
+le [troisième passage](evidence/code-editor-read-concurrency-dev-2026-11-12.json) passe34groupes réels,
+9ciblés/25communs sur414sources11b90326. Sept handlers, quatre lecteurs,
+trois créations réelles,429 borné et22captures sont recoupés. Les seize helpers
+et les ressources des trois passages sont nettoyés ; le contrôle garde cette
+même génération pendant campagne. Les autres preuves070 restent ouvertes.
 
 ## Correctif de focus Éditeur — déployé et qualification ciblée DEV
 

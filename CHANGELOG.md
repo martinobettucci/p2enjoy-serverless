@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- SLS-070 : [lecteurs vivants qualifiés par34groupes](docs/evidence/code-editor-read-concurrency-dev-2026-11-12.json),9ciblés/25communs,
+  414sources11b90326/imageb452ef16. Quatre FD/workers, trois nouveaux threads
+  rapprochés malgré arrêt enfant précoce, cinquième429 en63ms puis capacité rendue.
+  Release/EOF, SIGKILL, suspension/secours60s et vraiEMFILE du seul secours passent.
+  Sept handlers nominaux et22captures inspectées ; trois fonctions/tokens,
+  six parents et16helpers de tous les passages nettoyés. Deux échecs exclus,
+  zéro groupe ajouté. Backup/redémarrage préparatoire séparés ; produit, manuel,
+  schéma, configuration, référence et5982artefacts conservés.070.1–.5restent ouverts.
+
 - SLS-070 : [second passage des lecteurs échoué](docs/evidence/code-editor-reader-event-failed-dev-2026-11-12.json)
   après sept groupes, sur un événement de thread inattendu pendant l’acquisition
   de quatre lecteurs. Six handlers/helpers et nettoyages recoupés ; zéro groupe

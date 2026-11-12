@@ -1,6 +1,6 @@
 # Qualification de la plateforme
 
-## Lecteurs vivants de l’éditeur — banc préparé, pas encore qualifié
+## Lecteurs vivants de l’éditeur — qualification ciblée DEV
 
 `node e2e/code-editor-read-concurrency.mjs` part de l’accueil et du vrai SSO,
 avec identifiants sur stdin privée. Il publie `editor-reader-lifecycle.cjs` et
@@ -19,8 +19,13 @@ invocations natifs, sans contenu confidentiel ni écriture SQL.
 
 Un seul scénario à la fois sur le SPARK DEV au repos. Le
 [contrat](../docs/CODE_EDITOR_READ_CONCURRENCY.md) décrit identités, bornes et
-preuves résiduelles. Les syntaxes sont contrôlées ; aucun groupe E2E de ce
-nouveau banc n’est encore qualifié. Le [premier passage](../docs/evidence/code-editor-reader-guard-join-failed-dev-2026-11-12.json)
+preuves résiduelles. Le [passage qualifié](../docs/evidence/code-editor-read-concurrency-dev-2026-11-12.json)
+passe neuf groupes puis25communs sur414sources11b90326/commit7968ab9, imageb452ef16.
+Trois clones réellement observés, quatre FD/TID,429 en63ms et sept handlers
+nominaux sont recoupés ;22images communes sont ouvertes individuellement.
+Les seize helpers des trois passages sont absents, trois fonctions/tokens et
+six parents nettoyés ; données/configuration/référence conservées. La preuve
+ne clôture pas les autres droits/concurrences/ZIP et reprises de070. Le [premier passage](../docs/evidence/code-editor-reader-guard-join-failed-dev-2026-11-12.json)
 passe cinq groupes puis échoue à la jonction d’un timer déjà retiré après son
 secours réussi. Fonction/jeton/parents et quatre helpers sont nettoyés ; ses
 quatre handlers ne sont ajoutés à aucun replay. La correction de jonction est
@@ -28,8 +33,8 @@ décidée avant code. Le [second passage](../docs/evidence/code-editor-reader-ev
 passe sept groupes puis refuse un événement natif avec deux lecteurs retenus ;
 six helpers/handlers sont recoupés et les objets nettoyés. Zéro groupe qualifié,
 diagnostic brut et rapprochement des enfants hérités implémentés, syntaxe
-contrôlée. Le replay avec un vrai worker nouveau reste à produire.
-SLS-070 reste ouverte.
+contrôlée puis replay réussi avec trois workers nouveaux. Ces deux échecs
+restent séparés, zéro groupe ajouté aux34. SLS-070 reste ouverte.
 
 ## Client HTTP intégré par fonction — en qualification
 

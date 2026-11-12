@@ -200,8 +200,44 @@ véritable événement clone ; la seule réutilisation de workers ne suffit pas.
 Le répartiteur implémente maintenant ce rapprochement et conserve les métadonnées
 brutes du dernier wait, les créations et les arrêts initiaux observés. Le client
 exige un clone réel dans son groupe à quatre lecteurs. Les syntaxes passent ;
-ce correctif n’est pas encore qualifié. Après revue et gel du correctif ece7d09,
+le correctif est qualifié par le troisième passage décrit ci-dessous. Après revue et gel du correctif ece7d09,
 le redémarrage préparatoire est effectué une seule fois : backup SQLitef0543e39,
 même CID/image, nouveau démarrage2026-11-12T15:57:39.012887686Z. Santé, intégrité,
 FK, dix migrations, configuration, référence et5982artefacts sont conservés.
 Le troisième passage part de cette nouvelle baseline.
+
+## Résultat qualifié et portée
+
+Le [troisième passagec07760f8](evidence/code-editor-read-concurrency-dev-2026-11-12.json)
+au commit7968ab9 passe34groupes :9ciblés puis8manuel/8public/9connexion,
+414sources d’index11b90326 et imageb452ef16 identiques avant/après chaque phase.
+La baseline suit le redémarrage préparatoire15:57:39UTC, backupf0543e39 ;
+aucun redémarrage n’a lieu pendant les quatre campagnes.38backend/quatreweb,
+configuration officielle, référence et5982artefacts sont strictement conservés.
+Manuel18chapitres/74paragraphes, SHA8a50ffa0 inchangé,22captures inspectées.
+
+Quatre workers sont réellement arrêtés à read sur quatre FD distincts du même
+fichier/inode. Trois créations de threads sont observées, chacune avec son
+arrêt initial reçu avant l’événement du parent ; les TID/naissances sont
+rapprochés avant détachement du principal. La santé/gestion HTTP répond pendant
+le maintien, et la cinquième lecture reçoit429/Retry-After2 en63,238ms.
+Les quatre réponses exactes, une nouvelle lecture et un nouveau handler passent
+ensuite. Les autres modes prouvent release/EOF, SIGKILL9, SIGSTOP19 puis secours
+indépendant60s, et EMFILE réel du seul processus de secours après jonction du
+helper ; sa limite est restaurée avant le reçu d’échec, puis le finish normal
+confirme la santé. Aucun buffer, registre ou retour syscall n’est substitué.
+
+Sept invocations nominales distinctes sont jointes aux lignes succeeded,
+handler_started1/HTTP200 et au hash de leur révision. La fonction/révision est
+purgée physiquement, son jeton révoqué et ses deux parents supprimés. Avec les
+deux passages échoués : trois fonctions/tokens, six parents et16helpers sont
+nettoyés. Toutes les tentatives de restitution sont conservées, y compris les
+EMFILE attendus et le premier check de threads refusé du second passage ;
+les restitutions terminales réussissent toutes. Zéro activité/brouillon/
+opération/réservation/bail/garde, intégritéok/FKvide et dix migrations.
+
+Ce complément qualifie les six parcours de l’instrumentation et la capacité de
+quatre lectures de source. Il ne qualifie pas encore révocation pendant IO,
+purge face à lecteur vivant, reconstruction unique/limitesZIP, diff/UI maintenu
+ou interruptions de publication.070.1–.5 restent ouverts ; aucun critère
+supplémentaire n’est coché. Les deux échecs gardent chacun zéro groupe qualifié.

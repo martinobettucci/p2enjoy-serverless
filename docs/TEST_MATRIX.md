@@ -1,5 +1,19 @@
 # Matrice de qualification réelle
 
+Les [lecteurs de code concurrents](evidence/code-editor-read-concurrency-dev-2026-11-12.json) passent **34 groupes réels** :
+9 ciblés puis25communs, sur414sources11b90326/imageb452ef16. Quatre vrais
+workers retiennent quatre FD ; trois nouveaux threads sont rapprochés malgré
+leur arrêt initial reçu avant celui du parent. Le cinquième appel donne429 en
+63ms, puis les quatre réponses et la capacité reviennent. Libération, EOF,
+SIGKILL, suspension/secours60s et vraiEMFILE du seul secours passent.
+Sept handlers nominaux et22images communes sont recoupés ; trois fonctions/
+tokens de tous les passages, six parents et16helpers sont nettoyés. Les deux
+échecs restent séparés, zéro groupe ajouté. Contrôle redémarré avant campagne
+avec backupf0543e39, même CID/image ; référence/configuration/5982artefacts et
+manuel18/74SHA8a50ffa0 conservés.070.1–.5 restent ouverts pour les autres
+preuves : droits pendant IO, purge face à lecteur vivant, reconstruction/ZIP,
+focus sous attente et reprises de publication.
+
 Le [complément console de l’éditeur](evidence/code-editor-console-focus-dev-2026-11-12.json) passe **43 groupes réels** :
 18 UI puis25régressions, sur407sources6600150c et imageb452ef16. Sept versions
 sur deux pages5+2, archive sélectionnable/supprimée désactivée, adoption locale

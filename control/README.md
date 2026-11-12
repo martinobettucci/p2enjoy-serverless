@@ -1,5 +1,19 @@
 # Plan de contrôle
 
+Les [lecteurs de code concurrents](../docs/evidence/code-editor-read-concurrency-dev-2026-11-12.json) passent **34 groupes réels** :
+9 ciblés puis25communs, sur414sources11b90326/imageb452ef16. Quatre vrais
+workers retiennent quatre FD ; trois nouveaux threads sont rapprochés malgré
+leur arrêt initial reçu avant celui du parent. Le cinquième appel donne429 en
+63ms, puis les quatre réponses et la capacité reviennent. Libération, EOF,
+SIGKILL, suspension/secours60s et vraiEMFILE du seul secours passent.
+Sept handlers nominaux et22images communes sont recoupés ; trois fonctions/
+tokens de tous les passages, six parents et16helpers sont nettoyés. Les deux
+échecs restent séparés, zéro groupe ajouté. Contrôle redémarré avant campagne
+avec backupf0543e39, même CID/image ; référence/configuration/5982artefacts et
+manuel18/74SHA8a50ffa0 conservés.070.1–.5 restent ouverts pour les autres
+preuves : droits pendant IO, purge face à lecteur vivant, reconstruction/ZIP,
+focus sous attente et reprises de publication.
+
 Le client HTTP **Tester une fonction (SLS-071)** est livré et qualifié en DEV.
 La [preuve finale du dernier critère](../docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) passe **31 groupes réels** :
 6 ciblés et 25 régressions sur 401 sources 67215a2b, image 60938093 inchangée ;

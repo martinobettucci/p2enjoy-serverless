@@ -1,5 +1,33 @@
 # Journal de cadrage
 
+## 12 novembre 2026 — quatre lecteurs vivants et restitutions qualifiés
+
+Les [lecteurs de code concurrents](evidence/code-editor-read-concurrency-dev-2026-11-12.json) passent **34 groupes réels** :
+9 ciblés puis25communs, sur414sources11b90326/imageb452ef16. Quatre vrais
+workers retiennent quatre FD ; trois nouveaux threads sont rapprochés malgré
+leur arrêt initial reçu avant celui du parent. Le cinquième appel donne429 en
+63ms, puis les quatre réponses et la capacité reviennent. Libération, EOF,
+SIGKILL, suspension/secours60s et vraiEMFILE du seul secours passent.
+Sept handlers nominaux et22images communes sont recoupés ; trois fonctions/
+tokens de tous les passages, six parents et16helpers sont nettoyés. Les deux
+échecs restent séparés, zéro groupe ajouté. Contrôle redémarré avant campagne
+avec backupf0543e39, même CID/image ; référence/configuration/5982artefacts et
+manuel18/74SHA8a50ffa0 conservés.070.1–.5 restent ouverts pour les autres
+preuves : droits pendant IO, purge face à lecteur vivant, reconstruction/ZIP,
+focus sous attente et reprises de publication.
+
+Le troisième passagec07760f8 au commit7968ab9 est suivi des trois campagnes
+communes sur les mêmes414sources ; le redémarrage préparatoire et le backup
+restent un préalable sans groupe artificiel. Les trois arrêts enfants reçus
+avant leurs parents sont maintenant observés et rapprochés. Le premier refus
+sans statut brut reste distinct : la nouvelle observation ne réécrit pas son
+diagnostic manquant. Les reçus d’échec et les restitutions terminales restent
+tous dans le brut. Le vérificateur ouvre22originaux, Git propre avant/après ;
+la revue indépendante recoupe rapports et limites. Les fichiers produit/manuel
+restent inchangés ; seules les trois pages de contrat reçoivent leurs résultats
+dans l’index de sources. Aucun registre d’incohérences présent. Les autres
+preuves070 sont nommées au backlog et ne sont pas déclarées closes.
+
 ## 12 novembre 2026 — redémarrage DEV préparatoire aux nouveaux workers
 
 Le correctif d’événements est relu sans bloqueur statique, commité/poussé ece7d09

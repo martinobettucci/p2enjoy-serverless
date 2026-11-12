@@ -5,7 +5,7 @@ avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
 Le serveur et la migration010 sont déployés et partiellement qualifiés en DEV
 par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La première facette console est déployée et partiellement qualifiée sura77b6b4e.
-Les critères070.7 et070.8 sont clôturés ; les autres restent ouverts.
+Les critères070.6,070.7 et070.8 sont clôturés ;070.1–.5 restent ouverts.
 La campagne de capacité réelle est détaillée dans
 [CODE_DRAFT_CAPACITY](CODE_DRAFT_CAPACITY.md), décision avant son client E2E.
 
@@ -691,3 +691,15 @@ quatre parents et26helpers des deux passages sont nettoyés.38backend/quatreweb,
 référence, configuration,5982artefacts et dix migrations conservés pendant les
 campagnes. Manuel18/74SHA8a50ffa0.070.1–.5 restent ouverts pour les autres bornes,
 droits pendant IO, concurrence et reprises, dont les risques de focus décrits au contrat.
+
+Le [complément des lecteurs vivants](CODE_EDITOR_READ_CONCURRENCY.md) passe
+[34groupes réels](evidence/code-editor-read-concurrency-dev-2026-11-12.json) :9ciblés/25communs,
+414sources11b90326, imageb452ef16. Quatre workers/FD, trois créations réellement
+observées avec arrêt enfant avant parent, cinquième429 en63ms puis capacité
+rendue sont recoupés. Les six modes de barrière/secours et sept handlers passent,
+22images communes sont inspectées ; trois fonctions/tokens, six parents et16
+helpers des trois passages sont nettoyés. Les deux échecs restent exclus.
+Dix migrations, même génération pendant campagne, référence/configuration/
+5982artefacts et manuel18/74SHA8a50ffa0 conservés. Droits pendant IO, purge face
+à lecteur, reconstruction unique/ZIP, attentes UI et reprises restent à produire ;
+070.1–.5 restent ouverts.
