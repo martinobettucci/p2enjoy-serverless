@@ -165,6 +165,14 @@ nominales et33préliminaires sont purgées.22captures sont inspectées.
 
 ## Parcours de console de l’éditeur — première tranche qualifiée
 
+Les [compléments de console](../docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md) étendent
+le client à18groupes : sept versions réelles, archive/supprimée sur la seconde
+page, adoption gardant la saisie sans PUT, sept chemins de diff desktop/mobile
+et focus après pagination. Les14groupes historiques sont rejoués dans ce même
+passage ; leurs anciennes preuves ne sont pas additionnées. Ce client est
+préparé, son exécution et ses captures restent à produire. Aucun produit
+modifié avant la reproduction réelle de l’hypothèse de perte de focus.
+
 `node e2e/code-editor-ui.mjs` reçoit le JSON SSO sur stdin privée. Le parcours
 part de l’accueil et du vrai SSO, crée namespace/service/fonction et jeton Read
 par les formulaires, puis publie le paquet original YAML par la console.

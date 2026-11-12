@@ -506,6 +506,18 @@ restent près du fichier. Les textes binaires/hors limite n’ont pas de faux
 son avertissement navigateur. Les refus et conflits gardent les saisies.
 Les captures et preuves de cette facette restent à produire.
 
+### Compléments de console à qualifier
+
+Le [contrat](CODE_EDITOR_CONSOLE_EXTENSIONS.md) exige deux pages de choix de
+source et de diff, avec hash/état complets, archive sélectionnable et version
+supprimée désactivée. L’adoption conservant la saisie confirme sa portée locale,
+sans prétendre enregistrer le texte. La pagination de source rend le focus au
+titre **Versions de la fonction** ; celle du diff doit le rendre à **Comparer
+le brouillon enregistré**, selon les §§9.5/14.3 du socle. La disparition de ses
+commandes pendant lecture rend nécessaire ce point d’ancrage. Le parcours réel
+doit d’abord reproduire l’absence éventuelle de restitution ; aucune correction
+ni qualification visuelle de ce complément n’est encore revendiquée.
+
 ## Hash courant du testeur sous erreur de domaines — décision0712
 
 La [preuve échouée](evidence/function-http-client-source-access-failed-dev-2026-11-12.json)

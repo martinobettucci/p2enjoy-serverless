@@ -7926,3 +7926,20 @@ l’hypothèse sera éprouvée avant toute correction. Le précédent de la list
 source et les §§9.5/14.3 fixent le retour au titre de comparaison. Le contrat
 CODE_EDITOR_CONSOLE_EXTENSIONS porte les gestes, compteurs sans PUT d’adoption,
 preuves et nettoyage. Aucune modification produit n’est encore décidée.
+
+### 12novembre2026 — Client de compléments console préparé
+
+Les quatre groupes sont ajoutés au clientUI existant, soit18attendus. Les
+quatre publications supplémentaires sont réellement invoquées ; le choix de
+source joint les GET par offset, garde la base existante puis crée celle de
+l’archive. L’adoption locale compte les PUT et relit version/date/texte avant
+le seul enregistrement explicite. Sept fichiers sont ajoutés par l’UI ; quatre
+relevés de focus desktop/mobile sont exigés dans un groupe propre après les
+parcours, pour conserver leurs observations si le focus échoue. Les intentions
+de création recoupent aussi l’absence du nom et distinguent4xx/issue5xx.
+SyntaxeJS et diff contrôlés ; aucune campagne de ce complément encore lancée.
+
+La revue du client fait joindre le rendu du titre de conflit après409 avant
+d’asserter son verrouillage, et aligne l’ouverture du dialog source sur le geste
+clavier annoncé (focus/Entrée). Les routes et structures sont recoupées sans
+blocage ; la perte de focus pressentie reste à reproduire, sans correction produit.
