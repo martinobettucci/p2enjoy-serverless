@@ -258,3 +258,16 @@ ne montrent plus ces défauts, complétées par22vues de régression inspectées
 Le manuel compilé avec la règle actualisée correspond à18chapitres/74paragraphes.
 Les recoupements embarqués/HTTPS encadrent cette fois l’ensemble des campagnes ;
 configurations, référence et5982artefacts antérieurs sont conservés.
+
+## Provenance des refus et coupure après admission
+
+Le replay réel80eca655 sur8c761c5e reproduit un502 de proxy après SIGKILL du
+contrôle avec handler démarré, mal présenté comme refus certain par Tester.
+La reprise native garde une seule invocation et le même hash actif.
+La [correction071.8](CONSOLE_TESTER_FAILURES.md#défaut-reproduit-après-admission--correction0718)
+marque les véritables réponses API du contrôle et reconnaît leur erreur JSON ;
+les pertes du trajet de gestion restent inconnues. Le statut HTTP seul ne
+suffit plus, y compris pour les mutations de jeton temporaire. Un vrai503 du
+contrôle avant émission reste un refus visible, éprouvé par verrou SQLite
+sans écriture de données. Correction implémentée, non encore déployée ni
+rejouée ; le reçu échoué n’est pas une qualification de071.4/.8.

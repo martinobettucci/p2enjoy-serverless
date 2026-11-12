@@ -452,7 +452,10 @@ permet alors de consulter le statut réellement reçu par ce serveur.
 ne remplace pas la durée maximale d’exécution de la fonction. **Arrêter l’attente**,
 une échéance ou une rupture réseau peut laisser un handler admis continuer.
 Le résultat indique cette inconnue et n’effectue aucune relance automatique.
-Consulter les invocations avant de demander un nouvel appel. Les redirections
+Consulter les invocations avant de demander un nouvel appel. Une erreur de
+proxy après la perte du contrôle reste **Issue inconnue**, même si elle porte
+un statut502 ou503. Un refus confirmé du contrôle avant émission conserve
+son message, par exemple une indisponibilité de son stockage. Les redirections
 ne sont pas suivies ; le navigateur peut en masquer le statut.
 
 Une réponse lisible montre son statut HTTP, sa durée, ses en-têtes, son hash

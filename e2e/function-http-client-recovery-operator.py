@@ -5,7 +5,7 @@ from contextlib import closing
 import fcntl,hashlib,json,os,re,select,signal,socket,sqlite3,subprocess,sys,time
 from pathlib import Path
 from uuid import UUID,uuid4
-from control_database import read_control,control_owner
+from control_database import read_control,control_owner,ControlWriter
 from native_control_observer import NativeObserver
 
 def emit(value):print(json.dumps(value),flush=True)
@@ -34,7 +34,7 @@ KILL_CONTROL="import fcntl,hashlib,json,os,signal,socket,stat,subprocess,sys\nfr
 assert os.geteuid()==0 and socket.gethostname()=='infra-serverless','dev_spark_required'
 root=Path('/srv/p2enjoy-serverless');control=root/'state/control.sqlite3'
 mode,function_id,namespace=sys.argv[1:4]
-assert mode in ('arm','watchdog','inspect','restore','rescue','evidence')
+assert mode in ('arm','watchdog','inspect','restore','rescue','evidence','refusal-lock')
 assert str(UUID(function_id))==function_id and str(UUID(namespace))==namespace
 D=['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock']
 with read_control(control) as db:
@@ -91,6 +91,22 @@ for kind in ('instance','validation'):assert not command(D+['ps','-aq','--filter
 current,reference=inspect('serverless-api'),inspect('serverless-runtime-reference')
 assert current['State']['Running'] and reference['State']['Running']
 assert current['State']['Health']['Status']==reference['State']['Health']['Status']=='healthy'
+if mode=='refusal-lock':
+ signal.alarm(20);started=time.monotonic();before=snapshot();writer=ControlWriter(control);reason='pending'
+ try:
+  assert writer.db.total_changes==0
+  emit({'event':'armed','mode':mode,'before':before,'identity':writer.identity,'sql_changes':0,'max_wait_seconds':15})
+  try:
+   line=read_command(32,15);assert line==b'release\n','invalid_release_command';reason='released'
+  except AssertionError as error:
+   reason=str(error)
+   if reason not in ('command_eof','command_deadline'):raise
+  assert writer.db.total_changes==0
+ finally:
+  changes=writer.db.total_changes if writer.db is not None else None;writer.close()
+  emit({'event':'lock-released','reason':reason,'sql_changes':changes,'connection_closed':writer.db is None,'elapsed_seconds':time.monotonic()-started})
+ sys.exit(0)
+
 init=current['State']['Pid'];descendants=[init]
 for parent in descendants:descendants.extend(int(v) for v in Path('/proc',str(parent),'task',str(parent),'children').read_text().split())
 pids=[pid for pid in descendants if Path(os.readlink('/proc/'+str(pid)+'/exe')).name.startswith('python') and Path('/proc',str(pid),'cmdline').read_bytes().startswith(b'python\x00-B\x00-m\x00uvicorn\x00app.main:app\x00')]

@@ -128,6 +128,9 @@ async def response_headers(request:Request,call_next):
         if 'X-Request-ID' not in response.headers:response.headers['X-Request-ID']=request.state.request_id
         return response
     response.headers['X-Request-ID']=request.state.request_id
+    # @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER_FAILURES.md#défaut-reproduit-après-admission--correction0718
+    if request.url.path.startswith('/api/'):
+        response.headers['X-Serverless-Control-Response']='1'
     response.headers['Cache-Control']='no-store'
     response.headers['X-Content-Type-Options']='nosniff'
     response.headers['Referrer-Policy']='no-referrer'

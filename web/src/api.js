@@ -24,6 +24,8 @@ export async function api(path, options = {}) {
     }
     const error = new Error(data.error || `Le serveur a refusé la requête (${response.status}).`);
     error.status = response.status;
+    // @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER_FAILURES.md#défaut-reproduit-après-admission--correction0718
+    error.fromControl = response.headers.get('X-Serverless-Control-Response') === '1' && typeof data.error === 'string';
     error.details = data.details;
     throw error;
   }

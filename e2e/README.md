@@ -60,7 +60,12 @@ purgées, puis leurs parents supprimés par API. Le client reprend les condition
 du précédent natif (SSH137/255 avec événement et reçu, timer sans MainPID).
 Le [plan](../docs/CONSOLE_TESTER_FAILURES.md) définit garde, jonction, nettoyage
 et distinction entre refus certain et issue inconnue. La coupure après admission
-reste non exécutée. Ne pas lancer en parallèle d’un autre scénario.
+a ensuite reproduit le défaut UI sur80eca655 : proxy502 après SIGKILL, reprise
+native unique sans rejeu, mais refus certain affiché. La correction071.8 ajoute
+la provenance réelle du contrôle ; le client exige aussi un vrai503 avant
+émission sous `refusal-lock`, verrou SQLite15s sans DML, release/EOF/échéance
+et processus joints. Build, bascule et replay corrigé restent à exécuter.
+Ne pas lancer en parallèle d’un autre scénario.
 
 ## Capacité réelle des brouillons de code
 
