@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-070 : compléments console spécifiés avant leur client E2E : deux pages
+  de sources/diff, archive/supprimée et adoption de version gardant la saisie.
+  Le focus après pagination est à reproduire sur l’application avant correction.
+
 - SLS-070 : complément de qualification des sources et limites décidé avant
   son client E2E, puis [qualifié par38groupes réels](docs/evidence/code-editor-source-limits-dev-2026-11-12.json).
   Source archivée, gros fichier conservé, chemins en octets, diff2000lignes/

@@ -7912,3 +7912,17 @@ change pas.070.1–.5 restent ouverts pour console, ZIP/concurrence et reprises.
 Les documents de livraison suivent ces preuves ; la ligne071 périmée de la
 matrice des demandes est également retirée des manques, conformément à sa
 livraison déjà prouvée31, sans nouveau changement produit. Le goal reste actif.
+
+### 12novembre2026 — Compléments console de l’éditeur décidés avant E2E
+
+Les deux design systems sont relus intégralement, puis le composant et son
+client. Les lacunes concordent avec l’exploration RO : dialog de source sans
+seconde page/archive, diff UI sans changement de page et bouton garder-saisie
+jamais confirmé dans l’ancien parcours. Décision : ajouter quatre groupes au
+clientUI réel après ses quatorze groupes, avec sept versions, archive/supprimée,
+deux onglets, sept chemins de diff desktop/mobile et focus au titre.
+readDiff retire la pagination pendant sa lecture sans focus explicite ;
+l’hypothèse sera éprouvée avant toute correction. Le précédent de la liste
+source et les §§9.5/14.3 fixent le retour au titre de comparaison. Le contrat
+CODE_EDITOR_CONSOLE_EXTENSIONS porte les gestes, compteurs sans PUT d’adoption,
+preuves et nettoyage. Aucune modification produit n’est encore décidée.

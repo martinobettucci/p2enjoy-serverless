@@ -895,6 +895,10 @@ cinq handlers et conservation exacte246→250/246fichiers. Source archivée,
 texte1Mio+1, chemins512/255octets, diff2000/128Kio et JSON8Mio sont qualifiés.
 Deux fonctions/tokens des passages sont nettoyés,5982artefacts conservés.
 070.1–.5 restent ouverts pour les autres bornes, console et reprises.
+L’ensemble de [compléments console](CODE_EDITOR_CONSOLE_EXTENSIONS.md) est décidé
+avant son client : seconde page de sources/diff, archive/supprimée et adoption
+en conservant la saisie. Le focus du diff fait l’objet d’un contrôle réel avant
+toute correction ; dix-huit groupes UI puis les régressions sont à produire.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 est désormais

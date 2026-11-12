@@ -670,3 +670,9 @@ et deux jetons des passages sont purgés/révoqués, parents supprimés ; dix
 migrations, même contrôle/référence, fichiers officiels et5982artefacts conservés.
 Manuel18chapitres/74paragraphes inchangé. Aucun critère supplémentaire ne ferme :
 console/pagination/adoption, bornesZIP/concurrence et reprises restent à produire.
+
+Le [contrat de compléments console](CODE_EDITOR_CONSOLE_EXTENSIONS.md) définit
+les prochaines preuves UI : sept versions dont archive/supprimée en seconde
+page, adoption conservant la saisie, sept chemins de diff et restitution du
+focus à son titre après pagination. Ce dernier point est à reproduire avant
+correction ; aucun résultat de ce complément n’est encore qualifié.
