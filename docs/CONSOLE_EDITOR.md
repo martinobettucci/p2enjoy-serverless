@@ -530,3 +530,28 @@ inchangé fournit une confirmation ; Réessayer la lecture des fichiers doit la
 retirer même si la source reste404. Le dialog de choix d’un hash conservé rétablit
 ensuite la lecture et le brouillon existant. Cette épreuve ne substitue aucune
 réponse ni dépendance et ne prétend pas couvrir les sources archivées.
+
+### Fenêtre réelle de sauvegarde —décision avant banc
+
+Le premier passage070.8 sur6e1584f2 passe quatre groupes puis s’arrête parce que
+la réponse est arrivée avant la frappe observée. La fonction est purgée ; cet
+échec ne qualifie pas la branche de frappe pendant envoi.
+
+Le banc utilisera un vrai verrou d’écriture SQLite via ControlWriter existant,
+sans instruction d’écriture ni seed, sur le seul SPARK DEV. Il vérifie la
+fonction et son namespace de campagne avant le verrou. Le propriétaire de la
+base est conservé. Le verrou attend la libération du pilote ou EOF, au plus
+trois secondes : en cas de perte du processus, SQLite ferme la connexion et
+libère nativement le verrou. Aucun service ni variable officielle n’est arrêté.
+Le reçu conserve identité du processus/base, zéro changement SQL et motif de
+fermeture ; une nouvelle acquisition confirme la libération.
+
+Les sorties normales, EOF, échéance et pertes SIGTERM/SIGKILL du seul helper
+seront éprouvées réellement et en série avant l’utilisation. Le signal cible
+un pidfd après vérification PID/naissance/commande exacte/UUID ; aucune autre
+ressource n’est signalée. Le client ouvre ensuite un verrou, commence la vraie
+sauvegarde HTTP, tape pendant que sa réponse reste absente, libère le verrou
+puis compare le snapshot enregistré et le texte local. Le même observateur
+permet de dater la lecture seule avant réponse lors du retrait. Aucun délai
+réseau, réponse ou dépendance n’est substitué. Une borne ou jonction absente
+fait échouer la campagne ; aucun rejeu automatique ni succès conditionnel.
