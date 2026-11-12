@@ -7853,3 +7853,14 @@ rapprocher les5xx sous l’intention propre dont le nom était absent et compare
 les inventaires complets A→B/C aux seules modifications attendues. Aucun
 contenu de source ni ciphertext supplémentaire n’est exporté. La campagne
 reste à exécuter, aucun résultat fonctionnel n’est revendiqué.
+
+### 12novembre2026 — Client de sources préparé pour une campagne réelle
+
+Le client HTTPS, le paquet original et le lecteur natif sont écrits. Treize
+groupes prévus traversent le SSO, les API, la validation Docker, les frontières
+exactes et cinq invocations A/B/C ; les états privés et inventaires complets
+sont comparés sans exporter leur contenu. Les intentions incluent le jeton ;
+les issues5xx restent rapprochables. L’image60938093,38sources backend,
+quatre ressources HTTPS et5982artefacts initiaux sont recoupés en lecture
+seule avant lancement. Syntaxes JS/Python et diff vérifiés, aucune preuve
+fonctionnelle acquise ; la relecture puis le gel précèdent l’E2E.

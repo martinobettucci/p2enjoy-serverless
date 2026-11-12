@@ -69,6 +69,13 @@ livré ; les autres unités et la campagne complète restent dans le backlog.
 
 ## Installer, lancer et vérifier
 
+`artifacts/editor-source-limits.cjs` lit réellement taille et SHA du fichier
+`large-source.txt`1Mio+1, le binaire et la dépendance YAML packagée ; le marqueur
+de données distingue les sources A/B/C. Le client
+`e2e/code-editor-source-limits.mjs` prépare ces paquets originaux, les publie
+et les invoque dans Docker pour qualifier la conservation au-delà de la limite
+d’édition. Le runtime de référence reste inchangé.
+
 `artifacts/draft-capacity.cjs` est publié depuis un brouillon initial puis invoqué
 par son hash par `e2e/code-draft-capacity.mjs`. Cette campagne éprouve les plafonds
 32/128 et64Mio de ciphertext réel, leur libération et la purge ; contrat :

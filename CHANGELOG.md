@@ -5,6 +5,8 @@
 - SLS-070 : complément de qualification des sources et limites décidé avant
   son client E2E. Source archivée, gros fichier conservé, chemins en octets,
   diff2000lignes/128Kio et JSON8Mio à éprouver ; aucune clôture revendiquée.
+  Client HTTPS, paquet et lecteur natif préparés, syntaxe contrôlée ; exécution
+  réelle et régressions restent à produire sur l’image inchangée.
 
 - SLS-071 livré : le dernier critère071.6 est qualifié par
   [31 groupes réels](docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) sur401sources67215a2b,

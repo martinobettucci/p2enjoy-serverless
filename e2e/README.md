@@ -131,6 +131,20 @@ rétablie, pilote archivé404 et retour explicite sont éprouvés ; deux fonctio
 et deux jetons des passages nettoyés.071.2 reste ouverte pour le transitoire de
 chargement,071.6 pour l’exception inattendue ;101/102 suivent les défauts visuels.
 
+## Sources et limites complémentaires de l’éditeur
+
+`node e2e/code-editor-source-limits.mjs` reçoit les identifiants SSO sur stdin
+privée, après synchronisation des sources indexées et contrôle du SPARK DEV au
+repos. Le client part de l’accueil et du vrai SSO puis qualifie les bornes par
+HTTPS : gros fichier1Mio+1 conservé, chemins Unicode512/255octets, diff2000lignes/
+128Kio, JSON8Mio et base archivée. Les candidats passent la vraie validation
+Docker puis leurs handlers sont invoqués. Le helper de paquet réutilise le vrai
+YAML2.9.1 de la référence ; l’inspecteur natif relit tous les SHA/modes et les
+métadonnées privées de brouillon sans retourner source ou ciphertext.
+Rapports UUID, intentions avant POST, révocation des jetons et purge normale ;
+aucune clôture de070 avant ses autres preuves. Le client est préparé, son
+exécution réelle reste à produire. [Contrat](../docs/CODE_EDITOR_SOURCE_LIMITS.md).
+
 ## Capacité réelle des brouillons de code
 
 `node e2e/code-draft-capacity.mjs` reçoit les identifiants du SSO réel sur son
