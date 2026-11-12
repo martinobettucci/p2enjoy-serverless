@@ -403,3 +403,10 @@ et URL effectivement atteinte puis l’objet par sa vraie API. Le nettoyage reli
 ces intentions, y compris si l’affectation locale n’a pas fini ; un booléen de
 nettoyage sans ce rapprochement n’est pas une preuve. Aucun produit modifié par
 cette correction du banc ; le premier rapport reste conservé hors des succès.
+
+Le second passage passe le groupe de formulaires mais s’arrête sur le corps de
+la réponse d’upload, évincé du cache d’inspection Chromium. Sa fonction est
+purgée et ses trois intentions rapprochées ; aucun groupe d’éditeur acquis.
+Les observations de mutation liront statut et URL sans corps Chromium, puis
+reliront le candidat ou le fichier par la véritable API canonique. Les réponses
+GET du client API et les octets relus restent les autorités de comparaison.
