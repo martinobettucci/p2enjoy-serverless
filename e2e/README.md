@@ -21,6 +21,13 @@ Le complément070.8 est en préparation : assertions de confirmation à la frapp
 lecture et retry réel404, saisie pendant sauvegarde effective, lecture seule au
 retrait, puis choix de source depuis le vrai dialog. Les nouvelles assertions
 restent à exécuter ; le checkpoint57 conserve ses sources et son image datées.
+`code-editor-save-lock.py hold|probe|stop NAMESPACE FUNCTION` est un opérateur
+DEV sans écriture de donnée : verrou SQLite réel au plus3s, libération/EOF/
+échéance, ou signal du seul PID/naissance/commande vérifiés. Le client éprouve
+les6sorties (dont entrée invalide) puis utilise le verrou pour observer les
+frappes avant réponse HTTP. Les probes rejoignent le writer natif sous son
+propriétaire et recoupent zéro changement et connexion close. Aucun délai
+réseau, seed ni réponse remplacée.
 
 ## Sources et brouillons de code — première tranche qualifiée
 
