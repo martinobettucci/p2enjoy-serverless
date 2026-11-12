@@ -66,16 +66,31 @@ lecture : ces causes du lecteur commun restent dans [SLS-093](BACKLOG.md#sls-093
 Aucun statut ne doit les présenter comme exécutées par le refus EACCES.
 L'exception inattendue d'une tâche du relais relève séparément de071.6.
 Les régressions communes et captures inspectées précèdent toute qualification.
-Statut : client et inspecteur implémentés, relecture avant exécution.
-La relecture exige un témoin positif du vrai lien de téléchargement, un hash/
-UUID UI recoupés avec l'invocation native, intégrité/FK et migrations identiques
-avant/après, et le nettoyage d'un namespace de préparation sans service. Ces
-conditions complètent la preuve sans affaiblir les assertions. Le SHA de l'image
-contrôlée est un argument public obligatoire du client, fourni par le lanceur à
-partir de son relevé natif ; aucun ancien manifeste n'impose une image périmée.
-Le défaut de hash signalé statiquement reste à reproduire avant correction.
-Aucune panne ni qualification nouvelle à ce stade.
+Statut : banc exécuté, défaut d’affichage reproduit avant correction. Le
+[passage0bb9553f](evidence/function-http-client-source-access-failed-dev-2026-11-12.json)
+reste échoué, zéro groupe qualifié : trois handlers réels, quatre captures
+inspectées, source restituée, fonction purgée et jeton révoqué.395sources et
+l’image96e5dc4e sont conservées avant/après. La garde qualifiée066 reste inchangée.
 
-La relecture des locators cible les `dd` des faits Hash exécuté et Identifiant
-de requête : les mêmes valeurs figurent aussi dans les en-têtes repliés. Ce
-ciblage évite une ambiguïté de sélection sans ignorer un élément du produit.
+## Hash courant sous lecture indisponible — correction0712
+
+Le refus réel renvoie un catalogue200 avec source_forbidden et un
+`default_code_hash` valide ; l’UI jette cette réponse et confond absence de
+métadonnées avec absence de promotion. Décision avant code : garder uniquement
+les métadonnées de **la réponse courante** avec son erreur de domaines. Le hash
+courant confirmé reste lisible ; les destinations et l’envoi restent interdits.
+Une lecture en cours indique « Lecture en cours… » ; une erreur sans réponse
+métadonnée indique « Indisponible ». « Aucune cible promue » est réservé à une
+réponse courante confirmant son absence. Aucun ancien catalogue ou hash n’est
+réutilisé après un rafraîchissement. Cette séparation évite un état trompeur
+sans cacher le vrai refus de lecture ni fabriquer une cible.
+
+Le replay vérifie le hash exact sous EACCES. Deux témoins complètent ce choix :
+fonction sans code avant publication → absence confirmée ; sélection d’un pilote
+puis archivage réel et Actualiser → vrai404, Hash courant indisponible, ancienne
+URL/réponse retirée, retour explicite à la cible promue. La sélection du pilote
+se fait depuis le dialog de l’UI, l’archivage concurrent par l’API normale.
+Les faits Hash exécuté/Identifiant de requête ciblent leurs `dd`, distincts des
+mêmes valeurs dans les en-têtes repliés. Le SHA d’image reste un argument public
+obligatoire issu du relevé natif du lanceur ; intégrité/FK/migrations sont
+recoupées avant/après et toute préparation partielle est nettoyée.

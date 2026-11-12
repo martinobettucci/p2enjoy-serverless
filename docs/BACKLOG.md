@@ -987,6 +987,11 @@ Critères d'acceptation :
   Relecture du banc avant panne : témoin positif du lien de téléchargement,
   hash/UUID natifs, intégrité/FK/migrations avant/après et cleanup du namespace
   sans service sont requis ; SHA image public fourni par le relevé du lanceur.
+  Le [premier passage réel](evidence/function-http-client-source-access-failed-dev-2026-11-12.json)
+  reproduit « Aucune cible promue » malgré le hash courant renvoyé sous EACCES ;
+  zéro groupe retenu. Correction décidée : métadonnées courantes conservées avec
+  erreur de source, chargement/indisponible/absence confirmée distingués. Replay
+  exact du hash, témoin sans code et vrai404 après archivage du pilote requis.
 - [x] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
   après quinze minutes ; valeur en mémoire de la page, absente des exemples copiés, journaux,
   erreurs, préférences et historique. L’inspecteur de preuve ne réémet aucun

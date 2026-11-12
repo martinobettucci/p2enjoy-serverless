@@ -7584,3 +7584,18 @@ réutilise le candidat, protège les départs/déconnexion et sépare texte exac
 sa représentation DOM. Le manuel reçoit son chapitre ; une fixture de fins de
 ligne mixtes complète le paquet original. Revue, build, bascule et preuves UI
 restent à exécuter ; aucun critère supplémentaire clôturé.
+
+### 12 novembre2026 — Refus réel des domaines et hash courant du testeur
+
+Le banc5f47c7d reproduit sur96e5dc4e le défaut de071.2 : le catalogue200 porte
+source_forbidden et default_code_hash8eecbc4e, tandis que l’UI affiche Aucune
+cible promue. L’assertion échoue après les retraits URL/cURL/réponse et le CSPself
+réel. Quatre JPEG inspectés ; trois handlers succeeded. Permission000 réellement
+observée errno13 puis mode0640 et nouvel open0, même contrôle/référence, timer
+arrêté et helper terminé0. Fonction purgée, jeton révoqué et parents supprimés ;
+intégrité/FK/migrations,395sources,38backend/4web et5982artefacts conservés.
+Aucun groupe de l’essai n’est ajouté aux qualifications. La preuve échouée est
+publiée séparément avant correction. Décision : garder les métadonnées de la
+réponse courante même lorsque ses domaines sont refusés ; distinguer lecture,
+indisponibilité et absence confirmée. Deux témoins sans code/404 concurrent
+complètent le replay, sans mock ni changement du lecteur ou de sa garde.

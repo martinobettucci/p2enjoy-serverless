@@ -505,3 +505,13 @@ restent près du fichier. Les textes binaires/hors limite n’ont pas de faux
 éditeur vide. Une garde native unique protège le départ ; beforeunload conserve
 son avertissement navigateur. Les refus et conflits gardent les saisies.
 Les captures et preuves de cette facette restent à produire.
+
+## Hash courant du testeur sous erreur de domaines — décision0712
+
+La [preuve échouée](evidence/function-http-client-source-access-failed-dev-2026-11-12.json)
+montre un hash déclaré absent malgré les métadonnées courantes. Le
+[contrat de correction](CONSOLE_TESTER_SOURCE.md#hash-courant-sous-lecture-indisponible--correction0712)
+réserve cette absence à une réponse confirmée : lecture en cours, indisponibilité
+sans métadonnées et hash courant confirmé sont distincts. En cas de source
+refusée, conserver le hash de cette seule réponse et retirer URL/cURL/résultat ;
+aucun envoi autorisé. Décision persistée, correction et replay encore requis.

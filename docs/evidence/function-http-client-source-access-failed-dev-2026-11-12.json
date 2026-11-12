@@ -1,0 +1,93 @@
+{
+  "format": "p2enjoy-serverless-function-http-client-source-failure-v1",
+  "date": "2026-11-12",
+  "unit": "SLS-071.2",
+  "completed": false,
+  "qualified_groups": 0,
+  "excluded_campaign": "0bb9553f-f11c-459a-b503-a58e12437062",
+  "source_commit": "5f47c7d13ade35f2980d5a88166f336c693af7dc",
+  "image": "sha256:96e5dc4e6efcc1d3c5bb166aa118014a0f7a1ec65a999004bb6d538713bbc288",
+  "source_count": 395,
+  "sources_unchanged": true,
+  "embedded_unchanged": true,
+  "checks": [
+    {
+      "name": "Accueil HTTPS et vraie connexion SSO administrateur",
+      "status": "passed"
+    },
+    {
+      "name": "Fonction originale publiée, deux domaines et réponse réelle du testeur",
+      "status": "passed"
+    },
+    {
+      "name": "Source réellement refusée :503 marqué avant émission et passerelle toujours active",
+      "status": "passed"
+    },
+    {
+      "name": "Actualiser retire URL, cURL et réponse, hash inconnu et CSPself",
+      "status": "failed",
+      "stage": null,
+      "type": "AssertionError",
+      "message_sha256": "c19cdbf274dbe14301c0ce7d5c699621bc75b75960470b2318e5cdfb3a119d46",
+      "source_line": "74"
+    }
+  ],
+  "defect": "L’UI affirme Aucune cible promue après source_forbidden malgré un default_code_hash confirmé par la réponse courante.",
+  "current_promoted_hash": "8eecbc4ead022e84289689f1964ae8e4b72ba1e55d881a3a54f8c3bcc2f4d99e",
+  "restoration_confirmed": true,
+  "cleanup_confirmed": true,
+  "handlers": 3,
+  "captures_inspected": {
+    "available-response": {
+      "path": "/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless/.local/e2e/function-http-client-source-access-0bb9553f-f11c-459a-b503-a58e12437062-available-response.jpg",
+      "sha256": "462f26249ed4a1c3d635cb80952efd643639fd361d7daf2818c3b272d63173de",
+      "bytes": 126111,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    },
+    "source-forbidden-desktop": {
+      "path": "/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless/.local/e2e/function-http-client-source-access-0bb9553f-f11c-459a-b503-a58e12437062-source-forbidden-desktop.jpg",
+      "sha256": "458a8fc66bd461525de22ad2adddcbd43b2fd8f1ad2041a9174fa393d4aca39d",
+      "bytes": 95871,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    },
+    "source-forbidden-mobile": {
+      "path": "/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless/.local/e2e/function-http-client-source-access-0bb9553f-f11c-459a-b503-a58e12437062-source-forbidden-mobile.jpg",
+      "sha256": "876855ac28407b9bfdbb276b996d9e890b31ac42939625154e614eb688da0ec0",
+      "bytes": 43216,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    "failure-4": {
+      "path": "/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless/.local/e2e/function-http-client-source-access-0bb9553f-f11c-459a-b503-a58e12437062-failure-4.jpg",
+      "sha256": "7376f2d685e83ac78a81f0058430045c8f038fdb66fb33798972f4bb48f731ac",
+      "bytes": 101676,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      }
+    }
+  },
+  "original_artifacts": {
+    "files": 5982,
+    "manifest_sha256": "846904e1437a034d7fd95488f246cd5b3dc935a4723d20abf9bb419673e5d482"
+  },
+  "raw": {
+    "path": "function-http-client-source-access-failed-dev-2026-11-12.raw.json.gz",
+    "bytes": 45236,
+    "sha256": "157c323ff0d4ba82d79c12184e1da5ffc036966af7c29678714422da2108e949",
+    "uncompressed_bytes": 123868,
+    "uncompressed_sha256": "680bac5eae1bc6da9eba4d67e8dfc1e58005a269db5b4d037719197a50534c7b"
+  },
+  "limits": [
+    "Passage échoué, aucun groupe compté dans une qualification.",
+    "Le nouvel appel UI après restitution reste à éprouver."
+  ]
+}

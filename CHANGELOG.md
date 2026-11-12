@@ -2,10 +2,11 @@
 
 ## [Non publié]
 
-- SLS-071.2 : banc de refus réel de lecture des domaines préparé, avec la garde
-  SLS-066 inchangée, contrôle du hash/UUID natifs, retrait des résultats périmés
-  et restitution vérifiée. Client et inspecteur relus ; aucun nouveau résultat
-  fonctionnel avant le passage E2E.
+- SLS-071.2 : [défaut reproduit sur le SPARK](docs/evidence/function-http-client-source-access-failed-dev-2026-11-12.json) :
+  le hash promu est présenté absent sous refus réel de lecture des domaines.
+  Passage0bb9553f échoué, zéro groupe qualifié ; source restituée, fonction
+  purgée et jeton révoqué,395sources/image96e5dc4e conservées. Correction et
+  témoins d’absence confirmée/404 décidés avant code.
 
 - SLS-071.3/.8 qualifiés par [32groupes réels](docs/evidence/function-http-client-token-loss-dev-2026-11-12.json)
   sur392sourcescf5244f5, même image96e5dc4e : quatre coupures avant/après
