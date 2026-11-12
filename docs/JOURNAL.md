@@ -7864,3 +7864,14 @@ les issues5xx restent rapprochables. L’image60938093,38sources backend,
 quatre ressources HTTPS et5982artefacts initiaux sont recoupés en lecture
 seule avant lancement. Syntaxes JS/Python et diff vérifiés, aucune preuve
 fonctionnelle acquise ; la relecture puis le gel précèdent l’E2E.
+
+### 12novembre2026 — Échec du premier lecteur natif de sources
+
+2373aeb2/3e7b1e0 : quatre groupes acquis dans le passage, arrêt au cinquième,
+aucune qualification exportée. Vraie publication A et invocation réussies.
+Le diagnostic SSH recoupe NameError UUID absent du programme distant du
+lecteur, distinct de l’import du client local. Le nettoyage HTTP demande la
+révocation et la purge mais son lecteur échoue aussi ; les parents restent.
+Décision avant correction : importer UUID dans ce programme, recueillir la
+preuve native du nettoyage puis supprimer les parents par les API réelles.
+Le replay complet aura son nouveau gel, les groupes de cet échec restent exclus.

@@ -91,3 +91,15 @@ Le lecteur retourne les métadonnées d’inventaire sans contenu ; la comparais
 exige exactement A + changements attendus pour B et C, avec chaque chemin,
 taille, SHA et mode. Une omission ou une modification avec inventaire cohérent
 reste ainsi détectée. Cette revue n’est pas une preuve E2E acquise.
+
+## Premier passage interrompu dans le lecteur natif
+
+Le passage2373aeb2 au gel3e7b1e0 passe l’entréeSSO, les prérequis, la création
+du paquet et la première publication/invocation ; il échoue pendant le premier
+contrôle natif de refus. Le programme distant utilise UUID sans l’importer :
+un NameError réel est recoupé par une lecture de diagnostic. La purge et la
+révocation ont été demandées, mais leur reçu natif et les parents restent à
+terminer avant replay. Aucun groupe de ce passage ne qualifie le complément.
+Correction décidée avant code : importer UUID dans le programme distant du
+lecteur, vérifier les ressources résiduelles, terminer les parents par API,
+puis geler à nouveau les sources et exécuter l’ensemble sans addition de groupes.
