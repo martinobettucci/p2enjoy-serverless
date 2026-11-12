@@ -6,7 +6,7 @@
 part de l’accueil et du vrai SSO, crée namespace/service/fonction et jeton Read
 par les formulaires, puis publie le paquet original YAML par la console.
 Il édite les vraies sources et le handler, relit les octets exacts, provoque un
-conflit entre deux vrais onglets, retire/rétablit un fichier et publie des
+conflit entre deux vrais onglets, borne l’historique à64 gestes, retire/rétablit un fichier et publie des
 versions dédupliquées, pilotes, ESM puis un import réellement cassé. Promotion,
 rollback et URL copiée sont invoqués contre Docker. Captures desktop/mobile,
 absence de stockage web, brouillon retrouvé et purge native sont requis.

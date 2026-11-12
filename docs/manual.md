@@ -267,6 +267,13 @@ sans renvoyer la publication. Une préparation orpheline peut être abandonnée.
 **Adresses de la version publiée** ouvre le pilote ; **Versions, promotion et
 retour à un hash** mène aux gestes explicites de promotion et rollback.
 
+L’historique exact de saisie conserve au plus64 gestes et8Mio de fragments
+de texte, comptés en UTF-16. Ses compteurs apparaissent pendant l’édition.
+Les raccourcis natifs d’annulation et de rétablissement conservent les fins de
+ligne exactes. Si une annulation dépasse l’historique disponible, le texte reste
+inchangé et un avertissement le signale. Relire un fichier réinitialise cet
+historique local ; le brouillon enregistré reste sur le serveur.
+
 Pour annuler le retrait d’un fichier sans abandonner les autres modifications,
 ouvrez **Voir le diff avec la cible**, choisissez son chemin puis confirmez
 **Rétablir ce chemin depuis la base**. Le même geste retire un fichier ajouté

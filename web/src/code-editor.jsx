@@ -7,7 +7,7 @@ import {Candidate} from './publications';
 import {withCatalogue} from './catalogue';
 import {confirmNavigation, registerNavigationGuard} from './navigation-guard';
 
-const size=5, textLimit=1024**2;
+const size=5, textLimit=1024**2, historyLimit=8*1024**2, historySteps=64;
 const stamp=value=>new Date(value*1000).toLocaleString('fr-FR');
 const code=value=><span className="mono">{value}</span>;
 const hash=value=>value ? code(value) : 'Aucune version';
@@ -49,6 +49,24 @@ function editUnlocatedSource(raw,next) {
   while(end<previous.length-start&&end<next.length-start&&previous[previous.length-end-1]===next[next.length-end-1]) end++;
   const newline=raw.match(/\r\n|\r|\n/)?.[0] || '\n';
   return raw.slice(0,sourceOffset(raw,start))+next.slice(start,next.length-end).replace(/\n/g,newline)+raw.slice(sourceOffset(raw,previous.length-end));
+}
+function sourceChange(before,after) {
+  let start=0,end=0;
+  while(start<before.length&&start<after.length&&before[start]===after[start])start++;
+  while(end<before.length-start&&end<after.length-start&&before[before.length-end-1]===after[after.length-end-1])end++;
+  // Serialize only the changed fragments, without retaining slices of the full source.
+  return JSON.parse(JSON.stringify({start,removed:before.slice(start,before.length-end),inserted:after.slice(start,after.length-end)}));
+}
+const historyBytes=history=>[...history.past,...history.future].reduce((total,change)=>total+2*(change.removed.length+change.inserted.length),0);
+function trimHistory(history) {
+  while(history.past.length+history.future.length>historySteps||historyBytes(history)>historyLimit) {
+    (history.past.length?history.past:history.future).shift();
+  }
+}
+function applySourceChange(value,change,reverse) {
+  const removed=reverse?change.inserted:change.removed,inserted=reverse?change.removed:change.inserted;
+  if(value.slice(change.start,change.start+removed.length)!==removed)return null;
+  return value.slice(0,change.start)+inserted+value.slice(change.start+removed.length);
 }
 function lineStyle(raw) {
   const forms=new Set(raw.match(/\r\n|\r|\n/g)||[]);
@@ -123,7 +141,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
   const sourceGeneration=useRef(0),fileGeneration=useRef(0),diffGeneration=useRef(0),reviewGeneration=useRef(0);
   const pendingInput=useRef(null),textHistory=useRef({past:[],future:[]}),pathRef=useRef(path);
   const fileArea=useRef(null),fileHeading=useRef(null),treeHeading=useRef(null),focusFile=useRef(false),focusTree=useRef(false),focusEdit=useRef(false),[overflow,setOverflow]=useState(false);
-  const [find,setFind]=useState(''),[match,setMatch]=useState(-1),[findNotice,setFindNotice]=useState('');
+  const [find,setFind]=useState(''),[match,setMatch]=useState(-1),[findNotice,setFindNotice]=useState(''),[historyNotice,setHistoryNotice]=useState('');
   const dirty=editing&&Boolean(file?.editable)&&text!==file.text;
   dirtyRef.current=dirty;textRef.current=text;draftRef.current=draft;modeRef.current=mode;pathRef.current=path;
   const locked=busy||reading||fileLoading||Boolean(contextError)||needsReview||Boolean(conflict);
@@ -131,7 +149,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
   useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;sourceGeneration.current++;fileGeneration.current++;diffGeneration.current++;leaveResolver.current?.(false);};},[]);
   function acceptDraft(value) {draftRef.current=value;setDraft(value);}
   function invalidateReview() {reviewGeneration.current++;setConflict(null);setServerCopy(null);}
-  function installText(value) {setText(value);textHistory.current={past:[],future:[]};pendingInput.current=null;}
+  function installText(value) {setText(value);setHistoryNotice('');textHistory.current={past:[],future:[]};pendingInput.current=null;}
   function clearFile() {invalidateReview();fileGeneration.current++;setFile(null);setPath('');setText('');setEditing(false);setFileError(null);setFindNotice('');setMatch(-1);dirtyRef.current=false;writeAddress({file:''});}
   function askLeave() {
     if(!dirtyRef.current)return Promise.resolve(true);
@@ -226,13 +244,17 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
     const history=textHistory.current;
     let replacement;
     if(input?.type==='historyUndo'||input?.type==='historyRedo') {
-      const origin=input.type==='historyUndo'?history.past:history.future;
-      const destination=input.type==='historyUndo'?history.future:history.past;
-      const index=origin.findLastIndex(value=>displayText(value)===next);
-      if(index>=0){replacement=origin[index];destination.push(previous,...origin.slice(index+1).reverse());origin.splice(index);}
+      const reverse=input.type==='historyUndo',origin=reverse?history.past:history.future,destination=reverse?history.future:history.past;
+      let value=previous,found=-1;
+      for(let index=origin.length-1;index>=0;index--){value=applySourceChange(value,origin[index],reverse);if(value===null)break;if(displayText(value)===next){found=index;replacement=value;break;}}
+      if(found>=0)destination.push(...origin.splice(found).reverse());
+      else {
+        if(fileArea.current)fileArea.current.value=displayText(previous);
+        setHistoryNotice('Limite de l’historique atteinte : le texte exact est conservé.');return;
+      }
     }
-    if(replacement===undefined){replacement=editSource(previous,next,input);history.past.push(previous);history.future=[];}
-    textRef.current=replacement;setText(replacement);setMatch(-1);setFindNotice('');
+    if(replacement===undefined){replacement=editSource(previous,next,input);if(replacement!==previous){history.past.push(sourceChange(previous,replacement));history.future=[];trimHistory(history);}}
+    textRef.current=replacement;setText(replacement);setHistoryNotice('');setMatch(-1);setFindNotice('');
   }
 
   async function chooseSurface(surface,hashValue=version) {
@@ -402,6 +424,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
               <textarea ref={fileArea} className="editor-code mono" rows={18} wrap="off" spellCheck={false} autoCapitalize="off" autoCorrect="off" readOnly={!editing} value={displayText(text)} onChange={event=>changeText(event.target.value)}/>
             </Field>
             {overflow&&<p className="muted">Le code défile horizontalement dans son cadre.</p>}
+            {editing&&<><p className="muted">Historique exact : {textHistory.current.past.length} annulation(s), {textHistory.current.future.length} rétablissement(s) · {historyBytes(textHistory.current)} / {historyLimit} octets de fragments UTF-16 · {historySteps} gestes maximum.</p>{historyNotice&&<p className="notice" role="status">{historyNotice}</p>}</>}
             <p className={fileBytes>textLimit?'notice error':'muted'} role={fileBytes>textLimit?'alert':undefined}>{fileBytes} / {textLimit} octets UTF-8 · Fins de ligne : {lineStyle(text)}</p>
             {mode==='draft'&&<div className="actions">{editing?<><button className="primary" disabled={locked||fileBytes>textLimit} onClick={saveFile}>{busy?'Enregistrement…':'Enregistrer le fichier'}</button><button disabled={busy} onClick={()=>void protectedAction(()=>setEditing(false))}>Terminer l’édition</button></>:<button disabled={locked} onClick={()=>{focusEdit.current=true;setEditing(true);}}>Modifier le fichier</button>}
               <Confirm label="Retirer ce fichier" message={`Retirer « ${path} » du brouillon enregistré de « ${functionName} » ?`} disabled={locked||file.missing} action={async()=>{if(!await askLeave())return;await saveMutation({file:{action:'delete',path}});clearFile();}}/>
