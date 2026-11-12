@@ -172,6 +172,14 @@ les événements dans le client avant toute levée, puis rejouer le parcours ré
 Ne pas modifier les bornes, la gestion des signaux ou la frontière de panne
 sur une hypothèse non vérifiée par ce reçu.
 
+Relecture de cette instrumentation avant exécution : capturer l’échec en
+mémoire, mais remettre/relire prioritairement NOFILE puis libérer les TID et
+joindre la garde avant les E/S du diagnostic. Un stdout bloqué ne doit pas
+prolonger la fenêtre de limite dégradée ; une erreur du diagnostic ne masque
+pas l’exception initiale. Le fichier du frame est un identifiant public fixe
+ou une empreinte, jamais un basename inconnu en clair. Ces corrections sont
+requises avant le nouveau passage ; aucune panne n’est encore qualifiée.
+
 ## État
 
 Décision, matrice et constats de revue persistés avant leur code dépendant.

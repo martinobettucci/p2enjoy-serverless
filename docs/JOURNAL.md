@@ -7762,3 +7762,21 @@ Cause exacte non disponible (stderr431octets/SHA seulement), zéro groupe
 qualifié. Décision avant correction : échec structuré phase/code/errno/ligne
 et compteurs numériques ; aucun buffer/chemin inconnu/message brut. Ne pas
 attribuer cet échec à un timeout ou signal sans nouvelle observation réelle.
+
+### 12novembre2026 — Diagnostic de sortie native ajouté avant nouveau passage
+
+L’opérateur persiste/émet operator-failed avec phase numérique, code fixe ou
+SHA, type/errno/ligne, durée et compteurs stops/syscalls/opens/correspondancesCA.
+Les ouvertures2/257/437 ne livrent que leur numéro et concordance exacte avec
+le chemin public ; la frontière de faute reste257. Le client garde l’événement
+avant de lever sur fin du SSH. Délai8s, polling, signaux et panne inchangés ;
+aucune cause n’est déduite du reçu précédent. Syntaxes contrôlées,401sources,
+nouvel essai réel requis et071.6 toujours ouvert.
+
+### 12novembre2026 — Priorité de restitution conservée dans le diagnostic
+
+La relecture de l’instrumentation relève une écriture/émission avant le finally
+et un basename de frame non filtré. Décision avant correction : mémoire seule
+dans except, NOFILE rendu/relu puis TID/garde libérés avant les E/S diagnostic,
+sans masquer l’exception initiale ; fichier réduit à ID fixe ou SHA. Aucun
+nouvel essai lancé et aucune cause du742199ee n’est présumée.

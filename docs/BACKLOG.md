@@ -1073,6 +1073,9 @@ Critères d'acceptation :
   Zéro groupe qualifié. Décision : échec structuré avec phase/code/errno/ligne
   et compteurs numériques, sans chemins/buffers/messages bruts ; diagnostiquer
   réellement avant de changer délai, signal ou frontière de panne.
+  Relecture de l’instrumentation : E/S du diagnostic après restauration
+  prioritaire de NOFILE et libération, sans masquer l’exception initiale ;
+  fichier du frame réduit à ID public fixe ou SHA. Pas de nom inconnu en clair.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise
