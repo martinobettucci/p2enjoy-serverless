@@ -10,17 +10,18 @@ L’invocation du code publié passe la [preuve du moteur](evidence/execution-de
 Expiration, budget et interruption pendant nettoyage restent à qualifier.
 Le parcours UI est spécifié dans [CONSOLE_PUBLICATION](CONSOLE_PUBLICATION.md).
 
-## Prochaine preuve de lecteurs — redémarrage DEV prévu
+## Prochaine preuve de lecteurs — redémarrage DEV effectué
 
 Le [second échec du banc](evidence/code-editor-reader-event-failed-dev-2026-11-12.json)
 laisse le contrôle sain au même CID/imageb452ef16 ; les ressources de campagne
 sont nettoyées. Pour observer la création réelle de workers au prochain passage,
-le principal doit d’abord vérifier zéro activité/garde, sauvegarder SQLite par
-son identité1001, puis redémarrer uniquement `serverless-api`. CID, image,
-configuration, schéma010, données, référence et5982artefacts doivent rester
-identiques ; le nouveau PID/démarrage est enregistré dans une nouvelle baseline.
-Aucune image, migration, variable, secret ou route à appliquer. Le redémarrage
-n’est pas encore exécuté ; la qualification reste ouverte.
+le principal a vérifié zéro activité/garde et sauvegardé SQLite par son identité1001
+(SHAf0543e39), puis redémarré une seule fois `serverless-api`. CID19f92eff,
+imageb452ef16, configuration, schéma010, données, référence et5982artefacts sont
+conservés ; son nouveau démarrage est2026-11-12T15:57:39.012887686Z. La santé et
+l’intégrité/FK sont recoupées après reprise. Le prochain passage prend cette
+nouvelle baseline. Aucune image, migration, variable, secret ou route à appliquer ;
+la qualification du répartiteur reste ouverte.
 
 ## Correctif de focus Éditeur — déployé et qualification ciblée DEV
 

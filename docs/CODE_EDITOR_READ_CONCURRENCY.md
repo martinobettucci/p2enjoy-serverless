@@ -200,5 +200,8 @@ véritable événement clone ; la seule réutilisation de workers ne suffit pas.
 Le répartiteur implémente maintenant ce rapprochement et conserve les métadonnées
 brutes du dernier wait, les créations et les arrêts initiaux observés. Le client
 exige un clone réel dans son groupe à quatre lecteurs. Les syntaxes passent ;
-ce correctif n’est pas encore qualifié, et le redémarrage préparatoire reste
-à exécuter après la revue puis le gel des sources.
+ce correctif n’est pas encore qualifié. Après revue et gel du correctif ece7d09,
+le redémarrage préparatoire est effectué une seule fois : backup SQLitef0543e39,
+même CID/image, nouveau démarrage2026-11-12T15:57:39.012887686Z. Santé, intégrité,
+FK, dix migrations, configuration, référence et5982artefacts sont conservés.
+Le troisième passage part de cette nouvelle baseline.

@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 12 novembre 2026 — redémarrage DEV préparatoire aux nouveaux workers
+
+Le correctif d’événements est relu sans bloqueur statique, commité/poussé ece7d09
+et synchronisé sous garde SHA. Précontrôle sans activité ni garde, backup SQLite
+natif UID1001 f0543e39, puis un seul restart de serverless-api. Même CID19f92eff/
+imageb452ef16, démarrage2026-11-12T15:57:39.012887686Z ; référence, fichiers
+officiels et5982artefacts conservés. Santé200, intégritéok/FKvide et dix migrations.
+Le backup natif reste privé dans qualification-history ; les preuves précédentes
+gardent leurs propres démarrages. Le nouveau passage doit recouper sa baseline
+et observer un vrai clone au groupe quatre lecteurs. Aucun succès E2E du nouveau
+répartiteur n’est encore revendiqué.
+
 ## 12 novembre 2026 — événement natif refusé avant quatre lecteurs
 
 Le replay7bdc6702 passe la jonction corrigée et le vrai EMFILE du secours,
