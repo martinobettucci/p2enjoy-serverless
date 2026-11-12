@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-070.8 : retrait des confirmations de sauvegarde à la frappe et aux
+  consultations explicites implémenté ; une sauvegarde en cours ne confirme pas
+  les frappes ultérieures. Manuel et assertions UI adaptés ; build/preuve à faire.
+
 - Première facette Éditeur déployée en DEV sura77b6b4e, schéma010 inchangé.
   [57groupes réels](docs/evidence/code-editor-console-dev-2026-11-12.json) passent :12console,20serveur,
   25régressions ;17invocations Docker CJS/ESM/YAML,41captures inspectées et

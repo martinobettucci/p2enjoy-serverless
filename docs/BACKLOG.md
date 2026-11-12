@@ -908,9 +908,9 @@ Critères d'acceptation :
   conserve aussi le premier échec du client ClientRequest45s, sans le compter
   dans les45groupes réussis. Client TLS réel avec Connection:close, aucun rejeu.
 
-- [ ] SLS-070.8 Retirer le succès historique dès qu’une nouvelle saisie commence.
+- [~] SLS-070.8 Retirer le succès historique dès qu’une nouvelle saisie commence.
   La capture de première tranche unsaved-preserved affiche « Brouillon enregistré »
-  avec le badge local non enregistré ; ce reste UX est constaté et non corrigé.
+  avec le badge local non enregistré ; le correctif est implémenté, à qualifier.
   Conserver la réussite acquise de la sauvegarde, mais retirer sa notification
   quand le texte évolue ou lors d’une nouvelle lecture. Preuve UI réelle requise.
 

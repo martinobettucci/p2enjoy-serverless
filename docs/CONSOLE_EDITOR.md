@@ -504,3 +504,15 @@ adoption en gardant le texte, frappes durant sauvegarde, préparation/inconnu,
 réponses perdues et SIGKILL/restart, quotas globaux et autres bornes de ce contrat,
 purge avec lecteur vivant et campagne complète. Le lien Tester dépend de071.
 Les critères070.1–.6/.8 restent ouverts ; seule070.7 demeure clôturée.
+
+## Retrait des confirmations périmées —070.8 en qualification
+
+La décision est portée par070.8 avant cette correction. La notification de
+sauvegarde est retirée à toute nouvelle saisie et consultation explicite :
+fichier, dossiers/recherche/page, diff, contexte, brouillon ou tentative.
+La lecture automatique du contexte après publication conserve le résultat de
+publication acquis. Si de nouvelles frappes arrivent pendant la sauvegarde,
+seul le snapshot envoyé devient la référence ; aucune notification générale
+« Brouillon enregistré » ne doit prétendre sauvegarder le texte désormais local.
+Le scénario UI ajoute des assertions après frappe et changement de fichier ;
+le manuel suit ce comportement. Code implémenté, preuve de070.8 à produire.

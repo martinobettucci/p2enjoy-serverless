@@ -214,7 +214,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
 
   async function openFile(name,options={}) {
     if(!options.skipGuard&&!await askLeave())return;
-    invalidateReview();const generation=++fileGeneration.current;setFileLoading(true);setFileError(null);setFindNotice('');setMatch(-1);setEditing(false);setPath(name);writeAddress({file:name});
+    invalidateReview();setNotice('');const generation=++fileGeneration.current;setFileLoading(true);setFileError(null);setFindNotice('');setMatch(-1);setEditing(false);setPath(name);writeAddress({file:name});
     try {
       const surface=options.mode||modeRef.current;
       const endpoint=prefix+(surface==='draft'?'/code-draft/file':'/code-sources/file')+'?path='+encodeURIComponent(name)+(surface==='source'&&version?'&version='+encodeURIComponent(version):'');
@@ -240,6 +240,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
     node.addEventListener('beforeinput',beforeInput);return()=>node.removeEventListener('beforeinput',beforeInput);
   },[file,editing]);
   function changeText(next) {
+    setNotice('');
     const previous=textRef.current,input=pendingInput.current;pendingInput.current=null;
     const history=textHistory.current;
     let replacement;
@@ -283,7 +284,8 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
       if(!mounted.current)return result;
       acceptDraft(result.draft);setContext(prior=>({...prior,...result}));setTreeRevision(v=>v+1);setDiff(null);
       if(preserveFile&&submitted!==null)setFile(prior=>({...prior,text:submitted,size:bytes(submitted),sha256:fileHash}));
-      setNotice(result.changed?'Brouillon enregistré.':'Contenu déjà enregistré.');return result;
+      const laterInput=preserveFile?textRef.current!==submitted:dirtyRef.current;
+      setNotice(laterInput?'':result.changed?'Brouillon enregistré.':'Contenu déjà enregistré.');return result;
     } catch(error) {
       if(mounted.current){setMutationError(readable(error));if(error.status===409||!error.status||error.status>=500)setNeedsReview(true);}
       throw error;
@@ -296,7 +298,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
   async function rereadDraft() {
     if(busyRef.current)return;
     const generation=++reviewGeneration.current,surface=modeRef.current,targetPath=pathRef.current;
-    setReading(true);setMutationError(null);setConflict(null);setServerCopy(null);
+    setReading(true);setNotice('');setMutationError(null);setConflict(null);setServerCopy(null);
     try {
       const summary=await api(prefix+'/code-draft');
       const copy=summary.draft&&surface==='draft'&&targetPath ? await api(prefix+'/code-draft/file?path='+encodeURIComponent(targetPath)).catch(error=>{if(error.status===404)return null;throw error;}) : null;
@@ -328,7 +330,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
     finally {busyRef.current=false;if(mounted.current)setBusy(false);}
   }
   async function readDiff(pageValue=diffPage,pathValue=diffPath) {
-    const generation=++diffGeneration.current;setDiffLoading(true);setDiffError(null);setDiff(null);setDiffPage(pageValue);setDiffPath(pathValue);
+    const generation=++diffGeneration.current;setNotice('');setDiffLoading(true);setDiffError(null);setDiff(null);setDiffPage(pageValue);setDiffPath(pathValue);
     try {
       const params=new URLSearchParams({limit:String(size),offset:String(pageValue*size)});if(pathValue)params.set('path',pathValue);
       const data=await api(prefix+'/code-draft/diff?'+params);
@@ -403,14 +405,14 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
 
     {context&&<div className="editor-layout">
       <section className="panel" aria-labelledby="editor-tree-heading"><div className="section-heading"><h2 id="editor-tree-heading" tabIndex={-1} ref={treeHeading}>Fichiers {mode==='draft'?'du brouillon':'de la source'}</h2></div>
-        <form className="stack" onSubmit={event=>{event.preventDefault();setQuery(search);setPage(0);setTreeRevision(v=>v+1);}}><Field label="Rechercher un chemin"><input type="search" maxLength={200} value={search} onChange={event=>setSearch(event.target.value)}/></Field><button disabled={busy}><Search aria-hidden="true"/>Rechercher</button></form>
-        <nav className="editor-folders" aria-label="Dossiers du code"><button disabled={busy} onClick={()=>{setDirectory('');setPage(0);}}>Racine</button>{directory&&<><span className="mono">{directory}</span><button disabled={busy} onClick={()=>{setDirectory(directory.split('/').slice(0,-1).join('/'));setPage(0);}}>Dossier parent</button></>}</nav>
+        <form className="stack" onSubmit={event=>{event.preventDefault();setNotice('');setQuery(search);setPage(0);setTreeRevision(v=>v+1);}}><Field label="Rechercher un chemin"><input type="search" maxLength={200} value={search} onChange={event=>setSearch(event.target.value)}/></Field><button disabled={busy}><Search aria-hidden="true"/>Rechercher</button></form>
+        <nav className="editor-folders" aria-label="Dossiers du code"><button disabled={busy} onClick={()=>{setNotice('');setDirectory('');setPage(0);}}>Racine</button>{directory&&<><span className="mono">{directory}</span><button disabled={busy} onClick={()=>{setNotice('');setDirectory(directory.split('/').slice(0,-1).join('/'));setPage(0);}}>Dossier parent</button></>}</nav>
         {tree.loading?<p role="status">Lecture des fichiers…</p>:tree.error?<><ErrorMessage error={tree.error}/><button onClick={()=>setTreeRevision(v=>v+1)}>Réessayer la lecture des fichiers</button></>:<>
           <p className="muted">{tree.data?.tree.total||0} élément(s)</p>
           {!tree.data?.tree.items.length?<p className="empty">Aucun fichier dans cette sélection.</p>:<ul className="editor-files">{tree.data.tree.items.map(item=><li key={item.path}><button disabled={busy} aria-current={item.path===path?'true':undefined} onClick={()=>{
-            if(item.kind==='directory'){setDirectory(item.path);setPage(0);}else void openFile(item.path);
+            if(item.kind==='directory'){setNotice('');setDirectory(item.path);setPage(0);}else void openFile(item.path);
           }}>{item.kind==='directory'?<Folder aria-hidden="true"/>:<FileCode aria-hidden="true"/>}<span><span className="mono">{item.path}</span>{item.kind==='file'&&<small>{item.size} octets{item.dependency?' · Dépendance':''}{!item.editable?item.reason==='binary'?' · Binaire':' · Hors limite':''}</small>}</span></button></li>)}</ul>}
-          <Pages name="des fichiers" page={page} total={tree.data?.tree.total||0} disabled={busy} change={v=>{focusTree.current=true;setPage(v);}}/>
+          <Pages name="des fichiers" page={page} total={tree.data?.tree.total||0} disabled={busy} change={v=>{setNotice('');focusTree.current=true;setPage(v);}}/>
         </>}
         {mode==='draft'&&draft&&<button disabled={locked} onClick={()=>void protectedAction(()=>setDialog('file'))}>Ajouter un fichier</button>}
       </section>
@@ -461,7 +463,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
       <ErrorMessage error={candidateError}/>
       {candidate&&<Candidate row={candidate} disabled={busy} abandon={async()=>{await api('/api/deployments/'+candidate.id,{method:'DELETE'});setCandidateRevision(v=>v+1);}}/>}
       {candidate?.state==='published'&&<div className="actions"><a href={withCatalogue(`/console/functions/${functionId}/invocation-urls?version=${candidate.code_hash}`)}>Adresses de la version publiée</a><a href={withCatalogue(`/console/functions/${functionId}/code?deployment=${candidate.id}`)}>Versions, promotion et retour à un hash</a></div>}
-      <div className="actions"><button disabled={candidateReading} onClick={()=>setCandidateRevision(v=>v+1)}>Relire cette tentative</button>{!publishing&&!candidateReading&&!activeCandidate(candidate)&&<button onClick={()=>{setSelected('');setCandidate(null);setCandidateError(null);writeAddress({deployment:''});}}>Fermer le suivi</button>}</div>
+      <div className="actions"><button disabled={candidateReading} onClick={()=>{setNotice('');setCandidateRevision(v=>v+1);}}>Relire cette tentative</button>{!publishing&&!candidateReading&&!activeCandidate(candidate)&&<button onClick={()=>{setSelected('');setCandidate(null);setCandidateError(null);writeAddress({deployment:''});}}>Fermer le suivi</button>}</div>
     </Section>}
 
     {dialog==='source'&&<VersionChoice functionId={functionId} onClose={()=>setDialog(null)} choose={value=>chooseSurface('source',value)}/>}
