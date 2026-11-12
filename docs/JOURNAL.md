@@ -7875,3 +7875,14 @@ révocation et la purge mais son lecteur échoue aussi ; les parents restent.
 Décision avant correction : importer UUID dans ce programme, recueillir la
 preuve native du nettoyage puis supprimer les parents par les API réelles.
 Le replay complet aura son nouveau gel, les groupes de cet échec restent exclus.
+
+### 12novembre2026 — Import du lecteur corrigé, premier passage restitué
+
+L’importUUID est ajouté dans le programme distant et non seulement au client.
+Le lecteur corrigé confirme une fonction purgée, un artefact physiquement absent,
+un jeton révoqué, zéro brouillon/activité/réservation et intégritéok/FKvide.
+Un nouveauSSO et les vraies API suppriment service et namespace, avec404relus.
+L’ancien lecteur exact du commit3e7b1e0 reproduit encore le NameError en lecture
+seule ; le reçu lie son SHA. La preuve échouée publie406sources identiques,
+quatre groupes de passage mais zéro qualifié, avec nettoyage séparé. Le replay
+de l’ensemble et les régressions restent nécessaires ; aucun critère ne ferme.

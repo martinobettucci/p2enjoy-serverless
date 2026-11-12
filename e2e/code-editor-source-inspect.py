@@ -10,6 +10,7 @@ namespace=str(UUID(sys.argv[1])) if len(sys.argv)==2 else None
 program=r'''
 import hashlib,json,os,shutil,socket,stat,sys
 from pathlib import Path
+from uuid import UUID
 assert socket.gethostname()=='infra-serverless'
 root=Path('/srv/p2enjoy-serverless');sys.path.insert(0,str(root/'e2e'))
 from control_database import read_control

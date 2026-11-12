@@ -8,7 +8,9 @@
   Client HTTPS, paquet et lecteur natif préparés, syntaxe contrôlée ; exécution
   réelle et régressions restent à produire sur l’image inchangée.
   Le premier passage échoue sur l’importUUID manquant dans le lecteur distant,
-  après quatre groupes et une invocation ; nettoyage final à recouper avant replay.
+  après quatre groupes et une invocation ; [échec conservé](docs/evidence/code-editor-source-limits-reader-failed-dev-2026-11-12.json),
+  zéro groupe qualifié. Import corrigé, fonction/artefact purgés, jeton révoqué,
+  parents supprimés et activité nulle recoupés avant nouveau gel.
 
 - SLS-071 livré : le dernier critère071.6 est qualifié par
   [31 groupes réels](docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) sur401sources67215a2b,

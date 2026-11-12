@@ -97,9 +97,12 @@ reste ainsi détectée. Cette revue n’est pas une preuve E2E acquise.
 Le passage2373aeb2 au gel3e7b1e0 passe l’entréeSSO, les prérequis, la création
 du paquet et la première publication/invocation ; il échoue pendant le premier
 contrôle natif de refus. Le programme distant utilise UUID sans l’importer :
-un NameError réel est recoupé par une lecture de diagnostic. La purge et la
-révocation ont été demandées, mais leur reçu natif et les parents restent à
-terminer avant replay. Aucun groupe de ce passage ne qualifie le complément.
+un NameError réel est recoupé par une lecture de diagnostic. La
+[preuve échouée](evidence/code-editor-source-limits-reader-failed-dev-2026-11-12.json)
+conserve406sources identiques avant/après et zéro groupe qualifié. Le lecteur
+corrigé confirme ensuite la fonction purgée, l’artefact absent, le jeton révoqué,
+aucun brouillon ni activité ; les deux parents sont supprimés par API.
+Aucun groupe de ce passage ne qualifie le complément.
 Correction décidée avant code : importer UUID dans le programme distant du
 lecteur, vérifier les ressources résiduelles, terminer les parents par API,
 puis geler à nouveau les sources et exécuter l’ensemble sans addition de groupes.
