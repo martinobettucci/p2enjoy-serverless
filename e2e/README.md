@@ -2481,3 +2481,13 @@ conserve deux handlers et deux vues inspectées, zéro groupe qualifié.
 L’opérateur prépare désormais operator-failed avec phase/code/errno/ligne et
 compteurs numériques, sans chemins inconnus ou données de requête. Les bornes,
 signaux et frontière de panne restent inchangés en attendant le diagnostic réel.
+
+Le passage instrumentéca4aa8b9 établit phase2/CA_open_not_observed après6777stops
+et8154ms, sans signal ni baisse de limite. La
+[preuve échouée](../docs/evidence/function-http-client-task-wait-failed-dev-2026-11-12.json)
+conserve nettoyages et deux images inspectées, zéro groupe qualifié.
+`DeadlineObserver`, local à cet opérateur, remplace le polling du TID principal
+par waitpid bloquant sous alarme propre au helper ; échéance8s et garde12s
+inchangées, classe partagée intacte. L’alarme est annulée après chaque attente
+et l’ancien handler rendu au détachement. Syntaxe contrôlée, relecture et
+nouvelle exécution réelles requises ; aucun résultat de panne anticipé.

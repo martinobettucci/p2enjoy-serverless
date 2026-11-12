@@ -13,6 +13,36 @@ CA=b'/usr/local/lib/python3.14/site-packages/certifi/cacert.pem\0'
 D=['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock']
 
 
+class DeadlineObserver(NativeObserver):
+    """Wait for an actual ptrace stop without a millisecond poll per syscall."""
+    def __init__(self,pid):
+        super().__init__(pid)
+        assert signal.getitimer(signal.ITIMER_REAL)==(0.0,0.0),'helper_alarm_already_active'
+        self.previous_alarm=signal.getsignal(signal.SIGALRM)
+        signal.signal(signal.SIGALRM,self.expired)
+
+    @staticmethod
+    def expired(signum,frame):
+        raise TimeoutError('native_stop_not_observed')
+
+    def wait(self,deadline):
+        remaining=deadline-time.monotonic()
+        assert remaining>0,'native_stop_not_observed'
+        signal.setitimer(signal.ITIMER_REAL,remaining)
+        try:
+            value,state=os.waitpid(self.pid,0)
+            assert value==self.pid and os.WIFSTOPPED(state),'control_exited_during_observation'
+            self.stopped=True
+            return os.WSTOPSIG(state)
+        finally:signal.setitimer(signal.ITIMER_REAL,0)
+
+    def detach(self):
+        try:super().detach()
+        finally:
+            signal.setitimer(signal.ITIMER_REAL,0)
+            signal.signal(signal.SIGALRM,self.previous_alarm)
+
+
 def emit(v):print(json.dumps(v),flush=True)
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def birth(pid):return Path('/proc',str(pid),'stat').read_text().rsplit(')',1)[1].split()[19]
@@ -173,7 +203,7 @@ def main():
         command(['systemd-run','--quiet','--collect','--unit='+unit,'--on-active=12s','--timer-property=AccuracySec=100ms','--timer-property=RandomizedDelaySec=0','--property=RuntimeMaxSec=60s','--property=TimeoutStopSec=5s','/usr/bin/python3','-I',str(folder/'restore.py'),str(folder),'recover'])
         assert command(['systemctl','is-active',unit+'.timer'])=='active'
         assert identity(item)['tracer_pid']==0
-        main_observer=NativeObserver(pid);observers[pid]=main_observer;main_observer.start()
+        main_observer=DeadlineObserver(pid);observers[pid]=main_observer;main_observer.start()
         traced=identity(item);assert traced['tracer_pid']==os.getpid() and traced['state']=='t'
         emit({'event':'armed','unit':unit,'mode':mode,'image':arg,'container_id':current['Id'],'started_at':item['started_at'],'process':traced,'limits_nofile':list(original),'before':before})
         phase=2;deadline=time.monotonic()+8

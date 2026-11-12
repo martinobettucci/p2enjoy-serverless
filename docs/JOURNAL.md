@@ -7800,3 +7800,11 @@ secondes, sans mesure isolée exclusive. Décision avant code : observateur loca
 waitpid bloquant borné par alarme propre au helper, annulée après attente et
 handler restauré au detach. Mêmes8s/2s/garde12s, NativeObserver partagée et
 signaux du contrôle inchangés. Nouveau passage réel exigé pour atteindre le CA.
+
+### 12novembre2026 — Attente bloquante locale préparée sous même borne
+
+DeadlineObserver compose la classe partagée sans la modifier : waitpid réel
+bloquant et alarme POSIX sur l’échéance restante du helper, annulée après chaque
+attente ; ancien handler rétabli au detach, timer antérieur refusé. Recherche8s,
+gel2s et garde12s inchangés. Syntaxe contrôlée seulement, relecture et nouvelle
+exécution E2E requises pour vérifier l’arrivée au CA puis la panne.
