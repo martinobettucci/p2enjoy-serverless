@@ -1,5 +1,15 @@
 # Plan de contrôle
 
+## Client HTTP de fonction en réalisation SLS-071
+
+Le serveur source expose les routes décrites dans
+[CONSOLE_TESTER](../docs/CONSOLE_TESTER.md) : jeton Read temporaire900s,
+appel HTTP sortant limité aux domaines officiels et à la fonction, observation
+ciblée par UUID. L'émetteur de jetons est partagé avec les routes normales.
+Corps/réponses, attente, admission et fermeture sont bornés ; CSP/CORS préparent
+le contexte navigateur. Aucun schéma ni réglage nouveau. Ce code n'est pas
+encore déployé ni qualifié ; UI, build/bascule DEV et preuves E2E restent à faire.
+
 La tranche serveur [SLS-070](../docs/CONSOLE_EDITOR.md) ajoute les sources,
 brouillons chiffrés et publication du code enregistré par le pipeline Docker
 courant. Migration010 déployée sur7c5c6f4b ; [45groupes réels](../docs/evidence/code-editor-server-dev-2026-11-12.json)

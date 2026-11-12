@@ -23,6 +23,8 @@ from .db import Database,audit
 from .deployments import Deployments
 # @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md
 from .code_editor import CodeEditor
+# @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#api-de-la-console
+from .function_http_client import FunctionHttpClient
 from .function_operations import FunctionOperations
 from .storage_management import StorageManagement
 from .execution import Execution
@@ -31,7 +33,7 @@ from .schedules import Schedules
 from .invocation_routes import routes as invocation_routes,gateway_error
 from .network import forwarded_addresses
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md
-from .invocation_urls import routes as invocation_url_routes
+from .invocation_urls import routes as invocation_url_routes,read_routes
 # @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md
 from .catalogue import catalogue_query, routes as catalogue_routes
 
@@ -50,7 +52,7 @@ class BodyLimit:
             if message['type']=='http.request':
                 total+=len(message.get('body',b''))
                 state=scope.get('state',{})
-                limit=64*1024**2 if state.get('artifact_upload_authorized') is True else 8*1024**2 if state.get('source_edit_authorized') is True else 1024**2 if state.get('invocation_authorized') is True else 256*1024
+                limit=64*1024**2 if state.get('artifact_upload_authorized') is True else 8*1024**2 if state.get('source_edit_authorized') is True else 2*1024**2 if state.get('test_request_authorized') is True else 1024**2 if state.get('invocation_authorized') is True else 256*1024
                 if total>limit:raise HTTPException(413,'Le corps de requête dépasse sa limite autorisée.')
             return message
         await self.app(scope,limited,send)
@@ -105,6 +107,8 @@ app.include_router(router(database,identity,vault,operations))
 app.include_router(deployments.routes())
 # @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#api
 app.include_router(CodeEditor(deployments).routes())
+# @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#api-de-la-console
+app.include_router(FunctionHttpClient(database,identity).routes())
 app.include_router(invocation_routes(execution))
 app.include_router(schedules.routes())
 app.include_router(storage_management.routes())
@@ -128,6 +132,12 @@ async def response_headers(request:Request,call_next):
     response.headers['X-Content-Type-Options']='nosniff'
     response.headers['Referrer-Policy']='no-referrer'
     response.headers['Content-Security-Policy']="default-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'"
+    # @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#jetons-copie-et-corrélation
+    if response.headers.get('content-type','').startswith('text/html'):
+        server=request.scope.get('server')
+        domains=read_routes(server[1])[1] if server and isinstance(server[1],int) else []
+        origins=' '.join(v['origin'] for v in domains if not v['domain'].startswith('*.'))
+        response.headers['Content-Security-Policy']+="; connect-src 'self'"+(' '+origins if origins else '')
     return response
 
 
@@ -239,13 +249,18 @@ def canonical_entry(request,path):
                     try:selected[name]=catalogue_query(value)
                     except ValueError:pass
             # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel
-            if path.endswith('/invocation-urls'):
+            if path.endswith(('/invocation-urls','/tester')):
                 versions=[value for name,value in parameters if name=='version']
                 if versions:
                     # Even an invalid/duplicate selector must remain a refused
                     # explicit selection instead of becoming the default view.
                     selected['version']=versions[0] if len(versions)==1 and len(versions[0])<=256 else 'invalid'
                 elif request.url.query and not parameters:selected['version']='invalid'
+            if path.endswith('/invocations'):
+                identifiers=[value for name,value in parameters if name=='invocation']
+                if identifiers:
+                    try:selected['invocation']=str(UUID(identifiers[0])) if len(identifiers)==1 else 'invalid'
+                    except ValueError:selected['invocation']='invalid'
             if path=='/console/functions':
                 try:selected.update(dict(parse_qsl(catalogue_query(urlencode([(k,v) for k,v in parameters if k!='catalogue'])))))
                 except ValueError:pass

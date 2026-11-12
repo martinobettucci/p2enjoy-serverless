@@ -23,7 +23,8 @@ def gateway_error(execution,request,status):
     identifier=getattr(request.state,'request_id',None) or str(uuid4())
     code={404:'route_not_found',405:'method_not_allowed',413:'body_limit',422:'invalid_request'}.get(status,'execution_unavailable')
     response=JSONResponse({'error':code,'invocation_id':identifier},status_code=status,
-        headers={'X-Request-ID':identifier,'X-Serverless-Request-ID':identifier,'Vary':'Origin'})
+        headers={'X-Request-ID':identifier,'X-Serverless-Request-ID':identifier,'Vary':'Origin',
+                 'Access-Control-Expose-Headers':'X-Request-ID, X-Serverless-Request-ID'})
     if request.method=='HEAD':response.body=b''
     try:
         origins=request.headers.getlist('origin')
@@ -134,6 +135,11 @@ def routes(execution):
         if request.method=='HEAD':response.body=b''
         response.headers['X-Serverless-Request-ID']=identifier
         response.headers['X-Request-ID']=identifier
+        # @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#jetons-copie-et-corrélation
+        names=[name.strip() for value in response.headers.getlist('access-control-expose-headers') for name in value.split(',') if name.strip()]
+        for name in ('X-Request-ID','X-Serverless-Request-ID'):
+            if name.lower() not in {value.lower() for value in names}:names.append(name)
+        response.headers['Access-Control-Expose-Headers']=', '.join(names)
         if call and call.resolved_code_hash:
             response.headers['X-Serverless-Code-Hash']=call.resolved_code_hash
             names=[name.strip() for value in response.headers.getlist('access-control-expose-headers') for name in value.split(',') if name.strip()]
@@ -176,5 +182,15 @@ def routes(execution):
             row['logs_truncated']=bool(row['logs_truncated'])
         total=db.one('SELECT count(*) AS n FROM invocations WHERE function_id=?',(str(key),))['n']
         return {'items':rows,'total':total,'limit':limit,'offset':offset}
+
+    # @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#api-de-la-console
+    @api.get('/api/functions/{key}/invocations/{identifier}')
+    async def invocation(request:Request,key:UUID,identifier:UUID):
+        await observation(request,key)
+        row=db.one('SELECT * FROM invocations WHERE id=? AND function_id=?',(str(identifier),str(key)))
+        if not row:raise HTTPException(404,'Cette invocation est absente ou n’est plus conservée.')
+        if row['handler_started'] is not None:row['handler_started']=bool(row['handler_started'])
+        row['logs_truncated']=bool(row['logs_truncated'])
+        return row
 
     return api

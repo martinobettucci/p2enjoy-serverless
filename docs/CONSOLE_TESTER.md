@@ -137,6 +137,9 @@ et liens ; fixture originale et clients de preuve ; revue/build/bascule DEV
 avec sauvegarde native ; API puis UI réels ; régressions communes et preuve.
 Aucune migration, nouvelle variable/secret, route SPARK, dépendance ou nouvelle
 instance d'infrastructure n'est nécessaire. L'image remplace seulement le contrôle.
+Le serveur est implémenté dans les sources ; syntaxe Python vérifiée uniquement.
+L'interface et la campagne sont en réalisation. Aucun déploiement ni preuve
+fonctionnelle n'est encore revendiqué pour071.
 
 Les tests créent et publient un handler original du dépôt : texte, JSON, binaire,
 Unicode/query/en-têtes, Authorization par empreinte, absence cookies/jeton de

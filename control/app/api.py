@@ -1,14 +1,13 @@
 # @spec docs/BACKLOG.md#sls-020 | docs/CONTROL.md#gestion | docs/SCHEMA.md
 # Management routes, service scope, safe representations and durable mutations.
 import json
-import secrets
 import sqlite3
 import time
 from uuid import UUID,uuid4
 
 from fastapi import APIRouter,HTTPException,Query,Request
 
-from .auth import digest
+from .service_tokens import create_token,token_public
 from .db import audit
 from .deployments import effective_configuration,get as current_object
 from .function_operations import storage_configuration
@@ -60,28 +59,6 @@ def router(database,identity,vault,operations):
         authorization=await identity.operation(request,row['service_id'] if row else '',right,str(key))
         if not row:raise HTTPException(404,'Fonction introuvable.')
         return authorization
-
-    def token_public(row):
-        data=dict(row);data.pop('digest',None)
-        data['rights']=json.loads(data.pop('rights_json'))
-        restricted=data.pop('function_ids_json')
-        data['function_ids']=json.loads(restricted) if restricted is not None else None
-        return data
-
-    def create_token(db,service_id,data,actor):
-        identifiers=[str(value) for value in data.function_ids] if data.function_ids is not None else None
-        if identifiers is not None:
-            for key in identifiers:
-                if not db.execute('SELECT 1 FROM functions WHERE id=? AND service_id=? AND deleted_at IS NULL',(key,service_id)).fetchone():
-                    raise HTTPException(422,'La portée contient une fonction étrangère ou absente.')
-        key=str(uuid4());value='p2s_'+secrets.token_urlsafe(32)
-        row=(key,service_id,data.name,digest(value),value[:12],json.dumps(data.rights),
-             json.dumps(identifiers) if identifiers is not None else None,data.expires_at,None,time.time(),None)
-        db.execute('INSERT INTO service_tokens VALUES (?,?,?,?,?,?,?,?,?,?,?)',row)
-        audit(db,actor,'token.create',key,service_id,{'rights':data.rights})
-        result=token_public(db.execute('SELECT * FROM service_tokens WHERE id=?',(key,)).fetchone())
-        result['token']=value
-        return result
 
     @api.get('/namespaces')
     async def namespaces(request:Request,limit:int=Query(50,ge=1,le=100),offset:int=Query(0,ge=0,le=10000)):
