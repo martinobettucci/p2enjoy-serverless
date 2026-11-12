@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Notes SPARK : état courant010, manuel18chapitres/74paragraphes, image96e5dc4e
+  et facette Tester actualisés dans les trois sources de propositions. Les
+  notes actives demeurent distinctes jusqu’à adoption par le SPARK ; la
+  réduction des récits de campagne reste dans SLS-079.3.
+
 - SLS-071 : [42groupes réels](docs/evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json)
   qualifiés sur96e5dc4e/389sources039c4c97 :7reprise,10confidentialité,
   25régressions. SIGKILL natif, Docker137, reprise unique,502 proxy ⇒ Issue

@@ -1,12 +1,32 @@
 # Développement et exploitation du SPARK
 
+## État courant —12novembre2026
+
+La console et l’API utilisent l’image96e5dc4e, schéma de contrôle010. Le manuel
+compilé compte18chapitres et74paragraphes. Les facettes Éditeur et Tester sont
+déployées ; les compléments de leur qualification restent suivis dans le backlog.
+Le favicon et la marque utilisent trois blocs reliés.
+
+La preuve `docs/evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json`
+qualifie42groupes réels : reprise du même contrôle après SIGKILL sans rejeu,
+Issue inconnue après perte du contrôle, vrai503 avant émission, délais UI et
+confidentialité contrôlée avec témoin positif. Les27captures sont inspectées.
+Les42groupes gardent leur propre époque ; les preuves43/46 antérieures ne sont
+pas additionnées. Source/routes indisponible, réponse perdue des mutations de
+jeton et exception inattendue d’une tâche gardent SLS-071 ouverte.
+
+Les sections de campagne ci-dessous conservent les images, schémas et dates de
+leurs checkpoints historiques. Elles ne remplacent pas cet état courant.
+Leur déplacement vers le journal et la réduction de ces notes sont suivis dans
+SLS-079.3 ; cette opération n’est pas déclarée terminée.
+
 Le dépôt de travail est `/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless`. La copie exécutée est `/srv/p2enjoy-serverless`. Lire les README, CLAUDE_PROJECT et les contrats de docs/ avant intervention. Cette cellule DEV est la seule cible autorisée ; aucun profil PREPROD/PROD, aucune administration de la FORGE.
 
 ## Configuration et données
 
 La configuration consommée vient exclusivement de `/etc/spark/env` et `/run/spark/secrets`. Proposer les changements dans les fichiers voisins `.?`, puis utiliser la console SPARK pour les appliquer. La même procédure s’applique aux trois notes. Aucun `.env`, secret en dépôt ou surcharge de conteneur de substitution.
 
-Le contrôle conserve sa base et ses artefacts dans `/srv/p2enjoy-serverless/state`. La clé `SERVERLESS_MASTER_KEY` reste liée à cette base. Le schéma courant porte les migrations001 à009. Les sauvegardes natives avant005/006 sont décrites dans `docs/PLATFORM_DEV.md` ; celles avant008 et sa migration ciblée sont recoupées dans `docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json`. Les écritures postérieures empêchent une restauration implicite. SLS-031 ne demande aucune nouvelle migration.
+Le contrôle conserve sa base et ses artefacts dans `/srv/p2enjoy-serverless/state`. La clé `SERVERLESS_MASTER_KEY` reste liée à cette base. Le schéma courant porte les migrations001 à010. Les sauvegardes natives avant005/006 sont décrites dans `docs/PLATFORM_DEV.md` ; celles avant008 et sa migration ciblée sont recoupées dans `docs/evidence/function-version-execution-checkpoint-dev-2026-11-09.json`. Les écritures postérieures empêchent une restauration implicite. SLS-031 ne demande aucune nouvelle migration.
 
 L’agent possède `/srv/p2enjoy-serverless/storage-state`, schéma 004. Son canal `/srv/p2enjoy-serverless/storage-channel` est privé et monté readonly dans le contrôle. Ne jamais monter les backings natifs dans un workload : acquérir un bail et utiliser son chemin FUSE. Budget logique 32768 Mio, marge physique 8192 Mio, plafond 64 montages. Les valeurs officielles restent l’autorité.
 
@@ -20,7 +40,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:b9ad872abad15d787524a1dd0c2d1d32200069a85364114ca342d468757734d7`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:96e5dc4e6efcc1d3c5bb166aa118014a0f7a1ec65a999004bb6d538713bbc288`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 

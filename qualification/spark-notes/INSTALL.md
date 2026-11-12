@@ -1,6 +1,38 @@
 # Intégration avec P2Enjoy Serverless
 
+## État courant —12novembre2026
+
+La console et l’API utilisent l’image96e5dc4e, schéma de contrôle010. Le manuel
+compilé compte18chapitres et74paragraphes. Les facettes Éditeur et Tester sont
+déployées ; les compléments de leur qualification restent suivis dans le backlog.
+Le favicon et la marque utilisent trois blocs reliés.
+
+La preuve `docs/evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json`
+qualifie42groupes réels : reprise du même contrôle après SIGKILL sans rejeu,
+Issue inconnue après perte du contrôle, vrai503 avant émission, délais UI et
+confidentialité contrôlée avec témoin positif. Les27captures sont inspectées.
+Les42groupes gardent leur propre époque ; les preuves43/46 antérieures ne sont
+pas additionnées. Source/routes indisponible, réponse perdue des mutations de
+jeton et exception inattendue d’une tâche gardent SLS-071 ouverte.
+
+Les sections de campagne ci-dessous conservent les images, schémas et dates de
+leurs checkpoints historiques. Elles ne remplacent pas cet état courant.
+Leur déplacement vers le journal et la réduction de ces notes sont suivis dans
+SLS-079.3 ; cette opération n’est pas déclarée terminée.
+
 Entrée HTTPS : https://serverless.lelabs.tech. La console utilise le SSO LeLabs, client confidentiel `p2enjoy-serverless-dev`, retour `/auth/retour`. Les rôles `verified` et `admin` sont exigés côté serveur. Les secrets OIDC et jetons du fournisseur restent côté serveur.
+
+## Tester depuis la console
+
+Ouvrir une fonction puis Tester. Choisir cible promue ou hash disponible,
+domaine officiel, méthode, paramètres, en-têtes et corps. Le mode serveur
+appelle la vraie passerelle ; le mode navigateur applique CORS. Fournir Read
+ou créer un jeton temporaire limité à la fonction et quinze minutes. Les valeurs
+restent en mémoire ; l’exemple cURL ne copie pas les secrets. Une rupture après
+admission reste inconnue et ne rejoue pas l’appel ; consulter les invocations.
+Une réponse API réellement produite par le contrôle porte la marque fixe
+`X-Serverless-Control-Response: 1`. Elle n’accorde aucun droit et ne garantit
+pas l’issue d’un appel dont la réponse est perdue. Voir le manuel de la console.
 
 ## Accès des projets
 

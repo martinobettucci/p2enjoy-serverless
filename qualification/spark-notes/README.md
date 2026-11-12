@@ -1,5 +1,25 @@
 # P2Enjoy Serverless
 
+## État courant —12novembre2026
+
+La console et l’API utilisent l’image96e5dc4e, schéma de contrôle010. Le manuel
+compilé compte18chapitres et74paragraphes. Les facettes Éditeur et Tester sont
+déployées ; les compléments de leur qualification restent suivis dans le backlog.
+Le favicon et la marque utilisent trois blocs reliés.
+
+La preuve `docs/evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json`
+qualifie42groupes réels : reprise du même contrôle après SIGKILL sans rejeu,
+Issue inconnue après perte du contrôle, vrai503 avant émission, délais UI et
+confidentialité contrôlée avec témoin positif. Les27captures sont inspectées.
+Les42groupes gardent leur propre époque ; les preuves43/46 antérieures ne sont
+pas additionnées. Source/routes indisponible, réponse perdue des mutations de
+jeton et exception inattendue d’une tâche gardent SLS-071 ouverte.
+
+Les sections de campagne ci-dessous conservent les images, schémas et dates de
+leurs checkpoints historiques. Elles ne remplacent pas cet état courant.
+Leur déplacement vers le journal et la réduction de ces notes sont suivis dans
+SLS-079.3 ; cette opération n’est pas déclarée terminée.
+
 Ce SPARK héberge la plateforme de fonctions Docker sur l’infrastructure de développement LeLabs.
 
 ## Services et accès
@@ -29,7 +49,7 @@ La publication de code conserve côté serveur les ressources, variables, secret
 
 La qualification `python3 -B e2e/execution-suite.py --scope publication` passe 18 campagnes en série et 312 groupes réels, sans échec ni cas ignoré. Elle réunit moteur et console sans répéter les campagnes communes. La preuve `docs/evidence/publication-console-dev-2026-11-07.json` recoupe sources, image, rapports frais, captures relues, archives et ressources nettoyées. Les pannes de nettoyage sont éprouvées sur les seules révisions de campagne, avec garde indépendante puis maintenance normale.
 
-Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses quinze chapitres et52 paragraphes viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.
+Le manuel d’usage se consulte dans la navigation, à /console/manual. Ses18chapitres et74paragraphes viennent de l’unique source `docs/manual.md`, compilée avec chaque version de la console et mise à jour avec les comportements utilisateur. La campagne E2E compare le contenu rendu et son empreinte à ce fichier.
 
 L’agent de stockage dispose maintenant d’effacements corrélés : reçu durable,
 répétition sans second vidage et reprise après erreur physique ou interruption.

@@ -2045,6 +2045,10 @@ Critères d'acceptation :
   exemple) comparé mécaniquement au code qui les lit.
 - [ ] SLS-079.3 README ramené à une porte d'entrée ; notes de la cellule du SPARK réduites à leur
   usage ; récits de campagne déplacés au journal, jamais supprimés.
+  Relevé du12novembre : notes actives encore au schéma005/manuel11chapitres,
+  propositions du dépôt au schéma009/manuel15chapitres et anciens contrôles.
+  Actualisation minimale des trois propositions après071 (010,18/74, image96e5
+  et testeur) ; adoption non revendiquée. La réduction des récits reste à faire.
 - [ ] SLS-079.4 Guide rejoué sur une installation temporaire distincte : installation depuis
   zéro, mise à jour, redémarrage forcé, sauvegarde, destruction partielle, restauration,
   purge ; au moins cinq symptômes du tableau de diagnostic provoqués pour de vrai.

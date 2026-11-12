@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 12novembre2026 — propositions de notes SPARK actualisées
+
+La lecture officielle trouve encore005/11chapitres et d’anciennes fonctions
+annoncées absentes. Les trois propositions correspondent exactement aux sources
+du dépôt, sans modification concurrente. Leurs états courants sont actualisés
+pour010,18chapitres/74paragraphes, image96e5dc4e, Éditeur/Tester et preuve42.
+L’intégration explique la provenance du refus et l’issue inconnue, sans changer
+l’authentification. Les récits historiques sont bornés comme tels ; leur
+réduction reste dans079.3. Les trois propositions sont
+écrites atomiquement avec garde SHA et relues, notes actives conservées.
+Reçu : [notes proposées](evidence/spark-notes-http-client-proposed-2026-11-12.json).
+Aucune adoption ni modification de configuration officielle revendiquée.
+
 ## 12novembre2026 — reprise et confidentialité du testeur qualifiées
 
 La [preuve42](evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json) passe7groupes reprise,
