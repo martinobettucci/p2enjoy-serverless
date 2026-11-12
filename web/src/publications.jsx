@@ -292,6 +292,8 @@ function CodeVersion({row,functionName,functionId,observation,disabled,perform,r
     </div></details>
     <fieldset className="form-fields revision-actions" disabled={disabled}>
       {row.state==='available' && <>
+        {/* @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#parcours | docs/manual.md#tester-une-fonction */}
+        <a href={withCatalogue(`/console/functions/${functionId}/tester?version=${row.code_hash}`)}>Tester cette version</a>
         <a href={withCatalogue(`/console/functions/${functionId}/invocation-urls?version=${row.code_hash}`)}>Adresses de cette version</a>
         {!row.active && <Confirm tone="primary" label="Promouvoir cette version"
           message={`Promouvoir le hash ${row.code_hash} pour « ${functionName} » comme cible des appels sans tag ?`} action={()=>perform('promote')}/>}

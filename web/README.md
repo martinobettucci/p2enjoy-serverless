@@ -9,7 +9,8 @@ et le dialog de source sont qualifiés ; le manuel servi reste17chapitres/67para
 Les371sources et l’image restent identiques avant/après ; trois fonctions des
 passages sont purgées et21helpers terminés sont recoupés. Le checkpoint57 sur
 a77b6b4e garde ses preuves propres.070.8est clôturée ; les critères070.1–.6 restent
-ouverts pour quotas, limites, interruptions et compléments UI. Tester071 reste absent.
+ouverts pour quotas, limites, interruptions et compléments UI. Tester071 est implémenté dans les sources et son manuel, sans déploiement ni
+qualification fonctionnelle à ce stade. [Contrat](../docs/CONSOLE_TESTER.md).
 
 SLS-089 est déployée sur e81007c5, après sauvegarde native SQLite et sans
 changement de schéma ou configuration de cellule. La [preuve partielle](../docs/evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes

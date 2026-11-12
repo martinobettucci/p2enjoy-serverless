@@ -416,6 +416,61 @@ pendant la lecture, la publication reste réussie et le rapport signale seulemen
 les adresses indisponibles. Consulter la facette puis actualiser, sans republier
 le code pour obtenir ses adresses.
 
+## Tester une fonction
+
+Ouvrir une fonction puis **Tester**. Depuis une version disponible ou une
+publication réussie dans l’éditeur, **Tester cette version** ou **Tester la
+version publiée** sélectionne directement son hash. **Choisir la version à
+tester** permet aussi de revenir à la cible promue. Choisir un domaine officiel,
+son endpoint puis la méthode HTTP. Un hash devenu indisponible reste refusé ;
+choisir explicitement une autre version pour changer la sélection.
+
+Composer le chemin relatif exact, les paramètres et les en-têtes. Les routes
+actuelles n’ont pas de paramètres de chemin dynamiques. Le corps peut être
+absent, du texte UTF-8, du JSON validé ou un fichier de1Mio au plus. Le fichier
+conserve ses octets ; le champ texte suit les conventions du navigateur.
+Les paramètres sont limités à128couples et8Kio UTF-8, les en-têtes à64 et16Kio,
+y compris ceux calculés. Les doublons d’en-tête et les champs de transport
+réservés sont refusés. L’URL composée est visible avant l’envoi.
+
+Fournir un **Jeton Read**, ou confirmer **Créer un jeton Read temporaire**.
+Ce dernier autorise cette seule fonction pendant quinze minutes ; sa valeur
+reste masquée et sa date d’expiration est affichée. **Révoquer ce jeton
+temporaire** le ferme immédiatement. Quitter la page retire sa valeur locale ;
+le jeton reste administrable depuis le service jusqu’à révocation ou expiration.
+Une création non confirmée demande de consulter les jetons avant de recommencer.
+
+**Serveur de console** émet un véritable appel HTTP vers le domaine choisi,
+avec l’origine déclarée saisie. **Navigateur · CORS** émet depuis votre
+navigateur et son origine réelle, affichée en lecture. Les politiques origine/IP
+s’appliquent au transport de chaque mode. Les cookies de gestion ne sont pas
+transmis ; l’authentification métier peut utiliser **Authorization**. Le navigateur
+peut refuser certains en-têtes ou masquer une réponse CORS ; le mode serveur
+permet alors de consulter le statut réellement reçu par ce serveur.
+
+**Envoyer la requête** émet une seule fois. L’attente choisie, de1 à900secondes,
+ne remplace pas la durée maximale d’exécution de la fonction. **Arrêter l’attente**,
+une échéance ou une rupture réseau peut laisser un handler admis continuer.
+Le résultat indique cette inconnue et n’effectue aucune relance automatique.
+Consulter les invocations avant de demander un nouvel appel. Les redirections
+ne sont pas suivies ; le navigateur peut en masquer le statut.
+
+Une réponse lisible montre son statut HTTP, sa durée, ses en-têtes, son hash
+et son identifiant lorsqu’ils sont communiqués. Un statut métier d’erreur reste
+une réponse. Le corps conservé est limité à6Mio, son aperçu texte à64Kio ;
+**Télécharger le corps conservé** restitue les octets disponibles. Une troncature
+est signalée. Le serveur conserve le corps HTTP brut ; le navigateur peut le
+décompresser, distinction affichée si **Content-Encoding** est présent. Aucun
+contenu HTML ou SVG de réponse n’est exécuté.
+
+**Ouvrir cette invocation et son journal** sélectionne son identifiant exact.
+Un refus avant admission peut porter un identifiant sans créer d’observation ;
+la page le signale si elle est absente. **Consulter les invocations de la fonction**
+retrouve la liste. **Copier l’exemple cURL** fournit des valeurs à remplacer pour
+le jeton, les en-têtes, les paramètres et le fichier de corps ; ces valeurs
+saisies ne sont pas copiées. Requête, jeton et réponse restent dans la mémoire
+de cette page. L’adresse partageable conserve seulement la sélection du code.
+
 ## Invoquer et suivre une fonction
 
 Après promotion, appeler `/invoke/UUID_DE_FONCTION` si le manifeste déclare

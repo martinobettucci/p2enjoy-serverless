@@ -213,3 +213,12 @@ td {overflow-wrap:anywhere;}
 .editor-file h2 {overflow-wrap:anywhere;}
 .editor-diff-list button {display:block;max-width:100%;text-align:left;overflow-wrap:anywhere;}
 @media (max-width:1023px) {.editor-layout {grid-template-columns:minmax(0,1fr);}}
+
+/* @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#parcours | docs/DESIGN_SYSTEM_APP.md#app-ds-002--composition-de-requête-http */
+.tester-workspace,.tester-workspace>.panel,.tester-pairs {min-width:0;}
+.tester-pairs {margin:0;padding:var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-sm);}
+.tester-pairs legend {padding:0 var(--space-2);font-weight:600;}
+.tester-pair {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:var(--space-3);align-items:end;}
+.tester-body {white-space:pre;overflow:auto;}
+.tester-response {margin:var(--space-4) 0;}
+@media (max-width:767px) {.tester-pair {grid-template-columns:minmax(0,1fr);}.tester-pair>button {justify-self:start;}}

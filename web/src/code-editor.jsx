@@ -462,7 +462,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
       {!candidate&&!candidateError&&publishing&&<p>Préparation en cours. Le candidat n’est pas encore consultable.</p>}
       <ErrorMessage error={candidateError}/>
       {candidate&&<Candidate row={candidate} disabled={busy} abandon={async()=>{await api('/api/deployments/'+candidate.id,{method:'DELETE'});setCandidateRevision(v=>v+1);}}/>}
-      {candidate?.state==='published'&&<div className="actions"><a href={withCatalogue(`/console/functions/${functionId}/invocation-urls?version=${candidate.code_hash}`)}>Adresses de la version publiée</a><a href={withCatalogue(`/console/functions/${functionId}/code?deployment=${candidate.id}`)}>Versions, promotion et retour à un hash</a></div>}
+      {candidate?.state==='published'&&<div className="actions"><a href={withCatalogue(`/console/functions/${functionId}/tester?version=${candidate.code_hash}`)}>Tester la version publiée</a><a href={withCatalogue(`/console/functions/${functionId}/invocation-urls?version=${candidate.code_hash}`)}>Adresses de la version publiée</a><a href={withCatalogue(`/console/functions/${functionId}/code?deployment=${candidate.id}`)}>Versions, promotion et retour à un hash</a></div>}
       <div className="actions"><button disabled={candidateReading} onClick={()=>{setNotice('');setCandidateRevision(v=>v+1);}}>Relire cette tentative</button>{!publishing&&!candidateReading&&!activeCandidate(candidate)&&<button onClick={()=>{setSelected('');setCandidate(null);setCandidateError(null);writeAddress({deployment:''});}}>Fermer le suivi</button>}</div>
     </Section>}
 
