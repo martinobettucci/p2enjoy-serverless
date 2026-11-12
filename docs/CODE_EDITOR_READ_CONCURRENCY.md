@@ -75,6 +75,15 @@ sa terminaison par pidfd après vérification de son identité ; les attachement
 sont ensuite tous rejoints et chaque thread doit être libre de tracer/arrêt.
 La garde ne redémarre aucun conteneur et ne signale jamais un PID réutilisé.
 
+L’unité de garde est choisie et conservée par le client avant le lancement SSH,
+pour que la perte du premier message ne fasse pas perdre l’identité du secours.
+Le helper exact est terminé et rejoint avant les diagnostics applicatifs de
+récupération ; un refus de ces diagnostics conserve son échec sans laisser le
+traceur suspendu. Les callbacks de flux du client mémorisent leurs erreurs et
+laissent son finally joindre secours et transport ; ils ne lèvent pas hors du
+scénario. Une jonction échouée ferme aussi le seul SSH local par TERM/KILL,
+sans confondre cette fermeture avec une restitution native.
+
 Chaque tentative terminale possède un reçu immuable distinct. Le client rejoint
 la commande, les requêtes en vol, le timer et le service avant de nettoyer les
 objets. Une disparition de transport ne suffit ni à déclarer un succès ni à
@@ -90,7 +99,13 @@ Les mêmes véritables requêtes HTTPS éprouvent, en série :
 3. perte SIGKILL du helper après maintien, sans nouvel appel rejoué ;
 4. suspension SIGSTOP du helper, secours indépendant, réponse exacte et même
    contrôle sans redémarrage ;
-5. quatre lecteurs réellement retenus, cinquième 429 borné, puis quatre réponses
+5. véritable échec de diagnostic du secours : après jonction du helper exact,
+   seule la limite NOFILE du processus de secours est mise à zéro ; sa lecture
+   de diagnostic échoue réellement avec EMFILE. Sa propre limite est restaurée
+   avant publication du reçu d’échec. La vérification normale suivante doit
+   confirmer helper disparu, threads détachés et contrôle sain ; aucune limite
+   du contrôle ni du SPARK n’est modifiée ;
+6. quatre lecteurs réellement retenus, cinquième 429 borné, puis quatre réponses
    exactes et nouvelle lecture saine après libération.
 
 Les reçus recoupent toutes les naissances, FD et inodes réellement observés.

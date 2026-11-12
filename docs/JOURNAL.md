@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 12 novembre 2026 — revue de sûreté avant le premier lecteur maintenu
+
+La revue statique du nouveau banc identifie cinq risques avant toute exécution :
+identité à recouper avant SEIZE, traceur à joindre même si le diagnostic de
+secours échoue, erreurs de flux à ramener dans le finally, transport SSH à
+fermer sous borne et signal étranger à conserver au detach. Ces corrections
+préparent le premier passage ; elles ne sont pas des échecs produit reproduits.
+Un sixième parcours est décidé avant son code : provoquer réellement EMFILE
+sur la seule limite NOFILE du processus de secours, après jonction du helper,
+puis restaurer cette limite avant reçu d’échec et contrôler nativement les
+threads et la santé. Le contrôle conserve ses limites et sa génération.
+
 ## 12 novembre 2026 — lectures vivantes de l’éditeur, décision avant code
 
 Après le checkpoint console43, le SPARK est relu sain au même CID/image,
