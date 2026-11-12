@@ -1015,6 +1015,10 @@ Critères d'acceptation :
   Relecture du nouvel opérateur de jetons avant exécution : exiger intégrité/FK
   des deux bases et réservations nulles, puis revérifier CID/image/StartedAt,
   naissance/cgroup immédiatement avant tout attachement, watchdog inclus.
+  Premier3c50e181 : coupures de création natives franchies mais liste UI
+  comptée avant rendu Resource. Attendre panneau/lignes exactes avant assertions ;
+  fonction purgée, jeton perdu révoqué par UUID, parents/gardes nettoyés.
+  Reçu préliminaire exclu ; quatre cas à rejouer.
   Refus422 répétés puis cinq appels sains
   passent dans la tranche43 ; à ce checkpoint, saturation et interruption
   restaient à prouver, avant les compléments46 et42.

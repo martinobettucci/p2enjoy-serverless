@@ -97,3 +97,19 @@ ni la source/routes indisponible, ni l'exception inattendue d'une tâche Python
 vivante, ni toute la campagne de plateforme. Ces restes demeurent inscrits dans
 071.2/.6 et les unités transversales. Statut : opérateur et client implémentés,
 relecture ciblée en cours ; non exécutés, aucun nouveau scénario qualifié.
+
+## Premier passage3c50e181 — attente du rendu à corriger
+
+Le premier passage sur96e5dc4e passe accueil/préparation, watchdog et création
+avant commit. La barrière de création après commit confirme aussi une seule
+ligne/audit, SIGKILL natif, reprise et message inconnu, puis le client échoue
+sur `count()==0` au lieu d'une ligne dans la liste de service. Il comptait
+immédiatement après navigation et lecture API, avant le rendu asynchrone de
+Resource ; la capture d'échec est encore au chargement. Attendre le panneau
+et le nombre exact de lignes rendues, sans remplacer la réponse ou réduire
+l'assertion. Les états affichés restent ensuite comparés aux métadonnées réelles.
+
+Une fonction est physiquement purgée, le jeton dont la valeur est perdue est
+révoqué par son UUID public, parents supprimés et gardes jointes. Aucun problème
+produit ni succès de révocation n'est revendiqué. Le reçu incomplet et ses
+captures restent préliminaires ; les quatre cas sont rejoués après correction.
