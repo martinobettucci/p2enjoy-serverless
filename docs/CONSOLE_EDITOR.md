@@ -442,3 +442,20 @@ pour le catalogue d’adresses (borne réelle20) ; huit groupes acquis seulement
 sur cet essai, objets purgés. La consultation de recoupement utilisera la même
 page5 que la console. Ce défaut de banc et le changement d’historique imposent
 un nouveau gel de sources et une nouvelle image, sans addition des essais.
+
+### Replay serveur : sondage concurrent du quatrième lecteur
+
+Le replay de serveur sura77b6b4e passe12groupes puis échoue au sondage de
+capacité `four_readers_not_admitted`. Deux fonctions sont purgées et l’intégrité
+native passe. Les refus natifs de son intervalle portent un429 PUT code-draft,
+sans les quatre408 attendus ; ce résultat ne qualifie pas cette fenêtre.
+
+Par lecture du code, le GET code-sources utilisé comme sonde acquiert lui-même
+un lecteur. Il peut donc prendre la quatrième place avant un PUT partiel et
+faire refuser celui-ci : le banc perturbe sa propre admission. Le correctif
+attendra la fin d’écriture TLS des quatre en-têtes/premiers octets puis ouvrira
+la cinquième connexion, sans GET consommateur. Seules les cinq réponses complètes
+font preuve : cinquième429 sous5s sans corps, quatre408 entre29 et40s, puis
+lecture normale et purge. Aucun refus n’est remplacé/réessayé automatiquement.
+Les observations et échecs précédents restent conservés ; le backend ne change
+pas. Les12groupes UI acquis au gel48e0f1f restent leur époque distincte.
