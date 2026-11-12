@@ -1,16 +1,25 @@
 # Console web
 
-La facette [Éditeur SLS-070](../docs/CONSOLE_EDITOR.md) est déployée sur
+Le client HTTP [Tester une fonction](../docs/CONSOLE_TESTER.md) est déployé en DEV
+sur032ca071. Sa [première preuve](../docs/evidence/function-http-client-dev-2026-11-12.json)
+passe43groupes réels :18ciblés et25régressions sur382sources46a59128.
+27handlers Docker, expiration réelle900s, corps1Mio/réponse6Mio, refus bornés,
+redirection sans suivi et parcours serveur/CORS sont recoupés.27captures sont
+inspectées ; manuel18chapitres/74paragraphes, quatre fonctions de tous les
+passages purgées, huit jetons révoqués et5982artefacts antérieurs conservés.
+CORS refusé, politiques IP, annulation UI, saturation et SIGKILL restent ouverts ;
+SLS-071 reste[~]. Les checkpoints ci-dessous gardent leurs images et époques.
+
+La facette [Éditeur SLS-070](../docs/CONSOLE_EDITOR.md) a été qualifiée sur
 6e1584f2. Son [complément070.8](../docs/evidence/code-editor-save-confirmation-dev-2026-11-12.json) passe
 39 groupes réels : 14 UI et 25 régressions, neuf invocations Docker et 44 vues
 inspectées. Notifications retirées à la frappe/lecture, snapshot envoyé distinct
 des frappes ultérieures et readonly pendant retrait sont éprouvés. Le vrai404
-et le dialog de source sont qualifiés ; le manuel servi reste17chapitres/67paragraphes.
+et le dialog de source sont qualifiés ; lors de ce checkpoint, le manuel porte17chapitres/67paragraphes.
 Les371sources et l’image restent identiques avant/après ; trois fonctions des
 passages sont purgées et21helpers terminés sont recoupés. Le checkpoint57 sur
 a77b6b4e garde ses preuves propres.070.8est clôturée ; les critères070.1–.6 restent
-ouverts pour quotas, limites, interruptions et compléments UI. Tester071 est implémenté dans les sources et son manuel, sans déploiement ni
-qualification fonctionnelle à ce stade. [Contrat](../docs/CONSOLE_TESTER.md).
+ouverts pour quotas, limites, interruptions et compléments UI. La tranche071décrite en tête est déployée depuis ce checkpoint.
 
 SLS-089 est déployée sur e81007c5, après sauvegarde native SQLite et sans
 changement de schéma ou configuration de cellule. La [preuve partielle](../docs/evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes

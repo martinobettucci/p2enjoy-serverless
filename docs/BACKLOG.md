@@ -939,8 +939,10 @@ Tests exigés :
 <a id="sls-071"></a>
 ## SLS-071 — Client HTTP intégré par fonction
 
-Statut : [~] — réalisation engagée, contrat détaillé persisté avant code dans
-[CONSOLE_TESTER](CONSOLE_TESTER.md) ; aujourd'hui seuls catalogue et copie sont déployés.
+Statut : [~] — backend et facette Tester déployés en DEV sur032ca071 ;
+[première tranche43groupes](evidence/function-http-client-dev-2026-11-12.json)
+sur382sources46a59128.27handlers,900s réelles et27captures recoupés ;
+manuel18chapitres/74paragraphes. Aucun critère entier n’est encore clos.
 Nature : Développer. Dépend de : SLS-066, SLS-074. Ordre : 3.
 Contrat : [client HTTP](CONSOLE_USABILITY.md#client-http-par-fonction) et
 [CONSOLE_TESTER](CONSOLE_TESTER.md). Unité d'ordre3 retenue pour fournir le parcours
@@ -971,14 +973,18 @@ Critères d'acceptation :
 - [ ] SLS-071.6 En-têtes ASCII validés avant normalisation et jonction de toutes
   les tâches avant restitution de capacité, même après exception inattendue.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
-  et empêcher le décrément du compteur. Refus422 et appels suivants sains à prouver.
+  et empêcher le décrément du compteur. Refus422 répétés puis cinq appels sains
+  passent dans la tranche43 ; saturation et interruption restent à prouver.
   Appliquer aussi avant fetch navigateur les mêmes bornes query/en-têtes et
   interdictions que dans le mode serveur ; préserver les refus HTTP du testeur.
   Le client de preuve réconcilie aussi une création à réponse5xx inconnue,
   sans rejouer le POST, et termine ses fermetures indépendamment des erreurs.
   Premier passage réel047e33 :13groupes serveur réussis, timeout au premier
   parcours UI ; deux fonctions purgées, aucun groupe ajouté à une preuve finale.
-  Instrumenter les étapes et capture d’échec avant diagnostic/replay.
+  Étapes/capture d’échec instrumentées et URL du catalogue corrigée avant replay.
+  Passage4824d4a2 :18groupes ciblés puis25régressions passent ; deux fonctions
+  nominales et deux préliminaires purgées, huit jetons révoqués. Les13groupes
+  préliminaires restent exclus des43.
 
 Tests exigés :
 

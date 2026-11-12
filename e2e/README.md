@@ -11,6 +11,10 @@ la copie native, le téléchargement, les journaux et le viewport mobile. Prévo
 quinze minutes réelles pour l’expiration du jeton temporaire ; aucune horloge
 ou ligne SQLite n’est modifiée. Le rapport UUID reste incomplet jusqu’aux
 purges et recoupements natifs ; les captures nécessitent leur inspection.
+La [première preuve43groupes](../docs/evidence/function-http-client-dev-2026-11-12.json)
+passe18ciblés puis25régressions sur382sources46a59128 et032ca071 ;27handlers,
+expiration réelle900s,27captures inspectées, quatre fonctions purgées et huit
+jetons révoqués. Le premier passage13reste exclu.
 La campagne ne ferme pas seule les autres scénarios du [contrat](../docs/CONSOLE_TESTER.md),
 notamment les interruptions et les régressions complètes.
 

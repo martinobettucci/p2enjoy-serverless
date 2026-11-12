@@ -2,9 +2,13 @@
 
 ## [Non publié]
 
-- SLS-071 : contrat détaillé du client HTTP de fonction persisté avant code,
-  modes serveur/navigateur, jeton temporaire900s, destinations bornées et
-  corrélation. Réalisation engagée, aucune preuve ni fonctionnalité déployée ici.
+- SLS-071 : première facette Tester déployée en DEV sur032ca071.
+  [43groupes réels](docs/evidence/function-http-client-dev-2026-11-12.json) passent
+  sur382sources46a59128 :18ciblés et25régressions,27handlers, expiration900s
+  réelle et27captures inspectées. Manuel18chapitres/74paragraphes, quatre
+  fonctions purgées, huit jetons révoqués et5982artefacts conservés. Le premier
+  passage13reste exclu. CORS refusé, politiques IP, annulation UI, saturation,
+  troncature et SIGKILL restent à qualifier ; aucun critère entier ne ferme.
 
 - SLS-070.3 : [42groupes réels](docs/evidence/code-draft-capacity-dev-2026-11-12.json) qualifient
   32/128brouillons et64Mio exacts chiffrés sur375sources25a4152 et6e1584f2.

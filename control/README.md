@@ -1,14 +1,15 @@
 # Plan de contrôle
 
-## Client HTTP de fonction en réalisation SLS-071
+## Client HTTP de fonction — première tranche SLS-071
 
-Le serveur source expose les routes décrites dans
-[CONSOLE_TESTER](../docs/CONSOLE_TESTER.md) : jeton Read temporaire900s,
-appel HTTP sortant limité aux domaines officiels et à la fonction, observation
-ciblée par UUID. L'émetteur de jetons est partagé avec les routes normales.
-Corps/réponses, attente, admission et fermeture sont bornés ; CSP/CORS préparent
-le contexte navigateur. Aucun schéma ni réglage nouveau. Ce code n'est pas
-encore déployé ni qualifié ; UI, build/bascule DEV et preuves E2E restent à faire.
+[CONSOLE_TESTER](../docs/CONSOLE_TESTER.md) décrit le jeton Read temporaire900s,
+le vrai relais vers les domaines officiels de la fonction et la corrélation par
+UUID. Émetteur de jetons partagé, corps/réponses et réception bornés, CSP/CORS
+pour le navigateur ; aucune migration ni configuration nouvelle.
+L’image032ca071 est déployée après backup natif et passe [43groupes réels](../docs/evidence/function-http-client-dev-2026-11-12.json),
+avec27handlers et expiration réelle900s.38sources backend, quatre ressources
+web HTTPS et5982artefacts antérieurs sont recoupés. L’unité reste ouverte pour
+annulation UI, CORS refusé, politiques IP, saturation et SIGKILL notamment.
 
 La tranche serveur [SLS-070](../docs/CONSOLE_EDITOR.md) ajoute les sources,
 brouillons chiffrés et publication du code enregistré par le pipeline Docker

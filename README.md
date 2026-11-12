@@ -1,9 +1,19 @@
 # P2Enjoy Serverless
 
-La [facette Éditeur SLS-070](docs/CONSOLE_EDITOR.md) est déployée en DEV sur
+Le client HTTP [Tester une fonction](docs/CONSOLE_TESTER.md) est déployé en DEV
+sur032ca071. Sa [première preuve](docs/evidence/function-http-client-dev-2026-11-12.json)
+passe43groupes réels :18ciblés et25régressions sur382sources46a59128.
+27handlers Docker, expiration réelle900s, corps1Mio/réponse6Mio, refus bornés,
+redirection sans suivi et parcours serveur/CORS sont recoupés.27captures sont
+inspectées ; manuel18chapitres/74paragraphes, quatre fonctions de tous les
+passages purgées, huit jetons révoqués et5982artefacts antérieurs conservés.
+CORS refusé, politiques IP, annulation UI, saturation et SIGKILL restent ouverts ;
+SLS-071 reste[~]. Les checkpoints ci-dessous gardent leurs images et époques.
+
+La [facette Éditeur SLS-070](docs/CONSOLE_EDITOR.md) a été qualifiée en DEV sur
 6e1584f2, avec dix migrations inchangées. Le [complément de confirmation](docs/evidence/code-editor-save-confirmation-dev-2026-11-12.json)
 passe 39 groupes réels : 14 UI et 25 régressions, sur 371 sources ; neuf
-invocations Docker et 44 images sont recoupées. Le manuel servi correspond à
+invocations Docker et 44 images sont recoupées. Lors de ce checkpoint, le manuel correspond à
 17 chapitres et 67 paragraphes. Les frappes pendant sauvegarde restent locales,
 les confirmations périmées disparaissent et un retrait verrouille le champ.
 Ce complément clôture070.8, après le [checkpoint57](docs/evidence/code-editor-console-dev-2026-11-12.json)
@@ -18,7 +28,7 @@ régression sont inspectées, les66fonctions des deux passages purgées et les
 5982artefacts antérieurs conservés. Aucun critère supplémentaire de070 ne ferme.
 
 Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
-sur e81007c5 et sont conservées dans l’image courante6e1584f2. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+sur e81007c5 et sont conservées dans l’image courante032ca071. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
 passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
 JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
 manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans

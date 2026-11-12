@@ -15,7 +15,9 @@ distincts. Corps monospace avec défilement local et aperçu64Kio, téléchargem
 borné ; aucun rendu HTML actif. Champs et actions s'empilent sur mobile, noms,
 hashes et URL restent entiers. Le lien de corrélation ouvre les détails et le
 journal existants. Source indisponible retire les anciennes adresses et résultats.
-Les preuves d'interaction et captures restent à produire.
+La [première tranche43groupes](evidence/function-http-client-dev-2026-11-12.json)
+recoupe27captures inspectées, dont cinq du testeur. Certaines ne cadrent qu’une
+partie de la réponse ; les compléments clavier/tablette/erreurs restent ouverts.
 
 ## Statut
 

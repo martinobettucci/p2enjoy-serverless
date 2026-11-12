@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 12novembre2026 — première tranche réelle du testeur HTTP
+
+[43groupes](evidence/function-http-client-dev-2026-11-12.json) passent sur032ca071
+et382sources46a59128 :18ciblés et25régressions.27handlers, trois publications,
+expiration réelle900s, stable/pilote/archive, redirection non suivie avec témoin
+positif, limites exactes/+1 et UI serveur/CORS sont recoupés.27images inspectées,
+manuel18chapitres/74paragraphes. Le premier passage13groupes047e33 reste exclu après
+correction de l’URL de catalogue du banc. Les quatre fonctions de tous les
+passages sont purgées et leurs huit jetons révoqués ; les parents sont supprimés.
+Les38backend et quatre ressources HTTPS restent identiques après ciblé et
+régressions ; sources/images/CID/dates/configurations,5982artefacts, intégrité,
+writer0DML fermé et compteurs nuls sont recoupés. Les vues partielles et la
+capture embarquée après ciblé sont explicitement bornées.071reste[~] et ses
+critères ouverts pour annulation UI, CORS refusé, IP, saturation, SIGKILL et
+compléments de confidentialité. Les préparations suivantes restent non exécutées.
+
 ## 12 novembre 2026 — réalisation du client HTTP de fonction
 
 Reprise propre e37ae8b synchronisée.078 attend l'âge réel du18novembre et089 les

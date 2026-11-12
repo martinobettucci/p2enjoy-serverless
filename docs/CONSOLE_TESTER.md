@@ -144,10 +144,19 @@ et liens ; fixture originale et clients de preuve ; revue/build/bascule DEV
 avec sauvegarde native ; API puis UI réels ; régressions communes et preuve.
 Aucune migration, nouvelle variable/secret, route SPARK, dépendance ou nouvelle
 instance d'infrastructure n'est nécessaire. L'image remplace seulement le contrôle.
-Le serveur est implémenté dans les sources ; syntaxe Python vérifiée uniquement.
-L'interface, ses liens et son chapitre de manuel sont implémentés ; build Vite
-local vérifié uniquement. La campagne réelle est en réalisation. Aucun déploiement ni preuve
-fonctionnelle n'est encore revendiqué pour071.
+Le contrôle032ca071 est déployé après sauvegarde native SQLite, schéma010
+inchangé. La [première tranche](evidence/function-http-client-dev-2026-11-12.json)
+passe43groupes :18ciblés et25régressions, sur382sources46a59128.27handlers,
+trois publications et expiration900s réelle sont recoupés.27captures sont
+inspectées (cinq par le principal,22par factory_verifier) ; le manuel servi
+correspond à18chapitres/74paragraphes. Deux fonctions nominales et deux du
+premier passage sont purgées, huit jetons révoqués et5982artefacts conservés.
+Les13groupes du premier passage047e33 restent exclus : le banc ouvrait la
+mauvaise destination de catalogue. Le replay4824d4a2 utilise sa vraie URL.
+Les recoupements embarqués viennent après le ciblé puis avant/après régressions,
+pas avant le ciblé. Certaines captures ne cadrent qu’une partie de la réponse ;
+le corps du chapitre Tester n’est pas cadré. SLS-071 reste ouverte pour les
+compléments UI, CORS refusé, politiques IP, saturation, troncature et SIGKILL.
 
 Les intentions de création du client sont enregistrées avant POST, avec absence
 du nom UUID et parent vérifiés. Une réponse perdue ou5xx est réconciliée en
