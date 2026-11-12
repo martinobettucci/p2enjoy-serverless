@@ -6,6 +6,10 @@
   de sources/diff, archive/supprimée et adoption de version gardant la saisie.
   Le focus après pagination est à reproduire sur l’application avant correction.
   Le client18groupes est préparé, syntaxe contrôlée ; E2E et captures à produire.
+  Le [premier passage](docs/evidence/code-editor-console-focus-failed-dev-2026-11-12.json)
+  reproduit quatre focusBODY après pagination :17groupes passent mais zéro
+  qualifié,25captures inspectées et14handlers. Fonction/jeton/parents nettoyés,
+ 13helpers terminés,5982artefacts conservés ; correction décidée avant code.
 
 - SLS-070 : complément de qualification des sources et limites décidé avant
   son client E2E, puis [qualifié par38groupes réels](docs/evidence/code-editor-source-limits-dev-2026-11-12.json).

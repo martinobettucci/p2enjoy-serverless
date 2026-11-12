@@ -899,6 +899,13 @@ L’ensemble de [compléments console](CODE_EDITOR_CONSOLE_EXTENSIONS.md) est d�
 avant son client : seconde page de sources/diff, archive/supprimée et adoption
 en conservant la saisie. Le focus du diff fait l’objet d’un contrôle réel avant
 toute correction ; dix-huit groupes UI puis les régressions sont à produire.
+Le [passage échoué](evidence/code-editor-console-focus-failed-dev-2026-11-12.json)
+reproduit quatre focusBODY après pagination, sur407sources/image60938093.
+17groupes passent mais zéro n’est qualifié ;25captures inspectées,14handlers,
+une fonction/sept révisions et un jeton nettoyés,13helpers terminés et5982artefacts
+conservés. Correction de focus décidée avant code dans le contrat de console.
+Les réponses de diff périmées face à une mutation restent à éprouver avec un
+lecteur vivant (070.4) ; le focus après adoption locale est à mesurer (070.3).
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 est désormais

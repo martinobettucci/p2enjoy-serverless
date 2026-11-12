@@ -7943,3 +7943,25 @@ La revue du client fait joindre le rendu du titre de conflit après409 avant
 d’asserter son verrouillage, et aligne l’ouverture du dialog source sur le geste
 clavier annoncé (focus/Entrée). Les routes et structures sont recoupées sans
 blocage ; la perte de focus pressentie reste à reproduire, sans correction produit.
+
+### 12novembre2026 — Perte de focus du diff reproduite, correction décidée
+
+3a293344/3a21c6b échoue au18e groupe : BODY après quatre paginations, pages1/2
+à1440/390px.17groupes passent, aucun groupe qualifié.407sources/image60938093
+identiques avant/après ;25JPEG ouverts individuellement par le vérificateur RO,
+deux de pagination aussi par le principal. Source archivée/supprimée et adoption
+gardant le texte sont lisibles ; focus et absence dePUT ne sont pas déduits
+des images.14handlers, huit publications et un import refusé sont recoupés.
+Une fonction/sept révisions et un jeton sont purgés/révoqués, deux parents
+supprimés et13helpers natifs terminés.5982artefacts, fichiers officiels,
+référence,38backend/quatreweb et démarrages conservés ; intégritéok/FKvide,
+dix migrations, zéro activité/bail/réservation/garde, writer0DML/connexionfermée.
+
+Décision avant code : ancrer l’intention de focus à la génération du diff,
+h2 pourpages/retry, h3 du chemin pourdétail, repli h2 en erreur. Réutiliser
+Section.headingRef ; annuler comparaison/intention sur changement de surface
+ou de brouillon. Un finally aveugle risquerait un focus tardif. Les nouveaux
+effacements/invalidation de réponses restent à éprouver sous vraie lecture
+maintenue avec l’ensemble3 ;070.4 ne ferme pas. Le focus après disparition de
+la confirmation d’adoption est un risque statique ajouté à070.3, pas un défaut
+runtime mesuré. Manuel/design suivront la correction avant son replay DEV.

@@ -516,7 +516,24 @@ titre **Versions de la fonction** ; celle du diff doit le rendre à **Comparer
 le brouillon enregistré**, selon les §§9.5/14.3 du socle. La disparition de ses
 commandes pendant lecture rend nécessaire ce point d’ancrage. Le parcours réel
 doit d’abord reproduire l’absence éventuelle de restitution ; aucune correction
-ni qualification visuelle de ce complément n’est encore revendiquée.
+ni qualification visuelle de ce complément n’était revendiquée avant le passage.
+
+Le [passage échoué](evidence/code-editor-console-focus-failed-dev-2026-11-12.json)
+reproduit quatre focusBODY. Ses25JPEG sont inspectés : seconde page de sources
+avec archive/supprimée, archive lue, texte local conservé après adoption et
+diff5+2 desktop/mobile lisibles. Les images seules ne prouvent ni le focus ni
+l’absence dePUT, recoupés par leurs observations. Deux cadrages de pagination
+sont aussi ouverts par le principal ; leur titre est hors champ supérieur,
+ce qui ne permet aucune déduction d’élément actif.17groupes passent dans cet
+échec mais zéro groupe n’est qualifié. Les vues pleines pages prolongent leur
+viewport ; aucun autre défaut bloquant n’est constaté.
+
+La correction réutilise `Section.headingRef` et un h3 de détail : titre de
+comparaison après page/retry, chemin reçu après ouverture de détail, repli au
+titre en cas de refus. L’intention appartient à la seule génération encore
+valide, après rendu ; changer surface/brouillon l’annule. Le correctif et ses
+captures focalisées restent à qualifier. Concurrence de lecture/mutation et
+focus d’adoption gardent leurs preuves spécifiques à produire dans070.
 
 ## Hash courant du testeur sous erreur de domaines — décision0712
 

@@ -676,3 +676,8 @@ les prochaines preuves UI : sept versions dont archive/supprimée en seconde
 page, adoption conservant la saisie, sept chemins de diff et restitution du
 focus à son titre après pagination. Ce dernier point est à reproduire avant
 correction ; aucun résultat de ce complément n’est encore qualifié.
+
+Le premier passage reproduit la perte de focus après les quatre changements de
+page du diff : [échec conservé](evidence/code-editor-console-focus-failed-dev-2026-11-12.json),
+zéro groupe qualifié malgré17passés. La correction et les restes de concurrence/
+adoption sont décidés dans le contrat de compléments avant tout code produit.

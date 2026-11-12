@@ -91,8 +91,61 @@ Le manuel, les routes publiques et la connexion sont ensuite rejoués en série.
 Chaque capture ciblée et commune est inspectée individuellement.
 
 La preuve de console complète070.1/.3/.4 ;070.4 ne ferme qu’après recoupement
-avec ses preuves serveur/chemins/diff/recherche antérieures.070.1/.2/.3/.5 et
-l’unité restent ouverts pour ZIP/concurrence, droits pendantIO et reprises.
+avec ses preuves serveur/chemins/diff/recherche antérieures et la concurrence
+résiduelle décrite ci-dessous.070.1/.2/.3/.5 et l’unité restent ouverts pour
+ZIP/concurrence, droits pendantIO et reprises.
 Un changement produit éventuel actualise le manuel et les contrats, est
 construit/déployé sur le SPARK DEV et qualifié sur sa nouvelle image. Aucun
 changement de variable, secret, route ou schéma n’est prévu par ces parcours.
+
+## Perte de focus reproduite sur60938093
+
+Le [passage3a293344](evidence/code-editor-console-focus-failed-dev-2026-11-12.json)
+au gel3a21c6b/407sources échoue au dix-huitième groupe. Les quatre observations
+après pagination donnent `BODY`, en pages1/2 et1440/390px. Les17groupes précédents
+passent, dont les trois nouveaux parcours, mais aucun groupe n’est qualifié dans
+cet échec.25JPEG sont inspectés individuellement ;14handlers sont recoupés,
+huit candidats publiés/un import réellement refusé. La fonction et ses sept
+révisions sont purgées, le jeton révoqué, les deux parents supprimés et les13
+helpers terminés. Même image/CID/démarrage,38backend/quatreweb, configuration,
+référence et5982artefacts initiaux sont conservés. Zéro activité/bail/réservation/
+garde, intégritéok/FKvide et dix migrations ; aucune régression commune ajoutée.
+
+## Correction décidée avant code
+
+La cause est le démontage de `{diff&&…}` dans `readDiff` avant la requête : les
+boutons de pagination et de détail disparaissent alors qu’ils détiennent le
+focus. `Section.headingRef` fournit déjà un h2 focalisable ; les fichiers et
+sources utilisent déjà des refs et un effet après rendu. Aucun composant global,
+token, dépendance ni migration supplémentaire n’est nécessaire.
+
+La correction conserve une intention liée à la génération de la lecture :
+
+- page, comparaison initiale ou nouvelle tentative : titre **Comparer le
+  brouillon enregistré** après la lecture achevée ;
+- détail réussi : h3 du chemin effectivement reçu, focalisable ;
+- refus ou détail absent : repli vers le h2 stable ;
+- réponse remplacée, surface changée, brouillon adopté/modifié/abandonné :
+  annuler l’intention et la lecture logique, sans focus tardif ni réinstallation
+  de cette ancienne comparaison.
+
+Le déplacement attend le commitDOM courant et vérifie génération et chemin ;
+un `finally` inconditionnel est écarté, car il peut focaliser une réponse périmée.
+Le recalage automatique d’une page hors limite transmet l’intention à sa nouvelle
+lecture. Le manuel et le design du produit suivent ces gestes. Le prochain
+replay étend les assertions aux détails et aux captures du titre focalisé,
+puis rejoue l’ensemble sur la nouvelle image construite et déployée en DEV.
+
+## Risques statiques à éprouver dans la suite de070
+
+La relecture observe que les effacements du diff par `saveMutation`,
+`chooseSurface`, `adoptServer` et `removeDraft` n’invalident pas tous sa génération.
+Le correctif doit les unifier pour que son focus reste lié à une lecture encore
+valide. Une lecture réellement maintenue en attente face à une mutation reste
+à qualifier avec l’ensemble3 ; ce constat statique n’est pas une panne runtime
+prouvée par le passage ci-dessus.070.4 reste ouvert jusqu’à cette preuve.
+
+Le bloc de confirmation d’adoption disparaît aussi après son action locale :
+son retour de focus est à observer dans070.3, sans attribuer à ces captures une
+mesure qui n’y figure pas. Ces restes sont suivis dans le backlog avant toute
+correction correspondante ; ils ne sont pas présentés comme qualifiés.
