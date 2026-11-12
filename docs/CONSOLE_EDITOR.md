@@ -410,3 +410,11 @@ purgée et ses trois intentions rapprochées ; aucun groupe d’éditeur acquis.
 Les observations de mutation liront statut et URL sans corps Chromium, puis
 reliront le candidat ou le fichier par la véritable API canonique. Les réponses
 GET du client API et les octets relus restent les autorités de comparaison.
+
+Le troisième passage passe huit groupes et quatre handlers réels puis s’arrête
+sur l’hypothèse du client selon laquelle la première URL copiée porterait le
+domaine de console. Le catalogue classe les routes officielles : l’alias
+functions.lelabs.tech est légitime. La preuve compare désormais la copie à
+l’entrée exacte du catalogue courant, HTTPS et chemin/hash, puis l’invoque.
+La fonction et ses deux révisions sont physiquement purgées ; cet essai reste
+séparé du replay et ne clôture aucun critère.
