@@ -49,6 +49,15 @@ actuellement sous code UNKNOWN. Leur campagne se lance séparément selon
 [runtime/README.md](../runtime/README.md). Elles ne modifient pas l'exécuteur
 de référence ni son manifeste.
 
+## Fixture du client HTTP intégré
+
+`artifacts/function-http-client.cjs` reçoit une requête réelle et renvoie les
+empreintes du corps et d’Authorization, la query ordonnée, le contexte et la
+présence des cookies/jeton. Ses modes binaire, HTML littéral, redirection et
+attente bornée éprouvent le testeur SLS-071 après publication normale dans Docker.
+Aucun secret ou corps n’est journalisé par ce handler ; seul son identifiant
+public de requête est tracé. [Contrat](../docs/CONSOLE_TESTER.md).
+
 ## Installer, lancer et vérifier
 
 `artifacts/draft-capacity.cjs` est publié depuis un brouillon initial puis invoqué

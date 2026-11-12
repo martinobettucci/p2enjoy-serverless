@@ -1,5 +1,19 @@
 # Qualification de la plateforme
 
+## Client HTTP intégré par fonction — en qualification
+
+`node e2e/function-http-client.mjs` reçoit le JSON SSO sur stdin privée, seul sur
+le SPARK DEV au repos. Il publie deux handlers originaux par les API, invoque
+réellement les domaines HTTPS, teste les bornes et refus du relais, les versions,
+la redirection sans suivi, les jetons et le timeout. Le parcours UI part de
+l’accueil et du vrai SSO, découvre Tester, utilise les modes serveur/CORS,
+la copie native, le téléchargement, les journaux et le viewport mobile. Prévoir
+quinze minutes réelles pour l’expiration du jeton temporaire ; aucune horloge
+ou ligne SQLite n’est modifiée. Le rapport UUID reste incomplet jusqu’aux
+purges et recoupements natifs ; les captures nécessitent leur inspection.
+La campagne ne ferme pas seule les autres scénarios du [contrat](../docs/CONSOLE_TESTER.md),
+notamment les interruptions et les régressions complètes.
+
 ## Capacité réelle des brouillons de code
 
 `node e2e/code-draft-capacity.mjs` reçoit les identifiants du SSO réel sur son

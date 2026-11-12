@@ -71,6 +71,8 @@ def source_hashes():
     # @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#interface-et-preuves
     files += [ROOT/'docs/CONSOLE_EDITOR.md']
     files += [ROOT/'docs/CODE_DRAFT_CAPACITY.md']
+    # @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#réalisation-et-preuves
+    files += [ROOT/'docs/CONSOLE_TESTER.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md#livraison-et-limites
     files += [ROOT/'docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#preuves-et-portée-des-opérateurs
