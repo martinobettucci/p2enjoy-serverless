@@ -1067,6 +1067,12 @@ Critères d'acceptation :
   parents supprimés et limites intactes. Décision : nonce complet des parents,
   nom de fonction significatif suffixé du nonce8, liaison UUID/noms explicite,
   sans modifier le modèle produit ; replay complet requis.
+  Replay742199ee : deux groupes passent puis helperexit1 aprèsarmed/avant
+  fault-entry, cause perdue derrière SHA du stderr. Aucune baisse NOFILE,
+  deux handlers succeeded ; fonction purgée, jeton révoqué et helper disparu.
+  Zéro groupe qualifié. Décision : échec structuré avec phase/code/errno/ligne
+  et compteurs numériques, sans chemins/buffers/messages bruts ; diagnostiquer
+  réellement avant de changer délai, signal ou frontière de panne.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise

@@ -152,6 +152,26 @@ la fonction. Le helper lie nom exact, UUID de fonction/service/namespace et
 nonce parent ; il ne suppose aucun champ absent et ne modifie pas le modèle
 produit pour les besoins du banc. Rejouer le client complet après correction.
 
+## Replay : sortie de l’observateur sans cause structurée
+
+Le [passage742199ee](evidence/function-http-client-task-observation-failed-dev-2026-11-12.json)
+sur401sources/commitb5c1907 passe SSO et préparation, puis le helper termine1
+après armed, avant tout fichier fault-entry. Deux handlers réussissent après
+libération ; une fonction est purgée, un jeton révoqué, parents supprimés et
+helper disparu. Même PID, limites originales et TID sans traceur recoupés,
+38backend/4web et5982artefacts conservés ; deux captures inspectées. Zéro
+groupe ajouté à une qualification, et aucune baisse NOFILE n’est exécutée.
+
+La cause exacte manque : le client conserve seulement taille431/SHA du stderr
+et constate native_operator_ended. Ce reçu ne prouve ni timeout, ni signal, ni
+mauvais chemin. Décision avant correction : persister/émettre un échec structuré
+avec phase, code fixe/errno/ligne, durée et compteurs numériques de stops,
+syscalls, ouvertures, correspondances CA et TID, ainsi que limites connues.
+Aucun message brut, chemin inconnu, pointeur ou buffer n’est rapporté. Conserver
+les événements dans le client avant toute levée, puis rejouer le parcours réel.
+Ne pas modifier les bornes, la gestion des signaux ou la frontière de panne
+sur une hypothèse non vérifiée par ce reçu.
+
 ## État
 
 Décision, matrice et constats de revue persistés avant leur code dépendant.

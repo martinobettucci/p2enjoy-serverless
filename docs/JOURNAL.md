@@ -7751,3 +7751,14 @@ usage avec suffixe8du nonce. Le helper vérifie les UUID, le nonce parent comple
 le nom exact du namespace et celui de la fonction ; il lit f.name existant.
 SyntaxesJS/Python valides,401sources. Premier passage reste échoué et exclu ;
 replay complet et toutes les preuves natives encore requis.
+
+### 12novembre2026 — Replay071.6 : sortie native à diagnostiquer
+
+742199ee/b5c1907 passe SSO/préparation puis helperexit1 aprèsarmed, avant
+fault-entry ; aucun NOFILE modifié. Deux handlers succeeded après libération,
+fonction purgée, jeton révoqué, parents supprimés et helper disparu. Limites
+intactes, même PID, deux captures inspectées et5982artefacts conservés.
+Cause exacte non disponible (stderr431octets/SHA seulement), zéro groupe
+qualifié. Décision avant correction : échec structuré phase/code/errno/ligne
+et compteurs numériques ; aucun buffer/chemin inconnu/message brut. Ne pas
+attribuer cet échec à un timeout ou signal sans nouvelle observation réelle.

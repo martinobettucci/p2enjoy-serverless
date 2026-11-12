@@ -1,0 +1,94 @@
+{
+  "format": "p2enjoy-serverless-task-observation-failure-v1",
+  "completed": false,
+  "unit": "SLS-071.6",
+  "qualified_groups": 0,
+  "source_commit": "b5c19073b90e0992803135cc0d8de5257765556e",
+  "source_files": 401,
+  "image": "sha256:609380938e08e026427525fd78dd18c6a7fb9b0052c146ec900dc859cc415df6",
+  "scope": "Helper exits1 after armed and before fault-entry; exact reason unavailable, stderr retained only by SHA/size.",
+  "native_fault_started": false,
+  "native_handlers_succeeded": 2,
+  "functions_purged": 1,
+  "tokens_revoked": 1,
+  "captures_individually_inspected": 2,
+  "helper_confirmed_gone": true,
+  "parents_deleted": true,
+  "limits_unchanged": true,
+  "native_cleanup": {
+    "completed": true,
+    "namespace": {
+      "id": "9dc3b1e1-b62a-4ffb-8c45-97e7aebca9ab",
+      "name": "function-http-client-task-exception-742199ee",
+      "deleted_at": 1794476100.342571
+    },
+    "service": {
+      "id": "97b36942-b179-45ec-997c-18214d8dd389",
+      "namespace_id": "9dc3b1e1-b62a-4ffb-8c45-97e7aebca9ab",
+      "deleted_at": 1794476100.3221138
+    },
+    "functions_purged": [
+      {
+        "id": "aaa23e5e-b838-4d58-87f4-a8832741fd88",
+        "purged_at": 1794476099.0054772
+      }
+    ],
+    "tokens_revoked": [
+      {
+        "id": "b6f60df3-b9c5-40b3-b567-ba34ede7fad2",
+        "revoked_at": 1794476100.258897
+      }
+    ],
+    "helper_gone": true,
+    "unit": "serverless-restore-task-exception-cdb8c7f0b697444e9ef7006632fb79e9",
+    "fault_entry_absent": true,
+    "pid": 1007466,
+    "birth": "508864062",
+    "limits_nofile": [
+      1048576,
+      1048576
+    ],
+    "integrity": "ok",
+    "foreign_keys": [],
+    "native_fault_started": false
+  },
+  "captures": [
+    {
+      "path": "/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless/.local/e2e/function-http-client-task-exception-742199ee-c4fc-4417-855f-b5e68516b649-before-native-fault.jpg",
+      "sha256": "8a0c7c1353b6a446953f3ff4bf93b2e1a90c02755fb4ac907895d298f518eec9",
+      "bytes": 126321,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "name": "before-native-fault",
+      "individually_inspected": true,
+      "reviewer": "principal",
+      "finding": "Réponse initiale200/hash/UUID/corps/téléchargement lisible, ou seconde requête encore en attente ; aucun secret visible."
+    },
+    {
+      "path": "/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless/.local/e2e/function-http-client-task-exception-742199ee-c4fc-4417-855f-b5e68516b649-failure-3.jpg",
+      "sha256": "47a3c37391e52e904746984b270065fd52cdd4c635d02c9bd4fae2be0aedb10c",
+      "bytes": 88316,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "name": "failure-3",
+      "individually_inspected": true,
+      "reviewer": "principal",
+      "finding": "Réponse initiale200/hash/UUID/corps/téléchargement lisible, ou seconde requête encore en attente ; aucun secret visible."
+    }
+  ],
+  "original_artifacts": {
+    "files": 5982,
+    "manifest_sha256": "846904e1437a034d7fd95488f246cd5b3dc935a4723d20abf9bb419673e5d482"
+  },
+  "raw": {
+    "path": "function-http-client-task-observation-failed-dev-2026-11-12.raw.json.gz",
+    "bytes": 45173,
+    "sha256": "8d37fd4eb9f4a956a6245d22c26ce094b75b87c965eb7dda82db7f864f6ef42e",
+    "uncompressed_bytes": 117736,
+    "uncompressed_sha256": "c683584b59df77fe034ac1296125846614b0f924b0d03628518a471c9bf63d9a"
+  }
+}
