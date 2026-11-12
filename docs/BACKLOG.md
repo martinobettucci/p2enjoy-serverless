@@ -988,7 +988,9 @@ Critères d'acceptation :
   uniquement par index/SHA. Le premier9groupes reste intermédiaire ; le passage
   dd3b50db reste préliminaire ; le replay84287810 sur96e5dc4e passe10groupes
   dans le checkpoint42, avec témoin positif et valeurs protégées absentes.
-  Perte de réponse lors d’émission/révocation temporaire encore à éprouver.
+  Perte de réponse lors d’émission/révocation temporaire encore à éprouver :
+  [matrice native avant/après commit](CONSOLE_TESTER_TOKEN_LOSS.md) décidée
+  avant code, quatre cas UI et un watchdog, sans lecture du secret perdu.
 - [x] SLS-071.4 Annulation qui distingue l'arrêt de l'attente de l'issue du handler déjà
   admis ; aucun rejeu automatique d'une invocation incertaine ; refus de la passerelle
   restitués fidèlement.
@@ -1047,7 +1049,8 @@ Critères d'acceptation :
   avant émission sous verrou SQLite sans écriture, capacité, manuel et
   régressions sur la nouvelle image. Dans42, coupure puis vrai503 sont
   qualifiés sur96e5dc4e ; les pertes de réponse des deux mutations temporaires
-  restent à exécuter, donc le critère entier demeure ouvert. Contrat : [provenance](CONSOLE_TESTER_FAILURES.md#défaut-reproduit-après-admission--correction0718).
+  restent à exécuter selon la [matrice dédiée](CONSOLE_TESTER_TOKEN_LOSS.md),
+  donc le critère entier demeure ouvert. Contrat : [provenance](CONSOLE_TESTER_FAILURES.md#défaut-reproduit-après-admission--correction0718).
 
 Les critères071.1/.5 reposent sur43 et46 (corps, limites, versions, cURL et
 corrélation) ;071.4 reçoit en plus42 (deux délais UI et vraie coupure sans rejeu).
