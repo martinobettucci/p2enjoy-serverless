@@ -7670,3 +7670,14 @@ et cinq appels sains sont nécessaires. La mort spontanée du traceur laisse une
 fenêtre locale honnêtement bornée, sans exiger de capacité FORGE. Aucune limite
 n’est encore modifiée, aucune exception ni capacité n’est qualifiée à ce stade.
 Contrat CONSOLE_TESTER_TASK_EXCEPTION persisté ; produit et manuel inchangés.
+
+### 12novembre2026 — Relecture de l’opérateur d’exception avant tout essai
+
+La revue du premier opérateur et du restaurateur (syntaxe seule contrôlée)
+relève la disparition/zombie du helper qui interromprait le secours avant
+NOFILE, l’identité complète non relue avant mutation et l’absence de reçu
+d’échec. Décision persistée avant correction : pidfd/ESRCH idempotents, identité
+complète avant abaissement, échec atomique avec phase/limites/helper et alarme
+traitée. Exposer aussi l’unité préparée avant armement et reconnaître systemd
+collecté. Aucun prlimit modificatif ni nouvel attachement n’est exécuté ; les
+deux fichiers sont préparatoires et le client/pile restent à réaliser.

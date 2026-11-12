@@ -1048,6 +1048,12 @@ Critères d'acceptation :
   explicitement bornée et ne devient aucune dépendance FORGE. Seule une lecture
   initiale du contrôle est faite ; la classe Python et les scénarios restent
   à reproduire, sans remplacement du constructeur ou certificat.
+  Revue avant essai du premier opérateur : reconnaître ESRCH/pidfd lisible et
+  zombie du helper sans abandonner la restitution ; revalider toute l’identité
+  avant prlimit, écrire l’échec atomique avec phase/limites et traiter l’alarme
+  Python. Réconcilier aussi armement à réponse perdue et unités collectées.
+  Ces corrections du banc et le client/lecteur de pile précèdent toute panne ;
+  syntaxe seule contrôlée, aucun scénario de ce complément n’est qualifié.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise

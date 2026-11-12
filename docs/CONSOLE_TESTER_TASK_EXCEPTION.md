@@ -99,6 +99,25 @@ est rapportée ; aucun buffer de requête, TLS ou secret n’est lu.
    inspection de chaque capture avant qualification ; aucun groupe antérieur
    réadditionné et aucun test ignoré.
 
+## Relecture du premier opérateur avant exécution
+
+La revue du code préparatoire relève cinq frontières à corriger avant tout
+prlimit modificatif : disparition du helper entre ouverture du pidfd et STOP,
+zombie pendant l’attente, identité complète trop ancienne avant abaissement,
+absence de reçu d’échec de restitution, et état systemd collecté interprété
+comme échec de commande. STOP/KILL/jonction doivent reconnaître un pidfd lisible
+ou ESRCH comme une sortie, puis poursuivre la restauration du PID original.
+CID/image/StartedAt et référence sont relus immédiatement avant abaissement.
+
+Le restaurateur écrit aussi un reçu atomique incomplet avec phase, limites
+connues et état du helper si sa restitution échoue ; aucune santé ou libération
+n’y est présumée. Son alarme devient une exception traitée pour traverser cette
+finalisation, sans prétendre couvrir SIGKILL. L’unité préparée est exposée avant
+systemd-run et la tentative retenue avant sa commande pour pouvoir réconcilier
+une réponse perdue. Les unités absentes/collectées sont reconnues par leurs
+propriétés natives, même si systemctl retourne un code non nul. Aucun de ces
+constats ne provient d’une exécution de panne ; client/pile restent à écrire.
+
 ## État
 
 Décision et matrice persistées avant code. Seule l’inspection préalable en
