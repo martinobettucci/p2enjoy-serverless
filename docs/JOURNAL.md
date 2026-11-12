@@ -7627,3 +7627,16 @@ le transitoire de chargement sans assertion dédiée ;071.6 son exception dans
 un contrôle vivant. Aucun groupe des preuves antérieures n’est réadditionné.
 La relecture officielle ciblée du Test Scaleway actualise sa seule ligne de
 parité ; elle ne vaut pas revalidation des autres lignes.
+
+### 12 novembre2026 — Lecture du testeur maintenue en attente
+
+Décision : réutiliser NativeObserver et le watchdog existants, dans une fixture
+originale function-http-client-recovery-loading. La suspension du TID HTTP
+permet une vraie lecture en attente et les deux vues UI, sans Docker pause ou
+réponse simulée. Fenêtre du helper8s, garde12s avant attachement ; le retour de
+la lecture peut venir du détachement natif avant le timer. La revue révèle la
+revalidation d’identité manquante du watchdog et le cgroup manquant du cut ;
+ces deux frontières seront corrigées et leurs sept scénarios rejoués. Le reçu
+doit attester le PID original vivant, sa naissance/cgroup et TracerPid0 pour le
+chargement ; healthy seul ne suffit pas. Contrat persisté avant code, aucun
+nouveau test ou signal exécuté à ce stade.

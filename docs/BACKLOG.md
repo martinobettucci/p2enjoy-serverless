@@ -999,6 +999,11 @@ Critères d'acceptation :
   inspectées ; six handlers, deux fonctions et deux jetons des deux passages
   nettoyés. Le transitoire « Lecture en cours… » reste sans assertion E2E dédiée ;
   le critère reste ouvert pour cette preuve, distincte de l’exception071.6.
+  Le [complément de chargement](CONSOLE_TESTER_LOADING.md) réutilise le watchdog
+  natif : vrai GET en attente, retrait UI, perte du seul observateur, PID conservé
+  et reprise explicite. La revue impose avant code une revalidation immédiate
+  d’identité/cgroup aux deux attachements et une preuve native du PID survivant.
+  Rejouer les sept scénarios de reprise après ce durcissement, puis les communs.
 - [x] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
   après quinze minutes ; valeur en mémoire de la page, absente des exemples copiés, journaux,
   erreurs, préférences et historique. L’inspecteur de preuve ne réémet aucun
