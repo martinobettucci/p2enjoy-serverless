@@ -13,8 +13,10 @@ La campagne crée un namespace `code-draft-capacity-<uuid>`, un service
 Create `draft-owner-01` à`05`. Toutes les mutations passent par les API normales.
 Jetons en mémoire seulement, aucun secret ni texte de source dans les rapports.
 Fonctions sans volume, zéro instance minimale, idle0. Les intentions sont
-enregistrées avant les POST, puis rapprochées par nom pour nettoyer aussi une
-création dont la réponse serait perdue. Aucun objet extérieur n'est supprimé.
+enregistrées avant les POST, après lecture paginée attestant l'absence du nom.
+Le namespace porte l'UUID complet. Une réponse certaine autre que201 interdit
+le rapprochement ; seules une création acquittée ou une réponse perdue peuvent
+être rapprochées dans ce périmètre neuf. Aucun objet extérieur n'est supprimé.
 
 L'opérateur natif lit SQLite sous l'identité de son propriétaire, dans une
 transaction de lecture cohérente : compteurs globaux, métadonnées des seuls
@@ -81,6 +83,11 @@ Les31autres fonctions, service et namespace sont nettoyés par API. Les compteur
 finaux, intégrité/FK, absence d'instances, baux, candidats actifs et répertoires
 d'artefacts de campagne sont vérifiés. Les5982artefacts antérieurs, images/CID du
 contrôle et de la référence, configurations et sources indexées restent identiques.
+Le collecteur externe complète explicitement l'inspecteur ciblé : inventaire/SHA
+des5982fichiers, sources embarquées et HTTPS, empreintes des trois fichiers de
+configuration, CID/image/date/état des deux conteneurs, registre de stockage
+(baux et commandes en attente), santé et ownership SQLite. Ces observations ne
+sont pas déduites des seuls compteurs `busy` du client.
 
 Cette tranche ne clôt pas seule070.3 ni070 : limites, reprises, compléments UI
 et dépendance071 restent suivis dans le contrat principal.

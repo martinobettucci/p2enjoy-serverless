@@ -6,6 +6,10 @@ Le [plan](CODE_DRAFT_CAPACITY.md) précise avant code les frontières32/128 et
 64Mio de ciphertext réel, la comparaison atomique des refus et le nettoyage par
 API. Le scénario termine par une publication initiale et une invocation Docker
 originale. Aucun changement produit ni clôture supplémentaire revendiqué.
+La relecture préalable ajoute une garde de confinement : nom absent avant POST,
+UUID complet et aucun rapprochement après refus certain. Les observations
+externes (registre, CID, configurations, artefacts) sont explicitement séparées
+des métadonnées du client. Décision persistée avant cet ajustement du client.
 
 ## 12novembre2026 —070.8 clôturée par39groupes réels
 
