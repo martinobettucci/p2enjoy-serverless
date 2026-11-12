@@ -7780,3 +7780,12 @@ et un basename de frame non filtré. Décision avant correction : mémoire seule
 dans except, NOFILE rendu/relu puis TID/garde libérés avant les E/S diagnostic,
 sans masquer l’exception initiale ; fichier réduit à ID fixe ou SHA. Aucun
 nouvel essai lancé et aucune cause du742199ee n’est présumée.
+
+### 12novembre2026 — Échec structuré après restitution effective
+
+L’exception ne prépare désormais que des champs en mémoire ; le finally rend
+NOFILE, détache les TID, vérifie la restitution et joint la garde avant toute
+écriture/émission du diagnostic. Une erreur de cette seule E/S ne masque pas
+l’exception initiale. Le frame porte un ID public fixe, sinon SHA du nom/ligne.
+Délai, polling, signaux et frontière inchangés ; syntaxes valides, relecture
+ciblée et nouvelle observation réelle requises. Aucune baisse NOFILE qualifiée.

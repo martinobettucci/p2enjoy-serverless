@@ -2473,3 +2473,11 @@ reste séparée. Le replay porte le nonce complet dans namespace/service et son
 suffixe8dans le nom de fonction, liés par UUID/nom exact dans le helper ; aucune
 colonne de description de fonction n’est supposée. Syntaxes vérifiées ; replay
 réel complet encore requis.
+
+Le replay742199ee s’arrête après armed, avant fault-entry ; raison exacte
+non conservée (stderr SHA/taille seulement), limites intactes et cleanup réel.
+La [preuve échouée](../docs/evidence/function-http-client-task-observation-failed-dev-2026-11-12.json)
+conserve deux handlers et deux vues inspectées, zéro groupe qualifié.
+L’opérateur prépare désormais operator-failed avec phase/code/errno/ligne et
+compteurs numériques, sans chemins inconnus ou données de requête. Les bornes,
+signaux et frontière de panne restent inchangés en attendant le diagnostic réel.

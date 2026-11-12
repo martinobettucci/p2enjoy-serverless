@@ -165,7 +165,8 @@ def main():
           'program_sha256':{str(p.resolve()):sha(p) for p in [Path(__file__),source,Path(__file__).with_name('native_control_observer.py'),Path(__file__).with_name('control_database.py')]}}
     atomic(folder,'identity.json',item);(folder/'restore.py').write_bytes(source.read_bytes());(folder/'restore.py').chmod(0o600)
     before=snapshot(fn);assert before['integrity']=='ok' and not before['foreign_keys']
-    observers={};armed=False;limit_changed=False;fault=None
+    observers={};armed=False;limit_changed=False;fault=None;failure_info=None;phase=1;operation_started=time.monotonic()
+    observed={'stops':0,'entries':0,'exits':0,'syscall_entries':{},'signals':{},'open_candidates':{},'CA_comparisons':0,'CA_matches':{}}
     emit({'event':'prepared','unit':unit,'mode':mode,'image':arg,'container_id':current['Id'],'started_at':item['started_at']})
     try:
         armed=True  # Retain the attempted unit even if systemd-run loses its response.
@@ -175,20 +176,32 @@ def main():
         main_observer=NativeObserver(pid);observers[pid]=main_observer;main_observer.start()
         traced=identity(item);assert traced['tracer_pid']==os.getpid() and traced['state']=='t'
         emit({'event':'armed','unit':unit,'mode':mode,'image':arg,'container_id':current['Id'],'started_at':item['started_at'],'process':traced,'limits_nofile':list(original),'before':before})
-        deadline=time.monotonic()+8
+        phase=2;deadline=time.monotonic()+8
         while True:
             assert time.monotonic()<deadline,'CA_open_not_observed'
             main_observer.resume();stopped=main_observer.wait(deadline)
+            observed['stops']+=1;observed['last_signal']=stopped
             if stopped!=(signal.SIGTRAP|0x80):
+                key=str(stopped);observed['signals'][key]=observed['signals'].get(key,0)+1
                 assert stopped==signal.SIGTRAP,'unexpected_control_signal';continue
-            op,args=main_observer.info()
-            if op==1 and args[0]==257 and main_observer.match_line(args[2],len(CA),CA,0)==len(CA):break
+            op,args=main_observer.info();observed['last_event']=op
+            if op==2:observed['exits']+=1
+            if op==1:
+                observed['entries']+=1;number=args[0];observed['last_syscall']=number;key=str(number)
+                observed['syscall_entries'][key]=observed['syscall_entries'].get(key,0)+1
+                if number in (2,257,437):
+                    observed['open_candidates'][key]=observed['open_candidates'].get(key,0)+1
+                    observed['CA_comparisons']+=1
+                    matched=main_observer.match_line(args[1] if number==2 else args[2],len(CA),CA,0)==len(CA)
+                    if matched:observed['CA_matches'][key]=observed['CA_matches'].get(key,0)+1
+                    if number==257 and matched:break
+        phase=3
         assert args[3]&os.O_ACCMODE==os.O_RDONLY,'CA_read_only_open_required'
-        at_entry=snapshot(fn)
+        phase=4;at_entry=snapshot(fn)
         assert at_entry['invocations']==before['invocations']
         assert len(at_entry['test_audits'])==len(before['test_audits'])+1,'one_new_test_audit_required'
         assert all(v in at_entry['test_audits'] for v in before['test_audits'])
-        freeze_deadline=time.monotonic()+2;thread_births={pid:birth(pid)}
+        phase=5;freeze_deadline=time.monotonic()+2;thread_births={pid:birth(pid)}
         while True:
             census={int(v.name) for v in Path('/proc',str(pid),'task').iterdir()};assert 0<len(census)<=64
             for tid in sorted(census-set(observers)):
@@ -205,14 +218,14 @@ def main():
             frozen.append({'tid':tid,'birth':thread_births[tid],**v})
         # No subprocess or detached mutator operates the limit. The independent
         # guard stops this exact helper before restoring it on forced rescue.
-        fresh=identity(item);assert fresh['tracer_pid']==os.getpid() and fresh['state']=='t'
+        phase=6;fresh=identity(item);assert fresh['tracer_pid']==os.getpid() and fresh['state']=='t'
         assert {int(v.name) for v in Path('/proc',str(pid),'task').iterdir()}==set(observers)
         for tid in observers:
             v=status(tid);assert birth(tid)==thread_births[tid] and v['state']=='t' and v['tracer_pid']==os.getpid() and v['tgid']==pid
         assert resource.prlimit(pid,resource.RLIMIT_NOFILE)==original
-        fault={'event':'fault-active','unit':unit,'mode':mode,'syscall':'openat','CA_path_matched':True,'threads':frozen,'audit':at_entry['test_audits'][-1],'native_before':before,'native_at_entry':at_entry,'original_limits':list(original),'entry_at_ns':time.time_ns()}
+        fault={'observation':observed,'event':'fault-active','unit':unit,'mode':mode,'syscall':'openat','CA_path_matched':True,'threads':frozen,'audit':at_entry['test_audits'][-1],'native_before':before,'native_at_entry':at_entry,'original_limits':list(original),'entry_at_ns':time.time_ns()}
         atomic(folder,'fault-entry.json',fault)
-        resource.prlimit(pid,resource.RLIMIT_NOFILE,(0,original[1]));limit_changed=True
+        phase=7;resource.prlimit(pid,resource.RLIMIT_NOFILE,(0,original[1]));limit_changed=True
         assert resource.prlimit(pid,resource.RLIMIT_NOFILE)==(0,original[1])
         fault['limit_zero_at_ns']=time.time_ns()
         if mode=='rescue-window':
@@ -220,13 +233,25 @@ def main():
             # Deliberately leave all tracees stopped. A separate restorer stops
             # this helper, restores NOFILE, then terminates it; no self-KILL.
             while True:signal.pause()
-        main_observer.resume();assert main_observer.wait(deadline)==(signal.SIGTRAP|0x80)
+        phase=8;main_observer.resume();assert main_observer.wait(deadline)==(signal.SIGTRAP|0x80)
         op,result=main_observer.info();fault.update(syscall_exit_at_ns=time.time_ns(),syscall_result=result)
         assert op==2 and result==-errno.EMFILE,'real_EMFILE_required'
         resource.prlimit(pid,resource.RLIMIT_NOFILE,original)
         assert resource.prlimit(pid,resource.RLIMIT_NOFILE)==original
         limit_changed=False;fault.update(limits_restored_at_ns=time.time_ns(),restored_limits=list(original),restored_before_Python=True)
         atomic(folder,'native-fault.json',fault);emit(fault)
+    except BaseException as error:
+        trace=error.__traceback__
+        while trace and trace.tb_next:trace=trace.tb_next
+        message=str(error)
+        codes={'CA_open_not_observed','native_stop_not_observed','unexpected_control_signal','native_observation_failed','one_new_test_audit_required','CA_read_only_open_required','real_EMFILE_required','control_process_changed','control_pid_changed','control_generation_changed','unknown_guard_state'}
+        filename=Path(trace.tb_frame.f_code.co_filename).name if trace else ''
+        file_ids={'function-http-client-task-operator.py':'task_operator','native_control_observer.py':'native_observer','control_database.py':'control_database'}
+        source={'file_id':file_ids.get(filename,'other'),'line':trace.tb_lineno} if trace else None
+        if source and filename not in file_ids:source['filename_sha256']=hashlib.sha256(filename.encode()).hexdigest()
+        failure_info={'event':'operator-failed','unit':unit,'phase':phase,'reason_code':message if message in codes else 'unclassified','failure_type':type(error).__name__,'message_sha256':hashlib.sha256(message.encode()).hexdigest(),'elapsed_ms':round((time.monotonic()-operation_started)*1000,3),'observation':observed,'limit_changed':limit_changed,'original_limits':list(original),'observers_registered':len(observers),'source':source}
+        if isinstance(getattr(error,'errno',None),int):failure_info['errno']=error.errno
+        raise
     finally:
         # Restoring the original resource takes precedence over detaching any
         # tracee, including if a native assertion failed after the syscall.
@@ -235,9 +260,18 @@ def main():
             resource.prlimit(pid,resource.RLIMIT_NOFILE,original)
             assert resource.prlimit(pid,resource.RLIMIT_NOFILE)==original
         for obs in reversed(list(observers.values())):obs.detach()
-        if armed:
-            receipt=restored(folder,False);emit(receipt)
-            emit({'event':'guard-finished','unit':unit,'states':finish_guard(unit)})
+        receipt=restored(folder,False) if armed else None
+        states=finish_guard(unit) if armed else None
+        if failure_info is not None:
+            if receipt:
+                failure_info.update(observed_limits_after_restore=receipt['limits_after'],restoration_known=receipt['completed'],threads_released=True)
+            try:
+                atomic(folder,'operator-failure.json',failure_info);emit(failure_info)
+            except Exception:
+                pass  # Diagnostic I/O must not replace the original exception.
+        if receipt:
+            emit(receipt)
+            emit({'event':'guard-finished','unit':unit,'states':states})
 
 
 if __name__=='__main__':main()
