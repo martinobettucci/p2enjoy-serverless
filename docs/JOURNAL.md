@@ -1,3 +1,11 @@
+## 12novembre2026 — Revue de la facette Éditeur
+
+Quatre défauts de la première implémentation sont confirmés avant déploiement :
+liaison de copie serveur au fichier, résolution du candidat avant publication,
+revert d’un chemin retiré et sélection native pour fins de ligne répétées.
+Les corrections décidées sont dans CONSOLE_EDITOR ; build local Vite réussi,
+preuve E2E de console encore absente. L’unité070 reste ouverte.
+
 # Journal de cadrage
 
 ## 2026-11-09 — Pilotes de qualification076 maintenus dans le dépôt
@@ -7322,3 +7330,9 @@ code : garder le contexte monté, protéger les départs/déconnexion, conserver
 exactement les fins de ligne malgré la normalisation DOM, et ne jamais rejouer
 une publication incertaine. Le détail UI est ajouté au contrat existant sans
 le réécrire. Pile DEV saine, dix migrations, aucun objet actif ni brouillon.
+
+La première implémentation UI ajoute la facette et le lien depuis une version,
+réutilise le candidat, protège les départs/déconnexion et sépare texte exact de
+sa représentation DOM. Le manuel reçoit son chapitre ; une fixture de fins de
+ligne mixtes complète le paquet original. Revue, build, bascule et preuves UI
+restent à exécuter ; aucun critère supplémentaire clôturé.

@@ -4,7 +4,7 @@ Contrat de réalisation [SLS-070](BACKLOG.md#sls-070), décidé le11 novembre202
 avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler)
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
 Le serveur et la migration010 sont déployés et partiellement qualifiés en DEV
-par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La facette console reste à implémenter.
+par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La facette console est implémentée, en attente de construction et de preuve UI.
 Seul070.7 est clôturé ; les autres critères restent ouverts.
 
 ## Parcours et droits
@@ -369,3 +369,26 @@ complets reviennent à la ligne. Les champs de recherche ont leur libellé ;
 Précédent/Suivant sélectionnent l’occurrence et nomment sa ligne/colonne.
 Le manuel ajoutera un chapitre propre avec cette réalisation. Aucune API,
 migration, dépendance ou variable de cellule nouvelle.
+
+### Corrections issues de la revue de console —12novembre2026
+
+La relecture relève quatre défauts avant preuve UI : copie serveur réutilisable
+sur un autre chemin, publication autorisée pendant résolution d’un UUID suivi,
+absence de rétablissement d’un chemin retiré et ambiguïté des fins de ligne
+identiques. Aucun de ces parcours n’est déclaré qualifié.
+
+La copie relue est liée à sa surface, son chemin et une génération de lecture.
+Un changement de fichier ou de surface invalide cette copie ; une réponse tardive
+ne peut plus être adoptée. Toute tentative sélectionnée interdit une publication
+pendant son GET et tant que son état reste inconnu ; fermer le suivi attend aussi
+la fin de cette lecture. Le diff propose le rétablissement confirmé d’un chemin,
+y compris retiré, avec le même If-Match et sans modifier les autres patches.
+
+Le calcul de texte utilise d’abord la sélection et le type de l’événement natif
+beforeinput, pour rattacher la plage effectivement remplacée aux octets originaux.
+C’est nécessaire lorsque plusieurs fins de ligne visibles sont identiques : le
+préfixe/suffixe seul ne distingue pas laquelle a été supprimée. L’historique des
+valeurs exactes reste en mémoire pour les gestes natifs annuler/rétablir. La
+preuve comporte une suppression dans `a\r\n\nb`, une saisie sur les lignes
+mixtes et une relecture des octets enregistrés. Aucun contenu n’est persisté par
+le navigateur. Les contrôles statiques/build précèdent une campagne UI réelle.
