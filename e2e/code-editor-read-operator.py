@@ -62,7 +62,7 @@ def restore(folder,rescue):
 class WorkerTrace(NativeObserver):
     """Keep raw wait status so clone events cannot be confused with syscall stops."""
     def __init__(self,tid):
-        super().__init__(tid);self.birth=birth(tid);self.held=None;self.raw_status=None
+        super().__init__(tid);self.birth=birth(tid);self.held=None;self.raw_status=None;self.parent_tid=None;self.early_child=False
 
     def wait(self,deadline):
         while time.monotonic()<deadline:
@@ -156,7 +156,7 @@ def prepare(fn,ns,image,count,unit):
 def expired(signum,frame):raise TimeoutError('native_observation_deadline')
 
 def hold(fn,ns,image,count,unit):
-    folder,item=prepare(fn,ns,image,count,unit);unit=folder.name;traces={};held=[];armed=False;phase='prepared';started=time.monotonic();events=0;failure=None
+    folder,item=prepare(fn,ns,image,count,unit);unit=folder.name;traces={};held=[];armed=False;phase='prepared';started=time.monotonic();events=0;failure=None;last_wait=None;clone_events=[];early_child_stops=[]
     previous_alarm=signal.signal(signal.SIGALRM,expired);assert signal.getitimer(signal.ITIMER_REAL)==(0.0,0.0);signal.setitimer(signal.ITIMER_REAL,50)
     emit({'event':'prepared','unit':unit,'image':image,'count':count})
     try:
@@ -173,18 +173,31 @@ def hold(fn,ns,image,count,unit):
             trace.ptrace(0x4206,0,OPTIONS);trace.attached=True;trace.ptrace(0x4207);trace.wait(time.monotonic()+3);check_thread(trace,item)
         for trace in traces.values():trace.proceed(main.pid)
         phase='reading';emit({'event':'armed','unit':unit,'process':owner(item),'threads_attached':len(traces),'count':count})
-        while len(held)<count:
+        while len(held)<count or any(t.early_child and t.parent_tid is None for t in traces.values()):
             assert time.monotonic()-started<40,'reader_acquisition_deadline'
             if select.select([sys.stdin],[],[],0)[0]:raise RuntimeError('owner_closed_before_hold')
             tid,state=os.waitpid(-1,os.WNOHANG|WALL)
             if not tid:time.sleep(.001);continue
             events+=1;assert events<=200000,'native_event_limit'
-            assert tid in traces and os.WIFSTOPPED(state),'unexpected_tracee_event'
-            trace=traces[tid];trace.stopped=True;trace.raw_status=state;check_thread(trace,item)
+            last_wait={'tid':tid,'raw_status':state,'known_tid':tid in traces,'stopped':os.WIFSTOPPED(state),'event':state>>16,'signal':os.WSTOPSIG(state) if os.WIFSTOPPED(state) else None}
+            assert os.WIFSTOPPED(state),'tracee_exited_during_read'
             event=state>>16;stopped=os.WSTOPSIG(state)
+            if tid not in traces:
+                assert event==128 and stopped==signal.SIGTRAP and len(traces)<64,'unexpected_inherited_stop'
+                new=WorkerTrace(tid);check_thread(new,item)
+                new.attached=True;new.early_child=True;traces[tid]=new
+                early_child_stops.append({'tid':tid,'birth':new.birth,'event':event,'signal':stopped})
+            trace=traces[tid];trace.stopped=True;trace.raw_status=state;check_thread(trace,item)
             if event==3:
-                child=ctypes.c_ulong();trace.ptrace(0x4201,0,ctypes.addressof(child));new=WorkerTrace(child.value)
-                assert new.pid not in traces and len(traces)<64;new.attached=True;traces[new.pid]=new
+                child=ctypes.c_ulong();trace.ptrace(0x4201,0,ctypes.addressof(child))
+                if child.value in traces:
+                    new=traces[child.value];assert new.early_child and new.parent_tid is None
+                    check_thread(new,item)
+                else:
+                    assert len(traces)<64;new=WorkerTrace(child.value);check_thread(new,item)
+                    new.attached=True;traces[new.pid]=new
+                new.parent_tid=tid
+                clone_events.append({'parent_tid':tid,'child_tid':new.pid,'child_birth':new.birth,'initial_stop_seen_first':new.early_child})
                 trace.proceed(main.pid);continue
             if event==128:
                 assert stopped==signal.SIGTRAP,'unexpected_group_stop'
@@ -206,7 +219,7 @@ def hold(fn,ns,image,count,unit):
             trace=traces[row['tid']];check_thread(trace,item);assert trace.stopped
             observed=file_match(trace,trace.info()[1],item);assert observed is not None
             assert {k:v for k,v in observed.items() if k!='at_ns'}=={k:v for k,v in row.items() if k!='at_ns'}
-        value={'event':'held','unit':unit,'process':owner(item),'readers':held,'events':events,'threads_seen':len(traces)};atomic(folder,'held.json',value);emit(value)
+        value={'event':'held','unit':unit,'process':owner(item),'readers':held,'events':events,'threads_seen':len(traces),'clone_events':clone_events,'early_child_stops':early_child_stops};atomic(folder,'held.json',value);emit(value)
         deadline=started+45
         assert deadline>time.monotonic(),'reader_hold_deadline'
         ready=select.select([sys.stdin],[],[],deadline-time.monotonic())[0]
@@ -214,7 +227,9 @@ def hold(fn,ns,image,count,unit):
         line=sys.stdin.readline();assert line in ('release\n',''),'unexpected_owner_command'
         emit({'event':'releasing','unit':unit,'reason':'release' if line else 'EOF'})
     except BaseException as error:
-        failure={'event':'operator-failed','unit':unit,'phase':phase,'failure_type':type(error).__name__,'message_sha256':hashlib.sha256(str(error).encode()).hexdigest(),'events':events,'held_count':len(held)}
+        trace=error.__traceback__
+        while trace and trace.tb_next:trace=trace.tb_next
+        failure={'event':'operator-failed','unit':unit,'phase':phase,'failure_type':type(error).__name__,'message_sha256':hashlib.sha256(str(error).encode()).hexdigest(),'events':events,'held_count':len(held),'last_wait':last_wait,'clone_events':clone_events,'early_child_stops':early_child_stops,'source_line':trace.tb_lineno if trace else None,'source_file':Path(trace.tb_frame.f_code.co_filename).name if trace else None}
         atomic(folder,'operator-failure.json',failure);emit(failure);raise
     finally:
         signal.setitimer(signal.ITIMER_REAL,0);signal.signal(signal.SIGALRM,previous_alarm)

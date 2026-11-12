@@ -196,3 +196,9 @@ référence ; seul le démarrage/PID du contrôle change intentionnellement. Une
 nouvelle baseline avant la campagne distingue ce changement des conservations
 exigées pendant chaque épreuve. Le groupe à quatre lecteurs devra observer un
 véritable événement clone ; la seule réutilisation de workers ne suffit pas.
+
+Le répartiteur implémente maintenant ce rapprochement et conserve les métadonnées
+brutes du dernier wait, les créations et les arrêts initiaux observés. Le client
+exige un clone réel dans son groupe à quatre lecteurs. Les syntaxes passent ;
+ce correctif n’est pas encore qualifié, et le redémarrage préparatoire reste
+à exécuter après la revue puis le gel des sources.
