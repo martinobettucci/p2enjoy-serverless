@@ -180,6 +180,26 @@ pas l’exception initiale. Le fichier du frame est un identifiant public fixe
 ou une empreinte, jamais un basename inconnu en clair. Ces corrections sont
 requises avant le nouveau passage ; aucune panne n’est encore qualifiée.
 
+## Attente native : borne atteinte après6777arrêts
+
+Le [passageca4aa8b9](evidence/function-http-client-task-wait-failed-dev-2026-11-12.json)
+sur401sources/commit9e73901 établit phase2/CA_open_not_observed après8154,437ms :
+6777stops,3389entrées,3388sorties,48openat sans CA,2232pread64 et aucun signal.
+Aucune baisse NOFILE ni nouveau TID attaché hors main ; restitution connue,
+TIDlibérés, même PID et limites. Deux handlers réussissent après libération,
+fonction purgée, jeton révoqué, parents/helper nettoyés ; deux vues inspectées,
+38backend/4web et5982artefacts conservés. Zéro groupe qualifié.
+
+Le polling1ms par stop peut coûter plusieurs secondes sur ce volume ; il est
+une explication plausible, pas une mesure isolée de toutes les8154ms. Décision
+avant code : composer un observateur local dont wait utilise waitpid bloquant
+avec alarme POSIX sur la même échéance absolue. L’alarme est propre au helper,
+annulée à chaque sortie d’attente et l’ancien handler restauré au détachement.
+Aucun timer antérieur n’est adopté. Conserver8s de recherche,2s de gel et la
+garde indépendante12s ; aucun allongement de borne, aucun changement de la
+classe NativeObserver partagée ni de la gestion des signaux du contrôle. Le
+nouvel essai devra prouver l’arrivée au CA et toutes les frontières de panne.
+
 ## État
 
 Décision, matrice et constats de revue persistés avant leur code dépendant.

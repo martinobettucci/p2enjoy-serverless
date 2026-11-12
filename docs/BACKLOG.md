@@ -1076,6 +1076,11 @@ Critères d'acceptation :
   Relecture de l’instrumentation : E/S du diagnostic après restauration
   prioritaire de NOFILE et libération, sans masquer l’exception initiale ;
   fichier du frame réduit à ID public fixe ou SHA. Pas de nom inconnu en clair.
+  Passageca4aa8b9 instrumenté : CA_open_not_observed/phase2,8154ms,6777stops,
+  48openat sans CA,2232pread64, aucun signal ; limites intactes et cleanup réel,
+  zéro groupe qualifié. Décision avant code : waitpid bloquant sous alarme
+  locale du helper, même échéance8s et garde12s, classe partagée inchangée.
+  Le coût du polling est plausible, à éprouver sans allonger les bornes.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise

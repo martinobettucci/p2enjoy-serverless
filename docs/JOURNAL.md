@@ -7789,3 +7789,14 @@ NOFILE, détache les TID, vérifie la restitution et joint la garde avant toute
 l’exception initiale. Le frame porte un ID public fixe, sinon SHA du nom/ligne.
 Délai, polling, signaux et frontière inchangés ; syntaxes valides, relecture
 ciblée et nouvelle observation réelle requises. Aucune baisse NOFILE qualifiée.
+
+### 12novembre2026 — Borne native mesurée, attente à rendre efficace
+
+ca4aa8b9/9e73901 : phase2/CA_open_not_observed après8154ms,6777stops,
+3389entrées,3388sorties,48openat sans CA,2232pread64, aucun signal. Aucun
+NOFILE modifié, restitution connue et nettoyages natifs ; deux handlers et
+deux vues inspectées, zéro groupe qualifié. Le polling1ms peut peser plusieurs
+secondes, sans mesure isolée exclusive. Décision avant code : observateur local
+waitpid bloquant borné par alarme propre au helper, annulée après attente et
+handler restauré au detach. Mêmes8s/2s/garde12s, NativeObserver partagée et
+signaux du contrôle inchangés. Nouveau passage réel exigé pour atteindre le CA.

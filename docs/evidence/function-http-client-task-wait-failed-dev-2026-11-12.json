@@ -1,0 +1,162 @@
+{
+  "format": "p2enjoy-serverless-task-wait-failure-v1",
+  "completed": false,
+  "unit": "SLS-071.6",
+  "qualified_groups": 0,
+  "source_commit": "9e739010ed9fad5e2752064a3c2964da776eaf78",
+  "source_files": 401,
+  "image": "sha256:609380938e08e026427525fd78dd18c6a7fb9b0052c146ec900dc859cc415df6",
+  "native_failure": {
+    "event": "operator-failed",
+    "unit": "serverless-restore-task-exception-c329f86a64994ea39cfb7a052eb137ca",
+    "phase": 2,
+    "reason_code": "CA_open_not_observed",
+    "failure_type": "AssertionError",
+    "message_sha256": "cbb6f526ba22d5f9d9e583cb9118c45a9fa60bac0ee294a2c4fbf42eb473c4e3",
+    "elapsed_ms": 8154.437,
+    "observation": {
+      "stops": 6777,
+      "entries": 3389,
+      "exits": 3388,
+      "syscall_entries": {
+        "3": 47,
+        "5": 182,
+        "9": 16,
+        "11": 15,
+        "12": 30,
+        "16": 3,
+        "17": 2232,
+        "18": 128,
+        "39": 32,
+        "41": 1,
+        "42": 1,
+        "44": 1,
+        "45": 1,
+        "51": 4,
+        "52": 2,
+        "54": 1,
+        "72": 395,
+        "77": 16,
+        "87": 30,
+        "93": 32,
+        "107": 32,
+        "232": 7,
+        "233": 4,
+        "257": 48,
+        "262": 126,
+        "288": 2,
+        "318": 1
+      },
+      "signals": {},
+      "open_candidates": {
+        "257": 48
+      },
+      "CA_comparisons": 48,
+      "CA_matches": {},
+      "last_signal": 133,
+      "last_event": 1,
+      "last_syscall": 17
+    },
+    "limit_changed": false,
+    "original_limits": [
+      1048576,
+      1048576
+    ],
+    "observers_registered": 1,
+    "source": {
+      "file_id": "task_operator",
+      "line": 181
+    },
+    "observed_limits_after_restore": [
+      1048576,
+      1048576
+    ],
+    "restoration_known": true,
+    "threads_released": true
+  },
+  "native_fault_started": false,
+  "native_handlers_succeeded": 2,
+  "functions_purged": 1,
+  "tokens_revoked": 1,
+  "captures_individually_inspected": 2,
+  "helper_confirmed_gone": true,
+  "parents_deleted": true,
+  "limits_unchanged": true,
+  "native_cleanup": {
+    "completed": true,
+    "namespace": {
+      "id": "5c6b3bf7-7753-4047-8021-87f82e63470a",
+      "name": "function-http-client-task-exception-ca4aa8b9",
+      "deleted_at": 1794477090.670657
+    },
+    "service": {
+      "id": "8bb23719-e33f-42dd-94fa-7be923519f16",
+      "namespace_id": "5c6b3bf7-7753-4047-8021-87f82e63470a",
+      "deleted_at": 1794477090.6559534
+    },
+    "functions_purged": [
+      {
+        "id": "380fe9cf-0d4e-4182-a726-9a47c74b1cf5",
+        "purged_at": 1794477089.3374918
+      }
+    ],
+    "tokens_revoked": [
+      {
+        "id": "c0f33ed6-d283-4515-b1a8-7e2005ea9ddb",
+        "revoked_at": 1794477090.6043656
+      }
+    ],
+    "helper_gone": true,
+    "unit": "serverless-restore-task-exception-c329f86a64994ea39cfb7a052eb137ca",
+    "fault_entry_absent": true,
+    "pid": 1007466,
+    "birth": "508864062",
+    "limits_nofile": [
+      1048576,
+      1048576
+    ],
+    "integrity": "ok",
+    "foreign_keys": [],
+    "native_fault_started": false
+  },
+  "captures": [
+    {
+      "path": "/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless/.local/e2e/function-http-client-task-exception-ca4aa8b9-765e-40aa-b461-cb6d731eca43-before-native-fault.jpg",
+      "sha256": "c1617f5631457fd0906acd244abfeab8e615bc1fc5e7ff0d55a475cf6cb9248f",
+      "bytes": 126384,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "name": "before-native-fault",
+      "individually_inspected": true,
+      "reviewer": "principal",
+      "finding": "Réponse200 initiale/hash/UUID lisibles ou seconde requête en attente ; aucun secret visible."
+    },
+    {
+      "path": "/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless/.local/e2e/function-http-client-task-exception-ca4aa8b9-765e-40aa-b461-cb6d731eca43-failure-3.jpg",
+      "sha256": "47a3c37391e52e904746984b270065fd52cdd4c635d02c9bd4fae2be0aedb10c",
+      "bytes": 88316,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "name": "failure-3",
+      "individually_inspected": true,
+      "reviewer": "principal",
+      "finding": "Réponse200 initiale/hash/UUID lisibles ou seconde requête en attente ; aucun secret visible."
+    }
+  ],
+  "original_artifacts": {
+    "files": 5982,
+    "manifest_sha256": "846904e1437a034d7fd95488f246cd5b3dc935a4723d20abf9bb419673e5d482"
+  },
+  "limitation": "Timeout before CA proven; polling overhead plausible from6777stops, not directly measured as the exclusive cause.",
+  "raw": {
+    "path": "function-http-client-task-wait-failed-dev-2026-11-12.raw.json.gz",
+    "bytes": 45623,
+    "sha256": "4642bec8ac4da660a8ef4e43f243040fa4d42847b61c764be4c16cf725778c68",
+    "uncompressed_bytes": 119677,
+    "uncompressed_sha256": "64f37f43c6319a21967f18e975f22f0e9d5780366c76784f561598415565dd06"
+  }
+}
