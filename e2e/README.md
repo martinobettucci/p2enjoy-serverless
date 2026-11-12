@@ -9,6 +9,10 @@ les API ; `code-draft-capacity-inspect.py` ne lit que des métadonnées natives.
 Une publication initiale originale est invoquée dans Docker avant les archives
 et purges normales. Rapport UUID sous `.local/e2e`, aucun jeton/source dedans.
 Préconditions, calcul exact et nettoyage : [CODE_DRAFT_CAPACITY](../docs/CODE_DRAFT_CAPACITY.md).
+La [preuve DEV](../docs/evidence/code-draft-capacity-dev-2026-11-12.json) passe17groupes ciblés
+puis25régressions sur375sources. Le premier17reste préliminaire/exclu ;33fonctions
+nominales et33préliminaires sont purgées.22captures sont inspectées.
+
 
 ## Parcours de console de l’éditeur — première tranche qualifiée
 

@@ -94,12 +94,46 @@ sont pas déduites des seuls compteurs `busy` du client.
 Cette tranche ne clôt pas seule070.3 ni070 : limites, reprises, compléments UI
 et dépendance071 restent suivis dans le contrat principal.
 
-## État de qualification
+## Passage préliminaire
 
 Le premier passage passe17groupes et purge ses33fonctions, sans défaut produit.
 Son JSON intermédiaire peut toutefois porter `completed:true` pendant la phase
 de nettoyage, car le rapprochement enregistre le succès des scénarios trop tôt.
-Ce passage reste préliminaire. Le client doit conserver `completed:false` jusqu'à
-la fermeture des contextes, aux contrôles natifs et au nettoyage réussi ; une
-nouvelle campagne complète fournira le reçu final. Le wrapper exige aussi exit0,
+Ce passage reste préliminaire. Le client corrigé conserve `completed:false` jusqu'à
+la fermeture des contextes, aux contrôles natifs et au nettoyage réussi ; la
+nouvelle campagne complète ci-dessous fournit le reçu final. Le wrapper exige aussi exit0,
 les17groupes, les sources avant/après et l'absence d'erreur de nettoyage.
+
+## Capacité des brouillons qualifiée —12novembre2026
+
+La [preuve DEV](evidence/code-draft-capacity-dev-2026-11-12.json) passe42groupes sur375sources25a4152 :
+17ciblés et25régressions (8manuel,8public,9connexion), sans test ignoré.
+Le contrôle6e1584f2, ses36sources backend, ses quatre ressources web et le manuel
+servi sont identiques au checkpoint39. Les22captures de régression sont ouvertes
+individuellement ; le manuel conserve17chapitres/67paragraphes.
+
+Les API réelles atteignent32brouillons par propriétaire,128globaux, puis
+67108864octets de ciphertext. Les429 et507 ne changent ni lignes, versions,
+dates, handler, longueurs/SHA des ciphertexts ni audits de mutation du brouillon.
+Le PUT inchangé reste accepté au plafond. Libérer100octets permet une création
+vide ;80octets ne suffisent pas ; réduire20octets la rend à nouveau possible.
+Quatre patches Unicode de moins de4Mio et un brouillon vide remplissent le budget
+exact. Ce calcul préparatoire est recoupé sur les longueurs réellement stockées.
+
+Un brouillon initial produit un vrai candidat publié puis une invocation Docker
+par hash, sans ZIP client ni promotion. L'archive conserve les quatre brouillons
+restants de la fonction ; la purge les retire. Le conflit409 réel n'adopte pas
+l'UUID existant dans son intention de nettoyage. Le reçu reste incomplet jusqu'à
+la fermeture des clients et au nettoyage. Les33fonctions nominales sont purgées,
+ainsi que les33du passage préliminaire. Ses17groupes ne sont pas additionnés.
+
+Au final : aucun brouillon, invocation active, instance, candidat actif, bail,
+opération ou réservation ; dix migrations, intégrité/FK et propriétaires1001
+recoupés. Les5982artefacts antérieurs, leurs SHA, les trois configurations, les
+CID/images/dates de démarrage et la santé des deux conteneurs sont conservés.
+Le probe writer final ferme sa connexion et n'effectue aucun DML. Les journaux
+WAL/SHM sont vérifiés pendant ouverture ; leur disparition normale reste distincte.
+
+Ce résultat qualifie les plafonds dans070.3, sans clôturer ce critère ni070.
+Reprises/pertes de réponse du contrôle, limites restantes de diff/ZIP, purge sous
+lecteur vivant, sélection archivée, compléments UI et Tester071 restent ouverts.

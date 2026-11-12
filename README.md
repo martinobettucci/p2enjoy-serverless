@@ -7,8 +7,15 @@ invocations Docker et 44 images sont recoupées. Le manuel servi correspond à
 17 chapitres et 67 paragraphes. Les frappes pendant sauvegarde restent locales,
 les confirmations périmées disparaissent et un retrait verrouille le champ.
 Ce complément clôture070.8, après le [checkpoint57](docs/evidence/code-editor-console-dev-2026-11-12.json)
-qui garde son imagea77b6b4e et ses deux époques. Les quotas globaux, interruptions,
-limites et parcours résiduels gardent l’unité ouverte ;070.7/.8sont seuls clôturés.
+qui garde son imagea77b6b4e et ses deux époques. Les interruptions, limites et
+parcours résiduels gardent l’unité ouverte ;070.7/.8sont seuls clôturés.
+
+La [capacité des brouillons](docs/CODE_DRAFT_CAPACITY.md) passe
+[42groupes réels](docs/evidence/code-draft-capacity-dev-2026-11-12.json) sur375sources : plafonds32/128,
+64Mio exacts chiffrés, refus atomiques, libérations et purge. Un module original
+publié depuis son brouillon initial est invoqué dans Docker. Les22captures de
+régression sont inspectées, les66fonctions des deux passages purgées et les
+5982artefacts antérieurs conservés. Aucun critère supplémentaire de070 ne ferme.
 
 Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
 sur e81007c5 et sont conservées dans l’image courante6e1584f2. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)

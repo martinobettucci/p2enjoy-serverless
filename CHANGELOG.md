@@ -2,9 +2,11 @@
 
 ## [Non publié]
 
-- SLS-070.3 : plan de qualification des plafonds de brouillons persisté avant
-  code, frontière exacte64Mio chiffrés, refus atomiques, libération, publication
-  initiale et purge par les API normales. Preuve à produire.
+- SLS-070.3 : [42groupes réels](docs/evidence/code-draft-capacity-dev-2026-11-12.json) qualifient
+  32/128brouillons et64Mio exacts chiffrés sur375sources25a4152 et6e1584f2.
+  Refus429/507 atomiques, libérations100/20octets, publication initiale invoquée
+  dans Docker, archive/purge et22captures de régression recoupés. Les66fonctions
+  des deux passages sont purgées ; le préliminaire17reste exclu.070reste ouverte.
 
 - SLS-070.8 corrigée et qualifiée en DEV sur6e1584f2 : confirmations retirées à
   la frappe/lecture, saisies tardives distinctes du snapshot sauvegardé et code

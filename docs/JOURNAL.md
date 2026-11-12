@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 12novembre2026 — capacité réelle des brouillons qualifiée
+
+[42groupes](evidence/code-draft-capacity-dev-2026-11-12.json) sur375sources25a4152 et6e1584f2 passent :
+17ciblés et25régressions,22captures inspectées.32/128 et64Mio exacts de ciphertext
+sont atteints ; refus atomiques, no-op, libérations100/20octets et archive/purge
+sont prouvés par API/SQLite. Une publication initiale est invoquée dans Docker.
+33fonctions nominales et33préliminaires sont purgées ; le premier17n’est pas
+additionné. Le reçu nominal reste incomplet pendant cleanup. Les deux CID/images/
+dates, sources embarquées/HTTPS, configurations et5982artefacts sont conservés.
+Les registres contrôle/stockage sont sains, sans activité ni réservation ; le
+probe writer ne change aucune ligne.070.1–.6 restent ouverts,070reste[~].
+
 ## 12novembre2026 — décision de qualification des capacités de brouillon
 
 Le [plan](CODE_DRAFT_CAPACITY.md) précise avant code les frontières32/128 et

@@ -874,11 +874,14 @@ avant code. Serveur et migration010 déployés sur7c5c6f4b ;
 dont070.7. La première facette Éditeur est déployée sura77b6b4e et
 [57groupes réels](evidence/code-editor-console-dev-2026-11-12.json) passent :12UI/20serveur/25régressions,
 17invocations Docker,41captures inspectées ;manuel17chapitres/67paragraphes.
-Deux époques déclarées, produit identique ; quotas, reprises et compléments
-conservent leur état ouvert. Le complément [070.8](evidence/code-editor-save-confirmation-dev-2026-11-12.json)
+Deux époques déclarées, produit identique ; à ce checkpoint, quotas, reprises et
+compléments restent ouverts. Le complément [070.8](evidence/code-editor-save-confirmation-dev-2026-11-12.json)
 passe 39 groupes sur 6e1584f2 et clôture le retrait des confirmations périmées.
-La qualification suivante porte sur les plafonds32acteur/128globaux et64Mio
-chiffrés ; son [plan de capacité](CODE_DRAFT_CAPACITY.md) est persisté avant code.
+La [capacité des brouillons](CODE_DRAFT_CAPACITY.md) est qualifiée par
+[42groupes réels](evidence/code-draft-capacity-dev-2026-11-12.json) sur375sources25a4152 :32/128brouillons,
+64Mio exacts de ciphertext, refus atomiques, libération et purge. Une publication
+initiale est invoquée dans Docker ;66fonctions des deux passages sont purgées.
+Le préliminaire17reste exclu ;070.1–.6restent ouverts.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 dépend de
