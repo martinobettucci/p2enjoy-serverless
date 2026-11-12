@@ -2,7 +2,7 @@
 # @verifies docs/CONSOLE_TESTER_TASK_EXCEPTION.md#matrice-de-qualification
 """One real CA openat fails with EMFILE; resources restored before Python runs."""
 from contextlib import closing
-import errno,hashlib,json,os,re,resource,signal,socket,sqlite3,subprocess,sys,time
+import datetime,errno,hashlib,json,os,re,resource,select,signal,socket,sqlite3,subprocess,sys,time
 from pathlib import Path
 from uuid import UUID,uuid4
 from control_database import read_control,control_owner
@@ -61,11 +61,54 @@ def restored(folder,recover):
     return json.loads(command(['/usr/bin/python3','-I',str(folder/'restore.py'),str(folder),'recover' if recover else 'check'],60))
 
 
+def diagnose(folder,item,fn):
+    current=identity(item);assert current['tracer_pid']==0 and current['state'] not in ('t','T')
+    assert list(resource.prlimit(item['pid'],resource.RLIMIT_NOFILE))==item['limits_nofile']
+    fault=json.loads((folder/'native-fault.json').read_text())
+    assert fault['syscall_result']==-errno.EMFILE and fault['restored_before_Python']
+    after=snapshot(fn);assert after['invocations']==fault['native_at_entry']['invocations']
+    assert after['test_audits']==fault['native_at_entry']['test_audits']
+    # Real Docker output stays in memory and is bounded before decoding. Never
+    # publish traceback source lines, request buffers or raw log fragments.
+    end=datetime.datetime.now(datetime.timezone.utc).isoformat()
+    proc=subprocess.Popen(D+['logs','--timestamps','--since',item['log_since'],'--until',end,item['container_id']],stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+    raw=bytearray();deadline=time.monotonic()+10
+    try:
+        while True:
+            assert time.monotonic()<deadline,'logs_deadline'
+            if not select.select([proc.stdout],[],[],.1)[0]:continue
+            chunk=os.read(proc.stdout.fileno(),min(65536,2*1024**2+1-len(raw)))
+            if not chunk:break
+            raw.extend(chunk);assert len(raw)<=2*1024**2,'logs_limit'
+        assert proc.wait(timeout=2)==0
+    finally:
+        if proc.poll() is None:
+            proc.terminate()
+            try:proc.wait(timeout=2)
+            except subprocess.TimeoutExpired:proc.kill();proc.wait(timeout=3)
+        proc.stdout.close()
+    text=bytes(raw).decode('utf8',errors='strict')
+    classes=sorted(set(re.findall(r'(?:^|[ |])((?:ssl\.)?SSLError|OSError):',text,re.M)))
+    assert classes and all(v in ('ssl.SSLError','SSLError','OSError') for v in classes),'unexpected_exception_class_not_proven'
+    names={'/app/app/function_http_client.py','/usr/local/lib/python3.14/site-packages/httpx/_client.py','/usr/local/lib/python3.14/site-packages/httpx/_config.py','/usr/local/lib/python3.14/ssl.py'}
+    frames=[]
+    for path,line,function in re.findall(r'File "([^"\r\n]+)", line ([0-9]+), in ([A-Za-z_][A-Za-z_0-9]*)',text):
+        if path in names:
+            value={'file':path,'line':int(line),'function':function}
+            if value not in frames:frames.append(value)
+    assert any(v['file']=='/app/app/function_http_client.py' and v['function']=='forward' for v in frames)
+    assert any(v['file'].endswith('/httpx/_config.py') and v['function']=='create_ssl_context' for v in frames)
+    assert any(v['file'].endswith('/ssl.py') and v['function']=='create_default_context' for v in frames)
+    assert len(after['test_audits'])==len(fault['native_before']['test_audits'])+1
+    assert after['invocations']==fault['native_before']['invocations']
+    return {'event':'diagnosed','completed':True,'process':current,'limits_nofile':item['limits_nofile'],'exception_classes':classes,'public_frames':frames,'logs_bytes':len(raw),'logs_sha256':hashlib.sha256(raw).hexdigest(),'unexpected_TLS_exception':True,'unique_test_audit':True,'no_gateway_invocation':True,'native_after':after,'native_fault':fault}
+
+
 def main():
     assert os.geteuid()==0 and socket.gethostname()=='infra-serverless','DEV_only'
     assert len(sys.argv)==5
     mode,fn,ns,arg=sys.argv[1:]
-    assert mode in ('fault','rescue-window','recover','finish','evidence','inspect')
+    assert mode in ('fault','rescue-window','recover','finish','evidence','inspect','diagnose')
     assert str(UUID(fn))==fn and str(UUID(ns))==ns
     with read_control(ROOT/'state/control.sqlite3') as db:
         row=db.execute('SELECT n.name,n.description nonce,s.description service_nonce,f.description function_nonce FROM functions f JOIN services s ON s.id=f.service_id JOIN namespaces n ON n.id=s.namespace_id WHERE f.id=? AND n.id=?',(fn,ns)).fetchone()
@@ -85,9 +128,10 @@ def main():
         else:
             receipt=restored(folder,mode=='recover');receipt['guard_states']=finish_guard(arg);emit(receipt)
         return
-    if mode=='inspect':
+    if mode in ('inspect','diagnose'):
         assert re.fullmatch('serverless-restore-task-exception-[0-9a-f]{32}',arg)
         item=json.loads((Path('/run')/arg/'identity.json').read_text());assert item['function_id']==fn and item['namespace_id']==ns
+        if mode=='diagnose':emit(diagnose(Path('/run')/arg,item,fn));return
         process=identity(item);assert process['tracer_pid']==0 and process['state'] not in ('t','T')
         assert list(resource.prlimit(item['pid'],resource.RLIMIT_NOFILE))==item['limits_nofile']
         emit({'event':'inspected','process':process,'limits_nofile':item['limits_nofile'],'native':snapshot(fn)});return
@@ -113,7 +157,7 @@ def main():
     original=resource.prlimit(pid,resource.RLIMIT_NOFILE);assert 0<original[0]<=original[1]
     unit='serverless-restore-task-exception-'+uuid4().hex;folder=Path('/run')/unit;folder.mkdir(mode=0o700)
     source=Path(__file__).with_name('function-http-client-task-restore.py')
-    item={'function_id':fn,'namespace_id':ns,'container_id':current['Id'],'image':arg,'started_at':current['State']['StartedAt'],'reference':[reference['Id'],reference['Image'],reference['State']['StartedAt']],
+    item={'log_since':datetime.datetime.now(datetime.timezone.utc).isoformat(),'function_id':fn,'namespace_id':ns,'container_id':current['Id'],'image':arg,'started_at':current['State']['StartedAt'],'reference':[reference['Id'],reference['Image'],reference['State']['StartedAt']],
           'pid':pid,'birth':birth(pid),'cgroup':Path('/proc',str(pid),'cgroup').read_text(),'limits_nofile':list(original),'helper_pid':os.getpid(),'helper_birth':birth(os.getpid()),'docker':D,
           'official_sha256':{n:sha(n) for n in ('/etc/spark/env','/run/spark/secrets','/etc/spark/routes')},'restore_sha256':sha(source),
           'program_sha256':{str(p.resolve()):sha(p) for p in [Path(__file__),source,Path(__file__).with_name('native_control_observer.py'),Path(__file__).with_name('control_database.py')]}}

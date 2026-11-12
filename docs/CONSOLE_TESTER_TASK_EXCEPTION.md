@@ -142,6 +142,6 @@ Décision, matrice et constats de revue persistés avant leur code dépendant.
 Opérateur et restaurateur spécialisés implémentés ; syntaxe analysée et
 corrections relues sans résidu bloquant. Seule l’inspection préalable en lecture
 seule a été exécutée sur le SPARK. Le client SSO/UI et le lecteur de pile
-sont écrits, syntaxes contrôlées ; leur relecture et tous les scénarios réels
+sont écrits, syntaxes contrôlées et relus ; tous les scénarios réels
 restent requis. Aucun prlimit modificatif, nouvel attachement ou scénario de
 ce complément n’est exécuté ;071.6 et SLS-071 restent ouverts.

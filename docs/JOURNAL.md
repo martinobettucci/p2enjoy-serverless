@@ -7725,3 +7725,10 @@ puis relève que --no-access-log interdit le discriminant Uvicorn supposé.
 Décision avant correction : réponsePlaywright500 et POSTunique d’un côté,
 pileTLS/audit/frontière/absence d’invocation natives de l’autre ; aucun accèslog
 n’est activé. Aucun essai réel encore exécuté pour ce complément.
+
+### 12novembre2026 — Client et lecteur d’exception relus avant campagne
+
+La dernière revue confirme la séparation réponseHTTP500/POSTunique Playwright
+et exception/audit/frontière natives ; aucune ligne d’accès supposée. Client,
+lecteur et secours sont relus ; syntaxesJS/Python valides, index401sources.
+Le premier essai réel reste à exécuter, sans nouveau groupe ou critère qualifié.

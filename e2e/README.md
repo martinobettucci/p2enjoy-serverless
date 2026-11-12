@@ -2454,3 +2454,14 @@ Statut préparatoire : syntaxe analysée, corrections relues ; aucun attachement
 ou prlimit modificatif de ce complément n’est exécuté. Le client SSO/UI, la
 lecture bornée de pile et les scénarios quatre relais/cinquième429 restent à
 réaliser. Aucun groupe, capture ou critère n’est qualifié par ces fichiers.
+
+Le client préparatoire est désormais `node e2e/function-http-client-task-exception.mjs SHA_IMAGE` :
+identifiants SSO uniquement sur stdin privée, SHApublic obligatoire issu du
+relevé natif. Six groupes prévus : SSO, fixture/200, secours soussoft0, vrai500
+et UI, pile TLS bornée, capacité4+429 puis5succès et nouvel appel UI explicite.
+`diagnose` lit les vrais logs Docker en mémoire sous10s/2Mio et ne publie que
+classes, frames publiques et SHA, avec audit unique et absence d’invocation nouvelle. Le500 et le POST UI unique
+sont observés par Playwright ; --no-access-log reste inchangé.
+Syntaxes contrôlées ; client/lecteur relus et hypothèse d’access log retirée.
+L’exécution réelle reste requise. Douze handlers attendus si tous les scénarios passent ;
+aucun groupe ou capture de cette nouvelle campagne n’est encore qualifié.
