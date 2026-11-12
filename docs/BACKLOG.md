@@ -973,7 +973,10 @@ Critères d'acceptation :
   explicitement distingués.
 - [ ] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
   après quinze minutes ; valeur en mémoire de la page, absente des exemples copiés, journaux,
-  erreurs, préférences et historique.
+  erreurs, préférences et historique. L’inspecteur de preuve ne réémet aucun
+  champ de log brut non validé, même s’il contient une fuite ; UUID/statut
+  validés et SHA de route seulement. Les observations de réponse interceptent
+  aussi un échec de décodage asynchrone et sont jointes avant clôture.
 - [ ] SLS-071.4 Annulation qui distingue l'arrêt de l'attente de l'issue du handler déjà
   admis ; aucun rejeu automatique d'une invocation incertaine ; refus de la passerelle
   restitués fidèlement.

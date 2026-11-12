@@ -11,6 +11,12 @@ La revue constate un risque précis : un502HTML de proxy reçoit error.status
 et est donc traité comme refus de gestion. Son résultat doit être observé en
 E2E avant correction ; un503 propre du contrôle doit rester distinct. Aucun
 nouveau résultat ni défaut de réponse effectivement reçu n’est revendiqué.
+La revue du lecteur privé impose de ne jamais réémettre route/statut bruts
+quand une fuite y est détectée : sortie UUID/statut validés et SHA/booleans.
+Elle relève aussi le rejet JSON asynchrone sans catch terminal et la recherche
+d’erreurs limitée au littéral ; ces points sont corrigés avant exécution. La
+réponse métier peut refléter les entrées en mémoire ; seuls les reçus/logs et
+captures sont soumis à l’absence de valeurs brutes annoncée.
 
 ## 12novembre2026 — compléments du testeur qualifiés
 

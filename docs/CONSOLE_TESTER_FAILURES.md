@@ -26,8 +26,9 @@ Le client `e2e/function-http-client-confidentiality.mjs` compose des valeurs de
 campagne distinctes pour le jeton Read, Authorization, query, en-tête métier et
 corps. Les valeurs complètes restent en mémoire ; ni arguments de commande,
 environnement, fichiers de session/rapport ni capture ne les contiennent en
-clair. Le fixture ne les journalise pas ; il renvoie uniquement les empreintes
-nécessaires au contrôle et son identifiant public de requête. Une réponse reste
+clair. Le fixture ne les journalise pas. Sa réponse métier peut refléter query,
+en-tête et corps base64 ; elle reste en mémoire du client, avec les empreintes
+nécessaires au contrôle et l’identifiant public de requête. Une réponse reste
 une donnée de l’utilisateur, jamais une garantie d’expurgation du code métier.
 
 Les attentes de1s sont réellement dépassées par un handler de4s, en mode serveur
@@ -42,6 +43,9 @@ réels depuis un relevé horaire du SPARK pris avant les requêtes. Les lectures
 sont bornées ; une borne dépassée échoue au lieu de considérer la partie absente
 comme expurgée. Aucune ligne brute n’est retournée : nombres de lignes/octets,
 SHA et booléens d’exposition, avec indexes des sentinelles seulement. Les
+événements de refus ne restituent qu’un UUID attendu, un statut entier borné et
+le SHA de route avec indicateur de template attendu : même un champ de log qui
+contient une fuite n’est jamais recopié brut sur stdout. Les
 variantes ASCII/JSON/base64 utiles sont comparées en mémoire. La preuve exige
 absence des valeurs et de leurs représentations pertinentes ; les identifiants
 et traces de refus attendus doivent exister, pour éviter un succès sur logs vides.
@@ -113,4 +117,6 @@ sans inférer un échec certain du handler depuis le seul statut du proxy.
 L’indisponibilité de `/spark/routes` et les dernières bornes/non-régressions
 restent des preuves distinctes. Ni ce plan ni un SIGKILL seul ne clôturent071.
 Les messages, tableaux d’état et preuves continuent à distinguer implémenté,
-exécuté, inspecté et qualifié. Statut : spécifié, non implémenté/non exécuté.
+exécuté, inspecté et qualifié. Statut : client échéances/confidentialité et inspecteur implémentés, syntaxes
+Node/Python vérifiées uniquement ; aucun scénario nouveau exécuté. Le client
+et l’opérateur de coupure restent spécifiés, non implémentés.
