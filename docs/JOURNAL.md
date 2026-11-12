@@ -7830,3 +7830,16 @@ courantes42/32/37.071.6 et les huit critères sont qualifiés, SLS-071 retiré d
 registre ouvert. La relecture officielle ciblée Test/quickstart actualise cette
 seule ligne de parité. Schéma010/seed/manuel18chapitres74paragraphes inchangés,
 DAT et documents de livraison suivent ;095 et les autres unités restent ouverts.
+
+### 12novembre2026 — Reprise de l’éditeur, sources et limites avant interruptions
+
+La revue des sources et preuves confirme les acquis45/57/39/42 et le lien
+Tester46, sans adopter leurs anciennes listes de restes comme état courant.
+070.1–.5 restent ouverts. Décision avant code : compléter d’abord source
+archivée/gros fichier conservé, cheminsUnicode512/255octets, diff2000/128Kio et
+JSON8Mio par HTTPS réel, puis console, reconstruction/concurrence et reprise
+après interruption. Le contrat CODE_EDITOR_SOURCE_LIMITS porte ce découpage.
+Le JSON est complété par des espaces valides pour isoler la borne d’enveloppe ;
+les limites de texte/patch ne doivent pas la masquer. Les handlers Docker et
+lectures natives confirment la conservation, sans import local du produit,
+seed SQL ou substitution. Manuel/schéma/image restent inchangés pour ce banc.

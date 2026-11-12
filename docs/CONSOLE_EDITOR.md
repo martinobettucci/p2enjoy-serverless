@@ -652,3 +652,10 @@ A. Les campagnes conservent leurs époques distinctes, sans réaddition de group
 070.6 est clôturée ; les bornes, reprises et lectures vivantes restantes de070
 restent ouvertes. Les sections de résultats antérieurs conservent leur date,
 leurs images et leurs restes de qualification propres au checkpoint décrit.
+
+## Reprise des preuves restantes
+
+Le [complément de sources et limites](CODE_EDITOR_SOURCE_LIMITS.md) fixe le
+passage HTTP aux frontières exactes, puis les ensembles console, reconstruction/
+concurrence et reprises de publication. Décision persistée avant son client ;
+aucun critère supplémentaire n’est clos à ce stade.

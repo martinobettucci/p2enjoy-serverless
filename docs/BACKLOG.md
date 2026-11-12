@@ -884,6 +884,9 @@ La [capacité des brouillons](CODE_DRAFT_CAPACITY.md) est qualifiée par
 initiale est invoquée dans Docker ;66fonctions des deux passages sont purgées.
 Le préliminaire17reste exclu. Le [complément46du testeur](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
 qualifie ensuite070.6 ;070.1–.5restent ouverts.
+La reprise des preuves suit [Sources et limites](CODE_EDITOR_SOURCE_LIMITS.md) :
+bornes HTTP/source archivée, compléments console, reconstruction/concurrence,
+puis persistance et interruptions. Le premier passage est à produire.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 est désormais
