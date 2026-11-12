@@ -93,3 +93,13 @@ sont pas déduites des seuls compteurs `busy` du client.
 
 Cette tranche ne clôt pas seule070.3 ni070 : limites, reprises, compléments UI
 et dépendance071 restent suivis dans le contrat principal.
+
+## État de qualification
+
+Le premier passage passe17groupes et purge ses33fonctions, sans défaut produit.
+Son JSON intermédiaire peut toutefois porter `completed:true` pendant la phase
+de nettoyage, car le rapprochement enregistre le succès des scénarios trop tôt.
+Ce passage reste préliminaire. Le client doit conserver `completed:false` jusqu'à
+la fermeture des contextes, aux contrôles natifs et au nettoyage réussi ; une
+nouvelle campagne complète fournira le reçu final. Le wrapper exige aussi exit0,
+les17groupes, les sources avant/après et l'absence d'erreur de nettoyage.

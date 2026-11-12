@@ -13,6 +13,10 @@ des métadonnées du client. Décision persistée avant cet ajustement du client
 Le client de17groupes, son inspecteur natif RO et le module CommonJS original
 sont implémentés ; syntaxes Node/Python et diff valides. Relecture finale et
 campagne réelle restent à terminer ; aucun plafond supplémentaire qualifié ici.
+Un premier passage passe17groupes et purge33fonctions. Avant publication de sa
+preuve, le suivi du client est corrigé : `completed` doit attendre le nettoyage,
+pas seulement le succès des scénarios. Ce passage restera préliminaire, sans
+addition de ses17groupes au futur nominal. Aucune correction produit nécessaire.
 
 ## 12novembre2026 —070.8 clôturée par39groupes réels
 
