@@ -424,6 +424,11 @@ version publiée** sélectionne directement son hash. **Choisir la version à
 tester** permet aussi de revenir à la cible promue. Choisir un domaine officiel,
 son endpoint puis la méthode HTTP. Un hash devenu indisponible reste refusé ;
 choisir explicitement une autre version pour changer la sélection.
+Le **Hash courant** décrit la cible promue : « Aucune cible promue » confirme
+son absence ; « Lecture en cours… » ou « Indisponible » signalent une lecture
+non aboutie. Si les domaines sont indisponibles mais que la réponse confirme
+le hash courant, celui-ci reste affiché. Les anciennes URL et réponses sont
+retirées et l’envoi reste désactivé ; **Actualiser les adresses** relit l’état.
 
 Composer le chemin relatif exact, les paramètres et les en-têtes. Les routes
 actuelles n’ont pas de paramètres de chemin dynamiques. Le corps peut être

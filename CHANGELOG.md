@@ -6,7 +6,9 @@
   le hash promu est présenté absent sous refus réel de lecture des domaines.
   Passage0bb9553f échoué, zéro groupe qualifié ; source restituée, fonction
   purgée et jeton révoqué,395sources/image96e5dc4e conservées. Correction et
-  témoins d’absence confirmée/404 décidés avant code.
+  témoins d’absence confirmée/404 décidés avant code. Correction UI implémentée :
+  métadonnées courantes conservées sous erreur de source, chargement et lecture
+  indisponible distingués. Manuel et banc étendus ; build/replay restent requis.
 
 - SLS-071.3/.8 qualifiés par [32groupes réels](docs/evidence/function-http-client-token-loss-dev-2026-11-12.json)
   sur392sourcescf5244f5, même image96e5dc4e : quatre coupures avant/après

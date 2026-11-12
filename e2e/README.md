@@ -109,7 +109,10 @@ POST de test503 avant émission, vrais appels témoins, Actualiser sans ancienne
 URL/réponses, CSPself, captures desktop/mobile et restitution sont requis.
 `function-http-client-source-inspect.py` recoupe namespace/nonce/descriptions et
 métadonnées natives, sans code ni secret. Contrat : [source du testeur](../docs/CONSOLE_TESTER_SOURCE.md).
-Code préparé, non exécuté ; aucune nouvelle qualification revendiquée.
+Le [premier passage réel](../docs/evidence/function-http-client-source-access-failed-dev-2026-11-12.json)
+reproduit le faux état « Aucune cible promue » ; il est exclu des qualifications.
+La correction et les témoins sans code/pilote archivé sont implémentés, replay
+sur l’image reconstruite encore requis. Aucune nouvelle qualification revendiquée.
 
 ## Capacité réelle des brouillons de code
 

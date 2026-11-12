@@ -88,7 +88,8 @@ export function FunctionHttpTester({functionId,functionName}){
  useEffect(()=>{let current=true;const controller=new AbortController();setCatalogue({loading:true});setOrigin('');setResult(null);setNotice('');
   api(`/api/functions/${functionId}/invocation-urls?limit=${pageSize}&offset=${page*pageSize}${version===null?'':'&version='+encodeURIComponent(version)}`,{signal:controller.signal}).then(data=>{
    if(!current)return;const last=Math.max(0,Math.ceil(data.total/pageSize)-1);if(page>last){setPage(last);return;}
-   if(data.source.state!=='available')throw new Error('Le catalogue des domaines est indisponible. Réessayez sa lecture.');
+   // @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER_SOURCE.md#hash-courant-sous-lecture-indisponible--correction0712
+   if(data.source.state!=='available'){setCatalogue({data,error:new Error('Le catalogue des domaines est indisponible. Réessayez sa lecture.')});return;}
    setCatalogue({data});setOrigin(data.items[0]?.origin||'');
   }).catch(error=>{if(current)setCatalogue({error:new Error(error.status===404?'La version demandée est inconnue, archivée ou supprimée. Choisissez une version disponible.':error.status?error.message:'Impossible de lire les domaines d’appel. Réessayez.')});});
   return()=>{current=false;controller.abort();};
@@ -148,7 +149,7 @@ export function FunctionHttpTester({functionId,functionName}){
  return <div className="stack tester-workspace">
   <Section title="Destination" headingRef={destinationHeading} action={<button disabled={busy||catalogue.loading} onClick={()=>{focusCatalogue.current=true;setRevision(v=>v+1);}}><RefreshCw aria-hidden="true"/>Actualiser les adresses</button>}>
    <p><a href="/console/manual#tester-une-fonction">Consulter le manuel du testeur</a></p>
-   <Facts values={[["Sélection",version===null?'Cible promue courante':<span className="mono">{version}</span>],["Hash courant",catalogue.data?.default_code_hash?<span className="mono">{catalogue.data.default_code_hash}</span>:'Aucune cible promue']]}/>
+   <Facts values={[["Sélection",version===null?'Cible promue courante':<span className="mono">{version}</span>],["Hash courant",catalogue.loading?'Lecture en cours…':catalogue.data?(catalogue.data.default_code_hash?<span className="mono">{catalogue.data.default_code_hash}</span>:'Aucune cible promue'):'Indisponible']]}/>
    <div className="actions"><button disabled={busy} onClick={()=>setDialog(true)}>Choisir la version à tester</button>{version!==null&&<button disabled={busy} onClick={()=>chooseVersion(null)}>Utiliser la cible promue</button>}</div>
    {catalogue.loading?<p role="status">Lecture des domaines d’appel…</p>:catalogue.error?<ErrorMessage error={catalogue.error}/>:!catalogue.data?.total?<p className="empty">Aucun domaine d’appel applicable.</p>:<>
     <Field label="Domaine d’appel"><select disabled={busy} value={origin} onChange={e=>{setOrigin(e.target.value);setResult(null);}}>{catalogue.data.items.map(v=><option key={v.origin} value={v.origin}>{v.origin}</option>)}</select></Field>

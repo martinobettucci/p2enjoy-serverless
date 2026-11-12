@@ -920,3 +920,13 @@ concordent avec la construction ;5 982 artefacts, fichiers officiels et référe
 conservés, actifs/baux/préparations nuls, aucune garde. Seul le critère 089.4 est
 clos ; les vrais profils sans droits, refus azp/aud, rotation et pending503
 restent à éprouver. Le détail du déploiement et du backup est dans la preuve.
+
+## Correctif de hash courant du testeur — en qualification0712
+
+[CONSOLE_TESTER_SOURCE](CONSOLE_TESTER_SOURCE.md#hash-courant-sous-lecture-indisponible--correction0712)
+porte la correction UI reproduite sur96e5dc4e. Reconstruire le contrôle DEV après
+synchronisation des sources, sauvegarde SQLite native avant bascule, même schéma010.
+Aucune nouvelle variable, secret ni route. Le manuel compilé change avec la console.
+Comparer38backend/4web réellement servis et5982artefacts, puis rejouer source
+refusée, absence confirmée et pilote404 avec les régressions. L’image96e5dc4e
+reste active avant cette opération ; aucune qualification du correctif à ce stade.

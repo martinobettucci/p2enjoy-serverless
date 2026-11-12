@@ -94,3 +94,7 @@ Les faits Hash exécuté/Identifiant de requête ciblent leurs `dd`, distincts d
 mêmes valeurs dans les en-têtes repliés. Le SHA d’image reste un argument public
 obligatoire issu du relevé natif du lanceur ; intégrité/FK/migrations sont
 recoupées avant/après et toute préparation partielle est nettoyée.
+
+La correction UI et le manuel sont implémentés ; le banc ajoute les témoins
+sans code et pilote archivé. Relecture, build et replay du code déployé restent
+nécessaires avant tout statut qualifié.
