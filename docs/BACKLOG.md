@@ -996,6 +996,11 @@ Critères d'acceptation :
   reconnue par son propre reçu verrouillé ; le CID/image seul ne distingue pas
   un redémarrage concurrent. Vérifier les empreintes opérateur/observateur,
   borner la mémoire/jonction du SSH et écrire le reçu natif avant déverrouillage.
+  Premier reçu3360afcd : watchdog restauré mais assertion SSH137 trop stricte
+  (255 réel) puis MainPID absent du timer. Reprendre le précédent137/255 avec
+  événement SIGKILL et reçu indépendant ; timer inactif/service PID0, et
+  conserver les événements d’opérateur même après échec. Aucun KILL produit
+  ni groupe de récupération qualifié dans ce passage.
   Refus422 répétés puis cinq appels sains
   passent dans la tranche43 ; saturation et interruption restent à prouver.
   Appliquer aussi avant fetch navigateur les mêmes bornes query/en-têtes et

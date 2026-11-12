@@ -147,3 +147,22 @@ des délais attendent leur inspection. Le reçu5f3ace72 de9groupes reste
 intermédiaire. Ces résultats ne sont pas encore un checkpoint qualifié avec
 régressions et recoupement final. Le client et l’opérateur de coupure sont
 implémentés pour la preuve ; relecture et exécution réelle restent à faire.
+
+## Premier passage réel du banc de reprise
+
+Le reçu3360afcd échoue au watchdog avant toute invocation/coupure du contrôle :
+le pilote auto-tuè par SIGKILL remonte255 via SSH, alors que le client attendait
+strictement137. Le précédent `function-version-state-transport.mjs` accepte
+137/255 avec événement SIGKILL et reçu indépendant ; réutiliser cette exigence
+complète, pas le statut seul. La restitution est réelle, même CID/image et
+StartedAt, et les deux fonctions sont purgées. Le nettoyage déclare ensuite
+une anomalie parce que le timer n’expose pas MainPID ; son unité est absente
+et inactive, le service porte MainPID0. Exiger inactive pour les deux et PID0
+pour le service, accepter l’absence de ce champ du timer comme le précédent.
+Les parents restent à supprimer par API, le jeton est révoqué.
+
+Le rapport doit conserver les événements/identités et empreintes de sortie
+de chaque opérateur même lorsqu’une assertion échoue avant son ajout aux
+observations nominales. Ajouter cette sauvegarde systématique avant replay,
+sans réécrire le premier reçu ni compter ses trois préparations comme preuve
+de récupération. Aucun défaut produit n’est encore reproduit par ce passage.
