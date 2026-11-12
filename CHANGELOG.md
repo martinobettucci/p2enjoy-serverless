@@ -2,9 +2,13 @@
 
 ## [Non publié]
 
-- SLS-070.8 : retrait des confirmations de sauvegarde à la frappe et aux
-  consultations explicites implémenté ; une sauvegarde en cours ne confirme pas
-  les frappes ultérieures. Manuel et assertions UI adaptés ; build/preuve à faire.
+- SLS-070.8 corrigée et qualifiée en DEV sur6e1584f2 : confirmations retirées à
+  la frappe/lecture, saisies tardives distinctes du snapshot sauvegardé et code
+  readonly pendant les autres mutations. [39groupes réels](docs/evidence/code-editor-save-confirmation-dev-2026-11-12.json)
+  passent sur371sources, avec neuf invocations et44captures inspectées.
+  Vrais404/retry/dialog et huit sorties de verrou SQLite sans écriture éprouvés ;
+  trois fonctions purgées,21helpers absents, manuel17chapitres/67paragraphes.
+  Le premier essai trop rapide et le nominal préliminaire ne sont pas additionnés.
 
 - Première facette Éditeur déployée en DEV sura77b6b4e, schéma010 inchangé.
   [57groupes réels](docs/evidence/code-editor-console-dev-2026-11-12.json) passent :12console,20serveur,

@@ -875,7 +875,8 @@ dont070.7. La première facette Éditeur est déployée sura77b6b4e et
 [57groupes réels](evidence/code-editor-console-dev-2026-11-12.json) passent :12UI/20serveur/25régressions,
 17invocations Docker,41captures inspectées ;manuel17chapitres/67paragraphes.
 Deux époques déclarées, produit identique ; quotas, reprises et compléments
-conservent leur état ouvert.070.8 porte une confirmation de succès périmée.
+conservent leur état ouvert. Le complément [070.8](evidence/code-editor-save-confirmation-dev-2026-11-12.json)
+passe 39 groupes sur 6e1584f2 et clôture le retrait des confirmations périmées.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 dépend de
@@ -908,11 +909,14 @@ Critères d'acceptation :
   conserve aussi le premier échec du client ClientRequest45s, sans le compter
   dans les45groupes réussis. Client TLS réel avec Connection:close, aucun rejeu.
 
-- [~] SLS-070.8 Retirer le succès historique dès qu’une nouvelle saisie commence.
-  La capture de première tranche unsaved-preserved affiche « Brouillon enregistré »
-  avec le badge local non enregistré ; le correctif est implémenté, à qualifier.
-  Conserver la réussite acquise de la sauvegarde, mais retirer sa notification
-  quand le texte évolue ou lors d’une nouvelle lecture. Preuve UI réelle requise.
+- [x] SLS-070.8 Retirer le succès historique dès une nouvelle saisie/consultation.
+  [39 groupes réels](evidence/code-editor-save-confirmation-dev-2026-11-12.json) : 14 UI et 25 régressions sur
+  371 sources, image 6e1584f2. Snapshot sauvegardé distinct des frappes tardives,
+  champ readonly pendant retrait, vrai404/retry et choix de hash éprouvés.
+  Huit sorties du verrou natif, refus de signal tardif et de naissance périmée,
+  zéro écriture opérateur ; 21 anciens helpers absents et trois fonctions purgées.
+  Les 44 images sont inspectées ; les 17 chapitres/67 paragraphes du manuel sont
+  recoupés. Le premier essai trop rapide et le nominal préliminaire restent exclus.
 
 
 Tests exigés :

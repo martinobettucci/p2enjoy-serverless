@@ -1,16 +1,17 @@
 # P2Enjoy Serverless
 
-La [première facette Éditeur SLS-070](docs/CONSOLE_EDITOR.md) est déployée sur
-DEV, imagea77b6b4e, avec dix migrations inchangées. La [preuve](docs/evidence/code-editor-console-dev-2026-11-12.json)
-passe57groupes réels :12console,20serveur,8manuel/8public/9connexion.
-Dix-sept invocations natives CJS/ESM/YAML sont recoupées ;41captures sont
-inspectées. Le manuel servi correspond à17chapitres et67paragraphes.
-Les sources sont figées sur deux époques déclarées, sans changement produit entre
-elles. Quotas globaux, interruptions, limites résiduelles et parcours UI
-complémentaires restent ouverts ; seul070.7 est clôturé.
+La [facette Éditeur SLS-070](docs/CONSOLE_EDITOR.md) est déployée en DEV sur
+6e1584f2, avec dix migrations inchangées. Le [complément de confirmation](docs/evidence/code-editor-save-confirmation-dev-2026-11-12.json)
+passe 39 groupes réels : 14 UI et 25 régressions, sur 371 sources ; neuf
+invocations Docker et 44 images sont recoupées. Le manuel servi correspond à
+17 chapitres et 67 paragraphes. Les frappes pendant sauvegarde restent locales,
+les confirmations périmées disparaissent et un retrait verrouille le champ.
+Ce complément clôture070.8, après le [checkpoint57](docs/evidence/code-editor-console-dev-2026-11-12.json)
+qui garde son imagea77b6b4e et ses deux époques. Les quotas globaux, interruptions,
+limites et parcours résiduels gardent l’unité ouverte ;070.7/.8sont seuls clôturés.
 
 Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
-sur e81007c5 et sont conservées dans l’image courantea77b6b4e. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+sur e81007c5 et sont conservées dans l’image courante6e1584f2. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
 passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
 JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
 manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans

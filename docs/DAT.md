@@ -501,5 +501,13 @@ La [preuve de console](evidence/code-editor-console-dev-2026-11-12.json) passe
 17 chapitres et 67 paragraphes. Le compteur de brouillon est indépendant de la
 version de fonction ; la copie relue est liée au chemin/surface/génération.
 L’historique conserve des patches exacts bornés à 64 gestes et 8 Mio de fragments.
-Le succès historique visible pendant une nouvelle saisie reste à retirer dans
-070.8. L’unité reste ouverte pour limites, reprises et parcours complémentaires.
+Le succès historique visible pendant une nouvelle saisie est corrigé et
+qualifié dans070.8. L’unité reste ouverte pour limites, reprises et parcours complémentaires.
+
+Le [complément070.8](evidence/code-editor-save-confirmation-dev-2026-11-12.json) passe39groupes sur371sources et6e1584f2.
+Le serveur reste byte-identique au checkpoint57 ; les modifications sont dans
+l’état client de confirmation et de saisie, avec le manuel associé. Une vraie
+contention SQLite bornée du banc confirme le snapshot envoyé et les frappes
+ultérieures sans interception ni réponse substituée. Les sorties/pertes de ce
+seul helper sont recoupées ; elles ne qualifient pas un SIGKILL du contrôle.
+Les données, routes et référence sont conservées ; quotas/reprises restent ouverts.

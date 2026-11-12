@@ -14,7 +14,7 @@ contrats existent :
 | --- | --- | --- |
 | Favoris personnels persistants | Aucune route, persistance ou interface de favoris | SLS-068 |
 | Renommage et suppression en masse | Actions individuelles seulement ; sélection, aperçu et traitement de lot absents | SLS-069 |
-| Éditer le code et le handler sur place | Première facette Éditeur déployée ;57groupes et17invocations réels,41captures inspectées ; quotas, interruptions et compléments UI encore ouverts | SLS-070 |
+| Éditer le code et le handler sur place | Première facette Éditeur déployée ; checkpoint57 puis complément39 de confirmation, avec44vues inspectées ; quotas, interruptions et compléments UI encore ouverts | SLS-070 |
 | Client HTTP intégré par fonction, type Postman | Catalogue d'URL/copie présent ; facette de test, requête et réponse interactives absentes | SLS-071 |
 | Logging d'exploitation | Logs par invocation présents ; recherche, période, suivi, export et vue de service absents | SLS-072 |
 | Monitoring | Relevés Docker ponctuels présents ; séries historiques, tableaux de bord et alertes absents | SLS-073 |

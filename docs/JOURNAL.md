@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 12novembre2026 —070.8 clôturée par39groupes réels
+
+La [preuve](evidence/code-editor-save-confirmation-dev-2026-11-12.json) passe14UI puis25régressions sur371sources0080af6
+et6e1584f2. Snapshot1Mio−1 enregistré, frappe tardive locale puis sauvegarde1Mio,
+retrait readonly avant réponse, vrai404/retry et dialog de source sont éprouvés.
+Le premier essai n’avait pas de fenêtre réelle avant réponse ; le banc reçoit
+un verrou SQLite sans DML. Huit sorties, fragment3s, limite32octets et refus de
+signal tardif/naissance périmée passent.21helpers terminés et trois fonctions
+physiquement purgées, neuf invocations natives,44images inspectées et manuel
+17chapitres/67paragraphes recoupés. Collecte des propriétaires corrigée pour
+observer WAL/SHM pendant leur ouverture ; leur disparition normale reste explicite.
+Le nominal préliminaire14n’est pas ajouté au39final. Le produit serveur est
+identique au checkpoint57.070.8est clôturée,070reste[~] pour capacités, reprises,
+limites et Tester071 ; aucune modification FORGE ni profil interdit.
+
+
 ## 12novembre2026 — Première facette Éditeur qualifiée, unité ouverte
 
 La [preuve](evidence/code-editor-console-dev-2026-11-12.json) passe57groupes réels sura77b6b4e :

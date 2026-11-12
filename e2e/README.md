@@ -17,10 +17,12 @@ changement produit.17invocations natives,41captures inspectées et8purges de
 fonctions recoupées ; manuel17chapitres/67paragraphes. Les premiers échecs du
 banc restent exclus. Quotas, reprises, limites et compléments UI gardent070ouverte.
 
-Le complément070.8 est en préparation : assertions de confirmation à la frappe,
+Le complément070.8 est qualifié : assertions de confirmation à la frappe,
 lecture et retry réel404, saisie pendant sauvegarde effective, lecture seule au
-retrait, puis choix de source depuis le vrai dialog. Les nouvelles assertions
-restent à exécuter ; le checkpoint57 conserve ses sources et son image datées.
+retrait, puis choix de source depuis le vrai dialog. La [preuve](../docs/evidence/code-editor-save-confirmation-dev-2026-11-12.json) passe14groupes ciblés
+puis25régressions sur371sources0080af6 et6e1584f2. Neuf invocations et44images
+sont recoupées ; trois fonctions purgées et21helpers terminés. Le checkpoint57
+conserve ses sources/image ; les passages antérieurs ne sont pas additionnés.
 `code-editor-save-lock.py hold|probe|stop NAMESPACE FUNCTION` est un opérateur
 DEV sans écriture de donnée : verrou SQLite réel au plus3s, libération/EOF/
 échéance, ou signal du seul PID/naissance/commande vérifiés. Le client éprouve

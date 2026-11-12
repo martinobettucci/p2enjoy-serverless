@@ -1,16 +1,15 @@
 # Console web
 
-La première facette [Éditeur SLS-070](../docs/CONSOLE_EDITOR.md) est déployée
-sur a77b6b4e : sources par hash, brouillon personnel, fichiers, recherche, diff,
-historique exact borné et suivi du vrai pipeline. La [preuve](../docs/evidence/code-editor-console-dev-2026-11-12.json)
-passe57groupes réels,17invocations Docker et41captures inspectées.
-Les12groupes UI incluent lignes mixtes/undo/redo,64gestes/8Mio d’historique,
-protections de navigation, conflit entre onglets, revert, pilote/promotions/rollback,
-CJS/ESM et import refusé. Le manuel servi est17chapitres/67paragraphes.
-Deux époques de sources sont déclarées ; produit et image sont identiques entre
-elles. Aucun critère UI n’est clôturé : limites résiduelles, réponses perdues,
-reprises et compléments de parcours restent à éprouver. Le succès historique
-visible pendant une nouvelle saisie est à retirer dans070.8. Tester071 reste absent.
+La facette [Éditeur SLS-070](../docs/CONSOLE_EDITOR.md) est déployée sur
+6e1584f2. Son [complément070.8](../docs/evidence/code-editor-save-confirmation-dev-2026-11-12.json) passe
+39 groupes réels : 14 UI et 25 régressions, neuf invocations Docker et 44 vues
+inspectées. Notifications retirées à la frappe/lecture, snapshot envoyé distinct
+des frappes ultérieures et readonly pendant retrait sont éprouvés. Le vrai404
+et le dialog de source sont qualifiés ; le manuel servi reste17chapitres/67paragraphes.
+Les371sources et l’image restent identiques avant/après ; trois fonctions des
+passages sont purgées et21helpers terminés sont recoupés. Le checkpoint57 sur
+a77b6b4e garde ses preuves propres.070.8est clôturée ; les critères070.1–.6 restent
+ouverts pour quotas, limites, interruptions et compléments UI. Tester071 reste absent.
 
 SLS-089 est déployée sur e81007c5, après sauvegarde native SQLite et sans
 changement de schéma ou configuration de cellule. La [preuve partielle](../docs/evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes

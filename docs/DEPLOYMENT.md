@@ -526,3 +526,16 @@ Contrôle0c3a6aa3 sain ; référence, fichiers officiels et5982artefacts conserv
 La [preuve](evidence/code-editor-console-dev-2026-11-12.json) recoupe57groupes,17invocations,41captures,
 36sources serveur et4ressources HTTPS, puis l’absence d’actifs et de brouillons.
 Les captures protégées de rétention009 ne sont ni restaurées ni modifiées.
+
+## Confirmation de saisie070.8 —12novembre2026
+
+Bascule du seul contrôle DEV a77b6b4e→6e1584f2, CID442410ac, après sauvegarde
+native qualification-history/before-code-editor-save-confirmation-
+2c05f3d808f6489b9e0d3c25723c5129, SHA6a9c3e40dc37d7f383cd07017930f356ed0a362faf73cb519c90e1a7b04ba7f8.
+Schéma010 et tables métier conservés ; aucun nouveau paramètre, secret ou route.
+Les36fichiers backend restent identiques ; seuls bundle JS/document et manuel
+suivent la correction. La [preuve](evidence/code-editor-save-confirmation-dev-2026-11-12.json) recoupe39groupes,
+44images, neuf invocations, purges et disponibilité du writer natif sans écriture.
+Les21helpers des deux passages sont terminés ; les5982artefacts et la référence
+sont conservés. Les journaux SQLite sont observés sous propriétaire1001 pendant
+ouverture ; leur suppression normale après fermeture est distinguée.

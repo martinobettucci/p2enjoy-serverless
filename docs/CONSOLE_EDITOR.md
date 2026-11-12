@@ -5,7 +5,7 @@ avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
 Le serveur et la migration010 sont déployés et partiellement qualifiés en DEV
 par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La première facette console est déployée et partiellement qualifiée sura77b6b4e.
-Seul070.7 est clôturé ; les autres critères restent ouverts.
+Les critères070.7 et070.8 sont clôturés ; les autres restent ouverts.
 
 ## Parcours et droits
 
@@ -564,3 +564,40 @@ avec une échéance monotone commune pour toute lecture de commande, un reçu
 signal/PID/naissance obligatoire, puis des épreuves réelles de fragment sans LF,
 refus de signaux après EOF et refus de naissance périmée. Le prochain replay
 conservera ces contrôles ; ce nominal n’est pas additionné à son total.
+
+## Confirmations de sauvegarde qualifiées —070.8
+
+Le [complément DEV](evidence/code-editor-save-confirmation-dev-2026-11-12.json) passe 39 groupes au gel0080af6 :
+14 UI, puis8manuel/8public/9connexion, sur371sources identiques avant/après.
+L’image6e1584f2 sert le correctif et le manuel actualisé. Les36fichiers serveur
+embarqués sont identiques au checkpoint57 ; cette preuve ne réadditionne pas
+ses20groupes serveur. La première tentative trop rapide et les14groupes du
+nominal préliminaire restent distincts du total39.
+
+Les notifications sont retirées à la frappe, à la lecture et au retry d’une
+source réellement404. Le choix d’un hash par le vrai dialog rétablit la source
+puis le brouillon. Une vraie sauvegarde sous verrou SQLite conserve le snapshot
+1Mio−1 envoyé ; la frappe supplémentaire reste locale avec badge et sans faux
+succès. La sauvegarde suivante enregistre ce texte1Mio exact. Lors du retrait,
+le champ est readonly avant réponse ; les autres patches restent présents.
+Neuf invocations CJS/ESM/YAML, quatre publications et un import refusé sont
+recoupés nativement. Les trois fonctions des passages sont physiquement purgées.
+
+Le banc passe huit sorties : libération, EOF, échéance sans commande, fragment
+sans LF, SIGTERM, SIGKILL, commande invalide et33octets contre borne32. Les
+échéances mesurées sont3,007354s et3,007353s, avec0et4octets reçus. Chaque signal
+possède son reçu PID/naissance/pidfd ; un signal après EOF et une naissance
+périmée sont refusés. Les treize helpers finaux et huit du nominal préliminaire
+sont absents. Le probe final peut prendre le writer, ne change aucune ligne,
+ferme sa connexion et vérifie les propriétaires1001 de SQLite/WAL/SHM pendant
+l’ouverture. Les journaux peuvent ensuite disparaître normalement ; leur absence
+après fermeture n’est pas présentée comme une conservation physique de fichiers.
+
+Les44images inspectées sont15UI,22régressions et7lectures du chapitre mis à jour.
+Les38JPG ont leurs SHA déclarés ; les6PNG login restent liés aux octets courants
+et à la fraîcheur dans leur phase. Les sept lectures de guide n’ajoutent aucun
+groupe fonctionnel. Le manuel servi correspond à17chapitres et67paragraphes.
+Les5982artefacts antérieurs, la référence et les fichiers officiels sont identiques.
+Dix migrations, intégrité, clés étrangères, stockage sain et compteurs actifs nuls
+sont recoupés.070.8est clôturée ;070reste ouverte pour quotas globaux, limites,
+reprises/transport, source archivée, pagination au-delà de cinq et Tester071.
