@@ -555,3 +555,12 @@ puis compare le snapshot enregistré et le texte local. Le même observateur
 permet de dater la lecture seule avant réponse lors du retrait. Aucun délai
 réseau, réponse ou dépendance n’est substitué. Une borne ou jonction absente
 fait échouer la campagne ; aucun rejeu automatique ni succès conditionnel.
+
+Le passage nominal suivant réussit14groupes, dont six sorties réelles du verrou
+et les deux observations HTTP avant réponse. Il reste préliminaire : la revue
+relève une entrée de commande partielle pouvant attendre au-delà de3s et un
+reçu de signal non exigé si le client SSH était déjà terminé. Le banc est durci
+avec une échéance monotone commune pour toute lecture de commande, un reçu
+signal/PID/naissance obligatoire, puis des épreuves réelles de fragment sans LF,
+refus de signaux après EOF et refus de naissance périmée. Le prochain replay
+conservera ces contrôles ; ce nominal n’est pas additionné à son total.

@@ -47,11 +47,12 @@ async function startSaveLock(){
  createInterface({input:child.stdout}).on('line',line=>{try{events.push(JSON.parse(line));}catch{events.push({event:'invalid-operator-output'});}});
  const done=new Promise(resolve=>{child.on('close',code=>{ended=true;exitCode=code;resolve(code);});child.on('error',()=>{ended=true;exitCode=-1;resolve(-1);});});
  const handle={child,events,done,closed:false,async finish(action='release'){
-  if(!ended){if(action==='release')child.stdin.end('release\n');else if(action==='eof')child.stdin.end();else if(action==='invalid')child.stdin.end('invalid\n');else if(['term','kill'].includes(action))events.push(...await lockCommand('stop',[String(handle.held.pid),handle.held.birth,action]));else assert.equal(action,'deadline');}
+  if(['term','kill'].includes(action)){assert(!ended,'helper_already_ended_before_signal');const stopped=await lockCommand('stop',[String(handle.held.pid),handle.held.birth,action]),receipt=stopped.find(v=>v.event==='helper-stopped');assert(receipt&&receipt.native_exit_confirmed&&receipt.pid===handle.held.pid&&receipt.birth===handle.held.birth&&receipt.signal===action);events.push(...stopped);}
+  else if(!ended){if(action==='release')child.stdin.end('release\n');else if(action==='eof')child.stdin.end();else if(action==='invalid')child.stdin.end('invalid\n');else if(action==='fragment')child.stdin.write('rele');else assert.equal(action,'deadline');}
   const code=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('lock_helper_not_joined')),15000);done.then(value=>{clearTimeout(timer);resolve(value);});});handle.closed=true;
   if(['term','kill','invalid'].includes(action))assert.notEqual(code,0);else assert.equal(code,0);
   const proof=(await lockCommand('probe')).at(-1);assert.equal(proof.event,'writer-probe');assert.equal(proof.connection_closed,true);assert.equal(proof.sql_changes,0);
-  if(!['term','kill'].includes(action)){const event=events.find(v=>v.event==='lock-released');assert(event&&event.connection_closed&&event.sql_changes===0);assert.equal(event.reason,({release:'released',eof:'owner-eof',deadline:'deadline',invalid:'invalid-input'})[action]);}
+  if(!['term','kill'].includes(action)){const event=events.find(v=>v.event==='lock-released');assert(event&&event.connection_closed&&event.sql_changes===0);if(['deadline','fragment'].includes(action))assert(event.elapsed_seconds>=2.9&&event.elapsed_seconds<3.5);assert.equal(event.reason,({release:'released',eof:'owner-eof',deadline:'deadline',fragment:'deadline',invalid:'invalid-input'})[action]);}
   const evidence={action,events:[...events],exit_code:code,probe:proof};observations.push({save_lock:evidence});return evidence;
  }};saveLocks.push(handle);handle.held=await until(()=>{const event=events.find(v=>v.event==='lock-held');if(event)return event;assert(!ended,'lock_helper_ended_before_ready');return false;},'lock_helper_not_ready',15000);return handle;
 }
@@ -80,7 +81,9 @@ try{
   await chooseFile('editor.cjs');await content(page).getByText('Oui',{exact:true}).waitFor();await editor(page).getByRole('button',{name:'Créer mon brouillon',exact:true}).click();await editor(page).getByText('Brouillon personnel créé.',{exact:true}).waitFor();await ready();assert.equal(new URL(page.url()).searchParams.get('view'),'draft');
  });
  await check('Verrou réel sans écriture : libération, EOF, échéance et pertes SIGTERM/SIGKILL',async()=>{
-  for(const action of ['release','eof','deadline','term','kill','invalid']){const lock=await startSaveLock(),proof=await lock.finish(action);assert.deepEqual(proof.probe.scope,lock.held.scope);}
+  for(const action of ['release','eof','deadline','fragment','term','kill','invalid']){const lock=await startSaveLock(),proof=await lock.finish(action);assert.deepEqual(proof.probe.scope,lock.held.scope);}
+  for(const action of ['term','kill']){const lock=await startSaveLock();await lock.finish('eof');await assert.rejects(()=>lock.finish(action),/helper_already_ended_before_signal/);observations.push({save_lock_late_signal:{action,refused_after_real_eof:true,pid:lock.held.pid,birth:lock.held.birth}});}
+  const protectedLock=await startSaveLock();try{await assert.rejects(()=>lockCommand('stop',[String(protectedLock.held.pid),'0','kill']),error=>error.code===1&&String(error.stderr).includes('helper_birth_changed'));observations.push({save_lock_identity_refusal:{pid:protectedLock.held.pid,birth:protectedLock.held.birth,wrong_birth:'0',native_refusal:true}});}finally{await protectedLock.finish();}
  });
  await check('Saisie native : lignes mixtes, suppression ambiguë, annuler/rétablir et absence de fin ajoutée',async()=>{
   await chooseFile('lignes-identiques.txt');let field=await edit();await field.press('Control+Home');await field.press('ArrowRight');await field.press('Delete');assert.equal(await field.inputValue(),'a\nb');await saveFile();assert.equal((await draftFile('lignes-identiques.txt')).file.text,'a\nb');

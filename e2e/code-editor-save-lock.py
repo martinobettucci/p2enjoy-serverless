@@ -54,13 +54,20 @@ else:
         assert writer.db.total_changes==0
         if mode=='hold':
             emit({'event':'lock-held','pid':os.getpid(),'birth':birth(os.getpid()),'identity':writer.identity,'scope':current,'max_wait_seconds':3,'sql_changes':0})
-            ready,_,_=select.select([sys.stdin],[],[],3)
-            if not ready:reason='deadline'
-            else:
-                action=sys.stdin.readline(32)
-                if action=='':reason='owner-eof'
-                elif action=='release\n':reason='released'
-                else:reason='invalid-input';raise ValueError('invalid_release_command')
+            deadline=time.monotonic()+3;received=b''
+            while True:
+                remaining=deadline-time.monotonic()
+                if remaining<=0:reason='deadline';break
+                ready,_,_=select.select([sys.stdin],[],[],remaining)
+                if not ready:reason='deadline';break
+                chunk=os.read(sys.stdin.fileno(),32-len(received))
+                if not chunk:reason='owner-eof';break
+                received+=chunk
+                if b'\n' in received:
+                    if received==b'release\n':reason='released';break
+                    reason='invalid-input';raise ValueError('invalid_release_command')
+                if len(received)==32:reason='invalid-input';raise ValueError('release_command_limit')
+
         assert writer.db.total_changes==0
     finally:
         changes=writer.db.total_changes if writer.db is not None else None
