@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 12novembre2026 — préparation des compléments du testeur
+
+La [décision](CONSOLE_TESTER.md#compléments-ui-et-admission--décision-avant-intégration)
+précise avant intégration deux clients indépendants et l’extension du fixture
+original. Le vrai gzip permet de dépasser6Mio après décodage navigateur sans
+contourner la borne brute du moteur ; brut supérieur refusé par ce dernier.
+Réceptions JSON partielles et quatre sorties occupées reprennent TLS/SSO et
+les observations réelles. Revue RO : doublons manquants dans un intitulé,
+comparaison gzip insuffisante et rejet de promesse tardif corrigés dans les
+préparations. Rien n’est encore exécuté ; la tranche43 et son époque restent
+immuables. Aucun changement produit ni route/configuration nouvelle.
+
 ## 12novembre2026 — première tranche réelle du testeur HTTP
 
 [43groupes](evidence/function-http-client-dev-2026-11-12.json) passent sur032ca071

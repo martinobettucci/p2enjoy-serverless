@@ -187,3 +187,45 @@ vide, données longues, mobile/tablette et JPEG inspectés font partie du reçu.
 SIGKILL/reprise durable et limites d'admission sont éprouvés séparément quand
 le serveur est raccordé. Sources/images, données antérieures, nettoyage physique
 et manuel servi sont recoupés. Rien n'est clôturé par ce seul contrat.
+
+## Compléments UI et admission — décision avant intégration
+
+La tranche43 reste immuable avec son époque382sources. Les deux clients
+`e2e/function-http-client-ui.mjs` et `e2e/function-http-client-admission.mjs`
+ouvrent chacun leurs propres objets, publient le fixture canonique original
+puis purgent et recoupent leur seul périmètre. Le même contrôle032ca071 suffit ;
+aucune nouvelle image produit, configuration, route ou dépendance n’est requise.
+Chaque reçu garde sa propre époque de sources et ses prérequis ; ces préparations
+ne sont pas ajoutées aux43groupes déjà qualifiés.
+
+Le fixture ajoute une origine IP observée, une réponse gzip dont la décompression
+fait6Mio+1,128en-têtes et une réponse brute de6Mio+1. La borne HTTP de6Mio de la
+passerelle empêche d’atteindre la troncature brute défensive du relais : le
+supérieur doit être refusé par le vrai moteur. Le gzip passe cette borne brute
+et exerce réellement la troncature du navigateur après décompression. Le corps
+serveur téléchargé est comparé à un autre vrai appel brut et son contenu
+décompressé au SHA attendu ; le navigateur garde6Mio et un aperçu64Kio. Aucun
+serveur de substitution ne contourne la passerelle pour forcer une branche.
+
+Le client UI compose texte/JSON/fichier, query hors borne, doublons et noms
+réservés dans les deux modes sans émission. Il change la politique du seul
+service de sa campagne pour éprouver origine autorisée/refusée, CORS refusé,
+IP réellement observée et ET/OU ; restauration de politique avant la suite.
+L’annulation attend un handler démarré, arrête l’attente puis retrouve une unique
+invocation terminée, sans rejeu. Révocation au clavier, repli de focus,404 de
+corrélation expliqué, liens de versions et nouvelles vues du manuel restent
+éprouvés par leurs gestes réels. Les captures cadrent les corps/sections utiles,
+au lieu de déduire leur lisibilité d’une vue partielle.
+
+Le client d’admission adapte le précédent TLS réel de l’éditeur : session SSO,
+Origin/CSRF, POST du testeur, JSON annoncé2Mio, premier octet envoyé ; quatre
+réceptions, cinquième sans corps429 puis quatre408 après30s. Tous les sockets
+et promesses sont joints avant de vérifier cinq appels sains. Un second groupe
+occupe quatre relais sortants par quatre handlers réellement lents, observe
+leurs quatre invocations actives puis refuse le cinquième429. Les promesses
+reçoivent dès leur création un collecteur de rejet, avant tout sondage ; leur
+jonction est aussi garantie au finally. Ces deux groupes forment chacun une
+seule charge concurrente, jamais deux scénarios exécutés en parallèle.
+
+Statut de ce complément : préparé/relu, non exécuté ; SIGKILL et autres
+compléments restent séparés et l’unité demeure ouverte.
