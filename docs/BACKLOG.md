@@ -993,6 +993,8 @@ Critères d'acceptation :
   conserver les nouvelles erreurs jusqu’à correction ou nouvel envoi et ne pas
   prétendre modifier l’issue de l’appel précédent. Tester le vrai refus fichier,
   passage JSON, correction de JSON invalide et modification après copie cURL.
+  La même revue relève «1octets» : afficher le singulier pour un seul octet
+  et vérifier ce compteur avec le vrai corps JSON invalide d’un octet.
 
 Tests exigés :
 

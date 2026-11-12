@@ -242,6 +242,8 @@ Les résultats HTTP déjà observés gardent leur statut réel ; aucun appel n�
 relancé. Les confirmations d’émission/révocation de jeton gardent leur propre
 suivi. Une sélection de fichier invalide conserve son refus jusqu’à la prochaine
 correction ; le changement d’objet fichier ne doit pas effacer ce refus aussitôt.
+La revue relève aussi le pluriel «1octets» : le compteur prend le singulier
+pour un seul octet, sans modifier sa mesure UTF-8.
 Cette correction UI seule sera reconstruite/déployée puis les16+5groupes et
 les régressions rejoués sur le nouvel artefact. Le passage21initial reste
 intermédiaire, sans ajout à une preuve finale.
