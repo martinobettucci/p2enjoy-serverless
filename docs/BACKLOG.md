@@ -980,7 +980,10 @@ Critères d'acceptation :
 - [ ] SLS-071.2 Contexte **serveur** (appel émis par le serveur de console, destinations limitées
   aux adresses de cette installation et à `/invoke/UUID[@HASH]`, redirections non suivies,
   cookies de console non transmis) et contexte **navigateur** (CORS depuis la vraie origine),
-  explicitement distingués.
+  explicitement distingués. Le [complément source refusée](CONSOLE_TESTER_SOURCE.md)
+  fixe avant code le vrai503 avant émission, retrait UI des anciennes URL/résultats,
+  hash indisponible distinct de cible absente, CSPself et restitution. Il réutilise
+  la garde de permissions qualifiée066 ; autres causes du lecteur restent093.
 - [x] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
   après quinze minutes ; valeur en mémoire de la page, absente des exemples copiés, journaux,
   erreurs, préférences et historique. L’inspecteur de preuve ne réémet aucun
@@ -1023,7 +1026,7 @@ Critères d'acceptation :
   Premier3c50e181 : coupures de création natives franchies mais liste UI
   comptée avant rendu Resource. Attendre panneau/lignes exactes avant assertions ;
   fonction purgée, jeton perdu révoqué par UUID, parents/gardes nettoyés.
-  Reçu préliminaire exclu ; quatre cas à rejouer.
+  Reçu préliminaire exclu ; les quatre cas passent ensuite dans32.
   Refus422 répétés puis cinq appels sains
   passent dans la tranche43 ; à ce checkpoint, saturation et interruption
   restaient à prouver, avant les compléments46 et42.
