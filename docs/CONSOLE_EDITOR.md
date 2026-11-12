@@ -657,5 +657,16 @@ leurs images et leurs restes de qualification propres au checkpoint décrit.
 
 Le [complément de sources et limites](CODE_EDITOR_SOURCE_LIMITS.md) fixe le
 passage HTTP aux frontières exactes, puis les ensembles console, reconstruction/
-concurrence et reprises de publication. Décision persistée avant son client ;
-aucun critère supplémentaire n’est clos à ce stade.
+concurrence et reprises de publication. Le [replay qualifié](evidence/code-editor-source-limits-dev-2026-11-12.json)
+passe38groupes réels sur406sources59dd4591 et60938093 :13ciblés puis25communs,
+cinq handlers Docker,22captures inspectées. Gros texte1Mio+1 conservé,
+chemins512/513 et segments255/256octets, Unicode distinct, diff2000/2001lignes
+sur les deux côtés,128Kio exact puis motif explicite, JSON8Mio/+1 atomique et
+nouvelle publication depuis la sourceA archivée sont recoupés. Les inventaires
+complets A246→B250/C246 ne diffèrent que des changements attendus.
+
+Le premier échec de lecteur est séparé, zéro groupe réadditionné. Deux fonctions
+et deux jetons des passages sont purgés/révoqués, parents supprimés ; dix
+migrations, même contrôle/référence, fichiers officiels et5982artefacts conservés.
+Manuel18chapitres/74paragraphes inchangé. Aucun critère supplémentaire ne ferme :
+console/pagination/adoption, bornesZIP/concurrence et reprises restent à produire.

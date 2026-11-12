@@ -7,15 +7,14 @@ sont actualisées ci-dessous avec leurs preuves DEV propres.
 
 ## Ce qui manque dans le produit
 
-Onze demandes explicites restent à implémenter ou à démontrer, même si leurs
+Dix demandes explicites restent à implémenter ou à démontrer, même si leurs
 contrats existent :
 
 | Demande | État constaté | Suivi |
 | --- | --- | --- |
 | Favoris personnels persistants | Aucune route, persistance ou interface de favoris | SLS-068 |
 | Renommage et suppression en masse | Actions individuelles seulement ; sélection, aperçu et traitement de lot absents | SLS-069 |
-| Éditer le code et le handler sur place | Première facette Éditeur déployée ; checkpoint57 puis complément39 de confirmation, avec44vues inspectées ; quotas, interruptions et compléments UI encore ouverts | SLS-070 |
-| Client HTTP intégré par fonction, type Postman | Facette Tester déployée ; composition/réponse, arrêts, reprise réelle et confidentialité qualifiés par checkpoints43/46/42. Pertes de réponse des mutations de jeton qualifiées par32 ; sources indisponibles et preuves résiduelles ouvertes | SLS-071 |
+| Éditer le code et le handler sur place | Facette déployée ; confirmations39, quotas42 et [sources/limites38](evidence/code-editor-source-limits-dev-2026-11-12.json) qualifiés. Source archivée, conservation, chemins/diff/JSON éprouvés ; compléments console, ZIP/concurrence et interruptions encore ouverts | SLS-070 |
 | Logging d'exploitation | Logs par invocation présents ; recherche, période, suivi, export et vue de service absents | SLS-072 |
 | Monitoring | Relevés Docker ponctuels présents ; séries historiques, tableaux de bord et alertes absents | SLS-073 |
 | Planifications (crons) du manifeste | Moteur et facette déployés ; [checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json), [cycle des versions](evidence/schedule-versions-dev-2026-11-10.json) [grammaire numérique](evidence/schedule-calendar-dev-2026-11-10.json) et [coupures/reprises](evidence/schedule-recovery-dev-2026-11-10.json), puis [admission CPU/exclusif/recouvrement](evidence/schedule-admission-dev-2026-11-10.json), [RAM/version en file](evidence/schedule-memory-version-dev-2026-11-10.json), [files pleines16/128](evidence/schedule-queues-dev-2026-11-10.json), [commande de cache en cours](evidence/schedule-unavailable-dev-2026-11-10.json) et [maximum/réutilisation](evidence/schedule-instance-reuse-dev-2026-11-10.json) et [console/erreur/reprise](evidence/schedule-console-dev-2026-11-10.json) qualifiés séparément ; plafond099, [concurrence](evidence/schedule-concurrency-dev-2026-11-11.json) et [adaptateur.7](evidence/adapter-schedules-dev-2026-11-11.json) qualifiés ; rétention et qualification complète ouvertes | SLS-078 |
@@ -23,6 +22,11 @@ contrats existent :
 | Parité avec toutes les fonctionnalités de Scaleway Serverless | Matrice sourcée établie ; limites, en-têtes, runtimes, déclencheurs de messages et autres écarts ouverts | SLS-082 à SLS-088 |
 | Compatibilité démontrée du projet de référence | Audit et matrice faits ; fixtures et preuves absentes ; capacité CPU à adapter | SLS-080 |
 | Exploitation complète et reproductible | Informations dispersées dans des comptes rendus de campagne ; guide rejoué absent | SLS-079 |
+
+Le **client HTTP intégré par fonction, type Postman (SLS-071)** est livré.
+Ses huit critères sont qualifiés, avec la [dernière preuve31](evidence/function-http-client-task-exception-dev-2026-11-12.json)
+et les checkpoints propres à chaque critère. Cette demande quitte donc la liste
+des manques ; journaux avancés et monitoring gardent leurs unités072/073.
 
 Ces travaux appartiennent au périmètre confirmé. Ils n'attendent pas une nouvelle
 demande du responsable. Une unité inscrite dans le backlog n'est pas une unité

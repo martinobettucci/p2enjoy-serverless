@@ -1,5 +1,16 @@
 # P2Enjoy Serverless
 
+Le [complément de sources et limites de l’éditeur](docs/evidence/code-editor-source-limits-dev-2026-11-12.json)
+passe **38 groupes réels** :13ciblés puis25régressions, sur406sources59dd4591,
+image60938093 inchangée. Source archivée, conservation du texte1Mio+1,
+chemins512/255octets, diff2000lignes/128Kio et JSON8Mio sont éprouvés par HTTPS.
+Cinq handlers Docker et les inventaires complets246→250/246 recoupent les
+octets/modes conservés.22captures inspectées ; deux fonctions et deux jetons
+des passages sont purgés/révoqués, parents supprimés et5982artefacts conservés.
+Le premier passage échoué reste séparé, zéro groupe ajouté. SLS-070 reste
+ouverte pour console, ZIP/concurrence et reprises ; manuel18chapitres/74paragraphes
+et schéma010 inchangés. Le [contrat](docs/CODE_EDITOR_SOURCE_LIMITS.md) détaille la portée.
+
 Le client HTTP **Tester une fonction (SLS-071)** est livré et qualifié en DEV.
 La [preuve finale du dernier critère](docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) passe **31 groupes réels** :
 6 ciblés et 25 régressions sur 401 sources 67215a2b, image 60938093 inchangée ;

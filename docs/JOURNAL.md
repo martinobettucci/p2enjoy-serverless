@@ -7886,3 +7886,29 @@ L’ancien lecteur exact du commit3e7b1e0 reproduit encore le NameError en lectu
 seule ; le reçu lie son SHA. La preuve échouée publie406sources identiques,
 quatre groupes de passage mais zéro qualifié, avec nettoyage séparé. Le replay
 de l’ensemble et les régressions restent nécessaires ; aucun critère ne ferme.
+
+### 12novembre2026 — Sources et limites de l’éditeur qualifiées sur le replay
+
+bb741a51/53a6a9b passe13groupes puis25communs,406sources59dd4591 et image60938093
+identiques avant/après. Gros texte1048577octets, refus atomiques, cheminsUTF8
+512/513 et255/256, Unicode distinct, diff2000/2001lignes de chaque côté,
+131072octets exacts puis output_limit65570, JSON8388608/+1 sont recoupés.
+A246fichiers→B250 (quatre ajouts+marqueur), A→C246 (marqueur seul depuis archive) :
+inventaires et vrais octets/modes exacts, cinq handlers liés aux révisions.
+B reste promue, Aarchivée refuse l’appel tout en restant éditable comme source.
+
+22originaux communs ouverts individuellement par factory_verifier RO,16JPEG
+SHA déclarés et6PNG actuels/mtime de phase, Git propre avant/après ; aucun
+défaut nouveau,101/102 restent ouverts. Revue indépendante des preuves sans
+blocage. Manuel18chapitres/74paragraphes, schéma010,38backend/quatreweb, mêmes
+CID/démarrages/référence, fichiers officiels et5982artefacts conservés.
+Deux fonctions et deux jetons des deux passages purgés/révoqués, quatre parents
+supprimés, zéro activité/bail/réservation/garde ; writer0DML/connexionfermée.
+Les notes SPARK/propositions restent identiques et adaptées à cette installation
+inchangée, sans adoption. Aucun build produit ni configuration nécessaire.
+
+Les quatre groupes du premier échec restent exclus ; sa preuve séparée ne
+change pas.070.1–.5 restent ouverts pour console, ZIP/concurrence et reprises.
+Les documents de livraison suivent ces preuves ; la ligne071 périmée de la
+matrice des demandes est également retirée des manques, conformément à sa
+livraison déjà prouvée31, sans nouveau changement produit. Le goal reste actif.

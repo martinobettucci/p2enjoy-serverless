@@ -487,8 +487,9 @@ Première réalisation serveur010 déployée sur7c5c6f4b et [partiellement quali
 le12novembre2026 local :20groupes ciblés et25régressions, données et référence
 conservées. Les lecteurs réels retiennent les fichiers, les patches sont
 chiffrés, l’envoi réutilise operations.responsibility et le pipeline Docker.
-Les compléments de la facette Éditeur, les limites globales et les reprises
-gardent leur reste à faire.
+Les compléments de la facette Éditeur, les limites de reconstruction et les
+reprises gardent leur reste à faire. Les quotas de brouillons ont ensuite leur
+preuve42, distincte des bornes HTTP décrites ci-dessous.
 
 La première facette SLS-070 réutilise les API010 existantes. Une
 garde client protège les départs et la déconnexion avant mutation serveur ;
@@ -510,7 +511,15 @@ l’état client de confirmation et de saisie, avec le manuel associé. Une vrai
 contention SQLite bornée du banc confirme le snapshot envoyé et les frappes
 ultérieures sans interception ni réponse substituée. Les sorties/pertes de ce
 seul helper sont recoupées ; elles ne qualifient pas un SIGKILL du contrôle.
-Les données, routes et référence sont conservées ; quotas/reprises restent ouverts.
+Les données, routes et référence sont conservées ; les reprises restent ouvertes.
+
+Le [complément de sources et limites](evidence/code-editor-source-limits-dev-2026-11-12.json)
+passe38groupes sur406sources59dd4591/image60938093 inchangée :13ciblés et25communs.
+Les sources archivées, texte1Mio+1 conservé, chemins en octets, diff2000/128Kio
+et JSON8Mio sont qualifiés par les vraies API et cinq handlers Docker. Les
+inventaires complets A246→B250/C246,22captures, deux fonctions/tokens nettoyés
+et5982artefacts conservés sont recoupés. Schéma010/manuel inchangés ; console,
+bornesZIP/lecteurs et reprises restent dans070.
 
 ## Client HTTP intégré qualifié — SLS-071
 

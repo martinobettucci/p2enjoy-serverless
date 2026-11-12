@@ -142,8 +142,12 @@ Docker puis leurs handlers sont invoqués. Le helper de paquet réutilise le vra
 YAML2.9.1 de la référence ; l’inspecteur natif relit tous les SHA/modes et les
 métadonnées privées de brouillon sans retourner source ou ciphertext.
 Rapports UUID, intentions avant POST, révocation des jetons et purge normale ;
-aucune clôture de070 avant ses autres preuves. Le client est préparé, son
-exécution réelle reste à produire. [Contrat](../docs/CODE_EDITOR_SOURCE_LIMITS.md).
+aucune clôture de070 avant ses autres preuves. Le
+[replay réel](../docs/evidence/code-editor-source-limits-dev-2026-11-12.json) passe13groupes
+puis25régressions sur406sources59dd4591/image60938093, cinq handlers et22captures
+inspectées. InventairesA246→B250/C246 exacts ; deux fonctions/tokens des deux
+passages nettoyés, parents supprimés. L’échec de lecteur est conservé à part.
+[Contrat et suites](../docs/CODE_EDITOR_SOURCE_LIMITS.md).
 
 ## Capacité réelle des brouillons de code
 

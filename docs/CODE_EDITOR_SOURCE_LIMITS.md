@@ -106,3 +106,39 @@ Aucun groupe de ce passage ne qualifie le complément.
 Correction décidée avant code : importer UUID dans le programme distant du
 lecteur, vérifier les ressources résiduelles, terminer les parents par API,
 puis geler à nouveau les sources et exécuter l’ensemble sans addition de groupes.
+
+## Résultat qualifié et suites
+
+Le [replay DEV](evidence/code-editor-source-limits-dev-2026-11-12.json) bb741a51
+au commit53a6a9b passe38groupes :13ciblés puis8manuel/8public/9connexion.
+Les406sources59dd4591 et l’image60938093 sont identiques avant/après chaque
+campagne ;38backend/quatre ressources HTTPS, même CID/démarrage, référence,
+fichiers officiels et5982artefacts initiaux sont recoupés.
+
+Les frontières sont observées aux valeurs annoncées :1048577octets non éditables
+et conservés, chemins512/513/segments255/256, Unicode distinct, diff2000/2001
+de chaque côté,131072octets exacts de diff puis `output_limit` avec65570octets
+conservés, JSON8388608/+1. Les refus et no-op conservent les métadonnées,
+ciphertexts et audits de mutation. Cinq invocations réussies sont liées à leurs
+vraies révisions. L’inventaireA possède246fichiers, B250 (quatre ajouts et marqueur),
+C246 (marqueur seul depuis Aarchivée) ; aucun autre chemin, octet ou mode ne change.
+B reste promue pendant publicationC ; Aarchivée refuse l’invocation tout en
+restant une source de brouillon consultable.
+
+Les22captures communes sont ouvertes individuellement par le vérificateur RO,
+Git propre avant/après. Les16JPEG ont leurs SHA déclarés ; les6PNG sont liés
+à leurs octets courants et mtime de phase, sans SHA déclaré dans login.
+Ces images ne qualifient pas les compléments de console du second ensemble.
+Le manuel servi correspond à18chapitres/74paragraphes et son SHA source inchangé.
+
+La fonction et le jeton nominaux sont nettoyés, comme ceux du passage échoué :
+deux fonctions purgées, deux jetons révoqués et deux couples de parents supprimés.
+Aucun brouillon, activité, bail, réservation ou garde ; intégritéok/FKvide,
+dix migrations et propriétaire1001 recoupés. Le probe writer ne fait aucunDML
+et ferme sa connexion ; la disparition normale WAL/SHM après fermeture est
+distinguée de la vérification de leur propriétaire pendant ouverture.
+
+Les trois notes SPARK et propositions sont conservées : image, installation,
+interfaces et configuration inchangées, aucune adoption revendiquée. Aucun
+build produit, migration, variable, secret ou route n’est nécessaire. Les
+ensembles2–4 et la campagne complète restent à produire ;070.1–.5 restent ouverts.

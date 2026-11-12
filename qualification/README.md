@@ -74,7 +74,10 @@ livré ; les autres unités et la campagne complète restent dans le backlog.
 de données distingue les sources A/B/C. Le client
 `e2e/code-editor-source-limits.mjs` prépare ces paquets originaux, les publie
 et les invoque dans Docker pour qualifier la conservation au-delà de la limite
-d’édition. Le runtime de référence reste inchangé.
+d’édition. Le runtime de référence reste inchangé. Le
+[complément qualifié](../docs/evidence/code-editor-source-limits-dev-2026-11-12.json) passe38groupes
+réels, dont13ciblés et cinq invocationsA/B/C, sur406sources/image60938093.
+Les inventaires complets246→250/246 et modes exacts sont recoupés.
 
 `artifacts/draft-capacity.cjs` est publié depuis un brouillon initial puis invoqué
 par son hash par `e2e/code-draft-capacity.mjs`. Cette campagne éprouve les plafonds

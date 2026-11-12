@@ -888,7 +888,13 @@ La reprise des preuves suit [Sources et limites](CODE_EDITOR_SOURCE_LIMITS.md) :
 bornes HTTP/source archivée, compléments console, reconstruction/concurrence,
 puis persistance et interruptions. Le premier passage échoue dans le lecteur
 natif, corrigé ensuite ; sa [preuve séparée](evidence/code-editor-source-limits-reader-failed-dev-2026-11-12.json)
-porte zéro groupe qualifié et le nettoyage complet. Replay à produire.
+porte zéro groupe qualifié et le nettoyage complet. Le
+[replay qualifié](evidence/code-editor-source-limits-dev-2026-11-12.json) passe38groupes
+réels sur406sources59dd4591/image60938093 :13ciblés/25régressions,22captures,
+cinq handlers et conservation exacte246→250/246fichiers. Source archivée,
+texte1Mio+1, chemins512/255octets, diff2000/128Kio et JSON8Mio sont qualifiés.
+Deux fonctions/tokens des passages sont nettoyés,5982artefacts conservés.
+070.1–.5 restent ouverts pour les autres bornes, console et reprises.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 est désormais

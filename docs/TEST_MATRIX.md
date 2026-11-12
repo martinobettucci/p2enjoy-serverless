@@ -1,5 +1,14 @@
 # Matrice de qualification réelle
 
+Le [complément de sources de l’éditeur](evidence/code-editor-source-limits-dev-2026-11-12.json)
+qualifie38groupes réels :13ciblés puis25communs sur406sources59dd4591/image60938093.
+Source archivée, conservation1Mio+1, chemins512/255octets, diff2000/128Kio et
+JSON8Mio passent, avec cinq handlers et inventaires exacts A246→B250/C246.
+22captures inspectées, deux fonctions/tokens nettoyés,5982artefacts conservés.
+Le premier passage NameErrorUUID reste une preuve échouée séparée, zéro groupe
+additionné. Ce complément ne ferme aucun critère de070 ; ses autres bornes,
+parcours console et reprises gardent leurs preuves à produire.
+
 Le client HTTP **Tester une fonction (SLS-071)** est livré et qualifié en DEV.
 La [preuve finale du dernier critère](evidence/function-http-client-task-exception-dev-2026-11-12.json) passe **31 groupes réels** :
 6 ciblés et 25 régressions sur 401 sources 67215a2b, image 60938093 inchangée ;

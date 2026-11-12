@@ -3,10 +3,12 @@
 ## [Non publié]
 
 - SLS-070 : complément de qualification des sources et limites décidé avant
-  son client E2E. Source archivée, gros fichier conservé, chemins en octets,
-  diff2000lignes/128Kio et JSON8Mio à éprouver ; aucune clôture revendiquée.
-  Client HTTPS, paquet et lecteur natif préparés, syntaxe contrôlée ; exécution
-  réelle et régressions restent à produire sur l’image inchangée.
+  son client E2E, puis [qualifié par38groupes réels](docs/evidence/code-editor-source-limits-dev-2026-11-12.json).
+  Source archivée, gros fichier conservé, chemins en octets, diff2000lignes/
+  128Kio et JSON8Mio passent sur406sources59dd4591/image60938093 inchangée.
+  Cinq handlers, inventaires246→250/246 et22captures inspectées ; deux fonctions/
+  tokens des passages nettoyés, parents supprimés et5982artefacts conservés.
+  SLS-070 reste ouverte pour console, ZIP/concurrence et reprises.
   Le premier passage échoue sur l’importUUID manquant dans le lecteur distant,
   après quatre groupes et une invocation ; [échec conservé](docs/evidence/code-editor-source-limits-reader-failed-dev-2026-11-12.json),
   zéro groupe qualifié. Import corrigé, fonction/artefact purgés, jeton révoqué,
