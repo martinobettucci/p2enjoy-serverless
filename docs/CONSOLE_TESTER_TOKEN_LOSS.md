@@ -95,4 +95,5 @@ conditionnel. Une faute du banc reste un reçu préliminaire distinct.
 Ce complément vise les pertes de réponse des mutations temporaires. Il ne prouve
 ni la source/routes indisponible, ni l'exception inattendue d'une tâche Python
 vivante, ni toute la campagne de plateforme. Ces restes demeurent inscrits dans
-071.2/.6 et les unités transversales. Statut : spécifié, non implémenté/non exécuté.
+071.2/.6 et les unités transversales. Statut : opérateur et client implémentés,
+relecture ciblée en cours ; non exécutés, aucun nouveau scénario qualifié.

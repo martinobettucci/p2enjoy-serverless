@@ -76,6 +76,21 @@ inactives et base saine. Ce résultat est le statut courant de ces replays.
 Les pertes de réponse des mutations temporaires et les sources/routes
 indisponibles restent des scénarios distincts à réaliser.
 
+## Réponses perdues des jetons temporaires — en réalisation
+
+`node e2e/function-http-client-token-loss.mjs` reçoit le JSON SSO sur stdin
+privée, seul sur le SPARK DEV au repos. Il publie une fonction originale,
+puis utilise `function-http-client-token-operator.py` pour quatre vraies pertes
+de réponse : création/révocation, avant/après commit. L'observateur reconnaît
+uniquement la ligne HTTP publique et les métadonnées syscall du FD exact ; il
+ne lit ni header secret ni réponse contenant le jeton. Gardes indépendantes,
+SIGKILL natif/Docker137, reprise du même CID/image, audit corrélé et absence de
+rejeu sont requis. Le client ferme ensuite la confirmation et consulte la liste
+par l'UI, sans rechercher la valeur perdue ; les invocations réelles vérifient
+l'état des jetons de révocation. Captures desktop/mobile et purges recoupées.
+Contrat : [pertes de jeton](../docs/CONSOLE_TESTER_TOKEN_LOSS.md). Code préparé,
+non encore exécuté ; aucun nouveau résultat qualifié à ce stade.
+
 ## Capacité réelle des brouillons de code
 
 `node e2e/code-draft-capacity.mjs` reçoit les identifiants du SSO réel sur son

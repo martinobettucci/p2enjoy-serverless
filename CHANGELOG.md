@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-071.3/.8 : banc de pertes réelles des réponses de jetons implémenté et
+  relu avant exécution. Quatre barrières avant/après commit, watchdog,
+  confirmations UI, métadonnées et appels200/401 ; aucun nouveau résultat
+  qualifié à ce stade.
+
 - Notes SPARK : état courant010, manuel18chapitres/74paragraphes, image96e5dc4e
   et facette Tester actualisés dans les trois sources de propositions. Les
   notes actives demeurent distinctes jusqu’à adoption par le SPARK ; la
