@@ -1054,6 +1054,9 @@ Critères d'acceptation :
   Python. Réconcilier aussi armement à réponse perdue et unités collectées.
   Ces corrections du banc et le client/lecteur de pile précèdent toute panne ;
   syntaxe seule contrôlée, aucun scénario de ce complément n’est qualifié.
+  Seconde revue : temporaires de reçus par tentative et terminaux immuables
+  ordonnés nativement ; le lecteur doit exposer un échec ultérieur à un succès.
+  Ce reste est corrigé avant le premier essai, sans qualification anticipée.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise

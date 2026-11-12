@@ -7681,3 +7681,21 @@ complète avant abaissement, échec atomique avec phase/limites/helper et alarme
 traitée. Exposer aussi l’unité préparée avant armement et reconnaître systemd
 collecté. Aucun prlimit modificatif ni nouvel attachement n’est exécuté ; les
 deux fichiers sont préparatoires et le client/pile restent à réaliser.
+
+### 12novembre2026 — Opérateur et secours d’exception préparés
+
+Les deux scripts spécialisés composent NativeObserver sans le modifier. Les
+corrections de revue sont appliquées : disparition/zombie via pidfd, identité
+complète avant prlimit, reçus d’échec atomiques et alarme traitée, réconciliation
+d’armement et unité collectée. Syntaxe analysée seulement ; relecture des
+corrections requise avant tout essai. Le client réel et la lecture de pile
+restent à écrire. Aucune mutation de limite ni nouvelle preuve071.6 ; produit,
+manuel et image60938093 restent ceux du checkpoint37.
+
+### 12novembre2026 — Reçus concurrents du secours à corriger avant essai
+
+La seconde revue confirme les cinq corrections puis constate une collision du
+temporaire de succès garde/recover et un ancien succès masquant un échec plus
+récent. Décision avant correction : temporaire unique, reçus terminaux immuables
+par tentative et ordre monotone local ; evidence retourne le dernier terminal,
+succès ou échec. Aucun prlimit modificatif ni essai du complément exécuté.

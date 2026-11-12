@@ -118,8 +118,18 @@ une réponse perdue. Les unités absentes/collectées sont reconnues par leurs
 propriétés natives, même si systemctl retourne un code non nul. Aucun de ces
 constats ne provient d’une exécution de panne ; client/pile restent à écrire.
 
+La seconde revue relève le temporaire commun à deux restaurateurs et la priorité
+inconditionnelle d’un ancien succès sur un échec plus récent. Conserver des
+reçus terminaux immuables par tentative, avec temporaire unique, UUID, début/fin
+et ordre monotone local. Le lecteur choisit le dernier reçu terminal de cette
+unité, succès ou échec, et ne transforme jamais le succès historique en état
+courant. Aucun changement de compteur ou d’infrastructure externe n’est requis.
+
 ## État
 
-Décision et matrice persistées avant code. Seule l’inspection préalable en
-lecture seule a été exécutée. Aucun prlimit modificatif, nouvel attachement ou
-scénario de ce complément n’est encore exécuté ;071.6 et SLS-071 restent ouverts.
+Décision, matrice et constats de revue persistés avant leur code dépendant.
+Opérateur et restaurateur spécialisés implémentés ; syntaxe analysée et
+relecture des corrections en cours. Seule l’inspection préalable en lecture
+seule a été exécutée sur le SPARK. Le client SSO/UI et le lecteur de pile
+restent à écrire. Aucun prlimit modificatif, nouvel attachement ou scénario de
+ce complément n’est exécuté ;071.6 et SLS-071 restent ouverts.
