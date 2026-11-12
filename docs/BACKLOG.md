@@ -974,6 +974,8 @@ Critères d'acceptation :
   et empêcher le décrément du compteur. Refus422 et appels suivants sains à prouver.
   Appliquer aussi avant fetch navigateur les mêmes bornes query/en-têtes et
   interdictions que dans le mode serveur ; préserver les refus HTTP du testeur.
+  Le client de preuve réconcilie aussi une création à réponse5xx inconnue,
+  sans rejouer le POST, et termine ses fermetures indépendamment des erreurs.
 
 Tests exigés :
 

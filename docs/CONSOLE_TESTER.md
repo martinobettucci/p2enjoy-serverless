@@ -149,6 +149,12 @@ L'interface, ses liens et son chapitre de manuel sont implémentés ; build Vite
 local vérifié uniquement. La campagne réelle est en réalisation. Aucun déploiement ni preuve
 fonctionnelle n'est encore revendiqué pour071.
 
+Les intentions de création du client sont enregistrées avant POST, avec absence
+du nom UUID et parent vérifiés. Une réponse perdue ou5xx est réconciliée en
+lecture par ce seul nom/parent, sans rejeu ; un refus4xx certain n'est pas adopté.
+Chaque fermeture est tentée même si la précédente échoue ; le reçu ne devient
+complet qu'après purges, recoupements et fermeture des clients.
+
 Les tests créent et publient un handler original du dépôt : texte, JSON, binaire,
 Unicode/query/en-têtes, Authorization par empreinte, absence cookies/jeton de
 plateforme, statut métier non2xx, redirection vers une seconde vraie fonction
