@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 12novembre2026 — compléments du testeur qualifiés
+
+[46groupes](evidence/function-http-client-ui-admission-dev-2026-11-12.json) passent
+sur8c761c5e et384sources8285798e :16UI,5admission et25régressions,35handlers.
+La correction071.7 retire les messages périmés et rend «1octet» ;38images sont
+inspectées. CORS refusé, IP/ET/OU, arrêts des deux modes, gzip/décompression,
+corps/en-têtes bornés, liens versions/éditeur et corps du manuel sont éprouvés.
+Quatre réceptions JSON partielles :429 au cinquième en128ms sans corps, quatre
+408 après30,088–30,103s ; quatre sorties actives puis429, capacité restituée.
+Huit fonctions des deux passages sont purgées, leurs six jetons révoqués et
+parents supprimés. Backend38/CSS/favicon/référence inchangés depuis43 ; sources,
+image/CID/dates, configurations et5982artefacts encadrent les campagnes.
+071.7 et070.6 sont qualifiés. Les21groupes intermédiaires restent exclus, tout
+comme les43antérieurs. SIGKILL, confidentialité native, source indisponible,
+minuteries UI et campagne complète gardent071ouverte. Les autres critères encore ouverts de070
+restent ouverts ;070.7/.8conservent leurs qualifications antérieures. Aucun travail, bail, réservation ou garde ne subsiste.
+
 ## 12novembre2026 — erreur périmée du testeur à corriger
 
 Les compléments passent16groupes UI puis5admission sura71219d/032ca071,

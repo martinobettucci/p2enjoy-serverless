@@ -209,10 +209,12 @@ contenu essentiel n'est caché pour faire tenir le desktop. Une requête incerta
 n'est jamais rejouée automatiquement. Les confirmations nomment fonction et
 hash lorsqu'une promotion ou un rollback est engagé.
 
-Après publication, les parcours existants donnent les adresses du hash,
-promotion explicite et retour à un hash. Le lien vers **Tester** de070.6 attend
-l'implémentation réelle SLS-071 : aucune commande morte n'est affichée. Ce reste
-est une dépendance interne nommée, pas une clôture anticipée de070.6.
+Après publication, les parcours donnent les adresses du hash, promotion explicite
+et retour à un hash. **Tester la version publiée** ouvre la facette071 sur ce
+hash ; le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+suit réellement ce lien après validation Docker et invoque son code. Avec les
+promotions/pilotes/retour A de la tranche43,070.6 est qualifiée. Les autres
+critères ouverts de070 gardent leurs preuves propres.
 
 Les preuves E2E créent des fonctions originales CJS/ESM par les vraies API et
 formulaires, avec vraie dépendance packagée et fichier binaire. Elles vérifient
@@ -325,7 +327,8 @@ locale, brouillon enregistré et code publié. Ajouter un fichier demande son
 chemin dans le dialog existant, crée un texte vide puis permet son édition.
 Le handler possède son propre dialog. Retirer un texte, le rétablir depuis la
 base et abandonner le brouillon demandent leur confirmation nommée. Aucun
-bouton d’installation de dépendance ni de Tester071 n’est annoncé.
+bouton d’installation de dépendance n’est annoncé. Après publication réussie,
+le lien Tester071 utilise le hash effectivement publié.
 
 Un textarea utilise des LF pour sa valeur API, selon le
 [standard HTML](https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element).
@@ -637,3 +640,15 @@ WAL/SHM sont vérifiés pendant ouverture ; leur disparition normale reste disti
 Ce résultat qualifie les plafonds dans070.3, sans clôturer ce critère ni070.
 Reprises/pertes de réponse du contrôle, limites restantes de diff/ZIP, purge sous
 lecteur vivant, sélection archivée, compléments UI et Tester071 restent ouverts.
+
+## Parcours éditeur vers Tester qualifié
+
+Le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+sur8c761c5e/384sources8285798e ouvre Tester depuis une version pilote et depuis
+une publication Docker de l’éditeur. Les marqueurs exécutés confirment les hashes
+sélectionnés ; une version archivée est refusée sans repli. La tranche43 sur le
+même backend38sources prouve publication B sans promotion, promotion B et retour
+A. Les campagnes conservent leurs époques distinctes, sans réaddition de groupes.
+070.6 est clôturée ; les bornes, reprises et lectures vivantes restantes de070
+restent ouvertes. Les sections de résultats antérieurs conservent leur date,
+leurs images et leurs restes de qualification propres au checkpoint décrit.

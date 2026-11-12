@@ -101,7 +101,7 @@ nommés `WED`, `MON-FRI` et `DEC` maintiennent l'écart SLS-098 ouvert.
 | Journaux (Cockpit, 30 000 par minute et par projet) | **Partiel** : journaux expurgés par invocation | [SLS-072](BACKLOG.md#sls-072) |
 | Métriques | **Partiel** : relevés Docker ponctuels | [SLS-073](BACKLOG.md#sls-073) |
 | Alertes | **À livrer** | [SLS-073](BACKLOG.md#sls-073) |
-| Onglet Test (commande `curl` générée) | **Partiel** : client HTTP déployé, [43groupes réels](evidence/function-http-client-dev-2026-11-12.json) ; annulation UI/CORS refusé/IP/saturation/reprise ouverts | [SLS-071](BACKLOG.md#sls-071) |
+| Onglet Test (commande `curl` générée) | **Partiel** : client HTTP déployé, [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json) : UI/CORS/IP/annulation/saturation ; reprise et compléments ouverts | [SLS-071](BACKLOG.md#sls-071) |
 
 ### Serverless Jobs
 

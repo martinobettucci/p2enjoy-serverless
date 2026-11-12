@@ -18,14 +18,18 @@ jetons révoqués. Le premier passage13reste exclu.
 La campagne ne ferme pas seule les autres scénarios du [contrat](../docs/CONSOLE_TESTER.md),
 notamment les interruptions et les régressions complètes.
 
-Deux compléments distincts sont implémentés, non exécutés :
+Deux compléments distincts passent avec la correction071.7 :
 `node e2e/function-http-client-ui.mjs` pour les corps, refus locaux, politiques,
 annulations, gzip, révocation, liens et manuel ;
 `node e2e/function-http-client-admission.mjs` pour quatre vrais JSON HTTPS
 partiels puis429/408 et quatre relais actifs puis429. Même stdin SSO privée,
 objets confinés, purges et reçus UUID. Le fixture canonique est étendu, sans
 nouveau produit/conteneur ni source de substitution. Les18groupes initiaux
-restent dans leur époque382sources ; les compléments auront leur propre index.
+restent dans leur époque382sources. Le [complément46](../docs/evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+passe16UI+5admission+25régressions sur384sources8285798e/8c761c5e,35handlers
+et38captures inspectées. Quatre fonctions nominales et quatre intermédiaires
+sont purgées ; six jetons révoqués. Les21intermédiaires sont exclus après revue
+visuelle puis correction des messages/singulier et replay complet.
 
 ## Capacité réelle des brouillons de code
 

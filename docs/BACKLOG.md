@@ -881,11 +881,13 @@ La [capacité des brouillons](CODE_DRAFT_CAPACITY.md) est qualifiée par
 [42groupes réels](evidence/code-draft-capacity-dev-2026-11-12.json) sur375sources25a4152 :32/128brouillons,
 64Mio exacts de ciphertext, refus atomiques, libération et purge. Une publication
 initiale est invoquée dans Docker ;66fonctions des deux passages sont purgées.
-Le préliminaire17reste exclu ;070.1–.6restent ouverts.
+Le préliminaire17reste exclu. Le [complément46du testeur](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+qualifie ensuite070.6 ;070.1–.5restent ouverts.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
-[CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 dépend de
-l'implémentation réelle SLS-071 ; il ne sera pas remplacé par une commande morte.
+[CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 est désormais
+implémenté et qualifié avec la tranche réelle SLS-071 ; les autres preuves de
+l’éditeur restent dans leurs critères propres.
 
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de
@@ -905,8 +907,12 @@ Critères d'acceptation :
 - [ ] SLS-070.5 Publication par le pipeline de validation Docker existant, hash et
   déduplication de SLS-074 ; un import refusé conserve la version active et le brouillon,
   avec diagnostic consultable ; handler CJS/ESM validé avec les vrais modules.
-- [ ] SLS-070.6 Après publication : lien vers le test de SLS-071, promotion explicite ou
-  pilote, retour à un hash précédent.
+- [x] SLS-070.6 Après publication : lien vers le test de SLS-071, promotion explicite ou
+  pilote, retour à un hash précédent. Le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+  suit le lien d’une version pilote puis celui de la publication réelle de
+  l’éditeur vers le hash exécuté ; archivage refuse sans repli. La [tranche43](evidence/function-http-client-dev-2026-11-12.json)
+  prouve les promotions A/B et le retour A, sur le même backend38sources.
+  Ces campagnes conservent leurs époques et ne sont pas additionnées.
 - [x] SLS-070.7 Réception des gros enregistrements bornée avant allocation :
   quatre corps partiels, cinquième429 en107ms avec0octet de corps ; quatre408
   après30,140–30,197s, requêtes exactes recoupées dans les logs natifs. Lecture
@@ -939,10 +945,11 @@ Tests exigés :
 <a id="sls-071"></a>
 ## SLS-071 — Client HTTP intégré par fonction
 
-Statut : [~] — backend et facette Tester déployés en DEV sur032ca071 ;
-[première tranche43groupes](evidence/function-http-client-dev-2026-11-12.json)
-sur382sources46a59128.27handlers,900s réelles et27captures recoupés ;
-manuel18chapitres/74paragraphes. Aucun critère entier n’est encore clos.
+Statut : [~] — backend et facette Tester déployés en DEV sur8c761c5e.
+[Complément46groupes](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+sur384sources8285798e,35handlers et38captures ; seule071.7 est clôturée.
+La [première tranche43](evidence/function-http-client-dev-2026-11-12.json) garde
+032ca071/382sources et son expiration réelle900s. Manuel18chapitres/74paragraphes.
 Nature : Développer. Dépend de : SLS-066, SLS-074. Ordre : 3.
 Contrat : [client HTTP](CONSOLE_USABILITY.md#client-http-par-fonction) et
 [CONSOLE_TESTER](CONSOLE_TESTER.md). Unité d'ordre3 retenue pour fournir le parcours
@@ -986,7 +993,7 @@ Critères d'acceptation :
   nominales et deux préliminaires purgées, huit jetons révoqués. Les13groupes
   préliminaires restent exclus des43.
 
-- [ ] SLS-071.7 Retirer les erreurs et confirmations de composition dès que leur
+- [x] SLS-071.7 Retirer les erreurs et confirmations de composition dès que leur
   saisie change. Revue du passage UI f4908538 : après refus d’un fichier>1Mio,
   le choix JSON laissait « Le fichier dépasse1Mio » à côté du nouveau corps et
   du cURL. Effacer ces messages sur changement des champs de composition,
@@ -995,6 +1002,10 @@ Critères d'acceptation :
   passage JSON, correction de JSON invalide et modification après copie cURL.
   La même revue relève «1octets» : afficher le singulier pour un seul octet
   et vérifier ce compteur avec le vrai corps JSON invalide d’un octet.
+  Le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+  sur8c761c5e prouve retrait après fichier/JSON, correction de JSON invalide et
+  modification après copie ; nouveau refus conservé et singulier vérifié.
+  38captures sont inspectées ; le passage21antérieur reste exclu.
 
 Tests exigés :
 

@@ -1,5 +1,18 @@
 # Plan de contrôle
 
+Le [complément UI/admission du testeur](../docs/CONSOLE_TESTER.md) est qualifié en
+DEV sur8c761c5e : [46groupes réels](../docs/evidence/function-http-client-ui-admission-dev-2026-11-12.json),
+16UI,5admission et25régressions, sur384sources8285798e.35handlers et38captures
+inspectées recoupent corps, CORS/IP, annulation, gzip, limites et liens par hash.
+Quatre réceptions JSON partielles donnent429 au cinquième en128ms sans corps,
+puis quatre408 après30,088–30,103s ; quatre relais actifs refusent aussi le
+cinquième puis rendent leur capacité. Les messages périmés et «1octets» sont
+corrigés ;071.7 et le lien éditeur070.6 sont qualifiés. Huit fonctions de tous
+les passages du complément sont purgées, six jetons révoqués et5982artefacts
+conservés. SLS-071 reste ouverte pour SIGKILL, confidentialité native, source
+indisponible et temporisation UI notamment. Les checkpoints plus bas gardent
+leurs propres sources/images ; leurs groupes ne sont pas additionnés.
+
 ## Client HTTP de fonction — première tranche SLS-071
 
 [CONSOLE_TESTER](../docs/CONSOLE_TESTER.md) décrit le jeton Read temporaire900s,

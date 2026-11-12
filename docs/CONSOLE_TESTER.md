@@ -227,8 +227,15 @@ reçoivent dès leur création un collecteur de rejet, avant tout sondage ; leur
 jonction est aussi garantie au finally. Ces deux groupes forment chacun une
 seule charge concurrente, jamais deux scénarios exécutés en parallèle.
 
-Statut de ce complément : préparé/relu, non exécuté ; SIGKILL et autres
-compléments restent séparés et l’unité demeure ouverte.
+Statut : le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+passe16UI,5admission et25régressions sur384sources8285798e et8c761c5e.
+35handlers, sept candidats publiés et six révisions conservées avant purge sont
+recoupés. Huit fonctions des passages nominal/intermédiaire sont purgées, six
+jetons révoqués ;38images inspectées. Quatre réceptions donnent quatre408
+après30,088–30,103s, cinquième429 en128ms avant corps ; les quatre sorties
+actives rendent aussi leur capacité.071.7 et070.6 sont qualifiés,071reste
+ouverte pour SIGKILL, confidentialité native, source indisponible, délais UI et
+régression complète. La tranche43 et l’intermédiaire21ne sont pas réadditionnés.
 
 ## Messages de composition périmés — correction071.7
 
@@ -244,6 +251,10 @@ suivi. Une sélection de fichier invalide conserve son refus jusqu’à la proch
 correction ; le changement d’objet fichier ne doit pas effacer ce refus aussitôt.
 La revue relève aussi le pluriel «1octets» : le compteur prend le singulier
 pour un seul octet, sans modifier sa mesure UTF-8.
-Cette correction UI seule sera reconstruite/déployée puis les16+5groupes et
-les régressions rejoués sur le nouvel artefact. Le passage21initial reste
-intermédiaire, sans ajout à une preuve finale.
+Cette correction UI est déployée sur8c761c5e après backup natif, backend38sources
+inchangé, puis16+5groupes et25régressions passent. Les16vues ciblées nominales
+ne montrent plus ces défauts, complétées par22vues de régression inspectées.
+071.7 est qualifiée. Le passage21initial reste intermédiaire et exclu des46.
+Le manuel compilé avec la règle actualisée correspond à18chapitres/74paragraphes.
+Les recoupements embarqués/HTTPS encadrent cette fois l’ensemble des campagnes ;
+configurations, référence et5982artefacts antérieurs sont conservés.

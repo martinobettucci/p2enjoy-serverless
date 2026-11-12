@@ -1,6 +1,19 @@
 # P2Enjoy Serverless
 
-Le client HTTP [Tester une fonction](docs/CONSOLE_TESTER.md) est déployé en DEV
+Le [complément UI/admission du testeur](docs/CONSOLE_TESTER.md) est qualifié en
+DEV sur8c761c5e : [46groupes réels](docs/evidence/function-http-client-ui-admission-dev-2026-11-12.json),
+16UI,5admission et25régressions, sur384sources8285798e.35handlers et38captures
+inspectées recoupent corps, CORS/IP, annulation, gzip, limites et liens par hash.
+Quatre réceptions JSON partielles donnent429 au cinquième en128ms sans corps,
+puis quatre408 après30,088–30,103s ; quatre relais actifs refusent aussi le
+cinquième puis rendent leur capacité. Les messages périmés et «1octets» sont
+corrigés ;071.7 et le lien éditeur070.6 sont qualifiés. Huit fonctions de tous
+les passages du complément sont purgées, six jetons révoqués et5982artefacts
+conservés. SLS-071 reste ouverte pour SIGKILL, confidentialité native, source
+indisponible et temporisation UI notamment. Les checkpoints plus bas gardent
+leurs propres sources/images ; leurs groupes ne sont pas additionnés.
+
+Le premier client HTTP [Tester une fonction](docs/CONSOLE_TESTER.md) a été qualifié
 sur032ca071. Sa [première preuve](docs/evidence/function-http-client-dev-2026-11-12.json)
 passe43groupes réels :18ciblés et25régressions sur382sources46a59128.
 27handlers Docker, expiration réelle900s, corps1Mio/réponse6Mio, refus bornés,
@@ -28,7 +41,7 @@ régression sont inspectées, les66fonctions des deux passages purgées et les
 5982artefacts antérieurs conservés. Aucun critère supplémentaire de070 ne ferme.
 
 Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
-sur e81007c5 et sont conservées dans l’image courante032ca071. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+sur e81007c5 et sont conservées dans l’image courante8c761c5e. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
 passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
 JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
 manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans

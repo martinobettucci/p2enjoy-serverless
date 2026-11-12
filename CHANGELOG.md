@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- SLS-071.7 et parcours éditeur070.6 qualifiés en DEV sur8c761c5e :
+  [46groupes](docs/evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+  sur384sources8285798e,35handlers et38captures inspectées. CORS refusé,
+  IP/ET/OU, annulation, gzip, bornes, messages retirés à la saisie et liens par
+  hash sont éprouvés. Quatre réceptions partielles puis429 en128ms et quatre408
+  après30s ; quatre sorties actives puis429 et capacité rétablie. Huit fonctions
+  des deux passages purgées, six jetons révoqués. Les21groupes intermédiaires
+  et43antérieurs restent exclus des46. SLS-071 reste ouverte.
+
 - SLS-071 : première facette Tester déployée en DEV sur032ca071.
   [43groupes réels](docs/evidence/function-http-client-dev-2026-11-12.json) passent
   sur382sources46a59128 :18ciblés et25régressions,27handlers, expiration900s

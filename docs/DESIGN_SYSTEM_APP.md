@@ -17,7 +17,10 @@ hashes et URL restent entiers. Le lien de corrélation ouvre les détails et le
 journal existants. Source indisponible retire les anciennes adresses et résultats.
 La [première tranche43groupes](evidence/function-http-client-dev-2026-11-12.json)
 recoupe27captures inspectées, dont cinq du testeur. Certaines ne cadrent qu’une
-partie de la réponse ; les compléments clavier/tablette/erreurs restent ouverts.
+partie de la réponse. Le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
+ajoute38images inspectées, dont16vues du testeur et du corps de son manuel :
+clavier/tablette, refus CORS, annulation, gzip et messages périmés corrigés.
+071.7 est qualifiée ; l’unité conserve ses autres preuves ouvertes.
 
 ## Statut
 
