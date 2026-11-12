@@ -50,6 +50,12 @@ variantes ASCII/JSON/base64 utiles sont comparées en mémoire. La preuve exige
 absence des valeurs et de leurs représentations pertinentes ; les identifiants
 et traces de refus attendus doivent exister, pour éviter un succès sur logs vides.
 Le prérequis prend l’heure réelle du SPARK ; l’horloge n’est jamais modifiée.
+Après la recherche négative, une fonction témoin journalise volontairement une
+valeur publique `public-log-witness-UUID`, distincte de tous les identifiants
+confidentiels. Un second passage du lecteur doit la trouver dans les logs
+réels et ne restituer que son index/SHA. Ce contrôle positif prouve que le
+lecteur ne conclut pas toujours à l’absence ; il n’expose aucun vrai jeton et
+n’entre pas dans la revendication d’absence des sentinelles confidentielles.
 
 Les refus422, scopes étrangers sur le détail d’invocation, UUID étranger et
 révocation sont éprouvés par requêtes réelles. Le manuel et les captures
@@ -117,6 +123,8 @@ sans inférer un échec certain du handler depuis le seul statut du proxy.
 L’indisponibilité de `/spark/routes` et les dernières bornes/non-régressions
 restent des preuves distinctes. Ni ce plan ni un SIGKILL seul ne clôturent071.
 Les messages, tableaux d’état et preuves continuent à distinguer implémenté,
-exécuté, inspecté et qualifié. Statut : client échéances/confidentialité et inspecteur implémentés, syntaxes
-Node/Python vérifiées uniquement ; aucun scénario nouveau exécuté. Le client
+exécuté, inspecté et qualifié. Statut : premier passage de9groupes réussi, avec deux fonctions purgées et
+valeurs en mémoire uniquement ; reçu5f3ace72 conservé comme intermédiaire.
+Le contrôle positif du lecteur est ajouté avant qualification finale ; sa
+réalisation et son replay restent à faire. Le client
 et l’opérateur de coupure restent spécifiés, non implémentés.

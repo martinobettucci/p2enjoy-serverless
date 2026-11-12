@@ -977,6 +977,9 @@ Critères d'acceptation :
   champ de log brut non validé, même s’il contient une fuite ; UUID/statut
   validés et SHA de route seulement. Les observations de réponse interceptent
   aussi un échec de décodage asynchrone et sont jointes avant clôture.
+  Le lecteur est éprouvé négativement avec les sentinelles confidentielles,
+  puis positivement par une vraie trace volontaire de témoin public, retournée
+  uniquement par index/SHA. Le premier9groupes reste intermédiaire.
 - [ ] SLS-071.4 Annulation qui distingue l'arrêt de l'attente de l'issue du handler déjà
   admis ; aucun rejeu automatique d'une invocation incertaine ; refus de la passerelle
   restitués fidèlement.

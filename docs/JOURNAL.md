@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 12novembre2026 — premier passage échéances/confidentialité
+
+Le client5f3ace72 passe9groupes sur8c761c5e : délais UI1s, handler4s encore
+actif puis terminé une fois, droits du détail et absence de huit sentinelles
+avec variantes dans les vrais logs Docker/invocations/audits. Deux fonctions
+purgées, reçu complet conservé mais non publié comme clôture. Décision avant
+ajout : un témoin public volontairement journalisé éprouve le chemin positif
+du lecteur, avec sortie index/SHA seulement. Les vraies valeurs confidentielles
+restent distinctes ; aucune substitution ni injection de fausse ligne de log.
+Le client et l’opérateur KILL restent à réaliser.
+
 ## 12novembre2026 — suite des preuves du testeur
 
 Le [plan](CONSOLE_TESTER_FAILURES.md) fixe avant code les échéances UI1s,
