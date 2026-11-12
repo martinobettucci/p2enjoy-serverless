@@ -20,7 +20,13 @@ recoupe27captures inspectées, dont cinq du testeur. Certaines ne cadrent qu’u
 partie de la réponse. Le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
 ajoute38images inspectées, dont16vues du testeur et du corps de son manuel :
 clavier/tablette, refus CORS, annulation, gzip et messages périmés corrigés.
-071.7 est qualifiée ; l’unité conserve ses autres preuves ouvertes.
+071.7 est qualifiée. La [preuve42](evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json)
+ajoute27captures inspectées, dont cinq des délais, coupure, refus certain et
+réponse après reprise. Le502 proxy après admission montre Issue inconnue ;
+le vrai503 du contrôle avant émission conserve son alerte. Aucun nouveau
+style ni composant n’est ajouté. Les critères071.1/.4/.5 sont qualifiés avec
+leurs checkpoints propres ; sources indisponibles et pertes des mutations
+temporaires gardent l’unité ouverte.
 
 ## Statut
 

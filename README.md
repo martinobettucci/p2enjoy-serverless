@@ -1,5 +1,17 @@
 # P2Enjoy Serverless
 
+Le [complément reprise/confidentialité du testeur](docs/evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json)
+est qualifié en DEV sur96e5dc4e :42groupes réels,7reprise/10confidentialité et
+25régressions, sur389sources039c4c97.12handlers et27captures inspectées
+recoupent SIGKILL natif, reprise unique sans rejeu, véritable503 avant émission,
+délais UI1s et huit sentinelles absentes des logs/audits réels avec témoin positif.
+Le502 proxy après admission est désormais présenté comme Issue inconnue.
+Quatre fonctions nominales et huit préliminaires sont purgées, neuf jetons
+révoqués et5982artefacts antérieurs conservés.071.1/.4/.5 sont qualifiés en
+référençant leurs checkpoints respectifs ;071reste ouverte pour les sources
+indisponibles, pertes de réponse des mutations temporaires, exception inattendue
+d’une tâche et campagne complète. Les43 et46 gardent leurs époques distinctes.
+
 Le [complément UI/admission du testeur](docs/CONSOLE_TESTER.md) est qualifié en
 DEV sur8c761c5e : [46groupes réels](docs/evidence/function-http-client-ui-admission-dev-2026-11-12.json),
 16UI,5admission et25régressions, sur384sources8285798e.35handlers et38captures
@@ -41,7 +53,7 @@ régression sont inspectées, les66fonctions des deux passages purgées et les
 5982artefacts antérieurs conservés. Aucun critère supplémentaire de070 ne ferme.
 
 Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
-sur e81007c5 et sont conservées dans l’image courante8c761c5e. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+sur e81007c5 et sont conservées dans l’image courante96e5dc4e. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
 passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
 JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
 manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans
@@ -50,8 +62,8 @@ reste ouverte. Lors de cette preuve SSO, le manuel servi correspondait à
 16 chapitres et 57 paragraphes.
 
 **La plateforme demandée n'est pas encore entièrement livrée.** Favoris,
-actions en masse, compléments de l’éditeur, client HTTP par fonction, journaux
-avancés et monitoring historique restent à implémenter. Le moteur des crons du manifeste est
+actions en masse, compléments de l’éditeur, journaux avancés et monitoring
+historique restent à livrer ; le client HTTP intégré reste à compléter et qualifier. Le moteur des crons du manifeste est
 déployé et sa qualification DEV est en cours ; les jobs de console, la compatibilité
 complète du projet de référence, la parité avec Scaleway Serverless
 ([matrice](docs/SCALEWAY_PARITY.md)) et un guide d'exploitation rejoué restent à

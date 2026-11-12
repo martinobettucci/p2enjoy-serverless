@@ -44,8 +44,8 @@ bornes et une échéance ; un manque fait échouer. Aucune capture n’est effec
 pendant la saisie confidentielle ; les vues des délais ne portent que delay4.
 Un premier passage de9groupes est conservé comme intermédiaire. Le passage
 de10groupes dd3b50db réussit aussi le contrôle positif : une vraie trace
-volontaire de témoin public est trouvée sans être réémise. Les deux captures et
-les régressions restent à recouper avant qualification.
+volontaire de témoin public est trouvée sans être réémise. Ce passage reste
+préliminaire ; le replay qualifié avec régressions est décrit ci-dessous.
 
 `node e2e/function-http-client-recovery.mjs` reçoit la même stdin SSO privée et
 utilise `function-http-client-recovery-operator.py` sur le seul SPARK DEV, seul
@@ -64,8 +64,17 @@ a ensuite reproduit le défaut UI sur80eca655 : proxy502 après SIGKILL, reprise
 native unique sans rejeu, mais refus certain affiché. La correction071.8 ajoute
 la provenance réelle du contrôle ; le client exige aussi un vrai503 avant
 émission sous `refusal-lock`, verrou SQLite15s sans DML, release/EOF/échéance
-et processus joints. Build, bascule et replay corrigé restent à exécuter.
+et processus joints. Build et bascule sont ensuite effectués, puis le replay
+corrigé passe sur96e5dc4e.
 Ne pas lancer en parallèle d’un autre scénario.
+
+La [preuve42](../docs/evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json)
+qualifie les replays993fbeda/84287810 puis25régressions sur96e5dc4e,
+389sources039c4c97 :12handlers,27captures inspectées,12fonctions de tous les
+passages purgées et9jetons révoqués. Les trois opérateurs sont joints, gardes
+inactives et base saine. Ce résultat est le statut courant de ces replays.
+Les pertes de réponse des mutations temporaires et les sources/routes
+indisponibles restent des scénarios distincts à réaliser.
 
 ## Capacité réelle des brouillons de code
 

@@ -2,8 +2,30 @@
 
 Complément de [SLS-071](BACKLOG.md#sls-071), après les tranches43 et46.
 Ces checkpoints restent immuables ; aucun de leurs groupes n’est réadditionné.
-La source produit actuelle est8c761c5e. Ce document fixe la preuve avant code
-supplémentaire, sans revendiquer un scénario encore non exécuté.
+Le plan initial part de8c761c5e. La correction déployée et le replay qualifié
+sont décrits ci-dessous ; les paragraphes de décision gardent leur contexte.
+
+## Résultat qualifié du complément42
+
+La [preuve42](evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json) porte389sources039c4c97 du commit515f54a
+et l’image96e5dc4e :7groupes de reprise,10de confidentialité,25régressions,
+12handlers et27captures inspectées. Le SIGKILL est constaté nativement avant
+fin minimale du handler, Docker137, reprise du même CID/image et observation
+unique sans rejeu. Le502 du proxy sans marque donne Issue inconnue ; le vrai503
+du contrôle sous verrou SQLite sans DML reste un refus visible sans invocation.
+Le watchdog indépendant, les trois processus opérateurs et leurs gardes sont
+joints. Les délais UI1s expirent avec un handler4s, qui termine une seule fois.
+Huit sentinelles/variantes sont absentes des vrais logs/audits ; la trace publique
+positive est détectée par index/SHA. Les deux captures des délais sont inspectées.
+Quatre fonctions nominales et huit préliminaires sont purgées, neuf jetons sont
+révoqués et parents supprimés ; intégrité/FK, dix migrations et5982artefacts
+antérieurs recoupés. Aucune variable, secret ou route n’est modifiée.
+
+Les quatre passages préliminaires et les checkpoints43/46 ne sont pas ajoutés
+aux42.071.1/.4/.5 sont qualifiés avec leurs références propres.071.2/.3/.6/.8
+restent ouverts : source/routes indisponible, réponse perdue des mutations de
+jeton, exception inattendue d’une tâche avec contrôle vivant et campagne complète.
+L’expiration réelle900s reste la preuve43, pas une nouvelle mesure dans42.
 
 ## Périmètre
 
@@ -123,10 +145,10 @@ recoupés avant succès.
 
 ## Provenance d’une erreur HTTP du premier trajet
 
-La revue statique constate que `api()` attribue un statut à tout non2xx, y
+Avant correction sur8c761c5e, la revue statique constate que `api()` attribue un statut à tout non2xx, y
 compris un HTML502 de proxy, puis que `send()` traite ce statut comme un refus
-de gestion. Aucun marqueur de provenance n’existe actuellement. C’est une
-limite à mesurer lors de la coupure, pas une preuve de réponse déjà reçue.
+de gestion. Aucun marqueur de provenance n’existait alors. Cette limite est ensuite
+reproduite par80eca655, corrigée et rejouée dans42.
 
 Le test exige une issue inconnue lorsqu’une coupure après admission prive la
 console du résultat du contrôle. Il ne suffit pas de classer tous les503 comme
@@ -139,15 +161,11 @@ sans inférer un échec certain du handler depuis le seul statut du proxy.
 
 L’indisponibilité de `/spark/routes` et les dernières bornes/non-régressions
 restent des preuves distinctes. Ni ce plan ni un SIGKILL seul ne clôturent071.
-Les messages, tableaux d’état et preuves continuent à distinguer implémenté,
-exécuté, inspecté et qualifié. Statut : le passage de10groupes dd3b50db réussit,
-y compris la détection positive de la vraie trace témoin. Deux fonctions sont
-purgées, les sentinelles confidentielles restent en mémoire et les deux captures
-des délais attendent leur inspection. Le reçu5f3ace72 de9groupes reste
-intermédiaire. Ces résultats ne sont pas encore un checkpoint qualifié avec
-régressions et recoupement final. Le client et l’opérateur de coupure sont
-implémentés et relus pour la preuve ; le premier watchdog réel échoue sur le
-client, avant la coupure après admission qui reste à faire (voir ci-dessous).
+Les messages, tableaux d’état et preuves distinguent implémenté, exécuté,
+inspecté et qualifié. Les9groupes5f3ace72 puis10groupesdd3b50db restent des
+passages préliminaires sur8c761c5e ; le replay84287810 est inclus dans42 sur
+96e5dc4e, avec inspections et régressions. Les coupures3360afcd/80eca655 restent
+échouées ; le replay993fbeda qualifie la reprise et le classement UI corrigé.
 
 ## Premier passage réel du banc de reprise
 

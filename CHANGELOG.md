@@ -2,15 +2,13 @@
 
 ## [Non publié]
 
-- SLS-071.8 : correction implémentée, en attente de déploiement et qualification.
-  Le vrai502 proxy après SIGKILL était présenté comme refus certain ; distinguer
-  maintenant la provenance des réponses du contrôle, sans rejeu. Un vrai503
-  avant émission est prévu sous verrou SQLite sans écriture. Le banc de coupure
-  réelle est implémenté et reproduit le défaut sur8c761c5e.
-  Garde indépendante, identité CID/image/génération et PID, reçu natif du
-  SIGKILL, jonction du mutateur et SSH borné précèdent la reprise du même
-  conteneur. Le passage de confidentialité10groupes réussit avec vrai témoin
-  de détection ; qualification finale et replay corrigé restent à éprouver.
+- SLS-071 : [42groupes réels](docs/evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json)
+  qualifiés sur96e5dc4e/389sources039c4c97 :7reprise,10confidentialité,
+  25régressions. SIGKILL natif, Docker137, reprise unique,502 proxy ⇒ Issue
+  inconnue, vrai503 contrôle ⇒ refus avant émission, délais UI et lecteur privé
+  avec témoin positif.12handlers/27captures recoupés ;12fonctions de tous les
+  passages purgées,9jetons révoqués,5982artefacts conservés.071.1/.4/.5 sont
+  qualifiés avec leurs checkpoints propres.071.2/.3/.6/.8 restent ouverts.
 
 - SLS-071.7 et parcours éditeur070.6 qualifiés en DEV sur8c761c5e :
   [46groupes](docs/evidence/function-http-client-ui-admission-dev-2026-11-12.json)

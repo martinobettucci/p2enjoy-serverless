@@ -269,5 +269,10 @@ marque les véritables réponses API du contrôle et reconnaît leur erreur JSON
 les pertes du trajet de gestion restent inconnues. Le statut HTTP seul ne
 suffit plus, y compris pour les mutations de jeton temporaire. Un vrai503 du
 contrôle avant émission reste un refus visible, éprouvé par verrou SQLite
-sans écriture de données. Correction implémentée, non encore déployée ni
-rejouée ; le reçu échoué n’est pas une qualification de071.4/.8.
+sans écriture de données. La [preuve42](evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json)
+qualifie cette distinction pour l’invocation sur96e5dc4e/389sources039c4c97 :
+7reprise,10confidentialité et25régressions,12handlers,27captures inspectées.
+Le reçu80eca655 reste échoué ; les pertes de réponse des mutations temporaires
+restent à éprouver, donc071.8 demeure ouverte.071.1/.4/.5 sont qualifiés avec
+leurs références43/46/42 distinctes ;071reste ouverte. Aucun groupe antérieur
+n’est réadditionné.

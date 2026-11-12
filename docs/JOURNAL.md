@@ -1,5 +1,31 @@
 # Journal de cadrage
 
+## 12novembre2026 — reprise et confidentialité du testeur qualifiées
+
+La [preuve42](evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json) passe7groupes reprise,
+10confidentialité puis25régressions sur389sources039c4c97/commit515f54a et
+image96e5dc4e. Relecture du banc puis premier watchdog3360afcd échoué sur
+SSH255/timer MainPID absent, nettoyé ; replay80eca655 reproduit le vrai défaut
+produit après SIGKILL natif : proxy502 présenté comme refus certain. Contrat071.8
+poussé avant correction ; marque fixe API, provenance séparée dans api() et
+replay993fbeda. Issue inconnue après admission, vrai503 du contrôle avant
+émission conservé, unique invocation interrompue et appel neuf réussi.
+
+Le verrou SQLite réel tient5,379s et n’écrit aucune donnée. Les deux délais UI1s
+laissent les handlers4s finir une fois ; huit sentinelles/variantes absentes des
+logs/audits réels, témoin positif réellement détecté sans valeur brute réémise.
+27captures inspectées individuellement, manuel18chapitres/74paragraphes au SHA
+68a1e53f.12handlers nominaux,4fonctions nominales/8préliminaires purgées et
+9jetons révoqués. Santé, intégrité/FK,10migrations, zéro activité/bail/réservation/
+garde et5982artefacts antérieurs recoupés. Référence et empreintes officielles
+inchangées ; contrôle redémarré au même CID/image par sa propre garde.
+
+071.1/.4/.5 sont qualifiés par leurs références43/46/42, sans somme de groupes ;
+071.7 garde46.071.2/.3/.6/.8 restent ouverts pour source indisponible, pertes des
+mutations temporaires et exception inattendue d’une tâche, plus campagne complète.
+Registre d’incohérences absent ; aucun arbitrage ni accès externe requis ici.
+Les preuves préliminaires ne deviennent pas des succès après correction.
+
 ## 12novembre2026 — premier passage échéances/confidentialité
 
 Le client5f3ace72 passe9groupes sur8c761c5e : délais UI1s, handler4s encore
