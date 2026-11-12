@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-070 : [second passage des lecteurs échoué](docs/evidence/code-editor-reader-event-failed-dev-2026-11-12.json)
+  après sept groupes, sur un événement de thread inattendu pendant l’acquisition
+  de quatre lecteurs. Six handlers/helpers et nettoyages recoupés ; zéro groupe
+  qualifié. Diagnostics bruts et rapprochement des enfants hérités décidés
+  avant code ; le replay devra observer une vraie création de worker.
+
 - SLS-070 : [premier passage des lecteurs échoué](docs/evidence/code-editor-reader-guard-join-failed-dev-2026-11-12.json)
   sur414sources/imageb452ef16 : cinq groupes passent puis la jonction du timer
   déjà retiré échoue après secours réussi. Zéro groupe qualifié ; quatre handlers,

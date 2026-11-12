@@ -923,6 +923,11 @@ prouve le secours mais échoue à sa jonction sur timer déjà retiré : cinq gr
 passés, zéro qualifié. Fonction/jeton/parents nettoyés, quatre helpers disparus,
 quatre handlers et conservation recoupés. Correction de jonction décidée avant
 code ; nouveau gel et replay complet requis.
+Le [second passage échoué](evidence/code-editor-reader-event-failed-dev-2026-11-12.json)
+passe sept groupes puis refuse un événement natif après deux lectures retenues.
+Six helpers/handlers et nettoyage complet sont recoupés ; zéro qualifié.
+Diagnostic brut et rapprochement des enfants hérités décidés avant code,
+avec nouveau passage sur workers fraîchement créés après redémarrage DEV gardé.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 est désormais

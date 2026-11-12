@@ -1,5 +1,25 @@
 # Journal de cadrage
 
+## 12 novembre 2026 — événement natif refusé avant quatre lecteurs
+
+Le replay7bdc6702 passe la jonction corrigée et le vrai EMFILE du secours,
+puis échoue au huitième groupe : unexpected_tracee_event après81événements/
+deux lectures retenues. Le diagnostic actuel ne dit pas quel TID/statut a été
+reçu ; aucune cause plus précise n’est présentée comme prouvée. Le premier
+check de threads échoue ; la sortie du helper et le secours donnent une
+restitution terminale réussie. Tous les reçus, y compris ces deux erreurs
+(EMFILE attendu et check de threads refusé), sont conservés dans le brut.
+Six helpers absents, six handlers succeeded, fonction/token/parents nettoyés,
+activité et réservations nulles ;38backend/quatreweb, même contrôle/référence,
+configuration et5982artefacts conservés. Zéro groupe qualifié.
+
+Décision avant code : garder les métadonnées brutes du wait, puis rapprocher
+un enfant hérité arrêté avant son parent, seulement sous identité stricte,
+sans SEIZE répété. Joindre ses liens parent/enfant avant le détachement.
+Le prochain passage doit observer un vrai clone, après backup/redémarrage du
+seul contrôle DEV au repos et nouvelle baseline. La source primaire ptrace
+porte cette sémantique ; le nouveau passage doit prouver son emploi réel.
+
 ## 12 novembre 2026 — secours réussi, jonction du banc refusée
 
 Le passage833a9c59 au gelf17f515 sur414sources est conservé comme échec : cinq

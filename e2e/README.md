@@ -24,7 +24,11 @@ nouveau banc n’est encore qualifié. Le [premier passage](../docs/evidence/cod
 passe cinq groupes puis échoue à la jonction d’un timer déjà retiré après son
 secours réussi. Fonction/jeton/parents et quatre helpers sont nettoyés ; ses
 quatre handlers ne sont ajoutés à aucun replay. La correction de jonction est
-décidée avant code, SLS-070 reste ouverte.
+décidée avant code. Le [second passage](../docs/evidence/code-editor-reader-event-failed-dev-2026-11-12.json)
+passe sept groupes puis refuse un événement natif avec deux lecteurs retenus ;
+six helpers/handlers sont recoupés et les objets nettoyés. Zéro groupe qualifié,
+diagnostic brut et rapprochement des enfants hérités à corriger avant replay.
+SLS-070 reste ouverte.
 
 ## Client HTTP intégré par fonction — en qualification
 

@@ -166,3 +166,33 @@ complet sont requis ; aucune image produit, manuel ou configuration ne change.
 La demande stop est maintenant dissociée de son statut de sortie ; la boucle de
 relecture garde exactement ses exigences et sa borne. Syntaxe contrôlée ; le
 replay E2E et les campagnes communes restent à produire sur ce nouveau gel.
+
+## Second passage et traitement des événements hérités
+
+Le [passage7bdc6702](evidence/code-editor-reader-event-failed-dev-2026-11-12.json)
+au gel032719d/414sources passe sept groupes puis échoue au huitième : le
+répartiteur refuse `unexpected_tracee_event` après81événements et deux lectures
+retenues. Le diagnostic n’a pas encore le TID ni le statut brut de ce wait ;
+un arrêt initial d’enfant observé avant l’événement de son parent reste une
+hypothèse. Le premier check de restitution échoue à joindre tous les threads ;
+la fin du helper puis le secours rendent tous les threads. Six helpers sont
+absents, six handlers recoupés, fonction/token/parents nettoyés et conservation
+complète. Zéro groupe qualifié, aucune régression commune additionnée.
+
+Décision avant code : conserver TID/statut brut/événement/signal du dernier wait
+et la ligne de défaillance, sans buffer. Le répartiteur peut découvrir l’arrêt
+initial PTRACE_EVENT_STOP/SIGTRAP d’un enfant avant GETEVENTMSG de son parent :
+il enregistre alors un thread déjà tracé uniquement si TGID, cgroup et TracerPid
+correspondent au contrôle/helper attendus. Il ne fait aucun nouveau SEIZE.
+L’événement clone du parent rapproche ensuite ce même TID et sa naissance ;
+un doublon incohérent, un autre groupe ou un arrêt différent reste refusé.
+Les liens parent/enfant sont joints avant détachement du principal. Les mêmes
+identités s’appliquent à tous les nouveaux threads et les listes restent bornées.
+
+Pour éprouver réellement la création de workers, le prochain passage partira
+d’un contrôle fraîchement redémarré, après backup SQLite natif et précontrôle
+sans activité ni garde. Ce redémarrage DEV conserve CID/image/données et la
+référence ; seul le démarrage/PID du contrôle change intentionnellement. Une
+nouvelle baseline avant la campagne distingue ce changement des conservations
+exigées pendant chaque épreuve. Le groupe à quatre lecteurs devra observer un
+véritable événement clone ; la seule réutilisation de workers ne suffit pas.
