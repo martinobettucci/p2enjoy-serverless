@@ -535,8 +535,8 @@ valide, après rendu ; changer surface/brouillon l’annule. Le correctif et ses
 captures focalisées restent à qualifier. Concurrence de lecture/mutation et
 focus d’adoption gardent leurs preuves spécifiques à produire dans070.
 La réalisation réutilise ces deux refs et l’effet de layout, sans nouveau style
-ou token. Le manuel et le client E2E sont actualisés ; build local réussi,
-nouveau rendu DEV encore à qualifier. Les captures de l’échec restent leur époque.
+ou token. Le manuel et le client E2E sont actualisés ; builds local/SPARK réussis,
+rendu b452ef16 déployé mais encore à qualifier. Les captures de l’échec restent leur époque.
 
 ## Hash courant du testeur sous erreur de domaines — décision0712
 

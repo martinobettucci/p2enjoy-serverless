@@ -681,5 +681,5 @@ Le premier passage reproduit la perte de focus après les quatre changements de
 page du diff : [échec conservé](evidence/code-editor-console-focus-failed-dev-2026-11-12.json),
 zéro groupe qualifié malgré17passés. La correction et les restes de concurrence/
 adoption sont décidés dans le contrat de compléments avant tout code produit.
-Le correctif génération/focus et le manuel sont implémentés ; build local
-Vite et revue passent, sans nouvelle qualification avant déploiement/replay DEV.
+Le correctif génération/focus et le manuel sont déployés surb452ef16 après
+builds local/SPARK et revue ; le replay DEV reste à produire avant qualification.

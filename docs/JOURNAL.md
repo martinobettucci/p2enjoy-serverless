@@ -7982,3 +7982,13 @@ favicon inchangés. Ce checkpoint ne prétend pas à une qualification : image,
 déploiement DEV et replay18+25 sont à produire. Concurrence réelle enIO,
 non-vol de focus pendant attente, refus/recalages et focusd’adoption gardent
 leurs preuves propres à produire avant fermeture de070.
+
+### 12novembre2026 — Correctif de focus déployé sur le SPARK pour qualification
+
+Build au gel05b91c9,407sources ; imageb452ef16 active, CID19f92eff. Sauvegarde
+SQLite native6b9081ea sous propriétaire1001 avant recréation du seul contrôle.
+Tablecounts conservés hors sessions/login/audit, dix migrations010, intégrité/FK,
+référence, trois fichiers officiels et5982artefacts conservés. Le manuel compilé
+reste18chapitres/74paragraphes avec nouvelle empreinte8a50ffa0 ; aucun paramètre,
+secret, route, dépendance ou migration supplémentaire. Les résultats de build
+et de déploiement sont des prérequis : le replay18UI puis25communs reste à faire.

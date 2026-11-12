@@ -10,19 +10,20 @@ L’invocation du code publié passe la [preuve du moteur](evidence/execution-de
 Expiration, budget et interruption pendant nettoyage restent à qualifier.
 Le parcours UI est spécifié dans [CONSOLE_PUBLICATION](CONSOLE_PUBLICATION.md).
 
-## Correctif de focus Éditeur — déploiement DEV à effectuer
+## Correctif de focus Éditeur — déployé en qualification DEV
 
 Le [correctif SLS-070](CODE_EDITOR_CONSOLE_EXTENSIONS.md) est implémenté après
-reproduction sur60938093, relu et construit localement. Seuls la console et le
-manuel changent ; aucune migration, variable, secret, route, dépendance ou image
-du runtime n’est à ajouter. Le contrôle actif reste60938093 à ce checkpoint.
+reproduction sur60938093, relu et construit sur le SPARK. L’imageb452ef16 est
+maintenant active, CID19f92eff, après sauvegarde SQLite native6b9081ea et
+vérification des tables. Seuls la console et le manuel changent ; aucune
+migration, variable, secret, route, dépendance ou image du runtime n’est ajoutée.
 
-Synchroniser les sources avec gardes SHA, construire l’image contrôle par
-`bash control/dev.sh build` dans le SPARK DEV, sauvegarder SQLite nativement
-au repos sous son propriétaire, puis recréer seulement `serverless-api` par
-Compose avec les deux env_file officiels. Vérifier santé, migrations010,
-référence, configuration et artefacts avant/après. Le replay18UI puis25communs
-et l’inspection des nouvelles captures restent requis avant toute qualification.
+Les sources sont synchronisées avec gardes SHA ; le build utilise
+`bash control/dev.sh build` et seul `serverless-api` est recréé par Compose
+avec les deux env_file officiels. Santé, migrations010, référence, configuration,
+tables et5982artefacts sont conservés. Le manuel compilé conserve18chapitres/
+74paragraphes, nouvelle empreinte8a50ffa0. Le replay18UI puis25communs et
+l’inspection des nouvelles captures restent requis avant toute qualification.
 
 L’extension [SLS-074 — versions par hash](FUNCTION_VERSIONS.md) est déployée
 pour qualification008 : déduplication par paquet, appel épinglé, publication

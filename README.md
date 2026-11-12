@@ -1,5 +1,11 @@
 # P2Enjoy Serverless
 
+Le [correctif de focus de l’éditeur](docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md)
+est déployé en qualification surb452ef16 après backup SQLite et vérification
+de conservation. Le premier passage sur60938093 a reproduit quatre focusBODY ;
+sa preuve échouée reste séparée. Le replay18UI puis25régressions est à produire.
+Les preuves ci-dessous conservent leurs images et leurs époques propres.
+
 Le [complément de sources et limites de l’éditeur](docs/evidence/code-editor-source-limits-dev-2026-11-12.json)
 passe **38 groupes réels** :13ciblés puis25régressions, sur406sources59dd4591,
 image60938093 inchangée. Source archivée, conservation du texte1Mio+1,

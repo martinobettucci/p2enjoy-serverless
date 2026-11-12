@@ -166,7 +166,9 @@ avec activation clavier et captures ciblées supplémentaires. Le manuel suit
 ces gestes sans nouveau chapitre ni paragraphe :18chapitres/74paragraphes.
 
 La revue statique ne relève aucun blocage et le build local Vite passe. Ce sont
-des prérequis, pas une preuve fonctionnelle. Le build de l’image, son déploiement
-sur DEV puis le replay18groupes/25communs restent à produire. Les refus,
+des prérequis, pas une preuve fonctionnelle. Le build SPARK et le déploiement
+réussissent ensuite : imageb452ef16/CID19f92eff, backup SQLite6b9081ea, dix
+migrations/tables/référence/configuration/5982artefacts conservés. Le replay
+18groupes/25communs reste à produire. Les refus,
 recalages, changements de focus et mutations pendant lecture maintenue restent
 à éprouver dans la tranche de concurrence ;070.4 et l’unité restent ouverts.

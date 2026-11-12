@@ -3,8 +3,8 @@
 Le [correctif de focus de l’éditeur](../docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md)
 est implémenté après la reproduction réelle de quatre focusBODY. Refs des titres,
 intention par génération et invalidation des comparaisons remplacées sont relues ;
-le build local Vite passe. Manuel et client18groupes suivent le code. Le nouveau
-rendu n’est pas encore déployé ni qualifié en DEV à ce checkpoint.
+les builds local/SPARK passent. Manuel et client18groupes suivent le code.
+Le rendu est déployé en qualification surb452ef16 ; le replay reste à produire.
 
 Le client HTTP **Tester une fonction (SLS-071)** est livré et qualifié en DEV.
 La [preuve finale du dernier critère](../docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) passe **31 groupes réels** :

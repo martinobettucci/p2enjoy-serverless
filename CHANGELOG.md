@@ -10,7 +10,8 @@
   qualifié,25captures inspectées et14handlers. Fonction/jeton/parents nettoyés,
   13helpers terminés,5982artefacts conservés ; correction décidée avant code.
   Restitution h2/h3 liée à la génération et invalidation du diff implémentées,
-  manuel/client actualisés, revue et build local réussis ; DEV/replay à produire.
+  manuel/client actualisés, revue et builds local/SPARK réussis ; imageb452ef16
+  déployée après backup6b9081ea et conservation des données. Replay à produire.
 
 - SLS-070 : complément de qualification des sources et limites décidé avant
   son client E2E, puis [qualifié par38groupes réels](docs/evidence/code-editor-source-limits-dev-2026-11-12.json).
