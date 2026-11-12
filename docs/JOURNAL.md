@@ -33,7 +33,10 @@ configurations et5982artefacts conservés. Premier passage047e33 :13groupes
 serveur passent (dont bornes exactes/+1 et redirection avec témoin positif),
 puis timeout au parcours UI. Deux fonctions purgées et clients fermés, reçu
 incomplet conservé. Le client doit nommer les étapes UI et capturer l’échec
-pour distinguer défaut de parcours et défaut produit ; aucun succès final.
+pour distinguer défaut de parcours et défaut produit. Lecture du routeur :
+le banc ouvrait `/console`, qui n’est pas le catalogue ; la destination réelle
+est `/console/functions`. Correction du client, produit inchangé, avant replay.
+Aucun succès final revendiqué.
 
 ## 12novembre2026 — capacité réelle des brouillons qualifiée
 
