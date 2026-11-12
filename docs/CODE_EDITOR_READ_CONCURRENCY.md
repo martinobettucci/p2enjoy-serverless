@@ -162,3 +162,7 @@ service : chargés ou absents, tous deux inactifs, MainPID0. Une erreur de stop
 ne devient pas automatiquement un succès ; l’état terminal est toujours relu
 sous la borne50s, et tout état inconnu/actif échoue. Un nouveau gel et le replay
 complet sont requis ; aucune image produit, manuel ou configuration ne change.
+
+La demande stop est maintenant dissociée de son statut de sortie ; la boucle de
+relecture garde exactement ses exigences et sa borne. Syntaxe contrôlée ; le
+replay E2E et les campagnes communes restent à produire sur ce nouveau gel.

@@ -47,7 +47,7 @@ def guard_states(unit):
 
 
 def finish_guard(unit):
-    command(['systemctl','stop',unit+'.timer'])
+    subprocess.run(['systemctl','stop',unit+'.timer'],capture_output=True,timeout=10)
     deadline=time.monotonic()+50
     while True:
         states=guard_states(unit)
