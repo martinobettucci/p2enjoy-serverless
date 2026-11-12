@@ -7657,3 +7657,16 @@ réservation/garde. Dix migrations, intégritéok/FKvide,38backend/4web, manuel
 redémarre le contrôle à08:05:20UTC ; le chargement conserve ce PID/démarrage.
 071.2 fermé par références43/46/32/37 distinctes ;071.6 et campagne complète
 restent ouverts. Aucune unité globale n’est déclarée finie par cette seule preuve.
+
+### 12novembre2026 — Dernier critère du testeur : vraie exception avec PID vivant
+
+Après fermeture071.2 dans060dc3b,071.6 est le seul critère ouvert du client.
+Inspection réelle en lecture seule : Python3.14.10/HTTPX0.28.1, certificat CA
+certifi, PID1007466/naissance508864062, quatre TID et NOFILE1048576/1048576.
+Décision avant code : faute noyau EMFILE à l’ouverture exacte du CA, autres TID
+arrêtés, restauration au syscall-exit avant reprise Python ; garde indépendante
+et preuve de secours distinctes. Même PID puis quatre relais actifs/cinquième429
+et cinq appels sains sont nécessaires. La mort spontanée du traceur laisse une
+fenêtre locale honnêtement bornée, sans exiger de capacité FORGE. Aucune limite
+n’est encore modifiée, aucune exception ni capacité n’est qualifiée à ce stade.
+Contrat CONSOLE_TESTER_TASK_EXCEPTION persisté ; produit et manuel inchangés.

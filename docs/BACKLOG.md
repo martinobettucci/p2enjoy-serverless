@@ -1041,6 +1041,13 @@ Critères d'acceptation :
   exemple cURL copiable sans secret.
 - [ ] SLS-071.6 En-têtes ASCII validés avant normalisation et jonction de toutes
   les tâches avant restitution de capacité, même après exception inattendue.
+  Le [complément d’exception native](CONSOLE_TESTER_TASK_EXCEPTION.md) fixe avant
+  code la faute réelleopenat/EMFILE, restauration NOFILE au syscall-exit, même
+  PID et capacité quatre+cinquième429. Une garde spécialisée restitue avant
+  terminaison pilotée du traceur ; la fenêtre après sa mort spontanée est
+  explicitement bornée et ne devient aucune dépendance FORGE. Seule une lecture
+  initiale du contrôle est faite ; la classe Python et les scénarios restent
+  à reproduire, sans remplacement du constructeur ou certificat.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise
