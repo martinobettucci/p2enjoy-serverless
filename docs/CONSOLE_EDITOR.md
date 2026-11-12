@@ -518,7 +518,7 @@ Le scénario UI ajoute des assertions après frappe et changement de fichier ;
 le manuel suit ce comportement. Code implémenté, preuve de070.8 à produire.
 
 Pendant les mutations autres que l’enregistrement du fichier ouvert, la zone de
-texte sera en lecture seule. Cela évite qu’un retrait/abandon en cours efface une
+texte est en lecture seule. Cela évite qu’un retrait/abandon en cours efface une
 frappe arrivée après sa confirmation. L’enregistrement explicite du fichier
 reste le seul envoi qui accepte de nouvelles frappes, conservées comme saisies
 locales. Le scénario vérifiera ce mode pendant une vraie sauvegarde et un vrai

@@ -132,7 +132,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
   const [directory,setDirectory]=useState(''),[query,setQuery]=useState(''),[search,setSearch]=useState(''),[page,setPage]=useState(0);
   const [tree,setTree]=useState({loading:true}),[treeRevision,setTreeRevision]=useState(0);
   const [path,setPath]=useState(initial.current.get('file')||''),[file,setFile]=useState(null),[fileLoading,setFileLoading]=useState(false),[fileError,setFileError]=useState(null);
-  const [text,setText]=useState(''),[editing,setEditing]=useState(false),[busy,setBusy]=useState(false),[mutationError,setMutationError]=useState(null),[notice,setNotice]=useState('');
+  const [text,setText]=useState(''),[editing,setEditing]=useState(false),[busy,setBusy]=useState(false),[savingFile,setSavingFile]=useState(false),[mutationError,setMutationError]=useState(null),[notice,setNotice]=useState('');
   const [conflict,setConflict]=useState(null),[needsReview,setNeedsReview]=useState(false),[serverCopy,setServerCopy]=useState(null);
   const [dialog,setDialog]=useState(null),[leave,setLeave]=useState(false);
   const [diff,setDiff]=useState(null),[diffError,setDiffError]=useState(null),[diffLoading,setDiffLoading]=useState(false),[diffPage,setDiffPage]=useState(0),[diffPath,setDiffPath]=useState('');
@@ -275,7 +275,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
   async function saveMutation(body,{preserveFile=false}={}) {
     if(busyRef.current||locked)throw new Error('Relisez le brouillon avant de poursuivre.');
     if(!draftRef.current)throw new Error('Créez ou ouvrez votre brouillon.');
-    busyRef.current=true;setBusy(true);setMutationError(null);setNotice('');
+    busyRef.current=true;setBusy(true);setSavingFile(preserveFile);setMutationError(null);setNotice('');
     const previous=draftRef.current,submitted=body.file?.action==='write'?body.file.text:null;
     try {
       const result=await api(prefix+'/code-draft',{method:'PUT',headers:{'If-Match':String(previous.version)},body});
@@ -289,7 +289,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
     } catch(error) {
       if(mounted.current){setMutationError(readable(error));if(error.status===409||!error.status||error.status>=500)setNeedsReview(true);}
       throw error;
-    } finally {busyRef.current=false;if(mounted.current)setBusy(false);}
+    } finally {busyRef.current=false;if(mounted.current){setBusy(false);setSavingFile(false);}}
   }
   async function saveFile() {
     if(bytes(text)>textLimit){setMutationError(new Error('Un fichier est limité à 1 Mio UTF-8.'));return;}
@@ -423,7 +423,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
             <Field label="Rechercher dans le fichier" help="Recherche littérale, casse respectée."><input type="search" maxLength={200} value={find} onChange={event=>{setFind(event.target.value);setMatch(-1);setFindNotice('');}}/></Field>
             <div className="actions"><button onClick={()=>findOccurrence(true)}>Occurrence précédente</button><button onClick={()=>findOccurrence(false)}>Occurrence suivante</button></div><p role="status">{findNotice}</p>
             <Field label={editing?'Code en cours de saisie':'Code enregistré en lecture'} help={editing?'Enregistrer le fichier conserve ce texte dans votre brouillon.':mode==='draft'?'Contenu du brouillon enregistré sur le serveur.':'Contenu de la version source immuable.'}>
-              <textarea ref={fileArea} className="editor-code mono" rows={18} wrap="off" spellCheck={false} autoCapitalize="off" autoCorrect="off" readOnly={!editing} value={displayText(text)} onChange={event=>changeText(event.target.value)}/>
+              <textarea ref={fileArea} className="editor-code mono" rows={18} wrap="off" spellCheck={false} autoCapitalize="off" autoCorrect="off" readOnly={!editing||(busy&&!savingFile)} value={displayText(text)} onChange={event=>changeText(event.target.value)}/>
             </Field>
             {overflow&&<p className="muted">Le code défile horizontalement dans son cadre.</p>}
             {editing&&<><p className="muted">Historique exact : {textHistory.current.past.length} annulation(s), {textHistory.current.future.length} rétablissement(s) · {historyBytes(textHistory.current)} / {historyLimit} octets de fragments UTF-16 · {historySteps} gestes maximum.</p>{historyNotice&&<p className="notice" role="status">{historyNotice}</p>}</>}
