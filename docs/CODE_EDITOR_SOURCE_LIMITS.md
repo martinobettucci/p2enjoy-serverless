@@ -79,3 +79,15 @@ Après le passage ciblé : manuel, routes publiques et connexion sont rejoués
 en série, avec inspection individuelle des captures. Le manuel et le schéma
 restent inchangés tant qu’aucun comportement produit ne change. Une limite
 infirmée impose une reproduction conservée et une décision avant correction.
+
+## Revue du banc avant exécution
+
+La revue relève deux faiblesses de preuve, corrigées avant son gel : un statut
+5xx ne prouve pas l’absence de création, et chaque inventaire pris seul ne
+prouve pas la conservation entre révisions. Le rapprochement d’une intention
+dont le nom était absent consulte donc aussi les issues5xx ; seuls les refus4xx
+certains évitent l’adoption. Le namespace UUID isole les noms de campagne.
+Le lecteur retourne les métadonnées d’inventaire sans contenu ; la comparaison
+exige exactement A + changements attendus pour B et C, avec chaque chemin,
+taille, SHA et mode. Une omission ou une modification avec inventaire cohérent
+reste ainsi détectée. Cette revue n’est pas une preuve E2E acquise.

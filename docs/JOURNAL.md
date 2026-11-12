@@ -7843,3 +7843,13 @@ Le JSON est complété par des espaces valides pour isoler la borne d’envelopp
 les limites de texte/patch ne doivent pas la masquer. Les handlers Docker et
 lectures natives confirment la conservation, sans import local du produit,
 seed SQL ou substitution. Manuel/schéma/image restent inchangés pour ce banc.
+
+### 12novembre2026 — Revue du banc de sources avant son gel
+
+Deux constats vérifiés : le rapprochement du client saute aussi les5xx, dont
+l’issue peut suivre un commit ; la comparaison de chaque artefact à son propre
+inventaire n’exclut pas une omission cohérente. Décision avant correction :
+rapprocher les5xx sous l’intention propre dont le nom était absent et comparer
+les inventaires complets A→B/C aux seules modifications attendues. Aucun
+contenu de source ni ciphertext supplémentaire n’est exporté. La campagne
+reste à exécuter, aucun résultat fonctionnel n’est revendiqué.
