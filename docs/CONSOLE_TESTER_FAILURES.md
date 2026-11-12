@@ -95,6 +95,15 @@ MainPID doivent être nuls. Une identité changée ou un mutateur non joint fait
 échouer la preuve et reste explicitement signalé ; aucune propriété étrangère
 n’est reprise.
 
+La relecture de l’opérateur avant exécution relève une lacune de génération :
+le démarrage initial était enregistré sans être revérifié par les programmes
+de KILL/restauration. Le même CID/image peut avoir redémarré entre-temps. Avant
+tout signal, exiger aussi le StartedAt initial ; après notre propre reprise,
+n’accepter que le StartedAt d’un reçu de restauration déjà écrit sous le même
+verrou. Un démarrage concurrent sans ce reçu fait échouer la preuve. Vérifier
+aussi les empreintes des programmes opérateur/observateur conservées dans
+l’identité. Cette correction du banc précède toute coupure réelle.
+
 Un premier cas perd réellement le pilote après armement, avant appel, pour
 vérifier la restitution indépendante. Le second coupe après handler démarré.
 La reprise doit conserver une seule observation, son hash et la confirmation
@@ -123,8 +132,10 @@ sans inférer un échec certain du handler depuis le seul statut du proxy.
 L’indisponibilité de `/spark/routes` et les dernières bornes/non-régressions
 restent des preuves distinctes. Ni ce plan ni un SIGKILL seul ne clôturent071.
 Les messages, tableaux d’état et preuves continuent à distinguer implémenté,
-exécuté, inspecté et qualifié. Statut : premier passage de9groupes réussi, avec deux fonctions purgées et
-valeurs en mémoire uniquement ; reçu5f3ace72 conservé comme intermédiaire.
-Le contrôle positif du lecteur est ajouté avant qualification finale ; sa
-réalisation et son replay restent à faire. Le client
-et l’opérateur de coupure restent spécifiés, non implémentés.
+exécuté, inspecté et qualifié. Statut : le passage de10groupes dd3b50db réussit,
+y compris la détection positive de la vraie trace témoin. Deux fonctions sont
+purgées, les sentinelles confidentielles restent en mémoire et les deux captures
+des délais attendent leur inspection. Le reçu5f3ace72 de9groupes reste
+intermédiaire. Ces résultats ne sont pas encore un checkpoint qualifié avec
+régressions et recoupement final. Le client et l’opérateur de coupure sont
+implémentés pour la preuve ; relecture et exécution réelle restent à faire.

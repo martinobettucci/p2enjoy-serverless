@@ -955,7 +955,9 @@ Contrat : [client HTTP](CONSOLE_USABILITY.md#client-http-par-fonction) et
 [CONSOLE_TESTER](CONSOLE_TESTER.md). Unité d'ordre3 retenue pour fournir le parcours
 de test de070.6 désormais qualifié ; les autres preuves de070 restent ouvertes.
 Le [plan échéances/confidentialité/reprise](CONSOLE_TESTER_FAILURES.md) précise
-les prochains scénarios réels, non encore exécutés.
+les scénarios complémentaires :10groupes de confidentialité/échéances réussis
+avec témoin positif, encore sans checkpoint final ; client et opérateur de
+coupure implémentés, relecture et exécution réelle à faire.
 
 Résultat attendu : une facette Tester par fonction, de type client HTTP : composer une
 requête, l'envoyer par la vraie passerelle, lire la réponse et retrouver l'appel et ses
@@ -979,7 +981,8 @@ Critères d'acceptation :
   aussi un échec de décodage asynchrone et sont jointes avant clôture.
   Le lecteur est éprouvé négativement avec les sentinelles confidentielles,
   puis positivement par une vraie trace volontaire de témoin public, retournée
-  uniquement par index/SHA. Le premier9groupes reste intermédiaire.
+  uniquement par index/SHA. Le premier9groupes reste intermédiaire ; le passage
+  dd3b50db réussit10groupes dont le témoin, en attente de qualification finale.
 - [ ] SLS-071.4 Annulation qui distingue l'arrêt de l'attente de l'issue du handler déjà
   admis ; aucun rejeu automatique d'une invocation incertaine ; refus de la passerelle
   restitués fidèlement.
@@ -988,7 +991,11 @@ Critères d'acceptation :
 - [ ] SLS-071.6 En-têtes ASCII validés avant normalisation et jonction de toutes
   les tâches avant restitution de capacité, même après exception inattendue.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
-  et empêcher le décrément du compteur. Refus422 répétés puis cinq appels sains
+  et empêcher le décrément du compteur. Relecture du banc de reprise avant
+  exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise
+  reconnue par son propre reçu verrouillé ; le CID/image seul ne distingue pas
+  un redémarrage concurrent. Vérifier les empreintes opérateur/observateur.
+  Refus422 répétés puis cinq appels sains
   passent dans la tranche43 ; saturation et interruption restent à prouver.
   Appliquer aussi avant fetch navigateur les mêmes bornes query/en-têtes et
   interdictions que dans le mode serveur ; préserver les refus HTTP du testeur.
