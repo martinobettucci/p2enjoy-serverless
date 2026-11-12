@@ -75,3 +75,7 @@ contrôlée est un argument public obligatoire du client, fourni par le lanceur 
 partir de son relevé natif ; aucun ancien manifeste n'impose une image périmée.
 Le défaut de hash signalé statiquement reste à reproduire avant correction.
 Aucune panne ni qualification nouvelle à ce stade.
+
+La relecture des locators cible les `dd` des faits Hash exécuté et Identifiant
+de requête : les mêmes valeurs figurent aussi dans les en-têtes repliés. Ce
+ciblage évite une ambiguïté de sélection sans ignorer un élément du produit.

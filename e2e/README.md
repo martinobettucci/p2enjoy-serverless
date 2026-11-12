@@ -98,6 +98,19 @@ porte392sourcescf5244f5/image96e5dc4e. Les deux fonctions sont purgées, quatre
 jetons révoqués, huit observateurs morts et cinq opérateurs nominaux joints.
 071.3/.8 sont qualifiés ; le premier passage reste exclu des32.
 
+## Testeur sous source des domaines refusée — en réalisation
+
+`node e2e/function-http-client-source-access.mjs SHA_IMAGE_CONTROLEE` reçoit le vrai SSO sur stdin
+privée. Le client publie sa fonction originale dans le scope source-access
+strict de la garde existante `invocation-source-permissions.py`. Le fichier
+réel passe000 puis revient à son mode initial sous garde indépendante ; contenu,
+inode, propriétaire et mtime conservés, ctime observé. Sous errno13 confirmé,
+POST de test503 avant émission, vrais appels témoins, Actualiser sans anciennes
+URL/réponses, CSPself, captures desktop/mobile et restitution sont requis.
+`function-http-client-source-inspect.py` recoupe namespace/nonce/descriptions et
+métadonnées natives, sans code ni secret. Contrat : [source du testeur](../docs/CONSOLE_TESTER_SOURCE.md).
+Code préparé, non exécuté ; aucune nouvelle qualification revendiquée.
+
 ## Capacité réelle des brouillons de code
 
 `node e2e/code-draft-capacity.mjs` reçoit les identifiants du SSO réel sur son

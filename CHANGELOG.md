@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-071.2 : banc de refus réel de lecture des domaines préparé, avec la garde
+  SLS-066 inchangée, contrôle du hash/UUID natifs, retrait des résultats périmés
+  et restitution vérifiée. Client et inspecteur relus ; aucun nouveau résultat
+  fonctionnel avant le passage E2E.
+
 - SLS-071.3/.8 qualifiés par [32groupes réels](docs/evidence/function-http-client-token-loss-dev-2026-11-12.json)
   sur392sourcescf5244f5, même image96e5dc4e : quatre coupures avant/après
   commit, watchdog, inconnue sans rejeu, liste UI et appels200/401.32captures
