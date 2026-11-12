@@ -9,6 +9,10 @@ exports.handler=async(event,context)=>{
  const delay=Math.min(10,Math.max(0,Number(query.delay)||0));
  if(delay)await new Promise(resolve=>setTimeout(resolve,delay*1000));
  console.log(JSON.stringify({marker,requestId:context.awsRequestId,phase:'handler-completed'}));
+ if(query.kind==='log-witness'){
+  if(!/^public-log-witness-[0-9a-f-]{36}$/.test(query.value||''))return{statusCode:400,body:'invalid_log_witness'};
+  console.log(query.value);
+ }
  if(query.kind==='redirect')return{statusCode:307,headers:{Location:query.target},body:'Destination non suivie'};
  if(query.kind==='binary'){
   const length=Math.min(6*1024**2,Math.max(0,Number(query.size)||4096));

@@ -57,6 +57,8 @@ présence des cookies/jeton. Ses modes binaire, HTML littéral, redirection et
 attente bornée éprouvent le testeur SLS-071 après publication normale dans Docker.
 Les modes gzip6Mio+1 décodés, réponse brute supérieure et128en-têtes permettent
 de vérifier les limites réelles ; sourceIp provient du vrai contexte de transport.
+Le mode log-witness journalise seulement un marqueur public au format dédié,
+pour éprouver positivement le lecteur privé sur une vraie trace de handler.
 Aucun secret ou corps n’est journalisé par ce handler ; seul son identifiant
 public de requête est tracé. [Contrat](../docs/CONSOLE_TESTER.md).
 
