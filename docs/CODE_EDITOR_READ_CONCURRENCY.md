@@ -129,3 +129,14 @@ abandon pendant attente, le choix volontaire d’un autre focus, les refus et
 recalages et le focus après adoption conservent leurs critères 070.3/.4 ouverts.
 Aucun nouveau comportement produit ni manuel, schéma, variable, secret ou route
 n’est introduit par la seule instrumentation de lecture.
+
+## Banc implémenté, avant premier passage
+
+Le client, le paquet original, le lecteur natif et les deux programmes de
+barrière/secours sont implémentés. Neuf groupes sont prévus, avec sept handlers
+réels : préparation puis un après chacun des six scénarios. Le contrôle des
+syntaxes Python/Node est un prérequis, aucune preuve fonctionnelle acquise.
+La revue de sûreté précède le gel des sources et l’exécution ; les défauts de
+banc trouvés avant ce passage ne sont pas présentés comme des pannes produit.
+La qualification des droits pendant IO, de la purge et des bornes ZIP demeure
+à produire après la qualification propre de cette instrumentation.

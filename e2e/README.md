@@ -1,5 +1,27 @@
 # Qualification de la plateforme
 
+## Lecteurs vivants de l’éditeur — banc préparé, pas encore qualifié
+
+`node e2e/code-editor-read-concurrency.mjs` part de l’accueil et du vrai SSO,
+avec identifiants sur stdin privée. Il publie `editor-reader-lifecycle.cjs` et
+les données originales de `code-editor-read-package.py`, puis exécute neuf
+groupes : entrée, préparation, six scénarios de lecture/restitution/capacité
+et recoupement de sept handlers Docker. Les mêmes requêtes HTTPS sont maintenues
+au véritable read de leur worker par `code-editor-read-operator.py`.
+
+La garde figée `code-editor-read-restore.py` est armée avant SEIZE et ne change
+aucune limite du contrôle. Le scénario `recover-low-fds` impose un vrai EMFILE
+à la seule limite NOFILE de son processus de secours, après jonction du traceur,
+puis la restaure avant reçu d’échec. L’inspection normale suivante doit confirmer
+la santé. Tous les helpers, requêtes, transports SSH et gardes sont joints avant
+purge/révocation. `code-editor-read-inspect.py` relit les inventaires et les
+invocations natifs, sans contenu confidentiel ni écriture SQL.
+
+Un seul scénario à la fois sur le SPARK DEV au repos. Le
+[contrat](../docs/CODE_EDITOR_READ_CONCURRENCY.md) décrit identités, bornes et
+preuves résiduelles. Les syntaxes sont contrôlées ; aucun groupe E2E de ce
+nouveau banc n’est encore qualifié. SLS-070 reste ouverte.
+
 ## Client HTTP intégré par fonction — en qualification
 
 `node e2e/function-http-client.mjs` reçoit le JSON SSO sur stdin privée, seul sur
