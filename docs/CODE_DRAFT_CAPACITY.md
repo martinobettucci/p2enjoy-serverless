@@ -17,6 +17,8 @@ enregistrées avant les POST, après lecture paginée attestant l'absence du nom
 Le namespace porte l'UUID complet. Une réponse certaine autre que201 interdit
 le rapprochement ; seules une création acquittée ou une réponse perdue peuvent
 être rapprochées dans ce périmètre neuf. Aucun objet extérieur n'est supprimé.
+Un vrai409 sur le nom d'une fonction de la campagne vérifie qu'une intention
+refusée n'adopte aucun UUID et laisse l'objet initial accessible et inchangé.
 
 L'opérateur natif lit SQLite sous l'identité de son propriétaire, dans une
 transaction de lecture cohérente : compteurs globaux, métadonnées des seuls

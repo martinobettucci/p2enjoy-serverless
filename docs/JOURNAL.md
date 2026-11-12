@@ -10,6 +10,9 @@ La relecture préalable ajoute une garde de confinement : nom absent avant POST,
 UUID complet et aucun rapprochement après refus certain. Les observations
 externes (registre, CID, configurations, artefacts) sont explicitement séparées
 des métadonnées du client. Décision persistée avant cet ajustement du client.
+Le client de17groupes, son inspecteur natif RO et le module CommonJS original
+sont implémentés ; syntaxes Node/Python et diff valides. Relecture finale et
+campagne réelle restent à terminer ; aucun plafond supplémentaire qualifié ici.
 
 ## 12novembre2026 —070.8 clôturée par39groupes réels
 

@@ -1,5 +1,15 @@
 # Qualification de la plateforme
 
+## Capacité réelle des brouillons de code
+
+`node e2e/code-draft-capacity.mjs` reçoit les identifiants du SSO réel sur son
+stdin privée. Exécuter seul sur le SPARK DEV au repos, après synchronisation
+des sources indexées. Les plafonds32/128 puis64Mio chiffrés sont atteints par
+les API ; `code-draft-capacity-inspect.py` ne lit que des métadonnées natives.
+Une publication initiale originale est invoquée dans Docker avant les archives
+et purges normales. Rapport UUID sous `.local/e2e`, aucun jeton/source dedans.
+Préconditions, calcul exact et nettoyage : [CODE_DRAFT_CAPACITY](../docs/CODE_DRAFT_CAPACITY.md).
+
 ## Parcours de console de l’éditeur — première tranche qualifiée
 
 `node e2e/code-editor-ui.mjs` reçoit le JSON SSO sur stdin privée. Le parcours

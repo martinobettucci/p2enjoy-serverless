@@ -51,6 +51,11 @@ de référence ni son manifeste.
 
 ## Installer, lancer et vérifier
 
+`artifacts/draft-capacity.cjs` est publié depuis un brouillon initial puis invoqué
+par son hash par `e2e/code-draft-capacity.mjs`. Cette campagne éprouve les plafonds
+32/128 et64Mio de ciphertext réel, leur libération et la purge ; contrat :
+[CODE_DRAFT_CAPACITY](../docs/CODE_DRAFT_CAPACITY.md).
+
 Prérequis : Docker Engine avec Compose, Bash. Aucun Node installé sur l'hôte
 n'est requis. L'image Node 24 est verrouillée par digest ; la dépendance YAML
 est verrouillée par `package-lock.json`. Les services externes sont inutiles.
