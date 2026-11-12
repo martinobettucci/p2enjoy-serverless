@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 12novembre2026 — erreur périmée du testeur à corriger
+
+Les compléments passent16groupes UI puis5admission sura71219d/032ca071,
+avec purges terminées. La revue visuelle f4908538 découvre un message de fichier
+hors borne conservé après choix JSON.071.7 et son contrat sont persistés avant
+correction : retirer les messages de composition au changement de saisie,
+conserver le nouveau refus fichier et la vérité du résultat HTTP antérieur.
+Les21groupes restent intermédiaires ; nouveau build et replay ciblé/régressions
+après correction, sans les ajouter à un succès final.
+
 ## 12novembre2026 — préparation des compléments du testeur
 
 La [décision](CONSOLE_TESTER.md#compléments-ui-et-admission--décision-avant-intégration)

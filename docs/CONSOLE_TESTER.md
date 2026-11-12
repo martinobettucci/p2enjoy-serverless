@@ -229,3 +229,19 @@ seule charge concurrente, jamais deux scénarios exécutés en parallèle.
 
 Statut de ce complément : préparé/relu, non exécuté ; SIGKILL et autres
 compléments restent séparés et l’unité demeure ouverte.
+
+## Messages de composition périmés — correction071.7
+
+La revue des16vues du passage UI f4908538 constate une alerte de fichier>1Mio
+encore affichée après passage au corps JSON. Le message concerne une saisie
+ancienne et brouille l’état courant. Décision avant code : tout changement de
+champ de composition retire l’erreur et la confirmation de copie associées.
+Les erreurs d’un nouvel envoi restent visibles tant que la composition ne change
+pas ; elles ne disparaissent pas simplement parce que leur état est rendu.
+Les résultats HTTP déjà observés gardent leur statut réel ; aucun appel n’est
+relancé. Les confirmations d’émission/révocation de jeton gardent leur propre
+suivi. Une sélection de fichier invalide conserve son refus jusqu’à la prochaine
+correction ; le changement d’objet fichier ne doit pas effacer ce refus aussitôt.
+Cette correction UI seule sera reconstruite/déployée puis les16+5groupes et
+les régressions rejoués sur le nouvel artefact. Le passage21initial reste
+intermédiaire, sans ajout à une preuve finale.

@@ -986,6 +986,14 @@ Critères d'acceptation :
   nominales et deux préliminaires purgées, huit jetons révoqués. Les13groupes
   préliminaires restent exclus des43.
 
+- [ ] SLS-071.7 Retirer les erreurs et confirmations de composition dès que leur
+  saisie change. Revue du passage UI f4908538 : après refus d’un fichier>1Mio,
+  le choix JSON laissait « Le fichier dépasse1Mio » à côté du nouveau corps et
+  du cURL. Effacer ces messages sur changement des champs de composition,
+  conserver les nouvelles erreurs jusqu’à correction ou nouvel envoi et ne pas
+  prétendre modifier l’issue de l’appel précédent. Tester le vrai refus fichier,
+  passage JSON, correction de JSON invalide et modification après copie cURL.
+
 Tests exigés :
 
 - Unitaires : construction de requête, bornes de réponse, expurgation, validation de destination.
