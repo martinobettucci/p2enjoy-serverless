@@ -468,7 +468,9 @@ Un refus avant admission peut porter un identifiant sans créer d’observation 
 la page le signale si elle est absente. **Consulter les invocations de la fonction**
 retrouve la liste. **Copier l’exemple cURL** fournit des valeurs à remplacer pour
 le jeton, les en-têtes, les paramètres et le fichier de corps ; ces valeurs
-saisies ne sont pas copiées. Requête, jeton et réponse restent dans la mémoire
+saisies ne sont pas copiées. Une modification de la composition retire les
+messages d’erreur et de copie précédents ; un nouveau refus reste affiché
+jusqu’à correction ou nouvel envoi. Requête, jeton et réponse restent dans la mémoire
 de cette page. L’adresse partageable conserve seulement la sélection du code.
 
 ## Invoquer et suivre une fonction

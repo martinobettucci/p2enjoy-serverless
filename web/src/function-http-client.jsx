@@ -12,7 +12,7 @@ const reservedHeaders=new Set(['connection','keep-alive','proxy-authenticate','p
 const encoder=new TextEncoder(),blank=()=>({name:'',value:''});
 const cleanPairs=pairs=>pairs.filter(v=>v.name!==''||v.value!=='');
 const stamp=value=>new Date(value*1000).toLocaleString('fr-FR');
-const bytes=value=>new Intl.NumberFormat('fr-FR').format(value)+' octets';
+const bytes=value=>new Intl.NumberFormat('fr-FR').format(value)+(value===1?' octet':' octets');
 function base64(raw){let binary='';for(let n=0;n<raw.length;n+=32768)binary+=String.fromCharCode(...raw.subarray(n,n+32768));return btoa(binary);}
 function unbase64(value){if(typeof value!=='string'||value.length>4*Math.ceil(responseLimit/3))throw new Error('Réponse hors limite.');const binary=atob(value);const raw=Uint8Array.from(binary,c=>c.charCodeAt(0));if(raw.length>responseLimit)throw new Error('Réponse hors limite.');return raw;}
 function invocationPath(functionId,version,path){return '/invoke/'+functionId+(version===null?'':'@'+version)+(path?'/'+path:'');}
@@ -78,6 +78,9 @@ export function FunctionHttpTester({functionId,functionName}){
  const [token,setToken]=useState(''),[temporary,setTemporary]=useState(null),[tokenBusy,setTokenBusy]=useState(false),[tokenNotice,setTokenNotice]=useState('');
  const [wait,setWait]=useState(30),[busy,setBusy]=useState(false),[result,setResult]=useState(null),[error,setError]=useState(null),[notice,setNotice]=useState(''),[dialog,setDialog]=useState(false);
  const mounted=useRef(true),request=useRef(null),fileGeneration=useRef(0),resultHeading=useRef(null),destinationHeading=useRef(null),accessHeading=useRef(null),focusCatalogue=useRef(false);
+ // @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#messages-de-composition-périmés--correction0717
+ // File selection clears its own feedback before reading, so a new size refusal survives.
+ useEffect(()=>{setError(null);setNotice('');},[origin,version,path,method,query,headers,context,declaredOrigin,bodyKind,text,token,wait]);
  useEffect(()=>{mounted.current=true;const onUnload=e=>{if(request.current){e.preventDefault();e.returnValue='';}};window.addEventListener('beforeunload',onUnload);
   const unregister=registerNavigationGuard(async()=>!request.current||window.confirm('Arrêter l’attente et quitter le testeur ? Le handler déjà admis peut continuer.'));
   return()=>{mounted.current=false;fileGeneration.current++;request.current?.abort();unregister();window.removeEventListener('beforeunload',onUnload);};
@@ -95,7 +98,7 @@ export function FunctionHttpTester({functionId,functionName}){
  const selectedDomain=catalogue.data?.items.find(v=>v.origin===origin),destinations=selectedDomain?.urls||[];
  let url='';try{if(origin)url=exactUrl(origin,functionId,version,path,query);}catch{/* Invalid composition is reported before send. */}
  const selectedPath=entry=>new URL(entry.url).pathname.slice(invocationPath(functionId,version,'').length).replace(/^\//,'');
- async function selectFile(event){const chosen=event.target.files?.[0]||null,generation=++fileGeneration.current;setFile(null);setFileReading(false);setError(null);
+ async function selectFile(event){const chosen=event.target.files?.[0]||null,generation=++fileGeneration.current;setFile(null);setFileReading(false);setError(null);setNotice('');
   if(!chosen){setFileReading(false);return;}if(chosen.size>requestLimit){setError(new Error('Le fichier dépasse 1 Mio.'));event.target.value='';return;}
   setFileReading(true);try{const raw=new Uint8Array(await chosen.arrayBuffer());if(mounted.current&&generation===fileGeneration.current)setFile({name:chosen.name,raw});}
   catch{if(mounted.current&&generation===fileGeneration.current)setError(new Error('Impossible de lire le fichier. Sélectionnez-le à nouveau.'));}
