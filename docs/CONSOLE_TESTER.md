@@ -102,6 +102,12 @@ peut décompresser nativement. Cette distinction est indiquée si Content-Encodi
 est présent. Les réponses opaques CORS ou redirections masquées par fetch n'ont
 aucun faux statut200 : elles sont décrites comme non lisibles/inconnues.
 
+La composition valide les mêmes bornes et interdictions avant les deux modes :
+noms ASCII originaux, doublons insensibles à la casse, valeurs, en-têtes réservés,
+8Kio de query et16Kio d'en-têtes. Le navigateur ne contourne pas ces règles.
+Les refus HTTP propres au testeur restent des erreurs de gestion ; seules une
+enveloppe de transport inconnue ou une absence de réponse produisent l'issue inconnue.
+
 Le mode navigateur utilise fetch `credentials:omit`, `redirect:manual`,
 `mode:cors`, `cache:no-store`, `referrerPolicy:no-referrer`, AbortController et
 lecture de réponse bornée. Les cookies de gestion ne sont jamais joints, même
@@ -117,7 +123,8 @@ Quitter la page retire la valeur locale ; le jeton expire au plus tard à son
 dont la réponse est perdue n'est jamais recherché dans SQLite ni recréé en boucle.
 
 L'exemple cURL contient des placeholders pour le jeton, les en-têtes et valeurs
-de query ; le corps est un fichier à fournir. Aucune valeur saisie n'est copiée.
+de query ; le corps est un fichier à fournir. Les valeurs du jeton, des en-têtes,
+de query et du corps ne sont pas copiées ; domaine, chemin et noms restent lisibles.
 La réponse nomme le hash exécuté et l'ID réels. Un lien ouvre l'invocation exacte
 dans la facette existante avec son journal déplié ; les refus avant admission
 peuvent n'avoir aucune observation, ce qui est indiqué sans inventer de ligne.

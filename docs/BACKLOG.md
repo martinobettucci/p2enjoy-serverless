@@ -972,6 +972,8 @@ Critères d'acceptation :
   les tâches avant restitution de capacité, même après exception inattendue.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Refus422 et appels suivants sains à prouver.
+  Appliquer aussi avant fetch navigateur les mêmes bornes query/en-têtes et
+  interdictions que dans le mode serveur ; préserver les refus HTTP du testeur.
 
 Tests exigés :
 

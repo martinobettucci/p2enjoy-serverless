@@ -21,6 +21,13 @@ réattendait cette exception avant de rendre la place.071.6 fixe le nom original
 ASCII et la jonction de toutes les tâches avant décrément garanti. Rejet et
 réutilisation de capacité seront éprouvés en E2E réel ; aucune panne déployée.
 
+La revue UI relève le contournement des bornes en mode navigateur : le fetch
+direct ne traversait pas le DTO serveur. Décision : validation commune avant
+les deux modes, y compris noms originaux, doublons, réservations et tailles.
+Les refus HTTP propres au testeur restent distincts d'une issue de transport
+inconnue. L'exemple cURL conserve destination/noms mais remplace valeurs
+query/en-têtes/jeton/corps. Corrections071.6, avant déploiement.
+
 ## 12novembre2026 — capacité réelle des brouillons qualifiée
 
 [42groupes](evidence/code-draft-capacity-dev-2026-11-12.json) sur375sources25a4152 et6e1584f2 passent :
