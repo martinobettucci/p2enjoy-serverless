@@ -47,7 +47,11 @@ Le jeton perdu après création est révoqué par son UUID public, sans sa valeu
 Avant action : santé, absence d'autres fonctions actives ou consommateurs,
 base/registre intègres et sans travaux/baux/réservations, empreintes officielles,
 CID/image/StartedAt, référence, PID/naissance/cgroup et programmes exacts.
-Timer indépendant armé et actif avant attachement. Il restaure le même CID/image,
+Timer indépendant armé et actif avant attachement. Une revalidation immédiate
+CID/image/StartedAt et PID/naissance/cgroup précède `observer.start`, aussi pour
+le watchdog ; une vérification après attachement serait trop tardive.
+Les précontrôles exigent explicitement intégrité/FK de contrôle et registre,
+et SUM(reserved_bytes)=0, pas seulement absence de candidats actifs. Il restaure le même CID/image,
 sans rebuild, config ni ancienne base ; la génération qu'il démarre lui-même
 reste épinglée jusqu'à sa santé et son reçu final. Aucun autre SPARK ni aucune
 administration FORGE ; celle-ci reste uniquement le rebond SSH.

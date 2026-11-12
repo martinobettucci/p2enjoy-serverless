@@ -1012,6 +1012,9 @@ Critères d'acceptation :
   Les vrais arrêts et la capacité sont ensuite recoupés dans42 ; une exception
   Python inattendue d’une tâche dans un contrôle restant vivant demeure une
   garantie relue, pas encore un scénario exécuté.
+  Relecture du nouvel opérateur de jetons avant exécution : exiger intégrité/FK
+  des deux bases et réservations nulles, puis revérifier CID/image/StartedAt,
+  naissance/cgroup immédiatement avant tout attachement, watchdog inclus.
   Refus422 répétés puis cinq appels sains
   passent dans la tranche43 ; à ce checkpoint, saturation et interruption
   restaient à prouver, avant les compléments46 et42.
