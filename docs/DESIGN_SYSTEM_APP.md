@@ -532,3 +532,15 @@ Le [contrat et les reçus](CONSOLE_TESTER_LOADING.md#qualification-réelle-du-ch
 distinguent le retour réseau du détachement et la fin de garde.071.2 est fermé
 avec les preuves43/46/32 conservées ;071.6,101/102 et clôture complète restent
 ouverts. Ce complément ne modifie ni le produit ni le manuel déployés.
+
+## Exception du testeur : issue inconnue et retour explicite qualifiés
+
+La [preuve31](evidence/function-http-client-task-exception-dev-2026-11-12.json) complète SLS-071 sans
+changement de rendu : quatre JPEG ciblés inspectés par le principal,
+22vues communes par le vérificateur RO. Après le vrai500 de l’exception TLS,
+Issue inconnue, délai et consigne de consultation sont lisibles en desktop et
+à390px ; saisies conservées, pas de succès ou rejeu annoncé. Le dernier appel
+explicite montre200, hash complet, UUID, corps et téléchargement. Les quatre
+vues n’ajoutent pas de défaut bloquant ;101/102 restent connus et non corrigés.
+Leur clôture séparée et la campagne complète095 restent requises. Le corps
+agrandi du manuel ne constitue pas une preuve de zoom global du navigateur.

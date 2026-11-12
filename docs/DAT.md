@@ -511,3 +511,19 @@ contention SQLite bornée du banc confirme le snapshot envoyé et les frappes
 ultérieures sans interception ni réponse substituée. Les sorties/pertes de ce
 seul helper sont recoupées ; elles ne qualifient pas un SIGKILL du contrôle.
 Les données, routes et référence sont conservées ; quotas/reprises restent ouverts.
+
+## Client HTTP intégré qualifié — SLS-071
+
+La facette Tester compose en mémoire une requête serveur ou navigateur vers
+les seules destinations calculées de l’installation. Le serveur exige admin,
+un vrai Read pour la passerelle, aucune transmission du cookie de console et
+aucune redirection suivie. Quatre places sont réservées avant réception JSON,
+les tâches annulées/jointes avant restitution ; aucune table ou migration
+supplémentaire. Le manuel et le seed original restent ceux de la plateforme.
+
+La [preuve31](evidence/function-http-client-task-exception-dev-2026-11-12.json) recoupe la dernière
+garantie sur le code déployé : OSError réelle dans le constructeur TLS après
+openat/EMFILE, limites rendues avant Python, même processus, quatre sorties et
+cinquième429 puis succès. Les helpers natifs appartiennent au banc de DEV,
+sans capacité supplémentaire donnée aux fonctions. L’unité est livrée avec
+ses autres preuves par critère ; les journaux/monitoring complets restent072/073.

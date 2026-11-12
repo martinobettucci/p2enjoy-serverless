@@ -221,3 +221,14 @@ rajoute pas de sûreté à ce verrou : la mort du détenteur libère SQLite via 
 système. Le processus SSH doit néanmoins être joint avec échéance. Le manuel
 explique les deux issues ; les vraies reprises, refus et régressions sont rejoués
 sur l’image reconstruite avant de qualifier la correction.
+
+## Client HTTP livré après qualification du dernier critère
+
+Le [complément31](evidence/function-http-client-task-exception-dev-2026-11-12.json) qualifie071.6 :
+6groupes ciblés et25régressions,401sources67215a2b/image60938093,26vues
+inspectées. VraiEMFILE puis OSError de tâche, ressources rendues avant Python,
+même PID et quatre relais actifs/cinquième429 puis succès. Le
+[contrat d’exception](CONSOLE_TESTER_TASK_EXCEPTION.md#qualification-finale-de0716)
+lie les reçus originaux, les12handlers et les nettoyages. SLS-071 est livré avec
+les preuves43/46/42/32/37 conservées par critère, sans réaddition. Manuel et
+produit inchangés pendant ce complément ;101/102 et095 restent ouverts.

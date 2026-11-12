@@ -329,3 +329,13 @@ DEV après sauvegarde native ; aucune donnée existante n'est transformée.
 La [preuve serveur070](evidence/code-editor-server-dev-2026-11-12.json) vérifie dix migrations et intégrité,
 puis brouillons chiffrés, rétention et suppression après abandon/
 purge sur les vrais objets. Les reprises et quotas globaux restent non qualifiés.
+
+## Testeur HTTP : état transitoire, schéma010 conservé
+
+SLS-071 réutilise functions/revisions, service_tokens et invocations. La
+composition et la réponse du testeur restent en mémoire ; aucun nouveau modèle
+persistant ni migration. L’audit function.test ne conserve que les métadonnées
+liées à l’acteur/service/fonction. Les jetons gardent le stockage par empreinte
+existant, sans valeur claire enregistrée par le testeur. La
+[preuve31](evidence/function-http-client-task-exception-dev-2026-11-12.json) recoupe dix migrations,
+intégrité/FK, propriétaires1001 et réservations nulles après l’exception réelle.

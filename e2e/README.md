@@ -2491,3 +2491,16 @@ par waitpid bloquant sous alarme propre au helper ; échéance8s et garde12s
 inchangées, classe partagée intacte. L’alarme est annulée après chaque attente
 et l’ancien handler rendu au détachement. Syntaxe contrôlée, relecture et
 nouvelle exécution réelles requises ; aucun résultat de panne anticipé.
+
+## Exception native du testeur qualifiée —31groupes
+
+`node e2e/function-http-client-task-exception.mjs SHA_IMAGE` passe six groupes
+sur401sources67215a2b/commit417102d, image60938093, puis25régressions communes.
+La [preuve31](../docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) conserve26vues
+inspectées,12handlers nominaux, réelEMFILE/OSError, cinq TID gelés, NOFILE rendu
+avant Python et même PID. Secours soussoft0 avantKILL, puis quatre relais/
+cinquième429 et nouveaux succès sont recoupés. Les reçus Python originaux
+conservent les ns exactes ; leurs copies JS peuvent être arrondies.
+Trois passages échoués restent séparés/exclus ; trois fonctions/tokens de tous
+les passages sont purgés/révoqués, quatre helpers terminés et5982artefacts
+conservés.071.6 et SLS-071 sont qualifiés ;101/102 et095 restent ouverts.

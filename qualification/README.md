@@ -61,6 +61,11 @@ Le mode log-witness journalise seulement un marqueur public au format dédié,
 pour éprouver positivement le lecteur privé sur une vraie trace de handler.
 Aucun secret ou corps n’est journalisé par ce handler ; seul son identifiant
 public de requête est tracé. [Contrat](../docs/CONSOLE_TESTER.md).
+Le même seed original est inchangé pour le complément final
+[31groupes](../docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) :12handlers nominaux,
+exception réelle avant émission, quatre sorties actives/cinquième429 puis
+succès. Aucun manifeste du runtime de référence n’est modifié. SLS-071 est
+livré ; les autres unités et la campagne complète restent dans le backlog.
 
 ## Installer, lancer et vérifier
 

@@ -102,7 +102,7 @@ nommés `WED`, `MON-FRI` et `DEC` maintiennent l'écart SLS-098 ouvert.
 | Journaux (Cockpit, 30 000 par minute et par projet) | **Partiel** : journaux expurgés par invocation | [SLS-072](BACKLOG.md#sls-072) |
 | Métriques | **Partiel** : relevés Docker ponctuels | [SLS-073](BACKLOG.md#sls-073) |
 | Alertes | **À livrer** | [SLS-073](BACKLOG.md#sls-073) |
-| Onglet Test (commande `curl` générée) | **Partiel** : client HTTP déployé ; UI/CORS/IP/annulation/saturation46, reprise42 et jetons32 qualifiés ; [source/hash32](evidence/function-http-client-source-access-dev-2026-11-12.json) qualifié ; chargement dédié et exception071.6 ouverts | [SLS-071](BACKLOG.md#sls-071) |
+| Onglet Test (commande `curl` générée) | **Livré** : client HTTP serveur/navigateur, réponse et copie sans secret ; contextes/UI46, reprise/confidentialité42, jetons32, source/hash32, chargement37 et [exception/capacité31](evidence/function-http-client-task-exception-dev-2026-11-12.json) qualifiés, groupes non réadditionnés | [SLS-071](BACKLOG.md#sls-071) |
 
 ### Serverless Jobs
 
@@ -139,6 +139,7 @@ La page officielle [How to test a function](https://www.scaleway.com/en/docs/ser
 décrit méthode, chemin, en-têtes/paramètres et copie de commande, avec jeton pour
 une fonction privée. Le [quickstart](https://www.scaleway.com/en/docs/serverless-functions/quickstart/)
 présente aussi un bouton Run et une section Output : ces deux parcours publiés
-restent cités séparément. La ligne Test reste Partiel tant que071.2/.6 et la
-clôture ne sont pas prouvés ; les autres lignes ne sont pas déclarées revérifiées
-par cette consultation ciblée.
+restent cités séparément et ont été relus pour la clôture de071. Le chargement37
+et l’exception/capacité31 complètent les critères ; seule la ligne Test passe
+à Livré avec leurs preuves et les références antérieures. La campagne globale
+095 reste requise ; cette consultation ne requalifie pas les autres lignes.

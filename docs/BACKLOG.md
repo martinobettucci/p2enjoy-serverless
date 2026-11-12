@@ -71,7 +71,6 @@ bloquée est sautée et son blocage est nommé.
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
-| 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[~]` | SLS-066, SLS-074 | [CONSOLE_TESTER](CONSOLE_TESTER.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -100,7 +99,7 @@ bloquée est sautée et son blocage est nommé.
 SLS-078 est temporairement bloquée par le vieillissement réel des deux captures,
 au plus tôt le18 novembre2026 à03:30:26 puis04:05:13UTC ; la campagne complète
 suit ces preuves. Les reprises et bornes numériques courantes sont qualifiées.
-Cette attente ne bloque pas les unités indépendantes du registre ; SLS-100 est livrée.
+Cette attente ne bloque pas les unités indépendantes du registre ; SLS-100 et SLS-071 sont livrées.
 Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
 089.4 est qualifié. SLS-070 est la prochaine unité de développement indépendante.
 
@@ -947,7 +946,16 @@ Tests exigés :
 <a id="sls-071"></a>
 ## SLS-071 — Client HTTP intégré par fonction
 
-Statut : [~] — backend et facette Tester déployés en DEV sur60938093.
+Statut : [x] — client HTTP livré en DEV sur60938093 ; huit critères qualifiés.
+La [preuve31](evidence/function-http-client-task-exception-dev-2026-11-12.json) clôt071.6 : six groupes ciblés,
+25régressions sur401sources67215a2b/commit417102d,26captures inspectées.
+Vraiopenat/EMFILE puis OSError dans forward/TLS ; NOFILE rendu avant Python,
+même PID et quatre places/cinquième429 puis succès. Douze handlers nominaux,
+nettoyages de tous les passages et5982artefacts recoupés. Les preuves43/46/42/
+32/37 ci-dessous conservent leurs critères/époques, sans addition de groupes.
+Les défauts101/102 et la campagne globale095 restent des unités distinctes.
+
+Historique des compléments :
 Le [complément de chargement37](evidence/function-http-client-loading-dev-2026-11-12.json) qualifie071.2 :
 7reprise,5chargement,25régressions sur397sources6b9cb2bc et30captures inspectées.
 Même PID vivant pendant la lecture, perte d’observateur jointe, trois fonctions
@@ -1039,7 +1047,7 @@ Critères d'acceptation :
   restitués fidèlement.
 - [x] SLS-071.5 Lien de la réponse vers l'invocation et ses journaux ([SLS-072](#sls-072)) ;
   exemple cURL copiable sans secret.
-- [ ] SLS-071.6 En-têtes ASCII validés avant normalisation et jonction de toutes
+- [x] SLS-071.6 En-têtes ASCII validés avant normalisation et jonction de toutes
   les tâches avant restitution de capacité, même après exception inattendue.
   Le [complément d’exception native](CONSOLE_TESTER_TASK_EXCEPTION.md) fixe avant
   code la faute réelleopenat/EMFILE, restauration NOFILE au syscall-exit, même
@@ -1081,6 +1089,17 @@ Critères d'acceptation :
   zéro groupe qualifié. Décision avant code : waitpid bloquant sous alarme
   locale du helper, même échéance8s et garde12s, classe partagée inchangée.
   Le coût du polling est plausible, à éprouver sans allonger les bornes.
+  Le [replay4337a800](evidence/function-http-client-task-exception-dev-2026-11-12.json) passe les six groupes :
+  secours réel soussoft0, restauration avantKILL du helper, puis openat-24
+  nominal avec cinq TID gelés, fenêtre de limite134655ns d’après les reçus
+  Python originaux, restauration avant reprise. OSError et framesforward/
+  HTTPX/TLS recoupés, vrai500 UI non confirmé et aucun départ passerelle.
+  Même PID1007466/naissance508864062/CID/image/StartedAt, quatre relais actifs,
+  cinquième429 en22,6ms, quatre succès puis cinq nouveaux et un appel UI.
+  Avec25régressions,31groupes et26images inspectées ;12handlers nominaux.
+  Trois fonctions/tokens de tous les passages nettoyés, quatre helpers partis,
+  zéro activité/bail/réservation/garde, dix migrations et5982artefacts. Critère
+  qualifié ; les trois passages échoués restent exclus et leurs reçus conservés.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise

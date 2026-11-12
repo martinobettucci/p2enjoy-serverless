@@ -1,16 +1,17 @@
 # Console web
 
-La [lecture réellement en attente](../docs/evidence/function-http-client-loading-dev-2026-11-12.json) est qualifiée sur l’image
-60938093 : **37 groupes réels** (7 reprise, 5 chargement, 25 régressions),
-397 sources d’empreinte 6b9cb2bc et 30 captures inspectées individuellement.
-Le GET reste sans réponse pendant les vues desktop/mobile « Lecture en cours… ».
-Après perte de l’observateur, la garde est jointe et le même PID est vivant,
-sans invocation rejouée ; un nouvel appel explicite réussit. Trois fonctions
-purgées, deux jetons révoqués, zéro garde/bail/réservation et 5 982 artefacts
-conservés. **SLS-071.2 est qualifié**, avec les preuves antérieures des modes
-serveur/CORS et du refus de source. SLS-071 reste ouvert pour 071.6 ; les
-anomalies visuelles 101/102 et la campagne complète restent à traiter.
-Les checkpoints historiques ci-dessous gardent leurs propres dates et groupes.
+Le client HTTP **Tester une fonction (SLS-071)** est livré et qualifié en DEV.
+La [preuve finale du dernier critère](../docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) passe **31 groupes réels** :
+6 ciblés et 25 régressions sur 401 sources 67215a2b, image 60938093 inchangée ;
+26 captures inspectées. Un vrai `openat` échoue avec `EMFILE` ; les limites sont
+rendues avant reprise Python, qui lève un `OSError` dans le constructeur TLS.
+Le même PID conserve quatre places, refuse le cinquième appel en 429 puis
+réussit les appels suivants. Douze handlers nominaux et nettoyages natifs sont
+recoupés ; les trois passages échoués restent séparés, sans groupe réadditionné.
+Les huit critères s’appuient aussi sur leurs preuves43/46/42/32/37 distinctes.
+Manuel18chapitres/74paragraphes conforme, schéma010 et5 982artefacts conservés.
+Les défauts101/102 et la campagne complète095 restent ouverts. Les paragraphes
+historiques ci-dessous gardent leur époque ; ils ne remplacent pas ce statut.
 
 Le [complément de source du testeur](../docs/CONSOLE_TESTER_SOURCE.md) est
 qualifié sur60938093 : [32groupes réels](../docs/evidence/function-http-client-source-access-dev-2026-11-12.json),

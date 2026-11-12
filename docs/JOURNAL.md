@@ -7808,3 +7808,25 @@ bloquant et alarme POSIX sur l’échéance restante du helper, annulée après 
 attente ; ancien handler rétabli au detach, timer antérieur refusé. Recherche8s,
 gel2s et garde12s inchangés. Syntaxe contrôlée seulement, relecture et nouvelle
 exécution E2E requises pour vérifier l’arrivée au CA puis la panne.
+
+### 12novembre2026 — Exception réelle et capacité qualifiées, SLS-071 livré
+
+4337a800/417102d passe6groupes et25régressions sur401sources67215a2b,
+image60938093 inchangée. Waitpid bloquant atteint le CA dans la borne gardée.
+Secours soussoft0 rendu avantKILL du helper ; nominalopenat-24 avec cinq TID
+gelés, limites rendues avant Python (134655ns selon originaux), OSError dans
+forward/HTTPX/TLS, vrai500 Playwright/POSTunique, aucune invocation passerelle.
+Même PID/CID/image/StartedAt ; quatre sorties actives, cinquième429 en22,6ms,
+puis cinq succès et nouvel appel UI,12handlers.26images inspectées (4principal,
+22verifierRO), pas de défaut nouveau ;101/102 connus restent ouverts.
+
+Trois passages échoués conservés séparément, zéro groupe ajouté ; avec eux,
+trois fonctions et trois jetons purgés/révoqués, quatre parents supprimés et
+quatre helpers terminés. Limites/tous les TID recoupés, zéro activité/bail/
+réservation/garde, dix migrations, intégritéok/FKvide,38backend/4web et5982artefacts
+conservés. Source31etles autres preuves restent liées à leurs époques ; le
+client serveur2f12bd45 est byte-identique depuis43, main et UI à leurs preuves
+courantes42/32/37.071.6 et les huit critères sont qualifiés, SLS-071 retiré du
+registre ouvert. La relecture officielle ciblée Test/quickstart actualise cette
+seule ligne de parité. Schéma010/seed/manuel18chapitres74paragraphes inchangés,
+DAT et documents de livraison suivent ;095 et les autres unités restent ouverts.

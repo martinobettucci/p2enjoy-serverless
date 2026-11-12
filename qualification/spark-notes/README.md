@@ -1,17 +1,19 @@
 # P2Enjoy Serverless
 
-## Chargement du testeur qualifié — 12 novembre 2026
+## Client HTTP qualifié — 12 novembre 2026
 
-La preuve `docs/evidence/function-http-client-loading-dev-2026-11-12.json`
-qualifie 37 groupes réels sur 397 sources 6b9cb2bc, image 60938093 : sept reprise,
-cinq chargement et 25 régressions communes ; 30 captures inspectées. Un seul
-GET reste en attente pendant les vues desktop/mobile ; perte du helper, garde
-jointe et même PID vivant, puis nouvel appel explicite réussi sans rejeu.
-Trois fonctions purgées, deux jetons révoqués, zéro bail/réservation/garde et
-5 982 artefacts conservés. Le critère 071.2 est fermé ; 071.6, les défauts
-101/102 et la campagne complète restent ouverts. Le contrôle a redémarré dans
-le scénario de reprise à 08:05:20 UTC ; le chargement conserve ce démarrage.
-Les anciens checkpoints qui suivent gardent leur portée historique.
+SLS-071 est livré avec ses huit critères : composition serveur/navigateur,
+versions/cURL/Read, annulation et corrélation, confidentialité et reprise.
+La preuve `docs/evidence/function-http-client-task-exception-dev-2026-11-12.json`
+clôt le dernier critère par 31 groupes réels (6 ciblés, 25 régressions),
+401 sources 67215a2b/image 60938093 et 26 captures inspectées. Vrai EMFILE puis
+OSError dans le constructeur TLS, limites rendues avant Python ; même PID,
+quatre appels actifs/cinquième429 puis nouveaux succès, 12 handlers nominaux.
+Les trois passages échoués restent séparés ; trois fonctions/tokens nettoyés,
+quatre helpers terminés, zéro activité/bail/réservation/garde et 5 982 artefacts
+conservés. Schéma010 et manuel18chapitres/74paragraphes inchangés. SLS-070,
+101/102, la campagne globale095 et les autres unités restent dans le backlog.
+Les sections suivantes gardent les états historiques de leurs checkpoints.
 
 ## État courant —12novembre2026
 

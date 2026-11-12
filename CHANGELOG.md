@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- SLS-071 livré : le dernier critère071.6 est qualifié par
+  [31 groupes réels](docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) sur401sources67215a2b,
+  commit417102d/image60938093. VraiEMFILE, OSError de tâche, limites rendues
+  avant Python et même PID ; quatre relais actifs/cinquième429, puis succès.
+  26captures inspectées,12handlers nominaux. Trois fonctions/tokens de tous
+  les passages purgés/révoqués, quatre helpers terminés, dix migrations,
+  zéro activité/bail/réservation/garde et5982artefacts conservés. Les preuves
+  précédentes gardent leurs groupes propres ;101/102 et095 restent ouverts.
+
 - SLS-071.2 : [chargement qualifié](docs/evidence/function-http-client-loading-dev-2026-11-12.json) par
   37 groupes réels et 30 captures inspectées sur 397 sources 6b9cb2bc,
   image 60938093 inchangée. GET réellement en attente sur desktop/mobile,

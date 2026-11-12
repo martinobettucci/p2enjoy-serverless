@@ -200,13 +200,36 @@ garde indépendante12s ; aucun allongement de borne, aucun changement de la
 classe NativeObserver partagée ni de la gestion des signaux du contrôle. Le
 nouvel essai devra prouver l’arrivée au CA et toutes les frontières de panne.
 
-## État
+## Qualification finale de071.6
 
-Décision, matrice et constats de revue persistés avant leur code dépendant.
-Opérateur et restaurateur spécialisés implémentés ; syntaxe analysée et
-corrections relues sans résidu bloquant. Seule l’inspection préalable en lecture
-seule a été exécutée sur le SPARK. Le client SSO/UI et le lecteur de pile
-sont écrits, syntaxes contrôlées et relus ; tous les scénarios réels
-restent requis. Le premier passage échoue pendant préparation comme décrit ci-dessus ;
-aucun prlimit modificatif ni nouvel attachement n’est exécuté. Les scénarios
-de panne/capacité restent à faire ;071.6 et SLS-071 restent ouverts.
+La [preuve31](evidence/function-http-client-task-exception-dev-2026-11-12.json) porte401sources67215a2b,
+commit417102d et image60938093 inchangée. Le replay4337a800 passe six groupes,
+puis8manuel/8public/9connexion sur les mêmes sources. Quatre JPEG ciblés sont
+inspectés par le principal et22originaux communs par le vérificateur RO.
+Les trois passages échoués précédents gardent zéro groupe qualifié.
+
+Le secours soussoft0 remet NOFILE1048576/1048576 avant le SIGKILL du seul
+helper, le joint et libère le même PID. L’appel en attente réussit une seule
+fois. La faute nominale observe le vraiopenat du CA, cinq TID arrêtés et le
+retour noyau-24. Les reçus Python originaux donnent134655ns de ressource
+dégradée, restituée à l’arrêt syscall-exit avant Python. Les nombres muraux ns
+des événements JS peuvent être arrondis ; les originaux collectés séparément
+servent à cette mesure et à l’ordre natif. Aucun registre/résultat/buffer n’est
+modifié. Le500 est reçu par Playwright sur un seul POST UI ; la pile native
+porte OSError, forward, constructeurHTTPX et create_default_context. Un audit
+supplémentaire unique, aucune invocation nouvelle. Les9336octets de logs restent
+privés ; seuls classe, sept frames publiques, taille/SHA sont rapportés.
+
+Le même PID1007466/naissance508864062 et le même CID/image/StartedAt restent
+vivants. Quatre vrais relais lents sont actifs, le cinquième reçoit429 en22,6ms ;
+les quatre terminent200, cinq appels suivants et un dernier UI200 réussissent.
+Douze handlers succeeded sont corrélés. Une fonction/jeton nominaux sont
+purgés/révoqués ; avec les passages préliminaires, trois fonctions et trois
+jetons, quatre namespaces/services supprimés et quatre helpers terminés.
+Toutes les limites et tous les TID sont recoupés, sans traceur/arrêt restant,
+gardes et ressources nulles. Dix migrations, intégritéok/FKvide,38backend/4web,
+manuel18chapitres/74paragraphes et5982artefacts sont conservés.
+
+Statut :071.6 et SLS-071 qualifiés avec les références antérieures de chaque
+critère. La campagne complète de plateforme095 et les défauts101/102 restent
+ouverts ; aucune autre unité n’est close par ce complément.
