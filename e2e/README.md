@@ -28,7 +28,8 @@ Le scénario couvre droits et portée, sauvegarde privée/conflits/no-op, bornes
 déduplication et invocations pilote/CJS/ESM, promotion/rollback, import cassé,
 rétention de base supprimée et purges publiques. Le lecteur natif accepte le
 seul UUID namespace et ne renvoie ni source, ni chiffrement, ni jeton.
-Les rapports UUID ne sont pas écrasés. Une erreur est conservée ; aucun rejeu
+Les quatre sockets partiels ont fini leur écriture TLS avant le cinquième ;
+aucun sondage de source ne concurrence leur capacité. Les rapports UUID ne sont pas écrasés. Une erreur est conservée ; aucun rejeu
 silencieux. Quotas globaux/par acteur/chiffrement, interruptions, purge contre
 lecteur et interface restent des preuves distinctes. La [première tranche](../docs/evidence/code-editor-server-dev-2026-11-12.json)
 passe20groupes ciblés puis25régressions sur367sourcesa983b2f et7c5c6f4b,
