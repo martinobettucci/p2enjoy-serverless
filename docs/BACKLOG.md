@@ -953,7 +953,9 @@ La [première tranche43](evidence/function-http-client-dev-2026-11-12.json) gard
 Nature : Développer. Dépend de : SLS-066, SLS-074. Ordre : 3.
 Contrat : [client HTTP](CONSOLE_USABILITY.md#client-http-par-fonction) et
 [CONSOLE_TESTER](CONSOLE_TESTER.md). Unité d'ordre3 retenue pour fournir le parcours
-de test qui manque à070.6 ; les autres preuves de070 restent ouvertes.
+de test de070.6 désormais qualifié ; les autres preuves de070 restent ouvertes.
+Le [plan échéances/confidentialité/reprise](CONSOLE_TESTER_FAILURES.md) précise
+les prochains scénarios réels, non encore exécutés.
 
 Résultat attendu : une facette Tester par fonction, de type client HTTP : composer une
 requête, l'envoyer par la vraie passerelle, lire la réponse et retrouver l'appel et ses

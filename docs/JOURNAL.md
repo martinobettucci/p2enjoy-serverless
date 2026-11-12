@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 12novembre2026 — suite des preuves du testeur
+
+Le [plan](CONSOLE_TESTER_FAILURES.md) fixe avant code les échéances UI1s,
+recherche confidentielle par sentinelles et coupure réelle après confirmation
+du handler. Le précédent de garde native est conservé : timer avant action,
+PID/naissance/cgroup/CID/image, mutateur KILL joint, waitpidSIGKILL, restauration
+indépendante du même CID. Le contrôle seul peut être arrêté sur le SPARK DEV.
+La revue constate un risque précis : un502HTML de proxy reçoit error.status
+et est donc traité comme refus de gestion. Son résultat doit être observé en
+E2E avant correction ; un503 propre du contrôle doit rester distinct. Aucun
+nouveau résultat ni défaut de réponse effectivement reçu n’est revendiqué.
+
 ## 12novembre2026 — compléments du testeur qualifiés
 
 [46groupes](evidence/function-http-client-ui-admission-dev-2026-11-12.json) passent
