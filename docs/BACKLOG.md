@@ -994,7 +994,8 @@ Critères d'acceptation :
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise
   reconnue par son propre reçu verrouillé ; le CID/image seul ne distingue pas
-  un redémarrage concurrent. Vérifier les empreintes opérateur/observateur.
+  un redémarrage concurrent. Vérifier les empreintes opérateur/observateur,
+  borner la mémoire/jonction du SSH et écrire le reçu natif avant déverrouillage.
   Refus422 répétés puis cinq appels sains
   passent dans la tranche43 ; saturation et interruption restent à prouver.
   Appliquer aussi avant fetch navigateur les mêmes bornes query/en-têtes et

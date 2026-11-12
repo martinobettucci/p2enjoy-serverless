@@ -103,6 +103,14 @@ n’accepter que le StartedAt d’un reçu de restauration déjà écrit sous le
 verrou. Un démarrage concurrent sans ce reçu fait échouer la preuve. Vérifier
 aussi les empreintes des programmes opérateur/observateur conservées dans
 l’identité. Cette correction du banc précède toute coupure réelle.
+La même revue exige une échéance de jonction pour le client SSH local, même
+après secours validé : fermer puis terminer ce seul processus si nécessaire,
+et confirmer sa sortie avant clôture. Les bornes stdout/stderr arrêtent aussi
+la rétention mémoire, avec échec explicite ; fermer stdin seul ne suffit pas.
+Le constat waitpid/SIGKILL et son horodatage sont écrits atomiquement dans un
+reçu natif avant restitution du verrou ; stdout seul n’est pas une preuve
+durable. Une perte avant ce reçu n’interdit pas la restauration sûre déjà
+couverte par le reçu du mutateur, mais ne qualifie pas cette frontière native.
 
 Un premier cas perd réellement le pilote après armement, avant appel, pour
 vérifier la restitution indépendante. Le second coupe après handler démarré.
