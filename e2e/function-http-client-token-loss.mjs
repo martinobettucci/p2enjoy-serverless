@@ -80,8 +80,8 @@ async function prepareTemporary(){
 async function serviceTokenView(expected){
  await page.getByRole('link',{name:'Fonctions du service',exact:true}).click();await page.getByRole('link',{name:'Jetons',exact:true}).click();const data=await allTokenMetadata();
  assert.deepEqual(data.map(metadata).sort((a,b)=>a.id.localeCompare(b.id)),expected.map(metadata).sort((a,b)=>a.id.localeCompare(b.id)));
- const area=section('Jetons du service');if(!data.length)await area.getByText('Aucun jeton dans ce service.',{exact:true}).waitFor();else{
-  assert.equal(await area.locator('li').count(),data.length);
+ const area=section('Jetons du service');await area.getByRole('heading',{name:'Jetons du service',exact:true}).waitFor();if(!data.length)await area.getByText('Aucun jeton dans ce service.',{exact:true}).waitFor();else{
+  await until(async()=>await area.locator('li').count()===data.length,'service_token_rows_not_rendered');assert.equal(await area.locator('li').count(),data.length);
   for(const row of data){const item=area.locator('li').filter({has:page.locator('p.mono').filter({hasText:row.prefix+'…'})});assert.equal(await item.count(),1);await item.getByRole('heading',{name:row.name,exact:true}).waitFor();await item.getByText(row.revoked_at?'Révoqué':'Actif',{exact:true}).waitFor();}
  }
  assert.equal(await page.locator('input[readonly]').count(),0);assert.equal(await page.evaluate(()=>localStorage.length+sessionStorage.length),0);return data.map(metadata);
@@ -102,7 +102,7 @@ async function tokenLoss(action,boundary){
   await block.getByRole('alert').scrollIntoViewIfNeeded();await capture(action+'-'+boundary+'-unknown');assert.equal(requests.length,1);
   await until(async()=>await block.locator('.confirm').getByRole('button',{name:'Annuler',exact:true}).evaluate(v=>v===document.activeElement),'confirmation_error_focus_missing');
   if(boundary==='after'){await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await block.getByRole('alert').scrollIntoViewIfNeeded();await capture(action+'-'+boundary+'-unknown-mobile');await page.setViewportSize({width:1440,height:1000});}
-  if(boundary==='after')await page.keyboard.press('Escape');else await block.locator('.confirm').getByRole('button',{name:'Annuler',exact:true}).click();assert.equal(await block.locator('.confirm').count(),0);const listed=await serviceTokenView(after.tokens);assert.equal(requests.length,1);assert.deepEqual(await remote('inspect'),after);
+  if(boundary==='after')await page.keyboard.press('Escape');else await block.locator('.confirm').getByRole('button',{name:'Annuler',exact:true}).click();assert.equal(await block.locator('.confirm').count(),0);await mark(action+'-'+boundary+'-service-list');const listed=await serviceTokenView(after.tokens);assert.equal(requests.length,1);assert.deepEqual(await remote('inspect'),after);
   await capture(action+'-'+boundary+'-service-list');if(prepared){const invocation=await gateway(prepared.token,boundary==='after'?401:200);observations.push({scenario:'post-loss-token-access',action,boundary,token_id:prepared.id,...invocation});await idle();}
   observations.push({scenario:'token-response-loss',action,boundary,before,gated,cut,restored,proxy,after,listed,post_count:requests.length,events:op.events});
  }finally{page.off('request',listener);}

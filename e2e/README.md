@@ -89,7 +89,10 @@ rejeu sont requis. Le client ferme ensuite la confirmation et consulte la liste
 par l'UI, sans rechercher la valeur perdue ; les invocations réelles vérifient
 l'état des jetons de révocation. Captures desktop/mobile et purges recoupées.
 Contrat : [pertes de jeton](../docs/CONSOLE_TESTER_TOKEN_LOSS.md). Code préparé,
-non encore exécuté ; aucun nouveau résultat qualifié à ce stade.
+le premier3c50e181 échoue sur une liste comptée avant rendu asynchrone, après
+les deux coupures natives de création. Fonction/jeton/parents/gardes nettoyés ;
+attente du panneau et des lignes exactes ajoutée avant replay des quatre cas.
+Aucun nouveau résultat qualifié à ce stade.
 
 ## Capacité réelle des brouillons de code
 
