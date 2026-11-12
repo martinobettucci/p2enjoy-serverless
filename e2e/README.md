@@ -31,6 +31,20 @@ et38captures inspectées. Quatre fonctions nominales et quatre intermédiaires
 sont purgées ; six jetons révoqués. Les21intermédiaires sont exclus après revue
 visuelle puis correction des messages/singulier et replay complet.
 
+## Échéances et confidentialité du testeur — en réalisation
+
+`node e2e/function-http-client-confidentiality.mjs` reçoit les identifiants SSO
+sur stdin privée. Le client compose de vraies sentinelles query/Authorization/
+corps/en-tête, attend les échéances UI1s et les handlers4s, vérifie les droits du
+détail d’invocation puis recherche les valeurs dans les véritables logs/audits.
+`function-http-client-private-inspect.py begin|inspect NAMESPACE_UUID` est
+strictement lecteur du SPARK ; inspect reçoit ses sentinelles sur stdin privée
+et ne renvoie que booléens/SHA et métadonnées corrélées. Les lectures ont des
+bornes et une échéance ; un manque fait échouer. Aucune capture n’est effectuée
+pendant la saisie confidentielle ; les vues des délais ne portent que delay4.
+Statut : implémenté et syntaxe vérifiée, non encore exécuté. Le [plan](../docs/CONSOLE_TESTER_FAILURES.md)
+porte aussi la coupure contrôlée, encore à implémenter et qualifier.
+
 ## Capacité réelle des brouillons de code
 
 `node e2e/code-draft-capacity.mjs` reçoit les identifiants du SSO réel sur son
