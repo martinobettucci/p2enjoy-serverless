@@ -1057,6 +1057,10 @@ Critères d'acceptation :
   Seconde revue : temporaires de reçus par tentative et terminaux immuables
   ordonnés nativement ; le lecteur doit exposer un échec ultérieur à un succès.
   Ce reste est corrigé avant le premier essai, sans qualification anticipée.
+  Revue client/diagnostic : l’image utilise --no-access-log ; ne pas exiger
+  une ligne Uvicorn500 absente. Le vrai500 vient de Playwright/POSTunique,
+  recoupé par pile TLS/audit/frontière/absence d’invocation natives. Aucun
+  changement de logs produit, aucun scénario encore qualifié.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise

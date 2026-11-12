@@ -125,11 +125,23 @@ et ordre monotone local. Le lecteur choisit le dernier reçu terminal de cette
 unité, succès ou échec, et ne transforme jamais le succès historique en état
 courant. Aucun changement de compteur ou d’infrastructure externe n’est requis.
 
+## Corrélation du500 sans access log
+
+La revue du client/lecteur relève une hypothèse à retirer avant essai :
+`control/Dockerfile` désactive explicitement les access logs Uvicorn. Le500
+est donc prouvé par la vraie réponse Playwright et l’unique POST UI, jamais
+par une ligne d’accès supposée présente. Le lecteur natif recoupe séparément
+la pile TLS inattendue, l’audit supplémentaire unique, la frontière EMFILE et
+l’absence d’invocation passerelle. La journalisation de l’application reste
+inchangée. Six groupes et douze handlers sont les comptes attendus, sans
+préjuger de leur réussite ni de la classe Python réellement observée.
+
 ## État
 
 Décision, matrice et constats de revue persistés avant leur code dépendant.
 Opérateur et restaurateur spécialisés implémentés ; syntaxe analysée et
 corrections relues sans résidu bloquant. Seule l’inspection préalable en lecture
 seule a été exécutée sur le SPARK. Le client SSO/UI et le lecteur de pile
-restent à écrire. Aucun prlimit modificatif, nouvel attachement ou scénario de
+sont écrits, syntaxes contrôlées ; leur relecture et tous les scénarios réels
+restent requis. Aucun prlimit modificatif, nouvel attachement ou scénario de
 ce complément n’est exécuté ;071.6 et SLS-071 restent ouverts.

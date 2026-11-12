@@ -7708,3 +7708,20 @@ Index400sources ; syntaxe des deux scripts et du lanceur analysée. Ce checkpoin
 est préparatoire : client SSO/UI, lecteur borné de pile et toutes les preuves
 réelles restent requis. Aucun prlimit modificatif, nouveau groupe ou capture ;
 071.6 et SLS-071 restent ouverts, image et manuel produit inchangés.
+
+### 12novembre2026 — Client et diagnostic natifs071.6 préparés
+
+Le client réel six groupes est écrit avec SSO/fixtureoriginale, secours,
+exception500/UI et pile, puis quatre sorties/cinquième429 et nouveaux succès.
+Le diagnostic lit le vrai Dockerlogs depuis l’armement avec borne10s/2Mio,
+classe/frames publiques/SHA seulement et absence d’invocation passerelle.
+Syntaxes JS/Python analysées, index401 ; relecture et exécution restent à faire.
+Aucun prlimit modificatif ni nouveau groupe qualifié, image60938093 inchangée.
+
+### 12novembre2026 — Corrélation500 corrigée avant essai071.6
+
+La revue confirme six groupes/douze handlers et la jonction des promesses,
+puis relève que --no-access-log interdit le discriminant Uvicorn supposé.
+Décision avant correction : réponsePlaywright500 et POSTunique d’un côté,
+pileTLS/audit/frontière/absence d’invocation natives de l’autre ; aucun accèslog
+n’est activé. Aucun essai réel encore exécuté pour ce complément.
