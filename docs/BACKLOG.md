@@ -939,9 +939,12 @@ Tests exigés :
 <a id="sls-071"></a>
 ## SLS-071 — Client HTTP intégré par fonction
 
-Statut : [ ] — contrat défini ; aujourd'hui seulement le catalogue d'URL et la copie.
+Statut : [~] — réalisation engagée, contrat détaillé persisté avant code dans
+[CONSOLE_TESTER](CONSOLE_TESTER.md) ; aujourd'hui seuls catalogue et copie sont déployés.
 Nature : Développer. Dépend de : SLS-066, SLS-074. Ordre : 3.
-Contrat : [client HTTP](CONSOLE_USABILITY.md#client-http-par-fonction).
+Contrat : [client HTTP](CONSOLE_USABILITY.md#client-http-par-fonction) et
+[CONSOLE_TESTER](CONSOLE_TESTER.md). Unité d'ordre3 retenue pour fournir le parcours
+de test qui manque à070.6 ; les autres preuves de070 restent ouvertes.
 
 Résultat attendu : une facette Tester par fonction, de type client HTTP : composer une
 requête, l'envoyer par la vraie passerelle, lire la réponse et retrouver l'appel et ses

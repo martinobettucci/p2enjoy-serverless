@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 12 novembre 2026 — réalisation du client HTTP de fonction
+
+Reprise propre e37ae8b synchronisée.078 attend l'âge réel du18novembre et089 les
+profils/signatures externes.071, du même ordre3 que070, fournit le geste Tester
+nécessaire à070.6 et apporte du comportement neuf. Le contrat détaillé précède
+le code : HTTP réel limité aux domaines officiels/fonction, modes serveur et
+navigateur sans cookies, jeton Read900s, réponses bornées et corrélation exacte.
+
+L'exploration RO confirme httpx déjà verrouillé, les jetons/URL existants et deux
+raccordements : CSP self seule bloque les alias navigateur, CORS n'expose que le
+hash. Décision : origines concrètes officielles dans connect-src, exposition des
+IDs sûrs, réutilisation de l'émetteur normal de jeton et route d'observation ciblée.
+Aucune migration ni infrastructure nouvelle. Le préflight natif constate deux
+services sains, compteurs/baux nuls,5982artefacts et writer0DML fermé. Aucun test
+071 ni état implémenté n'est revendiqué avant code et déploiement.
+
 ## 12novembre2026 — capacité réelle des brouillons qualifiée
 
 [42groupes](evidence/code-draft-capacity-dev-2026-11-12.json) sur375sources25a4152 et6e1584f2 passent :

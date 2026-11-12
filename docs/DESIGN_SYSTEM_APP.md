@@ -1,5 +1,22 @@
 # Design system du produit
 
+## APP-DS-002 — Composition de requête HTTP
+
+SLS-071 suit [CONSOLE_TESTER](CONSOLE_TESTER.md). Sa facette Tester est un outil
+éphémère avec destination propre, sections Destination/Requête/Accès/Réponse.
+Les paramètres se composent sur place : ils ne modifient aucune configuration
+enregistrée. Cet écart au §6.27 évite d'enfermer la requête à comparer avec sa
+réponse dans une modale. Les jetons et la requête restent uniquement en mémoire.
+
+Les composants Section/Field/Facts/Resource, les confirmations et tokens existants
+sont réutilisés. Un envoi explicite nomme le contexte et la version ; l'arrêt
+porte sur l'attente. Résultat, refus de la passerelle et issue inconnue sont
+distincts. Corps monospace avec défilement local et aperçu64Kio, téléchargement
+borné ; aucun rendu HTML actif. Champs et actions s'empilent sur mobile, noms,
+hashes et URL restent entiers. Le lien de corrélation ouvre les détails et le
+journal existants. Source indisponible retire les anciennes adresses et résultats.
+Les preuves d'interaction et captures restent à produire.
+
 ## Statut
 
 Le socle global est importé dans `DESIGN_SYSTEM.md`. La console de gestion

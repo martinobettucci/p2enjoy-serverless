@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-071 : contrat détaillé du client HTTP de fonction persisté avant code,
+  modes serveur/navigateur, jeton temporaire900s, destinations bornées et
+  corrélation. Réalisation engagée, aucune preuve ni fonctionnalité déployée ici.
+
 - SLS-070.3 : [42groupes réels](docs/evidence/code-draft-capacity-dev-2026-11-12.json) qualifient
   32/128brouillons et64Mio exacts chiffrés sur375sources25a4152 et6e1584f2.
   Refus429/507 atomiques, libérations100/20octets, publication initiale invoquée
