@@ -2465,3 +2465,11 @@ sont observés par Playwright ; --no-access-log reste inchangé.
 Syntaxes contrôlées ; client/lecteur relus et hypothèse d’access log retirée.
 L’exécution réelle reste requise. Douze handlers attendus si tous les scénarios passent ;
 aucun groupe ou capture de cette nouvelle campagne n’est encore qualifié.
+
+Premier passage05ba6e14 sur401sources :422 de création (description de fonction
+non supportée), aucune faute native et zéro groupe qualifié ; parents nettoyés.
+La [preuve échouée](../docs/evidence/function-http-client-task-preparation-failed-dev-2026-11-12.json)
+reste séparée. Le replay porte le nonce complet dans namespace/service et son
+suffixe8dans le nom de fonction, liés par UUID/nom exact dans le helper ; aucune
+colonne de description de fonction n’est supposée. Syntaxes vérifiées ; replay
+réel complet encore requis.

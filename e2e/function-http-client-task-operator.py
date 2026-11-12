@@ -111,9 +111,11 @@ def main():
     assert mode in ('fault','rescue-window','recover','finish','evidence','inspect','diagnose')
     assert str(UUID(fn))==fn and str(UUID(ns))==ns
     with read_control(ROOT/'state/control.sqlite3') as db:
-        row=db.execute('SELECT n.name,n.description nonce,s.description service_nonce,f.description function_nonce FROM functions f JOIN services s ON s.id=f.service_id JOIN namespaces n ON n.id=s.namespace_id WHERE f.id=? AND n.id=?',(fn,ns)).fetchone()
+        row=db.execute('SELECT n.name,n.description nonce,s.description service_nonce,f.name function_name FROM functions f JOIN services s ON s.id=f.service_id JOIN namespaces n ON n.id=s.namespace_id WHERE f.id=? AND n.id=?',(fn,ns)).fetchone()
         assert row and row['name'].startswith('function-http-client-task-exception-')
-        assert str(UUID(row['nonce']))==row['nonce'] and row['nonce']==row['service_nonce']==row['function_nonce'],'owned_original_fixture_required'
+        assert str(UUID(row['nonce']))==row['nonce'] and row['nonce']==row['service_nonce'],'owned_original_fixture_required'
+        assert row['name']=='function-http-client-task-exception-'+row['nonce'][:8]
+        assert row['function_name']=='tester-task-capacity-observer-'+row['nonce'][:8]
     if mode in ('recover','finish','evidence'):
         assert re.fullmatch('serverless-restore-task-exception-[0-9a-f]{32}',arg)
         folder=Path('/run')/arg;item=json.loads((folder/'identity.json').read_text())

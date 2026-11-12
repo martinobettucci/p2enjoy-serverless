@@ -7743,3 +7743,11 @@ Preuve échouée publiée séparément, zéro groupe retenu. Décision avant cor
 nonce parent complet et nom de fonction significatif suffixé du nonce8, UUID
 et noms liés par le helper ; aucune extension de modèle pour le banc. Replay
 complet exigé,071.6 reste ouvert.
+
+### 12novembre2026 — Scope de fonction du banc corrigé avant replay
+
+Le client retire description de FunctionCreate et nomme la fonction par son
+usage avec suffixe8du nonce. Le helper vérifie les UUID, le nonce parent complet,
+le nom exact du namespace et celui de la fonction ; il lit f.name existant.
+SyntaxesJS/Python valides,401sources. Premier passage reste échoué et exclu ;
+replay complet et toutes les preuves natives encore requis.
