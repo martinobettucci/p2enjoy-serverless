@@ -392,3 +392,14 @@ valeurs exactes reste en mémoire pour les gestes natifs annuler/rétablir. La
 preuve comporte une suppression dans `a\r\n\nb`, une saisie sur les lignes
 mixtes et une relecture des octets enregistrés. Aucun contenu n’est persisté par
 le navigateur. Les contrôles statiques/build précèdent une campagne UI réelle.
+
+### Premier parcours navigateur interrompu avant édition
+
+Le premier essai de console échoue au premier groupe dans le client de preuve :
+Chromium ne conserve plus le corps du POST après la navigation de création.
+Zéro groupe acquis. Le namespace créé est à rapprocher explicitement puis retirer.
+Le pilote doit persister chaque intention de création avant le POST, lire statut
+et URL effectivement atteinte puis l’objet par sa vraie API. Le nettoyage relit
+ces intentions, y compris si l’affectation locale n’a pas fini ; un booléen de
+nettoyage sans ce rapprochement n’est pas une preuve. Aucun produit modifié par
+cette correction du banc ; le premier rapport reste conservé hors des succès.
