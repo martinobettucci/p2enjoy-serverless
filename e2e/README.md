@@ -18,6 +18,15 @@ jetons révoqués. Le premier passage13reste exclu.
 La campagne ne ferme pas seule les autres scénarios du [contrat](../docs/CONSOLE_TESTER.md),
 notamment les interruptions et les régressions complètes.
 
+Deux compléments distincts sont implémentés, non exécutés :
+`node e2e/function-http-client-ui.mjs` pour les corps, refus locaux, politiques,
+annulations, gzip, révocation, liens et manuel ;
+`node e2e/function-http-client-admission.mjs` pour quatre vrais JSON HTTPS
+partiels puis429/408 et quatre relais actifs puis429. Même stdin SSO privée,
+objets confinés, purges et reçus UUID. Le fixture canonique est étendu, sans
+nouveau produit/conteneur ni source de substitution. Les18groupes initiaux
+restent dans leur époque382sources ; les compléments auront leur propre index.
+
 ## Capacité réelle des brouillons de code
 
 `node e2e/code-draft-capacity.mjs` reçoit les identifiants du SSO réel sur son
