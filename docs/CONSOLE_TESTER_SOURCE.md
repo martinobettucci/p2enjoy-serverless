@@ -66,4 +66,12 @@ lecture : ces causes du lecteur commun restent dans [SLS-093](BACKLOG.md#sls-093
 Aucun statut ne doit les présenter comme exécutées par le refus EACCES.
 L'exception inattendue d'une tâche du relais relève séparément de071.6.
 Les régressions communes et captures inspectées précèdent toute qualification.
-Statut : spécifié, client non implémenté/non exécuté.
+Statut : client et inspecteur implémentés, relecture avant exécution.
+La relecture exige un témoin positif du vrai lien de téléchargement, un hash/
+UUID UI recoupés avec l'invocation native, intégrité/FK et migrations identiques
+avant/après, et le nettoyage d'un namespace de préparation sans service. Ces
+conditions complètent la preuve sans affaiblir les assertions. Le SHA de l'image
+contrôlée est un argument public obligatoire du client, fourni par le lanceur à
+partir de son relevé natif ; aucun ancien manifeste n'impose une image périmée.
+Le défaut de hash signalé statiquement reste à reproduire avant correction.
+Aucune panne ni qualification nouvelle à ce stade.

@@ -984,6 +984,9 @@ Critères d'acceptation :
   fixe avant code le vrai503 avant émission, retrait UI des anciennes URL/résultats,
   hash indisponible distinct de cible absente, CSPself et restitution. Il réutilise
   la garde de permissions qualifiée066 ; autres causes du lecteur restent093.
+  Relecture du banc avant panne : témoin positif du lien de téléchargement,
+  hash/UUID natifs, intégrité/FK/migrations avant/après et cleanup du namespace
+  sans service sont requis ; SHA image public fourni par le relevé du lanceur.
 - [x] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
   après quinze minutes ; valeur en mémoire de la page, absente des exemples copiés, journaux,
   erreurs, préférences et historique. L’inspecteur de preuve ne réémet aucun
