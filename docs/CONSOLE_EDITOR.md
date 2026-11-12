@@ -672,14 +672,22 @@ Manuel18chapitres/74paragraphes inchangé. Aucun critère supplémentaire ne fer
 console/pagination/adoption, bornesZIP/concurrence et reprises restent à produire.
 
 Le [contrat de compléments console](CODE_EDITOR_CONSOLE_EXTENSIONS.md) définit
-les prochaines preuves UI : sept versions dont archive/supprimée en seconde
-page, adoption conservant la saisie, sept chemins de diff et restitution du
-focus à son titre après pagination. Ce dernier point est à reproduire avant
-correction ; aucun résultat de ce complément n’est encore qualifié.
+les preuves UI : sept versions dont archive/supprimée en seconde page,
+adoption conservant la saisie, sept chemins de diff et restitution du focus
+à son titre après pagination. Le premier passage ci-dessous reproduit le défaut
+avant correction ; le replay qualifie ensuite ces parcours sur sa propre image.
 
 Le premier passage reproduit la perte de focus après les quatre changements de
 page du diff : [échec conservé](evidence/code-editor-console-focus-failed-dev-2026-11-12.json),
 zéro groupe qualifié malgré17passés. La correction et les restes de concurrence/
 adoption sont décidés dans le contrat de compléments avant tout code produit.
 Le correctif génération/focus et le manuel sont déployés surb452ef16 après
-builds local/SPARK et revue ; le replay DEV reste à produire avant qualification.
+builds local/SPARK et revue. Le [replay DEV](evidence/code-editor-console-focus-dev-2026-11-12.json)
+passe43groupes réels :18UI puis25communs,407sources6600150c. Les quatre H2 de
+pagination et deux H3 de détail reçoivent le focus ; adoption locale sans PUT
+puis sauvegarde, sources5+2 archive/supprimée et diff5+2 sont recoupés en desktop/
+mobile.51images inspectées,14handlers nominaux ; les deux fonctions/tokens,
+quatre parents et26helpers des deux passages sont nettoyés.38backend/quatreweb,
+référence, configuration,5982artefacts et dix migrations conservés pendant les
+campagnes. Manuel18/74SHA8a50ffa0.070.1–.5 restent ouverts pour les autres bornes,
+droits pendant IO, concurrence et reprises, dont les risques de focus décrits au contrat.

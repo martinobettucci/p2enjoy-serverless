@@ -155,7 +155,7 @@ son retour de focus est à observer dans070.3, sans attribuer à ces captures un
 mesure qui n’y figure pas. Ces restes sont suivis dans le backlog avant toute
 correction correspondante ; ils ne sont pas présentés comme qualifiés.
 
-## Correctif implémenté, avant qualification DEV
+## Correctif implémenté et qualification DEV
 
 Le composant possède maintenant les refs des deux titres, une intention
 génération/chemin/origine et son effet de layout. `invalidateDiff` unifie le
@@ -168,7 +168,28 @@ ces gestes sans nouveau chapitre ni paragraphe :18chapitres/74paragraphes.
 La revue statique ne relève aucun blocage et le build local Vite passe. Ce sont
 des prérequis, pas une preuve fonctionnelle. Le build SPARK et le déploiement
 réussissent ensuite : imageb452ef16/CID19f92eff, backup SQLite6b9081ea, dix
-migrations/tables/référence/configuration/5982artefacts conservés. Le replay
-18groupes/25communs reste à produire. Les refus,
-recalages, changements de focus et mutations pendant lecture maintenue restent
-à éprouver dans la tranche de concurrence ;070.4 et l’unité restent ouverts.
+migrations/tables/référence/configuration/5982artefacts conservés.
+
+Le [replay2c300143](evidence/code-editor-console-focus-dev-2026-11-12.json) passe
+43groupes réels :18UI puis8manuel/8public/9connexion,407sources6600150c au
+commitd3eb8eb. Le build05b91c9 ne diffère de ce gel que par trois contrats de
+métadonnées ; aucun produit, client ou manuel ne change entre ces époques.
+Les quatre pages donnent H2 focalisé, les deux détails H3, en1440/390px.
+Les sept versions réelles5+2 et leurs états archive/supprimée, la conservation
+de base puis création depuis l’archive, l’adoption locale sans PUT suivie de
+sauvegarde/rechargement et les sept chemins de diff sont recoupés.14handlers
+réussissent ; huit candidats sont publiés dont une réutilisation, un import est
+réellement refusé. Les sept révisions nominales sont physiquement purgées.
+
+51images sont inspectées :27UI,22communes et deux vues du paragraphe du manuel.
+Les deux dernières sont des observations complémentaires, zéro groupe ajouté.
+Les deux fonctions/tokens et quatre parents des passages sont nettoyés ;26helpers
+natifs ont disparu. Même CID/image/démarrage pendant les campagnes,38backend,
+quatreweb, fichiers officiels, référence et5982artefacts inchangés. Intégritéok,
+FKvide, dix migrations, zéro activité/bail/réservation/garde ; manuel18/74SHA8a50ffa0.
+Les trois notes SPARK sont actualisées en propositions gardées, sans adoption.
+
+Les refus, recalages, focus volontaire ailleurs pendant attente et mutations
+face à une lecture maintenue restent à éprouver avec l’ensemble3. Le retour
+de focus après adoption reste aussi à mesurer ;070.1–.5 et l’unité restent ouverts.
+Le premier échec garde sa preuve séparée et ajoute zéro groupe au replay.

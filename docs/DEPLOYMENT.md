@@ -10,7 +10,7 @@ L’invocation du code publié passe la [preuve du moteur](evidence/execution-de
 Expiration, budget et interruption pendant nettoyage restent à qualifier.
 Le parcours UI est spécifié dans [CONSOLE_PUBLICATION](CONSOLE_PUBLICATION.md).
 
-## Correctif de focus Éditeur — déployé en qualification DEV
+## Correctif de focus Éditeur — déployé et qualification ciblée DEV
 
 Le [correctif SLS-070](CODE_EDITOR_CONSOLE_EXTENSIONS.md) est implémenté après
 reproduction sur60938093, relu et construit sur le SPARK. L’imageb452ef16 est
@@ -22,8 +22,13 @@ Les sources sont synchronisées avec gardes SHA ; le build utilise
 `bash control/dev.sh build` et seul `serverless-api` est recréé par Compose
 avec les deux env_file officiels. Santé, migrations010, référence, configuration,
 tables et5982artefacts sont conservés. Le manuel compilé conserve18chapitres/
-74paragraphes, nouvelle empreinte8a50ffa0. Le replay18UI puis25communs et
-l’inspection des nouvelles captures restent requis avant toute qualification.
+74paragraphes, nouvelle empreinte8a50ffa0. Le [replay ciblé](evidence/code-editor-console-focus-dev-2026-11-12.json)
+passe18UI puis25communs,407sources6600150c ;51images inspectées,14handlers
+nominaux et nettoyage complet des deux passages. Backend38/quatreweb, même
+CID/démarrage, référence/configuration/5982artefacts sont conservés pendant les
+campagnes. Les propositions des trois notes sont actualisées sous garde SHA,
+sans adoption ; aucune opération de déploiement ne reste pour ce complément.
+Les autres bornes, lectures concurrentes et interruptions de070 restent ouvertes.
 
 L’extension [SLS-074 — versions par hash](FUNCTION_VERSIONS.md) est déployée
 pour qualification008 : déduplication par paquet, appel épinglé, publication

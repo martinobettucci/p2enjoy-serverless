@@ -11,7 +11,12 @@
   13helpers terminés,5982artefacts conservés ; correction décidée avant code.
   Restitution h2/h3 liée à la génération et invalidation du diff implémentées,
   manuel/client actualisés, revue et builds local/SPARK réussis ; imageb452ef16
-  déployée après backup6b9081ea et conservation des données. Replay à produire.
+  déployée après backup6b9081ea et conservation des données.
+  Le [replay qualifié](docs/evidence/code-editor-console-focus-dev-2026-11-12.json) passe43groupes :18UI/25communs,
+  407sources6600150c,51images inspectées et14handlers nominaux.4H2+2H3 focalisés,
+  sept versions5+2 et adoption locale sans PUT recoupés. Deux fonctions/tokens,
+  quatre parents et26helpers des passages nettoyés ; données/configuration
+  conservées, dix migrations et manuel18/74 conforme.070.1–.5restent ouverts.
 
 - SLS-070 : complément de qualification des sources et limites décidé avant
   son client E2E, puis [qualifié par38groupes réels](docs/evidence/code-editor-source-limits-dev-2026-11-12.json).

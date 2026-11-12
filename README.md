@@ -1,10 +1,16 @@
 # P2Enjoy Serverless
 
-Le [correctif de focus de l’éditeur](docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md)
-est déployé en qualification surb452ef16 après backup SQLite et vérification
-de conservation. Le premier passage sur60938093 a reproduit quatre focusBODY ;
-sa preuve échouée reste séparée. Le replay18UI puis25régressions est à produire.
-Les preuves ci-dessous conservent leurs images et leurs époques propres.
+Le [complément console de l’éditeur](docs/evidence/code-editor-console-focus-dev-2026-11-12.json) passe **43 groupes réels** :
+18 UI puis25régressions, sur407sources6600150c et imageb452ef16. Sept versions
+sur deux pages5+2, archive sélectionnable/supprimée désactivée, adoption locale
+sans PUT puis sauvegarde explicite et diff paginé sont recoupés. Quatre titres
+H2 et deux détails H3 reçoivent le focus en1440/390px.51images inspectées,
+14handlers nominaux ; deux fonctions/tokens de tous les passages nettoyés,
+quatre parents supprimés,26helpers disparus et5982artefacts conservés.
+Manuel18chapitres/74paragraphes, SHA8a50ffa0 ; dix migrations inchangées.
+Le premier passage échoué reste séparé, zéro groupe ajouté. SLS-070 et ses
+critères070.1–.5 restent ouverts pour ZIP/concurrence, droits pendant IO et
+interruptions ; les gestes de focus sous attente gardent leur preuve propre.
 
 Le [complément de sources et limites de l’éditeur](docs/evidence/code-editor-source-limits-dev-2026-11-12.json)
 passe **38 groupes réels** :13ciblés puis25régressions, sur406sources59dd4591,
@@ -102,7 +108,7 @@ régression sont inspectées, les66fonctions des deux passages purgées et les
 5982artefacts antérieurs conservés. Aucun critère supplémentaire de070 ne ferme.
 
 Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
-sur e81007c5 et sont conservées dans l’image courante60938093. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+sur e81007c5 et sont conservées dans l’image couranteb452ef16. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
 passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
 JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
 manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans

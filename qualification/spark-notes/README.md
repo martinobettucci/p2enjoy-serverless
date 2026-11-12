@@ -1,5 +1,21 @@
 # P2Enjoy Serverless
 
+## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
+
+La preuve `docs/evidence/code-editor-console-focus-dev-2026-11-12.json` passe
+43 groupes réels : 18 UI puis 25 régressions, 407 sources 6600150c et image
+b452ef16. Sept versions en pages 5+2, archive sélectionnable/supprimée désactivée,
+adoption gardant le texte local sans PUT et diff paginé desktop/mobile sont
+recoupés. Quatre titres de page H2 et deux détails H3 reçoivent le focus.
+51 images sont inspectées ; 14 handlers nominaux, deux fonctions/tokens de tous
+les passages nettoyés, quatre parents supprimés et 26 helpers disparus.
+Dix migrations, zéro activité/bail/réservation/garde, référence/configuration et
+5 982 artefacts sont conservés. Manuel18chapitres/74paragraphes, SHA8a50ffa0.
+Le passage échoué précédent est séparé et ajoute zéro groupe. SLS-070 reste
+ouverte pour bornes ZIP, concurrence, droits pendant IO et interruptions.
+Les trois fichiers voisins `.?` sont des propositions ; leur adoption reste
+une action distincte de la console SPARK.
+
 ## Client HTTP qualifié — 12 novembre 2026
 
 SLS-071 est livré avec ses huit critères : composition serveur/navigateur,
@@ -17,7 +33,7 @@ Les sections suivantes gardent les états historiques de leurs checkpoints.
 
 ## État courant —12novembre2026
 
-La console et l’API utilisent l’image60938093, schéma de contrôle010. Le manuel
+La console et l’API utilisent l’imageb452ef16, schéma de contrôle010. Le manuel
 compilé compte18chapitres et74paragraphes. Les facettes Éditeur et Tester sont
 déployées ; les compléments de leur qualification restent suivis dans le backlog.
 Le favicon et la marque utilisent trois blocs reliés.

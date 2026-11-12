@@ -174,7 +174,14 @@ passage ; leurs anciennes preuves ne sont pas additionnées. Le
 échoue au18e groupe avec quatre focusBODY :17passés, zéro qualifié,25JPEG
 inspectés et nettoyage complet. Après cette reproduction, le correctif est
 implémenté et le client exige aussi deux titres de détail. Le replay sur sa
-nouvelle image DEV reste à produire.
+nouvelle image DEVb452ef16 [passe43groupes](../docs/evidence/code-editor-console-focus-dev-2026-11-12.json) :
+18UI/8manuel/8public/9connexion, mêmes407sources6600150c avant/après chaque phase.
+27JPEG UI,22images communes et deux observations du paragraphe du manuel sont
+inspectés individuellement.14handlers nominaux, sept révisions purgées,26helpers
+des deux passages disparus, deux fonctions/tokens et quatre parents nettoyés.
+Les4H2+2H3 sont des assertions DOM distinctes des images. Les refus/recalages,
+la lecture maintenue face à mutation, le focus volontaire ailleurs pendant attente
+et celui après adoption gardent leurs preuves à produire.070.1–.5restent ouverts.
 
 `node e2e/code-editor-ui.mjs` reçoit le JSON SSO sur stdin privée. Le parcours
 part de l’accueil et du vrai SSO, crée namespace/service/fonction et jeton Read

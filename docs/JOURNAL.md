@@ -1,5 +1,31 @@
 # Journal de cadrage
 
+## 12 novembre 2026 — sources, adoption et focus de l’éditeur qualifiés
+
+Le [complément console de l’éditeur](evidence/code-editor-console-focus-dev-2026-11-12.json) passe **43 groupes réels** :
+18 UI puis25régressions, sur407sources6600150c et imageb452ef16. Sept versions
+sur deux pages5+2, archive sélectionnable/supprimée désactivée, adoption locale
+sans PUT puis sauvegarde explicite et diff paginé sont recoupés. Quatre titres
+H2 et deux détails H3 reçoivent le focus en1440/390px.51images inspectées,
+14handlers nominaux ; deux fonctions/tokens de tous les passages nettoyés,
+quatre parents supprimés,26helpers disparus et5982artefacts conservés.
+Manuel18chapitres/74paragraphes, SHA8a50ffa0 ; dix migrations inchangées.
+Le premier passage échoué reste séparé, zéro groupe ajouté. SLS-070 et ses
+critères070.1–.5 restent ouverts pour ZIP/concurrence, droits pendant IO et
+interruptions ; les gestes de focus sous attente gardent leur preuve propre.
+
+Le défaut BODY est reproduit avant correction et sa preuve échouée garde zéro
+groupe qualifié. La décision lie la restitution à la génération/chemin/origine
+et invalide les lectures remplacées. Le build05b91c9 et le geld3eb8eb diffèrent
+uniquement par trois contrats de métadonnées ; les407sources du replay restent
+strictement identiques avant/après chacune de ses quatre phases. Le backup
+SQLite6b9081ea précède la bascule du seul contrôle. La proposition des trois
+notes est renouvelée avec gardes SHA, notes actives conservées, sans adoption.
+La revue indépendante recoupe rapports/embarqués/nettoyage ; l’inspection51
+originaux est distincte des assertions DOM et mutations API. Aucun registre
+d’incohérences présent, aucun arbitrage nouveau ; la concurrence statique repérée
+reste suivie dans070.3/.4 avant toute correction ou clôture.
+
 ## 12novembre2026 — pertes de réponses des jetons qualifiées
 
 La [preuve32](evidence/function-http-client-token-loss-dev-2026-11-12.json) passe7groupes ciblés et25régressions,

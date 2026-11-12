@@ -1,5 +1,17 @@
 # Architecture technique
 
+Le [complément console de l’éditeur](evidence/code-editor-console-focus-dev-2026-11-12.json) passe **43 groupes réels** :
+18 UI puis25régressions, sur407sources6600150c et imageb452ef16. Sept versions
+sur deux pages5+2, archive sélectionnable/supprimée désactivée, adoption locale
+sans PUT puis sauvegarde explicite et diff paginé sont recoupés. Quatre titres
+H2 et deux détails H3 reçoivent le focus en1440/390px.51images inspectées,
+14handlers nominaux ; deux fonctions/tokens de tous les passages nettoyés,
+quatre parents supprimés,26helpers disparus et5982artefacts conservés.
+Manuel18chapitres/74paragraphes, SHA8a50ffa0 ; dix migrations inchangées.
+Le premier passage échoué reste séparé, zéro groupe ajouté. SLS-070 et ses
+critères070.1–.5 restent ouverts pour ZIP/concurrence, droits pendant IO et
+interruptions ; les gestes de focus sous attente gardent leur preuve propre.
+
 ## Plateforme
 
 Le [complément SSO SLS-089](SSO_SESSION_RECOVERY.md) réutilise le seul contrôle

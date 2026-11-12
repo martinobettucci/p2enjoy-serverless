@@ -898,14 +898,20 @@ Deux fonctions/tokens des passages sont nettoyés,5982artefacts conservés.
 L’ensemble de [compléments console](CODE_EDITOR_CONSOLE_EXTENSIONS.md) est décidé
 avant son client : seconde page de sources/diff, archive/supprimée et adoption
 en conservant la saisie. Le focus du diff fait l’objet d’un contrôle réel avant
-toute correction ; dix-huit groupes UI puis les régressions sont à produire.
+toute correction ; le passage initial est conservé ci-dessous.
 Le [passage échoué](evidence/code-editor-console-focus-failed-dev-2026-11-12.json)
 reproduit quatre focusBODY après pagination, sur407sources/image60938093.
 17groupes passent mais zéro n’est qualifié ;25captures inspectées,14handlers,
 une fonction/sept révisions et un jeton nettoyés,13helpers terminés et5982artefacts
 conservés. Correction de focus décidée avant code dans le contrat de console.
 Le correctif est implémenté, relu et déployé en qualification surb452ef16 après
-backup SQLite et conservation des données ; le replay reste à produire.
+backup SQLite et conservation des données. Le [replay qualifié](evidence/code-editor-console-focus-dev-2026-11-12.json)
+passe43groupes réels :18UI puis25communs,407sources6600150c/imageb452ef16.
+Sept versions5+2 archive/supprimée, adoption sans PUT puis sauvegarde explicite,
+diff5+2 et4H2+2H3 focalisés sont recoupés ;51images inspectées,14handlers nominaux.
+Deux fonctions/tokens et quatre parents des deux passages sont nettoyés,26helpers
+terminés, dix migrations et5982artefacts conservés. Manuel18/74SHA8a50ffa0.
+070.1–.5 restent ouverts ; aucun critère n’est clos par ce seul complément.
 Les réponses de diff périmées face à une mutation restent à éprouver avec un
 lecteur vivant (070.4) ; le focus après adoption locale est à mesurer (070.3).
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.

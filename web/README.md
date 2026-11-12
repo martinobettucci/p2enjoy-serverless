@@ -1,10 +1,14 @@
 # Console web
 
 Le [correctif de focus de l’éditeur](../docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md)
-est implémenté après la reproduction réelle de quatre focusBODY. Refs des titres,
+est qualifié après la reproduction réelle de quatre focusBODY. Refs des titres,
 intention par génération et invalidation des comparaisons remplacées sont relues ;
 les builds local/SPARK passent. Manuel et client18groupes suivent le code.
-Le rendu est déployé en qualification surb452ef16 ; le replay reste à produire.
+Le [replay](../docs/evidence/code-editor-console-focus-dev-2026-11-12.json) passe
+18groupes UI puis25communs sur407sources6600150c/imageb452ef16 ;51images sont
+inspectées. Quatre H2 et deux H3 focalisés, source5+2 archive/supprimée, adoption
+sans PUT puis sauvegarde et diff5+2 passent en desktop/mobile. Les lectures
+maintenues et le focus après adoption restent à qualifier dans070.3/.4.
 
 Le client HTTP **Tester une fonction (SLS-071)** est livré et qualifié en DEV.
 La [preuve finale du dernier critère](../docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) passe **31 groupes réels** :

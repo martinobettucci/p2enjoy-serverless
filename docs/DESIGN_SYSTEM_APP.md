@@ -532,11 +532,21 @@ La correction réutilise `Section.headingRef` et un h3 de détail : titre de
 comparaison après page/retry, chemin reçu après ouverture de détail, repli au
 titre en cas de refus. L’intention appartient à la seule génération encore
 valide, après rendu ; changer surface/brouillon l’annule. Le correctif et ses
-captures focalisées restent à qualifier. Concurrence de lecture/mutation et
-focus d’adoption gardent leurs preuves spécifiques à produire dans070.
+captures focalisées sont qualifiés sur le replay décrit ci-dessous. Concurrence
+de lecture/mutation et focus d’adoption gardent leurs preuves à produire dans070.
 La réalisation réutilise ces deux refs et l’effet de layout, sans nouveau style
 ou token. Le manuel et le client E2E sont actualisés ; builds local/SPARK réussis,
-rendu b452ef16 déployé mais encore à qualifier. Les captures de l’échec restent leur époque.
+rendu b452ef16 [qualifié par43groupes](evidence/code-editor-console-focus-dev-2026-11-12.json),407sources6600150c.
+51originaux sont ouverts individuellement :27UI,22communs et deux vues du
+paragraphe du manuel actualisé. Le principal inspecte les quatre titres/détails
+focalisés et les deux paragraphes ; le vérificateur ouvre les45autres vues.
+Dialogue source5+2 avec archive/supprimée, adoption gardant le texte local et
+diff5+2 sont lisibles en1440/390px ;4H2+2H3 sont aussi assertés dans le DOM.
+Les fichiers pleines pages prolongent le viewport : le lien fixe Aller au contenu
+recouvre partiellement un lien dans restored-mobile, sans preuve de défaut en
+viewport normal. Les six PNG communs ont leur SHA courant et une fraîcheur de
+phase, sans SHA déclaré par leur rapport. Les captures de l’échec gardent leur
+époque ; ni les attentes concurrentes, ni le focus après adoption ne sont clos.
 
 ## Hash courant du testeur sous erreur de domaines — décision0712
 

@@ -1,5 +1,21 @@
 # Développement et exploitation du SPARK
 
+## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
+
+La preuve `docs/evidence/code-editor-console-focus-dev-2026-11-12.json` passe
+43 groupes réels : 18 UI puis 25 régressions, 407 sources 6600150c et image
+b452ef16. Sept versions en pages 5+2, archive sélectionnable/supprimée désactivée,
+adoption gardant le texte local sans PUT et diff paginé desktop/mobile sont
+recoupés. Quatre titres de page H2 et deux détails H3 reçoivent le focus.
+51 images sont inspectées ; 14 handlers nominaux, deux fonctions/tokens de tous
+les passages nettoyés, quatre parents supprimés et 26 helpers disparus.
+Dix migrations, zéro activité/bail/réservation/garde, référence/configuration et
+5 982 artefacts sont conservés. Manuel18chapitres/74paragraphes, SHA8a50ffa0.
+Le passage échoué précédent est séparé et ajoute zéro groupe. SLS-070 reste
+ouverte pour bornes ZIP, concurrence, droits pendant IO et interruptions.
+Les trois fichiers voisins `.?` sont des propositions ; leur adoption reste
+une action distincte de la console SPARK.
+
 ## Client HTTP qualifié — 12 novembre 2026
 
 SLS-071 est livré avec ses huit critères : composition serveur/navigateur,
@@ -17,7 +33,7 @@ Les sections suivantes gardent les états historiques de leurs checkpoints.
 
 ## État courant —12novembre2026
 
-La console et l’API utilisent l’image60938093, schéma de contrôle010. Le manuel
+La console et l’API utilisent l’imageb452ef16, schéma de contrôle010. Le manuel
 compilé compte18chapitres et74paragraphes. Les facettes Éditeur et Tester sont
 déployées ; les compléments de leur qualification restent suivis dans le backlog.
 Le favicon et la marque utilisent trois blocs reliés.
@@ -72,7 +88,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:609380938e08e026427525fd78dd18c6a7fb9b0052c146ec900dc859cc415df6`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:b452ef1622cf106a85e42c9b616c87c34fcc06123c9dfdfcfe89c48a49af5575`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 
