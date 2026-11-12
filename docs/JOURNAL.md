@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 12 novembre 2026 — lectures vivantes de l’éditeur, décision avant code
+
+Après le checkpoint console43, le SPARK est relu sain au même CID/image,
+sans fonction/brouillon/instance/opération/appel actif ; les5982artefacts et les
+fichiers officiels sont conservés. Le contrat CODE_EDITOR_READ_CONCURRENCY
+retient un vrai read du FD/inode d’un artefact original et un worker libéré du
+GIL. Le main suivi en CONT/TRACECLONE capture les nouveaux workers ; il est
+détaché dès le maintien acquis. La garde indépendante et ses jonctions précèdent
+les preuves de quatre lecteurs, révocation et purge. Aucune réponse ni dépendance
+n’est remplacée. La qualification propre de cette instrumentation est distincte
+de celle des fonctionnalités qui l’utiliseront ; tous les restes070 persistent.
+
 ## 12 novembre 2026 — sources, adoption et focus de l’éditeur qualifiés
 
 Le [complément console de l’éditeur](evidence/code-editor-console-focus-dev-2026-11-12.json) passe **43 groupes réels** :

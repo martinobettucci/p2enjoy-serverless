@@ -914,6 +914,11 @@ terminés, dix migrations et5982artefacts conservés. Manuel18/74SHA8a50ffa0.
 070.1–.5 restent ouverts ; aucun critère n’est clos par ce seul complément.
 Les réponses de diff périmées face à une mutation restent à éprouver avec un
 lecteur vivant (070.4) ; le focus après adoption locale est à mesurer (070.3).
+Le [contrat des lectures vivantes](CODE_EDITOR_READ_CONCURRENCY.md) définit la
+barrière native du worker avant son client : FD/inode de campagne, suivi des
+nouveaux threads, garde indépendante et cinq parcours réels de restitution/
+capacité. Elle prépare droits pendant IO, purge et reconstruction ; aucune
+nouvelle preuve ni clôture de070.1–.5 n’est encore revendiquée.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 est désormais

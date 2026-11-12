@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-070 : [lectures vivantes et concurrence](docs/CODE_EDITOR_READ_CONCURRENCY.md)
+  spécifiées avant le banc : worker retenu sur le vrai FD/inode, nouveaux threads,
+  garde indépendante, restitutions et capacité quatre lecteurs. Préparation
+  des preuves IO/révocation/purge ; aucun résultat fonctionnel supplémentaire.
+
 - SLS-070 : compléments console spécifiés avant leur client E2E : deux pages
   de sources/diff, archive/supprimée et adoption de version gardant la saisie.
   Le client18groupes est préparé et sa syntaxe contrôlée.
