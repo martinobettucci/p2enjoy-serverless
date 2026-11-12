@@ -135,6 +135,11 @@ Le recalage automatique d’une page hors limite transmet l’intention à sa no
 lecture. Le manuel et le design du produit suivent ces gestes. Le prochain
 replay étend les assertions aux détails et aux captures du titre focalisé,
 puis rejoue l’ensemble sur la nouvelle image construite et déployée en DEV.
+Si la personne a déjà placé le focus dans un autre contrôle pendant la lecture,
+ce choix est conservé : la restitution vise seulement le déclencheur encore
+actif ou le focus retombé surbody. L’origine du geste est conservée lors du
+recalage automatique, afin que celui-ci ne transforme pas une autre saisie en
+nouvelle intention de focus.
 
 ## Risques statiques à éprouver dans la suite de070
 
