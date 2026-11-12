@@ -5,7 +5,8 @@
 - SLS-071.2 : preuve dédiée de lecture en attente spécifiée avant code, avec
   le watchdog natif existant, conservation du PID et reprise sans rejeu. La
   revue exige deux revalidations d’identité avant attachement et un reçu de
-  survie du PID ; implémentation et scénarios réels encore requis.
+  survie du PID. Client et durcissement de l’opérateur implémentés, syntaxe
+  contrôlée ; relecture et scénarios réels encore requis.
 
 - Notes SPARK : les trois propositions décrivent désormais60938093 et le
   complément source32. Les notes actives sont conservées ; les empreintes et

@@ -72,7 +72,7 @@ def source_hashes():
     files += [ROOT/'docs/CONSOLE_EDITOR.md']
     files += [ROOT/'docs/CODE_DRAFT_CAPACITY.md']
     # @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#réalisation-et-preuves
-    files += [ROOT/'docs/CONSOLE_TESTER.md',ROOT/'docs/CONSOLE_TESTER_FAILURES.md',ROOT/'docs/CONSOLE_TESTER_TOKEN_LOSS.md',ROOT/'docs/CONSOLE_TESTER_SOURCE.md']
+    files += [ROOT/'docs/CONSOLE_TESTER.md',ROOT/'docs/CONSOLE_TESTER_FAILURES.md',ROOT/'docs/CONSOLE_TESTER_TOKEN_LOSS.md',ROOT/'docs/CONSOLE_TESTER_SOURCE.md',ROOT/'docs/CONSOLE_TESTER_LOADING.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md#livraison-et-limites
     files += [ROOT/'docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#preuves-et-portée-des-opérateurs

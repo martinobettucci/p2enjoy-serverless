@@ -98,6 +98,19 @@ porte392sourcescf5244f5/image96e5dc4e. Les deux fonctions sont purgées, quatre
 jetons révoqués, huit observateurs morts et cinq opérateurs nominaux joints.
 071.3/.8 sont qualifiés ; le premier passage reste exclu des32.
 
+## Lecture réellement en attente du testeur — en préparation
+
+`node e2e/function-http-client-loading.mjs SHA_IMAGE_CONTROLEE` reçoit le vrai
+SSO sur stdin privée, crée sa fixture originale puis utilise le watchdog natif
+existant. Dans sa fenêtre4,5s, Actualiser montre Lecture en cours, retire les
+anciennes URL/cURL/réponse et conserve le jeton. Le seul observateur est ensuite
+réellement tué ; la réponse et la garde12s sont jointes séparément, même PID/
+naissance/cgroup/CID/image/StartedAt recoupés avant le nouvel appel explicite.
+Le [contrat](../docs/CONSOLE_TESTER_LOADING.md) impose aussi de rejouer les sept
+groupes de reprise après les revalidations d’identité de l’opérateur, puis les
+25régressions communes. Code préparé et syntaxe contrôlée ; aucun nouveau
+scénario exécuté ou qualifié à ce stade.
+
 ## Testeur sous source des domaines refusée — complément qualifié
 
 `node e2e/function-http-client-source-access.mjs SHA_IMAGE_CONTROLEE` reçoit le vrai SSO sur stdin

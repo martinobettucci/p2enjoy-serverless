@@ -72,4 +72,5 @@ huit secondes et le timer douze secondes sont ceux du helper qualifié ; les
 sources seront relues et leurs fenêtres respectées. L’exception inattendue
 avec contrôle vivant de071.6 reste une preuve séparée. Une réussite ici ne
 clôture ni les autres causes du lecteur093, ni la campagne complète095, ni les
-défauts visuels101/102. Statut : décidé avant implémentation.
+défauts visuels101/102. Statut : client et durcissement de l’opérateur
+implémentés, syntaxe contrôlée ; relecture et exécution réelles encore requises.
