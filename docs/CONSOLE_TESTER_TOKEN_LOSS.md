@@ -4,6 +4,25 @@ Complément de [SLS-071.3 et071.8](BACKLOG.md#sls-071), décidé avant code apr�
 le checkpoint42. Il garde389sources039c4c97/image96e5dc4e et ses groupes propres.
 Cette nouvelle preuve ne réadditionne aucun des checkpoints43/46/42.
 
+## Résultat qualifié32
+
+La [preuve32](evidence/function-http-client-token-loss-dev-2026-11-12.json) passe7groupes ciblés puis25régressions sur
+392sourcescf5244f5 du commitd3c1dd7, image96e5dc4e conservée. Les quatre
+barrières natives passent avec SIGKILL/Docker137, mutation absente avant commit,
+unique après commit et audit corrélé. Les cinq opérateurs sont joints, dont le
+watchdog indépendant. Confirmation conservée, message non confirmé, unique POST
+et consultation réelle de la liste passent ; les jetons préparés donnent200
+avant révocation commise et401 après.32captures sont inspectées individuellement.
+Une fonction nominale et une préliminaire sont purgées, quatre jetons révoqués,
+parents supprimés et huit observateurs confirmés morts. Base/FK, dix migrations,
+zéro activité/réservation/bail/garde et5982artefacts antérieurs recoupés.
+Le code backend, les ressources web et le manuel n’ont pas changé depuis42 ;
+aucun build, variable, secret ou route n’est ajouté. Les quatre redémarrages
+appartiennent à la garde et conservent CID/image ; la référence garde son démarrage.
+071.3/.8 sont qualifiés avec les preuves43/42/32 respectives. Source/routes,
+exception inattendue d’une tâche et campagne complète gardent071ouverte.
+Le premier3c50e181 reste un échec de banc exclu des32groupes.
+
 ## Résultat attendu
 
 Depuis Tester, une création ou révocation dont la réponse est perdue reste
@@ -95,8 +114,8 @@ conditionnel. Une faute du banc reste un reçu préliminaire distinct.
 Ce complément vise les pertes de réponse des mutations temporaires. Il ne prouve
 ni la source/routes indisponible, ni l'exception inattendue d'une tâche Python
 vivante, ni toute la campagne de plateforme. Ces restes demeurent inscrits dans
-071.2/.6 et les unités transversales. Statut : opérateur et client implémentés,
-relecture ciblée en cours ; non exécutés, aucun nouveau scénario qualifié.
+071.2/.6 et les unités transversales. Statut : opérateur/client et matrice
+avant/après qualifiés par32 ; unité071encore ouverte.
 
 ## Premier passage3c50e181 — attente du rendu à corriger
 

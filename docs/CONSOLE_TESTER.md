@@ -272,7 +272,20 @@ contrôle avant émission reste un refus visible, éprouvé par verrou SQLite
 sans écriture de données. La [preuve42](evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json)
 qualifie cette distinction pour l’invocation sur96e5dc4e/389sources039c4c97 :
 7reprise,10confidentialité et25régressions,12handlers,27captures inspectées.
-Le reçu80eca655 reste échoué ; les pertes de réponse des mutations temporaires
-restent à éprouver, donc071.8 demeure ouverte.071.1/.4/.5 sont qualifiés avec
+Le reçu80eca655 reste échoué. Les mutations temporaires sont ensuite
+qualifiées dans32, comme décrit ci-dessous.071.1/.4/.5 sont qualifiés avec
 leurs références43/46/42 distinctes ;071reste ouverte. Aucun groupe antérieur
 n’est réadditionné.
+
+## Réponses perdues des mutations temporaires qualifiées
+
+La [matrice native](CONSOLE_TESTER_TOKEN_LOSS.md) est qualifiée par la
+[preuve32](evidence/function-http-client-token-loss-dev-2026-11-12.json) sur392sourcescf5244f5/image96e5dc4e :
+création/révocation avant et après commit, watchdog et25régressions. Les
+confirmations restent ouvertes avec l’issue non confirmée, sans succès ni rejeu ;
+la liste UI retrouve les métadonnées, pas la valeur perdue. Les appels de jeton
+préparé donnent200/401 selon la décision durable.32captures inspectées,
+deux fonctions des passages nominal/préliminaire purgées, quatre jetons révoqués
+et huit observateurs morts.071.3/.8 sont qualifiés avec les références43/42/32
+propres ; les groupes des checkpoints ne sont pas additionnés. Le produit et
+le manuel18chapitres/74paragraphes restent ceux de42.071.2/.6 demeurent ouverts.

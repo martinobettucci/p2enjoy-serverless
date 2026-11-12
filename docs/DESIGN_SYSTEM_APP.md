@@ -25,8 +25,12 @@ ajoute27captures inspectées, dont cinq des délais, coupure, refus certain et
 réponse après reprise. Le502 proxy après admission montre Issue inconnue ;
 le vrai503 du contrôle avant émission conserve son alerte. Aucun nouveau
 style ni composant n’est ajouté. Les critères071.1/.4/.5 sont qualifiés avec
-leurs checkpoints propres ; sources indisponibles et pertes des mutations
-temporaires gardent l’unité ouverte.
+leurs checkpoints propres. Le [complément32](evidence/function-http-client-token-loss-dev-2026-11-12.json)
+recoupe dix vues ciblées de jetons et22régressions inspectées : confirmation
+non confirmée conservée, absence de succès, listes vide/actif/révoqué et deux
+vues mobiles lisibles. La dernière ligne d’une liste se poursuit verticalement.
+071.3/.8 sont qualifiés ; source indisponible et exception de tâche gardent
+l’unité ouverte.
 
 ## Statut
 

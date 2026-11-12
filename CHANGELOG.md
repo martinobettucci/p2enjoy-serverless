@@ -2,10 +2,12 @@
 
 ## [Non publié]
 
-- SLS-071.3/.8 : banc de pertes réelles des réponses de jetons implémenté et
-  relu avant exécution. Quatre barrières avant/après commit, watchdog,
-  confirmations UI, métadonnées et appels200/401 ; aucun nouveau résultat
-  qualifié à ce stade.
+- SLS-071.3/.8 qualifiés par [32groupes réels](docs/evidence/function-http-client-token-loss-dev-2026-11-12.json)
+  sur392sourcescf5244f5, même image96e5dc4e : quatre coupures avant/après
+  commit, watchdog, inconnue sans rejeu, liste UI et appels200/401.32captures
+  inspectées, deux fonctions des deux passages purgées, quatre jetons révoqués,
+  huit observateurs morts et5982artefacts conservés. Le premier3c50e181 reste
+  exclu après correction du client qui comptait avant le rendu.071reste ouverte.
 
 - Notes SPARK : état courant010, manuel18chapitres/74paragraphes, image96e5dc4e
   et facette Tester actualisés dans les trois sources de propositions. Les

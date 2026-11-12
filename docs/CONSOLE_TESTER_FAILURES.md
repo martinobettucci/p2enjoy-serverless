@@ -22,9 +22,10 @@ révoqués et parents supprimés ; intégrité/FK, dix migrations et5982artefact
 antérieurs recoupés. Aucune variable, secret ou route n’est modifiée.
 
 Les quatre passages préliminaires et les checkpoints43/46 ne sont pas ajoutés
-aux42.071.1/.4/.5 sont qualifiés avec leurs références propres.071.2/.3/.6/.8
-restent ouverts : source/routes indisponible, réponse perdue des mutations de
-jeton, exception inattendue d’une tâche avec contrôle vivant et campagne complète.
+aux42.071.1/.4/.5 sont qualifiés avec leurs références propres. Au checkpoint42,
+071.2/.3/.6/.8 restaient ouverts. Le [complément32](evidence/function-http-client-token-loss-dev-2026-11-12.json)
+qualifie ensuite les pertes des mutations temporaires et071.3/.8 ; source/routes
+indisponible, exception inattendue d’une tâche et campagne complète restent ouverts.
 L’expiration réelle900s reste la preuve43, pas une nouvelle mesure dans42.
 
 ## Périmètre

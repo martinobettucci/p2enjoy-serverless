@@ -92,7 +92,11 @@ Contrat : [pertes de jeton](../docs/CONSOLE_TESTER_TOKEN_LOSS.md). Code prépar�
 le premier3c50e181 échoue sur une liste comptée avant rendu asynchrone, après
 les deux coupures natives de création. Fonction/jeton/parents/gardes nettoyés ;
 attente du panneau et des lignes exactes ajoutée avant replay des quatre cas.
-Aucun nouveau résultat qualifié à ce stade.
+Le replayabc035c2 passe ensuite7groupes ciblés puis25régressions, avec
+32captures inspectées. La [preuve32](../docs/evidence/function-http-client-token-loss-dev-2026-11-12.json)
+porte392sourcescf5244f5/image96e5dc4e. Les deux fonctions sont purgées, quatre
+jetons révoqués, huit observateurs morts et cinq opérateurs nominaux joints.
+071.3/.8 sont qualifiés ; le premier passage reste exclu des32.
 
 ## Capacité réelle des brouillons de code
 

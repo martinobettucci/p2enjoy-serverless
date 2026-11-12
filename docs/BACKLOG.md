@@ -946,11 +946,14 @@ Tests exigés :
 ## SLS-071 — Client HTTP intégré par fonction
 
 Statut : [~] — backend et facette Tester déployés en DEV sur96e5dc4e.
+[Réponses perdues32groupes](evidence/function-http-client-token-loss-dev-2026-11-12.json)
+sur392sourcescf5244f5 : quatre coupures avant/après commit de création/révocation,
+watchdog et25régressions ;32captures inspectées.071.3/.8 sont qualifiés.
 [Reprise/confidentialité42groupes](evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json) sur389sources039c4c97 :
 7reprise,10confidentialité et25régressions,12handlers et27captures inspectées.
 Le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
 garde384sources8285798e/8c761c5e,35handlers et38captures. Les critères
-071.1/.4/.5/.7 sont qualifiés par leurs checkpoints propres, sans réaddition.
+071.1/.3/.4/.5/.7/.8 sont qualifiés par leurs checkpoints propres, sans réaddition.
 La [première tranche43](evidence/function-http-client-dev-2026-11-12.json) garde
 032ca071/382sources et son expiration réelle900s. Manuel18chapitres/74paragraphes.
 Nature : Développer. Dépend de : SLS-066, SLS-074. Ordre : 3.
@@ -960,8 +963,9 @@ de test de070.6 désormais qualifié ; les autres preuves de070 restent ouvertes
 Le [plan échéances/confidentialité/reprise](CONSOLE_TESTER_FAILURES.md) précise
 les scénarios complémentaires désormais qualifiés dans42 : SIGKILL natif,
 reprise unique, vrai503 avant émission, délais UI et confidentialité native avec
-témoin positif. Source indisponible, pertes de réponse des mutations de jeton,
-exception inattendue d’une tâche et campagne complète restent à éprouver.
+témoin positif. Le complément32 qualifie ensuite les mutations de jeton.
+Source indisponible, exception inattendue d’une tâche et campagne complète
+restent à éprouver.
 
 Résultat attendu : une facette Tester par fonction, de type client HTTP : composer une
 requête, l'envoyer par la vraie passerelle, lire la réponse et retrouver l'appel et ses
@@ -977,7 +981,7 @@ Critères d'acceptation :
   aux adresses de cette installation et à `/invoke/UUID[@HASH]`, redirections non suivies,
   cookies de console non transmis) et contexte **navigateur** (CORS depuis la vraie origine),
   explicitement distingués.
-- [ ] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
+- [x] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
   après quinze minutes ; valeur en mémoire de la page, absente des exemples copiés, journaux,
   erreurs, préférences et historique. L’inspecteur de preuve ne réémet aucun
   champ de log brut non validé, même s’il contient une fuite ; UUID/statut
@@ -988,9 +992,10 @@ Critères d'acceptation :
   uniquement par index/SHA. Le premier9groupes reste intermédiaire ; le passage
   dd3b50db reste préliminaire ; le replay84287810 sur96e5dc4e passe10groupes
   dans le checkpoint42, avec témoin positif et valeurs protégées absentes.
-  Perte de réponse lors d’émission/révocation temporaire encore à éprouver :
-  [matrice native avant/après commit](CONSOLE_TESTER_TOKEN_LOSS.md) décidée
-  avant code, quatre cas UI et un watchdog, sans lecture du secret perdu.
+  Les pertes d’émission/révocation sont qualifiées par la [preuve32](evidence/function-http-client-token-loss-dev-2026-11-12.json) :
+  quatre barrières avant/après commit, un watchdog, inconnue/confirmation
+  conservées, liste UI et200/401 réels, sans lecture du secret perdu.
+  Expiration900s reste la preuve43 ; confidentialité native reste42.
 - [x] SLS-071.4 Annulation qui distingue l'arrêt de l'attente de l'issue du handler déjà
   admis ; aucun rejeu automatique d'une invocation incertaine ; refus de la passerelle
   restitués fidèlement.
@@ -1047,7 +1052,7 @@ Critères d'acceptation :
   modification après copie ; nouveau refus conservé et singulier vérifié.
   38captures sont inspectées ; le passage21antérieur reste exclu.
 
-- [ ] SLS-071.8 Distinguer le refus confirmé du contrôle et le502 du proxy
+- [x] SLS-071.8 Distinguer le refus confirmé du contrôle et le502 du proxy
   après admission. Reçu80eca655 sur8c761c5e : SIGKILL natif/Docker137, reprise
   unique `control_interrupted`, mais UI affiche un refus certain502. Marquer
   les réponses API réelles du contrôle et vérifier la forme de l’erreur avant
@@ -1055,9 +1060,10 @@ Critères d'acceptation :
   Appliquer aussi aux mutations du jeton temporaire. Rejouer coupure, vrai503
   avant émission sous verrou SQLite sans écriture, capacité, manuel et
   régressions sur la nouvelle image. Dans42, coupure puis vrai503 sont
-  qualifiés sur96e5dc4e ; les pertes de réponse des deux mutations temporaires
-  restent à exécuter selon la [matrice dédiée](CONSOLE_TESTER_TOKEN_LOSS.md),
-  donc le critère entier demeure ouvert. Contrat : [provenance](CONSOLE_TESTER_FAILURES.md#défaut-reproduit-après-admission--correction0718).
+  qualifiés sur96e5dc4e ; la [matrice dédiée](CONSOLE_TESTER_TOKEN_LOSS.md)
+  passe ensuite dans32 sur la même image : mutations avant/après commit,
+  unique POST, message non confirmé et métadonnées retrouvées,32captures
+  inspectées.071.8 est qualifié par42 et32, sans addition de leurs groupes. Contrat : [provenance](CONSOLE_TESTER_FAILURES.md#défaut-reproduit-après-admission--correction0718).
 
 Les critères071.1/.5 reposent sur43 et46 (corps, limites, versions, cURL et
 corrélation) ;071.4 reçoit en plus42 (deux délais UI et vraie coupure sans rejeu).

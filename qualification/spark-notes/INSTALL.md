@@ -12,13 +12,21 @@ qualifie42groupes réels : reprise du même contrôle après SIGKILL sans rejeu,
 Issue inconnue après perte du contrôle, vrai503 avant émission, délais UI et
 confidentialité contrôlée avec témoin positif. Les27captures sont inspectées.
 Les42groupes gardent leur propre époque ; les preuves43/46 antérieures ne sont
-pas additionnées. Source/routes indisponible, réponse perdue des mutations de
-jeton et exception inattendue d’une tâche gardent SLS-071 ouverte.
+pas additionnées. Source/routes indisponible et exception inattendue d’une tâche gardent
+SLS-071 ouverte.
 
 Les sections de campagne ci-dessous conservent les images, schémas et dates de
 leurs checkpoints historiques. Elles ne remplacent pas cet état courant.
 Leur déplacement vers le journal et la réduction de ces notes sont suivis dans
 SLS-079.3 ; cette opération n’est pas déclarée terminée.
+
+Le complément `docs/evidence/function-http-client-token-loss-dev-2026-11-12.json`
+qualifie ensuite071.3/.8 :32groupes réels, quatre pertes de réponse de jetons
+avant/après commit, watchdog et32captures inspectées. La confirmation reste
+ouverte, sans succès ni rejeu ; consulter la liste retrouve les métadonnées,
+jamais la valeur perdue. Deux fonctions et quatre jetons de tous les passages
+sont purgés/révoqués, huit observateurs terminés. Le produit et le manuel
+restent inchangés depuis42 ; aucun checkpoint antérieur n’est réadditionné.
 
 Entrée HTTPS : https://serverless.lelabs.tech. La console utilise le SSO LeLabs, client confidentiel `p2enjoy-serverless-dev`, retour `/auth/retour`. Les rôles `verified` et `admin` sont exigés côté serveur. Les secrets OIDC et jetons du fournisseur restent côté serveur.
 

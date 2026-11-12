@@ -1,5 +1,14 @@
 # P2Enjoy Serverless
 
+Les [réponses perdues des jetons temporaires](docs/evidence/function-http-client-token-loss-dev-2026-11-12.json)
+sont qualifiées en DEV :32groupes réels sur392sourcescf5244f5/image96e5dc4e,
+7ciblés puis25régressions. Création et révocation sont réellement coupées avant
+et après commit : confirmation non confirmée, un seul POST, consultation de la
+liste et appels200/401.32captures inspectées, deux fonctions purgées et quatre
+jetons révoqués ; huit observateurs terminés et5982artefacts conservés.
+071.3/.8 sont qualifiés ;071.2/.6 et la campagne complète restent ouverts.
+Aucun nouveau build produit, variable, secret ou route pour ce complément.
+
 Le [complément reprise/confidentialité du testeur](docs/evidence/function-http-client-recovery-confidentiality-dev-2026-11-12.json)
 est qualifié en DEV sur96e5dc4e :42groupes réels,7reprise/10confidentialité et
 25régressions, sur389sources039c4c97.12handlers et27captures inspectées
@@ -9,8 +18,8 @@ Le502 proxy après admission est désormais présenté comme Issue inconnue.
 Quatre fonctions nominales et huit préliminaires sont purgées, neuf jetons
 révoqués et5982artefacts antérieurs conservés.071.1/.4/.5 sont qualifiés en
 référençant leurs checkpoints respectifs ;071reste ouverte pour les sources
-indisponibles, pertes de réponse des mutations temporaires, exception inattendue
-d’une tâche et campagne complète. Les43 et46 gardent leurs époques distinctes.
+indisponibles et exception inattendue d’une tâche, plus campagne complète ;
+les pertes des mutations sont qualifiées ensuite dans32. Les43 et46 gardent leurs époques distinctes.
 
 Le [complément UI/admission du testeur](docs/CONSOLE_TESTER.md) est qualifié en
 DEV sur8c761c5e : [46groupes réels](docs/evidence/function-http-client-ui-admission-dev-2026-11-12.json),

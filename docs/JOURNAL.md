@@ -1,5 +1,31 @@
 # Journal de cadrage
 
+## 12novembre2026 — pertes de réponses des jetons qualifiées
+
+La [preuve32](evidence/function-http-client-token-loss-dev-2026-11-12.json) passe7groupes ciblés et25régressions,
+392sourcescf5244f5/commitd3c1dd7, image96e5dc4e sans rebuild. Le précédent
+natif des versions est spécialisé avec gardes renforcées ; le principal opère
+seul. Premier3c50e181 : deux barrières de création natives franchies puis
+assertion de liste avant rendu. Défaut du banc inscrit/poussé avant correction,
+puis replayabc035c2 : quatre coupures avant/après commit de création/révocation,
+watchdog, snapshot unique/audit, message inconnu/confirmation, un seul POST et
+liste réelle. Les deux jetons de préparation donnent200avant/401après la
+révocation commise. Aucune lecture de valeur perdue ni buffer de réponse.
+
+32images sont inspectées individuellement :10ciblées dont2mobiles,22régressions.
+La dernière ligne de liste se poursuit sous le viewport, état pertinent visible.
+Trois handlers réels, deux fonctions purgées, quatre jetons révoqués ; huit
+observateurs des deux passages terminés, gardes/activité/baux/réservations nuls.
+Intégrité/FK,10migrations,38backends/quatre ressources web et5982artefacts
+antérieurs recoupés. Contrôle même CID/image, quatre redémarrages propres ;
+référence et fichiers officiels inchangés. Manuel18chapitres/74paragraphes,
+SHA68a1e53f inchangé.071.3/.8 sont qualifiés avec leurs références43/42/32,
+sans addition de groupes ;071.2/.6 et campagne complète restent ouvertes.
+Aucun registre d’incohérences présent, aucun arbitrage nécessaire ici.
+Les trois propositions de notes sont actualisées sous garde SHA et relues :
+[reçu](evidence/spark-notes-token-loss-proposed-2026-11-12.json). Les notes
+actives restent inchangées ; aucune adoption revendiquée.
+
 ## 12novembre2026 — propositions de notes SPARK actualisées
 
 La lecture officielle trouve encore005/11chapitres et d’anciennes fonctions
