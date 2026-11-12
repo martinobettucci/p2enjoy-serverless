@@ -28,6 +28,13 @@ Les refus HTTP propres au testeur restent distincts d'une issue de transport
 inconnue. L'exemple cURL conserve destination/noms mais remplace valeurs
 query/en-têtes/jeton/corps. Corrections071.6, avant déploiement.
 
+Le contrôle032ca071 est déployé après backup natif3ec28bb1 ; référence,
+configurations et5982artefacts conservés. Premier passage047e33 :13groupes
+serveur passent (dont bornes exactes/+1 et redirection avec témoin positif),
+puis timeout au parcours UI. Deux fonctions purgées et clients fermés, reçu
+incomplet conservé. Le client doit nommer les étapes UI et capturer l’échec
+pour distinguer défaut de parcours et défaut produit ; aucun succès final.
+
 ## 12novembre2026 — capacité réelle des brouillons qualifiée
 
 [42groupes](evidence/code-draft-capacity-dev-2026-11-12.json) sur375sources25a4152 et6e1584f2 passent :

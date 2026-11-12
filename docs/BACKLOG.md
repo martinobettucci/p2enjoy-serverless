@@ -976,6 +976,9 @@ Critères d'acceptation :
   interdictions que dans le mode serveur ; préserver les refus HTTP du testeur.
   Le client de preuve réconcilie aussi une création à réponse5xx inconnue,
   sans rejouer le POST, et termine ses fermetures indépendamment des erreurs.
+  Premier passage réel047e33 :13groupes serveur réussis, timeout au premier
+  parcours UI ; deux fonctions purgées, aucun groupe ajouté à une preuve finale.
+  Instrumenter les étapes et capture d’échec avant diagnostic/replay.
 
 Tests exigés :
 
