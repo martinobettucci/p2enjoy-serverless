@@ -6,6 +6,8 @@ et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
 Le serveur et la migration010 sont déployés et partiellement qualifiés en DEV
 par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La première facette console est déployée et partiellement qualifiée sura77b6b4e.
 Les critères070.7 et070.8 sont clôturés ; les autres restent ouverts.
+La campagne de capacité réelle est détaillée dans
+[CODE_DRAFT_CAPACITY](CODE_DRAFT_CAPACITY.md), décision avant son client E2E.
 
 ## Parcours et droits
 

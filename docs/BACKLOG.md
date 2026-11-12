@@ -877,6 +877,8 @@ dont070.7. La première facette Éditeur est déployée sura77b6b4e et
 Deux époques déclarées, produit identique ; quotas, reprises et compléments
 conservent leur état ouvert. Le complément [070.8](evidence/code-editor-save-confirmation-dev-2026-11-12.json)
 passe 39 groupes sur 6e1584f2 et clôture le retrait des confirmations périmées.
+La qualification suivante porte sur les plafonds32acteur/128globaux et64Mio
+chiffrés ; son [plan de capacité](CODE_DRAFT_CAPACITY.md) est persisté avant code.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 dépend de

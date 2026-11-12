@@ -1,5 +1,12 @@
 # Journal de cadrage
 
+## 12novembre2026 — décision de qualification des capacités de brouillon
+
+Le [plan](CODE_DRAFT_CAPACITY.md) précise avant code les frontières32/128 et
+64Mio de ciphertext réel, la comparaison atomique des refus et le nettoyage par
+API. Le scénario termine par une publication initiale et une invocation Docker
+originale. Aucun changement produit ni clôture supplémentaire revendiqué.
+
 ## 12novembre2026 —070.8 clôturée par39groupes réels
 
 La [preuve](evidence/code-editor-save-confirmation-dev-2026-11-12.json) passe14UI puis25régressions sur371sources0080af6

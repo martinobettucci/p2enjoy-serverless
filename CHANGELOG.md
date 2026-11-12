@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-070.3 : plan de qualification des plafonds de brouillons persisté avant
+  code, frontière exacte64Mio chiffrés, refus atomiques, libération, publication
+  initiale et purge par les API normales. Preuve à produire.
+
 - SLS-070.8 corrigée et qualifiée en DEV sur6e1584f2 : confirmations retirées à
   la frappe/lecture, saisies tardives distinctes du snapshot sauvegardé et code
   readonly pendant les autres mutations. [39groupes réels](docs/evidence/code-editor-save-confirmation-dev-2026-11-12.json)
