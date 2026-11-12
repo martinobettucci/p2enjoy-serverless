@@ -28,6 +28,8 @@ files.update({name:(ROOT/'qualification/artifacts'/name).read_bytes() for name i
 files['réglages.yml']='message: Bonjour depuis YAML\r\n'.encode()
 files['payload.bin']=bytes(range(256))*16
 files['sans-fin.txt']='Dernier caractère conservé : é'.encode()
+files['lignes-identiques.txt']='a\r\n\nb'.encode()
+files['fins-mixtes.txt']='première\r\ndeuxième\rtroisième\nfin'.encode()
 with zipfile.ZipFile(output,'x',compression=zipfile.ZIP_DEFLATED,allowZip64=False) as archive:
     for path,data in sorted(files.items()):
         info=zipfile.ZipInfo(path,(1980,1,1,0,0,0));info.create_system=3;info.compress_type=zipfile.ZIP_DEFLATED

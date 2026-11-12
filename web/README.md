@@ -1,5 +1,12 @@
 # Console web
 
+La facette [Éditeur SLS-070](../docs/CONSOLE_EDITOR.md) est implémentée et reste
+à construire/déployer/qualifier : sources par hash, brouillon personnel, fichiers,
+recherche, comparaison et suivi du vrai pipeline. Les saisies sont protégées
+avant navigation et déconnexion ; le modèle conserve les fins de ligne exactes.
+Aucune migration ni dépendance nouvelle. Les parcours et captures restent à
+produire ; aucun critère UI n’est clôturé.
+
 SLS-089 est déployée sur e81007c5, après sauvegarde native SQLite et sans
 changement de schéma ou configuration de cellule. La [preuve partielle](../docs/evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes
 sur 359 sources : 8 ciblés SSO, 8 du manuel, 8 publics, 9 de connexion. 30 captures sont recoupées,

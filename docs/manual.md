@@ -204,6 +204,74 @@ version archivée ou supprimée. En cas de réponse perdue, relire la tentative 
 le catalogue avant toute nouvelle opération ; une publication incertaine n’est
 jamais renvoyée automatiquement.
 
+## Modifier le code dans la console
+
+Ouvrir une fonction puis **Éditeur**, ou choisir **Modifier ce code** sur une
+version conservée dans **Code et révisions**. Le contexte distingue la source
+publiée, votre brouillon personnel et la cible promue. **Choisir une version
+source** permet de parcourir les hashes disponibles ou archivés ; une version
+supprimée n’est pas une source. Sans cible sur une fonction déjà publiée,
+choisir un hash conservé. Seule une fonction jamais publiée peut partir vide.
+
+**Créer mon brouillon** conserve la base choisie. Un brouillon existant n’est
+pas remplacé par une autre source : choisir **Ouvrir mon brouillon**, ou
+l’abandonner explicitement. Il appartient à votre compte et reste sur le
+serveur après fermeture. Son enregistrement possède un compteur de concurrence,
+distinct du hash d’une version publiée. Les sources et brouillons exigent le
+droit de publication ; Read d’invocation ne donne pas accès au code.
+
+Parcourir les dossiers ou **Rechercher un chemin**, puis choisir un fichier.
+Les listes ont cinq éléments par page. Les dépendances, binaires, tailles et
+empreintes sont identifiés. Un binaire ou un fichier de plus de1Mio n’est pas
+éditable ; ses octets sont conservés à la publication. Un texte s’ouvre en
+lecture. Dans votre brouillon, **Modifier le fichier**, saisir, puis
+**Enregistrer le fichier**. Le compteur limite chaque texte à1Mio UTF-8 ; le
+brouillon conserve128chemins et4Mio de texte au plus. Les fins de ligne
+existantes et l’absence éventuelle de fin de ligne finale sont conservées.
+
+**Rechercher dans le fichier** effectue une recherche littérale sensible à la
+casse. **Occurrence précédente** et **Occurrence suivante** sélectionnent le
+texte et indiquent sa ligne et sa colonne. Le code large défile dans son cadre.
+**Ajouter un fichier** demande un chemin relatif et crée un texte vide ; un
+chemin déjà occupé est refusé. **Modifier le handler du brouillon** règle le
+module et son export. Retirer un fichier, le rétablir depuis la base ou abandonner
+le brouillon demande confirmation. Un fichier ajouté rétabli depuis la base
+est retiré du brouillon. Aucune dépendance n’est installée automatiquement.
+
+Une saisie locale est signalée avant changement de fichier, navigation,
+déconnexion ou fermeture. Annuler conserve le texte. **Terminer l’édition**
+revient à la lecture après enregistrement ou abandon explicite des saisies.
+Un refus conserve votre texte ; **Contenu déjà enregistré** signifie qu’aucun
+octet n’a changé. Des frappes pendant l’enregistrement restent locales et ne
+sont pas présentées comme déjà sauvegardées.
+
+Après un conflit ou une réponse incertaine, **Relire le brouillon serveur**
+permet de consulter son nouvel enregistrement sans écraser votre saisie.
+Comparer son contenu puis adopter explicitement cette version en gardant votre
+texte pour une prochaine sauvegarde, ou choisir le texte du serveur. Une
+nouvelle modification concurrente peut encore refuser l’écriture ; il n’y a
+ni fusion silencieuse ni répétition automatique.
+
+**Voir le diff avec la cible** compare le brouillon enregistré à la cible
+promue actuelle ; les deux hashes et handlers sont indiqués. Choisir un chemin
+ouvre son diff textuel borné. Binaires, gros textes et dépassement des limites
+sont signalés ; les saisies non enregistrées ne sont pas dans cette comparaison.
+
+**Publier le brouillon** demande confirmation de la fonction, de sa base et du
+handler. Le pipeline vérifie réellement le paquet dans Docker. Code inchangé :
+même hash ; code modifié : version disponible par hash. La cible promue reste
+stable. Un import refusé conserve le brouillon et la cible ; **Validation et
+journal** permet de diagnostiquer la tentative. Son UUID est dans l’adresse
+avant l’envoi. Après interruption ou réponse perdue, **Relire cette tentative**,
+sans renvoyer la publication. Une préparation orpheline peut être abandonnée.
+**Adresses de la version publiée** ouvre le pilote ; **Versions, promotion et
+retour à un hash** mène aux gestes explicites de promotion et rollback.
+
+Pour annuler le retrait d’un fichier sans abandonner les autres modifications,
+ouvrez **Voir le diff avec la cible**, choisissez son chemin puis confirmez
+**Rétablir ce chemin depuis la base**. Le même geste retire un fichier ajouté
+au brouillon ; il ne modifie aucun autre fichier.
+
 ## Publier le code avec l’adaptateur
 
 La commande de déploiement lit `P2_SERVERLESS_URL` et `P2_SERVERLESS_TOKEN`

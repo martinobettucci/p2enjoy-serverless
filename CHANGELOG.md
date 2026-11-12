@@ -2,8 +2,9 @@
 
 ## [Non publié]
 
-- SLS-070 UI : détail des parcours et de la protection des saisies persisté
-  avant code ; facette, manuel et preuves navigateur à réaliser.
+- SLS-070 UI : facette Éditeur, navigation protégée, lecture/édition des fichiers,
+  recherche, diff et suivi du candidat implémentés après contrat. Manuel et
+  fixture de fins de ligne mis à jour ; construction et preuves UI à exécuter.
 
 - SLS-070 : contrat complet de l’éditeur persisté avant code : brouillons privés,
   droits de publication, diff, base retenue, limites et pipeline Docker réel.

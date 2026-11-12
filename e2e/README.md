@@ -1,5 +1,19 @@
 # Qualification de la plateforme
 
+## Parcours de console de l’éditeur — en préparation
+
+`node e2e/code-editor-ui.mjs` reçoit le JSON SSO sur stdin privée. Le parcours
+part de l’accueil et du vrai SSO, crée namespace/service/fonction et jeton Read
+par les formulaires, puis publie le paquet original YAML par la console.
+Il édite les vraies sources et le handler, relit les octets exacts, provoque un
+conflit entre deux vrais onglets, retire/rétablit un fichier et publie des
+versions dédupliquées, pilotes, ESM puis un import réellement cassé. Promotion,
+rollback et URL copiée sont invoqués contre Docker. Captures desktop/mobile,
+absence de stockage web, brouillon retrouvé et purge native sont requis.
+Aucune interception ni dépendance substituée. Les rapports UUID conservent les
+échecs sans ajouter leurs groupes à un replay réussi. Cette première facette
+reste à construire/déployer/qualifier ; aucune preuve UI n’est encore acquise.
+
 ## Sources et brouillons de code — première tranche qualifiée
 
 `node e2e/code-editor.mjs` reçoit le JSON SSO sur stdin privée. Il utilise le

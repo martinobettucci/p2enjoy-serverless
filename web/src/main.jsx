@@ -11,6 +11,8 @@ import {UsageManual} from './manual';
 import {Archives,ArchiveDetail} from './storage';
 // @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#parcours-et-adresses | docs/DESIGN_SYSTEM_APP.md
 import {FunctionCatalogue} from './catalogue';
+// @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#détail-de-la-facette-console--12novembre2026-avant-code | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md#modifier-le-code-dans-la-console
+import {confirmNavigation} from './navigation-guard';
 import './style.css';
 
 const brand = <div className="brand"><img src="/favicon.svg" alt=""/><div>P2Enjoy<small>Serverless</small></div></div>;
@@ -119,7 +121,7 @@ function Shell({user}) {
         <a href="/console/archives" aria-current={isArchives ? 'page' : undefined}><Archive aria-hidden="true"/>Archives de fonctions</a>
         <a href="/console/manual" aria-current={isManual ? 'page' : undefined}><BookOpen aria-hidden="true"/>Manuel d’usage</a></nav>
       <footer><div><small>Compte connecté</small><p>{user.name}</p></div>
-        <Confirm label="Se déconnecter" message={`Fermer la session de « ${user.name} » ?`} action={async () => {await api('/auth/logout',{method:'POST'}); sessionToken(''); location.assign('/');}}/>
+        <Confirm label="Se déconnecter" message={`Fermer la session de « ${user.name} » ?`} action={async () => {if(!await confirmNavigation())return;await api('/auth/logout',{method:'POST'}); sessionToken(''); location.assign('/');}}/>
       </footer>
     </aside>
     <div className="shell" inert={menu ? true : undefined}><header className="topbar"><div className="actions"><button ref={menuButton} className="mobile-menu" onClick={() => setMenu(true)} aria-expanded={menu}><Menu aria-hidden="true"/>Menu</button><span>Console d’administration</span></div></header>

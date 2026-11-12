@@ -871,8 +871,8 @@ Tests exigés :
 Statut : [~] — contrat détaillé persisté dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
 avant code. Serveur et migration010 déployés sur7c5c6f4b ;
 [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json) qualifient une première tranche serveur,
-dont070.7. La facette Éditeur est la tranche en cours ; ses gestes et sa garde
-de saisie sont précisés avant code dans CONSOLE_EDITOR. Les preuves restantes
+dont070.7. La facette Éditeur est implémentée, en attente de construction et qualification ;
+ses gestes et sa garde de saisie sont précisés dans CONSOLE_EDITOR. Les preuves restantes
 conservent leur état ouvert.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et

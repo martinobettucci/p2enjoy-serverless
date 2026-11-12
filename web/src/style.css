@@ -193,3 +193,23 @@ td {overflow-wrap:anywhere;}
   .key-row .field:first-child {grid-column:1 / -1;}
 }
 @media (prefers-reduced-motion:reduce) {*,*::before,*::after {transition:none !important; animation:none !important; scroll-behavior:auto !important;}}
+
+/* @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#détail-de-la-facette-console--12novembre2026-avant-code | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md#modifier-le-code-dans-la-console */
+:root {--size-code-editor:26rem;}
+.editor-layout {display:grid;grid-template-columns:var(--size-nav) minmax(0,1fr);gap:var(--space-6);align-items:start;}
+.editor-layout>.panel {min-width:0;}
+.editor-files,.editor-source-options,.editor-diff-list {list-style:none;margin:var(--space-4) 0;padding:0;}
+.editor-files li,.editor-source-options li {border-top:1px solid var(--color-border);}
+.editor-files button {display:flex;width:100%;justify-content:flex-start;text-align:left;padding:var(--space-3) var(--space-2);border:0;border-radius:0;min-width:0;}
+.editor-files button[aria-current=true] {background:var(--color-brand-soft);color:var(--color-brand-on-soft);border-left:4px solid var(--color-brand);font-weight:600;}
+.editor-files button>span,.editor-source-options label>span {min-width:0;overflow-wrap:anywhere;}
+.editor-files small,.editor-source-options small {display:block;font-weight:400;}
+.editor-source-options .check {align-items:flex-start;padding:var(--space-2) 0;}
+.editor-source-options input[type=radio] {width:24px;min-height:24px;flex:none;accent-color:var(--color-brand);}
+.editor-folders {display:grid;gap:var(--space-2);margin:var(--space-4) 0;}
+.editor-folders span {overflow-wrap:anywhere;}
+.editor-code {height:var(--size-code-editor);white-space:pre;overflow:auto;resize:vertical;}
+.editor-code[readonly] {background:var(--color-bg);cursor:default;}
+.editor-file h2 {overflow-wrap:anywhere;}
+.editor-diff-list button {display:block;max-width:100%;text-align:left;overflow-wrap:anywhere;}
+@media (max-width:1023px) {.editor-layout {grid-template-columns:minmax(0,1fr);}}

@@ -231,7 +231,8 @@ function Pages({name,page,total,disabled,change}) {
   </nav>;
 }
 
-function Candidate({row,disabled,abandon}) {
+// @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#publication-et-réponses-perdues | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md#modifier-le-code-dans-la-console
+export function Candidate({row,disabled,abandon}) {
   return <article aria-label={`Suivi ${row.id}`}>
     <div className="observation-heading"><h3>État de la tentative</h3><CandidateState row={row}/></div>
     <Facts values={[
@@ -302,6 +303,8 @@ function CodeVersion({row,functionName,functionId,observation,disabled,perform,r
         row.active ? <button onClick={()=>requestRemoval({row,functionName,perform,action:'delete'})}>Supprimer cette version</button> :
           <Confirm label="Supprimer cette version" message={`Supprimer le code du hash ${row.code_hash} de « ${functionName} » après la fin de ses appels admis ? Une réimportation du paquet sera nécessaire pour le retrouver.`} action={()=>perform('delete')}/>}
     </fieldset>
+    {/* @spec docs/BACKLOG.md#sls-070 | docs/CONSOLE_EDITOR.md#parcours-et-droits | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md#modifier-le-code-dans-la-console */}
+    {row.state!=='deleted'&&row.stored_bytes>0&&<a href={withCatalogue(`/console/functions/${functionId}/editor?view=source&version=${row.code_hash}`)}>Modifier ce code</a>}
     <ErrorMessage error={restoreError}/>
 
   </article>;
