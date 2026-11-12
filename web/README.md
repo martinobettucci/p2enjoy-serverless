@@ -1,11 +1,16 @@
 # Console web
 
-La facette [Éditeur SLS-070](../docs/CONSOLE_EDITOR.md) est implémentée et reste
-à construire/déployer/qualifier : sources par hash, brouillon personnel, fichiers,
-recherche, comparaison et suivi du vrai pipeline. Les saisies sont protégées
-avant navigation et déconnexion ; le modèle conserve les fins de ligne exactes.
-Aucune migration ni dépendance nouvelle. Les parcours et captures restent à
-produire ; aucun critère UI n’est clôturé.
+La première facette [Éditeur SLS-070](../docs/CONSOLE_EDITOR.md) est déployée
+sur a77b6b4e : sources par hash, brouillon personnel, fichiers, recherche, diff,
+historique exact borné et suivi du vrai pipeline. La [preuve](../docs/evidence/code-editor-console-dev-2026-11-12.json)
+passe57groupes réels,17invocations Docker et41captures inspectées.
+Les12groupes UI incluent lignes mixtes/undo/redo,64gestes/8Mio d’historique,
+protections de navigation, conflit entre onglets, revert, pilote/promotions/rollback,
+CJS/ESM et import refusé. Le manuel servi est17chapitres/67paragraphes.
+Deux époques de sources sont déclarées ; produit et image sont identiques entre
+elles. Aucun critère UI n’est clôturé : limites résiduelles, réponses perdues,
+reprises et compléments de parcours restent à éprouver. Le succès historique
+visible pendant une nouvelle saisie est à retirer dans070.8. Tester071 reste absent.
 
 SLS-089 est déployée sur e81007c5, après sauvegarde native SQLite et sans
 changement de schéma ou configuration de cellule. La [preuve partielle](../docs/evidence/sso-session-recovery-dev-2026-11-11.json) passe 33 groupes

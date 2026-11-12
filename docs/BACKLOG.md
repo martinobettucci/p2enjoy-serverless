@@ -871,9 +871,11 @@ Tests exigés :
 Statut : [~] — contrat détaillé persisté dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
 avant code. Serveur et migration010 déployés sur7c5c6f4b ;
 [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json) qualifient une première tranche serveur,
-dont070.7. La facette Éditeur est implémentée, en attente de construction et qualification ;
-ses gestes et sa garde de saisie sont précisés dans CONSOLE_EDITOR. Les preuves restantes
-conservent leur état ouvert.
+dont070.7. La première facette Éditeur est déployée sura77b6b4e et
+[57groupes réels](evidence/code-editor-console-dev-2026-11-12.json) passent :12UI/20serveur/25régressions,
+17invocations Docker,41captures inspectées ;manuel17chapitres/67paragraphes.
+Deux époques déclarées, produit identique ; quotas, reprises et compléments
+conservent leur état ouvert.070.8 porte une confirmation de succès périmée.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 dépend de
@@ -905,6 +907,12 @@ Critères d'acceptation :
   rétablie et purges complètes prouvent la libération. La [preuve](evidence/code-editor-server-dev-2026-11-12.json)
   conserve aussi le premier échec du client ClientRequest45s, sans le compter
   dans les45groupes réussis. Client TLS réel avec Connection:close, aucun rejeu.
+
+- [ ] SLS-070.8 Retirer le succès historique dès qu’une nouvelle saisie commence.
+  La capture de première tranche unsaved-preserved affiche « Brouillon enregistré »
+  avec le badge local non enregistré ; ce reste UX est constaté et non corrigé.
+  Conserver la réussite acquise de la sauvegarde, mais retirer sa notification
+  quand le texte évolue ou lors d’une nouvelle lecture. Preuve UI réelle requise.
 
 
 Tests exigés :

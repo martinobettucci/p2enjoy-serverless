@@ -1,6 +1,6 @@
 # Qualification de la plateforme
 
-## Parcours de console de l’éditeur — en préparation
+## Parcours de console de l’éditeur — première tranche qualifiée
 
 `node e2e/code-editor-ui.mjs` reçoit le JSON SSO sur stdin privée. Le parcours
 part de l’accueil et du vrai SSO, crée namespace/service/fonction et jeton Read
@@ -11,8 +11,11 @@ versions dédupliquées, pilotes, ESM puis un import réellement cassé. Promoti
 rollback et URL copiée sont invoqués contre Docker. Captures desktop/mobile,
 absence de stockage web, brouillon retrouvé et purge native sont requis.
 Aucune interception ni dépendance substituée. Les rapports UUID conservent les
-échecs sans ajouter leurs groupes à un replay réussi. Cette première facette
-reste à construire/déployer/qualifier ; aucune preuve UI n’est encore acquise.
+échecs sans ajouter leurs groupes à un replay réussi. La [première tranche](../docs/evidence/code-editor-console-dev-2026-11-12.json) passe12groupes UI puis20serveur
+et25régressions sura77b6b4e. Deux époques de370sources sont déclarées sans
+changement produit.17invocations natives,41captures inspectées et8purges de
+fonctions recoupées ; manuel17chapitres/67paragraphes. Les premiers échecs du
+banc restent exclus. Quotas, reprises, limites et compléments UI gardent070ouverte.
 
 ## Sources et brouillons de code — première tranche qualifiée
 

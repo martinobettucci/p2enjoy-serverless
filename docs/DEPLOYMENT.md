@@ -514,3 +514,15 @@ Base DEV actuelle7c5c6f4b, schéma010 inchangé. Sauvegarde native avant bascule
 référence/configurations/artefacts conservés ; mêmes deux env_file officiels,
 aucune route ou variable ajoutée. Preuves UI et régressions à exécuter après
 recoupement des exécutables et des ressources réellement servis.
+
+## Bascule de la facette Éditeur —12novembre2026
+
+Le seul contrôle DEV passe de7c5c6f4b à803f7a44 puisa77b6b4e pour l’historique
+borné. Le schéma reste010 ; avant chaque bascule, sauvegarde native et comparaison
+des tables métier. Sauvegarde avanta77b6b4e : qualification-history/
+before-code-editor-console-history-67108d227a794cf58e5ec80e2ef69abc,
+SHAd2019d3d5bf1a032b76afb1bc259f17d75f118b9e7574fe94c6c6d22c49ba6b5.
+Contrôle0c3a6aa3 sain ; référence, fichiers officiels et5982artefacts conservés.
+La [preuve](evidence/code-editor-console-dev-2026-11-12.json) recoupe57groupes,17invocations,41captures,
+36sources serveur et4ressources HTTPS, puis l’absence d’actifs et de brouillons.
+Les captures protégées de rétention009 ne sont ni restaurées ni modifiées.

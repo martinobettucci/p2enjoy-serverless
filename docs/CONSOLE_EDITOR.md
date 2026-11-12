@@ -4,7 +4,7 @@ Contrat de réalisation [SLS-070](BACKLOG.md#sls-070), décidé le11 novembre202
 avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler)
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
 Le serveur et la migration010 sont déployés et partiellement qualifiés en DEV
-par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La facette console est implémentée, en attente de construction et de preuve UI.
+par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La première facette console est déployée et partiellement qualifiée sura77b6b4e.
 Seul070.7 est clôturé ; les autres critères restent ouverts.
 
 ## Parcours et droits
@@ -459,3 +459,48 @@ font preuve : cinquième429 sous5s sans corps, quatre408 entre29 et40s, puis
 lecture normale et purge. Aucun refus n’est remplacé/réessayé automatiquement.
 Les observations et échecs précédents restent conservés ; le backend ne change
 pas. Les12groupes UI acquis au gel48e0f1f restent leur époque distincte.
+
+## Première facette console qualifiée —12novembre2026
+
+La [preuve](evidence/code-editor-console-dev-2026-11-12.json) contient57groupes réussis, strictement en série :
+12parcours UI au gel48e0f1f puis20serveur et25régressions au gelde56dfc.
+Les370sources de chaque époque sont recoupées avant/après. Seuls le client
+code-editor.mjs et ce contrat changent entre les deux ; les sources produit,
+le manuel servi et l’imagea77b6b4e restent identiques. Les cinq premiers essais
+échoués ne s’ajoutent pas aux57groupes ; leurs ressources sont rapprochées.
+
+La console passe les vrais formulaires/SSO, arborescence5+pagine, binaire,
+dépendance YAML2.9.1, EOL mixtes, suppression ambiguë et undo/redo, absence de fin
+ajoutée,65gestes→64retenus, neuf textes1Mio→8Mio exacts de patches, garde avant
+fichier/source/lien/logout/reload, conflit409entre deux onglets et invalidation
+A→B, ajout/refus de chemin, retrait/revert isolé, no-op et déduplication. Pilote,
+URL officielle copiée/invoquée, promotion/rollback, handler ESM et import cassé
+sont éprouvés. Neuf appels UI et huit serveur sont recoupés nativement ; quatre
+publications et un import refusé pour chacune des deux campagnes ciblées.
+
+Le replay serveur sans sonde consommatrice reçoit le cinquième429 en132ms,
+zéro octet envoyé, et quatre408entre30,115 et30,148s ; les cinq UUID ont leurs
+refus natifs. Son premier replay échoué reste distinct. Le paquet courant a
+240fichiers originaux/dépendance, dont les deux nouvelles fixtures de lignes.
+Huit fonctions de tous les essais sont purgées physiquement ; le premier
+namespace vide a sa correction de nettoyage distincte. Les5982artefacts
+antérieurs et leurs SHA, les fichiers officiels et la référence sont conservés.
+Dix migrations, intégrité, clés étrangères et actifs nuls ont leur reçu explicite.
+
+Les41images inspectées sont12captures Éditeur,22régressions et7lectures du
+chapitre nouveau. Les35JPG ont leurs SHA déclarés ; les6PNG de connexion sont
+liés à leurs octets actuels et mtime dans leur phase, sans SHA déclaré par le
+rapport login. Les7lectures de chapitre ajoutent zéro groupe fonctionnel. Le
+manuel canonique servi correspond à17chapitres et67paragraphes. Une première
+capture mobile avec tuile non peinte est reprise après frames/capture natives ;
+seules les images finales effectivement inspectées sont attestées.
+
+Reste UX constaté sur la capture unsaved-preserved : le succès historique
+« Brouillon enregistré » reste visible avec une nouvelle saisie locale. Le
+badge signale celle-ci mais la notification doit être retirée à la frappe et
+aux nouvelles lectures ; suivi070.8, aucun correctif encore revendiqué.
+Restent aussi les parcours source archivée/dialog/pagination de diff aux bornes,
+adoption en gardant le texte, frappes durant sauvegarde, préparation/inconnu,
+réponses perdues et SIGKILL/restart, quotas globaux et autres bornes de ce contrat,
+purge avec lecteur vivant et campagne complète. Le lien Tester dépend de071.
+Les critères070.1–.6/.8 restent ouverts ; seule070.7 demeure clôturée.

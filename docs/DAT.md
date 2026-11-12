@@ -472,7 +472,7 @@ Moteur déployé en DEV ; premier checkpoint de22 groupes réels recoupé dans
 [la preuve](evidence/schedules-checkpoint-dev-2026-11-10.json). La qualification
 complète des planifications et de la plateforme reste ouverte.
 
-## Éditeur et brouillons prévus
+## Éditeur et brouillons en qualification
 
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md) spécifie SLS-070 avant code : couche de
 modifications chiffrées sur une révision immuable retenue, puis reconstruction
@@ -480,15 +480,26 @@ ZIP bornée et réutilisation du vrai pipeline code-only. Une garde de lecteur
 protège les entrées/sorties du nettoyage et de la purge ; aucun verrou SQLite
 n'est tenu pendant la reconstruction. La copie des dépendances dans chaque
 brouillon est écartée. La bibliothèque standard suffit ; aucune dépendance,
-service ni variable de cellule supplémentaire. Implémentation encore absente.
+service ni variable de cellule supplémentaire. Le serveur et la première facette
+console sont maintenant déployés ; leur qualification reste partielle.
 
 Première réalisation serveur010 déployée sur7c5c6f4b et [partiellement qualifiée](evidence/code-editor-server-dev-2026-11-12.json)
 le12novembre2026 local :20groupes ciblés et25régressions, données et référence
 conservées. Les lecteurs réels retiennent les fichiers, les patches sont
 chiffrés, l’envoi réutilise operations.responsibility et le pipeline Docker.
-La facette Éditeur, les limites globales et les reprises gardent leur reste à faire.
+Les compléments de la facette Éditeur, les limites globales et les reprises
+gardent leur reste à faire.
 
-SLS-070 UI en préparation : la facette réutilise les API010 existantes. Une
+La première facette SLS-070 réutilise les API010 existantes. Une
 garde client protège les départs et la déconnexion avant mutation serveur ;
 le modèle texte garde ses octets/fins de ligne indépendamment de la vue DOM.
 Aucune nouvelle dépendance, migration ni valeur d’environnement.
+
+La [preuve de console](evidence/code-editor-console-dev-2026-11-12.json) passe
+57 groupes réels sur a77b6b4e : 12 UI, 20 serveur et 25 régressions, avec
+17 invocations natives et 41 images inspectées. Le manuel servi correspond à
+17 chapitres et 67 paragraphes. Le compteur de brouillon est indépendant de la
+version de fonction ; la copie relue est liée au chemin/surface/génération.
+L’historique conserve des patches exacts bornés à 64 gestes et 8 Mio de fragments.
+Le succès historique visible pendant une nouvelle saisie reste à retirer dans
+070.8. L’unité reste ouverte pour limites, reprises et parcours complémentaires.

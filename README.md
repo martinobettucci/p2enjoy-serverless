@@ -1,21 +1,25 @@
 # P2Enjoy Serverless
 
-Le [serveur de l’éditeur SLS-070](docs/CONSOLE_EDITOR.md) est déployé en DEV sur
-7c5c6f4b avec dix migrations. Sa [première preuve](docs/evidence/code-editor-server-dev-2026-11-12.json)
-passe45groupes réels, dont20ciblés et25régressions, et huit invocations Docker
-CJS/ESM avec YAML packagé. La facette de console, les quotas globaux et les
-interruptions restent à réaliser/qualifier ; seul le critère070.7 est clôturé.
+La [première facette Éditeur SLS-070](docs/CONSOLE_EDITOR.md) est déployée sur
+DEV, imagea77b6b4e, avec dix migrations inchangées. La [preuve](docs/evidence/code-editor-console-dev-2026-11-12.json)
+passe57groupes réels :12console,20serveur,8manuel/8public/9connexion.
+Dix-sept invocations natives CJS/ESM/YAML sont recoupées ;41captures sont
+inspectées. Le manuel servi correspond à17chapitres et67paragraphes.
+Les sources sont figées sur deux époques déclarées, sans changement produit entre
+elles. Quotas globaux, interruptions, limites résiduelles et parcours UI
+complémentaires restent ouverts ; seul070.7 est clôturé.
 
 Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
-sur e81007c5 et sont conservées dans l’image courante7c5c6f4b. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+sur e81007c5 et sont conservées dans l’image courantea77b6b4e. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
 passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
 JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
 manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans
 droits, négatifs azp/aud et rotation/pending503 restent non éprouvés ; l’unité
-reste ouverte. Le manuel servi correspond à 16 chapitres et 57 paragraphes.
+reste ouverte. Lors de cette preuve SSO, le manuel servi correspondait à
+16 chapitres et 57 paragraphes.
 
 **La plateforme demandée n'est pas encore entièrement livrée.** Favoris,
-actions en masse, éditeur de code intégré, client HTTP par fonction, journaux
+actions en masse, compléments de l’éditeur, client HTTP par fonction, journaux
 avancés et monitoring historique restent à implémenter. Le moteur des crons du manifeste est
 déployé et sa qualification DEV est en cours ; les jobs de console, la compatibilité
 complète du projet de référence, la parité avec Scaleway Serverless

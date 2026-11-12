@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 12novembre2026 — Première facette Éditeur qualifiée, unité ouverte
+
+La [preuve](evidence/code-editor-console-dev-2026-11-12.json) passe57groupes réels sura77b6b4e :
+12console au gel48e0f1f,20serveur/25régressions aude56dfc. Les seuls écarts
+indexés entre époques sont client TLS et contrat ; produit/manuel/image identiques.
+17invocations natives CJS/ESM/YAML,8fonctions de tous les essais purgées,
+41images inspectées et manuel17chapitres/67paragraphes recoupés. Le premier
+namespace vide est retiré explicitement après découverte de l’affectation inachevée.
+Un sondage empruntait un lecteur du banc : supprimé, les cinq réponses réelles
+passent429/132ms et408/30,115–30,148s. Tous les échecs restent exclus des57groupes.
+Succès historique encore visible à la frappe :070.8 à corriger, avec les limites,
+reprises, quotas et parcours résiduels.070reste[~], .7seule[x] ; aucune évolution
+FORGE ni profil interdit. Contrôle/référence/stockage sains et actifs nuls.
+
+
 ## 12novembre2026 — Revue de la facette Éditeur
 
 Quatre défauts de la première implémentation sont confirmés avant déploiement :
