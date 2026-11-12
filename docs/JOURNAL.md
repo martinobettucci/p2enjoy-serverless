@@ -7699,3 +7699,12 @@ temporaire de succès garde/recover et un ancien succès masquant un échec plus
 récent. Décision avant correction : temporaire unique, reçus terminaux immuables
 par tentative et ordre monotone local ; evidence retourne le dernier terminal,
 succès ou échec. Aucun prlimit modificatif ni essai du complément exécuté.
+
+### 12novembre2026 — Préparation native071.6 relue, sans exécution anticipée
+
+Les deux restes de reçus sont levés statiquement : publication exclusive d’un
+terminal immuable par tentative, ordre monotone et échec ultérieur visible.
+Index400sources ; syntaxe des deux scripts et du lanceur analysée. Ce checkpoint
+est préparatoire : client SSO/UI, lecteur borné de pile et toutes les preuves
+réelles restent requis. Aucun prlimit modificatif, nouveau groupe ou capture ;
+071.6 et SLS-071 restent ouverts, image et manuel produit inchangés.

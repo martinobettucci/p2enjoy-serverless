@@ -129,7 +129,7 @@ courant. Aucun changement de compteur ou d’infrastructure externe n’est requ
 
 Décision, matrice et constats de revue persistés avant leur code dépendant.
 Opérateur et restaurateur spécialisés implémentés ; syntaxe analysée et
-relecture des corrections en cours. Seule l’inspection préalable en lecture
+corrections relues sans résidu bloquant. Seule l’inspection préalable en lecture
 seule a été exécutée sur le SPARK. Le client SSO/UI et le lecteur de pile
 restent à écrire. Aucun prlimit modificatif, nouvel attachement ou scénario de
 ce complément n’est exécuté ;071.6 et SLS-071 restent ouverts.

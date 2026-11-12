@@ -2438,3 +2438,19 @@ appel explicite. Trois fonctions purgées, deux jetons révoqués, dix migration
 intégritéok et5982artefacts conservés.071.2 est qualifié ;071.6 reste ouvert.
 La reprise du seul login après disparition du lanceur est conservée dans le
 checkpoint ; ses images portent leurs nouvelles fenêtres, sans rejeu manuel/public.
+
+## Exception native d’une tâche du testeur — banc en préparation
+
+`function-http-client-task-operator.py` et `function-http-client-task-restore.py`
+préparent la faute réelleopenat/EMFILE de
+[SLS-071.6](../docs/CONSOLE_TESTER_TASK_EXCEPTION.md). Le premier est le seul
+mutateur de limite ; le second porte sa copie figée sous garde indépendante.
+Le gel de tous les TID et la restauration NOFILE au syscall-exit précèdent la
+reprise Python. Le secours piloté restaure avant de terminer le helper ; un
+PID redémarré ne peut pas qualifier cette preuve. Des reçus incomplets gardent
+phase/limites si le secours échoue, avec alarme traitée et pidfd idempotent.
+
+Statut préparatoire : syntaxe analysée, corrections relues ; aucun attachement
+ou prlimit modificatif de ce complément n’est exécuté. Le client SSO/UI, la
+lecture bornée de pile et les scénarios quatre relais/cinquième429 restent à
+réaliser. Aucun groupe, capture ou critère n’est qualifié par ces fichiers.
