@@ -139,6 +139,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
   const [selected,setSelected]=useState(initial.current.get('deployment')||''),[candidate,setCandidate]=useState(null),[candidateError,setCandidateError]=useState(null),[candidateReading,setCandidateReading]=useState(false),[candidateRevision,setCandidateRevision]=useState(0),[publishing,setPublishing]=useState(false);
   const mounted=useRef(true),busyRef=useRef(false),draftRef=useRef(null),dirtyRef=useRef(false),textRef=useRef(''),modeRef=useRef(mode),leaveResolver=useRef(null);
   const sourceGeneration=useRef(0),fileGeneration=useRef(0),diffGeneration=useRef(0),reviewGeneration=useRef(0);
+  const diffHeading=useRef(null),diffFileHeading=useRef(null),diffFocus=useRef(null);
   const pendingInput=useRef(null),textHistory=useRef({past:[],future:[]}),pathRef=useRef(path);
   const fileArea=useRef(null),fileHeading=useRef(null),treeHeading=useRef(null),focusFile=useRef(false),focusTree=useRef(false),focusEdit=useRef(false),[overflow,setOverflow]=useState(false);
   const [find,setFind]=useState(''),[match,setMatch]=useState(-1),[findNotice,setFindNotice]=useState(''),[historyNotice,setHistoryNotice]=useState('');
@@ -146,8 +147,10 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
   dirtyRef.current=dirty;textRef.current=text;draftRef.current=draft;modeRef.current=mode;pathRef.current=path;
   const locked=busy||reading||fileLoading||Boolean(contextError)||needsReview||Boolean(conflict);
 
-  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;sourceGeneration.current++;fileGeneration.current++;diffGeneration.current++;leaveResolver.current?.(false);};},[]);
+  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;sourceGeneration.current++;fileGeneration.current++;diffGeneration.current++;diffFocus.current=null;leaveResolver.current?.(false);};},[]);
   function acceptDraft(value) {draftRef.current=value;setDraft(value);}
+  // @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md#correction-décidée-avant-code
+  function invalidateDiff() {diffGeneration.current++;diffFocus.current=null;setDiff(null);setDiffError(null);setDiffLoading(false);}
   function invalidateReview() {reviewGeneration.current++;setConflict(null);setServerCopy(null);}
   function installText(value) {setText(value);setHistoryNotice('');textHistory.current={past:[],future:[]};pendingInput.current=null;}
   function clearFile() {invalidateReview();fileGeneration.current++;setFile(null);setPath('');setText('');setEditing(false);setFileError(null);setFindNotice('');setMatch(-1);dirtyRef.current=false;writeAddress({file:''});}
@@ -182,6 +185,8 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
       const fn=await api(prefix),summary=await api(prefix+'/code-draft');
       if(!mounted.current||generation!==sourceGeneration.current)return;
       const prior=draftRef.current;
+      if((prior&&(summary.draft?.id!==prior.id||summary.draft?.version!==prior.version))||
+          (context&&context.current_code_hash!==summary.current_code_hash))invalidateDiff();
       if(prior&&path&&(summary.draft?.id!==prior.id||summary.draft?.version!==prior.version)) {
         invalidateReview();setNeedsReview(true);
       } else acceptDraft(summary.draft);
@@ -260,7 +265,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
 
   async function chooseSurface(surface,hashValue=version) {
     if(!await askLeave())return;
-    clearFile();setTree({loading:true});setMode(surface);modeRef.current=surface;setVersion(hashValue);setDirectory('');setQuery('');setSearch('');setPage(0);setNotice('');setDiff(null);setDiffError(null);
+    clearFile();setTree({loading:true});setMode(surface);modeRef.current=surface;setVersion(hashValue);setDirectory('');setQuery('');setSearch('');setPage(0);setNotice('');invalidateDiff();
     writeAddress({view:surface,version:hashValue});
   }
   async function createDraft() {
@@ -282,7 +287,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
       const digest=submitted!==null?await crypto.subtle.digest('SHA-256',new TextEncoder().encode(submitted)):null;
       const fileHash=digest?[...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join(''):null;
       if(!mounted.current)return result;
-      acceptDraft(result.draft);setContext(prior=>({...prior,...result}));setTreeRevision(v=>v+1);setDiff(null);
+      acceptDraft(result.draft);setContext(prior=>({...prior,...result}));setTreeRevision(v=>v+1);invalidateDiff();
       if(preserveFile&&submitted!==null)setFile(prior=>({...prior,text:submitted,size:bytes(submitted),sha256:fileHash}));
       const laterInput=preserveFile?textRef.current!==submitted:dirtyRef.current;
       setNotice(laterInput?'':result.changed?'Brouillon enregistré.':'Contenu déjà enregistré.');return result;
@@ -298,7 +303,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
   async function rereadDraft() {
     if(busyRef.current)return;
     const generation=++reviewGeneration.current,surface=modeRef.current,targetPath=pathRef.current;
-    setReading(true);setNotice('');setMutationError(null);setConflict(null);setServerCopy(null);
+    setReading(true);setNotice('');setMutationError(null);setConflict(null);setServerCopy(null);invalidateDiff();
     try {
       const summary=await api(prefix+'/code-draft');
       const copy=summary.draft&&surface==='draft'&&targetPath ? await api(prefix+'/code-draft/file?path='+encodeURIComponent(targetPath)).catch(error=>{if(error.status===404)return null;throw error;}) : null;
@@ -312,7 +317,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
     if(!serverCopy||serverCopy.generation!==reviewGeneration.current||serverCopy.path!==pathRef.current||serverCopy.surface!==modeRef.current)throw new Error('Relisez le fichier ouvert avant toute adoption.');
     const copy=serverCopy.file;
     if(!replaceText&&copy&&!copy.editable)throw new Error('Le fichier relu n’est plus éditable. Conservez votre saisie avant de choisir le contenu du serveur.');
-    acceptDraft(conflict);setConflict(null);setNeedsReview(false);setMutationError(null);
+    acceptDraft(conflict);setConflict(null);setNeedsReview(false);setMutationError(null);invalidateDiff();
     if(modeRef.current==='draft') {
       if(copy?.editable) {setFile(copy);if(replaceText){installText(copy.text);dirtyRef.current=false;}}
       else if(replaceText)clearFile();
@@ -325,21 +330,31 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
     if(busyRef.current||locked)throw new Error('Relisez le brouillon avant de l’abandonner.');
     busyRef.current=true;setBusy(true);setMutationError(null);setNotice('');
     try {await api(prefix+'/code-draft',{method:'DELETE',headers:{'If-Match':String(draftRef.current.version)}});if(!mounted.current)return;
-      acceptDraft(null);clearFile();setMode('source');modeRef.current='source';writeAddress({view:'source'});setDiff(null);await loadContext();setNotice('Brouillon abandonné.');
+      acceptDraft(null);clearFile();setMode('source');modeRef.current='source';writeAddress({view:'source'});invalidateDiff();await loadContext();setNotice('Brouillon abandonné.');
     } catch(error){if(mounted.current){setMutationError(readable(error));if(error.status===409||!error.status||error.status>=500)setNeedsReview(true);}throw error;}
     finally {busyRef.current=false;if(mounted.current)setBusy(false);}
   }
-  async function readDiff(pageValue=diffPage,pathValue=diffPath) {
+  // @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md#correction-décidée-avant-code | docs/DESIGN_SYSTEM.md#95-focus
+  async function readDiff(pageValue=diffPage,pathValue=diffPath,origin=document.activeElement) {
     const generation=++diffGeneration.current;setNotice('');setDiffLoading(true);setDiffError(null);setDiff(null);setDiffPage(pageValue);setDiffPath(pathValue);
+    diffFocus.current={generation,path:pathValue,origin};
     try {
       const params=new URLSearchParams({limit:String(size),offset:String(pageValue*size)});if(pathValue)params.set('path',pathValue);
       const data=await api(prefix+'/code-draft/diff?'+params);
       if(!mounted.current||generation!==diffGeneration.current)return;
       const last=Math.max(0,Math.ceil(data.diff.total/size)-1);
-      if(pageValue>last){void readDiff(last,pathValue);return;}setDiff(data);
+      if(pageValue>last){void readDiff(last,pathValue,origin);return;}setDiff(data);
     }catch(error){if(mounted.current&&generation===diffGeneration.current)setDiffError(readable(error));}
     finally{if(mounted.current&&generation===diffGeneration.current)setDiffLoading(false);}
   }
+  useLayoutEffect(()=>{
+    const intent=diffFocus.current;
+    if(diffLoading||!intent||intent.generation!==diffGeneration.current||(!diff&&!diffError))return;
+    const target=intent.path&&diff?.diff.file?.path===intent.path?diffFileHeading.current:diffHeading.current;
+    if(!target)return;
+    if(document.activeElement===document.body||document.activeElement===intent.origin)target.focus();
+    diffFocus.current=null;
+  },[diffLoading,diff,diffError]);
 
   useEffect(()=>{
     if(!selected)return;
@@ -437,13 +452,13 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
       </section>
     </div>}
 
-    {draft&&<Section title="Comparer le brouillon enregistré" action={<button disabled={busy||diffLoading} onClick={()=>void readDiff(0,'')}>{diffError?'Réessayer la comparaison':'Voir le diff avec la cible'}</button>}>
+    {draft&&<Section title="Comparer le brouillon enregistré" headingRef={diffHeading} action={<button disabled={busy||diffLoading} onClick={()=>void readDiff(0,'')}>{diffError?'Réessayer la comparaison':'Voir le diff avec la cible'}</button>}>
       <p>Comparaison avec la cible promue actuelle. Les saisies non enregistrées restent dans le fichier.</p>
       {diffLoading&&<p role="status">Lecture de la comparaison…</p>}<ErrorMessage error={diffError}/>
       {diff&&<div className="stack"><Facts values={[["Cible comparée",hash(diff.comparison.before?.code_hash)],["Base du brouillon",hash(diff.comparison.after?.code_hash)],["Handler comparé",diff.comparison.before?.handler||'Aucun'],["Handler du brouillon",diff.comparison.after.handler]]}/>
         {!diff.diff.total?<p className="empty">Aucun fichier différent.</p>:<ul className="editor-diff-list">{diff.diff.items.map(item=><li key={item.path}><button disabled={busy} onClick={()=>void readDiff(diffPage,item.path)}><span className="mono">{item.path}</span> · {({added:'Ajouté',deleted:'Retiré',modified:'Modifié'})[item.change]}</button></li>)}</ul>}
         <Pages name="du diff" page={diffPage} total={diff.diff.total} disabled={busy} change={v=>void readDiff(v,'')}/>
-        {diff.diff.file&&<><h3 className="mono">{diff.diff.file.path}</h3>{diff.diff.file.diff!==null?<pre className="invocation-log mono" tabIndex={0} aria-label="Diff du fichier">{diff.diff.file.diff||'Contenu textuel identique.'}</pre>:<p>Diff textuel indisponible : {diff.diff.file.reason==='line_limit'?'plus de 2 000 lignes':'binaire ou hors limite d’édition'}.</p>}
+        {diff.diff.file&&<><h3 className="mono" ref={diffFileHeading} tabIndex={-1}>{diff.diff.file.path}</h3>{diff.diff.file.diff!==null?<pre className="invocation-log mono" tabIndex={0} aria-label="Diff du fichier">{diff.diff.file.diff||'Contenu textuel identique.'}</pre>:<p>Diff textuel indisponible : {diff.diff.file.reason==='line_limit'?'plus de 2 000 lignes':'binaire ou hors limite d’édition'}.</p>}
           {diff.diff.file.truncated&&<p className="notice log-warning">Diff tronqué à 128 Kio.</p>}
           <Confirm label="Rétablir ce chemin depuis la base" message={`Rétablir « ${diff.diff.file.path} » depuis la base du brouillon de « ${functionName} » ? Un chemin ajouté sera retiré.`} disabled={locked} action={async()=>{if(!await askLeave())return;const target=diff.diff.file.path;await saveMutation({file:{action:'revert',path:target}});if(pathRef.current===target)clearFile();}}/></>}
 

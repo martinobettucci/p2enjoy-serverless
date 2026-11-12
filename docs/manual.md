@@ -258,6 +258,10 @@ ni fusion silencieuse ni répétition automatique.
 promue actuelle ; les deux hashes et handlers sont indiqués. Choisir un chemin
 ouvre son diff textuel borné. Binaires, gros textes et dépassement des limites
 sont signalés ; les saisies non enregistrées ne sont pas dans cette comparaison.
+Au clavier, changer de page ramène au titre de la comparaison ; ouvrir un chemin
+amène au titre de son détail. Si vous avez déplacé le focus ailleurs pendant le
+chargement, il reste à cet endroit. Après modification ou adoption du brouillon,
+relancez la comparaison pour consulter son état enregistré courant.
 
 **Publier le brouillon** demande confirmation de la fonction, de sa base et du
 handler. Le pipeline vérifie réellement le paquet dans Docker. Code inchangé :

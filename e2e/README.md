@@ -169,9 +169,12 @@ Les [compléments de console](../docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md) étende
 le client à18groupes : sept versions réelles, archive/supprimée sur la seconde
 page, adoption gardant la saisie sans PUT, sept chemins de diff desktop/mobile
 et focus après pagination. Les14groupes historiques sont rejoués dans ce même
-passage ; leurs anciennes preuves ne sont pas additionnées. Ce client est
-préparé, son exécution et ses captures restent à produire. Aucun produit
-modifié avant la reproduction réelle de l’hypothèse de perte de focus.
+passage ; leurs anciennes preuves ne sont pas additionnées. Le
+[premier passage](../docs/evidence/code-editor-console-focus-failed-dev-2026-11-12.json)
+échoue au18e groupe avec quatre focusBODY :17passés, zéro qualifié,25JPEG
+inspectés et nettoyage complet. Après cette reproduction, le correctif est
+implémenté et le client exige aussi deux titres de détail. Le replay sur sa
+nouvelle image DEV reste à produire.
 
 `node e2e/code-editor-ui.mjs` reçoit le JSON SSO sur stdin privée. Le parcours
 part de l’accueil et du vrai SSO, crée namespace/service/fonction et jeton Read

@@ -154,3 +154,19 @@ Le bloc de confirmation d’adoption disparaît aussi après son action locale :
 son retour de focus est à observer dans070.3, sans attribuer à ces captures une
 mesure qui n’y figure pas. Ces restes sont suivis dans le backlog avant toute
 correction correspondante ; ils ne sont pas présentés comme qualifiés.
+
+## Correctif implémenté, avant qualification DEV
+
+Le composant possède maintenant les refs des deux titres, une intention
+génération/chemin/origine et son effet de layout. `invalidateDiff` unifie le
+retrait des comparaisons lors des changements de surface, de contexte ou de
+brouillon. L’origine est conservée au recalage et un autre contrôle déjà actif
+garde son focus. Le client exige quatre titres de page et deux titres de détail,
+avec activation clavier et captures ciblées supplémentaires. Le manuel suit
+ces gestes sans nouveau chapitre ni paragraphe :18chapitres/74paragraphes.
+
+La revue statique ne relève aucun blocage et le build local Vite passe. Ce sont
+des prérequis, pas une preuve fonctionnelle. Le build de l’image, son déploiement
+sur DEV puis le replay18groupes/25communs restent à produire. Les refus,
+recalages, changements de focus et mutations pendant lecture maintenue restent
+à éprouver dans la tranche de concurrence ;070.4 et l’unité restent ouverts.

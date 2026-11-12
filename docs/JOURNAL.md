@@ -7965,3 +7965,20 @@ effacements/invalidation de réponses restent à éprouver sous vraie lecture
 maintenue avec l’ensemble3 ;070.4 ne ferme pas. Le focus après disparition de
 la confirmation d’adoption est un risque statique ajouté à070.3, pas un défaut
 runtime mesuré. Manuel/design suivront la correction avant son replay DEV.
+
+### 12novembre2026 — Correctif de focus implémenté et relu, DEV à qualifier
+
+Le composant associe génération, chemin et déclencheur à chaque lecture du
+diff. L’effet de layout rend le focus au h2 stable ou au h3 du chemin reçu ;
+un autre contrôle choisi pendant l’attente reste actif. Le recalage transmet
+l’origine. invalidateDiff annule données/intention sur surface, relecture,
+adoption, sauvegarde, abandon et changement de contexte constaté. Le client
+exige quatre titres de page et deux de détail, avec actions clavier et vues des
+titres. Le manuel précise ces gestes dans son paragraphe existant, toujours
+18chapitres/74paragraphes, SHA8a50ffa0. Aucun code d’adoptionfocus n’est modifié.
+
+La revue statique ne trouve aucun blocage ; le build local Vite passe, CSS et
+favicon inchangés. Ce checkpoint ne prétend pas à une qualification : image,
+déploiement DEV et replay18+25 sont à produire. Concurrence réelle enIO,
+non-vol de focus pendant attente, refus/recalages et focusd’adoption gardent
+leurs preuves propres à produire avant fermeture de070.

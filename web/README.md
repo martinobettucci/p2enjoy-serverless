@@ -1,5 +1,11 @@
 # Console web
 
+Le [correctif de focus de l’éditeur](../docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md)
+est implémenté après la reproduction réelle de quatre focusBODY. Refs des titres,
+intention par génération et invalidation des comparaisons remplacées sont relues ;
+le build local Vite passe. Manuel et client18groupes suivent le code. Le nouveau
+rendu n’est pas encore déployé ni qualifié en DEV à ce checkpoint.
+
 Le client HTTP **Tester une fonction (SLS-071)** est livré et qualifié en DEV.
 La [preuve finale du dernier critère](../docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) passe **31 groupes réels** :
 6 ciblés et 25 régressions sur 401 sources 67215a2b, image 60938093 inchangée ;

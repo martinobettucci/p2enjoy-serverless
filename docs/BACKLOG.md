@@ -904,6 +904,8 @@ reproduit quatre focusBODY après pagination, sur407sources/image60938093.
 17groupes passent mais zéro n’est qualifié ;25captures inspectées,14handlers,
 une fonction/sept révisions et un jeton nettoyés,13helpers terminés et5982artefacts
 conservés. Correction de focus décidée avant code dans le contrat de console.
+Le correctif est maintenant implémenté, relu et construit localement ; sa
+nouvelle image DEV et le replay restent à produire, sans qualification acquise.
 Les réponses de diff périmées face à une mutation restent à éprouver avec un
 lecteur vivant (070.4) ; le focus après adoption locale est à mesurer (070.3).
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
