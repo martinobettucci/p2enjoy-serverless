@@ -2,11 +2,14 @@
 
 ## [Non publié]
 
-- SLS-071.2 : preuve dédiée de lecture en attente spécifiée avant code, avec
-  le watchdog natif existant, conservation du PID et reprise sans rejeu. La
-  revue exige deux revalidations d’identité avant attachement et un reçu de
-  survie du PID. Client et durcissement de l’opérateur implémentés, syntaxe
-  contrôlée ; relecture et scénarios réels encore requis.
+- SLS-071.2 : [chargement qualifié](docs/evidence/function-http-client-loading-dev-2026-11-12.json) par
+  37 groupes réels et 30 captures inspectées sur 397 sources 6b9cb2bc,
+  image 60938093 inchangée. GET réellement en attente sur desktop/mobile,
+  perte native de l’observateur, même PID vivant et reprise explicite sans rejeu.
+  Les sept scénarios de reprise passent après le durcissement des identités.
+  Trois fonctions purgées et deux jetons révoqués ; garde/baux/réservations nuls,
+  dix migrations, intégrité ok et 5 982 artefacts conservés. Critère 071.2 fermé ;
+  071.6, 101/102 et la campagne complète restent ouverts.
 
 - Notes SPARK : les trois propositions décrivent désormais60938093 et le
   complément source32. Les notes actives sont conservées ; les empreintes et

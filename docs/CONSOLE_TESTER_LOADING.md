@@ -2,7 +2,7 @@
 
 Complément de [SLS-071.2](BACKLOG.md#sls-071) après la qualification du
 [refus réel des domaines](CONSOLE_TESTER_SOURCE.md). Le libellé « Lecture en
-cours… » est implémenté ; sa preuve dédiée manque. Ce complément ne modifie
+cours… » est qualifié par la preuve réelle ci-dessous. Ce complément ne modifie
 aucun comportement produit.
 
 ## Décision avant code
@@ -72,5 +72,38 @@ huit secondes et le timer douze secondes sont ceux du helper qualifié ; les
 sources seront relues et leurs fenêtres respectées. L’exception inattendue
 avec contrôle vivant de071.6 reste une preuve séparée. Une réussite ici ne
 clôture ni les autres causes du lecteur093, ni la campagne complète095, ni les
-défauts visuels101/102. Statut : client et durcissement de l’opérateur
-implémentés, syntaxe contrôlée ; relecture et exécution réelles encore requises.
+défauts visuels101/102. Statut : critère071.2 qualifié, exception071.6 et campagne complète ouvertes.
+
+## Qualification réelle du chargement
+
+La [preuve37](evidence/function-http-client-loading-dev-2026-11-12.json) lie le commit
+b39e30f,397sources6b9cb2bc et l’image60938093 inchangée :7groupes de reprise,
+5de chargement et25régressions communes. Les deux clients ciblés passent
+après relecture de leurs frontières natives ;30captures sont inspectées,
+8ciblées par le principal et22communes par le vérificateur en lecture seule.
+
+Le TID1007466 est réellement en état`t`, sous le helper1009054. Une seule
+requête catalogue reste sans réponse pendant les assertions et les captures
+desktop/mobile, achevées en233ms dans la borne4500ms. Le helper reçoit le vrai
+SIGKILL et termine255 ; la réponse GET revient à1794470865483ms après
+détachement noyau, la garde indépendante est jointe à1794470879093ms. Aucun
+retour HTTP n’est attribué à tort au timer. Deux reçus natifs prouvent PID,
+naissance508864062, cgroup, CID/image/StartedAt identiques, TracerPid0 et santé.
+Les métadonnées/invocations sont identiques ; un nouvel appel explicite donne
+200avec hash et nouvel UUID natifs. Les deux handlers du chargement réussissent.
+
+Le replay de reprise possède sa propre coupure137 du contrôle et son
+redémarrage à08:05:20.159372646UTC. Cette mutation est antérieure au chargement
+et ne prouve pas sa conservation du PID : les reçus sont séparés. Trois
+handlers de reprise, dont un interrompu puis deux succès, sont recoupés.
+Trois fonctions des deux campagnes sont purgées et deux jetons révoqués ;
+parents supprimés, trois observateurs terminés, zéro activité/bail/réservation/
+garde. Dix migrations, intégritéok/FKvide,38backend/4web, fichiers officiels,
+manuel18chapitres/74paragraphes et5982artefacts antérieurs sont conservés.
+
+Le lanceur commun a disparu pendant son repos avant connexion ; son absence
+est confirmée par la perte du handle et l’absence du processus. Les16groupes
+manuel/public déjà terminés sont conservés ; seul login9 est repris, avec son
+nouveau snapshot et ses fenêtres. Aucune preuve n’est déduite du repos.
+Les PNG de connexion n’ont pas de SHA déclaré ; leurs octets courants et mtimes
+sont liés à la phase exécutée. Les défauts101/102 ne sont pas déclarés corrigés.

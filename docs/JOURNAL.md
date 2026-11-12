@@ -7640,3 +7640,20 @@ ces deux frontières seront corrigées et leurs sept scénarios rejoués. Le re�
 doit attester le PID original vivant, sa naissance/cgroup et TracerPid0 pour le
 chargement ; healthy seul ne suffit pas. Contrat persisté avant code, aucun
 nouveau test ou signal exécuté à ce stade.
+
+### 12novembre2026 — Chargement et reprise qualifiés, critère071.2 fermé
+
+La preuve37 lie397sources6b9cb2bc/commitb39e30f et l’image60938093 inchangée.
+Sept groupes de reprise passent après durcissement des identités ; cinq de
+chargement observent un seul GET sans réponse, UI desktop/mobile sous233ms,
+perte réelle du helper et même PID vivant après garde. La réponse revient par
+détachement avant le timer ; les instants sont conservés distinctement.
+25régressions communes passent ; reprise du seul login après disparition du
+lanceur pendant repos, sans rejouer les16groupes déjà acquis.30vues inspectées,
+aucun défaut nouveau ;101/102 restent ouverts. Trois fonctions purgées, deux
+jetons révoqués, parents supprimés, trois observateurs disparus et zéro bail/
+réservation/garde. Dix migrations, intégritéok/FKvide,38backend/4web, manuel
+18chapitres/74paragraphes et5982artefacts conservés. Le SIGKILL du replay
+redémarre le contrôle à08:05:20UTC ; le chargement conserve ce PID/démarrage.
+071.2 fermé par références43/46/32/37 distinctes ;071.6 et campagne complète
+restent ouverts. Aucune unité globale n’est déclarée finie par cette seule preuve.

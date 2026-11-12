@@ -947,7 +947,12 @@ Tests exigés :
 <a id="sls-071"></a>
 ## SLS-071 — Client HTTP intégré par fonction
 
-Statut : [~] — backend et facette Tester déployés en DEV sur96e5dc4e.
+Statut : [~] — backend et facette Tester déployés en DEV sur60938093.
+Le [complément de chargement37](evidence/function-http-client-loading-dev-2026-11-12.json) qualifie071.2 :
+7reprise,5chargement,25régressions sur397sources6b9cb2bc et30captures inspectées.
+Même PID vivant pendant la lecture, perte d’observateur jointe, trois fonctions
+purgées, deux jetons révoqués et5982artefacts conservés. Seul071.6 reste ouvert
+parmi les critères ; la campagne complète reste requise.
 [Réponses perdues32groupes](evidence/function-http-client-token-loss-dev-2026-11-12.json)
 sur392sourcescf5244f5 : quatre coupures avant/après commit de création/révocation,
 watchdog et25régressions ;32captures inspectées.071.3/.8 sont qualifiés.
@@ -966,8 +971,8 @@ Le [plan échéances/confidentialité/reprise](CONSOLE_TESTER_FAILURES.md) préc
 les scénarios complémentaires désormais qualifiés dans42 : SIGKILL natif,
 reprise unique, vrai503 avant émission, délais UI et confidentialité native avec
 témoin positif. Le complément32 qualifie ensuite les mutations de jeton.
-Source indisponible, exception inattendue d’une tâche et campagne complète
-restent à éprouver.
+Le refus de source et le chargement sont qualifiés par leurs compléments32/37 ;
+exception inattendue d’une tâche et campagne complète restent à éprouver.
 
 Résultat attendu : une facette Tester par fonction, de type client HTTP : composer une
 requête, l'envoyer par la vraie passerelle, lire la réponse et retrouver l'appel et ses
@@ -979,7 +984,7 @@ Critères d'acceptation :
   corps texte, JSON ou fichier ; réponse avec statut, en-têtes, corps, durée, hash
   effectivement appelé et identifiant de requête ; réponse volumineuse ou binaire bornée
   avec téléchargement.
-- [ ] SLS-071.2 Contexte **serveur** (appel émis par le serveur de console, destinations limitées
+- [x] SLS-071.2 Contexte **serveur** (appel émis par le serveur de console, destinations limitées
   aux adresses de cette installation et à `/invoke/UUID[@HASH]`, redirections non suivies,
   cookies de console non transmis) et contexte **navigateur** (CORS depuis la vraie origine),
   explicitement distingués. Le [complément source refusée](CONSOLE_TESTER_SOURCE.md)
@@ -1003,7 +1008,17 @@ Critères d'acceptation :
   natif : vrai GET en attente, retrait UI, perte du seul observateur, PID conservé
   et reprise explicite. La revue impose avant code une revalidation immédiate
   d’identité/cgroup aux deux attachements et une preuve native du PID survivant.
-  Rejouer les sept scénarios de reprise après ce durcissement, puis les communs.
+  Ces sept scénarios et cinq groupes dédiés passent ensuite dans la
+  [preuve37](evidence/function-http-client-loading-dev-2026-11-12.json), avec25régressions communes :
+  GET réellement en attente, assertions et deux vues sous233ms ; helper SIGKILL,
+  garde indépendante jointe, PID1007466/naissance508864062 conservés et TracerPid0.
+  La réponse GET revient après détachement natif avant la garde ; ces deux
+  instants restent distincts. Un seul GET et aucune invocation rejouée ; nouvel
+  appel explicite200/hash/UUID natifs. Les30vues sont inspectées ; cinq handlers
+  dont un interrompu par le scénario de reprise, trois fonctions purgées,
+  deux jetons révoqués et zéro activité/réservation/bail/garde. Dix migrations,
+  intégrité/FK et5982artefacts recoupés. Critère qualifié avec les preuves43/46
+  des contextes et32du refus de source, sans addition de leurs groupes.
 - [x] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
   après quinze minutes ; valeur en mémoire de la page, absente des exemples copiés, journaux,
   erreurs, préférences et historique. L’inspecteur de preuve ne réémet aucun

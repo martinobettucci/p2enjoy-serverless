@@ -98,7 +98,7 @@ porte392sourcescf5244f5/image96e5dc4e. Les deux fonctions sont purgées, quatre
 jetons révoqués, huit observateurs morts et cinq opérateurs nominaux joints.
 071.3/.8 sont qualifiés ; le premier passage reste exclu des32.
 
-## Lecture réellement en attente du testeur — en préparation
+## Lecture réellement en attente du testeur — qualifiée
 
 `node e2e/function-http-client-loading.mjs SHA_IMAGE_CONTROLEE` reçoit le vrai
 SSO sur stdin privée, crée sa fixture originale puis utilise le watchdog natif
@@ -2425,3 +2425,16 @@ finalisation, liées au SHA terminal :2services sains, actifs/baux nuls,5982arte
 et aucune garde. Captures canoniques inchangées. Brut83048624octets/gzip4228693 ;
 ancienne preuve348 préservée. La borne native partagée et son nominal sont
 qualifiés ; âge18novembre et campagne complète restent requis,078.5 non clôturée.
+
+## Chargement du testeur : campagne37 du12novembre
+
+`node e2e/function-http-client-loading.mjs` passe cinq groupes après les sept
+scénarios de `function-http-client-recovery.mjs` et le durcissement des deux
+attachements. La [preuve37](../docs/evidence/function-http-client-loading-dev-2026-11-12.json)
+porte397sources6b9cb2bc/commitb39e30f, image60938093,25régressions communes et
+30captures inspectées. Le [contrat](../docs/CONSOLE_TESTER_LOADING.md) détaille
+PID survivant, GET unique en attente, perte du helper, garde jointe et nouvel
+appel explicite. Trois fonctions purgées, deux jetons révoqués, dix migrations,
+intégritéok et5982artefacts conservés.071.2 est qualifié ;071.6 reste ouvert.
+La reprise du seul login après disparition du lanceur est conservée dans le
+checkpoint ; ses images portent leurs nouvelles fenêtres, sans rejeu manuel/public.

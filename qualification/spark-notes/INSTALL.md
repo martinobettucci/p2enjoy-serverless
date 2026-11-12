@@ -1,5 +1,18 @@
 # Intégration avec P2Enjoy Serverless
 
+## Chargement du testeur qualifié — 12 novembre 2026
+
+La preuve `docs/evidence/function-http-client-loading-dev-2026-11-12.json`
+qualifie 37 groupes réels sur 397 sources 6b9cb2bc, image 60938093 : sept reprise,
+cinq chargement et 25 régressions communes ; 30 captures inspectées. Un seul
+GET reste en attente pendant les vues desktop/mobile ; perte du helper, garde
+jointe et même PID vivant, puis nouvel appel explicite réussi sans rejeu.
+Trois fonctions purgées, deux jetons révoqués, zéro bail/réservation/garde et
+5 982 artefacts conservés. Le critère 071.2 est fermé ; 071.6, les défauts
+101/102 et la campagne complète restent ouverts. Le contrôle a redémarré dans
+le scénario de reprise à 08:05:20 UTC ; le chargement conserve ce démarrage.
+Les anciens checkpoints qui suivent gardent leur portée historique.
+
 ## État courant —12novembre2026
 
 La console et l’API utilisent l’image60938093, schéma de contrôle010. Le manuel

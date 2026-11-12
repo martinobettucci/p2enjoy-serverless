@@ -1,5 +1,17 @@
 # Matrice de qualification réelle
 
+La [lecture réellement en attente](evidence/function-http-client-loading-dev-2026-11-12.json) est qualifiée sur l’image
+60938093 : **37 groupes réels** (7 reprise, 5 chargement, 25 régressions),
+397 sources d’empreinte 6b9cb2bc et 30 captures inspectées individuellement.
+Le GET reste sans réponse pendant les vues desktop/mobile « Lecture en cours… ».
+Après perte de l’observateur, la garde est jointe et le même PID est vivant,
+sans invocation rejouée ; un nouvel appel explicite réussit. Trois fonctions
+purgées, deux jetons révoqués, zéro garde/bail/réservation et 5 982 artefacts
+conservés. **SLS-071.2 est qualifié**, avec les preuves antérieures des modes
+serveur/CORS et du refus de source. SLS-071 reste ouvert pour 071.6 ; les
+anomalies visuelles 101/102 et la campagne complète restent à traiter.
+Les checkpoints historiques ci-dessous gardent leurs propres dates et groupes.
+
 ## Application témoin QLF-001
 
 Chaque ligne doit être exercée contre le vrai service. `tests/e2e.test.cjs`

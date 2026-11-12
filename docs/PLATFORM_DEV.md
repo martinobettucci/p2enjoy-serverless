@@ -1,5 +1,17 @@
 # Déploiement DEV de la plateforme
 
+La [lecture réellement en attente](evidence/function-http-client-loading-dev-2026-11-12.json) est qualifiée sur l’image
+60938093 : **37 groupes réels** (7 reprise, 5 chargement, 25 régressions),
+397 sources d’empreinte 6b9cb2bc et 30 captures inspectées individuellement.
+Le GET reste sans réponse pendant les vues desktop/mobile « Lecture en cours… ».
+Après perte de l’observateur, la garde est jointe et le même PID est vivant,
+sans invocation rejouée ; un nouvel appel explicite réussit. Trois fonctions
+purgées, deux jetons révoqués, zéro garde/bail/réservation et 5 982 artefacts
+conservés. **SLS-071.2 est qualifié**, avec les preuves antérieures des modes
+serveur/CORS et du refus de source. SLS-071 reste ouvert pour 071.6 ; les
+anomalies visuelles 101/102 et la campagne complète restent à traiter.
+Les checkpoints historiques ci-dessous gardent leurs propres dates et groupes.
+
 ## Noms et entrée courants
 
 L’entrée est `https://serverless.lelabs.tech` vers le port HTTP 18090 du SPARK.
@@ -938,3 +950,12 @@ pilote404 et retour explicite.32captures inspectées, deux fonctions et deux
 jetons des passages nettoyés. Santé200, intégritéok, dix migrations et aucune
 activité/bail/réservation/garde après preuve. Le transitoire de lecture reste
 à éprouver dans071.2 ;071.6 et les défauts visuels101/102 restent ouverts.
+
+## Démarrage natif après le replay de reprise37
+
+Le replay sur60938093 conserve le CIDb76da789 et lui fait subir le SIGKILL
+contractuel. Le démarrage courant est2026-11-12T08:05:20.159372646Z ; le
+chargement et les régressions passent ensuite sans redémarrage. Le PID1007466,
+naissance508864062, est confirmé vivant et sans traceur après chargement.
+La référence demeure475be494 depuis2026-11-06T15:49:39.578107028Z.38backend/
+4ressources HTTPS, fichiers officiels et manifeste5982artefacts sont inchangés.

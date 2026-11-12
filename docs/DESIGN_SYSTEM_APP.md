@@ -520,3 +520,15 @@ Les huit JPEG ciblés et24vues de guide/connexion sont inspectés individuelleme
 Hash complet et refus lisibles en desktop/mobile ; le badge parent périmé101
 et la typographie des quantités102 restent suivis. Les images ne prouvent pas
 le transitoire de chargement, encore ouvert dans071.2.
+
+## Lecture en attente qualifiée après la preuve de source
+
+Le [complément37](evidence/function-http-client-loading-dev-2026-11-12.json) qualifie le reste
+chargement de071.2 sur397sources6b9cb2bc/image60938093 :7reprise,5chargement et
+25régressions,30vues inspectées. Vrai GET sans réponse pendant les vues desktop/
+mobile, perte native du helper, garde jointe et même PID/naissance/cgroup ;
+un seul GET, aucune invocation rejouée, puis nouvel appel explicite200.
+Le [contrat et les reçus](CONSOLE_TESTER_LOADING.md#qualification-réelle-du-chargement)
+distinguent le retour réseau du détachement et la fin de garde.071.2 est fermé
+avec les preuves43/46/32 conservées ;071.6,101/102 et clôture complète restent
+ouverts. Ce complément ne modifie ni le produit ni le manuel déployés.
