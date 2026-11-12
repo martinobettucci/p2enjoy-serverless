@@ -168,3 +168,37 @@ de chaque opérateur même lorsqu’une assertion échoue avant son ajout aux
 observations nominales. Ajouter cette sauvegarde systématique avant replay,
 sans réécrire le premier reçu ni compter ses trois préparations comme preuve
 de récupération. Aucun défaut produit n’est encore reproduit par ce passage.
+
+## Défaut reproduit après admission — correction071.8
+
+Le replay80eca655 sur8c761c5e passe le watchdog puis constate réellement le
+SIGKILL natif avant la fin minimale du handler, Docker137 et la restauration du
+même CID/image. Le proxy répond502, corps vide, sans marque de contrôle. La
+console affiche «Le serveur a refusé la requête (502)» au lieu d’Issue inconnue.
+La base conserve une unique invocation démarrée, reprise en
+`interrupted/control_interrupted` HTTP503 ; configuration/hash actif inchangés.
+Deux fonctions sont purgées, parents supprimés, jeton révoqué et gardes jointes.
+Ce reçu échoué et ses captures restent préliminaires, sans qualification071.4.
+
+Décision avant code : les réponses réellement produites sur `/api/` portent
+`X-Serverless-Control-Response: 1`, ajouté par le contrôle et sans valeur issue
+de la requête. Le helper `api()` garde son statut pour les autres consommateurs,
+et indique séparément la provenance : marque présente et erreur JSON de forme
+attendue. Le testeur, l’émission et la révocation temporaires n’affichent un
+refus certain que pour ces erreurs reconnues ; une réponse proxy/illisible ou
+perte de transport reste non confirmée. Aucun rejeu automatique. Ce marqueur
+n’est ni un secret ni une autorisation ; les handlers `/invoke/` ne le reçoivent
+pas par cette règle. Les autres lecteurs de console ne changent pas de contrat.
+
+Le replay doit aussi distinguer un vrai503 du contrôle avant toute émission.
+Le mode `refusal-lock` de l’opérateur prend un vrai verrou SQLite
+`BEGIN IMMEDIATE` sous le propriétaire normal, sans DML ni changement de
+configuration. Installation au repos et namespace de campagne exclusivement.
+La requête UI rencontre la vraie échéance SQLite5s et reçoit le503 documenté ;
+le client exige sa provenance, son message visible et zéro nouvelle invocation.
+Le verrou est borné à15s, alarme20s, et libéré sur release/EOF/échéance/entrée
+invalide avec rollback/fermeture et zéro total_changes. Une garde systemd ne
+rajoute pas de sûreté à ce verrou : la mort du détenteur libère SQLite via le
+système. Le processus SSH doit néanmoins être joint avec échéance. Le manuel
+explique les deux issues ; les vraies reprises, refus et régressions sont rejoués
+sur l’image reconstruite avant de qualifier la correction.

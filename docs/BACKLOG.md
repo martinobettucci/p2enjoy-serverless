@@ -1028,6 +1028,15 @@ Critères d'acceptation :
   modification après copie ; nouveau refus conservé et singulier vérifié.
   38captures sont inspectées ; le passage21antérieur reste exclu.
 
+- [ ] SLS-071.8 Distinguer le refus confirmé du contrôle et le502 du proxy
+  après admission. Reçu80eca655 sur8c761c5e : SIGKILL natif/Docker137, reprise
+  unique `control_interrupted`, mais UI affiche un refus certain502. Marquer
+  les réponses API réelles du contrôle et vérifier la forme de l’erreur avant
+  ce classement ; une réponse sans provenance reste inconnue, sans rejeu.
+  Appliquer aussi aux mutations du jeton temporaire. Rejouer coupure, vrai503
+  avant émission sous verrou SQLite sans écriture, capacité, manuel et
+  régressions sur la nouvelle image. Contrat : [provenance](CONSOLE_TESTER_FAILURES.md#défaut-reproduit-après-admission--correction0718).
+
 Tests exigés :
 
 - Unitaires : construction de requête, bornes de réponse, expurgation, validation de destination.
