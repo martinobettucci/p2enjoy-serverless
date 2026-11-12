@@ -47,7 +47,7 @@ if mode=='stop':
     finally:os.close(descriptor)
 else:
     assert len(sys.argv)==4
-    started=time.monotonic();reason='probe';writer=ControlWriter(control)
+    started=time.monotonic();reason='probe';received=b'';current=before;writer=ControlWriter(control)
     try:
         current=scope(writer.db)
         if mode=='hold':assert current==before,'campaign_changed_before_lock'
@@ -72,4 +72,4 @@ else:
     finally:
         changes=writer.db.total_changes if writer.db is not None else None
         writer.close()
-        emit({'event':'lock-released' if mode=='hold' else 'writer-probe','reason':reason,'elapsed_seconds':time.monotonic()-started,'sql_changes':changes,'scope':current,'connection_closed':writer.db is None})
+        emit({'event':'lock-released' if mode=='hold' else 'writer-probe','reason':reason,'elapsed_seconds':time.monotonic()-started,'sql_changes':changes,'scope':current,'command_bytes':len(received),'connection_closed':writer.db is None})

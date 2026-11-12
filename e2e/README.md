@@ -24,7 +24,7 @@ restent à exécuter ; le checkpoint57 conserve ses sources et son image datées
 `code-editor-save-lock.py hold|probe|stop NAMESPACE FUNCTION` est un opérateur
 DEV sans écriture de donnée : verrou SQLite réel au plus3s, libération/EOF/
 échéance, ou signal du seul PID/naissance/commande vérifiés. Le client éprouve
-les7sorties (dont fragment sans LF et entrée invalide) puis utilise le verrou pour observer les
+les8sorties (dont fragment sans LF, entrée invalide et borne32octets) puis utilise le verrou pour observer les
 frappes avant réponse HTTP. Les signaux tardifs après EOF et la naissance
 périmée sont refusés et recoupés. Les probes rejoignent le writer natif sous son
 propriétaire et recoupent zéro changement et connexion close. Aucun délai
