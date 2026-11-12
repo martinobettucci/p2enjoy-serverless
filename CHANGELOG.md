@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-071 : banc de coupure réelle du contrôle implémenté, avant exécution.
+  Garde indépendante, identité CID/image/génération et PID, reçu natif du
+  SIGKILL, jonction du mutateur et SSH borné précèdent la reprise du même
+  conteneur. Le passage de confidentialité10groupes réussit avec vrai témoin
+  de détection ; qualification finale et coupure restent à éprouver.
+
 - SLS-071.7 et parcours éditeur070.6 qualifiés en DEV sur8c761c5e :
   [46groupes](docs/evidence/function-http-client-ui-admission-dev-2026-11-12.json)
   sur384sources8285798e,35handlers et38captures inspectées. CORS refusé,

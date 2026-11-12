@@ -42,10 +42,21 @@ strictement lecteur du SPARK ; inspect reçoit ses sentinelles sur stdin privée
 et ne renvoie que booléens/SHA et métadonnées corrélées. Les lectures ont des
 bornes et une échéance ; un manque fait échouer. Aucune capture n’est effectuée
 pendant la saisie confidentielle ; les vues des délais ne portent que delay4.
-Un premier passage de9groupes est conservé comme intermédiaire. Le contrôle
-positif ajoute une vraie trace volontaire de témoin public et exige que le
-lecteur la trouve sans la réémettre ; son replay reste à exécuter. Le [plan](../docs/CONSOLE_TESTER_FAILURES.md)
-porte aussi la coupure contrôlée, encore à implémenter et qualifier.
+Un premier passage de9groupes est conservé comme intermédiaire. Le passage
+de10groupes dd3b50db réussit aussi le contrôle positif : une vraie trace
+volontaire de témoin public est trouvée sans être réémise. Les deux captures et
+les régressions restent à recouper avant qualification.
+
+`node e2e/function-http-client-recovery.mjs` reçoit la même stdin SSO privée et
+utilise `function-http-client-recovery-operator.py` sur le seul SPARK DEV, seul
+et au repos. Une garde indépendante vérifie le CID/image, PID/naissance/cgroup
+et les empreintes avant une suspension réelle puis perte du pilote. Le second
+scénario coupe le contrôle après confirmation persistée du démarrage du handler.
+Le signal natif, Docker137, restauration du même CID/image, observation unique
+et appel neuf sont requis. Aucun contenu de requête ne transite par l’opérateur.
+Ces deux fichiers sont implémentés, non encore exécutés ; le [plan](../docs/CONSOLE_TESTER_FAILURES.md)
+définit garde, jonction, nettoyage et distinction entre refus certain et issue
+inconnue. Ils ne doivent pas être lancés en parallèle d’un autre scénario.
 
 ## Capacité réelle des brouillons de code
 
