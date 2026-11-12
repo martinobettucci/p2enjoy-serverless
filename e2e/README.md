@@ -54,9 +54,13 @@ et les empreintes avant une suspension réelle puis perte du pilote. Le second
 scénario coupe le contrôle après confirmation persistée du démarrage du handler.
 Le signal natif, Docker137, restauration du même CID/image, observation unique
 et appel neuf sont requis. Aucun contenu de requête ne transite par l’opérateur.
-Ces deux fichiers sont implémentés, non encore exécutés ; le [plan](../docs/CONSOLE_TESTER_FAILURES.md)
-définit garde, jonction, nettoyage et distinction entre refus certain et issue
-inconnue. Ils ne doivent pas être lancés en parallèle d’un autre scénario.
+Le premier passage3360afcd échoue sur les assertions SSH/timer du watchdog ;
+la garde restaure réellement la même génération et les deux fonctions sont
+purgées, puis leurs parents supprimés par API. Le client reprend les conditions
+du précédent natif (SSH137/255 avec événement et reçu, timer sans MainPID).
+Le [plan](../docs/CONSOLE_TESTER_FAILURES.md) définit garde, jonction, nettoyage
+et distinction entre refus certain et issue inconnue. La coupure après admission
+reste non exécutée. Ne pas lancer en parallèle d’un autre scénario.
 
 ## Capacité réelle des brouillons de code
 

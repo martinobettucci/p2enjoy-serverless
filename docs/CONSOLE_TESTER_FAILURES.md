@@ -146,12 +146,13 @@ purgées, les sentinelles confidentielles restent en mémoire et les deux captur
 des délais attendent leur inspection. Le reçu5f3ace72 de9groupes reste
 intermédiaire. Ces résultats ne sont pas encore un checkpoint qualifié avec
 régressions et recoupement final. Le client et l’opérateur de coupure sont
-implémentés pour la preuve ; relecture et exécution réelle restent à faire.
+implémentés et relus pour la preuve ; le premier watchdog réel échoue sur le
+client, avant la coupure après admission qui reste à faire (voir ci-dessous).
 
 ## Premier passage réel du banc de reprise
 
 Le reçu3360afcd échoue au watchdog avant toute invocation/coupure du contrôle :
-le pilote auto-tuè par SIGKILL remonte255 via SSH, alors que le client attendait
+le pilote auto-tué par SIGKILL remonte255 via SSH, alors que le client attendait
 strictement137. Le précédent `function-version-state-transport.mjs` accepte
 137/255 avec événement SIGKILL et reçu indépendant ; réutiliser cette exigence
 complète, pas le statut seul. La restitution est réelle, même CID/image et
@@ -159,7 +160,8 @@ StartedAt, et les deux fonctions sont purgées. Le nettoyage déclare ensuite
 une anomalie parce que le timer n’expose pas MainPID ; son unité est absente
 et inactive, le service porte MainPID0. Exiger inactive pour les deux et PID0
 pour le service, accepter l’absence de ce champ du timer comme le précédent.
-Les parents restent à supprimer par API, le jeton est révoqué.
+Les parents sont ensuite supprimés par API réelle (reçu3360afcd-parents-cleanup),
+le jeton est révoqué.
 
 Le rapport doit conserver les événements/identités et empreintes de sortie
 de chaque opérateur même lorsqu’une assertion échoue avant son ajout aux
