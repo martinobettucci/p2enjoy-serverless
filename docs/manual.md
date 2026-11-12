@@ -242,8 +242,10 @@ Une saisie locale est signalée avant changement de fichier, navigation,
 déconnexion ou fermeture. Annuler conserve le texte. **Terminer l’édition**
 revient à la lecture après enregistrement ou abandon explicite des saisies.
 Un refus conserve votre texte ; **Contenu déjà enregistré** signifie qu’aucun
-octet n’a changé. Des frappes pendant l’enregistrement restent locales et ne
-sont pas présentées comme déjà sauvegardées.
+octet n’a changé. Une nouvelle saisie ou consultation retire la confirmation
+précédente. Des frappes pendant l’enregistrement du fichier restent locales et
+ne sont pas présentées comme déjà sauvegardées. Pendant les autres mutations,
+le champ de code reste en lecture seule jusqu’à leur fin.
 
 Après un conflit ou une réponse incertaine, **Relire le brouillon serveur**
 permet de consulter son nouvel enregistrement sans écraser votre saisie.
