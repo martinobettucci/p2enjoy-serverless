@@ -1061,6 +1061,12 @@ Critères d'acceptation :
   une ligne Uvicorn500 absente. Le vrai500 vient de Playwright/POSTunique,
   recoupé par pile TLS/audit/frontière/absence d’invocation natives. Aucun
   changement de logs produit, aucun scénario encore qualifié.
+  Premier05ba6e14 sur401sources : SSO puis422 de création de fonction, champ
+  description non supporté ; la requête native supposait aussi cette colonne.
+  Zéro groupe qualifié, aucun attachement ou prlimit, aucune fonction/jeton,
+  parents supprimés et limites intactes. Décision : nonce complet des parents,
+  nom de fonction significatif suffixé du nonce8, liaison UUID/noms explicite,
+  sans modifier le modèle produit ; replay complet requis.
   Revue avant déploiement : `Key` pouvait devenir `key` puis échouer à l'encodage
   et empêcher le décrément du compteur. Relecture du banc de reprise avant
   exécution : StartedAt doit être revérifié avant KILL/signaux et chaque reprise

@@ -136,6 +136,22 @@ l’absence d’invocation passerelle. La journalisation de l’application rest
 inchangée. Six groupes et douze handlers sont les comptes attendus, sans
 préjuger de leur réussite ni de la classe Python réellement observée.
 
+## Premier passage : refus du modèle pendant préparation
+
+Le [passage05ba6e14](evidence/function-http-client-task-preparation-failed-dev-2026-11-12.json)
+sur401sources/commit1a41b44 s’arrête au422 de création : FunctionCreate ne porte
+pas de description. La table functions n’a pas cette colonne non plus ; la
+requête de propriété du helper aurait donc aussi échoué. Aucun attachement,
+prlimit modificatif, fonction, jeton ou capture n’est produit. Namespace/service
+supprimés, intégritéok et limites1048576/1048576 recoupées sur le même PID.
+Zéro groupe retenu pour la qualification, y compris le SSO préliminaire.
+
+Décision avant correction : garder le nonce complet dans les descriptions du
+namespace/service, et le suffixe de huit caractères dans le nom significatif de
+la fonction. Le helper lie nom exact, UUID de fonction/service/namespace et
+nonce parent ; il ne suppose aucun champ absent et ne modifie pas le modèle
+produit pour les besoins du banc. Rejouer le client complet après correction.
+
 ## État
 
 Décision, matrice et constats de revue persistés avant leur code dépendant.
@@ -143,5 +159,6 @@ Opérateur et restaurateur spécialisés implémentés ; syntaxe analysée et
 corrections relues sans résidu bloquant. Seule l’inspection préalable en lecture
 seule a été exécutée sur le SPARK. Le client SSO/UI et le lecteur de pile
 sont écrits, syntaxes contrôlées et relus ; tous les scénarios réels
-restent requis. Aucun prlimit modificatif, nouvel attachement ou scénario de
-ce complément n’est exécuté ;071.6 et SLS-071 restent ouverts.
+restent requis. Le premier passage échoue pendant préparation comme décrit ci-dessus ;
+aucun prlimit modificatif ni nouvel attachement n’est exécuté. Les scénarios
+de panne/capacité restent à faire ;071.6 et SLS-071 restent ouverts.

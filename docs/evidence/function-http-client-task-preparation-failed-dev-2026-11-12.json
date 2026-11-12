@@ -1,0 +1,47 @@
+{
+  "format": "p2enjoy-serverless-task-preparation-failure-v1",
+  "completed": false,
+  "unit": "SLS-071.6",
+  "qualified_groups": 0,
+  "source_commit": "1a41b4407537ef6ad953594f88bc8a1e3a9b1d25",
+  "source_files": 401,
+  "image": "sha256:609380938e08e026427525fd78dd18c6a7fb9b0052c146ec900dc859cc415df6",
+  "cause": "FunctionCreate refuses description; native owner query also assumed this absent column.",
+  "native_fault_started": false,
+  "functions_created": 0,
+  "tokens_created": 0,
+  "captures": 0,
+  "parents_deleted": true,
+  "limits_unchanged": true,
+  "native_cleanup": {
+    "completed": true,
+    "namespace": {
+      "id": "0aa41348-a98d-4626-947e-b10353af6172",
+      "name": "function-http-client-task-exception-05ba6e14",
+      "deleted_at": 1794475798.0453966
+    },
+    "service": {
+      "id": "72efb58f-cef3-4f0c-98ba-8268d9d2c669",
+      "namespace_id": "0aa41348-a98d-4626-947e-b10353af6172",
+      "deleted_at": 1794475798.0296988
+    },
+    "functions_created": 0,
+    "tokens_created": 0,
+    "pid": 1007466,
+    "birth": "508864062",
+    "limits_nofile": [
+      1048576,
+      1048576
+    ],
+    "integrity": "ok",
+    "foreign_keys": [],
+    "native_fault_started": false
+  },
+  "raw": {
+    "path": "function-http-client-task-preparation-failed-dev-2026-11-12.raw.json.gz",
+    "bytes": 40714,
+    "sha256": "3cfe8faee4db3ab762acf88e5d7122d86c33ae8f8a31810657b8c064315d89ec",
+    "uncompressed_bytes": 95340,
+    "uncompressed_sha256": "f55dfd447fc658ee0bcb31bfe96aa0da88f5a36f5fd6acdacfac9a632f2bf874"
+  }
+}

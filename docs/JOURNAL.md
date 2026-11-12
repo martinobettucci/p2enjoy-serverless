@@ -7732,3 +7732,14 @@ La dernière revue confirme la séparation réponseHTTP500/POSTunique Playwright
 et exception/audit/frontière natives ; aucune ligne d’accès supposée. Client,
 lecteur et secours sont relus ; syntaxesJS/Python valides, index401sources.
 Le premier essai réel reste à exécuter, sans nouveau groupe ou critère qualifié.
+
+### 12novembre2026 — Premier071.6 arrêté à la préparation du modèle
+
+Passage05ba6e14/commit1a41b44 : SSO réel puis422, car FunctionCreate refuse
+la description inventée par le banc ; le helper supposait aussi f.description.
+Aucune fonction/jeton, capture, garde, attachement ou prlimit modificatif.
+Parents supprimés, intégritéok et NOFILE1048576/1048576 sur1007466 recoupés.
+Preuve échouée publiée séparément, zéro groupe retenu. Décision avant correction :
+nonce parent complet et nom de fonction significatif suffixé du nonce8, UUID
+et noms liés par le helper ; aucune extension de modèle pour le banc. Replay
+complet exigé,071.6 reste ouvert.
