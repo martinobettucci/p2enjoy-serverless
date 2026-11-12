@@ -67,9 +67,11 @@ L’identité lie installation, namespace, fonction, révision, image, CID,
 démarrage, PID et naissance du contrôle, cgroup et helper par PID/naissance.
 Les trois fichiers officiels et la référence sont recoupés sans contenu exposé.
 
-Le maintien dure au plus 45 secondes à partir de l’armement. L’observateur a
+Le maintien volontaire dure au plus 45 secondes à partir de l’armement. L’observateur a
 une échéance globale de 50 secondes ; la garde indépendante part à 60 secondes,
-avec exécution bornée et jonction. Une fin normale ou EOF détache tous les
+avec exécution bornée et jonction. Un helper suspendu ne peut pas appliquer
+son échéance propre ; cette branche est bornée par le départ indépendant à60s
+puis sa restitution, et non par le délai volontaire45s. Une fin normale ou EOF détache tous les
 tracees puis vérifie l’état sain. Une perte ou suspension du helper déclenche
 sa terminaison par pidfd après vérification de son identité ; les attachements
 sont ensuite tous rejoints et chaque thread doit être libre de tracer/arrêt.
@@ -140,3 +142,23 @@ La revue de sûreté précède le gel des sources et l’exécution ; les défau
 banc trouvés avant ce passage ne sont pas présentés comme des pannes produit.
 La qualification des droits pendant IO, de la purge et des bornes ZIP demeure
 à produire après la qualification propre de cette instrumentation.
+
+## Premier passage échoué et décision de jonction
+
+Le [passage833a9c59](evidence/code-editor-reader-guard-join-failed-dev-2026-11-12.json)
+au gelf17f515/414sources échoue au sixième groupe, après cinq passés. Le secours
+à60s termine réellement le helper suspendu ; les threads sont détachés et le
+même contrôle reste sain. La commande finish reproduit ensuite l’erreur :
+`systemctl stop <unité>.timer` renvoie5 parce que le timer collecté n’existe plus.
+Le client ne considère pas cette jonction comme acquise et conserve ses objets.
+Ils sont ensuite purgés/révoqués par un nouveau SSO et les API normales.
+Quatre handlers, quatre helpers disparus, parents supprimés, compteurs nuls,
+dix migrations, ressources servies/configuration/référence et5982artefacts sont
+recoupés. Zéro groupe qualifié ; EMFILE et quatre lecteurs ne sont pas exécutés.
+
+Correction décidée avant code : la demande d’arrêt du timer n’est pas une preuve
+de jonction. Comme le précédent071, attendre les états natifs du timer et du
+service : chargés ou absents, tous deux inactifs, MainPID0. Une erreur de stop
+ne devient pas automatiquement un succès ; l’état terminal est toujours relu
+sous la borne50s, et tout état inconnu/actif échoue. Un nouveau gel et le replay
+complet sont requis ; aucune image produit, manuel ou configuration ne change.

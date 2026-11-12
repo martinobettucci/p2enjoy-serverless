@@ -918,7 +918,11 @@ Le [contrat des lectures vivantes](CODE_EDITOR_READ_CONCURRENCY.md) définit la
 barrière native du worker avant son client : FD/inode de campagne, suivi des
 nouveaux threads, garde indépendante et six parcours réels de restitution/
 capacité. Elle prépare droits pendant IO, purge et reconstruction ; aucune
-nouvelle preuve ni clôture de070.1–.5 n’est encore revendiquée.
+clôture de070.1–.5 n’est revendiquée. Le [premier passage échoué](evidence/code-editor-reader-guard-join-failed-dev-2026-11-12.json)
+prouve le secours mais échoue à sa jonction sur timer déjà retiré : cinq groupes
+passés, zéro qualifié. Fonction/jeton/parents nettoyés, quatre helpers disparus,
+quatre handlers et conservation recoupés. Correction de jonction décidée avant
+code ; nouveau gel et replay complet requis.
 Nature : Développer. Dépend de : SLS-063, SLS-074. Ordre : 3.
 Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 [CONSOLE_EDITOR](CONSOLE_EDITOR.md). Le lien vers Tester de070.6 est désormais

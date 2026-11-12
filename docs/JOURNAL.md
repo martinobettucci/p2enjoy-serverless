@@ -1,5 +1,24 @@
 # Journal de cadrage
 
+## 12 novembre 2026 — secours réussi, jonction du banc refusée
+
+Le passage833a9c59 au gelf17f515 sur414sources est conservé comme échec : cinq
+groupes passent, le sixième échoue. Le secours indépendant termine réellement
+le traceur suspendu à60s ; tous les threads sont libres et le même contrôle
+reste sain. La reproduction avec le programme inchangé localise finish_guard :
+stop du timer collecté renvoie5. Le client conserve prudemment ses objets ; un
+nouveau SSO permet ensuite purge/révocation et suppression des parents par API.
+Quatre handlers succeeded, quatre helpers disparus, aucune activité/opération/
+réservation/bail, intégritéok/FKvide et dix migrations. Les38backend/quatreweb,
+référence, configuration et5982artefacts sont identiques au checkpoint précédent.
+La preuve échouée et son brut gzip n’ajoutent aucun groupe à une future réussite.
+
+Décision avant correction : séparer la demande stop de son constat terminal.
+Reprendre le précédent071, puis relire timer/service inactifs, MainPID0,
+LoadState chargé ou absent sous borne. Toute situation active/inconnue continue
+à échouer. Le contrat distingue aussi maintien volontaire45s et secours60s d’un
+helper suspendu. Aucun code produit, configuration ni manuel ne change.
+
 ## 12 novembre 2026 — revue de sûreté avant le premier lecteur maintenu
 
 La revue statique du nouveau banc identifie cinq risques avant toute exécution :

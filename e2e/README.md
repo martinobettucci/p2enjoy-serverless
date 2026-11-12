@@ -20,7 +20,11 @@ invocations natifs, sans contenu confidentiel ni écriture SQL.
 Un seul scénario à la fois sur le SPARK DEV au repos. Le
 [contrat](../docs/CODE_EDITOR_READ_CONCURRENCY.md) décrit identités, bornes et
 preuves résiduelles. Les syntaxes sont contrôlées ; aucun groupe E2E de ce
-nouveau banc n’est encore qualifié. SLS-070 reste ouverte.
+nouveau banc n’est encore qualifié. Le [premier passage](../docs/evidence/code-editor-reader-guard-join-failed-dev-2026-11-12.json)
+passe cinq groupes puis échoue à la jonction d’un timer déjà retiré après son
+secours réussi. Fonction/jeton/parents et quatre helpers sont nettoyés ; ses
+quatre handlers ne sont ajoutés à aucun replay. La correction de jonction est
+décidée avant code, SLS-070 reste ouverte.
 
 ## Client HTTP intégré par fonction — en qualification
 

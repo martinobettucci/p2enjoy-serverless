@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- SLS-070 : [premier passage des lecteurs échoué](docs/evidence/code-editor-reader-guard-join-failed-dev-2026-11-12.json)
+  sur414sources/imageb452ef16 : cinq groupes passent puis la jonction du timer
+  déjà retiré échoue après secours réussi. Zéro groupe qualifié ; quatre handlers,
+  quatre helpers terminés, fonction/token/parents nettoyés et conservation
+  native recoupée. Correction décidée avant code : vérifier états inactifs et
+  MainPID0 du timer/service, plutôt que le seul statut de la demande stop.
+
 - SLS-070 : [lectures vivantes et concurrence](docs/CODE_EDITOR_READ_CONCURRENCY.md)
   spécifiées avant le banc : worker retenu sur le vrai FD/inode, nouveaux threads,
   garde indépendante, restitutions et capacité quatre lecteurs. Préparation
