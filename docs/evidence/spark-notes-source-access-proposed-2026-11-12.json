@@ -1,0 +1,34 @@
+{
+  "completed": true,
+  "notes": {
+    "README.md": {
+      "path": "/etc/spark/notes/README.md.?",
+      "sha256": "b7324f4180ab5d94964d14a1eb253012aac3258a25c21c93b2814d75bcd0e02b",
+      "active_sha256": "68231a5bc5cd7b7a7521e435c67b6d1117fd56fbca3092d9483ea3cbd86d04b3",
+      "previous_proposal_sha256": "8eb587243afd9937f742483269cf96f53d8bf17ca6515cda03347ca78015fd2f",
+      "proposed": true,
+      "adoption_claimed": false
+    },
+    "INSTALL.md": {
+      "path": "/etc/spark/notes/INSTALL.md.?",
+      "sha256": "61cc8344c03ac5b2c85db5c33790a781c6f91059049e0330fe1cf76e28ed34d5",
+      "active_sha256": "8f1506c07b936669f16990f31eb9469fda6724c40ff2c6a8e50f9ace26f52d65",
+      "previous_proposal_sha256": "3d19a7fdfb3889813a65ba43e1732a7adc2e3c72cd1cb4e426cc93c54d19d867",
+      "proposed": true,
+      "adoption_claimed": false
+    },
+    "CONTRIBUTORS.md": {
+      "path": "/etc/spark/notes/CONTRIBUTORS.md.?",
+      "sha256": "cb18c56071d0231325c1a885b319cfbaa661629e9b324cf61a443e20c43d2c89",
+      "active_sha256": "b6ee5681dca28cced5e57008b8b2002e11680ee0506be045b98458302f324f66",
+      "previous_proposal_sha256": "edd00fdcc7e74bee7c2ea07e7b32eb7fbbc409dbb5b99d3e4dbc9624c1f87ac2",
+      "proposed": true,
+      "adoption_claimed": false
+    }
+  },
+  "format": "p2enjoy-serverless-spark-notes-source-proposals-v1",
+  "date": "2026-11-12",
+  "unit": "SLS-071",
+  "control_image": "sha256:609380938e08e026427525fd78dd18c6a7fb9b0052c146ec900dc859cc415df6",
+  "active_adoption_claimed": false
+}

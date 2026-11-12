@@ -98,7 +98,7 @@ porte392sourcescf5244f5/image96e5dc4e. Les deux fonctions sont purgées, quatre
 jetons révoqués, huit observateurs morts et cinq opérateurs nominaux joints.
 071.3/.8 sont qualifiés ; le premier passage reste exclu des32.
 
-## Testeur sous source des domaines refusée — en réalisation
+## Testeur sous source des domaines refusée — complément qualifié
 
 `node e2e/function-http-client-source-access.mjs SHA_IMAGE_CONTROLEE` reçoit le vrai SSO sur stdin
 privée. Le client publie sa fonction originale dans le scope source-access
@@ -111,8 +111,12 @@ URL/réponses, CSPself, captures desktop/mobile et restitution sont requis.
 métadonnées natives, sans code ni secret. Contrat : [source du testeur](../docs/CONSOLE_TESTER_SOURCE.md).
 Le [premier passage réel](../docs/evidence/function-http-client-source-access-failed-dev-2026-11-12.json)
 reproduit le faux état « Aucune cible promue » ; il est exclu des qualifications.
-La correction et les témoins sans code/pilote archivé sont implémentés, replay
-sur l’image reconstruite encore requis. Aucune nouvelle qualification revendiquée.
+Le [replay corrigé](../docs/evidence/function-http-client-source-access-dev-2026-11-12.json)
+passe7groupes ciblés puis25régressions sur395sources28105d2b/image60938093,
+six handlers et32captures inspectées. Sans code, hash exact sous refus, source
+rétablie, pilote archivé404 et retour explicite sont éprouvés ; deux fonctions
+et deux jetons des passages nettoyés.071.2 reste ouverte pour le transitoire de
+chargement,071.6 pour l’exception inattendue ;101/102 suivent les défauts visuels.
 
 ## Capacité réelle des brouillons de code
 

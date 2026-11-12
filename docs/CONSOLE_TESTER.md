@@ -289,3 +289,17 @@ deux fonctions des passages nominal/préliminaire purgées, quatre jetons révoq
 et huit observateurs morts.071.3/.8 sont qualifiés avec les références43/42/32
 propres ; les groupes des checkpoints ne sont pas additionnés. Le produit et
 le manuel18chapitres/74paragraphes restent ceux de42.071.2/.6 demeurent ouverts.
+
+## Domaines refusés et métadonnées courantes qualifiés
+
+Le [complément source](CONSOLE_TESTER_SOURCE.md) qualifie le refus EACCES réel et
+la correction du hash sur60938093 : [32groupes](evidence/function-http-client-source-access-dev-2026-11-12.json),
+7ciblés/25régressions,395sources28105d2b et32captures inspectées. Hash exact
+courant conservé, URL/résultat retirés,503 avant émission, vrais appels témoins,
+retour via alias, absence sans code et pilote archivé404 sont recoupés. Les six
+handlers, deux révisions et nettoyage natif sont confirmés. Le premier passage
+échoué0bb9553f demeure séparé. Le manuel18chapitres/74paragraphes compilé porte
+la nouvelle règle. Les anomalies visuelles101/102 restent ouvertes.071.2 garde
+la preuve dédiée du chargement ;071.6 l’exception inattendue d’une tâche, et
+la clôture exige toujours la campagne complète. Les anciens groupes ne sont
+pas réadditionnés et leurs images restent historiques.

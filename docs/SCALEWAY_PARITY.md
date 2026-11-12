@@ -12,8 +12,9 @@ Relevé du 10 novembre 2026 sur la documentation publiée par Scaleway
 (`github.com/scaleway/docs-content`, branche `main`, pages `serverless-functions/`
 et `serverless-jobs/` : concepts, limitations, runtimes, paliers mémoire/CPU,
 en-têtes de requête, déclencheurs, sécurité, gestion, test, jobs). Le site
-`scaleway.com` refuse l'accès automatisé (HTTP 403) : le relevé vient des sources
-open source de la documentation. Les valeurs de Scaleway peuvent évoluer ; la
+`scaleway.com` avait refusé ce relevé automatisé (HTTP403), d’où les sources
+open source ; le complément ciblé du12novembre ci-dessous consulte directement
+les pages publiées accessibles du testeur. Les valeurs de Scaleway peuvent évoluer ; la
 matrice se revérifie à chaque revue de parité. Les états de la plateforme
 viennent du code et des contrats du dépôt, pas de la mémoire de l'agent.
 
@@ -101,7 +102,7 @@ nommés `WED`, `MON-FRI` et `DEC` maintiennent l'écart SLS-098 ouvert.
 | Journaux (Cockpit, 30 000 par minute et par projet) | **Partiel** : journaux expurgés par invocation | [SLS-072](BACKLOG.md#sls-072) |
 | Métriques | **Partiel** : relevés Docker ponctuels | [SLS-073](BACKLOG.md#sls-073) |
 | Alertes | **À livrer** | [SLS-073](BACKLOG.md#sls-073) |
-| Onglet Test (commande `curl` générée) | **Partiel** : client HTTP déployé, [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json) : UI/CORS/IP/annulation/saturation ; reprise et compléments ouverts | [SLS-071](BACKLOG.md#sls-071) |
+| Onglet Test (commande `curl` générée) | **Partiel** : client HTTP déployé ; UI/CORS/IP/annulation/saturation46, reprise42 et jetons32 qualifiés ; [source/hash32](evidence/function-http-client-source-access-dev-2026-11-12.json) qualifié ; chargement dédié et exception071.6 ouverts | [SLS-071](BACKLOG.md#sls-071) |
 
 ### Serverless Jobs
 
@@ -131,3 +132,13 @@ et [référence des crons](https://www.scaleway.com/en/docs/serverless-jobs/refe
 consultées à nouveau. UTC et POST sur `/` confirmés ; l'écart des noms de
 mois/jours devient SLS-098. Cette revue ciblée ne renouvelle pas la preuve des
 autres lignes de la matrice.
+
+## Relecture ciblée du testeur —12novembre2026
+
+La page officielle [How to test a function](https://www.scaleway.com/en/docs/serverless-functions/how-to/test-a-function/)
+décrit méthode, chemin, en-têtes/paramètres et copie de commande, avec jeton pour
+une fonction privée. Le [quickstart](https://www.scaleway.com/en/docs/serverless-functions/quickstart/)
+présente aussi un bouton Run et une section Output : ces deux parcours publiés
+restent cités séparément. La ligne Test reste Partiel tant que071.2/.6 et la
+clôture ne sont pas prouvés ; les autres lignes ne sont pas déclarées revérifiées
+par cette consultation ciblée.

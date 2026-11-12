@@ -921,12 +921,20 @@ conservés, actifs/baux/préparations nuls, aucune garde. Seul le critère 089.4
 clos ; les vrais profils sans droits, refus azp/aud, rotation et pending503
 restent à éprouver. Le détail du déploiement et du backup est dans la preuve.
 
-## Correctif de hash courant du testeur — en qualification0712
+## Correctif de hash courant du testeur — refus réel qualifié0712
 
-[CONSOLE_TESTER_SOURCE](CONSOLE_TESTER_SOURCE.md#hash-courant-sous-lecture-indisponible--correction0712)
-porte la correction UI reproduite sur96e5dc4e. Reconstruire le contrôle DEV après
-synchronisation des sources, sauvegarde SQLite native avant bascule, même schéma010.
-Aucune nouvelle variable, secret ni route. Le manuel compilé change avec la console.
-Comparer38backend/4web réellement servis et5982artefacts, puis rejouer source
-refusée, absence confirmée et pilote404 avec les régressions. L’image96e5dc4e
-reste active avant cette opération ; aucune qualification du correctif à ce stade.
+Le contrôle sert60938093 depuis le12novembre2026 à07:23:17UTC, CIDb76da789,
+après buildDEV et sauvegarde SQLite native dans
+`qualification-history/before-function-http-client-source-access-a57ed423198047579aa8ab42957150a9`.
+BackupSHAf9323903798d7dbfc2858be8bb465416b0983e87aef993e748eeac0ffbd75efd.
+Schéma010 inchangé, aucune nouvelle variable/secret/route. Référence et5982
+artefacts conservés ;38backend identiques à96e5dc4e, CSS/favicon inchangés,
+JS/indexHTML et manuel actualisés. Le manuel servi18chapitres/74paragraphes
+porteSHAe0d2f0011c5de02571d241c5c4d1c13b1504a9618005538e9fb0ec002414f617.
+
+[32groupes réels](evidence/function-http-client-source-access-dev-2026-11-12.json)
+passent sur395sources28105d2b, source refusée/restaurée, hash exact, sans code,
+pilote404 et retour explicite.32captures inspectées, deux fonctions et deux
+jetons des passages nettoyés. Santé200, intégritéok, dix migrations et aucune
+activité/bail/réservation/garde après preuve. Le transitoire de lecture reste
+à éprouver dans071.2 ;071.6 et les défauts visuels101/102 restent ouverts.

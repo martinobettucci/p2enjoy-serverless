@@ -73,13 +73,14 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-071](#sls-071) Client HTTP par fonction | Développer | `[~]` | SLS-066, SLS-074 | [CONSOLE_TESTER](CONSOLE_TESTER.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
-| 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-060, SLS-071 | cette unité |
+| 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
 | 5 | [SLS-083](#sls-083) Limites et en-têtes alignés sur Scaleway | Développer | `[ ]` | SLS-040 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md), [EXECUTION](EXECUTION.md) |
 | 5 | [SLS-080](#sls-080) Compatibilité du projet de référence | Développer | `[~]` | SLS-078, SLS-083 | [REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md) |
 | 6 | [SLS-068](#sls-068) Favoris personnels | Développer | `[ ]` | SLS-067 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#favoris-personnels) |
 | 6 | [SLS-069](#sls-069) Renommage et suppression en masse | Développer | `[ ]` | SLS-067, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#opérations-en-masse) |
 | 6 | [SLS-075](#sls-075) Titre de la fiche d'archive après purge | Corriger | `[ ]` | SLS-065 | cette unité |
+| 6 | [SLS-102](#sls-102) Espacement des quantités du manuel du testeur | Corriger | `[ ]` | SLS-062 | cette unité |
 | 7 | [SLS-073](#sls-073) Monitoring historique et alertes | Développer | `[ ]` | SLS-072, SLS-078 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#monitoring-et-alertes) |
 | 8 | [SLS-084](#sls-084) Runtimes supplémentaires | Développer | `[ ]` | SLS-083 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | 8 | [SLS-086](#sls-086) Répartition du trafic entre versions | Développer | `[ ]` | SLS-074, SLS-073 | [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
@@ -992,7 +993,12 @@ Critères d'acceptation :
   reproduit « Aucune cible promue » malgré le hash courant renvoyé sous EACCES ;
   zéro groupe retenu. Correction décidée : métadonnées courantes conservées avec
   erreur de source, chargement/indisponible/absence confirmée distingués. Replay
-  exact du hash, témoin sans code et vrai404 après archivage du pilote requis.
+  Le [replay corrigé](evidence/function-http-client-source-access-dev-2026-11-12.json)
+  qualifie32groupes sur395sources28105d2b/image60938093 :7ciblés et25régressions,
+  hash exact sous EACCES, absence confirmée, vrai404 et reprise explicite.32vues
+  inspectées ; six handlers, deux fonctions et deux jetons des deux passages
+  nettoyés. Le transitoire « Lecture en cours… » reste sans assertion E2E dédiée ;
+  le critère reste ouvert pour cette preuve, distincte de l’exception071.6.
 - [x] SLS-071.3 Vrai jeton Read : fourni, ou jeton temporaire limité à la fonction qui expire
   après quinze minutes ; valeur en mémoire de la page, absente des exemples copiés, journaux,
   erreurs, préférences et historique. L’inspecteur de preuve ne réémet aucun
@@ -2656,7 +2662,7 @@ et56paragraphes, recoupés avec sa source inchangée.
 <a id="sls-101"></a>
 ## SLS-101 — État de fiche après publication concurrente
 
-Statut : [ ]. Nature : Corriger. Ordre :3. Dépend de : SLS-060, SLS-071.
+Statut : [ ]. Nature : Corriger. Ordre :3. Dépend de : SLS-071.
 
 Constat réel pendant le replay071.2 : la fonction est ouverte sans code, puis
 publiée/promue par l’API normale tandis que Tester reste monté. Actualiser les
@@ -2678,3 +2684,18 @@ et les valeurs éphémères du testeur monté.
 - [ ] SLS-101.3 Éprouver E2E le défaut avant correction, le retour corrigé, les
   refus de lecture et les autres facettes affectées ; captures desktop/mobile
   inspectées, manuel/design et régressions communs actualisés.
+
+<a id="sls-102"></a>
+## SLS-102 — Espacement des quantités du manuel du testeur
+
+Statut : [ ]. Nature : Corriger. Ordre :6. Dépend de : SLS-062.
+
+Constat visuel du complément071.2 : les cadrages du manuel rendent « de1Mio »,
+« à128couples », « et8Kio », « à64 et16Kio » et « de1 à900secondes ». Les mesures
+restent compréhensibles, mais l’absence d’espaces dégrade la lecture.
+
+- [ ] SLS-102.1 Corriger ces espacements dans la source canonique du manuel,
+  sans changer les bornes fonctionnelles ; examiner les quantités du même chapitre.
+- [ ] SLS-102.2 Reconstruire/déployer en DEV et recouper le manuel servi avec sa
+  source ; parcours du guide et captures desktop/mobile du chapitre inspectées,
+  régressions communes réelles.

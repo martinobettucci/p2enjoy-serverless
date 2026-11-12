@@ -2,7 +2,7 @@
 
 ## État courant —12novembre2026
 
-La console et l’API utilisent l’image96e5dc4e, schéma de contrôle010. Le manuel
+La console et l’API utilisent l’image60938093, schéma de contrôle010. Le manuel
 compilé compte18chapitres et74paragraphes. Les facettes Éditeur et Tester sont
 déployées ; les compléments de leur qualification restent suivis dans le backlog.
 Le favicon et la marque utilisent trois blocs reliés.
@@ -12,8 +12,8 @@ qualifie42groupes réels : reprise du même contrôle après SIGKILL sans rejeu,
 Issue inconnue après perte du contrôle, vrai503 avant émission, délais UI et
 confidentialité contrôlée avec témoin positif. Les27captures sont inspectées.
 Les42groupes gardent leur propre époque ; les preuves43/46 antérieures ne sont
-pas additionnées. Source/routes indisponible et exception inattendue d’une tâche gardent
-SLS-071 ouverte.
+pas additionnées. Le transitoire de chargement et l’exception inattendue d’une tâche gardent
+SLS-071 ouverte. Les causes résiduelles du lecteur restent suivies dans093.
 
 Les sections de campagne ci-dessous conservent les images, schémas et dates de
 leurs checkpoints historiques. Elles ne remplacent pas cet état courant.
@@ -25,10 +25,19 @@ qualifie ensuite071.3/.8 :32groupes réels, quatre pertes de réponse de jetons
 avant/après commit, watchdog et32captures inspectées. La confirmation reste
 ouverte, sans succès ni rejeu ; consulter la liste retrouve les métadonnées,
 jamais la valeur perdue. Deux fonctions et quatre jetons de tous les passages
-sont purgés/révoqués, huit observateurs terminés. Le produit et le manuel
-restent inchangés depuis42 ; aucun checkpoint antérieur n’est réadditionné.
+sont purgés/révoqués, huit observateurs terminés. Lors de ce complément, le produit et le manuel
+restaient ceux de42 ; aucun checkpoint antérieur n’était réadditionné.
 
 Le dépôt de travail est `/home/p2enjoy/Documents/VSCodeProjects/p2enjoy-serverless`. La copie exécutée est `/srv/p2enjoy-serverless`. Lire les README, CLAUDE_PROJECT et les contrats de docs/ avant intervention. Cette cellule DEV est la seule cible autorisée ; aucun profil PREPROD/PROD, aucune administration de la FORGE.
+
+Le complément `docs/evidence/function-http-client-source-access-dev-2026-11-12.json`
+qualifie le refus réel des domaines et la correction du hash courant sur60938093 :
+32groupes,7ciblés/25régressions,395sources28105d2b et32captures inspectées.
+Métadonnées courantes conservées sous panne, absence confirmée et pilote404
+sont distincts ; retour des domaines et appels réels confirmés. Deux fonctions
+et deux jetons des passages nettoyés, six handlers nominaux ; manuel actualisé,
+18chapitres/74paragraphes.071.2 garde le chargement dédié,071.6 son exception ;
+les défauts visuels101/102 restent ouverts.
 
 ## Configuration et données
 
@@ -48,7 +57,7 @@ bash control/dev.sh up
 bash control/dev.sh status
 ```
 
-`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:96e5dc4e6efcc1d3c5bb166aa118014a0f7a1ec65a999004bb6d538713bbc288`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
+`logs` consulte les traces ; `stop` conserve les données. L’image du contrôle courant est `sha256:609380938e08e026427525fd78dd18c6a7fb9b0052c146ec900dc859cc415df6`. Le runtime de plateforme configuré est immuable ; ne pas le confondre avec l’exécuteur de référence. La CLI reconstruite est `sha256:77a3c302eb0d6cb6f0f592dbaae2a682943a8c9eb0a0bbdc2e84b2646a581106` ; son image cliente E2E est `sha256:a986c0d0fb238af7d076b011f596c844e102bb8df107277f67aac6629b1d430c`.
 
 Pour l’agent, construire par `bash storage/dev.sh build` comme spark-docker ; installer par `bash storage/dev.sh install` comme root du SPARK. L’installation exige un agent sain, sans bail, intention ni montage et ferme les mutations par quiesce. Le paquet courant est `8bf1292fb61b28d1644d7488351b527ed9429e06c1f247685514ce52710d1dc4`. Les paquets précédents sont conservés ; aucun retour de schéma implicite.
 

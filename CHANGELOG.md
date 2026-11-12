@@ -2,13 +2,21 @@
 
 ## [Non publié]
 
+- Notes SPARK : les trois propositions décrivent désormais60938093 et le
+  complément source32. Les notes actives sont conservées ; les empreintes et
+  l’absence d’adoption sont dans la preuve de propositions dédiée.
+
 - SLS-071.2 : [défaut reproduit sur le SPARK](docs/evidence/function-http-client-source-access-failed-dev-2026-11-12.json) :
   le hash promu est présenté absent sous refus réel de lecture des domaines.
   Passage0bb9553f échoué, zéro groupe qualifié ; source restituée, fonction
   purgée et jeton révoqué,395sources/image96e5dc4e conservées. Correction et
-  témoins d’absence confirmée/404 décidés avant code. Correction UI implémentée :
-  métadonnées courantes conservées sous erreur de source, chargement et lecture
-  indisponible distingués. Manuel et banc étendus ; build/replay restent requis.
+  témoins d’absence confirmée/404 décidés avant code. Le correctif est déployé
+  sur60938093 après sauvegarde SQLite : [32groupes](docs/evidence/function-http-client-source-access-dev-2026-11-12.json)
+  passent sur395sources28105d2b, avec six handlers et32captures inspectées.
+  Métadonnées courantes conservées sous erreur, absence confirmée et vrai404
+  distincts, manuel servi conforme. Deux fonctions/tokens nettoyés avec le
+  passage échoué. Le chargement reste sans assertion dédiée ;071.2/.6 restent
+  ouverts, de même que les défauts visuels séparés101/102.
 
 - SLS-071.3/.8 qualifiés par [32groupes réels](docs/evidence/function-http-client-token-loss-dev-2026-11-12.json)
   sur392sourcescf5244f5, même image96e5dc4e : quatre coupures avant/après

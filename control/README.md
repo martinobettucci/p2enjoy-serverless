@@ -1,5 +1,13 @@
 # Plan de contrôle
 
+Le [complément de source du testeur](../docs/CONSOLE_TESTER_SOURCE.md) est
+qualifié sur60938093 : [32groupes réels](../docs/evidence/function-http-client-source-access-dev-2026-11-12.json),
+395sources28105d2b, six handlers et32captures inspectées. Hash confirmé sous
+EACCES, vrai503 avant émission, retrait UI, retour de l’alias, absence sans code
+et pilote404 sont éprouvés. Manuel18chapitres/74paragraphes conforme ; dix
+migrations, deux fonctions/tokens nettoyés et5982artefacts conservés. Le
+chargement dédié071.2, l’exception071.6 et les défauts101/102 restent ouverts.
+
 Le [complément UI/admission du testeur](../docs/CONSOLE_TESTER.md) est qualifié en
 DEV sur8c761c5e : [46groupes réels](../docs/evidence/function-http-client-ui-admission-dev-2026-11-12.json),
 16UI,5admission et25régressions, sur384sources8285798e.35handlers et38captures

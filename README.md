@@ -1,5 +1,15 @@
 # P2Enjoy Serverless
 
+Le [refus réel des domaines et le hash courant du testeur](docs/evidence/function-http-client-source-access-dev-2026-11-12.json)
+sont qualifiés sur l’image60938093 :32groupes réels,7ciblés/25régressions,
+395sources28105d2b et32captures inspectées. Le hash confirmé reste lisible sous
+panne, les anciennes URL/réponses disparaissent ; absence sans code et vrai404
+de pilote sont distincts, retour explicite fonctionnel. Six handlers sont
+recoupés ; deux fonctions et deux jetons des deux passages nettoyés. Manuel
+18chapitres/74paragraphes conforme.071.2 garde le transitoire de lecture,071.6
+l’exception inattendue ; les défauts visuels101/102 restent ouverts. Les
+checkpoints ci-dessous conservent leurs images et groupes propres.
+
 Les [réponses perdues des jetons temporaires](docs/evidence/function-http-client-token-loss-dev-2026-11-12.json)
 sont qualifiées en DEV :32groupes réels sur392sourcescf5244f5/image96e5dc4e,
 7ciblés puis25régressions. Création et révocation sont réellement coupées avant
@@ -62,7 +72,7 @@ régression sont inspectées, les66fonctions des deux passages purgées et les
 5982artefacts antérieurs conservés. Aucun critère supplémentaire de070 ne ferme.
 
 Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
-sur e81007c5 et sont conservées dans l’image courante96e5dc4e. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+sur e81007c5 et sont conservées dans l’image courante60938093. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
 passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
 JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
 manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans

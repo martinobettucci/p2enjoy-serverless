@@ -2,7 +2,7 @@
 
 ## État courant —12novembre2026
 
-La console et l’API utilisent l’image96e5dc4e, schéma de contrôle010. Le manuel
+La console et l’API utilisent l’image60938093, schéma de contrôle010. Le manuel
 compilé compte18chapitres et74paragraphes. Les facettes Éditeur et Tester sont
 déployées ; les compléments de leur qualification restent suivis dans le backlog.
 Le favicon et la marque utilisent trois blocs reliés.
@@ -12,8 +12,8 @@ qualifie42groupes réels : reprise du même contrôle après SIGKILL sans rejeu,
 Issue inconnue après perte du contrôle, vrai503 avant émission, délais UI et
 confidentialité contrôlée avec témoin positif. Les27captures sont inspectées.
 Les42groupes gardent leur propre époque ; les preuves43/46 antérieures ne sont
-pas additionnées. Source/routes indisponible et exception inattendue d’une tâche gardent
-SLS-071 ouverte.
+pas additionnées. Le transitoire de chargement et l’exception inattendue d’une tâche gardent
+SLS-071 ouverte. Les causes résiduelles du lecteur restent suivies dans093.
 
 Les sections de campagne ci-dessous conservent les images, schémas et dates de
 leurs checkpoints historiques. Elles ne remplacent pas cet état courant.
@@ -25,10 +25,19 @@ qualifie ensuite071.3/.8 :32groupes réels, quatre pertes de réponse de jetons
 avant/après commit, watchdog et32captures inspectées. La confirmation reste
 ouverte, sans succès ni rejeu ; consulter la liste retrouve les métadonnées,
 jamais la valeur perdue. Deux fonctions et quatre jetons de tous les passages
-sont purgés/révoqués, huit observateurs terminés. Le produit et le manuel
-restent inchangés depuis42 ; aucun checkpoint antérieur n’est réadditionné.
+sont purgés/révoqués, huit observateurs terminés. Lors de ce complément, le produit et le manuel
+restaient ceux de42 ; aucun checkpoint antérieur n’était réadditionné.
 
 Ce SPARK héberge la plateforme de fonctions Docker sur l’infrastructure de développement LeLabs.
+
+Le complément `docs/evidence/function-http-client-source-access-dev-2026-11-12.json`
+qualifie le refus réel des domaines et la correction du hash courant sur60938093 :
+32groupes,7ciblés/25régressions,395sources28105d2b et32captures inspectées.
+Métadonnées courantes conservées sous panne, absence confirmée et pilote404
+sont distincts ; retour des domaines et appels réels confirmés. Deux fonctions
+et deux jetons des passages nettoyés, six handlers nominaux ; manuel actualisé,
+18chapitres/74paragraphes.071.2 garde le chargement dédié,071.6 son exception ;
+les défauts visuels101/102 restent ouverts.
 
 ## Services et accès
 

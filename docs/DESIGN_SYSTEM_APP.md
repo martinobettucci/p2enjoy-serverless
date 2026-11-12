@@ -514,4 +514,9 @@ montre un hash déclaré absent malgré les métadonnées courantes. Le
 réserve cette absence à une réponse confirmée : lecture en cours, indisponibilité
 sans métadonnées et hash courant confirmé sont distincts. En cas de source
 refusée, conserver le hash de cette seule réponse et retirer URL/cURL/résultat ;
-aucun envoi autorisé. Correction et manuel implémentés ; build et replay encore requis.
+aucun envoi autorisé. Correction et manuel déployés sur60938093, avec
+[32groupes réels](evidence/function-http-client-source-access-dev-2026-11-12.json).
+Les huit JPEG ciblés et24vues de guide/connexion sont inspectés individuellement.
+Hash complet et refus lisibles en desktop/mobile ; le badge parent périmé101
+et la typographie des quantités102 restent suivis. Les images ne prouvent pas
+le transitoire de chargement, encore ouvert dans071.2.

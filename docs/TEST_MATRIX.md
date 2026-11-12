@@ -545,3 +545,15 @@ recoupées, dont2de chapitre ajoutant0 groupe ; 16 chapitres et 57 paragraphes c
 Les négatifs azp/aud, les vrais profils sans droits et la rotation/pending503
 restent non éprouvés ; aucune vue 503 réelle inspectée. L’unité089 reste [~],
 son seul critère 089.4 passe [x].
+
+## Testeur : source refusée et hash confirmé, complément0712
+
+[32groupes réels](evidence/function-http-client-source-access-dev-2026-11-12.json)
+sur395sources28105d2b/image60938093 :7ciblés puis8manuel/8publics/9connexion.
+EACCES natif et503 sans invocation, témoins publics, URL/résultat retirés, hash
+courant exact, reprise alias, absence confirmée et pilote archivé404/retour.
+Six handlers succeeded,32captures inspectées dont2du nouveau paragraphe,
+deux fonctions et deux jetons des deux passages nettoyés.38backend/4web recoupés,
+5982artefacts et officiels conservés. Le premier échec ne compte aucun groupe ;
+071.2 garde la preuve dédiée du chargement,071.6 son exception vivante,101/102
+leurs défauts visuels ; la campagne complète de plateforme reste distincte.

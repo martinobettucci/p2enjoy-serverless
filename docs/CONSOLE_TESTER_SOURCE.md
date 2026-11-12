@@ -66,7 +66,7 @@ lecture : ces causes du lecteur commun restent dans [SLS-093](BACKLOG.md#sls-093
 Aucun statut ne doit les présenter comme exécutées par le refus EACCES.
 L'exception inattendue d'une tâche du relais relève séparément de071.6.
 Les régressions communes et captures inspectées précèdent toute qualification.
-Statut : banc exécuté, défaut d’affichage reproduit avant correction. Le
+Statut : refus réel et correction qualifiés par le replay32 ci-dessous. Le
 [passage0bb9553f](evidence/function-http-client-source-access-failed-dev-2026-11-12.json)
 reste échoué, zéro groupe qualifié : trois handlers réels, quatre captures
 inspectées, source restituée, fonction purgée et jeton révoqué.395sources et
@@ -74,8 +74,8 @@ l’image96e5dc4e sont conservées avant/après. La garde qualifiée066 reste in
 
 ## Hash courant sous lecture indisponible — correction0712
 
-Le refus réel renvoie un catalogue200 avec source_forbidden et un
-`default_code_hash` valide ; l’UI jette cette réponse et confond absence de
+Le premier refus réel renvoyait un catalogue200 avec source_forbidden et un
+`default_code_hash` valide ; l’UI jetait cette réponse et confondait absence de
 métadonnées avec absence de promotion. Décision avant code : garder uniquement
 les métadonnées de **la réponse courante** avec son erreur de domaines. Le hash
 courant confirmé reste lisible ; les destinations et l’envoi restent interdits.
@@ -95,6 +95,23 @@ mêmes valeurs dans les en-têtes repliés. Le SHA d’image reste un argument p
 obligatoire issu du relevé natif du lanceur ; intégrité/FK/migrations sont
 recoupées avant/après et toute préparation partielle est nettoyée.
 
-La correction UI et le manuel sont implémentés ; le banc ajoute les témoins
-sans code et pilote archivé. Relecture, build et replay du code déployé restent
-nécessaires avant tout statut qualifié.
+## Qualification du refus réel et de la correction
+
+La [preuve32](evidence/function-http-client-source-access-dev-2026-11-12.json)
+porte395sources28105d2b, commit0ba8e93 et image60938093. Sept groupes ciblés puis
+25régressions passent, six handlers succeeded et deux révisions. Le vrai503
+avant émission ne crée pas d’invocation ; les deux URL connues fonctionnent
+sous EACCES, le hash courant reste exact et l’alias refonctionne après restitution.
+Absence sans code, pilote sélectionné puis archivé/404 et retour explicite sont
+éprouvés.32captures sont inspectées :8ciblées,22régressions et2de lecture du
+nouveau paragraphe. Le badge parent périmé et les quantités collées du manuel
+sont suivis séparément dans101/102, sans être masqués par ce succès ciblé.
+
+Le manuel servi garde18chapitres/74paragraphes, empreintee0d2f001.38backend,
+4web, fichiers officiels et5982artefacts sont recoupés avant/après. Deux fonctions
+avec le passage échoué sont purgées, deux jetons révoqués, parents supprimés,
+helpers terminés, gardes/baux/réservations nuls ; dix migrations et intégritéok.
+Le transitoire « Lecture en cours… » est relu statiquement mais sans assertion
+E2E ni capture dédiée ;071.2 reste ouvert pour cette preuve.071.6 conserve son
+exception inattendue dans un contrôle vivant. Les autres causes du lecteur
+restent093 et la campagne complète de plateforme reste095.

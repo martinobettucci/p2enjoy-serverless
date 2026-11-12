@@ -7609,3 +7609,21 @@ les adresses relit sa facette sans actualiser ce badge parent. Le défaut est
 inscrit séparément dans SLS-101, sans modifier le périmètre du correctif071.2
 ni revendiquer un écran totalement cohérent. Spécification et correction de
 101 restent à réaliser après l’unité en cours.
+
+### 12 novembre2026 — Correction source et hash qualifiée sur60938093
+
+BuildDEV puis bascule après backup SQLite f9323903, contrôle b76da789 depuis
+07:23:17UTC. Replay2f044b71 :7groupes ciblés, six handlers succeeded, source000
+errno13 puis0640/open0, même contrôle et référence. Hash exact conservé, vrai503
+avant émission, absence sans code, pilote archivé404 puis retour explicite.
+25régressions sérialisées passent sur les mêmes395sources28105d2b ; commit testé
+0ba8e93, manuel18chapitres/74paragraphes SHAe0d2f001. Huit JPEG ciblés inspectés
+par le principal et24originaux de guide/connexion par le vérificateur ; le
+nouveau paragraphe est visible en deux cadrages dédiés. Badge périmé101 et
+espacements102 suivis sans les masquer. Deux fonctions/tokens des deux passages
+purges/révocations/parents recoupés nativement ; zéro bail/réservation/garde,
+intégritéok, dix migrations,38backend/4web et5982artefacts conservés.071.2 garde
+le transitoire de chargement sans assertion dédiée ;071.6 son exception dans
+un contrôle vivant. Aucun groupe des preuves antérieures n’est réadditionné.
+La relecture officielle ciblée du Test Scaleway actualise sa seule ligne de
+parité ; elle ne vaut pas revalidation des autres lignes.
