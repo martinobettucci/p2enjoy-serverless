@@ -962,7 +962,10 @@ trois handlers et25communs sont prévus ;070.2 reste ouverte avant leur preuve. 
 [premier passage](evidence/code-editor-source-access-scope-failed-dev-2026-11-13.json)
 est refusé422 sur la portée Create du client ; deux fonctions/parents nettoyés,
 aucun jeton/handler ni groupe qualifié. Correction selon le modèle de portée
-service décidée avant code.
+service décidée avant code. Le [second passage](evidence/code-editor-source-access-default-status-failed-dev-2026-11-13.json)
+passe cinq groupes puis attend404 au lieu de409 sans cible. Un handler,
+deux fonctions/cinq jetons/deux parents nettoyés, zéro groupe qualifié.
+Distinction409 sans cible/404 hash archivé décidée avant correction du client.
 
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de

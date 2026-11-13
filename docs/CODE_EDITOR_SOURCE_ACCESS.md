@@ -53,8 +53,8 @@ L’arborescence sans hash réclame un choix explicite. Update et l’administra
 peuvent encore lire le hash archivé et leurs brouillons personnels.
 
 La même matrice de refus reste exigée, y compris pour le nouveau jeton Create :
-la disparition de la cible n’autorise pas l’accès initial. Les invocations Read
-sans hash et sur le hash archivé sont refusées404. Restaurer le hash conserve
+la disparition de la cible n’autorise pas l’accès initial. L’invocation Read sans hash est refusée409 (`function_not_deployed`) ;
+sur le hash archivé, elle est refusée404 (`version_unavailable`). Restaurer le hash conserve
 la cible absente ; le pilote épinglé fonctionne, Create reste refusé. Promouvoir
 explicitement le hash rend de nouveau l’appel sans tag fonctionnel. Trois
 handlers réussis distincts sont joints à leurs lignes natives et au même hash.
@@ -89,3 +89,17 @@ et5982artefacts sont conservés.
 Décision avant correction : omettre function_ids pour les deux jetons Create.
 La portée de Read/Update et le cas Update limité à l’autre fonction restent
 inchangés. Le refus422 est conforme ; le produit n’a pas à changer.
+
+## Second passage : absence de cible distincte du hash indisponible
+
+Le [second passage](evidence/code-editor-source-access-default-status-failed-dev-2026-11-13.json)
+au gel0e99bea passe cinq groupes et les matrices sans cible, puis attend404
+à tort sur l’appel sans hash. Son message d’assertion correspond exactement
+au digest de409/404 ; execution.snapshot et declared_path portent déjà409
+function_not_deployed. Le hash archivé conserve son404 version_unavailable.
+Un handler réussi, deux fonctions/cinq jetons/deux parents nettoyés ; baseline
+conservée, zéro groupe qualifié. Aucun résultat partiel ne s’ajoute au replay.
+
+Décision avant correction : exiger ces deux statuts et codes publics distincts,
+les enregistrer avant l’assertion, puis poursuivre restauration/pilote/promotion.
+La distinction existante ne requiert aucun changement produit.

@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 13 novembre 2026 — absence de cible409 distincte du hash archivé404
+
+Le replayerdc8b1789 passe cinq groupes et les matrices publiées/sans cible,
+puis échoue sur l’attente404 de l’appel sans hash. Le digest du message correspond
+à409/404 et le serveur porte function_not_deployed409 ; le hash archivé doit
+répondre version_unavailable404. Un handler réussi ; deux fonctions/cinq jetons/
+deux parents nettoyés et baseline conservée, zéro groupe qualifié. Décision avant
+code : assertions distinctes et statuts/codes publics enregistrés avant échec.
+Rejouer les sept groupes puis25communs ;070.2 reste ouverte.
+
+
 ## 13 novembre 2026 — portée Create du banc refusée avant publication
 
 Le passage2b41b32c au gelc40626f reçoit422 à la création du premier jeton :

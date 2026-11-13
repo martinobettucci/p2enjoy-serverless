@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-070.2 : [second passage arrêté sur le statut sans cible](docs/evidence/code-editor-source-access-default-status-failed-dev-2026-11-13.json).
+  Cinq groupes passent, puis attente404 du client au lieu du409 existant ;
+  un handler, deux fonctions/cinq jetons/deux parents nettoyés, zéro qualifié.
+  Correction décidée : distinguer409 sans cible et404 du hash archivé.
+
 - SLS-070.2 : [premier passage arrêté sur la portée Create](docs/evidence/code-editor-source-access-scope-failed-dev-2026-11-13.json).
   Refus422 conforme au modèle, deux fonctions/parents nettoyés et baseline
   conservée, aucun jeton/handler ni groupe qualifié. Correction de préparation
