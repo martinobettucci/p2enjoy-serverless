@@ -1,5 +1,29 @@
 # Journal de cadrage
 
+## 13 novembre2026 — capacité globale de publication éditeur qualifiée
+
+La [capacité globale de publication éditeur](evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :
+4 ciblés puis 25 communs, sur 423 sources `0856f1be` et l’image `b452ef16`.
+Un POST reste retenu au vrai read ; les nouveaux POST sur A et B font429 en
+118/130ms, Retry-After5, sans candidat ni mutation des brouillons. Après libération,
+le même POST A termine dédupliqué puis une nouvelle publication B réussit.
+Trois handlers et22captures communes sont recoupés ; deux fonctions, un jeton,
+deux parents et un helper sont nettoyés.38backend/quatreweb, services, manuel
+18/74, configuration, référence et5982artefacts initiaux sont conservés.
+Les frontières ZIP64Mio/256Mio/20000fichiers/parents et la capacité après413
+restent à éprouver ; aucun critère supplémentaire de070 n’est clôturé.
+
+Passagebe791eed au gel7ff7221, puis manuel/public/connexion en série. Le secours
+inchangé accepte B créée après armement ; première requête jointe, refus A/B
+sans candidat et trois handlers recoupés. Sept threads libres, compteurs nuls,
+intégrité/FK/dix migrations,22originaux inspectés et revue sans blocage. Aucun
+registre d’incohérences présent. Seules ARCHIVE_LIMITS/CONSOLE_EDITOR/SOURCE_LIMITS
+reçoivent les résultats dans l’index ; clients/produit/manuel inchangés après gel.
+Reprendre le second passage ZIP : nouveau hash pour conserver le ZIP reconstruit,
+frontières exactes64Mio/256Mio/20000fichiers/parents et capacité après413, puis
+attentes UI et reprises.070.1/.3/.4/.5 restent ouvertes.
+
+
 ## 13 novembre 2026 — reconstruction ZIP, découpage avant clients E2E
 
 ARCHIVE_LIMITS reprend le contrat existant en deux passages : publication A

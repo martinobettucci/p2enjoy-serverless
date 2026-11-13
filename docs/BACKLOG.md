@@ -975,7 +975,12 @@ Le [complément ZIP](CODE_EDITOR_ARCHIVE_LIMITS.md) est découpé avant code en
 capacité globale de publication puis frontières du paquet reconstruit. La garde
 initiale reste inchangée ; B est créée après arrêt du read de A pour éprouver
 le refus inter-fonctions. Les bornes exactes seront recoupées sur le ZIP conservé,
-pas seulement prédites. Les critères ouverts gardent toutes leurs exigences.
+pas seulement prédites. La [capacité globale29](evidence/code-editor-build-capacity-dev-2026-11-13.json)
+passe4ciblés/25communs sur423sources0856f1be/imageb452ef16 : refus429 A/B en
+118/130ms pendant le read, UUID absents/états natifs inchangés, même POST A joint
+puis B explicite publiée. Trois handlers,22captures, deux fonctions/un jeton/
+deux parents/helper nettoyés. Frontières64Mio/256Mio/20000 et capacité après413
+restent à produire ; aucun critère supplémentaire n’est clos.
 
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de

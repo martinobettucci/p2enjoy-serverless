@@ -89,4 +89,39 @@ référence et5982artefacts initiaux sont recoupés avant/après. Les inspecteur
 sont en lecture seule sous UID1001 pour SQLite ; aucun code, jeton, cookie,
 secret ou ciphertext n’est exporté. Les fenêtres et compteurs restent bornés.
 Les critères070.1/.3/.4/.5 restent ouverts tant que leurs autres preuves manquent.
-Aucun résultat de ce complément n’est encore qualifié.
+La capacité est qualifiée ci-dessous ; les frontières du paquet restent à produire.
+
+## Capacité globale qualifiée —13 novembre2026
+
+La [capacité globale de publication éditeur](evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :
+4 ciblés puis 25 communs, sur 423 sources `0856f1be` et l’image `b452ef16`.
+Un POST reste retenu au vrai read ; les nouveaux POST sur A et B font429 en
+118/130ms, Retry-After5, sans candidat ni mutation des brouillons. Après libération,
+le même POST A termine dédupliqué puis une nouvelle publication B réussit.
+Trois handlers et22captures communes sont recoupés ; deux fonctions, un jeton,
+deux parents et un helper sont nettoyés.38backend/quatreweb, services, manuel
+18/74, configuration, référence et5982artefacts initiaux sont conservés.
+Les frontières ZIP64Mio/256Mio/20000fichiers/parents et la capacité après413
+restent à éprouver ; aucun critère supplémentaire de070 n’est clôturé.
+
+La fonction A est seule avant armement, B apparaît après le held natif. Un
+worker reste tracé sur FD12/inode571353, fichier65octets ;131072octets sont la
+taille demandée au read, pas celle du fichier. La santé répond en171ms. Les
+refus exacts sont118,342ms et130,439ms, avec UUID absents par API et en SQLite.
+Fonctions, brouillons, audits de mutation, révisions et candidats sont identiques
+avant/après ces refus. Le premier appel est toujours en attente à ce point.
+
+La libération rejoint helper, garde et même requête. Le reçu commence environ
+4,36s après le read retenu, sous45s. Le premier UUID publie la révision d’origine
+avec code_changed=false ; le nouvel UUID B publie sa propre révision puis est
+invoqué par hash. Les trois handlers ont leurs lignes succeeded/handler_started1/
+HTTP200 et leurs révisions. Les deux UUID refusés restent absents au final.
+
+Le relevé final recoupe helper d’origine disparu, sept threads libres, compteurs
+nuls, intégrité/FK et dix migrations. Les22originaux communs sont ouverts
+individuellement, Git propre avant/après :16JPEG liés aux SHA déclarés et6PNG
+aux octets/fraîcheur de phase. Ces images ne prouvent aucune concurrence.
+
+Le passagebe791eed au gel7ff7221 est suivi des25communs sur le même gel.
+Les bornes de taille ne sont pas déduites de ce petit paquet. Aucun autre
+critère de070 ne ferme ; le second passage de frontières reste entièrement dû.

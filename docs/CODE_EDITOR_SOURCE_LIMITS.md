@@ -142,7 +142,10 @@ Les trois notes SPARK et propositions sont conservées : image, installation,
 interfaces et configuration inchangées, aucune adoption revendiquée. Aucun
 build produit, migration, variable, secret ou route n’est nécessaire. Les
 parcours de l’ensemble2 sont désormais qualifiés par [43groupes](evidence/code-editor-console-focus-dev-2026-11-12.json).
-L’ensemble3 est engagé par les [34groupes des lecteurs vivants](evidence/code-editor-read-concurrency-dev-2026-11-12.json),
-quatre lecteurs et leurs restitutions. Droits pendantIO, purge face à lecteur,
-reconstruction/ZIP, attentes UI, ensemble4 et campagne complète restent à
-produire ;070.1–.5 restent ouverts.
+L’ensemble3 dispose des [34groupes des lecteurs vivants](evidence/code-editor-read-concurrency-dev-2026-11-12.json),
+des [droits pendantIO/purge](evidence/code-editor-source-lifecycle-dev-2026-11-13.json)
+et des [droits sans cible](evidence/code-editor-source-access-dev-2026-11-13.json),
+qui clôturent070.2 sans réaddition des époques. La [capacité globale29](evidence/code-editor-build-capacity-dev-2026-11-13.json)
+qualifie ensuite le refus inter-fonctions pendant reconstruction et sa libération.
+Les [frontières ZIP](CODE_EDITOR_ARCHIVE_LIMITS.md), attentes UI, ensemble4 et
+campagne complète restent à produire ;070.1/.3/.4/.5 restent ouverts.

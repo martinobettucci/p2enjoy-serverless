@@ -1,5 +1,16 @@
 # Architecture technique
 
+La [capacité globale de publication éditeur](evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :
+4 ciblés puis 25 communs, sur 423 sources `0856f1be` et l’image `b452ef16`.
+Un POST reste retenu au vrai read ; les nouveaux POST sur A et B font429 en
+118/130ms, Retry-After5, sans candidat ni mutation des brouillons. Après libération,
+le même POST A termine dédupliqué puis une nouvelle publication B réussit.
+Trois handlers et22captures communes sont recoupés ; deux fonctions, un jeton,
+deux parents et un helper sont nettoyés.38backend/quatreweb, services, manuel
+18/74, configuration, référence et5982artefacts initiaux sont conservés.
+Les frontières ZIP64Mio/256Mio/20000fichiers/parents et la capacité après413
+restent à éprouver ; aucun critère supplémentaire de070 n’est clôturé.
+
 Les [droits d’accès aux sources](evidence/code-editor-source-access-dev-2026-11-13.json) passent **32 groupes réels** :
 7 ciblés puis 25 communs, sur 420 sources `70f21df4` et l’image `b452ef16`.
 Les matrices couvrent 78 cas de lecture (24 admis, 54 refusés) et 32 mutations

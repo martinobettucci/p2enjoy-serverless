@@ -1,6 +1,6 @@
 # Qualification de la plateforme
 
-## Capacité globale de publication éditeur — banc préparé
+## Capacité globale de publication éditeur — qualifiée en DEV
 
 `node e2e/code-editor-build-capacity.mjs` reçoit le SSO sur stdin privée et part
 de l’accueil. Quatre groupes prévus : SSO, préparation originale, capacité
@@ -10,8 +10,11 @@ La barrière/restauration qualifiées restent inchangées. Le lecteur natif
 `code-editor-build-inspect.py NAMESPACE_UUID [GARDE]` recoupe FD/inode, brouillons,
 candidats et nettoyages, sans écrire dans SQLite ni exporter code/cipher/jeton.
 Le [contrat](../docs/CODE_EDITOR_ARCHIVE_LIMITS.md) sépare cette capacité des
-frontières ZIP, qui restent à produire. Syntaxes Node/Python et programme distant
-contrôlés, revue sans blocage statique ; aucun nouveau groupe qualifié avant passage.
+frontières ZIP, qui restent à produire. Le [passage29](../docs/evidence/code-editor-build-capacity-dev-2026-11-13.json)
+passe4ciblés/25communs sur423sources0856f1be/imageb452ef16 : refus118/130ms,
+UUIDabsents et états identiques, puis premièrepublication jointe et B explicite.
+Trois handlers et22originaux inspectés, nettoyage natif complet et conservations
+recoupés. Les bornes ZIP et capacité après413 restent à qualifier.
 
 ## Droits de source sans cible promue — qualifiés en DEV
 
