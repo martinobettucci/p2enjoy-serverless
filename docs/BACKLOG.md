@@ -941,6 +941,12 @@ Contrat : [éditeur](CONSOLE_USABILITY.md#éditeur-de-code-et-handler) et
 implémenté et qualifié avec la tranche réelle SLS-071 ; les autres preuves de
 l’éditeur restent dans leurs critères propres.
 
+Le [cycle d’accès des sources](CODE_EDITOR_SOURCE_LIFECYCLE.md) est spécifié avant
+son code : révocation Update pendant IO, nouveau propriétaire sans transfert de
+brouillon, purge en phase artifacts face au FD vivant, puis refus et effacement
+après jonction. Cinq groupes réels et leurs régressions sont à produire ; aucune
+nouvelle clôture n’est revendiquée.
+
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de
 révisions immuables et tester le résultat.

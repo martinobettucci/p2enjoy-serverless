@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-070 : [révocation et purge pendant lecture](docs/CODE_EDITOR_SOURCE_LIFECYCLE.md)
+  spécifiées avant le client E2E. Réutilisation de la barrière qualifiée,
+  propriétaires distincts et purge durable avant effacement physique ; cinq
+  groupes ciblés prévus, aucun nouveau résultat encore qualifié.
+
 - SLS-070 : [lecteurs vivants qualifiés par34groupes](docs/evidence/code-editor-read-concurrency-dev-2026-11-12.json),9ciblés/25communs,
   414sources11b90326/imageb452ef16. Quatre FD/workers, trois nouveaux threads
   rapprochés malgré arrêt enfant précoce, cinquième429 en63ms puis capacité rendue.

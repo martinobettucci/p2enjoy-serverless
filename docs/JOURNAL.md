@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 13 novembre 2026 — droits et purge pendant lecture, décision avant code
+
+Après la qualification34 des lecteurs, le complément CODE_EDITOR_SOURCE_LIFECYCLE
+retient deux séquences sur la même fonction originale : jeton UpdateA révoqué
+après début du read, puis nouveau propriétaireB ; purge admin confirmée pendant
+une lecture de B, phase artifacts durable et fichier retenu jusqu’à jonction.
+Les statuts suivent les sources actuelles :401 du jeton révoqué,404 du lecteur
+initial après suppression,404 des nouvelles lectures admin et403 pour B dont
+la fonction vivante ne fournit plus de service. Les brouillons A/B restent
+privés puis sont retirés dans la décision de purge. Aucun nouveau comportement
+produit, manuel, migration ou configuration n’est introduit. Le banc reste
+arrêté jusqu’au contrat poussé puis à son gel et sa revue.
+
 ## 12 novembre 2026 — quatre lecteurs vivants et restitutions qualifiés
 
 Les [lecteurs de code concurrents](evidence/code-editor-read-concurrency-dev-2026-11-12.json) passent **34 groupes réels** :
