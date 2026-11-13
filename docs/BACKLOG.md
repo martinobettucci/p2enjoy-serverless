@@ -945,7 +945,10 @@ Le [cycle d’accès des sources](CODE_EDITOR_SOURCE_LIFECYCLE.md) est spécifi�
 son code : révocation Update pendant IO, nouveau propriétaire sans transfert de
 brouillon, purge en phase artifacts face au FD vivant, puis refus et effacement
 après jonction. Cinq groupes réels et leurs régressions sont à produire ; aucune
-nouvelle clôture n’est revendiquée.
+nouvelle clôture n’est revendiquée. Le [premier passage échoué](evidence/code-editor-source-lifecycle-error-field-failed-dev-2026-11-13.json)
+attendait detail au lieu du champ error commun : un groupe SSO passé, zéro
+qualifié, aucun handler/helper. Fonction/deux jetons/deux parents nettoyés et
+conservation recoupée ; correction de l’assertion décidée avant code.
 
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de

@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-070 : [premier passage accès/purge échoué](docs/evidence/code-editor-source-lifecycle-error-field-failed-dev-2026-11-13.json)
+  sur une assertion du champ d’erreur : statut403 conforme, error attendu au
+  lieu de detail. Un groupe SSO passé, zéro qualifié ; fonction, deux jetons et
+  deux parents nettoyés, sources/image et données conservées. Correction du
+  seul client décidée avant code ; les lectures maintenues restent à éprouver.
+
 - SLS-070 : [révocation et purge pendant lecture](docs/CODE_EDITOR_SOURCE_LIFECYCLE.md)
   spécifiées avant le client E2E. Réutilisation de la barrière qualifiée,
   propriétaires distincts et purge durable avant effacement physique ; cinq

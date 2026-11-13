@@ -49,6 +49,10 @@ Les refus conservent leur véritable objet d’erreur ; aucune réponse de sourc
 n’est fabriquée ni réinterprétée comme un succès. Les noms d’en-têtes et valeurs
 d’authentification ne sont pas exportés dans le rapport.
 
+Le gestionnaire HTTP commun sérialise ces refus dans `{error: texte}`. Le client
+exige un texte non vide et cette seule clé, en plus du statut attendu. Il ne
+suppose pas la forme `detail` par défaut de FastAPI.
+
 ## Purge confirmée face à un lecteur vivant
 
 1. Engager avec B une nouvelle lecture et retenir son worker sur le même fichier.
@@ -102,9 +106,17 @@ Ce complément ne clôture pas seul 070.1–.5 : reconstruction unique et limite
 lectures UI maintenues et reprises de publication restent exigées. La preuve
 antérieure des lecteurs conserve sa propre époque et ses 34 groupes.
 
-## Réalisation avant premier passage
+## Réalisation et premier passage
 
 Le client et l’inspecteur natif sont implémentés, leurs syntaxes Python/Node
 contrôlées, y compris le programme distant embarqué. La revue statique ne relève
-aucun bloqueur. Les durées cumulées sous la garde45s et les états attendus restent
-à établir par le passage réel ; aucun résultat E2E nouveau n’est revendiqué.
+aucun bloqueur. Le [premier passage](evidence/code-editor-source-lifecycle-error-field-failed-dev-2026-11-13.json)
+échoue avant sa première invocation : le refus403 passe mais le client cherche
+`detail` au lieu du champ `error` du gestionnaire commun. Un groupe SSO passé,
+zéro groupe qualifié ; fonction purgée, deux jetons révoqués, deux parents
+supprimés et conservation native recoupée. Aucune garde n’a été créée.
+
+Décision du13 novembre avant correction : vérifier la forme publique `error`
+et sa seule clé, sans changer les statuts ni réduire les exigences de refus.
+Les durées cumulées sous la garde45s et les états attendus restent à établir
+par le replay réel ; aucun résultat E2E nouveau n’est revendiqué.

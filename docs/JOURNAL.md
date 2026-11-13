@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 13 novembre 2026 — refus des sources : assertion du client corrigée au contrat
+
+Le premier passage1218c7ff au gelcb8ce70 échoue au groupe de préparation : le
+statut403 réel est conforme, mais denied attend detail alors que le gestionnaire
+HTTP commun renvoie error. Un seul groupe SSO passe ; zéro groupe qualifié,
+aucun handler ni helper créé. Fonction purgée, deux jetons révoqués et deux
+parents supprimés ; relevé natif et38backend/4web/5982artefacts/configuration/
+référence identiques à la baseline. La preuve d’échec et son brut sont conservés.
+
+Décision avant code : exiger error non vide et seule clé des refus401/403/404.
+Le produit reste inchangé. Corriger le client puis nouveau gel, replay5ciblés
+et25communs ; révocation pendant IO et purge vivante ne sont pas encore prouvées.
+
+
 ## 13 novembre 2026 — droits et purge pendant lecture, décision avant code
 
 Après la qualification34 des lecteurs, le complément CODE_EDITOR_SOURCE_LIFECYCLE
