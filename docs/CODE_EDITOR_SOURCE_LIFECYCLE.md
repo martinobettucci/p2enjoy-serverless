@@ -150,5 +150,7 @@ le titre entier du chapitre Archives mobile ; aucun défaut visuel ajouté.
 Le rapprochement avec la preuve serveur45 confirme auth/code_editor/models
 inchangés et les groupes Create initial/Update publié/Read/portée. Il n’ajoute
 aucun groupe ancien aux30. La variante « cible désactivée ne rétablit pas Create »
-reste à isoler dynamiquement ; les variantes de CSRF ne sont pas extrapolées
-du seul refus de valeur incorrecte. Aucun critère supplémentaire n’est clos.
+et les trois variantes CSRF sont ensuite isolées par le [complément32](evidence/code-editor-source-access-dev-2026-11-13.json).
+Le [contrat des droits](CODE_EDITOR_SOURCE_ACCESS.md) détaille ce nouveau gel,
+qui complète les présents droits pendant IO pour clôturer070.2. Le passage30
+conserve ses propres groupes et ne clôture toujours pas seul un autre critère.

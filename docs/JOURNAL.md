@@ -1,5 +1,28 @@
 # Journal de cadrage
 
+## 13 novembre 2026 — droits de source qualifiés, critère070.2 clôturé
+
+Les [droits d’accès aux sources](evidence/code-editor-source-access-dev-2026-11-13.json) passent **32 groupes réels** :
+7 ciblés puis 25 communs, sur 420 sources `70f21df4` et l’image `b452ef16`.
+Les matrices couvrent 78 cas de lecture (24 admis, 54 refusés) et 32 mutations
+refusées sans effet, dont 12 pour les variantes CSRF. Create reste refusé après
+retrait de cible, même nouvellement émis ; restauration, pilote et promotion
+sont distincts. Trois handlers Docker et 22 captures communes sont recoupés.
+Les trois passages sont nettoyés : six fonctions, dix jetons et six parents ;
+les deux échecs gardent zéro groupe qualifié. Les 5 982 artefacts, configurations,
+services et manuel 18 chapitres/74 paragraphes sont conservés.
+**070.2 est clôturé**, avec la preuve antérieure de droits pendant IO conservée
+sans réaddition. 070.1/.3/.4/.5 restent ouverts pour ZIP, attentes UI et reprises.
+
+Replay6314eb9b au gel84e3dd37 puis manuel/public/connexion en série. Les46sources
+control sont identiques à lifecycle30 ; ses groupes IO ne sont pas réadditionnés.
+Revue ciblée sans bloqueur,22originaux inspectés et nettoyages des trois passages
+recoupés. Aucun registre d’incohérences présent ; schéma et manuel inchangés.
+Seules SOURCE_ACCESS/CONSOLE_EDITOR/SOURCE_LIFECYCLE reçoivent les résultats
+dans l’index. Reprendre070 par reconstructionZIP unique et ses bornes, puis
+attentes UI et reprises ;070.1/.3/.4/.5 restent ouvertes.
+
+
 ## 13 novembre 2026 — absence de cible409 distincte du hash archivé404
 
 Le replayerdc8b1789 passe cinq groupes et les matrices publiées/sans cible,

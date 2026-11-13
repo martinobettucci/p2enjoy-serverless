@@ -869,7 +869,9 @@ Tests exigés :
 <a id="sls-070"></a>
 ## SLS-070 — Édition du code et du handler dans la console
 
-Statut : [~] — contrat détaillé persisté dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
+Statut : [~] —070.2 est clôturé par les [32 groupes des droits de source](evidence/code-editor-source-access-dev-2026-11-13.json)
+et les droits pendant IO de la preuve30, sans réaddition.070.1/.3/.4/.5 restent
+ouverts ;070.6/.7/.8 conservent leurs preuves. Contrat détaillé dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
 avant code. Serveur et migration010 déployés sur7c5c6f4b ;
 [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json) qualifient une première tranche serveur,
 dont070.7. La première facette Éditeur est déployée sura77b6b4e et
@@ -958,7 +960,9 @@ conservation recoupée ; correction de l’assertion décidée avant code.
 Le [complément des droits sans cible promue](CODE_EDITOR_SOURCE_ACCESS.md)
 isole le dernier cas dynamique de070.2 et rejoue la matrice de sources sur les
 six GET, les mutations refusées et les variantes CSRF. Sept groupes ciblés,
-trois handlers et25communs sont prévus ;070.2 reste ouverte avant leur preuve. Le
+trois handlers et25communs sont qualifiés par le [replay32](evidence/code-editor-source-access-dev-2026-11-13.json).
+070.2 est clôturé après rapprochement des droits pendant IO ; les échecs
+préliminaires ci-dessous restent exclus de ses groupes. Le
 [premier passage](evidence/code-editor-source-access-scope-failed-dev-2026-11-13.json)
 est refusé422 sur la portée Create du client ; deux fonctions/parents nettoyés,
 aucun jeton/handler ni groupe qualifié. Correction selon le modèle de portée
@@ -975,9 +979,15 @@ Critères d'acceptation :
 
 - [ ] SLS-070.1 Arborescence de la version choisie, lecture d'un fichier texte, binaires et
   dépendances identifiés comme tels, limites de taille appliquées côté serveur.
-- [ ] SLS-070.2 Accès aux sources réservé aux droits de publication (Create sur un
+- [x] SLS-070.2 Accès aux sources réservé aux droits de publication (Create sur un
   brouillon initial, Update sur une fonction publiée, session administratrice) ; le
-  jeton Read seul n'accède ni aux sources ni à leur téléchargement.
+  jeton Read seul n'accède ni aux sources ni à leur téléchargement. [32 groupes](evidence/code-editor-source-access-dev-2026-11-13.json) :
+  sixGET,78cas de lecture et32mutations refusées sans effet, dont12CSRF ;
+  Create ancien/nouveau refusé sans cible, restauration/pilote/promotion réels.
+  Trois handlers et22captures communes ; droits pendant IO/purge conservés dans
+  la [preuve30](evidence/code-editor-source-lifecycle-dev-2026-11-13.json), mêmes
+  modules serveur, zéro groupe ajouté. Les routes livrées n’exposent pas de ZIP
+  source supplémentaire. Six fonctions/dix jetons/six parents des passages nettoyés.
 - [ ] SLS-070.3 Brouillon persistant côté serveur, rattaché à une révision de base ;
   conflit de version détecté ; saisies non enregistrées signalées avant de quitter.
 - [ ] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins

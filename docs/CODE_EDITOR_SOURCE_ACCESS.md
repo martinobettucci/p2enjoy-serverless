@@ -73,9 +73,9 @@ Un échec reste incomplet et conservé avant correction. Aucun mock, interceptio
 seed SQL, horloge modifiée ou skip. Aucun changement produit, UI, manuel, schéma,
 route ou configuration n’est requis par ce complément.
 
-070.2 ne ferme qu’après inspection des résultats et rapprochement avec les
-preuves de droits pendant IO déjà qualifiées.070.1/.3/.4/.5 et la campagne
-complète gardent leurs exigences propres ; aucun résultat n’est encore acquis.
+Le replay et ses régressions sont qualifiés ci-dessous ; le rapprochement avec
+les droits pendant IO permet de clôturer070.2.070.1/.3/.4/.5 et la campagne
+complète gardent leurs exigences propres.
 
 ## Premier passage et correction de préparation
 
@@ -103,3 +103,38 @@ conservée, zéro groupe qualifié. Aucun résultat partiel ne s’ajoute au rep
 Décision avant correction : exiger ces deux statuts et codes publics distincts,
 les enregistrer avant l’assertion, puis poursuivre restauration/pilote/promotion.
 La distinction existante ne requiert aucun changement produit.
+
+## Qualification DEV du 13 novembre 2026
+
+Les [droits d’accès aux sources](evidence/code-editor-source-access-dev-2026-11-13.json) passent **32 groupes réels** :
+7 ciblés puis 25 communs, sur 420 sources `70f21df4` et l’image `b452ef16`.
+Les matrices couvrent 78 cas de lecture (24 admis, 54 refusés) et 32 mutations
+refusées sans effet, dont 12 pour les variantes CSRF. Create reste refusé après
+retrait de cible, même nouvellement émis ; restauration, pilote et promotion
+sont distincts. Trois handlers Docker et 22 captures communes sont recoupés.
+Les trois passages sont nettoyés : six fonctions, dix jetons et six parents ;
+les deux échecs gardent zéro groupe qualifié. Les 5 982 artefacts, configurations,
+services et manuel 18 chapitres/74 paragraphes sont conservés.
+**070.2 est clôturé**, avec la preuve antérieure de droits pendant IO conservée
+sans réaddition. 070.1/.3/.4/.5 restent ouverts pour ZIP, attentes UI et reprises.
+
+Le gel84e3dd37 est identique avant/après chaque phase, incluant les images CLI.
+Les deux matrices contiennent36 puis42GET ; les cinq séries de mutations
+refusées contiennent8/4/4/4/12cas. Chaque série recoupe fonctions, brouillons,
+audits de mutation, révisions, versions et candidats natifs sans changement.
+Les refus sans cible409/function_not_deployed et épinglé404/version_unavailable
+sont conservés explicitement dans le rapport avant assertion.
+
+Le catalogue et SQLite confirment l’historique et l’absence de cible après
+archivage ; la restauration garde cette absence avant le pilote puis promotion.
+Les trois handlers réussis sont joints au même hash. Sept threads libres,
+compteurs globaux nuls, intégrité/FK et dix migrations sont recoupés au final.
+Les seize JPEG ont leur SHA déclaré ; les six PNG ont leurs SHA actuels et
+fraîcheur de phase. Les22originaux sont ouverts individuellement, Git propre
+avant/après ; aucun nouveau parcours UI ciblé n’est déduit de ces images.
+
+Les46sources control de la preuve30 sont identiques à ce passage : routage,
+authentification, éditeur, modèles et émission des jetons compris. Cette preuve
+liée garde ses propres groupes et les scénarios IO/purge effectivement joués.
+Aucun endpoint d’export ZIP source n’est livré ; les sixGET de code/brouillon
+refusent Read. Le complément qualifie070.2 sans clôturer l’ensemble de070.

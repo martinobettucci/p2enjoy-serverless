@@ -5,7 +5,7 @@ avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
 Le serveur et la migration010 sont déployés et partiellement qualifiés en DEV
 par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La première facette console est déployée et partiellement qualifiée sura77b6b4e.
-Les critères070.6,070.7 et070.8 sont clôturés ;070.1–.5 restent ouverts.
+Les critères070.2,070.6,070.7 et070.8 sont clôturés ;070.1/.3/.4/.5 restent ouverts.
 La campagne de capacité réelle est détaillée dans
 [CODE_DRAFT_CAPACITY](CODE_DRAFT_CAPACITY.md), décision avant son client E2E.
 
@@ -723,3 +723,23 @@ B403 après suppression, réponse B déjà engagée404. Deux propriétaires de b
 sans transfert et purge durable avant effacement sont recoupés nativement.
 La variante Create sans cible promue reste à isoler ; les anciens groupes de
 droits gardent leur époque et ne sont pas additionnés aux30.
+
+## Droits de publication qualifiés — 070.2
+
+Les [droits d’accès aux sources](evidence/code-editor-source-access-dev-2026-11-13.json) passent **32 groupes réels** :
+7 ciblés puis 25 communs, sur 420 sources `70f21df4` et l’image `b452ef16`.
+Les matrices couvrent 78 cas de lecture (24 admis, 54 refusés) et 32 mutations
+refusées sans effet, dont 12 pour les variantes CSRF. Create reste refusé après
+retrait de cible, même nouvellement émis ; restauration, pilote et promotion
+sont distincts. Trois handlers Docker et 22 captures communes sont recoupés.
+Les trois passages sont nettoyés : six fonctions, dix jetons et six parents ;
+les deux échecs gardent zéro groupe qualifié. Les 5 982 artefacts, configurations,
+services et manuel 18 chapitres/74 paragraphes sont conservés.
+**070.2 est clôturé**, avec la preuve antérieure de droits pendant IO conservée
+sans réaddition. 070.1/.3/.4/.5 restent ouverts pour ZIP, attentes UI et reprises.
+
+Le [contrat des droits sans cible](CODE_EDITOR_SOURCE_ACCESS.md) lie cette
+matrice au [cycle de lecture vivante](CODE_EDITOR_SOURCE_LIFECYCLE.md). Les
+modules serveur sont identiques entre ces deux époques ; aucun ancien groupe
+n’est ajouté aux32. Le critère porte sur les routes livrées ; aucun export ZIP
+source supplémentaire n’est annoncé. Les autres critères gardent leur portée.

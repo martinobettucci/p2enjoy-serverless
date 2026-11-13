@@ -1,6 +1,6 @@
 # Qualification de la plateforme
 
-## Droits de source sans cible promue — banc préparé
+## Droits de source sans cible promue — qualifiés en DEV
 
 `node e2e/code-editor-source-access.mjs` reçoit le SSO sur stdin privée et part
 de l’accueil. Sept groupes éprouvent Create initial, publication Docker, les
@@ -12,7 +12,12 @@ SHA et états de la campagne sous UID1001. Aucune garde ni interruption produit.
 Trois handlers sont exigés, puis purge des deux fonctions/révocation des cinq
 jetons/suppression des parents. [Contrat](../docs/CODE_EDITOR_SOURCE_ACCESS.md)
 poussé avant code ; syntaxes Node/Python et programme distant contrôlés, revue
-statique sans blocage résiduel. Le passage réel reste à produire. Un seul scénario DEV à la fois, sans mock ni skip.
+statique sans blocage résiduel. Le [replay32](../docs/evidence/code-editor-source-access-dev-2026-11-13.json)
+passe7ciblés/25communs sur420sources70f21df4/imageb452ef16 :78GET,32mutations
+refusées sans effet, trois handlers et22images inspectées. Six fonctions/dix
+jetons/six parents des trois passages sont nettoyés ; les deux échecs gardent
+zéro groupe qualifié.070.2est clôturé avec les droits pendantIO déjà qualifiés,
+sans réaddition. Un seul scénario DEV à la fois, sans mock ni skip.
 
 ## Droits et purge pendant lecture — qualifiés en DEV
 

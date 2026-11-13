@@ -1,5 +1,17 @@
 # P2Enjoy Serverless
 
+Les [droits d’accès aux sources](docs/evidence/code-editor-source-access-dev-2026-11-13.json) passent **32 groupes réels** :
+7 ciblés puis 25 communs, sur 420 sources `70f21df4` et l’image `b452ef16`.
+Les matrices couvrent 78 cas de lecture (24 admis, 54 refusés) et 32 mutations
+refusées sans effet, dont 12 pour les variantes CSRF. Create reste refusé après
+retrait de cible, même nouvellement émis ; restauration, pilote et promotion
+sont distincts. Trois handlers Docker et 22 captures communes sont recoupés.
+Les trois passages sont nettoyés : six fonctions, dix jetons et six parents ;
+les deux échecs gardent zéro groupe qualifié. Les 5 982 artefacts, configurations,
+services et manuel 18 chapitres/74 paragraphes sont conservés.
+**070.2 est clôturé**, avec la preuve antérieure de droits pendant IO conservée
+sans réaddition. 070.1/.3/.4/.5 restent ouverts pour ZIP, attentes UI et reprises.
+
 Le [cycle d’accès des sources](docs/evidence/code-editor-source-lifecycle-dev-2026-11-13.json) passe **30 groupes réels** :
 5 ciblés puis25communs, sur417sourcesed0ff67a/imageb452ef16. Une révocation
 pendant le read rend401 à la même requête ; le nouveau jeton reçoit un brouillon
