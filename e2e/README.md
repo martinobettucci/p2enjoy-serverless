@@ -1,5 +1,24 @@
 # Qualification de la plateforme
 
+## Droits et purge pendant lecture — banc préparé
+
+`node e2e/code-editor-source-lifecycle.mjs` reçoit les identifiants SSO sur
+stdin privée et part de l’accueil. Cinq groupes sont prévus : connexion,
+publication du paquet original/droits Read et Update, révocation pendant read,
+purge en attente du lecteur, puis recoupements de deux handlers Docker.
+La barrière `code-editor-read-operator.py` et son secours restent inchangés.
+
+`code-editor-source-lifecycle-inspect.py NAMESPACE_UUID [UNITÉ_DE_GARDE]` relit
+SQLite sous UID1001 et les métadonnées du FD/inode de campagne. Il ne signale
+aucun processus et n’exporte pas de code, ciphertext ou valeur de jeton. Le
+client vérifie la propriété distincte des brouillons et la phase durable
+artifacts de la purge avant de libérer le lecteur. Gardes, requêtes et SSH sont
+joints avant le nettoyage des objets et la révocation de tous les jetons.
+
+Le [contrat](../docs/CODE_EDITOR_SOURCE_LIFECYCLE.md) est poussé avant le code.
+Syntaxes Python/Node contrôlées et revue statique sans bloqueur ; aucun groupe
+de ce complément n’est encore qualifié. Un seul scénario à la fois en DEV.
+
 ## Lecteurs vivants de l’éditeur — qualification ciblée DEV
 
 `node e2e/code-editor-read-concurrency.mjs` part de l’accueil et du vrai SSO,

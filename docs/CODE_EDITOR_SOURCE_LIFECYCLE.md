@@ -101,3 +101,10 @@ et les gardes doivent être à zéro, intégrité/FK et dix migrations conformes
 Ce complément ne clôture pas seul 070.1–.5 : reconstruction unique et limites ZIP,
 lectures UI maintenues et reprises de publication restent exigées. La preuve
 antérieure des lecteurs conserve sa propre époque et ses 34 groupes.
+
+## Réalisation avant premier passage
+
+Le client et l’inspecteur natif sont implémentés, leurs syntaxes Python/Node
+contrôlées, y compris le programme distant embarqué. La revue statique ne relève
+aucun bloqueur. Les durées cumulées sous la garde45s et les états attendus restent
+à établir par le passage réel ; aucun résultat E2E nouveau n’est revendiqué.
