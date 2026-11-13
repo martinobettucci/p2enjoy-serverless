@@ -79,7 +79,7 @@ async function gate(count){
 async function readSource(owner){return api(ep()+'/code-sources/file?path=reader-gate.txt',{owner,status:[200,401,403,404]});}
 function startRead(owner){const call={settled:false};call.promise=readSource(owner).then(result=>{call.settled=true;return {result};},error=>{call.settled=true;return {error};});pending.push(call.promise);return call;}
 async function joined(call){const v=await call.promise;if(v.error)throw v.error;return v.result;}
-function denied(r,status){assert.equal(r.status,status);assert.equal(typeof r.data.detail,'string');for(const k of ['file','text','tree','source','draft','diff'])assert(!(k in r.data));}
+function denied(r,status){assert.equal(r.status,status);assert.equal(typeof r.data.error,'string');assert(r.data.error.length>0);assert.deepEqual(Object.keys(r.data),['error']);}
 async function makeDraft(owner){return (await value(ep()+'/code-draft',{method:'POST',status:201,owner,headers:match((await value(ep())).updated_at),body:{base_code_hash:codeHash}})).draft;}
 function exact(r){assert.equal(r.status,200);const f=r.data.file;assert.equal(f.path,'reader-gate.txt');assert.equal(f.size,pkg.files['reader-gate.txt'].bytes);assert.equal(sha(f.text),pkg.files['reader-gate.txt'].sha256);}
 async function healthWhileHeld(){const start=performance.now();const r=await caller.get(base+'/healthz');assert.equal(r.status(),200);assert(performance.now()-start<5000);assert.equal((await value(ep())).id,fn.id);return {status:200,elapsed_ms:performance.now()-start};}
