@@ -17,7 +17,8 @@ réutilisés ; aucune source client ni dépendance de remplacement.
 
 Les jetons restent uniquement en mémoire : Create initial, Read, Update,
 Update limité à l’autre fonction et Create nouvellement émis après archivage.
-Le rapport ne conserve que leurs UUID. Les intentions de création sont écrites
+Les jetons Create portent sur tout le service, conformément à TokenCreate.scope ;
+Read et Update gardent leur portée par fonction. Le rapport ne conserve que leurs UUID. Les intentions de création sont écrites
 avant POST, rapprochées avant nettoyage si une réponse s’est perdue. Les valeurs
 SSO entrent sur stdin privée ; aucun en-tête confidentiel ni code ne figure
 dans le rapport. L’inspecteur relit SQLite sous UID1001, sans DML ni signal.
@@ -75,3 +76,16 @@ route ou configuration n’est requis par ce complément.
 070.2 ne ferme qu’après inspection des résultats et rapprochement avec les
 preuves de droits pendant IO déjà qualifiées.070.1/.3/.4/.5 et la campagne
 complète gardent leurs exigences propres ; aucun résultat n’est encore acquis.
+
+## Premier passage et correction de préparation
+
+Le [premier passage](evidence/code-editor-source-access-scope-failed-dev-2026-11-13.json)
+au gelc40626f passe le SSO puis reçoit422 sur le premier jeton Create : le
+client lui attribue function_ids malgré le contrat de portée service. Deux
+fonctions sans révision sont purgées, parents supprimés ; aucun jeton, handler
+ou groupe qualifié. Sources/image,38backend/quatreweb, configuration, référence
+et5982artefacts sont conservés.
+
+Décision avant correction : omettre function_ids pour les deux jetons Create.
+La portée de Read/Update et le cas Update limité à l’autre fonction restent
+inchangés. Le refus422 est conforme ; le produit n’a pas à changer.

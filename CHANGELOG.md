@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-070.2 : [premier passage arrêté sur la portée Create](docs/evidence/code-editor-source-access-scope-failed-dev-2026-11-13.json).
+  Refus422 conforme au modèle, deux fonctions/parents nettoyés et baseline
+  conservée, aucun jeton/handler ni groupe qualifié. Correction de préparation
+  du client décidée avant code : Create porte sur le service.
+
 - SLS-070.2 : [droits de source sans cible promue](docs/CODE_EDITOR_SOURCE_ACCESS.md)
   spécifiés avant le client : matrice des sixGET, mutations refusées et CSRF,
   archivage/restauration sans rétablir Create, puis pilote et promotion réels.

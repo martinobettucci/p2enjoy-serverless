@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 13 novembre 2026 — portée Create du banc refusée avant publication
+
+Le passage2b41b32c au gelc40626f reçoit422 à la création du premier jeton :
+TokenCreate.scope interdit Create avec function_ids. Deux fonctions purgées,
+parents supprimés, aucun jeton/handler ; sources et baseline conservées. L’échec
+est gardé séparément, zéro groupe qualifié. Décision avant code : omettre la
+restriction de fonction pour Create initial et Create nouveau, tout en gardant
+les autres portées. Rejouer les sept groupes puis25communs sur un nouveau gel.
+
+
 ## 13 novembre 2026 — droits sans cible promue, préparation de070.2
 
 Le contrat SOURCE_ACCESS isole la variante manquante : archiver la seule cible,

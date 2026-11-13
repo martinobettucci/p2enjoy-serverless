@@ -958,7 +958,11 @@ conservation recoupée ; correction de l’assertion décidée avant code.
 Le [complément des droits sans cible promue](CODE_EDITOR_SOURCE_ACCESS.md)
 isole le dernier cas dynamique de070.2 et rejoue la matrice de sources sur les
 six GET, les mutations refusées et les variantes CSRF. Sept groupes ciblés,
-trois handlers et25communs sont prévus ;070.2 reste ouverte avant leur preuve.
+trois handlers et25communs sont prévus ;070.2 reste ouverte avant leur preuve. Le
+[premier passage](evidence/code-editor-source-access-scope-failed-dev-2026-11-13.json)
+est refusé422 sur la portée Create du client ; deux fonctions/parents nettoyés,
+aucun jeton/handler ni groupe qualifié. Correction selon le modèle de portée
+service décidée avant code.
 
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de
