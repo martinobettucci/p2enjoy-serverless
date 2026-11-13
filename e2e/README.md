@@ -1,5 +1,19 @@
 # Qualification de la plateforme
 
+## Droits de source sans cible promue — banc préparé
+
+`node e2e/code-editor-source-access.mjs` reçoit le SSO sur stdin privée et part
+de l’accueil. Sept groupes éprouvent Create initial, publication Docker, les
+sixGET sous admin/Update et refus Create/Read/portée/anonyme, mutations refusées,
+CSRF incorrect/absent/origine étrangère, puis archivage de la seule cible.
+Restaurer garde la cible absente : pilote puis promotion restent explicites.
+`code-editor-access-inspect.py NAMESPACE_UUID` relit uniquement les métadonnées,
+SHA et états de la campagne sous UID1001. Aucune garde ni interruption produit.
+Trois handlers sont exigés, puis purge des deux fonctions/révocation des cinq
+jetons/suppression des parents. [Contrat](../docs/CODE_EDITOR_SOURCE_ACCESS.md)
+poussé avant code ; syntaxes Node/Python et programme distant contrôlés, revue
+statique sans blocage résiduel. Le passage réel reste à produire. Un seul scénario DEV à la fois, sans mock ni skip.
+
 ## Droits et purge pendant lecture — qualifiés en DEV
 
 `node e2e/code-editor-source-lifecycle.mjs` reçoit les identifiants SSO sur
