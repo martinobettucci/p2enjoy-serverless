@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-070 : [reconstruction ZIP](docs/CODE_EDITOR_ARCHIVE_LIMITS.md) spécifiée
+  avant ses clients : capacité globale entre fonctions, puis frontières exactes
+  recoupées sur les archives réellement conservées. Aucun nouveau résultat acquis.
+
 Les [droits d’accès aux sources](docs/evidence/code-editor-source-access-dev-2026-11-13.json) passent **32 groupes réels** :
 7 ciblés puis 25 communs, sur 420 sources `70f21df4` et l’image `b452ef16`.
 Les matrices couvrent 78 cas de lecture (24 admis, 54 refusés) et 32 mutations

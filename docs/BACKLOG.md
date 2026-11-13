@@ -971,6 +971,12 @@ passe cinq groupes puis attend404 au lieu de409 sans cible. Un handler,
 deux fonctions/cinq jetons/deux parents nettoyés, zéro groupe qualifié.
 Distinction409 sans cible/404 hash archivé décidée avant correction du client.
 
+Le [complément ZIP](CODE_EDITOR_ARCHIVE_LIMITS.md) est découpé avant code en
+capacité globale de publication puis frontières du paquet reconstruit. La garde
+initiale reste inchangée ; B est créée après arrêt du read de A pour éprouver
+le refus inter-fonctions. Les bornes exactes seront recoupées sur le ZIP conservé,
+pas seulement prédites. Les critères ouverts gardent toutes leurs exigences.
+
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de
 révisions immuables et tester le résultat.

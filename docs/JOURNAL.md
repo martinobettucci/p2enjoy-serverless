@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 13 novembre 2026 — reconstruction ZIP, découpage avant clients E2E
+
+ARCHIVE_LIMITS reprend le contrat existant en deux passages : publication A
+retenue au vrai read, refus du même candidat nouveau et d’une autre fonction B
+créée après armement, puis capacité rendue ; ensuite frontières64Mio/256Mio/
+20000fichiers/20000parents sur de vrais ZIP conservés. La barrière existante
+n’est pas modifiée. Une prédiction du générateur ne suffira pas : ZIP natif,
+inventaires et handlers devront concorder. Produit/manuel/configuration inchangés,
+aucun nouveau résultat acquis. Reprendre par le client de capacité globale.
+
+
 ## 13 novembre 2026 — droits de source qualifiés, critère070.2 clôturé
 
 Les [droits d’accès aux sources](evidence/code-editor-source-access-dev-2026-11-13.json) passent **32 groupes réels** :
