@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 13 novembre2026 — banc des frontières ZIP, préparation avant code
+
+Cinq fonctions et sept groupes ciblés : quatre frontières, plus une petite
+publication après413. Le générateur standard tourne dans l’image exacte du
+contrôle, sans réseau ni import produit, avec quota/timeout propres ; sortie
+privée UUID et reçu root avant lancement. ZIP/manifestes/marqueurs sont transférés
+par SSH puis vérifiés. Inspection complète et hashes résumés évitent des rapports
+à20000lignes. Nouveau marqueur avant ZIP exact empêche la déduplication vers
+l’entrée STORE ; les snapshots distinguent refus au PUT et au POST. Six handlers
+et25communs seront exigés. Aucun nouveau résultat ni changement produit acquis.
+
+
 ## 13 novembre2026 — capacité globale de publication éditeur qualifiée
 
 La [capacité globale de publication éditeur](evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :

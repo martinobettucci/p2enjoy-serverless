@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-070 : banc de frontières ZIP détaillé avant code : générateur dans l’image
+  exacte, cinq fonctions, sept groupes et six handlers prévus, inspection complète
+  des archives conservées et cleanup privé borné. Qualification à produire.
+
 La [capacité globale de publication éditeur](docs/evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :
 4 ciblés puis 25 communs, sur 423 sources `0856f1be` et l’image `b452ef16`.
 Un POST reste retenu au vrai read ; les nouveaux POST sur A et B font429 en

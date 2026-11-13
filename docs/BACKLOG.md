@@ -980,7 +980,9 @@ passe4ciblés/25communs sur423sources0856f1be/imageb452ef16 : refus429 A/B en
 118/130ms pendant le read, UUID absents/états natifs inchangés, même POST A joint
 puis B explicite publiée. Trois handlers,22captures, deux fonctions/un jeton/
 deux parents/helper nettoyés. Frontières64Mio/256Mio/20000 et capacité après413
-restent à produire ; aucun critère supplémentaire n’est clos.
+restent à produire ; aucun critère supplémentaire n’est clos. Le passage
+de frontières prépare cinq fonctions, sept groupes ciblés et six handlers,
+avec générateur de données isolé et inspection complète des archives conservées.
 
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de

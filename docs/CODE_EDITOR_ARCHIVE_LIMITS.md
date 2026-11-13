@@ -82,6 +82,46 @@ un nouveau parent isole la seconde, sans atteindre d’abord la borne des fichie
 Les dossiers ZIP explicites vides ne servent pas de discriminant : l’éditeur
 reconstruit les parents depuis son inventaire effectif.
 
+## Réalisation du passage de frontières
+
+Décision du13novembre avant ses sources : cinq fonctions de campagne, quatre
+frontières et une petite fonction distincte pour confirmer la capacité après413.
+Sept groupes ciblés sont prévus : accueil/SSO, préparation des vrais paquets,
+compression, volume extrait, nombre de fichiers, parents, recoupements natifs.
+Six handlers sont exigés : ZIP exact puis retour admissible, contrôle après413,
+et un par frontière restante. Les25communs suivent en série.
+
+Le générateur `code-editor-archive-fixtures.py` et le handler original
+`editor-archive-limits.cjs` sont montés readonly dans un conteneur temporaire de
+l’image exacte du contrôle. Aucun module produit n’est importé. Le conteneur
+est sans réseau, readonly, sans capacité, à1CPU/512Mio/64PID ; timeout interne
+600s puis kill5s, --rm. Il écrit seulement sa sortie privée de campagne, sous
+UID hôte1001. Le pilote `code-editor-archive-fixtures-run.py` vérifie le SPARK,
+le UUID, l’image et les identités de dossiers ; il conserve un reçu root privé
+avant lancement. Le nettoyage ne vise que cette sortie et ce conteneur nommés,
+avec identités et propriété contrôlées. Aucun service applicatif n’est lancé.
+
+La sortie contient ZIP d’entrée, ZIP prédit et manifestes normalisés A/B, plus
+marqueurs privés. Seuls comptes, tailles, empreintes, versions Python/zlib et
+SHA de zipfile sont exportés. Les octets sont transférés vers le client local
+par SSH et vérifiés avant upload. Le nettoyage du dossier et l’absence du
+conteneur sont recoupés à la fin. Un UUID déjà préparé est refusé sans génération.
+
+La prédiction reproduit le chemin ZipInfo explicite de l’éditeur, sortie
+seekable, noms triés, date1980, mode0444, DEFLATE et file_size. Elle n’utilise
+ni _for_archive ni open(nom) : le ZipInfo fourni garde son niveau de compression
+None, comme le produit. Les marqueurs modifiés sont écrits en un seul appel,
+les autres fichiers par blocs65536. La calibration incompressible est bornée
+à16ajustements ; l’archive fermée doit faire exactement64Mio et l’entrée STORE
+rester dessous. La paire de marqueurs doit réellement ajouter un octet comprimé.
+
+Le refus64Mio+1 est comparé au brouillon débordant déjà enregistré. Les autres
++1 sont refusés au PUT et comparés à l’état antérieur. L’inspection contrôle
+intégralement les fichiers/modes/SHA et parents contre les manifestes A/B,
+puis exporte leurs SHA canoniques et comptes ; elle recoupe aussi l’archive
+conservée et revisions.archive_sha256. Les invocations Docker retournent les
+comptes réels et les SHA des données/du marqueur, sans code ni secret.
+
 ## Clôture et portée
 
 Sources/images,38backend, quatre ressources HTTPS, manuel18/74, configuration,
