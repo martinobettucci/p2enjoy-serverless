@@ -1,5 +1,28 @@
 # Journal de cadrage
 
+## 13 novembre2026 — révocation et purge pendant lecture qualifiées
+
+Le [cycle d’accès des sources](evidence/code-editor-source-lifecycle-dev-2026-11-13.json) passe **30 groupes réels** :
+5 ciblés puis25communs, sur417sourcesed0ff67a/imageb452ef16. Une révocation
+pendant le read rend401 à la même requête ; le nouveau jeton reçoit un brouillon
+propre. La purge reste pending/artifacts avec FD/inode et20480octets conservés,
+puis termine après libération : réponse404, fichiers absents et zéro octet.
+Deux handlers Docker, deux gardes terminées et22captures inspectées sont recoupés.
+Deux fonctions/cinq jetons/quatre parents de tous les passages sont nettoyés ;
+l’échec initial reste exclu. Manuel18/74SHA8a50ffa0,38backend/quatreweb, génération,
+configuration, référence et5982artefacts conservés.070.1–.5 restent ouverts pour
+ZIP, attentes UI, reprises et Create sans cible promue après publication.
+
+Replay30cf01ad au gel91b450a, puis manuel/public/connexion strictement en série.
+Les deux helpers sont absents, sept threads libres, compteurs globaux nuls,
+intégritéok/FKvide/dix migrations. Le vérificateur ouvre22originaux, Git propre
+avant/après ; sa réserve sur le titre Archives est retirée après réouverture
+et recoupement SHA. Aucun registre d’incohérences présent. Seules les deux pages
+SOURCE_LIFECYCLE/CONSOLE_EDITOR reçoivent leurs résultats dans l’index ; produit,
+clients de preuve et manuel inchangés après le gel. Reprendre070.2 par le refus
+Create après retrait de cible, puis reconstruction/ZIP, attentes UI et reprises.
+
+
 ## 13 novembre 2026 — refus des sources : assertion du client corrigée au contrat
 
 Le premier passage1218c7ff au gelcb8ce70 échoue au groupe de préparation : le

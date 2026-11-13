@@ -1,6 +1,6 @@
 # Qualification de la plateforme
 
-## Droits et purge pendant lecture — banc préparé
+## Droits et purge pendant lecture — qualifiés en DEV
 
 `node e2e/code-editor-source-lifecycle.mjs` reçoit les identifiants SSO sur
 stdin privée et part de l’accueil. Cinq groupes sont prévus : connexion,
@@ -16,8 +16,13 @@ artifacts de la purge avant de libérer le lecteur. Gardes, requêtes et SSH son
 joints avant le nettoyage des objets et la révocation de tous les jetons.
 
 Le [contrat](../docs/CODE_EDITOR_SOURCE_LIFECYCLE.md) est poussé avant le code.
-Syntaxes Python/Node contrôlées et revue statique sans bloqueur ; aucun groupe
-de ce complément n’est encore qualifié. Un seul scénario à la fois en DEV.
+Le [replay qualifié](../docs/evidence/code-editor-source-lifecycle-dev-2026-11-13.json)
+passe5groupes puis25communs sur417sourcesed0ff67a/imageb452ef16. Deux handlers,
+deux gardes terminées,22captures inspectées et conservation native sont recoupés.
+Le premier échec de champ detail/error est conservé séparément, zéro groupe
+ajouté ; les deux fonctions/cinq jetons/quatre parents des passages sont nettoyés.
+Un seul scénario à la fois en DEV ;070reste ouverte pour les preuves résiduelles.
+
 
 ## Lecteurs vivants de l’éditeur — qualification ciblée DEV
 

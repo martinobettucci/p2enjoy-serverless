@@ -118,5 +118,37 @@ supprimés et conservation native recoupée. Aucune garde n’a été créée.
 
 Décision du13 novembre avant correction : vérifier la forme publique `error`
 et sa seule clé, sans changer les statuts ni réduire les exigences de refus.
-Les durées cumulées sous la garde45s et les états attendus restent à établir
-par le replay réel ; aucun résultat E2E nouveau n’est revendiqué.
+Le replay qualifié ci-dessous établit les états et les deux jonctions sous la
+garde45s. Le premier échec garde zéro groupe qualifié.
+
+## Qualification DEV du13 novembre2026
+
+Le [cycle d’accès des sources](evidence/code-editor-source-lifecycle-dev-2026-11-13.json) passe **30 groupes réels** :
+5 ciblés puis25communs, sur417sourcesed0ff67a/imageb452ef16. Une révocation
+pendant le read rend401 à la même requête ; le nouveau jeton reçoit un brouillon
+propre. La purge reste pending/artifacts avec FD/inode et20480octets conservés,
+puis termine après libération : réponse404, fichiers absents et zéro octet.
+Deux handlers Docker, deux gardes terminées et22captures inspectées sont recoupés.
+Deux fonctions/cinq jetons/quatre parents de tous les passages sont nettoyés ;
+l’échec initial reste exclu. Manuel18/74SHA8a50ffa0,38backend/quatreweb, génération,
+configuration, référence et5982artefacts conservés.070.1–.5 restent ouverts pour
+ZIP, attentes UI, reprises et Create sans cible promue après publication.
+
+Les deux lectures portent sur le même fichier65octets/inode483133, avec deux
+TID/FD distincts. Les reçus commencent environ4,52s et9,70s après les arrêts
+observés, avant l’échéance45s. A est révoqué pendant son arrêt ; les nouveaux
+appels et sa réponse initiale font401 sans code. Les deux brouillons privés
+restent distincts jusqu’à leur retrait dans la décision de purge. L’UUID de
+purge est le même pendant pending/artifacts et à completed, sans nouveau POST.
+
+Les six PNG de connexion n’ont pas de SHA déclaré dans leur rapport ; leurs
+SHA actuels et fraîcheur dans la phase sont recoupés. Les seize JPEG ont leur
+SHA déclaré. Ces vues communes ne prouvent aucune interaction ciblée de
+l’éditeur. L’inspection indépendante et la réouverture principale confirment
+le titre entier du chapitre Archives mobile ; aucun défaut visuel ajouté.
+
+Le rapprochement avec la preuve serveur45 confirme auth/code_editor/models
+inchangés et les groupes Create initial/Update publié/Read/portée. Il n’ajoute
+aucun groupe ancien aux30. La variante « cible désactivée ne rétablit pas Create »
+reste à isoler dynamiquement ; les variantes de CSRF ne sont pas extrapolées
+du seul refus de valeur incorrecte. Aucun critère supplémentaire n’est clos.

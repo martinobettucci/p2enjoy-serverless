@@ -2,6 +2,18 @@
 
 ## [Non publié]
 
+Le [cycle d’accès des sources](docs/evidence/code-editor-source-lifecycle-dev-2026-11-13.json) passe **30 groupes réels** :
+5 ciblés puis25communs, sur417sourcesed0ff67a/imageb452ef16. Une révocation
+pendant le read rend401 à la même requête ; le nouveau jeton reçoit un brouillon
+propre. La purge reste pending/artifacts avec FD/inode et20480octets conservés,
+puis termine après libération : réponse404, fichiers absents et zéro octet.
+Deux handlers Docker, deux gardes terminées et22captures inspectées sont recoupés.
+Deux fonctions/cinq jetons/quatre parents de tous les passages sont nettoyés ;
+l’échec initial reste exclu. Manuel18/74SHA8a50ffa0,38backend/quatreweb, génération,
+configuration, référence et5982artefacts conservés.070.1–.5 restent ouverts pour
+ZIP, attentes UI, reprises et Create sans cible promue après publication.
+
+
 - SLS-070 : [premier passage accès/purge échoué](docs/evidence/code-editor-source-lifecycle-error-field-failed-dev-2026-11-13.json)
   sur une assertion du champ d’erreur : statut403 conforme, error attendu au
   lieu de detail. Un groupe SSO passé, zéro qualifié ; fonction, deux jetons et

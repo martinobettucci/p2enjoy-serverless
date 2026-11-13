@@ -1,5 +1,16 @@
 # Demandes confirmées et état réel de livraison
 
+Le [cycle d’accès des sources](evidence/code-editor-source-lifecycle-dev-2026-11-13.json) passe **30 groupes réels** :
+5 ciblés puis25communs, sur417sourcesed0ff67a/imageb452ef16. Une révocation
+pendant le read rend401 à la même requête ; le nouveau jeton reçoit un brouillon
+propre. La purge reste pending/artifacts avec FD/inode et20480octets conservés,
+puis termine après libération : réponse404, fichiers absents et zéro octet.
+Deux handlers Docker, deux gardes terminées et22captures inspectées sont recoupés.
+Deux fonctions/cinq jetons/quatre parents de tous les passages sont nettoyés ;
+l’échec initial reste exclu. Manuel18/74SHA8a50ffa0,38backend/quatreweb, génération,
+configuration, référence et5982artefacts conservés.070.1–.5 restent ouverts pour
+ZIP, attentes UI, reprises et Create sans cible promue après publication.
+
 Revue du10 novembre2026, après signalement du responsable sur les demandes
 manquantes. Périmètre : conversation, spécifications, backlog et sources du
 dépôt courant. Les constats initiaux viennent de la revue statique ; les livraisons suivantes

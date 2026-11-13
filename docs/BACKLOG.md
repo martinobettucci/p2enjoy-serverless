@@ -944,8 +944,13 @@ l’éditeur restent dans leurs critères propres.
 Le [cycle d’accès des sources](CODE_EDITOR_SOURCE_LIFECYCLE.md) est spécifié avant
 son code : révocation Update pendant IO, nouveau propriétaire sans transfert de
 brouillon, purge en phase artifacts face au FD vivant, puis refus et effacement
-après jonction. Cinq groupes réels et leurs régressions sont à produire ; aucune
-nouvelle clôture n’est revendiquée. Le [premier passage échoué](evidence/code-editor-source-lifecycle-error-field-failed-dev-2026-11-13.json)
+après jonction. Le [replay qualifié](evidence/code-editor-source-lifecycle-dev-2026-11-13.json)
+passe30groupes réels (5ciblés/25communs),417sourcesed0ff67a/imageb452ef16,
+22captures inspectées et deux handlers. Deux gardes terminées ; deux fonctions,
+cinq jetons et quatre parents de tous les passages nettoyés. Révocation pendantIO,
+propriétaires distincts et purge pending/artifacts puis effacement sont prouvés.
+070.1–.5 restent ouverts : Create après retrait de la cible promue, ZIP,
+attentes UI et reprises restent à qualifier. Le [premier passage échoué](evidence/code-editor-source-lifecycle-error-field-failed-dev-2026-11-13.json)
 attendait detail au lieu du champ error commun : un groupe SSO passé, zéro
 qualifié, aucun handler/helper. Fonction/deux jetons/deux parents nettoyés et
 conservation recoupée ; correction de l’assertion décidée avant code.

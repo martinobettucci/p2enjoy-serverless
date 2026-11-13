@@ -703,3 +703,23 @@ Dix migrations, même génération pendant campagne, référence/configuration/
 5982artefacts et manuel18/74SHA8a50ffa0 conservés. Droits pendant IO, purge face
 à lecteur, reconstruction unique/ZIP, attentes UI et reprises restent à produire ;
 070.1–.5 restent ouverts.
+
+## Révocation et purge face au lecteur qualifiées —13novembre2026
+
+Le [cycle d’accès des sources](evidence/code-editor-source-lifecycle-dev-2026-11-13.json) passe **30 groupes réels** :
+5 ciblés puis25communs, sur417sourcesed0ff67a/imageb452ef16. Une révocation
+pendant le read rend401 à la même requête ; le nouveau jeton reçoit un brouillon
+propre. La purge reste pending/artifacts avec FD/inode et20480octets conservés,
+puis termine après libération : réponse404, fichiers absents et zéro octet.
+Deux handlers Docker, deux gardes terminées et22captures inspectées sont recoupés.
+Deux fonctions/cinq jetons/quatre parents de tous les passages sont nettoyés ;
+l’échec initial reste exclu. Manuel18/74SHA8a50ffa0,38backend/quatreweb, génération,
+configuration, référence et5982artefacts conservés.070.1–.5 restent ouverts pour
+ZIP, attentes UI, reprises et Create sans cible promue après publication.
+
+Le [contrat détaillé](CODE_EDITOR_SOURCE_LIFECYCLE.md) conserve les statuts :
+Read403 avant lecture, jeton A révoqué401 même après IO, nouvelles lectures admin404/
+B403 après suppression, réponse B déjà engagée404. Deux propriétaires de brouillon
+sans transfert et purge durable avant effacement sont recoupés nativement.
+La variante Create sans cible promue reste à isoler ; les anciens groupes de
+droits gardent leur époque et ne sont pas additionnés aux30.
