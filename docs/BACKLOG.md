@@ -955,6 +955,11 @@ attendait detail au lieu du champ error commun : un groupe SSO passé, zéro
 qualifié, aucun handler/helper. Fonction/deux jetons/deux parents nettoyés et
 conservation recoupée ; correction de l’assertion décidée avant code.
 
+Le [complément des droits sans cible promue](CODE_EDITOR_SOURCE_ACCESS.md)
+isole le dernier cas dynamique de070.2 et rejoue la matrice de sources sur les
+six GET, les mutations refusées et les variantes CSRF. Sept groupes ciblés,
+trois handlers et25communs sont prévus ;070.2 reste ouverte avant leur preuve.
+
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de
 révisions immuables et tester le résultat.

@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 13 novembre 2026 — droits sans cible promue, préparation de070.2
+
+Le contrat SOURCE_ACCESS isole la variante manquante : archiver la seule cible,
+conserver son historique et refuser Create sur les sources/brouillons, même avec
+un nouveau jeton. Le même passage reprend les sixGET et mutations Create/Read,
+les vrais Update/admin, portée étrangère, anonyme et trois variantes CSRF.
+Restauration sans promotion, pilote puis promotion sont invoqués dans Docker.
+Sept groupes et25communs prévus ; produit/manuel/configuration inchangés.
+Le résultat décidera de070.2, en rapprochant la preuve30 des droits pendantIO.
+
+
 ## 13 novembre2026 — révocation et purge pendant lecture qualifiées
 
 Le [cycle d’accès des sources](evidence/code-editor-source-lifecycle-dev-2026-11-13.json) passe **30 groupes réels** :

@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-070.2 : [droits de source sans cible promue](docs/CODE_EDITOR_SOURCE_ACCESS.md)
+  spécifiés avant le client : matrice des sixGET, mutations refusées et CSRF,
+  archivage/restauration sans rétablir Create, puis pilote et promotion réels.
+  Qualification à produire ; aucun nouveau résultat revendiqué.
+
 Le [cycle d’accès des sources](docs/evidence/code-editor-source-lifecycle-dev-2026-11-13.json) passe **30 groupes réels** :
 5 ciblés puis25communs, sur417sourcesed0ff67a/imageb452ef16. Une révocation
 pendant le read rend401 à la même requête ; le nouveau jeton reçoit un brouillon
