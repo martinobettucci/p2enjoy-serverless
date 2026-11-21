@@ -68,6 +68,8 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
+| 1 | [SLS-106](#sls-106) Conservation des artefacts en régression | Corriger | `[~]` | diagnostic natif | [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md) |
+| 1 | [SLS-105](#sls-105) Préparation des instances dans la preuve console | Corriger | `[~]` | SLS-106 | [EXECUTION_CONSOLE_WARMUP](EXECUTION_CONSOLE_WARMUP.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -2975,3 +2977,31 @@ ainsi avant de prouver sa migration réelle ; aucun défaut produit déduit.
 Le build est un prérequis, pas un groupe fonctionnel inventé. Les modes
 spécifiques006/007/008 et les captures de rétention009 restent inchangés.
 La campagne complète078 reste à assembler après ce préalable.
+
+<a id="sls-105"></a>
+## SLS-105 — Préparation des instances dans la preuve console
+
+Statut : [~] — échec réel reproduit dans la campagne078 ; cause à recouper.
+Nature : Corriger. Ordre :1, préalable à078, après106 pour sa propreté native.
+Contrat : [EXECUTION_CONSOLE_WARMUP](EXECUTION_CONSOLE_WARMUP.md).
+
+- [ ] SLS-105.1 Refus des six instances conservé, provenance/UUID/configuration
+  et publication/promotion recoupées sans déduire une cause non observée.
+- [ ] SLS-105.2 Préparation respectant upload pilote puis promotion explicite ;
+  six vraies instances mesurées, pagination5+1 et douze scénarios conservés.
+- [ ] SLS-105.3 Douze groupes UI et25communs passent ; captures fraîches relues,
+  services/données/artéfacts antérieurs et ressources propres recoupés.
+
+<a id="sls-106"></a>
+## SLS-106 — Conservation des artefacts en régression
+
+Statut : [~] — refus natif constaté après l’arrêt de la campagne078.
+Nature : Corriger. Ordre :1, préalable opérationnel à105/078.
+Contrat : [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md).
+
+- [ ] SLS-106.1 Inventaires original/courant comparés intégralement, différences
+  attribuées aux UUID de campagne ou protégées si leur appartenance est inconnue.
+- [ ] SLS-106.2 Cause et décision persistées avant correction ; nettoyage par
+  les vraies API limité aux fixtures prouvées, aucun original effacé ou fabriqué.
+- [ ] SLS-106.3 Client responsable et25communs rejoués, ressources et5982artefacts
+  recoupés, rapports/captures inspectés, essais incomplets exclus.

@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 21 novembre2026 — campagne078 arrêtée et105/106 inscrits
+
+Le worker d25a507d survit au retour et valide272groupes/15campagnes, trois
+prérequis. Le plafond isolé refuse13:15UTC puis réussit13:20sans rejeu, origine
+restituée. execution-ui passe son premier groupe puis échoue sur six instances
+prêtes ; publication sans promotion explicite constatée dans le client, cause
+à recouper nativement. Rapport/capture exacts conservés. Résultat systemd1,
+unité arrêtée et client joint ; aucune campagne543 revendiquée.
+
+Le finally annonce cleanup=true, mais le recoupement RO refuse l’inventaire
+5982/846904e1. Les contrôles précédents du lecteur ont passé : comptes nuls,
+intégrité/FK et services/budgets conformes. Le sens de l’écart reste inconnu.
+106 l’instruit avant toute mutation/reprise ;105 porte la préparation console
+et ses douze scénarios. Contrats créés avant correction, aucune cause produit
+présumée et aucun original effacé. Les preuves existantes et272groupes restent
+dans leur époque ; ce passage incomplet n’ajoute aucun groupe de clôture078.
+
 ## 21 novembre2026 — précontrôle078 refuse deux documents décalés
 
 Le premier worker6d7b0401 termine1 avant SSO/build/scénario : garde de sources
