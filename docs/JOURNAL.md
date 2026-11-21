@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 21 novembre2026 — préalable111 et incertitude historique à instruire
+
+Après112close et39régressions111.3 acquises, l’ancienne assertion reste sans
+discriminant :14isolés et162contextuels n’ont pas reproduit l’échec. IR-004
+consigne le conflit entre une cause ancienne inobservable,111préalable au
+prochain078, et la collecte de nouvelles preuves. Aucun scénario, critère
+produit, statut111.1/.2 ni attribution de cause modifié. Résolution dédiée
+selonCLAUDE§5 avant toute nouvelle campagne entière.
+
 ## 21 novembre2026 — surveillance pendant libération112 qualifiée
 
 Gel36763c9/458sources/image433da150, travail3fc5d04e :82groupes réels en série,

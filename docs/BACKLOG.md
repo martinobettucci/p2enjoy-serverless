@@ -3146,6 +3146,7 @@ IR-003 et la campagne entière078 restent ouverts.
 
 Statut : [~] —39régressions qualifiées dans la preuve112 ; assertion historique
 du cinquième passage078 au gel f7b1d2a toujours indéterminée, critères111.1/.2 ouverts.
+IR-004 instruit la cohérence du préalable de reprise, sans clôture ni attribution ancienne.
 Nature : Corriger. Ordre : 1, préalable au prochain passage entier078.
 Contrat : [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md).
 
