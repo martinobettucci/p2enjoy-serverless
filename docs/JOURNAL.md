@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — préfixe111 nominal, course distincte inscrite112
+
+Gel dc57cc2 /455sources, contexte72c83e77 : trois prérequis puis six campagnes,
+162groupes réels réussis, sans reprise ni somme avec le14isolé. Le résultat
+deadline est invocation_timeout, début observé, retrait confirmé et relecture
+conforme ;2,686628s incluent le nettoyage. Aucune ancienne assertion reconstruite,
+111reste ouverte et la campagne078 entière reste due.
+
+La lecture du flux établit une course possible distincte : le watcher reste actif
+pendant la libération volontaire du bail et peut transformer lease_unknown en
+storage_unavailable au-dessus du résultat timeout interne. Le verrou agent
+sérialise sans interdire check après release.112inscrite avant traitement,
+contrat de discriminant réel des tâches et campagne bornée de dix phases,
+sans remplacement de méthode ou de dépendance. Aucune reproduction ni correction
+produit encore acquise ; l’ancien échec111 demeure non attribué.
+
 ## 21 novembre 2026 — décision du diagnostic111 en contexte
 
 Le premier diagnostic isolé ne reproduit pas l’assertion ; ses trois fonctions

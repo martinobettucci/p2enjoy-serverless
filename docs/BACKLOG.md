@@ -68,6 +68,7 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
+| 1 | [SLS-112](#sls-112) Issue d’invocation pendant libération volontaire du bail | Corriger | `[~]` | SLS-040, SLS-050 | [MANAGED_INVOCATION_WATCH](MANAGED_INVOCATION_WATCH.md) |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
@@ -3149,3 +3150,20 @@ Contrat : [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md).
 - [ ] SLS-111.3 Les14groupes ciblés puis25communs passent sur le code déployé ;
   captures ouvertes individuellement, manuel, ressources et reçus recoupés, helpers
   réellement terminés, services/référence/configuration et5982originaux conservés.
+
+<a id="sls-112"></a>
+## SLS-112 — Issue d’invocation pendant libération volontaire du bail
+
+Statut : [~] — course possible établie par lecture du flux ; aucune reproduction
+ni attribution de l’ancienne assertion111 encore acquise.
+Nature : Corriger. Ordre :1. Contrat : [MANAGED_INVOCATION_WATCH](MANAGED_INVOCATION_WATCH.md).
+
+- [ ] SLS-112.1 Discriminant réel entre résultat de l’invocation interne,
+  exception du watcher et résultat final, même UUID/fermeture/bail ; cause et
+  décision persistées avant correction du produit, sans faux événement ou mock.
+- [ ] SLS-112.2 Une fermeture initiée par l’invocation ou le drainage ne devient
+  pas une fausse panne de stockage à cause de son propre bail libéré ; les pertes
+  réelles de FUSE/agent continuent de retirer le consommateur avec leur erreur.
+- [ ] SLS-112.3 Qualification complète du discriminant,14groupes gérés et25communs
+  sur code déployé ; captures/manuel, pannes et nettoyages natifs recoupés, même
+  référence/configuration et5982originaux conservés. Aucune cause111 inventée.
