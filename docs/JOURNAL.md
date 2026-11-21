@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — nouveau gel complet078 après110
+
+110 est livrée et poussée (4322863,29groupes) ; IR-003 corrigée et poussée
+(3736521), registre vide. Les quatre workers incomplets sont finalisés :0,
+272,313 et220groupes. Décision avant lancement dans SCHEDULE_REGRESSIONS :
+nouveau worker UUID,454sources propres committées/poussées et synchronisées,
+produit b452 conservé,49campagnes/543groupes +18prérequis depuis le début.
+Aucun total entre époques ni réemploi d’une partie réussie. Les captures fraîches,
+reçus natifs,127fonctions/35namespaces et restitution du nominal restent requis.
+Les captures scellées sont intouchées ; seuls leurs rapprochements existants
+sont relus. La compatibilité exacte des deux crons demeure080, entièrement ouverte.
+Le résultat de ce nouveau gel n’est pas encore acquis.
+
 ## 21 novembre 2026 — IR-003 corrigée : attribution des crons de référence
 
 Après instruction RO et vérification du principal, la cause est documentaire :

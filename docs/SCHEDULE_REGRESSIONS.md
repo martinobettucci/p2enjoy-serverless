@@ -218,3 +218,31 @@ Avant clôture078 : résultat complet du même worker, finalisation systemd/clie
 reçus natifs des fautes et helpers/gardes terminés, 127 fonctions / 35 namespaces
 recoupés, 5982 originaux et configuration/référence préservés. Tout reste garde
 078 en qualification ; les autres unités et la clôture095 restent distinctes.
+
+## Nouveau passage entier après SLS-110 et IR-003
+
+Décision du 21 novembre 2026, après la [preuve110 de 29 groupes](evidence/publication-restoration-confirmation-dev-2026-11-21.json)
+et la correction documentaire IR-003. Le quatrième worker6c3a1e35 est finalisé,
+unité arrêtée et client joint : onze campagnes / 220 groupes, trois prérequis,
+puis échec de confirmation indépendante. Suite scellée
+2d7ab8d1b3d009842bd83d61db10c409beafb476732141c7e05d4e2f4a39b11f,
+rapport ciblé14897a1b3abbd0745ee7b882a39a3bf46be255c354e81bcf75586ba4f8e1db1b.
+La garde avait effectivement restauré ; son ancien client attendait hors des
+bornes du protocole. Les reçus natifs et les sept images de ce worker restent
+conservés. La preuve110 qualifie sa correction dans un passage séparé ; elle
+n’ajoute aucun groupe aux543 et ne transforme pas les220en succès complet.
+
+Nouveau worker et UUID, arbre propre committé/poussé, 454 sources synchronisées,
+image produit b452 inchangée. Repartir de la première campagne, avec49campagnes /
+543groupes et18prérequis ; aucun des quatre essais incomplets (0,272,313,220)
+n’est réutilisé. Le protocole de confirmation110 est celui des sources figées ;
+les programmes de garde, délais réels, SIGKILL et critères de succès restent
+ceux du contrat. Les deux expressions de référence restent explicitement dues
+par080 ; le registre d’incohérences est vide.
+
+Inspecter chaque nouvelle capture, y compris les sept compléments contrôleUI
+et six compléments connexion, avant clôture. Même finalisation worker/client,
+recoupement des gardes et127fonctions/35namespaces, configuration/référence et
+5982originaux conservés. Les trois modules des preuves de rétention sont relus
+sans toucher aux captures scellées. Tant que ce passage n’est pas entier et
+recoupé,078 reste[~] ; les limites propres du banc et095 restent distinctes.

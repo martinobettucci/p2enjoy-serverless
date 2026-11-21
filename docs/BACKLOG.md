@@ -105,6 +105,11 @@ Les bornes numériques sont qualifiées ; SLS-100 et SLS-071 sont livrées.
 SLS-103 est livré : préconditions et restitutions sur010 qualifiées109groupes ;
 le raccordement de la campagne complète078 reste la prochaine unité.
 
+Les préalables105à110 sont qualifiés séparément ; IR-001/002/003 corrigées.
+Quatre essais078 incomplets (0,272,313,220groupes) restent conservés. Nouveau
+passage entier49/543 +18 requis sur454sources ; aucun de ces sous-totaux ne
+vaut résultat complet. Les expressions exactes de référence restent dues à080.
+
 Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
 089.4 est qualifié. Le banc ZIP de SLS-070 reste préparé, non exécuté.
 
