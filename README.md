@@ -6,12 +6,11 @@ Le raccordement de la preuve console aux versions par hash est
 promotion restent distincts ; fautes, pertes de réponse et nettoyage physique
 sont éprouvés. Les unités106/105/078 gardent leurs campagnes propres.
 
-Le [nettoyage des campagnes](docs/REGRESSION_ARTIFACT_CLEANUP.md) est corrigé
-pour qualification106 : purge publique complète et contrôle physique par fonction.
-L’essai de campagne078 s’est arrêté après272groupes validés ;105/106 portent
-les deux défauts de préparation/nettoyage constatés. Les5982artefacts antérieurs
-sont conservés et la seule révision ajoutée a été purgée par API. Les79groupes
-prévus pour106 restent à exécuter avant reprise de078.
+Le nettoyage partagé des campagnes est
+[qualifié par79groupes réels](docs/evidence/regression-artifact-cleanup-dev-2026-11-21.json) :
+code, données/cache et secrets purgés par les API, neuf fonctions recoupées
+physiquement,51captures inspectées. Les5982artefacts antérieurs sont conservés.
+La préparation de six instances105 reste à qualifier avant le replay complet078.
 
 
 Le [scope de régression complète des crons](docs/SCHEDULE_REGRESSIONS.md) est implémenté

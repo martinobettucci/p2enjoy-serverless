@@ -27,10 +27,11 @@ idempotente. Préparer les deux sessions réelles par dev-sso-sessions.
 Le helper storage-archives de control-admin/control-ui/execution-ui/publication-ui
 exige désormais un reçu public completed et le lecteur archive-purge-inspect
 RO. La session de purge distincte reste privée ; UUID, journal durable avant
-POST et SHA sont conservés. Qualification prévue :3ciblés,19gestion API,
+POST et SHA sont conservés. Qualification livrée :3ciblés,19gestion API,
 11gestion UI,21publication UI, puis25communs, soit79groupes. Les douze
-execution-ui et leur promotion manquante restent à105. Code relu et syntaxe
-contrôlée ; nouveaux E2E non encore exécutés.
+execution-ui et leur promotion manquante restent à105. La
+[preuve79](../docs/evidence/regression-artifact-cleanup-dev-2026-11-21.json) recoupe
+450sourcesaaf0784a, neuf purges natives et51captures inspectées.
 
 
 Le [scope de régression complète des crons](../docs/SCHEDULE_REGRESSIONS.md) est implémenté

@@ -6,13 +6,15 @@
   raccordent les21parcours de publication aux versions par hash et aux
   promotions explicites ;25communs,44captures inspectées,13invocations
   réussies et2refus. Fautes réelles et purges complètes recoupées ; deux essais
-  incomplets exclus,5982originaux préservés.106/105/078 restent ouvertes.
+  incomplets exclus,5982originaux préservés.105/078 restent ouvertes.
 
-- SLS-106 : helper de nettoyage partagé corrigé pour employer la purge publique
-  et un lecteur natif par fonction. L’ancien ne retirait que les volumes.
-  Remise en état par API de la seule fixture en échec ;5982originaux intacts.
-  Qualification79groupes encore à produire ; préparation de six instances105
-  et campagne complète078 restent ouvertes.
+- SLS-106 : [79groupes réels](docs/evidence/regression-artifact-cleanup-dev-2026-11-21.json)
+  qualifient le helper de purge publique partagé, ses trois groupes dédiés
+  et les clients de gestion/publication. Neuf fonctions purgées nativement,
+  deux records données/cache conservés puis retirés, relecture du même reçu
+  sans seconde commande,51captures inspectées.5982originaux préservés.
+  Ancienne fixture rétablie par API et deux essais incomplets conservés hors
+  du total. Six instances105 et campagne complète078 restent ouvertes.
 
 - SLS-078 : scope schedules implémenté pour qualification, socle37 conservé et
   douze clients cron ajoutés. Rapports UUID découverts et archivés, SSO frais,

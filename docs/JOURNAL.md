@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre2026 — SLS-106 qualifiée, reprise105
+
+La [preuve79](evidence/regression-artifact-cleanup-dev-2026-11-21.json) passe au gel72059cb
+sur450sourcesaaf0784a et imageb452 :3dédiés+19API+11gestionUI+21publicationUI
+puis25communs. Neuf fonctions purgées nativement, dix observations du helper
+et une seule commande par fonction ; deux records réellement écrits et
+conservés par archive avant purge.51images nouvellement ouvertes, SHA/fraîcheur
+par phase,38déclarées et13non déclarées distinguées. Compteurs0,5982originaux,
+38backends/4web, configuration et référence préservés. Le contrôle redémarre
+normalement à14:46:26UTC dans control-admin, même CID/image.
+Restitution de l’ancien UUID par API séparée0groupe ; deux essais incomplets
+restent exclus. Aucun exécutable modifié après qualification ; résultat
+documentaire postérieur séparé.106[x],105/078 restent ouverts.
+
 ## 21 novembre2026 — SLS-107 qualifiée, reprise106
 
 La [preuve de publication par hash](evidence/publication-console-hash-regressions-dev-2026-11-21.json)

@@ -68,7 +68,6 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-106](#sls-106) Conservation des artefacts en régression | Corriger | `[~]` | SLS-107 | [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md) |
 | 1 | [SLS-105](#sls-105) Préparation des instances dans la preuve console | Corriger | `[~]` | SLS-106 | [EXECUTION_CONSOLE_WARMUP](EXECUTION_CONSOLE_WARMUP.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
@@ -2995,17 +2994,26 @@ Contrat : [EXECUTION_CONSOLE_WARMUP](EXECUTION_CONSOLE_WARMUP.md).
 <a id="sls-106"></a>
 ## SLS-106 — Conservation des artefacts en régression
 
-Statut : [~] — refus natif constaté après l’arrêt de la campagne078.
+Statut : [x] — [79groupes réels](evidence/regression-artifact-cleanup-dev-2026-11-21.json) au gel72059cb,
+450sourcesaaf0784a et51captures inspectées ; neuf fonctions purgées nativement.
 Nature : Corriger. Ordre :1, préalable opérationnel à105/078.
 Contrat : [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md).
 
-- [ ] SLS-106.1 Inventaires original/courant comparés intégralement, différences
+- [x] SLS-106.1 Inventaires original/courant comparés intégralement, différences
   attribuées aux UUID de campagne ou protégées si leur appartenance est inconnue.
-- [ ] SLS-106.2 Cause et décision persistées avant correction ; nettoyage par
+- [x] SLS-106.2 Cause et décision persistées avant correction ; nettoyage par
   les vraies API limité aux fixtures prouvées, aucun original effacé ou fabriqué.
-- [ ] SLS-106.3 Helper partagé éprouvé par3groupes dédiés,19control-admin,
+- [x] SLS-106.3 Helper partagé éprouvé par3groupes dédiés,19control-admin,
   11control-ui et21publication-ui, puis25communs ;5982artefacts et ressources
   recoupés, rapports/captures inspectés. Les douze execution-ui restent à105.
+
+La remise en état de l’ancien UUID est distincte et compte0groupe. Neuf
+fonctions de la nouvelle campagne sont purgées, dix observations du helper
+conservent une seule commande par fonction. Les deux records données/cache
+sont réellement écrits, conservés au SHA attendu après archive puis retirés
+par purge.5982originaux, fichiers officiels, référence et images préservés.
+Le contrôle redémarre normalement dans le scénario control-admin. Deux essais
+incomplets restent exclus ;105/078/095 gardent leurs preuves propres.
 
 <a id="sls-107"></a>
 ## SLS-107 — Raccordement de la preuve de publication console

@@ -1,6 +1,8 @@
 # Conservation des artefacts pendant la campagne complète
 
 Contrat de [SLS-106](BACKLOG.md#sls-106), préalable opérationnel à105 et078.
+La [qualification finale](evidence/regression-artifact-cleanup-dev-2026-11-21.json) passe79groupes
+au gel72059cb,450sourcesaaf0784a et51captures inspectées.
 Constat du21novembre2026 après l’arrêt execution-ui : les compteurs sont nuls,
 les services sains et l’intégrité correcte, mais le lecteur natif refuse
 l’inventaire original attendu5982/SHA846904e1. La cause et le sens de cet écart
@@ -97,3 +99,43 @@ ni configuration/secrets n’est exporté. Le mode purgé garde ses contrôles s
 Cette observation remplace l’assertion incorrecte, sans réduire la preuve de
 conservation ni changer le produit. Les trois groupes entiers et les régressions
 prévues sont à rejouer après ce correctif du banc.
+
+## Qualification finale du21novembre2026
+
+La [preuve79](evidence/regression-artifact-cleanup-dev-2026-11-21.json) recoupe au gel
+72059cb527379a01ada12c92745bb4e192ada8cf les3groupes dédiés,19control-admin,
+11control-ui,21publication-ui puis8manuel/8public/9connexion, en série.
+450sources, indexaaf0784a458185facf2de009f8821f7526c8bba2df6e350e196a32d44b513a2d,
+imageb452 inchangée. Aucun mock ni groupe ignoré ; les sessions SSO restent des
+prérequis. Les sources exécutables ne changent pas après qualification ; les
+présentes métadonnées de résultat forment une époque documentaire séparée.
+
+Le handler original écrit vraiment les deux records. Le lecteur RO en relève
+les tailles/SHA dans les backings, puis la purge publique et le second passage
+du helper partagent le même UUID de commande, avec deux reçus d’observation
+distincts. Au total, neuf fonctions sont purgées dans les quatre phases ciblées,
+dix observations du helper et une seule commande par fonction. Configuration,
+secrets, code, backings, montages, canaux, conteneurs et réseaux sont absents
+pour chacune, avec corrélation du reçu agent et de l’installation.
+
+Les51captures sont rouvertes individuellement pour cette campagne :7gestionUI,
+22publication,16manuel,6connexion. SHA/fraîcheur source dans chaque phase ;
+les13captures non déclarées par les anciens rapports restent explicitement
+distinguées de leurs38captures déclarées. Aucun masquage ou débordement
+bloquant observé. Les captures ne prouvent pas les faits natifs de purge.
+Le manuel18chapitres/74paragraphes concorde avec source/rendu ; les longs
+hashes/noms, journaux, confirmations et erreurs sont lisibles aux formats testés.
+
+Les5982artefacts antérieurs restent identiques, tous les compteurs actifs sont
+nuls, dix migrations et intégrités/FK sont recoupées. Mêmes CID/images de
+contrôle/référence et fichiers officiels ; le redémarrage du contrôle est prévu
+par control-admin, sa naissance passe de14:04:44 à14:46:26UTC, sans recréation
+ni changement d’image. La référence garde sa naissance du6novembre. Les38
+backends,4web servis et trois notes conservées sont recoupés ; aucune adoption
+de note prétendue. Aucun produit/UI/manuel modifié.
+
+La restauration antérieure de la seule révision d9d07c5b est conservée à part :
+5984→5982, aucun original manquant/modifié, purge API corrélée à la fonction
+4ba58f4d et0groupe ajouté. Les essais b74f486b et05d9f312 restent archivés et
+exclus du total79. SLS-106 est terminée ; six instances et37groupes105, puis
+543groupes078 et clôture095 restent distincts.
