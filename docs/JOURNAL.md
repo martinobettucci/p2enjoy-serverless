@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre2026 — client107 préparé, qualification encore ouverte
+
+Les21groupes ciblent désormais cartes/hash, pilote puis promotions UI,
+tombstones et pagination réels. Trois identités sont distinctes ; réupload A
+garde son alias canonique dans la faute de confirmation du stockage. Les
+observations de réponses perdues et de fautes sont persistées avant assertions.
+La revue a fait ajouter les compteurs POST/PUT des pertes/rechargements,
+la persistance des statut/en-têtes503 avant assertions et la comparaison du
+champ UI de révision avec l’alias A réutilisé.
+Les retours A des groupes6/10 passent par une véritable promotion intermédiaire.
+Le groupe16 prépare une version inactive sur une page ultérieure et vérifie
+le total conservé après suppression, puis pagine les tentatives. Syntaxes JS et
+Python valides ; aucune campagne107 exécutée à ce stade, aucun produit changé.
+
 ## 21 novembre2026 — correspondance107 décidée avant le client
 
 Les21groupes sont rapprochés des widgets et contrats actuels dans

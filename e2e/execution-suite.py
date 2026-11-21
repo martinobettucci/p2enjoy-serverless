@@ -90,7 +90,9 @@ def source_hashes():
     files += [ROOT/'docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#preuves-et-portée-des-opérateurs
     files += [ROOT/'docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md']
-    files += [ROOT/'docs/REGRESSION_ARTIFACT_CLEANUP.md',ROOT/'docs/EXECUTION_CONSOLE_WARMUP.md']
+    # @spec docs/BACKLOG.md#sls-106 | docs/REGRESSION_ARTIFACT_CLEANUP.md
+    # @spec docs/BACKLOG.md#sls-107 | docs/PUBLICATION_CONSOLE_REGRESSIONS.md
+    files += [ROOT/'docs/REGRESSION_ARTIFACT_CLEANUP.md',ROOT/'docs/EXECUTION_CONSOLE_WARMUP.md',ROOT/'docs/PUBLICATION_CONSOLE_REGRESSIONS.md']
     files += list((ROOT/'docs').glob('SCHEDULE_*.md')) + [ROOT/'docs/SCHEDULES.md',ROOT/'docs/RETENTION_HISTORY_REPLAY.md']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 

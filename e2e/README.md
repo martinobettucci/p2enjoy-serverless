@@ -1,5 +1,21 @@
 # Qualification de la plateforme
 
+## Publication console par hash — SLS-107
+
+Après deux sessions administrateur SSO réelles préparées par
+`node e2e/dev-sso-sessions.mjs`, lancer `node e2e/publication-ui.mjs` depuis
+la racine, sur le seul SPARK DEV. Le client conserve21groupes : publication
+pilote, promotion UI distincte, appels par hash, refus, pertes de réponses,
+EACCES/gardes et nettoyage réel, pagination des versions/tombstones et des
+tentatives, clavier/mobile. Il ne remet pas en vigueur l’activation à l’upload.
+Le contrat et la correspondance des groupes sont dans
+[PUBLICATION_CONSOLE_REGRESSIONS](../docs/PUBLICATION_CONSOLE_REGRESSIONS.md).
+Le rapport privé `.local/e2e/publication-ui.json` doit être conservé avec ses
+captures avant un nouvel essai. Compléter avec les8groupes manual-ui,8public et
+9login-ui en série, soit46groupes ; les prérequis SSO restent distincts.
+Le helper106 purge le code et les volumes et vérifie nativement ses reçus.
+La qualification107 est encore ouverte.
+
 ## Purge complète des fixtures — SLS-106
 
 `node e2e/archive-cleanup.mjs` prépare une fonction originale, publie/promeut
