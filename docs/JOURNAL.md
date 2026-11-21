@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 21 novembre2026 —33groupes106 passent,107 devient préalable
+
+05d9f312/0a5e020 valide les3groupes dédiés,19API et11gestionUI sur449sources :
+archive conservant les vrais records au SHA attendu, purge publique complète
+et relecture du même reçu sans seconde commande. Le parcours publicationUI
+échoue dès l’attente « Aucune révision publiée. », avant sa première capture
+et tout groupe passé. Cleanup=true ; native-after-failure confirmecounts0,
+5982fichiers et mêmes services/configuration. Cet essai incomplet ne qualifie
+pas79groupes, aucun saut ni succès de campagne revendiqué.
+
+107 est inscrit avant traitement pour rapprocher les21groupes historiques de
+la facette actuelle des versions par hash. Son contrat exige la conservation
+des cas UI, des véritables mutations et des preuves natives.106 attend107,
+105 et078 restent ouverts. Aucun défaut produit déduit du timeout de texte.
+
 ## 21 novembre2026 — conservation physique106 prête pour replay
 
 Le client persiste maintenant l’archive avant assertion, attend la fin de sa

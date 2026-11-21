@@ -68,7 +68,8 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-106](#sls-106) Conservation des artefacts en régression | Corriger | `[~]` | diagnostic natif | [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md) |
+| 1 | [SLS-107](#sls-107) Raccordement de la preuve de publication console | Corriger | `[~]` | SLS-074 | [PUBLICATION_CONSOLE_REGRESSIONS](PUBLICATION_CONSOLE_REGRESSIONS.md) |
+| 1 | [SLS-106](#sls-106) Conservation des artefacts en régression | Corriger | `[~]` | SLS-107 | [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md) |
 | 1 | [SLS-105](#sls-105) Préparation des instances dans la preuve console | Corriger | `[~]` | SLS-106 | [EXECUTION_CONSOLE_WARMUP](EXECUTION_CONSOLE_WARMUP.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
@@ -3006,3 +3007,17 @@ Contrat : [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md).
 - [ ] SLS-106.3 Helper partagé éprouvé par3groupes dédiés,19control-admin,
   11control-ui et21publication-ui, puis25communs ;5982artefacts et ressources
   recoupés, rapports/captures inspectés. Les douze execution-ui restent à105.
+
+<a id="sls-107"></a>
+## SLS-107 — Raccordement de la preuve de publication console
+
+Statut : [~] — attente historique refusée sur la vraie facette des versions.
+Nature : Corriger. Ordre :1, préalable à106/078.
+Contrat : [PUBLICATION_CONSOLE_REGRESSIONS](PUBLICATION_CONSOLE_REGRESSIONS.md).
+
+- [ ] SLS-107.1 Échec initial conservé ; correspondance complète des21groupes
+  avec les contrats et les widgets servis, sans cause produit présumée.
+- [ ] SLS-107.2 Attentes/gestes du client alignés aux versions par hash et au
+  pilote/promotion, sans groupe retiré ni mutation UI contournée.
+- [ ] SLS-107.3 Vingt-et-un groupes et25communs passent, captures inspectées,
+  manuel/source/rendu et nettoyage natif recoupés ;5982artefacts conservés.
