@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 21 novembre2026 — cause105 et décision avant correction
+
+Le rapportfed55b06 et le relevé natif1795267783292962291 concordent : même
+fonction4ba58f4d, révisiond9d07c5b/hash5b556589, min=max=concurrence6 à
+0,05CPU/128Mio, active_revisionNULL, first_promoted_atNULL et zéro instance.
+Le moteur ne préchauffe que la cible promue. Décision dans
+EXECUTION_CONSOLE_WARMUP : attester le pilote puis ajouter une promotion API
+explicite, ETag frais, au montage existant ; garder les12groupes, six UUID
+ready/hash/alias, mesures et pagination5+1, puis25communs. Aucun produit changé.
+
 ## 21 novembre2026 — SLS-106 qualifiée, reprise105
 
 La [preuve79](evidence/regression-artifact-cleanup-dev-2026-11-21.json) passe au gel72059cb

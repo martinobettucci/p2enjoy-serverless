@@ -2980,11 +2980,12 @@ La campagne complète078 reste à assembler après ce préalable.
 <a id="sls-105"></a>
 ## SLS-105 — Préparation des instances dans la preuve console
 
-Statut : [~] — échec réel reproduit dans la campagne078 ; cause à recouper.
+Statut : [~] — cause du montage recoupée : code publié jamais promu,
+aucune cible et zéro instance ; décision de préparation persistée avant code.
 Nature : Corriger. Ordre :1, préalable à078, après106 pour sa propreté native.
 Contrat : [EXECUTION_CONSOLE_WARMUP](EXECUTION_CONSOLE_WARMUP.md).
 
-- [ ] SLS-105.1 Refus des six instances conservé, provenance/UUID/configuration
+- [x] SLS-105.1 Refus des six instances conservé, provenance/UUID/configuration
   et publication/promotion recoupées sans déduire une cause non observée.
 - [ ] SLS-105.2 Préparation respectant upload pilote puis promotion explicite ;
   six vraies instances mesurées, pagination5+1 et douze scénarios conservés.
