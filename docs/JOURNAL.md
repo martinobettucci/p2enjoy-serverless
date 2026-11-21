@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — SLS-108 qualifiée et close
+
+Au gel 3f6974a / 451 sources, les cinq groupes de transport et 25 communs
+passent sur b452 : 30 groupes, 22 captures fraîches ouvertes individuellement.
+Trois gardes désarmées, deux coupures 137, trois connexions HTTPS par commande
+interrompue sans rejeu. Les relances gardent le pilote et son refus 409 puis
+exécutent promote avant deux handlers réussis. Deux audits, deux invocations
+persistées, deux purges physiques et quatre jetons révoqués recoupés.
+Configuration, référence et 5982 originaux conservés ; contrôle même ID/image
+redémarré pour les coupures. Deux diagnostics RO de collecte exclus, dont
+l’assertion initiale erronée qui attendait une ligne pour un refus avant admission.
+Preuve service-transport-promotion-regressions-dev-2026-11-21 ; SLS-109 et
+l’assemblage complet SLS-078 restent ouverts. Aucun produit ou manuel modifié.
+
 ## 21 novembre2026 — client108 préparé pour qualification
 
 Les relances before/after conservent le résultat CLI pilote et son vrai409,

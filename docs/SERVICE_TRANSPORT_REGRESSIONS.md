@@ -73,3 +73,34 @@ schéma et n’annonce cleanup/completed qu’après la fin des ressources.
 
 Les dix autres clients sont inscrits dans109 avant traitement.108 ne les
 modifie pas et ne ferme pas leur qualification, ni celle de078.
+
+## Qualification du 21 novembre 2026
+
+La [preuve réelle](evidence/service-transport-promotion-regressions-dev-2026-11-21.json)
+réunit 5 groupes ciblés et 25 communs, soit 30, au gel
+3f6974ab2b6df323a9b0a81bb811f42ed7ac3289 / 451 sources, image b452ef16.
+Les 22 captures communes sont ouvertes individuellement : 16 déclarées par
+le manuel et 6 PNG complémentaires de connexion, archivés avec leur fraîcheur.
+Manuel inchangé, 18 chapitres et 74 paragraphes recoupés.
+
+Trois gardes terminées, deux SIGKILL avec sortie 137 et deux traces strace
+conservent les discriminants natifs. Chaque commande coupée fait trois
+connexions HTTPS, sans rejeu. Avant/après traitement, la configuration a
+respectivement zéro/une mutation ; après relance explicite, une/deux.
+Chaque upload reste pilote avec défaut NULL et vrai refus 409 ; la CLI
+promeut ensuite le hash, puis le handler reçoit variable commune et secret.
+Deux audits de promotion et deux invocations réussies sont recoupés en base.
+Le refus avant admission ne crée pas de ligne invocations : son reçu HTTP
+reste distinct des exécutions persistées.
+
+Deux fonctions sont purgées par les API avec code, volumes, réseaux, canaux,
+configuration et secrets absents ; quatre jetons révoqués, parents supprimés.
+Tous compteurs au repos, dix migrations et intégrités conformes, 38 backends
+et 4 ressources HTTPS recoupés. Contrôle de même ID/image redémarré pour les
+deux coupures ; référence, configuration officielle et 5982 originaux conservés.
+
+Deux diagnostics de collecte RO sont exclus du compte : accès SSH restreint
+avant transport, puis assertion incorrecte attendant une ligne pour le refus
+avant admission. Leurs traces sont conservées ; aucune mutation corrective.
+L’échec ancien reste séparé, sans corps 409 reconstruit. SLS-108 est close ;
+SLS-109 et le passage complet 49/543 + 18 de SLS-078 restent ouverts.

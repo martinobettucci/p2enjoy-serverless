@@ -1,5 +1,10 @@
 # Qualification de la plateforme
 
+La [qualification SLS-108](../docs/evidence/service-transport-promotion-regressions-dev-2026-11-21.json)
+passe 5 groupes de transport et 25 communs, 22 captures inspectées, au gel
+3f6974a / 451 sources. Trois gardes, deux coupures 137 et deux promotions CLI
+explicites sont recoupées ; cette preuve ne complète pas SLS-109 ou SLS-078.
+
 ## Relances de transport des services — SLS-108
 
 Préparer deux sessions SSO réelles avec `node e2e/dev-sso-sessions.mjs`, puis

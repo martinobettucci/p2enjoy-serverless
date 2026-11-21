@@ -1,5 +1,11 @@
 # P2Enjoy Serverless
 
+La [preuve de transport des services](docs/evidence/service-transport-promotion-regressions-dev-2026-11-21.json)
+passe 30 groupes réels et 22 captures inspectées : commandes interrompues sans
+rejeu, restauration native, puis relances avec publication pilote et promotion
+CLI explicite avant invocation Docker. Deux fonctions purgées physiquement ;
+les dix clients de SLS-109 puis la campagne complète SLS-078 restent à qualifier.
+
 Le raccordement de la preuve console aux versions par hash est
 [qualifié par 46 groupes réels](docs/evidence/publication-console-hash-regressions-dev-2026-11-21.json) :
 21 parcours de publication puis25communs,44captures inspectées. Pilote et
@@ -19,9 +25,9 @@ reste à terminer.
 Le [scope de régression complète des crons](docs/SCHEDULE_REGRESSIONS.md) est implémenté
 pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
 49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;
-rapports UUID figés, SSO frais et recoupement physique entre campagnes. Deux essais
-antérieurs restent incomplets et conservés ; après les préalables105/106/107,
-un nouveau passage entier49/543 reste à qualifier. SLS-078 reste[~].
+rapports UUID figés, SSO frais et recoupement physique entre campagnes. Trois essais
+antérieurs restent incomplets et conservés ; après les préalables105/106/107/108
+et le raccordement109, un nouveau passage entier49/543 reste à qualifier. SLS-078 reste[~].
 
 Pour une campagne suivie indépendamment du terminal :
 `python3 -B e2e/schedules-worker.py start`, puis `status NOM` et `finish NOM`
