@@ -68,7 +68,6 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-105](#sls-105) Préparation des instances dans la preuve console | Corriger | `[~]` | SLS-106 | [EXECUTION_CONSOLE_WARMUP](EXECUTION_CONSOLE_WARMUP.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -2980,17 +2979,24 @@ La campagne complète078 reste à assembler après ce préalable.
 <a id="sls-105"></a>
 ## SLS-105 — Préparation des instances dans la preuve console
 
-Statut : [~] — cause du montage recoupée : code publié jamais promu,
-aucune cible et zéro instance ; décision de préparation persistée avant code.
+Statut : [x] — [37groupes réels](evidence/execution-console-warmup-dev-2026-11-21.json) au gel93bc53d,
+450sources6f09e175 et34captures inspectées, six UUID ready réellement observés.
 Nature : Corriger. Ordre :1, préalable à078, après106 pour sa propreté native.
 Contrat : [EXECUTION_CONSOLE_WARMUP](EXECUTION_CONSOLE_WARMUP.md).
 
 - [x] SLS-105.1 Refus des six instances conservé, provenance/UUID/configuration
   et publication/promotion recoupées sans déduire une cause non observée.
-- [ ] SLS-105.2 Préparation respectant upload pilote puis promotion explicite ;
+- [x] SLS-105.2 Préparation respectant upload pilote puis promotion explicite ;
   six vraies instances mesurées, pagination5+1 et douze scénarios conservés.
-- [ ] SLS-105.3 Douze groupes UI et25communs passent ; captures fraîches relues,
+- [x] SLS-105.3 Douze groupes UI et25communs passent ; captures fraîches relues,
   services/données/artéfacts antérieurs et ressources propres recoupés.
+
+Le pilote est observé sans cible/instance, puis une promotion unique choisit
+son hash/alias. Six UUID ready,0,05CPU/128Mio chacun, trois mesures mémoire
+positives au relevé initial et pagination5+1 sont recoupés. Dix invocations
+terminales, jeton révoqué et purge native complète ;5982originaux/configuration
+et services inchangés. L’échec d’origine et les diagnostics de collecte restent
+hors des37groupes. La campagne543 de078 reste exigée.
 
 <a id="sls-106"></a>
 ## SLS-106 — Conservation des artefacts en régression
@@ -3035,4 +3041,5 @@ La preuve conserve21groupes publication,8manuel,8public et9connexion. Treize
 invocations réussies et deux refus recoupent pilote, promotion et disponibilité.
 Deux fonctions sont purgées par les API avec contrôle physique du code, des
 volumes et des secrets ;5982originaux/configuration/référence sont préservés.
-Les deux essais incomplets restent exclus.106/105/078 restent ouverts.
+Les deux essais incomplets restent exclus.106 et105 ont leurs preuves propres ;
+078 reste ouverte pour son assemblage complet.

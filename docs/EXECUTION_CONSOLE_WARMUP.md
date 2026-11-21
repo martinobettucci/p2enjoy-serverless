@@ -1,6 +1,8 @@
 # Préparation de la preuve des six instances de console
 
 Contrat de [SLS-105](BACKLOG.md#sls-105), préalable à la campagne complète078.
+La [qualification finale](evidence/execution-console-warmup-dev-2026-11-21.json) passe37groupes
+au gel93bc53d,450sources6f09e175 et34captures inspectées.
 Constat réel du21novembre2026 au gelfbafb11/286d296, imageb452 : execution-ui
 passe son accueil/vide puis échoue « Six instances prêtes requises » après
 publication. La suite termine1 à272groupes antérieurs validés ; ce passage
@@ -71,3 +73,51 @@ les25communs, soit37groupes, sous budgets natifs32/1CPU/8192Mio, avec captures
 nouvelles, code réellement déployé et purge publique106 contrôlée nativement.
 L’ancien essai et sa restauration106 restent des époques distinctes, sans
 groupe ajouté à ce replay.
+
+## Qualification du21novembre2026
+
+La [preuve37](evidence/execution-console-warmup-dev-2026-11-21.json) passe les douze groupes
+exécution, puis8manuel/8public/9connexion, en série, au gel
+93bc53da160a803123105b6e7421d1a91a5b1b8e.450sources, index
+6f09e17542a3407a2493c217ae92aa633ffce42ffe4d43075261377c0dfacca1,
+imageb452 inchangée ; aucun scénario ignoré.
+
+Le hash5b556589 est publié pilote : catalogue disponible, aucune cible,
+first_promoted_atNULL et zéro instance. Le POST explicite choisit ce hash
+et son alias ; sa décision est confirmée par un seul audit natif
+function.version_promote. Six UUID ready portent ce hash/alias, chacun
+50millions nanosCPU/128Mio. Leurs créations suivent la promotion. Trois des
+six mesures mémoire sont positives dans le relevé initial ; les autres
+indisponibilités ne sont pas présentées comme des mesures. Le rendu compare
+chaque valeur au relevé serveur, puis montre cinq cartes et la sixième sur la
+page suivante, avec focus du titre. Les budgets restent32/1CPU/8192Mio.
+
+Les douze groupes conservent réseau/chargement/reprise, extinction/recalage,
+journaux expurgés/tronqués et texte HTML, démarrage Oui/Non/Non confirmé,
+interruption réelle et mesures indisponibles, refus de session et suppression.
+Le lecteur natif relève dix invocations terminales : sept succeeded, deux
+failed et une rejected ; un HTTP503 métier reste succeeded. Le jeton est
+révoqué et la purge publique106 confirme code/backings/montages/canaux/
+conteneurs/réseaux absents et configuration/secrets vides.
+
+Les34captures sont rouvertes individuellement pour105 :12exécution,16manuel,
+6connexion. SHA/fraîcheur de phase recoupés,28déclarées et6PNG non déclarés
+distingués. Les images montrent cinq cartes et le total6, sans capture de la
+sixième : les assertions E2E portent cette dernière preuve. Noms/hash/logs
+restent contenus à390px et les états sont lisibles, sans défaut bloquant.
+Le manuel18chapitres/74paragraphes correspond à la source/rendu, marque à
+trois blocs visible. Aucun produit/UI/manuel modifié.
+
+Compteurs0,5982artefacts antérieurs exacts, dix migrations, intégrités/FK,
+mêmes CID/images/naissances, fichiers officiels,38backends et4web servis sont
+recoupés. Les trois notes sont conservées, sans adoption prétendue. Les
+exécutables restent ceux du gel ; ces résultats documentaires sont postérieurs.
+
+L’échec initialfed55b06 et la restauration106 restent distincts. Le collecteur
+complémentaire refuse d’abord sa chaîne locale mal délimitée avant tout SSH,
+puis deux lectures RO qui cherchent un nom d’audit incorrect ; le nom émis
+function.version_promote est recoupé avant correction du lecteur. Une seule
+trace détaillée est conservée dans le brut ; le premier code de sortie1 est
+observé par l’opérateur sans stderr retenu, sans revendiquer deux traces
+indépendantes. Ces diagnostics n’ont aucune mutation et ajoutent zéro groupe. SLS-105 est
+terminée ; la campagne49/543 de078 et la clôture095 restent distinctes.

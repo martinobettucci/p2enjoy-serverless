@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 21 novembre2026 — SLS-105 qualifiée, reprise078
+
+La [preuve37](evidence/execution-console-warmup-dev-2026-11-21.json) passe au gel93bc53d,
+450sources6f09e175 et imageb452 :12exécution puis25communs,34images
+nouvellement ouvertes. Pilote sans cible/instance, promotion unique auditée,
+six UUID ready au hash5b556589/alias canonique,0,05CPU/128Mio et pagination5+1.
+Trois mesures mémoire positives au relevé initial ; autres indisponibilités
+explicites. Dix invocations terminales7succeeded/2failed/1rejected, jeton
+révoqué et purge physique complète. Compteurs0,5982originaux, services/images/
+naissances, configuration,38backends/4web et notes conservés.
+Le collecteur complémentaire corrige une chaîne locale avant SSH puis un
+prédicat au nom d’audit incorrect refusé en deux tentatives RO, une seule
+trace détaillée conservée (première sortie1 observée sans stderr retenu) ; zéro mutation
+et zéro groupe ajouté. Échec d’originefed55 et restauration106 restent
+séparés.105[x],078[~] pour son assemblage543, aucun exécutable modifié après
+qualification.
+
 ## 21 novembre2026 — préparation105 corrigée pour qualification
 
 Le groupe2 conserve publication/packager API et atteste maintenant pilote

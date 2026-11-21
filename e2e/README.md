@@ -11,7 +11,8 @@ Les12groupes existants gardent réseau, focus, extinction, journaux, états de
 démarrage, interruption et nettoyage. Compléter par8manual-ui,8public et
 9login-ui, soit37groupes. Préserver rapports/captures de chaque essai.
 Contrat [EXECUTION_CONSOLE_WARMUP](../docs/EXECUTION_CONSOLE_WARMUP.md).
-Client corrigé pour qualification ;37groupes non encore rejoués.
+La [preuve105](../docs/evidence/execution-console-warmup-dev-2026-11-21.json) passe37groupes
+et34captures inspectées au gel93bc53d ; la campagne078 reste distincte.
 
 ## Publication console par hash — SLS-107
 
@@ -42,7 +43,7 @@ exige désormais un reçu public completed et le lecteur archive-purge-inspect
 RO. La session de purge distincte reste privée ; UUID, journal durable avant
 POST et SHA sont conservés. Qualification livrée :3ciblés,19gestion API,
 11gestion UI,21publication UI, puis25communs, soit79groupes. Les douze
-execution-ui et leur promotion manquante restent à105. La
+execution-ui sont qualifiés séparément dans105. La
 [preuve79](../docs/evidence/regression-artifact-cleanup-dev-2026-11-21.json) recoupe
 450sourcesaaf0784a, neuf purges natives et51captures inspectées.
 

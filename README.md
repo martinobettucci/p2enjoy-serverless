@@ -10,7 +10,10 @@ Le nettoyage partagé des campagnes est
 [qualifié par79groupes réels](docs/evidence/regression-artifact-cleanup-dev-2026-11-21.json) :
 code, données/cache et secrets purgés par les API, neuf fonctions recoupées
 physiquement,51captures inspectées. Les5982artefacts antérieurs sont conservés.
-La préparation de six instances105 reste à qualifier avant le replay complet078.
+La [préparation des six instances105](docs/evidence/execution-console-warmup-dev-2026-11-21.json)
+passe37groupes et34captures inspectées : pilote sans cible puis promotion
+explicite, six UUID ready, allocations et pagination5+1. La campagne complète078
+reste à terminer.
 
 
 Le [scope de régression complète des crons](docs/SCHEDULE_REGRESSIONS.md) est implémenté

@@ -2,11 +2,19 @@
 
 ## [Non publié]
 
+- SLS-105 : [37groupes réels](docs/evidence/execution-console-warmup-dev-2026-11-21.json)
+  qualifient le montage de six instances après promotion explicite. Douze
+  parcours conservés,25communs,34captures inspectées ; six UUID ready au
+  même hash/alias, allocations0,05CPU/128Mio et pagination5+1. Promotion
+  unique, dix invocations terminales, jeton révoqué et purge native complète.
+  5982originaux et services préservés ;078 garde sa campagne complète.
+
+
 - SLS-107 : [46 groupes réels](docs/evidence/publication-console-hash-regressions-dev-2026-11-21.json)
   raccordent les21parcours de publication aux versions par hash et aux
   promotions explicites ;25communs,44captures inspectées,13invocations
   réussies et2refus. Fautes réelles et purges complètes recoupées ; deux essais
-  incomplets exclus,5982originaux préservés.105/078 restent ouvertes.
+  incomplets exclus,5982originaux préservés.078 reste ouverte.
 
 - SLS-106 : [79groupes réels](docs/evidence/regression-artifact-cleanup-dev-2026-11-21.json)
   qualifient le helper de purge publique partagé, ses trois groupes dédiés
@@ -14,7 +22,7 @@
   deux records données/cache conservés puis retirés, relecture du même reçu
   sans seconde commande,51captures inspectées.5982originaux préservés.
   Ancienne fixture rétablie par API et deux essais incomplets conservés hors
-  du total. Six instances105 et campagne complète078 restent ouvertes.
+  du total. La campagne complète078 reste ouverte.
 
 - SLS-078 : scope schedules implémenté pour qualification, socle37 conservé et
   douze clients cron ajoutés. Rapports UUID découverts et archivés, SSO frais,
