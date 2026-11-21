@@ -1833,8 +1833,11 @@ Reprise du21novembre : préalables103/104 livrés. Le
 [contrat de campagne complète](SCHEDULE_REGRESSIONS.md) fixe49campagnes/543groupes
 attendus,18prérequis et les recoupements des36fonctions cron supplémentaires.
 Le lanceur est implémenté et relu ; qualification complète à produire.
-Premier lancement refusé avant SSO sur deux documents de rétention décalés,
-zéro groupe ; synchronisation gardée puis relance explicite requises.
+Deux essais antérieurs restent exclus : premier refus avant SSO sur deux
+contrats décalés, zéro groupe ; second15campagnes/272groupes puis préparation
+execution-ui en échec. Les préalables107/106/105 sont maintenant livrés par
+46/79/37groupes, chacun dans son époque. Nouveau worker et replay entier49/543,
+18prérequis,450sources et état natif au repos ; aucun résultat complet revendiqué.
 
 Dernier complément : [preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) passe31groupes sur428sources41574c45,
 image capturéec59 puis originauxb452restaurés. Source protégée puis retirée,

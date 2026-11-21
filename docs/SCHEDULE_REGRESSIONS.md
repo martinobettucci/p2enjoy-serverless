@@ -144,3 +144,33 @@ captures inspectées, continuité du code des preuves conservées et essais excl
 Mettre à jour backlog, journal, matrice, DAT, README et déploiement avec les
 résultats effectivement obtenus. Toute preuve manquante garde078[~]. La clôture
 globale095 et les unités produit encore ouvertes restent distinctes.
+
+## Reprise après les préalables105/106/107
+
+Les trois défauts de montage sont livrés avant la nouvelle campagne :
+[107,46groupes](evidence/publication-console-hash-regressions-dev-2026-11-21.json)
+raccorde les cartes au hash et aux promotions explicites ;
+[106,79groupes](evidence/regression-artifact-cleanup-dev-2026-11-21.json)
+remplace la purge des seuls volumes par une purge publique complète recoupée ;
+[105,37groupes](evidence/execution-console-warmup-dev-2026-11-21.json)
+prépare explicitement la cible avant les six instances réelles. Ces preuves
+gardent leurs gels et leurs comptes ; aucune n’est ajoutée aux543 attendus.
+Produit b452,38backends et4web restent ceux recoupés ; le code du moteur et les
+trois modules de rétention conservés ne changent pas.
+
+Les deux workers précédents sont terminés et finalisés :6d7b0401 est refusé
+avant SSO sur deux documents décalés, zéro groupe ; d25a507d passe15campagnes/
+272groupes puis s’arrête à execution-ui, rapport exact
+c50fd918500cf5a1bb3a4af3228b3a90b93d9e8804bc3dbe5b35653b2f68ce4e.
+Sa révision conservée en trop est attribuée puis purgée par106 ;5982originaux
+rétablis sans manque/modification. Ces essais restent incomplets et exclus.
+
+Décision de reprise : nouveau worker/UUID et assemblage entier49/543 avec
+18prérequis, sources450 figées et état natif au repos. Aucun saut vers les
+crons ni réutilisation des272groupes comme résultat du nouveau gel. Le suivi
+conserve aussi explicitement les7images contrôleUI non déclarées par son
+ancien rapport, avec SHA et fraîcheur source de leur phase, avant toute
+réutilisation de fichiers. Les6PNG login restent distingués de ses déclarations.
+Les captures scellées de rétention sont intouchées ; seuls les rapprochements
+d’identité déjà définis sont exécutés. Résultat complet, finalisation du worker,
+reçus des gardes et inspection des captures restent requis avant078[x].

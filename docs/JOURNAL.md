@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 21 novembre2026 — reprise complète078 après105/106/107
+
+Les trois préalables sont livrés séparément :107/46,106/79 et105/37groupes.
+Les deux workers précédents sont finalisés, premier0groupe puis second272
+avant échec execution-ui ; aucune réussite complète revendiquée. Décision
+dans SCHEDULE_REGRESSIONS : nouveau gel450sources, worker UUID neuf et reprise
+entière49campagnes/543groupes/18prérequis, sans saut ni somme entre époques.
+5982originaux au repos, produit b452 et modules de rétention inchangés. Le
+suivi conservera les7captures gestionUI non déclarées avec fraîcheur de phase.
+
 ## 21 novembre2026 — SLS-105 qualifiée, reprise078
 
 La [preuve37](evidence/execution-console-warmup-dev-2026-11-21.json) passe au gel93bc53d,
