@@ -8,8 +8,14 @@ attestés séparément, différences du validateur bornées aux changements conn
 Contexte de build neuf UUID, tag courant conservé. Le client full attend les
 dix migrations et garde ses quatre scénarios. Le déplacement partiel reste
 distinct. Contrat : [compatibilité104](../docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104).
-Deux refus reproduits avant correction ; code implémenté, nouvelle qualification
-réelle de build/SSO/migration/purges/restitution encore à produire.
+Deux refus reproduits avant correction et exclus. La
+[preuve104](../docs/evidence/legacy-schema010-dev-2026-11-21.json) passe30groupes
+au gel2613c3e : quatre full, un partiel puis25communs. Build véritable de39sources,
+image5ff7 et courantb452,428sources8b1a9f33 ; sept entrées d’archive/code par fonction
+identiques après upgrade, purge absente terminée et contradiction toujours pending.
+Deux gardes/pilotes joints,22images fraîches inspectées et5982artefacts conservés.
+Les trois notes SPARK sont revérifiées sans écriture ; aucune configuration changée.
+La campagne complète078 garde son périmètre distinct.
 
 
 ## Préconditions courantes sur010 — SLS-103

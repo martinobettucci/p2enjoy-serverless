@@ -1,5 +1,13 @@
 # P2Enjoy Serverless
 
+La [migration historique003→010](docs/evidence/legacy-schema010-dev-2026-11-21.json)
+est qualifiée :30groupes réels, cinq ciblés puis25communs,22captures inspectées.
+L’ancien contrôle est construit depuis ses39sources Git exactes ; ses deux
+archives gardent UUID, révisions et contenu après upgrade. Les deux fenêtres
+restituent les originaux et les5982artefacts. SLS-104 est clos ; la campagne
+complète de planification078 reste à assembler.
+
+
 Les [préconditions des preuves sur010](docs/evidence/schema010-proof-prerequisites-dev-2026-11-21.json)
 sont qualifiées :109groupes réels, dont84ciblés puis25communs, et22captures
 inspectées. Les bancs courants exigent les dix migrations exactes ; douze

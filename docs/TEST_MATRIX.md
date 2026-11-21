@@ -1,5 +1,15 @@
 # Matrice de qualification réelle
 
+## Migration historique003→010 — SLS-104
+
+[qualification104](evidence/legacy-schema010-dev-2026-11-21.json) passe30groupes : quatre full, un partiel,
+huit manuel/huit public/neuf connexion. Le build est un prérequis sans groupe.
+SSO réel, deux publications/imports Docker et inventaires avant/après identiques,
+purge absente réussie et contradiction protégée après restart ; deux restitutions
+et22captures inspectées. Sources4288b1a9f33, images5ff7/b452. Deux refus antérieurs
+exclus ; ces groupes ne ferment pas078 ni095.
+
+
 ## Préconditions010 et restitutions — SLS-103
 
 [qualification109](evidence/schema010-proof-prerequisites-dev-2026-11-21.json) passe109groupes sur428sourcesfd9c995f/imageb452 :

@@ -1,5 +1,17 @@
 # Révisions et adaptateur de déploiement
 
+## Qualification du contrôle historique vers010 —21 novembre2026
+
+[qualification104](evidence/legacy-schema010-dev-2026-11-21.json) clôt104 :30groupes réels et22captures
+inspectées. Le contrôle historique est bâti depuis39sources Git exactes dans
+un contexte UUID privé ; ses archives sont comparées avant/après003→010. Les
+fenêtres full et partielle restituent le même contrôle/imageb452 et5982artefacts,
+référence et configuration.38backend/quatreweb vérifiés sur le code servi,
+dix migrations/intégrité/FK ; aucun schéma, seed, paramètre, route ou secret
+ajouté. Les trois notes SPARK restent inchangées, revérifiées par SHA sans écriture ni
+adoption. La campagne complète078 reste distincte.
+
+
 ## Bancs de preuve010 qualifiés en DEV —21 novembre2026
 
 [qualification109](evidence/schema010-proof-prerequisites-dev-2026-11-21.json) clôt103 :109groupes réels,22images inspectées et

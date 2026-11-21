@@ -68,7 +68,6 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-104](#sls-104) Préparation du contrôle historique vers010 | Corriger | `[~]` | SLS-103 | [STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -2941,8 +2940,9 @@ conservent leurs propres campagnes.
 <a id="sls-104"></a>
 ## SLS-104 — Préparation du contrôle historique vers010
 
-Statut : [~] — correctif implémenté, qualification à produire.
-Nature : Corriger. Ordre :1, préalable à la campagne078.
+Statut : [x] — [qualification104](evidence/legacy-schema010-dev-2026-11-21.json) :30groupes réels sur428sources8b1a9f33,
+image couranteb452 et historique5ff7 ;22captures inspectées, deux fenêtres restituées.
+Nature : Corriger. Ordre :1, préalable livré de la campagne078.
 Contrat : [STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104).
 
 ConstatsGit du21novembre : storage-legacy-build.py exige auth.py identique,
@@ -2951,17 +2951,17 @@ nommage076 et son commentaire. storage-legacy-recovery.mjs attend encore007
 à l’upgrade alors que le helper lance l’image courante010. Le socle37 refuse
 ainsi avant de prouver sa migration réelle ; aucun défaut produit déduit.
 
-- [ ] SLS-104.1 Ancien arbre003 inchangé, provenance Git remappée ; dépendances
+- [x] SLS-104.1 Ancien arbre003 inchangé, provenance Git remappée ; dépendances
   et deux modules runtime identiques. Authentifications ancienne/courante
   distinctes et attestées, aucune injection du code courant dans l’ancien.
-- [ ] SLS-104.2 Différences du validateur bornées aux changements déjà livrés :
+- [x] SLS-104.2 Différences du validateur bornées aux changements déjà livrés :
   max_bytes optionnel, nom de conteneur076, commentaire de traçabilité. Toute
   autre différence reste refusée ; tag courant conservé pendant le vrai build.
-- [ ] SLS-104.3 Rejeu réel003→010 : SSO depuis accueil historique, deux archives
+- [x] SLS-104.3 Rejeu réel003→010 : SSO depuis accueil historique, deux archives
   produites par ses API et imports Docker, session/UUID/code conservés après
   upgrade, dix migrations exactes, purge absente et contradiction réelles
   conservées après redémarrage ; restitution complète des originaux.
-- [ ] SLS-104.4 Déplacement partiel rejoué et25communs, images/captures/sources
+- [x] SLS-104.4 Déplacement partiel rejoué et25communs, images/captures/sources
   recoupées. Préconditions historiques périmées reproduites puis exclues,
   contrats actuels/historiques clairement distingués.
 

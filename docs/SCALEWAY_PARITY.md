@@ -1,5 +1,10 @@
 # Parité fonctionnelle avec Scaleway Serverless
 
+La [preuve du banc historique104](evidence/legacy-schema010-dev-2026-11-21.json)
+qualifie003→010 en30groupes sur le SPARK DEV. Elle prépare la campagne078 ;
+elle n’ajoute pas de capacité produit et ne change aucun statut de parité.
+
+
 Contrat de l'unité [SLS-082](BACKLOG.md#sls-082). Demande du responsable, 10 novembre
 2026 : **répliquer toutes les fonctionnalités de Scaleway Serverless**, dont les
 projets de référence sont aujourd'hui clients. Cette matrice est la liste de

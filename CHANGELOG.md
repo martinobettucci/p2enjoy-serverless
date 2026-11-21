@@ -2,10 +2,11 @@
 
 ## [Non publié]
 
-- SLS-104 : préconditions de construction historique et migration003→010
-  spécifiées puis implémentées : authentifications distinctes et attestées,
-  ancien code conservé, différences de validateur bornées, cible010 exacte.
-  Deux refus reproduits ; nouvelle qualification réelle encore à produire.
+- SLS-104 : [30groupes réels](docs/evidence/legacy-schema010-dev-2026-11-21.json)
+  qualifient la construction historique, le SSO et l’upgrade003→010 : cinq
+  ciblés puis25communs,22captures inspectées. Deux archives gardent révisions,
+  SHA, tailles et modes ; deux fenêtres restituent les originaux. Deux refus
+  préalables exclus. Aucun produit, manuel, schéma ou paramètre changé.
 
 - SLS-103 : [109groupes réels](docs/evidence/schema010-proof-prerequisites-dev-2026-11-21.json)
   qualifient les préconditions010 et leurs restitutions :84ciblés,25communs,

@@ -1,5 +1,28 @@
 # Journal de cadrage
 
+## 21 novembre2026 — migration historique104 qualifiée
+
+[qualification104](evidence/legacy-schema010-dev-2026-11-21.json) passe30groupes au gel2613c3e,428sources8b1a9f33 :
+build0, full4, partiel1 puis25communs. Les39sources anciennes sont recoupées
+avec le Git remappé et à nouveau sur le SPARK ; image5ff7, tag courantb452
+conservé. Authentifications distinctes, vrai SSO historique puis même session
+après010. Deux archives gardent leurs UUID/révisions et sept entrées de fichiers
+avec SHA, tailles et modes. Purge sans registre terminée, aucun reçu agent
+inventé ; seconde commande pending/storage_state_changed inchangée après restart,
+code protégé. Son retrait temporaire n’est pas compté comme purge métier.
+
+Deux restitutions nominale/indépendante jointes, pilotes absents et gardes
+inactives ; zéro activité/bail/réservation, dix migrations, intégrité/FK,
+38backend/quatreweb, référence, configuration et5982artefacts conservés.
+22captures fraîches ouvertes individuellement, manuel18/74SHA8a50ffa0 ; notes
+SPARK revérifiées par SHA et inchangées. Deux refus préfixes exclus, zéro groupe.
+Deux diagnostics locaux de collecte sans mutation produit sont conservés hors
+comptes. Revue ciblée/natif/communs sans blocage, registre d’incohérences absent.
+Aucun produit/UI/manuel/schéma/configuration modifié.104 clos ; reprendre078
+par le contrat d’assemblage du socle37 et des12clients cron, sans confondre cette
+preuve30 avec la campagne complète ou la clôture globale095.
+
+
 ## 21 novembre2026 — comparaison des archives104 décidée après revue
 
 La revue relève une preuve manquante : présence et volume positif ne suffisent
