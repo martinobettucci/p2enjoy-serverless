@@ -68,7 +68,6 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-103](#sls-103) Préconditions des preuves sur le schéma010 | Corriger | `[~]` | migration010 déployée | [SCHEMA_010_PROOF_PREREQUISITES](SCHEMA_010_PROOF_PREREQUISITES.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -103,6 +102,9 @@ avec six groupes ciblés puis25communs et22captures inspectées dans la
 conservés ; rétention réelle qualifiée. La campagne complète sur010 reste à
 raccorder puis exécuter avant clôture ; aucune attente temporelle ne la bloque.
 Les bornes numériques sont qualifiées ; SLS-100 et SLS-071 sont livrées.
+SLS-103 est livré : préconditions et restitutions sur010 qualifiées109groupes ;
+le raccordement de la campagne complète078 reste la prochaine unité.
+
 Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
 089.4 est qualifié. Le banc ZIP de SLS-070 reste préparé, non exécuté.
 
@@ -2899,8 +2901,11 @@ restent compréhensibles, mais l’absence d’espaces dégrade la lecture.
 <a id="sls-103"></a>
 ## SLS-103 — Préconditions des preuves sur le schéma010
 
-Statut : [~] — attentes010 et reçus implémentés, qualification à produire.
-Nature : Corriger. Ordre :1, préalable à la campagne complète078.
+Statut : [x] — [qualification109](evidence/schema010-proof-prerequisites-dev-2026-11-21.json) passe sur428sourcesfd9c995f,
+imageb452 :84ciblés puis25communs,22captures inspectées,12fenêtres restituées.
+Nature : Corriger. Ordre :1, préalable désormais livré de la campagne078.
+Deux refus préalables reproduits sont exclus, zéro groupe qualifié.
+
 Contrat : [SCHEMA_010_PROOF_PREREQUISITES](SCHEMA_010_PROOF_PREREQUISITES.md).
 
 Constats de revue du21novembre : control-operations.py141 exige008 alors que
@@ -2908,15 +2913,25 @@ l’image courante applique010 ; storage-legacy-environment.py1135 exige009
 dans le parcours099 ordinaire. Ces refus précoces empêchent les campagnes
 complètes de mesurer le code actuel. Aucun échec fonctionnel produit déduit.
 
-- [ ] SLS-103.1 Précontrôle et assertions des migrations courantes exactement
+- [x] SLS-103.1 Précontrôle et assertions des migrations courantes exactement
   001→010 ; les bancs006/007/008 historiques et leurs refus restent inchangés.
-- [ ] SLS-103.2 Fenêtre099 sur l’image courante et son schéma010 : garde figée,
+- [x] SLS-103.2 Fenêtre099 sur l’image courante et son schéma010 : garde figée,
   même autorité/identités, refus des états inconnus et restitution physique,
   sans modification des captures ou configuration officielle.
-- [ ] SLS-103.3 Tests propres réels : contrôle55, gardes/restitutions et admission099
+- [x] SLS-103.3 Tests propres réels : contrôle55, gardes/restitutions et admission099
   avec véritable refus puis succès cron ; schéma, intégrité et originaux recoupés.
-- [ ] SLS-103.4 Matrice/README/contrat et preuves mis à jour, sans présenter
+- [x] SLS-103.4 Matrice/README/contrat et preuves mis à jour, sans présenter
   ces prérequis comme la campagne complète078 ou095.
 
 Le raccordement des clients schedule-* dans la campagne complète reste porté
 par078.5 ; le choix de son assemblage est persisté avant le code correspondant.
+
+Preuve103 :55contrôle,10restitutions,8options,6sûreté consommateur/propriété,
+4admission et1déplacement partiel, puis25communs. Onze fenêtres099 utilisent
+010→010 ; le déplacement interrompu garde ses métadonnées historiques006→007,
+sans démarrer de contrôle historique. Refus cron11:35UTC puis succès11:40,
+aucun rejeu ; six handlers réussis sur sept appels du nominal. Douze pilotes
+disparus et gardes inactives, zéro activité/bail/réservation, dix migrations,
+intégrité/FK,38backend/quatreweb et5982artefacts recoupés. Manuel18/74 conforme.
+Aucun changement produit, UI, migration ou configuration officielle ;078 et095
+conservent leurs propres campagnes.

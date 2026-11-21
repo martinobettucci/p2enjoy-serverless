@@ -1,5 +1,13 @@
 # P2Enjoy Serverless
 
+Les [préconditions des preuves sur010](docs/evidence/schema010-proof-prerequisites-dev-2026-11-21.json)
+sont qualifiées :109groupes réels, dont84ciblés puis25communs, et22captures
+inspectées. Les bancs courants exigent les dix migrations exactes ; douze
+fenêtres sont restituées, dont une interruption de déplacement historique.
+Le refus planifié11:35UTC est suivi du succès11:40sans rejeu. SLS-103 est clos ;
+le raccordement de la campagne complète078 reste à réaliser.
+
+
 La [rétention à sept jours](docs/evidence/schedule-retention-age-dev-2026-11-21.json)
 est qualifiée par31groupes réels : six ciblés sur les captures authentiques du
 11novembre, puis25communs. Source protégée tant que son tir reste ouvert puis

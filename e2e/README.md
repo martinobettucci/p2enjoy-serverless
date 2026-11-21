@@ -7,8 +7,13 @@ clients `instance-limit-environment.mjs` et `instance-limit-admission.mjs`
 recoupent la liste ordonnée `capacity.schema_migrations` du helper sur010.
 Les modes historiques006/007/008 et les replays de rétention009 restent distincts.
 Contrat : [préconditions010](../docs/SCHEMA_010_PROOF_PREREQUISITES.md).
-Deux refus périmés reproduits avant correction, originaux conservés ; correctif
-implémenté, syntaxe contrôlée, nouvelles preuves55/gardes/admission à exécuter.
+Deux refus périmés reproduits avant correction et exclus. La
+[preuve109](../docs/evidence/schema010-proof-prerequisites-dev-2026-11-21.json)
+qualifie55contrôle,10restitutions,8options,6sûreté,4admission et1partiel, puis
+25communs sur428sourcesfd9c995f/imageb452. Douze gardes/pilotes joints et22images
+inspectées ; onze fenêtres courantes010, une interruption historique sans
+contrôle démarré. Refus11:35/succès11:40UTC sans rejeu ; original et5982artefacts
+conservés. Aucun mock ni skip. La campagne complète078 reste à raccorder.
 
 
 ## Frontières du ZIP reconstruit — banc préparé

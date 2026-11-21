@@ -1,5 +1,16 @@
 # Matrice de qualification réelle
 
+## Préconditions010 et restitutions — SLS-103
+
+[qualification109](evidence/schema010-proof-prerequisites-dev-2026-11-21.json) passe109groupes sur428sourcesfd9c995f/imageb452 :
+55contrôle,10restitutions,8options,6sûreté,4admission et1partiel, puis
+8manuel/8public/9connexion. Les22images fraîches sont rouvertes individuellement.
+Les douze fenêtres restituent pilotes, consommateurs, bases et originaux ;
+onze sont010→010, la partielle garde006→007 sans démarrer de contrôle historique.
+Refus11:35UTC et succès11:40sans rejeu ; deux reproductions négatives exclues.
+Ce résultat clôt103, sans remplacer la campagne complète078 ni095.
+
+
 La [capacité globale de publication éditeur](evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :
 4 ciblés puis 25 communs, sur 423 sources `0856f1be` et l’image `b452ef16`.
 Un POST reste retenu au vrai read ; les nouveaux POST sur A et B font429 en

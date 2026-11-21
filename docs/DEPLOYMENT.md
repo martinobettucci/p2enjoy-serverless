@@ -1,5 +1,16 @@
 # Révisions et adaptateur de déploiement
 
+## Bancs de preuve010 qualifiés en DEV —21 novembre2026
+
+[qualification109](evidence/schema010-proof-prerequisites-dev-2026-11-21.json) clôt103 :109groupes réels,22images inspectées et
+douze restitutions natives. Les quatre clients/helpers modifiés sont installés
+sur le SPARK ; image produitb452 et38backend/quatreweb inchangés. Les fenêtres
+ordinaires exigent010 exactement ; la branche historique de déplacement et
+l’exception de replay009 restent distinctes. Aucun nouveau build produit,
+secret, variable, route ou migration ; redémarrages DEV attendus, même CID
+et données d’origine conservés. Campagne complète078 à raccorder ensuite.
+
+
 La [capacité globale de publication éditeur](evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :
 4 ciblés puis 25 communs, sur 423 sources `0856f1be` et l’image `b452ef16`.
 Un POST reste retenu au vrai read ; les nouveaux POST sur A et B font429 en

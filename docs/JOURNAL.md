@@ -1,5 +1,26 @@
 # Journal de cadrage
 
+## 21 novembre2026 — préconditions010 qualifiées,103 clôturé
+
+[qualification109](evidence/schema010-proof-prerequisites-dev-2026-11-21.json) passe109groupes au gelda0f3fd,428sourcesfd9c995f :
+55contrôle,10restitutions,8options,6sûreté,4admission et1partiel, puis25communs.
+Deux refus périmés exclus, zéro groupe ajouté. Douze fenêtres jointes, pilotes
+disparus et gardes inactives ; onze010→010 et une interruption historique006→007
+avant démarrage d’un contrôle. Vrai refus11:35UTC puis succès11:40sans rejeu,
+six handlers réussis/sept appels du nominal et trois purges API. Consommateur
+vivant, Dockerpause et namespace étranger sont discriminés. Comptes actifs,
+baux et réservations nuls, dix migrations/intégrité/FK ;38backend/quatreweb,
+configuration, référence et5982artefacts conservés.22images fraîches ouvertes
+individuellement, manuel18/74 conformeSHA8a50ffa0, revue de preuve sans blocage.
+
+Aucun produit, UI, migration ou configuration changé. Le dossier préalable
+vide du refus099 reste en privé, explicitement exclu du nettoyage nominal.
+Registre d’incohérences absent ;103 est retiré des ouverts. Reprendre078 :
+assembler sa campagne complète, avec les clients de planification et le socle
+courant. Les assertions historiques du builder003 sont à instruire avant
+lancement, sans supposer leur conformité ; la campagne globale095 reste distincte.
+
+
 ## 21 novembre2026 — préconditions010 implémentées avant preuve
 
 Le composant attend exactement001→010, sans modifier ses55scénarios. Le helper

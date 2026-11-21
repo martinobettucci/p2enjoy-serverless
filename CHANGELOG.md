@@ -2,9 +2,12 @@
 
 ## [Non publié]
 
-- SLS-103 : bancs courants raccordés aux dix migrations001→010 et liste
-  recoupée dans les reçus de capacité. Refus périmés reproduits ; qualification
-  des corrections à produire, sans changement produit ni configuration.
+- SLS-103 : [109groupes réels](docs/evidence/schema010-proof-prerequisites-dev-2026-11-21.json)
+  qualifient les préconditions010 et leurs restitutions :84ciblés,25communs,
+  22captures inspectées, douze fenêtres jointes. Schéma/intégrité/FK relus après
+  redémarrage, refus cron11:35 puis succès11:40sans rejeu ; originaux conservés.
+  Deux refus préalables exclus ; aucun produit/UI/migration/configuration changé.
+  La campagne complète078 reste distincte.
 
 - Rétention à sept jours qualifiée en DEV le21novembre :31groupes réels,
   six ciblés sur captures authentiques puis25communs,22images inspectées.
