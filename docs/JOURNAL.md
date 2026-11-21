@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 21 novembre2026 — audit du reste du socle et unité109 inscrite
+
+Le recoupement108 retrouve une fonction publiée mais jamais promue :
+first_promoted_atNULL, zéro audit de promotion et aucune invocation réservée.
+Le corps précis du409 n’était pas conservé par l’ancien rapport ; il n’est
+pas reconstruit comme preuve observée.
+L’audit RO des clients suivants relève dix montages modernes incompatibles,
+81groupes conservés, avant leur exécution.109 est inscrite après108 pour les
+raccorder et qualifier81+25=106 avant un nouveau078. Les deux legacy003 et
+les clients bas niveau sont distingués. Le paragraphe URL versionnées futures
+est consigné IR-001, proposé pour109 dans la boucle après preuve108 verte.
+
 ## 21 novembre2026 — troisième essai078 arrêté après313groupes
 
 Le worker9c509830/60a20da passe18campagnes/313groupes et4prérequis,

@@ -69,6 +69,7 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-108](#sls-108) Raccordement de la preuve de transport des services | Corriger | `[~]` | SLS-074 | [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md) |
+| 1 | [SLS-109](#sls-109) Préparation des dix clients modernes du socle | Corriger | `[~]` | SLS-108 | [MODERN_CLIENT_PROMOTION_REGRESSIONS](MODERN_CLIENT_PROMOTION_REGRESSIONS.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -3061,3 +3062,17 @@ Contrat : [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md).
   transport CLI ou vérification réelle ; décision persistée avant code.
 - [ ] SLS-108.3 Cinq groupes puis25communs passent ; captures/manuel et
   nettoyage natif recoupés,5982originaux préservés.
+
+<a id="sls-109"></a>
+## SLS-109 — Préparation des dix clients modernes du socle
+
+Statut : [~] — dix montages incompatibles identifiés par audit RO, avant E2E.
+Nature : Corriger. Ordre :1, après108 et avant le prochain078.
+Contrat : [MODERN_CLIENT_PROMOTION_REGRESSIONS](MODERN_CLIENT_PROMOTION_REGRESSIONS.md).
+
+- [ ] SLS-109.1 Dix clients/groupes rapprochés des contrats actuels ; décisions
+  explicites de cible, hash/alias, ETag et parcours persistées avant code.
+- [ ] SLS-109.2 Dix montages raccordés sans retirer leurs81groupes, leurs
+  fautes, refus, gestes UI et consommateurs réels ; historique003 intact.
+- [ ] SLS-109.3 Les81groupes puis25communs passent ; captures/manuels,
+  gardes/restaurations, purges et5982originaux recoupés sur le code déployé.
