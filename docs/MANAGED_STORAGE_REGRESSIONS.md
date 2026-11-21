@@ -69,3 +69,32 @@ exclus ; si le défaut ne se reproduit pas, le succès ne prouve aucune cause ni
 correction et111reste[~]. Toute correction fonctionnelle attend le diagnostic,
 sa décision persistée et ses preuves propres ; les39groupes de qualification
 restent dus après correction établie. Aucun changement produit/UI/image.
+
+## Diagnostic isolé observé au gel95d2e16
+
+Le passage original est conservé séparément ; l’unique diagnostic isolé sur
+455sources termine14/14 sans échec ni saut. Le timeout rend invocation_timeout,
+handler_started=true, container_removed=true, elapsed_seconds=2,742588 incluant
+le nettoyage ; les deux fermetures sont confirmées et la relecture correspond
+à la valeur attendue. Ce résultat ne reproduit ni n’explique l’ancienne assertion.
+Compteurs au repos et même nominal,5982originaux conservés. Aucun statut de
+cause/correction ou qualification39 n’est acquis ;111reste[~].
+
+## Décision du passage contextuel unique, avant lancement
+
+Le diagnostic isolé n’a pas reproduit l’échec. Pour discriminer l’état laissé
+par le préfixe, exécuter une seule fois les trois prérequis et les six premières
+campagnes du même assemblage, dans l’ordre exact, puis arrêter : SSO, build
+historique et build adaptateur ; control-operations55, function-storage15,
+runtime-instances31, instance-lifecycle11, runtime-validation36, managed-storage14.
+Soit162groupes si tous passent, sans prétendre une campagne078 entière ni ajouter
+le14isolé. Code diagnostique95d2e16 conservé ; aucun changement d’assertion,
+2s/30s ou produit. Pas d’injection de charge, sondes CPU ou horloge substituée.
+
+Figer les455sources, conserver les rapports avant/après écrasement, SHA/images,
+sorties et étapes ; repos natif/configuration/référence/originaux recoupés avant
+et après chaque campagne. Identifiants SSO sur stdin privée puis en mémoire.
+Arrêter au premier échec et conserver sa preuve avant toute décision ; pas de
+rejeu automatique. Si le passage reste nominal, cela ne révèle pas la cause
+ancienne et111reste ouverte ; toute suite sera une décision séparée motivée.
+Les25communs et la campagne49/543 restent distincts et encore dus.

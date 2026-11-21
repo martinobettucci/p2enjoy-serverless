@@ -1,5 +1,24 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — décision du diagnostic111 en contexte
+
+Le premier diagnostic isolé ne reproduit pas l’assertion ; ses trois fonctions
+sont purgées physiquement, sans consommateur restant. Décision réversible : un
+seul préfixe exact des trois préparations puis six campagnes,162groupes attendus,
+avec l’instrumentation existante et arrêt après managed-storage ou au premier
+échec. Repos natif et rapports figés à chaque étape ; aucun test concurrent,
+charge artificielle, changement de2s/30s ou réutilisation du14isolé. Ce préfixe
+ne vaut ni qualification39 de111 ni campagne078 entière ; cause toujours inconnue.
+
+## 21 novembre 2026 — diagnostic111 isolé réussi, cause non établie
+
+Gel95d2e16 /455sources, travail managed-storage-diagnostic-b8129a29 :14groupes,
+exit0/cleanuptrue, sans reproduction. Le résultat deadline est timeout, début
+observé, conteneur retiré, durée2,742588s incluant nettoyage ; deux fermetures
+confirmées et contenu relu conforme. Rapport et observations exacts conservés.
+Nominal et5982originaux au repos ; un succès isolé ne corrige pas rétroactivement
+l’assertion muette.111reste[~], cause et qualification39 non acquises.
+
 ## 21 novembre 2026 — instrumentation111 préparée, diagnostic à produire
 
 Le client conserve le défaut structuré dans son rapport terminal : étape,
