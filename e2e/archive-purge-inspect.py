@@ -2,6 +2,7 @@
 # @verifies docs/BACKLOG.md#sls-106 | docs/REGRESSION_ARTIFACT_CLEANUP.md#correction-bornée
 """Read-only DEV verification of one campaign function after its public purge."""
 from contextlib import closing
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -16,7 +17,10 @@ from uuid import UUID
 assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless'
 assert len(sys.argv) == 4
 function, namespace, operation = sys.argv[1:]
-assert all(str(UUID(value)) == value for value in (function, namespace, operation))
+retained = operation == '--retained'
+assert all(str(UUID(value)) == value for value in (function, namespace))
+if not retained: assert str(UUID(operation)) == operation
+OWNED = r'(?:qa-[0-9a-f]{8}|ui-[0-9a-f]{8}x{52}|invocation-[0-9a-f]{8}|publication-ui-[0-9a-f]{8})'
 root = Path('/srv/p2enjoy-serverless')
 sys.path.insert(0, str(root / 'e2e'))
 from control_database import read_control, control_owner
@@ -31,12 +35,49 @@ state = Path(settings['SERVERLESS_STATE_HOST_PATH'])
 storage = Path(settings['SERVERLESS_STORAGE_ROOT_HOST'])
 assert state.parent == storage.parent == root
 control = state / 'control.sqlite3'
+if retained:
+    with read_control(control) as db:
+        db.execute('BEGIN')
+        row = db.execute("""SELECT f.deleted_at,f.purged_at,n.name namespace_name FROM functions f
+            JOIN services s ON s.id=f.service_id JOIN namespaces n ON n.id=s.namespace_id
+            WHERE f.id=? AND n.id=?""", (function, namespace)).fetchone()
+        assert row and re.fullmatch(OWNED, row['namespace_name']) and row['deleted_at'] and row['purged_at'] is None
+        assert not db.execute('SELECT 1 FROM function_operations WHERE function_id=?', (function,)).fetchone()
+        assert not db.execute('SELECT 1 FROM execution_instances WHERE function_id=?', (function,)).fetchone()
+        assert not db.execute('SELECT 1 FROM invocations WHERE function_id=? AND completed_at IS NULL', (function,)).fetchone()
+        revisions = [dict(v) for v in db.execute('SELECT id,archive_sha256,stored_bytes,deleted_at FROM revisions WHERE function_id=?', (function,))]
+        assert len(revisions) == 1 and revisions[0]['stored_bytes'] > 0 and revisions[0]['deleted_at'] is None
+    with control_owner(control), closing(sqlite3.connect('file:' + str(storage / 'registry.sqlite3') + '?mode=ro', uri=True)) as db:
+        db.row_factory = sqlite3.Row
+        agent = db.execute('SELECT state,pending_json FROM functions WHERE id=?', (function,)).fetchone()
+        assert agent and agent['state'] == 'archived' and agent['pending_json'] is None
+        assert not db.execute('SELECT 1 FROM leases WHERE function_id=?', (function,)).fetchone()
+        volumes = [dict(v) for v in db.execute('SELECT kind,enabled,quota,phase FROM volumes WHERE function_id=? ORDER BY kind', (function,))]
+        assert {v['kind'] for v in volumes} == {'data','cache'}
+        assert all(v['enabled'] == 0 and v['quota'] == 2*1024**2 and v['phase'] == 'unmounted' for v in volumes)
+    revision = revisions[0]; identifier = revision['id']; assert str(UUID(identifier)) == identifier
+    archive = state / 'artifacts' / identifier / 'archive.zip'
+    code = state / 'artifacts' / identifier / 'code/scheduled-storage.cjs'
+    archive_sha = hashlib.sha256(archive.read_bytes()).hexdigest()
+    code_sha = hashlib.sha256(code.read_bytes()).hexdigest()
+    assert archive_sha == revision['archive_sha256']
+    assert code_sha == hashlib.sha256((root/'qualification/artifacts/scheduled-storage.cjs').read_bytes()).hexdigest()
+    records = {}
+    for kind in ('data','cache'):
+        path = storage / 'backings' / function / kind / 'record'
+        assert path.is_file() and not path.is_symlink()
+        raw = path.read_bytes(); assert raw
+        records[kind] = {'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+    print(json.dumps({'completed':True,'function_id':function,'namespace_id':namespace,
+        'revision_id':identifier,'archive_sha256':archive_sha,'code_sha256':code_sha,
+        'record_fingerprints':records,'volumes_disabled_and_retained':True,'volumes':volumes}))
+    raise SystemExit(0)
 with read_control(control) as db:
     db.execute('BEGIN')
     row = db.execute('''SELECT f.id,f.updated_at,f.deleted_at,f.purged_at,f.active_revision_id,f.config_json,f.environment_json,
         n.name namespace_name FROM functions f JOIN services s ON s.id=f.service_id
         JOIN namespaces n ON n.id=s.namespace_id WHERE f.id=? AND n.id=?''', (function, namespace)).fetchone()
-    assert row and re.fullmatch(r'(?:qa-[0-9a-f]{8}|ui-[0-9a-f]{8}x{52}|invocation-[0-9a-f]{8}|publication-ui-[0-9a-f]{8})', row['namespace_name']), 'owned_campaign_required'
+    assert row and re.fullmatch(OWNED, row['namespace_name']), 'owned_campaign_required'
     assert row['deleted_at'] and row['purged_at'] and row['active_revision_id'] is None
     assert json.loads(row['config_json']) == json.loads(row['environment_json']) == {}
     command = db.execute('SELECT id,state,kind,installation_id,storage_absent,result_version,phase,completed_at,error_code FROM storage_commands WHERE id=? AND function_id=?', (operation, function)).fetchone()

@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 21 novembre2026 — conservation physique106 prête pour replay
+
+Le client persiste maintenant l’archive avant assertion, attend la fin de sa
+garde et vérifie disabled/unmounted/quotas2Mio. Le mode RO --retained confirme
+ZIP/code aux SHA attendus, absence de consommateur et les deux vrais records
+conservés ; JS compare tailles/SHA au contenu écrit par le handler Docker. La
+branche après purge reste stricte. Revue ciblée sans blocage, AST/JS valides.
+449sources au gel à venir ; trois groupes et79attendus encore à rejouer.
+
 ## 21 novembre2026 — premier essai106 et conservation des volumes
 
 B74f486b/01fa6e1 exécute le handler : data/cache écrits et relus dans Docker,

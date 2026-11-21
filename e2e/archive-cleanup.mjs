@@ -2,7 +2,7 @@
 // @verifies docs/BACKLOG.md#sls-106 | docs/REGRESSION_ARTIFACT_CLEANUP.md#correction-bornée
 // Actual code publication, Docker writes, HTTP archive and complete public purge.
 import assert from 'node:assert/strict';
-import {randomUUID} from 'node:crypto';
+import {randomUUID,createHash} from 'node:crypto';
 import {mkdir,mkdtemp,readFile,writeFile,rename,cp,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
@@ -33,7 +33,15 @@ try{
   evidence.push({scenario:'docker-records-written',function_id:fn.id,revision_id:published.revision_id,code_hash:published.code_hash,validation:published.validation,invocation_id:value.id,response:value});
  });
  await check('Suppression HTTP : code et deux volumes conservés avant la purge complète',async()=>{
-  await archive();const value=await api('/api/archives/'+fn.id);assert.equal(value.namespace_id,namespace.id);assert.equal(value.purged_at,null);assert(value.artifact_bytes>0&&value.revision_count===1);assert(value.storage.available&&value.storage.registered&&value.storage.state==='archived');assert(value.storage.volumes.data.enabled&&value.storage.volumes.cache.enabled);assert.equal(value.storage.leases,0);evidence.push({scenario:'archive-retains-code-and-volumes',archive:value});
+  await archive();const value=await until(async()=>{const row=await api('/api/archives/'+fn.id);return !row.storage_operation&&row.storage.state==='archived'?row:false;},'archive_not_settled');
+  evidence.push({scenario:'archive-retains-code-and-volumes',archive:value});await save();
+  assert.equal(value.namespace_id,namespace.id);assert.equal(value.purged_at,null);assert(value.artifact_bytes>0&&value.revision_count===1);assert(value.storage.available&&value.storage.registered);assert.equal(value.storage.leases,0);
+  for(const kind of ['data','cache']){assert.equal(value.storage.volumes[kind].enabled,false);assert.equal(value.storage.volumes[kind].phase,'unmounted');assert.equal(value.storage.volumes[kind].quota_bytes,2*1024**2);}
+  const {stdout}=await run('ssh',['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24','python3','-B','/srv/p2enjoy-serverless/e2e/archive-purge-inspect.py',fn.id,namespace.id,'--retained'],{timeout:90000,maxBuffer:1024*1024});const physical=JSON.parse(stdout);
+  evidence.push({scenario:'retained-files-native',physical});await save();assert(physical.completed&&physical.volumes_disabled_and_retained);
+  const written=evidence.find(v=>v.scenario==='docker-records-written').response;
+  for(const kind of ['data','cache']){assert.equal(physical.record_fingerprints[kind].sha256,createHash('sha256').update(written[kind]).digest('hex'));assert.equal(physical.record_fingerprints[kind].bytes,Buffer.byteLength(written[kind]));}
+
  });
  await check('Helper : reçu public terminé, code/volumes physiquement absents et relecture idempotente',async()=>{
   purgeStarted=true;purgeResult=await purgeStorageArchive(fn.id,namespace.id);evidence.push({scenario:'public-purge',result:purgeResult});assert(purgeResult.purged&&purgeResult.physical.completed);assert.equal(purgeResult.physical.purge_commands,1);
