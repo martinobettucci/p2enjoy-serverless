@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — instrumentation111 préparée, diagnostic à produire
+
+Le client conserve le défaut structuré dans son rapport terminal : étape,
+traceback fichier/fonction/ligne sans locals, type/SHA de message. Le groupe
+deadline ajoute une projection fixe du résultat avant assertion et les états
+avant contrôle des deux fermetures, puis une empreinte/égalité de la relecture.
+Les assertions de fermeture ont des codes fixes. Aucun corps ou log ajouté.
+
+Les14noms/ordre, deadline2s, sommeil30s, fautes et assertions sont conservés ;
+compilation syntaxique et comparaison AST des groupes conformes. Contrat111
+ajouté à l’index,455sources. Aucun produit/UI/image modifié. Une seule exécution
+diagnostique après gel est encore due ; cause/correction et qualification39
+ne sont pas revendiquées.111 et078 restent ouvertes.
+
 ## 21 novembre 2026 — diagnostic111 borné avant code
 
 Les deux fonctions de l’installation4ea4aefb sont purgées : zéro volume/bail/

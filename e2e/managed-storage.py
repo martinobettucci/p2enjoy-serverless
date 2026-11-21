@@ -1,8 +1,11 @@
 # @spec docs/BACKLOG.md#sls-040 | docs/BACKLOG.md#sls-050 | docs/STORAGE_AGENT.md#instances-avec-baux-gérés
+# @spec docs/BACKLOG.md#sls-111 | docs/MANAGED_STORAGE_REGRESSIONS.md#décision-de-diagnostic-du-21-novembre-2026-avant-code
+# @verifies docs/BACKLOG.md#sls-111 | docs/MANAGED_STORAGE_REGRESSIONS.md#qualification-attendue
 # @verifies docs/STORAGE_AGENT.md#instances-avec-baux-gérés
 """Real baked control driver, Docker handlers and storage; root operates DEV faults only."""
 import asyncio
 from contextlib import suppress
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -33,6 +36,7 @@ async def worker(installation):
     work=Path(tempfile.mkdtemp(prefix='storage-proof-',dir='/state'))
     host_work=Path(os.environ['SERVERLESS_STATE_HOST_PATH'])/work.name
     instances=[];functions=[];consumers=[];checks=[];completed=False;cleanup_errors=[]
+    observations=[];failure=None;step='setup'
     async def fault(operation,**fields):
         emit({'fault':operation,**fields})
         answer=json.loads(await asyncio.to_thread(sys.stdin.readline))
@@ -55,11 +59,14 @@ async def worker(installation):
     async def close(item):
         async with asyncio.timeout(40):
             while not await item.close():await asyncio.sleep(.2)
-        assert item.removed and not item.lease_possible and not item.cleanup_error
-        assert await item.call('GET','/containers/'+item.name+'/json',allowed=(404,))
-        assert await item.call('GET','/networks/'+item.name,allowed=(404,))
-        assert item.channel is None or not item.channel.exists()
-        assert not any(row['consumer_id']==item.id for row in await storage.leases(installation))
+        if step.startswith('deadline'):
+            observations.append({'scenario':'close-state','step':step,'instance_id':item.id,
+                'removed':item.removed,'lease_possible':item.lease_possible,'cleanup_error':item.cleanup_error})
+        assert item.removed and not item.lease_possible and not item.cleanup_error,'managed_close_state'
+        assert await item.call('GET','/containers/'+item.name+'/json',allowed=(404,)),'managed_close_container'
+        assert await item.call('GET','/networks/'+item.name,allowed=(404,)),'managed_close_network'
+        assert item.channel is None or not item.channel.exists(),'managed_close_channel'
+        assert not any(row['consumer_id']==item.id for row in await storage.leases(installation)),'managed_close_lease'
     async def invoke(item,operation='read',name='record',status=200,**fields):
         result=await item.invoke({'operation':operation,'name':name,**fields},5)
         assert result['state']=='succeeded' and result['instance_available'],result
@@ -125,12 +132,25 @@ async def worker(installation):
             else:raise AssertionError('Acquisition invalide acceptée')
             assert refused.container is None;await close(refused)
         passed('Refus de stockage et échec du démarrage Docker sans bail abandonné')
-        item=await instance(identifier).start()
+        step='deadline-start';item=await instance(identifier).start()
+        step='deadline-invoke'
         result=await item.invoke({'operation':'write-sleep','name':'deadline','value':'before-timeout','ms':30000},2)
-        assert result['state']=='failed' and result['error']=='invocation_timeout' and result['handler_started']
-        await close(item);item=await instance(identifier).start()
-        assert (await invoke(item,name='deadline'))['value']=='before-timeout'
-        await close(item);passed('Deadline, destruction et conservation des écritures acquittées')
+        step='deadline-result'
+        observations.append({'scenario':'deadline-result','step':step,
+            'state':result.get('state') if result.get('state') in ('failed','succeeded') else 'other_state',
+            'error':result.get('error') if result.get('error') in ('invocation_timeout','cleanup_failed','storage_unavailable','runtime_unavailable','runtime_exited','runtime_protocol_timeout','memory_exceeded') else 'other_error',
+            'error_sha256':hashlib.sha256(str(result.get('error')).encode()).hexdigest(),
+            **{key:result.get(key) for key in ('invocation_id','instance_id','handler_started','instance_available','container_removed','elapsed_seconds')}})
+        assert result['state']=='failed' and result['error']=='invocation_timeout' and result['handler_started'],'managed_deadline_result'
+        step='deadline-first-close';await close(item)
+        step='deadline-recreate';item=await instance(identifier).start()
+        step='deadline-read';value=(await invoke(item,name='deadline'))['value']
+        observations.append({'scenario':'deadline-read','step':step,'matches_expected':value=='before-timeout',
+            'bytes':len(value.encode())if isinstance(value,str)else None,
+            'sha256':hashlib.sha256(value.encode()).hexdigest()if isinstance(value,str)else None})
+        assert value=='before-timeout','managed_deadline_persistence'
+        step='deadline-second-close';await close(item)
+        passed('Deadline, destruction et conservation des écritures acquittées');step='after-deadline'
         item=instance(identifier)
         await fault('pause_agent')
         starting=asyncio.create_task(item.start());await wait_for(lambda:item.lease_possible)
@@ -204,7 +224,13 @@ async def worker(installation):
         passed('Diagnostic CLI géré : configuration stdin, vraie invocation puis fermeture sur EOF')
         completed=True
     except BaseException as error:
-        emit({'failure':type(error).__name__+': '+str(error)[:2000]})
+        frames=[];trace=error.__traceback__
+        while trace:
+            frames.append({'file':Path(trace.tb_frame.f_code.co_filename).name,
+                'function':trace.tb_frame.f_code.co_name,'line':trace.tb_lineno});trace=trace.tb_next
+        failure={'type':type(error).__name__,'step':step,'frames':frames,
+            'message_sha256':hashlib.sha256(str(error).encode(errors='replace')).hexdigest()}
+        emit({'failure':failure})
     finally:
         try:await fault('restore_agent')
         except (ValueError,AssertionError):
@@ -232,7 +258,7 @@ async def worker(installation):
         except BaseException as error:cleanup_errors.append(type(error).__name__)
         emit({'report':{'completed':completed and not cleanup_errors,'cleanup':not cleanup_errors,
             'passed':len(checks),'failed':int(not completed or bool(cleanup_errors)),'skipped':0,
-            'checks':checks,'cleanup_errors':cleanup_errors,'installation_id':installation,'functions':functions}})
+            'checks':checks,'cleanup_errors':cleanup_errors,'failure':failure,'observations':observations,'installation_id':installation,'functions':functions}})
 
 
 def parent():

@@ -246,3 +246,13 @@ recoupement des gardes et127fonctions/35namespaces, configuration/référence et
 5982originaux conservés. Les trois modules des preuves de rétention sont relus
 sans toucher aux captures scellées. Tant que ce passage n’est pas entier et
 recoupé,078 reste[~] ; les limites propres du banc et095 restent distinctes.
+
+## Cinquième essai incomplet : diagnostic SLS-111
+
+Le worker6b215e89 au gel f7b1d2a /454sources est finalisé en échec : cinq
+campagnes /148groupes et trois prérequis, puis managed-storage après six
+sous-groupes. Suite ae1704fe et rapport ciblé61f05271 conservés ; unité arrêtée
+et client joint. Le nettoyage natif confirme les deux fonctions temporaires
+purgées, aucun consommateur ni travail restant, même nominal et5982originaux.
+SLS-111 porte le diagnostic avant correction ; aucun résultat complet et aucune
+nouvelle exécution entière ne sont acquis ici. Les148groupes restent exclus.

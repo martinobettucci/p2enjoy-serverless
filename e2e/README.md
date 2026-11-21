@@ -1,5 +1,21 @@
 # Qualification de la plateforme
 
+## Diagnostic du stockage géré — SLS-111
+
+Contrat : [MANAGED_STORAGE_REGRESSIONS](../docs/MANAGED_STORAGE_REGRESSIONS.md).
+Le cinquième passage complet078 s’est arrêté après six sous-groupes de
+managed-storage ; l’assertion précise n’est pas conservée. Le client ajoute
+étape, ligne/fichier/fonction sans locals, type/SHA de message, projection fixe
+du résultat deadline, états de fermeture et empreinte de la valeur relue.
+Les14groupes, la deadline2s, le sommeil30s et les fautes restent inchangés.
+
+Une exécution diagnostique complète est à réaliser sur les455sources figées
+et le vrai SPARK DEV : `python3 -B /srv/p2enjoy-serverless/e2e/managed-storage.py`
+comme root dans la cellule. Le rapport est runtime/managed-storage-proof.json.
+Aucun replay automatique ; un succès sans cause ne ferme pas111. Les39groupes
+ciblés/communs restent à qualifier après la correction établie. Aucun autre test
+pendant les suspensions et redémarrages réels de l’agent de stockage.
+
 ## Confirmation de restitution indépendante — SLS-110
 
 Contrat : [PUBLICATION_RECOVERY_GUARD_REGRESSIONS](../docs/PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md).

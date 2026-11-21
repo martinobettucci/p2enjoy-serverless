@@ -37,10 +37,10 @@ reste à terminer.
 Le [scope de régression complète des crons](docs/SCHEDULE_REGRESSIONS.md) est implémenté
 pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
 49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;
-rapports UUID figés, SSO frais et recoupement physique entre campagnes. Quatre essais
-antérieurs restent incomplets et conservés (0,272,313 et220groupes). Les préalables
-105 à110 ont leurs preuves propres ; un nouveau passage entier49/543 +18, sur
-454 sources figées, reste à qualifier. SLS-078 reste[~].
+rapports UUID figés, SSO frais et recoupement physique entre campagnes. Cinq essais
+antérieurs restent incomplets et conservés (0,272,313,220 et148groupes). Les préalables
+105 à110 ont leurs preuves propres ; SLS-111 instruit le dernier arrêt du stockage
+géré avant un nouveau passage entier49/543 +18. SLS-078 reste[~].
 
 Pour une campagne suivie indépendamment du terminal :
 `python3 -B e2e/schedules-worker.py start`, puis `status NOM` et `finish NOM`
