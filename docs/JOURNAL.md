@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 21 novembre2026 — rattachement075/113 précisé avant code
+
+Le précédent075prescrit déjà le titre neutre « Archive de la fonction » et
+le badge seul pour l’état ; la nouvelle capture le reconfirme. Le premier
+contrat113recouvrait ce titre : attribution corrigée,075reste son seul porteur,
+113neporte que la pagination périmée. Les deux défauts de lecture sont mineurs,
+ordre6avec la prochaine livraison de console ; aucun préalable nouveau à078.
+
+Lecture RO recoupée : titre piloté par route plutôt que row.purged_at ; compteur
+de page calculé depuis ancien state.data hors branche réussie. Pour113, choix
+du précédent Catalogue : navigation retirée pendant lecture/erreur, paramètres
+de reprise conservés, aucun fauxzéro, restitutionfocus sur ciblemontée. Tests
+et attentes du client à enrichir avant correction ; offline natif navigateur
+sans route/fulfill, latence CDP10s distincte conservée. Aucun code/testdéployé
+ou gel du worker changé.075/113restent ouverts et non qualifiés.
+
 ## 21 novembre2026 — états d’archives contradictoires, conversion en113
 
 Lecture des14captures fraîches storage-console-ui du sixième078 : fiche Purgée

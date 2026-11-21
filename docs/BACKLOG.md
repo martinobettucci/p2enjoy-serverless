@@ -69,7 +69,6 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
-| 1 | [SLS-113](#sls-113) États d’archives de stockage : titre et pagination en erreur | Corriger | `[ ]` | SLS-065 | [STORAGE_CONSOLE_PRESENTATION](STORAGE_CONSOLE_PRESENTATION.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -81,6 +80,7 @@ bloquée est sautée et son blocage est nommé.
 | 6 | [SLS-068](#sls-068) Favoris personnels | Développer | `[ ]` | SLS-067 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#favoris-personnels) |
 | 6 | [SLS-069](#sls-069) Renommage et suppression en masse | Développer | `[ ]` | SLS-067, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#opérations-en-masse) |
 | 6 | [SLS-075](#sls-075) Titre de la fiche d'archive après purge | Corriger | `[ ]` | SLS-065 | cette unité |
+| 6 | [SLS-113](#sls-113) Pagination des archives pendant erreur et chargement | Corriger | `[ ]` | SLS-065 | [STORAGE_CONSOLE_PRESENTATION](STORAGE_CONSOLE_PRESENTATION.md) |
 | 6 | [SLS-102](#sls-102) Espacement des quantités du manuel du testeur | Corriger | `[ ]` | SLS-062 | cette unité |
 | 7 | [SLS-073](#sls-073) Monitoring historique et alertes | Développer | `[ ]` | SLS-072, SLS-078 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#monitoring-et-alertes) |
 | 8 | [SLS-084](#sls-084) Runtimes supplémentaires | Développer | `[ ]` | SLS-083 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
@@ -1739,6 +1739,11 @@ de zéro révision et zéro Mio. Source : `web/src/storage.jsx:96` ; capture con
 `storage-ui-purged-mobile.jpg`, empreinte
 `ae744c550e6e636e91163047b3768840f310d943d728a621102bee6121fa2285`. Le badge et le
 reçu sont corrects.
+Reconfirmation au gel9e1da70/image433da150 pendant le sixième078 : capture
+storage-ui-purged-mobile.jpg SHA7c91c06207213fa4c8d830d83bf29b9a001f8c103f535a1adbc14c987af33a93.
+Ce constat reste075 ; la pagination périmée distincte porte113, sans duplication.
+Le titre neutre et le badge seul restent le choix prescrit, sans titre dynamique.
+
 
 Critères d'acceptation :
 
@@ -3190,29 +3195,29 @@ référence/configuration/5982originaux conservés. Les39gérés/communs satisfo
 attribuées/non qualifiées ; la campagne entière078 reste due.
 
 <a id="sls-113"></a>
-## SLS-113 — États d’archives dans la console de stockage
+## SLS-113 — Pagination des archives pendant erreur et chargement
 
-Statut : [ ] — deux incohérences constatées visuellement sur433da150 pendant
-le sixième passage078 au gel9e1da70 ; aucun correctif ni nouveau test appliqué.
-Nature : Corriger. Ordre :1. Dépend de :SLS-065.
-Contrat : [STORAGE_CONSOLE_PRESENTATION](STORAGE_CONSOLE_PRESENTATION.md).
+Statut : [ ] — pagination périmée constatée visuellement sur433da150 pendant
+le sixième078 au gel9e1da70 ; aucun correctif ni nouveau test appliqué.
+Nature : Corriger. Ordre :6, avec la prochaine livraison de console.
+Dépend de :SLS-065. Contrat : [STORAGE_CONSOLE_PRESENTATION](STORAGE_CONSOLE_PRESENTATION.md).
 
-- [ ] SLS-113.1 La fiche purgée ne conserve pas un titre promettant des archives
-  conservées ; titre, badge, compteurs et date de purge décrivent le même état,
-  desktop et mobile, sans perdre le contexte de l’objet ni son reçu.
-- [ ] SLS-113.2 Pendant une erreur du catalogue, aucun nombre de pages antérieur
-  n’est présenté comme actuel ; erreur, reprise, filtre et contexte utiles
-  restent lisibles, commandes désactivées et aucun faux total à zéro.
-- [ ] SLS-113.3 Causes et décision persistées avant code ; véritables purge et
-  panne de consultation reproduites depuis l’accueil et le SSO réel. Les10groupes
-  storage-console-ui, leurs nouvelles assertions discriminantes et25communs
-  passent sur le code déployé, sans mock/rejeu/skip ; captures fraîches inspectées,
-  manuel et ressources/nettoyages/configuration/référence/originaux recoupés.
+- [ ] SLS-113.1 Navigation chiffrée retirée hors lecture réussie, comme dans le
+  catalogue global ; aucune ancienne page ni faux totalzéro présentés en cours
+  de lecture ou d’erreur. Erreur et relecture restent lisibles.
+- [ ] SLS-113.2 Filtre et page demandée conservés pour la reprise ; résultat,
+  total et recalage relus depuis la vraie réponse, focus sur un élément monté,
+  desktop/mobile et retour après panne sans données périmées présentées à jour.
+- [ ] SLS-113.3 Cause/décision persistées avant code ; mode horsconnexion natif
+  navigateur, requête réellement refusée puis reprise online, sans interception
+  ni serveur de substitution. Les10groupes storage-console-ui enrichis et25communs
+  passent sur code déployé ; captures fraîches inspectées, manuel et ressources/
+  nettoyages/configuration/référence/originaux recoupés, aucune faute retirée.
 
-Constats mesurés : storage-ui-purged-mobile.jpg SHA7c91c06207213fa4c8d830d83bf29b9a001f8c103f535a1adbc14c987af33a93
-montre « Archives conservées » avec badge « Purgée » et compteurs nuls.
-storage-ui-pagination-error.jpg SHA569351743565ed9243f8ce4b3822ad3b6f8fbe63b76e5f9921e69eeaf01ec7c3
+Constat : storage-ui-pagination-error.jpg
+SHA569351743565ed9243f8ce4b3822ad3b6f8fbe63b76e5f9921e69eeaf01ec7c3
 montre « Page1sur161 » pendant l’erreur, sans cartes ni total, commandes grisées.
 Rapport storage-console-ui3f346779432b5dd2cd3e17a135ab44a4d27dd5ecb1e65777df381bfe816f37d3,
-10groupes passés et14captures fraîches ; ces succès ne qualifient pas les deux
-corrections encore absentes. Aucun défaut backend n’est déduit des seules images.
+10groupes passés et14captures fraîches. La fiche titrée « Archives conservées »
+après purge était déjà075 et y reste attribuée. Aucun défaut backend n’est
+inféré des seules images ; aucune correction075/113 n’est encore qualifiée.

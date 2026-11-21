@@ -1,61 +1,70 @@
-# États d’archives cohérents dans la console de stockage
+# Pagination des archives cohérente avec la lecture
 
-Contrat de [SLS-113](BACKLOG.md#sls-113), découvert pendant la lecture visuelle
-du sixième passage complet078. L’unité porte deux présentations contradictoires,
-aucune attribution de perte de données ou de défaut d’ACL sur une capture seule.
+Contrat de [SLS-113](BACKLOG.md#sls-113), découvert pendant le sixième passage SLS-078.
+La fiche purgée titrée « Archives conservées » appartient déjà à
+[SLS-075](BACKLOG.md#sls-075), dont le choix neutre « Archive de la fonction »
+reste autoritatif.SLS-113 porte seulement la pagination ; aucun changement d’API,
+de droits, de commande de stockage ou de rétention n’est impliqué.
 
-## Constats conservés
+## Constat et cause
 
-Image433da150, gel9e1da704c230dcd05c414c4e1013fa882c8fda44,
-run833b57eff42c4b429d06a86161e5fc5b, phase storage-console-ui :10groupes réussis,
-14JPEG déclarés et ouverts individuellement. Rapport SHA
+Image 433da150, gel 9e1da704c230dcd05c414c4e1013fa882c8fda44,
+run 833b57eff42c4b429d06a86161e5fc5b, phase storage-console-ui : 10 groupes réussis,
+14 JPEG déclarés et ouverts. Rapport SHA
 3f346779432b5dd2cd3e17a135ab44a4d27dd5ecb1e65777df381bfe816f37d3.
-Images sous072-storage-console-ui-result :
+storage-ui-pagination-error.jpg,1440×1000,
+SHA569351743565ed9243f8ce4b3822ad3b6f8fbe63b76e5f9921e69eeaf01ec7c3 :
+cartes et total retirés pendant l’erreur mais « Page 1 sur 161 » antérieure
+reste présentée sans indication de fraîcheur ; commandes grisées.
+Dates source dans 1795299314559953009→1795299424106362162.
 
-- storage-ui-purged-mobile.jpg,390×1730,
-  SHA7c91c06207213fa4c8d830d83bf29b9a001f8c103f535a1adbc14c987af33a93 :
-  titre « Archives conservées », badge « Purgée », zéro révision/espace code,
-  aucun volume et purge datée. Le titre contredit l’état détaillé.
-- storage-ui-pagination-error.jpg,1440×1000,
-  SHA569351743565ed9243f8ce4b3822ad3b6f8fbe63b76e5f9921e69eeaf01ec7c3 :
-  cartes et total retirés pendant l’erreur ; « Page1sur161 » reste affiché,
-  sans indication de fraîcheur, bien que les commandes soient grisées.
+Cause lue : web/src/storage.jsx, composant Archives. Le début de lecture et
+le catch conservent state.data ; cartes/total sont dans la branche réussie,
+mais la navigation utilise encore cet ancien total en dehors de cette branche.
+StorageDetail et son titre sont la cause distincte de SLS-075 ; ne pas les attribuer à SLS-113.
+Le client archive() et son assertion de focus encodent aujourd’hui ce titre
+erroné ;SLS-075 devra corriger ces attentes sans fermer ses critères sur ces images.
 
-Les dates source sont dans la phase1795299314559953009→1795299424106362162.
-Ce constat ne modifie pas le code ni les assertions du passage078 en cours.
-Il est enregistré dans un checkout documentaire séparé pour garder le gel.
+## Décision avant code
 
-## Instruction avant correction
+Retirer la navigation chiffrée pendant chargement et erreur, en la rendant
+uniquement avec les données lues avec succès. Le catalogue global et ses
+sélecteurs parents utilisent déjà ce principe ; les adresses retirent aussi
+les anciennes données. La liste d’observations qui conserve un ancien total
+ne sert pas de précédent sûr. Aucun élargissement de SLS-113 à une autre vue non
+instruite n’est décidé ; tout défaut distinct rejoint son unité avant code.
 
-Lire les README racine/web/e2e, les deux design systems, CONSOLE_STORAGE,
-manual et les composants/clients qui produisent ces vues. Rechercher les
-précédents de titre selon état et de pagination pendant erreur/chargement.
-Identifier les causes exactes puis persister le choix réversible et son motif
-avant le code. Ne pas changer les états API ou les droits pour résoudre un libellé.
-
-## Résultat attendu
-
-La fiche distingue conservation et purge sans promesse contradictoire ; les
-métadonnées historiques et le reçu restent consultables. La pagination en erreur
-n’affirme pas un nombre de pages courant non obtenu. Conserver le filtre, la
-possibilité de relire et le contexte utile ; ne pas remplacer l’inconnu par un
-faux zéro. Reprendre ensuite avec la pagination réellement renvoyée par le serveur.
-Appliquer le même sens desktop/mobile, avec titres et focus cohérents.
+Conserver le filtre et la page demandée en mémoire pour Réessayer et garder le recalage
+de page vide existant. Ne jamais présenter l’inconnu comme un zéro actuel.
+La navigation revient avec le nombre réellement renvoyé. Le H1 reste monté :
+la restitution de focus après changement de page/filtre et après erreur garde
+une cible existante ; le bouton de relecture reste utilisable au clavier.
+L’option de commandes grises avec un résumé indisponible est écartée ici au
+profit du précédent du catalogue, plus simple et sans nombre ambigu.
 
 ## Preuves requises
 
-Depuis l’accueil, SSO réel puis navigation souris/clavier, créer des fixtures
-originales par les API, supprimer/purger réellement et provoquer la vraie panne
-de consultation selon le mécanisme natif du client existant. Ajouter des
-assertions qui discriminent chacun des deux défauts, sans retirer un des10groupes
-ni modifier leurs fautes, volumes ou nettoyages. Aucune interception réseau,
-substitution, mock, horloge fausse ou succès conditionnel.
+Depuis l’accueil et le SSO réel, garder les10groupes storage-console-ui,
+leurs vrais objets, volumes et fautes. Groupe 10 : le mode natif du contexte
+navigateur passe offline via setOffline(true), puis Suivante provoque un vrai
+fetch refusé. Aucun route/fulfill ni serveur de substitution. Vérifier absence
+des anciennes cartes, du total et de navigation chiffrée, filtre conservé et
+focus sur un élément monté. Capturer l’erreur desktop/mobile. Revenir online,
+Réessayer et comparer page/total/identifiants à la réponse API réelle offset5,
+sans fixer 161 ; capturer la reprise responsive. La latence CDP de 10 s du groupe 5
+reste une faute distincte inchangée ; elle ne remplace pas cette panne.
 
-Passage entier storage-console-ui10 puis25communs, sur sources/image synchronisées
-et gelées ; tous les JPEG frais ouverts individuellement, dont les deux états
-corrigés desktop/mobile. Recouper les purges, baux/chemins/processus, reçus,
-manuel canonique affiché, backend/web servis, configuration/référence et5982
-originaux. Le compte reste35groupes si les discriminants enrichissent les groupes
-existants ; tout nouveau groupe distinct est annoncé avant son exécution.
-Une preuve manquante garde113ouverte. Le passage078 actuel conserve son époque ;
-il ne qualifie ni ces changements absents ni la campagne globale095.
+SLS-075 garde ses tests propres : titre neutre/badge Conservée, Purge en cours et
+Purgée à observer réellement, parents et reçu consultables ; ne pas revendiquer
+un état transitoire non capturé. Actualiser archive() et le focus après purge,
+conserver le même H2 référencé et compléter desktop/mobile. Toute coordination
+d’une livraison de console commune conserve les critères et porteurs distincts,
+sans compter deux fois un groupe partagé.
+
+Pour SLS-113 : 10 groupes ciblés et 25 communs sur code réellement déployé/sources synchronisées,
+sans mock, skip ou rejeu. Tous les JPEG frais ouverts individuellement, manuel
+canonique servi, backend/web et nettoyages/ressources/configuration/référence/
+5 982 originaux recoupés. Le compte reste de 35 si les discriminants enrichissent les
+groupes existants ; un groupe distinct serait annoncé avant exécution.
+SLS-113 reste non implémentée ; le passage SLS-078 figé conserve son époque et ne qualifie
+aucune de ces corrections absentes ni la clôture globale SLS-095.
