@@ -40,3 +40,32 @@ communes fraîches ouvertes individuellement, manuel18/74,38backend/quatreweb
 et état natif rapprochés. Vérifier nettoyage physique de l’installation isolée,
 terminaison des clients/helpers, mêmes services/images, référence/configuration
 et5982originaux conservés. La suite078 reste entièrement à rejouer49/543 +18.
+
+## Décision de diagnostic du 21 novembre 2026, avant code
+
+Le recoupement natif après échec confirme les deux tombstones purged, aucun
+volume/bail/chemin, conteneur ou réseau appartenant à cette installation, aucun
+worker/script ni répertoire de travail temporaire. Compteurs au repos, mêmes
+services/images, référence/configuration et5982originaux conservés.
+
+La source montre plusieurs assertions possibles dans le septième groupe :
+résultat timeout/handler_started, deux fermetures complètes, relecture de la
+valeur écrite. Ni le résultat du timeout ni la ligne de l’exception ne sont
+conservés. La deadline commence au dispatch et inclut import/enfant ; son délai
+2s ne prouve pas à lui seul que le handler a écrit. Aucune cause précise ne
+peut être attribuée à cet essai et aucune durée n’est changée sur cette hypothèse.
+
+Décision réversible : ajouter au seul client un diagnostic allowlisté, avant
+assertions. Conserver étape, fichier/ligne/fonction de traceback sans locals,
+type d’exception et SHA du message ; projeter uniquement identités, états/codes
+fixes, handler_started, durée et indicateurs de nettoyage pour le passage
+deadline, plus le booléen de correspondance de la relecture. Aucun log, corps,
+configuration ou secret applicatif recopié. Le rapport terminal garde cette
+observation et sa cause, au-delà de la seule sortie standard.
+
+Une seule exécution diagnostique complète des14groupes est autorisée après
+synchronisation/gel, sans rejeu automatique. Les six groupes antérieurs restent
+exclus ; si le défaut ne se reproduit pas, le succès ne prouve aucune cause ni
+correction et111reste[~]. Toute correction fonctionnelle attend le diagnostic,
+sa décision persistée et ses preuves propres ; les39groupes de qualification
+restent dus après correction établie. Aucun changement produit/UI/image.

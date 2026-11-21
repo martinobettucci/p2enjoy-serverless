@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — diagnostic111 borné avant code
+
+Les deux fonctions de l’installation4ea4aefb sont purgées : zéro volume/bail/
+chemin, conteneur/réseau, worker/script ou travail temporaire. Compteurs0,
+5982originaux et nominal conservés. Le groupe deadline contient plusieurs
+assertions muettes ; ligne et résultat intermédiaire absents. Hypothèse de
+délai insuffisant pour démarrer distincte du fait d’échec ; aucune attribution.
+
+Décision dans MANAGED_STORAGE_REGRESSIONS : diagnostic sûr étape/traceback
+sans locals, type/SHA de message et projection fixe du résultat deadline et
+des nettoyages, avant assertions. Durée2s et toutes les assertions restent
+inchangées. Un seul passage14 diagnostique après gel ; un éventuel succès sans
+cause établie ne ferme pas111. Qualification39 encore due après correction.
+
 ## 21 novembre 2026 — cinquième essai078 arrêté, SLS-111 inscrite
 
 Worker6b215e89 au gel f7b1d2a /454sources /b452 : cinq campagnes et148groupes,
