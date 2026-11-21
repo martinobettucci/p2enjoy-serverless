@@ -44,3 +44,43 @@ manuel18/74 et octets servis recoupés ; dix fonctions purgées physiquement,
 parents supprimés logiquement et jetons révoqués. Gardes/helpers/mutateurs et
 consommateurs effectivement terminés, compteurs au repos, mêmes services/images,
 référence/configuration et5982originaux conservés. Une preuve manquante garde110[~].
+
+## Cause native et décision du 21 novembre 2026, avant code
+
+Le SHA du message correspond exactement à independent_receipt_missing. Le
+journal natif et les fichiers root privés de la garde validating retrouvent
+un vrai reçu indépendant healthy/observer_gone/stop_mutator_joined, avant le
+reçu nominal du finally. Les programmes figés correspondent aux littéraux
+RESTORE/KILL_CONTROL du gel8351687 ; aucune modification ou horloge substituée.
+
+Sur ce même SPARK : armement→départ du service45,176514s ; armement→reçu
+indépendant51,713680497s ; fichier de coupure→reçu50,495795658s. Le reçu nominal
+vient0,689411645s après l’indépendant et voit déjà le contrôle en marche.
+Les unités finissent inactives/success. Le polling ancien n’a pas conservé ses
+instants : aucune dernière lecture ou échéance client précise n’est reconstruite.
+La garde a donc réellement réussi ; sa fenêtre de confirmation de50s ne couvre
+pas les durées autorisées par le protocole.
+
+Décision bornée : exposer au client, dans armed et l’identité de cette garde,
+les trois bornes effectives : délai du timer45s, alarme existante du restaurateur
+180s, sonde evidence10s. Calculer l’enveloppe de lecture45+180+10=235s ; elle
+inclut volontairement tout le délai du timer, même si une partie est déjà écoulée
+à la perte. Vérifier que l’alarme annoncée correspond au programme figé et utiliser
+la même constante pour armer le timer. Ne changer ni les octets RESTORE/KILL_CONTROL,
+ni leurs alarmes, ni le verrou hérité, ni Docker/start/santé, ni le déclenchement45s.
+
+L’attente de confirmation utilise performance.now, une échéance monotone et des
+sondes SSH bornées à10s au plus et au temps restant. Persister protocole, nombre
+de sondes, durées monotones, reçus observés et état d’attente avant assertions,
+sans en-tête, corps d’upload ou identifiant secret. Un reçu nominal ne satisfait
+jamais le quatrième groupe : exiger independent, observer_gone, coupure liée,
+santé, identité et fin réelle des unités. Le secours conserve sa provenance et
+son reçu au rapport ; il assure le nettoyage sans acquitter l’indépendance.
+Aucun nouveau type de succès ni rejeu ; les pannes propres non provoquées restent
+les preuves résiduelles déjà nommées par le client et SLS-074.
+
+Le relevé après échec retrouve compteurs au repos, dix migrations/intégrités/FK,
+mêmes services/images, configuration et5982originaux conservés. Le recoupement
+physique confirme les dix purges, configuration et secrets propres effacés,
+ressources absentes et reçus corrélés, au-delà du drapeau cleanup. Rejouer ensuite les
+quatre groupes et25communs, sans ajouter les trois groupes de l’essai incomplet.

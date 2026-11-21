@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — cause110 recoupée et décision avant code
+
+Le message est independent_receipt_missing. La garde validating a réellement
+réussi : service lancé45,176514s après armement, reçu indépendant à51,713680497s,
+soit50,495795658s après le fichier de coupure ; nominal du finally0,689411645s
+plus tard, contrôle déjà en marche. Programmes figés exacts et unités inactives/
+success. Aucun instant de polling ancien reconstruit. Compteurs0,5982originaux,
+configuration/référence et mêmes services/images préservés.
+
+Décision dans PUBLICATION_RECOVERY_GUARD_REGRESSIONS : transmettre les bornes
+réelles45/180/10 et calculer235s, attente monotone et sondes plafonnées au temps
+restant, observations/reçus persistés avant assertions. Programme de restauration,
+alarme, timer45s, protections/verrou et SIGKILL inchangés. Un secours ne remplace
+pas un reçu indépendant ; sa provenance reste conservée. Quatre ciblés et25
+communs à qualifier après code ; aucune correction produit présumée.
+
 ## 21 novembre 2026 — quatrième essai078 arrêté, SLS-110 inscrite
 
 Worker6c3a1e35 au gel8351687 / 453 sources / b452 : onze campagnes et220groupes,

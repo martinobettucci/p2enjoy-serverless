@@ -3101,7 +3101,7 @@ Statut : [~] — quatrième groupe publication-recovery interrompu au gel8351687
 Nature : Corriger. Ordre :1, préalable au nouveau078.
 Contrat : [PUBLICATION_RECOVERY_GUARD_REGRESSIONS](PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md).
 
-- [ ] SLS-110.1 Échec scellé et état natif recoupés ; reçus, échéances et cause
+- [x] SLS-110.1 Échec scellé et état natif recoupés ; reçus, échéances et cause
   instruits avant décision, sans assimiler timeout client et panne de garde.
 - [ ] SLS-110.2 Décision persistée puis correction bornée sans retirer aucun
   des quatre groupes, coupe, helper perdu, garde ou contrôle physique.
