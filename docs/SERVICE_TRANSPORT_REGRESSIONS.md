@@ -34,3 +34,42 @@ services/images, configuration et5982artefacts antérieurs conservés. Toute
 preuve manquante garde108[~]. Après sa livraison,078 requiert toujours un
 passage entier49/543+18 à un nouveau gel ; les313groupes de cet essai restent
 dans leur époque distincte et ne sont pas réutilisés comme nouveau total.
+
+## Cause native et décision du21novembre2026
+
+Le relevé RO du même worker retrouve l’unique fonction de la relance échouée :
+une publication terminale avec hash conservé, default_code_hash_at_publication
+NULL, first_promoted_atNULL, zéro audit function.version_promote et aucune
+invocation réservée. Elle est ensuite purgée par le finally du client. Le flux
+source confirme que startDeployment lance seulement adapter deploy et que
+la ligne146 appelle immédiatement sans tag. Le code courant refuse cette
+absence de cible avec function_not_deployed. Le statut409 ancien est observé ;
+son corps n’était pas conservé et n’est pas reconstruit comme observation.
+
+Décision avant code : garder la CLI deploy pilote. Dans chacune des deux
+relances explicites, conserver le résultat publié, le hash et l’alias, puis
+relire fonction/catalogue et invoquer sans tag pour vérifier le vrai409 avant
+promotion. Exécuter ensuite la vraie commande adapter promote, avec le même
+jeton de déploiement, hash complet et ETag relu par cette CLI. Vérifier la
+cible, l’alias et le résultat de promotion, puis invoquer le même endpoint
+sans tag en200, en contrôlant le hash de réponse, la variable commune et
+l’empreinte du secret réellement transmis au handler.
+
+Cette promotion appartient au parcours explicite de réparation après issue
+inconnue ; elle ne fait pas partie de la commande coupée. Les deux GET et
+l’unique tentative de mutation de cette dernière doivent toujours produire
+exactement trois connexions HTTPS natives, sans rejouer ni publier. La
+promotion ne doit pas augmenter le compteur de mutations de configuration
+commune, qui reste1 dans before et2 dans after.
+
+Les cinq groupes existants restent les mêmes : observateur perdu ; relance
+before et son groupe parent de perte avant traitement ; relance after et
+son groupe parent après commit. Leurs sous-actions ne deviennent pas des
+groupes supplémentaires. Les SIGKILL, gardes, strace sans buffersTLS et
+restaurations conservent leurs discriminants. Les observations de résultat
+CLI, connexions, pilote/refus et promotion sont persistées avant assertions,
+après exclusion des valeurs privées ; le rapport terminal conserve son
+schéma et n’annonce cleanup/completed qu’après la fin des ressources.
+
+Les dix autres clients sont inscrits dans109 avant traitement.108 ne les
+modifie pas et ne ferme pas leur qualification, ni celle de078.

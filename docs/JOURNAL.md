@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 21 novembre2026 — décision108 avant code
+
+Le relevé natif du worker9c509830 confirme publication sans promotion,
+aucune invocation, puis purge. La relance CLI appelle sans tag immédiatement
+après deploy pilote. Décision : observer le pilote et son vrai409, choisir
+la cible avec la vraie CLI promote/même jeton, puis invoquer en200 et
+recouper hash/alias/valeurs. Les trois connexions de la commande coupée et
+les compteurs1/2 de mutation commune restent inchangés. Cinq groupes,
+observations persistées avant assertions,30groupes à qualifier.
+
 ## 21 novembre2026 — audit du reste du socle et unité109 inscrite
 
 Le recoupement108 retrouve une fonction publiée mais jamais promue :

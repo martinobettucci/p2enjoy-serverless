@@ -3056,7 +3056,7 @@ Statut : [~] —409 réel là où le client attend200 au gel60a20da.
 Nature : Corriger. Ordre :1, préalable à078.
 Contrat : [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md).
 
-- [ ] SLS-108.1 Échec et worker finalisé conservés ; cause et cinq groupes
+- [x] SLS-108.1 Échec et worker finalisé conservés ; cause et cinq groupes
   rapprochés des contrats/identités actuels avant décision.
 - [ ] SLS-108.2 Client raccordé sans supprimer faute, observateur, garde,
   transport CLI ou vérification réelle ; décision persistée avant code.
