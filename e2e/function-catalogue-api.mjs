@@ -1,7 +1,10 @@
+// @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#lecture-et-périmètre
 // @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // Real management API, real adapter publication, Docker invocation and public purges.
 import assert from 'node:assert/strict';
+import {promotePublishedFunction} from './promotion-fixtures.mjs';
 import {randomUUID} from 'node:crypto';
 import {mkdir,mkdtemp,readFile,writeFile,cp,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
@@ -119,9 +122,12 @@ try{
     for(const version of ['a','b']){
       await writeFile(path.join(work,'revision.json'),JSON.stringify({name:version}));
       const result=await run('python3',['-B','-m','adapter','deploy','--config',path.join(work,'serverless.yml'),'--service',a.id],{cwd:root,timeout:300000,env:{...process.env,P2_SERVERLESS_URL:base,P2_SERVERLESS_TOKEN:full}});
-      assert(!result.stdout.includes(secret)&&!tokens.some(v=>result.stdout.includes(v)));const published=JSON.parse(result.stdout);assert(published.completed);revisions.push(published.results[0].revision_id);
+      assert(!result.stdout.includes(secret)&&!tokens.some(v=>result.stdout.includes(v)));const published=JSON.parse(result.stdout);assert(published.completed);const publication=published.results[0],before=await query({q:functions[0].id});revisions.push(publication.revision_id);
+      assert.equal(before.items[0].revision_id,revisions.length===1?null:revisions.at(-2));assert.equal(before.items[0].state,revisions.length===1?'draft':'published');
+      observations.push({scenario:'catalogue-before-promotion',version,publication,default_catalogue:before});
+      await promotePublishedFunction(api,functions[0].id,publication,observations);
       const page=await query({q:functions[0].id,state:'published'});assert.equal(page.total,1);assert.equal(page.items[0].revision_id,revisions.at(-1));
-      const response=await caller.get('/invoke/'+functions[0].id,{headers:{'X-Serverless-Token':read}});assert.equal(response.status(),200);assert.equal((await response.json()).revision,version);
+      const response=await caller.get('/invoke/'+functions[0].id,{headers:{'X-Serverless-Token':read}});assert.equal(response.status(),200);assert.equal((await response.json()).revision,version);assert.equal(response.headers()['x-serverless-code-hash'],publication.code_hash);
     }
     const current=await api('/api/functions/'+functions[0].id);await api(`/api/functions/${current.id}/rollback`,{method:'POST',body:{revision_id:revisions[0]},headers:{'If-Match':String(current.updated_at)}});
     assert.equal((await query({q:current.id})).items[0].revision_id,revisions[0]);

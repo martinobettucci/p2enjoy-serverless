@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — clients SLS-109 raccordés, qualification à produire
+
+Les dix préparations portent la référence109 et conservent leurs 81 groupes.
+Aide API explicite séparée, catalogue CLI du pilote comparé avec version=HASH,
+cibles promues au point de préparation et révisions canoniques utilisées pour
+les fautes d’artefact. Les adresses UI choisissent le hash disponible sur la
+carte ; le stockage UI confirme la promotion au clavier avant ses écritures.
+Aucun produit, helper de faute, packaging commun ou legacy003 modifié.
+Syntaxe JS/Python et diff conformes ; index453 avec contrat109 et nouvelle aide.
+La revue statique relève une lecture trop précoce du catalogue stockage UI :
+fermeture de modale avant fin de l’upload. L’attente du vrai PUT est désormais
+armée avant confirmation et son 200 précède la lecture. Revue finale conforme ;
+qualification106 sur code réellement synchronisé encore nécessaire.
+
 ## 21 novembre 2026 — décisions des dix préparations SLS-109
 
 Les dix clients, cinq contrats et aides de préparation sont rapprochés, avec

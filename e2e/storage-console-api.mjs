@@ -1,6 +1,9 @@
+// @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md
 // @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#preuves-attendues
 import assert from 'node:assert/strict';
+import {promotePublishedFunction} from './promotion-fixtures.mjs';
 import {randomUUID} from 'node:crypto';
 import {readFile,writeFile,rename,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {request} from 'playwright';
@@ -9,11 +12,11 @@ import {promisify} from 'node:util';
 import {publicationArchive} from './publication-fixtures.mjs';
 
 const base='https://serverless.lelabs.tech',output=new URL('../.local/e2e/',import.meta.url);
-const report=new URL('storage-console-api.json',output),checks=[],cleanupErrors=[],functions=[],services=[],namespaces=[],operations=[],pending=[],refusalEvidence=[];
+const report=new URL('storage-console-api.json',output),checks=[],cleanupErrors=[],functions=[],services=[],namespaces=[],operations=[],pending=[],refusalEvidence=[],publicationEvidence=[];
 const run=promisify(execFile),ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
 const prefix='storage-console-api-'+randomUUID().slice(0,8),secret='storage-private-'+randomUUID();
 let admin,caller,session,namespace,work,completed=false,cleanup=false;
-async function save(){const temporary=new URL('storage-console-api.pending',output);const campaigns=Object.fromEntries(namespaces.map(ns=>[ns.id,functions.filter(fn=>services.some(service=>service.id===fn.service_id&&service.namespace_id===ns.id)).map(fn=>fn.id)]));await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),campaigns,operation_ids:operations,refusal_evidence:refusalEvidence},null,2)+'\n');await rename(temporary,report);}
+async function save(){const temporary=new URL('storage-console-api.pending',output);const campaigns=Object.fromEntries(namespaces.map(ns=>[ns.id,functions.filter(fn=>services.some(service=>service.id===fn.service_id&&service.namespace_id===ns.id)).map(fn=>fn.id)]));await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),campaigns,operation_ids:operations,refusal_evidence:refusalEvidence,publication_evidence:publicationEvidence},null,2)+'\n');await rename(temporary,report);}
 function nativeInspectionCommand(fn,mode='inspect-api-refusals',namespaceId=namespace.id){return run('ssh',[...ssh,'python3','-B','/srv/p2enjoy-serverless/e2e/storage-command-faults.py',mode,fn.id,namespaceId],{timeout:30000,maxBuffer:1024*1024});}
 async function inspectRefusals(fn){return JSON.parse((await nativeInspectionCommand(fn)).stdout);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}}
@@ -29,7 +32,7 @@ async function until(action,message){const end=Date.now()+120000;while(Date.now(
 async function current(fn){return call(`/api/functions/${fn.id}`);}
 async function token(service,rights,extra={}){return call(`/api/services/${service.id}/tokens`,{method:'POST',status:201,body:{name:randomUUID(),rights,...extra}});}
 async function create(service,name,enabled=true){const row=await call(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'storage-console.handler',cpu:.2,memory_mib:256,idle_seconds:30,timeout_seconds:10,storage:{data:{enabled,quota_mib:8},cache:{enabled,quota_mib:8}}},configuration:{environment:{PUBLIC_LABEL:'storage'},secrets:{QUALIFICATION_SYNTHETIC_SECRET:secret}}}});functions.push(row);return row;}
-async function publish(fn,archive){const row=await current(fn);const candidate=await call(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:archive.handler}});await call(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes:archive.bytes});return candidate;}
+async function publish(fn,archive){const row=await current(fn);const candidate=await call(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:archive.handler}});return call(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes:archive.bytes});}
 async function command(fn,kind,credential,extra={}){
   const row=await call(kind==='purge'?`/api/archives/${fn.id}`:`/api/functions/${fn.id}`),identifier=randomUUID();operations.push(identifier);
   const options={method:'POST',status:[200,202],token:credential,body:{operation_id:identifier,...(kind==='purge'?{confirm_name:row.name}:{})},headers:{'If-Match':String(row.updated_at)},...extra};
@@ -74,7 +77,8 @@ try {
     await call(`/api/archives/${fn.id}/purge`,{method:'POST',body:{operation_id:randomUUID(),confirm_name:fn.name},headers:{'If-Match':String(fn.updated_at)},status:409});
   });
   await check('Vrais fichiers Docker : cache vidé, données et révision conservées',async()=>{
-    candidate=await publish(fn,archive);await publish(peer,archive);
+    candidate=await publish(fn,archive);const neighbor=await publish(peer,archive);
+    await promotePublishedFunction(call,fn.id,candidate,publicationEvidence);await promotePublishedFunction(call,peer.id,neighbor,publicationEvidence);
     const before=await invoke(fn,{data:'permanent-record',cache:'old-cache'});await invoke(peer,{data:'peer-data',cache:'peer-cache'});
     const observed=await call(`/api/functions/${fn.id}/storage`);assert(observed.storage.volumes.cache.quota_bytes===8*1024**2);
     cleared=await command(fn,'clear-cache',update.token);const done=await terminal(cleared.identifier,update.token);
@@ -175,7 +179,7 @@ try {
     const replacementNamespace=await call('/api/namespaces',{method:'POST',status:201,body:{name:namespace.name}});namespaces.push(replacementNamespace);
     const replacementService=await call(`/api/namespaces/${replacementNamespace.id}/services`,{method:'POST',status:201,body:{name:service.name}});services.push(replacementService);
     const replacement=await create(replacementService,peer.name),replacementRead=await token(replacementService,['read']);
-    await publish(replacement,archive);
+    const freshPublication=await publish(replacement,archive);await promotePublishedFunction(call,replacement.id,freshPublication,publicationEvidence);
     assert.notEqual(replacementNamespace.id,namespace.id);assert.notEqual(replacementService.id,service.id);assert.notEqual(replacement.id,peer.id);
     const fresh=await call(`/invoke/${replacement.id}`,{token:replacementRead.token});assert.equal(fresh.data,null);assert.equal(fresh.cache,null);
     await call(`/invoke/${replacement.id}`,{method:'POST',token:replacementRead.token,body:{data:'replacement-data',cache:'replacement-cache'}});

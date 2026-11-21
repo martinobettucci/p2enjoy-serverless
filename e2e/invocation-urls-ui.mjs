@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#console-et-domaine-canonique | docs/DESIGN_SYSTEM_APP.md
@@ -15,7 +17,7 @@ const base='https://serverless.lelabs.tech',out=new URL('../.local/e2e/',import.
 const prefix='invocation-addresses-ui-'+randomUUID().slice(0,8);
 const functionName='function-with-long-name-for-invocation-address-observation-'+randomUUID().slice(0,4);
 const checks=[],captures={},faults=[],cleanupErrors=[],observations=[];
-let browser,context,page,namespace,service,fn,session,token,work,completed=false,purged,failure;
+let browser,context,page,namespace,service,fn,session,token,work,completed=false,purged,failure,codeHash;
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}}
 async function capture(name){
   if(name!=='manual-mobile')await page.evaluate(()=>scrollTo(0,0));
@@ -40,7 +42,7 @@ async function ready(){await page.getByRole('heading',{name:'Adresses d’appel'
 async function fits(){assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'page_overflow');}
 async function copiedCall(expected){
   const text=await page.evaluate(()=>navigator.clipboard.readText());
-  assert(text.startsWith(base+'/invoke/'+fn.id));
+  assert.equal(new URL(text).pathname,'/invoke/'+fn.id+'@'+codeHash);assert.equal(new URL(page.url()).searchParams.get('version'),codeHash);
   const response=await context.request.get(text,{headers:{'X-Serverless-Token':token}});assert.equal(response.status(),200);assert.equal((await response.json()).revision,expected);
   observations.push({copied_url:text,invoked:true});return text;
 }
@@ -66,7 +68,7 @@ try{
     await page.getByRole('link',{name:'Fonctions du service',exact:true}).click();
     await page.getByRole('link',{name:`Adresses d’appel de ${functionName}`,exact:true}).click();await ready();
     assert.equal(new URL(page.url()).pathname,`/console/functions/${fn.id}/invocation-urls`);
-    await page.getByText('Fonction brouillon : publiez une révision dans Code et révisions pour obtenir ses adresses.',{exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'Copier l’adresse',exact:true}).count(),0);
+    await page.getByText('Aucune cible par défaut. Dans Code et révisions, choisissez les adresses d’un hash disponible ou promouvez une version.',{exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'Copier l’adresse',exact:true}).count(),0);
     await capture('draft-desktop');
     token=(await api(`/api/services/${service.id}/tokens`,{method:'POST',body:{name:'invoke-addresses',rights:['read']},status:201})).token;
   });
@@ -76,7 +78,13 @@ try{
     await dialog.getByRole('button',{name:'Vérifier la publication',exact:true}).click();
     const response=page.waitForResponse(r=>r.request().method()==='PUT'&&/\/api\/deployments\/[^/]+\/artifact$/.test(new URL(r.url()).pathname));
     await dialog.getByRole('button',{name:'Confirmer la publication',exact:true}).click();assert.equal((await response).status(),200);
-    await dialog.waitFor({state:'hidden'});await addresses();await page.getByText('Disponibilité non vérifiée',{exact:true}).first().waitFor();
+    await dialog.waitFor({state:'hidden'});
+    const catalogue=await api(`/api/functions/${fn.id}/versions?limit=100`);assert.equal(catalogue.total,1);assert.equal(catalogue.active_code_hash,null);assert.equal(catalogue.first_promoted_at,null);
+    const version=catalogue.items[0];codeHash=version.code_hash;assert.equal(version.state,'available');
+    const card=page.getByRole('article',{name:`Version ${codeHash}`,exact:true});await card.waitFor();
+    await card.getByRole('link',{name:'Adresses de cette version',exact:true}).click();await ready();assert.equal(new URL(page.url()).searchParams.get('version'),codeHash);
+    observations.push({scenario:'pilot-selected-via-version-card',code_hash:codeHash,revision_id:version.revision_id,active_code_hash:catalogue.active_code_hash});
+    await page.getByText('Disponibilité non vérifiée',{exact:true}).first().waitFor();
     await page.getByText('HTTPS déclaré',{exact:true}).first().waitFor();
     assert(await page.getByRole('button',{name:'Copier l’adresse',exact:true}).count()>=1);await fits();await capture('published-desktop');
   });

@@ -1,6 +1,9 @@
+// @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#preuves-attendues
 // @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#décision-durable-et-répétition
 import assert from 'node:assert/strict';
+import {promotePublishedFunction} from './promotion-fixtures.mjs';
 import {randomUUID} from 'node:crypto';
 import {readFile,writeFile,rename,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {execFile,spawn} from 'node:child_process';
@@ -53,7 +56,7 @@ async function gate(mode,fn,extra=[]){
 }
 async function invoke(fn,body){const value=await call(`/invoke/${fn.id}`,{method:body?'POST':'GET',body,token:readToken});await until(async()=>!(await call(`/api/functions/${fn.id}/instances`)).items.length,'Instance non éteinte');return value;}
 async function create(name){const fn=await call(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'storage-console.handler',cpu:.2,memory_mib:256,idle_seconds:0,timeout_seconds:10,storage:{data:{enabled:true,quota_mib:8},cache:{enabled:true,quota_mib:8}}},configuration:{environment:{DECISION_LABEL:'retained'},secrets:{QUALIFICATION_SYNTHETIC_SECRET:secret}}}});functions.push(fn);return fn;}
-async function publish(fn,bundle){const row=await call(`/api/functions/${fn.id}`),candidate=await call(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:bundle.handler}});await call(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes:bundle.bytes});}
+async function publish(fn,bundle){const row=await call(`/api/functions/${fn.id}`),candidate=await call(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:bundle.handler}});return call(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes:bundle.bytes});}
 async function archive(fn){await call(`/api/functions/${fn.id}`,{method:'DELETE'});await until(async()=>!(await call(`/api/archives/${fn.id}`)).storage_operation,'Archivage non terminé');}
 async function command(fn,kind='clear-cache'){const row=await call(kind==='purge'?`/api/archives/${fn.id}`:`/api/functions/${fn.id}`);return {id:randomUUID(),fn,kind,version:row.updated_at,name:row.name,path:kind==='purge'?`/api/archives/${fn.id}/purge`:`/api/functions/${fn.id}/cache-clear`};}
 function post(action,status=[200,202],options={}){return call(action.path,{method:'POST',status,headers:{'If-Match':String(action.version)},body:{operation_id:action.id,...(action.kind==='purge'?{confirm_name:action.name}:{})},...options});}
@@ -72,7 +75,7 @@ try{
   readToken=(await call(`/api/services/${service.id}/tokens`,{method:'POST',status:201,body:{name:'observe-real-data',rights:['read']}})).token;
   work=await mkdtemp(new URL('storage-decisions-',output).pathname);const bundle=await publicationArchive(work,'decisions','storage-console.handler');
   const fn=await create('cache-after-decision'),peer=await create('preserved-neighbor'),target=await create('archive-revoked-session');
-  for(const row of [fn,peer,target])await publish(row,bundle);
+  for(const row of [fn,peer,target]){const publication=await publish(row,bundle);await promotePublishedFunction(call,row.id,publication,evidence);}
   await invoke(fn,{data:'permanent',cache:'initial'});await invoke(peer,{data:'neighbor-data',cache:'neighbor-cache'});await invoke(target,{data:'archive-data',cache:'archive-cache'});await archive(target);
   await check('Purge : session administrateur fermée pendant préparation, abandon sans effacement',async()=>{
     const action=await command(target,'purge'),before=await remote('inspect',target),held=await gate('pause-agent',target);

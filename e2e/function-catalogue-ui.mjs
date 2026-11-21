@@ -1,7 +1,10 @@
+// @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md | docs/DESIGN_SYSTEM_APP.md
 // @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // Real home, management, catalogue and detail pages; actual HTTPS/Docker fixtures.
 import assert from 'node:assert/strict';
+import {promotePublishedFunction} from './promotion-fixtures.mjs';
 import {randomUUID,createHash} from 'node:crypto';
 import {mkdir,mkdtemp,readFile,writeFile,cp,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
@@ -90,7 +93,9 @@ try{
     await writeFile(work+'/revision.json',JSON.stringify({name:'catalogue-ui'}));
     await writeFile(work+'/serverless.yml',JSON.stringify({service:serviceName,provider:{name:'p2enjoy',runtime:'node24',p2enjoy:{idle_seconds:0}},functions:{[functionName]:{handler:'handler.handler'}},package:{patterns:['!**','*.cjs','revision.json']}}));
     const result=await run('python3',['-B','-m','adapter','deploy','--config',work+'/serverless.yml','--service',service.id],{timeout:300000,env:{...process.env,P2_SERVERLESS_URL:base,P2_SERVERLESS_TOKEN:full}});
-    assert(!result.stdout.includes(full));assert(JSON.parse(result.stdout).completed);
+    assert(!result.stdout.includes(full));const published=JSON.parse(result.stdout);assert(published.completed);
+    const publication=published.results[0];assert.equal((await api('/api/functions/'+functions[0].id)).active_revision_id,null);
+    await promotePublishedFunction(api,functions[0].id,publication,observations);
     const response=await context.request.get(base+'/invoke/'+functions[0].id,{headers:{'X-Serverless-Token':full}});assert.equal(response.status(),200);assert.equal((await response.json()).revision,'catalogue-ui');
     await page.getByRole('complementary',{name:'Navigation principale',exact:true}).getByRole('link',{name:'Fonctions',exact:true}).click();await rows(25,27);
   });

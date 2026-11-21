@@ -1,6 +1,9 @@
+// @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#preuves-attendues
 // @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#décision-durable-et-répétition
 import assert from 'node:assert/strict';
+import {promotePublishedFunction} from './promotion-fixtures.mjs';
 import {randomUUID} from 'node:crypto';
 import {readFile,writeFile,rename,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {execFile,spawn} from 'node:child_process';
@@ -30,7 +33,7 @@ async function remote(mode,fn,extra=[]){const {stdout}=await run('ssh',[...ssh,'
 async function invoke(fn,body){const value=await call(`/invoke/${fn.id}`,{method:body?'POST':'GET',body,token:readToken});await until(async()=>!(await call(`/api/functions/${fn.id}/instances`)).items.length,'Instance non éteinte');return value;}
 async function create(name){const fn=await call(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'storage-console.handler',cpu:.2,memory_mib:256,idle_seconds:0,timeout_seconds:10,storage:{data:{enabled:true,quota_mib:8},cache:{enabled:true,quota_mib:8}}},configuration:{environment:{VALIDATION_LABEL:'preserved'},secrets:{QUALIFICATION_SYNTHETIC_SECRET:secret}}}});functions.push(fn);return fn;}
 async function prepare(fn,bundle){const row=await call(`/api/functions/${fn.id}`);return call(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:bundle.handler}});}
-async function publish(fn,bundle){const row=await prepare(fn,bundle);await call(`/api/deployments/${row.id}/artifact`,{method:'PUT',bytes:bundle.bytes});return row;}
+async function publish(fn,bundle){const row=await prepare(fn,bundle);return call(`/api/deployments/${row.id}/artifact`,{method:'PUT',bytes:bundle.bytes});}
 function upload(candidate,bundle){const task={settled:false};task.done=call(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes:bundle.bytes,status:422}).then(value=>({value}),error=>({error})).then(value=>{task.settled=true;return value;});uploads.push(task);return task;}
 async function finish(task){const result=await task.done;if(result.error)throw result.error;return result.value;}
 async function archive(fn){await call(`/api/functions/${fn.id}`,{method:'DELETE'});await until(async()=>!(await call(`/api/archives/${fn.id}`)).storage_operation,'Archivage non terminé');}
@@ -72,6 +75,7 @@ try{
   const slow=await publicationArchive(work,'live-validation','storage-validation-delay.handler',['storage-validation-delay.mjs']);
   const fn=await create('archive-after-validation'),peer=await create('preserved-neighbor');
   const initial=await publish(fn,normal),neighbor=await publish(peer,normal);
+  await promotePublishedFunction(call,fn.id,initial,evidence);await promotePublishedFunction(call,peer.id,neighbor,evidence);
   await invoke(fn,{data:'permanent',cache:'cache'});await invoke(peer,{data:'neighbor-data',cache:'neighbor-cache'});
   await check('Socket Docker : SIGKILL du helper puis restauration indépendante et nettoyage du vrai validateur',async()=>{
     const baseline=(await remote('preflight',fn)).socket,candidate=await prepare(fn,slow),pending=upload(candidate,slow);
@@ -83,7 +87,7 @@ try{
     await finish(pending);const result=await remote('inspect',fn,[candidate.id]);
     assert.equal(result.candidate.state,'failed');assert.equal(result.candidate.validation.error,'validation_timeout');assert.equal(result.candidate.validation.container_removed,true);
     assert.equal(result.candidate.reserved_bytes,0);assert.equal(result.validators.length,0);assert.equal(result.channels.length,0);assert.equal(result.code_present,false);assert.equal(result.archive_present,false);
-    assert.equal((await call(`/api/functions/${fn.id}`)).active_revision_id,initial.id);assert.equal((await invoke(fn)).data,'permanent');
+    assert.equal((await call(`/api/functions/${fn.id}`)).active_revision_id,initial.revision_id);assert.equal((await invoke(fn)).data,'permanent');
     evidence.push({scenario:'independent-socket-restoration',candidate_id:candidate.id,result});await healthy();
   });
   await check('Purge pendant import vivant : attente du nettoyage Docker et effacement du diagnostic tardif',async()=>{
@@ -96,7 +100,7 @@ try{
       during=await remote('inspect',fn,[candidate.id]);assert.equal(pending.settled,false,'Diagnostic arrivé avant le relevé de décision');
       assert.equal(during.candidate.validation,null);assert.equal(during.candidate.configuration_empty,1);assert.equal(during.function.purged_at,null);
       assert(during.guards.some(row=>row.id===action.id&&row.decision==='commit'));assert(during.validators[0].running&&during.validators[0].marker);
-      assert(during.candidate.reserved_bytes>0&&during.revisions.some(row=>row.id===initial.id&&row.stored_bytes>0));
+      assert(during.candidate.reserved_bytes>0&&during.revisions.some(row=>row.id===initial.revision_id&&row.stored_bytes>0));
       assert.equal(during.archive_sha256,slow.sha256);assert.equal(during.validators[0].id,active.before.validators[0].id);
       await finish(pending);
       await until(async()=>{const row=await call(`/api/storage-operations/${action.id}`);return row.state==='pending'&&row.phase==='artifacts'&&row.error_code==='artifact_cleanup_pending';},'Purge non retenue après échec de nettoyage');
@@ -111,7 +115,7 @@ try{
     const final=await remote('inspect',fn,[candidate.id]);assert(final.function.purged_at);assert.equal(final.candidate.validation,null);assert.equal(final.candidate.configuration_empty,1);
     assert.equal(final.candidate.reserved_bytes,0);assert(final.revisions.every(row=>row.stored_bytes===0&&row.deleted_at));assert.equal(final.validators.length,0);assert.equal(final.channels.length,0);
     assert.equal(final.code_present,false);assert.equal(final.archive_present,false);assert.equal(final.guards.length,0);
-    await healthy();const preserved=await invoke(peer);assert.equal(preserved.data,'neighbor-data');assert.equal(preserved.cache,'neighbor-cache');assert.equal((await call(`/api/functions/${peer.id}`)).active_revision_id,neighbor.id);
+    await healthy();const preserved=await invoke(peer);assert.equal(preserved.data,'neighbor-data');assert.equal(preserved.cache,'neighbor-cache');assert.equal((await call(`/api/functions/${peer.id}`)).active_revision_id,neighbor.revision_id);
     evidence.push({scenario:'live-validation-purge',candidate_id:candidate.id,operation_id:action.id,during,after_upload:afterUpload,terminal:done,final});
   });
   completed=true;

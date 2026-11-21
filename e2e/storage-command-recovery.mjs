@@ -1,6 +1,9 @@
+// @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#preuves-attendues
 // @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#décision-durable-et-répétition
 import assert from 'node:assert/strict';
+import {promotePublishedFunction} from './promotion-fixtures.mjs';
 import {randomUUID} from 'node:crypto';
 import {readFile,writeFile,rename,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {execFile,spawn} from 'node:child_process';
@@ -31,7 +34,7 @@ async function idle(fn){await until(async()=>!(await call(`/api/functions/${fn.i
 async function invoke(fn,body){const value=await call(`/invoke/${fn.id}`,{method:body?'POST':'GET',body,token:readToken});await idle(fn);return value;}
 async function credential(rights){return call(`/api/services/${service.id}/tokens`,{method:'POST',body:{name:'storage-command-access',rights},status:201});}
 async function create(name){const row=await call(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'storage-console.handler',cpu:.2,memory_mib:256,idle_seconds:0,timeout_seconds:10,storage:{data:{enabled:true,quota_mib:8},cache:{enabled:true,quota_mib:8}}},configuration:{environment:{RECOVERY_LABEL:'retained'},secrets:{QUALIFICATION_SYNTHETIC_SECRET:secret}}}});functions.push(row);return row;}
-async function publish(fn,archive){const row=await current(fn);const deployment=await call(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:archive.handler}});await call(`/api/deployments/${deployment.id}/artifact`,{method:'PUT',bytes:archive.bytes});return deployment;}
+async function publish(fn,archive){const row=await current(fn);const deployment=await call(`/api/functions/${fn.id}/code-deployments`,{method:'POST',status:201,headers:{'If-Match':String(row.updated_at)},body:{deployment_id:randomUUID(),handler:archive.handler}});return call(`/api/deployments/${deployment.id}/artifact`,{method:'PUT',bytes:archive.bytes});}
 function tracked(promise){const task=promise.then(value=>({value}),error=>({error}));requests.push(task);return task;}
 async function finish(task){const result=await task;if(result.error)throw result.error;return result.value;}
 async function remote(mode,fn,extra=[]){const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,mode,fn.id,namespace.id,...extra],{timeout:120000,maxBuffer:1024*1024});return JSON.parse(stdout.trim().split('\n').at(-1));}
@@ -56,7 +59,8 @@ try{
   session=await call('/api/session');assert(session.authenticated,'Session SSO réelle requise');await healthy();
   namespace=await call('/api/namespaces',{method:'POST',body:{name:prefix},status:201});service=await call(`/api/namespaces/${namespace.id}/services`,{method:'POST',body:{name:'storage-recovery'},status:201});readToken=(await credential(['read'])).token;
   work=await mkdtemp(new URL('storage-recovery-',output).pathname);const bundle=await publicationArchive(work,'storage','storage-console.handler');
-  const fn=await create('cache-recovery'),peer=await create('preserved-neighbor');await publish(fn,bundle);await publish(peer,bundle);
+  const fn=await create('cache-recovery'),peer=await create('preserved-neighbor');const initial=await publish(fn,bundle),neighbor=await publish(peer,bundle);
+  await promotePublishedFunction(call,fn.id,initial,evidence);await promotePublishedFunction(call,peer.id,neighbor,evidence);
   await invoke(fn,{data:'permanent',cache:'initial'});await invoke(peer,{data:'neighbor-data',cache:'neighbor-cache'});
   await check('Garde indépendante : helper tué et agent réellement repris',async()=>{
     const held=await gate('watchdog',fn);const unit=(await held.wait('guard-armed')).unit;await held.kill();
@@ -103,11 +107,11 @@ try{
     await invoke(fn,{cache:'rebuilt-after-recovery'});const replay=await post(action,200,{token:undefined});assert.equal(replay.result_version,done.result_version);assert.equal((await invoke(fn)).cache,'rebuilt-after-recovery');evidence.push({scenario:'committed-cache-recovery',receipt:done});
   });
   await check('Purge : artefacts refusés, budget conservé et reprise après SIGKILL',async()=>{
-    const target=await create('archive-recovery'),revision=await publish(target,bundle);await invoke(target,{data:'archive-data',cache:'archive-cache'});await archive(target);
-    const action=await command(target,'purge'),held=await gate('deny-artifact',target,[revision.id]);let restart,stable;
+    const target=await create('archive-recovery'),revision=await publish(target,bundle);await promotePublishedFunction(call,target.id,revision,evidence);await invoke(target,{data:'archive-data',cache:'archive-cache'});await archive(target);
+    const action=await command(target,'purge'),held=await gate('deny-artifact',target,[revision.revision_id]);let restart,stable;
     try{assert.equal((await post(action,202)).state,'pending');stable=await until(async()=>{const value=await call(`/api/storage-operations/${action.id}`);return value.phase==='artifacts'&&value.error_code==='artifact_cleanup_pending'?value:false;},'Erreur physique des artefacts absente');
       const view=await call(`/api/archives/${target.id}`);assert.equal(view.purged_at,null);assert(view.artifact_bytes>0);assert.equal(view.storage_operation.decision,'commit');
-      const physical=await remote('inspect',target);assert(physical.revisions.some(row=>row.id===revision.id&&row.stored_bytes>0));assert.equal(physical.agent[0].state,'purged');restart=await killControl(target,action.id,'commit');
+      const physical=await remote('inspect',target);assert(physical.revisions.some(row=>row.id===revision.revision_id&&row.stored_bytes>0));assert.equal(physical.agent[0].state,'purged');restart=await killControl(target,action.id,'commit');
     }finally{await held.release();}
     await startControl(restart);await healthy();const done=await receipt(action);assert.equal(done.result_version,stable.result_version);const view=await call(`/api/archives/${target.id}`);assert(view.purged_at&&view.artifact_bytes===0&&!view.storage_operation);assert.equal((await post(action,200)).state,'completed');
     const neighbor=await invoke(peer);assert.equal(neighbor.data,'neighbor-data');assert.equal(neighbor.cache,'neighbor-cache');evidence.push({scenario:'artifact-recovery',receipt:done});

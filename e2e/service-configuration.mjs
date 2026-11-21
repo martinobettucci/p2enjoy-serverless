@@ -1,7 +1,10 @@
+// @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#configuration-de-service-et-surcharges
 // @verifies docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuves-et-manuel
 // Real CLI, HTTPS, SSO session, service tokens and Docker invocations; no substitute server.
 import assert from 'node:assert/strict';
+import {promotePublishedFunction} from './promotion-fixtures.mjs';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {createHash,randomUUID} from 'node:crypto';
@@ -90,6 +93,10 @@ try{
     assert.deepEqual(fn['configuration-overrides'].environment,{SHARED_LABEL:'local-one',LOCAL_LABEL:'configuration-overrides'});
     assert.deepEqual(fn['configuration-overrides'].secret_names,['SHARED_SECRET']);
     assert.equal(result.service_configuration.state,'applied');
+    for(const published of result.results){
+      assert.equal(fn[published.name].active_revision_id,null);assert.equal(published.default_code_hash_at_publication,null);
+      await promotePublishedFunction(api,published.function_id,published,observations);
+    }
   });
   await check('Invocations Docker : héritage et surcharge de secret effectifs',async()=>{
     assert.deepEqual(await invoke('configuration-overrides'),{label:'local-one',local:'configuration-overrides',secret_sha256:digest(secrets[1])});
@@ -114,7 +121,10 @@ try{
   await check('Provider absent préservé et suppression de surcharge rétablissant l’héritage',async()=>{
     delete manifest.provider.env;delete manifest.provider.secret;
     manifest.functions['configuration-overrides'].env={SHARED_LABEL:null};manifest.functions['configuration-overrides'].secret={SHARED_SECRET:null};
-    await deploy(full,true);assert.deepEqual((await current('configuration-overrides')).environment,{});
+    const before=await functions(),published=await deploy(full,true);
+    for(const result of published.results){const old=before.find(row=>row.id===result.function_id);assert.equal(result.code_changed,false);assert.equal(result.revision_id,old.active_revision_id);assert.equal(result.default_code_hash_at_publication,result.code_hash);assert.equal((await api(`/api/functions/${result.function_id}`)).active_revision_id,old.active_revision_id);}
+    observations.push({scenario:'unchanged-code-after-override-removal',publications:published.results});
+    assert.deepEqual((await current('configuration-overrides')).environment,{});
     assert.deepEqual((await current('configuration-overrides')).secret_names,[]);
     assert.deepEqual(await invoke('configuration-overrides'),{label:'common-two',local:null,secret_sha256:digest(secrets[2])});
     assert.deepEqual((await api(`/api/services/${service.id}`)).environment,{SHARED_LABEL:'common-two'});

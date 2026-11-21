@@ -1,5 +1,22 @@
 # Qualification de la plateforme
 
+## Préparations modernes et promotion explicite — SLS-109
+
+Contrat : [MODERN_CLIENT_PROMOTION_REGRESSIONS](../docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md).
+Les dix commandes `node e2e/CLIENT.mjs` du tableau de ce contrat sont lancées
+une par une depuis la racine, sur le seul SPARK DEV : 81 groupes, puis
+`node e2e/manual-ui.mjs`, `python3 -B e2e/public.py` et
+`node e2e/login-ui.mjs`, soit 25 communs et 106 au total. Renouveler les deux
+sessions SSO réelles avant la préparation initiale et storage-decision-recovery.
+
+`promotion-fixtures.mjs` ne publie pas : les clients API appellent explicitement
+promotePublishedFunction après leur upload pilote, avec ETag relu et contrôle
+hash/alias/cible. Les adresses UI choisissent leur pilote par sa carte ; le
+stockage UI promeut par sa confirmation réelle. Les 81 groupes et leurs fautes
+restent inchangés. L’image produit et les clients historiques003 sont conservés.
+Syntaxe vérifiée ; qualification E2E encore à exécuter sur les 453 sources figées.
+
+
 La [qualification SLS-108](../docs/evidence/service-transport-promotion-regressions-dev-2026-11-21.json)
 passe 5 groupes de transport et 25 communs, 22 captures inspectées, au gel
 3f6974a / 451 sources. Trois gardes, deux coupures 137 et deux promotions CLI

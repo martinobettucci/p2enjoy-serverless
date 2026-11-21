@@ -1,7 +1,10 @@
+// @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#qualification-réelle-et-autorité
 // @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#api-et-calcul-commun
 // Focused API/CLI checkpoint on actual currently assigned domains, not the full route lifecycle proof.
 import assert from 'node:assert/strict';
+import {promotePublishedFunction} from './promotion-fixtures.mjs';
 import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {randomUUID,createHash} from 'node:crypto';
@@ -128,9 +131,12 @@ try{
     const result=await deploy();first=result.results[0];explicit=result.results[1];functions.push(explicit.function_id);
     for(const row of result.results){
       assert.equal(row.state,'published');assert.equal(row.invocation_urls.state,'available');
-      const page=await catalogue(row.function_id,'?limit=20');
+      const page=await catalogue(row.function_id,`?version=${row.code_hash}&limit=20`);
       assert.deepEqual(row.invocation_urls.items,page.items);assert.equal(row.invocation_urls.source_sha256,page.source.sha256);
-      assert.equal(row.invocation_urls.revision_id,row.revision_id);observations.push({scenario:'published',catalogue:page});
+      assert.equal(row.invocation_urls.revision_id,row.revision_id);assert.equal(page.selection,'version');assert.equal(page.code_hash,row.code_hash);assert.equal(page.default_code_hash,null);
+      const pending=await catalogue(row.function_id);assert.equal(pending.selection,'default');assert.equal(pending.revision_id,null);assert(pending.items.every(domain=>domain.urls.length===0));
+      observations.push({scenario:'published-pilot',catalogue:page,default_catalogue:pending});
+      await promotePublishedFunction(api,row.function_id,row,observations);
     }
     const page=await catalogue(first.function_id);assert.equal(canonical(page).urls[0].url,base+'/invoke/'+first.function_id);
     const paths=canonical(await catalogue(explicit.function_id)).urls;
@@ -152,6 +158,11 @@ try{
     await writeFile(path.join(work,'revision.json'),JSON.stringify({name:'two'}));
     manifest.functions['explicit-entry'].events=[{http:{path:'Revised/read',method:'get'}}];
     const result=await deploy();second=result.results.find(row=>row.name==='explicit-entry');
+    const stable=await catalogue(explicit.function_id),pilot=await catalogue(explicit.function_id,`?version=${second.code_hash}&limit=20`);
+    assert.equal(stable.revision_id,explicit.revision_id);assert.equal(stable.code_hash,explicit.code_hash);assert.equal(pilot.revision_id,second.revision_id);assert.equal(pilot.code_hash,second.code_hash);assert.equal(pilot.default_code_hash,explicit.code_hash);assert.notEqual(second.code_hash,explicit.code_hash);
+    assert.equal(canonical(pilot).urls[0].url,base+'/invoke/'+explicit.function_id+'@'+second.code_hash+'/Revised/read');await invoke(canonical(pilot).urls[0].url,'GET','two');
+    observations.push({scenario:'new-pilot-preserves-default',stable,pilot});
+    await promotePublishedFunction(api,explicit.function_id,second,observations);
     const page=await catalogue(explicit.function_id);assert.equal(page.revision_id,second.revision_id);
     assert.equal(canonical(page).urls[0].url,base+'/invoke/'+explicit.function_id+'/Revised/read');await invoke(canonical(page).urls[0].url,'GET','two');
     const row=await api(`/api/functions/${explicit.function_id}`);
