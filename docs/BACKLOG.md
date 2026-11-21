@@ -3076,7 +3076,7 @@ Statut : [~] — dix montages incompatibles identifiés par audit RO, avant E2E.
 Nature : Corriger. Ordre :1, après108 et avant le prochain078.
 Contrat : [MODERN_CLIENT_PROMOTION_REGRESSIONS](MODERN_CLIENT_PROMOTION_REGRESSIONS.md).
 
-- [ ] SLS-109.1 Dix clients/groupes rapprochés des contrats actuels ; décisions
+- [x] SLS-109.1 Dix clients/groupes rapprochés des contrats actuels ; décisions
   explicites de cible, hash/alias, ETag et parcours persistées avant code.
 - [ ] SLS-109.2 Dix montages raccordés sans retirer leurs81groupes, leurs
   fautes, refus, gestes UI et consommateurs réels ; historique003 intact.

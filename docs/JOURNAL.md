@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — décisions des dix préparations SLS-109
+
+Les dix clients, cinq contrats et aides de préparation sont rapprochés, avec
+les 81 libellés de groupes conservés dans MODERN_CLIENT_PROMOTION_REGRESSIONS.
+Promotion API explicitement appelée pour les préparations qui doivent avoir
+un défaut ; aide distincte promotePublishedFunction sans publication cachée.
+Le parcours UI des adresses choisit le hash pilote par sa carte ; le parcours
+UI stockage promeut par sa vraie confirmation. Réuploads identiques conservent
+hash/alias/cible ; les nouveaux chemins d’un pilote restent distincts du défaut
+avant promotion. Les imports fautés gardent leurs candidats séparés des alias.
+Aucun helper de faute ou image historique003 modifié. 81 ciblés + 25 communs,
+soit 106 groupes à qualifier après code/revue/gel et synchronisation DEV.
+
 ## 21 novembre 2026 — IR-001 corrigée : contrat courant des URL par hash
 
 Décision du principal après instruction RO du résolveur : corriger la phrase
