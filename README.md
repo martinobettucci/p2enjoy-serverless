@@ -2,7 +2,8 @@
 
 Une course de résultat entre timeout et libération du bail a été reproduite
 sur le vrai pilote ([SLS-112](docs/MANAGED_INVOCATION_WATCH.md)). Sa correction
-est déployée en DEV sur433da150 ; les81groupes restent à qualifier.
+est déployée en DEV sur433da150 ; les82groupes restent à qualifier. Le nouveau discriminant suspend le seul worker
+après libération réellement acquittée ; son exécution et sa branche restent à prouver.
 L’ancienne assertion muette111 reste non attribuée ; les diagnostics14et162
 sont conservés sans les ajouter à une qualification. La suite entière078 reste due.
 

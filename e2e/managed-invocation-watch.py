@@ -45,6 +45,8 @@ async def worker(installation):
     sys.path.insert(0, '/app')
     from app.managed_instances import ManagedInstance
     from app.storage_client import StorageClient
+    sys.path.insert(0, str(Path(__file__).with_suffix('')))
+    from managed_watch_pause import pause_after_release
     owner = asyncio.current_task()
     loop = asyncio.get_running_loop()
     loop.add_signal_handler(signal.SIGTERM, owner.cancel)
@@ -205,6 +207,38 @@ async def worker(installation):
         assert read['state'] == 'succeeded' and read['response']['statusCode'] == 200 and record['read_matches_expected'], 'watch_drain_persistence'
         checks.append({'name': 'Fermeture extérieure, invocation active et écriture acquittée conservée', 'status': 'passed'})
         emit({'passed': checks[-1]['name']})
+        item = await instance().start()
+        record = {'case': 12, 'scenario': 'paused-after-release', 'deadline_seconds': 2,
+                  'instance_id': item.id, 'tasks_observed': [], 'task_terminals': []}
+        observations.append(record)
+        observer_stop = asyncio.Event()
+        observer = asyncio.create_task(observe_tasks(item, observer_stop, record))
+        with pause_after_release(item, storage, installation, work, record):
+            result = await item.invoke({'operation': 'write-sleep', 'name': 'release-pause',
+                                        'value': 'persisted-before-pause', 'ms': 30000}, 2)
+        record['final_result'] = result_projection(result)
+        observer_stop.set()
+        await observer
+        observer = None
+        await asyncio.sleep(0)
+        await close(item)
+        reader = await instance().start()
+        read = await reader.invoke({'operation': 'read', 'name': 'release-pause'}, 5)
+        record['read_result'] = result_projection(read)
+        body = json.loads(read['response']['body']) if read.get('response') else {}
+        record['read_matches_expected'] = body.get('value') == 'persisted-before-pause'
+        await close(reader)
+        assert record['pause'].get('completed') and record['pause'].get('helper_joined'), 'watch_pause_incomplete'
+        assert not record['pause'].get('failure'), 'watch_pause_instrumentation_failed'
+        watcher = next(value for value in record['task_terminals'] if value['role'] == 'storage-watcher')
+        internal = next(value for value in record['task_terminals'] if value['role'] == 'internal-invocation')['result']
+        assert watcher.get('error_type') == 'LeaseMissingDuringClose' and watcher.get('error') == 'lease_unknown' and watcher['closing'], 'watch_pause_branch_unobserved'
+        assert result['state'] == internal['state'] == 'failed' and result.get('error') == internal.get('error') == 'invocation_timeout', 'watch_pause_timeout_overwritten'
+        assert result['invocation_id'] == internal['invocation_id'] and result['instance_id'] == internal['instance_id'] == item.id, 'watch_pause_identity'
+        assert result['handler_started'] is True and result['container_removed'] and not result['instance_available'], 'watch_pause_lifecycle'
+        assert read['state'] == 'succeeded' and read['response']['statusCode'] == 200 and record['read_matches_expected'], 'watch_pause_persistence'
+        checks.append({'name': 'Libération acquittée, suspension réelle du worker et timeout conservé', 'status': 'passed'})
+        emit({'passed': checks[-1]['name']})
         assert any(terminal.get('error_type') == 'LeaseMissingDuringClose'
                    and terminal.get('error') == 'lease_unknown' and terminal['closing']
                    for record in observations for terminal in record['task_terminals']), 'watch_closing_lease_branch_unobserved'
@@ -250,8 +284,12 @@ def parent():
     def run(args, **kwargs):
         return subprocess.run(args, check=True, text=True, capture_output=True, timeout=90, **kwargs)
 
-    run(docker + ['exec', '-i', 'serverless-api', 'python', '-B', '-c',
-        'import pathlib,sys;pathlib.Path(sys.argv[1]).write_text(sys.stdin.read())', script], input=Path(__file__).read_text())
+    control_id = run(docker + ['inspect', 'serverless-api', '--format', '{{.Id}}']).stdout.strip()
+    assert re.fullmatch('[0-9a-f]{64}', control_id), 'watch_control_identity'
+    helper_source = Path(__file__).with_name('managed_watch_pause.py').read_text()
+    bootstrap = {'script': Path(__file__).read_text(), 'observer': helper_source}
+    install = "import json,os,pathlib,sys;v=json.load(sys.stdin);p=pathlib.Path(sys.argv[1]);d=p.with_suffix('');assert not p.exists() and not d.exists();d.mkdir(mode=0o700);(d/'owner.json').write_text(json.dumps({'installation':sys.argv[2],'script':str(p)}));p.write_text(v['script']);(d/'managed_watch_pause.py').write_text(v['observer'])"
+    remove = "import json,pathlib,sys;p=pathlib.Path(sys.argv[1]);d=p.with_suffix('');m=d/'owner.json';assert json.loads(m.read_text())=={'installation':sys.argv[2],'script':str(p)};h=d/'managed_watch_pause.py';assert not p.is_symlink() and not h.is_symlink();h.unlink(missing_ok=True);m.unlink();d.rmdir();p.unlink(missing_ok=True)"
     transport = ROOT / 'runtime' / ('invocation-watch-transport-' + UUID(installation).hex)
     transport.mkdir(mode=0o700)
     process = None
@@ -261,16 +299,18 @@ def parent():
     output = errors = b''
     joined = False
     try:
-        process = subprocess.Popen(docker + ['exec', 'serverless-api', 'python', '-B', script, '--worker', installation],
+        run(docker + ['exec', '-i', control_id, 'python', '-B', '-c', install, script, installation],
+            input=json.dumps(bootstrap))
+        process = subprocess.Popen(docker + ['exec', control_id, 'python', '-B', script, '--worker', installation],
                                    stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         try:
             output, errors = process.communicate(timeout=240)
             joined = True
         except BaseException as error:
             parent_failure = diagnostic(error)
-            stop = "import os,pathlib,signal,sys\nfor p in pathlib.Path('/proc').iterdir():\n if p.name.isdigit() and int(p.name)!=os.getpid():\n  try:args=p.joinpath('cmdline').read_bytes().split(b'\\0')\n  except OSError:continue\n  if sys.argv[1].encode() in args:os.kill(int(p.name),signal.SIGTERM)"
+            stop = "import os,pathlib,signal,sys\nfor p in pathlib.Path('/proc').iterdir():\n if p.name.isdigit() and int(p.name)!=os.getpid():\n  fd=None\n  try:\n   birth=p.joinpath('stat').read_text().rsplit(')',1)[1].split()[19];fd=os.pidfd_open(int(p.name));args=p.joinpath('cmdline').read_bytes().split(b'\\0')\n   if p.joinpath('stat').read_text().rsplit(')',1)[1].split()[19]==birth and sys.argv[1].encode() in args and b'--worker' in args and sys.argv[2].encode() in args:\n    signal.pidfd_send_signal(fd,signal.SIGCONT);signal.pidfd_send_signal(fd,signal.SIGTERM)\n  except (OSError,ProcessLookupError):pass\n  finally:\n   if fd is not None:os.close(fd)"
             try:
-                run(docker + ['exec', 'serverless-api', 'python', '-B', '-c', stop, script])
+                run(docker + ['exec', control_id, 'python', '-B', '-c', stop, script, installation])
             except BaseException as stop_error:
                 join_failure = diagnostic(stop_error)
             try:
@@ -304,12 +344,13 @@ def parent():
                      'checks': [], 'observations': [], 'cleanup_errors': ['worker_report_missing']}
         if joined:
             try:
-                run(docker + ['exec', 'serverless-api', 'rm', '-f', script])
+                run(docker + ['exec', control_id, 'python', '-B', '-c', remove, script, installation])
                 script_removed = True
             except BaseException as remove_error:
                 parent_failure = parent_failure or diagnostic(remove_error)
         final['worker_exit_code'] = process.returncode
-        final.update(worker_joined=joined, script_removed=script_removed,
+        final.update(control_id=control_id, observer_sha256=hashlib.sha256(helper_source.encode()).hexdigest(),
+                     worker_joined=joined, script_removed=script_removed,
                      script_retained_for_reconciliation=not script_removed,
                      parent_failure=parent_failure, join_failure=join_failure, transport=streams)
         final['completed'] = bool(final['completed'] and joined and script_removed
@@ -320,7 +361,7 @@ def parent():
     finally:
         # Keep the owned script as an identity for reconciliation if joining failed.
         if not script_removed and process is None:
-            run(docker + ['exec', 'serverless-api', 'rm', '-f', script])
+            run(docker + ['exec', control_id, 'python', '-B', '-c', remove, script, installation])
 
 
 if __name__ == '__main__':

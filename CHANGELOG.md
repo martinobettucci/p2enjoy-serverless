@@ -5,8 +5,9 @@
 - SLS-112 : correction implémentée de la course entre timeout et libération
   volontaire du bail. Le seul lease_unknown observé pendant une fermeture
   gérée conserve le résultat interne après confirmations complètes ; les vraies
-  pannes restent distinctes. Dix phases et un drainage réel préparés, sans changer
-  les14groupes gérés. Image433da150 déployée en DEV ;81groupes encore à qualifier.
+  pannes restent distinctes. Dix phases, un drainage et un discriminant natif
+  STOP/CONT après libération réelle sont préparés, sans changer les14groupes gérés.
+  Image433da150 déployée en DEV ;82groupes encore à qualifier,458sources de preuve.
 
 - SLS-110 : [29 groupes réels](docs/evidence/publication-restoration-confirmation-dev-2026-11-21.json)
   qualifient la confirmation du reçu indépendant dans les bornes réelles de la

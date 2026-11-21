@@ -4,28 +4,32 @@
 
 Contrat : [MANAGED_INVOCATION_WATCH](../docs/MANAGED_INVOCATION_WATCH.md).
 `python3 -B /srv/p2enjoy-serverless/e2e/managed-invocation-watch.py`, comme root
-sur le seul SPARK DEV, exécute dix cas distincts sur le vrai pilote embarqué,
+sur le seul SPARK DEV, exécute douze cas distincts sur le vrai pilote embarqué,
 Docker et FUSE. Aucun produit changé pour le diagnostic. Les tâches réelles
 Instance.invoke/watch_storage du même consommateur sont observées, sans wrapper
 ni remplacement ; les résultats interne/final et l’exception fixe du watcher
 sont projetés sans corps/logs/locals. Le rapport est
 runtime/managed-invocation-watch-proof.json ; flux exacts privés sous runtime/
-invocation-watch-transport-UUID. Un timeout du parent240s déclenche SIGTERM sur
+invocation-watch-transport-UUID. Un timeout du parent240s déclenche CONT puis TERM via pidfd sur
 le worker exact puis une jointure60s ; il conserve toujours l’échec, même si
 le worker rend ensuite un résultat nominal. Une jointure inconnue reste telle,
 avec script conservé pour réconciliation. Le nettoyage natif demeure obligatoire.
 
 Le premier cas rouge au gel5f8e6d3 /457sources prouve watcher lease_unknown,
 interne invocation_timeout puis externe storage_unavailable, mêmes UUID et
-nettoyage confirmé. Il ne qualifie aucun groupe. La correction est implémentée,
-encore à construire/déployer. Le client garde ses dix phases et ajoute un drainage
+nettoyage confirmé. Il ne qualifie aucun groupe. La correction est déployée sur433da150. Le premier passage à onze parcours
+est refusé pour branche non observée ; zéro groupe qualifié. Le client garde ses dix phases et ajoute un drainage
 extérieur avant5s sur écriture préalablement acquittée ; la branche de libération
 concurrente doit être réellement observée, sinon la campagne échoue.
 
-Après bascule et gel, lancer11ciblés,14gérés,31public-invocations-suite puis
-8manual-ui/8public/9login-ui, en série :81groupes. Préparer deux sessions SSO
+Le douzième cas utilise managed_watch_pause.py : trace du vrai acquittement,
+gardien indépendant avec identité pidfd, vrais refus Docker/bail, READY/ARM,
+STOP observé au moins0,75s, CONT et ACK avant jointure. Aucune méthode remplacée.
+Le cas exige sa propre branche LeaseMissingDuringClose et le timeout conservé.
+Après gel, lancer12ciblés,14gérés,31public-invocations-suite puis
+8manual-ui/8public/9login-ui, en série :82groupes. Préparer deux sessions SSO
 réelles avant les parcours communs et laisser le public-suite lire ses identifiants
-sur stdin privée. Sources457, aucun succès de correction encore acquis ; les
+sur stdin privée. Sources458, aucun succès de correction encore acquis ; les
 14+25 constituent aussi39pour111 sans double comptage.078reste entièrement due.
 
 ## Diagnostic du stockage géré — SLS-111

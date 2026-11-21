@@ -5,9 +5,13 @@
 L’API et la console servent l’image433da150, schéma010, manuel18chapitres/
 74paragraphes et marque à trois blocs. Le pilote corrige la classification
 entre timeout et libération volontaire du bail. La bascule est recoupée ; les
-81groupes de qualification restent à exécuter. SLS-111/112/078 restent ouvertes.
+82groupes de qualification restent à exécuter. SLS-111/112/078 restent ouvertes.
 Cette entrée complète les checkpoints datés ci-dessous. Proposition .? ;
 adoption active non revendiquée.
+
+Le cas natif supplémentaire suspend le seul worker après libération acquittée ;
+458sources de preuve, aucun groupe encore qualifié. L’essai à onze parcours
+reste refusé pour branche non observée.
 
 ## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
 

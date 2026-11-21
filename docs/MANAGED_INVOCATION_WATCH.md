@@ -183,6 +183,7 @@ HTTPS identiques et no-store. Code image au gel6d0cc43, métadonnées de retoura
 aucune restauration DB, migration, route ou variable nouvelle. Ces constats de
 bascule ne remplacent pas les81groupes, encore à exécuter sur les sources figées.
 
+<a id="preuve-suspension-worker"></a>
 ## Branche non observée et discriminant natif — décision avant code
 
 La première campagne du gel4382b37 sur433da150 termine onze parcours métier,
@@ -233,3 +234,12 @@ sans réutiliser les onze parcours de l’essai refusé. L’image produit433da1
 ses38backend/quatreweb sont inchangés ; seuls client/contrats de preuve évoluent.
 Les propres pannes du gardien et du rattrapage parent qui ne sont pas provoquées
 par ce cas nominal restent explicitement dues dans091.2, jamais déclarées acquises.
+
+## Discriminant préparé, exécution encore due
+
+Le module managed_watch_pause.py et son programme gardien sont relus avec le
+cas12 ; syntaxe conforme et458sources indexées. Le parent épingle le CID du
+contrôle et dépose le module dans un dossier marqué propre au worker. Après
+jointure il retire les seuls fichiers connus ; un écart reste un échec. Le
+rattrapage parent CONT/TERM utilise pidfd après recoupement de naissance.
+Aucune exécution du nouveau cas ni aucun groupe qualifié à ce checkpoint.

@@ -2300,7 +2300,7 @@ Critères d'acceptation :
   propositions du dépôt au schéma009/manuel15chapitres et anciens contrôles.
   Actualisation minimale des trois propositions après071 (010,18/74, image96e5
   et testeur) ; adoption non revendiquée. La réduction des récits reste à faire.
-  Actualisation minimale112 : image433da150 déployée, qualification81encore en attente ;
+  Actualisation minimale112 : image433da150 déployée, qualification82encore en attente ;
   schéma010 et manuel18/74inchangés, propositions seules sans adoption active.
 - [ ] SLS-079.4 Guide rejoué sur une installation temporaire distincte : installation depuis
   zéro, mise à jour, redémarrage forcé, sauvegarde, destruction partielle, restauration,

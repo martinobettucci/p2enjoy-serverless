@@ -4,11 +4,15 @@
 
 Code corrigé déployé sur433da150 après reproduction réelle watcher lease_unknown /
 interne invocation_timeout / externe storage_unavailable. Exécuter en série
-11groupes discriminants,14gérés,31publics et25communs :81uniques, sans mock ni saut.
+12groupes discriminants,14gérés,31publics et25communs :82uniques, sans mock ni saut.
 La branche de fermeture doit être réellement observée ; les images communes
 fraîches doivent être ouvertes individuellement. Les diagnostics14/162 et le
-cas rouge ne s’ajoutent pas aux81 ; la campagne078 entière reste distincte.
+cas rouge ne s’ajoutent pas aux82 ; la campagne078 entière reste distincte.
 Qualification encore à produire. Ces notes restent proposées, sans adoption.
+
+Le cas natif supplémentaire suspend le seul worker après libération acquittée ;
+458sources de preuve, aucun groupe encore qualifié. L’essai à onze parcours
+reste refusé pour branche non observée.
 
 ## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
 

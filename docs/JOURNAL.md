@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — discriminant natif112 préparé, avant exécution
+
+Au gel suivant,458sources et82groupes attendus. managed_watch_pause.py fournit
+le gardien indépendant, reçus/identités et bornes ; le cas12 exige sa propre
+branche corrigée, le même timeout interne/externe et la persistance réelle.
+Les onze parcours précédents sont inchangés. Parent épinglé au CID et rattrapage
+pidfd CONT avant TERM ; observateur temporaire retiré seulement après jointure.
+Revue statique conforme, syntaxe des deux clients et du programme gardien lue.
+Aucune exécution nouvelle ni groupe qualifié ; image433da150 inchangée.
+Les pannes non provoquées du banc restent091.2. Les notes.? seules sont proposées.
+
 ## 21 novembre 2026 — onze parcours112 passés, qualification refusée et nouveau discriminant
 
 Travail7b3d3317 au gel4382b37 /433da150 : onze parcours métier réussis, puis

@@ -7,8 +7,12 @@ Backup natif contrôle/registre sous qualification-history/before-managed-
 invocation-watch-b953eae7c0894b1b9340a4aae5a1bf5c. Le retour
 p2enjoy-control:before-managed-invocation-watch porte7aaaa36e, reconstruit avec
 38backend/quatreweb identiques au b452 vivant ; les digests restent distincts.
-Référence et5982artefacts conservés.81groupes encore à qualifier, aucune
+Référence et5982artefacts conservés.82groupes encore à qualifier, aucune
 restauration DB automatique. Proposition .? sans adoption active revendiquée.
+
+Le cas natif supplémentaire suspend le seul worker après libération acquittée ;
+458sources de preuve, aucun groupe encore qualifié. L’essai à onze parcours
+reste refusé pour branche non observée.
 
 ## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
 

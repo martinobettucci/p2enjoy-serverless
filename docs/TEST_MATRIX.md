@@ -1,5 +1,13 @@
 # Matrice de qualification réelle
 
+## Surveillance pendant libération — SLS-112, preuve encore ouverte
+
+La campagne préparée porte82groupes :12discriminants,14gérés,31publics et25communs.
+Le cas12 exige STOP/CONT réels du seul worker, acquittement réel de libération,
+absence native Docker/bail et sa propre branche LeaseMissingDuringClose.
+458sources ; image433da150 inchangée. Revue statique conforme, aucune nouvelle
+preuve fonctionnelle. Le passage4382b37 à onze parcours reste refusé sans réemploi.
+
 ## Confirmation indépendante des publications — SLS-110
 
 [Qualification110](evidence/publication-restoration-confirmation-dev-2026-11-21.json) :
