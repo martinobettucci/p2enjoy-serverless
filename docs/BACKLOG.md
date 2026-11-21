@@ -3015,7 +3015,7 @@ Statut : [~] — attente historique refusée sur la vraie facette des versions.
 Nature : Corriger. Ordre :1, préalable à106/078.
 Contrat : [PUBLICATION_CONSOLE_REGRESSIONS](PUBLICATION_CONSOLE_REGRESSIONS.md).
 
-- [ ] SLS-107.1 Échec initial conservé ; correspondance complète des21groupes
+- [x] SLS-107.1 Échec initial conservé ; correspondance complète des21groupes
   avec les contrats et les widgets servis, sans cause produit présumée.
 - [ ] SLS-107.2 Attentes/gestes du client alignés aux versions par hash et au
   pilote/promotion, sans groupe retiré ni mutation UI contournée.

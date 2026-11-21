@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 21 novembre2026 — correspondance107 décidée avant le client
+
+Les21groupes sont rapprochés des widgets et contrats actuels dans
+PUBLICATION_CONSOLE_REGRESSIONS. Hash, candidat et alias restent distincts.
+Publication pilote/promotion explicite, tombstones conservés et200/cleanup_pending
+priment les attentes historiques063 ; CONSOLE_PUBLICATION est précisé. Les
+preuves physiques EACCES/gardes,503 de stockage, refus, transports et pagination
+restent exigées. Aucun groupe retiré. Qualification46 encore à exécuter.
+
 ## 21 novembre2026 —33groupes106 passent,107 devient préalable
 
 05d9f312/0a5e020 valide les3groupes dédiés,19API et11gestionUI sur449sources :

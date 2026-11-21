@@ -139,7 +139,7 @@ disponibles pour leurs qualifications propres.
 
 ### Nettoyage physique refusé
 
-La preuve de 503 après suppression logique vise uniquement le répertoire parent
+La preuve historique063 de503 après suppression logique visait uniquement le répertoire parent
 d’une révision inactive créée par la campagne, sans instance utilisatrice.
 L’opérateur relève identité, mode et empreintes, puis retire temporairement
 les permissions du parent ; le vrai contrôle doit observer EACCES avant toute
@@ -152,8 +152,12 @@ attendu. Le chemin ne peut être remplacé ni recréé. EOF, signal et exception
 du pilote restaurent aussi le mode avant désarmement. Une première preuve tue
 le pilote sous faute et attend la restauration par cette garde.
 
-Le DELETE normal de console doit répondre 503 après son commit, afficher le
-diagnostic et relire l’historique avant une nouvelle mutation. SQL et disque
+Dans le parcours historique063, le DELETE par UUID répondait503 après son
+commit. Le parcours courant074 utilise DELETE par hash : sa décision retourne200
+avec cleanup_pending et la notice de nettoyage en attente ; le catalogue garde
+la carte Supprimée. Il relit fonction et versions avant une nouvelle mutation.
+Le raccordement107 en conserve la preuve physique sous la même faute, selon
+[sa correspondance](PUBLICATION_CONSOLE_REGRESSIONS.md). SQL et disque
 doivent montrer la suppression logique avec octets toujours comptés et contenu
 intact. Après restauration, la maintenance normale supprime les octets ; une
 nouvelle publication réelle prouve la reprise. Le gestionnaire bloque les

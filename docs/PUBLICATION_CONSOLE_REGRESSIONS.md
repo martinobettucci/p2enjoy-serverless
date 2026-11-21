@@ -36,3 +36,57 @@ Une incohérence produit découverte est inscrite au backlog avant son traitemen
 
 107 ne ferme ni105, ni106, ni la campagne complète078. Après sa livraison,
 106 peut terminer ses79groupes ;078 doit encore terminer son assemblage entier.
+
+## Décision de raccordement du21novembre2026
+
+Les sources servies `web/src/publications.jsx` et
+`control/app/function_versions.py` recoupent le contrat actuel
+FUNCTION_VERSION_EXECUTION : publication pilote, catalogue par hash incluant
+les tombstones deleted, promotion distincte, nettoyage asynchrone. Ce contrat
+prime les formulations historiques063 encore présentes dans CONSOLE_PUBLICATION.
+On précise ces dernières avant le client ; le produit ne change pas.
+
+Le client conserve séparément UUID de tentative, UUID de révision canonique et
+hash. Un réupload de A peut réutiliser son alias initial : candidate.id ne vaut
+pas nécessairement revision_id. Le suivi expose ces deux identités dans des
+champs distincts ; la région de code expose la cible par hash. Un helper de
+lecture retrouvera la page de la carte par le catalogue réel, sans mutation API.
+
+Correspondance des21groupes, dans leur ordre conservé :
+
+| Groupe | Parcours et preuve actuels |
+| --- | --- |
+| 1 | Création UI et navigation normales ; « Aucune version publiée. » et vide des tentatives. |
+| 2 | Vrais422/409 ; ZIP/handler conservés ; « Revenir à la saisie » avant correction ou nouvelle confirmation. |
+| 3 | A pilote, hash/SHA/alias et focus ; défaut absent et appel sans tag refusé, appel épinglé réussi ; promotion UI puis appel sans tag. |
+| 4 | ZIP invalide et import réel refusés, logs expurgés, cible A conservée. |
+| 5 | B pilote invoqué par hash, défaut A intact ; promotion B puis retour A par confirmations UI, configuration/secrets/données courants. |
+| 6 | Vrais logs tronqués, mobile/clavier ; cible A conservée après upload, appel A. |
+| 7 | Annulation de suppression B, suppression confirmée ; carte Supprimée conservée, appels B refusés ; retrait de A exige choix explicite dans sa modale, annulée. |
+| 8 | Bascule réelle vers un autre hash puis réponse de promotion A perdue après commit ; retour sans rejeu et invocation A. |
+| 9 | Réponse DELETE hash perdue ; tombstone relu sans second DELETE, cible A intacte. |
+| 10 | Même faute physique et pertes SIGKILL/arrêt du helper ; identité/inode/mode/fichiers et garde restaurés. |
+| 11 | Même EACCES réel ; DELETE hash200 avec cleanup_pending, notice « Version retirée. Nettoyage physique en attente. », carte Supprimée ; lectures fonction/catalogue après décision, un seul DELETE ; octets conservés puis effacés par maintenance ; nouvel upload pilote invoqué puis promotion/retour A explicites. |
+| 12 | Déploiement complet modifiant quota avec réupload A ;503 réel de confirmation de stockage, candidat published et alias A réutilisé, cible A inchangée ; reprise et invocation vérifiées. |
+| 13 | Validation réelle en cours, états liste/suivi cohérents puis conflit409 ; A et modification concurrente conservés. |
+| 14 | Rechargement pendant validation, même candidat, aucune préparation/upload supplémentaire ; issue terminale observée et pointeur A invariant, hash pilote si publié. |
+| 15 | Préparation API prescrite, sélection dans liste puis abandon UI. |
+| 16 | Catalogue hash >5 : pages serveur distinctes ; suppression d’un hash inactif page2, total et page conservés car tombstone, focus titre, retour page1 ; pagination des tentatives distincte. |
+| 17 | Vraie panne réseau, reprise exacte de page, promotion UI d’un hash disponible inactif ; actualisation hors ligne et session absente refusées, reconnexion. |
+| 18 | Réponse de préparation perdue au transport Chromium, même UUID retrouvé sans PUT ni second POST, abandon UI. |
+| 19 | UUID absent, erreur explicite sans nouvelle préparation, fermeture du suivi. |
+| 20 | Candidat étranger refusé sans détails/actions ni modification. |
+| 21 | Mobile390px, long nom, métadonnées hash/alias/SHA, confirmations au clavier, retour du focus, aucune fuite dans rendu/stockage navigateur. |
+
+Deux attentes impossibles sont remplacées par leurs discriminants actuels,
+sans retirer de groupe : le503 historique de suppression de révision appartient
+à l’ancienne route UUID ; la route hash actuelle acquitte la décision200 et
+annonce explicitement le nettoyage en attente. Le503 de stockage du groupe12
+reste exigé. Le catalogue garde les hashes supprimés : supprimer sa sixième
+entrée ne peut pas le ramener à une page. Le groupe16 prouve donc maintien
+du total, état deleted, stabilité de page, focus et aller-retour sans doublon.
+Les artefacts physiques et les gardes restent éprouvés exactement sous faute.
+
+Qualification prévue :21groupes de publication puis8manuel,8public et9connexion,
+en série avec vrai SSO, soit46groupes. Les sources indexées comprennent ce
+contrat ; les captures et reçus natifs sont conservés avant toute réécriture.
