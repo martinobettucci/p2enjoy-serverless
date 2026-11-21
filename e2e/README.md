@@ -1,5 +1,18 @@
 # Qualification de la plateforme
 
+## Six instances dans la console — SLS-105
+
+Après les deux sessions SSO réelles de `node e2e/dev-sso-sessions.mjs`, lancer
+`node e2e/execution-ui.mjs` depuis la racine, sur DEV. La préparation API
+publie le handler original puis vérifie le pilote sans cible/instance, avant
+une promotion explicite par hash avec ETag frais. Six instances ready réelles
+portent le même hash/alias, chacune0,05CPU/128Mio ; la console reste paginée5+1.
+Les12groupes existants gardent réseau, focus, extinction, journaux, états de
+démarrage, interruption et nettoyage. Compléter par8manual-ui,8public et
+9login-ui, soit37groupes. Préserver rapports/captures de chaque essai.
+Contrat [EXECUTION_CONSOLE_WARMUP](../docs/EXECUTION_CONSOLE_WARMUP.md).
+Client corrigé pour qualification ;37groupes non encore rejoués.
+
 ## Publication console par hash — SLS-107
 
 Après deux sessions administrateur SSO réelles préparées par

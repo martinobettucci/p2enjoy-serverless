@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 21 novembre2026 — préparation105 corrigée pour qualification
+
+Le groupe2 conserve publication/packager API et atteste maintenant pilote
+disponible, aucune cible/promotion/instance avant un seul POSTpromote avec
+ETag frais. Hash/alias et observations sont persistés avant assertions ; la
+cible est relue, puis six UUID ready sont vérifiés sur le hash/alias à
+50millions nanosCPU/128Mio. Les douze groupes et la pagination5+1 restent
+intacts ; helper106 conservé. Syntaxe JS valide ;37groupes restent à rejouer.
+
 ## 21 novembre2026 — cause105 et décision avant correction
 
 Le rapportfed55b06 et le relevé natif1795267783292962291 concordent : même

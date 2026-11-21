@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-105 | docs/EXECUTION_CONSOLE_WARMUP.md
+// @verifies docs/BACKLOG.md#sls-105 | docs/EXECUTION_CONSOLE_WARMUP.md
 // @spec docs/BACKLOG.md#sls-106 | docs/REGRESSION_ARTIFACT_CLEANUP.md
 // @verifies docs/BACKLOG.md#sls-106 | docs/REGRESSION_ARTIFACT_CLEANUP.md
 // @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
@@ -22,12 +24,12 @@ const base='https://serverless.lelabs.tech',prefix='invocation-'+randomUUID().sl
 const report=path.join(output,'execution-ui.json'),checks=[],faults=[],cleanupErrors=[],captures={},evidence=[],guards=[],pending=[];
 const ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
 const helper='/srv/p2enjoy-serverless/e2e/execution-faults.py';
-let browser,context,page,session,lastInstances,namespaceId,serviceId,functionId,work,token,revisionId,completed=false,cleanupCompleted=false,deleted=false,storageArchive;
+let browser,context,page,session,lastInstances,namespaceId,serviceId,functionId,work,token,revisionId,codeHash,completed=false,cleanupCompleted=false,deleted=false,storageArchive;
 const functionName='observer-'+randomUUID().replaceAll('-','')+'x'.repeat(22);
 const secret='observation-secret-'+randomUUID();
 async function save() {
   const value={target:base,completed:completed&&!cleanupErrors.length&&!faults.length,cleanup:cleanupCompleted&&!cleanupErrors.length,skipped:0,checks,faults,cleanupErrors,
-    namespace_id:namespaceId,service_id:serviceId,function_id:functionId,revision_id:revisionId,last_instances:lastInstances,storage_archive:storageArchive,captures,evidence};
+    namespace_id:namespaceId,service_id:serviceId,function_id:functionId,revision_id:revisionId,code_hash:codeHash,last_instances:lastInstances,storage_archive:storageArchive,captures,evidence};
   const text=JSON.stringify(value,null,2);assert(!text.includes(secret));
   await writeFile(report+'.pending',text+'\n',{mode:0o600});await rename(report+'.pending',report);
 }
@@ -100,10 +102,19 @@ try {
     const descriptor=JSON.parse(await readFile(path.join(work,'.serverless-p2/deployment.json'),'utf8'));const bytes=await readFile(path.join(work,'.serverless-p2',descriptor.artifacts.observer.file));
     const fn=await manage(`/api/functions/${functionId}`);
     const candidate=await manage(`/api/functions/${functionId}/deployments`,{method:'POST',status:201,headers:{'If-Match':String(fn.updated_at)},body:{config:{...fn.config,cpu:.05,memory_mib:128,min_instances:6,max_instances:6,concurrency:6,idle_seconds:30,timeout_seconds:30,queue_timeout_seconds:0},configuration:{secrets:{OBSERVATION_SECRET:secret}},events:{http:[{path:'observe',methods:['POST'],implicit:true}]}}});
-    revisionId=(await manage(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes})).revision_id;
+    const published=await manage(`/api/deployments/${candidate.id}/artifact`,{method:'PUT',bytes});revisionId=published.revision_id;codeHash=published.code_hash;
+    const pilot=await manage(`/api/functions/${functionId}`),catalogue=await manage(`/api/functions/${functionId}/versions?limit=100`),beforePromotion=await manage(`/api/functions/${functionId}/instances?limit=100`);
+    evidence.push({pilot_before_promotion:{candidate_id:candidate.id,revision_id:revisionId,code_hash:codeHash,state:published.state,code_changed:published.code_changed,active_revision_id:pilot.active_revision_id,active_code_hash:catalogue.active_code_hash,first_promoted_at:catalogue.first_promoted_at,versions:catalogue.items,instances:beforePromotion}});await save();
+    assert.equal(published.state,'published');assert.match(codeHash,/^[0-9a-f]{64}$/);assert.equal(published.code_changed,true);assert.equal(pilot.active_revision_id,null);assert.equal(catalogue.active_code_hash,null);assert.equal(catalogue.first_promoted_at,null);assert.equal(catalogue.first_published_code_hash,codeHash);assert.equal(catalogue.items.length,1);assert.equal(catalogue.items[0].code_hash,codeHash);assert.equal(catalogue.items[0].revision_id,revisionId);assert.equal(catalogue.items[0].state,'available');assert.equal(beforePromotion.total,0);assert.deepEqual(beforePromotion.items,[]);
+    const current=await manage(`/api/functions/${functionId}`);
+    const promoted=await manage(`/api/functions/${functionId}/versions/${codeHash}/promote`,{method:'POST',headers:{'If-Match':String(current.updated_at)}});
+    const selected=await manage(`/api/functions/${functionId}`),selectedCatalogue=await manage(`/api/functions/${functionId}/versions?limit=100`);
+    evidence.push({explicit_promotion:{result:promoted,active_revision_id:selected.active_revision_id,active_code_hash:selectedCatalogue.active_code_hash,first_promoted_at:selectedCatalogue.first_promoted_at}});await save();
+    assert.equal(promoted.changed,true);assert.equal(promoted.code_hash,codeHash);assert.equal(promoted.revision_id,revisionId);assert.equal(promoted.default_code_hash,codeHash);assert.equal(selected.active_revision_id,revisionId);assert.equal(selectedCatalogue.active_code_hash,codeHash);assert(selectedCatalogue.first_promoted_at>0);
     token=(await manage(`/api/services/${serviceId}/tokens`,{method:'POST',status:201,body:{name:'invoke-observer',rights:['read']}})).token;
     const data=await until(async()=>{const value=await manage(`/api/functions/${functionId}/instances?limit=100`);lastInstances=value;return value.total===6&&value.items.every(row=>row.state==='ready')&&value;},'Six instances prêtes requises');
-    assert(data.items.every(row=>row.cpu_nanos===50000000&&row.memory_mib===128));assert(data.items.some(row=>row.metrics?.memory_usage_bytes>0),'Mesure mémoire réelle requise');evidence.push({instances:data.items.map(row=>({id:row.id,cpu_nanos:row.cpu_nanos,memory_mib:row.memory_mib,metrics:row.metrics}))});
+    evidence.push({promoted_instances:{code_hash:codeHash,revision_id:revisionId,observation:data}});await save();
+    assert.equal(data.items.length,6);assert.equal(new Set(data.items.map(row=>row.id)).size,6);assert(data.items.every(row=>row.revision_id===revisionId&&row.code_hash===codeHash&&row.cpu_nanos===50000000&&row.memory_mib===128));assert(data.items.some(row=>row.metrics?.memory_usage_bytes>0),'Mesure mémoire réelle requise');evidence.push({instances:data.items.map(row=>({id:row.id,code_hash:row.code_hash,revision_id:row.revision_id,cpu_nanos:row.cpu_nanos,memory_mib:row.memory_mib,metrics:row.metrics}))});
     const observed=await tab('Instances');assert.equal(await rows().count(),5);
     for(const measured of observed.items){const displayed=page.getByRole('article',{name:`Instance ${measured.id}`,exact:true});const memory=displayed.locator('dl>div').filter({has:page.getByText('Mémoire consommée',{exact:true})}).locator('dd');
       assert.equal(await memory.innerText(),measured.metrics?.memory_usage_bytes==null?'Indisponible':new Intl.NumberFormat('fr-FR',{maximumFractionDigits:3}).format(measured.metrics.memory_usage_bytes/1024**2)+' Mio');}
