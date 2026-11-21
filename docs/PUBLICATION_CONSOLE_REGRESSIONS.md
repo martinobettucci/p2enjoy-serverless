@@ -90,3 +90,27 @@ Les artefacts physiques et les gardes restent éprouvés exactement sous faute.
 Qualification prévue :21groupes de publication puis8manuel,8public et9connexion,
 en série avec vrai SSO, soit46groupes. Les sources indexées comprennent ce
 contrat ; les captures et reçus natifs sont conservés avant toute réécriture.
+
+## Premier essai107 : synchronisation de page
+
+Le gel4f5b886 passe15groupes puis échoue dans16 ;46groupes non qualifiés.
+Rapport exact29f9e1b571ce5b3dde885024c89e324210b3d1706b1eb24579c0563fc7a2852c,
+checkpoint6887328d. Les deux réuploads A observés distinguent bien tentative
+et alias ; le dernier est code_changed=false. L’échec compare les3hashes
+de page2 aux5hashes attendus page1, après le retour par Précédente.
+Nettoyage public sans erreur ; lecteur natif après échec completed, counts0,
+5982originaux et même installation/configuration.
+
+La lecture de CodePublications explique l’attente insuffisante du client :
+change versions fixe revisionPage avant que son effet ne mette loading, tandis
+que Pages utilise revisionPage et les cartes utilisent encore state.data.
+Le compteur peut donc annoncer la page demandée avant ses cartes. ready(), qui
+attend seulement l’absence de loading et un bouton actif, ne distingue pas cet
+intervalle. Ce constat n’établit pas un défaut produit permanent.
+
+Décision avant correction : le groupe16 attend une observation cohérente du
+numéro de page ET des hashes exacts attendus de son GET serveur, avec échéance
+finie et diagnostic persisté ; il compare ensuite explicitement les deux listes.
+Il conserve les clics réels, cinq cartes/page, tombstone, total, focus et
+contrôles de doublon. Aucun délai arbitraire ni baisse du nombre de cartes.
+Les46groupes seront rejoués au nouveau gel ; cet essai incomplet reste distinct.

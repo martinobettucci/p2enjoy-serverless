@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 21 novembre2026 — essai107 arrêté à la pagination
+
+Le gel4f5b886 passe15groupes, dont503 de stockage, alias A dédupliqué et
+compteurs sans rejeu.16 compare3cartes de page2 aux5 attendues de page1 lors
+du retour. Rapport29f9e1b conservé et native-after-failure confirme counts0/5982,
+mêmes services/configuration. La cause du wait insuffisant est documentée
+avant correction : attendre compteur ET contenu cohérents, puis comparer.
+Aucun groupe complet46 revendiqué ;107 reste[~].
+
 ## 21 novembre2026 — client107 préparé, qualification encore ouverte
 
 Les21groupes ciblent désormais cartes/hash, pilote puis promotions UI,
