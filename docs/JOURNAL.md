@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — quatrième essai078 arrêté, SLS-110 inscrite
+
+Worker6c3a1e35 au gel8351687 / 453 sources / b452 : onze campagnes et220groupes,
+trois prérequis, puis publication-recovery échoue au quatrième groupe après
+validating, coupe137 et perte réelle du helper. Échec dans until, diagnostic
+fixe conservé ; aucune cause produit présumée. Rapport14897a1b et suite2d7ab8d1
+scellés ; MainPID0/exit1, seule unité arrêtée et client joint. Deux gardes et
+dix purges déclarées par finally, recoupement natif encore à réaliser.
+Sept captures contrôleUI ouvertes individuellement, aucun autre résultat visuel
+inventé. Avertissement antérieur de socket isolé conservé sans attribution causale.
+110 inscrite avant traitement pour diagnostic des reçus/échéances puis quatre
+ciblés et25communs ;078 reste ouverte, sans réutiliser220comme nouveau total.
+
+La réserve de traçabilité des deux expressions exactes est consignée IR-003
+après libération du gel ; leurs preuves080 restent entièrement ouvertes.
+
 ## 21 novembre 2026 — nouveau gel complet SLS-078 après108/109
 
 SLS-108 et SLS-109 sont livrées séparément (30 et106 groupes réels), IR-001/002

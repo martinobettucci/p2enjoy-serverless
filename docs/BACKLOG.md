@@ -68,6 +68,7 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
+| 1 | [SLS-110](#sls-110) Restitution indépendante des publications pendant validation | Corriger | `[~]` | SLS-074 | [PUBLICATION_RECOVERY_GUARD_REGRESSIONS](PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -3092,3 +3093,17 @@ des parents restent hors de sa portée conformément à CONSOLE_STORAGE. Quinze
 services catalogue ont été explicitement vidés ; deux autres services conservent
 leurs secrets communs chiffrés dans leurs lignes supprimées. Ce constat ne clôt ni SLS-074,
 ni SLS-066, ni la campagne entière SLS-078.
+
+<a id="sls-110"></a>
+## SLS-110 — Restitution indépendante des publications pendant validation
+
+Statut : [~] — quatrième groupe publication-recovery interrompu au gel8351687.
+Nature : Corriger. Ordre :1, préalable au nouveau078.
+Contrat : [PUBLICATION_RECOVERY_GUARD_REGRESSIONS](PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md).
+
+- [ ] SLS-110.1 Échec scellé et état natif recoupés ; reçus, échéances et cause
+  instruits avant décision, sans assimiler timeout client et panne de garde.
+- [ ] SLS-110.2 Décision persistée puis correction bornée sans retirer aucun
+  des quatre groupes, coupe, helper perdu, garde ou contrôle physique.
+- [ ] SLS-110.3 Quatre groupes et25communs passent sur code déployé ; captures,
+  manuel, reçus/restaurations et dix purges physiques recoupés,5982originaux conservés.
