@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 21 novembre2026 — assemblage078 décidé avant code
+
+Choix réversible : étendre le lanceur existant avec un scope schedules, garder
+37campagnes/489groupes et ajouter12clients/54groupes en série.18prérequis avec
+SSO frais avant chaque cron, rapports UUID découverts par différence et figés,
+nettoyage natif après chaque phase puis35namespaces/127fonctions au recoupement
+final. Le contrat SCHEDULE_REGRESSIONS porte durées, champs cleanup réellement
+présents et captures à relire. Les trois modules centraux sont identiques aux
+preuves numériques/source/âge conservées ; témoins jeunes désormais inadmissibles
+non rejoués, aucun skip ni groupe ajouté. Aucun produit ou paramètre modifié ;
+implémentation, revue et campagne543 restent à produire.
+
 ## 21 novembre2026 — migration historique104 qualifiée
 
 [qualification104](evidence/legacy-schema010-dev-2026-11-21.json) passe30groupes au gel2613c3e,428sources8b1a9f33 :

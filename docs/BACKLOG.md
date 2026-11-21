@@ -1829,6 +1829,11 @@ relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-1
 <a id="sls-078"></a>
 ## SLS-078 — Moteur de planification des crons
 
+Reprise du21novembre : préalables103/104 livrés. Le
+[contrat de campagne complète](SCHEDULE_REGRESSIONS.md) fixe49campagnes/543groupes
+attendus,18prérequis et les recoupements des36fonctions cron supplémentaires.
+Le lanceur reste à implémenter et éprouver ; aucune clôture anticipée.
+
 Dernier complément : [preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) passe31groupes sur428sources41574c45,
 image capturéec59 puis originauxb452restaurés. Source protégée puis retirée,
 tir terminal/générations99/100 effacés, zéro nouvelle invocation ; six ciblés

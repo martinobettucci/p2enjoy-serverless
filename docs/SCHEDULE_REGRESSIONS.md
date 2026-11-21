@@ -1,0 +1,128 @@
+# Campagne complète des planifications sur le contrôle courant
+
+Contrat de clôture de [SLS-078](BACKLOG.md#sls-078), complément de
+[SCHEDULES](SCHEDULES.md#preuves-e2e-attendues). Décision du21novembre2026,
+après livraison des préalables103/104 et avant code du lanceur.
+
+## Assemblage et comptes
+
+Ajouter `python3 -B e2e/execution-suite.py --scope schedules`. Il conserve
+l’union du scope function-catalogue :37campagnes uniques/489groupes, toutes
+ses assertions et ses six prérequis. Ajouter ensuite, dans cet ordre :
+
+| Client Node | Groupes | Fonctions | Discriminants principaux |
+| --- | --- | --- | --- |
+| schedules |6|3|Frontières, fusion, Unicode, événements et droits |
+| schedule-calendar |5|3|Grammaire numérique, OU jour/semaine, prévisions |
+| schedule-versions |5|3|Pilote, promotions, retour, retrait/désactivation |
+| schedule-recovery |5|1|Trois coupes, fenêtres manquées, aucune reprise du tir |
+| schedule-admission |5|5|CPU, exclusif, file, deadline,315s et extinction |
+| schedule-memory-version |5|3|RAM8192, refus isolé et hash changé avant admission |
+| schedule-queues |4|9|16/128 réceptions réelles, refus sans invocation |
+| schedule-unavailable |4|1|Cache réellement inaccessible, reçu et données conservés |
+| schedule-instance-reuse |4|2|Maximum distinct des budgets, minima et mêmes CID |
+| schedule-concurrency |4|2|Seule concurrence1/2 varie, maximum3 et shared identiques |
+| adapter-schedules |4|2|Vrais plan/deploy/promote et tir après promotion |
+| schedule-console |3|2|Accueil, formulaires, six tirs, pages5+1 et vrai401→200 |
+
+Total attendu :49campagnes/543groupes, dont54groupes propres aux douze clients.
+Les36fonctions de ces douze campagnes sont distinctes. Les sous-assertions,
+lecteurs natifs, connexions SSO et builds ne deviennent pas des groupes ajoutés.
+Ne pas utiliser --unicode-regression-only à la place du nominal6groupes.
+Aucun scénario de charge en parallèle avec un autre client ; les réceptions
+concurrentes internes à un scénario restent ses véritables consommateurs.
+
+## SSO, durée et repos
+
+Les identifiants restent sur stdin privée puis en mémoire, jamais argument,
+environnement, fichier ou rapport. Conserver les préparations SSO du socle.
+Avant chacun des douze clients cron, refaire deux connexions depuis l’accueil
+avec le helper dev-sso-sessions, purpose scheduled-regressions ; seule la session
+plateforme est écrite dans ses fichiers privés habituels. Chaque préparation
+a son nom dans le checkpoint et son reçu figé, sans identifiant de session.
+Total :18prérequis, dont les douze préparations supplémentaires ; chacun doit
+être frais et réussi, sans être compté dans543.
+
+Les durées des contrats restent inchangées : reprise environ40min, admission/
+RAM/files environ15min chacune, indisponibilité/réutilisation environ10min.
+Le total dépasse deux heures, plus le socle et les autres frontières. Aucun
+timeout global600s ni accélération d’horloge. Une exécution reste suivie jusqu’à
+la fin réelle de ses processus ; les gardes distantes existantes ne changent pas.
+Avant chaque campagne cron, recouper le repos natif : aucune fonction vivante,
+instance, opération, invocation active, réservation ni bail ; services sains et
+configuration officielle/budgets inchangés. Après chaque campagne, recouper sa
+purge physique avant de passer à la suivante. Une issue inconnue arrête la suite.
+
+## Rapports frais et conservation
+
+Rapport principal privé schedules-regressions.json et dossier schedules-run-UUID
+neuf0700. Avant tout écrasement d’un rapport existant, conserver ses octets et
+ses captures déclarées. Conserver aussi les nouveaux rapports exacts par phase,
+SHA, dates, sortie du processus, sources/images avant/après et commit du gel.
+Les résultats SSO successifs sont figés avant leur prochain écrasement.
+
+Les douze clients écrivent des noms UUID : onze scheduled-functions-8hex.json,
+l’indisponibilité storage-recovery-8hex-schedule.json. Relever l’ensemble des
+chemins présents avant le client puis imposer exactement un nouveau rapport
+conforme après ; ne jamais sélectionner simplement le dernier fichier. Lier ce
+chemin au checkpoint et vérifier sa fraîcheur, son SHA et ses groupes exacts.
+Un processus non nul reste un échec même si son rapport se dit terminé. Aucun
+rejeu automatique ; conserver l’essai et qualifier une relance séparément.
+
+Trois clients ne déclarent pas cleanup : schedules, calendar et versions.
+Ne pas leur inventer ce champ. Exiger completed, zéro skip/échec, tous les
+groupes réussis, cleanup_errors vide, puis leur recoupement physique strict.
+Calendar/versions ont aussi native_after_purge ; schedules doit recevoir le
+même recoupement RO externe de ses trois fonctions. Les neuf autres clients
+conservent leur exigence cleanup=true et leurs observations natives propres.
+Lire les identifiants singulier/pluriel tels qu’ils sont réellement produits,
+avec unicité, compte attendu et namespace propre vérifiés.
+
+## Recoupement physique et visuel
+
+Étendre storage-suite-inspect pour le scope schedules explicite. Conserver
+intégralement les10namespaces/32fonctions de stockage/URL et les13/59 du
+catalogue : le sous-ensemble reste23/91. Ajouter séparément12namespaces et
+36fonctions cron, soit35/127au total, sans inclure les UUID des installations
+historiques temporaires. Chaque lecteur storage-console-inspect reçoit un
+namespace à la fois pour les crons, conservant ses bornes existantes.
+
+Exiger code/volumes/conteneurs/réseaux/baux/canaux absents, parents supprimés,
+générations retirées, aucune commande/candidat/appel/réservation active et
+aucune garde/helper vivant. Les reçus de reprise et d’indisponibilité gardent
+leurs vérifications propres. Relire dix migrations exactes, intégrité/FK,
+38backend et quatre ressources HTTPS ;5982artefacts originaux, référence et
+configuration conservés. Le contrôle peut redémarrer aux coupes explicitement
+prévues ; son image et son CID restent ceux de l’original.
+
+Indexer les contrats SCHEDULES, SCHEDULE_*.md et RETENTION_HISTORY_REPLAY avec
+les sources actuelles. Recouper toutes les captures déclarées, y compris les
+formats SHA simple ou objet viewport/full_page ; ouvrir individuellement les
+nouveaux originaux desktop/mobile. Les25communs ne remplacent pas cette campagne.
+
+## Rattachement des époques de rétention
+
+Les replays numériques historiques ne sont plus admissibles avec leurs témoins
+âgés de plus de sept jours. Ne pas lancer leurs modes jeunes/preflight/refus
+pré-éligibilité pour les contourner, changer les dates ou les compter comme skips.
+Conserver leurs preuves publiées et les contrôles d’identité de leurs sources :
+borne globale des tirs (schedule-firing-retention-count du11novembre), source
+protégée sous borne (invocation-source-retention-detach-volume du11novembre),
+puis âge réel (schedule-retention-age du21novembre). Les trois modules communs
+schedules.py, execution.py et schedule_calendar.py ont été comparés : leurs SHA
+sont identiques à ces trois preuves et au produit courant. Relire ces égalités
+au gel de la campagne ; une différence invalide ce rapprochement.
+
+Ces preuves gardent leurs images, leurs époques et leurs comptes. Les captures
+scellées restent intouchées ; les builds/chargements et restitutions103/104 ne
+les transforment pas en nouveaux groupes543. Le rapprochement documente ce qui
+est conservé, ce qui est rejoué et ce qui est effectivement servi. Les limites
+résiduelles du banc portent091.2 ; elles ne sont pas des preuves produit.
+
+## Livrable de clôture
+
+Une preuve compressée lie les49rapports frais,18prérequis, collectes finales,
+captures inspectées, continuité du code des preuves conservées et essais exclus.
+Mettre à jour backlog, journal, matrice, DAT, README et déploiement avec les
+résultats effectivement obtenus. Toute preuve manquante garde078[~]. La clôture
+globale095 et les unités produit encore ouvertes restent distinctes.

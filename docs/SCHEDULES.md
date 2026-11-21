@@ -488,3 +488,10 @@ clos puis10000 après clôture. Exacts deux plus anciens HTTP retirés, source
 inchangée,5001 lignes par fonction avant borne, observation12,34s, deux purges
 publiques et restitution nominale jointe. Sept jours et campagne complète restent
 ouverts ; cette preuve ne clôture pas078.5.
+
+## Campagne complète sur le contrôle courant
+
+Le [contrat d’assemblage](SCHEDULE_REGRESSIONS.md) fixe avant code le scope
+schedules : socle37 puis12clients cron,543groupes attendus et18prérequis.
+Il distingue les nouvelles exécutions des preuves historiques de rétention
+conservées avec leurs SHA ; aucun résultat de ce scope n’est encore produit.
