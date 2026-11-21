@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-103 | docs/SCHEMA_010_PROOF_PREREQUISITES.md
+# @verifies docs/BACKLOG.md#sls-103 | docs/SCHEMA_010_PROOF_PREREQUISITES.md#preuves-exigées
 # @spec docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md
 # @verifies docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md#fenêtre-et-conservation-des-données
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#preuves-à-terminer
@@ -52,6 +54,7 @@ SCHEMA_006 = ['001_control.sql', '002_login_limits.sql', '003_deployments.sql',
               '004_function_operations.sql', '005_execution.sql', '006_storage_commands.sql']
 SCHEMA_007 = SCHEMA_006 + ['007_function_code_hash.sql']
 SCHEMA_008 = SCHEMA_007 + ['008_function_versions.sql']
+SCHEMA_010 = SCHEMA_008 + ['009_schedules.sql', '010_code_drafts.sql']
 SCHEMA_006_REVISION = 'f56d79ebe3d1d84731bfd262d1e6a9d5b5a680c0'
 
 
@@ -882,6 +885,8 @@ def instance_limit_observation(item):
     assert all(same(path,item['replacement_dirs'][key]) for key,path in item['paths'].items())
     assert hashes()==item['configuration'],'official_configuration_changed'
     control=Path(item['paths']['state'])/'control.sqlite3'
+    schema_migrations=[v['version'] for v in rows(item,control,'SELECT version FROM schema_migrations ORDER BY version')]
+    if not item.get('retention_replay'):assert schema_migrations==SCHEMA_010,'temporary_schema010_required'
     namespace=rows(item,control,'SELECT id,name FROM namespaces WHERE deleted_at IS NULL')
     if item.get('retention_replay'):retention_scope(item)
     else:assert all(v['name']==item['namespace_name'] for v in namespace),'foreign_namespace'
@@ -902,7 +907,7 @@ def instance_limit_observation(item):
         'kind':v['Config']['Labels'].get('tech.p2enjoy.serverless.kind'),
         'instance_id':v['Config']['Labels'].get('tech.p2enjoy.serverless.instance'),
         'cpu_nanos':v['HostConfig']['NanoCpus'],'memory_bytes':v['HostConfig']['Memory']} for v in definitions]
-    return {'budgets':budgets,'container':current,'installation_id':item['temporary_installation'],
+    return {'budgets':budgets,'schema_migrations':schema_migrations,'container':current,'installation_id':item['temporary_installation'],
         'functions':functions,'instances':instances,'invocations':invocations,'firings':firings,
         'containers':containers,'official_configuration_unchanged':True,'original_control_stopped':True}
 
@@ -1119,7 +1124,8 @@ def main():
     if mode == 'instance-limit':
         item.update(namespace_name='instance-limit-' + campaign[:8],
             unit='serverless-restore-instance-limit-' + campaign,
-            project='instance-limit-' + campaign, source_schema='009', target_schema='009')
+            project='instance-limit-' + campaign, source_schema='009' if retention_replay else '010',
+            target_schema='009' if retention_replay else '010')
     if intermediary:item['intermediate_image']=intermediary['image']
     item['original'] = container(item, 'serverless-api')
     item['reference'] = container(item, 'serverless-runtime-reference')
@@ -1132,7 +1138,7 @@ def main():
             assert settings['SERVERLESS_FUNCTION_CPU_BUDGET'] == '1'
             assert settings['SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB'] == '8192'
         actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
-        if not retention_replay:assert actual == SCHEMA_008 + ['009_schedules.sql'], 'current_schema009_required'
+        if not retention_replay:assert actual == SCHEMA_010, 'current_schema010_required'
         proposal=Path('/etc/spark/env.?')
         item['proposal_sha256']=hashlib.sha256(proposal.read_bytes()).hexdigest() if proposal.exists() else None
         if firing_replay:

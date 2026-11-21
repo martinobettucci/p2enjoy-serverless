@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-103 | docs/SCHEMA_010_PROOF_PREREQUISITES.md
+// @verifies docs/BACKLOG.md#sls-103 | docs/SCHEMA_010_PROOF_PREREQUISITES.md#preuves-exigées
 // @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#installation-temporaire-réelle
 // @verifies docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#scénarios-requis
 // Real deployment and kernel signals; no application server or dependency substitute.
@@ -38,7 +40,7 @@ try{
  child.on('close',code=>{ended=true;exitCode=code;});child.on('error',()=>{ended=true;exitCode=-1;});
  await check('Même image réellement déployée, plafond2, données neuves et HTTPS disponible',async()=>{
   const armed=await event('guard-armed'),ready=await event('instance-limit-ready');
-  assert.equal(armed.current_image,image);assert.equal(ready.container.image,image);assert.notEqual(ready.container.id,armed.original_id);
+  assert.equal(armed.current_image,image);assert.equal(ready.container.image,image);assert.deepEqual(ready.capacity.schema_migrations,['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql','008_function_versions.sql','009_schedules.sql','010_code_drafts.sql']);assert.notEqual(ready.container.id,armed.original_id);
   assert(ready.capacity.original_control_stopped&&ready.capacity.official_configuration_unchanged);
   assert.deepEqual(ready.capacity.budgets,{SERVERLESS_FUNCTION_INSTANCE_LIMIT:'2',SERVERLESS_FUNCTION_CPU_BUDGET:'1',SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB:'8192'});
   for(const name of ['functions','instances','invocations','firings','containers'])assert.deepEqual(ready.capacity[name],[]);

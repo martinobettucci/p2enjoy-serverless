@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-103 : bancs courants raccordés aux dix migrations001→010 et liste
+  recoupée dans les reçus de capacité. Refus périmés reproduits ; qualification
+  des corrections à produire, sans changement produit ni configuration.
+
 - Rétention à sept jours qualifiée en DEV le21novembre :31groupes réels,
   six ciblés sur captures authentiques puis25communs,22images inspectées.
   Source protégée puis supprimée après clôture, tir terminal/générations retirés

@@ -1,5 +1,16 @@
 # Qualification de la plateforme
 
+## Préconditions courantes sur010 — SLS-103
+
+Le composant `control-operations.py` exige les dix migrations001→010. Les
+clients `instance-limit-environment.mjs` et `instance-limit-admission.mjs`
+recoupent la liste ordonnée `capacity.schema_migrations` du helper sur010.
+Les modes historiques006/007/008 et les replays de rétention009 restent distincts.
+Contrat : [préconditions010](../docs/SCHEMA_010_PROOF_PREREQUISITES.md).
+Deux refus périmés reproduits avant correction, originaux conservés ; correctif
+implémenté, syntaxe contrôlée, nouvelles preuves55/gardes/admission à exécuter.
+
+
 ## Frontières du ZIP reconstruit — banc préparé
 
 `node e2e/code-editor-archive-boundaries.mjs` reçoit le SSO sur stdin privée et

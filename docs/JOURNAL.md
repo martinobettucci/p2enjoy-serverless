@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 21 novembre2026 — préconditions010 implémentées avant preuve
+
+Le composant attend exactement001→010, sans modifier ses55scénarios. Le helper
+099 nomme010 dans le mode courant, précontrôle la liste exacte puis la relit
+dans capacity ; les deux clients la recoupent. Replays historiques009 et
+parcours006/007/008 conservent leurs contrôles. Syntaxes vérifiées ; revue et
+preuves finales restent requises avant clôture103. Aucun produit/manuel modifié.
+
+
 ## 21 novembre2026 — deux refus périmés103 reproduits
 
 control-operations surb452 termine1 à l’assertion008 après le premier groupe ;

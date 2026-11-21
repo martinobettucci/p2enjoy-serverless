@@ -68,7 +68,7 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-103](#sls-103) Préconditions des preuves sur le schéma010 | Corriger | `[ ]` | migration010 déployée | [SCHEMA_010_PROOF_PREREQUISITES](SCHEMA_010_PROOF_PREREQUISITES.md) |
+| 1 | [SLS-103](#sls-103) Préconditions des preuves sur le schéma010 | Corriger | `[~]` | migration010 déployée | [SCHEMA_010_PROOF_PREREQUISITES](SCHEMA_010_PROOF_PREREQUISITES.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -2899,7 +2899,8 @@ restent compréhensibles, mais l’absence d’espaces dégrade la lecture.
 <a id="sls-103"></a>
 ## SLS-103 — Préconditions des preuves sur le schéma010
 
-Statut : [ ]. Nature : Corriger. Ordre :1, préalable à la campagne complète078.
+Statut : [~] — attentes010 et reçus implémentés, qualification à produire.
+Nature : Corriger. Ordre :1, préalable à la campagne complète078.
 Contrat : [SCHEMA_010_PROOF_PREREQUISITES](SCHEMA_010_PROOF_PREREQUISITES.md).
 
 Constats de revue du21novembre : control-operations.py141 exige008 alors que
