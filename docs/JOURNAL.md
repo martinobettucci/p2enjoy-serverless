@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 21 novembre2026 — premier essai106 et conservation des volumes
+
+B74f486b/01fa6e1 exécute le handler : data/cache écrits et relus dans Docker,
+promotion explicite et hash recoupés. Le deuxième groupe exige à tort enabled
+sur des volumes archivés ; l’agent archive les désactive en conservant quota et
+backings. Le nouveau helper réussit sa purge dans finally, lecteur natif positif,
+source449/image inchangées, counts0 et5982artefacts exacts après l’essai.
+Échec conservé, zéro groupe qualifié. Décision avant code : persister le GET
+avant assertion, vérifier flags désactivés/quotas/unmounted et un relevé RO
+--retained avec SHA du ZIP/code et des deux records. Comparer les hashes aux
+valeurs écrites ; aucune ligne/date ni réponse fabriquée. Rejouer les trois
+groupes et79attendus après cette correction de l’assertion du banc.
+
 ## 21 novembre2026 — correctif106 relu avant qualification
 
 La remise en état22fcd60a emploie une vraie paire SSO et un seul POST purge

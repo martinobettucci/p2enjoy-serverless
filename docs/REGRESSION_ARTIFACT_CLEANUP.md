@@ -77,3 +77,23 @@ enfin25communs ; conserver à part la remise en état de l’ancien UUID. La pr�
 six instances reste à qualifier dans105 après106 : ne pas l’exiger pour clore
 106 ni modifier sa préparation dans ce changement. Les lecteurs/sourceimages,
 captures et5982artefacts sont recoupés à chaque phase ; un échec reste conservé.
+
+## Sens des volumes archivés et preuve de conservation
+
+L’essai b74f486b au gel01fa6e1 exécute réellement le handler et écrit les deux
+records, puis échoue dans son deuxième groupe sur enabled=true. Son finally
+purge complètement par le nouveau helper ; le lecteur natif réussit et les5982
+originaux sont conservés. Ce premier essai reste incomplet, zéro groupe qualifié.
+
+La source agent_volumes.archive met explicitement enabled=0 après arrêt des
+volumes, sans retirer quota ou backing. L’assertion du nouveau client confondait
+activation et conservation. Avant code du replay, décider : conserver d’abord
+le GET archive dans le rapport, exiger désactivation/unmounted/quotas2Mio et
+ajouter un mode RO --retained au lecteur dédié. Il vérifie namespace/fonction
+archivés, absence de garde/instance/bail, ZIP au SHA déclaré, fichier de code au
+SHA de la fixture et les deux vrais backings record par taille/SHA. Le client
+compare ces SHA aux valeurs effectivement écrites par le handler. Aucun contenu
+ni configuration/secrets n’est exporté. Le mode purgé garde ses contrôles stricts.
+Cette observation remplace l’assertion incorrecte, sans réduire la preuve de
+conservation ni changer le produit. Les trois groupes entiers et les régressions
+prévues sont à rejouer après ce correctif du banc.
