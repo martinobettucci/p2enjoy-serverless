@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
+// @verifies docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
 // @spec docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md
 // @verifies docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md#parcours-réel
 import assert from 'node:assert/strict';
@@ -85,10 +87,21 @@ try{
       }
     });
     // @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#migration-et-conservation
-    await check('Migration réelle 001–003 vers 001–007 : session et archives conservées',async()=>{
+    await check('Migration réelle 001–003 vers 001–010 : session et archives conservées',async()=>{
       const current=await operation('upgrade');assert.equal(current.image,currentImage);
       session=await call('/api/session');assert(session.authenticated);
-      for(const fn of functions){const row=await call('/api/archives/'+fn.id);assert(row.artifact_bytes>0&&row.storage.available&&!row.storage.registered);const physical=await operation('inspect',{function_id:fn.id});assert.equal(physical.versions.length,7);assert.deepEqual(physical.agent,[]);evidence.push({scenario:'migrated-archive',function_id:fn.id,physical});}
+      for(const fn of functions){
+        const row=await call('/api/archives/'+fn.id);assert.equal(row.id,fn.id);assert.equal(row.name,fn.name);
+        assert(row.artifact_bytes>0&&row.storage.available&&!row.storage.registered);
+        const physical=await operation('inspect',{function_id:fn.id});
+        assert.deepEqual(physical.versions,['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql','008_function_versions.sql','009_schedules.sql','010_code_drafts.sql']);
+        assert.deepEqual(physical.agent,[]);
+        const historical=evidence.find(value=>value.scenario==='historical-archive'&&value.function_id===fn.id).physical;
+        assert(Object.keys(historical.artifact_inventory).length>0);
+        assert.deepEqual(physical.revisions,historical.revisions);assert.deepEqual(physical.artifacts,historical.artifacts);
+        assert.deepEqual(physical.artifact_inventory,historical.artifact_inventory);
+        evidence.push({scenario:'migrated-archive',function_id:fn.id,physical});
+      }
     });
     await check('Archive sans registre : purge terminée, absence persistée et aucun reçu agent inventé',async()=>{
       const fn=functions[0],action=await purge(fn);const done=await receipt(action.id,row=>row.state==='completed');

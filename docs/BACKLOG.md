@@ -68,7 +68,7 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-104](#sls-104) Préparation du contrôle historique vers010 | Corriger | `[ ]` | SLS-103 | [STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md) |
+| 1 | [SLS-104](#sls-104) Préparation du contrôle historique vers010 | Corriger | `[~]` | SLS-103 | [STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -2941,7 +2941,8 @@ conservent leurs propres campagnes.
 <a id="sls-104"></a>
 ## SLS-104 — Préparation du contrôle historique vers010
 
-Statut : [ ]. Nature : Corriger. Ordre :1, préalable à la campagne078.
+Statut : [~] — correctif implémenté, qualification à produire.
+Nature : Corriger. Ordre :1, préalable à la campagne078.
 Contrat : [STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104).
 
 ConstatsGit du21novembre : storage-legacy-build.py exige auth.py identique,

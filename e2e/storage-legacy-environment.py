@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
+# @verifies docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
 # @spec docs/BACKLOG.md#sls-103 | docs/SCHEMA_010_PROOF_PREREQUISITES.md
 # @verifies docs/BACKLOG.md#sls-103 | docs/SCHEMA_010_PROOF_PREREQUISITES.md#preuves-exigées
 # @spec docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md
@@ -540,13 +542,20 @@ def inspect_function(item, function):
     versions = [row['version'] for row in rows(item, control, 'SELECT version FROM schema_migrations ORDER BY version')]
     new = '006_storage_commands.sql' in versions
     revisions = rows(item, control, 'SELECT id,stored_bytes,deleted_at FROM revisions WHERE function_id=?', (function,))
-    return {'versions': versions, 'revisions': revisions,
+    observation = {'versions': versions, 'revisions': revisions,
             'artifacts': {row['id']: (Path(item['paths']['state']) / 'artifacts' / row['id']).exists() for row in revisions},
             'agent': rows(item, registry, 'SELECT state,version,pending_json FROM functions WHERE id=?', (function,)),
             'agent_receipts': rows(item, registry, 'SELECT operation_id,kind,expected_version,version FROM discard_receipts WHERE function_id=?', (function,)),
             'commands': rows(item, control, 'SELECT id,state,phase,storage_absent,result_version,error_code FROM storage_commands WHERE function_id=?', (function,)) if new else [],
             'guards': rows(item, control, 'SELECT id,decision FROM function_operations WHERE function_id=?', (function,)) if new else [],
             'reserved_bytes': rows(item, control, 'SELECT coalesce(sum(reserved_bytes),0) AS bytes FROM deployments WHERE function_id=?', (function,))[0]['bytes']}
+    if item.get('mode') == 'historical':
+        root = Path(item['paths']['state']) / 'artifacts'
+        observation['artifact_inventory'] = {
+            str(path.relative_to(root)): {'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                'bytes': path.stat().st_size, 'mode': path.stat().st_mode & 0o7777}
+            for revision in revisions for path in sorted((root / revision['id']).rglob('*')) if path.is_file()}
+    return observation
 
 
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
@@ -1026,6 +1035,7 @@ def main():
         assert guard_seconds==120,'firing_replay_guard_duration'
     source_schema='007' if '--source-schema007' in options else '006'
     target_schema='008' if '--target-schema008' in options else '007'
+    if mode=='historical':source_schema='003';target_schema='010'
     assert source_schema!='007' or target_schema=='008','source007_requires_explicit_target008'
     if mode=='function-version-unknown-first':assert source_schema=='006' and target_schema=='008','unknown_first_requires_006_to008'
     if mode in ('function-version-purge','function-version-unknown-first'):
@@ -1146,6 +1156,10 @@ def main():
             item['firing_replay']=firing_replay
             item['namespace_name']=firing_replay['source']['namespace_name']
             item['temporary_installation']=firing_replay['source']['installation_id']
+
+    if mode=='historical':
+        actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
+        assert actual==SCHEMA_010,'current_historical_target_schema010_required'
 
     if retention_replay:
         source=retention_replay['source'];assert source['installation_id']==item['installation'],'known_original_installation_required'

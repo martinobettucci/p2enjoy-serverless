@@ -1,5 +1,17 @@
 # Qualification de la plateforme
 
+## Contrôle historique003 vers010 — SLS-104
+
+Le constructeur conserve l’ancien arbre Git remappé et ses sources intactes.
+Dépendances/runtime restent identiques ; auth.py historique et courant sont
+attestés séparément, différences du validateur bornées aux changements connus.
+Contexte de build neuf UUID, tag courant conservé. Le client full attend les
+dix migrations et garde ses quatre scénarios. Le déplacement partiel reste
+distinct. Contrat : [compatibilité104](../docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104).
+Deux refus reproduits avant correction ; code implémenté, nouvelle qualification
+réelle de build/SSO/migration/purges/restitution encore à produire.
+
+
 ## Préconditions courantes sur010 — SLS-103
 
 Le composant `control-operations.py` exige les dix migrations001→010. Les
