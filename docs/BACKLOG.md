@@ -68,6 +68,7 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
+| 1 | [SLS-108](#sls-108) Raccordement de la preuve de transport des services | Corriger | `[~]` | SLS-074 | [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -3046,3 +3047,17 @@ Deux fonctions sont purgées par les API avec contrôle physique du code, des
 volumes et des secrets ;5982originaux/configuration/référence sont préservés.
 Les deux essais incomplets restent exclus.106 et105 ont leurs preuves propres ;
 078 reste ouverte pour son assemblage complet.
+
+<a id="sls-108"></a>
+## SLS-108 — Raccordement de la preuve de transport des services
+
+Statut : [~] —409 réel là où le client attend200 au gel60a20da.
+Nature : Corriger. Ordre :1, préalable à078.
+Contrat : [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md).
+
+- [ ] SLS-108.1 Échec et worker finalisé conservés ; cause et cinq groupes
+  rapprochés des contrats/identités actuels avant décision.
+- [ ] SLS-108.2 Client raccordé sans supprimer faute, observateur, garde,
+  transport CLI ou vérification réelle ; décision persistée avant code.
+- [ ] SLS-108.3 Cinq groupes puis25communs passent ; captures/manuel et
+  nettoyage natif recoupés,5982originaux préservés.

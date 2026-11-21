@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre2026 — troisième essai078 arrêté après313groupes
+
+Le worker9c509830/60a20da passe18campagnes/313groupes et4prérequis,
+notamment les12exécution et21publication corrigés. service-transport échoue
+sur409!=200 dans l’invocation du sous-parcours before. Rapportabb59234 et
+suite0399336a sont scellés ; worker exit1/MainPID0, unité arrêtée et client
+joint. Le rapport indique cleanup=true sans erreur. Le relevé natif après
+échec confirme tous compteurs0,5982originaux exacts, mêmes services/images
+et configuration. Aucun543 revendiqué.
+108 est inscrit avant traitement pour recouper ses cinq groupes et sa
+préparation ; aucune cause produit présumée. Les63captures des phases de
+gestion/connexion/exécution/publication/manuel ont été ouvertes par lots et
+leurs SHA/fraîcheur recoupés ; elles ne complètent pas la campagne manquante.
+
 ## 21 novembre2026 — reprise complète078 après105/106/107
 
 Les trois préalables sont livrés séparément :107/46,106/79 et105/37groupes.
