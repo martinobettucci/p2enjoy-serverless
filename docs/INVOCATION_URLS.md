@@ -67,39 +67,54 @@ sont recensés séparément, sans inventer un hôte concret ni une URL copiable.
 
 ## API et calcul commun
 
-Ajouter `GET /api/functions/{UUID}/invocation-urls?limit=5&offset=0` : session
+`GET /api/functions/{UUID}/invocation-urls?limit=5&offset=0` accepte un
+paramètre optionnel `version=HASH` : session
 administrateur ou Read sur cette fonction. Create/Update/Delete seuls, portée
 étrangère et anonymat restent refusés avant de révéler l’existence de l’objet.
 Fonction ou parent supprimé : 404 après autorisation ; un jeton ne pouvant
 identifier un service autorisé reçoit le refus de portée habituel.
 Limite 1..20 domaines par page, offset 0..10000 ; tri par domaine.
 
-Une seule lecture SQL joint fonction active, service actif et révision active
-non supprimée. Les chemins et méthodes viennent de cette révision, avec son
-UUID dans le résultat. Pas de valeurs de variables, secrets, jetons, code,
-chemins hôte ou résultat de handler. Les horaires distinguent lecture du
-registre et révision observée ; une consultation n’exécute pas de fonction.
+Un même instantané SQL autorisé lie la fonction et son service actifs, la
+révision sélectionnée, ses événements et la cible promue observée séparément.
+Sans paramètre `version`, la sélection suit la cible promue. Avec
+`version=HASH`, elle désigne explicitement une version disponible, y compris
+un premier upload non promu. Les chemins et méthodes viennent de la même
+révision que le hash sélectionné, sans repli silencieux vers le défaut.
+Pas de valeurs de variables, secrets, jetons, code, chemins hôte ou résultat
+de handler. Les horaires distinguent lecture du registre et révision observée ;
+une consultation n’exécute pas de fonction.
 
-Le résultat contient function_id, service_id, revision_id, function_state
+Le résultat contient function_id, service_id, revision_id, code_hash,
+default_code_hash, selection (default/version), function_state
 (draft/published), console_url canonique, source (state, observed_at, mtime,
 sha256, error_code éventuel), items de domaines avec origine/transport et leurs
 URL/méthodes, total/limit/offset et domaines génériques non concrétisés.
+Le champ function_state décrit ici la sélection : un hash disponible peut
+être published alors que la sélection par défaut reste draft faute de
+première promotion.
 Une source absente/interdite/invalide/changeante donne source indisponible et
 aucune URL ; ce diagnostic ne dégrade pas le moteur d’invocation ni sa santé.
 Un fichier valide sans domaine applicable donne un résultat vide explicite.
-Un brouillon ne reçoit aucune URL à appeler.
+Sans cible promue, la consultation par défaut ne reçoit aucune URL à appeler.
+Une consultation explicite d’un hash disponible reste possible.
 
-Pour un événement exact, construire `/invoke/{UUID}/{chemin}`. Pour un événement
-implicite, proposer `/invoke/{UUID}` avec ses méthodes ; le nom dérivé stocké
-n’est pas nécessaire à ce point stable. Le routage actuel ne supporte que les
-chemins exacts : aucun gabarit paramétré inexistant n’est annoncé. Préserver la
-casse et les méthodes ; une URL sans tag suit la révision active actuelle.
-[SLS-074](FUNCTION_VERSIONS.md) ajoutera les versions par hash et la promotion ;
-aucune URL versionnée n’est émise avant son implémentation.
+Pour la sélection par défaut, construire `/invoke/{UUID}/{chemin}` pour un
+événement exact et `/invoke/{UUID}` pour l’entrée implicite. Pour
+`version=HASH`, construire respectivement
+`/invoke/{UUID}@{HASH}/{chemin}` et `/invoke/{UUID}@{HASH}`, avec le hash complet.
+Le nom dérivé stocké n’est pas nécessaire à ce point stable. Le routage actuel
+ne supporte que les chemins exacts : aucun gabarit paramétré inexistant n’est
+annoncé. Préserver la casse et les méthodes. Une URL sans tag suit uniquement
+la cible choisie par promotion explicite ; publier un nouveau hash ne la
+déplace pas. Le contrat courant est décrit dans
+[Publication, promotion et exécution d’une version par hash](FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel).
 
 La source et la construction sont communes à la console et à l’adaptateur.
-La CLI consulte ce catalogue après publication, avec le même jeton Read, et
-parcourt les pages de cinq domaines tant que source et révision restent identiques. Une lecture
+La CLI consulte ce catalogue après publication pour le hash retenu, avec le
+même jeton Read. Elle parcourt les pages de cinq domaines en vérifiant la
+stabilité de la source, du nombre de domaines, du hash sélectionné et de sa
+révision. Une lecture
 indisponible, un changement de catalogue/révision ou un refus après publication
 rend seulement l’information d’adresses indisponible avec diagnostic : une
 publication déjà réussie reste published, sans nouveau ZIP ni mutation rejouée.
@@ -108,6 +123,11 @@ L’exemple curl préfère GET lorsqu’il est autorisé ; sinon il reprend une 
 déclarée. Le classement alphabétique ne choisit pas DELETE lorsqu’un GET existe.
 
 ## Console et domaine canonique
+
+La carte d’une version disponible ouvre cette facette avec `?version=HASH`.
+Le retour à la cible par défaut est explicite. La sélection reste distincte
+de la promotion : consulter ou copier les adresses d’un pilote ne le rend
+pas actif pour les appels sans tag.
 
 Facette partageable Adresses d’appel dans la fonction, et lien explicite depuis
 chaque fonction de la fiche service. Domaines paginés par cinq, méthodes et URL
@@ -548,6 +568,14 @@ parcours nominal confirme le retour de chaque build, ses images et contenus.
 
 ## Perte native du catalogue après publication CLI
 
+Cette section conserve le protocole et les résultats du 8 novembre 2026,
+avant le raccordement de la publication pilote par hash et de la promotion
+séparée. Le GET sans paramètre `version` et la cible active observée décrivent
+cette époque. Ils ne définissent pas la requête facultative de la CLI actuelle.
+La clarification du contrat courant et les campagnes API/CLI et UI de SLS-109
+ne rejouent ni ne requalifient ce complément de transport, ses barrières ou
+ses résultats ; ses sources, images, rapports et nettoyages restent inchangés.
+
 Le [complément DEV](evidence/invocation-url-transport-dev-2026-11-08.json)
 passe trois groupes propres avec `node e2e/invocation-url-transport.mjs`, puis
 cinq groupes de transport historique et huit API/CLI, en série. Il réutilise
@@ -605,6 +633,12 @@ Ces chemins d’échec restent distincts du résultat nominal et ne sont pas
 déclarés éprouvés avant leurs scénarios réels.
 
 ## Révocation avant le GET facultatif
+
+Ce complément conserve lui aussi son protocole et ses preuves du 8 novembre
+2026. Le nombre de connexions, la barrière et la publication observée
+appartiennent à ce gel historique. Ils ne sont pas requalifiés par la
+clarification du catalogue courant ni par les campagnes API/CLI et UI de
+SLS-109.
 
 Le client de transport passe désormais quatre groupes réels dans le
 [complément de révocation](evidence/invocation-url-refusal-dev-2026-11-08.json).

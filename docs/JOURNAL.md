@@ -1,5 +1,25 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — IR-002 corrigée : catalogue courant et transports historiques
+
+Après instruction RO et décision du principal, INVOCATION_URLS décrit la
+sélection par défaut/version, hash/alias/événements du même instantané, défaut
+observé séparément et catalogue CLI du pilote. La facette s’ouvre depuis sa
+carte sans promotion. Bon sens, précédents FUNCTION_VERSION_EXECUTION/IR-001
+et UX actuelle concordent ; aucune décision produit supplémentaire.
+
+Les 8 groupes API/CLI et 6 UI de la preuve109 au gel0dfd953/453sources/b452
+recoupent premiers pilotes sans défaut, chemins @hash, ancien défaut conservé
+pendant nouvel upload, promotion et rollback, copie UI et invocation Docker.
+Leurs rapports exacts fb570378 et bbc7eb01 sont dans le brut public109. Les
+sources invocation_urls.py589af8b9 et adaptateur sont celles du gel recoupé.
+
+Les chapitres de transport et de révocation du 8 novembre gardent leurs textes,
+protocoles et résultats, précédés seulement d’un marqueur d’époque. Aucun
+rejeu de leurs barrières ou six connexions n’est revendiqué. Revue du diff/liens,
+aucun test ou code changé et aucun groupe ajouté. IR-002 est retirée ; SLS-066,
+SLS-074 et l’assemblage complet SLS-078 restent ouverts. Registre désormais vide.
+
 ## 21 novembre 2026 — SLS-109 qualifiée et close
 
 Au gel 0dfd953 / 453 sources sur b452, les dix campagnes passent leurs 81
