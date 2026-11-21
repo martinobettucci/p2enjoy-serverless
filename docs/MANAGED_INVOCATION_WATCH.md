@@ -182,3 +182,54 @@ aux sources corrigées, seules celles du pilote géré changent ; quatre ressour
 HTTPS identiques et no-store. Code image au gel6d0cc43, métadonnées de retoura0c9886 ;
 aucune restauration DB, migration, route ou variable nouvelle. Ces constats de
 bascule ne remplacent pas les81groupes, encore à exécuter sur les sources figées.
+
+## Branche non observée et discriminant natif — décision avant code
+
+La première campagne du gel4382b37 sur433da150 termine onze parcours métier,
+mais échoue à `watch_closing_lease_branch_unobserved` : les watchers ont été
+annulés avant la réponse en erreur. Zéro groupe qualifié, aucun passage aux
+14/31/25 suivants. Rapport, source du lanceur, résultats et nettoyage natif
+conservés ; fonction purgée, worker joint, nominal et5982originaux recoupés.
+Ce refus est une preuve manquante, pas une nouvelle cause produit ni un succès.
+
+Décision : conserver les onze groupes et leur postcondition, ajouter un douzième
+cas déterminant le point de libération. Dans le seul worker E2E, un traceur
+standard observe le code object réel de StorageClient.release_confirmed,
+sa source embarquée et la ligne avant leases, après le vrai release acquitté.
+Fonction, consommateur et installation doivent correspondre au cas ; les seuls
+champs de réponse observés sont released=true/already_released=false. Aucune
+méthode, frame, valeur de retour ou RPC n’est remplacé ou modifié. Refuser un
+traceur préexistant et un second déclenchement ; restaurer le traceur sur toutes
+les sorties. L’instrumentation ne jette pas ses propres erreurs dans la méthode
+produit : elle les conserve puis fait échouer le cas après son nettoyage normal.
+
+À ce point, un petit processus Python indépendant du worker, dans la même image,
+avec environnement vide, valide PID/birth/boot/script/installation via pidfd.
+Il confirme par les vrais clients Docker et stockage l’absence du conteneur et
+du bail, annonce READY, puis attend l’armement. Ce gardien est seul propriétaire
+de SIGSTOP/SIGCONT. Après armement il arrête ce seul worker, observe son vrai état
+STOP, laisse passer au moins0,75s monotones (> surveillance0,5s), puis CONT dans
+son finally. Le contrôle, l’agent et FUSE ne sont pas suspendus. Aucun changement
+d’horloge, charge artificielle, interception ou dépendance de substitution.
+
+Le worker en reprise envoie son ACK avant d’attendre la fin du gardien. Conserver
+READY/armement/STOP/CONT/ACK/résultat, empreintes des reçus et code, identités et
+instants monotones d’observation, puis joindre le processus exact. Les attentes
+et l’alarme du gardien sont bornées ; aucune réussite sans son reçu complet.
+Le parent de rattrapage doit valider le worker exact puis CONT avant TERM et
+jointure, pour ne pas laisser un worker arrêté si le gardien disparaît. Une
+jointure inconnue reste un échec avec identité conservée.
+
+Le douzième cas garde deadline2s et sommeil30s, exige son propre watcher
+LeaseMissingDuringClose/lease_unknown, résultat interne et externe
+invocation_timeout corrélés, libération confirmée, donnée relue et ressources
+physiques retirées. Une reprise réelle ne garantit pas l’ordre des callbacks :
+la branche doit toujours être effectivement observée, sinon le cas échoue.
+Cela qualifie un entrelacement provoqué par SIGSTOP, sans prétendre tous les
+ordres possibles ni attribuer l’ancienne assertion111.
+
+Nouveau passage entier :12ciblés +14gérés +31publics +25communs = **82uniques**,
+sans réutiliser les onze parcours de l’essai refusé. L’image produit433da150 et
+ses38backend/quatreweb sont inchangés ; seuls client/contrats de preuve évoluent.
+Les propres pannes du gardien et du rattrapage parent qui ne sont pas provoquées
+par ce cas nominal restent explicitement dues dans091.2, jamais déclarées acquises.

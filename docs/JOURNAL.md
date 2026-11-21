@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — onze parcours112 passés, qualification refusée et nouveau discriminant
+
+Travail7b3d3317 au gel4382b37 /433da150 : onze parcours métier réussis, puis
+postcondition watch_closing_lease_branch_unobserved en échec. Zéro groupe qualifié,
+aucun passage aux autres campagnes. Nettoyage et flux conservés, fonction purgée
+nativement, compteurs0 et5982originaux recoupés. Aucun nouveau défaut produit déduit.
+
+Décision avant code dans MANAGED_INVOCATION_WATCH : douzième cas avec observation
+du vrai point release acquitté, puis SIGSTOP/CONT du seul worker par un gardien
+indépendant validé pidfd/identité, sans modifier les méthodes ou l’horloge. READY,
+armement, STOP observé,0,75s réelles, CONT, ACK avant jointure et reçus exigés.
+Le parent de secours fait CONT avant TERM. Trace restaurée, erreurs de l’outil
+conservées hors du produit ; branche locale réellement observée obligatoire.
+Nouveau82complet, sans reprendre11. Image/backend/web inchangés. Pannes propres
+non provoquées du gardien/parent ajoutées explicitement à091.2.
+
 ## 21 novembre 2026 — contrôle corrigé112 déployé, qualification à produire
 
 Retour7aaaa36e reconstruit sans environnement de cellule,38backend/quatreweb

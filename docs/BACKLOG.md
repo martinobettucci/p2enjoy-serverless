@@ -2629,6 +2629,10 @@ Critères d'acceptation :
   requise avant de cocher ce critère.
 - [ ] SLS-091.2 Chemins résiduels de nettoyage et de reprise après interruption prouvés (SIGKILL
   pendant nettoyage, reprise sans doublon ni perte).
+  Les pannes propres du gardien112 et du rattrapage de son parent restent à
+  provoquer : perte avant/après armement, gardien perdu pendant STOP, CONT avant
+  TERM, reçu ou jointure indisponible et identité conservée sans signal étranger.
+  Le cas nominal de suspension ne les qualifie pas par lui-même.
 
 Tests exigés : unitaires de la rétention, E2E sur horloge et volume réels, ressources
 restituées recoupées.
@@ -3157,7 +3161,7 @@ Contrat : [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md).
 ## SLS-112 — Issue d’invocation pendant libération volontaire du bail
 
 Statut : [~] — triplet causal reproduit au gel5f8e6d3 ; correction déployée sur433da150,
-81groupes encore à qualifier. Ancienne assertion111 non attribuée.
+82groupes encore à qualifier après un essai refusé pour branche non observée. Ancienne assertion111 non attribuée.
 Nature : Corriger. Ordre :1. Contrat : [MANAGED_INVOCATION_WATCH](MANAGED_INVOCATION_WATCH.md).
 
 - [ ] SLS-112.1 Discriminant réel entre résultat de l’invocation interne,
@@ -3166,7 +3170,7 @@ Nature : Corriger. Ordre :1. Contrat : [MANAGED_INVOCATION_WATCH](MANAGED_INVOCA
 - [ ] SLS-112.2 Une fermeture initiée par l’invocation ou le drainage ne devient
   pas une fausse panne de stockage à cause de son propre bail libéré ; les pertes
   réelles de FUSE/agent continuent de retirer le consommateur avec leur erreur.
-- [ ] SLS-112.3 Onze groupes discriminants,14groupes gérés,31publics et25communs
-  (81uniques) passent
+- [ ] SLS-112.3 Douze groupes discriminants,14groupes gérés,31publics et25communs
+  (82uniques) passent
   sur code déployé ; captures/manuel, pannes et nettoyages natifs recoupés, même
   référence/configuration et5982originaux conservés. Aucune cause111 inventée.
