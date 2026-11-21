@@ -101,6 +101,8 @@ def source_hashes():
     files += [ROOT/'docs/PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md']
     # @spec docs/BACKLOG.md#sls-111 | docs/MANAGED_STORAGE_REGRESSIONS.md
     files += [ROOT/'docs/MANAGED_STORAGE_REGRESSIONS.md']
+    # @spec docs/BACKLOG.md#sls-112 | docs/MANAGED_INVOCATION_WATCH.md
+    files += [ROOT/'docs/MANAGED_INVOCATION_WATCH.md']
     files += list((ROOT/'docs').glob('SCHEDULE_*.md')) + [ROOT/'docs/SCHEDULES.md',ROOT/'docs/RETENTION_HISTORY_REPLAY.md']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 

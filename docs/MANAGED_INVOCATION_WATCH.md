@@ -55,3 +55,22 @@ Toute correction produit attend un diagnostic établi et sa décision committée
 Les pannes réelles FUSE/agent, annulations et drainage doivent rester qualifiées,
 puis25communs et nouvelles captures ouvertes individuellement. La campagne
 entière078 et toutes les autres unités gardent leurs preuves propres.
+
+## Instrumentation préparée avant première exécution
+
+Le client e2e/managed-invocation-watch.py écrit son worker dans le tmpfs du
+contrôle et utilise exclusivement les classes de production embarquées.
+L’observateur identifie les deux vraies coroutines par leur nom et self, retient
+leurs références et pose des callbacks de fin ; aucun appel produit remplacé.
+Dix cas et leurs relectures réelles sont définis, observations avant assertion,
+nettoyage de tous les consommateurs puis archive/purge de la fonction propre.
+
+Le parent borne240s puis SIGTERM exact et jointure60s. Il conserve les flux
+binaires exacts dans un dossier0700/fichiers0600, même après échéance ; parsing
+et rapport final restent exécutés. Un échec parent/jointure interdit completed,
+un second timeout reste inconnu avec l’identité du script conservée. Aucun rm
+sur une simple réévaluation tardive du client. Les contrôles natifs restent
+indispensables : la seule sortie du client ne prouve pas le nettoyage distant.
+Revue statique et syntaxe conformes après correction des deux pertes de
+traçabilité du parent ; aucune branche de délai ou aucun cas réel exécuté ici.
+Contrat et client ajoutés à l’index,457sources ; produit et image inchangés.

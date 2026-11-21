@@ -1,5 +1,25 @@
 # Qualification de la plateforme
 
+## Observation de la surveillance pendant fermeture — SLS-112
+
+Contrat : [MANAGED_INVOCATION_WATCH](../docs/MANAGED_INVOCATION_WATCH.md).
+`python3 -B /srv/p2enjoy-serverless/e2e/managed-invocation-watch.py`, comme root
+sur le seul SPARK DEV, exécute dix cas distincts sur le vrai pilote embarqué,
+Docker et FUSE. Aucun produit changé pour le diagnostic. Les tâches réelles
+Instance.invoke/watch_storage du même consommateur sont observées, sans wrapper
+ni remplacement ; les résultats interne/final et l’exception fixe du watcher
+sont projetés sans corps/logs/locals. Le rapport est
+runtime/managed-invocation-watch-proof.json ; flux exacts privés sous runtime/
+invocation-watch-transport-UUID. Un timeout du parent240s déclenche SIGTERM sur
+le worker exact puis une jointure60s ; il conserve toujours l’échec, même si
+le worker rend ensuite un résultat nominal. Une jointure inconnue reste telle,
+avec script conservé pour réconciliation. Le nettoyage natif demeure obligatoire.
+
+Client préparé sur457sources, pas encore exécuté. Dix délais1,75à2,20s pour
+le sommeil30s, arrêt au premier écart sans réessai ; les14groupes gérés et
+les25communs gardent leurs preuves distinctes. Aucun résultat111/112/078 acquis
+par la seule instrumentation.
+
 ## Diagnostic du stockage géré — SLS-111
 
 Contrat : [MANAGED_STORAGE_REGRESSIONS](../docs/MANAGED_STORAGE_REGRESSIONS.md).

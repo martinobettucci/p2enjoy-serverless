@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — client de preuve112 préparé, pas de résultat réel
+
+Dix deadlines distinctes sur le vrai pilote/handler, observateur des deux tâches
+réelles sans wrapper, projections des résultats interne/final et exception du
+watcher, relecture des fichiers et nettoyage des consommateurs. Aucun produit
+modifié. Revue du parent : sorties perdues après240s, puis identité supprimable
+après jointure inconnue corrigées avant exécution. Flux binaires privés conservés,
+SIGTERM exact puis60s, parsing/persist même après échéance et completedfalse ;
+une jointure inconnue conserve le script et exige recoupement natif.
+
+Syntaxe conforme ; contrat/client dans l’index457sources. Une seule campagne
+diagnostique est encore à exécuter après gel/synchronisation. Aucune reproduction
+de la course, aucune attribution de111 ni qualification112/078 revendiquée.
+
 ## 21 novembre 2026 — préfixe111 nominal, course distincte inscrite112
 
 Gel dc57cc2 /455sources, contexte72c83e77 : trois prérequis puis six campagnes,
