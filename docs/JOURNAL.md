@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 21 novembre2026 — reprise prioritaire de078 après vieillissement réel
+
+Horloge SPARK10:42UTC, même contrôle/imageb452/démarrage12novembre et référence
+conservés ; agent actif, zéro fonction/brouillon/instance/opération/appel actif.
+5982artefacts et trois fichiers officiels identiques au relevé du13novembre.
+Les deux `verify` canoniques passent avec leurs SHA SQLite/artefacts/exports
+inchangés. Les échéances18novembre sont dépassées : blocage retiré du registre.
+Reprendre le contrat existant sans le réécrire : source age puis terminal age,
+en série, image capturéec59 et garde120, SSO réel, restitution de l’image courante.
+Aucun replay ni preuve des sept jours encore acquis à ce point. Le checkpoint
+ZIPeeb0515 est poussé, non exécuté ; ses sources entrent dans le gel de reprise.
+
+
 ## 21 novembre2026 — checkpoint du banc ZIP avant reprise de rétention
 
 Les cinq sources du banc de frontières ZIP et leur README sont préparés :

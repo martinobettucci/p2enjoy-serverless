@@ -96,12 +96,13 @@ bloquée est sautée et son blocage est nommé.
 | — | [SLS-085](#sls-085) Déclencheurs de file et NATS | Décision | `[ ]` | choix du courtier | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | — | [SLS-088](#sls-088) Serverless Jobs en conteneur | Décision | `[ ]` | choix des images | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 
-SLS-078 est temporairement bloquée par le vieillissement réel des deux captures,
-au plus tôt le18 novembre2026 à03:30:26 puis04:05:13UTC ; la campagne complète
-suit ces preuves. Les reprises et bornes numériques courantes sont qualifiées.
-Cette attente ne bloque pas les unités indépendantes du registre ; SLS-100 et SLS-071 sont livrées.
+SLS-078 reprend en priorité : l’horloge native du SPARK confirme le21 novembre2026,
+les deux captures canoniques sont intactes et éligibles depuis le18 novembre
+à03:30:26 puis04:05:13UTC. Le blocage de vieillissement est levé ; les deux replays
+`age` puis la campagne complète restent à exécuter. Reprises et bornes numériques
+courantes sont qualifiées ; SLS-100 et SLS-071 sont livrées.
 Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
-089.4 est qualifié. SLS-070 est la prochaine unité de développement indépendante.
+089.4 est qualifié. Le banc ZIP de SLS-070 reste préparé, non exécuté.
 
 Unités parentes encore `[~]` et unités qui portent leur reste à faire :
 [SLS-001](#sls-001) → toutes ; [SLS-020](#sls-020) → SLS-089 ;
