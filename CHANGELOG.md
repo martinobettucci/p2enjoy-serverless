@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-104 : préconditions de construction historique et migration003→010
+  spécifiées avant code ; authentifications distinctes, ancien code conservé,
+  différences de validateur bornées et vrais replays exigés.
+
 - SLS-103 : [109groupes réels](docs/evidence/schema010-proof-prerequisites-dev-2026-11-21.json)
   qualifient les préconditions010 et leurs restitutions :84ciblés,25communs,
   22captures inspectées, douze fenêtres jointes. Schéma/intégrité/FK relus après

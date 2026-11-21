@@ -14,9 +14,10 @@ La session préalable est établie par dev-sso-sessions.mjs depuis l'accueil/SSO
 réels ; ce prérequis ne s'ajoute pas aux76 groupes. Aucun produit, route,
 configuration, migration, image ou UI ne change pour cette tranche.
 
-Les sources des bancs historiques006/007 restent inchangées. Les55 contrôles
-courants exigent maintenant les huit migrations exactes et gardent intégrité,
-UUID, verrou, refus de configuration, permissions et nettoyage. La même image
+Les sources des bancs historiques006/007 restent inchangées. À ce checkpoint008, les55 contrôles
+exigeaient les huit migrations exactes et conservaient intégrité, UUID, verrou,
+refus de configuration, permissions et nettoyage. Leur état courant010 est
+spécifié et qualifié par [SLS-103](SCHEMA_010_PROOF_PREREQUISITES.md). La même image
 immuable sert les copies réelles, aucune dépendance n'est remplacée.
 
 ## Publications complètes

@@ -10,19 +10,21 @@ La version historique est exactement
 `93f88e5c543be4ad41e4ca22d08cbedbabec73c5`. Son API crée et supprime les fonctions
 sans registre agent. Son image est construite depuis son propre arbre Git :
 contrôle, migrations 001–003, frontend et verrous de dépendances. Les dépendances
-Python, l’authentification et le protocole de validation sont comparés avec la
-version actuelle avant utilisation. L’image runtime officielle est conservée.
-Les dépendances Python, l’authentification et les deux fichiers runtime sont
-identiques. Le client Docker du validateur actuel ajoute seulement le paramètre
-optionnel `max_bytes=LIMIT`, transmis à sa requête ; sa valeur par défaut et le
-protocole de validation historique restent inchangés. Le banc vérifie exactement
-cette différence et conserve les deux empreintes, sans qualifier les fichiers
-entiers d’identiques.
+Python et les deux modules runtime sont comparés octet par octet au courant.
+L’authentification historique est conservée telle quelle : les correctifs089
+rendent son fichier différent du courant. Les deux empreintes sont attestées
+séparément ; seule la preuve SSO réelle peut qualifier leur compatibilité.
+Le validateur courant a trois différences fonctionnelles/documentaires bornées :
+paramètre max_bytes optionnel et transmission, nommage076, commentaire de
+traçabilité associé. Leurs substitutions exactes sont contrôlées ; tout autre
+écart est refusé. Aucun module courant n’est copié dans l’ancien arbre.
 
 Le passage ancien → actuel utilise l’image immuable du contrôle actuellement
-déployé, qui applique normalement 004–007. L’ancienne API ne doit jamais voir la
+déployé, qui applique normalement004–010. L’ancienne API ne voit jamais la
 base actuelle : ses INSERT sans liste de colonnes n’offrent pas de compatibilité
 descendante. Aucun retour à l’ancien code après migration des données temporaires.
+Les preuves003→007 antérieures restent historiques ; le parcours courant
+attend exactement001→010. Les modes spécifiques006→007/008 restent distincts.
 
 Le banc respecte les deux `env_file` officiels, sans fichier parallèle, surcharge
 de variable, nouvelle route ni modification de FORGE. La route HTTPS existante
@@ -84,7 +86,7 @@ La preuve exige publication, validation réussie et conteneur retiré avant DELE
 Elle vérifie le schéma 001–003 et l’absence des fonctions dans le vrai registre agent.
 
 Après bascule vers l’image actuelle, la même base et la même clé conservent la
-session, les UUID et les révisions. Les sept migrations sont constatées, puis
+session, les UUID et les révisions. Les dix migrations exactes sont constatées, puis
 `/api/session` confirme l’authentification. Les archives contiennent du code réel
 et exposent `storage.registered=false`, distinct d’un registre connu sans volumes.
 
@@ -127,3 +129,41 @@ Après le retrait du briefing privé de l'historique, les lectures Git historiqu
 utilisent les commits remappés. L'identité revision des attestations reste celle
 des preuves datées ; source_revision précise le commit effectivement lu. Voir
 [réécriture Git](GIT_HISTORY_REWRITE.md) et sa table de correspondance.
+
+## Compatibilité courante et preuves104
+
+Décision du21novembre2026 avant code, pour [SLS-104](BACKLOG.md#sls-104).
+Le constructeur conserve REVISION comme identité historique et SOURCE_REVISION
+comme arbre Git remappé. Le build utilise uniquement control/web de cet arbre.
+Les empreintes de tous ses fichiers sont vérifiées sur le SPARK ; contexte
+dédié, aucun secret ou fichier de configuration ajouté au contexte. Le tag
+courant et son conteneur ne changent pas.
+
+L’authentification courante doit correspondre exactement au SHA de auth.py
+dans la preuve SSO089 publiée ; l’ancienne vient de l’arbre003 exact. Le rapport
+ne les déclare plus identiques : historique/courant, référence de preuve et
+différences089 connues sont explicites. Cette attestation n’invente aucune
+qualification de profils négatifs ou rotation non fournis ;089 reste ouvert.
+Les dépendances et les deux fichiers runtime demeurent strictement identiques.
+
+Avant copie ou build, comparer le validateur avec l’ancien après les seules
+substitutions connues max_bytes, nom p2-v→serverless-code-validator et son
+commentaire076 ; aucune différence arbitraire acceptée. Garder les empreintes
+et signaler les écarts réellement admis. Les sources historiques restent intactes.
+
+Le client générique d’archives attend010 après upgrade, sans élargir les
+bornes des bancs006/007/008. Il conserve ses quatre groupes : SSO/publications
+historiques, migration/session, purge sans reçu agent inventé, contradiction
+protégée après apparition réelle du registre et redémarrage. Dix noms ordonnés
+exacts, UUID/session/révisions/archives et état de stockage sont recoupés.
+Aucune ligne ou date SQL fabriquée ; la ligne de registre tardive passe par
+le véritable agent configure, comme dans le scénario déjà défini.
+
+Épreuves : sauvegarder les anciens rapports avant le refus préalable du builder,
+conserver son échec avant SSH sans groupe ajouté, construire réellement puis
+rejouer les quatre groupes complets sur le seul SPARK DEV ; le déplacement
+partiel et25communs suivent en série. Rapports, images, sources, original et
+5982artefacts, pilotes/gardes et nettoyages physiques sont liés ;22captures
+communes inspectées. Le nettoyage de l’installation contradictoire ne devient
+pas une purge métier réussie. Aucun changement de produit, de configuration,
+de migration, de route ou de manuel.

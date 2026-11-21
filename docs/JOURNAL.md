@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 21 novembre2026 — préalable historique104 inscrit avant correction
+
+L’exploration du socle37 constate trois gardes périmées : auth.py diffère par
+089, le validateur ajoute076, et le client d’upgrade générique attend007 au
+lieu de010.104 les porte avant traitement. Décision : ancien code intact ;
+SHA authentifications distincts et attestés, dépendances/runtime identiques,
+différences du validateur bornées explicitement, puis vrai SSO et migration
+003→010 avec les quatre scénarios conservés. L’ancien contrat76 est nommé
+comme checkpoint008 ; aucune preuve historique n’est réécrite.
+Reproduire le refus du builder avant SSH en préservant son rapport précédent,
+puis implémenter et qualifier104. L’assemblage078 reste à persister ensuite.
+
+
 ## 21 novembre2026 — préconditions010 qualifiées,103 clôturé
 
 [qualification109](evidence/schema010-proof-prerequisites-dev-2026-11-21.json) passe109groupes au gelda0f3fd,428sourcesfd9c995f :
