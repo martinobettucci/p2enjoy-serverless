@@ -1,0 +1,64 @@
+{
+  "completed": true,
+  "campaigns": {
+    "original-failure": {
+      "949159de-ad13-4656-a6ab-2e4278362b69": {
+        "backings": true,
+        "mounts": true,
+        "trash": true
+      },
+      "7e02da29-40fc-4f26-b55f-34193c1665d3": {
+        "backings": true,
+        "mounts": true,
+        "trash": true
+      }
+    },
+    "isolated-diagnostic": {
+      "247bf8e2-4327-42f8-ba43-318b2e6a845f": {
+        "backings": true,
+        "mounts": true,
+        "trash": true
+      },
+      "c5ec9dfc-171b-4927-8d7e-9d740820dae5": {
+        "backings": true,
+        "mounts": true,
+        "trash": true
+      },
+      "ed7dc520-f090-495b-a53d-29ccd30ac800": {
+        "backings": true,
+        "mounts": true,
+        "trash": true
+      }
+    },
+    "context-diagnostic": {
+      "38da88de-9063-47d6-92af-8b365463a47e": {
+        "backings": true,
+        "mounts": true,
+        "trash": true
+      },
+      "64dd3ae3-e48e-47c1-8b6b-9d40bc534ddd": {
+        "backings": true,
+        "mounts": true,
+        "trash": true
+      },
+      "7266a7a8-757b-4f3c-8ccc-b3f6bf500822": {
+        "backings": true,
+        "mounts": true,
+        "trash": true
+      }
+    }
+  },
+  "corrected_path_component": "backings",
+  "prior_singular_backing_check_insufficient": true,
+  "current_observation_only": true,
+  "groups_added": 0,
+  "format": "p2enjoy-serverless-managed-storage-historical-paths-v1",
+  "unit": "SLS-111",
+  "unit_complete": false,
+  "qualification_claimed": false,
+  "source_commit": "298199efc447619b808bd00363177762bf8aca0f",
+  "collected_at_ns": 1795295399638947608,
+  "program_sha256": "f589b77cb82663799ffcdb27bbc0aec68c9756596a83c86c376b0dc2b47a8304",
+  "transport_sha256": "6ce8a23895a32d0559e3e21eaeb6a4883638c4b45f2ed42ea598d6fedac834ab",
+  "scope": "Recoupement actuel des chemins physiques ; aucune attribution de cause ni reconstruction historique."
+}

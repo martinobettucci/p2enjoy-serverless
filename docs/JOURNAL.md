@@ -1,5 +1,30 @@
 # Journal de cadrage
 
+## 21 novembre2026 — IR-004 corrigée, reprise actuelle distincte de l’ancienne cause
+
+Après instruction RO du resolver et recoupement du principal, bon sens et
+précédentIR-003 tranchent : qualifier le code actuel ne peut pas reconstituer
+une observation perdue. Le contrat111 prévoyait déjà une décision séparée
+motivée ;078dépend de040/074. Diagnostic14/162 et régression39 acquis permettent
+de préparer la nouvelle campagne entière, sans fermer111.1/.2 ni attribuer
+son ancien échec à112. Les critères de preuve et tous les scénarios restent.
+
+Clôturer111sur39/112seuls est écarté ; répéter14/162 jusqu’au résultat choisi
+l’est aussi. La cause reste non déterminable à partir des observations conservées,
+sans prétendre une impossibilité universelle. Le rapprochement documentaire des
+deux contrats, dépendances et comptes49/543+18 est vérifié ; aucune nouvelle
+épreuve produit nécessaire pour cette clarification. IR-004 retirée, registre
+vide supprimé selonCLAUDE§5. Aucun arbitrage externe requis.
+
+Recoupement physique actuel supplémentaire : huit fonctions des trois anciens
+passages111 n’ont plus de backings/mounts/trash. Le singulier backing hérité
+était insuffisant ; aucune observation passée n’est reconstruite, aucun groupe
+qualifié ajouté. Preuve managed-storage-historical-paths-dev-2026-11-21.
+
+Sixième passage078 décidé avant lancement : nouveau worker, gel courant458,
+image433da150,49/543+18 frais depuis le début. Les cinq anciens essais restent
+exclus ; mêmes fautes et arrêts au premier échec. Le résultat demeure non acquis.
+
 ## 21 novembre2026 — préalable111 et incertitude historique à instruire
 
 Après112close et39régressions111.3 acquises, l’ancienne assertion reste sans

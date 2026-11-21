@@ -1,6 +1,8 @@
 # Reprise de la qualification du stockage géré
 
-Contrat de [SLS-111](BACKLOG.md#sls-111), préalable au nouveau passage entier078.
+Contrat de [SLS-111](BACKLOG.md#sls-111). Le diagnostic borné et la qualification
+actuelle39 sont les préalables de reprise078 ; ils sont acquis. L’incertitude
+historique111.1/.2 reste ouverte et n’est pas une dépendance absolue de078.
 Le cinquième worker6b215e89 au gel f7b1d2a /454sources /imageb452 est terminal :
 cinq campagnes /148groupes et trois prérequis, puis managed-storage échoue après
 six sous-groupes réussis. Suite scellée
@@ -108,3 +110,24 @@ manuel18/74, purges physiques des trois fonctions gérées, worker/script/chemin
 baux absents,38backend/quatreweb et nominal/5982originaux recoupés.111.3 est acquise.
 L’assertion du passage historique reste inconnue ;111.1/.2 ne sont pas déclarés
 satisfaits par cette régression ni par le défaut distinct112 corrigé.
+
+## Reprise séparée et incertitude historique — résolutionIR-004
+
+Une nouvelle qualification établit le comportement actuel ; elle ne reconstitue
+pas une observation non conservée. Les diagnostics14/162 ont été effectués sans
+reproduction et l’instrumentation conserve désormais les discriminants. La
+correction distincte112 et les39régressions qualifiées permettent de préparer
+un nouveau passage entier078, par la décision séparée motivée prévue ci-dessus.
+111.1/.2 restent ouverts ; un futur543vert ne les coche pas à lui seul et
+n’attribue jamais l’ancienne assertion à112. Aucun groupe, faute, concurrence
+ou critère produit retiré ; aucune répétition14/162 jusqu’au résultat souhaité.
+
+Le [recoupement actuel des chemins](evidence/managed-storage-historical-paths-dev-2026-11-21.json)
+vérifie backings/mounts/trash pour huit fonctions des trois anciens passages111.
+L’ancien collecteur contrôlait backing au singulier, contrôle insuffisant ; les
+vrais chemins sont absents actuellement. Zéro groupe ajouté, aucune date passée
+reconstruite ni cause ancienne déduite. Les rapports historiques restent scellés.
+
+Le nouveau078 sert aussi de contexte complet supplémentaire pour111. Il commence
+à la première campagne, conserve49/543+18 et s’arrête au premier échec avec
+rapports et état natif. Aucune reprise à mi-parcours ni transfert des148anciens.

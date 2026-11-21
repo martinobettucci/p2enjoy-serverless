@@ -1861,6 +1861,9 @@ qualifiée par cinq autres groupes sur le client final : huit tirs de la fenêtr
 douze refus et prévisions calendaires, trois fonctions purgées.
 Nature : Développer. Dépend de : SLS-040 (admission), SLS-074 (cible promue).
 Débloque : SLS-080, SLS-081, SLS-073. Ordre : 1.
+Décision de reprise après112/IR-004 : sixième passage entier49/543+18 à préparer
+sur l’image433da150 et le gel courant458sources ; cinq essais incomplets exclus.
+Aucun résultat de ce nouveau passage encore acquis.
 Contrat : [SCHEDULES](SCHEDULES.md).
 Les [coupures et reprises réelles](evidence/schedule-recovery-dev-2026-11-10.json)
 passent cinq groupes sur310 sources : garde indépendante, trois SIGKILL aux
@@ -3146,8 +3149,8 @@ IR-003 et la campagne entière078 restent ouverts.
 
 Statut : [~] —39régressions qualifiées dans la preuve112 ; assertion historique
 du cinquième passage078 au gel f7b1d2a toujours indéterminée, critères111.1/.2 ouverts.
-IR-004 instruit la cohérence du préalable de reprise, sans clôture ni attribution ancienne.
-Nature : Corriger. Ordre : 1, préalable au prochain passage entier078.
+Nature : Corriger. Ordre :1. Diagnostic borné et régression actuelle39 acquis avant
+reprise078 ; investigation historique111.1/.2 ouverte, sans dépendance absolue de078.
 Contrat : [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md).
 
 - [ ] SLS-111.1 Échec scellé, assertion et état natif instruits, cause et décision

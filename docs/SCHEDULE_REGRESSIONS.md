@@ -256,3 +256,35 @@ et client joint. Le nettoyage natif confirme les deux fonctions temporaires
 purgées, aucun consommateur ni travail restant, même nominal et5982originaux.
 SLS-111 porte le diagnostic avant correction ; aucun résultat complet et aucune
 nouvelle exécution entière ne sont acquis ici. Les148groupes restent exclus.
+
+## Sixième passage décidé après112 et résolutionIR-004
+
+Le diagnostic111 isolé14 puis contextuel162 ne détermine pas l’ancienne assertion.
+112a corrigé et qualifié un défaut distinct sur433da150 :82groupes dont les39
+régressions actuelles111.3,22captures inspectées et nettoyages natifs recoupés.
+IR-004 clarifie le préalable : diagnostic borné et régression actuelle acquis,
+111.1/.2 toujours ouverts. Le registre078 garde ses dépendances040/074 ; aucune
+causalité historique n’est exigée comme condition impossible d’observation future.
+
+Décision séparée motivée avant lancement : nouveau worker UUID, départ de la
+première campagne,458sources courantes propres/committées/poussées/synchronisées
+et image433da150. Relever le commit réellement lancé et figer ses empreintes.
+49campagnes/543groupes +18prérequis frais, mêmes fautes/assertions/allocations
+et horloges réelles. Les cinq essais incomplets restent exclus ; aucun cumul
+avec82/39/14/162 ni aucun succès partiel réutilisé. Le passage fournit aussi un
+contexte supplémentaire pour111, sans jamais expliquer rétroactivement son échec.
+
+Recouper avant/après chaque campagne le repos et le nominal. Les outils privés
+de collecte sont préparés pour458sources/433da150, notes de livraison112 et
+cinq exclusions ; aucun ancien reçu b452/f7b n’est renommé en preuve actuelle.
+Le nombre de captures reste dynamique : conserver toutes les images fraîches
+déclarées et les sept compléments de control-ui, puis les ouvrir individuellement.
+Conserver127fonctions/35namespaces du sous-ensemble physique, les gardes et
+restitutions,38backend/quatreweb et5982originaux. Captures de rétention scellées
+intouchées, seules les trois correspondances de modules/manifeste/gzip prévues
+sont recoupées ; aucune prétention de nouveau hash des images scellées.
+
+Arrêt au premier échec, aucune relance automatique. Ne qualifier078que si le
+passage entier et sa clôture native/visuelle réussissent. Tout défaut distinct
+devient une unité avant traitement. Les expressions exactes de référence restent080.
+Ce nouveau passage n’est pas encore lancé ni qualifié par cette décision.
