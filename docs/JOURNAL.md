@@ -1,5 +1,26 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — course112 reproduite et correction décidée avant code
+
+Gel5f8e6d3 /457sources /b452, diagnostic f419803b : premier cas1,75s rouge.
+Même consommateur44b51897 et invocationdb2edc59 ; watcher lease_unknown pendant
+closing, interne invocation_timeout, externe storage_unavailable. Observations
+terminales espacées1,131ms ; aucune reconstruction du moment exact du RPC.
+Écriture relue conforme, worker joint, flux privés exacts conservés et fonction
+purgée physiquement ; nominal/5982originaux préservés. Zéro groupe qualifié.
+Cette preuve établit le défaut actuel, sans attribuer l’ancienne assertion111.
+
+Choix étroit documenté avant code : qualifier lease_unknown au point où le
+watcher l’observe pendant une fermeture gérée ; joindre fermeture et invocation,
+puis conserver son résultat terminal uniquement si destruction/libération et
+indisponibilité sont confirmées. Aucun masque général d’erreur ni nouvelle
+coordination du watcher ; autres erreurs et défaut de nettoyage restent inchangés.
+
+Dix phases conservées plus un groupe de fermeture extérieure sur écriture déjà
+acquittée,14gérés inchangés,31publics et25communs :81uniques. Nouveau contrôle DEV
+seul après backup natif ; runtime, configuration, routes, schéma, manuel et web
+conservés. Build/bascule et qualification restent à réaliser après code/revue.
+
 ## 21 novembre 2026 — client de preuve112 préparé, pas de résultat réel
 
 Dix deadlines distinctes sur le vrai pilote/handler, observateur des deux tâches

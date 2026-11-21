@@ -1,5 +1,16 @@
 # Révisions et adaptateur de déploiement
 
+## Préparation de la correction du pilote géré — SLS-112
+
+[MANAGED_INVOCATION_WATCH](MANAGED_INVOCATION_WATCH.md) exige une bascule du seul
+contrôle DEV après build et sauvegarde SQLite native au repos. Le CID/image
+courant b452 sera remplacé ; conserver référence, fichiers officiels, registre,
+tables et 5 982 artefacts. Le delta produit attendu est managed_instances.py,
+sans migration, variable, route ou web modifié. Relever les 38 fichiers backend,
+les quatre ressources HTTPS et le manuel, puis 81 groupes réels en série et
+captures fraîches inspectées. Correction décidée ; aucune nouvelle image encore
+construite ou déployée à cette étape.
+
 ## Confirmation de restitution des publications — 21 novembre 2026
 
 [Qualification110](evidence/publication-restoration-confirmation-dev-2026-11-21.json) :

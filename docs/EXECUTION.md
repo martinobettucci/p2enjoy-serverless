@@ -85,6 +85,16 @@ protocole trop grand (120), refus/protocole (121), récolte (122), montage (123)
 deadline (124), délai de canal (125) et autre erreur interne (126), sans recopier
 de message applicatif.
 
+La surveillance de stockage distingue le bail manquant observé pendant une
+fermeture gérée déjà engagée d’une perte réelle de stockage. Après confirmation
+de la destruction et de la libération, le résultat terminal interne d’une
+instance devenue indisponible conserve sa cause ; son propre bail retiré ne
+transforme pas un timeout ou un arrêt en `storage_unavailable`. Une erreur
+observée avant fermeture et tout autre code de stockage gardent leur chemin de
+panne. Les confirmations et le diagnostic `cleanup_failed` restent obligatoires.
+Décision [SLS-112](MANAGED_INVOCATION_WATCH.md#reproduction-et-décision-du-21-novembre-2026-avant-correction),
+encore à déployer et qualifier.
+
 ## Événement, réponse et journaux
 
 La passerelle fournit un événement Lambda HTTP v1 : httpMethod, path, headers,

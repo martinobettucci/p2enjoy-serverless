@@ -1,5 +1,17 @@
 # Architecture technique
 
+## Classification de fin du pilote géré — SLS-112, décision avant code
+
+Le watcher ne doit pas confondre la libération confirmée de son propre bail
+avec une perte de stockage. `lease_unknown` observé pendant une fermeture gérée
+déjà engagée reçoit une classification interne distincte. Le pilote rejoint
+fermeture et invocation, exige destruction/libération confirmées et instance
+indisponible, puis conserve le résultat terminal original. Les erreurs observées
+avant fermeture et tous les autres codes restent des pannes. Aucun changement
+de protocole, verrous, échéance, schéma ou ressources ; seul managed_instances.py
+est prévu modifié. [Contrat](MANAGED_INVOCATION_WATCH.md). Une reproduction rouge
+sur b452 établit le défaut ; bascule DEV et 81 groupes restent à qualifier.
+
 ## Banc historique compatible avec010 —21 novembre2026
 
 [qualification104](evidence/legacy-schema010-dev-2026-11-21.json) clôt104 :30groupes réels et22captures

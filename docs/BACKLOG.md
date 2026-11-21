@@ -3154,8 +3154,8 @@ Contrat : [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md).
 <a id="sls-112"></a>
 ## SLS-112 — Issue d’invocation pendant libération volontaire du bail
 
-Statut : [~] — course possible établie par lecture du flux ; aucune reproduction
-ni attribution de l’ancienne assertion111 encore acquise.
+Statut : [~] — triplet causal reproduit au gel5f8e6d3 ; correction décidée avant code,
+à déployer et qualifier. Ancienne assertion111 non attribuée.
 Nature : Corriger. Ordre :1. Contrat : [MANAGED_INVOCATION_WATCH](MANAGED_INVOCATION_WATCH.md).
 
 - [ ] SLS-112.1 Discriminant réel entre résultat de l’invocation interne,
@@ -3164,6 +3164,7 @@ Nature : Corriger. Ordre :1. Contrat : [MANAGED_INVOCATION_WATCH](MANAGED_INVOCA
 - [ ] SLS-112.2 Une fermeture initiée par l’invocation ou le drainage ne devient
   pas une fausse panne de stockage à cause de son propre bail libéré ; les pertes
   réelles de FUSE/agent continuent de retirer le consommateur avec leur erreur.
-- [ ] SLS-112.3 Qualification complète du discriminant,14groupes gérés et25communs
+- [ ] SLS-112.3 Onze groupes discriminants,14groupes gérés,31publics et25communs
+  (81uniques) passent
   sur code déployé ; captures/manuel, pannes et nettoyages natifs recoupés, même
   référence/configuration et5982originaux conservés. Aucune cause111 inventée.

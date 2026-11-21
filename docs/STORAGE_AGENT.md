@@ -225,6 +225,15 @@ signale storage_unavailable et conserve l'observation handler_started. Aucun
 appel n'est rejoué. Les erreurs de quota rendues par le système de fichiers
 restent des réponses applicatives normales lorsque le handler les traite.
 
+Lorsqu’un timeout ou un drainage ferme déjà le consommateur, le watcher peut
+encore recevoir `lease_unknown` après la libération normale. Le contrôle classe
+ce seul code au point de son observation, puis attend destruction et libération
+confirmées avant de conserver le résultat terminal interne indisponible. Il ne
+déduit pas cette antériorité après avoir lui-même déclenché une fermeture pour
+panne. Les autres erreurs FUSE/agent restent des pertes de stockage et aucune
+libération incertaine n’est acquittée. Contrat [SLS-112](MANAGED_INVOCATION_WATCH.md),
+correction décidée, pas encore déployée ni qualifiée.
+
 Le diagnostic opérateur existant accepte --managed-storage et une configuration
 storage data/cache sur stdin, à la place de chemins mounts libres. Ce chemin
 exécute la classe de production dans l'image réelle du contrôle ; il ne crée
