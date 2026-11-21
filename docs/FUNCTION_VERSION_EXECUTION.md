@@ -443,3 +443,17 @@ pages de contrat reçoivent les résultats dans l'index de sources. Les opérate
 historiques conservent leurs limites. Aucun nouveau parcours visuel ni changement
 produit/UI/manuel ; console, historique et régression complète008 restent ouverts.
 SLS-074 conserve [~].
+
+
+## Raccordement de la régression console au catalogue par hash
+
+La [preuve107](evidence/publication-console-hash-regressions-dev-2026-11-21.json) passe46groupes
+réels sur450sources au gel659e852, imageb452 conservée :21parcours publication,
+25communs et44captures inspectées. Elle raccorde les attentes historiques au
+pilote/promotion distincts, à l’alias canonique d’un doublon, aux tombstones et
+à la pagination cohérente. Les vrais EACCES/gardes,503 de stockage et pertes de
+réponses restent éprouvés. Treize invocations réussies, deux refus et deux
+purges physiques recoupent le parcours ;5982originaux sont préservés.
+Aucun produit/UI/manuel changé. Cette tranche ferme107, sans fermer la
+régression partagée106, l’exécution console105 ni l’assemblage complet078 ;
+SLS-074 conserve ses critères restant ouverts.

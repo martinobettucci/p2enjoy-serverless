@@ -68,7 +68,6 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-107](#sls-107) Raccordement de la preuve de publication console | Corriger | `[~]` | SLS-074 | [PUBLICATION_CONSOLE_REGRESSIONS](PUBLICATION_CONSOLE_REGRESSIONS.md) |
 | 1 | [SLS-106](#sls-106) Conservation des artefacts en régression | Corriger | `[~]` | SLS-107 | [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md) |
 | 1 | [SLS-105](#sls-105) Préparation des instances dans la preuve console | Corriger | `[~]` | SLS-106 | [EXECUTION_CONSOLE_WARMUP](EXECUTION_CONSOLE_WARMUP.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
@@ -3011,13 +3010,20 @@ Contrat : [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md).
 <a id="sls-107"></a>
 ## SLS-107 — Raccordement de la preuve de publication console
 
-Statut : [~] — attente historique refusée sur la vraie facette des versions.
+Statut : [x] — [qualification de 46 groupes](evidence/publication-console-hash-regressions-dev-2026-11-21.json) au gel659e852,
+450sources7b67df18, imageb452 et44captures inspectées.
 Nature : Corriger. Ordre :1, préalable à106/078.
 Contrat : [PUBLICATION_CONSOLE_REGRESSIONS](PUBLICATION_CONSOLE_REGRESSIONS.md).
 
 - [x] SLS-107.1 Échec initial conservé ; correspondance complète des21groupes
   avec les contrats et les widgets servis, sans cause produit présumée.
-- [ ] SLS-107.2 Attentes/gestes du client alignés aux versions par hash et au
+- [x] SLS-107.2 Attentes/gestes du client alignés aux versions par hash et au
   pilote/promotion, sans groupe retiré ni mutation UI contournée.
-- [ ] SLS-107.3 Vingt-et-un groupes et25communs passent, captures inspectées,
+- [x] SLS-107.3 Vingt-et-un groupes et25communs passent, captures inspectées,
   manuel/source/rendu et nettoyage natif recoupés ;5982artefacts conservés.
+
+La preuve conserve21groupes publication,8manuel,8public et9connexion. Treize
+invocations réussies et deux refus recoupent pilote, promotion et disponibilité.
+Deux fonctions sont purgées par les API avec contrôle physique du code, des
+volumes et des secrets ;5982originaux/configuration/référence sont préservés.
+Les deux essais incomplets restent exclus.106/105/078 restent ouverts.

@@ -14,7 +14,8 @@ Le rapport privé `.local/e2e/publication-ui.json` doit être conservé avec ses
 captures avant un nouvel essai. Compléter avec les8groupes manual-ui,8public et
 9login-ui en série, soit46groupes ; les prérequis SSO restent distincts.
 Le helper106 purge le code et les volumes et vérifie nativement ses reçus.
-La qualification107 est encore ouverte.
+La [qualification107](../docs/evidence/publication-console-hash-regressions-dev-2026-11-21.json) passe46groupes
+et44captures inspectées au gel659e852 ;106/105/078 restent distinctes.
 
 ## Purge complète des fixtures — SLS-106
 

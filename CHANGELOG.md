@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-107 : [46 groupes réels](docs/evidence/publication-console-hash-regressions-dev-2026-11-21.json)
+  raccordent les21parcours de publication aux versions par hash et aux
+  promotions explicites ;25communs,44captures inspectées,13invocations
+  réussies et2refus. Fautes réelles et purges complètes recoupées ; deux essais
+  incomplets exclus,5982originaux préservés.106/105/078 restent ouvertes.
+
 - SLS-106 : helper de nettoyage partagé corrigé pour employer la purge publique
   et un lecteur natif par fonction. L’ancien ne retirait que les volumes.
   Remise en état par API de la seule fixture en échec ;5982originaux intacts.

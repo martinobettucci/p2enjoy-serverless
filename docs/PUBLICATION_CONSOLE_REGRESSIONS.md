@@ -114,3 +114,42 @@ finie et diagnostic persisté ; il compare ensuite explicitement les deux listes
 Il conserve les clics réels, cinq cartes/page, tombstone, total, focus et
 contrôles de doublon. Aucun délai arbitraire ni baisse du nombre de cartes.
 Les46groupes seront rejoués au nouveau gel ; cet essai incomplet reste distinct.
+
+## Qualification du21novembre2026
+
+La [preuve finale](evidence/publication-console-hash-regressions-dev-2026-11-21.json) passe les46groupes
+en série au gel659e852f8544e1dd09784814215c6801229c2b58 :450sources
+(index7b67df1870f9f40959a99b97ec252e0276de2b9441a6e9282ca4c48162b045c0),
+imageb452 inchangée. Les21groupes publication sont suivis de8manuel,8public
+et9connexion. Aucun scénario ignoré ; les prérequis SSO ne sont pas des groupes.
+
+Treize invocations réussies uniques et deux refus recoupent les appels pilote,
+les promotions/retours A, la configuration, l’empreinte du secret et le compteur
+permanent. Les deux pertes de réponse de mutation, le rechargement et la perte
+de préparation ont leurs comptes transport persistés sans rejeu. La suppression
+sous EACCES conserve réellement ses octets puis la maintenance les retire ;
+les deux pertes du helper exécutent leur garde. Le503 de confirmation stockage
+reste réel, avec décision commit, alias A dédupliqué et champ UI comparé.
+
+Les44captures sont ouvertes individuellement :22publication,16manuel,6connexion.
+SHA et fraîcheur source sont recoupés dans chaque phase ; les6PNG de connexion
+non déclarés par l’ancien rapport sont distingués de ses captures déclarées.
+Desktop/mobile/tablette, longs noms/hashes/logs et confirmation390×844 restent
+lisibles. Les pages mobiles longues sont une limite de défilement, sans
+masquage bloquant. Les images ne remplacent pas les assertions de comportement.
+Le manuel18chapitres/74paragraphes correspond à sa source et au rendu ; la
+marque à trois blocs est visible. Aucun changement produit/UI/manuel effectué.
+
+Les deux fonctions de campagne sont purgées par les API ; le lecteur natif
+confirme absence de code/backings/montages/canaux/conteneurs/réseaux,
+configuration/secrets vides et une commande de purge par fonction. Tous les
+compteurs actifs sont nuls. Les5982artefacts antérieurs, dix migrations,
+intégrités/FK, mêmes services/images, fichiers officiels,38backends et4web
+servis sont recoupés. Les trois notes du SPARK sont conservées, sans adoption
+prétendue. Deux essais incomplets restent archivés et ajoutent zéro groupe
+à cette qualification. Une sélection de nom de reçu local déjà utilisé est
+refusée avant publication de preuve ; le reçu historique reste intact et le
+nouveau porte date/gel distincts. Ce diagnostic ajoute zéro groupe.
+
+SLS-107 est terminée. Les79groupes106, les37groupes105 et l’assemblage543
+de078 restent exigés dans leurs unités propres.

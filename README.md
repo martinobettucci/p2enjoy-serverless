@@ -1,9 +1,10 @@
 # P2Enjoy Serverless
 
-Le raccordement de la preuve console aux versions par hash est suivi dans
-[SLS-107](docs/PUBLICATION_CONSOLE_REGRESSIONS.md) :21groupes historiques
-conservés, publication pilote/promotion séparées et nettoyage physique réel.
-Sa campagne de46groupes reste à qualifier avant la reprise106/105/078.
+Le raccordement de la preuve console aux versions par hash est
+[qualifié par 46 groupes réels](docs/evidence/publication-console-hash-regressions-dev-2026-11-21.json) :
+21 parcours de publication puis25communs,44captures inspectées. Pilote et
+promotion restent distincts ; fautes, pertes de réponse et nettoyage physique
+sont éprouvés. Les unités106/105/078 gardent leurs campagnes propres.
 
 Le [nettoyage des campagnes](docs/REGRESSION_ARTIFACT_CLEANUP.md) est corrigé
 pour qualification106 : purge publique complète et contrôle physique par fonction.

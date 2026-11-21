@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre2026 — SLS-107 qualifiée, reprise106
+
+La [preuve de publication par hash](evidence/publication-console-hash-regressions-dev-2026-11-21.json)
+passe46groupes sur450sources7b67df18 au gel659e852 et imageb452. Les21parcours
+conservent pilote/promotions,13invocations réussies et2refus, pertes de réponses
+sans rejeu, EACCES/gardes et503 de confirmation du stockage avec alias A
+réutilisé et comparé dans l’UI. Deux purges publiques sont recoupées physiquement.
+44images ouvertes :22publication/16manuel/6connexion, SHA/fraîcheur par phase ;
+manuel18/74 concordant et nouvelle marque à trois blocs visible. Compteurs0,
+5982originaux, configuration, référence,38backends et4web restent identiques.
+Les deux essais incomplets sont conservés et exclus. La garde de nom du reçu
+visuel refuse un ancien fichier de54captures ; nouveau reçu date/gel distinct,
+ancien inchangé. Diagnostic local,0groupe.107[x],106/105/078 restent[~].
+
 ## 21 novembre2026 — essai107 arrêté à la pagination
 
 Le gel4f5b886 passe15groupes, dont503 de stockage, alias A dédupliqué et
