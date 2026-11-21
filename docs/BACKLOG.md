@@ -99,7 +99,9 @@ bloquée est sautée et son blocage est nommé.
 SLS-078 reprend en priorité : l’horloge native du SPARK confirme le21 novembre2026,
 les deux captures canoniques sont intactes et éligibles depuis le18 novembre
 à03:30:26 puis04:05:13UTC. Le blocage de vieillissement est levé ; les deux replays
-`age` puis la campagne complète restent à exécuter. Reprises et bornes numériques
+`age` puis la campagne complète restent à exécuter. Premier essai du21novembre
+refusé avant garde : image capturéec59 absente du magasin Docker, export
+canonique intact sans tag ; rechargement natif préparé, zéro groupe qualifié. Reprises et bornes numériques
 courantes sont qualifiées ; SLS-100 et SLS-071 sont livrées.
 Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
 089.4 est qualifié. Le banc ZIP de SLS-070 reste préparé, non exécuté.

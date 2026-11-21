@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 21 novembre2026 — replay arrêté avant garde, image capturée absente
+
+Le précontrôle de sources a d’abord refusé ARCHIVE_LIMITS resté au SHA antérieur
+sur le SPARK ; synchronisation gardée, aucune fenêtre créée. Le passage source
+age656a0f76 échoue ensuite au premier image inspect : imagec59 absente. Zéro
+groupe qualifié, aucun événement de garde ni dossier de fenêtre ; deux services
+originaux encore sains. Rapport/checkpointeb8b0ba8 conservés, sources/images
+avant/après identiques. La tentative restore du client échoue faute de fenêtre,
+sans restitution nécessaire.
+
+Décision réversible avant opération : importer l’image depuis l’export canonique
+SHA vérifié, manifeste RepoTags=null contrôlé en lecture seule. Ce format ne
+déplace pas p2enjoy-control:dev, actuellementb452. Comparer archive/image/tags
+et services après import ; puis nouveau passage source age explicite.
+
+
 ## 21 novembre2026 — reprise prioritaire de078 après vieillissement réel
 
 Horloge SPARK10:42UTC, même contrôle/imageb452/démarrage12novembre et référence

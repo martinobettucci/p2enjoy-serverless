@@ -62,6 +62,15 @@ contrôlées ; les originaux redémarrent sur leur image d'origine. Le schéma s
 009 reste associé à son image capturée ; aucune migration de la source n'est faite
 par le test. Une incompatibilité réelle de clé/configuration fait échouer le replay.
 
+Si l’image capturée a quitté le magasin Docker, la recharger avant toute fenêtre
+depuis son export scellé vérifié. Inspecter le manifeste de l’export : aucun tag
+existant ne doit être déplacé. Les exports canoniques portent RepoTags=null ;
+un import natif par stdin est donc suffisant. Comparer SHA de l’archive, ID de
+l’image importée et tags/identités des services avant/après ; aucune
+reconstruction ni réécriture de la capture. Un export portant un tag en conflit
+fait refuser cette préparation. L’import seul ne qualifie aucun scénario.
+
+
 Armer dans la première partie d'une fenêtre réelle UTC, de D+10 à D+60s ; relever
 l'activation effective du timer et figer D. Après arrêt/contrôle du repos, conserver
 les originaux, copier les artefacts et le registre, puis publier CONTROL atomiquement
