@@ -48,6 +48,24 @@ RAM/files environ15min chacune, indisponibilité/réutilisation environ10min.
 Le total dépasse deux heures, plus le socle et les autres frontières. Aucun
 timeout global600s ni accélération d’horloge. Une exécution reste suivie jusqu’à
 la fin réelle de ses processus ; les gardes distantes existantes ne changent pas.
+Le lancement long utilise `python3 -B e2e/schedules-worker.py start`, unité
+systemd utilisateur transitoire serverless-schedules-regressions-UUID, sans
+récurrence ni redémarrage automatique. Type=oneshot, RemainAfterExit=yes,
+TimeoutStartSec=21600, TimeoutStopSec=60. Le lanceur transmet les identifiants
+uniquement par un pipe stdin directement passé au service (`systemd-run --pipe`),
+puis ferme son écriture ; sorties vers fichiers privés0600, processus de lancement
+détaché de la session du terminal. Aucun secret dans une propriété systemd.
+Le worker conserve les identifiants en mémoire pour les seuls SSO déjà définis.
+
+Relever PID/naissance/cgroup du service et de son client de lancement ; observer
+le même worker vivant après le retour du lanceur. `status NOM` lit son état,
+`finish NOM` exige MainPID0 et résultat systemd terminal, fige le SHA du rapport,
+puis arrête cette seule unité et joint la disparition du client exact. Une
+suite completed ne suffit pas si Result/ExecMainCode/ExecMainStatus ne valent
+pas success/1/0. Une perte ne relance rien et impose d’abord le recoupement des
+gardes et restaurations distantes. Ce lancement ne change aucun scénario,
+aucune garde distante ni aucun compte de groupe.
+
 Avant chaque campagne cron, recouper le repos natif : aucune fonction vivante,
 instance, opération, invocation active, réservation ni bail ; services sains et
 configuration officielle/budgets inchangés. Après chaque campagne, recouper sa

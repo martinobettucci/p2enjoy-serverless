@@ -1,5 +1,26 @@
 # Journal de cadrage
 
+## 21 novembre2026 — suivi du lancement long078 décidé avant code
+
+La campagne dépasse deux heures ; elle doit survivre au terminal comme le
+rejeu recovery déjà contractuel. Choisir une unité utilisateur transitoire
+oneshot/remain, six heures de borne et aucun restart. systemd-run --pipe passe
+les descripteurs stdin/stdout directement au service ; le secret reste sur pipe
+puis en mémoire, sorties privées. Figer PID/naissance/cgroup et résultat terminal
+avant arrêt/jonction du seul client possédé. Le contrat précise start/status/finish
+et conserve les gardes distantes et comptes inchangés.
+
+## 21 novembre2026 — lanceur de campagne078 implémenté
+
+Scope schedules :49campagnes,18prérequis et543groupes attendus. Le socle reste
+asserté37/489 avant ajout des douze clients. Le helper d’archives garde les
+octets des rapports précédents/nouveaux et captures ; découverte UUID stricte.
+Purpose SSO dédié, comptes cleanup exacts, contrôle de repos/identité avant et
+après chaque client et recoupement final35/127. Les trois preuves conservées
+restent distinctes, SHA des modules et manifests/gz revérifiés. AST locaux et
+programmes distants, syntaxeJS et import runpy contrôlés ; revue et E2E543 requis.
+Aucun code produit, manuel, migration ou paramètre modifié.
+
 ## 21 novembre2026 — assemblage078 décidé avant code
 
 Choix réversible : étendre le lanceur existant avec un scope schedules, garder
