@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — bascule112 arrêtée avant remplacement, retour à reconstruire
+
+433da150 est construite,38backend conformes aux sources et quatreweb identiques
+au contrôle vivant. La tentative de bascule échoue au tag de retour : record
+Docker b452 introuvable, bien que son conteneur19f92eff soit encore vivant.
+Transport exact conservé, backup natif réalisé, aucun compose up exécuté.
+Le contrôle/référence, compteurs0 et5982originaux sont recoupés sans changement.
+La disparition du record n’est attribuée à aucune opération sans preuve.
+
+Décision avant reprise dans MANAGED_INVOCATION_WATCH : contexte privé de sources
+épinglées avec ancien module Git5f8e6d3, sans environnement ; image de retour
+construite et38backend/quatreweb exigés identiques au contrôle vivant. Son ID réel
+sera gardé distinct de b452. Candidat433da150 et services inchangés pendant ce
+build, puis nouveau backup et bascule gardée. Qualification81 encore due.
+
 ## 21 novembre 2026 — correction112 implémentée, qualification à produire
 
 Le watcher classe le seul lease_unknown pendant fermeture gérée dans le

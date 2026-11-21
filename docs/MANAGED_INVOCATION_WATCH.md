@@ -140,3 +140,28 @@ est managed_instances.py ; les quatre ressources web et le manuel restent ceux
 précédemment servis. Les captures communes fraîches sont ouvertes individuellement.
 Relever les ressources physiques de tous les essais et les consommateurs réellement
 terminés. Une preuve manquante garde112[~] et078 garde son passage entier distinct.
+
+## Précondition de retour avant bascule — 21 novembre 2026
+
+L’image corrigée433da150 est construite et ses38backend/quatreweb sont recoupés.
+La première tentative s’arrête avant compose up : Docker ne retrouve plus le
+record d’image b452 désigné par le conteneur vivant. Le tag de retour ne peut
+donc pas être créé par son ancien ID. Les sauvegardes natives contrôle/registre
+ont été faites ; aucun conteneur, schéma, configuration ou artefact remplacé.
+L’absence est observée ici ; sa date et son auteur ne sont pas établis.
+
+Décision réversible avant reprise : reconstruire une image de retour dans un
+contexte privé distinct, depuis les sources Docker épinglées et le fichier
+managed_instances.py exact du gel5f8e6d3. Copier uniquement Dockerfile/ignore,
+requirements, modules/migrations, bibliothèque de hash, sources web et manuel ;
+aucun fichier d’environnement ou de cellule. Exiger les38empreintes backend et
+quatre ressources web identiques à celles lues dans le contrôle toujours vivant.
+Le tag de retour porte le digest réellement reconstruit, qui peut différer de
+l’ancien ID tout en servant exactement ces octets. Conserver les deux identités,
+la provenance Git et les empreintes ; aucune assimilation au record disparu.
+
+La reconstruction n’altère ni le tag candidat433da150 ni le conteneur actuel.
+Relever le nominal après build, puis seulement reprendre une bascule avec backup
+natif frais et garde sur ce nouveau digest de retour. Le helper ne tente plus de
+retagger un ID absent et n’efface pas la preuve de la première tentative.
+Aucun nouveau comportement produit ni qualification acquis par cette opération.
