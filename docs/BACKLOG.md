@@ -68,6 +68,7 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
+| 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -3133,3 +3134,18 @@ Manuel18/74,38backend/quatreweb, mêmes services/images, configuration, référe
 et5982originaux conservés. Les branches de secours et d’expiration235s non
 provoquées restent hors de cette preuve et des critères résiduels074/091.2.
 IR-003 et la campagne entière078 restent ouverts.
+
+<a id="sls-111"></a>
+## SLS-111 — Reprise du banc de stockage géré après six groupes
+
+Statut : [~] — cinquième passage078 arrêté sur managed-storage au gel f7b1d2a.
+Nature : Corriger. Ordre : 1, préalable au prochain passage entier078.
+Contrat : [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md).
+
+- [ ] SLS-111.1 Échec scellé, assertion et état natif instruits, cause et décision
+  persistées avant code ; aucun timeout ou silence assimilé à une panne produit.
+- [ ] SLS-111.2 Correction bornée du défaut établi, sans retirer de groupe, de faute
+  réelle, de concurrence ou de contrôle de nettoyage ; tout défaut distinct inscrit.
+- [ ] SLS-111.3 Les14groupes ciblés puis25communs passent sur le code déployé ;
+  captures ouvertes individuellement, manuel, ressources et reçus recoupés, helpers
+  réellement terminés, services/référence/configuration et5982originaux conservés.

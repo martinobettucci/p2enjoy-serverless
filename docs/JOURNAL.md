@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — cinquième essai078 arrêté, SLS-111 inscrite
+
+Worker6b215e89 au gel f7b1d2a /454sources /b452 : cinq campagnes et148groupes,
+trois prérequis, puis managed-storage échoue après six sous-groupes. Rapport
+61f05271 et suite ae1704fe scellés ; MainPID0/exit1, unité arrêtée et client joint.
+La sortie finale annonce cleanup=true et6passed/1failed ; message d’assertion
+vide, aucune cause déduite. Avertissement UNIX conservé sans causalité attribuée.
+SLS-111 inscrite avant traitement : diagnostic natif, décision avant code puis
+14ciblés +25communs attendus. Aucun résultat du cinquième essai ni replay acquis.
+078 reste ouverte ; le registre d’incohérences reste vide.
+
 ## 21 novembre 2026 — nouveau gel complet078 après110
 
 110 est livrée et poussée (4322863,29groupes) ; IR-003 corrigée et poussée
