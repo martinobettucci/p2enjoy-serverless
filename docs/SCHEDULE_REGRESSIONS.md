@@ -174,3 +174,39 @@ réutilisation de fichiers. Les6PNG login restent distingués de ses déclaratio
 Les captures scellées de rétention sont intouchées ; seuls les rapprochements
 d’identité déjà définis sont exécutés. Résultat complet, finalisation du worker,
 reçus des gardes et inspection des captures restent requis avant078[x].
+
+## Nouveau passage entier après SLS-108 et SLS-109
+
+Décision du 21 novembre 2026, après leurs livraisons et les boucles IR-001/002.
+La [preuve108](evidence/service-transport-promotion-regressions-dev-2026-11-21.json)
+passe 30 groupes et la [preuve109](evidence/modern-client-promotion-regressions-dev-2026-11-21.json)
+en passe 106 : configuration, adresses, catalogue et stockage conservent leurs
+préparations pilotes puis leurs choix explicites. Les 81 groupes des dix
+clients109 restent inchangés. Ces comptes appartiennent à leurs gels propres
+et ne s’ajoutent pas aux 543 du passage complet.
+
+Le troisième worker9c509830 est finalisé, unité arrêtée et client joint :
+18 campagnes / 313 groupes avant échec service-transport, quatre prérequis.
+Rapport de suite exact0399336a9f3f5da9663a9a4bad1e989dcf9cbab571987646d31e55d89c3fb182,
+rapport ciblé abb5923490a3db31c819b1085f5a44c5f35e545efca58474a822343085b0bdae.
+Ses 63 captures sont inspectées mais ne complètent pas la suite manquante.
+Les trois essais précédents restent incomplets et exclus, sans somme entre gels.
+
+Le nouveau worker reçoit un UUID neuf, un arbre propre committé/poussé,
+453 sources synchronisées et le même produit b452. Repartir depuis la première
+campagne avec les 49 campagnes / 543 groupes et 18 prérequis, sans reprise au
+premier cron ni réemploi des 313 groupes. Renouvellements SSO, bornes et durées
+réelles restent ceux définis plus haut. Les captures scellées ne sont ni déplacées
+ni réécrites ; leurs trois modules de rétention sont recoupés au gel.
+
+Les purges physiques portent sur les fonctions : configurations et secrets
+propres effacés, parents supprimés logiquement et jetons révoqués. Conformément
+à CONSOLE_STORAGE, elles ne détruisent aucune configuration commune des parents.
+Les remises à zéro explicites des quinze services catalogue restent contrôlées.
+La collecte ne doit pas inventer une obligation générale de parents vides.
+
+Avant clôture078 : résultat complet du même worker, finalisation systemd/client,
+49 rapports et 18 prérequis exacts, toutes les captures fraîches ouvertes,
+reçus natifs des fautes et helpers/gardes terminés, 127 fonctions / 35 namespaces
+recoupés, 5982 originaux et configuration/référence préservés. Tout reste garde
+078 en qualification ; les autres unités et la clôture095 restent distinctes.

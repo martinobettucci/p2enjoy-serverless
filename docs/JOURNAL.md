@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — nouveau gel complet SLS-078 après108/109
+
+SLS-108 et SLS-109 sont livrées séparément (30 et106 groupes réels), IR-001/002
+corrigées et poussées ; registre vide. Les trois workers précédents sont
+finalisés : zéro groupe, puis272, puis313, tous conservés incomplets.
+Décision persistée avant lancement : nouveau worker UUID, 453 sources propres
+et synchronisées, produit b452 inchangé, reprise entière 49/543 +18 depuis le
+socle. Aucun groupe des époques antérieures repris ou ajouté. Les contrats
+cron, les durées réelles et les captures scellées restent ceux déjà qualifiés.
+Toutes les nouvelles images seront inspectées ; collecte finale et gardes
+physiques propres, trois modules de rétention identiques, 127 fonctions et
+35 namespaces recoupés avant clôture078. Les parents restent logiquement
+supprimés, leurs configurations hors portée de la purge d’une fonction.
+
 ## 21 novembre 2026 — IR-002 corrigée : catalogue courant et transports historiques
 
 Après instruction RO et décision du principal, INVOCATION_URLS décrit la

@@ -33,7 +33,8 @@ pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
 49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;
 rapports UUID figés, SSO frais et recoupement physique entre campagnes. Trois essais
 antérieurs restent incomplets et conservés ; après les préalables105/106/107/108
-et la qualification109, un nouveau passage entier49/543 reste à qualifier. SLS-078 reste[~].
+et la qualification109, un nouveau passage entier49/543 +18 est préparé sur
+453 sources figées. Son résultat reste à qualifier. SLS-078 reste[~].
 
 Pour une campagne suivie indépendamment du terminal :
 `python3 -B e2e/schedules-worker.py start`, puis `status NOM` et `finish NOM`
