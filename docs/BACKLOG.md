@@ -69,6 +69,7 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
+| 1 | [SLS-113](#sls-113) États d’archives de stockage : titre et pagination en erreur | Corriger | `[ ]` | SLS-065 | [STORAGE_CONSOLE_PRESENTATION](STORAGE_CONSOLE_PRESENTATION.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -3187,3 +3188,31 @@ isolées purgées puis absentes après restauration,38backend/quatreweb, manuel1
 référence/configuration/5982originaux conservés. Les39gérés/communs satisfont
 111.3 sans double comptage. Ancienne assertion111 et fautes propres091.2 non
 attribuées/non qualifiées ; la campagne entière078 reste due.
+
+<a id="sls-113"></a>
+## SLS-113 — États d’archives dans la console de stockage
+
+Statut : [ ] — deux incohérences constatées visuellement sur433da150 pendant
+le sixième passage078 au gel9e1da70 ; aucun correctif ni nouveau test appliqué.
+Nature : Corriger. Ordre :1. Dépend de :SLS-065.
+Contrat : [STORAGE_CONSOLE_PRESENTATION](STORAGE_CONSOLE_PRESENTATION.md).
+
+- [ ] SLS-113.1 La fiche purgée ne conserve pas un titre promettant des archives
+  conservées ; titre, badge, compteurs et date de purge décrivent le même état,
+  desktop et mobile, sans perdre le contexte de l’objet ni son reçu.
+- [ ] SLS-113.2 Pendant une erreur du catalogue, aucun nombre de pages antérieur
+  n’est présenté comme actuel ; erreur, reprise, filtre et contexte utiles
+  restent lisibles, commandes désactivées et aucun faux total à zéro.
+- [ ] SLS-113.3 Causes et décision persistées avant code ; véritables purge et
+  panne de consultation reproduites depuis l’accueil et le SSO réel. Les10groupes
+  storage-console-ui, leurs nouvelles assertions discriminantes et25communs
+  passent sur le code déployé, sans mock/rejeu/skip ; captures fraîches inspectées,
+  manuel et ressources/nettoyages/configuration/référence/originaux recoupés.
+
+Constats mesurés : storage-ui-purged-mobile.jpg SHA7c91c06207213fa4c8d830d83bf29b9a001f8c103f535a1adbc14c987af33a93
+montre « Archives conservées » avec badge « Purgée » et compteurs nuls.
+storage-ui-pagination-error.jpg SHA569351743565ed9243f8ce4b3822ad3b6f8fbe63b76e5f9921e69eeaf01ec7c3
+montre « Page1sur161 » pendant l’erreur, sans cartes ni total, commandes grisées.
+Rapport storage-console-ui3f346779432b5dd2cd3e17a135ab44a4d27dd5ecb1e65777df381bfe816f37d3,
+10groupes passés et14captures fraîches ; ces succès ne qualifient pas les deux
+corrections encore absentes. Aucun défaut backend n’est déduit des seules images.

@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 21 novembre2026 — états d’archives contradictoires, conversion en113
+
+Lecture des14captures fraîches storage-console-ui du sixième078 : fiche Purgée
+à compteurs nuls titrée « Archives conservées » ; erreur de catalogue gardant
+« Page1sur161 » sans cartes/total, commandes grisées. Les SHA et rapport exacts
+sont inscrits dans STORAGE_CONSOLE_PRESENTATION. Aucun effet backend déduit.
+
+Issue du constat hors078 : convertie en unité113, correction à instruire et
+qualifier séparément. Aucun code, test, résultat antérieur ou preuve de
+correction changé. Le registre ouvert de résolution reste vide ;113est dans
+le backlog avec contrat, critères et vrais tests requis. Cette inscription est
+faite depuis un checkout documentaire isolé ; le worker078 poursuit son gel9e1da70,
+son image433da150 et tous ses scénarios. Le checkout d’exécution reste inchangé.
+
 ## 21 novembre2026 — IR-004 corrigée, reprise actuelle distincte de l’ancienne cause
 
 Après instruction RO du resolver et recoupement du principal, bon sens et
