@@ -1,5 +1,13 @@
 # P2Enjoy Serverless
 
+La [rétention à sept jours](docs/evidence/schedule-retention-age-dev-2026-11-21.json)
+est qualifiée par31groupes réels : six ciblés sur les captures authentiques du
+11novembre, puis25communs. Source protégée tant que son tir reste ouvert puis
+supprimée ; tir terminal et générations retirées effacés. Aucun nouveau handler,
+22captures inspectées, deux restitutions jointes et5982artefacts conservés.
+SLS-091.1 est clôturé ; SLS-078 attend sa campagne complète sur010.
+
+
 La [capacité globale de publication éditeur](docs/evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :
 4 ciblés puis 25 communs, sur 423 sources `0856f1be` et l’image `b452ef16`.
 Un POST reste retenu au vrai read ; les nouveaux POST sur A et B font429 en

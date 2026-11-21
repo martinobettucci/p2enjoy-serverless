@@ -195,6 +195,13 @@ archives conservées, le nettoyage et les notes appliquées au SPARK.
 
 ## Planifications et concordance du manuel — SLS-078/096
 
+Complément du21novembre : [preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) passe31groupes
+(six âge, huit manuel, huit publics, neuf connexion) sur428sources41574c45.
+Les22originaux communs sont inspectés ; deux replays sur captures immuables,
+zéro nouveau handler et deux restitutions jointes. Manuel18/74 conforme.
+Les25communs ne sont pas la campagne complète078 ; son raccordement010 reste dû.
+
+
 Checkpoint courant : [preuve009](evidence/schedules-checkpoint-dev-2026-11-10.json).
 Exécuter en série, après connexion SSO réelle :
 

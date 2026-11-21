@@ -1,5 +1,13 @@
 # Rétention réelle des tirs planifiés
 
+État courant au21novembre2026 : [preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) qualifie l’âge réel
+par les deux replays10:50/10:55UTC, six groupes ciblés puis25communs,22captures
+inspectées. Les checkpoints antérieurs ci-dessous gardent leurs époques et leurs
+limites historiques. Captures originales inchangées, source conservée tant que
+son tir reste ouvert puis retirée ; tir terminal et générations99/100 effacés.
+Aucun nouveau handler ; imagesc59temporaires/b452restaurée distinctes, mêmes
+modules de rétention/calendrier. La campagne complète078 reste à exécuter sur010.
+
 Contrat de preuve de [SLS-078](BACKLOG.md#sls-078), complément de
 [SCHEDULES](SCHEDULES.md#réalisation-du-moteur-et-migration-009). DEV uniquement,
 preuves sérielles, aucune date ni ligne métier fabriquée, aucune horloge remplacée.

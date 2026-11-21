@@ -1,5 +1,26 @@
 # Journal de cadrage
 
+## 21 novembre2026 — âge réel qualifié, campagne complète078 à raccorder
+
+[preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) passe31groupes au gelc49bc39 :428sources41574c45,
+3+3âge puis8manuel/8public/9connexion,22images ouvertes individuellement.
+Source10:50 : ancien HTTP retiré, source strictement conservée/tir ouvert puis
+source retirée après clôture. Terminal10:55 : invocation, tir et générations99/100
+effacés. Observations10,846/11,085s ; aucun nouveau handler. Contrôles temporaires
+absentsD+57,788/58,832 ; restitutionsD+69,454/70,289. Deux gardes/pilotes joints,
+originaux/CID/imageb452, référence, configuration,38backend/quatreweb et5982artefacts
+conservés ; dix migrations, intégrité/FK, compteurs actifs/baux/réservations nuls.
+Image capturéec59distincte ; trois modules de rétention/calendrier identiques.
+Le refus préalable pour image absente est exclu, zéro groupe ajouté.091.1 est clos.
+
+Aucune interface, migration, configuration ou code produit changé. Le bancZIP
+reste préparé ;078.5 attend la campagne complète. Exploration RO : lanceur général
+sans clients schedule, control-operations attend008 et099 attend009 hors replay.
+Ces préconditions périmées sont inscrites dans103, contrat persisté avant code ;
+les25communs ne sont pas présentés comme la clôture078 ni095. Aucun registre
+d’incohérences présent.
+
+
 ## 21 novembre2026 — replay arrêté avant garde, image capturée absente
 
 Le précontrôle de sources a d’abord refusé ARCHIVE_LIMITS resté au SHA antérieur

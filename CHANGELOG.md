@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- Rétention à sept jours qualifiée en DEV le21novembre :31groupes réels,
+  six ciblés sur captures authentiques puis25communs,22images inspectées.
+  Source protégée puis supprimée après clôture, tir terminal/générations retirés
+  effacés, aucun nouveau handler ; deux restitutions complètes.091.1 clôturé,
+  078.5 reste ouvert pour sa campagne complète sur010.
+
 - SLS-070 : clients et données du banc ZIP implémentés ; revue et syntaxe
   contrôlées. Génération et E2E sur le SPARK restent à exécuter.
 

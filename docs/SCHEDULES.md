@@ -1,5 +1,13 @@
 # Moteur de planification
 
+État courant au21novembre2026 : [preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) qualifie l’âge réel
+par les deux replays10:50/10:55UTC, six groupes ciblés puis25communs,22captures
+inspectées. Les checkpoints antérieurs ci-dessous gardent leurs époques et leurs
+limites historiques. Captures originales inchangées, source conservée tant que
+son tir reste ouvert puis retirée ; tir terminal et générations99/100 effacés.
+Aucun nouveau handler ; imagesc59temporaires/b452restaurée distinctes, mêmes
+modules de rétention/calendrier. La campagne complète078 reste à exécuter sur010.
+
 Contrat de l'unité [SLS-078](BACKLOG.md#sls-078). Il précise la ligne « crons » de
 [PLATFORM](PLATFORM.md#exécution) et l'exigence de l'adaptateur
 ([DEPLOYMENT](DEPLOYMENT.md)) qui accepte déjà `events: - schedule`. Les jobs

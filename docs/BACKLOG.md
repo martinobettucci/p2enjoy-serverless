@@ -68,6 +68,7 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
+| 1 | [SLS-103](#sls-103) Préconditions des preuves sur le schéma010 | Corriger | `[ ]` | migration010 déployée | [SCHEMA_010_PROOF_PREREQUISITES](SCHEMA_010_PROOF_PREREQUISITES.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -96,13 +97,12 @@ bloquée est sautée et son blocage est nommé.
 | — | [SLS-085](#sls-085) Déclencheurs de file et NATS | Décision | `[ ]` | choix du courtier | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | — | [SLS-088](#sls-088) Serverless Jobs en conteneur | Décision | `[ ]` | choix des images | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 
-SLS-078 reprend en priorité : l’horloge native du SPARK confirme le21 novembre2026,
-les deux captures canoniques sont intactes et éligibles depuis le18 novembre
-à03:30:26 puis04:05:13UTC. Le blocage de vieillissement est levé ; les deux replays
-`age` puis la campagne complète restent à exécuter. Premier essai du21novembre
-refusé avant garde : image capturéec59 absente du magasin Docker, export
-canonique intact sans tag ; rechargement natif préparé, zéro groupe qualifié. Reprises et bornes numériques
-courantes sont qualifiées ; SLS-100 et SLS-071 sont livrées.
+SLS-078 reste prioritaire : les deux replays d’âge passent le21 novembre2026,
+avec six groupes ciblés puis25communs et22captures inspectées dans la
+[preuve31](evidence/schedule-retention-age-dev-2026-11-21.json). Captures et originaux
+conservés ; rétention réelle qualifiée. La campagne complète sur010 reste à
+raccorder puis exécuter avant clôture ; aucune attente temporelle ne la bloque.
+Les bornes numériques sont qualifiées ; SLS-100 et SLS-071 sont livrées.
 Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
 089.4 est qualifié. Le banc ZIP de SLS-070 reste préparé, non exécuté.
 
@@ -1827,6 +1827,11 @@ relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-1
 <a id="sls-078"></a>
 ## SLS-078 — Moteur de planification des crons
 
+Dernier complément : [preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) passe31groupes sur428sources41574c45,
+image capturéec59 puis originauxb452restaurés. Source protégée puis retirée,
+tir terminal/générations99/100 effacés, zéro nouvelle invocation ; six ciblés
+et25communs,22captures inspectées.078.5 reste ouvert pour la campagne complète.
+
 Statut : [~] — moteur, migration 009, lectures API et facette déployés en DEV ;
 [premier checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json) : six groupes ciblés,
 huit du manuel et huit publics. Le manuel conforme SLS-096 est clos ; les critères
@@ -2165,8 +2170,12 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   réellement terminal0 puis arrêté ; collectes natives et captures fraîches
   après finalisation,2services sains, actifs/baux nuls,5982artefacts et aucune garde.
   Les anciens essais restent distincts ; ce résultat ne qualifie pas sept jours.
-- [ ] Âge des deux sources aux dates réelles du 18 novembre, puis campagne
-  complète de clôture.
+- [x] Âge réel des deux sources : [replay du21novembre](evidence/schedule-retention-age-dev-2026-11-21.json),
+  six groupes ciblés à10:50/10:55UTC, plus25communs. Deux gardes/pilotes joints,
+  sources scellées inchangées, source protégée puis supprimée après clôture,
+  tir terminal et générations99/100 supprimés ; aucun nouveau handler.
+- [ ] Campagne complète de non-régression raccordée et exécutée sur010,
+  avec les nouveaux clients de planification et les bancs historiques préservés.
 
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
@@ -2571,14 +2580,16 @@ unitaires des garde-fous touchés, E2E réels, ressources restituées recoupées
 <a id="sls-091"></a>
 ## SLS-091 — Rétention et nettoyage du moteur d'exécution
 
-Statut : [~] — bornes numériques HTTP et protection de source qualifiées ;
-sept jours et nettoyage résiduel restent ouverts.
+Statut : [~] —091.1 est qualifié : bornes numériques et âge réel rapprochés ;
+le nettoyage résiduel091.2 reste ouvert.
 Nature : Qualifier. Dépend de : SLS-040. Ordre : 10. Reste à faire de SLS-040.
 
 Critères d'acceptation :
 
-- [ ] SLS-091.1 Rétention à sept jours et 10 000 observations prouvée par franchissement réel des
-  deux bornes.
+- [x] SLS-091.1 Rétention à sept jours et 10 000 observations prouvée par franchissement réel des
+  deux bornes. [Âge31](evidence/schedule-retention-age-dev-2026-11-21.json) : HTTP ancien
+  retiré, source identique protégée tant que le tir est ouvert puis supprimée.
+
   La [borne numérique HTTP ordinaire](evidence/invocation-retention-volume-dev-2026-11-11.json)
   est qualifiée par10016 appels/5008 par fonction dans SLS-078. La
   [source protégée sous borne](evidence/invocation-source-retention-volume-dev-2026-11-11.json) est aussi
@@ -2883,3 +2894,28 @@ restent compréhensibles, mais l’absence d’espaces dégrade la lecture.
 - [ ] SLS-102.2 Reconstruire/déployer en DEV et recouper le manuel servi avec sa
   source ; parcours du guide et captures desktop/mobile du chapitre inspectées,
   régressions communes réelles.
+
+
+<a id="sls-103"></a>
+## SLS-103 — Préconditions des preuves sur le schéma010
+
+Statut : [ ]. Nature : Corriger. Ordre :1, préalable à la campagne complète078.
+Contrat : [SCHEMA_010_PROOF_PREREQUISITES](SCHEMA_010_PROOF_PREREQUISITES.md).
+
+Constats de revue du21novembre : control-operations.py141 exige008 alors que
+l’image courante applique010 ; storage-legacy-environment.py1135 exige009
+dans le parcours099 ordinaire. Ces refus précoces empêchent les campagnes
+complètes de mesurer le code actuel. Aucun échec fonctionnel produit déduit.
+
+- [ ] SLS-103.1 Précontrôle et assertions des migrations courantes exactement
+  001→010 ; les bancs006/007/008 historiques et leurs refus restent inchangés.
+- [ ] SLS-103.2 Fenêtre099 sur l’image courante et son schéma010 : garde figée,
+  même autorité/identités, refus des états inconnus et restitution physique,
+  sans modification des captures ou configuration officielle.
+- [ ] SLS-103.3 Tests propres réels : contrôle55, gardes/restitutions et admission099
+  avec véritable refus puis succès cron ; schéma, intégrité et originaux recoupés.
+- [ ] SLS-103.4 Matrice/README/contrat et preuves mis à jour, sans présenter
+  ces prérequis comme la campagne complète078 ou095.
+
+Le raccordement des clients schedule-* dans la campagne complète reste porté
+par078.5 ; le choix de son assemblage est persisté avant le code correspondant.
