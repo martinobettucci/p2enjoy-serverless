@@ -1,10 +1,16 @@
 # P2Enjoy Serverless
 
+Les [dix préparations modernes](docs/evidence/modern-client-promotion-regressions-dev-2026-11-21.json)
+passent 106 groupes réels : 81 ciblés et 25 communs, 59 captures inspectées.
+Uploads pilotes, choix explicites et promotions restent distincts ; 89 fonctions
+sont purgées physiquement et 30 jetons révoqués. SLS-109 est close ; la campagne
+complète de SLS-078 reste à exécuter au nouveau gel.
+
 La [preuve de transport des services](docs/evidence/service-transport-promotion-regressions-dev-2026-11-21.json)
 passe 30 groupes réels et 22 captures inspectées : commandes interrompues sans
 rejeu, restauration native, puis relances avec publication pilote et promotion
 CLI explicite avant invocation Docker. Deux fonctions purgées physiquement ;
-les dix clients de SLS-109 puis la campagne complète SLS-078 restent à qualifier.
+les dix clients de SLS-109 ont ensuite leur preuve distincte ; SLS-078 reste à qualifier.
 
 Le raccordement de la preuve console aux versions par hash est
 [qualifié par 46 groupes réels](docs/evidence/publication-console-hash-regressions-dev-2026-11-21.json) :
@@ -27,7 +33,7 @@ pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
 49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;
 rapports UUID figés, SSO frais et recoupement physique entre campagnes. Trois essais
 antérieurs restent incomplets et conservés ; après les préalables105/106/107/108
-et le raccordement109, un nouveau passage entier49/543 reste à qualifier. SLS-078 reste[~].
+et la qualification109, un nouveau passage entier49/543 reste à qualifier. SLS-078 reste[~].
 
 Pour une campagne suivie indépendamment du terminal :
 `python3 -B e2e/schedules-worker.py start`, puis `status NOM` et `finish NOM`

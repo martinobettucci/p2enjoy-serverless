@@ -1,5 +1,30 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — SLS-109 qualifiée et close
+
+Au gel 0dfd953 / 453 sources sur b452, les dix campagnes passent leurs 81
+mêmes groupes puis 25 communs : 106 groupes, 59 captures fraîches ouvertes.
+Dix-neuf promotions API et une confirmation UI, vingt audits, deux rollbacks
+et 83 invocations réussies recoupés. Adresses UI toujours pilote sans défaut ;
+ETag/canonique/hash et fautes de stockage conservés. Les 89 fonctions sont
+purgées physiquement dans 22 namespaces ; 26 services supprimés logiquement,
+30 jetons révoqués. Quinze configurations catalogue explicitement vidées.
+
+Le premier collecteur RO ajoutait une condition absente du contrat : tous
+les parents vides. CONSOLE_STORAGE exclut explicitement leurs configurations
+et secrets de la purge d’une fonction. Revue contractuelle et principal
+confirment ce périmètre : un service conserve ses variables, deux leurs secrets
+communs chiffrés dans leurs lignes supprimées ; aucune destruction revendiquée.
+Refus/programme initial conservés, zéro groupe et aucune mutation corrective.
+
+Gardes et helpers terminés, compteurs au repos, dix migrations/intégrités/FK,
+38 backends et 4 web recoupés ; référence/configuration et 5982 originaux exacts
+préservés. Le contrôle de même ID/image redémarre pour les scénarios prévus.
+La revue finale date explicitement une limite du premier lot visuel dans la
+synthèse, sans réécrire son reçu ni le brut.
+Preuve modern-client-promotion-regressions-dev-2026-11-21 ; IR-002 et SLS-078
+restent distincts, sans fermeture de SLS-074 ou SLS-066.
+
 ## 21 novembre 2026 — clients SLS-109 raccordés, qualification à produire
 
 Les dix préparations portent la référence109 et conservent leurs 81 groupes.

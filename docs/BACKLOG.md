@@ -68,7 +68,6 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-109](#sls-109) Préparation des dix clients modernes du socle | Corriger | `[~]` | SLS-108 | [MODERN_CLIENT_PROMOTION_REGRESSIONS](MODERN_CLIENT_PROMOTION_REGRESSIONS.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -3072,13 +3071,24 @@ et 5982 artefacts conservés. SLS-109 et la campagne entière SLS-078 restent ou
 <a id="sls-109"></a>
 ## SLS-109 — Préparation des dix clients modernes du socle
 
-Statut : [~] — dix montages incompatibles identifiés par audit RO, avant E2E.
+Statut : [x] — [106 groupes réels et 59 captures inspectées](evidence/modern-client-promotion-regressions-dev-2026-11-21.json), gel 0dfd953 / 453 sources.
 Nature : Corriger. Ordre :1, après108 et avant le prochain078.
 Contrat : [MODERN_CLIENT_PROMOTION_REGRESSIONS](MODERN_CLIENT_PROMOTION_REGRESSIONS.md).
 
 - [x] SLS-109.1 Dix clients/groupes rapprochés des contrats actuels ; décisions
   explicites de cible, hash/alias, ETag et parcours persistées avant code.
-- [ ] SLS-109.2 Dix montages raccordés sans retirer leurs81groupes, leurs
+- [x] SLS-109.2 Dix montages raccordés sans retirer leurs81groupes, leurs
   fautes, refus, gestes UI et consommateurs réels ; historique003 intact.
-- [ ] SLS-109.3 Les81groupes puis25communs passent ; captures/manuels,
+- [x] SLS-109.3 Les81groupes puis25communs passent ; captures/manuels,
   gardes/restaurations, purges et5982originaux recoupés sur le code déployé.
+
+Les dix campagnes passent leurs 81 groupes puis les 25 communs, sans saut.
+Dix-neuf promotions API de préparation et une confirmation UI sont recoupées
+par vingt audits ; le parcours UI des adresses conserve son pilote sans défaut.
+Quatre-vingt-neuf fonctions sont purgées physiquement, 22 namespaces et 26
+services supprimés logiquement, 30 jetons révoqués et 83 invocations réussies.
+La purge efface les secrets propres des fonctions ; les configurations communes
+des parents restent hors de sa portée conformément à CONSOLE_STORAGE. Quinze
+services catalogue ont été explicitement vidés ; deux autres services conservent
+leurs secrets communs chiffrés dans leurs lignes supprimées. Ce constat ne clôt ni SLS-074,
+ni SLS-066, ni la campagne entière SLS-078.

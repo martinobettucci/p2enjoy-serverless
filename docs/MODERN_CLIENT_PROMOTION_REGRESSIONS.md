@@ -251,3 +251,44 @@ préparations changent, aucun de ces 81 groupes n’est retiré ou fractionné.
 2. Après décision : transport agent refusé, reçu conservé et reprise sans second vidage
 3. Après décision : writer contrôle occupé, agent terminé et garde indépendante du writer
 4. Contrôle arrêté après décision : redémarrage effectif par garde indépendante
+
+## Qualification du 21 novembre 2026
+
+La [preuve réelle](evidence/modern-client-promotion-regressions-dev-2026-11-21.json)
+passe les dix campagnes et leurs 81 groupes, puis 8 manuel, 8 public et
+9 connexion : 106 groupes, zéro échec et zéro saut. Gel
+0dfd95308af943a0690f7294ab122114baaf27ce, 453 sources et image b452ef16
+identiques avant/après les treize phases. Trois renouvellements SSO réels à
+deux sessions indépendantes restent des prérequis, sans groupe supplémentaire.
+
+Les 59 captures fraîches sont ouvertes individuellement : 37 ciblées et
+22 communes ; six PNG de connexion complémentaires ne sont pas déclarés par
+leur rapport. Le manuel compilé correspond à sa source inchangée, 18 chapitres
+et 74 paragraphes. Dix-neuf promotions API explicitement appelées et une
+promotion par confirmation UI concordent avec vingt audits ; deux rollbacks
+conservent leur action historique distincte. Les 83 invocations persistées
+réussissent ; le pilote des adresses UI n’est jamais promu et reste appelé
+par son hash explicite. Les fautes de stockage et leurs consommateurs réels
+sont terminés, gardes inactives et helpers absents.
+
+Trois lots natifs recoupent 89 fonctions purgées dans 22 namespaces : code,
+volumes, configuration et secrets propres effacés, reçus concordants. Les
+26 services et 22 namespaces sont supprimés logiquement ; 30 jetons révoqués.
+La purge ne modifie aucun secret ou configuration des parents
+(CONSOLE_STORAGE, périmètre explicite). Les quinze services catalogue sont
+explicitement vidés par leurs clients ; un autre service conserve ses variables
+et deux conservent leurs secrets communs chiffrés dans leurs lignes supprimées.
+La preuve ne revendique pas leur destruction.
+
+Le premier collecteur RO exigeait à tort toutes les configurations de service
+vides. Son refus et son programme restent conservés, zéro groupe ajouté ;
+le recoupement contractuel corrige cette assertion sans changement produit
+ou modification des données. Les trois lots physiques déjà conformes restent
+archivés avec leurs rapports exacts. Aucun test n’est rejoué ou ajouté par la
+collecte complémentaire.
+
+5982 originaux exacts, configuration officielle, référence et mêmes services/
+images sont conservés ; les redémarrages du contrôle appartiennent aux fautes
+prévues. Dix migrations, intégrités/FK, compteurs au repos, 38 backends et
+4 ressources HTTPS recoupés. SLS-109 est close ; IR-002 garde sa boucle
+séparée et SLS-078 requiert toujours un passage entier 49/543 + 18 au nouveau gel.

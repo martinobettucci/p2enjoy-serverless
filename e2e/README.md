@@ -14,7 +14,11 @@ promotePublishedFunction après leur upload pilote, avec ETag relu et contrôle
 hash/alias/cible. Les adresses UI choisissent leur pilote par sa carte ; le
 stockage UI promeut par sa confirmation réelle. Les 81 groupes et leurs fautes
 restent inchangés. L’image produit et les clients historiques003 sont conservés.
-Syntaxe vérifiée ; qualification E2E encore à exécuter sur les 453 sources figées.
+La [preuve réelle](../docs/evidence/modern-client-promotion-regressions-dev-2026-11-21.json)
+passe les 106 groupes au gel 0dfd953 / 453 sources, avec 59 captures inspectées,
+89 purges physiques, 30 jetons révoqués et 5982 originaux conservés. Les parents
+sont supprimés logiquement ; seuls les secrets propres des fonctions relèvent
+de leur purge. SLS-078 garde sa campagne complète distincte.
 
 
 La [qualification SLS-108](../docs/evidence/service-transport-promotion-regressions-dev-2026-11-21.json)
