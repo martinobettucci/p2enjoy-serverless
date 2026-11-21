@@ -1,11 +1,14 @@
 # P2Enjoy Serverless
 
-Une course de résultat entre timeout et libération du bail a été reproduite
-sur le vrai pilote ([SLS-112](docs/MANAGED_INVOCATION_WATCH.md)). Sa correction
-est déployée en DEV sur433da150 ; les82groupes restent à qualifier. Le nouveau discriminant suspend le seul worker
-après libération réellement acquittée ; son exécution et sa branche restent à prouver.
-L’ancienne assertion muette111 reste non attribuée ; les diagnostics14et162
-sont conservés sans les ajouter à une qualification. La suite entière078 reste due.
+La [correction du résultat pendant libération du bail](docs/evidence/managed-invocation-watch-dev-2026-11-21.json)
+est qualifiée en DEV :82groupes réels sur458sources36763c9 et l’image433da150,
+22captures fraîches inspectées. Le cas natif observe LeaseMissingDuringClose
+après STOP/CONT du seul worker et conserve exactement invocation_timeout.
+Dix phases, drainage, pertes réelles FUSE/agent, appels publics et25communs passent.
+17purges physiques et trois fonctions isolées purgées puis absentes après
+restauration sont recoupées ;5982originaux conservés. SLS-112 est close.
+L’ancienne assertion muette111 reste non attribuée ; son sous-ensemble39 passe
+sans ajouter de groupes aux82. La campagne entière078 reste due.
 
 La [confirmation indépendante des restaurations](docs/evidence/publication-restoration-confirmation-dev-2026-11-21.json)
 passe 29 groupes réels au gel965185f / 454 sources : deux coupures du contrôle,
@@ -235,7 +238,7 @@ régression sont inspectées, les66fonctions des deux passages purgées et les
 5982artefacts antérieurs conservés. Aucun critère supplémentaire de070 ne ferme.
 
 Les corrections SSO [SLS-089](docs/SSO_SESSION_RECOVERY.md) ont été qualifiées en DEV
-sur e81007c5 et sont conservées dans l’image couranteb452ef16. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
+sur e81007c5 et sont conservées dans l’image courante433da150. La [preuve partielle](docs/evidence/sso-session-recovery-dev-2026-11-11.json)
 passe 33 groupes réels sur 359 sources : pages publiques d’attente, vrai SSO admin,
 JWT signés de 300 s, renouvellement après expiration réelle et déconnexion, puis
 manuel/public/connexion. 30 captures sont recoupées. Les refus de profils sans

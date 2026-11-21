@@ -2,12 +2,14 @@
 
 ## [Non publié]
 
-- SLS-112 : correction implémentée de la course entre timeout et libération
-  volontaire du bail. Le seul lease_unknown observé pendant une fermeture
-  gérée conserve le résultat interne après confirmations complètes ; les vraies
-  pannes restent distinctes. Dix phases, un drainage et un discriminant natif
-  STOP/CONT après libération réelle sont préparés, sans changer les14groupes gérés.
-  Image433da150 déployée en DEV ;82groupes encore à qualifier,458sources de preuve.
+- SLS-112 : [82groupes réels](docs/evidence/managed-invocation-watch-dev-2026-11-21.json) qualifient la correction
+  sur433da150,458sources36763c9 et22captures inspectées. Le watcher réel observe
+  LeaseMissingDuringClose après libération acquittée et STOP/CONT gardé0,759268909s ;
+  les résultats interne/final sont identiques et gardent invocation_timeout.
+  12ciblés,14gérés,31publics et25communs ;17purges physiques, trois fonctions
+  isolées purgées puis absentes après restauration,5982originaux conservés.
+  L’ancienne assertion111 reste inconnue ; son sous-ensemble39 passe sans double
+  comptage. Pannes propres du gardien091.2 et campagne entière078 restent dues.
 
 - SLS-110 : [29 groupes réels](docs/evidence/publication-restoration-confirmation-dev-2026-11-21.json)
   qualifient la confirmation du reçu indépendant dans les bornes réelles de la

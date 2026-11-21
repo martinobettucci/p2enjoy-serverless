@@ -1,17 +1,18 @@
 # P2Enjoy Serverless
 
-## Contrôle courant — 21 novembre 2026, qualification SLS-112 en cours
+## Pilote géré qualifié —21 novembre2026
 
-L’API et la console servent l’image433da150, schéma010, manuel18chapitres/
-74paragraphes et marque à trois blocs. Le pilote corrige la classification
-entre timeout et libération volontaire du bail. La bascule est recoupée ; les
-82groupes de qualification restent à exécuter. SLS-111/112/078 restent ouvertes.
-Cette entrée complète les checkpoints datés ci-dessous. Proposition .? ;
-adoption active non revendiquée.
-
-Le cas natif supplémentaire suspend le seul worker après libération acquittée ;
-458sources de preuve, aucun groupe encore qualifié. L’essai à onze parcours
-reste refusé pour branche non observée.
+Image433da150/APIa9c2bb4d, schéma010, manuel18/74 et marque à trois blocs.
+Preuve docs/evidence/managed-invocation-watch-dev-2026-11-21.json :82groupes réels,
+458sources36763c9,22captures inspectées.12ciblés/14gérés/31publics/25communs ;
+branche réelle après STOP/CONT0,759268909s, timeout conservé et donnée relue.
+17purges physiques et trois fonctions isolées purgées puis absentes après
+restauration.38backend/quatreweb HTTPS no-store,5982originaux/configuration/
+référence conservés. Backup qualification-history/before-managed-invocation-watch-
+b953eae7c0894b1b9340a4aae5a1bf5c ; retour7aaaa36e distinct de l’ancien b452.
+SLS-112 close ; ancienne assertion111 inconnue, pannes propres du gardien091.2
+et campagne entière078 restent dues. Proposition .? sans adoption active.
+Cette entrée complète les checkpoints datés ci-dessous.
 
 ## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
 

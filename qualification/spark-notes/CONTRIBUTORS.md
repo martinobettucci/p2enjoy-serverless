@@ -1,18 +1,18 @@
 # Développement et exploitation du SPARK
 
-## Qualification du pilote géré — 21 novembre 2026
+## Pilote géré qualifié —21 novembre2026
 
-Code corrigé déployé sur433da150 après reproduction réelle watcher lease_unknown /
-interne invocation_timeout / externe storage_unavailable. Exécuter en série
-12groupes discriminants,14gérés,31publics et25communs :82uniques, sans mock ni saut.
-La branche de fermeture doit être réellement observée ; les images communes
-fraîches doivent être ouvertes individuellement. Les diagnostics14/162 et le
-cas rouge ne s’ajoutent pas aux82 ; la campagne078 entière reste distincte.
-Qualification encore à produire. Ces notes restent proposées, sans adoption.
-
-Le cas natif supplémentaire suspend le seul worker après libération acquittée ;
-458sources de preuve, aucun groupe encore qualifié. L’essai à onze parcours
-reste refusé pour branche non observée.
+Image433da150/APIa9c2bb4d, schéma010, manuel18/74 et marque à trois blocs.
+Preuve docs/evidence/managed-invocation-watch-dev-2026-11-21.json :82groupes réels,
+458sources36763c9,22captures inspectées.12ciblés/14gérés/31publics/25communs ;
+branche réelle après STOP/CONT0,759268909s, timeout conservé et donnée relue.
+17purges physiques et trois fonctions isolées purgées puis absentes après
+restauration.38backend/quatreweb HTTPS no-store,5982originaux/configuration/
+référence conservés. Backup qualification-history/before-managed-invocation-watch-
+b953eae7c0894b1b9340a4aae5a1bf5c ; retour7aaaa36e distinct de l’ancien b452.
+SLS-112 close ; ancienne assertion111 inconnue, pannes propres du gardien091.2
+et campagne entière078 restent dues. Proposition .? sans adoption active.
+Cette entrée complète les checkpoints datés ci-dessous.
 
 ## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
 

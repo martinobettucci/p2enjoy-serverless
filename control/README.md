@@ -1,11 +1,14 @@
 # Plan de contrôle
 
-La correction [SLS-112](../docs/MANAGED_INVOCATION_WATCH.md) est déployée en DEV
-sur433da150, encore à qualifier : un bail manquant observé pendant une
-fermeture déjà engagée ne remplace plus le résultat terminal interne après
-confirmation complète du nettoyage. Les autres pertes FUSE/agent conservent leur
-chemin d’erreur. Une reproduction réelle sur b452 établit le défaut ;11groupes
-ciblés,14gérés,31publics et25communs restent à qualifier sur cette nouvelle image.
+La correction [SLS-112](../docs/evidence/managed-invocation-watch-dev-2026-11-21.json) est qualifiée en DEV
+sur433da150 :82groupes réels,458sources36763c9 et22captures inspectées.
+Un bail manquant observé pendant une fermeture déjà engagée conserve le résultat
+terminal interne après confirmation complète du nettoyage. La branche est
+observée réellement après STOP/CONT gardé du worker ; timeout, données et UUID
+sont conservés. Les14groupes gérés,31publics et25communs passent aussi.
+17purges physiques et trois fonctions isolées purgées puis absentes après
+restauration sont recoupées. Les pannes propres du gardien restent091.2,
+l’ancienne assertion111 non attribuée et la campagne entière078 encore due.
 
 La [capacité globale de publication éditeur](../docs/evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :
 4 ciblés puis 25 communs, sur 423 sources `0856f1be` et l’image `b452ef16`.

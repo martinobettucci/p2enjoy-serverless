@@ -232,7 +232,8 @@ confirmées avant de conserver le résultat terminal interne indisponible. Il ne
 déduit pas cette antériorité après avoir lui-même déclenché une fermeture pour
 panne. Les autres erreurs FUSE/agent restent des pertes de stockage et aucune
 libération incertaine n’est acquittée. Contrat [SLS-112](MANAGED_INVOCATION_WATCH.md),
-correction déployée en DEV sur433da150, qualification encore à produire.
+correction [qualifiée en DEV](evidence/managed-invocation-watch-dev-2026-11-21.json) sur433da150 :82groupes réels,
+les14groupes gérés conservés et22captures inspectées.
 
 Le diagnostic opérateur existant accepte --managed-storage et une configuration
 storage data/cache sur stdin, à la place de chemins mounts libres. Ce chemin

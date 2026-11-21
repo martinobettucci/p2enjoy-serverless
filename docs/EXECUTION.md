@@ -93,7 +93,8 @@ transforme pas un timeout ou un arrêt en `storage_unavailable`. Une erreur
 observée avant fermeture et tout autre code de stockage gardent leur chemin de
 panne. Les confirmations et le diagnostic `cleanup_failed` restent obligatoires.
 Décision [SLS-112](MANAGED_INVOCATION_WATCH.md#reproduction-et-décision-du-21-novembre-2026-avant-correction),
-déployée en DEV sur433da150, encore à qualifier.
+déployée et [qualifiée en DEV](evidence/managed-invocation-watch-dev-2026-11-21.json) sur433da150 :82groupes réels,
+22captures inspectées. Les pannes propres du banc restent091.2.
 
 ## Événement, réponse et journaux
 

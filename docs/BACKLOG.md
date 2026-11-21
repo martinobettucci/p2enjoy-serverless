@@ -68,7 +68,6 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-112](#sls-112) Issue d’invocation pendant libération volontaire du bail | Corriger | `[~]` | SLS-040, SLS-050 | [MANAGED_INVOCATION_WATCH](MANAGED_INVOCATION_WATCH.md) |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
@@ -2300,7 +2299,7 @@ Critères d'acceptation :
   propositions du dépôt au schéma009/manuel15chapitres et anciens contrôles.
   Actualisation minimale des trois propositions après071 (010,18/74, image96e5
   et testeur) ; adoption non revendiquée. La réduction des récits reste à faire.
-  Actualisation minimale112 : image433da150 déployée, qualification82encore en attente ;
+  Actualisation minimale112 : image433da150 déployée, qualification82acquise,22captures inspectées ;
   schéma010 et manuel18/74inchangés, propositions seules sans adoption active.
 - [ ] SLS-079.4 Guide rejoué sur une installation temporaire distincte : installation depuis
   zéro, mise à jour, redémarrage forcé, sauvegarde, destruction partielle, restauration,
@@ -3145,7 +3144,8 @@ IR-003 et la campagne entière078 restent ouverts.
 <a id="sls-111"></a>
 ## SLS-111 — Reprise du banc de stockage géré après six groupes
 
-Statut : [~] — cinquième passage078 arrêté sur managed-storage au gel f7b1d2a.
+Statut : [~] —39régressions qualifiées dans la preuve112 ; assertion historique
+du cinquième passage078 au gel f7b1d2a toujours indéterminée, critères111.1/.2 ouverts.
 Nature : Corriger. Ordre : 1, préalable au prochain passage entier078.
 Contrat : [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md).
 
@@ -3153,24 +3153,33 @@ Contrat : [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md).
   persistées avant code ; aucun timeout ou silence assimilé à une panne produit.
 - [ ] SLS-111.2 Correction bornée du défaut établi, sans retirer de groupe, de faute
   réelle, de concurrence ou de contrôle de nettoyage ; tout défaut distinct inscrit.
-- [ ] SLS-111.3 Les14groupes ciblés puis25communs passent sur le code déployé ;
+- [x] SLS-111.3 Les14groupes ciblés puis25communs passent sur le code déployé ;
   captures ouvertes individuellement, manuel, ressources et reçus recoupés, helpers
   réellement terminés, services/référence/configuration et5982originaux conservés.
 
 <a id="sls-112"></a>
 ## SLS-112 — Issue d’invocation pendant libération volontaire du bail
 
-Statut : [~] — triplet causal reproduit au gel5f8e6d3 ; correction déployée sur433da150,
-82groupes encore à qualifier après un essai refusé pour branche non observée. Ancienne assertion111 non attribuée.
+Statut : [x] —82groupes réels qualifiés au gel36763c9/458sources/image433da150,
+22captures inspectées. Ancienne assertion111 non attribuée.
 Nature : Corriger. Ordre :1. Contrat : [MANAGED_INVOCATION_WATCH](MANAGED_INVOCATION_WATCH.md).
 
-- [ ] SLS-112.1 Discriminant réel entre résultat de l’invocation interne,
+- [x] SLS-112.1 Discriminant réel entre résultat de l’invocation interne,
   exception du watcher et résultat final, même UUID/fermeture/bail ; cause et
   décision persistées avant correction du produit, sans faux événement ou mock.
-- [ ] SLS-112.2 Une fermeture initiée par l’invocation ou le drainage ne devient
+- [x] SLS-112.2 Une fermeture initiée par l’invocation ou le drainage ne devient
   pas une fausse panne de stockage à cause de son propre bail libéré ; les pertes
   réelles de FUSE/agent continuent de retirer le consommateur avec leur erreur.
-- [ ] SLS-112.3 Douze groupes discriminants,14groupes gérés,31publics et25communs
+- [x] SLS-112.3 Douze groupes discriminants,14groupes gérés,31publics et25communs
   (82uniques) passent
   sur code déployé ; captures/manuel, pannes et nettoyages natifs recoupés, même
   référence/configuration et5982originaux conservés. Aucune cause111 inventée.
+
+Preuve112 : [82groupes réels](evidence/managed-invocation-watch-dev-2026-11-21.json),
+12ciblés/14gérés/31publics/25communs ;22captures inspectées et0saut. Cas natif :
+LeaseMissingDuringClose pendant fermeture, STOP/CONT0,759268909s, timeout interne
+et final identiques et données relues.17purges physiques et trois fonctions
+isolées purgées puis absentes après restauration,38backend/quatreweb, manuel18/74,
+référence/configuration/5982originaux conservés. Les39gérés/communs satisfont
+111.3 sans double comptage. Ancienne assertion111 et fautes propres091.2 non
+attribuées/non qualifiées ; la campagne entière078 reste due.

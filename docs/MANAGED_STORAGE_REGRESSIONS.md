@@ -98,3 +98,13 @@ Arrêter au premier échec et conserver sa preuve avant toute décision ; pas de
 rejeu automatique. Si le passage reste nominal, cela ne révèle pas la cause
 ancienne et111reste ouverte ; toute suite sera une décision séparée motivée.
 Les25communs et la campagne49/543 restent distincts et encore dus.
+
+## Régression39 acquise dans la qualification112
+
+La [preuve112](evidence/managed-invocation-watch-dev-2026-11-21.json) au gel36763c9,
+458sources/image433da150, passe14gérés inchangés puis25communs :39groupes déjà
+compris dans82, sans double comptage.22captures fraîches ouvertes individuellement,
+manuel18/74, purges physiques des trois fonctions gérées, worker/script/chemins/
+baux absents,38backend/quatreweb et nominal/5982originaux recoupés.111.3 est acquise.
+L’assertion du passage historique reste inconnue ;111.1/.2 ne sont pas déclarés
+satisfaits par cette régression ni par le défaut distinct112 corrigé.

@@ -1,5 +1,27 @@
 # Journal de cadrage
 
+## 21 novembre2026 — surveillance pendant libération112 qualifiée
+
+Gel36763c9/458sources/image433da150, travail3fc5d04e :82groupes réels en série,
+12ciblés/14gérés/31publics/25communs,22captures fraîches ouvertes individuellement.
+Cas12 : gardien STOP/CONT0,759268909s etACK5,763429ms, LeaseMissingDuringClose
+réel, interne/final identiques invocation_timeout, mêmes UUID et donnée relue.
+Gardien/worker joints, scripts retirés.17purges physiques et trois fonctions
+isolées purgées puis UUID absents après restauration. Compteurs0,38backend/
+quatreweb no-store,10migrations/intégrités/FK, manuel18/74 et5982originaux conservés.
+
+Revue de collecte avant exécution : vrai répertoire backings avec lexists,
+installation isolée restaurée contrôlée séparément des tombstones HTTP,38SHA
+backend etCID/image/quatreSHAHTTPS, ensemble exact22triplets capture/phase/SHA.
+Les vrais chemins des deux anciens essais112 sont recoupés actuellement ; leur
+ancien contrôle singulier était insuffisant, aucun état passé reconstruit.
+Sources/produit/scénarios n’ont pas changé pendant ces corrections du collecteur.
+
+Preuve publique managed-invocation-watch-dev-2026-11-21 ; rouge et essai11refusé
+exclus des82.112close ; sous-ensemble39 satisfait111.3 seulement. Ancienne
+assertion111 inconnue, pannes propres091.2 et campagne entière078 encore dues.
+Les propositions de notes sont actualisées après qualification, sans adoption.
+
 ## 21 novembre 2026 — discriminant natif112 préparé, avant exécution
 
 Au gel suivant,458sources et82groupes attendus. managed_watch_pause.py fournit

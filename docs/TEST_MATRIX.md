@@ -1,12 +1,18 @@
 # Matrice de qualification réelle
 
-## Surveillance pendant libération — SLS-112, preuve encore ouverte
+## Surveillance pendant libération — SLS-112 qualifiée
 
-La campagne préparée porte82groupes :12discriminants,14gérés,31publics et25communs.
-Le cas12 exige STOP/CONT réels du seul worker, acquittement réel de libération,
-absence native Docker/bail et sa propre branche LeaseMissingDuringClose.
-458sources ; image433da150 inchangée. Revue statique conforme, aucune nouvelle
-preuve fonctionnelle. Le passage4382b37 à onze parcours reste refusé sans réemploi.
+[Qualification112](evidence/managed-invocation-watch-dev-2026-11-21.json) :82groupes au gel36763c9/458sources/image433da150,
+12discriminants,14gérés,31publics et25communs. La branche LeaseMissingDuringClose
+est réellement observée après acquittement de libération et STOP/CONT du worker
+pendant0,759268909s ; mêmes résultats interne/final invocation_timeout et donnée
+relue.22captures fraîches ouvertes individuellement.17purges physiques et trois
+fonctions isolées purgées puis absentes après restauration,38backend/quatreweb,
+manuel18/74 et5982originaux recoupés. Les vrais chemins backings des deux essais
+112 antérieurs sont vérifiés actuellement : leur ancien contrôle singulier était
+insuffisant, aucun état passé n’est reconstruit. Zéro groupe ancien réutilisé.
+Les39gérés/communs satisfont la régression111.3 sans attribuer son ancienne assertion.
+Les fautes non provoquées du gardien091.2 et la campagne entière078 restent dues.
 
 ## Confirmation indépendante des publications — SLS-110
 

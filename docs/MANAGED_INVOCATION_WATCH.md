@@ -1,6 +1,8 @@
 # Surveillance du stockage et fermeture de l’invocation
 
-Contrat de [SLS-112](BACKLOG.md#sls-112), découvert pendant le diagnostic111.
+Contrat de [SLS-112](BACKLOG.md#sls-112), clôturée par la
+[qualification82](evidence/managed-invocation-watch-dev-2026-11-21.json). Les sections datées ci-dessous
+conservent décisions et essais préalables. Défaut découvert pendant le diagnostic111.
 Les passages isolé14 et contextuel162 réussissent ; l’ancienne assertion reste
 inconnue. Ce constat de code distinct ne les transforme pas en reproduction.
 
@@ -243,3 +245,29 @@ contrôle et dépose le module dans un dossier marqué propre au worker. Après
 jointure il retire les seuls fichiers connus ; un écart reste un échec. Le
 rattrapage parent CONT/TERM utilise pidfd après recoupement de naissance.
 Aucune exécution du nouveau cas ni aucun groupe qualifié à ce checkpoint.
+
+## Qualification effectuée sur le gel36763c9
+
+[Preuve réelle82](evidence/managed-invocation-watch-dev-2026-11-21.json) sur458sources,
+image433da150 :12ciblés,14gérés,31publics et25communs,22captures fraîches inspectées.
+Le cas12 observe LeaseMissingDuringClose/lease_unknown pendant fermeture après
+STOP/CONT0,759268909s. ACK après5,763429ms, gardien et worker joints ; résultat
+interne/final intégralement identique, invocation_timeout, mêmes UUID, début
+observé, conteneur retiré et donnée relue. Aucun ancien groupe réutilisé.
+
+Contrôle natif :17purges physiques et trois fonctions isolées purgées puis UUID
+absents après restauration, aucun bail/volume/processus/réseau/chemin temporaire
+résiduel. Compteurs0,10migrations/intégrités/FK,38backend/quatreweb no-store,
+manuel18/74, configuration/référence et5982originaux conservés. Notes actives
+inchangées ; leurs propositions sont recoupées, aucune adoption revendiquée.
+
+Le collecteur préparé corrige un chemin hérité `backing` en `backings` avec
+lexists. Les vrais chemins des deux essais112 antérieurs sont aussi recoupés
+actuellement ; leur ancien contrôle singulier était insuffisant. Aucune date
+passée n’est reconstruite. L’installation isolée restaurée se contrôle par
+absence de ses UUID et reçu de restauration, distincte des tombstones HTTP.
+Ce changement du collecteur ne modifie aucun groupe ou scénario du produit.
+
+Les39gérés/communs fournissent111.3 sans somme ajoutée ; l’ancienne assertion111
+reste indéterminée. Le discriminant prouve cet entrelacement provoqué, aucun
+ordre universel ni panne propre du gardien/parent091.2. La campagne078 reste due.

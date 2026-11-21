@@ -1,22 +1,24 @@
 # Révisions et adaptateur de déploiement
 
-## Préparation de la correction du pilote géré — SLS-112
+## Pilote géré corrigé et qualifié —21 novembre2026
 
-[MANAGED_INVOCATION_WATCH](MANAGED_INVOCATION_WATCH.md) exige une bascule du seul
-contrôle DEV après build et sauvegarde SQLite native au repos. Le CID/image
-courant b452 sera remplacé ; conserver référence, fichiers officiels, registre,
-tables et 5 982 artefacts. Le delta produit attendu est managed_instances.py,
-sans migration, variable, route ou web modifié. Relever les 38 fichiers backend,
-les quatre ressources HTTPS et le manuel, puis 82 groupes réels en série et
-captures fraîches inspectées. L’image433da150 est désormais déployée dans serverless-api/a9c2bb4d après
-backup natif contrôle/registre. La première tentative s’est arrêtée au tag de
-retour avant remplacement : ancien record b452 absent du catalogue. L’image de
-retour7aaaa36e est reconstruite depuis les sources épinglées/ancien module5f8e6d3,
-38backend/quatreweb vérifiés identiques au contrôle vivant ; candidat et services
-conservés pendant sa construction. Les deux digests restent distincts. Les82groupes
-restent à qualifier sur433da150 après le refus du premier passage : onze parcours
-réussis mais aucune branche corrigée observée. Le douzième cas natif ne change
-ni image ni backend/web ; aucun succès de correction encore revendiqué.
+[Qualification112](evidence/managed-invocation-watch-dev-2026-11-21.json) :82groupes réels et22captures inspectées
+sur458sources36763c9/image433da150. serverless-api/a9c2bb4d reste le contrôle
+qualifié ; son seul delta produit est managed_instances.py. Dix migrations,
+38backend/quatreweb HTTPS no-store, manuel18/74, budgets/configuration/référence
+et5982originaux sont recoupés. Aucun nouveau paramètre, route ou migration.
+17purges physiques et trois fonctions isolées purgées puis absentes après
+restauration sont confirmées ; tous les compteurs au repos sont nuls.
+
+La bascule a précédé les tests : backup natif contrôle/registre sous
+qualification-history/before-managed-invocation-watch-b953eae7c0894b1b9340a4aae5a1bf5c.
+Le premier arrêt avant remplacement et ses backups restent distincts. Le record
+b452 absent du catalogue a motivé le retour reconstruit7aaaa36e,38backend/quatreweb
+identiques à l’ancien contrôle vivant ; ce digest reste distinct de b452.
+Pas de restauration DB automatique. Le premier essai11 est refusé pour branche
+non observée et exclu des82. Le nouveau cas STOP/CONT observe sa propre branche.
+Pannes du gardien non provoquées091.2, ancienne assertion111 et campagne078
+complète restent hors de la clôture112.
 
 ## Confirmation de restitution des publications — 21 novembre 2026
 
