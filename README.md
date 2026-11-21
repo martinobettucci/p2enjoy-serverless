@@ -2,7 +2,7 @@
 
 Une course de résultat entre timeout et libération du bail a été reproduite
 sur le vrai pilote ([SLS-112](docs/MANAGED_INVOCATION_WATCH.md)). Sa correction
-est implémentée et relue ; construction/bascule DEV et81groupes restent à faire.
+est déployée en DEV sur433da150 ; les81groupes restent à qualifier.
 L’ancienne assertion muette111 reste non attribuée ; les diagnostics14et162
 sont conservés sans les ajouter à une qualification. La suite entière078 reste due.
 

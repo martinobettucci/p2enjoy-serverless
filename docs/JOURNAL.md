@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — contrôle corrigé112 déployé, qualification à produire
+
+Retour7aaaa36e reconstruit sans environnement de cellule,38backend/quatreweb
+identiques au b452 vivant ; candidat433da150 et services restés inchangés.
+Le retour porte son digest réel distinct de l’ancien record. Après nouveau
+backup natif contrôle/registre, seule l’API est remplacée : CIDa9c2bb4d,433da150.
+Dix migrations/intégrités/FK, tables/registre, budgets, fichiers officiels,
+référence et5982originaux conservés.38backend corrigés et quatre ressources
+HTTPS no-store recoupés ; manuel/web inchangés.81groupes encore à qualifier.
+
+Les trois propositions de notes reçoivent une entrée d’état courant avant
+qualification ; aucun récit historique n’est réécrit, aucune adoption active
+revendiquée. Leur réduction reste079.3. Les deux tentatives de bascule et leurs
+backups sont conservés séparément, zéro groupe de test ajouté.
+
 ## 21 novembre 2026 — bascule112 arrêtée avant remplacement, retour à reconstruire
 
 433da150 est construite,38backend conformes aux sources et quatreweb identiques

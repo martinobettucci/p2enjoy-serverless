@@ -1,5 +1,15 @@
 # Développement et exploitation du SPARK
 
+## Qualification du pilote géré — 21 novembre 2026
+
+Code corrigé déployé sur433da150 après reproduction réelle watcher lease_unknown /
+interne invocation_timeout / externe storage_unavailable. Exécuter en série
+11groupes discriminants,14gérés,31publics et25communs :81uniques, sans mock ni saut.
+La branche de fermeture doit être réellement observée ; les images communes
+fraîches doivent être ouvertes individuellement. Les diagnostics14/162 et le
+cas rouge ne s’ajoutent pas aux81 ; la campagne078 entière reste distincte.
+Qualification encore à produire. Ces notes restent proposées, sans adoption.
+
 ## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
 
 La preuve `docs/evidence/code-editor-console-focus-dev-2026-11-12.json` passe

@@ -8,8 +8,13 @@ courant b452 sera remplacé ; conserver référence, fichiers officiels, registr
 tables et 5 982 artefacts. Le delta produit attendu est managed_instances.py,
 sans migration, variable, route ou web modifié. Relever les 38 fichiers backend,
 les quatre ressources HTTPS et le manuel, puis 81 groupes réels en série et
-captures fraîches inspectées. Correction décidée ; aucune nouvelle image encore
-construite ou déployée à cette étape.
+captures fraîches inspectées. L’image433da150 est désormais déployée dans serverless-api/a9c2bb4d après
+backup natif contrôle/registre. La première tentative s’est arrêtée au tag de
+retour avant remplacement : ancien record b452 absent du catalogue. L’image de
+retour7aaaa36e est reconstruite depuis les sources épinglées/ancien module5f8e6d3,
+38backend/quatreweb vérifiés identiques au contrôle vivant ; candidat et services
+conservés pendant sa construction. Les deux digests restent distincts. Les81groupes
+restent à qualifier sur433da150 ; aucun succès de correction encore revendiqué.
 
 ## Confirmation de restitution des publications — 21 novembre 2026
 

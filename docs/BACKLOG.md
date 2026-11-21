@@ -2300,6 +2300,8 @@ Critères d'acceptation :
   propositions du dépôt au schéma009/manuel15chapitres et anciens contrôles.
   Actualisation minimale des trois propositions après071 (010,18/74, image96e5
   et testeur) ; adoption non revendiquée. La réduction des récits reste à faire.
+  Actualisation minimale112 : image433da150 déployée, qualification81encore en attente ;
+  schéma010 et manuel18/74inchangés, propositions seules sans adoption active.
 - [ ] SLS-079.4 Guide rejoué sur une installation temporaire distincte : installation depuis
   zéro, mise à jour, redémarrage forcé, sauvegarde, destruction partielle, restauration,
   purge ; au moins cinq symptômes du tableau de diagnostic provoqués pour de vrai.
@@ -3154,8 +3156,8 @@ Contrat : [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md).
 <a id="sls-112"></a>
 ## SLS-112 — Issue d’invocation pendant libération volontaire du bail
 
-Statut : [~] — triplet causal reproduit au gel5f8e6d3 ; correction décidée avant code,
-à déployer et qualifier. Ancienne assertion111 non attribuée.
+Statut : [~] — triplet causal reproduit au gel5f8e6d3 ; correction déployée sur433da150,
+81groupes encore à qualifier. Ancienne assertion111 non attribuée.
 Nature : Corriger. Ordre :1. Contrat : [MANAGED_INVOCATION_WATCH](MANAGED_INVOCATION_WATCH.md).
 
 - [ ] SLS-112.1 Discriminant réel entre résultat de l’invocation interne,

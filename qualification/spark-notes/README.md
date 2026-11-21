@@ -1,5 +1,14 @@
 # P2Enjoy Serverless
 
+## Contrôle courant — 21 novembre 2026, qualification SLS-112 en cours
+
+L’API et la console servent l’image433da150, schéma010, manuel18chapitres/
+74paragraphes et marque à trois blocs. Le pilote corrige la classification
+entre timeout et libération volontaire du bail. La bascule est recoupée ; les
+81groupes de qualification restent à exécuter. SLS-111/112/078 restent ouvertes.
+Cette entrée complète les checkpoints datés ci-dessous. Proposition .? ;
+adoption active non revendiquée.
+
 ## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
 
 La preuve `docs/evidence/code-editor-console-focus-dev-2026-11-12.json` passe

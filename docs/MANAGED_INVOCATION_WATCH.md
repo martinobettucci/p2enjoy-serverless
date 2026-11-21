@@ -165,3 +165,20 @@ Relever le nominal après build, puis seulement reprendre une bascule avec backu
 natif frais et garde sur ce nouveau digest de retour. Le helper ne tente plus de
 retagger un ID absent et n’efface pas la preuve de la première tentative.
 Aucun nouveau comportement produit ni qualification acquis par cette opération.
+
+## Bascule effectuée, qualification encore à produire
+
+Le retour reconstruit7aaaa36e conserve exactement les38backend/quatreweb du
+contrôle vivant b452, avec un environnement d’image identique au build épinglé.
+Le candidat433da150 n’est pas retaggé. Une seconde sauvegarde native contrôle/
+registre au repos précède le remplacement ; nouveau contrôle
+`a9c2bb4d394087f6e07d8ca0a345a2844c68bbcf5d951797d1dbe55cf034e48b` sur433da150.
+
+Le backup courant est qualification-history/before-managed-invocation-watch-
+b953eae7c0894b1b9340a4aae5a1bf5c ; la première tentative et ses backups restent
+conservés séparément. Dix migrations, intégrité/FK, tables et registre, budgets,
+fichiers officiels, référence et5 982originaux recoupés.38backend correspondent
+aux sources corrigées, seules celles du pilote géré changent ; quatre ressources
+HTTPS identiques et no-store. Code image au gel6d0cc43, métadonnées de retoura0c9886 ;
+aucune restauration DB, migration, route ou variable nouvelle. Ces constats de
+bascule ne remplacent pas les81groupes, encore à exécuter sur les sources figées.

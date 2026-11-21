@@ -1,5 +1,15 @@
 # Intégration avec P2Enjoy Serverless
 
+## Bascule du contrôle — 21 novembre 2026, qualification en cours
+
+serverless-api/a9c2bb4d sert433da150, sans nouvelle variable, route ni migration.
+Backup natif contrôle/registre sous qualification-history/before-managed-
+invocation-watch-b953eae7c0894b1b9340a4aae5a1bf5c. Le retour
+p2enjoy-control:before-managed-invocation-watch porte7aaaa36e, reconstruit avec
+38backend/quatreweb identiques au b452 vivant ; les digests restent distincts.
+Référence et5982artefacts conservés.81groupes encore à qualifier, aucune
+restauration DB automatique. Proposition .? sans adoption active revendiquée.
+
 ## Éditeur : sources, adoption et focus qualifiés — 12 novembre 2026
 
 La preuve `docs/evidence/code-editor-console-focus-dev-2026-11-12.json` passe

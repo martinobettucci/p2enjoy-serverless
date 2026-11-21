@@ -93,7 +93,7 @@ transforme pas un timeout ou un arrêt en `storage_unavailable`. Une erreur
 observée avant fermeture et tout autre code de stockage gardent leur chemin de
 panne. Les confirmations et le diagnostic `cleanup_failed` restent obligatoires.
 Décision [SLS-112](MANAGED_INVOCATION_WATCH.md#reproduction-et-décision-du-21-novembre-2026-avant-correction),
-encore à déployer et qualifier.
+déployée en DEV sur433da150, encore à qualifier.
 
 ## Événement, réponse et journaux
 
