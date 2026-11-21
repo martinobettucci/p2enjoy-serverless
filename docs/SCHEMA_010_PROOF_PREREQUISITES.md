@@ -26,7 +26,11 @@ la fenêtre temporaire utilise cette même image et applique010 au démarrage.
 Ses métadonnées nomment010 sans altérer le comportement des modes historiques
 ni l’exception déjà qualifiée des replays de rétention sur009. Avant toute
 mutation, vérifier services/repos/configuration/identités/absence consommateurs.
-Aucune base ou date fabriquée.
+Aucune base ou date fabriquée. Le reçu capacity/ready expose
+`schema_migrations` (liste ordonnée des dix noms) ; les clients de déploiement
+et d’admission la recoupent. La lecture du helper refuse tout autre jeu dans
+le mode courant ; le replay historique conserve son propre jeu009.
+
 
 La garde indépendante est copiée et figée avant la fenêtre. Les décisions de
 restitution, identités, bases/artefacts originaux et interdiction de retirer des

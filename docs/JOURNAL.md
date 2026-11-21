@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 21 novembre2026 — deux refus périmés103 reproduits
+
+control-operations surb452 termine1 à l’assertion008 après le premier groupe ;
+projet Docker nettoyé, rapport précédent préservé, sources/images inchangées.
+Checkpoint reproduce-eae37613 conservé, aucun groupe qualifié. Le helper099
+4b5552a5 refuse current_schema009_required avant garde/arrêt/journal : mêmes
+services et démarrages, seul dossier préalable vide conservé en privé.
+La correction exige010 exactement, et expose la liste ordonnée danscapacity
+pour recoupement par les deux clients. Aucun changement de schéma ou produit.
+
+
 ## 21 novembre2026 — âge réel qualifié, campagne complète078 à raccorder
 
 [preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) passe31groupes au gelc49bc39 :428sources41574c45,
