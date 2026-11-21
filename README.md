@@ -1,5 +1,17 @@
 # P2Enjoy Serverless
 
+Le [scope de régression complète des crons](docs/SCHEDULE_REGRESSIONS.md) est implémenté
+pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
+49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;
+rapports UUID figés, SSO frais et recoupement physique entre campagnes. Le
+lancement réel et ses résultats restent à produire ; SLS-078 reste[~].
+
+Pour une campagne suivie indépendamment du terminal :
+`python3 -B e2e/schedules-worker.py start`, puis `status NOM` et `finish NOM`
+sur ce même script. Les identifiants SSO sont lus sur stdin privée et restent
+en mémoire ; les rapports et résultats systemd sont conservés dans .local/e2e.
+
+
 La [migration historique003→010](docs/evidence/legacy-schema010-dev-2026-11-21.json)
 est qualifiée :30groupes réels, cinq ciblés puis25communs,22captures inspectées.
 L’ancien contrôle est construit depuis ses39sources Git exactes ; ses deux

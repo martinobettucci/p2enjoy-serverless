@@ -1,5 +1,17 @@
 # Qualification de la plateforme
 
+Le [scope de régression complète des crons](../docs/SCHEDULE_REGRESSIONS.md) est implémenté
+pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
+49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;
+rapports UUID figés, SSO frais et recoupement physique entre campagnes. Le
+lancement réel et ses résultats restent à produire ; SLS-078 reste[~].
+
+Pour une campagne suivie indépendamment du terminal :
+`python3 -B e2e/schedules-worker.py start`, puis `status NOM` et `finish NOM`
+sur ce même script. Les identifiants SSO sont lus sur stdin privée et restent
+en mémoire ; les rapports et résultats systemd sont conservés dans .local/e2e.
+
+
 ## Contrôle historique003 vers010 — SLS-104
 
 Le constructeur conserve l’ancien arbre Git remappé et ses sources intactes.

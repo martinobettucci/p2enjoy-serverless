@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_REGRESSIONS.md#recoupement-physique-et-visuel
+# @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_REGRESSIONS.md#recoupement-physique-et-visuel
 # @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
 # @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
@@ -10,6 +12,7 @@ All declarations implement this scope. The operator never deletes resources.
 """
 import hashlib
 import json
+import re
 from pathlib import Path
 import shlex
 import subprocess
@@ -18,21 +21,24 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / '.local/e2e/storage-console-physical.json'
 SSH = ['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', '-J', 'ubuntu@51.158.54.202', 'root@10.77.0.24']
+from schedule_regressions import COUNTS as SCHEDULE_COUNTS, function_ids, verify_report as verify_schedule_report
+
 NAMES = ('storage-console-api', 'storage-console-ui', 'storage-command-recovery',
          'storage-validation-recovery', 'storage-decision-recovery')
 
 
 def main():
     assert sys.argv[1] in ('.local/e2e/storage-console-focused.json', '.local/e2e/storage-console-regressions.json',
-                           '.local/e2e/invocation-urls-regressions.json','.local/e2e/function-catalogue-regressions.json')
-    catalogue = sys.argv[1] == '.local/e2e/function-catalogue-regressions.json'
+                           '.local/e2e/invocation-urls-regressions.json','.local/e2e/function-catalogue-regressions.json','.local/e2e/schedules-regressions.json')
+    schedules = sys.argv[1] == '.local/e2e/schedules-regressions.json'
+    catalogue = schedules or sys.argv[1] == '.local/e2e/function-catalogue-regressions.json'
     extended = catalogue or sys.argv[1] == '.local/e2e/invocation-urls-regressions.json'
-    output = ROOT / '.local/e2e/function-catalogue-physical.json' if catalogue else ROOT / '.local/e2e/invocation-urls-physical.json' if extended else OUTPUT
+    output = ROOT / '.local/e2e/schedules-physical.json' if schedules else ROOT / '.local/e2e/function-catalogue-physical.json' if catalogue else ROOT / '.local/e2e/invocation-urls-physical.json' if extended else OUTPUT
     output.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     output.write_text(json.dumps({'completed': False}) + '\n')
     suite = json.loads((ROOT / sys.argv[1]).read_text())
     assert suite['serial'] and not suite['completed'], 'live_suite_checkpoint_required'
-    if extended: assert suite['scope'] == ('function-catalogue' if catalogue else 'invocation-urls')
+    if extended: assert suite['scope'] == ('schedules' if schedules else 'function-catalogue' if catalogue else 'invocation-urls')
     commands = {row['campaign']: row for row in suite['commands']}
     campaigns, reports, historical, temporary_ids = {}, {}, {}, []
     names = NAMES + (('invocation-urls', 'invocation-urls-ui', 'service-configuration', 'service-transport') if extended else ())
@@ -88,6 +94,34 @@ def main():
             cleared=json.loads(subprocess.check_output(SSH+[shlex.join(command)],timeout=90));assert cleared['services_cleared']
             reports[name]={'path':row['report_path'],'sha256':digest}
             catalogue_results[name]={'physical':result,**cleared}
+    schedule_results = {}
+    if schedules:
+        occupied_namespaces=set(campaigns)
+        occupied_functions=set(identifiers+temporary_ids)
+        for result in catalogue_results.values():
+            occupied_namespaces.update(result['physical']['campaigns'])
+            occupied_functions.update(result['physical']['functions'])
+        for name in SCHEDULE_COUNTS:
+            row=commands[name]
+            assert row['exit_code']==0 and row['fresh_report_verified'] and row['report_content_verified']
+            path=ROOT/row['report_path']
+            pattern=r'storage-recovery-[0-9a-f]{8}-schedule\.json' if name=='schedule-unavailable' else r'scheduled-functions-[0-9a-f]{8}\.json'
+            assert path.parent==ROOT/'.local/e2e' and re.fullmatch(pattern,path.name)
+            raw=path.read_bytes();digest=hashlib.sha256(raw).hexdigest()
+            assert digest==row['after']['report']['sha256'] and row['report_archive']['sha256']==digest
+            assert (ROOT/row['report_archive']['path']).read_bytes()==raw
+            report=json.loads(raw);verify_schedule_report(name,report)
+            namespace=report['namespace_id'];ids=function_ids(report,name)
+            assert namespace not in occupied_namespaces and set(ids).isdisjoint(occupied_functions)
+            occupied_namespaces.add(namespace);occupied_functions.update(ids)
+            assert row['native_before']['completed'] and row['native_after']['completed'] and row['native_after']['physical']['completed']
+            assert not any(row['native_after']['counts'].values())
+            command=['python3','-B','/srv/p2enjoy-serverless/e2e/storage-console-inspect.py',json.dumps({namespace:ids})]
+            result=json.loads(subprocess.check_output(SSH+[shlex.join(command)],timeout=240))
+            assert result['completed']
+            reports[name]={'path':row['report_path'],'sha256':digest}
+            schedule_results[name]={'namespace_id':namespace,'function_ids':ids,'physical':result}
+        assert len(schedule_results)==12 and sum(len(v['function_ids']) for v in schedule_results.values())==36
     expected = {str(path.relative_to(ROOT / 'control')): hashlib.sha256(path.read_bytes()).hexdigest()
                 for directory, pattern in [('app', '*.py'), ('migrations', '*.sql')]
                 for path in (ROOT / 'control' / directory).glob(pattern)}
@@ -142,6 +176,12 @@ print(json.dumps(result))
                      total_namespaces=len(campaigns)+sum(len(r['physical']['campaigns']) for r in catalogue_results.values()),
                      total_functions=len(identifiers)+sum(len(r['physical']['functions']) for r in catalogue_results.values()))
         assert value['total_namespaces']==23 and value['total_functions']==91
+    if schedules:
+        value.update(schedules=schedule_results,schedule_namespaces=len(schedule_results),
+                     schedule_functions=sum(len(v['function_ids']) for v in schedule_results.values()),
+                     all_namespaces=value['total_namespaces']+len(schedule_results),
+                     all_functions=value['total_functions']+sum(len(v['function_ids']) for v in schedule_results.values()))
+        assert value['all_namespaces']==35 and value['all_functions']==127
     pending = output.with_suffix('.pending');pending.write_text(json.dumps(value, indent=2) + '\n');pending.replace(output)
     print(json.dumps({'completed': True, 'namespaces': len(campaigns), 'functions': len(identifiers),
                       'embedded_files': len(expected), 'historical_restorations': len(historical)}))

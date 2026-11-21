@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_REGRESSIONS.md
+# @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_REGRESSIONS.md
 # @spec docs/BACKLOG.md#sls-040 | docs/ADMISSION.md
 # @verifies docs/BACKLOG.md#sls-040 | docs/ADMISSION.md
 # @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#suite-commune-et-pagination-autonome
@@ -16,6 +18,11 @@ import subprocess
 import sys
 import termios
 import time
+
+# Keep the same module lookup when proof wrappers load this file with runpy.
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from schedule_regressions import COUNTS as SCHEDULE_COUNTS, ProofArchive, discover_report, function_ids, native_state, report_candidates, retained_retention_proofs, same_installation
+from schedule_regressions import verify_report as verify_schedule_report
 
 ROOT=Path(__file__).resolve().parent.parent
 SSH=['ssh','-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202']
@@ -83,6 +90,7 @@ def source_hashes():
     files += [ROOT/'docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#preuves-et-portée-des-opérateurs
     files += [ROOT/'docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md']
+    files += list((ROOT/'docs').glob('SCHEDULE_*.md')) + [ROOT/'docs/SCHEDULES.md',ROOT/'docs/RETENTION_HISTORY_REPLAY.md']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
 def metadata(path):
@@ -139,6 +147,7 @@ def read_report(path,is_remote,expected_hash):
 def verify_report(name,path,is_remote,expected_hash):
     result=read_report(path,is_remote,expected_hash)
     assert result['completed'] is True and result['skipped']==0,'Campagne incomplète ou ignorée'
+    if name in SCHEDULE_COUNTS:return verify_schedule_report(name,result)
     expected={'control-operations':55,'function-storage':15,'runtime-instances':31,'instance-lifecycle':11,
               'runtime-validation':36,'managed-storage':14,'control-admin':19,'control-ui':11,
               'deployments':11,'adapter-deploy':7,'publication-recovery':4,'public':8,
@@ -197,7 +206,7 @@ def main():
     # @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
     # @spec docs/BACKLOG.md#sls-063 | docs/CONSOLE_PUBLICATION.md#preuves-requises
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--scope',choices=('engine','console','publication','storage','storage-console-focused','storage-console','invocation-urls','function-catalogue','public-invocations'),default='engine')
+    parser.add_argument('--scope',choices=('engine','console','publication','storage','storage-console-focused','storage-console','invocation-urls','function-catalogue','public-invocations','schedules'),default='engine')
     scope=parser.parse_args().scope
     report={'engine':REPORT,'console':ROOT/'.local/e2e/console-execution-regressions.json','publication':ROOT/'.local/e2e/publication-regressions.json',
             'storage':ROOT/'.local/e2e/storage-discard-regressions.json',
@@ -205,8 +214,9 @@ def main():
             'storage-console':ROOT/'.local/e2e/storage-console-regressions.json',
             'invocation-urls':ROOT/'.local/e2e/invocation-urls-regressions.json',
             'function-catalogue':ROOT/'.local/e2e/function-catalogue-regressions.json',
-            'public-invocations':ROOT/'.local/e2e/public-invocations-regressions.json'}[scope]
-    extended=scope in ('invocation-urls','function-catalogue')
+            'public-invocations':ROOT/'.local/e2e/public-invocations-regressions.json',
+            'schedules':ROOT/'.local/e2e/schedules-regressions.json'}[scope]
+    extended=scope in ('invocation-urls','function-catalogue','schedules')
     console_cases=[
         next(row for row in CASES if row[0]=='public'),
         ('login-ui',['node','e2e/login-ui.mjs'],'.local/e2e/login-ui.json',False),
@@ -229,7 +239,7 @@ def main():
             *[next(row for row in CASES if row[0]==name) for name in ('managed-storage','function-storage','public-invocations')],
         ]
     if scope=='storage':cases=storage_cases
-    storage_console=scope in ('storage-console-focused','storage-console','invocation-urls','function-catalogue')
+    storage_console=scope in ('storage-console-focused','storage-console','invocation-urls','function-catalogue','schedules')
     if storage_console:
         focused=[
             (name,['node','e2e/'+name+'.mjs'],'.local/e2e/'+name+'.json',False)
@@ -247,43 +257,63 @@ def main():
                 extra += [(name,remote(['bash',REMOTE+'adapter/dev.sh',action]),'adapter/reports/'+filename,True)
                           for name,action,filename in [('adapter-docker','test','adapter.json'),
                                                        ('adapter-public-docker','deploy-public-test','adapter-deploy-public.json')]]
-                if scope=='function-catalogue':
+                if scope in ('function-catalogue','schedules'):
                     extra += [(name,['node','e2e/'+name+'.mjs'],'.local/e2e/'+name+'.json',False)
                               for name in ('function-catalogue-api','function-catalogue-ui')]
             union=CASES+console_cases+extra+storage_cases+focused
             cases=list({row[0]:row for row in union}.values())
-            if extended:assert len(cases)==(37 if scope=='function-catalogue' else 35)
+            if extended:assert len(cases)==(37 if scope in ('function-catalogue','schedules') else 35)
+    if scope=='schedules':cases += [(name,['node','e2e/'+name+'.mjs'],None,False) for name in SCHEDULE_COUNTS]
+    archive=ProofArchive() if scope=='schedules' else None
+    previous_suite=archive.retain('schedules-suite',str(report.relative_to(ROOT)),False,'previous') if archive else None
+    source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip() if archive else None
     records=[];prerequisites=[];baseline=None;adapter_baseline=None
+    native_baseline=native_state() if archive else None
+    retention_proofs=retained_retention_proofs() if archive else None
     def save(done=False):
         temporary=report.with_suffix('.tmp')
-        temporary.write_text(json.dumps({'completed':done,'serial':True,'scope':scope,'prerequisites':prerequisites,'commands':records},ensure_ascii=False,indent=2)+'\n')
+        value={'completed':done,'serial':True,'scope':scope,'prerequisites':prerequisites,'commands':records}
+        if archive:value.update(run_id=archive.id,archive_path=str(archive.path.relative_to(ROOT)),source_commit=source_commit,previous_suite=previous_suite,native_baseline=native_baseline,retained_retention_proofs=retention_proofs)
+        temporary.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
         temporary.replace(report)
     report.parent.mkdir(parents=True,exist_ok=True,mode=0o700);save()
     def execute(name,command,path,is_remote,*,count=True,private_input=None):
         nonlocal baseline,adapter_baseline
         include_adapter=adapter_baseline is not None
+        dynamic=name in SCHEDULE_COUNTS
+        existing=report_candidates(name) if dynamic else None
+        if dynamic:path=str((archive.path/(name+'-awaiting-report.json')).relative_to(ROOT))
+        previous=archive.retain(name,path,is_remote,'previous') if archive and not dynamic else None
         before=snapshot(path,is_remote,include_adapter=include_adapter)
         if baseline is None:baseline={k:before[k] for k in ('image','source_sha256')}
         assert all(before[k]==v for k,v in baseline.items()),'Image ou sources changées avant campagne'
         if include_adapter:assert before['adapter_images']==adapter_baseline,'Images CLI changées avant campagne'
         record={'campaign':name,'command':command,'report_path':path,'report_remote':is_remote,'before':before,'exit_code':None}
+        if archive:record.update(started_at_ns=time.time_ns(),previous_report=previous)
         (records if count else prerequisites).append(record);save();print(json.dumps({'campaign' if count else 'prerequisite':name,'state':'running'}),flush=True)
         started=time.monotonic()
         options={'input':private_input} if private_input is not None else {'stdin':subprocess.DEVNULL}
         result=subprocess.run(command,cwd=ROOT,**options)
         record.update(exit_code=result.returncode,duration_seconds=round(time.monotonic()-started,2));save()
+        if dynamic:
+            path=discover_report(name,existing);record['report_path']=path;save()
+        if result.returncode and not archive:raise SystemExit(result.returncode)
+        after=snapshot(path,is_remote,include_adapter=include_adapter);record['after']=after
+        if archive:
+            record['report_archive']=archive.retain(name,path,is_remote,'result',after['report']['sha256'])
+            record['finished_at_ns']=time.time_ns()
+        save()
         if result.returncode:raise SystemExit(result.returncode)
-        after=snapshot(path,is_remote,include_adapter=include_adapter);record['after']=after;save()
         assert all(after[k]==v for k,v in baseline.items()),'Image ou sources changées pendant campagne'
         if include_adapter:assert after['adapter_images']==adapter_baseline,'Images CLI changées pendant campagne'
         assert before['report']['sampled_at_ns']<=after['report']['mtime_ns']<=after['report']['sampled_at_ns'],'Rapport non régénéré par la campagne'
         if count:record['passed_groups']=verify_report(name,path,is_remote,after['report']['sha256'])
         else:
             value=read_report(path,is_remote,after['report']['sha256']);assert value['completed'] is True,'Prérequis incomplet'
-            if name in ('dev-sso-sessions','dev-sso-decision-sessions','dev-sso-invocation-sessions'):
+            if name in ('dev-sso-sessions','dev-sso-decision-sessions','dev-sso-invocation-sessions') or name.startswith('dev-sso-before-'):
                 assert value['authenticated'] and value['independent_sessions']==2 and value['platform_cookies_only']
-                assert value['purpose']=={'dev-sso-sessions':'suite-start','dev-sso-decision-sessions':'storage-decisions',
-                                          'dev-sso-invocation-sessions':'invocation-urls'}[name]
+                expected_purpose='scheduled-regressions' if name.startswith('dev-sso-before-') else {'dev-sso-sessions':'suite-start','dev-sso-decision-sessions':'storage-decisions','dev-sso-invocation-sessions':'invocation-urls'}[name]
+                assert value['purpose']==expected_purpose
             elif name=='storage-legacy-build':assert value['current_image']==baseline['image'] and value['current_tag_unchanged']
             elif name=='invocation-url-adapter-build':
                 assert value['remote_state']=='completed' and value['current_image']==baseline['image'] and value['current_tag_unchanged']
@@ -294,10 +324,13 @@ def main():
             elif name=='storage-console-physical':
                 counts=(10,32) if extended else (6,24)
                 assert value['physical']['completed'] and (value['campaign_count'],value['function_count'])==counts
-                if scope=='function-catalogue':
+                if scope in ('function-catalogue','schedules'):
                     assert value['total_namespaces']==23 and value['total_functions']==91
                     assert set(value['catalogue'])=={'function-catalogue-api','function-catalogue-ui'}
                     assert all(v['physical']['completed'] and v['services_cleared'] for v in value['catalogue'].values())
+                    if scope=='schedules':
+                        assert len(value['schedules'])==12 and value['schedule_namespaces']==12 and value['schedule_functions']==36
+                        assert value['all_namespaces']==35 and value['all_functions']==127
             else:raise AssertionError('Prérequis inconnu')
         record['fresh_report_verified']=True;record['report_content_verified']=True;save()
     # @spec docs/BACKLOG.md#sls-099 | docs/INSTANCE_LIMIT_RESTORATION.md#intégration-et-portée-des-preuves
@@ -311,6 +344,14 @@ def main():
             execute('invocation-url-adapter-build',['python3','-B','e2e/invocation-url-adapter-build.py'],
                     '.local/e2e/invocation-url-adapter-build.json',False,count=False)
     for name,command,path,is_remote in cases:
+        if scope=='schedules' and name=='login-ui':
+            print(json.dumps({'campaign':name,'state':'login-rate-quiet-period','seconds':60}),flush=True);time.sleep(60)
+        if name in SCHEDULE_COUNTS:
+            before_native=native_state()
+            if native_baseline is None:native_baseline=before_native
+            same_installation(native_baseline,before_native)
+            execute('dev-sso-before-'+name,['node','e2e/dev-sso-sessions.mjs','--for-scheduled-regressions'],
+                    '.local/e2e/dev-sso-schedule-sessions.json',False,count=False,private_input=credentials)
         if extended and name=='service-transport':
             execute('dev-sso-invocation-sessions',['node','e2e/dev-sso-sessions.mjs','--for-invocation-urls'],
                     '.local/e2e/dev-sso-invocation-sessions.json',False,count=False,private_input=credentials)
@@ -318,12 +359,22 @@ def main():
             execute('dev-sso-decision-sessions',['node','e2e/dev-sso-sessions.mjs','--for-storage-decisions'],
                     '.local/e2e/dev-sso-decision-sessions.json',False,count=False,private_input=credentials)
         execute(name,command,path,is_remote,private_input=credentials if name in ('storage-legacy-recovery','public-invocations') else None)
+        if name in SCHEDULE_COUNTS:
+            row=records[-1];value=read_report(row['report_path'],False,row['after']['report']['sha256'])
+            after_native=native_state({value['namespace_id']:function_ids(value,name)})
+            row.update(native_before=before_native,native_after=after_native);save()
+            same_installation(native_baseline,after_native)
+            assert after_native['physical']['completed']
     credentials=None
     if storage_console:
         execute('storage-console-physical',['python3','-B','e2e/storage-suite-inspect.py',str(report.relative_to(ROOT))],
-                '.local/e2e/function-catalogue-physical.json' if scope=='function-catalogue' else '.local/e2e/invocation-urls-physical.json' if extended else '.local/e2e/storage-console-physical.json',False,count=False)
+                '.local/e2e/schedules-physical.json' if scope=='schedules' else '.local/e2e/function-catalogue-physical.json' if scope=='function-catalogue' else '.local/e2e/invocation-urls-physical.json' if extended else '.local/e2e/storage-console-physical.json',False,count=False)
     if scope=='invocation-urls':assert len(records)==35 and sum(row['passed_groups'] for row in records)==467 and len(prerequisites)==6
     if scope=='function-catalogue':assert len(records)==37 and sum(row['passed_groups'] for row in records)==489 and len(prerequisites)==6
+    if scope=='schedules':
+        assert len(records)==49 and sum(row['passed_groups'] for row in records)==543 and len(prerequisites)==18
+        assert retained_retention_proofs()==retention_proofs
+        same_installation(native_baseline,native_state())
     save(True)
 
 if __name__=='__main__':main()

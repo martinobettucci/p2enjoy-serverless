@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 21 novembre2026 — lancement long078 prêt pour E2E
+
+Le lanceur start/status/finish est implémenté et relu : pipe stdin transmis
+directement au service, sorties0600, dossier0700, worker suivi par PID/naissance/
+cgroup, résultat terminal figé avant arrêt/jonction du seul client possédé.
+La création de OUTPUT est corrigée avant le dossier UUID exclusif. AST locaux/
+programmes distants, syntaxeJS et import runpy passent ;445sources indexées.
+Les deux design systems ont été relus intégralement avant le rejeu visuel.
+Revue statique sans blocage restant ; survie du worker, transfert stdin et543
+groupes restent à constater réellement. Aucun nouveau résultat produit revendiqué.
+
 ## 21 novembre2026 — suivi du lancement long078 décidé avant code
 
 La campagne dépasse deux heures ; elle doit survivre au terminal comme le

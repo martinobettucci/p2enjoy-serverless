@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-078 : scope schedules implémenté pour qualification, socle37 conservé et
+  douze clients cron ajoutés. Rapports UUID découverts et archivés, SSO frais,
+  nettoyages natifs par campagne ;543groupes attendus, non encore exécutés.
+
 - SLS-104 : [30groupes réels](docs/evidence/legacy-schema010-dev-2026-11-21.json)
   qualifient la construction historique, le SSO et l’upgrade003→010 : cinq
   ciblés puis25communs,22captures inspectées. Deux archives gardent révisions,
