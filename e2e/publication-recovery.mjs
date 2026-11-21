@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-110 | docs/PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md#cause-native-et-décision-du-21-novembre-2026-avant-code
+// @verifies docs/BACKLOG.md#sls-110 | docs/PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md#décision-et-qualification-attendues
 // @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#limites-et-reprise-des-publications
 // @verifies docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#limites-et-reprise-des-publications
 // @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md
@@ -20,11 +22,11 @@ let admin,caller,session,namespace,service,work,credential,before,completed=fals
 const prefix='publication-recovery-'+randomUUID().slice(0,8),applicationSecret='publication-recovery-private-'+randomUUID();
 const digest=value=>createHash('sha256').update(value).digest('hex');
 function diagnostic(error){const safe=v=>typeof v==='string'&&/^[A-Za-z_][A-Za-z0-9_ :<>=!.-]{0,79}$/.test(v)?v:undefined;const location=String(error?.stack??'').match(/publication-recovery\.mjs:(\d+):(\d+)/);return {name:safe(error?.name)??'UnknownError',code:safe(error?.code),operator:safe(error?.operator),source:location?{line:Number(location[1]),column:Number(location[2])}:undefined,message_sha256:digest(String(error?.message??''))};}
-async function save(){const temporary=report+'.pending';await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,cleanup,skipped:0,checks,cleanupErrors,before,observations,invocations,namespace_id:namespace?.id,function_ids:functionIds,pre_purge_revisions:archives,storage_archives:storageArchives,gates:gates.map(g=>({mode:g.mode,events:g.events,restored:g.restored,exit_code:g.exitCode,stderr_sha256:digest(g.stderr)})),remaining_proofs:['Expiration réelle','Budget et marge disque','Déconnexion administrateur concurrente','Interruption pendant nettoyage','Pannes propres des gardes et processus']},null,2)+'\n',{mode:0o600});await rename(temporary,report);}
+async function save(){const temporary=report+'.pending';await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,cleanup,skipped:0,checks,cleanupErrors,before,observations,invocations,namespace_id:namespace?.id,function_ids:functionIds,pre_purge_revisions:archives,storage_archives:storageArchives,gates:gates.map(g=>({mode:g.mode,events:g.events,restored:g.restored,exit_code:g.exitCode,stderr_sha256:digest(g.stderr),independent_wait:g.independentWait,recovery_receipts:g.recoveryReceipts})),remaining_proofs:['Expiration réelle','Budget et marge disque','Déconnexion administrateur concurrente','Interruption pendant nettoyage','Pannes propres des gardes et processus']},null,2)+'\n',{mode:0o600});await rename(temporary,report);}
 async function until(action,message,seconds=60){const end=Date.now()+seconds*1000;while(Date.now()<end){const v=await action();if(v)return v;await new Promise(r=>setTimeout(r,100));}assert.fail(message);}
 async function call(url,{method='GET',body,bytes,token=false,status=200,headers={}}={}){const response=await(token?caller:admin).fetch(url,{method,data:bytes??body,headers:{...(token?{'X-Serverless-Token':credential}:{Origin:base,'X-CSRF-Token':session.csrf_token}),...(bytes?{'Content-Type':'application/zip'}:{}),...headers}});assert([status].flat().includes(response.status()),method+' '+url+': '+response.status());const raw=await response.text();assert(!raw.includes(applicationSecret));return JSON.parse(raw);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:diagnostic(error)});throw error;}finally{await save();}}
-async function remote(mode,fn,extra=[]){const value=await run('ssh',[...ssh,'python3','-B',helper,mode,namespace.id,...(fn?[fn.id]:[]),...extra],{timeout:210000,maxBuffer:8*1024*1024});return JSON.parse(value.stdout.trim().split('\n').at(-1));}
+async function remote(mode,fn,extra=[],timeout=210000){const value=await run('ssh',[...ssh,'python3','-B',helper,mode,namespace.id,...(fn?[fn.id]:[]),...extra],{timeout,maxBuffer:8*1024*1024});return JSON.parse(value.stdout.trim().split('\n').at(-1));}
 async function current(fn){return call(`/api/functions/${fn.id}`,{token:true});}
 async function idle(fn){await until(async()=>!(await call(`/api/functions/${fn.id}/instances`)).items.length,'instances_not_released');}
 async function create(name){const row=await call(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'publication-recovery.handler',memory_mib:128,cpu:.05,timeout_seconds:10,idle_seconds:0,min_instances:0,max_instances:1}}});functions.set(row.id,row);functionIds.push(row.id);return row;}
@@ -38,7 +40,7 @@ async function bundle(marker,delay=0){await writeFile(path.join(work,'publicatio
 async function deleteRevision(fn,row){await call(`/api/functions/${fn.id}/revisions/${row.revision_id}`,{method:'DELETE',token:true,headers:{'If-Match':String((await current(fn)).updated_at)}});await until(async()=>{const v=await remote('inspect',fn);return v.revisions.some(v=>v.id===row.revision_id&&v.deleted_at&&v.stored_bytes===0)&&!v.archives[row.revision_id].directory_exists;},'revision_not_physically_deleted');await call(`/invoke/${fn.id}@${row.code_hash}`,{token:true,status:404});}
 async function gate(mode,fn,candidate){
  const child=spawn('ssh',[...ssh,'python3','-B',helper,mode,namespace.id,fn.id,candidate.id],{stdio:['pipe','pipe','pipe']});
- const g={mode,events:[],restored:false,ended:false,stderr:'',exitCode:null};gates.push(g);
+ const g={mode,events:[],restored:false,ended:false,stderr:'',exitCode:null,recoveryReceipts:[]};gates.push(g);
  createInterface({input:child.stdout}).on('line',line=>{try{g.events.push(JSON.parse(line));}catch(error){g.events.push({event:'invalid-native-output',diagnostic:diagnostic(error)});}});
  child.stderr.on('data',v=>{g.stderr=(g.stderr+v.toString()).slice(-16000);});child.stdin.on('error',error=>g.events.push({event:'native-stdin-error',diagnostic:diagnostic(error)}));
  const done=new Promise(resolve=>{child.on('close',code=>{g.ended=true;g.exitCode=code;resolve(code);});child.on('error',error=>{g.events.push({event:'native-process-error',diagnostic:diagnostic(error)});g.ended=true;g.exitCode=-1;resolve(-1);});});
@@ -46,8 +48,29 @@ async function gate(mode,fn,candidate){
  g.send=value=>child.stdin.write(value+'\n');
  g.join=async(seconds=70)=>{await until(()=>g.ended,'native_ssh_join_timeout',seconds);return done;};
  g.finish=async()=>{assert.equal(await g.join(),0);const value=g.events.find(v=>v.event==='restored');assert(value?.healthy&&value.reference_unchanged&&value.stop_mutator_joined);assert(!g.events.some(v=>v.event==='invalid-native-output'));const joined=g.events.find(v=>v.event==='guard-finished');assert(joined&&Object.values(joined.states).every(v=>v.ActiveState==='inactive'&&(v.MainPID??'0')==='0'));g.restored=true;return value;};
- g.recover=async()=>{if(!g.ended)child.stdin.end();const armed=g.events.find(v=>v.event==='guard-armed');assert(armed,'native_restoration_identity_unknown');const value=await remote(g.ended?'restore':'rescue',fn,[armed.unit]);assert(value.healthy&&value.reference_unchanged&&Object.values(value.guard_states).every(v=>v.ActiveState==='inactive'&&(v.MainPID??'0')==='0'));try{await g.join(20);}catch(error){g.events.push({event:'local-ssh-join-expired',diagnostic:diagnostic(error)});child.kill('SIGKILL');await g.join(10);}assert(g.ended);g.restored=true;return value;};
- g.independent=async()=>{assert([137,255].includes(await g.join(30)));assert(g.events.some(v=>v.event==='observer-loss'&&v.signal==='SIGKILL'));const armed=g.events.find(v=>v.event==='armed');assert(armed);const receipt=await until(async()=>{const v=await remote('evidence',fn,[armed.unit]);return v.event==='restored'?v:false;},'independent_receipt_missing',50);assert(receipt.independent&&receipt.observer_gone&&receipt.healthy&&receipt.reference_unchanged&&receipt.stop_mutator_joined);const joined=await remote('restore',fn,[armed.unit]);assert(Object.values(joined.guard_states).every(v=>v.ActiveState==='inactive'&&(v.MainPID??'0')==='0'));g.restored=true;return {...receipt,guard_states:joined.guard_states};};
+ g.recover=async()=>{if(!g.ended)child.stdin.end();const armed=g.events.find(v=>v.event==='guard-armed');assert(armed,'native_restoration_identity_unknown');const recoveryMode=g.ended?'restore':'rescue',recoveryStarted=performance.now(),value=await remote(recoveryMode,fn,[armed.unit]);g.recoveryReceipts.push({mode:recoveryMode,unit:armed.unit,elapsed_ms:Math.round((performance.now()-recoveryStarted)*1000)/1000,receipt:value});await save();assert(value.healthy&&value.reference_unchanged&&Object.values(value.guard_states).every(v=>v.ActiveState==='inactive'&&(v.MainPID??'0')==='0'));try{await g.join(20);}catch(error){g.events.push({event:'local-ssh-join-expired',diagnostic:diagnostic(error)});child.kill('SIGKILL');await g.join(10);}assert(g.ended);g.restored=true;return value;};
+ g.independent=async()=>{
+  assert([137,255].includes(await g.join(30)));assert(g.events.some(v=>v.event==='observer-loss'&&v.signal==='SIGKILL'));
+  const armed=g.events.find(v=>v.event==='armed');assert(armed);const protocol=armed.restore_protocol;
+  assert.equal(protocol?.version,1);
+  for(const key of ['guard_delay_seconds','restore_alarm_seconds','evidence_probe_timeout_seconds'])assert(Number.isSafeInteger(protocol[key])&&protocol[key]>0);
+  const budget=protocol.guard_delay_seconds+protocol.restore_alarm_seconds+protocol.evidence_probe_timeout_seconds;assert(budget<=300);
+  const started=performance.now(),deadline=started+budget*1000;
+  g.independentWait={protocol,budget_seconds:budget,probes:[],completed:false};await save();let receipt;
+  while(performance.now()<deadline){
+   const timeout=Math.min(protocol.evidence_probe_timeout_seconds*1000,Math.max(1,Math.floor(deadline-performance.now())));
+   let value;
+   try{value=await remote('evidence',fn,[armed.unit],timeout);}catch(error){g.independentWait.probes.push({elapsed_ms:Math.round((performance.now()-started)*1000)/1000,timeout_ms:timeout,error:diagnostic(error)});await save();throw error;}
+   g.independentWait.probes.push({elapsed_ms:Math.round((performance.now()-started)*1000)/1000,timeout_ms:timeout,receipt:value});await save();
+   if(performance.now()<=deadline&&value.event==='restored'){receipt=value;break;}
+   const remaining=deadline-performance.now();if(remaining>0)await new Promise(resolve=>setTimeout(resolve,Math.min(100,remaining)));
+  }
+  g.independentWait.elapsed_ms=Math.round((performance.now()-started)*1000)/1000;await save();assert(receipt,'independent_receipt_missing');
+  assert(receipt.independent&&receipt.observer_gone&&receipt.healthy&&receipt.reference_unchanged&&receipt.stop_mutator_joined);
+  const joined=await remote('restore',fn,[armed.unit]);g.independentWait.guard_finished=joined;await save();
+  assert(Object.values(joined.guard_states).every(v=>v.ActiveState==='inactive'&&(v.MainPID??'0')==='0'));
+  g.independentWait.completed=true;g.restored=true;await save();return {...receipt,guard_states:joined.guard_states};
+ };
  await g.wait('armed');return g;
 }
 function interruptedUpload(candidate,bytes,partial) {

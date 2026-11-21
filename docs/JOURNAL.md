@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — confirmation110 implémentée, preuve29 à produire
+
+L’opérateur annonce les bornes45/180/10 dans armed et son identité ; la même
+constante arme le timer et une assertion recoupe l’alarme du programme figé.
+Le client calcule235s, attend sur performance.now, borne chaque sonde à10s
+ou au temps restant et persiste ses reçus/durées avant assertions. Le reçu
+indépendant et la terminaison des unités restent requis ; provenance du secours
+conservée sans en déduire une indépendance. Les quatre groupes sont intacts.
+Syntaxe JS/Python conforme ; littéraux RESTORE/KILL_CONTROL strictement identiques
+au gel8351687 par AST. Contrat110 ajouté à l’index,454sources ; aucun produit,
+image, route, configuration ou secret modifié. Revue statique conforme ;
+qualification29 sur les sources synchronisées et figées encore requise.
+
 ## 21 novembre 2026 — cause110 recoupée et décision avant code
 
 Le message est independent_receipt_missing. La garde validating a réellement

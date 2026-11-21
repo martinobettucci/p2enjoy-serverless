@@ -1,5 +1,18 @@
 # Qualification de la plateforme
 
+## Confirmation de restitution indépendante — SLS-110
+
+Contrat : [PUBLICATION_RECOVERY_GUARD_REGRESSIONS](../docs/PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md).
+Lancer `node e2e/publication-recovery.mjs` seul depuis la racine après SSO réel
+et synchronisation DEV : quatre groupes, puis25communs avec manual-ui,
+public.py et login-ui, soit29. Le protocole de la garde annonce timer45s,
+alarme180s et sonde10s ; le client calcule235s et conserve ses lectures
+monotoniques. Les programmes RESTORE/KILL_CONTROL sont strictement inchangés.
+Un reçu indépendant réel et la fin des unités restent obligatoires ; le secours
+de nettoyage ne transforme pas le groupe en succès. Sources454 préparées,
+aucun replay110 encore qualifié.
+
+
 ## Préparations modernes et promotion explicite — SLS-109
 
 Contrat : [MODERN_CLIENT_PROMOTION_REGRESSIONS](../docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md).

@@ -97,6 +97,8 @@ def source_hashes():
     files += [ROOT/'docs/SERVICE_TRANSPORT_REGRESSIONS.md']
     # @spec docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md
     files += [ROOT/'docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md']
+    # @spec docs/BACKLOG.md#sls-110 | docs/PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md
+    files += [ROOT/'docs/PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md']
     files += list((ROOT/'docs').glob('SCHEDULE_*.md')) + [ROOT/'docs/SCHEDULES.md',ROOT/'docs/RETENTION_HISTORY_REPLAY.md']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
