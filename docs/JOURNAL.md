@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — correction112 implémentée, qualification à produire
+
+Le watcher classe le seul lease_unknown pendant fermeture gérée dans le
+sous-type privé LeaseMissingDuringClose. Le catch rejoint fermeture/invocation
+et conserve le résultat original seulement après confirmations et indisponibilité.
+Autres erreurs et annulations inchangées. Revue statique du flux conforme,
+aucun nouveau cycle de verrou identifié ; pas encore construit ni déployé.
+
+Le onzième groupe écrit et acquitte avant drainage, observe un nouveau handler
+actif puis exige instance_stopped et relecture. Résultat de préécriture conservé
+avant assertion ; borne monotone conservative prouve close avant5s. Les dix
+phases d’origine sont identiques octet pour octet, et la campagne exige une
+vraie observation LeaseMissingDuringClose, sinon elle échoue. Syntaxe conforme ;
+81groupes restent à qualifier après build/bascule et gel457sources.
+
 ## 21 novembre 2026 — course112 reproduite et correction décidée avant code
 
 Gel5f8e6d3 /457sources /b452, diagnostic f419803b : premier cas1,75s rouge.

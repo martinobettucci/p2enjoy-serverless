@@ -1,5 +1,11 @@
 # P2Enjoy Serverless
 
+Une course de résultat entre timeout et libération du bail a été reproduite
+sur le vrai pilote ([SLS-112](docs/MANAGED_INVOCATION_WATCH.md)). Sa correction
+est implémentée et relue ; construction/bascule DEV et81groupes restent à faire.
+L’ancienne assertion muette111 reste non attribuée ; les diagnostics14et162
+sont conservés sans les ajouter à une qualification. La suite entière078 reste due.
+
 La [confirmation indépendante des restaurations](docs/evidence/publication-restoration-confirmation-dev-2026-11-21.json)
 passe 29 groupes réels au gel965185f / 454 sources : deux coupures du contrôle,
 huit invocations Docker, dix purges physiques et 22 captures inspectées. Le client

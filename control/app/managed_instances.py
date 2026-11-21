@@ -1,4 +1,5 @@
 # @spec docs/BACKLOG.md#sls-040 | docs/BACKLOG.md#sls-050 | docs/STORAGE_AGENT.md#instances-avec-baux-gérés
+# @spec docs/BACKLOG.md#sls-112 | docs/MANAGED_INVOCATION_WATCH.md#reproduction-et-décision-du-21-novembre-2026-avant-correction
 """Docker instances whose lifetime owns a real durable storage lease."""
 import asyncio
 import time
@@ -7,6 +8,10 @@ from uuid import UUID,uuid4
 from .instances import Instance,joined
 from .storage_client import StorageError,volumes
 from .validator import ValidationError
+
+
+class LeaseMissingDuringClose(StorageError):
+    """The watcher observed a missing lease after managed closure had begun."""
 
 
 class ManagedInstance(Instance):
@@ -38,7 +43,11 @@ class ManagedInstance(Instance):
     async def watch_storage(self):
         while True:
             await asyncio.sleep(.5)
-            await self.storage_health()
+            try:await self.storage_health()
+            except StorageError as error:
+                if str(error)=='lease_unknown' and self.closing and self.managed_close_task is not None:
+                    raise LeaseMissingDuringClose('lease_unknown',uncertain=error.uncertain) from error
+                raise
 
     async def invoke(self,event,timeout_seconds,invocation_id=None):
         if self.managed_invoking or self.busy or self.closing or not self.ready.is_set():raise ValidationError('instance_unavailable')
@@ -56,11 +65,17 @@ class ManagedInstance(Instance):
             if result['instance_available']:await self.storage_health()
             if watcher.done():watcher.result()
             return result
-        except StorageError:
+        except StorageError as error:
             removed=await self.close()
             result=await joined(invocation) if invocation else {
                 'invocation_id':invocation_id,'instance_id':self.id,'handler_started':False,
                 'logs':'','logs_truncated':False,'elapsed_seconds':round(time.monotonic()-started,6)}
+            # Preserve only a terminal result whose own managed closure is confirmed.
+            if (isinstance(error,LeaseMissingDuringClose) and removed
+                    and not self.lease_possible and not self.cleanup_error
+                    and result.get('state') in ('succeeded','failed')
+                    and result.get('instance_available') is False):
+                return result
             return {**result,'state':'failed','error':'storage_unavailable' if removed else 'cleanup_failed',
                     'instance_available':False,'container_removed':removed}
         except BaseException:

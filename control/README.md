@@ -1,5 +1,12 @@
 # Plan de contrôle
 
+La correction [SLS-112](../docs/MANAGED_INVOCATION_WATCH.md) est implémentée,
+encore à construire et déployer en DEV : un bail manquant observé pendant une
+fermeture déjà engagée ne remplace plus le résultat terminal interne après
+confirmation complète du nettoyage. Les autres pertes FUSE/agent conservent leur
+chemin d’erreur. Une reproduction réelle sur b452 établit le défaut ;11groupes
+ciblés,14gérés,31publics et25communs restent à qualifier sur la nouvelle image.
+
 La [capacité globale de publication éditeur](../docs/evidence/code-editor-build-capacity-dev-2026-11-13.json) passe **29 groupes réels** :
 4 ciblés puis 25 communs, sur 423 sources `0856f1be` et l’image `b452ef16`.
 Un POST reste retenu au vrai read ; les nouveaux POST sur A et B font429 en

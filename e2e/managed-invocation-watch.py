@@ -154,6 +154,60 @@ async def worker(installation):
             assert read['state'] == 'succeeded' and read['response']['statusCode'] == 200 and record['read_matches_expected'], 'watch_write_not_observed'
             checks.append({'name': f'Deadline réelle {deadline:.2f}s et surveillance jointe', 'status': 'passed'})
             emit({'passed': checks[-1]['name']})
+        record = {'case': 11, 'scenario': 'external-close', 'deadline_seconds': 5,
+                  'tasks_observed': [], 'task_terminals': [], 'prior_write_acknowledged': False}
+        observations.append(record)
+        writer = instance()
+        record['writer_instance_id'] = writer.id
+        await writer.start()
+        written = await writer.invoke({'operation': 'write', 'name': 'drained-record',
+                                       'value': 'acknowledged-before-drain'}, 5)
+        record['write_result'] = result_projection(written)
+        assert written['state'] == 'succeeded' and written['response']['statusCode'] == 200, 'watch_drain_write_ack'
+        record['prior_write_acknowledged'] = True
+        await close(writer)
+        item = await instance().start()
+        record['instance_id'] = item.id
+        observer_stop = asyncio.Event()
+        observer = asyncio.create_task(observe_tasks(item, observer_stop, record))
+        record['invocation_requested_monotonic_ns'] = time.monotonic_ns()
+        invoking = asyncio.create_task(item.invoke({'operation': 'write-sleep',
+            'name': 'drained-record', 'value': 'acknowledged-before-drain', 'ms': 30000}, 5))
+        try:
+            async with asyncio.timeout(5):
+                while not item.started_observed:
+                    assert not invoking.done(), 'watch_drain_handler_not_started'
+                    await asyncio.sleep(.01)
+            record['close_requested_monotonic_ns'] = time.monotonic_ns()
+            assert (record['close_requested_monotonic_ns'] - record['invocation_requested_monotonic_ns']
+                    < 5_000_000_000), 'watch_drain_requested_after_deadline'
+            await close(item)
+            result = await invoking
+        finally:
+            if not invoking.done():
+                invoking.cancel()
+                await asyncio.gather(invoking, return_exceptions=True)
+        record['final_result'] = result_projection(result)
+        observer_stop.set()
+        await observer
+        observer = None
+        await asyncio.sleep(0)
+        reader = await instance().start()
+        read = await reader.invoke({'operation': 'read', 'name': 'drained-record'}, 5)
+        record['read_result'] = result_projection(read)
+        body = json.loads(read['response']['body']) if read.get('response') else {}
+        record['read_matches_expected'] = body.get('value') == 'acknowledged-before-drain'
+        await close(reader)
+        assert result['state'] == 'failed' and result.get('error') == 'instance_stopped', 'watch_drain_result'
+        assert result['handler_started'] is True and result['instance_available'] is False, 'watch_drain_lifecycle'
+        assert sorted(record['tasks_observed']) == ['internal-invocation', 'storage-watcher'], 'watch_drain_tasks_missing'
+        assert len(record['task_terminals']) == 2, 'watch_drain_terminals_missing'
+        assert read['state'] == 'succeeded' and read['response']['statusCode'] == 200 and record['read_matches_expected'], 'watch_drain_persistence'
+        checks.append({'name': 'Fermeture extérieure, invocation active et écriture acquittée conservée', 'status': 'passed'})
+        emit({'passed': checks[-1]['name']})
+        assert any(terminal.get('error_type') == 'LeaseMissingDuringClose'
+                   and terminal.get('error') == 'lease_unknown' and terminal['closing']
+                   for record in observations for terminal in record['task_terminals']), 'watch_closing_lease_branch_unobserved'
         completed = True
     except BaseException as error:
         failure = diagnostic(error)
