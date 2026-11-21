@@ -123,8 +123,16 @@ suivante, puis observés ensemble ; une attente est bornée par l'événement ob
   administratrice refusée par requête directe ;
 - parcours UI depuis l'accueil réel (fiche de fonction, prochain tir, dernier
   résultat, vide, long nom, mobile), captures inspectées ;
-- fixtures originales reproduisant les deux fonctions planifiées de la référence
+- compatibilité de la référence, attribuée à
+  [SLS-080.3, .7 et .8](BACKLOG.md#sls-080) : fixtures originales des treize
+  fonctions, dont les deux fonctions planifiées avec les expressions exactes
+  `0 21 * * 1-6` et `0 7-20 * * 1-6`, tirs réels aux frontières attendues sur
+  leur version promue et comparaison au manifeste en lecture seule
   ([REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md#planifications)).
+  Cette preuve reste obligatoire et non qualifiée. Elle appartient à la
+  campagne de compatibilité après SLS-078 et SLS-083 ; les preuves du moteur
+  et le passage complet de SLS-078 ne valent pas qualification de ces deux
+  expressions.
 
 ## Réalisation du moteur et migration 009
 

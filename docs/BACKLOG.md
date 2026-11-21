@@ -165,7 +165,7 @@ leurs preuves font autorité dans le détail de chaque unité.
 | Monitoring historique et alertes | [SLS-073](#sls-073) |
 | Version par hash du code changé, upload identique dédupliqué, invocation épinglée, rollback et pilote stable | [SLS-074](#sls-074), [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
 | Méthode importée fidèlement : `docs/.routine` et rôles d’origine | [SLS-000](#sls-000), [METHODE](METHODE.md) |
-| Planifications (crons) du manifeste, réellement déclenchées | [SLS-078](#sls-078), [SCHEDULES](SCHEDULES.md) |
+| Planifications (crons) du manifeste, réellement déclenchées | [SLS-078](#sls-078) pour le moteur ; [SLS-080.3, .7 et .8](#sls-080) pour les deux expressions exactes de la référence ; [SCHEDULES](SCHEDULES.md) |
 | Jobs serverless : payload fixe, gabarits composés dans l’UI, expression crontab contrôlée par fenêtres de 5 minutes | [SLS-081](#sls-081), [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
 | Répliquer toutes les fonctionnalités de Scaleway Serverless | [SLS-082](#sls-082) et unités 083 à 088, [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | Compatibilité du projet de référence établie par contrats et fixtures | [SLS-080](#sls-080), [REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md) |
@@ -2255,12 +2255,17 @@ Tests exigés :
 - Unitaires : calcul des créneaux, fenêtres, fusion, grammaire, OU jour/semaine.
 - API / intégration : table des tirs, droits par requête directe, migration, reprise
   après redémarrage.
-- E2E sur l'horloge réelle (liste complète dans
+- E2E du moteur sur l'horloge réelle (détail dans
   [SCHEDULES](SCHEDULES.md#preuves-e2e-attendues)) : `*/5`, `* * * * *`, instant précis,
   pilote/promotion/retour de hash, désactivation et suppression, SIGKILL du contrôle autour de
   la réclamation, arrêt sur plusieurs fenêtres, recouvrement, saturation, stockage exclusif
   occupé, parcours UI et captures. Tous les objets d'un scénario sont créés avant la
   frontière suivante.
+- La qualification des expressions exactes `0 21 * * 1-6` et `0 7-20 * * 1-6`
+  dans les fixtures des treize fonctions relève de
+  [SLS-080.3, .7 et .8](#sls-080), après SLS-078 et SLS-083. Cette exigence
+  reste ouverte ; les preuves et la clôture du moteur ne la déclarent pas
+  satisfaite.
 
 À mettre à jour : `SCHEMA.md` et migration, seed (fonctions planifiées), manuel (retrait de la
 limite), `DESIGN_SYSTEM_APP.md`, `DEPLOYMENT.md`, parité (CRON), README.
@@ -2322,8 +2327,8 @@ Critères d'acceptation :
   `X-Serverless-Token`, build Node 24, origines, abandon de `privacy`/`httpOption`/
   `custom_domains`).
 - [ ] SLS-080.3 Fixtures originales à treize fonctions fidèles aux contrats (mémoires, délais,
-  minima et maxima, `provider.secret`/`env`, trois options ignorées, `node20` converti, deux
-  planifications, handlers `(event, context, cb)` avec `JSON.parse(event.body)`, CORS
+  minima et maxima, `provider.secret`/`env`, trois options ignorées, `node20` converti,
+  les deux planifications exactes `0 21 * * 1-6` et `0 7-20 * * 1-6`, handlers `(event, context, cb)` avec `JSON.parse(event.body)`, CORS
   construit par le handler, `OPTIONS`, appels entre fonctions avec jeton). Jamais de copie
   du client.
 - [ ] SLS-080.4 Publication complète par `adapter deploy` avec les deux drapeaux, rapport lu ;
@@ -2335,9 +2340,15 @@ Critères d'acceptation :
 - [ ] SLS-080.6 Accès sortant réel vers des dépendances réelles démarrées pour l'essai (HTTP,
   PostgreSQL, courrier) puis purgées ; l'instance n'atteint ni le contrôle, ni l'agent de
   stockage, ni le socket Docker.
-- [ ] SLS-080.7 Les deux planifications tirent aux frontières attendues sur la version promue.
+- [ ] SLS-080.7 Les deux planifications exactes `0 21 * * 1-6` et
+  `0 7-20 * * 1-6` tirent réellement aux frontières UTC attendues sur la
+  version promue de leurs fixtures originales, avec `POST` et corps `{}`.
+  Les expressions enregistrées, créneaux, tirs et invocations des handlers
+  sont recoupés ; aucune expression accélérée ni horloge modifiée ne les
+  remplace.
 - [ ] SLS-080.8 `plan` exécuté en lecture seule sur les manifestes réels de la référence et
-  comparé aux fixtures, pour que celles-ci restent fidèles.
+  comparé aux fixtures, y compris les deux expressions de planification
+  exactes, pour que celles-ci restent fidèles.
 
 Tests exigés : campagne E2E exécutée **seule** (budgets partagés), captures des écrans
 concernés sur ordinateur et mobile. Un budget de cellule insuffisant est une proposition

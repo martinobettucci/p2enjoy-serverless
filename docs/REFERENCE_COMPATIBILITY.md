@@ -90,7 +90,9 @@ samedi (`0 7-20 * * 1-6`). Elles tombent sur des frontières de 5 minutes : la
 résolution de [SCHEDULES](SCHEDULES.md) ne les décale pas. Leurs handlers lisent
 un corps JSON ; le tir envoie `{}` en `POST`. Le moteur de [SLS-078](BACKLOG.md#sls-078) a son premier checkpoint réel.
 Les deux expressions de la référence et leurs fixtures originales restent à
-qualifier ; ce checkpoint ne démontre pas leur compatibilité complète.
+qualifier dans [SLS-080.3, .7 et .8](BACKLOG.md#sls-080), au sein de la
+campagne des treize fonctions après SLS-078 et SLS-083. Ni le checkpoint du
+moteur ni sa campagne complète ne démontrent à eux seuls cette compatibilité.
 
 ## Adaptations côté client
 

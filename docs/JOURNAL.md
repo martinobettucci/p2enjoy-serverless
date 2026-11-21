@@ -1,5 +1,24 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — IR-003 corrigée : attribution des crons de référence
+
+Après instruction RO et vérification du principal, la cause est documentaire :
+la liste commune de SCHEDULES et le renvoi « liste complète » de SLS-078 ne
+séparaient pas le moteur de la compatibilité du manifeste. Bon sens et attribution
+préexistante du backlog concordent : SLS-080.3/.7/.8 porte les treize fixtures,
+les deux expressions exactes, leurs tirs réels et la comparaison en lecture seule.
+Cette campagne dépend déjà de078 et083 ; aucun nouveau porteur n’est nécessaire.
+
+Décision appliquée aux deux côtés des renvois, à REFERENCE_COMPATIBILITY et au
+contrat de régression. Les expressions `0 21 * * 1-6` et `0 7-20 * * 1-6` sont
+explicites, avec POST/{} et sans horloge accélérée. Les huit critères080 restent
+ouverts ;078 reste[~],49/543 +18 entièrement dus. L’absence d’assertions de ces
+expressions dans le banc actuel est conservée comme limite, sans inventer de preuve.
+
+Vérification documentaire des liens, critères et comptes ; aucun code, test,
+service ou résultat historique changé. IR-003 est retirée avec l’issue « corrigée ».
+Le registre est vide ; un nouveau passage entier078 peut être préparé.
+
 ## 21 novembre 2026 — SLS-110 qualifiée et close
 
 Preuve publication-restoration-confirmation-dev-2026-11-21 : gel965185f,

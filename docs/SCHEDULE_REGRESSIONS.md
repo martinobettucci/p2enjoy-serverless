@@ -32,6 +32,14 @@ Ne pas utiliser --unicode-regression-only à la place du nominal6groupes.
 Aucun scénario de charge en parallèle avec un autre client ; les réceptions
 concurrentes internes à un scénario restent ses véritables consommateurs.
 
+Ce passage qualifie le moteur et ses régressions. Il ne contient pas les
+fixtures de compatibilité des treize fonctions et ne qualifie pas les
+expressions exactes `0 21 * * 1-6` et `0 7-20 * * 1-6`. Leurs tirs réels et
+leur fidélité au manifeste restent exigés par
+[SLS-080.3, .7 et .8](BACKLOG.md#sls-080), après SLS-078 et SLS-083.
+Les 49 campagnes / 543 groupes ne sont ni augmentés ni présentés comme leur
+preuve. Aucun résultat complet réussi n’est acquis par cette clarification.
+
 ## SSO, durée et repos
 
 Les identifiants restent sur stdin privée puis en mémoire, jamais argument,
