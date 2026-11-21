@@ -3003,5 +3003,6 @@ Contrat : [REGRESSION_ARTIFACT_CLEANUP](REGRESSION_ARTIFACT_CLEANUP.md).
   attribuées aux UUID de campagne ou protégées si leur appartenance est inconnue.
 - [ ] SLS-106.2 Cause et décision persistées avant correction ; nettoyage par
   les vraies API limité aux fixtures prouvées, aucun original effacé ou fabriqué.
-- [ ] SLS-106.3 Client responsable et25communs rejoués, ressources et5982artefacts
-  recoupés, rapports/captures inspectés, essais incomplets exclus.
+- [ ] SLS-106.3 Helper partagé éprouvé par3groupes dédiés,19control-admin,
+  11control-ui et21publication-ui, puis25communs ;5982artefacts et ressources
+  recoupés, rapports/captures inspectés. Les douze execution-ui restent à105.

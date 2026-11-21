@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 21 novembre2026 — cause106 et correction bornée décidées
+
+Le relevé1795267783292962291 confirme5982originaux strictement identiques et
+deux seuls ajouts de la révision d9d07c5b, fonction4ba58f4d du namespace
+invocation-144a134f créé par execution-ui. Code16384octets encore compté,
+purged_atNULL ; le helper purgeait exclusivement l’agent. first_promoted_atNULL
+confirme aussi le pilote non promu105, sans défaut du moteur démontré.
+
+Décision avant mutation/code : remettre en état ce seul UUID par la purge
+publique065, puis corriger le helper partagé de quatre clients. Session de purge
+SSO distincte, même reçu après POST unique, contrôle API et lecteur natif RO
+par fonction avant les parents. Préfixes bornés, aucune suppression SQL/manuelle.
+Trois groupes dédiés sur données/cache réellement écrits,19API/11gestion/21
+publicationUI puis25communs prouvent106 ; les douze execution-ui restent105.
+14images de l’essai arrêté ouvertes individuellement, sans défaut visuel
+supplémentaire ni preuve de six instances ; Git propre avant/après la mission.
+
 ## 21 novembre2026 — campagne078 arrêtée et105/106 inscrits
 
 Le worker d25a507d survit au retour et valide272groupes/15campagnes, trois

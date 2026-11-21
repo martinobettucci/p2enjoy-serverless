@@ -32,3 +32,48 @@ purges/révocations, états natifs et captures pertinentes, invariants de contr�
 référence, configuration et5982artefacts. Tous les essais incomplets restent
 exclus des comptes de qualification. Une preuve manquante garde106[~] et interdit
 la reprise de la campagne543. Aucune cause ou réussite n’est présumée ici.
+
+## Diagnostic recoupé et décision avant code
+
+Le relevé RO1795267783292962291 compare les5982chemins/SHA du journal104
+0a3798d2 avec le courant : aucun manque, aucune modification, exactement deux
+ajouts. Ils appartiennent à la révision d9d07c5b-ecbe-449e-beb2-c84c5f0d4f29,
+fonction4ba58f4d-d0c3-4953-a3a8-406de1b6f5c6, namespaceb8e06c8a-c6af-4217-9e7d-7227e420f559
+invocation-144a134f. Fonction/parents supprimés, purged_atNULL et16384octets
+encore comptés. first_promoted_atNULL recoupe séparément l’hypothèse105.
+
+La chaîne execution-ui→storage-archives→function-storage-faults archive-cleanup
+purge seulement l’agent de volumes. Les quatre clients control-admin, control-ui,
+execution-ui et publication-ui utilisent ce helper partagé. Corriger ce helper,
+plutôt que dupliquer une purge dans un seul client. Son interface à deux UUID
+reste stable ; ajouter les traces106 aux consommateurs sans modifier leurs
+scénarios. Le protocole opérateur ancien reste distinct, pour ses preuves propres.
+
+Après relecture SSO réelle, la remise en état de l’essai existant vise uniquement
+le UUID fonction ci-dessus, par GET archive/If-Match/nom exact puis un POST purge
+UUID neuf et son suivi GET. Le contrat public065 accepte un agent déjà purgé
+par le protocole opérateur. Conserver cette trace et l’inventaire5982 rétabli ;
+aucun unlink ou SQL de réparation. Cette action opérationnelle précède le replay.
+
+Le helper corrigé utilise la session de purge distincte du vrai SSO, requête
+CSRF/Origin, vérification UUID/namespace de l’archive, attente d’absence de garde,
+un seul POST et suivi du même UUID. Après résultat incertain il ne fabrique pas
+un nouvel UUID. Une purge déjà terminée se vérifie par son reçu existant ; une
+opération de purge déjà en cours est rejointe, pas redemandée.
+
+Un lecteur DEV RO par fonction vérifie appartenance au namespace exact et au
+préfixe des quatre clients, fonction supprimée/purgée, reçu public completed,
+configuration/variables/secrets propres effacés, révisions et candidats vidés,
+aucune instance/garde active, état/receipt agent corrélés et aucun fichier de
+code/volume/montage/canal/conteneur/réseau de cette fonction. Les parents peuvent
+encore être actifs à cet instant ; le lecteur ne demande pas un inventaire
+complet de namespace ni ne modifie les bornes du collecteur existant.
+
+Qualification106 indépendante de105 : un client dédié crée/publie/promeut une
+fonction originale avec le handler scheduled-storage, écrit réellement données
+et cache par invocation Docker, archive puis exerce le helper et son inspection
+native. Trois groupes ciblés, puis les19control-admin,11control-ui et21publication-ui,
+enfin25communs ; conserver à part la remise en état de l’ancien UUID. La préparation
+six instances reste à qualifier dans105 après106 : ne pas l’exiger pour clore
+106 ni modifier sa préparation dans ce changement. Les lecteurs/sourceimages,
+captures et5982artefacts sont recoupés à chaque phase ; un échec reste conservé.
