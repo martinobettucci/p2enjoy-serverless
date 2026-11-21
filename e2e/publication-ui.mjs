@@ -281,14 +281,23 @@ try{
     for(let index=0;index<20;index++){const rows=await versionRows();if(rows.total>=6&&rows.items.slice(5).some(row=>row.state==='available'&&!row.active))break;assert(rows.total<20,'Préparation de pagination au plafond');await publish(await publicationArchive(work,'page-'+index));}
     const all=await versionRows(),pages=page.getByRole('navigation',{name:'Pagination des versions',exact:true});
     const cardHashes=()=>revisions().getByRole('article').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label').slice(8)));
-    while(!(await pages.innerText()).includes('Page 1 sur')){await pages.getByRole('button',{name:'Précédente',exact:true}).click();await ready();}
-    assert.deepEqual(await cardHashes(),all.items.slice(0,5).map(row=>row.code_hash));
+    async function settledPage(number,catalogue){
+      const expected=catalogue.items.slice((number-1)*5,number*5).map(row=>row.code_hash),label=`Page ${number} sur ${Math.ceil(catalogue.total/5)}`;let observed;
+      try{await until(async()=>{
+        observed={label:await pages.locator('span').innerText(),hashes:await cardHashes(),loading:await page.locator('.publication-view .loading').count()};
+        return observed.label===label&&!observed.loading&&JSON.stringify(observed.hashes)===JSON.stringify(expected);
+      },'Compteur et cartes de versions non cohérents',30000);}
+      finally{evidence.push({version_page_observation:{expected:{label,hashes:expected},observed}});await save();}
+      assert.equal(observed.label,label);assert.deepEqual(observed.hashes,expected);
+    }
+    while(!(await pages.innerText()).includes('Page 1 sur')){const current=Number((await pages.innerText()).match(/Page (\d+) sur/)[1]);await pages.getByRole('button',{name:'Précédente',exact:true}).click();await settledPage(current-1,all);}
+    await settledPage(1,all);assert.deepEqual(await cardHashes(),all.items.slice(0,5).map(row=>row.code_hash));
     const last=all.items.slice(5).find(row=>row.state==='available'&&!row.active);assert(last,'Version inactive requise après la première page');hashes.set(last.revision_id,last.code_hash);
     await publish(a);await consultAfterSuccess('pagination des versions',async()=>{await pages.getByRole('button',{name:'Suivante',exact:true}).click();await ready();});
     const targetPage=Math.floor(all.items.indexOf(last)/5)+1;const row=await showRevision(last.revision_id);const pageBefore=await pages.innerText();
     await confirmAction(row,'Supprimer cette version',value=>value.url()===base+`/api/functions/${functionId}/versions/${last.code_hash}`&&value.request().method()==='DELETE');
     const after=await versionRows();assert.equal(after.total,all.total);assert.equal(after.items.find(item=>item.code_hash===last.code_hash).state,'deleted');assert.equal(await pages.innerText(),pageBefore);await row.getByText('Supprimée',{exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.activeElement?.id),'revisions-heading');assert.deepEqual(await cardHashes(),after.items.slice((targetPage-1)*5,targetPage*5).map(item=>item.code_hash));
-    while(!(await pages.innerText()).includes('Page 1 sur')){await pages.getByRole('button',{name:'Précédente',exact:true}).click();await ready();}assert.deepEqual(await cardHashes(),after.items.slice(0,5).map(item=>item.code_hash));assert.equal(new Set(after.items.map(item=>item.code_hash)).size,after.total);
+    while(!(await pages.innerText()).includes('Page 1 sur')){const current=Number((await pages.innerText()).match(/Page (\d+) sur/)[1]);await pages.getByRole('button',{name:'Précédente',exact:true}).click();await settledPage(current-1,after);}await settledPage(1,after);assert.deepEqual(await cardHashes(),after.items.slice(0,5).map(item=>item.code_hash));assert.equal(new Set(after.items.map(item=>item.code_hash)).size,after.total);
     await publish(a);
     const candidates=page.getByRole('navigation',{name:'Pagination des tentatives',exact:true});await consultAfterSuccess('pagination des tentatives',async()=>{await candidates.getByRole('button',{name:'Suivante',exact:true}).click();await ready();});const second=await manage(`/api/functions/${functionId}/deployments?limit=5&offset=5`);await candidates.getByText(`Page 2 sur ${Math.ceil(second.total/5)}`,{exact:true}).waitFor();assert.deepEqual(await page.getByRole('article',{name:/^Tentative /}).locator('h3').allTextContents(),second.items.map(row=>row.id));await capture('pagination');await candidates.getByRole('button',{name:'Précédente',exact:true}).click();await ready();const first=await manage(`/api/functions/${functionId}/deployments?limit=5`);assert.deepEqual(await page.getByRole('article',{name:/^Tentative /}).locator('h3').allTextContents(),first.items.map(row=>row.id));assert.equal(new Set([...first.items,...second.items].map(row=>row.id)).size,10);
   });
