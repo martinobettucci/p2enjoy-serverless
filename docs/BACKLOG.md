@@ -80,7 +80,7 @@ bloquée est sautée et son blocage est nommé.
 | 6 | [SLS-068](#sls-068) Favoris personnels | Développer | `[ ]` | SLS-067 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#favoris-personnels) |
 | 6 | [SLS-069](#sls-069) Renommage et suppression en masse | Développer | `[ ]` | SLS-067, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#opérations-en-masse) |
 | 6 | [SLS-075](#sls-075) Titre de la fiche d'archive après purge | Corriger | `[ ]` | SLS-065 | cette unité |
-| 6 | [SLS-113](#sls-113) Pagination des archives pendant erreur et chargement | Corriger | `[ ]` | SLS-065 | [STORAGE_CONSOLE_PRESENTATION](STORAGE_CONSOLE_PRESENTATION.md) |
+| 6 | [SLS-113](#sls-113) Pagination des lectures de console pendant erreur et chargement | Corriger | `[ ]` | SLS-065 | [CONSOLE_PAGINATION_STATES](CONSOLE_PAGINATION_STATES.md) |
 | 6 | [SLS-102](#sls-102) Espacement des quantités du manuel du testeur | Corriger | `[ ]` | SLS-062 | cette unité |
 | 7 | [SLS-073](#sls-073) Monitoring historique et alertes | Développer | `[ ]` | SLS-072, SLS-078 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#monitoring-et-alertes) |
 | 8 | [SLS-084](#sls-084) Runtimes supplémentaires | Développer | `[ ]` | SLS-083 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
@@ -3195,29 +3195,34 @@ référence/configuration/5982originaux conservés. Les39gérés/communs satisfo
 attribuées/non qualifiées ; la campagne entière078 reste due.
 
 <a id="sls-113"></a>
-## SLS-113 — Pagination des archives pendant erreur et chargement
+## SLS-113 — Pagination des lectures de console pendant erreur et chargement
 
-Statut : [ ] — pagination périmée constatée visuellement sur433da150 pendant
-le sixième078 au gel9e1da70 ; aucun correctif ni nouveau test appliqué.
-Nature : Corriger. Ordre :6, avec la prochaine livraison de console.
-Dépend de :SLS-065. Contrat : [STORAGE_CONSOLE_PRESENTATION](STORAGE_CONSOLE_PRESENTATION.md).
+Statut : [ ] — pagination périmée constatée visuellement sur 433da150 pendant
+le sixième passage 078 au gel 9e1da70 ; aucun correctif ni nouveau test appliqué.
+Nature : Corriger. Ordre : 6, avec la prochaine livraison de console.
+Dépend de : SLS-065. Contrat : [CONSOLE_PAGINATION_STATES](CONSOLE_PAGINATION_STATES.md).
 
-- [ ] SLS-113.1 Navigation chiffrée retirée hors lecture réussie, comme dans le
-  catalogue global ; aucune ancienne page ni faux totalzéro présentés en cours
+- [ ] SLS-113.1 Navigation chiffrée des archives et des observations Instances/
+  Invocations retirée hors lecture réussie, comme dans le catalogue global ; aucune ancienne page ni faux total à zéro
+  présentés en cours
   de lecture ou d’erreur. Erreur et relecture restent lisibles.
 - [ ] SLS-113.2 Filtre et page demandée conservés pour la reprise ; résultat,
   total et recalage relus depuis la vraie réponse, focus sur un élément monté,
   desktop/mobile et retour après panne sans données périmées présentées à jour.
-- [ ] SLS-113.3 Cause/décision persistées avant code ; mode horsconnexion natif
+- [ ] SLS-113.3 Cause/décision persistées avant code ; mode hors connexion natif
   navigateur, requête réellement refusée puis reprise online, sans interception
-  ni serveur de substitution. Les10groupes storage-console-ui enrichis et25communs
-  passent sur code déployé ; captures fraîches inspectées, manuel et ressources/
+  ni serveur de substitution. Les 10 groupes storage-console-ui,12 execution-ui enrichis et 25 communs
+  (47 uniques) passent sur code déployé ; captures fraîches inspectées, manuel et ressources/
   nettoyages/configuration/référence/originaux recoupés, aucune faute retirée.
 
 Constat : storage-ui-pagination-error.jpg
 SHA569351743565ed9243f8ce4b3822ad3b6f8fbe63b76e5f9921e69eeaf01ec7c3
-montre « Page1sur161 » pendant l’erreur, sans cartes ni total, commandes grisées.
+montre « Page 1 sur 161 » pendant l’erreur, sans cartes ni total, commandes grisées.
 Rapport storage-console-ui3f346779432b5dd2cd3e17a135ab44a4d27dd5ecb1e65777df381bfe816f37d3,
-10groupes passés et14captures fraîches. La fiche titrée « Archives conservées »
-après purge était déjà075 et y reste attribuée. Aucun défaut backend n’est
-inféré des seules images ; aucune correction075/113 n’est encore qualifiée.
+10 groupes passés et 14 captures fraîches. La fiche titrée « Archives conservées »
+après purge était déjà suivie dans 075 et y reste attribuée. Le même état est observé dans execution-ui-network-error.jpg
+SHA7a7ea8d638e499db76a41877d6fff251d041a1d8ac30e4bd858f9342d7321d85 :
+Instances sans cartes en erreur, « Page 2 sur 2 », Précédente active. Le composant
+ExecutionObservations est partagé avec Invocations ; les deux variantes doivent
+être éprouvées. Aucun défaut backend n’est inféré des seules images ; aucune
+correction de 075/113 n’est encore qualifiée.

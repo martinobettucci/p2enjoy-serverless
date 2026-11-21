@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 22 novembre2026 — autre pagination périmée recoupée dans Instances
+
+Le principal a ouvert execution-ui-network-error.jpg du sixième078 : erreur sans
+cartes, « Page2sur2 » et Précédente active. Le composant ExecutionObservations
+conserve total et rend la navigation hors branche réussie ; Instances/Invocations
+partagent ce flux.113couvre désormais ces observations en plus des archives,
+selon le même invariant et le précédent Catalogue. Le titre d’archive reste075.
+
+Contrat renommé CONSOLE_PAGINATION_STATES pour sa portée réelle. E2E requis :
+10stockage+12exécution+25communs,47uniques si les groupes existants sont enrichis ;
+fautes et lectures réelles conservées. Aucune correction déployée ou source du
+worker modifiée. Le constat supplémentaire ne compte aucune nouvelle image dans
+les105déjà ouvertes, ni aucun groupe exécuté.
+
 ## 21 novembre2026 — rattachement075/113 précisé avant code
 
 Le précédent075prescrit déjà le titre neutre « Archive de la fonction » et
@@ -21,7 +35,7 @@ ou gel du worker changé.075/113restent ouverts et non qualifiés.
 Lecture des14captures fraîches storage-console-ui du sixième078 : fiche Purgée
 à compteurs nuls titrée « Archives conservées » ; erreur de catalogue gardant
 « Page1sur161 » sans cartes/total, commandes grisées. Les SHA et rapport exacts
-sont inscrits dans STORAGE_CONSOLE_PRESENTATION. Aucun effet backend déduit.
+sont inscrits dans CONSOLE_PAGINATION_STATES. Aucun effet backend déduit.
 
 Issue du constat hors078 : convertie en unité113, correction à instruire et
 qualifier séparément. Aucun code, test, résultat antérieur ou preuve de
