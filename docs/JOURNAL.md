@@ -1,5 +1,26 @@
 # Journal de cadrage
 
+## 21 novembre2026 — comparaison des archives104 décidée après revue
+
+La revue relève une preuve manquante : présence et volume positif ne suffisent
+pas à établir la conservation du code après003→010. Avant code, décider un
+inventaire RO par fonction historique, chemins/SHA256/tailles/modes sans contenu,
+puis égalité stricte des révisions, présences et inventaires avant/après. Les
+autres modes restent inchangés. Le texte003→007 est marqué comme checkpoint
+historique ; le rejeu courant104 vise010. Aucun autre blocage statique trouvé.
+
+## 21 novembre2026 — raccordement104 implémenté avant preuve
+
+Le builder compare toujours requirements/runtime octet par octet. auth.py
+courant est épinglé au SHA attesté de089, ancien code inchangé ; le rapport
+nomme leurs différences et exige le replay réel. Le validateur n’accepte que
+max_bytes, nom076 et commentaire associé. Contexte de build neuf UUID, image
+et tag courants conservés. Le client full attend les dix noms exacts ; helper
+historical nomme003→010 et vérifie010 avant arrêt. Branches006/007/008, partial
+et rétention009 inchangées. Syntaxe seule contrôlée ; revue, build et replays
+restent requis avant de clore104. Aucun produit, schéma ou manuel modifié.
+
+
 ## 21 novembre2026 — préconditions104 reproduites sur le vrai banc
 
 Le builder133462b9 refuse historical_protocol_changed:auth.py avant SSH/build ;

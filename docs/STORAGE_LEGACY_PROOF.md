@@ -109,8 +109,9 @@ ci-dessus restent inchangés. L’attente de leur upgrade reste une santé verte
 seul le mode de purge dispose des observations natives de refus/rollback, de la
 reprise006 avant commit007 et d’une attente API lisible pendant EACCES. Le
 relâchement de permissions utilise un descripteur vérifié avec fchown en dernier.
-Ce complément reste à qualifier ; la campagne003→007 doit être rejouée après
-les extensions du helper.
+La campagne003→007 désigne ce checkpoint historique. Le rejeu générique
+courant vise003→010 et relève du contrat104 ci-dessous ; les preuves propres
+au complément006 gardent leur périmètre distinct.
 
 La commande contradictoire reste volontairement non terminée. Elle n’est ni
 abandonnée par SQL ni qualifiée de purge réussie. Son installation temporaire
@@ -159,7 +160,11 @@ Le mode partial conserve ses métadonnées historiques, sans démarrer de contr�
 avant l’interruption du premier déplacement. Il conserve ses quatre groupes : SSO/publications
 historiques, migration/session, purge sans reçu agent inventé, contradiction
 protégée après apparition réelle du registre et redémarrage. Dix noms ordonnés
-exacts, UUID/session/révisions/archives et état de stockage sont recoupés.
+exacts, UUID/session/révisions/archives et état de stockage sont recoupés. Le relevé
+RO par fonction conserve les métadonnées des révisions et, pour chaque fichier
+d’archive/code, chemin relatif, SHA256, taille et mode. Après upgrade, comparer
+strictement ces inventaires et les présences, sans exporter le contenu du code ;
+ce relevé est limité au mode historical et ne modifie pas les autres preuves.
 Aucune ligne ou date SQL fabriquée ; la ligne de registre tardive passe par
 le véritable agent configure, comme dans le scénario déjà défini.
 
