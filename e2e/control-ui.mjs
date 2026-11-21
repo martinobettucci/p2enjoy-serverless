@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-106 | docs/REGRESSION_ARTIFACT_CLEANUP.md
+// @verifies docs/BACKLOG.md#sls-106 | docs/REGRESSION_ARTIFACT_CLEANUP.md
 // @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-020 | docs/CONTROL.md#preuves | docs/DESIGN_SYSTEM_APP.md

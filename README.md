@@ -1,5 +1,13 @@
 # P2Enjoy Serverless
 
+Le [nettoyage des campagnes](docs/REGRESSION_ARTIFACT_CLEANUP.md) est corrigé
+pour qualification106 : purge publique complète et contrôle physique par fonction.
+L’essai de campagne078 s’est arrêté après272groupes validés ;105/106 portent
+les deux défauts de préparation/nettoyage constatés. Les5982artefacts antérieurs
+sont conservés et la seule révision ajoutée a été purgée par API. Les79groupes
+prévus pour106 restent à exécuter avant reprise de078.
+
+
 Le [scope de régression complète des crons](docs/SCHEDULE_REGRESSIONS.md) est implémenté
 pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
 49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;

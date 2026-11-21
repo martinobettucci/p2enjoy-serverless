@@ -1,5 +1,23 @@
 # Journal de cadrage
 
+## 21 novembre2026 — correctif106 relu avant qualification
+
+La remise en état22fcd60a emploie une vraie paire SSO et un seul POST purge
+sur4ba58f4d ; reçu completed, code retiré par le produit. Forensic1795268351
+confirme5982fichiers, aucun ajout/manque/changement. Native1795268371 : comptes
+nuls, mêmes contrôle/référence/configuration, intégrité et dix migrations.
+Cette remise en état compte zéro groupe ; aucune suppression SQL/manuelle.
+
+Helper partagé : journal privé durable avant POST unique, suivi du même reçu,
+attente bornée des autres gardes et relecture ETag, relecture idempotente d’une
+purge terminée. Nouveau lecteur RO par fonction : code/volumes/métadonnées
+effacés, receipt agent/installation/version corrélés et ressources absentes.
+Trois groupes dédiés originaux sont préparés ; quatre consommateurs gardent
+leurs scénarios, seule leur trace106 est ajoutée. Revue corrige fsync, attente
+de garde et contrôles events_json/installation ; plus de blocage statique.
+Vault seul et SQLite RO pour le booléen de secrets,449sources indexées. AST/JS
+valides ;3+19+11+21+25=79groupes réels restent requis avant clôture106.
+
 ## 21 novembre2026 — cause106 et correction bornée décidées
 
 Le relevé1795267783292962291 confirme5982originaux strictement identiques et

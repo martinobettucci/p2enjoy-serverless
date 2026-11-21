@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-106 | docs/REGRESSION_ARTIFACT_CLEANUP.md
+// @verifies docs/BACKLOG.md#sls-106 | docs/REGRESSION_ARTIFACT_CLEANUP.md
 // @spec docs/CONTROL.md#preuves | docs/SCHEMA.md | docs/BACKLOG.md#sls-020
 // @verifies docs/CONTROL.md#preuves | docs/SCHEMA.md | docs/BACKLOG.md#sls-020
 // Uses a real admin session obtained by authorize.mjs and real scoped tokens.

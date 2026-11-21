@@ -1,5 +1,21 @@
 # Qualification de la plateforme
 
+## Purge complète des fixtures — SLS-106
+
+`node e2e/archive-cleanup.mjs` prépare une fonction originale, publie/promeut
+son code puis écrit réellement données/cache dans Docker. Trois groupes
+éprouvent archive puis purge publique avec vérification native et relecture
+idempotente. Préparer les deux sessions réelles par dev-sso-sessions.
+
+Le helper storage-archives de control-admin/control-ui/execution-ui/publication-ui
+exige désormais un reçu public completed et le lecteur archive-purge-inspect
+RO. La session de purge distincte reste privée ; UUID, journal durable avant
+POST et SHA sont conservés. Qualification prévue :3ciblés,19gestion API,
+11gestion UI,21publication UI, puis25communs, soit79groupes. Les douze
+execution-ui et leur promotion manquante restent à105. Code relu et syntaxe
+contrôlée ; nouveaux E2E non encore exécutés.
+
+
 Le [scope de régression complète des crons](../docs/SCHEDULE_REGRESSIONS.md) est implémenté
 pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
 49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;

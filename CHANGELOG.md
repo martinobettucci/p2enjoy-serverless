@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-106 : helper de nettoyage partagé corrigé pour employer la purge publique
+  et un lecteur natif par fonction. L’ancien ne retirait que les volumes.
+  Remise en état par API de la seule fixture en échec ;5982originaux intacts.
+  Qualification79groupes encore à produire ; préparation de six instances105
+  et campagne complète078 restent ouvertes.
+
 - SLS-078 : scope schedules implémenté pour qualification, socle37 conservé et
   douze clients cron ajoutés. Rapports UUID découverts et archivés, SSO frais,
   nettoyages natifs par campagne ;543groupes attendus, non encore exécutés.
