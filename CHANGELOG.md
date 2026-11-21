@@ -2,6 +2,9 @@
 
 ## [Non publié]
 
+- SLS-070 : clients et données du banc ZIP implémentés ; revue et syntaxe
+  contrôlées. Génération et E2E sur le SPARK restent à exécuter.
+
 - SLS-070 : banc de frontières ZIP détaillé avant code : générateur dans l’image
   exacte, cinq fonctions, sept groupes et six handlers prévus, inspection complète
   des archives conservées et cleanup privé borné. Qualification à produire.

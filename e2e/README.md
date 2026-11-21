@@ -1,5 +1,23 @@
 # Qualification de la plateforme
 
+## Frontières du ZIP reconstruit — banc préparé
+
+`node e2e/code-editor-archive-boundaries.mjs` reçoit le SSO sur stdin privée et
+part de l’accueil. Sept groupes sont prévus : génération isolée des cinq cas,
+ZIP64Mio/+1, total256Mio/+1,20000fichiers/+1,20000parents/+1 et recoupements.
+Les ZIP exacts passent le POST éditeur et Docker ; six handlers sont exigés.
+`code-editor-archive-fixtures-run.py create|cleanup UUID` s’exécute uniquement
+sur le SPARK DEV comme root : conteneur temporaire de l’image exacte, sans
+réseau, quota512Mio/1CPU/64PID, timeout600+5s et sortie privée UUID. Les sources
+`code-editor-archive-fixtures.py` et `editor-archive-limits.cjs` sont readonly.
+Le générateur ne charge aucun module produit. Ses prédictions sont distinctes
+des ZIP effectivement conservés, contrôlés exhaustivement par
+`code-editor-archive-inspect.py NAMESPACE_UUID CAMPAIGN_UUID [FUNCTION_UUID]`.
+Les rapports ne contiennent que métadonnées/SHA ; données transférées par SSH,
+cleanup des fonctions, jeton, parents, fichiers et conteneur avant succès.
+Le [contrat](../docs/CODE_EDITOR_ARCHIVE_LIMITS.md) précède le code ; syntaxe
+et revue précèdent le premier passage réel. Aucun nouveau résultat qualifié.
+
 ## Capacité globale de publication éditeur — qualifiée en DEV
 
 `node e2e/code-editor-build-capacity.mjs` reçoit le SSO sur stdin privée et part

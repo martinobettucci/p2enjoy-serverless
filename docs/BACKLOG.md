@@ -983,6 +983,8 @@ deux parents/helper nettoyés. Frontières64Mio/256Mio/20000 et capacité après
 restent à produire ; aucun critère supplémentaire n’est clos. Le passage
 de frontières prépare cinq fonctions, sept groupes ciblés et six handlers,
 avec générateur de données isolé et inspection complète des archives conservées.
+Les cinq sources du banc sont implémentées et relues statiquement ; syntaxe
+contrôlée, aucune génération ni campagne ZIP exécutée à ce checkpoint.
 
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de

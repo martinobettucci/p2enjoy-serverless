@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 21 novembre2026 — checkpoint du banc ZIP avant reprise de rétention
+
+Les cinq sources du banc de frontières ZIP et leur README sont préparés :
+générateur isolé, propriétaire de campagne, lecteur exhaustif, client HTTPS et
+handler original. Revue statique API/schéma et syntaxe, aucune exécution réelle
+de ce banc. Les marqueurs de traçabilité sont corrigés et chaque inspection
+exige intégrité, FK vides, dix migrations et réservation nulle. Ce checkpoint
+conserve le travail sans clôturer de critère070 ; sa qualification reste due.
+
+
 ## 13 novembre2026 — banc des frontières ZIP, préparation avant code
 
 Cinq fonctions et sept groupes ciblés : quatre frontières, plus une petite
