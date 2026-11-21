@@ -1,19 +1,19 @@
 # Registre des incohérences
 
-## IR-001 — URL versionnées encore décrites comme futures
+## IR-002 — Contrat des adresses encore rédigé avant les versions par hash
 
-Constat du21novembre2026, hors unité108 en cours.
-SERVICE_CONFIGURATION_URLS, section Domaines du SPARK et chemins d’appel,
-annonce encore que l’extension par hash « reste à implémenter », alors que
-FUNCTION_VERSION_EXECUTION et control/app/invocation_urls.py portent déjà
-la sélection version et ses chemins. Le client CLI demande ce catalogue
-après publication ; la préparation de invocation-urls en est directement
-affectée. L’audit RO ne démontre pas un défaut du moteur.
+Constat documentaire du 21 novembre 2026 pendant la boucle IR-001, en lisant
+le contrat requis de SLS-109. INVOCATION_URLS.md, section API et calcul commun,
+annonce encore que SLS-074 « ajoutera les versions par hash et la promotion »
+et décrit sa résolution seulement comme révision active. Son chapitre de
+transport historique nomme aussi le GET sans version et une cible active.
+Les sources courantes et FUNCTION_VERSION_EXECUTION décrivent déjà le
+catalogue explicite d’un pilote et la promotion séparée.
 
-Mesure : un paragraphe contradictoire dans ce contrat historique ; sources
-implémentées et preuves propres074 à rapprocher avant rédaction.
-Issue proposée : rattacher sa clarification à109, déjà inscrite, préserver
-les époques historiques et décrire le comportement courant sans prétendre
-074 complètement clos. Entrée à instruire par la boucle CLAUDE§5 après les
-preuves ciblées vertes de108, avant le passage complet078. Aucune modification
-de ce paragraphe n’est encore appliquée.
+Mesure : les paragraphes de contrat courant ne distinguent pas suffisamment
+le comportement actuel des preuves historiques. Aucune preuve historique ni
+aucun client de transport complémentaire n’est modifié par IR-001.
+Issue à instruire dans la prochaine boucle après preuve ciblée verte de109 :
+clarifier le contrat courant et marquer l’époque des preuves de transport,
+sans réécrire les résultats acquis ni présumer leur qualification actuelle.
+Un écart exécutable distinct découvert doit recevoir une unité avant correction.

@@ -103,18 +103,30 @@ La projection décrit les routes enregistrées et activées dans le registre ;
 elle ne certifie ni leur application effective ni la disponibilité TLS.
 Une proposition `routes.?` ne fournit aucune adresse au catalogue.
 
-Les événements de la révision active déterminent les méthodes et chemins :
-`/invoke/{function_id}` pour l’entrée implicite et
-`/invoke/{function_id}/{chemin}` pour un chemin exact déclaré. Aucun gabarit
-paramétré absent du moteur n’est annoncé. Un brouillon n’a aucune adresse
-appelable. L’URL SSO canonique configurée reste distincte des domaines d’appel ;
-Host et X-Forwarded-Host ne constituent jamais une source de confiance.
+Sans paramètre `version`, les événements de la cible promue déterminent les
+méthodes et chemins : `/invoke/{function_id}` pour l’entrée implicite et
+`/invoke/{function_id}/{chemin}` pour un chemin exact déclaré. Sans cible
+promue, ce catalogue ne fournit aucune adresse appelable par défaut.
 
-Avec [SLS-074](FUNCTION_VERSIONS.md#appel-par-défaut-et-appel-par-tag), le catalogue
-ajoutera les URL portant le hash complet pour chaque version disponible ;
-les événements et le hash proviendront de la même version. Les appels sans
-tag suivront uniquement la dernière promotion explicite. Cette extension
-reste à implémenter, sans émission anticipée d’URL versionnées.
+Avec `version=HASH`, le catalogue utilise les événements de la version
+disponible sélectionnée et fournit les chemins
+`/invoke/{function_id}@{HASH}` et
+`/invoke/{function_id}@{HASH}/{chemin}` portant son hash complet. Cette
+consultation permet notamment d’essayer un premier upload non promu. Le
+résultat distingue le hash sélectionné et la cible promue ; les appels sans
+tag suivent uniquement la dernière promotion explicite. Le contrat courant
+est décrit dans [Publication, promotion et exécution d’une version par
+hash](FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel).
+
+Aucun gabarit paramétré absent du moteur n’est annoncé. L’URL SSO canonique
+configurée reste distincte des domaines d’appel ; Host et X-Forwarded-Host
+ne constituent jamais une source de confiance.
+
+À la décision initiale du 8 novembre 2026, cette extension par hash restait
+à implémenter. Les preuves historiques de SLS-031 et SLS-066 conservent leur
+périmètre et leur époque. Le raccordement ultérieur est documenté par les
+preuves propres à SLS-074 ; cette clarification ne clôt pas ses critères
+restant ouverts.
 
 ## Preuves et manuel
 

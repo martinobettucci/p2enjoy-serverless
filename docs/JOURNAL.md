@@ -1,5 +1,27 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — IR-001 corrigée : contrat courant des URL par hash
+
+Décision du principal après instruction RO du résolveur : corriger la phrase
+future dans SERVICE_CONFIGURATION_URLS. Le bon sens exige que le contrat
+courant décrive le catalogue existant ; les précédents moteur, CLI, console
+et manuel concordent. GET sans version suit le défaut promu ; version=HASH
+sélectionne événements et chemins de ce hash disponible, même premier pilote.
+Les preuves historiques SLS-031/066 gardent leur époque et SLS-074 reste ouverte.
+
+Recoupement ciblé : checkpoint réel074 du 9 novembre, campagnes API/CLI/UI
+complètes ; le groupe API « Sélecteurs, portée et événements » contrôle hash B,
+défaut A et chemins @B/pilot. Son client a2fdb22d et invocation_urls.py589af8b9
+sont toujours identiques. La preuve108 au gel3f6974a conserve deux catalogues
+CLI selection=version de premiers pilotes, défaut NULL, avant promotion.
+Les contrats FUNCTION_VERSION_EXECUTION et manuel précisent la sélection UI.
+Aucun test ou produit changé, aucun groupe ajouté. L’entrée IR-001 est retirée,
+sa tâche future remplacée par un renvoi factuel dans le contrat109.
+
+Une seconde formulation historique contradictoire, découverte en lisant
+INVOCATION_URLS pour109 pendant cette boucle, est consignée IR-002 et attend
+la boucle suivante. Aucun client complémentaire ni preuve ancienne modifié.
+
 ## 21 novembre 2026 — SLS-108 qualifiée et close
 
 Au gel 3f6974a / 451 sources, les cinq groupes de transport et 25 communs

@@ -45,10 +45,11 @@ ne crée pas à elle seule une nouvelle identité de code.
 Le pipeline reste pilote. Préparer explicitement le défaut seulement lorsque
 le scénario doit réellement invoquer sans tag ou filtrer published ; une
 épreuve de pilote doit rester telle. Ne pas remplacer un geste UI par une
-API, changer le produit pour satisfaire l’ancien banc, retirer des refus,
-fausses réponses, mocks ou succès conditionnels. Réconcilier la formulation
-périmée de SERVICE_CONFIGURATION_URLS sur les URL versionnées, sans réécrire
-les preuves historiques. Son entrée de registre suit la boucle CLAUDE§5.
+API, changer le produit pour satisfaire l’ancien banc ou retirer des refus.
+Aucune fausse réponse, aucun mock ni succès conditionnel. La clarification
+IR-001 de SERVICE_CONFIGURATION_URLS décrit désormais les URL par hash déjà
+implémentées, en conservant les preuves historiques et les critères ouverts
+de SLS-074. Elle ne qualifie aucun des dix clients de cette unité.
 
 ## Qualification
 
