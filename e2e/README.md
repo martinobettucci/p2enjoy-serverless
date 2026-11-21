@@ -1,5 +1,19 @@
 # Qualification de la plateforme
 
+## Relances de transport des services — SLS-108
+
+Préparer deux sessions SSO réelles avec `node e2e/dev-sso-sessions.mjs`, puis
+`node e2e/service-transport.mjs` depuis la racine, sur DEV. Les cinq groupes
+conservent la perte de l’observateur et les deux SIGKILL avant traitement/
+après commit. Une commande coupée reste unknown avec trois connexionsHTTPS
+et aucune publication ; la relance opérateur publie pilote, constate le409
+sans défaut, puis appelle la vraie CLI promote avant l’invocation Docker.
+Les traces natives sans buffersTLS sont conservées séparément par service ;
+les observations expurgées sont persistées avant assertions. Les compteurs
+de configuration commune restent1/2. Compléter avec les25communs, soit30groupes.
+Contrat [SERVICE_TRANSPORT_REGRESSIONS](../docs/SERVICE_TRANSPORT_REGRESSIONS.md).
+Client préparé ;30groupes encore à qualifier.
+
 ## Six instances dans la console — SLS-105
 
 Après les deux sessions SSO réelles de `node e2e/dev-sso-sessions.mjs`, lancer

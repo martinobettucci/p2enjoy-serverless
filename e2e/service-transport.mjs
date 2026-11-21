@@ -1,8 +1,10 @@
+// @spec docs/BACKLOG.md#sls-108 | docs/SERVICE_TRANSPORT_REGRESSIONS.md
+// @verifies docs/BACKLOG.md#sls-108 | docs/SERVICE_TRANSPORT_REGRESSIONS.md
 // @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuve-de-transport
 // @verifies docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuve-de-transport
 // All helpers exercise the real CLI, native control process and public HTTPS API.
 import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
+import {readFile,writeFile,rename,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
 import {execFile,spawn} from 'node:child_process';
 import {createHash,randomUUID} from 'node:crypto';
 import {createInterface} from 'node:readline';
@@ -18,10 +20,18 @@ const checks=[],observations=[],gates=[],services=[],archives=[],cleanupErrors=[
 const secret=randomUUID()+randomUUID(),digest=value=>createHash('sha256').update(value).digest('hex');
 await mkdir(out,{recursive:true,mode:0o700});
 const report=path.join(out,'service-transport.json');
-await writeFile(report,JSON.stringify({completed:false,checks:[],skipped:0})+'\n');
+await writeFile(report,JSON.stringify({completed:false,checks:[],skipped:0})+'\n',{mode:0o600});
 const admin=await request.newContext({baseURL:base,storageState:JSON.parse(await readFile(path.join(out,'admin-session.json'),'utf8')),timeout:120000});
 const caller=await request.newContext({baseURL:base,timeout:120000});
-let session,namespace,work,completed=false,activeTask;
+let session,namespace,work,completed=false,cleanupFinished=false,activeTask;
+
+async function save(){
+  const value={target:base,completed:completed&&cleanupFinished&&!cleanupErrors.length,checks,observations,skipped:0,cleanup:cleanupFinished&&!cleanupErrors.length,cleanup_errors:cleanupErrors,
+    namespace_id:namespace?.id,service_ids:services.map(row=>row.id),function_ids:archives.map(row=>row.function_id),storage_archives:archives,
+    native_gates:gates.map(held=>({service_id:held.service.id,events:held.events,restored:held.restored}))};
+  const text=JSON.stringify(value,null,2);for(const value of [secret,...credentials])assert(!text.includes(value),'Identifiant dans le rapport');
+  await writeFile(report+'.pending',text+'\n',{mode:0o600});await rename(report+'.pending',report);
+}
 
 async function api(url,{method='GET',body,status=200,headers={}}={}){
   const response=await admin.fetch(url,{method,data:body,headers:{Origin:base,'X-CSRF-Token':session?.csrf_token??'',...headers}});
@@ -76,18 +86,19 @@ async function startDeployment(service,credential,label,trace=false){
     functions:{'transport-inheritance':{handler:'handler.handler'}},package:{patterns:['!**','*.cjs']}}));
   const task={settled:false,async result(success){
     const value=await task.done;task.settled=true;
-    assert.equal(value.code,success?0:1,'Code de sortie CLI');
     for(const credential of [secret,...credentials])assert(!value.stdout.includes(credential)&&!value.stderr.includes(credential),'Identifiant exposé');
-    assert(!value.stderr.includes('Traceback'));const result=JSON.parse(value.stdout);assert.equal(result.completed,success);
+    observations.push({scenario:'cli-deploy-exit',service_id:service.id,expected_success:success,exit_code:value.code,stdout_sha256:digest(value.stdout),stderr_sha256:digest(value.stderr)});await save();assert.equal(value.code,success?0:1,'Code de sortie CLI');
+    assert(!value.stderr.includes('Traceback'));const result=JSON.parse(value.stdout);observations.push({scenario:'cli-deploy-result',service_id:service.id,expected_success:success,report:result});await save();assert.equal(result.completed,success);
     if(trace){
       const native=await readFile(tracePath,'utf8');
       for(const credential of [secret,...credentials])assert(!native.includes(credential),'Identifiant dans la trace native');
+      const preserved=path.join(out,'service-transport-cli-connections-'+service.id+'.trace');await writeFile(preserved,native,{flag:'wx',mode:0o600});
       const attempts=native.split('\n').filter(line=>line.includes('connect(')&&line.includes('htons(443)'));
       const connections=attempts.filter(line=>/ = 0$| = -1 EINPROGRESS /.test(line));
+      observations.push({scenario:'native-cli-connections',service_id:service.id,https_connect_attempts:attempts.length,https_connections:connections.length,
+        expected_read_requests:2,expected_mutation_attempts:1,trace_path:preserved,trace_sha256:digest(native)});await save();
       assert.equal(connections.length,3,'Deux lectures et une seule tentative de mutation HTTPS');
       assert.equal(attempts.length,connections.length,'Aucune autre tentative HTTPS');
-      observations.push({scenario:'native-cli-connections',service_id:service.id,https_connect_attempts:attempts.length,
-        expected_read_requests:2,expected_mutation_attempts:1,trace_sha256:digest(native)});
     }
     return result;
   }};
@@ -97,6 +108,16 @@ async function startDeployment(service,credential,label,trace=false){
     (error,stdout,stderr)=>resolve({code:error?.code??0,stdout,stderr})));
   activeTask=task;return task;
 }
+async function promote(credential,published,boundary){
+  const value=await new Promise(resolve=>execFile('python3',['-B','-m','adapter','promote','--function',published.function_id,'--code-hash',published.code_hash],
+    {cwd:root,timeout:60000,maxBuffer:4*1024*1024,env:{...process.env,P2_SERVERLESS_URL:base,P2_SERVERLESS_TOKEN:credential}},
+    (error,stdout,stderr)=>resolve({code:error?.code??0,stdout,stderr})));
+  for(const privateValue of [secret,...credentials])assert(!value.stdout.includes(privateValue)&&!value.stderr.includes(privateValue),'Identifiant exposé par promote');
+  observations.push({scenario:boundary+'-promotion-exit',exit_code:value.code,stdout_sha256:digest(value.stdout),stderr_sha256:digest(value.stderr)});await save();
+  assert.equal(value.code,0);const result=JSON.parse(value.stdout);observations.push({scenario:boundary+'-explicit-promotion',report:result});await save();
+  assert(result.completed);assert.equal(result.state,'promoted');assert.equal(result.function_id,published.function_id);assert.equal(result.code_hash,published.code_hash);assert.equal(result.revision_id,published.revision_id);assert.equal(result.changed,true);return result;
+}
+
 async function purge(service){
   const rows=(await api(`/api/services/${service.id}/functions`)).items;
   for(const row of rows){
@@ -111,8 +132,8 @@ async function purge(service){
   await api(`/api/services/${service.id}`,{method:'DELETE'});service.cleaned=true;
 }
 async function check(name,action){
-  try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}
-  catch(error){checks.push({name,status:'failed',error:error.name});throw error;}
+  try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}
+  catch(error){checks.push({name,status:'failed',error:error.name});await save();throw error;}
 }
 try{
   session=await api('/api/session');assert(session.authenticated,'Session SSO requise');
@@ -138,13 +159,19 @@ try{
       assert.equal(state.environment_sha256,gated.durable.environment_sha256);
       assert.deepEqual((await api(`/api/services/${service.id}`)).environment,boundary==='before'?{}:{SHARED_LABEL:label});
       observations.push({scenario:boundary,service_id:service.id,events:held.events,restored,report:result,durable:state});
-      await check(`Relance explicite après coupure ${boundary} : publication et invocation Docker`,async()=>{
+      await check(`Relance explicite après coupure ${boundary} : publication, promotion et invocation Docker`,async()=>{
         const retry=await startDeployment(service,credential,label),published=await retry.result(true);
         assert.equal(published.service_configuration.state,'applied');assert.equal(published.results.length,1);
-        const functions=(await api(`/api/services/${service.id}/functions`)).items;assert.equal(functions.length,1);
-        const read=await token(service,'invocation',['read']);
-        const response=await caller.get(`/invoke/${functions[0].id}`,{headers:{'X-Serverless-Token':read}});assert.equal(response.status(),200);
-        assert.deepEqual(await response.json(),{label,local:null,secret_sha256:digest(secret)});
+        const functions=(await api(`/api/services/${service.id}/functions`)).items;assert.equal(functions.length,1);const fn=functions[0],publication=published.results[0];
+        const catalogue=await api(`/api/functions/${fn.id}/versions?limit=100`),read=await token(service,'invocation',['read']);
+        const pilotResponse=await caller.get(`/invoke/${fn.id}`,{headers:{'X-Serverless-Token':read}}),pilotBody=await pilotResponse.json();
+        observations.push({scenario:boundary+'-pilot-before-promotion',function_id:fn.id,publication,active_revision_id:fn.active_revision_id,active_code_hash:catalogue.active_code_hash,first_promoted_at:catalogue.first_promoted_at,status:pilotResponse.status(),response:pilotBody});await save();
+        assert.equal(publication.function_id,fn.id);assert.equal(publication.state,'published');assert.match(publication.code_hash,/^[0-9a-f]{64}$/);assert.equal(fn.active_revision_id,null);assert.equal(catalogue.active_code_hash,null);assert.equal(catalogue.first_promoted_at,null);assert.equal(pilotResponse.status(),409);assert.equal(pilotBody.error,'function_not_deployed');
+        const promoted=await promote(credential,publication,boundary),selected=await api(`/api/functions/${fn.id}`);assert.equal(selected.active_revision_id,promoted.revision_id);
+        const response=await caller.get(`/invoke/${fn.id}`,{headers:{'X-Serverless-Token':read}}),body=await response.json();
+        observations.push({scenario:boundary+'-invocation-after-promotion',function_id:fn.id,status:response.status(),code_hash:response.headers()['x-serverless-code-hash'],response:body});await save();
+        assert.equal(response.status(),200);assert.equal(response.headers()['x-serverless-code-hash'],publication.code_hash);
+        assert.deepEqual(body,{label,local:null,secret_sha256:digest(secret)});
         const state=await remote('inspect',service);assert.equal(state.mutations,boundary==='before'?1:2);
         observations.push({scenario:boundary+'-explicit-retry',service_id:service.id,function_id:functions[0].id,mutations:state.mutations});
       });
@@ -161,7 +188,6 @@ try{
   }
   if(work)await rm(work,{recursive:true,force:true});
   await admin.dispose();await caller.dispose();
-  await writeFile(report,JSON.stringify({target:base,completed:completed&&!cleanupErrors.length,checks,observations,skipped:0,cleanup:!cleanupErrors.length,cleanup_errors:cleanupErrors,
-    namespace_id:namespace?.id,service_ids:services.map(row=>row.id),function_ids:archives.map(row=>row.function_id),storage_archives:archives},null,2)+'\n');
+  cleanupFinished=true;await save();
 }
 assert(completed&&!cleanupErrors.length);

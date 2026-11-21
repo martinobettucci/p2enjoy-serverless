@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 21 novembre2026 — client108 préparé pour qualification
+
+Les relances before/after conservent le résultat CLI pilote et son vrai409,
+puis exécutent promote avec le même jeton avant appel200/hash/variable/
+empreinte du secret. La commande coupée conserve sa preuve3connexions,
+sans promotion ni nouvelle publication ; traces natives expurgées conservées
+par service. Rapport atomique et observations/gardes persistés avant
+assertions ; completed/cleanup seulement après fin des ressources.
+Cinq groupes conservés,30attendus ; source du contrat108 ajoutée à l’index
+(451fichiers). Aucun produit modifié.
+
 ## 21 novembre2026 — décision108 avant code
 
 Le relevé natif du worker9c509830 confirme publication sans promotion,
