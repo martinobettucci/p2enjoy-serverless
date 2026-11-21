@@ -1832,7 +1832,9 @@ relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-1
 Reprise du21novembre : préalables103/104 livrés. Le
 [contrat de campagne complète](SCHEDULE_REGRESSIONS.md) fixe49campagnes/543groupes
 attendus,18prérequis et les recoupements des36fonctions cron supplémentaires.
-Le lanceur reste à implémenter et éprouver ; aucune clôture anticipée.
+Le lanceur est implémenté et relu ; qualification complète à produire.
+Premier lancement refusé avant SSO sur deux documents de rétention décalés,
+zéro groupe ; synchronisation gardée puis relance explicite requises.
 
 Dernier complément : [preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) passe31groupes sur428sources41574c45,
 image capturéec59 puis originauxb452restaurés. Source protégée puis retirée,

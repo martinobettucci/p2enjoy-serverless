@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 21 novembre2026 — précontrôle078 refuse deux documents décalés
+
+Le premier worker6d7b0401 termine1 avant SSO/build/scénario : garde de sources
+refusée, zéro groupe/prérequis. Le relevé RO445fichiers identifie exactement
+RETENTION_HISTORY_REPLAY et SCHEDULE_RETENTION : leurs dernières évolutions
+documentaires n’étaient pas dans l’ancien index428. Décision : synchroniser
+ces deux fichiers sous leurs SHA distants connus, sans modifier code produit
+ni assertions. Le résultat systemd échec est figé, unité arrêtée et client joint ;
+rapport et logs privés conservés. Relance explicite séparée après correction.
+
 ## 21 novembre2026 — lancement long078 prêt pour E2E
 
 Le lanceur start/status/finish est implémenté et relu : pipe stdin transmis
