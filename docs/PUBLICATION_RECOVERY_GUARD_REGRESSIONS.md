@@ -17,8 +17,8 @@ ensuite dans until, source24, message SHA
 6b5b35c4132f389d4b5d3bab0f0772cb89ad8b6b2faed6acad5c7bb8bf64f0bf.
 Le finally déclare les deux gardes restaurées et dix purges publiques sans
 cleanupErrors. Ce drapeau ne remplace pas le recoupement natif après échec.
-Le journal conserve également un avertissement de socket UNIX d’une preuve
-isolée antérieure ; aucune causalité avec l’échec n’est déduite de cette proximité.
+Le journal de ce worker conserve également un avertissement de socket UNIX
+dans un répertoire isolé ; aucune causalité avec l’échec n’est déduite de cette proximité.
 
 Lire intégralement publication-recovery.mjs, publication-recovery-operator.py
 et FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS ; rapprocher leurs échéances,
@@ -84,3 +84,29 @@ mêmes services/images, configuration et5982originaux conservés. Le recoupement
 physique confirme les dix purges, configuration et secrets propres effacés,
 ressources absentes et reçus corrélés, au-delà du drapeau cleanup. Rejouer ensuite les
 quatre groupes et25communs, sans ajouter les trois groupes de l’essai incomplet.
+
+## Résultat qualifié du 21 novembre 2026
+
+[Preuve et brut scellé](evidence/publication-restoration-confirmation-dev-2026-11-21.json) :
+gel965185f,454sources, imageb452 inchangée. Quatre groupes ciblés puis25communs
+passent en série ;22captures fraîches ouvertes individuellement (16déclarées,
+six compléments de connexion). Manuel18chapitres/74paragraphes,38backend et
+quatre ressources web servies recoupées.
+
+Deux vraies coupures137, deux gardes terminées ; pendant validating, le client
+observe le reçu indépendant après84sondes et49,343131s monotones. Identité,
+observer_gone, santé, référence et mutateur joint sont recoupés avec les fichiers
+natifs. Les littéraux RESTORE/KILL_CONTROL restent exactement ceux du gel8351687.
+Le nouveau passage reste sous50s : il prouve le protocole calculé, ses lectures
+et l’indépendance réelle, sans prétendre provoquer une nouvelle attente au-delà
+de l’ancien délai ni l’expiration235s. L’ancien relevé natif50,495795658s est
+conservé séparément, sans reconstruction de ses sondes client.
+
+Huit invocations Docker réussies, une promotion auditée, dix fonctions purgées
+physiquement et un jeton révoqué ; gardes et consommateurs terminés, compteurs
+au repos. Mêmes services/images, référence/configuration et5982originaux
+conservés ; trois notes SPARK vérifiées sans écriture. Aucun produit, UI, manuel,
+route ou image changé. Aucun reçu de secours utilisé par ce passage : sa capture
+de provenance et les branches de panne/expiration non provoquées ne sont pas
+qualifiées ici ; les preuves résiduelles074/091.2 restent ouvertes.
+SLS-110 est close. IR-003 et le nouveau passage entier078 restent à traiter.

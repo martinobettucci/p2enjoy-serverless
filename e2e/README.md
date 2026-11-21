@@ -9,8 +9,14 @@ public.py et login-ui, soit29. Le protocole de la garde annonce timer45s,
 alarme180s et sonde10s ; le client calcule235s et conserve ses lectures
 monotoniques. Les programmes RESTORE/KILL_CONTROL sont strictement inchangés.
 Un reçu indépendant réel et la fin des unités restent obligatoires ; le secours
-de nettoyage ne transforme pas le groupe en succès. Sources454 préparées,
-aucun replay110 encore qualifié.
+de nettoyage ne transforme pas le groupe en succès.
+La [preuve réelle](../docs/evidence/publication-restoration-confirmation-dev-2026-11-21.json)
+passe29groupes au gel965185f / 454sources,22captures ouvertes individuellement.
+Le reçu indépendant est observé après84sondes /49,343131s monotones ; ce passage
+ne dépasse pas l’ancien délai50s. Les deux gardes/coupures137, huit invocations,
+dix purges physiques et un jeton révoqué sont recoupés nativement. Les branches
+de secours et d’expiration235s ne sont pas provoquées par ce passage. SLS-110
+est close ; les543groupes de078 restent à exécuter entièrement.
 
 
 ## Préparations modernes et promotion explicite — SLS-109

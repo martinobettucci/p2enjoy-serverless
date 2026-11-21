@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- SLS-110 : [29 groupes réels](docs/evidence/publication-restoration-confirmation-dev-2026-11-21.json)
+  qualifient la confirmation du reçu indépendant dans les bornes réelles de la
+  garde : timer 45 s, alarme 180 s et sonde 10 s, enveloppe 235 s. Attente monotone
+  et observations conservées ; programmes de restauration inchangés. Deux coupures
+  réelles, huit invocations Docker, dix purges physiques et 22 captures inspectées.
+  Le passage observe le reçu en 49,343131 s ; les branches de secours et d’expiration
+  restent hors de cette preuve. La campagne entière SLS-078 reste ouverte.
+
 - SLS-105 : [37groupes réels](docs/evidence/execution-console-warmup-dev-2026-11-21.json)
   qualifient le montage de six instances après promotion explicite. Douze
   parcours conservés,25communs,34captures inspectées ; six UUID ready au

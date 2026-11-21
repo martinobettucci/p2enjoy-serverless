@@ -1,5 +1,17 @@
 # Révisions et adaptateur de déploiement
 
+## Confirmation de restitution des publications — 21 novembre 2026
+
+[Qualification110](evidence/publication-restoration-confirmation-dev-2026-11-21.json) :
+29 groupes réels au gel 965185f / 454 sources, 22 captures inspectées. Seuls
+le client et son opérateur annoncent les bornes et conservent leurs observations ;
+les programmes de garde et l’image produit b452 ne changent pas. Deux coupures
+réelles puis restitutions recoupées, dix fonctions purgées physiquement et huit
+invocations Docker réussies. Les 38 fichiers backend et quatre ressources HTTPS,
+services/images, référence/configuration et 5982 artefacts restent conservés.
+Aucune variable, route, migration ou secret ajouté ; trois notes vérifiées sans
+écriture. SLS-110 est close, la campagne complète078 reste à qualifier.
+
 ## Qualification du contrôle historique vers010 —21 novembre2026
 
 [qualification104](evidence/legacy-schema010-dev-2026-11-21.json) clôt104 :30groupes réels et22captures

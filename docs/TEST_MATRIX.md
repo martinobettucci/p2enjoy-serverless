@@ -1,5 +1,16 @@
 # Matrice de qualification réelle
 
+## Confirmation indépendante des publications — SLS-110
+
+[Qualification110](evidence/publication-restoration-confirmation-dev-2026-11-21.json) :
+quatre groupes ciblés puis 25 communs, gel 965185f / 454 sources / image b452.
+Deux SIGKILL 137 et deux gardes natives ; huit invocations réussies, dix purges
+physiques, un jeton révoqué et 22 captures inspectées. Le reçu indépendant est
+lu après 84 sondes et 49,343131 s monotones dans l’enveloppe 235 s. L’ancien
+échec natif à 50,495795658 s reste distinct ; aucune nouvelle attente au-delà
+de 50 s ni expiration 235 s n’est prétendue. Manuel 18/74, mêmes services/images,
+configuration/référence et 5982 originaux conservés. La campagne entière078 reste due.
+
 ## Migration historique003→010 — SLS-104
 
 [qualification104](evidence/legacy-schema010-dev-2026-11-21.json) passe30groupes : quatre full, un partiel,

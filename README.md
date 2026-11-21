@@ -1,5 +1,11 @@
 # P2Enjoy Serverless
 
+La [confirmation indépendante des restaurations](docs/evidence/publication-restoration-confirmation-dev-2026-11-21.json)
+passe 29 groupes réels au gel965185f / 454 sources : deux coupures du contrôle,
+huit invocations Docker, dix purges physiques et 22 captures inspectées. Le client
+attend le reçu dans les bornes du protocole sans modifier la garde. SLS-110 est
+close ; la campagne entière des crons reste à qualifier.
+
 Les [dix préparations modernes](docs/evidence/modern-client-promotion-regressions-dev-2026-11-21.json)
 passent 106 groupes réels : 81 ciblés et 25 communs, 59 captures inspectées.
 Uploads pilotes, choix explicites et promotions restent distincts ; 89 fonctions
@@ -31,10 +37,10 @@ reste à terminer.
 Le [scope de régression complète des crons](docs/SCHEDULE_REGRESSIONS.md) est implémenté
 pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
 49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;
-rapports UUID figés, SSO frais et recoupement physique entre campagnes. Trois essais
-antérieurs restent incomplets et conservés ; après les préalables105/106/107/108
-et la qualification109, un nouveau passage entier49/543 +18 est préparé sur
-453 sources figées. Son résultat reste à qualifier. SLS-078 reste[~].
+rapports UUID figés, SSO frais et recoupement physique entre campagnes. Quatre essais
+antérieurs restent incomplets et conservés (0,272,313 et220groupes). Les préalables
+105 à110 ont leurs preuves propres ; un nouveau passage entier49/543 +18, sur
+454 sources figées, reste à qualifier. SLS-078 reste[~].
 
 Pour une campagne suivie indépendamment du terminal :
 `python3 -B e2e/schedules-worker.py start`, puis `status NOM` et `finish NOM`

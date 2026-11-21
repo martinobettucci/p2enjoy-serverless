@@ -1,5 +1,25 @@
 # Journal de cadrage
 
+## 21 novembre 2026 — SLS-110 qualifiée et close
+
+Preuve publication-restoration-confirmation-dev-2026-11-21 : gel965185f,
+454sources, imageb452 ; quatre groupes ciblés puis25communs,22captures fraîches
+ouvertes individuellement. Deux coupures137/gardes natives, huit invocations
+Docker réussies, une promotion auditée, dix purges physiques et un jeton révoqué.
+
+Le reçu indépendant est observé après84sondes /49,343131s monotones dans235s.
+Ce nouveau passage ne dépasse pas50s : l’ancien relevé natif50,495795658s reste
+conservé séparément, sans inventer ses instants de polling. Programmes de garde
+strictement identiques ; aucune branche de secours ou d’expiration235s provoquée.
+Leurs preuves résiduelles074/091.2 restent ouvertes.
+
+Manuel18/74,38backend/quatreweb, dix migrations/intégrités/FK, mêmes services/
+images, référence/configuration et5982originaux recoupés ; trois notes conservées.
+Le premier appel RO du vérificateur de notes est refusé par le réseau du bac à
+sable, puis le même appel autorisé aboutit sans écriture. Aucune modification
+produit/UI/manuel/image. IR-003 reste à résoudre avant le prochain078 entier ;
+aucun des220groupes de l’essai incomplet n’est ajouté aux29.
+
 ## 21 novembre 2026 — confirmation110 implémentée, preuve29 à produire
 
 L’opérateur annonce les bornes45/180/10 dans armed et son identité ; la même

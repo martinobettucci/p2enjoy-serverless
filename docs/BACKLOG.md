@@ -68,7 +68,6 @@ bloquée est sautée et son blocage est nommé.
 
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [SLS-110](#sls-110) Restitution indépendante des publications pendant validation | Corriger | `[~]` | SLS-074 | [PUBLICATION_RECOVERY_GUARD_REGRESSIONS](PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md) |
 | 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
@@ -3097,13 +3096,24 @@ ni SLS-066, ni la campagne entière SLS-078.
 <a id="sls-110"></a>
 ## SLS-110 — Restitution indépendante des publications pendant validation
 
-Statut : [~] — quatrième groupe publication-recovery interrompu au gel8351687.
+Statut : [x] — 29 groupes réels et 22 captures inspectées au gel965185f, le21 novembre2026.
 Nature : Corriger. Ordre :1, préalable au nouveau078.
 Contrat : [PUBLICATION_RECOVERY_GUARD_REGRESSIONS](PUBLICATION_RECOVERY_GUARD_REGRESSIONS.md).
 
 - [x] SLS-110.1 Échec scellé et état natif recoupés ; reçus, échéances et cause
   instruits avant décision, sans assimiler timeout client et panne de garde.
-- [ ] SLS-110.2 Décision persistée puis correction bornée sans retirer aucun
+- [x] SLS-110.2 Décision persistée puis correction bornée sans retirer aucun
   des quatre groupes, coupe, helper perdu, garde ou contrôle physique.
-- [ ] SLS-110.3 Quatre groupes et25communs passent sur code déployé ; captures,
+- [x] SLS-110.3 Quatre groupes et25communs passent sur code déployé ; captures,
   manuel, reçus/restaurations et dix purges physiques recoupés,5982originaux conservés.
+
+Preuve : [confirmation indépendante réelle](evidence/publication-restoration-confirmation-dev-2026-11-21.json),
+454sources / imageb452 ; quatre ciblés puis25communs, sans réutiliser les groupes
+du worker incomplet. Deux coupures137 et gardes natives, huit invocations Docker
+réussies, dix purges physiques et un jeton révoqué. Le reçu indépendant est lu
+après84sondes et49,343131s monotones, dans l’enveloppe235s ; ce nouveau passage
+ne dépasse pas50s. L’ancien délai natif50,495795658s reste une preuve distincte.
+Manuel18/74,38backend/quatreweb, mêmes services/images, configuration, référence
+et5982originaux conservés. Les branches de secours et d’expiration235s non
+provoquées restent hors de cette preuve et des critères résiduels074/091.2.
+IR-003 et la campagne entière078 restent ouverts.
