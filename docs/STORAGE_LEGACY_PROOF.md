@@ -136,7 +136,8 @@ Décision du21novembre2026 avant code, pour [SLS-104](BACKLOG.md#sls-104).
 Le constructeur conserve REVISION comme identité historique et SOURCE_REVISION
 comme arbre Git remappé. Le build utilise uniquement control/web de cet arbre.
 Les empreintes de tous ses fichiers sont vérifiées sur le SPARK ; contexte
-dédié, aucun secret ou fichier de configuration ajouté au contexte. Le tag
+neuf UUID `build-archive-migration-REVISION-UUID`, aucun secret ou fichier de
+configuration ajouté au contexte. Le reçu garde son emplacement et ses SHA. Le tag
 courant et son conteneur ne changent pas.
 
 L’authentification courante doit correspondre exactement au SHA de auth.py
@@ -152,7 +153,10 @@ commentaire076 ; aucune différence arbitraire acceptée. Garder les empreintes
 et signaler les écarts réellement admis. Les sources historiques restent intactes.
 
 Le client générique d’archives attend010 après upgrade, sans élargir les
-bornes des bancs006/007/008. Il conserve ses quatre groupes : SSO/publications
+bornes des bancs006/007/008. Le mode historical nomme003→010 dans son
+journal et refuse avant arrêt un original dont le schéma n’est pas exactement010.
+Le mode partial conserve ses métadonnées historiques, sans démarrer de contrôle
+avant l’interruption du premier déplacement. Il conserve ses quatre groupes : SSO/publications
 historiques, migration/session, purge sans reçu agent inventé, contradiction
 protégée après apparition réelle du registre et redémarrage. Dix noms ordonnés
 exacts, UUID/session/révisions/archives et état de stockage sont recoupés.

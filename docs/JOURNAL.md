@@ -1,5 +1,23 @@
 # Journal de cadrage
 
+## 21 novembre2026 — préconditions104 reproduites sur le vrai banc
+
+Le builder133462b9 refuse historical_protocol_changed:auth.py avant SSH/build ;
+ancien rapport réel préservé. Le replay2127d0b8 réutilise son image003ac34
+attestée, sans la reconstruire ni renommer ses métadonnées : SSO historique
+et deux publications/imports Docker passent, puis upgrade versb452/010 échoue
+sur10!==7. Deux groupes atteints, zéro qualifié. Original restitué, aucun
+nettoyage incomplet ; sources/images avant/après égales. Rapports originaux
+et diagnostics privés conservés avant toute correction.
+
+Précisions avant code : contexte de build neuf UUID pour ne pas reprendre
+d’anciens fichiers, SHA auth courant égal à la preuve089 b9ae58f6, ancien416f8261
+intact. Comparaison validateur garde ses seules substitutions connues. Le
+mode historical nomme003→010 et vérifie010 avant interruption ; les modes
+spécifiques006/007/008 et partial restent distincts. Rejouer les quatre cas
+après correction, sans décompter le build ni ces deux échecs comme succès.
+
+
 ## 21 novembre2026 — préalable historique104 inscrit avant correction
 
 L’exploration du socle37 constate trois gardes périmées : auth.py diffère par
