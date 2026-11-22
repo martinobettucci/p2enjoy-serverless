@@ -26,10 +26,21 @@ Le pilote de bascule est un processus ponctuel supervisé par systemd dans le
 SPARK. Une commande `ExecStopPost` gelée assure la restitution après sa sortie,
 même anormale. Le périmètre du cgroup comprend ses clients Docker, pas le démon
 rootless ni les conteneurs applicatifs. `KillMode=control-group` et
-`KillSignal=SIGKILL` joignent les éventuels processus de commande restants avant
-le traitement de fin. Le pilote garde un maximum140s ; le traitement de fin
+`KillSignal=SIGKILL` demandent la terminaison des processus de commande restants.
+Le traitement de fin vérifie leur absence avant toute restitution : son entrée
+ne vaut pas, à elle seule, preuve de jonction. Le pilote garde un maximum140s ; le traitement de fin
 dispose de200s et d'une alarme propre180s. La perte du terminal qui attend le
 résultat ne détruit ni la supervision ni son reçu.
+
+Les clients Docker de cette unité sont lancés directement avec les UID/GID et
+groupes supplémentaires de `spark-docker`, par les options natives du processus
+Python. Ils gardent le cgroup hérité ; aucun `runuser`/PAM ne peut les déplacer
+vers une autre session. Le socket et le répertoire de configuration Docker sont
+explicites ; aucune réaffectation de HOME. PID/naissance/UID/cgroup de chaque
+client et des descendants observés sont conservés. Avant toute manipulation
+dans le post, vérifier l'absence de l'ancien pilote et des clients enregistrés,
+ainsi que le cgroup courant en excluant le seul post. Un survivant interdit la
+restitution. Après la sortie, contrôler aussi les éventuels sous-groupes.
 
 Ce choix évite un secours dépendant du terminal et un groupe de mutateurs
 orphelins. Sémantique vérifiée dans les documentations primaires
