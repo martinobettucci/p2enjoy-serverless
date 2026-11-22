@@ -676,7 +676,13 @@ Le helper réel reçoit l’opération `diagnose-import-output` avec les deuxUUI
 Elle est réservée à instance-limit sans replay, garde2700, configuration/dossiers/
 CID/image/installation reconnus, exactement les deuxfonctions et deuxinstances
 ready, aucune invocation ni tir. Vérifier W−60 avant/après et entre itérations.
-La durée totale est bornée30s, chaque enfant à5s au plus dans le tempsrestant.
+La production et le transfert du flux possèdent une échéance commune30s ;
+chaque enfant dispose au plus5s dans ce tempsrestant, puis sa jonction possède
+sa propre borne5s. Les lectures natives avant/après conservent les commandes
+bornées40s du helper existant ; elles sont mesurées séparément et ne sont pas
+annoncées incluses dans les30s du producteur. Le client conserve sa borne
+d’attente90s de l’opération et refuse toute clôture horsW−60. Le reçu enregistre
+préflight, production, recoupement et total séparément, avec les heures réelles.
 
 La sortie provient des vrais diagnostics `python -I -B -vv` de chargements du
 helper figé dans la fenêtre et de son helperSQLite figé. Le child exécute runpy
@@ -706,3 +712,14 @@ nettoyage réussi. Le wrapper de preuve réussit seulement pour cet échec atten
 avec deuxgroupespropres, seuil réel franchi, producteurs joints, préfixe exact,
 origines/config/référence/5982 et huitcompteurs0. Aucun groupe de rétention ajouté.
 Le refusaprèsattache acquis reste distinct ; borne25/35/40/5 et nominal inchangés.
+
+
+Précision avant exécution du cascap : la revue a relevé que la lecture native
+avant et le recoupement final ne relevaient pas de l’échéance du producteur.
+Le budget est décomposé ci-dessus : les30s bornent les vrais imports, la collecte
+et le transfert sous contrepression ; les lectures de contrôle reprennent leurs
+bornes existantes et leurs mesures distinctes. Motif : réutiliser les primitives
+natives déjà qualifiées sans ajouter un second client Docker ou modifier les
+délais partagés pour ce diagnostic. Aucun cascap n’a encore été exécuté ; aucun
+succès total30s n’est revendiqué. Le refus horsW−60, la borneclient90 et toutes les
+jonctions restent exigés. L’imageapplicative et les délais25/35/40/5 ne changent pas.
