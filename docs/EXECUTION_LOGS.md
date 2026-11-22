@@ -618,3 +618,13 @@ Le client préparatoire de lecteurs/budgets peut exécuter API12/05/06 isolémen
 avec les mêmes fonctions/classes et corpus réels. Il ajoute zéro groupe qualifié
 et ne remplace pas les douze groupes de la campagne finale ni les25communs frais.
 Un prérequis absent reste un échec, sans skip ni variante simulée.
+
+
+Diagnostic126 : la barrière DBopenat peut manquer un lecteur qui réutilise un
+descripteur. [SourceSQLite os_unix.c](https://github.com/sqlite/sqlite/blob/master/src/os_unix.c)
+décrit findReusableFd ; c'est une piste, pas l'attestation binaire de la cible.
+Avant correction, conserver les deux résultatsHTTP par vague release/EOF/kill
+et au plus64openat des seuls workersjournal-read, classeDB/WAL/SHM ou autrechemin
+haché et borné, TID/retour/instant. Aucun buffer applicatif ou en-tête n'est lu,
+les mêmes critères et échéances restent imposés. Un relevé vaut zéro groupe
+qualifié, même si une exécution ne reproduit pas l'échec d'acquisition.

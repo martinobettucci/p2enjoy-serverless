@@ -77,6 +77,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-123](#sls-123) Armement de la coupure après compteur durable | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-124](#sls-124) Restitution du focus des commandes Journaux | Corriger | `[ ]` | SLS-061 | cette unité |
 | 3 | [SLS-125](#sls-125) Corrélation du hash des événements conservés | Corriger | `[~]` | SLS-040 | cette unité |
+| 3 | [SLS-126](#sls-126) Acquisition des lecteurs retenus d’API12 | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -3989,3 +3990,42 @@ atteints (lecteurs API12 et budgets API05/06), avec les mêmes helpers et de vra
 corpus. Ce client préparatoire ajoute zéro groupe qualifié ; il ne remplace pas
 le full12/25communs et ne saute aucun scénario de la campagne finale. Son rôle
 est de départager les échecs nouveaux avant de refaire le préfixe déjà observé.
+
+
+<a id="sls-126"></a>
+## SLS-126 — Acquérir les lecteurs retenus d'API12
+
+Statut : [~] — préparatoire505sources/1aa échoue dans l'attente d'une barrière
+API12, client source_line62 ; trois propriétaires natifs sont relevés, nettoyage
+physique acquis, API05/06 non exécutés. Nature : Corriger. Dépend de : SLS-040.
+Ordre : 3. Contrat : [instrumentation native](EXECUTION_LOGS.md#instrumentation-native-des-lectures).
+
+Résultat attendu : éprouver les deux vrais lecteurs retenus,429,deadline/jonction,
+EOF/perte de helper et EMFILE réel avec leurs gardes, sans confondre un refus du
+banc avec celui du produit ni relâcher les délais.
+
+- [x] SLS-126.1 Sceller le préparatoire échoué505sources, ses programmes/reçus,
+  zéro groupe qualifié et purge physique ; situer précisément le mode/phase.
+- [ ] SLS-126.2 Reproduire et départager le défaut à partir des reçus natifs,
+  des vrais résultatsHTTP et d'un diagnostic borné si nécessaire. Aucun résultat
+  injecté, thread supposé acquis, registre modifié ni étatSQL fabriqué.
+- [ ] SLS-126.3 Cause recoupée et décision/motif commités avant correction du
+  composant en cause ; conserver les sources et le rouge originaux.
+- [ ] SLS-126.4 Rejouer API12 puis API05/06 et12API/25communs frais sur le code
+  déployé, gardes/processus joints, purge physique, captures communes inspectées.
+
+
+Premierrouge : [preuve](evidence/execution-journal-readers-acquisition-first-failed-dev-2026-11-22.json).
+Release et EOF acquièrent2, la troisième vague prévuekill ne retient qu'un
+worker openatDB. Un autre journal-read passe en journal-verify et finit son
+travail avant0,9s. Le matcher d'ouverture n'a donc pas retenu tous les lecteurs ;
+leurs réponsesHTTP ne sont pas encore conservées. SQLite peut réutiliser un FD
+de base existant, ce qui rend plausible une lecture sans nouvelle ouverture,
+sans attribuer encore cette cause à l'exécution observée.
+
+Décision avant diagnostic : garder l'oracle et le matcher, enregistrer chaque
+vague/mode, statut/code public/durée/fin des deux GET avant assertions. Ajouter
+aux reçus natifs au plus64openat des seuls workersjournal-read : typeDB/WAL/SHM
+ou SHA d'autre chemin borné, retour, TID et instant. Aucun autre contenu mémoire,
+en-tête/corps, FD remplacé, valeurSQL écrite ou budget élargi. Rejouer les trois
+vagues puis la vraie faute comme dans API12, zéro groupe qualifié pour ce relevé.

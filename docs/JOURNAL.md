@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — acquisition126 manque un lecteur de la troisième vague
+
+Préparatoire3da409a7/505sources : release puis EOF acquièrent chacun2workers.
+La vague prévuekill retient1 puis échéance40s ; un autre journal-read a rejoint
+journal-verify avant0,9s. Trois restitutions, purge du seul handler et parents,
+compteurs0/5982originaux, mêmecontrôle/référence/configuration. API05/06 nonlancés,
+zérogroupequalifié. SLS-126 inscrit et rouge scellé. Décision : statutsHTTP/durées
+parvague et64openat bornés avantcorrection. La réutilisationFDSQLite est une
+piste source, pas une cause attribuée à ce stade.
+
+
 ## 22 novembre 2026 — oracle de corrélation125 départagé
 
 Diagnostic1b84f800/504sources reproduit402 : cinq événements, received/queued
