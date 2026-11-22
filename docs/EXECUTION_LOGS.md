@@ -574,3 +574,11 @@ avec les mêmes identités est conservé, puis le principal est immédiatement
 détaché pour permettre son vrai acquittement1 ; sinon échec et restitution.
 La fixture passe ensuite minimum0/idle0 après le redémarrage avant les lectures
 du compteur. Le runtime ne reçoit aucun indicateur ni branche de test.
+
+
+Diagnostic complémentaire123 : le seul helper de coupure conserve nombres de
+stops et syscalls, heures de début/fin, retours de lecture et au plus32inodesUNIX
+rencontrés. Les chemins en clair restent dans /state/execution ; tout autre nom
+est haché. L'instance correspondante est explicite ; aucun octet applicatif ou
+en-tête supplémentaire n'est lu. Le premier relevé garde le poll1ms partagé,
+avant décision de sa correction ; les époques et sources restent distinctes.

@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — réception123 non atteinte, coût natif à mesurer
+
+Brut309bacdb/502sources, archive00753289 : /started non rencontré avant30s.
+L'invocation réelle échoue storage_unavailable/handler_started0, aucune coupure ;
+restitution et purge de trois fonctions passent, compteurs0. La mesure RO tardive
+trouve le principal déjà détaché ; elle ne décrit pas ses sockets au moment du
+blocage. Décision : relever stops/syscalls et32inodesUNIX bornés avant de changer
+le poll1ms de NativeObserver. Aucun lien causal attribué à ce stade.
+
+
 ## 22 novembre 2026 — coupure réelle123, branche d'attente encore non prouvée
 
 Brut75a81d34/502sources, archive61a73803 : sept groupes passent puis cut9/137,

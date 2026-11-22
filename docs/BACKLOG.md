@@ -3852,6 +3852,21 @@ seule fixture pour éprouver son extinction. Ce placement natif rend la branche
 à prouver observable ; il ne transforme pas l'ancien passage en réussite.
 
 
+Premier [essai de réception](evidence/execution-journal-started-receive-first-failed-dev-2026-11-22.json) :
+borne30s atteinte avant /started, invocation réelle503/storage_unavailable,
+handler_started0. Les trois fonctions sont purgées ; zéro groupe qualifié.
+La nouvelle barrière n'est pas acquise. L'observateur partagé utilise encore un
+poll waitpid suivi de1ms de sommeil ; le défaut de coût similaire de121 rend
+cette piste plausible, sans prouver la cause de ce503 particulier.
+
+Décision avant diagnostic complémentaire : mesurer en nombres et temps les
+stops/syscalls effectivement rencontrés, les retours read/recvfrom et un relevé
+borné de32inodes/cheminsUNIX rencontrés, avec compteur de dépassement et booléen
+instance correspondante. N'enregistrer que les chemins /state/execution ; pour
+les autres, uniquement SHA. Ne lire aucun contenu supplémentaire. Conserver les
+mêmes bornes et le même poll pour cette mesure avant correction de l'attente.
+
+
 <a id="sls-124"></a>
 ## SLS-124 — Restituer le focus des commandes Journaux
 
