@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-132/133 : nominal courant10001HTTP interrompu à9406réponses par sa
+  marge réelle avantcron, zéro groupe qualifié. Rouge et restauration011
+  scellés ; le ralentissement observé doit être diagnostiqué avant correction.
+  L'assemblage32 reste préparatoire et n'a encore exécuté aucune campagne.
+
 - SLS-072.6 : inventaire32campagnes/276groupes supplémentaires fixé avant code ;
   préconditions courantes011 exactes et pinsf73 (clients/opérateurs/générateur).
   Troiswrappers versions ont une branche011 explicite et conservent008 ;

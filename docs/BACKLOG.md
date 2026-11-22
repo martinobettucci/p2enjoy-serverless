@@ -83,6 +83,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-129](#sls-129) Agrandissement et cadrage des preuves Journaux | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-130](#sls-130) Interruption navigateur après écriture de politique | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
+| 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4624,3 +4625,45 @@ pas une autorisation de modifier les fichiers canoniques ou d'assouplir la garde
 072.6 — précision avant intégration : le recoupementphysique des30campagnes API utilisera une option explicite de l’inspecteur courant, bornée au client nommé et à son formatnamespace exact ; le périmètre historique par défaut reste inchangé. Les captures fraîches doivent être présentes selon le format du client et datées entre lancement et fin du relevé. Un checkpoint/log sans rapportNode après une tentative interrompue est archivé séparément avant préparation de nouveaux chemins ; aucune preuve partielle n’est effacée. Motif : les nouveaux noms UUID36 ne sont pas reconnus par la garde historique, et les versions réutilisent leurs nomsJPEG fixes.
 
 072.6 — décision de propriétécourante : un manifeste partagé nomme les30clients API et leurs74fonctions nominales (51éditeur/14testeur/9versions). Les27noms reconstruits depuiscampaign/prefix sont comparés au nom natif ; pour les3CLI, sauvegarder namespace_name depuis la vraie réponsePOST, lié au namespace_id. L’option explicite additional-client/namespace-name exige préfixe/suffixe/cardinalité exacts et inventaireUUID identique ; l’inspecteur historique par défaut reste strictement inchangé. Motif : éviter toute déduction erronée des préfixes réutilisés, UUID36, UUIDtronqué16 avec tirets et suffixeCLI perdu. Cette trace de rapport ne modifie aucune création ni nettoyage métier.
+
+
+<a id="sls-133"></a>
+## SLS-133 — Débit du nominal de rétention sous journal saturé
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-072, SLS-132. Ordre : 3.
+Contrats : cette unité, RETENTION_SCHEMA_011 et INVOCATION_SOURCE_RETENTION_VOLUME.
+
+Constat réel : le worker de19d780,520sources74ed538/f73, manque la marge de
+production de60s avant le cron20:40UTC. Il termine rouge avec9406réponses HTTP
+réussies ; le premier groupe n'est pas acquis et aucun cron du nominal n'est
+qualifié. Le [rouge conservé](evidence/invocation-source-retention-schema011-first-failed-dev-2026-11-22.json)
+porte production_margin_before_cron_exhausted. Un relevéRO à8511appels montre
+500premiers en54,765s et500derniers en140,704s, médianes de durée serveur
+0,168s puis0,413s ; journal au plafond10000. Cette corrélation ne démontre pas
+la cause. Les compteursCPU/RSS de PID hôte dont l'identité n'a pas été recoupée
+sont exclus de toute conclusion. Restitution et worker joints, collectionoriginale,
+42backend/quatreweb/config/référence/5982artefacts conservés, huitcompteurs0.
+
+Résultat attendu : identifier le coût réel, corriger sa cause ou le protocole
+justifié avant code, et obtenir10000HTTP avant la marge puis10001HTTP+1cron et
+les trois ensembles exacts. Ne pas allonger une borne pour transformer ce rouge
+en réussite ; toute évolution justifiée du protocole doit être décidée et
+contractualisée séparément, avec ses limites et ses preuves. Les invariants
+métier, collecte, budgets, purge et rétention restent exigés.
+
+- [x] SLS-133.1 Sceller l'essai, résultatterminal,9406réponses et marge manquée,
+  observationRO sans attribution causale et restitution physique complète.
+- [ ] SLS-133.2 Mesurer les requêtes/transactions réellement coûteuses et le
+  chemin d'appel sur le code déployé ; distinguer réseau, ordonnanceur,
+  sérialisation et maintenanceSQLite. Aucun résultat ni dépendance substitué.
+- [ ] SLS-133.3 Persister le diagnostic et le correctif retenu avant code ;
+  conserver données/ordre/compteurs/budgets, expurgation et limites. Une simple
+  augmentation du délai n'est pas un diagnostic ni une optimisation.
+- [ ] SLS-133.4 Nouveau nominal3 avec ses10001HTTP+1cron réels, gardes et
+  originaux joints ; replays affectés,12API/10UI/25communs et régression courant072
+  avant clôture. Le rouge initial et les preuves historiques restent inchangés.
+
+132 — nominal courant réellement rouge :9406HTTP, marge avantcron épuisée,
+aucun groupe qualifié. Worker terminal1 puis libéré, original011/f6e19cdd,
+42backend/quatreweb et huitcompteurs0 recoupés. Le reste de production est
+instruit dans133 ; aucune rétention manquante n'est déclarée acquise.

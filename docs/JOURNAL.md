@@ -10270,3 +10270,16 @@ logs et le replay sansreproduction sont scellés, aucunecauseproduit attribuée.
 ### 22 novembre 2026 — Nouvelles preuves de rétention011 contractualisées
 
 La garde refuse réellement les deux modules changés depuis les preuves historiques. Inspection RO des deux captures009 : SHA/modes/exports intacts, âge acquis, installation et témoin de clé compatibles, original011 sans activité. Décision132 : conserver les preuves historiques et produire trois preuves courantes ; copies009 migrées par le vrai startup pour sept jours, nouvelle capture256tirs suivie de3h15 pour la borne, et nouvelle charge10001HTTP pour la source protégée. Les logs expirables072 sont séparés de la chronologie078/091. Gardes/délais/identités et restitution des seuls originaux011 sont conservés ; aucun assouplissement de garde ou SQL fabriqué. Contrat RETENTION_SCHEMA_011 avant code.
+
+
+### 22 novembre 2026 — Nominal source011 rouge et restitution acquise
+
+Le worker durable de19d780 termine avec9406HTTP avant de refuser la marge
+avantcron, sans qualification de son premier groupe. Les520sources74ed538 et
+f73/runtime sont restées identiques ; ses seuls nouveaux commits pendant
+l'essai portent des décisionsdocumentaires horsvecteur. MainPID0/exit1 sont
+scellés avant arrêt de l'unité, puis original011 et collectionf6e19cdd,
+42backend/quatreweb/config/référence/5982artefacts recoupés, huitcompteurs0.
+Le relevéRO constate un ralentissement, sans cause établie et sans utiliser les
+métriques de PID nonattribué. SLS133 est enregistré avant correction ; les
+brouillons de l'assemblage32 sont horsgel, relus sansP1/P2, nonexécutés.
