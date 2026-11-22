@@ -1364,7 +1364,7 @@ Critères d'acceptation :
   rétention expirée et collecte indisponible signalées ; secrets expurgés ; valeurs
   d'authentification et corps métier non journalisés.
 - [ ] SLS-072.5 Export respectant les droits ; texte échappé, clavier et mobile.
-- [ ] SLS-072.6 Migration011 additive et déploiement gardé : intégrité/FK,
+- [ ] SLS-072.6 Migration011 additive et [déploiement gardé](EXECUTION_LOG_DEPLOYMENT.md) : intégrité/FK,
   conservation des données et des sources réelles, puis régression du socle
   49 campagnes / 543 groupes sur011 et des consommateurs ajoutés depuis,
   inventoriés séparément avant adaptation. Les préconditions des clients courants

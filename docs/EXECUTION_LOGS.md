@@ -302,6 +302,9 @@ libellés de collecte/expiration, sans exposer les contenus supprimés.
 
 ## Déploiement et retour
 
+Le [protocole de bascule011](EXECUTION_LOG_DEPLOYMENT.md) définit la supervision,
+les deux sauvegardes natives et les frontières avant arrêt/avant migration.
+
 011 est additive : anciennes colonnes et valeurs restent lisibles par 046 au
 niveau structurel, mais 046 ne connaît pas la rétention du contenu. Une sauvegarde
 SQLite native, l'intégrité et l'image précédente sont vérifiées avant migration.
