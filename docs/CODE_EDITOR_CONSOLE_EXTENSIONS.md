@@ -193,3 +193,13 @@ Les refus, recalages, focus volontaire ailleurs pendant attente et mutations
 face à une lecture maintenue restent à éprouver avec l’ensemble3. Le retour
 de focus après adoption reste aussi à mesurer ;070.1–.5 et l’unité restent ouverts.
 Le premier échec garde sa preuve séparée et ajoute zéro groupe au replay.
+
+## Suite des attentes UI — décision du22novembre2026
+
+070.1 est désormais clôturé par le rapprochement de sources et des frontières
+ZIP. Le [prochain banc de concurrence UI](CODE_EDITOR_UI_CONCURRENCY.md) isole
+les restes070.3/.4 : quatre actions face au vrai détail retenu, focus d’adoption,
+choix volontaire ailleurs, recalage5+2 et refus404/429. L’opérateur de lecture
+et ses gardes restent inchangés ; dix groupes ciblés puis25communs sont requis.
+Ce contrat précède le nouveau client ; aucune correction produit n’est déduite
+de la lecture statique et aucune nouvelle preuve fonctionnelle n’est acquise.

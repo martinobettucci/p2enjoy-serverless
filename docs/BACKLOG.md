@@ -1034,8 +1034,12 @@ Critères d'acceptation :
   source supplémentaire. Six fonctions/dix jetons/six parents des passages nettoyés.
 - [ ] SLS-070.3 Brouillon persistant côté serveur, rattaché à une révision de base ;
   conflit de version détecté ; saisies non enregistrées signalées avant de quitter.
+  Le [complément d’attentes UI](CODE_EDITOR_UI_CONCURRENCY.md) fixe avant son
+  client les quatre actions face au détail retenu et le focus après adoption.
 - [ ] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
+  Le même complément éprouvera refus404/429, recalage réel5+2 et choix volontaire
+  d’un autre focus, sans attribuer une lecture de fichier à la liste de métadonnées.
 - [ ] SLS-070.5 Publication par le pipeline de validation Docker existant, hash et
   déduplication de SLS-074 ; un import refusé conserve la version active et le brouillon,
   avec diagnostic consultable ; handler CJS/ESM validé avec les vrais modules.

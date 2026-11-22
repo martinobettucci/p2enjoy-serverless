@@ -198,6 +198,17 @@ contrôle démarré. Refus11:35/succès11:40UTC sans rejeu ; original et5982arte
 conservés. Aucun mock ni skip. La campagne complète078 reste à raccorder.
 
 
+## Attentes UI de l’éditeur — contrat avant client
+
+Le [contrat de concurrence UI](../docs/CODE_EDITOR_UI_CONCURRENCY.md) prévoit
+`node e2e/code-editor-ui-concurrency.mjs`, avec credentials sur stdin privée.
+Accueil/SSO puis vraie publication originale ; détails de comparaison retenus
+au syscall par l’opérateur déjà qualifié, sans modifier ses gardes. Sauvegarde,
+surface, deux adoptions et abandon sont confrontés aux réponses tardives,
+sur ordinateur/mobile. Focus volontaire, recalage5+2 et refus404/429 sont
+mesurés séparément ; huit handlers nominaux, jonction et purge physique requis.
+Dix groupes ciblés puis25communs frais ; aucun lancement ni résultat à ce point.
+
 ## Frontières du ZIP reconstruit — qualifiées en DEV
 
 `node e2e/code-editor-archive-boundaries.mjs` reçoit le SSO sur stdin privée et

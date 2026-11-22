@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — attentes UI070.3/.4 contractualisées avant client
+
+Après livraison114/070.1 poussée be41f8d, le principal vérifie l’exploration RO :
+le détail diff lit la vraie cible physique, la liste sans path ne la lit pas.
+Le choix conserve le gate existant et ses bornes/identités : nouveau client,
+une fonction conforme, quatre actions UI face à la réponse retenue, adoption
+garder/remplacer et focus DOM, choix ailleurs, recalage détaillé5+2, vrais404/429.
+Dix groupes puis25communs et huit handlers sont prévus. Deux design systems
+lus intégralement ; aucun nouveau comportement ni correction produit décidé.
+Le contrat CODE_EDITOR_UI_CONCURRENCY précède son client et rattache ces restes
+à070.3/.4. Les interruptions/persistance restent distinctes, non qualifiées.
+
 ## 22 novembre 2026 — ZIP32 qualifié,114 et070.1 clôturés
 
 Le nouveau passage03df7cb3, campagne3844e53c, finit sortie0 et client joint sur
