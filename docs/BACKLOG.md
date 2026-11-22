@@ -4068,10 +4068,10 @@ jusqu'à sa propagation et restaurer les limites/threads sans forger de résulta
 
 - [x] SLS-127.1 Sceller le replay201ade72, trois vagues acquises partiellement,
   faute native, sources/programmes, purge physique et zéro groupe qualifié.
-- [ ] SLS-127.2 Diagnostic du vrai statut/code/délaiHTTP et des ouverturesSQLite
+- [x] SLS-127.2 Diagnostic du vrai statut/code/délaiHTTP et des ouverturesSQLite
   de cette faute, phases/flags/retours et restauration, avant toute correction.
   Aucune valeur injectée, erreur supposée terminale ni étatSQL fabriqué.
-- [ ] SLS-127.3 Cause recoupée, décision/motif persistés avant correction du
+- [x] SLS-127.3 Cause recoupée, décision/motif persistés avant correction du
   seul élément en cause ; rouge et sources initiales conservés.
 - [ ] SLS-127.4 Éprouver le défaut réel corrigé puis les trois vagues et budgets,
  12API/25communs frais, mêmes sources/image déployées, gardes/jonctions/purge
@@ -4094,3 +4094,21 @@ SQLite unixOpen prévoit une tentative read-only après l'échec read-write
 ([source officielle](https://raw.githubusercontent.com/sqlite/sqlite/master/src/os_unix.c),
 branche Failed to open the file for read/write access). Cela motive le relevé,
 sans prouver encore que cette branche s'exécute dans notre binaire.
+
+
+Diagnostic127 : [deux ouvertures réelles, récupération confirmée](evidence/execution-journal-emfile-recovery-diagnostic-dev-2026-11-22.json).
+Flags655426/access_mode2 → errno24 ; après restauration, flags655360/mode0 →
+FD11, puisHTTP200 en168,47ms. Même fichier/TID/naissance, deux arrêts après
+restauration, aucun registre ou résultat modifié, garde et purge jointes.
+Cela recoupe la reprise read-only prévue parunixOpen ; aucun défaut produit
+n'est établi et le scénario n'obtient aucun groupe qualifié.
+
+Décision avant correction127 : maintenir la limite0 pendant les deux tentatives
+réelles RW puisRO du même fichier/TID, exiger les deux retours noyauEMFILE,
+puis restaurer la limite à la sortie de la seconde ouverture, avantPython.
+Garder2s/64arrêts, acquisition de tous les autres threads, garde indépendante,
+restaurationfinally, propriétaires et programmes attestés. Exiger dans le client
+503/log_read_unavailable puis une lecture réussie après jonction. Si la
+seconde ouverture n'est pas observée ou réussit, le banc échoue sans prétendre
+avoir prouvé le refus. Aucune modification du produit ni fauxerrno ; restaurer
+après le premier échec est écarté car cette faute est réellement récupérée.

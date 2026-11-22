@@ -653,3 +653,14 @@ Les autres threads restent arrêtés et sont restitués même si le relevé éch
 Le client conserve statut, code public et délai avant son assertion503. Un
 préparatoire de cette seule faute n'ajoute aucun groupe de qualification ; les
 vagues complètes et12API/25communs restent exigés par SLS-127.
+
+
+### Refus réel des ouvertures SQLite — décision127
+
+Le défaut natif exige désormais deux openatDB exacts sur le mêmeTID : premier
+O_RDWR puis O_RDONLY, tous deux rendusEMFILE par le noyau avecRLIMIT_NOFILE0.
+La limite initiale est rétablie à la sortie du second syscall avant queSQLite
+etPython ne propagent l'erreur. Le plafond2s/64arrêts et la restitutionfinally
+restent applicables ; un FD réutilisé ou une ouverture réussie ne prouve pas
+cette faute. Le reçu conserve flags, retours et ordre de restauration. L'oracle
+HTTP exige503/log_read_unavailable puis lecture réussie après restitution.
