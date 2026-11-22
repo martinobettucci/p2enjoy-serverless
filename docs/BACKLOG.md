@@ -4583,6 +4583,9 @@ sources009 et leurs exports demeurent strictement immuables.
 - [ ] SLS-132.4 Préflights/refus/perte et restitution réelle, originaux011,
   collection/schema/données conservés, seules copies retirées, gardes/clients
   joints ; jamais de restauration009/010 sur la base originale011.
+  Les échéances propres du nouvel exporteur d’images90s et de sa jonction5s
+  restent à provoquer réellement (dont alarme pendant nettoyage), sans
+  modifier ses archives canoniques ; le seul export nominal ne les qualifie pas.
 - [ ] SLS-132.5 La garde rattache exclusivement la preuve fraîche à ses sources
   actuelles exactes et refuse tout manque ; rapports historiques inchangés,
   zéro groupe réadditionné. Rejouer ensuite le socle et les consommateurs
@@ -4613,3 +4616,5 @@ pas une autorisation de modifier les fichiers canoniques ou d'assouplir la garde
 132 — [quatre groupes du refus de périmètre011](evidence/retention-schema011-foreign-namespace-dev-2026-11-22.json),519sourcesf99ffa9/f73 : namespace horsscope conservé au refus, pilote réellement terminé255, seulnamespacefixture retrouvé/retiré parAPI puis restitutionexplicite jointe. Client0, originaux011/source009/config/référence/5982 conservés ; huitcompteurs0. Aucun groupe nominal d’âge réadditionné.
 
 072.6/132.5 — préconditionscourantes001→011 et pinsf73 appliqués (clients+opérateur+générateur), source003 conservée pour upgradevers011. Troiswrappers ont branche011 explicite/default008, statecompare une baselineembarquée/nativereelle ;16appels/7gardes/6coupures conservés. Migrationsobjets projetéesparversion, gardeslittérales inchangées.18sources modifiées, syntaxesPython/Node et revue sansP1/P2 ; aucunequalification supplémentaire. Le contrat32 est ajouté au vecteur, désormais520sources.
+
+132 — [quatre groupes des pertes numériques011](evidence/schedule-firing-schema011-losses-dev-2026-11-22.json),520sources733b1f6/f73 : vraisSIGKILL aprèsregistre/avantCONTROL puis aprèsattachenative, deuxgardes120 indépendantes/restaurations jointes. Sources scellées/images/config/référence/5982 conservés, huitcompteurs0 ; aucunepurge métier déduite. Count22:10, nominalsource10001HTTP et régressions restent requis.
