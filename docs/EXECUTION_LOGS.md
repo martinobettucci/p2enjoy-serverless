@@ -209,6 +209,31 @@ Timeout/coût excessif ou stockage indisponible donnent un refus contrôlé 503,
 sans anciennes lignes exposées ni succès de secours. ACL et visibilité sont
 relues après l'IO ; modification du contexte/politique refuse le résultat périmé.
 
+Précision d'implémentation décidée avant correction : le budget monotone de
+deux secondes est partagé par tous les nouveaux IO SQL du journal, y compris
+sujet et vérification finale. La même deadline est transmise aux workers,
+délais SQLite et progress handlers. Le protocole OIDC commun (réseau et
+stockage des identités) garde ses bornes existantes ; ce budget ne promet pas
+une réponse HTTP totale de deux secondes pendant un renouvellement SSO.
+
+Après le worker principal et la nouvelle autorisation réelle, une courte
+transaction `BEGIN IMMEDIATE`, hors boucle HTTP, vérifie ensemble visibilité,
+politique et droits courants. Cette réservation empêche une révocation ou
+purge de committer entre les SELECT de cette décision. Les droits sont relus
+en dernier ; la transaction est entièrement jointe avant restitution de la
+place. Son commit constitue le point de décision de lecture. Une révocation
+acceptée avant ce point refuse le contenu ; une écriture concurrente qui doit
+attendre cette réservation est ordonnée après la lecture et protège les appels
+suivants. Aucun verrou n'est conservé pendant l'envoi réseau de la réponse.
+Une simple transaction de lecture WAL, ou une suite de SELECT sur son ancien
+snapshot, ne fournit pas cette frontière : ce choix est écarté pour ce motif.
+La réservation ne change aucune donnée métier et reste sous la même deadline.
+
+La preuve distingue donc le changement accepté pendant le premier IO (refus
+du résultat) et l'écriture retenue pendant la transaction finale (ordre natif
+des commits puis refus des lectures suivantes). Elle ne fait pas passer un
+simple timeout pour une vérification discriminante des droits.
+
 Les messages applicatifs de fonctions supprimées ne sont pas ouverts par cette
 API. Une vue service peut conserver les résumés fixes de plateforme selon les
 ACL de l'audit existant ; noms inaccessibles et diagnostics privés sont retirés.

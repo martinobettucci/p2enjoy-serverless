@@ -1,5 +1,33 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — frontière SQL finale des lectures de journaux
+
+La première revue backend a trouvé un budget d'enveloppe appliqué à tort aux
+exports et une purge de contenu trop tardive ; ils sont corrigés avant E2E.
+La relecture ajoutée a ensuite quitté la boucle HTTP, avec compteur pris avant
+IO et autorisation réelle répétée. La seconde revue montre qu'un BEGIN WAL
+conserve néanmoins un ancien snapshot si le dernier IO est retenu après le
+premier SELECT. Elle demande aussi de propager la deadline restante aux SQL.
+
+Décision persistée avant cette correction : une courte réservation SQLite
+BEGIN IMMEDIATE dans le worker final fournit le point de décision, droits
+relus en dernier et commit joint avant réponse. Un changement déjà accepté
+refuse le contenu ; une mutation concurrente attend ce point et protège les
+lectures suivantes. Même budget SQL cumulé de deux secondes, hors protocole
+OIDC commun, propagé à chaque callback/progress handler/busy timeout. Aucun
+verrou pendant le réseau ni restauration de données. Le contrat072 nomme
+les deux scénarios de concurrence à prouver, sans succès acquis.
+
+## 22 novembre 2026 — reste de rétention repéré avant adaptation des clients
+
+L'exploration RO SLS-072 confirme que la garde de continuité des trois preuves
+de rétention compare les SHA entiers de schedules.py, execution.py et
+schedule_calendar.py. Le raccordement des journaux modifie execution.py ;
+cette égalité ne sera donc plus vraie sur011. Reste inscrit en091.3 avant
+tout traitement de la garde. Les preuves/captures scellées et leurs octets
+restent intacts ; leur époque ne devient pas une preuve courante par simple
+rapprochement de code. Le socle49/543 et la clôture072 restent à qualifier.
+
 ## 22 novembre 2026 — contrat des journaux SLS-072 avant code
 
 070 et118 livrés et poussés en fd95419, arbre propre avant cette unité.

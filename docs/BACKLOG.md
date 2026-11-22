@@ -2696,7 +2696,7 @@ unitaires des garde-fous touchés, E2E réels, ressources restituées recoupées
 ## SLS-091 — Rétention et nettoyage du moteur d'exécution
 
 Statut : [~] —091.1 est qualifié : bornes numériques et âge réel rapprochés ;
-le nettoyage résiduel091.2 reste ouvert.
+le nettoyage résiduel091.2 et la nouvelle continuité011 de091.3 restent ouverts.
 Nature : Qualifier. Dépend de : SLS-040. Ordre : 10. Reste à faire de SLS-040.
 
 Critères d'acceptation :
@@ -2716,6 +2716,15 @@ Critères d'acceptation :
   provoquer : perte avant/après armement, gardien perdu pendant STOP, CONT avant
   TERM, reçu ou jointure indisponible et identité conservée sans signal étranger.
   Le cas nominal de suspension ne les qualifie pas par lui-même.
+- [ ] SLS-091.3 Continuité de rétention après l'instrumentation SLS-072 et
+  la migration011 : `execution.py` change, donc l'égalité de sources exigée
+  par `retained_retention_proofs()` n'est plus acquise. Les trois manifestes
+  scellés et leurs captures restent inchangés et qualifiés à leur époque.
+  Avant adaptation de cette garde, écrire le contrat de preuve courante et
+  conserver la distinction historique/courant. Un rapprochement de code ou
+  une durée d'une minute ne prouve pas sept jours réellement écoulés sur011.
+  Aucune régression complète courante n'est revendiquée tant que cette
+  précondition du socle49/543 n'est pas satisfaite.
 
 Tests exigés : unitaires de la rétention, E2E sur horloge et volume réels, ressources
 restituées recoupées.
