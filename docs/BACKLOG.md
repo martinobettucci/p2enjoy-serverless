@@ -3411,6 +3411,10 @@ Dépend de : SLS-063. Contrat : [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR
 - [ ] SLS-117.2 Diagnostic réel, borné et séparé à zéro groupe qualifié : observer
   la requête originale après navigation, avec événements navigateur et CDP natifs,
   candidat et nettoyage propres ; établir la provenance et la fin avant correction.
+  Revue du diagnostic avant exécution : l’expiration20s quittait l’attente sans
+  fin/dernière sonde ni GET indépendant du candidat. Conserver échéance, fin,
+  résultat absent ou reçu et lecture GET avant de réémettre ce rouge, sans
+  prolongation de fenêtre ni conversion en réussite.
 - [ ] SLS-117.3 Persister le résultat et la décision avant correction du client ;
   nouveau gel et nouveau7+25sans cumul, neuf handlers, une garde, quatre vrais
   uploads partiels, dix captures ciblées et22communes inspectées, purge physique.

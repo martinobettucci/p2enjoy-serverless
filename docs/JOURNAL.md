@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 22novembre2026 — client diagnostique117 préparé
+
+Après23fbd4d poussé, client dédié sans filtre ni saut de la campagne7+25.
+Observations PW et CDP Network/Page par UUID/requestId/frame/loader, bornées,
+conservées avant assertions ; horloges séparées. Trois étapes/0groupequalifié,
+retourGET et nettoyageAPI avant fermeture contexte. SyntaxeJS et index468vérifiés ;
+revue sans blocage après conservation du timeout/GET et dernière sélection bornée.
+Produit/images/manuel inchangés, aucune cause nouvelle ; diagnostic non exécuté.
+
+
 ## 22novembre2026 — observation réseau non acquise,117 enregistrée
 
 Le premier banc070 becedfc/466 termine89379/sortie1/joint après quatre groupes

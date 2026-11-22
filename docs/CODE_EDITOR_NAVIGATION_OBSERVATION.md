@@ -123,3 +123,18 @@ neuf handlers/une garde/quatre uploads et32captures inspectées avec toutes les
 conservations habituelles. Le diagnostic et le premier rouge restent séparés à
 zéro groupe ajouté.117 ne ferme qu’avec ce replay ;070 garde ses critères de
 coupures receiving/validating et de persistance après redémarrage.
+
+## Préparation du diagnostic, sans exécution
+
+Client dédié implémenté, syntaxe JS contrôlée. Observateurs Playwright par
+requête et session CDP avec2048événements conservés au plus ; aucune interception.
+Les GET du candidat au retour sont relevés séparément du POST original. L’UUID,
+la version et le frame/loader initiaux sont recoupés avant départ, et la réponse
+est comparée à l’init du nouveau document dans le seul domaine temporel CDP.
+L’expiration conserve deadline, dernière sonde, fin réelle et GET indépendant
+avant de réémettre l’échec ; la sélection finale ne retient que les événements
+déjà reçus avant deadline, aucun événement tardif ne l’acquitte.
+Le canal context.request reste vivant pour le nettoyage ; callbacks/listeners,
+CDP et navigateur sont fermés ensuite. Trois étapes, trois invocations et trois
+captures desktop attendues, zéro groupe qualifié. Index468sources vérifié à
+l’écriture ; diagnostic non exécuté, cause et correction toujours non établies.
