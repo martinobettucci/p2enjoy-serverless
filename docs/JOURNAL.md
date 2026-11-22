@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — gardes de bascule115 précisées avant exécution
+
+La revue de l’opérateur préparé refuse l’image seule comme preuve de propriété
+du conteneur de retour, et relève une enveloppe SSH trop courte. Aucun opérateur
+n’a été exécuté. Décision préalable : étiquette d’opération unique sur control
+via complément Compose privé, identités natives enregistrées et recontrôlées,
+fichiers officiels inchangés ; principal300s/secours180s/transport600s avec reçu
+de terminaison locale même en expiration. L’étiquette ne change aucun paramètre
+applicatif. Le contrat est amendé avant correction de cet opérateur de bascule.
+
 ## 22 novembre 2026 — image115 construite, pin046 avant bascule
 
 Build DEV au gel d028cb8/462sources terminé sortie0 et client joint : image04604089,

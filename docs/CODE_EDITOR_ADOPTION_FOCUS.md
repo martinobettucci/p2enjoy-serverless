@@ -106,3 +106,19 @@ reçu de retour, sans relance E2E automatique. Ce retour borné évite qu’une
 erreur d’image laisse le contrôle indisponible ; il ne touche pas la référence.
 Une image, un conteneur ou une configuration d’origine inconnue interdit ce
 retour automatique et conserve les observations pour instruction.
+
+La bascule attache au seul conteneur control une étiquette d’opération unique,
+via un complément Compose privé dans le dossier de sauvegarde. Ce fichier ne
+contient que cette étiquette ; les deux fichiers officiels, l’environnement et
+le service de référence restent inchangés. Le retour admet uniquement le CID/
+démarrage initial exact, ou le conteneur portant l’étiquette acquise de cette
+opération et l’image candidate ; il conserve CID/création/démarrage/PID/naissance
+observés puis les recontrôle avant recréation. Une même image sans ce lien
+ne prouve pas la propriété. Le fichier et son SHA sont conservés dans le reçu.
+
+Budget distant principal300s, secours180s, publication/jonction et marge de
+transport120s : SSH600s. L’alarme distante et les commandes partagent la borne
+de leur phase ; un changement de phase de secours conserve son reçu. Même sur
+expiration locale, terminer/joindre le seul transport possédé, conserver son
+résultat et ne pas revendiquer la fin distante sans observation. Aucune campagne
+E2E ne part d’un état de bascule ou de secours non confirmé.
