@@ -8,7 +8,7 @@ Les commandes, captures et preuves historiques gardent leurs sources et résulta
 
 ## Époque et autorité
 
-L'image à qualifier est f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0,
+La première époque011 qualifiée utilise f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0,
 le runtime1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a.
 Les empreintes complètes des modules exécutés et des sources du banc sont figées
 avant chaque campagne. Un changement produit impose de nouveaux passages affectés.
@@ -218,3 +218,46 @@ mêmes services/CID/image/démarrage/configuration/collection et les mêmes reç
 SHA et modes canoniques. La qualification attend aussi l’état terminal puis
 l’arrêt et la jonction réels de sa seule unitéroot ; diagnostic = zéro groupe de
 clôture, aucune rétention historique réadditionnée.
+
+
+## Exécuteur courant après optimisation133
+
+La bascule gardée du22novembre à22:25:50UTC sert désormais
+`sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7`.
+Ses42backend diffèrent def73 seulement par execution_logs.py ; quatreweb et
+migrations sont identiques. Le contexte de build réel est gelé. Cette image et
+le runtime1e64 ont leurs propres exports canoniques, vérifiés avant toutefenêtre.
+Les huit clients/opérateurs courants d’éditeur et de fixtures pinés sur f73
+utilisent maintenant ce seul exécuteur approuvé ; leurs oracles restent stricts.
+Le profiler133 et le diagnostic90/5 conservent leur imagef73 de mesure historique.
+
+Pour les seules sources numériques011 du manifeste nommé a5a8fc06, vérifié
+intégralement par verify_capture, l’imagef73 scellée atteste le dataset tandis que
+f016 l’exécute. Avant mkdir/guard/arrêt, vérifier imageoriginale saine égale à
+f016, migrations001..011 exactes, sources embarquées égales aux sources locales
+synchronisées, runtime égal aux exports et préservationf016 vérifiée. Le retour
+source garde tous ses champs inchangés ; l’exécuteur est enregistré séparément
+et l’observateur exige cette même imageoriginale gelée. Les branches009 restent
+liées à leur imagecapturée, sans acceptation générique d’un autre dataset.
+Les deux pins du replayâge courant suivent f016 ; sources009/c59 inchangées.
+
+Les modesinvalid courants prouvent, avantfenêtre, le refus de l’ancienf73 pourtant
+disponible et de la vraieimageruntime comme exécuteurs. Les huit refus numériques
+existants deviennent dix ; les treize refusâge deviennent quatorze. Comptages
+propres et noms des groupes suivent ces nombres, sans réaddition historique.
+La préflight numérique1..38 reste réservée à un âge réel compatible ; a5a8fc06
+ayant dépassé39fenêtres ne peut plus la réussir. Son refus historique conserve
+sa portée. Aucune horloge ni date ne change pour fabriquer cette éligibilité.
+
+Trois chemins publics courants sont fixés avant code de garde :
+`evidence/schedule-firing-retention-count-schema011-query-dev-2026-11-22.json`,
+`evidence/invocation-source-retention-volume-schema011-query-dev-2026-11-22.json`,
+`evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json`.
+Leurs bruts gzip sont nommés dans chaque manifeste. La garde exige completed,
+imagef016 exacte et quatre modules courants exacts : execution.py, schedules.py,
+schedule_calendar.py et execution_logs.py. Elle vérifie SHA compressé et SHA
+noncompressé en lisant le gzip intégralement ; aucun glob de dernièrepreuve ni
+réécriture d’une preuvef73. Un chemin manquant reste un refus. Chaque preuve
+reste ciblée (3numériques,3source,6âge) ; aucun de ses groupes n’est ajouté au
+socle49/543. Les nouveaux refus/pertes et les régressions012API/10UI/25communs,
+49/543/18 puis32/276 restent distincts et requis.
