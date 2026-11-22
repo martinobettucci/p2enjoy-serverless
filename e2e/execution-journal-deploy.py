@@ -28,6 +28,9 @@ PREFIX='serverless-apply-journal-schema-'
 UPDATE_PREFIX='serverless-update-journal-code-'
 UPDATE_BASELINE='sha256:1aa70214be1ba72bd75bea301fac23a3dbcdaf6547de1b3521c9547c8ac35292'
 FOCUS_BASELINE='sha256:bf9b61a60ae4d9284b037cce90816754c85ad43195500fa8542f8cfcd8c73c17'
+# @spec docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-du-diagnostic-de-maintenance--sls-1265
+DIAGNOSTICS_BASELINE='sha256:a7d7491a8cb698c9e2ee739339c60dc3846d84c8242b55a13a9e9b4f21edb1d7'
+PROFILE_BASELINES={'purge-rollback':UPDATE_BASELINE,'journal-focus':FOCUS_BASELINE,'maintenance-diagnostics':DIAGNOSTICS_BASELINE}
 OLD='sha256:04604089a8cb61d6015be0cde1671f29265878ff4f6f081509542ebc126055fc'
 RUN_FOLDER=None
 
@@ -219,8 +222,8 @@ def identity(folder):
     assert item.get('mode','schema-migration') in ('schema-migration','code-update')
     assert folder.name.startswith(UPDATE_PREFIX if item.get('mode')=='code-update' else PREFIX)
     if item.get('mode')=='code-update':
-        assert item['update_profile'] in ('purge-rollback','journal-focus')
-        assert item['old']['image']==(FOCUS_BASELINE if item['update_profile']=='journal-focus' else UPDATE_BASELINE)
+        assert item['update_profile'] in PROFILE_BASELINES
+        assert item['old']['image']==PROFILE_BASELINES[item['update_profile']]
     return item
 
 
@@ -362,8 +365,8 @@ def verify_new(item):
 def prepare(image,*,mode='schema-migration',profile='purge-rollback'):
     signal.signal(signal.SIGALRM,expired);signal.alarm(90)
     assert mode in ('schema-migration','code-update')
-    assert profile in ('purge-rollback','journal-focus')
-    baseline=(FOCUS_BASELINE if profile=='journal-focus' else UPDATE_BASELINE) if mode=='code-update' else OLD
+    assert profile in PROFILE_BASELINES
+    baseline=PROFILE_BASELINES[profile] if mode=='code-update' else OLD
     assert re.fullmatch('sha256:[0-9a-f]{64}',image) and image!=baseline
     manifest=json.load(sys.stdin);assert set(manifest)=={'backend','web'} and len(manifest['backend'])==42 and len(manifest['web'])==4
     assert all(re.fullmatch('[0-9a-f]{64}',value) for group in manifest.values() for value in group.values())
@@ -383,6 +386,9 @@ def prepare(image,*,mode='schema-migration',profile='purge-rollback'):
         if profile=='purge-rollback':
             assert baseline_manifest['web']==manifest['web'],'code_update_web_changed'
             assert changes==['control/app/execution_logs.py'],'code_update_unexpected_backend_changes'
+        elif profile=='maintenance-diagnostics':
+            assert baseline_manifest['web']==manifest['web'],'diagnostics_update_web_changed'
+            assert changes==['control/app/execution.py','control/app/schedules.py'],'diagnostics_update_unexpected_backend_changes'
         else:
             assert not changes,'focus_update_backend_changed'
             def by_type(web):
@@ -499,7 +505,7 @@ def finalize(folder):
 
 if __name__=='__main__':
     assert os.geteuid()==0 and socket.gethostname()=='infra-serverless','DEV_only'
-    assert len(sys.argv)==3 and sys.argv[1] in ('prepare','prepare-update','prepare-ui-update','apply','finalize')
-    if sys.argv[1] in ('prepare','prepare-update','prepare-ui-update'):print(json.dumps(prepare(sys.argv[2],mode='schema-migration' if sys.argv[1]=='prepare' else 'code-update',profile='journal-focus' if sys.argv[1]=='prepare-ui-update' else 'purge-rollback')),flush=True)
+    assert len(sys.argv)==3 and sys.argv[1] in ('prepare','prepare-update','prepare-ui-update','prepare-diagnostics-update','apply','finalize')
+    if sys.argv[1] in ('prepare','prepare-update','prepare-ui-update','prepare-diagnostics-update'):print(json.dumps(prepare(sys.argv[2],mode='schema-migration' if sys.argv[1]=='prepare' else 'code-update',profile={'prepare-ui-update':'journal-focus','prepare-diagnostics-update':'maintenance-diagnostics'}.get(sys.argv[1],'purge-rollback'))),flush=True)
     elif sys.argv[1]=='apply':apply(Path(sys.argv[2]))
     else:finalize(Path(sys.argv[2]))

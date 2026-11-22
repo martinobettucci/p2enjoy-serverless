@@ -507,8 +507,16 @@ class Execution:
                 else:await self.tick()
                 self.maintenance_error=False
             except Exception as error:
+                # @spec docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOGS.md#diagnostic-expurgé-de-maintenance--sls-1265
+                previous=self.maintenance_error
                 self.maintenance_error=True
-                logger.error(json.dumps({'event':'execution.maintenance_failed','error_type':type(error).__name__}))
+                trace=error.__traceback__
+                while trace and trace.tb_next:trace=trace.tb_next
+                logger.error(json.dumps({'event':'execution.maintenance_failed','error_type':type(error).__name__,
+                    'sqlite_errorcode':getattr(error,'sqlite_errorcode',None),'sqlite_errorname':getattr(error,'sqlite_errorname',None),
+                    'phase':'tick' if self.reconciled else 'recovery','previous_maintenance_error':previous,
+                    'source':{'file':trace.tb_frame.f_code.co_filename.rsplit('/',1)[-1],
+                        'function':trace.tb_frame.f_code.co_name,'line':trace.tb_lineno} if trace else None}))
             self.wake.clear()
             with suppress(TimeoutError):await asyncio.wait_for(self.wake.wait(),.1 if self.reconciled else 5)
 
