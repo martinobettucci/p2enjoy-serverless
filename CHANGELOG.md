@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-134 : diagnostics de phase/source/ligne et statutwaitpid réel intégrés,
+  exception primaire conservée avant nettoyage. Stderrpilote haché et préfixe
+  privé borné dans touslesmodes, EOF distinct de sortie ; refus réel enrichi
+  sans changer signaux/délais/oracles. Syntaxes/revue passent ; E2E encoredu.
+
 - SLS-133/134 : nominal f016 produit10000HTTP dans la marge puis échoue après
   attache sur une assertion sans diagnostic. Rouge conservé, origine restaurée,
   worker arrêté et huitcompteurs0. Contrat du diagnostic natif discriminant et

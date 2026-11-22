@@ -20,10 +20,12 @@ const productionProfile=options.length===1&&options[0]==='--production-profile';
 const observerDiagnostic=observerRefusal||Boolean(observerDeadline);
 assert(options.length===0||observerDiagnostic||productionProfile,'unknown_source_retention_options');
 const report=new URL((productionProfile?'invocation-source-production-profile-':observerDeadline?'invocation-source-observer-'+observerDeadline+'-':observerRefusal?'invocation-source-observer-refusal-':'invocation-source-retention-volume-')+campaign+'.json',out),events=[],checks=[],observations=[],functions=[],responses=[],producers=[];
-const driverErrors=[];
+// @verifies docs/BACKLOG.md#sls-134 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134
+const driverErrors=[],driverErrorHash=createHash('sha256'),driverErrorLimit=1024*1024;
+let driverErrorBytes=0,driverErrorStored=0,driverStderr;
 let caller,stopProducing=false,saveQueue=Promise.resolve(),window,lastCall;
 let child,ended=false,exitCode=null,browser,context,admin,session,namespace,service,reader,work,archive,completed=false,cleanup=false,failure=null,restoration;
-function save(){saveQueue=saveQueue.then(async()=>{const p=new URL(report.pathname+'.pending','file:');await writeFile(p,JSON.stringify({campaign,mode:productionProfile?'production-profile':observerDeadline??(observerRefusal?'observer-refusal':'count'),...(productionProfile?{qualified_groups:0}:{}),completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,responses,function_ids:functions.map(v=>v.id),namespace_id:namespace?.id,exit_code:exitCode,failure,restoration},null,2)+'\n',{mode:0o600});await rename(p,report);});return saveQueue;}
+function save(){saveQueue=saveQueue.then(async()=>{const p=new URL(report.pathname+'.pending','file:');await writeFile(p,JSON.stringify({campaign,mode:productionProfile?'production-profile':observerDeadline??(observerRefusal?'observer-refusal':'count'),...(productionProfile?{qualified_groups:0}:{}),completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,responses,function_ids:functions.map(v=>v.id),namespace_id:namespace?.id,exit_code:exitCode,failure,restoration,driver_stderr:driverStderr},null,2)+'\n',{mode:0o600});await rename(p,report);});return saveQueue;}
 async function until(action,message,seconds=90){const deadline=Date.now()+seconds*1000;while(Date.now()<deadline){const v=await action();if(v)return v;await new Promise(r=>setTimeout(r,250));}assert.fail(message);}
 async function event(name){return until(()=>{const v=events.find(v=>v.event===name);assert(v||!ended,'deployment_driver_stopped');return v;},'deployment_event_missing',150);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}finally{await save();}}
@@ -289,7 +291,7 @@ await mkdir(out,{recursive:true,mode:0o700});await save();let credentials;
 try{
  assert(!process.stdin.isTTY,'private_pipe_required');const input=createInterface({input:process.stdin});credentials=await new Promise((resolve,reject)=>{input.once('line',line=>{try{assert(line.length<=8192);resolve(JSON.parse(line));}catch{reject(new Error('private_input_invalid'));}finally{input.close();}});input.once('close',()=>reject(new Error('private_input_missing')));});assert(credentials?.username&&credentials?.password);
  const image=(await run('ssh',[...ssh,'runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock','inspect','--format','{{.Image}}','serverless-api'],{timeout:20000})).stdout.trim();assert.match(image,/^sha256:[a-f0-9]{64}$/);
- child=spawn('ssh',[...ssh,'python3','-B',helper,'instance-limit',campaign,image,'--guard-seconds=2700'],{stdio:['pipe','pipe','pipe']});createInterface({input:child.stdout}).on('line',line=>{try{events.push(JSON.parse(line));}catch{events.push({event:'invalid-driver-output'});}});child.stderr.on('data',chunk=>{if(observerDiagnostic)driverErrors.push(chunk);});child.stdin.on('error',()=>{});child.on('close',code=>{ended=true;exitCode=code;});child.on('error',()=>{ended=true;exitCode=-1;});
+ child=spawn('ssh',[...ssh,'python3','-B',helper,'instance-limit',campaign,image,'--guard-seconds=2700'],{stdio:['pipe','pipe','pipe']});createInterface({input:child.stdout}).on('line',line=>{try{events.push(JSON.parse(line));}catch{events.push({event:'invalid-driver-output'});}});child.stderr.on('data',chunk=>{driverErrorHash.update(chunk);driverErrorBytes+=chunk.length;const keep=Math.min(chunk.length,driverErrorLimit-driverErrorStored);if(keep>0){driverErrors.push(chunk.subarray(0,keep));driverErrorStored+=keep;}});child.stdin.on('error',()=>{});child.on('close',code=>{ended=true;exitCode=code;});child.on('error',()=>{ended=true;exitCode=-1;});
  let initial,before,after;
  await check('SSO réel et deux instances préchauffées dans une installation isolée de même image',async()=>{
   const armed=await event('guard-armed'),ready=await event('instance-limit-ready');assert.equal(armed.guard_seconds,2700);assert(armed.timer_schedule.includes('OnActiveUSec=45min'));assert.equal(ready.container.image,image);assert.equal(ready.capacity.invocations.length,0);
@@ -336,6 +338,10 @@ try{
   const last=await lastCall;observations.push({scenario:'underfilled-observer-refusal',native:measured,terminal_status:status,last_http:last.error?{error_type:last.error.name}:{response:last.value}});await save();
   assert.equal(measured.completed,false);assert.equal(measured.failure_type,'AssertionError');assert.equal(measured.reason,'retention_history_incomplete');assert(measured.inherited_guard_lock);
   assert.deepEqual(measured.initial_counts,{total:2,terminal:0});assert.equal(measured.running.length,2);
+  assert.equal(measured.operator_source_sha256,createHash('sha256').update(await readFile(new URL('./invocation-source-retention-observer.py',import.meta.url))).digest('hex'));
+  const primary=measured.primary_failure;assert.equal(primary.phase,'validate_initial_history');assert.equal(primary.source.file,'invocation-source-retention-observer.py');assert.equal(primary.source.function,'observe');assert(Number.isInteger(primary.source.line)&&primary.source.line>0);
+  const operatorLines=(await readFile(new URL('./invocation-source-retention-observer.py',import.meta.url),'utf8')).split('\n');assert(operatorLines[primary.source.line-1].includes('retention_history_incomplete'),'native_failure_source_line_mismatch');
+  assert.deepEqual(primary.last_wait,measured.last_wait);const nativeStop=primary.last_wait;assert(nativeStop.result_available&&nativeStop.stopped&&!nativeStop.exited&&!nativeStop.signaled);assert.equal(nativeStop.pid,measured.pid);assert.equal(nativeStop.signal,(nativeStop.status>>8)&255);assert.equal(nativeStop.status&255,127);assert.equal(nativeStop.ptrace_event,nativeStop.status>>>16);assert(Number.isInteger(nativeStop.signal)&&nativeStop.signal>0&&nativeStop.signal<=64);
   assert(measured.running.every(v=>v.handler_started&&v.state==='running'&&v.completed_at===null));
   assert.deepEqual(measured.running.map(v=>v.function_id).sort(),functions.map(v=>v.id).sort());
   const heldHttp=measured.running.find(v=>v.function_id===functions[0].id),scheduled=measured.running.find(v=>v.function_id===functions[1].id),firing=measured.initial.firing;
@@ -357,6 +363,11 @@ try{
 finally{
  credentials=null;stopProducing=true;await Promise.allSettled(producers);if(lastCall)await lastCall;
  if(!cleanup&&child){child.stdin.end();try{const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,'restore',campaign],{timeout:150000,maxBuffer:12*1024*1024});restoration=JSON.parse(stdout.trim().split('\n').at(-1));cleanup=Boolean(restoration.control_healthy&&restoration.configuration_unchanged);}catch(error){failure={...failure,restoration_error:error.name};}await until(()=>ended,'failed_deployment_not_joined',60).catch(()=>{cleanup=false;});}
+ if(child){
+  const name='source-retention-driver-'+campaign+'.stderr',raw=Buffer.concat(driverErrors),streamEnded=child.stderr.readableEnded,joined=ended&&streamEnded;await writeFile(new URL(name,out),raw,{mode:0o600});
+  driverStderr={path:'.local/e2e/'+name,bytes:driverErrorBytes,captured_bytes:raw.length,captured_sha256:createHash('sha256').update(raw).digest('hex'),sha256:joined?driverErrorHash.digest('hex'):null,truncated:driverErrorBytes>driverErrorLimit,stream_ended:streamEnded,driver_joined:ended};
+  if(driverStderr.truncated||!joined)failure={...failure,driver_stderr_overflow:driverStderr.truncated,driver_stderr_unjoined:!joined};
+ }
  await caller?.dispose();await browser?.close();if(work)await rm(work,{recursive:true,force:true});await save();
 }
 assert(completed&&cleanup&&!failure,`invocation_retention_volume_failed:${report.pathname}`);console.log(JSON.stringify({completed:true,...(productionProfile?{mode:'production-profile',diagnostic_groups:checks.length,qualified_groups:0}:{groups:checks.length}),real_http_handlers:responses.length,report:report.pathname}));

@@ -32,6 +32,18 @@ def traced_process(pid):
     return {'pid': pid, 'birth': birth, 'tracer_pid': tracer}
 
 
+# @verifies docs/BACKLOG.md#sls-134 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134
+def wait_diagnostic(observer):
+    status=getattr(observer,'last_wait_status',None)
+    if status is None:return {'result_available':False}
+    stopped=os.WIFSTOPPED(status);exited=os.WIFEXITED(status);signaled=os.WIFSIGNALED(status)
+    return {'result_available':True,'pid':observer.last_wait_pid,'status':status,
+        'stopped':stopped,'signal':os.WSTOPSIG(status) if stopped else None,
+        'ptrace_event':status>>16 if stopped else None,'exited':exited,
+        'exit_code':os.WEXITSTATUS(status) if exited else None,'signaled':signaled,
+        'term_signal':os.WTERMSIG(status) if signaled else None}
+
+
 def observe(args, receipt, target):
     assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
     assert str(UUID(args.campaign)) == args.campaign
@@ -101,11 +113,15 @@ def observe(args, receipt, target):
         receipt.update(campaign=args.campaign, window=args.window, pid=pid, birth=birth,
                        container_id=current['id'], image=current['image'], running=active,
                        inherited_guard_lock=True, operator=traced_process(os.getpid()))
+        receipt['operator_source_sha256']=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+        receipt['phase']='attach_native_observer'
         observer = BlockingNativeObserver(pid)
         observer.start()
+        receipt['last_wait']=wait_diagnostic(observer)
         attached = traced_process(pid)
         receipt['after_attach'] = attached
         assert attached['birth'] == birth and attached['tracer_pid'] == os.getpid(), 'native_tracer_identity_changed'
+        receipt['phase']='read_initial_state'
         initial = state()
         receipt['initial'] = initial
         receipt['initial_counts'] = {'total': len(initial['invocations']),
@@ -113,11 +129,15 @@ def observe(args, receipt, target):
         atomic(target, receipt)
         # @spec docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#pannes-propres-de-lalarme35-et-de-la-commande40
         if args.deadline_fault:
+            receipt['phase']='arm_deadline_fault'
             from source_observer_deadlines import arm
             arm(args.campaign, args.deadline_fault, receipt, target, observer)
+        receipt['phase']='validate_initial_history'
         assert receipt['initial_counts'] == {'total': 10002, 'terminal': 10000}, 'retention_history_incomplete'
-        assert initial['firing'] and initial['firing']['state'] == 'dispatched' and initial['firing']['completed_at'] is None
+        receipt['phase']='validate_initial_firing'
+        assert initial['firing'] and initial['firing']['state'] == 'dispatched' and initial['firing']['completed_at'] is None,'initial_firing_not_dispatched'
         source_id = initial['firing']['invocation_id']
+        receipt['phase']='validate_initial_source'
         assert source_id in {v['id'] for v in active if v['trigger'] == 'schedule' and v['function_id'] == ids[1]}
         receipt['initial'] = initial
         atomic(target, receipt)
@@ -126,25 +146,32 @@ def observe(args, receipt, target):
         pending = None
         observer.resume()
         while True:
+            receipt['phase']='wait_native_stop'
             stopped = observer.wait(deadline)
+            receipt['last_wait']=wait_diagnostic(observer)
+            receipt['phase']='validate_native_stop'
             if stopped != signal.SIGTRAP | 0x80:
-                assert stopped not in (signal.SIGSTOP, signal.SIGTRAP)
+                assert stopped not in (signal.SIGSTOP, signal.SIGTRAP),'unexpected_native_stop'
                 observer.resume(stopped)
                 continue
+            receipt['phase']='read_native_syscall_info'
             phase, data = observer.info()
             if phase == 1:
                 pending = data[0]
             if pending in (3, 72, 75) and phase in (1, 2):
+                receipt['phase']='read_database_boundary'
                 counts = reader.rows('SELECT count(*) AS total,sum(completed_at IS NOT NULL) AS terminal FROM invocations')[0]
                 fire = firing()
                 assert fire and fire['invocation_id'] == source_id
                 if counts['terminal'] == 10002 and before is None:
+                    receipt['phase']='validate_first_terminal_frontier'
                     assert fire['completed_at'] is None, 'source_closed_before_first_frontier'
                     before = state()
                     assert all(v['state'] == 'succeeded' and v['handler_started'] for v in before['invocations'])
                     receipt['before'] = before
                     atomic(target, receipt)
                 elif before is not None and protected is None and counts['total'] == 10001:
+                    receipt['phase']='validate_protected_frontier'
                     assert fire['completed_at'] is None, 'source_closed_before_protected_gc'
                     protected = state()
                     ordinary = ordered([v for v in before['invocations'] if v['id'] != source_id])
@@ -154,6 +181,7 @@ def observe(args, receipt, target):
                     receipt['removed_while_protected'] = ordinary[-1]['id']
                     atomic(target, receipt)
                 elif protected is not None and counts['total'] == 10000 and fire['completed_at'] is not None:
+                    receipt['phase']='validate_final_frontier'
                     final = state()
                     assert ids_of(final['invocations']) == ids_of(ordered(before['invocations'])[:10000]), 'wrong_closed_survivors'
                     original_source = next(v for v in before['invocations'] if v['id'] == source_id)
@@ -169,8 +197,14 @@ def observe(args, receipt, target):
                     raise AssertionError('protected_gc_frontier_missed')
             observer.resume()
     except BaseException as error:
+        trace=error.__traceback__
+        while trace and trace.tb_next:trace=trace.tb_next
+        receipt['last_wait']=wait_diagnostic(observer)
         receipt['primary_failure'] = {'type': type(error).__name__,
-            'reason': str(error) if isinstance(error, (AssertionError, TimeoutError)) else None}
+            'reason': str(error) if isinstance(error, (AssertionError, TimeoutError)) else None,
+            'phase':receipt.get('phase'),'last_wait':dict(receipt['last_wait']),
+            'source':{'file':Path(trace.tb_frame.f_code.co_filename).name,
+                      'function':trace.tb_frame.f_code.co_name,'line':trace.tb_lineno} if trace else None}
         if receipt.get('inherited_guard_lock'):
             atomic(target, receipt)
         raise

@@ -4755,3 +4755,5 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
 
 Le défaut corrigé ici est l’absence de diagnostic, pas une cause rétroactive
 inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent intactes.
+
+134 — diagnostics intégrés sans changement d’algorithme natif : dernier waitpid remisàNone puis statutréel, phase/sourceSHA/ligne et snapshotprimaire, stderrnominal conservé avec EOF distinct et bornageprivé. Assertions du vrai refus après attache enrichies ; deuxASTPython/Node et revueRO passent sansP1/P2. Aucun E2E nouveau acquis à ce stade.

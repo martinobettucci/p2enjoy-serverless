@@ -3214,3 +3214,11 @@ utilise exclusivement `prepare-retention-query-update` depuis f73. Il vérifie
 avant préparation/arrêt/intention. Contrat :
 [EXECUTION_LOG_DEPLOYMENT](../docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-de-la-requête-de-rétention--sls-133).
 Construction et bascule sont des prérequis, sans groupe fonctionnel ajouté.
+
+
+SLS-134 enrichit `invocation-source-retention-volume.mjs --observer-refusal`
+avec le SHA/source/ligne/phase réels et le dernier statutwaitpid de l’attache.
+Le stderrpilote de touslesmodes est conservé en privé (SHAcomplet et préfixe1Mio),
+avec fin de flux et jonction distinctes ; dépassement rend la campagne rouge.
+Les oracles de rétention et les limites restent inchangés.
+Contrat : [INVOCATION_SOURCE_RETENTION_VOLUME](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134).

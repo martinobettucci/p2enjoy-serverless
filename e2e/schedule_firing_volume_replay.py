@@ -33,6 +33,8 @@ class BlockingNativeObserver(NativeObserver):
     """Wait for real child notifications with a monotonic deadline, without polling."""
     # @spec docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#dépassement-reproduit-et-décision-de-correction
     def wait(self, deadline):
+        # @verifies docs/BACKLOG.md#sls-134 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134
+        self.last_wait_pid = self.last_wait_status = None
         previous_mask = signal.pthread_sigmask(signal.SIG_BLOCK, set())
         try:
             signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGCHLD})
@@ -46,6 +48,7 @@ class BlockingNativeObserver(NativeObserver):
                 assert time.monotonic() < deadline, 'native_stop_not_observed'
                 waited, status = os.waitpid(self.pid, os.WNOHANG)
                 if waited:
+                    self.last_wait_pid, self.last_wait_status = waited, status
                     assert os.WIFSTOPPED(status), 'control_exited_during_observation'
                     self.stopped = True
                     assert time.monotonic() < deadline, 'native_stop_not_observed'
