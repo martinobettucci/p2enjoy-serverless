@@ -5,7 +5,7 @@ import hashlib,json,os,shutil,socket,stat,subprocess,sys,tempfile,time
 from pathlib import Path
 from uuid import UUID
 
-ROOT=Path('/srv/p2enjoy-serverless');IMAGE='sha256:b452ef1622cf106a85e42c9b616c87c34fcc06123c9dfdfcfe89c48a49af5575'
+ROOT=Path('/srv/p2enjoy-serverless');IMAGE='sha256:433da1501d03a26915a0ccf9b8a52babd62d20393452a0e42dd5cdfeb375d981'
 D=['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock']
 assert os.geteuid()==0 and socket.gethostname()=='infra-serverless'
 assert len(sys.argv)==3 and sys.argv[1] in ('create','cleanup')

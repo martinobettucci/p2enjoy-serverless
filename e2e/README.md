@@ -215,6 +215,12 @@ Les rapports ne contiennent que métadonnées/SHA ; données transférées par S
 cleanup des fonctions, jeton, parents, fichiers et conteneur avant succès.
 Le [contrat](../docs/CODE_EDITOR_ARCHIVE_LIMITS.md) précède le code ; syntaxe
 et revue précèdent le premier passage réel. Aucun nouveau résultat qualifié.
+La reprise du22novembre exige le pin433da150, les dix noms de migration exacts
+et600s par requête administratrice ; appelant240s et handler60s inchangés.
+Après le client, `schedule_regressions.native_state({namespace: function_ids})`
+recoupe les cinq UUID par le collecteur partagé, dont le seul nouveau préfixe
+autorisé est code-editor-archive-limits suivi de8hex. Tous ses contrôles physiques
+restent requis ; les seuls compteurs SQL de l’inspecteur ne les remplacent pas.
 
 ## Capacité globale de publication éditeur — qualifiée en DEV
 
