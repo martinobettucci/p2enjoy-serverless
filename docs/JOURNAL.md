@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — API04 passe, frontière native finale inscrite en121
+
+Le second passage499sources/1aa70214 passe01/02/03/04/07 : les octets expurgés,
+projections et la vraie minute correspondent au contrat. API08 échoue ensuite
+avant acquisition de son verrou natif :40s,66178événements, zéro retenu. Son
+opérateur restitue tous les threads (TracerPid0), contrôle sain et garde jointe.
+Le client termine1 et nettoie physiquement ses quatre fonctions ; huit compteurs
+actifs restent0,5982originaux et configuration/services conservés. Cinq groupes
+partiels, zéro qualifié ; pas de25communs exécutés sur ce passage échoué.
+
+121 est inscrite avant diagnostic/correction. Conserver le programme de replay,
+les499sources archivées avant exécution et le brut43182a4a. Le prochain diagnostic
+mesurera les vrais syscalls/threads et résultat HTTP sous les bornes existantes,
+sans présumer d'un défaut produit ni augmenter un délai.120.4 reste ouverte.
+
 ## 22 novembre 2026 — diagnostic120 prouvé, correction du client décidée
 
 Sur499sources/1aa70214, huit appels réels sont mesurés avant assertions :

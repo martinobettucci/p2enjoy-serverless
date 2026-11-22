@@ -71,7 +71,8 @@ bloquée est sautée et son blocage est nommé.
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
-| 3 | [SLS-120](#sls-120) Frontière réelle du buffer de journaux | Corriger | `[~]` | SLS-040 | cette unité |
+| 3 | [SLS-120](#sls-120) Frontière réelle du buffer de journaux | Corriger | `[~]` | SLS-040, SLS-121 | cette unité |
+| 3 | [SLS-121](#sls-121) Acquisition native du verrou final du journal | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -3567,7 +3568,39 @@ troncature et sans préfixe divulgué. Nettoyage physique et5982originaux recoup
 Décision avant correction : conserver le produit ; le client éprouvera la borne
 brute dans un service sans secrets et le retrait de protection séparément dans
 le service à secrets. Manuel inchangé : il décrit une limite et l'expurgation,
-sans promettre une taille égale à64Kio après celle-ci. Le replay complet reste dû.
+sans promettre une taille égale à64Kio après celle-ci. Le replay complet reste dû. Le second passage passe API04 et07 mais échoue
+au verrou natif d’API08 ;120.4 attend maintenant [SLS-121](#sls-121).
 
 À mettre à jour : contrat de collecte dans `EXECUTION_LOGS.md`/`EXECUTION.md`,
 preuve et clients ; manuel s'il décrit incorrectement le buffer expurgé.
+
+## SLS-121 — Acquérir la frontière native de décision du journal
+
+Statut : [~] — API08 du second passage072 échoue avant acquisition de la
+barrière finale :40s,66178événements natifs, zéro thread retenu. Les cinq groupes
+précédents restent partiels, zéro qualifié. Nature : Corriger. Dépend de :
+SLS-040. Ordre : 3. Contrat de frontière :
+[EXECUTION_LOGS](EXECUTION_LOGS.md#instrumentation-native-des-lectures).
+
+Résultat attendu : observer le vrai verrou d’écriture SQLite acquis par
+journal-verify avant de laisser progresser une écriture concurrente, avec un
+banc qui respecte les délais réels du produit et restitue ses threads. Ne pas
+changer de produit pour satisfaire une hypothèse non mesurée du banc.
+
+- [x] SLS-121.1 Sceller le rouge499sources/1aa70214, ses programmes et reçus,
+  cinq groupes partiels hors qualification ; nettoyage physique et5982originaux.
+- [ ] SLS-121.2 Diagnostic réel des syscalls de la lecture finale : thread,
+  commande/fd/verrou/résultat et chemin effectifs, résultat HTTP et chronologie.
+  Garder les bornes40/45/50/60s et les2s du produit ; aucun syscall remplacé,
+  registre modifié, résultat injecté ni écriture de données SQL.
+- [ ] SLS-121.3 Décision/motif persistés avant correction du seul élément en
+  cause ; le rouge précède toute correction de comportement produit. Les
+  conditions natives et l’observation du writer restent strictes.
+- [ ] SLS-121.4 Rejouer API08 dans les12API réels puis25communs frais,
+  sources/image recoupées, gardes/threads/consommateurs joints, purge physique
+  et captures communes inspectées.120.4 et072 gardent leurs critères propres.
+
+Premier rouge : [preuve](evidence/execution-journal-final-lock-first-failed-dev-2026-11-22.json),
+brutSHA `43182a4a…`, archive des499sources `09804d14…`. Le contrôle/référence,
+leur démarrage, configuration et originaux sont conservés. Cause non établie ;
+le premier rouge de buffer et son diagnostic restent des époques distinctes.
