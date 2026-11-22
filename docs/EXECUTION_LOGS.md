@@ -664,3 +664,16 @@ etPython ne propagent l'erreur. Le plafond2s/64arrêts et la restitutionfinally
 restent applicables ; un FD réutilisé ou une ouverture réussie ne prouve pas
 cette faute. Le reçu conserve flags, retours et ordre de restauration. L'oracle
 HTTP exige503/log_read_unavailable puis lecture réussie après restitution.
+
+
+### Effacement massif des anciens logs — SLS-128
+
+Les purges de fonction et de service effacent les anciens logs avec UPDATE OR
+ROLLBACK, dans la transaction qui fait autorité pour la purge. Une erreur annule
+l'ensemble comme dans Database.transaction ; aucun effacement partiel n'est
+accepté. Ce choix évite le journal d'instruction multilignes deSQLite, capable
+de saturer /tmp16Mio alors que /state reste disponible. Aucun pragma, montage ou
+budget n'est augmenté. Après le corpus16Mio, la reprise de l'archive retenue
+et, après16Mio+1, l'archivage de la fonction suivi de la suppression du service
+éprouvent les deux véritables chemins avant leur purge physique. Le moniteurRO
+recoupe /proc/PID/root/tmp, les seuls métadonnéesFDtemporaires et le HTTP réel.

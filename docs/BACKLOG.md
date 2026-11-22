@@ -4140,7 +4140,7 @@ corpus+1 puis les campagnes propres et communes, sans étatSQL fabriqué.
 
 - [x] SLS-128.1 Conserver rouge, programmes, résultat exact16Mio, références
   possédées et erreurs primaires/nettoyage ; relever l'état natif actuel.
-- [ ] SLS-128.2 Recouper le chemin/code public du503, propriétaires, opérations,
+- [x] SLS-128.2 Recouper le chemin/code public du503, propriétaires, opérations,
   délais et erreurs réelles. Décider et écrire la cause/issue avant correction.
   Reprendre le nettoyage uniquement sur les ressources possédées, via les API,
   en conservant le premier rouge ; aucune suppression SQL ni faux succès.
@@ -4164,3 +4164,33 @@ est déjà active, la joindre au lieu d'en créer une. Un503 garde son intention
 et reste rouge ; pas de répétition automatique aveugle. La reprise éventuelle
 du nettoyage réutilise uniquement les UUID de ce rapport et prouve ensuite
 l'absence physique et les parents supprimés, sans réécrire le rapport initial.
+
+
+Diagnostic128 : [tmpfs rempli par le journalSQLite temporaire](evidence/execution-journal-byte-purge-temp-full-diagnostic-dev-2026-11-22.json).
+L'unique intention conservée reçoit503 en521,64ms. Même request_id dans
+SQLITE_FULL/purge_function224 ; /proc du PID/naissance/CID1aa épinglés montre
+un FD etilqs déjà délié de16777216octets, /tmp libre0 puis16777216 après fermeture.
+La base dispose de100Go et de nombreuses pages libres. SQLite3.46.1 actif,
+aucun trigger surinvocations, seules FKfunction_id/service_id, inchangées par
+cet effacement.248logs occupent16067621octets ; leurs pages avant modification
+font déborder le sous-journal d'instruction dans /tmp16Mio. Aucun contenu lu.
+
+Décision avant correction128 : les deux effacements de logs par fonction/service
+utilisent UPDATE OR ROLLBACK dans leur transaction existante. SQLite documente
+l'absence de statementjournal pour cette clause ; notre Database.transaction
+annule déjà toute la transaction si une exception est propagée et vérifie
+in_transaction avantROLLBACK. Même effacement atomique, sans nouveau budgetRAM,
+montage, pragma global, dépendance ou changement de rétention. Augmenter/tmp
+repousserait la panne sans corriger cette sauvegarde d'instruction inutile ;
+forcer temp_store en mémoire déplacerait le problème vers les512Mio du contrôle.
+
+Après construction et mise à jour gardée011→011, reprendre une seule intention
+sur l'archive possédée et prouver son succès, l'absence de saturationtmp, la
+purge physique et le retrait des parents. Les deux corpusAPI06 gardent leurs
+bornesexactes ; après+1, archiver la fonction puis supprimer son service avant
+purge physique éprouve aussi l'effacement bulk parservice. Chaque refus avant
+cette décision reste rouge ;12API/10UI/25communs frais restent requis.
+Sources : [journaux d'instructionSQLite](https://www.sqlite.org/tempfiles.html#statement_journal_files),
+[ROLLBACK](https://www.sqlite.org/lang_conflict.html). La mise à jour conserve
+la base011 et ne remet jamais046 ni une ancienne sauvegarde ; son contrat
+spécifique doit précéder son pilote.
