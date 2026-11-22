@@ -207,7 +207,11 @@ au syscall par l’opérateur déjà qualifié, sans modifier ses gardes. Sauveg
 surface, deux adoptions et abandon sont confrontés aux réponses tardives,
 sur ordinateur/mobile. Focus volontaire, recalage5+2 et refus404/429 sont
 mesurés séparément ; huit handlers nominaux, jonction et purge physique requis.
-Dix groupes ciblés puis25communs frais ; aucun lancement ni résultat à ce point.
+Dix groupes ciblés puis25communs frais. Le client est implémenté et ses syntaxes
+contrôlées ; aucun lancement ni résultat fonctionnel à ce point. Chaque variante
+possède son brouillon neuf ;18sessions de gate/24lecteurs retenus sont requis,
+avec repos natif après chaque invocation. Les quatre adoptions ont leurs mesures
+immédiates et après réponse tardive, consolidées dans le dernier groupe.
 
 ## Frontières du ZIP reconstruit — qualifiées en DEV
 

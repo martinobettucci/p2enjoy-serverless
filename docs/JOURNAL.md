@@ -1,5 +1,26 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — client des attentes UI implémenté, E2E à produire
+
+La revue avant exécution relève trois faiblesses du client, corrigées avant
+son premier gel : nettoyage séparant les révocations/purges indépendantes,
+projection de focus atomique après rendu, conservation des deux reçus à quatre
+lecteurs. Le client exporte aussi les événements bornés de ses18gates et exige
+leur somme24. La réponse tardive est liée à l’UUID/version du brouillon relu
+avant armement, avec projection SHA/chemins sans exporter les octets de source.
+Ces corrections de banc ne sont pas présentées comme des défauts produit mesurés.
+
+Le client séparé réutilise le protocole du gate qualifié sans modifier opérateur
+ni secours. Les quatre actions face au détail200 tardif, choix volontaire,
+recalage5+2 et404/429 réels sont écrits pour1440/390px.18gates/24lecteurs,
+huit invocations distinctes et quatre couples de focus d’adoption sont exigés.
+Préparations par API, gestes mesurés par l’UI, contrôle des textes/versions/PUT,
+captures viewport et nettoyage public/natif sont séparés. Aucun focus BODY n’est
+accepté dans la consolidation. Contrat+client portent l’index à461sources ; le
+collecteur physique ajoute seulement le préfixe strict décidé précédemment.
+Syntaxes Node/Python et diff contrôlés, revue RO puis nouveau gel requis avant
+le premier passage10+25. Produit, manuel et schéma restent inchangés.
+
 ## 22 novembre 2026 — attentes UI070.3/.4 contractualisées avant client
 
 Le principal relève ensuite que le collecteur physique partagé n’admet pas le
