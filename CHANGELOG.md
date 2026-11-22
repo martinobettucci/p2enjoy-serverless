@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- SLS-078 est close le 22 novembre : [49 campagnes / 543 groupes réels](docs/evidence/schedules-regressions-dev-2026-11-22.json),
+  18 prérequis frais, 458 sources `9e1da70`, image `433da150`, 117 captures inspectées.
+  Les douze clients cron apportent 54 groupes au socle 489. Worker terminé,
+  unité arrêtée et client joint ; 127 fonctions / 35 namespaces recoupés après
+  purge, quatre gardes et trois coupures de reprise. 38 backend, quatre ressources
+  HTTPS, dix migrations, manuel 18/74 et 5 982 originaux conservés. Rétention
+  rapprochée sans rejeu ; cinq essais incomplets exclus. Les unités 111.1/.2,
+  075/113, 080, 091.2 et 095 restent distinctes et ouvertes.
+
 - SLS-112 : [82groupes réels](docs/evidence/managed-invocation-watch-dev-2026-11-21.json) qualifient la correction
   sur433da150,458sources36763c9 et22captures inspectées. Le watcher réel observe
   LeaseMissingDuringClose après libération acquittée et STOP/CONT gardé0,759268909s ;
@@ -41,9 +50,9 @@
   Ancienne fixture rétablie par API et deux essais incomplets conservés hors
   du total. La campagne complète078 reste ouverte.
 
-- SLS-078 : scope schedules implémenté pour qualification, socle37 conservé et
-  douze clients cron ajoutés. Rapports UUID découverts et archivés, SSO frais,
-  nettoyages natifs par campagne ;543groupes attendus, non encore exécutés.
+- Préparation antérieure de SLS-078 : scope schedules, socle37 conservé et
+  douze clients cron raccordés. Le passage complet du 22 novembre ci-dessus
+  qualifie désormais ses 543 groupes et ses 18 prérequis.
 
 - SLS-104 : [30groupes réels](docs/evidence/legacy-schema010-dev-2026-11-21.json)
   qualifient la construction historique, le SSO et l’upgrade003→010 : cinq

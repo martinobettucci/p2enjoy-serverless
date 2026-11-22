@@ -1,5 +1,37 @@
 # Campagne complète des planifications sur le contrôle courant
 
+## Campagne complète qualifiée — 22 novembre 2026
+
+La [preuve complète](evidence/schedules-regressions-dev-2026-11-22.json) clôt
+SLS-078 sur le gel `9e1da704c230dcd05c414c4e1013fa882c8fda44` : 458 sources,
+image `433da150`, **49 campagnes / 543 groupes et 18 prérequis** frais.
+Le socle 37/489 et les douze clients cron / 54 groupes s’exécutent en série.
+Worker `245fa787` réellement terminé, résultat systemd success/1/0 puis unité
+arrêtée et client de lancement joint. Suite scellée SHA `4c1d0f1a9b06a35fc90430d1f4249a24cbb5996d34603ee0a9505abedea56714`.
+
+Les 117 fichiers de capture sont ouverts individuellement : 104 déclarés et
+13 compléments tracés (sept contrôle UI, six connexion). Les images de reprise
+ne cadrent pas toujours l’historique restauré ; les rapports et observations
+natives portent les preuves HTTP, ACL, effets et horloges. Les défauts de lecture
+075/113 restent ouverts et leur correction n’est pas revendiquée.
+
+127 UUID de fonctions distincts dans 35 namespaces sont recoupés après purge,
+dont 36 fonctions cron / 12 namespaces. Les quinze services du catalogue sont
+explicitement vidés ; aucune purge générale des configurations des parents
+n’est déduite des seules purges de fonctions. Quatre gardes de reprise et trois
+coupures137, leurs clients et helpers sont joints. État final sans fonction
+vivante, instance, invocation active, opération, réservation, bail ou intention.
+38 backend et quatre ressources HTTPS `no-store` concordent ; dix migrations,
+intégrités/FK, budgets, fichiers officiels, référence et 5 982 originaux conservés.
+Manuel canonique servi inchangé : 18 chapitres / 74 paragraphes.
+
+Les trois preuves de rétention sont rapprochées par leurs manifestes, gzip et
+trois modules communs, sans rejeu ni nouveau hash des captures scellées. Les cinq
+essais incomplets 0/272/313/220/148 sont conservés et ajoutent zéro groupe.
+111.1/.2 restent historiquement non attribuées ; les treize fixtures et deux
+expressions exactes de référence080, les pannes du banc091.2 et la clôture globale095
+restent dues. Les checkpoints antérieurs conservent leur portée à leur date.
+
 Contrat de clôture de [SLS-078](BACKLOG.md#sls-078), complément de
 [SCHEDULES](SCHEDULES.md#preuves-e2e-attendues). Décision du21novembre2026,
 après livraison des préalables103/104 et avant code du lanceur.
@@ -288,3 +320,17 @@ Arrêt au premier échec, aucune relance automatique. Ne qualifier078que si le
 passage entier et sa clôture native/visuelle réussissent. Tout défaut distinct
 devient une unité avant traitement. Les expressions exactes de référence restent080.
 Ce nouveau passage n’est pas encore lancé ni qualifié par cette décision.
+
+## Provenance de la publication complète
+
+Manifeste : `schedules-regressions-dev-2026-11-22.json`, SHA
+`4ccb134949ab8aa131aaca9fd5bd4a2acba29fa706152646361c650b823ea8ea`.
+Brut gzip : 3 528 965 octets, SHA
+`6b6142d923318531ea2802af8ba08b86e6e8ffb4bff83e1ab814f6ce76344a49` ;
+11 679 997 octets décompressés, SHA
+`722780a292b98cb3da84603d7e390965910eb2103ecc039aad3121b2133b0e79`.
+Index des458sources SHA `8ee5b0b1dc22af31ba1bc1a099f15a869356e75a39af4c5e2b9a93fa596dd089`.
+Les 67 rapports exacts, collectes finales, programmes de collecte, inspections et
+limites sont rattachés dans ce brut. Les commits documentaires075/113 publiés
+pendant le gel ont été rapatriés après ce scellement ; ils ne changent ni le
+commit testé9e1da70 ni les sources et images de sa campagne.

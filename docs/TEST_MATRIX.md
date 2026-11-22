@@ -1,5 +1,37 @@
 # Matrice de qualification réelle
 
+## Campagne complète qualifiée — 22 novembre 2026
+
+La [preuve complète](evidence/schedules-regressions-dev-2026-11-22.json) clôt
+SLS-078 sur le gel `9e1da704c230dcd05c414c4e1013fa882c8fda44` : 458 sources,
+image `433da150`, **49 campagnes / 543 groupes et 18 prérequis** frais.
+Le socle 37/489 et les douze clients cron / 54 groupes s’exécutent en série.
+Worker `245fa787` réellement terminé, résultat systemd success/1/0 puis unité
+arrêtée et client de lancement joint. Suite scellée SHA `4c1d0f1a9b06a35fc90430d1f4249a24cbb5996d34603ee0a9505abedea56714`.
+
+Les 117 fichiers de capture sont ouverts individuellement : 104 déclarés et
+13 compléments tracés (sept contrôle UI, six connexion). Les images de reprise
+ne cadrent pas toujours l’historique restauré ; les rapports et observations
+natives portent les preuves HTTP, ACL, effets et horloges. Les défauts de lecture
+075/113 restent ouverts et leur correction n’est pas revendiquée.
+
+127 UUID de fonctions distincts dans 35 namespaces sont recoupés après purge,
+dont 36 fonctions cron / 12 namespaces. Les quinze services du catalogue sont
+explicitement vidés ; aucune purge générale des configurations des parents
+n’est déduite des seules purges de fonctions. Quatre gardes de reprise et trois
+coupures137, leurs clients et helpers sont joints. État final sans fonction
+vivante, instance, invocation active, opération, réservation, bail ou intention.
+38 backend et quatre ressources HTTPS `no-store` concordent ; dix migrations,
+intégrités/FK, budgets, fichiers officiels, référence et 5 982 originaux conservés.
+Manuel canonique servi inchangé : 18 chapitres / 74 paragraphes.
+
+Les trois preuves de rétention sont rapprochées par leurs manifestes, gzip et
+trois modules communs, sans rejeu ni nouveau hash des captures scellées. Les cinq
+essais incomplets 0/272/313/220/148 sont conservés et ajoutent zéro groupe.
+111.1/.2 restent historiquement non attribuées ; les treize fixtures et deux
+expressions exactes de référence080, les pannes du banc091.2 et la clôture globale095
+restent dues. Les checkpoints antérieurs conservent leur portée à leur date.
+
 ## Surveillance pendant libération — SLS-112 qualifiée
 
 [Qualification112](evidence/managed-invocation-watch-dev-2026-11-21.json) :82groupes au gel36763c9/458sources/image433da150,

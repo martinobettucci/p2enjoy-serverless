@@ -150,12 +150,13 @@ execution-ui sont qualifiés séparément dans105. La
 450sourcesaaf0784a, neuf purges natives et51captures inspectées.
 
 
-Le [scope de régression complète des crons](../docs/SCHEDULE_REGRESSIONS.md) est implémenté
-pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
-49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;
-rapports UUID figés, SSO frais et recoupement physique entre campagnes. Deux essais
-antérieurs restent incomplets et conservés ; après les préalables105/106/107,
-un nouveau passage entier49/543 reste à qualifier. SLS-078 reste[~].
+Le [scope de régression complète des crons](../docs/SCHEDULE_REGRESSIONS.md) est
+[qualifié le22novembre](../docs/evidence/schedules-regressions-dev-2026-11-22.json) :
+`python3 -B e2e/execution-suite.py --scope schedules`,49campagnes/543groupes et
+18prérequis frais, strictement en série. Worker245fa787 au gel9e1da70/458sources,
+image433da150,117captures inspectées ;127fonctions/35namespaces recoupés après
+purge. Les cinq essais antérieurs 0/272/313/220/148 sont conservés et exclus.
+SLS-078 est close ; la clôture globale095 et les autres unités restent dues.
 
 Pour une campagne suivie indépendamment du terminal :
 `python3 -B e2e/schedules-worker.py start`, puis `status NOM` et `finish NOM`

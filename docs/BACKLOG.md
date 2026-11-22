@@ -69,7 +69,6 @@ bloquée est sautée et son blocage est nommé.
 | Ordre | Unité | Nature | Statut | Dépend de | Contrat |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
-| 1 | [SLS-078](#sls-078) Moteur de planification (crons) | Développer | `[~]` | SLS-040, SLS-074 | [SCHEDULES](SCHEDULES.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
@@ -98,19 +97,17 @@ bloquée est sautée et son blocage est nommé.
 | — | [SLS-085](#sls-085) Déclencheurs de file et NATS | Décision | `[ ]` | choix du courtier | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | — | [SLS-088](#sls-088) Serverless Jobs en conteneur | Décision | `[ ]` | choix des images | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 
-SLS-078 reste prioritaire : les deux replays d’âge passent le21 novembre2026,
-avec six groupes ciblés puis25communs et22captures inspectées dans la
-[preuve31](evidence/schedule-retention-age-dev-2026-11-21.json). Captures et originaux
-conservés ; rétention réelle qualifiée. La campagne complète sur010 reste à
-raccorder puis exécuter avant clôture ; aucune attente temporelle ne la bloque.
-Les bornes numériques sont qualifiées ; SLS-100 et SLS-071 sont livrées.
-SLS-103 est livré : préconditions et restitutions sur010 qualifiées109groupes ;
-le raccordement de la campagne complète078 reste la prochaine unité.
+SLS-078 est close par la [campagne complète du 22 novembre](evidence/schedules-regressions-dev-2026-11-22.json) :
+49 campagnes / 543 groupes et 18 prérequis, 458 sources `9e1da70`, image `433da150`,
+117 captures fraîches inspectées, 127 fonctions / 35 namespaces recoupés après
+purge. Les trois preuves de rétention restent acquises sans nouveau rejeu ni
+réécriture de leurs captures scellées. Les cinq anciens essais incomplets et
+les campagnes des préalables restent séparés du total.
 
-Les préalables105à110 sont qualifiés séparément ; IR-001/002/003 corrigées.
-Quatre essais078 incomplets (0,272,313,220groupes) restent conservés. Nouveau
-passage entier49/543 +18 requis sur454sources ; aucun de ces sous-totaux ne
-vaut résultat complet. Les expressions exactes de référence restent dues à080.
+111.1/.2 restent non déterminées faute d’observation historique discriminante ;
+111.3 et les régressions courantes sont qualifiées. La résolution IR-004 conserve
+ce reste sans lui attribuer une cause par le succès futur. Les autres unités
+indépendantes avancent ; les deux expressions exactes de référence restent 080.
 
 Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
 089.4 est qualifié. Le banc ZIP de SLS-070 reste préparé, non exécuté.
@@ -118,7 +115,7 @@ Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4
 Unités parentes encore `[~]` et unités qui portent leur reste à faire :
 [SLS-001](#sls-001) → toutes ; [SLS-020](#sls-020) → SLS-089 ;
 [SLS-030](#sls-030) → SLS-090 et SLS-080 ; [SLS-040](#sls-040) → SLS-091 ;
-[SLS-050](#sls-050) → SLS-078 et SLS-092 ; [SLS-060](#sls-060) → SLS-068 à SLS-073,
+[SLS-050](#sls-050) → SLS-092 ; [SLS-060](#sls-060) → SLS-068 à SLS-073,
 SLS-081 et SLS-095 ; [SLS-066](#sls-066) → SLS-093 ;
 [SLS-074](#sls-074) → SLS-094 ; [SLS-082](#sls-082) → SLS-083 à SLS-088 et SLS-097.
 
@@ -409,8 +406,8 @@ d’exécution sont livrées et vérifiées par SLS-061.
 ## SLS-050
 
 Statut : [~] — agent local installé en DEV ; raccordements et reprises principaux qualifiés.
-Reste à faire : [SLS-078](#sls-078) (crons) et [SLS-092](#sls-092) (acquisition partielle,
-marge physique, registre).
+Reste à faire : [SLS-092](#sls-092) (acquisition partielle, marge physique, registre).
+Les crons de SLS-078 sont clos par la campagne complète du 22 novembre.
 
 Volumes par ID, quotas et modes, archive/purge, crons UTC, logs bornés et
 métriques. E2E : concurrence, saturation disque, cache, déploiement/rollback,
@@ -432,8 +429,8 @@ recoupe aussi les régressions et la console. Les admissions et observations API
 de la [preuve du moteur](evidence/execution-dev-2026-11-06.json). Les
 commandes publiques de purge/cache et leurs vues de console sont déployées
 et qualifiées dans SLS-065. Les crons sont portés par [SLS-078](#sls-078) et les
-jobs de console par [SLS-081](#sls-081). Le moteur a son premier checkpoint
-réel dans SLS-078 ; les jobs de console restent absents.
+jobs de console par [SLS-081](#sls-081). Le moteur est qualifié par les 543 groupes
+réels de SLS-078 ; les jobs de console restent absents.
 Les quotas préparés et leurs reçus sont
 implémentés ; la preuve initiale de dix groupes vérifie décisions, réservations, SIGKILL pendant
 préparation et reprise d'abandon partiel avec conservation des données.
@@ -445,7 +442,7 @@ restent à qualifier ; aucune clôture de SLS-050 ne repose sur ces seuls compos
 ## SLS-060
 
 Statut : [~] — gestion, exécutions, manuel, publication et purge/cache présents.
-Reste à faire : [SLS-068](#sls-068) à [SLS-073](#sls-073), [SLS-078](#sls-078),
+Reste à faire : [SLS-068](#sls-068) à [SLS-073](#sls-073),
 [SLS-081](#sls-081) et la campagne de [SLS-095](#sls-095).
 
 Parcours d'administration sur les API réelles : connexion, objets, jetons,
@@ -1841,7 +1838,19 @@ relus avec Git. [Preuve](evidence/git-history-private-briefing-removed-2026-11-1
 <a id="sls-078"></a>
 ## SLS-078 — Moteur de planification des crons
 
-Reprise du21novembre : préalables103/104 livrés. Le
+Statut : [x] — [campagne complète du 22 novembre](evidence/schedules-regressions-dev-2026-11-22.json),
+49 campagnes / 543 groupes et 18 prérequis frais, sans cumul des essais antérieurs.
+Gel `9e1da70`, 458 sources, image `433da150` : 117 captures ouvertes individuellement,
+127 fonctions dans 35 namespaces recoupées après purge, dont 36 fonctions cron / 12 namespaces.
+Worker terminé puis unité arrêtée et client joint ; quatre gardes de reprise,
+trois coupures137 et 38 backend / quatre ressources HTTPS recoupés. Dix migrations,
+intégrités/FK, configuration, référence et 5 982 originaux conservés ; manuel 18/74.
+Rétention rapprochée sur trois manifestes/gzip/modules, sans rejeu ni nouveau
+hash des captures scellées. Le détail daté ci-dessous conserve les étapes antérieures.
+Les défauts 075/113, l’ancienne cause 111.1/.2, les expressions 080 et les
+limites 091.2 / campagne globale 095 restent ouverts dans leurs unités.
+
+Historique de reprise du21novembre : préalables103/104 livrés. Le
 [contrat de campagne complète](SCHEDULE_REGRESSIONS.md) fixe49campagnes/543groupes
 attendus,18prérequis et les recoupements des36fonctions cron supplémentaires.
 Le lanceur est implémenté et relu ; qualification complète à produire.
@@ -1856,7 +1865,7 @@ image capturéec59 puis originauxb452restaurés. Source protégée puis retirée
 tir terminal/générations99/100 effacés, zéro nouvelle invocation ; six ciblés
 et25communs,22captures inspectées.078.5 reste ouvert pour la campagne complète.
 
-Statut : [~] — moteur, migration 009, lectures API et facette déployés en DEV ;
+Premier checkpoint du 10 novembre — moteur, migration 009, lectures API et facette déployés en DEV ;
 [premier checkpoint réel](evidence/schedules-checkpoint-dev-2026-11-10.json) : six groupes ciblés,
 huit du manuel et huit publics. Le manuel conforme SLS-096 est clos ; les critères
 restants de cette unité demeurent ouverts. Le [cycle des versions planifiées](evidence/schedule-versions-dev-2026-11-10.json)
@@ -1869,7 +1878,7 @@ Nature : Développer. Dépend de : SLS-040 (admission), SLS-074 (cible promue).
 Débloque : SLS-080, SLS-081, SLS-073. Ordre : 1.
 Décision de reprise après112/IR-004 : sixième passage entier49/543+18 à préparer
 sur l’image433da150 et le gel courant458sources ; cinq essais incomplets exclus.
-Aucun résultat de ce nouveau passage encore acquis.
+Au point de décision, aucun résultat du sixième passage n’était encore acquis.
 Contrat : [SCHEDULES](SCHEDULES.md).
 Les [coupures et reprises réelles](evidence/schedule-recovery-dev-2026-11-10.json)
 passent cinq groupes sur310 sources : garde indépendante, trois SIGKILL aux
@@ -2201,8 +2210,10 @@ Restes ciblés de 078.5, avant clôture et campagne complète :
   six groupes ciblés à10:50/10:55UTC, plus25communs. Deux gardes/pilotes joints,
   sources scellées inchangées, source protégée puis supprimée après clôture,
   tir terminal et générations99/100 supprimés ; aucun nouveau handler.
-- [ ] Campagne complète de non-régression raccordée et exécutée sur010,
-  avec les nouveaux clients de planification et les bancs historiques préservés.
+- [x] Campagne complète de non-régression raccordée et exécutée sur010 :
+  [49 campagnes / 543 groupes + 18 prérequis](evidence/schedules-regressions-dev-2026-11-22.json),
+  nouveaux clients de planification et bancs historiques préservés ; 117 captures
+  inspectées, clôture native et purges recoupées sur le même worker terminé.
 
 Le recoupement078.4 avait identifié une preuve non discriminante : concurrence
 planifiée isolée du maximum individuel et du stockage exclusif. Le scénario
@@ -2254,7 +2265,7 @@ Critères d'acceptation :
   `x-p2enjoy-trigger` et `x-p2enjoy-schedule-slot`, sans jeton ni politique origine/IP,
   par la même admission que les appels HTTP (budgets, file, concurrence, verrou de
   stockage, deadline, extinction).
-- [ ] SLS-078.5 Enregistrement durable de chaque tir (états `claimed`, `dispatched`,
+- [x] SLS-078.5 [Campagne complète et rétention rapprochée](evidence/schedules-regressions-dev-2026-11-22.json). Enregistrement durable de chaque tir (états `claimed`, `dispatched`,
   `succeeded`, `failed`, `skipped_downtime`, `skipped_overlap`, `refused_*`) ; réclamation
   avant envoi ; aucun rejeu ni rattrapage ; recouvrement évité ; refus de capacité consigné
   sans retry.

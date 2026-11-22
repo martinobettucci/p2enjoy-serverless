@@ -1,5 +1,19 @@
 # Architecture technique
 
+## Moteur de planification qualifié — 22 novembre 2026
+
+La [campagne complète078](evidence/schedules-regressions-dev-2026-11-22.json)
+clôt le moteur sur `9e1da70` / 458 sources / `433da150` : 49 campagnes,
+543 groupes et 18 prérequis, 117 captures inspectées. Architecture, migration010,
+manuel18/74 et services inchangés ; aucun nouveau déploiement requis pour cette
+preuve. Les reprises réelles, admissions communes HTTP/cron, versions, files,
+stockage, maxima et concurrence sont recoupés ; 127 fonctions / 35 namespaces
+purgés, 38 backend / quatre ressources HTTPS conformes, 5 982 originaux conservés.
+La rétention conserve ses trois preuves distinctes sans rejeu. Les jobs de
+console081, les expressions de référence080, les noms de calendrier098 et les
+autres unités du backlog restent à livrer. Les décisions et checkpoints datés
+ci-dessous gardent leur état au moment décrit.
+
 ## Classification de fin du pilote géré — SLS-112, décision avant code
 
 Le watcher ne doit pas confondre la libération confirmée de son propre bail

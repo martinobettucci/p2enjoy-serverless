@@ -1,5 +1,11 @@
 # Parité fonctionnelle avec Scaleway Serverless
 
+État interne actualisé le 22 novembre 2026 : SLS-078 est close par la
+[campagne complète](evidence/schedules-regressions-dev-2026-11-22.json),49/543+18.
+Les jobs081 et les noms de calendrier098 restent ouverts. Le relevé externe
+Scaleway conserve sa date et ses sources ci-dessous ; cette qualification du
+moteur ne prétend pas actualiser les limites publiées par ce fournisseur.
+
 La [preuve du banc historique104](evidence/legacy-schema010-dev-2026-11-21.json)
 qualifie003→010 en30groupes sur le SPARK DEV. Elle prépare la campagne078 ;
 elle n’ajoute pas de capacité produit et ne change aucun statut de parité.
@@ -92,7 +98,7 @@ déjà prise et documentée, avec motif).
 
 | Fonctionnalité Scaleway | État de la plateforme | Unité ou décision |
 | --- | --- | --- |
-| CRON : UTC, au plus une fois par minute, arguments JSON envoyés en `POST` sur `/` | **Partiel, en qualification** : moteur de manifeste déployé, [grammaire numérique qualifiée](evidence/schedule-calendar-dev-2026-11-10.json), résolution de **5 minutes** voulue par le responsable ; arguments de jobs et noms de mois/jours à livrer | [SLS-078](BACKLOG.md#sls-078), [SLS-081](BACKLOG.md#sls-081), [SLS-098](BACKLOG.md#sls-098) |
+| CRON : UTC, au plus une fois par minute, arguments JSON envoyés en `POST` sur `/` | **Partiel** : moteur de manifeste [qualifié par543groupes](evidence/schedules-regressions-dev-2026-11-22.json), grammaire numérique et résolution de **5 minutes** voulue par le responsable ; arguments de jobs et noms de mois/jours à livrer | [SLS-078](BACKLOG.md#sls-078), [SLS-081](BACKLOG.md#sls-081), [SLS-098](BACKLOG.md#sls-098) |
 | Queue (Scaleway Queues) : retry jusqu'à 3 fois si statut ≥ 300, 10 messages en vol | **À livrer** plus tard ; aucun service de messagerie dans le SPARK DEV | [SLS-085](BACKLOG.md#sls-085) |
 | NATS : un appel par message du sujet | **À livrer** plus tard, même dépendance | [SLS-085](BACKLOG.md#sls-085) |
 

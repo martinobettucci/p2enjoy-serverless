@@ -1,5 +1,20 @@
 # Révisions et adaptateur de déploiement
 
+## Clôture du moteur de planification — 22 novembre 2026
+
+La [campagne complète078](evidence/schedules-regressions-dev-2026-11-22.json)
+réussit sans nouveau build produit : 49 campagnes / 543 groupes et 18 prérequis,
+458 sources `9e1da70`, image `433da150`, même CID de contrôle `a9c2bb4d` à clôture.
+Les trois SIGKILL du client de reprise ont leurs reçus137 et restaurations ;
+les redémarrages attendus du contrôle sont distincts de la référence inchangée.
+Quatre gardes de reprise et le worker sont terminés/joints. 127 fonctions /
+35 namespaces purgés, 117 captures inspectées, dix migrations/intégrités/FK,
+38 backend et quatre ressources HTTPS `no-store` recoupés. Les 5 982 originaux,
+les budgets et fichiers officiels sont conservés. Manuel18/74 inchangé.
+Les trois notes actives et leurs propositions ont été revérifiées sans écriture
+pour la preuve ; leur mise à jour de livraison reste une proposition `.?`.
+La clôture078 ne vaut ni guide079 rejoué ni clôture globale095.
+
 ## Pilote géré corrigé et qualifié —21 novembre2026
 
 [Qualification112](evidence/managed-invocation-watch-dev-2026-11-21.json) :82groupes réels et22captures inspectées

@@ -1,5 +1,29 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — SLS-078 close après le sixième passage entier
+
+Le worker245fa787 lancé sur9e1da70/458sources et image433da150 termine avec
+49campagnes/543groupes et18prérequis frais. Résultat systemd success/1/0,
+MainPID0, unité arrêtée et client exact joint ; SHA suite4c1d0f1a. Les quatre
+collectes finales recoupent 127UUID/35namespaces purgés dont36/12cron, quatre
+gardes de reprise et trois coupures137,38backend/quatreweb/no-store,010intègre,
+configuration/référence et5982originaux inchangés. Le manuel servi reste18/74.
+
+Les105premières images et12dernières sont ouvertes individuellement, SHA et
+fraîcheur dans leur phase :117fichiers,104déclarés/13compléments. Relecture finale
+RO sans blocage ni secret exporté ; les limites de cadrage/focus sont conservées.
+Manifeste4ccb1349, gzip6b6142d9 et brut722780a2 publiés dans
+[evidence/schedules-regressions-dev-2026-11-22.json](evidence/schedules-regressions-dev-2026-11-22.json).
+Les trois preuves de rétention sont rapprochées sans rejeu ni rehash des captures
+scellées ; les cinq essais antérieurs0/272/313/220/148 ajoutent zéro groupe.
+
+075/113 restent des défauts mineurs ouverts ; leurs commits documentaires503f631
+sont rapatriés après toutes les collectes et la publication au gel9e1. Aucun
+correctif absent n’est prétendu livré.111.1/.2 restent non attribuées malgré le
+contexte vert actuel.080,091.2,095 et les autres unités restent distinctes.
+Prochaine unité indépendante :070, frontières ZIP préparées ; choix de pin/image,
+préconditions et enveloppe client à persister avant adaptation et premier test.
+
 ## 22 novembre2026 — autre pagination périmée recoupée dans Instances
 
 Le principal a ouvert execution-ui-network-error.jpg du sixième078 : erreur sans

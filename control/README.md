@@ -1,5 +1,12 @@
 # Plan de contrôle
 
+Le moteur de planification SLS-078 est [qualifié en DEV](../docs/evidence/schedules-regressions-dev-2026-11-22.json) :
+49 campagnes / 543 groupes, 18 prérequis, 458 sources `9e1da70` / image433da150,
+117 captures inspectées. Les 38 backend / quatre ressources HTTPS concordent ;
+127 fonctions / 35 namespaces purgés, quatre gardes de reprise terminées et
+5 982 originaux conservés. Schéma010 et manuel18/74 inchangés. Les résultats
+ci-dessous conservent leur date ; 111.1/.2,075/113,080,091.2 et095 restent ouverts.
+
 La correction [SLS-112](../docs/evidence/managed-invocation-watch-dev-2026-11-21.json) est qualifiée en DEV
 sur433da150 :82groupes réels,458sources36763c9 et22captures inspectées.
 Un bail manquant observé pendant une fermeture déjà engagée conserve le résultat

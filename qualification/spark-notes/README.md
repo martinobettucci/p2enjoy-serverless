@@ -1,5 +1,22 @@
 # P2Enjoy Serverless
 
+## Planifications qualifiées — 22 novembre 2026
+
+Preuve `docs/evidence/schedules-regressions-dev-2026-11-22.json` : 49 campagnes,
+543 groupes et 18 prérequis, 458 sources `9e1da70` / image `433da150`,
+117 captures inspectées. Worker `245fa787` terminé, unité arrêtée et client joint ;
+127 fonctions dans 35 namespaces recoupées après purge, dont 36 fonctions cron
+et 12 namespaces. Quatre gardes de reprise, trois coupures137, 38 backend et
+quatre ressources web `no-store`, dix migrations, intégrités/FK, manuel18/74 et
+5 982 originaux, configuration et référence conservés. SLS-078 est close.
+Les trois preuves de rétention gardent leurs captures scellées sans rejeu ;
+les cinq essais incomplets sont exclus. 111.1/.2, 075/113, 080, 091.2 et 095 restent ouverts.
+
+Ce fichier reste proposé en `.?`, sans adoption active. Les checkpoints datés
+ci-dessous conservent leurs états historiques ; le README du projet et
+`docs/DEPLOYMENT.md` portent les commandes actuelles. La restructuration du guide
+et des notes079.3 reste ouverte. Cette qualification ne rejoue pas le guide079.
+
 ## Pilote géré qualifié —21 novembre2026
 
 Image433da150/APIa9c2bb4d, schéma010, manuel18/74 et marque à trois blocs.
@@ -45,7 +62,7 @@ conservés. Schéma010 et manuel18chapitres/74paragraphes inchangés. SLS-070,
 101/102, la campagne globale095 et les autres unités restent dans le backlog.
 Les sections suivantes gardent les états historiques de leurs checkpoints.
 
-## État courant —12novembre2026
+## Checkpoint historique —12novembre2026
 
 La console et l’API utilisent l’imageb452ef16, schéma de contrôle010. Le manuel
 compilé compte18chapitres et74paragraphes. Les facettes Éditeur et Tester sont

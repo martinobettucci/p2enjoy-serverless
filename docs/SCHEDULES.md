@@ -1,12 +1,12 @@
 # Moteur de planification
 
-État courant au21novembre2026 : [preuve de rétention à sept jours](evidence/schedule-retention-age-dev-2026-11-21.json) qualifie l’âge réel
-par les deux replays10:50/10:55UTC, six groupes ciblés puis25communs,22captures
-inspectées. Les checkpoints antérieurs ci-dessous gardent leurs époques et leurs
-limites historiques. Captures originales inchangées, source conservée tant que
-son tir reste ouvert puis retirée ; tir terminal et générations99/100 effacés.
-Aucun nouveau handler ; imagesc59temporaires/b452restaurée distinctes, mêmes
-modules de rétention/calendrier. La campagne complète078 reste à exécuter sur010.
+État courant au 22 novembre 2026 : [campagne complète](evidence/schedules-regressions-dev-2026-11-22.json)
+qualifiée, SLS-078 close. 49 campagnes / 543 groupes et 18 prérequis sur458sources
+`9e1da70` / image433da150 ; 117 captures inspectées et 127 fonctions / 35 namespaces
+recoupés après purge. Les trois preuves de rétention sont conservées et rapprochées
+sans rejeu ni modification des captures scellées. Le manuel servi reste18/74.
+Les jobs de console081, noms de calendrier098 et deux expressions de référence080
+restent distincts. Les checkpoints ci-dessous conservent leurs époques.
 
 Contrat de l'unité [SLS-078](BACKLOG.md#sls-078). Il précise la ligne « crons » de
 [PLATFORM](PLATFORM.md#exécution) et l'exigence de l'adaptateur

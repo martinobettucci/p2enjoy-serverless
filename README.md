@@ -1,5 +1,20 @@
 # P2Enjoy Serverless
 
+La [campagne complète des planifications](docs/evidence/schedules-regressions-dev-2026-11-22.json)
+clôt SLS-078 en DEV le 22 novembre 2026 : **49 campagnes, 543 groupes et 18 prérequis**,
+sur les 458 sources du gel `9e1da70` et l’image `433da150`. Les 117 fichiers de
+capture frais sont ouverts individuellement ; 127 fonctions dans 35 namespaces
+sont recoupées après purge, dont 36 fonctions cron dans 12 namespaces.
+Le worker est terminé, son unité arrêtée et son client joint. Quatre gardes de
+reprise et trois coupures réelles sont corrélées ; configuration, référence et
+5 982 artefacts initiaux sont conservés. Le manuel servi reste à 18 chapitres et
+74 paragraphes. Les cinq essais incomplets restent exclus du total.
+
+Les critères historiques 111.1/.2, les défauts de présentation 075/113, les
+expressions exactes de référence 080, les pannes résiduelles 091.2 et la clôture
+globale 095 restent ouverts. Le [backlog](docs/BACKLOG.md) porte l’état courant ;
+les checkpoints ci-dessous conservent leurs résultats et leurs restes à leur date.
+
 La [correction du résultat pendant libération du bail](docs/evidence/managed-invocation-watch-dev-2026-11-21.json)
 est qualifiée en DEV :82groupes réels sur458sources36763c9 et l’image433da150,
 22captures fraîches inspectées. Le cas natif observe LeaseMissingDuringClose
@@ -44,13 +59,12 @@ explicite, six UUID ready, allocations et pagination5+1. La campagne complète07
 reste à terminer.
 
 
-Le [scope de régression complète des crons](docs/SCHEDULE_REGRESSIONS.md) est implémenté
-pour qualification : `python3 -B e2e/execution-suite.py --scope schedules`.
-49campagnes/543groupes et18prérequis attendus, en série sur le SPARK DEV ;
-rapports UUID figés, SSO frais et recoupement physique entre campagnes. Cinq essais
-antérieurs restent incomplets et conservés (0,272,313,220 et148groupes). Les préalables
-105 à110 ont leurs preuves propres ; SLS-111 instruit le dernier arrêt du stockage
-géré avant un nouveau passage entier49/543 +18. SLS-078 reste[~].
+Le [scope de régression complète des crons](docs/SCHEDULE_REGRESSIONS.md) est qualifié :
+`python3 -B e2e/execution-suite.py --scope schedules` exécute en série les 49 campagnes /
+543 groupes et 18 prérequis du [passage complet](docs/evidence/schedules-regressions-dev-2026-11-22.json).
+Le worker `245fa787` a fini avec succès sur `9e1da70` / 458 sources / `433da150`.
+Les cinq essais incomplets (0, 272, 313, 220 et 148 groupes) gardent leurs propres
+reçus et n’ajoutent rien au total. SLS-078 est close ; 111.1/.2 restent non attribuées.
 
 Pour une campagne suivie indépendamment du terminal :
 `python3 -B e2e/schedules-worker.py start`, puis `status NOM` et `finish NOM`
