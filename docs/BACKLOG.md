@@ -79,6 +79,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-125](#sls-125) Corrélation du hash des événements conservés | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-126](#sls-126) Acquisition des lecteurs retenus d’API12 | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-127](#sls-127) Refus SQLite après épuisement réel des descripteurs | Corriger | `[~]` | SLS-040 | cette unité |
+| 3 | [SLS-128](#sls-128) Purge réelle après journal de 16Mio | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4120,3 +4121,46 @@ sortie, HTTP503/log_read_unavailable en198,22ms, puis lecture réussie. Garde
 jointe, purge physique, huit compteurs0, même1aa/référence/config/5982artefacts.
 Revue RO du helper/oracle : aucunP1/P2 trouvé ; elle reste distincte de la preuve.
 507sources gelées ; préparatoire zéro groupe qualifié,127.4 reste ouvert.
+
+
+<a id="sls-128"></a>
+## SLS-128 — Rétablir la purge après le corpus réel de16Mio
+
+Statut : [~] — préparatoire507sources/1aa09e9ab57 : API12 etAPI05 passent,
+le corpus exactAPI06 atteint16777216octets/5169événements, puis POST503 à la
+retraite du corpus et de nouveau pendant son nettoyage. Cinq ressources locales
+fermées maiscleanupfalse ; le second corpus+1 n'est pas exécuté.
+Nature : Corriger. Dépend de : SLS-040. Ordre : 3.
+Contrats : [budget](EXECUTION_LOGS.md#conservation-par-service-et-budget),
+[purge](CONSOLE_STORAGE.md).
+
+Résultat attendu : purger par les véritables API le corpus possédé après la
+borne16Mio, comprendre le refus503 sans supposer sa cause, finir le second
+corpus+1 puis les campagnes propres et communes, sans étatSQL fabriqué.
+
+- [x] SLS-128.1 Conserver rouge, programmes, résultat exact16Mio, références
+  possédées et erreurs primaires/nettoyage ; relever l'état natif actuel.
+- [ ] SLS-128.2 Recouper le chemin/code public du503, propriétaires, opérations,
+  délais et erreurs réelles. Décider et écrire la cause/issue avant correction.
+  Reprendre le nettoyage uniquement sur les ressources possédées, via les API,
+  en conservant le premier rouge ; aucune suppression SQL ni faux succès.
+- [ ] SLS-128.3 Corriger le seul composant en cause, puis prouver sa reprise,
+  purge physique et compteurs vides ; corpus16Mio puis+1 et12API/25communs sur
+  les sources déployées, captures inspectées et gardes/consommateurs joints.
+
+
+Premierrouge128 : [corpus exact puis refus de purge](evidence/execution-journal-byte-purge-first-failed-dev-2026-11-22.json).
+Le SHA du harnais recoupe POST503. Le relevéRO conserve5169événements/
+16777089octets après les tentatives, zéro fonction active/instance/opération,
+mais archive389b71c3 nonpurgée et service/namespace encore présents. Cinq
+ressources locales closes, aucun succès de nettoyage physique annoncé.
+
+Décision avant diagnostic128 : relever enRO les commandes de stockage et leur
+error_code, l'état du registre et des propriétaires, sans messages/secrets.
+Faire une seule nouvelle intention de purge sur cette archive possédée, via
+SSO/APIréels, avec UUID persisté avantPOST, If-Match et nom courant exact ;
+conserver chemin, statut, code public et durée avantassertion. Si une commande
+est déjà active, la joindre au lieu d'en créer une. Un503 garde son intention
+et reste rouge ; pas de répétition automatique aveugle. La reprise éventuelle
+du nettoyage réutilise uniquement les UUID de ce rapport et prouve ensuite
+l'absence physique et les parents supprimés, sans réécrire le rapport initial.
