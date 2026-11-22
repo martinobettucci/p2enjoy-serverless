@@ -4708,3 +4708,6 @@ Chaque cas tourne dans sa seule unitéroot DEV oneshot180s/stop30s/KillModecontr
 
 
 072 — [douze groupes API complets acquis](evidence/execution-journal-api-complete-dev-2026-11-22.json) sur526sources21834d8/f73,402f8ea3 : buffers/Unicode/JSON/niveaux, droits/scopes/révocation, filtres/pages, expurgation,10000/+1,16Mio/+1 dansdeuxcorpus, minute réellementécoulée et nonrésurrection, politique/perte deréponse, exports/reprise, suivi/coupure, cycles/stockage, lecteurs429/jonction/EMFILE réels. Douzecasespassées, Node0/joint, troispréparations recoupées àtroisévénementsSQLiteattendus ; purgephysique, référence/config/5982 et huitcompteurs0. Zéro groupe de clôture ajouté ;10UI/25communs/socle49+32/rétentions restentdus. Correctif133 toujours nondéployé.
+
+
+132.3 — [trois groupes numériques011 acquis](evidence/schedule-firing-retention-count-schema011-dev-2026-11-22.json),526sourcesa81b9b7/f73 :39fenêtres réellement manquées,10240tirs puis10000 survivants exacts selon completed_at/id,240anciens retirés. Deuxinvocationsinitiales conservées, aucunhandlernouveau,112pagesAPI conformes ; observation12,835767s. Restitutionnominale jointe, source scellée et originaux/config/référence/5982 conservés, huitcompteurs0. Source10001HTTP, raccordement de garde et régressions restent requis ; ce résultatf73 ne qualifie pas une futureimage133.

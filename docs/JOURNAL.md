@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — rétention numérique011 et API du journal acquises
+
+Sur f73, API12 complet puis count011 troisgroupes passent ; la borne réelle
+10240→10000 conserve exactement les bons tirs,112pages concordent, aucune
+nouvelle invocation. Originaux restaurés, gardes/clients joints, huitcompteurs0.
+Preuves scellées séparément ; ne pas les attribuer à la candidate133 à venir.
+Reprendre le seul correctif de jointure d’expiration mesuré, son profil de
+bascule log-retention-query documenté, puis ses preuves fraîches sur image déployée.
+
 ## 22 novembre 2026 — inventaire des préconditions courantes et rétention132
 
 Socle49/543/18 confirmé ; gardes010/images anciennes dans plusieursclients,

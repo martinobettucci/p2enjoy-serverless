@@ -239,3 +239,45 @@ CID/génération, label, reprise vers la même candidate après intention, compa
 schema/tables/collection, configurations et cgroups restent identiques. Aucun
 retourDB, changement de santé, cadence, quota, /tmp ou configuration n'est permis.
 Le déploiement est un prérequis de diagnostic, sans groupe fonctionnel qualifié.
+
+
+## Mise à jour de la requête de rétention — SLS-133
+
+Le profil explicite `log-retention-query` part exclusivement de
+`sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0`.
+Le lanceur reçoit le reçu privé d'inspection puis ce profil et sélectionne
+`prepare-retention-query-update`. Les trois profils historiques et la préparation
+010→011 gardent leurs baselines et comparaisons propres.
+
+La candidate est construite avec le Dockerfile normal et son contexte réel,
+figés avant le build : Dockerfile, ignore, dépendances, migrations, application,
+web, manuel et scripts de compilation. Le manifeste de ce contexte est conservé
+avec le résultat du build ; celui des42backend/quatreweb ne remplace pas ce gel.
+Le SHA candidat provient de l'inspection Docker après ce build, jamais d'une
+valeur supposée. Le conteneur d'inspection, sans réseau ni volume, est retiré
+et joint. Ses42backend correspondent aux sources synchronisées ; leur ensemble
+est égal à celui du CIDf73 et seul `control/app/execution_logs.py` diffère.
+Les quatreweb et les onze migrations restent identiques à la baseline.
+
+Le correctif change exclusivement l'ordre de jointure du SELECT d'expiration :
+politiques en boucle externe, événements recherchés par l'index existant
+`execution_log_retention(service_id, observed_at)`. Prédicats, heure réelle,
+ordre global parsequence et LIMIT sont conservés. Aucun DDL, ANALYZE, changement
+de cadence, de quota ou de configuration ne fait partie de cette mise à jour.
+
+La préparation refuse tout écart d'image initiale, de manifeste, de santé, de
+repos ou de configuration avant mutation du service. Elle conserve les contrôles
+existants sur les échéances : les lignes à conserver ne doivent pas expirer
+pendant la bascule. Aucune table n'est exemptée de la comparaison, notamment
+`execution_log_state`, les événements et les politiques. Les deux sauvegardes
+natives, schéma complet, collectionUUID, CID/génération, montages, référence,
+configurations officielles et bornes140/200/180 restent ceux du protocole011→011.
+
+Avant intention, seul le CIDf73 possédé peut être redémarré. Après intention,
+le secours rejoint exclusivement la même candidate sur la base existante,
+sans rollback d'image ni copie d'une sauvegarde sur la base active. Le reçu
+nomme le profil ; succès primaire, finalisation,16clients Docker et unité/cgroup
+joints sont vérifiés séparément. Cette bascule est un prérequis sans groupe
+fonctionnel. Les anciennes preuvesf73 restent attachées à leur image ; débit
+10001HTTP, expiration réelle, refus, pertes et campagnes de régression doivent
+être éprouvés sur la candidate réellement servie.

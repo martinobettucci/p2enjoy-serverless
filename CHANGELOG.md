@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-132.3 : borne numérique réellement franchie sur f73 :10240→10000tirs,
+  survivants/retraits exacts,112pagesAPI et restitution jointe ; troisgroupes
+  ciblés, sans nouvelle invocation. Contrat du profil de bascule SQL133 précisé.
+
 - SLS-072 : douzegroupes API complets passent sur f73, avec vrais budgets
   10000/+1 et16Mio/+1, expirations, droits, refus, coupures, lecteurs et EMFILE.
   Node/ressources joints et purgephysique recoupée ;10UI/25communs et régression
