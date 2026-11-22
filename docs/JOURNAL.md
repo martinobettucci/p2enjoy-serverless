@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — neufpartielsUI et interruption130 à corriger
+
+Replayde324298/515sources08b8959/f73 passeUI09 (CSSOM/CSP) et les3viewportsUI10,
+puis UI07 attend sansrequestfailed10s malgrépolicy-commit acquis. StatutHTTP
+nonconservé, aucune panne déduite ; nettoyagecomplet.130inscrit avantcode : cas
+partagé, vraiPage.stopLoading après commit/versionrelue, observations réseau
+expurgées, issueinconnue/relecture sansrejeu. Zéroqualifié, images privées à
+inspecter ; chargement/troncatures du replay ont déjà été ouvertes et cadrées.
+
 ## 22 novembre 2026 — premier10UI, septpartiels et défaut de banc129
 
 cca809c0/515sourcesc209ffe/f73 passeUI01–06/08, puis addStyleTag échoue210 au

@@ -81,6 +81,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-127](#sls-127) Refus SQLite après épuisement réel des descripteurs | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-128](#sls-128) Purge réelle après journal de 16Mio | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-129](#sls-129) Agrandissement et cadrage des preuves Journaux | Corriger | `[~]` | SLS-072 | cette unité |
+| 3 | [SLS-130](#sls-130) Interruption navigateur après écriture de politique | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4458,3 +4459,47 @@ tokens de l'unique :rootCSSexterne doublés et restaurés enfinally, valeurs/pri
 conservées. Cibles d'état défilées et rectangles vérifiés avantJPEG ; pause et
 pré focalisé ont deux vues distinctes, Tab/ShiftTab établit le focusclavier.
 Syntaxe etdiff passent ; aucune preuve du replay encoreacquise.
+
+
+<a id="sls-130"></a>
+## SLS-130 — Interrompre la réponse navigateur après commit de politique
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
+Contrat : cette unité, EXECUTION_LOGS#console-et-manuel.
+
+Constat : replay129 de324298/515sources08b8959/f73 passe neufgroupes puis UI07
+attend requestfailed10s sans succès. La barrière policy-commit a acquis le
+prctl de restitution après WAL acquis/libéré ; le modehorsligne n'interrompt
+pas cette requête déjà en vol dans le navigateur observé. Son statutHTTP final
+n'a pas été relevé : aucune erreur de transport n'est déduite du timeout du banc.
+Garde/jonctions/purge acquises, huitcompteurs0, zéro groupequalifié. [Rouge](evidence/execution-journal-policy-browser-stop-first-failed-dev-2026-11-22.json).
+
+Résultat attendu : la requête de politique réellement committée perd sa réponse
+par arrêt natif des fetches de la page, et l'UI conserve une issue inconnue puis
+relit l'autorité sans rejouer le PUT. Aucun retour HTTP/JS n'est fabriqué.
+
+- [x] SLS-130.1 Sceller le rouge, programmes et frontière native, neufpartiels/
+  zéroqualifié et nettoyage ; nommer les observations de transport manquantes.
+- [ ] SLS-130.2 Cas partagé dédié au parcoursUI07, client isolé original zéro
+  groupequalifié : conserver événements PUT(response/requestfailed) avant
+  assertion, WALcommit retenu, version relue réellement pendant la retenue.
+- [ ] SLS-130.3 Après ce commit et avant libération, appeler unefois Page.stopLoading
+  via une sessionCDP de cette seule page. Exiger un vrai requestfailed du même
+  PUT et absence de réponseHTTP acceptée auparavant ; aucune issue alternative
+  de succès. Conserver code d'erreur sousSHA et ordre des instants ; timeout
+  manqué reste rouge. Détacher CDP et joindre la barrière en finally.
+- [ ] SLS-130.4 UI affiche issueinconnue et bloque écriture, saisie conservée ;
+  relecture voit l'uniqueversion committée, un seulPUT et aucun rejeu. Prouver
+  aussi confirmation/conflit/rélecture/enregistrement et référence indisponible
+  par le même cas partagé, puis10UI/12API/25communs et captures inspectées.
+
+Décision avant code : Page.stopLoading est la commande native de Chromium qui
+arrête navigations et fetches encore enattente, selon le [protocole officiel](https://raw.githubusercontent.com/ChromeDevTools/devtools-protocol/master/json/browser_protocol.json)
+(domainePage/méthodestopLoading). Le seul effet attendu est la vraie interruption
+cliente, après preuve de commit serveur. Aucun Fetch.enable, route/interception,
+remplacement de réponse, nouveau serveur ou changement produit. Le modehorsligne
+reste seulement dans le scénario de coupure des polls futurs déjà prouvéUI06.
+Le casUI07 est extrait en un module de scénario réutilisé par le client complet
+et son préparatoire, sans nouveau cadre générique de tests. Une politique à la
+borne10080 est modifiée de−1 avec confirmation ; sinon de+1 : aucun no-op ne peut
+passer pour un commit. Les sources et premiersrouges restent conservés.

@@ -725,3 +725,17 @@ sont expliquées par cette préparation. Un autre code/site ou erreur de moteur
 reste un échec à instruire même si un tick ultérieur rend200. Le détenteur exact
 du verrou n'est pas identifié par les preuves actuelles. La préparation seule
 n'ajoute aucun groupe ; le replay complet et le recoupement restent requis.
+
+
+### Réponse de politique arrêtée dans le navigateur — SLS-130
+
+Le parcoursUI07 retient policy-commit après la vraie transaction/WAL puis relit
+la nouvelleversion par API avant d'interrompre la page. Page.stopLoading, commande
+native du [protocole Chromium](https://raw.githubusercontent.com/ChromeDevTools/devtools-protocol/master/json/browser_protocol.json),
+arrête les fetches en attente sans fabriquer de réponse. Le mêmePUT doit produire
+un vrai requestfailed avant libération ; tout200 préalable ou absence d'événement
+échoue. L'UI doit préserver la saisie, annoncer l'issueinconnue et bloquer un
+nouvel enregistrement jusqu'à relecture. Version et comptePUT=1 sont recoupés,
+sans rejeu. Observations de transport expurgées avant assertion, CDP détaché et
+barrière jointe enfinally. Un client préparatoire partage ce seul cas réel avec
+le client10UI et qualifie zéro groupe ; le full10/12API/25communs reste requis.
