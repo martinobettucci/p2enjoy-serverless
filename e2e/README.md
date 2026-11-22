@@ -3141,3 +3141,17 @@ indisponible ne relâche jamais les assertions de propriété ni l’oracle nomi
 Les appels sans l’argument restent la voie historique009 et ses conditions
 d’âge : la préflight jeune doit maintenant refuser ces captures devenues âgées.
 Observation25/alarme35/commande40, garde120 et bornesUTC sont inchangées.
+
+La perte `observer-loss --target-schema011` exige réellement009/010 au point
+natif puis Dockerpause du seul contrôle temporaire, avantSIGKILL du pilote
+et de l’observateur. La garde doit rapporter migrationincomplète, retirer ce
+CID suspendu et restituer les originaux011 ; une migration déjà011 ne passe
+pas pour ce discriminant. Les autres modes ne suspendent pas le contrôle.
+
+Le replay numérique courant utilise
+`node e2e/schedule-firing-volume-replay.mjs MODE --target-schema011`, oùMODE
+vaut `invalid`, `not-eligible`, `preflight`, `count`, `seed-loss` ou `observer-loss`.
+Il sélectionne explicitement le nouveau manifeste de capture011, vérifie ses
+migrations exactes et ses exports propres ; sansargument, manifeste009
+historique et oracle de son époque sont conservés. `count` reste refusé avant
+22:10UTC le22novembre, `preflight` nécessite1à38fenêtres réellement manquées.

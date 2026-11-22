@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
+# @verifies docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#observation-du-replay-et-preuves-propres
 """Verify, copy and observe a sealed real DEV installation without editing rows."""
@@ -110,6 +112,11 @@ def verify_capture(identifier):
     receipt = json.loads((folder / 'capture.json').read_text())
     evidence = ROOT / 'docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json'
     public = json.loads(evidence.read_text())
+    current = identifier != public['receipt']['capture_id']
+    if current:
+        evidence = ROOT / 'docs/evidence/schedule-firing-volume-capture-schema011-dev-2026-11-22.json'
+        public = json.loads(evidence.read_text())
+        assert public['receipt']['capture_id'] == identifier, 'known_current_capture_required'
     assert public['completed'] and public['capture_qualified'] and receipt == public['receipt'], 'known_capture_required'
     assert receipt['completed'] and receipt['capture_id'] == identifier and receipt['source_read_only'] and receipt['dates_unchanged']
     witness = receipt['witnesses']
@@ -123,6 +130,13 @@ def verify_capture(identifier):
     assert sha(folder / 'control.sqlite3') == receipt['backup_sha256']
     with closing(immutable(folder / 'control.sqlite3')) as db:
         assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
+        assert not db.execute('PRAGMA foreign_key_check').fetchall()
+        migrations = [row[0] for row in db.execute('SELECT version FROM schema_migrations ORDER BY version')]
+        if current:
+            from retention_current_images import CURRENT_MIGRATIONS
+            assert migrations == receipt['schema_migrations'] == CURRENT_MIGRATIONS, 'current_firing_capture_schema011_required'
+        else:
+            assert migrations == ['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql','008_function_versions.sql','009_schedules.sql'], 'historical_firing_capture_schema009_required'
         assert snapshot.witnesses(db, ids, witness['cursor'], namespace, installation) == witness
     assert sha(folder / 'registry.sqlite3') == receipt['registry_sha256']
     with closing(immutable(folder / 'registry.sqlite3')) as db:
@@ -138,13 +152,20 @@ def verify_capture(identifier):
     assert len(inventory) == receipt['artifact_files']
     assert hashlib.sha256(json.dumps(inventory, sort_keys=True).encode()).hexdigest() == receipt['artifact_inventory_sha256']
     image_folder = HISTORY / receipt['image_capture_id']
-    assert re.fullmatch('schedule-retention-[a-f0-9]{32}', image_folder.name) and image_folder.resolve() == image_folder
-    assert json.loads((image_folder / 'preservation.json').read_text())['images'] == receipt['images']
-    for role, row in receipt['images'].items():
-        path = image_folder / (role + '-image.tar')
-        sealed_file(path)
-        assert path.stat().st_size == row['bytes'] and sha(path) == row['archive_sha256']
-    return {'capture_id': identifier, 'receipt_sha256': sha(folder / 'capture.json'),
+    if current:
+        from retention_current_images import verify as verify_images
+        preservation = verify_images(receipt['images']['control']['image'], receipt['images']['runtime']['image'])
+        assert image_folder.name == preservation['capture_id']
+        assert preservation['images'] == receipt['images']
+        assert sha(image_folder/'preservation.json') == receipt['image_evidence_sha256']
+    else:
+        assert re.fullmatch('schedule-retention-[a-f0-9]{32}', image_folder.name) and image_folder.resolve() == image_folder
+        assert json.loads((image_folder / 'preservation.json').read_text())['images'] == receipt['images']
+        for role, row in receipt['images'].items():
+            path = image_folder / (role + '-image.tar')
+            sealed_file(path)
+            assert path.stat().st_size == row['bytes'] and sha(path) == row['archive_sha256']
+    result = {'capture_id': identifier, 'receipt_sha256': sha(folder / 'capture.json'),
             'public_evidence_sha256': sha(evidence), 'control_sha256': receipt['backup_sha256'],
             'registry_sha256': receipt['registry_sha256'], 'artifact_inventory_sha256': receipt['artifact_inventory_sha256'],
             'artifact_files': len(inventory), 'namespace_name': namespace,
@@ -153,6 +174,8 @@ def verify_capture(identifier):
             'declarations_per_window': 256, 'eligible_after': receipt['eligible_after'],
             'oldest_completed_at': min(v['completed_at'] for v in witness['firings']),
             'images': receipt['images'], 'image_capture_id': receipt['image_capture_id']}
+    if current:result['schema_migrations']=migrations
+    return result
 
 
 def timing(source, mode):

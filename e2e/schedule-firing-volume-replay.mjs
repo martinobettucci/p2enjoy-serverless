@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
+// @verifies docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
 // @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie
 // @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#observation-du-replay-et-preuves-propres
 // Real sealed backups, native syscall gates, SSO/API reads and independent DEV restoration.
@@ -9,16 +11,18 @@ import {promisify} from 'node:util';
 import {createInterface} from 'node:readline';
 import {chromium} from 'playwright';
 
-const mode=process.argv[2];assert(process.argv.length===3&&['invalid','not-eligible','preflight','count','seed-loss','observer-loss'].includes(mode),'explicit_replay_mode_required');
+const current=process.argv[3]==='--target-schema011';
+const mode=process.argv[2];assert((process.argv.length===3||(process.argv.length===4&&current))&&['invalid','not-eligible','preflight','count','seed-loss','observer-loss'].includes(mode),'explicit_replay_mode_required');
 const run=promisify(execFile),campaign=randomUUID(),base='https://serverless.lelabs.tech';
 const ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
 const helper='/srv/p2enjoy-serverless/e2e/storage-legacy-environment.py',module='/srv/p2enjoy-serverless/e2e/schedule_firing_volume_replay.py';
 const out=new URL('../.local/e2e/',import.meta.url),report=new URL(`schedule-firing-volume-replay-${mode}-${campaign}.json`,out);
-const evidence=JSON.parse(await readFile(new URL('../docs/evidence/schedule-firing-volume-capture-dev-2026-11-11.json',import.meta.url),'utf8'));assert(evidence.completed&&evidence.capture_qualified);
+const evidenceName=current?'schedule-firing-volume-capture-schema011-dev-2026-11-22.json':'schedule-firing-volume-capture-dev-2026-11-11.json';
+const evidence=JSON.parse(await readFile(new URL('../docs/evidence/'+evidenceName,import.meta.url),'utf8'));assert(evidence.completed&&evidence.capture_qualified);if(current)assert(evidence.receipt.schema_migrations.length===11&&evidence.receipt.schema_migrations.at(-1)==='011_execution_logs.sql');
 const capture=evidence.receipt.capture_id,events=[],checks=[],observations=[],refusals=[];
 let child,ended=false,exitCode=null,browser,admin,session,credentials,ready,restoration,before,source;
 let completed=false,cleanup=false,failure=null,errors='',saveQueue=Promise.resolve();
-function save(){saveQueue=saveQueue.then(async()=>{const pending=new URL(report.pathname+'.pending','file:');await writeFile(pending,JSON.stringify({campaign,mode,source_capture:capture,completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,refusals,exit_code:exitCode,failure,restoration},null,2)+'\n',{mode:0o600});await rename(pending,report);});return saveQueue;}
+function save(){saveQueue=saveQueue.then(async()=>{const pending=new URL(report.pathname+'.pending','file:');await writeFile(pending,JSON.stringify({campaign,mode,source_capture:capture,target_schema:current?'011':'009',completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,refusals,exit_code:exitCode,failure,restoration},null,2)+'\n',{mode:0o600});await rename(pending,report);});return saveQueue;}
 async function until(action,message,seconds=90){const deadline=Date.now()+seconds*1000;while(Date.now()<deadline){const value=await action();if(value)return value;await new Promise(resolve=>setTimeout(resolve,250));}assert.fail(message);}
 async function event(name,seconds=370){return until(()=>{const value=events.find(v=>v.event===name);assert(value||!ended,'deployment_driver_stopped');return value;},'deployment_event_missing',seconds);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}finally{await save();}}

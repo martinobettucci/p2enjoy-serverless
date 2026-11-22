@@ -63,6 +63,10 @@ capturé : count devient éligible à C+39*300, après3h15 réelles et avant sep
 Aucun contrôle ou fonction de cette installation temporaire ne reste actif
 pendant l'attente. Les autres preuves indépendantes peuvent avancer en série.
 Le reçu/public manifeste courant est distinct du manifeste du11novembre.
+La CLI numérique sélectionne ce manifeste par l'argument explicite
+--target-schema011 ; sans lui, elle conserve le manifeste historique009.
+L'opérateur reconnaît uniquement ces deux manifestes nommés et leurs reçus
+égaux, jamais une source arbitraire ou la dernière preuve d'un glob.
 
 La vérification du replay reconnaît explicitement soit le manifeste historique,
 soit le nouveau manifeste courant ; elle exige leur reçu complet égal au canonique,

@@ -389,7 +389,22 @@ def observe(campaign,fd):
         receipt.update(container_id=row['Id'],image=row['Image'],pid=pid,birth=birth,
                        cgroup_sha256=hashlib.sha256(cgroup.encode()).hexdigest(),observer_attached=True,native_stop=observer.stopped)
         atomic(target,receipt)
-        if mode == 'observer-loss':kill_pair(item,target,receipt)
+        if mode == 'observer-loss':
+            if current:
+                loss_state=read_state(reader,source,current=True)
+                receipt['before_observer_loss']=loss_state;atomic(target,receipt)
+                assert loss_state['schema_migrations'] in (helper.SCHEMA_011[:9],helper.SCHEMA_010), 'loss_requires_incomplete_migration_before011'
+                helper.docker(item,'pause',row['Id'])
+                paused=json.loads(helper.docker(item,'inspect',row['Id']))[0]
+                assert paused['Id']==row['Id'] and paused['Image']==helper.retention_control_image(item)
+                assert paused['State']['Running'] and paused['State']['Paused'] and paused['State']['Pid']==init
+                assert paused['Config']['Labels']['com.docker.compose.project']==item['project']
+                assert Path('/proc',str(pid),'stat').read_text().rsplit(')',1)[1].split()[19]==birth
+                assert Path('/proc',str(pid),'cgroup').read_text()==cgroup
+                assert read_state(reader,source,current=True)==loss_state, 'copy_changed_before_freeze'
+                receipt.update(control_paused_for_incomplete_loss=True,paused_container_id=row['Id'])
+                atomic(target,receipt)
+            kill_pair(item,target,receipt)
         started = time.monotonic()
         deadline = started+25
         pending = None;protected = None;database_boundary = False
