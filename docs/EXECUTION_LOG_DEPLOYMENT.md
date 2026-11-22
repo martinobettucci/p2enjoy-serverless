@@ -185,3 +185,14 @@ unité inactive/MainPID0/ControlPID0 et cgroup vide précèdent toute qualificat
 La réussite d'un secours ne transforme pas l'échec primaire en succès de mise
 à jour. RepriseAPI de l'archive128 et campagne12API/10UI/25communs restent des
 preuves suivantes ; cette opération est un prérequis de déploiement seulement.
+
+
+Le lanceur local `python3 -B e2e/execution-journal-update-run.py <reçu-image-privé>`
+utilise uniquement prepare-update. La préparation recoupe le manifeste du CID1aa
+embarqué avec celui de la candidate avant arrêt : web et migrations identiques,
+ensemblebackend égal et seul execution_logs.py différent. La comparaison après
+remplacement inclut schema_migrations ; la dispense de migration reste réservée
+à010→011. Le runner accepte failed comme fin observable, mais ne peut annoncer
+une réussite que pour ActiveStateinactive et Resultsuccess, avec reçus primaire/
+post réussis, MainPID/ControlPID0 et cgroup vide. Ces contrôles sont communs aux
+deux lanceurs. Leur revue et leur compilation ne prouvent pas encore une bascule.

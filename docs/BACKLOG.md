@@ -4204,3 +4204,14 @@ et sa génération changent. Même supervision et jonction140/200/180s, label/no
 propre, sauvegardes natives avant/aprèsarrêt, reprise enavant après intention,
 aucun046 ni restauration deDB. L'archive retenue constitue la donnée protégée
 de cette mise à jour, pas une précondition à masquer en la supprimant.
+
+
+128 — correctif et prérequis préparés : les deux clausesSQL sont écrites,
+revueRO sansP1/P2 restant sur leur sémantique ; imagebf9b61a6 construite/inspectée,
+42backend/quatreweb, seul execution_logs.py différent de1aa. Contrôleactif et
+référence inchangés. Le pilote prepare-update compare la baseline embarquée,
+schéma/table/collection complets et distingue le résultat réel de l'unité des
+seuls fichiers de reçu. Trois écarts de revue (schema_migrations dispensée,
+préflightmanifeste absent, failed assimiléàinactive) sont corrigés avant exécution.
+Compilation/diff passent ; la miseàjour et la reprise API ne sont pas encore
+éprouvées.128.3 reste ouvert.

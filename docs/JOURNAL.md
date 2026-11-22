@@ -10147,3 +10147,17 @@ réussie. Garde, purge, huit compteurs0 et5982artefacts sont recoupés. Les roug
 sources et reçus sont scellés dans les preuves SLS-126/127 ; aucun groupe de la
 campagne complète n'est qualifié par ces préparatoires. Reprise : vagues et
 budgets réels, puis12API/25communs et les parcoursUI restant à produire.
+
+
+### 22 novembre 2026 — Purge16Mio : cause réelle et mise à jour préparée
+
+API12 etAPI05 passent en préparatoire. Le premier corpusAPI06 atteint exactement
+16Mio, puis deux POSTpurge503 laissent une archive retenue. Un seul POSTdiagnostic
+supplémentaire recoupe SQLITE_FULL/purge_function, FDtemporaireSQLite16Mio et
+/tmp0libre puis16Miolibres ; /state dispose de100Go. Les deux effacements bulk
+sont corrigés parORROLLBACK, atomicité globale conservée. Imagebf9b61a6 inspectée,
+seul execution_logs.py change ; le contrôle utilise encore1aa. La voie gardée
+prepare-update011→011 est codée et relue, sans bascule encore exécutée. Reprise :
+la lancer, qualifier la purge de l'archive possédée et le retrait des parents,
+puis les deux corpus et les campagnes propres/communes. L'ancien rapport reste
+cleanupfalse et aucune qualification complète n'est annoncée.
