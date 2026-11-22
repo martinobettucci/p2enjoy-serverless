@@ -1,5 +1,20 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — clôture indépendante122 attestée sur501sources
+
+Une seule fonction originale est appelée puis son lecteur retenu ; SIGSTOP du
+helper757199 attesté, garde60 réelle le tue/joint. GET50360,070s et PUT20058,947s,
+reçu systemdrestorer758216/ad7bfba1 avec santéDockerunhealthy→healthy. Purge
+physique et cinq fermetures passent ; dixprocessus recensés et paquet absents.
+Source501/image1aa/services/configuration/5982originaux conservés, huitcompteurs0.
+Le primaire garde son assertion/code1 et cleanup=true, zéro groupe qualifié.
+
+Le collecteur privé initial échoue sur MESSAGE=null : journalctl JSON abrège
+les champs>4096octets. Son programme/rouge restent figés. Un addendum RO--all
+retrouve le même reçu7860octets, SHA8f153bf7, ID/PID/unité/naissance exacts.
+Aucun handler ni faute rejoué pour ce recoupement.122 reste[~] pour12API/25communs
+après121 ; le cas de clôture ne prouve pas l'ordre de commits du journal.
+
 ## 22 novembre 2026 — clôture locale122 acquise, garde santé à corriger
 
 Brut21f2affb/500sources : Node termine1 sans intervention, paquet temporaire

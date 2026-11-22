@@ -3729,3 +3729,26 @@ SIGSTOP attesté, reçu d'origine systemd réelle et journal corrélé, réponse
 lecture503 conservée en échec/code1, PUT réel abouti, purge physique et cinq
 fermetures locales acquises. Zéro groupe qualifié ajouté ; les12API/25communs
 restent dus après résolution121. Ce cas n'exige pas le EAGAIN noyau contesté.
+
+Premier client isolé501sources : primaire503/code1 conservé, PUT200, garde
+système confirmée par son cgroup, purge physique et cinq fermetures locales
+réussies. Le contrôle indépendant du journal échoue dans l'orchestrateur privé ;
+le passage reste donc à zéro groupe qualifié,122 non clôturée. Conserver ses
+sources/rapports et déterminer ce refus de collecte avant toute correction.
+
+Cause du refus de collecte501 : journalctl JSON sans `--all` remplace MESSAGE
+par null au-delà4096octets ; le reçu fait7860octets. Décision avant nouveau
+collecteur : relecture RO `--all` du même reçu déjà exécuté, typage MESSAGE et
+recoupement exact attempt_id/PID/unité/naissance. Conserver l'orchestrateur
+échoué et son brut ; aucune relance du SIGSTOP ou du handler n'est nécessaire
+pour lire cette preuve existante. Cet addendum ne compte aucun groupe de plus.
+
+Clôture de faute isolée attestée : [preuve501sources](evidence/execution-journal-independent-guard-closure-dev-2026-11-22.json).
+SIGSTOP helper757199 puis SIGKILL par la garde ; GET503 à60,070s et PUT200 à58,947s.
+La santé passe unhealthy→healthy dans55s, les threads sont libérés et la vraie
+origine systemd (PID758216, attemptad7bfba1…) est recoupée avec MESSAGE7860octets,
+SHA8f153bf7. Purge physique d'une fonction/jeton/service/namespace, cinqfermetures,
+dixprocessus recensés absents et paquet temporaire retiré. Le primaire reste
+completed=false/code1, cleanup=true ; zéro groupe qualifié. Le collecteur initial
+échoué est conservé ; son addendum RO n'ajoute aucun handler ou faute.122 reste
+[~] pour l'intégration12API/25communs, actuellement dépendante du défaut121.
