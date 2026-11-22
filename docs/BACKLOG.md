@@ -4309,3 +4309,21 @@ Le finally du client appelle recover pour une barrière nonclose : son arrêt du
 helper peut expliquerSSH255 et les retours200 avantdeadline. Cette fin n'est
 donc pas qualifiée de panne primaire du transport. L'objet à identifier reste
 le GET503 avant l'actionEOF. Les programmes et premiers reçus sont conservés.
+
+
+126.5 — relevéRO des logs : dans la fenêtreEOF,429/logs précède503/healthz ;
+deux execution.maintenance_failed/OperationalError sont relevés avant les deux
+reader-held. Aucune database.unavailable dans ce relevé. Le contrôle conserve
+l'erreur de maintenance jusqu'au succès d'un prochain tick ; le codeSQLite et
+le détailHTTP du premier503 ne sont pas reconstructibles à partir de ce log.
+Un premier replay du même cas avec relevéHTTP a passé troisvagues+EMFILE,
+sans503inattendu : il ne prouve pas la cause du premier. Avant toute correction,
+le préparatoire peut répéterreaders() auplus3fois, s'arrêtant au premier échec,
+statuts/deadlines inchangés, zéro groupequalifié et purge unique à la fin.
+
+
+126.5 — [replaydiagnostic sans reproduction et logs du premier rouge](evidence/execution-journal-reader-health-diagnostic-dev-2026-11-22.json).
+Les troisvagues et les deux vraisEMFILE passent, restitution/purge et huitcompteurs0.
+Zéro groupecompletqualifié et aucune cause attribuée au premier503. Le harness
+conserve désormais tout refus inattendu avant assertion sous forme expurgée ;
+la reproduction limitéeàtrois itérations s'arrête au premier échec.126.5 resteouvert.

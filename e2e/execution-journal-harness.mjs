@@ -116,12 +116,33 @@ export class JournalCampaign {
   }
 
   async call(path,{method='GET',body,bytes,token,anonymous=false,status=200,headers={},json=true}={}) {
+    const started=performance.now(),expected=[status].flat();
     const technical=token!==undefined;
     const client=technical || anonymous?this.caller:this.admin;
     const response=await client.fetch(path,{method,data:bytes===undefined?body:bytes,headers:{
       ...(technical?{'X-Serverless-Token':token}:anonymous?{}:{Origin:base,'X-CSRF-Token':this.session.csrf_token}),...headers,
     }});
-    assert([status].flat().includes(response.status()),`unexpected_http_status:${method}:${response.status()}`);
+    // @spec docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOGS.md#instrumentation-native-des-lectures
+    // @verifies docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOGS.md#instrumentation-native-des-lectures
+    if(!expected.includes(response.status())) {
+      try {
+        const pathname=new URL(path,base).pathname;
+        const template=pathname.replace(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi,'{id}');
+        const publicRoute=template==='/healthz' || /^\/(?:api|auth)(?:\/(?:[a-z][a-z-]*|\{id\}))*$/.test(template);
+        const raw=await response.body(),observation={scenario:'unexpected-control-http-result',method,
+          ...(publicRoute?{route:template}:{route_sha256:sha(pathname)}),expected_statuses:expected,
+          http_status:response.status(),elapsed_ms:performance.now()-started,body_bytes:raw.length,body_sha256:sha(raw)};
+        if(raw.length<=16384) {
+          let value;try{value=JSON.parse(raw.toString('utf8'));}catch(error){if(!(error instanceof SyntaxError))throw error;}
+          if(typeof value?.error==='string') {
+            observation.error_sha256=sha(value.error);
+            if(['log_read_timeout','log_read_unavailable','log_policy_changed','log_collection_changed','log_snapshot_expired','log_authorization_context_changed','log_cursor_invalid','log_cursor_foreign'].includes(value.error))observation.public_error=value.error;
+          }
+        }
+        this.observations.push(observation);await this.save();
+      } catch(error) {this.observations.push({scenario:'unexpected-http-observation-failed',...diagnosis(error)});}
+    }
+    assert(expected.includes(response.status()),`unexpected_http_status:${method}:${response.status()}`);
     const data=json?await response.json():await response.body();
     return {data,status:response.status(),headers:response.headers()};
   }
