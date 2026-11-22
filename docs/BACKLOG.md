@@ -70,7 +70,6 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
-| 3 | [SLS-117](#sls-117) Observation de la requête après départ du document | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR_NAVIGATION_OBSERVATION.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
@@ -1051,9 +1050,11 @@ Critères d'acceptation :
   Reprise du22novembre : le [contrat de continuité](CODE_EDITOR_PUBLICATION_CONTINUITY.md)
   sépare les preuves restantes du POST unique : mutation avant préparation,
   instantané après préparation, réponse perdue et préparation sans admission ;
-  sept groupes ciblés puis25communs à produire avant les coupures/restart.
-  Premier passage becedfc/466 échoué à l’observation réseau : [117](#sls-117)
-  porte diagnostic puis reprise ; aucun des quatre groupes passés n’est qualifié.
+  sept groupes ciblés puis25communs selon le résultat ci-dessous, avant les coupures/restart.
+  Le premier passage becedfc/466 échoué reste exclu. [117](#sls-117) est close
+  par les [32groupes](evidence/code-editor-publication-continuity-dev-2026-11-22.json) :
+  mutation/snapshot, fermeture Page puis reprise et orphanprepared429/abandon.
+  La persistance après redémarrage reste à éprouver, sans nouvelle clôture de070.3.
 - [x] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
   [Rapprochement des quatre preuves](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies) :
@@ -3396,9 +3397,9 @@ Contrat : [CODE_EDITOR_DEPLOYMENT_RECOVERY](CODE_EDITOR_DEPLOYMENT_RECOVERY.md).
 <a id="sls-117"></a>
 ## SLS-117 — Observation de la requête après départ du document
 
-Statut : [~] — [premier passage conservé](evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json)
-au gelbecedfc/466sources/API046 : quatre groupes passent, cinquième échoué sur
-original_request_not_joined_after_departure, zéro qualifié et aucun commun lancé.
+Statut : [x] — [32groupes réels](evidence/code-editor-publication-continuity-dev-2026-11-22.json)
+au gel9b14b0d/469sources/API046,32captures inspectées, neuf handlers et purge
+physique recoupés. Les deux rouges et le diagnostic restent séparés, zéro groupe ajouté.
 Nature : Corriger (banc de preuve). Ordre :3, préalable à070.3/.5.
 Dépend de : SLS-063. Contrat : [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR_NAVIGATION_OBSERVATION.md).
 
@@ -3430,8 +3431,16 @@ Dépend de : SLS-063. Contrat : [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR
   au gel1749ffe/469 : trois étapes, zéro groupe qualifié. Close/retourclose/
   targetDestroyed exacts en3,144ms puis targetabsente ; nouvellePage/GETmêmeUUID,
   Bparhash/Apar défaut, trois handlers et trois captures, purge physique et
-  conservations recoupées. HTTPoriginal resteinconnu.117attend son replay32.
-- [ ] SLS-117.3 Persister le résultat et la décision avant correction du client ;
+  conservations recoupées. HTTPoriginal resteinconnu. À ce checkpoint diagnostique,117attendait son replay32.
+- [x] SLS-117.3 Persister le résultat et la décision avant correction du client ;
   nouveau gel et nouveau7+25sans cumul, neuf handlers, une garde, quatre vrais
   uploads partiels, dix captures ciblées et22communes inspectées, purge physique.
  070.3/.5 restent ouverts pour leurs coupures et persistance après redémarrage.
+
+Résultat117.3 : sept ciblés puis25communs frais, deux fermetures Page/target et
+reprises par GET, observateurs détachés avant le POST suivant ; neuf handlers,
+une garde/un lecteur, quatre uploads receiving puis orphanprepared429/abandon.
+Neuf candidats4publiés/5échoués et quatre révisions recoupés. Les32captures sont
+inspectées ;38backend/quatreweb,010/manuel/notes/configuration/budgets/référence/
+5982originaux conservés. Les fins HTTP inconnues restent inconnues ; aucune
+coupure du contrôle ni persistance après restart acquise par cette campagne.

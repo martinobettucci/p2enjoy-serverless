@@ -1,5 +1,17 @@
 # Intégration avec P2Enjoy Serverless
 
+## Continuité de publication qualifiée —22 novembre2026
+
+Preuve docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json :
+32groupes,469sources9b14b0d/API04604089,32captures inspectées, neuf handlers et
+purge physique. Mutation409 sans candidat et snapshot B/brouillon C distincts ;
+deux fermetures Page/target et reprise GET mêmeUUID, quatre uploads receiving
+puis orphanprepared429 et abandon explicite. Une garde/un lecteur restitués.
+117close ;070garde restart/coupures. Manuel18/74SHA8d2434cf,010/38backend/quatreweb,
+configuration/budgets/référence et5982originaux conservés. Deux rouges, diagnostic
+positif et trois prérequis ajoutent zéro groupe ; état HTTP inconnu conservé.
+Cette note reste une proposition .? ; adoption et restructuration079.3 non revendiquées.
+
 ## Retour au fichier après adoption qualifié —22novembre2026
 
 Preuve docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json :36groupes,

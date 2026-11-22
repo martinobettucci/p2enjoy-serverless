@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- SLS-117 est close par [32groupes réels](docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json) :
+  fermeture Page/target et reprise du même UUID sans POST en1440/390px, mutation
+  pendant reconstruction et instantané conservé, quatre uploads réels puis
+  candidat préparé sans admission d’upload429, puis abandonné par UI.469sources9b14b0d/API046, neuf handlers,
+ 32captures inspectées et purge physique ;070 garde restart/coupures à qualifier.
+
+
 - SLS-115 et SLS-116 sont closes par [36groupes réels](docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json) :
   focus au fichier après adoption, quatre adoptions sous réponse retenue et huit
   replis desktop/mobile.463sourcesce8540a/image046,62captures inspectées, neuf

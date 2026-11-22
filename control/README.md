@@ -1,5 +1,11 @@
 # Plan de contrôle
 
+La [continuité de publication](../docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json)
+est qualifiée par32groupes sur469sources9b14b0d/API046 : neuf handlers et32captures
+inspectées, deux fermetures de page suivies du GET du même UUID, quatre uploads
+partiels puis préparation durable, refus d’admission429 et abandon, avec purge physique.117close ;070 garde
+la persistance après redémarrage et les coupures receiving/validating.
+
 Le [retour de focus après adoption](../docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json)
 est qualifié sur046 :36groupes réels,463sourcesce8540a et62captures inspectées.
 Quatre adoptions focalisent le textarea, huit replis le titre ; neuf handlers,

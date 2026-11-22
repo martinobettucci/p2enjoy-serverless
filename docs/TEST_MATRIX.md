@@ -1,5 +1,44 @@
 # Matrice de qualification réelle
 
+## Continuité de publication qualifiée —22 novembre 2026
+
+La [preuve32](evidence/code-editor-publication-continuity-dev-2026-11-22.json) clôt **SLS-117** sur469sources `9b14b0d`, API04604089/
+CIDe219f789 : sept groupes ciblés puis25communs frais. Le pilote7470 termine
+sortie0 et joint. Les32captures sont ouvertes individuellement : dix JPEG ciblés,
+16JPEG du manuel déclarés et six PNG complémentaires, sans SHA déclaré par le
+rapport de connexion. Les SHA déterministes manuel/login ne remplacent pas les
+nouveaux reçus d’exécution et mtime dans chaque phase.
+
+Pendant reconstruction retenue, la mutation du brouillon donne409 sans candidat
+ni audit de préparation. B préparée/puis publiée garde son instantané pendant
+que le brouillon C est enregistré à sa version suivante. Les deux fermetures
+Page/target en1440/390px sont confirmées en4,592/3,337ms, avec inventaire absent,
+nouvelles Pages et GET du même UUID sans second POST. Les observateurs sont
+joints/détachés entre variantes. Aucun terminal HTTP n’est déduit de ces fermetures.
+
+Quatre uploads sont réellement receiving, avec81663–196608octets observés dans
+leurs fichiers et499392512octets réservés chacun. Le client écrit un préfixe de
+196608octets par connexion ; ces tailles natives restent distinctes. Le cinquième
+POST éditeur reçoit429/Retry-After5 après préparation, sans réservation ni dossier ;
+son lien au brouillon et sa configuration chiffrée sont conservés. Après fermeture
+et nettoyage des quatre connexions, le candidat prepared est consulté puis
+abandonné explicitement par l’UI sur ordinateur/mobile, sans publication.
+
+Neuf invocations distinctes succeeded/handler_started1/HTTP200, neuf candidats
+(quatre publiés/cinq échoués), quatre révisions et les audits9/4/1 sont recoupés.
+Une garde avec un lecteur est restituée. Fonction, jeton et parents retirés,
+purge physique par UUID et absence Docker/réseaux/canaux/backings/baux/réservations
+recoupées.38backend/quatreweb HTTPS no-store,010/intégrités/FK, notes, budgets,
+configuration/référence et5982originaux conservés. Manuel canonique rendu :
+18chapitres/74paragraphes, SHA8d2434cff30235f0a6849f312764432581afb78659b71a328d51ee5416365d6b.
+
+Deux rouges, le diagnostic positif et les trois prérequis ajoutent zéro groupe.
+Leurs inconnues réseau restent conservées. Les images ne prouvent pas les effets
+DOM/HTTP/natifs ; le code mobile n’est pas entièrement cadré, et le texte agrandi
+du manuel ne mesure pas un zoom global du navigateur.
+**070.3 persistance après redémarrage et070.5 coupures receiving/validating restent
+ouverts**. Le contrôle n’est pas redémarré pendant ce passage.
+
 [Diagnostic Page/target117](evidence/code-editor-page-closure-diagnostic-dev-2026-11-22.json)
 acquis sur469sources1749ffe : trois étapes, zéro groupe qualifié, trois JPEG
 desktop, trois handlers et purge physique. Une nouvelle Page consulte le même

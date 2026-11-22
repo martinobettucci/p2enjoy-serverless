@@ -1,12 +1,19 @@
 # Qualification de la plateforme
 
+Le [replay de continuité](../docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json)
+passe32groupes réels sur469sources9b14b0d/API046 :7ciblés/25communs, neuf handlers,
+une garde/un lecteur, deux fermetures Page/target, quatre uploads partiels et
+purge physique. Les32captures sont inspectées ;117close,070garde restart/coupures.
+Les deux rouges et le diagnostic positif sont conservés séparément à0groupe.
+
+
 La [fermeture Page/target117](../docs/evidence/code-editor-page-closure-diagnostic-dev-2026-11-22.json)
 est acquise comme diagnostic sur469sources1749ffe : trois étapes, trois
 invocations, trois captures desktop et purge physique, zéro groupe qualifié.
 [Le replay32](../docs/CODE_EDITOR_PUBLICATION_CONTINUITY.md) est décidé avant
 l’adaptation du client : deux viewports et jonction/détachement entre variantes.
-Le client est adapté et non exécuté ; le gel du nouveau7+25 reste à qualifier.
-117et070restent ouvertes.
+Le client adapté est qualifié par le replay32 ci-dessus ;117est close,070reste
+ouverte pour les coupures et la persistance après redémarrage.
 
 
 Le [diagnostic réseau20s](../docs/evidence/code-editor-navigation-diagnostic-failed-dev-2026-11-22.json)

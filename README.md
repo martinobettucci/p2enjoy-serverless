@@ -1,5 +1,15 @@
 # P2Enjoy Serverless
 
+La [continuité de publication depuis l’éditeur](docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json)
+est qualifiée par32groupes réels au gel9b14b0d/469sources surAPI046 : mutation
+pendant reconstruction409 sans candidat, instantané B conservé malgré brouillon C,
+fermeture du client/reprise GET même UUID et candidat préparé dont l’admission
+est refusée429, ensuite abandonné par UI.
+Neuf handlers,32captures inspectées et purge physique complète ; **117 est close**.
+070 garde la persistance après redémarrage et les coupures du contrôle. Les
+anciens échecs et le diagnostic restent séparés, sans groupes ajoutés.
+
+
 Le [retour de focus et les attentes de l’éditeur](docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json)
 sont qualifiés par **36groupes réels** :11ciblés/25communs sur463sourcesce8540a,
 image04604089 et62captures inspectées. Quatre adoptions focalisent le champ de

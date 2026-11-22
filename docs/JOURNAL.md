@@ -1,5 +1,25 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — continuité qualifiée,117 clôturée
+
+Replay9b14b0d/469, pilote7470 sortie0/joint :7+8+8+9=32groupes, rapport ciblé
+9a510a61. Mutation409 sans candidat, snapshot B et brouillon C indépendants ;
+deux pages fermées nativement en4,592/3,337ms puis GET même UUID sans POST.
+Quatre receiving avec81663–196608octets natifs, cinquième429/Retry-After5 prepared,
+puis fermetures/jonctions et abandon UI. Neuf handlers,9candidats4pub/5failed,
+4révisions, audits9/4/1 ; une garde/un lecteur, purge physique d’une fonction.
+
+Les32images sont ouvertes individuellement et liées à leurs SHA/mtime :26JPEG
+déclarés/six PNG compléments. Le constat de liens mobiles se touchant est retiré
+après réouverture exacte, confirmée par le principal ; aucun défaut produit retenu.
+Images distinctes des preuves DOM/HTTP/natives ; limites de cadrage conservées.
+Manuel18/74SHA8d2434cf,38backend/quatreweb/010, notes/config/budgets/référence et
+5982originaux préservés. Revue RO sans blocage ; publication gzipf83c021c/brutdedd54df.
+
+117close. Deux rouges, diagnostic positif et3prérequis ajoutent0groupe ; leurs
+inconnues réseau restent conservées. Le contrôle n’a pas redémarré.070.3/.5
+restent ouverts pour restart et coupures receiving/validating du POST unique.
+
 ## 22 novembre 2026 — replay de continuité préparé après diagnostic
 
 Après3d5554f poussé, le groupe5 utilise une fermeture réelle Page/target dans

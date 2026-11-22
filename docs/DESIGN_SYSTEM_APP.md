@@ -601,3 +601,16 @@ explicite montre200, hash complet, UUID, corps et téléchargement. Les quatre
 vues n’ajoutent pas de défaut bloquant ;101/102 restent connus et non corrigés.
 Leur clôture séparée et la campagne complète095 restent requises. Le corps
 agrandi du manuel ne constitue pas une preuve de zoom global du navigateur.
+
+### Continuité de publication qualifiée — SLS-117
+
+La [preuve32](evidence/code-editor-publication-continuity-dev-2026-11-22.json)
+conserve les surfaces existantes : marqueur enregistré, attente, suivi du même
+UUID dans une nouvelle Page, préparation puis abandon. Deux viewports1440/390,
+dix JPEG ciblés et22captures communes ouverts individuellement. Le suivi et ses
+liens restent lisibles dans la largeur mobile. Aucun composant, couleur,
+dimension ou exception ajouté.
+La fermeture de Page/target, l’état HTTP et les effets backend sont prouvés par
+leurs rapports séparés. Le cadrage du code mobile reste partiel ; aucune preuve
+de focus DOM ou de zoom global n’est déduite des seules images. Manuel rendu
+18/74SHA8d2434cf inchangé.117close,070reste ouverte pour restart et coupures.
