@@ -75,7 +75,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-121](#sls-121) Frontières natives de décision du journal | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-122](#sls-122) Clôture du client de diagnostic après refus natif | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-123](#sls-123) Armement de la coupure après compteur durable | Corriger | `[~]` | SLS-040 | cette unité |
-| 3 | [SLS-124](#sls-124) Restitution du focus des commandes Journaux | Corriger | `[ ]` | SLS-072 | cette unité |
+| 3 | [SLS-124](#sls-124) Restitution du focus des commandes Journaux | Corriger | `[ ]` | SLS-061 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -3796,11 +3796,11 @@ puis prouver interruption, reprise du suivi et compteur1 sans rejeu.
 
 - [x] SLS-123.1 Sceller le rouge501sources, sept groupes partiels/zéro qualifié,
   les programmes et les preuves de restitution/purge de cinq fonctions et parents.
-- [ ] SLS-123.2 Diagnostic borné du helper réel : phase, type/errno, code public
+- [x] SLS-123.2 Diagnostic borné du helper réel : phase, type/errno, code public
   d'assertion et lignes de traceback, sans buffers applicatifs ni stderr brut.
   Rejouer le seul scénario compteur sur une fixture originale fraîche ; aucune
   donnéeSQL écrite, limite élargie ni signal avant acquittement durable.
-- [ ] SLS-123.3 Cause établie, décision/motif persistés avant correction du
+- [x] SLS-123.3 Cause établie, décision/motif persistés avant correction du
   composant en cause ; conserver l'original rouge et ses sources figées.
 - [ ] SLS-123.4 Replay API10 dans les12API puis25communs frais, code déployé et
   sources recoupés, gardes/processus joints, purge physique et captures inspectées.
@@ -3817,11 +3817,27 @@ brut6947603a, archive501sources b39638e8. API08 passe partiellement ;121.4,
 120.4 et122.3 attendent le replay complet après123.
 
 
+Diagnostic123 : [preuve réelle](evidence/execution-journal-control-start-race-diagnostic-dev-2026-11-22.json).
+Les trois chemins attendus appartiennent à1001 ; reçu synthétique valide,
+compteur1. La ligneSQL de la même invocation est running/non terminée mais
+handler_started=null lors de l'assertion ; elle finit ensuite normalement avec
+handler_started=1. Ceci établit une course du banc sur ce passage, sans attribuer
+rétroactivement une cause au premier rouge dépourvu de ce tuple.
+
+Décision avant correction : l'état running/handler_started=null est une attente
+transitoire, seulement si fonction/UUID et unique invocation active concordent,
+avec reçu déjà validé. Continuer les sondes dans les30s EXISTANTES ; n'envoyer le
+signal qu'après handler_started=1, sans accepter0, une autre fonction, un appel
+terminé ni une activité étrangère. Conserver le premier tuple null et l'acquittement
+suivant dans le reçu cut. Ne pas changer le runtime asynchrone ni retirer la
+condition de démarrage pour satisfaire le banc.
+
+
 <a id="sls-124"></a>
 ## SLS-124 — Restituer le focus des commandes Journaux
 
 Statut : [ ] — deux risques P2 statiques relevés en revue072, sans reproduction
-navigateur. Nature : Corriger. Dépend de : SLS-072. Ordre : 3. Contrats :
+navigateur. Nature : Corriger. Dépend de : SLS-061. Ordre : 3. Contrats :
 [console](EXECUTION_LOGS.md#console-et-manuel), [design local](DESIGN_SYSTEM_APP.md).
 
 Résultat attendu : à la fermeture de Conservation et lors d'un refus invalidant

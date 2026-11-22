@@ -550,3 +550,11 @@ empreinte du reçu déjà synthétique, identifiant et état de l'invocation. Au
 stderr brut, buffer applicatif, cookie, argument privé ou écritureSQL. Les
 photographies transitoires restent observées avant de décider de leur cause ;
 les bornes30/35/40/45/180 et la condition fsync avant signal restent inchangées.
+
+
+Décision123 après diagnostic réel : la présence du reçu fsync peut précéder
+l'acquittement asynchrone /started. running avec handler_started=null, mêmeUUID,
+même fonction, non terminé et unique actif reste en attente dans la borne30s
+existante. Le signal exige toujours handler_started=1 ;0 ou toute contradiction
+reste un échec. Le reçu cut conserve premier tuple d'attente et acquittement
+suivant. Aucun runtime, délai produit ou condition durable n'est modifié.

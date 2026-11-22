@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — course du compteur123 reproduite avant correction
+
+Diagnostic502sources/d4458d66 : après reçu fsync valide et UID1001, tupleSQL
+running/handler_started=null, assertion132. La même invocation finit200 avec
+handler_started=1. Contrôle jamais redémarré, trois fonctions purgées, parents
+et jetons retirés, huitcompteurs0 et5982originaux. Zéro groupe qualifié.
+Décision : attendre cet acquittement transitoire dans les30s existantes, après
+contrôles d’identité et unique actif ; signal toujours conditionné au1. Garder
+le premier null et l’acquittement dans cut. Pas de changement produit/runtime.
+
+
 ## 22 novembre 2026 — API08 acquis, nouveau rouge d'armement API10
 
 Replay501sources/1aa70214, archiveb39638e8 et brut6947603a : sept groupes passent,
