@@ -30,7 +30,9 @@ UPDATE_BASELINE='sha256:1aa70214be1ba72bd75bea301fac23a3dbcdaf6547de1b3521c9547c
 FOCUS_BASELINE='sha256:bf9b61a60ae4d9284b037cce90816754c85ad43195500fa8542f8cfcd8c73c17'
 # @spec docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-du-diagnostic-de-maintenance--sls-1265
 DIAGNOSTICS_BASELINE='sha256:a7d7491a8cb698c9e2ee739339c60dc3846d84c8242b55a13a9e9b4f21edb1d7'
-PROFILE_BASELINES={'purge-rollback':UPDATE_BASELINE,'journal-focus':FOCUS_BASELINE,'maintenance-diagnostics':DIAGNOSTICS_BASELINE}
+# @spec docs/BACKLOG.md#sls-133 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-de-la-requête-de-rétention--sls-133
+RETENTION_QUERY_BASELINE='sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0'
+PROFILE_BASELINES={'purge-rollback':UPDATE_BASELINE,'journal-focus':FOCUS_BASELINE,'maintenance-diagnostics':DIAGNOSTICS_BASELINE,'log-retention-query':RETENTION_QUERY_BASELINE}
 OLD='sha256:04604089a8cb61d6015be0cde1671f29265878ff4f6f081509542ebc126055fc'
 RUN_FOLDER=None
 
@@ -362,6 +364,24 @@ def verify_new(item):
         'official_files_unchanged':True,'reference_unchanged':True,'existing_columns_unchanged':True}
 
 
+# @verifies docs/BACKLOG.md#sls-133 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-de-la-requête-de-rétention--sls-133
+def retention_expiration_safety():
+    read_control,_=access_module(Path(__file__).parent if Path(__file__).parent.parent==Path('/run') else None)
+    now=time.time();horizon=now+600
+    with read_control(CONTROL) as db:
+        db.execute('BEGIN')
+        events=db.execute('''SELECT count(*) FROM execution_log_events e
+            LEFT JOIN service_log_policies p ON p.service_id=e.service_id
+            WHERE e.observed_at<max(coalesce(p.expiration_floor,0),?-coalesce(p.retention_minutes,10080)*60)''',(horizon,)).fetchone()[0]
+        calls=db.execute("""SELECT count(*) FROM invocations i
+            LEFT JOIN service_log_policies p ON p.service_id=i.service_id
+            WHERE i.completed_at<max(coalesce(p.expiration_floor,0),?-coalesce(p.retention_minutes,10080)*60)
+            AND i.logs_collection_state<>'expired'""",(horizon,)).fetchone()[0]
+        db.rollback()
+    assert events==calls==0,'retention_update_expiration_horizon_not_clear'
+    return {'checked_at':now,'horizon':horizon,'seconds':600,'eligible_events':events,'eligible_invocations':calls}
+
+
 def prepare(image,*,mode='schema-migration',profile='purge-rollback'):
     signal.signal(signal.SIGALRM,expired);signal.alarm(90)
     assert mode in ('schema-migration','code-update')
@@ -383,7 +403,7 @@ def prepare(image,*,mode='schema-migration',profile='purge-rollback'):
         baseline_manifest=embedded_manifest()
         assert baseline_manifest['backend'].keys()==manifest['backend'].keys(),'code_update_backend_set_changed'
         changes=sorted(name for name,value in manifest['backend'].items() if baseline_manifest['backend'][name]!=value)
-        if profile=='purge-rollback':
+        if profile in ('purge-rollback','log-retention-query'):
             assert baseline_manifest['web']==manifest['web'],'code_update_web_changed'
             assert changes==['control/app/execution_logs.py'],'code_update_unexpected_backend_changes'
         elif profile=='maintenance-diagnostics':
@@ -400,6 +420,7 @@ def prepare(image,*,mode='schema-migration',profile='purge-rollback'):
             previous,candidate=by_type(baseline_manifest['web']),by_type(manifest['web'])
             assert all(previous[key]==candidate[key] for key in ('favicon','css')),'focus_update_style_or_identity_changed'
             assert all(previous[key]!=candidate[key] for key in ('html','js')),'focus_update_bundle_not_changed'
+    expiration_safety=retention_expiration_safety() if mode=='code-update' and profile=='log-retention-query' else None
     nonce=uuid4().hex;folder=Path('/run')/((UPDATE_PREFIX if mode=='code-update' else PREFIX)+nonce);folder.mkdir(mode=0o700)
     write(folder,'preparation-intent.json',{'unit':folder.name,'image':image,'old':public_container(current),'at_ns':time.time_ns()})
     ownership_label='tech.p2enjoy.serverless.code-update' if mode=='code-update' else 'tech.p2enjoy.serverless.schema-deployment'
@@ -423,7 +444,7 @@ def prepare(image,*,mode='schema-migration',profile='purge-rollback'):
         'configuration':configuration(current),'official_sha256':{name:sha(name) for name in OFFICIAL},'compose_sha256':sha(COMPOSE),
         'compose_override':str(override),'compose_override_sha256':sha(override),
         'operator_sha256':sha(folder/'operator.py'),'database_helper_sha256':sha(folder/'control_database.py'),
-        'initial_backup':initial,'backup_folder':str(archive),'old_migrations':old_migrations,'new_migrations':migrations,'image_manifest':manifest,'baseline_manifest':baseline_manifest}
+        'initial_backup':initial,'backup_folder':str(archive),'old_migrations':old_migrations,'new_migrations':migrations,'image_manifest':manifest,'baseline_manifest':baseline_manifest,'expiration_safety':expiration_safety}
     write(folder,'identity.json',item)
     return {'completed':True,'prepared':True,'mode':mode,'update_profile':profile if mode=='code-update' else None,'unit':folder.name,'folder':str(folder),'new_image':image,'initial_backup':str(archive),'database_restored':False}
 
@@ -436,6 +457,7 @@ def apply(folder):
         attest_unit(folder,'apply')
         assert public_container(scope(item))==item['old']
         state=snapshot();exact_schema(state,item['old_migrations'])
+        if item.get('update_profile')=='log-retention-query':write(folder,'expiration-before-stop.json',retention_expiration_safety())
         write(folder,'stop-intent.json',{'old':item['old'],'at_ns':time.time_ns()})
         phase='stopping_owned_control';docker(['stop','--time','10',item['old']['id']],20)
         old=scope(item);assert not old['State']['Running']
@@ -444,6 +466,7 @@ def apply(folder):
         os.chown(item['backup_folder'],0,0)
         # Verify against this final stopped state, not the earlier live snapshot.
         item['initial_backup']=final
+        if item.get('update_profile')=='log-retention-query':write(folder,'expiration-before-intent.json',retention_expiration_safety())
         write(folder,replacement_intent(item).name,{'new_image':item['new_image'],'final_backup_sha256':final['sha256'],'at_ns':time.time_ns()})
         phase='starting_schema011';select_new(item)
         phase='verifying_schema011';result=verify_new(item)
@@ -505,7 +528,7 @@ def finalize(folder):
 
 if __name__=='__main__':
     assert os.geteuid()==0 and socket.gethostname()=='infra-serverless','DEV_only'
-    assert len(sys.argv)==3 and sys.argv[1] in ('prepare','prepare-update','prepare-ui-update','prepare-diagnostics-update','apply','finalize')
-    if sys.argv[1] in ('prepare','prepare-update','prepare-ui-update','prepare-diagnostics-update'):print(json.dumps(prepare(sys.argv[2],mode='schema-migration' if sys.argv[1]=='prepare' else 'code-update',profile={'prepare-ui-update':'journal-focus','prepare-diagnostics-update':'maintenance-diagnostics'}.get(sys.argv[1],'purge-rollback'))),flush=True)
+    assert len(sys.argv)==3 and sys.argv[1] in ('prepare','prepare-update','prepare-ui-update','prepare-diagnostics-update','prepare-retention-query-update','apply','finalize')
+    if sys.argv[1] in ('prepare','prepare-update','prepare-ui-update','prepare-diagnostics-update','prepare-retention-query-update'):print(json.dumps(prepare(sys.argv[2],mode='schema-migration' if sys.argv[1]=='prepare' else 'code-update',profile={'prepare-ui-update':'journal-focus','prepare-diagnostics-update':'maintenance-diagnostics','prepare-retention-query-update':'log-retention-query'}.get(sys.argv[1],'purge-rollback'))),flush=True)
     elif sys.argv[1]=='apply':apply(Path(sys.argv[2]))
     else:finalize(Path(sys.argv[2]))

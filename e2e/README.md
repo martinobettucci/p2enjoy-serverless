@@ -3206,3 +3206,11 @@ le résultatterminal de cette seuleunité avant toute autre campagne.
 La CLI et image-save sont réels, archivescanoniques enlectureseule ; kernelEXIT,
 SIGALRMpending, tempsrestant et jonction ont leurs oracles stricts. Chaque cas
 restezéro groupe de clôture. Les [trois diagnostics](../docs/evidence/retention-image-export-deadlines-schema011-dev-2026-11-22.json) passent sur526sources2691de2/f73, avec unités et descendants joints, archives/services conservés. Aucune rétention métier ajoutée.
+
+
+Le profil `log-retention-query` du lanceur `execution-journal-update-run.py`
+utilise exclusivement `prepare-retention-query-update` depuis f73. Il vérifie
+42backend/quatreweb, seule différence execution_logs.py, et les échéances natives
+avant préparation/arrêt/intention. Contrat :
+[EXECUTION_LOG_DEPLOYMENT](../docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-de-la-requête-de-rétention--sls-133).
+Construction et bascule sont des prérequis, sans groupe fonctionnel ajouté.

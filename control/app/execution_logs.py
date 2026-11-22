@@ -242,9 +242,12 @@ def public_invocation(db,row,*,now=None):
 
 def maintenance(db,*,limit=200):
     now=time.time()
+    # @spec docs/BACKLOG.md#sls-133 | docs/EXECUTION_LOGS.md
+    # Keep the policy outside so the existing service/time index seeks expired
+    # events; global sequence order, eligibility and the output batch stay exact.
     rows=[dict(row) for row in db.execute('''SELECT e.sequence,e.service_id,e.payload_bytes
-        FROM execution_log_events e JOIN service_log_policies p ON p.service_id=e.service_id
-        WHERE e.observed_at<max(p.expiration_floor,?-p.retention_minutes*60) ORDER BY e.sequence LIMIT ?''',(now,limit))]
+        FROM service_log_policies p CROSS JOIN execution_log_events e
+        WHERE e.service_id=p.service_id AND e.observed_at<max(p.expiration_floor,?-p.retention_minutes*60) ORDER BY e.sequence LIMIT ?''',(now,limit))]
     _remove(db,rows,reason='retention')
     calls=[dict(row) for row in db.execute('''SELECT i.id,i.service_id FROM invocations i JOIN service_log_policies p ON p.service_id=i.service_id
         WHERE i.completed_at<max(p.expiration_floor,?-p.retention_minutes*60) AND i.logs_collection_state<>'expired'

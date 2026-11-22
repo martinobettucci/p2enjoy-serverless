@@ -1,3 +1,4 @@
+# @verifies docs/BACKLOG.md#sls-133 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-de-la-requête-de-rétention--sls-133
 # @spec docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-du-diagnostic-de-maintenance--sls-1265
 # @spec docs/BACKLOG.md#sls-124 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-du-focus--sls-124
 # @spec docs/BACKLOG.md#sls-128 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-de-code-compatible011--sls-128
@@ -68,7 +69,7 @@ print(json.dumps({'unit':folder.name,'state':state,'files':files,'cgroup':group,
 def main():
     assert len(sys.argv) in (2,3),'private_built_image_receipt_required'
     profile=sys.argv[2] if len(sys.argv)==3 else 'purge-rollback'
-    assert profile in ('purge-rollback','journal-focus','maintenance-diagnostics')
+    assert profile in ('purge-rollback','journal-focus','maintenance-diagnostics','log-retention-query')
     proof=Path(sys.argv[1]).resolve();assert proof.is_relative_to(ROOT/'.local/e2e') and proof.is_file() and not proof.is_symlink()
     built=json.loads(proof.read_text());assert built['kind']=='static-image-inspection-not-e2e' and built['inspection_container_removed']
     image=built['image'];assert re.fullmatch('sha256:[0-9a-f]{64}',image)
@@ -84,7 +85,7 @@ def main():
         # The remote original must match before creating frozen copies or backups.
         check='import hashlib;from pathlib import Path;assert hashlib.sha256(Path("/srv/p2enjoy-serverless/e2e/execution-journal-deploy.py").read_bytes()).hexdigest()=='+repr(operator_sha)+';assert hashlib.sha256(Path("/srv/p2enjoy-serverless/e2e/control_database.py").read_bytes()).hexdigest()=='+repr(helper_sha)
         remote(['python3','-B','-c',check])
-        prepared=json.loads(remote(['python3','-B','/srv/p2enjoy-serverless/e2e/execution-journal-deploy.py',{'journal-focus':'prepare-ui-update','maintenance-diagnostics':'prepare-diagnostics-update'}.get(profile,'prepare-update'),image],input=json.dumps(manifest),timeout=100))
+        prepared=json.loads(remote(['python3','-B','/srv/p2enjoy-serverless/e2e/execution-journal-deploy.py',{'journal-focus':'prepare-ui-update','maintenance-diagnostics':'prepare-diagnostics-update','log-retention-query':'prepare-retention-query-update'}.get(profile,'prepare-update'),image],input=json.dumps(manifest),timeout=100))
         assert prepared['prepared'] and prepared['completed'] and prepared['mode']=='code-update' and prepared['update_profile']==profile;result['preparation']=prepared
         folder=prepared['folder'];unit=prepared['unit'];assert folder=='/run/'+unit and re.fullmatch('serverless-update-journal-code-[0-9a-f]{32}',unit)
         command=['systemd-run','--quiet','--service-type=exec','--unit='+unit,

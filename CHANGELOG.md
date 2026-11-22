@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-133 : la purge des événements cherche les événements expirés avec
+  l’index service/temps existant, en conservant ordre global et bornes. Profil
+  de bascule f73→candidate ajouté avec refus natif des échéances proches.
+  Construction, bascule et preuves fonctionnelles restent à exécuter.
+
 - SLS-132.3 : borne numérique réellement franchie sur f73 :10240→10000tirs,
   survivants/retraits exacts,112pagesAPI et restitution jointe ; troisgroupes
   ciblés, sans nouvelle invocation. Contrat du profil de bascule SQL133 précisé.

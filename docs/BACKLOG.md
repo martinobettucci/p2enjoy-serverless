@@ -4711,3 +4711,5 @@ Chaque cas tourne dans sa seule unitéroot DEV oneshot180s/stop30s/KillModecontr
 
 
 132.3 — [trois groupes numériques011 acquis](evidence/schedule-firing-retention-count-schema011-dev-2026-11-22.json),526sourcesa81b9b7/f73 :39fenêtres réellement manquées,10240tirs puis10000 survivants exacts selon completed_at/id,240anciens retirés. Deuxinvocationsinitiales conservées, aucunhandlernouveau,112pagesAPI conformes ; observation12,835767s. Restitutionnominale jointe, source scellée et originaux/config/référence/5982 conservés, huitcompteurs0. Source10001HTTP, raccordement de garde et régressions restent requis ; ce résultatf73 ne qualifie pas une futureimage133.
+
+133.3 — correctif limité au SELECT d’expiration intégré avec profil log-retention-query/prepare-retention-query-update depuisf73 ; horizonsnatifs600s avantrépertoire/arrêt/intention, comparaisons42+4 et protocolegardé conservés. Syntaxes et revueRO sansP1/P2 ; build, bascule et preuvesE2E pas encore exécutés.
