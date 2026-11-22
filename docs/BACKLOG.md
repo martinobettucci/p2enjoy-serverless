@@ -75,7 +75,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-121](#sls-121) Frontières natives de décision du journal | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-122](#sls-122) Clôture du client de diagnostic après refus natif | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-123](#sls-123) Armement de la coupure après compteur durable | Corriger | `[~]` | SLS-040 | cette unité |
-| 3 | [SLS-124](#sls-124) Restitution du focus des commandes Journaux | Corriger | `[ ]` | SLS-061 | cette unité |
+| 3 | [SLS-124](#sls-124) Restitution du focus des commandes Journaux | Corriger | `[~]` | SLS-061 | cette unité |
 | 3 | [SLS-125](#sls-125) Corrélation du hash des événements conservés | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-126](#sls-126) Acquisition des lecteurs retenus d’API12 | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-127](#sls-127) Refus SQLite après épuisement réel des descripteurs | Corriger | `[~]` | SLS-040 | cette unité |
@@ -3917,24 +3917,35 @@ Diagnostic seul : zéro groupe qualifié ;123.4 et les12API/25communs restent ou
 <a id="sls-124"></a>
 ## SLS-124 — Restituer le focus des commandes Journaux
 
-Statut : [ ] — deux risques P2 statiques relevés en revue072, sans reproduction
-navigateur. Nature : Corriger. Dépend de : SLS-061. Ordre : 3. Contrats :
+Statut : [~] — deux focusBODY reproduits sur512sources/bf9b61a6 ; trois
+capturesdesktop inspectées, purge physique et compteurs0. Nature : Corriger. Dépend de : SLS-061. Ordre : 3. Contrats :
 [console](EXECUTION_LOGS.md#console-et-manuel), [design local](DESIGN_SYSTEM_APP.md).
 
 Résultat attendu : à la fermeture de Conservation et lors d'un refus invalidant
 le suivi, le focus reste sur une commande active ou rejoint le titre ; aucune
 commande focalisée ne devient désactivée sans relais.
 
-- [ ] SLS-124.1 Reproduire depuis l'accueil, SSO réel, clavier : ouvrir
+- [x] SLS-124.1 Reproduire depuis l'accueil, SSO réel, clavier : ouvrir
   Conservation puis Échap sans changement ; relever le focus pendant/après le
   GET politique de fermeture. Garder l'état réellement observé, même s'il réfute
   le risque statique resource.reload→loading→déclencheur désactivé.
-- [ ] SLS-124.2 Reproduire avec le focus sur Pause et une vraie invalidation de
+- [x] SLS-124.2 Reproduire avec le focus sur Pause et une vraie invalidation de
   politique ou droits : refus, lignes retirées, commande désactivée et relais
   effectif observés. Aucune interception ni réponse substituée.
 - [ ] SLS-124.3 Si défaut confirmé, décision/motif avant correction ; conserver
   les rouges et rejouer les dix UI et25communs frais sur le code déployé, captures
   ouvertes individuellement, contextes/gardes joints et purge physique.
+
+Décision de diagnostic124 avant client : éprouver les deux risques sur le web
+inchangé de l'imagebf9b61a6, après reprise128, avant la campagne finale. Partir
+de l'accueil avec une fonction originale et un SSO réel, commandes clavier,
+GET de politique réel et PUT de version réel provoquant410 du suivi. Conserver
+les événementsfocus natifs pendant Échap/relecture, le focusfinal et trois
+captures, ainsi que les erreursPage. Les deux observations précèdent leur
+assertion commune pour conserver un éventuel succès et l'autre défaut. Aucun
+focus forcé au résultat, réponse substituée, interception, mock ou succès
+conditionnel. Ce préparatoire compte zéro groupe qualifié ; les parcours
+UI06/UI09 et la campagne10UI/25communs gardent leurs preuves propres.
 
 Ces vérifications complètent UI06/UI09 déjà prévus ; elles ne créent pas deux
 groupes supplémentaires. Le risque statique seul ne vaut pas preuve d'un défaut
@@ -4228,3 +4239,24 @@ huit compteurs0 et5982originaux recoupés.511sources ; zéro groupe complet qual
 Le premier rouge reste inchangé.128.3 reste ouvert pour la secondevoie service,
 les corpus et campagnes complètes.124 peut maintenant éprouver ses deux risques
 sur les mêmes ressourcesweb inchangées avant la prochaine campagne finale.
+
+
+124 — [deux pertes de focus réelles](evidence/execution-journal-focus-first-failed-dev-2026-11-22.json).
+Échap : INPUT→BUTTON actif→BUTTON désactivé→BODY durant relectureGET200.
+Suivi : Pause focalisée avantPUTpolitique1→2 ; après refus, lignes0, Reprendre
+indisponible et focusBODY. TroisJPEG ouverts individuellement, aucun autre
+défaut visuel bloquant ; Pageerrors0, purge et huit compteurs0. Le statut exact
+du GETinvalidé n'est pas conservé par ce premier client ; le replay le relèvera.
+Zéro groupe qualifié.
+
+Décision avant correction124 : conserver la relecture après fermeture et porter
+dans le parent une intention de focus. Un effet après démontage et restitution
+passive du dialog rejoint le titre stable Conservation si le focus reste sur
+le déclencheur ouBODY ; un autre contrôle choisi entretemps est respecté. Cela
+évite le déclencheur transitoirement désactivé sans temporisation ni changement
+du dialog partagé. Relais ponctuel, annulé à l'ouverture suivante. Une ref sur
+Pause/Reprendre permet de focaliser le titreJournaux avant désactivation lors
+d'un refus invalidant ; les autres contrôles conservent le focus. Aucun nouveau
+style/token. Manuel et design local nomment ces replis. Rejouer les deux vrais
+parcours avec statutHTTP410, captures desktop/mobile, puis10UI/25communs frais.
+Les premiers rouge et sources restent conservés.

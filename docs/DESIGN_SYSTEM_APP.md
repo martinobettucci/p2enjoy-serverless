@@ -20,10 +20,16 @@ La conservation est une section du service avec Facts et dialog Modifier.
 L'entrée numérique nomme les minutes et les bornes 1–10080. Une diminution
 demande une confirmation explicite dans le flux, en nommant le service ; un
 conflit garde la saisie et propose une relecture. La politique ne partage pas
-le formulaire des variables/secrets. Échap rend le focus à sa commande.
+le formulaire des variables/secrets. Échap ferme le dialog ; après la relecture,
+le titre stable Conservation reçoit le focus lorsque le déclencheur devient
+temporairement indisponible. Un autre contrôle choisi entretemps est respecté.
 Ces parcours seront éprouvés au clavier, sur desktop, tablette et mobile
 390 px ; les longues lignes défilent dans leur cadre sans débordement global.
-À ce checkpoint, seule la spécification est acquise, aucune capture SLS-072.
+Le [premier diagnostic124](evidence/execution-journal-focus-first-failed-dev-2026-11-22.json)
+conserve trois capturesdesktop inspectées et deux mesuresBODY. La correction
+reste à qualifier : après refus invalidant du suivi, si Pause/Reprendre avait
+le focus, le titreJournaux reçoit le relais avant désactivation ; les autres
+contrôles sont respectés. Aucun nouveau token ou style.
 
 ## Reprise de l’éditeur qualifiée —22 novembre2026
 
