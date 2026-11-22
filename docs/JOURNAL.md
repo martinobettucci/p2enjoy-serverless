@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — frontière123 et reprise réellement acquises
+
+Diagnostic4e54e404/503sources : FD10/inode1140247143 reconnu dans le netns du
+seul runtime a5d023ad, absent du netns contrôle. Retenue6,514ms, reçu fsync avec
+startednull puis acquittement1 de la même invocation. Cut9/137 et helper tué/joint
+par pidfd ; garde45 redémarre le mêmeCID1aa. Son journal attribue exactement le
+reçu au PID805650 ; les grandsentiersNode sont comparésIEEE754, journal exact
+conservé séparément. Compteur1, suivi repris, aucune réinvocation automatique.
+Trois fonctions purgées, huitcompteurs0,5982originaux et référence/configuration
+conservés. Diagnostic positif/zéro groupe qualifié : prochain12API puis25communs.
+
+
 ## 22 novembre 2026 — réveil123 acquis, namespace du canal à recouper
 
 Replayda9200fb/503sources, archive12534b25 : sommeil artificiel0,100k stops en

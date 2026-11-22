@@ -3901,6 +3901,15 @@ ce comportement reste à recouper sur la vraie cible, pas présumé comme preuve
 Ne modifier ni plafond100000, ni30s, ni retenue1s, ni runtime/protocole.
 
 
+Le [diagnostic corrigé](evidence/execution-journal-counter-start-and-guard-diagnostic-dev-2026-11-22.json)
+503sources/1aa acquiert réellement /started dans le netns du runtime, inode
+absent du netns contrôle ; retenue6,514ms, mêmeUUID/reçu null→1. Cut9/137,
+helper tué/joint par pidfd, garde45 attribuée à son unique reçu journalisé,
+redémarrage du mêmeCID1aa, reprise du suivi et compteur toujours1. Trois fonctions
+purgées, huitcompteurs0,5982originaux et configuration/référence conservés.
+Diagnostic seul : zéro groupe qualifié ;123.4 et les12API/25communs restent ouverts.
+
+
 <a id="sls-124"></a>
 ## SLS-124 — Restituer le focus des commandes Journaux
 
