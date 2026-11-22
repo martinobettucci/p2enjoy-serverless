@@ -24,7 +24,8 @@ export async function retentionPolicyCase(c,cases) {
     const transport={scenario:'policy-browser-native-stop',method:'Page.stopLoading',events:[],response_status:null};c.observations.push(transport);
     const count=request=>{if(new URL(request.url()).pathname===policyPath && request.method()==='PUT'){writes++;transport.events.push({event:'request',at_ms:Date.now()});}};
     const received=response=>{if(new URL(response.url()).pathname===policyPath && response.request().method()==='PUT'){transport.response_status=response.status();transport.events.push({event:'response',at_ms:Date.now(),status:response.status()});}};
-    c.page.on('request',count);c.page.on('response',received);
+    const interrupted=request=>{if(new URL(request.url()).pathname===policyPath && request.method()==='PUT')transport.events.push({event:'requestfailed',at_ms:Date.now(),error_sha256:request.failure()?sha(request.failure().errorText):null});};
+    c.page.on('request',count);c.page.on('response',received);c.page.on('requestfailed',interrupted);
     try {
       stop=await c.context.newCDPSession(c.page);await stop.send('Page.enable');
       const failed=c.track(c.page.waitForEvent('requestfailed',{predicate:request=>new URL(request.url()).pathname===policyPath && request.method()==='PUT',timeout:10000}));
@@ -33,15 +34,15 @@ export async function retentionPolicyCase(c,cases) {
       const held=await committed.held();assert.equal(held.readers[0].boundary,'policy-commit');
       const actual=await c.value(policyPath);assert.equal(actual.version,prior.version+1);assert.equal(actual.retention_minutes,wanted);
       transport.events.push({event:'commit-read-before-stop',at_ms:Date.now(),version:actual.version});assert.equal(transport.response_status,null);
-      transport.events.push({event:'stop-intent',at_ms:Date.now()});await c.save();await stop.send('Page.stopLoading');
+      transport.events.push({event:'stop-intent',at_ms:Date.now()});await c.save();await stop.send('Page.stopLoading');transport.events.push({event:'stop-ack',at_ms:Date.now()});
       const lost=await done(failed);assert(lost.failure());assert.equal(transport.response_status,null);
-      transport.events.push({event:'requestfailed',at_ms:Date.now(),error_sha256:sha(lost.failure().errorText)});await c.save();
+      await c.save();
       await dialog.getByText(/Son résultat est inconnu/).waitFor();assert(await dialog.getByRole('button',{name:'Enregistrer',exact:true}).isDisabled());assert.equal(await input.inputValue(),String(wanted));await c.capture('retention-response-lost');
       await committed.close();
       await response(c.page,policyPath,()=>dialog.getByRole('button',{name:'Relire la politique',exact:true}).click());await dialog.getByText(/Votre saisie est conservée/).waitFor();assert.equal(writes,1);
       c.observations.push({scenario:'committed-policy-response-lost-in-real-browser',before_version:prior.version,after_version:actual.version,put_requests:writes,network_failure_sha256:sha(lost.failure().errorText),draft_preserved:true});
     } catch(error) {transport.failure=diagnosis(error);throw error;}
-    finally {c.page.off('request',count);c.page.off('response',received);try {if(stop)await stop.detach();}finally {if(!committed.closed)await committed.close();await c.save();}}
+    finally {c.page.off('request',count);c.page.off('response',received);c.page.off('requestfailed',interrupted);try {if(stop)await stop.detach();}finally {if(!committed.closed)await committed.close();await c.save();}}
     await c.page.keyboard.press('Escape');await dialog.getByRole('button',{name:'Abandonner',exact:true}).click();await dialog.waitFor({state:'hidden'});await until(()=>opener.isEnabled(),'retention_unknown_reread_not_joined');await opener.click();
     dialog=c.page.getByRole('dialog',{name:'Conservation des journaux',exact:true});input=dialog.getByLabel('Conservation (minutes)',{exact:true});await input.fill('1');
     const before=await c.value('/api/services/'+cases.service.id+'/log-policy');await cases.policy(cases.service,before.retention_minutes-1);
