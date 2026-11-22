@@ -155,6 +155,12 @@ des états distincts. Les quotas/rétention sont exposés avec période et unit�
   obsolète. Mutation atomique, non rejouée après réponse inconnue. Une écriture
   identique ne prétend pas modifier la valeur. La fonction/son ETag ne changent pas.
 
+L'écriture de politique utilise aussi un worker SQL joint, nommé
+`journal-write`, avec deadline2s et attente SQLite bornée ; elle ne bloque pas
+la boucle HTTP et ne consomme pas l'une des deux places de lecture. Un refus
+503 ou une réponse perdue impose une relecture avant toute nouvelle mutation :
+la réception d'une erreur de transport ne démontre pas l'absence de commit.
+
 Filtres combinables : from/to UTC finis, période maximale sept jours, source,
 niveau connu ou non renseigné, état, invocation UUID, instance UUID, version
 (hash complet de 64 caractères hexadécimaux minuscules), type d'événement et texte
@@ -396,14 +402,19 @@ empreinte ; une garde systemd indépendante peut tuer le seul traceur possédé
 par pidfd, restituer ses ressources puis constater la libération de ses threads.
 
 Les travailleurs du produit portent les noms diagnostiques `journal-subject`,
-`journal-read`, `journal-verify` ou `journal-policy`. La première barrière retient
+`journal-read`, `journal-verify`, `journal-policy` ou `journal-write`. La première barrière retient
 l'entrée réelle `openat` du SQLite principal dans `journal-read`. La seconde
 retient le retour réussi du verrou WAL d'écriture de `BEGIN IMMEDIATE` dans
 `journal-verify` ; un arrêt avant acquisition ne vaut pas réservation. Ptrace
 observe arguments et résultats sans jamais les modifier. Le thread HTTP reste
 actif pendant une retenue de lecture ; les enfants natifs hérités sont joints.
 L'observation courte de la requête d'écriture concurrente reste distincte du
-verrou acquis et n'assimile pas la maintenance à cette requête.
+verrou acquis et n'assimile pas la maintenance à cette requête. Pour la politique,
+le vrai worker `journal-write` doit être observé au retour `EAGAIN` du verrou
+WAL d'écriture tandis que `journal-verify` le conserve. La version native reste
+alors inchangée. Après libération : réponse de lecture, commit du PUT et refus
+du snapshot précédent sont recoupés. Ce nom distingue l'écriture demandée de
+la maintenance et évite de lui attribuer son éventuel échec de verrou.
 
 Acquisition au plus40s, retenue totale45s, alarme50s et secours60s ; la lecture
 du produit garde son propre budget2s, qui n'est jamais étendu par ce banc. Une
