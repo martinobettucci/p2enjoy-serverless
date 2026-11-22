@@ -558,3 +558,19 @@ même fonction, non terminé et unique actif reste en attente dans la borne30s
 existante. Le signal exige toujours handler_started=1 ;0 ou toute contradiction
 reste un échec. Le reçu cut conserve premier tuple d'attente et acquittement
 suivant. Aucun runtime, délai produit ou condition durable n'est modifié.
+
+
+Pour éprouver cette attente123 sans dépendre de son ordonnancement spontané,
+le banc prépare une instance réellement disponible, sans invocation préalable.
+Il observe uniquement le principal, avec NativeObserver et garde déjà armée,
+jusqu'au retour read/recvfrom sur le socketUNIX du canal de cette instance.
+L'inode est recoupé dans /proc/net/unix et le chemin est celui de
+/state/execution/INSTANCE/i-…/control.sock. La lecture mémoire est bornée à la
+seule ligne exacte `POST /started HTTP/1.1\r\n`, sans en-tête ni corps ; pas de
+modification de mémoire, registre, résultat ou protocole. Fermer le suivi d'un
+FD à sa réutilisation. Le retour reste retenu au plus1s et dans l'acquisition30s
+existante pendant que le handler publie son vrai reçu. Un tuple null constaté
+avec les mêmes identités est conservé, puis le principal est immédiatement
+détaché pour permettre son vrai acquittement1 ; sinon échec et restitution.
+La fixture passe ensuite minimum0/idle0 après le redémarrage avant les lectures
+du compteur. Le runtime ne reçoit aucun indicateur ni branche de test.

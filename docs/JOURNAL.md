@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — coupure réelle123, branche d'attente encore non prouvée
+
+Brut75a81d34/502sources, archive61a73803 : sept groupes passent puis cut9/137,
+compteur1/handler_started1 mais zéro sonde null. Le nouvel oracle échoue445 ;
+le nettoyage récupère le mêmeCID1aa et purge cinq fonctions, compteurs0. La
+preuve reste rouge, sans qualification de la reprise nominale. Décision avant
+code : instance réellement chaude sans appel, réception native de /started
+retenue au plus1s, socket/inode/instance vérifiés, ligne seule lue, vrai reçu
+et null constatés avant détachement, puis acquittement1 et signal. Bornes et
+runtime inchangés. Ce sera une nouvelle époque ; l'ancien rouge reste scellé.
+
+
 ## 22 novembre 2026 — course du compteur123 reproduite avant correction
 
 Diagnostic502sources/d4458d66 : après reçu fsync valide et UID1001, tupleSQL

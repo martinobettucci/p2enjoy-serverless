@@ -3833,6 +3833,25 @@ suivant dans le reçu cut. Ne pas changer le runtime asynchrone ni retirer la
 condition de démarrage pour satisfaire le banc.
 
 
+Le [replay suivant](evidence/execution-journal-counter-pending-not-observed-dev-2026-11-22.json)
+coupe réellement9/137 après acquittement1, mais échoue parce que sa première
+sonde ne rencontre pas null. La récupération de nettoyage redémarre le mêmeCID
+sur1aa ; purge physique acquise, sept groupes partiels/zéro qualifié.
+
+Décision avant instrumentation complémentaire : préparer une instance chaude
+sans appel préalable, tracer uniquement le principal jusqu'à la réception
+réelle de `POST /started HTTP/1.1` sur son socketUNIX propre. Lire seulement la
+ligne attendue, jamais les en-têtes/clé/corps, avec inode et chemin du canal liés
+à l'instanceUUID et à la génération possédée. Retenir ce retour recv au plus1s,
+à l'intérieur des30s existantes, observer le reçu fsync et le tuple null, puis
+détacher immédiatement ; attendre ensuite1 avec les égalités déjà imposées.
+Le handler poursuit réellement son travail pendant cette retenue du contrôle.
+Aucun résultat de syscall remplacé, changement de runtime ni faux message.
+Le signal reste interdit avant1. Après restitution, remettre le minimum0 de la
+seule fixture pour éprouver son extinction. Ce placement natif rend la branche
+à prouver observable ; il ne transforme pas l'ancien passage en réussite.
+
+
 <a id="sls-124"></a>
 ## SLS-124 — Restituer le focus des commandes Journaux
 
