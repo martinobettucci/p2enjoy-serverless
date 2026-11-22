@@ -155,3 +155,22 @@ calendar actuels ; les anciennes preuves restent consultables avec leurs époque
 sans substitution d'empreinte ni ajout de groupes. Tant qu'une des trois manque,
 SLS-132 et072 restent ouverts. Les49campagnes/543groupes/18prérequis et l'inventaire
 des consommateurs supplémentaires sont exécutés ensuite sur le code courant figé.
+
+
+## Discriminant de perte avant commit011
+
+Précision du22novembre avant code : pour le seul observer-loss courant, relever
+les migrations committées au premier arrêt natif et exiger009 ou010 exactes.
+À ce point, suspendre le seul conteneur temporaire par Dockerpause et confirmer
+Paused=true, mêmeCID/image/PID/naissance/cgroup et mêmes répertoires reconnus.
+Le [freezer cgroup réel](https://docs.docker.com/reference/cli/docker/container/pause/)
+maintient cette copie incomplète après la mort de l’observateur ; aucun syscall
+ou étatSQL n’est remplacé. Puis vrais SIGKILL pilote/observateur. La garde120
+doit rencontrer le diagnosticretention_copy_migration_incomplete, retirer le
+seul conteneur possédé et restituer les originaux011. Le
+[retrait forcé Docker](https://docs.docker.com/reference/cli/docker/container/rm/)
+utiliseSIGKILL ; son résultat est à constater réellement, jamais supposé.
+Le client exige schéma incomplet au point de perte ET diagnostic de la garde,
+absence du CID, source canonique intacte et bornesD+240/D+270. Le modehistorique
+et les nominaux ne suspendent pas le contrôle. Motif : une simple perte du
+traceur peut laisser le startup finir avant120s et ne prouverait pas ce chemin.
