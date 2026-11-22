@@ -3577,7 +3577,7 @@ preuve et clients ; manuel s'il décrit incorrectement le buffer expurgé.
 ## SLS-121 — Acquérir la frontière native de décision du journal
 
 Statut : [~] — API08 du second passage072 échoue avant acquisition de la
-barrière finale :40s,66178événements natifs, zéro thread retenu. Les cinq groupes
+barrière finale :40s,66178tours de boucle, zéro thread retenu. Les cinq groupes
 précédents restent partiels, zéro qualifié. Nature : Corriger. Dépend de :
 SLS-040. Ordre : 3. Contrat de frontière :
 [EXECUTION_LOGS](EXECUTION_LOGS.md#instrumentation-native-des-lectures).
@@ -3589,11 +3589,11 @@ changer de produit pour satisfaire une hypothèse non mesurée du banc.
 
 - [x] SLS-121.1 Sceller le rouge499sources/1aa70214, ses programmes et reçus,
   cinq groupes partiels hors qualification ; nettoyage physique et5982originaux.
-- [ ] SLS-121.2 Diagnostic réel des syscalls de la lecture finale : thread,
+- [x] SLS-121.2 Diagnostic réel des syscalls de la lecture finale : thread,
   commande/fd/verrou/résultat et chemin effectifs, résultat HTTP et chronologie.
   Garder les bornes40/45/50/60s et les2s du produit ; aucun syscall remplacé,
   registre modifié, résultat injecté ni écriture de données SQL.
-- [ ] SLS-121.3 Décision/motif persistés avant correction du seul élément en
+- [x] SLS-121.3 Décision/motif persistés avant correction du seul élément en
   cause ; le rouge précède toute correction de comportement produit. Les
   conditions natives et l’observation du writer restent strictes.
 - [ ] SLS-121.4 Rejouer API08 dans les12API réels puis25communs frais,
@@ -3609,8 +3609,39 @@ flock déjà requis pour observer SQLite. Conserver le statut/délai/code public
 de la vraie requête même si la barrière échoue. Reproduire le préfixe réel des
 cinq groupes pour garder le même corpus de lecture ; ce diagnostic compte zéro
 groupe qualifié. Les ralentissements de ptrace ne valent pas performance normale.
+Le champ historique `events` compte les tours de boucle avant waitpid, y compris
+les polls sans statut, pas des événements natifs effectifs. Le diagnostic les
+sépare : tours, polls vides, statuts waitpid et stops de syscall. La preuve brute
+échouée est inchangée ; aucun coût de traçage n'est déduit du seul nombre66178.
+
+La revue du diagnostic préparé relève deux écarts à résoudre dans121.2 avant
+première exécution : écritures concurrentes possibles du même fichier pending,
+et résultat HTTP perdu avant observation si statut/décodage/transport échoue.
+Décision avant correction du banc : sérialiser les sauvegardes par campagne ;
+observer la réponse HTTP brute et ses erreurs expurgées dans finally, puis
+maintenir200 comme unique réussite. Aucun changement de contrat produit.
 
 Premier rouge : [preuve](evidence/execution-journal-final-lock-first-failed-dev-2026-11-22.json),
 brutSHA `43182a4a…`, archive des499sources `09804d14…`. Le contrôle/référence,
 leur démarrage, configuration et originaux sont conservés. Cause non établie ;
 le premier rouge de buffer et son diagnostic restent des époques distinctes.
+
+Diagnostic500sources/1aa70214 : [preuve](evidence/execution-journal-final-lock-diagnostic-dev-2026-11-22.json),
+brutSHA `437fcbfa…`, zéro groupe qualifié et nettoyage physique acquis. GET503
+log_read_unavailable à2074ms ; workers subject puis read, aucune entrée verify.
+66184tours =64398polls vides+1786statuts waitpid, tous stops syscall sur ce passage.
+72fcntl conservés sans dépassement. Le chemin shm exact est bien rencontré dans
+les workers antérieurs ; aucun verrou final n'est atteint sur cette mesure.
+
+Décision réversible avant code : remplacer le sommeil fixe0,5ms après chaque
+poll vide du seul observateur par un réveil SIGCHLD sur pipe non bloquant,
+`signal.set_wakeup_fd` et select borné à la même échéance. Les statuts se lisent
+toujours par waitpid, jamais par le nombre d'octets du pipe ; vider le pipe,
+préserver/restaurer handler et wakeupfd, fermer ses deux FD dans finally.
+Conserver les mêmes sélecteurs, vérifications d'identité, plafonds et40/45/50/60s,
+sans relâcher les2s du produit. Écarter l'allongement de budget et la suppression
+des contrôles d'identité : ils changeraient ce que la preuve est censée éprouver.
+Ajouter au prochain diagnostic un GET sans trace avant le même GET tracé sur le
+même corpus ; comparer statut/délai et entrée effective dans journal-verify.
+Ce correctif du banc reste à éprouver ; la seule hypothèse de son efficacité
+ne clôture ni121.4, ni120.4, ni072.

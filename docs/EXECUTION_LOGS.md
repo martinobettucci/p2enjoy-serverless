@@ -436,6 +436,18 @@ alors inchangée. Après libération : réponse de lecture, commit du PUT et ref
 du snapshot précédent sont recoupés. Ce nom distingue l'écriture demandée de
 la maintenance et évite de lui attribuer son éventuel échec de verrou.
 
+L'observateur attend les arrêts natifs par un réveil SIGCHLD sur pipe non
+bloquant (`signal.set_wakeup_fd`), puis lit tous les statuts réels par waitpid.
+Le pipe ne compte pas des événements : ses octets servent seulement au réveil.
+L'attente select reste bornée par la même échéance ; le gestionnaire, le wakeupfd
+précédent et les deux FD sont restitués après détachement. Cette décision121
+supprime le sommeil fixe0,5ms dont le coût pouvait empêcher d'atteindre la phase
+finale sous le budget produit. Elle ne modifie aucun registre/résultat ni budget.
+Référence de mécanisme : [documentation Python3.14](https://docs.python.org/3.14/library/signal.html#signal.set_wakeup_fd).
+La [mesure500sources](evidence/execution-journal-final-lock-diagnostic-dev-2026-11-22.json)
+précède la correction ; son efficacité et la comparaison sans/avec trace restent
+à prouver sur le corpus réel.
+
 Acquisition au plus40s, retenue totale45s, alarme50s et secours60s ; la lecture
 du produit garde son propre budget2s, qui n'est jamais étendu par ce banc. Une
 preuve d'ACL doit donc accepter le changement et libérer la première barrière

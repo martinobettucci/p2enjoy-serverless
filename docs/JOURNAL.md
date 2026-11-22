@@ -1,10 +1,26 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — diagnostic121 conservé, attente du banc à corriger
+
+500sources/1aa70214, brut437fcbfa : le GET renvoie503/log_read_unavailable après
+2074ms.1786stops réels sur66184tours (64398vides) ; journal-read est observé de
+0,710 à2,311s après armement, jamais journal-verify. Aucun sélecteur de verrou
+final n'est atteint.72fcntl documentent le vrai chemin shm dans les workers
+antérieurs. Quatre fonctions purgées, gardes/threads joints, huitcompteurs0,
+5982originaux et services/configuration conservés ; zéro groupe qualifié.
+
+Décision avant code : réveil natif SIGCHLD/pipe nonbloquant du seul observateur
+à la place du sommeil fixe0,5ms. waitpid reste l'autorité des statuts ; handler,
+wakeupfd et FD sont restitués en finally. Garder les contrôles d'identité, les
+mêmes bornes de garde et le budget produit2s. Le prochain diagnostic comparera
+sans/avec trace sur le même corpus. L'efficacité de cette correction reste à
+mesurer ; pas de modification produit ou d'image et pas de clôture anticipée.
+
 ## 22 novembre 2026 — API04 passe, frontière native finale inscrite en121
 
 Le second passage499sources/1aa70214 passe01/02/03/04/07 : les octets expurgés,
 projections et la vraie minute correspondent au contrat. API08 échoue ensuite
-avant acquisition de son verrou natif :40s,66178événements, zéro retenu. Son
+avant acquisition de son verrou natif :40s,66178tours de boucle, zéro retenu. Son
 opérateur restitue tous les threads (TracerPid0), contrôle sain et garde jointe.
 Le client termine1 et nettoie physiquement ses quatre fonctions ; huit compteurs
 actifs restent0,5982originaux et configuration/services conservés. Cinq groupes
