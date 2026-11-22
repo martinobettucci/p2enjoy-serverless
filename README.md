@@ -6,7 +6,9 @@ Le [complément SLS-070.3/.5](docs/CODE_EDITOR_CONTROL_INTERRUPTION.md) fixe deu
 éditeur : `receiving` avec ZIP entièrement reçu, puis `validating` avec Docker
 vivant et perte du helper. Gardes RESTORE/KILL_CONTROL inchangées, même API046,
 brouillon conservé et repris par API/UI, nouveau pilote explicite et déduplication.
-Quatre groupes ciblés puis25communs sont prévus ; aucun exécuté à ce checkpoint.
+Le client `e2e/code-editor-control-interruption.mjs`, son packager original et son
+opérateur natif distinct sont préparés ; syntaxes contrôlées, index473sources.
+Quatre groupes ciblés puis25communs restent à exécuter ; aucune preuve acquise.
 Produit, manuel, images, schéma et configuration officielle restent inchangés.
 
 

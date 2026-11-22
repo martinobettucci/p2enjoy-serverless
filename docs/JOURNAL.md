@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — client de coupures préparé après contrat poussé
+
+Le contrat3b0b520 précède les trois nouveaux fichiers de preuve. L’opérateur
+arme avant le POST, sonde seulement le candidat connu et exige receiving0444
+puis ZIP/CRC complet, ou le validateur vivant. Les deux programmes indépendants
+sont lus comme littéraux AST et leurs SHA exacts sont exigés. Le client relit
+le brouillon par API/UI après chaque restart et exige les nouveaux pilotes
+explicites, six handlers, deux coupures et une déduplication. Le cleanup refuse
+tout candidat étranger ; le lecteur physique ajoute le seul préfixe déclaré.
+Syntaxes JS/Python contrôlées,473sources. Aucun E2E de ce complément encore
+exécuté ;070.3/.5 restent ouverts et le produit/manuel/image sont inchangés.
+Revue RO achevée sans blocage : validateur réobservé après ZIP/CRC, erreur
+primaire préservée si secours en erreur, transport collecté séparément et reçus
+natifs des deux gardes recoupés. Les trois orchestrateurs privés distincts
+sont relus :29groupes,26captures attendues, deux générations et fin physique.
+Aucune revue statique ne qualifie les fenêtres ou leurs bornes en exécution.
+
 ## 22 novembre 2026 — décision de coupures du POST éditeur avant code
 
 Après livraison117 poussée et trois notes proposées recoupées,070.3/.5 portent

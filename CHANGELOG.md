@@ -6,6 +6,8 @@
   persisté avant code : deux interruptions physiques du POST éditeur, brouillon
   après redémarrage et nouvelle publication explicite ;29groupes encore à prouver.
   Aucun changement produit, image, manuel ou configuration officielle.
+  Client HTTPS/UI, paquet18 002entrées et opérateur natif préparés ; syntaxe
+  contrôlée, index473sources, aucune exécution réelle de ce complément.
 
 - SLS-117 est close par [32groupes réels](docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json) :
   fermeture Page/target et reprise du même UUID sans POST en1440/390px, mutation

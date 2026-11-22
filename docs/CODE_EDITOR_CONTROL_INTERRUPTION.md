@@ -171,5 +171,22 @@ limites visuelles distinctes des observations DOM/HTTP/natives.
 Le manuel et le produit restent inchangés. La clôture de 070.3/.5 exige cette
 preuve positive et un rapprochement explicite avec leurs preuves déjà acquises
 (conflits, saisie non enregistrée, CJS/ESM, import refusé, hash/déduplication).
-Sans ces pièces, SLS-070 reste `[~]`. Aucun groupe n'est encore exécuté sous
-ce contrat à ce checkpoint.
+Sans ces pièces, SLS-070 reste `[~]`.
+
+## Client préparatoire et état courant
+
+Après le contrat `3b0b520` poussé, le client prévu est
+`node e2e/code-editor-control-interruption.mjs`, lancé depuis la racine, seul,
+avec identifiants SSO sur stdin privée JSON en mémoire. Il utilise
+`code-editor-control-interruption-package.py` et, sur le seul SPARK DEV comme
+root, `code-editor-control-interruption-operator.py`. Le second lit les deux
+littéraux historiques par AST, sans import exécutable, et en exige les SHA
+figés avant armement. L’inspecteur physique commun accepte seulement le nouveau
+préfixe déclaré, sous ses contrôles UUID et inventaire complet inchangés.
+
+Le client, le paquet et l’opérateur sont préparés ; syntaxes JS/Python vérifiées,
+index473sources avec ce contrat. Aucun produit, image ou manuel changé.
+Aucun groupe ni coupure n’est exécuté sous ce contrat à ce checkpoint ;
+la relecture statique ne relève plus de blocage après recoupement du validateur
+après CRC et préservation de l’erreur primaire pendant le secours. La
+synchronisation et le gel précèdent le passage4+25 réel.

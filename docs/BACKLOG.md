@@ -1058,6 +1058,8 @@ Critères d'acceptation :
   Le [contrat de coupures du contrôle](CODE_EDITOR_CONTROL_INTERRUPTION.md) fixe
   avant code les deux SIGKILL du POST éditeur, la persistance native/API/UI et
   les gardes inchangées ; quatre groupes ciblés puis25communs restent à exécuter.
+  Client HTTPS/UI, packager18 002entrées et opérateur avant POST préparés ;
+  syntaxes contrôlées, index473sources. Aucune coupure exécutée à ce checkpoint.
 - [x] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
   [Rapprochement des quatre preuves](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies) :
