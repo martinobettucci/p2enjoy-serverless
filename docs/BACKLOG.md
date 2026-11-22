@@ -70,6 +70,7 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
+| 3 | [SLS-116](#sls-116) Image de retour disponible avant bascule | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_DEPLOYMENT_RECOVERY](CODE_EDITOR_DEPLOYMENT_RECOVERY.md) |
 | 3 | [SLS-115](#sls-115) Retour du focus après adoption du brouillon | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_ADOPTION_FOCUS](CODE_EDITOR_ADOPTION_FOCUS.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
@@ -3320,3 +3321,25 @@ Contrat : [CODE_EDITOR_ADOPTION_FOCUS](CODE_EDITOR_ADOPTION_FOCUS.md).
   neuf invocations,18gardes/24lecteurs joints et purge physique recoupés.
   Captures/manuel/backend/web/notes/configuration/référence/5982originaux conservés.
   Le premier échec reste exclu. Les critères070.3/.4/.5 gardent leurs autres preuves.
+
+<a id="sls-116"></a>
+## SLS-116 — Image de retour disponible avant bascule
+
+Statut : [~] — préparation de la bascule115 arrêtée avant Compose : Docker tag
+de l’empreinte433 vers son tag de retour sort1. Le transport et le programme
+distant sont terminés ; aucune bascule ni qualification n’a eu lieu.
+Nature : Corriger. Ordre :3, préalable à115. Dépend de : SLS-063.
+Contrat : [CODE_EDITOR_DEPLOYMENT_RECOVERY](CODE_EDITOR_DEPLOYMENT_RECOVERY.md).
+
+- [ ] SLS-116.1 Conserver le premier transport/programme/intention et relever
+  l’état réel du magasin d’images, du contrôle/référence et des sauvegardes
+  possédées. Déterminer la cause sans déduire l’existence d’une image de son
+  empreinte dans l’inspection d’un conteneur ; aucune relance automatique.
+- [ ] SLS-116.2 Disposer avant bascule d’une image de retour validée contre les
+  vrais octets backend/web servis et la configuration d’image attendue, sans
+  secret embarqué. Toute reconstruction est décidée avant son code et conserve
+  les sources, images et services de départ ; premier échec exclu.
+- [ ] SLS-116.3 Nouveau précontrôle, nouveaux UUID et bascule DEV puis36groupes
+  réels de115 :9handlers,18gardes/24lecteurs joints, captures inspectées et purge
+  physique complète ; backend/web/manuel/notes/configuration/référence/originaux
+  recoupés. Pas de fermeture de115 ni de070 sur la seule construction d’image.

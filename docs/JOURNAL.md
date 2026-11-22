@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — préparation de bascule115 arrêtée,116 inscrite
+
+Opérateura8c7f410 au gel7b2b541 terminé sortie1, transport joint et fin distante
+confirmée. Le tag de retour depuis433 échoue avant Compose ; stderr6497df2a,
+stdout vide. Aucun changement de contrôle n’a été engagé par la commande de
+bascule, aucune qualification.116 est inscrite avant instruction/correction :
+recouper images réellement disponibles, services et sauvegardes possédées,
+conserver les diagnostics exacts et décider la reprise avant son code.046 reste
+candidate ; ne pas relancer l’opérateur sur une hypothèse de cause.
+
 ## 22 novembre 2026 — gardes de bascule115 précisées avant exécution
 
 La revue de l’opérateur préparé refuse l’image seule comme preuve de propriété
