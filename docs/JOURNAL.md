@@ -1,5 +1,24 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — reprise des frontières ZIP070, décision avant adaptation
+
+Après la livraison078 poussée8bd53f7 et les propositions de notes recoupées,
+070 est la prochaine unité indépendante.111.1/.2 restent non déterminées et
+089.1/.2/.3 dépendent toujours des profils et capacités externes nommés.
+Lecture intégrale de CONSOLE_EDITOR et CODE_EDITOR_ARCHIVE_LIMITS, puis revue
+des cinq sources originales du banc. Deux pins b452 sont périmés ; le relevé
+natif frais confirme433da150, repos, dix migrations et intégrités conformes.
+Le lecteur local initial demandait un champ running non exporté ; son arrêt
+et sa correction sont conservés privés, zéro groupe et aucune opération de service.
+
+Choix persistés dans le contrat avant code : pin exact433da150, liste ordonnée
+des dix migrations et délai HTTP administrateur600s cohérent avec120+300+15s
+du pipeline puis contrôles/nettoyage. Deadline serveur et appelant inchangés.
+Générateur, frontières, refus413, capacité après refus, six invocations et
+sept groupes restent identiques ; les25communs et recoupements physiques/
+backend/web/configuration/référence/originaux restent requis. Aucun lancement
+ZIP ni nouvelle clôture de critère070 à ce point.
+
 ## 22 novembre 2026 — SLS-078 close après le sixième passage entier
 
 Le worker245fa787 lancé sur9e1da70/458sources et image433da150 termine avec

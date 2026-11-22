@@ -165,3 +165,37 @@ aux octets/fraîcheur de phase. Ces images ne prouvent aucune concurrence.
 Le passagebe791eed au gel7ff7221 est suivi des25communs sur le même gel.
 Les bornes de taille ne sont pas déduites de ce petit paquet. Aucun autre
 critère de070 ne ferme ; le second passage de frontières reste entièrement dû.
+
+## Reprise du banc sur le contrôle courant — 22 novembre 2026
+
+Décision avant adaptation et premier lancement, après la clôture078 (`8bd53f7`).
+Le relevé natif frais confirme le repos, les intégrités, les dix migrations et
+l’image servie `sha256:433da1501d03a26915a0ccf9b8a52babd62d20393452a0e42dd5cdfeb375d981`.
+Le producteur natif vérifie Docker Running/healthy avant d’exporter son résumé
+id/image/démarrage. Un lecteur local initial attendait à tort un champ running
+dans ce résumé ; sa correction et le relevé frais restent des précontrôles,
+zéro groupe fonctionnel, séparés de la future campagne ZIP.
+
+Le générateur et son client devront exiger cette empreinte exacte au lieu
+du pin b452 de leur préparation. La création refuse une image différente ;
+le nettoyage conserve l’identité de campagne, les contrôles d’image, de labels,
+de propriétaire et d’inode. Un futur changement d’image exige un nouveau gel
+explicite, sans découverte qui accepterait silencieusement une autre image.
+Ni générateur, ni Python/zipfile, ni calibration ou données ne sont simplifiés.
+
+Le recoupement natif compare les dix noms ordonnés001_control.sql à
+010_code_drafts.sql, avec les huit noms intermédiaires exacts du dépôt ; le
+seul nombre dix ne suffit pas. Le client administrateur disposera de600secondes
+par requête : réception120, extraction300, validation15 puis contrôles et
+jonction/nettoyage Docker peuvent dépasser son ancien délai240. Ce budget ne
+change aucune limite serveur ni la deadline60 du handler ; l’appelant garde
+son délai240. Aucun dépassement n’a encore été observé sur ce banc non lancé.
+
+Le passage reste7groupes ciblés,5fonctions,6handlers et10révisions A/B puis
+25communs frais. Les collectes externes recoupent sources/images,38backend,
+quatre ressources HTTPS, manuel canonique servi, configuration/référence et
+5982originaux. Le nettoyage physique complète les seules lignes SQL et
+répertoires de l’inspecteur : Docker, réseaux, canaux, baux et backings absents.
+Le rapport utilise completed, checks et cleanup_errors ; aucun champ cleanup
+absent n’est inventé. Les acquis précédents restent séparés ;070.1/.3/.4/.5
+ne sont pas clôturés par cette décision et aucun test ZIP n’est encore exécuté.

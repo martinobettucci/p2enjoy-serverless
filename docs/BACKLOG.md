@@ -995,6 +995,12 @@ avec générateur de données isolé et inspection complète des archives conser
 Les cinq sources du banc sont implémentées et relues statiquement ; syntaxe
 contrôlée, aucune génération ni campagne ZIP exécutée à ce checkpoint.
 
+Reprise du22novembre après078 : [préconditions du banc ZIP](CODE_EDITOR_ARCHIVE_LIMITS.md#reprise-du-banc-sur-le-contrôle-courant--22-novembre-2026)
+persistées avant adaptation. Image433da150 vérifiée au repos, pins périmés à
+actualiser, dix noms de migration exacts et budget HTTP administrateur600s.
+Le passage7+25, ses frontières et son nettoyage restent à exécuter ; aucune
+nouvelle qualification de070 n’est déduite du précontrôle natif.
+
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de
 révisions immuables et tester le résultat.
