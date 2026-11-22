@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 22novembre2026 — diagnostic réseau20s négatif, décision de jonction Page
+
+fe02296/468 termine42224/sortie1/joint :2étapespassées, terminalnatifmanquant20s,
+390sondes, nouveau loader/init puis GETpublished. Un handler, deux captures et
+purge physique ; preuve négative publiée gzipfc631548/brut82938f3c, zéro qualifié.
+La revue RO du code installé distingue remplacement du document, événements
+Network et fermeture réelle de Page/target ; elle n’établit pas la cause CDP.
+Décision avant nouveau code : fermer la Page possédée pendant validating,
+exiger Close/close achevé et Target.targetDestroyed par observer navigateur
+indépendant, puis nouvelle Page/GET mêmeUUID. Transport HTTP inconnu conservé,
+aucun nouvel allongement ni acquittement des rouges. Contrat117 mis à jour ;
+client de fermeture non écrit, diagnostic/replay32 non acquis.
+
+
 ## 22novembre2026 — client diagnostique117 préparé
 
 Après23fbd4d poussé, client dédié sans filtre ni saut de la campagne7+25.

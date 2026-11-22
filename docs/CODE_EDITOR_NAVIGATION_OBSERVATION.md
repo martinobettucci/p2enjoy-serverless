@@ -138,3 +138,106 @@ Le canal context.request reste vivant pour le nettoyage ; callbacks/listeners,
 CDP et navigateur sont fermés ensuite. Trois étapes, trois invocations et trois
 captures desktop attendues, zéro groupe qualifié. Index468sources vérifié à
 l’écriture ; diagnostic non exécuté, cause et correction toujours non établies.
+
+## Diagnostic20s conservé —22novembre2026
+
+La [preuve négative du diagnostic](evidence/code-editor-navigation-diagnostic-failed-dev-2026-11-22.json)
+porte fe02296/468sources/API046. Pilote42224 sortie1/joint ; deux étapes passent,
+la troisième échoue native_network_terminal_missing, ligne79, SHA
+befe527c7c12f6ebda55a7307d2774e562dde1f4c0f507de4768fd3d2f391910.
+Fenêtre20s,390sondes, dernière lecture avant deadline et sélection finale bornée ;
+expiredtrue, native_terminalnull. PW porte request/candidate-get, CDP un seul
+request : aucun terminal, aucune erreur d’observateur. Nouveau loader/init du
+frame principal réels, puis GET indépendant candidatpublished. Retour à l’éditeur
+et deux invocations suivantes non atteints ; un handler préparatoire, deux
+captures desktop inspectées et purge physique complète. Zéro groupe qualifié,
+aucun commun ; services/images,38backend/quatreweb,010, notes/configuration/
+budgets/référence, manuel18/74 et5982originaux conservés. Gzipfc631548/brut82938f3c.
+
+Ce rouge reste échoué. L’absence du terminal après navigation n’est ni une
+annulation ni une réponse reçue, et le candidat publié ne l’acquitte pas.
+Aucune cause du silence CDP n’est établie.
+
+## Décision après diagnostic, avant code de fermeture
+
+Le contrat fonctionnel070 demande de reprendre une publication incertaine par
+GET du même UUID, sans nouvel envoi. Il ne promet aucun événement Network d’un
+document quitté. Le banc avait ajouté ce terminal comme condition de jonction
+du client. Les deux fenêtres5s/20s montrent que ce canal n’apporte pas cette
+confirmation dans les parcours observés ; l’agrandir encore ne prouverait pas
+la ressource cliente effectivement quittée.
+
+Recoupement local du code installé playwright-core1.64.1, `lib/coreBundle.js` :
+la navigation remplace le document et vide l’ensemble inflight du frame
+(lignes24518–24546 et24793–24802). Ce chemin n’émet pas de terminal individuel
+pour chaque ancienne requête. Les terminaux PW viennent de loadingFinished/
+loadingFailed (37714–37757). Ces sources expliquent les limites de l’oracle PW,
+sans attribuer une cause au silence CDP. Les déclarations du protocole décrivent
+Target.targetDestroyed comme la destruction de la target ; detach seul n’est
+pas une destruction. Le succès du seul closeTarget vaut toujourstrue hors erreur
+et ne suffit pas non plus. Les lignes citées sont le snapshot de cette version
+installée ; elles ne désignent pas un code applicatif ou un événement reconstruit.
+
+Décision réversible : provoquer la perte de réponse en **fermant réellement
+l’onglet de publication pendant validating**, puis ouvrir une nouvelle Page
+dans le même contexte authentifié à l’adresse exacte du candidat. Prouver la
+fin de la ressource cliente par sa Page/target, garder l’état HTTP original
+inconnu si aucun terminal n’est observé et éprouver séparément le résultat
+serveur/GET. Cette décision corrige l’oracle du banc ; elle ne change ni le
+produit ni son contrat de reprise. Les deux rouges gardent zéro groupe qualifié.
+
+## Diagnostic de fermeture Page/target
+
+Nouveau client dédié `e2e/code-editor-page-closure.mjs`, sans changer les deux
+clients des passages échoués avant acquisition du résultat. Trois étapes
+SSO/préparation originale/perte et reprise, trois invocations A/B/A et trois
+captures desktop, zéro groupe qualifié. Index469sources prévu. Service/fonction
+nomment editor-publication-page-closure-<nonce>, namespace de campagne fermé
+code-editor-read-concurrency-<nonce>. MêmeAPI046, mêmes fixtures originales,
+paquet et import8s ; aucune dépendance, réponse ou requête substituée.
+
+Avant POST : les observers PW et CDP de la page sont installés, UUID/version
+et loader du POST liés à l’adresse ; les éventuels événements réseau restent
+conservés mais ne sont pas requis pour confirmer la fermeture Page/target.
+Aucune fin HTTP n’est affirmée sans observation terminale. Une **session CDP
+navigateur indépendante** est ouverte ; activer seulement la découverte des
+targets. Lire le targetId exact de la Page possédée par Target.getTargetInfo,
+exiger typepage et origine de console. Le listener de Target.targetDestroyed
+est armé avant fermeture et ne conserve que ce targetId. Ne fermer aucune
+Page ou target étrangère ; ne pas assimiler detach ou closeTargetsuccess à la
+confirmation.
+
+Lancer le vrai POST par sa confirmation UI, observer validating et absence de
+réponse originale ; conserver le marqueur enregistré et l’attente par captures.
+Avant fermeture, exiger à nouveau absence de réponse et aucun texte non
+sauvegardé. Persister l’intention du seul targetId puis appeler Page.close().
+Exiger en10s au plus les trois faits : événementClose de cette Page, close
+achevé/isClosedtrue, Target.targetDestroyed du même targetId sur la session
+navigateur. Relire Target.getTargets et constater l’absence de ce targetId.
+Les réceptions réseau éventuelles restent des observations distinctes ; aucune
+réponse originale ne doit avoir été observée avant cette fermeture achevée.
+Une confirmation manquante échoue, même si le candidat est ensuite publié.
+
+Créer ensuite une nouvelle Page du même contexte, appliquer le même viewport et
+ouvrir l’adresse exacte avec deployment=UUID. Le contexte et context.request
+restent vivants : aucune copie persistante de cookie, nouvelle identité ou
+session remplacée. Compter les POST sur les deux Pages et les GET de reprise :
+un seul POST, même UUID/draft_version, nouvelle Page et GET sans nouvel envoi.
+Exiger publication, brouillon/version/lien et cible A inchangés ; invoquer B
+par hash et A par défaut. La troisième capture montre le suivi terminal sur
+la nouvelle Page. Conserver les identités des deux Pages/targets sans valeurs
+confidentielles ni contenu d’autres targets.
+
+Sur timeout/erreur, conserver fenêtre et dernière observation, état Page/target,
+GET indépendant du candidat et nettoyage possédé. Une fermeture commencée est
+jointe avant fin du diagnostic ; canal API conservé pour le nettoyage, puis
+fermeture des observers, des Pages/contexte et navigateur. Si elle n’est pas
+confirmée nominalement, la fermeture finale du navigateur est distinguée de
+la preuve attendue : aucun succès de diagnostic ne lui est attribué. Les
+collectes sources/images/38backend/quatreweb/010/manuel/notes/budgets/référence/
+5982originaux et purge physique restent identiques aux exigences précédentes.
+
+Après acquisition seulement : preuve et décision avant adaptation du client
+7+25. Ce replay utilisera la même fermeture en1440/390px et gardera neuf
+handlers, une garde, quatre uploads partiels, dix captures ciblées/22communes,
+zéro cumul avec diagnostics.117 et070 restent ouverts à ce checkpoint.

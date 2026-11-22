@@ -1,5 +1,16 @@
 # Architecture technique
 
+## Diagnostic réseau20s non acquis —22novembre2026
+
+[117au gel468fe02296](evidence/code-editor-navigation-diagnostic-failed-dev-2026-11-22.json) :
+deux étapes passent puis native_network_terminal_missing ; nouveau loader/init
+et GET indépendantpublished, aucun terminalPW/CDP. Un handler, deux captures et
+purge physique, toutes conservations sources/services/originaux recoupées.
+Zéro groupe qualifié. Le [contrat117](CODE_EDITOR_NAVIGATION_OBSERVATION.md)
+distingue désormais jonction de Page/target et état HTTP inconnu avant son
+nouveau client dédié. Aucun produit, image, schéma, manuel ou secret changé.
+
+
 ## Observation de navigation non acquise —22novembre2026
 
 Le [premier ciblé070](evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json)

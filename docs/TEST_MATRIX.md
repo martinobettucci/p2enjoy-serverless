@@ -1,5 +1,12 @@
 # Matrice de qualification réelle
 
+Le [diagnostic11720s](evidence/code-editor-navigation-diagnostic-failed-dev-2026-11-22.json)
+reste échoué : nouveau document et GETpublished, terminal réseau non observé,
+un handler/deux captures/purge physique recoupés, zéro qualifié. La
+[décision Page/target](CODE_EDITOR_NAVIGATION_OBSERVATION.md#décision-après-diagnostic-avant-code-de-fermeture)
+précède son propre diagnostic puis le replay7+25 ; aucune fin HTTP déduite.
+
+
 Le [premier banc de continuité](evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json)
 échoue au cinquième groupe après quatre passés : zéro qualifié/aucun commun,
 quatre handlers, deux captures et nettoyage physique recoupés. [117](CODE_EDITOR_NAVIGATION_OBSERVATION.md)

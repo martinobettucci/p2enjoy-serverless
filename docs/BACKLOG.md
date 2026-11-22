@@ -3408,13 +3408,21 @@ Dépend de : SLS-063. Contrat : [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR
   L’UUID UI est plus tard publié mais aucun événement terminal réseau n’est
   conservé ; cette inconnue n’est pas reconstruite.38backend/quatreweb, notes,
  010/manual18/74, référence/configuration/budgets et5982originaux préservés.
-- [ ] SLS-117.2 Diagnostic réel, borné et séparé à zéro groupe qualifié : observer
-  la requête originale après navigation, avec événements navigateur et CDP natifs,
-  candidat et nettoyage propres ; établir la provenance et la fin avant correction.
+- [ ] SLS-117.2 Conserver le diagnostic réel de navigation et sa limite de
+  visibilité réseau, puis éprouver la fermeture réelle de la Page cliente :
+  Close/close achevé et Target.targetDestroyed de son identifiant natif, inventaire absent,
+  nouvelle Page au même candidat par GET sans POST. La fin HTTP reste distincte.
+  Diagnostic borné et séparé à zéro groupe qualifié avant correction/replay.
   Revue du diagnostic avant exécution : l’expiration20s quittait l’attente sans
   fin/dernière sonde ni GET indépendant du candidat. Conserver échéance, fin,
   résultat absent ou reçu et lecture GET avant de réémettre ce rouge, sans
   prolongation de fenêtre ni conversion en réussite.
+  Le [diagnostic20s](evidence/code-editor-navigation-diagnostic-failed-dev-2026-11-22.json)
+  fe02296/468 échoue : deux étapes passent, troisième native_network_terminal_missing,
+  zéro qualifié, un handler et deux captures ;390sondes, nouveau loader/init et
+  GET publié sans terminal réseau observé. Purge physique et conservations recoupées.
+  La décision de fermeture Page/target est persistée au contrat avant son client ;
+  aucun nouvel allongement de fenêtre ni acquittement rétroactif du rouge.
 - [ ] SLS-117.3 Persister le résultat et la décision avant correction du client ;
   nouveau gel et nouveau7+25sans cumul, neuf handlers, une garde, quatre vrais
   uploads partiels, dix captures ciblées et22communes inspectées, purge physique.

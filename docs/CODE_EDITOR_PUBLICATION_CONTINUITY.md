@@ -161,3 +161,9 @@ une garde et purge complète recoupés. Le candidat UI est publié plus tard,
 sans événement terminal réseau conservé ; aucune conclusion native inventée.
 Le [contrat117](CODE_EDITOR_NAVIGATION_OBSERVATION.md) précède diagnostic puis
 correction et nouveau7+25. Les sources de ce premier passage restent leur époque.
+
+Le diagnostic20s de117 est également échoué et conservé séparément. La
+[décision avant nouveau client](CODE_EDITOR_NAVIGATION_OBSERVATION.md#décision-après-diagnostic-avant-code-de-fermeture)
+prévoit une vraie fermeture de Page/target puis une nouvelle Page au même UUID.
+Son diagnostic doit précéder l’adaptation du groupe5 ci-dessus et le replay32 ;
+aucun événement HTTP manquant des anciens passages n’est inventé ou acquitté.
