@@ -4367,3 +4367,8 @@ sans texte d'exception ni SQL ; préserver flags santé/cadences et mêmes refus
 Le contrat EXECUTION_LOGS et le profil maintenance-diagnostics011→011 partant
 d'a7d figent cette modification avant code. La prochaine reproduction doit
 établir le code exact avant toute correction ; aucun retry santé ajouté.
+
+126.5 — revue avant bascule : recover intercepte ses propres exceptions ; son
+événement execution.recovery_failed reçoit aussi code/site/phase expurgés au
+point de capture, sans relance et sans changer l'état. Ce complément contractuel
+précède son code ; le profil conserve les deux seuls fichiers backend autorisés.

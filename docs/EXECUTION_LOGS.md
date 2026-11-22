@@ -688,5 +688,8 @@ que fichier, fonction et ligne du dernier cadre de traceback, la phase tick ou
 recovery et la valeur antérieure du booléen maintenance_error. Aucun message
 d'exception, SQL, paramètre ou contenu applicatif n'est journalisé. La capture
 d'erreur, le flag santé, sa remise à zéro au tick réussi et les cadences restent
-identiques. Le prochain préparatoire natif garde health200 et les deadlines
+identiques. Le chemin execution.recovery_failed capture ses exceptions à l’intérieur de
+recover : il conserve la même projection expurgée, phase recovery et flag
+antérieur, à cet endroit précis sans relancer l’exception.
+Le prochain préparatoire natif garde health200 et les deadlines
 stricts ; l'attribution du code précède toute correction ou nouvelle décision.
