@@ -199,3 +199,13 @@ répertoires de l’inspecteur : Docker, réseaux, canaux, baux et backings abse
 Le rapport utilise completed, checks et cleanup_errors ; aucun champ cleanup
 absent n’est inventé. Les acquis précédents restent séparés ;070.1/.3/.4/.5
 ne sont pas clôturés par cette décision et aucun test ZIP n’est encore exécuté.
+
+Le recoupement physique réutilise `storage-console-inspect.py` par
+`schedule_regressions.native_state(mapping)` après fin du client ZIP. Sa liste
+fermée de noms de campagne recevra seulement le préfixe
+`code-editor-archive-limits-` suivi de huit chiffres hexadécimaux. Les UUID du
+rapport et l’inventaire SQL exhaustif doivent correspondre aux cinq fonctions.
+Ce choix évite une copie divergente des contrôles physiques ; aucun contrôle
+de purge, reçu, secret vide, chemin, montage, propriétaire, Docker ou canal
+n’est retiré. Le collecteur commun reste lu depuis les sources du gel et son
+changement fait partie de la future preuve070, sans réécrire le gel543de078.

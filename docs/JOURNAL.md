@@ -2,6 +2,13 @@
 
 ## 22 novembre 2026 — reprise des frontières ZIP070, décision avant adaptation
 
+Le raccordement physique réutilisera le collecteur partagé, avec le seul
+préfixe fermé code-editor-archive-limits suivi de8hex ajouté avant son premier
+usage. Rapport/API et inventaire SQL complet des cinq UUID resteront rapprochés ;
+tous les contrôles de reçus, secrets vides, artefacts, montages/backings,
+Docker/réseaux et canaux sont conservés. Décision avant ce changement du
+collecteur, qui évite une copie privée divergente de ses garanties.
+
 Après la livraison078 poussée8bd53f7 et les propositions de notes recoupées,
 070 est la prochaine unité indépendante.111.1/.2 restent non déterminées et
 089.1/.2/.3 dépendent toujours des profils et capacités externes nommés.
