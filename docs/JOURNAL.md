@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — arrêt navigateur130 réellement acquis
+
+4b629862/517sources774be25/f73 : version relue avantstop, vrai requestfailed sans
+réponsePUT, uneécriture/relecture. Conflit/version4/durée1 et archive passent,
+quatreJPEG inspectées, purgephysique/0compteurs/5982originaux. Zéroqualifié ;
+130.4 et129campagnes restent ouverts. Cadre Conservation enregistrée à corriger
+avantfull10 ; détailanglais secondaire inscrit131/ordre6 pour ergonomie.
+InventaireRO des préconditions011 en cours avant gel final des clients.
+
 ## 22 novembre 2026 — neufpartielsUI et interruption130 à corriger
 
 Replayde324298/515sources08b8959/f73 passeUI09 (CSSOM/CSP) et les3viewportsUI10,

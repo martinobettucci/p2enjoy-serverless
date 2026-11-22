@@ -92,6 +92,7 @@ bloquée est sautée et son blocage est nommé.
 | 6 | [SLS-075](#sls-075) Titre de la fiche d'archive après purge | Corriger | `[ ]` | SLS-065 | cette unité |
 | 6 | [SLS-113](#sls-113) Pagination des lectures de console pendant erreur et chargement | Corriger | `[ ]` | SLS-065 | [CONSOLE_PAGINATION_STATES](CONSOLE_PAGINATION_STATES.md) |
 | 6 | [SLS-102](#sls-102) Espacement des quantités du manuel du testeur | Corriger | `[ ]` | SLS-062 | cette unité |
+| 6 | [SLS-131](#sls-131) Détail réseau lisible dans la conservation | Corriger | `[ ]` | SLS-072 | cette unité |
 | 7 | [SLS-073](#sls-073) Monitoring historique et alertes | Développer | `[ ]` | SLS-072, SLS-078 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#monitoring-et-alertes) |
 | 8 | [SLS-084](#sls-084) Runtimes supplémentaires | Développer | `[ ]` | SLS-083 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | 8 | [SLS-086](#sls-086) Répartition du trafic entre versions | Développer | `[ ]` | SLS-074, SLS-073 | [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
@@ -4480,10 +4481,10 @@ relit l'autorité sans rejouer le PUT. Aucun retour HTTP/JS n'est fabriqué.
 
 - [x] SLS-130.1 Sceller le rouge, programmes et frontière native, neufpartiels/
   zéroqualifié et nettoyage ; nommer les observations de transport manquantes.
-- [ ] SLS-130.2 Cas partagé dédié au parcoursUI07, client isolé original zéro
+- [x] SLS-130.2 Cas partagé dédié au parcoursUI07, client isolé original zéro
   groupequalifié : conserver événements PUT(response/requestfailed) avant
   assertion, WALcommit retenu, version relue réellement pendant la retenue.
-- [ ] SLS-130.3 Après ce commit et avant libération, appeler unefois Page.stopLoading
+- [x] SLS-130.3 Après ce commit et avant libération, appeler unefois Page.stopLoading
   via une sessionCDP de cette seule page. Exiger un vrai requestfailed du même
   PUT et absence de réponseHTTP acceptée auparavant ; aucune issue alternative
   de succès. Conserver code d'erreur sousSHA et ordre des instants ; timeout
@@ -4510,3 +4511,38 @@ observés avantassertion, version relue pendantpolicy-commit, Page.stopLoading
 sur la seulepage sansinterception, CDP/barrière joints enfinally. La caméra129
 identique est portée par le propriétaireJournalCampaign pour les deuxclients.
 Syntaxe seule vérifiée ; premièrepreuve de cette interruption reste à produire.
+
+130 — [interruption réelle acquise](evidence/execution-journal-policy-browser-stop-replay-dev-2026-11-22.json).
+4b629862/517sources774be25/f73 : PUT reçu, version2 relue pendantpolicy-commit,
+stopintent puisack puisrequestfailed, aucunHTTPpréalable ; uniquePUT, saisie
+conservée et relecture sansrejeu. Conflit puisversion4/durée1, référencefonction
+indisponible, purgephysique et huitcompteurs0/5982originaux. QuatreJPEGinspectées,
+Conservation enregistrée encore souslepli ; ce cadre est repris par129 avant
+full10. Zéro groupequalifié,130.4resteouvert pourcampagnescomplètes.
+
+<a id="sls-131"></a>
+## SLS-131 — Détail réseau lisible dans le dialog de conservation
+
+Statut : [ ]. Nature : Corriger. Dépend de : SLS-072. Ordre : 6.
+Contrat : cette unité et DESIGN_SYSTEM_APP#journaux-recherchables--contrat-sls-072-avant-code.
+
+Constatvisuel : la capture130 retention-response-lost affiche correctement en
+français l'issueinconnue et la relecture requise, puis un détailbrut anglais
+« Failed to fetch ». Le parcours de refus/relecture est fonctionnel ; ce détail
+secondaire n'apporte pas d'action utile. Amélioration de lisibilité P3, inscrite
+au rang d'ergonomie, sans modifier au passage le comportement de conservation.
+
+Résultat attendu : pour le seul dialog de conservation, les défauts de réseau
+ou réponses nonconfirmées portent un détail français utile ; les refus métier
+compréhensibles et les codes/statuts restent distincts. Aucune exception brute,
+valeur confidentielle ou issue de succès inventée. La décision précise et son
+motif précèdent le code, selon les précédents du journal/testeur.
+
+- [ ] SLS-131.1 Reproduire et conserver le détailbrut avec vraiPage.stopLoading
+  aprèscommit et lors d'une relecture réseau indisponible, sansmock.
+- [ ] SLS-131.2 Normaliser au plusprès du dialog les seuls défauts concernés,
+  préserver saisie/issueinconnue/relecture obligatoire/absence de rejeu ; manuel
+  et designlocal suivent le comportement, aucune traduction globale improvisée.
+- [ ] SLS-131.3 Prouver réseau, réponseincomplète/nonconfirmée et refus409, en
+  desktop/mobile, capturesJPEG inspectées, vrais appels et nettoyage physique ;
+  régressions communes et tests propres avant clôture.
