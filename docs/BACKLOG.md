@@ -3423,6 +3423,9 @@ Dépend de : SLS-063. Contrat : [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR
   GET publié sans terminal réseau observé. Purge physique et conservations recoupées.
   La décision de fermeture Page/target est persistée au contrat avant son client ;
   aucun nouvel allongement de fenêtre ni acquittement rétroactif du rouge.
+  Revue du client de fermeture avant exécution : relier frame/loader du POST
+  au document initial, et borner le refus de réponse à la fermeture confirmée ;
+  conserver les événements ultérieurs sans leur attribuer une remise antérieure.
 - [ ] SLS-117.3 Persister le résultat et la décision avant correction du client ;
   nouveau gel et nouveau7+25sans cumul, neuf handlers, une garde, quatre vrais
   uploads partiels, dix captures ciblées et22communes inspectées, purge physique.

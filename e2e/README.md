@@ -4,7 +4,8 @@ Le [diagnostic réseau20s](../docs/evidence/code-editor-navigation-diagnostic-fa
 est lui aussi échoué, zéro qualifié : loader remplacé et candidat publié,
 aucun terminal observé. [117](../docs/CODE_EDITOR_NAVIGATION_OBSERVATION.md)
 porte avant code la jonction par fermeture réelle de Page/target puis reprise
-sur nouvelle Page au même UUID. Le client de fermeture reste à écrire.
+sur nouvelle Page au même UUID. Le [client de fermeture](code-editor-page-closure.mjs)
+est préparé et non exécuté, index469sources ; aucune qualification nouvelle.
 
 
 Le premier banc070 est [échoué et conservé](../docs/evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json) :

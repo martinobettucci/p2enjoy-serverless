@@ -186,6 +186,7 @@ inconnu si aucun terminal n’est observé et éprouver séparément le résulta
 serveur/GET. Cette décision corrige l’oracle du banc ; elle ne change ni le
 produit ni son contrat de reprise. Les deux rouges gardent zéro groupe qualifié.
 
+<a id="diagnostic-fermeture-page"></a>
 ## Diagnostic de fermeture Page/target
 
 Nouveau client dédié `e2e/code-editor-page-closure.mjs`, sans changer les deux
@@ -241,3 +242,12 @@ Après acquisition seulement : preuve et décision avant adaptation du client
 7+25. Ce replay utilisera la même fermeture en1440/390px et gardera neuf
 handlers, une garde, quatre uploads partiels, dix captures ciblées/22communes,
 zéro cumul avec diagnostics.117 et070 restent ouverts à ce checkpoint.
+
+## Client de fermeture préparé, avant exécution
+
+`e2e/code-editor-page-closure.mjs` est distinct des clients rouges ; trois étapes
+et zéro groupe qualifié. Syntaxe JS et index469sources contrôlés. Le contexte API
+reste ouvert pour purge et recoupements ; après sa fermeture, la requête de
+fermeture Page est jointe et la session navigateur indépendante détachée avant
+la fermeture du navigateur. Le reçu nominal10s reste distinct de cette jonction
+finale. Diagnostic non exécuté, aucun comportement produit modifié.
