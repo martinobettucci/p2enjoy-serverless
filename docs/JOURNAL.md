@@ -1,5 +1,23 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — diagnostic120 prouvé, correction du client décidée
+
+Sur499sources/1aa70214, huit appels réels sont mesurés avant assertions :
+65535/65536/65537, sans puis avec secrets, et secret traversant la frontière.
+Sans secret,65537 garde65536 avec troncature ; avec secret maximal61octets,
+il garde65476, tous des «a». Le préfixe coupé est visible quand il n'est pas
+secret et absent quand il l'est. C'est le retrait de60octets prévu par
+validator.redact_logs, et non une perte du runtime. Deux fonctions purgées,
+jetons/parents retirés,5982originaux et image/configuration conservés ; zéro
+activité/réservation/bail résiduel. Les deux rapports et leurs sources sont figés.
+
+Décision avant code : corriger API04, sans toucher au produit ni relâcher la
+protection. Éprouver la borne brute dans un service sans secrets hérités, puis
+vérifier le retrait calculé et le préfixe absent dans le service à secrets.
+Conserver les projections4096/1024 et leurs dépassements. Le manuel expose déjà
+une limite et l'expurgation ; pas de changement éditorial ni de rebuild requis.
+120.4 et072 restent ouverts :12API,25communs,10UI et régressions à produire.
+
 ## 22 novembre 2026 — premier passage API072 arrêté, diagnostic120
 
 Sur498sources et1aa70214, les groupes01/02/03 passent puis API04 échoue sur

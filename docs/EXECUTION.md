@@ -124,7 +124,12 @@ propres longueurs et sa politique CORS. HEAD ne transmet pas de corps.
 stdout et stderr sont drainés par invocation, bornés à 64 Kio et expurgés des
 secrets effectifs avant stockage ou exposition. Les buffers sont remis à zéro
 entre appels. L’algorithme conserve les protections de chevauchement, troncature
-et UTF-8 déjà qualifiées pour la validation. Les réponses métier ne sont pas
+et UTF-8 déjà qualifiées pour la validation. Lorsqu'une capture est tronquée,
+le buffer exposé peut être plus court que64Kio : si des secrets sont effectifs,
+le validateur retire à la fin leur longueur UTF-8 maximale moins un octet pour
+ne pas exposer un préfixe de secret coupé. Cette protection garde le drapeau de
+troncature ; [le contrat de collecte](EXECUTION_LOGS.md#collecte-et-événements)
+distingue la capture brute et le buffer expurgé. Les réponses métier ne sont pas
 réécrites par l’expurgation des logs : le handler est responsable de leur contenu.
 
 ## Admission et générations

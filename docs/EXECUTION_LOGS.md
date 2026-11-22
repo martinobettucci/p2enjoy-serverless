@@ -3,8 +3,14 @@
 Contrat de [SLS-072](BACKLOG.md#sls-072), décidé le 22 novembre 2026 avant code.
 Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation),
 [EXECUTION](EXECUTION.md#événement-réponse-et-journaux) et
-[CONTROL](CONTROL.md#gestion). Produit actuel : API 046, schéma 010, éditeur 070
+[CONTROL](CONTROL.md#gestion). Produit à la décision : API 046, schéma 010, éditeur 070
 et testeur 071 qualifiés ; journal avancé non implémenté à ce checkpoint.
+
+Mise à jour du22novembre2026,11h00UTC : le code préparé est déployé sur
+API1aa70214 et la migration011 est appliquée par la
+[bascule gardée](EXECUTION_LOG_DEPLOYMENT.md). Les sauvegardes, le contenu de
+l'image et la conservation des anciennes colonnes sont recoupés. Les12API,
+10UI,25communs et régressions restent à exécuter ;072 reste `[~]`.
 
 ## Sources et frontières
 
@@ -94,6 +100,17 @@ Bornes :64 Kio au buffer existant,1024 lignes projetées au plus par invocation,
 Chaque limite produit son indicateur ; la vue d'invocation conserve son buffer
 original jusqu'à expiration, avec sa propre limite de collecte 64 Kio.
 Pas de perte silencieuse entre projection partielle et buffer original.
+La borne de65536 octets porte sur la capture brute du runtime ; le buffer
+original exposé est déjà expurgé, donc sa taille peut être inférieure. Si la
+capture est tronquée et que des secrets sont effectifs, le validateur retire
+encore `max(longueur UTF-8 des secrets)-1` octets à sa fin avant remplacement,
+pour ne pas exposer le préfixe d'un secret coupé. Il conserve le drapeau de
+troncature. La conversion UTF-8 et les remplacements restent bornés à65536.
+L'égalité65536 à la frontière brute se teste dans un service sans secrets ;
+le même dépassement avec secrets vérifie séparément le retrait de protection.
+Décision120, après [huit mesures réelles](evidence/execution-journal-buffer-diagnostic-dev-2026-11-22.json) :
+corriger le client, conserver le runtime et le validateur. Exiger une taille
+brute après expurgation obligerait à affaiblir une protection existante.
 L'expurgation de secrets précède toute analyse/indexation/troncature du message.
 Elle protège les secrets effectifs connus ; un code qui imprime volontairement
 des données métier inconnues reste responsable de ce contenu.

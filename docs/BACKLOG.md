@@ -3541,19 +3541,33 @@ Résultat attendu : distinguer la borne brute du runtime et le buffer expurgé
 exposé par l'API, puis avoir un contrat et un client qui éprouvent exactement
 leurs limites sans affaiblir la protection des secrets ou masquer une perte.
 
-- [ ] SLS-120.1 Sceller le premier rouge sur1aa70214/498sources, son nettoyage
+- [x] SLS-120.1 Sceller le premier rouge sur1aa70214/498sources, son nettoyage
   et sa conservation ; garder ses trois groupes partiels hors du total qualifié.
-- [ ] SLS-120.2 Diagnostic réel aux bornes65535/65536/65537 octets, avec et
+- [x] SLS-120.2 Diagnostic réel aux bornes65535/65536/65537 octets, avec et
   sans secrets effectifs : conserver UUID, octets observés, empreinte et drapeaux
   avant toute assertion. Éprouver aussi un secret traversant la frontière.
   Aucune horloge, dépendance, réponse ou donnée SQL substituée.
-- [ ] SLS-120.3 Décision et motif persistés avant correction du contrat,
+- [x] SLS-120.3 Décision et motif persistés avant correction du contrat,
   client ou produit concerné ; limites et expurgation restent contrôlées.
   Le test échoué précède toute correction de comportement produit.
 - [ ] SLS-120.4 Rejouer API04 dans les douze groupes réels puis25communs frais,
   avec sources/image recoupées, purge physique et captures communes inspectées.
   Les dixUI et la régression complète de072 restent des preuves distinctes ;
   aucun cumul de l'ancien échec et aucun critère072 validé par le seul diagnostic.
+
+Premier rouge scellé : [preuve](evidence/execution-journal-buffer-first-failed-dev-2026-11-22.json),
+brutSHA `63a18943…`, trois groupes partiels et zéro qualifié. Les498sources et
+le programme privé sont conservés séparément ; le client de diagnostic est un
+nouveau fichier et ne réécrit pas le premier passage.
+
+Diagnostic : [huit mesures réelles](evidence/execution-journal-buffer-diagnostic-dev-2026-11-22.json),
+499sources/1aa70214, brutSHA `0564ea54…`, zéro groupe qualifié. Sans secret,
+65536 est conservé ; avec secret maximal61octets,65537 devient65476 avec
+troncature et sans préfixe divulgué. Nettoyage physique et5982originaux recoupés.
+Décision avant correction : conserver le produit ; le client éprouvera la borne
+brute dans un service sans secrets et le retrait de protection séparément dans
+le service à secrets. Manuel inchangé : il décrit une limite et l'expurgation,
+sans promettre une taille égale à64Kio après celle-ci. Le replay complet reste dû.
 
 À mettre à jour : contrat de collecte dans `EXECUTION_LOGS.md`/`EXECUTION.md`,
 preuve et clients ; manuel s'il décrit incorrectement le buffer expurgé.
