@@ -4452,3 +4452,9 @@ assouplissement du produit. Les cibles de capture sont les éléments rendus
 (loading, alertes, textepré, avertissements, statutd'export), jamais une attente
 arbitraire. Le focus clavier du pré est établi par Tab/ShiftTab pour rendre son
 état visible. Aucun autre comportement du produit ne change.
+
+129 — correctif de banc écrit : mesureCSP deGET/ sansassouplissement ; cinq
+tokens de l'unique :rootCSSexterne doublés et restaurés enfinally, valeurs/priorités
+conservées. Cibles d'état défilées et rectangles vérifiés avantJPEG ; pause et
+pré focalisé ont deux vues distinctes, Tab/ShiftTab établit le focusclavier.
+Syntaxe etdiff passent ; aucune preuve du replay encoreacquise.

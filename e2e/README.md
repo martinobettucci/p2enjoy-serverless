@@ -32,7 +32,10 @@ pilote retire les corpus précédents avant de mesurer les frontières globales.
 Les checkpoints natifs SQL et coupure sont joints avant les requêtes de purge ;
 un refus, un prérequis absent ou un nettoyage incomplet fait échouer le pilote.
 Les reçus privés UUID de `.local/e2e` sont conservés, sans écrasement d'un échec.
-Le client UI `node e2e/execution-journal-ui.mjs` est écrit et relu, non exécuté.
+Le client UI `node e2e/execution-journal-ui.mjs` a un premier passage rouge :
+septgroupes passent puis la balisestyleinline du banc est refusée enUI09.
+[SLS-129](../docs/BACKLOG.md#sls-129) corrige ce rendu via la feuilleCSSOM
+existante et cadre chaque étatciblé avantJPEG ; son replay reste à exécuter.
 Il lit le même stdin privé et qualifie ses dixgroupes uniquement si tous les
 parcours et le nettoyage passent. Horsligne/latence du vrai navigateur éprouvent
 les pannes, sans route interceptée ni réponse fabriquée ; les PUTperdus sont

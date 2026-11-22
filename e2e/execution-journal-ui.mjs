@@ -18,9 +18,16 @@ async function response(page,pathname,action,{status=200,method='GET'}={}) {
   const pending=c.track(page.waitForResponse(r=>new URL(r.url()).pathname===pathname && r.request().method()===method,{timeout:15000}));
   await action();const r=await done(pending);assert.equal(r.status(),status);return r;
 }
-async function capture(name,page=c.page) {
-  const filename='execution-journal-ui-'+c.id+'-'+name+'.jpg',target=new URL(filename,c.output);
-  await page.screenshot({path:target.pathname,type:'jpeg',quality:85});c.captures[filename]=sha(await readFile(target));await c.save();
+// @spec docs/BACKLOG.md#sls-129 | docs/EXECUTION_LOGS.md#console-et-manuel
+// @verifies docs/BACKLOG.md#sls-129
+async function capture(name,page=c.page,target) {
+  if(target) {
+    await target.scrollIntoViewIfNeeded();const box=await target.boundingBox(),viewport=page.viewportSize();
+    assert(box && viewport && box.x>=-1 && box.y>=-1 && box.x+box.width<=viewport.width+1 && box.y+box.height<=viewport.height+1,'capture_target_outside_viewport');
+    c.observations.push({scenario:'capture-framing',name,viewport,target:box,fully_in_view:true});
+  }
+  const filename='execution-journal-ui-'+c.id+'-'+name+'.jpg',destination=new URL(filename,c.output);
+  await page.screenshot({path:destination.pathname,type:'jpeg',quality:85});c.captures[filename]=sha(await readFile(destination));await c.save();
 }
 async function ready() {await until(()=>journal().getByRole('button',{name:'Suivre les nouveaux événements',exact:true}).isEnabled(),'journal_history_not_ready');}
 async function navigate(filters={}) {
@@ -87,7 +94,7 @@ try {
       await journal().getByRole('button',{name:'Nouveau relevé',exact:true}).click();await gate.held();
       await journal().getByText('Chargement des journaux…',{exact:true}).waitFor();assert.equal(await rows().count(),0);
       assert.equal(await journal().getByRole('navigation',{name:'Pagination des journaux',exact:true}).count(),0);
-      assert(!/\d+ événements dans cette période/.test(await journal().innerText()));await capture('loading');
+      assert(!/\d+ événements dans cette période/.test(await journal().innerText()));await capture('loading',c.page,journal().getByText('Chargement des journaux…',{exact:true}));
       const data=await filter({q:'no-such-event-'+c.id});assert.equal(data.total,0);await assertPage(data);
       await gate.close();assert.equal(await rows().count(),0);assert.equal(await journal().getByLabel('Texte à rechercher',{exact:true}).inputValue(),'no-such-event-'+c.id);
     } finally {if(!gate.closed)await gate.close();}
@@ -105,15 +112,15 @@ try {
     const html=actual.find(row=>row.message.startsWith('<script>'));assert(html);const card=await details(html.id);
     assert.equal(await card.getByLabel('Texte de '+html.id,{exact:true}).textContent(),html.message);assert.equal(await c.page.evaluate(()=>globalThis.journalInjected),undefined);
     for(const value of [html.id,html.invocation_id,html.code_hash,html.service_id,html.function_id,html.instance_id])if(value)assert((await card.innerText()).includes(value));
-    await card.getByText(/Date observée à la fin/).waitFor();await capture('text-and-correlation');
+    await card.getByText(/Date observée à la fin/).waitFor();await capture('text-and-correlation',c.page,card.getByLabel('Texte de '+html.id,{exact:true}));
     await navigate({source:'application',invocation:cases.calls.json});const structured=(await cases.application(cases.fn,cases.calls.json))[0],json=await details(structured.id);
-    const text=await json.getByLabel('Texte de '+structured.id,{exact:true}).textContent();for(const value of ['9007199254740993','1.2300','1e+30','\\u00e9'])assert(text.includes(value));await capture('json-exact');
+    const text=await json.getByLabel('Texte de '+structured.id,{exact:true}).textContent();for(const value of ['9007199254740993','1.2300','1e+30','\\u00e9'])assert(text.includes(value));await capture('json-exact',c.page,json.getByLabel('Texte de '+structured.id,{exact:true}));
     await navigate({source:'application',invocation:cases.calls.bytes});const cut=(await cases.application(cases.fn,cases.calls.bytes))[0];assert(cut.message_truncated);const truncated=await details(cut.id);await truncated.getByText(/Message limité à 4096/).waitFor();
     const collected=await cases.invoke('bytes',{bytes:65537});await navigate({source:'application',invocation:collected.id});
     const collectionRows=await cases.application(cases.fn,collected.id),collectionItem=collectionRows.find(row=>row.collection_truncated);assert(collectionItem);
-    const collectionCard=await details(collectionItem.id);await collectionCard.getByText(/Buffer de collecte limité à 64 Kio/).waitFor();await capture('collection-truncated');
+    const collectionCard=await details(collectionItem.id);await collectionCard.getByText(/Buffer de collecte limité à 64 Kio/).waitFor();await capture('collection-truncated',c.page,collectionCard.getByText(/Buffer de collecte limité à 64 Kio/));
     const projected=await cases.invoke('lines',{count:1025}),projectionRows=await cases.application(cases.fn,projected.id),projectionItem=projectionRows.find(row=>row.projection_truncated);assert(projectionItem);
-    await navigate({source:'application',invocation:projected.id,q:projectionItem.message});const projectionCard=await details(projectionItem.id);await projectionCard.getByText(/Projection limitée aux 1024 premières lignes/).waitFor();await capture('projection-truncated');
+    await navigate({source:'application',invocation:projected.id,q:projectionItem.message});const projectionCard=await details(projectionItem.id);await projectionCard.getByText(/Projection limitée aux 1024 premières lignes/).waitFor();await capture('projection-truncated',c.page,projectionCard.getByText(/Projection limitée aux 1024 premières lignes/));
     c.observations.push({scenario:'collection-and-projection-truncation-rendered',collection_invocation:collected.id,collection_event:collectionItem.id,projection_invocation:projected.id,projection_event:projectionItem.id});
     c.observations.push({scenario:'details-escaped-exact',html_event_id:html.id,json_event_id:structured.id,truncated_event_id:cut.id,script_executed:false});
   });
@@ -124,7 +131,7 @@ try {
     const sent=await response(c.page,endpoint(cases.fn)+'/test-invocation',()=>c.page.getByRole('button',{name:'Envoyer la requête',exact:true}).click(),{method:'POST'});const result=await sent.json();assert(result.request_id);
     await c.terminal(cases.fn,result.request_id);const before=await c.value(endpoint(cases.fn)+'/invocations');
     const link=c.page.getByRole('link',{name:'Rechercher les journaux de cet appel',exact:true});await link.focus();await c.page.keyboard.press('Enter');await ready();assert.equal(new URL(c.page.url()).searchParams.get('invocation'),result.request_id);
-    assert(await rows().count()>0);const after=await c.value(endpoint(cases.fn)+'/invocations');assert.equal(after.total,before.total);await capture('tester-correlation');
+    assert(await rows().count()>0);const after=await c.value(endpoint(cases.fn)+'/invocations');assert.equal(after.total,before.total);await capture('tester-correlation',c.page,journal().locator('[data-log-id] article').first().getByRole('heading'));
     c.observations.push({scenario:'tester-no-reinvocation',invocation_id:result.request_id,before:before.total,after:after.total});
   });
   await c.check('UI 06 — Suivi, pause, reprise, fenêtre et focus',async()=>{
@@ -144,9 +151,9 @@ try {
     await journal().getByRole('button',{name:'Reprendre le suivi',exact:true}).click();await until(async()=>await rows().count()>beforeDisconnect.length,'follow_did_not_resume_after_disconnection');
     assert.equal(new Set(await ids()).size,(await ids()).length);assert(await ids().then(current=>beforeDisconnect.every(id=>current.includes(id))));
     c.observations.push({scenario:'actual-browser-disconnection-and-resume',before:beforeDisconnect,after:await ids(),new_invocation:disconnectedCall.id,intercepted_responses:0});
-    await card.locator(':scope > details > summary').click();await text.focus();await cases.invoke('lines',{count:220});
+    await card.locator(':scope > details > summary').click();await text.focus();await c.page.keyboard.press('Tab');await c.page.keyboard.press('Shift+Tab');assert(await text.evaluate(element=>element===document.activeElement));await cases.invoke('lines',{count:220});
     await journal().getByText(/Suivi mis en pause pour conserver l’entrée qui a le focus/).waitFor({timeout:15000});assert(await text.evaluate(element=>element===document.activeElement));assert(await rows().count()<=200);
-    await capture('follow-protects-focus');const resume=journal().getByRole('button',{name:'Reprendre le suivi',exact:true});await resume.focus();await c.page.keyboard.press('Enter');
+    await capture('follow-protects-focus-notice',c.page,journal().getByText(/Suivi mis en pause pour conserver l’entrée qui a le focus/));await capture('follow-protects-focus',c.page,text);const resume=journal().getByRole('button',{name:'Reprendre le suivi',exact:true});await resume.focus();await c.page.keyboard.press('Enter');
     await until(async()=>await rows().count()===200,'live_window_not_capped');const retained=await ids();assert.equal(new Set(retained).size,200);
     await journal().getByText(/Les 200 dernières entrées/).waitFor();await capture('follow-window');
     const old=await c.value('/api/services/'+cases.service.id+'/log-policy'),pause=journal().getByRole('button',{name:'Mettre en pause',exact:true});await pause.focus();
@@ -175,7 +182,7 @@ try {
     for(let index=0;index<40;index++)await cases.invoke('batch',{lengths:Array(16).fill(4095)});
     await navigate({source:'application',q:'a'.repeat(200)});const large=await download('Exporter cette période'),next=await download('Exporter le lot suivant');
     const a=parse(large.bytes),b=parse(next.bytes);assert(a.length<1000 && a.length>0 && b.length>0);assert.equal(large.headers['x-log-partial'],'true');assert(large.bytes.length+Buffer.byteLength(JSON.stringify(b[0])+'\n')>1024**2);
-    assert(!a.some(row=>b.some(other=>other.id===row.id)));await capture('export-batches');
+    assert(!a.some(row=>b.some(other=>other.id===row.id)));await capture('export-batches',c.page,journal().getByRole('status').filter({hasText:/octets téléchargés/}));
     const old=await c.value('/api/services/'+cases.service.id+'/log-policy');await cases.policy(cases.service,old.retention_minutes-1);
     await response(c.page,path()+'/export',()=>journal().getByRole('button',{name:'Exporter le lot suivant',exact:true}).click(),{status:410});
     await journal().getByRole('alert').waitFor();assert.equal(await rows().count(),0);assert.equal(await journal().getByRole('navigation',{name:'Pagination des journaux',exact:true}).count(),0);
@@ -207,9 +214,40 @@ try {
     const disclosure=journal().locator('[data-log-id] article > details > summary').first();await disclosure.focus();await c.page.keyboard.press('Enter');
     assert(await disclosure.evaluate(element=>element.parentElement.open));
     const before=await journal().getByLabel('Texte à rechercher',{exact:true}).evaluate(element=>parseFloat(getComputedStyle(element).fontSize));
-    const enlargement=await c.page.addStyleTag({content:':root {--text-small:26px;--text-body:30px;--text-h3:32px;--text-h2:40px;--text-h1:52px;font-size:var(--text-body) !important}'});
-    const after=await journal().getByLabel('Texte à rechercher',{exact:true}).evaluate(element=>parseFloat(getComputedStyle(element).fontSize));assert(after>=before*1.9);
-    assert(await c.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await capture('text-enlarged');await enlargement.evaluate(element=>element.remove());
+    const entry=await c.call('/',{anonymous:true,json:false}),policy=entry.headers['content-security-policy'];
+    assert(policy?.includes("default-src 'self'") && !policy.includes("'unsafe-inline'"),'unexpected_product_style_policy');
+    const enlargement=await c.page.evaluate(()=>{
+      const names=['--text-small','--text-body','--text-h3','--text-h2','--text-h1'],found=[];
+      for(const sheet of document.styleSheets) {
+        if(!sheet.href || new URL(sheet.href).origin!==location.origin)continue;
+        for(let index=0;index<sheet.cssRules.length;index++) {
+          const rule=sheet.cssRules[index];
+          if(rule.selectorText===':root' && names.every(name=>rule.style.getPropertyValue(name)))found.push({sheet,rule,index});
+        }
+      }
+      if(found.length!==1)throw new Error('unique_external_typography_rule_required');
+      const {sheet,rule,index}=found[0],values=names.map(name=>{
+        const value=rule.style.getPropertyValue(name),priority=rule.style.getPropertyPriority(name);
+        if(!/^\d+(?:\.\d+)?px$/.test(value) || Number.parseFloat(value)<=0)throw new Error('pixel_typography_token_required');
+        return {name,value,priority,scaled:2*Number.parseFloat(value)+'px'};
+      });
+      try {for(const item of values)rule.style.setProperty(item.name,item.scaled,item.priority);}
+      catch(error) {for(const item of values)rule.style.setProperty(item.name,item.value,item.priority);throw error;}
+      return {href:sheet.href,index,values};
+    });
+    let after;
+    try {
+      after=await journal().getByLabel('Texte à rechercher',{exact:true}).evaluate(element=>parseFloat(getComputedStyle(element).fontSize));assert(after>=before*1.9);
+      assert(await c.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await capture('text-enlarged',c.page,journal().getByLabel('Texte à rechercher',{exact:true}));
+    } finally {
+      await c.page.evaluate(state=>{
+        const sheets=[...document.styleSheets].filter(sheet=>sheet.href===state.href);if(sheets.length!==1)throw new Error('typography_sheet_changed');
+        const rule=sheets[0].cssRules[state.index];if(rule.selectorText!==':root')throw new Error('typography_rule_changed');
+        for(const item of state.values)if(rule.style.getPropertyValue(item.name)!==item.scaled)throw new Error('typography_token_changed');
+        for(const item of state.values)rule.style.setProperty(item.name,item.value,item.priority);
+      },enlargement);
+    }
+    c.observations.push({scenario:'served-csp-and-reversible-cssom',policy_sha256:sha(policy),tokens:enlargement.values,restored:true});
     c.observations.push({scenario:'repeated-keyboard-focus',repetitions:3,other_control_respected:true,text_font_before:before,text_font_after:after,measurement:'product font tokens doubled, not browser zoom'});
   });
   await c.check('UI 10 — Desktop, tablette, mobile et défilement local',async()=>{
@@ -255,7 +293,7 @@ try {
     const finalCall=await cases.invoke('text');await c.value(endpoint(cases.fn),{method:'DELETE'});
     await c.page.goto(base+'/console/services/'+cases.service.id+'/logs?source=platform&invocation='+finalCall.id);await ready();
     await c.value(path()+'?source=application&invocation='+finalCall.id,{status:404});
-    const unavailable=journal().locator('[data-log-id] article').first();await unavailable.locator(':scope > details > summary').click();await unavailable.getByText(/Objet indisponible/).waitFor();assert.equal(await unavailable.getByRole('link',{name:'Ouvrir la fonction',exact:true}).count(),0);await capture('archived-reference');
+    const unavailable=journal().locator('[data-log-id] article').first();await unavailable.locator(':scope > details > summary').click();await unavailable.getByText(/Objet indisponible/).waitFor();assert.equal(await unavailable.getByRole('link',{name:'Ouvrir la fonction',exact:true}).count(),0);await capture('archived-reference',c.page,unavailable.getByText(/Objet indisponible/));
     c.observations.push({scenario:'real-retention-conflict-and-save',before_version:before.version,after_version:current.version,draft_preserved:true,retention_minutes:1});
   });
   assert.deepEqual(errors,[]);assert.equal(c.checks.length,10);c.scenariosPassed=true;

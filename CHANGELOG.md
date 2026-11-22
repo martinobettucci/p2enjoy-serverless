@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-129 : le premier10UI passe septgroupes puis échoue sur la balisestyle du
+  banc refusée parCSP. Les13JPEG sont inspectées, leurs cadrages incomplets nommés.
+  Le test utilise maintenant la feuilleCSSOM existante et des cibles de capture
+  vérifiées, avec restauration du rendu. Replay et qualification restent ouverts.
+
 - SLS-072 : client navigateur dixgroupes écrit et relu, nonexécuté : filtres/pages
   stables, détails, testeur, suivi interrompu, exports, politique et clavier/mobile.
   Aucune nouvelle qualification UI acquise. Les préparatoires126/128 prouvent
