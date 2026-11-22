@@ -5,9 +5,11 @@ manuel canonique recompilé dans1aa70214/011, mêmes ressourcesweb dansbf9b61a6.
 ressources servies sont recoupées par la [bascule](../docs/EXECUTION_LOG_DEPLOYMENT.md).
 Les dix parcours UI072, leurs captures et les régressions restent à exécuter :
 le premier diagnostic124 a depuis reproduit deux pertes de focusBODY, avec
-trois capturesinspectées. Le correctif et son manuel sont construits dans
-a7d7491a, backend/CSS/favicon identiques, puis restent à basculer et qualifier.
-Les dix parcours complets et leurs régressions ne sont pas encore acquis.
+trois capturesinspectées. Le correctif est maintenant déployé dansa7d7491a,
+backend/CSS/favicon identiques àbf. Le [replay préparatoire124](../docs/evidence/execution-journal-focus-replay-dev-2026-11-22.json)
+recoupe quatre H2focalisés, deux410/log_policy_changed et sixvuesinspectées en
+1440/390px, avec purge physique. Il ne remplace pas les dixparcours complets et
+25communs, ni les intentions successives et le respect d'un autre contrôle.
 
 La [reprise29](../docs/evidence/code-editor-control-interruption-dev-2026-11-22.json) clôt070et118 sur474sourcesef71eb7/
 API046 : deux coupures137, brouillons relus API/UI, six handlers,26captures

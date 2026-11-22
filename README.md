@@ -3,12 +3,17 @@
 ## Journaux déployés — qualification en cours
 
 Le registre011, ses API et les facettes Journaux fonction/service sont déployés
-en DEV sur l'image1aa70214, avec le manuel canonique recompilé. La
+en DEV sur l'imagea7d7491a, avec le manuel canonique recompilé. La
 [bascule gardée](docs/EXECUTION_LOG_DEPLOYMENT.md) recoupe deux sauvegardes SQLite,
 les anciennes colonnes et42backend/quatreweb ; son unité est terminée et son
 cgroup vide. Les parcours fonctionnels et visuels restent à qualifier selon
 [SLS-072](docs/BACKLOG.md#sls-072), ainsi que les régressions sur011. Aucun groupe
 fonctionnel ni critère de clôture n'est ajouté par le seul déploiement.
+Le [replay clavier124](docs/evidence/execution-journal-focus-replay-dev-2026-11-22.json)
+recoupe quatre relaisH2 en1440/390px, deux410 réels, six captures inspectées et
+purge physique ; sa bascule garde42backend/CSS/favicon identiques àbf9b61a6.
+Il reste préparatoire : les12API/10UI/25communs complets sont encore requis.
+
 
 ## Brouillons et coupures du contrôle qualifiés —22 novembre2026
 

@@ -1,7 +1,7 @@
 # Plan de contrôle
 
 Le [registre de journaux011](../docs/EXECUTION_LOGS.md) est implémenté et déployé
-en DEV surbf9b61a6. La [bascule](../docs/EXECUTION_LOG_DEPLOYMENT.md) conserve les
+en DEV sura7d7491a, backend identique àbf9b61a6. La [bascule](../docs/EXECUTION_LOG_DEPLOYMENT.md) conserve les
 anciennes colonnes et recoupe42backend/quatreweb, deux backups natifs et la fin
 de l'unité/cgroup. Les critères072 et les régressions restent ouverts ; ce
 prérequis ne compte aucun groupe fonctionnel. La [reprise de purge128](../docs/evidence/execution-journal-purge-recovery-dev-2026-11-22.json)

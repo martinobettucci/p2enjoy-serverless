@@ -10184,3 +10184,14 @@ invalidations. RevueUI contre les deuxdesignsystems sansP1/P2 restant et build
 local réussi. Imagea7d7491a inspectée,42backend/CSS/favicon conservés ; profil
 journal-focus relu, sans bascule encore exécutée. Reprise : bascule gardée puis
 replay1440/390 avec vrai410, six captures et campagne10UI/25communs.
+
+
+### 22 novembre 2026 — Relais clavier124 éprouvés en desktop/mobile
+
+L'imagea7d7491a est basculée par l'unité9a4eb277, tables/schema/collection,
+backend42/CSS/favicon conservés et16clientsjoints. Le replay512sources6f6fefc
+rend le focus à quatreH2 en1440/390px et recoupe deux410log_policy_changed.
+SixJPEG inspectés individuellement, purge physique et5982originaux. Le premier
+rouge reste distinct ;10UI/25communs et les autres intentions restent à produire.
+Un nouveau refus de santé au préparatoirelecteurs est traité dans126.5 ; ses
+logs et le replay sansreproduction sont scellés, aucunecauseproduit attribuée.

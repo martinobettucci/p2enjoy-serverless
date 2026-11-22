@@ -4327,3 +4327,14 @@ Les troisvagues et les deux vraisEMFILE passent, restitution/purge et huitcompte
 Zéro groupecompletqualifié et aucune cause attribuée au premier503. Le harness
 conserve désormais tout refus inattendu avant assertion sous forme expurgée ;
 la reproduction limitéeàtrois itérations s'arrête au premier échec.126.5 resteouvert.
+
+
+124 — [replay préparatoire positif et six captures inspectées](evidence/execution-journal-focus-replay-dev-2026-11-22.json).
+Bascule9a4eb277 inactive/Resultsuccess,16clientsDockerjoints, toutes tables,
+schéma et collection égaux au backupfinal, backend42/CSS/favicon conservés.
+Imagea7d7491a/CID218c13d1. Quatre focusH2 en1440/390, deux vrais410/
+log_policy_changed aprèsPUTversion, Pageerrors0 ; fonction/jeton/parents purgés,
+huitcompteurs0 et5982originaux.512sources identiques au commit6f6fefc.
+Zéro groupecompletqualifié ;124.3 reste ouvert pour intentionssuccessives,
+respect d'un autrecontrôle et10UI/25communs. Les images mobiles ne cadrent pas
+le refus souslepli : sa preuve estDOM/HTTP, pas visuelle.

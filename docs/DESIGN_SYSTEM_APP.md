@@ -671,3 +671,16 @@ La fermeture de Page/target, l’état HTTP et les effets backend sont prouvés 
 leurs rapports séparés. Le cadrage du code mobile reste partiel ; aucune preuve
 de focus DOM ou de zoom global n’est déduite des seules images. Manuel rendu
 18/74SHA8d2434cf inchangé.117close,070reste ouverte pour restart et coupures.
+
+
+### Relais des journaux — replay préparatoire124
+
+Le [replay124](evidence/execution-journal-focus-replay-dev-2026-11-22.json) sur
+512sources du commit6f6fefc/imagea7d7491a recoupe quatreH2 et deux410 réels.
+Les six JPEG sont ouverts individuellement : champfocalisé du dialog et contours
+Conservation/Journaux lisibles en1440/390px ; modale mobile pleinepage selonle
+socle, aucune nouvelle couleur ou dimension. Le refus et Reprendre indisponible
+sont cadrés surdesktop ; la vue mobile du suivi ne montre que son titre et ses
+filtres, pas les commandes souslepli. Les mesuresDOM/HTTP prouvent ces effets
+séparément. Purge acquise, zéro groupecompletqualifié. Intentions successives,
+respect d'un autre contrôle,10UI/25communs gardent leur campagne à produire.
