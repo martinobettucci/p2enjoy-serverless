@@ -582,3 +582,11 @@ rencontrés. Les chemins en clair restent dans /state/execution ; tout autre nom
 est haché. L'instance correspondante est explicite ; aucun octet applicatif ou
 en-tête supplémentaire n'est lu. Le premier relevé garde le poll1ms partagé,
 avant décision de sa correction ; les époques et sources restent distinctes.
+
+
+Après mesure du poll123, NativeWakeup déjà utilisé par121 est extrait à
+l'identique dans un moduleE2E commun. Le CounterObserver remplace uniquement son
+sommeil fixe par ce réveil SIGCHLD, sans modifier le matcher ni ses bornes.
+waitpid demeure l'autorité ; pipe/handlers/wakeupfd sont fermés/restaurés en
+finally et le module est épinglé avec les programmes des deux gardes. Les
+mesures restent présentes et la prochaine acquisition doit être réelle.

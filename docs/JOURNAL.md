@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — coût du poll123 mesuré, réveil commun décidé
+
+Le diagnostic30a08449 conserve26249stops et24740polls vides :26974ms de sommeil
+sur30s. Quatre socketsUNIX sans nom, /started non acquis. Nettoyage physique
+et détachement acquis ; aucun groupe qualifié ni cause de stockage attribuée.
+Décision avant code : extraire NativeWakeup121 à l'identique dans un moduleE2E,
+réutiliser son pipeSIGCHLD dans CounterObserver, épingler ce module dans les
+reçus des deux gardes, fermeture en finally. Aucun matcher ni délai changé.
+
+
 ## 22 novembre 2026 — réception123 non atteinte, coût natif à mesurer
 
 Brut309bacdb/502sources, archive00753289 : /started non rencontré avant30s.

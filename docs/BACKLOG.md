@@ -3867,6 +3867,22 @@ les autres, uniquement SHA. Ne lire aucun contenu supplémentaire. Conserver les
 mêmes bornes et le même poll pour cette mesure avant correction de l'attente.
 
 
+Les [mesures du poll](evidence/execution-journal-started-receive-poll-metrics-dev-2026-11-22.json)
+conservent26249stops,24740polls vides et26974ms réellement passées en sommeil
+sur la fenêtre30s. Quatre socketsUNIX sans nom, aucun canal instance reconnu.
+Le coût propre du poll est établi ; aucune cause précise de stockage n'est
+attribuée par le seul code public storage_unavailable.
+
+Décision avant correction du banc : extraire sans modification NativeWakeup
+actuel de l'opérateurSQL vers un moduleE2E commun, et l'utiliser aussi pour le
+wait du seul CounterObserver. Attente SIGCHLD sur pipe non bloquant/CLOEXEC,
+waitpid reste seul arbitre ; handlers/wakeupfd/FD toujours restaurés en finally.
+Épingler le module dans les identités de programmes des deux opérateurs.
+Ne changer ni matcher de socket, ni budgets, ni runtime ; conserver les mesures
+pour le prochain diagnostic avant le full12. Cette extraction n'est pas une
+nouvelle preuve des groupes121 : ils restent à rejouer avec le vecteur commun.
+
+
 <a id="sls-124"></a>
 ## SLS-124 — Restituer le focus des commandes Journaux
 
