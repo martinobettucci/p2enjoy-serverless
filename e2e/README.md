@@ -40,6 +40,11 @@ Il lit le même stdin privé et qualifie ses dixgroupes uniquement si tous les
 parcours et le nettoyage passent. Horsligne/latence du vrai navigateur éprouvent
 les pannes, sans route interceptée ni réponse fabriquée ; les PUTperdus sont
 retenus après commit natif. Toutes les JPEG doivent être ouvertes individuellement.
+Le préparatoire `node e2e/execution-journal-policy-browser-diagnostic.mjs`
+partage le seul scénarioUI07 avec le clientcomplet, même stdin privé et
+purge systématique. Il attend le vrai requestfailed après Page.stopLoading
+sur le PUT retenu aprèscommit ; zéro groupequalifié. Son premierpassage
+reste à exécuter.
 Les25communs et l’orchestration de régression restent à produire :
 les12groupes API, même réussis, ne clôturent pas072.
 

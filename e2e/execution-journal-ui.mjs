@@ -4,6 +4,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {JournalCampaign,privateInput,diagnosis,base,endpoint,match,until,delay,sha,adminConnection} from './execution-journal-harness.mjs';
+import {retentionPolicyCase} from './execution-journal-ui-policy-case.mjs';
 import {JournalApiCases} from './execution-journal-api-cases.mjs';
 import {inspectJournal,JournalSqlBarrier,joinJournalSqlBarriers,joinJournalCuts} from './execution-journal-native.mjs';
 
@@ -18,17 +19,8 @@ async function response(page,pathname,action,{status=200,method='GET'}={}) {
   const pending=c.track(page.waitForResponse(r=>new URL(r.url()).pathname===pathname && r.request().method()===method,{timeout:15000}));
   await action();const r=await done(pending);assert.equal(r.status(),status);return r;
 }
-// @spec docs/BACKLOG.md#sls-129 | docs/EXECUTION_LOGS.md#console-et-manuel
-// @verifies docs/BACKLOG.md#sls-129
-async function capture(name,page=c.page,target) {
-  if(target) {
-    await target.scrollIntoViewIfNeeded();const box=await target.boundingBox(),viewport=page.viewportSize();
-    assert(box && viewport && box.x>=-1 && box.y>=-1 && box.x+box.width<=viewport.width+1 && box.y+box.height<=viewport.height+1,'capture_target_outside_viewport');
-    c.observations.push({scenario:'capture-framing',name,viewport,target:box,fully_in_view:true});
-  }
-  const filename='execution-journal-ui-'+c.id+'-'+name+'.jpg',destination=new URL(filename,c.output);
-  await page.screenshot({path:destination.pathname,type:'jpeg',quality:85});c.captures[filename]=sha(await readFile(destination));await c.save();
-}
+const capture=(name,page=c.page,target)=>c.capture(name,page,target);
+
 async function ready() {await until(()=>journal().getByRole('button',{name:'Suivre les nouveaux événements',exact:true}).isEnabled(),'journal_history_not_ready');}
 async function navigate(filters={}) {
   const params=new URLSearchParams(filters);await c.page.goto(base+'/console/functions/'+cases.fn.id+'/logs?'+params);await ready();
@@ -263,39 +255,7 @@ try {
     }
     await c.page.setViewportSize({width:1440,height:1000});
   });
-  await c.check('UI 07 — Conservation, confirmation, conflit et relecture',async()=>{
-    await navigate();await c.page.getByRole('link',{name:'Journaux et conservation de tout le service',exact:true}).click();await ready();
-    const retention=panel(c.page,'Conservation des journaux'),opener=retention.getByRole('button',{name:'Modifier la conservation',exact:true});await until(()=>opener.isEnabled(),'retention_not_ready');await opener.click();
-    let dialog=c.page.getByRole('dialog',{name:'Conservation des journaux',exact:true}),input=dialog.getByLabel('Conservation (minutes)',{exact:true});
-    const prior=await c.value('/api/services/'+cases.service.id+'/log-policy'),policyPath='/api/services/'+cases.service.id+'/log-policy';await input.fill(String(prior.retention_minutes+1));
-    const committed=await new JournalSqlBarrier(c,cases.image,1,'policy-commit').start();let writes=0;
-    const count=request=>{if(new URL(request.url()).pathname===policyPath && request.method()==='PUT')writes++;};c.page.on('request',count);
-    try {
-      const failed=c.track(c.page.waitForEvent('requestfailed',{predicate:request=>new URL(request.url()).pathname===policyPath && request.method()==='PUT',timeout:10000}));
-      await dialog.getByRole('button',{name:'Enregistrer',exact:true}).click();const held=await committed.held();assert.equal(held.readers[0].boundary,'policy-commit');
-      await c.context.setOffline(true);const lost=await done(failed);assert(lost.failure());
-      await dialog.getByText(/Son résultat est inconnu/).waitFor();assert(await dialog.getByRole('button',{name:'Enregistrer',exact:true}).isDisabled());assert.equal(await input.inputValue(),String(prior.retention_minutes+1));await capture('retention-response-lost');
-      await committed.close();await c.context.setOffline(false);
-      const actual=await c.value(policyPath);assert.equal(actual.version,prior.version+1);assert.equal(actual.retention_minutes,prior.retention_minutes+1);
-      await response(c.page,policyPath,()=>dialog.getByRole('button',{name:'Relire la politique',exact:true}).click());await dialog.getByText(/Votre saisie est conservée/).waitFor();assert.equal(writes,1);
-      c.observations.push({scenario:'committed-policy-response-lost-in-real-browser',before_version:prior.version,after_version:actual.version,put_requests:writes,network_failure_sha256:sha(lost.failure().errorText),draft_preserved:true});
-    } finally {await c.context.setOffline(false);c.page.off('request',count);if(!committed.closed)await committed.close();}
-    await c.page.keyboard.press('Escape');await dialog.getByRole('button',{name:'Abandonner',exact:true}).click();await dialog.waitFor({state:'hidden'});await until(()=>opener.isEnabled(),'retention_unknown_reread_not_joined');await opener.click();
-    dialog=c.page.getByRole('dialog',{name:'Conservation des journaux',exact:true});input=dialog.getByLabel('Conservation (minutes)',{exact:true});await input.fill('1');
-    const before=await c.value('/api/services/'+cases.service.id+'/log-policy');await cases.policy(cases.service,before.retention_minutes-1);
-    await dialog.getByRole('button',{name:'Enregistrer',exact:true}).click();await dialog.getByRole('button',{name:'Confirmer la diminution',exact:true}).click();
-    await dialog.getByText(/La politique a changé dans une autre session/).waitFor();assert.equal(await input.inputValue(),'1');assert(await dialog.getByRole('button',{name:'Enregistrer',exact:true}).isDisabled());await capture('retention-conflict');
-    await response(c.page,'/api/services/'+cases.service.id+'/log-policy',()=>dialog.getByRole('button',{name:'Relire la politique',exact:true}).click());await dialog.getByText(/Votre saisie est conservée/).waitFor();assert.equal(await input.inputValue(),'1');
-    await input.fill('0');assert.equal(await input.evaluate(element=>element.validity.rangeUnderflow),true);await input.fill('10081');assert.equal(await input.evaluate(element=>element.validity.rangeOverflow),true);await input.fill('1');
-    await dialog.getByRole('button',{name:'Enregistrer',exact:true}).click();await dialog.getByText(new RegExp(cases.service.name)).waitFor();
-    await response(c.page,'/api/services/'+cases.service.id+'/log-policy',()=>dialog.getByRole('button',{name:'Confirmer la diminution',exact:true}).click(),{method:'PUT'});await dialog.waitFor({state:'hidden'});
-    const current=await c.value('/api/services/'+cases.service.id+'/log-policy');assert.equal(current.retention_minutes,1);await until(()=>opener.isEnabled(),'retention_save_reread_missing');await capture('retention-saved');
-    const finalCall=await cases.invoke('text');await c.value(endpoint(cases.fn),{method:'DELETE'});
-    await c.page.goto(base+'/console/services/'+cases.service.id+'/logs?source=platform&invocation='+finalCall.id);await ready();
-    await c.value(path()+'?source=application&invocation='+finalCall.id,{status:404});
-    const unavailable=journal().locator('[data-log-id] article').first();await unavailable.locator(':scope > details > summary').click();await unavailable.getByText(/Objet indisponible/).waitFor();assert.equal(await unavailable.getByRole('link',{name:'Ouvrir la fonction',exact:true}).count(),0);await capture('archived-reference',c.page,unavailable.getByText(/Objet indisponible/));
-    c.observations.push({scenario:'real-retention-conflict-and-save',before_version:before.version,after_version:current.version,draft_preserved:true,retention_minutes:1});
-  });
+  await c.check('UI 07 — Conservation, confirmation, conflit et relecture',()=>retentionPolicyCase(c,cases));
   assert.deepEqual(errors,[]);assert.equal(c.checks.length,10);c.scenariosPassed=true;
 } catch(error) {c.failure=diagnosis(error);process.exitCode=1;}
 finally {

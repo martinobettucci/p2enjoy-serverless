@@ -4503,3 +4503,10 @@ Le casUI07 est extrait en un module de scénario réutilisé par le client compl
 et son préparatoire, sans nouveau cadre générique de tests. Une politique à la
 borne10080 est modifiée de−1 avec confirmation ; sinon de+1 : aucun no-op ne peut
 passer pour un commit. Les sources et premiersrouges restent conservés.
+
+130 — casUI07 extrait dans execution-journal-ui-policy-case.mjs, appelé par le
+client10UI et un préparatoire dédié zérogroupes. Réponse et requestfailed sont
+observés avantassertion, version relue pendantpolicy-commit, Page.stopLoading
+sur la seulepage sansinterception, CDP/barrière joints enfinally. La caméra129
+identique est portée par le propriétaireJournalCampaign pour les deuxclients.
+Syntaxe seule vérifiée ; premièrepreuve de cette interruption reste à produire.

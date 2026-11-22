@@ -90,6 +90,19 @@ export class JournalCampaign {
     await this.saveTail;
   }
 
+  // @spec docs/BACKLOG.md#sls-129 | docs/EXECUTION_LOGS.md#console-et-manuel
+  // @verifies docs/BACKLOG.md#sls-129
+  async capture(name,page=this.page,target) {
+    assert(/^[a-z0-9-]+$/.test(name));
+    if(target) {
+      await target.scrollIntoViewIfNeeded();const box=await target.boundingBox(),viewport=page.viewportSize();
+      assert(box && viewport && box.x>=-1 && box.y>=-1 && box.x+box.width<=viewport.width+1 && box.y+box.height<=viewport.height+1,'capture_target_outside_viewport');
+      this.observations.push({scenario:'capture-framing',name,viewport,target:box,fully_in_view:true});
+    }
+    const filename='execution-journal-'+this.kind+'-'+this.id+'-'+name+'.jpg',destination=new URL(filename,this.output);
+    await page.screenshot({path:destination.pathname,type:'jpeg',quality:85});this.captures[filename]=sha(await readFile(destination));await this.save();
+  }
+
   async check(name,action) {
     this.stage=name;await this.save();
     try {await action();this.checks.push({name,status:'passed'});console.log('PASS',name);}
