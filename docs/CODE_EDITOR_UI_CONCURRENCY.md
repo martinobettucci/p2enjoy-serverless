@@ -144,3 +144,41 @@ huit handlers, purge complète,32captures inspectées ; zéro groupe qualifié e
 communs non lancés. La [correction115](CODE_EDITOR_ADOPTION_FOCUS.md) conserve
 ce premier passage et décide le retour au fichier avant code. Son nouveau
 passage ajoute un groupe de repli au banc initial, soit11+25et neuf invocations.
+
+## Retour au fichier et attentes UI qualifiés —22novembre2026
+
+La [preuve36](evidence/code-editor-adoption-focus-dev-2026-11-22.json) clôt **SLS-115 et SLS-116** : onze groupes ciblés puis
+25communs frais sur463sources `ce8540a`, image04604089/CIDe219f789. Les68entrées
+produit sont identiques au buildd028 ; les gels ultérieurs changent le pin du
+client et les contrats de preuve. Les62captures sont ouvertes individuellement :
+40JPEG ciblés,16JPEG du manuel déclarés et six PNG complémentaires non déclarés.
+
+Les quatre adoptions garder/remplacer en1440/390px donnent huit mesures sur le
+textarea connecté et focalisé avant/après réponse tardive. Huit variantes de
+lecture/existence/absence focalisent le h2 courant ; version UI/serveur, texte/SHA,
+chemin et lecture seule sont recoupés, sans PUT implicite. Sauvegarde, surface,
+adoption et abandon écartent les anciens200. Focus volontaire, recalage détaillé
+5+2 avec origine conservée, vrais404/429 puis reprise sont recoupés.18gardes et
+24lecteurs sont joints ; seize instantanés tardifs sont conservés.
+
+Neuf invocations distinctes sont succeeded/handler_started1/HTTP200. Fonction,
+jeton et deux parents retirés ; purge physique du seul UUID, ressources Docker/
+réseaux/canaux/backings/baux et réservations recoupées.38backend/quatreweb HTTPS
+no-store, dix migrations/intégrités/FK, notes, budgets, configuration/référence et
+5982originaux sont conservés. Manuel canonique servi :18chapitres/74paragraphes,
+SHA8d2434cff30235f0a6849f312764432581afb78659b71a328d51ee5416365d6b.
+
+Les prérequis build046, reconstruction de retouraa214179 et bascule5c106957 sont
+liés aux reçus exacts, zéro groupe ajouté. Les63entrées du retour reproduisent
+38backend/quatreweb du live433, avec deux seules copies Git4d ; l’image de retour
+reste distincte du digest433 absent. Sauvegardes contrôle/registre sous1001,
+référenceaf6 et originaux conservés. Le nominal n’exécute pas de rollback de
+bascule ni de nouvelles fautes de gardien. Les deux échecs préliminaires restent
+séparés et exclus, zéro groupe ajouté. Leurs limites de diagnostic sont conservées.
+
+Les images corroborent lisibilité et contours ; DOM/HTTP/FD/handlers/effets sont
+portés par les rapports natifs. Certaines vues mobiles ne cadrent pas le texte
+adopté et le nouveau passage du manuel n’est pas cadré spécifiquement. Les
+assertions vérifient le contenu canonique rendu ; aucun texte caché ou paragraphe
+supplémentaire n’est déduit des seules images.070 conserve ses critères de
+persistance après redémarrage et d’interruption de publication à qualifier.

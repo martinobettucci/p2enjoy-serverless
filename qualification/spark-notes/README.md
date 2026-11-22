@@ -1,5 +1,18 @@
 # P2Enjoy Serverless
 
+## Retour au fichier après adoption qualifié —22novembre2026
+
+Preuve docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json :36groupes,
+463sourcesce8540a/imageAPI04604089,62captures inspectées. Quatre adoptions au
+textarea, huit replis au titre, réponses tardives/refus/recalage recoupés ; neuf
+invocations,18gardes/24lecteurs et purge physique complète.115/116 closes.
+Manuel servi18/74SHA8d2434cf,010,38backend/quatreweb, configuration/budgets,
+référence runtimeaf6 et5982originaux conservés. Retour APIaa214179 validé contre
+l’ancienne application433 ; bascule5c106957 et sauvegardes des deux bases.
+Trois prérequis et deux échecs ajoutent zéro groupe ; rollback de bascule non
+exécuté.070 garde persistance/redémarrage et interruptions de publication.
+Cette note est proposée en .? ; adoption et restructuration du guide079.3 non revendiquées.
+
 ## Sources et frontières ZIP qualifiées — 22 novembre 2026
 
 Preuve docs/evidence/code-editor-archive-boundaries-dev-2026-11-22.json :

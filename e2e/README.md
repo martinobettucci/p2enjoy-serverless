@@ -198,7 +198,7 @@ contrôle démarré. Refus11:35/succès11:40UTC sans rejeu ; original et5982arte
 conservés. Aucun mock ni skip. La campagne complète078 reste à raccorder.
 
 
-## Attentes UI de l’éditeur — premier passage échoué, reprise115
+## Attentes UI de l’éditeur — qualifiées après correction115
 
 Le [contrat de concurrence UI](../docs/CODE_EDITOR_UI_CONCURRENCY.md) prévoit
 `node e2e/code-editor-ui-concurrency.mjs`, avec credentials sur stdin privée.
@@ -222,8 +222,12 @@ dans un seul groupe :11+25, neuf invocations et40+22captures. Aucun correctif
 qualifié ni nouveau passage à ce checkpoint. Le relais est désormais implémenté,
 le client contient le groupe de repli, et le build UI local passe ; l’image DEV
 et le passage36 restent à produire à ce checkpoint. L’index porte désormais
-463sources avec le contrat de retour116. Le contrôle046 est ensuite déployé
-pour qualification, avec retouraa validé ; la campagne36 n’est pas encore lancée.
+463sources avec le contrat de retour116. Le contrôle046 et son retouraa validé
+sont qualifiés par la [preuve36](../docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json) :
+11ciblés puis25communs frais, neuf invocations,18gardes/24lecteurs et purge physique.
+Les62images sont inspectées individuellement ; les deux échecs restent exclus.
+Le manuel servi18/74SHA8d2434cf, les sources/backend/web et les originaux sont
+recoupés.115/116 closes,070 garde persistance et interruptions distinctes.
 
 ## Frontières du ZIP reconstruit — qualifiées en DEV
 

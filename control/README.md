@@ -1,5 +1,11 @@
 # Plan de contrôle
 
+Le [retour de focus après adoption](../docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json)
+est qualifié sur046 :36groupes réels,463sourcesce8540a et62captures inspectées.
+Quatre adoptions focalisent le textarea, huit replis le titre ; neuf handlers,
+18gardes/24lecteurs et purge physique recoupés.115/116 closes ; manuel18/74SHA8d2434cf.
+Les autres critères d’éditeur gardent leurs preuves propres à produire.
+
 Le moteur de planification SLS-078 est [qualifié en DEV](../docs/evidence/schedules-regressions-dev-2026-11-22.json) :
 49 campagnes / 543 groupes, 18 prérequis, 458 sources `9e1da70` / image433da150,
 117 captures inspectées. Les 38 backend / quatre ressources HTTPS concordent ;

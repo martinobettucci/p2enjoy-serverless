@@ -1,5 +1,30 @@
 # Journal de cadrage
 
+## 22 novembre 2026 —36groupes qualifiés,115/116 clôturées
+
+Le passage45b2caa8/campagne4513df37 termine29288/sortie0, client joint, sur
+ce8540a/463sources/image046.11ciblés puis25communs passent. Quatre adoptions
+corrigées donnent huit TEXTAREAtrue, huit replis H2true avec versionUI/texte/SHA
+et PUT0 ;18gardes/24lecteurs et seize snapshots tardifs conservés. Neuf handlers
+et purge physique d’une fonction recoupés, jeton/deux parents retirés ; repos final.
+
+Les40JPEG ciblés puis22communes sont ouverts individuellement, SHA et dates de
+phase recoupés ; deux vues aussi par le principal.56déclarés/six PNG compléments,
+aucun nouveau défaut visuel. La nouvelle phrase du manuel n’est pas cadrée dans
+ces16vues générales, contenu canonique rendu74paragraphes/SHA8d2434cf recoupé.
+Relecture RO du publisher/provenance puis des62reçus sans blocage. Preuve
+code-editor-adoption-focus-dev-2026-11-22, gzip19aefb4b/brut98e2a269 publiée.
+
+Trois prérequis exacts build046/retouraa/bascule et deux échecs exclus à0groupe.
+68sources produit identiques au build malgré les métadonnées des gels suivants.
+Le principal recoupe aussi070.4 : sources38 compare réellement Bpromue/Abase et
+le diff -B/+C ; console43 sélectionne settings dans le fichier. Modules serveur
+identiques et deltaUI limité à115 qualifié36.070.4 clôturé sans addition de groupes ;
+persistance070.3 et interruptions070.5 restent distinctes.
+38backend/quatreweb/no-store,010, notes/configuration/budgets/référence et5982
+originaux conservés.115/116 closes ;070 reste ouverte pour la persistance réelle
+et les interruptions de publication, dont le flux POST unique exige ses preuves.
+
 ## 22 novembre 2026 — bascule046 réussie, replay36 à produire
 
 Nouvel opérateur avec retouraa relu puis exécuté au gel485b97f/463sources.

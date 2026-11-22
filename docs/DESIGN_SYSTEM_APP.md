@@ -548,7 +548,7 @@ viewport normal. Les six PNG communs ont leur SHA courant et une fraîcheur de
 phase, sans SHA déclaré par leur rapport. Les captures de l’échec gardent leur
 époque ; ni les attentes concurrentes, ni le focus après adoption ne sont clos.
 
-### Retour au fichier après adoption — correction115 à qualifier
+### Retour au fichier après adoption — correction115 qualifiée
 
 Le [premier banc d’attentes](evidence/code-editor-adoption-focus-failed-dev-2026-11-22.json)
 reproduit huit mesures BODY pour quatre adoptions ;32JPEG sont inspectés, zéro
@@ -556,8 +556,12 @@ groupe qualifié. Selon [le contrat115](CODE_EDITOR_ADOPTION_FOCUS.md), le paren
 de l’éditeur porte l’intention de focus après disparition de la confirmation :
 textarea si le fichier reste en édition, sinon h2 stable du fichier. Les refs
 et l’effet de layout existants suffisent ; aucun changement de Confirm, style
-ou token. Le manuel suit ce retour. La réalisation reste à construire/déployer
-et qualifier par11+25groupes, dont huit variantes de repli desktop/mobile.
+ou token. Le manuel suit ce retour. La [preuve36](evidence/code-editor-adoption-focus-dev-2026-11-22.json) qualifie le
+relais sur046,463sourcesce8540a :62captures inspectées, quatre adoptions avec
+contour de textarea et huit replis avec titre entouré. DOM et SHA recoupent
+focus/version/texte sans PUT ; les cadrages mobiles ne montrent pas toujours
+le texte adopté. Manuel rendu18/74SHA8d2434cf, paragraphe nouveau non cadré
+spécifiquement. Aucune nouvelle couleur, dimension ou exception au socle.
 
 ## Hash courant du testeur sous erreur de domaines — décision0712
 

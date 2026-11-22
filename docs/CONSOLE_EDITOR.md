@@ -776,17 +776,17 @@ leurs gels respectifs. Il ne s’agit pas d’une nouvelle campagne cumulant leu
 | Reconstruction64Mio compressés,256Mio extraits,20000fichiers et20000parents, refus indépendants +1 et capacité après413 | [ZIP32](evidence/code-editor-archive-boundaries-dev-2026-11-22.json), dix révisions et six invocations Docker recoupées |
 
 `control/app/code_editor.py` (SHA6fe5d4bb) et `control/app/artifacts.py`
-(SHA5508b2af) sont identiques dans ces quatre manifestes et au gel courant0168.
+(SHA5508b2af) sont identiques dans ces quatre manifestes et au gel du passageZIP0168.
 `web/src/code-editor.jsx` a changé lors de la correction de focus : son SHA
-ca20fbd1 est identique entre console43 et le gel courant ; le SHA antérieur
-1afc78f2 de sources38 n’est pas présenté comme le composant actuel. Les sources exécutables
-web/runtime n’ont pas changé depuis console43 ; les changements serveur
+ca20fbd1 est identique entre console43 et le gel du passageZIP0168 ; le SHA antérieur
+1afc78f2 de sources38 n’est pas présenté comme le composant de ce passage. À cette époque,
+les sources exécutables web/runtime n’ont pas changé depuis console43 ; les changements serveur
 intermédiaires de managed_instances ne changent ni lecture, extraction ni rendu
 éditeur. Les images de contrôle de ces époques restent distinctes ; aucun rejeu
 console43 sous433 n’est revendiqué. Leurs contrôles backend/web et le nouveau
 recoupement38backend/quatreweb relient la preuve au code effectivement installé.
 
-070.3/.4/.5 restent ouverts : focus après adoption et pendant attente, résultats
+À l'issue de ce passage ZIP, 070.3/.4/.5 restaient ouverts : focus après adoption et pendant attente, résultats
 de diff périmés, persistance après redémarrage, mutation pendant reconstruction,
 réponse perdue et interruptions de publication sont encore à qualifier.
 
@@ -818,3 +818,34 @@ configuration ni comportement utilisateur ne change dans cette qualification.
 pour attentes/focus et interruptions/persistance. Les groupes historiques ne
 sont pas additionnés aux32 et aucune facette Éditeur n’est déduite des captures
 communes de ce nouveau passage.
+
+<a id="diff-recherche-et-attentes-qualifies"></a>
+## Diff, recherche et attentes qualifiés —22novembre2026
+
+**070.4 est clôturé** après rapprochement des preuves ci-dessous. Le principal
+recoupe les contrôles passés, les clients conservés et la continuité des sources ;
+les campagnes ne sont ni additionnées ni annoncées comme rejouées à une autre époque.
+
+| Clause | Preuve réelle et discriminant |
+| --- | --- |
+| Diff contre la cible promue actuelle | [Serveur45](evidence/code-editor-server-dev-2026-11-12.json) et [sources38](evidence/code-editor-source-limits-dev-2026-11-12.json) : before=B promue, after=A archivée, contenu exact -source-B/+source-C ; base et cible sont distinctes |
+| Recherche dans le fichier | [Console43](evidence/code-editor-console-focus-dev-2026-11-12.json) : Rechercher dans le fichier, Occurrence suivante, annonce ligne/colonne et sélection DOM exacte de settings dans le textarea, sur mobile |
+| Chemins invalides, collisions et limites | Serveur45 et sources38 : refus côté serveur et bornes512/513octets,255/256par segment ; console43 : chemin existant et ../interdit.txt refusés par les formulaires sans perte de contenu |
+| Diff borné, pages et détails | Sources38 :2000/2001lignes sur les deux côtés et131072octets exacts/troncature explicite ; console43 : sept chemins5+2, détail, quatre H2 et deux H3 en desktop/mobile |
+| Attentes, mutations et focus | [Preuve36](evidence/code-editor-adoption-focus-dev-2026-11-22.json), gelce8540a/image046 : quatre actions face à un détail retenu,16instantanés tardifs, choix volontaire ailleurs,404/429/retry, quatre vrais recalages offset5&path→offset0&path avec origine conservée ; quatre adoptions au textarea et huit replis au titre |
+
+`code_editor.py`6fe5d4bb et `artifacts.py`5508b2af sont identiques dans ces quatre
+preuves et le code installé. Le client sources38 bc10d83c et le client console43
+0735b54a sont conservés. Le composant console ca20fbd1 devient e0c469a7 dans36 :
+le diff Git se limite à la dépendance draft de l’effet de layout et aux intentions
+de focus après adoption115, avec leurs commentaires. Le calcul/requête de diff,
+recalage, recherche et refus de chemin restent inchangés ; le nouveau delta est
+éprouvé sur la vraie image046. Aucun nouveau replay43 sous046 n’est revendiqué.
+
+Les36groupes et62captures, neuf handlers,18gardes/24lecteurs et purge physique
+sont liés à leurs reçus exacts. Manuel18/74SHA8d2434cf, backend/web, référence,
+configuration et originaux sont recoupés. Les captures ne remplacent pas les
+mesures DOM, HTTP ou natives. Les anciennes listes de restes datées gardent leur
+portée historique. **070.3 persistance après redémarrage et070.5 interruptions/
+réponse perdue de publication restent ouverts** ; le flux Éditeur POST unique
+nécessite ses propres points de phase, distincts des anciens POST puis PUT.

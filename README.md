@@ -1,11 +1,14 @@
 # P2Enjoy Serverless
 
-Le [premier passage des attentes UI](docs/evidence/code-editor-adoption-focus-failed-dev-2026-11-22.json)
-reproduit une perte de focus après adoption du brouillon : quatre variantes,
-huit mesures BODY. Neuf groupes passent mais zéro n’est qualifié ; les18gardes,
-24lecteurs, huit handlers et la purge physique sont recoupés,32captures inspectées.
-La [correction SLS-115](docs/CODE_EDITOR_ADOPTION_FOCUS.md) est décidée avant code.
-070.3/.4/.5 restent ouverts ; le nouveau passage11+25 n’est pas encore exécuté.
+Le [retour de focus et les attentes de l’éditeur](docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json)
+sont qualifiés par **36groupes réels** :11ciblés/25communs sur463sourcesce8540a,
+image04604089 et62captures inspectées. Quatre adoptions focalisent le champ de
+code, huit replis le titre du fichier ; réponses périmées, focus volontaire,
+recalage et refus/reprise sont recoupés. Neuf invocations et purge physique complète.
+**SLS-115 et SLS-116 sont closes** ; retouraa validé et sauvegardes des deux bases,
+référence af6 et5982originaux conservés. Les deux échecs restent exclus ;070 garde
+la persistance après redémarrage et les interruptions de publication. Le manuel
+servi reste18chapitres/74paragraphes, avec sa nouvelle empreinte8d2434cf.
 
 Les [32 groupes ZIP](docs/evidence/code-editor-archive-boundaries-dev-2026-11-22.json)
 qualifient les frontières64Mio/256Mio/20000fichiers/20000parents et leurs refus +1,

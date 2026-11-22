@@ -70,8 +70,6 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
-| 3 | [SLS-116](#sls-116) Image de retour disponible avant bascule | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_DEPLOYMENT_RECOVERY](CODE_EDITOR_DEPLOYMENT_RECOVERY.md) |
-| 3 | [SLS-115](#sls-115) Retour du focus après adoption du brouillon | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_ADOPTION_FOCUS](CODE_EDITOR_ADOPTION_FOCUS.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
@@ -113,8 +111,10 @@ indépendantes avancent ; les deux expressions exactes de référence restent 08
 
 Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
 089.4 est qualifié. Les [32 groupes ZIP](evidence/code-editor-archive-boundaries-dev-2026-11-22.json)
-clôturent SLS-114 et complètent les preuves de070.1.070.3/.4/.5 restent ouverts
-pour les attentes/focus de console et les interruptions/persistance de publication.
+clôturent SLS-114 et complètent les preuves de070.1. Les
+[36groupes d’attentes UI](evidence/code-editor-adoption-focus-dev-2026-11-22.json)
+clôturent115/116 et complètent070.4 par rapprochement des preuves de diff/recherche/
+chemins.070.3/.5 restent ouverts pour persistance réelle et interruptions de publication.
 
 Unités parentes encore `[~]` et unités qui portent leur reste à faire :
 [SLS-001](#sls-001) → toutes ; [SLS-020](#sls-020) → SLS-089 ;
@@ -886,7 +886,8 @@ Statut : [~] —070.2 est clôturé par les [32 groupes des droits de source](ev
 et les droits pendant IO de la preuve30, sans réaddition.070.1 est clôturé après
 les [32 groupes ZIP](evidence/code-editor-archive-boundaries-dev-2026-11-22.json)
 et le [rapprochement des preuves de sources](CONSOLE_EDITOR.md#sources-et-limites-qualifiées--22-novembre-2026).
-070.3/.4/.5 restent ouverts ;070.6/.7/.8 conservent leurs preuves. Contrat détaillé dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
+070.4 est clôturé par les [36groupes et leur rapprochement](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies).
+070.3/.5 restent ouverts ;070.6/.7/.8 conservent leurs preuves. Contrat détaillé dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
 avant code. Serveur et migration010 déployés sur7c5c6f4b ;
 [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json) qualifient une première tranche serveur,
 dont070.7. La première facette Éditeur est déployée sura77b6b4e et
@@ -1041,12 +1042,19 @@ Critères d'acceptation :
   Son [premier passage échoué](evidence/code-editor-adoption-focus-failed-dev-2026-11-22.json)
   reproduit huit mesures BODY après quatre adoptions ; neuf groupes passent,
   zéro qualifié.18gardes/24lecteurs restitués, huit handlers et purge physique
-  recoupés ;32JPEG inspectés. La correction est portée par115 ; persistance
+  recoupés ;32JPEG inspectés. La correction115 est close par les
+  [36groupes](evidence/code-editor-adoption-focus-dev-2026-11-22.json) : quatre
+  adoptions/huit mesures textarea focalisé et huit replis h2, sans PUT,62captures.
+  Les deux échecs restent exclus ; persistance
   après redémarrage et interruptions de publication restent distinctes.
-- [ ] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
+- [x] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
-  Le même complément éprouvera refus404/429, recalage réel5+2 et choix volontaire
-  d’un autre focus, sans attribuer une lecture de fichier à la liste de métadonnées.
+  [Rapprochement des quatre preuves](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies) :
+  diff Bpromue/Abase, bornes et chemins côté serveur45/sources38 ; recherche
+  littérale avec sélection DOM et pagination7chemins5+2 de console43 ; puis36
+  pour réponses tardives des quatre actions, refus404/429/retry, quatre recalages
+  détaillés et focus volontaire/adoption. Époques conservées, aucun groupe ajouté.
+  Les modules serveur sont identiques et le seul delta UI115 est qualifié dans36.
 - [ ] SLS-070.5 Publication par le pipeline de validation Docker existant, hash et
   déduplication de SLS-074 ; un import refusé conserve la version active et le brouillon,
   avec diagnostic consultable ; handler CJS/ESM validé avec les vrais modules.
@@ -2352,6 +2360,13 @@ Critères d'acceptation :
   et testeur) ; adoption non revendiquée. La réduction des récits reste à faire.
   Actualisation minimale112 : image433da150 déployée, qualification82acquise,22captures inspectées ;
   schéma010 et manuel18/74inchangés, propositions seules sans adoption active.
+  Relevé du22novembre pendant la livraison115 : neuf liens relatifs préexistants sont
+  cassés dans les trois sources `qualification/spark-notes/{README,INSTALL,CONTRIBUTORS}.md`.
+  Chacune vise `docs/evidence/function-version-unknown-first-dev-2026-11-09.json`,
+  `docs/evidence/function-version-state-transport-dev-2026-11-09.json` et
+  `docs/evidence/function-version-publication-regressions-dev-2026-11-09.json` depuis
+  le répertoire des notes. Corriger leur destination dans la restructuration des notes,
+  puis vérifier les liens dans leur contexte de consultation réel sur le SPARK.
 - [ ] SLS-079.4 Guide rejoué sur une installation temporaire distincte : installation depuis
   zéro, mise à jour, redémarrage forcé, sauvegarde, destruction partielle, restauration,
   purge ; au moins cinq symptômes du tableau de diagnostic provoqués pour de vrai.
@@ -3302,9 +3317,9 @@ sur l’ancien UUID puis nouveau7+25 réalisés ; aucune garde ni limite retiré
 <a id="sls-115"></a>
 ## SLS-115 — Retour du focus après adoption du brouillon
 
-Statut : [~] — défaut reproduit sur461sources4dcd24b/image433da150 :
-les quatre adoptions gardant/remplaçant la saisie en1440/390px donnent BODY
-avant et après la réponse tardive. Nature : Corriger. Ordre :3, préalable à la
+Statut : [x] — [36groupes réels](evidence/code-editor-adoption-focus-dev-2026-11-22.json)
+au gelce8540a/463sources/image04604089,62captures inspectées. Le défaut initial
+sur433 reste conservé, zéro groupe ajouté. Nature : Corriger. Ordre :3, préalable à la
 qualification résiduelle070.3/.4. Dépend de : SLS-063 ; s’appuie sur la tranche
 déjà déployée de SLS-070.
 Contrat : [CODE_EDITOR_ADOPTION_FOCUS](CODE_EDITOR_ADOPTION_FOCUS.md).
@@ -3313,10 +3328,13 @@ Contrat : [CODE_EDITOR_ADOPTION_FOCUS](CODE_EDITOR_ADOPTION_FOCUS.md).
   conservés : neuf groupes passés mais zéro qualifié,18gardes/24lecteurs
   restaurés, huit invocations et purge complète,32captures inspectées. L’adoption
   retire sa confirmation avant son retour de focus ; aucun relais parent.
-- [ ] SLS-115.2 Rendre après adoption réussie le focus au textarea courant en
+- [x] SLS-115.2 Rendre après adoption réussie le focus au textarea courant en
   édition, sinon au titre stable du fichier ; garder/remplacer restent des
   actions locales sans PUT. Annuler/refuser ne déclenche aucun retour tardif.
-- [ ] SLS-115.3 Nouveau gel construit/déployé : onze groupes ciblés puis25communs
+  Les huit mesures des quatre adoptions sont TEXTAREA/on_fieldtrue ; huit
+  variantes de lecture/existence/absence gardent le titre attendu, texte/SHA,
+  lecture seule et version UI/serveur recoupés. La preuve36 conserve leurs données.
+- [x] SLS-115.3 Nouveau gel construit/déployé : onze groupes ciblés puis25communs
   frais, quatre adoptions retenues et huit variantes hors saisie/fichier absent,
   neuf invocations,18gardes/24lecteurs joints et purge physique recoupés.
   Captures/manuel/backend/web/notes/configuration/référence/5982originaux conservés.
@@ -3325,9 +3343,9 @@ Contrat : [CODE_EDITOR_ADOPTION_FOCUS](CODE_EDITOR_ADOPTION_FOCUS.md).
 <a id="sls-116"></a>
 ## SLS-116 — Image de retour disponible avant bascule
 
-Statut : [~] — préparation de la bascule115 arrêtée avant Compose : Docker tag
-de l’empreinte433 vers son tag de retour sort1. Le transport et le programme
-distant sont terminés ; aucune bascule ni qualification n’a eu lieu.
+Statut : [x] — image de retouraa214179 reconstruite et comparée au live,
+bascule046 réussie puis [36groupes qualifiés](evidence/code-editor-adoption-focus-dev-2026-11-22.json).
+Le premier arrêt avant Compose et son diagnostic restent conservés, zéro groupe ajouté.
 Nature : Corriger. Ordre :3, préalable à115. Dépend de : SLS-063.
 Contrat : [CODE_EDITOR_DEPLOYMENT_RECOVERY](CODE_EDITOR_DEPLOYMENT_RECOVERY.md).
 
@@ -3340,11 +3358,17 @@ Contrat : [CODE_EDITOR_DEPLOYMENT_RECOVERY](CODE_EDITOR_DEPLOYMENT_RECOVERY.md).
   la garde de préparation ne vérifiait pas cette disponibilité. Le stderr
   interne du premier tag et la raison de disparition Docker restent inconnus,
   sans être inventés ; le diagnostic actuel et ses limites sont conservés.
-- [ ] SLS-116.2 Disposer avant bascule d’une image de retour validée contre les
+- [x] SLS-116.2 Disposer avant bascule d’une image de retour validée contre les
   vrais octets backend/web servis et la configuration d’image attendue, sans
   secret embarqué. Toute reconstruction est décidée avant son code et conserve
   les sources, images et services de départ ; premier échec exclu.
-- [ ] SLS-116.3 Nouveau précontrôle, nouveaux UUID et bascule DEV puis36groupes
+  Prérequis de la preuve36 :63entrées dont deux copies Git4d,38backend/quatreweb
+  exactement égaux au live433 ; six attributs d’image comparés sans valeurs,
+  conteneur d’inspection retiré, candidate046/services conservés. Zéro groupe ajouté.
+- [x] SLS-116.3 Nouveau précontrôle, nouveaux UUID et bascule DEV puis36groupes
   réels de115 :9handlers,18gardes/24lecteurs joints, captures inspectées et purge
   physique complète ; backend/web/manuel/notes/configuration/référence/originaux
   recoupés. Pas de fermeture de115 ni de070 sur la seule construction d’image.
+  La preuve36 lie build, retour et déploiement exacts ; bascule5c106957, nouveau
+  CIDe219 et sauvegardes des deux bases. Aucun retour de déploiement n’a été
+  exécuté ou qualifié par ce nominal ; les fautes de garde acquises restent à leur époque.

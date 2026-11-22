@@ -1,5 +1,11 @@
 # Console web
 
+Le [retour de focus après adoption](../docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json)
+est qualifié sur046 :36groupes réels,463sourcesce8540a et62captures inspectées.
+Quatre adoptions focalisent le textarea, huit replis le titre ; neuf handlers,
+18gardes/24lecteurs et purge physique recoupés.115/116 closes ; manuel18/74SHA8d2434cf.
+Les autres critères d’éditeur gardent leurs preuves propres à produire.
+
 Le [correctif de focus de l’éditeur](../docs/CODE_EDITOR_CONSOLE_EXTENSIONS.md)
 est qualifié après la reproduction réelle de quatre focusBODY. Refs des titres,
 intention par génération et invalidation des comparaisons remplacées sont relues ;
@@ -8,7 +14,8 @@ Le [replay](../docs/evidence/code-editor-console-focus-dev-2026-11-12.json) pass
 18groupes UI puis25communs sur407sources6600150c/imageb452ef16 ;51images sont
 inspectées. Quatre H2 et deux H3 focalisés, source5+2 archive/supprimée, adoption
 sans PUT puis sauvegarde et diff5+2 passent en desktop/mobile. Les lectures
-maintenues et le focus après adoption restent à qualifier dans070.3/.4.
+maintenues et le focus après adoption sont désormais qualifiés par36 ci-dessus ;
+070.4 est clôturé par rapprochement des preuves,070.3 garde la persistance réelle.
 
 Le client HTTP **Tester une fonction (SLS-071)** est livré et qualifié en DEV.
 La [preuve finale du dernier critère](../docs/evidence/function-http-client-task-exception-dev-2026-11-12.json) passe **31 groupes réels** :
