@@ -663,3 +663,46 @@ detach/reprise selon leurs contrats courants. Anciennes préflightsjeunes ne son
 pas fabriquées sur des captures maintenant âgées. Aucune cause du rougeinitial
 n’est déclarée corrigée par le seul succès futur ; les deux époques restent liées
 à leurs sources et données exactes. Imagef016 et quatre modules produit inchangés.
+
+
+### Dépassement réel du fluxstderr
+
+Décision avant code du22novembre2026 pour134.2 : mode de qualification explicite
+`--driver-stderr-overflow`. Reprendre le vrai SSO, les deux publications, les deux
+instances chaudes, garde2700 et créneau futur du modecourt ; zéro HTTPordinaire,
+aucun tir encore possible pendant le diagnostic et son nettoyage.
+
+Le helper réel reçoit l’opération `diagnose-import-output` avec les deuxUUID et W.
+Elle est réservée à instance-limit sans replay, garde2700, configuration/dossiers/
+CID/image/installation reconnus, exactement les deuxfonctions et deuxinstances
+ready, aucune invocation ni tir. Vérifier W−60 avant/après et entre itérations.
+La durée totale est bornée30s, chaque enfant à5s au plus dans le tempsrestant.
+
+La sortie provient des vrais diagnostics `python -I -B -vv` de chargements du
+helper figé dans la fenêtre et de son helperSQLite figé. Le child exécute runpy
+avec un nom de module nonmain et le chemin de ces deux fichiers : aucun serveur
+ni handlerapplicatif ne démarre. Les deuxSHA sont recoupés avant/après ; les
+traces d’import réelles de chaque enfant sont transmises inchangées surstderr
+du pilote. Une mesureRO du helper a donné121260octets de diagnostic Python ;
+elle ne vaut pas preuve du dépassement. Répéter les vrais chargements jusqu’à
+plus1Mio effectivement recueilli, maximum12enfants. Si le seuil n’est pas
+atteint, conserver l’échec, sans compléter ou répéter des octets enregistrés.
+
+Chaque enfant possède sa session/groupe, PID/naissance/PGID/SID et son code réel,
+stdout/stderr SHA/octets ; les sorties sont limitées à512Kio chacune. Sur toute
+sortie, tuer seulement son groupe possédé s’il survit, joindre le child et
+vérifier le groupe vide en5s. Erreur primaire et jonction manquante restent
+rouges ; aucun enfant ne survit à la restitution. Le reçu ne publie que les
+métadonnées et les empreintes, pas les tracesbrutes. Aucun fichier officiel,
+imageapplicative ou donnée métier n’est modifié par ces imports.
+
+Le client d’E2E exige le vrai flux au-delà1Mio, puis réutilise les minima0,
+révocation, deuxpurgespubliques, retraitsservice/namespace, contrôlesphysiques et
+restitution jointe existants. Tout se termine avantW−60, sans déplacerW.
+Son finally conserve exactement les premiers1048576octets en0600, SHA du
+préfixe, SHA et nombre d’octets du flux complet, fin réelle et pilote joint ;
+`driver_stderr_overflow=true` impose completed=false et codeclient1 malgré le
+nettoyage réussi. Le wrapper de preuve réussit seulement pour cet échec attendu,
+avec deuxgroupespropres, seuil réel franchi, producteurs joints, préfixe exact,
+origines/config/référence/5982 et huitcompteurs0. Aucun groupe de rétention ajouté.
+Le refusaprèsattache acquis reste distinct ; borne25/35/40/5 et nominal inchangés.

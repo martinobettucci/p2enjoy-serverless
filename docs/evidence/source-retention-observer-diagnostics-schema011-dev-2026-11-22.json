@@ -669,7 +669,7 @@
   },
   "limitations": [
     "Deuxgroupes de refus avec vrais handlers ; aucune rétention ou purge métier qualifiée.",
-    "Le cas de dépassementstderr1Mio reste à éprouver ;477octets ou plus ne sont pas déduits des476observés.",
+    "Le cas de dépassementstderr1Mio reste à éprouver.",
     "La cause du nominalrouge précédent n’est pas reconstituée par ce succès.",
     "Nominal3 et consommateurs affectés restent requis."
   ]
