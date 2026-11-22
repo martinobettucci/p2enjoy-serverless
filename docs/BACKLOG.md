@@ -76,6 +76,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-122](#sls-122) Clôture du client de diagnostic après refus natif | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-123](#sls-123) Armement de la coupure après compteur durable | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-124](#sls-124) Restitution du focus des commandes Journaux | Corriger | `[ ]` | SLS-061 | cette unité |
+| 3 | [SLS-125](#sls-125) Corrélation du hash des événements conservés | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -3935,3 +3936,36 @@ commande focalisée ne devient désactivée sans relais.
 Ces vérifications complètent UI06/UI09 déjà prévus ; elles ne créent pas deux
 groupes supplémentaires. Le risque statique seul ne vaut pas preuve d'un défaut
 ni autorisation de masquer un échec du banc.
+
+
+<a id="sls-125"></a>
+## SLS-125 — Recouper le hash des événements conservés après purge du frère
+
+Statut : [~] — replay503sources/1aa passe huit groupes puis échoue API11 ligne397,
+après purge du frère, sur items nonvides et tous code_hash identiques au hash
+publié. La réponse de ce GET n'a pas été conservée avant assertion. Nature :
+Corriger. Dépend de : SLS-040. Ordre : 3. Contrat :
+[modèle/corrélation](EXECUTION_LOGS.md#modèle-et-migration-011).
+
+Résultat attendu : conserver les événements de la fonction sœur encore visible,
+avec leur corrélation honnête aux étapes d'exécution ; refuser toute attribution
+inventée d'un hash à un événement où il n'était pas connu. Départager le défaut
+produit du mauvais oracle sur des champs réellement retournés.
+
+- [x] SLS-125.1 Sceller le rouge503sources, huit groupes partiels/zéro qualifié,
+  ses programmes, gardes et purge physique. [Preuve](evidence/execution-journal-correlation-hash-first-failed-dev-2026-11-22.json).
+- [ ] SLS-125.2 Reproduire API11 isolément avec les mêmes vrais appels/purge ;
+  conserver avant assertion total/items et leurs id/kind/state/function_id/
+  invocation_id/code_hash, hash attendu et hash résolu de l'invocation native.
+  Pas de messages, secrets, donnéesSQL écrites ni réponse substituée.
+- [ ] SLS-125.3 Cause recoupée contre le contrat, décision/motif commités avant
+  correction de l'élément en cause ; rouge et source initiale inchangés.
+- [ ] SLS-125.4 Replay dans12API puis25communs frais, sources et image du code
+  déployé recoupées, gardes/consommateurs joints, purge physique et captures
+  communes inspectées. Les autres critères072 gardent leurs preuves propres.
+
+Décision avant diagnostic : ne changer ni l'oracle ni le produit ; sauvegarder
+les champs bornés ci-dessus avant l'assertion et exécuter seulement la préparation
+originale et correlations(), avec ses fautes réelles et sa purge du frère.
+Si le préfixe complet est nécessaire à la reproduction, le nommer et le rejouer
+ensuite, sans considérer un diagnostic nonreproducteur comme une réussite.

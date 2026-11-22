@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — huit groupes acquis partiellement, corrélation125 à diagnostiquer
+
+Replay0772967c/503sources : API10 passe, puis API11 échoue397 après la purge du
+frère, lors du test items nonvides/touscode_hash attendus. La réponse n'a pas
+été sauvegardée. Huitpartiels/zéroqualifié, cinq fonctions purgées, compteurs0,
+5982originaux et référence/configuration conservés ; redémarrage1aa par garde.
+SLS-125 inscrit avant traitement. Décision : observer total et seules références
+publiques avant assertion, hash attendu/résolu recoupés, reproduire correlations
+isolément sans changer le produit ou son oracle avant le diagnostic.
+
+
 ## 22 novembre 2026 — frontière123 et reprise réellement acquises
 
 Diagnostic4e54e404/503sources : FD10/inode1140247143 reconnu dans le netns du
