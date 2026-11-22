@@ -152,3 +152,37 @@ Ces deuxcas gardent leurs nettoyagesnatifs ; ne pas fabriquer de mapping API.
 Le repos global original est ensuite exigé pourtous. Les troiswrappers versions
 gardent checkpoints/logs/recoupements propres en plus du rapportNode, avec
 assertions de fraîcheur pour les deuxniveaux et archive préalable des anciens.
+
+
+## Propriété courante et lancement dédié
+
+Les30commandes API possèdent30namespaces et74fonctions nominales distinctes :
+51éditeur,14testeur et9versions. Le manifeste partagé
+`e2e/additional_regressions_contract.py` décrit les formats et cardinalités exacts
+lus dans les clients. Pour27commandes, reconstruire le nom depuiscampaign UUID36
+ou prefix complet ; les suffixes16 sont des UUIDtronqués avec tirets, jamais
+16hex. Les cinq éditeurs réutilisant code-editor-read-concurrency conservent
+ce nom réel. Les troisCLI sauvegardent désormais namespace_name de la vraie
+réponsePOST, lié à namespace_id, pour permettre la comparaison indépendante.
+
+L'inspecteur natif reçoit son mappingUUID habituel puis l'option explicite
+`--additional-client CLIENT --namespace-name NOM`. Un seul namespace est accepté,
+avec format et cardinalité du client, nom natif strictement égal et inventaire
+complet identique. Toutes les assertions de purge/secrets/reçus/consommateurs
+restent exigées. Sans ces options, la garde historique reste inchangée.
+Aucun nom libre, booléen de propriété ou simple total74 ne remplace ce lien.
+
+`python3 -B e2e/additional-regressions-suite.py` exécute le manifeste complet
+32/276, huitprérequisSSO, sans sélectionpartielle ni rejeuautomatique. Pour une
+exécution durable : `python3 -B e2e/additional-regressions-worker.py start`, puis
+`status NOM` et `finish NOM`. Le worker reprend les bornesoneshot21600s/60s,
+credentials surstdin puismémoire, résultatterminal et vraiejonction du client.
+La présence de ces commandes ne constitue pas leur qualification : aucunbilan
+complet ne passe avant les32résultats réellement acquis et captures inspectées.
+
+Les anciens rapports/checkpoints/logs, y compris les couplespartiels, sont
+archivés puis seuls les cheminsconnus recoupés sont déplacés. Les images de
+résultat portent unmtime entre lancement et terminaison de leur cas ; leur SHA
+et taille applicable sont vérifiés. Tous les testeurs déclarent captures, mais
+admission n'exige pas d'imagepositive : ses images sont seulement diagnostiques
+lors d'une panne. Aucun fichierhistorique ne remplace une capture fraîche.
