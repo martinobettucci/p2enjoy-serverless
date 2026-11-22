@@ -28,7 +28,7 @@ import zipfile
 from control_database import read_control, control_owner
 from native_control_observer import NativeObserver
 
-IMAGE = 'sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0'
+IMAGE = 'sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7'
 PROTOCOL = {'version': 1, 'guard_delay_seconds': 45, 'restore_alarm_seconds': 180,
             'evidence_probe_timeout_seconds': 10}
 

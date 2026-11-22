@@ -186,3 +186,11 @@ résultat portent unmtime entre lancement et terminaison de leur cas ; leur SHA
 et taille applicable sont vérifiés. Tous les testeurs déclarent captures, mais
 admission n'exige pas d'imagepositive : ses images sont seulement diagnostiques
 lors d'une panne. Aucun fichierhistorique ne remplace une capture fraîche.
+
+
+L’exécuteur courant après optimisation133 est strictement f016a1b7 (SHAcomplet
+dans RETENTION_SCHEMA_011, section Exécuteur courant après optimisation133).
+Les huit pins d’éditeur/fixtures suivent cette image réellement construite et
+déployée. Les baselines des profils de bascule et des diagnostics historiques
+ne changent pas. La garde courante lie les trois nouvelles preuves nommées et
+les quatre modules de rétention ; une preuve manquante reste un refus.

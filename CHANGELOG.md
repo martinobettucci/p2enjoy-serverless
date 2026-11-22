@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-133/132 : f016a1b7 construite puis basculée en DEV, deuxbackups natifs,
+  tables/schéma/collection conservés,16clients et cgroup joints. Exports privés
+  préservés. Les opérateurs distinguent maintenant datasetf73 et exécuteurf016,
+  ajoutent les refus d’anciensha ; garde courante àquatremodules/cheminsexacts.
+  Replays et campagnesf016 restent à exécuter.
+
 - SLS-133 : la purge des événements cherche les événements expirés avec
   l’index service/temps existant, en conservant ordre global et bornes. Profil
   de bascule f73→candidate ajouté avec refus natif des échéances proches.

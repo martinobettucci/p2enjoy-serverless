@@ -319,7 +319,12 @@ def observe(campaign, fd):
                 '-f', str(work / 'compose.yml'), 'up', '-d', '--no-build')
         definitions = json.loads(command('inspect', 'serverless-api-instance-limit'))
         row = definitions[0]
-        assert row['State']['Running'] and row['Image'] == source['images']['control']['image']
+        expected_image=source['images']['control']['image']
+        if 'schema_migrations' in source:
+            assert source['capture_id']=='schedule-firing-volume-a5a8fc06179d4a31bd5620f0d9c87c97'
+            expected_image=item['firing_replay']['executor']['image']
+            assert expected_image==item['original']['image']=='sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7'
+        assert row['State']['Running'] and row['Image']==expected_image
         assert row['Config']['Labels']['com.docker.compose.project'] == item['project']
         init = row['State']['Pid']
         find_deadline = time.monotonic() + 3

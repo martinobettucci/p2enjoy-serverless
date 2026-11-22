@@ -109,7 +109,7 @@ try{
   });completed=true;
  }else if(mode==='invalid'){
   if(current)source=await verifySource();
-  await check(current?'Treize refus réels dont cinq propres au replay011 avant mutation':'Huit refus réels des options de rétention avant mutation',async()=>{
+  await check(current?'Quatorze refus réels dont six propres au replay011 avant mutation':'Huit refus réels des options de rétention avant mutation',async()=>{
    await refusal('source_without_mode','instance-limit',[`--retention-history=${capture}`],'retention_replay_option_pair_required');
    await refusal('mode_without_source','instance-limit',['--retention-observation=preflight'],'retention_replay_option_pair_required');
    await refusal('noncanonical_source','instance-limit',flags('../source','preflight'),'canonical_retention_capture_required');
@@ -121,6 +121,7 @@ try{
    if(current){
     await refusal('current_target_without_pair','instance-limit',['--retention-target-schema011'],'retention_target_requires_replay_pair');
     await refusal('current_target_with_firing_only','instance-limit',['--firing-history=schedule-firing-volume-a5a8fc06179d4a31bd5620f0d9c87c97','--firing-observation=count','--guard-seconds=120','--retention-target-schema011'],'retention_target_requires_replay_pair');
+    await refusal('current_target_old_executor','instance-limit',flags(capture,'age'),'current_retention_image_required','sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0');
     await refusal('current_target_wrong_real_image','instance-limit',flags(capture,'age'),'current_retention_image_required',source.images.runtime.image);
     await refusal('current_image_without_explicit_target','instance-limit',flags(capture,'age').filter(v=>v!=='--retention-target-schema011'),'captured_control_image_required');
     await refusal('historical_young_preflight_after_real_age','instance-limit',flags(capture,'preflight'),'young_preflight_no_longer_eligible');

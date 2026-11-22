@@ -199,7 +199,7 @@ def verify_capture(identifier):
 def verify_current(identifier):
     from retention_current_images import baseline, verify as verify_images
     source = verify_capture(identifier)
-    image = 'sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0'
+    image = 'sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7'
     before = baseline(image)
     assert source['images']['runtime']['image'] == before['runtime_image']
     preserved = verify_images(image, before['runtime_image'])

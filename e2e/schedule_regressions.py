@@ -3,6 +3,7 @@
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_REGRESSIONS.md#rapports-frais-et-conservation
 """DEV proof orchestration only: exact reports, owned archives and native reads."""
 import hashlib
+import gzip
 import json
 from pathlib import Path
 import re
@@ -173,18 +174,23 @@ def same_installation(before, after):
 def retained_retention_proofs():
     """Bind preserved epochs without claiming that their aged witnesses ran again."""
     sources = {n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in
-               ('control/app/schedules.py', 'control/app/execution.py', 'control/app/schedule_calendar.py')}
+               ('control/app/schedules.py', 'control/app/execution.py', 'control/app/schedule_calendar.py', 'control/app/execution_logs.py')}
     results = []
-    for name in ('schedule-firing-retention-count-dev-2026-11-11.json',
-                 'invocation-source-retention-detach-volume-dev-2026-11-11.json',
-                 'schedule-retention-age-dev-2026-11-21.json'):
+    for name in ('schedule-firing-retention-count-schema011-query-dev-2026-11-22.json',
+                 'invocation-source-retention-volume-schema011-query-dev-2026-11-22.json',
+                 'schedule-retention-age-schema011-query-dev-2026-11-22.json'):
         path = ROOT / 'docs/evidence' / name
         raw = path.read_bytes(); proof = json.loads(raw)
-        assert proof['completed'] and all(proof['source_sha256'][n] == digest for n, digest in sources.items())
+        assert proof['completed'] and proof['image']=='sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7'
+        assert all(proof['source_sha256'][n] == digest for n, digest in sources.items())
         compressed_name = proof['raw']['path']
         assert Path(compressed_name).name == compressed_name
         compressed = path.with_name(compressed_name).read_bytes()
         assert hashlib.sha256(compressed).hexdigest() == proof['raw']['sha256']
+        digest=hashlib.sha256()
+        with gzip.open(path.with_name(compressed_name),'rb') as stream:
+            while block:=stream.read(1024*1024):digest.update(block)
+        assert digest.hexdigest()==proof['raw']['uncompressed_sha256'],'retention_raw_content_mismatch'
         results.append({'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(raw).hexdigest(),
                         'raw_sha256': proof['raw']['sha256'], 'same_core_sources': sources,
                         'replayed_in_this_scope': False, 'groups_added': 0})

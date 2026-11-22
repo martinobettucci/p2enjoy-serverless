@@ -3,8 +3,12 @@
 ## Journaux déployés — qualification en cours
 
 Le registre011, ses API et les facettes Journaux fonction/service sont déployés
-en DEV sur l'imagef73efa6e, avec la consolea7d7491a et le manuel canonique
-recompilé. Les diagnostics126 ajoutent codeSQLite/site de maintenance expurgés. La
+en DEV sur l'imagef016a1b7, avec la consolea7d7491a et le manuel canonique
+recompilé. Les diagnostics126 ajoutent codeSQLite/site de maintenance expurgés. La requête
+d’expiration133 utilise l’index existant service/date ; sa
+[bascule f73→f016](docs/evidence/execution-journal-retention-query-deployment-dev-2026-11-22.json)
+conserve toutes les tables, le schéma et la collection. Les douzegroupes API
+complets acquis surf73 gardent leur époque ; les preuvesf016 restent dues. La
 [bascule gardée](docs/EXECUTION_LOG_DEPLOYMENT.md) recoupe deux sauvegardes SQLite,
 les anciennes colonnes et42backend/quatreweb ; son unité est terminée et son
 cgroup vide. Les parcours fonctionnels et visuels restent à qualifier selon

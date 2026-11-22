@@ -105,9 +105,27 @@ def retention_replay_command(operation, identifier):
 def retention_control_image(item):
     replay = item['retention_replay']
     if replay.get('target_schema') == '011':
-        assert item['original']['image'] == item['historical_image'] == 'sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0'
+        assert item['original']['image'] == item['historical_image'] == 'sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7'
         return item['original']['image']
     return replay['source']['images']['control']['image']
+
+
+# @verifies docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#exécuteur-courant-après-optimisation133
+def current_firing_executor(source,image):
+    from retention_current_images import baseline,verify as verify_images
+    assert source['capture_id']=='schedule-firing-volume-a5a8fc06179d4a31bd5620f0d9c87c97'
+    assert source['schema_migrations']==SCHEMA_011,'current_firing_capture_schema011_required'
+    assert image=='sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7','current_firing_executor_required'
+    before=baseline(image)
+    assert source['images']['runtime']['image']==before['runtime_image'],'captured_runtime_image_required'
+    preserved=verify_images(image,before['runtime_image'])
+    code="import hashlib,json;from pathlib import Path;r=Path('/app');print(json.dumps({**{'control/app/'+p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (r/'app').glob('*.py')},**{'control/migrations/'+p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (r/'migrations').glob('*.sql')},'function_code_hash.py':hashlib.sha256((r/'function_code_hash.py').read_bytes()).hexdigest()}))"
+    actual=json.loads(command(['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock','exec',before['services'][0]['id'],'python','-B','-c',code]))
+    names={str(p.relative_to(BASE)) for prefix,pattern in [('control/app','*.py'),('control/migrations','*.sql')] for p in (BASE/prefix).glob(pattern)}|{'function_code_hash.py'}
+    assert len(actual)==42 and set(actual)==names,'current_executor_backend_set_changed'
+    assert all(hashlib.sha256((BASE/name).read_bytes()).hexdigest()==digest for name,digest in actual.items()),'current_executor_sources_not_synchronized'
+    assert baseline(image)==before,'current_executor_changed_during_verification'
+    return {'image':image,'baseline':before,'preservation':preserved['images'],'backend_sha256':actual}
 
 
 def retention_replay_receipts(item):
@@ -1095,7 +1113,10 @@ def main():
     assert image_id == old_image, 'historical_image_missing'
     if firing_replay:
         source=firing_replay_command('verify',firing_replay['capture_id'])
-        assert source['images']['control']['image']==old_image,'captured_control_image_required'
+        if 'schema_migrations' in source:
+            firing_replay['executor']=current_firing_executor(source,old_image)
+        else:
+            assert source['images']['control']['image']==old_image,'captured_control_image_required'
         assert source['images']['runtime']['image']==settings['SERVERLESS_RUNTIME_IMAGE'],'captured_runtime_image_required'
         def replay_timing():
             now=time.time();missed=(int(now//300)*300-source['cursor'])//300
@@ -1181,6 +1202,9 @@ def main():
         proposal=Path('/etc/spark/env.?')
         item['proposal_sha256']=hashlib.sha256(proposal.read_bytes()).hexdigest() if proposal.exists() else None
         if firing_replay:
+            if 'executor' in firing_replay:
+                frozen=firing_replay['executor']['baseline']['services'][0]
+                assert all(item['original'][key]==frozen[key] for key in ('id','image','started_at')),'current_executor_changed_since_preflight'
             assert firing_replay['source']['installation_id']!=item['installation'],'original_installation_cannot_be_replayed'
             item['firing_replay']=firing_replay
             item['namespace_name']=firing_replay['source']['namespace_name']

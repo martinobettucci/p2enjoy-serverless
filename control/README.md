@@ -1,8 +1,11 @@
 # Plan de contrôle
 
 Le [registre de journaux011](../docs/EXECUTION_LOGS.md) est implémenté et déployé
-en DEV surf73efa6e, console identique àa7d7491a et diagnosticsSQLite126
-expurgés en plus de la reprise128. La [bascule](../docs/EXECUTION_LOG_DEPLOYMENT.md) conserve les
+en DEV surf016a1b7, console identique àa7d7491a et diagnosticsSQLite126
+expurgés en plus de la reprise128. Le SELECT d’expiration utilise maintenant
+l’index existant service/date ; [bascule133](../docs/evidence/execution-journal-retention-query-deployment-dev-2026-11-22.json)
+011→011 avec toutes tables/schéma/collection conservés et16clients joints.
+Les preuvesf73 ne qualifient pas cette nouvelle image. La [bascule](../docs/EXECUTION_LOG_DEPLOYMENT.md) conserve les
 anciennes colonnes et recoupe42backend/quatreweb, deux backups natifs et la fin
 de l'unité/cgroup. Les critères072 et les régressions restent ouverts ; ce
 prérequis ne compte aucun groupe fonctionnel. La [reprise de purge128](../docs/evidence/execution-journal-purge-recovery-dev-2026-11-22.json)

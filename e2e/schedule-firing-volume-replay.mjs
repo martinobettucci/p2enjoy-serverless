@@ -46,7 +46,7 @@ print(json.dumps({'services':services,'official_sha256':official,'campaign_direc
  return new Promise((resolve,reject)=>{const process=execFile('ssh',[...ssh,'python3 -B -'],{timeout:40000,maxBuffer:1024*1024},(error,stdout)=>{if(error){reject(error);return;}try{resolve(JSON.parse(stdout));}catch(error){reject(error);}});process.stdin.on('error',reject);process.stdin.end(program);});
 }
 const flags=(id,observation)=>[`--firing-history=${id}`,`--firing-observation=${observation}`,'--guard-seconds=120'];
-async function refusal(name,helperMode,args,reason){const identifier=randomUUID();let rejected;try{await run('ssh',[...ssh,'python3','-B',helper,helperMode,identifier,before.services[0].image,...args],{timeout:45000,maxBuffer:1024*1024});}catch(error){assert.equal(error.code,1);assert(String(error.stderr).includes(reason),'expected_refusal_reason_missing');rejected={name,reason,campaign:identifier,exit_code:error.code,stderr_sha256:createHash('sha256').update(String(error.stderr)).digest('hex')};}assert(rejected,'refusal_missing');const after=await native(identifier);assert.deepEqual(after.services,before.services);assert.deepEqual(after.official_sha256,before.official_sha256);assert.deepEqual(after.campaign_directories,[]);refusals.push(rejected);}
+async function refusal(name,helperMode,args,reason,image=before.services[0].image){const identifier=randomUUID();let rejected;try{await run('ssh',[...ssh,'python3','-B',helper,helperMode,identifier,image,...args],{timeout:45000,maxBuffer:1024*1024});}catch(error){assert.equal(error.code,1);assert(String(error.stderr).includes(reason),'expected_refusal_reason_missing');rejected={name,reason,campaign:identifier,exit_code:error.code,stderr_sha256:createHash('sha256').update(String(error.stderr)).digest('hex')};}assert(rejected,'refusal_missing');const after=await native(identifier);assert.deepEqual(after.services,before.services);assert.deepEqual(after.official_sha256,before.official_sha256);assert.deepEqual(after.campaign_directories,[]);refusals.push(rejected);}
 async function api(url){assert(Date.now()/1000<ready.firing_replay.observation.start_boundary+260,'api_replay_window_expired');const response=await admin.get(base+url,{headers:{Origin:base,'X-CSRF-Token':session?.csrf_token},timeout:10000});assert.equal(response.status(),200);return response.json();}
 function restored(value,independent){assert(value.control_healthy&&value.agent_healthy&&value.directories_identical&&value.databases_identical&&value.artifacts_identical&&value.configuration_unchanged&&value.reference_unchanged&&value.temporary_directories_removed);assert.equal(value.independent,independent);assert.equal(value.original_id,before.services[0].id);assert.equal(value.image,before.services[0].image);}
 function joined(value){assert(value.restored&&!value.driver_alive&&['inactive','unknown'].includes(value.timer_state)&&['inactive','unknown'].includes(value.service_state));}
@@ -58,7 +58,7 @@ try{
  }
  before=await native();
  if(mode==='invalid'){
-  await check('Huit refus réels de paramètres/source avant mutation',async()=>{
+  await check(current?'Dix refus réels de paramètres/source/exécuteur avant mutation':'Huit refus réels de paramètres/source avant mutation',async()=>{
    await refusal('source_without_mode','instance-limit',[`--firing-history=${capture}`],'firing_replay_option_pair_required');
    await refusal('mode_without_source','instance-limit',['--firing-observation=preflight'],'firing_replay_option_pair_required');
    await refusal('noncanonical_source','instance-limit',flags('../source','preflight'),'canonical_capture_required');
@@ -67,7 +67,11 @@ try{
    await refusal('two_sources','instance-limit',[...flags(capture,'preflight'),`--firing-history=schedule-firing-volume-${randomUUID().replaceAll('-','')}`],'one_firing_replay_source_required');
    await refusal('unknown_source','instance-limit',flags('schedule-firing-volume-'+randomUUID().replaceAll('-',''),'preflight'),'firing_replay_error:FileNotFoundError');
    await refusal('missing_short_guard','instance-limit',flags(capture,'preflight').slice(0,2),'firing_replay_guard_duration');
-   assert.equal(refusals.length,8);cleanup=true;
+   if(current){
+    await refusal('current_executor_old_capture_image','instance-limit',flags(capture,'count'),'current_firing_executor_required',evidence.receipt.images.control.image);
+    await refusal('current_executor_runtime_image','instance-limit',flags(capture,'count'),'current_firing_executor_required',evidence.receipt.images.runtime.image);
+   }
+   assert.equal(refusals.length,current?10:8);cleanup=true;
   });completed=true;
  }else if(mode==='not-eligible'){
   await check('Refus réel du replay numérique avant39 fenêtres sans création de fenêtre',async()=>{assert(before.sampled_at<evidence.receipt.eligible_after-60,'refusal_requires_real_early_date');await refusal('numeric_before_39_windows','instance-limit',flags(capture,'count'),'numeric_replay_not_yet_eligible');cleanup=true;});completed=true;
