@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-072.6 : lanceur32/276 et workerdurable intégrés, avec archivespartielles,
+  capturesfraîches et propriétéexacte30namespaces/74fonctions. La CLI conserve
+  le nomréel du namespace pour le recoupement ; aucune exécution32 n'est
+  qualifiée par les seules syntaxes et revue.
+
 - SLS-132/133 : nominal courant10001HTTP interrompu à9406réponses par sa
   marge réelle avantcron, zéro groupe qualifié. Rouge et restauration011
   scellés ; le ralentissement observé doit être diagnostiqué avant correction.

@@ -1,3 +1,4 @@
+# @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_REGRESSIONS.md
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_REGRESSIONS.md#rapports-frais-et-conservation
 """DEV proof orchestration only: exact reports, owned archives and native reads."""
@@ -112,9 +113,11 @@ class ProofArchive:
         return {'path': str(report_path.relative_to(ROOT)), 'sha256': digest, 'captures': captures}
 
 
-def native_state(mapping=None):
+def native_state(mapping=None, *, additional_client=None, additional_namespace=None):
     """Check an idle original installation; optional campaign cleanup is read only."""
-    program = 'mapping=' + repr(mapping) + '\n' + r'''
+    assert (additional_client is None) == (additional_namespace is None)
+    assert additional_client is None or mapping is not None
+    program = 'mapping=' + repr(mapping) + '\nadditional_client=' + repr(additional_client) + '\nadditional_namespace=' + repr(additional_namespace) + '\n' + r'''
 import hashlib,json,os,socket,sqlite3,subprocess,sys,time
 from pathlib import Path
 from contextlib import closing
@@ -130,7 +133,9 @@ assert run(['systemctl','is-active','p2enjoy-storage-dev.service']).strip()=='ac
 physical=None
 if mapping:
  assert len(mapping)==1
- physical=json.loads(run(['python3','-B',str(root/'e2e/storage-console-inspect.py'),json.dumps(mapping)]))
+ command=['python3','-B',str(root/'e2e/storage-console-inspect.py'),json.dumps(mapping)]
+ if additional_client is not None:command += ['--additional-client',additional_client,'--namespace-name',additional_namespace]
+ physical=json.loads(run(command))
  assert physical['completed']
 with read_control(root/'state/control.sqlite3') as db:
  counts={n:db.execute(q).fetchone()[0] for n,q in {'live_functions':'SELECT count(*) FROM functions WHERE deleted_at IS NULL','instances':'SELECT count(*) FROM execution_instances','operations':'SELECT count(*) FROM function_operations','active_calls':'SELECT count(*) FROM invocations WHERE completed_at IS NULL','reserved_bytes':'SELECT coalesce(sum(reserved_bytes),0) FROM deployments','active_deployments':"SELECT count(*) FROM deployments WHERE state IN ('prepared','receiving','validating')"}.items()}

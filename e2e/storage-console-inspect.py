@@ -1,3 +1,4 @@
+# @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 # @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#preuves-attendues
 # @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#preuves-attendues
 # @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuves-et-manuel
@@ -47,6 +48,12 @@ sys.path.insert(0, '/srv/p2enjoy-serverless/e2e')
 from control_database import read_control
 
 assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
+additional_client = additional_namespace = None
+if len(sys.argv) == 6 and sys.argv[2] == '--additional-client' and sys.argv[4] == '--namespace-name':
+    from additional_regressions_contract import validate_namespace
+    additional_client, additional_namespace = sys.argv[3], sys.argv[5]
+else:
+    assert len(sys.argv) == 2, 'explicit_inspection_arguments_required'
 campaigns = json.loads(sys.argv[1])
 assert isinstance(campaigns, dict) and 1 <= len(campaigns) <= 10
 identifiers = []
@@ -55,6 +62,9 @@ for namespace, functions in campaigns.items():
     assert all(str(UUID(value)) == value for value in functions)
     identifiers.extend(functions)
 assert len(set(identifiers)) == len(identifiers) <= 50
+if additional_client is not None:
+    assert len(campaigns) == 1
+    validate_namespace(additional_client, additional_namespace, identifiers)
 settings = {}
 for line in Path('/etc/spark/env').read_text().splitlines():
     parts = shlex.split(line, comments=True)
@@ -82,7 +92,10 @@ with read_control(state / 'control.sqlite3') as db:
         # @verifies docs/CODE_EDITOR_UI_CONCURRENCY.md#jonction-nettoyage-et-clôture
         # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md#quatre-groupes-ciblés-puis-25-communs-frais
         # @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md#quatre-groupes-ciblés-puis-25-communs-frais
-        assert row and row['deleted_at'] is not None and re.fullmatch(r'(?:(storage-console-api|storage-ui|storage-recovery|storage-validation|service-configuration|service-transport|invocation-url-transport|invocation-addresses(?:-ui)?|invocation-route-cycles|invocation-route-pause|source-access|invocation-pagination-(?:ui|cli)|validator-names|function-versions|version-cli|version-upload-capacity|version-duplicate-recovery|version-state-transport|deploy|publication-api|cli|publication-recovery|storage-api|invocation|code-editor-archive-limits|code-editor-read-concurrency|code-editor-control-interruption|execution-journal-(?:api|ui)|scheduled-functions)-[0-9a-f]{8}|function-catalogue-(?:api|ui)-[0-9a-f]{8}(?:-[a-z0-9_-]{1,32})?)', row['name']), 'owned_campaign_required'
+        if additional_client is None:
+            assert row and row['deleted_at'] is not None and re.fullmatch(r'(?:(storage-console-api|storage-ui|storage-recovery|storage-validation|service-configuration|service-transport|invocation-url-transport|invocation-addresses(?:-ui)?|invocation-route-cycles|invocation-route-pause|source-access|invocation-pagination-(?:ui|cli)|validator-names|function-versions|version-cli|version-upload-capacity|version-duplicate-recovery|version-state-transport|deploy|publication-api|cli|publication-recovery|storage-api|invocation|code-editor-archive-limits|code-editor-read-concurrency|code-editor-control-interruption|execution-journal-(?:api|ui)|scheduled-functions)-[0-9a-f]{8}|function-catalogue-(?:api|ui)-[0-9a-f]{8}(?:-[a-z0-9_-]{1,32})?)', row['name']), 'owned_campaign_required'
+        else:
+            assert row and row['deleted_at'] is not None and row['name'] == additional_namespace, 'owned_additional_campaign_required'
         actual = {r[0] for r in db.execute('SELECT f.id FROM functions f JOIN services s ON s.id=f.service_id WHERE s.namespace_id=?', (namespace,))}
         assert actual == set(functions), 'campaign_inventory_mismatch'
         assert not db.execute('SELECT 1 FROM services WHERE namespace_id=? AND deleted_at IS NULL', (namespace,)).fetchone(), 'live_campaign_service'

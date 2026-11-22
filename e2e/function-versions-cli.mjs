@@ -1,3 +1,4 @@
+// @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#propriété-courante-et-lancement-dédié
 // @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel
 // @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#preuves-réelles
 import assert from 'node:assert/strict';
@@ -14,7 +15,7 @@ const checks=[],evidence=[],cleanupErrors=[],tokens=[],secret='cli-version-priva
 let api,caller,session,namespace,service,fn,work,manifest,publisher,scoped,reader,a,b,executionImage,completed=false,cleanup=false;
 await mkdir(out,{recursive:true,mode:0o700});
 async function save(){await writeFile(new URL(reportName,out),JSON.stringify({target:base,execution:dockerMode?`docker-${dockerMode}`:'host-python',image:executionImage,completed:completed&&cleanup,cleanup,cleanup_errors:cleanupErrors,
-  checks,skipped:0,evidence,namespace_id:namespace?.id,service_id:service?.id,function_ids:fn?[fn.id]:[]},null,2)+'\n',{mode:0o600});}
+  checks,skipped:0,evidence,namespace_id:namespace?.id,namespace_name:namespace?.name,service_id:service?.id,function_ids:fn?[fn.id]:[]},null,2)+'\n',{mode:0o600});}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}}
 async function call(path,{method='GET',body,headers={},status=200}={}){const r=await api.fetch(path,{method,data:body,headers:{Origin:base,'X-CSRF-Token':session?.csrf_token,...headers}});
   assert([status].flat().includes(r.status()),`${method} ${path}: ${r.status()}`);const text=await r.text();assert(!text.includes(secret));return JSON.parse(text);}

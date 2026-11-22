@@ -4667,3 +4667,5 @@ métier, collecte, budgets, purge et rétention restent exigés.
 aucun groupe qualifié. Worker terminal1 puis libéré, original011/f6e19cdd,
 42backend/quatreweb et huitcompteurs0 recoupés. Le reste de production est
 instruit dans133 ; aucune rétention manquante n'est déclarée acquise.
+
+072.6 — assemblage32 intégré après terminaison/libération du workerde19d780 : trois nouveaux modules (suite/worker/contrat), option explicite de recoupement et traceCLI namespace_name. Propriété30/74, archivesorphelines, capturesSHA/octets/mtime et huitSSO ; défauts du brouillon corrigés, relecture sansP1/P2. CinqASTPython et syntaxeNode passent, aucune campagne supplémentaire exécutée ; nouvelle liste523sources.

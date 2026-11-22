@@ -332,6 +332,14 @@ Pour une campagne suivie indépendamment du terminal :
 sur ce même script. Les identifiants SSO sont lus sur stdin privée et restent
 en mémoire ; les rapports et résultats systemd sont conservés dans .local/e2e.
 
+Le passage49/543 ci-dessus correspond à l'image433 ; sa régression sur011
+reste à produire. Le [complément courant32/276](../docs/SCHEMA_011_REGRESSIONS.md) a son lanceur
+`python3 -B e2e/additional-regressions-suite.py` et son worker durable
+`python3 -B e2e/additional-regressions-worker.py start`, puis `status NOM` /
+`finish NOM`. Les archives antérieures et la propriété exacte des30namespaces/
+74fonctions sont contrôlées ; huitSSO neufs sont requis. Code préparé et relu,
+aucune des32commandes ni leur inspection visuelle n'est encore qualifiée.
+
 
 ## Contrôle historique003 vers010 — SLS-104
 
