@@ -448,6 +448,7 @@ export class JournalApiCases {
         const wait=Math.min(50,deadline-performance.now());assert(wait>0,'reader_preparation_deadline');await delay(wait);
       }
       assert(record.ready,'reader_preparation_probe_bound');
+      assert(performance.now()<=deadline,'reader_preparation_disposal_after_deadline');
     } finally {record.finished_at_ms=Date.now();record.elapsed_ms=performance.now()-started;await c.save();}
   }
 
