@@ -590,3 +590,18 @@ sommeil fixe par ce réveil SIGCHLD, sans modifier le matcher ni ses bornes.
 waitpid demeure l'autorité ; pipe/handlers/wakeupfd sont fermés/restaurés en
 finally et le module est épinglé avec les programmes des deux gardes. Les
 mesures restent présentes et la prochaine acquisition doit être réelle.
+
+
+Sélecteur de canal123 : un socketUNIX accepté peut appartenir au namespace
+réseau du client ; `unix_stream_connect` crée le nouveau socket depuis ce netns
+puis lui copie l'adresse de l'écouteur. [SourceLinux af_unix.c](https://github.com/torvalds/linux/blob/master/net/unix/af_unix.c).
+C'est une explication du flux, pas une attestation du noyau déployé.
+Le banc épingle le seul runtime chaud : labelsfonction/instance/révision,
+CID/image/PID/naissance/cgroup et inode netns, unique bind /protocol en lecture
+seule issu du canal state/execution/INSTANCE/i-… ; il vérifie ces identités avant
+chaque lecture candidate. Le FD réellement lu du principal fournit son inode,
+cherché dans les tablesUNIX du contrôle et de ce seul runtime. L'inode, le chemin
+exact control.sock et l'instance doivent tous concorder avant de lire la seule
+ligne /started. Le reçu nomme le netns fournissant cette correspondance.
+Les deux lectures de tables et les métadonnées restent bornées, sans accès à
+un autre runtime, contenu d'en-tête ou corps ; les plafonds existants demeurent.

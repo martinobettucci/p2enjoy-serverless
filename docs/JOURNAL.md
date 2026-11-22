@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — réveil123 acquis, namespace du canal à recouper
+
+Replayda9200fb/503sources, archive12534b25 : sommeil artificiel0,100k stops en
+12,26s, le compteur finit200/started1 ; aucun cut et purge complète. Le sélecteur
+cherche seulement le netns contrôle, où63des67lectures sockets ont un inodeUNIX,
+tous anonymes. Linuxaf_unix alloue le socket accepté dans le netns du client.
+Décision avant code : épingler le seul runtime de l'instance par CID/labels/PID/
+naissance/cgroup/netns/montage, chercher son inode dans les deux tables et
+exiger canalexact avant ligne /started. Le prochain reçu doit attester ce netns ;
+aucun plafond ni budget élargi. Sourcekernel citée dans le contrat, pas assimilée
+à une preuve de l'installation.
+
+
 ## 22 novembre 2026 — coût du poll123 mesuré, réveil commun décidé
 
 Le diagnostic30a08449 conserve26249stops et24740polls vides :26974ms de sommeil

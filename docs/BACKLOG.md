@@ -3883,6 +3883,24 @@ pour le prochain diagnostic avant le full12. Cette extraction n'est pas une
 nouvelle preuve des groupes121 : ils restent à rejouer avec le vecteur commun.
 
 
+Le [replay SIGCHLD](evidence/execution-journal-started-receive-sigchld-scope-failed-dev-2026-11-22.json)
+supprime le sommeil artificiel mais atteint100000stops en12,26s sans reconnaître
+le canal. Le vrai compteur finit200/started1 ;67lectures sockets, seulement63
+inodesUNIX retrouvés dans le netns du contrôle, tous anonymes. Zéro qualification.
+
+Décision avant correction du sélecteur : épingler le seul conteneur runtime de
+l'instance chaude, par labelsfonction/instance/révision, CID/image/PID/naissance,
+cgroup et inode du netns. Recouper son unique montage /protocol avec le chemin
+state/execution de l'instance ; exiger lecture seule et canalexact control.sock.
+Rechercher l'inode du FD du contrôle dans les tablesUNIX du contrôle ET de ce
+seul runtime, avec identité/propriété du runtime recontrôlées. Ne reconnaître la
+ligne /started qu'après concordance inode+chemin+instance et consigner le netns
+qui la fournit. Aucun autre conteneur, namespace ou buffer n'est inspecté.
+La sourceLinux explique l'allocation du nouveau socket dans le netns du client ;
+ce comportement reste à recouper sur la vraie cible, pas présumé comme preuve.
+Ne modifier ni plafond100000, ni30s, ni retenue1s, ni runtime/protocole.
+
+
 <a id="sls-124"></a>
 ## SLS-124 — Restituer le focus des commandes Journaux
 
