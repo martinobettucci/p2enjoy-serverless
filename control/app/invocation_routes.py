@@ -2,7 +2,7 @@
 """Authenticated public gateway and authorized execution observations."""
 import asyncio
 import base64
-from contextlib import suppress
+from contextlib import closing,suppress
 import json
 import sqlite3
 from uuid import UUID,uuid4
@@ -15,6 +15,8 @@ from .invocation_http import InvocationError,canonical_origin,declared_path,poli
 from .network import client_address
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#sélection-http-et-admission
 from .function_versions import selected_revision
+# @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#collecte-et-événements
+from .execution_logs import append as append_log,classification,public_invocation
 
 METHODS=['GET','POST','PUT','PATCH','DELETE','HEAD','OPTIONS']
 
@@ -58,7 +60,7 @@ def routes(execution):
             if (await request.receive())['type']=='http.disconnect':return
 
     async def invoke(request:Request,function_id:str,path:str|None=None):
-        identifier=str(uuid4());origin=None;source_ip=None;call=None;watcher=None
+        identifier=str(uuid4());origin=None;source_ip=None;call=None;watcher=None;authorization=None
         preflight=request.method=='OPTIONS' and 'access-control-request-method' in request.headers
         try:
             base,separator,selector=function_id.partition('@')
@@ -127,6 +129,14 @@ def routes(execution):
             if call and not call.admitted and execution.waiting.get(call.id) is call:
                 # reject records its pending decision before SQL; maintenance owns retry.
                 with suppress(sqlite3.Error):execution.reject(call,status,code)
+            elif call is None and authorization is not None and authorization.actor.kind=='token':
+                with suppress(sqlite3.Error):
+                    with db.transaction(busy_timeout=0) as connection:
+                        append_log(connection,key='request:'+identifier,service_id=authorization.actor.service_id,
+                            function_id=function_id,kind='invocation.denied',state='rejected',severity='warning',
+                            request_id=identifier,message='invocation.denied',
+                            metadata={'error_code':code,'http_status':status,'classification':classification('rejected',code),
+                                      'invocation_created':False,'time_source':'control'})
             response=JSONResponse({'error':code,'invocation_id':identifier},status_code=status)
         finally:
             if watcher:
@@ -177,6 +187,7 @@ def routes(execution):
     async def invocations(request:Request,key:UUID,limit:int=Query(20,ge=1,le=100),offset:int=Query(0,ge=0,le=10000)):
         await observation(request,key)
         rows=db.all('SELECT * FROM invocations WHERE function_id=? ORDER BY created_at DESC,id DESC LIMIT ? OFFSET ?',(str(key),limit,offset))
+        with closing(db.connect()) as connection:rows=[public_invocation(connection,row) for row in rows]
         for row in rows:
             if row['handler_started'] is not None:row['handler_started']=bool(row['handler_started'])
             row['logs_truncated']=bool(row['logs_truncated'])
@@ -189,6 +200,7 @@ def routes(execution):
         await observation(request,key)
         row=db.one('SELECT * FROM invocations WHERE id=? AND function_id=?',(str(identifier),str(key)))
         if not row:raise HTTPException(404,'Cette invocation est absente ou n’est plus conservée.')
+        with closing(db.connect()) as connection:row=public_invocation(connection,row)
         if row['handler_started'] is not None:row['handler_started']=bool(row['handler_started'])
         row['logs_truncated']=bool(row['logs_truncated'])
         return row

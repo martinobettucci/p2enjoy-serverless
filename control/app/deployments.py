@@ -28,6 +28,8 @@ from .models import CodeDeploymentCreate,DeploymentCreate,Rollback
 from .validator import Docker,ValidationError,application_environment,validate,LIMIT
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md
 from .function_versions import FunctionVersions,default_code_hash,selected_revision
+# @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#collecte-et-événements
+from .execution_logs import deployment_event
 
 RESERVATION=MAX_ZIP+MAX_TOTAL+(2*MAX_ENTRIES+2)*4096
 MARGIN=1024**3
@@ -114,7 +116,9 @@ class Deployments:
             if not row:db.execute('INSERT INTO security_metadata VALUES (?,?)',('installation-id',self.installation))
         await blocking(self.reconcile_docker)
         with self.database.transaction() as db:
+            interrupted=db.execute("SELECT id FROM deployments WHERE state IN ('receiving','validating')").fetchall()
             db.execute("UPDATE deployments SET state='failed',error_code='control_interrupted',configuration_cipher=NULL,completed_at=? WHERE state IN ('receiving','validating')",(time.time(),))
+            for row in interrupted:deployment_event(db,row['id'])
         await self.clean(startup=True)
         if self.cleanup_error:raise RuntimeError('Le nettoyage des artefacts doit réussir avant la reprise.')
         self.task=asyncio.create_task(self.maintain())
@@ -157,7 +161,10 @@ class Deployments:
 
     def expire(self):
         with self.database.transaction() as db:
-            db.execute("UPDATE deployments SET state='expired',error_code='candidate_expired',configuration_cipher=NULL,completed_at=? WHERE state='prepared' AND expires_at<=?",(time.time(),time.time()))
+            now=time.time()
+            expired=db.execute("SELECT id FROM deployments WHERE state='prepared' AND expires_at<=?",(now,)).fetchall()
+            db.execute("UPDATE deployments SET state='expired',error_code='candidate_expired',configuration_cipher=NULL,completed_at=? WHERE state='prepared' AND expires_at<=?",(now,now))
+            for row in expired:deployment_event(db,row['id'])
 
     # @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#décision-durable-et-répétition
     def purge_holds_artifacts(self,function):
@@ -183,7 +190,9 @@ class Deployments:
                 await self.clean_channels()
             # With no live worker, these states can only belong to an interrupted operation.
             with self.database.transaction() as db:
+                interrupted=db.execute("SELECT id FROM deployments WHERE state IN ('receiving','validating')").fetchall()
                 db.execute("UPDATE deployments SET state='failed',error_code='deployment_interrupted',configuration_cipher=NULL,completed_at=? WHERE state IN ('receiving','validating')",(time.time(),))
+                for row in interrupted:deployment_event(db,row['id'])
             self.expire()
             for row in self.database.all("SELECT id FROM deployments WHERE state IN ('failed','expired','published') AND reserved_bytes>0"):
                 await self.clean_candidate(row['id'])
@@ -308,8 +317,10 @@ class Deployments:
 
     def failed(self,key,code,validation=None):
         with self.database.transaction() as db:
-            db.execute("UPDATE deployments SET state='failed',error_code=?,validation_json=?,configuration_cipher=NULL,completed_at=? WHERE id=? AND state!='published'",
+            prior=db.execute('SELECT state FROM deployments WHERE id=?',(key,)).fetchone()
+            changed=db.execute("UPDATE deployments SET state='failed',error_code=?,validation_json=?,configuration_cipher=NULL,completed_at=? WHERE id=? AND state!='published'",
                 (code,json.dumps(validation) if validation else None,time.time(),key))
+            if changed.rowcount and prior['state']!='failed':deployment_event(db,key)
 
     async def extract(self,path):
         process=await asyncio.create_subprocess_exec(sys.executable,'-B','-m',__package__+'.artifacts',

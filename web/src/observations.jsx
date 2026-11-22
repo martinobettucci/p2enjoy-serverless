@@ -118,7 +118,15 @@ function Invocation({row,expanded=false}) {
       ]}/>
       <div className="stack"><h4>Journal de l’invocation</h4>
         {row.logs_truncated && <p className="notice log-warning">Journal tronqué à la limite de collecte.</p>}
-        {row.logs ? <pre className="invocation-log" tabIndex={0} aria-label={`Journal de ${row.id}`}>{row.logs}</pre> : <p className="muted">{activeStates.has(row.state) ? 'Journaux disponibles à la fin de l’invocation.' : 'Aucun journal collecté.'}</p>}
+        {/* @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#console-et-manuel | docs/DESIGN_SYSTEM_APP.md | docs/manual.md */}
+        {row.logs ? <pre className="invocation-log" tabIndex={0} aria-label={`Journal de ${row.id}`}>{row.logs}</pre> : <p className="muted">{activeStates.has(row.state) ? 'Journaux disponibles à la fin de l’invocation.' : ({
+          collected:'Collecte confirmée : aucun message émis.',
+          unavailable:'Collecte indisponible : aucun buffer final valide reçu du runtime.',
+          not_started:'Aucun journal d’application : cet appel n’a pas été envoyé au runtime.',
+          expired:'Le contenu du journal est expiré ou purgé ; la chronologie reste consultable.',
+          unknown:'Le statut de collecte de cet ancien appel n’est pas renseigné.',
+        }[row.logs_collection_state] || 'Le statut de collecte n’est pas renseigné.')}</p>}
+        <a href={withCatalogue(`/console/functions/${row.function_id}/logs?invocation=${row.id}`)}>Rechercher les événements de cet appel</a>
       </div>
     </div></details>
   </article>;

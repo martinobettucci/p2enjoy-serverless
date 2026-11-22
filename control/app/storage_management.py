@@ -15,6 +15,8 @@ from .artifacts import ArtifactError
 from .models import Strict
 from .storage_client import StorageError
 from .validator import ValidationError
+# @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#collecte-et-événements
+from .execution_logs import storage_event,purge_function
 
 
 class CacheClear(Strict):
@@ -89,12 +91,15 @@ class StorageManagement:
                 # An invalidated upload could finish its diagnostic after the decision.
                 # artifacts() has now joined the shared owner; no publisher can remain.
                 db.execute('UPDATE deployments SET configuration_cipher=NULL,validation_json=NULL WHERE function_id=?',(row['function_id'],))
+                purge_function(db,row['function_id'])
+            storage_event(db,row['id'])
             db.execute('DELETE FROM function_operations WHERE id=?',(row['id'],))
 
     def phase(self,row,phase,error=None):
         with self.db.transaction() as db:
             db.execute('UPDATE storage_commands SET phase=?,error_code=? WHERE id=?',(phase,error,row['id']))
             db.execute('UPDATE function_operations SET error_code=? WHERE id=?',(error,row['id']))
+            storage_event(db,row['id'])
 
     async def artifacts(self,key):
         deployment=self.deployments
@@ -179,6 +184,7 @@ class StorageManagement:
                 self.operations.reserve(db,identifier,function,service,kind=kind)
                 db.execute('INSERT INTO storage_commands (id,function_id,service_id,installation_id,kind,state,phase,expected_function_version,created_at) VALUES (?,?,?,?,?,\'preparing\',\'draining\',?,?)',
                            (identifier,key,service['id'],self.operations.installation,kind,function['updated_at'],time.time()))
+                storage_event(db,identifier)
             await self.operations.prepare(identifier)
             authorization=await self.authorization(request,key,kind)
             with self.db.transaction() as db:
@@ -196,7 +202,9 @@ class StorageManagement:
                     db.execute("UPDATE functions SET config_json='{}',environment_json='{}',secrets_cipher=? WHERE id=?",(self.vault.seal({}),key))
                     db.execute("UPDATE revisions SET deleted_at=coalesce(deleted_at,?),inventory_json='[]',events_json='{}' WHERE function_id=?",(now,key))
                     db.execute("UPDATE deployments SET configuration_cipher=NULL,events_json='{}',validation_json=NULL WHERE function_id=?",(key,))
+                    purge_function(db,key)
                 db.execute("UPDATE storage_commands SET state='pending',phase='volumes',result_version=?,error_code=NULL WHERE id=?",(now,identifier))
+                storage_event(db,identifier)
                 self.operations.commit(db,identifier)
                 audit(db,authorization.actor,'function.cache_clear' if kind=='clear-cache' else 'function.purge',key,service['id'],{'operation_id':identifier})
         return self.response(self.db.one('SELECT * FROM storage_commands WHERE id=?',(identifier,)))

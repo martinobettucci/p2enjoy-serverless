@@ -25,6 +25,8 @@ from .invocation_http import InvocationError,declared_path,event_envelope,policy
 from .function_versions import selected_revision
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULES.md#réalisation-du-moteur-et-migration-009
 from .schedules import ScheduleAuthorization,check_schedule
+# @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#collecte-et-événements
+from . import execution_logs
 
 logger=logging.getLogger('p2enjoy.control')
 ACTIVE=('receiving','queued','admitted','running')
@@ -127,6 +129,7 @@ class Execution:
                 now=time.time()
                 db.execute("UPDATE schedule_firings SET state='dispatched',invocation_id=?,dispatched_at=?,delay_seconds=? WHERE id=?",
                     (call.id,now,now-firing['nominal_at'],firing['id']))
+            execution_logs.invocation_event(db,call.id,'invocation.received')
         self.waiting[call.id]=call
         return call
 
@@ -136,6 +139,7 @@ class Execution:
             function,_,_,_=self.check_call(db,call)
             timeout=json.loads(function['config_json'])['queue_timeout_seconds']
             db.execute("UPDATE invocations SET state='queued',queued_at=? WHERE id=? AND state='receiving'",(time.time(),call.id))
+            execution_logs.invocation_event(db,call.id,'invocation.queued')
         call.payload=(raw_headers,query,body);call.deadline=time.monotonic()+timeout
         # Zero allows exactly this immediate admission attempt, including a cold start.
         self.attempt(call)
@@ -143,8 +147,16 @@ class Execution:
 
     def write_terminal(self,db,identifier,state,code,status,*,result=None):
         result=result or {}
-        db.execute('UPDATE invocations SET state=?,error_code=?,http_status=?,completed_at=?,handler_started=coalesce(?,handler_started),logs=?,logs_truncated=? WHERE id=?',
-            (state,code,status,time.time(),result.get('handler_started'),result.get('logs',''),int(result.get('logs_truncated',False)),identifier))
+        prior=db.execute('SELECT state,dispatched_at FROM invocations WHERE id=?',(identifier,)).fetchone()
+        if prior is None or prior['state'] in execution_logs.TERMINAL:return
+        collection=('collected' if result.get('logs_collected') is True else
+                    'unavailable' if prior['dispatched_at'] is not None else 'not_started')
+        db.execute('''UPDATE invocations SET state=?,error_code=?,http_status=?,completed_at=?,
+            handler_started=coalesce(?,handler_started),logs=?,logs_truncated=?,logs_collection_state=? WHERE id=?''',
+            (state,code,status,time.time(),result.get('handler_started'),result.get('logs',''),
+             int(result.get('logs_truncated',False)),collection,identifier))
+        execution_logs.collect(db,identifier)
+        execution_logs.invocation_event(db,identifier,'invocation.timeout' if code=='invocation_timeout' else 'invocation.completed')
 
     def terminal(self,identifier,state,code,status,*,result=None):
         with self.db.transaction(busy_timeout=0) as db:self.write_terminal(db,identifier,state,code,status,result=result)
@@ -173,6 +185,7 @@ class Execution:
             (id,function_id,revision_id,generation,cpu_nanos,memory_mib,state,snapshot_cipher,created_at,ready_at,last_used_at,error_code)
             VALUES(?,?,?,?,?,?,'starting',?,?,NULL,?,NULL)""",
             (identifier,snapshot['function_id'],snapshot['revision_id'],generation,math.ceil(config['cpu']*1000000000),config['memory_mib'],self.vault.seal(snapshot),now,now))
+        execution_logs.instance_event(db,identifier,'instance.reserved')
         return identifier
 
     def attempt(self,call):
@@ -201,6 +214,7 @@ class Execution:
                 db.execute("UPDATE execution_instances SET state='busy',last_used_at=? WHERE id=?",(time.time(),identifier))
                 db.execute("""UPDATE invocations SET state='admitted',revision_id=?,resolved_code_hash=?,instance_id=?,admitted_at=? WHERE id=?""",
                            (snapshot['revision_id'],snapshot['code_hash'],identifier,time.time(),call.id))
+                execution_logs.invocation_event(db,call.id,'invocation.admitted')
             call.admitted=True;self.waiting.pop(call.id,None)
             call.resolved_code_hash=snapshot['code_hash']
             payload=call.payload;call.payload=None
@@ -245,10 +259,14 @@ class Execution:
         instance=None;result=None
         try:
             instance=self.driver(identifier,snapshot)
-            if not instance.managed_started:await instance.start()
+            if not instance.managed_started:
+                await instance.start()
+                with self.db.transaction(busy_timeout=0) as db:execution_logs.instance_event(db,identifier,'instance.started')
             with self.db.transaction(busy_timeout=0) as db:
                 db.execute('UPDATE execution_instances SET ready_at=coalesce(ready_at,?) WHERE id=?',(time.time(),identifier))
                 db.execute("UPDATE invocations SET state='running',dispatched_at=?,handler_started=NULL WHERE id=?",(time.time(),call.id))
+                execution_logs.instance_event(db,identifier,'instance.available')
+                execution_logs.invocation_event(db,call.id,'invocation.dispatched')
             result=await instance.invoke(event,snapshot['config']['timeout_seconds'],call.id)
             status=result['response']['statusCode'] if result['state']=='succeeded' else 504 if result['error']=='invocation_timeout' else 502 if result['error'] in ('handler_error','handler_exited','invalid_handler_response') else 503
             result['http_status']=status
@@ -291,7 +309,10 @@ class Execution:
     async def warm(self,identifier,snapshot):
         try:
             instance=self.driver(identifier,snapshot);await instance.start()
-            with self.db.transaction(busy_timeout=0) as db:db.execute("UPDATE execution_instances SET state='ready',ready_at=?,last_used_at=? WHERE id=?",(time.time(),time.time(),identifier))
+            with self.db.transaction(busy_timeout=0) as db:
+                db.execute("UPDATE execution_instances SET state='ready',ready_at=?,last_used_at=? WHERE id=?",(time.time(),time.time(),identifier))
+                execution_logs.instance_event(db,identifier,'instance.started')
+                execution_logs.instance_event(db,identifier,'instance.available')
         except BaseException:
             self.retry_at[snapshot['function_id']]=time.monotonic()+5
             await joined(self.retire(identifier));raise
@@ -315,11 +336,15 @@ class Execution:
                 if any(item['consumer_id']==identifier for item in await self.operations.storage.leases(self.installation)):
                     raise ValidationError('cleanup_failed')
             await joined(asyncio.to_thread(self.deployments.remove,self.root,identifier))
-            with self.db.transaction(busy_timeout=0) as db:db.execute('DELETE FROM execution_instances WHERE id=?',(identifier,))
+            with self.db.transaction(busy_timeout=0) as db:
+                execution_logs.instance_event(db,identifier,'instance.stopped')
+                db.execute('DELETE FROM execution_instances WHERE id=?',(identifier,))
             self.instances.pop(identifier,None);return True
         except (OSError,ArtifactError,ValidationError,StorageError,sqlite3.Error):
             with suppress(sqlite3.Error):
-                with self.db.transaction(busy_timeout=0) as db:db.execute("UPDATE execution_instances SET state='cleanup_failed',error_code='cleanup_failed' WHERE id=?",(identifier,))
+                with self.db.transaction(busy_timeout=0) as db:
+                    db.execute("UPDATE execution_instances SET state='cleanup_failed',error_code='cleanup_failed' WHERE id=?",(identifier,))
+                    execution_logs.instance_event(db,identifier,'instance.cleanup_failed')
             return False
 
     async def reconcile_orphan(self,identifier):
@@ -328,7 +353,8 @@ class Execution:
             removed=await self.retire(identifier)
             try:
                 with self.db.transaction(busy_timeout=0) as db:
-                    db.execute("UPDATE invocations SET state='interrupted',error_code='execution_owner_lost',http_status=503,completed_at=? WHERE instance_id=? AND state IN ('admitted','running')",(time.time(),identifier))
+                    for row in db.execute("SELECT id FROM invocations WHERE instance_id=? AND state IN ('admitted','running')",(identifier,)).fetchall():
+                        self.write_terminal(db,row['id'],'interrupted','execution_owner_lost',503)
                     if not removed:db.execute("UPDATE execution_instances SET state='cleanup_failed',error_code='cleanup_failed' WHERE id=?",(identifier,))
                 return
             except sqlite3.Error:
@@ -377,8 +403,11 @@ class Execution:
                 if str(UUID(path.name))!=path.name:raise ValidationError('cleanup_ownership')
                 await joined(asyncio.to_thread(self.deployments.remove,self.root,path.name))
             with self.db.transaction(busy_timeout=0) as db:
+                for row in db.execute('SELECT id FROM execution_instances').fetchall():
+                    execution_logs.instance_event(db,row['id'],'instance.stopped')
                 db.execute('DELETE FROM execution_instances')
-                db.execute("UPDATE invocations SET state='interrupted',error_code='control_interrupted',http_status=503,completed_at=? WHERE state IN ('receiving','queued','admitted','running')",(time.time(),))
+                for row in db.execute("SELECT id FROM invocations WHERE state IN ('receiving','queued','admitted','running')").fetchall():
+                    self.write_terminal(db,row['id'],'interrupted','control_interrupted',503)
             if self.operations.discards:self.operations.discards.execution_reconciled=True
             await self.operations.sweep()
             self.reconciled=not self.operations.cleanup_error and self.operations.agent_ready
@@ -467,6 +496,7 @@ class Execution:
                         (row['function_id'] not in demands and count>minimum)):
                     self.schedule_retirement(row['id']);break
         with self.db.transaction(busy_timeout=0) as db:
+            execution_logs.maintenance(db)
             db.execute('DELETE FROM invocations WHERE completed_at IS NOT NULL AND completed_at<? AND NOT EXISTS (SELECT 1 FROM schedule_firings t WHERE t.invocation_id=invocations.id AND t.completed_at IS NULL)',(time.time()-7*86400,))
             db.execute('DELETE FROM invocations WHERE id IN (SELECT id FROM invocations WHERE completed_at IS NOT NULL AND NOT EXISTS (SELECT 1 FROM schedule_firings t WHERE t.invocation_id=invocations.id AND t.completed_at IS NULL) ORDER BY completed_at DESC,id DESC LIMIT -1 OFFSET 10000)')
 

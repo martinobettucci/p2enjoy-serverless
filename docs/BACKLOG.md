@@ -4215,3 +4215,16 @@ seuls fichiers de reçu. Trois écarts de revue (schema_migrations dispensée,
 préflightmanifeste absent, failed assimiléàinactive) sont corrigés avant exécution.
 Compilation/diff passent ; la miseàjour et la reprise API ne sont pas encore
 éprouvées.128.3 reste ouvert.
+
+
+128 — [miseàjour et reprise physique acquises](evidence/execution-journal-purge-recovery-dev-2026-11-22.json).
+L'unité20da0f11 termineinactive/Resultsuccess, MainPID/ControlPID0/cgroupvide ;
+les clientsDocker sont joints. CID7574a50f/imagebf9b61a6 remplace1aa, tables/schema/
+collection nonvide égaux au backupfinal, onze migrations, configuration/référence
+conservées, aucune restaurationDB. Le POST de reprise donne202 en1129,77ms puis
+completed ; /tmp garde16777216octets libres sur5067mesures et aucunFDtemporaire
+observé. Trois fonctions, trois services et le namespace antérieurs sont retirés,
+huit compteurs0 et5982originaux recoupés.511sources ; zéro groupe complet qualifié.
+Le premier rouge reste inchangé.128.3 reste ouvert pour la secondevoie service,
+les corpus et campagnes complètes.124 peut maintenant éprouver ses deux risques
+sur les mêmes ressourcesweb inchangées avant la prochaine campagne finale.

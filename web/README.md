@@ -1,5 +1,11 @@
 # Console web
 
+Les facettes Journaux et la conservation par service sont déployées avec le
+manuel canonique recompilé dans1aa70214/011. La construction et les quatre
+ressources servies sont recoupées par la [bascule](../docs/EXECUTION_LOG_DEPLOYMENT.md).
+Les dix parcours UI072, leurs captures et les régressions restent à exécuter :
+ce checkpoint ne prouve pas encore leurs comportements ni leur rendu.
+
 La [reprise29](../docs/evidence/code-editor-control-interruption-dev-2026-11-22.json) clôt070et118 sur474sourcesef71eb7/
 API046 : deux coupures137, brouillons relus API/UI, six handlers,26captures
 inspectées et purge physique. Critères historiques rapprochés, sans cumul ;

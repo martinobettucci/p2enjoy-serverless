@@ -4,6 +4,10 @@ import React, {useState} from 'react';
 import {Plus, Copy, KeyRound} from 'lucide-react';
 import {api} from './api';
 import {Badge, Confirm, DialogForm, ErrorMessage, Facts, Field, NamedFields, Pagination, Resource, Section, Success, useResource} from './ui';
+// @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#console-et-manuel | docs/DESIGN_SYSTEM_APP.md | docs/manual.md
+import {ExecutionJournal} from './execution-journal';
+import {LogRetention} from './log-retention';
+import {catalogueReturn,withCatalogue} from './catalogue';
 
 const pageSize = 25;
 export const url = (kind, id, tab = '') => `/console/${kind}/${id}${tab ? `/${tab}` : ''}`;
@@ -58,11 +62,12 @@ export function Service({id,tab}) {
 
 function ServiceView({row,tab,reload}) {
   const [edit,setEdit] = useState(false);
-  const tabs = {functions:'Fonctions',configuration:'Configuration',tokens:'Jetons',activity:'Activité'};
+  const tabs = {functions:'Fonctions',configuration:'Configuration',tokens:'Jetons',activity:'Activité',logs:'Journaux'};
   const active = tabs[tab] ? tab : 'functions';
-  return <><nav className="breadcrumb" aria-label="Fil d’Ariane"><a href="/console/namespaces">Namespaces</a><span>/</span><a href={url('namespaces',row.namespace_id)}>Services du namespace</a><span>/</span><span>{row.name}</span></nav>
+  return <>{active==='logs' && catalogueReturn() && <p className="catalogue-back"><a href={catalogueReturn()}>Revenir au catalogue</a></p>}<nav className="breadcrumb" aria-label="Fil d’Ariane"><a href="/console/namespaces">Namespaces</a><span>/</span><a href={url('namespaces',row.namespace_id)}>Services du namespace</a><span>/</span><span>{row.name}</span></nav>
     <div className="page-title"><div><h1>{row.name}</h1>{row.description && <p>{row.description}</p>}</div><button onClick={() => setEdit(true)}>Modifier le service</button></div>
-    <nav className="tabs" aria-label="Service">{Object.entries(tabs).map(([key,label]) => <a key={key} href={url('services',row.id,key)} aria-current={active === key ? 'page' : undefined}>{label}</a>)}</nav>
+    <nav className="tabs" aria-label="Service">{Object.entries(tabs).map(([key,label]) => <a key={key} href={withCatalogue(url('services',row.id,key))} aria-current={active === key ? 'page' : undefined}>{label}</a>)}</nav>
+    {active === 'logs' && <><ExecutionJournal serviceId={row.id}/><LogRetention serviceId={row.id} serviceName={row.name}/></>}
     {active === 'functions' && <Functions service={row}/>}
     {active === 'configuration' && <><Configuration row={row} endpoint={`/api/services/${row.id}/configuration`} reload={reload}/><Policy row={row} reload={reload}/>
       <Section title="Gestion du service"><Confirm label="Supprimer le service" message={`Supprimer « ${row.name} » et révoquer ses jetons ? Le service doit être vide de fonctions.`}

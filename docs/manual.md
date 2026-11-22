@@ -391,6 +391,87 @@ relevé reste visible. Si des instances disparaissent, la pagination revient
 se parcourent dans leur cadre, y compris au clavier. Les liens de facette
 peuvent être conservés pour retrouver la même fonction.
 
+La collecte est précisée même lorsque le buffer est vide : « aucun message
+émis » confirme le résultat du runtime ; « collecte indisponible » signifie
+qu'aucun buffer final valide n'a été reçu. Un appel non envoyé au runtime,
+un ancien statut inconnu et un contenu expiré ou purgé sont distingués.
+La chronologie reste disponible selon sa propre conservation.
+
+## Rechercher et suivre les journaux
+
+Ouvrir **Journaux** dans une fonction pour consulter son activité, ou dans un
+service pour réunir les événements de ses fonctions. Le lien depuis le résultat
+du testeur recherche le même identifiant de requête sans lancer un nouvel appel.
+Un refus précoce peut avoir un identifiant de requête sans invocation créée.
+Un refus avant authentification n'est pas ajouté à ce journal de service.
+
+Choisir une période UTC de sept jours au maximum. Les raccourcis **15 minutes**,
+**1 heure**, **24 heures** et **7 jours** calculent une nouvelle période jusqu'à
+l'instant courant. Combiner texte littéral sensible à la casse, source,
+niveau, état, identifiant d'appel ou de requête, instance, hash complet et type
+d'événement. Un lien par appel, instance ou hash consulte les sept derniers
+jours lorsqu'aucune période n'est précisée. La recherche
+texte accepte 200 caractères. Un niveau absent reste **Non renseigné** : la
+plateforme ne déduit pas une gravité depuis stderr ou depuis le statut HTTP.
+
+Chaque page historique contient cinq événements. Le relevé garde ses pages
+stables lorsque de nouveaux événements arrivent ; son instantané dure quinze
+minutes. Une expiration, purge ou modification de politique qui empêche de le
+compléter demande **Nouveau relevé**. Cette action conserve la période et les
+filtres ; choisir un raccourci pour avancer la période jusqu'à maintenant.
+L'adresse de la page conserve les filtres et le numéro de page, sans partager
+les droits ni le contenu du relevé. Aucun événement antérieur à l'installation
+du registre n'est reconstitué ; son début de collecte est indiqué.
+
+Déplier **Texte, corrélation et chronologie** pour lire le message complet
+conservé, ses métadonnées publiques, le hash exécuté et les identifiants de
+fonction, service, invocation, instance, publication ou stockage. Une référence
+devenue indisponible reste nommée. Les événements de plateforme retrouvent les
+publications, démarrages, extinctions, délais dépassés et commandes de stockage.
+Une réponse métier HTTP 500 peut rester une exécution réussie ; les erreurs de
+code, refus d'admission et défauts d'infrastructure ont des classes distinctes.
+
+Les sorties de l'application sont collectées à la fin de l'invocation. Leur
+date observée ne prétend pas dater exactement chaque ligne du code. Le buffer
+est limité à 64 Kio ; sa projection dans la recherche garde au plus 1024 lignes
+et 4096 octets UTF-8 par message. Les troncatures sont signalées séparément.
+Le buffer original de l'invocation reste consultable jusqu'à son expiration.
+Texte et JSON sont affichés sans interpréter de HTML ; les longues lignes se
+parcourent dans leur cadre au clavier.
+
+Choisir **Suivre les nouveaux événements** pour lire les séquences suivantes,
+au-delà de la période historique. **Mettre en pause** arrête les lectures ;
+**Reprendre le suivi** utilise le dernier curseur confirmé. La page conserve
+au plus 200 entrées et indique sa dernière lecture. Elle peut se mettre en
+pause pour conserver une entrée qui a le focus. Après une coupure, reprendre
+explicitement ; si le curseur a perdu des événements par conservation, ouvrir
+un nouveau relevé. Un suivi dure au plus sept jours. Ni pause ni reprise ne
+relance un handler et les sorties d'un handler actif ne sont pas diffusées
+en continu.
+
+Depuis la recherche historique, choisir le format **JSONL** ou **Texte**, puis
+**Exporter cette période**. Chaque lot contient au plus 1000 événements et
+1 Mio de données UTF-8. **Exporter le lot suivant** poursuit le même relevé ;
+la fin est annoncée explicitement. Si le relevé expire avant la suite, il faut
+en ouvrir un nouveau. L'export conserve les mêmes droits et restrictions de
+fonctions que la consultation. En mode suivi, revenir d'abord à la période
+historique pour exporter celle-ci.
+
+Dans le service, **Conservation des journaux** règle la durée de 1 à 10080
+minutes, avec sept jours par défaut. **Modifier la conservation** exige une
+session administrateur. Une diminution demande confirmation et peut faire
+expirer immédiatement des contenus déjà collectés. Augmenter ensuite la durée
+ne les ressuscite pas. Un conflit conserve la saisie et impose une relecture ;
+si la réponse d'enregistrement manque, relire la politique avant toute nouvelle
+écriture. Le budget global du registre est de 10000 événements et 16 Mio de
+messages et métadonnées ; un retrait par capacité est signalé.
+
+Les secrets effectifs connus sont expurgés avant stockage et recherche.
+La plateforme n'ajoute pas automatiquement les jetons, en-têtes ou corps métier
+aux événements. Le code d'une fonction reste responsable des données métier
+qu'il imprime. Le contenu du journal peut expirer avant sa chronologie
+d'invocation ; la purge de la fonction retire ses contenus de journaux.
+
 ## Adresses d’appel
 
 Depuis le service, choisir **Adresses d’appel** sous le nom de la fonction,

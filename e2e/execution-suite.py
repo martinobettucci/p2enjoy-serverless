@@ -98,6 +98,9 @@ def source_hashes():
     files += [ROOT/'docs/CODE_EDITOR_CONTROL_INTERRUPTION.md']
     # @spec docs/BACKLOG.md#sls-118 | docs/CODE_EDITOR_CONTROL_WINDOW.md
     files += [ROOT/'docs/CODE_EDITOR_CONTROL_WINDOW.md']
+    # @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#découpage-et-qualification-réels
+    files += [ROOT/'docs/EXECUTION_LOGS.md']
+    files += [ROOT/'docs/EXECUTION_LOG_DEPLOYMENT.md']
     # @spec docs/BACKLOG.md#sls-117 | docs/CODE_EDITOR_NAVIGATION_OBSERVATION.md
     files += [ROOT/'docs/CODE_EDITOR_NAVIGATION_OBSERVATION.md']
     # @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#réalisation-et-preuves

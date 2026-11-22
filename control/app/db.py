@@ -79,3 +79,6 @@ def audit(db,actor,action,object_id=None,service_id=None,detail=None):
     db.execute('INSERT INTO audit_events VALUES (?,?,?,?,?,?,?,?)',(
         str(uuid.uuid4()),actor.kind,actor.id,service_id,action,object_id,
         time.time(),json.dumps(detail or {},separators=(',',':'))))
+    # @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#collecte-et-événements
+    from .execution_logs import audited_event
+    audited_event(db,action,object_id,service_id,detail or {})

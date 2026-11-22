@@ -1,5 +1,15 @@
 # P2Enjoy Serverless
 
+## Journaux déployés — qualification en cours
+
+Le registre011, ses API et les facettes Journaux fonction/service sont déployés
+en DEV sur l'image1aa70214, avec le manuel canonique recompilé. La
+[bascule gardée](docs/EXECUTION_LOG_DEPLOYMENT.md) recoupe deux sauvegardes SQLite,
+les anciennes colonnes et42backend/quatreweb ; son unité est terminée et son
+cgroup vide. Les parcours fonctionnels et visuels restent à qualifier selon
+[SLS-072](docs/BACKLOG.md#sls-072), ainsi que les régressions sur011. Aucun groupe
+fonctionnel ni critère de clôture n'est ajouté par le seul déploiement.
+
 ## Brouillons et coupures du contrôle qualifiés —22 novembre2026
 
 La [preuve29](docs/evidence/code-editor-control-interruption-dev-2026-11-22.json) passe quatre ciblés puis25communs

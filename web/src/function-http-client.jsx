@@ -192,7 +192,7 @@ export function FunctionHttpTester({functionId,functionName}){
      {preview!==null?<><pre className="invocation-log tester-response" tabIndex={0} aria-label="Corps de réponse">{preview||'Corps vide.'}</pre>{resultBytes.length>previewLimit&&<p className="muted">Aperçu limité à 64 Kio. Téléchargez le corps conservé pour lire la suite.</p>}</>:<p>Corps binaire ; utilisez le téléchargement.</p>}
      {downloadUrl&&<a className="button" href={downloadUrl} download={contentEncoding&&result.body_representation==='wire'?'reponse-encodee.bin':'reponse.bin'}><Download aria-hidden="true"/>Télécharger le corps conservé</a>}
     </>}
-    <div className="actions">{result.request_id&&<a href={withCatalogue(`/console/functions/${functionId}/invocations?invocation=${encodeURIComponent(result.request_id)}`)}>Ouvrir cette invocation et son journal</a>}<a href={withCatalogue(`/console/functions/${functionId}/invocations`)}>Consulter les invocations de la fonction</a></div>
+    <div className="actions">{result.request_id&&<><a href={withCatalogue(`/console/functions/${functionId}/invocations?invocation=${encodeURIComponent(result.request_id)}`)}>Ouvrir cette invocation et son journal</a><a href={withCatalogue(`/console/functions/${functionId}/logs?invocation=${encodeURIComponent(result.request_id)}`)}>Rechercher les journaux de cet appel</a></>}<a href={withCatalogue(`/console/functions/${functionId}/invocations`)}>Consulter les invocations de la fonction</a></div>
    </>}
   </Section>
   {dialog&&<VersionChoice functionId={functionId} onClose={()=>setDialog(false)} choose={chooseVersion}/>}

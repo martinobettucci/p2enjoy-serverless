@@ -1,5 +1,17 @@
 # Application de qualification DEV
 
+## Fixtures des journaux SLS-072 en préparation
+
+`artifacts/execution-journal.cjs` émet les échantillons texte/JSON/Unicode,
+niveaux déclarés ou absents, bornes de lignes et d'octets, erreurs et attentes
+réelles du [contrat des journaux](../docs/EXECUTION_LOGS.md). Ses corpus passent
+par la publication et l'invocation Docker. Le compteur sur `/data` est fsyncé
+avant attente pour recouper une exécution interrompue ; son mode de relecture
+n'incrémente pas la donnée. Les secrets de témoins sont ceux configurés dans
+le service et sa fonction par les API, puis expurgés par le vrai runtime.
+Le packager `e2e/execution-journal-package.py` produit le ZIP original et son
+marqueur. Ces sources ne sont pas encore déployées ni qualifiées.
+
 Service synthétique destiné à éprouver les développements de P2Enjoy Serverless.
 Spécification : `../docs/DAT.md#qualification`, unité QLF-001.
 

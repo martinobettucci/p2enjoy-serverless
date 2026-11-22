@@ -1,5 +1,15 @@
 # Plan de contrôle
 
+Le [registre de journaux011](../docs/EXECUTION_LOGS.md) est implémenté et déployé
+en DEV surbf9b61a6. La [bascule](../docs/EXECUTION_LOG_DEPLOYMENT.md) conserve les
+anciennes colonnes et recoupe42backend/quatreweb, deux backups natifs et la fin
+de l'unité/cgroup. Les critères072 et les régressions restent ouverts ; ce
+prérequis ne compte aucun groupe fonctionnel. La [reprise de purge128](../docs/evidence/execution-journal-purge-recovery-dev-2026-11-22.json)
+recoupe la miseàjour011→011 et une archive réellement purgée après16Mio, avec
+/tmp conservé et5982originaux. Les campagnes12API/10UI/25communs restent dues.
+Après migration-intent, aucune
+garde ne doit remettre046 ou une base antérieure.
+
 La [reprise29](../docs/evidence/code-editor-control-interruption-dev-2026-11-22.json) clôt070et118 sur474sourcesef71eb7/
 API046 : deux coupures137, brouillons relus API/UI, six handlers,26captures
 inspectées et purge physique. Critères historiques rapprochés, sans cumul ;

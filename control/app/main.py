@@ -36,6 +36,9 @@ from .network import forwarded_addresses
 from .invocation_urls import routes as invocation_url_routes,read_routes
 # @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md
 from .catalogue import catalogue_query, routes as catalogue_routes
+# @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#api-droits-et-snapshots
+from .execution_log_routes import ExecutionLogRoutes
+from .execution_log_queries import console_parameters as console_log_parameters
 
 logger=logging.getLogger('p2enjoy.control')
 
@@ -116,6 +119,7 @@ app.include_router(storage_management.routes())
 app.include_router(invocation_url_routes(database,identity,settings))
 # @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#lecture-et-périmètre
 app.include_router(catalogue_routes(database,identity))
+app.include_router(ExecutionLogRoutes(database,identity,vault).routes())
 web_root=Path(__file__).parent.parent/'web'
 app.mount('/assets',StaticFiles(directory=web_root/'assets'),name='assets')
 
@@ -241,8 +245,9 @@ def canonical_entry(request,path):
     if len(hosts)!=1 or hosts[0].lower() not in expected:
         if path.startswith('/console/'):
             selected={}
+            parsing_failed=False
             try:parameters=parse_qsl(request.url.query,max_num_fields=32,keep_blank_values=True)
-            except ValueError:parameters=[]
+            except ValueError:parameters=[];parsing_failed=True
             for name,value in parameters:
                 if name in ('deployment','operation'):
                     try:selected[name]=str(UUID(value))
@@ -264,6 +269,12 @@ def canonical_entry(request,path):
                 if identifiers:
                     try:selected['invocation']=str(UUID(identifiers[0])) if len(identifiers)==1 else 'invalid'
                     except ValueError:selected['invocation']='invalid'
+            # @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#console-et-manuel
+            if path.endswith('/logs'):
+                try:
+                    if parsing_failed or (request.url.query and not parameters):raise ValueError('log_query_parse_failed')
+                    selected.update(console_log_parameters(parameters))
+                except ValueError:selected['log-query-invalid']='1'
             if path=='/console/functions':
                 try:selected.update(dict(parse_qsl(catalogue_query(urlencode([(k,v) for k,v in parameters if k!='catalogue'])))))
                 except ValueError:pass

@@ -9,8 +9,82 @@ séparément avant adaptation. Les fixtures restent originales, les corpus
 passent par de vrais handlers Docker et les expirations par le temps réel.
 Les préconditions des clients courants seront actualisées vers011 ; aucune
 branche historique ni capture scellée n'est réécrite. Les communs rejoués
-ne s'ajoutent pas deux fois au nombre de groupes uniques. Aucune commande
-de cette nouvelle campagne n'est encore disponible à ce checkpoint.
+ne s'ajoutent pas deux fois au nombre de groupes uniques.
+
+Le pilote API `node e2e/execution-journal-api.mjs` a deux passages échoués
+conservés sur1aa70214 : buffer après trois groupes, puis frontière finale native
+après cinq. Zéro groupe qualifié. Il lit une unique ligne JSON privée sur stdin (`username`,
+`password`), maintient les identifiants en mémoire, crée les seuls objets de son
+namespace `execution-journal-api-…`, puis les purge par les API réelles et les
+recoupe avec le collecteur physique partagé. Ne jamais mettre ces valeurs
+dans argv, l'environnement, un rapport ou un fichier de session.
+
+Ses prérequis sont l'image011 réellement déployée, les modules Python opérateurs
+copiés et recoupés sur le seul SPARK DEV, les dépendances Playwright verrouillées
+et Chromium installé. Les groupes sont sérialisés ; la minute de rétention et
+la garde de reprise45s passent en temps réel. L'ordre des groupes05/06 en fin de
+pilote retire les corpus précédents avant de mesurer les frontières globales.
+Les checkpoints natifs SQL et coupure sont joints avant les requêtes de purge ;
+un refus, un prérequis absent ou un nettoyage incomplet fait échouer le pilote.
+Les reçus privés UUID de `.local/e2e` sont conservés, sans écrasement d'un échec.
+Le client UI, les25communs et l'orchestration de régression restent à terminer :
+les12groupes API, même réussis, ne clôturent pas072.
+
+Le [diagnostic120](../docs/evidence/execution-journal-buffer-diagnostic-dev-2026-11-22.json)
+exécute `node e2e/execution-journal-buffer-diagnostic.mjs` avec le même stdin
+privé : huit mesures réelles avec/sans secrets, zéro groupe qualifié, deux
+fonctions purgées et5982originaux conservés. Il distingue65536bruts et65476
+après protection du préfixe de secret coupé ; le produit n'est pas modifié.
+
+Pour [SLS-121](../docs/BACKLOG.md#sls-121),
+`node e2e/execution-journal-lock-diagnostic.mjs` prépare le même corpus que les
+cinq groupes précédents, puis observe la frontière API08. Le nouveau diagnostic
+a été exécuté sur500sources/1aa70214 : GET503 à2074ms, aucune entrée dans
+journal-verify, restitution et purge acquises, zéro groupe qualifié. L'opérateur conserve des histogrammes bornés,
+128fcntl maximum et leurs résultats natifs ; le GET conserve statut/délai
+avant son assertion. Le compteur historique «events» compte des tours de
+polling ; polls vides, statuts waitpid et stops syscall sont séparés par le
+diagnostic. Les délais et conditions de barrière restent inchangés, aucun
+buffer métier ni résultat noyau n'est modifié. Succès du diagnostic signifie
+observations et nettoyage acquis, **zéro groupe fonctionnel qualifié**, même
+si sa frontière est refusée dans sa première époque. Le replay de réveil acquiert
+le verrou mais reste rouge sur writer-blocked ; sa reprise opérateur est
+[conservée séparément](../docs/evidence/execution-journal-wakeup-writer-failed-dev-2026-11-22.json).
+Le correctif122 assure une fermeture locale idempotente et une observation de
+la garde existante,125s maximum depuis launch. Le cas isolé conserve le primaire
+failed/code1 avec cleanuptrue, Node joint et zéro groupe qualifié ; sa preuve
+et son addendum journal sont distincts du collecteur initial échoué. Le replay
+12API/25communs reste requis après résolution de121.
+
+Les modes121 read-result/read-decision/policy-commit du prctl existant sont
+implémentés, pas encore qualifiés ; sqlite-reservation sert à la seule faute122.
+Les tests exigent410 avant décision,200 après décision puis snapshot410, et
+réponse réellement perdue après version/audit committés, sans EAGAIN imposé.
+
+Le client isolé `node e2e/execution-journal-guard-closure.mjs` a un premier passage501sources conservé : la faute, la garde réelle, la purge
+et les cinqfermetures sont attestées, zéro groupe qualifié. Son collecteur
+initial échoue sur MESSAGE7860octets/null ; l'addendumRO--all est distinct.
+Le replay sur les modes actuels reste à produire. Il reçoit la même ligne SSO privée sur stdin, crée une
+seule fonction originale et suspend réellement son helper après le verrou final.
+Son mode independent_guard attend exclusivement la vraie garde60, sous125s
+client, puis exige503lecture/code1 conservés, PUT200, purge physique et cinq
+fermetures locales. Le restorer observe la santé dans son alarme55s existante,
+avec PID/naissance/cgroup d'origine et reçu recoupable au journal systemd.
+Ce client ne qualifie pas l'ordre des commitsAPI08 et n'ajoute aucun groupe ;
+une récupération opérateur ne remplace pas son chemin indépendant attendu.
+
+La [bascule gardée011](../docs/EXECUTION_LOG_DEPLOYMENT.md) dispose du pilote
+`python3 -B e2e/execution-journal-deploy-run.py CHEMIN_DU_RECU_IMAGE`, exécuté
+avec succès le22novembre2026 à11h00UTC. Son argument est le reçu privé d'inspection
+de l'image construite ; ses42fichiers backend doivent encore correspondre au
+poste. Il vérifie le script distant, prépare deux sauvegardes natives puis
+supervise une seule unité DEV. La finalisation indépendante conserve son propre
+résultat et celui du primaire ; aucune sauvegarde n'écrase la base. Les reçus
+de cgroup et l'état final sont collectés avant de lancer le banc API.
+L'image1aa70214/CID49a82269 est saine, avec onze migrations et toutes les
+anciennes colonnes conservées ; les sauvegardes portent le SHA0a517159.
+La finalisation nominale est terminée et le cgroup vide. Le pilote API reste
+à exécuter et aucun groupe fonctionnel n'est ajouté par la bascule.
 
 ## Brouillons et coupures du contrôle qualifiés —22 novembre2026
 
@@ -2975,3 +3049,44 @@ conservent les ns exactes ; leurs copies JS peuvent être arrondies.
 Trois passages échoués restent séparés/exclus ; trois fonctions/tokens de tous
 les passages sont purgés/révoqués, quatre helpers terminés et5982artefacts
 conservés.071.6 et SLS-071 sont qualifiés ;101/102 et095 restent ouverts.
+
+
+### Diagnostic de l'armement de coupure du journal
+
+`execution-journal-control-diagnostic.mjs` porte SLS-123 : il exécute seulement
+la préparation originale et le scénario compteur/coupure/suivi d'API10, avec
+SSO réel et purge possédée. Zéro groupe qualifié, même si le diagnostic passe.
+Le helper `execution-journal-control-operator.py` conserve son premier échec
+structuré avant restitution, phase/métadonnées/tupleSQLite et traceback borné,
+sans stderr brut ni lecture de buffers applicatifs. L'ancien rouge et son
+programme figé restent séparés ; aucune faute ni requête n'est substituée.
+
+
+### Corrélation et préparation des budgets du journal
+
+`execution-journal-correlation-diagnostic.mjs` exécute les vrais appels d'API11
+et la purge d'une fonction sœur. Les références sont observées avant l'oracle :
+les événements reçu/enfile restent sans hash résolu ; admis/dispatché/terminé
+portent la révision, l'instance et le hash effectifs. La réponse complète de la
+fonction conservée doit rester identique avant/après purge du frère.
+
+`execution-journal-readers-budgets-diagnostic.mjs` prépare séparément API12,
+API05 et API06 avec les mêmes helpers : vrais lecteurs retenus/défaut natif,
+10000événements/+1 et16Mio/+1 issus des handlers. Ces clients diagnostiques
+comptent zéro groupe qualifié ; ils ne remplacent ni les douze API de la
+campagne complète, ni ses25communs frais et captures inspectées.
+
+
+`execution-journal-readers-diagnostic.mjs` isole les trois vagues et la faute
+réelle d'API12 pour SLS-126. Il conserve statut/code public/durée des deux GET
+avant assertions ; le helper garde au plus64openat de journal-read, classes de
+cheminsSQLite ou SHA borné, TID/retour/instant et dépassement. Le premier relevé
+conserve le matcher DBopenat et ses bornes. Aucun groupe qualifié n'est ajouté.
+
+
+Les trois vagues de capacitéAPI12 utilisent explicitement `reader-start` :
+affectation native initiale du nom journal-read, entrée prctl15 et sortie0
+recoupées, deuxTID distincts avantSQL. Après2,1s réelles, la jonction rend
+503/log_read_timeout. `read` historique conserve DBopenat ; `fault` conserve
+le véritable openat refuséEMFILE et la restauration avantPython. Aucun de ces
+modes ne remplace la preuve d'un autre.

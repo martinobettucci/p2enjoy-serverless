@@ -2,11 +2,19 @@
 
 ## [Non publié]
 
-- SLS-072 : [contrat des journaux](docs/EXECUTION_LOGS.md) décidé avant code.
-  Registre SQLite borné, migration011 additive, collecte finale expurgée,
-  rétention par service, recherche, suivi réautorisé et exports finis sont
-  spécifiés. La qualification exigera les parcours réels et la régression
-  complète sur011 ; aucune fonctionnalité ni preuve supplémentaire livrée.
+- SLS-128 : [mise à jour011→011 et reprise réelle de purge](docs/evidence/execution-journal-purge-recovery-dev-2026-11-22.json).
+  Les effacements de logs par fonction/service utilisent ORROLLBACK pour éviter
+  un sous-journalSQLite saturant/tmp16Mio. L'archive qui échouait passe202 puis
+  completed, sans consommationtmp observée ; parents retirés, compteurs0 et
+  5982originaux conservés. Les bornes+1, la voie service et les campagnes complètes
+  restent ouvertes ; ce préparatoire ne qualifie aucun groupe complet.
+
+- SLS-072 : registre, API, facettes et manuel compilé déployés en DEV sur
+  bf9b61a6/011 après [bascule gardée](docs/EXECUTION_LOG_DEPLOYMENT.md).
+  Deux sauvegardes natives et anciennes colonnes recoupées,42backend/quatreweb,
+  unité terminée et cgroup vide. Le [contrat](docs/EXECUTION_LOGS.md) reste à
+  qualifier :12API/10UI/25communs et régression complète ; aucun groupe
+  fonctionnel ajouté par cette bascule et aucun critère072 clôturé.
 
 - **SLS-118etSLS-070 sont clos** par [29groupes réels](docs/evidence/code-editor-control-interruption-dev-2026-11-22.json)
   sur474sourcesef71eb7/API046,26captures inspectées : deux SIGKILL137/HTTP502,

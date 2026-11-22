@@ -146,12 +146,14 @@ origine/IP et la gestion de jetons sont réservées aux sessions admin.
   Docker et historique avec journaux expurgés, selon Read ou la session admin ;
   [contrat des observations](ADMISSION.md#observations-et-cycle-du-contrôle).
 
-### Journaux avancés spécifiés — SLS-072
+<a id="journaux-avancés-spécifiés--sls-072"></a>
+### Journaux avancés déployés, qualification en cours — SLS-072
 
 Le [contrat détaillé](EXECUTION_LOGS.md) prévoit `GET /api/functions/{id}/logs`
 et `/api/services/{id}/logs`, leur export JSONL/texte et la politique de
-conservation `/api/services/{id}/log-policy`. Ces routes ne sont pas encore
-implémentées. Read conserve sa portée de fonctions sur liste, filtre, curseur
+conservation `/api/services/{id}/log-policy`. Ces routes sont implémentées et
+déployées en DEV sur1aa70214/011 ; leur qualification E2E reste à produire.
+Read conserve sa portée de fonctions sur liste, filtre, curseur
 et export ; la modification de politique reste admin, CSRF et If-Match.
 Chaque lecture réautorise, y compris après son IO borné. Recherche, snapshots,
 suivi, perte de conservation et téléchargements ont des limites explicites ;

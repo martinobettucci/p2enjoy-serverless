@@ -22,6 +22,8 @@
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULES.md#preuves-e2e-attendues
 # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_ARCHIVE_LIMITS.md#reprise-du-banc-sur-le-contrôle-courant--22-novembre-2026
 # @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_ARCHIVE_LIMITS.md#reprise-du-banc-sur-le-contrôle-courant--22-novembre-2026
+# @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#découpage-et-qualification-réels
+# @verifies docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#découpage-et-qualification-réels
 """Read-only physical recoup of completed, API-created storage console campaigns.
 
 Run as root on the DEV SPARK with one JSON argument mapping namespace UUIDs
@@ -80,7 +82,7 @@ with read_control(state / 'control.sqlite3') as db:
         # @verifies docs/CODE_EDITOR_UI_CONCURRENCY.md#jonction-nettoyage-et-clôture
         # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md#quatre-groupes-ciblés-puis-25-communs-frais
         # @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md#quatre-groupes-ciblés-puis-25-communs-frais
-        assert row and row['deleted_at'] is not None and re.fullmatch(r'(?:(storage-console-api|storage-ui|storage-recovery|storage-validation|service-configuration|service-transport|invocation-url-transport|invocation-addresses(?:-ui)?|invocation-route-cycles|invocation-route-pause|source-access|invocation-pagination-(?:ui|cli)|validator-names|function-versions|version-cli|version-upload-capacity|version-duplicate-recovery|version-state-transport|deploy|publication-api|cli|publication-recovery|storage-api|invocation|code-editor-archive-limits|code-editor-read-concurrency|code-editor-control-interruption|scheduled-functions)-[0-9a-f]{8}|function-catalogue-(?:api|ui)-[0-9a-f]{8}(?:-[a-z0-9_-]{1,32})?)', row['name']), 'owned_campaign_required'
+        assert row and row['deleted_at'] is not None and re.fullmatch(r'(?:(storage-console-api|storage-ui|storage-recovery|storage-validation|service-configuration|service-transport|invocation-url-transport|invocation-addresses(?:-ui)?|invocation-route-cycles|invocation-route-pause|source-access|invocation-pagination-(?:ui|cli)|validator-names|function-versions|version-cli|version-upload-capacity|version-duplicate-recovery|version-state-transport|deploy|publication-api|cli|publication-recovery|storage-api|invocation|code-editor-archive-limits|code-editor-read-concurrency|code-editor-control-interruption|execution-journal-(?:api|ui)|scheduled-functions)-[0-9a-f]{8}|function-catalogue-(?:api|ui)-[0-9a-f]{8}(?:-[a-z0-9_-]{1,32})?)', row['name']), 'owned_campaign_required'
         actual = {r[0] for r in db.execute('SELECT f.id FROM functions f JOIN services s ON s.id=f.service_id WHERE s.namespace_id=?', (namespace,))}
         assert actual == set(functions), 'campaign_inventory_mismatch'
         assert not db.execute('SELECT 1 FROM services WHERE namespace_id=? AND deleted_at IS NULL', (namespace,)).fetchone(), 'live_campaign_service'

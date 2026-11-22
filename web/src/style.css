@@ -222,3 +222,11 @@ td {overflow-wrap:anywhere;}
 .tester-body {white-space:pre;overflow:auto;}
 .tester-response {margin:var(--space-4) 0;}
 @media (max-width:767px) {.tester-pair {grid-template-columns:minmax(0,1fr);}.tester-pair>button {justify-self:start;}}
+
+/* @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#console-et-manuel | docs/DESIGN_SYSTEM_APP.md | docs/manual.md */
+.journal-content,.journal-filters,.journal-events article,.journal-events .stack {min-width:0;}
+.journal-controls {align-items:end;}
+.journal-correlation>.form-grid {margin-top:var(--space-4);}
+.journal-events .observation-heading h3 {display:flex;align-items:center;gap:var(--space-2);}
+.journal-message-preview {margin:var(--space-3) 0;white-space:pre-wrap;}
+.journal-events .invocation-log {max-width:100%;min-width:0;white-space:pre;overflow-wrap:normal;}

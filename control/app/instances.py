@@ -155,7 +155,9 @@ class Instance:
                         data=json.loads(await reader.readexactly(int(length)))
                         if not isinstance(data,dict) or data.get('invocation_id')!=self.job['invocation_id'] or type(data.get('handler_started')) is not bool:
                             raise ValidationError('protocol_invalid')
-                        clean={'handler_started':data['handler_started'],**redact_logs(data.get('logs',''),data.get('logs_truncated'),self.secrets)}
+                        # @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#collecte-et-événements
+                        clean={'handler_started':data['handler_started'],'logs_collected':True,
+                               **redact_logs(data.get('logs',''),data.get('logs_truncated'),self.secrets)}
                         if data.get('state')=='succeeded':clean.update(state='succeeded',response=response(data.get('response')))
                         elif data.get('state')=='failed' and data.get('error') in INVOCATION_ERRORS:clean.update(state='failed',error=data['error'])
                         else:raise ValidationError('protocol_invalid')
@@ -277,7 +279,8 @@ class Instance:
             return {'state':'failed','error':code if removed else 'cleanup_failed','invocation_id':invocation_id,'instance_id':self.id,
                     'elapsed_seconds':round(time.monotonic()-started,6),'instance_available':False,
                     'handler_started':result['handler_started'] if result else True if self.started_observed else None if self.claimed else False,'logs':result.get('logs','') if result else '',
-                    'logs_truncated':bool(result and result.get('logs_truncated')),'container_removed':removed}
+                    'logs_truncated':bool(result and result.get('logs_truncated')),
+                    'logs_collected':bool(result and result.get('logs_collected')),'container_removed':removed}
         except BaseException:
             await self.close();raise
         finally:

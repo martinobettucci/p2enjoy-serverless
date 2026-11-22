@@ -10161,3 +10161,16 @@ prepare-update011→011 est codée et relue, sans bascule encore exécutée. Rep
 la lancer, qualifier la purge de l'archive possédée et le retrait des parents,
 puis les deux corpus et les campagnes propres/communes. L'ancien rapport reste
 cleanupfalse et aucune qualification complète n'est annoncée.
+
+
+### 22 novembre 2026 — Reprise128 réussie sur le code déployé
+
+L'unité20da0f11 termineinactive/Resultsuccess avec16clientsDockerjoints. La
+candidatebf9b61a6 conserve exactement schema011, tables et collection nonvide
+au backupfinal. Le POSTde reprise rend202 puiscompleted ; le relevéRO garde
+16Mio libres dans/tmp, sansFDtemporaire observé. L'archive retenue et ses parents
+sont purgés, huit compteurs0 et5982originaux recoupés. Cette reprise ne réécrit
+pas le premier rouge et n'ajoute aucun groupe complet. Le checkpoint source
+regroupe le registre/API/console réellement construits, ses fixtures et bancs ;
+qualification12API/10UI/25communs et régression entière restent ouvertes.
+Prochain geste : diagnostic clavier124 sur le même web, puis campagnes finales.

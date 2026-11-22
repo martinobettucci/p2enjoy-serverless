@@ -340,7 +340,8 @@ existant, sans valeur claire enregistrée par le testeur. La
 [preuve31](evidence/function-http-client-task-exception-dev-2026-11-12.json) recoupe dix migrations,
 intégrité/FK, propriétaires1001 et réservations nulles après l’exception réelle.
 
-## Journaux d'exécution — migration011 spécifiée, non appliquée
+<a id="journaux-dexécution--migration011-spécifiée-non-appliquée"></a>
+## Journaux d'exécution — migration011 appliquée en DEV
 
 [SLS-072](EXECUTION_LOGS.md) ajoute un registre distinct de l'audit de sécurité.
 `execution_log_events` conserve une séquence autoincrémentée, un UUID public,
@@ -372,4 +373,8 @@ la suppression du service retire sa politique et ses contenus.
 Aucun historique d'événements de plateforme n'est fabriqué à la migration.
 La sauvegarde native, le déploiement gardé et le retour sans écrasement des
 écritures acceptées suivent le [contrat de déploiement](EXECUTION_LOGS.md#déploiement-et-retour).
-À ce checkpoint, le produit déployé reste en010 et aucune preuve011 n'est acquise.
+Le22novembre2026, la [bascule gardée](EXECUTION_LOG_DEPLOYMENT.md) applique011
+sur l'image1aa70214. Deux sauvegardes natives, intégrité/FK, anciennes colonnes,
+UUID de collection et compteurs nuls sont recoupés ; aucun fichier de sauvegarde
+ne remplace la base. Les preuves fonctionnelles et régressions restent ouvertes
+dans072, dont la continuité de rétention091.3.

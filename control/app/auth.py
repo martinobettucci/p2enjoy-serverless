@@ -336,17 +336,23 @@ class Identity:
         return Authorization(actor,key,row['tokens_cipher'])
 
     # @spec docs/BACKLOG.md#sls-030 | docs/DEPLOYMENT.md#intégration-au-contrôle
-    def recheck(self,db,authorization,service_id,right,function_id):
+    # @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#api-droits-et-snapshots
+    def recheck(self,db,authorization,service_id,right,function_id,*,service_read=False):
+        if service_read and (right!='read' or function_id is not None):
+            raise ValueError('service_read_requires_read_without_function')
         actor=authorization.actor;now=time.time()
         if actor.kind=='admin':
             row=db.execute('SELECT * FROM sessions WHERE digest=?',(authorization.credential_digest,)).fetchone()
             if (not row or row['subject']!=actor.id or row['expires_at']<=now or row['access_expires_at']<=now or
                 row['tokens_cipher']!=authorization.tokens_cipher):
                 raise HTTPException(401,'La session a changé ou expiré pendant cette opération.')
+            return actor
         else:
             row=db.execute('SELECT * FROM service_tokens WHERE id=? AND digest=?',(actor.id,authorization.credential_digest)).fetchone()
             if not row or row['revoked_at'] is not None or (row['expires_at'] is not None and row['expires_at']<=now):
                 raise HTTPException(401,'Le jeton du service est invalide, expiré ou révoqué.')
             functions=json.loads(row['function_ids_json']) if row['function_ids_json'] is not None else None
-            if row['service_id']!=service_id or right not in json.loads(row['rights_json']) or (functions is not None and function_id not in functions):
+            rights=tuple(json.loads(row['rights_json']))
+            if row['service_id']!=service_id or right not in rights or (functions is not None and function_id not in functions and not service_read):
                 raise HTTPException(403,'Les droits ont changé pendant cette opération.')
+            return Actor('token',row['id'],service_id,rights,tuple(functions) if functions is not None else None)

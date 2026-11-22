@@ -1,5 +1,6 @@
 // @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md
 // URL state, bounded selectors and read-only catalogue share this contract.
+// @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#console-et-manuel | docs/DESIGN_SYSTEM_APP.md
 import React, {useEffect, useRef, useState} from 'react';
 import {ChevronLeft, ChevronRight, RefreshCw} from 'lucide-react';
 import {api} from './api';
@@ -67,12 +68,12 @@ function useRead(url){
   return {...(state.key===url?state:{loading:true}),reload:()=>{setState({key:url,loading:true});setRevision(v=>v+1);}};
 }
 
-function Pages({page,total,pageSize,change,label='Pagination des fonctions'}){
+export function Pages({page,total,pageSize,change,label='Pagination des fonctions',disabled=false}){
   const pages=Math.max(1,Math.ceil(total/pageSize));
   return <nav className="pagination" aria-label={label}>
-    <button type="button" disabled={page<=1} onClick={()=>change(page-1)}><ChevronLeft aria-hidden="true"/>Précédente</button>
+    <button type="button" disabled={disabled || page<=1} onClick={()=>change(page-1)}><ChevronLeft aria-hidden="true"/>Précédente</button>
     <span>Page {page} sur {pages}</span>
-    <button type="button" disabled={page>=pages} onClick={()=>change(page+1)}>Suivante<ChevronRight aria-hidden="true"/></button>
+    <button type="button" disabled={disabled || page>=pages} onClick={()=>change(page+1)}>Suivante<ChevronRight aria-hidden="true"/></button>
   </nav>;
 }
 

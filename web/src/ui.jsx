@@ -57,7 +57,7 @@ export function Pagination({page, size, count, change}) {
 }
 
 // @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_EXECUTION.md#catalogue-cli-console-et-manuel | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md
-export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirmationLabel = 'Confirmer la création', confirmationTone = 'primary', preserveConfirmationOnError = false, focusTarget, children, onSubmit, onClose, confirmation}) {
+export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirmationLabel = 'Confirmer la création', confirmationTone = 'primary', preserveConfirmationOnError = false, focusTarget, children, onSubmit, onClose, confirmation, confirmationWhen, submitDisabled = false}) {
   const [value, setValue] = useState(initial);
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -96,8 +96,9 @@ export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirm
   function close() {if (!busy) {if (dirty) setDiscard(true); else onClose();}}
   async function submit(event,confirmed=false) {
     event?.preventDefault();
-    if (busy || discard) return;
-    if (confirmation && !confirmed) {setReview(true);return;}
+    if (busy || discard || submitDisabled) return;
+    // @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#console-et-manuel | docs/DESIGN_SYSTEM_APP.md | docs/manual.md
+    if (confirmation && (!confirmationWhen || confirmationWhen(value)) && !confirmed) {setReview(true);return;}
     setBusy(true); setError(null);
     try {await onSubmit(value); onClose();}
     catch (err) {focusAfterError.current=true;setError(err);if (!preserveConfirmationOnError) setReview(false);}
@@ -113,9 +114,9 @@ export function DialogForm({title, initial, submitLabel = 'Enregistrer', confirm
           <button className="danger" type="button" onClick={onClose}>Abandonner</button>
         </div></div> : review ? <div className="confirm" role="group" aria-label="Confirmation de l’opération">
           <p>{confirmation(value)}</p><div className="actions"><button ref={reviewRef} type="button" onClick={() => setReview(false)} disabled={busy}>Revenir à la saisie</button>
-            <button className={confirmationTone} type="button" disabled={busy} onClick={() => submit(null,true)}>{busy ? 'Enregistrement…' : confirmationLabel}</button></div>
+            <button className={confirmationTone} type="button" disabled={busy || submitDisabled} onClick={() => submit(null,true)}>{busy ? 'Enregistrement…' : confirmationLabel}</button></div>
         </div> : <div className="dialog-actions"><button type="button" onClick={close} disabled={busy}>Annuler</button>
-        <button className="primary" disabled={busy}>{busy ? 'Enregistrement…' : submitLabel}</button></div>}
+        <button className="primary" disabled={busy || submitDisabled}>{busy ? 'Enregistrement…' : submitLabel}</button></div>}
     </form>
   </dialog>;
 }
