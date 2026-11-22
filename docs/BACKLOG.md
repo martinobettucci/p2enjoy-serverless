@@ -72,6 +72,7 @@ bloquée est sautée et son blocage est nommé.
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
+| 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
 | 5 | [SLS-083](#sls-083) Limites et en-têtes alignés sur Scaleway | Développer | `[ ]` | SLS-040 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md), [EXECUTION](EXECUTION.md) |
 | 5 | [SLS-080](#sls-080) Compatibilité du projet de référence | Développer | `[~]` | SLS-078, SLS-083 | [REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md) |
@@ -3491,3 +3492,33 @@ Purge physique, compteurs0,38backend/quatreweb/010/manuel/notes/config/budgets/
 référence/5982originaux recoupés. Le premier rouge ajoute0groupe. Les sources
 serveur inchangées et les preuves historiques rapprochées ferment070.3/.5 ;
 les autres unités et la clôture globale095 restent ouvertes.
+
+<a id="sls-119"></a>
+## SLS-119 — Refuser une réponse JSON de gestion incomplète
+
+Statut : [ ] — constat statique découvert pendant SLS-072 ; aucune reproduction
+réelle ni correction du client commun encore acquise.
+Nature : Corriger. Dépend de : SLS-020. Ordre : 3.
+
+Constat : [web/src/api.js](../web/src/api.js) remplace toute erreur de lecture
+JSON par `{}` avant de vérifier le statut HTTP. Un corps incomplet sous statut
+2xx peut ainsi être rendu au consommateur comme une réussite. La cause est
+localisée ; l'effet réel sur les parcours existants reste à reproduire. Le
+comportement commun reste inchangé pendant la préparation de SLS-072.
+
+Résultat attendu : une réponse JSON non lisible ne confirme pas une opération
+et ne transforme pas une lecture incomplète en données par défaut.
+
+- [ ] SLS-119.1 Reproduire sur une vraie réponse de contrôle : en-têtes2xx et
+  corps incomplet observés, défaut natif possédé avec garde de restitution,
+  test échoué conservé avant correction. Aucun serveur ou flux substitué.
+- [ ] SLS-119.2 Rejeter cette réponse dans le client commun ; conserver les
+  refus HTTP réels, distinguer protocole incomplet et refus métier, et garder
+  une mutation non acquittée sans rejeu automatique.
+- [ ] SLS-119.3 Prouver les lectures et écritures concernées dans la vraie UI :
+  erreur lisible, aucun faux message de réussite ni ancien contenu présenté
+  comme nouveau résultat, relecture explicite et ressource native recoupée.
+  Rejouer les consommateurs touchés et les critères communs, captures ouvertes.
+
+À mettre à jour lors de la réalisation : contrat du client de gestion dans
+`CONTROL.md`, manuel, `DESIGN_SYSTEM_APP.md`, preuve et inventaire de régression.

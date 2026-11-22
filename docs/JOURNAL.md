@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — réponse JSON du client commun inscrite en119
+
+En préparant les coupures de réponse072, lecture de api.js : une erreur de
+response.json est remplacée par un objet vide, y compris sous2xx. Le constat
+hors du nouveau journal est inscrit dans119 avant traitement. Pas de correction
+du helper commun à ce stade : reproduction réelle et test échoué doivent
+précéder sa correction, puis régressions des consommateurs existants. Les
+nouveaux DTO de journal/politique devront eux-mêmes être contrôlés avant usage.
+
 ## 22 novembre 2026 — deux budgets isolables et corrélation historique072
 
 Avant adaptation du code : le volume du registre passe du choix initial32Mio
