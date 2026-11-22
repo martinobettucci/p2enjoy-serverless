@@ -1,5 +1,13 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — contrat116 rattaché au gel de reprise
+
+Le contrat de l’image de retour entre dans l’index, désormais463sources. Le
+produit construit046 et ses38backend/quatreweb restent identiques ; ce raccord
+de preuve n’affecte aucun fichier copié par le Dockerfile. Les462sources des
+arrêts et du build précédent restent dans leurs preuves d’époque. Reconstruction
+isolée, disponibilité du retour, nouvelle bascule et36E2E restent requises.
+
 ## 22 novembre 2026 — prérequis d’image absent établi, reprise116 décidée
 
 Diagnosticreadonly terminé64947/sortie0, API433a9 et référence inchangées. Docker
