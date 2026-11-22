@@ -70,7 +70,8 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
-| 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
+| 3 | [SLS-118](#sls-118) Acquisition de la validation du banc éditeur | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_CONTROL_WINDOW](CODE_EDITOR_CONTROL_WINDOW.md) |
+| 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074, SLS-118 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -1058,8 +1059,11 @@ Critères d'acceptation :
   Le [contrat de coupures du contrôle](CODE_EDITOR_CONTROL_INTERRUPTION.md) fixe
   avant code les deux SIGKILL du POST éditeur, la persistance native/API/UI et
   les gardes inchangées ; quatre groupes ciblés puis25communs restent à exécuter.
-  Client HTTPS/UI, packager18 002entrées et opérateur avant POST préparés ;
-  syntaxes contrôlées, index473sources. Aucune coupure exécutée à ce checkpoint.
+  Le [premier passage](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json)
+  4a5d67d/473 échoue : receiving réellement coupé et repris, puis fenêtre20s
+  validating non acquise, sans seconde coupure. Zéro groupe qualifié, trois
+  handlers, deux captures desktop inspectées et purge physique. [118](#sls-118)
+  fixe avant correction une base compacte pour validating, sans changer les gardes.
 - [x] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
   [Rapprochement des quatre preuves](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies) :
@@ -3449,3 +3453,31 @@ Neuf candidats4publiés/5échoués et quatre révisions recoupés. Les32captures
 inspectées ;38backend/quatreweb,010/manuel/notes/configuration/budgets/référence/
 5982originaux conservés. Les fins HTTP inconnues restent inconnues ; aucune
 coupure du contrôle ni persistance après restart acquise par cette campagne.
+
+<a id="sls-118"></a>
+## SLS-118 — Acquisition de la validation du banc éditeur
+
+Statut : [~] — premier rouge scellé, décision avant correction ; aucun replay
+positif acquis. Nature : Corriger (banc de preuve). Ordre :3, préalable à
+070.3/.5. Dépend de : SLS-063. Contrat :
+[CODE_EDITOR_CONTROL_WINDOW](CODE_EDITOR_CONTROL_WINDOW.md).
+
+- [x] SLS-118.1 Conserver le [premier échec](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json),
+  gel4a5d67d/473sources/API046, pilote11034 sortie1/joint : deux groupes passent
+  puis acquisition validating expirée20,007976929s/1535sondes, état receiving0444
+  encore observé. Une seule vraie coupure receiving137/HTTP502, deux gardes
+  terminées, trois handlers, deux JPEG desktop inspectés et purge physique ;
+  seconde requête ensuite200/publiée, aucune coupure validating ni vue mobile.
+  Zéro qualifié, aucun commun. Produit/notes/config/référence/5982originaux
+  conservés ; durée précise d’extraction et cause système non reconstruites.
+- [ ] SLS-118.2 Après persistance de la décision, garder le grand ZIP pour
+  receiving, publier un pilote C compact de deux vrais fichiers, abandonner
+  explicitement le brouillon déjà éprouvé et créer une nouvelle base C pour
+  validating. Même fonction/cible A/ETag, fenêtres20s/timer45s/protocole235s
+  et gardes à l’octet. Aucun produit ni dépendance substituée.
+- [ ] SLS-118.3 Nouveau gel et nouveau4+25réels : deux coupures137, seconde
+  restitution indépendante, API/UI du brouillon conservé dans les deux phases,
+  six handlers, sept candidats5pub/2failed, quatre révisions, déduplication,
+  quatre JPEG ciblés et22communs inspectés, purge physique/repos/conservations.
+  Le premier rouge reste exclu ;070.3/.5 exigent aussi le rapprochement avec
+  leurs preuves historiques, sans cumul de groupes.

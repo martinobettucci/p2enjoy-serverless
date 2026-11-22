@@ -1,5 +1,18 @@
 # Design system du produit
 
+## Coupures de l’éditeur — première observation échouée,22 novembre2026
+
+[Essai473sources](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json) :
+deux JPEG1440×1000 ouverts individuellement, tentativefailed/control_interrupted
+et fichier publication-marker.json relu avec son texte entier receiving-pilot.
+Titre avec contour de focus dans la seconde vue ; cadrages lisibles, marque
+à trois blocs, aucun défaut visuel bloquant observé. Champ de recherche étroit
+avec valeur partiellement masquée, titre principal entier. Ces images ne
+prouvent pas les effets serveur, SIGKILL, HTTP, handler, purge ou parcours
+clavier complet ; aucune vue mobile atteinte, zéro groupe qualifié.
+[118](CODE_EDITOR_CONTROL_WINDOW.md) prévoit le nouveau4+25avant toute clôture.
+Aucun changement de composant, CSS ou comportement utilisateur.
+
 ## APP-DS-002 — Composition de requête HTTP
 
 SLS-071 suit [CONSOLE_TESTER](CONSOLE_TESTER.md). Sa facette Tester est un outil

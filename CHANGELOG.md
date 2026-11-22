@@ -2,12 +2,18 @@
 
 ## [Non publié]
 
+- Le premier complément de coupures070 est [échoué](docs/evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json) :
+  une seule coupure receiving, fenêtre validating non atteinte20s, zéro qualifié.
+  Deux gardes terminées, trois handlers, deux JPEG inspectés et purge physique.
+  [118](docs/CODE_EDITOR_CONTROL_WINDOW.md) spécifie avant correction une base
+  compacte pour validating, sans changer les bornes ni les gardes ; nouveau29dû.
+
 - Contrat de qualification [SLS-070.3/.5](docs/CODE_EDITOR_CONTROL_INTERRUPTION.md)
   persisté avant code : deux interruptions physiques du POST éditeur, brouillon
   après redémarrage et nouvelle publication explicite ;29groupes encore à prouver.
   Aucun changement produit, image, manuel ou configuration officielle.
-  Client HTTPS/UI, paquet18 002entrées et opérateur natif préparés ; syntaxe
-  contrôlée, index473sources, aucune exécution réelle de ce complément.
+  Le client HTTPS/UI et son opérateur ont produit le premier rouge473sources
+  ci-dessus ; la correction118 est spécifiée et reste à implémenter.
 
 - SLS-117 est close par [32groupes réels](docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json) :
   fermeture Page/target et reprise du même UUID sans POST en1440/390px, mutation

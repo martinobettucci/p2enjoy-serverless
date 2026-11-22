@@ -3,7 +3,9 @@
 Contrat de qualification des critères [SLS-070.3 et SLS-070.5](BACKLOG.md#sls-070),
 persisté le 22 novembre 2026 avant le client et son opérateur. La continuité
 sans redémarrage reste acquise par [ses 32 groupes](evidence/code-editor-publication-continuity-dev-2026-11-22.json).
-Le présent complément ne modifie aucun comportement utilisateur, schéma,
+Le premier passage est [échoué](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json),
+zéro qualifié ; [SLS-118](CODE_EDITOR_CONTROL_WINDOW.md) fixe la correction
+contractuelle avant code. Le présent complément ne modifie aucun comportement utilisateur, schéma,
 manuel, image produit, route ou configuration officielle.
 
 ## Décision et frontières observables
@@ -27,15 +29,19 @@ qui impose la reprise de ces deux états, sans imposer un upload partiel.
 Les quatre connexions partielles et leur orphelin sont une autre preuve,
 déjà qualifiée dans les 32 groupes précités.
 
-Le paquet original utilise le handler `publication-recovery.cjs` du dépôt,
+Pour `receiving`, le paquet original utilise le handler `publication-recovery.cjs` du dépôt,
 son marqueur JSON et 18 000 fichiers texte originaux déterministes, non vides,
 dans un seul répertoire. Ce volume reste dans les limites qualifiées de
 20 000 fichiers et de 256 Mio extraits. Il allonge le vrai travail d'extraction
 sans fausse attente du serveur, sans substitution de dépendance et sans
 garantir artificiellement l'acquisition de la fenêtre. Une fenêtre manquée
 fait échouer l'essai ; aucun rejeu automatique ni coupure d'un état suivant.
-Le second marqueur utilise la vraie attente d'import de 8 000 ms déjà bornée
-par le handler, pour observer un validateur Docker vivant.
+Pour `validating`, publier d’abord un vrai pilote compact C à deux fichiers
+et créer explicitement un nouveau brouillon sur cette base, après la preuve
+de conservation et la publication de reprise B du grand brouillon. A reste
+le défaut et son ETag est conservé. Ce brouillon C modifié utilise la vraie
+attente d’import de8 000ms déjà bornée par le handler, pour observer un
+validateur Docker vivant. Le détail et le motif sont dans le contrat118.
 
 ## Propriété et armement avant POST
 
@@ -88,7 +94,7 @@ Pour `receiving`, observer un fichier ordinaire non vide sous le dossier exact
 du candidat, sans lien symbolique, déjà en mode `0444`. Le code ne pose ce mode
 qu’après fin du flux, flush et fsync, avant extraction. Le recouper après
 rétention du thread, puis vérifier le ZIP complet (répertoire central, compte
-exact des fichiers et CRC de chaque entrée), avec SHA et taille stables entre
+exact des fichiers (18 002pour receiving, deux pour validating) et CRC de chaque entrée), avec SHA et taille stables entre
 les deux relevés. Un fichier encore inscriptible n’acquitte pas cette frontière.
 
 Pour `validating`, identifier un seul
@@ -146,11 +152,12 @@ Il ne sert jamais à remplacer une publication échouée dans le rapport.
    explicite de A, première invocation Docker et brouillon enregistré.
 2. POST éditeur interrompu en `receiving`, restitution nominale, conservation
    native/API/UI sur ordinateur, invocation de A puis publication explicite du
-   brouillon et invocation de son hash pilote.
+   brouillon et invocation de son hash pilote B ; publication du pilote compact C
+   puis abandon/création explicites du nouveau brouillon sur C.
 3. POST éditeur interrompu en `validating`, perte du helper et restitution
    indépendante, mêmes preuves sur mobile, invocation de A puis nouveau pilote.
 4. Revalidation sans changement, même hash/révision, six invocations distinctes,
-   six candidats exactement possédés (quatre publiés, deux échoués), trois
+   sept candidats exactement possédés (cinq publiés, deux échoués), quatre
    révisions et deux gardes/coupures ; conservations et repos natif recoupés.
 
 Puis huit groupes manual-ui, huit public et neuf login-ui, frais, en série :
@@ -173,20 +180,24 @@ preuve positive et un rapprochement explicite avec leurs preuves déjà acquises
 (conflits, saisie non enregistrée, CJS/ESM, import refusé, hash/déduplication).
 Sans ces pièces, SLS-070 reste `[~]`.
 
-## Client préparatoire et état courant
+## Premier passage échoué et état courant
 
-Après le contrat `3b0b520` poussé, le client prévu est
-`node e2e/code-editor-control-interruption.mjs`, lancé depuis la racine, seul,
-avec identifiants SSO sur stdin privée JSON en mémoire. Il utilise
-`code-editor-control-interruption-package.py` et, sur le seul SPARK DEV comme
-root, `code-editor-control-interruption-operator.py`. Le second lit les deux
-littéraux historiques par AST, sans import exécutable, et en exige les SHA
-figés avant armement. L’inspecteur physique commun accepte seulement le nouveau
-préfixe déclaré, sous ses contrôles UUID et inventaire complet inchangés.
+Après le contrat3b0b520 poussé, le client et son opérateur distinct ont été
+committés4a5d67d, synchronisés puis exécutés sur473sources figées. Le premier
+[rouge scellé](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json)
+conserve receiving coupé137/repris et sa saisie relue API/UI, puis acquisition
+validating expirée sans deuxième coupure. Deux groupes passent, zéro qualifié,
+aucun commun ; trois handlers/deux captures desktop et purge physique recoupés.
+Les programmes de garde restent inchangés, notes/config/référence/originaux
+conservés. La durée système exacte de l’extraction reste inconnue.
 
-Le client, le paquet et l’opérateur sont préparés ; syntaxes JS/Python vérifiées,
-index473sources avec ce contrat. Aucun produit, image ou manuel changé.
-Aucun groupe ni coupure n’est exécuté sous ce contrat à ce checkpoint ;
-la relecture statique ne relève plus de blocage après recoupement du validateur
-après CRC et préservation de l’erreur primaire pendant le secours. La
-synchronisation et le gel précèdent le passage4+25 réel.
+Le client `node e2e/code-editor-control-interruption.mjs`, depuis la racine,
+reçoit le SSO sur stdin privée en mémoire. Il utilise son packager et
+`code-editor-control-interruption-operator.py` comme root sur le seul SPARK DEV.
+L’opérateur lit les gardes par AST sans import, exige leurs SHA figés, recoupe
+le validateur après ZIP/CRC et conserve les erreurs primaire/secours distinctes.
+Le lecteur physique commun garde ses contrôles UUID/inventaire complet.
+
+La décision118 prépare le replay4+25 sur deux bases réelles et les nouveaux
+comptages ci-dessus. Aucun code de cette correction ni replay positif n’est
+encore livré. Produit, manuel et image restent inchangés ;070.3/.5 ouverts.

@@ -1,15 +1,16 @@
 # Éditeur de code et brouillons persistants
 
-## Coupures du contrôle depuis l’éditeur — contrat avant code
+## Coupures du contrôle depuis l’éditeur — premier passage échoué
 
-Le [complément SLS-070.3/.5](CODE_EDITOR_CONTROL_INTERRUPTION.md) fixe deux vrais SIGKILL du POST
-éditeur : `receiving` avec ZIP entièrement reçu, puis `validating` avec Docker
-vivant et perte du helper. Gardes RESTORE/KILL_CONTROL inchangées, même API046,
-brouillon conservé et repris par API/UI, nouveau pilote explicite et déduplication.
-Le client `e2e/code-editor-control-interruption.mjs`, son packager original et son
-opérateur natif distinct sont préparés ; syntaxes contrôlées, index473sources.
-Quatre groupes ciblés puis25communs restent à exécuter ; aucune preuve acquise.
-Produit, manuel, images, schéma et configuration officielle restent inchangés.
+Le premier4+25 au gel4a5d67d/473sources s’arrête après deux groupes passés
+puis acquisition validating expirée20s : zéro qualifié, aucun commun. Une
+seule vraie coupure receiving137/HTTP502, brouillon relu API/UI sur ordinateur ;
+la seconde requête finit200/publiée sans coupure. Trois handlers, deux JPEG
+inspectés, deux gardes terminées et purge physique/repos recoupés.
+Le [contrat118](CODE_EDITOR_CONTROL_WINDOW.md) fixe avant correction une base compacte
+pour validating, en conservant20s/45s/235s et les gardes à l’octet ; nouveau
+4+25à produire. Produit, manuel, image et configuration officielle inchangés.
+
 
 
 Contrat de réalisation [SLS-070](BACKLOG.md#sls-070), décidé le11 novembre2026

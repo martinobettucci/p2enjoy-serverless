@@ -1,5 +1,31 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — acquisition validating expirée, décision118 avant correction
+
+[Preuve négative](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json)
+4a5d67d/473, pilote11034 sortie1/joint : deux groupes passent puis opérateur
+physical_phase_not_observed après20,007976929s/1535sondes, dernier receiving0444
+4133951octets à6,728039519s. Une seule coupure receiving137/502/control_interrupted
+et brouillon relu API/UI ; seconde requête ensuite200/publiée sans coupure,
+aucune UI mobile. Zéro qualifié, aucun commun ; trois handlers/deux JPEG ouverts
+individuellement, trois révisions et quatre candidats3pub/1failed. Deux gardes
+et helpers terminés ; purge physique et tous compteurs0. Manuel/produit/image
+inchangés,38backend/quatreweb/010/notes/config/budgets/référence/5982originaux
+recoupés. Gzip05090398/brut1ba4d580. Revue négative sans obstacle.
+
+Le collecteur RO natif a d’abord supposé MainPID sur un timer, KeyError conservé,
+puis lu ce champ optionnel comme le protocole existant. Aucun scénario rejoué.
+La durée précise d’extraction et une cause système restent inconnues.
+[118](CODE_EDITOR_CONTROL_WINDOW.md) est inscrit avant traitement : conserver
+le grand paquet pour receiving, publier un vrai pilote compact C et recréer
+explicitement le brouillon sur C pour validating. CibleA/ETag inchangés, deux
+SIGKILL et gardesinchangées, mêmes20s/45s/235s ; nouveau4+25, six invocations,
+sept candidats5pub/2failed et quatre révisions. Aucun code de correction écrit
+à ce checkpoint. Les trois orchestrateurs échoués sont conservés sans modification.
+Revue RO de la décision118 achevée sans obstacle : comptes7/5/2/4 cohérents,
+base compacte réelle et absence de promotion, baseline du rouge et deux prochains
+restarts distincts ; acquisition effective et positif29toujours à prouver.
+
 ## 22 novembre 2026 — client de coupures préparé après contrat poussé
 
 Le contrat3b0b520 précède les trois nouveaux fichiers de preuve. L’opérateur
