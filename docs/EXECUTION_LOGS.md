@@ -437,3 +437,14 @@ la valeur acquittée, avant son attente métier. Seul ce reçu postérieur au fs
 autorise le signal. Sa présence n'est pas un résultat de passerelle ni une
 réponse applicative : la preuve de non-rejeu compare les UUID et la lecture
 ultérieure explicite du compteur. Aucun hook de test n'est ajouté au produit.
+
+Cette coupure garde le protocole déjà qualifié45s/180s/10s (déclenchement du
+secours/alarme de restitution/sonde du reçu), avec nom propre au journal. La
+garde conserve le CID et l'image011 effectivement observés ; elle ne reconstruit
+ni046 ni un conteneur d'une autre image. Un mutateur Docker séparé conserve le
+verrou hérité jusqu'à son reçu137 et sa jonction. La restitution joint le seul
+traceur reconnu, attend ce verrou, contrôle le CID/génération/référence, puis
+redémarre ce même conteneur si nécessaire. Un démarrage est borné par ses vrais
+instants de demande/retour. Reçu terminal durable et garde entièrement jointe
+sont requis avant le nettoyage des fonctions. Les programmes historiques de
+coupure restent inchangés ; leurs résultats ne s'ajoutent pas à cette campagne.
