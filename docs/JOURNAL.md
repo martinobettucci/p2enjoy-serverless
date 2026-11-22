@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — replay de continuité préparé après diagnostic
+
+Après3d5554f poussé, le groupe5 utilise une fermeture réelle Page/target dans
+chacun des deux viewports. Chaque observateur porte son propre enregistrement,
+se joint et se détache avant le POST suivant. Les deux reçus, UUID possédés et
+l’ordre temporel sont consolidés ; la fin HTTP reste une observation distincte.
+SyntaxeJS et index469contrôlés ; revue du client et des trois programmes privés
+sans blocage. Nouveau7+25 non exécuté à ce checkpoint.
+Produit, images, schéma, fixtures et manuel inchangés ;117.3 et070 ouverts.
+
+
 ## 22 novembre 2026 — jonction Page acquise, replay32 décidé avant correction
 
 Le diagnostic1749ffe, 469 sources, termine avec succès sous le pilote17674,

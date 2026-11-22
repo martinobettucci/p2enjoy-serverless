@@ -289,3 +289,16 @@ conservations habituelles sont exigées. Les deux rouges et le diagnostic positi
 ajoutent zéro groupe aux32. Produit, images, routes, schéma, secrets, fixtures et
 manuel restent inchangés.117reste[~] et070reste ouverte pour persistance et
 interruptions ; aucun replay n’a encore été lancé.
+
+## Replay préparé, non exécuté
+
+Le client7+25 reprend le helper de fermeture acquis avec un enregistrement
+propre à chaque viewport. La méthode de jonction/détachement est appelée avant
+le POST suivant ; son instant et les deux reçus entrent dans le rapport.
+La consolidation exige un seul POST par variante et l’ordre de détachement,
+les deux destructions de targets, neuf invocations et les dix captures ciblées.
+Les UUID PW/CDP observés rejoignent l’ensemble de nettoyage possédé. Une erreur
+primaire est conservée si le détachement échoue aussi ; le nettoyage final
+rejoint les observateurs restants après fermeture du contexte, sans acquitter
+la confirmation nominale. SyntaxeJS et index469contrôlés, aucune exécution du
+replay à ce checkpoint. Les deux clients diagnostiques restent inchangés.

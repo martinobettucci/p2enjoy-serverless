@@ -5,7 +5,8 @@ est acquise comme diagnostic sur469sources1749ffe : trois étapes, trois
 invocations, trois captures desktop et purge physique, zéro groupe qualifié.
 [Le replay32](../docs/CODE_EDITOR_PUBLICATION_CONTINUITY.md) est décidé avant
 l’adaptation du client : deux viewports et jonction/détachement entre variantes.
-Aucun nouveau7+25 n’a encore été exécuté ;117et070restent ouvertes.
+Le client est adapté et non exécuté ; le gel du nouveau7+25 reste à qualifier.
+117et070restent ouvertes.
 
 
 Le [diagnostic réseau20s](../docs/evidence/code-editor-navigation-diagnostic-failed-dev-2026-11-22.json)
