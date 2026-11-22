@@ -14,6 +14,11 @@ partiels, zéro qualifié ; pas de25communs exécutés sur ce passage échoué.
 les499sources archivées avant exécution et le brut43182a4a. Le prochain diagnostic
 mesurera les vrais syscalls/threads et résultat HTTP sous les bornes existantes,
 sans présumer d'un défaut produit ni augmenter un délai.120.4 reste ouverte.
+Le diagnostic conserve un histogramme borné des vrais noms/syscalls,128fcntl
+maximum avec inode/type/portée/résultat et chronologie, plus le statut/délai du
+GET. Aucun buffer métier ou en-tête n'est lu ; le préfixe des cinq groupes
+reconstitue le même corpus par API/handlers. Ces observations n'ajoutent aucun
+groupe ni ne changent une condition de barrière ou un délai produit.
 
 ## 22 novembre 2026 — diagnostic120 prouvé, correction du client décidée
 

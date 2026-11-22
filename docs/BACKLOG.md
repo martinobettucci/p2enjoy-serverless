@@ -3600,6 +3600,16 @@ changer de produit pour satisfaire une hypothèse non mesurée du banc.
   sources/image recoupées, gardes/threads/consommateurs joints, purge physique
   et captures communes inspectées.120.4 et072 gardent leurs critères propres.
 
+Diagnostic retenu avant code : ajouter aux seuls reçus du banc un relevé borné
+des noms de workers et numéros de syscalls rencontrés, les128premiers fcntl des
+workers du journal (fd, identité du fichier, type/portée du verrou et résultat),
+leur première/dernière observation et les compteurs de dépassement. Ne lire ni
+en-têtes, ni corps, ni buffers applicatifs ; la mémoire lue se limite au struct
+flock déjà requis pour observer SQLite. Conserver le statut/délai/code public
+de la vraie requête même si la barrière échoue. Reproduire le préfixe réel des
+cinq groupes pour garder le même corpus de lecture ; ce diagnostic compte zéro
+groupe qualifié. Les ralentissements de ptrace ne valent pas performance normale.
+
 Premier rouge : [preuve](evidence/execution-journal-final-lock-first-failed-dev-2026-11-22.json),
 brutSHA `43182a4a…`, archive des499sources `09804d14…`. Le contrôle/référence,
 leur démarrage, configuration et originaux sont conservés. Cause non établie ;
