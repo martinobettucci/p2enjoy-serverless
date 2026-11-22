@@ -71,6 +71,7 @@ bloquée est sautée et son blocage est nommé.
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
+| 3 | [SLS-120](#sls-120) Frontière réelle du buffer de journaux | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -1342,8 +1343,12 @@ Tests exigés :
 <a id="sls-072"></a>
 ## SLS-072 — Journaux recherchables et corrélation d'exploitation
 
-Statut : [~] — contrat détaillé décidé ; journaux par invocation présents,
-vues, recherche, suivi et export non implémentés ni qualifiés.
+Statut : [~] — registre011, API, vues, recherche, suivi et export implémentés et
+déployés en DEV sur1aa70214 ; qualification fonctionnelle, visuelle et
+régressions encore à produire. La bascule gardée nominale est recoupée,
+sans groupe fonctionnel ajouté et sans clôture d'un critère ci-dessous.
+Le premier passage API s'arrête sur la frontière du buffer ; [SLS-120](#sls-120)
+porte son diagnostic et sa correction avant reprise de072.4.
 Nature : Développer. Dépend de : SLS-061, SLS-074. Ordre : 3.
 Contrat : [EXECUTION_LOGS](EXECUTION_LOGS.md), complétant
 [journaux](CONSOLE_USABILITY.md#journaux-et-corrélation).
@@ -3522,3 +3527,33 @@ et ne transforme pas une lecture incomplète en données par défaut.
 
 À mettre à jour lors de la réalisation : contrat du client de gestion dans
 `CONTROL.md`, manuel, `DESIGN_SYSTEM_APP.md`, preuve et inventaire de régression.
+
+<a id="sls-120"></a>
+## SLS-120 — Réconcilier la frontière réelle du buffer de journaux
+
+Statut : [~] — premier passage072 arrêté sur une assertion de frontière dans
+API04, après trois groupes passés ; zéro qualifié. Le nettoyage physique et
+les5982artefacts antérieurs sont recoupés. La cause est à établir par un témoin
+d'octets conservé ; ne pas attribuer l'échec au runtime sur cette seule assertion.
+Nature : Corriger. Dépend de : SLS-040. Ordre : 3.
+
+Résultat attendu : distinguer la borne brute du runtime et le buffer expurgé
+exposé par l'API, puis avoir un contrat et un client qui éprouvent exactement
+leurs limites sans affaiblir la protection des secrets ou masquer une perte.
+
+- [ ] SLS-120.1 Sceller le premier rouge sur1aa70214/498sources, son nettoyage
+  et sa conservation ; garder ses trois groupes partiels hors du total qualifié.
+- [ ] SLS-120.2 Diagnostic réel aux bornes65535/65536/65537 octets, avec et
+  sans secrets effectifs : conserver UUID, octets observés, empreinte et drapeaux
+  avant toute assertion. Éprouver aussi un secret traversant la frontière.
+  Aucune horloge, dépendance, réponse ou donnée SQL substituée.
+- [ ] SLS-120.3 Décision et motif persistés avant correction du contrat,
+  client ou produit concerné ; limites et expurgation restent contrôlées.
+  Le test échoué précède toute correction de comportement produit.
+- [ ] SLS-120.4 Rejouer API04 dans les douze groupes réels puis25communs frais,
+  avec sources/image recoupées, purge physique et captures communes inspectées.
+  Les dixUI et la régression complète de072 restent des preuves distinctes ;
+  aucun cumul de l'ancien échec et aucun critère072 validé par le seul diagnostic.
+
+À mettre à jour : contrat de collecte dans `EXECUTION_LOGS.md`/`EXECUTION.md`,
+preuve et clients ; manuel s'il décrit incorrectement le buffer expurgé.

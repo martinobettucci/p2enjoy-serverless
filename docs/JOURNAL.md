@@ -1,5 +1,34 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — premier passage API072 arrêté, diagnostic120
+
+Sur498sources et1aa70214, les groupes01/02/03 passent puis API04 échoue sur
+l'assertion de buffer, avant les frontières de projection1024 et les autres
+groupes. Le passage entier reste échoué, zéro qualifié. Son rapport UUID est
+conservé en gzip ; les deux fonctions, jetons et parents sont purgés/révoqués,
+le reçu physique est positif et les5982originaux gardent846904e1. Le wrapper
+et le client sont terminés/joints ; sources/image identiques avant/après.
+
+120 est inscrite avant traitement. Le diagnostic conservera les valeurs de
+65535/65536/65537, avec et sans secrets effectifs et secret à la frontière,
+avant décision de correction. La seule assertion de la première campagne ne
+permet pas d'attribuer une faute au runtime ni de relâcher l'expurgation.
+
+## 22 novembre 2026 — registre011 déployé, qualification072 ouverte
+
+La bascule supervisée vers1aa70214 réussit sur le seul SPARK DEV à11h00UTC.
+Le CID49a82269 remplace046 ; référence, configuration, budgets et chemins
+conservés. Deux sauvegardes natives ont le SHA0a517159 ; onze migrations,
+intégrité/FK et anciennes colonnes sont recoupées, ainsi que42backend/quatreweb.
+Le post vérifie le primaire réussi, puis les deux processus et le cgroup sont
+absents. Aucun ancien fichier de base n'est réinjecté. Après migration-intent,
+le protocole reste exclusivement en reprise011/correction en avant.
+
+Le code de journaux, ses facettes et le manuel compilé sont désormais présents
+en DEV ; aucune preuve fonctionnelle nouvelle n'est encore acquise. Les12API,
+10UI,25communs et la régression complète restent à exécuter, avec091.3 pour
+la rétention courante. Le backlog garde072 `[~]`, tous ses critères ouverts.
+
 ## 22 novembre 2026 — réponse JSON du client commun inscrite en119
 
 En préparant les coupures de réponse072, lecture de api.js : une erreur de
