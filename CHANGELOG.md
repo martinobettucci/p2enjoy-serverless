@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-072 : douzegroupes API complets passent sur f73, avec vrais budgets
+  10000/+1 et16Mio/+1, expirations, droits, refus, coupures, lecteurs et EMFILE.
+  Node/ressources joints et purgephysique recoupée ;10UI/25communs et régression
+  complète restent dus. La preuve ne qualifie pas le correctifSQL133 nondéployé.
+
 - SLS-132.4 : propres échéances90/5 de l’exporteur éprouvées dans troisunités
   DEV, dont alarmpending pendant lefinally ; tempsrestant/oracles stricts,
   descendants récollectés, unités libérées et canoniques/services identiques.
