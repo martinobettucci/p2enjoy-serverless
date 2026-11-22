@@ -3222,3 +3222,12 @@ Le stderrpilote de touslesmodes est conservé en privé (SHAcomplet et préfixe1
 avec fin de flux et jonction distinctes ; dépassement rend la campagne rouge.
 Les oracles de rétention et les limites restent inchangés.
 Contrat : [INVOCATION_SOURCE_RETENTION_VOLUME](../docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134).
+
+
+Le mode `node e2e/invocation-source-retention-volume.mjs --driver-stderr-overflow`
+éprouve le plafond avec les vrais diagnostics d’import Python des helpers gelés,
+après SSO/publications/deuxinstances chaudes. Il purge et restitue avantW−60,
+puis doit finir1/completedfalse avec driver_stderr_overflowtrue. Ce résultat
+rouge attendu se qualifie dans un wrapper distinct ; aucun groupe nominal de
+rétention n’en découle. Production/transfert30s, lecturesnatives40s/commande,
+client90s et jonctions5s ont leurs mesures séparées dans le reçu.

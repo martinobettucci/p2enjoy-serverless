@@ -17,15 +17,16 @@ const helper='/srv/p2enjoy-serverless/e2e/storage-legacy-environment.py',out=new
 const options=process.argv.slice(2),observerRefusal=options.length===1&&options[0]==='--observer-refusal';
 const observerDeadline=options.length===1&&options[0]==='--observer-global-deadline'?'global-alarm':options.length===1&&options[0]==='--observer-command-timeout'?'command-timeout':options.length===1&&options[0]==='--observer-detach-failure'?'detach-failure':null;
 const productionProfile=options.length===1&&options[0]==='--production-profile';
-const observerDiagnostic=observerRefusal||Boolean(observerDeadline);
+const driverOverflow=options.length===1&&options[0]==='--driver-stderr-overflow';
+const observerDiagnostic=observerRefusal||Boolean(observerDeadline)||driverOverflow;
 assert(options.length===0||observerDiagnostic||productionProfile,'unknown_source_retention_options');
-const report=new URL((productionProfile?'invocation-source-production-profile-':observerDeadline?'invocation-source-observer-'+observerDeadline+'-':observerRefusal?'invocation-source-observer-refusal-':'invocation-source-retention-volume-')+campaign+'.json',out),events=[],checks=[],observations=[],functions=[],responses=[],producers=[];
+const report=new URL((driverOverflow?'invocation-source-driver-stderr-overflow-':productionProfile?'invocation-source-production-profile-':observerDeadline?'invocation-source-observer-'+observerDeadline+'-':observerRefusal?'invocation-source-observer-refusal-':'invocation-source-retention-volume-')+campaign+'.json',out),events=[],checks=[],observations=[],functions=[],responses=[],producers=[];
 // @verifies docs/BACKLOG.md#sls-134 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134
 const driverErrors=[],driverErrorHash=createHash('sha256'),driverErrorLimit=1024*1024;
 let driverErrorBytes=0,driverErrorStored=0,driverStderr;
 let caller,stopProducing=false,saveQueue=Promise.resolve(),window,lastCall;
 let child,ended=false,exitCode=null,browser,context,admin,session,namespace,service,reader,work,archive,completed=false,cleanup=false,failure=null,restoration;
-function save(){saveQueue=saveQueue.then(async()=>{const p=new URL(report.pathname+'.pending','file:');await writeFile(p,JSON.stringify({campaign,mode:productionProfile?'production-profile':observerDeadline??(observerRefusal?'observer-refusal':'count'),...(productionProfile?{qualified_groups:0}:{}),completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,responses,function_ids:functions.map(v=>v.id),namespace_id:namespace?.id,exit_code:exitCode,failure,restoration,driver_stderr:driverStderr},null,2)+'\n',{mode:0o600});await rename(p,report);});return saveQueue;}
+function save(){saveQueue=saveQueue.then(async()=>{const p=new URL(report.pathname+'.pending','file:');await writeFile(p,JSON.stringify({campaign,mode:driverOverflow?'driver-stderr-overflow':productionProfile?'production-profile':observerDeadline??(observerRefusal?'observer-refusal':'count'),...(productionProfile?{qualified_groups:0}:{}),completed:completed&&cleanup&&!failure,cleanup,skipped:0,checks,events,observations,responses,function_ids:functions.map(v=>v.id),namespace_id:namespace?.id,exit_code:exitCode,failure,restoration,driver_stderr:driverStderr},null,2)+'\n',{mode:0o600});await rename(p,report);});return saveQueue;}
 async function until(action,message,seconds=90){const deadline=Date.now()+seconds*1000;while(Date.now()<deadline){const v=await action();if(v)return v;await new Promise(r=>setTimeout(r,250));}assert.fail(message);}
 async function event(name){return until(()=>{const v=events.find(v=>v.event===name);assert(v||!ended,'deployment_driver_stopped');return v;},'deployment_event_missing',150);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}finally{await save();}}
@@ -301,10 +302,21 @@ try{
   work=await mkdtemp(new URL('retention-observation-code-',out).pathname);archive=(await publicationArchive(work,'retention-volume','protected-retention-observation.handler',['protected-retention-observation.cjs'])).bytes;
   for(const name of (productionProfile?['first-profile-stream','second-profile-stream']:['first-retention-stream','second-retention-stream'])){const fn=await api(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'protected-retention-observation.handler',cpu:.5,memory_mib:128,timeout_seconds:10,idle_seconds:0,min_instances:1,max_instances:1,concurrency:1,queue_timeout_seconds:30,storage:{concurrency:'shared',data:{enabled:false,quota_mib:2},cache:{enabled:false,quota_mib:2}}}}});functions.push(fn);if(functions.length===2){const date=new Date(window*1000);fn.schedules=[{cron:`${date.getUTCMinutes()} ${date.getUTCHours()} * * *`,enabled:true,timezone:'UTC'}];}await save();fn.hash=await publish(fn);await promote(fn,fn.hash);}
   initial=await until(async()=>{const s=await capacity();return s.instances.length===2&&s.instances.every(v=>v.state==='ready')?s:false;},'two_warm_instances_missing');terminal(initial,0);assert.equal(initial.instances.reduce((n,v)=>n+v.cpu_nanos,0),1000000000);assert.equal(initial.instances.reduce((n,v)=>n+v.memory_mib,0),256);assert.equal(initial.containers.length,2);for(const c of initial.containers)assert(c.running&&c.cpu_nanos===500000000&&c.memory_bytes===128*1024**2);observations.push({scenario:'initial-warm-instances',native:initial});if(observerDeadline){const consumers=await deadlineConsumersBefore(initial);observations.push({scenario:'source-deadline-consumers-before',native:consumers});}
-  if(observerDiagnostic){assert(Date.now()/1000<window-30,'preparation_margin_before_cron_exhausted');assert.equal(responses.length,0);observations.push({scenario:'underfilled-history-before-boundary',window,native:initial});await save();return;}
+  if(observerDiagnostic){assert(Date.now()/1000<window-30,'preparation_margin_before_cron_exhausted');assert.equal(responses.length,0);observations.push({scenario:driverOverflow?'driver-output-before-boundary':'underfilled-history-before-boundary',window,native:initial});await save();return;}
   const perFunction=productionProfile?3000:5000;await streams(0,perFunction);assert.equal(responses.length,perFunction*2);before=await capacity();terminal(before,perFunction*2);assert.deepEqual(before.invocations.map(v=>v.id).sort(),responses.map(v=>v.id).sort());for(const fn of functions)assert.equal(responses.filter(v=>v.function_id===fn.id).length,perFunction);assert(Date.now()/1000<window-60,'production_margin_before_cron_exhausted');observations.push({scenario:productionProfile?'six-thousand-diagnostic-invocations':'ten-thousand-ordinary-invocations',window,native:before});await save();
  });
- if(productionProfile){
+ if(driverOverflow){
+ await check('Flux réel du pilote au-delà1Mio, deux purges publiques et restitution jointe',async()=>{
+  assert(Date.now()/1000<window-60,'driver_output_margin_before_cron_exhausted');
+  const native=await operation('diagnose-import-output',{functions:functions.map(v=>v.id),window});
+  observations.push({scenario:'real-driver-stderr-overflow',native});await save();
+  assert(native.completed&&native.qualified_groups===0&&native.stderr_bytes>driverErrorLimit&&native.prefix_bytes===driverErrorLimit&&native.same_container_and_instances);
+  assert(native.production_seconds>0&&native.production_seconds<=30&&native.preflight_seconds>=0&&native.postflight_seconds>=0&&native.total_seconds<90);
+  assert(native.children.length<=12&&native.children.every(c=>c.completed&&c.group_joined&&c.returncode===0));
+  const current=await capacity();terminal(current,0);assert.equal(responses.length,0);assert(Date.now()/1000<window-60,'driver_output_margin_before_cron_exhausted');
+  await purgeAndRestore();assert(Date.now()/1000<window-60,'driver_output_cleanup_frontier_missed');
+ });
+ }else if(productionProfile){
  await check('Relevé SQL final6000 puis deux purges publiques et restitution jointe',async()=>{await productionSqlProfile('complete');await purgeAndRestore();});
  }else if(!observerDiagnostic){
  await check('Source exclue avant clôture puis recomptée : trois ensembles exacts10002→10001→10000',async()=>{

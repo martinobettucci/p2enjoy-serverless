@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-134.2 : cas E2E du dépassementstderr préparé avec vrais importsPython
+  de helpersgelés, enfants/sessions/groupes joints et sorties bornées. Envoi
+  nonbloquant sous30s de production, mesuresavant/après/total distinctes ;
+  nettoyagepublic puis résultatclientrouge attendu. Syntaxes/revue seules
+  acquises ; seuil et jonctions réels restent à éprouver.
+
 - SLS-134.3 : deuxgroupes réels du refus aprèsattache passent surf016 ;
   SHA/source/ligne136/phase et waitpidbrut8390015 recoupés, stderr476octets
   complet, fermetures/restitution/0compteurs vérifiés. Nominal, consommateurs

@@ -958,6 +958,106 @@ def instance_limit_observation(item):
         'containers':containers,'official_configuration_unchanged':True,'original_control_stopped':True}
 
 
+
+# @verifies docs/BACKLOG.md#sls-134 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#dépassement-réel-du-fluxstderr
+def diagnose_import_output(item,request):
+    started=time.monotonic();started_at_ns=time.time_ns()
+    import selectors
+    from datetime import datetime,timezone
+    from retention_current_images import group_members
+    assert item['mode']=='instance-limit' and item['guard_seconds']==2700
+    assert not item.get('firing_replay') and not item.get('retention_replay')
+    assert set(request)=={'op','functions','window'}
+    identifiers=request['functions'];window=request['window']
+    assert len(identifiers)==len(set(identifiers))==2 and all(str(UUID(v))==v for v in identifiers)
+    assert type(window)is int and window%300==0 and time.time()<window-60
+    before=instance_limit_observation(item)
+    def quiet(state):
+        assert sorted(v['id'] for v in state['functions'] if not v['deleted_at'])==sorted(identifiers)
+        assert state['invocations']==state['firings']==[]
+        assert len(state['instances'])==2 and all(v['state']=='ready'for v in state['instances'])
+    quiet(before)
+    declared=rows(item,Path(item['paths']['state'])/'control.sqlite3','SELECT events_json,activated_at FROM schedule_generations WHERE function_id=? AND retired_at IS NULL',(identifiers[1],))
+    assert len(declared)==1
+    schedules=json.loads(declared[0]['events_json'])['schedules'];date=datetime.fromtimestamp(window,timezone.utc)
+    assert len(schedules)==1 and schedules[0]['enabled'] and schedules[0]['cron']==f'{date.minute} {date.hour} * * *'
+    assert declared[0]['activated_at']<window<time.time()+600
+    work=Path(item['work']);sources={name:hashlib.sha256((work/name).read_bytes()).hexdigest()for name in ('storage-legacy-environment.py','control_database.py')}
+    assert sources['storage-legacy-environment.py']==hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+    for name in sources:
+        info=(work/name).lstat();assert stat.S_ISREG(info.st_mode)and info.st_uid==0 and stat.S_IMODE(info.st_mode)==0o600
+    result={'completed':False,'campaign':item['campaign'],'sources':sources,'children':[],'stderr_bytes':0,'qualified_groups':0,'started_at_ns':started_at_ns}
+    target=work/'source134-import-output.json';assert not target.exists()
+    digest=hashlib.sha256();prefix=bytearray();production_started=time.monotonic();deadline=production_started+30
+    result.update(production_started_at_ns=time.time_ns(),preflight_seconds=production_started-started)
+    code='import runpy,sys;sys.path.insert(0,'+repr(str(work))+');runpy.run_path('+repr(str(work/'storage-legacy-environment.py'))+",run_name='source134_import_diagnostic')"
+    try:
+        for index in range(12):
+            assert time.monotonic()<deadline and time.time()<window-60,'import_output_frontier_exhausted'
+            process=None;entry={'index':index,'completed':False};result['children'].append(entry)
+            try:
+                process=subprocess.Popen([sys.executable,'-I','-B','-vv','-c',code],stdout=subprocess.PIPE,stderr=subprocess.PIPE,start_new_session=True)
+                fields=Path('/proc',str(process.pid),'stat').read_text().rsplit(')',1)[1].split()
+                assert int(fields[2])==int(fields[3])==process.pid
+                entry.update(pid=process.pid,birth=fields[19],process_group=process.pid,session=process.pid)
+                streams={'stdout':bytearray(),'stderr':bytearray()};child_deadline=min(deadline,time.monotonic()+5)
+                with selectors.DefaultSelector()as selector:
+                    for label,stream in [('stdout',process.stdout),('stderr',process.stderr)]:
+                        os.set_blocking(stream.fileno(),False);selector.register(stream,selectors.EVENT_READ,label)
+                    while selector.get_map():
+                        remaining=child_deadline-time.monotonic();assert remaining>0,'import_child_deadline'
+                        for key,_ in selector.select(remaining):
+                            block=os.read(key.fd,4096)
+                            if not block:selector.unregister(key.fileobj);continue
+                            buffer=streams[key.data];assert len(buffer)+len(block)<=512*1024,'import_child_output_bound'
+                            buffer.extend(block)
+                process.wait(timeout=max(.001,child_deadline-time.monotonic()))
+                entry.update(returncode=process.returncode,outputs={name:{'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}for name,data in streams.items()})
+                assert process.returncode==0,'real_helper_import_failed'
+                data=streams['stderr'];assert data,'real_helper_import_trace_missing'
+                blocking=os.get_blocking(2)
+                try:
+                    os.set_blocking(2,False)
+                    with selectors.DefaultSelector()as writable:
+                        writable.register(2,selectors.EVENT_WRITE)
+                        position=0
+                        while position<len(data):
+                            remaining=deadline-time.monotonic();assert remaining>0,'import_stderr_forward_deadline'
+                            if not writable.select(remaining):raise TimeoutError('import_stderr_forward_deadline')
+                            try:position+=os.write(2,memoryview(data)[position:position+4096])
+                            except (BlockingIOError,InterruptedError):continue
+                finally:os.set_blocking(2,blocking)
+                digest.update(data)
+                prefix.extend(data[:max(0,1048576-len(prefix))]);result['stderr_bytes']+=len(data)
+                entry['completed']=True
+            except BaseException as error:
+                entry['primary_failure']={'type':type(error).__name__,'reason':str(error)if isinstance(error,AssertionError)else None};raise
+            finally:
+                if process is not None:
+                    cleanup_deadline=time.monotonic()+5
+                    if group_members(process.pid):
+                        try:os.killpg(process.pid,signal.SIGKILL)
+                        except ProcessLookupError:pass
+                    process.wait(timeout=max(.001,cleanup_deadline-time.monotonic()))
+                    while group_members(process.pid):
+                        assert time.monotonic()<cleanup_deadline,'import_child_group_not_joined';time.sleep(.01)
+                    process.stdout.close();process.stderr.close();entry['group_joined']=True
+                    atomic(target,result)
+            if result['stderr_bytes']>1048576:break
+        assert result['stderr_bytes']>1048576,'real_import_output_limit_not_reached'
+        production_finished=time.monotonic();assert production_finished<deadline,'import_output_frontier_exhausted'
+        result.update(production_seconds=production_finished-production_started,postflight_started_at_ns=time.time_ns())
+        after=instance_limit_observation(item);quiet(after)
+        assert before['container']==after['container']and before['instances']==after['instances']
+        assert time.time()<window-60,'import_output_frontier_exhausted'
+        assert all(hashlib.sha256((work/name).read_bytes()).hexdigest()==value for name,value in sources.items())
+        result.update(completed=True,postflight_seconds=time.monotonic()-production_finished,stderr_sha256=digest.hexdigest(),prefix_bytes=len(prefix),prefix_sha256=hashlib.sha256(prefix).hexdigest(),same_container_and_instances=True)
+        return result
+    finally:
+        result.update(finished_at_ns=time.time_ns(),total_seconds=time.monotonic()-started)
+        atomic(target,result)
+
+
 def main():
     global LOCK, CONTROL_READER
     assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
@@ -1315,7 +1415,7 @@ def main():
             if op == 'restore':
                 break
             if retention_replay:assert op == 'retention-replay-state','retention_replay_operation_required'
-            elif mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention','measure-native-deadline'), 'instance_limit_operation_required'
+            elif mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention','measure-native-deadline','diagnose-import-output'), 'instance_limit_operation_required'
             if op == 'retention-replay-state':
                 assert retention_replay and set(request)=={'op'}
                 result=retention_replay_command('inspect',campaign)
@@ -1329,6 +1429,8 @@ def main():
                 result = json.loads(command(['python3','-B',str(BASE/'e2e/native-observer-deadline.py'),
                     'measure',campaign,'--lock-fd',str(LOCK)], (0,1), foreground_timeout=True))
                 assert result['completed'], 'native_deadline_measurement_incomplete'
+            elif op == 'diagnose-import-output':
+                result=diagnose_import_output(item,request)
             elif op == 'observe-source-retention':
                 assert item.get('mode') == 'instance-limit' and item['guard_seconds'] == 2700
                 assert set(request) in ({'op','functions','window'}, {'op','functions','window','deadline_fault'})
