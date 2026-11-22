@@ -80,6 +80,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-126](#sls-126) Acquisition des lecteurs retenus d’API12 | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-127](#sls-127) Refus SQLite après épuisement réel des descripteurs | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-128](#sls-128) Purge réelle après journal de 16Mio | Corriger | `[~]` | SLS-040 | cette unité |
+| 3 | [SLS-129](#sls-129) Agrandissement et cadrage des preuves Journaux | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4410,3 +4411,44 @@ statiquement. Il utilise le vrai modehorsligne et la latence du navigateur,
 avec restaurationfinally, jamais des routes ou réponses fabriquées. La perte
 d'un PUT est retenue après son commit natif, puis relue sans rejeu. Syntaxe seule
 vérifiée, aucune preuvefonctionnelle UI acquise ; premièrecampagne à exécuter.
+
+
+<a id="sls-129"></a>
+## SLS-129 — Agrandissement compatible CSP et captures cadrées du journal
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
+Contrat : cette unité et EXECUTION_LOGS#console-et-manuel.
+
+Constat réel : le premier client10UI cca809c0/515sources/c209ffe/f73 passe
+septgroupes puis échoue UI09 ligne210/addStyleTag. Le contrôle sert default-src
+self, qui ne permet pas la balisestyleinline du banc ; le détailconsole initial
+n'est pas conservé. TreizeJPEG inspectées : certaines indications/assertionsDOM
+se trouvent souslepli (chargement, avertissements, résultatsd'export notamment).
+Produit inchangé, nettoyage acquis, zéro groupequalifié. [Rouge et captures](evidence/execution-journal-ui-first-failed-dev-2026-11-22.json).
+
+Résultat attendu : mesurer le vrai texte agrandi sans diminuer la CSP ; chaque
+preuvevisuelle nommée cadre son état réel et garde ses limites explicites.
+
+- [x] SLS-129.1 Sceller le rouge, programmes et13JPEG originales toutes inspectées,
+  septpartiels/zéroqualifié et nettoyage physique.
+- [ ] SLS-129.2 Recouper la CSP réellement servie, puis doubler les cinq tokens de
+  texte dans la feuilleCSS mêmeorigine existante via CSSOM navigateur, en conserver
+  les valeurs/priorités et les rétablir en finally. Aucun styleinline injecté,
+  changementCSP, fichierCSS produit modifié ou zoomnavigateur revendiqué.
+  Mesurer le facteur réel et le reflow ; échec si la feuille/type/token manque.
+- [ ] SLS-129.3 Avant chaque JPEG d'état ciblé, faire défiler réellement sa cible
+  dans le viewport et vérifier son rectangle entièrement visible. Capturer
+  séparément les états qui ne peuvent partager unevue (annoncepause/focus).
+  Garder les mesures DOM/HTTP distinctes, sans retouche ni imagecomposite.
+- [ ] SLS-129.4 Rejouer les10UI complets puis12API/25communs frais ; toutes les
+  captures ouvertes individuellement, mêmes sources/images, gardes/processus
+  joints et purge physique. Les régressions propres072 restent requises.
+
+Décision avant code : utiliser la feuille CSS externe déjà chargée, trouver son
+unique règle :root portant les cinq tokens, modifier seulement ces propriétés
+pour ce rendu de test, puis restaurer valeurs et priorités même en échec. Cette
+mesure évite une nouvelle source de style que la CSP refuse et ne teste pas un
+assouplissement du produit. Les cibles de capture sont les éléments rendus
+(loading, alertes, textepré, avertissements, statutd'export), jamais une attente
+arbitraire. Le focus clavier du pré est établi par Tab/ShiftTab pour rendre son
+état visible. Aucun autre comportement du produit ne change.

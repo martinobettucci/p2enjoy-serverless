@@ -1,5 +1,13 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — premier10UI, septpartiels et défaut de banc129
+
+cca809c0/515sourcesc209ffe/f73 passeUI01–06/08, puis addStyleTag échoue210 au
+texteagrandi ; CSPdefaultself relevée dans le contrôle. Nettoyagecomplet/0compteurs.
+13JPEG inspectées, plusieurs états souslepli ; limites publiées, zéroqualifié.
+129inscrit avantcode : CSSOM de la feuilleexistante/restaurationfinally et
+cibles réellementcadrées, puis replay10UI/12API/25communs. UI10/07 nonatteints.
+
 ## 22 novembre 2026 — préparation126 et neuf vagues strictes acquises
 
 f0d9fd63/514sources efba3fe/f73 : neufvagues et troisEMFILE passent. Deuxphases
