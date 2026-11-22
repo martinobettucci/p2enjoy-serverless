@@ -350,7 +350,7 @@ révision/hash/candidat/opération, message expurgé, métadonnées publiques fi
 indicateurs de troncature et octets UTF-8 comptabilisés. Les références de
 diagnostic n'empêchent pas la purge de leurs ressources. Index service/date,
 fonction/date et invocation ; les contenus sont limités à 10000 événements et
-32 Mio au total. Aucun secret ni corps métier n'est ajouté par la plateforme.
+16 Mio au total. Aucun secret ni corps métier n'est ajouté par la plateforme.
 
 `execution_log_state` garde l'identité durable de collection, son début réel,
 les compteurs transactionnels et sa frontière d'éviction. `service_log_policies`

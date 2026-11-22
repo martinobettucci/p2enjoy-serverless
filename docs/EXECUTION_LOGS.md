@@ -106,11 +106,22 @@ de réduire la conservation ; sa preuve utilise réellement une minute, jamais
 une horloge modifiée ni des timestamps injectés. Il ne prouve pas sept jours
 écoulés : le défaut et la même règle paramétrée sont recoupés séparément.
 
-Le registre entier est plafonné à 10000 événements et 32 Mio de messages/métadonnées
+Le registre entier est plafonné à 10000 événements et 16 Mio de messages/métadonnées
 comptabilisés. Avant d'exposer une écriture qui dépasse le budget, retirer les
 plus anciens événements nécessaires et conserver une frontière de perte. Les
 compteurs et suppressions sont transactionnels. Le nombre d'objets, leur taille
 et le travail par collecte sont bornés ; aucun cache mémoire non borné.
+
+Précision décidée avant qualification : 16 Mio remplace le premier choix de
+32 Mio. Le buffer final de 64 Kio et les événements de plateforme par appel
+rendent les deux frontières trop proches avec 32 Mio ; 16 Mio permet d'isoler
+le volume avant 10000 événements, et le nombre avec des messages courts, par
+de vrais handlers. Cette limite réduit aussi le contenu conservé. La preuve
+emploie deux corpus réels pour la borne exacte et une entrée augmentée d'un
+octet, sans édition SQL des événements. Les dates de métadonnées publiques
+sont formatées en ISO UTC à microsecondes fixes, à partir des vrais temps du
+contrôle : leur représentation est lisible et de taille prévisible, sans
+modifier l'horloge ni les dates métier. La colonne observée reste en secondes.
 
 Réduire la rétention fixe une frontière durable maximale ; l'augmenter ensuite
 ne ressuscite pas du contenu expiré. Les lectures l'appliquent immédiatement.
@@ -145,9 +156,13 @@ des états distincts. Les quotas/rétention sont exposés avec période et unit�
   identique ne prétend pas modifier la valeur. La fonction/son ETag ne changent pas.
 
 Filtres combinables : from/to UTC finis, période maximale sept jours, source,
-niveau connu ou non renseigné, état, invocation UUID, type d'événement et texte
+niveau connu ou non renseigné, état, invocation UUID, instance UUID, version
+(hash complet de 64 caractères hexadécimaux minuscules), type d'événement et texte
 littéral avec casse respectée (200 caractères). Aucun regex ni requête SQL libre.
-Défaut dernière heure ; presets 15 minutes/1 heure/24 heures/7 jours. La réponse nomme
+Défaut dernière heure ; sans période explicite, un lien filtré par invocation,
+instance ou version porte sur les sept derniers jours pour retrouver un objet
+historique encore conservé. Le comportement est identique en API et console.
+Presets 15 minutes/1 heure/24 heures/7 jours. La réponse nomme
 la période effective, la source, le début de collecte et la rétention disponible.
 
 Pagination historique :1–20 événements (UI 5), offset 0–10000, ordre date/séquence
@@ -228,6 +243,8 @@ suivants. Aucun verrou n'est conservé pendant l'envoi réseau de la réponse.
 Une simple transaction de lecture WAL, ou une suite de SELECT sur son ancien
 snapshot, ne fournit pas cette frontière : ce choix est écarté pour ce motif.
 La réservation ne change aucune donnée métier et reste sous la même deadline.
+Références de sémantique : [transactions SQLite](https://www.sqlite.org/lang_transaction.html)
+et [isolation WAL](https://www.sqlite.org/isolation.html), consultées le 22 novembre 2026.
 
 La preuve distingue donc le changement accepté pendant le premier IO (refus
 du résultat) et l'écriture retenue pendant la transaction finale (ordre natif
@@ -255,6 +272,14 @@ ne présentent pas une attente arrêtée comme une annulation du handler.
 Le suivi garde le focus et n'accumule pas indéfiniment le DOM ; le compteur
 de nouvelles entrées est annoncé poliment. Les réponses d'une ancienne query
 ne remplacent ni la nouvelle liste ni les saisies de filtre.
+
+La pause protectrice du focus concerne seulement la limite de fenêtre200,
+jamais un retrait exigé par conservation ou visibilité. Dans ce dernier cas,
+retirer le contenu et rendre le focus au titre. Un export refusé pour droits
+ou relevé incomplet invalide aussi l'état principal : pas d'anciennes lignes,
+totaux, curseur ni reprise d'export. Une page refusée rend son focus au titre.
+Les liens par instance et par hash ouvrent leur journal historique filtré,
+sans promettre qu'un conteneur ou un paquet supprimé est encore disponible.
 
 Conservation du service : Facts, commande Modifier ouvrant un dialog limité à
 la politique. Saisie numérique en minutes (plus de 400 crans, pas de faux curseur),
@@ -300,7 +325,7 @@ les erreurs de protocole et pertes de canal ne sont pas inférées d'un texte vi
    en conservant les branches historiques 003/006/007/008/009 et captures scellées.
 5. Douze groupes API et dix UI spécifiques, puis 25 communs frais (47), sans skip.
    Couvrir vrais texte/JSON/Unicode/HTML inerte, niveaux connus/inconnus, secrets,
-   bornes 64 Kio/4096 octets/1024 lignes et+1, budgets 10000/32 Mio, filtres/pages/snapshots,
+   bornes 64 Kio/4096 octets/1024 lignes et+1, budgets 10000/16 Mio, filtres/pages/snapshots,
    ACL directes/scopes/révocation, états silence/perte/expiration, politique 60 s
    réelle et concurrence/CSRF/perte de réponse, limites de lectures, exports,
    événements publication/instance/timeout/stockage, coupure du contrôle et reprise
@@ -329,7 +354,7 @@ Répartition des groupes spécifiques, fixée avant les clients :
 | API 03 | Filtres combinés, limites exactes et +1, ordre et pages stables sous nouvelles écritures |
 | API 04 | Collecte 64 Kio, messages 4096 octets et 1024 lignes, troncatures distinctes et secrets expurgés |
 | API 05 | Budget 10000 événements, premier dépassement, compteurs et perte explicite |
-| API 06 | Budget 32 Mio, premier dépassement, sérialisation et compteurs réconciliés |
+| API 06 | Budget 16 Mio, borne exacte puis entrée +1 octet dans deux corpus réels, sérialisation et compteurs réconciliés |
 | API 07 | Expiration réelle 60 s, buffer effacé, augmentation sans résurrection et snapshot 410 |
 | API 08 | Politique admin/CSRF/If-Match, conflit, écriture identique et réponse perdue sans rejeu |
 | API 09 | Exports JSONL/texte, lots 1000/1 Mio, reprise, échappement et mêmes ACL |

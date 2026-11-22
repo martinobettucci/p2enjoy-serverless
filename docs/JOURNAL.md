@@ -1,5 +1,23 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — deux budgets isolables et corrélation historique072
+
+Avant adaptation du code : le volume du registre passe du choix initial32Mio
+à16Mio. Avec le buffer64Kio et plusieurs événements de plateforme par appel,
+la preuve du volume doit pouvoir précéder nettement celle des10000événements.
+Deux corpus réels permettront borne exacte et entrée augmentée d'un octet ;
+les dates publiques de métadonnées deviennent ISO UTC à microsecondes fixes,
+depuis le vrai temps, pour lisibilité et comptabilisation prévisible.
+
+La corrélation ajoute les filtres instance UUID et version/hash complet. Sans
+période explicite, les entrées invocation/instance/version consultent les sept
+derniers jours plutôt qu'une heure ; API et console suivent la même règle.
+Les liens de journal restent utilisables pour une instance éteinte ou un code
+supprimé, sans lien trompeur vers la ressource de gestion. Les quatre défauts
+RO de console sont intégrés au contrat avant correction : expiration prioritaire
+sur focus, export invalidant aussi le relevé, historique de corrélation et
+restitution clavier après page refusée. Aucune preuve réelle nouvelle.
+
 ## 22 novembre 2026 — frontière SQL finale des lectures de journaux
 
 La première revue backend a trouvé un budget d'enveloppe appliqué à tort aux
