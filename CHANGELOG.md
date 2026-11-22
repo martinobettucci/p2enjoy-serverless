@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-134.3 : deuxgroupes réels du refus aprèsattache passent surf016 ;
+  SHA/source/ligne136/phase et waitpidbrut8390015 recoupés, stderr476octets
+  complet, fermetures/restitution/0compteurs vérifiés. Nominal, consommateurs
+  et dépassementstderr restent dus ; aucune cause rétroactive attribuée.
+
 - SLS-134 : diagnostics de phase/source/ligne et statutwaitpid réel intégrés,
   exception primaire conservée avant nettoyage. Stderrpilote haché et préfixe
   privé borné dans touslesmodes, EOF distinct de sortie ; refus réel enrichi

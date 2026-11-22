@@ -4745,7 +4745,7 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
   et les erreurs de nettoyage séparément, même pour assertion sans message.
   Stderrpilote borné et haché conservé en privé pour tous les modes ; dépassement
   nommé et campagne rouge, jamais silence ni valeur fabriquée.
-- [ ] SLS-134.3 Éprouver sur le vrai contrôle f016 le refus après attache avec
+- [x] SLS-134.3 Éprouver sur le vrai contrôle f016 le refus après attache avec
   deuxvrais handlers et historique insuffisant : source/ligne/phase précises,
   statutnatifs réel, stderr et fermetures/restitution recoupés. Aucun mock ni
   nouvel oracle permissif pourSIGSTOP/SIGTRAP.
@@ -4757,3 +4757,5 @@ Le défaut corrigé ici est l’absence de diagnostic, pas une cause rétroactiv
 inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent intactes.
 
 134 — diagnostics intégrés sans changement d’algorithme natif : dernier waitpid remisàNone puis statutréel, phase/sourceSHA/ligne et snapshotprimaire, stderrnominal conservé avec EOF distinct et bornageprivé. Assertions du vrai refus après attache enrichies ; deuxASTPython/Node et revueRO passent sansP1/P2. Aucun E2E nouveau acquis à ce stade.
+
+134.3 — [deux groupes réels de diagnostic acquis](evidence/source-retention-observer-diagnostics-schema011-dev-2026-11-22.json),526sourcesf089610/f016 : deuxhandlers HTTP/cron, refusnaturel10002 attendu sur2/0, sourceSHA/phase/ligne136 et vrai waitpid8390015 (signal5/événement128) recoupés. Stderr476octets complet/SHAégal, helper1/client0/joint, lecteur/mémoire fermés/Trace0 ; deuxconsommateurs/réseaux/baux absents, originaux/5982/huitcompteurs0.134.2 resteouvert pour le dépassement1Mio et134.4 pour nominal/consommateurs ; zéro groupe de rétention ajouté.
