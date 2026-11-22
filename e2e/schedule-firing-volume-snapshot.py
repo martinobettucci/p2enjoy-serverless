@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
+# @verifies docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#préparation-authentique-et-conservation
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#préparation-authentique-et-conservation
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_CAPTURE_INTERRUPTION.md
@@ -411,20 +413,29 @@ def capture(args):
     with read_control(control) as db:
         db.execute('BEGIN')
         live = witnesses(db, ids, args.window, item['namespace_name'], item['temporary_installation'])
-    source_proof = ROOT / 'docs/evidence/schedule-retention-capture-dev-2026-11-11.json'
-    preservation = json.loads(source_proof.read_text())['native_preservation']
-    assert preservation['completed']
-    image_capture = history / preservation['capture_id']
-    assert re.fullmatch(r'schedule-retention-[a-f0-9]{32}', image_capture.name)
-    assert image_capture.is_dir() and not image_capture.is_symlink()
-    assert json.loads((image_capture / 'preservation.json').read_text())['images'] == preservation['images']
-    assert preservation['images']['control']['image'] == before_services[1]['image']
-    assert preservation['images']['runtime']['image'] == live['runtime_image']
-    for role, row in preservation['images'].items():
-        archive = image_capture / (role + '-image.tar')
-        info = archive.lstat()
-        assert stat.S_ISREG(info.st_mode) and info.st_uid == 0 and stat.S_IMODE(info.st_mode) == 0o400
-        assert info.st_size == row['bytes'] and sha(archive) == row['archive_sha256']
+    if item['target_schema'] == '011':
+        from retention_current_images import CURRENT_MIGRATIONS, verify as verify_images
+        with read_control(control) as db:
+            schema_migrations = [row[0] for row in db.execute('SELECT version FROM schema_migrations ORDER BY version')]
+        assert schema_migrations == CURRENT_MIGRATIONS, 'capture_schema011_required'
+        preservation = verify_images(before_services[1]['image'], live['runtime_image'])
+        image_capture = history / preservation['capture_id']
+        source_proof = image_capture / 'preservation.json'
+    else:
+        source_proof = ROOT / 'docs/evidence/schedule-retention-capture-dev-2026-11-11.json'
+        preservation = json.loads(source_proof.read_text())['native_preservation']
+        assert preservation['completed']
+        image_capture = history / preservation['capture_id']
+        assert re.fullmatch(r'schedule-retention-[a-f0-9]{32}', image_capture.name)
+        assert image_capture.is_dir() and not image_capture.is_symlink()
+        assert json.loads((image_capture / 'preservation.json').read_text())['images'] == preservation['images']
+        assert preservation['images']['control']['image'] == before_services[1]['image']
+        assert preservation['images']['runtime']['image'] == live['runtime_image']
+        for role, row in preservation['images'].items():
+            archive = image_capture / (role + '-image.tar')
+            info = archive.lstat()
+            assert stat.S_ISREG(info.st_mode) and info.st_uid == 0 and stat.S_IMODE(info.st_mode) == 0o400
+            assert info.st_size == row['bytes'] and sha(archive) == row['archive_sha256']
     prefix = 'schedule-firing-capture-interrupted-' if args.loss else 'schedule-firing-volume-'
     folder = history / (prefix + args.campaign.replace('-', ''))
     folder.mkdir(mode=0o700)
@@ -476,6 +487,8 @@ def capture(args):
                'required_missed_windows': windows, 'eligible_after': args.window + windows * 300,
                'root_private_directory': True, 'sqlite_read_only': True,
                'count_retention_qualified': False, 'seven_day_retention_qualified': False}
+    if item['target_schema'] == '011':
+        receipt['schema_migrations'] = schema_migrations
     (folder / 'capture.json').write_text(json.dumps(receipt) + '\n')
     os.chmod(folder / 'capture.json', 0o400)
     return receipt

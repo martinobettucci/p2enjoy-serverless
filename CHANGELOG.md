@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-132 : protocole courant011 écrit avant code, inventaire RO des captures
+  anciennes et refus statique de rattachement scellés. Nouvelle préparation
+  numérique : préservation des deux images immuables avant fenêtre, exports
+  bornés/joints, schéma011 exact puis capture256tirs distincte. Les preuves
+  historiques sont conservées ; qualification courante encore ouverte.
+
 - SLS-129 : le premier10UI passe septgroupes puis échoue sur la balisestyle du
   banc refusée parCSP. Les13JPEG sont inspectées, leurs cadrages incomplets nommés.
   Le test utilise maintenant la feuilleCSSOM existante et des cibles de capture

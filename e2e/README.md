@@ -3108,3 +3108,18 @@ recoupées, deuxTID distincts avantSQL. Après2,1s réelles, la jonction rend
 503/log_read_timeout. `read` historique conserve DBopenat ; `fault` conserve
 le véritable openat refuséEMFILE et la restauration avantPython. Aucun de ces
 modes ne remplace la preuve d'un autre.
+
+
+## Rétention courante011 — préparation des images et source numérique
+
+SLS-132 suit [RETENTION_SCHEMA_011](../docs/RETENTION_SCHEMA_011.md). Avant la
+fenêtre de capture, sur le seul SPARKDEV, root exécute
+`python3 -B /srv/p2enjoy-serverless/e2e/retention_current_images.py preserve SHA256_IMMUABLE_DU_CONTROLE`.
+Cette commande exporte réellement contrôle/runtime sans arrêter de service, ou
+vérifie les exports déjà complets ; un dossier incomplet est refusé. Le reçu privé
+nomme les images et SHA, jamais une valeur de secret. Ensuite, depuis la racine :
+`node e2e/schedule-firing-volume-capture.mjs`, SSO sur stdin privée. La préflight
+vérifie les exports avant ouverture de fenêtre ; le snapshot011 conserve les
+migrations exactes et sa préservation propre. Quatre groupes préparatoires, puis
+attente réelle3h15 de la capture scellée ; aucune rétention qualifiée par préparation.
+Les sources009/010 et leurs preuves restent historiques, sans modification.

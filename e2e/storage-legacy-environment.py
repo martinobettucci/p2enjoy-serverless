@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#époque-et-autorité
+# @verifies docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
 # @spec docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
 # @verifies docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
 # @spec docs/BACKLOG.md#sls-103 | docs/SCHEMA_010_PROOF_PREREQUISITES.md
@@ -57,6 +59,7 @@ SCHEMA_006 = ['001_control.sql', '002_login_limits.sql', '003_deployments.sql',
 SCHEMA_007 = SCHEMA_006 + ['007_function_code_hash.sql']
 SCHEMA_008 = SCHEMA_007 + ['008_function_versions.sql']
 SCHEMA_010 = SCHEMA_008 + ['009_schedules.sql', '010_code_drafts.sql']
+SCHEMA_011 = SCHEMA_010 + ['011_execution_logs.sql']
 SCHEMA_006_REVISION = 'f56d79ebe3d1d84731bfd262d1e6a9d5b5a680c0'
 
 
@@ -895,7 +898,7 @@ def instance_limit_observation(item):
     assert hashes()==item['configuration'],'official_configuration_changed'
     control=Path(item['paths']['state'])/'control.sqlite3'
     schema_migrations=[v['version'] for v in rows(item,control,'SELECT version FROM schema_migrations ORDER BY version')]
-    if not item.get('retention_replay'):assert schema_migrations==SCHEMA_010,'temporary_schema010_required'
+    if not item.get('retention_replay'):assert schema_migrations==SCHEMA_011,'temporary_schema011_required'
     namespace=rows(item,control,'SELECT id,name FROM namespaces WHERE deleted_at IS NULL')
     if item.get('retention_replay'):retention_scope(item)
     else:assert all(v['name']==item['namespace_name'] for v in namespace),'foreign_namespace'
@@ -1134,8 +1137,8 @@ def main():
     if mode == 'instance-limit':
         item.update(namespace_name='instance-limit-' + campaign[:8],
             unit='serverless-restore-instance-limit-' + campaign,
-            project='instance-limit-' + campaign, source_schema='009' if retention_replay else '010',
-            target_schema='009' if retention_replay else '010')
+            project='instance-limit-' + campaign, source_schema='009' if retention_replay else '011',
+            target_schema='009' if retention_replay else '011')
     if intermediary:item['intermediate_image']=intermediary['image']
     item['original'] = container(item, 'serverless-api')
     item['reference'] = container(item, 'serverless-runtime-reference')
@@ -1148,7 +1151,7 @@ def main():
             assert settings['SERVERLESS_FUNCTION_CPU_BUDGET'] == '1'
             assert settings['SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB'] == '8192'
         actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
-        if not retention_replay:assert actual == SCHEMA_010, 'current_schema010_required'
+        if not retention_replay:assert actual == SCHEMA_011, 'current_schema011_required'
         proposal=Path('/etc/spark/env.?')
         item['proposal_sha256']=hashlib.sha256(proposal.read_bytes()).hexdigest() if proposal.exists() else None
         if firing_replay:

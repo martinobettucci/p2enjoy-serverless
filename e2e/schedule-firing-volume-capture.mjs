@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
+// @verifies docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
 // @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#préparation-authentique-et-conservation
 // @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#préparation-authentique-et-conservation
 // @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_CAPTURE_INTERRUPTION.md
@@ -69,6 +71,7 @@ await mkdir(out,{recursive:true,mode:0o700});await save();let credentials;
 try{
  assert(!process.stdin.isTTY,'private_pipe_required');const input=createInterface({input:process.stdin});credentials=await new Promise((resolve,reject)=>{input.once('line',line=>{try{assert(line.length<=8192);resolve(JSON.parse(line));}catch{reject(new Error('private_input_invalid'));}finally{input.close();}});input.once('close',()=>reject(new Error('private_input_missing')));});assert(credentials?.username&&credentials?.password);
  const image=(await run('ssh',[...ssh,'runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock','inspect','--format','{{.Image}}','serverless-api'],{timeout:20000})).stdout.trim();assert.match(image,/^sha256:[a-f0-9]{64}$/);
+ const preserved=JSON.parse((await run('ssh',[...ssh,'python3','-B','/srv/p2enjoy-serverless/e2e/retention_current_images.py','verify',image],{timeout:100000,maxBuffer:1024*1024})).stdout);assert(preserved.completed&&preserved.images.control.image===image,'current_image_preservation_required');observations.push({scenario:'current-images-verified-before-window',preservation:preserved});await save();
  child=spawn('ssh',[...ssh,'python3','-B',helper,'instance-limit',campaign,image],{stdio:['pipe','pipe','pipe']});createInterface({input:child.stdout}).on('line',line=>{try{events.push(JSON.parse(line));}catch{events.push({event:'invalid-driver-output'});}});child.stderr.resume();child.stdin.on('error',()=>{});child.on('close',code=>{ended=true;exitCode=code;});child.on('error',()=>{ended=true;exitCode=-1;});
  await check('SSO réel et16 publications/promotions avant la même frontière UTC',async()=>{
   const armed=await event('guard-armed'),ready=await event('instance-limit-ready');assert.equal(armed.guard_seconds,900);assert(armed.timer_schedule.includes('OnActiveUSec=15min'));assert.equal(ready.container.image,image);assert.equal(ready.capacity.invocations.length,0);assert.equal(ready.capacity.firings.length,0);

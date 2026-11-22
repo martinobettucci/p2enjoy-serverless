@@ -4593,3 +4593,5 @@ inventaire. Les copies natives authentiques vieillies sont une piste de replay,
 pas une autorisation de modifier les fichiers canoniques ou d'assouplir la garde.
 
 132 — [garde rouge statique](evidence/retention-source-epoch-mismatch-2026-11-22.json) et [inspection RO native](evidence/retention-authentic-sources-inspection-2026-11-22.json) scellées. Sources009 intactes/éligibles, témoin de clé égal en mémoire, f73 disponible et original011 quiet ; aucune rétention requalifiée. Le [contrat courant](RETENTION_SCHEMA_011.md) distingue copies migrées, métadonnées protégées et logs expirés, nouvelles captures numériques, gardes et restitution des mêmes originaux011.
+
+132 — préparation numérique codée : préservation f73/runtime avant fenêtre, exports natifs avec session/subreaper et jonction5s sur toute sortie ; vérification des deux images et original011 quiet. Instance-limit courant exige001..011, snapshot011 lie son export distinct et ses migrations ; anciennes listes/exports préservés. Syntaxes valides, revue puis export et capture réels encore requis.

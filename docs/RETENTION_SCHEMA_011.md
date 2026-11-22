@@ -31,8 +31,10 @@ Un outil natif DEV distinct exporte les deux images immuables dans un dossier
 neuf `qualification-history/retention-images-<hash complet du contrôle>`.
 Il vérifie API/référence sains, CID/image/démarrage et onze migrations, zéro
 fonction vivante/instance/appel actif/opération et registres sans bail. Chaque
-`docker image save` réel est borné40s ; le processus entier90s, sans service
-arrêté. Le dossier est root0700, archives/reçu root0400, chemins canoniques sans
+`docker image save` réel est borné40s ; échéance globale90s, sans service
+arrêté. Chaque export possède une session/groupe natif ; le helper subreaper
+retire et joint timeout/runuser/Docker en finally, y compris sur alarme, avant
+tout retour. Le nettoyage est borné5s et une jonction manquante reste un échec. Le dossier est root0700, archives/reçu root0400, chemins canoniques sans
 symlink ; espace libre vérifié, fichiers fsync puis reçu terminé publié en dernier.
 Le reçu contient SHA/octets/image réelle pour chaque archive, empreinte de
 l'opérateur et observations avant/après identiques. Une interruption garde un
