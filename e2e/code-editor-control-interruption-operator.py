@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md
 # @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md#acquisition-et-coupure-gardées
+# @spec docs/BACKLOG.md#sls-118 | docs/CODE_EDITOR_CONTROL_WINDOW.md#décision-avant-correction
+# @verifies docs/BACKLOG.md#sls-118 | docs/CODE_EDITOR_CONTROL_WINDOW.md#replay-et-critères-de-preuve
 """Native DEV control cuts, armed before the real code-draft publication POST."""
 import ast
 from contextlib import closing
@@ -172,6 +174,7 @@ def inspect(candidate=None):
         result = {'counts': counts, 'function': function, 'draft': draft_row(db),
                   'versions': [dict(v) for v in db.execute('SELECT * FROM function_versions WHERE function_id=? ORDER BY code_hash', (function_id,))],
                   'revisions': revisions, 'archives': archives, 'candidates': candidates, 'audits': audits,
+                  'draft_audits': [dict(v) for v in db.execute("SELECT id,action FROM audit_events WHERE object_id=? AND action IN ('code_draft.create','code_draft.save','code_draft.discard') ORDER BY id", (function_id,))],
                   'invocations': [dict(v) for v in db.execute('SELECT id,revision_id,state,handler_started,http_status FROM invocations WHERE function_id=? ORDER BY id', (function_id,))],
                   'integrity': db.execute('PRAGMA integrity_check').fetchone()[0],
                   'foreign_keys': [list(v) for v in db.execute('PRAGMA foreign_key_check')],
@@ -383,9 +386,11 @@ try:
     file = root / 'artifacts' / candidate / 'archive.zip'
     zip_before = archive_metadata(candidate)
     archive_sha = sha(file)
+    expected_names = {'publication-recovery.cjs', 'publication-marker.json'}
+    if mode == 'receiving':
+        expected_names |= {f'extraction-inputs/file-{index:05d}.txt' for index in range(18000)}
     with zipfile.ZipFile(file) as archive:
-        assert len(archive.infolist()) == 18002 and len(set(archive.namelist())) == 18002
-        assert set(archive.namelist()) == {'publication-recovery.cjs', 'publication-marker.json'} | {f'extraction-inputs/file-{index:05d}.txt' for index in range(18000)}
+        assert len(archive.infolist()) == len(expected_names) and set(archive.namelist()) == expected_names
         assert archive.testzip() is None, 'complete_archive_crc_required'
     assert archive_metadata(candidate) == zip_before and sha(file) == archive_sha
     if mode == 'validating':
@@ -394,7 +399,7 @@ try:
         assert len(alive) == 1 and alive[0]['id'] == matches[0]['id'], 'validator_window_missed_during_archive_check'
         matches = alive
     emit({'event': 'gated', 'phase': mode, 'unit': unit, 'observed': observed, 'durable': gated,
-          'archive': zip_before | {'sha256': archive_sha, 'entries': 18002, 'all_crc_valid': True},
+          'archive': zip_before | {'sha256': archive_sha, 'entries': len(expected_names), 'all_crc_valid': True},
           'validator': matches[0] if matches else None})
     assert select.select([sys.stdin], [], [], 8)[0] and sys.stdin.readline().strip() == 'interrupt'
     assert birth(pid) == item['birth'] and Path('/proc', str(pid), 'cgroup').read_text() == item['cgroup']

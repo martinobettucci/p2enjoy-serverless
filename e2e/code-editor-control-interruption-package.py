@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md#décision-et-frontières-observables
 # @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md#quatre-groupes-ciblés-puis-25-communs-frais
+# @spec docs/BACKLOG.md#sls-118 | docs/CODE_EDITOR_CONTROL_WINDOW.md#décision-avant-correction
+# @verifies docs/BACKLOG.md#sls-118 | docs/CODE_EDITOR_CONTROL_WINDOW.md#replay-et-critères-de-preuve
 """Original complete ZIP for a real receiving/extraction observation window."""
 import hashlib
 import json
@@ -9,6 +11,9 @@ import sys
 import zipfile
 
 root = Path(__file__).resolve().parents[1]
+assert len(sys.argv) in (2, 3) and (len(sys.argv) == 2 or sys.argv[2] == '--compact')
+compact = len(sys.argv) == 3
+text_files = 0 if compact else 18000
 target = Path(sys.argv[1]).resolve()
 assert target.is_relative_to(root / '.local/e2e') and target.parent.is_dir()
 assert not target.exists() and not target.is_symlink()
@@ -20,7 +25,7 @@ with zipfile.ZipFile(target, 'x', compression=zipfile.ZIP_DEFLATED, allowZip64=F
     for name, content in [('publication-recovery.cjs', handler), ('publication-marker.json', marker),
                           *((f'extraction-inputs/file-{index:05d}.txt',
                              f'Entrée originale {index:05d} : extraction réelle, intégrité et conservation après redémarrage.\n'.encode())
-                            for index in range(18000))]:
+                            for index in range(text_files))]:
         item = zipfile.ZipInfo(name, (1980, 1, 1, 0, 0, 0))
         item.create_system = 3
         item.compress_type = zipfile.ZIP_DEFLATED
@@ -30,9 +35,9 @@ with zipfile.ZipFile(target, 'x', compression=zipfile.ZIP_DEFLATED, allowZip64=F
         inventory.update(json.dumps({'path': name, 'bytes': len(content),
                                      'sha256': hashlib.sha256(content).hexdigest()}, sort_keys=True).encode() + b'\n')
 with zipfile.ZipFile(target) as archive:
-    assert len(archive.infolist()) == 18002 and archive.testzip() is None
+    assert len(archive.infolist()) == text_files + 2 and archive.testzip() is None
 assert total < 256 * 1024**2 and target.stat().st_size < 64 * 1024**2
-print(json.dumps({'entries': 18002, 'original_text_files': 18000, 'expanded_bytes': total,
+print(json.dumps({'entries': text_files + 2, 'original_text_files': text_files, 'compact': compact, 'expanded_bytes': total,
                   'archive_bytes': target.stat().st_size, 'archive_sha256': hashlib.sha256(target.read_bytes()).hexdigest(),
                   'inventory_sha256': inventory.hexdigest(), 'all_crc_valid': True,
                   'handler_sha256': hashlib.sha256(handler).hexdigest(), 'marker_sha256': hashlib.sha256(marker).hexdigest()}))

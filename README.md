@@ -9,7 +9,9 @@ la seconde requête finit200/publiée sans coupure. Trois handlers, deux JPEG
 inspectés, deux gardes terminées et purge physique/repos recoupés.
 Le [contrat118](docs/CODE_EDITOR_CONTROL_WINDOW.md) fixe avant correction une base compacte
 pour validating, en conservant20s/45s/235s et les gardes à l’octet ; nouveau
-4+25à produire. Produit, manuel, image et configuration officielle inchangés.
+4+25à produire. Modes compact/grand et base C préparés après9a35d3d, syntaxes
+contrôlées et474sources ; aucun replay exécuté. Produit, manuel, image et
+configuration officielle inchangés.
 
 
 

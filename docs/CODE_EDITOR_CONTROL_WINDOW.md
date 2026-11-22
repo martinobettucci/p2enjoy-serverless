@@ -110,6 +110,15 @@ joint transports/helpers/mutateurs/gardes et recoupe la purge physique, les
 38 backend, quatre ressources no-store, schéma010/intégrité/FK, manuel18/74/SHA,
 notes actives/proposées et 5 982 originaux, sans changer l'image produit.
 
-Le premier échec et la présente décision sont acquis ; aucun code de correction
-ni replay positif n'est encore livré à ce checkpoint. SLS-118 et SLS-070 restent
-ouverts jusqu'au passage réel et au rapprochement complet des critères.
+## Client corrigé préparé, replay encore requis
+
+Après persistance et push de9a35d3d, le packager possède son mode `--compact`,
+le client publie C sans promotion puis abandonne/recrée explicitement le
+brouillon, et l’opérateur exige le nombre exact de fichiers de chaque phase.
+Le consolidateur recoupe sept candidats/cinq publications/quatre révisions et
+les audits de deux créations/deux sauvegardes/un abandon de brouillon.
+Syntaxes JS/Python contrôlées, index474sources ; les gardes et les bornes
+restent inchangées. Aucun nouveau passage réel n’est encore exécuté.
+
+Le premier échec et la présente décision sont acquis ; SLS-118 et SLS-070
+restent ouverts jusqu’au replay positif et au rapprochement complet des critères.

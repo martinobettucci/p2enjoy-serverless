@@ -13,7 +13,8 @@
   après redémarrage et nouvelle publication explicite ;29groupes encore à prouver.
   Aucun changement produit, image, manuel ou configuration officielle.
   Le client HTTPS/UI et son opérateur ont produit le premier rouge473sources
-  ci-dessus ; la correction118 est spécifiée et reste à implémenter.
+  ci-dessus ; la correction118 est préparée après son contrat9a35d3d, avec
+  syntaxes contrôlées et474sources. Nouveau passage réel encore requis.
 
 - SLS-117 est close par [32groupes réels](docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json) :
   fermeture Page/target et reprise du même UUID sans POST en1440/390px, mutation

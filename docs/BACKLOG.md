@@ -3475,6 +3475,9 @@ positif acquis. Nature : Corriger (banc de preuve). Ordre :3, préalable à
   explicitement le brouillon déjà éprouvé et créer une nouvelle base C pour
   validating. Même fonction/cible A/ETag, fenêtres20s/timer45s/protocole235s
   et gardes à l’octet. Aucun produit ni dépendance substituée.
+  Implémentation préparée après9a35d3d : modes explicites, nouvelle base C et
+  contrôles par phase ; syntaxes JS/Python contrôlées,474sources. Critère non
+  fermé avant le nouveau passage réel.
 - [ ] SLS-118.3 Nouveau gel et nouveau4+25réels : deux coupures137, seconde
   restitution indépendante, API/UI du brouillon conservé dans les deux phases,
   six handlers, sept candidats5pub/2failed, quatre révisions, déduplication,

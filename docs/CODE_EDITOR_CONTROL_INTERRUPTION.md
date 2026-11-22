@@ -199,5 +199,7 @@ le validateur après ZIP/CRC et conserve les erreurs primaire/secours distinctes
 Le lecteur physique commun garde ses contrôles UUID/inventaire complet.
 
 La décision118 prépare le replay4+25 sur deux bases réelles et les nouveaux
-comptages ci-dessus. Aucun code de cette correction ni replay positif n’est
-encore livré. Produit, manuel et image restent inchangés ;070.3/.5 ouverts.
+comptages ci-dessus. Après9a35d3d, les modes compact/grand, la création de
+base C et les comptes/audits sont implémentés dans le client, syntaxes
+contrôlées et index474sources. Aucun replay positif acquis ; produit, manuel
+et image restent inchangés,070.3/.5 ouverts.

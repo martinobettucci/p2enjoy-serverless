@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — reprise118 préparée après contrat poussé
+
+9a35d3d précède le code : packager --compact à deux fichiers originaux, grand
+ZIP inchangé pour receiving. Le client publie C, vérifie A/ETag, abandonne
+explicitement le brouillon et le recrée sur C avant validating. L’opérateur
+exige18 002ou2entrées selon la phase ; son recoupement du validateur après
+mesures et ses gardes inchangées sont conservés. Comptes7/5/2/4 et audits de
+brouillon2créations/2sauvegardes/1abandon, six invocations attendues.
+Syntaxes JS/Python contrôlées,474sources. Trois nouveaux orchestrateurs privés
+prennent le native_final du rouge pour baseline et exigent deux nouvelles
+générations,4+25frais et26captures ; anciens programmes intacts. Aucun nouveau
+passage réel encore lancé. Produit, image, manuel et configuration inchangés.
+Revue RO code/orchestrateurs achevée sans obstacle : C réellement publié et
+non promu, abandon/création conditionnels, bases/API/natif recoupées, noms/CRC
+par phase, baseline du rouge et deux futurs restarts exigés. Les trois anciens
+programmes et leurs copies sont encore identiques par SHA.
+
 ## 22 novembre 2026 — acquisition validating expirée, décision118 avant correction
 
 [Preuve négative](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json)

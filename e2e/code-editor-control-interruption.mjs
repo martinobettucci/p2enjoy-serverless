@@ -1,5 +1,7 @@
 // @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md
 // @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md#quatre-groupes-ciblés-puis-25-communs-frais
+// @spec docs/BACKLOG.md#sls-118 | docs/CODE_EDITOR_CONTROL_WINDOW.md#décision-avant-correction
+// @verifies docs/BACKLOG.md#sls-118 | docs/CODE_EDITOR_CONTROL_WINDOW.md#replay-et-critères-de-preuve
 import assert from 'node:assert/strict';
 import {createHash,randomUUID} from 'node:crypto';
 import {mkdir,mkdtemp,readFile,writeFile,rename,rm} from 'node:fs/promises';
@@ -16,7 +18,7 @@ const SSH=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.
 const checks=[],observations=[],intents=[],publications=[],gates=[],invocations=[],http=[],captures={},faults=[],cleanupErrors=[],pending=[];
 const applicationSecret='editor-control-interruption-'+randomUUID(),markerPath='publication-marker.json';
 const sha=v=>createHash('sha256').update(v).digest('hex'),match=v=>({'If-Match':String(v)}),ep=()=>'/api/functions/'+fn.id;
-let credentials,browser,context,page,admin,caller,session,namespace,service,fn,token,work,pkg,stable,latest;
+let credentials,browser,context,page,admin,caller,session,namespace,service,fn,token,work,pkg,stable,latest,validationBase;
 let completed=false,scenariosPassed=false,failure=null,writes=Promise.resolve();
 function diagnosis(error){return {type:error.name,code:error.code??null,message_sha256:sha(String(error.message)),source_line:String(error.stack??'').match(/code-editor-control-interruption\.mjs:(\d+)/)?.[1]};}
 async function save(){const raw=JSON.stringify({campaign:id,target:base,completed,skipped:0,checks,observations,intents,publication_intents:publications,namespace_id:namespace?.id,service_id:service?.id,function_ids:fn?[fn.id]:[],token_ids:token?[token.id]:[],invocations,http,captures,faults,cleanup_errors:cleanupErrors,failure,gates:gates.map(({phase,events,restored,terminal,independentWait,recoveryReceipts})=>({phase,events,restored,terminal,independent_wait:independentWait,recovery_receipts:recoveryReceipts}))},null,2)+'\n';const next=writes.then(async()=>{const temporary=new URL(report.href+'.pending');await writeFile(temporary,raw,{mode:0o600});await rename(temporary,report);});writes=next.catch(()=>{});await next;}
@@ -85,9 +87,25 @@ async function reopen(width,publication,text){
  await page.goto(base);await page.getByRole('heading',{name:'Fonctions',exact:true}).waitFor();
 }
 
+async function compactValidationBase(){
+ const before=await remote('inspect'),previous=await draft();
+ const info=JSON.parse((await exec('python3',['-B','e2e/code-editor-control-interruption-package.py',work+'/compact.zip','--compact'],{timeout:30000,maxBuffer:1048576})).stdout);
+ const archive=await readFile(work+'/compact.zip'),publication={deployment_id:randomUUID(),kind:'explicit-compact-validation-base'};
+ const record={scenario:'compact-validation-base',before,previous,package:info,publication};observations.push(record);publications.push(publication);await save();
+ assert(info.compact&&info.entries===2&&info.original_text_files===0);assert.equal(sha(archive),info.archive_sha256);
+ await api(ep()+'/code-deployments',{method:'POST',status:201,headers:match(fn.updated_at),body:{deployment_id:publication.deployment_id,handler:'publication-recovery.cjs.handler'}});
+ validationBase=await api('/api/deployments/'+publication.deployment_id+'/artifact',{method:'PUT',bytes:archive});record.published=validationBase;await save();
+ assert.equal(validationBase.state,'published');assert(validationBase.validation.valid&&validationBase.validation.container_removed);assert.equal(validationBase.code_changed,true);assert.notEqual(validationBase.code_hash,stable.code_hash);assert.notEqual(validationBase.code_hash,latest.code_hash);
+ const beforeDiscard=await draft();record.before_discard=beforeDiscard;record.discard_intent={draft_id:previous.id,version:previous.version,new_base_code_hash:validationBase.code_hash};await save();assert.deepEqual(beforeDiscard,previous);
+ record.discarded=await api(ep()+'/code-draft',{method:'DELETE',headers:match(previous.version)});await save();assert(record.discarded.discarded);assert.equal(await draft(),null);
+ record.created=(await api(ep()+'/code-draft',{method:'POST',status:201,headers:match(fn.updated_at),body:{base_code_hash:validationBase.code_hash}})).draft;record.after=await remote('inspect');await save();
+ assert.notEqual(record.created.id,previous.id);assert.equal(record.created.version,1);assert.equal(record.created.base.code_hash,validationBase.code_hash);assert.equal(record.after.draft.base_revision_id,validationBase.revision_id);assert.equal(record.after.draft.id,record.created.id);assert.deepEqual(record.after.function,before.function);assert.equal(record.after.function.active_revision_id,stable.revision_id);assert.equal(record.after.function.updated_at,fn.updated_at);
+}
+
 async function interrupt(phase,width){
  const changed=await marker(phase+'-pilot'),before=await remote('inspect'),publication=await intent(changed.draft,'cut-'+phase),record={scenario:'cut-'+phase,before,publication};observations.push(record);await save();let g,flight,primaryError;
  try{
+  const expectedBase=phase==='receiving'?stable:validationBase;assert(expectedBase);assert.equal(changed.draft.base.code_hash,expectedBase.code_hash);assert.equal(before.draft.base_revision_id,expectedBase.revision_id);
   g=await gate(phase,publication);const armed=g.events.find(v=>v.event==='armed');assert.deepEqual(armed.before,before);
   flight=admin.post(base+ep()+'/code-draft/publish',{headers:{Origin:base,'X-CSRF-Token':session.csrf_token,...match(fn.updated_at)},data:{deployment_id:publication.deployment_id,draft_version:publication.draft_version},timeout:180000}).then(async response=>{const raw=await response.text();return {status:response.status(),body_bytes:Buffer.byteLength(raw),body_sha256:sha(raw)};}).catch(error=>({error:diagnosis(error)}));pending.push(flight);g.send('observe');
   const held=await g.wait('gated',35);record.held=held;await save();assert.equal(held.phase,phase);assert.equal(held.durable.draft_link.last_deployment_id,publication.deployment_id);g.send('interrupt');record.cut=await g.wait('cut');await save();assert.equal(record.cut.native_signal,9);assert.equal(record.cut.exit_code,137);
@@ -118,11 +136,11 @@ async function main(){
    const first={deployment_id:randomUUID(),kind:'initial'};publications.push(first);await save();await api(ep()+'/code-deployments',{method:'POST',status:201,headers:match(fn.updated_at),body:{deployment_id:first.deployment_id,handler:'publication-recovery.cjs.handler'}});stable=await api('/api/deployments/'+first.deployment_id+'/artifact',{method:'PUT',bytes:archive});assert.equal(stable.state,'published');await api(ep()+'/versions/'+stable.code_hash+'/promote',{method:'POST',headers:match((await api(ep())).updated_at)});fn=await api(ep());
    token=await create('token','/api/services/'+service.id+'/tokens',{name:'invoke-persistent-editor-'+id.slice(0,8),rights:['read'],function_ids:[fn.id]});await api(ep()+'/code-draft',{method:'POST',status:201,headers:match(fn.updated_at),body:{base_code_hash:stable.code_hash}});await invoke(stable,'stable-A');
   });
-  await check('Coupure receiving complète : brouillon persistant, UI ordinateur et pilote explicite',()=>interrupt('receiving',1440));
+  await check('Coupure receiving complète : brouillon persistant, UI ordinateur puis base compacte explicite',async()=>{await interrupt('receiving',1440);await compactValidationBase();});
   await check('Coupure validating et perte du helper : garde indépendante, UI mobile et pilote explicite',()=>interrupt('validating',390));
   await check('Déduplication après reprise et consolidation native des deux coupures',async()=>{
    const duplicate=await publish(await draft(),'explicit-unchanged');assert.equal(duplicate.code_changed,false);assert.equal(duplicate.code_hash,latest.code_hash);assert.equal(duplicate.revision_id,latest.revision_id);await invoke(duplicate,'validating-pilot',true);
-   const native=await remote('inspect');observations.push({scenario:'native-consolidation',native});await save();assert.equal(invocations.length,6);assert.equal(new Set(invocations.map(v=>v.id)).size,6);assert.equal(native.invocations.length,6);for(const item of invocations){const row=native.invocations.find(v=>v.id===item.id);assert(row?.state==='succeeded'&&row.handler_started===1&&row.http_status===200);assert.equal(native.revisions.find(v=>v.id===row.revision_id).code_hash,item.code_hash);}assert.equal(native.revisions.length,3);assert.equal(native.versions.length,3);assert.equal(native.candidates.length,6);assert(native.candidates.every(v=>publications.some(p=>p.deployment_id===v.id)));assert.equal(native.candidates.filter(v=>v.state==='published').length,4);assert.equal(native.candidates.filter(v=>v.state==='failed'&&v.error_code==='control_interrupted').length,2);assert.equal(native.audits.filter(v=>v.action==='deployment.prepare').length,6);assert.equal(native.audits.filter(v=>v.action==='function.deploy').length,4);assert.equal(native.audits.filter(v=>v.action==='deployment.abandon').length,0);assert.equal(native.function.active_revision_id,stable.revision_id);assert.equal(native.function.updated_at,fn.updated_at);assert.equal(native.integrity,'ok');assert.deepEqual(native.foreign_keys,[]);assert.equal(gates.length,2);assert(gates.every(v=>v.restored));assert.equal(Object.keys(captures).length,4);assert.equal(faults.length,0);
+   const native=await remote('inspect');observations.push({scenario:'native-consolidation',native});await save();assert.equal(invocations.length,6);assert.equal(new Set(invocations.map(v=>v.id)).size,6);assert.equal(native.invocations.length,6);for(const item of invocations){const row=native.invocations.find(v=>v.id===item.id);assert(row?.state==='succeeded'&&row.handler_started===1&&row.http_status===200);assert.equal(native.revisions.find(v=>v.id===row.revision_id).code_hash,item.code_hash);}assert.equal(native.revisions.length,4);assert.equal(native.versions.length,4);assert.equal(native.candidates.length,7);assert(native.candidates.every(v=>publications.some(p=>p.deployment_id===v.id)));assert.equal(native.candidates.filter(v=>v.state==='published').length,5);assert.equal(native.candidates.filter(v=>v.state==='failed'&&v.error_code==='control_interrupted').length,2);assert.equal(native.audits.filter(v=>v.action==='deployment.prepare').length,7);assert.equal(native.audits.filter(v=>v.action==='function.deploy').length,5);assert.equal(native.audits.filter(v=>v.action==='deployment.abandon').length,0);assert.equal(native.draft_audits.filter(v=>v.action==='code_draft.create').length,2);assert.equal(native.draft_audits.filter(v=>v.action==='code_draft.save').length,2);assert.equal(native.draft_audits.filter(v=>v.action==='code_draft.discard').length,1);assert.equal(native.function.active_revision_id,stable.revision_id);assert.equal(native.function.updated_at,fn.updated_at);assert.equal(native.integrity,'ok');assert.deepEqual(native.foreign_keys,[]);assert.equal(gates.length,2);assert(gates.every(v=>v.restored));assert.equal(Object.keys(captures).length,4);assert.equal(faults.length,0);
   });
   scenariosPassed=true;
  }finally{
