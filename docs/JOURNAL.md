@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — image115 construite, pin046 avant bascule
+
+Build DEV au gel d028cb8/462sources terminé sortie0 et client joint : image04604089,
+38backend exacts et quatreweb identiques au build local, manuel18/74SHA8d2434cf.
+API433/CIDa9c2bb4d/démarrage et référence af6 conservés, repos et5982originaux
+recoupés. Le client exige désormais046 explicitement ; le produit construit
+ne change pas dans ce checkpoint de pin et de métadonnées.
+
+Choix de bascule persisté avant son opérateur : sauvegardes contrôle/registre
+sous1001 au repos, tag de retour propre vers433, Composecontrol seul sans build.
+Un échec vérifie la propriété de l’image avant retour433, sans restaurer les
+bases ni toucher la référence. La bascule et le replay36 restent à exécuter.
+
 ## 22 novembre 2026 — relais de focus115 implémenté, avant build DEV
 
 Après contrat poussé8a50044, le parent arme ses intentions fichier/édition après

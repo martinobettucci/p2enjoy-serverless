@@ -79,3 +79,30 @@ configuration/référence/5982originaux et nettoyages physiques.
 
 115 ne ferme qu’après ces preuves ;070 reste ouvert pour la persistance après
 redémarrage et les interruptions de publication, qui ne sont pas prouvées ici.
+
+## Image construite et préparation de bascule —22novembre2026
+
+Build au gel d028cb8/462sources : image exacte
+`sha256:04604089a8cb61d6015be0cde1671f29265878ff4f6f081509542ebc126055fc`.
+38backend identiques aux sources et quatre ressources web identiques au build
+local ; manuel18/74SHA8d2434cf. API433/CIDa9c2bb4d et référence af6 restent
+inchangés pendant le build, avec repos/configuration/originaux recoupés.
+Le client de qualification exigera explicitement04604089 ; ce changement de
+pin et les métadonnées de bascule n’affectent aucun octet applicatif construit.
+
+Avant recréation : vérifier les identités/démarrages exacts du relevé final,
+repos et absence de garde ; sauvegarder SQLite contrôle et registre avec
+intégrités sous propriétaire1001. Conserver les comptes de tables, migrations,
+fichiers officiels et inventaire des5982originaux. Retenir l’image433 dans un
+tag de retour propre à cette seule opération, et comparer les environnements
+par défaut des deux images, sans exporter de valeurs.
+
+La commande Compose du seul service control emploie les deux fichiers officiels,
+--no-build et --wait90s. En cas d’échec de bascule/recoupement, vérifier qu’aucun
+autre opérateur n’a remplacé l’image attendue avant de rétablir le tag de
+composition vers433 et recréer le seul contrôle. Ne restaurer aucune base :
+le changement de focus n’ajoute pas de migration. Conserver l’échec et son
+reçu de retour, sans relance E2E automatique. Ce retour borné évite qu’une
+erreur d’image laisse le contrôle indisponible ; il ne touche pas la référence.
+Une image, un conteneur ou une configuration d’origine inconnue interdit ce
+retour automatique et conserve les observations pour instruction.
