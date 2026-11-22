@@ -11,6 +11,15 @@ future adaptation de coupure attend un contrat séparé. Le résumé courant du
 contrat éditeur est réaligné sur070.1/.4 closes, constat enregistré au backlog.
 Aucun code produit, test exécuté ou nouveau critère clôturé à ce checkpoint.
 
+Après contrat aa75650 poussé : client sept groupes et packager cinq fichiers
+implémentés, collecteur natif enrichi de champs de candidats/audits sans secrets.
+Même acteur technique pour préparation et PUT des quatre connexions ; syntaxe
+JS et trois programmes Python contrôlée. Revue statique sans blocage après
+corrections : propriété exhaustive, requête originale jointe, observations avant
+assertions et écritures sérialisées ; trois programmes privés de provenance relus.
+E2E non lancé.
+Index466sources prévu, produit/images/manuel inchangés ; aucun critère fermé.
+
 
 ## 22 novembre 2026 —36groupes qualifiés,115/116 clôturées
 

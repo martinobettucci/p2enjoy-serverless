@@ -21,7 +21,7 @@ with read_control(root/'state/control.sqlite3') as db:
  db.execute('BEGIN')
  result={'operator_uid':os.geteuid(),'free_bytes':shutil.disk_usage(root/'state').free,
          'global_drafts':db.execute('SELECT count(*) FROM code_drafts').fetchone()[0],
-         'functions':[],'drafts':[],'draft_mutations':[],'revisions':[],'invocations':[],'tokens':[],'storage_commands':[],'deployments':[]}
+         'functions':[],'drafts':[],'draft_mutations':[],'revisions':[],'invocations':[],'tokens':[],'storage_commands':[],'deployments':[],'publication_candidates':[],'publication_audits':[]}
  if namespace:
   ns=db.execute('SELECT name FROM namespaces WHERE id=?',(namespace,)).fetchone()
   assert ns and ns['name'].startswith('code-editor-read-concurrency-')
@@ -42,6 +42,16 @@ with read_control(root/'state/control.sqlite3') as db:
       assert stat.S_IMODE(file.stat().st_mode)==int(item['mode'],8)
     result['revisions'].append({k:v[k] for k in ('id','function_id','code_hash','stored_bytes','deleted_at')}|{'artifact_directory_exists':path.parent.exists(),'inventory_count':len(items),'inventory':items})
    result['deployments']=[dict(v) for v in db.execute('SELECT id,function_id,state,revision_id FROM deployments WHERE function_id IN ('+marks+') ORDER BY id',keys)]
+   # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_PUBLICATION_CONTINUITY.md
+   for v in db.execute('SELECT id,function_id,state,error_code,reserved_bytes,configuration_cipher IS NULL AS configuration_erased,revision_id,code_hash,code_only FROM deployments WHERE function_id IN ('+marks+') ORDER BY id',keys):
+    row=dict(v);folder=root/'state/artifacts'/str(UUID(v['id']));file=folder/'archive.zip'
+    assert not folder.is_symlink() and not file.is_symlink()
+    row.update(artifact_directory_exists=folder.exists(),archive_bytes=file.stat().st_size if file.exists() else 0)
+    result['publication_candidates'].append(row)
+   for v in db.execute("SELECT id,action,object_id,created_at,detail_json FROM audit_events WHERE object_id IN ("+marks+") AND action IN ('deployment.prepare','function.deploy','deployment.abandon') ORDER BY id",keys):
+    row={k:v[k] for k in ('id','action','object_id','created_at')};detail=json.loads(v['detail_json'])
+    row.update({k:detail[k] for k in ('deployment_id','revision_id','code_hash') if k in detail})
+    result['publication_audits'].append(row)
    result['invocations']=[dict(v) for v in db.execute('SELECT id,function_id,revision_id,state,handler_started,http_status FROM invocations WHERE function_id IN ('+marks+') ORDER BY id',keys)]
    result['storage_commands']=[dict(v) for v in db.execute('SELECT id,function_id,kind,state,phase,created_at,completed_at,error_code FROM storage_commands WHERE function_id IN ('+marks+') ORDER BY id',keys)]
   result['tokens']=[dict(v) for v in db.execute('SELECT t.id,t.revoked_at FROM service_tokens t JOIN services s ON s.id=t.service_id WHERE s.namespace_id=? ORDER BY t.id',(namespace,))]

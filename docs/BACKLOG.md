@@ -1067,6 +1067,14 @@ Critères d'acceptation :
   Constat documentaire avant reprise : le résumé courant de CONSOLE_EDITOR
   mentionne encore070.1/.4 ouvertes ; le réaligner sur leurs clôtures prouvées,
   en conservant les états historiques datés. Aucun critère nouveau fermé ici.
+  Revue du client avant gel : le cleanup initial abandonnait tout prepared de
+  la fonction sans comparer ses UUID aux intentions ; le contrôle de perte de
+  réponse s'arrêtait juste avant navigation. Exiger l'ensemble possédé avant
+  mutation/purge et absence de réponse jusqu'au départ achevé, avec requête
+  effectivement interrompue/jointe. Aucun E2E n'a précédé ces corrections.
+  Même revue : les états discriminants de plusieurs assertions n'étaient
+  enregistrés qu'après leur succès. Persister les projections HTTP/natives
+  autorisées avant assertions ; conserver aussi le premier rouge et son état.
 - [x] SLS-070.6 Après publication : lien vers le test de SLS-071, promotion explicite ou
   pilote, retour à un hash précédent. Le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
   suit le lien d’une version pilote puis celui de la publication réelle de

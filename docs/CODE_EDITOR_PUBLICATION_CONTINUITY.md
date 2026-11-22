@@ -132,3 +132,22 @@ dix migrations, mêmes CID/images/démarrages, référence/configuration/budgets
 notes actives/proposées de livraison cfc94ca et5982originaux conservés. Les images
 communes sont également ouvertes individuellement. Les preuves négatives restent
 séparées à zéro groupe ; un défaut découvert rejoint le backlog avant correction.
+
+## Banc implémenté, non encore exécuté
+
+`e2e/code-editor-publication-continuity.mjs` porte les sept groupes ;
+`e2e/code-editor-publication-package.py` produit les cinq fichiers originaux et
+leur inventaire exact, dont le payload256Kio. Le collecteur existant
+`code-editor-build-inspect.py` ajoute seulement les candidats détaillés et les
+audits de préparation/publication/abandon de la fonction possédée, sans valeur
+de configuration exportée. Les quatre candidats d’upload sont préparés et
+alimentés par le même jeton Read/Update ; les candidats de l’éditeur appartiennent
+à la session administratrice. Cette distinction respecte l’accès par acteur.
+
+Index466sources prévu après ajout de ce contrat et des deux programmes ;
+syntaxes JS/Python contrôlées. Aucun paquet généré, groupe E2E, invocation,
+capture ou nettoyage de ce nouveau passage encore exécuté. Les compteurs attendus
+avant purge sont neuf candidats (quatre publiés/cinq échoués), quatre révisions,
+neuf audits de préparation, quatre de publication et un abandon ; l’UUID refusé
+avant préparation n’y figure pas. Les coupures et restart restent à réaliser
+selon leur futur contrat distinct.
