@@ -178,3 +178,43 @@ Le client exige schéma incomplet au point de perte ET diagnostic de la garde,
 absence du CID, source canonique intacte et bornesD+240/D+270. Le modehistorique
 et les nominaux ne suspendent pas le contrôle. Motif : une simple perte du
 traceur peut laisser le startup finir avant120s et ne prouverait pas ce chemin.
+
+
+## Diagnostics des bornes propres de l’exporteur
+
+Avant code : trois cas natifs cli90, join5 et alarm-join5, chacun dans sa seule
+unitérootDEV oneshot, sansrestart, RemainAfterExit, TimeoutStart180s,
+TimeoutStop30s et KillModecontrol-group. L’opérateur recoupe ces propriétés
+réelles, MainPIDself et cgroup avant toute action. Aucun de ces cas n’appelle
+preserve ni n’écrit dans les dossiers d’images canoniques.
+
+CLI90 exécute verify original, observe son armement90 puis retient l’openat
+/etc/spark/env dans son try. Après90s réelles, SIGALRM doit êtrepending ;
+libération sans supprimer ce signal, erreur réelle1/TimeoutError et terminaison
+au plus1s après le gate. Aucun signal d’alarme ou résultat n’est fabriqué.
+
+Les deux autres cas appellent export_image original, sortie du vrai image-save
+vers un pipe noyau non drainé. Le threadDocker doit être réellement bloqué sur
+ce même pipe avant arrêt du seul wrapper timeout. Le descendant runuser est
+retenu à son vrai PTRACE_EVENT_EXIT, statutcomplet et GETEVENTMSG de SIGKILL
+exigés. Le finally du helper doit produire image_export_group_not_joined ;
+la durée EXIT→terminaison est comprise entre4,5 et5,5s (tolérance d’observation
+native0,5s autour de5). cause_timeout égale min(45,tempsrestant réellementlu),
+à1e-9 de représentation près. Une erreur de nettoyage10s ou un faux45 àla
+place du restant44 ne peut pas passer.
+
+Pour alarm-join5, le helper est retenu avant son getitimer jusqu’à46s après le
+vrai armement90. Il lit ensuite son propre tempsrestant (~44s). SIGALRM doit
+être àlafois bloqué etpending pendant la jonction, après la mort du wrapper et
+pendant le vrai EXIT-stop. Aucun arrêt du helper pendant ces5s. L’erreur de
+nettoyage garde priorité sur l’alarme et la causeTimeoutExpired, comme dans le
+code exécuté. Un noyau ne donnant pas l’événement exigé garde le cas rouge.
+
+PID/naissance/parent/PGID/SID/cgroup/argv/pidfd sont recoupés avant les signaux ;
+aucune action sur le daemon ou les applications. La sortie retenue est libérée
+parCONT, jamais par un secondSIGKILL supposé ; tous les descendants sont
+récollectés soussubreaper et le groupe est vide. Chaque cas recoupe ensuite les
+mêmes services/CID/image/démarrage/configuration/collection et les mêmes reçus,
+SHA et modes canoniques. La qualification attend aussi l’état terminal puis
+l’arrêt et la jonction réels de sa seule unitéroot ; diagnostic = zéro groupe de
+clôture, aucune rétention historique réadditionnée.
