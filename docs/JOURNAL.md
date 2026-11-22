@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — frontières121 simplifiées avant code
+
+Le critère EAGAIN noyau entre connexions sœurs est impropre : SQLite peut
+rendre BUSY en interne, et l'arrêt au retour fcntl précède potentiellement
+la libération du mutex. Les mesures conservent acquisition réelle, writer
+absent et GETtimeout ; aucune pile native ne prouve le mutex particulier.
+
+Décision : utiliser le prctl de restauration du nom déjà exécuté après retour
+des vrais workers. read-result permet une politique acceptée avant décision
+(GET410) ; read-decision observe la décision déjà committée avant réponse
+(PUT200, puis GET200 et snapshot410) ; policy-commit retient la réponse après
+commit constaté par version/audit, puis détruit la vraie connexion sans rejeu.
+Acquisition/libération WAL et succèsHTTP recoupent les fins de transaction.
+Le point intérieur SQLite reste réservé à la faute de garde, nommé pour sa
+réservation. Pas de single-step, layout binaire, nouveau flag/point produit ou
+budget augmenté. Contrat corrigé avant code ; preuve à produire sur1aa.
+
 ## 22 novembre 2026 — clôture indépendante122 attestée sur501sources
 
 Une seule fonction originale est appelée puis son lecteur retenu ; SIGSTOP du

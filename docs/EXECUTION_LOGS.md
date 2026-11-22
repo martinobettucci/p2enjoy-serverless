@@ -269,10 +269,14 @@ La réservation ne change aucune donnée métier et reste sous la même deadline
 Références de sémantique : [transactions SQLite](https://www.sqlite.org/lang_transaction.html)
 et [isolation WAL](https://www.sqlite.org/isolation.html), consultées le 22 novembre 2026.
 
-La preuve distingue donc le changement accepté pendant le premier IO (refus
-du résultat) et l'écriture retenue pendant la transaction finale (ordre natif
-des commits puis refus des lectures suivantes). Elle ne fait pas passer un
-simple timeout pour une vérification discriminante des droits.
+La preuve distingue le changement accepté avant la décision finale (refus du
+résultat), celui accepté après son commit mais avant la réponse réseau (lecture
+encore valide puis refus du snapshot aux appels suivants), et la réponse de
+politique perdue après son commit réellement constaté. Les phases natives de
+fin de worker et les résultats HTTP/versions/audits recoupent ces ordres. Elle
+ne fait pas passer un timeout ou une requête seulement envoyée pour une preuve
+de droits ou de commit, et n'exige pas un EAGAIN noyau pour un conflit que SQLite
+peut résoudre à l'intérieur du même processus.
 
 Les messages applicatifs de fonctions supprimées ne sont pas ouverts par cette
 API. Une vue service peut conserver les résumés fixes de plateforme selon les
@@ -421,20 +425,50 @@ Les fichiers de garde sont privés, immuables pendant la fenêtre et recoupés p
 empreinte ; une garde systemd indépendante peut tuer le seul traceur possédé
 par pidfd, restituer ses ressources puis constater la libération de ses threads.
 
-Les travailleurs du produit portent les noms diagnostiques `journal-subject`,
-`journal-read`, `journal-verify`, `journal-policy` ou `journal-write`. La première barrière retient
-l'entrée réelle `openat` du SQLite principal dans `journal-read`. La seconde
-retient le retour réussi du verrou WAL d'écriture de `BEGIN IMMEDIATE` dans
-`journal-verify` ; un arrêt avant acquisition ne vaut pas réservation. Ptrace
-observe arguments et résultats sans jamais les modifier. Le thread HTTP reste
-actif pendant une retenue de lecture ; les enfants natifs hérités sont joints.
-L'observation courte de la requête d'écriture concurrente reste distincte du
-verrou acquis et n'assimile pas la maintenance à cette requête. Pour la politique,
-le vrai worker `journal-write` doit être observé au retour `EAGAIN` du verrou
-WAL d'écriture tandis que `journal-verify` le conserve. La version native reste
-alors inchangée. Après libération : réponse de lecture, commit du PUT et refus
-du snapshot précédent sont recoupés. Ce nom distingue l'écriture demandée de
-la maintenance et évite de lui attribuer son éventuel échec de verrou.
+Correction121 décidée après les mesures500/501 : les modes ci-dessous sont
+spécifiés avant code ; leur implémentation et leurs preuves restent à produire.
+Le produit1aa70214 reste inchangé. Les noms de workers existants suffisent ;
+aucun nouveau point d'arrêt, endpoint, nom diagnostique ou flag n'est ajouté.
+
+Les travailleurs du produit portent les noms `journal-subject`, `journal-read`,
+`journal-verify`, `journal-policy` et `journal-write`. Le mode `read` retient
+l'entrée réelle openat du SQLite principal dans journal-read ; `write` fait de
+même dans journal-write pour éprouver l'autorité retirée avant l'écriture.
+Les nouvelles frontières utilisent le prctl(PR_SET_NAME) qui restitue le nom
+précédent dans le finally de reader_name, après retour du callback et contrôle
+de sa deadline. Le comm courant identifie le worker qui se termine. Ptrace
+n'en change ni arguments, registres, résultat ni mémoire. Les autres threads
+sont détachés dès acquisition de la frontière, et tous sont joints ensuite.
+
+- `read-result` : fin du worker journal-read, avant la nouvelle autorisation
+  et la transaction finale. Une politique réellement modifiée et acceptée
+  pendant cette retenue doit donner410/log_policy_changed après libération,
+  sans anciennes lignes ni timeout de substitution.
+- `read-decision` : fin de journal-verify après retour de final_check. Le même
+  thread doit avoir acquis puis libéré le verrou WAL d'écriture réel (bon
+  inode/byte120, fcntl réussis), avant le prctl de restauration. Le PUT concurrent
+  est réellement committé alors que la réponse GET reste retenue. Après
+  libération, GET200 demeure valide et son ancien snapshot donne410. Le code
+  de succès et le chemin final_check qui committe avant retour distinguent
+  cette issue d'une erreur qui passerait aussi par le finally.
+- `policy-commit` : fin de journal-write, avec acquisition/libération WAL et
+  prctl de restauration. Version et audit sont relus pendant la retenue et
+  attestent le commit. La vraie connexion HTTP est ensuite détruite, puis le
+  worker libéré : erreur cliente, même unique version/audit et aucun POST rejoué.
+- `sqlite-reservation` : arrêt au retour réussi du F_SETLK exclusif byte120,
+  réservé à la faute de garde122. Ce point peut encore être dans le mutex
+  interne SQLite ; il ne sert pas à prouver l'ordre des requêtes concurrentes.
+
+L'ancien discriminant journal-write/F_SETLK→EAGAIN est écarté : SQLite peut
+refuser le verrou entre connexions sœurs avec SQLITE_BUSY avant tout fcntl.
+Le point d'arrêt au retour du fcntl peut aussi précéder la libération de son
+mutex interne et empêcher l'autorisation SQL du PUT d'atteindre journal-write.
+La [mesure501](evidence/execution-journal-independent-guard-closure-dev-2026-11-22.json)
+et le [diagnostic500](evidence/execution-journal-final-lock-diagnostic-dev-2026-11-22.json)
+conservent ce qui a été réellement observé, sans attribuer une pile native non
+capturée. Cette correction porte le banc, pas l'application ni ses transactions.
+Références : [source SQLite unixShmLock](https://sqlite.org/src/doc/trunk/src/os_unix.c)
+et le code réellement déployé reader_name/io/final_check/write_policy.
 
 L'observateur attend les arrêts natifs par un réveil SIGCHLD sur pipe non
 bloquant (`signal.set_wakeup_fd`), puis lit tous les statuts réels par waitpid.
@@ -445,8 +479,9 @@ supprime le sommeil fixe0,5ms dont le coût pouvait empêcher d'atteindre la pha
 finale sous le budget produit. Elle ne modifie aucun registre/résultat ni budget.
 Référence de mécanisme : [documentation Python3.14](https://docs.python.org/3.14/library/signal.html#signal.set_wakeup_fd).
 La [mesure500sources](evidence/execution-journal-final-lock-diagnostic-dev-2026-11-22.json)
-précède la correction ; son efficacité et la comparaison sans/avec trace restent
-à prouver sur le corpus réel.
+précède la correction ; les mesures501 attestent ensuite l'acquisition du verrou
+avec réveil natif, sans qualifier l'ancien scénario writer. Les nouvelles
+frontières de fin de worker restent à éprouver sur le corpus réel.
 
 Acquisition au plus40s, retenue totale45s, alarme50s et secours60s ; la lecture
 du produit garde son propre budget2s, qui n'est jamais étendu par ce banc. Une
@@ -462,6 +497,32 @@ résultat noyau négatif, puis limites initiales rétablies **avant** reprise de
 Python. Aucune écriture de registre ni remplacement de syscall. La garde
 restitue aussi cette limite si le traceur disparaît. L'échec contrôlé503 et la
 lecture suivante réussie sont des preuves HTTP séparées de l'observation native.
+
+La clôture du client sépare toujours la fermeture locale (API, contextes,
+navigateur, paquet temporaire) de la purge métier. Un finally externe ferme
+les ressources locales même si la jonction native ou la sauvegarde du rapport
+échoue. La purge exige les gardes réellement jointes ; sans cette preuve, les
+UUID restent au rapport rouge pour récupération explicite. Après un échec de
+santé immédiat, le client peut observer le reçu de la garde déjà armée jusqu'à
+125s depuis le lancement du helper (60s+55s existants et10s de jonction), avec
+statuts/identités/threads/santé recoupés avant finish. Le scénario n'est pas
+rejoué, les bornes40/45/50/60 et les2s du produit restent identiques. Les erreurs
+de tentative et d'observation sont conservées ; une récupération acquise rend
+le nettoyage possible mais ne transforme pas l'échec primaire en réussite.
+Contrat et preuve propre de ce flux : [SLS-122](BACKLOG.md#sls-122).
+Le restorer attend HTTP200 et Dockerhealthy dans son alarme55s existante ; une
+photographie Docker encore unhealthy ne suffit pas à abandonner une reprise.
+Il conserve128sondes au plus, leur dépassement et le dernier état. L'expiration
+globale utilise une exception distincte des timeouts réseau et ne peut pas être
+absorbée par une nouvelle sonde. Chaque reçu identifie le PID/naissance/cgroup
+du restorer et son origine exacte. `independent` demeure le mode rescue ; une
+preuve de timer recoupe l'ID du reçu et le PID avec le journal de l'unité
+systemd. Le marqueur d'échec conserve ce rattachement même si la garde échoue ;
+le mode recover-low-fds traité garde un unique JSON stdout.
+Le client de preuve isolé peut attendre exclusivement la garde indépendante
+après un SIGSTOP réel du seul helper possédé. Cette option est dans le banc,
+jamais dans le produit. Elle n'émet aucun secours actif avant le timer60 et
+reste sous la borne client125s ; le GET503 demeure rouge après purge réussie.
 
 Pour la coupure du contrôle, le handler original du compteur écrit et fsync son
 compteur, puis écrit et fsync un reçu portant son vrai identifiant d'appel et

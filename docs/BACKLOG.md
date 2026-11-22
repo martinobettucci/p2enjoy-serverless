@@ -72,7 +72,7 @@ bloquée est sautée et son blocage est nommé.
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
 | 3 | [SLS-120](#sls-120) Frontière réelle du buffer de journaux | Corriger | `[~]` | SLS-040, SLS-121 | cette unité |
-| 3 | [SLS-121](#sls-121) Acquisition native du verrou final du journal | Corriger | `[~]` | SLS-040 | cette unité |
+| 3 | [SLS-121](#sls-121) Frontières natives de décision du journal | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-122](#sls-122) Clôture du client de diagnostic après refus natif | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
@@ -3575,7 +3575,9 @@ au verrou natif d’API08 ;120.4 attend maintenant [SLS-121](#sls-121).
 À mettre à jour : contrat de collecte dans `EXECUTION_LOGS.md`/`EXECUTION.md`,
 preuve et clients ; manuel s'il décrit incorrectement le buffer expurgé.
 
-## SLS-121 — Acquérir la frontière native de décision du journal
+<a id="sls-121"></a>
+
+## SLS-121 — Éprouver les frontières natives de décision du journal
 
 Statut : [~] — API08 du second passage072 échoue avant acquisition de la
 barrière finale :40s,66178tours de boucle, zéro thread retenu. Les cinq groupes
@@ -3583,10 +3585,12 @@ précédents restent partiels, zéro qualifié. Nature : Corriger. Dépend de :
 SLS-040. Ordre : 3. Contrat de frontière :
 [EXECUTION_LOGS](EXECUTION_LOGS.md#instrumentation-native-des-lectures).
 
-Résultat attendu : observer le vrai verrou d’écriture SQLite acquis par
-journal-verify avant de laisser progresser une écriture concurrente, avec un
-banc qui respecte les délais réels du produit et restitue ses threads. Ne pas
-changer de produit pour satisfaire une hypothèse non mesurée du banc.
+Résultat attendu : éprouver les changements acceptés avant et après la
+décision de lecture, et la réponse perdue après commit de politique, par de
+vraies frontières natives de worker et les résultats HTTP/versions/audits.
+Le banc respecte les délais du produit et restitue ses threads ; il n'exige
+pas d'errno noyau pour un conflit que SQLite peut traiter en interne. Ne pas
+changer de produit pour satisfaire une hypothèse du banc.
 
 - [x] SLS-121.1 Sceller le rouge499sources/1aa70214, ses programmes et reçus,
   cinq groupes partiels hors qualification ; nettoyage physique et5982originaux.
@@ -3752,3 +3756,16 @@ dixprocessus recensés absents et paquet temporaire retiré. Le primaire reste
 completed=false/code1, cleanup=true ; zéro groupe qualifié. Le collecteur initial
 échoué est conservé ; son addendum RO n'ajoute aucun handler ou faute.122 reste
 [~] pour l'intégration12API/25communs, actuellement dépendante du défaut121.
+
+Décision121 avant correction du banc, après la preuve de clôture122 : remplacer
+l'attente EAGAIN par les phases de restauration du nom de worker existantes.
+read-result retient après le résultat principal mais avant vérification finale
+(PUT accepté→GET410) ; read-decision retient après final_check et son commit
+(PUT accepté avant réponse→GET200 puis snapshot410) ; policy-commit retient
+après write_policy (version/audit committés→vraie perte de réponse sans rejeu).
+Pour les deux derniers, recouper acquisition/libération WAL du même TID/inode
+avant son prctl de fin et exiger les succès HTTP/états qui discriminent le retour
+normal du finally d'erreur. Aucune pile/registre/buffer n'est substitué ; aucun
+symbole ou layout interne SQLite, single-step ou changement produit nécessaire.
+L'arrêt dans SQLite est renommé sqlite-reservation et réservé à la faute122.
+Les modes sont à implémenter puis prouver, toujours sous2s produit/40/45/50/60.
