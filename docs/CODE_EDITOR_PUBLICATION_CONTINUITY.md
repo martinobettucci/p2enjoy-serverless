@@ -133,7 +133,7 @@ notes actives/proposées de livraison cfc94ca et5982originaux conservés. Les im
 communes sont également ouvertes individuellement. Les preuves négatives restent
 séparées à zéro groupe ; un défaut découvert rejoint le backlog avant correction.
 
-## Banc implémenté, non encore exécuté
+## Checkpoint avant le premier passage, au gelbecedfc
 
 `e2e/code-editor-publication-continuity.mjs` porte les sept groupes ;
 `e2e/code-editor-publication-package.py` produit les cinq fichiers originaux et
@@ -144,10 +144,20 @@ de configuration exportée. Les quatre candidats d’upload sont préparés et
 alimentés par le même jeton Read/Update ; les candidats de l’éditeur appartiennent
 à la session administratrice. Cette distinction respecte l’accès par acteur.
 
-Index466sources prévu après ajout de ce contrat et des deux programmes ;
-syntaxes JS/Python contrôlées. Aucun paquet généré, groupe E2E, invocation,
-capture ou nettoyage de ce nouveau passage encore exécuté. Les compteurs attendus
+À ce checkpoint, index466sources vérifié après ajout de ce contrat et des deux
+programmes ; syntaxes JS/Python contrôlées. Aucun paquet généré, groupe E2E,
+invocation, capture ou nettoyage n’avait encore été exécuté. Les compteurs attendus
 avant purge sont neuf candidats (quatre publiés/cinq échoués), quatre révisions,
 neuf audits de préparation, quatre de publication et un abandon ; l’UUID refusé
 avant préparation n’y figure pas. Les coupures et restart restent à réaliser
 selon leur futur contrat distinct.
+
+## Premier passage conservé, reprise117 avant correction
+
+[Échec becedfc/466](evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json) :
+quatre groupes passent puis attente réseau5s expirée au départ du document,
+zéro groupe qualifié/aucun commun. Deux captures desktop, quatre handlers,
+une garde et purge complète recoupés. Le candidat UI est publié plus tard,
+sans événement terminal réseau conservé ; aucune conclusion native inventée.
+Le [contrat117](CODE_EDITOR_NAVIGATION_OBSERVATION.md) précède diagnostic puis
+correction et nouveau7+25. Les sources de ce premier passage restent leur époque.

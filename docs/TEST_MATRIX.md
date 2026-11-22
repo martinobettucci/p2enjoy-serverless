@@ -1,7 +1,15 @@
 # Matrice de qualification réelle
 
+Le [premier banc de continuité](evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json)
+échoue au cinquième groupe après quatre passés : zéro qualifié/aucun commun,
+quatre handlers, deux captures et nettoyage physique recoupés. [117](CODE_EDITOR_NAVIGATION_OBSERVATION.md)
+porte le diagnostic réel de terminaison réseau après départ du document, puis
+le nouveau7+25 ; aucune preuve de mobile ou d’orphelin tirée de ce premier rouge.
+
+
 [Continuité de publication éditeur](CODE_EDITOR_PUBLICATION_CONTINUITY.md),070.3/.5 :
-sept groupes ciblés puis25communs prévus, client non exécuté. Les oracles portent
+sept groupes ciblés puis25communs à rejouer après117 ; le premier ciblé est
+interrompu au cinquième groupe. Les oracles portent
 mutation avant préparation409 sans candidat, instantané préparé immuable malgré
 nouveau brouillon, GET du même UUID après départ réel du document et orphan429
 avec quatre uploads physiquement admis. La persistance/restart et les coupures

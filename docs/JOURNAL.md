@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 22novembre2026 — observation réseau non acquise,117 enregistrée
+
+Le premier banc070 becedfc/466 termine89379/sortie1/joint après quatre groupes
+passés ; cinquième échoué sur original_request_not_joined_after_departure.
+Deux captures desktop ouvertes, quatre handlers, garde/lecteur restitués et purge
+physique recoupés. Aucun commun lancé, zéro qualifié. Preuve négative publiée,
+gzip02baf71c/brut9b446ec7 ; sources/programmes conservés avant libération du gel.
+Le candidat UI publié plus tard ne date pas sa requête originale. Ni response ni
+requestfailed dans la fenêtre5s ; import configuré8s, durée restante inconnue.
+117 spécifie un diagnostic navigateur/CDP natif borné20s et séparé, avant
+correction ou replay32. Aucun défaut produit ni modification d’image revendiqué.
+
+
 ## 22 novembre2026 — contrat du POST éditeur avant son banc
 
 Livraison115/116/070.4 cfc94ca poussée puis21documents/preuves synchronisés ;

@@ -1,5 +1,17 @@
 # Architecture technique
 
+## Observation de navigation non acquise —22novembre2026
+
+Le [premier ciblé070](evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json)
+au gelbecedfc/466sources surAPI046 termine en échec : quatre groupes passés,
+cinquième en attente réseau expirée, zéro qualifié et aucun commun. Quatre
+invocations, une garde et purge physique recoupés ; deux captures desktop
+inspectées. Le candidat UI est publié plus tard sans événement terminal réseau
+conservé ; aucune cause native ni preuve mobile n’en est déduite. [117](CODE_EDITOR_NAVIGATION_OBSERVATION.md)
+précède diagnostic réel puis correction/replay32. Services,38backend/quatreweb,
+010, manuel18/74SHA8d2434cf, notes/configuration/budgets et5982originaux conservés.
+
+
 ## Retour au fichier et attentes UI qualifiés —22novembre2026
 
 La [preuve36](evidence/code-editor-adoption-focus-dev-2026-11-22.json) clôt **SLS-115 et SLS-116** : onze groupes ciblés puis

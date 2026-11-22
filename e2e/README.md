@@ -1,10 +1,17 @@
 # Qualification de la plateforme
 
-Le prochain complément070 suit [CODE_EDITOR_PUBLICATION_CONTINUITY](../docs/CODE_EDITOR_PUBLICATION_CONTINUITY.md) :
+Le premier banc070 est [échoué et conservé](../docs/evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json) :
+quatre groupes passés puis attente réseau5s expirée, zéro qualifié, aucun commun.
+Le [contrat117](../docs/CODE_EDITOR_NAVIGATION_OBSERVATION.md) impose un diagnostic
+séparé par événements réels du navigateur/CDP avant correction et nouveau7+25.
+
+
+Le complément070 suit [CODE_EDITOR_PUBLICATION_CONTINUITY](../docs/CODE_EDITOR_PUBLICATION_CONTINUITY.md) :
 sept groupes ciblés puis25communs surAPI046, sans changement produit ni redémarrage.
 Il doit distinguer mutation avant préparation, instantané préparé, perte réelle de
-réponse UI et orphelin429 après quatre uploads partiels. Client et packager implémentés, index466sources prévu ;
-aucun groupe de ce nouveau passage exécuté.070.3/.5 restent ouverts.
+réponse UI et orphelin429 après quatre uploads partiels. Client et packager au
+gel466becedfc ont produit le premier rouge ci-dessus ; diagnostic117 et nouveau
+passage propre restent à produire.070.3/.5 restent ouverts.
 
 
 ## Surveillance pendant fermeture qualifiée — SLS-112

@@ -160,7 +160,8 @@ réaffichent jamais un corps de code ou une valeur confidentielle.
 
 Le [complément de continuité](CODE_EDITOR_PUBLICATION_CONTINUITY.md) définit
 les preuves restantes du POST unique ; sa première tranche ne redémarre pas
-le contrôle. Les coupures et la persistance après redémarrage gardent leur
+le contrôle. Le [premier rouge d’observation réseau](CODE_EDITOR_NAVIGATION_OBSERVATION.md)
+reste conservé et précède son diagnostic117, sans groupe qualifié. Les coupures et la persistance après redémarrage gardent leur
 contrat natif à établir avant opérateur. Aucune clôture sur les anciennes
 préparations POST suivies de PUT public.
 

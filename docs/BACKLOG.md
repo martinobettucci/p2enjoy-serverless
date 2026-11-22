@@ -70,6 +70,7 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
+| 3 | [SLS-117](#sls-117) Observation de la requête après départ du document | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR_NAVIGATION_OBSERVATION.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
@@ -1051,6 +1052,8 @@ Critères d'acceptation :
   sépare les preuves restantes du POST unique : mutation avant préparation,
   instantané après préparation, réponse perdue et préparation sans admission ;
   sept groupes ciblés puis25communs à produire avant les coupures/restart.
+  Premier passage becedfc/466 échoué à l’observation réseau : [117](#sls-117)
+  porte diagnostic puis reprise ; aucun des quatre groupes passés n’est qualifié.
 - [x] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
   [Rapprochement des quatre preuves](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies) :
@@ -3389,3 +3392,26 @@ Contrat : [CODE_EDITOR_DEPLOYMENT_RECOVERY](CODE_EDITOR_DEPLOYMENT_RECOVERY.md).
   La preuve36 lie build, retour et déploiement exacts ; bascule5c106957, nouveau
   CIDe219 et sauvegardes des deux bases. Aucun retour de déploiement n’a été
   exécuté ou qualifié par ce nominal ; les fautes de garde acquises restent à leur époque.
+
+<a id="sls-117"></a>
+## SLS-117 — Observation de la requête après départ du document
+
+Statut : [~] — [premier passage conservé](evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json)
+au gelbecedfc/466sources/API046 : quatre groupes passent, cinquième échoué sur
+original_request_not_joined_after_departure, zéro qualifié et aucun commun lancé.
+Nature : Corriger (banc de preuve). Ordre :3, préalable à070.3/.5.
+Dépend de : SLS-063. Contrat : [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR_NAVIGATION_OBSERVATION.md).
+
+- [x] SLS-117.1 Conserver le premier rouge, le rapport et les programmes figés,
+  pilote89379 sortie1/joint, deux captures desktop ouvertes individuellement,
+  quatre invocations, une garde restituée et purge physique de la fonction.
+  L’UUID UI est plus tard publié mais aucun événement terminal réseau n’est
+  conservé ; cette inconnue n’est pas reconstruite.38backend/quatreweb, notes,
+ 010/manual18/74, référence/configuration/budgets et5982originaux préservés.
+- [ ] SLS-117.2 Diagnostic réel, borné et séparé à zéro groupe qualifié : observer
+  la requête originale après navigation, avec événements navigateur et CDP natifs,
+  candidat et nettoyage propres ; établir la provenance et la fin avant correction.
+- [ ] SLS-117.3 Persister le résultat et la décision avant correction du client ;
+  nouveau gel et nouveau7+25sans cumul, neuf handlers, une garde, quatre vrais
+  uploads partiels, dix captures ciblées et22communes inspectées, purge physique.
+ 070.3/.5 restent ouverts pour leurs coupures et persistance après redémarrage.
