@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — clôture locale122 acquise, garde santé à corriger
+
+Brut21f2affb/500sources : Node termine1 sans intervention, paquet temporaire
+retiré, premier échec writer conservé. Le client refuse la purge après125s :
+la garde s'arrête sur une unique photographie Docker unhealthy malgré HTTP200.
+Récupération opérateur séparée, quatre fonctions/13jetons et parents retirés,
+huitcompteurs0,5982originaux conservés. Zéro groupe qualifié.
+
+Décision avant code : observer HTTP et Dockerhealth dans l'alarme55 existante,
+avec observations bornées ; attester PID/naissance/cgroup d'origine du restorer
+et journaliser l'ID du reçu aussi en échec. independent reste le mode rescue,
+jamais une preuve isolée d'expiration du timer. Nouveau client122 isolé : une
+fonction originale, vraie lecture finale, SIGSTOP du seul helper possédé puis
+PUT réel ; attendre exclusivement sa garde60 sous125, constater503/code1 et
+fermer/purger automatiquement après confirmation. Le défaut writer121 demeure
+ouvert et n'est pas corrigé pour obtenir cette preuve de clôture.
+
 ## 22 novembre 2026 — contrat de clôture122 décidé avant code
 
 La récupération est prouvée sans modifier le rouge. Le flux à livrer sépare

@@ -3665,12 +3665,17 @@ rapport échoué en succès ni faire d'une reprise opérateur une preuve nominal
 - [x] SLS-122.1 Sceller le replay échoué500sources, les reçus natifs et la garde
   indépendante ; arrêter/joindre seulement le Node et ses enfants identifiés,
   recouper le contrôle sain et purger les seules fixtures par API réelles.
-- [ ] SLS-122.2 Décision et motif avant correction du flux finally ; ressources
+- [x] SLS-122.2 Décision et motif avant correction du flux finally ; ressources
   navigateur/API/work toujours fermées, échecs primaires conservés, nettoyage
   conditionné à la restitution réellement acquise. Aucun rejeu du scénario.
 - [ ] SLS-122.3 Éprouver le refus et sa clôture sur le vrai code déployé avec
   faute réelle et gardes jointes, puis replay121/12API/25communs frais ;
   aucune simulation, substitution de réponse, skip ou succès conditionnel.
+  Le champ `independent` du reçu vaut le mode rescue : il ne prouve pas seul
+  une expiration du timer. Une preuve attribuée à la garde60 recoupe son
+  attempt_id exact avec la sortie journalisée par l'unité systemd possédée ;
+  une restitution manuelle reste nommée manuelle. Ce recoupement est requis
+  avant de qualifier le chemin de garde, même si la purge physique a réussi.
 
 Le rouge primaire reste celui de121 ; cette unité porte la clôture du banc,
 pas la reconnaissance du writer ni un changement du budget produit.
@@ -3698,3 +3703,29 @@ session SSO vérifie les UUID/noms/descriptions puis purge les quatre fonctions,
 révoque les13jetons et supprime leurs quatre services/namespace. Huitcompteurs0,
 5982originaux, mêmes services/démarrages/configuration ; wrapper/Node/driver absents.
 Le primaire reste cleanup=false ; la reprise opérateur reste une preuve distincte.
+
+Le [replay de fermeture locale](evidence/execution-journal-local-closure-health-failed-dev-2026-11-22.json)
+500sources est conservé : Node finit1 sans signal opérateur et paquet temporaire
+absent, premier échec inchangé ; la purge reste refusée après125s car la garde
+termine checking_health/failed. Une nouvelle récupération opérateur purge quatre
+fonctions/13jetons/quatre services/namespace ; huitcompteurs0 et5982originaux.
+Aucune de ces reprises ne constitue une réussite de clôture automatique.
+
+Décision avant la suite du code122 : le contrôle de santé du restorer attend
+HTTP200 et l'état Docker healthy à l'intérieur de son alarme55s EXISTANTE,
+au lieu de conclure sur une seule photographie. Garder toutes ses observations
+bornées et son dernier état ; ne jamais modifier/recréer le conteneur. Le reçu
+porte PID/naissance/cgroup du restorer et origine réelle (unité systemd exacte
+ou opérateur). Une ligne JSON d'ID de reçu est journalisée aussi en échec,
+pour permettre le recoupement exact de l'origine ; le primaire reste échoué.
+
+Isoler la preuve122 du discriminant writer121 : nouveau client original
+`execution-journal-guard-closure.mjs`, un namespace/service/fonction/jeton, vrai
+handler Docker puis vraie lecture finale retenue. Suspendre réellement le seul
+helper identifié après held par son actionnative existante, et émettre le PUT
+réel ; laisser la garde60s le tuer/restituer. Le client observe exclusivement
+cette garde pour ce cas, sous125s, sans secours actif anticipé. Exiger helper
+SIGSTOP attesté, reçu d'origine systemd réelle et journal corrélé, réponse de
+lecture503 conservée en échec/code1, PUT réel abouti, purge physique et cinq
+fermetures locales acquises. Zéro groupe qualifié ajouté ; les12API/25communs
+restent dus après résolution121. Ce cas n'exige pas le EAGAIN noyau contesté.
