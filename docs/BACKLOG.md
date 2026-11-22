@@ -78,6 +78,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-124](#sls-124) Restitution du focus des commandes Journaux | Corriger | `[ ]` | SLS-061 | cette unité |
 | 3 | [SLS-125](#sls-125) Corrélation du hash des événements conservés | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-126](#sls-126) Acquisition des lecteurs retenus d’API12 | Corriger | `[~]` | SLS-040 | cette unité |
+| 3 | [SLS-127](#sls-127) Refus SQLite après épuisement réel des descripteurs | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4050,3 +4051,46 @@ Le modefault conserve une vraie entréeopenatDB et son résultat noyauEMFILE,
 limite restaurée avantPython ; un prctl ou un autre503 ne vaut pas cette preuve.
 Le mode read historique et les autres frontières restent inchangés. Aucun
 hook produit, nouvelle réouverture forcée, faux résultat ou écritureSQL.
+
+
+<a id="sls-127"></a>
+## SLS-127 — Recouper le refus SQLite après épuisement de descripteurs
+
+Statut : [~] — replay506sources/1aa passe les trois vagues reader-start,
+constate réellement native-fault/syscall_result=-24 et limite restaurée, puis
+échoue dans l'oracleHTTP attendu503 (harness124). Le statut réel de cette dernière
+réponse n'est pas conservé avant assertion. Nature : Corriger. Dépend de :
+SLS-040. Ordre : 3. Contrat : [défaut natif](EXECUTION_LOGS.md#instrumentation-native-des-lectures).
+
+Résultat attendu : distinguer un errno noyau récupéré parSQLite d'une lecture
+réellement refusée ; si le banc prétend éprouver503, conserver un refus réel
+jusqu'à sa propagation et restaurer les limites/threads sans forger de résultat.
+
+- [x] SLS-127.1 Sceller le replay201ade72, trois vagues acquises partiellement,
+  faute native, sources/programmes, purge physique et zéro groupe qualifié.
+- [ ] SLS-127.2 Diagnostic du vrai statut/code/délaiHTTP et des ouverturesSQLite
+  de cette faute, phases/flags/retours et restauration, avant toute correction.
+  Aucune valeur injectée, erreur supposée terminale ni étatSQL fabriqué.
+- [ ] SLS-127.3 Cause recoupée, décision/motif persistés avant correction du
+  seul élément en cause ; rouge et sources initiales conservés.
+- [ ] SLS-127.4 Éprouver le défaut réel corrigé puis les trois vagues et budgets,
+ 12API/25communs frais, mêmes sources/image déployées, gardes/jonctions/purge
+  physiques et captures communes inspectées.126 garde ses critères propres.
+
+
+Premier rouge127 : [trois vagues puis HTTP200 après EMFILE](evidence/execution-journal-emfile-first-failed-dev-2026-11-22.json).
+Le SHA exact de unexpected_http_status:GET:200 recoupe le statut ; le corps et
+le délai de cette réponse ne sont pas capturés. Les quatre gardes sont jointes,
+limites restaurées, purge physique acquise, zéro groupe qualifié.
+
+Décision avant diagnostic127 : conserver la faute (limite0 puis restauration
+immédiate après le premier errno24) et son oracle503. Capturer statut/code/délai
+avant assertion et les flags d'ouverture. Après restauration, observer au plus64
+arrêts et2s du seul TID jusqu'au retour d'une éventuelle nouvelle ouverture du
+même fichier ; autres threads toujours acquis et restitution dans finally.
+Aucun registre, résultat, buffer applicatif ou SQL modifié. Un client préparatoire
+limité à cette faute réutilise le même cas queAPI12 ; zéro groupe qualifié.
+SQLite unixOpen prévoit une tentative read-only après l'échec read-write
+([source officielle](https://raw.githubusercontent.com/sqlite/sqlite/master/src/os_unix.c),
+branche Failed to open the file for read/write access). Cela motive le relevé,
+sans prouver encore que cette branche s'exécute dans notre binaire.

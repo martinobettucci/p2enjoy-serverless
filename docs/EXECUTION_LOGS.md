@@ -642,3 +642,14 @@ pas sur deux connexionsSQL déjà ouvertes. Les budgets2s et40/45/50/60s restent
 identiques. Le mode read historique continue d'observer DBopenat ; le modefault
 exige toujours une vraie ouverture refuséeEMFILE avec restauration avantPython.
 Aucune réussite de reader-start ne remplace cette fauteI/O réelle.
+
+
+### Diagnostic127 de la récupération SQLite
+
+Avant correction, la faute native garde sa restauration après le premier EMFILE.
+Le reçu ajoute flags/retour de cette ouverture puis, sous le même plafond2s,
+au plus64 arrêts du même TID jusqu'au retour d'une nouvelle ouverture exacteDB.
+Les autres threads restent arrêtés et sont restitués même si le relevé échoue.
+Le client conserve statut, code public et délai avant son assertion503. Un
+préparatoire de cette seule faute n'ajoute aucun groupe de qualification ; les
+vagues complètes et12API/25communs restent exigés par SLS-127.
