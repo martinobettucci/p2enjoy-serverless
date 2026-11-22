@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_ARCHIVE_LIMITS.md#réalisation-du-passage-de-frontières
 # @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_ARCHIVE_LIMITS.md#frontières-du-paquet
+# @spec docs/BACKLOG.md#sls-114 | docs/CODE_EDITOR_ARCHIVE_RECOVERY.md#cause-native-et-décision-avant-code--22-novembre-2026
+# @verifies docs/BACKLOG.md#sls-114 | docs/CODE_EDITOR_ARCHIVE_RECOVERY.md#cause-native-et-décision-avant-code--22-novembre-2026
 """Own a bounded data-generator container and its private DEV fixture directory."""
 import hashlib,json,os,shutil,socket,stat,subprocess,sys,tempfile,time
 from pathlib import Path
@@ -29,7 +31,8 @@ def atomic(name,value):
 def container():
  r=subprocess.run(D+['inspect',NAME],capture_output=True,text=True,timeout=15)
  if r.returncode:
-  assert r.returncode==1 and ('No such object' in r.stderr or 'No such container' in r.stderr),r.stderr[-300:]
+  error_message=r.stderr.lower()
+  assert r.returncode==1 and ('no such object' in error_message or 'no such container' in error_message),r.stderr[-300:]
   return None
  v=json.loads(r.stdout)[0];assert v['Image']==IMAGE and v['Config']['Labels'].get('p2enjoy.archive-fixture.campaign')==ID
  return v
@@ -87,7 +90,7 @@ def create():
 def cleanup():
  if not UNIT.exists():
   assert not OUTPUT.exists() and container() is None
-  print(json.dumps({'completed':True,'already_absent':True,'campaign':ID}));return 0
+  print(json.dumps({'completed':True,'already_absent':True,'campaign':ID,'output_removed':True,'container_gone':True}));return 0
  info=UNIT.lstat();assert stat.S_ISDIR(info.st_mode) and info.st_uid==0 and stat.S_IMODE(info.st_mode)==0o700
  item=json.loads((UNIT/'identity.json').read_text());assert item['campaign']==ID and item['output']==str(OUTPUT) and item['image']==IMAGE and item['container_name']==NAME
  stop_owned()

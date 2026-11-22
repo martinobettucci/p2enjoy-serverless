@@ -221,6 +221,12 @@ Après le client, `schedule_regressions.native_state({namespace: function_ids})`
 recoupe les cinq UUID par le collecteur partagé, dont le seul nouveau préfixe
 autorisé est code-editor-archive-limits suivi de8hex. Tous ses contrôles physiques
 restent requis ; les seuls compteurs SQL de l’inspecteur ne les remplacent pas.
+SLS-114 conserve le premier refus du helper et sa reproduction native. La
+reconnaissance de l’absence Docker est désormais insensible à la casse des deux
+messages connus, toujours sous code1. Le retour already_absent renseigne les
+postconditions output_removed/container_gone après vérification réelle. Son
+prérequis positif et le nouveau passage7+25 restent à qualifier ; aucun groupe
+du premier essai n’est réutilisé.
 
 ## Capacité globale de publication éditeur — qualifiée en DEV
 
