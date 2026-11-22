@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — codesSQLite126 et bascule diagnostique acquis
+
+Imagef73efa6e/CID88201d21, basculegardée0c195234 terminée sansrestaurationDB,
+16clientsjoints, webidentique. Rouge13fab054 : BUSY_RECOVERY261planning etBUSY5
+moteur auBEGINIMMEDIATE avant les deuxheld ; health relit le flagplanning
+avant le tick suivant. Aucun comportement santé changé. Nettoyagecomplet/0compteurs.
+Préparation de la frontière de qualification à décider avant code ; UI10groupes
+brouillon privé en revue, nonexécuté et nonqualifié.
+
 ## 22 novembre 2026 — corpus exact/+1 et effacementservice128 acquis
 
 89e99d13/514sources/a7d passe10000/+1 puis16Mio/+1 ; le dépassement retire

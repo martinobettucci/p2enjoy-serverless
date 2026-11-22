@@ -4372,3 +4372,24 @@ d'a7d figent cette modification avant code. La prochaine reproduction doit
 événement execution.recovery_failed reçoit aussi code/site/phase expurgés au
 point de capture, sans relance et sans changer l'état. Ce complément contractuel
 précède son code ; le profil conserve les deux seuls fichiers backend autorisés.
+
+126.5 — [diagnosticSQLite exact acquis](evidence/execution-journal-maintenance-code-diagnostic-dev-2026-11-22.json).
+Bascule0c195234 terminéeinactive/Resultsuccess/cgroupvide/16clientsjoints ;
+CID88201d21/imagef73efa6e, backenddeuxdiffs/webidentique, schema/tables/collection
+égaux au backupfinal, configurations/référence conservées. Rouge13fab054/514sources :
+EOFhealth503 après SQLITE_BUSY_RECOVERY261 des planifications etBUSY5 du moteur,
+db.transaction41/BEGINIMMEDIATE, avantheld44.582/44.589s. Le flagplanning posé
+à44.531s est relu parhealth44.724s avant sa prochaine maintenance0,5s.
+La préparationptrace arrête aussi les workersjournal-subject avant détachement ;
+aucune erreur SQLite n'est attribuée aux deuxlecteurs qui restent avantSQL.
+Restitution/purge acquises, huitcompteurs0/5982originaux ; zéro groupequalifié.
+
+126.5 — décision avant correction du banc : la santé200 préalable à chaque
+armement reste stricte. Aprèsheld/détachement seulement, une préparationnommée
+bornée1000ms/21sondes, comprise dans45s moins5s réservées, observe la reprise
+réelle des maintenances. Tous refus/probes sont conservés ; codes5/261 auBEGIN
+à recouper enRO avantqualification, autres anomalies refusées. Aucun réarmement,
+rejeuGET, changementflag/délai2s. Ensuite429→health200→2,1s→429 et les actions/
+jonctions restent exécutés unefois ; tout échec qualifié échoue immédiatement.
+Contrat complet EXECUTION_LOGS, anciensrougesinchangés. Le détenteur exact du
+verrou resteinconnu ; la preuve ne promet pas santé200 pendantacquisitionptrace.

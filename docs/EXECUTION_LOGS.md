@@ -693,3 +693,35 @@ recover : il conserve la même projection expurgée, phase recovery et flag
 antérieur, à cet endroit précis sans relancer l’exception.
 Le prochain préparatoire natif garde health200 et les deadlines
 stricts ; l'attribution du code précède toute correction ou nouvelle décision.
+
+### Préparation après acquisition des lecteurs — SLS-126.5
+
+La séquence qualifiée d'API12 commence après l'acquisition perturbatrice ptrace,
+qui peut arrêter aussi journal-subject pendant son SQL. Une santéHTTP200 réelle
+est exigée avant chaque armement. Une fois les deuxreader-start exacts acquis
+et les nonretenus détachés, une phase préparatoire nommée observe uniquement
+/healthz, sans réarmer la barrière, relancer ses GET ni modifier un flag produit.
+Elle dure auplus1000ms et reste dans la retenue45s déjà ouverte : son échéance
+est min(débutpréparation+1000ms, débutlocalduhelper+45000ms−5000ms), afin de
+réserver les2,1s et les actions qualifiées. Pas plus de21sondes, espacement
+auplus50ms dans cette même borne absolue, timeoutHTTP limité au temps restant.
+Chaque sonde conserve instant/durée/statut/taille/SHAdu corps et SHA d'error,
+sans contenu libre. Une503 n'est recevable dans cette préparation que pour les
+messages santé des planifications ou du moteur déjà identifiés ; les autres
+statuts, erreurs réseau, dépassements ou perte du helper font échouer le cas.
+Un vrai200/control/ok est indispensable avant l'échéance.
+
+Après ce prérequis, exécuter une seule fois les oracles inchangés : troisième
+429/RetryAfter2, santé200 immédiate,2,1s réelles, nouveau429, actionrelease/EOF/
+SIGKILL prévue, deux503/log_read_timeout après jonction et capacité retrouvée.
+Une erreur de cette séquence n'entre jamais dans l'attente préparatoire. Le
+budget produit2s, ses instants d'origine et les gardes40/45/50/60s ne changent pas.
+Les rouges antérieurs restent rouges et la dégradation pendant acquisition est
+publiée comme telle, jamais présentée comme une santé200 permanente.
+
+Les logs RO de chaque phase qui a observé503 sont recoupés avant qualification :
+seules les contentionsSQLite5/261 au BEGINIMMEDIATE précédant la stabilisation
+sont expliquées par cette préparation. Un autre code/site ou erreur de moteur
+reste un échec à instruire même si un tick ultérieur rend200. Le détenteur exact
+du verrou n'est pas identifié par les preuves actuelles. La préparation seule
+n'ajoute aucun groupe ; le replay complet et le recoupement restent requis.
