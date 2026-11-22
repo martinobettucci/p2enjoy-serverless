@@ -92,3 +92,22 @@ retiendra ce digest comme retour, avec son UUID d’opération neuf ; il conserv
 les gardes de conteneur, configuration et délais décidées pour115. Une nouvelle
 sauvegarde native précède la bascule. Ni le premier tag raté ni ses sauvegardes
 ne sont réutilisés ou retirés.
+
+## Reconstruction réelle constatée —22novembre2026
+
+Au gel bf4ba5b/463sources, le contexte privé de63fichiers produit l’image de
+retour `sha256:aa21417933694da6ac9789140f9567dfddc9e898aad1b0512d090ec8fc1fd5a1`.
+Les38backend et quatre ressources web sont exactement ceux du live433 et du
+diagnostic, y compris les noms et SHA complets. Les six attributs de configuration
+d’image (dont Env/Cmd/Entrypoint) correspondent à046, sans valeur exportée.
+Le conteneur d’inspection est retiré, son client termine sortie0 et est joint.
+Tag candidat046, contrôlea9/433, référenceaf6, configuration et5982originaux
+restent inchangés. Cette construction ajoute zéro groupe fonctionnel.
+
+La nouvelle bascule exigera explicitement046 comme candidate etaa214179 comme
+retour validé. Elle n’essaie plus de taguer le digest433 absent ; elle recoupe
+tag+digest du retour disponible et ses octets applicatifs contre le live avant
+les nouvelles sauvegardes. Le retour éventuel recrée l’application ancienne
+avec aa214179, sans prétendre restaurer l’ancien digest433. Nouvel UUID,
+étiquette propre, identités complètes, bornes et fichiers officiels restent requis.
+116 et115 restent ouverts jusqu’à bascule et36groupes qualifiés.

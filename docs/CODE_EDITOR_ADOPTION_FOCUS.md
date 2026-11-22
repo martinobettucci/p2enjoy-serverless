@@ -100,7 +100,10 @@ par défaut des deux images, sans exporter de valeurs.
 La commande Compose du seul service control emploie les deux fichiers officiels,
 --no-build et --wait90s. En cas d’échec de bascule/recoupement, vérifier qu’aucun
 autre opérateur n’a remplacé l’image attendue avant de rétablir le tag de
-composition vers433 et recréer le seul contrôle. Ne restaurer aucune base :
+composition vers l’image de l’ancienne application et recréer le seul contrôle.
+L’image reconstruite validée par [116](CODE_EDITOR_DEPLOYMENT_RECOVERY.md) remplace
+le digest433 devenu indisponible ; le retour attendu est désormaisaa214179.
+Ne restaurer aucune base :
 le changement de focus n’ajoute pas de migration. Conserver l’échec et son
 reçu de retour, sans relance E2E automatique. Ce retour borné évite qu’une
 erreur d’image laisse le contrôle indisponible ; il ne touche pas la référence.

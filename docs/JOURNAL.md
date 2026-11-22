@@ -1,5 +1,16 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — image de retour116 reconstruite et comparée au live
+
+Builder au gelbf4ba5b/463sources terminé58395/sortie0, client joint. Les63entrées
+explicites et seules deux substitutions4d produisentaa214179, image de retour
+distincte du digest433 absent.38backend/quatreweb sont identiques au live/diagnostic,
+six attributs d’image comparés à046 sans valeurs, inspection Docker retirée.
+API433a9/référenceaf6, tag candidat046/configuration et5982originaux conservés.
+Zéro groupe ajouté. Le nouvel opérateur doit exiger tag/digestaa et ses octets
+avant sauvegardes et bascule, sans utiliser le digest433 comme source de tag.
+Nouvelles identités et36E2E restent requises ;115/116 restent ouvertes.
+
 ## 22 novembre 2026 — contrat116 rattaché au gel de reprise
 
 Le contrat de l’image de retour entre dans l’index, désormais463sources. Le
