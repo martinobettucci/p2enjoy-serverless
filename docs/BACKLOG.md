@@ -4026,6 +4026,11 @@ banc avec celui du produit ni relâcher les délais.
   composant en cause ; conserver les sources et le rouge originaux.
 - [ ] SLS-126.4 Rejouer API12 puis API05/06 et12API/25communs frais sur le code
   déployé, gardes/processus joints, purge physique, captures communes inspectées.
+- [ ] SLS-126.5 Éclairer le GET503 inattendu du replay512/a7d, vagueEOF :
+  conserver rouge/retours natifs, identifier le chemin, le refus et sa phase
+  avant toute correction. Une finSSH pendant le secours n'est pas attribuée
+  d'office à l'échec primaire ; reçus et ordre doivent la départager.
+
 
 
 Premierrouge : [preuve](evidence/execution-journal-readers-acquisition-first-failed-dev-2026-11-22.json).
@@ -4278,3 +4283,29 @@ conservés, JS/HTML seuls changés. Le profiljournal-focus est relu, les deux vo
 SQL/UI restent strictes. Le client préparatoire attend maintenant le vrai410
 et mesure les titres en1440/390px avec six vues. Bascule et replay restent à faire,
 10UI/25communs nonqualifiés ;124.3 reste ouvert.
+
+
+126 — nouveau reste de qualification : replay02ce7249/512sources/a7d passe la
+vague release, puis échoue sur unexpected_http_status:GET:503 pendantEOF.
+Deuxworkers étaient acquis ; les deuxGET détenus finissent200 en~1s après
+restitution. La finSSH255 et le reçu de restauration sont observés pendant le
+secours ; ils ne prouvent pas une panne primaire du transport. Kill/fault et
+les budgets ne sont pas atteints. Nettoyage physique acquis, huitcompteurs0,
+512sources/image stables. Ce résultat appartient à126.4/.5 toujours ouverts.
+
+Décision avant diagnostic126.5 : conserver les appels et leurs statuts attendus.
+Avant toute assertionHTTP inattendue du harness, relever méthode, route fixée
+ou son SHA (jamais query/corps/en-têtesconfidentiels), statutsattendus/réel,
+durée et SHA/taille du corps. Pour un JSONd'erreur auplus16Kio, conserver le
+SHA du champ error et uniquement un code log_ appartenant à la liste constante
+du contrôle. Aucun contenu libre du corps n'est publié. Ce relevé ne change
+aucune réponse, deadline ou attente. Rejouer seulement readers() avec son client
+préparatoire existant, zéro groupequalifié ; recouper les reçus de secours et
+les traces natives si nécessaire. Cause et issue restent à établir avantfix.
+
+
+126.5 — [rouge scellé du GET503](evidence/execution-journal-reader-wave-http-first-failed-dev-2026-11-22.json).
+Le finally du client appelle recover pour une barrière nonclose : son arrêt du
+helper peut expliquerSSH255 et les retours200 avantdeadline. Cette fin n'est
+donc pas qualifiée de panne primaire du transport. L'objet à identifier reste
+le GET503 avant l'actionEOF. Les programmes et premiers reçus sont conservés.
