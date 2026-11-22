@@ -3954,11 +3954,11 @@ produit du mauvais oracle sur des champs réellement retournés.
 
 - [x] SLS-125.1 Sceller le rouge503sources, huit groupes partiels/zéro qualifié,
   ses programmes, gardes et purge physique. [Preuve](evidence/execution-journal-correlation-hash-first-failed-dev-2026-11-22.json).
-- [ ] SLS-125.2 Reproduire API11 isolément avec les mêmes vrais appels/purge ;
+- [x] SLS-125.2 Reproduire API11 isolément avec les mêmes vrais appels/purge ;
   conserver avant assertion total/items et leurs id/kind/state/function_id/
   invocation_id/code_hash, hash attendu et hash résolu de l'invocation native.
   Pas de messages, secrets, donnéesSQL écrites ni réponse substituée.
-- [ ] SLS-125.3 Cause recoupée contre le contrat, décision/motif commités avant
+- [x] SLS-125.3 Cause recoupée contre le contrat, décision/motif commités avant
   correction de l'élément en cause ; rouge et source initiale inchangés.
 - [ ] SLS-125.4 Replay dans12API puis25communs frais, sources et image du code
   déployé recoupées, gardes/consommateurs joints, purge physique et captures
@@ -3969,3 +3969,23 @@ les champs bornés ci-dessus avant l'assertion et exécuter seulement la prépar
 originale et correlations(), avec ses fautes réelles et sa purge du frère.
 Si le préfixe complet est nécessaire à la reproduction, le nommer et le rejouer
 ensuite, sans considérer un diagnostic nonreproducteur comme une réussite.
+
+
+Diagnostic125 : [cinq événements réellement conservés](evidence/execution-journal-correlation-hash-diagnostic-dev-2026-11-22.json).
+received/queued portent null, admitted/dispatched/completed portent le hash résolu
+450d33a8…, identique au hash publié. Le producteur capture la ligne d'invocation
+lors de chaque transition ; resolved_code_hash n'est affecté qu'à l'admission.
+La lecture n'enrichit pas rétroactivement l'événement avec une cible plus récente.
+
+Décision avant correction : corriger le seul oracle API11. Exiger les cinq étapes
+avec leurs vrais sujets ; comparer les DTO complets avant/après purge du frère.
+Hash/révision/instance restent null pour reçu/enfile ; à partir de l'admission,
+ils correspondent à la révision/instance et au hash réellement résolus. Une
+absence d'événement, une modification ou une autre référence échoue. Ne remplir
+aucun hash rétroactivement et ne modifier ni schéma ni produit pour le banc.
+
+Avant le prochain full12, éprouver séparément les trois groupes encore jamais
+atteints (lecteurs API12 et budgets API05/06), avec les mêmes helpers et de vrais
+corpus. Ce client préparatoire ajoute zéro groupe qualifié ; il ne remplace pas
+le full12/25communs et ne saute aucun scénario de la campagne finale. Son rôle
+est de départager les échecs nouveaux avant de refaire le préfixe déjà observé.

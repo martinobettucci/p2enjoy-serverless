@@ -77,6 +77,13 @@ publiques de stockage. La corrélation conserve les UUID effectifs et le hash
 résolu, non le hash de la cible relu après coup. Un refus précoce authentifié
 peut avoir un request_id sans invocation créée : ce fait est explicite.
 Un trafic anonyme ne remplit pas ce registre ; le logger borné existant demeure.
+Chaque événement conserve les références connues lors de sa transition. Pour un
+appelHTTP nominal, received/queued précèdent la résolution : hash, révision et
+instance restent null. L'admission inscrit les références résolues qui se
+retrouvent dans admitted/dispatched/completed. Un hash demandé n'est pas un hash
+résolu ; une lecture ultérieure ne complète pas ces événements avec la cible
+courante. La purge d'une autre fonction ne modifie aucun de ces événements.
+
 
 Classification séparée : réponse applicative (y comprisHTTP 500 rendu par le
 handler avec état succeeded), exception/import de code, refus d'admission,
@@ -605,3 +612,9 @@ exact control.sock et l'instance doivent tous concorder avant de lire la seule
 ligne /started. Le reçu nomme le netns fournissant cette correspondance.
 Les deux lectures de tables et les métadonnées restent bornées, sans accès à
 un autre runtime, contenu d'en-tête ou corps ; les plafonds existants demeurent.
+
+
+Le client préparatoire de lecteurs/budgets peut exécuter API12/05/06 isolément,
+avec les mêmes fonctions/classes et corpus réels. Il ajoute zéro groupe qualifié
+et ne remplace pas les douze groupes de la campagne finale ni les25communs frais.
+Un prérequis absent reste un échec, sans skip ni variante simulée.

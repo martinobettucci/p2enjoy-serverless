@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — oracle de corrélation125 départagé
+
+Diagnostic1b84f800/504sources reproduit402 : cinq événements, received/queued
+hashnull, admitted/dispatched/completed hash450d33a8 identique au résolu/publié.
+Le producteur fige la ligne à chaque transition ; l'admission seule affecte
+resolved_code_hash. Nettoyage de deux fonctions et parents acquis, compteurs0.
+Décision avant code : oracle par étape et égalité des DTO complets avant/après
+purge du frère, pas d'enrichissement rétroactif produit. Préparer API12/05/06
+séparément pour les éprouver avant le nouveau full12 ; zéro groupe ajouté et
+campagne finale complète toujours requise.
+
+
 ## 22 novembre 2026 — huit groupes acquis partiellement, corrélation125 à diagnostiquer
 
 Replay0772967c/503sources : API10 passe, puis API11 échoue397 après la purge du
