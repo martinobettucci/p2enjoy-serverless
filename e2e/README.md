@@ -3193,3 +3193,16 @@ compteursVDBE et horodatages viennent du Python/SQLite réellement servi. Aucun
 l'opérateur. RapportUUID distinct, zéro groupequalifié ; ce diagnostic ne
 remplace ni le nominal10001HTTP+1cron ni les régressions. Code relu/syntaxes
 passées, passage réel encore à exécuter.
+
+
+## Propres échéances de préservation des images — SLS-132
+
+`e2e/retention-image-export-deadlines.py CAS UUID` s'exécute seulement comme
+root dans son unitéDEV `serverless-qualification-image-export-CAS-UUIDHEX`,
+oneshot/RemainAfterExit, sansrestart, TimeoutStart180/TimeoutStop30,
+KillModecontrol-group. CAS vaut cli90, join5 ou alarm-join5. Vérifier/finaliser
+le résultatterminal de cette seuleunité avant toute autre campagne.
+[Contrat](../docs/RETENTION_SCHEMA_011.md#diagnostics-des-bornes-propres-de-lexporteur).
+La CLI et image-save sont réels, archivescanoniques enlectureseule ; kernelEXIT,
+SIGALRMpending, tempsrestant et jonction ont leurs oracles stricts. Chaque cas
+restezéro groupe de clôture. Code relu et syntaxe seule, aucun cas natif exécuté.

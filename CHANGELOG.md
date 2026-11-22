@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-132 : diagnostics natifs des propres bornes90/5 préparés et relus,
+  protocole root180/30/CG et assertions strictes de noyau/temps/jonction.
+  Aucun cas exécuté par cette préparation ; archives et produit inchangés.
+
 - SLS-133 : profil6000HTTP et quatre relevésSQLRO préparés sur le vrai contrôle,
   rapports distincts/zéroqualification et clôture partagée avantcron. Modes
   nominaux/observateurs conservés ; la revue et les syntaxes ne prouvent pas
