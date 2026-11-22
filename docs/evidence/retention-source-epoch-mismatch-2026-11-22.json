@@ -1,0 +1,102 @@
+{
+  "format": "p2enjoy-serverless-retention-source-epoch-mismatch-v1",
+  "unit": "SLS-132",
+  "kind": "static-precondition-not-e2e",
+  "qualified_groups": 0,
+  "source_commit": "92ee6b72555cd4674edc9d4ca3f585396bc78c05",
+  "inspector_sha256": "c74ead8535cb4a38fb3639c5c0f01b83f0a168e5c1e17171e0ae58db82194e30",
+  "proofs": [
+    {
+      "path": "docs/evidence/schedule-firing-retention-count-dev-2026-11-11.json",
+      "sha256": "39bcf3e699e8ab06d61407ba1408635e20a72f0076111a6781803a1cd28612dd",
+      "completed": true,
+      "source_commit": "ef8cb3f3f5dae1e5fd0f9f7efe230a47707b5e16",
+      "raw_sha256": "31d01007cdcf507802a05020331c2786595da07494e5ae11733c33cd9190318b",
+      "sources": {
+        "control/app/schedules.py": {
+          "current": "9547b046b682639d59751d1a865dab307dd03e5f8c98d0b251f276aa6e8b2fe3",
+          "historical": "7d99de7a60ee24be76ebde14b30349bf04a3d762dca405995d682fa605564933",
+          "equal": false
+        },
+        "control/app/execution.py": {
+          "current": "848f065272c17481fb6eb4c9dea5e97f83bdb5d0e829abe2c32093e4cb66a7f8",
+          "historical": "1c5d9264ae63955792a3e6fc46b3a54ebadea1d3038672f64f092cf7e6107436",
+          "equal": false
+        },
+        "control/app/schedule_calendar.py": {
+          "current": "6308bc80f7b5f11a07341240962b9d5670391a9dcdb3d4ed71c0e686d442c9b5",
+          "historical": "6308bc80f7b5f11a07341240962b9d5670391a9dcdb3d4ed71c0e686d442c9b5",
+          "equal": true
+        }
+      }
+    },
+    {
+      "path": "docs/evidence/invocation-source-retention-detach-volume-dev-2026-11-11.json",
+      "sha256": "f9ec58ba5cbbd8765f84cb0ef421358ba16067329621be827ce2fa82428661ca",
+      "completed": true,
+      "source_commit": "6de2a8672547c153c77c941a1910727b1f2e2319",
+      "raw_sha256": "e5e418995ea9f92954ea5716be0d0cb23a44f58c2f3bdaa74135baa1ade2e861",
+      "sources": {
+        "control/app/schedules.py": {
+          "current": "9547b046b682639d59751d1a865dab307dd03e5f8c98d0b251f276aa6e8b2fe3",
+          "historical": "7d99de7a60ee24be76ebde14b30349bf04a3d762dca405995d682fa605564933",
+          "equal": false
+        },
+        "control/app/execution.py": {
+          "current": "848f065272c17481fb6eb4c9dea5e97f83bdb5d0e829abe2c32093e4cb66a7f8",
+          "historical": "1c5d9264ae63955792a3e6fc46b3a54ebadea1d3038672f64f092cf7e6107436",
+          "equal": false
+        },
+        "control/app/schedule_calendar.py": {
+          "current": "6308bc80f7b5f11a07341240962b9d5670391a9dcdb3d4ed71c0e686d442c9b5",
+          "historical": "6308bc80f7b5f11a07341240962b9d5670391a9dcdb3d4ed71c0e686d442c9b5",
+          "equal": true
+        }
+      }
+    },
+    {
+      "path": "docs/evidence/schedule-retention-age-dev-2026-11-21.json",
+      "sha256": "1afab3920bb8c76645ee603b62af13c6536ea14587233fceb44ae9c4bc65a5d8",
+      "completed": true,
+      "source_commit": "c49bc395a6486ef60cbbc88dc3542e6413b75739",
+      "raw_sha256": "3e6abe851d6bddf41fc534eb7e51a06803ee8066bfed91f83d8299975161cdea",
+      "sources": {
+        "control/app/schedules.py": {
+          "current": "9547b046b682639d59751d1a865dab307dd03e5f8c98d0b251f276aa6e8b2fe3",
+          "historical": "7d99de7a60ee24be76ebde14b30349bf04a3d762dca405995d682fa605564933",
+          "equal": false
+        },
+        "control/app/execution.py": {
+          "current": "848f065272c17481fb6eb4c9dea5e97f83bdb5d0e829abe2c32093e4cb66a7f8",
+          "historical": "1c5d9264ae63955792a3e6fc46b3a54ebadea1d3038672f64f092cf7e6107436",
+          "equal": false
+        },
+        "control/app/schedule_calendar.py": {
+          "current": "6308bc80f7b5f11a07341240962b9d5670391a9dcdb3d4ed71c0e686d442c9b5",
+          "historical": "6308bc80f7b5f11a07341240962b9d5670391a9dcdb3d4ed71c0e686d442c9b5",
+          "equal": true
+        }
+      }
+    }
+  ],
+  "expected_precondition_failure": true,
+  "failure": {
+    "type": "AssertionError",
+    "frames": [
+      {
+        "file": "inspect-retention-epoch-mismatch.py",
+        "function": "<module>",
+        "line": 9
+      },
+      {
+        "file": "schedule_regressions.py",
+        "function": "retained_retention_proofs",
+        "line": 178
+      }
+    ]
+  },
+  "limitations": [
+    "Contrôle statique de garde uniquement ; aucune rétention ni disponibilité physique du SPARK requalifiée.",
+    "Preuves et gzip historiques lus/vérifiés, jamais réécrits."
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "completed": true,
+  "created_at_ns": 1795372419032933482,
+  "inspector_sha256": "83ed10411ca2e0cd134a24452718b8117d5445699c42a7bb54da755b1b838a4e",
+  "program_sha256": "b89c3fb2fb505e78fe6fe2031e2b689a1e412006afabd29e8954e5db1923b6fb",
+  "qualified_groups": 0,
+  "exit_code": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "result": {
+    "completed": true,
+    "kind": "read-only-canonical-inspection-not-functional-replay",
+    "captures": [
+      {
+        "capture_id": "schedule-retention-9a2a4cd1eb134c20b4e1c5a1a1bdc7c0",
+        "kind": "source",
+        "receipt_sha256": "11410ae93178ecd48b18b1f48164e658fac78f454649778ff5117c76771c6539",
+        "public_evidence_sha256": "1c8a2a8109acd2e0d58de0d43e4906c0bd2c0ad8936f35fb3a6171b540785112",
+        "inspection_evidence_sha256": "851a19b3a9e60c15854b1296d6f6a4656cf1e5aeeff46e0a51206043dd1c6d4c",
+        "control_sha256": "38ce972f1cbc33e25643ae7773836e226aebaade623376acf6dfa2a012ce2f78",
+        "registry_sha256": "7307d8ca27de1ecdc646aef590d6c21b2a69ace7833b77ef26a0204c8fb9d43c",
+        "artifact_inventory_sha256": "ec12d047ce20c34837bb6f671c72d54e51bb28a869df422f19d73433f730f840",
+        "artifact_files": 5990,
+        "images": {
+          "control": {
+            "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+            "archive_sha256": "c426fbad98b2bd4834f94ac4d1667879ba57293328f48583f6e8cc7b78542fba",
+            "bytes": 59558400
+          },
+          "runtime": {
+            "image": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+            "archive_sha256": "f34b37fc1ef9467edaa80b8803c9bbc3d75e6c171873fdd3a88c68c3230722d4",
+            "bytes": 81080320
+          }
+        },
+        "image_capture_id": "schedule-retention-9a2a4cd1eb134c20b4e1c5a1a1bdc7c0",
+        "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+        "eligible_after": 1794972626.3558178,
+        "earliest_eligible_after": 1794972360.2249622,
+        "migrations": [
+          "001_control.sql",
+          "002_login_limits.sql",
+          "003_deployments.sql",
+          "004_function_operations.sql",
+          "005_execution.sql",
+          "006_storage_commands.sql",
+          "007_function_code_hash.sql",
+          "008_function_versions.sql",
+          "009_schedules.sql"
+        ],
+        "installation_same_as_current": true,
+        "master_key_witness_equal": true,
+        "eligible_now": true,
+        "observed_at_ns": 1795372416108617246,
+        "files": {
+          "control.sqlite3": {
+            "uid": 0,
+            "mode": "0o400",
+            "bytes": 19697664
+          },
+          "registry.sqlite3": {
+            "uid": 0,
+            "mode": "0o400",
+            "bytes": 1097728
+          },
+          "capture.json": {
+            "uid": 0,
+            "mode": "0o600",
+            "bytes": 2627
+          },
+          "artifacts.json": {
+            "uid": 0,
+            "mode": "0o600",
+            "bytes": 1004670
+          }
+        },
+        "witnesses": {
+          "firings": [
+            {
+              "id": "d86c8fa3-c969-4b79-8297-04f9f84e6d7c",
+              "generation_id": 92,
+              "function_id": "ba4ffa98-f0eb-4e97-8c68-644b3bf2ca00",
+              "state": "dispatched",
+              "completed_at": null,
+              "invocation_id": "ccd2a7dc-edcb-48bd-b1f5-bf3385a166cf"
+            }
+          ],
+          "invocations": [
+            {
+              "id": "ccd2a7dc-edcb-48bd-b1f5-bf3385a166cf",
+              "state": "succeeded",
+              "handler_started": 1,
+              "completed_at": 1794367825.3558178,
+              "trigger": "schedule"
+            },
+            {
+              "id": "f9498f65-8d0e-4bf2-a520-247f0ed24bf1",
+              "state": "succeeded",
+              "trigger": "http",
+              "completed_at": 1794367559.2249622,
+              "handler_started": 1
+            }
+          ],
+          "generations": [
+            {
+              "id": 92,
+              "function_id": "ba4ffa98-f0eb-4e97-8c68-644b3bf2ca00",
+              "retired_at": null
+            }
+          ]
+        }
+      },
+      {
+        "capture_id": "schedule-terminal-history-a3993b7d64f14650933cf03960c3d3b0",
+        "kind": "terminal",
+        "receipt_sha256": "e663f3525d30002c2af8284f36c2bcdc9d2514fc5a0a749f08d75137715451d6",
+        "public_evidence_sha256": "898d81eead849786fe6168b7c4321cb6d444ae243c0d33b7b1af13430c7b3ef6",
+        "inspection_evidence_sha256": "851a19b3a9e60c15854b1296d6f6a4656cf1e5aeeff46e0a51206043dd1c6d4c",
+        "control_sha256": "5293fabc3cdc76dbc514c99a5432518cd83c9a6b632ac683fc9b5ea1b66b16b8",
+        "registry_sha256": "2487f0a8617563f41d6126e27793fc779765281d21a7875b93bfd4e5d5910dc4",
+        "artifact_inventory_sha256": "521505ab7f1211164e98cfe7523e2661ca0bc0b4ca1aec099e37eb03066bf003",
+        "artifact_files": 5982,
+        "images": {
+          "control": {
+            "image": "sha256:c59b86162a7811f05838a5554790a37086101812c9715480fa187249ccebcfc0",
+            "archive_sha256": "c426fbad98b2bd4834f94ac4d1667879ba57293328f48583f6e8cc7b78542fba",
+            "bytes": 59558400
+          },
+          "runtime": {
+            "image": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+            "archive_sha256": "f34b37fc1ef9467edaa80b8803c9bbc3d75e6c171873fdd3a88c68c3230722d4",
+            "bytes": 81080320
+          }
+        },
+        "image_capture_id": "schedule-retention-9a2a4cd1eb134c20b4e1c5a1a1bdc7c0",
+        "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+        "eligible_after": 1794974713.3584592,
+        "earliest_eligible_after": 1794974709.0146434,
+        "migrations": [
+          "001_control.sql",
+          "002_login_limits.sql",
+          "003_deployments.sql",
+          "004_function_operations.sql",
+          "005_execution.sql",
+          "006_storage_commands.sql",
+          "007_function_code_hash.sql",
+          "008_function_versions.sql",
+          "009_schedules.sql"
+        ],
+        "installation_same_as_current": true,
+        "master_key_witness_equal": true,
+        "eligible_now": true,
+        "observed_at_ns": 1795372418899356711,
+        "files": {
+          "control.sqlite3": {
+            "uid": 0,
+            "mode": "0o400",
+            "bytes": 19791872
+          },
+          "registry.sqlite3": {
+            "uid": 0,
+            "mode": "0o400",
+            "bytes": 1097728
+          },
+          "capture.json": {
+            "uid": 0,
+            "mode": "0o400",
+            "bytes": 5923
+          },
+          "artifacts.json": {
+            "uid": 0,
+            "mode": "0o400",
+            "bytes": 1003316
+          }
+        },
+        "witnesses": {
+          "functions": [
+            {
+              "id": "2771f8d5-5a65-4975-aa1d-650bf994411f"
+            },
+            {
+              "id": "3f686e62-ac7c-427c-a64c-d40461d0bf35"
+            }
+          ],
+          "generations": [
+            {
+              "id": 99,
+              "function_id": "2771f8d5-5a65-4975-aa1d-650bf994411f",
+              "retired_at": 1794369910.5306222
+            },
+            {
+              "id": 100,
+              "function_id": "3f686e62-ac7c-427c-a64c-d40461d0bf35",
+              "retired_at": 1794369912.3584592
+            }
+          ],
+          "firings": [
+            {
+              "id": "bd41aa75-8db4-4806-9b56-73a4ced7c243",
+              "generation_id": 100,
+              "function_id": "3f686e62-ac7c-427c-a64c-d40461d0bf35",
+              "state": "succeeded",
+              "completed_at": 1794369908.0146434,
+              "invocation_id": "910fdd2d-cda4-405d-92fc-75afbe00de73"
+            }
+          ],
+          "invocations": [
+            {
+              "id": "910fdd2d-cda4-405d-92fc-75afbe00de73",
+              "function_id": "3f686e62-ac7c-427c-a64c-d40461d0bf35",
+              "state": "succeeded",
+              "created_at": 1794369900.2903159,
+              "completed_at": 1794369907.5684392,
+              "handler_started": 1,
+              "trigger": "schedule"
+            }
+          ]
+        }
+      }
+    ],
+    "current": {
+      "installation_id": "0492c433-a9ed-43b2-bb0a-fa0482185757",
+      "migrations": [
+        "001_control.sql",
+        "002_login_limits.sql",
+        "003_deployments.sql",
+        "004_function_operations.sql",
+        "005_execution.sql",
+        "006_storage_commands.sql",
+        "007_function_code_hash.sql",
+        "008_function_versions.sql",
+        "009_schedules.sql",
+        "010_code_drafts.sql",
+        "011_execution_logs.sql"
+      ],
+      "counts": {
+        "live_functions": 0,
+        "instances": 0,
+        "active_calls": 0,
+        "operations": 0
+      },
+      "services": [
+        {
+          "id": "88201d21a4c6a1d2a9d10c05ae8cb282a36d17e19980101485f931b8ba7a0636",
+          "image": "sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0",
+          "started_at": "2026-11-22T17:22:01.112318925Z"
+        },
+        {
+          "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+          "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+          "started_at": "2026-11-06T15:49:39.578107028Z"
+        }
+      ]
+    },
+    "images": {
+      "sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0": {
+        "id": "sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0",
+        "bytes": 64535297,
+        "tags": [
+          "p2enjoy-control:dev",
+          "p2enjoy-control:maintenance-diagnostics-f9ec66b807dc"
+        ]
+      },
+      "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a": {
+        "id": "sha256:1e64b4af9ae7d5b753505a23370ab83345fdfee1f1587a15a4e723b2cd6a8a9a",
+        "bytes": 196583523,
+        "tags": [
+          "p2enjoy-runtime:dev"
+        ]
+      }
+    },
+    "no_service_or_configuration_change": true,
+    "no_capture_write": true
+  },
+  "format": "p2enjoy-serverless-retention-authentic-sources-inspection-v1",
+  "unit": "SLS-132",
+  "limitations": [
+    "Inspection RO de disponibilité et intégrité, zéro groupe fonctionnel.",
+    "Valeur du témoin de clé comparée uniquement en mémoire ; seule égalité publiée.",
+    "Aucune rétention actuelle qualifiée par cet inventaire."
+  ]
+}

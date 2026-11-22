@@ -4570,9 +4570,9 @@ code011 installé, avec témoins authentiques et bornes métier conservées ; la
 garde continue de refuser une preuve absente ou d'une autre source. Les captures
 sources009 et leurs exports demeurent strictement immuables.
 
-- [ ] SLS-132.1 Sceller les empreintes incompatibles et inventorier sources,
+- [x] SLS-132.1 Sceller les empreintes incompatibles et inventorier sources,
   reçus, exports et témoins réellement anciens disponibles, en lectureseule.
-- [ ] SLS-132.2 Écrire/pousser le contrat du seul passagecourant envisagé avant
+- [x] SLS-132.2 Écrire/pousser le contrat du seul passagecourant envisagé avant
   code : image/copies/migrations/observateur, gardes/possession/identités/délais,
   refus et restitution. Préserver sans substitution les voies historiques.
 - [ ] SLS-132.3 Prouver sur le vrai code011 l'âge et la rétention de source
@@ -4591,3 +4591,5 @@ sources009 et leurs exports demeurent strictement immuables.
 Aucune conservation historique n'est déclarée requalifiée sur011 par cet
 inventaire. Les copies natives authentiques vieillies sont une piste de replay,
 pas une autorisation de modifier les fichiers canoniques ou d'assouplir la garde.
+
+132 — [garde rouge statique](evidence/retention-source-epoch-mismatch-2026-11-22.json) et [inspection RO native](evidence/retention-authentic-sources-inspection-2026-11-22.json) scellées. Sources009 intactes/éligibles, témoin de clé égal en mémoire, f73 disponible et original011 quiet ; aucune rétention requalifiée. Le [contrat courant](RETENTION_SCHEMA_011.md) distingue copies migrées, métadonnées protégées et logs expirés, nouvelles captures numériques, gardes et restitution des mêmes originaux011.

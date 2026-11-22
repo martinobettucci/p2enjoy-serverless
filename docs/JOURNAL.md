@@ -10265,3 +10265,8 @@ SixJPEG inspectés individuellement, purge physique et5982originaux. Le premier
 rouge reste distinct ;10UI/25communs et les autres intentions restent à produire.
 Un nouveau refus de santé au préparatoirelecteurs est traité dans126.5 ; ses
 logs et le replay sansreproduction sont scellés, aucunecauseproduit attribuée.
+
+
+### 22 novembre 2026 — Nouvelles preuves de rétention011 contractualisées
+
+La garde refuse réellement les deux modules changés depuis les preuves historiques. Inspection RO des deux captures009 : SHA/modes/exports intacts, âge acquis, installation et témoin de clé compatibles, original011 sans activité. Décision132 : conserver les preuves historiques et produire trois preuves courantes ; copies009 migrées par le vrai startup pour sept jours, nouvelle capture256tirs suivie de3h15 pour la borne, et nouvelle charge10001HTTP pour la source protégée. Les logs expirables072 sont séparés de la chronologie078/091. Gardes/délais/identités et restitution des seuls originaux011 sont conservés ; aucun assouplissement de garde ou SQL fabriqué. Contrat RETENTION_SCHEMA_011 avant code.
