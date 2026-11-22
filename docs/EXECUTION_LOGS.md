@@ -383,3 +383,46 @@ onze migrations, notes/configuration/référence/5982 originaux et purge physiqu
 des seuls UUID possédés sont recoupés. Aucun profil PREPROD/PROD ni opération
 FORGE. Régression manquante, capture non inspectée ou preuve résiduelle garde
 072 `[~]`. Aucune réalisation ni nouvelle preuve n'est acquise par ce contrat.
+
+### Instrumentation native des lectures
+
+Décision avant les opérateurs : ils portent des noms propres au journal et ne
+modifient pas les programmes ou reçus historiques de l'éditeur. Un opérateur
+vérifie l'image/génération Docker, la naissance et le cgroup du contrôle, les
+seuls UUID de son namespace original et les empreintes des configurations
+officielles. L'accès opérateur à SQLite reste en lecture seule sous UID1001.
+Les fichiers de garde sont privés, immuables pendant la fenêtre et recoupés par
+empreinte ; une garde systemd indépendante peut tuer le seul traceur possédé
+par pidfd, restituer ses ressources puis constater la libération de ses threads.
+
+Les travailleurs du produit portent les noms diagnostiques `journal-subject`,
+`journal-read`, `journal-verify` ou `journal-policy`. La première barrière retient
+l'entrée réelle `openat` du SQLite principal dans `journal-read`. La seconde
+retient le retour réussi du verrou WAL d'écriture de `BEGIN IMMEDIATE` dans
+`journal-verify` ; un arrêt avant acquisition ne vaut pas réservation. Ptrace
+observe arguments et résultats sans jamais les modifier. Le thread HTTP reste
+actif pendant une retenue de lecture ; les enfants natifs hérités sont joints.
+L'observation courte de la requête d'écriture concurrente reste distincte du
+verrou acquis et n'assimile pas la maintenance à cette requête.
+
+Acquisition au plus40s, retenue totale45s, alarme50s et secours60s ; la lecture
+du produit garde son propre budget2s, qui n'est jamais étendu par ce banc. Une
+preuve d'ACL doit donc accepter le changement et libérer la première barrière
+avant sa deadline ; sinon elle échoue, même si le refus final est503. Deux IO
+retenus peuvent dépasser2s pour prouver429, responsabilité jusqu'à jonction et
+retour de capacité. Libération explicite, EOF et perte réelle du traceur sont
+recoupés avec absence de tracer/arrêt sur tous les threads et santé de l'API.
+
+Le défaut natif de stockage est un vrai `EMFILE` au `openat` observé : arrêt
+borné des autres threads, limite réelle de descripteurs abaissée, constat du
+résultat noyau négatif, puis limites initiales rétablies **avant** reprise de
+Python. Aucune écriture de registre ni remplacement de syscall. La garde
+restitue aussi cette limite si le traceur disparaît. L'échec contrôlé503 et la
+lecture suivante réussie sont des preuves HTTP séparées de l'observation native.
+
+Pour la coupure du contrôle, le handler original du compteur écrit et fsync son
+compteur, puis écrit et fsync un reçu portant son vrai identifiant d'appel et
+la valeur acquittée, avant son attente métier. Seul ce reçu postérieur au fsync
+autorise le signal. Sa présence n'est pas un résultat de passerelle ni une
+réponse applicative : la preuve de non-rejeu compare les UUID et la lecture
+ultérieure explicite du compteur. Aucun hook de test n'est ajouté au produit.
