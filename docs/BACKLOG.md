@@ -3408,7 +3408,7 @@ Dépend de : SLS-063. Contrat : [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR
   L’UUID UI est plus tard publié mais aucun événement terminal réseau n’est
   conservé ; cette inconnue n’est pas reconstruite.38backend/quatreweb, notes,
  010/manual18/74, référence/configuration/budgets et5982originaux préservés.
-- [ ] SLS-117.2 Conserver le diagnostic réel de navigation et sa limite de
+- [x] SLS-117.2 Conserver le diagnostic réel de navigation et sa limite de
   visibilité réseau, puis éprouver la fermeture réelle de la Page cliente :
   Close/close achevé et Target.targetDestroyed de son identifiant natif, inventaire absent,
   nouvelle Page au même candidat par GET sans POST. La fin HTTP reste distincte.
@@ -3426,6 +3426,11 @@ Dépend de : SLS-063. Contrat : [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR
   Revue du client de fermeture avant exécution : relier frame/loader du POST
   au document initial, et borner le refus de réponse à la fermeture confirmée ;
   conserver les événements ultérieurs sans leur attribuer une remise antérieure.
+  [Diagnostic de fermeture acquis](evidence/code-editor-page-closure-diagnostic-dev-2026-11-22.json)
+  au gel1749ffe/469 : trois étapes, zéro groupe qualifié. Close/retourclose/
+  targetDestroyed exacts en3,144ms puis targetabsente ; nouvellePage/GETmêmeUUID,
+  Bparhash/Apar défaut, trois handlers et trois captures, purge physique et
+  conservations recoupées. HTTPoriginal resteinconnu.117attend son replay32.
 - [ ] SLS-117.3 Persister le résultat et la décision avant correction du client ;
   nouveau gel et nouveau7+25sans cumul, neuf handlers, une garde, quatre vrais
   uploads partiels, dix captures ciblées et22communes inspectées, purge physique.

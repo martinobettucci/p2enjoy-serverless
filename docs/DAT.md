@@ -1,5 +1,17 @@
 # Architecture technique
 
+## Diagnostic Page/target acquis —22 novembre 2026
+
+[Preuve1749ffe/469](evidence/code-editor-page-closure-diagnostic-dev-2026-11-22.json) :
+Close, retour de close et targetDestroyed exacts en3,144 ms, puis absence de la
+target dans l’inventaire. Une nouvelle Page consulte le même UUID ; B par hash
+et A par défaut sont réellement invoqués. Trois étapes et zéro groupe qualifié ;
+trois JPEG desktop inspectés et purge physique recoupée. La fin HTTP reste
+inconnue. Backend, web, migrations, manuel, notes, configuration, budgets,
+référence et originaux sont conservés.117.2 est acquis ;117et070restent ouvertes,
+avec un replay32 sur deux viewports à produire.
+
+
 ## Diagnostic réseau20s non acquis —22novembre2026
 
 [117au gel468fe02296](evidence/code-editor-navigation-diagnostic-failed-dev-2026-11-22.json) :

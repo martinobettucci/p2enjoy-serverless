@@ -1,11 +1,19 @@
 # Qualification de la plateforme
 
+La [fermeture Page/target117](../docs/evidence/code-editor-page-closure-diagnostic-dev-2026-11-22.json)
+est acquise comme diagnostic sur469sources1749ffe : trois étapes, trois
+invocations, trois captures desktop et purge physique, zéro groupe qualifié.
+[Le replay32](../docs/CODE_EDITOR_PUBLICATION_CONTINUITY.md) est décidé avant
+l’adaptation du client : deux viewports et jonction/détachement entre variantes.
+Aucun nouveau7+25 n’a encore été exécuté ;117et070restent ouvertes.
+
+
 Le [diagnostic réseau20s](../docs/evidence/code-editor-navigation-diagnostic-failed-dev-2026-11-22.json)
 est lui aussi échoué, zéro qualifié : loader remplacé et candidat publié,
 aucun terminal observé. [117](../docs/CODE_EDITOR_NAVIGATION_OBSERVATION.md)
 porte avant code la jonction par fermeture réelle de Page/target puis reprise
 sur nouvelle Page au même UUID. Le [client de fermeture](code-editor-page-closure.mjs)
-est préparé et non exécuté, index469sources ; aucune qualification nouvelle.
+a maintenant son diagnostic acquis au gel469, lié ci-dessus ; zéro groupe qualifié.
 
 
 Le premier banc070 est [échoué et conservé](../docs/evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json) :
@@ -18,8 +26,8 @@ Le complément070 suit [CODE_EDITOR_PUBLICATION_CONTINUITY](../docs/CODE_EDITOR_
 sept groupes ciblés puis25communs surAPI046, sans changement produit ni redémarrage.
 Il doit distinguer mutation avant préparation, instantané préparé, perte réelle de
 réponse UI et orphelin429 après quatre uploads partiels. Client et packager au
-gel466becedfc ont produit le premier rouge ci-dessus ; diagnostic117 et nouveau
-passage propre restent à produire.070.3/.5 restent ouverts.
+gel466becedfc ont produit le premier rouge ci-dessus. Les diagnostics117 sont
+conservés ; le nouveau passage7+25 reste à produire.070.3/.5 restent ouverts.
 
 
 ## Surveillance pendant fermeture qualifiée — SLS-112

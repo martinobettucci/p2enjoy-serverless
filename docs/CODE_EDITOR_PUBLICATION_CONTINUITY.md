@@ -65,18 +65,19 @@ entrent dans les observations, jamais les valeurs.
    Joindre la publication B puis comparer brouillon C/version/date et lien à B.
    Invoquer B par hash : marqueur B ; invoquer sans tag : A. Les deux décisions
    durables restent distinctes, sans promotion implicite ni sauvegarde écrasée.
-5. **Réponse perdue UI**, en1440×1000 puis390×844 : ouvrir le brouillon proprement
-   enregistré avec un nouveau marqueur et publier par confirmation réelle.
-   Observer dans le navigateur UUID dans l’adresse avant le POST, un seul POST
-   avec ce même UUID, puis validating via GET réel et absence de réponse POST.
-   Capturer cette attente, recontrôler que la réponse POST manque encore juste
-   avant le départ réel du document, puis revenir à l’adresse
-   exacte portant cet UUID. Le navigateur rejoint le même candidat par GET ;
-   aucun nouveau POST/envoi et aucun nouveau candidat ne sont permis. Exiger
-   publication terminale, diagnostic/handler et marqueur attendu par invocation
-   du hash, puis A sans tag. Conserver événements request/response/requestfailed,
-   statuts et instants sans en-tête ni corps privé. Une navigation ne prouve pas
-   à elle seule l’annulation du travail serveur ; son résultat durable fait foi.
+5. **Réponse perdue UI**, en1440×1000 puis390×844 : ouvrir le brouillon enregistré
+   avec un nouveau marqueur et publier par confirmation réelle. UUID dans
+   l’adresse avant son seul POST, version/frame/loader liés ; candidatvalidating
+   et absence de réponse avant fermeture. Capturerl’attente puis fermer cette
+   seulePage. Dans10s, exigerClose, retourclose/isClosed et targetDestroyed exact
+   viaCDPnavigateur indépendant ; inventaireabsent. Le [diagnostic acquis117](evidence/code-editor-page-closure-diagnostic-dev-2026-11-22.json)
+   et son [contrat](CODE_EDITOR_NAVIGATION_OBSERVATION.md#diagnostic-fermeture-page)
+   portent ce raccordement. La finHTTP reste distincte et inconnue sans événement.
+   Créerune nouvellePage du mêmecontexte, mêmeviewport et adresseexacteUUID :
+   GETdu mêmecandidat, aucun nouveauPOST/envoi. Exigerpublished, brouillon/version/
+   lien et cibleAconservés ; invoquer lehashmarqué puisApar défaut. Garder les
+   observations avant assertions ; confirmerjonction/détachement de cet observer
+   avantla variante suivante. Ces deux variantesformentun seulgroupe.
 6. **Préparation sans admission** : préparer par API quatre autres candidats
    propres à cette fonction, puis quatre connexions HTTPS partielles réelles
    vers leur PUT artifact. Longueur annoncée du ZIP entier, préfixe envoyé non
@@ -97,8 +98,8 @@ entrent dans les observations, jamais les valeurs.
    de publications et lien du brouillon. Relever intégrités/FK, migrations,
    source/backend/web et absence de ressources actives avant purge physique.
 
-Le groupe5 conserve trois captures par viewport : contexte enregistré, validation
-avant navigation, suivi terminal au même UUID. Le groupe6 ajoute prepared et
+Le groupe5 conserve trois captures par viewport : contexte enregistré, attente
+avant fermeture, suivi terminal au même UUID dans la nouvelle Page. Le groupe6 ajoute prepared et
 abandon terminal dans les deux viewports, soit dix captures ciblées inspectées
 individuellement. Le focus, les textes, les UUID/versions, les requêtes et les
 effets serveur sont mesurés dans DOM/HTTP/SQL et jamais déduits des images.
@@ -165,5 +166,6 @@ correction et nouveau7+25. Les sources de ce premier passage restent leur époqu
 Le diagnostic20s de117 est également échoué et conservé séparément. La
 [décision avant nouveau client](CODE_EDITOR_NAVIGATION_OBSERVATION.md#décision-après-diagnostic-avant-code-de-fermeture)
 prévoit une vraie fermeture de Page/target puis une nouvelle Page au même UUID.
-Son diagnostic doit précéder l’adaptation du groupe5 ci-dessus et le replay32 ;
+Son diagnostic acquis est lié ci-dessus ; l’adaptation du groupe5 et le replay32
+restent à produire ;
 aucun événement HTTP manquant des anciens passages n’est inventé ou acquitté.

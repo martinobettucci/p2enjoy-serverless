@@ -1,10 +1,18 @@
 # Matrice de qualification réelle
 
+[Diagnostic Page/target117](evidence/code-editor-page-closure-diagnostic-dev-2026-11-22.json)
+acquis sur469sources1749ffe : trois étapes, zéro groupe qualifié, trois JPEG
+desktop, trois handlers et purge physique. Une nouvelle Page consulte le même
+UUID ; la fin HTTP reste inconnue.117.2 est coché,117reste ouverte. Le replay
+7+25 garde les deux viewports et toutes les autres preuves, sans cumul.
+
+
 Le [diagnostic11720s](evidence/code-editor-navigation-diagnostic-failed-dev-2026-11-22.json)
 reste échoué : nouveau document et GETpublished, terminal réseau non observé,
 un handler/deux captures/purge physique recoupés, zéro qualifié. La
 [décision Page/target](CODE_EDITOR_NAVIGATION_OBSERVATION.md#décision-après-diagnostic-avant-code-de-fermeture)
-précède son propre diagnostic puis le replay7+25 ; aucune fin HTTP déduite.
+est éprouvée par le diagnostic lié ci-dessus ; le replay7+25 reste à produire,
+sans fin HTTP déduite.
 
 
 Le [premier banc de continuité](evidence/code-editor-navigation-observation-failed-dev-2026-11-22.json)

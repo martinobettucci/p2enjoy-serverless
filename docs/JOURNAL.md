@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — jonction Page acquise, replay32 décidé avant correction
+
+Le diagnostic1749ffe, 469 sources, termine avec succès sous le pilote17674,
+sortie0 et jonction confirmée : trois étapes, trois JPEG ouverts individuellement,
+trois invocations A/B/A et purge physique, zéro groupe qualifié. Les trois
+confirmations Page/target arrivent en3,144 ms ; l’inventaire constate son absence.
+Une nouvelle Page consulte le même UUID sans POST, encore validating après
+fermeture puis published. La fin HTTP originale reste inconnue.
+
+La preuve est publiée, gzip860fdbae/brutc26cc46f, après revue sans blocage.
+Produit, manuel et images restent inchangés ; les conservations sont recoupées.
+117.2 est coché ;117.3 et070 restent ouverts. Décision avant code : intégrer les
+deux variantes1440/390 au groupe5, avec observateurs distincts joints et détachés
+avant le POST suivant. Nouveau7+25 au gel469 ; aucun replay encore exécuté.
+
+
 ## 22novembre2026 — diagnostic de fermeture Page préparé
 
 Après64d9aff poussé, nouveau client autonome code-editor-page-closure.mjs,

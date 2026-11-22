@@ -251,3 +251,41 @@ reste ouvert pour purge et recoupements ; après sa fermeture, la requête de
 fermeture Page est jointe et la session navigateur indépendante détachée avant
 la fermeture du navigateur. Le reçu nominal10s reste distinct de cette jonction
 finale. Diagnostic non exécuté, aucun comportement produit modifié.
+
+## Diagnostic de fermeture acquis, décision de replay avant code
+
+La [preuve diagnostique](evidence/code-editor-page-closure-diagnostic-dev-2026-11-22.json)
+porte le gel1749ffe, 469 sources et l’API046. Le pilote17674 termine avec une
+sortie0 et sa jonction confirmée : trois étapes passent, zéro groupe qualifié.
+Le rapport0192aef1 relie Close, le retour de close et targetDestroyed à la même
+target9163B537 en3,144 ms, dans la borne de10 s ; getTargets la trouve absente.
+Une nouvelle target80F0A142 utilise le même contexte : un seul POST au même UUID,
+puis les GET de reprise. Le candidat est encore validating après la fermeture,
+puis devient published. Les trois invocations A/B/A sont recoupées nativement.
+
+Les trois JPEG desktop sont ouverts individuellement. La fonction, son jeton,
+ses parents et ses ressources physiques sont retirés ; les compteurs sont nuls.
+Les38fichiers backend, quatre ressources web, dix migrations, notes, budgets,
+configuration, référence et5982originaux sont conservés. Le gzip porte le SHA
+860fdbae et le brut c26cc46f. Aucun terminal réseau n’est conservé ; la fin HTTP
+reste inconnue. Ce diagnostic n’exécute aucun contrôle commun ni parcours mobile.
+
+Décision avant adaptation : le groupe5 du client7+25 utilisera cette fermeture
+Page/target en1440 et390 px, avec un reçu propre à chaque viewport. Reprendre le
+corps du helper effectivement éprouvé ; ajouter un enregistrement propre au
+parcours et une jonction/détachement nominale **avant le POST du viewport suivant**.
+L’observateur du premier parcours doit cesser de recueillir les requêtes avant
+le deuxième. Le contexte et le canal API restent vivants entre variantes.
+Les UUID de publication observés rejoignent l’ensemble possédé avant nettoyage.
+Une confirmation manquante reste un échec ; la jonction finale après fermeture
+du contexte est conservée comme une observation distincte.
+
+Les programmes et sources des diagnostics sont conservés. Le nouveau pilote de
+replay et ses collectes partent d’un gel propre de469sources, committé, poussé
+et synchronisé, avec de nouveaux UUID. Sept groupes ciblés puis25communs frais
+s’exécutent en série : neuf handlers, une garde avec un lecteur, quatre uploads
+partiels, dix JPEG ciblés puis22captures communes inspectées. Purge physique et
+conservations habituelles sont exigées. Les deux rouges et le diagnostic positif
+ajoutent zéro groupe aux32. Produit, images, routes, schéma, secrets, fixtures et
+manuel restent inchangés.117reste[~] et070reste ouverte pour persistance et
+interruptions ; aucun replay n’a encore été lancé.
