@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-072.6 : inventaire32campagnes/276groupes supplémentaires fixé avant code ;
+  préconditions courantes011 exactes et pinsf73 (clients/opérateurs/générateur).
+  Troiswrappers versions ont une branche011 explicite et conservent008 ;
+  state-transport utilise sa baseline réelle courante. Syntaxes/revue passent,
+  exécutions propres et socle49/543 encore requis. Aucun changement produit.
+
 - SLS-132 : protocole courant011 écrit avant code, inventaire RO des captures
   anciennes et refus statique de rattachement scellés. Nouvelle préparation
   numérique : préservation des deux images immuables avant fenêtre, exports

@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#préconditions-et-historique
+// @verifies docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 // @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_ARCHIVE_LIMITS.md
 // @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_ARCHIVE_LIMITS.md#frontières-du-paquet
 // Real SSO, HTTPS, immutable original artifacts, native read syscalls and Docker.
@@ -17,7 +19,7 @@ const expectedControlMigrations=[
  '001_control.sql','002_login_limits.sql','003_deployments.sql',
  '004_function_operations.sql','005_execution.sql','006_storage_commands.sql',
  '007_function_code_hash.sql','008_function_versions.sql','009_schedules.sql',
- '010_code_drafts.sql',
+ '010_code_drafts.sql','011_execution_logs.sql',
 ];
 function diagnosis(error){return {type:error.name,message_sha256:sha(String(error.message)),source_line:String(error.stack??'').match(/code-editor-archive-boundaries\.mjs:(\d+)/)?.[1]};}
 async function save(){const p=new URL(report.href+'.pending');await writeFile(p,JSON.stringify({campaign:id,target:base,completed,checks,observations,cleanup_errors:cleanupErrors,intents,namespace_id:namespace?.id,service_id:service?.id,function_ids:functions.map(v=>v.id),token_ids:tokens.map(v=>v.id),invocations,skipped:0,failure},null,2)+'\n',{mode:0o600});await rename(p,report);}
@@ -51,7 +53,7 @@ async function main(){await mkdir(out,{recursive:true,mode:0o700});await save();
  try{
   await check('Accueil et SSO administrateur réel',async()=>{await page.goto(base);await page.getByRole('link',{name:'Se connecter avec le SSO',exact:true}).click();await page.waitForURL('https://oauth.lelabs.tech/**');await page.locator('input[name=username]').fill(credentials.username);await page.locator('input[type=password]').fill(credentials.password);await page.locator('input[type=submit],button[type=submit]').first().click();credentials=null;await page.waitForURL(base+'/**',{timeout:90000});await page.getByRole('heading',{name:'Fonctions',exact:true}).waitFor();const state=await context.storageState();state.cookies=state.cookies.filter(v=>v.domain==='serverless.lelabs.tech'&&v.name==='__Host-p2-session');state.origins=[];assert.equal(state.cookies.length,1);admin=await request.newContext({baseURL:base,storageState:state,timeout:600000});session=await(await admin.get('/api/session')).json();assert(session.authenticated);caller=await request.newContext({baseURL:base,timeout:240000});});
   await check('Cinq vrais paquets calibrés dans l’image, transférés et publiés',async()=>{
-   work=await mkdtemp(new URL('code-editor-archive-boundaries-'+id+'-',out).pathname);fixtureIntent=true;observations.push({fixture_intent:{campaign:id}});await save();fixtures=await fixtureAction('create');assert(fixtures.completed&&fixtures.container_gone&&fixtures.campaign===id);assert.equal(fixtures.image,'sha256:433da1501d03a26915a0ccf9b8a52babd62d20393452a0e42dd5cdfeb375d981');assert.equal(fixtures.output,'/srv/p2enjoy-serverless/.qualification-archive-fixtures/'+id);
+   work=await mkdtemp(new URL('code-editor-archive-boundaries-'+id+'-',out).pathname);fixtureIntent=true;observations.push({fixture_intent:{campaign:id}});await save();fixtures=await fixtureAction('create');assert(fixtures.completed&&fixtures.container_gone&&fixtures.campaign===id);assert.equal(fixtures.image,'sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0');assert.equal(fixtures.output,'/srv/p2enjoy-serverless/.qualification-archive-fixtures/'+id);
    let refused=false;try{await fixtureAction('create');}catch(error){assert.equal(error.code,2);assert.equal(JSON.parse(error.stdout).error,'campaign_exists');refused=true;}assert(refused);observations.push({scenario:'fixture-generation',image:fixtures.image,metadata_sha256:fixtures.metadata_sha256,metadata:fixtures.metadata,duplicate_uuid_refused:true});await save();
    namespace=await create('namespace','/api/namespaces',{name:'code-editor-archive-limits-'+id.slice(0,8),description:id});service=await create('service','/api/namespaces/'+namespace.id+'/services',{name:'editor-archive-boundaries',description:id});tokens.push(await create('token','/api/services/'+service.id+'/tokens',{name:'editor-archive-invoker-'+id.slice(0,8),rights:['read']}));
    for(const kind of ['compressed','expanded','files','directories','recovery']){

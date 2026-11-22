@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#préconditions-et-historique
+// @verifies docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 // @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_UI_CONCURRENCY.md
 // @verifies docs/CODE_EDITOR_UI_CONCURRENCY.md#dix-groupes-ciblés-ordinateur-et-mobile
 // @spec docs/BACKLOG.md#sls-115 | docs/CODE_EDITOR_ADOPTION_FOCUS.md
@@ -12,7 +14,7 @@ import {promisify} from 'node:util';
 import {chromium} from 'playwright';
 import {enterNamespaces} from './console-navigation.mjs';
 const exec=promisify(execFile),base='https://serverless.lelabs.tech',id=randomUUID();
-const image='sha256:04604089a8cb61d6015be0cde1671f29265878ff4f6f081509542ebc126055fc';
+const image='sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0';
 const out=new URL('../.local/e2e/',import.meta.url),prefix='code-editor-ui-concurrency-'+id,report=new URL(prefix+'.json',out);
 const checks=[],observations=[],cleanupErrors=[],intents=[],functions=[],tokens=[],gates=[],pending=[],invocations=[],faults=[],captures={},adoptionFocus=[],adoptionFallbackFocus=[];
 const sha=v=>createHash('sha256').update(v).digest('hex'),match=v=>({'If-Match':String(v)}),ep=()=>'/api/functions/'+fn.id;

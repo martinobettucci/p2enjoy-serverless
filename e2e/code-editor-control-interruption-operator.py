@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#préconditions-et-historique
+# @verifies docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md
 # @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_CONTROL_INTERRUPTION.md#acquisition-et-coupure-gardées
 # @spec docs/BACKLOG.md#sls-118 | docs/CODE_EDITOR_CONTROL_WINDOW.md#décision-avant-correction
@@ -26,7 +28,7 @@ import zipfile
 from control_database import read_control, control_owner
 from native_control_observer import NativeObserver
 
-IMAGE = 'sha256:04604089a8cb61d6015be0cde1671f29265878ff4f6f081509542ebc126055fc'
+IMAGE = 'sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0'
 PROTOCOL = {'version': 1, 'guard_delay_seconds': 45, 'restore_alarm_seconds': 180,
             'evidence_probe_timeout_seconds': 10}
 

@@ -1,8 +1,16 @@
+# @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#préconditions-et-historique
+# @verifies docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md#preuves-et-limites
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_UPLOAD_CAPACITY.md#preuves-et-limites
 """Run one serial real campaign, freeze source identity, then recoup physical cleanup."""
-import hashlib,json,runpy,subprocess,time
+import hashlib,json,runpy,subprocess,time,sys
 from pathlib import Path
+
+assert sys.argv[1:] in ([],['--target-schema011']), 'explicit_current_schema_option_required'
+current_schema011 = sys.argv[1:] == ['--target-schema011']
+expected_current_migrations = [p.name for p in sorted(Path('control/migrations').glob('*.sql'))]
+if current_schema011:
+ assert len(expected_current_migrations)==11 and expected_current_migrations[-1]=='011_execution_logs.sql'
 
 r=runpy.run_path('e2e/execution-suite.py');folder=Path('.local/e2e');name='function-version-upload-capacity'
 report=folder/(name+'.json');checkpoint=folder/(name+'-checkpoint.json')
@@ -17,7 +25,7 @@ value=json.loads(report.read_text());valid=process.returncode==0 and value['comp
 result={'completed':False,'started_at_ns':started,'ended_at_ns':time.time_ns(),'exit_code':process.returncode,'before':before,'after':after,'report':value,'log_sha256':hashlib.sha256(log.read_bytes()).hexdigest()}
 checkpoint.write_text(json.dumps(result,indent=2)+'\n');assert valid,'campaign_failed_see_private_report'
 campaigns={value['namespace_id']:value['function_ids']}
-program='campaigns='+repr(campaigns)+'\ncalls='+repr([v for v in value['evidence'] if 'invocation_id' in v])+'\n'+'''
+program='current_schema011='+repr(current_schema011)+'\nexpected_current_migrations='+repr(expected_current_migrations)+'\n'+'campaigns='+repr(campaigns)+'\ncalls='+repr([v for v in value['evidence'] if 'invocation_id' in v])+'\n'+'''
 import hashlib,json,os,socket,subprocess,sys,urllib.request
 from pathlib import Path
 assert os.geteuid()==0 and socket.gethostname()=='infra-serverless'
@@ -26,7 +34,9 @@ physical=json.loads(subprocess.check_output(['python3','-B',str(root/'e2e/storag
 assert physical['completed'] and all(physical['physical'].values())
 counts={};invocations=[]
 with read_control(root/'state/control.sqlite3') as db:
- migrations=[v[0] for v in db.execute('SELECT version FROM schema_migrations ORDER BY version')];assert len(migrations)==8
+ migrations=[v[0] for v in db.execute('SELECT version FROM schema_migrations ORDER BY version')]
+ if current_schema011:assert migrations==expected_current_migrations
+ else:assert len(migrations)==8
  for name,sql in {'active_functions':'SELECT count(*) FROM functions WHERE deleted_at IS NULL','instances':'SELECT count(*) FROM execution_instances','active_calls':"SELECT count(*) FROM invocations WHERE state IN ('receiving','queued','admitted','running')",'active_deployments':"SELECT count(*) FROM deployments WHERE state IN ('prepared','receiving','validating')",'reserved_bytes':'SELECT coalesce(sum(reserved_bytes),0) FROM deployments','operations':'SELECT count(*) FROM function_operations'}.items():counts[name]=db.execute(sql).fetchone()[0]
  assert not any(counts.values())
  function=next(iter(campaigns.values()))[0]

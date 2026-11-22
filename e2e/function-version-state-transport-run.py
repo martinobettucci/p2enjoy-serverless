@@ -1,11 +1,29 @@
+# @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#préconditions-et-historique
+# @verifies docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_STATE_TRANSPORT.md#livraison-et-limites
 # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_STATE_TRANSPORT.md#matrice-et-discriminants
 """Run the real nine-group campaign serially and independently recoup native state."""
-import hashlib,json,runpy,subprocess,time
+import hashlib,json,runpy,subprocess,time,sys
 from pathlib import Path
+
+assert sys.argv[1:] in ([],['--target-schema011']), 'explicit_current_schema_option_required'
+current_schema011 = sys.argv[1:] == ['--target-schema011']
+expected_current_migrations = [p.name for p in sorted(Path('control/migrations').glob('*.sql'))]
+if current_schema011:
+ assert len(expected_current_migrations)==11 and expected_current_migrations[-1]=='011_execution_logs.sql'
 r=runpy.run_path('e2e/execution-suite.py');folder=Path('.local/e2e');name='function-version-state-transport'
 report=folder/(name+'.json');checkpoint=folder/(name+'-checkpoint.json');assert not report.exists() and not checkpoint.exists(),'retain_prior_attempt_before_replay'
-before=r['snapshot'](str(report),False,include_adapter=True);credentials=r['private_credentials']();started=time.time_ns()
+before=r['snapshot'](str(report),False,include_adapter=True)
+current_native_before=None;current_embedded_before=None
+if current_schema011:
+ current_native_before=r['native_state']()
+ inspection="import hashlib,json\nfrom pathlib import Path\nr=Path('/app');files=[*r.joinpath('app').glob('*.py'),*r.joinpath('migrations').glob('*.sql'),r/'function_code_hash.py']\nprint(json.dumps({'backend':{str(p.relative_to(r)):hashlib.sha256(p.read_bytes()).hexdigest() for p in files},'web':{str(p.relative_to(r/'web')):hashlib.sha256(p.read_bytes()).hexdigest() for p in (r/'web').rglob('*') if p.is_file()}}))"
+ program='import json,socket,subprocess\nassert socket.gethostname()=="infra-serverless"\n'+ 'command='+repr(['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock','exec','serverless-api','python','-B','-c',inspection])+'\nprint(subprocess.check_output(command,text=True,timeout=30))\n'
+ current_embedded_before=json.loads(subprocess.check_output(r['SSH']+['root@10.77.0.24','python3 -B -'],input=program.encode(),timeout=45))
+ expected_backend={str(p.relative_to(Path('control'))):hashlib.sha256(p.read_bytes()).hexdigest()for folder,pattern in [('control/app','*.py'),('control/migrations','*.sql')]for p in Path(folder).glob(pattern)}
+ expected_backend['function_code_hash.py']=hashlib.sha256(Path('function_code_hash.py').read_bytes()).hexdigest()
+ assert current_embedded_before['backend']==expected_backend
+credentials=r['private_credentials']();started=time.time_ns()
 value={'completed':False,'started_at_ns':started,'before':before};checkpoint.write_text(json.dumps(value,indent=2)+'\n')
 try:
  process=subprocess.run(['node','e2e/'+name+'.mjs'],input=credentials,capture_output=True,timeout=1200);credentials=None;output=process.stdout+process.stderr;exit_code=process.returncode
@@ -15,7 +33,7 @@ log=folder/(name+'.log');log.write_bytes(output);print(output.decode(),end='')
 after=r['snapshot'](str(report),False,include_adapter=True);campaign=json.loads(report.read_text()) if report.exists() else None
 valid=exit_code==0 and campaign and campaign['completed'] and campaign['cleanup'] and not campaign['cleanup_errors'] and campaign['skipped']==0 and len(campaign['checks'])==9 and all(v['status']=='passed' for v in campaign['checks']) and len(campaign['calls'])==16 and len(campaign['gates'])==7 and all(v['restored'] for v in campaign['gates']) and before['source_sha256']==after['source_sha256'] and before['image']==after['image'] and before['adapter_images']==after['adapter_images'] and after['report']['mtime_ns']>started
 value.update(ended_at_ns=time.time_ns(),exit_code=exit_code,after=after,report=campaign,log_sha256=hashlib.sha256(log.read_bytes()).hexdigest());checkpoint.write_text(json.dumps(value,indent=2)+'\n');assert valid,'inspect_state_transport_checkpoint_no_automatic_replay'
-program='campaign='+repr(campaign)+'\n'+r'''
+program='current_schema011='+repr(current_schema011)+'\nexpected_current_migrations='+repr(expected_current_migrations)+'\n'+'campaign='+repr(campaign)+'\n'+r'''
 import hashlib,json,os,socket,subprocess,sys
 from pathlib import Path
 assert os.geteuid()==0 and socket.gethostname()=='infra-serverless'
@@ -26,7 +44,8 @@ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 function,namespace=campaign['function_id'],campaign['namespace_id'];physical=json.loads(cmd(['python3','-B',str(root/'e2e/storage-console-inspect.py'),json.dumps({namespace:[function]})]));assert physical['completed'] and all(physical['physical'].values())
 counts={};calls=[]
 with read_control(root/'state/control.sqlite3') as db:
- assert len(list(db.execute('SELECT version FROM schema_migrations')))==8
+ if current_schema011:assert [v[0]for v in db.execute('SELECT version FROM schema_migrations ORDER BY version')]==expected_current_migrations
+ else:assert len(list(db.execute('SELECT version FROM schema_migrations')))==8
  for label,sql in {'active_functions':'SELECT count(*) FROM functions WHERE deleted_at IS NULL','instances':'SELECT count(*) FROM execution_instances','active_calls':"SELECT count(*) FROM invocations WHERE state IN ('receiving','queued','admitted','running')",'uploads':"SELECT count(*) FROM deployments WHERE state IN ('prepared','receiving','validating')",'reserved_bytes':'SELECT coalesce(sum(reserved_bytes),0) FROM deployments','operations':'SELECT count(*) FROM function_operations'}.items():counts[label]=db.execute(sql).fetchone()[0]
  assert not any(counts.values())
  expected=campaign['calls'];assert len(expected)==16 and db.execute("SELECT count(*) FROM invocations WHERE function_id=? AND state='succeeded'",(function,)).fetchone()[0]==16
@@ -69,5 +88,13 @@ print(json.dumps({'completed':True,'physical':physical,'global_counts':counts,'c
 p=subprocess.run(r['SSH']+['root@10.77.0.24','python3 -B -'],input=program,text=True,capture_output=True,timeout=240)
 if p.returncode:
  (folder/(name+'-native.log')).write_text(p.stdout+p.stderr);raise AssertionError('native_recoup_failed_see_private_log')
-native=json.loads(p.stdout);assert native['completed'];previous=json.loads(Path('docs/evidence/function-version-unknown-first-dev-2026-11-09.json').read_text());assert native['embedded']==previous['native']['embedded'] and native['official_sha256']==previous['native']['official_sha256'] and all(native['services'][i][k]==previous['native']['services'][i][k] for i in range(2) for k in ('id','image','health')) and native['services'][1]['started_at']==previous['native']['services'][1]['started_at']
+native=json.loads(p.stdout);assert native['completed']
+if current_schema011:
+ assert native['embedded']==current_embedded_before and native['embedded']['backend']==expected_backend
+ current_native_after=r['native_state']();r['same_installation'](current_native_before,current_native_after)
+ assert all(native['services'][i][k]==current_native_after['services'][i][k]for i in range(2)for k in ('id','image','started_at'))
+ assert native['official_sha256']=={k:v for k,v in current_native_before['official_sha256'].items()if k!='/etc/spark/env.?'}
+ value.update(target_schema='011',native_before=current_native_before,native_after=current_native_after,embedded_before=current_embedded_before)
+else:
+ previous=json.loads(Path('docs/evidence/function-version-unknown-first-dev-2026-11-09.json').read_text());assert native['embedded']==previous['native']['embedded'] and native['official_sha256']==previous['native']['official_sha256'] and all(native['services'][i][k]==previous['native']['services'][i][k] for i in range(2) for k in ('id','image','health')) and native['services'][1]['started_at']==previous['native']['services'][1]['started_at']
 value.update(completed=True,native=native,native_collection_program=program,native_collection_program_sha256=hashlib.sha256(program.encode()).hexdigest());checkpoint.write_text(json.dumps(value,indent=2)+'\n');print(json.dumps({'completed':True,'groups':9,'successful_invocations':16,'guards_finished':7,'control_cuts':6,'source_files':len(after['source_sha256']),'image':after['image'],'global_counts':native['global_counts']}))

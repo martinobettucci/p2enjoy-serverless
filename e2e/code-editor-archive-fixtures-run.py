@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#préconditions-et-historique
+# @verifies docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_ARCHIVE_LIMITS.md#réalisation-du-passage-de-frontières
 # @verifies docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_ARCHIVE_LIMITS.md#frontières-du-paquet
 # @spec docs/BACKLOG.md#sls-114 | docs/CODE_EDITOR_ARCHIVE_RECOVERY.md#cause-native-et-décision-avant-code--22-novembre-2026
@@ -7,7 +9,7 @@ import hashlib,json,os,shutil,socket,stat,subprocess,sys,tempfile,time
 from pathlib import Path
 from uuid import UUID
 
-ROOT=Path('/srv/p2enjoy-serverless');IMAGE='sha256:433da1501d03a26915a0ccf9b8a52babd62d20393452a0e42dd5cdfeb375d981'
+ROOT=Path('/srv/p2enjoy-serverless');IMAGE='sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0'
 D=['runuser','-u','spark-docker','--','docker','--host','unix:///run/user/1001/docker.sock']
 assert os.geteuid()==0 and socket.gethostname()=='infra-serverless'
 assert len(sys.argv)==3 and sys.argv[1] in ('create','cleanup')

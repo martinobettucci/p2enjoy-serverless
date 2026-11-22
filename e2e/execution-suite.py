@@ -125,6 +125,8 @@ def source_hashes():
     files += list((ROOT/'docs').glob('SCHEDULE_*.md')) + [ROOT/'docs/SCHEDULES.md',ROOT/'docs/RETENTION_HISTORY_REPLAY.md']
     # @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#époque-et-autorité
     files += [ROOT/'docs/RETENTION_SCHEMA_011.md']
+    # @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md
+    files += [ROOT/'docs/SCHEMA_011_REGRESSIONS.md']
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(files))}
 
 def metadata(path):

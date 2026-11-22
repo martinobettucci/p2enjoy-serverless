@@ -2,7 +2,7 @@
 
 Contrat de SLS-072.6 et SLS-132.5, complément de EXECUTION_LOGS et
 SCHEDULE_REGRESSIONS. Inventaire avant adaptation : les options --target-schema011 des trois wrappers
-sont des branches à livrer, pas des commandes déjà disponibles. Les anciens résultats
+sont implémentées, mais leur qualification courante reste à exécuter. Les anciens résultats
 restent leurs époques et aucune réussite n'est déduite de cette liste.
 
 ## Périmètre décidé

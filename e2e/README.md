@@ -3155,3 +3155,20 @@ Il sélectionne explicitement le nouveau manifeste de capture011, vérifie ses
 migrations exactes et ses exports propres ; sansargument, manifeste009
 historique et oracle de son époque sont conservés. `count` reste refusé avant
 22:10UTC le22novembre, `preflight` nécessite1à38fenêtres réellement manquées.
+
+
+## Préconditions des campagnes courantes sur011
+
+[Inventaire32/276](../docs/SCHEMA_011_REGRESSIONS.md), après le socle49/543/18.
+Les clients courants et le générateur ZIP épinglent maintenantf73 ; contrôle,
+plafond et upgrade003→imagecourante exigent les onze migrations exactes.
+Les trois pilotes versions utilisent `--target-schema011` :
+`python3 -B e2e/function-version-state-transport-run.py --target-schema011`,
+`python3 -B e2e/function-version-upload-capacity-run.py --target-schema011`,
+`python3 -B e2e/function-version-duplicate-recovery-run.py --target-schema011`.
+Leurs anciens rapports/checkpoints doivent d’abord être archivés, puis déplacés
+dans leur espace de conservation ; le refus d’écrasement reste actif.
+Sansargument, branche008 historique conservée. State-transport recoupe une
+baseline courante réelle backend/web/CID/config, avec ses16appels/7gardes/6coupures.
+Ces adaptations ont syntaxe/revue statiques ; aucune des32campagnes ni le socle
+011 n’est déclaré réussi par leur seule préparation. Aucun produit reconstruit.

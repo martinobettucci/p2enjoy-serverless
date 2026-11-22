@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#préconditions-et-historique
+# @verifies docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 # @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#époque-et-autorité
 # @verifies docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#nouvelle-source-numérique-authentique
 # @spec docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
@@ -1055,7 +1057,7 @@ def main():
         assert guard_seconds==120,'firing_replay_guard_duration'
     source_schema='007' if '--source-schema007' in options else '006'
     target_schema='008' if '--target-schema008' in options else '007'
-    if mode=='historical':source_schema='003';target_schema='010'
+    if mode=='historical':source_schema='003';target_schema='011'
     assert source_schema!='007' or target_schema=='008','source007_requires_explicit_target008'
     if mode=='function-version-unknown-first':assert source_schema=='006' and target_schema=='008','unknown_first_requires_006_to008'
     if mode in ('function-version-purge','function-version-unknown-first'):
@@ -1186,7 +1188,7 @@ def main():
 
     if mode=='historical':
         actual=[v['version'] for v in rows(item,Path(paths['state'])/'control.sqlite3','SELECT version FROM schema_migrations ORDER BY version')]
-        assert actual==SCHEMA_010,'current_historical_target_schema010_required'
+        assert actual==SCHEMA_011,'current_historical_target_schema011_required'
 
     if retention_replay:
         source=retention_replay['source'];assert source['installation_id']==item['installation'],'known_original_installation_required'

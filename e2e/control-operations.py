@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#préconditions-et-historique
+# @verifies docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 # @spec docs/BACKLOG.md#sls-103 | docs/SCHEMA_010_PROOF_PREREQUISITES.md
 # @verifies docs/BACKLOG.md#sls-103 | docs/SCHEMA_010_PROOF_PREREQUISITES.md#preuves-exigées
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PUBLICATION_REGRESSIONS.md#périmètre-et-fidélité
@@ -140,8 +142,8 @@ try:
     metadata=json.loads(run(['docker','exec',container,'python','-B','-c',
         'import sqlite3,json; db=sqlite3.connect("/state/control.sqlite3"); print(json.dumps({"versions":[r[0] for r in db.execute("SELECT version FROM schema_migrations ORDER BY version")],"installation":db.execute("SELECT value FROM security_metadata WHERE name=?",("installation-id",)).fetchone()[0],"integrity":db.execute("PRAGMA integrity_check").fetchone()[0],"foreign_keys":list(db.execute("PRAGMA foreign_key_check"))}))']).stdout)
     # @verifies docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_REGISTRY.md#migration-et-conservation
-    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql','008_function_versions.sql','009_schedules.sql','010_code_drafts.sql'] and metadata['integrity']=='ok' and metadata['foreign_keys']==[]
-    uuid.UUID(metadata['installation']);passed('Dix migrations réelles, intégrité SQLite et UUID d’installation')
+    assert metadata['versions']==['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql','008_function_versions.sql','009_schedules.sql','010_code_drafts.sql','011_execution_logs.sql'] and metadata['integrity']=='ok' and metadata['foreign_keys']==[]
+    uuid.UUID(metadata['installation']);passed('Onze migrations réelles, intégrité SQLite et UUID d’installation')
     competing=run(base+['run','--rm','--name','serverless-control-lock-contender-'+project.rsplit('-',1)[-1],'--no-deps','control'],timeout=20,check=False)
     assert competing.returncode!=0 and 'Un contrôle possède déjà cet état' in competing.stderr
     ready(container);passed('Second contrôle réel refusé par le verrou exclusif')

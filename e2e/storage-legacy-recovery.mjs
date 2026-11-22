@@ -1,3 +1,5 @@
+// @spec docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#préconditions-et-historique
+// @verifies docs/BACKLOG.md#sls-072 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture
 // @spec docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
 // @verifies docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
 // @spec docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md
@@ -94,7 +96,7 @@ try{
         const row=await call('/api/archives/'+fn.id);assert.equal(row.id,fn.id);assert.equal(row.name,fn.name);
         assert(row.artifact_bytes>0&&row.storage.available&&!row.storage.registered);
         const physical=await operation('inspect',{function_id:fn.id});
-        assert.deepEqual(physical.versions,['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql','008_function_versions.sql','009_schedules.sql','010_code_drafts.sql']);
+        assert.deepEqual(physical.versions,['001_control.sql','002_login_limits.sql','003_deployments.sql','004_function_operations.sql','005_execution.sql','006_storage_commands.sql','007_function_code_hash.sql','008_function_versions.sql','009_schedules.sql','010_code_drafts.sql','011_execution_logs.sql']);
         assert.deepEqual(physical.agent,[]);
         const historical=evidence.find(value=>value.scenario==='historical-archive'&&value.function_id===fn.id).physical;
         assert(Object.keys(historical.artifact_inventory).length>0);
