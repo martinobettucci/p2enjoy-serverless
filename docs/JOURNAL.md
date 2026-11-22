@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 22 novembre2026 — contrat du POST éditeur avant son banc
+
+Livraison115/116/070.4 cfc94ca poussée puis21documents/preuves synchronisés ;
+les trois propositions de notes sont recoupées, notes actives inchangées.
+Choix réversible : qualifier d’abord les raccordements sans coupure du POST
+unique dans CODE_EDITOR_PUBLICATION_CONTINUITY, sept ciblés/25communs prévus.
+L’ancien opérateur exige un candidat préparé et ne prouve pas ce flux ; sa
+future adaptation de coupure attend un contrat séparé. Le résumé courant du
+contrat éditeur est réaligné sur070.1/.4 closes, constat enregistré au backlog.
+Aucun code produit, test exécuté ou nouveau critère clôturé à ce checkpoint.
+
+
 ## 22 novembre 2026 —36groupes qualifiés,115/116 clôturées
 
 Le passage45b2caa8/campagne4513df37 termine29288/sortie0, client joint, sur

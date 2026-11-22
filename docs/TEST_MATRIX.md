@@ -1,5 +1,13 @@
 # Matrice de qualification réelle
 
+[Continuité de publication éditeur](CODE_EDITOR_PUBLICATION_CONTINUITY.md),070.3/.5 :
+sept groupes ciblés puis25communs prévus, client non exécuté. Les oracles portent
+mutation avant préparation409 sans candidat, instantané préparé immuable malgré
+nouveau brouillon, GET du même UUID après départ réel du document et orphan429
+avec quatre uploads physiquement admis. La persistance/restart et les coupures
+receiving/validating restent séparées et ouvertes.
+
+
 ## Retour au fichier et attentes UI qualifiés —22novembre2026
 
 La [preuve36](evidence/code-editor-adoption-focus-dev-2026-11-22.json) clôt **SLS-115 et SLS-116** : onze groupes ciblés puis

@@ -1,5 +1,12 @@
 # Qualification de la plateforme
 
+Le prochain complément070 suit [CODE_EDITOR_PUBLICATION_CONTINUITY](../docs/CODE_EDITOR_PUBLICATION_CONTINUITY.md) :
+sept groupes ciblés puis25communs surAPI046, sans changement produit ni redémarrage.
+Il doit distinguer mutation avant préparation, instantané préparé, perte réelle de
+réponse UI et orphelin429 après quatre uploads partiels. Client et packager à écrire ;
+aucun groupe de ce nouveau passage exécuté.070.3/.5 restent ouverts.
+
+
 ## Surveillance pendant fermeture qualifiée — SLS-112
 
 [Qualification112](../docs/evidence/managed-invocation-watch-dev-2026-11-21.json) :82groupes réels,

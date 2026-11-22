@@ -1047,6 +1047,10 @@ Critères d'acceptation :
   adoptions/huit mesures textarea focalisé et huit replis h2, sans PUT,62captures.
   Les deux échecs restent exclus ; persistance
   après redémarrage et interruptions de publication restent distinctes.
+  Reprise du22novembre : le [contrat de continuité](CODE_EDITOR_PUBLICATION_CONTINUITY.md)
+  sépare les preuves restantes du POST unique : mutation avant préparation,
+  instantané après préparation, réponse perdue et préparation sans admission ;
+  sept groupes ciblés puis25communs à produire avant les coupures/restart.
 - [x] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
   [Rapprochement des quatre preuves](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies) :
@@ -1058,6 +1062,11 @@ Critères d'acceptation :
 - [ ] SLS-070.5 Publication par le pipeline de validation Docker existant, hash et
   déduplication de SLS-074 ; un import refusé conserve la version active et le brouillon,
   avec diagnostic consultable ; handler CJS/ESM validé avec les vrais modules.
+  Le [contrat de continuité](CODE_EDITOR_PUBLICATION_CONTINUITY.md) porte les réponses perdues et orphelins du flux
+  éditeur ; les preuves POST préparation/PUT public ne les remplacent pas.
+  Constat documentaire avant reprise : le résumé courant de CONSOLE_EDITOR
+  mentionne encore070.1/.4 ouvertes ; le réaligner sur leurs clôtures prouvées,
+  en conservant les états historiques datés. Aucun critère nouveau fermé ici.
 - [x] SLS-070.6 Après publication : lien vers le test de SLS-071, promotion explicite ou
   pilote, retour à un hash précédent. Le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
   suit le lien d’une version pilote puis celui de la publication réelle de

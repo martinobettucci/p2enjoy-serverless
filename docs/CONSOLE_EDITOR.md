@@ -5,7 +5,7 @@ avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
 Le serveur et la migration010 sont déployés et partiellement qualifiés en DEV
 par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La première facette console est déployée et partiellement qualifiée sura77b6b4e.
-Les critères070.2,070.6,070.7 et070.8 sont clôturés ;070.1/.3/.4/.5 restent ouverts.
+Les critères070.1/.2/.4/.6/.7/.8 sont clôturés ;070.3/.5 restent ouverts.
 La campagne de capacité réelle est détaillée dans
 [CODE_DRAFT_CAPACITY](CODE_DRAFT_CAPACITY.md), décision avant son client E2E.
 
@@ -157,6 +157,12 @@ budget de brouillon/artefact ou marge disque insuffisants. Les erreurs ne
 réaffichent jamais un corps de code ou une valeur confidentielle.
 
 ## Publication et réponses perdues
+
+Le [complément de continuité](CODE_EDITOR_PUBLICATION_CONTINUITY.md) définit
+les preuves restantes du POST unique ; sa première tranche ne redémarre pas
+le contrôle. Les coupures et la persistance après redémarrage gardent leur
+contrat natif à établir avant opérateur. Aucune clôture sur les anciennes
+préparations POST suivies de PUT public.
 
 L'UUID candidat est placé dans l'adresse de l'éditeur **avant** le POST. Il
 permet la consultation normale par GET candidat après réponse perdue. Le
