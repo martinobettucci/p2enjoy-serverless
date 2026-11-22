@@ -4753,6 +4753,13 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
   partagée, mêmes25/35/40/5s et gardes, API/SSO et nettoyagephysique ; aucun groupe
   historique ajouté. Tout nouveau défaut reçoit son constat avant correction.
 
+- [ ] SLS-134.5 Le pilote conserve avant son finally un diagnostic durable de
+  toute exceptionPython de la fenêtre reconnue : opération, sourceSHA, pile de
+  code sanslocals, métadonnées de la commande native échouée. Sa lecture après
+  restitution reste possible même lorsque stderr dépasse son préfixe. Ne pas
+  attribuer rétrospectivement l’erreur absente du premiercas ; éprouver les vrais
+  refus et le cascap complet avec ce diagnostic avant clôture.
+
 Le défaut corrigé ici est l’absence de diagnostic, pas une cause rétroactive
 inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent intactes.
 
@@ -4765,3 +4772,5 @@ inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent inta
 134.2 — précision avant exécution : le P2 de revue sur « total30s » conduit à distinguer préflight/recoupementnatifs (commandes40sexistantes) et production+transfert30s, enfants5s/jonction5s ; reçu de phases/total, client90 et finavantW−60. Ne pas présenter la lectureavant ou le recoupementaprès comme inclus dans30s. Écriturestderr désormaisnonbloquante sousdeadline ; aucun testcap encoreexécuté, aucune bornepartagée modifiée. Motif : conserver les primitivesDocker/SQLite réelles existantes, sans nouveauclient ni framework de délais pour ce diagnostic.
 
 134.2 — cascap intégré : imports réels du helper figé en enfants isolés, fluxréel borné/transféré parFD2 nonbloquant, source/identités/groupes/SHA et duréesdephases. Modeclient explicite, deuxpublications/minima chauds puis nettoyages partagés et sortie1 attendue au dépassement. DeuxP2 de brouillonrésolus (écriturebloquante, budget30s imprécis), dernière revue sansP1/P2 ; syntaxes seules acquises, aucune qualificationcap encore.
+
+134.2/134.5 — [premiercas dépassement réellement rouge](evidence/source-driver-stderr-overflow-first-failed-dev-2026-11-22.json),526sourcesa409f34/f016 : huitimports natifs/1154632octets/1,189sproduction, groupesjoints, préfixeexact1Mio et fluxcomplet1155579octets haché. Le pilote termine1 pendant libérationaprèsdiagnostic/capacity, donc secondgroupeéchoue et zéroqualifié ; 947octets supplémentaires horspréfixe nonconservés enclair. Originalf016/config/référence/5982/huitcompteurs0 restaurés.134.5 inscrit avanttraitement : diagnosticparent durable indépendant de la troncature, source/commande/pile, sans inventer la cause manquante.

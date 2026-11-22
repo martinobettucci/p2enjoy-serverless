@@ -723,3 +723,42 @@ natives déjà qualifiées sans ajouter un second client Docker ou modifier les
 délais partagés pour ce diagnostic. Aucun cascap n’a encore été exécuté ; aucun
 succès total30s n’est revendiqué. Le refus horsW−60, la borneclient90 et toutes les
 jonctions restent exigés. L’imageapplicative et les délais25/35/40/5 ne changent pas.
+
+
+### Diagnostic durable du pilote — SLS-134.5
+
+Constat avant correction : le premiercas dépassement produit effectivement
+1154632octets via huitenfants joints, puis le pilote échoue pendant la libération.
+Le client reçoit947octets supplémentaires après le préfixe1Mio ; leur texte
+n’est pas récupérable. L’opération précède capacity puis la restitution, sans
+cause exacte connue. Le cas reste rouge, même si les originaux sont restitués.
+
+Décision avant code : compléter le diagnostic de cette unité par un reçuparent
+`driver-primary-failure.json` privéroot0600 dans la fenêtre déjà reconnue.
+Il est écrit avant les commandes de restitution du finally, pour toute exception
+Python attrapable après possessionvalidée/verrou hérité. Avant cette frontière,
+aucun fichierdiagnostic n’est créé ; SIGKILL ne prétend pas fournir de traceback.
+Conserver l’opération nommée, SHA du pilote exécuté et pile limitée à16frames
+(basename/fonction/ligne, jamais locals ni lignes de code). L’exception est relancée
+et la restitution existante est conservée ; aucune erreur n’est convertie en succès.
+
+La fonction command conserve seulement sa dernière anomalie réelle : code
+retourné ou typetimeout, durée réelle, SHA/octets stdout/stderr et SHAargv,
+exécutable et actionnative parmi noms connus. Le contexte est remisàNone à
+chaque commande afin d’éviter une attributionpérimée ; un statut autorisé3/4 ne
+vaut pas une panne. L’exceptionparent fige ce contexte avant que le nettoyage
+ne lance d’autres commandes. Les résultats et les délaisnatifs ne changent pas.
+Aucun contenu de commande, env, secret ou sortie brute n’entre dans le reçu.
+
+Le mode status lit ce seul fichierroot600/scopé lorsqu’il existe, vérifie
+campagne/source du code gelé et retourne ce diagnostic séparément de restauration.
+Le client conserve la référence dans ses observations lors des vrais refus et
+l’exige absent lors d’une clôture nominale du cascap. Le fluxstderr reste limité
+au même préfixe ; le reçuparent ne reconstitue aucun texte perdu.
+
+Preuves propres : refusnaturel après attache existant (opérateur/helper1,
+client0), commandenonréussie réellement observée dans les cascourants, cascap
+complet et nettoyages. Les erreurs primaires et celles de restitution sont
+séparées ; un nouveau défaut observé reçoit son constat avant correction.
+Les mêmes sources/image/configuration, fonctions, groupes et restaurations sont
+recoupés. Aucun comportementmétier ou limite25/35/40/5 n’est modifié.

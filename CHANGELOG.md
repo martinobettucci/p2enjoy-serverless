@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-134 : premiercascap atteint réellement1Mio, mais le pilote tombe lors
+  de la libération ; rouge conservé et originaux restaurés. Diagnosticparent
+  durable spécifié avantcode pour conserver source/opération/commandenative
+  même après troncature ; aucune cause ni qualification inventée.
+
 - SLS-134.2 : cas E2E du dépassementstderr préparé avec vrais importsPython
   de helpersgelés, enfants/sessions/groupes joints et sorties bornées. Envoi
   nonbloquant sous30s de production, mesuresavant/après/total distinctes ;
