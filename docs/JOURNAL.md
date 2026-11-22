@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — matcher DBopenat126 réfuté par deux lectures réussies
+
+Diagnostic5cd712fe/506sources : deuxGET200 en912/945ms sous trace ; troisopenat
+WAL/SHM positifs, zéroDBprincipale et zérolecteur retenu. Le matcher ne peut pas
+exiger une nouvelle ouverture principale pour toute lecture. Le réemploiFD est
+cohérent avec le codeSQLite mais sa fonction interne n'est pas attestée.
+Décision avant code : mode reader-start explicite pour les trois vaguesAPI12,
+setterprctl journal-read entrée→sortie0, deuxworkers avantSQL, mêmes délais et
+oracles429/santé/log_read_timeout/jonction. Le fault garde son vraiopenatEMFILE,
+le read historique est conservé. Produit inchangé, pas de réouverture forcée.
+
+
 ## 22 novembre 2026 — acquisition126 manque un lecteur de la troisième vague
 
 Préparatoire3da409a7/505sources : release puis EOF acquièrent chacun2workers.

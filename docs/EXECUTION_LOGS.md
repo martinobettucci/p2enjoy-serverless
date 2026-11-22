@@ -397,7 +397,7 @@ Répartition des groupes spécifiques, fixée avant les clients :
 | API 09 | Exports JSONL/texte, lots 1000/1 Mio, reprise, échappement et mêmes ACL |
 | API 10 | Suivi, pause, nouvelles séquences, reprise après coupure, curseur altéré et contexte étranger |
 | API 11 | Publication, code en erreur, réponseHTTP 500, admission, instance, timeout et stockage corrélés |
-| API 12 | Deux vrais IO de lecture retenus, troisième 429, délai, jonction et reprise après défaut réel |
+| API 12 | Deux vrais workers de lecture retenus avant SQL, troisième 429, délai/jonction et EMFILE réel |
 | UI 01 | Entrée accueil → fonction/service → Journaux, contexte et retour catalogue |
 | UI 02 | Filtres, pages et période partageables, vide et nouvelle requête |
 | UI 03 | Chargement, refus et perte de conservation sans anciennes lignes ni totaux |
@@ -628,3 +628,17 @@ et au plus64openat des seuls workersjournal-read, classeDB/WAL/SHM ou autrechemi
 haché et borné, TID/retour/instant. Aucun buffer applicatif ou en-tête n'est lu,
 les mêmes critères et échéances restent imposés. Un relevé vaut zéro groupe
 qualifié, même si une exécution ne reproduit pas l'échec d'acquisition.
+
+
+Mode reader-start126 : pour les trois vagues de capacité/jonction d'API12,
+retenir les vrais workers à l'entrée effective du traitement de lecture,
+avant callbackSQL. Corréler prctl157/commande15 d'affectation exacte journal-read
+à sa sortie0, mêmeTID/naissance et comm obtenu ; refuser de confondre la
+restauration du nom avec cette affectation. Deux workers distincts, puis
+429/Retry-After2 et santé200, attente réelle2,1s, libération/EOF/SIGKILL, jonction
+et503/log_read_timeout, puis capacité revenue. Le délai peut expirer avant
+l'ouvertureSQLite : cette preuve porte sur les slots et la jonction des workers,
+pas sur deux connexionsSQL déjà ouvertes. Les budgets2s et40/45/50/60s restent
+identiques. Le mode read historique continue d'observer DBopenat ; le modefault
+exige toujours une vraie ouverture refuséeEMFILE avec restauration avantPython.
+Aucune réussite de reader-start ne remplace cette fauteI/O réelle.

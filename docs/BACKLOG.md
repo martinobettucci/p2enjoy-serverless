@@ -4006,10 +4006,10 @@ banc avec celui du produit ni relâcher les délais.
 
 - [x] SLS-126.1 Sceller le préparatoire échoué505sources, ses programmes/reçus,
   zéro groupe qualifié et purge physique ; situer précisément le mode/phase.
-- [ ] SLS-126.2 Reproduire et départager le défaut à partir des reçus natifs,
+- [x] SLS-126.2 Reproduire et départager le défaut à partir des reçus natifs,
   des vrais résultatsHTTP et d'un diagnostic borné si nécessaire. Aucun résultat
   injecté, thread supposé acquis, registre modifié ni étatSQL fabriqué.
-- [ ] SLS-126.3 Cause recoupée et décision/motif commités avant correction du
+- [x] SLS-126.3 Cause recoupée et décision/motif commités avant correction du
   composant en cause ; conserver les sources et le rouge originaux.
 - [ ] SLS-126.4 Rejouer API12 puis API05/06 et12API/25communs frais sur le code
   déployé, gardes/processus joints, purge physique, captures communes inspectées.
@@ -4029,3 +4029,24 @@ aux reçus natifs au plus64openat des seuls workersjournal-read : typeDB/WAL/SHM
 ou SHA d'autre chemin borné, retour, TID et instant. Aucun autre contenu mémoire,
 en-tête/corps, FD remplacé, valeurSQL écrite ou budget élargi. Rejouer les trois
 vagues puis la vraie faute comme dans API12, zéro groupe qualifié pour ce relevé.
+
+
+Diagnostic126 : [deux GET200 sans ouverture DBprincipale](evidence/execution-journal-readers-openat-diagnostic-dev-2026-11-22.json).
+Deux workers lisent correctement, trois openat WAL/SHM et zéro DBprincipale,
+sans dépassement du relevé. Le matcher manque donc des lectures valides. Le
+réemploiFD décrit parSQLite explique une possibilité, sans identification de
+sa fonction interne dans cette exécution ; cette identification n'est pas
+nécessaire pour écarter la précondition erronée du banc.
+
+Décision avant correction : ajouter le mode explicite reader-start et l'utiliser
+pour les trois vagues API12 seulement. Reconnaître l'entrée prctl157/commande15
+avec argument exact journal-read, puis sa sortie0 sur le mêmeTID/naissance et
+comm journal-read ; distinguer cette affectation initiale de sa restauration.
+Deux TID distincts sont retenus avant le callbackSQL, sans mutexSQLite ni
+hypothèse d'ouverture de FD ; vérifier429/santé puis, après2,1s réelles, exiger
+503/log_read_timeout à la jonction. Restituer via release/EOF/SIGKILL et recouper
+la capacité revenue. Les40/45/50/60s natifs et2s produit restent inchangés.
+Le modefault conserve une vraie entréeopenatDB et son résultat noyauEMFILE,
+limite restaurée avantPython ; un prctl ou un autre503 ne vaut pas cette preuve.
+Le mode read historique et les autres frontières restent inchangés. Aucun
+hook produit, nouvelle réouverture forcée, faux résultat ou écritureSQL.
