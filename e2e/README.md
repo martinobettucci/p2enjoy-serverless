@@ -11,6 +11,11 @@ Les préconditions des clients courants seront actualisées vers011 ; aucune
 branche historique ni capture scellée n'est réécrite. Les communs rejoués
 ne s'ajoutent pas deux fois au nombre de groupes uniques.
 
+Le [replay126](../docs/evidence/execution-journal-reader-preparation-replay-dev-2026-11-22.json)
+passe neufvagues/troisEMFILE avec rapprochement des codes5/261 ; les [budgets128](../docs/evidence/execution-journal-budgets-purge-replay-dev-2026-11-22.json)
+passent10000/+1 et16Mio/+1 avec deuxvoies de purge. Ce sont des préparatoires,
+zéro groupecompletqualifié. Imagecourantef73efa6e, webidentiqueàa7, migration011.
+
 Le pilote API `node e2e/execution-journal-api.mjs` a deux passages échoués
 conservés sur1aa70214 : buffer après trois groupes, puis frontière finale native
 après cinq. Zéro groupe qualifié. Il lit une unique ligne JSON privée sur stdin (`username`,
@@ -27,7 +32,12 @@ pilote retire les corpus précédents avant de mesurer les frontières globales.
 Les checkpoints natifs SQL et coupure sont joints avant les requêtes de purge ;
 un refus, un prérequis absent ou un nettoyage incomplet fait échouer le pilote.
 Les reçus privés UUID de `.local/e2e` sont conservés, sans écrasement d'un échec.
-Le client UI, les25communs et l'orchestration de régression restent à terminer :
+Le client UI `node e2e/execution-journal-ui.mjs` est écrit et relu, non exécuté.
+Il lit le même stdin privé et qualifie ses dixgroupes uniquement si tous les
+parcours et le nettoyage passent. Horsligne/latence du vrai navigateur éprouvent
+les pannes, sans route interceptée ni réponse fabriquée ; les PUTperdus sont
+retenus après commit natif. Toutes les JPEG doivent être ouvertes individuellement.
+Les25communs et l’orchestration de régression restent à produire :
 les12groupes API, même réussis, ne clôturent pas072.
 
 Le [diagnostic120](../docs/evidence/execution-journal-buffer-diagnostic-dev-2026-11-22.json)

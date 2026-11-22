@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-072 : client navigateur dixgroupes écrit et relu, nonexécuté : filtres/pages
+  stables, détails, testeur, suivi interrompu, exports, politique et clavier/mobile.
+  Aucune nouvelle qualification UI acquise. Les préparatoires126/128 prouvent
+  neufvagues réelles et les budgets/purges, sans remplacer les campagnescomplètes.
+
 - SLS-124 : les deux focusBODY de Conservation et du suivi sont reproduits
   et [conservés avec leurs trois captures](docs/evidence/execution-journal-focus-first-failed-dev-2026-11-22.json).
   Le parent du dialog restitue le titre stable après sa relecture ; un suivi

@@ -4402,3 +4402,11 @@ oumaintenance sont refusés. Ensuite neuf429→health200→délai→429 et jonct
 503timeout passent. Aucunprimitifréarmé, mêmesdeadlines ; huitcompteurs0/5982originaux.
 126.5 éclairci avec limite explicite : codeSQL/corps du toutpremier512 nonconservés,
 aucune rétroattribution.126.4/ensemble restent ouverts pour12API/25communs frais.
+
+072/124 — le client e2e/execution-journal-ui.mjs porte maintenant les dixgroupes
+du contrat, avec vrai SSO/API/handlers, captures, jonctions et purge. La revue a
+corrigé ses locators/états/insertions avant exécution ; aucun P1/P2 restant
+statiquement. Il utilise le vrai modehorsligne et la latence du navigateur,
+avec restaurationfinally, jamais des routes ou réponses fabriquées. La perte
+d'un PUT est retenue après son commit natif, puis relue sans rejeu. Syntaxe seule
+vérifiée, aucune preuvefonctionnelle UI acquise ; premièrecampagne à exécuter.
