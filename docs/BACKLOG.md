@@ -70,6 +70,7 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
+| 3 | [SLS-114](#sls-114) Génération et nettoyage des archives de qualification | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_ARCHIVE_RECOVERY](CODE_EDITOR_ARCHIVE_RECOVERY.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
@@ -1000,6 +1001,11 @@ persistées avant adaptation. Image433da150 vérifiée au repos, pins périmés 
 actualiser, dix noms de migration exacts et budget HTTP administrateur600s.
 Le passage7+25, ses frontières et son nettoyage restent à exécuter ; aucune
 nouvelle qualification de070 n’est déduite du précontrôle natif.
+
+Le premier passage au gel `db4980e` s’arrête après le SSO dans la préparation
+des paquets, puis signale une erreur de nettoyage des fixtures. Zéro fonction,
+namespace ou groupe qualifié ; rapport et contrôles conservés. La reprise du
+générateur et du nettoyage est portée par [SLS-114](#sls-114), avant nouveau passage.
 
 Résultat attendu : ouvrir le code d'une fonction, modifier un fichier texte et le
 handler, enregistrer un brouillon, voir le diff, publier par le pipeline réel de
@@ -3231,6 +3237,24 @@ Dépend de : SLS-065. Contrat : [CONSOLE_PAGINATION_STATES](CONSOLE_PAGINATION_S
   ni serveur de substitution. Les 10 groupes storage-console-ui,12 execution-ui enrichis et 25 communs
   (47 uniques) passent sur code déployé ; captures fraîches inspectées, manuel et ressources/
   nettoyages/configuration/référence/originaux recoupés, aucune faute retirée.
+
+<a id="sls-114"></a>
+## SLS-114 — Génération et nettoyage des archives de qualification
+
+Statut : [~] — premier passage ZIP070 arrêté pendant préparation, nettoyage
+des fixtures également en erreur ; aucun objet applicatif créé ni groupe qualifié.
+Nature : Corriger. Ordre :3, préalable au passage ZIP de070. Dépend de : SLS-063.
+Contrat : [CODE_EDITOR_ARCHIVE_RECOVERY](CODE_EDITOR_ARCHIVE_RECOVERY.md).
+
+- [ ] SLS-114.1 Premier échec scellé, état natif du générateur, reçus, identités et
+  propriété des sorties instruits ; cause et décision persistées avant correction.
+- [ ] SLS-114.2 Correction bornée conservant image, identités, limites, calibration,
+  refus et contrôles de nettoyage ; restitution ou retrait des seules ressources
+  possédées après diagnostic connu, sans masquer l’état natif ni relance automatique.
+- [ ] SLS-114.3 Sept groupes ZIP et25communs passent au nouveau gel sur code réel ;
+  six handlers, cinq fonctions, dix révisions et nettoyage physique complet recoupés,
+  captures/manuel/backend/web/configuration/référence et5982originaux conservés.
+  Le premier essai reste séparé et n’ajoute aucun groupe au total qualifié.
 
 Constat : storage-ui-pagination-error.jpg
 SHA569351743565ed9243f8ce4b3822ad3b6f8fbe63b76e5f9921e69eeaf01ec7c3

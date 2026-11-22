@@ -1,5 +1,18 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — premier passage ZIP070 arrêté, unité114 inscrite
+
+Le gel db4980e, image433da150 et458sources est synchronisé. Le pilote du
+passage6eee6434 est terminé avec sortie1 : SSO passé, génération/préparation
+en erreur puis fixture-cleanup en erreur. Campagne bfc8ebae, rapport76cb802b.
+Aucun namespace, fonction ou intention applicative ; zéro groupe qualifié et
+communs non lancés. Rapports exacts et sorties archivés ; aucun essai repris.
+
+SLS-114 est inscrite avant traitement. Lire les reçus, conteneur et propriétaires
+de la seule campagne nommée ; cause et décision à établir avant toute correction.
+Aucun nettoyage forcé ni retrait de garde ne découle du seul message haché.
+Le reste de070 garde sa portée ;078 reste qualifiée à son gel distinct9e1.
+
 ## 22 novembre 2026 — reprise des frontières ZIP070, décision avant adaptation
 
 Le raccordement physique réutilisera le collecteur partagé, avec le seul
