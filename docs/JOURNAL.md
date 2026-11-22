@@ -1,5 +1,21 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — prérequis d’image absent établi, reprise116 décidée
+
+Diagnosticreadonly terminé64947/sortie0, API433a9 et référence inchangées. Docker
+ne fournit plus433, alors que046 est disponible ; deux backups1001/0600 intègres,
+38backend/quatreweb/notes/configuration/budgets et5982originaux recoupés. Preuve
+négative publiée : gzip0d2d266f/brut0c1878b3, zéro groupe. Le stderr interne du
+premier tag et la cause de disparition Docker restent inconnus explicitement.
+
+L’exploration RO et le principal recoupent les63entrées Docker : seuls le composant
+éditeur et le manuel diffèrent depuis4d. Décision avant code : contexte privé
+original de63fichiers, ces deux sources Git historiques ca20/8a50, aucun module
+backend rétrogradé ni secret/env/base copié. Construire un tag de retour propre
+et exiger38backend/quatreweb identiques au live, environnement par défaut cohérent
+avec046 et services/tag candidat conservés. Nouveau précontrôle, nouvelles
+sauvegardes/UUID puis36E2E restent requis ;116 et115 restent ouverts.
+
 ## 22 novembre 2026 — préparation de bascule115 arrêtée,116 inscrite
 
 Opérateura8c7f410 au gel7b2b541 terminé sortie1, transport joint et fin distante

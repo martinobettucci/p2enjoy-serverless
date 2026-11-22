@@ -3331,10 +3331,15 @@ distant sont terminés ; aucune bascule ni qualification n’a eu lieu.
 Nature : Corriger. Ordre :3, préalable à115. Dépend de : SLS-063.
 Contrat : [CODE_EDITOR_DEPLOYMENT_RECOVERY](CODE_EDITOR_DEPLOYMENT_RECOVERY.md).
 
-- [ ] SLS-116.1 Conserver le premier transport/programme/intention et relever
+- [x] SLS-116.1 [Arrêt et diagnostic natif](evidence/editor-adoption-image-preparation-failed-dev-2026-11-22.json).
+  Conserver le premier transport/programme/intention et relever
   l’état réel du magasin d’images, du contrôle/référence et des sauvegardes
   possédées. Déterminer la cause sans déduire l’existence d’une image de son
   empreinte dans l’inspection d’un conteneur ; aucune relance automatique.
+  L’image433 est actuellement absente du magasin, contrôle sain inchangé ;
+  la garde de préparation ne vérifiait pas cette disponibilité. Le stderr
+  interne du premier tag et la raison de disparition Docker restent inconnus,
+  sans être inventés ; le diagnostic actuel et ses limites sont conservés.
 - [ ] SLS-116.2 Disposer avant bascule d’une image de retour validée contre les
   vrais octets backend/web servis et la configuration d’image attendue, sans
   secret embarqué. Toute reconstruction est décidée avant son code et conserve
