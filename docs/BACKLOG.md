@@ -4026,7 +4026,7 @@ banc avec celui du produit ni relâcher les délais.
   composant en cause ; conserver les sources et le rouge originaux.
 - [ ] SLS-126.4 Rejouer API12 puis API05/06 et12API/25communs frais sur le code
   déployé, gardes/processus joints, purge physique, captures communes inspectées.
-- [ ] SLS-126.5 Éclairer le GET503 inattendu du replay512/a7d, vagueEOF :
+- [x] SLS-126.5 Éclairer le GET503 inattendu du replay512/a7d, vagueEOF :
   conserver rouge/retours natifs, identifier le chemin, le refus et sa phase
   avant toute correction. Une finSSH pendant le secours n'est pas attribuée
   d'office à l'échec primaire ; reçus et ordre doivent la départager.
@@ -4393,3 +4393,12 @@ rejeuGET, changementflag/délai2s. Ensuite429→health200→2,1s→429 et les ac
 jonctions restent exécutés unefois ; tout échec qualifié échoue immédiatement.
 Contrat complet EXECUTION_LOGS, anciensrougesinchangés. Le détenteur exact du
 verrou resteinconnu ; la preuve ne promet pas santé200 pendantacquisitionptrace.
+
+126.5 — [replay préparatoire positif](evidence/execution-journal-reader-preparation-replay-dev-2026-11-22.json) :
+f0d9fd63/514sources efba3fe/f73, troisitérations/neufvagues/troisEMFILE. Deux
+préparations observent11health503, toutes stabilisées enmoins390,06ms et recoupées
+automatiquement au boncomposant/codes5/261/siteBEGIN ; tousautresdéfautspropriétaires
+oumaintenance sont refusés. Ensuite neuf429→health200→délai→429 et jonctions
+503timeout passent. Aucunprimitifréarmé, mêmesdeadlines ; huitcompteurs0/5982originaux.
+126.5 éclairci avec limite explicite : codeSQL/corps du toutpremier512 nonconservés,
+aucune rétroattribution.126.4/ensemble restent ouverts pour12API/25communs frais.

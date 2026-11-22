@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — préparation126 et neuf vagues strictes acquises
+
+f0d9fd63/514sources efba3fe/f73 : neufvagues et troisEMFILE passent. Deuxphases
+préparatoires voient11health503, recoupés uniquement5/261 auBEGIN dans le bon
+composant ; stabilisationmax390,06ms. Aprèspréparation, santé200 et oracles429/
+délai/jonction inchangés passent, purge/huitcompteurs0/5982originaux.126.5 éclairci,
+ancienrouge512 exactnonreconstructible reste distinct ; zéro groupecompletqualifié.
+Prochaineétape : finir le client10UI en revue puis geler12API/10UI/25communs.
+
 ## 22 novembre 2026 — codesSQLite126 et bascule diagnostique acquis
 
 Imagef73efa6e/CID88201d21, basculegardée0c195234 terminée sansrestaurationDB,
