@@ -88,6 +88,8 @@ def source_hashes():
     files += [ROOT/'docs/CODE_EDITOR_ARCHIVE_RECOVERY.md']
     # @spec docs/BACKLOG.md#sls-070 | docs/CODE_EDITOR_UI_CONCURRENCY.md
     files += [ROOT/'docs/CODE_EDITOR_UI_CONCURRENCY.md']
+    # @spec docs/BACKLOG.md#sls-115 | docs/CODE_EDITOR_ADOPTION_FOCUS.md
+    files += [ROOT/'docs/CODE_EDITOR_ADOPTION_FOCUS.md']
     # @spec docs/BACKLOG.md#sls-071 | docs/CONSOLE_TESTER.md#réalisation-et-preuves
     files += [ROOT/'docs/CONSOLE_TESTER.md',ROOT/'docs/CONSOLE_TESTER_FAILURES.md',ROOT/'docs/CONSOLE_TESTER_TOKEN_LOSS.md',ROOT/'docs/CONSOLE_TESTER_SOURCE.md',ROOT/'docs/CONSOLE_TESTER_LOADING.md',ROOT/'docs/CONSOLE_TESTER_TASK_EXCEPTION.md']
     # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_CLI_RECOVERY_REGRESSIONS.md#livraison-et-limites

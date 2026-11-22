@@ -219,7 +219,9 @@ communs non lancés.18gates/24lecteurs restaurés, huit handlers et purge physiq
 recoupés,32JPEG inspectés individuellement. La [correction115](../docs/CODE_EDITOR_ADOPTION_FOCUS.md)
 prévoit le relais de focus parent et huit variantes de repli supplémentaires
 dans un seul groupe :11+25, neuf invocations et40+22captures. Aucun correctif
-ni nouveau passage à ce checkpoint.
+qualifié ni nouveau passage à ce checkpoint. Le relais est désormais implémenté,
+le client contient le groupe de repli, et le build UI local passe ; l’image DEV
+et le passage36 restent à produire. L’index porte462sources.
 
 ## Frontières du ZIP reconstruit — qualifiées en DEV
 

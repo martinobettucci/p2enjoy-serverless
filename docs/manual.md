@@ -251,6 +251,7 @@ Après un conflit ou une réponse incertaine, **Relire le brouillon serveur**
 permet de consulter son nouvel enregistrement sans écraser votre saisie.
 Comparer son contenu puis adopter explicitement cette version en gardant votre
 texte pour une prochaine sauvegarde, ou choisir le texte du serveur. Une
+adoption rend le focus au champ de code en édition, sinon au titre du fichier. Une
 nouvelle modification concurrente peut encore refuser l’écriture ; il n’y a
 ni fusion silencieuse ni répétition automatique.
 

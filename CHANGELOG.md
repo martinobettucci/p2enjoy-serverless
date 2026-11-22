@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-115 : relais de focus implémenté dans l’éditeur après adoption du brouillon,
+  avec manuel et huit variantes E2E de repli. Build UI local réussi ; image DEV,
+  déploiement et qualification11+25 restent à produire. Le premier échec réel
+  et ses huit mesures BODY restent conservés, zéro groupe qualifié.
+
 - SLS-114 est close par [32groupes réels](docs/evidence/code-editor-archive-boundaries-dev-2026-11-22.json) :
   frontières ZIP64Mio/256Mio/20000fichiers/20000parents et +1, six invocations,
   dix révisions, cinq purges physiques et22captures inspectées au gel0168/459sources.

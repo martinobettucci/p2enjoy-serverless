@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — relais de focus115 implémenté, avant build DEV
+
+Après contrat poussé8a50044, le parent arme ses intentions fichier/édition après
+les validations d’adoption ; l’effet de layout dépend aussi du brouillon adopté.
+Le textarea courant reçoit le focus si l’édition subsiste, sinon le titre stable.
+Confirm et la sémantique locale restent inchangés. Le client ajoute le groupe
+des huit replis lecture/existence/absence, mesure h2, PUT/version et SHA séparés.
+Onze groupes, neuf handlers,40cibles+22communes sont désormais exigés ;462sources.
+
+Build UI local terminé sortie0, client joint ; manuel18chapitres/74paragraphes
+inchangé en structure, nouvelle empreinte8d2434cf compilée. Ce contrôle statique
+et le build ne qualifient aucun comportement. Revue du
+composant/client, gel poussé, build/déploiement DEV et nouveau36 restent requis.
+
 ## 22 novembre 2026 — défaut d’adoption reproduit,115 et son choix avant code
 
 Le premier passage UI au gel4dcd24b/461sources/image433 termine sortie1, joint.

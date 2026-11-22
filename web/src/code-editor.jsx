@@ -233,7 +233,8 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
   }
   const initialFileOpened=useRef(false);
   useEffect(()=>{if(context&&mode&&path&&!initialFileOpened.current){initialFileOpened.current=true;void openFile(path,{skipGuard:true});}},[Boolean(context),mode]);
-  useLayoutEffect(()=>{if(!fileLoading&&focusFile.current){focusFile.current=false;fileHeading.current?.focus();}if(focusEdit.current&&editing){focusEdit.current=false;fileArea.current?.focus();}},[fileLoading,file,editing]);
+  // @spec docs/BACKLOG.md#sls-115 | docs/CODE_EDITOR_ADOPTION_FOCUS.md#cause-et-choix-avant-code
+  useLayoutEffect(()=>{if(!fileLoading&&focusFile.current){focusFile.current=false;fileHeading.current?.focus();}if(focusEdit.current&&editing){focusEdit.current=false;fileArea.current?.focus();}},[fileLoading,file,editing,draft]);
   useEffect(()=>{
     const node=fileArea.current;if(!node)return;
     const measure=()=>setOverflow(node.scrollWidth>node.clientWidth+1),observer=new ResizeObserver(measure);observer.observe(node);measure();return()=>observer.disconnect();
@@ -312,6 +313,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
     } catch(error) {if(mounted.current&&generation===reviewGeneration.current)setMutationError(readable(error));}
     finally {if(mounted.current)setReading(false);}
   }
+  // @spec docs/BACKLOG.md#sls-115 | docs/CODE_EDITOR_ADOPTION_FOCUS.md#cause-et-choix-avant-code
   function adoptServer(replaceText) {
     if(!conflict||conflict.missing)return;
     if(!serverCopy||serverCopy.generation!==reviewGeneration.current||serverCopy.path!==pathRef.current||serverCopy.surface!==modeRef.current)throw new Error('Relisez le fichier ouvert avant toute adoption.');
@@ -323,6 +325,7 @@ export function FunctionCodeEditor({functionId,functionName,onFunction}) {
       else if(replaceText)clearFile();
       else if(pathRef.current)setFile(prior=>({...prior,text:'',size:0,sha256:null,executable:false,mode:'0o444',missing:true}));
     }
+    focusFile.current=true;focusEdit.current=editing&&(!replaceText||Boolean(copy?.editable));
     setServerCopy(null);setTreeRevision(v=>v+1);setNotice('Version du serveur adoptée explicitement.');
   }
   async function removeDraft() {
