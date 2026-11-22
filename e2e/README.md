@@ -3205,4 +3205,4 @@ le résultatterminal de cette seuleunité avant toute autre campagne.
 [Contrat](../docs/RETENTION_SCHEMA_011.md#diagnostics-des-bornes-propres-de-lexporteur).
 La CLI et image-save sont réels, archivescanoniques enlectureseule ; kernelEXIT,
 SIGALRMpending, tempsrestant et jonction ont leurs oracles stricts. Chaque cas
-restezéro groupe de clôture. Code relu et syntaxe seule, aucun cas natif exécuté.
+restezéro groupe de clôture. Les [trois diagnostics](../docs/evidence/retention-image-export-deadlines-schema011-dev-2026-11-22.json) passent sur526sources2691de2/f73, avec unités et descendants joints, archives/services conservés. Aucune rétention métier ajoutée.

@@ -4581,12 +4581,14 @@ sources009 et leurs exports demeurent strictement immuables.
   retirées, borne10000 et détachement de source. Aucun âge/SQL/horloge fabriqué,
   aucune nouvelle invocation attribuée à un témoin ancien. Distinguer les logs
   expirables selon072 des métadonnées de source protégées selon078/091.
-- [ ] SLS-132.4 Préflights/refus/perte et restitution réelle, originaux011,
+- [x] SLS-132.4 Préflights/refus/perte et restitution réelle, originaux011,
   collection/schema/données conservés, seules copies retirées, gardes/clients
   joints ; jamais de restauration009/010 sur la base originale011.
-  Les échéances propres du nouvel exporteur d’images90s et de sa jonction5s
-  restent à provoquer réellement (dont alarme pendant nettoyage), sans
-  modifier ses archives canoniques ; le seul export nominal ne les qualifie pas.
+  [Trois diagnostics propres90/5](evidence/retention-image-export-deadlines-schema011-dev-2026-11-22.json)
+  acquis sur526sources2691de2/f73 : vraieCLI90, vraiejonction5 refusée et
+  alarmpending pendantfinally, tempsrestant recoupé. Troisunités/descendants
+  joints, canoniques et services intacts ; zéro groupe de clôture ajouté.
+  Préflights/refus/pertes/namespace restent liés à leurs preuves ci-dessous.
 - [ ] SLS-132.5 La garde rattache exclusivement la preuve fraîche à ses sources
   actuelles exactes et refuse tout manque ; rapports historiques inchangés,
   zéro groupe réadditionné. Rejouer ensuite le socle et les consommateurs
@@ -4694,3 +4696,5 @@ Chaque cas tourne dans sa seule unitéroot DEV oneshot180s/stop30s/KillModecontr
 133.3 — [comparaisonRO sur corpusauthentique2928/10000](evidence/invocation-production-query-comparison-dev-2026-11-22.json) : SELECToriginal parcourt10000événements, médianechau de17,94ms/17,13msCPU ; CROSSJOINpolitiques→indexservice/temps donne0,027ms, lignes ordonnées égales. ConteneurSQL/copie de travail retirés, canonSHA inchangé, deuxservices strictementidentiques ; zérogroupefonctionnel. Décision de correctif avant codeproduit : changer seulement la forme de jointure du SELECT d’expiration desévénements, mêmesprédicats/heure/LIMIT/ordre global, en utilisant l’index011 existant ; aucune migration, index ou statistique modifié, aucune cadence relâchée. Cette optimisation cible un coût mesuré ; débitE2E et casexpirés restent àprouver. Le correctif n’est pas déployé : terminer d’abord les preuvesf73 en cours de qualification, dont la borne numérique éligible22:10UTC.
 
 132.4 — trois diagnostics natifs intégrés, propresunitésroot180/30/CG vérifiées, vraipipe image-save et vraisEXIT/alarme ; oraclescause_timeout/EXIT→fin corrigés aprèsrevue. Propriété héritée du helper et du clientDocker dans le CG exigée avantlesretenues. Syntaxe/revue seules passent, aucune exécution ni borne acquise.
+
+132.4 — [trois diagnostics natifs acquis](evidence/retention-image-export-deadlines-schema011-dev-2026-11-22.json) : CLIalarme observéeaprès90,218s, fin17msaprèslibération ; jonction5 à5,017s aprèsEXIT ; variantealarme tempsrestant lu etSIGALRMpending/bloqué pendantfinally. Groupesvides, troisunités arrêtées, mêmesservices/CID/démarrages/config/collection/archives. Zéro groupe de rétention ajouté.132.4 est acquis ;132.3/132.5 restent ouverts pournominalsource, borenumérique et régressions.

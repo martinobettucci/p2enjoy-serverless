@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-132.4 : propres échéances90/5 de l’exporteur éprouvées dans troisunités
+  DEV, dont alarmpending pendant lefinally ; tempsrestant/oracles stricts,
+  descendants récollectés, unités libérées et canoniques/services identiques.
+  Troisgroupes support, zéro groupe de rétention ou de clôture réadditionné.
+
 - SLS-132 : diagnostics natifs des propres bornes90/5 préparés et relus,
   protocole root180/30/CG et assertions strictes de noyau/temps/jonction.
   Aucun cas exécuté par cette préparation ; archives et produit inchangés.
