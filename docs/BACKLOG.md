@@ -4338,3 +4338,18 @@ huitcompteurs0 et5982originaux.512sources identiques au commit6f6fefc.
 Zéro groupecompletqualifié ;124.3 reste ouvert pour intentionssuccessives,
 respect d'un autrecontrôle et10UI/25communs. Les images mobiles ne cadrent pas
 le refus souslepli : sa preuve estDOM/HTTP, pas visuelle.
+
+
+126.5 — [reproduction bornée rouge](evidence/execution-journal-reader-health-repeated-failed-dev-2026-11-22.json) :
+les deux premières itérations passent, la troisième échoue pendant release.
+Le GET/healthz503 conserve le SHA exact de « Les planifications doivent être
+réconciliées. » ; les logs recoupent schedules.maintenance_failed/OperationalError
+avant les deuxworkersheld. Le codeSQLite précis reste inconnu. Restitution/purge,
+huitcompteurs0 et5982originaux acquis ; zéro groupequalifié. Aucune attente assouplie.
+
+128 — décision avant préparatoire indépendant : exécuter les seules fonctions
+eventBudget puisbyteBudget existantes, avec leurs deuxcorpus16Mio/+1, purgefonction
+et effacementservice réels. Pas de préfixereaders susceptible de masquer cette
+preuve indépendante, aucun oracle changé, zéro groupecompletqualifié. Le client
+reste possesseur de toutes ses ressources et les purge en finally. Le full12
+reste requis ensuite sur la même source déployée.

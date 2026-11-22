@@ -1,5 +1,13 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — refus santé126 reproduit et isolé
+
+Le troisième essai31c33904 échoue sur health503 ; le SHA du message désigne les
+planifications et leurs logs confirment OperationalError avant held. CodeSQLite
+nonconnu, aucun fix attribué. Deux itérations complètes passent auparavant,
+restitution/purge acquises, huitcompteurs0. Rouge scellé. Préparatoire128 décidé
+sans préfixelecteurs pour prouver indépendamment16Mio/+1 et les deux purges.
+
 ## 22 novembre 2026 — matcher DBopenat126 réfuté par deux lectures réussies
 
 Diagnostic5cd712fe/506sources : deuxGET200 en912/945ms sous trace ; troisopenat
