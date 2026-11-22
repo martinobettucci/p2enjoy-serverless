@@ -1055,6 +1055,9 @@ Critères d'acceptation :
   par les [32groupes](evidence/code-editor-publication-continuity-dev-2026-11-22.json) :
   mutation/snapshot, fermeture Page puis reprise et orphanprepared429/abandon.
   La persistance après redémarrage reste à éprouver, sans nouvelle clôture de070.3.
+  Le [contrat de coupures du contrôle](CODE_EDITOR_CONTROL_INTERRUPTION.md) fixe
+  avant code les deux SIGKILL du POST éditeur, la persistance native/API/UI et
+  les gardes inchangées ; quatre groupes ciblés puis25communs restent à exécuter.
 - [x] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
   [Rapprochement des quatre preuves](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies) :

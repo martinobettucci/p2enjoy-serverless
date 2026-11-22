@@ -1,5 +1,15 @@
 # Éditeur de code et brouillons persistants
 
+## Coupures du contrôle depuis l’éditeur — contrat avant code
+
+Le [complément SLS-070.3/.5](CODE_EDITOR_CONTROL_INTERRUPTION.md) fixe deux vrais SIGKILL du POST
+éditeur : `receiving` avec ZIP entièrement reçu, puis `validating` avec Docker
+vivant et perte du helper. Gardes RESTORE/KILL_CONTROL inchangées, même API046,
+brouillon conservé et repris par API/UI, nouveau pilote explicite et déduplication.
+Quatre groupes ciblés puis25communs sont prévus ; aucun exécuté à ce checkpoint.
+Produit, manuel, images, schéma et configuration officielle restent inchangés.
+
+
 Contrat de réalisation [SLS-070](BACKLOG.md#sls-070), décidé le11 novembre2026
 avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-et-handler)
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).

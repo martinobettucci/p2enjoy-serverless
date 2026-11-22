@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- Contrat de qualification [SLS-070.3/.5](docs/CODE_EDITOR_CONTROL_INTERRUPTION.md)
+  persisté avant code : deux interruptions physiques du POST éditeur, brouillon
+  après redémarrage et nouvelle publication explicite ;29groupes encore à prouver.
+  Aucun changement produit, image, manuel ou configuration officielle.
+
 - SLS-117 est close par [32groupes réels](docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json) :
   fermeture Page/target et reprise du même UUID sans POST en1440/390px, mutation
   pendant reconstruction et instantané conservé, quatre uploads réels puis

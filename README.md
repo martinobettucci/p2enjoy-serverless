@@ -1,5 +1,15 @@
 # P2Enjoy Serverless
 
+## Coupures du contrôle depuis l’éditeur — contrat avant code
+
+Le [complément SLS-070.3/.5](docs/CODE_EDITOR_CONTROL_INTERRUPTION.md) fixe deux vrais SIGKILL du POST
+éditeur : `receiving` avec ZIP entièrement reçu, puis `validating` avec Docker
+vivant et perte du helper. Gardes RESTORE/KILL_CONTROL inchangées, même API046,
+brouillon conservé et repris par API/UI, nouveau pilote explicite et déduplication.
+Quatre groupes ciblés puis25communs sont prévus ; aucun exécuté à ce checkpoint.
+Produit, manuel, images, schéma et configuration officielle restent inchangés.
+
+
 La [continuité de publication depuis l’éditeur](docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json)
 est qualifiée par32groupes réels au gel9b14b0d/469sources surAPI046 : mutation
 pendant reconstruction409 sans candidat, instantané B conservé malgré brouillon C,

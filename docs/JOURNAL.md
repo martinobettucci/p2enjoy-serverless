@@ -1,5 +1,19 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — décision de coupures du POST éditeur avant code
+
+Après livraison117 poussée et trois notes proposées recoupées,070.3/.5 portent
+le [contrat de coupures](CODE_EDITOR_CONTROL_INTERRUPTION.md). L’opérateur ancien
+exige un candidat déjà préparé : un opérateur distinct armera avant le POST,
+avec UUID absent, brouillon lié et phase sondée sans inventaire lourd.
+`receiving` reste durable pendant l’extraction réelle du ZIP complet ; ne pas
+présenter cette frontière comme une réception partielle ou un extracteur suspendu.
+Paquet original de18 000fichiers pour une fenêtre réelle, échec si manquée ;
+validateur Docker vivant pour la seconde coupure. Les programmes de garde figés
+et le protocole235s restent inchangés. Quatre ciblés puis25communs à produire,
+six invocations et deux redémarrages avec conservation du brouillon.
+Aucun produit, UI, manuel ou image modifié ; aucune nouvelle preuve acquise.
+
 ## 22 novembre 2026 — continuité qualifiée,117 clôturée
 
 Replay9b14b0d/469, pilote7470 sortie0/joint :7+8+8+9=32groupes, rapport ciblé

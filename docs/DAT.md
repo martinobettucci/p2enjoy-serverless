@@ -1,5 +1,15 @@
 # Architecture technique
 
+## Coupures du contrôle depuis l’éditeur — contrat avant code
+
+Le [complément SLS-070.3/.5](CODE_EDITOR_CONTROL_INTERRUPTION.md) fixe deux vrais SIGKILL du POST
+éditeur : `receiving` avec ZIP entièrement reçu, puis `validating` avec Docker
+vivant et perte du helper. Gardes RESTORE/KILL_CONTROL inchangées, même API046,
+brouillon conservé et repris par API/UI, nouveau pilote explicite et déduplication.
+Quatre groupes ciblés puis25communs sont prévus ; aucun exécuté à ce checkpoint.
+Produit, manuel, images, schéma et configuration officielle restent inchangés.
+
+
 ## Continuité de publication qualifiée —22 novembre 2026
 
 La [preuve32](evidence/code-editor-publication-continuity-dev-2026-11-22.json) clôt **SLS-117** sur469sources `9b14b0d`, API04604089/
