@@ -98,6 +98,12 @@ permises sur les sources éligibles. Le préflight jeune historique conserve son
 refus aujourd'hui ; sa preuve n'est pas renommée. Un préflight courant RO vérifie
 les sources et l'image avant toute fenêtre, sans revendiquer l'absence d'expiration
 sur des données aujourd'hui anciennes.
+La CLI `source|terminal preflight --target-schema011` appelle verify-current
+en lecture seule, sans garde ni fenêtre. Les treize refus de la CLIinvalid
+couvrent les huit historiques et cinq cas propres : cible seule, cible avec
+seule pairefiring, vraie mauvaiseimage, imagecourante sanscible explicite et
+préflightjeune sursource réellement âgée. Les modesâge/perte/namespace gardent
+leurs fenêtres ; namespace utiliseage sur la voie courante.
 
 La fenêtre exclusive reste D+10..60, garde120 ; source/contrôle original même
 installation ne sont jamais simultanément consommateurs. Original/API et agent
@@ -128,6 +134,11 @@ atteindre le prochain créneau D+300. Le refus de namespace étranger demeure ;
 seul le namespace original de fixture créé par l'API peut être retiré par le
 client pour permettre la restitution. Aucun marqueur booléen ne donne propriété
 sur une installation ou un dossier. Référence/configuration officielle inchangées.
+Une perte peut laisser la copie009 ou010 avant commit011. Après vérification
+stricte image/campagne/répertoires/périmètre, l'observation de restitution
+nomme cette migration incomplète comme diagnosticindisponible et permet le
+retrait de la copie possédée. Un schéma inconnu reste refusé ; seul l'oracle
+nominal exact011 donne une preuve fonctionnelle courante.
 
 ## Source sous plafond et rattachement final
 

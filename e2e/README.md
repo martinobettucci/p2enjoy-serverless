@@ -3123,3 +3123,21 @@ vérifie les exports avant ouverture de fenêtre ; le snapshot011 conserve les
 migrations exactes et sa préservation propre. Quatre groupes préparatoires, puis
 attente réelle3h15 de la capture scellée ; aucune rétention qualifiée par préparation.
 Les sources009/010 et leurs preuves restent historiques, sans modification.
+
+
+## Replay d’âge011 sur copies authentiques009
+
+Contrat [SLS-132](../docs/RETENTION_SCHEMA_011.md#âge-authentique-sur-copies-migrées).
+`node e2e/retention-history-replay.mjs source preflight --target-schema011`
+vérifie réellement sources, exports, imagef73, original011 et égalité privée
+clé/installation, sans créer de fenêtre. Même commande avec `terminal`.
+Les modes `invalid`, `age`, `seed-loss`, `observer-loss` et `foreign-namespace`
+(source seule pour ce dernier) portent le même argument explicite. `invalid`
+exige treize refus réels dont cinq propres à011 ; âge et namespace demandent
+le SSO sur stdin privée, les pertes non. Le contrôle temporaire applique010/011
+par son vrai startup ; la restitution garde les mêmes répertoires originaux011,
+y compris après perte sur une migration incomplète009/010. Ce diagnostic
+indisponible ne relâche jamais les assertions de propriété ni l’oracle nominal011.
+Les appels sans l’argument restent la voie historique009 et ses conditions
+d’âge : la préflight jeune doit maintenant refuser ces captures devenues âgées.
+Observation25/alarme35/commande40, garde120 et bornesUTC sont inchangées.

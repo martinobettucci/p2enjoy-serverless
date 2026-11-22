@@ -1,3 +1,5 @@
+# @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#âge-authentique-sur-copies-migrées
+# @verifies docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#âge-authentique-sur-copies-migrées
 # @spec docs/BACKLOG.md#sls-078 | docs/RETENTION_HISTORY_REPLAY.md
 # @verifies docs/BACKLOG.md#sls-078 | docs/RETENTION_HISTORY_REPLAY.md#sources-exactes-et-exclusivité
 """Verify authentic sealed retention witnesses before an exclusive DEV replay."""
@@ -6,6 +8,7 @@ from contextlib import closing
 import fcntl
 import importlib.util
 import shutil
+import shlex
 import subprocess
 import hashlib
 import json
@@ -192,6 +195,35 @@ def verify_capture(identifier):
             'earliest_eligible_after': earliest_eligible, 'eligible_after': eligible_after}
 
 
+# @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#âge-authentique-sur-copies-migrées
+def verify_current(identifier):
+    from retention_current_images import baseline, verify as verify_images
+    source = verify_capture(identifier)
+    image = 'sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0'
+    before = baseline(image)
+    assert source['images']['runtime']['image'] == before['runtime_image']
+    preserved = verify_images(image, before['runtime_image'])
+    settings = {}
+    for line in Path('/etc/spark/env').read_text().splitlines():
+        fields = shlex.split(line, comments=True)
+        if len(fields)==1 and '=' in fields[0]:
+            key,value = fields[0].split('=',1)
+            if key=='SERVERLESS_STATE_HOST_PATH':settings[key]=value
+    path = Path(settings['SERVERLESS_STATE_HOST_PATH'])/'control.sqlite3'
+    from control_database import read_control
+    with read_control(path) as db:
+        installation = db.execute("SELECT value FROM security_metadata WHERE name='installation-id'").fetchone()[0]
+        current_key = db.execute("SELECT value FROM security_metadata WHERE name='master-key'").fetchone()[0]
+    with closing(immutable(HISTORY/identifier/'control.sqlite3')) as db:
+        captured_key = db.execute("SELECT value FROM security_metadata WHERE name='master-key'").fetchone()[0]
+    assert installation==source['installation_id'] and current_key==captured_key, 'current_retention_identity_or_key_mismatch'
+    del current_key,captured_key
+    assert baseline(image)==before, 'original_changed_during_retention_preflight'
+    return {'completed':True,'source':source,'current':before,
+            'images_preserved':preserved['capture_id'],'master_key_witness_equal':True,
+            'no_window_created':True,'no_service_or_configuration_change':True}
+
+
 def timing(source, mode):
     now = time.time()
     if mode == 'age':
@@ -284,18 +316,25 @@ def seed(campaign,fd):
     return receipt
 
 
-def read_state(reader,source):
+def read_state(reader,source,current=False):
     ids = [v['id'] for v in source['target_calls']]
-    calls = reader.rows('SELECT '+CALL_FIELDS+' FROM invocations WHERE id IN ('+','.join('?' for _ in ids)+') ORDER BY id',ids)
+    versions = reader.rows('SELECT version FROM schema_migrations ORDER BY version') if current else None
+    migrated = current and any(v['version']=='011_execution_logs.sql' for v in versions)
+    fields = CALL_FIELDS+(',logs_collection_state,logs_truncated' if migrated else '')
+    calls = reader.rows('SELECT '+fields+' FROM invocations WHERE id IN ('+','.join('?' for _ in ids)+') ORDER BY id',ids)
     fires = [reader.rows('SELECT * FROM schedule_firings WHERE id=?',(v['id'],)) for v in source['witnesses']['firings']]
     generations = [reader.rows('SELECT * FROM schedule_generations WHERE id=?',(v['id'],)) for v in source['witnesses']['generations']]
     unexpected = reader.rows('SELECT id,function_id,created_at FROM invocations WHERE created_at>?',(source['latest_invocation_created_at'],))
     assert not unexpected, 'new_invocation_during_retention_replay'
-    return {'invocations':calls,'firings':[row for values in fires for row in values],
+    result = {'invocations':calls,'firings':[row for values in fires for row in values],
             'generations':[row for values in generations for row in values],
             'instances':reader.rows('SELECT id,function_id,state FROM execution_instances ORDER BY id'),
             'cursor':reader.rows('SELECT window_at FROM schedule_cursor WHERE singleton=1')[0]['window_at'],
             'new_invocations':0}
+    if current:
+        result['schema_migrations']=[v['version'] for v in versions]
+        result['collection']=reader.rows('SELECT * FROM execution_log_state WHERE singleton=1') if migrated else []
+    return result
 
 
 def observe(campaign,fd):
@@ -303,6 +342,7 @@ def observe(campaign,fd):
     from schedule_firing_volume_replay import BlockingNativeObserver
     work,item,source,helper = window(campaign,fd)
     mode = item['retention_replay']['mode']
+    current = item['retention_replay'].get('target_schema')=='011'
     boundary = timing(source,mode)
     assert boundary == item['retention_replay']['armed_boundary'], 'retention_boundary_changed_since_arm'
     assert 10 <= item['retention_replay']['armed_at']-boundary <= 60
@@ -316,7 +356,7 @@ def observe(campaign,fd):
     try:
         reader.open()
         # This copy is committed before any application process starts.
-        initial = read_state(reader,source)
+        initial = read_state(reader,source,current)
         assert initial['invocations'] == source['target_calls']
         assert initial['firings'] == source['witnesses']['firings']
         assert initial['generations'] == source['witnesses']['generations']
@@ -325,7 +365,7 @@ def observe(campaign,fd):
         helper.docker(item,'compose','--env-file','/etc/spark/env','--env-file','/run/spark/secrets',
                       '-f',str(work/'compose.yml'),'up','-d','--no-build')
         row = json.loads(helper.docker(item,'inspect',helper.temporary_control_name(item)))[0]
-        assert row['State']['Running'] and row['Image'] == source['images']['control']['image']
+        assert row['State']['Running'] and row['Image'] == helper.retention_control_image(item)
         assert row['Config']['Labels']['com.docker.compose.project'] == item['project']
         init = row['State']['Pid'];find_deadline = time.monotonic()+3
         while True:
@@ -370,6 +410,12 @@ def observe(campaign,fd):
             except (FileNotFoundError,ProcessLookupError):return False
         def accepted(value):
             nonlocal protected
+            if current:
+                assert value['schema_migrations']==helper.SCHEMA_011[:len(value['schema_migrations'])], 'unexpected_retention_migration'
+                if value['schema_migrations']!=helper.SCHEMA_011:return False
+                assert len(value['collection'])==1 and str(UUID(value['collection'][0]['collection_id']))==value['collection'][0]['collection_id']
+                receipt['current_schema_migrations']=value['schema_migrations']
+                receipt['current_collection_id']=value['collection'][0]['collection_id']
             if source['kind'] == 'terminal':
                 if mode == 'preflight':
                     return (not value['instances'] and value['invocations']==source['target_calls'] and
@@ -387,13 +433,20 @@ def observe(campaign,fd):
                 if fire['completed_at'] is not None:raise AssertionError('source_closed_before_protected_age_frontier')
                 calls = value['invocations']
                 if len(calls)==1 and calls[0]['id']==call_id:
-                    assert calls[0]==next(v for v in source['target_calls'] if v['id']==call_id)
+                    expected=next(v for v in source['target_calls'] if v['id']==call_id)
+                    if current:
+                        excluded={'logs','logs_collection_state','logs_truncated'}
+                        assert {k:v for k,v in calls[0].items() if k not in excluded}=={k:v for k,v in expected.items() if k not in excluded}, 'protected_source_metadata_changed'
+                        assert calls[0]['logs']=='' and calls[0]['logs_truncated']==0 and calls[0]['logs_collection_state']=='expired', 'protected_source_logs_not_expired'
+                        receipt['protected_metadata_preserved']=True
+                        receipt['protected_logs_expired']=True
+                    else:assert calls[0]==expected
                     assert fire==original,'protected_firing_changed'
                     protected=value;receipt['protected']=value;atomic(target,receipt)
                 return False
             return not value['invocations'] and fire['state']=='succeeded' and fire['completed_at'] is not None
         # Recovery may not have removed the ready line at the first native stop.
-        first = read_state(reader,source);receipt['initial_stop']=first
+        first = read_state(reader,source,current);receipt['initial_stop']=first
         atomic(target,receipt)
         if not first['instances'] and accepted(first):
             final=first
@@ -411,7 +464,7 @@ def observe(campaign,fd):
                     database_boundary=pending==75 and database_descriptor(data[1])
                 if database_boundary and phase in (1,2):
                     receipt['database_boundaries']+=1
-                    value=read_state(reader,source)
+                    value=read_state(reader,source,current)
                     if not value['instances'] and accepted(value):
                         final=value;break
                 observer.resume()
@@ -431,8 +484,13 @@ def observe(campaign,fd):
         atomic(target,receipt)
         raise
     finally:
-        if observer:observer.detach()
-        reader.close()
+        if current:
+            try:
+                if observer:observer.detach()
+            finally:reader.close()
+        else:
+            if observer:observer.detach()
+            reader.close()
 
 
 def inspect_replay(campaign,fd):
@@ -441,14 +499,14 @@ def inspect_replay(campaign,fd):
     helper.retention_scope(item)
     reader=ControlObserver(Path(item['paths']['state'])/'control.sqlite3')
     try:
-        reader.open();return read_state(reader,source)
+        reader.open();return read_state(reader,source,item['retention_replay'].get('target_schema')=='011')
     finally:reader.close()
 
 
 def main():
     assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('operation', choices=['verify','seed','observe','inspect'])
+    parser.add_argument('operation', choices=['verify','verify-current','seed','observe','inspect'])
     parser.add_argument('identifier')
     parser.add_argument('--lock-fd',type=int)
     args = parser.parse_args()
@@ -456,6 +514,7 @@ def main():
     signal.alarm(35)
     try:
         if args.operation=='verify':value=verify_capture(args.identifier)
+        elif args.operation=='verify-current':value=verify_current(args.identifier)
         else:
             assert args.lock_fd is not None
             value={'seed':seed,'observe':observe,'inspect':inspect_replay}[args.operation](args.identifier,args.lock_fd)

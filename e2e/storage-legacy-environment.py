@@ -91,12 +91,21 @@ def firing_replay_command(operation, identifier):
 # @spec docs/BACKLOG.md#sls-078 | docs/RETENTION_HISTORY_REPLAY.md
 def retention_replay_command(operation, identifier):
     args = ['python3', '-B', str(BASE / 'e2e/retention-history-replay.py'), operation, identifier]
-    if operation != 'verify':
+    if operation not in ('verify','verify-current'):
         assert LOCK is not None
         args += ['--lock-fd', str(LOCK)]
     value = json.loads(command(args, (0, 1), foreground_timeout=True))
     assert 'failure_type' not in value, 'retention_replay_error:' + str(value.get('reason') or value.get('failure_type'))
     return value
+
+
+# @spec docs/BACKLOG.md#sls-132 | docs/RETENTION_SCHEMA_011.md#âge-authentique-sur-copies-migrées
+def retention_control_image(item):
+    replay = item['retention_replay']
+    if replay.get('target_schema') == '011':
+        assert item['original']['image'] == item['historical_image'] == 'sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0'
+        return item['original']['image']
+    return replay['source']['images']['control']['image']
 
 
 def retention_replay_receipts(item):
@@ -486,7 +495,7 @@ def start_control(item, journal, image, *, readiness='healthy'):
     if item.get('mode') == 'instance-limit':
         if item.get('retention_replay'):
             retention_clone_context(item,item['temporary_installation'])
-            assert image == item['retention_replay']['source']['images']['control']['image'], 'captured_control_image_required'
+            assert image == retention_control_image(item), 'retention_execution_image_required'
         else:assert image == item['original']['image'], 'same_served_image_required'
         assert source.count('    network_mode: host\n') == 1 and '    environment:' not in source
         source = source.replace('    network_mode: host\n',
@@ -891,7 +900,7 @@ def instance_limit_observation(item):
     """Read the real consumed budgets, database and native Docker identities only."""
     assert item.get('mode') == 'instance-limit' and not item.get('restored')
     current=container(item,temporary_control_name(item))
-    expected_image=item['retention_replay']['source']['images']['control']['image'] if item.get('retention_replay') else item['original']['image']
+    expected_image=retention_control_image(item) if item.get('retention_replay') else item['original']['image']
     assert current['image']==expected_image and current['running']
     assert not container(item,item['original']['id'])['running']
     assert all(same(path,item['replacement_dirs'][key]) for key,path in item['paths'].items())
@@ -902,6 +911,11 @@ def instance_limit_observation(item):
     namespace=rows(item,control,'SELECT id,name FROM namespaces WHERE deleted_at IS NULL')
     if item.get('retention_replay'):retention_scope(item)
     else:assert all(v['name']==item['namespace_name'] for v in namespace),'foreign_namespace'
+    if item.get('retention_replay',{}).get('target_schema')=='011' and schema_migrations!=SCHEMA_011:
+        # Scope/image/directory ownership was verified above. A known incomplete
+        # startup is unavailable diagnostic data, never authority to block restore.
+        assert schema_migrations in (SCHEMA_008+['009_schedules.sql'],SCHEMA_010), 'unexpected_retention_copy_schema'
+        raise InstanceLimitObservationUnavailable('retention_copy_migration_incomplete')
     keys=('SERVERLESS_FUNCTION_INSTANCE_LIMIT','SERVERLESS_FUNCTION_CPU_BUDGET','SERVERLESS_FUNCTION_MEMORY_BUDGET_MIB')
     program='import os,json;print(json.dumps({k:os.environ[k] for k in '+repr(keys)+'}))'
     try:
@@ -1005,11 +1019,11 @@ def main():
     retention_history=[v for v in options if v.startswith('--retention-history=')]
     retention_observation=[v for v in options if v.startswith('--retention-observation=')]
     retention_options=set(retention_history+retention_observation)
-    assert len(options)==len(set(options)) and set(options)-firing_options-retention_options<={'--source-schema007','--target-schema008','--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
+    assert len(options)==len(set(options)) and set(options)-firing_options-retention_options<={'--source-schema007','--target-schema008','--retention-target-schema011','--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
     assert not options or mode in ('function-version-purge','function-version-unknown-first','instance-limit')
     guard_options=set(options)&{'--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
     assert len(guard_options)<=1,'one_guard_duration_required'
-    if mode=='instance-limit':assert set(options)<=guard_options|firing_options|retention_options
+    if mode=='instance-limit':assert set(options)<=guard_options|firing_options|retention_options|{'--retention-target-schema011'}
     else:assert not guard_options,'guard_duration_requires_instance_limit'
     assert not firing_options or mode=='instance-limit','firing_replay_requires_instance_limit'
     assert len(history_options)<=1 and len(observation_options)<=1,'one_firing_replay_source_required'
@@ -1018,6 +1032,8 @@ def main():
     assert not (retention_options and firing_options),'history_replays_are_exclusive'
     assert len(retention_history)<=1 and len(retention_observation)<=1,'one_retention_replay_source_required'
     assert bool(retention_history)==bool(retention_observation),'retention_replay_option_pair_required'
+    retention_current='--retention-target-schema011' in options
+    assert not retention_current or (mode=='instance-limit' and retention_options), 'retention_target_requires_replay_pair'
     retention_replay=None
     if retention_options:
         identifier=retention_history[0].split('=',1)[1]
@@ -1025,6 +1041,7 @@ def main():
         observation=retention_observation[0].split('=',1)[1]
         assert observation in ('preflight','age','seed-loss','observer-loss'),'unknown_retention_observation'
         retention_replay={'capture_id':identifier,'mode':observation}
+        if retention_current:retention_replay['target_schema']='011'
     firing_replay=None
     if history_options:
         match=re.fullmatch('--firing-history=(schedule-firing-volume-[a-f0-9]{32})',history_options[0])
@@ -1094,9 +1111,16 @@ def main():
         replay_timing()
         firing_replay['source']=source
     if retention_replay:
-        source=retention_replay_command('verify',retention_replay['capture_id'])
-        assert source['images']['control']['image']==old_image,'captured_control_image_required'
+        if retention_current:
+            verification=retention_replay_command('verify-current',retention_replay['capture_id'])
+            assert verification['completed'] and verification['master_key_witness_equal'] and verification['no_window_created']
+            source=verification['source']
+            assert old_image==verification['current']['services'][0]['image'], 'current_retention_image_required'
+        else:
+            source=retention_replay_command('verify',retention_replay['capture_id'])
+            assert source['images']['control']['image']==old_image,'captured_control_image_required'
         for role,image in source['images'].items():
+            if retention_current and role=='control':continue
             assert command(['runuser','-u','spark-docker','--','docker','--host','unix://'+settings['SERVERLESS_DOCKER_SOCKET_HOST'],
                 'image','inspect','--format','{{.Id}}',image['image']])==image['image'],'captured_image_missing'
         def retention_timing():
@@ -1138,14 +1162,14 @@ def main():
         item.update(namespace_name='instance-limit-' + campaign[:8],
             unit='serverless-restore-instance-limit-' + campaign,
             project='instance-limit-' + campaign, source_schema='009' if retention_replay else '011',
-            target_schema='009' if retention_replay else '011')
+            target_schema=('011' if retention_current else '009') if retention_replay else '011')
     if intermediary:item['intermediate_image']=intermediary['image']
     item['original'] = container(item, 'serverless-api')
     item['reference'] = container(item, 'serverless-runtime-reference')
     assert item['original']['status'] == 'healthy' and item['reference']['running']
     item['installation'] = rows(item, Path(paths['state']) / 'control.sqlite3', "SELECT value FROM security_metadata WHERE name='installation-id'")[0]['value']
     if mode == 'instance-limit':
-        if not retention_replay:assert old_image == item['original']['image'], 'same_served_image_required'
+        if not retention_replay or retention_current:assert old_image == item['original']['image'], 'same_served_image_required'
         if not retention_replay:
             assert settings['SERVERLESS_FUNCTION_INSTANCE_LIMIT'] == '32', 'official_limit32_required'
             assert settings['SERVERLESS_FUNCTION_CPU_BUDGET'] == '1'
