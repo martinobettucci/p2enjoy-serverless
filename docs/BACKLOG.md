@@ -4112,3 +4112,11 @@ restaurationfinally, propriétaires et programmes attestés. Exiger dans le clie
 seconde ouverture n'est pas observée ou réussit, le banc échoue sans prétendre
 avoir prouvé le refus. Aucune modification du produit ni fauxerrno ; restaurer
 après le premier échec est écarté car cette faute est réellement récupérée.
+
+
+Replay127 isolé : [deuxEMFILE,503 et reprise](evidence/execution-journal-emfile-both-opens-replay-dev-2026-11-22.json).
+Les deux openat renvoient réellement-24 sous limite0 ; restauration à la seconde
+sortie, HTTP503/log_read_unavailable en198,22ms, puis lecture réussie. Garde
+jointe, purge physique, huit compteurs0, même1aa/référence/config/5982artefacts.
+Revue RO du helper/oracle : aucunP1/P2 trouvé ; elle reste distincte de la preuve.
+507sources gelées ; préparatoire zéro groupe qualifié,127.4 reste ouvert.

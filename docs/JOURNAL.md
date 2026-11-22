@@ -10133,3 +10133,17 @@ référence, trois fichiers officiels et5982artefacts conservés. Le manuel comp
 reste18chapitres/74paragraphes avec nouvelle empreinte8a50ffa0 ; aucun paramètre,
 secret, route, dépendance ou migration supplémentaire. Les résultats de build
 et de déploiement sont des prérequis : le replay18UI puis25communs reste à faire.
+
+
+### 22 novembre 2026 — Lecteurs du journal : acquisition et vraie faute SQLite
+
+Les trois vagues retiennent les workers à leur entrée réelle journal-read et
+obtiennent log_read_timeout après release, EOF ou perte du helper. Le refusI/O
+échouait ensuite : SQLite récupérait le premier EMFILE par une ouverture en
+lecture seule. Le diagnostic natif a recoupé RW→EMFILE puisRO→FD11/HTTP200.
+La correction du seul banc garde l'épuisement jusqu'au secondEMFILE, restaure
+avantPython et obtient réellement503/log_read_unavailable puis une lecture
+réussie. Garde, purge, huit compteurs0 et5982artefacts sont recoupés. Les rouges,
+sources et reçus sont scellés dans les preuves SLS-126/127 ; aucun groupe de la
+campagne complète n'est qualifié par ces préparatoires. Reprise : vagues et
+budgets réels, puis12API/25communs et les parcoursUI restant à produire.
