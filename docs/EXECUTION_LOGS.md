@@ -426,7 +426,7 @@ empreinte ; une garde systemd indépendante peut tuer le seul traceur possédé
 par pidfd, restituer ses ressources puis constater la libération de ses threads.
 
 Correction121 décidée après les mesures500/501 : les modes ci-dessous sont
-spécifiés avant code ; leur implémentation et leurs preuves restent à produire.
+implémentés dans le banc ; leurs preuves restent à produire sur le corpus réel.
 Le produit1aa70214 reste inchangé. Les noms de workers existants suffisent ;
 aucun nouveau point d'arrêt, endpoint, nom diagnostique ou flag n'est ajouté.
 
@@ -541,3 +541,12 @@ redémarre ce même conteneur si nécessaire. Un démarrage est borné par ses v
 instants de demande/retour. Reçu terminal durable et garde entièrement jointe
 sont requis avant le nettoyage des fonctions. Les programmes historiques de
 coupure restent inchangés ; leurs résultats ne s'ajoutent pas à cette campagne.
+
+
+Diagnostic d'armement123 : le helper conserve phase, type/errno, SHA du message
+et fichiers/lignes de traceback dans son répertoire /run possédé, et émet ce
+reçu avec unit. Les seules métadonnées de compteur observées sont type/UID/mode,
+empreinte du reçu déjà synthétique, identifiant et état de l'invocation. Aucun
+stderr brut, buffer applicatif, cookie, argument privé ou écritureSQL. Les
+photographies transitoires restent observées avant de décider de leur cause ;
+les bornes30/35/40/45/180 et la condition fsync avant signal restent inchangées.

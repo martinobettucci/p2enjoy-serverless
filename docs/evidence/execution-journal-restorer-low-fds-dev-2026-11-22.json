@@ -1,0 +1,103 @@
+{
+  "format": "p2enjoy-serverless-execution-journal-low-fds-v1",
+  "unit": "SLS-122.4",
+  "completed": true,
+  "unit_complete": false,
+  "qualified_groups": 0,
+  "diagnostic": {
+    "attempt_id": "58e87b6e92e64bb1ba51d262e8c998f4",
+    "started_at_ns": 1795353795787484310,
+    "event": "restoration-failed",
+    "independent": true,
+    "unit": "serverless-restore-journal-sql-a1f48b4aa2ee48008c7836a25854ab81",
+    "pid": 692820,
+    "birth": "596313796",
+    "container_id": "49a82269dd27550a951938003155f0fc30ed2ecd87a488107c3050c3c36e0c9a",
+    "image": "sha256:1aa70214be1ba72bd75bea301fac23a3dbcdaf6547de1b3521c9547c8ac35292",
+    "started_at": "2026-11-22T11:00:17.493119926Z",
+    "cgroup_sha256": "67aff27c02d29b0897d61458aa8453b94c7fd23cce55d409097f7fd940de1dbc",
+    "restorer_pid": 767240,
+    "restorer_birth": "597171604",
+    "restorer_cgroup_sha256": "015627e1d43f2f7e18ccc8953177ab5e6e67c81ada36b62881e1f0587f4c0751",
+    "restorer_systemd_unit": null,
+    "restoration_origin": "operator",
+    "helper_already_gone": true,
+    "limits_nofile_restored": true,
+    "helper_gone": true,
+    "own_nofile_restored": true,
+    "completed": false,
+    "phase": "validating_owner",
+    "failure_type": "OSError",
+    "errno": 24,
+    "control_identity_preserved_on_failure": true,
+    "finished_at_ns": 1795353795788940421,
+    "finished_monotonic_ns": 5971716131372304
+  },
+  "stdout_lines": 1,
+  "stdout_sha256": "8217aa9e0bb6be0dae564f7a03e599c0815951d44eb41752725800a8e4a538e1",
+  "restorer_source_sha256": "7c56dfba9818ac84b6174e0d55ccbd67889decb19869d9068dd3ba5e40b7910b",
+  "restorer_source_epoch": "execution-journal-independent-guard-closure-dev-2026-11-22.json",
+  "source_identity_addendum": {
+    "path": "execution-journal-restorer-low-fds-dev-2026-11-22.source.json.gz",
+    "bytes": 1030,
+    "sha256": "8d397fedd4fb80c02de8849442169ed4ed6274229069013c253105c28db927aa",
+    "uncompressed_bytes": 4454,
+    "uncompressed_sha256": "5e3fa0d0bf4f2d0d3e715046b69ee2bcf60451cef0c3d944d2c0bd7057fcb52f"
+  },
+  "raw": {
+    "path": "execution-journal-restorer-low-fds-dev-2026-11-22.raw.json.gz",
+    "bytes": 1561,
+    "sha256": "18d6db1dd806542f971f15027c8e93f94776378197fec26db77b74fefd67a93c",
+    "uncompressed_bytes": 5627,
+    "uncompressed_sha256": "9980893ce539cc8baeb23c64669b1997bc8a92c938bad2c29971d1c9e6ea221b"
+  },
+  "preservation": {
+    "services": [
+      {
+        "id": "49a82269dd27550a951938003155f0fc30ed2ecd87a488107c3050c3c36e0c9a",
+        "image": "sha256:1aa70214be1ba72bd75bea301fac23a3dbcdaf6547de1b3521c9547c8ac35292",
+        "started_at": "2026-11-22T11:00:17.493119926Z"
+      },
+      {
+        "id": "475be494efc2ae1d96a4f5275fb5eadb275f8e52c7647c7ddaf9110b728c6620",
+        "image": "sha256:af6a023740a2295060f368d87e032e0bd71ad4f3cfd46f9d39b87c393094eee2",
+        "started_at": "2026-11-06T15:49:39.578107028Z"
+      }
+    ],
+    "official_sha256": {
+      "/etc/spark/env": "ae534c7f7c8f200dcaa080062c9beaaebe3bc95c8534e4dce59c368394d4323d",
+      "/run/spark/secrets": "b892789ff2359f788618c852c73c5f19c13624b238bec2ff4da26f9d583c42b5",
+      "/etc/spark/routes": "a4473e07d6133d5fe82f647fac90051515d2d412e1a63e3da055817480a7325e",
+      "/etc/spark/env.?": "269e6d38976800f6f11f95386c0e283d24080422b6204704a49f9d6363e17115"
+    },
+    "original_artifacts": {
+      "files": 5982,
+      "manifest_sha256": "846904e1437a034d7fd95488f246cd5b3dc935a4723d20abf9bb419673e5d482"
+    },
+    "counts_before": {
+      "live_functions": 0,
+      "instances": 0,
+      "operations": 0,
+      "active_calls": 0,
+      "reserved_bytes": 0,
+      "active_deployments": 0,
+      "leases": 0,
+      "pending_storage": 0
+    },
+    "counts_after": {
+      "live_functions": 0,
+      "instances": 0,
+      "operations": 0,
+      "active_calls": 0,
+      "reserved_bytes": 0,
+      "active_deployments": 0,
+      "leases": 0,
+      "pending_storage": 0
+    }
+  },
+  "limitations": [
+    "Mode diagnostique exécuté explicitement par opérateur sur une garde déjà terminée ; aucune preuve de déclenchement du timer.",
+    "La limiteFD0 ne vise que ce restorer ; son completed=false/errno24 attendu ne vaut pas restitution réussie.",
+    "Aucun handler ni consommateur recréé."
+  ]
+}

@@ -74,6 +74,8 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-120](#sls-120) Frontière réelle du buffer de journaux | Corriger | `[~]` | SLS-040, SLS-121 | cette unité |
 | 3 | [SLS-121](#sls-121) Frontières natives de décision du journal | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-122](#sls-122) Clôture du client de diagnostic après refus natif | Corriger | `[~]` | SLS-040 | cette unité |
+| 3 | [SLS-123](#sls-123) Armement de la coupure après compteur durable | Corriger | `[~]` | SLS-040 | cette unité |
+| 3 | [SLS-124](#sls-124) Restitution du focus des commandes Journaux | Corriger | `[ ]` | SLS-072 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -3681,6 +3683,14 @@ rapport échoué en succès ni faire d'une reprise opérateur une preuve nominal
   une restitution manuelle reste nommée manuelle. Ce recoupement est requis
   avant de qualifier le chemin de garde, même si la purge physique a réussi.
 
+- [x] SLS-122.4 Éprouver le mode existant recover-low-fds sur la copie figée
+  d'une garde terminée : vraie limite de descripteurs du seul restorer à zéro,
+  errno24 et limite propre restaurée, unique JSON stdout, source/identités
+  recoupées. Le contrôle/référence restent sains et inchangés, aucun consommateur
+  recréé ; le reçu diagnostique failed ne devient pas un reçu de restitution.
+  [Preuve réelle](evidence/execution-journal-restorer-low-fds-dev-2026-11-22.json) :
+  errno24, limite propre restaurée, un JSON ; huitcompteurs0 et5982originaux.
+
 Le rouge primaire reste celui de121 ; cette unité porte la clôture du banc,
 pas la reconnaissance du writer ni un changement du budget produit.
 
@@ -3769,3 +3779,66 @@ normal du finally d'erreur. Aucune pile/registre/buffer n'est substitué ; aucun
 symbole ou layout interne SQLite, single-step ou changement produit nécessaire.
 L'arrêt dans SQLite est renommé sqlite-reservation et réservé à la faute122.
 Les modes sont à implémenter puis prouver, toujours sous2s produit/40/45/50/60.
+
+
+<a id="sls-123"></a>
+## SLS-123 — Armer la coupure après le vrai compteur durable
+
+Statut : [~] — le replay501sources/1aa70214 passe sept groupes dont API08,
+puis le helper API10 sort1 après armed, avant cut ; stderr930octets non retenu.
+Le contrôle ne redémarre pas, le handler finit normalement200, sa seule invocation
+est retrouvée puis purgée. Nature : Corriger. Dépend de : SLS-040. Ordre : 3.
+Contrat : [instrumentation native](EXECUTION_LOGS.md#instrumentation-native-des-lectures).
+
+Résultat attendu : identifier l'échec d'armement sans l'attribuer au produit par
+hypothèse, couper le contrôle seulement après le reçu fsync du vrai handler,
+puis prouver interruption, reprise du suivi et compteur1 sans rejeu.
+
+- [x] SLS-123.1 Sceller le rouge501sources, sept groupes partiels/zéro qualifié,
+  les programmes et les preuves de restitution/purge de cinq fonctions et parents.
+- [ ] SLS-123.2 Diagnostic borné du helper réel : phase, type/errno, code public
+  d'assertion et lignes de traceback, sans buffers applicatifs ni stderr brut.
+  Rejouer le seul scénario compteur sur une fixture originale fraîche ; aucune
+  donnéeSQL écrite, limite élargie ni signal avant acquittement durable.
+- [ ] SLS-123.3 Cause établie, décision/motif persistés avant correction du
+  composant en cause ; conserver l'original rouge et ses sources figées.
+- [ ] SLS-123.4 Replay API10 dans les12API puis25communs frais, code déployé et
+  sources recoupés, gardes/processus joints, purge physique et captures inspectées.
+
+Décision avant instrumentation : conserver un diagnostic structuré dans le seul
+répertoire /run possédé et l'émettre en JSON avec unit. Nommer la phase et les
+fichiers/lignes du helper ; ne conserver un message d'assertion que s'il appartient
+à un vocabulaire statique du banc, sinon seulement son SHA. Le client conserve cet
+événement avant de traiter la sortie. Ne pas réexécuter la fixture purgée ni déduire
+une cause des seuls930octets ; une nouvelle exécution reste une époque distincte.
+
+Preuve initiale : [rouge API10](evidence/execution-journal-control-arm-first-failed-dev-2026-11-22.json),
+brut6947603a, archive501sources b39638e8. API08 passe partiellement ;121.4,
+120.4 et122.3 attendent le replay complet après123.
+
+
+<a id="sls-124"></a>
+## SLS-124 — Restituer le focus des commandes Journaux
+
+Statut : [ ] — deux risques P2 statiques relevés en revue072, sans reproduction
+navigateur. Nature : Corriger. Dépend de : SLS-072. Ordre : 3. Contrats :
+[console](EXECUTION_LOGS.md#console-et-manuel), [design local](DESIGN_SYSTEM_APP.md).
+
+Résultat attendu : à la fermeture de Conservation et lors d'un refus invalidant
+le suivi, le focus reste sur une commande active ou rejoint le titre ; aucune
+commande focalisée ne devient désactivée sans relais.
+
+- [ ] SLS-124.1 Reproduire depuis l'accueil, SSO réel, clavier : ouvrir
+  Conservation puis Échap sans changement ; relever le focus pendant/après le
+  GET politique de fermeture. Garder l'état réellement observé, même s'il réfute
+  le risque statique resource.reload→loading→déclencheur désactivé.
+- [ ] SLS-124.2 Reproduire avec le focus sur Pause et une vraie invalidation de
+  politique ou droits : refus, lignes retirées, commande désactivée et relais
+  effectif observés. Aucune interception ni réponse substituée.
+- [ ] SLS-124.3 Si défaut confirmé, décision/motif avant correction ; conserver
+  les rouges et rejouer les dix UI et25communs frais sur le code déployé, captures
+  ouvertes individuellement, contextes/gardes joints et purge physique.
+
+Ces vérifications complètent UI06/UI09 déjà prévus ; elles ne créent pas deux
+groupes supplémentaires. Le risque statique seul ne vaut pas preuve d'un défaut
+ni autorisation de masquer un échec du banc.

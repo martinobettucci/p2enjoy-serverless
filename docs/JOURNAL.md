@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — API08 acquis, nouveau rouge d'armement API10
+
+Replay501sources/1aa70214, archiveb39638e8 et brut6947603a : sept groupes passent,
+dont les trois frontières121 et la révocation de session ; zéro groupe qualifié.
+API10 échoue avant cut, helper1/stderr930octets sans contenu retenu. Une seule
+invocation du compteur finit normalement200 ; aucun redémarrage du contrôle.
+Restitution/gardes jointes, cinq fonctions et quatre services purgés/supprimés,
+17jetons révoqués, huitcompteurs0,5982originaux et configuration conservés.
+SLS-123 inscrit avant diagnostic. Décision : reçu de phase/erreur structuré,
+borné, sans stderr brut ni buffers ; nouvelle fixture isolée avant correction.
+
+Le mode recover-low-fds de122.4 est éprouvé séparément sur la garde déjà terminée :
+vraie limite propreFD0, OSError24, limite restaurée et unique JSON stdout. C'est
+un diagnostic attendu completed=false, jamais une restitution réussie. Les deux
+photographies natives conservent services, huitcompteurs0 et5982originaux.
+
+
 ## 22 novembre 2026 — frontières121 simplifiées avant code
 
 Le critère EAGAIN noyau entre connexions sœurs est impropre : SQLite peut
