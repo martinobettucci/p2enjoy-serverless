@@ -3180,3 +3180,16 @@ Sansargument, branche008 historique conservée. State-transport recoupe une
 baseline courante réelle backend/web/CID/config, avec ses16appels/7gardes/6coupures.
 Ces adaptations ont syntaxe/revue statiques ; aucune des32campagnes ni le socle
 011 n’est déclaré réussi par leur seule préparation. Aucun produit reconstruit.
+
+
+## Profil réel du débit — SLS-133
+
+`node e2e/invocation-source-retention-volume.mjs --production-profile` reçoit les
+identifiants sur stdin privée, comme le nominal. Il exécute6000HTTP réels dans
+les deuxfonctions chaudes, prélève quatreprofilsSQLRO natifs puis purge/restitue
+avant le cronfutur. [Contrat](../docs/INVOCATION_PRODUCTION_PROFILE.md) : plans,
+compteursVDBE et horodatages viennent du Python/SQLite réellement servi. Aucun
+état n'est reconstruit depuis un JSON ; aucune ligne/index n'est modifiée par
+l'opérateur. RapportUUID distinct, zéro groupequalifié ; ce diagnostic ne
+remplace ni le nominal10001HTTP+1cron ni les régressions. Code relu/syntaxes
+passées, passage réel encore à exécuter.

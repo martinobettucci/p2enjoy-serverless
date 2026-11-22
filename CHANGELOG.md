@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-133 : profil6000HTTP et quatre relevésSQLRO préparés sur le vrai contrôle,
+  rapports distincts/zéroqualification et clôture partagée avantcron. Modes
+  nominaux/observateurs conservés ; la revue et les syntaxes ne prouvent pas
+  encore les mesures réelles ni la cause du ralentissement.
+
 - SLS-072.6 : lanceur32/276 et workerdurable intégrés, avec archivespartielles,
   capturesfraîches et propriétéexacte30namespaces/74fonctions. La CLI conserve
   le nomréel du namespace pour le recoupement ; aucune exécution32 n'est
