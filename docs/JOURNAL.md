@@ -1,5 +1,15 @@
 # Journal de cadrage
 
+## 22 novembre2026 — nominalf016 atteint10000 puis observateur rouge
+
+7e15cd00/f151e3a0,526sourcesdf27af5 :10000HTTP avantW−60, premièreétape acquise,
+puis pilote perdu et assertionnative vide. Reçu10002/10000 avec deuxhandlers
+running/tir dispatched, lecteurs fermés/Trace0 ; aucune borne qualifiée.
+Originalf016 restauré, collection/config/référence/5982 et huitcompteurs0, worker
+terminal1/libéré. Corpusauthentique6307/10000 privé conservé.134 inscrit pour
+phases/ligne/statutwait réel et stderr nominal, sans oracle permissif.
+Reprendre ce diagnostic puis le vrai refus après attache et les replays courants.
+
 ## 22 novembre 2026 — rétention numérique011 et API du journal acquises
 
 Sur f73, API12 complet puis count011 troisgroupes passent ; la borne réelle

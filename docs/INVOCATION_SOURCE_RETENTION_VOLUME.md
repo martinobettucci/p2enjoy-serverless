@@ -616,3 +616,50 @@ finalisation, liées au SHA terminal :2services sains, actifs/baux nuls,5982arte
 et aucune garde. Captures canoniques inchangées. Brut83048624octets/gzip4228693 ;
 ancienne preuve348 préservée. La borne native partagée et son nominal sont
 qualifiés ; âge18novembre et campagne complète restent requis,078.5 non clôturée.
+
+
+## Diagnostic discriminant courant — SLS-134
+
+Décision du22novembre2026 avant code. Le nominal f151e3a0 sur f016 a10000réponses
+avant W−60, puis une assertionnative sans message après attache. Son reçu
+10002/10000 et deuxhandlers running ne donne ni ligne ni dernier statut d’arrêt.
+Ces données ne permettent pas d’attribuer une cause. Son rouge reste conservé,
+avec restitution réussie, lecteurs/mémoire fermés et TracerPid0.
+
+Ajouter seulement de l’observation, sans changer le flux natif ni les oracles.
+BlockingNativeObserver.wait remet son dernier résultat àNone à l’entrée,
+puis conserve PID/statut brut réellement retournés par waitpid avant ses
+assertions. Aucun événement ne vaut retour lorsque waitpid n’en fournit pas.
+Pas de nouvel appel système, timer, délai, signal délivré ou exception remplacé.
+L’attenteSIGCHLD et son masque/finally restent identiques.
+
+L’observateur source conserve sa phase explicite, SHA de son propre fichier,
+point de code de l’exception primaire (basename/fonction/ligne, sans source ni
+locals), dernier waitpid s’il existe et interprétation du statut avec les vraies
+fonctions os.WIF*/WSTOPSIG et l’événement ptrace brut. Le relevé après start puis
+après chaque wait garde le contexte de l’arrêt ; la phase avant chaque assertion
+initiale/frontière distingue ces points. Le finally peut actualiser son diagnostic
+de nettoyage mais n’écrase jamais ce snapshotprimaire. Les raisons, détachement,
+mémoire/lecteur fermés et statut de la commande gardent leur sens strict.
+Les SIGSTOP/SIGTRAP inattendus restent refusés ; cette décision n’autorise pas
+à les ignorer ou à les classer comme syscalls.
+
+Le client conserve le stderr réel du pilote dans tous ses modes : SHA du flux
+complet, nombre d’octets et copie privée0600 des premiers1Mio maximum. Hash du
+préfixe, troncature et fin réelle du flux sont nommés dans le rapport. La
+troncature rend la campagne rouge ; aucune sortie perdue ne devient réussite.
+Le stderr brut ne passe pas dans la preuve publique, seulement ses métadonnées.
+Les artefacts existants des modes de faute restent conservés. Aucun secret dans
+le rapport ; les identifiants restent sur stdin privée puis mémoire.
+
+Preuve propre : mode --observer-refusal existant, sans HTTPordinaire, deuxvrais
+handlers HTTP/cron, attache réelle puis refus retention_history_incomplete.
+Vérifier sourceSHA/phase/ligne correspondant à cette assertion, PID/statut brut
+réel d’attache, décodage cohérent, fluxstderr terminé/haché, mémoire/lecteur et
+TracerPid, deuxconsommateurs/réseaux/baux absents et originaux restitués. Le
+helper/opérateur restent échoués, le client réussit les deuxgroupes de refus.
+Rejouer ensuite nominal10001+cron3 et consommateurs count/âge/refus/25/35/40/
+detach/reprise selon leurs contrats courants. Anciennes préflightsjeunes ne sont
+pas fabriquées sur des captures maintenant âgées. Aucune cause du rougeinitial
+n’est déclarée corrigée par le seul succès futur ; les deux époques restent liées
+à leurs sources et données exactes. Imagef016 et quatre modules produit inchangés.

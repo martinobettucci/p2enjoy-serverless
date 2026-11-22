@@ -84,6 +84,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-130](#sls-130) Interruption navigateur après écriture de politique | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
+| 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4721,3 +4722,36 @@ Chaque cas tourne dans sa seule unitéroot DEV oneshot180s/stop30s/KillModecontr
 132.4 — [deux groupes de refus d’exécuteur f016](evidence/retention-schema011-query-executor-refusals-dev-2026-11-22.json) : dixnumériques/quatorzeâge, dont anciensha et vrai runtime ; aucunefenêtre, mêmesCID/images/démarrages/config/référence/5982 et huitcompteurs0.526sources9bf6509 ; nominaux et pertesf016 encore dus.
 
 133.2 — décision avant collecteur : conserver aussi un unique backupSQLite natif du nominalf016 pendant sa production réelle, au moins180s avantW, sans déplacer sa frontière. Mêmeclone/campagne/CID/imagef016/fonctions reconnus avant/après, lectureRO en transaction et backupborné15s sousUIDpropriétaire ; intégrité/FK/11migrations/journal10000/zérotir recoupés. Déplacer seulement la nouvelle copie vers un dossier privéroot0700/control0400 avec SHA/reçu, horsrépertoires remplacés avant leur retrait. Aucun SQL métier/horloge/service modifié, pas de reconstruction depuisJSON ; copiesf73 inchangées. La charge d’observation est datée et reconnue, sans lui attribuer une durée applicative ; zéroqualification. Motif : conserver le vrai corpus saturé et ses transactions pour le diagnostic, quel que soit le résultat terminal du nominal.
+
+
+<a id="sls-134"></a>
+## SLS-134 — Diagnostic discriminant de l’observateur de source
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-132, SLS-133. Ordre : 3.
+Contrat : [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134).
+
+Constat réel : le nominal f151e3a0/7e15cd00 atteint10000réponses avant la marge,
+puis son observateur échoue après attache sur AssertionError sans raison ni
+ligne. Le reçu donne10002lignes/10000terminales, deuxhandlers running, tir
+dispatched/nonclos, mais aucun des trois ensembles acquis. Le client nominal
+écarte le stderr du pilote alors que les modesdiagnostiques le gardent.
+Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
+
+- [x] SLS-134.1 [Sceller le rouge](evidence/invocation-source-retention-schema011-query-first-failed-dev-2026-11-22.json)
+  et sa restitution : workerterminal1/libéré, mêmesf016/collection/config/référence,
+  huitcompteurs0/5982. Un groupepartiel acquis, zéroqualificationglobale.
+- [ ] SLS-134.2 Persister phases, point de code et SHAopérateur, dernier résultat
+  waitpid réel PID/statut brut/signal/événement ; conserver l’exception primaire
+  et les erreurs de nettoyage séparément, même pour assertion sans message.
+  Stderrpilote borné et haché conservé en privé pour tous les modes ; dépassement
+  nommé et campagne rouge, jamais silence ni valeur fabriquée.
+- [ ] SLS-134.3 Éprouver sur le vrai contrôle f016 le refus après attache avec
+  deuxvrais handlers et historique insuffisant : source/ligne/phase précises,
+  statutnatifs réel, stderr et fermetures/restitution recoupés. Aucun mock ni
+  nouvel oracle permissif pourSIGSTOP/SIGTRAP.
+- [ ] SLS-134.4 Rejouer le nominal3 et les consommateurs affectés de la classe
+  partagée, mêmes25/35/40/5s et gardes, API/SSO et nettoyagephysique ; aucun groupe
+  historique ajouté. Tout nouveau défaut reçoit son constat avant correction.
+
+Le défaut corrigé ici est l’absence de diagnostic, pas une cause rétroactive
+inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent intactes.

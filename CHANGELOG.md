@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-133/134 : nominal f016 produit10000HTTP dans la marge puis échoue après
+  attache sur une assertion sans diagnostic. Rouge conservé, origine restaurée,
+  worker arrêté et huitcompteurs0. Contrat du diagnostic natif discriminant et
+  de conservation du stderr nominal écrit avant code ; aucun arrêt ignoré.
+
 - SLS-133/132 : f016a1b7 construite puis basculée en DEV, deuxbackups natifs,
   tables/schéma/collection conservés,16clients et cgroup joints. Exports privés
   préservés. Les opérateurs distinguent maintenant datasetf73 et exécuteurf016,
