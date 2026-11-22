@@ -1,0 +1,49 @@
+{
+  "format": "p2enjoy-serverless-code-editor-archive-message-reproduction-v1",
+  "completed": true,
+  "unit": "SLS-114",
+  "source_commit": "db4980e05b8fd712701e80594c25a3a97d76ace0",
+  "first_report_sha256": "76cb802bc8dd279cd00e9dd24c35533e8a0e2b495e4503adf4a9ce0a5c21debe",
+  "campaign": "bfc8ebae-f022-46ce-9cf1-a18828312479",
+  "diagnostic_only": true,
+  "groups_added": 0,
+  "qualification_succeeded": false,
+  "steps": [
+    {
+      "mode": "create",
+      "exit_code": 1,
+      "message_sha256": "e5654c89deda885c13d47e79a5d13ce15a3d0f3f1f4fee3daaa0d8d5099e931a",
+      "original_message_sha256": "e5654c89deda885c13d47e79a5d13ce15a3d0f3f1f4fee3daaa0d8d5099e931a",
+      "exact_original_message_match": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/srv/p2enjoy-serverless/e2e/code-editor-archive-fixtures-run.py\", line 101, in <module>\n    if __name__=='__main__':sys.exit(create() if MODE=='create' else cleanup())\n                                     ~~~~~~^^\n  File \"/srv/p2enjoy-serverless/e2e/code-editor-archive-fixtures-run.py\", line 63, in create\n    assert container() is None\n           ~~~~~~~~~^^\n  File \"/srv/p2enjoy-serverless/e2e/code-editor-archive-fixtures-run.py\", line 32, in container\n    assert r.returncode==1 and ('No such object' in r.stderr or 'No such container' in r.stderr),r.stderr[-300:]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: error: no such object: serverless-archive-fixtures-bfc8ebaef02246ce9cf1a18828312479\n\n"
+    },
+    {
+      "mode": "cleanup",
+      "exit_code": 1,
+      "message_sha256": "28061aa717550d8d4a370b1d019be0d63fe1a9bae02045933a7329e9ba782601",
+      "original_message_sha256": "28061aa717550d8d4a370b1d019be0d63fe1a9bae02045933a7329e9ba782601",
+      "exact_original_message_match": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/srv/p2enjoy-serverless/e2e/code-editor-archive-fixtures-run.py\", line 101, in <module>\n    if __name__=='__main__':sys.exit(create() if MODE=='create' else cleanup())\n                                                                     ~~~~~~~^^\n  File \"/srv/p2enjoy-serverless/e2e/code-editor-archive-fixtures-run.py\", line 89, in cleanup\n    assert not OUTPUT.exists() and container() is None\n                                   ~~~~~~~~~^^\n  File \"/srv/p2enjoy-serverless/e2e/code-editor-archive-fixtures-run.py\", line 32, in container\n    assert r.returncode==1 and ('No such object' in r.stderr or 'No such container' in r.stderr),r.stderr[-300:]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: error: no such object: serverless-archive-fixtures-bfc8ebaef02246ce9cf1a18828312479\n\n"
+    }
+  ],
+  "native_after": {
+    "unit_absent": true,
+    "output_absent": true,
+    "fixture_container_absent": true,
+    "application_namespace_rows": [],
+    "control_counts": {
+      "live_functions": 0,
+      "instances": 0,
+      "operations": 0,
+      "active_calls": 0,
+      "reserved_bytes": 0
+    }
+  },
+  "diagnostic_artifacts_sha256": {
+    "error-message-reproduction.json": "d6c6ab71745f5480c8d0d8aede43bf22732856d73a466ee23523f0e514dc28f3",
+    "error-message-reproduction-final-native.json": "5ee81217e8132c2c464b7e2c6c660e04c09064cee9bc918c4ad0aa9c15fbbc7c",
+    "error-message-reproduction-final-transport.json": "9021ae598713b59810a093b6f86ae890467e928bb2cc4c354e3db9ac9c38eb85"
+  }
+}

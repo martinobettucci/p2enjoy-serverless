@@ -3238,24 +3238,6 @@ Dépend de : SLS-065. Contrat : [CONSOLE_PAGINATION_STATES](CONSOLE_PAGINATION_S
   (47 uniques) passent sur code déployé ; captures fraîches inspectées, manuel et ressources/
   nettoyages/configuration/référence/originaux recoupés, aucune faute retirée.
 
-<a id="sls-114"></a>
-## SLS-114 — Génération et nettoyage des archives de qualification
-
-Statut : [~] — premier passage ZIP070 arrêté pendant préparation, nettoyage
-des fixtures également en erreur ; aucun objet applicatif créé ni groupe qualifié.
-Nature : Corriger. Ordre :3, préalable au passage ZIP de070. Dépend de : SLS-063.
-Contrat : [CODE_EDITOR_ARCHIVE_RECOVERY](CODE_EDITOR_ARCHIVE_RECOVERY.md).
-
-- [ ] SLS-114.1 Premier échec scellé, état natif du générateur, reçus, identités et
-  propriété des sorties instruits ; cause et décision persistées avant correction.
-- [ ] SLS-114.2 Correction bornée conservant image, identités, limites, calibration,
-  refus et contrôles de nettoyage ; restitution ou retrait des seules ressources
-  possédées après diagnostic connu, sans masquer l’état natif ni relance automatique.
-- [ ] SLS-114.3 Sept groupes ZIP et25communs passent au nouveau gel sur code réel ;
-  six handlers, cinq fonctions, dix révisions et nettoyage physique complet recoupés,
-  captures/manuel/backend/web/configuration/référence et5982originaux conservés.
-  Le premier essai reste séparé et n’ajoute aucun groupe au total qualifié.
-
 Constat : storage-ui-pagination-error.jpg
 SHA569351743565ed9243f8ce4b3822ad3b6f8fbe63b76e5f9921e69eeaf01ec7c3
 montre « Page 1 sur 161 » pendant l’erreur, sans cartes ni total, commandes grisées.
@@ -3267,3 +3249,29 @@ Instances sans cartes en erreur, « Page 2 sur 2 », Précédente active. Le com
 ExecutionObservations est partagé avec Invocations ; les deux variantes doivent
 être éprouvées. Aucun défaut backend n’est inféré des seules images ; aucune
 correction de 075/113 n’est encore qualifiée.
+
+<a id="sls-114"></a>
+## SLS-114 — Génération et nettoyage des archives de qualification
+
+Statut : [~] — premier passage ZIP070 arrêté pendant préparation, nettoyage
+des fixtures également en erreur ; aucun objet applicatif créé ni groupe qualifié.
+Nature : Corriger. Ordre :3, préalable au passage ZIP de070. Dépend de : SLS-063.
+Contrat : [CODE_EDITOR_ARCHIVE_RECOVERY](CODE_EDITOR_ARCHIVE_RECOVERY.md).
+
+- [x] SLS-114.1 [Premier échec et diagnostic natif](evidence/code-editor-archive-preparation-failed-dev-2026-11-22.json). Premier échec scellé, état natif du générateur, reçus, identités et
+  propriété des sorties instruits ; cause et décision persistées avant correction.
+- [ ] SLS-114.2 Correction bornée conservant image, identités, limites, calibration,
+  refus et contrôles de nettoyage ; restitution ou retrait des seules ressources
+  possédées après diagnostic connu, sans masquer l’état natif ni relance automatique.
+- [ ] SLS-114.3 Sept groupes ZIP et25communs passent au nouveau gel sur code réel ;
+  six handlers, cinq fonctions, dix révisions et nettoyage physique complet recoupés,
+  captures/manuel/backend/web/configuration/référence et5982originaux conservés.
+  Le premier essai reste séparé et n’ajoute aucun groupe au total qualifié.
+
+Diagnostic114 : Docker dit `error: no such object` en minuscules ; le helper
+rejette ce message réel par comparaison sensible à la casse, avant création et
+au nettoyage. Cleanup original reproduit sortie1 sur des ressources absentes
+avant/après ; aucun nettoyage forcé nécessaire. Décision avant code : normaliser
+la casse des seuls messages connus sous code1 et compléter les postconditions
+du retour already_absent après vérification native. Prérequis positif à exécuter
+sur l’ancien UUID puis nouveau7+25 ; aucune garde ni limite retirée.

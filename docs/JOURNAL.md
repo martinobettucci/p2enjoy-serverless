@@ -1,5 +1,25 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — cause114 reproduite et choix persisté avant correction
+
+Le relevé natif du premier UUID bfc8ebae confirme conteneur/unité/sortie absents,
+aucun namespace applicatif et tous les compteurs nuls ;5982originaux,38backend,
+quatreweb et notes conservés. Le cleanup original reproduit sortie1, ligne32 :
+Docker retourne `error: no such object` mais container() exige une majuscule.
+Create appelle ce même contrôle avant allocation ; le premier échec est borné.
+Les deux appels négatifs originaux sont aussi reproduits avec les mêmes arguments :
+les SHA des messages create et cleanup sont exactement ceux du premier rapport,
+e5654c89 et28061aa7 ; les ressources restent absentes après. Complément de
+diagnostic distinct, zéro groupe, aucun paquet généré ni campagne Node rejouée.
+
+Preuve publique du premier passage et diagnostic : manifeste9ed19d9f,
+gzip ea8dddf5, zéro groupe qualifié. Cause et choix documentés avant code :
+comparer les deux seuls messages connus après normalisation de casse, garder
+le code1 et toutes les vérifications d’identité. Compléter le retour already_absent
+avec les deux postconditions réellement vérifiées, puis éprouver ce cleanup
+positif comme prérequis non compté avant un nouveau7+25.114.1 est instruite ;
+114.2/.3 restent ouvertes. Aucun correctif ni replay encore appliqué.
+
 ## 22 novembre 2026 — premier passage ZIP070 arrêté, unité114 inscrite
 
 Le gel db4980e, image433da150 et458sources est synchronisé. Le pilote du
