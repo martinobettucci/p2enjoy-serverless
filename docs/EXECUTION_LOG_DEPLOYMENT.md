@@ -196,3 +196,30 @@ remplacement inclut schema_migrations ; la dispense de migration reste réservé
 une réussite que pour ActiveStateinactive et Resultsuccess, avec reçus primaire/
 post réussis, MainPID/ControlPID0 et cgroup vide. Ces contrôles sont communs aux
 deux lanceurs. Leur revue et leur compilation ne prouvent pas encore une bascule.
+
+
+## Mise à jour du focus — SLS-124
+
+Le profil explicite journal-focus complète la voie011→011 ; le profil initial
+purge-rollback de128 reste inchangé. La baseline de ce second profil est
+l'imagebf9b61a6 attestée par la reprise128. La candidate doit conserver exactement
+les42backend, les onze migrations, le CSS et le favicon ; seuls le JavaScript
+Vite (focus et manuel recompilé) et sa référence dansindex.html changent.
+Le manifeste embarqué de la baseline et celui de la candidate sont comparés
+avant tout arrêt, pas seulement aux sources locales. Une différence backend,
+CSS/favicon ou ensemble de types d'assets interdit cette voie.
+
+Le lanceur reçoit le reçu-image privé puis journal-focus et utilise uniquement
+prepare-ui-update. L'identité enregistre modecode-update et profiljournal-focus ;
+les vérifications de nonce/label/CID/génération, sauvegardes, schema/tables/UUID,
+configuration, référence et résultats primaire/post restent celles de la voie
+011→011. Avant l'intention, seul le CIDbf exact peut être redémarré ; après
+code-update-intent, reprise vers la même candidate compatible exclusivement.
+Les trois fichiers officiels, les quotas et /tmp16Mio restent inchangés.
+
+La qualification doit relever les backend42 identiques et les quatre ressources
+web servies no-store conformes à la candidate, unitéinactive/Resultsuccess,
+MainPID/ControlPID0 et cgroup vide. Elle est suivie du replay réel124 en1440 et
+390px, du statut410 du suivi invalidé, des captures inspectées et des campagnes
+12API/10UI/25communs fraîches. Construire ou basculer la candidate ne suffit pas
+à déclarer le correctif d'ergonomie qualifié.

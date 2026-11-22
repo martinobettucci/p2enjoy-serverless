@@ -4260,3 +4260,11 @@ d'un refus invalidant ; les autres contrôles conservent le focus. Aucun nouveau
 style/token. Manuel et design local nomment ces replis. Rejouer les deux vrais
 parcours avec statutHTTP410, captures desktop/mobile, puis10UI/25communs frais.
 Les premiers rouge et sources restent conservés.
+
+
+124 — décision avant extension du pilote : profil journal-focus, baselinebf9
+et backend42 strictement identique, CSS/favicon conservés ; JavaScript et
+index.html recompilés avec le manuel seulement. Contrat de [mise à jour du focus](EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-du-focus--sls-124).
+Le profilpurge-rollback128 n'est pas assoupli ; le nouveaupréflight recoupe le
+manifeste de la baseline embarquée. Même garde011→011/possession/reprise, aucune
+restaurationDB. La relecture du correctif et sa qualification restent ouvertes.
