@@ -73,6 +73,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
 | 3 | [SLS-120](#sls-120) Frontière réelle du buffer de journaux | Corriger | `[~]` | SLS-040, SLS-121 | cette unité |
 | 3 | [SLS-121](#sls-121) Acquisition native du verrou final du journal | Corriger | `[~]` | SLS-040 | cette unité |
+| 3 | [SLS-122](#sls-122) Clôture du client de diagnostic après refus natif | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -3645,3 +3646,55 @@ Ajouter au prochain diagnostic un GET sans trace avant le même GET tracé sur l
 même corpus ; comparer statut/délai et entrée effective dans journal-verify.
 Ce correctif du banc reste à éprouver ; la seule hypothèse de son efficacité
 ne clôture ni121.4, ni120.4, ni072.
+
+## SLS-122 — Fermer le diagnostic après une restitution refusée
+
+Statut : [~] — le replay de réveil121 acquiert le verrou final mais échoue
+avant writer-blocked ; les premières vérifications de santé de restitution
+échouent. La garde indépendante60s rétablit les threads et confirme ensuite
+la santé. Le client quitte son finally avant fermeture navigateur/purge,
+laissant son Node en attente et ses quatre fonctions possédées. Nature :
+Corriger. Dépend de : SLS-040. Ordre : 3.
+
+Résultat attendu : un échec natif conserve son rouge, joint ses processus et
+ferme toujours les ressources locales. Une restitution non prouvée interdit la
+purge jusqu'à sa confirmation ; une fois la garde terminée et le contrôle sain,
+les seuls UUID possédés sont nettoyés avec un reçu distinct. Ne pas réécrire le
+rapport échoué en succès ni faire d'une reprise opérateur une preuve nominale.
+
+- [x] SLS-122.1 Sceller le replay échoué500sources, les reçus natifs et la garde
+  indépendante ; arrêter/joindre seulement le Node et ses enfants identifiés,
+  recouper le contrôle sain et purger les seules fixtures par API réelles.
+- [ ] SLS-122.2 Décision et motif avant correction du flux finally ; ressources
+  navigateur/API/work toujours fermées, échecs primaires conservés, nettoyage
+  conditionné à la restitution réellement acquise. Aucun rejeu du scénario.
+- [ ] SLS-122.3 Éprouver le refus et sa clôture sur le vrai code déployé avec
+  faute réelle et gardes jointes, puis replay121/12API/25communs frais ;
+  aucune simulation, substitution de réponse, skip ou succès conditionnel.
+
+Le rouge primaire reste celui de121 ; cette unité porte la clôture du banc,
+pas la reconnaissance du writer ni un changement du budget produit.
+
+Décision122 avant code : séparer une fermeture locale idempotente de la purge
+métier ; l'appeler dans un finally externe, même si jonction ou sauvegarde
+échoue. Conserver le premier échec dans failure/observations et le code1.
+Après échec d'une tentative de restitution, observer le reçu de la garde déjà
+armée, sans rejouer le scénario ni désarmer son timer. Le budget d'observation
+client est125s depuis le lancement du helper :60s de déclenchement+55s de garde
+existants+10s de jonction ; aucune borne native40/45/50/60 ni2s produit augmentée.
+Une garde réellement terminée avec santé, identités et threads libérés permet
+alors finish et la purge habituelle. Sans ce reçu, pas de purge : fermeture
+locale quand même, rapport rouge et UUID laissés pour récupération explicite.
+Les tentatives échouées demeurent dans les observations ; le reçu final ne les
+réécrit pas. Le prochain replay conserve le défaut writer121 pour éprouver
+cette clôture sur son échec réel, avec zéro groupe fonctionnel qualifié.
+
+Preuve initiale et reprise : [replay/recovery](evidence/execution-journal-wakeup-writer-failed-dev-2026-11-22.json).
+Brut primaire `cfbe96b3…`, archive500sources `146c4b4e…`. Le réveil acquiert
+réellement verify/F_SETLK0 ; writer-blocked reste absent. GETsans trace200 en72ms,
+GETtracé503 après44,8s. Garde indépendante60s puis confirmation explicite des
+deux gardes ; Node ciblé par pidfd/SIGTERM, wrapper sort1/joint. Une nouvelle
+session SSO vérifie les UUID/noms/descriptions puis purge les quatre fonctions,
+révoque les13jetons et supprime leurs quatre services/namespace. Huitcompteurs0,
+5982originaux, mêmes services/démarrages/configuration ; wrapper/Node/driver absents.
+Le primaire reste cleanup=false ; la reprise opérateur reste une preuve distincte.

@@ -1,5 +1,39 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — contrat de clôture122 décidé avant code
+
+La récupération est prouvée sans modifier le rouge. Le flux à livrer sépare
+closeLocal idempotent de la purge métier et l'appelle dans un finally externe,
+même après refus natif. La purge exige toujours les gardes et consommateurs
+joints. Un échec de santé immédiat conserve sa tentative puis attend le reçu
+de la garde déjà armée ;125s maximum depuis lancement couvre60+55existants et
+10s de jonction. Pas de nouveau scénario ni extension du délai produit.
+
+Après confirmation réelle, finish et purge habituelle ; sinon fermer les
+ressources locales, garder failure/code1 et les UUID pour reprise explicite.
+Le prochain passage conserve le défaut writer121 pour éprouver ce finally sur
+un refus réel. Aucun groupe qualifié ajouté par récupération ou diagnostic.
+
+## 22 novembre 2026 — réveil121 acquiert le verrou, reprise122 distincte
+
+Le replay500sources acquiert réellement verify/F_SETLK0 byte120 ; son GETsans
+trace rend200 en72ms pour2705événements. Le writer n'est pas observé et45s
+s'écoulent ; GETtracé503/log_read_timeout44,8s. Le client abandonne son finally
+au refus de santé, laissant browser/fixtures :122 est inscrite avant traitement.
+La garde60 indépendante confirme ensuite tous threads libérés et API saine,
+mêmeCID/image/démarrage. Un finish explicite confirme aussi les gardes inactives.
+
+Le seul Node4062189 est signalé par pidfd après identité/parent/argv, puis le
+wrapper termine1 et fige son rougecfbe96b3. Une reprise SSO séparée vérifie
+UUID/noms/descriptions et nettoie quatre fonctions/13jetons/quatre services et
+namespace. Collecte native : huitcompteurs0,5982originaux, sources500 et
+services/configuration conservés ; wrapper/Node/driver absents. Le reçu opérateur
+ne réécrit pas cleanup=false du primaire et n'ajoute aucun groupe qualifié.
+
+121 poursuit le diagnostic du writer absent ;122 portera le finally qui ferme
+les ressources locales et nettoie seulement après restitution confirmée. Le
+produit et ses2s sont inchangés. Aucun nouveau replay avant correction de ce flux.
+
 ## 22 novembre 2026 — diagnostic121 conservé, attente du banc à corriger
 
 500sources/1aa70214, brut437fcbfa : le GET renvoie503/log_read_unavailable après
