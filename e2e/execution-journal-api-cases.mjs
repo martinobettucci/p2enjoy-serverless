@@ -416,9 +416,46 @@ export class JournalApiCases {
       exited_id:exited.id,timeout_id:timeout.id,admission_id:rejected.id,cache_operation_id:cache.id,purged_sibling_id:sibling.id});
   }
 
+  // @spec docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOGS.md#préparation-après-acquisition-des-lecteurs--sls-1265
+  // @verifies docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOGS.md#préparation-après-acquisition-des-lecteurs--sls-1265
+  async prepareHeldReaders(gate,mode) {
+    const c=this.c,started=performance.now(),deadline=Math.min(started+1000,gate.startedMonotonic+45000-5000);
+    const record={scenario:'reader-acquisition-health-preparation',gate:gate.unit,mode,
+      started_at_ms:Date.now(),started_after_gate_ms:started-gate.startedMonotonic,
+      budget_ms:deadline-started,probes:[],ready:false};
+    c.observations.push(record);
+    try {
+      assert(deadline>started,'reader_preparation_budget_exhausted');
+      for(let index=0;index<21;index++) {
+        assert.equal(gate.exit,null,'reader_helper_exited_during_preparation');
+        const before=performance.now(),remaining=Math.floor(deadline-before);assert(remaining>0,'reader_preparation_deadline');
+        const probe={index,at_ms:Date.now(),after_gate_ms:before-gate.startedMonotonic,timeout_ms:remaining};record.probes.push(probe);
+        let response;
+        try {
+          response=await c.caller.get('/healthz',{timeout:remaining,maxRedirects:0});
+          const raw=await response.body();probe.http_status=response.status();probe.body_bytes=raw.length;probe.body_sha256=sha(raw);
+          assert(raw.length<=16384,'reader_preparation_health_body_too_large');
+          const data=JSON.parse(raw.toString('utf8'));if(typeof data.error==='string')probe.error_sha256=sha(data.error);
+          assert(performance.now()<=deadline,'reader_preparation_response_after_deadline');
+          if(response.status()===200) {
+            assert.equal(data.status,'ok');assert.equal(data.component,'control');
+            assert.equal(gate.exit,null,'reader_helper_exited_during_preparation');record.ready=true;break;
+          }
+          assert.equal(response.status(),503,'reader_preparation_unexpected_status');
+          assert(['Les planifications doivent être réconciliées.','Les instances doivent être réconciliées avant la reprise.'].includes(data.error),'reader_preparation_unrelated_failure');
+        } catch(error) {probe.failure=diagnosis(error);throw error;}
+        finally {probe.elapsed_ms=performance.now()-before;await response?.dispose();}
+        const wait=Math.min(50,deadline-performance.now());assert(wait>0,'reader_preparation_deadline');await delay(wait);
+      }
+      assert(record.ready,'reader_preparation_probe_bound');
+    } finally {record.finished_at_ms=Date.now();record.elapsed_ms=performance.now()-started;await c.save();}
+  }
+
   async readers() {
     const c=this.c;
     for(const mode of ['release','eof','kill']) {
+      const baseline=await c.call('/healthz',{anonymous:true});
+      c.observations.push({scenario:'reader-health-before-acquisition',mode,http_status:baseline.status,at_ms:Date.now()});
       const gate=await new JournalSqlBarrier(c,this.image,2,'reader-start').start();
       // @spec docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOGS.md#instrumentation-native-des-lectures
       c.observations.push({scenario:'reader-wave',mode,gate:gate.unit});
@@ -442,6 +479,7 @@ export class JournalApiCases {
         assert.equal(row.syscall_phase,'exit');assert.equal(row.syscall_result,0);assert.equal(row.comm,'journal-read');
         assert.equal(row.name_assignment_initial,true);assert.equal(row.application_buffers_read,false);assert.equal(row.registers_or_results_modified,false);
       }
+      await this.prepareHeldReaders(gate,mode);
       const third=await c.call(logPath(this.fn),{status:429});assert.equal(third.headers['retry-after'],'2');
       assert.equal((await c.call('/healthz',{anonymous:true})).status,200);
       await delay(2100);
