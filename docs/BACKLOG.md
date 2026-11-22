@@ -82,6 +82,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-128](#sls-128) Purge réelle après journal de 16Mio | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-129](#sls-129) Agrandissement et cadrage des preuves Journaux | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-130](#sls-130) Interruption navigateur après écriture de politique | Corriger | `[~]` | SLS-072 | cette unité |
+| 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4546,3 +4547,47 @@ motif précèdent le code, selon les précédents du journal/testeur.
 - [ ] SLS-131.3 Prouver réseau, réponseincomplète/nonconfirmée et refus409, en
   desktop/mobile, capturesJPEG inspectées, vrais appels et nettoyage physique ;
   régressions communes et tests propres avant clôture.
+
+
+<a id="sls-132"></a>
+## SLS-132 — Raccorder les rétentions authentiques au schéma011
+
+Statut : [~]. Nature : Qualifier. Dépend de : SLS-078, SLS-072. Ordre : 3.
+Contrats : SCHEDULE_RETENTION, RETENTION_HISTORY_REPLAY, SCHEDULE_REGRESSIONS et
+EXECUTION_LOGS ; le contrat du nouveau passage courant précède son code.
+
+Constatstatique : schedule_regressions.retained_retention_proofs compare les
+modules execution/schedules/calendar courants aux trois preuves canoniques de
+rétention. Les producteurs072 et diagnostics126 ont changé les deuxpremiers ;
+la garde ne peut plus rattacher ces époques à011. Une simple nouvelle empreinte,
+la suppression de l'assertion ou l'absence de nouveau code de rétention ne
+prouve pas le comportement actuel. Les anciennes preuves gardent leur portée.
+Le socle49/543/18 et les35pointsd'entrée fonctionnels supplémentaires sont
+inventoriés séparément ; leurs préconditions010/images sont traitées dans072.6.
+
+Résultat attendu : disposer de preuves réelles de rétention correspondant au
+code011 installé, avec témoins authentiques et bornes métier conservées ; la
+garde continue de refuser une preuve absente ou d'une autre source. Les captures
+sources009 et leurs exports demeurent strictement immuables.
+
+- [ ] SLS-132.1 Sceller les empreintes incompatibles et inventorier sources,
+  reçus, exports et témoins réellement anciens disponibles, en lectureseule.
+- [ ] SLS-132.2 Écrire/pousser le contrat du seul passagecourant envisagé avant
+  code : image/copies/migrations/observateur, gardes/possession/identités/délais,
+  refus et restitution. Préserver sans substitution les voies historiques.
+- [ ] SLS-132.3 Prouver sur le vrai code011 l'âge et la rétention de source
+  protégée jusqu'à clôture du tir, puis retrait ; tir terminal et générations
+  retirées, borne10000 et détachement de source. Aucun âge/SQL/horloge fabriqué,
+  aucune nouvelle invocation attribuée à un témoin ancien. Distinguer les logs
+  expirables selon072 des métadonnées de source protégées selon078/091.
+- [ ] SLS-132.4 Préflights/refus/perte et restitution réelle, originaux011,
+  collection/schema/données conservés, seules copies retirées, gardes/clients
+  joints ; jamais de restauration009/010 sur la base originale011.
+- [ ] SLS-132.5 La garde rattache exclusivement la preuve fraîche à ses sources
+  actuelles exactes et refuse tout manque ; rapports historiques inchangés,
+  zéro groupe réadditionné. Rejouer ensuite le socle et les consommateurs
+  inventoriés de072.6, captures et nettoyages recoupés avant clôture.
+
+Aucune conservation historique n'est déclarée requalifiée sur011 par cet
+inventaire. Les copies natives authentiques vieillies sont une piste de replay,
+pas une autorisation de modifier les fichiers canoniques ou d'assouplir la garde.

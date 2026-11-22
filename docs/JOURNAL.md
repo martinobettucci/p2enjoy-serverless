@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — inventaire des préconditions courantes et rétention132
+
+Socle49/543/18 confirmé ; gardes010/images anciennes dans plusieursclients,
+35entréesfonctionnelles supplémentaires à classer sansdoublecompte. Les trois
+preuves de rétention ne correspondent plus aux modules072/126 ; garde conservée,
+132inscrit avanttraitement pour preuvesauthentiques sur011. Examiner le replay
+des deuxcaptures sources vieillies, sans toucher les canoniques ni anciennebase
+suroriginal011. Les autrespréconditionscourantes relèvent de072.6 avant gel47.
+
 ## 22 novembre 2026 — arrêt navigateur130 réellement acquis
 
 4b629862/517sources774be25/f73 : version relue avantstop, vrai requestfailed sans
