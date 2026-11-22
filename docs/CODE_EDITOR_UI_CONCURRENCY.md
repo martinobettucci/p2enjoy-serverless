@@ -134,3 +134,13 @@ avant correction ; tout nouveau passage part d’un nouveau gel et de nouveaux U
 070.3/.4 ne ferment qu’après rapprochement avec leurs preuves antérieures ;
 la persistance après redémarrage070.3 et les interruptions de publication070.5
 restent distinctes et ouvertes.
+
+## Premier passage et reprise115
+
+Le [passage échoué](evidence/code-editor-adoption-focus-failed-dev-2026-11-22.json)
+au gel4dcd24b/461sources/image433 passe neuf groupes puis échoue à la consolidation :
+quatre adoptions, huit mesures BODY avant/après libération.18gates/24lecteurs et
+huit handlers, purge complète,32captures inspectées ; zéro groupe qualifié et
+communs non lancés. La [correction115](CODE_EDITOR_ADOPTION_FOCUS.md) conserve
+ce premier passage et décide le retour au fichier avant code. Son nouveau
+passage ajoute un groupe de repli au banc initial, soit11+25et neuf invocations.

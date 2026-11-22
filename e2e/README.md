@@ -198,7 +198,7 @@ contrôle démarré. Refus11:35/succès11:40UTC sans rejeu ; original et5982arte
 conservés. Aucun mock ni skip. La campagne complète078 reste à raccorder.
 
 
-## Attentes UI de l’éditeur — contrat avant client
+## Attentes UI de l’éditeur — premier passage échoué, reprise115
 
 Le [contrat de concurrence UI](../docs/CODE_EDITOR_UI_CONCURRENCY.md) prévoit
 `node e2e/code-editor-ui-concurrency.mjs`, avec credentials sur stdin privée.
@@ -208,10 +208,18 @@ surface, deux adoptions et abandon sont confrontés aux réponses tardives,
 sur ordinateur/mobile. Focus volontaire, recalage5+2 et refus404/429 sont
 mesurés séparément ; huit handlers nominaux, jonction et purge physique requis.
 Dix groupes ciblés puis25communs frais. Le client est implémenté et ses syntaxes
-contrôlées ; aucun lancement ni résultat fonctionnel à ce point. Chaque variante
+contrôlées avant le premier passage. Chaque variante
 possède son brouillon neuf ;18sessions de gate/24lecteurs retenus sont requis,
 avec repos natif après chaque invocation. Les quatre adoptions ont leurs mesures
 immédiates et après réponse tardive, consolidées dans le dernier groupe.
+
+Le [premier passage](../docs/evidence/code-editor-adoption-focus-failed-dev-2026-11-22.json)
+passe neuf groupes puis échoue sur huit mesures BODY : zéro groupe qualifié,
+communs non lancés.18gates/24lecteurs restaurés, huit handlers et purge physique
+recoupés,32JPEG inspectés individuellement. La [correction115](../docs/CODE_EDITOR_ADOPTION_FOCUS.md)
+prévoit le relais de focus parent et huit variantes de repli supplémentaires
+dans un seul groupe :11+25, neuf invocations et40+22captures. Aucun correctif
+ni nouveau passage à ce checkpoint.
 
 ## Frontières du ZIP reconstruit — qualifiées en DEV
 

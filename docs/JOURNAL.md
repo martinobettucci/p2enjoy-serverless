@@ -1,5 +1,22 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — défaut d’adoption reproduit,115 et son choix avant code
+
+Le premier passage UI au gel4dcd24b/461sources/image433 termine sortie1, joint.
+Neuf groupes passent et la consolidation donne huit mesures BODY après quatre
+adoptions ; zéro groupe qualifié, aucun commun lancé.18gates/24lecteurs restitués,
+huit handlers et une purge physique complète recoupés.32JPEG inspectés, deux
+vues d’adoption aussi par le principal. Backend/web, notes/configuration/référence,
+010 et5982originaux conservés. Preuve négative publiée, gzip5266b6a7/brut31efb810.
+
+115 est inscrite avant correction. Le bloc Confirm disparaît avec conflict ;
+son retour de focus ne survit pas et le parent n’a pas de relais. Choix persisté :
+intention de fichier après adoption valide, textarea en édition sinon h2 stable,
+dans l’effet de layout existant, sans modifier Confirm ni la sémantique locale.
+Le prochain passage conserve les dix groupes et ajoute huit variantes de repli
+dans un groupe distinct :11+25, neuf invocations et40+22captures. Aucun correctif
+produit appliqué à ce checkpoint ;070.3/.4/.5 restent ouverts.
+
 ## 22 novembre 2026 — client des attentes UI implémenté, E2E à produire
 
 La revue avant exécution relève trois faiblesses du client, corrigées avant

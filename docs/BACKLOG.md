@@ -70,6 +70,7 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
+| 3 | [SLS-115](#sls-115) Retour du focus après adoption du brouillon | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_ADOPTION_FOCUS](CODE_EDITOR_ADOPTION_FOCUS.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
@@ -1036,6 +1037,11 @@ Critères d'acceptation :
   conflit de version détecté ; saisies non enregistrées signalées avant de quitter.
   Le [complément d’attentes UI](CODE_EDITOR_UI_CONCURRENCY.md) fixe avant son
   client les quatre actions face au détail retenu et le focus après adoption.
+  Son [premier passage échoué](evidence/code-editor-adoption-focus-failed-dev-2026-11-22.json)
+  reproduit huit mesures BODY après quatre adoptions ; neuf groupes passent,
+  zéro qualifié.18gardes/24lecteurs restitués, huit handlers et purge physique
+  recoupés ;32JPEG inspectés. La correction est portée par115 ; persistance
+  après redémarrage et interruptions de publication restent distinctes.
 - [ ] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
   Le même complément éprouvera refus404/429, recalage réel5+2 et choix volontaire
@@ -3291,3 +3297,26 @@ avant/après ; aucun nettoyage forcé nécessaire. Décision avant code : normal
 la casse des seuls messages connus sous code1 et compléter les postconditions
 du retour already_absent après vérification native. Prérequis positif
 sur l’ancien UUID puis nouveau7+25 réalisés ; aucune garde ni limite retirée.
+
+<a id="sls-115"></a>
+## SLS-115 — Retour du focus après adoption du brouillon
+
+Statut : [~] — défaut reproduit sur461sources4dcd24b/image433da150 :
+les quatre adoptions gardant/remplaçant la saisie en1440/390px donnent BODY
+avant et après la réponse tardive. Nature : Corriger. Ordre :3, préalable à la
+qualification résiduelle070.3/.4. Dépend de : SLS-063 ; s’appuie sur la tranche
+déjà déployée de SLS-070.
+Contrat : [CODE_EDITOR_ADOPTION_FOCUS](CODE_EDITOR_ADOPTION_FOCUS.md).
+
+- [x] SLS-115.1 [Échec et cause circonscrite](evidence/code-editor-adoption-focus-failed-dev-2026-11-22.json)
+  conservés : neuf groupes passés mais zéro qualifié,18gardes/24lecteurs
+  restaurés, huit invocations et purge complète,32captures inspectées. L’adoption
+  retire sa confirmation avant son retour de focus ; aucun relais parent.
+- [ ] SLS-115.2 Rendre après adoption réussie le focus au textarea courant en
+  édition, sinon au titre stable du fichier ; garder/remplacer restent des
+  actions locales sans PUT. Annuler/refuser ne déclenche aucun retour tardif.
+- [ ] SLS-115.3 Nouveau gel construit/déployé : onze groupes ciblés puis25communs
+  frais, quatre adoptions retenues et huit variantes hors saisie/fichier absent,
+  neuf invocations,18gardes/24lecteurs joints et purge physique recoupés.
+  Captures/manuel/backend/web/notes/configuration/référence/5982originaux conservés.
+  Le premier échec reste exclu. Les critères070.3/.4/.5 gardent leurs autres preuves.
