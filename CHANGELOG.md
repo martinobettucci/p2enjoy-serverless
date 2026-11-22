@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- SLS-114 est close par [32groupes réels](docs/evidence/code-editor-archive-boundaries-dev-2026-11-22.json) :
+  frontières ZIP64Mio/256Mio/20000fichiers/20000parents et +1, six invocations,
+  dix révisions, cinq purges physiques et22captures inspectées au gel0168/459sources.
+  Cleanup positif de l’ancien UUID et premier essai échoué séparés, zéro groupe.
+  070.1 est clôturé après rapprochement des preuves de sources ;070.3/.4/.5
+  restent ouverts. Produit, manuel18/74, schéma010 et5982originaux conservés.
+
 - SLS-078 est close le 22 novembre : [49 campagnes / 543 groupes réels](docs/evidence/schedules-regressions-dev-2026-11-22.json),
   18 prérequis frais, 458 sources `9e1da70`, image `433da150`, 117 captures inspectées.
   Les douze clients cron apportent 54 groupes au socle 489. Worker terminé,

@@ -762,3 +762,59 @@ Cette preuve reprend la même génération du contrôle et la barrière qualifi�
 sans nouveau code produit ni changement du manuel. Le refus global précède
 la préparation des deux candidats rejetés ; la capacité après un refus413
 et les frontières du ZIP restent à qualifier séparément.
+
+## Sources et limites qualifiées — 22 novembre 2026
+
+**070.1 est clôturé** par les preuves complémentaires suivantes, conservées dans
+leurs gels respectifs. Il ne s’agit pas d’une nouvelle campagne cumulant leurs groupes.
+
+| Clause de070.1 | Preuve réelle |
+| --- | --- |
+| Arborescence, texte Unicode, modes, binaires et dépendances conservées | [Serveur45](evidence/code-editor-server-dev-2026-11-12.json), [sources38](evidence/code-editor-source-limits-dev-2026-11-12.json) et [console43](evidence/code-editor-console-focus-dev-2026-11-12.json) |
+| Choix de version, source archivée admise, supprimée refusée, pagination5+2 et base conservée | Sources38 et console43, parcours réels desktop/mobile |
+| Texte1Mio exact/+1, texte trop grand non éditable,128patches/4Mio, chemins512/513 et255/256octets, JSON8Mio/+1 refusé atomiquement | Serveur45 et sources38 |
+| Reconstruction64Mio compressés,256Mio extraits,20000fichiers et20000parents, refus indépendants +1 et capacité après413 | [ZIP32](evidence/code-editor-archive-boundaries-dev-2026-11-22.json), dix révisions et six invocations Docker recoupées |
+
+`control/app/code_editor.py` (SHA6fe5d4bb) et `control/app/artifacts.py`
+(SHA5508b2af) sont identiques dans ces quatre manifestes et au gel courant0168.
+`web/src/code-editor.jsx` a changé lors de la correction de focus : son SHA
+ca20fbd1 est identique entre console43 et le gel courant ; le SHA antérieur
+1afc78f2 de sources38 n’est pas présenté comme le composant actuel. Les sources exécutables
+web/runtime n’ont pas changé depuis console43 ; les changements serveur
+intermédiaires de managed_instances ne changent ni lecture, extraction ni rendu
+éditeur. Les images de contrôle de ces époques restent distinctes ; aucun rejeu
+console43 sous433 n’est revendiqué. Leurs contrôles backend/web et le nouveau
+recoupement38backend/quatreweb relient la preuve au code effectivement installé.
+
+070.3/.4/.5 restent ouverts : focus après adoption et pendant attente, résultats
+de diff périmés, persistance après redémarrage, mutation pendant reconstruction,
+réponse perdue et interruptions de publication sont encore à qualifier.
+
+## Frontières ZIP qualifiées — 22 novembre 2026
+
+La [preuve ZIP](evidence/code-editor-archive-boundaries-dev-2026-11-22.json) clôt SLS-114 : **32 groupes réels**, sept ciblés puis
+25 communs, sur459sources `0168ae29` et l’image `433da150`. Les22captures
+fraîches sont ouvertes individuellement :16JPEG déclarés et6PNG complémentaires.
+Le prérequis cleanup positif de l’ancien UUID confirme sortie0 et absence native
+avant/après ; il ajoute zéro groupe. Le premier essai échoué demeure exclu.
+
+Le ZIP reconstruit atteint exactement67108864octets ; son dépassement d’un octet
+est refusé413 sans candidat ni mutation du brouillon. Une autre fonction publie
+et s’exécute après ce refus, puis le ZIP admissible republie et s’exécute.
+Les268435456octets extraits,20000fichiers et20000parents implicites sont éprouvés
+séparément ; leurs +1 sont refusés au PUT avant mutation. Les cinq fonctions
+gardent leur version active initiale ; dix révisions A/B ont leur inventaire
+complet/modes/SHA et leur archive réelle recoupés. Six invocations Docker
+succeeded/handler_started1/HTTP200 portent les hashes attendus.
+
+Les cinq purges publiques sont rapprochées des UUID et ressources physiques :
+artefacts, stockage, Docker, réseaux, canaux, réservations et baux. Jeton révoqué,
+service/namespace supprimés ; générateur et sortie privée absents.38backend,
+quatre ressources HTTPS no-store, dix migrations/intégrités/FK, notes, budgets,
+configuration, référence et5982originaux sont conservés. Manuel canonique servi
+inchangé :18chapitres/74paragraphes, SHA8a50ffa0. Aucun produit, schéma, seed,
+configuration ni comportement utilisateur ne change dans cette qualification.
+070.1 est clôturé par le rapprochement précédent ;070.3/.4/.5 restent ouverts
+pour attentes/focus et interruptions/persistance. Les groupes historiques ne
+sont pas additionnés aux32 et aucune facette Éditeur n’est déduite des captures
+communes de ce nouveau passage.

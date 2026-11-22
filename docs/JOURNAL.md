@@ -1,5 +1,25 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — ZIP32 qualifié,114 et070.1 clôturés
+
+Le nouveau passage03df7cb3, campagne3844e53c, finit sortie0 et client joint sur
+0168ae2/459sources/image433da150. Sept groupes ZIP puis25communs passent ;
+22images fraîches inspectées,16JPEG déclarés/6PNG complémentaires. Le prérequis
+positif de cleanup ancien est distinct et ajoute zéro groupe. Les quatre bornes
+exactes/+1, la capacité après413, dix révisions et six invocations sont recoupées.
+Cinq UUID purgés physiquement, générateur/sortie absents, jeton/parents retirés ;
+38backend/quatreweb,010, notes/configuration/référence et5982originaux conservés.
+
+Preuve publique code-editor-archive-boundaries-dev-2026-11-22, gzip0f0bdc02,
+brut74a351bc. Le premier échec et ses diagnostics restent immuables et exclus.
+Le garde de publication rapproche chemin/SHA/phase/mtime de chaque image et
+rehash les octets ; relecture RO ciblée sans défaut résiduel.114 est close.
+Le principal rapproche serveur45/sources38/console43/ZIP32 et leurs sources :
+code_editor6fe5/artifacts5508 identiques, composant ca20 de console43 inchangé.
+070.1 clôturé sans addition ni rejeu historique revendiqué ;070.3/.4/.5 restent
+ouverts pour attentes/focus et interruptions/persistance. Aucun changement de
+produit, manuel, schéma, seed ou service n’est nécessaire pour cette livraison.
+
 ## 22 novembre 2026 — contrat114 inclus dans le nouveau gel de preuve
 
 Le contrat de reprise114 rejoint l’index des sources de la suite, comme les

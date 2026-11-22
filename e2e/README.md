@@ -198,7 +198,7 @@ contrôle démarré. Refus11:35/succès11:40UTC sans rejeu ; original et5982arte
 conservés. Aucun mock ni skip. La campagne complète078 reste à raccorder.
 
 
-## Frontières du ZIP reconstruit — banc préparé
+## Frontières du ZIP reconstruit — qualifiées en DEV
 
 `node e2e/code-editor-archive-boundaries.mjs` reçoit le SSO sur stdin privée et
 part de l’accueil. Sept groupes sont prévus : génération isolée des cinq cas,
@@ -214,7 +214,7 @@ des ZIP effectivement conservés, contrôlés exhaustivement par
 Les rapports ne contiennent que métadonnées/SHA ; données transférées par SSH,
 cleanup des fonctions, jeton, parents, fichiers et conteneur avant succès.
 Le [contrat](../docs/CODE_EDITOR_ARCHIVE_LIMITS.md) précède le code ; syntaxe
-et revue précèdent le premier passage réel. Aucun nouveau résultat qualifié.
+et revue précèdent le premier passage réel. Le nouveau passage32 est qualifié.
 La reprise du22novembre exige le pin433da150, les dix noms de migration exacts
 et600s par requête administratrice ; appelant240s et handler60s inchangés.
 Après le client, `schedule_regressions.native_state({namespace: function_ids})`
@@ -225,8 +225,12 @@ SLS-114 conserve le premier refus du helper et sa reproduction native. La
 reconnaissance de l’absence Docker est désormais insensible à la casse des deux
 messages connus, toujours sous code1. Le retour already_absent renseigne les
 postconditions output_removed/container_gone après vérification réelle. Son
-prérequis positif et le nouveau passage7+25 restent à qualifier ; aucun groupe
-du premier essai n’est réutilisé.
+prérequis positif et le nouveau passage7+25 sont qualifiés dans la
+[preuve32](../docs/evidence/code-editor-archive-boundaries-dev-2026-11-22.json) :
+459sources0168/image433,22images inspectées, dix révisions et six invocations.
+Cinq purges physiques, générateur/sortie absents,38backend/quatreweb/5982originaux
+recoupés.114 et070.1 sont clos ;070.3/.4/.5 restent ouverts. Aucun groupe du
+premier essai n’est réutilisé.
 
 ## Capacité globale de publication éditeur — qualifiée en DEV
 

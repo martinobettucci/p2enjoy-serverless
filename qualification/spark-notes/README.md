@@ -1,5 +1,18 @@
 # P2Enjoy Serverless
 
+## Sources et frontières ZIP qualifiées — 22 novembre 2026
+
+Preuve docs/evidence/code-editor-archive-boundaries-dev-2026-11-22.json :
+32groupes réels,459sources0168ae2/image433da150,22captures inspectées.
+Bornes64Mio compressés/256Mio extraits/20000fichiers/20000parents et +1,
+capacité après413, dix révisions et six invocations Docker. Cinq fonctions
+purgées physiquement, générateur/sortie absents et jeton/parents retirés.
+38backend/quatreweb/no-store,010, manuel18/74, configuration/référence et
+5982originaux conservés.114 et070.1 sont clos après rapprochement des preuves
+antérieures distinctes ;070.3/.4/.5 restent ouverts pour attentes/focus et
+interruptions/persistance. Ancien essai et prérequis positif ajoutent zéro groupe.
+Proposition .? uniquement ; restructuration des notes079.3 toujours ouverte.
+
 ## Planifications qualifiées — 22 novembre 2026
 
 Preuve `docs/evidence/schedules-regressions-dev-2026-11-22.json` : 49 campagnes,

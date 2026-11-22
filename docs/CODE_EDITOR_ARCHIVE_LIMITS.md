@@ -209,3 +209,32 @@ Ce choix évite une copie divergente des contrôles physiques ; aucun contrôle
 de purge, reçu, secret vide, chemin, montage, propriétaire, Docker ou canal
 n’est retiré. Le collecteur commun reste lu depuis les sources du gel et son
 changement fait partie de la future preuve070, sans réécrire le gel543de078.
+
+## Frontières ZIP qualifiées — 22 novembre 2026
+
+La [preuve ZIP](evidence/code-editor-archive-boundaries-dev-2026-11-22.json) clôt SLS-114 : **32 groupes réels**, sept ciblés puis
+25 communs, sur459sources `0168ae29` et l’image `433da150`. Les22captures
+fraîches sont ouvertes individuellement :16JPEG déclarés et6PNG complémentaires.
+Le prérequis cleanup positif de l’ancien UUID confirme sortie0 et absence native
+avant/après ; il ajoute zéro groupe. Le premier essai échoué demeure exclu.
+
+Le ZIP reconstruit atteint exactement67108864octets ; son dépassement d’un octet
+est refusé413 sans candidat ni mutation du brouillon. Une autre fonction publie
+et s’exécute après ce refus, puis le ZIP admissible republie et s’exécute.
+Les268435456octets extraits,20000fichiers et20000parents implicites sont éprouvés
+séparément ; leurs +1 sont refusés au PUT avant mutation. Les cinq fonctions
+gardent leur version active initiale ; dix révisions A/B ont leur inventaire
+complet/modes/SHA et leur archive réelle recoupés. Six invocations Docker
+succeeded/handler_started1/HTTP200 portent les hashes attendus.
+
+Les cinq purges publiques sont rapprochées des UUID et ressources physiques :
+artefacts, stockage, Docker, réseaux, canaux, réservations et baux. Jeton révoqué,
+service/namespace supprimés ; générateur et sortie privée absents.38backend,
+quatre ressources HTTPS no-store, dix migrations/intégrités/FK, notes, budgets,
+configuration, référence et5982originaux sont conservés. Manuel canonique servi
+inchangé :18chapitres/74paragraphes, SHA8a50ffa0. Aucun produit, schéma, seed,
+configuration ni comportement utilisateur ne change dans cette qualification.
+070.1 est clôturé par le [rapprochement des preuves](CONSOLE_EDITOR.md#sources-et-limites-qualifiées--22-novembre-2026) ;070.3/.4/.5 restent ouverts
+pour attentes/focus et interruptions/persistance. Les groupes historiques ne
+sont pas additionnés aux32 et aucune facette Éditeur n’est déduite des captures
+communes de ce nouveau passage.

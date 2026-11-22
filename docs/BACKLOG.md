@@ -70,7 +70,6 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
-| 3 | [SLS-114](#sls-114) Génération et nettoyage des archives de qualification | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_ARCHIVE_RECOVERY](CODE_EDITOR_ARCHIVE_RECOVERY.md) |
 | 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
@@ -111,7 +110,9 @@ ce reste sans lui attribuer une cause par le succès futur. Les autres unités
 indépendantes avancent ; les deux expressions exactes de référence restent 080.
 
 Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4 ;
-089.4 est qualifié. Le banc ZIP de SLS-070 reste préparé, non exécuté.
+089.4 est qualifié. Les [32 groupes ZIP](evidence/code-editor-archive-boundaries-dev-2026-11-22.json)
+clôturent SLS-114 et complètent les preuves de070.1.070.3/.4/.5 restent ouverts
+pour les attentes/focus de console et les interruptions/persistance de publication.
 
 Unités parentes encore `[~]` et unités qui portent leur reste à faire :
 [SLS-001](#sls-001) → toutes ; [SLS-020](#sls-020) → SLS-089 ;
@@ -880,8 +881,10 @@ Tests exigés :
 ## SLS-070 — Édition du code et du handler dans la console
 
 Statut : [~] —070.2 est clôturé par les [32 groupes des droits de source](evidence/code-editor-source-access-dev-2026-11-13.json)
-et les droits pendant IO de la preuve30, sans réaddition.070.1/.3/.4/.5 restent
-ouverts ;070.6/.7/.8 conservent leurs preuves. Contrat détaillé dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
+et les droits pendant IO de la preuve30, sans réaddition.070.1 est clôturé après
+les [32 groupes ZIP](evidence/code-editor-archive-boundaries-dev-2026-11-22.json)
+et le [rapprochement des preuves de sources](CONSOLE_EDITOR.md#sources-et-limites-qualifiées--22-novembre-2026).
+070.3/.4/.5 restent ouverts ;070.6/.7/.8 conservent leurs preuves. Contrat détaillé dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
 avant code. Serveur et migration010 déployés sur7c5c6f4b ;
 [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json) qualifient une première tranche serveur,
 dont070.7. La première facette Éditeur est déployée sura77b6b4e et
@@ -1013,8 +1016,13 @@ révisions immuables et tester le résultat.
 
 Critères d'acceptation :
 
-- [ ] SLS-070.1 Arborescence de la version choisie, lecture d'un fichier texte, binaires et
+- [x] SLS-070.1 Arborescence de la version choisie, lecture d'un fichier texte, binaires et
   dépendances identifiés comme tels, limites de taille appliquées côté serveur.
+  [Composition des preuves](CONSOLE_EDITOR.md#sources-et-limites-qualifiées--22-novembre-2026) :
+  serveur45, sources38, console43 et ZIP32 gardent leurs époques et leurs groupes
+  distincts. Les modules de lecture/extraction sont identiques ; le composant
+  console actuel est celui du passage43. Les quatre frontières ZIP et leurs
+  dépassements sont réellement éprouvés, avec six invocations et dix révisions.
 - [x] SLS-070.2 Accès aux sources réservé aux droits de publication (Create sur un
   brouillon initial, Update sur une fonction publiée, session administratrice) ; le
   jeton Read seul n'accède ni aux sources ni à leur téléchargement. [32 groupes](evidence/code-editor-source-access-dev-2026-11-13.json) :
@@ -3253,17 +3261,21 @@ correction de 075/113 n’est encore qualifiée.
 <a id="sls-114"></a>
 ## SLS-114 — Génération et nettoyage des archives de qualification
 
-Statut : [~] — premier passage ZIP070 arrêté pendant préparation, nettoyage
-des fixtures également en erreur ; aucun objet applicatif créé ni groupe qualifié.
+Statut : [x] — [32 groupes réels](evidence/code-editor-archive-boundaries-dev-2026-11-22.json)
+au gel0168ae2/459sources, image433da150 ;22captures fraîches inspectées.
+Le premier passage échoué reste conservé, zéro groupe ajouté.
 Nature : Corriger. Ordre :3, préalable au passage ZIP de070. Dépend de : SLS-063.
 Contrat : [CODE_EDITOR_ARCHIVE_RECOVERY](CODE_EDITOR_ARCHIVE_RECOVERY.md).
 
 - [x] SLS-114.1 [Premier échec et diagnostic natif](evidence/code-editor-archive-preparation-failed-dev-2026-11-22.json). Premier échec scellé, état natif du générateur, reçus, identités et
   propriété des sorties instruits ; cause et décision persistées avant correction.
-- [ ] SLS-114.2 Correction bornée conservant image, identités, limites, calibration,
+- [x] SLS-114.2 Correction bornée conservant image, identités, limites, calibration,
   refus et contrôles de nettoyage ; restitution ou retrait des seules ressources
   possédées après diagnostic connu, sans masquer l’état natif ni relance automatique.
-- [ ] SLS-114.3 Sept groupes ZIP et25communs passent au nouveau gel sur code réel ;
+  Le prérequis natif positif intégré à la preuve32 confirme cleanup sortie0,
+  already_absent/output_removed/container_gone et absence avant/après de l’ancien
+  UUID ; il ajoute zéro groupe. Le nouveau générateur et son nettoyage passent.
+- [x] SLS-114.3 Sept groupes ZIP et25communs passent au nouveau gel sur code réel ;
   six handlers, cinq fonctions, dix révisions et nettoyage physique complet recoupés,
   captures/manuel/backend/web/configuration/référence et5982originaux conservés.
   Le premier essai reste séparé et n’ajoute aucun groupe au total qualifié.
@@ -3273,5 +3285,5 @@ rejette ce message réel par comparaison sensible à la casse, avant création e
 au nettoyage. Cleanup original reproduit sortie1 sur des ressources absentes
 avant/après ; aucun nettoyage forcé nécessaire. Décision avant code : normaliser
 la casse des seuls messages connus sous code1 et compléter les postconditions
-du retour already_absent après vérification native. Prérequis positif à exécuter
-sur l’ancien UUID puis nouveau7+25 ; aucune garde ni limite retirée.
+du retour already_absent après vérification native. Prérequis positif
+sur l’ancien UUID puis nouveau7+25 réalisés ; aucune garde ni limite retirée.

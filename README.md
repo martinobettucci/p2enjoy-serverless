@@ -1,5 +1,14 @@
 # P2Enjoy Serverless
 
+Les [32 groupes ZIP](docs/evidence/code-editor-archive-boundaries-dev-2026-11-22.json)
+qualifient les frontières64Mio/256Mio/20000fichiers/20000parents et leurs refus +1,
+avec six invocations Docker, dix révisions et purge physique des cinq fonctions.
+SLS-114 est close ; [070.1](docs/CONSOLE_EDITOR.md#sources-et-limites-qualifiées--22-novembre-2026)
+est clôturé par rapprochement des preuves de sources, sans addition de leurs groupes.
+459sources0168ae2/image433da150,22captures inspectées ; ancien essai exclu.
+070.3/.4/.5 restent ouverts pour attentes/focus et interruptions/persistance.
+Le manuel18/74, le schéma010, les services et5982originaux sont conservés.
+
 La [campagne complète des planifications](docs/evidence/schedules-regressions-dev-2026-11-22.json)
 clôt SLS-078 en DEV le 22 novembre 2026 : **49 campagnes, 543 groupes et 18 prérequis**,
 sur les 458 sources du gel `9e1da70` et l’image `433da150`. Les 117 fichiers de
