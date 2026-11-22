@@ -4669,3 +4669,6 @@ aucun groupe qualifié. Worker terminal1 puis libéré, original011/f6e19cdd,
 instruit dans133 ; aucune rétention manquante n'est déclarée acquise.
 
 072.6 — assemblage32 intégré après terminaison/libération du workerde19d780 : trois nouveaux modules (suite/worker/contrat), option explicite de recoupement et traceCLI namespace_name. Propriété30/74, archivesorphelines, capturesSHA/octets/mtime et huitSSO ; défauts du brouillon corrigés, relecture sansP1/P2. CinqASTPython et syntaxeNode passent, aucune campagne supplémentaire exécutée ; nouvelle liste523sources.
+
+
+133.2 — [première mesureRO réelle](evidence/invocation-production-sql-readonly-dev-2026-11-22.json) sur l’original011 :2999invocations,248maximum parfonction, zéro événement journal. Plans confirment indexfonction àl’admission, scans d’expiration et tri de la borne ; coût numérique chaud9,4–10,2ms. Ces données ne sont pas celles du rouge9406 et ne prouvent pas sa cause. Décision avant code : [profil6k](INVOCATION_PRODUCTION_PROFILE.md), option explicite du vrai client,4relevésRO dansSQLitef73 pendant6000HTTP réels, données/horodatages/plans/instructions natifs conservés, zéro groupequalifié et clôture partagée inchangée. Aucune borne du nominal n’est allongée.
