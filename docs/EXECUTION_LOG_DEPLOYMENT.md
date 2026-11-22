@@ -223,3 +223,19 @@ MainPID/ControlPID0 et cgroup vide. Elle est suivie du replay réel124 en1440 et
 390px, du statut410 du suivi invalidé, des captures inspectées et des campagnes
 12API/10UI/25communs fraîches. Construire ou basculer la candidate ne suffit pas
 à déclarer le correctif d'ergonomie qualifié.
+
+## Mise à jour du diagnostic de maintenance — SLS-126.5
+
+Le profil explicite maintenance-diagnostics part exclusivement de l'image
+sha256:a7d7491a8cb698c9e2ee739339c60dc3846d84c8242b55a13a9e9b4f21edb1d7.
+La candidate conserve exactement les quatre ressources web, le manifeste backend42
+et ses onze migrations, à l'exception de control/app/execution.py et
+control/app/schedules.py : seuls leurs événements de maintenance_failed sont
+enrichis selon EXECUTION_LOGS. Une différence supplémentaire interdit cette voie.
+Le lanceur reçoit ce profil et utilise prepare-diagnostics-update. Baseline
+embarquée, sources et candidate sont recoupées avant arrêt ; le profil est figé
+dans l'identité du pilote. Tous les garde-fous011→011 de sauvegarde, possession,
+CID/génération, label, reprise vers la même candidate après intention, comparaison
+schema/tables/collection, configurations et cgroups restent identiques. Aucun
+retourDB, changement de santé, cadence, quota, /tmp ou configuration n'est permis.
+Le déploiement est un prérequis de diagnostic, sans groupe fonctionnel qualifié.

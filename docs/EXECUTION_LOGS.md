@@ -677,3 +677,16 @@ budget n'est augmenté. Après le corpus16Mio, la reprise de l'archive retenue
 et, après16Mio+1, l'archivage de la fonction suivi de la suppression du service
 éprouvent les deux véritables chemins avant leur purge physique. Le moniteurRO
 recoupe /proc/PID/root/tmp, les seuls métadonnéesFDtemporaires et le HTTP réel.
+
+### Diagnostic expurgé de maintenance — SLS-126.5
+
+Le troisième essai borné a recoupé health503 et le message des planifications,
+avec OperationalError avant la retenue des deux lecteurs. Avant de décider une
+correction, les logs execution.maintenance_failed et schedules.maintenance_failed
+conservent le code SQLite entier et son nom étendu lorsqu'ils existent, ainsi
+que fichier, fonction et ligne du dernier cadre de traceback, la phase tick ou
+recovery et la valeur antérieure du booléen maintenance_error. Aucun message
+d'exception, SQL, paramètre ou contenu applicatif n'est journalisé. La capture
+d'erreur, le flag santé, sa remise à zéro au tick réussi et les cadences restent
+identiques. Le prochain préparatoire natif garde health200 et les deadlines
+stricts ; l'attribution du code précède toute correction ou nouvelle décision.

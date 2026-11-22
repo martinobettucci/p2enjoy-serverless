@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — corpus exact/+1 et effacementservice128 acquis
+
+89e99d13/514sources/a7d passe10000/+1 puis16Mio/+1 ; le dépassement retire
+63octets et laisse16777154/5168événements. Suppressionservice :248buffers
+expired/0 avant purgephysique. Nettoyagecomplet/huitcompteurs0/5982originaux.
+Préparatoire seulement, campagnescomplètes restent requises. Avant code126.5,
+décision de logs SQLitecode/site expurgés et profil011→011 strict a7d ; aucun
+changement santé/délais, attribution exacte attendue avant correction.
+
 ## 22 novembre 2026 — refus santé126 reproduit et isolé
 
 Le troisième essai31c33904 échoue sur health503 ; le SHA du message désigne les

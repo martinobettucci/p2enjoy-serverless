@@ -4353,3 +4353,17 @@ et effacementservice réels. Pas de préfixereaders susceptible de masquer cette
 preuve indépendante, aucun oracle changé, zéro groupecompletqualifié. Le client
 reste possesseur de toutes ses ressources et les purge en finally. Le full12
 reste requis ensuite sur la même source déployée.
+
+128 — [budgets et purges ciblés acquis](evidence/execution-journal-budgets-purge-replay-dev-2026-11-22.json) :
+89e99d13/514sources/imagea7d :10000/+1,16777216exact puis16777217avantéviction ;
+ce dernier conserve16777154octets/5168événements. La suppression du service
+vide248anciens buffers (expired/0octet) et le registre avant purge physique.
+Trois fonctions et leurs parents retirés, huitcompteurs0/5982originaux conservés.
+Zéro groupecompletqualifié ;128.3 reste ouvert pour les campagnes complètes.
+
+126.5 — décision avant instrumentation du contrôle : enrichir exclusivement les
+logs maintenance_failed des deux moteurs, avec codeSQLite étendu et site/phase,
+sans texte d'exception ni SQL ; préserver flags santé/cadences et mêmes refus.
+Le contrat EXECUTION_LOGS et le profil maintenance-diagnostics011→011 partant
+d'a7d figent cette modification avant code. La prochaine reproduction doit
+établir le code exact avant toute correction ; aucun retry santé ajouté.
