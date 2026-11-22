@@ -1,5 +1,30 @@
 # Design system du produit
 
+## Journaux recherchables — contrat SLS-072 avant code
+
+Le [parcours détaillé](EXECUTION_LOGS.md#console-et-manuel) ajoute la facette
+Journaux à la fonction et au service. Il utilise les composants Section,
+Field, Facts, Resource, Pages et dialogs existants. Les filtres de collection
+restent près des résultats : période UTC, texte, source, niveau connu ou non
+renseigné, état et appel. Chargement, absence, refus, erreur et perte de
+conservation ne réutilisent pas les totaux ou lignes d'une lecture précédente.
+
+L'événement se déplie dans le flux, avec UUID et hash complets repliables,
+source du temps observé et texte/JSON inerte. Les corrélations devenues
+indisponibles restent des références lisibles. Le suivi s'active explicitement,
+garde le focus, indique pause/reprise et limite sa fenêtre à 200 entrées ;
+une coupure ne rejoue jamais le handler. L'export annonce ses limites et la
+reprise des lots. Le résultat du testeur rejoint le journal de l'appel.
+
+La conservation est une section du service avec Facts et dialog Modifier.
+L'entrée numérique nomme les minutes et les bornes 1–10080. Une diminution
+demande une confirmation explicite dans le flux, en nommant le service ; un
+conflit garde la saisie et propose une relecture. La politique ne partage pas
+le formulaire des variables/secrets. Échap rend le focus à sa commande.
+Ces parcours seront éprouvés au clavier, sur desktop, tablette et mobile
+390 px ; les longues lignes défilent dans leur cadre sans débordement global.
+À ce checkpoint, seule la spécification est acquise, aucune capture SLS-072.
+
 ## Reprise de l’éditeur qualifiée —22 novembre2026
 
 [Preuve29](evidence/code-editor-control-interruption-dev-2026-11-22.json) :26images réellement ouvertes,

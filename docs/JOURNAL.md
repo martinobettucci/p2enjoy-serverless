@@ -1,5 +1,37 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — contrat des journaux SLS-072 avant code
+
+070 et118 livrés et poussés en fd95419, arbre propre avant cette unité.
+111 et089 gardent leurs blocages documentés ;072 est la première unité
+indépendante ouverte. Lecture des contrats console, exécution, contrôle,
+schéma et design, puis cartographie RO des producteurs réels : buffer final
+expurgé de64Kio, audit métier, diagnostics privés et disparition des instances.
+
+Décision : registre SQLite borné distinct, migration011 additive, événements
+publics typés et collecte runtime explicitement attestée. Pas de lecture brute
+Docker ni copie de diagnostics Update dans un journal Read. Rétention par
+service1–10080minutes, défaut sept jours et frontière irréversible ; budget
+10000événements/32Mio, projection1024lignes/4096octets. Snapshots signés,
+suivi réautorisé à chaque lecture, exports finis, deux lectures concurrentes
+et IO joint avant restitution. Les motivations et le contrat détaillé sont
+dans EXECUTION_LOGS ; aucun comportement n'est encore implémenté.
+
+La preuve exigera22groupes ciblés et25communs frais, puis le socle nommé
+49campagnes/543groupes sur011 et les consommateurs supplémentaires inventoriés,
+sans cumul des communs, avec temps réel pour expiration et vrais
+Docker/SSO/API. Les préconditions courantes010 seront adaptées ; branches
+historiques et captures scellées restent intactes. Toute preuve manquante
+laisse072 ouverte. Aucune nouvelle exigence FORGE ni accès demandé.
+
+Revue RO avant code : trois précisions intégrées. Le suivi reprend par séquence
+commitée, sans filtre temporel perdant une transaction en vol ; les instantanés
+historiques restent séparés. Tout retour automatique046 est interdit dès le
+commit011, pas seulement après la première modification de politique. Le
+socle49/543 n'est pas la totalité des consommateurs actuels : l'inventaire
+complémentaire sera persisté avant l'adaptation des clients. Aucun autre
+obstacle backend acquis par la revue ; aucune preuve fonctionnelle annoncée.
+
 ## 22 novembre2026 — reprise29 qualifiée,118et070 clôturés
 
 [Preuve positive](evidence/code-editor-control-interruption-dev-2026-11-22.json) :ef71eb7/474, pilote47037

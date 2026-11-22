@@ -70,7 +70,7 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
-| 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
+| 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
 | 5 | [SLS-083](#sls-083) Limites et en-têtes alignés sur Scaleway | Développer | `[ ]` | SLS-040 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md), [EXECUTION](EXECUTION.md) |
@@ -1341,9 +1341,11 @@ Tests exigés :
 <a id="sls-072"></a>
 ## SLS-072 — Journaux recherchables et corrélation d'exploitation
 
-Statut : [ ] — journaux par invocation présents ; vues, recherche, suivi et export absents.
+Statut : [~] — contrat détaillé décidé ; journaux par invocation présents,
+vues, recherche, suivi et export non implémentés ni qualifiés.
 Nature : Développer. Dépend de : SLS-061, SLS-074. Ordre : 3.
-Contrat : [journaux](CONSOLE_USABILITY.md#journaux-et-corrélation).
+Contrat : [EXECUTION_LOGS](EXECUTION_LOGS.md), complétant
+[journaux](CONSOLE_USABILITY.md#journaux-et-corrélation).
 
 Résultat attendu : retrouver et suivre les journaux d'une fonction ou d'un service sur une
 période, et passer d'une ligne à l'appel, à la version et à l'instance concernés.
@@ -1361,6 +1363,12 @@ Critères d'acceptation :
   rétention expirée et collecte indisponible signalées ; secrets expurgés ; valeurs
   d'authentification et corps métier non journalisés.
 - [ ] SLS-072.5 Export respectant les droits ; texte échappé, clavier et mobile.
+- [ ] SLS-072.6 Migration011 additive et déploiement gardé : intégrité/FK,
+  conservation des données et des sources réelles, puis régression du socle
+  49 campagnes / 543 groupes sur011 et des consommateurs ajoutés depuis,
+  inventoriés séparément avant adaptation. Les préconditions des clients courants
+  sont actualisées avant exécution ; les branches historiques et captures
+  scellées restent intactes. Les groupes communs ne sont comptés qu'une fois.
 
 Tests exigés :
 

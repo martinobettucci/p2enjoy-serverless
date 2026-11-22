@@ -1,5 +1,17 @@
 # Qualification de la plateforme
 
+## Journaux SLS-072 — campagne spécifiée avant code
+
+[EXECUTION_LOGS](../docs/EXECUTION_LOGS.md#découpage-et-qualification-réels)
+fixe douze groupes API et dix UI, puis25communs frais, le socle nommé
+49campagnes/543groupes sur011 et les consommateurs ajoutés depuis, inventoriés
+séparément avant adaptation. Les fixtures restent originales, les corpus
+passent par de vrais handlers Docker et les expirations par le temps réel.
+Les préconditions des clients courants seront actualisées vers011 ; aucune
+branche historique ni capture scellée n'est réécrite. Les communs rejoués
+ne s'ajoutent pas deux fois au nombre de groupes uniques. Aucune commande
+de cette nouvelle campagne n'est encore disponible à ce checkpoint.
+
 ## Brouillons et coupures du contrôle qualifiés —22 novembre2026
 
 La [preuve29](../docs/evidence/code-editor-control-interruption-dev-2026-11-22.json) passe quatre ciblés puis25communs

@@ -12,9 +12,10 @@ ZIP avec handler, les révisions, les instances et les invocations. Les journaux
 expurgés se consultent dans le détail d’une invocation. Les mesures Docker
 actuelles sont des relevés manuels ; l’allocation et la consommation sont
 distinctes. Le catalogue et la recherche globale SLS-067 sont implémentés et
-qualifiés à leur checkpoint. Favoris, actions en masse, éditeur de fichiers,
-client HTTP intégré, journaux avancés et monitoring historique restent à
-implémenter. Le [suivi des demandes](DEMANDES_ET_LIVRAISON.md) expose ces absences.
+qualifiés à leur checkpoint. L'éditeur de fichiers SLS-070 et le client HTTP
+SLS-071 sont également qualifiés. Favoris, actions en masse, journaux avancés
+et monitoring historique restent à implémenter. Le
+[suivi des demandes](DEMANDES_ET_LIVRAISON.md) expose l'état détaillé.
 
 Le parcours cible est : retrouver une fonction, lire sa configuration effective,
 modifier son code, publier, appeler sa véritable URL puis retrouver les journaux
@@ -154,6 +155,10 @@ Les exemples cURL et paramètres non sensibles peuvent être copiés pour reprod
 un appel depuis le véritable client métier.
 
 ## Journaux et corrélation
+
+Le [contrat détaillé SLS-072](EXECUTION_LOGS.md) fixe la migration011,
+la collecte finale expurgée, les événements publics de plateforme, les bornes,
+les snapshots et droits, le suivi et les preuves réelles avant réalisation.
 
 SLS-072 complète les journaux existants par une consultation par fonction et
 service : période, sévérité lorsqu’elle est connue, état et identifiant d’appel.

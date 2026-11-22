@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-072 : [contrat des journaux](docs/EXECUTION_LOGS.md) décidé avant code.
+  Registre SQLite borné, migration011 additive, collecte finale expurgée,
+  rétention par service, recherche, suivi réautorisé et exports finis sont
+  spécifiés. La qualification exigera les parcours réels et la régression
+  complète sur011 ; aucune fonctionnalité ni preuve supplémentaire livrée.
+
 - **SLS-118etSLS-070 sont clos** par [29groupes réels](docs/evidence/code-editor-control-interruption-dev-2026-11-22.json)
   sur474sourcesef71eb7/API046,26captures inspectées : deux SIGKILL137/HTTP502,
   brouillons persistants relus API/UI, pilotes explicites et déduplication.

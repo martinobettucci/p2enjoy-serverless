@@ -339,3 +339,37 @@ liées à l’acteur/service/fonction. Les jetons gardent le stockage par emprei
 existant, sans valeur claire enregistrée par le testeur. La
 [preuve31](evidence/function-http-client-task-exception-dev-2026-11-12.json) recoupe dix migrations,
 intégrité/FK, propriétaires1001 et réservations nulles après l’exception réelle.
+
+## Journaux d'exécution — migration011 spécifiée, non appliquée
+
+[SLS-072](EXECUTION_LOGS.md) ajoute un registre distinct de l'audit de sécurité.
+`execution_log_events` conserve une séquence autoincrémentée, un UUID public,
+une clé d'observation unique pour déduplication, les UUID service/fonction,
+source, type, niveau nullable, état, date observée, invocation/requête/instance,
+révision/hash/candidat/opération, message expurgé, métadonnées publiques fixes,
+indicateurs de troncature et octets UTF-8 comptabilisés. Les références de
+diagnostic n'empêchent pas la purge de leurs ressources. Index service/date,
+fonction/date et invocation ; les contenus sont limités à 10000 événements et
+32 Mio au total. Aucun secret ni corps métier n'est ajouté par la plateforme.
+
+`execution_log_state` garde l'identité durable de collection, son début réel,
+les compteurs transactionnels et sa frontière d'éviction. `service_log_policies`
+garde service unique, rétention entière de 1 à 10080 minutes, version positive,
+date de modification, frontière temporelle irréversible et génération
+d'effacement du périmètre. La frontière d'expiration avance ; augmenter la
+durée ne ressuscite jamais un contenu devenu expiré. Une suppression invalide
+explicitement les snapshots antérieurs concernés.
+
+`invocations.logs_collection_state` ajoute pending, collected, unavailable,
+not_started, expired et unknown. Les anciens buffers non vides sont collected ;
+un ancien buffer vide reste unknown. Les nouvelles terminaisons emploient le
+résultat du protocole runtime validé, jamais une déduction depuis le texte vide.
+La maintenance efface les contenus expirés par lots bornés, indépendamment de
+la chronologie conservée sept jours / 10000 appels et de son exception pour un
+tir planifié actif. La purge confirmée efface les contenus de sa fonction ;
+la suppression du service retire sa politique et ses contenus.
+
+Aucun historique d'événements de plateforme n'est fabriqué à la migration.
+La sauvegarde native, le déploiement gardé et le retour sans écrasement des
+écritures acceptées suivent le [contrat de déploiement](EXECUTION_LOGS.md#déploiement-et-retour).
+À ce checkpoint, le produit déployé reste en010 et aucune preuve011 n'est acquise.
