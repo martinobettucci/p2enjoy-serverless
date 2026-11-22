@@ -1,6 +1,7 @@
+# @spec docs/BACKLOG.md#sls-124 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-du-focus--sls-124
 # @spec docs/BACKLOG.md#sls-128 | docs/EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-de-code-compatible011--sls-128
 # @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOG_DEPLOYMENT.md
-# @verifies docs/BACKLOG.md#sls-072 | docs/BACKLOG.md#sls-128 | docs/EXECUTION_LOG_DEPLOYMENT.md#deux-frontières-explicites
+# @verifies docs/BACKLOG.md#sls-124 | docs/BACKLOG.md#sls-072 | docs/BACKLOG.md#sls-128 | docs/EXECUTION_LOG_DEPLOYMENT.md#deux-frontières-explicites
 """Supervised DEV schema011 deployment; never replace an accepted database."""
 from contextlib import closing
 import hashlib
@@ -26,6 +27,7 @@ OFFICIAL=('/etc/spark/env','/run/spark/secrets','/etc/spark/routes')
 PREFIX='serverless-apply-journal-schema-'
 UPDATE_PREFIX='serverless-update-journal-code-'
 UPDATE_BASELINE='sha256:1aa70214be1ba72bd75bea301fac23a3dbcdaf6547de1b3521c9547c8ac35292'
+FOCUS_BASELINE='sha256:bf9b61a60ae4d9284b037cce90816754c85ad43195500fa8542f8cfcd8c73c17'
 OLD='sha256:04604089a8cb61d6015be0cde1671f29265878ff4f6f081509542ebc126055fc'
 RUN_FOLDER=None
 
@@ -216,6 +218,9 @@ def identity(folder):
     assert sha(folder/'control_database.py')==item['database_helper_sha256']
     assert item.get('mode','schema-migration') in ('schema-migration','code-update')
     assert folder.name.startswith(UPDATE_PREFIX if item.get('mode')=='code-update' else PREFIX)
+    if item.get('mode')=='code-update':
+        assert item['update_profile'] in ('purge-rollback','journal-focus')
+        assert item['old']['image']==(FOCUS_BASELINE if item['update_profile']=='journal-focus' else UPDATE_BASELINE)
     return item
 
 
@@ -354,10 +359,11 @@ def verify_new(item):
         'official_files_unchanged':True,'reference_unchanged':True,'existing_columns_unchanged':True}
 
 
-def prepare(image,*,mode='schema-migration'):
+def prepare(image,*,mode='schema-migration',profile='purge-rollback'):
     signal.signal(signal.SIGALRM,expired);signal.alarm(90)
     assert mode in ('schema-migration','code-update')
-    baseline=UPDATE_BASELINE if mode=='code-update' else OLD
+    assert profile in ('purge-rollback','journal-focus')
+    baseline=(FOCUS_BASELINE if profile=='journal-focus' else UPDATE_BASELINE) if mode=='code-update' else OLD
     assert re.fullmatch('sha256:[0-9a-f]{64}',image) and image!=baseline
     manifest=json.load(sys.stdin);assert set(manifest)=={'backend','web'} and len(manifest['backend'])==42 and len(manifest['web'])==4
     assert all(re.fullmatch('[0-9a-f]{64}',value) for group in manifest.values() for value in group.values())
@@ -372,10 +378,22 @@ def prepare(image,*,mode='schema-migration'):
     baseline_manifest=None
     if mode=='code-update':
         baseline_manifest=embedded_manifest()
-        assert baseline_manifest['web']==manifest['web'],'code_update_web_changed'
         assert baseline_manifest['backend'].keys()==manifest['backend'].keys(),'code_update_backend_set_changed'
         changes=sorted(name for name,value in manifest['backend'].items() if baseline_manifest['backend'][name]!=value)
-        assert changes==['control/app/execution_logs.py'],'code_update_unexpected_backend_changes'
+        if profile=='purge-rollback':
+            assert baseline_manifest['web']==manifest['web'],'code_update_web_changed'
+            assert changes==['control/app/execution_logs.py'],'code_update_unexpected_backend_changes'
+        else:
+            assert not changes,'focus_update_backend_changed'
+            def by_type(web):
+                assert len(web)==4 and 'index.html' in web and 'favicon.svg' in web
+                js=[value for name,value in web.items() if name.startswith('assets/index-') and name.endswith('.js')]
+                css=[value for name,value in web.items() if name.startswith('assets/index-') and name.endswith('.css')]
+                assert len(js)==len(css)==1
+                return {'html':web['index.html'],'favicon':web['favicon.svg'],'js':js[0],'css':css[0]}
+            previous,candidate=by_type(baseline_manifest['web']),by_type(manifest['web'])
+            assert all(previous[key]==candidate[key] for key in ('favicon','css')),'focus_update_style_or_identity_changed'
+            assert all(previous[key]!=candidate[key] for key in ('html','js')),'focus_update_bundle_not_changed'
     nonce=uuid4().hex;folder=Path('/run')/((UPDATE_PREFIX if mode=='code-update' else PREFIX)+nonce);folder.mkdir(mode=0o700)
     write(folder,'preparation-intent.json',{'unit':folder.name,'image':image,'old':public_container(current),'at_ns':time.time_ns()})
     ownership_label='tech.p2enjoy.serverless.code-update' if mode=='code-update' else 'tech.p2enjoy.serverless.schema-deployment'
@@ -393,7 +411,7 @@ def prepare(image,*,mode='schema-migration'):
     assert len(migrations)==11 and migrations[-1]=='011_execution_logs.sql'
     old_migrations=migrations if mode=='code-update' else migrations[:-1]
     exact_schema(initial['snapshot'],old_migrations)
-    item={'mode':mode,'ownership_label':ownership_label,'folder':str(folder),'unit':folder.name,'old':public_container(current),'new_image':image,'reference':public_container(reference),
+    item={'mode':mode,'update_profile':profile if mode=='code-update' else None,'ownership_label':ownership_label,'folder':str(folder),'unit':folder.name,'old':public_container(current),'new_image':image,'reference':public_container(reference),
         'public_host':urlsplit(dict(value.split('=',1) for value in current['Config']['Env'])['SERVERLESS_PUBLIC_URL']).netloc,
         'state_identity':state_identity(),
         'configuration':configuration(current),'official_sha256':{name:sha(name) for name in OFFICIAL},'compose_sha256':sha(COMPOSE),
@@ -401,7 +419,7 @@ def prepare(image,*,mode='schema-migration'):
         'operator_sha256':sha(folder/'operator.py'),'database_helper_sha256':sha(folder/'control_database.py'),
         'initial_backup':initial,'backup_folder':str(archive),'old_migrations':old_migrations,'new_migrations':migrations,'image_manifest':manifest,'baseline_manifest':baseline_manifest}
     write(folder,'identity.json',item)
-    return {'completed':True,'prepared':True,'mode':mode,'unit':folder.name,'folder':str(folder),'new_image':image,'initial_backup':str(archive),'database_restored':False}
+    return {'completed':True,'prepared':True,'mode':mode,'update_profile':profile if mode=='code-update' else None,'unit':folder.name,'folder':str(folder),'new_image':image,'initial_backup':str(archive),'database_restored':False}
 
 
 def apply(folder):
@@ -481,7 +499,7 @@ def finalize(folder):
 
 if __name__=='__main__':
     assert os.geteuid()==0 and socket.gethostname()=='infra-serverless','DEV_only'
-    assert len(sys.argv)==3 and sys.argv[1] in ('prepare','prepare-update','apply','finalize')
-    if sys.argv[1] in ('prepare','prepare-update'):print(json.dumps(prepare(sys.argv[2],mode='code-update' if sys.argv[1]=='prepare-update' else 'schema-migration')),flush=True)
+    assert len(sys.argv)==3 and sys.argv[1] in ('prepare','prepare-update','prepare-ui-update','apply','finalize')
+    if sys.argv[1] in ('prepare','prepare-update','prepare-ui-update'):print(json.dumps(prepare(sys.argv[2],mode='schema-migration' if sys.argv[1]=='prepare' else 'code-update',profile='journal-focus' if sys.argv[1]=='prepare-ui-update' else 'purge-rollback')),flush=True)
     elif sys.argv[1]=='apply':apply(Path(sys.argv[2]))
     else:finalize(Path(sys.argv[2]))

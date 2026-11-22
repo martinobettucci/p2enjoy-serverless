@@ -70,7 +70,7 @@ export function ExecutionJournal({functionId,serviceId}) {
   const [live,setLive]=useState({items:[],busy:false,error:null,notice:''});
   const [format,setFormat]=useState('jsonl'),[exportState,setExportState]=useState({busy:false});
   const snapshot=useRef(null),cursor=useRef(null),liveWindow=useRef({items:[],generation:null});
-  const heading=useRef(null),exportRequest=useRef(null),download=useRef(null);
+  const heading=useRef(null),followCommand=useRef(null),exportRequest=useRef(null),download=useRef(null);
   const filterKey=endpoint+'?'+queryString(query.value)+'#'+query.epoch;
   const requestKey=filterKey+'&page='+query.page;
   const exportKey=filterKey+'#format='+format;
@@ -126,9 +126,10 @@ export function ExecutionJournal({functionId,serviceId}) {
           notice:changed || removedByPolicy?'Fenêtre actualisée après une expiration, une purge ou un changement de visibilité.':merged.length>200?'Les 200 dernières entrées de ce suivi sont conservées dans la page.':''});
         timer=setTimeout(poll,data.partial?0:2000);
       } catch(error) {if(current){
-        if(document.activeElement?.closest('[data-log-id]'))heading.current?.focus();
-        setRunning(false);
         const invalid=[401,403,404,409,410,422].includes(error.status) || error.responseInvalid;
+        // @spec docs/BACKLOG.md#sls-124 | docs/DESIGN_SYSTEM_APP.md#journaux-recherchables--contrat-sls-072-avant-code
+        if(document.activeElement?.closest('[data-log-id]') || (invalid && document.activeElement===followCommand.current))heading.current?.focus();
+        setRunning(false);
         if(invalid) {
           cursor.current=null;liveWindow.current={items:[],generation:null};snapshot.current=null;
           setLive({items:[],busy:false,error:friendly(error),requiresNew:true,notice:''});
@@ -232,7 +233,7 @@ export function ExecutionJournal({functionId,serviceId}) {
       {JSON.stringify(draft)!==JSON.stringify(query.value) && <p role="status" className="muted">Filtres modifiés : choisissez Rechercher pour les appliquer.</p>}
     </form>
     <div className="actions journal-controls">
-      {running?<button onClick={()=>setRunning(false)}><Pause aria-hidden="true"/>Mettre en pause</button>:<button disabled={Boolean(exportView.busy || filterError || (mode==='history' && (!historyView.data || historyView.loading || historyView.error)) || (mode==='live' && live.requiresNew))} onClick={startFollow}><Play aria-hidden="true"/>{mode==='live'?'Reprendre le suivi':'Suivre les nouveaux événements'}</button>}
+      {running?<button ref={followCommand} onClick={()=>setRunning(false)}><Pause aria-hidden="true"/>Mettre en pause</button>:<button ref={followCommand} disabled={Boolean(exportView.busy || filterError || (mode==='history' && (!historyView.data || historyView.loading || historyView.error)) || (mode==='live' && live.requiresNew))} onClick={startFollow}><Play aria-hidden="true"/>{mode==='live'?'Reprendre le suivi':'Suivre les nouveaux événements'}</button>}
       {mode==='live' && <button onClick={()=>apply(query.value)}>Revenir à cette période</button>}
       <Field label="Format de l’export"><select disabled={exportView.busy} value={format} onChange={event=>setFormat(event.target.value)}><option value="jsonl">JSONL</option><option value="text">Texte</option></select></Field>
       <button disabled={mode!=='history' || busy || Boolean(error) || !data || exportView.busy || exportView.finished} onClick={exportBatch}><Download aria-hidden="true"/>{exportView.busy?'Export…':exportView.nextOffset!=null?'Exporter le lot suivant':'Exporter cette période'}</button>

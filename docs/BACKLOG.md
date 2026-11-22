@@ -4268,3 +4268,13 @@ index.html recompilés avec le manuel seulement. Contrat de [mise à jour du foc
 Le profilpurge-rollback128 n'est pas assoupli ; le nouveaupréflight recoupe le
 manifeste de la baseline embarquée. Même garde011→011/possession/reprise, aucune
 restaurationDB. La relecture du correctif et sa qualification restent ouvertes.
+
+
+124 — correctif écrit/relu : intention ponctuelle du parentConservation après
+cleanup passif, ref de la commande de suivi et relais avant désactivation.
+Aucun P1/P2 statique restant ; les deux designsystems ont été lus entièrement.
+Build local puis imagea7d7491a inspectée :42backend identiques àbf, CSS/favicon
+conservés, JS/HTML seuls changés. Le profiljournal-focus est relu, les deux voies
+SQL/UI restent strictes. Le client préparatoire attend maintenant le vrai410
+et mesure les titres en1440/390px avec six vues. Bascule et replay restent à faire,
+10UI/25communs nonqualifiés ;124.3 reste ouvert.

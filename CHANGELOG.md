@@ -2,6 +2,14 @@
 
 ## [Non publié]
 
+- SLS-124 : les deux focusBODY de Conservation et du suivi sont reproduits
+  et [conservés avec leurs trois captures](docs/evidence/execution-journal-focus-first-failed-dev-2026-11-22.json).
+  Le parent du dialog restitue le titre stable après sa relecture ; un suivi
+  invalidé relaie sa commande focalisée vers le titre avant désactivation.
+  Le manuel suit ces replis. Imagea7d7491a construite avec42backend/CSS/favicon
+  identiques ; seuls JavaScript/HTML changent. Relecture statique et build passent,
+  bascule/replay desktop-mobile et10UI/25communs encore à produire.
+
 - SLS-128 : [mise à jour011→011 et reprise réelle de purge](docs/evidence/execution-journal-purge-recovery-dev-2026-11-22.json).
   Les effacements de logs par fonction/service utilisent ORROLLBACK pour éviter
   un sous-journalSQLite saturant/tmp16Mio. L'archive qui échouait passe202 puis

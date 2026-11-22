@@ -445,7 +445,8 @@ au-delà de la période historique. **Mettre en pause** arrête les lectures ;
 au plus 200 entrées et indique sa dernière lecture. Elle peut se mettre en
 pause pour conserver une entrée qui a le focus. Après une coupure, reprendre
 explicitement ; si le curseur a perdu des événements par conservation, ouvrir
-un nouveau relevé. Un suivi dure au plus sept jours. Ni pause ni reprise ne
+un nouveau relevé. Si ce refus désactive la commande de suivi qui avait le
+focus, le titre **Journaux** le reçoit. Un suivi dure au plus sept jours. Ni pause ni reprise ne
 relance un handler et les sorties d'un handler actif ne sont pas diffusées
 en continu.
 
@@ -464,7 +465,10 @@ expirer immédiatement des contenus déjà collectés. Augmenter ensuite la dur�
 ne les ressuscite pas. Un conflit conserve la saisie et impose une relecture ;
 si la réponse d'enregistrement manque, relire la politique avant toute nouvelle
 écriture. Le budget global du registre est de 10000 événements et 16 Mio de
-messages et métadonnées ; un retrait par capacité est signalé.
+messages et métadonnées ; un retrait par capacité est signalé. Après fermeture
+du formulaire et relecture de la politique, le titre **Conservation des journaux**
+reçoit le focus si la commande d’ouverture est temporairement indisponible ;
+un autre contrôle choisi entretemps le conserve.
 
 Les secrets effectifs connus sont expurgés avant stockage et recherche.
 La plateforme n'ajoute pas automatiquement les jetons, en-têtes ou corps métier

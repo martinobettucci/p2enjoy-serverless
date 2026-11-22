@@ -1,5 +1,5 @@
 // @spec docs/BACKLOG.md#sls-072 | docs/EXECUTION_LOGS.md#console-et-manuel | docs/DESIGN_SYSTEM.md | docs/DESIGN_SYSTEM_APP.md | docs/manual.md
-import React, {useRef,useState} from 'react';
+import React, {useEffect,useRef,useState} from 'react';
 import {api} from './api';
 import {DialogForm, ErrorMessage, Facts, Field, Resource, Section, Success, useResource} from './ui';
 import {retentionResponse,incompleteJournalResponse} from './execution-journal-contract';
@@ -9,9 +9,15 @@ export function LogRetention({serviceId,serviceName}) {
   const response=useResource(endpoint);
   let resource=response;
   if(Object.hasOwn(response,'data'))try{retentionResponse(response.data,serviceId);}catch(error){resource={...response,data:undefined,error,loading:false};}
-  const heading=useRef(null);
+  const heading=useRef(null),opener=useRef(null),focusAfterClose=useRef(false);
   const [editing,setEditing]=useState(false),[notice,setNotice]=useState('');
-  return <Section title="Conservation des journaux" headingRef={heading} action={<button disabled={!resource.data || resource.loading || Boolean(resource.error)} onClick={() => setEditing(true)}>Modifier la conservation</button>}>
+  // @spec docs/BACKLOG.md#sls-124 | docs/DESIGN_SYSTEM_APP.md#journaux-recherchables--contrat-sls-072-avant-code
+  useEffect(()=>{
+    if(editing || !focusAfterClose.current)return;
+    focusAfterClose.current=false;
+    if(document.activeElement===document.body || document.activeElement===opener.current)heading.current?.focus();
+  },[editing]);
+  return <Section title="Conservation des journaux" headingRef={heading} action={<button ref={opener} disabled={!resource.data || resource.loading || Boolean(resource.error)} onClick={() => {focusAfterClose.current=false;setEditing(true);}}>Modifier la conservation</button>}>
     <Success>{notice}</Success>
     <Resource resource={resource}>{row => <>
       <Facts values={[
@@ -20,7 +26,7 @@ export function LogRetention({serviceId,serviceName}) {
         ['Périmètre','Messages des fonctions et événements publics de ce service'],
       ]}/>
       <p className="muted">De 1 à 10080 minutes, soit sept jours au maximum. Un contenu expiré ne réapparaît pas si vous augmentez cette durée. La chronologie des invocations possède sa propre conservation.</p>
-      {editing && <RetentionEditor endpoint={endpoint} initial={row} serviceName={serviceName} focusTarget={heading} onClose={() => {setEditing(false);resource.reload();}}
+      {editing && <RetentionEditor endpoint={endpoint} initial={row} serviceName={serviceName} focusTarget={heading} onClose={() => {focusAfterClose.current=true;setEditing(false);resource.reload();}}
         onSaved={changed => setNotice(changed ? 'Conservation des journaux enregistrée.' : 'Cette durée est déjà enregistrée.')}/>}
     </>}</Resource>
   </Section>;

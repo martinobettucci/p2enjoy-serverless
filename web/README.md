@@ -1,10 +1,13 @@
 # Console web
 
 Les facettes Journaux et la conservation par service sont déployées avec le
-manuel canonique recompilé dans1aa70214/011. La construction et les quatre
+manuel canonique recompilé dans1aa70214/011, mêmes ressourcesweb dansbf9b61a6. La construction et les quatre
 ressources servies sont recoupées par la [bascule](../docs/EXECUTION_LOG_DEPLOYMENT.md).
 Les dix parcours UI072, leurs captures et les régressions restent à exécuter :
-ce checkpoint ne prouve pas encore leurs comportements ni leur rendu.
+le premier diagnostic124 a depuis reproduit deux pertes de focusBODY, avec
+trois capturesinspectées. Le correctif et son manuel sont construits dans
+a7d7491a, backend/CSS/favicon identiques, puis restent à basculer et qualifier.
+Les dix parcours complets et leurs régressions ne sont pas encore acquis.
 
 La [reprise29](../docs/evidence/code-editor-control-interruption-dev-2026-11-22.json) clôt070et118 sur474sourcesef71eb7/
 API046 : deux coupures137, brouillons relus API/UI, six handlers,26captures

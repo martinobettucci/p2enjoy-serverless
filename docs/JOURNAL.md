@@ -10174,3 +10174,13 @@ pas le premier rouge et n'ajoute aucun groupe complet. Le checkpoint source
 regroupe le registre/API/console réellement construits, ses fixtures et bancs ;
 qualification12API/10UI/25communs et régression entière restent ouvertes.
 Prochain geste : diagnostic clavier124 sur le même web, puis campagnes finales.
+
+
+### 22 novembre 2026 — Correctif clavier124 construit avant replay
+
+Les deux focusBODY sont scellés avec trois JPEG inspectés. Le parent porte le
+retour au titre après démontage du dialog ; le suivi relaie sa commande avant
+invalidations. RevueUI contre les deuxdesignsystems sansP1/P2 restant et build
+local réussi. Imagea7d7491a inspectée,42backend/CSS/favicon conservés ; profil
+journal-focus relu, sans bascule encore exécutée. Reprise : bascule gardée puis
+replay1440/390 avec vrai410, six captures et campagne10UI/25communs.
