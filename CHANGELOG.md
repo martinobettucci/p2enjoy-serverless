@@ -2,19 +2,28 @@
 
 ## [Non publié]
 
+- **SLS-118etSLS-070 sont clos** par [29groupes réels](docs/evidence/code-editor-control-interruption-dev-2026-11-22.json)
+  sur474sourcesef71eb7/API046,26captures inspectées : deux SIGKILL137/HTTP502,
+  brouillons persistants relus API/UI, pilotes explicites et déduplication.
+  Six handlers, sept candidats5pub/2failed, quatre révisions ; deux gardes
+  terminées dont indépendante50,289497s/83sondes, purge physique et compteurs0.
+  Premier rouge exclu ; critères antérieurs rapprochés sans cumul. Aucun
+  produit, image, manuel ou configuration officielle modifié.
+
 - Le premier complément de coupures070 est [échoué](docs/evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json) :
   une seule coupure receiving, fenêtre validating non atteinte20s, zéro qualifié.
   Deux gardes terminées, trois handlers, deux JPEG inspectés et purge physique.
   [118](docs/CODE_EDITOR_CONTROL_WINDOW.md) spécifie avant correction une base
-  compacte pour validating, sans changer les bornes ni les gardes ; nouveau29dû.
+  compacte pour validating, sans changer les bornes ni les gardes ; le replay29
+  qualifié ci-dessus conserve ce premier échec séparément.
 
 - Contrat de qualification [SLS-070.3/.5](docs/CODE_EDITOR_CONTROL_INTERRUPTION.md)
   persisté avant code : deux interruptions physiques du POST éditeur, brouillon
-  après redémarrage et nouvelle publication explicite ;29groupes encore à prouver.
+  après redémarrage et nouvelle publication explicite ;29groupes désormais qualifiés.
   Aucun changement produit, image, manuel ou configuration officielle.
   Le client HTTPS/UI et son opérateur ont produit le premier rouge473sources
   ci-dessus ; la correction118 est préparée après son contrat9a35d3d, avec
-  syntaxes contrôlées et474sources. Nouveau passage réel encore requis.
+  syntaxes contrôlées et474sources, puis replay29qualifié.
 
 - SLS-117 est close par [32groupes réels](docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json) :
   fermeture Page/target et reprise du même UUID sans POST en1440/390px, mutation

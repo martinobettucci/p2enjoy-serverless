@@ -70,8 +70,6 @@ bloquée est sautée et son blocage est nommé.
 | --- | --- | --- | --- | --- | --- |
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
-| 3 | [SLS-118](#sls-118) Acquisition de la validation du banc éditeur | Corriger | `[~]` | SLS-063 | [CODE_EDITOR_CONTROL_WINDOW](CODE_EDITOR_CONTROL_WINDOW.md) |
-| 3 | [SLS-070](#sls-070) Éditeur de code et de handler | Développer | `[~]` | SLS-063, SLS-074, SLS-118 | [CONSOLE_EDITOR](CONSOLE_EDITOR.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[ ]` | SLS-061, SLS-074 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#journaux-et-corrélation) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -115,12 +113,14 @@ Les critères089.1/.2/.3 attendent les accès/profils et rotation réels du cas4
 clôturent SLS-114 et complètent les preuves de070.1. Les
 [36groupes d’attentes UI](evidence/code-editor-adoption-focus-dev-2026-11-22.json)
 clôturent115/116 et complètent070.4 par rapprochement des preuves de diff/recherche/
-chemins.070.3/.5 restent ouverts pour persistance réelle et interruptions de publication.
+chemins. Les [29groupes de reprise](evidence/code-editor-control-interruption-dev-2026-11-22.json)
+ferment070.3/.5 et118 ; les huit critères de070 sont clos, époques rapprochées
+sans addition des groupes historiques.
 
 Unités parentes encore `[~]` et unités qui portent leur reste à faire :
 [SLS-001](#sls-001) → toutes ; [SLS-020](#sls-020) → SLS-089 ;
 [SLS-030](#sls-030) → SLS-090 et SLS-080 ; [SLS-040](#sls-040) → SLS-091 ;
-[SLS-050](#sls-050) → SLS-092 ; [SLS-060](#sls-060) → SLS-068 à SLS-073,
+[SLS-050](#sls-050) → SLS-092 ; [SLS-060](#sls-060) → SLS-068, SLS-069, SLS-072, SLS-073,
 SLS-081 et SLS-095 ; [SLS-066](#sls-066) → SLS-093 ;
 [SLS-074](#sls-074) → SLS-094 ; [SLS-082](#sls-082) → SLS-083 à SLS-088 et SLS-097.
 
@@ -883,12 +883,15 @@ Tests exigés :
 <a id="sls-070"></a>
 ## SLS-070 — Édition du code et du handler dans la console
 
-Statut : [~] —070.2 est clôturé par les [32 groupes des droits de source](evidence/code-editor-source-access-dev-2026-11-13.json)
+Statut : [x] — les [29groupes de reprise](evidence/code-editor-control-interruption-dev-2026-11-22.json) clôturent070.3/.5 après
+[rapprochement des critères](CONSOLE_EDITOR.md#persistance-et-publication-qualifiées-par-rapprochement),
+avec26captures inspectées, six handlers, deux coupures137 et purge physique.
+070.2 est clôturé par les [32 groupes des droits de source](evidence/code-editor-source-access-dev-2026-11-13.json)
 et les droits pendant IO de la preuve30, sans réaddition.070.1 est clôturé après
 les [32 groupes ZIP](evidence/code-editor-archive-boundaries-dev-2026-11-22.json)
 et le [rapprochement des preuves de sources](CONSOLE_EDITOR.md#sources-et-limites-qualifiées--22-novembre-2026).
 070.4 est clôturé par les [36groupes et leur rapprochement](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies).
-070.3/.5 restent ouverts ;070.6/.7/.8 conservent leurs preuves. Contrat détaillé dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
+070.3/.5 sont clôturés par le complément29 ;070.6/.7/.8 conservent leurs preuves. Contrat détaillé dans [CONSOLE_EDITOR](CONSOLE_EDITOR.md)
 avant code. Serveur et migration010 déployés sur7c5c6f4b ;
 [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json) qualifient une première tranche serveur,
 dont070.7. La première facette Éditeur est déployée sura77b6b4e et
@@ -1036,34 +1039,15 @@ Critères d'acceptation :
   la [preuve30](evidence/code-editor-source-lifecycle-dev-2026-11-13.json), mêmes
   modules serveur, zéro groupe ajouté. Les routes livrées n’exposent pas de ZIP
   source supplémentaire. Six fonctions/dix jetons/six parents des passages nettoyés.
-- [ ] SLS-070.3 Brouillon persistant côté serveur, rattaché à une révision de base ;
+- [x] SLS-070.3 Brouillon persistant côté serveur, rattaché à une révision de base ;
   conflit de version détecté ; saisies non enregistrées signalées avant de quitter.
-  Le [complément d’attentes UI](CODE_EDITOR_UI_CONCURRENCY.md) fixe avant son
-  client les quatre actions face au détail retenu et le focus après adoption.
-  Son [premier passage échoué](evidence/code-editor-adoption-focus-failed-dev-2026-11-22.json)
-  reproduit huit mesures BODY après quatre adoptions ; neuf groupes passent,
-  zéro qualifié.18gardes/24lecteurs restitués, huit handlers et purge physique
-  recoupés ;32JPEG inspectés. La correction115 est close par les
-  [36groupes](evidence/code-editor-adoption-focus-dev-2026-11-22.json) : quatre
-  adoptions/huit mesures textarea focalisé et huit replis h2, sans PUT,62captures.
-  Les deux échecs restent exclus ; persistance
-  après redémarrage et interruptions de publication restent distinctes.
-  Reprise du22novembre : le [contrat de continuité](CODE_EDITOR_PUBLICATION_CONTINUITY.md)
-  sépare les preuves restantes du POST unique : mutation avant préparation,
-  instantané après préparation, réponse perdue et préparation sans admission ;
-  sept groupes ciblés puis25communs selon le résultat ci-dessous, avant les coupures/restart.
-  Le premier passage becedfc/466 échoué reste exclu. [117](#sls-117) est close
-  par les [32groupes](evidence/code-editor-publication-continuity-dev-2026-11-22.json) :
-  mutation/snapshot, fermeture Page puis reprise et orphanprepared429/abandon.
-  La persistance après redémarrage reste à éprouver, sans nouvelle clôture de070.3.
-  Le [contrat de coupures du contrôle](CODE_EDITOR_CONTROL_INTERRUPTION.md) fixe
-  avant code les deux SIGKILL du POST éditeur, la persistance native/API/UI et
-  les gardes inchangées ; quatre groupes ciblés puis25communs restent à exécuter.
-  Le [premier passage](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json)
-  4a5d67d/473 échoue : receiving réellement coupé et repris, puis fenêtre20s
-  validating non acquise, sans seconde coupure. Zéro groupe qualifié, trois
-  handlers, deux captures desktop inspectées et purge physique. [118](#sls-118)
-  fixe avant correction une base compacte pour validating, sans changer les gardes.
+  Le [rapprochement des preuves](CONSOLE_EDITOR.md#persistance-et-publication-qualifiées-par-rapprochement)
+  conserve45/43/39 pour base/conflit/saisies/snapshot,36 pour réponses tardives
+  et focus,32 pour continuité du POST, sans addition de groupes.
+  [Reprise29](evidence/code-editor-control-interruption-dev-2026-11-22.json) :
+  mêmes ID/version/acteur/base/handler/ciphertext après deux vrais redémarrages,
+  fichiers relus API/UI1440/390. Abandon/création explicites entre les deux
+  bases A et C ; aucun brouillon reconstitué automatiquement après perte.
 - [x] SLS-070.4 Diff entre brouillon et code déployé ; recherche dans le fichier ; chemins
   invalides refusés.
   [Rapprochement des quatre preuves](CONSOLE_EDITOR.md#diff-recherche-et-attentes-qualifies) :
@@ -1072,22 +1056,18 @@ Critères d'acceptation :
   pour réponses tardives des quatre actions, refus404/429/retry, quatre recalages
   détaillés et focus volontaire/adoption. Époques conservées, aucun groupe ajouté.
   Les modules serveur sont identiques et le seul delta UI115 est qualifié dans36.
-- [ ] SLS-070.5 Publication par le pipeline de validation Docker existant, hash et
+- [x] SLS-070.5 Publication par le pipeline de validation Docker existant, hash et
   déduplication de SLS-074 ; un import refusé conserve la version active et le brouillon,
   avec diagnostic consultable ; handler CJS/ESM validé avec les vrais modules.
-  Le [contrat de continuité](CODE_EDITOR_PUBLICATION_CONTINUITY.md) porte les réponses perdues et orphelins du flux
-  éditeur ; les preuves POST préparation/PUT public ne les remplacent pas.
-  Constat documentaire avant reprise : le résumé courant de CONSOLE_EDITOR
-  mentionne encore070.1/.4 ouvertes ; le réaligner sur leurs clôtures prouvées,
-  en conservant les états historiques datés. Aucun critère nouveau fermé ici.
-  Revue du client avant gel : le cleanup initial abandonnait tout prepared de
-  la fonction sans comparer ses UUID aux intentions ; le contrôle de perte de
-  réponse s'arrêtait juste avant navigation. Exiger l'ensemble possédé avant
-  mutation/purge et absence de réponse jusqu'au départ achevé, avec requête
-  effectivement interrompue/jointe. Aucun E2E n'a précédé ces corrections.
-  Même revue : les états discriminants de plusieurs assertions n'étaient
-  enregistrés qu'après leur succès. Persister les projections HTTP/natives
-  autorisées avant assertions ; conserver aussi le premier rouge et son état.
+  [Rapprochement](CONSOLE_EDITOR.md#persistance-et-publication-qualifiées-par-rapprochement) :
+  serveur45/console43/sauvegarde39 pour CJS/ESM/YAML/import refusé et diagnostic,
+  mêmes six modules clés ; continuité32 pour mutation/snapshot/perte de réponse/
+  orphelin429, puis [reprise29](evidence/code-editor-control-interruption-dev-2026-11-22.json).
+  Deux vrais SIGKILL137/HTTP502, receiving complet puis validating vivant ;
+  candidatscontrol_interrupted nettoyés sans révision publiée, A/ETag/config
+  préservés. Pilotes B/D explicites, C choisie comme base sans promotion,
+  déduplication exacte après reprise. Six handlers, sept candidats5pub/2failed,
+  quatre révisions ; premier rouge118 conservé, aucun groupe ancien ajouté.
 - [x] SLS-070.6 Après publication : lien vers le test de SLS-071, promotion explicite ou
   pilote, retour à un hash précédent. Le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
   suit le lien d’une version pilote puis celui de la publication réelle de
@@ -3444,7 +3424,8 @@ Dépend de : SLS-063. Contrat : [CODE_EDITOR_NAVIGATION_OBSERVATION](CODE_EDITOR
 - [x] SLS-117.3 Persister le résultat et la décision avant correction du client ;
   nouveau gel et nouveau7+25sans cumul, neuf handlers, une garde, quatre vrais
   uploads partiels, dix captures ciblées et22communes inspectées, purge physique.
- 070.3/.5 restent ouverts pour leurs coupures et persistance après redémarrage.
+ À ce checkpoint117,070.3/.5 restaient ouverts ; le complément29 les clôture
+ après rapprochement des critères.
 
 Résultat117.3 : sept ciblés puis25communs frais, deux fermetures Page/target et
 reprises par GET, observateurs détachés avant le POST suivant ; neuf handlers,
@@ -3457,8 +3438,8 @@ coupure du contrôle ni persistance après restart acquise par cette campagne.
 <a id="sls-118"></a>
 ## SLS-118 — Acquisition de la validation du banc éditeur
 
-Statut : [~] — premier rouge scellé, décision avant correction ; aucun replay
-positif acquis. Nature : Corriger (banc de preuve). Ordre :3, préalable à
+Statut : [x] — [29groupes réels](evidence/code-editor-control-interruption-dev-2026-11-22.json) au gelef71eb7/474sources/API046,
+26captures inspectées, six handlers, deux coupures137 et purge physique. Nature : Corriger (banc de preuve). Ordre :3, préalable à
 070.3/.5. Dépend de : SLS-063. Contrat :
 [CODE_EDITOR_CONTROL_WINDOW](CODE_EDITOR_CONTROL_WINDOW.md).
 
@@ -3470,17 +3451,26 @@ positif acquis. Nature : Corriger (banc de preuve). Ordre :3, préalable à
   seconde requête ensuite200/publiée, aucune coupure validating ni vue mobile.
   Zéro qualifié, aucun commun. Produit/notes/config/référence/5982originaux
   conservés ; durée précise d’extraction et cause système non reconstruites.
-- [ ] SLS-118.2 Après persistance de la décision, garder le grand ZIP pour
+- [x] SLS-118.2 Après persistance de la décision, garder le grand ZIP pour
   receiving, publier un pilote C compact de deux vrais fichiers, abandonner
   explicitement le brouillon déjà éprouvé et créer une nouvelle base C pour
   validating. Même fonction/cible A/ETag, fenêtres20s/timer45s/protocole235s
   et gardes à l’octet. Aucun produit ni dépendance substituée.
   Implémentation préparée après9a35d3d : modes explicites, nouvelle base C et
-  contrôles par phase ; syntaxes JS/Python contrôlées,474sources. Critère non
-  fermé avant le nouveau passage réel.
-- [ ] SLS-118.3 Nouveau gel et nouveau4+25réels : deux coupures137, seconde
+  contrôles par phase ; syntaxes JS/Python contrôlées,474sources. Ces gestes
+  passent dans29 : C non promue, nouveau brouillon réellement sur sa révision.
+- [x] SLS-118.3 Nouveau gel et nouveau4+25réels : deux coupures137, seconde
   restitution indépendante, API/UI du brouillon conservé dans les deux phases,
   six handlers, sept candidats5pub/2failed, quatre révisions, déduplication,
   quatre JPEG ciblés et22communs inspectés, purge physique/repos/conservations.
   Le premier rouge reste exclu ;070.3/.5 exigent aussi le rapprochement avec
   leurs preuves historiques, sans cumul de groupes.
+
+Résultat118 : quatre ciblés puis25communs frais, pilote47037 sortie0/joint.
+Deux gardes terminées, seconde restitution indépendante50,289497s/83sondes,
+aucun secours ; six handlers et26captures inspectées. Sept candidats5pub/2failed,
+quatre révisions, deux créations/deux sauvegardes/un abandon de brouillon.
+Purge physique, compteurs0,38backend/quatreweb/010/manuel/notes/config/budgets/
+référence/5982originaux recoupés. Le premier rouge ajoute0groupe. Les sources
+serveur inchangées et les preuves historiques rapprochées ferment070.3/.5 ;
+les autres unités et la clôture globale095 restent ouvertes.

@@ -118,7 +118,18 @@ brouillon, et l’opérateur exige le nombre exact de fichiers de chaque phase.
 Le consolidateur recoupe sept candidats/cinq publications/quatre révisions et
 les audits de deux créations/deux sauvegardes/un abandon de brouillon.
 Syntaxes JS/Python contrôlées, index474sources ; les gardes et les bornes
-restent inchangées. Aucun nouveau passage réel n’est encore exécuté.
+restent inchangées. Le replay réel est qualifié ci-dessous.
 
-Le premier échec et la présente décision sont acquis ; SLS-118 et SLS-070
-restent ouverts jusqu’au replay positif et au rapprochement complet des critères.
+## Résultat qualifié du22novembre2026
+
+[Preuve29](evidence/code-editor-control-interruption-dev-2026-11-22.json) au gelef71eb7/474/API046 : quatre
+ciblés puis25communs frais, pilote47037 sortie0/joint,26captures inspectées.
+C est réellement publiée/non promue puis choisie comme base du nouveau
+brouillon ; validating est acquis sur deux entrées et le validateur vivant
+après CRC. Deux coupures137/502, deux gardes terminées, seconde restitution
+indépendante50,289497s/83sondes sans secours. Six handlers, sept candidats
+5pub/2failed, quatre révisions, déduplication et audits2/2/1 sont recoupés.
+Purge physique, tous compteurs0, backend/web/manuel/010/notes/configuration/
+budgets/référence/5982originaux conservés.118est close et le rapprochement
+des critères070.3/.5 dans CONSOLE_EDITOR clôt070. Aucun groupe de l’ancien
+rouge n’est ajouté ; ses inconnues système restent inconnues.

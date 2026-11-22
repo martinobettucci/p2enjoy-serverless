@@ -1,17 +1,29 @@
 # Éditeur de code et brouillons persistants
 
-## Coupures du contrôle depuis l’éditeur — premier passage échoué
+## Brouillons et coupures du contrôle qualifiés —22 novembre2026
 
-Le premier4+25 au gel4a5d67d/473sources s’arrête après deux groupes passés
-puis acquisition validating expirée20s : zéro qualifié, aucun commun. Une
-seule vraie coupure receiving137/HTTP502, brouillon relu API/UI sur ordinateur ;
-la seconde requête finit200/publiée sans coupure. Trois handlers, deux JPEG
-inspectés, deux gardes terminées et purge physique/repos recoupés.
-Le [contrat118](CODE_EDITOR_CONTROL_WINDOW.md) fixe avant correction une base compacte
-pour validating, en conservant20s/45s/235s et les gardes à l’octet ; nouveau
-4+25à produire. Modes compact/grand et base C préparés après9a35d3d, syntaxes
-contrôlées et474sources ; aucun replay exécuté. Produit, manuel, image et
-configuration officielle inchangés.
+La [preuve29](evidence/code-editor-control-interruption-dev-2026-11-22.json) passe quatre ciblés puis25communs
+frais, au gel474sources `ef71eb7`, API04604089/CIDe219f789. Pilote47037 sortie0
+et joint ;26captures ouvertes individuellement (4ciblées/16manuel/6connexion).
+Deux vrais SIGKILL/code137 et HTTP502, en receiving avec ZIP complet18 002entrées
+puis validating avec ZIPcompact2et validateur vivant après CRC. La seconde
+restitution est indépendante,50,289497s/83sondes dans le protocole235s ; deux
+gardes/helpers terminés, aucun secours utilisé. Les brouillons chiffrés, bases,
+versions, configuration et cibleA/ETag sont conservés, relus API/UI1440/390.
+
+C est réellement publié pilote puis choisi comme base d’un nouveau brouillon,
+après abandon explicite du premier déjà éprouvé. Reprises B/D explicites et
+déduplication : six handlers, sept candidats5pub/2failed, quatre révisions et
+audits de brouillon2créations/2sauvegardes/1abandon. Fonction purgée physiquement,
+jeton révoqué, parents retirés et tous compteurs0 ;38backend/quatreweb no-store,
+010/intégrités/FK, manuel18/74SHA8d2434cf, notes/config/budgets/référence et
+5982originaux recoupés. Produit, image, manuel et configuration inchangés.
+
+**118et070 sont clos**, après rapprochement explicite des critères antérieurs,
+sans cumul de groupes. Le premier rouge, les trois prérequis et les preuves
+historiques ajoutent0groupe ; cause système et fin d’extraction anciennes
+restent inconnues. Le JSONmobile est partiel dans son cadre défilant ; images
+distinctes des preuves DOM/HTTP/natives, texte agrandi distinct du zoomglobal.
 
 
 
@@ -20,7 +32,8 @@ avant code. Complète [CONSOLE_USABILITY](CONSOLE_USABILITY.md#éditeur-de-code-
 et le parcours courant de [publication par hash](FUNCTION_VERSION_EXECUTION.md).
 Le serveur et la migration010 sont déployés et partiellement qualifiés en DEV
 par [45groupes réels](evidence/code-editor-server-dev-2026-11-12.json). La première facette console est déployée et partiellement qualifiée sura77b6b4e.
-Les critères070.1/.2/.4/.6/.7/.8 sont clôturés ;070.3/.5 restent ouverts.
+Les huit critères070.1à070.8 sont clôturés ; l’état courant est API046 et le
+rapprochement ci-dessous distingue les époques de chaque preuve.
 La campagne de capacité réelle est détaillée dans
 [CODE_DRAFT_CAPACITY](CODE_DRAFT_CAPACITY.md), décision avant son client E2E.
 
@@ -236,7 +249,8 @@ et retour à un hash. **Tester la version publiée** ouvre la facette071 sur ce
 hash ; le [complément46](evidence/function-http-client-ui-admission-dev-2026-11-12.json)
 suit réellement ce lien après validation Docker et invoque son code. Avec les
 promotions/pilotes/retour A de la tranche43,070.6 est qualifiée. Les autres
-critères ouverts de070 gardent leurs preuves propres.
+critères de070 gardent leurs preuves propres et sont désormais clos par
+rapprochement, sans réaddition de ces groupes.
 
 Les preuves E2E créent des fonctions originales CJS/ESM par les vraies API et
 formulaires, avec vraie dépendance packagée et fichier binaire. Elles vérifient
@@ -836,8 +850,8 @@ quatre ressources HTTPS no-store, dix migrations/intégrités/FK, notes, budgets
 configuration, référence et5982originaux sont conservés. Manuel canonique servi
 inchangé :18chapitres/74paragraphes, SHA8a50ffa0. Aucun produit, schéma, seed,
 configuration ni comportement utilisateur ne change dans cette qualification.
-070.1 est clôturé par le rapprochement précédent ;070.3/.4/.5 restent ouverts
-pour attentes/focus et interruptions/persistance. Les groupes historiques ne
+Au gel0168ae2,070.1 était clôturé ;070.3/.4/.5 restaient ouverts
+pour attentes/focus et interruptions/persistance, depuis qualifiés par36et29. Les groupes historiques ne
 sont pas additionnés aux32 et aucune facette Éditeur n’est déduite des captures
 communes de ce nouveau passage.
 
@@ -908,5 +922,29 @@ Deux rouges, le diagnostic positif et les trois prérequis ajoutent zéro groupe
 Leurs inconnues réseau restent conservées. Les images ne prouvent pas les effets
 DOM/HTTP/natifs ; le code mobile n’est pas entièrement cadré, et le texte agrandi
 du manuel ne mesure pas un zoom global du navigateur.
-**070.3 persistance après redémarrage et070.5 coupures receiving/validating restent
-ouverts**. Le contrôle n’est pas redémarré pendant ce passage.
+**Au gel9b14b0d,070.3 persistance et070.5 coupures restaient ouverts**. Le contrôle n’est pas redémarré pendant ce passage.
+
+## Persistance et publication qualifiées par rapprochement
+
+La [reprise29](evidence/code-editor-control-interruption-dev-2026-11-22.json) clôt les derniers critères070.3/.5,
+sur474sourcesef71eb7 et l’API046inchangée, avec26captures inspectées et purge
+physique. Le premier passage4a5d67d/473 reste échoué, zéro groupe ajouté.
+
+| Critère | Preuves acquises et portée conservée |
+| --- | --- |
+|070.3, base et conflit|[Serveur45](evidence/code-editor-server-dev-2026-11-12.json) : base retenue, brouillon privé/version et409 ; [console43](evidence/code-editor-console-focus-dev-2026-11-12.json) : deux onglets, copie liée au chemin et adoption sans PUT implicite.|
+|070.3, saisie avant départ|Console43 : fichier/source/lien/déconnexion/rechargement ; [sauvegarde39](evidence/code-editor-save-confirmation-dev-2026-11-12.json) : snapshot envoyé distinct des frappes tardives et retrait des confirmations.|
+|070.3, réponses tardives et focus|[Adoption36](evidence/code-editor-adoption-focus-dev-2026-11-22.json) : quatre adoptions et huit replis ; UIe0c469a7 identique à la preuve29 et à la continuité32.|
+|070.3, durabilité après restart|Reprise29 : mêmes ID/version/acteur/base/handler/ciphertext avant et après chaque coupure, deux générations nouvelles, lecture API et UI1440/390 ; abandon/création explicites entre les deux bases.|
+|070.5, vrais imports et refus|Serveur45/console43/sauvegarde39 : CJS/ESM/YAML2.9.1, import cassé avec diagnostic, cible et brouillon conservés ; aucun rejeu de ces groupes prétendu ici.|
+|070.5, hash et pipeline|Serveur45/console43 : hash/révision canoniques et déduplication ; reprise29 : B/C/D pilotes réels, C choisie comme base sans promotion, six handlers et déduplication exacte après les coupures.|
+|070.5, POST et interruption|[Continuité32](evidence/code-editor-publication-continuity-dev-2026-11-22.json) : mutation409, snapshot, fermeture Page/GET mêmeUUID et orphelin429 ; reprise29 : deux SIGKILL137/HTTP502 du POST éditeur, receiving complet puis validating vivant, cleanupcontrol_interrupted et nouvelle action explicite.|
+
+Les six modules `code_editor.py`, `deployments.py`, `artifacts.py`, `validator.py`,
+`function_code_hash.py` et `validate-supervisor.mjs` ont les mêmes SHA dans les
+cinq manifestes45/43/39/36/32 et les sources courantes ; manifestes, gzip/bruts et
+leurs tailles sont revérifiés dans la preuve29. L’UI a ses époques distinctes :
+le delta de focus115 est qualifié par36, puis la même UIe0c est utilisée dans32
+et29. Aucun groupe historique n’est ajouté aux29nouveaux, aucun ancien rouge
+n’est transformé en succès. Les critères070.1/.2/.4/.6/.7/.8 gardent leurs
+propres pièces ; ce rapprochement clôt070 sans déclarer la clôture globale095.

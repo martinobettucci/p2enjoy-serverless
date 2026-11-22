@@ -1,5 +1,18 @@
 # P2Enjoy Serverless
 
+## Brouillons et coupures du contrôle qualifiés —22 novembre2026
+
+Preuve docs/evidence/code-editor-control-interruption-dev-2026-11-22.json :29groupes sur474sourcesef71eb7/
+API046/CIDe219,26captures inspectées et six handlers. Deux SIGKILL137/HTTP502,
+receiving complet puis validating vivant sur base compacte C ; brouillons
+conservés et relus API/UI, deux nouvelles générations et gardes terminées,
+indépendante50,289497s/83sondes sans secours. Sept candidats5pub/2failed et
+quatre révisions ; purge physique, jeton/parents retirés, compteurs0.
+070et118 clos après rapprochement sans cumul ; premier rouge0groupe conservé.
+38backend/quatreweb no-store,010, manuel18/74SHA8d2434cf, notes/config/budgets/
+référence et5982originaux recoupés. Produit, image et manuel inchangés.
+Cette note reste une proposition .? ; adoption et restructuration079.3 non revendiquées.
+
 ## Continuité de publication qualifiée —22 novembre2026
 
 Preuve docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json :
@@ -7,7 +20,7 @@ Preuve docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json :
 purge physique. Mutation409 sans candidat et snapshot B/brouillon C distincts ;
 deux fermetures Page/target et reprise GET mêmeUUID, quatre uploads receiving
 puis orphanprepared429 et abandon explicite. Une garde/un lecteur restitués.
-117close ;070garde restart/coupures. Manuel18/74SHA8d2434cf,010/38backend/quatreweb,
+Au gel9b14b0d,117était close et070gardait restart/coupures. Manuel18/74SHA8d2434cf,010/38backend/quatreweb,
 configuration/budgets/référence et5982originaux conservés. Deux rouges, diagnostic
 positif et trois prérequis ajoutent zéro groupe ; état HTTP inconnu conservé.
 Cette note reste une proposition .? ; adoption et restructuration079.3 non revendiquées.
@@ -22,7 +35,7 @@ Manuel servi18/74SHA8d2434cf,010,38backend/quatreweb, configuration/budgets,
 référence runtimeaf6 et5982originaux conservés. Retour APIaa214179 validé contre
 l’ancienne application433 ; bascule5c106957 et sauvegardes des deux bases.
 Trois prérequis et deux échecs ajoutent zéro groupe ; rollback de bascule non
-exécuté.070 garde persistance/redémarrage et interruptions de publication.
+exécuté. Au gelce8540a,070gardait restart/coupures, depuis qualifiés par29.
 Cette note est proposée en .? ; adoption et restructuration du guide079.3 non revendiquées.
 
 ## Sources et frontières ZIP qualifiées — 22 novembre 2026
@@ -34,8 +47,8 @@ capacité après413, dix révisions et six invocations Docker. Cinq fonctions
 purgées physiquement, générateur/sortie absents et jeton/parents retirés.
 38backend/quatreweb/no-store,010, manuel18/74, configuration/référence et
 5982originaux conservés.114 et070.1 sont clos après rapprochement des preuves
-antérieures distinctes ;070.3/.4/.5 restent ouverts pour attentes/focus et
-interruptions/persistance. Ancien essai et prérequis positif ajoutent zéro groupe.
+antérieures distinctes ; au gel0168ae2,070.3/.4/.5 restaient ouverts pour
+attentes/focus et interruptions/persistance, depuis qualifiés par36et29. Ancien essai et prérequis positif ajoutent zéro groupe.
 Proposition .? uniquement ; restructuration des notes079.3 toujours ouverte.
 
 ## Planifications qualifiées — 22 novembre 2026

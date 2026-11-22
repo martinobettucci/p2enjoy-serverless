@@ -1,10 +1,16 @@
 # Plan de contrôle
 
+La [reprise29](../docs/evidence/code-editor-control-interruption-dev-2026-11-22.json) clôt070et118 sur474sourcesef71eb7/
+API046 : deux coupures137, brouillons relus API/UI, six handlers,26captures
+inspectées et purge physique. Critères historiques rapprochés, sans cumul ;
+premier rouge conservé à0groupe. Produit, image et manuel18/74inchangés.
+
 La [continuité de publication](../docs/evidence/code-editor-publication-continuity-dev-2026-11-22.json)
 est qualifiée par32groupes sur469sources9b14b0d/API046 : neuf handlers et32captures
 inspectées, deux fermetures de page suivies du GET du même UUID, quatre uploads
-partiels puis préparation durable, refus d’admission429 et abandon, avec purge physique.117close ;070 garde
-la persistance après redémarrage et les coupures receiving/validating.
+partiels puis préparation durable, refus d’admission429 et abandon, avec purge physique.Au gel9b14b0d,117était close ;070 gardait
+la persistance après redémarrage et les coupures receiving/validating, depuis
+qualifiées par29.
 
 Le [retour de focus après adoption](../docs/evidence/code-editor-adoption-focus-dev-2026-11-22.json)
 est qualifié sur046 :36groupes réels,463sourcesce8540a et62captures inspectées.

@@ -1,5 +1,31 @@
 # Journal de cadrage
 
+## 22 novembre2026 — reprise29 qualifiée,118et070 clôturés
+
+[Preuve positive](evidence/code-editor-control-interruption-dev-2026-11-22.json) :ef71eb7/474, pilote47037
+sortie0/joint,4+8+8+9=29groupes. Receiving ZIPcomplet18 002 puis validating2,
+validateur vivant après CRC, deux signaux9/Docker137/HTTP502. Seconde perte
+helper réelle puis indépendante50,289497s/83sondes dans235s ; deux gardes et
+helpers terminés, aucun secours. Mêmes ID/version/acteur/base/ciphertext dans
+chaque phase, A/ETag/config conservés. B/D explicites, C publiée sans promotion
+puis nouveau brouillon créé sur C après abandon explicite ; déduplication D.
+Six handlers, sept candidats5pub/2failed, quatre révisions, audits2create/2save/
+1discard. Fonction purgée physiquement, jeton révoqué et deux parents retirés,
+compteurs0.38backend/quatreweb no-store/010/intégrités/FK, manuel18/74SHA8d2434cf,
+notes/config/budgets/référence/5982originaux recoupés ; produit/image inchangés.
+
+26images ouvertes individuellement :4ciblées/16manuel/6login,20SHA déclarés.
+JSONmobile partiel dans son cadre défilant, texte agrandi nonzoomglobal ;
+images distinctes des résultats DOM/HTTP/natifs. Revue RO résultats/publieur
+sans obstacle, garde historique renforcée et rerécoupée : manifestes/gzip/bruts/
+tailles/sixmodules identiques. Gzip6b0ad680/brut69d6f6db. Les preuves45/43/39/36/32,
+le premier rouge et trois prérequis ajoutent0groupe ; inconnues historiques
+non reconstruites. Rapprochement explicite dans CONSOLE_EDITOR :070.3/.5 et
+118clos, autres critères070gardent leurs preuves, aucune clôture globale095.
+Revue RO documentaire finale sans obstacle ;26inspections liées et limites
+conservées, unités111/089/095 ouvertes. Les notes de livraison restent des
+propositions .? et leur adoption079.3 n’est pas revendiquée.
+
 ## 22 novembre 2026 — reprise118 préparée après contrat poussé
 
 9a35d3d précède le code : packager --compact à deux fichiers originaux, grand

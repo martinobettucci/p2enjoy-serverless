@@ -1,17 +1,29 @@
 # Matrice de qualification réelle
 
-## Coupures du contrôle depuis l’éditeur — premier passage échoué
+## Brouillons et coupures du contrôle qualifiés —22 novembre2026
 
-Le premier4+25 au gel4a5d67d/473sources s’arrête après deux groupes passés
-puis acquisition validating expirée20s : zéro qualifié, aucun commun. Une
-seule vraie coupure receiving137/HTTP502, brouillon relu API/UI sur ordinateur ;
-la seconde requête finit200/publiée sans coupure. Trois handlers, deux JPEG
-inspectés, deux gardes terminées et purge physique/repos recoupés.
-Le [contrat118](CODE_EDITOR_CONTROL_WINDOW.md) fixe avant correction une base compacte
-pour validating, en conservant20s/45s/235s et les gardes à l’octet ; nouveau
-4+25à produire. Modes compact/grand et base C préparés après9a35d3d, syntaxes
-contrôlées et474sources ; aucun replay exécuté. Produit, manuel, image et
-configuration officielle inchangés.
+La [preuve29](evidence/code-editor-control-interruption-dev-2026-11-22.json) passe quatre ciblés puis25communs
+frais, au gel474sources `ef71eb7`, API04604089/CIDe219f789. Pilote47037 sortie0
+et joint ;26captures ouvertes individuellement (4ciblées/16manuel/6connexion).
+Deux vrais SIGKILL/code137 et HTTP502, en receiving avec ZIP complet18 002entrées
+puis validating avec ZIPcompact2et validateur vivant après CRC. La seconde
+restitution est indépendante,50,289497s/83sondes dans le protocole235s ; deux
+gardes/helpers terminés, aucun secours utilisé. Les brouillons chiffrés, bases,
+versions, configuration et cibleA/ETag sont conservés, relus API/UI1440/390.
+
+C est réellement publié pilote puis choisi comme base d’un nouveau brouillon,
+après abandon explicite du premier déjà éprouvé. Reprises B/D explicites et
+déduplication : six handlers, sept candidats5pub/2failed, quatre révisions et
+audits de brouillon2créations/2sauvegardes/1abandon. Fonction purgée physiquement,
+jeton révoqué, parents retirés et tous compteurs0 ;38backend/quatreweb no-store,
+010/intégrités/FK, manuel18/74SHA8d2434cf, notes/config/budgets/référence et
+5982originaux recoupés. Produit, image, manuel et configuration inchangés.
+
+**118et070 sont clos**, après rapprochement explicite des critères antérieurs,
+sans cumul de groupes. Le premier rouge, les trois prérequis et les preuves
+historiques ajoutent0groupe ; cause système et fin d’extraction anciennes
+restent inconnues. Le JSONmobile est partiel dans son cadre défilant ; images
+distinctes des preuves DOM/HTTP/natives, texte agrandi distinct du zoomglobal.
 
 
 
@@ -51,8 +63,7 @@ Deux rouges, le diagnostic positif et les trois prérequis ajoutent zéro groupe
 Leurs inconnues réseau restent conservées. Les images ne prouvent pas les effets
 DOM/HTTP/natifs ; le code mobile n’est pas entièrement cadré, et le texte agrandi
 du manuel ne mesure pas un zoom global du navigateur.
-**070.3 persistance après redémarrage et070.5 coupures receiving/validating restent
-ouverts**. Le contrôle n’est pas redémarré pendant ce passage.
+**Au gel9b14b0d,070.3 persistance et070.5 coupures restaient ouverts**. Le contrôle n’est pas redémarré pendant ce passage.
 
 [Diagnostic Page/target117](evidence/code-editor-page-closure-diagnostic-dev-2026-11-22.json)
 acquis sur469sources1749ffe : trois étapes, zéro groupe qualifié, trois JPEG

@@ -1,5 +1,18 @@
 # Design system du produit
 
+## Reprise de l’éditeur qualifiée —22 novembre2026
+
+[Preuve29](evidence/code-editor-control-interruption-dev-2026-11-22.json) :26images réellement ouvertes,
+quatre JPEGciblés1440/390,16JPEGmanuel et six PNGconnexion complémentaires.
+Deux tentativesfailed/control_interrupted et deux marqueurs persistés lisibles ;
+JSONdesktop complet, JSONmobile partiel avec défilement interne indiqué, sans
+débordement global. Focus visible sur le titre desktop, non identifiable dans
+les autres cadrages ciblés.18entrées du sommaire visibles sur tablette ;74
+paragraphes mesurés par pilote/SHA. Texte agrandi reste un cadrage, non une
+mesure de zoomglobal. Aucun défaut visuel bloquant retenu ; marque trois blocs.
+Images distinctes des preuves DOM/HTTP/natives et du parcours clavier complet.
+070/118 clos après les29groupes et rapprochement ; aucune modification UI/CSS.
+
 ## Coupures de l’éditeur — première observation échouée,22 novembre2026
 
 [Essai473sources](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json) :

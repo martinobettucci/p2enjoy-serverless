@@ -3,9 +3,10 @@
 Contrat de qualification des critères [SLS-070.3 et SLS-070.5](BACKLOG.md#sls-070),
 persisté le 22 novembre 2026 avant le client et son opérateur. La continuité
 sans redémarrage reste acquise par [ses 32 groupes](evidence/code-editor-publication-continuity-dev-2026-11-22.json).
-Le premier passage est [échoué](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json),
-zéro qualifié ; [SLS-118](CODE_EDITOR_CONTROL_WINDOW.md) fixe la correction
-contractuelle avant code. Le présent complément ne modifie aucun comportement utilisateur, schéma,
+Le [replay29](evidence/code-editor-control-interruption-dev-2026-11-22.json) est qualifié sur474sourcesef71eb7/API046.
+Le premier passage reste [échoué](evidence/code-editor-control-interruption-window-failed-dev-2026-11-22.json),
+zéro groupe ajouté ; [SLS-118](CODE_EDITOR_CONTROL_WINDOW.md) est close après
+sa correction contractuelle et son replay réel. Le présent complément ne modifie aucun comportement utilisateur, schéma,
 manuel, image produit, route ou configuration officielle.
 
 ## Décision et frontières observables
@@ -201,5 +202,20 @@ Le lecteur physique commun garde ses contrôles UUID/inventaire complet.
 La décision118 prépare le replay4+25 sur deux bases réelles et les nouveaux
 comptages ci-dessus. Après9a35d3d, les modes compact/grand, la création de
 base C et les comptes/audits sont implémentés dans le client, syntaxes
-contrôlées et index474sources. Aucun replay positif acquis ; produit, manuel
-et image restent inchangés,070.3/.5 ouverts.
+contrôlées et index474sources. Le replay29 est désormais acquis ; produit, manuel et image restent inchangés.
+Le rapprochement des critères dans CONSOLE_EDITOR clôt070.3/.5.
+
+## Résultat du replay du22novembre2026
+
+[Preuve29 et brut scellé](evidence/code-editor-control-interruption-dev-2026-11-22.json) :474sourcesef71eb7,
+pilote47037 sortie0/joint, quatre ciblés puis25communs frais et26images ouvertes
+individuellement. Deux coupures natives137/HTTP502 ;18 002entrées complètes en
+receiving, deux en validating avec même validateur vivant après mesures.
+Deux gardes et helpers terminés, aucun secours ; indépendante50,289497s/83sondes
+dans235s. Mêmes ID/version/acteur/base/ciphertext dans chaque phase et cibleA
+préservée. B/D explicites, C réellement publiée puis choisie comme nouvelle
+base après abandon explicite ; déduplication D exacte. Six handlers, sept
+candidats5pub/2failed, quatre révisions et audits2/2/1, purge physique/repos0.
+38backend/quatreweb no-store/010/intégrités/FK, manuel18/74SHA8d2434cf, notes,
+configuration, budgets, référence et5982originaux sont recoupés. Le premier
+rouge et ses inconnues restent séparés ;118et070 clos après rapprochement.
