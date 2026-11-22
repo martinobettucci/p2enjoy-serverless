@@ -111,3 +111,10 @@ les nouvelles sauvegardes. Le retour éventuel recrée l’application ancienne
 avec aa214179, sans prétendre restaurer l’ancien digest433. Nouvel UUID,
 étiquette propre, identités complètes, bornes et fichiers officiels restent requis.
 116 et115 restent ouverts jusqu’à bascule et36groupes qualifiés.
+
+La nouvelle bascule5c106957 est ensuite terminée sortie0 et jointe : API046/CIDe219f789,
+référence inchangée, sauvegardes contrôle/registre intègres, tables/migrations,
+fichiers officiels, budgets et5982originaux conservés. Tag et digestaa sont
+recoupés avant sauvegardes et nouveau tag propre. Le contenu embarqué046 est
+vérifié après démarrage ; aucune branche de retour n’est exécutée ni qualifiée
+par ce nominal. La campagne36 reste requise avant clôture116/115.

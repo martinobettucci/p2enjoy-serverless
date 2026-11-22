@@ -125,3 +125,14 @@ de leur phase ; un changement de phase de secours conserve son reçu. Même sur
 expiration locale, terminer/joindre le seul transport possédé, conserver son
 résultat et ne pas revendiquer la fin distante sans observation. Aucune campagne
 E2E ne part d’un état de bascule ou de secours non confirmé.
+
+## Contrôle046 déployé pour qualification
+
+La nouvelle opération5c106957 termine sortie0, transport joint. Seul le contrôle
+est recréé : CIDe219f789, image04604089, démarrage2026-11-22T03:40:50.265558467Z.
+Sauvegardes contrôle/registre dans before-editor-adoption-focus-5c10695706bf4937be317e7a69858a6f,
+sous1001 et intègres ; dix migrations/comptes, configuration, budgets, référence
+et5982originaux conservés.38backend/quatreweb correspondent à l’image construite.
+Le tag de retour possèdeaa214179 ; aucun retour n’a été nécessaire. Le premier
+arrêt de préparation reste séparé dans116. Cette bascule est un prérequis,
+zéro groupe qualifié ; nouveau gel463sources et replay36 encore requis.

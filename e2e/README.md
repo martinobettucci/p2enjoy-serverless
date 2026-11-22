@@ -221,7 +221,9 @@ prévoit le relais de focus parent et huit variantes de repli supplémentaires
 dans un seul groupe :11+25, neuf invocations et40+22captures. Aucun correctif
 qualifié ni nouveau passage à ce checkpoint. Le relais est désormais implémenté,
 le client contient le groupe de repli, et le build UI local passe ; l’image DEV
-et le passage36 restent à produire. L’index porte462sources.
+et le passage36 restent à produire à ce checkpoint. L’index porte désormais
+463sources avec le contrat de retour116. Le contrôle046 est ensuite déployé
+pour qualification, avec retouraa validé ; la campagne36 n’est pas encore lancée.
 
 ## Frontières du ZIP reconstruit — qualifiées en DEV
 

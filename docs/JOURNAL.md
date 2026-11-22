@@ -1,5 +1,17 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — bascule046 réussie, replay36 à produire
+
+Nouvel opérateur avec retouraa relu puis exécuté au gel485b97f/463sources.
+Opération5c106957 terminée37986/sortie0 et jointe ; sauvegardes natives des deux
+bases sous1001. Contrôle nouveauCIDe219f789/image046/démarrage03:40:50UTC,
+référence475be494/af6 inchangée. Tables/migrations/intégrités, configuration,
+budgets et5982originaux conservés ;38backend/quatreweb correspondent au build.
+Tag de retour aa disponible et étiquette d’opération recoupée ; aucun secours
+exécuté. Les octets applicatifs sont ceux du buildd028, le pin et les contrats
+de métadonnées ont suivi dans les gels ultérieurs. Premier arrêt et diagnostic
+116 restent exclus.115/116 gardent la preuve36 et ses captures à produire.
+
 ## 22 novembre 2026 — image de retour116 reconstruite et comparée au live
 
 Builder au gelbf4ba5b/463sources terminé58395/sortie0, client joint. Les63entrées
