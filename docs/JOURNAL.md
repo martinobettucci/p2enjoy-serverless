@@ -2,6 +2,11 @@
 
 ## 22 novembre 2026 — attentes UI070.3/.4 contractualisées avant client
 
+Le principal relève ensuite que le collecteur physique partagé n’admet pas le
+préfixe reader-concurrency déjà exigé par le gate. Décision avant adaptation :
+ajouter uniquement ce préfixe fermé avec huit hex, inventaireUUID exhaustif et
+toutes les gardes physiques conservées. L’opérateur de maintien reste inchangé.
+
 Après livraison114/070.1 poussée be41f8d, le principal vérifie l’exploration RO :
 le détail diff lit la vraie cible physique, la liste sans path ne la lit pas.
 Le choix conserve le gate existant et ses bornes/identités : nouveau client,

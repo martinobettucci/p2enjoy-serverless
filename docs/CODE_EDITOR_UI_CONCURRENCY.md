@@ -116,6 +116,15 @@ service/namespace. Inventaire SQL et ressources physiques de cet UUID sont
 recoupés ; aucun nettoyage global des objets étrangers. Huit invocations sont
 rapprochées de leurs lignes natives et du hash actif, sans nouvelle publication.
 
+Le recoupement physique emploiera le collecteur partagé storage-console-inspect
+via native_state(mapping), comme ZIP32. Sa liste fermée n’admet pas encore le
+namespace de lecteur ; ajouter seulement code-editor-read-concurrency suivi
+de huit hexadécimaux avant son premier usage. UUID du rapport et inventaire
+exhaustif doivent correspondre. Aucun contrôle de reçus, secrets vides, chemins,
+montages/backings, Docker/réseaux/canaux/baux n’est retiré. Cette admission de
+nom dans le collecteur de preuve ne change pas l’opérateur de maintien ni ses
+préconditions. Le nouveau contrat et le client rejoignent l’index des sources.
+
 Après les dix groupes,25communs frais en série. Gel propre committé/poussé,
 sources/image identiques avant/après chaque phase ;38backend/quatreweb no-store,
 manuel18/74SHA8a50ffa0,010/intégrités/FK, notes actives/proposées, budgets,
