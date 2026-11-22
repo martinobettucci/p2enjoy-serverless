@@ -1,5 +1,14 @@
 # Journal de cadrage
 
+## 22 novembre 2026 — contrat114 inclus dans le nouveau gel de preuve
+
+Le contrat de reprise114 rejoint l’index des sources de la suite, comme les
+autres contrats du banc. Le nouveau passage portera459sources ; les458sources
+du premier échec et de078 restent conservées dans leurs preuves d’époque.
+Ce raccordement ne modifie aucun scénario, groupe, délai ou service. La
+correction du helper est poussée464ee3e ; prérequis positif et nouveau7+25
+restent à exécuter avant qualification.
+
 ## 22 novembre 2026 — cause114 reproduite et choix persisté avant correction
 
 Le relevé natif du premier UUID bfc8ebae confirme conteneur/unité/sortie absents,
