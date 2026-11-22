@@ -6,7 +6,7 @@ configuration officielle et service `serverless-api` sur18090 ; référence inch
 
 ## État constaté et image construite
 
-Le22novembre2026, le contrôle réellement actif reste04604089, CIDe219f789,
+Avant la bascule du22novembre2026, le contrôle réellement actif est04604089, CIDe219f789,
 schéma001→010, santé et intégrités correctes, compteurs actifs nuls. L'image
 `p2enjoy-control:execution-journal-schema011` est construite et inspectée sous
 empreinte immuable
@@ -16,6 +16,15 @@ quatre fichiers web, dont `assets/index-DpcIaa1t.js`, et le manuel compilé.
 Le conteneur d'inspection est sans réseau ni volumes, retiré et joint.
 Cela atteste les octets de l'image ; aucune migration ni preuve fonctionnelle
 de cette image n'est acquise par sa construction.
+
+La bascule nominale est ensuite exécutée à11h00UTC sur cette même image :
+CID49a82269, `StartedAt=2026-11-22T11:00:17.493119926Z`, santé correcte,
+onze migrations, anciennes colonnes conservées,42fichiers backend et quatre
+ressources servies identiques. Les deux sauvegardes ont la même empreinte
+`0a517159b2c105a42961125cf182eab1902b86707ad8d664da46a359db0b965c`.
+Le post a vérifié le succès primaire ; l'unité est inactive, MainPID/ControlPID0,
+cgroup vide. Cette exécution est un prérequis, sans groupe fonctionnel ajouté.
+Elle ne remplace pas les tests072 ni une preuve de perte du pilote.
 
 Les identités exactes et la configuration sont recontrôlées au moment de la
 bascule. Les empreintes historiques de cet état ne remplacent pas ce contrôle.
@@ -124,3 +133,55 @@ sur les écritures nouvellement acceptées. Le socle49/543 et les consommateurs
 supplémentaires gardent leurs campagnes distinctes, dont la précondition
 [091.3](BACKLOG.md#sls-091) de rétention courante. Aucune de ces preuves n'est
 acquise par le présent contrat.
+
+
+## Mise à jour de code compatible011 — SLS-128
+
+Cette voie est distincte de la bascule010→011 historique ci-dessus. Elle part
+exclusivement du contrôle1aa70214 sain, conserve ses onze migrations exactes et
+une image candidate différente, construite et inspectée avant tout arrêt. Les
+fichiersSQL001→011 de la candidate correspondent aux migrations de la baseline.
+Elle ne remet ni046 ni une ancienne sauvegarde. Le seul changement attendu
+pour128 est execution_logs.py ; le web et tous les autres backend restent
+identiques à l'image1aa attestée. Aucun fichier officiel, quota ou montage
+n'est modifié, notamment /tmp16Mio.
+
+La précondition accepte l'archive possédée de128 encore retenue mais exige zéro
+fonction active, instance, invocation active, opération, candidat ou réservation.
+Les métadonnées de cette archive, ses logs et les compteurs du journal sont
+conservés pendant le remplacement ; ils ne sont effacés que par sa repriseAPI.
+La collectionUUID et le schémaSQL complet sont épinglés. Le pilote commun
+expose une préparation explicite prepare-update ; l'intention et le reçu nomment
+mode=code-update, sans détourner prepare qui garde son contrat010 historique.
+
+Avant arrêt, produire une sauvegardeSQLite native et un état complet ; après
+arrêt du seulCID/StartedAt1aa possédé, produire la sauvegarde finale et comparer
+l'intégrité, FK, migrations, schémaSQL et toutes les tables. Le snapshot final
+arrêté est la référence de conservation. Les copies restent privées et ne sont
+jamais écrites sur la base active. Sources, helpers et paramètres sont gelés
+sous nonce/root0700 avec empreintes, comme pour la première bascule.
+
+L'unité de mise à jour possède son nom significatif
+serverless-update-journal-code-<nonce>, un label de possession propre sur le
+nouveau conteneur, ses commandesDocker et leurs PID/naissance/cgroups. Elle
+reprend les bornes140s/200s/alarme180s, UID/GID explicites des clients et
+ExecStopPost existants. Une intention code-update-intent est écrite durablement
+avant sélection de l'image/recréation ; toute reprise après cette frontière
+vise exclusivement la même candidate011 compatible. Avant cette frontière,
+après arrêt, le secours peut seulement redémarrer le CID1aa exact, avec sa
+nouvelle génération recoupée dans sa propre fenêtre de démarrage. Une image1aa
+portée par un autreCID ne suffit pas à donner possession de ce conteneur.
+
+Après création, vérifier configuration, référence, fichiers officiels,
+backend42/web4 embarqués et ressourcesHTTP réelles no-store. Recouper toutes
+les tables et le schéma à la sauvegarde finale, collectionUUID et comptage
+réconcilié inclus ; aucune exemption globale des tables journal. Une variation
+inattendue échoue et reste à instruire. Les nouveaux logspérimés ne sont pas
+attendus pour ce corpus à septjours. L'ancien CID ne peut être remplacé que
+par une candidate portant le label/nonce prévu après l'intention de cette unité.
+
+Le succès primaire et la finalisation restent distincts. Leur reçu exact,
+unité inactive/MainPID0/ControlPID0 et cgroup vide précèdent toute qualification.
+La réussite d'un secours ne transforme pas l'échec primaire en succès de mise
+à jour. RepriseAPI de l'archive128 et campagne12API/10UI/25communs restent des
+preuves suivantes ; cette opération est un prérequis de déploiement seulement.

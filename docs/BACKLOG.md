@@ -4194,3 +4194,13 @@ Sources : [journaux d'instructionSQLite](https://www.sqlite.org/tempfiles.html#s
 [ROLLBACK](https://www.sqlite.org/lang_conflict.html). La mise à jour conserve
 la base011 et ne remet jamais046 ni une ancienne sauvegarde ; son contrat
 spécifique doit précéder son pilote.
+
+
+Complément de décision128 avant pilote : la voie prepare-update et sa garde
+sont spécifiées dans [mise à jour compatible011](EXECUTION_LOG_DEPLOYMENT.md#mise-à-jour-de-code-compatible011--sls-128).
+Elle garde la baseline1aa et une candidate011 distincte, les onze migrations,
+le schémaSQL, toutes les tables et la collection nonvide exacts ; seule l'image
+et sa génération changent. Même supervision et jonction140/200/180s, label/nonce
+propre, sauvegardes natives avant/aprèsarrêt, reprise enavant après intention,
+aucun046 ni restauration deDB. L'archive retenue constitue la donnée protégée
+de cette mise à jour, pas une précondition à masquer en la supprimant.
