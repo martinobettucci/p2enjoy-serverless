@@ -267,8 +267,15 @@ de cadence, de quota ou de configuration ne fait partie de cette mise à jour.
 
 La préparation refuse tout écart d'image initiale, de manifeste, de santé, de
 repos ou de configuration avant mutation du service. Elle conserve les contrôles
-existants sur les échéances : les lignes à conserver ne doivent pas expirer
-pendant la bascule. Aucune table n'est exemptée de la comparaison, notamment
+des échéances propres à ce profil : avant création de son répertoire, avant
+arrêt et avant intention, une lectureSQLite native sous propriétaire vérifie
+zéro événement et zéro invocation terminale nonexpired éligibles à expiration
+dans les600secondes suivantes (même floor, durée du service, défaut10080minutes).
+Les trois lectures utilisent chacune l’heure réelle et une transactionRO ; leur
+reçu garde seulement heure/horizon/comptages. Ce délai couvre la préparation90s,
+le pilote140s et le post180s ; il ne retarde aucune purge et n’exempte aucune ligne.
+Un corpus déjà éligible ou proche de son échéance refuse cette voie avant arrêt,
+puis doit être observé après sa maintenance normale avant une nouvelle demande. Aucune table n'est exemptée de la comparaison, notamment
 `execution_log_state`, les événements et les politiques. Les deux sauvegardes
 natives, schéma complet, collectionUUID, CID/génération, montages, référence,
 configurations officielles et bornes140/200/180 restent ceux du protocole011→011.
