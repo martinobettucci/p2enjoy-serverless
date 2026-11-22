@@ -43,8 +43,8 @@ retenus après commit natif. Toutes les JPEG doivent être ouvertes individuelle
 Le préparatoire `node e2e/execution-journal-policy-browser-diagnostic.mjs`
 partage le seul scénarioUI07 avec le clientcomplet, même stdin privé et
 purge systématique. Il attend le vrai requestfailed après Page.stopLoading
-sur le PUT retenu aprèscommit ; zéro groupequalifié. Son premierpassage
-reste à exécuter.
+sur le PUT retenu aprèscommit ; zéro groupequalifié. Le [préparatoire130](../docs/evidence/execution-journal-policy-browser-stop-replay-dev-2026-11-22.json)
+a passé ce cas et quatreétats, sans groupequalifié ; le full10 reste requis.
 Les25communs et l’orchestration de régression restent à produire :
 les12groupes API, même réussis, ne clôturent pas072.
 

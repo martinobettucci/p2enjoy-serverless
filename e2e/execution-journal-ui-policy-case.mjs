@@ -37,7 +37,7 @@ export async function retentionPolicyCase(c,cases) {
       transport.events.push({event:'stop-intent',at_ms:Date.now()});await c.save();await stop.send('Page.stopLoading');transport.events.push({event:'stop-ack',at_ms:Date.now()});
       const lost=await done(failed);assert(lost.failure());assert.equal(transport.response_status,null);
       await c.save();
-      await dialog.getByText(/Son résultat est inconnu/).waitFor();assert(await dialog.getByRole('button',{name:'Enregistrer',exact:true}).isDisabled());assert.equal(await input.inputValue(),String(wanted));await c.capture('retention-response-lost');
+      await dialog.getByText(/Son résultat est inconnu/).waitFor();assert(await dialog.getByRole('button',{name:'Enregistrer',exact:true}).isDisabled());assert.equal(await input.inputValue(),String(wanted));await c.capture('retention-response-lost',c.page,dialog);
       await committed.close();
       await response(c.page,policyPath,()=>dialog.getByRole('button',{name:'Relire la politique',exact:true}).click());await dialog.getByText(/Votre saisie est conservée/).waitFor();assert.equal(writes,1);
       c.observations.push({scenario:'committed-policy-response-lost-in-real-browser',before_version:prior.version,after_version:actual.version,put_requests:writes,network_failure_sha256:sha(lost.failure().errorText),draft_preserved:true});
@@ -47,12 +47,12 @@ export async function retentionPolicyCase(c,cases) {
     dialog=c.page.getByRole('dialog',{name:'Conservation des journaux',exact:true});input=dialog.getByLabel('Conservation (minutes)',{exact:true});await input.fill('1');
     const before=await c.value('/api/services/'+cases.service.id+'/log-policy');await cases.policy(cases.service,before.retention_minutes-1);
     await dialog.getByRole('button',{name:'Enregistrer',exact:true}).click();await dialog.getByRole('button',{name:'Confirmer la diminution',exact:true}).click();
-    await dialog.getByText(/La politique a changé dans une autre session/).waitFor();assert.equal(await input.inputValue(),'1');assert(await dialog.getByRole('button',{name:'Enregistrer',exact:true}).isDisabled());await c.capture('retention-conflict');
+    await dialog.getByText(/La politique a changé dans une autre session/).waitFor();assert.equal(await input.inputValue(),'1');assert(await dialog.getByRole('button',{name:'Enregistrer',exact:true}).isDisabled());await c.capture('retention-conflict',c.page,dialog);
     await response(c.page,'/api/services/'+cases.service.id+'/log-policy',()=>dialog.getByRole('button',{name:'Relire la politique',exact:true}).click());await dialog.getByText(/Votre saisie est conservée/).waitFor();assert.equal(await input.inputValue(),'1');
     await input.fill('0');assert.equal(await input.evaluate(element=>element.validity.rangeUnderflow),true);await input.fill('10081');assert.equal(await input.evaluate(element=>element.validity.rangeOverflow),true);await input.fill('1');
     await dialog.getByRole('button',{name:'Enregistrer',exact:true}).click();await dialog.getByText(new RegExp(cases.service.name)).waitFor();
     await response(c.page,'/api/services/'+cases.service.id+'/log-policy',()=>dialog.getByRole('button',{name:'Confirmer la diminution',exact:true}).click(),{method:'PUT'});await dialog.waitFor({state:'hidden'});
-    const current=await c.value('/api/services/'+cases.service.id+'/log-policy');assert.equal(current.retention_minutes,1);await until(()=>opener.isEnabled(),'retention_save_reread_missing');await c.capture('retention-saved');
+    const current=await c.value('/api/services/'+cases.service.id+'/log-policy');assert.equal(current.retention_minutes,1);await until(()=>opener.isEnabled(),'retention_save_reread_missing');await c.capture('retention-saved',c.page,retention);
     const finalCall=await cases.invoke('text');await c.value(endpoint(cases.fn),{method:'DELETE'});
     await c.page.goto(base+'/console/services/'+cases.service.id+'/logs?source=platform&invocation='+finalCall.id);await ready();
     await c.value(endpoint(cases.fn)+'/logs'+'?source=application&invocation='+finalCall.id,{status:404});
