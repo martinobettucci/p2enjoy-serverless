@@ -412,7 +412,14 @@ class Execution:
             await self.operations.sweep()
             self.reconciled=not self.operations.cleanup_error and self.operations.agent_ready
         except Exception as error:
-            logger.error(json.dumps({'event':'execution.recovery_failed','error_type':type(error).__name__}))
+            # @spec docs/BACKLOG.md#sls-126 | docs/EXECUTION_LOGS.md#diagnostic-expurgé-de-maintenance--sls-1265
+            trace=error.__traceback__
+            while trace and trace.tb_next:trace=trace.tb_next
+            logger.error(json.dumps({'event':'execution.recovery_failed','error_type':type(error).__name__,
+                'sqlite_errorcode':getattr(error,'sqlite_errorcode',None),'sqlite_errorname':getattr(error,'sqlite_errorname',None),
+                'phase':'recovery','previous_maintenance_error':self.maintenance_error,
+                'source':{'file':trace.tb_frame.f_code.co_filename.rsplit('/',1)[-1],
+                    'function':trace.tb_frame.f_code.co_name,'line':trace.tb_lineno} if trace else None}))
 
     async def ready(self,installation):
         self.installation=installation;self.started=True;self.root.mkdir(mode=0o700,exist_ok=True)
