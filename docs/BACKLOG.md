@@ -5498,7 +5498,7 @@ Workerfb662de7 finalisé en échec et client joint ; ne pas réutiliser les272
 comme campagne complète ni effacer le premier refus140. Le constructeur140
 passe réellement, mais ses migrations/partial/full/25communs restent dus.
 
-- [ ] SLS-141.1 Sceller le rouge, programmes/529sources, erreurs et rapports
+- [x] SLS-141.1 Sceller le rouge, programmes/529sources, erreurs et rapports
   exacts, cinqJPEG inspectées et clôture/possession/étatnatifs recoupés ;
   distinguer272partiels, quatreUI partiels et zéro groupe global qualifié.
 - [ ] SLS-141.2 Établir la réponse réelle et le rendu attendus pour le seulappel
@@ -5509,3 +5509,32 @@ passe réellement, mais ses migrations/partial/full/25communs restent dus.
   événements plateforme/handler, erreur de code et HTTPmétier distingués,
   texte échappé et expurgé ; clavier/mobile/captures, vrai nettoyage et replays
   connexes puis socle49 complet frais. Une preuve manquante garde l'unité ouverte.
+
+141.1 — [rouge courant scellé](evidence/schedules-execution-ui-log-state-first-failed-dev-2026-11-23.json) :
+TAR529 exact de470b6ea, quinze campagnes/272groupes et quatreUI partiels,
+zéro groupe qualifié globalement. Dix-huitcaptures ouvertes individuellement,
+dont cinqUI ; aucun cadrage du point fautif. Worker/client/PID/cgroup terminés,
+purge physique de la fonction et configuration/secrets vides, huitcompteurs0,
+originaux/configuration/référence/5982 conservés. DTO initial non retenu.
+
+Décision141 avant code : l'ancien texte a été supprimé par072 dans le composant
+servi ; son attente est impossible, indépendamment du DTO initial inconnu.
+Le handler métier503 termine normalement sans écrire. Recueillir le vrai DTO
+déjà retourné par tab('Invocations'), avant assertions, sélectionner exactement
+son UUID et exiger succeeded/HTTP503/logsvides/collected, puis nouveau texte
+exact « Collecte confirmée : aucun message émis. » et absence depre. Conserver
+le contrôle d'erreurcode/HTML/secret et les douze groupes existants.
+Dans leurs scénarios réels déjà présents, recouper aussi not_started après
+refus avantdispatch et unavailable après perte du runtime, avec leurs textes
+exacts. Les états expired/unknown gardent les preuves072/historiques propres,
+aucun état fabriqué pour les atteindre. TroisJPEG de détail supplémentaires
+(videcollected, refusnot_started, perteruntimeunavailable), soit15 pour ce client.
+
+La reprise ciblée est12UI puis25communs frais, avec deuxsessionsSSO réelles,
+sources/image/natif/acteurs et captures liés ; puis nouveau49 depuis le début.
+Pilotes locauxexec sansrejeu, UI1800/stop60/contrôleur2000 et communs3600/60/3800,
+PID/naissance/cgroup actifs puis terminés et vrais retours capturés. Réutiliser
+les collecteurs courants stricts en nommant leur responsabilité de console,
+sans faire passer un reçuUI pour un reçuAPI. Aucun produit/image/configuration,
+délai métier ni branche historique changé ; la correction de texte du contrat
+CONSOLE_EXECUTION suit le comportement déjà déployé.

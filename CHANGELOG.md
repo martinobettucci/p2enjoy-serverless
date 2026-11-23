@@ -4,7 +4,9 @@
 
 - SLS-141 inscrit : le deuxième socle courant s'arrête sur l'état de journal
   attendu dans l'historiqueUI, après272groupes partiels et troisprérequis.
-  Client et worker fermés, rapport/cinqJPEG conservés ; cause à instruire.
+  Client et worker fermés, rouge scellé et18captures inspectées ; oracle
+  de texte supprimé par072 identifié. DTO/étatscollected/not_started/unavailable
+  et15JPEG du client décidés avant code, reprise12UI/25communs puis49 due.
   Le constructeur140 passe réellement, migration et suite restent dues.
 
 - SLS-140 inscrit : le socle49 courant refuse le SHA d'authentification au

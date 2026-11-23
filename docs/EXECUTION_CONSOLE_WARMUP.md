@@ -121,3 +121,27 @@ trace détaillée est conservée dans le brut ; le premier code de sortie1 est
 observé par l’opérateur sans stderr retenu, sans revendiquer deux traces
 indépendantes. Ces diagnostics n’ont aucune mutation et ajoutent zéro groupe. SLS-105 est
 terminée ; la campagne49/543 de078 et la clôture095 restent distinctes.
+
+## Parité de collecte sur011 — SLS-141
+
+Le [refus du socle courant](evidence/schedules-execution-ui-log-state-first-failed-dev-2026-11-23.json)
+sur470b6ea/529sources/f016 atteint sixinstances et quatre groupesUI, puis attend
+un ancien texte de journalvide absent du composant depuis072. Les douze groupes
+du21novembre gardent leur imageb452 et ne qualifient pas les nouvelles branches
+de collecte011. La réponse exacte du GET fautif n'a pas été conservée.
+
+La correction décidée avant code conserve les douze scénarios, sixinstances,
+pagination5+1, vrais gestes depuisl'accueil et tous les refus/nettoyages. Le
+DTO du GET réellement émis par la page est conservé avant assertions sous une
+projection sûre (UUID/état/statutHTTP/collecte/troncature/taille et SHA du buffer).
+Le métier503 doit être succeeded/collected avec buffer vide ; le refus avant
+dispatch not_started et la perte runtime unavailable sont recoupés dans leurs
+scénarios existants, puis leurs libellés exacts sont vérifiés dans le mêmearticle.
+Trois nouvellesJPEG de détail complètent les douze captures antérieures.
+
+Rejouer12UI/25communs sur leur nouveau gel, sans groupes uniques ajoutés au
+socle49, puis reprendre ce dernier depuis son premier prérequis. Les pilotes
+exec et leurs délais sont ceux de141 ; les programmes/source/rapports sont
+figés et les unités/PID/naissances/cgroups joints avant chaque phase suivante.
+Cette correction ne change aucun composant de produit ni la qualification
+historique105. Les états expirés/anciens conservent leurs preuves propres072.

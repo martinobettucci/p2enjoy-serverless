@@ -10677,3 +10677,24 @@ cinqJPEG. Workerterminé1/finalisé/clientjoint, preuve complète non acquise.
 Les septJPEG contrôleUI et sixPNG connexion déjà inspectées gardent leurs reçus.
 141 enregistré avant correction ; conserver le rouge et qualifier ses images,
 étatnatif et réponse/rendu réels avant de décider.140 garde ses replays dus.
+
+### 23 novembre 2026 — Rouge141 scellé et décision avant correction
+
+Preuve272partiels/quatreUI scellée avec TAR529 de470b6ea, exacts rapports et
+18images réellement ouvertes. Fonction12f94b44 purgée physiquement, secrets/
+configuration vides, worker/client/PIDnaissances/cgroup terminés ; natiforiginal
+restauré09:10:20 et configuration/référence/5982/huit0. L'avertissement réel de
+socket Unix reste dans stderr, sans masquer le refusTimeOut ; la purge propre
+et les compteurs sont recoupés séparément. Aucun DTO/DOM du point fautif retenu.
+
+L'exploration RO confirme le diff072 : seul l'oracle de textevide est supprimé,
+les autres littéraux du client restent définis. Décision : garder le vrai DTO
+navigateur avant assertions et exiger succeeded/503/collected/buffer vide puis
+le nouveau libellé et absence depre. Renforcer aussi les scénarios existants de
+refusavantdispatch et perte runtime par DTO/textes not_started/unavailable.
+TroisJPEG de détail supplémentaires, douze groupes inchangés. Projetter seulement
+les champspublics, taille/SHA du buffer, aucun contenu/cookie/secret enregistré.
+12UI puis25communs frais sous unités localesexec bornées et clôtures externes ;
+puis49entier. Réutilisation explicite des collecteurs sans qualifier un UI enAPI,
+aucune modification de produit/image/configuration ou délai. Contratconsole
+corrigé sur le sens déjà déployé de collecte vide, ancienne preuve105 intacte.

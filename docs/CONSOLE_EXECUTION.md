@@ -37,8 +37,12 @@ code de diagnostic, observation du démarrage et journal. Le démarrage garde
 les trois valeurs Oui, Non et Non confirmé ; il n’est pas une autorisation de
 rejouer. Les journaux restent du texte échappé, multiligne, défilant localement,
 avec une indication explicite lorsqu’ils sont tronqués. Un appel actif sans
-journal indique que celui-ci sera disponible à sa fin ; un appel terminé sans
-journal indique l’absence de collecte. Aucun corps métier n’est ajouté.
+journal indique que celui-ci sera disponible à sa fin. Pour un appel terminé,
+l'état de collecte distingue un résultat runtime valide sans message
+(`collected`), une collecte indisponible après envoi (`unavailable`), un appel
+jamais envoyé au runtime (`not_started`), un contenu expiré/purgé (`expired`)
+et un ancien statut inconnu (`unknown`). Un buffer vide ne signifie donc pas
+une absence de collecte. Aucun corps métier n’est ajouté.
 
 Les états chargement, vide et erreur sont explicites. Actualiser et les commandes
 de page restent hors de la liste remplacée. Un changement de page place le focus
