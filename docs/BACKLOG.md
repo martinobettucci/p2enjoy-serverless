@@ -4595,7 +4595,7 @@ sources009 et leurs exports demeurent strictement immuables.
   zéro groupe réadditionné. Rejouer ensuite le socle et les consommateurs
   inventoriés de072.6, captures et nettoyages recoupés avant clôture.
 
-- [ ] SLS-132.6 Le collecteur distingue le curseur critique F=C+min(n,40)×300
+- [x] SLS-132.6 Le collecteur distingue le curseur critique F=C+min(n,40)×300
   du curseur final D, conformément au contrat et au vrai client. Recouper les
   survivants/retraits exacts au mêmeF, puis les pagesAPI avec leur relevé natif
   àD, sans exiger les mêmes UUID lorsque F<D. Rapports SHA/gzip/unités liées,
@@ -4891,3 +4891,5 @@ Décision : corriger ce collecteur selon ces deux étapes existantes, conserver
 intégralement les vecteurs réels et leur SHA, sans changer le test, la borne,
 les dates ni reconstruire les fenêtres manquantes. Nouveau132.6 inscrit avant
 traitement ; aucun groupe supplémentaire ni rejeu du countacquis.
+
+132.3/132.6 — [borne numérique courante réellement acquise](evidence/schedule-firing-retention-count-schema011-query-dev-2026-11-22.json),526sourcesf9e3e4b/f016 :84fenêtresmanquées,41fenêtres de256 et10496→10000 avec496retraits exacts au même curseurF ; récupération réelleàD,10000autresUUID et112pagesAPI recoupés. Deuxinvocations anciennes conservées, zérohandler nouveau, observation13,661s ; restitutionnominale, source scellée intacte, unitéexec/CGjointe et huitcompteurs0/5982. Collecteur corrigé et relu : SHA/gzip/rapport/unité liés, compteurs aprèsF627maximum distincts de ceux APIàD626maximum.132.6 passe sans replay ;132.3 attend encore les deuxâgescourants,132.5 et134.4 les autres consommateurs/régressions.

@@ -3272,3 +3272,9 @@ ensembles10002→10001→10000, observation14,405s, deuxpurgespubliques et resti
 nominale. Node/worker0, stderr0/EOF, gardesjointes et originaux/5982/compteurs0
 sont recoupés. Cette preuve fixe ne requalifie pas les anciensrouges et ne
 remplace pas count/âge/échéances ni la campagne complète.
+
+La [borne numérique courante](../docs/evidence/schedule-firing-retention-count-schema011-query-dev-2026-11-22.json)
+passe ses troisgroupes sur526sourcesf9e3e4b/f016 :10496→10000/496retraits au
+curseur critique, puis fin du rattrapage et112pagesAPI au curseurD. Les deux
+vecteurs et leurs compteurs restent séparés, avec SHA/gzip/unité extérieure
+recoupés ; aucun handler nouveau ni groupe de clôture ajouté.

@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-132.3/132.6 : borne réelle10496→10000 qualifiée sur f016 avec496retraits
+  exacts, puis rattrapage final et112pagesAPI. Collecteur distingue les deux
+  curseurs et leurs compteurs ; troisgroupes réels, source et originaux intacts,
+  unité/cgroup joints. Les deuxâges et autres régressions restent dus.
+
 - SLS-132.6 : collecteur numérique refusé avant publication après troisgroupes
   E2E réussis ; il confondait curseur du premier lot et fin du rattrapage quand
   plus de40fenêtres sont manquées. Correction spécifiée depuis le contrat
