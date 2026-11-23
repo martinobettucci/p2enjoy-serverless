@@ -72,6 +72,7 @@ bloquée est sautée et son blocage est nommé.
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
 | 3 | [SLS-140](#sls-140) Attestation courante du constructeur historique | Corriger | `[~]` | SLS-104 | [STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md#attestation-courante-du-constructeur--sls-140) |
+| 3 | [SLS-141](#sls-141) États de journal dans l'historique d'invocation | Corriger | `[~]` | SLS-061 | cette unité |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -5477,5 +5478,34 @@ zéro groupe, un prérequis, builder1 avant SSH ; TAR529 du Gitad9f1a9, trace46,
 rapport et worker terminés1, client joint. Natif extérieur identique, génération/
 configuration/référence/5982/huit0. Le constructeur corrigé exige désormais
 manifest47 complet et module exact, gzip/brut/12API dont02 ; la preuve089 est
-liée séparément. Syntaxe valide et revue indépendante sansP1/P2 ; nouvelle construction/parcours
-restent dus.
+liée séparément. Syntaxe valide et revue indépendante sansP1/P2 ; construction réelle réussie
+au deuxième socle470b6ea. Les parcours de migration/partial et25communs restent
+dus après son échecUI141 ; aucune clôture140 acquise par le seul build.
+
+## SLS-141 — États de journal dans l'historique d'invocation
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-061. Ordre : 3.
+Contrat : cette unité, EXECUTION_LOGS et EXECUTION_CONSOLE_WARMUP.
+
+Constat réel : le deuxième socle49 courant au gel470b6ea/529sources/f016
+termine1 dans execution-ui, après15campagnes/272groupes et troisprérequis.
+Quatre groupesUI partiels passent, puis le cinquième attend15s à la ligne150
+le texte « Aucun journal collecté. » dans l'appel métierHTTP503 terminé.
+Ce texte ne devient pas visible ; aucune cause produit ou oracle n'est encore
+établie. Clientcompletedfalse/cleanuptrue, faults[] et cleanupErrors[] ; cinq
+JPEG conservées. Les autres groupesUI et la suite ne sont pas qualifiés.
+Workerfb662de7 finalisé en échec et client joint ; ne pas réutiliser les272
+comme campagne complète ni effacer le premier refus140. Le constructeur140
+passe réellement, mais ses migrations/partial/full/25communs restent dus.
+
+- [ ] SLS-141.1 Sceller le rouge, programmes/529sources, erreurs et rapports
+  exacts, cinqJPEG inspectées et clôture/possession/étatnatifs recoupés ;
+  distinguer272partiels, quatreUI partiels et zéro groupe global qualifié.
+- [ ] SLS-141.2 Établir la réponse réelle et le rendu attendus pour le seulappel
+  métier terminé, en recoupant le contrat et le vrai DTO/journal ; décider et
+  persister la correction avant code. Aucun remplacement de réponse ou d'état,
+  retry arbitraire, skip ou suppression d'une assertion d'étatvide.
+- [ ] SLS-141.3 Prouver les états applicables réels de l'historique, journalvide,
+  événements plateforme/handler, erreur de code et HTTPmétier distingués,
+  texte échappé et expurgé ; clavier/mobile/captures, vrai nettoyage et replays
+  connexes puis socle49 complet frais. Une preuve manquante garde l'unité ouverte.

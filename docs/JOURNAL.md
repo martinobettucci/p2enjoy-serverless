@@ -10665,3 +10665,15 @@ syntaxePython valide et gardes historiques inchangées. Contrôle local extérie
 supplémentaire : PID/naissance du worker et du client terminés, cgroup disparu.
 Le prochain49 repartira de sa première commande sur le nouveau vecteur529,
 sans reprendre le prérequisSSO ni un groupe du rouge précédent.
+
+### 23 novembre 2026 — Deuxième socle courant interrompu,141 inscrit
+
+Workerfb662de7, source470b6ea/529/f016 : builder140 et deuximages adaptateur
+réellement construits,15campagnes/272groupes et troisprérequis passent, puis
+execution-ui échoue après quatregroupes sur l'attente « Aucun journal collecté. »
+dans une invocation métier503 terminée. Timeout15s/ligne150 ; aucune cause
+attribuée avant diagnostic. Clientcleanuptrue, faults/cleanupErrors vides et
+cinqJPEG. Workerterminé1/finalisé/clientjoint, preuve complète non acquise.
+Les septJPEG contrôleUI et sixPNG connexion déjà inspectées gardent leurs reçus.
+141 enregistré avant correction ; conserver le rouge et qualifier ses images,
+étatnatif et réponse/rendu réels avant de décider.140 garde ses replays dus.

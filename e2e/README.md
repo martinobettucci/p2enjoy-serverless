@@ -61,7 +61,10 @@ au prérequis storage-legacy-build : ancien SHAauth089 différent du recheck072.
 Worker8731613d fermé, client joint et originaux intacts ; un prérequis SSO réussi,
 zéro groupe qualifié. [SLS-140](../docs/BACKLOG.md#sls-140) conserve ce rouge et
 rattache explicitement le module courant à47, avec intégrité gzip/brut/12API,
-et089 comme origine séparée. La construction réelle et le nouveau49 restent dus.
+et089 comme origine séparée. La construction réelle passe au deuxième socle470b6ea, qui s’arrête ensuite
+sur [SLS-141](../docs/BACKLOG.md#sls-141) dans execution-ui :272groupes partiels,
+quatreUI partiels et troisprérequis, aucun passage49 complet. Les parcours
+historiques et la nouvellecampagne restent dus.
 
 ### Historique des préparations et campagnes précédentes
 
