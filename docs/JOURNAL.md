@@ -10857,3 +10857,20 @@ conservés. SLS-143 enregistre le défaut avant traitement. Décision : sceller,
 recouper métadonnées/journaux expurgés/UUID/purges, puis instrumenter si besoin
 avant nouveau parcours ; aucunretry, fauxétat ou délai relâché. Les452 et deux
 partiels restent zéroqualifié globalement ;49et32 toujours dus.
+
+143.1 scellée :35rapports/529TAR/89images, troisvraiespurges et huit0,
+42backend/quatrewebno-store/manuel84 ; revue et vérification indépendantes
+sansP1/P2. L'appel c59fabe8, hashd025d393, admis à12:57:46UTC, échoue avant
+dispatch en101ms ; handler_started0 et execution.failed/StorageError corrélé.
+Codeagent et corps503 perdus ; logs expirés aprèspurge noninterprétés.
+Le premiercollecteurRO vise storage_operations inexistant : refus1 conservé,
+copiecorrecte storage_commands0 puis lecturelog0, aucune écriture distante.
+
+Décision avantinstrumentation143 : améliorer la conservationHTTP avantassertion
+dans le banc, puis observer les seuls échanges du vraiagent de stockage par
+strace borné déjàinstallé, sans toucher au produit/image/fourcore ni au
+protocole. Associations FD/close/accept, framesJSON et UUIDstricts ; brutprivé,
+projectionexpurgée de la seule acquisition possédée, PID/naissance/unité et
+TracerPid0 après jonction. Aucun arrêt métier, buffer/registre/SQL modifié ;
+influence d'ordonnancement explicite. Si aucun refus ne se reproduit, conserver
+ce résultat sans attribuer rétrospectivement le souscode manquant.

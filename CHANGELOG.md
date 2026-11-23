@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- SLS-143 : quatrième socle49c94a28d/529/f016 arrêté sur le premier appel
+  d'écriture du parcours stockage, attendu200/reçu503 après deuxpromotions.
+  452groupes antérieurs/deuxAPI partiels, zéroqualifié globalement ; rouge
+  scellé avec35rapports/89captures inspectées et troispurges recoupées.
+  Admission puis StorageError avantdispatch établies, souscode et corps
+  originaux inconnus. Worker/client fermés, configuration/référence/5982/huit0
+  conservés, revue indépendante sansP1/P2. Diagnosticnatif et conservationHTTP
+  décidés avantcode ; aucune correctionproduit ni réussite future revendiquée.
+
 - SLS-142 inscrit : troisième socle courant453900d/529/f016 arrêté sur la
   barrière native aprèscommit du transport de service, après313groupes et
   quatreprérequis. Troisgroupesclient partiels, nettoyage et fermeture externe

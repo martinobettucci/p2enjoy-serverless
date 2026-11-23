@@ -9,6 +9,15 @@ manuel et régressions passent ; les captures et nettoyages sont recoupés.
 Le [checkpoint initial](evidence/storage-console-checkpoint-dev-2026-11-07.json)
 conserve ses neuf parcours navigateur antérieurs.
 
+Le [replay courant refusé](evidence/schedules-storage-console-invocation-first-failed-dev-2026-11-23.json)
+c94a28d/529/f016 ne remplace pas ces preuves historiques : le premier appel
+d'écriture reçoit503 après publication/promotion, avantdispatch, avec un
+StorageError corrélé mais sans souscode ni corpsHTTP retenu. DeuxgroupesAPI
+partiels, troispurges physiques et89captures du socle conservées ; aucun49
+complet qualifié. [SLS-143](BACKLOG.md#sls-143) définit le diagnosticnatif et
+la conservation des observations avantassertion, sans changer le contrat
+de stockage ni transformer un nouveau succès en causehistorique.
+
 ## Portée et droits
 
 Une fonction active expose son stockage avec Read ou une session administrateur.

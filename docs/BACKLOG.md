@@ -5645,7 +5645,7 @@ conservation avant un nouveau parcours complet, avec décision motivée avant
 correctif. Aucun retry automatique, fauxDTO, écritureSQL, suppression
 d'assertion ou allongement arbitraire de délai pour obtenir200.
 
-- [ ] SLS-143.1 Sceller le rouge, rapports/programmes/TAR529 exact, trace,
+- [x] SLS-143.1 Sceller le rouge, rapports/programmes/TAR529 exact, trace,
   résultat terminal et clôture externe ; recouper troispurges, configuration
   et réservations, les89captures fraîches déjà inspectées et leurs limites.
   Distinguer452antérieurs/deuxAPI partiels/zéroqualifié globalement.
@@ -5660,3 +5660,32 @@ d'assertion ou allongement arbitraire de délai pour obtenir200.
   puis25communs frais avec captures inspectées ; nouveau49 depuisle début
   et complément32/276, sources/image/native/clients/gardes recoupés.
   Une preuve manquante laisse l'unité ouverte.
+
+143.1 — [premier503 scellé](evidence/schedules-storage-console-invocation-first-failed-dev-2026-11-23.json) :
+35rapports, TAR529 exactGitc94,89captures inspectées, worker1/lanceurjoint/
+naissances/cgroupvide et namespacehôte épinglé recoupés. Troispurges réelles,
+configuration/secrets vides, huit0/référence/configuration/5982,42backend/
+quatrewebno-store et manuel84. L'uniqueappel est admis puis failed503 avant
+dispatch, handler_started0 ; journal corrélé StorageError, codeprécis inconnu.
+Logs expired/événements retirés aprèspurge ne reconstruisent pas la collecte
+initiale. PremiercollecteurRO1 sur tableinexistante, secondelecture0 et
+lecturelog0, programmes/erreurs conservés. Revue et vérification indépendantes
+sansP1/P2 ;452antérieurs/deuxpartiels/zéroqualifié globalement.
+
+Décision143.2 avant instrumentation : conserver le résultatHTTP expurgé et les
+identifiants avant l'assertion du client. Pour distinguer le refusagent d'une
+erreur de protocole, observer les vrais recvfrom/sendto du seulprocessus agent
+DEV au moyen du strace déjàinstallé, sur une fenêtre bornée du parcours9.
+Épingler PID/naissance/unité, reprendre les requêtes/réponses par FD et fermer
+leur association à chaque close/accept ; cadrerJSON et UUIDfonction/consumer
+stricts, exporter seulement métadonnées et code d'erreur. Le protocoleagent ne
+transporte ni jetonsHTTP, ni environnement, ni secrets, ni code utilisateur.
+Le brut reste privé sousSHA ; fragments/troncatures/FDnoncorrélé restent des
+limites, jamais un refus supposé. Aucune écriture mémoire/registre/SQL,
+aucunrésultat substitué, aucunparamètre d'exécution changé. L'observation
+peut influencer l'ordonnancement ; unpassage nominal ne reconstitue pas le
+codeperdu du premier503. Unité systemd bornée, terminaison/jonction et
+TracerPid0 de l'agent exigés avant preuve suivante. Le logger produit serait
+une autre option, mais modifierait l'image et les quatre modules de rétention
+sans avoir encore établi un défautproduit ; le diagnosticnatif limité garde
+ici le même exécuteur et constate le protocole qui fait autorité.

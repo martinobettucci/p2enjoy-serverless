@@ -2,6 +2,13 @@
 
 ## Journaux déployés — qualification en cours
 
+Le quatrième socle49 courant est [arrêté sur un503 de stockage](docs/evidence/schedules-storage-console-invocation-first-failed-dev-2026-11-23.json) :
+30campagnes/452groupes antérieurs, puis deuxgroupesAPI partiels, zéroqualifié
+globalement.89captures inspectées et troisfonctions purgées physiquement ;
+worker/client fermés et originaux conservés. SLS-143 porte le diagnostic :
+StorageError avantdispatch établie, souscode et corpsHTTP perdus. Le socle49
+complet et le complément32 restent dus ; les anciensrouges restent distincts.
+
 Le registre011, ses API et les facettes Journaux fonction/service sont déployés
 en DEV sur l'imagef016a1b7, avec la consolea7d7491a et le manuel canonique
 recompilé. Les diagnostics126 ajoutent codeSQLite/site de maintenance expurgés. La requête

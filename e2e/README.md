@@ -2,6 +2,13 @@
 
 ## Journaux SLS-072 — qualification courante sur f016
 
+Le [quatrième rouge du socle49](../docs/evidence/schedules-storage-console-invocation-first-failed-dev-2026-11-23.json)
+conserve c94a28d/529/f016,35rapports et89captures inspectées :452groupes
+antérieurs puis deuxgroupes du client stockage, avant503 à sa premièreécriture.
+Troispurges et clôture externe acquis, zéroqualifié globalement. SLS-143 porte
+le diagnostic avantdispatch/StorageError ; souscode/corpsHTTP nonretenus.
+Ne pas réutiliser ces groupes comme un49 complet ni lancer32 en parallèle.
+
 Le [passage courant](../docs/evidence/execution-journal-complete-schema011-query-dev-2026-11-23.json)
 passe **47groupes réels :12API,10UI puis25communs**, au gel1c706f0/529sources,
 imagef016. Trois contrôleurs0, acteurs/cgroups/gardes joints et purge physique ;
