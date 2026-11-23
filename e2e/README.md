@@ -3255,3 +3255,8 @@ Les oracles35/detach vérifient le diagnostic enrichi et le couple d’attache
 SIGTRAP/PTRACE_EVENT_STOP5/128 ; le mode40 exige toujours l’absence de traceback
 aprèsSIGKILL. Les wrapperscourts requièrent la clôture externe de leur unité
 possédée et, aprèsrouge, restore/status réels avant un autretest.
+
+Le [refus réel de fenêtre courte](../docs/evidence/invocation-production-window-preflight-dev-2026-11-23.json)
+passe sur526sourcesc63014f/f016 :1849,233s avantW, zéroHTTP/zérotir puis reprise
+indépendante. Unitéutilisateur et cgroup joints extérieurement ; un groupe support,
+aucun groupe nominal ajouté. Le nominal positif du précontrôle reste à passer.

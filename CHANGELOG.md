@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-133.5 : refus préparatoire réel acquis à1849,233s avantcron, avec
+  SSO/deuxpublications/deuxinstances et zéroHTTP/zérotir. Reprise indépendante
+  et unitélocale/cgroup vides recoupés ; un groupe support, nominal positif dû.
+
 - SLS-133.5/134.6 : précontrôle du budget1980s ajouté avant charge nominale ;
   oracles35/detach recoupent les nouveaux champs et le vrai couple5/128.
   Limites et calcul du cron conservés, traceback absent exigé aprèsSIGKILL40.
