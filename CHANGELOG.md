@@ -5,10 +5,10 @@
 - SLS-146.2 : décision de diagnostic du banc persistée avant code : phases et
   compteurs natifs bornés, primaire/finalisation distinctes, identités àl’armement,
   vrais flux bornés et métadonnéesHTTP avantassertion. Observateurs/SQL/signaux/
-  délais conservés ; instrumentation en cours et syntaxe contrôlée localement.
-  TroisP2 de revue àcorriger avantcommit/déploiement : garder le secours après
-  refusSIGCONT, valider chaque protocole joint et borner le tampon de ligne.
-  Mode diagnosticSIGTERM distinct0groupe prévu ; qualification DEV encore àlivrer.
+  délais conservés ; instrumentation et trois correctionsP2 de revue implémentées,
+  syntaxe contrôlée : secours conservé après refusSIGCONT, validation de chaque
+  protocole joint et tampon de ligne borné dès réception. Relecture sansP1/P2,
+  mode diagnosticSIGTERM distinct0groupe ; qualification DEV encore àlivrer.
 
 - SLS-146 : [premier refus ZIP scellé](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json),
   gel5eaf3ab/530/f016,55groupes antérieurs et13checks partiels, troisprérequis,

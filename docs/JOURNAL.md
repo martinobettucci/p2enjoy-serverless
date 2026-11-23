@@ -11273,3 +11273,16 @@ assemblage readline, sans perdre le SHA/suffixe réels. SELECT/oracles/bornes et
 ControlObserver inchangés ; aucune E2E acquise. L’arbre reste local, le code
 n’est pas encore committé ni déployé. Ces corrections appliquent la garde
 existante et ne déduisent toujours aucune cause du refus historique.
+
+Les trois correctionsP2 sont implémentées aprèsd3bcf7f : résultat d’envoiSIGCONT
+séparé de cibleterminée, timer maintenu armé sur refus et erreurs de finalisation
+conservées ; validation de chaque transport aprèsdone, sans commande aux enfants
+déjàclos ; parseur binaire àtampon64Kio avant sautdeligne, suffixe/SHA réels
+indépendants et dépassement en échec. AST/Python, node--check et diff--check0.
+Relecture avantcommit/déploiement, aucune E2E encore acquise.
+
+Seconde revue sansP1/P2 résiduel sur les septfichiers stabilisés ; aucuneécriture
+ni opération distante/E2E du relecteur. ComparaisonAST des littérauxSQL natifs
+égaleHEAD, quinze noms de groupes inchangés et control_database strictement
+égalHEAD. Les troisP2 sont corrigés, bornes/oracle503 conservés. Checkpoint de
+code autorisé ; qualification DEV et cause historique restent dues.

@@ -190,11 +190,13 @@ sans soumettre de mutation : il vérifie la primaire native et la restitution,
 compte zéro groupe et ne remplace aucun des quinzegroupes. Toute nouvelle faute
 reste conservée et instruite, sans retry.49/543/18 puis32/276 restent dus.
 
-L’instrumentation est en cours dans les deux fichiers du banc ; syntaxe
-Python/Node contrôlée sur l’arbre local, sans commit de code ni qualification
-fonctionnelle à ce checkpoint. La première revue signale troisP2 à corriger :
-secours après erreurSIGCONT, protocole de tous les transports et tampon de ligne.
-Le diagnostic séparé prévu se lance avec
+L’instrumentation est implémentée dans les deux fichiers du banc ; syntaxe
+Python/Node contrôlée, sans qualification fonctionnelle à ce checkpoint. Les
+troisP2 de la première revue ont leur correction dans l’arbre : secours conservé
+si SIGCONT échoue, validation de chaque transport joint, parseur borné par
+octets avant assemblage de ligne. Relecture sansP1/P2 résiduel ; aucune E2E
+encore exécutée sur ces octets.
+Le diagnostic séparé se lance avec
 `node e2e/function-storage.mjs --diagnose-guard-interruption`, après création
 d’une vraie session administrateur par le prérequis SSO existant. Il écrit
 `function-storage-guard-interruption.json`, avec zéro groupe fonctionnel ; le

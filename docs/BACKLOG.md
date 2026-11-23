@@ -6020,10 +6020,10 @@ SQL, signaux et bornes25/3/5/35/110 inchangés. Aucun correctif de produit dédu
 DiagnosticSIGTERMréel0groupe distinct possible, puis15stockage/25communs frais,
 nouveau49 et32 ; aucune qualification annoncée par cette spécification.
 
-Instrumentation146 en cours dans les deuxfichiers du banc, syntaxe Python/
-Node et diff contrôlés localement. Première revue avec troisP2 : garder le
-timer si SIGCONT échoue hors cibleterminée ; valider le protocole/envoi de tous
-les handles joints sans envoyer àun enfant déjàclos ; borner les octets de
-ligne avant assemblage. Décision persistée avant ces corrections. Diagnostic
-séparéSIGTERM0groupe prévu ; aucun codecommitté/déploiement/qualification à ce
-checkpoint.146.2 et146.3 restent partielles.
+Instrumentation146 implémentée dans les deuxfichiers du banc, syntaxe Python/
+Node et diff contrôlés. Les troisP2 de la première revue sont corrigés dans
+l’arbre : timer gardé si SIGCONT échoue hors cibleterminée ; protocole/envoi
+validés pour tous les handles joints sans envoyer àun enfant déjàclos ; tampon
+de ligne borné dès les octets reçus. Relecture sansP1/P2 résiduel.
+Diagnostic séparéSIGTERM0groupe disponible ; aucun déploiement ni qualification
+à ce checkpoint.146.2 et146.3 restent partielles.

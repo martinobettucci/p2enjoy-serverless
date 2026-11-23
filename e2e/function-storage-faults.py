@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle
 # @verifies docs/BACKLOG.md#sls-050 | docs/ADMISSION.md#raccordement-des-mutations-du-contrôle | docs/ADMISSION.md#observation-durable-des-intentions-par-les-gardes
+# @spec docs/BACKLOG.md#sls-146 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#diagnostic-du-refus-de-commit-zip--sls-146
+# @verifies docs/BACKLOG.md#sls-146 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#diagnostic-du-refus-de-commit-zip--sls-146
 """DEV-only real process gates and filesystem consumers for the HTTPS campaign."""
 from contextlib import closing,suppress
 import json
@@ -33,6 +35,18 @@ mode=sys.argv[1];identifier=str(UUID(sys.argv[2])) if len(sys.argv)>2 else None
 
 
 def emit(value):print(json.dumps(value),flush=True)
+
+
+def error_metadata(error):
+    reason=str(error)
+    return {'type':type(error).__name__,
+            'reason':reason if re.fullmatch(r'[a-z_]{1,80}',reason) else 'operator_failure',
+            'message_sha256':hashlib.sha256(reason.encode()).hexdigest()}
+
+
+def process_identity(pid):
+    path=Path('/proc',str(pid));state=(path/'stat').read_text().rsplit(')',1)[1].split()
+    return {'pid':pid,'birth':state[19],'cgroup':(path/'cgroup').read_text()}
 
 
 def failure(kind,error,traceback):
@@ -159,7 +173,7 @@ def clean_consumer(path):
 
 def recovery_guard(pid,delay=110):
     unit='serverless-resume-storage-'+uuid4().hex
-    birth=Path('/proc',str(pid),'stat').read_text().rsplit(')',1)[1].split()[19]
+    agent_identity=process_identity(pid);birth=agent_identity['birth']
     program='''import json,os,signal,sys
 from pathlib import Path
 try:
@@ -175,12 +189,22 @@ except (ProcessLookupError,FileNotFoundError):pass
     command(['systemd-run','--quiet','--collect','--on-active='+str(delay)+'s','--unit',unit,
         '--timer-property=AccuracySec=100ms','--timer-property=RandomizedDelaySec=0',
         '--property=Type=oneshot','/usr/bin/python3','-I','-c',program,str(pid),birth,identifier])
-    emit({'event':'recovery-guard','unit':unit});return unit
+    emit({'event':'recovery-guard','unit':unit,'helper':process_identity(os.getpid()),
+          'agent':agent_identity,'guard_seconds':delay});return unit
 
 
 if mode=='health':emit(storage('health'));raise SystemExit(0)
-owned_function()
-if mode=='registry-close-interruption':
+function_owner=owned_function()
+if mode=='interrupt-guard':
+    target=json.loads(bytes.fromhex(sys.argv[3]));pid=int(target['pid']);fd=os.pidfd_open(pid)
+    try:
+        assert process_identity(pid)==target,'guard_identity_changed'
+        arguments=Path('/proc',str(pid),'cmdline').read_bytes().split(b'\0')
+        assert str(Path(__file__).resolve()).encode() in arguments and b'commit' in arguments and identifier.encode() in arguments,'owned_commit_guard_required'
+        signal.pidfd_send_signal(fd,signal.SIGTERM)
+        emit({'event':'guard-interrupted','signal':'SIGTERM','helper':target})
+    finally:os.close(fd)
+elif mode=='registry-close-interruption':
     def interrupted(signum,frame):raise InterruptedError('operator_interrupted')
     signal.signal(signal.SIGTERM,interrupted)
     writer=RegistryWriter();replacement=RegistryWriter();caught=False
@@ -308,60 +332,88 @@ elif mode in ('write','read','hold-lease'):
         clean_consumer(record_path)
 elif mode in ('prepare','commit','commit-database-busy','watchdog'):
     pidfd=None;paused=False;writer=None;registry_writer=None;guard=None;observer=None
+    primary=None;finalization_errors=[]
+    observation={'version':1,'mode':mode,'function_id':identifier,'namespace_id':function_owner['namespace_id'],
+                 'phase':'starting','started_monotonic_ns':str(time.monotonic_ns()),'started_utc_ns':str(time.time_ns()),
+                 'loops':{},'milestones':{},'signal_acknowledged':False}
+    def phase(name):
+        observation['phase']=name
+        observation['milestones'][name]={'monotonic_ns':str(time.monotonic_ns()),'utc_ns':str(time.time_ns())}
+    def reading(name,read):
+        loop=observation['loops'].setdefault(name,{'calls':0,'returns':0})
+        loop['calls']+=1;loop['entered_monotonic_ns']=str(time.monotonic_ns())
+        result=read()
+        loop['returns']+=1;loop['returned_monotonic_ns']=str(time.monotonic_ns())
+        return result
+    def cleanup(name,action):
+        try:action();return True
+        except BaseException as error:
+            finalization_errors.append({'step':name,**error_metadata(error),'exception':error});return False
     def interrupted(signum,frame):raise InterruptedError('operator_interrupted')
     for signum in (signal.SIGHUP,signal.SIGTERM,signal.SIGINT):signal.signal(signum,interrupted)
     try:
         pid=int(command(['systemctl','show','--property=MainPID','--value',UNIT]));pidfd=os.pidfd_open(pid)
         guard=recovery_guard(pid,5 if mode=='watchdog' else 110)
         if mode in ('commit','commit-database-busy'):
+            phase('observer_open')
             observer=ControlObserver(CONTROL);observer.open()
             emit({'event':'control-observer-ready',**observer.identity,'autocommit':True,'operator_uid':os.geteuid()})
-            registry_writer=RegistryWriter();registry_writer.begin()
+            phase('registry_writer_begin');registry_writer=RegistryWriter();registry_writer.begin()
             emit({'event':'registry-writer-identity',**registry_writer.identity,'operator_uid':os.geteuid()})
-        emit({'event':'watching'});deadline=time.monotonic()+25;operation=None
+        phase('watching');emit({'event':'watching'});deadline=time.monotonic()+25;operation=None
         if mode=='watchdog':
-            signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True;emit({'event':'paused','phase':'watchdog'})
+            signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True;phase('stop_sent');emit({'event':'paused','phase':'watchdog'})
             action=input_command()
             if action=='kill-helper':os.kill(os.getpid(),signal.SIGKILL)
             assert action=='resume'
             raise SystemExit(0)
+        phase('intention_wait');observation['loops']['intention']={'calls':0,'returns':0,'deadline_monotonic_ns':str(int(deadline*1e9))}
         while time.monotonic()<deadline:
             if registry_writer:
-                pending=observer.rows('SELECT id FROM function_operations WHERE function_id=? AND storage_version IS NOT NULL AND decision=\'undecided\'',(identifier,))
+                pending=reading('intention',lambda:observer.rows('SELECT id FROM function_operations WHERE function_id=? AND storage_version IS NOT NULL AND decision=\'undecided\'',(identifier,)))
+                observation['loops']['intention']['last_row_count']=len(pending)
                 if pending:
                     operation=pending[0]['id'];break
                 time.sleep(.001);continue
-            pending=rows(REGISTRY,'SELECT pending_json FROM functions WHERE id=?',(identifier,))
+            pending=reading('intention',lambda:rows(REGISTRY,'SELECT pending_json FROM functions WHERE id=?',(identifier,)))
+            observation['loops']['intention']['last_row_count']=len(pending)
             if pending and pending[0]['pending_json']:
                 value=json.loads(pending[0]['pending_json'])
                 if value.get('operation')=='configuration-prepared' and value['phase']=='preparing':
                     operation=value['operation_id'];break
             time.sleep(.001)
         assert operation,'preparation_intention_not_observed'
-        emit({'event':'preparation-observed','operation_id':operation})
+        observation['operation_id']=operation;phase('intention_observed');emit({'event':'preparation-observed','operation_id':operation})
         if mode=='prepare':
-            signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True
+            signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True;phase('stop_sent')
             assert json.loads(rows(REGISTRY,'SELECT pending_json FROM functions WHERE id=?',(identifier,))[0]['pending_json'])['phase']=='preparing'
         else:
-            writer=ControlWriter(CONTROL);emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
-            registry_writer.close();registry_writer=None
+            phase('control_writer_begin');writer=ControlWriter(CONTROL);phase('control_writer_acquired');emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
+            phase('registry_writer_close');registry_writer.close();registry_writer=None;phase('registry_writer_closed')
             deadline=time.monotonic()+3
+            phase('prepared_wait');observation['loops']['prepared']={'calls':0,'returns':0,'deadline_monotonic_ns':str(int(deadline*1e9))}
             while True:
-                raw=rows(REGISTRY,'SELECT pending_json FROM functions WHERE id=?',(identifier,))[0]['pending_json']
-                phase=json.loads(raw)['phase'] if raw else None
-                if phase=='prepared':break
+                raw=reading('prepared',lambda:rows(REGISTRY,'SELECT pending_json FROM functions WHERE id=?',(identifier,)))[0]['pending_json']
+                prepared_phase=json.loads(raw)['phase'] if raw else None
+                observation['loops']['prepared']['last_phase']=prepared_phase
+                if prepared_phase=='prepared':break
                 assert time.monotonic()<deadline,'prepared_not_observed'
                 time.sleep(.001)
-            signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True
-            writer.close();writer=None
+            phase('prepared_observed');signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True;phase('stop_sent')
+            phase('control_writer_close');writer.close();writer=None;phase('control_writer_closed')
             deadline=time.monotonic()+5
+            phase('commit_wait');observation['loops']['commit']={'calls':0,'returns':0,'deadline_monotonic_ns':str(int(deadline*1e9))}
             while True:
-                pending=observer.rows('SELECT decision FROM function_operations WHERE id=?',(operation,))
+                pending=reading('commit',lambda:observer.rows('SELECT decision FROM function_operations WHERE id=?',(operation,)))
+                observation['loops']['commit']['last_row_count']=len(pending)
+                observation['loops']['commit']['last_decision']=pending[0]['decision']if pending else None
                 if pending and pending[0]['decision']=='commit':break
                 assert time.monotonic()<deadline,'commit_not_observed'
                 time.sleep(.001)
             if mode=='commit-database-busy':
+                phase('busy_writer_begin')
                 writer=ControlWriter(CONTROL);emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
+        phase('acquired')
         emit({'event':'paused','phase':mode,'operation_id':operation})
         action=input_command()
         if action=='kill-control':
@@ -372,22 +424,33 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
             state=json.loads(command(DOCKER+['inspect','--format','{{json .State}}','serverless-api']))
             assert state['Status']=='exited' and state['ExitCode']==137,'control_crash_unconfirmed'
         else:assert action=='resume'
-        signal.pidfd_send_signal(pidfd,signal.SIGCONT);paused=False
+        signal.pidfd_send_signal(pidfd,signal.SIGCONT);paused=False;phase('continue_sent')
         emit({'event':'resumed','control_killed':action=='kill-control'})
+    except BaseException as error:
+        if isinstance(error,SystemExit)and error.code in (None,0):raise
+        primary=error
+        # Diagnostic I/O never replaces the real exception or delays restoration.
+        try:emit({'event':'fault-primary',**error_metadata(error),'observation':observation})
+        except BaseException as diagnostic_error:finalization_errors.append({'step':'primary_diagnostic',**error_metadata(diagnostic_error),'exception':diagnostic_error})
+        raise
     finally:
-        try:
-            try:
-                if registry_writer:registry_writer.close()
-            finally:
-                try:
-                    if writer:writer.close()
-                finally:
-                    if observer:observer.close()
-        finally:
-            if pidfd is not None:
-                try:
-                    if paused:
-                        with suppress(ProcessLookupError):signal.pidfd_send_signal(pidfd,signal.SIGCONT)
-                finally:os.close(pidfd)
-            if guard:command(['systemctl','stop',guard+'.timer'])
+        if registry_writer:cleanup('registry_writer_close',registry_writer.close)
+        if writer:cleanup('control_writer_close',writer.close)
+        if observer:cleanup('observer_close',observer.close)
+        resumption={'result':'not_required'};may_disarm=True
+        if pidfd is not None:
+            def resume():
+                try:signal.pidfd_send_signal(pidfd,signal.SIGCONT)
+                except ProcessLookupError:resumption['result']='target_ended'
+                else:resumption['result']='continue_sent'
+            if paused:
+                resumption['result']='failed';may_disarm=cleanup('agent_continue',resume)
+            cleanup('pidfd_close',lambda:os.close(pidfd))
+        if guard and may_disarm:cleanup('timer_stop',lambda:command(['systemctl','stop',guard+'.timer']))
+        try:emit({'event':'fault-finalization','completed':not finalization_errors,
+                  'errors':[{k:v for k,v in issue.items()if k!='exception'}for issue in finalization_errors],
+                  'agent_resumption':resumption,'independent_guard_retained':bool(guard and not may_disarm),
+                  'observation':observation,'finished_monotonic_ns':str(time.monotonic_ns()),'finished_utc_ns':str(time.time_ns())})
+        except BaseException as error:finalization_errors.append({'step':'final_diagnostic',**error_metadata(error),'exception':error})
+        if primary is None and finalization_errors:raise finalization_errors[0]['exception']
 else:raise RuntimeError('operator_mode_invalid')

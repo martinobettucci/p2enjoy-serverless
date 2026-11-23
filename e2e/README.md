@@ -10,6 +10,16 @@ deuxpurges physiques/deuxjetons révoqués, septminuteurs inactifs ; naissances
 initiales des helpers nonretenues. Premierlecteur natif1 conservé (MainPID absent
 sur un timer), lecteur corrigé0 sans rejeu. SLS-146 reste ouverte ; aucun49/32 acquis.
 
+Le banc stockage146 conserve désormais phases/compteurs des mêmes lectures,
+première exception et erreurs de restitution distinctes, fluxstdout/stderr
+bornés64Kio sousSHA, identités àl’armement et métadonnéesHTTP avantassertion.
+Syntaxe contrôlée ; ces octets ne sont pas encore qualifiés E2E. Le diagnostic
+séparé `node e2e/function-storage.mjs --diagnose-guard-interruption` exige une
+sessionSSO réelle actuelle et interrompt parSIGTERM une gardecommit possédée,
+sans mutation soumise. Rapport `function-storage-guard-interruption.json`,
+zérogroupe ; le nominal sansargument garde quinzegroupes dansfunction-storage.json.
+Voir le [contrat146](../docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#diagnostic-du-refus-de-commit-zip--sls-146).
+
 Le [ciblé de reprise145](../docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json)
 passe5nominaux puis25communs frais surba55881/530/f016. Quatregardes et
 troiscoupures137, troisfenêtres manquées sans invocation, claimed/linked
