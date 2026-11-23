@@ -3239,3 +3239,10 @@ le client conserve le contexte primaire réel et exige son absence en clôture
 nominale. Les SHA/octets de commande portent sur les octets avant conversion
 texte. Le refus après attache et le cas de dépassement doivent être rejoués
 avec ces sources ; la seule revue ne les qualifie pas.
+
+Les [preuves courantes SLS-134.2/134.5](../docs/evidence/source-driver-durable-diagnostics-schema011-dev-2026-11-23.json)
+passent sur526sourcesd4e7e5d/f016 : HTTP401/22 puis200/0 recoupés en bytes,
+refus après attache avec reçuparent, puis dépassement1154632octets/huitimports
+et deuxpurgespubliques. Quatregroupes support, zéroqualification de rétention.
+Le client du cascap termine1 pour le seul dépassement attendu ; le pilote0
+et ses reçus d’erreur absents sont recoupés. Nominal et consommateurs restent dus.

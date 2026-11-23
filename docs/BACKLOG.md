@@ -4740,7 +4740,7 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
 - [x] SLS-134.1 [Sceller le rouge](evidence/invocation-source-retention-schema011-query-first-failed-dev-2026-11-22.json)
   et sa restitution : workerterminal1/libéré, mêmesf016/collection/config/référence,
   huitcompteurs0/5982. Un groupepartiel acquis, zéroqualificationglobale.
-- [ ] SLS-134.2 Persister phases, point de code et SHAopérateur, dernier résultat
+- [x] SLS-134.2 Persister phases, point de code et SHAopérateur, dernier résultat
   waitpid réel PID/statut brut/signal/événement ; conserver l’exception primaire
   et les erreurs de nettoyage séparément, même pour assertion sans message.
   Stderrpilote borné et haché conservé en privé pour tous les modes ; dépassement
@@ -4753,7 +4753,7 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
   partagée, mêmes25/35/40/5s et gardes, API/SSO et nettoyagephysique ; aucun groupe
   historique ajouté. Tout nouveau défaut reçoit son constat avant correction.
 
-- [ ] SLS-134.5 Le pilote conserve avant son finally un diagnostic durable de
+- [x] SLS-134.5 Le pilote conserve avant son finally un diagnostic durable de
   toute exceptionPython de la fenêtre reconnue : opération, sourceSHA, pile de
   code sanslocals, métadonnées de la commande native échouée. Sa lecture après
   restitution reste possible même lorsque stderr dépasse son préfixe. Ne pas
@@ -4778,3 +4778,5 @@ inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent inta
 134.5 — précision avant code aprèsrevue : capturernatif enbytes pourSHA/octets, puis même conversiontexteuniverselle antérieure ; textTrue réencodé altèreCRLF et doit être corrigé. Preuveréelleprévue curl401/curl22 puishealth200/curl0 surAPIlocalhost, tee de chaque mêmeflux pour comparerbytes/normalisation et resetducontexte ; jamais de sortie fabriquée. Statut duwrappertimeout explicite, diagnosticsprimaire/reader/restore séparés.
 
 134.5 — reçus primaire/fermeture/restitution intégrés avec pile bornée et source gelée ; commande native recueillie en octets puis conversion texte compatible, SHA/statut/contextes distincts. Le client recoupe le vrai refus primaire et exige une clôture sans reçu d’erreur. Revue RO sans autre P1/P2 ; oracle HTTP corrigé avant exécution pour exiger explicitement échec22 puis succès0. Deux AST Python et la syntaxe Node passent ; preuves réelles encore dues, aucun critère fermé par cette intégration.
+
+134.2/134.5 — [diagnostic durable réellement éprouvé](evidence/source-driver-durable-diagnostics-schema011-dev-2026-11-23.json),526sourcesd4e7e5d/f016 : deux lectures HTTP natives401/curl22 puis200/curl0 recoupent bytes/CRLF, conversion et reset ; refus après attache deuxgroupes avec reçuparent AssertionError/ligne1513/sourceSHA et aucune erreur de fermeture ; cascap deuxgroupes avec huitimports/1154632octets/1,217sproduction, préfixe1Mio exact, Node1 seulement pour overflow, pilote0 et deuxpurgespubliques. EOF/jonctions/restitutions/config/référence/5982/huitcompteurs0 recoupés. Ces deux critères passent ;134.4 reste ouvert pour nominal/consommateurs, zéro groupe de rétention ajouté. La cause du premiercascap rouge reste inconnue et n’est pas attribuée par ce succès.

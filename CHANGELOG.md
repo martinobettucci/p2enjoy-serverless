@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-134.2/134.5 : diagnostic durable éprouvé sur le SPARK : deux lectures
+  HTTP réelles, deux groupes de refus après attache et deux groupes du plafond
+  stderr. Huit imports produisent 1154632 octets ; purge publique et restitution
+  passent, client1 pour le seul dépassement attendu. Nominal/consommateurs dus.
+
 - SLS-134.5 : reçus privés distincts pour les erreurs du pilote et de sa
   fermeture/restitution, avec pile bornée et métadonnées des octets natifs.
   Le client recoupe le refus primaire et exige une clôture nominale sans reçu
