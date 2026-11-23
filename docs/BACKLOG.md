@@ -4673,6 +4673,13 @@ métier, collecte, budgets, purge et rétention restent exigés.
   restauration indépendante, puis nominal3 positif après lancement aligné.
   Ce précontrôle ne qualifie ni débit garanti ni ventilation fine de133.2.
 
+- [ ] SLS-133.6 Compléter les mesures productives dans le vrai processus f016 :
+  profilage standard Python, SQLRO courant et durées client conservées avec
+  leurs périmètres distincts. Passage court2HTTP réel puis6000HTTP/jalons4,
+  fermeture/lisibilité des statistiques, source/PID/naissance/cgroup et
+  restaurations prouvés ; zéro groupe nominal ajouté. Toute attribution reste
+  bornée par la portée réelle de l’instrumentation et les coûts observés.
+
 132 — nominal courant réellement rouge :9406HTTP, marge avantcron épuisée,
 aucun groupe qualifié. Worker terminal1 puis libéré, original011/f6e19cdd,
 42backend/quatreweb et huitcompteurs0 recoupés. Le reste de production est
@@ -4807,3 +4814,46 @@ inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent inta
 133.5 — [refus préparatoire réel acquis](evidence/invocation-production-window-preflight-dev-2026-11-23.json),526sourcesc63014f/f016 : budget1849,233s<1980 aprèsdeuxpublications/SSO/deuxinstances, client1 attendu avanttoutHTTP et zérotir. Repriseindépendante et origines/5982/huitcompteurs0 recoupés ; unitéexec900/60/CG épinglée, PID0/cgrouprécursivementvide et retourwrapper0. Un groupe support, zéroqualificationnominale ;133.5 resteouvert jusqu’au prochainnominalpositif et n’attribue aucun coût133.2.
 
 134.4 — [borne25 courante réellement acquise](evidence/native-observer-deadline-schema011-query-dev-2026-11-23.json),526sources1135713/f016 : attente sansévénement25,000266s, masque/alarme conservés, dégel indépendant, mémoire/lecteur fermés/Trace0 et restitution ; troisgroupes support. Unitélocaleexec900/60/CG reconnue puis PID0/cgroupvide, originaux/config/référence/5982/huitcompteurs0 recoupés. Nominal/count/âge/35/40/detach/reprise encore dus ; zéro groupe de rétention ajouté.
+
+133.6 — décision avant code : retenir cProfile/_lsprof de Python3.14 déjà prévu
+par l’imagef016 et pstats du même interpréteur, sans dépendance ni image/app
+modifiée. Nouveau mode explicite production-transaction-profile, réservé à la
+fenêtre instance-limit2700/f016 sans replay ; ancien profileurf73 inchangé.
+La seule commande du clone devient python -B -m cProfile -o /qualification-profile/control.pstats
+-m uvicorn avec les mêmes arguments applicatifs. Dossier de sortie privé possédé,
+hors état/quota officiel, montage limité au clone ; runtime3.14/uvicorn0.54,
+moduleprofiler, commande,42backend/quatreweb et PID/naissance/cgroup recoupés.
+Tous les appels restent HTTP/SSO/API/runtime/agent réels ; aucun handler importé
+par le client, aucune substitution de fonction, connexion, résultat ou signal.
+
+Profilage en deux étapes distinctes : essai court2HTTP pour prouver production
+et fermeture des statistiques, puis passage6000 avec les quatre lecturesSQLRO
+courantes et leurs vrais horodatages. Après purges publiques et zéro instance,
+SIGINT du seul clone reconnu, attente bornée15s et constat du vrai résultat de
+shutdown ; statistiques présentes/lisibles exigées, sinon rouge et reprise
+existante. SIGTERM seul peut être réémis par Uvicorn et interrompre l’écriture
+du profiler : ne pas supposer un dump sur SIGKILL ou sur arrêt raté. pstats est
+lu dans le même runtimef016 ; brut privé scellé, projection publique limitée à
+fonction/fichier/ligne, appels, durées exclusives/cumulées et liens de callers.
+Pas de locals/arguments/valeursSQL/headers/secret dans ces données.
+
+Le profil porte sur le thread principal et tout son cycle réel, préparation,
+6000appels, purges et shutdown compris ; sa surcharge est explicite, aucun
+benchmark noninstrumenté déduit. Les durées SQLite productives et des fonctions
+JSON/boucle proviennent de ce processus, pas du lecteurSQLRO. Un COMMIT n’est
+pas un syscall ; le temps de Database.transaction générateur ne comprend pas
+magiquement tout le corps yieldé, et les résumptions de coroutine ne deviennent
+pas un nombre d’invocations. Les durées client requête/headers/JSON restent des
+intervalles composites ; aucun résidu n’est appelé temps réseau pur, ni aucune
+somme de cumtime chevauchantes présentée comme un totalCPU. La mesure réelle
+décidera de la portée acquise de133.2 ; ce choix d’instrument ne la clôt pas.
+
+Motif : profiler les appels réellement exécutés avec l’extension standard et
+ses métadonnées, en conservant le codeimage et les dépendances ; éviter un
+nouveau framework de traces ou de faux timings par SELECTRO. Les préflights
+refusent toute combinaison horsscope avant fenêtre, puis les preuves réelles
+et la clôture native restent dues. Sources consultées : documentationPython3.14
+https://docs.python.org/3.14/library/profile.html et implémentationUvicorn0.54
+https://github.com/Kludex/uvicorn/blob/0.54.0/uvicorn/server.py . Le contrat dédié
+sera complété avant implémentation après fin du nominal488d0ab7, dont les526sources
+restent figées ; aucune instrumentation du passage actif.

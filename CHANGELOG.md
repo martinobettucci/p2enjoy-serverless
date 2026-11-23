@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-133.6 : profilage productif par cProfile standard décidé avant code,
+  sur clone de même image et avec statistiques privées ; passage court puis
+  6000HTTP, limites de mesure et fermeture réelles requis. Aucune instrumentation
+  ajoutée au nominal actif ni qualification par cette décision.
+
 - SLS-134.4 : borne native sans événement mesurée à25,000266s sur f016,
   masque/alarme conservés, dégel et détachement réels. Troisgroupes support
   passent avec restitution et unité/cgroup joints ; autres consommateurs dus.
