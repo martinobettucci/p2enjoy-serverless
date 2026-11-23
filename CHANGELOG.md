@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-135 : échec terminalâge avant garde, lecture /proc refusée EINVAL ;
+  originaux strictement identiques, qualification incomplète. Unité dédiée
+  inscrite avant correction et nettoyage du seul dossier stagiaire à recouper.
+  Aucune cause de sortie de processus ni succès de rétention inventé.
+
 - SLS-132.3/132.6 : borne réelle10496→10000 qualifiée sur f016 avec496retraits
   exacts, puis rattrapage final et112pagesAPI. Collecteur distingue les deux
   curseurs et leurs compteurs ; troisgroupes réels, source et originaux intacts,

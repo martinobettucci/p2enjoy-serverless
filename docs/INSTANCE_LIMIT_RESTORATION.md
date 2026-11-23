@@ -324,3 +324,26 @@ redémarrage à 14:26:18 UTC, référence inchangée, deux services sains, actif
 et aucune garde. Cette preuve qualifie les fenêtres communes ; pannes
 propres de capture et d'observateur source, âge et campagne complète restent
 ouverts dans 078.5. Les preuves antérieures conservent leurs époques distinctes.
+
+
+## Observation des références des processus — SLS-135
+
+Le replay terminalâge du23novembre2026 a échoué avant armement dans
+no_references : OSError22/EINVAL sur /proc/1947870/mountinfo. Aucun état duPID
+n’avait été épinglé ; sa mort ou une réutilisation ne sont pas prouvées par ce
+seul traceback. Le client n’a reçu aucun événement et restore ne disposait
+pas de journal. Les services et leurs démarrages, configuration et artefacts
+originaux sont strictement identiques dans les snapshots avant/après.
+
+Avant tout nouveau scénario : conserver ce rouge, constater la fin du groupe
+local et l’absence de garde/journal du seulUUID. Le répertoire stagiaire ne
+peut être retiré que s’il est encore vide, canonique, root/groupe attendu et
+identité recoupée ; utiliser rmdir, sans effacement récursif ni reprise d’un
+chemin inconnu. Conserver ces constats et le retrait dans un reçu privé.
+
+L’implémentation future doit distinguer une fin native étayée d’un processus
+de l’indisponibilité d’une lecture encore vivante, sans accepter globalement
+EINVAL ni affaiblir les contrôles de références. Le protocole précis, ses
+bornes et ses vrais cas noyau seront persistés avant code après exploration.
+Les captures historiques, valeurs officielles et autres modes du helper sont
+conservés. Aucun succès de rétention n’est déduit de cette erreur de préflight.

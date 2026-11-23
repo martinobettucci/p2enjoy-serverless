@@ -85,6 +85,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
+| 3 | [SLS-135](#sls-135) Lecture des références pendant la sortie d’un processus | Corriger | `[~]` | SLS-099 | [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md#observation-des-références-des-processus--sls-135) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4893,3 +4894,43 @@ les dates ni reconstruire les fenêtres manquantes. Nouveau132.6 inscrit avant
 traitement ; aucun groupe supplémentaire ni rejeu du countacquis.
 
 132.3/132.6 — [borne numérique courante réellement acquise](evidence/schedule-firing-retention-count-schema011-query-dev-2026-11-22.json),526sourcesf9e3e4b/f016 :84fenêtresmanquées,41fenêtres de256 et10496→10000 avec496retraits exacts au même curseurF ; récupération réelleàD,10000autresUUID et112pagesAPI recoupés. Deuxinvocations anciennes conservées, zérohandler nouveau, observation13,661s ; restitutionnominale, source scellée intacte, unitéexec/CGjointe et huitcompteurs0/5982. Collecteur corrigé et relu : SHA/gzip/rapport/unité liés, compteurs aprèsF627maximum distincts de ceux APIàD626maximum.132.6 passe sans replay ;132.3 attend encore les deuxâgescourants,132.5 et134.4 les autres consommateurs/régressions.
+
+
+<a id="sls-135"></a>
+## SLS-135 — Lecture des références pendant la sortie d’un processus
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-099. Ordre : 3.
+Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md#observation-des-références-des-processus--sls-135).
+
+Constat réel : le replay terminalâge f29d1f7c termine rouge avant guard-armed,
+avec OSError22/EINVAL en lisant /proc/1947870/mountinfo dans no_references.
+Le PID n’était pas épinglé et son état à cet instant n’est pas connu ; ne pas
+attribuer rétrospectivement cet errno à une sortie confirmée. Le client échoue
+au premier groupe puis sa tentative restore sans journal échoue également.
+Le wrapper a joint Node1 et ses snapshots avant/après recoupent strictement
+les services/démarrages, fichiers officiels,5982artefacts et huitcompteurs0.
+Le cas sourceâge précédent a passé3groupes ; il ne remplace pas le terminal.
+
+Résultat attendu : garder le contrôle des références réelles sans rendre
+permissif un EINVAL de processus vivant ou une identité inconnue. Une disparition
+ou fin de processus doit être étayée par les primitives natives existantes ;
+une observation encore indisponible reste un refus nommé avant mutation.
+Aucun faux /proc, errno injecté, processus substitué ou succès conditionnel.
+
+- [ ] SLS-135.1 Sceller ce rouge et le stderr réel, constater l’absence de garde
+  et de journal avant mutation, originaux strictement identiques et unitélocale
+  terminée. Inspecter le seul dossier du nonce ; s’il est vide et de la bonne
+  identité, retirer uniquement ce dossier par rmdir et conserver le reçu.
+- [ ] SLS-135.2 Écrire le contrat précis avant code : identité/lifecycle de la
+  lecture /proc, gestion bornée de ses erreurs, diagnostic privé sans secret et
+  refus des références vivantes. Conserver les bornes et contrôles de propriété.
+- [ ] SLS-135.3 Éprouver le défaut et la correction avec de vrais processus et
+  leur vrai état noyau ; couvrir processus terminé et référence vivante refusée,
+  absence de contournement, jonction des enfants et nettoyage de la seule fixture.
+- [ ] SLS-135.4 Rejouer les deux âges courants puis les consommateurs et25groupes
+  communs du helper concernés. Les captures scellées, imagef016, configuration,
+  originaux et preuves antérieures restent intacts ; clôture seulement sur E2E.
+
+La correction est interne au bancDEV autorisé ; aucun accès externe demandé.
+132.3/134.4 gardent leurs preuves partielles et attendent ce correctif pour
+achever les âges, sans relance aveugle ni publication du composite6 manquant.
