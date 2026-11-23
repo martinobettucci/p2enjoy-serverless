@@ -13,12 +13,19 @@ sur un timer), lecteur corrigé0 sans rejeu. SLS-146 reste ouverte ; aucun49/32 
 Le banc stockage146 conserve désormais phases/compteurs des mêmes lectures,
 première exception et erreurs de restitution distinctes, fluxstdout/stderr
 bornés64Kio sousSHA, identités àl’armement et métadonnéesHTTP avantassertion.
-Syntaxe contrôlée ; ces octets ne sont pas encore qualifiés E2E. Le diagnostic
+Le [ciblé courant40](../docs/evidence/storage-mutation-diagnostics-current-dev-2026-11-23.json)
+qualifie quinzegroupes puis25communs frais sur6f758b2/530/f016, sept handlers
+succeeded recoupés, troisclôtures et22captures originales inspectées. Le diagnostic
 séparé `node e2e/function-storage.mjs --diagnose-guard-interruption` exige une
 sessionSSO réelle actuelle et interrompt parSIGTERM une gardecommit possédée,
 sans mutation soumise. Rapport `function-storage-guard-interruption.json`,
 zérogroupe ; le nominal sansargument garde quinzegroupes dansfunction-storage.json.
 Voir le [contrat146](../docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#diagnostic-du-refus-de-commit-zip--sls-146).
+Son SIGTERM réel passe avec primaire native1/finalisation complète, client et
+worker0 ; aucun groupe ajouté. Les chemins de refusSIGCONT, protocole surlong
+et sauvegarde/finalisation en faute restent nonqualifiés E2E. Une course est
+établie statiquement dans le protocole : prepared peut précéder l’arrivéeRPC,
+sans attribution au rouge historique.49/32 ne sont pas acquis.
 
 Le [ciblé de reprise145](../docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json)
 passe5nominaux puis25communs frais surba55881/530/f016. Quatregardes et

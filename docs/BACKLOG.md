@@ -6005,7 +6005,7 @@ d’observation conserve les observateurs et dépendances réels.
   sans changement de ressources. Conserver la primaire et les erreurs de
   finalisation séparément, avec les vrais retours et stderr natifs ; aucun
   observateur ou résultat remplacé, assertion retirée ou scénario sauté.
-- [ ] SLS-146.4 Quinze groupes de stockage complets puis 25 communs frais,
+- [~] SLS-146.4 Quinze groupes de stockage complets puis 25 communs frais,
   captures inspectées et clôtures recoupées sur le code déployé. Les 13 partiels
   de ce refus restent exclus. Aucun retour secondaire ne devient un succès.
 - [ ] SLS-146.5 Nouveau socle 49/543/18 depuis le début puis complément 32/276,
@@ -6025,5 +6025,22 @@ Node et diff contrôlés. Les troisP2 de la première revue sont corrigés dans
 l’arbre : timer gardé si SIGCONT échoue hors cibleterminée ; protocole/envoi
 validés pour tous les handles joints sans envoyer àun enfant déjàclos ; tampon
 de ligne borné dès les octets reçus. Relecture sansP1/P2 résiduel.
-Diagnostic séparéSIGTERM0groupe disponible ; aucun déploiement ni qualification
-à ce checkpoint.146.2 et146.3 restent partielles.
+Diagnostic séparéSIGTERM0groupe disponible et
+[ciblé40 courant](evidence/storage-mutation-diagnostics-current-dev-2026-11-23.json)
+acquis au gel6f758b2/530/f016 : diagnostic client/worker0 avec primaire native1
+et restitution, quinze mutations puis25communs frais. Sept handlers succeeded
+recoupés en base, vrais503/déduplication/promotion/rollback ; troisclôtures0,
+troispurges physiques/deuxnamespaces et22captures originales inspectées.
+42backend/quatreHTTPSno-store, manuel84 et originaux conservés ; zéro groupeunique
+ajouté au socle543.146.2/.3/.4 restent partielles,49/32 dus.
+
+Fait statique nouveau de146.2, vérifié par le principal : pending.phaseprepared
+est écrit avant l’envoiRPC de prepare ; le contrôle attend cet RPC avantcommit.
+La garde peut donc arrêter l’agent avant cette réception et attendre un commit
+encore impossible. Cela n’attribue pas le premierrouge à cette course, mais
+nomme une absence de synchronisation du banc àtraiter avant49. Une détention
+REGISTRY seule serait insuffisante : SQLiteagent timeout1s peut produire une
+erreurIO plutôt qu’une vraie confirmation perdue. Aucune décision de correction
+du protocole ni modificationproduit dans ce checkpoint ; elle sera persistée
+avant le code. Les branches refusSIGCONT, protocole excessif et finalisation
+en faute restent nonqualifiées E2E par le ciblé positif.

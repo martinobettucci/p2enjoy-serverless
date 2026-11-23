@@ -2,13 +2,22 @@
 
 ## [Non publié]
 
+- SLS-146 : [ciblé40](docs/evidence/storage-mutation-diagnostics-current-dev-2026-11-23.json)
+  sur6f758b2/530/f016, diagnosticSIGTERM0groupe puis15stockage/25communs frais.
+  Primaire native1 retenue et restitution complète ; sept handlers succeeded
+  corrélés, vrais503/déduplication/rollback, troisclôtures et22captures inspectées.
+  Référence/configuration/5982/huit0,42backend/quatreHTTPSno-store et manuel84
+  conservés. Une course prepared/ACK est établie statiquement dans le banc,
+  sans attribution au rouge initial ; protocole àtraiter avant49. Unité ouverte.
+
 - SLS-146.2 : décision de diagnostic du banc persistée avant code : phases et
   compteurs natifs bornés, primaire/finalisation distinctes, identités àl’armement,
   vrais flux bornés et métadonnéesHTTP avantassertion. Observateurs/SQL/signaux/
   délais conservés ; instrumentation et trois correctionsP2 de revue implémentées,
   syntaxe contrôlée : secours conservé après refusSIGCONT, validation de chaque
   protocole joint et tampon de ligne borné dès réception. Relecture sansP1/P2,
-  mode diagnosticSIGTERM distinct0groupe ; qualification DEV encore àlivrer.
+  mode diagnosticSIGTERM distinct0groupe et ciblé40 acquis ci-dessus. La cause
+  historique et les branches de finalisation en faute restent inconnues/nonqualifiées.
 
 - SLS-146 : [premier refus ZIP scellé](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json),
   gel5eaf3ab/530/f016,55groupes antérieurs et13checks partiels, troisprérequis,

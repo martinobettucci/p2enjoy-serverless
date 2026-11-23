@@ -191,16 +191,53 @@ compte zéro groupe et ne remplace aucun des quinzegroupes. Toute nouvelle faute
 reste conservée et instruite, sans retry.49/543/18 puis32/276 restent dus.
 
 L’instrumentation est implémentée dans les deux fichiers du banc ; syntaxe
-Python/Node contrôlée, sans qualification fonctionnelle à ce checkpoint. Les
+Python/Node contrôlée et ciblé courant40 acquis ci-dessous. Les
 troisP2 de la première revue ont leur correction dans l’arbre : secours conservé
 si SIGCONT échoue, validation de chaque transport joint, parseur borné par
-octets avant assemblage de ligne. Relecture sansP1/P2 résiduel ; aucune E2E
-encore exécutée sur ces octets.
+octets avant assemblage de ligne. Relecture sansP1/P2 résiduel.
 Le diagnostic séparé se lance avec
 `node e2e/function-storage.mjs --diagnose-guard-interruption`, après création
 d’une vraie session administrateur par le prérequis SSO existant. Il écrit
 `function-storage-guard-interruption.json`, avec zéro groupe fonctionnel ; le
 nominal sans argument conserve `function-storage.json` et ses quinzegroupes.
 Le mode natif interrupt-guard vérifie PID/naissance/cgroup et les arguments du
-helpercommit possédé, via pidfd, avant le vraiSIGTERM. Ces deux parcours restent
-à exécuter sur le SPARK DEV, avec clôtures physiques propres et25communs frais.
+helpercommit possédé, via pidfd, avant le vraiSIGTERM. Ces deux parcours sont
+éprouvés sur le SPARK DEV au gel6f758b2, avec clôtures physiques propres et
+25communs frais.
+
+### Ciblé courant de diagnostic et de stockage
+
+La [preuve40](evidence/storage-mutation-diagnostics-current-dev-2026-11-23.json)
+lie un diagnosticSIGTERM0groupe, quinze mutations puis25communs frais aux
+mêmes530sources6f758b2 et imagef016. Primaire nativeInterruptedError/1, synthèse
+avantfinally et finalisation complète ; client/worker diagnostiques0. Le nominal
+termine0 avec sept vrais handlers succeeded recoupés par UUID/hash en base,
+vrais503 et publication dédupliquée, Bpilote/promue puis rollbackA conservant
+quota7Mio/reçu/fichiers. DeuxcoupuresSIGKILL vérifiées par le helper, huit handles
+dont septminuteurs et un consommateurhold-lease. Les sixfinalisations ordinaires
+sont complètes ; le helperwatchdog est volontairement tué et son timer restitue.
+
+Troisclôtures indépendantes0, naissancesworker/lanceur/Node et helpers de garde
+terminées, cgroupsvides et purges physiques d’une fonction diagnostique puis
+deuxnominales. Deuxnamespaces retirés ; référence/configuration/5982/huit0
+conservés. Les troisétapes utilisent un prérequisSSO réel frais ;22captures des
+communs effectivement ouvertes par le principal,42backend/quatreHTTPSno-store
+et manuel84/SHA4a331e15. Les troisTAR gardent leur gel ; zéro groupeunique ajouté
+au socle543, aucun49/32 complet acquis.
+
+Le passage positif ne reproduit pas le timing du premierrouge. RefusSIGCONT,
+ligne de protocole excessive, écriture de rapport et finalisation en faute
+ne sont pas qualifiés E2E par ce positif. Le consommateurhold-lease est absent
+et son SSH0 joint ; son helper n’a pas émis sa naissance distante initiale.
+Les fenêtres d’image ne montrent pas84paragraphes simultanément ; texte agrandi
+distinct du zoomnavigateur, formulaireSSO vide distinct de l’autorisation.
+
+L’exploration statique, recoupée dans les sources par le principal, établit une
+absence d’ordre garanti dans le banc : agent_volumes.prepare_configuration
+écrit pending.phaseprepared en autocommit avant de retourner son état ;
+Server.handle écrit la réponseRPC seulement après dispatch. Le contrôle attend
+cette réponse avant SQLcommit. La garde actuelle peut donc SIGSTOP l’agent
+entre le marqueur et l’envoiRPC, puis attendre un commit que le contrôle ne peut
+pas encore décider. C’est une possibilité du protocole, sans attribution au
+rouge historique et sans correctif de produit. La décision de traitement doit
+être persistée avant de changer ce protocole ; la nouvelle intégration49 attend.

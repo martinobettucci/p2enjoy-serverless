@@ -1,5 +1,15 @@
 # P2Enjoy Serverless
 
+Le [ciblé stockage146](docs/evidence/storage-mutation-diagnostics-current-dev-2026-11-23.json)
+passe40groupes : quinze mutations puis25communs frais sur6f758b2/530/f016.
+Sept handlers succeeded recoupés en base ; vrais503, déduplication, promotion
+et rollback préservent les ressources. Le diagnosticSIGTERM distinct compte0,
+conserve la primaire native1 et termine0 après restitution. Troisclôtures
+indépendantes,22captures originales inspectées,42backend/quatreHTTPSno-store
+et manuel84 ; aucun49/32 complet ni cause du rouge historique revendiquée.
+L’exploration établit une course possible du banc : prepared précède la
+réponseRPC ; son protocole reste à instruire avant la nouvelle intégration.
+
 Le [sixième socle courant](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
 termine1 dans la publication ZIP : garde `commit_not_observed`, upload200
 attendu503.55groupes antérieurs puis13checks partiels, troisprérequis et aucune

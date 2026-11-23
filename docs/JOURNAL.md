@@ -11286,3 +11286,74 @@ ni opération distante/E2E du relecteur. ComparaisonAST des littérauxSQL natifs
 égaleHEAD, quinze noms de groupes inchangés et control_database strictement
 égalHEAD. Les troisP2 sont corrigés, bornes/oracle503 conservés. Checkpoint de
 code autorisé ; qualification DEV et cause historique restent dues.
+
+### 23 novembre2026 — Diagnostic0, nominal15 et communs25, SLS-146
+
+Sources de banc6f758b2/530/f016 synchronisées atomiquement avec sauvegarde et
+comparaisonSHA ; image, configuration et services nonredéployés. Pilote privé
+reluduSLS146 avant exécution : deuxP2 de conservationSSO/finalisation puis
+diagnosticstderr nonprotégé corrigés ; contrôleAST0 après une faute de syntaxe
+préexécution corrigée. Aucune version déjàexécutée retouchée. Relecture sansP1/P2.
+
+Diagnostic5929ca6d : SSO réel frais, création d’une fonction, gardecommit acquise
+watching puis SIGTERM via PID/naissance/cgroup/argv/pidfd vérifiés, sans mutation
+soumise. NativeInterruptedError/operator_interrupted1, fault-primary avantfinally,
+fault-finalizationcomplete et receipt/configuration inchangés. Client/worker0,
+zérocheck/groupe ; stdout2951octets conservé entier, stderr0. Clôture extérieure0,
+helper/garde inactifs, agentstable/TracerPid0, fonction purgée physiquement et
+worker/lanceur/Node terminés/cgroupvide.
+
+Nominal57c20f05 : quinzegroupes passent, client/worker0 ; huit handles dont
+watchdog255attendu, hold-lease0 et sixgardes ordinaires0. Six synthèses complètes,
+compteurs de commit6/5/5/6lectures revenues aveccommit, phases et temps conservés ;
+neuf fluxstderr diagnostique+nominal tous vides, vraisstdout complets sousSHA.
+DeuxcoupuresSIGKILL du contrôle validées137 par le helper. Confirmation perdue503
+y comprisZIP, A dédupliqué àquota7Mio ; Bpilote/promue puis rollbackA préservant
+reçu et fichiers. Sept handlers succeeded corrélés aprèspurge en SQL par UUID/
+hash, auditcandidat et reçucommitted recoupés. Deuxfonctions purgées physiquement.
+Clôture extérieure0 : septhelpers auxnaissances émises terminés, septminuteurs
+inactifs, agentstable/TracerPid0, worker/lanceur/Node terminés et cgroupvide.
+La naissance initiale du helperhold-lease n’est pas émise ; SSH0 et consommateur
+absent sont distingués de cette observation manquante.
+
+Copiesprivées25communs relues avantexécution ; P2d’admission corrigé pourexiger
+retoursworker ETNode0, au-delà desbooléens. Unité8e1516f7/banc0ad6bd10 : une
+nouvelleSSO puis8manuel/8public/9connexion, vrai calme60s avantlogin, contrôleur0.
+PID820445/73013859 épinglé vivant ; clôture extérieure0, naissance terminée,
+cgroupvide, même générationAPI après les coupures nominales. Baseline/final
+42backend et quatreHTTPSno-store identiques ;84paragraphes manuels/SHA4a331e15.
+Le principal ouvre séparément les22originaux frais,16JPEGmanuel et6PNGconnexion,
+puis conserve notes/dimensions/SHA. Pas de montage ni substitution historique ;
+les fenêtres ne montrent pas84paragraphes simultanément, le texte agrandi n’est
+pas un zoomnavigateur et le formulaireSSO vide n’est pas une preuve d’autorisation.
+
+Le scellement storage-mutation-diagnostics-current-dev-2026-11-23 est présent :
+gzip445761octets/SHAfeec939f, brut1347732/SHAb568ea90, treizeprogrammes et troisTAR.
+40groupes ciblés, diagnostic0groupe et zéro groupeunique ajouté543 ; référence/
+configuration/5982/huit0 conservés.146.2/.3/.4partielles,146.5ouverte. Les branches
+SIGCONTrefusé, ligne excessive, sauvegarde et finalisation en faute ne sont pas
+qualifiées E2E par ces succès. Aucun49/32 acquis ni cause historique attribuée.
+
+Exploration indépendante sansécriture/test/SSH, puis lecture des sources par le
+principal : agent_volumes.py326 publieprepared avant configuration_operation,
+dispatch puis écritureRPCagent.py142. Le contrôle attend readuntil et receipt
+avant sa transactionfinale. Le SIGSTOPactuel aprèsprepared peut donc empêcher
+la réception deprepare et le commit durant l’attente5s ; seul SIGCONTfinally
+débloquerait ensuite la publication. Possibilité statique établie, sans preuve
+que c’est le trajet du premierrouge. Un writerREGISTRY aprèsprepared laisse
+les dernières lectures/réponseprepare possibles sousWAL et bloquerait la future
+confirmationagent, mais le timeoutSQLite1s impose de distinguer sa contention
+d’une vraie perte de confirmation par arrêt. Aucun changement de protocole ou
+produit dans cette preuve ; décision àpersister avant code et avant nouveau49.
+
+Revue et vérification indépendantes sansP1/P2 : les huitchemins conservent
+strictement statut/SHA avant/après.139références vers104chemins, treizeprogrammes,
+troisTAR et530sourcesGit6f758b2 recoupés ;531/531/532membresTAR incluent les
+wrappers privés distincts. Seul le contrat de résultats courant diffère du
+vecteur530 gelé ; les exécutables restent exacts. Les18canaux stdout/stderr
+décodés sont entiers et sousSHA, scans de formats sensibles sans détection.
+Deuxerreursconcurrentes sont les502 des coupures volontaires, attendues par
+les scénarios et conservées. Premières hypothèses de lecture du vérificateur
+(membresTAR, erreurs attendues et format d’assertionNode) corrigées uniquement
+en mémoire, puis recoupements finaux0 ; aucune écriture ni rejeu de campagne.
+La nouvelle inspection des pixels reste celle du principal, pas du vérificateur.
