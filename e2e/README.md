@@ -3260,3 +3260,8 @@ Le [refus réel de fenêtre courte](../docs/evidence/invocation-production-windo
 passe sur526sourcesc63014f/f016 :1849,233s avantW, zéroHTTP/zérotir puis reprise
 indépendante. Unitéutilisateur et cgroup joints extérieurement ; un groupe support,
 aucun groupe nominal ajouté. Le nominal positif du précontrôle reste à passer.
+
+La [borne native25 courante](../docs/evidence/native-observer-deadline-schema011-query-dev-2026-11-23.json)
+passe ses troisgroupes sur526sources1135713/f016 :25,000266s, masque/alarme
+conservés, dégel/détachement, restitution et cgroup joints. Aucun groupe de
+rétention ajouté ; autres consommateurs natifs restent à éprouver.

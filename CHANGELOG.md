@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-134.4 : borne native sans événement mesurée à25,000266s sur f016,
+  masque/alarme conservés, dégel et détachement réels. Troisgroupes support
+  passent avec restitution et unité/cgroup joints ; autres consommateurs dus.
+
 - SLS-133.5 : refus préparatoire réel acquis à1849,233s avantcron, avec
   SSO/deuxpublications/deuxinstances et zéroHTTP/zérotir. Reprise indépendante
   et unitélocale/cgroup vides recoupés ; un groupe support, nominal positif dû.
