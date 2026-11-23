@@ -73,14 +73,15 @@ demeurent nécessaires.
 
 ## Portée du compteur CLI à corriger — SLS-133.7
 
-La synthèse du client nomme real_http_handlers le nombre d’éléments du tableau
+La synthèse historique du client nommait real_http_handlers le nombre d’éléments du tableau
 responses, qui contient les réponses de charge. Le vrai command-timeout
 078126da affiche0 pour ce champ, alors que son reçu natif conserve une
 invocation HTTP et une planifiée réellement démarrées. Cette synthèse ne doit
 pas présenter un compteur de réponses comme un nombre de démarrages observés.
-La clarification sera décidée et codée avec le profilage productif133.6, puis
-éprouvée sur ses vrais passages. Les rapports passés et leur comptage de groupes
-restent intacts ; ce libellé n’est pas utilisé pour qualifier les pannes134.
+La synthèse est désormais nommée ordinary_http_responses et les deux passages
+courts réels l’éprouvent à2. Le plein6000 reste dû. Les rapports passés et leur
+comptage de groupes restent intacts ; l’ancien libellé n’est pas utilisé pour
+qualifier les pannes134.
 
 
 ## Profilage du coût d’invocation courant — SLS-133.6
@@ -279,3 +280,30 @@ Exécuter les refus avant mutation, le smoke2 normal, cette perte, puis le plein
 même image et restitution sans profilage. Les autres campagnes produit et
 consommateurs gardent leurs obligations propres. Aucun retry automatique,
 aucun processus ou signal substitué n’est ajouté pour qualifier cette reprise.
+
+## Passage court et reprise qualifiés — 23 novembre 2026
+
+La [preuve courte](evidence/invocation-cost-short-schema011-dev-2026-11-23.json)
+porte sept vrais refusCLI et quatre groupes support, zéro groupe nominal.
+Sources528 du gel3fd1473, même imagef016, originaux011/collection/configuration,
+référence,5982artefacts et huitcompteurs0 sont recoupés. Deux contrôleurs réels
+code0, unités/cgroups vides et gardes terminées ; la première clôture précède
+le second lancement. Revue des archives et reçus sans P1/P2 bloquant.
+
+Le smoke valide2HTTP, SQLROfinal2 et le vrai shutdown API0,431704787s. Les quatre
+marqueurs applicatifs et le codeprofiler0 sont prouvés séparément ; pstats frais
+1002003octets,6643fonctions/15411liens callers, parser mêmeimage sorti0 puis
+retiré et fichier scellé. La perte réelle conserve T/created/CIDdurable, suivis
+d’une restitution indépendante et du retrait du parser. Elle ne revendique
+aucune lecturepstats réussie. Les deux synthèses affichent2réponses de charge.
+Ces résultats ne permettent pas d’attribuer le ralentissement sous saturation.
+
+Décision avant le pilote plein : son unité localeexec a RuntimeMaxSec2400 et
+TimeoutStopSec60 ; l’attente client est bornée2300 et le contrôleur2600.
+Le smoke/reprise conservent leurs unités900/attente750. Ces bornes externes
+laissent passer le diagnostic6000 dans sa fenêtre existante tout en terminant
+avant la garde2700 ; elles ne déplacent ni W30–35min, ni W−60, ni les délais
+opérateur ou applicatifs. Une frontière manquée reste rouge. Le wrapper plein
+est une nouvelle source privée gelée ; les pilotes exécutés restent immuables.
+Le plein/quatrejalons et release/EOF sans profilage restent à produire, puis
+nominal3, campagnes produit et autres consommateurs selon leurs contrats.

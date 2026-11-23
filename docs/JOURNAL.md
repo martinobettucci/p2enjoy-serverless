@@ -10342,3 +10342,21 @@ Son seul défaut concret est corrigé : le vrai marqueur Uvicorn
 et un code0. Le contrôle syntaxique et le diff passent ; aucun smoke, parser-loss,
 plein6000 ou défaut release/EOF de cette nouvelle voie n’est encore qualifié.
 L’image applicative et la configuration officielle restent hors de ce changement.
+
+### 23 novembre 2026 — Coût court et perte du parser éprouvés
+
+Sept refusCLI réels ne créent aucune ressource et ne touchent pas aux services.
+Le smoke passe deux HTTP, SQLROfinal et shutdown0,431704787s ; fichier frais
+1002003octets lu par le vrai parserf016,6643fonctions/15411callers. La seconde
+campagne observe réellement T après CIDparser durable/created, puis la reprise
+indépendante retire ceCID sans prétendre avoir lu ses statistiques. Quatre
+groupes support et zéro nominal ; deux contrôleurs0, clôtures/cgroups/gardes,
+configuration/collection/5982 et huitcompteurs0 recoupés. Revue des archives,
+timings, manifests et reçus sansP1/P2 bloquant ; brutpstats distant non relu par
+le relecteur, empreintes et assertions attestées par les reçus.
+
+Avant code du pilote plein : unité locale2400s, client2300 et contrôleur2600,
+afin d’accompagner6000HTTP dans la fenêtre déjà décidée sans prolonger sa
+frontière ni la garde2700. Nouveau pilote gelé, scripts exécutés immuables.
+Plein/quatrejalons et release/EOF restent dus ; le court n’attribue pas le
+ralentissement sous journal saturé et ne clôt pas133.

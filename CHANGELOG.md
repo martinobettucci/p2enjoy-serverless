@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-133.6/.7 : sept refusCLI et quatre groupes support courts qualifiés sur
+ 528sources/f016. Smoke2, vrai shutdown0,432s, pstats lisibles et parser retiré ;
+ perte pilote réelle après CIDdurable puis reprise indépendante. Deux contrôleurs0,
+ cgroups/gardes joints et originaux conservés. Plein6000 et régressions encore dus.
+
 - SLS-133.6/.7 : code du clone cProfile et du parser possédé raccordé,
   SQLRO courant distinct du f73, timings client en chaînes et compteur de
   réponses explicite. Reprise parser-loss et anciennes voies conservées ;

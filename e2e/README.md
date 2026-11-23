@@ -3366,5 +3366,11 @@ et temps réels, sans les présenter comme CPU, corps de transaction ou réseau
 pur. SQLRO courantCROSS et intervalles client sont séparés ; les ns client sont
 des chaînes. La synthèse nomme le compteur `ordinary_http_responses`, nombre
 de réponses de charge validées. Sources/index528, images, originaux et clôtures
-sont à recouper par les vrais passages ; ce code préparé n’est pas encore qualifié.
+sont recoupés par les deux passages courts : sept refusCLI et quatre groupes
+support, deux contrôleurs0/cgroups joints, statistiques lisibles sur le smoke
+et reprise indépendante après vraie perte du pilote sur parser-loss. Le plein
+6000/quatrejalons, release/EOF sans profilage et campagnes globales restent dus.
+Le [reçu court](../docs/evidence/invocation-cost-short-schema011-dev-2026-11-23.json)
+ne qualifie aucun groupe nominal. Le pilote plein local est borné2400s, attente
+client2300s et contrôleur2600s ; garde2700 et W−60 restent inchangés.
 Voir le [contrat courant](../docs/INVOCATION_PRODUCTION_PROFILE.md#profilage-du-coût-dinvocation-courant--sls-1336).
