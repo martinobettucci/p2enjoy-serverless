@@ -10605,3 +10605,27 @@ PUT200 et purge ; reçu systemd exact et confirmation65,801s/125s. Wrapper0 et
 contrôleur0, cgroupvide, source529/a6d326c et originaux/config/référence/5982/huit0
 recoupés. Zéro groupe fonctionnel, primaire rouge conservé.122reste ouverte
 pour12API/25communs frais après cette faute ;072/132/133 gardent les49/32.
+
+### 23 novembre 2026 — Clôture122 après intégration réelle37
+
+Après la garde8f6d68a0 et sa clôture externe, APIaca812b5 passe12 puis les
+communs ee65b861 passent25 sur529sources5c5342c/f016. Deuxcontrôleurs0,
+clôtureAPI avant lancementcommuns et dixacteursnatifsAPI joints. La coupure9/137
+change la génération en08:07:24.452782111Z, ensuite conservée par lescommuns.
+22nouvelles captures ouvertes une à une,42backend/quatreweb conformes et manuel
+84paragraphes/SHA4a331e15 ; configuration/référence/5982/huit0 conservés.
+
+La vérification indépendante recoupe tous les SHA/TAR/reçus/chronologie et les
+identités archivées, sansP1/P2, sans relancer de test ni revendiquer une nouvelle
+inspectionvisuelle.122.3 et122 sont clos. Le primaire de faute resteNode1/
+completedfalse ; le nouveau passage37 répète la couverture et ajoute zéro
+groupeunique. Le précédent47 garde ses octets et sa génération07:10:58.
+README/backlog corrigent leurs anciennes mentions de qualificationfonctionnelle
+encore due. Les49/543/18 puis32/276 restent nécessaires pour072/132/133/134.
+
+PréparationRO du socle49 : manifeste49/543/18 confirmé, troispreuves de rétention
+liées à leurs quatre modulesf016 ; le gestionnaire systemd utilisateur porte
+SSH_AUTH_SOCK/PATH (présence seule contrôlée). Le lanceur canonique est conservé.
+Les septJPEG contrôleUI non déclarées seront archivées en complément, avec SHA
+et mtime dans la fenêtre de leur commande, puis toutes les images fraîches
+seront ouvertes individuellement ; aucun nouveau test ni source n'est ajouté.

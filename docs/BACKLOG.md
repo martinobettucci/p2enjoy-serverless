@@ -71,7 +71,6 @@ bloquée est sautée et son blocage est nommé.
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
-| 3 | [SLS-122](#sls-122) Clôture du client de diagnostic après refus natif | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -1348,12 +1347,12 @@ Tests exigés :
 <a id="sls-072"></a>
 ## SLS-072 — Journaux recherchables et corrélation d'exploitation
 
-Statut : [~] — registre011, API, vues, recherche, suivi et export implémentés et
-déployés en DEV sur1aa70214 ; qualification fonctionnelle, visuelle et
-régressions encore à produire. La bascule gardée nominale est recoupée,
-sans groupe fonctionnel ajouté et sans clôture d'un critère ci-dessous.
-Le premier passage API s'arrête sur la frontière du buffer ; [SLS-120](#sls-120)
-porte son diagnostic et sa correction avant reprise de072.4.
+Statut : [~] — registre011, API, vues, recherche, suivi et export déployés en DEV
+surf016 ; [47groupes fonctionnels et visuels](evidence/execution-journal-complete-schema011-query-dev-2026-11-23.json)
+qualifiés sur529sources,44captures inspectées. Les corrections120→130 et137/138
+sont closes, dont la garde122 et son intégration fraîche12API/25communs.
+Les rétentions132/133 ont leurs preuves courantes séparées ; le socle49/543/18
+puis les32commandes/276groupes restent dus avant clôture de072.
 Nature : Développer. Dépend de : SLS-061, SLS-074. Ordre : 3.
 Contrat : [EXECUTION_LOGS](EXECUTION_LOGS.md), complétant
 [journaux](CONSOLE_USABILITY.md#journaux-et-corrélation).
@@ -3675,7 +3674,11 @@ groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
 
 ## SLS-122 — Fermer le diagnostic après une restitution refusée
 
-Statut : [~] — le replay de réveil121 acquiert le verrou final mais échoue
+Statut : [x]. [Intégration après faute réelle](evidence/execution-journal-postguard-integration-schema011-query-dev-2026-11-23.json) :
+12API/25communs frais,22captures inspectées, contrôleurs0 et clôtures externes.
+La faute de garde conserve son primaireNode1/completedfalse ; zéro groupeunique ajouté.
+
+Contexte initial : le replay de réveil121 acquiert le verrou final mais échoue
 avant writer-blocked ; les premières vérifications de santé de restitution
 échouent. La garde indépendante60s rétablit les threads et confirme ensuite
 la santé. Le client quitte son finally avant fermeture navigateur/purge,
@@ -3694,7 +3697,7 @@ rapport échoué en succès ni faire d'une reprise opérateur une preuve nominal
 - [x] SLS-122.2 Décision et motif avant correction du flux finally ; ressources
   navigateur/API/work toujours fermées, échecs primaires conservés, nettoyage
   conditionné à la restitution réellement acquise. Aucun rejeu du scénario.
-- [ ] SLS-122.3 Éprouver le refus et sa clôture sur le vrai code déployé avec
+- [x] SLS-122.3 Éprouver le refus et sa clôture sur le vrai code déployé avec
   faute réelle et gardes jointes, puis replay121/12API/25communs frais ;
   aucune simulation, substitution de réponse, skip ou succès conditionnel.
   Le champ `independent` du reçu vaut le mode rescue : il ne prouve pas seul
@@ -3784,8 +3787,9 @@ origine systemd (PID758216, attemptad7bfba1…) est recoupée avec MESSAGE7860oc
 SHA8f153bf7. Purge physique d'une fonction/jeton/service/namespace, cinqfermetures,
 dixprocessus recensés absents et paquet temporaire retiré. Le primaire reste
 completed=false/code1, cleanup=true ; zéro groupe qualifié. Le collecteur initial
-échoué est conservé ; son addendum RO n'ajoute aucun handler ou faute.122 reste
-[~] pour l'intégration12API/25communs, actuellement dépendante du défaut121.
+échoué est conservé ; son addendum RO n'ajoute aucun handler ou faute. Cette
+preuve501 ne porte pas l'intégration ; celle-ci est acquise après la faute529
+par le passage frais12API/25communs lié ci-dessous.
 
 Décision121 avant correction du banc, après la preuve de clôture122 : remplacer
 l'attente EAGAIN par les phases de restauration du nom de worker existantes.
@@ -3822,7 +3826,13 @@ GET503 à60,027s et PUT200 à58,915s ; confirmation de garde65,801s sous125s.
 PrimaireNode1/completedfalse conservé, cleanuptrue et cinqfermetures ; wrapper
 et contrôleur0 qualifient seulement cette clôture, zéro groupe fonctionnel.
 Unité/cgroup et gardes joints, mêmegénération/config/référence/5982/huit0.
-Les12API/25communs frais après cette faute restent requis ;122 reste ouverte.
+L'[intégration fraîche après cette faute](evidence/execution-journal-postguard-integration-schema011-query-dev-2026-11-23.json)
+passe12API/25communs sur529sources5c5342c/f016. DixacteursnatifsAPI et deux
+contrôleurs0, cgroups/PID/gardes joints ; générationaprèscoupure08:07:24.452782111Z
+conservée pour lescommuns.22captures ouvertes individuellement,42backend/quatreweb,
+configuration/référence/5982/huit0 recoupés. La revue indépendante confirme les
+SHA/TAR/chronologie ;122 est close. Le corpus47 garde sa génération propre et
+ces37répétitions ajoutent zéro groupeunique ;072/132/133 gardent les49/32.
 
 ## SLS-123 — Armer la coupure après le vrai compteur durable
 

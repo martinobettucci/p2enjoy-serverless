@@ -25,11 +25,15 @@ reste au gel9702888/528sources.
 
 Le [rapprochement des critères](../docs/evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json)
 clôt120/121/123–130 avec ces mêmes47groupes, sans cumul supplémentaire. Le cas
-122 reste distinct : [faute courante](../docs/evidence/execution-journal-independent-guard-schema011-query-dev-2026-11-23.json)
+122 est clos avec sa [faute courante](../docs/evidence/execution-journal-independent-guard-schema011-query-dev-2026-11-23.json)
 sur529sourcesa6d326c/f016, vraiSIGSTOP/garde60, GET503/Node1 conservé puis PUT200,
 purge physique et cinqfermetures, reçu système exact. Son wrapper/contrôleur0
 qualifie le diagnostic de clôture, pas la lecture échouée ; zéro groupe ajouté.
-12API puis25communs frais après cette faute restent requis avant clôture122.
+L'[intégration fraîche après cette faute](../docs/evidence/execution-journal-postguard-integration-schema011-query-dev-2026-11-23.json)
+passe12API puis25communs sur529sources5c5342c/f016, deuxcontrôleurs0 et dixacteurs
+natifsAPI joints.22nouvelles captures inspectées ; mêmes sources/configuration/
+référence/5982/huit0. La génération08:07:24.452782111Z est celle de ce passage,
+distincte du corpus47 conservé. Ces37répétitions ajoutent zéro groupeunique.
 
 Les [rouges137](../docs/evidence/execution-journal-ui-conservation-first-failed-dev-2026-11-23.json)
 et [138](../docs/evidence/execution-journal-date-input-first-failed-dev-2026-11-23.json)
