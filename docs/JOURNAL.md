@@ -10563,3 +10563,13 @@ de référence archivée. Rétention par défaut et aucun corpus ancien partagé
 chaque upload/promote/appel/archivage est réel, les deux fonctions sont purgées.
 Pas de retry, délai ajouté ou code produit changé. L'observation137 reste active
 pour le GET final et les passagesAPI12/UI10/25communs frais restent requis.
+
+### 23 novembre 2026 — UI07 corrigé passe en ciblé
+
+0e469015 passe le scénario partagé sur529sources9f7f9f6/f016 : gardecommit et
+PUT réellement perdu, conflit/relecture/1min, puis seconde fixture10080min
+archivée avec GETnavigateur200/cinq lignes,404fonction et référence indisponible.
+QuatreJPEG ouvertes individuellement et leurs limites consignées. Contrôleur0,
+Nodejoint, deuxpurges physiques, cgroupvide et originaux/config/référence/5982/
+huit0 recoupés.137.2 acquis, sous-code410 ancien toujours inconnu, zéro groupe
+complet. Reprendre API12→UI10→25communs courants sans changement des sources.

@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-137.2 acquise en ciblé : politique1min et seconde fixture10080min,
+  référence archivée lue200/cinq événements et routefonction404. QuatreJPEG
+  inspectées, deuxpurges et clôture externe ; fullUI/API12/25communs encore dus.
+
 - SLS-137 : référence archivée isolée dans un service neuf, après tous les
   contrôles de politique1min inchangés. Deux fixtures réelles et purge commune,
   observation passive maintenue ; qualification complète encore due.

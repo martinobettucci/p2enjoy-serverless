@@ -37,7 +37,10 @@ scénario conserve désormais son test complet de politique1min sur le service
 initial, puis crée une seconde fixture originale dans un service neuf pour la
 référence archivée. Ce service ne partage pas le corpus en cours d'expiration ;
 upload/promote/appel/archivage et purge restent réels. L'observateurHTTP/DOM est
-conservé ; aucun retry ou délai ajouté. Le passage courant reste à qualifier.
+conservé ; aucun retry ou délai ajouté. Le [scénario partagé corrigé](../docs/evidence/execution-journal-policy-reference-replay-dev-2026-11-23.json)
+passe sur529sources9f7f9f6/f016 : GET200/cinq événements, quatreJPEG inspectées,
+deuxfonctions purgées et clôture externe acquise, zéro groupe complet. API12,
+full10UI et25communs de ce même vecteur restent à qualifier.
 
 La basculef016 et les rétentions courantes sont acquises ; les12API du gel21834d8
 restent attachées àf73. Le prochain passage complet rejoue API12 puisUI10 puis

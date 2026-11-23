@@ -5122,7 +5122,7 @@ Les12API acquises juste avant gardent leur gel ; aucun commun n’est lancé.
   La génération qui lie UI et communs est celle après la coupure réelle d’API10,
   pas celle avant API12. Conserver ses deux StartedAt et les événements de coupure ;
   ne pas comparer les démarrages à l’intérieur du scénario qui les fait changer.
-- [ ] SLS-137.2 Retrouver le point de refus depuis le source et les observations
+- [x] SLS-137.2 Retrouver le point de refus depuis le source et les observations
   réelles, distinguer produit, protocole et corpus sans attribuer une cause
   depuis le seul hash ; persister le correctif retenu avant code.
 - [ ] SLS-137.3 Qualifier le scénario affecté puis le full10UI sur le code
@@ -5179,6 +5179,17 @@ d'expiration ; aucune temporisation, relance, tolérance de statut ou modificati
 produit n'est ajoutée. Ce choix isole les deux responsabilités plutôt que de
 supposer qu'un relevé invalidé va devenir prêt. Le full10UI et les campagnes
 cohérentes doivent éprouver cette correction ;137.2/.3 restent ouverts jusque-là.
+
+137.2 — [scénario partagé corrigé acquis](evidence/execution-journal-policy-reference-replay-dev-2026-11-23.json),
+529sources9f7f9f6/f016. Perte réelle du PUT après commit, conflit, relecture,
+bornes0/10081 et sauvegarde1min conservés ; seconde fixture relue à10080min,
+upload/promote/Read/appel/archivage puis GETnavigateur200/cinq événements sans
+nom de fonction,404 côté fonction, Objet indisponible et aucun lien de gestion.
+Deuxfonctions purgées physiquement, quatreJPEG personnellement inspectées,
+contrôleur0/Nodejoint, cgroupvide et originaux/config/référence/5982/huit0.
+Zéro groupe complet ;137.2 acquis pour le refus410 établi et la séparation
+de protocole éprouvée, sans prétendre retrouver son sous-code ancien.137.3
+reste ouverte pour API12→full10UI→25communs courants, puis suites49/32 distinctes.
 
 ## SLS-138 — Refus de saisie de la date dans le replay UI
 
