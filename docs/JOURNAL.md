@@ -10987,3 +10987,28 @@ brut/SHA,18programmes/102objets référencés et108captures rehashés. Les deux
 fichiers de preuve sont les seuls ajouts pendant la vérification RO.145.1
 est acquise ;145.2garde la phase primaire à observer,145.3/.4 restent ouvertes.
 Aucun rejeu ni correctif de produit, aucun cumul en49 complet ;32 non lancé.
+
+
+### 23 novembre2026 — Décision145 : conserver la phase avant secours
+
+Le rouge145 ne localise pas le site natif. Trois horloges d’acquisition ont
+des origines distinctes ; la faiblesse statique du contrôle de délai quand
+waitpid rend un statut ne prouve pas sa causalité ici. Décision : instrumenter
+le seul banc de reprise, sans modifier NativeObserver/ControlObserver ni les
+programmes de restitution. État de phase et compteurs binaires en page mappée
+partagée/versionnée, checkpointJSON borné seulement lorsqu’il change, primaire
+atomique avantfinally et erreurs de nettoyage séparées. Une trace par syscall
+ajouterait de l’IO et du volume dans la fenêtre visée ; une conservation à la
+seule sortie serait perdue sousSIGKILL. La page mémoire évite ces écritures
+répétées tout en laissant un état récupérable sur le même boothôte ; elle ne
+promet ni coût nul ni persistance après reboot. Séquence/révision incohérentes
+restent des limites explicites, jamais un checkpoint supposé.
+
+PhotographieRO3s du helper encore identifié avantsecours, sans lecture des
+buffers/environ.45/70/80s et prédicats conservés, origine du secours retenue
+sans la déduire du boolindependent. Un diagnosticclaimed explicite, rapport
+séparé et0groupe, permet l’acquisition native puisrelease sanscoupure : vrais
+API/handler/Docker, mêmeobservateur/SQL, purge et gardes obligatoires. Ce mode
+ne remplace aucun des cinqgroupes nominaux ni les25communs et49/32. Le mode
+terminal-capture de rétention reste non instrumenté. Contrat écrit avant code ;
+aucuneimplémentation ni cause démontrée à cet instant.

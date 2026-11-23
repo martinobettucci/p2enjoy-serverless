@@ -221,3 +221,99 @@ finalisation, liées au SHA terminal :2services sains, actifs/baux nuls,5982arte
 et aucune garde. Captures canoniques inchangées. Brut83048624octets/gzip4228693 ;
 ancienne preuve348 préservée. La borne native partagée et son nominal sont
 qualifiés ; âge18novembre et campagne complète restent requis,078.5 non clôturée.
+
+## Diagnostic de la barrière non reçue — SLS-145
+
+Décision du23novembre2026 avant code, après le
+[premier échec scellé](evidence/schedules-recovery-gated-first-failed-dev-2026-11-23.json).
+L’erreur primaire est l’expiration cliente `native_event_missing_gated`, et
+non la finSSH255. Le site natif n’est pas établi. La décision porte sur la
+conservation d’observations nouvelles ; aucun correctif de cause n’est déduit
+du seul rouge. Les cinq groupes nominaux restent exigés intégralement.
+
+### Périmètre de l’instrumentation
+
+Instrumenter seulement le parcours de reprise et ses quatre gardes. Conserver
+la classe partagée `NativeObserver`, `ControlObserver`, les programmes historiques
+d’arrêt/restitution et les requêtes/prédicats d’acquisition. Le mode
+`terminal-capture` des rétentions garde son chemin non instrumenté. Aucun
+registre, tampon, résultat SQL, horloge ou réponse n’est remplacé. Aucun
+nouveau service, paquet tiers ou réglage d’infrastructure n’est nécessaire.
+
+Le helper crée dans son dossier de garde root0700 des fichiers diagnostiques
+root0600. Un petit état binaire versionné, mappé par la bibliothèque standard
+Python, conserve phase et compteurs sans écriture de fichier ni émission
+stdout à chaque syscall. Les mises à jour de la page mémoire partagée restent
+visibles après SIGKILL du helper sur le même démarragehôte ; aucune garantie de
+persistance après redémarrage n’est revendiquée. Cette observation a un coût,
+nommé dans la preuve ; elle n’est pas assimilée à une exécution non instrumentée.
+
+Le protocole publie sa version, ses champs/types et ses phases dans un manifeste
+figé sousSHA, avec identité helper/contrôle, naissances, namespacePID et boot.
+Un compteur de séquence encadre chaque mise à jour ; le lecteur borne ses essais
+et annonce un état incomplet si la mort interrompt l’écriture. Il ne reconstruit
+pas une valeur partielle. Les diagnostics ne contiennent ni environnement,
+secrets, arguments applicatifs, en-têtes, corpsHTTP ni mémoire utilisateur.
+
+Bornes de réalisation : page d’état fixe de4096octets ; manifeste de16Kio au
+plus ; derniercheckpointJSON de64Kio au plus ; primaire et incidents de
+finalisation de16Kio chacun,16cadres source au plus. Les dépassements sont
+nommés avec taille/SHA et observation incomplète, jamais convertis en un état
+complet. Le lecteur fait au plus trois essais de séquence espacés au plus
+d’1ms, dans la borne globale3s. Une erreur de conservation diagnostique ne
+remplace ni la primaire ni ses métadonnées déjà reçues ; elle constitue un
+incident séparé et empêche de qualifier une observation manquante.
+
+### Observations conservées
+
+- instants réels d’armement, attenteUTC, début/fin d’attache, début d’acquisition
+  et échéance45s ; domaines tempsmur/monotone explicitement séparés ;
+- phase avant les appels susceptibles de bloquer : `attach`, `wait`, `info`,
+  chacune des trois lectures du checkpoint, `predicate`, `durable`, `emit`,
+  `detach`, `restore`, `reader_close` et fin ;
+- nombre d’appels/retours de l’API `NativeObserver.wait`, dernier signal réellement
+  retourné, métadonnée du dernier syscall observé et nombre de candidats.
+  Ces compteurs ne prétendent pas exposer les appels internes vides de waitpid
+  ni leur statutbrut, que la classe partagée ne publie pas ;
+- durées et compteurs séparés des trois lecturesSQLite et de `durable()` ;
+  dernier checkpoint réellement obtenu, sous révision/SHA et capacité bornée,
+  distinct du seul fait d’avoir commencé une lecture. Tout dépassement ou
+  désaccord de révision reste une observation indisponible explicite ;
+- exception primaire enregistrée atomiquement avant le `finally` : type,
+  errno applicable, SHA du message et cadres source sans variables ; incidents
+  de finalisation conservés séparément, sans les substituer à la primaire.
+
+Une lecture diagnostique dédiée est strictementRO : dossier/identités/SHA
+vérifiés, page mémoire et checkpoint recoupés, puis métadonnées bornées de
+`/proc` du helper encore identifié (état, syscall, attente noyau, tempsCPU,
+identités). Le lecteur ne lit ni environ ni tampon pointé. Il distingue processus
+vivant, naissance terminée, permission refusée et fichier absent ; le namespace
+et boot épinglés précèdent toute conclusion d’absence.
+
+Le client enregistre l’expiration primaire et la photographieRO avant d’engager
+son secours. Cette photographie est bornée à3s, sans retry ; son échec conserve
+la primaire au lieu de la remplacer. Les limites45/70/80s restent inchangées,
+avec leurs origines distinctes. La commande de secours choisie, l’étatSSH
+observé et les instants d’envoi/retour sont retenus ; `independent:true` n’est
+jamais présenté comme une preuve du déclencheur timer. Une course non distinguée
+par les reçus/journaux reste nommée inconnue. Après réussite aussi, lire les
+fichiers diagnostiques figés avant de commencer la garde suivante.
+
+### Diagnostic d’acquisition séparé du nominal
+
+Un mode explicite `--diagnose-claimed` du client peut préparer une fonction
+originale par les API réelles, puis éprouver la seule acquisitionclaimed à la
+prochaine frontièreUTC. Il utilise le même helper, observateur, SQL, prédicat
+et bornes que le nominal. Après barrière réellement acquise, une commande
+explicite `release`, autorisée seulement avec l’option native d’observation,
+détache et restitue sans envoyer de commande de coupure. Le vrai handler peut
+alors poursuivre normalement ; le nettoyage public et physique reste exigé.
+Un échec reste conservé avec son vrai retour et sa photographie.
+
+Ce mode produit un rapport distinct identifié acquisitiondiagnostique et compte
+zérogroupefonctionnel. Il ne saute aucun groupe du nominal et ne remplace ni
+les trois coupures137, ni les trois fenêtres manquées, ni claimed/linked
+interrompus, ni leurs tirs normaux. Pas de relance automatique : résultat,
+programmes, diagnostics, identités, gardes et purge sont recoupés avant toute
+nouvelle expérience. Le nominal cinqgroupes puis25communs,49/543/18 depuisle
+début et complément32/276 restent nécessaires à145.4.

@@ -5889,3 +5889,11 @@ et les propositions égales aux sourcesGit gelées, différentes de l’ancien
 reçu de propositions. Aucun changement/adoption de note revendiqué. La trace
 stockage est conservée/détachée aveccontrôleur0, mais sa corrélationSQL prévue
 après49 n’a pas été réalisée sur ce socle échoué. Ces limites restent ouvertes.
+
+Décision145.2 avant code : [diagnostic de phase](SCHEDULE_RECOVERY.md#diagnostic-de-la-barrière-non-reçue--sls-145),
+état binaire mappé borné/versionné dans le dossier de garde, checkpoint réel
+et primaire/finally distincts, photographieRO3s avantsecours. NativeObserver/
+ControlObserver, programmes d’arrêt/restitution, oracles et bornes45/70/80
+conservés ; terminal-capture non instrumenté. Diagnosticclaimed séparé0groupe,
+release seulement en observation sanscoupure ; le nominal5+25 et49/32 restent
+complets et obligatoires. Instrumentation décidée, pas encore implémentée.

@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-145 : diagnostic de phase décidé avant code, borné et propre au banc de
+  reprise : état mappé/versionné récupérable, checkpoint et primaire/finally
+  séparés, photographieRO3s avantsecours. Observateur partagé, oracles et
+ 45/70/80s conservés ; diagnosticclaimed0groupe distinct des cinqgroupes
+  nominaux encore requis. Instrumentation non encore implémentée.
+
 - SLS-145 : [cinquième socle scellé](docs/evidence/schedules-recovery-gated-first-failed-dev-2026-11-23.json),
   8b88e99/529/f016,505groupes antérieurs/40campagnes puis deuxpartiels,
   neufprérequis et108captures inspectées. Primaire native_event_missing_gated
