@@ -55,6 +55,14 @@ extérieurement. Le [contrat133](../docs/INVOCATION_PRODUCTION_PROFILE.md#bilan-
 porte le rapprochement du correctif retenu ; les autres critères gardent leurs
 preuves propres.
 
+Le premier socle49 courant, ad9f1a9/529sources/f016, est
+[arrêté avant tout groupe](../docs/evidence/schedules-current-builder-auth-first-failed-dev-2026-11-23.json)
+au prérequis storage-legacy-build : ancien SHAauth089 différent du recheck072.
+Worker8731613d fermé, client joint et originaux intacts ; un prérequis SSO réussi,
+zéro groupe qualifié. [SLS-140](../docs/BACKLOG.md#sls-140) conserve ce rouge et
+rattache explicitement le module courant à47, avec intégrité gzip/brut/12API,
+et089 comme origine séparée. La construction réelle et le nouveau49 restent dus.
+
 ### Historique des préparations et campagnes précédentes
 
 [EXECUTION_LOGS](../docs/EXECUTION_LOGS.md#découpage-et-qualification-réels)

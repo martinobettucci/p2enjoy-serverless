@@ -10647,3 +10647,21 @@ comme origine distincte et nommer le hunk072 ; aucune preuve de rôles négatifs
 ou rotation extrapolée. Le contratstorage corrige son texte courant vers011,
 conformément au client déjà adapté. Builder puis partial/full et25communs
 restent E2E réels, réutilisés dans49sansdoublecompte ; aucun autre oracle affaibli.
+
+### 23 novembre 2026 — Refus140 scellé et constructeur corrigé à qualifier
+
+La preuve publique du premierrefus conserve suite/trace/prérequis/worker et
+TAR529 reconstruit depuis les octets Gitad9f1a9, non depuis les fichiers modifiés.
+Zéro groupe et un prérequis ; les natifs extérieurs prouvent la génération et
+les originaux inchangés. Le constructeur relit le manifeste47 complet et son
+brut exact (SHAgzip/décompressé), recoupe12API dont02 et le vecteur de preuve,
+puis exige le moduleauth courant exact.089 reste lié à son propre moduleGit et
+son SHA ; reviewed_changes nomme le recheck072. Aucune copie de module courant
+dans003 ni changement des gardes dépendances/runtime/validateur. Le vrai build,
+la conservation de session lors d'upgrade et les replays restent non qualifiés.
+
+Revue140 avant gel : aucunP1/P2 sur le constructeur ni la preuve rouge ;
+syntaxePython valide et gardes historiques inchangées. Contrôle local extérieur
+supplémentaire : PID/naissance du worker et du client terminés, cgroup disparu.
+Le prochain49 repartira de sa première commande sur le nouveau vecteur529,
+sans reprendre le prérequisSSO ni un groupe du rouge précédent.

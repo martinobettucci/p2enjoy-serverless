@@ -5461,7 +5461,7 @@ Les exigences SSO négatives encore ouvertes089 restent ouvertes. Actualiser
 le texte du parcours courant003→011 selon le client déjà adapté, sans changer
 les branches historiques006/007/008 ni les autres gardes du constructeur.
 
-- [ ] SLS-140.1 Sceller le premier refus, sources/rapport/trace/worker et clôture
+- [x] SLS-140.1 Sceller le premier refus, sources/rapport/trace/worker et clôture
   native ; zéro groupe fonctionnel et un prérequis, sans transformer le rouge.
 - [ ] SLS-140.2 Corriger l'attestation exacte et sa traçabilité, référence complète
   courante et origine089 recoupées ; aucun code courant copié dans l'arbre003,
@@ -5471,3 +5471,11 @@ les branches historiques006/007/008 ni les autres gardes du constructeur.
   partiel réel ; originaux, gardes/clients, configuration et5982 conservés.
   Rejouer les25communs avec captures inspectées, sans les compter deuxfois dans
   le socle49 ; chaque étape du socle reste fraîche avant clôture072.
+
+140.1 — [refus initial scellé](evidence/schedules-current-builder-auth-first-failed-dev-2026-11-23.json) :
+zéro groupe, un prérequis, builder1 avant SSH ; TAR529 du Gitad9f1a9, trace46,
+rapport et worker terminés1, client joint. Natif extérieur identique, génération/
+configuration/référence/5982/huit0. Le constructeur corrigé exige désormais
+manifest47 complet et module exact, gzip/brut/12API dont02 ; la preuve089 est
+liée séparément. Syntaxe valide et revue indépendante sansP1/P2 ; nouvelle construction/parcours
+restent dus.

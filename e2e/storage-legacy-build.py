@@ -1,11 +1,14 @@
 # @spec docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
 # @verifies docs/BACKLOG.md#sls-104 | docs/STORAGE_LEGACY_PROOF.md#compatibilité-courante-et-preuves104
+# @spec docs/BACKLOG.md#sls-140 | docs/STORAGE_LEGACY_PROOF.md#attestation-courante-du-constructeur--sls-140
+# @verifies docs/BACKLOG.md#sls-140 | docs/STORAGE_LEGACY_PROOF.md#attestation-courante-du-constructeur--sls-140
 # @spec docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md#versions-et-configuration
 # @verifies docs/BACKLOG.md#sls-065 | docs/STORAGE_LEGACY_PROOF.md#versions-et-configuration
 """Build the genuine pre-storage control without changing the deployed image tag."""
 # @spec docs/BACKLOG.md#sls-077 | docs/GIT_HISTORY_REWRITE.md#sources-historiques-et-preuves
 # @verifies docs/BACKLOG.md#sls-077 | docs/GIT_HISTORY_REWRITE.md#vérifications-requises
 import hashlib
+import gzip
 import io
 import json
 from pathlib import Path
@@ -19,6 +22,40 @@ SSH = ['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', '-J',
 ROOT = Path(__file__).resolve().parents[1]
 # REVISION remains the historical attestation identity; read the rewritten Git tree.
 SOURCE_REVISION='eb6cbf328d56a68f4f6f565a2cc7818b917c5c9f'
+
+
+# @spec docs/BACKLOG.md#sls-140 | docs/STORAGE_LEGACY_PROOF.md#attestation-courante-du-constructeur--sls-140
+# @verifies docs/BACKLOG.md#sls-140 | docs/STORAGE_LEGACY_PROOF.md#attestation-courante-du-constructeur--sls-140
+def current_authorization_proof(authentication, current_auth):
+    path = ROOT / 'docs/evidence/execution-journal-complete-schema011-query-dev-2026-11-23.json'
+    manifest_raw = path.read_bytes()
+    manifest = json.loads(manifest_raw)
+    assert (manifest['completed'] and manifest['functional_groups'] == 47
+            and manifest['qualified_groups'] == 47 and manifest['api_groups'] == 12
+            and manifest['ui_groups'] == 10 and manifest['common_groups'] == 25), 'incomplete_current_authorization_proof'
+    assert hashlib.sha256(current_auth).hexdigest() == manifest['source_sha256'][authentication], 'unattested_current_authentication'
+    raw_name = manifest['raw']['path']
+    assert Path(raw_name).name == raw_name, 'authorization_proof_basename_required'
+    compressed = path.with_name(raw_name).read_bytes()
+    assert hashlib.sha256(compressed).hexdigest() == manifest['raw']['sha256'], 'authorization_proof_gzip_changed'
+    raw = gzip.decompress(compressed)
+    assert (len(raw) == manifest['raw']['uncompressed_bytes']
+            and hashlib.sha256(raw).hexdigest() == manifest['raw']['uncompressed_sha256']), 'authorization_proof_raw_changed'
+    phases = json.loads(raw)['phases']
+    assert [phase['phase'] for phase in phases] == ['api', 'ui', 'common'], 'authorization_proof_phases_changed'
+    api = phases[0]
+    client = api['client']
+    assert (api['bank']['before']['source_sha256'] == api['bank']['after']['source_sha256']
+            == manifest['source_sha256']), 'authorization_proof_sources_changed'
+    assert (api['controller']['returncode'] == 0 and api['bank']['node_exit_code'] == 0
+            and client['completed'] and client['cleanup'] and client['skipped'] == 0
+            and not client['cleanup_errors'] and len(client['checks']) == 12
+            and all(check['status'] == 'passed' for check in client['checks'])
+            and sum(check['name'].startswith('API 02 — ') for check in client['checks']) == 1), 'authorization_api_rights_unproven'
+    return {'path': str(path.relative_to(ROOT)), 'sha256': hashlib.sha256(manifest_raw).hexdigest(),
+            'raw_gzip_sha256': hashlib.sha256(compressed).hexdigest(),
+            'raw_sha256': hashlib.sha256(raw).hexdigest(), 'api_groups': 12,
+            'current_auth_sha256': manifest['source_sha256'][authentication]}
 
 
 def main():
@@ -43,15 +80,23 @@ def main():
     reference = json.loads(authentication_reference.read_text())
     historical_auth = subprocess.check_output(['git', 'show', SOURCE_REVISION + ':' + authentication], cwd=ROOT)
     current_auth = (ROOT / authentication).read_bytes()
-    assert reference['completed'] and hashlib.sha256(current_auth).hexdigest() == reference['source_sha256'][authentication], 'unattested_current_authentication'
+    assert reference['completed'], 'incomplete_historical_sso_proof'
+    sso_auth = subprocess.check_output(['git', 'show', reference['source_commit'] + ':' + authentication], cwd=ROOT)
+    assert hashlib.sha256(sso_auth).hexdigest() == reference['source_sha256'][authentication], 'historical_sso_proof_sources_changed'
+    authorization_proof = current_authorization_proof(authentication, current_auth)
     authentication_comparison = {
         'historical_sha256': hashlib.sha256(historical_auth).hexdigest(),
         'current_sha256': hashlib.sha256(current_auth).hexdigest(),
         'byte_identical': historical_auth == current_auth,
-        'current_proof': str(authentication_reference.relative_to(ROOT)),
-        'current_proof_sha256': hashlib.sha256(authentication_reference.read_bytes()).hexdigest(),
+        'current_proof': authorization_proof['path'],
+        'current_proof_sha256': authorization_proof['sha256'],
+        'authorization_recheck_proof': authorization_proof,
+        'historical_sso_proof': str(authentication_reference.relative_to(ROOT)),
+        'historical_sso_proof_sha256': hashlib.sha256(authentication_reference.read_bytes()).hexdigest(),
+        'historical_sso_auth_sha256': reference['source_sha256'][authentication],
         'historical_code_unchanged': True,
-        'reviewed_changes': ['pending_roles', 'id_token_azp', 'jwks_backoff', 'pending_refresh_tokens'],
+        'reviewed_changes': ['pending_roles', 'id_token_azp', 'jwks_backoff', 'pending_refresh_tokens',
+                             'execution_log_authorization_recheck'],
         'real_sso_upgrade_replay_required': True,
     }
     validator = 'control/app/validator.py'
