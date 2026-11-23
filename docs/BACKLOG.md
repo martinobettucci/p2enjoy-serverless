@@ -81,6 +81,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
+| 4 | [SLS-144](#sls-144) Rapports de jobs et dashboards générés | Développer | `[ ]` | SLS-081, SLS-072 | cette unité |
 | 5 | [SLS-083](#sls-083) Limites et en-têtes alignés sur Scaleway | Développer | `[ ]` | SLS-040 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md), [EXECUTION](EXECUTION.md) |
 | 5 | [SLS-080](#sls-080) Compatibilité du projet de référence | Développer | `[~]` | SLS-078, SLS-083 | [REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md) |
 | 6 | [SLS-068](#sls-068) Favoris personnels | Développer | `[ ]` | SLS-067 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#favoris-personnels) |
@@ -186,6 +187,7 @@ leurs preuves font autorité dans le détail de chaque unité.
 | Méthode importée fidèlement : `docs/.routine` et rôles d’origine | [SLS-000](#sls-000), [METHODE](METHODE.md) |
 | Planifications (crons) du manifeste, réellement déclenchées | [SLS-078](#sls-078) pour le moteur ; [SLS-080.3, .7 et .8](#sls-080) pour les deux expressions exactes de la référence ; [SCHEDULES](SCHEDULES.md) |
 | Jobs serverless : payload fixe, gabarits composés dans l’UI, expression crontab contrôlée par fenêtres de 5 minutes | [SLS-081](#sls-081), [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
+| Rapports de jobs : bibliothèque Node, tables et graphiques nommés, ajout aux objets existants, `history=false`, onglets Journaux et Dashboard généré, framework expliqué dans le guide SPARK | [SLS-144](#sls-144) |
 | Répliquer toutes les fonctionnalités de Scaleway Serverless | [SLS-082](#sls-082) et unités 083 à 088, [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | Compatibilité du projet de référence établie par contrats et fixtures | [SLS-080](#sls-080), [REFERENCE_COMPATIBILITY](REFERENCE_COMPATIBILITY.md) |
 | Exploitation complète et reproductible, guide rejoué | [SLS-079](#sls-079), [OPERATIONS](OPERATIONS.md) |
@@ -5718,3 +5720,92 @@ programmes, SHA, fenêtres et limites sont conservés séparément, zéro groupe
 ajouté. Un arrêt de suite avant ce parcours reste « non atteint », sans faux
 acquire. Cela cherche le souscode dans le contexte transversal ayant produit
 le premierrefus, sans changer l'image ni attribuer une absence de reproduction.
+
+<a id="sls-144"></a>
+## SLS-144 — Rapports de jobs et dashboards générés
+
+Statut : [ ]. Nature : Développer. Ordre : 4, après SLS-081.
+Dépend de : SLS-081, SLS-072.
+Contrat : cette unité ; [SERVERLESS_JOBS](SERVERLESS_JOBS.md), complété avant
+le code par le protocole des rapports, leur modèle de données et le contrat
+de la bibliothèque Node.
+
+Demande du responsable du 23 novembre 2026 : fournir une bibliothèque Node
+pour les retours structurés des jobs. Chaque exécution peut produire des
+tables et des graphiques nommés. Un objet connu reçoit les nouvelles données ;
+un objet inconnu est créé. Avec `history=false`, seule la dernière valeur
+reçue est conservée et affichée. La fiche du job présente ses journaux et un
+dashboard généré par ces sorties. Le guide d'installation du SPARK décrit
+l'existence de ce framework et son usage.
+
+Résultat attendu : un auteur de job déclare ses données avec la bibliothèque
+Node, puis retrouve automatiquement ses tables et graphiques dans la console,
+avec leur provenance d'exécution et leur politique d'historique.
+
+Décision réversible avant implémentation : l’historique est activé si `history`
+est omis. Le mode explicitement nommé `history=false` par la demande est ainsi
+le choix sans historique ; la documentation et les quotas rendent l’accumulation
+visible. L’identité d’objet est bornée au job, même si deux jobs donnent le même
+nom à une table ou à un graphique. La représentation exacte et les évolutions
+du protocole sont spécifiées dans le contrat de réalisation avant son code.
+
+Critères d'acceptation :
+
+- [ ] SLS-144.1 Contrat et bibliothèque Node réels : API documentée pour émettre
+  plusieurs objets depuis une exécution, format versionné et types validés.
+  Documenter installation, import, intégration dans un handler et erreurs.
+  Le rapport est rattaché côté serveur au job et à son exécution réels ; les
+  valeurs déclarées par le code ne peuvent pas changer ce propriétaire.
+- [ ] SLS-144.2 Tables : nom d'objet, définition des colonnes et lignes avec
+  valeurs typées ; création au premier envoi, ajout des nouvelles lignes aux
+  données de l'objet existant. Valeurs nulles, zéro et chaînes vides restent
+  distinctes. Un changement incompatible de schéma est refusé explicitement
+  sans corruption ni ajout partiel ; son évolution est spécifiée avant code.
+- [ ] SLS-144.3 Graphiques : nom, type, données, séries ou catégories, légende,
+  libellés et valeurs. Livrer au minimum camembert, courbe et histogramme.
+  Un objet connu reçoit les nouvelles données ; ne pas inventer une somme ou
+  une autre agrégation implicite. Spécifier avant code la représentation des
+  points, des catégories et des instantanés selon chaque type de graphique.
+- [ ] SLS-144.4 Identité stable dans le périmètre du job : retrouver le même
+  objet par sa clé documentée, créer les objets inconnus, isoler deux jobs
+  utilisant le même nom et conserver l'identité après renommage du job.
+  Les doublons de transport d'un même envoi n'ajoutent pas deux fois les données ;
+  plusieurs envois intentionnels et plusieurs exécutions restent distincts.
+- [ ] SLS-144.5 Historique activé par défaut : ajout des données et provenance
+  job/exécution/instant. `history=false` : remplacement atomique de la valeur
+  courante, aucun ancien contenu conservé dans l'historique des rapports ni
+  dans une copie des résultats d'exécution. Spécifier et éprouver le passage
+  d'un mode à l'autre, les envois concurrents et la règle de dernière réception.
+- [ ] SLS-144.6 Fiche de job avec onglet Journaux utilisant les journaux
+  serverless existants et onglet Dashboard généré depuis les objets reçus.
+  Tables paginées et graphiques avec nom, légende, valeurs, période ou instant
+  applicable, dernière réception et lien vers l'exécution. État vide,
+  chargement, erreur, données absentes, noms longs, clavier et mobile traités ;
+  représentation textuelle ou tabulaire accessible des graphiques.
+- [ ] SLS-144.7 Stockage et API : validation côté serveur, droits de lecture
+  alignés sur ceux du job et isolation entre fonctions/services ; aucun HTML
+  ou script rendu actif depuis une sortie. Borner tailles, objets, lignes,
+  points, fréquence et conservation avec quotas documentés, refus explicites
+  et état lisible, sans perte silencieuse. Corréler les refus de rapport à leur
+  exécution ; ne pas journaliser le contenu métier ni les secrets.
+- [ ] SLS-144.8 Documentation livrée : manuel canonique, exemples Node
+  exécutables de table et des trois graphiques, modes avec/sans historique,
+  installation et erreurs. Ajouter une section d'usage dans le guide SPARK
+  `qualification/spark-notes/INSTALL.md`, destiné à sa proposition `.?`,
+  indiquant le framework, comment l'installer, l'utiliser dans un job et ouvrir
+  son dashboard. Distinguer proposition du guide et adoption active selon
+  le contrat SPARK ; ne pas annoncer le SDK disponible avant sa livraison.
+- [ ] SLS-144.9 Qualification E2E sur le SPARK DEV : vrais jobs, vrais handlers
+  Docker et vraie bibliothèque Node du dépôt ; première création puis ajouts
+  lors d'exécutions suivantes, deux jobs homonymes, historique, remplacement
+  sans historique et absence des anciennes valeurs dans le stockage actif du
+  framework (objets de rapport, historique et copies des résultats qu’il gère),
+  vérifiée par API et lecture native ciblée ; doublons de transport, schémas
+  invalides, quotas, refus de droits et reprise après coupure. Parcours depuis
+  l'accueil SSO, journaux et dashboard corrélés,
+  captures desktop/mobile inspectées, nettoyage et critères communs du backlog.
+
+À mettre à jour : contrat des jobs et des rapports, `SCHEMA.md` et migrations,
+DAT, bibliothèque Node et métadonnées de paquet, exemples et seed, API, manuel,
+`DESIGN_SYSTEM_APP.md`, déploiement et guide SPARK. Aucun mock, serveur de
+substitution ou donnée injectée pour remplacer une vraie sortie de job.

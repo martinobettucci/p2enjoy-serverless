@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-144 inscrite : rapports de jobs par bibliothèque Node, tables et graphiques
+  nommés, ajout aux objets existants, conservation de la seule dernière valeur
+  avec `history=false`, onglets Journaux/Dashboard et documentation du framework
+  dans le guide SPARK. Contrat de backlog et critères E2E définis ; implémentation
+  non commencée. Ajout documentaire sans changement des529sources du socle actif.
+
 - SLS-143 : quatrième socle49c94a28d/529/f016 arrêté sur le premier appel
   d'écriture du parcours stockage, attendu200/reçu503 après deuxpromotions.
   452groupes antérieurs/deuxAPI partiels, zéroqualifié globalement ; rouge

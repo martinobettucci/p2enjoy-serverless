@@ -10911,3 +10911,33 @@ liée à son marqueur réel/worker/source, moniteur900s lancé pendant ses
 préparations et trace90s au début du cas. Zérocas ajouté, stop dès première
 réponse conservée, nonatteint si suitearrêtée avant, jonctions exigées.
 Le complément32 suit seulement une campagne49 complète et clôturée.
+
+
+### 23 novembre 2026 — Rapports de jobs inscrits, SLS-144
+
+Nouvelle demande du responsable : bibliothèque Node pour les sorties structurées
+des jobs, tables et graphiques nommés, ajout à un objet connu ou création,
+`history=false` conservant seulement la dernière valeur reçue, journaux et
+dashboard généré dans la fiche du job. Le framework et ses exemples doivent
+être expliqués dans le guide d’installation du SPARK. SLS-144 est inscrite dans
+le registre et le suivi des demandes, ordre4 après081 ; aucune fonctionnalité
+implémentée ni disponibilité du paquet revendiquée. Les critères couvrent
+l’identité des objets, l’historique, les tableaux et trois types de graphiques,
+les droits, les limites, la documentation et les preuves E2E réelles.
+Décision réversible : historique activé si le paramètre est omis, parce que la
+demande présente `history=false` comme le mode sans historique. La preuve de
+remplacement porte sur les objets/historiques/copies gérés par ce framework,
+par lecture API et native ciblée ; aucun effacement global de support de stockage
+n’est promis par cette règle de conservation applicative.
+
+Décision de conservation de la campagne active : cet ajout ne modifie que
+BACKLOG/JOURNAL/CHANGELOG, tous trois absents du vecteur gelé529 du worker49
+3d3db540, lancé sur8b88e99. Les vrais tests continuent sur ces mêmes529 octets
+et sur l’imagef016 ; leur source_commit de lancement reste8b88e99. Le commit
+documentaire est tracé séparément, avec ascendanceGit et diff strictement limité
+à ces documents, avant adaptation des collecteurs de clôture non encore exécutés.
+Aucun programme déjà exécuté, résultat ancien, source du banc ou source produit
+n’est réécrit. Les collecteurs devront vérifier cette équivalence exacte plutôt
+que refuser un ajout de backlog sans effet sur les sources mesurées. Les reçus
+de suivi à l’ouverture gardent leur SHA documentaire initial. Cette décision
+réversible préserve simultanément la demande immédiate et la vérité du gel.
