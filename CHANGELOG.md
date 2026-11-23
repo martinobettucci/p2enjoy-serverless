@@ -10,6 +10,8 @@
   originaux inconnus. Worker/client fermés, configuration/référence/5982/huit0
   conservés, revue indépendante sansP1/P2. Diagnosticnatif et conservationHTTP
   décidés avantcode ; aucune correctionproduit ni réussite future revendiquée.
+  ConservationHTTP implémentée dans le client et piloteprivé borné préparé,
+  syntaxe/relecture sansP1/P2 ; neufgroupes encore à exécuter.
 
 - SLS-142 inscrit : troisième socle courant453900d/529/f016 arrêté sur la
   barrière native aprèscommit du transport de service, après313groupes et

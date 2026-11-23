@@ -9,6 +9,14 @@ Troispurges et clôture externe acquis, zéroqualifié globalement. SLS-143 port
 le diagnostic avantdispatch/StorageError ; souscode/corpsHTTP nonretenus.
 Ne pas réutiliser ces groupes comme un49 complet ni lancer32 en parallèle.
 
+SLS-143 ajoute au rapportAPI les seules métadonnées de réponse d'invocation
+avant l'assertionHTTP : statut attendu/reçu, UUID de corrélation, hash du code,
+taille/SHA du corps et erreurpublique strictement cadrée. Les neufgroupes
+restent identiques. L'observationnative privée du premieracquire ne change
+ni l'agent ni le contrôle ; son brut reste privé et sa projection/fin réelle
+doivent être recoupées avant tout diagnostic. La présence du pilote ou la
+validité de sa syntaxe ne qualifie pas son exécution.
+
 Le [passage courant](../docs/evidence/execution-journal-complete-schema011-query-dev-2026-11-23.json)
 passe **47groupes réels :12API,10UI puis25communs**, au gel1c706f0/529sources,
 imagef016. Trois contrôleurs0, acteurs/cgroups/gardes joints et purge physique ;

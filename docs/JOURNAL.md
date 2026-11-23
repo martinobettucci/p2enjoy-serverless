@@ -10874,3 +10874,15 @@ projectionexpurgée de la seule acquisition possédée, PID/naissance/unité et
 TracerPid0 après jonction. Aucun arrêt métier, buffer/registre/SQL modifié ;
 influence d'ordonnancement explicite. Si aucun refus ne se reproduit, conserver
 ce résultat sans attribuer rétrospectivement le souscode manquant.
+
+Instrumentation143 implémentée avantreprise : le client conserve statut,
+empreinte/octets du corps, UUID des en-têtes et erreurpublique strictement
+projetée avant ses assertions ; aucun corpsmétier ni jeton n'est exporté.
+Les neufgroupes et tous les oracles restent inchangés. Le piloteprivé arme
+strace recvfrom/sendto/accept4/close sur le seulagent, unité90s/stop10,
+termine aprèspremièreobservationHTTP et joint Node avant recoupement.
+Frames et liensFD/UUID stricts, brutprivé et projectionlimitée. RevueP2 de
+couverturenettoyage corrigée avantexécution : intentionarmement et finally
+externe, jonction protégée dèsPopen, refussecondaires conservés. Syntaxes
+JS/Python/programmedistant valides, relecture sansP1/P2. Aucune acquisition
+native ni réussite9 n'est encore revendiquée ; produit/image inchangés.

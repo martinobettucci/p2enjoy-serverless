@@ -2,9 +2,11 @@
 // @verifies docs/BACKLOG.md#sls-109 | docs/MODERN_CLIENT_PROMOTION_REGRESSIONS.md#qualification
 // @spec docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md
 // @verifies docs/BACKLOG.md#sls-065 | docs/CONSOLE_STORAGE.md#preuves-attendues
+// @spec docs/BACKLOG.md#sls-143 | docs/BACKLOG.md#sls-143
+// @verifies docs/BACKLOG.md#sls-143 | docs/CONSOLE_STORAGE.md#preuves-attendues
 import assert from 'node:assert/strict';
 import {promotePublishedFunction} from './promotion-fixtures.mjs';
-import {randomUUID} from 'node:crypto';
+import {createHash,randomUUID} from 'node:crypto';
 import {readFile,writeFile,rename,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {request} from 'playwright';
 import {execFile} from 'node:child_process';
@@ -12,11 +14,11 @@ import {promisify} from 'node:util';
 import {publicationArchive} from './publication-fixtures.mjs';
 
 const base='https://serverless.lelabs.tech',output=new URL('../.local/e2e/',import.meta.url);
-const report=new URL('storage-console-api.json',output),checks=[],cleanupErrors=[],functions=[],services=[],namespaces=[],operations=[],pending=[],refusalEvidence=[],publicationEvidence=[];
+const report=new URL('storage-console-api.json',output),checks=[],cleanupErrors=[],functions=[],services=[],namespaces=[],operations=[],pending=[],refusalEvidence=[],publicationEvidence=[],invocationEvidence=[];
 const run=promisify(execFile),ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
 const prefix='storage-console-api-'+randomUUID().slice(0,8),secret='storage-private-'+randomUUID();
 let admin,caller,session,namespace,work,completed=false,cleanup=false;
-async function save(){const temporary=new URL('storage-console-api.pending',output);const campaigns=Object.fromEntries(namespaces.map(ns=>[ns.id,functions.filter(fn=>services.some(service=>service.id===fn.service_id&&service.namespace_id===ns.id)).map(fn=>fn.id)]));await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),campaigns,operation_ids:operations,refusal_evidence:refusalEvidence,publication_evidence:publicationEvidence},null,2)+'\n');await rename(temporary,report);}
+async function save(){const temporary=new URL('storage-console-api.pending',output);const campaigns=Object.fromEntries(namespaces.map(ns=>[ns.id,functions.filter(fn=>services.some(service=>service.id===fn.service_id&&service.namespace_id===ns.id)).map(fn=>fn.id)]));await writeFile(temporary,JSON.stringify({target:base,completed:completed&&cleanup&&!cleanupErrors.length,skipped:0,checks,cleanup,cleanup_errors:cleanupErrors,namespace_id:namespace?.id,function_ids:functions.map(row=>row.id),campaigns,operation_ids:operations,refusal_evidence:refusalEvidence,publication_evidence:publicationEvidence,invocation_evidence:invocationEvidence},null,2)+'\n');await rename(temporary,report);}
 function nativeInspectionCommand(fn,mode='inspect-api-refusals',namespaceId=namespace.id){return run('ssh',[...ssh,'python3','-B','/srv/p2enjoy-serverless/e2e/storage-command-faults.py',mode,fn.id,namespaceId],{timeout:30000,maxBuffer:1024*1024});}
 async function inspectRefusals(fn){return JSON.parse((await nativeInspectionCommand(fn)).stdout);}
 async function check(name,action){try{await action();checks.push({name,status:'passed'});console.log('PASS',name);await save();}catch(error){checks.push({name,status:'failed',error:error.name});throw error;}}
@@ -25,8 +27,26 @@ async function call(url,{method='GET',body,bytes,token,anonymous=false,headers={
     ...(token?{'X-Serverless-Token':token}:anonymous?{}:{Origin:base,'X-CSRF-Token':session?.csrf_token}),
     ...(bytes?{'Content-Type':'application/zip'}:{}),...headers,
   }});
+  const text=await result.text();
+  // Keep only metadata before an unexpected status can throw and cleanup removes logs.
+  const invocation=url.match(/^\/invoke\/([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})$/);
+  if(invocation){
+    const uuid=/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/;
+    const headers=result.headers(),identifier=name=>uuid.test(headers[name]??'')?headers[name]:null;
+    let value=null,jsonParseError=false;try{value=JSON.parse(text);}catch{jsonParseError=true;}
+    const error=value&&typeof value==='object'&&!Array.isArray(value)&&Object.keys(value).length===2&&
+      typeof value.error==='string'&&/^[a-z_]{1,64}$/.test(value.error)&&uuid.test(value.invocation_id??'')?
+      {error:value.error,invocation_id:value.invocation_id}:null;
+    invocationEvidence.push({function_id:invocation[1],method,observed_at_ms:Date.now(),http_status:result.status(),
+      expected_http_status:[status].flat(),body_bytes:Buffer.byteLength(text),body_sha256:createHash('sha256').update(text).digest('hex'),
+      server_request_id:identifier('x-serverless-request-id'),request_id:identifier('x-request-id'),
+      code_hash:/^[0-9a-f]{64}$/.test(headers['x-serverless-code-hash']??'')?headers['x-serverless-code-hash']:null,
+      public_error:error,json_parse_error:jsonParseError});
+    await save();
+  }
+  assert(!text.includes(secret),'Secret exposé');
   assert([status].flat().includes(result.status()),`${method} ${url.split('?')[0]}: ${result.status()} au lieu de ${status}`);
-  const text=await result.text();assert(!text.includes(secret),'Secret exposé');return JSON.parse(text);
+  return JSON.parse(text);
 }
 async function until(action,message){const end=Date.now()+120000;while(Date.now()<end){const value=await action();if(value)return value;await new Promise(resolve=>setTimeout(resolve,200));}assert.fail(message);}
 async function current(fn){return call(`/api/functions/${fn.id}`);}
