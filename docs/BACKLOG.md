@@ -5108,7 +5108,7 @@ Le client annonce cleanuptrue et zéro erreur de nettoyage,21JPEG conservées ;
 le wrapper rejoint Node1 et refuse la qualification. La cause reste à établir.
 Les12API acquises juste avant gardent leur gel ; aucun commun n’est lancé.
 
-- [ ] SLS-137.1 Sceller le rouge, son vrai retourcontrôleur1, neuf groupes non
+- [x] SLS-137.1 Sceller le rouge, son vrai retourcontrôleur1, neuf groupes non
   qualifiés, client/wrapper joints,21captures inspectées et reçus originaux.
   Constater extérieurement PID/cgroup vides, acteurs/gardes terminés, même
   générationf016/config/référence/5982 et huitcompteurs0 avant tout autre test.
@@ -5129,3 +5129,25 @@ Les12API acquises juste avant gardent leur gel ; aucun commun n’est lancé.
   25communs de la même époque requis avant de rattacher le passage complet072.
   Aucun skip, allongement de borne ou réponse substituée ; les suites49/32 restent
   les obligations distinctes de072/133.4.
+
+137.1 — [rouge scellé](evidence/execution-journal-ui-conservation-first-failed-dev-2026-11-23.json),
+contrôleur1, Nodejoint, neuf succès nonqualifiés et21JPEG inspectées une à une.
+Unitéfailed1 conservée avant libération de son seulUUID, cgroupvide, gardes
+terminées et originaux/config/référence/5982/huitcompteurs0 recoupés. Les deux
+refus de collecte sont conservés séparément, sans nouvelle E2E. Les
+[12API acquises](evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
+gardent leur gel9702888/f016 ; UI est liée à leur génération après SIGKILL9/137.
+RevueRO sansP1/P2. Aucun commun exécuté ;137.2/.3 restent ouverts.
+
+137.2 — décision avant instrumentation : le hash désigne l'attente de90s
+`journal_history_not_ready`, après invocation finale et archivage de fonction,
+à l'ouverture du journal de service. Il ne contient pas la causeHTTP. Observer
+ce seul parcours réel : requête/réponse/échecGET du journal, statut, taille/SHA
+et structure bornée du corps, URL/filtres autorisés, erreurs et étatDOM. Ne
+collecter ni en-tête, cookie, jeton, curseur signé ou message applicatif ;
+les valeurs nonautorisées sont hachées. Joindre les lectures asynchrones et
+conserver l'erreur principale, avec une capture du refus si présent. Garder
+90s, les assertions et les délais natifs ; aucun retry ou correctif produit
+choisi avant cette observation. Un replay diagnostique conserve zéro groupe
+de qualification et ne requalifie pas le rouge initial. Le vecteur E2E changé
+exigera ensuite API12→UI10→25communs de la même époque.

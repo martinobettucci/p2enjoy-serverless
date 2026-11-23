@@ -10494,3 +10494,20 @@ est conservée. Décision avant nouveau publisher : lier UI au StartedAt après
 API et garder distincts les deux démarrages de l’API elle-même. Sourcevecteur
 et CID/image/référence restent stricts. Aucun test n’est rejoué pour cette
 correction du rattachement, les publishers exécutés restent immuables.
+
+### 23 novembre 2026 — Rouge137 scellé, observation ciblée décidée
+
+La revueRO recoupe les deux gzip,528sources9702888, retours0/1 des vrais
+contrôleurs, coupureAPI9/137, génération postcoupure commune et clôtures
+extérieures. Les21JPEG ont été ouvertes individuellement par le principal,
+SHA exacts et reçu indépendant conservés. AucunP1/P2 de scellement ;137.1 acquis.
+API12 fonctionnels sont acquis, aucunUI ni commun qualifié.
+
+L'attente finale de90s suit l'archivage de la fonction et l'ouverture du journal
+de service. Le backend prévoit les événements plateforme de fonction archivée ;
+le frontend accepte une liste vide et les noms indisponibles. Ces lectures ne
+prouvent pas la cause du refus. Décision avant code : observer uniquement le
+vraiGET de ce parcours, sa structure/résultat bornés et l'étatDOM, sans donnée
+sensible ni interception, puis joindre les observations. Maintenir bornes et
+assertions, ne choisir aucun correctif depuis le seul hash. Le replay complet
+diagnostique garde zéro groupe ; les campagnes cohérentes courantes suivent.

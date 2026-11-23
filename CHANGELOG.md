@@ -2,13 +2,18 @@
 
 ## [Non publié]
 
+- SLS-137.1 acquise : API12 et rougeUI scellés, contrôleurs0/1,21JPEG inspectées,
+  clôtures externes et génération après coupureAPI recoupées. Le refus final
+  reste sans causeHTTP ; observation réelle ciblée décidée avant code, sans
+  changer le délai90s ni qualifier les neuf succès de la campagne rouge.
+
 - SLS-137 inscrite : fullUI courant rouge en Conservation après neuf groupes,
   nettoyage annoncé et Node1 joint ;21captures conservées, cause encore inconnue.
   Collecte d’échec et clôture externe exigées avant correction, zéroUI qualifié.
 
 - SLS-072/133.4 : protocole de pilotage API12→UI10→25communs sur une même
   générationf016 fixé avant code du contrôleur ; unités bornées, retours natifs
-  et cgroups joints. Ces campagnes courantes restent à exécuter.
+  et cgroups joints. API12 passent ; UI10 reste rouge,25communs non exécutés.
 
 - SLS-133.2/.3 acquis par rapprochement des preuves : coûtSQL concret et
   chemin source, décisionCROSS avantcode, basculef016 et nominal positif, quatre
