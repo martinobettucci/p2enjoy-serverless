@@ -10520,3 +10520,11 @@ Cleanuptrue/aucune erreur et Node1 joint, uneJPEG desktop personnellement ouvert
 SLS-138 est inscrite avant analyse/correction. Décision avant instrumentation :
 date publique produite, attributs/validité natifs et classification constante
 de l'erreur autour de cette seule saisie ; aucun texte sensible conservé.
+
+Clôture externe acquise : contrôleur1, unitéfailed1 avant reset de son seulUUID,
+cgroupvide et originaux/config/référence/5982/huitcompteurs0.138.1 est scellée.
+La lecture du pilote installé montre une comparaison stricte à input.value
+après normalisation native. Décision138.2 : éprouver ce chemin sur le vrai
+contrôle de la console, fractions120/123/000 et secondes00, puis formes
+normalisées et GET de recherche exacts. Un client ciblé possède/purge sa fixture,
+zéro groupe qualifié ; aucune cause ancienne reconstituée depuis le seul hash.

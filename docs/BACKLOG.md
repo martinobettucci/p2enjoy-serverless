@@ -5171,7 +5171,7 @@ messageSHA8b25b87bb48def55b2d6f407eb69804de8dd02e27ef0046f721b409f63a98600.
 Le point instrumenté137 n'est pas atteint : aucune cause de son ancien rouge
 n'est déduite. Node1 joint, cleanuptrue, aucuncleanup_error et uneJPEG conservée.
 
-- [ ] SLS-138.1 Sceller ce second rouge distinct, vrai contrôleur1 et unité/
+- [x] SLS-138.1 Sceller ce second rouge distinct, vrai contrôleur1 et unité/
   cgroup terminés ; inspecter laJPEG, recouper sources, génération, configuration,
   référence,5982 et huitcompteurs0. Zéro groupe qualifié, aucun replay automatique.
 - [ ] SLS-138.2 Établir le refus de saisie avec de vraies observations navigateur,
@@ -5187,3 +5187,21 @@ page fermée, timeout), tout autre texte uniquement par SHA ; capturer le refus.
 Aucune valeur d'authentification, interception ou réponse de remplacement.
 Lire le code du pilote navigateur installé peut expliquer le format attendu ;
 la preuve fonctionnelle passe toujours par le véritable champ de la console.
+
+138.1 — [rouge distinct scellé](evidence/execution-journal-date-input-first-failed-dev-2026-11-23.json),
+contrôleur1 et Nodejoint, cleanuptrue sans erreur, cgroupvide et seule unitéUUID
+libérée après conservation de son étatfailed1. Même générationf016,528sources,
+configuration/référence/5982/huitcompteurs0 recoupés. UneJPEG de la vue de service
+précédente inspectée ; elle ne représente pas le champ au refus.
+
+138.2 — décision avant client ciblé : le pilotePlaywright1.64.1 installé
+(coreBundle SHA829521b67ed7be90c7d6d6098ff39f2241562d47e4ad7ccab13710924a56001d)
+compare la valeur attribuée à celle normalisée par input.value et lève
+`Malformed value` si elles diffèrent. Vérifier ce mécanisme sur le véritable
+champ FinUTC déployé, avec dates futures réelles à fractions120/123/000 et
+secondes00, puis leurs formes normalisées. NouvellePage de relevé entre essais,
+valeurs/validités natives observées, classification constante du refus, JPEG
+ciblées et GET après Rechercher pour les formes acceptées (période exacte).
+Le client ciblé possède sa fixture originale et la purge normalement ; zéro
+groupe qualifié, aucune injection DOM ni horloge remplacée. Ne pas attribuer
+rétrospectivement le hash historique au mécanisme sans preuve correspondante.
