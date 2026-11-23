@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-135.3 : rouge reproduit sur la vraie sonde du stockage àEXEC puisZ ;
+  EINVAL22 attribué au seul enfant possédé, vivant correctement refusé.
+  Enfant/pidfd et deuxcgroups joints, originaux strictement identiques.
+  Correction et parcoursHTTPS sous zombie restent à éprouver.
+
 - SLS-135.2 : contrat avant code pour EINVAL/mountinfo, identité Z et pidfd
   non bloquant ; vrai probe EXEC/zombie et clone HTTPS requis. Les observations
   indisponibles restent des refus, aucune cause historique réattribuée.
