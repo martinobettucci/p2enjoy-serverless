@@ -10807,3 +10807,21 @@ sous-classe locale au helper, waitpid autoritaire et métriques d'attente ;
 aucun changement du modulepartagé, matcher ou bornes40/45/70/12. Clôture
 des descripteurs/handler sur touteissue, garder secours70 si restoreéchoue.
 Revue du rouge puiscorrectif, cinqcanoniques/connexes/25communs encore dus.
+
+### 23 novembre 2026 — RéveilSIGCHLD142 implémenté, reprise nonexécutée
+
+Après décision46e9a17, ServiceTransportObserver sous-classe localement le
+NativeObserver inchangé. Réveil existantNativeWakeup armé avantattach,
+waitpid PID exact/WIFSTOPPED puis deadline restent autoritaires ; plus de
+sleep1ms systématique. Métriquespolls/empty/attentemonotone/notifications
+conservées dans le bilan, portée attach-through-acquisition explicite.
+detach précède close des fd/handler, même en erreur ; watchdog resteSIGKILL
+avec restaurationindépendante. SyntaxePython valide, aucunE2E corrigé encore.
+Pilotes privés distincts préparés, sans modifier ceux du rouge scellé ;
+mêmes limites600/900/1100 et originalcanonique5. Revue puis sync/gel/reprise.
+
+RevueSIGCHLD : le réveilpartagé inclut stdin ; sonEOF aurait rendu la boucle
+occupée. Décision et correction locales : select du seulpipe de notification,
+borne50ms/deadline restante, drain partagé lorsqu'il est prêt. Modulescommuns
+inchangés. Le contrat ajoute un vraiEOF indépendant sansmutation,45s jusqu'au
+refus normal, métriques et restauration/purge conservées, zéro groupeajouté.

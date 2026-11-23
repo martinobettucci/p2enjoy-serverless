@@ -3483,6 +3483,10 @@ helper/CLI et des compteurs d'acquisition. Le client canonique reste
 `node e2e/service-transport.mjs`, cinqgroupes après SSO réel, avec son helper
 synchronisé ; bornes40/45/70/12 et oracles inchangés. La traceconnect seule
 est conservée aussi dans le finally d'une phase nonacquise ; ce reçu ne
-qualifie pas les troisconnexions ou un résultatunknown. Aucun diagnostic
-fonctionnel n'est encore acquis sur ce changement. Voir le
+qualifie pas les troisconnexions ou un résultatunknown. Le diagnostic6a4d4ad
+refuse before : barrière43,8s aprèsabandon40s,37072arrêts, zéroqualifié ;
+rapportCLI0/septconnexions et pilote ensuite purgé conservés. La sous-classe
+locale ServiceTransportObserver attend désormais SIGCHLD avec NativeWakeup
+existant ; le modulepartagé/matcher/bornes restent inchangés, reprise E2E due.
+Voir le
 [contrat142](../docs/SERVICE_TRANSPORT_REGRESSIONS.md#diagnostic-de-lacquisition-courante--sls-142).

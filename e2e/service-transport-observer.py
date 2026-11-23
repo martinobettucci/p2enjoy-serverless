@@ -29,6 +29,41 @@ import time
 from uuid import UUID, uuid4
 from control_database import read_control
 from native_control_observer import NativeObserver
+from native_signal_wakeup import NativeWakeup
+
+
+# @spec docs/BACKLOG.md#sls-142 | docs/SERVICE_TRANSPORT_REGRESSIONS.md#mesure-courante-et-décision-avant-correction142
+class ServiceTransportObserver(NativeObserver):
+    """Observe real waitpid stops, waking on SIGCHLD instead of polling sleeps."""
+    def __init__(self, pid, wakeup):
+        super().__init__(pid)
+        self.wakeup = wakeup
+        self.metrics = {'waiting_mode': 'sigchld', 'scope': 'attach-through-acquisition',
+                        'polls': 0, 'stops': 0, 'empty_polls': 0, 'wait_elapsed_ms': 0,
+                        'wakeup_waits': 0, 'wakeup_bytes_drained': 0}
+
+    def wait(self, deadline):
+        while True:
+            assert time.monotonic() < deadline, 'native_stop_not_observed'
+            self.metrics['polls'] += 1
+            value, status = os.waitpid(self.pid, os.WNOHANG)
+            if value:
+                assert os.WIFSTOPPED(status), 'control_exited_during_observation'
+                self.stopped = True
+                self.metrics['stops'] += 1
+                assert time.monotonic() < deadline, 'native_stop_after_deadline'
+                return os.WSTOPSIG(status)
+            assert time.monotonic() < deadline, 'native_stop_not_observed'
+            self.metrics['empty_polls'] += 1
+            started = time.monotonic()
+            # This helper consumes owner commands only at the held boundary.
+            # An EOF must not make the shared wakeup's stdin perpetually ready.
+            remaining = deadline - started
+            if remaining > 0 and select.select([self.wakeup.read_fd], [], [], min(.05, remaining))[0]:
+                self.wakeup.wait(deadline)
+            self.metrics['wait_elapsed_ms'] += (time.monotonic() - started) * 1000
+            self.metrics.update(wakeup_waits=self.wakeup.waits,
+                                wakeup_bytes_drained=self.wakeup.bytes_drained)
 
 
 def emit(value):
@@ -259,7 +294,8 @@ item = {'service_id': service, 'namespace_id': namespace, 'container_id': curren
         'lock_identity': [info.st_dev, info.st_ino]}
 (folder / 'identity.json').write_text(json.dumps(item))
 (folder / 'restore.py').write_text(RESTORE)
-observer, armed, acquisition = NativeObserver(pid), False, None
+wakeup = NativeWakeup()
+observer, armed, acquisition = ServiceTransportObserver(pid, wakeup), False, None
 try:
     command(['systemd-run', '--quiet', '--collect', '--unit=' + unit, '--on-active=' + ('12s' if mode.endswith('watchdog') else '70s'),
              '--timer-property=AccuracySec=100ms', '--timer-property=RandomizedDelaySec=0',
@@ -268,6 +304,7 @@ try:
     armed = True
     assert command(['systemctl', 'is-active', unit + '.timer']) == 'active', 'guard_not_armed'
     emit({'event': 'guard-armed', 'unit': unit})
+    wakeup.start()
     observer.start()
     emit({'event': 'armed', 'unit': unit, 'container_id': current['Id'], 'image': current['Image'], 'before': before})
     if mode.endswith('watchdog'):
@@ -392,11 +429,15 @@ finally:
     delivery_errors = []
     try:
         if acquisition is not None:
+            acquisition['wait_metrics'] = dict(observer.metrics)
             emit(acquisition)
     except Exception as delivery_error:
         delivery_errors.append(delivery_error)
     try:
-        observer.detach()
+        try:
+            observer.detach()
+        finally:
+            wakeup.close()
         os.close(lock)
         if armed:
             restored = json.loads(command(['/usr/bin/python3', '-I', str(folder / 'restore.py'), str(folder)], timeout=190))

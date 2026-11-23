@@ -205,3 +205,12 @@ gardes existantes, en particulier le SIGKILLwatchdog indépendant. Rejouer les
 cinqgroupes canoniques et confronter acquisitions/connexions/mutations et vrais
 retours. Ce passage et25communs frais restent dus ; le helper sert aussi le
 catalogueURL, à recouper dans les régressions connexes et le49 complet.
+
+La revue relève que NativeWakeup surveille aussi stdin pour ses autres
+opérateurs. Ici, EOF aprèsrecover ne doit pas provoquer de polls continus :
+attendre localement le seulpipeSIGCHLD avec borne50ms/deadline restante, puis
+utiliser le drain existant seulement lorsque ce pipe est prêt. Aucun changement
+du modulepartagé. Éprouver séparément ce vraiEOF sur helperarmé sans mutation :
+laisser l'acquisition45s refuser naturellement, conserver métriques/retour1,
+restauration et purge du seulservice/namespace possédés. Zéro groupe ajouté ;
+ce refus attendu ne remplace pas les cinqgroupes canoniques.

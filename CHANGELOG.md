@@ -11,7 +11,8 @@
   correction de cause restent à établir.12UI141 passe dans ce socle.
   Le diagnostic6a4d4ad est scellé : gatedbefore43,8s après abandonclient40s,
  37072arrêts, zéroqualifié. AttenteSIGCHLD locale décidée avant correction,
-  sans élargir les délais ; anciennecauseafter nonreconstituée.
+  sans élargir les délais, puis implémentée dans le seul helper ; reprise E2E
+  encore due et anciennecauseafter nonreconstituée.
 
 - SLS-141 inscrit : le deuxième socle courant s'arrête sur l'état de journal
   attendu dans l'historiqueUI, après272groupes partiels et troisprérequis.
