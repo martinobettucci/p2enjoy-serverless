@@ -28,6 +28,7 @@ from contextlib import closing
 import fcntl
 import hashlib
 import json
+import locale
 import os
 from pathlib import Path
 import pwd
@@ -54,6 +55,7 @@ TEMP = 'serverless-api-archive-migration'
 OFFICIAL = ['/etc/spark/env', '/run/spark/secrets', '/etc/spark/routes']
 LOCK = None
 CONTROL_READER = None
+COMMAND_FAILURE = None
 LOCK_PATH = Path('/run/serverless-archive-migration.lock')
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
 SCHEMA_006 = ['001_control.sql', '002_login_limits.sql', '003_deployments.sql',
@@ -69,14 +71,39 @@ def emit(value):
     print(json.dumps(value), flush=True)
 
 
+# @verifies docs/BACKLOG.md#sls-134 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-durable-du-pilote--sls-1345
 def command(args, allowed=(0,), *, combined_output=False, foreground_timeout=False):
     # The native timeout and inherited flock survive a killed Python/SSH driver.
-    result = subprocess.run(['timeout', *(['--foreground'] if foreground_timeout else []), '--signal=KILL', '40s', *args],
-                            capture_output=True, text=True, timeout=45,
-                            cwd=BASE,
-                            pass_fds=() if LOCK is None else (LOCK,))
+    global COMMAND_FAILURE
+    COMMAND_FAILURE=None
+    invocation=['timeout', *(['--foreground'] if foreground_timeout else []), '--signal=KILL', '40s', *args]
+    started=time.monotonic()
+    action=next((v for v in args if isinstance(v,str)and v in ('inspect','ps','exec','stop','start','rm','network','image','compose','pause','unpause','restart')),None)
+    kind=('docker.'+action if action and 'docker'in args else str(args[0]).rsplit('/',1)[-1])
+    meta={'kind':kind,'returncode_source':'timeout-wrapper','argv_sha256':hashlib.sha256(json.dumps([str(v)for v in invocation],separators=(',',':')).encode()).hexdigest()}
+    def output_metadata(value):
+        if value is None:return {'available':False}
+        data=value if isinstance(value,bytes)else value.encode()
+        return {'available':True,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
+    try:
+        result = subprocess.run(invocation,capture_output=True,timeout=45,
+                                cwd=BASE,pass_fds=() if LOCK is None else (LOCK,))
+    except BaseException as error:
+        COMMAND_FAILURE={**meta,'elapsed_seconds':time.monotonic()-started,'type':type(error).__name__,
+            'returncode':None,'outputs_complete':False,'stdout':output_metadata(getattr(error,'output',None)),
+            'stderr':output_metadata(getattr(error,'stderr',None))}
+        raise
+    captured={**meta,'elapsed_seconds':time.monotonic()-started,'returncode':result.returncode,
+        'outputs_complete':True,'stdout':output_metadata(result.stdout),'stderr':output_metadata(result.stderr)}
+    if result.returncode not in allowed:COMMAND_FAILURE=captured
+    try:
+        encoding='utf-8'if sys.flags.utf8_mode else locale.getencoding()
+        stdout,stderr=(value.decode(encoding).replace('\r\n','\n').replace('\r','\n')for value in (result.stdout,result.stderr))
+    except UnicodeError as error:
+        COMMAND_FAILURE={**captured,'type':type(error).__name__}
+        raise
     assert result.returncode in allowed, 'bounded_operator_command_failed: ' + args[0]
-    return (result.stdout + result.stderr if combined_output else result.stdout).strip()
+    return (stdout + stderr if combined_output else stdout).strip()
 
 
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_FIRING_VOLUME.md#chargement-gardé-de-la-copie
@@ -1058,8 +1085,38 @@ def diagnose_import_output(item,request):
         atomic(target,result)
 
 
+# @verifies docs/BACKLOG.md#sls-134 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-durable-du-pilote--sls-1345
+def save_driver_failure(item,op,error,phase='primary'):
+    try:
+        assert phase in ('primary','reader-close','restore')
+        failure_command=COMMAND_FAILURE;work=Path(item['work'])
+        native_lock=os.fstat(LOCK);assert [native_lock.st_dev,native_lock.st_ino]==item['lock_identity']
+        frames=[];trace=error.__traceback__
+        while trace:
+            frames.append({'file':Path(trace.tb_frame.f_code.co_filename).name,'function':trace.tb_frame.f_code.co_name,'line':trace.tb_lineno});trace=trace.tb_next
+        known=('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention','measure-native-deadline','diagnose-import-output','retention-replay-state','inspect','restart','upgrade')
+        diagnostic={'campaign':item['campaign'],'operator_source_sha256':item['driver_source_sha256'],'phase':phase,
+            'operation':op if op in known else None,'operation_sha256':hashlib.sha256(str(op).encode()).hexdigest(),
+            'type':type(error).__name__,'reason':str(error)[:1024]if isinstance(error,(AssertionError,TimeoutError))else None,
+            'frames':frames[-16:],'command_failure':failure_command,'recorded_at_ns':time.time_ns()}
+        atomic(work/('driver-'+phase+'-failure.json'),diagnostic)
+    except BaseException as diagnostic_error:
+        error.add_note('driver_diagnostic_write_failed:'+type(diagnostic_error).__name__)
+
+
+def read_driver_failure_receipt(item,phase='primary'):
+    assert phase in ('primary','reader-close','restore')
+    work=Path(item['work']);path=work/('driver-'+phase+'-failure.json')
+    if not path.exists():return None
+    info=path.lstat();assert stat.S_ISREG(info.st_mode)and info.st_uid==0 and stat.S_IMODE(info.st_mode)==0o600 and info.st_size<65536
+    value=json.loads(path.read_bytes())
+    assert value['campaign']==item['campaign']and value['phase']==phase and value['operator_source_sha256']==item['driver_source_sha256']
+    assert hashlib.sha256((work/'storage-legacy-environment.py').read_bytes()).hexdigest()==value['operator_source_sha256']
+    return value
+
+
 def main():
-    global LOCK, CONTROL_READER
+    global LOCK, CONTROL_READER, COMMAND_FAILURE
     assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
     mode, campaign = sys.argv[1:3]
     assert str(UUID(campaign)) == campaign
@@ -1079,7 +1136,8 @@ def main():
         assert item['campaign'] == campaign and item['work'] == str(work)
         if mode == 'status':
             emit({'restored': item.get('restored', False), 'restoration': item.get('restoration'),
-                  'driver_alive': alive(item), 'unit': item['unit'],
+                  'driver_alive': alive(item), 'unit': item['unit'],'driver_primary_failure':read_driver_failure_receipt(item),
+                  'driver_cleanup_failures':[value for phase in ('reader-close','restore')if(value:=read_driver_failure_receipt(item,phase))is not None],
                   'timer_state':command(['systemctl','is-active',item['unit'] + '.timer'],(0,3,4)),
                   'service_state':command(['systemctl','is-active',item['unit'] + '.service'],(0,3,4)),
                   **({'before_consumer_cleanup':item.get('before_consumer_cleanup'),
@@ -1330,6 +1388,7 @@ def main():
     for name in ('storage-legacy-environment.py', 'control_database.py'):
         shutil.copyfile(Path(__file__).parent / name, work / name)
         os.chmod(work / name, 0o600)
+    item['driver_source_sha256']=hashlib.sha256((work/'storage-legacy-environment.py').read_bytes()).hexdigest()
     atomic(journal, item)
     command(['systemd-run', '--quiet', '--collect', '--unit=' + item['unit'],
              '--on-active=' + str(guard_seconds) + 's',
@@ -1339,6 +1398,7 @@ def main():
     emit({'event': 'guard-armed', 'unit': item['unit'], 'campaign': campaign,
           'current_image': item['original']['image'], 'original_id':item['original']['id'],
           'guard_seconds':guard_seconds,'timer_schedule':command(['systemctl','show',item['unit']+'.timer','--property=TimersMonotonic','--value'])})
+    op=None
     try:
         if firing_replay:
             activation=int(command(['systemctl','show',item['unit']+'.timer','--property=ActiveEnterTimestampMonotonic','--value']))
@@ -1410,6 +1470,7 @@ def main():
               **({'firing_replay':firing_replay_receipts(item)} if firing_replay else {}),
               **({'retention_replay':retention_replay_receipts(item)} if retention_replay else {})})
         for line in sys.stdin:
+            op=None;COMMAND_FAILURE=None
             request = json.loads(line)
             op = request['op']
             if op == 'restore':
@@ -1556,13 +1617,22 @@ def main():
             else:
                 raise AssertionError('unknown_campaign_operation')
             emit({'event': 'result', 'op': op, 'value': result})
+    except BaseException as error:
+        save_driver_failure(item,op,error)
+        raise
     finally:
         try:
+            COMMAND_FAILURE=None
             if CONTROL_READER is not None:
                 reader, CONTROL_READER = CONTROL_READER, None
-                reader.close()
+                try:reader.close()
+                except BaseException as error:
+                    save_driver_failure(item,op,error,'reader-close');raise
         finally:
-            restore(item, journal, False)
+            COMMAND_FAILURE=None
+            try:restore(item,journal,False)
+            except BaseException as error:
+                save_driver_failure(item,op,error,'restore');raise
 
 
 def lock_available(fd):

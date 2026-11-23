@@ -3231,3 +3231,11 @@ puis doit finir1/completedfalse avec driver_stderr_overflowtrue. Ce résultat
 rouge attendu se qualifie dans un wrapper distinct ; aucun groupe nominal de
 rétention n’en découle. Production/transfert30s, lecturesnatives40s/commande,
 client90s et jonctions5s ont leurs mesures séparées dans le reçu.
+
+SLS-134.5 ajoute les reçus privés `driver-primary-failure.json`,
+`driver-reader-close-failure.json` et `driver-restore-failure.json` dans la
+fenêtre possédée. Le mode `status` en vérifie campagne et SHA du pilote gelé ;
+le client conserve le contexte primaire réel et exige son absence en clôture
+nominale. Les SHA/octets de commande portent sur les octets avant conversion
+texte. Le refus après attache et le cas de dépassement doivent être rejoués
+avec ces sources ; la seule revue ne les qualifie pas.

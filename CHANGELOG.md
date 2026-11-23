@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-134.5 : reçus privés distincts pour les erreurs du pilote et de sa
+  fermeture/restitution, avec pile bornée et métadonnées des octets natifs.
+  Le client recoupe le refus primaire et exige une clôture nominale sans reçu
+  d’erreur. Revue statique acquise ; fidélité HTTP et nouveaux cas réels dus.
+
 - SLS-134 : premiercascap atteint réellement1Mio, mais le pilote tombe lors
   de la libération ; rouge conservé et originaux restaurés. Diagnosticparent
   durable spécifié avantcode pour conserver source/opération/commandenative
