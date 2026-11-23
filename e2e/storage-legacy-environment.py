@@ -25,6 +25,7 @@
 # @verifies docs/BACKLOG.md#sls-078 | docs/RETENTION_HISTORY_REPLAY.md#parcours-gardé-distinct
 """DEV-only isolated installations with an independent identity-based restore."""
 from contextlib import closing
+import errno
 import fcntl
 import hashlib
 import json
@@ -293,6 +294,45 @@ def artifacts(item):
             for path in sorted(root.rglob('*')) if path.is_file()}
 
 
+# @verifies docs/BACKLOG.md#sls-135 | docs/INSTANCE_LIMIT_RESTORATION.md#décision1352--einval-et-fin-attestée
+def ended_mount_namespace(proc, original_error):
+    """Accept an EINVAL only for an absent task or an identity-pinned zombie."""
+    descriptor = None
+    diagnostic = {'pid': int(proc.name), 'errno': original_error.errno, 'phase': 'stat-before'}
+    def pinned():
+        raw = (proc / 'stat').read_bytes()
+        assert int(raw.split(b' ', 1)[0]) == int(proc.name), 'proc_stat_pid_changed'
+        fields = raw.rsplit(b')', 1)[1].split()
+        return {'birth': int(fields[19]), 'state': fields[0].decode('ascii')}
+    try:
+        before = pinned(); diagnostic['before'] = before
+        if before['state'] == 'Z':
+            diagnostic['phase'] = 'pidfd-open'
+            descriptor = os.pidfd_open(int(proc.name))
+            diagnostic['phase'] = 'pidfd-poll'
+            polling = select.poll(); polling.register(descriptor, select.POLLIN)
+            events = polling.poll(0); diagnostic['poll_events'] = [mask for _, mask in events]
+            diagnostic['phase'] = 'stat-after'
+            after = pinned(); diagnostic['after'] = after
+            if before == after and any(mask & select.POLLIN and not mask & (select.POLLERR | select.POLLNVAL) for _, mask in events):
+                return True
+            diagnostic['reason'] = 'identity_changed_or_termination_unconfirmed'
+        else:
+            diagnostic['reason'] = 'process_not_zombie'
+    except (FileNotFoundError, ProcessLookupError) as error:
+        diagnostic['lifecycle_errno'] = error.errno
+        if not proc.exists():
+            return True
+        diagnostic['reason'] = 'process_directory_still_present'
+    except (OSError, ValueError, IndexError, UnicodeError, AssertionError) as error:
+        diagnostic.update(reason='lifecycle_observation_failed', type=type(error).__name__, lifecycle_errno=getattr(error, 'errno', None))
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+    raise RuntimeError('process_reference_unavailable:' + json.dumps(diagnostic, sort_keys=True, separators=(',', ':'))) from original_error
+
+
+# @verifies docs/BACKLOG.md#sls-135 | docs/INSTANCE_LIMIT_RESTORATION.md#décision1352--einval-et-fin-attestée
 def no_references(item, allow_original=False):
     paths = list(item['paths'].values())
     registry = Path(item['paths']['storage']) / 'registry.sqlite3'
@@ -320,7 +360,13 @@ def no_references(item, allow_original=False):
         if not proc.name.isdecimal():
             continue
         try:
-            mountinfo = (proc / 'mountinfo').read_text()
+            try:
+                mountinfo = (proc / 'mountinfo').read_text()
+            except OSError as error:
+                if error.errno != errno.EINVAL:
+                    raise
+                if ended_mount_namespace(proc, error):
+                    continue
             arguments = (proc / 'cmdline').read_bytes().split(b'\0')
         except (FileNotFoundError, ProcessLookupError, PermissionError):
             continue

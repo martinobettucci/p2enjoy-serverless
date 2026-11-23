@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-135 : helper corrigé pour examiner seulement EINVAL/mountinfo avec
+  Z/naissance stable et pidfdPOLLIN ; refus privé nommé dans les autres cas.
+  Le client réel ajoute le leaderZ/threadvivant, sans errno ni procfs injecté.
+  Syntaxe/revue acquises ; parcours positif et régressions encore à exécuter.
+
 - SLS-135.3 : rouge reproduit sur la vraie sonde du stockage àEXEC puisZ ;
   EINVAL22 attribué au seul enfant possédé, vivant correctement refusé.
   Enfant/pidfd et deuxcgroups joints, originaux strictement identiques.

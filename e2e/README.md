@@ -3305,3 +3305,8 @@ les seuls enfants possédés. Les deux unités, leurs cgroups et les pidfd/enfan
 sont recoupés avant de qualifier. Reçu root700/600 et stderr restent privés ;
 les sources hachées, uname et métadonnées bornées alimentent la preuve publique.
 Voir le [contrat](../docs/INSTANCE_LIMIT_RESTORATION.md#protocole1353--vrai-noyau-et-vraie-référence).
+
+Le cas after-fix exige aussi un vrai leader terminé par syscall exit60 avec
+un thread conservant unFD du stockage. PID/naissance, thread/FD réel et pidfd
+nonprêt sont recoupés ; le contrôle doit refuser l’EINVAL réel plutôt que
+d’accepter un simple étatZ. Seul ce groupe possédé est ensuite tué et récolté.
