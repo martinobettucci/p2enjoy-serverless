@@ -8,7 +8,12 @@ arrête le replay diagnostic suivant enUI02. Le client
 de FinUTC sur le vrai champ déployé : trois chaînes normalisées/refusées par
 Playwright et quatre formes acceptées, recherchées par GET réel avec période
 exacte. Même stdin SSO privé et purge physique partagée, deuxJPEG ciblées,
-zéro groupe qualifié. Ce diagnostic est préparé, pas encore exécuté.
+zéro groupe qualifié. Le [diagnostic natif](../docs/evidence/execution-journal-date-native-diagnostic-dev-2026-11-23.json)
+passe ces sept formes et deuxJPEG inspectées sur529sources6e757f5/f016. Le
+formateur partagé du banc retire seulement les zéros non significatifs ; UI02
+l'utilise. Son replay ajoute .100/.010/.001 et passe les sept formes acceptées
+par ce même formateur : dix formes/septGET/trois refus bruts attendus. Ce replay
+et le fullUI corrigé restent à exécuter ; aucun changement produit.
 
 Le [checkpoint courant API12](../docs/evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
 passe au gel9702888/528sources. Le fullUI qui suit échoue en conservation après

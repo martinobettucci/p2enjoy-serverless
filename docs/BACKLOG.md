@@ -5221,3 +5221,8 @@ formes acceptées du diagnostic passent aussi par cette même fonction, comparé
 à leurs formes attendues indépendantes puis recherchées réellement. Les trois
 refus bruts restent éprouvés. Aucun code produit ni délai n'est changé ; rejouer
 ce diagnostic corrigé puis la campagne UI complète reste requis.
+
+Le replay du formateur ajoute aux sept formes déjà acquises trois recherches
+canoniques .100→.1, .010→.01 et .001 conservée : dix formes, septGET et trois
+refus bruts attendus. Ces bornes éprouvent les deux zéros finaux et les zéros
+significatifs de début de fraction ; elles restent dans la même fixtureE2E.

@@ -3,7 +3,7 @@
 // Real browser/API/Docker scenarios. No network interception or synthetic server.
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {JournalCampaign,privateInput,diagnosis,base,endpoint,match,until,delay,sha,adminConnection} from './execution-journal-harness.mjs';
+import {JournalCampaign,privateInput,diagnosis,base,endpoint,match,until,delay,sha,adminConnection,utcDateInputValue} from './execution-journal-harness.mjs';
 import {retentionPolicyCase} from './execution-journal-ui-policy-case.mjs';
 import {JournalApiCases} from './execution-journal-api-cases.mjs';
 import {inspectJournal,JournalSqlBarrier,joinJournalSqlBarriers,joinJournalCuts} from './execution-journal-native.mjs';
@@ -64,7 +64,7 @@ try {
     const first=await ids(),nav=journal().getByRole('navigation',{name:'Pagination des journaux',exact:true});
     const next=await response(c.page,path(),()=>nav.getByRole('button',{name:'Suivante',exact:true}).click());const second=await next.json();await assertPage(second);
     assert.equal(second.total,15);assert(!second.items.some(row=>first.includes(row.id)));
-    await journal().getByLabel('Fin (UTC)',{exact:true}).fill(new Date(Date.now()+3600000).toISOString().slice(0,23));
+    await journal().getByLabel('Fin (UTC)',{exact:true}).fill(utcDateInputValue(new Date(Date.now()+3600000)));
     const stable=await filter({source:'application'});assert(stable.total>5);
     const stableNext=await response(c.page,path(),()=>nav.getByRole('button',{name:'Suivante',exact:true}).click());const stablePage=await stableNext.json();await assertPage(stablePage);
     const inserted=await cases.invoke('levels');

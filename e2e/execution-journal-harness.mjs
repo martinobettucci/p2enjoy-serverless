@@ -17,6 +17,10 @@ export const sha=value=>createHash('sha256').update(value).digest('hex');
 export const match=value=>({'If-Match':String(value)});
 export const endpoint=row=>'/api/functions/'+row.id;
 export const delay=milliseconds=>new Promise(resolve=>setTimeout(resolve,milliseconds));
+// @spec docs/BACKLOG.md#sls-138
+// HTML datetime-local normalizes insignificant zeros before Playwright compares values.
+export const utcDateInputValue=date=>date.toISOString().slice(0,23)
+  .replace(/\.000$/,'').replace(/(\.\d*?[1-9])0+$/,'$1').replace(/:00$/,'');
 export function diagnosis(error) {
   return {type:error.name,message_sha256:sha(String(error.message)),
     source_line:String(error.stack || '').match(/execution-journal[^:]*:(\d+)/)?.[1]};

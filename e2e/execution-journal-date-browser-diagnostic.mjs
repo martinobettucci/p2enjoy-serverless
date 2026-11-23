@@ -2,7 +2,7 @@
 // @verifies docs/BACKLOG.md#sls-138 | docs/EXECUTION_LOGS.md#console-et-manuel
 // Diagnose native date normalization on the deployed console, through real inputs.
 import assert from 'node:assert/strict';
-import {JournalCampaign,privateInput,diagnosis,base,endpoint,until} from './execution-journal-harness.mjs';
+import {JournalCampaign,privateInput,diagnosis,base,endpoint,until,utcDateInputValue} from './execution-journal-harness.mjs';
 import {JournalApiCases} from './execution-journal-api-cases.mjs';
 import {inspectJournal} from './execution-journal-native.mjs';
 
@@ -21,6 +21,9 @@ try {
     {name:'fraction-120-canonical',input:seconds+'.12',native:seconds+'.12',accepted:true},
     {name:'fraction-zero-canonical',input:seconds,native:seconds,accepted:true},
     {name:'minute-canonical',input:minute,native:minute,accepted:true},
+    {name:'fraction-100-canonical',input:seconds+'.1',native:seconds+'.1',accepted:true},
+    {name:'fraction-010-canonical',input:seconds+'.01',native:seconds+'.01',accepted:true},
+    {name:'fraction-001-canonical',input:seconds+'.001',native:seconds+'.001',accepted:true},
   ];
   for(const variant of variants) {
     await c.page.goto(base+'/console/functions/'+cases.fn.id+'/logs');
@@ -28,7 +31,9 @@ try {
     await until(()=>journal.getByRole('button',{name:'Suivre les nouveaux événements',exact:true}).isEnabled(),'date_diagnostic_journal_not_ready');
     const input=journal.getByLabel('Fin (UTC)',{exact:true});
     const row={scenario:'real-native-date-input',...variant};c.observations.push(row);await c.save();
-    try {await input.fill(variant.input);row.fill_returned=true;}
+    const candidate=variant.accepted?utcDateInputValue(new Date(Date.parse(variant.input+'Z'))):variant.input;
+    row.shared_formatter=variant.accepted;assert.equal(candidate,variant.input);
+    try {await input.fill(candidate);row.fill_returned=true;}
     catch(error) {row.failure=diagnosis(error);row.error_class=String(error.message).includes('Malformed value')?'native-value-normalized':'unclassified';}
     row.control=await input.evaluate(element=>({type:element.type,step:element.getAttribute('step'),value:element.value,
       valid:element.validity.valid,bad_input:element.validity.badInput,step_mismatch:element.validity.stepMismatch}));

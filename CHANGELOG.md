@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-138 : normalisation du seul banc corrigée sans perte de précision ;
+  UI02 et diagnostic partagent le formateur. Sept formes natives déjà acquises,
+  replay étendu dix formes/septGET puis fullUI encore requis.
+
 - SLS-138 : client navigateur ciblé préparé pour sept formes de date natives,
   quatre recherchesHTTP exactes et trois refus attendus du pilote, sur la
   console déployée et sa propre fixture purgée. Qualification encore due.
