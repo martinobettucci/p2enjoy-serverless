@@ -71,6 +71,7 @@ bloquée est sautée et son blocage est nommé.
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
+| 3 | [SLS-140](#sls-140) Attestation courante du constructeur historique | Corriger | `[~]` | SLS-104 | [STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md#attestation-courante-du-constructeur--sls-140) |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -5437,3 +5438,36 @@ les sources pendant la campagneAPI/UI/communs en cours.
 - [ ] SLS-139.3 Qualifier navigation clavier, texte agrandi et zoom200% réels,
   desktop et mobile390, libellés complets et aucune superposition ni largeur
   globale parasite ; captures inspectées et régressions communes sur le déploiement.
+
+## SLS-140 — Attestation courante du constructeur historique
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-104. Ordre : 3.
+Contrat : [attestation du constructeur](STORAGE_LEGACY_PROOF.md#attestation-courante-du-constructeur--sls-140).
+
+Constat réel : le worker8731613d du socle49 au gel ad9f1a9/529sources/f016
+termine1 avant tout groupe fonctionnel, après un seul prérequis SSO réussi.
+storage-legacy-build.py:46 refuse unattested_current_authentication : il exige
+encore auth.py b9ae58f6 de la preuve089, alors que le courant4b573d90 porte le
+recheck des droits de journaux072, attesté par les passages47 et37 réels.
+Le diff exact est limité à Identity.recheck ; le reste du SSO n'a pas changé.
+Le refus précède toute création distante/build. Worker/client joints et
+original/configuration/référence/5982/huitcompteurs0 recoupés, génération identique.
+
+Décision avant code : conserver l'arbre003 historique et la preuve089 intacts ;
+rattacher le SHA exact du module courant à la preuve47 complète, sans accepter
+une empreinte libre ni une réussite partielle. Conserver aussi l'identité de la
+preuve089 et nommer l'ajout fonctionnel072 dans le reçu de comparaison.
+Les exigences SSO négatives encore ouvertes089 restent ouvertes. Actualiser
+le texte du parcours courant003→011 selon le client déjà adapté, sans changer
+les branches historiques006/007/008 ni les autres gardes du constructeur.
+
+- [ ] SLS-140.1 Sceller le premier refus, sources/rapport/trace/worker et clôture
+  native ; zéro groupe fonctionnel et un prérequis, sans transformer le rouge.
+- [ ] SLS-140.2 Corriger l'attestation exacte et sa traçabilité, référence complète
+  courante et origine089 recoupées ; aucun code courant copié dans l'arbre003,
+  mêmes comparaisons strictes dépendances/runtime/validateur, aucun changement produit.
+- [ ] SLS-140.3 Construire réellement l'image historique puis réussir les quatre
+  groupes de migration/session/purge/contradiction sur011 et le déplacement
+  partiel réel ; originaux, gardes/clients, configuration et5982 conservés.
+  Rejouer les25communs avec captures inspectées, sans les compter deuxfois dans
+  le socle49 ; chaque étape du socle reste fraîche avant clôture072.

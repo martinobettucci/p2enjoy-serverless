@@ -20,11 +20,11 @@ traçabilité associé. Leurs substitutions exactes sont contrôlées ; tout aut
 écart est refusé. Aucun module courant n’est copié dans l’ancien arbre.
 
 Le passage ancien → actuel utilise l’image immuable du contrôle actuellement
-déployé, qui applique normalement004–010. L’ancienne API ne voit jamais la
+déployé, qui applique normalement004–011. L’ancienne API ne voit jamais la
 base actuelle : ses INSERT sans liste de colonnes n’offrent pas de compatibilité
 descendante. Aucun retour à l’ancien code après migration des données temporaires.
 Les preuves003→007 antérieures restent historiques ; le parcours courant
-attend exactement001→010. Les modes spécifiques006→007/008 restent distincts.
+attend exactement001→011. Les modes spécifiques006→007/008 restent distincts.
 
 Le banc respecte les deux `env_file` officiels, sans fichier parallèle, surcharge
 de variable, nouvelle route ni modification de FORGE. La route HTTPS existante
@@ -86,7 +86,7 @@ La preuve exige publication, validation réussie et conteneur retiré avant DELE
 Elle vérifie le schéma 001–003 et l’absence des fonctions dans le vrai registre agent.
 
 Après bascule vers l’image actuelle, la même base et la même clé conservent la
-session, les UUID et les révisions. Les dix migrations exactes sont constatées, puis
+session, les UUID et les révisions. Les onze migrations exactes sont constatées, puis
 `/api/session` confirme l’authentification. Les archives contiennent du code réel
 et exposent `storage.registered=false`, distinct d’un registre connu sans volumes.
 
@@ -110,7 +110,7 @@ seul le mode de purge dispose des observations natives de refus/rollback, de la
 reprise006 avant commit007 et d’une attente API lisible pendant EACCES. Le
 relâchement de permissions utilise un descripteur vérifié avec fchown en dernier.
 La campagne003→007 désigne ce checkpoint historique. Le rejeu générique
-courant vise003→010 et relève du contrat104 ci-dessous ; les preuves propres
+courant vise003→011 et relève des contrats104/140 ci-dessous ; les preuves propres
 au complément006 gardent leur périmètre distinct.
 
 La commande contradictoire reste volontairement non terminée. Elle n’est ni
@@ -142,9 +142,10 @@ configuration ajouté au contexte. Le reçu garde son emplacement et ses SHA. Le
 courant et son conteneur ne changent pas.
 
 L’authentification courante doit correspondre exactement au SHA de auth.py
-dans la preuve SSO089 publiée ; l’ancienne vient de l’arbre003 exact. Le rapport
+dans la preuve courante complète décrite au contrat140 ci-dessous ; la preuve
+SSO089 conserve son empreinte et son périmètre, l’ancienne vient de l’arbre003 exact. Le rapport
 ne les déclare plus identiques : historique/courant, référence de preuve et
-différences089 connues sont explicites. Cette attestation n’invente aucune
+différences089/072 connues sont explicites. Cette attestation n’invente aucune
 qualification de profils négatifs ou rotation non fournis ;089 reste ouvert.
 Les dépendances et les deux fichiers runtime demeurent strictement identiques.
 
@@ -153,13 +154,13 @@ substitutions connues max_bytes, nom p2-v→serverless-code-validator et son
 commentaire076 ; aucune différence arbitraire acceptée. Garder les empreintes
 et signaler les écarts réellement admis. Les sources historiques restent intactes.
 
-Le client générique d’archives attend010 après upgrade, sans élargir les
-bornes des bancs006/007/008. Le mode historical nomme003→010 dans son
-journal et refuse avant arrêt un original dont le schéma n’est pas exactement010.
+Le client générique d’archives attend011 après upgrade, sans élargir les
+bornes des bancs006/007/008. Le mode historical nomme003→011 dans son
+journal et refuse avant arrêt un original dont le schéma n’est pas exactement011.
 Le mode partial conserve ses métadonnées historiques, sans démarrer de contrôle
 avant l’interruption du premier déplacement. Il conserve ses quatre groupes : SSO/publications
 historiques, migration/session, purge sans reçu agent inventé, contradiction
-protégée après apparition réelle du registre et redémarrage. Dix noms ordonnés
+protégée après apparition réelle du registre et redémarrage. Onze noms ordonnés
 exacts, UUID/session/révisions/archives et état de stockage sont recoupés. Le relevé
 RO par fonction conserve les métadonnées des révisions et, pour chaque fichier
 d’archive/code, chemin relatif, SHA256, taille et mode. Après upgrade, comparer
@@ -176,3 +177,33 @@ partiel et25communs suivent en série. Rapports, images, sources, original et
 communes inspectées. Le nettoyage de l’installation contradictoire ne devient
 pas une purge métier réussie. Aucun changement de produit, de configuration,
 de migration, de route ou de manuel.
+
+## Attestation courante du constructeur — SLS-140
+
+Le premier socle49 courant du23novembre, ad9f1a9/529sources/f016, refuse avant
+SSH/build la référence auth.py b9ae58f6 de la preuve089. Le SHA courant4b573d90
+est celui des passages réels47/37. Le diff depuis089 ne porte que sur
+Identity.recheck : garde de service_read, retour de l'acteur relu et relecture
+des droits/scopes pour les journaux072. Les flux OIDC/session restent identiques.
+Le refus et son worker terminé1 restent conservés ; ils ne qualifient aucun groupe.
+
+Décision avant code : le constructeur exige completed=true,47groupes qualifiés
+et le SHA exact du module courant dans
+execution-journal-complete-schema011-query-dev-2026-11-23.json. Il recoupe le
+SHA comprimé et le contenu décompressé de son brut, puis les12API réussies,
+dont le contrôle direct des droitsAPI02 ; le vecteur du brut doit être celui
+du manifeste. La preuve089 reste une origine documentaire distincte, avec son
+empreinte de module, son chemin et son SHA de manifeste dans le reçu. Aucune
+réécriture de cette preuve ni attestation des profils négatifs/rotation manquants.
+
+Le reçu nomme execution_log_authorization_recheck parmi les changements revus ;
+ses empreintes historique/courante restent différentes. Les autres comparaisons
+strictes, l'arbre003 et ses fichiers exacts, la construction Docker véritable,
+les identités et restaurations du banc restent inchangés. Aucun choix d'image,
+de schéma ou d'autorisation produit n'est modifié par cette correction de preuve.
+
+La qualification réutilise les commandes réelles documentées : constructeur,
+storage-legacy-recovery --partial (un groupe) puis --full (quatre groupes),
+et25communs ; le socle49 les exécute en série et ne les recompte pas. Chaque
+nouvelle source a son propre gel ; les47/37 attestent seulement le auth.py
+identique et gardent leurs vecteurs complets/générations propres.

@@ -10629,3 +10629,21 @@ SSH_AUTH_SOCK/PATH (présence seule contrôlée). Le lanceur canonique est conse
 Les septJPEG contrôleUI non déclarées seront archivées en complément, avec SHA
 et mtime dans la fenêtre de leur commande, puis toutes les images fraîches
 seront ouvertes individuellement ; aucun nouveau test ni source n'est ajouté.
+
+### 23 novembre 2026 — Refus du prérequis historique et décision140
+
+Le worker8731613d au gel ad9f1a9/529sources/f016 termine1 après une préparation
+SSO réelle, zéro groupe. Builderligne46 : unattested_current_authentication,
+avant toute commande distante/création/build. Auth.py courant4b573d90 diffère
+réellement de b9ae58f6 attesté par089 ; Git montre le seul hunk Identity.recheck
+ajouté par072. Les passages47/37 attestent déjà ce module exact et leurs droits
+API. Les trois protocoles dépendances/runtime et les substitutionsvalidateur
+restent strictement égaux aux oracles existants. Worker finalisé/client joint,
+natif extérieur après identique au préflight, configuration/référence/5982/huit0.
+
+140 inscrit avant code. Décision : garder003/089 immuables et exiger l'attestation
+complète47, ses SHA/gzip/brut et12API dont02, avec moduleauth exact. Retenir089
+comme origine distincte et nommer le hunk072 ; aucune preuve de rôles négatifs
+ou rotation extrapolée. Le contratstorage corrige son texte courant vers011,
+conformément au client déjà adapté. Builder puis partial/full et25communs
+restent E2E réels, réutilisés dans49sansdoublecompte ; aucun autre oracle affaibli.

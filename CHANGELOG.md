@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-140 inscrit : le socle49 courant refuse le SHA d'authentification au
+  prérequis historique, avant build et sans groupe fonctionnel. Worker fermé,
+  originaux conservés. Rattachement exact à la preuve47 et conservation de089
+  décidés avant code ; constructeur et parcours003→011 restent à qualifier.
+
 - SLS-120/121/123–130 closes par rapprochement des douze critères restants avec
   les47groupes courants ; zéro groupe ajouté. Ordre129/130 relié aux décisions
   pré-codeAPI→UI→communs. Garde122 courante acquise en diagnostic0groupes,
