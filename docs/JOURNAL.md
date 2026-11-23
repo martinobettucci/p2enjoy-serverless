@@ -11049,3 +11049,57 @@ pendant cette acquisition, et le chemin d’échec écrit après le secours join
 Horodatage d’acquisition et début d’écriture du rapport restent distincts.
 La relecture indépendante finale ne relève aucunP1/P2 ; elle reste statique,
 sans qualification d’une borne ou d’un futur parcours E2E.
+
+### 23 novembre2026 — Diagnosticclaimed positif et clôturé, zéro groupe
+
+Commit2d98bcd poussé puis cinqfichiers de helper/contrat synchronisés atomiquement,
+sans rebuild/image/configuration. Une seule acquisition diagnostique est lancée
+par worker durable144d3f40 : deuxsessionsSSO réelles et indépendantes, source530
+exactGit/TAR, mode expliciteclaimed. La barrière réelle est acquise après
+2,691563911s,6220appels et retourswait/info,154candidats/checkpoints et deux
+révisions.154lectures de chaque requête ; cumulsSQLite117,316775/103,043551/
+104,836627ms, durable5,309353ms. Aucun coût nul ni chronologie du rouge ancien
+n’est déduit de ces temps instrumentés.
+
+Release explicite sans coupurecontrôle ; un tir et sa vraieinvocation terminent
+succeeded/handler_started1, puis purge API/physique et retrait des parents.
+LectureRO aprèsfinish458ms, manifeste/page4096/checkpoint et stdout exact recoupés,
+nanosecondes en chaînes décimales ; aucun avantsecours, primaire native ou perte
+du writer n’est éprouvé par ce succès. Dixévénements de finalisation recoupés.
+
+Le premiercollecteur clôture1 sur restored.json root0644, mode historique du
+programme inchangé dans son dossierroot0700 ; il exigeait600 pour touslesfichiers.
+Programme/transport/refus conservés. Les métadonnéesRO expliquent cette erreur
+de collecte ; lecteur nouveau0 vérifie644 pour ces seuls reçus historiques et
+600 pour les fichiers initiaux/diagnostiques, sans rejouer le scénario. Worker,
+lanceur, Node et helper terminés, unitélocaleinactive et cgroupvide. Garde inactive,
+backupintègre, contrôleTracerPid0, huit0 et référence/configuration/5982 conservés.
+
+Preuve schedule-claimed-acquisition-diagnostic-dev-2026-11-23 : sealer0,
+gzip1956266octets/SHA145062a8, brut2805570/SHA1dc7ff82. Deuxétapesdiagnostiques,
+zéro groupefonctionnel, aucunecause historique attribuée et aucuneunitéclose.
+Décision avant prochaine campagne : nominal cinqgroupes puis25communs frais,
+nouveaugel sur les mêmes octets instrumentés, sans modifier les délais ou la
+dépendance. Une faute est conservée sans retry ;49/32 restent après ce ciblé
+complet et sa clôture.145.2partielle,145.3/.4 ouvertes.
+
+La revue du couple public/sealer est sansP1/P2. Le vérificateur des originaux
+privés recoupe530/Git/TAR, compteurs, entiers natifs/projection, tir/invocation,
+clôture et refus conservé, sansP1/P2 sur ces octets. Il relève un écart de gel :
+pendant son analyseRO, le principal a publié le couple de preuve puis changé
+BACKLOG/JOURNAL/CHANGELOG/e2eREADME, ces six seuls chemins. Aucun original privé
+ni source530 n’a changé ; le vérificateur n’en était pas l’auteur et sa première
+portée exclut ces nouvelles publications. L’écart est conservé ; une dernière
+vérification RO doit comparer l’arbre stabilisé avant/après et les publications,
+sans rejeu E2E. Aucun résultat nouveau n’est attribué à cette seule correction
+de discipline de revue.
+
+La dernière vérification RO recoupe le couple public et le diff sur arbre
+stabilisé : mêmes statutGit et SHA des six chemins au début/fin, aucunP1/P2.
+Vingt fichiers/quatreprogrammes décodés, tailles/SHA exacts, gzip/brut valides ;
+530sources TAR/Git/current identiques et originaux déjà épinglés inchangés.
+Aucun secret détecté dans les formats contrôlés ; aucun scénario ou sealer
+réexécuté. Les annexes sans empreinte globale antérieure sont recoupées entre
+publication et originaux privés actuels seulement. L’anomalie de première
+revue reste tracée ; la stabilité de cette dernière est acquise sans effacer
+sa portée historique.145.2partielle et nominal5+25 encore dus.

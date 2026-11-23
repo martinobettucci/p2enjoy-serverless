@@ -16,8 +16,13 @@ prochaine frontièreUTC. Une commande `release` restitue sans coupure ; purge
 API et physique obligatoire. Le rapport `scheduled-functions-*-acquisition.json`
 est distinct du nominal et compte zéro groupe fonctionnel. Les fichiers de phase
 mappés sont lus RO avant secours (borne3s) et après restitution ; les cinqgroupes
-nominaux,25communs et49/32 restent dus. Instrumentation implémentée, syntaxe
-contrôlée ; cette nouvelle source n’est pas encore qualifiée sur le SPARK.
+nominaux,25communs et49/32 restent dus. Le
+[diagnostic positif](../docs/evidence/schedule-claimed-acquisition-diagnostic-dev-2026-11-23.json)
+sur2d98bcd/530/f016 recoupe acquisition2,69s et lectureRO aprèsfinish458ms,
+release sans coupure, handler réussi, purge et clôture. Deuxétapes, zéro groupe ;
+premier collecteur1 conservé et lecteur corrigé0 sans rejeu. La cause historique
+et le chemin avantsecours restent inconnus. Prochaine campagne : les cinqgroupes
+nominaux complets, puis25communs frais ; aucun lancement49/32 avant leur clôture.
 
 
 

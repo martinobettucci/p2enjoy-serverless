@@ -5897,5 +5897,19 @@ ControlObserver, programmes d’arrêt/restitution, oracles et bornes45/70/80
 conservés ; terminal-capture non instrumenté. Diagnosticclaimed séparé0groupe,
 release seulement en observation sanscoupure ; le nominal5+25 et49/32 restent
 complets et obligatoires. Instrumentation implémentée dans le banc, contrôles
-de syntaxe seuls acquis ; ni synchronisation SPARK ni diagnostic E2E encore
-exécutés sur cette nouvelle source. Aucun correctif causal ni clôture acquis.
+de syntaxe et revue statique sansP1/P2 acquis. Le
+[diagnosticclaimed positif](evidence/schedule-claimed-acquisition-diagnostic-dev-2026-11-23.json)
+passe ses deuxétapes, zéro groupe fonctionnel, sur2d98bcd/530/f016.
+Acquisition2,691563911s,6220appels/retourswait,154checkpoints/deuxrévisions ;
+lectureRO aprèsfinish458ms complète, vraieinvocationensuite succeeded et purge
+physique. Garde/helper/worker/lanceur/Node joints, cgroupvide/TracerPid0,
+configuration/référence/5982/huit0 inchangés. Premier collecteur1 : reçu
+historique0644 dans dossier0700, contrôle600 trop large ; original conservé,
+lecteur corrigé0 sans rejeu. Cause historique et chemin avantsecours non acquis.
+
+Décision après diagnostic : aucun correctif causal fondé sur cette seule
+acquisition positive. Éprouver maintenant le nominal intégral cinqgroupes,
+puis25communs frais, sur les mêmes octets instrumentés avec nouveau gel et
+restaurations indépendantes. Une nouvelle faute reste primaire et conservée,
+sans relance automatique ;49et32 ne commencent qu’après ce ciblé complet et
+sa clôture.145.2reste partielle,145.3/.4 ouvertes.

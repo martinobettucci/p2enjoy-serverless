@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- SLS-145 : diagnosticclaimed réel positif sur2d98bcd/530/f016, deuxétapes et
+  zéro groupe fonctionnel ; acquisition2,69s, lectureRO aprèsfinish458ms complète,
+  release sans coupure, handler réussi et purge physique. Garde/helpers/worker/
+  lanceur/Node joints, cgroupvide/TracerPid0 et originaux conservés. Premier
+  collecteur1 retenu (mode historique de reçu), lecteur corrigé0 sans rejeu.
+  Cause historique inconnue ; nominal5+25 puis49/32 encore dus.
+
 - SLS-145 : instrumentation du seul banc de reprise implémentée, avec état
   mappé borné, checkpoint/exception/finalisation séparés et photographieRO avant
   secours. Mode claimed explicite sans coupure, rapport distinct à zéro groupe.
