@@ -10957,3 +10957,33 @@ allongement, remplacement d’assertion ou cause supposée à partir du seul255.
 Le commit144/1f28365 reste une transition documentaire séparée : mêmes529
 fichiers aux deuxcommits et worktree, source de lancement8b88 préservée.
 Ce nouveau constat ne requalifie ni les anciensrouges ni leurs groupes.
+
+
+### 23 novembre2026 — Scellement145 et observations bornées acquis
+
+Preuve schedules-recovery-gated-first-failed-dev-2026-11-23 :50rapports,
+TAR529 exactGit8b88, transitionsdocumentaires1f/ecf et108captures réellement
+inspectées ;505antérieurs/deuxpartiels/zéroqualifié. Primaire70s
+native_event_missing_gated recoupé parSHA et stderr original, puisSSH255 après
+secours. Horloges/origines45/70/80 différentes ; aucun site natif attribué.
+Clôture extérieure0 avec namespacehôte vivant épinglé au lancement, worker et
+lanceur terminés/cgroupvide. LectureRO0 des troisgardes/backups, helpers
+terminés et TracerPid du contrôle0 ; une purgephysique, huit0, configuration/
+référence/5982originaux,42backend/quatrewebno-store et manuel84 recoupés.
+Les journauxbornés sont retenus privés sousSHA ; leurs fenêtres vides ne prouvent
+pas l’absence d’un incident. Le champ privé agent_tracer_pid lisait le PID
+contrôle de l’identitéclaimed : projectionpublique explicitement corrigée,
+original/code/SHA préservés, aucun champ d’agent de stockage déduit.
+
+Premier comparateur des notes1 : stdout/stderrSSH nonredirigés, refus conservé
+comme transcription de retouroutil. NouvellelectureRO0 avec transports exacts :
+actives identiques à sa baseline, propositions identiques aux sourcesGit8b88,
+ancienreçu de propositions différent ; aucune note écrite ou adoptée.
+L’observationnative du stockage terminée0 est conservée et détachée ; sa
+corrélationSQL prévue après un49 complet n’a pas été exécutée après ce rouge.
+
+Le sealer termine0 ; revue et vérification indépendantes sansP1/P2, gzip et
+brut/SHA,18programmes/102objets référencés et108captures rehashés. Les deux
+fichiers de preuve sont les seuls ajouts pendant la vérification RO.145.1
+est acquise ;145.2garde la phase primaire à observer,145.3/.4 restent ouvertes.
+Aucun rejeu ni correctif de produit, aucun cumul en49 complet ;32 non lancé.

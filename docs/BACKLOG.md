@@ -75,7 +75,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-141](#sls-141) États de journal dans l'historique d'invocation | Corriger | `[~]` | SLS-061 | cette unité |
 | 3 | [SLS-142](#sls-142) Barrière après commit du transport de service | Corriger | `[~]` | SLS-031, SLS-108 | [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md) |
 | 3 | [SLS-143](#sls-143) Invocation réelle refusée dans le parcours de stockage | Corriger | `[~]` | SLS-065 | cette unité, [CONSOLE_STORAGE](CONSOLE_STORAGE.md) |
-| 3 | [SLS-145](#sls-145) Transport de reprise terminé sans barrière reçue | Corriger | `[~]` | SLS-078 | cette unité, [SCHEDULE_RECOVERY](SCHEDULE_RECOVERY.md) |
+| 3 | [SLS-145](#sls-145) Barrière de réclamation non reçue à l’échéance | Corriger | `[~]` | SLS-078 | cette unité, [SCHEDULE_RECOVERY](SCHEDULE_RECOVERY.md) |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -5813,7 +5813,7 @@ substitution ou donnée injectée pour remplacer une vraie sortie de job.
 
 
 <a id="sls-145"></a>
-## SLS-145 — Transport de reprise terminé sans barrière reçue
+## SLS-145 — Barrière de réclamation non reçue à l’échéance
 
 Statut : [~]. Nature : Corriger (banc de preuve). Ordre : 3, préalable aux
 régressions de072.6 et au rattachement134.4. Dépend de : SLS-078.
@@ -5823,13 +5823,17 @@ Constat du23novembre2026 : le cinquième socle49, worker3d3db540 lancé sur
 8b88e99/529sources/f016, passe40campagnes/505groupes et neufprérequis.
 Dans schedule-recovery, la garde indépendante et les trois fenêtres manquées
 sans invocation suivies du tir normal passent. Le parcours après réclamation
-échoue ensuite dans schedule-recovery.mjs:22:189 : le clientSSH de cette garde
-termine255 après guard-armed/armed, sans événement gated conservé, avec stderr
-conservé vide. Le rapport exact est scheduled-functions-20b8deeb ; cleanuptrue,
-cleanup_errors[], troisgardes restaurées, quatrièmegarde liée non atteinte.
-Le worker termine1, son unité est arrêtée et son lanceurjoint ; la clôture
-native extérieure reste à recouper. Aucun défautproduit, causeSSH ou cause
-native n’est encore établi.505antérieurs/deuxgroupes de reprise partiels,
+échoue ensuite dans schedule-recovery.mjs:22:189 : l’attente cliente70s
+expire avec native_event_missing_gated, confirmé par SHA et stderr original.
+Le clientSSH de cette garde finit255 après le secours ; seuls guard-armed/armed
+sont conservés, son stderr est vide. Ce255 final n’est pas la cause primaire.
+Le rapport exact est scheduled-functions-20b8deeb ; cleanuptrue/cleanup_errors[],
+troisgardes restaurées, quatrièmegarde liée non atteinte. Le reçu de secours
+porte independent/observer_killed/observer_gone, mais ne désigne pas à lui seul
+le timer ou une commande rescue comme déclencheur. Worker1, lanceurjoint,
+naissances terminées/cgroupvide dans le namespacehôte épinglé sont recoupés ;
+les troishelpers sont terminés, sauvegardes intègres et TracerPid du contrôle0.
+Aucun défautproduit ni cause native de l’acquisition n’est encore établi.505antérieurs/deuxgroupes de reprise partiels,
 zéro49complet et aucun32. Les108captures fraîches déjà inspectées restent
 propres à ce gel. L’ajout documentaire144/1f28365 pendant le passage conserve
 le source_commit8b88 et les mêmes529octets ; son reçu exact reste distinct.
@@ -5841,12 +5845,12 @@ fin de l’observateur et restauration ; ne pas déduire leur cause du seul255
 ou du stderr vide. Toute instrumentation ou correction ultérieure conserve
 les fenêtres existantes, les vraies coupures et l’absence de rejeu.
 
-- [ ] SLS-145.1 Conserver rapports/programmes/TAR529, transition documentaire144,
+- [x] SLS-145.1 Conserver rapports/programmes/TAR529, transition documentaire144,
   transport et résultats réels, trois stderr,505antérieurs/deuxgroupespartiels,
  108captures inspectées et leurs limites. Recouper troisgardes/restaurations,
   purge physique, fin du worker/lanceur/cgroup dans le namespacehôte épinglé,
   configuration/référence/5982originaux et réservations.
-- [ ] SLS-145.2 Établir les observations disponibles de la garde claimed par
+- [~] SLS-145.2 Établir les observations disponibles de la garde claimed par
   UUID/PID/naissance/unité, phases/événements et journaux applicables ; nommer
   toute observation perdue. Persister le diagnostic borné et la décision avant
   l’instrumentation ou le correctif qui en dépend.
@@ -5861,3 +5865,27 @@ les fenêtres existantes, les vraies coupures et l’absence de rejeu.
   complément32/276. Ne réutiliser ni505antérieurs ni groupespartiels comme
   réussite du socle ; les preuves de stockage143 et de transport142 restent
   distinctes. Une preuve manquante laisse l’unité ouverte.
+
+145.1 — [premier échec scellé](evidence/schedules-recovery-gated-first-failed-dev-2026-11-23.json) :
+50rapports exacts, TAR529/Git8b88 et transitions documentaires1f28365/ecf7e15,
+108captures inspectées.505antérieurs/deuxpartiels/zéroqualifié globalement.
+Clôture extérieure0, troisgardes/helpers terminés et une purge physique ;
+42backend/quatreHTTPSno-store, manuel84, référence/configuration/5982/huit0
+conservés. Une seule coupure du contrôle137 et troisfenêtres manquées puis un
+tir normal sont acquis dans le caspartiel ; claimed/linked complets restent dus.
+Revue et vérification indépendante sansP1/P2. La projection nomme le vrai
+TracerPid du contrôle ; le champ privé mal nommé agent_tracer_pid est conservé
+sousSHA avec son acteur explicité.
+
+145.2 — lecturesRO0 : troisgardes et leurs backups sont recoupés ; les journaux
+bornés sont vides hors13messagesSSH, sans conclusion d’absence d’incident.
+Le site natif primaire et sa chronologie ne sont pas établis par ces reçus
+après décès.
+Client70s aprèsarmed, acquisition45s après attenteUTC/attache et garde80s
+avantarmed ont des origines distinctes. Le reçu de secours ne suffit pas à
+attribuer le déclenchement. La première collecte de notes termine1, original
+stderr nonredirigé ; la lecture corrigée0 retrouve les actives de sa baseline
+et les propositions égales aux sourcesGit gelées, différentes de l’ancien
+reçu de propositions. Aucun changement/adoption de note revendiqué. La trace
+stockage est conservée/détachée aveccontrôleur0, mais sa corrélationSQL prévue
+après49 n’a pas été réalisée sur ce socle échoué. Ces limites restent ouvertes.

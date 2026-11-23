@@ -1,12 +1,14 @@
 # Qualification de la plateforme
 
-Le cinquième socle courant s’arrête dans [SLS-145](../docs/BACKLOG.md#sls-145) :
-40campagnes/505groupes sur8b88e99/529sources/f016, puis deuxgroupes de reprise
-partiels ; clientSSHclaimed terminé255 avant gated, stderr vide, cause indéterminée.
-Worker1 finalisé et lanceurjoint, troisgardes restaurées et cleanuptrue ;
-recoupementnatif extérieur encore dû.108captures inspectées conservées.
-Aucun49 complet acquis et complément32 non lancé ; ne pas cumuler ces groupes
-avec un nouveau passage. L’ajout documentaire144/1f28365 reste séparé du gel.
+Le [cinquième socle courant scellé](../docs/evidence/schedules-recovery-gated-first-failed-dev-2026-11-23.json)
+termine1 dans la reprise : attente70s de gated expirée, puis clientSSH255 après
+secours, site natif primaire inconnu.40campagnes/505groupes antérieurs, deux
+groupespartiels et neufprérequis ;108captures inspectées. Worker/lanceur/cgroup
+fermés, troisgardes restaurées, purgephysique et référence/configuration/5982/
+huit0 recoupés ;42backend/quatreHTTPSno-store et manuel84. Aucun49 complet
+ni complément32 acquis. SLS-145 porte le diagnostic ; les autres rouges et
+leurs gels restent distincts. L’unité144 Rapports de jobs est inscrite au backlog.
+
 
 
 ## Journaux SLS-072 — qualification courante sur f016

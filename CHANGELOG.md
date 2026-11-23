@@ -2,12 +2,16 @@
 
 ## [Non publié]
 
-- SLS-145 inscrite : cinquième socle8b88e99/529/f016 arrêté dans
-  schedule-recovery après505groupes/40campagnes et deuxgroupespartiels.
-  ClientSSHclaimed255 sans gated ni stderr, cause indéterminée ; troisgardes
-  restaurées et cleanuptrue. Worker1 finalisé/clientjoint ; recoupementnatif
-  extérieur et diagnostic encore dus.108captures inspectées conservées,
-  aucun49 complet ni32 lancé. Aucun correctifproduit revendiqué.
+- SLS-145 : [cinquième socle scellé](docs/evidence/schedules-recovery-gated-first-failed-dev-2026-11-23.json),
+  8b88e99/529/f016,505groupes antérieurs/40campagnes puis deuxpartiels,
+  neufprérequis et108captures inspectées. Primaire native_event_missing_gated
+  à70s confirmé parSHA/stderr original ;255SSH final aprèssecours, site natif
+  inconnu. Clôture extérieure et lecture native0, troisgardes/une purge,
+  contrôleTracerPid0, référence/configuration/5982/huit0 et42backend/quatreweb
+  no-store conservés. Notes : anciencomparateur1 retenu, nouvelleobservationRO0
+  distingue propositions/sourceGit et baseline obsolète ; aucuneadoption.
+  Revue/vérification sansP1/P2 ;145.1acquise,145.2partielle,49/32 toujours dus.
+
 
 - SLS-144 inscrite : rapports de jobs par bibliothèque Node, tables et graphiques
   nommés, ajout aux objets existants, conservation de la seule dernière valeur
