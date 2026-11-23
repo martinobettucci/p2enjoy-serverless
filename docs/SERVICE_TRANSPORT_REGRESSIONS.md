@@ -163,3 +163,13 @@ nonatteinte, refus durable ou acquisition horsborne restent distincts. La
 correction de cause éventuelle reçoit sa décision avant code. Les cinqgroupes
 complets,25communs frais/captures et nouveau49 depuis le début restent dus ;
 le complément32/276 et les autres critères072/132/133/134 restent indépendants.
+
+Le diagnostic ciblé lance une seule fois le client canonique complet, après
+deux sessionsSSO réelles neuves, dans une unitélocaleexec900s/stop60, enfant
+Node600s et contrôleur1100s. Ces bornes encadrent le banc ; elles ne changent
+pas les bornes d'acquisition. Le relevé externe du PID/naissance/cgroup précède
+la saisie privée. TAR529/Git propre, rapport exact même rouge, sorties privées,
+traces fraîchement produites et clôture externe sont conservés. Aucun replay
+automatique, aucun groupe qualifié par le seul diagnostic. L'émission du bilan
+est protégée par un finally qui garantit le nettoyage ; si une erreur primaire
+existe déjà, l'échec de livraison est attaché comme note statique à cette erreur.

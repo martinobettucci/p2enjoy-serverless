@@ -10772,3 +10772,23 @@ Décision avantcode : conserver CLI/helper et compteurs d'acquisition, sans
 changer40/45/70s, matcher ou observateurpartagé ; source de la cause à établir
 par le flux réel, zéro groupe acquis par cette instrumentation. Contrat142
 ajouté au documenttransport ; originalrouge et limites restent inchangés.
+
+### 23 novembre 2026 — Conservation142 implémentée, diagnostic encore dû
+
+Le client conserve désormais le vrai transport helper (fermeture/jointure,
+retour et stderr expurgé borné), le résultat CLI et sa trace même lorsqu'une
+assertion précède result(). Observer ajoute compteurs et chronologie du match,
+sans nouvellelecture de buffer ni changement du matcher, des oracles ou des
+bornes40/45/70/12. Le premier diff avait une émission de bilan pouvant empêcher
+le nettoyage sur BrokenPipe : constatP2 de revue corrigé avant toutE2E par
+finally garanti et note statique sur le primaire. SyntaxesNode/Python valides.
+Pilotes privés préparés : canonique5 entier unefois, SSO2réels, TAR529/Git,
+unitéexec900/stop60, enfant600 et contrôleur1100 ; preuve externe avantstdin
+puis clôture extérieure. Aucun testfonctionnel encoreexécuté sur ce diff,
+aucune cause attribuée ni142.2 acquise ; revue/synchronisation/gel puis diagnostic.
+
+Recoupe de revue : le pilote accepte le StartedAt changé par les vraiescoupures,
+mais conserve CID/image du contrôle et référence entière via same_installation.
+Les deux émissions terminales sont protégées ; erreur secondaire attachée au
+primaire ou propagée après nettoyage. Le timer n'est arrêté qu'après retour
+de restauration acquis : une restauration refusée conserve son secours70s.

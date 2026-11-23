@@ -3477,3 +3477,12 @@ Le [reçu court](../docs/evidence/invocation-cost-short-schema011-dev-2026-11-23
 ne qualifie aucun groupe nominal. Le pilote plein local est borné2400s, attente
 client2300s et contrôleur2600s ; garde2700 et W−60 restent inchangés.
 Voir le [contrat courant](../docs/INVOCATION_PRODUCTION_PROFILE.md#profilage-du-coût-dinvocation-courant--sls-1336).
+
+La reprise SLS-142 du transport ajoute la conservation des retours réels
+helper/CLI et des compteurs d'acquisition. Le client canonique reste
+`node e2e/service-transport.mjs`, cinqgroupes après SSO réel, avec son helper
+synchronisé ; bornes40/45/70/12 et oracles inchangés. La traceconnect seule
+est conservée aussi dans le finally d'une phase nonacquise ; ce reçu ne
+qualifie pas les troisconnexions ou un résultatunknown. Aucun diagnostic
+fonctionnel n'est encore acquis sur ce changement. Voir le
+[contrat142](../docs/SERVICE_TRANSPORT_REGRESSIONS.md#diagnostic-de-lacquisition-courante--sls-142).

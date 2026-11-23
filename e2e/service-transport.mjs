@@ -1,5 +1,7 @@
 // @spec docs/BACKLOG.md#sls-108 | docs/SERVICE_TRANSPORT_REGRESSIONS.md
 // @verifies docs/BACKLOG.md#sls-108 | docs/SERVICE_TRANSPORT_REGRESSIONS.md
+// @spec docs/BACKLOG.md#sls-142 | docs/SERVICE_TRANSPORT_REGRESSIONS.md#diagnostic-de-lacquisition-courante--sls-142
+// @verifies docs/BACKLOG.md#sls-142 | docs/SERVICE_TRANSPORT_REGRESSIONS.md#diagnostic-de-lacquisition-courante--sls-142
 // @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuve-de-transport
 // @verifies docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuve-de-transport
 // All helpers exercise the real CLI, native control process and public HTTPS API.
@@ -28,7 +30,7 @@ let session,namespace,work,completed=false,cleanupFinished=false,activeTask;
 async function save(){
   const value={target:base,completed:completed&&cleanupFinished&&!cleanupErrors.length,checks,observations,skipped:0,cleanup:cleanupFinished&&!cleanupErrors.length,cleanup_errors:cleanupErrors,
     namespace_id:namespace?.id,service_ids:services.map(row=>row.id),function_ids:archives.map(row=>row.function_id),storage_archives:archives,
-    native_gates:gates.map(held=>({service_id:held.service.id,events:held.events,restored:held.restored}))};
+    native_gates:gates.map(held=>({service_id:held.service.id,mode:held.mode,events:held.events,restored:held.restored,helper_transport:held.transport}))};
   const text=JSON.stringify(value,null,2);for(const value of [secret,...credentials])assert(!text.includes(value),'Identifiant dans le rapport');
   await writeFile(report+'.pending',text+'\n',{mode:0o600});await rename(report+'.pending',report);
 }
@@ -49,13 +51,17 @@ async function remote(mode,service,extra=[]){
     {timeout:200000,maxBuffer:1024*1024},(error,stdout,stderr)=>error?reject(new Error('observer_operator_failed: '+stderr.slice(-1000))):resolve(JSON.parse(stdout.trim().split('\n').at(-1)))));
 }
 async function gate(mode,service){
+  const transport={started_at_ms:Date.now(),closed_at_ms:null,exit_code:null,joined:false,stderr_bytes:0,stderr_sha256:null,stderr_excerpt:''};
+  const stderrHash=createHash('sha256');
   const child=spawn('ssh',[...ssh,'python3','-B',helper,mode,service.id,namespace.id],{stdio:['pipe','pipe','pipe']});
   const events=[];let ended=false,exitCode=null,stderr='';
   createInterface({input:child.stdout}).on('line',line=>events.push(JSON.parse(line)));
-  child.stderr.on('data',bytes=>{stderr+=bytes.toString();});child.stdin.on('error',()=>{});
-  const done=new Promise(resolve=>{child.on('close',code=>{ended=true;exitCode=code;resolve(code);});child.on('error',()=>{ended=true;exitCode=-1;resolve(-1);});});
-  const value={service,events,restored:false,
-    async wait(name){return until(()=>{const event=events.find(row=>row.event===name);assert(event||!ended,`Observateur terminé : ${exitCode}; ${stderr.slice(-700)}`);return event;},'Barrière native absente : '+name);},
+  const safeStderr=()=>{let text=stderr;for(const value of [secret,...credentials])text=text.replaceAll(value,'[redacted]');return text;};
+  child.stderr.on('data',bytes=>{stderrHash.update(bytes);transport.stderr_bytes+=bytes.length;stderr+=bytes.toString();});child.stdin.on('error',()=>{});
+  child.on('error',error=>{transport.spawn_error=error.code??error.name;});
+  const done=new Promise(resolve=>{child.on('close',code=>{ended=true;exitCode=code;Object.assign(transport,{closed_at_ms:Date.now(),exit_code:code,joined:true,stderr_sha256:stderrHash.digest('hex'),stderr_excerpt:safeStderr().slice(-4096)});resolve(code);});});
+  const value={service,mode,events,transport,restored:false,
+    async wait(name){return until(()=>{const event=events.find(row=>row.event===name);assert(event||!ended,`Observateur terminé : ${exitCode}; ${safeStderr().slice(-700)}`);return event;},'Barrière native absente : '+name);},
     send(command){child.stdin.write(command+'\n');},
     async finish(){assert.equal(await done,0,'Fin de l’observateur');const restored=events.find(row=>row.event==='restored');assert(restored?.healthy&&restored.reference_unchanged);value.restored=true;return restored;},
     async recover(){
@@ -84,22 +90,33 @@ async function startDeployment(service,credential,label,trace=false){
   const config=path.join(work,'serverless.yml');
   await writeFile(config,JSON.stringify({service:service.name,provider:{name:'p2enjoy',runtime:'node24',env:{SHARED_LABEL:label},secret:{SHARED_SECRET:'${env:SHARED_SECRET}'},p2enjoy:{idle_seconds:0}},
     functions:{'transport-inheritance':{handler:'handler.handler'}},package:{patterns:['!**','*.cjs']}}));
-  const task={settled:false,async result(success){
+  let observation;
+  const task={settled:false,expectedSuccess:null,async observe(){
+    if(observation)return observation;
+    observation=(async()=>{
     const value=await task.done;task.settled=true;
     for(const credential of [secret,...credentials])assert(!value.stdout.includes(credential)&&!value.stderr.includes(credential),'Identifiant exposé');
-    observations.push({scenario:'cli-deploy-exit',service_id:service.id,expected_success:success,exit_code:value.code,stdout_sha256:digest(value.stdout),stderr_sha256:digest(value.stderr)});await save();assert.equal(value.code,success?0:1,'Code de sortie CLI');
-    assert(!value.stderr.includes('Traceback'));const result=JSON.parse(value.stdout);observations.push({scenario:'cli-deploy-result',service_id:service.id,expected_success:success,report:result});await save();assert.equal(result.completed,success);
+    observations.push({scenario:'cli-deploy-exit',service_id:service.id,expected_success:task.expectedSuccess,observation_context:task.expectedSuccess===null?'finally-without-result-oracle':'result-oracle',exit_code:value.code,stdout_sha256:digest(value.stdout),stderr_sha256:digest(value.stderr)});await save();
+    let result,parseError;
+    try{result=JSON.parse(value.stdout);observations.push({scenario:'cli-deploy-result',service_id:service.id,expected_success:task.expectedSuccess,report:result});}
+    catch(error){parseError=error;observations.push({scenario:'cli-deploy-result-unparseable',service_id:service.id,error_type:error.name,stdout_sha256:digest(value.stdout)});}
+    await save();let native;
     if(trace){
-      const native=await readFile(tracePath,'utf8');
-      for(const credential of [secret,...credentials])assert(!native.includes(credential),'Identifiant dans la trace native');
-      const preserved=path.join(out,'service-transport-cli-connections-'+service.id+'.trace');await writeFile(preserved,native,{flag:'wx',mode:0o600});
-      const attempts=native.split('\n').filter(line=>line.includes('connect(')&&line.includes('htons(443)'));
+      const traceText=await readFile(tracePath,'utf8');
+      for(const credential of [secret,...credentials])assert(!traceText.includes(credential),'Identifiant dans la trace native');
+      const preserved=path.join(out,'service-transport-cli-connections-'+service.id+'.trace');await writeFile(preserved,traceText,{flag:'wx',mode:0o600});
+      const attempts=traceText.split('\n').filter(line=>line.includes('connect(')&&line.includes('htons(443)'));
       const connections=attempts.filter(line=>/ = 0$| = -1 EINPROGRESS /.test(line));
       observations.push({scenario:'native-cli-connections',service_id:service.id,https_connect_attempts:attempts.length,https_connections:connections.length,
-        expected_read_requests:2,expected_mutation_attempts:1,trace_path:preserved,trace_sha256:digest(native)});await save();
-      assert.equal(connections.length,3,'Deux lectures et une seule tentative de mutation HTTPS');
-      assert.equal(attempts.length,connections.length,'Aucune autre tentative HTTPS');
+        expected_read_requests:task.expectedSuccess===null?null:2,expected_mutation_attempts:task.expectedSuccess===null?null:1,trace_path:preserved,trace_bytes:Buffer.byteLength(traceText),trace_sha256:digest(traceText)});await save();
+      native={attempts:attempts.length,connections:connections.length};
     }
+    return {value,result,parseError,native};})();return observation;
+  },async result(success){
+    task.expectedSuccess=success;const {value,result,parseError,native}=await task.observe();
+    assert.equal(value.code,success?0:1,'Code de sortie CLI');assert(!value.stderr.includes('Traceback'));
+    if(parseError)throw parseError;assert.equal(result.completed,success);
+    if(trace){assert.equal(native.connections,3,'Deux lectures et une seule tentative de mutation HTTPS');assert.equal(native.attempts,native.connections,'Aucune autre tentative HTTPS');}
     return result;
   }};
   const tracePath=path.join(work,'https-connect.trace'),args=['-B','-m','adapter','deploy','--config',config,'--service',service.id];
@@ -181,7 +198,7 @@ try{
   completed=true;
 }finally{
   for(const held of gates)if(!held.restored)try{await held.recover();}catch(error){cleanupErrors.push({resource:'observer',error:error.name});}
-  if(activeTask&&!activeTask.settled)await activeTask.done;
+  if(activeTask)try{await activeTask.observe();}catch(error){cleanupErrors.push({resource:'cli-evidence',error:error.name});}
   if(session?.authenticated&&gates.every(row=>row.restored)){
     for(const service of services)if(!service.cleaned)try{await purge(service);}catch(error){cleanupErrors.push({resource:service.id,error:error.name});}
     if(namespace)try{await api(`/api/namespaces/${namespace.id}`,{method:'DELETE'});}catch(error){cleanupErrors.push({resource:'namespace',error:error.name});}

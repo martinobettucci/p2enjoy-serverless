@@ -1,5 +1,7 @@
 # @spec docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuve-de-transport
 # @verifies docs/BACKLOG.md#sls-031 | docs/SERVICE_CONFIGURATION_URLS.md#preuve-de-transport
+# @spec docs/BACKLOG.md#sls-142 | docs/SERVICE_TRANSPORT_REGRESSIONS.md#diagnostic-de-lacquisition-courante--sls-142
+# @verifies docs/BACKLOG.md#sls-142 | docs/SERVICE_TRANSPORT_REGRESSIONS.md#diagnostic-de-lacquisition-courante--sls-142
 # @spec docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli
 # @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#perte-native-du-catalogue-après-publication-cli
 """Bounded native observation of the unchanged DEV control, with independent recovery.
@@ -257,7 +259,7 @@ item = {'service_id': service, 'namespace_id': namespace, 'container_id': curren
         'lock_identity': [info.st_dev, info.st_ino]}
 (folder / 'identity.json').write_text(json.dumps(item))
 (folder / 'restore.py').write_text(RESTORE)
-observer, armed = NativeObserver(pid), False
+observer, armed, acquisition = NativeObserver(pid), False, None
 try:
     command(['systemd-run', '--quiet', '--collect', '--unit=' + unit, '--on-active=' + ('12s' if mode.endswith('watchdog') else '70s'),
              '--timer-property=AccuracySec=100ms', '--timer-property=RandomizedDelaySec=0',
@@ -278,16 +280,25 @@ try:
     expected = (f'GET /api/functions/{function_id}/invocation-urls?limit=5&offset=0 HTTP/1.1\r\n' if catalogue_scope
                 else f'PUT /api/services/{service}/configuration HTTP/1.1\r\n').encode('ascii')
     pending, offsets, target, gated = None, {}, None, False
-    deadline = time.monotonic() + 45
+    acquisition_started = time.monotonic()
+    acquisition = {'event': 'acquisition-summary', 'service_id': service, 'mode': mode,
+                   'outcome': 'pending', 'deadline_seconds': 45, 'stops': 0,
+                   'syscall_entries': 0, 'syscall_exits': 0, 'non_syscall_stops': 0,
+                   'read_candidates': 0, 'socket_reads_on_18090': 0,
+                   'line_matches': 0, 'target_fd': None}
+    deadline = acquisition_started + 45
     observer.resume()
     while not gated:
         stopped_signal = observer.wait(deadline)
+        acquisition['stops'] += 1
         if stopped_signal != signal.SIGTRAP | 0x80:
+            acquisition['non_syscall_stops'] += 1
             assert stopped_signal not in (signal.SIGSTOP, signal.SIGTRAP), 'unexpected_native_stop'
             observer.resume(stopped_signal)
             continue
         phase, data = observer.info()
         if phase == 1:
+            acquisition['syscall_entries'] += 1
             number, *args = data
             pending = (number, args)
             fd = args[0]
@@ -304,10 +315,12 @@ try:
                 gated = True
                 gate = {'boundary': 'before-send', 'syscall': number, 'durable': after}
         elif phase == 2 and pending:
+            acquisition['syscall_exits'] += 1
             number, args = pending
             pending = None
             # CPython sockets use recvfrom; read is included for ABI completeness.
             if number in (0, 45) and data > 0:
+                acquisition['read_candidates'] += 1
                 fd, pointer = args[:2]
                 try:
                     link = os.readlink(f'/proc/{pid}/fd/{fd}')
@@ -320,10 +333,16 @@ try:
                     for name in ('tcp', 'tcp6'):
                         tcp.extend(line.split() for line in Path('/proc', str(pid), 'net', name).read_text().splitlines()[1:])
                     if any(row[9] == inode and row[1].endswith(':46AA') for row in tcp):
+                        acquisition['socket_reads_on_18090'] += 1
                         offset = observer.match_line(pointer, data, expected, offsets.get(fd, 0))
                         offsets[fd] = offset
                         if offset == len(expected):
                             target = fd
+                            acquisition['line_matches'] += 1
+                            acquisition['target_fd'] = fd
+                            emit({'event': 'target-request-observed', 'service_id': service,
+                                  'fd': fd, 'syscall': number,
+                                  'elapsed_ms': (time.monotonic() - acquisition_started) * 1000})
                             if mode.endswith('before'):
                                 received = durable()
                                 if catalogue_scope:
@@ -336,6 +355,7 @@ try:
                 offsets.pop(args[0], None)
         if not gated:
             observer.resume()
+    acquisition.update(outcome='gated', elapsed_ms=(time.monotonic() - acquisition_started) * 1000)
     emit({'event': 'gated', **gate, 'service_id': service})
     assert select.select([sys.stdin], [], [], 8)[0], 'cut_command_missing'
     assert sys.stdin.readline().strip() == 'cut', 'cut_command_required'
@@ -360,9 +380,38 @@ try:
         emit({'event': 'cut', 'exit_code': 137, 'durable': durable()})
     finally:
         fcntl.flock(lock, fcntl.LOCK_UN)
+except BaseException as error:
+    if acquisition is not None and acquisition['outcome'] == 'pending':
+        code = str(error)
+        acquisition.update(outcome='failed', error_type=type(error).__name__,
+                           error_code=code if re.fullmatch('[a-z_]{1,80}', code) else None,
+                           elapsed_ms=(time.monotonic() - acquisition_started) * 1000)
+    raise
 finally:
-    observer.detach()
-    os.close(lock)
-    if armed:
-        emit(json.loads(command(['/usr/bin/python3', '-I', str(folder / 'restore.py'), str(folder)], timeout=190)))
-        stop_timer(unit)
+    primary = sys.exc_info()[1]
+    delivery_errors = []
+    try:
+        if acquisition is not None:
+            emit(acquisition)
+    except Exception as delivery_error:
+        delivery_errors.append(delivery_error)
+    try:
+        observer.detach()
+        os.close(lock)
+        if armed:
+            restored = json.loads(command(['/usr/bin/python3', '-I', str(folder / 'restore.py'), str(folder)], timeout=190))
+            stop_timer(unit)
+            try:
+                emit(restored)
+            except Exception as delivery_error:
+                delivery_errors.append(delivery_error)
+    except BaseException as cleanup_error:
+        for error in delivery_errors:
+            cleanup_error.add_note('cleanup_event_delivery_failed: ' + type(error).__name__)
+        raise
+    if delivery_errors:
+        recipient = primary if primary is not None else delivery_errors[0]
+        for error in delivery_errors:
+            recipient.add_note('cleanup_event_delivery_failed: ' + type(error).__name__)
+        if primary is None:
+            raise recipient

@@ -7,7 +7,8 @@
   quatreprérequis. Troisgroupesclient partiels, nettoyage et fermeture externe
   acquis ;66captures/529sources/23rapports scellés et relus sansP1/P2.
  142.1 acquise ; instrumentation de conservation/acquisition décidée avantcode,
-  cause et correction restent à établir.12UI141 passe dans ce socle.
+  instrumentation implémentée et syntaxiquement vérifiée, diagnostic réel et
+  correction de cause restent à établir.12UI141 passe dans ce socle.
 
 - SLS-141 inscrit : le deuxième socle courant s'arrête sur l'état de journal
   attendu dans l'historiqueUI, après272groupes partiels et troisprérequis.
