@@ -341,10 +341,10 @@ peut être retiré que s’il est encore vide, canonique, root/groupe attendu et
 identité recoupée ; utiliser rmdir, sans effacement récursif ni reprise d’un
 chemin inconnu. Conserver ces constats et le retrait dans un reçu privé.
 
-L’implémentation future doit distinguer une fin native étayée d’un processus
-de l’indisponibilité d’une lecture encore vivante, sans accepter globalement
-EINVAL ni affaiblir les contrôles de références. Le protocole précis, ses
-bornes et ses vrais cas noyau seront persistés avant code après exploration.
+L’implémentation distingue une fin native étayée d’un processus de
+l’indisponibilité d’une lecture encore vivante, sans accepter globalement
+EINVAL ni affaiblir les contrôles de références. Le protocole précis et ses
+vrais cas noyau ci-dessous ont été persistés avant leur code.
 Les captures historiques, valeurs officielles et autres modes du helper sont
 conservés. Aucun succès de rétention n’est déduit de cette erreur de préflight.
 
@@ -445,7 +445,7 @@ enfants sont récoltés/status9, leurs pidfdfermés et les unités/cgroups/garde
 sont joints. Originaux/config/5982 et huitcompteurs0 recoupés. Le
 [rouge préalable](evidence/process-reference-real-zombie-before-fix-dev-2026-11-23.json)
 reste distinct, sans cause réattribuée au PIDhistorique. Les deuxâges et
-consommateurs/25communs attendent encore leurs replays ;135 reste ouverte.
+consommateurs/25communs sont qualifiés dans la clôture135.4 ci-dessous.
 
 
 ### Retour du contrôleur et sérialité des clôtures — SLS-135.5
@@ -470,3 +470,28 @@ de la suivante, en triant les phases par leur exécution réelle. Ni un reçu
 complété ni une clôture acquise n’autorisent à inventer le retour manquant.
 Les programmes et rapports E2E déjà exécutés restent intacts ; ce raccordement
 de preuve ne nécessite aucun replay des phasesdefault/volume.
+
+
+### Clôture135.4 et135.5
+
+La [matrice réelle25](evidence/process-reference-guard-regressions-dev-2026-11-23.json)
+passe onze cas sur527sources ec24e3b/bdccd9d identiques et imagef016 : fenêtres11,
+défaut3, volume5, consommateurs6. Ces six sont déjà inclus dans25. Les pertes
+portent chacune sur un handler/bail/conteneur/réseau réel ; le namespace hors
+périmètre demeure au refus puis seule la fixture est retirée parAPI. SIGTERM,
+SIGKILL, expiration120 et premier renommage interrompu sont effectivement
+éprouvés ; les fenêtres900/2700 sont programmées puis restituées.
+
+Quatreunitéslocales/cgroups et onzegardes sont joints ; retours réels du
+contrôleur liés selon135.5 et clôtures avant phases suivantes. Les deux
+transcriptions outil restent distinguées des deuxcapturesmachine, sans heure
+reconstruite. Configuration/référence/5982/huitcompteurs0 sont recoupés après
+chaquecas. Une revueRO indépendante vérifie manifestes, gzip, reçus, sources
+et sérialité sansP1/P2 restant, sans nouveau test ni groupe ajouté.
+
+Les [deuxâges courants](evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json)
+passent sixgroupes sur le même helper corrigé, sources527 strictementidentiques
+entre les deuxcas, captures009 conservées, sans nouveau handler. Avec le rouge
+initial et les preuves natives135.3, les cinqcritères SLS-135 sont acquis. Les
+25communs produit,49/543/18 puis32/276 et les autres consommateurs134 restent
+distincts ; cette clôture interne du helper ne les requalifie pas.

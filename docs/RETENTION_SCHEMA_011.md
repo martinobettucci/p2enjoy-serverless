@@ -287,19 +287,22 @@ sans nouveau run ni succès fabriqué. Le rapport originel, ses empreintes et
 les unités/clients/gardes joints restent exigés avant publication.
 
 
-## Deuxâges sur le helper corrigé — SLS-135.4
+## Deux âges sur le helper corrigé — SLS-135.4
 
-La [preuveâge courante](evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json)
-porte sixgroupes sur527sources5db72a8/f016, identiques entre les deuxcas et
-avant/après. Métadonnées protégées conservées avec logs expirés, source retirée
-après clôture ; historique terminal et générations supprimés. Deux vraisSSO/API
-sansnouveauhandler, captures009 conservées et deuxrestitutions nominales
-avec unités/cgroups/gardes joints, originaux/config/5982 et huitcompteurs0.
+La [preuve d’âge courante](evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json)
+porte six groupes sur 527 sources du commit 5db72a8 et l’image f016, identiques
+entre les deux cas et avant/après. Les métadonnées protégées sont conservées
+avec des logs expirés, puis leur source est retirée après clôture ; l’historique
+terminal et les générations sont supprimés. Deux connexions SSO et lectures API
+réelles, sans nouveau handler, avec captures009 conservées et deux restitutions
+nominales. Unités, cgroups et gardes joints ; originaux, configuration,
+5 982 artefacts et huit compteurs nuls recoupés.
 
-Les troischemins fixés existent désormais ; le
+Les trois chemins fixés existent désormais ; le
 [raccordement réel](evidence/retention-three-current-proofs-binding-dev-2026-11-23.json)
-recoupe les quatre modules et les deuxSHA de chaque archive complète sans
-modifier la garde ni ajouter de groupe.132.3 est acquise ; consommateurs et
-25communs du helper, API/UI/25communs produit,49/543/18 puis32/276 restent
-distincts. Les preuves526/519 et le sourceâge antérieur au correctif ne sont ni
-réétiquetés ni ajoutés au composite courant.
+recoupe les quatre modules et les deux SHA de chaque archive complète sans
+modifier la garde ni ajouter de groupe. SLS-132.3 est acquise. Les consommateurs
+et les 25 communs du helper sont [qualifiés séparément](evidence/process-reference-guard-regressions-dev-2026-11-23.json).
+Les campagnes API/UI/25 communs produit, 49/543/18 puis 32/276 restent dues.
+Les preuves526/519 et le sourceâge antérieur au correctif ne sont ni réétiquetés
+ni ajoutés au composite courant.

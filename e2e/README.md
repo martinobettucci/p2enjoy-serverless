@@ -3322,4 +3322,15 @@ passent sixgroupes sur527sources5db72a8/f016, sansnouveauhandler, sources
 canoniques et originaux conservés, deuxunités/cgroups/gardes joints. La garde
 [rattache les troispreuves actuelles](../docs/evidence/retention-three-current-proofs-binding-dev-2026-11-23.json)
 par leurs quatre modules et archives intégrales, zéro groupe ajouté.
-Les25communs du helper et campagnes produit demeurent requis.
+Les régressions du helper sont qualifiées ci-dessous ; les campagnes produit restent dues.
+
+La [matrice SLS-135.4/135.5](../docs/evidence/process-reference-guard-regressions-dev-2026-11-23.json)
+passe 25 groupes sur 527 sources identiques aux commits ec24e3b/bdccd9d et sur
+l’image f016 : onze cas, répartis en 11 groupes de fenêtres, 3 de durée par
+défaut, 5 de fenêtre longue et 6 avec consommateurs. Ces six sont déjà inclus.
+Les quatre unités et onze gardes sont jointes. Les retours réels du contrôleur
+sont liés avec leurs deux types explicites ; chaque clôture précède le
+lancement suivant. Originaux, 5 982 artefacts et huit compteurs nuls recoupés ;
+revue en lecture seule sans P1/P2. Avec les deux âges et les vrais cas noyau/HTTPS,
+SLS-135 est close. Les 25 communs produit et les campagnes 49/543/18 puis 32/276
+restent indépendants et dus.

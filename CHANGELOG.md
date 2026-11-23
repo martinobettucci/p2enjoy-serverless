@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-135 close : vrai EINVAL reproduit puis correction qualifiée par huit
+  contrôles noyau/deuxHTTPS, sixgroupes d’âge et25groupes de restitution.
+  Onze cas/quatreunités/onzegardes joints, sources527/f016 et originaux conservés.
+  Retours contrôleurs réels et ordre des clôtures recoupés ; campagnes produit
+  et autres consommateurs134/mesures133 restent ouverts.
+
 - SLS-132.3/135.4 : sixgroupes d’âge qualifiés sur le helper corrigé,
   métadonnées/logs expirés distincts, historique terminal retiré, aucun handler
   nouveau. Deuxrestitutions/cgroups/gardes joints ; troispreuves courantes

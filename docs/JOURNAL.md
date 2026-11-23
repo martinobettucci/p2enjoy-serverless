@@ -10302,3 +10302,18 @@ scellés avant arrêt de l'unité, puis original011 et collectionf6e19cdd,
 Le relevéRO constate un ralentissement, sans cause établie et sans utiliser les
 métriques de PID nonattribué. SLS133 est enregistré avant correction ; les
 brouillons de l'assemblage32 sont horsgel, relus sansP1/P2, nonexécutés.
+
+
+### 23 novembre 2026 — Fin procfs attestée et SLS-135 close
+
+Le rouge terminalâge est conservé sans attribuer la mort du PID nonépinglé.
+Un vrai probe àEXEC puisZ reproduit EINVAL22 ; le helper examine seulement
+ce cas mountinfo et exige Z/naissance stable plus pidfdPOLLIN. Le vrai groupe
+avec leaderZ/thread/FDvivant reste refusé. Huitcontrôles noyau/deuxHTTPS, puis
+sixâges et25groupes du helper passent surf016, aucun mock ni modification des
+captures. Les sixconsommateurs sont déjà dans25 ; original/5982/huitcompteurs0
+et toutesunités/cgroups/gardes sont recoupés. Les deuxécarts du collecteur sont
+spécifiés puis corrigés avant publication, retours outil transcrits distingués
+des capturesmachine et clôture avant phase suivante exigée. RevueRO sansP1/P2.
+135 est close,132.3 acquise ; mesures133, autresconsommateurs134 et campagnes
+API/UI/25communs produit/49/32 restent à livrer avant la clôture de plateforme.

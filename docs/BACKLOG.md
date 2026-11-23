@@ -85,7 +85,6 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
-| 3 | [SLS-135](#sls-135) Lecture des références pendant la sortie d’un processus | Corriger | `[~]` | SLS-099 | [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md#observation-des-références-des-processus--sls-135) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4637,6 +4636,11 @@ pas une autorisation de modifier les fichiers canoniques ou d'assouplir la garde
 072.6 — décision de propriétécourante : un manifeste partagé nomme les30clients API et leurs74fonctions nominales (51éditeur/14testeur/9versions). Les27noms reconstruits depuiscampaign/prefix sont comparés au nom natif ; pour les3CLI, sauvegarder namespace_name depuis la vraie réponsePOST, lié au namespace_id. L’option explicite additional-client/namespace-name exige préfixe/suffixe/cardinalité exacts et inventaireUUID identique ; l’inspecteur historique par défaut reste strictement inchangé. Motif : éviter toute déduction erronée des préfixes réutilisés, UUID36, UUIDtronqué16 avec tirets et suffixeCLI perdu. Cette trace de rapport ne modifie aucune création ni nettoyage métier.
 
 
+132.3/135.4 — [Deuxâges courants qualifiés](evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json),527sources5db72a8/f016 : sixgroupes, deuxSSO/API sansnouveauhandler, métadonnées protégées identiques alors que bufferexpired puis source retirée ; historique terminal/générations retirés. Deuxrestitutions nominales et unités/cgroups/gardes jointes, captures009 inchangées, originaux/config/5982 et huitcompteurs0 recoupés. Avec count3 et source10001/cron3 courants,132.3 est acquise ;135.4 attend consommateurs/25communs,132.5 attend socle et complémentaires.
+
+132.5 — [Raccordement réel des troispreuves](evidence/retention-three-current-proofs-binding-dev-2026-11-23.json) : garde inchangée, quatre modulesf016 exacts, SHAcompressés et contenusdécompressés intégralement recoupés, zéro groupe ajouté. Ce contrôle de provenance ne remplace pas49/543/18 puis32/276 ;132.5 reste ouverte.
+
+
 <a id="sls-133"></a>
 ## SLS-133 — Débit du nominal de rétention sous journal saturé
 
@@ -4899,7 +4903,7 @@ traitement ; aucun groupe supplémentaire ni rejeu du countacquis.
 <a id="sls-135"></a>
 ## SLS-135 — Lecture des références pendant la sortie d’un processus
 
-Statut : [~]. Nature : Corriger. Dépend de : SLS-099. Ordre : 3.
+Statut : [x]. Nature : Corriger. Dépend de : SLS-099. Ordre : 3.
 Contrat : [INSTANCE_LIMIT_RESTORATION](INSTANCE_LIMIT_RESTORATION.md#observation-des-références-des-processus--sls-135).
 
 Constat réel : le replay terminalâge f29d1f7c termine rouge avant guard-armed,
@@ -4927,18 +4931,18 @@ Aucun faux /proc, errno injecté, processus substitué ou succès conditionnel.
 - [x] SLS-135.3 Éprouver le défaut et la correction avec de vrais processus et
   leur vrai état noyau ; couvrir processus terminé et référence vivante refusée,
   absence de contournement, jonction des enfants et nettoyage de la seule fixture.
-- [ ] SLS-135.4 Rejouer les deux âges courants puis les consommateurs et25groupes
+- [x] SLS-135.4 Rejouer les deux âges courants puis les consommateurs et25groupes
   communs du helper concernés. Les captures scellées, imagef016, configuration,
   originaux et preuves antérieures restent intacts ; clôture seulement sur E2E.
-- [ ] SLS-135.5 Rattacher le vrai retour du contrôleur systemd-run --wait
+- [x] SLS-135.5 Rattacher le vrai retour du contrôleur systemd-run --wait
   au reçu de clôture ; le completed du wrapper seul ne suffit pas. Conserver
   les retours outil déjà observés des deux premières phases sans les fabriquer
   ni rejouer ; capturer automatiquement les suivants. Exiger finwrapper puis
   clôtureexterne avant début de la phase suivante, sans double comptage.
 
 La correction est interne au bancDEV autorisé ; aucun accès externe demandé.
-132.3/134.4 gardent leurs preuves partielles et attendent ce correctif pour
-achever les âges, sans relance aveugle ni publication du composite6 manquant.
+Les preuves135.3/135.4 ci-dessous lèvent cet arrêt : les deux âges sont acquis.
+132.5/134.4 gardent leurs autres qualifications à terminer dans leur périmètre.
 
 135.1 — [rouge et clôture extérieure scellés](evidence/retention-terminal-age-prearm-procfs-failed-dev-2026-11-23.json),526sourcesdd19196/f016 : premiergroupe terminalâge refusé avant toutévénement, OSError22 surmountinfo et cleanupclientfalse conservés. Garde/journal absents, dossierroot750/groupe1001 vide dont dev/inode revérifiés puis seulrmdir ; reçuJSONroot600 relu/haché. Unitélocale1/cgroupvide capturée puis reset de cette seuleunité. Services/démarrages/config/5982 strictement identiques et huitcompteurs0 aprèsclôture. Zéro groupe terminal acquis ; PID initial nonépinglé, aucune cause de mort attribuée. La correction135.2/135.3 reste à livrer avant replays135.4.
 
@@ -4950,8 +4954,21 @@ achever les âges, sans relance aveugle ni publication du composite6 manquant.
 
 135.3 — [Correctif éprouvé](evidence/process-reference-lifecycle-corrected-dev-2026-11-23.json),527sources1f48754/f016 : huitcontrôles noyau et deuxgroupesHTTPS. SondeZ réellement acceptée, sondes vivantes refusées, leaderZ avec thread/FD réel vivant refusé par pidfdnonprêt et causeEINVAL22. Le zombie reste présent pendant cloneHTTPS et restitutionnominale. Trois enfantsstatus9/pidfdfermés, unitésroot/locale/cgroups et garde120 joints, originaux/config/5982 conservés et huitcompteurs0. Le rouge préalable reste lié ; aucun groupe de rétention ajouté.135.4 et ses deuxnouveauxâges restent dus.
 
-132.3/135.4 — [Deuxâges courants qualifiés](evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json),527sources5db72a8/f016 : sixgroupes, deuxSSO/API sansnouveauhandler, métadonnées protégées identiques alors que bufferexpired puis source retirée ; historique terminal/générations retirés. Deuxrestitutions nominales et unités/cgroups/gardes jointes, captures009 inchangées, originaux/config/5982 et huitcompteurs0 recoupés. Avec count3 et source10001/cron3 courants,132.3 est acquise ;135.4 attend consommateurs/25communs,132.5 attend socle et complémentaires.
-
-132.5 — [Raccordement réel des troispreuves](evidence/retention-three-current-proofs-binding-dev-2026-11-23.json) : garde inchangée, quatre modulesf016 exacts, SHAcompressés et contenusdécompressés intégralement recoupés, zéro groupe ajouté. Ce contrôle de provenance ne remplace pas49/543/18 puis32/276 ;132.5 reste ouverte.
-
 135.5 — Deuxécarts de collecteur relevés avant publication25 : le script de clôture posait0 sans rattacher le retour réel du contrôleur, et le publisher ne comparait que finwrapper au débutsuivant. Les deuxphases exécutées ont réellement terminé0 dans l’outil et leurs clôtures sont acquises ; les prochains collecteurs doivent lier ces observations exactes et capturer les futurs retours, sans les déduire de completed. Contrat persisté avant correction ; aucun résultatE2E retiré ou rejoué par cette revue.
+
+135.4/135.5 — [Matrice de 25 groupes qualifiée](evidence/process-reference-guard-regressions-dev-2026-11-23.json),
+527 sources identiques aux commits ec24e3b/bdccd9d, image f016. Onze cas :
+fenêtres11 + défaut3 + volume5 + consommateurs6, ces six déjà inclus.
+Release/EOF, SIGTERM/SIGKILL, expiration réelle120 et interruption après le
+premier renommage. Chaque perte retire son handler, bail, conteneur et réseau ;
+le diagnostic sous pause et le refus foreign_namespace préservent le périmètre.
+Quatre unités/cgroups et onze gardes joints ; retours des contrôleurs réellement
+rattachés, deux transcriptions outil distinguées de deux captures machine,
+clôtures avant phases suivantes. Originaux, configuration, référence,
+5 982 artefacts et huit compteurs nuls recoupés. Les fenêtres900/2700 sont
+programmées puis restituées. Revue des manifestes, gzip et reçus sans P1/P2,
+sans nouveau test ni groupe ajouté. Avec le rouge initial scellé, les trois
+contrôles de reproduction, les huit noyau/deux HTTPS et les six âges courants,
+les cinq critères135 sont acquis : SLS-135 close. Les 25 communs produit,
+49/543/18 puis 32/276, autres consommateurs134 et mesures133 restent dus dans
+leurs propres unités.
