@@ -10511,3 +10511,12 @@ vraiGET de ce parcours, sa structure/résultat bornés et l'étatDOM, sans donn�
 sensible ni interception, puis joindre les observations. Maintenir bornes et
 assertions, ne choisir aucun correctif depuis le seul hash. Le replay complet
 diagnostique garde zéro groupe ; les campagnes cohérentes courantes suivent.
+
+### 23 novembre 2026 — Diagnostic137 arrêté plus tôt en UI02
+
+Sur e8a90a0/528sources/f016,005f7724 termine1 après UI01 puis refusError en67
+pendant fill(FinUTC), hash8b25b87b. UI07 n'est pas atteint, sa cause reste ouverte.
+Cleanuptrue/aucune erreur et Node1 joint, uneJPEG desktop personnellement ouverte.
+SLS-138 est inscrite avant analyse/correction. Décision avant instrumentation :
+date publique produite, attributs/validité natifs et classification constante
+de l'erreur autour de cette seule saisie ; aucun texte sensible conservé.

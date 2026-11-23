@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-138 inscrite : le diagnosticUI005f7724 échoue plus tôt sur fill(FinUTC),
+  après UI01, avantUI07. Node1/cleanuptrue et uneJPEG conservée ; zéro groupe
+  qualifié, refus de saisie à observer avant de choisir une correction.
+
 - SLS-137 : observation passive bornée ajoutée au vrai GET final du scénario
   partagéUI07 ; structureHTTP/étatDOM et capture du refus, erreur primaire
   préservée. Aucun changement produit, retry ou borne ; replay diagnostic dû.

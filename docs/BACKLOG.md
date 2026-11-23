@@ -86,6 +86,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
 | 3 | [SLS-137](#sls-137) Échec de conservation dans la campagne UI complète | Corriger | `[~]` | SLS-072 | cette unité |
+| 3 | [SLS-138](#sls-138) Refus de saisie de la date dans le replay UI | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -5159,3 +5160,30 @@ annulation puis fermeture réelle de sa seule Page si une lecture reste en
 vol, jonction de toutes les promesses et conservation du primaire. Une limite
 du diagnostic fait échouer le passage, sans nouvelle requête ni délai ajouté
 à l'attente fonctionnelle. Aucun test de ce cas n'est annoncé par la revue.
+
+## SLS-138 — Refus de saisie de la date dans le replay UI
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
+
+Constat réel : le diagnostic complet005f7724 sur528sources e8a90a0/f016 termine1
+après UI01 passée, UI02 échouée à la saisie de FinUTC, source_line67, typeError,
+messageSHA8b25b87bb48def55b2d6f407eb69804de8dd02e27ef0046f721b409f63a98600.
+Le point instrumenté137 n'est pas atteint : aucune cause de son ancien rouge
+n'est déduite. Node1 joint, cleanuptrue, aucuncleanup_error et uneJPEG conservée.
+
+- [ ] SLS-138.1 Sceller ce second rouge distinct, vrai contrôleur1 et unité/
+  cgroup terminés ; inspecter laJPEG, recouper sources, génération, configuration,
+  référence,5982 et huitcompteurs0. Zéro groupe qualifié, aucun replay automatique.
+- [ ] SLS-138.2 Établir le refus de saisie avec de vraies observations navigateur,
+  distinguer format natif, protocole ou produit, décider avant correction puis
+  qualifier le cas sur l'UI déployée. Garder les délais et le filtrage réel.
+- [ ] SLS-138.3 Reprendre full10UI et passage API12/25communs cohérent, toutes
+  captures inspectées et acteurs joints, sans requalifier les anciens gels.
+
+Décision avant diagnostic : conserver autour de la seule saisie UI02 la date
+ISO produite et les attributs/valeurs/validités du vrai contrôle. Classer les
+erreurs Playwright par messages constants autorisés (format refusé, détachement,
+page fermée, timeout), tout autre texte uniquement par SHA ; capturer le refus.
+Aucune valeur d'authentification, interception ou réponse de remplacement.
+Lire le code du pilote navigateur installé peut expliquer le format attendu ;
+la preuve fonctionnelle passe toujours par le véritable champ de la console.
