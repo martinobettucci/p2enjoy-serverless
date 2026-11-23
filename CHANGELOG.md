@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-137 : observation passive bornée ajoutée au vrai GET final du scénario
+  partagéUI07 ; structureHTTP/étatDOM et capture du refus, erreur primaire
+  préservée. Aucun changement produit, retry ou borne ; replay diagnostic dû.
+
 - SLS-137.1 acquise : API12 et rougeUI scellés, contrôleurs0/1,21JPEG inspectées,
   clôtures externes et génération après coupureAPI recoupées. Le refus final
   reste sans causeHTTP ; observation réelle ciblée décidée avant code, sans

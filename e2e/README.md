@@ -2,6 +2,22 @@
 
 ## Journaux SLS-072 — qualification courante sur f016
 
+Le [checkpoint courant API12](../docs/evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
+passe au gel9702888/528sources. Le fullUI qui suit échoue en conservation après
+neuf succès ; [rouge137 scellé](../docs/evidence/execution-journal-ui-conservation-first-failed-dev-2026-11-23.json),
+21JPEG inspectées et clôtures externes acquises, aucunUI qualifié ni commun lancé.
+SLS-137 ajoute au scénario partagé l'observation passive du GET réel après
+archivage de fonction : événements bornés100, statut, taille/SHA et structure
+du corps sous1Mio, URL autorisée, étatDOM et JPEG de refus. Aucun en-tête,
+cookie, curseur ou message applicatif conservé. La jonction utilise la même
+échéance absolue90s ; une lecture restante est annulée par fermeture réelle de
+la seule Page possédée, après observationDOM, et le primaire reste conservé.
+Le replay diagnostique reprend
+`node e2e/execution-journal-ui.mjs` avec les dix scénarios et leurs bornes
+inchangées ; son wrapper compte zéro groupe qualifié. Ce diagnostic reste à
+exécuter. Les nouveaux sources E2E ne se combinent pas implicitement avec le
+checkpoint API antérieur pour clore le passage complet.
+
 La basculef016 et les rétentions courantes sont acquises ; les12API du gel21834d8
 restent attachées àf73. Le prochain passage complet rejoue API12 puisUI10 puis
 25communs sur les mêmes sources et la même générationf016, sans redémarrage

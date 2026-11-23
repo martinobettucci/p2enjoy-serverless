@@ -4,6 +4,81 @@
 import assert from 'node:assert/strict';
 import {base,endpoint,match,until,sha,diagnosis} from './execution-journal-harness.mjs';
 import {JournalSqlBarrier} from './execution-journal-native.mjs';
+
+// @spec docs/BACKLOG.md#sls-137
+// Observe the real archived-function read, without modifying or retrying it.
+async function archivedJournalRead(c,cases,invocation,ready,journal) {
+  const path='/api/services/'+cases.service.id+'/logs',pending=[];
+  const observation={scenario:'archived-function-service-journal-browser-read',invocation_id:invocation,
+    service_id:cases.service.id,function_id:cases.fn.id,events:[],started_at_ms:Date.now()};
+  c.observations.push(observation);
+  const record=row=>{if(observation.events.length<100){observation.events.push(row);return true;}observation.events_omitted=(observation.events_omitted || 0)+1;return false;};
+  const parameters=url=>[...new URL(url).searchParams].map(([key,value])=>{
+    const allowed=(['from','to'].includes(key) && /^\d{4}-\d\d-\d\dT[\d:.]+Z$/.test(value)) ||
+      (key==='source' && value==='platform') || (key==='invocation' && value===invocation) ||
+      (['limit','offset','page'].includes(key) && /^\d{1,6}$/.test(value));
+    return allowed?{key,value}:{key_sha256:sha(key),value_sha256:sha(value)};
+  });
+  const selected=request=>request.method()==='GET' && new URL(request.url()).pathname===path;
+  const requested=request=>{if(selected(request))record({event:'request',at_ms:Date.now(),parameters:parameters(request.url())});};
+  const failed=request=>{if(selected(request))record({event:'requestfailed',at_ms:Date.now(),error_sha256:sha(request.failure()?.errorText || '')});};
+  const received=response=>{
+    if(!selected(response.request()))return;
+    const row={event:'response',at_ms:Date.now(),status:response.status()};if(!record(row))return;
+    pending.push(c.track((async()=>{
+      try {
+        const body=await response.body();row.body_bytes=body.length;row.body_sha256=sha(body);
+        if(body.length>1024**2){row.structure_omitted='body_over_1MiB';return;}
+        let value;try {value=JSON.parse(body.toString('utf8'));}catch {row.json_valid=false;return;}
+        row.json_valid=true;
+        const type=value=>value===null?'null':Array.isArray(value)?'array':typeof value;
+        row.structure=Object.fromEntries(['items','total','limit','mode','snapshot','follow_cursor','partial','period','collection','error'].map(key=>[key,type(value?.[key])]));
+        if(Array.isArray(value?.items))row.items=value.items.slice(0,5).map(item=>({id_type:type(item?.id),message_type:type(item?.message),observed_at_type:type(item?.observed_at),metadata_type:type(item?.metadata),function_name_type:type(item?.function_name)}));
+        for(const key of ['total','limit'])if(Number.isSafeInteger(value?.[key]))row[key]=value[key];
+        if(typeof value?.error==='string')row.error_sha256=sha(value.error);
+      } catch(error) {row.body_observation_failure=diagnosis(error);}
+    })()));
+  };
+  const pageError=error=>record({event:'pageerror',at_ms:Date.now(),...diagnosis(error)});
+  c.page.on('request',requested);c.page.on('requestfailed',failed);c.page.on('response',received);c.page.on('pageerror',pageError);
+  let primary;
+  try {
+    await c.page.goto(base+'/console/services/'+cases.service.id+'/logs?source=platform&invocation='+invocation);await ready();observation.ready=true;
+  } catch(error) {primary=error;observation.failure=diagnosis(error);}
+  finally {
+    c.page.off('request',requested);c.page.off('requestfailed',failed);c.page.off('response',received);c.page.off('pageerror',pageError);
+    try {
+      observation.url_parameters=parameters(c.page.url());
+      observation.route_matches=new URL(c.page.url()).pathname==='/console/services/'+cases.service.id+'/logs';
+      const alerts=await c.page.getByRole('alert').allTextContents();observation.alerts=alerts.map(text=>({sha256:sha(text),characters:text.length}));
+      const follow=journal().getByRole('button',{name:'Suivre les nouveaux événements',exact:true});
+      observation.follow_buttons=await follow.count();if(observation.follow_buttons===1)observation.follow_disabled=await follow.isDisabled();
+      observation.loading=await journal().getByText('Chargement des journaux…',{exact:true}).count();
+      observation.rows=await journal().locator('[data-log-id]').count();
+      if(primary)await c.capture('archived-reference-read-failed',c.page);
+    } catch(error) {observation.dom_observation_failure=diagnosis(error);}
+    const joined=Promise.all(pending);let timer;
+    try {
+      const complete=await Promise.race([joined.then(()=>true),new Promise(resolve=>{
+        timer=setTimeout(()=>resolve(false),Math.max(0,observation.started_at_ms+90000-Date.now()));
+      })]);
+      if(!complete) {
+        observation.body_join_deadline_reached=true;
+        if(!primary) {
+          primary=new Error('archived_journal_observation_not_joined');observation.failure=diagnosis(primary);
+          try {await c.capture('archived-reference-read-failed',c.page);}catch(error) {observation.capture_failure=diagnosis(error);}
+        }
+        // Closing this owned Page aborts real pending reads before joining them.
+        await c.page.close();observation.page_closed_to_cancel_reads=true;await joined;
+      }
+    } catch(error) {if(!primary)primary=error;else observation.join_failure=diagnosis(error);}
+    finally {clearTimeout(timer);}
+    observation.finished_at_ms=Date.now();
+    try {await c.save();}catch(error) {if(!primary)throw error;observation.save_failure=diagnosis(error);}
+  }
+  if(primary)throw primary;
+}
+
 export async function retentionPolicyCase(c,cases) {
   const panel=(page,title)=>page.locator('section.panel').filter({has:page.getByRole('heading',{name:title,exact:true})});
   const journal=()=>panel(c.page,'Journaux');
@@ -54,7 +129,7 @@ export async function retentionPolicyCase(c,cases) {
     await response(c.page,'/api/services/'+cases.service.id+'/log-policy',()=>dialog.getByRole('button',{name:'Confirmer la diminution',exact:true}).click(),{method:'PUT'});await dialog.waitFor({state:'hidden'});
     const current=await c.value('/api/services/'+cases.service.id+'/log-policy');assert.equal(current.retention_minutes,1);await until(()=>opener.isEnabled(),'retention_save_reread_missing');await c.capture('retention-saved',c.page,retention);
     const finalCall=await cases.invoke('text');await c.value(endpoint(cases.fn),{method:'DELETE'});
-    await c.page.goto(base+'/console/services/'+cases.service.id+'/logs?source=platform&invocation='+finalCall.id);await ready();
+    await archivedJournalRead(c,cases,finalCall.id,ready,journal);
     await c.value(endpoint(cases.fn)+'/logs'+'?source=application&invocation='+finalCall.id,{status:404});
     const unavailable=journal().locator('[data-log-id] article').first();await unavailable.locator(':scope > details > summary').click();await unavailable.getByText(/Objet indisponible/).waitFor();assert.equal(await unavailable.getByRole('link',{name:'Ouvrir la fonction',exact:true}).count(),0);await c.capture('archived-reference',c.page,unavailable.getByText(/Objet indisponible/));
     c.observations.push({scenario:'real-retention-conflict-and-save',before_version:before.version,after_version:current.version,draft_preserved:true,retention_minutes:1});
