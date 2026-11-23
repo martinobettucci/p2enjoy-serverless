@@ -4595,6 +4595,12 @@ sources009 et leurs exports demeurent strictement immuables.
   zéro groupe réadditionné. Rejouer ensuite le socle et les consommateurs
   inventoriés de072.6, captures et nettoyages recoupés avant clôture.
 
+- [ ] SLS-132.6 Le collecteur distingue le curseur critique F=C+min(n,40)×300
+  du curseur final D, conformément au contrat et au vrai client. Recouper les
+  survivants/retraits exacts au mêmeF, puis les pagesAPI avec leur relevé natif
+  àD, sans exiger les mêmes UUID lorsque F<D. Rapports SHA/gzip/unités liées,
+  refus du collecteur erroné conservé puis publication sans replay du vrai E2E.
+
 Aucune conservation historique n'est déclarée requalifiée sur011 par cet
 inventaire. Les copies natives authentiques vieillies sont une piste de replay,
 pas une autorisation de modifier les fichiers canoniques ou d'assouplir la garde.
@@ -4873,3 +4879,15 @@ ne devient pas un instant isolé de réception des headers. Ces précisions
 résolvent le P2 contractuel ; aucune exécution ni implémentation133.6 acquise.
 
 133.5/134.4/132.3 — [nominal courant3 réellement acquis](evidence/invocation-source-retention-volume-schema011-query-dev-2026-11-22.json),526sources4918597/f016 :10001HTTP+1cron, troisensembles exacts10002→10001→10000/même source et mêmesurvivants/retraits, observation14,405s sous25. Précontrôle positif2057,471s, deuxpurgespubliques/absencephysique puis restitutionnominale ; Node0/worker0 terminal/libéré, stderr0/EOF/joint et aucun reçuparent/cleanup.42backend/quatreweb/collection/config/référence/5982/huitcompteurs0 recoupés.133.5 passe avec son refus négatif1849s ;133.4/134.4 restent ouverts pour consommateurs/régressions,132.3 pour âge/countcourants. Les anciensrouges et leurs causes inconnues ne sont pas requalifiés par ce succès.
+
+132.6 — constat avant correction du collecteur : le vrai count06357228 passe
+ses3groupes sur526sourcesf9e3e4b/f016,84fenêtresmanquées,10496→10000 au curseur
+C+40×300, puis récupération jusqu’àD/112pagesAPI et restitution jointe. Le
+collecteur privé a refusé avant écriture car il exigeaitF=D, puis aurait aussi
+exigé les mêmes survivants entre ces deux moments ; hypothèses seulement vraies
+pour l’ancien n39. Les données et le client appliquent déjà le contrat
+SCHEDULE_FIRING_VOLUME : F=min(D,C+40×300), API/native recoupés après retouràD.
+Décision : corriger ce collecteur selon ces deux étapes existantes, conserver
+intégralement les vecteurs réels et leur SHA, sans changer le test, la borne,
+les dates ni reconstruire les fenêtres manquantes. Nouveau132.6 inscrit avant
+traitement ; aucun groupe supplémentaire ni rejeu du countacquis.

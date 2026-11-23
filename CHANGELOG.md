@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-132.6 : collecteur numérique refusé avant publication après troisgroupes
+  E2E réussis ; il confondait curseur du premier lot et fin du rattrapage quand
+  plus de40fenêtres sont manquées. Correction spécifiée depuis le contrat
+  existant, avec vecteurs séparés ; aucune donnée ni test rejoué ou modifié.
+
 - SLS-133.5/134.4 : nominal réel10001HTTP+1cron passe ses troisgroupes sur
   f016, ensembles10002→10001→10000 recoupés et deuxpurgespubliques acquises.
   Observation14,405s, restitutionnominale, worker/driver/gardes joints et

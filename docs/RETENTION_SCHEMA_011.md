@@ -261,3 +261,27 @@ réécriture d’une preuvef73. Un chemin manquant reste un refus. Chaque preuve
 reste ciblée (3numériques,3source,6âge) ; aucun de ses groupes n’est ajouté au
 socle49/543. Les nouveaux refus/pertes et les régressions012API/10UI/25communs,
 49/543/18 puis32/276 restent distincts et requis.
+
+
+## Publication des deux étapes du curseur — SLS-132.6
+
+Le contrat numérique de SCHEDULE_FIRING_VOLUME distingue déjà le premier lot
+critique et la fin du rattrapage. Soient C le curseur de la source authentique,
+D la frontière réelle d’armement et n=(D−C)/300. Le premier lot complet finit
+à F=C+min(n,40)×300. Ses vecteurs avant/après portent le même F, avec
+256×(1+min(n,40)) tirs avant suppression et exactement10000 après. Recalculer
+les survivants et retraits depuis les véritables completed_at/id de ce vecteur.
+
+Après détachement, le client attend le curseur D puis recoupe les pagesAPI avec
+un second relevé natif réel à D. Si n>40, de nouveaux lots sont intervenus entre
+F et D ; les UUID de ce relevé final ne sont pas ceux du premier lot critique.
+La publication conserve les deux vecteurs séparément, vérifie leurs curseurs,
+les10000 lignes finales, les16 fonctions et les totaux/pagesAPI de ce relevé.
+Elle ne reconstruit aucun UUID ni date de lot intermédiaire. Quand F=D seulement,
+les survivants critiques et le relevé final doivent aussi être identiques.
+
+Le vrai essai f016 à84 fenêtres a donné10496→10000 à F, puis10000 autres UUID
+au relevé final D. Le collecteur qui imposait F=D a correctement refusé de
+publier sa propre hypothèse erronée ; la correction suit le contrat existant,
+sans nouveau run ni succès fabriqué. Le rapport originel, ses empreintes et
+les unités/clients/gardes joints restent exigés avant publication.
