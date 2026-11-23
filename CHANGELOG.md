@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-145 : instrumentation du seul banc de reprise implémentée, avec état
+  mappé borné, checkpoint/exception/finalisation séparés et photographieRO avant
+  secours. Mode claimed explicite sans coupure, rapport distinct à zéro groupe.
+  Syntaxe Python/Node contrôlée ; exécution DEV et cause encore non établies.
+
 - SLS-145 : diagnostic de phase décidé avant code, borné et propre au banc de
   reprise : état mappé/versionné récupérable, checkpoint et primaire/finally
   séparés, photographieRO3s avantsecours. Observateur partagé, oracles et

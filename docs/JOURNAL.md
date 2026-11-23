@@ -11012,3 +11012,40 @@ API/handler/Docker, mêmeobservateur/SQL, purge et gardes obligatoires. Ce mode
 ne remplace aucun des cinqgroupes nominaux ni les25communs et49/32. Le mode
 terminal-capture de rétention reste non instrumenté. Contrat écrit avant code ;
 aucuneimplémentation ni cause démontrée à cet instant.
+
+### 23 novembre2026 — Instrumentation du banc145, avant preuve DEV
+
+Le module `schedule_recovery_diagnostics.py` ajoute une page partagée4096octets,
+séquence/version et manifeste de disposition, derniers compteurs et checkpoint
+réel sous révision/SHA. Les transitions d’armement/attenteUTC/attache gardent
+leurs tempsmonotones et muraux ; acquisitions et duréesSQLite sont distinctes.
+Le lecteur vérifie dossier, propriétaire, identités/SHA, namespacePID/boot avant
+les seuls métadonnéesproc ; troisessais maximum pour la séquence. Le client
+borne sa photographieSSH à3s, sans retry, et conserve choix/état/instants de
+secours. Une exception diagnostique ne remplace pas l’erreur de l’expérience.
+
+Le mode séparé `--diagnose-claimed` réutilise les API, fixture, promotion,
+observateur, SQL et prédicat du nominal ; seule une option explicite autorise
+release après vraiebarrière, sansSIGKILLcontrôle. Rapport acquisition distinct,
+zéro groupe fonctionnel et nettoyage obligatoire. Le nominal garde ses cinq
+groupes ; NativeObserver/ControlObserver et programmes historiques inchangés.
+Le chemin terminal-capture garde sa finalisation historique non instrumentée.
+Après erreur instrumentée, les incidents des étapes de finalisation sont
+conservés séparément ; l’exception primaire reste propagée, les restaurations
+et fermetures sont tentées en série. Cela applique le contrat de conservation
+de primaire écrit au42461eb, sans déduire un correctif causal.
+
+AST Python et syntaxe Node passent, diff sans erreur d’espacement. Ces contrôles
+ne qualifient aucune fonction ni la nouvelle instrumentation sur le SPARK.
+Synchronisation DEV, diagnosticréel et recoupement de clôture restent dus ;
+145.2partielle,145.3/.4 ouvertes et aucun49/32 lancé.
+
+La revue statique a relevé puis fait corriger deux risques : les échecs de
+rapportage ne bloquent plus le secours ni sa jonction et ne remplacent pas la
+primaire ; les nanosecondes JSON sont des chaînes décimales, leur stdout exact
+étant conservé sousSHA dans le rapport. Une écriture locale après la lectureSSH
+aurait pu dépasser la borne3s avantsecours : les octets restent donc en mémoire
+pendant cette acquisition, et le chemin d’échec écrit après le secours joint.
+Horodatage d’acquisition et début d’écriture du rapport restent distincts.
+La relecture indépendante finale ne relève aucunP1/P2 ; elle reste statique,
+sans qualification d’une borne ou d’un futur parcours E2E.

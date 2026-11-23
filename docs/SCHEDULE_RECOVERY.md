@@ -250,6 +250,12 @@ nommé dans la preuve ; elle n’est pas assimilée à une exécution non instru
 
 Le protocole publie sa version, ses champs/types et ses phases dans un manifeste
 figé sousSHA, avec identité helper/contrôle, naissances, namespacePID et boot.
+La projectionJSON destinée au client encode les nanosecondes en chaînes décimales
+pour conserver les entiers natifs au-delà de2^53 ; son stdout exact est retenu
+sousSHA dans le rapport, distinct des SHA des fichiers natifs. La photographie
+garde ses octets en mémoire ; sa conservation sur disque intervient après
+engagement/jonction du secours en cas d’échec. Aucun IO local de conservation
+n’est ajouté entre l’expiration de la photographie et la commande de secours.
 Un compteur de séquence encadre chaque mise à jour ; le lecteur borne ses essais
 et annonce un état incomplet si la mort interrompt l’écriture. Il ne reconstruit
 pas une valeur partielle. Les diagnostics ne contiennent ni environnement,

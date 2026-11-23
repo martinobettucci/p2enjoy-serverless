@@ -3,6 +3,8 @@
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RECOVERY.md#campagne-séquentielle
 # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RETENTION.md#capture-authentique-avant-vieillissement
 # @verifies docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RETENTION.md#capture-authentique-avant-vieillissement
+# @spec docs/BACKLOG.md#sls-145 | docs/SCHEDULE_RECOVERY.md#diagnostic-de-la-barrière-non-reçue--sls-145
+# @verifies docs/BACKLOG.md#sls-145 | docs/SCHEDULE_RECOVERY.md#diagnostic-de-la-barrière-non-reçue--sls-145
 """Observe real scheduler commits, capture retention witnesses or interrupt owned DEV."""
 import ast
 from contextlib import closing
@@ -26,6 +28,7 @@ import time
 from uuid import UUID, uuid4
 from control_database import ControlObserver, control_owner, read_control
 from native_control_observer import NativeObserver
+from schedule_recovery_diagnostics import RecoveryDiagnostics
 
 
 def emit(value):
@@ -65,6 +68,10 @@ def finish_guard(unit):
 assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless' and platform.machine() == 'x86_64', 'dev_spark_required'
 mode, function_id, namespace = sys.argv[1:4]
 assert mode in ('before', 'claimed', 'linked', 'watchdog', 'inspect', 'restore', 'rescue', 'evidence', 'terminal-capture')
+observe_only = '--observe-only' in sys.argv[4:]
+assert not observe_only or mode == 'claimed', 'observe_only_requires_claimed'
+if mode in ('before', 'claimed', 'linked', 'watchdog'):
+    assert sys.argv[5:] == (['--observe-only'] if observe_only else []), 'unexpected_recovery_option'
 assert str(UUID(function_id)) == function_id and str(UUID(namespace)) == namespace
 assert not any(v.startswith('--capture-loss') for v in sys.argv[4:]) or mode == 'terminal-capture', 'capture_loss_requires_terminal_capture'
 capture_loss = None
@@ -190,6 +197,9 @@ item = {'function_id':function_id, 'namespace_id':namespace, 'window':window, 'm
         'lock_identity':[lock_info.st_dev, lock_info.st_ino]}
 if capture_loss:
     item['capture_loss'] = capture_loss
+if mode != 'terminal-capture':
+    item['recovery_diagnostics_sha256'] = sha(Path(__file__).with_name('schedule_recovery_diagnostics.py'))
+    item['observe_only'] = observe_only
 for name, content in [('identity.json', json.dumps(item)), ('restore.py', restore_program), ('kill.py', kill_program)]:
     path = folder/name
     path.write_text(content)
@@ -197,19 +207,52 @@ for name, content in [('identity.json', json.dumps(item)), ('restore.py', restor
 reader = ControlObserver(control)
 observer = NativeObserver(pid)
 armed = False
+diagnostics = None
+
+
+def record(method, *args, **kwargs):
+    # Diagnostic failures cannot change the native experiment or its primary error.
+    if diagnostics is not None:
+        try:
+            getattr(diagnostics, method)(*args, **kwargs)
+        except BaseException as error:
+            try:
+                diagnostics.issue('record_'+method, error)
+            except BaseException:
+                # A failed diagnostic channel cannot replace the experiment's error.
+                pass
+
+
+def observed_durable():
+    record('phase', 'durable')
+    started = time.monotonic_ns()
+    result = durable()
+    record('duration', 'durable', started)
+    return result
+
+
 try:
     reader.open()
     guard_seconds = 12 if mode == 'watchdog' else 680 if mode == 'before' else 80
+    arm_started, arm_started_wall = time.monotonic_ns(), time.time_ns()
     command(['systemd-run', '--quiet', '--collect', '--unit='+unit, '--on-active='+str(guard_seconds)+'s',
              '--timer-property=AccuracySec=100ms', '--timer-property=RandomizedDelaySec=0',
              '--property=RuntimeMaxSec=190s', '--property=TimeoutStopSec=5s',
              '/usr/bin/python3', '-I', str(folder/'restore.py'), str(folder), 'guard'])
+    arm_finished, arm_finished_wall = time.monotonic_ns(), time.time_ns()
     armed = True
     assert command(['systemctl', 'is-active', unit+'.timer']) == 'active'
     emit({'event':'guard-armed', 'unit':unit, 'identity':item})
-    before = durable()
+    if mode != 'terminal-capture':
+        diagnostics = RecoveryDiagnostics(folder, item)
+        record('update', guard_arm_started_ns=arm_started, guard_arm_finished_ns=arm_finished,
+               guard_arm_started_wall_ns=arm_started_wall, guard_arm_finished_wall_ns=arm_finished_wall)
+        record('phase', 'guard_armed')
+    before = observed_durable()
+    record('phase', 'emit')
     emit({'event':'armed', 'unit':unit, 'before':before})
     if mode != 'watchdog':
+        record('phase', 'waiting_window')
         while time.time() < window-(1.5 if mode == 'before' else .4):
             time.sleep(.01)
     if mode == 'terminal-capture':
@@ -222,18 +265,34 @@ try:
                 break
             assert time.monotonic()<running_deadline, 'handler_not_started_before_observation'
             time.sleep(.05)
+    record('phase', 'attach')
     observer.start()
+    record('phase', 'attached')
     if mode == 'watchdog':
+        record('phase', 'watchdog_wait')
         emit({'event':'suspended', 'unit':unit})
         assert select.select([sys.stdin], [], [], 8)[0] and sys.stdin.readline().strip() == 'lose-observer'
         emit({'event':'observer-loss', 'signal':'SIGKILL', 'unit':unit})
+        record('phase', 'watchdog_loss')
         os.kill(os.getpid(), signal.SIGKILL)
 
     def checkpoint():
+        record('phase', 'cursor_read')
+        started = time.monotonic_ns()
         cursor = reader.rows('SELECT window_at FROM schedule_cursor WHERE singleton=1')[0]['window_at']
+        record('duration', 'cursor_read', started)
+        record('phase', 'firings_read')
+        started = time.monotonic_ns()
         firing = reader.rows('SELECT * FROM schedule_firings WHERE function_id=? AND window_at=?', (function_id, window))
+        record('duration', 'firings_read', started)
+        record('phase', 'invocations_read')
+        started = time.monotonic_ns()
         calls = reader.rows('SELECT id,state,handler_started,completed_at,schedule_firing_id FROM invocations WHERE function_id=? AND schedule_slot=?', (function_id, window))
-        return {'cursor':cursor, 'firings':firing, 'invocations':calls}
+        record('duration', 'invocations_read', started)
+        result = {'cursor':cursor, 'firings':firing, 'invocations':calls}
+        record('checkpoint', result)
+        record('phase', 'predicate')
+        return result
 
     if mode == 'before':
         gated = checkpoint()
@@ -241,17 +300,28 @@ try:
     else:
         pending = None
         deadline = time.monotonic()+45
+        record('phase', 'acquisition')
+        record('update', acquisition_started_ns=time.monotonic_ns(), acquisition_deadline_ns=int(deadline*1e9))
         observer.resume()
         while True:
+            record('phase', 'wait')
+            record('count', 'wait_calls')
             stopped_signal = observer.wait(deadline)
+            record('count', 'wait_returns')
+            record('update', last_wait_signal=stopped_signal, last_wait_finished_ns=time.monotonic_ns())
             if stopped_signal != signal.SIGTRAP|0x80:
                 assert stopped_signal not in (signal.SIGSTOP, signal.SIGTRAP)
                 observer.resume(stopped_signal)
                 continue
+            record('phase', 'info')
+            record('count', 'info_calls')
             phase, data = observer.info()
+            record('update', last_syscall_phase=phase)
             if phase == 1:
                 pending = data[0]
+                record('update', last_syscall_number=pending)
             elif phase == 2 and pending in (3, 18, 72, 75, 257):
+                record('count', 'candidate_calls')
                 gated = checkpoint()
                 if gated['cursor'] == window and len(gated['firings']) == 1:
                     firing = gated['firings'][0]
@@ -269,7 +339,9 @@ try:
                             and not gated['invocations'][0]['handler_started']):
                         break
             observer.resume()
-    emit({'event':'gated', 'mode':mode, 'checkpoint':gated, 'durable':durable()})
+    gated_durable = observed_durable()
+    record('phase', 'emit')
+    emit({'event':'gated', 'mode':mode, 'checkpoint':gated, 'durable':gated_durable})
     # @spec docs/BACKLOG.md#sls-078 | docs/SCHEDULE_RETENTION.md#capture-authentique-avant-vieillissement
     if mode == 'terminal-capture':
         assert select.select([sys.stdin], [], [], 8)[0] and sys.stdin.readline().strip() == 'capture', 'capture_command_required'
@@ -404,7 +476,13 @@ try:
         os.chmod(capture/'artifacts.json',0o600);os.chmod(capture/'capture.json',0o600)
         emit(receipt)
         raise SystemExit(0)
+    record('phase', 'waiting_command')
+    if observe_only:
+        assert select.select([sys.stdin], [], [], 8)[0] and sys.stdin.readline().strip() == 'release', 'release_command_required'
+        emit({'event':'released', 'observation_only':True})
+        raise SystemExit(0)
     assert select.select([sys.stdin], [], [], 8)[0] and sys.stdin.readline().strip() == 'cut', 'cut_command_required'
+    record('phase', 'cut')
     fcntl.flock(lock, fcntl.LOCK_EX)
     try:
         (folder/'kill-started.json').write_text(json.dumps({'requested':True})+'\n')
@@ -441,10 +519,47 @@ try:
             emit({'event':'missed-boundary', 'window':boundary, 'control_stopped':True})
         while time.time() < window+605:
             time.sleep(.05)
+except BaseException as error:
+    if not (isinstance(error, SystemExit) and error.code == 0):
+        record('primary', error)
+    raise
 finally:
-    observer.detach()
-    if armed:
-        emit(json.loads(command(['/usr/bin/python3', '-I', str(folder/'restore.py'), str(folder)], timeout=190)))
-        emit({'event':'guard-finished', 'unit':unit, 'states':finish_guard(unit)})
-    reader.close()
-    os.close(lock)
+    primary = sys.exc_info()[1]
+    def finalize(stage, action):
+        record('phase', stage)
+        record('finalizing', stage, 'entered')
+        try:
+            action()
+        except BaseException as error:
+            record('finalizing', stage, 'failed', error)
+            raise
+        else:
+            record('finalizing', stage, 'finished')
+
+    try:
+        # Retention capture keeps the historical, non-instrumented finalization.
+        if diagnostics is None:
+            observer.detach()
+            if armed:
+                emit(json.loads(command(['/usr/bin/python3', '-I', str(folder/'restore.py'), str(folder)], timeout=190)))
+                emit({'event':'guard-finished', 'unit':unit, 'states':finish_guard(unit)})
+            reader.close()
+            os.close(lock)
+        else:
+            cleanup_errors = []
+            actions = [('detach', observer.detach)]
+            if armed:
+                actions += [('restore', lambda: emit(json.loads(command(['/usr/bin/python3', '-I', str(folder/'restore.py'), str(folder)], timeout=190)))),
+                            ('guard_finish', lambda: emit({'event':'guard-finished', 'unit':unit, 'states':finish_guard(unit)}))]
+            actions += [('reader_close', reader.close), ('lock_close', lambda: os.close(lock))]
+            for stage, action in actions:
+                try:
+                    finalize(stage, action)
+                except BaseException as error:
+                    cleanup_errors.append(error)
+            record('phase', 'done')
+            if cleanup_errors and (primary is None or isinstance(primary, SystemExit) and primary.code == 0):
+                raise cleanup_errors[0]
+    finally:
+        if diagnostics is not None:
+            record('close')

@@ -5896,4 +5896,6 @@ et primaire/finally distincts, photographieRO3s avantsecours. NativeObserver/
 ControlObserver, programmes d’arrêt/restitution, oracles et bornes45/70/80
 conservés ; terminal-capture non instrumenté. Diagnosticclaimed séparé0groupe,
 release seulement en observation sanscoupure ; le nominal5+25 et49/32 restent
-complets et obligatoires. Instrumentation décidée, pas encore implémentée.
+complets et obligatoires. Instrumentation implémentée dans le banc, contrôles
+de syntaxe seuls acquis ; ni synchronisation SPARK ni diagnostic E2E encore
+exécutés sur cette nouvelle source. Aucun correctif causal ni clôture acquis.

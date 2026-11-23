@@ -9,6 +9,16 @@ huit0 recoupés ;42backend/quatreHTTPSno-store et manuel84. Aucun49 complet
 ni complément32 acquis. SLS-145 porte le diagnostic ; les autres rouges et
 leurs gels restent distincts. L’unité144 Rapports de jobs est inscrite au backlog.
 
+Le diagnostic145 ajoute `node e2e/schedule-recovery.mjs --diagnose-claimed` :
+une vraie session administrateur fraîche dans `admin-session.json` est requise,
+puis publication/promotion de la fixture originale et acquisition native à la
+prochaine frontièreUTC. Une commande `release` restitue sans coupure ; purge
+API et physique obligatoire. Le rapport `scheduled-functions-*-acquisition.json`
+est distinct du nominal et compte zéro groupe fonctionnel. Les fichiers de phase
+mappés sont lus RO avant secours (borne3s) et après restitution ; les cinqgroupes
+nominaux,25communs et49/32 restent dus. Instrumentation implémentée, syntaxe
+contrôlée ; cette nouvelle source n’est pas encore qualifiée sur le SPARK.
+
 
 
 ## Journaux SLS-072 — qualification courante sur f016
