@@ -4793,7 +4793,7 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
 - [ ] SLS-134.7 Recouper les diagnostics natifs et leur représentation JSON
   JavaScript sans exiger l’égalité des entiers nanoseconde au-delà de2^53.
   Conserver la valeur native exacte ; exiger la représentation réellement
-  produite par le parseur/sérialiseur Node du client, sans tolérance numérique
+  produite par le parseur/sérialiseur Node de qualification, sans tolérance numérique
   arbitraire ni modification des rapports. Le rouge du collecteur et les
   clôtures natives restent distincts des groupes E2E déjà réussis.
   Le contrat ajouté ensuite n’entre pas dans source_hashes : les527 sources
@@ -4912,6 +4912,8 @@ traitement ; aucun groupe supplémentaire ni rejeu du countacquis.
 134.7 — Constat avant correction : global-alarm8406560b passe ses deuxgroupes sur527sourcesc4ed58d/f016, puis le collecteur extérieur échoue avant d’écrire sa clôture. Le statut natif est restoredtrue/driverfalse/gardesinactives, diagnostic identique hors recorded_at_ns :1795405535188332558 natif contre1795405535188332500 aprèsJSONJavaScript. Cette perte de précision est observée, pas une cause d’échec de l’alarme. Statut exact conservé en privé ; ne changer ni reçu, producteur ni horloge. Contrat ajouté avant correctif ; aucune autre campagne n’est lancée tant que cette clôture n’est pas acquise.
 
 134.7 — Vérification de l’inventaire avant adaptation du publisher : le contrat ne fait pas partie du vrai vecteur527 ; source_hashes actuel et celui du succès global-alarm sont strictement égaux (zéro chemin changé). La mention documentaire contraire est corrigée, aucune exception de provenance n’est implémentée. Les commits documentaires diffèrent mais les527 sources/image restent stricts.
+
+134.7 — Revue de provenance : aucun exécutableNode n’avait été épinglé pour le client passé. La projection relève donc le vrai Node utilisé pour ce contrôle de données, avec chemin/version/SHA, et ne revendique pas l’identité du binaire historique. L’objet natif exact et l’objet client existant doivent toujours être entièrement recoupés par le vrai passage JSON, sans exclusion ni epsilon ; aucune E2E n’est réexécutée ou réattribuée.
 
 <a id="sls-135"></a>
 ## SLS-135 — Lecture des références pendant la sortie d’un processus

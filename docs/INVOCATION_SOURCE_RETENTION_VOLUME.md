@@ -838,8 +838,8 @@ du collecteur reste conservé ; il n’est pas un rouge du parcours E2E réussi.
 Ces entiers dépassent la précision exacte du Number JavaScript. Le statut
 natif reste l’autorité pour la valeur exacte et est conservé sans altération
 dans le reçu de clôture. Pour recouper sa projection client, passer le vrai
-objet natif par JSON.parse puis JSON.stringify dans le même exécutable Node
-que le client et exiger l’égalité de cet objet avec le rapport existant. Ce
+objet natif par JSON.parse puis JSON.stringify dans le véritable Node
+de qualification et exiger l’égalité de cet objet avec le rapport existant. Ce
 passage réel ne modifie aucun rapport ou producteur et ne prétend pas retrouver
 les nanosecondes perdues. Aucun epsilon arbitraire, exclusion du champ ou
 conversion de durée entre domaines d’horloge n’est accepté.
@@ -860,3 +860,14 @@ aucune exception documentaire n’est nécessaire. Chaque preuve conserve son
 commit propre, sans antidater le contrat ajouté ensuite. Le publisher exige
 les527 fichiers et les images identiques entre les trois cas, ainsi que les
 vecteurs avant/après de chaque cas. Toute différence reste un refus.
+
+
+L’exécutable Node du client déjà terminé n’avait pas été relevé lors de son
+lancement ; son identité historique n’est pas reconstructible depuis son seul
+rapport. La projection enregistre donc le Node réellement utilisé maintenant
+(chemin/version/SHA), sans prétendre qu’il est celui de ce client passé. Sa
+portée est l’égalité exacte de la représentation des données : tout l’objet
+natif passé par le vrai parseur/sérialiseur doit donner tout l’objet client
+conservé. Elle ne constitue ni un replay du client, ni une attestation de son
+ancien binaire. Ce périmètre suffit au rattachement JSON, sans altérer les
+valeurs natives, les rapports, les retours ou les preuves E2E acquises.
