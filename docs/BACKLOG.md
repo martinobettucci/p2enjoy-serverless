@@ -5569,7 +5569,7 @@ naissances/cgroup fermés ; recoupementphysique extérieur, configuration,
 référence/5982 et huitcompteurs0 conservés. Les deux rouges140/141 restent
 séparés ; aucun49 complet acquis. Le12UI141 passe dans ce passage,15JPEG.
 
-- [ ] SLS-142.1 Sceller rapports/programmes/529sources/trace et résultatterminal,
+- [x] SLS-142.1 Sceller rapports/programmes/529sources/trace et résultatterminal,
   troisgroupespartiels distincts des313 ; recouper gardes, ressources possédées,
   restauration et toutes captures fraîches avant d'interpréter le refus.
 - [ ] SLS-142.2 Établir la cause réelle de l'absence de gated : transportCLI,
@@ -5581,3 +5581,15 @@ séparés ; aucun49 complet acquis. Le12UI141 passe dans ce passage,15JPEG.
   de publication sousissueinconnue ; publication/promotion/invocation explicites
   ensuite, purges/gardes/clients et originaux conservés.25communs frais et
   captures inspectées, puis49complet depuis le début ; complément32 reste dû.
+
+142.1 — [rouge courant scellé](evidence/schedules-service-transport-gate-first-failed-dev-2026-11-23.json) :
+313groupes antérieurs et troisgroupesclient partiels, quatreprérequis,
+zéroqualifié ;23rapports/529TAR/Git453900d/f016 et66captures ouvertes reliés.
+Troisgardes inactives/helpers absents, TracerPid0, deuxpurges physiques,
+configuration/référence/5982/huit0 ;42backend/quatreHTTPSno-store/manuel84.
+Revue indépendante sansP1/P2. Métadonnéesafter : uneconfiguration et unefonction
+publiée puis purgée ; aucungated/cut. CLIexit/trace/stderrhelper manquent et
+ne sont pas reconstruits. PremiercollecteurRO refusé1 sousidentitéSQLréduite,
+secondelecture0 aprèssortie du contexte ; aucunécrituredistante/groupeajouté.
+Décision142.2 : instrumenter la conservation et l'acquisition sans modifier
+les bornes ni le matcher, selon le contrat142, puis diagnostiquer survrai flux.

@@ -10759,3 +10759,16 @@ naissances terminées/cgroup récursif vide, configuration/référence/5982/huit
 reçus (7contrôle/6connexion/15exécution/22publication), seizemanuel encore à
 inspecter. Sceller d'abord ce rouge et ses gardes, puis instruire le transport ;
 aucun rejeu, aucune clôture49,140/141 gardent leur critère global manquant.
+
+### 23 novembre 2026 — Rouge142 scellé, acquisition à instrumenter
+
+Preuve313/troispartiels/4prérequis/0qualifié relue sansP1/P2 :529Git453/TAR,
+23rapports,66captures,42backend/quatreweb et manuel84. Troisgardes fermées,
+helpers absents/TracerPid0, deuxpurges/configuration/référence/5982/huit0.
+Le collecteurRO initial1 (identitéSQLréduite) reste conservé ; copie0 après
+fermeture du contexte, aucune mutation distante.142.1 acquise. SQLafterprouve
+1configuration et1publication avantpurge, sansretourCLI ni trace retenus.
+Décision avantcode : conserver CLI/helper et compteurs d'acquisition, sans
+changer40/45/70s, matcher ou observateurpartagé ; source de la cause à établir
+par le flux réel, zéro groupe acquis par cette instrumentation. Contrat142
+ajouté au documenttransport ; originalrouge et limites restent inchangés.

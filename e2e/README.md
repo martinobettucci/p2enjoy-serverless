@@ -82,6 +82,16 @@ Revue indépendante sansP1/P2 ; zéro groupeunique ajouté.141 reste ouvert pour
 49 entier depuis le début, puis32/276. La preuve105/b452 garde son époque et
 les anciens reçus.140.2 est acquise par le builder réel ;140.3 reste ouverte.
 
+Le [troisième rouge courant142](../docs/evidence/schedules-service-transport-gate-first-failed-dev-2026-11-23.json)
+conserve313groupespartiels/18campagnes et quatreprérequis au gel453900d/529/f016,
+puis troisgroupestransportpartiels et gated absent aprèscommit.66captures
+inspectées ; deuxpurges/3gardes/tracer0/configuration/référence/5982/huit0,
+42backend/quatreHTTPSno-store et manuel84 recoupés. CLIexit/trace/helperstderr
+de cette phase manquent ; SQLafterprouve uneconfiguration/unepublication mais
+ne détermine pas la cause. Décision142 : conservation avantassertion et compteurs
+d'acquisition, bornes40/45/70s et matcher inchangés. Aucun49 complet ni reprise
+32 acquis ; les anciensrouges gardent leurs propres gels et limites.
+
 ### Historique des préparations et campagnes précédentes
 
 [EXECUTION_LOGS](../docs/EXECUTION_LOGS.md#découpage-et-qualification-réels)

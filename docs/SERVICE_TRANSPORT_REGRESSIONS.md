@@ -104,3 +104,62 @@ avant transport, puis assertion incorrecte attendant une ligne pour le refus
 avant admission. Leurs traces sont conservées ; aucune mutation corrective.
 L’échec ancien reste séparé, sans corps 409 reconstruit. SLS-108 est close ;
 SLS-109 et le passage complet 49/543 + 18 de SLS-078 restent ouverts.
+
+## Diagnostic de l'acquisition courante — SLS-142
+
+Le rouge453900d/529/f016 est scellé séparément :18campagnes/313groupes et
+quatreprérequis, puis troisgroupestransport partiels et barrière gated absente
+au casafter. Les deuxfonctions sont purgées, troisgardes fermées et66captures
+inspectées. La relectureSQL prouve uneconfiguration et unepublicationafter,
+pas le résultatCLI manquant. Les événementsafter conservés sont guard-armed,
+armed, restored ; aucune coupure de cette phase n'est acquise. L'ancienne
+qualification108 conserve son imageb452 et son périmètre.
+
+Décision avant code : établir la cause sur le vrai flux en conservant les
+observations avant leurs assertions. Aucun changement du produit, de l'API,
+de NativeObserver partagé, du matcher de lignePUT/FD, ni des bornes40s(client),
+45s(acquisition),70s(garde),12s(watchdog). Une augmentation de délai ne constitue
+pas une correction de la cause. Pas de rejeu automatique ni sélection réduite
+présentée comme les cinqgroupes. Un diagnostic reste zéro groupequalifié.
+
+Le transport de chaque helper est conservé dans native_gates : mode, dates
+natives locales de lancement/fermeture, retour réel, jointure, octets/SHA du
+stderr et extrait expurgé borné4096caractères. Les dates ne sont pas inventées
+pour les anciennes preuves. Les événements JSON déjà reçus restent complets.
+Un helper nonterminé ne porte pas joined=true. Watchdog conserve son vrai
+retour137ou255 et sa restauration indépendante ; aucune exception absorbée.
+
+L'observateur de service ajoute des observations d'acquisition, sans lire de
+nouveaux buffers : nombre d'arrêts, entrées/sorties syscall, autres signaux,
+lectures candidates, lectures de socket local18090, lignePUT entièrement
+reconnue, FD cible et tempsmonotone écoulé. Aucun header, corpsHTTP, registre
+ou mémoire supplémentaire n'est lu. Un événement cible est émis au match
+complet ; un bilan d'acquisition est émis en sortie normale ou exceptionnelle
+avec outcome et classe/code statique de l'erreur. La frontière reste le même
+syscall et le même contrôle durable ; aucun compteur ne remplace ces oracles.
+La mortSIGKILL du watchdog peut empêcher toutbilan : ne pas lui en fabriquer.
+
+La fin de la CLI est séparée de son oracle de résultat. Une observation unique
+conserve son vrai retour, SHA des sorties et JSON public après exclusion des
+valeurs privées. Une sortie nonJSON conserve classe de parse et empreinte,
+jamais un faux objet completed. Pour strace, le fichier existant ne contient
+que connect/getsockopt sans buffersTLS ; il est copié avant retrait du travail,
+avec SHA/octets et nombres réels de connexions. Sur le parcours nominal coupé,
+les assertions existantes restent exactement troisconnexions et résultatunknown
+sanspublication. Sur le finally d'une phase nonacquise, conserver la CLI et
+la trace ne qualifie rien et n'impose pas rétrospectivement troisconnexions.
+
+Toute sortie de check avant task.result passe par cette observation lors du
+finally, avant suppression du répertoire. Une exception d'observation est
+conservée parmi les erreurs de nettoyage et le primaire reste nommé ; aucun
+succès silencieux. Les helpers sont joints/restaurés avant les purges, la CLI
+est réellement attendue et ses fichiers restent privés0600. Les valeurs de
+secret/jeton sont refusées ou expurgées avant tout enregistrement ; seules
+les métadonnées publiques et la ligne de requête déjà autorisée sont conservées.
+
+Relire ensuite les vrais retours, chronologies/counters, mutation et absence
+ou présence de publication pour trancher : requête nonreconnue, frontière
+nonatteinte, refus durable ou acquisition horsborne restent distincts. La
+correction de cause éventuelle reçoit sa décision avant code. Les cinqgroupes
+complets,25communs frais/captures et nouveau49 depuis le début restent dus ;
+le complément32/276 et les autres critères072/132/133/134 restent indépendants.
