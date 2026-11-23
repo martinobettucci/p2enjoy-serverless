@@ -736,7 +736,8 @@ cause exacte connue. Le cas reste rouge, même si les originaux sont restitués.
 Décision avant code : compléter le diagnostic de cette unité par un reçuparent
 `driver-primary-failure.json` privéroot0600 dans la fenêtre déjà reconnue.
 Il est écrit avant les commandes de restitution du finally, pour toute exception
-Python attrapable après possessionvalidée/verrou hérité. Avant cette frontière,
+Python attrapable dans le corps supervisé après l’armement/annonce de la garde,
+possessionvalidée et verrou hérité. Avant cette frontière,
 aucun fichierdiagnostic n’est créé ; SIGKILL ne prétend pas fournir de traceback.
 Conserver l’opération nommée, SHA du pilote exécuté et pile limitée à16frames
 (basename/fonction/ligne, jamais locals ni lignes de code). L’exception est relancée
@@ -762,3 +763,24 @@ complet et nettoyages. Les erreurs primaires et celles de restitution sont
 séparées ; un nouveau défaut observé reçoit son constat avant correction.
 Les mêmes sources/image/configuration, fonctions, groupes et restaurations sont
 recoupés. Aucun comportementmétier ou limite25/35/40/5 n’est modifié.
+
+
+Précision134.5 avant correction de fidélité : command recueille les octets natifs
+pour les SHA/comptages puis produit le même texte (encodagelocal et normalisation
+universelle CRLF/CR→LF) qu’auparavant. Un échec de décodage reste un échec, avec
+les métadonnées des octets réellement reçus. Le code de retour appartient au
+wrappertimeout, pas à un statut individuel d’enfant inventé. Les reçus séparés
+reader-close et restore sont privésroot600 comme le primaire ; une écriture de
+diagnostic qui échoue ajoute une note typée à l’erreur originale, sans la masquer.
+
+Preuve native de fidélité : sur le SPARKDEV, le vrai helper command exécute une
+requêtecurl refusée sans session vers /api/namespaces (statutHTTP401, curl22),
+puis /healthz (200/curl0). tee conserve en privé les octets des mêmes réponses
+que reçoit command, sans modifier le flux ni son statut. Comparer SHA/octets
+réels (dont CRLF) aux métadonnées d’échec, puis le texte normalisé de la réussite
+aux octets de sa propre réponse. La seconde commande autorisée remet le contexte
+àNone. Les deux programmes et l’API sont réels, aucun handler n’est importé.
+Fichiers temporairesnonce/root700-600, supprimés après collecte des métadonnées ;
+services/images/config/compteurs/5982 recoupés avant/après. Lecture infrastructure
+uniquement, sans groupe de rétention ajouté. Les corps/headers bruts restent
+privés et ne figurent pas dans la preuve publique.
