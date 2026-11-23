@@ -3334,3 +3334,12 @@ lancement suivant. Originaux, 5 982 artefacts et huit compteurs nuls recoupés ;
 revue en lecture seule sans P1/P2. Avec les deux âges et les vrais cas noyau/HTTPS,
 SLS-135 est close. Les 25 communs produit et les campagnes 49/543/18 puis 32/276
 restent indépendants et dus.
+
+Les [pannes courantes35/40/detach](../docs/evidence/source-observer-native-deadlines-schema011-query-dev-2026-11-23.json)
+passent six groupes sur 527 sources identiques c4ed58d/c808e21, image f016 :
+35,671 s,40,010 s/code124, erreur detach5,256 s et lecteur fermé. Les valeurs
+natives et leurs projections JSON client sont conservées séparément et
+recoupées par le vrai Node de qualification, sans attester l’ancien binaire.
+Trois unités/cgroups/gardes/acteurs joints, retraits physiques et originaux
+conservés ; revue sans P1/P2. Le premier refus de collecte est lié, aucun replay
+E2E ou groupe global ajouté.134.6/.7 acquis ; autres consommateurs/campagnes dus.

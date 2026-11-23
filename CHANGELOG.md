@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- SLS-134.6/.7 : six groupes natifs35/40/detach qualifiés, diagnostics enrichis
+  stricts, vrai retour124 et lecteur fermé malgré l’erreur detach. Trois unités,
+  gardes et acteurs joints ; objets JSON natif/client entièrement recoupés sans
+  perdre la valeur native. Autres consommateurs/campagnes encore ouverts.
+- SLS-133.7 : ambiguïté du compteur CLI de réponses nommé démarrages inscrite
+  avant correction ; clarification et vrais tests prévus avec le profilage.
+
 - SLS-135 close : vrai EINVAL reproduit puis correction qualifiée par huit
   contrôles noyau/deuxHTTPS, sixgroupes d’âge et25groupes de restitution.
   Onze cas/quatreunités/onzegardes joints, sources527/f016 et originaux conservés.

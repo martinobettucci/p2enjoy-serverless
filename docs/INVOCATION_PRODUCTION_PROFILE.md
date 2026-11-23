@@ -69,3 +69,15 @@ une version affaiblie du nettoyage.
 Une mesure concluante motive une décision de correction avant code produit.
 Le profil ne clôt pas133 : nominal3, régressions affectées et campagnescomplètes
 demeurent nécessaires.
+
+
+## Portée du compteur CLI à corriger — SLS-133.7
+
+La synthèse du client nomme real_http_handlers le nombre d’éléments du tableau
+responses, qui contient les réponses de charge. Le vrai command-timeout
+078126da affiche0 pour ce champ, alors que son reçu natif conserve une
+invocation HTTP et une planifiée réellement démarrées. Cette synthèse ne doit
+pas présenter un compteur de réponses comme un nombre de démarrages observés.
+La clarification sera décidée et codée avec le profilage productif133.6, puis
+éprouvée sur ses vrais passages. Les rapports passés et leur comptage de groupes
+restent intacts ; ce libellé n’est pas utilisé pour qualifier les pannes134.

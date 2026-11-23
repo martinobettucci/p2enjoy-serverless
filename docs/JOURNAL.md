@@ -10317,3 +10317,18 @@ spécifiés puis corrigés avant publication, retours outil transcrits distingu�
 des capturesmachine et clôture avant phase suivante exigée. RevueRO sansP1/P2.
 135 est close,132.3 acquise ; mesures133, autresconsommateurs134 et campagnes
 API/UI/25communs produit/49/32 restent à livrer avant la clôture de plateforme.
+
+
+### 23 novembre 2026 — Pannes natives134.6 et projection JSON qualifiées
+
+Les trois vrais cas passent six groupes sur les mêmes 527 sources/f016 :
+35,671 s,40,010 s/code124 et detach5,256 s. Les diagnostics source/phase/wait
+restent stricts, les fermetures et le dégel sont observés avec leurs limites.
+Trois contrôleurs machine et unités/cgroups/gardes/acteurs sont joints. Le
+collecteur initial a refusé l’horodatage natif plus précis que Number ; le vrai
+passage JSON de tout l’objet recoupe le client sans modifier le natif. Le
+premier refus et le périmètre du parseur courant sont explicitement conservés.
+Revue en lecture seule sans P1/P2, aucune E2E rejouée pour cette collecte.
+134.6/.7 sont acquis ; les autres consommateurs, reprises et campagnes restent
+dus. Le libellé CLI qui confond réponses et démarrages est inscrit en133.7 pour
+la suite du profilage ; aucun résultat historique n’est réattribué.

@@ -871,3 +871,28 @@ natif passé par le vrai parseur/sérialiseur doit donner tout l’objet client
 conservé. Elle ne constitue ni un replay du client, ni une attestation de son
 ancien binaire. Ce périmètre suffit au rattachement JSON, sans altérer les
 valeurs natives, les rapports, les retours ou les preuves E2E acquises.
+
+
+### Preuves courantes134.6 et134.7
+
+Les [six groupes de pannes](evidence/source-observer-native-deadlines-schema011-query-dev-2026-11-23.json)
+passent sur 527 sources strictement identiques, commits c4ed58d/c808e21 et image
+f016. Alarme35 mesurée à35,670999724 s, commande40 à40,010176838 s avec retour124,
+et erreur detach à5,255705981 s. Les diagnostics enrichis gardent source, phase
+et vrai dernier arrêt5/128 ; les erreurs de nettoyage restent distinctes. Le
+lecteur est fermé dans les cas Python, aucune fermeture Python n’est inventée
+après SIGKILL40 ; dans detach, Trace0 est constaté après mort puis dégel.
+
+Les trois acteurs et gardes, les trois contrôleurs machine et unités/cgroups
+sont joints. Les retraits physiques de l’union initiale/tardive sont recoupés,
+avec originaux, configuration, référence, 5 982 artefacts et huit compteurs nuls.
+Les deux objets du diagnostic sont conservés, valeur native exacte et projection
+JSON Node réelle entièrement égale au client. Le parseur courant est identifié
+par chemin/version/SHA ; l’ancien binaire n’est pas attesté rétrospectivement.
+Le premier refus du collecteur reste conservé avec son périmètre explicite ;
+aucun testE2E n’est rejoué pour cette correction de collecte. Une revue en
+lecture seule recoupe archives, hachages et sérialité sans P1/P2 restant.
+
+134.6/134.7 sont acquis.134.4 reste ouverte pour les autres consommateurs,
+la reprise et les campagnes produit. Les six groupes sont du support propre ;
+ils ne requalifient ni l’ancien rouge sans cause ni la rétention nominale.

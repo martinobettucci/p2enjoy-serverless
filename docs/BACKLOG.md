@@ -4690,6 +4690,11 @@ métier, collecte, budgets, purge et rétention restent exigés.
   fermeture/lisibilité des statistiques, source/PID/naissance/cgroup et
   restaurations prouvés ; zéro groupe nominal ajouté. Toute attribution reste
   bornée par la portée réelle de l’instrumentation et les coûts observés.
+- [ ] SLS-133.7 La synthèse CLI distingue réponses HTTP de charge validées et
+  démarrages de handlers observés. Le champ real_http_handlers utilise actuellement
+  responses.length : les modes diagnostiques affichent0 malgré leur HTTP/cron
+  réellement démarrés. Nommer le compteur selon sa portée, conserver les preuves
+  anciennes et qualifier la synthèse avec les vrais passages de profilage.
 
 132 — nominal courant réellement rouge :9406HTTP, marge avantcron épuisée,
 aucun groupe qualifié. Worker terminal1 puis libéré, original011/f6e19cdd,
@@ -4749,6 +4754,8 @@ Chaque cas tourne dans sa seule unitéroot DEV oneshot180s/stop30s/KillModecontr
 133.2 — décision avant collecteur : conserver aussi un unique backupSQLite natif du nominalf016 pendant sa production réelle, au moins180s avantW, sans déplacer sa frontière. Mêmeclone/campagne/CID/imagef016/fonctions reconnus avant/après, lectureRO en transaction et backupborné15s sousUIDpropriétaire ; intégrité/FK/11migrations/journal10000/zérotir recoupés. Déplacer seulement la nouvelle copie vers un dossier privéroot0700/control0400 avec SHA/reçu, horsrépertoires remplacés avant leur retrait. Aucun SQL métier/horloge/service modifié, pas de reconstruction depuisJSON ; copiesf73 inchangées. La charge d’observation est datée et reconnue, sans lui attribuer une durée applicative ; zéroqualification. Motif : conserver le vrai corpus saturé et ses transactions pour le diagnostic, quel que soit le résultat terminal du nominal.
 
 
+133.7 — Constat inscrit avant correction : la ligne414 du client invocation-source-retention-volume.mjs nomme real_http_handlers le nombre de réponses de charge dans responses. Le stdout du vrai command-timeout078126da affiche0, tandis que le reçu natif prouve deux invocations running/handler_started (HTTP et cron). Ce compteur de charge ne compte pas les démarrages ; les sixgroupes134 restent recoupés depuis leurs vrais reçus, sans utiliser ce libellé. Clarification du résultatCLI à livrer avec133.6, aucun code modifié ni ancien rapport réécrit.
+
 <a id="sls-134"></a>
 ## SLS-134 — Diagnostic discriminant de l’observateur de source
 
@@ -4785,12 +4792,12 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
   attribuer rétrospectivement l’erreur absente du premiercas ; éprouver les vrais
   refus et le cascap complet avec ce diagnostic avant clôture.
 
-- [ ] SLS-134.6 Adapter les deux oracles anciens du client35/detach au diagnostic
+- [x] SLS-134.6 Adapter les deux oracles anciens du client35/detach au diagnostic
   enrichi : mêmes type/raison stricts, avec phase/sourceSHA/ligne/wait réel
   recoupés séparément. Les égalités anciennes sur un objet à deux champs
   rejettent les champs supplémentaires ; aucune limite ni raison affaiblie.
   Éprouver les modes35/40/detach sur leurs vrais arrêts après adaptation.
-- [ ] SLS-134.7 Recouper les diagnostics natifs et leur représentation JSON
+- [x] SLS-134.7 Recouper les diagnostics natifs et leur représentation JSON
   JavaScript sans exiger l’égalité des entiers nanoseconde au-delà de2^53.
   Conserver la valeur native exacte ; exiger la représentation réellement
   produite par le parseur/sérialiseur Node de qualification, sans tolérance numérique
@@ -4914,6 +4921,22 @@ traitement ; aucun groupe supplémentaire ni rejeu du countacquis.
 134.7 — Vérification de l’inventaire avant adaptation du publisher : le contrat ne fait pas partie du vrai vecteur527 ; source_hashes actuel et celui du succès global-alarm sont strictement égaux (zéro chemin changé). La mention documentaire contraire est corrigée, aucune exception de provenance n’est implémentée. Les commits documentaires diffèrent mais les527 sources/image restent stricts.
 
 134.7 — Revue de provenance : aucun exécutableNode n’avait été épinglé pour le client passé. La projection relève donc le vrai Node utilisé pour ce contrôle de données, avec chemin/version/SHA, et ne revendique pas l’identité du binaire historique. L’objet natif exact et l’objet client existant doivent toujours être entièrement recoupés par le vrai passage JSON, sans exclusion ni epsilon ; aucune E2E n’est réexécutée ou réattribuée.
+
+134.6/134.7 — [Six groupes de pannes natives qualifiés](evidence/source-observer-native-deadlines-schema011-query-dev-2026-11-23.json),
+527 sources strictement identiques aux commits c4ed58d/c808e21, image f016.
+Alarme35 : 35,670999724 s, TimeoutError et phase/source/dernier arrêt5/128,
+lecteur/mémoire fermés, TracerPid0. Commande40 : 40,010176838 s et vrai retour124,
+KILL rapporté, opérateur absent, aucun final Python inventé. Detach : erreur
+native à5,255705981 s, primaire d’historique et erreurs detach/detach-state
+séparés, lecteur fermé ; acteur constate la mort et Trace0 avant dégel sans
+secours. Trois contrôleurs machine0, unités/cgroups/gardes/acteurs joints,
+neuf contrôles physiques et sept exacts par cas, originaux/config/5982 et huit
+compteurs nuls. Le refus du premier collecteur est conservé explicitement ;
+projection JSON réelle des objets entiers, natif exact et représentation client
+séparés, Node courant identifié sans attestation du binaire historique.
+Revue des archives et hachages sans P1/P2, aucun replay E2E ni groupe global
+ajouté.134.6/.7 acquis ;134.4 garde les autres consommateurs/reprise/campagnes à
+terminer, et les causes historiques inconnues ne sont pas réattribuées.
 
 <a id="sls-135"></a>
 ## SLS-135 — Lecture des références pendant la sortie d’un processus
