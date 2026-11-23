@@ -3246,3 +3246,12 @@ refus après attache avec reçuparent, puis dépassement1154632octets/huitimport
 et deuxpurgespubliques. Quatregroupes support, zéroqualification de rétention.
 Le client du cascap termine1 pour le seul dépassement attendu ; le pilote0
 et ses reçus d’erreur absents sont recoupés. Nominal et consommateurs restent dus.
+
+Le nominal source refuse désormais avant ses flux toute préparation avec moins
+de1980s réelles avantW (`production_window_too_short`). La formuleW30–35min,
+la margeW−60 et la garde2700 restent les mêmes ; profil6000 et modescourts
+conservent leurs parcours. Ce refus et le nominalpositif restent à éprouver.
+Les oracles35/detach vérifient le diagnostic enrichi et le couple d’attache
+SIGTRAP/PTRACE_EVENT_STOP5/128 ; le mode40 exige toujours l’absence de traceback
+aprèsSIGKILL. Les wrapperscourts requièrent la clôture externe de leur unité
+possédée et, aprèsrouge, restore/status réels avant un autretest.

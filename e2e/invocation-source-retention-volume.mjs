@@ -128,11 +128,27 @@ async function proveObserverDeadline(initial){
  assert.equal(command.control_before_restore.pid,measured.pid);assert.equal(command.control_before_restore.birth,measured.birth);assert.equal(command.control_before_restore.tracer_pid,0);
  assert.equal(command.stdout_sha256,evidence.metadata['source-observer-command.stdout'].sha256);assert.equal(command.stderr_sha256,evidence.metadata['source-observer-command.stderr'].sha256);
  assert.equal(command.actor_terminal.MainPID,'0');assert.equal(command.actor_terminal.Result,'success');assert.equal(command.actor_terminal.ExecMainCode,'1');assert.equal(command.actor_terminal.ExecMainStatus,'0');assert.equal(command.actor_joined.ActiveState,'inactive');assert.equal(command.actor_joined.MainPID,'0');
+ // @verifies docs/BACKLOG.md#sls-134 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#oracles-des-diagnostics-enrichis--sls-1346
+ const nativeSource=await readFile(new URL('invocation-source-retention-observer.py',import.meta.url));
+ assert.equal(measured.operator_source_sha256,createHash('sha256').update(nativeSource).digest('hex'));
+ if(observerDeadline!=='command-timeout'){
+  const primary=measured.primary_failure;assert(primary);
+  assert.equal(primary.phase,observerDeadline==='detach-failure'?'validate_initial_history':'arm_deadline_fault');
+  assert.equal(primary.source.file,'invocation-source-retention-observer.py');assert(typeof primary.source.function==='string'&&primary.source.function.length>0);
+  const lines=nativeSource.toString('utf8').split('\n');assert(Number.isInteger(primary.source.line)&&primary.source.line>0&&primary.source.line<=lines.length);
+  assert(lines[primary.source.line-1].includes(observerDeadline==='detach-failure'?'retention_history_incomplete':'native_observation_deadline'));
+  if(observerDeadline==='detach-failure')assert.equal(primary.source.function,'observe');
+  assert.deepEqual(primary.last_wait,measured.last_wait);const wait=primary.last_wait;
+  assert(wait.result_available&&Number.isInteger(wait.status));assert.equal(wait.pid,measured.pid);assert.equal(wait.status&255,127);
+  assert.equal(wait.stopped,true);assert.equal(wait.signal,(wait.status>>>8)&255);assert.equal(wait.ptrace_event,wait.status>>>16);
+  assert.equal(wait.signal,5);assert.equal(wait.ptrace_event,128);
+  assert.equal(wait.exited,false);assert.equal(wait.exit_code,null);assert.equal(wait.signaled,false);assert.equal(wait.term_signal,null);
+ }
  if(observerDeadline==='detach-failure'){
   // @verifies docs/BACKLOG.md#sls-078 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#fermeture-du-lecteur-malgré-une-erreur-native-de-detach
   assert.equal(command.returncode,1);assert(command.duration>=5&&command.duration<15);assert(!command.timeout_kill_reported);
   assert.equal(measured.failure_type,'AssertionError');assert.equal(measured.reason,'native_tracer_retained');
-  assert.deepEqual(measured.primary_failure,{type:'AssertionError',reason:'retention_history_incomplete'});
+  assert.equal(measured.primary_failure.type,'AssertionError');assert.equal(measured.primary_failure.reason,'retention_history_incomplete');
   assert(measured.detach_fault_pause.paused);assert.equal(measured.detach_fault_pending_status.pid,0);assert.equal(measured.detach_fault_pending_status.status,0);
   assert.deepEqual(measured.cleanup_errors.map(v=>v.step),['detach','detach-state']);
   const detached=measured.cleanup_errors[0];assert.equal(detached.type,'AssertionError');assert.equal(detached.reason,'native_stop_not_observed');assert(detached.duration>=5&&detached.duration<7);
@@ -146,12 +162,12 @@ async function proveObserverDeadline(initial){
   assert(driverStderr.includes(Buffer.from('source_retention_observation_failed:native_tracer_retained')));
  }else if(observerDeadline==='global-alarm'){
   assert.equal(command.returncode,1);assert(command.duration>=35&&command.duration<40);assert(!command.timeout_kill_reported);assert.equal(actor.signals_sent.length,1);assert.equal(actor.signals_sent[0].signal,18);assert(actor.signals_sent[0].pidfd);
-  assert.equal(measured.failure_type,'TimeoutError');assert.equal(measured.reason,'native_observation_deadline');assert.deepEqual(measured.primary_failure,{type:'TimeoutError',reason:'native_observation_deadline'});assert(!measured.cleanup_errors?.length);
+  assert.equal(measured.failure_type,'TimeoutError');assert.equal(measured.reason,'native_observation_deadline');assert.equal(measured.primary_failure.type,'TimeoutError');assert.equal(measured.primary_failure.reason,'native_observation_deadline');assert(!measured.cleanup_errors?.length);
   assert.equal(measured.after_detach.pid,measured.pid);assert.equal(measured.after_detach.birth,measured.birth);assert.equal(measured.after_detach.tracer_pid,0);assert(measured.reader_closed&&measured.observer_memory_closed);
   assert(driverStderr.includes(Buffer.from('source_retention_observation_failed:native_observation_deadline')));
  }else{
   assert.equal(command.returncode,124);assert(command.duration>=40&&command.duration<43);assert(command.timeout_kill_reported);assert.equal(actor.signals_sent.length,0);
-  for(const key of ['after_detach','reader_closed','observer_memory_closed','failure_type'])assert(!(key in measured));assert.equal(evidence.metadata['source-observer-command.stdout'].bytes,0);
+  for(const key of ['after_detach','reader_closed','observer_memory_closed','failure_type','primary_failure'])assert(!(key in measured));assert.equal(evidence.metadata['source-observer-command.stdout'].bytes,0);
   assert(driverStderr.includes(Buffer.from('source_retention_command_exit:124')));
  }
  assert(status.restored&&!status.driver_alive&&['inactive','unknown'].includes(status.timer_state)&&['inactive','unknown'].includes(status.service_state));
@@ -303,6 +319,8 @@ try{
   for(const name of (productionProfile?['first-profile-stream','second-profile-stream']:['first-retention-stream','second-retention-stream'])){const fn=await api(`/api/services/${service.id}/functions`,{method:'POST',status:201,body:{name,config:{handler:'protected-retention-observation.handler',cpu:.5,memory_mib:128,timeout_seconds:10,idle_seconds:0,min_instances:1,max_instances:1,concurrency:1,queue_timeout_seconds:30,storage:{concurrency:'shared',data:{enabled:false,quota_mib:2},cache:{enabled:false,quota_mib:2}}}}});functions.push(fn);if(functions.length===2){const date=new Date(window*1000);fn.schedules=[{cron:`${date.getUTCMinutes()} ${date.getUTCHours()} * * *`,enabled:true,timezone:'UTC'}];}await save();fn.hash=await publish(fn);await promote(fn,fn.hash);}
   initial=await until(async()=>{const s=await capacity();return s.instances.length===2&&s.instances.every(v=>v.state==='ready')?s:false;},'two_warm_instances_missing');terminal(initial,0);assert.equal(initial.instances.reduce((n,v)=>n+v.cpu_nanos,0),1000000000);assert.equal(initial.instances.reduce((n,v)=>n+v.memory_mib,0),256);assert.equal(initial.containers.length,2);for(const c of initial.containers)assert(c.running&&c.cpu_nanos===500000000&&c.memory_bytes===128*1024**2);observations.push({scenario:'initial-warm-instances',native:initial});if(observerDeadline){const consumers=await deadlineConsumersBefore(initial);observations.push({scenario:'source-deadline-consumers-before',native:consumers});}
   if(observerDiagnostic){assert(Date.now()/1000<window-30,'preparation_margin_before_cron_exhausted');assert.equal(responses.length,0);observations.push({scenario:driverOverflow?'driver-output-before-boundary':'underfilled-history-before-boundary',window,native:initial});await save();return;}
+  // @verifies docs/BACKLOG.md#sls-133 | docs/INVOCATION_SOURCE_RETENTION_VOLUME.md#précontrôle-du-budget-de-production--sls-1335
+  if(!productionProfile){const sampled=Date.now()/1000,available=window-sampled;observations.push({scenario:'production-window-preflight',window,sampled_at:sampled,available_seconds:available,required_seconds:1980});assert(available>=1980,'production_window_too_short');}
   const perFunction=productionProfile?3000:5000;await streams(0,perFunction);assert.equal(responses.length,perFunction*2);before=await capacity();terminal(before,perFunction*2);assert.deepEqual(before.invocations.map(v=>v.id).sort(),responses.map(v=>v.id).sort());for(const fn of functions)assert.equal(responses.filter(v=>v.function_id===fn.id).length,perFunction);assert(Date.now()/1000<window-60,'production_margin_before_cron_exhausted');observations.push({scenario:productionProfile?'six-thousand-diagnostic-invocations':'ten-thousand-ordinary-invocations',window,native:before});await save();
  });
  if(driverOverflow){

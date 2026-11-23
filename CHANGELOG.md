@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-133.5/134.6 : précontrôle du budget1980s ajouté avant charge nominale ;
+  oracles35/detach recoupent les nouveaux champs et le vrai couple5/128.
+  Limites et calcul du cron conservés, traceback absent exigé aprèsSIGKILL40.
+  Revue et syntaxe passent ; refus réel, nominal et échéances restent à éprouver.
+
 - SLS-133/134 : nominal arrêté à9532réponses par la marge W−60 ; reprise
   indépendante et originaux entièrement recoupés, zéro groupe qualifié.
   Précontrôle1980s décidé avant code pour refuser tôt les fenêtres insuffisantes,
