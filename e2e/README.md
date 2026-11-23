@@ -2,6 +2,14 @@
 
 ## Journaux SLS-072 — qualification courante sur f016
 
+Le [rouge de saisie138](../docs/evidence/execution-journal-date-input-first-failed-dev-2026-11-23.json)
+arrête le replay diagnostic suivant enUI02. Le client
+`node e2e/execution-journal-date-browser-diagnostic.mjs` éprouve sept formes
+de FinUTC sur le vrai champ déployé : trois chaînes normalisées/refusées par
+Playwright et quatre formes acceptées, recherchées par GET réel avec période
+exacte. Même stdin SSO privé et purge physique partagée, deuxJPEG ciblées,
+zéro groupe qualifié. Ce diagnostic est préparé, pas encore exécuté.
+
 Le [checkpoint courant API12](../docs/evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
 passe au gel9702888/528sources. Le fullUI qui suit échoue en conservation après
 neuf succès ; [rouge137 scellé](../docs/evidence/execution-journal-ui-conservation-first-failed-dev-2026-11-23.json),

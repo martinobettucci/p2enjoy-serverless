@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-138 : client navigateur ciblé préparé pour sept formes de date natives,
+  quatre recherchesHTTP exactes et trois refus attendus du pilote, sur la
+  console déployée et sa propre fixture purgée. Qualification encore due.
+
 - SLS-138 inscrite : le diagnosticUI005f7724 échoue plus tôt sur fill(FinUTC),
   après UI01, avantUI07. Node1/cleanuptrue et uneJPEG conservée ; zéro groupe
   qualifié, refus de saisie à observer avant de choisir une correction.
