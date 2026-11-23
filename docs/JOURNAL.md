@@ -11395,3 +11395,47 @@ storage_io_error reste refusé. Cela précise une nouvelle assertion de diagnost
 sans retirer l’ancien503/marqueur/UUID/audit ni fabriquer une autre cause.
 Le protocole et les diagnostics sont en cours localement, sans code nouveau
 committé/déployé ou E2E acquise à ce checkpoint.
+
+### 23 novembre2026 — Barrière ordonnée et diagnostics réels implémentés localement
+
+Le helper garde un writer REGISTRY de confirmation aprèsprepared, libère
+CONTROL, observecommit puis SIGSTOP et vérifie naissance/étatT. Budget mesuré
+avantBEGIN et inférieur à1s, sans allonger25/3/5/35/110. Observationversion2,
+identité du writer de confirmation, synthèse temporelle, helperhold-lease et
+restitution de timer horodatée en monotone. Les journaux réels d’opération sont
+lus avant release ; classe stricte de transport sauf writer CONTROL dédié où
+le refusSQL avantRPC est distingué et corrélé à l’audit.
+
+Les cinqoptions diagnostiques ont leurs fichiers propres. Le clientprimaire
+et le fichier de rapport protégé reçoivent un vraiSIGTERM inattendu sur leur
+garde ; la ligne65537octets est une entrée invalide sansLF du vraihelper/SSH ;
+le refusSIGCONT utilise une identité effective sansdroit, sessions distinctes,
+root restauré et timer conservé. Les primaires et erreurs de sauvegarde sont
+émises comme métadonnées avant relance, sans remplacement par une erreur de
+diagnostic. Pas de nouvelle dépendance, image ou codeproduit modifié. ASTPython,
+node--check et diff--check0 ; code nonencorecommitté/déployé, aucune nouvelle E2E
+acquise. Revue puis contrôleurs/clôtures propres aux négatifs avant exécution.
+
+Les diagnostics émettent leur finalisation réelle avant l’écriture du rapport
+afin de conserver les flux natifs et purges même en EACCES ; la primaire est
+identifiée séparément sur stderr avant relance. Les événements ne rendent pas
+un rapport manquant ou un client1 réussi : le contrôleur doit vérifier ses
+attentes exactes et les preuves natives, avec zéro groupe fonctionnel.
+
+Anomalie de séquence : des ajustements de finalisation diagnostique et de
+documentation ont encore été écrits après le lancement de la première revue.
+Le principal l’a signalé et arrêté les éditions ; le relecteur a repris une
+photographie des septSHA puis relu ce second arbre stable, sans intervention
+de vérificateur ni E2E/service pendant cette séquence. Les SHA et le statut
+sont identiques avant/après cette seconde revue. Un seulP2 reste alors : le
+refusSIGCONT ne doit pas accepter d’autre erreur de finalisation que l’EPERM
+intentionnel et doit vérifier le GID restauré. Correction ensuite implémentée :
+liste exacte d’une erreur agent_continue/PermissionError/errno1, identitéinitiale
+UID/GID observée avant les fautes et comparaisonGID après restitution ; UID0
+toujours exigé. AST/Python et node--check0 ; dernière relecture de ce bloc avant
+checkpoint, aucune qualification nouvelle encore revendiquée.
+
+Dernière relecture ciblée sansP1/P2 : liste unique d’EPERM, UIDinitial/final0
+et GIDfinal égal à l’initial effectivement vérifiés. Aucune écriture ni E2E/
+opération distante du relecteur ; changement prêt au checkpoint de code,
+déploiement et nouveaux diagnostics/15/25/49/32 encore dus.

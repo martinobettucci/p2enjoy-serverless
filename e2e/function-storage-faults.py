@@ -7,6 +7,7 @@ from contextlib import closing,suppress
 import json
 import hashlib
 import os
+import pwd
 import re
 from pathlib import Path
 import select
@@ -41,6 +42,7 @@ def error_metadata(error):
     reason=str(error)
     return {'type':type(error).__name__,
             'reason':reason if re.fullmatch(r'[a-z_]{1,80}',reason) else 'operator_failure',
+            'errno':error.errno if isinstance(error,OSError)else None,
             'message_sha256':hashlib.sha256(reason.encode()).hexdigest()}
 
 
@@ -174,15 +176,16 @@ def clean_consumer(path):
 def recovery_guard(pid,delay=110):
     unit='serverless-resume-storage-'+uuid4().hex
     agent_identity=process_identity(pid);birth=agent_identity['birth']
-    program='''import json,os,signal,sys
+    program='''import json,os,signal,sys,time
 from pathlib import Path
 try:
  p=int(sys.argv[1]);fd=os.pidfd_open(p)
  try:
   state=Path('/proc',str(p),'stat').read_text().rsplit(')',1)[1].split()
   if state[19]==sys.argv[2]:
+   started=time.monotonic_ns()
    signal.pidfd_send_signal(fd,signal.SIGCONT)
-   print(json.dumps({'event':'storage-guard-resumed','function_id':sys.argv[3],'pid':p,'birth':state[19],'was_stopped':state[0] in ('T','t')}),flush=True)
+   print(json.dumps({'event':'storage-guard-resumed','function_id':sys.argv[3],'pid':p,'birth':state[19],'was_stopped':state[0] in ('T','t'),'signal_started_monotonic_ns':str(started),'signal_finished_monotonic_ns':str(time.monotonic_ns())}),flush=True)
  finally:os.close(fd)
 except (ProcessLookupError,FileNotFoundError):pass
 '''
@@ -200,10 +203,16 @@ if mode=='interrupt-guard':
     try:
         assert process_identity(pid)==target,'guard_identity_changed'
         arguments=Path('/proc',str(pid),'cmdline').read_bytes().split(b'\0')
-        assert str(Path(__file__).resolve()).encode() in arguments and b'commit' in arguments and identifier.encode() in arguments,'owned_commit_guard_required'
+        target_mode=sys.argv[4]if len(sys.argv)==5 else 'commit'
+        assert target_mode in ('commit','watchdog-resume-denied'),'interrupt_mode_invalid'
+        assert str(Path(__file__).resolve()).encode() in arguments and target_mode.encode() in arguments and identifier.encode() in arguments,'owned_commit_guard_required'
         signal.pidfd_send_signal(fd,signal.SIGTERM)
         emit({'event':'guard-interrupted','signal':'SIGTERM','helper':target})
     finally:os.close(fd)
+elif mode=='protocol-overflow':
+    emit({'event':'watching'});emit({'event':'invalid-line-started','bytes':65537,'line_feed':False,'helper':process_identity(os.getpid()),'function_id':identifier})
+    sys.stdout.buffer.write(b'!'*65537);sys.stdout.buffer.flush()
+    assert input_command()=='resume','protocol_diagnostic_command_invalid'
 elif mode=='registry-close-interruption':
     def interrupted(signum,frame):raise InterruptedError('operator_interrupted')
     signal.signal(signal.SIGTERM,interrupted)
@@ -274,6 +283,18 @@ elif mode=='audit-failure':
             value=json.loads(line)
             if value.get('event')=='audit.unavailable' and value.get('request_id')==request_id:matched.append(value)
     emit({'request_id':request_id,'audit_unavailable':len(matched)})
+elif mode=='resolution-evidence':
+    operation=str(UUID(sys.argv[3]));owner=rows(CONTROL,'SELECT function_id,decision FROM function_operations WHERE id=?',(operation,))
+    assert owner and owner[0]['function_id']==identifier and owner[0]['decision']=='commit','owned_commit_operation_required'
+    logs=subprocess.run(DOCKER+['logs','--tail','300','serverless-api'],text=True,capture_output=True,timeout=20);assert logs.returncode==0,'control_logs_failed'
+    matched=[]
+    for line in(logs.stdout+'\n'+logs.stderr).splitlines():
+        if line.startswith('{'):
+            value=json.loads(line)
+            if value.get('event')=='function.storage_pending'and value.get('operation_id')==operation:
+                code=value.get('error_code');assert isinstance(code,str)and re.fullmatch('[a-z_]{1,64}',code),'resolution_error_invalid'
+                matched.append({'event':value['event'],'operation_id':operation,'error_code':code})
+    emit({'event':'resolution-evidence','function_id':identifier,'operation_id':operation,'events':matched,'row_limit':300})
 elif mode=='guard-evidence':
     unit=sys.argv[3]
     assert re.fullmatch(r'serverless-resume-storage-[0-9a-f]{32}',unit),'invalid_guard_unit'
@@ -308,7 +329,7 @@ elif mode in ('write','read','hold-lease'):
     record_path=ROOT/'control'/('volume-api-client-'+consumer+'.json')
     fd=os.open(record_path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
     with os.fdopen(fd,'w') as stream:json.dump(record,stream);stream.flush();os.fsync(stream.fileno())
-    emit({'event':'consumer',**record})
+    emit({'event':'consumer',**record,'helper':process_identity(os.getpid())})
     try:
         lease=storage('acquire',function_id=identifier,consumer_id=consumer,installation_id=installation,configuration=before['configuration'])
         image=command(DOCKER+['inspect','--format','{{.Image}}','serverless-api'])
@@ -330,11 +351,12 @@ elif mode in ('write','read','hold-lease'):
             emit({'result':output})
     finally:
         clean_consumer(record_path)
-elif mode in ('prepare','commit','commit-database-busy','watchdog'):
+elif mode in ('prepare','commit','commit-database-busy','watchdog','watchdog-resume-denied'):
     pidfd=None;paused=False;writer=None;registry_writer=None;guard=None;observer=None
     primary=None;finalization_errors=[]
-    observation={'version':1,'mode':mode,'function_id':identifier,'namespace_id':function_owner['namespace_id'],
+    observation={'version':2,'mode':mode,'function_id':identifier,'namespace_id':function_owner['namespace_id'],
                  'phase':'starting','started_monotonic_ns':str(time.monotonic_ns()),'started_utc_ns':str(time.time_ns()),
+                 'operator_initial_identity':{'uid':os.geteuid(),'gid':os.getegid()},
                  'loops':{},'milestones':{},'signal_acknowledged':False}
     def phase(name):
         observation['phase']=name
@@ -352,8 +374,13 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
     def interrupted(signum,frame):raise InterruptedError('operator_interrupted')
     for signum in (signal.SIGHUP,signal.SIGTERM,signal.SIGINT):signal.signal(signum,interrupted)
     try:
-        pid=int(command(['systemctl','show','--property=MainPID','--value',UNIT]));pidfd=os.pidfd_open(pid)
-        guard=recovery_guard(pid,5 if mode=='watchdog' else 110)
+        pid=int(command(['systemctl','show','--property=MainPID','--value',UNIT]));agent_identity=process_identity(pid);pidfd=os.pidfd_open(pid)
+        assert process_identity(pid)==agent_identity,'agent_identity_changed'
+        observation['agent_identity']=agent_identity
+        if mode=='watchdog-resume-denied':
+            observation['agent_session_id']=os.getsid(pid);observation['helper_session_id']=os.getsid(0)
+            assert observation['agent_session_id']!=observation['helper_session_id'],'distinct_agent_session_required'
+        guard=recovery_guard(pid,5 if mode in('watchdog','watchdog-resume-denied')else 110)
         if mode in ('commit','commit-database-busy'):
             phase('observer_open')
             observer=ControlObserver(CONTROL);observer.open()
@@ -361,8 +388,8 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
             phase('registry_writer_begin');registry_writer=RegistryWriter();registry_writer.begin()
             emit({'event':'registry-writer-identity',**registry_writer.identity,'operator_uid':os.geteuid()})
         phase('watching');emit({'event':'watching'});deadline=time.monotonic()+25;operation=None
-        if mode=='watchdog':
-            signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True;phase('stop_sent');emit({'event':'paused','phase':'watchdog'})
+        if mode in('watchdog','watchdog-resume-denied'):
+            signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True;phase('stop_sent');emit({'event':'paused','phase':mode})
             action=input_command()
             if action=='kill-helper':os.kill(os.getpid(),signal.SIGKILL)
             assert action=='resume'
@@ -399,22 +426,42 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
                 if prepared_phase=='prepared':break
                 assert time.monotonic()<deadline,'prepared_not_observed'
                 time.sleep(.001)
-            phase('prepared_observed');signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True;phase('stop_sent')
+            phase('prepared_observed')
+            # Budget starts before BEGIN, conservatively bounding the actual
+            # write lock below the agent's real one-second SQLite busy timeout.
+            confirmation_started=time.monotonic_ns();confirmation_deadline=confirmation_started+1_000_000_000
+            observation['confirmation_gate']={'started_monotonic_ns':str(confirmation_started),'deadline_monotonic_ns':str(confirmation_deadline),'limit_ns':'1000000000'}
+            phase('confirmation_writer_begin');registry_writer=RegistryWriter();registry_writer.begin();phase('confirmation_writer_acquired')
+            assert time.monotonic_ns()<confirmation_deadline,'confirmation_gate_too_slow'
+            emit({'event':'confirmation-writer-identity',**registry_writer.identity,'operator_uid':os.geteuid()})
             phase('control_writer_close');writer.close();writer=None;phase('control_writer_closed')
             deadline=time.monotonic()+5
             phase('commit_wait');observation['loops']['commit']={'calls':0,'returns':0,'deadline_monotonic_ns':str(int(deadline*1e9))}
             while True:
+                assert time.monotonic_ns()<confirmation_deadline,'confirmation_gate_too_slow'
                 pending=reading('commit',lambda:observer.rows('SELECT decision FROM function_operations WHERE id=?',(operation,)))
                 observation['loops']['commit']['last_row_count']=len(pending)
                 observation['loops']['commit']['last_decision']=pending[0]['decision']if pending else None
                 if pending and pending[0]['decision']=='commit':break
                 assert time.monotonic()<deadline,'commit_not_observed'
                 time.sleep(.001)
+            phase('commit_observed');assert time.monotonic_ns()<confirmation_deadline,'confirmation_gate_too_slow'
+            signal.pidfd_send_signal(pidfd,signal.SIGSTOP);paused=True;phase('stop_sent')
+            while True:
+                state=Path('/proc',str(pid),'stat').read_text().rsplit(')',1)[1].split()
+                assert state[19]==agent_identity['birth'],'agent_identity_changed'
+                stopped_at=time.monotonic_ns();assert stopped_at<confirmation_deadline and time.monotonic()<deadline,'agent_stop_not_observed_in_budget'
+                if state[0]=='T':break
+                time.sleep(.001)
+            observation['signal_acknowledged']=True;observation['confirmation_gate'].update(stopped_monotonic_ns=str(stopped_at),blocking_window_ns=str(stopped_at-confirmation_started),agent_state=state[0])
+            phase('agent_stopped');phase('confirmation_writer_close');registry_writer.close();registry_writer=None;phase('confirmation_writer_closed')
             if mode=='commit-database-busy':
                 phase('busy_writer_begin')
                 writer=ControlWriter(CONTROL);emit({'event':'control-writer-identity',**writer.identity,'operator_uid':os.geteuid()})
         phase('acquired')
-        emit({'event':'paused','phase':mode,'operation_id':operation})
+        emit({'event':'paused','phase':mode,'operation_id':operation,
+              'agent_stop_acknowledged':observation['signal_acknowledged'],
+              'confirmation_gate':observation.get('confirmation_gate')})
         action=input_command()
         if action=='kill-control':
             row=(observer.rows('SELECT decision FROM function_operations WHERE id=?',(operation,)) if observer else
@@ -440,7 +487,18 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
         resumption={'result':'not_required'};may_disarm=True
         if pidfd is not None:
             def resume():
-                try:signal.pidfd_send_signal(pidfd,signal.SIGCONT)
+                try:
+                    if mode=='watchdog-resume-denied':
+                        account=pwd.getpwnam('nobody');original_uid=os.geteuid();original_gid=os.getegid()
+                        assert account.pw_uid not in(0,CONTROL.stat().st_uid),'unprivileged_identity_required'
+                        previous=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGHUP,signal.SIGTERM,signal.SIGINT})
+                        try:
+                            os.setegid(account.pw_gid);os.seteuid(account.pw_uid)
+                            resumption['signal_effective_uid']=os.geteuid();resumption['signal_effective_gid']=os.getegid()
+                            signal.pidfd_send_signal(pidfd,signal.SIGCONT)
+                        finally:
+                            os.seteuid(original_uid);os.setegid(original_gid);signal.pthread_sigmask(signal.SIG_SETMASK,previous)
+                    else:signal.pidfd_send_signal(pidfd,signal.SIGCONT)
                 except ProcessLookupError:resumption['result']='target_ended'
                 else:resumption['result']='continue_sent'
             if paused:
@@ -449,7 +507,7 @@ elif mode in ('prepare','commit','commit-database-busy','watchdog'):
         if guard and may_disarm:cleanup('timer_stop',lambda:command(['systemctl','stop',guard+'.timer']))
         try:emit({'event':'fault-finalization','completed':not finalization_errors,
                   'errors':[{k:v for k,v in issue.items()if k!='exception'}for issue in finalization_errors],
-                  'agent_resumption':resumption,'independent_guard_retained':bool(guard and not may_disarm),
+                  'agent_resumption':resumption,'independent_guard_retained':bool(guard and not may_disarm),'operator_uid':os.geteuid(),'operator_gid':os.getegid(),
                   'observation':observation,'finished_monotonic_ns':str(time.monotonic_ns()),'finished_utc_ns':str(time.time_ns())})
         except BaseException as error:finalization_errors.append({'step':'final_diagnostic',**error_metadata(error),'exception':error})
         if primary is None and finalization_errors:raise finalization_errors[0]['exception']

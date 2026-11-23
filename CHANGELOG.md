@@ -6,7 +6,8 @@
   protéger la confirmation par un writer REGISTRY réel et arrêter l’agent
   seulement après commit CONTROL observé ; borne dérivée du timeoutSQLite1s,
   journal storage_transport corrélé. Quatre diagnostics négatifs réels à zéro
-  groupe prévus pour primaire/restitution/protocole/rapport. Code et preuves dus.
+  groupe pour primaire/restitution/protocole/rapport. Code implémenté localement,
+  observationversion2, syntaxe contrôlée et revue sansP1/P2 ; déploiement et preuves dus.
   La classification du caswriter CONTROL occupé distingue son refusSQL avantRPC
   du vrai storage_transport ; UUIDopération/audit corrélés restent exigés.
 
@@ -18,7 +19,7 @@
   conservés. Une course prepared/ACK est établie statiquement dans le banc,
   sans attribution au rouge initial ; protocole àtraiter avant49. Unité ouverte.
 
-- SLS-146.2 : décision de diagnostic du banc persistée avant code : phases et
+- SLS-146.2, premier checkpoint6f : décision de diagnostic du banc persistée avant code : phases et
   compteurs natifs bornés, primaire/finalisation distinctes, identités àl’armement,
   vrais flux bornés et métadonnéesHTTP avantassertion. Observateurs/SQL/signaux/
   délais conservés ; instrumentation et trois correctionsP2 de revue implémentées,

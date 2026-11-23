@@ -6,7 +6,7 @@
 // @verifies docs/BACKLOG.md#sls-146 | docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#diagnostic-du-refus-de-commit-zip--sls-146
 // Real HTTPS administration, actual SSO session, host agent, Docker and process failures.
 import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,mkdtemp,cp,rm} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,mkdtemp,cp,rm,chmod,stat} from 'node:fs/promises';
 import {execFile,spawn} from 'node:child_process';
 import {promisify} from 'node:util';
 import {randomUUID,createHash} from 'node:crypto';
@@ -15,9 +15,17 @@ import path from 'node:path';
 import {request} from 'playwright';
 
 const run=promisify(execFile),root=fileURLToPath(new URL('../',import.meta.url));
-const diagnosticInterruption=process.argv[2]==='--diagnose-guard-interruption';
-assert(process.argv.length===2||(process.argv.length===3&&diagnosticInterruption),'Argument de campagne inconnu');
-const output=path.join(root,'.local/e2e'),report=path.join(output,diagnosticInterruption?'function-storage-guard-interruption.json':'function-storage.json');
+const diagnosticNames={
+  '--diagnose-guard-interruption':'guard-interruption',
+  '--diagnose-client-primary':'client-primary',
+  '--diagnose-resumption-refusal':'resumption-refusal',
+  '--diagnose-protocol-overflow':'protocol-overflow',
+  '--diagnose-primary-save-failure':'primary-save-failure',
+};
+const diagnosticMode=process.argv[2]?diagnosticNames[process.argv[2]]:null;
+assert(process.argv.length===2||(process.argv.length===3&&diagnosticMode),'Argument de campagne inconnu');
+const diagnosticInterruption=diagnosticMode==='guard-interruption';
+const output=path.join(root,'.local/e2e'),report=path.join(output,diagnosticMode?`function-storage-${diagnosticMode}.json`:'function-storage.json');
 const base='https://serverless.lelabs.tech',prefix='storage-api-'+randomUUID().slice(0,8);
 const ssh=['-o','BatchMode=yes','-o','ConnectTimeout=10','-J','ubuntu@51.158.54.202','root@10.77.0.24'];
 const helper='/srv/p2enjoy-serverless/e2e/function-storage-faults.py';
@@ -27,7 +35,7 @@ await writeFile(report,JSON.stringify({completed:false,cleanup:false,skipped:0})
 const state=JSON.parse(await readFile(path.join(output,'admin-session.json'),'utf8'));
 const admin=await request.newContext({baseURL:base,storageState:state,timeout:180000});
 const caller=await request.newContext({baseURL:base,timeout:180000});
-const checks=[],functions=[],tokens=[],faults=[],pending=[],storageArchives=[],cleanupErrors=[],requestOutcomes=[],invocations=[],publicationEvidence=[],finalizationFailures=[],diagnosticObservations=[];
+const checks=[],functions=[],tokens=[],faults=[],pending=[],storageArchives=[],cleanupErrors=[],requestOutcomes=[],invocations=[],publicationEvidence=[],finalizationFailures=[],diagnosticObservations=[],confirmationEvidence=[];
 let session,namespace,service,work,completed=false,needsStart=false,primaryFailure=null;
 
 async function call(url,{method='GET',body,bytes,token,headers={},status=200}={}) {
@@ -58,7 +66,17 @@ async function remote(mode,fn,extra=[]){
   const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,mode,...(fn?[fn.id]:[]),...extra],{timeout:120000,maxBuffer:1024*1024});
   return JSON.parse(stdout.trim().split('\n').at(-1));
 }
-function diagnostic(error){const location=String(error?.stack??'').match(/function-storage\.mjs:(\d+):(\d+)/);return {name:error?.name??'UnknownError',operator:error?.operator,source:location?{line:Number(location[1]),column:Number(location[2])}:undefined,message_sha256:createHash('sha256').update(String(error?.message??'')).digest('hex')};}
+function diagnostic(error){const location=String(error?.stack??'').match(/function-storage\.mjs:(\d+):(\d+)/);return {name:error?.name??'UnknownError',code:/^[A-Z0-9_]{1,64}$/.test(error?.code??'')?error.code:undefined,operator:error?.operator,source:location?{line:Number(location[1]),column:Number(location[2])}:undefined,message_sha256:createHash('sha256').update(String(error?.message??'')).digest('hex')};}
+async function verifyConfirmationFailure(fn,phase,response,{controlWriterBusy=false}={}){
+  assert.equal(response.headers['x-serverless-operation-id'],phase.operation_id);assert.equal(response.headers['x-serverless-function-id'],fn.id);
+  assert.equal(phase.agent_stop_acknowledged,true);assert.equal(phase.confirmation_gate.agent_state,'T');
+  assert(BigInt(phase.confirmation_gate.blocking_window_ns)<1_000_000_000n);
+  const native=await remote('resolution-evidence',fn,[phase.operation_id]);assert(native.events.length>0);
+  const allowed=controlWriterBusy?['storage_transport','control_database_unavailable']:['storage_transport'];
+  assert(native.events.every(v=>v.operation_id===phase.operation_id&&allowed.includes(v.error_code)));
+  const first=native.events[0].error_code;
+  confirmationEvidence.push({request_id:response.headers['x-request-id'],function_id:fn.id,operation_id:phase.operation_id,agent_stop_acknowledged:true,confirmation_gate:phase.confirmation_gate,failure_stage:first==='storage_transport'?'rpc-transport':'control-before-rpc',control_writer_busy:controlWriterBusy,native});
+}
 async function finalizing(action,finalizer,scope){
   let primary=null;
   try{return await action();}catch(error){primary=error;throw error;}
@@ -144,6 +162,8 @@ async function fault(mode,fn){
       assert.equal(identities.length,mode==='commit'?1:2);
       const registryIdentities=events.filter(row=>row.event==='registry-writer-identity');
       assert.equal(registryIdentities.length,1);identities.push(...registryIdentities);
+      const confirmationIdentities=events.filter(row=>row.event==='confirmation-writer-identity');
+      assert.equal(confirmationIdentities.length,1);identities.push(...confirmationIdentities);
       const observers=events.filter(row=>row.event==='control-observer-ready');assert.equal(observers.length,1);
       assert.equal(observers[0].autocommit,true);identities.push(...observers);
       for(const row of identities){assert(row.effective_uid>0);assert(row.effective_gid>0);assert.equal(row.operator_uid,0);
@@ -159,20 +179,49 @@ try{
   namespace=await object('/api/namespaces',{method:'POST',status:201,body:{name:prefix}});
   service=await object(`/api/namespaces/${namespace.id}/services`,{method:'POST',status:201,body:{name:'function-storage'}});
   let fn;
-  if(diagnosticInterruption){
-    fn=await create('guard-interruption');const before=await remote('inspect',fn);
-    const held=await fault('commit',fn);held.expectedTermination=true;
+  if(diagnosticMode){
+    fn=await create('diagnostic-'+diagnosticMode);const before=await remote('inspect',fn);
+    console.log(JSON.stringify({event:'diagnostic-resource',scenario:diagnosticMode,function_id:fn.id,namespace_id:namespace.id,service_id:service.id,report:path.basename(report)}));
+    if(diagnosticMode==='protocol-overflow'){
+      const held=await fault('protocol-overflow',fn);await held.wait('paused');
+      assert.fail('La ligne invalide ne doit pas acquérir de phase');
+    }
+    const nativeMode=diagnosticMode==='resumption-refusal'?'watchdog-resume-denied':'commit';
+    const held=await fault(nativeMode,fn);
+    held.expectedTermination=diagnosticInterruption||diagnosticMode==='resumption-refusal';
+    if(diagnosticMode==='resumption-refusal')await held.wait('paused');
     const armed=held.events.find(v=>v.event==='recovery-guard');assert(armed?.helper);
-    const interrupted=await remote('interrupt-guard',fn,[Buffer.from(JSON.stringify(armed.helper)).toString('hex')]);
+    console.log(JSON.stringify({event:'diagnostic-guard-armed',scenario:diagnosticMode,function_id:fn.id,guard:armed}));
+    if(diagnosticMode==='primary-save-failure'){
+      assert.notEqual(process.geteuid(),0,'Le refus d’écriture exige un client non root');
+      await chmod(report,0o400);const info=await stat(report);assert.equal(info.mode&0o777,0o400);assert.equal(info.uid,process.geteuid());
+      console.log(JSON.stringify({event:'diagnostic-report-protected',scenario:diagnosticMode,mode:info.mode&0o777,uid:info.uid,report:path.basename(report)}));
+    }
+    const interrupted=await remote('interrupt-guard',fn,[Buffer.from(JSON.stringify(armed.helper)).toString('hex'),nativeMode]);
     assert.equal(interrupted.signal,'SIGTERM');assert.deepEqual(interrupted.helper,armed.helper);
+    if(diagnosticMode==='client-primary'||diagnosticMode==='primary-save-failure'){
+      await held.wait('paused');assert.fail('La garde interrompue ne doit pas acquérir de phase');
+    }
     assert.equal(await held.done,1);
     const primary=held.events.find(v=>v.event==='fault-primary'),final=held.events.find(v=>v.event==='fault-finalization');
     assert.equal(primary.type,'InterruptedError');assert.equal(primary.reason,'operator_interrupted');
-    assert.equal(final.completed,true);assert.deepEqual(final.errors,[]);
-    assert.equal(held.events.at(-1).event,'fault-failed');assert.equal(held.events.at(-1).reason,'operator_interrupted');
-    assert(!held.events.some(v=>v.event==='preparation-observed'||v.event==='paused'));
+    if(diagnosticMode==='resumption-refusal'){
+      assert.equal(final.completed,false);assert.equal(final.independent_guard_retained,true);assert.equal(final.agent_resumption.result,'failed');
+      assert.deepEqual(final.errors.map(v=>({step:v.step,type:v.type,errno:v.errno})),[{step:'agent_continue',type:'PermissionError',errno:1}]);
+      assert(final.agent_resumption.signal_effective_uid>0);assert.equal(final.operator_uid,0);
+      assert.equal(primary.observation.operator_initial_identity.uid,0);
+      assert.equal(final.operator_gid,primary.observation.operator_initial_identity.gid);
+      await healthy();let evidence;
+      await until(async()=>{evidence=await remote('guard-evidence',fn,[armed.unit]);return evidence.events.length===1;},'independent_resumption_missing');
+      const resumed=evidence.events[0];assert.equal(resumed.was_stopped,true);
+      assert(BigInt(resumed.signal_started_monotonic_ns)>BigInt(final.finished_monotonic_ns));held.events.push(resumed);
+    }else{assert.equal(final.completed,true);assert.deepEqual(final.errors,[]);}
+    const failed=held.events.find(v=>v.event==='fault-failed');assert.equal(failed.reason,'operator_interrupted');
+    assert(held.events.indexOf(failed)>held.events.indexOf(final));
+    assert(!held.events.some(v=>v.event==='preparation-observed'));
+    if(diagnosticInterruption)assert(!held.events.some(v=>v.event==='paused'));
     const after=await remote('inspect',fn);assert.deepEqual(after.receipt,before.receipt);assert.equal(after.operation,null);assert.deepEqual(after.storage,before.storage);
-    diagnosticObservations.push({scenario:'real-guard-sigterm-without-mutation',status:'passed',native_exit:held.exitCode,primary_retained:true,finalization_completed:true,configuration_unchanged:true});
+    diagnosticObservations.push({scenario:diagnosticMode,status:'passed',native_exit:held.exitCode,primary_retained:true,finalization_completed:final.completed,independent_guard_retained:final.independent_guard_retained,configuration_unchanged:true});
     completed=true;
   }else{
   await check('Création HTTPS : quotas réellement publiés avant réponse et intention terminée',async()=>{
@@ -273,6 +322,7 @@ try{
     const held=await fault('commit',fn);const request=tracked(update(fn,volumes(5,3),{status:503}));
     await finalizing(async()=>{
       const phase=await held.wait('paused');const response=await finish(request);
+      await verifyConfirmationFailure(fn,phase,response);
       assert.equal(response.headers['x-serverless-mutation-committed'],'true');
       assert.equal(response.headers['x-serverless-operation-id'],phase.operation_id);
       assert.equal(response.headers['x-serverless-function-id'],fn.id);assert.match(response.data.error,/enregistrée/);
@@ -284,6 +334,7 @@ try{
     const held=await fault('commit-database-busy',fn);const request=tracked(update(fn,volumes(5,4),{status:503}));
     await finalizing(async()=>{
       const phase=await held.wait('paused');const response=await finish(request);
+      await verifyConfirmationFailure(fn,phase,response,{controlWriterBusy:true});
       assert.equal(response.headers['x-serverless-mutation-committed'],'true');
       assert.equal(response.headers['x-serverless-operation-id'],phase.operation_id);
       assert.equal(response.headers['x-serverless-function-id'],fn.id);assert.match(response.data.error,/enregistrée/);
@@ -318,6 +369,7 @@ try{
     const upload=tracked(call(`/api/deployments/${next.id}/artifact`,{method:'PUT',bytes,status:503}));
     await finalizing(async()=>{
       const phase=await held.wait('paused');const response=await finish(upload);
+      await verifyConfirmationFailure(fn,phase,response);
       assert.equal(response.headers['x-serverless-mutation-committed'],'true');
       assert.equal(response.headers['x-serverless-operation-id'],phase.operation_id);
       const candidateState=await object(`/api/deployments/${next.id}`);
@@ -379,15 +431,32 @@ try{
   for(const [scope,context]of [['admin_dispose',admin],['caller_dispose',caller]]){
     try{await context.dispose();}catch(error){cleanupErrors.push(scope+':'+error.name);finalizationFailures.push({scope,error:diagnostic(error)});}
   }
+  const faultResults=faults.map(f=>({mode:f.mode,function_id:f.functionId,expected_termination:f.expectedTermination,exit_code:f.exitCode,events:f.events,transport:f.transport()}));
+  if(diagnosticMode){
+    try{console.log(JSON.stringify({event:'diagnostic-finalization',version:1,scenario:diagnosticMode,functional_groups:0,
+      functions:functions.map(f=>f.id),namespace_id:namespace?.id,service_id:service?.id,
+      failure:primaryFailure?diagnostic(primaryFailure):null,cleanup_errors:cleanupErrors,finalization_failures:finalizationFailures,
+      storage_archives:storageArchives,faults:faultResults,final_health:finalHealth}));}
+    catch(error){finalizationFailures.push({scope:'diagnostic_finalization_output',error:diagnostic(error)});if(!primaryFailure)primaryFailure=error;}
+  }
   try{await writeFile(report,JSON.stringify({completed:completed&&!primaryFailure&&!cleanupErrors.length&&!finalizationFailures.length,cleanup:!cleanupErrors.length&&!finalizationFailures.length,
     failed:Number(!completed||Boolean(primaryFailure)||Boolean(cleanupErrors.length)||Boolean(finalizationFailures.length)),skipped:0,checks,cleanup_errors:cleanupErrors,functions:functions.map(f=>f.id),
-    namespace_id:namespace?.id,service_id:service?.id,requests:requestOutcomes,invocations,publication_evidence:publicationEvidence,
+    namespace_id:namespace?.id,service_id:service?.id,requests:requestOutcomes,invocations,publication_evidence:publicationEvidence,confirmation_failure_evidence:confirmationEvidence,
     failure:primaryFailure?diagnostic(primaryFailure):null,finalization_failures:finalizationFailures,
-    scope:diagnosticInterruption?'guard-interruption-diagnostic':'function-storage',functional_groups:diagnosticInterruption?0:checks.filter(v=>v.status==='passed').length,diagnostic_observations:diagnosticObservations,
+    scope:diagnosticMode?diagnosticMode+'-diagnostic':'function-storage',functional_groups:diagnosticMode?0:checks.filter(v=>v.status==='passed').length,diagnostic_observations:diagnosticObservations,
     pending_request_errors:pendingResults.filter(v=>v.error).map(v=>diagnostic(v.error)),
-    storage_archives:storageArchives,faults:faults.map(f=>({mode:f.mode,function_id:f.functionId,expected_termination:f.expectedTermination,exit_code:f.exitCode,events:f.events,transport:f.transport()})),final_health:finalHealth},null,2)+'\n');}
-  catch(error){finalizationFailures.push({scope:'report_save',error:diagnostic(error)});console.error(JSON.stringify({event:'report-save-failed',error:diagnostic(error),primary:primaryFailure?diagnostic(primaryFailure):null}));if(!primaryFailure)primaryFailure=error;}
-  if(primaryFailure)throw primaryFailure;
+    storage_archives:storageArchives,faults:faultResults,final_health:finalHealth},null,2)+'\n');}
+  catch(error){
+    finalizationFailures.push({scope:'report_save',error:diagnostic(error)});
+    try{console.error(JSON.stringify({event:'report-save-failed',error:diagnostic(error),primary:primaryFailure?diagnostic(primaryFailure):null}));}
+    catch(diagnosticError){finalizationFailures.push({scope:'report_save_diagnostic',error:diagnostic(diagnosticError)});}
+    if(!primaryFailure)primaryFailure=error;
+  }
+  if(primaryFailure){
+    try{console.error(JSON.stringify({event:'campaign-primary',error:diagnostic(primaryFailure),secondary_count:cleanupErrors.length+finalizationFailures.length}));}
+    catch(error){finalizationFailures.push({scope:'primary_diagnostic',error:diagnostic(error)});}
+    throw primaryFailure;
+  }
   assert.deepEqual(cleanupErrors,[],'Nettoyage de campagne incomplet');assert.deepEqual(finalizationFailures,[],'Finalisation de campagne incomplète');
 }
 console.log(JSON.stringify({completed:true,passed:checks.length,cleanup:true,failed:0,skipped:0}));

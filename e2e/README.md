@@ -27,6 +27,24 @@ et sauvegarde/finalisation en faute restent nonqualifiés E2E. Une course est
 établie statiquement dans le protocole : prepared peut précéder l’arrivéeRPC,
 sans attribution au rouge historique.49/32 ne sont pas acquis.
 
+La révision locale suivante de146 implémente la barrière ordonnée version2 :
+writer REGISTRY de confirmation, commit CONTROL observé, SIGSTOP/étatT prouvé
+en moins d’une seconde, puis libération du writer. Les réponses503 sont reliées
+au code réel de résolution ; le caswriter CONTROL occupé distingue le refusSQL
+avantRPC du transport indisponible. Syntaxe contrôlée, aucune qualification DEV
+encore acquise sur ces nouveaux octets. Synchroniser les deuxfichiers du banc
+et leur contrat avant le lancement, sans redéployer le produit.
+
+Les diagnostics distincts ajoutent `--diagnose-client-primary`,
+`--diagnose-resumption-refusal`, `--diagnose-protocol-overflow` et
+`--diagnose-primary-save-failure`. Le refus de reprise vérifie un vrai EPERM
+de SIGCONT puis le timer indépendant, avec client0 et native1 conservé.
+Les troisautres clients doivent terminer1 ; leurs contrôleurs et clôtures
+propres restent à livrer. Le dernier protège son seul rapport en0400 après
+l’écriture initiale ; restaurer ses permissions après jointure, sans modifier
+son contenu. Chaque diagnostic compte0groupe ; ils ne sont pas des commandes
+de remplacement du nominal15 ou des25communs.
+
 Le [ciblé de reprise145](../docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json)
 passe5nominaux puis25communs frais surba55881/530/f016. Quatregardes et
 troiscoupures137, troisfenêtres manquées sans invocation, claimed/linked

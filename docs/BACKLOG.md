@@ -6016,7 +6016,7 @@ d’observation conserve les observateurs et dépendances réels.
   de ce refus restent exclus. Aucun retour secondaire ne devient un succès.
 - [ ] SLS-146.5 Nouveau socle 49/543/18 depuis le début puis complément 32/276,
   avec leurs preuves propres ; aucun ancien partiel ou ciblé ne remplit ce total.
-- [ ] SLS-146.6 Diagnostics négatifs E2E distincts à zéro groupe : première
+- [~] SLS-146.6 Diagnostics négatifs E2E distincts à zéro groupe : première
   attente cliente interrompue préservée malgré finalisation, refus réel de
   SIGCONT et restitution par timer, ligne invalide65 537octets avantLF/EOF et
   EACCES réel de rapport. Conserver les clients1 attendus et leurs secondaires,
@@ -6064,3 +6064,10 @@ du timeoutSQLite. Métadonnées et vrai storage_transport de la même opération
 exigés. Quatre diagnostics négatifs réels complètent la primaire/restitution/
 protocole/rapport ; clients1 conservés et zéro groupe fonctionnel. Implémentation
 et preuves encore dues, puis nouveau15/25 et49/32 sans réutiliser les40 précédents.
+
+Le code local de la barrière version2 et des cinqoptions de diagnostic (dont
+l’interruption simple déjà connue) est implémenté, syntaxe contrôlée et revue
+sansP1/P2 résiduel. Les troisclients négatifs1 restent attendus comme
+échecs clients, sans promotion en groupe fonctionnel. Les nouveaux parcours
+et la fenêtreREGISTRY bornée n’ont encore aucune preuve DEV ; les40 restent
+attachés au code6f758b2.

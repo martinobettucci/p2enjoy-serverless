@@ -304,6 +304,26 @@ recoupe les purges et acteurs ; la clôture positive ne les accepte pas par
 défaut. Les quinze groupes, sept handlers et25communs repartent ensuite frais
 sur les nouveaux octets, puis49/32 ; le ciblé40 précédent garde son époque.
 
-Décision spécifiée avant code. Le protocole corrigé et ces diagnostics négatifs
-sont en cours dans l’arbre local ; aucun nouveau code committé/déployé ni preuve
-acquise sur ces octets à ce checkpoint.
+Le protocole corrigé et ces diagnostics sont implémentés dans l’arbre local,
+avec observation version2 ; AST/Python et node--check passent. La fenêtre de
+blocage est mesurée dès avant BEGIN, donc borne conservatrice de la détention.
+L’arrêt acquis exige l’étatT de la même naissance. Les identités du writer de
+confirmation et du helperhold-lease sont maintenant émises séparément.
+Les événements structurés de primaire et d’échec de sauvegarde conservent le
+même diagnostic d’exception avant relance, même si le rapport reste en lecture
+seule. Les sessions Linux distinctes de l’agent et du helper sont vérifiées
+avant le diagnostic de refusSIGCONT ; root est restauré dans le finally.
+
+Les options clientes sont `--diagnose-guard-interruption` (client0),
+`--diagnose-resumption-refusal` (client0 vérifiant la primaire native1 et son
+erreur secondaire), `--diagnose-client-primary`, `--diagnose-protocol-overflow`
+et `--diagnose-primary-save-failure` (ces trois clients doivent terminer1).
+Leurs rapports sont distincts et comptent zéro groupe ; le dernier peut ne
+conserver que le rapport initial, avec ressources/guardes et erreurs dans les
+vrais stdout/stderr. Le contrôleur doit vérifier et restaurer uniquement les
+permissions de ce fichier après jointure. Relecture sansP1/P2 résiduel ; aucun
+nouveau code déployé ni preuve acquise sur ces octets à ce checkpoint.
+Chaque diagnostic émet aussi sa finalisation réelle, flux natifs bornés et
+purges, sur stdout avant d’essayer la sauvegarde du rapport ; la primaire est
+identifiée sur stderr avant relance. Ces canaux permettent de qualifier le
+refus d’écriture sans prétendre qu’un rapport complet a été enregistré.
