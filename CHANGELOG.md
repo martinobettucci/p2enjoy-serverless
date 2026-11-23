@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-135.1 : échec terminalâge scellé sans requalification ; garde et journal
+  absents, seul dossier UUID vide retiré par rmdir après recoupement. Unité
+  échouée libérée, services/démarrages/config/5982 intacts et huitcompteurs0 ;
+  lecture procfs et vrais tests de correction encore à livrer.
+
 - SLS-135 : échec terminalâge avant garde, lecture /proc refusée EINVAL ;
   originaux strictement identiques, qualification incomplète. Unité dédiée
   inscrite avant correction et nettoyage du seul dossier stagiaire à recouper.

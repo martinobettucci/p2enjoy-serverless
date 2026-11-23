@@ -4917,7 +4917,7 @@ ou fin de processus doit être étayée par les primitives natives existantes ;
 une observation encore indisponible reste un refus nommé avant mutation.
 Aucun faux /proc, errno injecté, processus substitué ou succès conditionnel.
 
-- [ ] SLS-135.1 Sceller ce rouge et le stderr réel, constater l’absence de garde
+- [x] SLS-135.1 Sceller ce rouge et le stderr réel, constater l’absence de garde
   et de journal avant mutation, originaux strictement identiques et unitélocale
   terminée. Inspecter le seul dossier du nonce ; s’il est vide et de la bonne
   identité, retirer uniquement ce dossier par rmdir et conserver le reçu.
@@ -4934,3 +4934,5 @@ Aucun faux /proc, errno injecté, processus substitué ou succès conditionnel.
 La correction est interne au bancDEV autorisé ; aucun accès externe demandé.
 132.3/134.4 gardent leurs preuves partielles et attendent ce correctif pour
 achever les âges, sans relance aveugle ni publication du composite6 manquant.
+
+135.1 — [rouge et clôture extérieure scellés](evidence/retention-terminal-age-prearm-procfs-failed-dev-2026-11-23.json),526sourcesdd19196/f016 : premiergroupe terminalâge refusé avant toutévénement, OSError22 surmountinfo et cleanupclientfalse conservés. Garde/journal absents, dossierroot750/groupe1001 vide dont dev/inode revérifiés puis seulrmdir ; reçuJSONroot600 relu/haché. Unitélocale1/cgroupvide capturée puis reset de cette seuleunité. Services/démarrages/config/5982 strictement identiques et huitcompteurs0 aprèsclôture. Zéro groupe terminal acquis ; PID initial nonépinglé, aucune cause de mort attribuée. La correction135.2/135.3 reste à livrer avant replays135.4.

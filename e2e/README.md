@@ -3278,3 +3278,10 @@ passe ses troisgroupes sur526sourcesf9e3e4b/f016 :10496→10000/496retraits au
 curseur critique, puis fin du rattrapage et112pagesAPI au curseurD. Les deux
 vecteurs et leurs compteurs restent séparés, avec SHA/gzip/unité extérieure
 recoupés ; aucun handler nouveau ni groupe de clôture ajouté.
+
+Le [rouge terminalâge avant armement](../docs/evidence/retention-terminal-age-prearm-procfs-failed-dev-2026-11-23.json)
+conserve le client1/cleanupfalse et le stderr privé haché (EINVAL mountinfo).
+Sa clôture extérieure vérifie garde/journal absents, retire le seul dossier vide
+par rmdir et libère l’unitélocale/cgroup ; les originaux sont strictement
+recoupés. Aucun groupe terminalâge acquis, aucun composite6 publié. SLS-135
+porte la correction de cette lecture avant les prochains replays.
