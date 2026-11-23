@@ -4843,7 +4843,7 @@ benchmark noninstrumenté déduit. Les durées SQLite productives et des fonctio
 JSON/boucle proviennent de ce processus, pas du lecteurSQLRO. Un COMMIT n’est
 pas un syscall ; le temps de Database.transaction générateur ne comprend pas
 magiquement tout le corps yieldé, et les résumptions de coroutine ne deviennent
-pas un nombre d’invocations. Les durées client requête/headers/JSON restent des
+pas un nombre d’invocations. Les durées client avantPOST/réponsedisponible/validationJSON restent des
 intervalles composites ; aucun résidu n’est appelé temps réseau pur, ni aucune
 somme de cumtime chevauchantes présentée comme un totalCPU. La mesure réelle
 décidera de la portée acquise de133.2 ; ce choix d’instrument ne la clôt pas.
@@ -4857,3 +4857,17 @@ https://docs.python.org/3.14/library/profile.html et implémentationUvicorn0.54
 https://github.com/Kludex/uvicorn/blob/0.54.0/uvicorn/server.py . Le contrat dédié
 sera complété avant implémentation après fin du nominal488d0ab7, dont les526sources
 restent figées ; aucune instrumentation du passage actif.
+
+133.6 — précision avant code aprèsrevue : conserver seulement le code réel du
+processus cProfile, sans le présenter comme codeinterneapp : _Utils absorbe
+SystemExit et peut écrire un pstats valide après échec. Exiger séparément les
+marqueurs Uvicorn de démarrage et shutdown applicatif complets, puis Finished
+server process du PIDnamespace réellement relié au PIDhôte/naissance/cgroup ;
+refuser échec de lifespan/shutdown, timeout graceful, erreur de fermeture ou
+traceback. Finished seul est insuffisant. Fichier absent avantcepassage,
+créé/frais après le signal, identité/hash et validité dans le même runtime
+requises. Le timer par défaut de cProfile mesure du temps réel, pasCPU ; les
+cumuls restent chevauchants et la surcharge explicite. Côtéclient, horodater
+avantPOST, retour de awaitpost et fin de validationJSON ; le retourAPIResponse
+ne devient pas un instant isolé de réception des headers. Ces précisions
+résolvent le P2 contractuel ; aucune exécution ni implémentation133.6 acquise.

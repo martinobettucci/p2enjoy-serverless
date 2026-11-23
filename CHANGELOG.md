@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-133.6 : succès applicatif de fermeture et statistiques fraîches rendus
+  obligatoires séparément du code cProfile ; timer réel et intervalles client
+  nommés avec leur portée. Précision contractuelle avant code, aucune mesure acquise.
+
 - SLS-133.6 : profilage productif par cProfile standard décidé avant code,
   sur clone de même image et avec statistiques privées ; passage court puis
   6000HTTP, limites de mesure et fermeture réelles requis. Aucune instrumentation
