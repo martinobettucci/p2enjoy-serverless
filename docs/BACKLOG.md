@@ -5138,7 +5138,7 @@ terminées et originaux/config/référence/5982/huitcompteurs0 recoupés. Les de
 refus de collecte sont conservés séparément, sans nouvelle E2E. Les
 [12API acquises](evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
 gardent leur gel9702888/f016 ; UI est liée à leur génération après SIGKILL9/137.
-RevueRO sansP1/P2. Aucun commun exécuté ;137.2/.3 restent ouverts.
+RevueRO sansP1/P2. Aucun commun exécuté ;137.2 est acquis ci-dessous et137.3 reste ouvert.
 
 137.2 — décision avant instrumentation : le hash désigne l'attente de90s
 `journal_history_not_ready`, après invocation finale et archivage de fonction,
@@ -5178,7 +5178,8 @@ reste sur ce seul GET final. Le service neuf n'a pas le corpus ancien en cours
 d'expiration ; aucune temporisation, relance, tolérance de statut ou modification
 produit n'est ajoutée. Ce choix isole les deux responsabilités plutôt que de
 supposer qu'un relevé invalidé va devenir prêt. Le full10UI et les campagnes
-cohérentes doivent éprouver cette correction ;137.2/.3 restent ouverts jusque-là.
+cohérentes doivent éprouver cette correction : ciblé pour137.2, passage complet
+pour137.3, avec leurs preuves distinctes ci-dessous.
 
 137.2 — [scénario partagé corrigé acquis](evidence/execution-journal-policy-reference-replay-dev-2026-11-23.json),
 529sources9f7f9f6/f016. Perte réelle du PUT après commit, conflit, relecture,
