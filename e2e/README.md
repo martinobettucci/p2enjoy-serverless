@@ -1,5 +1,14 @@
 # Qualification de la plateforme
 
+Le cinquième socle courant s’arrête dans [SLS-145](../docs/BACKLOG.md#sls-145) :
+40campagnes/505groupes sur8b88e99/529sources/f016, puis deuxgroupes de reprise
+partiels ; clientSSHclaimed terminé255 avant gated, stderr vide, cause indéterminée.
+Worker1 finalisé et lanceurjoint, troisgardes restaurées et cleanuptrue ;
+recoupementnatif extérieur encore dû.108captures inspectées conservées.
+Aucun49 complet acquis et complément32 non lancé ; ne pas cumuler ces groupes
+avec un nouveau passage. L’ajout documentaire144/1f28365 reste séparé du gel.
+
+
 ## Journaux SLS-072 — qualification courante sur f016
 
 Le [quatrième rouge du socle49](../docs/evidence/schedules-storage-console-invocation-first-failed-dev-2026-11-23.json)

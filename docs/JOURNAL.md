@@ -10941,3 +10941,19 @@ n’est réécrit. Les collecteurs devront vérifier cette équivalence exacte p
 que refuser un ajout de backlog sans effet sur les sources mesurées. Les reçus
 de suivi à l’ouverture gardent leur SHA documentaire initial. Cette décision
 réversible préserve simultanément la demande immédiate et la vérité du gel.
+
+
+### 23 novembre2026 — Cinquième socle arrêté dans la reprise, SLS-145
+
+Worker3d3db540, sources8b88e99/529/f016 :40campagnes/505groupes puis
+deuxgroupes de reprise passent ; le troisième termine1, clientSSHclaimed255
+aprèsguard-armed/armed, gated non reçu et stderr vide. Rapport20b8deeb,
+cleanuptrue/sans erreur, troisgardes restaurées, linked non atteint. Worker1
+finalisé et lanceurjoint ; recoupementnatif extérieur encore dû.108captures
+fraîches inspectées, zéro49 complet et32 non lancé. SLS-145 est inscrite avant
+traitement. Décision : conserver premierrouge/transport et troisstderr, puis
+lire les seuls reçus/identités/journaux applicables de ce passage. Aucun retry,
+allongement, remplacement d’assertion ou cause supposée à partir du seul255.
+Le commit144/1f28365 reste une transition documentaire séparée : mêmes529
+fichiers aux deuxcommits et worktree, source de lancement8b88 préservée.
+Ce nouveau constat ne requalifie ni les anciensrouges ni leurs groupes.

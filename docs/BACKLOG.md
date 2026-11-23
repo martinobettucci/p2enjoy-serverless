@@ -75,6 +75,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-141](#sls-141) États de journal dans l'historique d'invocation | Corriger | `[~]` | SLS-061 | cette unité |
 | 3 | [SLS-142](#sls-142) Barrière après commit du transport de service | Corriger | `[~]` | SLS-031, SLS-108 | [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md) |
 | 3 | [SLS-143](#sls-143) Invocation réelle refusée dans le parcours de stockage | Corriger | `[~]` | SLS-065 | cette unité, [CONSOLE_STORAGE](CONSOLE_STORAGE.md) |
+| 3 | [SLS-145](#sls-145) Transport de reprise terminé sans barrière reçue | Corriger | `[~]` | SLS-078 | cette unité, [SCHEDULE_RECOVERY](SCHEDULE_RECOVERY.md) |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -5809,3 +5810,54 @@ Critères d'acceptation :
 DAT, bibliothèque Node et métadonnées de paquet, exemples et seed, API, manuel,
 `DESIGN_SYSTEM_APP.md`, déploiement et guide SPARK. Aucun mock, serveur de
 substitution ou donnée injectée pour remplacer une vraie sortie de job.
+
+
+<a id="sls-145"></a>
+## SLS-145 — Transport de reprise terminé sans barrière reçue
+
+Statut : [~]. Nature : Corriger (banc de preuve). Ordre : 3, préalable aux
+régressions de072.6 et au rattachement134.4. Dépend de : SLS-078.
+Contrat : cette unité et [SCHEDULE_RECOVERY](SCHEDULE_RECOVERY.md).
+
+Constat du23novembre2026 : le cinquième socle49, worker3d3db540 lancé sur
+8b88e99/529sources/f016, passe40campagnes/505groupes et neufprérequis.
+Dans schedule-recovery, la garde indépendante et les trois fenêtres manquées
+sans invocation suivies du tir normal passent. Le parcours après réclamation
+échoue ensuite dans schedule-recovery.mjs:22:189 : le clientSSH de cette garde
+termine255 après guard-armed/armed, sans événement gated conservé, avec stderr
+conservé vide. Le rapport exact est scheduled-functions-20b8deeb ; cleanuptrue,
+cleanup_errors[], troisgardes restaurées, quatrièmegarde liée non atteinte.
+Le worker termine1, son unité est arrêtée et son lanceurjoint ; la clôture
+native extérieure reste à recouper. Aucun défautproduit, causeSSH ou cause
+native n’est encore établi.505antérieurs/deuxgroupes de reprise partiels,
+zéro49complet et aucun32. Les108captures fraîches déjà inspectées restent
+propres à ce gel. L’ajout documentaire144/1f28365 pendant le passage conserve
+le source_commit8b88 et les mêmes529octets ; son reçu exact reste distinct.
+
+Décision avant diagnostic : sceller le premier échec, la fin réelle et les
+trois stderr exacts, puis lire les reçus de garde, identités et journaux natifs
+encore disponibles de cette seule campagne. Distinguer fin du transportSSH,
+fin de l’observateur et restauration ; ne pas déduire leur cause du seul255
+ou du stderr vide. Toute instrumentation ou correction ultérieure conserve
+les fenêtres existantes, les vraies coupures et l’absence de rejeu.
+
+- [ ] SLS-145.1 Conserver rapports/programmes/TAR529, transition documentaire144,
+  transport et résultats réels, trois stderr,505antérieurs/deuxgroupespartiels,
+ 108captures inspectées et leurs limites. Recouper troisgardes/restaurations,
+  purge physique, fin du worker/lanceur/cgroup dans le namespacehôte épinglé,
+  configuration/référence/5982originaux et réservations.
+- [ ] SLS-145.2 Établir les observations disponibles de la garde claimed par
+  UUID/PID/naissance/unité, phases/événements et journaux applicables ; nommer
+  toute observation perdue. Persister le diagnostic borné et la décision avant
+  l’instrumentation ou le correctif qui en dépend.
+- [ ] SLS-145.3 Corriger le défaut établi sans substituer la dépendance, retirer
+  de scénario, convertir255 en succès, ajouter un retry automatique ou allonger
+  arbitrairement les fenêtres. Conserver les trois coupures137, trois fenêtres
+  manquées sans invocation, états claimed/linked interrompus, tirs normaux
+  après reprise et quatre restaurations. Aucun correctif causal inventé si
+  les observations ne démontrent pas la cause.
+- [ ] SLS-145.4 Cinqgroupes ciblés complets puis25communs frais, captures
+  inspectées et clôtures recoupées ; nouveau49/543/18 depuisle début, puis
+  complément32/276. Ne réutiliser ni505antérieurs ni groupespartiels comme
+  réussite du socle ; les preuves de stockage143 et de transport142 restent
+  distinctes. Une preuve manquante laisse l’unité ouverte.

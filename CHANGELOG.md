@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- SLS-145 inscrite : cinquième socle8b88e99/529/f016 arrêté dans
+  schedule-recovery après505groupes/40campagnes et deuxgroupespartiels.
+  ClientSSHclaimed255 sans gated ni stderr, cause indéterminée ; troisgardes
+  restaurées et cleanuptrue. Worker1 finalisé/clientjoint ; recoupementnatif
+  extérieur et diagnostic encore dus.108captures inspectées conservées,
+  aucun49 complet ni32 lancé. Aucun correctifproduit revendiqué.
+
 - SLS-144 inscrite : rapports de jobs par bibliothèque Node, tables et graphiques
   nommés, ajout aux objets existants, conservation de la seule dernière valeur
   avec `history=false`, onglets Journaux/Dashboard et documentation du framework
