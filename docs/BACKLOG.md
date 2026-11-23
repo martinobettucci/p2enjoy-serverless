@@ -85,6 +85,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
+| 3 | [SLS-136](#sls-136) Portée réelle du profil Python et limites d’attribution | Corriger | `[~]` | SLS-040 | [INVOCATION_PRODUCTION_PROFILE](INVOCATION_PRODUCTION_PROFILE.md#portée-réelle-du-profiler--sls-136) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4760,14 +4761,15 @@ Chaque cas tourne dans sa seule unitéroot DEV oneshot180s/stop30s/KillModecontr
 
 133.7 — Constat inscrit avant correction : la ligne414 du client invocation-source-retention-volume.mjs nomme real_http_handlers le nombre de réponses de charge dans responses. Le stdout du vrai command-timeout078126da affiche0, tandis que le reçu natif prouve deux invocations running/handler_started (HTTP et cron). Ce compteur de charge ne compte pas les démarrages ; les sixgroupes134 restent recoupés depuis leurs vrais reçus, sans utiliser ce libellé. Clarification du résultatCLI à livrer avec133.6, aucun code modifié ni ancien rapport réécrit.
 
-133.6/.7 — Contrat courant complété avant code : deux options invocation-cost-profile=smoke/full, vrai clonef016 cProfile avec sortie privée horsquota, source gelée528, API identifiée sousTini/NSpid et SIGINTpidfd15s, shutdown applicatif distinct d’exit0. Parser mêmeimage sans labelinstallation, intention/CID durables et retrait dansrestore, pstats scellés ; SQLROcourantCROSS/4points, timingsclient en nschaînes et compteur de réponses nommé selon sa portée. Anciennevoie f73 et nominal conservés ; refus et deux passages courts acquis ci-dessous, full6000 et régressions restent à produire. Choix des noms et de l’isolation dérivé de la fonction/usage, sans profilENVPROD.
+133.6/.7 — Contrat courant complété avant code : deux options invocation-cost-profile=smoke/full, vrai clonef016 cProfile avec sortie privée horsquota, source gelée528, API identifiée sousTini/NSpid et SIGINTpidfd15s, shutdown applicatif distinct d’exit0. Parser mêmeimage sans labelinstallation, intention/CID durables et retrait dansrestore, pstats scellés ; SQLROcourantCROSS/4points, timingsclient en nschaînes et compteur de réponses nommé selon sa portée. Anciennevoie f73 et nominal conservés ; refus et deux passages courts acquis ci-dessous, plein6000 et release/EOF900 acquis depuis ; portée corrigée par136. Choix des noms et de l’isolation dérivé de la fonction/usage, sans profilENVPROD.
 
 133.6/.7 — [Sept refus et quatre groupes support courts](evidence/invocation-cost-short-schema011-dev-2026-11-23.json)
 qualifiés sur528sources3fd1473/f016. Smoke2 avec SQLROfinal2, API arrêtée en
 0,431704787s, shutdown et pstats frais/lisibles séparément ; parser-loss T/created
 puis reprise indépendante, CID retiré et originaux/5982/huitcompteurs0 conservés.
 Deux contrôleurs0 et clôtures externes ordonnées, revue des reçus sansP1/P2.
-Plein6000/quatrejalons, défaut release/EOF et campagnes globales restent dus.
+Plein6000/quatrejalons et release/EOF900 acquis depuis au geldc95781 ;
+portée du collecteur corrigée par136 et campagnes globales encore dues.
 Le contrat fixe avant code le pilote plein local2400/2300/2600, sans changement
 de garde2700 ni de fenêtre métier. Aucun groupe nominal ajouté.
 
@@ -4881,10 +4883,12 @@ lu dans le même runtimef016 ; brut privé scellé, projection publique limitée
 fonction/fichier/ligne, appels, durées exclusives/cumulées et liens de callers.
 Pas de locals/arguments/valeursSQL/headers/secret dans ces données.
 
-Le profil porte sur le thread principal et tout son cycle réel, préparation,
-6000appels, purges et shutdown compris ; sa surcharge est explicite, aucun
-benchmark noninstrumenté déduit. Les durées SQLite productives et des fonctions
-JSON/boucle proviennent de ce processus, pas du lecteurSQLRO. Un COMMIT n’est
+Le profil couvre le processus sur son cycle réel, préparation,
+6000appels, purges et shutdown compris, avec des événements de plusieurs threads
+et sans attribution par TID ou tâche ; sa surcharge est explicite, aucun
+benchmark noninstrumenté déduit. Les valeurs SQLite et JSON/boucle comptabilisées
+proviennent de ce profiler, pas du lecteurSQLRO ; ses arêtes ne ventilent pas
+fiablement le coût des chemins d’appel. Un COMMIT n’est
 pas un syscall ; le temps de Database.transaction générateur ne comprend pas
 magiquement tout le corps yieldé, et les résumptions de coroutine ne deviennent
 pas un nombre d’invocations. Les durées client avantPOST/réponsedisponible/validationJSON restent des
@@ -5027,3 +5031,30 @@ contrôles de reproduction, les huit noyau/deux HTTPS et les six âges courants,
 les cinq critères135 sont acquis : SLS-135 close. Les 25 communs produit,
 49/543/18 puis 32/276, autres consommateurs134 et mesures133 restent dus dans
 leurs propres unités.
+
+## SLS-136 — Portée réelle du profil Python et limites d’attribution
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-040. Ordre : 3.
+Contrat : [portée réelle](INVOCATION_PRODUCTION_PROFILE.md#portée-réelle-du-profiler--sls-136).
+
+Constat réel : le plein6000 c88abf87/dc95781/f016 passe ses deux groupes,
+quatre relevés SQL et ses clôtures. Sa projection contient6651fonctions,
+17689liens, sept fonctions et356liens dont self dépasse cumulative. Le tuple
+est décodé correctement. Elle inclut concurrent.futures.thread._worker et
+threading._bootstrap_inner : la mention « thread principal » est fausse.
+Python effectif3.14.10, GILactif et cProfile.pySHA32d908b9 sont lus depuis
+l’image ; le tag primaire ne prouve pas l’identité de tous les fichiers du build.
+La cause de chaque incohérence n’est pas établie. Cette unité corrige la portée
+annoncée, sans remplacer le profiler ni transformer ces données en ventilationCPU.
+
+- [ ] SLS-136.1 Sceller le plein6000, ses SQLRO/timings et restaurations avec
+  cette limite explicite ; conserver intégralement données, anomalies et rapports
+  natifs. Corriger la métadonnée éditoriale du reçu court en gardant son brut.
+- [ ] SLS-136.2 Corriger les métadonnées du collecteur et les documents :
+  callbacks à portée d’interpréteur, aucun TID/tâche attribué, temps réels bruts,
+  arêtes nonfiables pour ventiler les coûts. Nommer les incohérences observées
+  sans les réparer, masquer ou inventer leur cause ; bornes et produit inchangés.
+- [ ] SLS-136.3 Nouveau smoke2 E2E et perte réelle parser-loss sur ce collecteur,
+  lectures/fermetures/restaurations et métadonnées exactes recoupées ; relecture
+  du plein conservé, sans le présenter comme exécuté sur le nouveau collecteur.
+  La mesure causale133.2 et les campagnes de plateforme restent distinctes.

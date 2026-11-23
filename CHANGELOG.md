@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-136 inscrite avant correction : le plein6000 et les régressions release/EOF
+  passent, mais la portée « thread principal » du profiler est incorrecte.
+  Sept fonctions/356liens self>cum et workers présents ; données conservées,
+  attribution fine par arêtes suspendue. Contrat des métadonnées corrigées et
+  de leurs deux vrais passages fixé avant code.
+
 - SLS-133.6/.7 : sept refusCLI et quatre groupes support courts qualifiés sur
  528sources/f016. Smoke2, vrai shutdown0,432s, pstats lisibles et parser retiré ;
  perte pilote réelle après CIDdurable puis reprise indépendante. Deux contrôleurs0,

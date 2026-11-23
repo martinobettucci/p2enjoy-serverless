@@ -79,7 +79,7 @@ responses, qui contient les réponses de charge. Le vrai command-timeout
 invocation HTTP et une planifiée réellement démarrées. Cette synthèse ne doit
 pas présenter un compteur de réponses comme un nombre de démarrages observés.
 La synthèse est désormais nommée ordinary_http_responses et les deux passages
-courts réels l’éprouvent à2. Le plein6000 reste dû. Les rapports passés et leur
+courts réels l’éprouvent à2, puis le plein à6000. Les rapports passés et leur
 comptage de groupes restent intacts ; l’ancien libellé n’est pas utilisé pour
 qualifier les pannes134.
 
@@ -226,13 +226,16 @@ propriété du seul parser demeurent des refus, pas des effacements permissifs.
 
 ### Périmètre des mesures, compteur et qualification
 
-cProfile utilise son timer réel par défaut, pasCPU. Le profil couvre le thread
-principal et tout son cycle : préparation, appels, mesures, purges et shutdown.
-Sa surcharge est déclarée. Les cumtime se chevauchent ; leur somme n’est pas un
+cProfile utilise son timer réel par défaut, pasCPU. Le profil couvre le processus
+sur son cycle : préparation, appels, mesures, purges et shutdown, avec événements
+de plusieurs threads et sans attribution TID/tâche. La mention initiale « thread
+principal » est corrigée par136 ci-dessous. Sa surcharge est déclarée.
+Les cumtime se chevauchent ; leur somme n’est pas un
 CPUtotal et les résumptions de coroutine ne sont pas des invocations. Le temps
 du générateur Database.transaction n’inclut pas automatiquement le corpsyieldé.
-Les Cexecute productifs et leurs callers viennent de cette API ; les SELECTRO
-restent séparés. Les données réelles décideront de ce qui est établi en133.2.
+Les Cexecute et leurs callers viennent du profiler de cette API ; les SELECTRO
+restent séparés. Les arêtes ne constituent pas une ventilation fiable par chemin.
+Les données réelles décideront de ce qui est établi en133.2.
 
 Pour133.7, le seul compteur responses.length s’appelle ordinary_http_responses
 dans la synthèseCLI. Il ne devient jamais un nombre de handlers démarrés ;
@@ -305,5 +308,51 @@ laissent passer le diagnostic6000 dans sa fenêtre existante tout en terminant
 avant la garde2700 ; elles ne déplacent ni W30–35min, ni W−60, ni les délais
 opérateur ou applicatifs. Une frontière manquée reste rouge. Le wrapper plein
 est une nouvelle source privée gelée ; les pilotes exécutés restent immuables.
-Le plein/quatrejalons et release/EOF sans profilage restent à produire, puis
-nominal3, campagnes produit et autres consommateurs selon leurs contrats.
+Le plein/quatrejalons et release/EOF900 sans profilage passent dans leur gel
+dc95781. Leur analyse de portée est corrigée ci-dessous ; nominal3, campagnes
+produit et autres consommateurs restent dus selon leurs contrats.
+
+## Portée réelle du profiler — SLS-136
+
+Constat après le plein6000 réel, avant toute correction du collecteur : sept
+fonctions et356liens ont self_seconds supérieur à cumulative_seconds. Les deux
+copies de la projection sont identiques, le tuple nc,cc,tt,ct des callers est
+correctement décodé et le total_self est la somme des champs bruts. Conserver
+ces données sans les réordonner, réparer ni les transformer en ventilationCPU.
+La projection contient _worker et _bootstrap_inner ; plusieurs threads sont
+donc représentés. Aucun champ ne permet une attribution par TID ou tâche.
+
+Le module cProfile effectif est lu RO depuis f016 : Python3.14.10/GILactif,
+SHA32d908b9fbaa8366c35898e32efbd81a0c841bd813d70a5a1a465251e3497e7d.
+Son snapshot_stats confirme le format des tuples. Les sources primaires du
+tagv3.14.10 montrent set_events dans l’interpréteur, un contexte de profiler
+commun et la comptabilité de récursion/reprise ; elles confortent cette limite
+sans prouver la cause précise de chaque valeur ni l’identité binaire du build.
+Références : [cProfile](https://github.com/python/cpython/blob/v3.14.10/Lib/cProfile.py#L51),
+[_lsprof](https://github.com/python/cpython/blob/v3.14.10/Modules/_lsprof.c#L289),
+[événements](https://github.com/python/cpython/blob/v3.14.10/Python/instrumentation.c#L1919).
+La différence de ligne de _worker entre le profil et ce tag interdit de prétendre
+avoir recoupé tous les fichiers à partir de la seule chaîne de version.
+
+Décision avant code : garder cProfile et toutes les mesures natives, en nommant
+sa portée d’interpréteur sans décomposition thread/tâche. Ajouter à la projection
+measurement_scope et timing_consistency : horloge réelle, attribution par thread,
+tâche et chemin déclarée indisponible ; compte exact des fonctions/liens self>cum,
+aucune correction des valeurs. Le message du reçu externe reprend cette portée.
+Le scanner traverse les fonctions/callers déjà chargés sous les mêmes limites,
+sans nouveau processus, dépendance ou code applicatif. Les callbacks bruts ne
+deviennent ni durées de transactions, ni réseau pur, ni pourcentageCPU.
+
+Le reçu public court corrige sa seule phrase éditoriale « thread principal »,
+avec le motif et son unité ; son gzip et les rapports natifs restent identiques.
+Le reçu plein conserve les anciennes déclarations dans son brut et porte une
+correction explicite dans sa synthèse. Les deux groupes de charge/fermeture et
+les quatre régressions release/EOF900 restent acquis, sans ajouter de nominal.
+Les mesures SQLRO et intervalles client sont utilisables dans leur portée propre.
+
+Qualification du collecteur corrigé : smoke2 puis parser-loss réels, mêmes
+limites, image et origine des bibliothèques. Recouper les nouveaux champs avec
+toutes les fonctions/liens de la projection réelle, assertions client, retrait
+du parser, pstats scellés, originaux/config/5982/huitcompteurs0 et clôtures
+externes. Les rapports antérieurs restent dans leur gel3fd1473/dc95781 ; le
+plein6000 n’est ni refabriqué ni réputé rejoué sur ce correctif de métadonnées.

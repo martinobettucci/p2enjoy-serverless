@@ -10360,3 +10360,25 @@ afin d’accompagner6000HTTP dans la fenêtre déjà décidée sans prolonger sa
 frontière ni la garde2700. Nouveau pilote gelé, scripts exécutés immuables.
 Plein/quatrejalons et release/EOF restent dus ; le court n’attribue pas le
 ralentissement sous journal saturé et ne clôt pas133.
+
+### 23 novembre 2026 — Plein6000 acquis, portée du profiler à corriger
+
+Le vrai plein c88abf87/dc95781/f016 passe6000HTTP/quatreSQL et deux groupes
+diagnostiques ; API arrêtée en0,468942707s, pstats frais/lisibles, parser retiré,
+contrôleur0 et clôtures externes. Release puis EOF sans aucune option de durée
+ou profilage passent quatre groupes, vraies gardes900 et HTTPS, zéro secours,
+originaux/5982/huitcompteurs0 et cgroup externe recoupés.
+
+L’analyse révèle sept fonctions et356liens self>cum ; deux copies égales, tuple
+correct. _worker et _bootstrap_inner contredisent la portée « thread principal »
+que le contrat et le collecteur annonçaient. La lectureRO de cProfile.py effectif
+SHA32d908b9 confirme son format, Python3.14.10/GILactif. Le tag primaire fournit
+le mécanisme général de monitoring/récursion, sans prouver le build exact ni
+la cause de chaque valeur. Le lien tick→execute178,722s n’est pas une ventilation
+fiable ;633,751s execute demeure seulement une valeur comptabilisée du profiler.
+
+Décision136 persistée avant code : portée et limites explicites, comptage des
+anomalies sans altération, rapports natifs conservés, correction éditoriale du
+reçu court avec trace. Le plein et les SQLRO/client restent dans leur propre
+portée ; aucune sommeCPU ni réseau pur attribués. Nouveau smoke/perte pour les
+métadonnées, sans nouveau framework ni répétition artificielle du plein.

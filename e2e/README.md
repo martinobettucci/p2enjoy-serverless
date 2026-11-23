@@ -3369,7 +3369,10 @@ de réponses de charge validées. Sources/index528, images, originaux et clôtur
 sont recoupés par les deux passages courts : sept refusCLI et quatre groupes
 support, deux contrôleurs0/cgroups joints, statistiques lisibles sur le smoke
 et reprise indépendante après vraie perte du pilote sur parser-loss. Le plein
-6000/quatrejalons, release/EOF sans profilage et campagnes globales restent dus.
+6000/quatrejalons et release/EOF900 sans profilage passent aussi au geldc95781.
+Le profiler couvre plusieurs threads, sans attribution TID/tâche ; sept fonctions
+et356liens self>cum dans le plein interdisent une ventilation précise par arêtes.
+La correction des métadonnées136 et les campagnes globales restent dues.
 Le [reçu court](../docs/evidence/invocation-cost-short-schema011-dev-2026-11-23.json)
 ne qualifie aucun groupe nominal. Le pilote plein local est borné2400s, attente
 client2300s et contrôleur2600s ; garde2700 et W−60 restent inchangés.
