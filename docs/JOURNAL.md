@@ -11382,3 +11382,16 @@ diagnostique propres ; aucun groupe ajouté. Les clôtures négatives sont born�
 à leurs domaines explicites et ne passent pas dans le closer positif par défaut.
 Les15/25 frais puis49/32 restent requis sur le protocole corrigé. Ce checkpoint
 ne livre encore que la décision, sans code ni E2E de ces nouveaux chemins.
+
+Précision avant assertion cliente de classification : le caswriter CONTROL
+occupé peut empêcher le BEGIN IMMEDIATE initial de FunctionOperations._resolve,
+avant toutRPC ; le code produit capture alors control_database_unavailable.
+S’il a déjà passé ce BEGIN, la pause donne storage_transport. Ce sont deux
+refus réels distincts du scénario d’audit occupé ; seul le second est un
+timeoutRPC. Décision : enregistrer le premier code du même UUIDopération et
+exiger l’audit indisponible du même UUIDHTTP ; accepter uniquement ces deux
+causes dans ce cas dédié, storage_transport strict dans les deux autres cas.
+storage_io_error reste refusé. Cela précise une nouvelle assertion de diagnostic,
+sans retirer l’ancien503/marqueur/UUID/audit ni fabriquer une autre cause.
+Le protocole et les diagnostics sont en cours localement, sans code nouveau
+committé/déployé ou E2E acquise à ce checkpoint.

@@ -6008,6 +6008,9 @@ d’observation conserve les observateurs et dépendances réels.
   La barrière de confirmation doit observer le commit CONTROL avant SIGSTOP,
   protéger la confirmation par un writer REGISTRY réel et prouver l’arrêt sous
   la borne dérivée du timeout SQLite agent ; journal storage_transport corrélé.
+  Le cas dédié au writer CONTROL occupé distingue aussi son refus réel
+  control_database_unavailable avantRPC et l’audit indisponible, sans le
+  présenter comme un timeoutRPC ni accepter un503 quelconque.
 - [~] SLS-146.4 Quinze groupes de stockage complets puis 25 communs frais,
   captures inspectées et clôtures recoupées sur le code déployé. Les 13 partiels
   de ce refus restent exclus. Aucun retour secondaire ne devient un succès.

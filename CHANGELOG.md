@@ -7,6 +7,8 @@
   seulement après commit CONTROL observé ; borne dérivée du timeoutSQLite1s,
   journal storage_transport corrélé. Quatre diagnostics négatifs réels à zéro
   groupe prévus pour primaire/restitution/protocole/rapport. Code et preuves dus.
+  La classification du caswriter CONTROL occupé distingue son refusSQL avantRPC
+  du vrai storage_transport ; UUIDopération/audit corrélés restent exigés.
 
 - SLS-146 : [ciblé40](docs/evidence/storage-mutation-diagnostics-current-dev-2026-11-23.json)
   sur6f758b2/530/f016, diagnosticSIGTERM0groupe puis15stockage/25communs frais.

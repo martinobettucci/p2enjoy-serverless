@@ -265,10 +265,17 @@ strictement inférieure à cette seconde : un dépassement échoue le banc et
 déclenche les restitutions, sans annoncer une confirmation perdue acquise.
 La borne5s de commit reste un plafond, sans allongement ; l’attente d’arrêt
 partage ces bornes. Un verrou détenu trop longtemps pourrait sinon produire
-`storage_io_error` avant la pause. Les trois scénarios de confirmation perdue
-exigent aussi le vrai journal `function.storage_pending / storage_transport`
-de leur opération, lié aux en-têtes de réponse et à la garde. Un503 provenant
-d’une autre panne n’est pas un substitut. Garder le timer indépendant si la
+`storage_io_error` avant la pause. Les scénarios de confirmation perdue sans
+writer CONTROL de faute exigent aussi le vrai journal
+`function.storage_pending / storage_transport` de leur opération, lié aux
+en-têtes de réponse et à la garde. Le scénario dédié au writer CONTROL occupé
+classe séparément son premier refus : `storage_transport` si le RPC est déjà
+parti, ou `control_database_unavailable` si le writer empêche la transaction
+initiale de `_resolve`, avant RPC. Ce second chemin prouve la confirmation et
+l’audit indisponibles côté contrôle ; il n’est pas compté comme un timeoutRPC.
+Les journaux doivent nommer le code réellement observé et l’audit indisponible
+du même UUIDHTTP ; aucun `storage_io_error` ou503 indifférencié n’est accepté.
+Garder le timer indépendant si la
 restitution SIGCONT échoue ; les autres fermetures restent tentées.
 
 Éprouver les branches encore manquantes par des diagnostics séparés sur les
@@ -298,4 +305,5 @@ défaut. Les quinze groupes, sept handlers et25communs repartent ensuite frais
 sur les nouveaux octets, puis49/32 ; le ciblé40 précédent garde son époque.
 
 Décision spécifiée avant code. Le protocole corrigé et ces diagnostics négatifs
-ne sont pas encore implémentés ni qualifiés à ce checkpoint.
+sont en cours dans l’arbre local ; aucun nouveau code committé/déployé ni preuve
+acquise sur ces octets à ce checkpoint.
