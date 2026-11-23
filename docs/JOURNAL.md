@@ -10720,3 +10720,14 @@ Revue141 stabilisée : aucunP1/P2 sur les nouveaux oracles, le rouge et les
 quatrepilotes. Relevé externe de l'unité active/PID/naissance/cgroup confirmé
 avant toute saisieSSO pour UI etcommuns ; le closer le refuse s'il manque.
 La revue ne compte aucun test exécuté. Gel/synchronisation puis preuves37restentdus.
+
+### 23 novembre 2026 — Synchronisation141 reprise après garde de référence
+
+Le premier update refuse docs/CONSOLE_EXECUTION.md avant touteécriture : ce
+fichier documentaire horsvecteur n'avait pas d'empreinte dans le reçu local.
+La lectureRO distante donne63b8b461, strictement le blobGit1f4c512 antérieur à
+la décision141. Référence initialisée seulement après cetteégalité, refus1
+conservé comme transcription exacte de l'outil dans un reçu privé, zéro groupe.
+Le mêmeupdate strict passe ensuite ses septfichiers avec sauvegarde/atomique ;
+aucune image/service/configuration modifiée. Codefd6d021 poussé, aucunE2E de
+reprise déjàdéclaré. Le prochain pilote fige le nouveau529 synchronisé.
