@@ -6,6 +6,8 @@
 // @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 // @spec docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md
 // @verifies docs/BACKLOG.md#sls-061 | docs/CONSOLE_EXECUTION.md#preuves-attendues
+// @spec docs/BACKLOG.md#sls-141 | docs/EXECUTION_CONSOLE_WARMUP.md#parité-de-collecte-sur011--sls-141
+// @verifies docs/BACKLOG.md#sls-141 | docs/EXECUTION_LOGS.md#modèle-et-migration-011
 // Real browser, SSO session, packaged original handler and Docker observations.
 import {enterNamespaces} from './console-navigation.mjs';
 import assert from 'node:assert/strict';
@@ -64,10 +66,22 @@ async function observationAction(action) {
   return data;
 }
 async function tab(name){const action=()=>page.getByRole('navigation',{name:'Fonction',exact:true}).getByRole('link',{name,exact:true}).click();if(name==='Configuration'){await action();await page.getByRole('button',{name:'Modifier l’exécution',exact:true}).waitFor();}else return observationAction(action);}
-async function refresh(){await observationAction(()=>region().getByRole('button',{name:/^(Actualiser|Réessayer)$/}).click());}
+async function refresh(){return observationAction(()=>region().getByRole('button',{name:/^(Actualiser|Réessayer)$/}).click());}
 async function changePage(name){await observationAction(()=>region().getByRole('button',{name,exact:true}).click());await until(()=>region().getByRole('heading',{level:2}).evaluate(node=>document.activeElement===node),'Focus de pagination absent',5);}
 const item=id=>page.getByRole('article',{name:`Invocation ${id}`,exact:true});
 async function open(id){const row=item(id);await row.locator('summary').click();return row;}
+// @spec docs/BACKLOG.md#sls-141 | docs/CONSOLE_EXECUTION.md#présentation
+// @verifies docs/BACKLOG.md#sls-141 | docs/EXECUTION_LOGS.md#modèle-et-migration-011
+async function observeCollection(data,id,scenario){
+  const matches=data.items.filter(row=>row.id===id);
+  evidence.push({scenario,requested_invocation_id:id,matches:matches.map(row=>({
+    id:row.id,state:row.state,http_status:row.http_status,logs_collection_state:row.logs_collection_state,
+    logs_truncated:row.logs_truncated,logs_present:Object.hasOwn(row,'logs'),logs_type:typeof row.logs,
+    logs_utf8_bytes:typeof row.logs==='string'?Buffer.byteLength(row.logs,'utf8'):null,
+    logs_sha256:typeof row.logs==='string'?createHash('sha256').update(row.logs).digest('hex'):null,
+  }))});
+  await save();assert.equal(matches.length,1,'Une seule invocation attendue dans le vrai GET navigateur');return matches[0];
+}
 async function capture(name){await page.evaluate(()=>window.scrollTo(0,0));const filename='execution-ui-'+name+'.jpg';const bytes=await page.screenshot({path:path.join(output,filename),type:'jpeg',quality:85,fullPage:true});captures[filename]=createHash('sha256').update(bytes).digest('hex');}
 async function operator(mode,extra=[]){const {stdout}=await run('ssh',[...ssh,'python3','-B',helper,mode,functionId,...extra],{timeout:90000,maxBuffer:1024*1024});const value=JSON.parse(stdout.trim());evidence.push({operator:mode,value});return value;}
 async function writer(){
@@ -146,8 +160,10 @@ try {
   let logId,longId,errorId,businessId;
   await check('Historique réel : page pleine, journal vide, erreur et HTTP métier séparés',async()=>{
     await invoke();logId=await invoke({action:'logs'});errorId=await invoke({action:'error'},502);businessId=await invoke({status:503},503);longId=await invoke({action:'many-logs'});
-    await tab('Invocations');assert.equal(await rows().count(),5);assert.equal(await region().getByRole('button',{name:'Suivante',exact:true}).getAttribute('aria-disabled'),'true');
-    const business=await open(businessId);assert(await business.getByText('Terminée',{exact:true}).isVisible());assert((await business.innerText()).includes('HTTP 503'));await business.getByText('Aucun journal collecté.',{exact:true}).waitFor();
+    const data=await tab('Invocations');assert.equal(await rows().count(),5);assert.equal(await region().getByRole('button',{name:'Suivante',exact:true}).getAttribute('aria-disabled'),'true');
+    const collected=await observeCollection(data,businessId,'business-empty-collected-browser-dto');
+    assert.equal(collected.state,'succeeded');assert.equal(collected.http_status,503);assert.equal(collected.logs,'');assert.equal(collected.logs_collection_state,'collected');
+    const business=await open(businessId);assert(await business.getByText('Terminée',{exact:true}).isVisible());assert((await business.innerText()).includes('HTTP 503'));await business.getByText('Collecte confirmée : aucun message émis.',{exact:true}).waitFor();assert.equal(await business.locator('pre').count(),0);await capture('collected-empty');
     const error=await open(errorId);await error.getByText('Échec',{exact:true}).waitFor();await error.getByText('handler_error',{exact:true}).waitFor();
     assert(!(await page.locator('body').innerText()).includes(secret));
   });
@@ -170,7 +186,9 @@ try {
     const active=start({action:'delay',ms:12000});
     const row=await until(async()=>{const values=await history();return values.find(value=>value.state==='running'&&value.handler_started===true);},'Appel actif non observé');
     await refresh();const displayed=await open(row.id);await displayed.getByText('En cours',{exact:true}).waitFor();await displayed.getByText('Oui',{exact:true}).waitFor();await displayed.getByText('Journaux disponibles à la fin de l’invocation.',{exact:true}).waitFor();await capture('running');
-    const rejected=await invoke({},429);await refresh();const refusal=await open(rejected);await refusal.getByText('Refusée',{exact:true}).waitFor();await refusal.getByText('Non',{exact:true}).waitFor();
+    const rejected=await invoke({},429);const data=await refresh();const notStarted=await observeCollection(data,rejected,'rejected-not-started-browser-dto');
+    assert.equal(notStarted.state,'rejected');assert.equal(notStarted.http_status,429);assert.equal(notStarted.logs,'');assert.equal(notStarted.logs_collection_state,'not_started');
+    const refusal=await open(rejected);await refusal.getByText('Refusée',{exact:true}).waitFor();await refusal.getByText('Non',{exact:true}).waitFor();await refusal.getByText('Aucun journal d’application : cet appel n’a pas été envoyé au runtime.',{exact:true}).waitFor();assert.equal(await refusal.locator('pre').count(),0);await capture('collection-not-started');
     assert.equal((await active).status,200);
   });
   await check('Import réel retardé : démarrage non confirmé puis terminé',async()=>{
@@ -186,6 +204,9 @@ try {
       assert(await page.getByText('0,05 CPU',{exact:true}).isVisible());assert(await page.getByText('128 Mio',{exact:true}).isVisible());await capture('metrics-unavailable');}
     finally{await guard.release();}
     assert.equal((await active).status,503);await until(async()=>(await manage(`/api/functions/${functionId}/instances`)).total===0,'Réservation interrompue non libérée');
+    const data=await tab('Invocations');const unavailable=await observeCollection(data,row.id,'runtime-loss-unavailable-browser-dto');
+    assert.equal(unavailable.state,'failed');assert.equal(unavailable.http_status,503);assert.equal(unavailable.logs,'');assert.equal(unavailable.logs_collection_state,'unavailable');
+    const interrupted=await open(row.id);await interrupted.getByText('Échec',{exact:true}).waitFor();await interrupted.getByText('Collecte indisponible : aucun buffer final valide reçu du runtime.',{exact:true}).waitFor();assert.equal(await interrupted.locator('pre').count(),0);await capture('collection-unavailable');await tab('Instances');
   });
   await check('Session absente : refus réel et reprise de la session autorisée',async()=>{
     await tab('Invocations');const cookies=await context.cookies(base);await context.clearCookies();

@@ -66,6 +66,16 @@ sur [SLS-141](../docs/BACKLOG.md#sls-141) dans execution-ui :272groupes partiels
 quatreUI partiels et troisprérequis, aucun passage49 complet. Les parcours
 historiques et la nouvellecampagne restent dus.
 
+Le [rougeUI courant141](../docs/evidence/schedules-execution-ui-log-state-first-failed-dev-2026-11-23.json)
+conserve les272groupes partiels, quatreUI partiels et18captures inspectées,
+source470b6ea/529/f016 ; natif et purge physique recoupés. Le client corrigé
+conserve le vrai DTO navigateur avant ses assertions et exige le libellé011
+correspondant. Les scénarios existants de refus et perte du runtime recoupent
+aussi not_started/unavailable ; troisJPEG supplémentaires, soit15 pour12groupes.
+Les pilotesUI1800/60/2000 et communs3600/60/3800 conservent vraisretours,
+PID/naissance/cgroups, sources et captures. Ces12UI/25communs restent à exécuter,
+puis le49 entier ; la preuve105/b452 garde son époque et les anciens reçus.
+
 ### Historique des préparations et campagnes précédentes
 
 [EXECUTION_LOGS](../docs/EXECUTION_LOGS.md#découpage-et-qualification-réels)

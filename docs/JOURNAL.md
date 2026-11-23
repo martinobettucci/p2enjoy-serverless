@@ -10698,3 +10698,25 @@ les champspublics, taille/SHA du buffer, aucun contenu/cookie/secret enregistré
 puis49entier. Réutilisation explicite des collecteurs sans qualifier un UI enAPI,
 aucune modification de produit/image/configuration ou délai. Contratconsole
 corrigé sur le sens déjà déployé de collecte vide, ancienne preuve105 intacte.
+
+### 23 novembre 2026 — Correctif du client141 prêt pour les vrais replays
+
+Le client conserve le DTO du GETnavigateur dans une projection sans buffer,
+avec taille/SHA avantassertion. L'appel métier503 exige succeeded/collected/
+logsvides puis nouveau texte et aucunpre. Les scénarios existants de refus429
+et perte du runtime exigent not_started/unavailable et leurs textes ; retour
+àInstances après cette dernière lecture conserve le départ du groupe suivant.
+TroisJPEG ajoutées, douze groupes et tous les autres oracles conservés.
+SyntaxeNode et quatrepilotesPython valides ; aucun E2E encoreexécuté surcecorrectif.
+
+PiloteUI séparé : deuxvraiesSSO avantNode, ancienrapport/images conservés,
+TAR529+wrapper et sortiesprivées, nouvelles15JPEG et purgephysique recoupées.
+Les25communs reprennent le collecteur42backend/quatreweb existant et sont
+liés explicitement au reçuUI12. Contrôleursexec et clôturesexternes sérielles,
+aucun reçuAPI fabriqué, aucun produit/image/configuration changé. Revue puis
+synchronisation/gel et12UI/25communs, avant de reprendre49depuisle début.
+
+Revue141 stabilisée : aucunP1/P2 sur les nouveaux oracles, le rouge et les
+quatrepilotes. Relevé externe de l'unité active/PID/naissance/cgroup confirmé
+avant toute saisieSSO pour UI etcommuns ; le closer le refuse s'il manque.
+La revue ne compte aucun test exécuté. Gel/synchronisation puis preuves37restentdus.
