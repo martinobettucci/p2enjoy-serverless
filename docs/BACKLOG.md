@@ -98,6 +98,7 @@ bloquée est sautée et son blocage est nommé.
 | 6 | [SLS-113](#sls-113) Pagination des lectures de console pendant erreur et chargement | Corriger | `[ ]` | SLS-065 | [CONSOLE_PAGINATION_STATES](CONSOLE_PAGINATION_STATES.md) |
 | 6 | [SLS-102](#sls-102) Espacement des quantités du manuel du testeur | Corriger | `[ ]` | SLS-062 | cette unité |
 | 6 | [SLS-131](#sls-131) Détail réseau lisible dans la conservation | Corriger | `[ ]` | SLS-072 | cette unité |
+| 6 | [SLS-139](#sls-139) Navigation latérale avec texte agrandi | Corriger | `[ ]` | SLS-067 | cette unité |
 | 7 | [SLS-073](#sls-073) Monitoring historique et alertes | Développer | `[ ]` | SLS-072, SLS-078 | [CONSOLE_USABILITY](CONSOLE_USABILITY.md#monitoring-et-alertes) |
 | 8 | [SLS-084](#sls-084) Runtimes supplémentaires | Développer | `[ ]` | SLS-083 | [SCALEWAY_PARITY](SCALEWAY_PARITY.md) |
 | 8 | [SLS-086](#sls-086) Répartition du trafic entre versions | Développer | `[ ]` | SLS-074, SLS-073 | [FUNCTION_VERSIONS](FUNCTION_VERSIONS.md) |
@@ -5192,6 +5193,20 @@ Zéro groupe complet ;137.2 acquis pour le refus410 établi et la séparation
 de protocole éprouvée, sans prétendre retrouver son sous-code ancien.137.3
 reste ouverte pour API12→full10UI→25communs courants, puis suites49/32 distinctes.
 
+137.3 — les47groupes courants passent sur529sources1c706f0/f016 et leurs
+trois unités sont closes,44images inspectées. Le premier publisher refuse
+enligne21 (outil778a70/code1) avant écriture publique : il exige helper_gone=true
+sur toutes les restitutions natives. Le sourceSQLrestore affecte ce champ au
+booléen rescue, donc false pour une restitution nominale opérateur ; le client
+joint séparément son transport puis exige reçucompleted/healthy/limitesrendues
+et gardes inactives. Décision avant nouveau publisher : garder le champ natif
+exact et sa portée, vérifier ces preuves distinctes de jonction ; pour une
+perte provoquée exiger son PID/naissance/signal9/pidfdjoint et le vrai retour
+SSH137/255 autorisé par le client. La coupure de contrôle conserve sa restitution
+indépendante et helper_gonetrue. Aucun fauxtrue ni nouveau replay ; publisher
+exécuté immuable et son refus typé conservés. La revue de synthèse précède toute
+clôture de137/138 ; les suites49/32 et les deuxécartsP3 restent indépendants.
+
 ## SLS-138 — Refus de saisie de la date dans le replay UI
 
 Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
@@ -5264,3 +5279,25 @@ attendus. Les sept saisies acceptées passent réellement par le même formateur
 qu'UI02, avec égalité native et période exacte jusque1ms. Contrôleur0/Nodejoint,
 deuxJPEG inspectées, cgroupvide et originaux/config/référence/5982/huitcompteurs0
 recoupés. Zéro groupe complet ;138.3 reste ouvert avec fullUI/API12/25communs.
+
+## SLS-139 — Navigation latérale avec texte agrandi
+
+Statut : [ ]. Nature : Corriger. Dépend de : SLS-067. Ordre : 6.
+Contrat : cette unité et DESIGN_SYSTEM_APP, sous le socle DESIGN_SYSTEM.
+
+Constat visuel pendant le fullUI ea0d2ab0 : dans sa capture text-enlarged,
+le libellé Namespaces dépasse le fond de sa zone latérale lorsque les tokens
+typographiques sont doublés. Aucun recouvrement du contenu principal constaté
+dans ce cadrage ; le test d'absence de débordement global passe, mais ne prouve
+pas le confinement du texte dans chaque commande. Ce cas reste distinct du
+zoom navigateur. Amélioration P3 enregistrée au rang d'ergonomie, sans modifier
+les sources pendant la campagneAPI/UI/communs en cours.
+
+- [ ] SLS-139.1 Reproduire sur la console déployée avec vrai texte agrandi,
+  mesurer limitesDOM du libellé/commande/navigation et conserver des JPEG
+  originales inspectées ; distinguer cette mesure du zoom navigateur.
+- [ ] SLS-139.2 Décider puis appliquer la correction minimale de disposition
+  selon les deux design systems, sans texte tronqué ni commande inaccessible.
+- [ ] SLS-139.3 Qualifier navigation clavier, texte agrandi et zoom200% réels,
+  desktop et mobile390, libellés complets et aucune superposition ni largeur
+  globale parasite ; captures inspectées et régressions communes sur le déploiement.

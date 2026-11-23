@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-137/138 :47groupes courants passent,44images inspectées et trois unités
+  closes. Collecteur de synthèse refusé sur l'interprétation de helper_gone ;
+  reçu brut conservé et correction de lecture décidée sans rejouer lesE2E.
+  SLS-139 inscrit au rang ergonomie pour le libellé latéral en texte agrandi.
+
 - SLS-137.2 acquise en ciblé : politique1min et seconde fixture10080min,
   référence archivée lue200/cinq événements et routefonction404. QuatreJPEG
   inspectées, deuxpurges et clôture externe ; fullUI/API12/25communs encore dus.
