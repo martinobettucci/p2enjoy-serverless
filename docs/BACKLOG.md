@@ -4796,6 +4796,9 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
   produite par le parseur/sérialiseur Node du client, sans tolérance numérique
   arbitraire ni modification des rapports. Le rouge du collecteur et les
   clôtures natives restent distincts des groupes E2E déjà réussis.
+  Le seul écart inter-cas déclaré peut être le contrat134.7 ajouté après le
+  premier succès : deux SHA documentaires exacts figés avant les prochains cas,
+  vecteurs527 conservés et526 autres fichiers/images strictement identiques.
 
 Le défaut corrigé ici est l’absence de diagnostic, pas une cause rétroactive
 inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent intactes.
