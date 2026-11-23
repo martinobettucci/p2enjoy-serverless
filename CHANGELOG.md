@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-146 : correction de barrière spécifiée avant code après le ciblé40 :
+  protéger la confirmation par un writer REGISTRY réel et arrêter l’agent
+  seulement après commit CONTROL observé ; borne dérivée du timeoutSQLite1s,
+  journal storage_transport corrélé. Quatre diagnostics négatifs réels à zéro
+  groupe prévus pour primaire/restitution/protocole/rapport. Code et preuves dus.
+
 - SLS-146 : [ciblé40](docs/evidence/storage-mutation-diagnostics-current-dev-2026-11-23.json)
   sur6f758b2/530/f016, diagnosticSIGTERM0groupe puis15stockage/25communs frais.
   Primaire native1 retenue et restitution complète ; sept handlers succeeded

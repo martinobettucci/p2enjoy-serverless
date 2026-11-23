@@ -11357,3 +11357,28 @@ les scénarios et conservées. Premières hypothèses de lecture du vérificateu
 (membresTAR, erreurs attendues et format d’assertionNode) corrigées uniquement
 en mémoire, puis recoupements finaux0 ; aucune écriture ni rejeu de campagne.
 La nouvelle inspection des pixels reste celle du principal, pas du vérificateur.
+
+### 23 novembre2026 — Décision de correction de l’ordre du gate, SLS-146
+
+La preuve40 est poussée dans14c29a0. Le manque d’ordre prepared/ACK est établi
+dans les sources, indépendamment de son attribution historique. Décision avant
+code : garder CONTROL, reprendre un vrai writer REGISTRY aprèsprepared pour
+bloquer la seule confirmation future, libérer CONTROL et observer son commit,
+puis SIGSTOP et vérification naissance/état arrêté avant libération REGISTRY.
+La réponse prepare finit par ses lectures/WAL et son socket réels. La durée
+de cette détention doit être inférieure à1s, timeoutSQLite agent ; sinon refus
+et restitutions, aucune pause acquise. Borne5s nonallongée. Exiger aussi le
+journalstorage_transport réel de la même opération pour distinguer une autre
+panneIO. Aucun changement de contrôle/agent/observateur/RPC ni de leurs données.
+
+Quatre diagnostics réels séparés0groupe sont décidés pour les branches encore
+nonqualifiées : SIGTERM inattendu du helper et primaire cliente préservée ;
+SIGCONT réellement refusé sous UID sansdroit puis root rétabli et timer effectif ;
+ligne invalide65 537octets sansLF dans le vrai SSH pour refus avantEOF ; fichier
+de rapport passé0400 après l’écriture initiale et vrai EACCES final, primaire et
+purge conservées puis permissions restaurées sans changement d’octets. Les
+clients1 attendus restent des échecs clients, avec contrôleur/qualification
+diagnostique propres ; aucun groupe ajouté. Les clôtures négatives sont bornées
+à leurs domaines explicites et ne passent pas dans le closer positif par défaut.
+Les15/25 frais puis49/32 restent requis sur le protocole corrigé. Ce checkpoint
+ne livre encore que la décision, sans code ni E2E de ces nouveaux chemins.

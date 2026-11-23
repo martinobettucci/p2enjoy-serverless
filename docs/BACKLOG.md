@@ -6005,11 +6005,19 @@ d’observation conserve les observateurs et dépendances réels.
   sans changement de ressources. Conserver la primaire et les erreurs de
   finalisation séparément, avec les vrais retours et stderr natifs ; aucun
   observateur ou résultat remplacé, assertion retirée ou scénario sauté.
+  La barrière de confirmation doit observer le commit CONTROL avant SIGSTOP,
+  protéger la confirmation par un writer REGISTRY réel et prouver l’arrêt sous
+  la borne dérivée du timeout SQLite agent ; journal storage_transport corrélé.
 - [~] SLS-146.4 Quinze groupes de stockage complets puis 25 communs frais,
   captures inspectées et clôtures recoupées sur le code déployé. Les 13 partiels
   de ce refus restent exclus. Aucun retour secondaire ne devient un succès.
 - [ ] SLS-146.5 Nouveau socle 49/543/18 depuis le début puis complément 32/276,
   avec leurs preuves propres ; aucun ancien partiel ou ciblé ne remplit ce total.
+- [ ] SLS-146.6 Diagnostics négatifs E2E distincts à zéro groupe : première
+  attente cliente interrompue préservée malgré finalisation, refus réel de
+  SIGCONT et restitution par timer, ligne invalide65 537octets avantLF/EOF et
+  EACCES réel de rapport. Conserver les clients1 attendus et leurs secondaires,
+  les vrais flux/permissions, purges et clôtures spécifiques ; aucun faux succès.
 
 Décision146.2 avant code : [diagnostic du banc](FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#diagnostic-du-refus-de-commit-zip--sls-146),
 résumé natif borné en mémoire, phases/compteurs/dernières lectures sans SELECT
@@ -6040,7 +6048,16 @@ La garde peut donc arrêter l’agent avant cette réception et attendre un comm
 encore impossible. Cela n’attribue pas le premierrouge à cette course, mais
 nomme une absence de synchronisation du banc àtraiter avant49. Une détention
 REGISTRY seule serait insuffisante : SQLiteagent timeout1s peut produire une
-erreurIO plutôt qu’une vraie confirmation perdue. Aucune décision de correction
-du protocole ni modificationproduit dans ce checkpoint ; elle sera persistée
-avant le code. Les branches refusSIGCONT, protocole excessif et finalisation
+erreurIO plutôt qu’une vraie confirmation perdue. Le ciblé40 ne modifie aucun
+protocole ni produit ; la décision suivante précède son code. Les branches
+refusSIGCONT, protocole excessif et finalisation
 en faute restent nonqualifiées E2E par le ciblé positif.
+
+Décision suivante persistée avant code :
+[barrière de confirmation](FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#décision-de-correction-de-la-barrière-après-le-ciblé40).
+Writer REGISTRY de confirmation aprèsprepared, CONTROL libéré puis commit réel
+observé avant SIGSTOP/étatarrêté ; détention strictement inférieure à1s, dérivée
+du timeoutSQLite. Métadonnées et vrai storage_transport de la même opération
+exigés. Quatre diagnostics négatifs réels complètent la primaire/restitution/
+protocole/rapport ; clients1 conservés et zéro groupe fonctionnel. Implémentation
+et preuves encore dues, puis nouveau15/25 et49/32 sans réutiliser les40 précédents.

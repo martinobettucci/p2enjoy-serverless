@@ -8,7 +8,7 @@ conserve la primaire native1 et termine0 après restitution. Troisclôtures
 indépendantes,22captures originales inspectées,42backend/quatreHTTPSno-store
 et manuel84 ; aucun49/32 complet ni cause du rouge historique revendiquée.
 L’exploration établit une course possible du banc : prepared précède la
-réponseRPC ; son protocole reste à instruire avant la nouvelle intégration.
+réponseRPC ; sa correction reste à livrer avant la nouvelle intégration.
 
 Le [sixième socle courant](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
 termine1 dans la publication ZIP : garde `commit_not_observed`, upload200

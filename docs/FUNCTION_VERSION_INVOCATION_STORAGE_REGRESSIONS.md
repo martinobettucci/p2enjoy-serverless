@@ -142,12 +142,12 @@ les stderr et le corps/en-têtes de cette réponse ; ses assertions de release
 puis nettoyage remplacent l’échec initial. La cause de la non-observation reste
 inconnue ; le masquage et les pertes de diagnostic sont des défauts établis du banc.
 
-Décision avant code du23novembre2026 : instrumenter ces deux fichiers du banc,
-sans modifier le contrôle, l’agent, ControlObserver/ControlWriter, les transactions,
-les SELECT, les signaux ni leurs conditions d’acquisition. Conserver25s pour
-l’intention,3s pour prepared,5s pour commit,35s côté client et la garde110s
-(5s pour watchdog). Aucune relance de PUT, augmentation de délai ou acceptation
-de200 dans le scénario de confirmation perdue.
+Le checkpoint instrumenté6f758b2 a conservé le contrôle, l’agent, les observateurs,
+transactions, SELECT et signaux ; son ciblé40 est acquis ci-dessous. La correction
+du protocole décidée après cette preuve est définie dans la section suivante.
+Conserver25s pour l’intention,3s pour prepared,5s pour commit,35s côté client
+et la garde110s (5s pour watchdog). Aucune relance de PUT, augmentation de délai
+ou acceptation de200 dans le scénario de confirmation perdue.
 
 Le helper conserve un diagnostic borné en mémoire : version, mode, fonction,
 opération déjà observée, phase, bornes et compteurs des boucles, dernières valeurs
@@ -239,5 +239,63 @@ Server.handle écrit la réponseRPC seulement après dispatch. Le contrôle atte
 cette réponse avant SQLcommit. La garde actuelle peut donc SIGSTOP l’agent
 entre le marqueur et l’envoiRPC, puis attendre un commit que le contrôle ne peut
 pas encore décider. C’est une possibilité du protocole, sans attribution au
-rouge historique et sans correctif de produit. La décision de traitement doit
-être persistée avant de changer ce protocole ; la nouvelle intégration49 attend.
+rouge historique et sans correctif de produit. La section suivante persiste la
+décision de traitement avant code ; la nouvelle intégration49 attend sa preuve.
+
+### Décision de correction de la barrière après le ciblé40
+
+Le protocole de confirmation perdue doit prouver la décision du contrôle avant
+d’arrêter l’agent. Le marqueur `prepared` seul ne fournit pas cet ordre. La
+correction reste limitée au banc DEV ; aucun changement du produit ou de son RPC.
+
+Après observation de `prepared`, garder le writer CONTROL et acquérir un
+second vrai writer REGISTRY, nommé pour son rôle de blocage de confirmation.
+Les dernières lectures de `prepare` et sa réponse peuvent finir sous WAL.
+Libérer ensuite CONTROL et observer `decision=commit` de la même opération,
+avec le ControlObserver existant. Le writer REGISTRY empêche pendant ce temps
+la transaction de confirmation de l’agent. Seulement après ce commit, envoyer
+SIGSTOP par pidfd et vérifier la naissance et l’état arrêté du processus agent.
+Libérer REGISTRY dès cette preuve, puis annoncer `paused` au client. Les deux
+writers ont des identités et des phases distinctes ; aucun contenu du registre
+n’est fabriqué ou modifié par l’opérateur.
+
+La connexion SQLite agent a un timeout d’une seconde. La durée mesurée entre
+acquisition du writer de confirmation et preuve d’arrêt doit donc rester
+strictement inférieure à cette seconde : un dépassement échoue le banc et
+déclenche les restitutions, sans annoncer une confirmation perdue acquise.
+La borne5s de commit reste un plafond, sans allongement ; l’attente d’arrêt
+partage ces bornes. Un verrou détenu trop longtemps pourrait sinon produire
+`storage_io_error` avant la pause. Les trois scénarios de confirmation perdue
+exigent aussi le vrai journal `function.storage_pending / storage_transport`
+de leur opération, lié aux en-têtes de réponse et à la garde. Un503 provenant
+d’une autre panne n’est pas un substitut. Garder le timer indépendant si la
+restitution SIGCONT échoue ; les autres fermetures restent tentées.
+
+Éprouver les branches encore manquantes par des diagnostics séparés sur les
+vrais processus, flux et fichiers. Chacun compte zéro groupe fonctionnel :
+
+- interrompre par SIGTERM une garde réelle et laisser le client ordinaire
+  attendre sa phase : client1 et rapport en échec attendus ; vérifier que
+  l’attente primaire reste l’exception finale malgré release/nettoyage ;
+- faire réellement refuser SIGCONT au noyau sous une identité effective sans
+  droit sur l’agent, rétablir root ensuite, et vérifier première erreur,
+  finalisation secondaire, timer conservé puis restitution indépendante ;
+- envoyer 65 537 octets de ligne invalide sans LF dans le vrai stdout du helper
+  DEV et le vrai SSH : le parseur réel doit refuser avant EOF/LF, conserver le
+  suffixe borné et le SHA entier, terminer1 et purger ses ressources ;
+- rendre le fichier de rapport temporaire en lecture seule après son écriture
+  initiale, puis provoquer la première interruption : constater le vrai EACCES
+  de sauvegarde, la primaire inchangée et la purge native ; restaurer ensuite
+  les permissions de ce seul fichier, sans changer ses octets.
+
+Ces charges invalides et refus sont des entrées/fautes du banc exécuté, avec
+les dépendances réelles. Aucun serveur, handler, agent, fonction SQLite ou
+résultat n’est remplacé. Un client1 attendu reste conservé comme échec client ;
+seul le contrôleur du diagnostic peut conclure à sa vérification, avec son
+propre retour et zéro groupe. Une clôture propre à chaque domaine négatif
+recoupe les purges et acteurs ; la clôture positive ne les accepte pas par
+défaut. Les quinze groupes, sept handlers et25communs repartent ensuite frais
+sur les nouveaux octets, puis49/32 ; le ciblé40 précédent garde son époque.
+
+Décision spécifiée avant code. Le protocole corrigé et ces diagnostics négatifs
+ne sont pas encore implémentés ni qualifiés à ce checkpoint.
