@@ -28,6 +28,7 @@ from contextlib import closing
 import errno
 import fcntl
 import hashlib
+import importlib.util
 import json
 import locale
 import os
@@ -432,6 +433,9 @@ def restore(item, journal, independent):
     if item.get('restored'):
         emit(item['restoration'])
         return item['restoration']
+    # @verifies docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#propriété-et-retrait-du-parser
+    if item.get('invocation_cost_profile'):
+        invocation_cost_module(item).cleanup_parser(item, journal, sys.modules[__name__])
     if not item.get('originals_verified'):
         original = container(item, item['original']['id'])
         assert original['image'] == item['original']['image']
@@ -568,6 +572,15 @@ print(json.dumps({'available':available}))
     return bool(result and json.loads(result)['available'])
 
 
+# @spec docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#démarrage-et-identité-du-seul-clone
+def invocation_cost_module(item):
+    path = Path(item['work']) / 'invocation_cost_profile.py'
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == item['invocation_cost_profile']['source_sha256']
+    spec = importlib.util.spec_from_file_location('owned_invocation_cost_profile', path)
+    module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+    return module
+
+
 # @spec docs/BACKLOG.md#sls-074 | docs/FUNCTION_VERSION_PURGE_UPGRADE.md#banc-historique-réel-et-borné
 def start_control(item, journal, image, *, readiness='healthy'):
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', image)
@@ -593,6 +606,8 @@ def start_control(item, journal, image, *, readiness='healthy'):
         assert source.count('    network_mode: host\n') == 1 and '    environment:' not in source
         source = source.replace('    network_mode: host\n',
             '    environment:\n      SERVERLESS_FUNCTION_INSTANCE_LIMIT: "2"\n    network_mode: host\n')
+    if item.get('invocation_cost_profile'):
+        source = invocation_cost_module(item).configure(item, journal, sys.modules[__name__], source)
     compose = Path(item['work']) / 'compose.yml'
     compose.write_text(source)
     os.chmod(compose, 0o640)
@@ -1140,7 +1155,7 @@ def save_driver_failure(item,op,error,phase='primary'):
         frames=[];trace=error.__traceback__
         while trace:
             frames.append({'file':Path(trace.tb_frame.f_code.co_filename).name,'function':trace.tb_frame.f_code.co_name,'line':trace.tb_lineno});trace=trace.tb_next
-        known=('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention','measure-native-deadline','diagnose-import-output','retention-replay-state','inspect','restart','upgrade')
+        known=('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention','measure-native-deadline','diagnose-import-output','finish-invocation-cost-profile','retention-replay-state','inspect','restart','upgrade')
         diagnostic={'campaign':item['campaign'],'operator_source_sha256':item['driver_source_sha256'],'phase':phase,
             'operation':op if op in known else None,'operation_sha256':hashlib.sha256(str(op).encode()).hexdigest(),
             'type':type(error).__name__,'reason':str(error)[:1024]if isinstance(error,(AssertionError,TimeoutError))else None,
@@ -1184,6 +1199,7 @@ def main():
             emit({'restored': item.get('restored', False), 'restoration': item.get('restoration'),
                   'driver_alive': alive(item), 'unit': item['unit'],'driver_primary_failure':read_driver_failure_receipt(item),
                   'driver_cleanup_failures':[value for phase in ('reader-close','restore')if(value:=read_driver_failure_receipt(item,phase))is not None],
+                  **({'invocation_cost_profile':invocation_cost_module(item).status(item,sys.modules[__name__])} if item.get('invocation_cost_profile') else {}),
                   'timer_state':command(['systemctl','is-active',item['unit'] + '.timer'],(0,3,4)),
                   'service_state':command(['systemctl','is-active',item['unit'] + '.service'],(0,3,4)),
                   **({'before_consumer_cleanup':item.get('before_consumer_cleanup'),
@@ -1237,17 +1253,25 @@ def main():
     old_image = sys.argv[3]
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', old_image)
     options=sys.argv[4:]
+    # @spec docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#profilage-du-coût-dinvocation-courant--sls-1336
+    cost_options=[v for v in options if v.startswith('--invocation-cost-profile=')]
+    assert len(cost_options)<=1, 'one_invocation_cost_profile_required'
+    cost_mode=cost_options[0].split('=',1)[1] if cost_options else None
+    if cost_options:
+        assert cost_mode in ('smoke','full','parser-loss'), 'invocation_cost_profile_mode_unknown'
+        assert mode=='instance-limit' and set(options)=={'--guard-seconds=2700',cost_options[0]}, 'invocation_cost_profile_scope_required'
+        assert old_image=='sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7', 'invocation_cost_profile_f016_required'
     history_options=[v for v in options if v.startswith('--firing-history=')]
     observation_options=[v for v in options if v.startswith('--firing-observation=')]
     firing_options=set(history_options+observation_options)
     retention_history=[v for v in options if v.startswith('--retention-history=')]
     retention_observation=[v for v in options if v.startswith('--retention-observation=')]
     retention_options=set(retention_history+retention_observation)
-    assert len(options)==len(set(options)) and set(options)-firing_options-retention_options<={'--source-schema007','--target-schema008','--retention-target-schema011','--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
+    assert len(options)==len(set(options)) and set(options)-firing_options-retention_options-set(cost_options)<={'--source-schema007','--target-schema008','--retention-target-schema011','--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
     assert not options or mode in ('function-version-purge','function-version-unknown-first','instance-limit')
     guard_options=set(options)&{'--guard-seconds=120','--guard-seconds=1800','--guard-seconds=2700'}
     assert len(guard_options)<=1,'one_guard_duration_required'
-    if mode=='instance-limit':assert set(options)<=guard_options|firing_options|retention_options|{'--retention-target-schema011'}
+    if mode=='instance-limit':assert set(options)<=guard_options|firing_options|retention_options|set(cost_options)|{'--retention-target-schema011'}
     else:assert not guard_options,'guard_duration_requires_instance_limit'
     assert not firing_options or mode=='instance-limit','firing_replay_requires_instance_limit'
     assert len(history_options)<=1 and len(observation_options)<=1,'one_firing_replay_source_required'
@@ -1390,6 +1414,8 @@ def main():
             unit='serverless-restore-instance-limit-' + campaign,
             project='instance-limit-' + campaign, source_schema='009' if retention_replay else '011',
             target_schema=('011' if retention_current else '009') if retention_replay else '011')
+    if cost_mode:
+        item['invocation_cost_profile']={'mode':cost_mode,'source_sha256':hashlib.sha256((Path(__file__).parent/'invocation_cost_profile.py').read_bytes()).hexdigest()}
     if intermediary:item['intermediate_image']=intermediary['image']
     item['original'] = container(item, 'serverless-api')
     item['reference'] = container(item, 'serverless-runtime-reference')
@@ -1431,7 +1457,7 @@ def main():
     no_references(item, allow_original=True)
     assert agent_call(item, {'op': 'health'})['healthy']
     # Freeze the restoration code and its identity-switching helper for this window.
-    for name in ('storage-legacy-environment.py', 'control_database.py'):
+    for name in ('storage-legacy-environment.py', 'control_database.py') + (('invocation_cost_profile.py',) if cost_mode else ()):
         shutil.copyfile(Path(__file__).parent / name, work / name)
         os.chmod(work / name, 0o600)
     item['driver_source_sha256']=hashlib.sha256((work/'storage-legacy-environment.py').read_bytes()).hexdigest()
@@ -1465,6 +1491,8 @@ def main():
             assert 10<=armed_at-boundary<=60 and int(time.time()//300)*300==boundary,'retention_guard_activation_outside_window'
             item['retention_replay'].update(armed_at=armed_at,armed_boundary=boundary,timer_active_monotonic_us=activation)
             atomic(journal,item)
+        if item.get('invocation_cost_profile'):
+            invocation_cost_module(item).capture_original(item, journal, sys.modules[__name__])
         docker(item, 'stop', '--time', '15', item['original']['id'])
         assert not container(item, item['original']['id'])['running']
         command(['systemctl', 'stop', AGENT])
@@ -1510,8 +1538,10 @@ def main():
         if mode == 'instance-limit' and CONTROL_READER is None:
             CONTROL_READER = ControlObserver(Path(paths['state']) / 'control.sqlite3')
             CONTROL_READER.open()
+        cost_ready=invocation_cost_module(item).ready(item,journal,sys.modules[__name__]) if cost_mode else None
         emit({'event': 'retention-replay-ready' if retention_replay else 'instance-limit-ready' if mode == 'instance-limit' else 'historical-ready',
               'container': current, 'installation_id': item['temporary_installation'],
+              **({'invocation_cost_profile':cost_ready} if cost_ready is not None else {}),
               **({'capacity': instance_limit_observation(item)} if mode == 'instance-limit' and not retention_replay else {}),
               **({'firing_replay':firing_replay_receipts(item)} if firing_replay else {}),
               **({'retention_replay':retention_replay_receipts(item)} if retention_replay else {})})
@@ -1522,7 +1552,7 @@ def main():
             if op == 'restore':
                 break
             if retention_replay:assert op == 'retention-replay-state','retention_replay_operation_required'
-            elif mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention','measure-native-deadline','diagnose-import-output'), 'instance_limit_operation_required'
+            elif mode == 'instance-limit':assert op in ('capacity','pause-observation','capture-firing-history','firing-replay-state','observe-source-retention','measure-native-deadline','diagnose-import-output','finish-invocation-cost-profile'), 'instance_limit_operation_required'
             if op == 'retention-replay-state':
                 assert retention_replay and set(request)=={'op'}
                 result=retention_replay_command('inspect',campaign)
@@ -1560,6 +1590,10 @@ def main():
             elif op == 'firing-replay-state':
                 assert mode == 'instance-limit' and item.get('firing_replay') and set(request)=={'op'}
                 result=firing_replay_command('inspect',campaign)
+            # @verifies docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#fermeture-et-statistiques-fraîches
+            elif op == 'finish-invocation-cost-profile':
+                assert item.get('invocation_cost_profile'), 'invocation_cost_profile_required'
+                result=invocation_cost_module(item).complete(item,journal,sys.modules[__name__],request)
             elif op == 'capture-firing-history':
                 assert mode == 'instance-limit' and set(request) in ({'op','function_ids','window'}, {'op','function_ids','window','loss'})
                 if 'loss' in request:assert request['loss'] == 'control-backup', 'capture_loss_variant_unknown'

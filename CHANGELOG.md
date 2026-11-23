@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-133.6/.7 : code du clone cProfile et du parser possédé raccordé,
+  SQLRO courant distinct du f73, timings client en chaînes et compteur de
+  réponses explicite. Reprise parser-loss et anciennes voies conservées ;
+  syntaxes acquises, revue statique effectuée et marqueur réel de timeout
+  Uvicorn corrigé ; vrais passages encore requis.
+
 - SLS-133.6/.7 : contrat de mesure productive complété avant code, smoke2 puis
  6000HTTP sur clonef016, sortie privée et parser possédé, fermeture/pstats
  séparément prouvés. SQLRO et temps client distincts ; aucune mesure acquise.

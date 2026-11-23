@@ -10332,3 +10332,13 @@ Revue en lecture seule sans P1/P2, aucune E2E rejouée pour cette collecte.
 134.6/.7 sont acquis ; les autres consommateurs, reprises et campagnes restent
 dus. Le libellé CLI qui confond réponses et démarrages est inscrit en133.7 pour
 la suite du profilage ; aucun résultat historique n’est réattribué.
+
+### 23 novembre 2026 — Collecteur de coût préparé, qualification encore due
+
+Le contrat133.6 précède le module gelé, le branchement du helper, le SQLRO
+courant et les timings client. La revue indépendante est exclusivement statique.
+Son seul défaut concret est corrigé : le vrai marqueur Uvicorn
+`timeout graceful shutdown exceeded` est refusé, même avec des marqueurs de fin
+et un code0. Le contrôle syntaxique et le diff passent ; aucun smoke, parser-loss,
+plein6000 ou défaut release/EOF de cette nouvelle voie n’est encore qualifié.
+L’image applicative et la configuration officielle restent hors de ce changement.

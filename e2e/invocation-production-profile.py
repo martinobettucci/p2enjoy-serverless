@@ -1,5 +1,6 @@
-# @spec docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#passage-diagnostique-décidé
+# @spec docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#passage-sql-historique-f73
 # @verifies docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#résultat-et-nettoyage
+# @spec docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#charge-et-mesures-sqlclient
 """Read actual SQL work and phase timestamps from the owned DEV invocation fixture."""
 import hashlib
 import importlib.util
@@ -16,6 +17,9 @@ from uuid import UUID
 
 ROOT = Path('/srv/p2enjoy-serverless')
 IMAGE = 'sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0'
+CURRENT_IMAGE = 'sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7'
+LEGACY_EXPIRATION = 'SELECT e.sequence,e.service_id,e.payload_bytes FROM execution_log_events e JOIN service_log_policies p ON p.service_id=e.service_id WHERE e.observed_at<max(p.expiration_floor,?-p.retention_minutes*60) ORDER BY e.sequence LIMIT ?'
+CURRENT_EXPIRATION = 'SELECT e.sequence,e.service_id,e.payload_bytes FROM service_log_policies p CROSS JOIN execution_log_events e WHERE e.service_id=p.service_id AND e.observed_at<max(p.expiration_floor,?-p.retention_minutes*60) ORDER BY e.sequence LIMIT ?'
 
 INSPECTION = r'''
 import hashlib,json,sqlite3,time
@@ -40,7 +44,7 @@ with sqlite3.connect('file:/state/control.sqlite3?mode=ro',uri=True,timeout=1) a
    ('admission_active_count',"SELECT count(*) FROM invocations WHERE function_id=? AND state IN ('admitted','running')")):
    queries[name+'_'+str(index)]=(sql,(fn,))
  queries.update({
-  'logs_expiration':('SELECT e.sequence,e.service_id,e.payload_bytes FROM execution_log_events e JOIN service_log_policies p ON p.service_id=e.service_id WHERE e.observed_at<max(p.expiration_floor,?-p.retention_minutes*60) ORDER BY e.sequence LIMIT ?',(now,200)),
+  'logs_expiration':(LOGS_EXPIRATION_QUERY,(now,200)),
   'buffers_expiration':("SELECT i.id,i.service_id FROM invocations i JOIN service_log_policies p ON p.service_id=i.service_id WHERE i.completed_at<max(p.expiration_floor,?-p.retention_minutes*60) AND i.logs_collection_state<>'expired' ORDER BY i.completed_at,i.id LIMIT ?",(now,200)),
   'invocation_age_candidates':('SELECT id FROM invocations WHERE completed_at IS NOT NULL AND completed_at<? AND NOT EXISTS (SELECT 1 FROM schedule_firings t WHERE t.invocation_id=invocations.id AND t.completed_at IS NULL)',(now-7*86400,)),
   'invocation_count_candidates':('SELECT id FROM invocations WHERE completed_at IS NOT NULL AND NOT EXISTS (SELECT 1 FROM schedule_firings t WHERE t.invocation_id=invocations.id AND t.completed_at IS NULL) ORDER BY completed_at DESC,id DESC LIMIT -1 OFFSET 10000',()),
@@ -69,10 +73,11 @@ with sqlite3.connect('file:/state/control.sqlite3?mode=ro',uri=True,timeout=1) a
 
 def main():
     assert os.geteuid() == 0 and socket.gethostname() == 'infra-serverless', 'dev_spark_required'
-    assert len(sys.argv) == 6
-    campaign, point, container_id, image, functions_raw = sys.argv[1:]
-    assert str(UUID(campaign)) == campaign and point in ('256', '1024', '2048', 'complete')
-    assert re.fullmatch('[a-f0-9]{64}', container_id) and image == IMAGE
+    current_cost = len(sys.argv) == 7 and sys.argv[-1] == '--current-cost-profile'
+    assert len(sys.argv) == (7 if current_cost else 6)
+    campaign, point, container_id, image, functions_raw = sys.argv[1:6]
+    assert str(UUID(campaign)) == campaign and point in (('256', '1024', '2048', 'complete', 'smoke-complete') if current_cost else ('256', '1024', '2048', 'complete'))
+    assert re.fullmatch('[a-f0-9]{64}', container_id) and image == (CURRENT_IMAGE if current_cost else IMAGE)
     functions = functions_raw.split(',')
     assert len(functions) == len(set(functions)) == 2 and all(str(UUID(v)) == v for v in functions)
     work = ROOT / 'qualification-history' / ('instance-limit-' + campaign)
@@ -84,6 +89,10 @@ def main():
     assert item['campaign'] == campaign and item['work'] == str(work)
     assert item['mode'] == 'instance-limit' and item['guard_seconds'] == 2700 and not item.get('restored')
     assert not item.get('retention_replay') and not item.get('firing_replay')
+    if current_cost:
+        cost=item['invocation_cost_profile'];assert cost['mode'] in ('smoke','full','parser-loss') and not cost.get('completed')
+        assert (point=='smoke-complete') == (cost['mode']!='full')
+    else:assert not item.get('invocation_cost_profile')
     source = ROOT / 'e2e/storage-legacy-environment.py'
     spec = importlib.util.spec_from_file_location('profile_window', source)
     helper = importlib.util.module_from_spec(spec); spec.loader.exec_module(helper)
@@ -92,7 +101,7 @@ def main():
     assert sorted(v['id'] for v in before['functions'] if not v['deleted_at']) == sorted(functions)
     migrations = [p.name for p in sorted((ROOT / 'control/migrations').glob('*.sql'))]
     assert migrations == helper.SCHEMA_011
-    inspection = INSPECTION.replace('FUNCTION_IDS', repr(functions)).replace('EXPECTED_MIGRATIONS', repr(migrations))
+    inspection = INSPECTION.replace('FUNCTION_IDS', repr(functions)).replace('EXPECTED_MIGRATIONS', repr(migrations)).replace('LOGS_EXPIRATION_QUERY',repr(CURRENT_EXPIRATION if current_cost else LEGACY_EXPIRATION))
     started = time.time_ns()
     process = subprocess.run(item['docker'] + ['exec', container_id, 'python', '-B', '-c', inspection],
                              capture_output=True, text=True, timeout=30)
@@ -106,8 +115,8 @@ def main():
     after = helper.container(item, helper.temporary_control_name(item))
     assert after['id'] == container_id and after['image'] == image and after['running']
     assert not json.loads(journal.read_bytes()).get('restored')
-    result.update(campaign=campaign, point=point, container_id=container_id, image=image,
-                  started_at_ns=started, finished_at_ns=time.time_ns(),
+    result.update(campaign=campaign, point=point, container_id=container_id, image=image, profile_scope='current-cost' if current_cost else 'legacy-f73',
+                  started_at_ns=str(started) if current_cost else started, finished_at_ns=str(time.time_ns()) if current_cost else time.time_ns(),
                   operator_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                   sql_program_sha256=hashlib.sha256(inspection.encode()).hexdigest())
     print(json.dumps(result))

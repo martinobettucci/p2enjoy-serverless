@@ -3343,3 +3343,28 @@ recoupées par le vrai Node de qualification, sans attester l’ancien binaire.
 Trois unités/cgroups/gardes/acteurs joints, retraits physiques et originaux
 conservés ; revue sans P1/P2. Le premier refus de collecte est lié, aucun replay
 E2E ou groupe global ajouté.134.6/.7 acquis ; autres consommateurs/campagnes dus.
+
+
+### Coût des invocations sur le processus réel — SLS-133.6/.7
+
+Les modes `node e2e/invocation-source-retention-volume.mjs
+--invocation-cost-profile=smoke`, `=parser-loss` puis `=full` reçoivent le SSO
+sur stdin privée. Ils utilisent le clone DEV de même image f016 et les mêmes
+budgets, avec cProfile standard ; deux réponses pour le smoke et la reprise,
+6000 pour le plein. Le helper garde les anciens modes et refuse les combinaisons
+hors de cette fenêtre2700. Le nouveau module gelé est invocation_cost_profile.py.
+
+Après les purges publiques, SIGINT vise le vrai PID API sous Tini. Les marqueurs
+de shutdown et le résultat du profiler sont vérifiés séparément. Le parser
+éphémère de même image possède son intention/CID/label propres, un montageRO
+sans réseau/secret/socket ; son retrait est aussi assuré par la restauration.
+Le mode parser-loss interrompt réellement le pilote après création/CID durable
+pour éprouver ce retrait ; il ne revendique pas une lecturepstats réussie.
+
+Les pstats restent privés et scellés. La projection conserve fonctions/callers
+et temps réels, sans les présenter comme CPU, corps de transaction ou réseau
+pur. SQLRO courantCROSS et intervalles client sont séparés ; les ns client sont
+des chaînes. La synthèse nomme le compteur `ordinary_http_responses`, nombre
+de réponses de charge validées. Sources/index528, images, originaux et clôtures
+sont à recouper par les vrais passages ; ce code préparé n’est pas encore qualifié.
+Voir le [contrat courant](../docs/INVOCATION_PRODUCTION_PROFILE.md#profilage-du-coût-dinvocation-courant--sls-1336).
