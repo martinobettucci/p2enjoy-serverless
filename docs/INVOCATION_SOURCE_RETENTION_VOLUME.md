@@ -853,14 +853,10 @@ immuable ; une copie fraîche corrige seulement ce rattachement, sans replay
 de la faute réelle, nouveau test de handler ou modification d’horloge.
 
 
-Le contrat134.7 est écrit après le premier parcours réussi. Ce fichier fait
-partie du vecteur de527 sources : les deux parcours suivants auront donc une
-époque documentaire distincte. Les preuves conservent chaque vecteur complet
-et le commit propre à chaque cas, sans antidater le nouveau texte. Le seul
-écart inter-cas autorisé est ce fichier de contrat, entre ses deux empreintes
-exactes figées avant les prochains lancements. Les526 autres fichiers, dont
-tous les exécutables/clients et les quatre modules applicatifs f016, ainsi que
-les images, doivent être strictement identiques. Le manifeste déclare cet écart
-documentaire et les deux époques, sans annoncer527 sources toutes identiques
-entre les trois cas. Toute autre différence reste un refus. Cela conserve la
-preuve réelle du premier cas sans la rejouer pour une décision de collecteur.
+Le contrat134.7 est écrit après le premier parcours réussi. Vérification du
+vrai source_hashes : ce fichier n’entre pas dans son vecteur courant. Les527
+sources indexées restent strictement identiques entre ce succès et la suite ;
+aucune exception documentaire n’est nécessaire. Chaque preuve conserve son
+commit propre, sans antidater le contrat ajouté ensuite. Le publisher exige
+les527 fichiers et les images identiques entre les trois cas, ainsi que les
+vecteurs avant/après de chaque cas. Toute différence reste un refus.

@@ -4796,9 +4796,9 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
   produite par le parseur/sérialiseur Node du client, sans tolérance numérique
   arbitraire ni modification des rapports. Le rouge du collecteur et les
   clôtures natives restent distincts des groupes E2E déjà réussis.
-  Le seul écart inter-cas déclaré peut être le contrat134.7 ajouté après le
-  premier succès : deux SHA documentaires exacts figés avant les prochains cas,
-  vecteurs527 conservés et526 autres fichiers/images strictement identiques.
+  Le contrat ajouté ensuite n’entre pas dans source_hashes : les527 sources
+  et images restent strictement identiques entre cas, sans exception ; chaque
+  commit propre est conservé sans antidater le nouveau texte.
 
 Le défaut corrigé ici est l’absence de diagnostic, pas une cause rétroactive
 inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent intactes.
@@ -4910,6 +4910,8 @@ traitement ; aucun groupe supplémentaire ni rejeu du countacquis.
 
 
 134.7 — Constat avant correction : global-alarm8406560b passe ses deuxgroupes sur527sourcesc4ed58d/f016, puis le collecteur extérieur échoue avant d’écrire sa clôture. Le statut natif est restoredtrue/driverfalse/gardesinactives, diagnostic identique hors recorded_at_ns :1795405535188332558 natif contre1795405535188332500 aprèsJSONJavaScript. Cette perte de précision est observée, pas une cause d’échec de l’alarme. Statut exact conservé en privé ; ne changer ni reçu, producteur ni horloge. Contrat ajouté avant correctif ; aucune autre campagne n’est lancée tant que cette clôture n’est pas acquise.
+
+134.7 — Vérification de l’inventaire avant adaptation du publisher : le contrat ne fait pas partie du vrai vecteur527 ; source_hashes actuel et celui du succès global-alarm sont strictement égaux (zéro chemin changé). La mention documentaire contraire est corrigée, aucune exception de provenance n’est implémentée. Les commits documentaires diffèrent mais les527 sources/image restent stricts.
 
 <a id="sls-135"></a>
 ## SLS-135 — Lecture des références pendant la sortie d’un processus
