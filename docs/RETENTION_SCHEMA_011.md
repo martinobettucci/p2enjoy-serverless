@@ -301,5 +301,5 @@ Les troischemins fixés existent désormais ; le
 recoupe les quatre modules et les deuxSHA de chaque archive complète sans
 modifier la garde ni ajouter de groupe.132.3 est acquise ; consommateurs et
 25communs du helper, API/UI/25communs produit,49/543/18 puis32/276 restent
-distincts. Les preuves526/519 et le sourceâge527 pré-correctif ne sont ni
+distincts. Les preuves526/519 et le sourceâge antérieur au correctif ne sont ni
 réétiquetés ni ajoutés au composite courant.
