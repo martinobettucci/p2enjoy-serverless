@@ -17,6 +17,14 @@ ni l'agent ni le contrôle ; son brut reste privé et sa projection/fin réelle
 doivent être recoupées avant tout diagnostic. La présence du pilote ou la
 validité de sa syntaxe ne qualifie pas son exécution.
 
+Le [checkpoint143 courant](../docs/evidence/storage-console-response-current-dev-2026-11-23.json)
+qualifie9API puis25communs sur1991432/529/f016, deuxcontrôleurs0,22captures
+inspectées et quatrefonctions/deuxnamespaces purgés. La premièreacquisition
+positive est reliée au vraiUUIDHTTP/SQL/instance-consumer ; traceurjoint,
+TracerPid0. Le premierdiagnostic9/Node0 maiscontrôleur1 reste exclu avec ses
+refus de collecte/parse et recoupementsRO. Aucun souscode du premier503 n'est
+reconstruit.34ciblés n'ajoutent aucun groupe au socle49 ;49et32 restent dus.
+
 Le [passage courant](../docs/evidence/execution-journal-complete-schema011-query-dev-2026-11-23.json)
 passe **47groupes réels :12API,10UI puis25communs**, au gel1c706f0/529sources,
 imagef016. Trois contrôleurs0, acteurs/cgroups/gardes joints et purge physique ;

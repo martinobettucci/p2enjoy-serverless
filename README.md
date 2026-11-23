@@ -9,6 +9,13 @@ worker/client fermés et originaux conservés. SLS-143 porte le diagnostic :
 StorageError avantdispatch établie, souscode et corpsHTTP perdus. Le socle49
 complet et le complément32 restent dus ; les anciensrouges restent distincts.
 
+La [reprise ciblée stockage143](docs/evidence/storage-console-response-current-dev-2026-11-23.json)
+passe34groupes (9API/25communs), deuxcontrôleurs0 et22captures inspectées au
+gel1991432/529/f016. Acquisition native positive liée au vraiappelHTTP et
+quatrefonctions/deuxnamespaces purgés ; le premierdiagnostic de collecte
+terminé1 reste exclu. Le souscode du premier503 reste inconnu, SLS-143 reste
+ouverte et le prochain49 repart du début avec conservation des réponses.
+
 Le registre011, ses API et les facettes Journaux fonction/service sont déployés
 en DEV sur l'imagef016a1b7, avec la consolea7d7491a et le manuel canonique
 recompilé. Les diagnostics126 ajoutent codeSQLite/site de maintenance expurgés. La requête

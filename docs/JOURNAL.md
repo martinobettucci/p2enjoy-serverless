@@ -10886,3 +10886,28 @@ couverturenettoyage corrigée avantexécution : intentionarmement et finally
 externe, jonction protégée dèsPopen, refussecondaires conservés. Syntaxes
 JS/Python/programmedistant valides, relecture sansP1/P2. Aucune acquisition
 native ni réussite9 n'est encore revendiquée ; produit/image inchangés.
+
+### 23 novembre 2026 — Nominal stockage143 et25communs acquis
+
+1991432/529/f016 : neufgroupesAPI puis25communs passent, deuxcontrôleurs0 et
+clôtures extérieures avantphase suivante. Quatrefonctions/deuxnamespaces
+physiquement purgés, configuration/secretsvides/huit0/configuration/référence/
+5982 conservés. Premièreacquisition native positive etfermée liée au vrai
+HTTP200, UUIDSQL/hash/instance-consumer ; fenêtre10,63s, traceurjoint/TracerPid0.
+22images communes ouvertes individuellement,42backend/quatrewebno-store et
+manuel84 ; publisher0, revue indépendante sansP1/P2.
+
+Premierdiagnostic3125 Node0/9maiscontrôleur1 conservé/exclu : garde mono-namespace
+du collecteur inadaptée au derniergroupe2namespaces/4fonctions, puis premier
+parseur refusant le fragmentvoisin enfin de fenêtre. RO corrigés sans réécrire
+les exécutables ni les retours ; nouveaupilote recoupe les formes observées
+1/3 ou2/4 avant l'oracle nominal, garde les erreurssecondaires et lie le
+consumerSQL au premierHTTP. Les P2de revue sont corrigés avant ce nouveautest.
+34groupesciblés, zéroajoutunique ; premier503 toujours StorageError sanssouscode
+ni corps, aucune correctionproduit revendiquée et143resteouverte.
+
+Décision : nouveau49depuisle début, observationnative du seulcasstockage
+liée à son marqueur réel/worker/source, moniteur900s lancé pendant ses
+préparations et trace90s au début du cas. Zérocas ajouté, stop dès première
+réponse conservée, nonatteint si suitearrêtée avant, jonctions exigées.
+Le complément32 suit seulement une campagne49 complète et clôturée.

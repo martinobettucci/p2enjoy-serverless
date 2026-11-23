@@ -5649,14 +5649,14 @@ d'assertion ou allongement arbitraire de délai pour obtenir200.
   résultat terminal et clôture externe ; recouper troispurges, configuration
   et réservations, les89captures fraîches déjà inspectées et leurs limites.
   Distinguer452antérieurs/deuxAPI partiels/zéroqualifié globalement.
-- [ ] SLS-143.2 Établir l'issue réelle de l'appel fautif par UUID/date/hash,
+- [~] SLS-143.2 Établir l'issue réelle de l'appel fautif par UUID/date/hash,
   admission/handler/erreur et journaux natifs applicables. Distinguer les
   observations manquantes de la cause prouvée ; persister la décision avant
   instrumentation ou correction dépendante.
 - [ ] SLS-143.3 Corriger la cause établie et conserver le sens du nominal :
   vraieécriture dans données/cache, cache effacé avec données/code conservés,
   voisin inchangé et mêmes contrôles de droits, versions et nettoyage.
-- [ ] SLS-143.4 Réussir les neufgroupesAPI complets et connexes applicables,
+- [~] SLS-143.4 Réussir les neufgroupesAPI complets et connexes applicables,
   puis25communs frais avec captures inspectées ; nouveau49 depuisle début
   et complément32/276, sources/image/native/clients/gardes recoupés.
   Une preuve manquante laisse l'unité ouverte.
@@ -5689,3 +5689,32 @@ TracerPid0 de l'agent exigés avant preuve suivante. Le logger produit serait
 une autre option, mais modifierait l'image et les quatre modules de rétention
 sans avoir encore établi un défautproduit ; le diagnosticnatif limité garde
 ici le même exécuteur et constate le protocole qui fait autorité.
+
+143.2/.4 — [checkpoint34 courant](evidence/storage-console-response-current-dev-2026-11-23.json)
+1991432/529/f016 : neufgroupesAPI puis25communs passent, deuxcontrôleurs0
+clôturés extérieurement,22captures inspectées et42backend/quatrewebno-store/
+manuel84. Quatrefonctions de deuxnamespaces purgées, configuration/secrets
+vides et huit0/référence/configuration/5982 conservés. PremierHTTP200 lié à
+son UUIDSQL, hash et instance, elle-même consumer du vraiacquire complet et
+fermé ; trace10,63s puis détachement/TracerPid0. Deuxacquisitions complètes,
+fragments sansissue déduite. Le brutprotocole reste privé sousSHA.
+Le premierdiagnostic3125 conserveNode0/neufgroupes maiscontrôleur1 : collecteur
+supposant unnamespace, puis parseur refusant unacquirevoisin commencé enfin
+de fenêtre. RecoupementsRO corrigés, quatrepurges et clôture sont acquis ;
+ce passage reste exclu, zéroqualifié. Revue indépendante sansP1/P2.
+Le premier503 reste StorageError avantdispatch, souscode/corps inconnus :
+aucunecause historique ni correctionproduit n'est déduite des succès actuels.
+143.3 reste ouverte, nouveau49 et32 restent dus ;34ciblés, zéroajoutunique.
+
+Décision avant prochain49 : reprendre depuisle début sur le banc instrumenté,
+sans saut ni cumul des452antérieurs. Pendant son seulparcours storage-console-api,
+rattacher la même observationnative à son marqueur réel de début dans le
+rapport de suite, lié au worker/sourcegelés ; arrêter dès sa première réponse
+d'invocation conservée, ou constater sa fin sans réponse. Le moniteur attend
+au plus900s après son lancement pendant les préparations de stockage ; seule
+la trace, armée quand le cas démarre, possède sa fenêtre90s. Aucun autrecas
+ni requête métier ajouté. Moniteur/traceur doivent terminer et être joints ;
+programmes, SHA, fenêtres et limites sont conservés séparément, zéro groupe
+ajouté. Un arrêt de suite avant ce parcours reste « non atteint », sans faux
+acquire. Cela cherche le souscode dans le contexte transversal ayant produit
+le premierrefus, sans changer l'image ni attribuer une absence de reproduction.

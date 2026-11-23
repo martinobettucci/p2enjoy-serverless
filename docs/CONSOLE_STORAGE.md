@@ -18,6 +18,13 @@ complet qualifié. [SLS-143](BACKLOG.md#sls-143) définit le diagnosticnatif et
 la conservation des observations avantassertion, sans changer le contrat
 de stockage ni transformer un nouveau succès en causehistorique.
 
+Le [checkpoint143 courant](evidence/storage-console-response-current-dev-2026-11-23.json)
+qualifie les neufgroupesAPI et25communs au gel1991432/529/f016 : acquisition
+positive reliée au vraiHTTP/UUIDSQL/instance-consumer, quatrefonctions et
+deuxnamespaces purgés,22captures inspectées, deuxcontrôleurs0 fermés.
+L'ancien diagnostic terminé1 reste exclu ; souscode/corps du premier503
+inconnus, aucune correctionproduit déduite. Nouveau49 et32 encore requis.
+
 ## Portée et droits
 
 Une fonction active expose son stockage avec Read ou une session administrateur.

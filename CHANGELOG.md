@@ -10,8 +10,11 @@
   originaux inconnus. Worker/client fermés, configuration/référence/5982/huit0
   conservés, revue indépendante sansP1/P2. Diagnosticnatif et conservationHTTP
   décidés avantcode ; aucune correctionproduit ni réussite future revendiquée.
-  ConservationHTTP implémentée dans le client et piloteprivé borné préparé,
-  syntaxe/relecture sansP1/P2 ; neufgroupes encore à exécuter.
+  ConservationHTTP implémentée et checkpoint34 acquis :9API/25communs,
+  deuxcontrôleurs0,22captures inspectées et quatrefonctions/deuxnamespaces
+  purgés. Vraiacquire positif corrélé HTTP/SQL/instance-consumer, traceurjoint.
+  Premierdiagnostic9/Node0 maiscontrôleur1 exclu ; collecte/parseRO corrigés
+  sans effacer ses refus. Souscodeancien503 inconnu, unité ouverte et49/32dus.
 
 - SLS-142 inscrit : troisième socle courant453900d/529/f016 arrêté sur la
   barrière native aprèscommit du transport de service, après313groupes et
