@@ -4930,6 +4930,11 @@ Aucun faux /proc, errno injecté, processus substitué ou succès conditionnel.
 - [ ] SLS-135.4 Rejouer les deux âges courants puis les consommateurs et25groupes
   communs du helper concernés. Les captures scellées, imagef016, configuration,
   originaux et preuves antérieures restent intacts ; clôture seulement sur E2E.
+- [ ] SLS-135.5 Rattacher le vrai retour du contrôleur systemd-run --wait
+  au reçu de clôture ; le completed du wrapper seul ne suffit pas. Conserver
+  les retours outil déjà observés des deux premières phases sans les fabriquer
+  ni rejouer ; capturer automatiquement les suivants. Exiger finwrapper puis
+  clôtureexterne avant début de la phase suivante, sans double comptage.
 
 La correction est interne au bancDEV autorisé ; aucun accès externe demandé.
 132.3/134.4 gardent leurs preuves partielles et attendent ce correctif pour
@@ -4948,3 +4953,5 @@ achever les âges, sans relance aveugle ni publication du composite6 manquant.
 132.3/135.4 — [Deuxâges courants qualifiés](evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json),527sources5db72a8/f016 : sixgroupes, deuxSSO/API sansnouveauhandler, métadonnées protégées identiques alors que bufferexpired puis source retirée ; historique terminal/générations retirés. Deuxrestitutions nominales et unités/cgroups/gardes jointes, captures009 inchangées, originaux/config/5982 et huitcompteurs0 recoupés. Avec count3 et source10001/cron3 courants,132.3 est acquise ;135.4 attend consommateurs/25communs,132.5 attend socle et complémentaires.
 
 132.5 — [Raccordement réel des troispreuves](evidence/retention-three-current-proofs-binding-dev-2026-11-23.json) : garde inchangée, quatre modulesf016 exacts, SHAcompressés et contenusdécompressés intégralement recoupés, zéro groupe ajouté. Ce contrôle de provenance ne remplace pas49/543/18 puis32/276 ;132.5 reste ouverte.
+
+135.5 — Deuxécarts de collecteur relevés avant publication25 : le script de clôture posait0 sans rattacher le retour réel du contrôleur, et le publisher ne comparait que finwrapper au débutsuivant. Les deuxphases exécutées ont réellement terminé0 dans l’outil et leurs clôtures sont acquises ; les prochains collecteurs doivent lier ces observations exactes et capturer les futurs retours, sans les déduire de completed. Contrat persisté avant correction ; aucun résultatE2E retiré ou rejoué par cette revue.

@@ -446,3 +446,27 @@ sont joints. Originaux/config/5982 et huitcompteurs0 recoupés. Le
 [rouge préalable](evidence/process-reference-real-zombie-before-fix-dev-2026-11-23.json)
 reste distinct, sans cause réattribuée au PIDhistorique. Les deuxâges et
 consommateurs/25communs attendent encore leurs replays ;135 reste ouverte.
+
+
+### Retour du contrôleur et sérialité des clôtures — SLS-135.5
+
+Le retour de systemd-run --wait est une observation distincte du completed
+du wrapper et de l’état inactif d’une unité collectée. Le collecteur ne peut
+poser0 depuis ces deuxseulsfaits. Pour les phasesdefault/volume déjà passées,
+conserver les résultats effectivement reçus de functions.write_stdin, sessions
+12875/chunk378457 et77708/chunk85b0ea : tousdeux exit_code0, émis avant leurs
+clôtures externes. Ces pièces sont des transcriptions opérateur nommées comme
+telles, rattachées à l’unité/phase/wrapper et hachées ; elles ne sont pas
+présentées comme un statut systemd terminal conservé. Aucune date d’observation
+exacte absente de l’outil n’est reconstruite. Un statut manquant reste manquant.
+
+Pour les prochains lancements, un contrôleur privé appelle réellement
+subprocess.run(systemd-run --wait...), conserve son retour et les bornes
+observées dans un reçu600 rattaché à l’unité avant de rendre la main. Le
+collecteur de clôture exige et recoupe ce reçu, la finwrapper, PID0/cgroupvide
+et les statuts de restitution de chaqueUUID. Le publisher exige en plus
+finwrapper ≤ closed_at_ns et closed_at_ns de la phase précédente ≤ début
+de la suivante, en triant les phases par leur exécution réelle. Ni un reçu
+complété ni une clôture acquise n’autorisent à inventer le retour manquant.
+Les programmes et rapports E2E déjà exécutés restent intacts ; ce raccordement
+de preuve ne nécessite aucun replay des phasesdefault/volume.
