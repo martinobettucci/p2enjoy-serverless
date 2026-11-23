@@ -5151,3 +5151,11 @@ conserver l'erreur principale, avec une capture du refus si présent. Garder
 choisi avant cette observation. Un replay diagnostique conserve zéro groupe
 de qualification et ne requalifie pas le rouge initial. Le vecteur E2E changé
 exigera ensuite API12→UI10→25communs de la même époque.
+
+137.2 — revue préalable : une réponse dont seuls les en-têtes arrivent peut
+laisser response.body en attente après le refus90s. Décision avant correction
+du collecteur : même échéance absolue90s pour sa jonction, captureDOM avant
+annulation puis fermeture réelle de sa seule Page si une lecture reste en
+vol, jonction de toutes les promesses et conservation du primaire. Une limite
+du diagnostic fait échouer le passage, sans nouvelle requête ni délai ajouté
+à l'attente fonctionnelle. Aucun test de ce cas n'est annoncé par la revue.
