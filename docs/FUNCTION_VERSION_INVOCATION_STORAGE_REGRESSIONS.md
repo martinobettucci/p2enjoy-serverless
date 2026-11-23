@@ -321,9 +321,59 @@ et `--diagnose-primary-save-failure` (ces trois clients doivent terminer1).
 Leurs rapports sont distincts et comptent zéro groupe ; le dernier peut ne
 conserver que le rapport initial, avec ressources/guardes et erreurs dans les
 vrais stdout/stderr. Le contrôleur doit vérifier et restaurer uniquement les
-permissions de ce fichier après jointure. Relecture sansP1/P2 résiduel ; aucun
-nouveau code déployé ni preuve acquise sur ces octets à ce checkpoint.
+permissions de ce fichier après jointure. Relecture sansP1/P2 résiduel ; preuve DEV courante ci-dessous. Aucun nouveau code produit déployé ; seuls
+les fichiers du banc sont synchronisés.
 Chaque diagnostic émet aussi sa finalisation réelle, flux natifs bornés et
 purges, sur stdout avant d’essayer la sauvegarde du rapport ; la primaire est
 identifiée sur stderr avant relance. Ces canaux permettent de qualifier le
 refus d’écriture sans prétendre qu’un rapport complet a été enregistré.
+
+### Qualification courante de la barrière ordonnée et des cinq diagnostics
+
+La [preuve40](evidence/storage-confirmation-order-current-dev-2026-11-23.json)
+conserve les six étapes puis les communs sur le gel Git98daf9f, 530 sources
+et imagef016. Les sept TAR recoupent exactement Git ; 17 programmes conservés.
+Le sealer termine effectivement0, après revue statique sansP1/P2.
+
+Les cinq diagnostics ne comptent aucun groupe fonctionnel : interruption
+simple client0 ; attente primaire cliente interrompue client1 ; SIGCONT
+réellement refusé EPERM/errno1 sous identité effective65534 client0 ; entrée
+protocole65 537octets sansLF client1 ; rapport0400 refusant réellement l’écriture
+EACCES client1. Chaque worker diagnostique termine0 seulement après validation
+de ses attentes exactes et de la purge. Les clients1 restent des échecs clients.
+Le refusSIGCONT conserve l’unique erreur secondaire attendue, rétablit UID/GID
+root et garde le timer indépendant ; son vrai signal intervient après la
+finalisation native. La ligne excessive produit65 798octets au total dans le
+vrai SSH ; le parseur refuse avantLF/EOF. Après jointure, le SHA entier et
+le suffixe65 536octets sont recoupés.
+Le rapport en faute conserve uniquement son état initialfalse ; permissions
+0400→0600 restaurées sans modifier les octets. La finalisation réelle et les
+ressources sont conservées surstdout avant l’écriture refusée. La première
+assertion cliente reste identique malgré les deux secondaires en EACCES.
+
+Le nominal termine0 avec quinze checks et sept handlers succeeded recoupés
+par UUID/hash en base. Les trois confirmations indisponibles portent le vrai
+503 et storage_transport de leur opération ; le caswriter CONTROL occupé
+ajoute ensuite control_database_unavailable/audit indisponible. Le premier
+refus est donc transport dans les trois cas de ce passage. Les fenêtres
+REGISTRY sont15 076 884,19 797 613 et20 809 463ns, arrêtT même naissance et
+commit préalable observés ; toutes restent sous1 000 000 000ns. Publication
+ZIP dédupliquée, reçucommitted, Bpilote/promue puis rollbackA, quota7Mio et
+fichiers données/cache sont conservés. Deuxcoupures réelles et huithelpers
+nominaux, donthold-lease, ont maintenant leur naissance émise puis terminée.
+
+Sept clôtures indépendantes sont recoupées : six workers terminal0, contrôleur
+commun0, tous les acteurs/guardes/cgroups joints ; septfonctions dans six
+namespaces purgées physiquement. Agent/API sans traceur ni arrêt dans les
+collectes dédiées ; la clôture commune ne mesure pas elle-même TracerPid.
+Configuration/budgets/référence/5982/huitcompteurs0 conservés,42backend et
+quatreHTTPSno-store identiques, manuel84/SHA4a331e15.25communs8/8/9 frais avec
+un nouveauSSO et délai calme60s ; septpréparationsSSO au total. Les22originaux
+ont été ouverts individuellement par le principal, avec leurs notes et limites
+de viewport, texte agrandi et formulaireSSO distinct de l’autorisation.
+
+Ces40 répètent des groupes inclus dans543 et ajoutent zéro groupeunique.
+Ils corrigent la course établie statiquement du banc sans attribuer le premier
+commit_not_observed à cette course. Le premier refus et les preuves du gel6f
+restent distincts. Le nouveau49/543/18 repart du début ;32/276 commence après
+sa réussite, sa clôture, son scellement et son inscription au commit de lancement.

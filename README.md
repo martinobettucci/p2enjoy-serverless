@@ -1,5 +1,17 @@
 # P2Enjoy Serverless
 
+Le [ciblé courant de confirmation ordonnée](docs/evidence/storage-confirmation-order-current-dev-2026-11-23.json)
+passe 40 groupes sur les 530 sources `98daf9f` et l’image f016 : quinze mutations,
+puis 25 communs frais. Trois pertes de confirmation produisent `storage_transport`
+après commit observé et arrêt prouvé en 15 à 21 ms, sous la borne d’une seconde.
+Sept handlers sont recoupés en base ; déduplication, promotion, rollback et
+ressources conservés. Cinq diagnostics distincts à zéro groupe éprouvent les
+interruptions, le vrai refus SIGCONT/EPERM, le protocole excessif et EACCES.
+Les trois clients négatifs terminent réellement 1 ; leurs contrôleurs terminent 0
+après validation et restitution. Sept clôtures indépendantes, 22 originaux
+inspectés, 42 backend/quatre HTTPS no-store et manuel84 recoupés. Aucun socle49
+ni complément32 complet acquis ; la cause du premier rouge reste inconnue.
+
 Le [ciblé stockage146](docs/evidence/storage-mutation-diagnostics-current-dev-2026-11-23.json)
 passe40groupes : quinze mutations puis25communs frais sur6f758b2/530/f016.
 Sept handlers succeeded recoupés en base ; vrais503, déduplication, promotion
@@ -8,7 +20,8 @@ conserve la primaire native1 et termine0 après restitution. Troisclôtures
 indépendantes,22captures originales inspectées,42backend/quatreHTTPSno-store
 et manuel84 ; aucun49/32 complet ni cause du rouge historique revendiquée.
 L’exploration établit une course possible du banc : prepared précède la
-réponseRPC ; sa correction reste à livrer avant la nouvelle intégration.
+réponseRPC ; sa correction est qualifiée par le nouveau ciblé40 ci-dessus ; la nouvelle
+intégration reste due.
 
 Le [sixième socle courant](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
 termine1 dans la publication ZIP : garde `commit_not_observed`, upload200

@@ -2,12 +2,20 @@
 
 ## [Non publié]
 
+- SLS-146 : [barrière ordonnée et diagnostics qualifiés](docs/evidence/storage-confirmation-order-current-dev-2026-11-23.json)
+  sur98daf9f/530/f016 :15stockage/25communs frais, cinqdiagnostics distincts0groupe
+  et troisclients1 conservés ; vraisEPERM/protocole/EACCES et primaire inchangée.
+  Sept handlers SQL, trois503/storage_transport aprèscommit/arrêtT sous1s,
+  septclôtures et22originaux inspectés ; référence/configuration/5982 conservés.
+  146.3/.4/.6 closes ; cause historique inconnue et49/32 toujours dus.
+
 - SLS-146 : correction de barrière spécifiée avant code après le ciblé40 :
   protéger la confirmation par un writer REGISTRY réel et arrêter l’agent
   seulement après commit CONTROL observé ; borne dérivée du timeoutSQLite1s,
   journal storage_transport corrélé. Quatre diagnostics négatifs réels à zéro
   groupe pour primaire/restitution/protocole/rapport. Code implémenté localement,
-  observationversion2, syntaxe contrôlée et revue sansP1/P2 ; déploiement et preuves dus.
+  observationversion2, syntaxe contrôlée et revue sansP1/P2 ; synchronisation du banc et preuves
+  courantes acquises ci-dessus, sans nouveau déploiement produit.
   La classification du caswriter CONTROL occupé distingue son refusSQL avantRPC
   du vrai storage_transport ; UUIDopération/audit corrélés restent exigés.
 

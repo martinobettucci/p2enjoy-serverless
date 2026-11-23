@@ -11439,3 +11439,45 @@ Dernière relecture ciblée sansP1/P2 : liste unique d’EPERM, UIDinitial/final
 et GIDfinal égal à l’initial effectivement vérifiés. Aucune écriture ni E2E/
 opération distante du relecteur ; changement prêt au checkpoint de code,
 déploiement et nouveaux diagnostics/15/25/49/32 encore dus.
+
+### 23 novembre2026 — Barrière ordonnée146 qualifiée et dossiers négatifs conservés
+
+Les cinq diagnostics puis nominal15 et commun25 ont été lancés une seule fois
+chacun sur98daf9f/530/f016. Pilote et closer privés préparés avant exécution ;
+P2 de fraîcheur du rapport corrigé avant tout lancement. Les programmes exécutés
+restent immuables. RéelsSIGTERM, EPERM de SIGCONT sous65534 avec timer conservé,
+flux65537sansLF et EACCES sur0400 : workers0 après attentes exactes ; retours
+Node0/1/0/1/1 conservés, zéro groupe. Dans le dernier, rapport initialfalse
+inchangé sousSHA53ef7fa6, primaire2bd384ff identique, deuxsecondaires et
+permission restaurée0600. La finalisationstdout est une observation réelle,
+pas un rapport de succès reconstitué.
+
+Nominal15/Node0 puis25communs/controller0, septclôtures et septpurges physiques
+dans sixnamespaces. Les troisconfirmation_gate durent15 076 884,19 797 613 et
+20 809 463ns ; commit préalable, étatT et storagetransport de la même opération
+recoupés. Caswriter occupé : transport d’abord, refusSQL ensuite, audit mêmeUUID.
+Sept handlers SQLsucceeded et reçuZIPcommitted/dédupliqué conservés. Huithelpers
+nominaux à naissances émises puis terminées, septminuteurs nominauxinactifs,
+agent/API TracerPid0 des collectes dédiées. La clôture commune ne mesure pas
+elle-même TracerPid.22nouvelles images originales réellement ouvertes chacune,
+notes propres conservées ; ni zoomglobal ni autorisation tirée d’une image vide.
+Configuration/budgets/référence/5982/huit0,42backend/quatreHTTPSno-store et
+manuel84 conservés. Aucun build ni changementproduit.
+
+Revue du sealer préparé sansP1/P2, aucune édition concurrente dans son périmètre.
+Son exécution termine effectivement0 ; preuve40 et gzip créés, brutSHA
+4b38570c6a2ec6aa2c254225dde383c569180e33dc7d3fb49ed566073371bb9b, gzipSHA
+0cbf2ddd19d000a6668782b35d36684cda6411f520299b116f764837f080825e.
+SeptTAR530 et17programmes conservés. Cause du premierrouge inconnue ; correction
+du défaut d’ordre statique prouvée sans attribution historique.146.3/.4/.6
+closes ;146.2partielle et146.5due. Nouveau49 depuisle début, puis32 après preuve
+du49 committée. Le ciblé ajoute zéro groupeunique au socle543.
+
+La revue finale a relevé deux précisions documentaires, corrigées après les
+deux retours sur arbre stable : statuts du ciblé6f au passé ; refus du parseur
+avantLF/EOF distinct du recoupementSHA/suffixe après jointure. Vérification
+indépendante finale0 :208références/161chemins privés,17programmes, septTAR
+530 exacts et26canaux décodés dont seule troncature attendue du protocole.
+HuitSHA et statuts identiques avant/après les deux analyses, aucune écriture
+concurrente ; scans des exports sans clé interdite ni signatureJWT/p2s.
+L’inspection des22originaux reste celle du principal.

@@ -1,5 +1,17 @@
 # Qualification de la plateforme
 
+Le [ciblé courant de confirmation ordonnée](../docs/evidence/storage-confirmation-order-current-dev-2026-11-23.json)
+passe 40 groupes sur les 530 sources `98daf9f` et l’image f016 : quinze mutations,
+puis 25 communs frais. Trois pertes de confirmation produisent `storage_transport`
+après commit observé et arrêt prouvé en 15 à 21 ms, sous la borne d’une seconde.
+Sept handlers sont recoupés en base ; déduplication, promotion, rollback et
+ressources conservés. Cinq diagnostics distincts à zéro groupe éprouvent les
+interruptions, le vrai refus SIGCONT/EPERM, le protocole excessif et EACCES.
+Les trois clients négatifs terminent réellement 1 ; leurs contrôleurs terminent 0
+après validation et restitution. Sept clôtures indépendantes, 22 originaux
+inspectés, 42 backend/quatre HTTPS no-store et manuel84 recoupés. Aucun socle49
+ni complément32 complet acquis ; la cause du premier rouge reste inconnue.
+
 Le [sixième socle courant](../docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
 conserve son premier refus de publication ZIP : garde `commit_not_observed`,
 upload200 attendu503, assertion de release puis nettoyage en échec. Un SSO réel
@@ -23,7 +35,8 @@ zérogroupe ; le nominal sansargument garde quinzegroupes dansfunction-storage.j
 Voir le [contrat146](../docs/FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#diagnostic-du-refus-de-commit-zip--sls-146).
 Son SIGTERM réel passe avec primaire native1/finalisation complète, client et
 worker0 ; aucun groupe ajouté. Les chemins de refusSIGCONT, protocole surlong
-et sauvegarde/finalisation en faute restent nonqualifiés E2E. Une course est
+et sauvegarde/finalisation en faute n’étaient pas qualifiés par ce gel6f ;
+ils le sont séparément par les cinq diagnostics sur98daf9f ci-dessus. Une course est
 établie statiquement dans le protocole : prepared peut précéder l’arrivéeRPC,
 sans attribution au rouge historique.49/32 ne sont pas acquis.
 
@@ -31,16 +44,15 @@ La révision locale suivante de146 implémente la barrière ordonnée version2 :
 writer REGISTRY de confirmation, commit CONTROL observé, SIGSTOP/étatT prouvé
 en moins d’une seconde, puis libération du writer. Les réponses503 sont reliées
 au code réel de résolution ; le caswriter CONTROL occupé distingue le refusSQL
-avantRPC du transport indisponible. Syntaxe contrôlée, aucune qualification DEV
-encore acquise sur ces nouveaux octets. Synchroniser les deuxfichiers du banc
-et leur contrat avant le lancement, sans redéployer le produit.
+avantRPC du transport indisponible. Cette révision98daf9f est synchronisée et qualifiée par le ciblé40 courant
+et ses cinq diagnostics distincts, sans redéploiement du produit.
 
 Les diagnostics distincts ajoutent `--diagnose-client-primary`,
 `--diagnose-resumption-refusal`, `--diagnose-protocol-overflow` et
 `--diagnose-primary-save-failure`. Le refus de reprise vérifie un vrai EPERM
 de SIGCONT puis le timer indépendant, avec client0 et native1 conservé.
 Les troisautres clients doivent terminer1 ; leurs contrôleurs et clôtures
-propres restent à livrer. Le dernier protège son seul rapport en0400 après
+propres sont livrés dans la preuve courante. Le dernier protège son seul rapport en0400 après
 l’écriture initiale ; restaurer ses permissions après jointure, sans modifier
 son contenu. Chaque diagnostic compte0groupe ; ils ne sont pas des commandes
 de remplacement du nominal15 ou des25communs.

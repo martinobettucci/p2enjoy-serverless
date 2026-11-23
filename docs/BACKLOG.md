@@ -6000,7 +6000,7 @@ d’observation conserve les observateurs et dépendances réels.
   publication, requête HTTP et garde de commit ; nommer tout état ou stderr
   perdu. Persister les observations et la décision avant instrumentation ou
   correction ; aucune cause inventée à partir du seul 200 ou du retour 1.
-- [~] SLS-146.3 Corriger le défaut établi en préservant la vraie confirmation
+- [x] SLS-146.3 Corriger le défaut établi en préservant la vraie confirmation
   perdue, la décision commune, la publication, la déduplication et le rollback
   sans changement de ressources. Conserver la primaire et les erreurs de
   finalisation séparément, avec les vrais retours et stderr natifs ; aucun
@@ -6011,12 +6011,12 @@ d’observation conserve les observateurs et dépendances réels.
   Le cas dédié au writer CONTROL occupé distingue aussi son refus réel
   control_database_unavailable avantRPC et l’audit indisponible, sans le
   présenter comme un timeoutRPC ni accepter un503 quelconque.
-- [~] SLS-146.4 Quinze groupes de stockage complets puis 25 communs frais,
+- [x] SLS-146.4 Quinze groupes de stockage complets puis 25 communs frais,
   captures inspectées et clôtures recoupées sur le code déployé. Les 13 partiels
   de ce refus restent exclus. Aucun retour secondaire ne devient un succès.
 - [ ] SLS-146.5 Nouveau socle 49/543/18 depuis le début puis complément 32/276,
   avec leurs preuves propres ; aucun ancien partiel ou ciblé ne remplit ce total.
-- [~] SLS-146.6 Diagnostics négatifs E2E distincts à zéro groupe : première
+- [x] SLS-146.6 Diagnostics négatifs E2E distincts à zéro groupe : première
   attente cliente interrompue préservée malgré finalisation, refus réel de
   SIGCONT et restitution par timer, ligne invalide65 537octets avantLF/EOF et
   EACCES réel de rapport. Conserver les clients1 attendus et leurs secondaires,
@@ -6043,7 +6043,7 @@ et restitution, quinze mutations puis25communs frais. Sept handlers succeeded
 recoupés en base, vrais503/déduplication/promotion/rollback ; troisclôtures0,
 troispurges physiques/deuxnamespaces et22captures originales inspectées.
 42backend/quatreHTTPSno-store, manuel84 et originaux conservés ; zéro groupeunique
-ajouté au socle543.146.2/.3/.4 restent partielles,49/32 dus.
+ajouté au socle543. À ce gel6f,146.2/.3/.4 étaient partielles et49/32 dus.
 
 Fait statique nouveau de146.2, vérifié par le principal : pending.phaseprepared
 est écrit avant l’envoiRPC de prepare ; le contrôle attend cet RPC avantcommit.
@@ -6063,11 +6063,29 @@ observé avant SIGSTOP/étatarrêté ; détention strictement inférieure à1s, 
 du timeoutSQLite. Métadonnées et vrai storage_transport de la même opération
 exigés. Quatre diagnostics négatifs réels complètent la primaire/restitution/
 protocole/rapport ; clients1 conservés et zéro groupe fonctionnel. Implémentation
-et preuves encore dues, puis nouveau15/25 et49/32 sans réutiliser les40 précédents.
+et preuves15/25 acquises sur98daf9f ci-dessous ;49/32 restent dus sans réutiliser
+les40 précédents.
 
 Le code local de la barrière version2 et des cinqoptions de diagnostic (dont
 l’interruption simple déjà connue) est implémenté, syntaxe contrôlée et revue
 sansP1/P2 résiduel. Les troisclients négatifs1 restent attendus comme
 échecs clients, sans promotion en groupe fonctionnel. Les nouveaux parcours
-et la fenêtreREGISTRY bornée n’ont encore aucune preuve DEV ; les40 restent
-attachés au code6f758b2.
+et la fenêtreREGISTRY bornée sont qualifiés par la preuve courante ci-dessous ;
+les40 précédents gardent leur gel6f758b2.
+
+146.3/.4/.6 — [ciblé ordonné courant40](evidence/storage-confirmation-order-current-dev-2026-11-23.json)
+sur98daf9f/530/f016 : cinq diagnostics0groupe puis15nominaux et25communs frais.
+Cinq workers diagnostiques0 vérifient les clients0/1/0/1/1, leurs primaires et
+secondaires exactes, vraiEPERM de reprise avec timer, protocole65537sansLF et
+vraiEACCES de rapport restauré sans changer ses octets. Les clients1 ne
+deviennent pas des succès fonctionnels. NominalNode/worker0, sept handlers
+succeeded recoupés ; troisvrais503/storage_transport aprèscommit et arrêtT
+prouvé sous1s, fenêtres15–21ms. Déduplication/promotion/rollback et ressources
+conservés. Septclôtures, septpurges physiques/sixnamespaces retirés, huithelpers
+nominaux à naissance émise puis terminée ; traceurs0 des collectes dédiées.
+SeptTAR exacts,17programmes,22captures originales inspectées ;42backend/quatre
+HTTPSno-store,manuel84 et configuration/référence/5982/huit0 conservés.
+Sealer0 après revue sansP1/P2 ; aucun groupeunique ajouté aux543.
+146.2 reste partielle : la cause historique de commit_not_observed est inconnue ;
+le défaut d’ordre statique et les pertes de primaire sont corrigés et éprouvés.
+146.5 et l’unité restent ouverts pour49/543/18 puis32/276.
