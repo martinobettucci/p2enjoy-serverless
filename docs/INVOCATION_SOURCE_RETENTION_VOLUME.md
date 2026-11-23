@@ -824,3 +824,30 @@ les cgroupsdescendants. Tout retourrouge nécessite la reprise existante du seul
 UUID reconnu puis status/restauration natifs avant autrecampagne. Le wrapperrouge
 ne prouve pas la clôture par la seule jonctionNode ; cette observation externe
 reste distincte. EntréeSSO privée, aucun secret dans argv/env/disque/journal.
+
+
+### Représentation des nanosecondes du diagnostic — SLS-134.7
+
+Le cas global-alarm8406560b a réellement passé ses deux groupes sur f016.
+Son collecteur extérieur a ensuite refusé l’égalité de tout le diagnostic :
+recorded_at_ns vaut1795405535188332558 dans le statut natif Python et
+1795405535188332500 dans le rapport du client JavaScript. Les autres champs
+concordent, les originaux sont restitués, pilote et gardes terminés. Le refus
+du collecteur reste conservé ; il n’est pas un rouge du parcours E2E réussi.
+
+Ces entiers dépassent la précision exacte du Number JavaScript. Le statut
+natif reste l’autorité pour la valeur exacte et est conservé sans altération
+dans le reçu de clôture. Pour recouper sa projection client, passer le vrai
+objet natif par JSON.parse puis JSON.stringify dans le même exécutable Node
+que le client et exiger l’égalité de cet objet avec le rapport existant. Ce
+passage réel ne modifie aucun rapport ou producteur et ne prétend pas retrouver
+les nanosecondes perdues. Aucun epsilon arbitraire, exclusion du champ ou
+conversion de durée entre domaines d’horloge n’est accepté.
+
+Le reçu conserve les deux objets, leurs SHA et les métadonnées du parseur
+Node utilisé. Le collecteur continue d’exiger strictement type, raison, source,
+phase, pile, commande et erreurs de nettoyage ; le publisher applique le même
+recoupement aux trois modes avant toute publication. Un écart qui persiste
+après ce vrai passage JSON reste un refus. Le collecteur exécuté est conservé
+immuable ; une copie fraîche corrige seulement ce rattachement, sans replay
+de la faute réelle, nouveau test de handler ou modification d’horloge.

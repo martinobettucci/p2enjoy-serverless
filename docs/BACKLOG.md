@@ -4790,6 +4790,12 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
   recoupés séparément. Les égalités anciennes sur un objet à deux champs
   rejettent les champs supplémentaires ; aucune limite ni raison affaiblie.
   Éprouver les modes35/40/detach sur leurs vrais arrêts après adaptation.
+- [ ] SLS-134.7 Recouper les diagnostics natifs et leur représentation JSON
+  JavaScript sans exiger l’égalité des entiers nanoseconde au-delà de2^53.
+  Conserver la valeur native exacte ; exiger la représentation réellement
+  produite par le parseur/sérialiseur Node du client, sans tolérance numérique
+  arbitraire ni modification des rapports. Le rouge du collecteur et les
+  clôtures natives restent distincts des groupes E2E déjà réussis.
 
 Le défaut corrigé ici est l’absence de diagnostic, pas une cause rétroactive
 inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent intactes.
@@ -4899,6 +4905,8 @@ traitement ; aucun groupe supplémentaire ni rejeu du countacquis.
 
 132.3/132.6 — [borne numérique courante réellement acquise](evidence/schedule-firing-retention-count-schema011-query-dev-2026-11-22.json),526sourcesf9e3e4b/f016 :84fenêtresmanquées,41fenêtres de256 et10496→10000 avec496retraits exacts au même curseurF ; récupération réelleàD,10000autresUUID et112pagesAPI recoupés. Deuxinvocations anciennes conservées, zérohandler nouveau, observation13,661s ; restitutionnominale, source scellée intacte, unitéexec/CGjointe et huitcompteurs0/5982. Collecteur corrigé et relu : SHA/gzip/rapport/unité liés, compteurs aprèsF627maximum distincts de ceux APIàD626maximum.132.6 passe sans replay ;132.3 attend encore les deuxâgescourants,132.5 et134.4 les autres consommateurs/régressions.
 
+
+134.7 — Constat avant correction : global-alarm8406560b passe ses deuxgroupes sur527sourcesc4ed58d/f016, puis le collecteur extérieur échoue avant d’écrire sa clôture. Le statut natif est restoredtrue/driverfalse/gardesinactives, diagnostic identique hors recorded_at_ns :1795405535188332558 natif contre1795405535188332500 aprèsJSONJavaScript. Cette perte de précision est observée, pas une cause d’échec de l’alarme. Statut exact conservé en privé ; ne changer ni reçu, producteur ni horloge. Contrat ajouté avant correctif ; aucune autre campagne n’est lancée tant que cette clôture n’est pas acquise.
 
 <a id="sls-135"></a>
 ## SLS-135 — Lecture des références pendant la sortie d’un processus
