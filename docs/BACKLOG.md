@@ -85,6 +85,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
+| 3 | [SLS-137](#sls-137) Échec de conservation dans la campagne UI complète | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -5095,3 +5096,29 @@ pour réparer le repérage. Plein6000/quatreSQL reste dc95781, reexecutedfalse,
 SHAmanifest/gzip/brut inchangés. RevueRO sansP1/P2, aucune valeur réparée ni groupe
 nominal ajouté.136 est close et133.6/.7 acquis ; diagnostic133.2 et campagnes
 plateforme conservent leurs critères propres.
+
+## SLS-137 — Échec de conservation dans la campagne UI complète
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
+
+Constat réel : UI66b2617e sur528sources9702888/f016 termine1 après neuf groupes
+passés et UI07 Conservation échoué, Error/source_line41, messageSHA
+b6a41bc87df7ad81aae05a355073793c4c57ced8526f24e4d710afdd2765dd8e.
+Le client annonce cleanuptrue et zéro erreur de nettoyage,21JPEG conservées ;
+le wrapper rejoint Node1 et refuse la qualification. La cause reste à établir.
+Les12API acquises juste avant gardent leur gel ; aucun commun n’est lancé.
+
+- [ ] SLS-137.1 Sceller le rouge, son vrai retourcontrôleur1, neuf groupes non
+  qualifiés, client/wrapper joints,21captures inspectées et reçus originaux.
+  Constater extérieurement PID/cgroup vides, acteurs/gardes terminés, même
+  générationf016/config/référence/5982 et huitcompteurs0 avant tout autre test.
+  Le closer du succès reste immuable ; la collecte d’échec exige explicitement
+  completedfalse/échecUI07/cleanuptrue et ne fabrique aucun succès.
+- [ ] SLS-137.2 Retrouver le point de refus depuis le source et les observations
+  réelles, distinguer produit, protocole et corpus sans attribuer une cause
+  depuis le seul hash ; persister le correctif retenu avant code.
+- [ ] SLS-137.3 Qualifier le scénario affecté puis le full10UI sur le code
+  déployé corrigé, toutes captures inspectées et nettoyages joints ; API12 et
+  25communs de la même époque requis avant de rattacher le passage complet072.
+  Aucun skip, allongement de borne ou réponse substituée ; les suites49/32 restent
+  les obligations distinctes de072/133.4.

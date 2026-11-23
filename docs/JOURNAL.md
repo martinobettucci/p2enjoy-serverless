@@ -10455,3 +10455,18 @@ puis arrêt/absence constatés avant chaque suite. Connexion SSO privée, aucune
 identité dans argv/env/fichiers. Toutes les captures seront ouvertes une à une.
 Les unités072/120–130/132/133 gardent leurs critères globaux tant que ces passages
 et les suites49/32 restent incomplets.
+
+### 23 novembre 2026 — UI complète rouge, conservation à instruire
+
+Après API174f0024 passée12 et unité/cgroup joints, UI66b2617e conserve neuf
+succès mais échoue enUI07 avec Error/ligne41/hashb6a41bc8. Node1 est rejoint,
+cleanuptrue et aucun cleanup_error ; le wrapper refuse son succès.21JPEG sont
+archivées,13 déjà ouvertes individuellement. Aucun commun lancé, aucun groupe
+UI qualifié.137 inscrit avant correction ; cause non attribuée.
+
+La collecte du rouge sera distincte du closer de succès, sans modifier celui
+qui est exécuté : véritable retour1 et completedfalse exigés, conservation des
+rapports/captures, vérification extérieure des unités/cgroups/acteurs/gardes et
+originaux avant tout autre test. Les huitJPEG restantes seront ouvertes avant
+publication de l’échec. L’analyse partira ensuite du source et des observations
+réelles du scénario complet ; son préparatoire130 reste dans sa propre époque.

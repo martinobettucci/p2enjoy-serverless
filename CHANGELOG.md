@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-137 inscrite : fullUI courant rouge en Conservation après neuf groupes,
+  nettoyage annoncé et Node1 joint ;21captures conservées, cause encore inconnue.
+  Collecte d’échec et clôture externe exigées avant correction, zéroUI qualifié.
+
 - SLS-072/133.4 : protocole de pilotage API12→UI10→25communs sur une même
   générationf016 fixé avant code du contrôleur ; unités bornées, retours natifs
   et cgroups joints. Ces campagnes courantes restent à exécuter.
