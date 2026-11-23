@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-137 : audit durable retrouvé, HTTP410 après archivage établi ; sous-code
+  ancien encore inconnu. Décision avant code : séparer la fixture de référence
+  archivée du corpus auquel UI07 impose1min de rétention, sans retry ou délai.
+
 - SLS-138.2 acquise sur529sources/f016 : dix formes natives, sept recherches
   exactes via formateur commun et trois refus bruts conservés ; deuxJPEG
   inspectées, contrôleur0 et clôture externe. FullUI/API12/25communs encore dus.

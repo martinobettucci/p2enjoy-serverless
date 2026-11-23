@@ -10548,3 +10548,18 @@ DeuxJPEG ouvertes une à une, contrôleur0/Nodejoint, cgroupvide et génération
 configuration/référence/5982/huitcompteurs0 recoupés.138.2 acquis, aucun groupe
 complet ni cause137 déduits. La reprise courante sera API12→UI10→25communs
 sur ce même vecteur529, chacune clôturée avant la suivante ;138.3 reste ouverte.
+
+### 23 novembre 2026 — L'audit137 retrouve le refus410
+
+Une lectureRO sous l'identité propriétaire de SQLite retrouve, pour le seul
+service66b2617e, GET/services/logs410 à0,257s de l'archivage. Le statut manquant
+est désormais établi ; sous-code et événement exact de pruning restent inconnus.
+Le source prévoit l'invalidation stricte si la génération change entre lecture
+et décision. Ce n'est pas une preuve que la fonction archivée serait introuvable.
+
+Décision avant correction : conserver le test de politique1min sur son service,
+puis créer une seconde fixture originale dans un service neuf pour l'assertion
+de référence archivée. Rétention par défaut et aucun corpus ancien partagé ;
+chaque upload/promote/appel/archivage est réel, les deux fonctions sont purgées.
+Pas de retry, délai ajouté ou code produit changé. L'observation137 reste active
+pour le GET final et les passagesAPI12/UI10/25communs frais restent requis.

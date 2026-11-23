@@ -1,0 +1,89 @@
+{
+  "format": "p2enjoy-serverless-journal-archived-audit-observation-v1",
+  "unit": "SLS-137",
+  "completed_observation": true,
+  "functional_groups": 0,
+  "qualified_groups": 0,
+  "campaign": "66b2617e-e04c-463a-8013-8b8c00422952",
+  "campaign_source_commit": "97028889f5fc08b7973f79596d10339bd804c154",
+  "observation_source_commit": "6b0108c2f31e13e08d8f4ff781457e743354c095",
+  "old_evidence": {
+    "path": "execution-journal-ui-conservation-first-failed-dev-2026-11-23.json",
+    "sha256": "fea5ab3bb7b0dbb054a9741a41c8a703ee4f2162c1ed1044fcb635e2977772e1"
+  },
+  "old_client_sha256": "63cfb4e812a3569cfec1d8c9a3e84749def7f3813115c4330b4ad2fcb7e661b5",
+  "read_only_observation": {
+    "service_id": "98841e35-7e85-45b2-b10c-1f0df3cfe113",
+    "rows": [
+      {
+        "id": "c496c0e7-1acb-4c8c-b5ea-1cbd0585276f",
+        "action": "request.denied",
+        "object_id": "83eb2fc7-4a25-45ff-96df-1fd83c2babbf",
+        "created_at": 1795414155.1577113,
+        "detail": {
+          "status": 410,
+          "route": "/api/functions/{key}/logs"
+        }
+      },
+      {
+        "id": "f8926cb7-5b31-4b16-acbc-de57c311ed2c",
+        "action": "request.denied",
+        "object_id": "83eb2fc7-4a25-45ff-96df-1fd83c2babbf",
+        "created_at": 1795414236.6372333,
+        "detail": {
+          "status": 410,
+          "route": "/api/functions/{key}/logs/export"
+        }
+      },
+      {
+        "id": "b91dde46-b015-4ec8-b021-ee0c2dae3980",
+        "action": "request.denied",
+        "object_id": "98841e35-7e85-45b2-b10c-1f0df3cfe113",
+        "created_at": 1795414247.7115552,
+        "detail": {
+          "status": 409,
+          "route": "/api/services/{key}/log-policy"
+        }
+      },
+      {
+        "id": "58acdd0b-0a6d-4357-a4ab-d1ed7866ff1f",
+        "action": "function.delete",
+        "object_id": "83eb2fc7-4a25-45ff-96df-1fd83c2babbf",
+        "created_at": 1795414250.2899604,
+        "detail": {}
+      },
+      {
+        "id": "dbe06282-bfa1-476d-89a4-d8495e4db582",
+        "action": "request.denied",
+        "object_id": "98841e35-7e85-45b2-b10c-1f0df3cfe113",
+        "created_at": 1795414250.5467458,
+        "detail": {
+          "status": 410,
+          "route": "/api/services/{key}/logs"
+        }
+      },
+      {
+        "id": "078623bf-6da7-491f-aa33-da32a6947bce",
+        "action": "request.denied",
+        "object_id": "83eb2fc7-4a25-45ff-96df-1fd83c2babbf",
+        "created_at": 1795414340.5552025,
+        "detail": {
+          "status": 404,
+          "route": "/api/functions/{key}"
+        }
+      }
+    ],
+    "read_only": true,
+    "sampled_at_ns": 1795417023479864427,
+    "collector_sha256": "cc9f2afe31813d05a779d1259ad9ebda8b3597c5d5aaf9142a4a4bcfd67deed3"
+  },
+  "read_only_receipt_sha256": "0117784460c453c88085f117b7173f91adb274868cddc90327ffd727a4321e85",
+  "collector_sha256": "263a90c7ad5c47730b7562cdb2890b7accf5da8d77d073a46c8fe05439ed749b",
+  "after_function_delete_seconds": 0.25678539276123047,
+  "established": "Owned service log read refused with HTTP410 after its function was archived; exact error body was not retained.",
+  "limitations": [
+    "No historic query/body/request-id reconstructed.",
+    "Specific 410 subcode and precise concurrent pruning event remain unknown.",
+    "No UI scenario rerun or successful qualification inferred."
+  ]
+}

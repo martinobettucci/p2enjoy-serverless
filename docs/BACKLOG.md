@@ -5161,6 +5161,25 @@ vol, jonction de toutes les promesses et conservation du primaire. Une limite
 du diagnostic fait échouer le passage, sans nouvelle requête ni délai ajouté
 à l'attente fonctionnelle. Aucun test de ce cas n'est annoncé par la revue.
 
+137.2 — [audit durable relu en lecture seule](evidence/execution-journal-archived-reference-audit-dev-2026-11-23.json) :
+le service propre au rouge66b2617e porte un refus GET/services/logs410 à
+0,257s après function.delete, avant le nettoyage90s plus tard. Ce statut est
+établi indépendamment du hash ; le corps, le sous-code410 et l'événement exact
+de pruning manquent toujours. Le contrat invalide les relevés si politique,
+visibilité ou conservation changent ; le scénario mêlait référence archivée
+et corpus complet auquel il venait d'appliquer une minute de rétention.
+
+Décision avant correction du scénario : garder tous les parcours de politique
+et leur assertion finale1min sur leur service initial ; éprouver ensuite la
+référence archivée avec une seconde fonction originale, dans un second service
+neuf de rétention par défaut. Upload/promote/invocation/archivage réels, jeton
+Read propre et purge des deux fixtures par le cycle existant. L'observateur137
+reste sur ce seul GET final. Le service neuf n'a pas le corpus ancien en cours
+d'expiration ; aucune temporisation, relance, tolérance de statut ou modification
+produit n'est ajoutée. Ce choix isole les deux responsabilités plutôt que de
+supposer qu'un relevé invalidé va devenir prêt. Le full10UI et les campagnes
+cohérentes doivent éprouver cette correction ;137.2/.3 restent ouverts jusque-là.
+
 ## SLS-138 — Refus de saisie de la date dans le replay UI
 
 Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
