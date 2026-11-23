@@ -10746,3 +10746,16 @@ execution-console-collection-states-schema011-dev-2026-11-23.141.2 acquise,
 réel du deuxième socle recoupe aussi140.2, migration/partial/full encore dues.
 Reprendre49/543/18 depuis sa première commande sur ce même vecteur529, puis
 32/276 ; conserver séparément les deux rouges et leurs groupes partiels.
+
+### 23 novembre 2026 — Troisième socle313 interrompu,142 inscrit
+
+Gel453900d/529/f016, worker0cdadcb :18campagnes/313groupes et quatreprérequis
+passent, dont12UI141/15JPEG et publicationUI21/22JPEG. service-transport échoue
+au quatrièmegroupe, ligne153, barrière gated absente aprèscommit ; troisgroupes
+partiels, cause inconnue. Retour1/cleanuptrue/cleanup_errors[], deuxfonctions
+purgées. Finish a réellement joint le client ; contrôle extérieur confirme
+naissances terminées/cgroup récursif vide, configuration/référence/5982/huit0.
+142 inscrit avant diagnostic/correction. Cinquantecaptures déjà ouvertes avec
+reçus (7contrôle/6connexion/15exécution/22publication), seizemanuel encore à
+inspecter. Sceller d'abord ce rouge et ses gardes, puis instruire le transport ;
+aucun rejeu, aucune clôture49,140/141 gardent leur critère global manquant.

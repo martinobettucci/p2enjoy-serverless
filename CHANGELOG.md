@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-142 inscrit : troisième socle courant453900d/529/f016 arrêté sur la
+  barrière native aprèscommit du transport de service, après313groupes et
+  quatreprérequis. Troisgroupesclient partiels, nettoyage et fermeture externe
+  acquis ; cause et correction restent à établir.12UI141 passe dans ce socle.
+
 - SLS-141 inscrit : le deuxième socle courant s'arrête sur l'état de journal
   attendu dans l'historiqueUI, après272groupes partiels et troisprérequis.
   Client et worker fermés, rouge scellé et18captures inspectées ; oracle

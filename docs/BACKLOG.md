@@ -73,6 +73,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
 | 3 | [SLS-140](#sls-140) Attestation courante du constructeur historique | Corriger | `[~]` | SLS-104 | [STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md#attestation-courante-du-constructeur--sls-140) |
 | 3 | [SLS-141](#sls-141) États de journal dans l'historique d'invocation | Corriger | `[~]` | SLS-061 | cette unité |
+| 3 | [SLS-142](#sls-142) Barrière après commit du transport de service | Corriger | `[~]` | SLS-031, SLS-108 | [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md) |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -5552,3 +5553,31 @@ indépendante sansP1/P2.37groupes ciblés, zéro groupeunique ajouté et unité
 incomplète : nouveau socle49 depuis le début encore dû, puis complément32.
 Le rouge272/quatreUI reste partiel, DTOhistorique inconnu.140.2 acquise sur
 le vrai rapportbuilder du deuxième socle, SHA61167986 ;140.3 reste ouverte.
+
+## SLS-142 — Barrière après commit du transport de service
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-031, SLS-108. Ordre : 3.
+Contrat : SERVICE_TRANSPORT_REGRESSIONS et SERVICE_CONFIGURATION_URLS.
+
+Constat réel : troisième socle courant au gel453900d/529sources/f016 arrêté1
+sur service-transport.mjs:153, « Barrière native absente : gated », après
+18campagnes/313groupes et quatreprérequis. Troisgroupes du client passent,
+puis le cas réponseperdueaprèscommit échoue après135,18s au total. Aucun état
+produit ou cause attribué à ce stade. Clientcompletedfalse/cleanuptrue,
+cleanup_errors[] ; deuxfonctions purgées. Worker0cdadcb finalisé1, client et
+naissances/cgroup fermés ; recoupementphysique extérieur, configuration,
+référence/5982 et huitcompteurs0 conservés. Les deux rouges140/141 restent
+séparés ; aucun49 complet acquis. Le12UI141 passe dans ce passage,15JPEG.
+
+- [ ] SLS-142.1 Sceller rapports/programmes/529sources/trace et résultatterminal,
+  troisgroupespartiels distincts des313 ; recouper gardes, ressources possédées,
+  restauration et toutes captures fraîches avant d'interpréter le refus.
+- [ ] SLS-142.2 Établir la cause réelle de l'absence de gated : transportCLI,
+  événementnatif et étatdurable recoupés, refus/issueinconnue sansrejeu ;
+  décision motivée persistée avant correction, aucun délai arbitraire ni
+  relâchement d'oracle pour obtenir un vert.
+- [ ] SLS-142.3 Corriger puis réussir les cinqgroupes complets du transport avec
+  vraies coupures/gardeindépendante, troisconnexionsHTTPS, mutations et absence
+  de publication sousissueinconnue ; publication/promotion/invocation explicites
+  ensuite, purges/gardes/clients et originaux conservés.25communs frais et
+  captures inspectées, puis49complet depuis le début ; complément32 reste dû.
