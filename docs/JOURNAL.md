@@ -10397,3 +10397,15 @@ Le module produit désormais measurement_scope et timing_consistency depuis les
 valeurs déjà lues ; les assertions du client les recoupent. Aucune statistique,
 borne, image ou code applicatif ne change. RevueRO sansP1/P2 et syntaxe acquises ;
 les nouveaux smoke2/perte restent requis avant clôture136.
+
+### 23 novembre 2026 — Chemins des reçus à normaliser avant clôture136
+
+Le smoke corrigé41227946 passe ses deux groupes sousa43d1b4 et produit ses
+métadonnées réelles. Une lecture de repérage refuse l’unicité : les chemins
+absolus du contrôleur ne soustraient pas les chemins relatifs du glob local,
+désormais deuxsmokes existent. Ce n’est ni un nouvel échec E2E ni une preuve de
+clôture. Décision avant code du nouveau closer : chemins canoniques des deux
+ensembles, confinement .local/e2e et une seule différence exigés. Le closer
+précédent exécuté reste immuable ; reçu natif et campagne ne sont pas rejoués.
+Cette qualification de collecte est inscrite en136.4 ; les clôtures antérieures
+restent valides car leurs cas n’avaient chacun qu’un reçu candidat.

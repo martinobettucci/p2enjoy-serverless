@@ -5058,6 +5058,13 @@ annoncée, sans remplacer le profiler ni transformer ces données en ventilation
   lectures/fermetures/restaurations et métadonnées exactes recoupées ; relecture
   du plein conservé, sans le présenter comme exécuté sur le nouveau collecteur.
   La mesure causale133.2 et les campagnes de plateforme restent distinctes.
+- [ ] SLS-136.4 La clôture distingue les anciens reçus du nouveau en comparant
+  leurs chemins canoniques sous .local/e2e. Le contrôleur conserve des chemins
+  absolus ; l’ancien closer compare un glob relatif, ce qui devient ambigu au
+  second smoke. Normaliser les deux ensembles, refuser toute sortie du dossier
+  et exiger une seule différence. Nouveau closer privé gelé, précédents scripts
+  exécutés immuables ; aucune E2E rejouée pour réparer cette seule collecte.
+  Éprouver la clôture du smoke puis parser-loss avec leurs prédécesseurs présents.
 
 136.1 — [Plein6000](evidence/invocation-cost-full-schema011-dev-2026-11-23.json)
 et [release/EOF900](evidence/invocation-cost-default-restoration-schema011-dev-2026-11-23.json)

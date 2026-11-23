@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-136.4 : ambiguïté relatif/absolu du closer constatée lors du second
+  smoke réel passé ; normalisation confinée et nouveau closer décidés avant
+  code. Aucune E2E rejouée ni clôture déduite de cette lecture refusée.
+
 - SLS-136 : métadonnées du parser et assertions du client corrigées pour la
   portée d’interpréteur et les incohérences de temps brutes. Plein6000 scellé
   sans attribution par arêtes ; phrase éditoriale du reçu court corrigée en
