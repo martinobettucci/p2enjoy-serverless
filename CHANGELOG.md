@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-143.5 : défaut statique de conservation de la primaire enregistré dans
+  le moniteur auxiliaire49 et son contrôleur ; traitement décidé avant code,
+  secondaires et restitutions distinctes. Préparation des six exclusions49 et
+  de l’épinglage vivant530 pour32 ; aucune qualification acquise par cette décision.
+
 - SLS-146 : [barrière ordonnée et diagnostics qualifiés](docs/evidence/storage-confirmation-order-current-dev-2026-11-23.json)
   sur98daf9f/530/f016 :15stockage/25communs frais, cinqdiagnostics distincts0groupe
   et troisclients1 conservés ; vraisEPERM/protocole/EACCES et primaire inchangée.

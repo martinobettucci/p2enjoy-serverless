@@ -11481,3 +11481,22 @@ indépendante finale0 :208références/161chemins privés,17programmes, septTAR
 HuitSHA et statuts identiques avant/après les deux analyses, aucune écriture
 concurrente ; scans des exports sans clé interdite ni signatureJWT/p2s.
 L’inspection des22originaux reste celle du principal.
+
+### 23 novembre2026 — Préparation du nouveau49 et conservation de la primaire143
+
+Le ciblé146 est scellé et poussé par ed44cca. Exploration bornée en lecture
+seule et lecture du principal : les finally des deux programmes privés530
+observe-current-schedules-storage-response et run-current-schedules-storage-observer
+peuvent remplacer la primaire par save/print ou terminate/wait/hash/save. Ces
+programmes préparés n’ont pas été exécutés. Constat consigné143.5 avant code ;
+nouvelles copies conservant l’exception initiale et toutes les finalisations,
+secondaires expurgées séparées, échec de finalisation seul non masqué. Aucun
+nouveau scénario produit, délai, API, dépendance ou résultat remplacé.
+
+Le publisher49 doit exiger aussi le sixième rouge2ef5a5e5, avec ses zéro groupe
+qualifié ; nouvelle copie avant lancement. Préparer les cinqhelpers32 pour530,
+y compris vrai épinglage du namespace/boot et worker vivant absent du retainer
+antérieur. Source49 figée jusqu’au32, preuves49 déjàcommittées au lancement32.
+L’ancien49 complet a duré14 033,595s (~3h54), sans promesse sur la durée nouvelle ;
+borne21600s et expiration900s réelles conservées. Ces décisions précèdent le
+code privé de préparation et ne prétendent pas qualifier les branches négatives.

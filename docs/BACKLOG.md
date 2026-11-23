@@ -5665,6 +5665,16 @@ d'assertion ou allongement arbitraire de délai pour obtenir200.
   et complément32/276, sources/image/native/clients/gardes recoupés.
   Une preuve manquante laisse l'unité ouverte.
 
+
+- [~] SLS-143.5 Préserver la première exception du moniteur de stockage de la
+  suite et de son contrôleur malgré les erreurs de restitution, de jointure,
+  de hachage, de sauvegarde ou d’affichage. Les finalisations indépendantes
+  restent tentées ; conserver les secondaires séparément et échouer si une
+  finalisation seule échoue. Aucun résultat client, délai ou acquisition changé.
+  Analyse statique du23novembre : les finally des deux programmes privés530
+  peuvent remplacer la primaire par save/print/terminate/wait. Ces programmes
+  n’ont pas été exécutés ; les nouvelles copies portent le traitement avant49.
+
 143.1 — [premier503 scellé](evidence/schedules-storage-console-invocation-first-failed-dev-2026-11-23.json) :
 35rapports, TAR529 exactGitc94,89captures inspectées, worker1/lanceurjoint/
 naissances/cgroupvide et namespacehôte épinglé recoupés. Troispurges réelles,
@@ -5722,6 +5732,25 @@ programmes, SHA, fenêtres et limites sont conservés séparément, zéro groupe
 ajouté. Un arrêt de suite avant ce parcours reste « non atteint », sans faux
 acquire. Cela cherche le souscode dans le contexte transversal ayant produit
 le premierrefus, sans changer l'image ni attribuer une absence de reproduction.
+
+
+Décision143.5 avant code : garder l’objet de la première exception, ne le
+relancer qu’après les tentatives indépendantes de restitution/jointure et
+sauvegarde. Chaque secondaire porte type, errno/code et SHA du message, sans
+contenu de protocole ou secret. Si aucune primaire n’existe, la première
+secondaire fait échouer le programme ; un client nonnul reste nonnul. Conserver
+les programmes530 préparés, créer deux copies nommées pour la préservation de
+la primaire et lier leurs SHA au dossier courant. Les refus de ces chemins ne
+sont pas qualifiés par la seule lecture statique ; critère ouvert jusqu’à ses
+preuves réelles. La campagne49 nominale conserve ses49/543/18 et le moniteur0groupe.
+
+Décision de préparation49→32 : le publisher49 impose les six workers rouges,
+dont2ef5a5e5f5bc4f98bdc74961ccc8371c, comme exclusions à zéro groupe. Les cinq
+helpers du complément32 sont adaptés aux530sources avec un épinglage réel
+PIDnamespace/boot/naissance pendant la vie du worker. Le socle49 et son gzip
+entrent dans le commit de lancement32 ; aucun des530fichiers indexés ne change
+entre les deux passages. Les bornes6h,900s d’expiration réelle et les oracles
+restent inchangés. Aucun résultat de ces préparations n’est encore acquis.
 
 <a id="sls-144"></a>
 ## SLS-144 — Rapports de jobs et dashboards générés

@@ -194,3 +194,18 @@ Les huit pins d’éditeur/fixtures suivent cette image réellement construite e
 déployée. Les baselines des profils de bascule et des diagnostics historiques
 ne changent pas. La garde courante lie les trois nouvelles preuves nommées et
 les quatre modules de rétention ; une preuve manquante reste un refus.
+
+## Finalisations des collectes courantes
+
+Les programmes auxiliaires gardent la première exception jusqu’à la fin de
+leurs tentatives de restitution, jointure, conservation des flux et sauvegarde.
+Une erreur de finalisation ne remplace pas cette primaire ; ses métadonnées
+expurgées sont conservées séparément. Sans primaire, la première erreur de
+finalisation entraîne une sortie en échec. Un retour nonnul du client observé
+reste nonnul. Le moniteur143 ne soumet aucune requête métier et compte zéro groupe.
+
+Le scellement49 exige les six essais courants incomplets distincts, y compris
+celui de146, exclus du total. Le lancement32 épingle réellement espacePID du
+lecteur et du worker vivant, boot et identités ; une absence ultérieure n’est
+interprétée que dans ce contexte vérifié. Manifeste et gzip49 sont déjà dans le
+commit de lancement32, dont les530SHA de sources restent strictement identiques.
