@@ -5118,6 +5118,9 @@ Les12API acquises juste avant gardent leur gel ; aucun commun n’est lancé.
   exiger à sa place le reçu indépendant des21images réellement observées et
   leurs SHA exacts. Le premier closer refusé par KeyError est conservé ; sa
   correction utilise un nouveau fichier gelé, sans rejouer aucune E2E.
+  La génération qui lie UI et communs est celle après la coupure réelle d’API10,
+  pas celle avant API12. Conserver ses deux StartedAt et les événements de coupure ;
+  ne pas comparer les démarrages à l’intérieur du scénario qui les fait changer.
 - [ ] SLS-137.2 Retrouver le point de refus depuis le source et les observations
   réelles, distinguer produit, protocole et corpus sans attribuer une cause
   depuis le seul hash ; persister le correctif retenu avant code.

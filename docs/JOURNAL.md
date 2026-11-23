@@ -10481,3 +10481,16 @@ connexionnative ou libération d’unité. Ce champ n’est écrit que pour un s
 Décision avant son correctif : typer le reçu échoué sans ce champ et vérifier
 le reçu indépendant complet des21images contre toutes les captures archivées.
 Un nouveau closer gelé conserve le précédent refusé ; aucun test n’est rejoué.
+
+### 23 novembre 2026 — Génération de rattachement après la coupure API
+
+Les deux clôtures externes sont acquises : API contrôleur0, UI contrôleur1 et
+unitéfailed puis libérée, cgroups vides et originaux recoupés. Le premier
+publisher de checkpoint refuse ensuite sa comparaison du StartedAt avant/après
+API (outil7db93e/code1/ligne14), avant toute écriture de preuve publique. API10
+éprouve justement SIGKILL9/code137 et la reprise : le mêmeCID/image passe de
+05:40:01 à05:59:37UTC ; référence inchangée. L’observation native de coupure
+est conservée. Décision avant nouveau publisher : lier UI au StartedAt après
+API et garder distincts les deux démarrages de l’API elle-même. Sourcevecteur
+et CID/image/référence restent stricts. Aucun test n’est rejoué pour cette
+correction du rattachement, les publishers exécutés restent immuables.
