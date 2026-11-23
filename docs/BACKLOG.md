@@ -5464,7 +5464,7 @@ les branches historiques006/007/008 ni les autres gardes du constructeur.
 
 - [x] SLS-140.1 Sceller le premier refus, sources/rapport/trace/worker et clôture
   native ; zéro groupe fonctionnel et un prérequis, sans transformer le rouge.
-- [ ] SLS-140.2 Corriger l'attestation exacte et sa traçabilité, référence complète
+- [x] SLS-140.2 Corriger l'attestation exacte et sa traçabilité, référence complète
   courante et origine089 recoupées ; aucun code courant copié dans l'arbre003,
   mêmes comparaisons strictes dépendances/runtime/validateur, aucun changement produit.
 - [ ] SLS-140.3 Construire réellement l'image historique puis réussir les quatre
@@ -5501,11 +5501,11 @@ passe réellement, mais ses migrations/partial/full/25communs restent dus.
 - [x] SLS-141.1 Sceller le rouge, programmes/529sources, erreurs et rapports
   exacts, cinqJPEG inspectées et clôture/possession/étatnatifs recoupés ;
   distinguer272partiels, quatreUI partiels et zéro groupe global qualifié.
-- [ ] SLS-141.2 Établir la réponse réelle et le rendu attendus pour le seulappel
+- [x] SLS-141.2 Établir la réponse réelle et le rendu attendus pour le seulappel
   métier terminé, en recoupant le contrat et le vrai DTO/journal ; décider et
   persister la correction avant code. Aucun remplacement de réponse ou d'état,
   retry arbitraire, skip ou suppression d'une assertion d'étatvide.
-- [ ] SLS-141.3 Prouver les états applicables réels de l'historique, journalvide,
+- [~] SLS-141.3 Prouver les états applicables réels de l'historique, journalvide,
   événements plateforme/handler, erreur de code et HTTPmétier distingués,
   texte échappé et expurgé ; clavier/mobile/captures, vrai nettoyage et replays
   connexes puis socle49 complet frais. Une preuve manquante garde l'unité ouverte.
@@ -5538,3 +5538,17 @@ les collecteurs courants stricts en nommant leur responsabilité de console,
 sans faire passer un reçuUI pour un reçuAPI. Aucun produit/image/configuration,
 délai métier ni branche historique changé ; la correction de texte du contrat
 CONSOLE_EXECUTION suit le comportement déjà déployé.
+
+141.2/141.3 — [checkpoint ciblé courant](evidence/execution-console-collection-states-schema011-dev-2026-11-23.json) :
+12UI puis25communs passent au gel0a6a3a2/529sources/f016, deuxcontrôleurs0
+clôturés extérieurement. Les trois vraisDTO sont succeeded/503/collected,
+rejected/429/not_started et failed/503/unavailable, chacun avec bufferstring
+vide et texte exact correspondant sanspre. QuinzeJPEG UI, seizeJPEG manuel
+et sixPNG connexion ouvertes individuellement ; clavier/mobile, erreurs de
+code/HTTPmétier, échappement/expurgation/troncature conservés. Purge physique,
+configuration/secrets vides, huitcompteurs0, mêmes génération/configuration/
+référence/5982 ;42backend/quatreweb no-store et manuel84 recoupés. Revue
+indépendante sansP1/P2.37groupes ciblés, zéro groupeunique ajouté et unité
+incomplète : nouveau socle49 depuis le début encore dû, puis complément32.
+Le rouge272/quatreUI reste partiel, DTOhistorique inconnu.140.2 acquise sur
+le vrai rapportbuilder du deuxième socle, SHA61167986 ;140.3 reste ouverte.

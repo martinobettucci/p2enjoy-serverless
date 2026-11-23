@@ -73,8 +73,14 @@ conserve le vrai DTO navigateur avant ses assertions et exige le libellé011
 correspondant. Les scénarios existants de refus et perte du runtime recoupent
 aussi not_started/unavailable ; troisJPEG supplémentaires, soit15 pour12groupes.
 Les pilotesUI1800/60/2000 et communs3600/60/3800 conservent vraisretours,
-PID/naissance/cgroups, sources et captures. Ces12UI/25communs restent à exécuter,
-puis le49 entier ; la preuve105/b452 garde son époque et les anciens reçus.
+PID/naissance/cgroups, sources et captures. Le [checkpoint ciblé141](../docs/evidence/execution-console-collection-states-schema011-dev-2026-11-23.json)
+passe ces12UI/25communs sur0a6a3a2/529/f016, deuxcontrôleurs0 clôturés et
+37captures inspectées (15UI/16manuel/6connexion). TroisDTO réels recoupent
+collected/not_started/unavailable ; purge physique, configuration/secrets vides,
+mêmes génération/configuration/référence/5982/huit0,42backend/quatreweb et manuel84.
+Revue indépendante sansP1/P2 ; zéro groupeunique ajouté.141 reste ouvert pour
+49 entier depuis le début, puis32/276. La preuve105/b452 garde son époque et
+les anciens reçus.140.2 est acquise par le builder réel ;140.3 reste ouverte.
 
 ### Historique des préparations et campagnes précédentes
 

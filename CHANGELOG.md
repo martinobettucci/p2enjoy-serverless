@@ -7,7 +7,9 @@
   Client et worker fermés, rouge scellé et18captures inspectées ; oracle
   de texte supprimé par072 identifié. DTO/étatscollected/not_started/unavailable
   et15JPEG du client spécifiés puis implémentés sans changement produit ;
-  syntaxes valides, reprise12UI/25communs puis49 encore due.
+  reprise12UI/25communs réussie au gel0a6a3a2,37captures inspectées et deux
+  contrôleurs0 clôturés, revue sansP1/P2 ;141.2 acquise.141.3 reste en cours
+  pour49 entier, puis32/276 ; zéro groupeunique ajouté.
   Le constructeur140 passe réellement, migration et suite restent dues.
 
 - SLS-140 inscrit : le socle49 courant refuse le SHA d'authentification au

@@ -10731,3 +10731,18 @@ conservé comme transcription exacte de l'outil dans un reçu privé, zéro grou
 Le mêmeupdate strict passe ensuite ses septfichiers avec sauvegarde/atomique ;
 aucune image/service/configuration modifiée. Codefd6d021 poussé, aucunE2E de
 reprise déjàdéclaré. Le prochain pilote fige le nouveau529 synchronisé.
+
+### 23 novembre 2026 — États de collecte141 acquis en ciblé, socle à reprendre
+
+Gel0a6a3a2/529sources/f016 :12UI puis25communs frais passent, deuxcontrôleurs0
+et clôtures externes/PIDnaissance/cgroups recoupés. TroisDTO réels distincts,
+collected vide, not_started après429 et unavailable après perte du runtime,
+avec textes exacts et absence depre.37captures ouvertes individuellement,
+15UI/16manuel/6connexion ; purge physique, configuration/secrets vides, mêmes
+génération/configuration/référence/5982 et huitcompteurs0.42backend/quatreweb
+no-store, manuel84 identiques. Revue indépendante sansP1/P2, checkpoint public
+execution-console-collection-states-schema011-dev-2026-11-23.141.2 acquise,
+141.3 reste en cours pour49entier ; zéro groupeunique ajouté. Le rapportbuilder
+réel du deuxième socle recoupe aussi140.2, migration/partial/full encore dues.
+Reprendre49/543/18 depuis sa première commande sur ce même vecteur529, puis
+32/276 ; conserver séparément les deux rouges et leurs groupes partiels.
