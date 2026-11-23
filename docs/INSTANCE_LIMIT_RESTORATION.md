@@ -412,3 +412,23 @@ et originaux recoupés. Les deux âges sont ensuite rejoués sur un même vecteu
 courant ; le composite six ne peut utiliser l’ancien sourceâge526. Les modes
 consommateurs et25groupes communs restent dus. Ni les tests de lifecycle ni
 le nouveau fichier ne changent l’image applicative ou les captures scellées.
+
+
+### Complément135.3 — leader terminé avec thread encore vivant
+
+Le pidfd atteste la fin du groupe entier, pas seulement celle de son leader.
+La preuve après correction ajoute donc un vrai processus Python du client
+lifecycle, avec un thread qui conserve un descripteur du répertoire de stockage
+géré. Sur le noyau x86_64 observé, son leader appelle le vrai syscall exit60,
+sans exit_group ; le thread reste vivant. Aucune valeur de lecture n’est
+remplacée. Le parent doit constater Z du leader, identité du thread/FD réel,
+EINVAL réel sur mountinfo et pidfd non prêt ; sinon le scénario échoue.
+
+Le vrai contrôle doit refuser process_reference_unavailable avec naissancesZ
+stables, événements poll vides et causeEINVAL. Le signal final vise parpidfd
+le seul groupe enfant possédé, même si son leader est déjàZ ; sa terminaison
+complète et sa récolte sont recoupées. Ce cas éprouve le refus d’une observation
+indisponible encore vivante et empêche de remplacer le critère pidfd par un
+simple testZ. Il n’ajoute ni faux programme de sonde ni service de substitution.
+Le client local lit le nombre de contrôles attendu propre à chaque mode ;
+la reproductionbefore-fix scellée reste immuable à troiscontrôles.
