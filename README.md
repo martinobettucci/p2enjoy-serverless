@@ -1,5 +1,14 @@
 # P2Enjoy Serverless
 
+Le [sixième socle courant](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
+termine1 dans la publication ZIP : garde `commit_not_observed`, upload200
+attendu503.55groupes antérieurs puis13checks partiels, troisprérequis et aucune
+capture ; aucun49 complet. Le reçu natif confirme ensuite commit et publication
+dédupliquée, sans établir la chronologie de l’observation. Deuxfonctions purgées,
+deuxjetons révoqués, septminuteurs inactifs et worker/lanceur/cgroup fermés ;
+référence/configuration/5982/huit0 et42backend/quatreHTTPSno-store conservés.
+SLS-146 porte le diagnostic ; les anciens passages et leurs limites restent distincts.
+
 Le [ciblé courant de reprise145](docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json)
 passe30groupes réels : cinqreprises puis25communs frais, surba55881/530sources
 et l’imagef016. Quatregardes, troiscoupures137, troisfenêtres manquées et

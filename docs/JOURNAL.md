@@ -11182,3 +11182,51 @@ une confirmation perdue réussie. Aucun correctif causal supposé à ce stade.
 L’inscription est relue indépendamment sans P1/P2 résiduel. La garde en refus
 est la huitième entrée (index7), distincte de commit-database-busy à l’index6.
 Cette revue est documentaire, sans nouveau diagnostic ni opération distante.
+
+### 23 novembre 2026 — Premier refus ZIP scellé et clôture réelle, SLS-146.1
+
+Clôture extérieure0 du worker2ef5a5e5, après sonfinish1 conservé : naissances du
+worker et du lanceur terminées, unitéinactive et cgroupvide dans l’espacePID/
+boot épinglé vivant. Un seul commit documentaire6cd6cd4 suit le lancement5eaf3ab ;
+ses troisdocuments n’altèrent aucune des530sources, TAR exact et égal aux deux
+commits. Cinqrapports courants conservés : un SSO réel, deuxconstructeurs,
+contrôle55 puis stockage13checks réussis/14e en échec/15e nonatteint.
+
+Deuxfonctions purgées physiquement, deuxjetons révoqués, service/namespace retirés ;
+volumes/baux/code/montages/réseaux/canaux/secrets vides recoupés. Huit handles
+de faute comprennent septminuteurs et un consommateurhold-lease ; sept unités
+inactives et consommateur absent. Les événements initiaux ne portaient pas les
+PID/naissances des helpers : leur absence actuelle ne remplace pas cette preuve
+manquante. API et agent nonarrêtés/TracerPid0, configuration/référence/5982artefacts
+et huitcompteurs0 conservés ;42backend et quatreHTTPSno-store égaux au gel.
+
+Le premier collecteur natif termine1 sur KeyErrorMainPID : cette propriété n’est
+pas exposée par un timer. Programme/transport/stderr originaux sont conservés ;
+un autre lecteurRO garde les propriétés effectivement présentes et termine0,
+sans relance de campagne. Les septservices/timers sont inactifs. Seul le journal
+du premierwatchdog retrouve storage-guard-resumed (agent2799774/606506948,
+was_stoppedtrue). Six journaux sans événement utile et zéro logAPI correspondant
+dans la fenêtre bornée ne prouvent pas l’absence d’incident.
+
+Le reçu de configuration existe encore après purge : opérationab5a1e59,
+committed11→12. CandidatZIPe41bcb25published, révisionfcdbbb1a, hash580c17aa,
+code_changedfalse ; auditfunction.deploy concordant avec configuration_changedtrue.
+La déduplication et le commit ultérieurs sont donc établis. L’horodatage métier
+de cet audit ne donne pas l’instant du commit SQLite et ne reconstitue pas la
+boucle5s ni son dernier SELECT. CorpsHTTP/en-têtes d’opération et stderr natifs
+ont été écartés par le client ; aucune récupération rétrospective revendiquée.
+
+La preuve zip-storage-commit-barrier-first-failed-dev-2026-11-23 garde retour1,
+cleanupfalse/fault:AssertionError,55antérieurs/13partiels/zéroqualifié globalement,
+zéro capture ; le complément32 et l’observateur143 n’ont pas commencé.146.1 est
+acquise pour le scellement avec limites explicites,146.2/.3/.4/.5 restent ouvertes.
+Aucune correctionproduit ni cause temporelle supposée.
+
+Revue et vérification indépendantes sans P1/P2 : septchemins et leurs SHA
+strictement stables avant/après ; cinqrapports, huitprogrammes,530fichiersTAR
+égaux au Git5eaf3ab et46références vers40chemins recoupés. Gzip365794octets/
+SHA2cee658c, brut1027652/SHA8ca40fd4 ; aucun formatJWT/p2s ni clé interdite
+détecté dans l’export. Ces contrôles de formats ne garantissent pas universellement
+l’absence de contenu sensible. Un premier bloc du vérificateur termine1 sur son
+sélecteur request_id obligatoire ; correction en mémoire avecget, aucune écriture,
+puis vérification finale0 sur le même arbre. Aucun E2E ou sealer rejoué.

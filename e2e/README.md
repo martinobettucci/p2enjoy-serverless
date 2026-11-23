@@ -1,5 +1,15 @@
 # Qualification de la plateforme
 
+Le [sixième socle courant](../docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
+conserve son premier refus de publication ZIP : garde `commit_not_observed`,
+upload200 attendu503, assertion de release puis nettoyage en échec. Un SSO réel
+et deuxconstructeurs,55groupes antérieurs/13checks partiels, zéro capture et
+zéroqualification globale. Le reçucommitted et le candidatpublished dédupliqué
+prouvent l’issue ultérieure, sans restituer le délai du commit. Clôture extérieure0,
+deuxpurges physiques/deuxjetons révoqués, septminuteurs inactifs ; naissances
+initiales des helpers nonretenues. Premierlecteur natif1 conservé (MainPID absent
+sur un timer), lecteur corrigé0 sans rejeu. SLS-146 reste ouverte ; aucun49/32 acquis.
+
 Le [ciblé de reprise145](../docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json)
 passe5nominaux puis25communs frais surba55881/530/f016. Quatregardes et
 troiscoupures137, troisfenêtres manquées sans invocation, claimed/linked

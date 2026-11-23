@@ -5961,12 +5961,27 @@ primaire par « Nettoyage de campagne incomplet ». Le client écarte les stderr
 natifs avec `resume()` : leur contenu n’est pas récupéré rétrospectivement.
 Ces faits ne prouvent pas à eux seuls un défaut de décision du produit.
 
-Le rapport original conserve `completed:false`, `cleanup:false` et les deux
-fonctions de la campagne. La santé finale déclare zéro allocation, bail,
-fonction en attente et montage ; la purge physique, les huit gardes et la fin
-réelle doivent être recoupées. Le worker est finalisé 1, son unité arrêtée et
-son lanceur joint. Les 55 antérieurs et 13 partiels ne qualifient aucun socle
-complet ; les 30 du ciblé145 restent distincts.
+Le [premier refus scellé](evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
+conserve `completed:false`, `cleanup:false` et les deux fonctions de la campagne.
+Clôture extérieure0 et lecture native corrigée0 : deuxpurges physiques et
+deuxjetons révoqués, parents retirés, septminuteurs inactifs ; huit handles de
+faute dont un consommateur hold-lease absent. Les naissances originales des
+helpers ne sont pas retenues ; leur absence actuelle ne les reconstitue pas.
+Worker/lanceur terminés et cgroupvide dans l’espacePID épinglé vivant,
+API/agent sans traceur ni arrêt ; configuration/référence/5982/huit0 conservés.
+42backend/quatreHTTPSno-store égaux aux sources/imagef016. Premierlecteur1 sur
+MainPID absent d’un timer, original gardé et lecture corrigée0 sans rejeu.
+Les55antérieurs et13partiels ne qualifient aucun socle complet ; les30 du
+ciblé145 restent distincts.
+
+Le reçu de configuration retenu porte l’opération `ab5a1e59`, décisioncommitted,
+version11→12. Le candidat `e41bcb25` est published, code_changedfalse, sur la
+révision canonique A ; son auditfunction.deploy confirme la déduplication et
+configuration_changedtrue. Cela prouve l’issue ultérieure, sans reconstituer la
+fenêtre5s de lecture ni l’instant du commit transactionnel. Aucun log correspondant
+dans la fenêtre bornée ; seul le premierwatchdog conserve sa restitution en
+journal. Ces absences ne prouvent pas l’absence d’incident. CorpsHTTP/en-têtes
+d’opération et stderr natifs nonretenus restent inconnus.
 
 Décision avant diagnostic : conserver les rapports et programmes exacts, le
 TAR530 et le transport, puis lire seulement les identités, reçus, états et
@@ -5976,7 +5991,7 @@ de release/nettoyage. Aucun retry ni augmentation de délai ; ne pas accepter
 200 comme substitut au 503 qui éprouve la confirmation perdue. Tout ajout
 d’observation conserve les observateurs et dépendances réels.
 
-- [~] SLS-146.1 Sceller le premier refus : cinq rapports courants, source/TAR530,
+- [x] SLS-146.1 Sceller le premier refus : cinq rapports courants, source/TAR530,
   worker/transport 1, 55 antérieurs et 13 checks partiels, check14 échoué,
   check15 non atteint et zéro groupe global. Recouper les deux fonctions,
   révocations, parents, huit gardes, naissances/cgroups, référence, configuration,

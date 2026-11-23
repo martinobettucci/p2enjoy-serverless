@@ -2,11 +2,14 @@
 
 ## [Non publié]
 
-- SLS-146 inscrite : le sixième socle courant s’arrête après 55 groupes et
-  13 checks partiels de stockage. La garde de commit de publication ZIP termine 1
-  sur `commit_not_observed`, PUT attendu503/reçu200 ; release et nettoyage
-  rapportent des assertions secondaires. Premier résultat conservé, aucune
-  relance ni cause attribuée. Clôture native et diagnostic restent dus.
+- SLS-146 : [premier refus ZIP scellé](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json),
+  gel5eaf3ab/530/f016,55groupes antérieurs et13checks partiels, troisprérequis,
+  zéro capture. Gardecommit_not_observed1, PUT200 attendu503 ; assertionsrelease/
+  nettoyage conservées. Reçucommitted11→12 et candidatpublished dédupliqué établis,
+  délai primaire inconnu. Deuxpurges physiques/deuxjetons révoqués, septminuteurs
+  inactifs, worker/lanceur/cgroup fermés, API/agentTracerPid0 et originaux conservés.
+  Premierlecteur1 (MainPID d’un timer), lecture corrigée0 sans rejeu ; naissances
+  des helpers/stderr/corpsHTTP initiaux nonretenus.146.1acquise ; diagnostic et49/32 dus.
 
 - SLS-145 : [ciblé30 courant](docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json),
   cinqreprises puis25communs frais surba55881/530/f016. Quatregardes, troiscoupures137,
