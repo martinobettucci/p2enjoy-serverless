@@ -10792,3 +10792,18 @@ mais conserve CID/image du contrôle et référence entière via same_installati
 Les deux émissions terminales sont protégées ; erreur secondaire attachée au
 primaire ou propagée après nettoyage. Le timer n'est arrêté qu'après retour
 de restauration acquis : une restauration refusée conserve son secours70s.
+
+### 23 novembre 2026 — Diagnostic142 : barrière reconnue après l'abandonclient
+
+Gel6a4d4ad/529/f016, canonique unique arrêté1 au before ; watchdog acquis,
+gated réellement à43798ms/37072arrêts, après borneclient40s. Fermeturestdin
+du finally, pasdecut ; helper1 puisrestauration, CLI0/septconnexions et
+unepublicationpilote conservés. Purge physique et deuxgardes/TracerPid0,
+contrôleur1/Nodejoint/PIDnaissance/cgroupvide/configuration/référence/5982/huit0.
+Rouge scellé, zéroqualifié et after nonatteint. Le cumul des sleep1ms du
+NativeObserver partagé n'est pas mesuré ; aucun historiqueafter reconstruit.
+Décision avantcorrectif : réveilSIGCHLD déjàutilisé par opérateursjournaux,
+sous-classe locale au helper, waitpid autoritaire et métriques d'attente ;
+aucun changement du modulepartagé, matcher ou bornes40/45/70/12. Clôture
+des descripteurs/handler sur touteissue, garder secours70 si restoreéchoue.
+Revue du rouge puiscorrectif, cinqcanoniques/connexes/25communs encore dus.

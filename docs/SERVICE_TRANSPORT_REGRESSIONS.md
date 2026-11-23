@@ -173,3 +173,35 @@ traces fraîchement produites et clôture externe sont conservés. Aucun replay
 automatique, aucun groupe qualifié par le seul diagnostic. L'émission du bilan
 est protégée par un finally qui garantit le nettoyage ; si une erreur primaire
 existe déjà, l'échec de livraison est attaché comme note statique à cette erreur.
+
+### Mesure courante et décision avant correction142
+
+Le [diagnostic6a4d4ad](evidence/service-transport-acquisition-deadline-refusal-dev-2026-11-23.json)
+termine1 au casbefore : une seule vérification partielle passée, zéroqualifié.
+Le helper reconnaît réellement la lignePUT et sa barrière à43798ms, après
+l'abandon du client40s, sous sa propre borne45s.37072arrêts,18536entrées et
+autant de sorties, quatrelectures de socket18090 et unmatch exact. Le finally
+ferme stdin sanscut : helper1/cut_command_required, puis restauration acquise.
+La CLI0 termine normalement après détachement, septconnexions, uneconfiguration
+et unepublicationpilote avantpurge. Ce ne sont ni une coupure ni unknown acquis.
+Deuxgardes et contrôleur/Node/PIDnaissance/cgroup joints, TracerPid0, unepurge
+physique et configuration/référence/5982/huit0 recoupés. After nonatteint ;
+aucune cause historique reconstruite.
+
+Le code partagé NativeObserver.wait appelle sleep(.001) après chaque waitpid
+vide. Le cumul exact de ces attentes n'a pas été mesuré dans ce rouge ; ne pas
+attribuer43798ms intégralement à ces pauses. L'écart40s/43,8s est directement
+observé, et la mise en attente systématique rend ce coût évitable. Décision :
+le seul helper de transport utilise une sous-classe locale d'attente SIGCHLD,
+avec NativeWakeup déjà éprouvé par les opérateurs de journaux. waitpid reste
+l'autorité exclusive sur PID/statut/arrêt ; notifications seules ne qualifient
+rien. Pas de changement au moduleNativeObserver partagé, au matcher ni aux
+bornes40/45/70/12. Pas de boucle occupée ou délai élargi.
+
+Armer le réveil avant attach, restaurer ses descripteurs/handler après detach,
+y compris échec de démarrage ou restauration. Mesurer polls/empty_polls,
+attente réelle monotone et notifications drainées dans le bilan. Conserver les
+gardes existantes, en particulier le SIGKILLwatchdog indépendant. Rejouer les
+cinqgroupes canoniques et confronter acquisitions/connexions/mutations et vrais
+retours. Ce passage et25communs frais restent dus ; le helper sert aussi le
+catalogueURL, à recouper dans les régressions connexes et le49 complet.

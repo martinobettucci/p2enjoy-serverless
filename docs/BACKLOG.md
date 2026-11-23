@@ -5593,3 +5593,13 @@ ne sont pas reconstruits. PremiercollecteurRO refusé1 sousidentitéSQLréduite,
 secondelecture0 aprèssortie du contexte ; aucunécrituredistante/groupeajouté.
 Décision142.2 : instrumenter la conservation et l'acquisition sans modifier
 les bornes ni le matcher, selon le contrat142, puis diagnostiquer survrai flux.
+
+142.2 — [diagnostic instrumenté refusé](evidence/service-transport-acquisition-deadline-refusal-dev-2026-11-23.json)
+au gel6a4d4ad : beforegated43798ms aprèsabandon40s,37072arrêts/unmatch ;
+helper1/cut_command_required après fermeturestdin, CLI0/septconnexions et
+unepublicationpilote puispurge. Contrôleur1/Nodejoint/cgroupvide, deuxgardes/
+TracerPid0 et configuration/référence/5982/huit0 acquis ; zéroqualifié.
+After nonatteint, anciennecause nonreconstituée. Décision avantcode : attendre
+les arrêts par SIGCHLD dans une sous-classe propre au helper, réutilisant
+NativeWakeup, sans changer le modulepartagé/matcher/bornes ; mesurer attente
+et notifications puis réussir le canonique5.142.2 reste ouverte avant reprise.
