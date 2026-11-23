@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- SLS-145 : [ciblé30 courant](docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json),
+  cinqreprises puis25communs frais surba55881/530/f016. Quatregardes, troiscoupures137,
+  troisfenêtres manquées, claimed/linked interrompus et troistirs normaux sans
+  rejeu ; writer tué relu, purge et clôtures recoupées,22captures inspectées.
+ 42backend/quatreHTTPSno-store, manuel84 et originaux conservés. Aucunecause
+  historique ni correctionproduit déduite ;145.4partielle, nouveau49 puis32 dus.
+
 - SLS-145 : diagnosticclaimed réel positif sur2d98bcd/530/f016, deuxétapes et
   zéro groupe fonctionnel ; acquisition2,69s, lectureRO aprèsfinish458ms complète,
   release sans coupure, handler réussi et purge physique. Garde/helpers/worker/

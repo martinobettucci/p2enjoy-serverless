@@ -5860,7 +5860,7 @@ les fenêtres existantes, les vraies coupures et l’absence de rejeu.
   manquées sans invocation, états claimed/linked interrompus, tirs normaux
   après reprise et quatre restaurations. Aucun correctif causal inventé si
   les observations ne démontrent pas la cause.
-- [ ] SLS-145.4 Cinqgroupes ciblés complets puis25communs frais, captures
+- [~] SLS-145.4 Cinqgroupes ciblés complets puis25communs frais, captures
   inspectées et clôtures recoupées ; nouveau49/543/18 depuisle début, puis
   complément32/276. Ne réutiliser ni505antérieurs ni groupespartiels comme
   réussite du socle ; les preuves de stockage143 et de transport142 restent
@@ -5913,3 +5913,22 @@ puis25communs frais, sur les mêmes octets instrumentés avec nouveau gel et
 restaurations indépendantes. Une nouvelle faute reste primaire et conservée,
 sans relance automatique ;49et32 ne commencent qu’après ce ciblé complet et
 sa clôture.145.2reste partielle,145.3/.4 ouvertes.
+
+145.4 — [ciblé courant30](evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json) :
+cinqgroupes nominaux puis25communs frais, sourceba55881/530/f016. Quatregardes,
+troiscoupures137, troisfenêtres skipped_downtime sans invocation, claimed/linked
+interrompus et troistirs normaux sans rejeu. Le writer tué au watchdog conserve
+une page cohérente relue après restitution ; les troisautres lectures aprèsfin
+sont complètes. Ni phase primaire du rouge historique ni avantsecours éprouvés.
+Worker nominal/Node0, contrôleur commun0, deuxclôtures0 ; naissances et cgroups
+joints, une fonction purgée physiquement/un namespace retiré, TracerPid0,
+configuration/référence/5982/huit0 conservés.22captures fraîches effectivement
+inspectées ;42backend/quatreHTTPSno-store et manuel84 recoupés. Zérogroupeunique
+ajouté au socle543.145.4reste partielle pour49/543/18 puis32/276 ; aucun correctif
+causal revendiqué,145.2/.3 restent ouvertes.
+
+Décision avant intégration : reprendre le socle49 au début sur un nouveau gel,
+avec ces mêmes530octets instrumentés, conserver le premier échec et son vrai
+retour sans retry. Ne commencer32 qu’après réussite/clôture/scellement du49 et
+présence de sa preuve dans le commit de lancement du32. Les505antérieurs,
+deuxpartiels et ciblé30 ne remplacent aucun groupe du nouveau49.

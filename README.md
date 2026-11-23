@@ -1,5 +1,13 @@
 # P2Enjoy Serverless
 
+Le [ciblé courant de reprise145](docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json)
+passe30groupes réels : cinqreprises puis25communs frais, surba55881/530sources
+et l’imagef016. Quatregardes, troiscoupures137, troisfenêtres manquées et
+troistirs normaux sans rejeu ; purgephysique et clôtures recoupées.22captures
+originales inspectées,42backend/quatreHTTPSno-store et manuel84 conservés.
+La phase du rouge historique reste inconnue ; aucun correctif causal ni49
+complet n’est revendiqué. Le prochain49/543/18 repart du début, puis32/276.
+
 Le [cinquième socle courant scellé](docs/evidence/schedules-recovery-gated-first-failed-dev-2026-11-23.json)
 termine1 dans la reprise : attente70s de gated expirée, puis clientSSH255 après
 secours, site natif primaire inconnu.40campagnes/505groupes antérieurs, deux

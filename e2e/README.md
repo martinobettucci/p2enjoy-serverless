@@ -1,5 +1,14 @@
 # Qualification de la plateforme
 
+Le [ciblé de reprise145](../docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json)
+passe5nominaux puis25communs frais surba55881/530/f016. Quatregardes et
+troiscoupures137, troisfenêtres manquées sans invocation, claimed/linked
+interrompus et troistirs normaux sans rejeu ; purge et clôtures recoupées.
+22captures originales inspectées ;42backend/quatreHTTPSno-store et manuel84.
+La page du writer tué est relue cohérente après restitution ; aucunephase
+primaire du rouge historique ni lectureavantsecours qualifiée. Le49 complet
+repart du début sur nouveaugel ;32 suit seulement sa réussite/clôture/scellement.
+
 Le [cinquième socle courant scellé](../docs/evidence/schedules-recovery-gated-first-failed-dev-2026-11-23.json)
 termine1 dans la reprise : attente70s de gated expirée, puis clientSSH255 après
 secours, site natif primaire inconnu.40campagnes/505groupes antérieurs, deux

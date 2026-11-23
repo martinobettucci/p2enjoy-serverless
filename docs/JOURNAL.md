@@ -11103,3 +11103,57 @@ réexécuté. Les annexes sans empreinte globale antérieure sont recoupées ent
 publication et originaux privés actuels seulement. L’anomalie de première
 revue reste tracée ; la stabilité de cette dernière est acquise sans effacer
 sa portée historique.145.2partielle et nominal5+25 encore dus.
+
+### 23 novembre2026 — Reprises instrumentées5 puis communs25 acquis
+
+Gelba55881/530/f016, worker nominal33e11120 : source/TAR et naissances vivantes
+épinglés. DeuxsessionsSSO réelles pour ce prérequis ; Node et worker terminent0.
+Cinqgroupes complets : perteSIGKILL de l’observateur et restitution indépendante,
+troisfenêtres manquées, claimed puis linked interrompus, troistirs normaux sans
+rejeu, purgeAPI et physique. Quatregardes restaurées ; troiscoupures du contrôle
+137. La page du writer tué conserve watchdog_loss et une séquence cohérente,
+lectureRO472ms après restitution ; troisautres lectures aprèsfin complètes.
+Le chemin avantsecours, une écriture déchirée et une finalisation en faute ne
+sont pas éprouvés par ce passage positif. Le site natif du rouge initial reste
+inconnu, aucun correctif causal n’est supposé.
+
+Clôture nominale extérieure0 : quatregardes/helpers terminés, backups intègres,
+contrôleTracerPid0, worker/lanceur/Node joints, unitéinactive/cgroupvide ; une
+fonction purgée physiquement, un namespace retiré, référence/configuration/
+5982originaux et huit0 conservés. Les journaux de chacun des quatretransports
+sont conservés sousSHA ;255du watchdog est l’issue attendue de la seule perte
+volontaire de l’observateur, troisautres clientsSSH0.
+
+Après cette clôture, pilote commun95b5289b/bancbb14f909 :25groupes frais8manuel/
+8publics/9connexion, prérequis de deuxsessionsSSO indépendantes et calme réel60s
+avantlogin. Le contrôleur attend et conserve son retour0 ; clôture extérieure0,
+naissance du worker terminée, cgroupvide et mêmes références/originaux.
+Le principal ouvre séparément les22originaux courants :16JPEGmanuel et6PNGconnexion,
+sans montage ni conversion, puis conserve leurs notes/dimensions/SHA. Le cadre
+manuel ne montre pas84paragraphes simultanément ; texte agrandi distinct du
+zoomnavigateur et formulaireSSO vide distinct d’une preuve d’autorisation.
+Relevés embarqués baseline/final0 :42backend et quatreHTTPSno-store égaux,
+manuelSHA4a331e15/84paragraphes recoupé. Aucun codeproduit, image ou configuration
+modifié ; ce ciblé n’altère aucune interface décrite par les troisnotes SPARK,
+et ne propose aucune nouvelle note.
+
+Sealer0 : schedule-recovery-instrumented-current-dev-2026-11-23,
+gzip3959704octets/SHA7041de53, brut6001988/SHA7db27157,53objets exacts dont
+neufprogrammes et deuxTAR530. Images privées, seules métadonnées/SHA exportées.
+30groupes qualifiés dans ce ciblé, zéro groupeunique additionnel au socle543 ;
+aucune clôture globale ni attribution de cause ancienne.145.4partielle,072/132/
+133/134 et145 restent ouverts.
+
+Décision avant nouvelle intégration :49/543/18 repart au début sur nouveaugel
+des mêmes530octets instrumentés, premierrouge conservé sans retry ;32/276 ne
+commence qu’après49complet/clôturé/scellé et sa preuve présente au commit de
+lancement. Les anciens505/deuxpartiels/ciblé30 ne remplissent pas le nouveau49.
+
+Revue et vérification indépendantes : aucun P1/P2 relevé. La dernière
+vérification conserve le même statut Git et les mêmes SHA des sept chemins
+avant/après ; les 53 objets, neuf programmes, deux TAR et 530 sources sont
+recoupés. Les quatre lectures durent 472/1163/487/594 ms et précèdent la garde
+suivante ; les quatre stderr sont vides et retenus sous SHA. Les 22 images sont
+reliées aux notes du principal, sans pixels exportés ni nouvelle inspection
+visuelle déléguée. Contrôles de formats sensibles sans détection ; aucune E2E
+ou sealer réexécuté pendant la revue. Aucune clôture de l’unité 145 décidée.
