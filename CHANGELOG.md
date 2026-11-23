@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-136 close : quatre groupes E2E corrigés, portée explicite et comptes4/66
+  sans altération ; reprise réelle parser-loss, deux contrôleurs0 et clôtures
+  externes recoupées, reçus précédents distingués canoniquement. Origine et
+  SHA du plein6000 conservés, aucun nominal ajouté.133.6/.7 acquis ; diagnostic
+  et campagnes de plateforme restent ouverts.
+
 - SLS-136.4 : ambiguïté relatif/absolu du closer constatée lors du second
   smoke réel passé ; normalisation confinée et nouveau closer décidés avant
   code. Aucune E2E rejouée ni clôture déduite de cette lecture refusée.

@@ -356,3 +356,21 @@ toutes les fonctions/liens de la projection réelle, assertions client, retrait
 du parser, pstats scellés, originaux/config/5982/huitcompteurs0 et clôtures
 externes. Les rapports antérieurs restent dans leur gel3fd1473/dc95781 ; le
 plein6000 n’est ni refabriqué ni réputé rejoué sur ce correctif de métadonnées.
+
+### Résultat de136 — 23 novembre 2026
+
+La [preuve corrigée](evidence/invocation-cost-scope-schema011-dev-2026-11-23.json)
+passe quatre groupes support : smoke2 puis perte réelle.6644fonctions et15444liens
+du smoke donnent exactement4/66 incohérences, sans altération ; les cinq champs
+de portée sont recoupés. Parser retiré/scellé, vrai T/created puis restitution
+indépendante pour la perte.528sources identiques a43d1b4/0658103, f016, deux
+contrôleurs0 et clôtures externes ordonnées ; cgroups/gardes/parser absents,
+originaux/configuration/référence/5982 et huitcompteurs0 conservés.
+
+Le nouveau closer normalise ses deux ensembles de chemins sous .local/e2e et
+identifie chacun des deux nouveaux reçus malgré son prédécesseur. Aucune campagne
+n’est rejouée pour cette correction de repérage. RevueRO sansP1/P2 et SHA des
+archives/clients/contrôleurs recoupés ; pstats/logs distants non relus par le
+relecteur, assertions et empreintes conservées dans les reçus. Le plein6000
+reste attaché àdc95781, nonréexécuté et inchangé.136 est close,133.6/.7 acquis ;
+aucun nominal ou coûtCPU n’est ajouté.133.2 et les campagnes produit restent dus.

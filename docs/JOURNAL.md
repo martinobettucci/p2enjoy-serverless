@@ -10409,3 +10409,19 @@ ensembles, confinement .local/e2e et une seule différence exigés. Le closer
 précédent exécuté reste immuable ; reçu natif et campagne ne sont pas rejoués.
 Cette qualification de collecte est inscrite en136.4 ; les clôtures antérieures
 restent valides car leurs cas n’avaient chacun qu’un reçu candidat.
+
+### 23 novembre 2026 — SLS-136 close, mesures conservées dans leur portée
+
+Le smoke136 et parser-loss passent quatre groupes réels sur les528sources
+identiques des gelsa43d1b4/0658103, imagef016. La projection conserve6644fonctions,
+15444liens et leurs quatre/66incohérences ; les cinq champs de portée sont exacts.
+La perte observeT et created avantstart, puis reprise indépendante et parser
+retiré/scellé. Deux vrais contrôleurs0, unités/cgroups/gardes et originaux/
+configuration/référence/5982/huitcompteurs0 recoupés. Le closer canonique
+identifie exactement les deux nouveaux reçus en présence de leurs prédécesseurs.
+
+La revue recoupe toutes les empreintes et les deuxTAR528+wrapper ; elle ne
+relit pas les bruts pstats/logs distants. Plein6000 reste dc95781, nonréexécuté,
+manifest/gzip/brut inchangés.136 et ses quatre critères sont clos,133.6/.7 acquis.
+Cette preuve ne clôt ni la mesure causale133.2, ni le nominal et les campagnes
+plateforme. Le prochain travail retourne au diagnostic133 et à ses régressions.

@@ -85,7 +85,6 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
-| 3 | [SLS-136](#sls-136) Portée réelle du profil Python et limites d’attribution | Corriger | `[~]` | SLS-040 | [INVOCATION_PRODUCTION_PROFILE](INVOCATION_PRODUCTION_PROFILE.md#portée-réelle-du-profiler--sls-136) |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -4685,7 +4684,7 @@ métier, collecte, budgets, purge et rétention restent exigés.
   restauration indépendante, puis nominal3 positif après lancement aligné.
   Ce précontrôle ne qualifie ni débit garanti ni ventilation fine de133.2.
 
-- [~] SLS-133.6 Compléter les mesures productives dans le vrai processus f016 :
+- [x] SLS-133.6 Compléter les mesures productives dans le vrai processus f016 :
   profilage standard Python, SQLRO courant et durées client conservées avec
   leurs périmètres distincts. Passage court2HTTP réel puis6000HTTP/jalons4,
   fermeture/lisibilité des statistiques, source/PID/naissance/cgroup et
@@ -5034,7 +5033,7 @@ leurs propres unités.
 
 ## SLS-136 — Portée réelle du profil Python et limites d’attribution
 
-Statut : [~]. Nature : Corriger. Dépend de : SLS-040. Ordre : 3.
+Statut : [x]. Nature : Corriger. Dépend de : SLS-040. Ordre : 3.
 Contrat : [portée réelle](INVOCATION_PRODUCTION_PROFILE.md#portée-réelle-du-profiler--sls-136).
 
 Constat réel : le plein6000 c88abf87/dc95781/f016 passe ses deux groupes,
@@ -5050,15 +5049,15 @@ annoncée, sans remplacer le profiler ni transformer ces données en ventilation
 - [x] SLS-136.1 Sceller le plein6000, ses SQLRO/timings et restaurations avec
   cette limite explicite ; conserver intégralement données, anomalies et rapports
   natifs. Corriger la métadonnée éditoriale du reçu court en gardant son brut.
-- [~] SLS-136.2 Corriger les métadonnées du collecteur et les documents :
+- [x] SLS-136.2 Corriger les métadonnées du collecteur et les documents :
   callbacks à portée d’interpréteur, aucun TID/tâche attribué, temps réels bruts,
   arêtes nonfiables pour ventiler les coûts. Nommer les incohérences observées
   sans les réparer, masquer ou inventer leur cause ; bornes et produit inchangés.
-- [ ] SLS-136.3 Nouveau smoke2 E2E et perte réelle parser-loss sur ce collecteur,
+- [x] SLS-136.3 Nouveau smoke2 E2E et perte réelle parser-loss sur ce collecteur,
   lectures/fermetures/restaurations et métadonnées exactes recoupées ; relecture
   du plein conservé, sans le présenter comme exécuté sur le nouveau collecteur.
   La mesure causale133.2 et les campagnes de plateforme restent distinctes.
-- [ ] SLS-136.4 La clôture distingue les anciens reçus du nouveau en comparant
+- [x] SLS-136.4 La clôture distingue les anciens reçus du nouveau en comparant
   leurs chemins canoniques sous .local/e2e. Le contrôleur conserve des chemins
   absolus ; l’ancien closer compare un glob relatif, ce qui devient ambigu au
   second smoke. Normaliser les deux ensembles, refuser toute sortie du dossier
@@ -5072,4 +5071,15 @@ scellés au geldc95781/f016, sans ajout au nominal. Deux et quatre groupes,
 contrôleurs0 et clôtures externes ; correction de portée explicite et7/356
 comptages recoupés par revueRO. Gzip court inchangé, seule phrase éditoriale
 corrigée avec SHA de l’ancienne synthèse. Métadonnées codées, syntaxe/revue
-acquises ; smoke2/perte corrigés restent à éprouver.133.7 est acquis sur2/6000.
+acquises ; smoke2/perte corrigés qualifiés ci-dessous.133.7 est acquis sur2/6000.
+
+136 — [Quatre groupes corrigés](evidence/invocation-cost-scope-schema011-dev-2026-11-23.json)
+qualifiés sur528sources identiques a43d1b4/0658103 et f016. Smoke2 avec6644fonctions/
+15444liens, compte exact4/66 et portée sans attribution ; puis vraiT/created,
+reprise indépendante et parser absent/scellé. Deux contrôleurs0, unités/cgroups/
+gardes joints, originaux/config/5982/huitcompteurs0 recoupés. Les deux nouveaux
+reçus sont distingués canoniquement de leurs prédécesseurs, sans nouveau test
+pour réparer le repérage. Plein6000/quatreSQL reste dc95781, reexecutedfalse,
+SHAmanifest/gzip/brut inchangés. RevueRO sansP1/P2, aucune valeur réparée ni groupe
+nominal ajouté.136 est close et133.6/.7 acquis ; diagnostic133.2 et campagnes
+plateforme conservent leurs critères propres.
