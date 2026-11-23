@@ -7,12 +7,13 @@
   quatreprérequis. Troisgroupesclient partiels, nettoyage et fermeture externe
   acquis ;66captures/529sources/23rapports scellés et relus sansP1/P2.
  142.1 acquise ; instrumentation de conservation/acquisition décidée avantcode,
-  instrumentation implémentée et syntaxiquement vérifiée, diagnostic réel et
-  correction de cause restent à établir.12UI141 passe dans ce socle.
+  instrumentation implémentée et éprouvée,12UI141 passe dans ce socle.
   Le diagnostic6a4d4ad est scellé : gatedbefore43,8s après abandonclient40s,
  37072arrêts, zéroqualifié. AttenteSIGCHLD locale décidée avant correction,
-  sans élargir les délais, puis implémentée dans le seul helper ; reprise E2E
-  encore due et anciennecauseafter nonreconstituée.
+  sans élargir les délais, puis implémentée dans le seul helper. Checkpoint
+ 74342a1 :5canoniques/25communs passent, EOF réel45s/helper1 distinct,
+ 22captures inspectées et troiscontrôleurs0 fermés. Revue sansP1/P2 ;
+  anciennecauseafter nonreconstituée et reprise49/32 encore due.
 
 - SLS-141 inscrit : le deuxième socle courant s'arrête sur l'état de journal
   attendu dans l'historiqueUI, après272groupes partiels et troisprérequis.

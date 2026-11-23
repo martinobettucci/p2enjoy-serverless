@@ -5572,11 +5572,11 @@ séparés ; aucun49 complet acquis. Le12UI141 passe dans ce passage,15JPEG.
 - [x] SLS-142.1 Sceller rapports/programmes/529sources/trace et résultatterminal,
   troisgroupespartiels distincts des313 ; recouper gardes, ressources possédées,
   restauration et toutes captures fraîches avant d'interpréter le refus.
-- [ ] SLS-142.2 Établir la cause réelle de l'absence de gated : transportCLI,
+- [~] SLS-142.2 Établir la cause réelle de l'absence de gated : transportCLI,
   événementnatif et étatdurable recoupés, refus/issueinconnue sansrejeu ;
   décision motivée persistée avant correction, aucun délai arbitraire ni
   relâchement d'oracle pour obtenir un vert.
-- [ ] SLS-142.3 Corriger puis réussir les cinqgroupes complets du transport avec
+- [~] SLS-142.3 Corriger puis réussir les cinqgroupes complets du transport avec
   vraies coupures/gardeindépendante, troisconnexionsHTTPS, mutations et absence
   de publication sousissueinconnue ; publication/promotion/invocation explicites
   ensuite, purges/gardes/clients et originaux conservés.25communs frais et
@@ -5603,3 +5603,17 @@ After nonatteint, anciennecause nonreconstituée. Décision avantcode : attendre
 les arrêts par SIGCHLD dans une sous-classe propre au helper, réutilisant
 NativeWakeup, sans changer le modulepartagé/matcher/bornes ; mesurer attente
 et notifications puis réussir le canonique5.142.2 reste ouverte avant reprise.
+
+142.2/.3 — [checkpointSIGCHLD courant](evidence/service-transport-sigchld-current-dev-2026-11-23.json)
+au gel74342a1/529/f016 : cinqcanoniques puis25communs passent, troiscontrôleurs0
+et clôtures extérieures entre phases,22captures inspectées,42backend/quatreweb
+no-store et manuel84. Barrièresbefore/after acquises en1727/1617ms, deuxcuts137,
+troisconnexions parcommande coupée et unknown sanspublication ; relances
+explicites avec deuxpromotions/deuxinvocations/quatrejetonsrévoqués. Troisgardes,
+deuxpurges/TracerPid0/configuration/référence/5982/huit0 recoupés. EOF réel
+séparé : helper1 attendu à45000ms,28,5s d'attente bloquante, zérofonction,
+mutation/publication/cut ; restauration et garde jointes. Zéro groupe ajouté
+parEOF,30ciblés et zéro groupeunique supplémentaire. Revue sansP1/P2.
+Le refus courant43,8s est établi ; la causehistoriquedeafter reste inconnue.
+142 garde ses critères ouverts : reprendre49entier depuisle début, recouper
+les consommateurs duhelper, puis32/276 ; aucune clôtureglobale acquise ici.

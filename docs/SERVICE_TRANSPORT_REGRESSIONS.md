@@ -214,3 +214,24 @@ du modulepartagé. Éprouver séparément ce vraiEOF sur helperarmé sans mutati
 laisser l'acquisition45s refuser naturellement, conserver métriques/retour1,
 restauration et purge du seulservice/namespace possédés. Zéro groupe ajouté ;
 ce refus attendu ne remplace pas les cinqgroupes canoniques.
+
+### Checkpoint courant du 23 novembre 2026
+
+La [preuve74342a1](evidence/service-transport-sigchld-current-dev-2026-11-23.json)
+qualifie cinqcanoniques et25communs sur529sources/f016, troiscontrôleurs0
+fermés extérieurement. Les acquisitionsbefore/after sont1727/1617ms ; deux
+SIGKILL137, troisconnexionsHTTPS parcommande coupée et résultatsunknown sans
+publication. Les relances explicites publient puis promeuvent et invoquent :
+deuxaudits de promotion/deuxinvocations200 et quatrejetonsrévoqués recoupés.
+Troisgardes, deuxpurges physiques et TracerPid0 ; configuration, référence,
+5982originaux et huitcompteurs0 conservés. Manuel84/sourceSHA,42backend et
+quatreHTTPSno-store recoupés ;22captures originales ouvertes individuellement.
+
+Le vraiEOF est un diagnosticdistinct à zéro groupe : helper1 à45000,283ms,
+native_stop_after_deadline, aucunmatch/gated/cut, zérofonction/mutation/
+publication et28,5s réellement passées dans l'attente. Ce temps n'est pas
+une mesureCPU ; les458787arrêts observés restent de vraisstatutswaitpid.
+Unequatrièmegarde et son helper sont joints, service/namespace supprimés.
+Revue indépendante sansP1/P2 ; le rouge43,8s et l'ancienafter gardent leurs
+propresobservations. La causehistoriqueafter n'est pas reconstituée.142 reste
+incomplète pourle socle49 complet, sesconsommateursconnexes et le complément32.

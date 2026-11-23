@@ -154,7 +154,9 @@ sur ce même script. Les identifiants SSO sont lus sur stdin privée et restent
 en mémoire ; les rapports et résultats systemd sont conservés dans .local/e2e.
 
 Le passage49/543 ci-dessus correspond à l'image433 ; sa régression sur011
-reste à produire. Le [complément courant32/276](docs/SCHEMA_011_REGRESSIONS.md) a son lanceur
+reste à produire. Le [checkpoint transport courant](docs/evidence/service-transport-sigchld-current-dev-2026-11-23.json)
+passe5canoniques et25communs sur529sources/f016, avec22captures inspectées ;
+le socle49 complet doit reprendre depuisle début. Le [complément courant32/276](docs/SCHEMA_011_REGRESSIONS.md) a son lanceur
 `python3 -B e2e/additional-regressions-suite.py` et son worker durable
 `python3 -B e2e/additional-regressions-worker.py start`, puis `status NOM` /
 `finish NOM`. Les archives antérieures et la propriété exacte des30namespaces/

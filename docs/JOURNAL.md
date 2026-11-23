@@ -10825,3 +10825,21 @@ occupée. Décision et correction locales : select du seulpipe de notification,
 borne50ms/deadline restante, drain partagé lorsqu'il est prêt. Modulescommuns
 inchangés. Le contrat ajoute un vraiEOF indépendant sansmutation,45s jusqu'au
 refus normal, métriques et restauration/purge conservées, zéro groupeajouté.
+
+### 23 novembre 2026 — Checkpoint142 acquis, nouveau49 à reprendre
+
+74342a1/529/f016 : cinqcanoniques passent, barrières1727/1617ms sous40s,
+deuxcuts137, troisconnexions chacunes/unknown sanspublication puis relances
+explicites/pilotes/promotions/invocations200. NatifRO : mutations0/1/2,
+deuxpromotions/deuxinvocations/quatrejetonsrévoqués, deuxpurges/troisgardes/
+TracerPid0. Le vraiEOF séparé termine comme attendu helper1 à45000ms,
+native_stop_after_deadline,28,5s d'attente réelle, aucunmatch/cut/publication/
+mutation et zérofonction ; restauration et quatrièmegarde jointes.
+25communs passent ensuite dans la même génération, troiscontrôleurs0 et
+clôtures extérieures avantchaquephase, configuration/référence/5982/huit0.
+22images ouvertes individuellement,42backend/quatrewebno-store/manuel84.
+Le P2du pilotecommun (anciennescaptures noncopiées) a été corrigé avantson
+exécution ; leurscopies et les6PNGlogin sont conservées avantremplacement.
+Publisher0 scellé et revue/vérificationRO sansP1/P2 ;30groupesciblés,
+zérouniqueajouté, aucun groupeEOF.142.2/.3 restent en cours : causehistorique
+after inconnue et nouveau49 depuisle début dû, puis complément32/276.

@@ -92,6 +92,16 @@ ne détermine pas la cause. Décision142 : conservation avantassertion et compte
 d'acquisition, bornes40/45/70s et matcher inchangés. Aucun49 complet ni reprise
 32 acquis ; les anciensrouges gardent leurs propres gels et limites.
 
+Le [checkpoint142 corrigé](../docs/evidence/service-transport-sigchld-current-dev-2026-11-23.json)
+passe5canoniques puis25communs sur74342a1/529/f016, troiscontrôleurs0 et
+clôtures extérieures,22captures inspectées. Barrières1727/1617ms avec réveil
+SIGCHLD local, deuxcuts137 et troisconnexions parcommandecoupée ; unknown
+sanspublication puis relances/promotions/invocations200 distinctes. EOF réel
+45s/helper1/restauration est séparé et ajoute zéro groupe.42backend/quatreweb,
+manuel84, configuration/référence/5982/huit0 conservés ; revue sansP1/P2.
+L'anciennecauseafter reste inconnue,142 ouvert et nouveau49depuisle début dû,
+puis32/276. Les30ciblés n'augmentent pas le corpus de groupesuniques.
+
 ### Historique des préparations et campagnes précédentes
 
 [EXECUTION_LOGS](../docs/EXECUTION_LOGS.md#découpage-et-qualification-réels)
@@ -3487,6 +3497,8 @@ qualifie pas les troisconnexions ou un résultatunknown. Le diagnostic6a4d4ad
 refuse before : barrière43,8s aprèsabandon40s,37072arrêts, zéroqualifié ;
 rapportCLI0/septconnexions et pilote ensuite purgé conservés. La sous-classe
 locale ServiceTransportObserver attend désormais SIGCHLD avec NativeWakeup
-existant ; le modulepartagé/matcher/bornes restent inchangés, reprise E2E due.
+existant ; le modulepartagé/matcher/bornes restent inchangés. Les5canoniques et
+25communs sont acquis au checkpoint74342a1, avec EOF indépendant45s/refus1,
+22captures et vraisnettoyages ; socle49 entier et32 restent dus.
 Voir le
 [contrat142](../docs/SERVICE_TRANSPORT_REGRESSIONS.md#diagnostic-de-lacquisition-courante--sls-142).
