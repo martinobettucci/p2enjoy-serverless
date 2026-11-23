@@ -4756,6 +4756,8 @@ Chaque cas tourne dans sa seule unitéroot DEV oneshot180s/stop30s/KillModecontr
 
 133.7 — Constat inscrit avant correction : la ligne414 du client invocation-source-retention-volume.mjs nomme real_http_handlers le nombre de réponses de charge dans responses. Le stdout du vrai command-timeout078126da affiche0, tandis que le reçu natif prouve deux invocations running/handler_started (HTTP et cron). Ce compteur de charge ne compte pas les démarrages ; les sixgroupes134 restent recoupés depuis leurs vrais reçus, sans utiliser ce libellé. Clarification du résultatCLI à livrer avec133.6, aucun code modifié ni ancien rapport réécrit.
 
+133.6/.7 — Contrat courant complété avant code : deux options invocation-cost-profile=smoke/full, vrai clonef016 cProfile avec sortie privée horsquota, source gelée528, API identifiée sousTini/NSpid et SIGINTpidfd15s, shutdown applicatif distinct d’exit0. Parser mêmeimage sans labelinstallation, intention/CID durables et retrait dansrestore, pstats scellés ; SQLROcourantCROSS/4points, timingsclient en nschaînes et compteur de réponses nommé selon sa portée. Anciennevoie f73 et nominal conservés ; refus, smoke2 puis full6000 et régressions restent à produire. Choix des noms et de l’isolation dérivé de la fonction/usage, sans profilENVPROD.
+
 <a id="sls-134"></a>
 ## SLS-134 — Diagnostic discriminant de l’observateur de source
 

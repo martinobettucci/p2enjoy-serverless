@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-133.6/.7 : contrat de mesure productive complété avant code, smoke2 puis
+ 6000HTTP sur clonef016, sortie privée et parser possédé, fermeture/pstats
+ séparément prouvés. SQLRO et temps client distincts ; aucune mesure acquise.
+
 - SLS-134.6/.7 : six groupes natifs35/40/detach qualifiés, diagnostics enrichis
   stricts, vrai retour124 et lecteur fermé malgré l’erreur detach. Trois unités,
   gardes et acteurs joints ; objets JSON natif/client entièrement recoupés sans
