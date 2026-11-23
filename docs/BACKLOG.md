@@ -4760,6 +4760,12 @@ Aucune cause de signal, de moteur ou de frontière manquée n’est démontrée.
   attribuer rétrospectivement l’erreur absente du premiercas ; éprouver les vrais
   refus et le cascap complet avec ce diagnostic avant clôture.
 
+- [ ] SLS-134.6 Adapter les deux oracles anciens du client35/detach au diagnostic
+  enrichi : mêmes type/raison stricts, avec phase/sourceSHA/ligne/wait réel
+  recoupés séparément. Les égalités anciennes sur un objet à deux champs
+  rejettent les champs supplémentaires ; aucune limite ni raison affaiblie.
+  Éprouver les modes35/40/detach sur leurs vrais arrêts après adaptation.
+
 Le défaut corrigé ici est l’absence de diagnostic, pas une cause rétroactive
 inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent intactes.
 
@@ -4780,3 +4786,5 @@ inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent inta
 134.5 — reçus primaire/fermeture/restitution intégrés avec pile bornée et source gelée ; commande native recueillie en octets puis conversion texte compatible, SHA/statut/contextes distincts. Le client recoupe le vrai refus primaire et exige une clôture sans reçu d’erreur. Revue RO sans autre P1/P2 ; oracle HTTP corrigé avant exécution pour exiger explicitement échec22 puis succès0. Deux AST Python et la syntaxe Node passent ; preuves réelles encore dues, aucun critère fermé par cette intégration.
 
 134.2/134.5 — [diagnostic durable réellement éprouvé](evidence/source-driver-durable-diagnostics-schema011-dev-2026-11-23.json),526sourcesd4e7e5d/f016 : deux lectures HTTP natives401/curl22 puis200/curl0 recoupent bytes/CRLF, conversion et reset ; refus après attache deuxgroupes avec reçuparent AssertionError/ligne1513/sourceSHA et aucune erreur de fermeture ; cascap deuxgroupes avec huitimports/1154632octets/1,217sproduction, préfixe1Mio exact, Node1 seulement pour overflow, pilote0 et deuxpurgespubliques. EOF/jonctions/restitutions/config/référence/5982/huitcompteurs0 recoupés. Ces deux critères passent ;134.4 reste ouvert pour nominal/consommateurs, zéro groupe de rétention ajouté. La cause du premiercascap rouge reste inconnue et n’est pas attribuée par ce succès.
+
+134.6 — constat statique avant correction : invocation-source-retention-volume.mjs lignes134/147 compare encore primary_failure à un objet exact type/raison dans detach-failure/global-alarm, alors que l’observateur courant y ajoute phase/source/last_wait. Décision : conserver les deux valeurs attendues strictes et recouper les nouveaux champs avec le vrai code/dernier arrêt, plutôt que retirer le diagnostic ou ignorer ses champs. Traitement après fin du nominal983b8568 pour garder ses526sources gelées ; aucun E2E des deux anciens oracles ni correction de ce critère encore acquis. Le cas40 doit conserver absence de traceback après SIGKILL.
