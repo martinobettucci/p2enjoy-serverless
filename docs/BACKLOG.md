@@ -3793,6 +3793,20 @@ Les modes sont à implémenter puis prouver, toujours sous2s produit/40/45/50/60
 
 
 <a id="sls-123"></a>
+122.3 — décision de reprise courante avant code du pilote : le reçu501 reste
+son époque ; la faute de garde est rejouée sur le helper courant529/f016 avec
+le client existant execution-journal-guard-closure.mjs. Il suspend réellement
+son seul helper après réservation finale, attend exclusivement la garde60 et
+son reçu systemd exact, conserve GET503/Node1/completedfalse, puis exige PUT200,
+purge et cinqfermetures locales. Le wrapper de preuve attend ce primaire rouge
+et ne compte aucun groupe fonctionnel. Une unité localeexec propre, RuntimeMax480,
+stop60, contrôleur680, vrai retourcapturé et PID/naissance/cgroup actifs puis
+terminés bornent le pilote sans changer40/45/50/60/125 ni2s produit. Aucun
+redémarrage/image/configuration prévu. Recouper extérieurement gardes, sources,
+génération, référence/config/5982/huit0 avant le test suivant. Après ce ciblé,
+rejouer12API puis25communs frais conformément à122.3 ; le passage47 déjà scellé
+garde sa génération et ne sera pas relabellé.
+
 ## SLS-123 — Armer la coupure après le vrai compteur durable
 
 Statut : [~] — le replay501sources/1aa70214 passe sept groupes dont API08,

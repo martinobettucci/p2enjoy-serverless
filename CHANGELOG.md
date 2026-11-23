@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-122.3 : reprise courante de la vraie garde60 décidée avant pilote,
+  primaire GET503/Node1 conservé et wrapper de preuve0groupes. Unité480/60/680,
+  puis12API/25communs frais ; aucune nouvelle preuve de garde encore acquise.
+
 - SLS-137 et138 closes :47groupes12API/10UI/25communs sur529sources/f016,
  44captures inspectées, trois contrôleurs0 et clôtures externes recoupées.
   Synthèse relue sansP1/P2 ; valeurs natives/refus conservés. Les campagnes
