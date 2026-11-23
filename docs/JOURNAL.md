@@ -10843,3 +10843,17 @@ exécution ; leurscopies et les6PNGlogin sont conservées avantremplacement.
 Publisher0 scellé et revue/vérificationRO sansP1/P2 ;30groupesciblés,
 zérouniqueajouté, aucun groupeEOF.142.2/.3 restent en cours : causehistorique
 after inconnue et nouveau49 depuisle début dû, puis complément32/276.
+
+### 23 novembre 2026 — Premier503 du parcours stockage, unité143 ouverte
+
+Le nouveau49c94a28d/529/f016 passe452groupes sur30campagnes et quatreprérequis,
+puis storage-console-api termine1 : deuxgroupes passent, troisième refusé sur
+POST /invoke attendu200/reçu503 avant vidage du cache. Deuxpublications et
+promotions réelles conservées ; corps503 non retenu, aucunecause attribuée.
+Cleanuptrue/troisfonctions/troisopérations, worker854 et lanceur joints,
+naissances/cgroup clôturés depuis le namespacehôte déjàépinglé ; huitcompteurs0,
+configuration/référence/5982 conservés.89captures déjà ouvertes et reçus privés
+conservés. SLS-143 enregistre le défaut avant traitement. Décision : sceller,
+recouper métadonnées/journaux expurgés/UUID/purges, puis instrumenter si besoin
+avant nouveau parcours ; aucunretry, fauxétat ou délai relâché. Les452 et deux
+partiels restent zéroqualifié globalement ;49et32 toujours dus.

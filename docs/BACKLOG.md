@@ -74,6 +74,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-140](#sls-140) Attestation courante du constructeur historique | Corriger | `[~]` | SLS-104 | [STORAGE_LEGACY_PROOF](STORAGE_LEGACY_PROOF.md#attestation-courante-du-constructeur--sls-140) |
 | 3 | [SLS-141](#sls-141) États de journal dans l'historique d'invocation | Corriger | `[~]` | SLS-061 | cette unité |
 | 3 | [SLS-142](#sls-142) Barrière après commit du transport de service | Corriger | `[~]` | SLS-031, SLS-108 | [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md) |
+| 3 | [SLS-143](#sls-143) Invocation réelle refusée dans le parcours de stockage | Corriger | `[~]` | SLS-065 | cette unité, [CONSOLE_STORAGE](CONSOLE_STORAGE.md) |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -5617,3 +5618,45 @@ parEOF,30ciblés et zéro groupeunique supplémentaire. Revue sansP1/P2.
 Le refus courant43,8s est établi ; la causehistoriquedeafter reste inconnue.
 142 garde ses critères ouverts : reprendre49entier depuisle début, recouper
 les consommateurs duhelper, puis32/276 ; aucune clôtureglobale acquise ici.
+
+## SLS-143 — Invocation réelle refusée dans le parcours de stockage
+
+Statut : [~]. Nature : Corriger. Dépend de : SLS-065. Ordre : 3.
+Contrat : cette unité, CONSOLE_STORAGE et SCHEMA_011_REGRESSIONS.
+
+Constat réel : le quatrième socle49 courant au gelc94a28d/529sources/f016
+termine1 dans storage-console-api.mjs:82, appel de la fonction storage-files
+après deux publications et promotions explicites. L'assertion de call:28
+attend200 et reçoit503 ; le corps n'est pas conservé par ce chemin.
+Trentecampagnes/452groupes antérieurs passent, puis deuxgroupesAPI partiels.
+Le troisièmegroupe « Vrais fichiers Docker : cache vidé, données et révision
+conservées » échoue avant le vidage du cache. Aucun défautproduit, cause de503
+ni écriture du handler n'est encore établi. Cleanuptrue/cleanup_errors[],
+troisfonctions et troisopérations de nettoyage recensées. Worker8549184d
+finalisé1, clientjoint, naissances terminées/cgroupvide dans le namespacehôte
+épinglé pendant sa vie ; mêmesoriginaux/configuration/référence/5982/huit0.
+Les rouges140/141/142 restent distincts ; aucun49complet acquis.
+
+Décision avant diagnostic : conserver ce premier503 et son absence de corps,
+puis recouper les seules métadonnées d'invocation, journaux expurgés, ressources
+et reçus de cette campagne. Ne pas attribuer503 au délai de démarrage, au
+stockage ou au code sans preuve. Si une observation manque, instrumenter sa
+conservation avant un nouveau parcours complet, avec décision motivée avant
+correctif. Aucun retry automatique, fauxDTO, écritureSQL, suppression
+d'assertion ou allongement arbitraire de délai pour obtenir200.
+
+- [ ] SLS-143.1 Sceller le rouge, rapports/programmes/TAR529 exact, trace,
+  résultat terminal et clôture externe ; recouper troispurges, configuration
+  et réservations, les89captures fraîches déjà inspectées et leurs limites.
+  Distinguer452antérieurs/deuxAPI partiels/zéroqualifié globalement.
+- [ ] SLS-143.2 Établir l'issue réelle de l'appel fautif par UUID/date/hash,
+  admission/handler/erreur et journaux natifs applicables. Distinguer les
+  observations manquantes de la cause prouvée ; persister la décision avant
+  instrumentation ou correction dépendante.
+- [ ] SLS-143.3 Corriger la cause établie et conserver le sens du nominal :
+  vraieécriture dans données/cache, cache effacé avec données/code conservés,
+  voisin inchangé et mêmes contrôles de droits, versions et nettoyage.
+- [ ] SLS-143.4 Réussir les neufgroupesAPI complets et connexes applicables,
+  puis25communs frais avec captures inspectées ; nouveau49 depuisle début
+  et complément32/276, sources/image/native/clients/gardes recoupés.
+  Une preuve manquante laisse l'unité ouverte.
