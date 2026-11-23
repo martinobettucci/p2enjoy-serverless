@@ -3285,3 +3285,23 @@ Sa clôture extérieure vérifie garde/journal absents, retire le seul dossier v
 par rmdir et libère l’unitélocale/cgroup ; les originaux sont strictement
 recoupés. Aucun groupe terminalâge acquis, aucun composite6 publié. SLS-135
 porte la correction de cette lecture avant les prochains replays.
+
+
+### Références de processus réelles — SLS-135
+
+Le client root `process-reference-lifecycle.py before-fix|after-fix UUID` exige
+son unité `serverless-process-reference-UUID.service` sur infra-serverless,
+RuntimeMaxSec480/TimeoutStopSec30/KillModecontrol-group. Il lit les vrais
+registres, Docker et procfs, et exécute le véritable programme de sonde du
+stockage, arrêté par ptrace àEXEC avant SIGKILL puis maintenu zombie nonrécolté.
+Le rouge before-fix exige EINVAL sur le PID possédé ; after-fix exige encore
+les refus de référence vivante, y compris avec un zombie présent.
+
+Après l’événement zombie-held, le pilote local exécute **en série**
+`node e2e/instance-limit-environment.mjs release` : HTTPS public, clone mêmeimage
+et restitution nominale sous garde120. Il n’envoie release à la fixture
+qu’après jonction et vérification du rapport HTTP ; EOF est un échec qui nettoie
+les seuls enfants possédés. Les deux unités, leurs cgroups et les pidfd/enfants
+sont recoupés avant de qualifier. Reçu root700/600 et stderr restent privés ;
+les sources hachées, uname et métadonnées bornées alimentent la preuve publique.
+Voir le [contrat](../docs/INSTANCE_LIMIT_RESTORATION.md#protocole1353--vrai-noyau-et-vraie-référence).
