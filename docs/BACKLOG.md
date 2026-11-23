@@ -4666,7 +4666,7 @@ métier, collecte, budgets, purge et rétention restent exigés.
   originaux joints ; replays affectés,12API/10UI/25communs et régression courant072
   avant clôture. Le rouge initial et les preuves historiques restent inchangés.
 
-- [ ] SLS-133.5 Refuser avant les flux HTTP une préparation disposant de moins
+- [x] SLS-133.5 Refuser avant les flux HTTP une préparation disposant de moins
   de1980s réelles avantW, dans la plage30–35min existante. Réserve issue du
   précédent nominalf016 (1883,418s entre10000terminaisons), de la marge60s et
   du recoupement final ; aucunW déplacé. Éprouver refus réel sans HTTP/cron,
@@ -4871,3 +4871,5 @@ cumuls restent chevauchants et la surcharge explicite. Côtéclient, horodater
 avantPOST, retour de awaitpost et fin de validationJSON ; le retourAPIResponse
 ne devient pas un instant isolé de réception des headers. Ces précisions
 résolvent le P2 contractuel ; aucune exécution ni implémentation133.6 acquise.
+
+133.5/134.4/132.3 — [nominal courant3 réellement acquis](evidence/invocation-source-retention-volume-schema011-query-dev-2026-11-22.json),526sources4918597/f016 :10001HTTP+1cron, troisensembles exacts10002→10001→10000/même source et mêmesurvivants/retraits, observation14,405s sous25. Précontrôle positif2057,471s, deuxpurgespubliques/absencephysique puis restitutionnominale ; Node0/worker0 terminal/libéré, stderr0/EOF/joint et aucun reçuparent/cleanup.42backend/quatreweb/collection/config/référence/5982/huitcompteurs0 recoupés.133.5 passe avec son refus négatif1849s ;133.4/134.4 restent ouverts pour consommateurs/régressions,132.3 pour âge/countcourants. Les anciensrouges et leurs causes inconnues ne sont pas requalifiés par ce succès.

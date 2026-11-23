@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-133.5/134.4 : nominal réel10001HTTP+1cron passe ses troisgroupes sur
+  f016, ensembles10002→10001→10000 recoupés et deuxpurgespubliques acquises.
+  Observation14,405s, restitutionnominale, worker/driver/gardes joints et
+  originaux intacts. Précontrôle négatif/positif qualifié ; autres rétentions,
+  consommateurs, API/UI et campagne complète restent dus.
+
 - SLS-133.6 : succès applicatif de fermeture et statistiques fraîches rendus
   obligatoires séparément du code cProfile ; timer réel et intervalles client
   nommés avec leur portée. Précision contractuelle avant code, aucune mesure acquise.

@@ -3265,3 +3265,10 @@ La [borne native25 courante](../docs/evidence/native-observer-deadline-schema011
 passe ses troisgroupes sur526sources1135713/f016 :25,000266s, masque/alarme
 conservés, dégel/détachement, restitution et cgroup joints. Aucun groupe de
 rétention ajouté ; autres consommateurs natifs restent à éprouver.
+
+Le [nominal courant10001+cron](../docs/evidence/invocation-source-retention-volume-schema011-query-dev-2026-11-22.json)
+passe ses troisgroupes sur526sources4918597/f016 : précontrôle2057,471s,
+ensembles10002→10001→10000, observation14,405s, deuxpurgespubliques et restitution
+nominale. Node/worker0, stderr0/EOF, gardesjointes et originaux/5982/compteurs0
+sont recoupés. Cette preuve fixe ne requalifie pas les anciensrouges et ne
+remplace pas count/âge/échéances ni la campagne complète.
