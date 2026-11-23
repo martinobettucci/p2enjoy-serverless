@@ -4690,6 +4690,9 @@ métier, collecte, budgets, purge et rétention restent exigés.
   fermeture/lisibilité des statistiques, source/PID/naissance/cgroup et
   restaurations prouvés ; zéro groupe nominal ajouté. Toute attribution reste
   bornée par la portée réelle de l’instrumentation et les coûts observés.
+  Éprouver aussi la perte réelle du pilote après CIDparser durable et avant
+  start, puis reprise indépendante et retrait propriétaire ; ce cas support2
+  ne vaut pas une lecturepstats réussie. Rejouer release/EOF sans profilage.
 - [ ] SLS-133.7 La synthèse CLI distingue réponses HTTP de charge validées et
   démarrages de handlers observés. Le champ real_http_handlers utilise actuellement
   responses.length : les modes diagnostiques affichent0 malgré leur HTTP/cron
@@ -4757,6 +4760,8 @@ Chaque cas tourne dans sa seule unitéroot DEV oneshot180s/stop30s/KillModecontr
 133.7 — Constat inscrit avant correction : la ligne414 du client invocation-source-retention-volume.mjs nomme real_http_handlers le nombre de réponses de charge dans responses. Le stdout du vrai command-timeout078126da affiche0, tandis que le reçu natif prouve deux invocations running/handler_started (HTTP et cron). Ce compteur de charge ne compte pas les démarrages ; les sixgroupes134 restent recoupés depuis leurs vrais reçus, sans utiliser ce libellé. Clarification du résultatCLI à livrer avec133.6, aucun code modifié ni ancien rapport réécrit.
 
 133.6/.7 — Contrat courant complété avant code : deux options invocation-cost-profile=smoke/full, vrai clonef016 cProfile avec sortie privée horsquota, source gelée528, API identifiée sousTini/NSpid et SIGINTpidfd15s, shutdown applicatif distinct d’exit0. Parser mêmeimage sans labelinstallation, intention/CID durables et retrait dansrestore, pstats scellés ; SQLROcourantCROSS/4points, timingsclient en nschaînes et compteur de réponses nommé selon sa portée. Anciennevoie f73 et nominal conservés ; refus, smoke2 puis full6000 et régressions restent à produire. Choix des noms et de l’isolation dérivé de la fonction/usage, sans profilENVPROD.
+
+133.6 — Précision avant code de la reprise du parser : mode parser-loss à2HTTP, vrai SIGSTOP après création/CIDjournalisé avant start, restauration indépendante explicite existante (pas expiration2700), retrait exact et originaux conservés. Aucun pstatsparse réussi revendiqué dans cette faute ; smoke normal, perte puis6000 distincts. Défaut release/EOF rejoué sansprofilage. Le choix couvre la nouvelle ressource durable avec les primitives existantes, sans framework ni délai changé.
 
 <a id="sls-134"></a>
 ## SLS-134 — Diagnostic discriminant de l’observateur de source

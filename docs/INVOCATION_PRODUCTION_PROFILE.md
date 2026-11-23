@@ -87,7 +87,8 @@ restent intacts ; ce libellé n’est pas utilisé pour qualifier les pannes134.
 
 Décision avant code : conserver la voie historique ci-dessus et ajouter deux
 options uniques au client existant : --invocation-cost-profile=smoke et
---invocation-cost-profile=full. Elles correspondent à deux campagnes distinctes,
+--invocation-cost-profile=full, plus parser-loss pour la seule preuve de reprise
+décrite ci-dessous. Elles correspondent à deux campagnes distinctes,
 avec deux puis6000 réponses HTTP validées (une puis3000 par fonction). Le passage
 court doit prouver fermeture, validité des statistiques et restitution avant
 le lancement du plein. Le nom décrit la mesure ; l’environnement reste DEV.
@@ -247,3 +248,34 @@ externe avant tout autre test. Aucune exception, horloge ou dépendance simulée
 aucun retry ou replay automatique. Les modes historiques touchés ont leur
 régression nommée ; le nominal10001+cron et les campagnes produit demeurent
 indépendants et ne sont pas qualifiés par ce diagnostic.
+
+
+### Perte réelle après création du parser — SLS-133.6
+
+Le parser est une ressource durable nouvelle : sa reprise doit être éprouvée,
+pas seulement relue. Le mode explicite --invocation-cost-profile=parser-loss
+reprend la charge courte2, son relevéRO final et le vrai shutdown. Il n’est
+ni le smoke réussi de lisibilité ni le plein6000. La fenêtre reste f016/2700,
+sans modifier le timer ni aucun environnement officiel.
+
+Après dockercreate, identité vérifiée et CID journalisé, avant dockerstart,
+le helper émet l’événement du parser réellement créé puis s’arrête lui-même
+par le vrai SIGSTOP. La source, le CID, le nom/label, l’étatcreated et le reçu
+durable sont recoupés ; aucun faux résultat n’est renvoyé. Le client demande
+ensuite restore par la voie indépendante existante, qui tue le seul pilote
+reconnu et reprend depuis le journal gelé. Ce n’est pas une expiration2700.
+
+La restauration retire le seulCID du parser après vérification complète,
+puis le clone et les ressources de sa fenêtre, et restitue les mêmes originaux.
+Le fichierpstats déjà écrit peut être scellé comme diagnostic existant après
+retrait du parser ; aucune lecturepstats réussie ni statistique complète n’est
+revendiquée dans ce mode. Un fichier manquant ou inconnu n’est pas fabriqué.
+Deux groupes support : préparation réelle2, puis perte/retrait/restauration
+indépendante et jonctions. Parser absent, pilote nonvivant, gardes et unités
+terminées, configuration/collection/5982 et huitcompteurs0 sont recoupés.
+
+Exécuter les refus avant mutation, le smoke2 normal, cette perte, puis le plein
+6000. Régression nommée du défaut sansoption : release/EOF sur le helper final,
+même image et restitution sans profilage. Les autres campagnes produit et
+consommateurs gardent leurs obligations propres. Aucun retry automatique,
+aucun processus ou signal substitué n’est ajouté pour qualifier cette reprise.
