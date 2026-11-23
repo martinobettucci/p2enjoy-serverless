@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-072/133.4 : protocole de pilotage API12→UI10→25communs sur une même
+  générationf016 fixé avant code du contrôleur ; unités bornées, retours natifs
+  et cgroups joints. Ces campagnes courantes restent à exécuter.
+
 - SLS-133.2/.3 acquis par rapprochement des preuves : coûtSQL concret et
   chemin source, décisionCROSS avantcode, basculef016 et nominal positif, quatre
   relevés/6000chronologies et intervalles client distingués. Limites de causalité

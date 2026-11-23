@@ -1,6 +1,24 @@
 # Qualification de la plateforme
 
-## Journaux SLS-072 — campagne spécifiée avant code
+## Journaux SLS-072 — qualification courante sur f016
+
+La basculef016 et les rétentions courantes sont acquises ; les12API du gel21834d8
+restent attachées àf73. Le prochain passage complet rejoue API12 puisUI10 puis
+25communs sur les mêmes sources et la même générationf016, sans redémarrage
+intermédiaire. Les JPEG fraîches deUI10 et des communs sont toutes inspectées
+individuellement avant leur qualification. Les récits préparatoires ci-dessous
+conservent leurs époques ; ils n’ajoutent pas de groupes au passage courant.
+
+Décision de pilotage avant code : unités localesexec distinctes API/UI avec
+RuntimeMaxSec1800, stop60 et contrôleur2000 ; communs3600/60/3800. Aucun délai
+applicatif ou opérateur n’est modifié. Chaque contrôleur conserve son vrai retour,
+PID/naissance/cgroup sont capturés puis leur fin constatée extérieurement avant
+le lancement suivant. Les wrappers et leurs archives restent privés, gelés et
+liés aux reçus ; aucun secret ne transite dans argv/env/fichiers. Le contrat
+[133](../docs/INVOCATION_PRODUCTION_PROFILE.md#bilan-borné-de1332-et1333--23-novembre-2026)
+porte le rapprochement du correctif retenu. Les suites49/543/18 et32/276 suivent.
+
+### Historique des préparations et campagnes précédentes
 
 [EXECUTION_LOGS](../docs/EXECUTION_LOGS.md#découpage-et-qualification-réels)
 fixe douze groupes API et dix UI, puis25communs frais, le socle nommé
@@ -14,7 +32,8 @@ ne s'ajoutent pas deux fois au nombre de groupes uniques.
 Le [replay126](../docs/evidence/execution-journal-reader-preparation-replay-dev-2026-11-22.json)
 passe neufvagues/troisEMFILE avec rapprochement des codes5/261 ; les [budgets128](../docs/evidence/execution-journal-budgets-purge-replay-dev-2026-11-22.json)
 passent10000/+1 et16Mio/+1 avec deuxvoies de purge. Ce sont des préparatoires,
-zéro groupecompletqualifié. Imagecourantef73efa6e, webidentiqueàa7, migration011.
+zéro groupecompletqualifié. Ces préparatoires utilisentf73efa6e, webidentiqueàa7,
+migration011 ; l’image actuellement déployée estf016a1b7.
 
 Le pilote API `node e2e/execution-journal-api.mjs` a deux passages échoués
 conservés sur1aa70214 : buffer après trois groupes, puis frontière finale native

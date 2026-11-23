@@ -10442,3 +10442,16 @@ du correctif. Décision : conserver l’optimisation mesurée déjà déployée 
 nominal positif, puis livrer les campagnes133.4.133.2/.3 acquis,133 reste ouvert.
 Les preuves gardent leurs gels. API12→UI10→25communs doivent maintenant passer
 sur la même générationf016 avant49/543/18 puis32/276, sans test parallèle.
+
+### 23 novembre 2026 — Pilotage du passage complet des journaux décidé
+
+API12 puisUI10 puis25communs reprennent la générationf016 après les restaurations
+du diagnostic. Leurs wrappers préparés gèlent dynamiquement les528sources et les
+rapports précédents ; la preuve012API antérieure gardef73. Décision avant code
+du contrôleur : unitésexec locales API/UI1800s et attente2000s, stop60s ; communs
+3600s/3800s/stop60. Ces bornes externes accompagnent les délais propres des clients
+sans les changer. Vrai retour du contrôleur, PID/naissance/cgroup actifs capturés
+puis arrêt/absence constatés avant chaque suite. Connexion SSO privée, aucune
+identité dans argv/env/fichiers. Toutes les captures seront ouvertes une à une.
+Les unités072/120–130/132/133 gardent leurs critères globaux tant que ces passages
+et les suites49/32 restent incomplets.
