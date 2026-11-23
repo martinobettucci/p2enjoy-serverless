@@ -432,3 +432,17 @@ indisponible encore vivante et empêche de remplacer le critère pidfd par un
 simple testZ. Il n’ajoute ni faux programme de sonde ni service de substitution.
 Le client local lit le nombre de contrôles attendu propre à chaque mode ;
 la reproductionbefore-fix scellée reste immuable à troiscontrôles.
+
+
+### Preuve135.3 acquise
+
+La [preuve courante](evidence/process-reference-lifecycle-corrected-dev-2026-11-23.json)
+passe huitcontrôles noyau et deuxgroupesHTTPS sur527sources1f48754, mêmeimagef016.
+Le leaderZ conserve réellement un thread et unFD du stockage ; son pidfd
+nonprêt impose le refus nommé et la causeEINVAL. Le zombie entièrement terminé
+est accepté et reste présent pendant le clone/restitutionnominale. Trois
+enfants sont récoltés/status9, leurs pidfdfermés et les unités/cgroups/garde120
+sont joints. Originaux/config/5982 et huitcompteurs0 recoupés. Le
+[rouge préalable](evidence/process-reference-real-zombie-before-fix-dev-2026-11-23.json)
+reste distinct, sans cause réattribuée au PIDhistorique. Les deuxâges et
+consommateurs/25communs attendent encore leurs replays ;135 reste ouverte.

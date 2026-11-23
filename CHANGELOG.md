@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-135.3 : correctif éprouvé par huitcontrôles kernel et deuxgroupesHTTPS ;
+  refus du leaderZ/thread/FDvivant, zombie conservé pendant clone/restitution.
+  Trois enfants/pidfd et unités/cgroups/gardes joints, originaux/5982 intacts.
+  Les deuxâges et consommateurs de135.4 restent ouverts.
+
 - SLS-135 : helper corrigé pour examiner seulement EINVAL/mountinfo avec
   Z/naissance stable et pidfdPOLLIN ; refus privé nommé dans les autres cas.
   Le client réel ajoute le leaderZ/threadvivant, sans errno ni procfs injecté.

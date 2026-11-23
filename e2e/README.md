@@ -3310,3 +3310,9 @@ Le cas after-fix exige aussi un vrai leader terminé par syscall exit60 avec
 un thread conservant unFD du stockage. PID/naissance, thread/FD réel et pidfd
 nonprêt sont recoupés ; le contrôle doit refuser l’EINVAL réel plutôt que
 d’accepter un simple étatZ. Seul ce groupe possédé est ensuite tué et récolté.
+
+La [preuve SLS-135.3](../docs/evidence/process-reference-lifecycle-corrected-dev-2026-11-23.json)
+qualifie huitcontrôles noyau et deuxgroupesHTTPS sur527sources1f48754/f016,
+leaderZ/threadvivant refusé, zombie gardé pendant clone/restitution et trois
+enfants/pidfd/deuxcgroups joints. Le rouge préalable est lié ; les deuxâges
+et autres consommateurs restent à passer sur le helper corrigé.

@@ -4924,7 +4924,7 @@ Aucun faux /proc, errno injecté, processus substitué ou succès conditionnel.
 - [x] SLS-135.2 Écrire le contrat précis avant code : identité/lifecycle de la
   lecture /proc, gestion bornée de ses erreurs, diagnostic privé sans secret et
   refus des références vivantes. Conserver les bornes et contrôles de propriété.
-- [ ] SLS-135.3 Éprouver le défaut et la correction avec de vrais processus et
+- [x] SLS-135.3 Éprouver le défaut et la correction avec de vrais processus et
   leur vrai état noyau ; couvrir processus terminé et référence vivante refusée,
   absence de contournement, jonction des enfants et nettoyage de la seule fixture.
 - [ ] SLS-135.4 Rejouer les deux âges courants puis les consommateurs et25groupes
@@ -4942,3 +4942,5 @@ achever les âges, sans relance aveugle ni publication du composite6 manquant.
 135.3 — [Reproduction réelle avant correctif](evidence/process-reference-real-zombie-before-fix-dev-2026-11-23.json) sur527sources07c34b8/f016 : troiscontrôles support, sonde réelle àEXEC refusée vivante, Z/POLLIN aprèsSIGKILL puis vraiEINVAL22 du mêmePID dans no_references. Enfant récolté/status9, pidfd fermé, unitésroot/locale et cgroups joints. Services/démarrages strictement identiques,5982artefacts et huitcompteurs0. Le correctif et le parcoursHTTPS sous zombie ne sont pas encore exécutés ;135.3 reste ouverte.
 
 135.3 — Complément décidé avant code : vrai leader Python terminé par syscall exit60, thread gardant unFD du stockage vivant ; exiger EINVAL natif mais pidfd nonprêt et refus nommé. Ce cas négatif réel éprouve l’autorité du pidfd, sans substituer la sonde du premier cas ni modifier sa preuve déjà scellée.
+
+135.3 — [Correctif éprouvé](evidence/process-reference-lifecycle-corrected-dev-2026-11-23.json),527sources1f48754/f016 : huitcontrôles noyau et deuxgroupesHTTPS. SondeZ réellement acceptée, sondes vivantes refusées, leaderZ avec thread/FD réel vivant refusé par pidfdnonprêt et causeEINVAL22. Le zombie reste présent pendant cloneHTTPS et restitutionnominale. Trois enfantsstatus9/pidfdfermés, unitésroot/locale/cgroups et garde120 joints, originaux/config/5982 conservés et huitcompteurs0. Le rouge préalable reste lié ; aucun groupe de rétention ajouté.135.4 et ses deuxnouveauxâges restent dus.
