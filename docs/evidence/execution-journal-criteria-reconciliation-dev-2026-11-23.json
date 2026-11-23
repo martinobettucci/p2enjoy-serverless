@@ -1,0 +1,385 @@
+{
+  "format": "p2enjoy-serverless-journal-criteria-reconciliation-v1",
+  "completed": true,
+  "qualification_kind": "existing-evidence-reconciliation",
+  "new_groups": 0,
+  "unique_existing_groups": 47,
+  "source_commit": "1c706f05107bb1d61a1c50d091fa2d8ff81cedd2",
+  "source_count": 529,
+  "image": "sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7",
+  "evidence": {
+    "path": "execution-journal-complete-schema011-query-dev-2026-11-23.json",
+    "sha256": "dd50a478c446e2049dc70577d59f23581e91cf007243936a9b32c634b7385307",
+    "raw": {
+      "path": "execution-journal-complete-schema011-query-dev-2026-11-23.raw.json.gz",
+      "sha256": "2dbd04b9edf762c7ef686fb12bc5d679ae0ce5bb8a0cd6547dcdda5dd3586696",
+      "uncompressed_sha256": "29bba006c39533e5ef3889874e5e321fa0b56c7c4d59963bde2fa307af0d319b",
+      "uncompressed_bytes": 2591006
+    }
+  },
+  "criteria": [
+    {
+      "criterion": "120.4",
+      "phase": "api",
+      "passed_check": {
+        "name": "API 04 — projections, buffers et secrets expurgés",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "real-buffer-boundary",
+          "observation_indexes": [
+            17,
+            19,
+            21,
+            23,
+            25,
+            27
+          ],
+          "count": 6
+        },
+        {
+          "scenario": "real-secret-crossing-capture-boundary",
+          "observation_indexes": [
+            29
+          ],
+          "count": 1
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    },
+    {
+      "criterion": "121.4",
+      "phase": "api",
+      "passed_check": {
+        "name": "API 08 — politique, ordre de décision, perte de réponse et autorité retirée",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "policy-accepted-before-read-decision",
+          "observation_indexes": [
+            58
+          ],
+          "count": 1
+        },
+        {
+          "scenario": "policy-committed-after-read-decision-before-response",
+          "observation_indexes": [
+            61
+          ],
+          "count": 1
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    },
+    {
+      "criterion": "123.4",
+      "phase": "api",
+      "passed_check": {
+        "name": "API 10 — suivi, vraie coupure et compteur sans rejeu",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "real-control-cut-follow-resume-without-replay",
+          "observation_indexes": [
+            71
+          ],
+          "count": 1
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    },
+    {
+      "criterion": "124.3",
+      "phase": "ui",
+      "passed_check": {
+        "name": "UI 09 — Clavier, intentions successives et texte agrandi",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "other-control-chosen-before-policy-response",
+          "observation_indexes": [
+            80,
+            81,
+            82
+          ],
+          "count": 3
+        },
+        {
+          "scenario": "follow-window-and-invalidation",
+          "observation_indexes": [
+            32
+          ],
+          "count": 1
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    },
+    {
+      "criterion": "125.4",
+      "phase": "api",
+      "passed_check": {
+        "name": "API 11 — cycles, classifications et corrélation de stockage",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "post-sibling-purge-correlation-diagnostic",
+          "observation_indexes": [
+            78
+          ],
+          "count": 1
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    },
+    {
+      "criterion": "126.4",
+      "phase": "api",
+      "passed_check": {
+        "name": "API 12 — lecteurs retenus, 429, jonction et EMFILE réel",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "reader-wave",
+          "observation_indexes": [
+            81,
+            87,
+            93
+          ],
+          "count": 3
+        },
+        {
+          "scenario": "reader-http-result",
+          "observation_indexes": [
+            82,
+            83,
+            88,
+            89,
+            94,
+            95
+          ],
+          "count": 6
+        },
+        {
+          "scenario": "reader-acquisition-health-preparation",
+          "observation_indexes": [
+            84,
+            90,
+            96
+          ],
+          "count": 3
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    },
+    {
+      "criterion": "127.4",
+      "phase": "api",
+      "passed_check": {
+        "name": "API 12 — lecteurs retenus, 429, jonction et EMFILE réel",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "reader-fault-http-result",
+          "observation_indexes": [
+            98
+          ],
+          "count": 1
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0,
+      "native_fault": {
+        "unit": "serverless-restore-journal-sql-cdccda202d984db898d3c40966af147a",
+        "database_opens": [
+          {
+            "flags": 655426,
+            "access_mode": 2,
+            "phase": "before-limit-restoration",
+            "syscall_result": -24
+          },
+          {
+            "flags": 655360,
+            "access_mode": 0,
+            "phase": "before-limit-restoration",
+            "syscall_result": -24
+          }
+        ],
+        "restoration_after_open_attempt": 2,
+        "restored_before_Python": true
+      }
+    },
+    {
+      "criterion": "128.3",
+      "phase": "api",
+      "passed_check": {
+        "name": "API 06 — exactement 16 Mio puis un octet supplémentaire",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "actual-byte-boundary-exact",
+          "observation_indexes": [
+            364
+          ],
+          "count": 1
+        },
+        {
+          "scenario": "actual-byte-boundary-plus-one",
+          "observation_indexes": [
+            614
+          ],
+          "count": 1
+        },
+        {
+          "scenario": "byte-boundary-service-logs-cleared-before-physical-purge",
+          "observation_indexes": [
+            615
+          ],
+          "count": 1
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    },
+    {
+      "criterion": "129.2",
+      "phase": "ui",
+      "passed_check": {
+        "name": "UI 09 — Clavier, intentions successives et texte agrandi",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "served-csp-and-reversible-cssom",
+          "observation_indexes": [
+            84
+          ],
+          "count": 1
+        },
+        {
+          "scenario": "repeated-keyboard-focus",
+          "observation_indexes": [
+            85
+          ],
+          "count": 1
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    },
+    {
+      "criterion": "129.3",
+      "phase": "ui",
+      "passed_check": {
+        "name": "UI 09 — Clavier, intentions successives et texte agrandi",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "capture-framing",
+          "observation_indexes": [
+            12,
+            14,
+            15,
+            17,
+            19,
+            22,
+            30,
+            31,
+            79,
+            83,
+            90,
+            93,
+            94,
+            98
+          ],
+          "count": 14
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    },
+    {
+      "criterion": "129.4",
+      "phase": "ui",
+      "passed_check": {
+        "name": "UI 09 — Clavier, intentions successives et texte agrandi",
+        "status": "passed"
+      },
+      "evidence_pointers": [],
+      "common_groups": 25,
+      "new_groups": 0,
+      "actual_order": [
+        "12API",
+        "10UI",
+        "25common"
+      ],
+      "preexisting_order_decisions": [
+        "9702888",
+        "a94f350"
+      ],
+      "reason": "API10reallycutscontrol; UI/common bind the post-cut generation."
+    },
+    {
+      "criterion": "130.4",
+      "phase": "ui",
+      "passed_check": {
+        "name": "UI 07 — Conservation, confirmation, conflit et relecture",
+        "status": "passed"
+      },
+      "evidence_pointers": [
+        {
+          "scenario": "policy-browser-native-stop",
+          "observation_indexes": [
+            89
+          ],
+          "count": 1
+        },
+        {
+          "scenario": "committed-policy-response-lost-in-real-browser",
+          "observation_indexes": [
+            92
+          ],
+          "count": 1
+        },
+        {
+          "scenario": "real-retention-conflict-and-save",
+          "observation_indexes": [
+            99
+          ],
+          "count": 1
+        },
+        {
+          "scenario": "archived-function-service-journal-browser-read",
+          "observation_indexes": [
+            97
+          ],
+          "count": 1
+        }
+      ],
+      "common_groups": 25,
+      "new_groups": 0
+    }
+  ],
+  "excluded_criterion": "122.3:current specific guard diagnostic and later fresh12API/25common integration handled separately.",
+  "complete_backlog_qualification": false,
+  "limitations": [
+    "Historical evidence remains unchanged; no replay or new functionalgroup in this reconciliation.",
+    "129/130sequence is linked to pre-code9702888/a94f350; no inverse sequence is invented.",
+    "Parent072/132/133 retain49/543/18 and32/276 requirements; P3units131/139 remain open."
+  ],
+  "collector_sha256": "d400e09c3ce48b940276adb5f4f72e2317c1ecb4bc8d3b4042c4ed62e9f16ac7"
+}

@@ -23,6 +23,14 @@ leur source/image ; les12API du gel21834d8 restent attachées àf73 et le premie
 [checkpointf016](../docs/evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
 reste au gel9702888/528sources.
 
+Le [rapprochement des critères](../docs/evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json)
+clôt120/121/123–130 avec ces mêmes47groupes, sans cumul supplémentaire. Le cas
+122 reste distinct : [faute courante](../docs/evidence/execution-journal-independent-guard-schema011-query-dev-2026-11-23.json)
+sur529sourcesa6d326c/f016, vraiSIGSTOP/garde60, GET503/Node1 conservé puis PUT200,
+purge physique et cinqfermetures, reçu système exact. Son wrapper/contrôleur0
+qualifie le diagnostic de clôture, pas la lecture échouée ; zéro groupe ajouté.
+12API puis25communs frais après cette faute restent requis avant clôture122.
+
 Les [rouges137](../docs/evidence/execution-journal-ui-conservation-first-failed-dev-2026-11-23.json)
 et [138](../docs/evidence/execution-journal-date-input-first-failed-dev-2026-11-23.json)
 restent inchangés. L'[audit durable](../docs/evidence/execution-journal-archived-reference-audit-dev-2026-11-23.json)

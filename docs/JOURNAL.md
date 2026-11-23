@@ -10589,3 +10589,19 @@ publisher gelé conserve false et prouve séparément transport/identités/perte
 gardes. Aucun test rejoué, refus typé et sources conservés. La revue indépendante
 recoupe TAR/gzip/reçus/chronologie/44images sansP1/P2, sans refaire les images.
 137et138 sont clos, corpus47 qualifié ;072 reste ouvert pour49/543/18 puis32/276.
+
+### 23 novembre 2026 — Douze critères rapprochés, garde122 courante acquise
+
+Le rapprochement RO des reçus47 et des sources gelées confirme les douze
+derniers critères de120/121/123–130. Frontières buffer, WAL, compteur durable,
+hash par étape, vagues/EMFILE, budgets/purges, focus, CSSOM/cadrage et PUTperdu
+sont chacun pointés dans le brut. La vérification principale recoupe ces
+observations ; ces dixunités sont closes sans nouveau groupe.129/130 sont
+explicitement alignés sur la décision pré-code9702888/a94f350 : APIcoupe puis
+UI/communs sur générationaprèscoupure. Les anciennes preuves restent intactes.
+
+La faute122 courante8f6d68a0 conserve réellement GET503/Node1 puis garde60,
+PUT200 et purge ; reçu systemd exact et confirmation65,801s/125s. Wrapper0 et
+contrôleur0, cgroupvide, source529/a6d326c et originaux/config/référence/5982/huit0
+recoupés. Zéro groupe fonctionnel, primaire rouge conservé.122reste ouverte
+pour12API/25communs frais après cette faute ;072/132/133 gardent les49/32.

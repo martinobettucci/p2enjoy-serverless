@@ -71,17 +71,7 @@ bloquée est sautée et son blocage est nommé.
 | 1 | [SLS-111](#sls-111) Reprise du banc de stockage géré après six groupes | Corriger | `[~]` | SLS-050 | [MANAGED_STORAGE_REGRESSIONS](MANAGED_STORAGE_REGRESSIONS.md) |
 | 2 | [SLS-089](#sls-089) Défauts SSO : attente, azp, rotation de clé | Corriger | `[~]` | SLS-020 | [sso](sso.md), [CONTROL](CONTROL.md) |
 | 3 | [SLS-072](#sls-072) Journaux recherchables et corrélation | Développer | `[~]` | SLS-061, SLS-074 | [EXECUTION_LOGS](EXECUTION_LOGS.md) |
-| 3 | [SLS-120](#sls-120) Frontière réelle du buffer de journaux | Corriger | `[~]` | SLS-040, SLS-121 | cette unité |
-| 3 | [SLS-121](#sls-121) Frontières natives de décision du journal | Corriger | `[~]` | SLS-040 | cette unité |
 | 3 | [SLS-122](#sls-122) Clôture du client de diagnostic après refus natif | Corriger | `[~]` | SLS-040 | cette unité |
-| 3 | [SLS-123](#sls-123) Armement de la coupure après compteur durable | Corriger | `[~]` | SLS-040 | cette unité |
-| 3 | [SLS-124](#sls-124) Restitution du focus des commandes Journaux | Corriger | `[~]` | SLS-061 | cette unité |
-| 3 | [SLS-125](#sls-125) Corrélation du hash des événements conservés | Corriger | `[~]` | SLS-040 | cette unité |
-| 3 | [SLS-126](#sls-126) Acquisition des lecteurs retenus d’API12 | Corriger | `[~]` | SLS-040 | cette unité |
-| 3 | [SLS-127](#sls-127) Refus SQLite après épuisement réel des descripteurs | Corriger | `[~]` | SLS-040 | cette unité |
-| 3 | [SLS-128](#sls-128) Purge réelle après journal de 16Mio | Corriger | `[~]` | SLS-040 | cette unité |
-| 3 | [SLS-129](#sls-129) Agrandissement et cadrage des preuves Journaux | Corriger | `[~]` | SLS-072 | cette unité |
-| 3 | [SLS-130](#sls-130) Interruption navigateur après écriture de politique | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -3546,7 +3536,9 @@ et ne transforme pas une lecture incomplète en données par défaut.
 <a id="sls-120"></a>
 ## SLS-120 — Réconcilier la frontière réelle du buffer de journaux
 
-Statut : [~] — premier passage072 arrêté sur une assertion de frontière dans
+Statut : [x]. [Rapprochement courant47](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json).
+
+Contexte initial : premier passage072 arrêté sur une assertion de frontière dans
 API04, après trois groupes passés ; zéro qualifié. Le nettoyage physique et
 les5982artefacts antérieurs sont recoupés. La cause est à établir par un témoin
 d'octets conservé ; ne pas attribuer l'échec au runtime sur cette seule assertion.
@@ -3565,7 +3557,7 @@ leurs limites sans affaiblir la protection des secrets ou masquer une perte.
 - [x] SLS-120.3 Décision et motif persistés avant correction du contrat,
   client ou produit concerné ; limites et expurgation restent contrôlées.
   Le test échoué précède toute correction de comportement produit.
-- [ ] SLS-120.4 Rejouer API04 dans les douze groupes réels puis25communs frais,
+- [x] SLS-120.4 Rejouer API04 dans les douze groupes réels puis25communs frais,
   avec sources/image recoupées, purge physique et captures communes inspectées.
   Les dixUI et la régression complète de072 restent des preuves distinctes ;
   aucun cumul de l'ancien échec et aucun critère072 validé par le seul diagnostic.
@@ -3585,14 +3577,24 @@ le service à secrets. Manuel inchangé : il décrit une limite et l'expurgation
 sans promettre une taille égale à64Kio après celle-ci. Le replay complet reste dû. Le second passage passe API04 et07 mais échoue
 au verrou natif d’API08 ;120.4 attend maintenant [SLS-121](#sls-121).
 
-À mettre à jour : contrat de collecte dans `EXECUTION_LOGS.md`/`EXECUTION.md`,
-preuve et clients ; manuel s'il décrit incorrectement le buffer expurgé.
+Les contrats de collecte `EXECUTION_LOGS.md`/`EXECUTION.md` et les clients
+sont raccordés aux bornes mesurées. Le manuel décrit une limite et
+l’expurgation, sans promettre une égalité du buffer après protection.
+
+
+120 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères120.4 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+
 
 <a id="sls-121"></a>
-
 ## SLS-121 — Éprouver les frontières natives de décision du journal
 
-Statut : [~] — API08 du second passage072 échoue avant acquisition de la
+Statut : [x]. [Rapprochement courant47](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json).
+
+Contexte initial : API08 du second passage072 échoue avant acquisition de la
 barrière finale :40s,66178tours de boucle, zéro thread retenu. Les cinq groupes
 précédents restent partiels, zéro qualifié. Nature : Corriger. Dépend de :
 SLS-040. Ordre : 3. Contrat de frontière :
@@ -3614,7 +3616,7 @@ changer de produit pour satisfaire une hypothèse du banc.
 - [x] SLS-121.3 Décision/motif persistés avant correction du seul élément en
   cause ; le rouge précède toute correction de comportement produit. Les
   conditions natives et l’observation du writer restent strictes.
-- [ ] SLS-121.4 Rejouer API08 dans les12API réels puis25communs frais,
+- [x] SLS-121.4 Rejouer API08 dans les12API réels puis25communs frais,
   sources/image recoupées, gardes/threads/consommateurs joints, purge physique
   et captures communes inspectées.120.4 et072 gardent leurs critères propres.
 
@@ -3663,6 +3665,13 @@ Ajouter au prochain diagnostic un GET sans trace avant le même GET tracé sur l
 même corpus ; comparer statut/délai et entrée effective dans journal-verify.
 Ce correctif du banc reste à éprouver ; la seule hypothèse de son efficacité
 ne clôture ni121.4, ni120.4, ni072.
+
+121 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères121.4 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+
 
 ## SLS-122 — Fermer le diagnostic après une restitution refusée
 
@@ -3807,9 +3816,19 @@ génération, référence/config/5982/huit0 avant le test suivant. Après ce cib
 rejouer12API puis25communs frais conformément à122.3 ; le passage47 déjà scellé
 garde sa génération et ne sera pas relabellé.
 
+122.3 — [faute courante scellée](evidence/execution-journal-independent-guard-schema011-query-dev-2026-11-23.json),
+529sourcesa6d326c/f016. VraiSIGSTOP19 puis garde60/SIGKILL et reçu système exact,
+GET503 à60,027s et PUT200 à58,915s ; confirmation de garde65,801s sous125s.
+PrimaireNode1/completedfalse conservé, cleanuptrue et cinqfermetures ; wrapper
+et contrôleur0 qualifient seulement cette clôture, zéro groupe fonctionnel.
+Unité/cgroup et gardes joints, mêmegénération/config/référence/5982/huit0.
+Les12API/25communs frais après cette faute restent requis ;122 reste ouverte.
+
 ## SLS-123 — Armer la coupure après le vrai compteur durable
 
-Statut : [~] — le replay501sources/1aa70214 passe sept groupes dont API08,
+Statut : [x]. [Rapprochement courant47](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json).
+
+Contexte initial : le replay501sources/1aa70214 passe sept groupes dont API08,
 puis le helper API10 sort1 après armed, avant cut ; stderr930octets non retenu.
 Le contrôle ne redémarre pas, le handler finit normalement200, sa seule invocation
 est retrouvée puis purgée. Nature : Corriger. Dépend de : SLS-040. Ordre : 3.
@@ -3827,7 +3846,7 @@ puis prouver interruption, reprise du suivi et compteur1 sans rejeu.
   donnéeSQL écrite, limite élargie ni signal avant acquittement durable.
 - [x] SLS-123.3 Cause établie, décision/motif persistés avant correction du
   composant en cause ; conserver l'original rouge et ses sources figées.
-- [ ] SLS-123.4 Replay API10 dans les12API puis25communs frais, code déployé et
+- [x] SLS-123.4 Replay API10 dans les12API puis25communs frais, code déployé et
   sources recoupés, gardes/processus joints, purge physique et captures inspectées.
 
 Décision avant instrumentation : conserver un diagnostic structuré dans le seul
@@ -3935,10 +3954,20 @@ purgées, huitcompteurs0,5982originaux et configuration/référence conservés.
 Diagnostic seul : zéro groupe qualifié ;123.4 et les12API/25communs restent ouverts.
 
 
+
+123 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères123.4 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+
+
 <a id="sls-124"></a>
 ## SLS-124 — Restituer le focus des commandes Journaux
 
-Statut : [~] — deux focusBODY reproduits sur512sources/bf9b61a6 ; trois
+Statut : [x]. [Rapprochement courant47](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json).
+
+Contexte initial : deux focusBODY reproduits sur512sources/bf9b61a6 ; trois
 capturesdesktop inspectées, purge physique et compteurs0. Nature : Corriger. Dépend de : SLS-061. Ordre : 3. Contrats :
 [console](EXECUTION_LOGS.md#console-et-manuel), [design local](DESIGN_SYSTEM_APP.md).
 
@@ -3953,7 +3982,7 @@ commande focalisée ne devient désactivée sans relais.
 - [x] SLS-124.2 Reproduire avec le focus sur Pause et une vraie invalidation de
   politique ou droits : refus, lignes retirées, commande désactivée et relais
   effectif observés. Aucune interception ni réponse substituée.
-- [ ] SLS-124.3 Si défaut confirmé, décision/motif avant correction ; conserver
+- [x] SLS-124.3 Si défaut confirmé, décision/motif avant correction ; conserver
   les rouges et rejouer les dix UI et25communs frais sur le code déployé, captures
   ouvertes individuellement, contextes/gardes joints et purge physique.
 
@@ -3973,10 +4002,20 @@ groupes supplémentaires. Le risque statique seul ne vaut pas preuve d'un défau
 ni autorisation de masquer un échec du banc.
 
 
+
+124 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères124.3 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+
+
 <a id="sls-125"></a>
 ## SLS-125 — Recouper le hash des événements conservés après purge du frère
 
-Statut : [~] — replay503sources/1aa passe huit groupes puis échoue API11 ligne397,
+Statut : [x]. [Rapprochement courant47](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json).
+
+Contexte initial : replay503sources/1aa passe huit groupes puis échoue API11 ligne397,
 après purge du frère, sur items nonvides et tous code_hash identiques au hash
 publié. La réponse de ce GET n'a pas été conservée avant assertion. Nature :
 Corriger. Dépend de : SLS-040. Ordre : 3. Contrat :
@@ -3995,7 +4034,7 @@ produit du mauvais oracle sur des champs réellement retournés.
   Pas de messages, secrets, donnéesSQL écrites ni réponse substituée.
 - [x] SLS-125.3 Cause recoupée contre le contrat, décision/motif commités avant
   correction de l'élément en cause ; rouge et source initiale inchangés.
-- [ ] SLS-125.4 Replay dans12API puis25communs frais, sources et image du code
+- [x] SLS-125.4 Replay dans12API puis25communs frais, sources et image du code
   déployé recoupées, gardes/consommateurs joints, purge physique et captures
   communes inspectées. Les autres critères072 gardent leurs preuves propres.
 
@@ -4026,10 +4065,20 @@ le full12/25communs et ne saute aucun scénario de la campagne finale. Son rôle
 est de départager les échecs nouveaux avant de refaire le préfixe déjà observé.
 
 
+
+125 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères125.4 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+
+
 <a id="sls-126"></a>
 ## SLS-126 — Acquérir les lecteurs retenus d'API12
 
-Statut : [~] — préparatoire505sources/1aa échoue dans l'attente d'une barrière
+Statut : [x]. [Rapprochement courant47](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json).
+
+Contexte initial : préparatoire505sources/1aa échoue dans l'attente d'une barrière
 API12, client source_line62 ; trois propriétaires natifs sont relevés, nettoyage
 physique acquis, API05/06 non exécutés. Nature : Corriger. Dépend de : SLS-040.
 Ordre : 3. Contrat : [instrumentation native](EXECUTION_LOGS.md#instrumentation-native-des-lectures).
@@ -4045,7 +4094,7 @@ banc avec celui du produit ni relâcher les délais.
   injecté, thread supposé acquis, registre modifié ni étatSQL fabriqué.
 - [x] SLS-126.3 Cause recoupée et décision/motif commités avant correction du
   composant en cause ; conserver les sources et le rouge originaux.
-- [ ] SLS-126.4 Rejouer API12 puis API05/06 et12API/25communs frais sur le code
+- [x] SLS-126.4 Rejouer API12 puis API05/06 et12API/25communs frais sur le code
   déployé, gardes/processus joints, purge physique, captures communes inspectées.
 - [x] SLS-126.5 Éclairer le GET503 inattendu du replay512/a7d, vagueEOF :
   conserver rouge/retours natifs, identifier le chemin, le refus et sa phase
@@ -4091,10 +4140,20 @@ Le mode read historique et les autres frontières restent inchangés. Aucun
 hook produit, nouvelle réouverture forcée, faux résultat ou écritureSQL.
 
 
+
+126 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères126.4 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+
+
 <a id="sls-127"></a>
 ## SLS-127 — Recouper le refus SQLite après épuisement de descripteurs
 
-Statut : [~] — replay506sources/1aa passe les trois vagues reader-start,
+Statut : [x]. [Rapprochement courant47](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json).
+
+Contexte initial : replay506sources/1aa passe les trois vagues reader-start,
 constate réellement native-fault/syscall_result=-24 et limite restaurée, puis
 échoue dans l'oracleHTTP attendu503 (harness124). Le statut réel de cette dernière
 réponse n'est pas conservé avant assertion. Nature : Corriger. Dépend de :
@@ -4111,7 +4170,7 @@ jusqu'à sa propagation et restaurer les limites/threads sans forger de résulta
   Aucune valeur injectée, erreur supposée terminale ni étatSQL fabriqué.
 - [x] SLS-127.3 Cause recoupée, décision/motif persistés avant correction du
   seul élément en cause ; rouge et sources initiales conservés.
-- [ ] SLS-127.4 Éprouver le défaut réel corrigé puis les trois vagues et budgets,
+- [x] SLS-127.4 Éprouver le défaut réel corrigé puis les trois vagues et budgets,
  12API/25communs frais, mêmes sources/image déployées, gardes/jonctions/purge
   physiques et captures communes inspectées.126 garde ses critères propres.
 
@@ -4160,10 +4219,20 @@ Revue RO du helper/oracle : aucunP1/P2 trouvé ; elle reste distincte de la preu
 507sources gelées ; préparatoire zéro groupe qualifié,127.4 reste ouvert.
 
 
+
+127 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères127.4 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+
+
 <a id="sls-128"></a>
 ## SLS-128 — Rétablir la purge après le corpus réel de16Mio
 
-Statut : [~] — préparatoire507sources/1aa09e9ab57 : API12 etAPI05 passent,
+Statut : [x]. [Rapprochement courant47](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json).
+
+Contexte initial : préparatoire507sources/1aa09e9ab57 : API12 etAPI05 passent,
 le corpus exactAPI06 atteint16777216octets/5169événements, puis POST503 à la
 retraite du corpus et de nouveau pendant son nettoyage. Cinq ressources locales
 fermées maiscleanupfalse ; le second corpus+1 n'est pas exécuté.
@@ -4181,7 +4250,7 @@ corpus+1 puis les campagnes propres et communes, sans étatSQL fabriqué.
   délais et erreurs réelles. Décider et écrire la cause/issue avant correction.
   Reprendre le nettoyage uniquement sur les ressources possédées, via les API,
   en conservant le premier rouge ; aucune suppression SQL ni faux succès.
-- [ ] SLS-128.3 Corriger le seul composant en cause, puis prouver sa reprise,
+- [x] SLS-128.3 Corriger le seul composant en cause, puis prouver sa reprise,
   purge physique et compteurs vides ; corpus16Mio puis+1 et12API/25communs sur
   les sources déployées, captures inspectées et gardes/consommateurs joints.
 
@@ -4433,10 +4502,18 @@ d'un PUT est retenue après son commit natif, puis relue sans rejeu. Syntaxe seu
 vérifiée, aucune preuvefonctionnelle UI acquise ; premièrecampagne à exécuter.
 
 
+
+128 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères128.3 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+
+
 <a id="sls-129"></a>
 ## SLS-129 — Agrandissement compatible CSP et captures cadrées du journal
 
-Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
+Statut : [x]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
 Contrat : cette unité et EXECUTION_LOGS#console-et-manuel.
 
 Constat réel : le premier client10UI cca809c0/515sources/c209ffe/f73 passe
@@ -4451,16 +4528,16 @@ preuvevisuelle nommée cadre son état réel et garde ses limites explicites.
 
 - [x] SLS-129.1 Sceller le rouge, programmes et13JPEG originales toutes inspectées,
   septpartiels/zéroqualifié et nettoyage physique.
-- [ ] SLS-129.2 Recouper la CSP réellement servie, puis doubler les cinq tokens de
+- [x] SLS-129.2 Recouper la CSP réellement servie, puis doubler les cinq tokens de
   texte dans la feuilleCSS mêmeorigine existante via CSSOM navigateur, en conserver
   les valeurs/priorités et les rétablir en finally. Aucun styleinline injecté,
   changementCSP, fichierCSS produit modifié ou zoomnavigateur revendiqué.
   Mesurer le facteur réel et le reflow ; échec si la feuille/type/token manque.
-- [ ] SLS-129.3 Avant chaque JPEG d'état ciblé, faire défiler réellement sa cible
+- [x] SLS-129.3 Avant chaque JPEG d'état ciblé, faire défiler réellement sa cible
   dans le viewport et vérifier son rectangle entièrement visible. Capturer
   séparément les états qui ne peuvent partager unevue (annoncepause/focus).
   Garder les mesures DOM/HTTP distinctes, sans retouche ni imagecomposite.
-- [ ] SLS-129.4 Rejouer les10UI complets puis12API/25communs frais ; toutes les
+- [x] SLS-129.4 Rejouer les12API puis10UI complets et25communs frais ; toutes les
   captures ouvertes individuellement, mêmes sources/images, gardes/processus
   joints et purge physique. Les régressions propres072 restent requises.
 
@@ -4480,10 +4557,21 @@ pré focalisé ont deux vues distinctes, Tab/ShiftTab établit le focusclavier.
 Syntaxe etdiff passent ; aucune preuve du replay encoreacquise.
 
 
+
+129 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères129.2,129.3,129.4 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+L’ordre documentaire suit la décision pré-code9702888 et son rattachement
+a94f350 : API10coupe réellement, puis UI et communs partagent sa génération
+aprèscoupure. Aucun ordreUI→API n’est attribué aux reçus actuels.
+
+
 <a id="sls-130"></a>
 ## SLS-130 — Interrompre la réponse navigateur après commit de politique
 
-Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
+Statut : [x]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
 Contrat : cette unité, EXECUTION_LOGS#console-et-manuel.
 
 Constat : replay129 de324298/515sources08b8959/f73 passe neufgroupes puis UI07
@@ -4507,10 +4595,10 @@ relit l'autorité sans rejouer le PUT. Aucun retour HTTP/JS n'est fabriqué.
   PUT et absence de réponseHTTP acceptée auparavant ; aucune issue alternative
   de succès. Conserver code d'erreur sousSHA et ordre des instants ; timeout
   manqué reste rouge. Détacher CDP et joindre la barrière en finally.
-- [ ] SLS-130.4 UI affiche issueinconnue et bloque écriture, saisie conservée ;
+- [x] SLS-130.4 UI affiche issueinconnue et bloque écriture, saisie conservée ;
   relecture voit l'uniqueversion committée, un seulPUT et aucun rejeu. Prouver
   aussi confirmation/conflit/rélecture/enregistrement et référence indisponible
-  par le même cas partagé, puis10UI/12API/25communs et captures inspectées.
+  par le même cas partagé, puis12API/10UI/25communs et captures inspectées.
 
 Décision avant code : Page.stopLoading est la commande native de Chromium qui
 arrête navigations et fetches encore enattente, selon le [protocole officiel](https://raw.githubusercontent.com/ChromeDevTools/devtools-protocol/master/json/browser_protocol.json)
@@ -4537,6 +4625,17 @@ conservée et relecture sansrejeu. Conflit puisversion4/durée1, référencefonc
 indisponible, purgephysique et huitcompteurs0/5982originaux. QuatreJPEGinspectées,
 Conservation enregistrée encore souslepli ; ce cadre est repris par129 avant
 full10. Zéro groupequalifié,130.4resteouvert pourcampagnescomplètes.
+
+
+130 — [rapprochement courant](evidence/execution-journal-criteria-reconciliation-dev-2026-11-23.json) : critères130.4 acquis sur les47groupes
+12API/10UI/25communs,529sources1c706f0/f016. Sources et acteurs/gardes/cgroups
+joints, purge physique,44captures inspectées et originaux/config/référence/5982
+recoupés. Les preuves et diagnostics antérieurs gardent leur époque ; aucun
+groupe ajouté par ce rapprochement. Cette unité est close,072 garde49/32.
+L’ordre documentaire suit la décision pré-code9702888 et son rattachement
+a94f350 : API10coupe réellement, puis UI et communs partagent sa génération
+aprèscoupure. Aucun ordreUI→API n’est attribué aux reçus actuels.
+
 
 <a id="sls-131"></a>
 ## SLS-131 — Détail réseau lisible dans le dialog de conservation

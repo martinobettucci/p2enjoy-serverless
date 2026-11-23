@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-120/121/123–130 closes par rapprochement des douze critères restants avec
+  les47groupes courants ; zéro groupe ajouté. Ordre129/130 relié aux décisions
+  pré-codeAPI→UI→communs. Garde122 courante acquise en diagnostic0groupes,
+  primaireNode1 conservé ; son intégration12API/25communs reste due.
+
 - SLS-122.3 : reprise courante de la vraie garde60 décidée avant pilote,
   primaire GET503/Node1 conservé et wrapper de preuve0groupes. Unité480/60/680,
   puis12API/25communs frais ; aucune nouvelle preuve de garde encore acquise.
