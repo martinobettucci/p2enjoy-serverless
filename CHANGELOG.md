@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-133.2/.3 acquis par rapprochement des preuves : coûtSQL concret et
+  chemin source, décisionCROSS avantcode, basculef016 et nominal positif, quatre
+  relevés/6000chronologies et intervalles client distingués. Limites de causalité
+  conservées, zéro groupe ajouté. Replays et campagnes133.4 encore dus.
+
 - SLS-136 close : quatre groupes E2E corrigés, portée explicite et comptes4/66
   sans altération ; reprise réelle parser-loss, deux contrôleurs0 et clôtures
   externes recoupées, reçus précédents distingués canoniquement. Origine et

@@ -373,4 +373,46 @@ n’est rejouée pour cette correction de repérage. RevueRO sansP1/P2 et SHA de
 archives/clients/contrôleurs recoupés ; pstats/logs distants non relus par le
 relecteur, assertions et empreintes conservées dans les reçus. Le plein6000
 reste attaché àdc95781, nonréexécuté et inchangé.136 est close,133.6/.7 acquis ;
-aucun nominal ou coûtCPU n’est ajouté.133.2 et les campagnes produit restent dus.
+aucun nominal ou coûtCPU n’est ajouté. Les campagnes produit restent dues ;
+le rapprochement de133.2/.3 est précisé ci-dessous.
+
+## Bilan borné de133.2 et133.3 — 23 novembre 2026
+
+Le [rapprochement](evidence/invocation-diagnostic-reconciliation-dev-2026-11-23.json)
+lie les quatre manifestes et leurs vrais gzip vérifiés, sans nouvelle campagne.
+Il établit un coût évitable précis : sur la copie authentique2928/10000 dans le
+même SQLite, le scan d’expiration coûte17,938614ms médiane chaude réelle et
+17,134095msCPU du lecteur ; la formulationCROSS indexée coûte0,027255ms réelle
+et0,027256msCPU, avec les mêmes lignes ordonnées. L’éligibilité est vide dans
+cette comparaison ; les cas positifs ont leurs propres preuves.
+
+Le code établit le chemin Execution.maintain→Execution.tick→execution_logs.maintenance
+et son SELECT. La décision précède le code puis la basculef73→f016, qui conserve
+schéma, tables, collection,42backend/quatreweb et toutes les limites. Le correctif
+retenu reste cette formulation de jointure ; ses prédicats, ordre global et
+LIMIT sont identiques. Le nominalf016 déjà qualifié fournit10001HTTP+1cron et
+trois ensembles exacts dans sa fenêtre, avec clôture de ses gardes et originaux.
+
+Le plein6000 complète les domaines de mesure, sans ventilation causale totale :
+
+| Domaine réellement observé | Résultat ou périmètre |
+| --- | --- |
+| Serveur created→queued / queued→admitted | Médianes6,864ms /13,463ms sur6000chronologies |
+| Serveur admitted→dispatched / dispatched→completed | Médianes4,922ms /206,985ms ; phases composites |
+| Client avantPOST→réponse disponible | Médiane310,666ms ;217,282ms puis408,808ms sur les500premiers/derniers |
+| Client réponse disponible→validationJSON/assertions | Médiane0,388ms ; pas une mesure de sérialisation serveur |
+| SQLRO courant | Quatre états réels517/2062/4119/6000invocations ; plans, CPUlecteur, temps réels et pasVDBE conservés |
+| Profil global | Valeurs brutes interthreads et incohérences conservées ; aucune ventilation par arêtes |
+
+Aucune soustraction entre horloges client et serveur, attribution du résidu au
+réseau, addition de cumtime en CPU, cause unique du rouge9406 ni tempsCOMMIT/fsync
+n’est déduit. completed_at précède collecte finale et COMMIT. L’observationnative
+supplémentaire prévue « si cette piste reste nécessaire » ne s’impose pas pour
+le correctif mesuré et son nominal positif ; la limite demeure explicitement.
+La revue de rapprochement ne relève aucun nouveau correctif automatiquement dû.
+
+133.2/.3 sont acquis, sans fermer133 : le nominal conserve son gel4918597/526,
+le plein dc95781/528 et les métadonnées a43d1b4/0658103.133.4 garde les replays
+affectés,12API/10UI/25communs puis les régressions complètes courantes072. Le
+prochain passage suit API12→UI10→25communs dans la même générationf016, avant
+les suites49/543/18 et32/276 ; chaque campagne est jointe avant la suivante.

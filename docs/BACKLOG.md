@@ -4667,13 +4667,13 @@ métier, collecte, budgets, purge et rétention restent exigés.
 
 - [x] SLS-133.1 Sceller l'essai, résultatterminal,9406réponses et marge manquée,
   observationRO sans attribution causale et restitution physique complète.
-- [ ] SLS-133.2 Mesurer les requêtes/transactions réellement coûteuses et le
+- [x] SLS-133.2 Mesurer les requêtes/transactions réellement coûteuses et le
   chemin d'appel sur le code déployé ; distinguer réseau, ordonnanceur,
   sérialisation et maintenanceSQLite. Aucun résultat ni dépendance substitué.
-- [ ] SLS-133.3 Persister le diagnostic et le correctif retenu avant code ;
+- [x] SLS-133.3 Persister le diagnostic et le correctif retenu avant code ;
   conserver données/ordre/compteurs/budgets, expurgation et limites. Une simple
   augmentation du délai n'est pas un diagnostic ni une optimisation.
-- [ ] SLS-133.4 Nouveau nominal3 avec ses10001HTTP+1cron réels, gardes et
+- [~] SLS-133.4 Nouveau nominal3 avec ses10001HTTP+1cron réels, gardes et
   originaux joints ; replays affectés,12API/10UI/25communs et régression courant072
   avant clôture. Le rouge initial et les preuves historiques restent inchangés.
 
@@ -4699,6 +4699,18 @@ métier, collecte, budgets, purge et rétention restent exigés.
   réellement démarrés. Le compteur est renommé ordinary_http_responses et éprouvé
   à2 sur les deux passages courts puis à6000 sur le plein. Conserver les preuves
   anciennes et qualifier la synthèse avec les vrais passages de profilage.
+
+133.2/.3 — [Rapprochement borné](evidence/invocation-diagnostic-reconciliation-dev-2026-11-23.json)
+acquis sans nouvelle campagne ni groupe ajouté. Coût évitable mesuré sur le vrai
+corpus2928/10000 et chemin source maintain→tick→maintenance→SELECT, décisionCROSS
+avantcode, basculef016 limitée à cette requête, mêmes prédicats/ordre/LIMIT et
+invariants. Plein6000/quatreSQL, chronologies natives et intervalles client
+conservent leurs périmètres ; les arêtes nonfiables du profiler ne ventilent pas
+les coûts. Aucune cause unique du rouge9406, duréeCOMMIT/fsync ou réseau pur
+n’est affirmée. La piste d’observation native supplémentaire était conditionnelle
+au besoin du correctif ; aucun nouveau correctif n’est retenu ici.133.2/.3 sont
+acquis. Le nominalf0163 du gel4918597 reste acquis et garde son époque ; replays
+affectés,12API/10UI/25communs et régressions complètes de133.4 restent dus.
 
 132 — nominal courant réellement rouge :9406HTTP, marge avantcron épuisée,
 aucun groupe qualifié. Worker terminal1 puis libéré, original011/f6e19cdd,

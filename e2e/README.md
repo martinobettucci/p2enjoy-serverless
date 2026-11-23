@@ -3376,7 +3376,10 @@ La [correction136](../docs/evidence/invocation-cost-scope-schema011-dev-2026-11-
 est qualifiée par quatre nouveaux groupes smoke/perte ; comptes bruts4/66,
 portée nonattribuable explicite, deux contrôleurs0/cgroups/gardes joints et
 originaux conservés. Le plein demeure dans son gel, sans réexécution.136 est
-close ; les mesures causales133.2 et campagnes globales restent dues.
+close. Le [bilan133.2/.3](../docs/evidence/invocation-diagnostic-reconciliation-dev-2026-11-23.json)
+rapproche comparaisonSQL authentique, correctifCROSS avantcode, plein/phases et
+nominal positif sans ventilationCPU/réseau pure.133.4 garde les replays affectés,
+12API→10UI→25communs frais dans la même génération, puis les suites complètes.
 Le [reçu court](../docs/evidence/invocation-cost-short-schema011-dev-2026-11-23.json)
 ne qualifie aucun groupe nominal. Le pilote plein local est borné2400s, attente
 client2300s et contrôleur2600s ; garde2700 et W−60 restent inchangés.

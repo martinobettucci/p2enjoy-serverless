@@ -10425,3 +10425,20 @@ relit pas les bruts pstats/logs distants. Plein6000 reste dc95781, nonréexécut
 manifest/gzip/brut inchangés.136 et ses quatre critères sont clos,133.6/.7 acquis.
 Cette preuve ne clôt ni la mesure causale133.2, ni le nominal et les campagnes
 plateforme. Le prochain travail retourne au diagnostic133 et à ses régressions.
+
+### 23 novembre 2026 — Diagnostic133 rapproché, correctifCROSS conservé
+
+La comparaison authentique2928/10000 mesure17,939ms→0,027255ms pour le seul
+SELECT d’expiration, lignes égales ; son chemin d’appel vient du source déployé.
+La décision précède le code, la basculef016 conserve42+4/schéma/tables/collection
+et le nominalf016 passe10001HTTP+cron/trois groupes avec sa fenêtre initiale.
+Le plein6000, ses quatreSQL et ses chronologies/client complètent le diagnostic
+dans leurs périmètres ; aucun coût par arête du profiler n’est pris pour acquis.
+
+Revue de rapprochement et quatre gzip vérifiés, aucun nouveau test ou groupe.
+Les coûtsCOMMIT/fsync et réseau pur, ainsi que la cause unique du rouge9406,
+restent nonprouvés ; l’observation supplémentaire était conditionnelle au besoin
+du correctif. Décision : conserver l’optimisation mesurée déjà déployée et son
+nominal positif, puis livrer les campagnes133.4.133.2/.3 acquis,133 reste ouvert.
+Les preuves gardent leurs gels. API12→UI10→25communs doivent maintenant passer
+sur la même générationf016 avant49/543/18 puis32/276, sans test parallèle.

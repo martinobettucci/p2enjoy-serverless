@@ -1,0 +1,464 @@
+{
+  "format": "p2enjoy-serverless-invocation-diagnostic-reconciliation-v1",
+  "units": [
+    "SLS-133.2",
+    "SLS-133.3"
+  ],
+  "completed": true,
+  "new_functional_groups": 0,
+  "new_qualified_groups": 0,
+  "preserved_proofs": [
+    {
+      "path": "docs/evidence/invocation-production-query-comparison-dev-2026-11-22.json",
+      "sha256": "9b1c39bc3013ff1e960462e2e21f047daa016d29e6c5a13fc6a0dde26bd49b24",
+      "source_commit": "76ed074",
+      "image": "sha256:f73efa6e4e2b944b0cbc02f207c6cda0258138df1a7718579a9b0396d02e68d0",
+      "raw": {
+        "path": "invocation-production-query-comparison-dev-2026-11-22.raw.json.gz",
+        "sha256": "0195a861f9e3e21acf3f1c0c32ed6213b96f202ed0f03e2bd7b5bdeb7b7b8e5b",
+        "bytes": 54593,
+        "uncompressed_sha256": "cc3ac01a973e4d27aadacffcabca3de4e1af1e051d26eedc621e9b7700584ece"
+      },
+      "uncompressed_bytes_verified": 128244
+    },
+    {
+      "path": "docs/evidence/execution-journal-retention-query-deployment-dev-2026-11-22.json",
+      "sha256": "542e0d517d7242d1c151daea99a83785a9a06ff80432b1d0485e28a350978f18",
+      "source_commit": "96379fe7409553655de1b5b172fd18a46824a6c8",
+      "image": "sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7",
+      "raw": {
+        "path": "execution-journal-retention-query-deployment-dev-2026-11-22.raw.json.gz",
+        "bytes": 43310,
+        "sha256": "f90f7085d2161626fcb86ba8ed4b74cbd05815ef3d4969bbba77c64a40fb891d",
+        "uncompressed_bytes": 199534,
+        "uncompressed_sha256": "cca337e18b3ef7f9ccdab8cd4d718e467055d2296d3adc52998a47b201cc5784"
+      },
+      "uncompressed_bytes_verified": 199534
+    },
+    {
+      "path": "docs/evidence/invocation-cost-full-schema011-dev-2026-11-23.json",
+      "sha256": "389c435a0091ee8fe0b580abf2aecb734d7b9d301066383a61decbc618e800db",
+      "source_commit": "dc9578142639699fdb685405d4a3ce729acee065",
+      "image": "sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7",
+      "raw": {
+        "path": "invocation-cost-full-schema011-dev-2026-11-23.raw.json.gz",
+        "sha256": "8ca5d400ec7cae9677139b64c9fbefa2242a397187983e7db848539cab02ffc4",
+        "uncompressed_sha256": "5b6d4d2c2a81f94c9e4ffe6367be3182407d84c42fa25727dad6e6eb30f93a6b",
+        "uncompressed_bytes": 34915484
+      },
+      "uncompressed_bytes_verified": 34915484
+    },
+    {
+      "path": "docs/evidence/invocation-source-retention-volume-schema011-query-dev-2026-11-22.json",
+      "sha256": "e580ecb47280da90c6b43b9c67ef655393a525e5aeddb0cdd1610a59a4cc04be",
+      "source_commit": "4918597e7ba26ec7468e8d336f011df84b735acb",
+      "image": "sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7",
+      "raw": {
+        "path": "invocation-source-retention-volume-schema011-query-dev-2026-11-22.raw.json.gz",
+        "bytes": 4271802,
+        "sha256": "86ca52282d4ffcc9d47001c18b1917f5fc13dd79bf75d03a24278fb4ba79a937",
+        "uncompressed_bytes": 80260539,
+        "uncompressed_sha256": "159ba83c6d76dfee5af5e9c345d012e5290e67478829210a58efe7c7c679817f"
+      },
+      "uncompressed_bytes_verified": 80260539
+    }
+  ],
+  "source_call_path": [
+    "Execution.maintain",
+    "Execution.tick",
+    "execution_logs.maintenance",
+    "logs_expiration SELECT"
+  ],
+  "source_call_path_scope": "Established from the frozen source; no duration inferred from cProfile callers.",
+  "sql_comparison": {
+    "original": {
+      "sql": "SELECT e.sequence,e.service_id,e.payload_bytes FROM execution_log_events e JOIN service_log_policies p ON p.service_id=e.service_id WHERE e.observed_at<max(p.expiration_floor,?-p.retention_minutes*60) ORDER BY e.sequence LIMIT ?",
+      "parameters": [
+        1795383703.858769,
+        200
+      ],
+      "plan": [
+        [
+          8,
+          0,
+          0,
+          "SCAN e"
+        ],
+        [
+          10,
+          0,
+          0,
+          "SEARCH p USING INDEX sqlite_autoindex_service_log_policies_1 (service_id=?)"
+        ]
+      ],
+      "samples": [
+        {
+          "iteration": 0,
+          "wall_ns": 16181734,
+          "cpu_ns": 16123700,
+          "vm_progress_calls": 1500,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 1,
+          "wall_ns": 28209258,
+          "cpu_ns": 23187326,
+          "vm_progress_calls": 1500,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 2,
+          "wall_ns": 17938614,
+          "cpu_ns": 17207478,
+          "vm_progress_calls": 1500,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 3,
+          "wall_ns": 16584440,
+          "cpu_ns": 16526816,
+          "vm_progress_calls": 1500,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 4,
+          "wall_ns": 16559509,
+          "cpu_ns": 16468848,
+          "vm_progress_calls": 1500,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 5,
+          "wall_ns": 16399445,
+          "cpu_ns": 16284445,
+          "vm_progress_calls": 1500,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 6,
+          "wall_ns": 16267787,
+          "cpu_ns": 16225027,
+          "vm_progress_calls": 1500,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 7,
+          "wall_ns": 22434689,
+          "cpu_ns": 21139397,
+          "vm_progress_calls": 1501,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 8,
+          "wall_ns": 24800929,
+          "cpu_ns": 24784506,
+          "vm_progress_calls": 1500,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 9,
+          "wall_ns": 18261833,
+          "cpu_ns": 17134095,
+          "vm_progress_calls": 1500,
+          "vm_quantum": 100,
+          "result_rows": 0
+        }
+      ],
+      "warm_median_wall_ns": 17938614,
+      "warm_median_cpu_ns": 17134095
+    },
+    "policies_outer_cross_join": {
+      "sql": "SELECT e.sequence,e.service_id,e.payload_bytes FROM service_log_policies p CROSS JOIN execution_log_events e WHERE e.service_id=p.service_id AND e.observed_at<max(p.expiration_floor,?-p.retention_minutes*60) ORDER BY e.sequence LIMIT ?",
+      "parameters": [
+        1795383703.858769,
+        200
+      ],
+      "plan": [
+        [
+          8,
+          0,
+          0,
+          "SCAN p"
+        ],
+        [
+          10,
+          0,
+          0,
+          "SEARCH e USING INDEX execution_log_retention (service_id=? AND observed_at<?)"
+        ],
+        [
+          37,
+          0,
+          0,
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      ],
+      "samples": [
+        {
+          "iteration": 0,
+          "wall_ns": 492312,
+          "cpu_ns": 273669,
+          "vm_progress_calls": 0,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 1,
+          "wall_ns": 27255,
+          "cpu_ns": 27256,
+          "vm_progress_calls": 0,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 2,
+          "wall_ns": 83289,
+          "cpu_ns": 83439,
+          "vm_progress_calls": 0,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 3,
+          "wall_ns": 26477,
+          "cpu_ns": 26437,
+          "vm_progress_calls": 1,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 4,
+          "wall_ns": 62075,
+          "cpu_ns": 62475,
+          "vm_progress_calls": 0,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 5,
+          "wall_ns": 21508,
+          "cpu_ns": 21639,
+          "vm_progress_calls": 0,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 6,
+          "wall_ns": 64812,
+          "cpu_ns": 65117,
+          "vm_progress_calls": 1,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 7,
+          "wall_ns": 21450,
+          "cpu_ns": 21575,
+          "vm_progress_calls": 0,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 8,
+          "wall_ns": 61334,
+          "cpu_ns": 61399,
+          "vm_progress_calls": 0,
+          "vm_quantum": 100,
+          "result_rows": 0
+        },
+        {
+          "iteration": 9,
+          "wall_ns": 23413,
+          "cpu_ns": 23486,
+          "vm_progress_calls": 0,
+          "vm_quantum": 100,
+          "result_rows": 0
+        }
+      ],
+      "warm_median_wall_ns": 27255,
+      "warm_median_cpu_ns": 27256
+    }
+  },
+  "comparison_cardinalities": {
+    "invocations": 2928,
+    "execution_log_events": 10000,
+    "service_log_policies": 1,
+    "schedule_firings": 0
+  },
+  "comparison_rows_equal": true,
+  "current_profile_scope": {
+    "unit": "SLS-136",
+    "scope": "Interpreter-global callbacks; multiple threads represented; no TID/task attribution",
+    "call_path_attribution_supported": false,
+    "timing_consistency": {
+      "functions_self_gt_cumulative": 7,
+      "caller_links_self_gt_cumulative": 356
+    },
+    "worker_entries": [
+      {
+        "file": "/usr/local/lib/python3.14/concurrent/futures/thread.py",
+        "line": 97,
+        "name": "_worker",
+        "total_calls": 2
+      },
+      {
+        "file": "/usr/local/lib/python3.14/threading.py",
+        "line": 1066,
+        "name": "_bootstrap_inner",
+        "total_calls": 5
+      }
+    ],
+    "original_declaration_preserved_in_raw": true,
+    "reason": "Raw callers timings do not form a reliable decomposition; cause of each inconsistency is not established.",
+    "effective_library": {
+      "receipt_path": ".local/e2e/profiler-runtime-library-1795411535677650552.json",
+      "receipt_sha256": "c480cde8cbfb01383929650477ebd3ff18f7dec18496e928bbc2cae293e2b9a7",
+      "metadata": {
+        "python": "3.14.10 (main, Nov  5 2026, 07:57:36) [GCC 14.2.0]",
+        "gil_disabled": 0,
+        "cProfile_sha256": "32d908b9fbaa8366c35898e32efbd81a0c841bd813d70a5a1a465251e3497e7d",
+        "image": "sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7",
+        "container_id": "b396de90eec2dd9c630567c9b4a50a529db81963d6ce9f92d02b7b3fa3b29479",
+        "started_at": "2026-11-23T05:24:07.043663199Z",
+        "command_returncode": 0,
+        "no_app_import": true
+      }
+    },
+    "primary_sources_scope": "Versioned CPython sources inform interpretation; complete build/source identity is not claimed."
+  },
+  "client_intervals": {
+    "all": {
+      "response_available_seconds": {
+        "count": 6000,
+        "min": 0.163450487,
+        "median": 0.3106660225,
+        "p95_nearest_rank": 0.472201181,
+        "max": 0.870420395,
+        "sum": 1914.228610502
+      },
+      "validation_after_response_seconds": {
+        "count": 6000,
+        "min": 0.000147154,
+        "median": 0.000387811,
+        "p95_nearest_rank": 0.000579668,
+        "max": 0.004933135,
+        "sum": 2.398650825
+      }
+    },
+    "first500": {
+      "response_available_seconds": {
+        "count": 500,
+        "min": 0.165808903,
+        "median": 0.217281716,
+        "p95_nearest_rank": 0.274881885,
+        "max": 0.389829543,
+        "sum": 111.895536473
+      },
+      "validation_after_response_seconds": {
+        "count": 500,
+        "min": 0.000183892,
+        "median": 0.00035748949999999996,
+        "p95_nearest_rank": 0.00059696,
+        "max": 0.004517231,
+        "sum": 0.198246402
+      }
+    },
+    "last500": {
+      "response_available_seconds": {
+        "count": 500,
+        "min": 0.251655486,
+        "median": 0.4088076325,
+        "p95_nearest_rank": 0.59552672,
+        "max": 0.870420395,
+        "sum": 215.970570304
+      },
+      "validation_after_response_seconds": {
+        "count": 500,
+        "min": 0.000174946,
+        "median": 0.00040108600000000004,
+        "p95_nearest_rank": 0.000667632,
+        "max": 0.001689553,
+        "sum": 0.204916418
+      }
+    }
+  },
+  "native_server_phase_durations": {
+    "created_at→queued_at": {
+      "count": 6000,
+      "median_seconds": 0.006863594055175781,
+      "p95_nearest_rank_seconds": 0.020979642868041992,
+      "min_seconds": 0.004359722137451172,
+      "max_seconds": 0.22412896156311035
+    },
+    "queued_at→admitted_at": {
+      "count": 6000,
+      "median_seconds": 0.01346290111541748,
+      "p95_nearest_rank_seconds": 0.027427196502685547,
+      "min_seconds": 0.004204273223876953,
+      "max_seconds": 0.07205963134765625
+    },
+    "admitted_at→dispatched_at": {
+      "count": 6000,
+      "median_seconds": 0.004922151565551758,
+      "p95_nearest_rank_seconds": 0.013020038604736328,
+      "min_seconds": 0.003198385238647461,
+      "max_seconds": 0.11591172218322754
+    },
+    "dispatched_at→completed_at": {
+      "count": 6000,
+      "median_seconds": 0.2069849967956543,
+      "p95_nearest_rank_seconds": 0.3161766529083252,
+      "min_seconds": 0.09165692329406738,
+      "max_seconds": 0.6508617401123047
+    }
+  },
+  "native_phase_provenance": {
+    "report_path": ".local/e2e/invocation-cost-profile-full-c88abf87-62ab-4bbb-ac54-b47db026c0bf.json",
+    "report_sha256": "97b48f148b69be20410c9772af49628d36039caa5e502a4ccaf89fa78f800565",
+    "analysis_path": ".local/e2e/source133-full-phase-analysis-1795412760116800605.json",
+    "analysis_sha256": "59fc93fb4cf3387e95d94d0d9a1f933c0c164569da214be0ccf7eaa3bdefa4dc"
+  },
+  "retained_correction": "Keep deployed CROSS JOIN expiration query with unchanged eligibility/order/LIMIT, budgets, retention and cadence.",
+  "positive_nominal": {
+    "source_commit": "4918597e7ba26ec7468e8d336f011df84b735acb",
+    "image": "sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7",
+    "targeted_groups": 3,
+    "counts": {
+      "real_http_responses": 10001,
+      "real_scheduled_handlers": 1,
+      "terminal_before": 10002,
+      "terminal_while_source_protected": 10001,
+      "terminal_after_firing_close": 10000,
+      "business_purges": 2
+    },
+    "preflight": {
+      "scenario": "production-window-preflight",
+      "window": 1795398600,
+      "sampled_at": 1795396542.529,
+      "available_seconds": 2057.470999956131,
+      "required_seconds": 1980
+    }
+  },
+  "remaining_unit": "SLS-133.4",
+  "remaining_work": [
+    "Affected replays and consumers",
+    "Fresh12API/10UI/25common groups on f016",
+    "Current072 full regressions49/543/18 then32/276 and complete closure"
+  ],
+  "limitations": [
+    "No unique cause of the former9406 failure is asserted.",
+    "RO query costs belong to their measurement process; the real comparison has empty eligibility and does not alone prove positive expiration.",
+    "Server phases, client intervals and raw interpreter-global profile have distinct scopes; no cross-host clock subtraction or pure network/CPU split.",
+    "completed_at precedes final collection and COMMIT; no COMMIT/fsync/caller cost decomposition is established or required for the retained measured fix.",
+    "This reconciliation executes no new campaign and does not relabel historical proofs."
+  ]
+}
