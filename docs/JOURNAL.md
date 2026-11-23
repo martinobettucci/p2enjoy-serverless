@@ -10470,3 +10470,14 @@ rapports/captures, vérification extérieure des unités/cgroups/acteurs/gardes 
 originaux avant tout autre test. Les huitJPEG restantes seront ouvertes avant
 publication de l’échec. L’analyse partira ensuite du source et des observations
 réelles du scénario complet ; son préparatoire130 reste dans sa propre époque.
+
+### 23 novembre 2026 — Closer du rouge à corriger, images relues
+
+Les21JPEG sont ouvertes individuellement et liées aux SHA du client ; vues
+desktop/tablette/mobile, troncatures, export et dialogues restent distincts des
+assertions fonctionnelles. Aucun groupeUI qualifié. Le premier closer d’échec
+refuse enligne18 par KeyError visual_review_pending (outil130976/code1), avant
+connexionnative ou libération d’unité. Ce champ n’est écrit que pour un succès.
+Décision avant son correctif : typer le reçu échoué sans ce champ et vérifier
+le reçu indépendant complet des21images contre toutes les captures archivées.
+Un nouveau closer gelé conserve le précédent refusé ; aucun test n’est rejoué.

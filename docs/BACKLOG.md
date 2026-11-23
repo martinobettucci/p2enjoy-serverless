@@ -5114,6 +5114,10 @@ Les12API acquises juste avant gardent leur gel ; aucun commun n’est lancé.
   générationf016/config/référence/5982 et huitcompteurs0 avant tout autre test.
   Le closer du succès reste immuable ; la collecte d’échec exige explicitement
   completedfalse/échecUI07/cleanuptrue et ne fabrique aucun succès.
+  Le reçu échoué n’a pas le champ visual_review_pending réservé au succès :
+  exiger à sa place le reçu indépendant des21images réellement observées et
+  leurs SHA exacts. Le premier closer refusé par KeyError est conservé ; sa
+  correction utilise un nouveau fichier gelé, sans rejouer aucune E2E.
 - [ ] SLS-137.2 Retrouver le point de refus depuis le source et les observations
   réelles, distinguer produit, protocole et corpus sans attribuer une cause
   depuis le seul hash ; persister le correctif retenu avant code.
