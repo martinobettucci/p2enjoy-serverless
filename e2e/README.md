@@ -3316,3 +3316,10 @@ qualifie huitcontrôles noyau et deuxgroupesHTTPS sur527sources1f48754/f016,
 leaderZ/threadvivant refusé, zombie gardé pendant clone/restitution et trois
 enfants/pidfd/deuxcgroups joints. Le rouge préalable est lié ; les deuxâges
 et autres consommateurs restent à passer sur le helper corrigé.
+
+Les [deuxâges sous helper corrigé](../docs/evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json)
+passent sixgroupes sur527sources5db72a8/f016, sansnouveauhandler, sources
+canoniques et originaux conservés, deuxunités/cgroups/gardes joints. La garde
+[rattache les troispreuves actuelles](../docs/evidence/retention-three-current-proofs-binding-dev-2026-11-23.json)
+par leurs quatre modules et archives intégrales, zéro groupe ajouté.
+Les25communs du helper et campagnes produit demeurent requis.

@@ -4578,7 +4578,7 @@ sources009 et leurs exports demeurent strictement immuables.
 - [x] SLS-132.2 Écrire/pousser le contrat du seul passagecourant envisagé avant
   code : image/copies/migrations/observateur, gardes/possession/identités/délais,
   refus et restitution. Préserver sans substitution les voies historiques.
-- [ ] SLS-132.3 Prouver sur le vrai code011 l'âge et la rétention de source
+- [x] SLS-132.3 Prouver sur le vrai code011 l'âge et la rétention de source
   protégée jusqu'à clôture du tir, puis retrait ; tir terminal et générations
   retirées, borne10000 et détachement de source. Aucun âge/SQL/horloge fabriqué,
   aucune nouvelle invocation attribuée à un témoin ancien. Distinguer les logs
@@ -4944,3 +4944,7 @@ achever les âges, sans relance aveugle ni publication du composite6 manquant.
 135.3 — Complément décidé avant code : vrai leader Python terminé par syscall exit60, thread gardant unFD du stockage vivant ; exiger EINVAL natif mais pidfd nonprêt et refus nommé. Ce cas négatif réel éprouve l’autorité du pidfd, sans substituer la sonde du premier cas ni modifier sa preuve déjà scellée.
 
 135.3 — [Correctif éprouvé](evidence/process-reference-lifecycle-corrected-dev-2026-11-23.json),527sources1f48754/f016 : huitcontrôles noyau et deuxgroupesHTTPS. SondeZ réellement acceptée, sondes vivantes refusées, leaderZ avec thread/FD réel vivant refusé par pidfdnonprêt et causeEINVAL22. Le zombie reste présent pendant cloneHTTPS et restitutionnominale. Trois enfantsstatus9/pidfdfermés, unitésroot/locale/cgroups et garde120 joints, originaux/config/5982 conservés et huitcompteurs0. Le rouge préalable reste lié ; aucun groupe de rétention ajouté.135.4 et ses deuxnouveauxâges restent dus.
+
+132.3/135.4 — [Deuxâges courants qualifiés](evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json),527sources5db72a8/f016 : sixgroupes, deuxSSO/API sansnouveauhandler, métadonnées protégées identiques alors que bufferexpired puis source retirée ; historique terminal/générations retirés. Deuxrestitutions nominales et unités/cgroups/gardes jointes, captures009 inchangées, originaux/config/5982 et huitcompteurs0 recoupés. Avec count3 et source10001/cron3 courants,132.3 est acquise ;135.4 attend consommateurs/25communs,132.5 attend socle et complémentaires.
+
+132.5 — [Raccordement réel des troispreuves](evidence/retention-three-current-proofs-binding-dev-2026-11-23.json) : garde inchangée, quatre modulesf016 exacts, SHAcompressés et contenusdécompressés intégralement recoupés, zéro groupe ajouté. Ce contrôle de provenance ne remplace pas49/543/18 puis32/276 ;132.5 reste ouverte.

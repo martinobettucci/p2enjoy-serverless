@@ -1,0 +1,53 @@
+{
+  "completed": true,
+  "kind": "real-preserved-proof-binding-not-new-e2e",
+  "guard_source_sha256": "196d7d283744bf77a6415a023a36c6e14570b5d8d535f495ae4744b9710037e0",
+  "proofs": [
+    {
+      "path": "docs/evidence/schedule-firing-retention-count-schema011-query-dev-2026-11-22.json",
+      "sha256": "cda0f412ebacb94dac4be44a92bf5d0910eb5b0c061d10ef912dcf577eb95693",
+      "raw_sha256": "c5c10f7a58132e6cbd899c0a5117b4d4aa5bbd999fa79cdd0491c3ee362f625b",
+      "same_core_sources": {
+        "control/app/schedules.py": "9547b046b682639d59751d1a865dab307dd03e5f8c98d0b251f276aa6e8b2fe3",
+        "control/app/execution.py": "848f065272c17481fb6eb4c9dea5e97f83bdb5d0e829abe2c32093e4cb66a7f8",
+        "control/app/schedule_calendar.py": "6308bc80f7b5f11a07341240962b9d5670391a9dcdb3d4ed71c0e686d442c9b5",
+        "control/app/execution_logs.py": "1d882ed6188594983351c7d958a3b89ac7cdb61145ecc770bfd8b3efe3f653bd"
+      },
+      "replayed_in_this_scope": false,
+      "groups_added": 0
+    },
+    {
+      "path": "docs/evidence/invocation-source-retention-volume-schema011-query-dev-2026-11-22.json",
+      "sha256": "e580ecb47280da90c6b43b9c67ef655393a525e5aeddb0cdd1610a59a4cc04be",
+      "raw_sha256": "86ca52282d4ffcc9d47001c18b1917f5fc13dd79bf75d03a24278fb4ba79a937",
+      "same_core_sources": {
+        "control/app/schedules.py": "9547b046b682639d59751d1a865dab307dd03e5f8c98d0b251f276aa6e8b2fe3",
+        "control/app/execution.py": "848f065272c17481fb6eb4c9dea5e97f83bdb5d0e829abe2c32093e4cb66a7f8",
+        "control/app/schedule_calendar.py": "6308bc80f7b5f11a07341240962b9d5670391a9dcdb3d4ed71c0e686d442c9b5",
+        "control/app/execution_logs.py": "1d882ed6188594983351c7d958a3b89ac7cdb61145ecc770bfd8b3efe3f653bd"
+      },
+      "replayed_in_this_scope": false,
+      "groups_added": 0
+    },
+    {
+      "path": "docs/evidence/schedule-retention-age-schema011-query-dev-2026-11-22.json",
+      "sha256": "3fcb645976d87f8519f3b1124cac30560802a458ede7c614266ef633c2dd5d28",
+      "raw_sha256": "17bfc0aea839f674c7d78d35b81316e0d1fb1b1530f8303f7491d13bf65b1992",
+      "same_core_sources": {
+        "control/app/schedules.py": "9547b046b682639d59751d1a865dab307dd03e5f8c98d0b251f276aa6e8b2fe3",
+        "control/app/execution.py": "848f065272c17481fb6eb4c9dea5e97f83bdb5d0e829abe2c32093e4cb66a7f8",
+        "control/app/schedule_calendar.py": "6308bc80f7b5f11a07341240962b9d5670391a9dcdb3d4ed71c0e686d442c9b5",
+        "control/app/execution_logs.py": "1d882ed6188594983351c7d958a3b89ac7cdb61145ecc770bfd8b3efe3f653bd"
+      },
+      "replayed_in_this_scope": false,
+      "groups_added": 0
+    }
+  ],
+  "qualified_groups": 0,
+  "format": "p2enjoy-serverless-current-retention-proof-binding-v1",
+  "unit": "SLS-132.5",
+  "limitations": [
+    "Validation réelle des troispreuves scellées, pas un nouveau parcours E2E.",
+    "Campagnes49/543/18 et32/276 toujours dues."
+  ]
+}

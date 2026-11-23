@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-132.3/135.4 : sixgroupes d’âge qualifiés sur le helper corrigé,
+  métadonnées/logs expirés distincts, historique terminal retiré, aucun handler
+  nouveau. Deuxrestitutions/cgroups/gardes joints ; troispreuves courantes
+  rattachées par la garde inchangée. Consommateurs/25communs et suites dus.
+
 - SLS-135.3 : correctif éprouvé par huitcontrôles kernel et deuxgroupesHTTPS ;
   refus du leaderZ/thread/FDvivant, zombie conservé pendant clone/restitution.
   Trois enfants/pidfd et unités/cgroups/gardes joints, originaux/5982 intacts.
