@@ -10528,3 +10528,14 @@ après normalisation native. Décision138.2 : éprouver ce chemin sur le vrai
 contrôle de la console, fractions120/123/000 et secondes00, puis formes
 normalisées et GET de recherche exacts. Un client ciblé possède/purge sa fixture,
 zéro groupe qualifié ; aucune cause ancienne reconstituée depuis le seul hash.
+
+### 23 novembre 2026 — Normalisation native reproduite en138
+
+dcf23f9f passe les sept formes réelles sur529sources6e757f5/f016 : trois refus
+du pilote sur des valeurs valides normalisées, quatre recherches200 aux périodes
+exactes. DeuxJPEG ouvertes individuellement, Chromium156.0.8078.4, Node0 et
+cleanuptrue. Cette preuve ne restitue pas la valeur ancienne absente005f7724.
+Décision avant correction : formater la saisie du banc selon le canon natif,
+sans arrondir la précision ; partager ce formateur entre UI02 et les quatre
+cas acceptés du diagnostic. Les trois formes brutes refusées restent testées.
+Produit et bornes inchangés ; diagnostic corrigé et fullUI restent dus.

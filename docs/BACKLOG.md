@@ -5205,3 +5205,19 @@ ciblées et GET après Rechercher pour les formes acceptées (période exacte).
 Le client ciblé possède sa fixture originale et la purge normalement ; zéro
 groupe qualifié, aucune injection DOM ni horloge remplacée. Ne pas attribuer
 rétrospectivement le hash historique au mécanisme sans preuve correspondante.
+
+138.2 — diagnostic réel dcf23f9f acquis sur529sources6e757f5/f016 : trois refus
+natifs aux formes .120/.000/:00.000, normalisationDOM exacte et validitétrue,
+quatre formes acceptées avec GET200/périodes exactes. Chromium156.0.8078.4,
+Node0/cleanuptrue et deuxJPEG personnellement inspectées. Aucun groupe qualifié.
+La valeur historique005f7724 reste inconnue : ce diagnostic démontre un défaut
+concret du format généré, pas l'identité de chaque erreur ancienne.
+
+Décision avant correctif : une fonction partagée du seul banc convertit la
+dateUTC ISO vers sa forme native canonique, en retirant seulement les zéros
+finaux de fraction et les secondes nulles devenues inutiles. Aucune seconde
+ou milliseconde significative n'est arrondie. UI02 l'utilise ; les quatre
+formes acceptées du diagnostic passent aussi par cette même fonction, comparées
+à leurs formes attendues indépendantes puis recherchées réellement. Les trois
+refus bruts restent éprouvés. Aucun code produit ni délai n'est changé ; rejouer
+ce diagnostic corrigé puis la campagne UI complète reste requis.
