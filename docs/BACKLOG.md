@@ -5996,7 +5996,7 @@ d’observation conserve les observateurs et dépendances réels.
   check15 non atteint et zéro groupe global. Recouper les deux fonctions,
   révocations, parents, huit gardes, naissances/cgroups, référence, configuration,
   5 982 artefacts et réservations. Conserver les observations manquantes.
-- [ ] SLS-146.2 Établir le diagnostic borné : relier opération de stockage,
+- [~] SLS-146.2 Établir le diagnostic borné : relier opération de stockage,
   publication, requête HTTP et garde de commit ; nommer tout état ou stderr
   perdu. Persister les observations et la décision avant instrumentation ou
   correction ; aucune cause inventée à partir du seul 200 ou du retour 1.
@@ -6010,3 +6010,12 @@ d’observation conserve les observateurs et dépendances réels.
   de ce refus restent exclus. Aucun retour secondaire ne devient un succès.
 - [ ] SLS-146.5 Nouveau socle 49/543/18 depuis le début puis complément 32/276,
   avec leurs preuves propres ; aucun ancien partiel ou ciblé ne remplit ce total.
+
+Décision146.2 avant code : [diagnostic du banc](FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md#diagnostic-du-refus-de-commit-zip--sls-146),
+résumé natif borné en mémoire, phases/compteurs/dernières lectures sans SELECT
+ajouté, primaire avantfinally et restitutions indépendantes. Conserver identités
+à l’armement, stdout/stderr réels bornés64Kio et métadonnéesHTTP avantassertion,
+sans corps métier ; erreurs concurrentes/release/nettoyage séparées. Observateurs,
+SQL, signaux et bornes25/3/5/35/110 inchangés. Aucun correctif de produit déduit.
+DiagnosticSIGTERMréel0groupe distinct possible, puis15stockage/25communs frais,
+nouveau49 et32 ; aucune qualification annoncée par cette spécification.

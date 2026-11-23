@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-146.2 : décision de diagnostic du banc persistée avant code : phases et
+  compteurs natifs bornés, primaire/finalisation distinctes, identités àl’armement,
+  vrais flux bornés et métadonnéesHTTP avantassertion. Observateurs/SQL/signaux/
+  délais conservés ; instrumentation et qualifications encore à livrer.
+
 - SLS-146 : [premier refus ZIP scellé](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json),
   gel5eaf3ab/530/f016,55groupes antérieurs et13checks partiels, troisprérequis,
   zéro capture. Gardecommit_not_observed1, PUT200 attendu503 ; assertionsrelease/

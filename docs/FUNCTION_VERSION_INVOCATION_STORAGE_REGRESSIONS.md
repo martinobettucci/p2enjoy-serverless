@@ -131,3 +131,58 @@ pages de contrat reçoivent les résultats dans l'index de sources. Les opérate
 historiques conservent leurs limites. Aucun nouveau parcours visuel ni changement
 produit/UI/manuel ; console, historique et régression complète008 restent ouverts.
 SLS-074 conserve [~].
+
+## Diagnostic du refus de commit ZIP — SLS-146
+
+Le [premier refus courant](evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
+conserve le helper1/commit_not_observed et l’upload200 attendu503. Le reçucommitted
+11→12 et le candidatpublished dédupliqué sont établis ultérieurement ; ils ne
+reconstituent pas le dernier SELECT ni l’instant du commit. Le client a perdu
+les stderr et le corps/en-têtes de cette réponse ; ses assertions de release
+puis nettoyage remplacent l’échec initial. La cause de la non-observation reste
+inconnue ; le masquage et les pertes de diagnostic sont des défauts établis du banc.
+
+Décision avant code du23novembre2026 : instrumenter ces deux fichiers du banc,
+sans modifier le contrôle, l’agent, ControlObserver/ControlWriter, les transactions,
+les SELECT, les signaux ni leurs conditions d’acquisition. Conserver25s pour
+l’intention,3s pour prepared,5s pour commit,35s côté client et la garde110s
+(5s pour watchdog). Aucune relance de PUT, augmentation de délai ou acceptation
+de200 dans le scénario de confirmation perdue.
+
+Le helper conserve un diagnostic borné en mémoire : version, mode, fonction,
+opération déjà observée, phase, bornes et compteurs des boucles, dernières valeurs
+issues des SELECT existants, entrée/retour des writers et lectures, émission des
+signaux. Horloges monotones et instantsUTC sont conservés sans arrondi JSON.
+Émettre la synthèse à la fin ou au premier échec, avant le nettoyage ; aucun
+fichier ou événement par tour de boucle, aucun SELECT de diagnostic ajouté et
+aucune attente supplémentaire pour acquitter SIGSTOP. Un signal envoyé ne vaut
+pas preuve que le processus cible s’est arrêté.
+
+Le premier échec natif reste celui levé. Chaque fermeture de registre/writer/
+observer, restitutionSIGCONT, fermeturepidfd et arrêt du timer reste tentée,
+même si une autre étape échoue. Les erreurs de finalisation sont séparées et
+ne remplacent pas la primaire. Une finalisation échouée sans primaire fait
+échouer le helper. Les identités du helper et de l’agent, PID/naissance/cgroup,
+accompagnent l’armement ; elles ne sont pas déduites après disparition.
+
+Le client conserve avant assertion le statutHTTP, les identifiants publics
+normalisés de requête/opération/fonction, le marqueur de décision, taille/SHA
+du corps et sa classification existante. Aucun corps métier, configuration,
+secret ou jeton n’est exporté. Capturer les vrais stdout/stderr de chaque
+transport avec octets totaux, SHA de flux et suffixe borné64Kio, troncature
+explicite ; événements structurés séparés, protocole invalide en échec.
+Préserver les erreurs des requêtes concurrentes, de l’attente, de release et
+du nettoyage, avec l’échec initial relancé après toutes les restitutions.
+Un échec de sauvegarde/dispose ne doit pas remplacer cette primaire.
+
+La qualification conserve quinzegroupes nominaux et septappels Echo, puis
+25communs frais et leurs captures inspectées. Les nouveaux diagnostics sont
+recoupés avec les états réels, les identités et la clôture physique ; les
+succès ne valent pas reproduction de l’ancien timing. Un diagnostic distinct
+peut interrompre réellement parSIGTERM une gardecommit possédée aprèswatching,
+sans soumettre de mutation : il vérifie la primaire native et la restitution,
+compte zéro groupe et ne remplace aucun des quinzegroupes. Toute nouvelle faute
+reste conservée et instruite, sans retry.49/543/18 puis32/276 restent dus.
+
+Cette décision est spécifiée ; son instrumentation et sa qualification ne sont
+pas encore livrées à ce checkpoint.

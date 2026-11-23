@@ -11230,3 +11230,22 @@ détecté dans l’export. Ces contrôles de formats ne garantissent pas univers
 l’absence de contenu sensible. Un premier bloc du vérificateur termine1 sur son
 sélecteur request_id obligatoire ; correction en mémoire avecget, aucune écriture,
 puis vérification finale0 sur le même arbre. Aucun E2E ou sealer rejoué.
+
+### 23 novembre2026 — Décision de diagnostic natif et de primaire, SLS-146.2
+
+Le refus est scellé/poussé dansb790852. Le commit produit est ultimement acquis,
+mais son délai reste inconnu. Le masquage parrelease/finally et la perte des
+buffersHTTP/stderr sont établis dans le client. Décision persistée avantcode :
+diagnostic borné en mémoire du protocole existant, derniers résultats des mêmes
+SELECT et horloges/compteurs ; synthèse àfin/échec avantnettoyage, sans I/O parpoll
+ni changement d’observateur, SQL, signal ou bornes25/3/5/35/110.
+
+Conserver la première exception native et cliente, traiter chaque restitution
+indépendamment ; ne pas substituer une erreur secondaire. Armement avec vraies
+identitésPID/naissance/cgroup, fluxstdout/stderr réels bornés64Kio et SHA/tailles,
+métadonnéesHTTP avantassertion sans corps métier, erreurs concurrentes retenues.
+Les boucles natives restent identiques ; aucun acquittementSIGSTOP ni délai
+supplémentaire. Un diagnosticSIGTERM réel d’une garde possédée, sans mutation,
+compte0groupe et reste séparé. Les15groupes stockages et25communs frais sont
+requis avant49/32 ; toute nouvelle faute est conservée. Ce checkpoint spécifie
+l’instrumentation ; son code et sa preuve restent à livrer.
