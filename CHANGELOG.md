@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-133/134 : nominal arrêté à9532réponses par la marge W−60 ; reprise
+  indépendante et originaux entièrement recoupés, zéro groupe qualifié.
+  Précontrôle1980s décidé avant code pour refuser tôt les fenêtres insuffisantes,
+  plage30–35min conservée ; oracles enrichis et clôture externe des wrappers
+  courts précisés avant leur traitement.
+
 - SLS-134.6 : écart statique des anciens oracles35/detach enregistré avant
   correction ; ils comparent encore le diagnostic enrichi à deux seuls champs.
   Adaptation stricte et E2E dus après le nominal actif, dont le gel est conservé.

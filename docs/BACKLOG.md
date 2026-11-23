@@ -4666,6 +4666,13 @@ métier, collecte, budgets, purge et rétention restent exigés.
   originaux joints ; replays affectés,12API/10UI/25communs et régression courant072
   avant clôture. Le rouge initial et les preuves historiques restent inchangés.
 
+- [ ] SLS-133.5 Refuser avant les flux HTTP une préparation disposant de moins
+  de1980s réelles avantW, dans la plage30–35min existante. Réserve issue du
+  précédent nominalf016 (1883,418s entre10000terminaisons), de la marge60s et
+  du recoupement final ; aucunW déplacé. Éprouver refus réel sans HTTP/cron,
+  restauration indépendante, puis nominal3 positif après lancement aligné.
+  Ce précontrôle ne qualifie ni débit garanti ni ventilation fine de133.2.
+
 132 — nominal courant réellement rouge :9406HTTP, marge avantcron épuisée,
 aucun groupe qualifié. Worker terminal1 puis libéré, original011/f6e19cdd,
 42backend/quatreweb et huitcompteurs0 recoupés. Le reste de production est
@@ -4788,3 +4795,9 @@ inventée du rouge. Les preuvesf73, les limites et l’imageproduit restent inta
 134.2/134.5 — [diagnostic durable réellement éprouvé](evidence/source-driver-durable-diagnostics-schema011-dev-2026-11-23.json),526sourcesd4e7e5d/f016 : deux lectures HTTP natives401/curl22 puis200/curl0 recoupent bytes/CRLF, conversion et reset ; refus après attache deuxgroupes avec reçuparent AssertionError/ligne1513/sourceSHA et aucune erreur de fermeture ; cascap deuxgroupes avec huitimports/1154632octets/1,217sproduction, préfixe1Mio exact, Node1 seulement pour overflow, pilote0 et deuxpurgespubliques. EOF/jonctions/restitutions/config/référence/5982/huitcompteurs0 recoupés. Ces deux critères passent ;134.4 reste ouvert pour nominal/consommateurs, zéro groupe de rétention ajouté. La cause du premiercascap rouge reste inconnue et n’est pas attribuée par ce succès.
 
 134.6 — constat statique avant correction : invocation-source-retention-volume.mjs lignes134/147 compare encore primary_failure à un objet exact type/raison dans detach-failure/global-alarm, alors que l’observateur courant y ajoute phase/source/last_wait. Décision : conserver les deux valeurs attendues strictes et recouper les nouveaux champs avec le vrai code/dernier arrêt, plutôt que retirer le diagnostic ou ignorer ses champs. Traitement après fin du nominal983b8568 pour garder ses526sources gelées ; aucun E2E des deux anciens oracles ni correction de ce critère encore acquis. Le cas40 doit conserver absence de traceback après SIGKILL.
+
+133/134.4 — [nominal9532 réellement rouge](evidence/invocation-source-retention-diagnostic-margin-failed-dev-2026-11-23.json),526sources7e210bf/f016 : marge00:54 avantcron00:55 atteinte avant10000, premiergroupe échoué et zéroqualification. Générations activées vers00:24:35/37, donc auplus29min23 disponibles avantmarge, contre1883,418s entre10000terminaisons du précédent essai. Aucun arrêt natif observé ; cause aprèsattache encoreouverte. Reprise existante indépendante, SSH255/worker1 terminal/libéré, stderr0 et aucun reçuPython (reprise parSIGKILL), originaux42backend/quatreweb/collection/config/référence/5982/huitcompteurs0 recoupés. Premiercollecteur refusé car il supposait pilote0/restitutionnominale ; reçu corrigé depuis ces étatsréels, sans replay.
+
+133.5 — décision avant code : précondition explicite1980s avantW, après deuxinstances chaudes mais avant le premier flux ; elle conserve le choixW30–35min, le refusW−60 et la garde2700. Refus court éprouvé en lançant le vrai nominal dans la partie tardive d’un créneau5min (horloge réelle), avec deuxpublications/SSO/instances, zéroHTTP et zérotir puis reprise existante ; sonclientreste1. Le prochainnominalpositif démarre au début d’un créneau5min pour recevoir la partiehaute du budgetdéjàcontractuel. Motif : refuser tôt un budget inférieur à la mesure déjà disponible, sans prétendre optimiser le moteur ni attribuer ses coûts.
+
+134.4 — clôture des futurs wrapperscourts : une expiration750s ne joint queNode. Avant utilisation, les lancer dans une unité utilisateurUUID possédée Type=exec/KillMode=control-group/RuntimeMaxSec900/TimeoutStopSec60, sansRemainAfterExit, via la commande native --pipe/--wait déjà utilisée dans schedules-worker. Le principalextérieur recoupe unité/PID0/cgrouprécursivementvide ; tout rouge exige restore/status existants de la seule campagneUUID reconnue avant autretest. Le reçu local du wrapperrouge reste insuffisant à prouver la clôture. Aucun nouveau framework de processus ni borne métier changé.

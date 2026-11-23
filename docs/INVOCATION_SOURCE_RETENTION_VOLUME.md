@@ -784,3 +784,43 @@ Fichiers temporairesnonce/root700-600, supprimés après collecte des métadonn�
 services/images/config/compteurs/5982 recoupés avant/après. Lecture infrastructure
 uniquement, sans groupe de rétention ajouté. Les corps/headers bruts restent
 privés et ne figurent pas dans la preuve publique.
+
+
+### Précontrôle du budget de production — SLS-133.5
+
+Décision du23novembre2026 avant code, après le rouge9532 : le créneau reste
+choisi30 à35min après préparation, avec W−60 et garde2700 inchangés. Après
+les deuxinstances chaudes et avant streams, exiger au moins1980s réelles avantW.
+Le précédent nominalf016 a enregistré10000terminaisons sur1883,418s ; les60s
+et le recoupement final demandent une réserve initiale supérieure. Cette règle
+refuse tôt une fenêtre insuffisante, sans déplacerW ni revendiquer un débit.
+Elle ne remplace pas l’attributionfine et les mesures requises par133.2.
+
+Preuve négative : lancer le même nominal réel dans la partie tardive du créneau
+5min, après SSO/deuxpublications/deuxinstances, afin que le précontrôle refuse
+naturellement avant tout HTTPordinaire ou tir. Client1, erreur nommée
+production_window_too_short ; observations de préparation et du budgetmesuré,
+aucune réponse, reprise existante et ressourcesorigines/compteurs recoupés.
+Preuve positive : prochain nominal lancé au début d’un créneau5min, même formuleW,
+mêmes5000×2 et troisfrontières. Le rouge9532 reste conservé et zéroqualifié.
+
+
+### Oracles des diagnostics enrichis — SLS-134.6
+
+Les modes35 et detach conservent leurs type/raison attendus stricts, puis
+recoupent phase, sourceSHA/ligne et dernierwait réel du diagnostic enrichi.
+L’ancienne égalité d’objet à deuxchamps ne décrit plus cette forme complète.
+Pour detach, la phase reste validate_initial_history et la ligne porte son
+assertion ; pour35, arm_deadline_fault et la ligne de l’alarme réelle. Le statut
+natif est décodé depuis sesbits réels et reste celui duPIDcontrôle. La branche40
+conserve son absence de tracebackPython aprèsSIGKILL. Aucun signal inattendu
+n’est accepté ni délai déplacé par cette adaptation d’oracle.
+
+Les wrapperscourts se lancent dans une unitéutilisateurUUID possédée, Type=exec,
+KillMode=control-group, RuntimeMaxSec900 et TimeoutStopSec60, sansRemainAfterExit,
+via systemd-run --pipe --wait existant. Le principalextérieur conserve identité
+et cgroup avant sa disparition, puis vérifie MainPID/ControlPID0 et aucunPID dans
+les cgroupsdescendants. Tout retourrouge nécessite la reprise existante du seul
+UUID reconnu puis status/restauration natifs avant autrecampagne. Le wrapperrouge
+ne prouve pas la clôture par la seule jonctionNode ; cette observation externe
+reste distincte. EntréeSSO privée, aucun secret dans argv/env/disque/journal.
