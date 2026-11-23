@@ -11157,3 +11157,28 @@ suivante ; les quatre stderr sont vides et retenus sous SHA. Les 22 images sont
 reliées aux notes du principal, sans pixels exportés ni nouvelle inspection
 visuelle déléguée. Contrôles de formats sensibles sans détection ; aucune E2E
 ou sealer réexécuté pendant la revue. Aucune clôture de l’unité 145 décidée.
+
+### 23 novembre 2026 — Sixième socle arrêté dans le stockage, SLS-146
+
+Worker `2ef5a5e5`, gel `5eaf3ab` / 530 / f016, run `54dd3e47` : un SSO réel et
+deux constructeurs passent, puis 55 groupes de contrôle. Le client stockage
+termine 1 après 13 checks réussis ; le 14e, publication ZIP avec confirmation
+perdue, échoue ; le dernier n’est pas atteint. Huitième garde, `commit` (index7) :
+`preparation-observed`, identité écrivain puis `fault-failed / commit_not_observed`,
+sans `paused`, retour1. Le PUT d’archive reçoit200 attendu503. `release()` puis
+la vérification finale du nettoyage produisent des assertions secondaires ;
+le rapport original garde cleanupfalse/fault:AssertionError. Aucun stderr du
+helper n’a été retenu par ce client, qui le drainait ; cette perte est nommée.
+
+La santé finale indique zéro allocation/bail/attente/montage et les purges sont
+rapportées, sans conclure à leur contrôle physique. Worker finalisé1, unité
+arrêtée et lanceur joint ; clôture native extérieure, gardes et ressources à
+recouper. Zéro capture atteinte, zéro qualification globale ; les55/13partiels
+et les30 du ciblé145 restent distincts. SLS-146 est inscrite avant traitement.
+Décision : sceller le premier refus et ses sources, lire uniquement les reçus,
+identités et journaux applicables, sans retry ni interprétation du200 comme
+une confirmation perdue réussie. Aucun correctif causal supposé à ce stade.
+
+L’inscription est relue indépendamment sans P1/P2 résiduel. La garde en refus
+est la huitième entrée (index7), distincte de commit-database-busy à l’index6.
+Cette revue est documentaire, sans nouveau diagnostic ni opération distante.

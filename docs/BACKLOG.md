@@ -76,6 +76,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-142](#sls-142) Barrière après commit du transport de service | Corriger | `[~]` | SLS-031, SLS-108 | [SERVICE_TRANSPORT_REGRESSIONS](SERVICE_TRANSPORT_REGRESSIONS.md) |
 | 3 | [SLS-143](#sls-143) Invocation réelle refusée dans le parcours de stockage | Corriger | `[~]` | SLS-065 | cette unité, [CONSOLE_STORAGE](CONSOLE_STORAGE.md) |
 | 3 | [SLS-145](#sls-145) Barrière de réclamation non reçue à l’échéance | Corriger | `[~]` | SLS-078 | cette unité, [SCHEDULE_RECOVERY](SCHEDULE_RECOVERY.md) |
+| 3 | [SLS-146](#sls-146) Barrière de commit de publication ZIP non observée | Corriger | `[~]` | SLS-050, SLS-074 | cette unité, [ADMISSION](ADMISSION.md) |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -5932,3 +5933,65 @@ avec ces mêmes530octets instrumentés, conserver le premier échec et son vrai
 retour sans retry. Ne commencer32 qu’après réussite/clôture/scellement du49 et
 présence de sa preuve dans le commit de lancement du32. Les505antérieurs,
 deuxpartiels et ciblé30 ne remplacent aucun groupe du nouveau49.
+
+
+<a id="sls-146"></a>
+## SLS-146 — Barrière de commit de publication ZIP non observée
+
+Statut : [~]. Nature : Corriger. Ordre : 3.
+Dépend de : SLS-050, SLS-074 ; bloque l’intégration SLS-072.
+Contrats : cette unité, [ADMISSION](ADMISSION.md#observation-durable-des-intentions-par-les-gardes)
+et [FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS](FUNCTION_VERSION_INVOCATION_STORAGE_REGRESSIONS.md).
+Le diagnostic et toute décision de correction sont persistés avant le code qui
+s’y rattache.
+
+Constat du 23 novembre 2026 : le sixième socle courant, worker `2ef5a5e5`,
+source `5eaf3ab` / 530 / image f016, termine 1 dans `function-storage`.
+Une campagne de 55 groupes est complète ; 13 checks de stockage passent, le
+14e échoue et le 15e n’est pas atteint. Trois prérequis sont acquis : un SSO
+réel et deux constructeurs. Aucune capture UI n’est atteinte.
+
+Dans le scénario de publication ZIP avec décision de stockage et confirmation
+perdue, la garde native de mode `commit` émet `preparation-observed`, puis
+`control-writer-identity`, puis `fault-failed / commit_not_observed`. Elle ne
+publie pas `paused` et son transport termine 1. Le PUT d’archive reçoit 200
+alors que le scénario exige 503. Le check rapporte une assertion de `release()`
+attendant 0 ; le nettoyage ajoute `fault:AssertionError`, puis masque la sortie
+primaire par « Nettoyage de campagne incomplet ». Le client écarte les stderr
+natifs avec `resume()` : leur contenu n’est pas récupéré rétrospectivement.
+Ces faits ne prouvent pas à eux seuls un défaut de décision du produit.
+
+Le rapport original conserve `completed:false`, `cleanup:false` et les deux
+fonctions de la campagne. La santé finale déclare zéro allocation, bail,
+fonction en attente et montage ; la purge physique, les huit gardes et la fin
+réelle doivent être recoupées. Le worker est finalisé 1, son unité arrêtée et
+son lanceur joint. Les 55 antérieurs et 13 partiels ne qualifient aucun socle
+complet ; les 30 du ciblé145 restent distincts.
+
+Décision avant diagnostic : conserver les rapports et programmes exacts, le
+TAR530 et le transport, puis lire seulement les identités, reçus, états et
+journaux encore disponibles des ressources possédées par cette campagne.
+Distinguer le refus d’acquisition, la réponse HTTP et les assertions secondaires
+de release/nettoyage. Aucun retry ni augmentation de délai ; ne pas accepter
+200 comme substitut au 503 qui éprouve la confirmation perdue. Tout ajout
+d’observation conserve les observateurs et dépendances réels.
+
+- [~] SLS-146.1 Sceller le premier refus : cinq rapports courants, source/TAR530,
+  worker/transport 1, 55 antérieurs et 13 checks partiels, check14 échoué,
+  check15 non atteint et zéro groupe global. Recouper les deux fonctions,
+  révocations, parents, huit gardes, naissances/cgroups, référence, configuration,
+  5 982 artefacts et réservations. Conserver les observations manquantes.
+- [ ] SLS-146.2 Établir le diagnostic borné : relier opération de stockage,
+  publication, requête HTTP et garde de commit ; nommer tout état ou stderr
+  perdu. Persister les observations et la décision avant instrumentation ou
+  correction ; aucune cause inventée à partir du seul 200 ou du retour 1.
+- [ ] SLS-146.3 Corriger le défaut établi en préservant la vraie confirmation
+  perdue, la décision commune, la publication, la déduplication et le rollback
+  sans changement de ressources. Conserver la primaire et les erreurs de
+  finalisation séparément, avec les vrais retours et stderr natifs ; aucun
+  observateur ou résultat remplacé, assertion retirée ou scénario sauté.
+- [ ] SLS-146.4 Quinze groupes de stockage complets puis 25 communs frais,
+  captures inspectées et clôtures recoupées sur le code déployé. Les 13 partiels
+  de ce refus restent exclus. Aucun retour secondaire ne devient un succès.
+- [ ] SLS-146.5 Nouveau socle 49/543/18 depuis le début puis complément 32/276,
+  avec leurs preuves propres ; aucun ancien partiel ou ciblé ne remplit ce total.

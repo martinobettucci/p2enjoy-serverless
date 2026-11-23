@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-146 inscrite : le sixième socle courant s’arrête après 55 groupes et
+  13 checks partiels de stockage. La garde de commit de publication ZIP termine 1
+  sur `commit_not_observed`, PUT attendu503/reçu200 ; release et nettoyage
+  rapportent des assertions secondaires. Premier résultat conservé, aucune
+  relance ni cause attribuée. Clôture native et diagnostic restent dus.
+
 - SLS-145 : [ciblé30 courant](docs/evidence/schedule-recovery-instrumented-current-dev-2026-11-23.json),
   cinqreprises puis25communs frais surba55881/530/f016. Quatregardes, troiscoupures137,
   troisfenêtres manquées, claimed/linked interrompus et troistirs normaux sans
