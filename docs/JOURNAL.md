@@ -10573,3 +10573,19 @@ QuatreJPEG ouvertes individuellement et leurs limites consignées. Contrôleur0,
 Nodejoint, deuxpurges physiques, cgroupvide et originaux/config/référence/5982/
 huit0 recoupés.137.2 acquis, sous-code410 ancien toujours inconnu, zéro groupe
 complet. Reprendre API12→UI10→25communs courants sans changement des sources.
+
+### 23 novembre 2026 — Passage47 courant scellé,137et138 clos
+
+Sur529sources1c706f0/f016, API739a1901 passe12, UIea0d2ab0 passe10 puis les
+communs645b6e12 passent25. Trois vrais contrôleurs0, clôtures sérielles/cgroups
+vides ; APIcut9/137 et restitution indépendante puis mêmegénération07:10:58
+pourUI/communs. Douzeacteurs natifs,42backend/quatreweb, configuration/référence/
+5982/huit0 recoupés.44captures ouvertes individuellement, manuel84paragraphes/
+SHA4a331e15. Les détailsP3 du dialog131 et de navigationagrandie139 restent ouverts.
+
+Le premier publisher refuse helper_gonetrue sur le nominal (outil778a70/code1),
+avant écriturepublique. Le source affecte ce champ depuis rescue ; nouveau
+publisher gelé conserve false et prouve séparément transport/identités/pertes/
+gardes. Aucun test rejoué, refus typé et sources conservés. La revue indépendante
+recoupe TAR/gzip/reçus/chronologie/44images sansP1/P2, sans refaire les images.
+137et138 sont clos, corpus47 qualifié ;072 reste ouvert pour49/543/18 puis32/276.

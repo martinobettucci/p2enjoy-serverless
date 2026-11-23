@@ -85,8 +85,6 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
-| 3 | [SLS-137](#sls-137) Échec de conservation dans la campagne UI complète | Corriger | `[~]` | SLS-072 | cette unité |
-| 3 | [SLS-138](#sls-138) Refus de saisie de la date dans le replay UI | Corriger | `[~]` | SLS-072 | cette unité |
 | 3 | [SLS-101](#sls-101) État de fiche après publication concurrente | Corriger | `[ ]` | SLS-071 | cette unité |
 | 3 | [SLS-119](#sls-119) Réponse JSON de gestion incomplète | Corriger | `[ ]` | SLS-020 | cette unité |
 | 4 | [SLS-081](#sls-081) Jobs de console | Développer | `[ ]` | SLS-078, SLS-072 | [SERVERLESS_JOBS](SERVERLESS_JOBS.md) |
@@ -5101,7 +5099,7 @@ plateforme conservent leurs critères propres.
 
 ## SLS-137 — Échec de conservation dans la campagne UI complète
 
-Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
+Statut : [x]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
 
 Constat réel : UI66b2617e sur528sources9702888/f016 termine1 après neuf groupes
 passés et UI07 Conservation échoué, Error/source_line41, messageSHA
@@ -5126,7 +5124,7 @@ Les12API acquises juste avant gardent leur gel ; aucun commun n’est lancé.
 - [x] SLS-137.2 Retrouver le point de refus depuis le source et les observations
   réelles, distinguer produit, protocole et corpus sans attribuer une cause
   depuis le seul hash ; persister le correctif retenu avant code.
-- [ ] SLS-137.3 Qualifier le scénario affecté puis le full10UI sur le code
+- [x] SLS-137.3 Qualifier le scénario affecté puis le full10UI sur le code
   déployé corrigé, toutes captures inspectées et nettoyages joints ; API12 et
   25communs de la même époque requis avant de rattacher le passage complet072.
   Aucun skip, allongement de borne ou réponse substituée ; les suites49/32 restent
@@ -5207,9 +5205,17 @@ indépendante et helper_gonetrue. Aucun fauxtrue ni nouveau replay ; publisher
 exécuté immuable et son refus typé conservés. La revue de synthèse précède toute
 clôture de137/138 ; les suites49/32 et les deuxécartsP3 restent indépendants.
 
+137.3 — [passage complet acquis](evidence/execution-journal-complete-schema011-query-dev-2026-11-23.json),
+47groupes12API/10UI/25communs,529sources1c706f0/f016. Trois contrôleurs0 et
+clôtures avant phase suivante ; APIcut9/137 puis UI/communs sur07:10:58.4871964Z.
+Douze acteurs natifs joints,44captures inspectées,42backend/quatreweb et manuel
+84paragraphes/SHA4a331e15 recoupés. Configuration/référence/5982/huit0 conservés.
+RevueRO sansP1/P2, refus du premier publisher conservé et champs natifs intacts.
+137 est close ;072/132/133 gardent49/543/18 et32/276,131/139 leurs détailsP3.
+
 ## SLS-138 — Refus de saisie de la date dans le replay UI
 
-Statut : [~]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
+Statut : [x]. Nature : Corriger. Dépend de : SLS-072. Ordre : 3.
 
 Constat réel : le diagnostic complet005f7724 sur528sources e8a90a0/f016 termine1
 après UI01 passée, UI02 échouée à la saisie de FinUTC, source_line67, typeError,
@@ -5223,7 +5229,7 @@ n'est déduite. Node1 joint, cleanuptrue, aucuncleanup_error et uneJPEG conserv�
 - [x] SLS-138.2 Établir le refus de saisie avec de vraies observations navigateur,
   distinguer format natif, protocole ou produit, décider avant correction puis
   qualifier le cas sur l'UI déployée. Garder les délais et le filtrage réel.
-- [ ] SLS-138.3 Reprendre full10UI et passage API12/25communs cohérent, toutes
+- [x] SLS-138.3 Reprendre full10UI et passage API12/25communs cohérent, toutes
   captures inspectées et acteurs joints, sans requalifier les anciens gels.
 
 Décision avant diagnostic : conserver autour de la seule saisie UI02 la date
@@ -5279,6 +5285,13 @@ attendus. Les sept saisies acceptées passent réellement par le même formateur
 qu'UI02, avec égalité native et période exacte jusque1ms. Contrôleur0/Nodejoint,
 deuxJPEG inspectées, cgroupvide et originaux/config/référence/5982/huitcompteurs0
 recoupés. Zéro groupe complet ;138.3 reste ouvert avec fullUI/API12/25communs.
+
+138.3 — [même passage courant](evidence/execution-journal-complete-schema011-query-dev-2026-11-23.json) :
+UI02 avec formateur partagé passe au sein du full10, après12API et avant25communs.
+Les dixformes ciblées et le premier rouge restent dans leurs propres reçus.
+Trois contrôleurs0, sources/génération/acteurs/purge et44images recoupés ;138
+est close. Aucun groupe diagnostique ajouté aux47 et aucune cause ancienne
+reconstituée depuis le seul hash. Les campagnes globales072 restent dues.
 
 ## SLS-139 — Navigation latérale avec texte agrandi
 

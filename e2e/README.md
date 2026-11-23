@@ -2,61 +2,46 @@
 
 ## Journaux SLS-072 — qualification courante sur f016
 
-Le [rouge de saisie138](../docs/evidence/execution-journal-date-input-first-failed-dev-2026-11-23.json)
-arrête le replay diagnostic suivant enUI02. Le client
-`node e2e/execution-journal-date-browser-diagnostic.mjs` éprouve sept formes
-de FinUTC sur le vrai champ déployé : trois chaînes normalisées/refusées par
-Playwright et quatre formes acceptées, recherchées par GET réel avec période
-exacte. Même stdin SSO privé et purge physique partagée, deuxJPEG ciblées,
-zéro groupe qualifié. Le [diagnostic natif](../docs/evidence/execution-journal-date-native-diagnostic-dev-2026-11-23.json)
-passe ces sept formes et deuxJPEG inspectées sur529sources6e757f5/f016. Le
-formateur partagé du banc retire seulement les zéros non significatifs ; UI02
-l'utilise. Son replay ajoute .100/.010/.001 et passe les sept formes acceptées
-par ce même formateur : le [replay dix formes](../docs/evidence/execution-journal-date-formatter-replay-dev-2026-11-23.json)
-passe septGET/trois refus bruts,529sources cbf1e15/f016 et deuxJPEG inspectées.
-138.2 est acquis ; fullUI corrigé et passageAPI12/25communs restent dus.
+Le [passage courant](../docs/evidence/execution-journal-complete-schema011-query-dev-2026-11-23.json)
+passe **47groupes réels :12API,10UI puis25communs**, au gel1c706f0/529sources,
+imagef016. Trois contrôleurs0, acteurs/cgroups/gardes joints et purge physique ;
+configuration, référence et5982originaux conservés. UI et communs sont liés à
+la génération après la coupureAPI9/137, StartedAt07:10:58.4871964Z. Chaque phase
+est clôturée avant la suivante. Aucune réexécution E2E pour corriger un collecteur.
 
-Le [checkpoint courant API12](../docs/evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
-passe au gel9702888/528sources. Le fullUI qui suit échoue en conservation après
-neuf succès ; [rouge137 scellé](../docs/evidence/execution-journal-ui-conservation-first-failed-dev-2026-11-23.json),
-21JPEG inspectées et clôtures externes acquises, aucunUI qualifié ni commun lancé.
-SLS-137 ajoute au scénario partagé l'observation passive du GET réel après
-archivage de fonction : événements bornés100, statut, taille/SHA et structure
-du corps sous1Mio, URL autorisée, étatDOM et JPEG de refus. Aucun en-tête,
-cookie, curseur ou message applicatif conservé. La jonction utilise la même
-échéance absolue90s ; une lecture restante est annulée par fermeture réelle de
-la seule Page possédée, après observationDOM, et le primaire reste conservé.
-Le replay diagnostique reprend
-`node e2e/execution-journal-ui.mjs` avec les dix scénarios et leurs bornes
-inchangées ; son wrapper compte zéro groupe qualifié. Ce diagnostic reste à
-exécuter. Les nouveaux sources E2E ne se combinent pas implicitement avec le
-checkpoint API antérieur pour clore le passage complet.
+Les44captures sont ouvertes individuellement :22JPEG du journal,16JPEG du
+manuel et sixPNG complémentaires de connexion. Le manuel servi correspond
+à84paragraphes sources/SHA4a331e15. Les deux détailsP3 restent inscrits :131
+pour le détail réseau anglais du dialog,139 pour le libellé latéral lorsque
+les tokens de texte sont doublés. Cet agrandissement ne prouve pas un zoom
+navigateur. Les images complètent les assertions DOM/HTTP/natives/clavier.
 
-L'audit durable retrouve HTTP410 après l'archivage du premier rouge137. Le
-scénario conserve désormais son test complet de politique1min sur le service
-initial, puis crée une seconde fixture originale dans un service neuf pour la
-référence archivée. Ce service ne partage pas le corpus en cours d'expiration ;
-upload/promote/appel/archivage et purge restent réels. L'observateurHTTP/DOM est
-conservé ; aucun retry ou délai ajouté. Le [scénario partagé corrigé](../docs/evidence/execution-journal-policy-reference-replay-dev-2026-11-23.json)
-passe sur529sources9f7f9f6/f016 : GET200/cinq événements, quatreJPEG inspectées,
-deuxfonctions purgées et clôture externe acquise, zéro groupe complet. API12,
-full10UI et25communs de ce même vecteur restent à qualifier.
+**137et138 sont clos.072 reste ouvert** pour le socle49campagnes/543groupes/
+18prérequis puis le complément32commandes/276groupes. Les25communs sont inclus
+dans543 et ne seront pas comptés deuxfois. Les preuves antérieures gardent
+leur source/image ; les12API du gel21834d8 restent attachées àf73 et le premier
+[checkpointf016](../docs/evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
+reste au gel9702888/528sources.
 
-La basculef016 et les rétentions courantes sont acquises ; les12API du gel21834d8
-restent attachées àf73. Le prochain passage complet rejoue API12 puisUI10 puis
-25communs sur les mêmes sources et la même générationf016, sans redémarrage
-intermédiaire. Les JPEG fraîches deUI10 et des communs sont toutes inspectées
-individuellement avant leur qualification. Les récits préparatoires ci-dessous
-conservent leurs époques ; ils n’ajoutent pas de groupes au passage courant.
+Les [rouges137](../docs/evidence/execution-journal-ui-conservation-first-failed-dev-2026-11-23.json)
+et [138](../docs/evidence/execution-journal-date-input-first-failed-dev-2026-11-23.json)
+restent inchangés. L'[audit durable](../docs/evidence/execution-journal-archived-reference-audit-dev-2026-11-23.json)
+établit HTTP410 après archivage, sans restituer son sous-code. Le
+[scénario partagé corrigé](../docs/evidence/execution-journal-policy-reference-replay-dev-2026-11-23.json)
+conserve politique1min, perte réelle de réponse/conflit/relecture, puis éprouve
+la référence archivée dans un service neuf10080min. Le GET final reste observé
+passivement, sans retry ni délai ajouté. Le [replayUTC](../docs/evidence/execution-journal-date-formatter-replay-dev-2026-11-23.json)
+éprouve dixformes/sept recherches et trois refus bruts ; UI02 partage son
+formateur sans arrondir les millisecondes. Les deux préparatoires comptent0groupe.
 
-Décision de pilotage avant code : unités localesexec distinctes API/UI avec
-RuntimeMaxSec1800, stop60 et contrôleur2000 ; communs3600/60/3800. Aucun délai
-applicatif ou opérateur n’est modifié. Chaque contrôleur conserve son vrai retour,
-PID/naissance/cgroup sont capturés puis leur fin constatée extérieurement avant
-le lancement suivant. Les wrappers et leurs archives restent privés, gelés et
-liés aux reçus ; aucun secret ne transite dans argv/env/fichiers. Le contrat
-[133](../docs/INVOCATION_PRODUCTION_PROFILE.md#bilan-borné-de1332-et1333--23-novembre-2026)
-porte le rapprochement du correctif retenu. Les suites49/543/18 et32/276 suivent.
+Les clients `node e2e/execution-journal-api.mjs` et
+`node e2e/execution-journal-ui.mjs` lisent une unique ligne JSON privée sur stdin
+(username/password) ; aucun secret dans argv/env/rapports. Unités localesexec
+API/UI1800s, stop60, contrôleur2000 ; communs3600/60/3800. Les wrappers et sources
+sont gelés, les vrais retours conservés et les PID/naissances/cgroups recoupés
+extérieurement. Le [contrat133](../docs/INVOCATION_PRODUCTION_PROFILE.md#bilan-borné-de1332-et1333--23-novembre-2026)
+porte le rapprochement du correctif retenu ; les autres critères gardent leurs
+preuves propres.
 
 ### Historique des préparations et campagnes précédentes
 

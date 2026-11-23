@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-137 et138 closes :47groupes12API/10UI/25communs sur529sources/f016,
+ 44captures inspectées, trois contrôleurs0 et clôtures externes recoupées.
+  Synthèse relue sansP1/P2 ; valeurs natives/refus conservés. Les campagnes
+  globales49/543/18 et32/276 restent dues, ainsi que les détailsP3 de131/139.
+
 - SLS-137/138 :47groupes courants passent,44images inspectées et trois unités
   closes. Collecteur de synthèse refusé sur l'interprétation de helper_gone ;
   reçu brut conservé et correction de lecture décidée sans rejouer lesE2E.
