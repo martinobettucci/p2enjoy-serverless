@@ -128,9 +128,20 @@ export async function retentionPolicyCase(c,cases) {
     await dialog.getByRole('button',{name:'Enregistrer',exact:true}).click();await dialog.getByText(new RegExp(cases.service.name)).waitFor();
     await response(c.page,'/api/services/'+cases.service.id+'/log-policy',()=>dialog.getByRole('button',{name:'Confirmer la diminution',exact:true}).click(),{method:'PUT'});await dialog.waitFor({state:'hidden'});
     const current=await c.value('/api/services/'+cases.service.id+'/log-policy');assert.equal(current.retention_minutes,1);await until(()=>opener.isEnabled(),'retention_save_reread_missing');await c.capture('retention-saved',c.page,retention);
-    const finalCall=await cases.invoke('text');await c.value(endpoint(cases.fn),{method:'DELETE'});
-    await archivedJournalRead(c,cases,finalCall.id,ready,journal);
-    await c.value(endpoint(cases.fn)+'/logs'+'?source=application&invocation='+finalCall.id,{status:404});
+    // @spec docs/BACKLOG.md#sls-137
+    // Archive references use their own service, outside the one-minute corpus.
+    const referenceService=await c.service('journal-archived-reference');
+    const referencePolicy=await c.value('/api/services/'+referenceService.id+'/log-policy');assert.equal(referencePolicy.retention_minutes,10080);
+    const referenceFunction=await c.function(referenceService,'journal-reference-handler');
+    const referenceVersion=await c.publish(referenceFunction,'journal-archived-reference');
+    await c.promote(referenceFunction,referenceVersion.code_hash);
+    const referenceReader=await c.mint(referenceService);
+    const finalCall=await c.invoke(referenceFunction,referenceReader,{mode:'text'});
+    await c.terminal(referenceFunction,finalCall.id);await c.value(endpoint(referenceFunction),{method:'DELETE'});
+    await archivedJournalRead(c,{service:referenceService,fn:referenceFunction},finalCall.id,ready,journal);
+    await c.value(endpoint(referenceFunction)+'/logs'+'?source=application&invocation='+finalCall.id,{status:404});
     const unavailable=journal().locator('[data-log-id] article').first();await unavailable.locator(':scope > details > summary').click();await unavailable.getByText(/Objet indisponible/).waitFor();assert.equal(await unavailable.getByRole('link',{name:'Ouvrir la fonction',exact:true}).count(),0);await c.capture('archived-reference',c.page,unavailable.getByText(/Objet indisponible/));
-    c.observations.push({scenario:'real-retention-conflict-and-save',before_version:before.version,after_version:current.version,draft_preserved:true,retention_minutes:1});
+    c.observations.push({scenario:'real-retention-conflict-and-save',before_version:before.version,after_version:current.version,draft_preserved:true,retention_minutes:1,
+      retention_service_id:cases.service.id,archived_reference_service_id:referenceService.id,archived_reference_function_id:referenceFunction.id,
+      archived_reference_retention_minutes:referencePolicy.retention_minutes});
 }

@@ -32,6 +32,13 @@ inchangées ; son wrapper compte zéro groupe qualifié. Ce diagnostic reste à
 exécuter. Les nouveaux sources E2E ne se combinent pas implicitement avec le
 checkpoint API antérieur pour clore le passage complet.
 
+L'audit durable retrouve HTTP410 après l'archivage du premier rouge137. Le
+scénario conserve désormais son test complet de politique1min sur le service
+initial, puis crée une seconde fixture originale dans un service neuf pour la
+référence archivée. Ce service ne partage pas le corpus en cours d'expiration ;
+upload/promote/appel/archivage et purge restent réels. L'observateurHTTP/DOM est
+conservé ; aucun retry ou délai ajouté. Le passage courant reste à qualifier.
+
 La basculef016 et les rétentions courantes sont acquises ; les12API du gel21834d8
 restent attachées àf73. Le prochain passage complet rejoue API12 puisUI10 puis
 25communs sur les mêmes sources et la même générationf016, sans redémarrage

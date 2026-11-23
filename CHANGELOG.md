@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-137 : référence archivée isolée dans un service neuf, après tous les
+  contrôles de politique1min inchangés. Deux fixtures réelles et purge commune,
+  observation passive maintenue ; qualification complète encore due.
+
 - SLS-137 : audit durable retrouvé, HTTP410 après archivage établi ; sous-code
   ancien encore inconnu. Décision avant code : séparer la fixture de référence
   archivée du corpus auquel UI07 impose1min de rétention, sans retry ou délai.
