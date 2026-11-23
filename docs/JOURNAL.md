@@ -11249,3 +11249,27 @@ supplémentaire. Un diagnosticSIGTERM réel d’une garde possédée, sans mutat
 compte0groupe et reste séparé. Les15groupes stockages et25communs frais sont
 requis avant49/32 ; toute nouvelle faute est conservée. Ce checkpoint spécifie
 l’instrumentation ; son code et sa preuve restent à livrer.
+
+### 23 novembre2026 — Instrumentation stockage146 implémentée, E2E encore dû
+
+Les deuxfichiers du banc portent phases/compteurs bornés des mêmes SELECT,
+identitéshelper/agent àl’armement, synthèse avantfinally, restitution indépendante
+de chaque ressource et première exception relancée. Le client conserve les
+métadonnéesHTTP avantassertion, fluxréels64Kio+SHA/tailles/troncature, fautes de
+transport/protocole, erreurs des requêtesconcurrentes et secondaires séparées.
+Le mode --diagnose-guard-interruption crée une fonction réelle puis SIGTERM
+de sa gardecommit possédée via pidfd/PID/naissance/cgroup/argv vérifiés, sans
+mutation soumise ; son rapport compte0groupe et le nominal conserve15groupes.
+ContrôlesAST/Python, node--check et gitdiff--check passent. Aucun codeproduit,
+observateur partagé, SQL, signal d’acquisition ou délai changé ; aucune E2E
+encore exécutée sur ces octets. Revue avantcommit/déploiement en cours.
+
+Première revue statique : troisP2 avantcommit/déploiement. Décision avantcode
+correctif : si SIGCONT échoue horsProcessLookupError, garder le timer armé ;
+sa restitution indépendante reste nécessaire. Valider protocole et erreurs
+d’envoi de tous les handles aprèsdone, y compris watchdog/SIGTERM ; ne pas
+envoyerresume àun enfant déjàclos. Borner64Kio les octets de ligne avant
+assemblage readline, sans perdre le SHA/suffixe réels. SELECT/oracles/bornes et
+ControlObserver inchangés ; aucune E2E acquise. L’arbre reste local, le code
+n’est pas encore committé ni déployé. Ces corrections appliquent la garde
+existante et ne déduisent toujours aucune cause du refus historique.

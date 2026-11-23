@@ -159,8 +159,10 @@ aucune attente supplémentaire pour acquitter SIGSTOP. Un signal envoyé ne vaut
 pas preuve que le processus cible s’est arrêté.
 
 Le premier échec natif reste celui levé. Chaque fermeture de registre/writer/
-observer, restitutionSIGCONT, fermeturepidfd et arrêt du timer reste tentée,
-même si une autre étape échoue. Les erreurs de finalisation sont séparées et
+observer, restitutionSIGCONT et fermeturepidfd reste tentée, même si une autre
+étape échoue. Si SIGCONT échoue hors cible déjà terminée, conserver le timer
+indépendant armé : sa restitution reste nécessaire. Sinon tenter son arrêt.
+Les erreurs de finalisation sont séparées et
 ne remplacent pas la primaire. Une finalisation échouée sans primaire fait
 échouer le helper. Les identités du helper et de l’agent, PID/naissance/cgroup,
 accompagnent l’armement ; elles ne sont pas déduites après disparition.
@@ -170,7 +172,11 @@ normalisés de requête/opération/fonction, le marqueur de décision, taille/SH
 du corps et sa classification existante. Aucun corps métier, configuration,
 secret ou jeton n’est exporté. Capturer les vrais stdout/stderr de chaque
 transport avec octets totaux, SHA de flux et suffixe borné64Kio, troncature
-explicite ; événements structurés séparés, protocole invalide en échec.
+explicite ; événements structurés séparés, ligne de protocole bornée64Kio dès
+réception des octets, avant assemblage jusqu’au saut de ligne. Valider le
+protocole et les commandes réellement envoyées pour chaque transport joint,
+y compris watchdog et diagnosticSIGTERM. Une jointure d’enfant déjà clos
+n’envoie pas de commande. Protocole ou envoi invalide fait échouer le bilan.
 Préserver les erreurs des requêtes concurrentes, de l’attente, de release et
 du nettoyage, avec l’échec initial relancé après toutes les restitutions.
 Un échec de sauvegarde/dispose ne doit pas remplacer cette primaire.
@@ -184,5 +190,15 @@ sans soumettre de mutation : il vérifie la primaire native et la restitution,
 compte zéro groupe et ne remplace aucun des quinzegroupes. Toute nouvelle faute
 reste conservée et instruite, sans retry.49/543/18 puis32/276 restent dus.
 
-Cette décision est spécifiée ; son instrumentation et sa qualification ne sont
-pas encore livrées à ce checkpoint.
+L’instrumentation est en cours dans les deux fichiers du banc ; syntaxe
+Python/Node contrôlée sur l’arbre local, sans commit de code ni qualification
+fonctionnelle à ce checkpoint. La première revue signale troisP2 à corriger :
+secours après erreurSIGCONT, protocole de tous les transports et tampon de ligne.
+Le diagnostic séparé prévu se lance avec
+`node e2e/function-storage.mjs --diagnose-guard-interruption`, après création
+d’une vraie session administrateur par le prérequis SSO existant. Il écrit
+`function-storage-guard-interruption.json`, avec zéro groupe fonctionnel ; le
+nominal sans argument conserve `function-storage.json` et ses quinzegroupes.
+Le mode natif interrupt-guard vérifie PID/naissance/cgroup et les arguments du
+helpercommit possédé, via pidfd, avant le vraiSIGTERM. Ces deux parcours restent
+à exécuter sur le SPARK DEV, avec clôtures physiques propres et25communs frais.

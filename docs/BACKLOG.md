@@ -6000,7 +6000,7 @@ d’observation conserve les observateurs et dépendances réels.
   publication, requête HTTP et garde de commit ; nommer tout état ou stderr
   perdu. Persister les observations et la décision avant instrumentation ou
   correction ; aucune cause inventée à partir du seul 200 ou du retour 1.
-- [ ] SLS-146.3 Corriger le défaut établi en préservant la vraie confirmation
+- [~] SLS-146.3 Corriger le défaut établi en préservant la vraie confirmation
   perdue, la décision commune, la publication, la déduplication et le rollback
   sans changement de ressources. Conserver la primaire et les erreurs de
   finalisation séparément, avec les vrais retours et stderr natifs ; aucun
@@ -6019,3 +6019,11 @@ sans corps métier ; erreurs concurrentes/release/nettoyage séparées. Observat
 SQL, signaux et bornes25/3/5/35/110 inchangés. Aucun correctif de produit déduit.
 DiagnosticSIGTERMréel0groupe distinct possible, puis15stockage/25communs frais,
 nouveau49 et32 ; aucune qualification annoncée par cette spécification.
+
+Instrumentation146 en cours dans les deuxfichiers du banc, syntaxe Python/
+Node et diff contrôlés localement. Première revue avec troisP2 : garder le
+timer si SIGCONT échoue hors cibleterminée ; valider le protocole/envoi de tous
+les handles joints sans envoyer àun enfant déjàclos ; borner les octets de
+ligne avant assemblage. Décision persistée avant ces corrections. Diagnostic
+séparéSIGTERM0groupe prévu ; aucun codecommitté/déploiement/qualification à ce
+checkpoint.146.2 et146.3 restent partielles.
