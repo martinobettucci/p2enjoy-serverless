@@ -12,8 +12,9 @@ zéro groupe qualifié. Le [diagnostic natif](../docs/evidence/execution-journal
 passe ces sept formes et deuxJPEG inspectées sur529sources6e757f5/f016. Le
 formateur partagé du banc retire seulement les zéros non significatifs ; UI02
 l'utilise. Son replay ajoute .100/.010/.001 et passe les sept formes acceptées
-par ce même formateur : dix formes/septGET/trois refus bruts attendus. Ce replay
-et le fullUI corrigé restent à exécuter ; aucun changement produit.
+par ce même formateur : le [replay dix formes](../docs/evidence/execution-journal-date-formatter-replay-dev-2026-11-23.json)
+passe septGET/trois refus bruts,529sources cbf1e15/f016 et deuxJPEG inspectées.
+138.2 est acquis ; fullUI corrigé et passageAPI12/25communs restent dus.
 
 Le [checkpoint courant API12](../docs/evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
 passe au gel9702888/528sources. Le fullUI qui suit échoue en conservation après

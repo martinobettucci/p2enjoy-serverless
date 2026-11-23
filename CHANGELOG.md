@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-138.2 acquise sur529sources/f016 : dix formes natives, sept recherches
+  exactes via formateur commun et trois refus bruts conservés ; deuxJPEG
+  inspectées, contrôleur0 et clôture externe. FullUI/API12/25communs encore dus.
+
 - SLS-138 : normalisation du seul banc corrigée sans perte de précision ;
   UI02 et diagnostic partagent le formateur. Sept formes natives déjà acquises,
   replay étendu dix formes/septGET puis fullUI encore requis.

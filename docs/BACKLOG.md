@@ -5174,7 +5174,7 @@ n'est déduite. Node1 joint, cleanuptrue, aucuncleanup_error et uneJPEG conserv�
 - [x] SLS-138.1 Sceller ce second rouge distinct, vrai contrôleur1 et unité/
   cgroup terminés ; inspecter laJPEG, recouper sources, génération, configuration,
   référence,5982 et huitcompteurs0. Zéro groupe qualifié, aucun replay automatique.
-- [ ] SLS-138.2 Établir le refus de saisie avec de vraies observations navigateur,
+- [x] SLS-138.2 Établir le refus de saisie avec de vraies observations navigateur,
   distinguer format natif, protocole ou produit, décider avant correction puis
   qualifier le cas sur l'UI déployée. Garder les délais et le filtrage réel.
 - [ ] SLS-138.3 Reprendre full10UI et passage API12/25communs cohérent, toutes
@@ -5226,3 +5226,10 @@ Le replay du formateur ajoute aux sept formes déjà acquises trois recherches
 canoniques .100→.1, .010→.01 et .001 conservée : dix formes, septGET et trois
 refus bruts attendus. Ces bornes éprouvent les deux zéros finaux et les zéros
 significatifs de début de fraction ; elles restent dans la même fixtureE2E.
+
+138.2 — [replay corrigé acquis](evidence/execution-journal-date-formatter-replay-dev-2026-11-23.json),
+529sources cbf1e15/f016, dix formes, sept recherches200 et trois refus bruts
+attendus. Les sept saisies acceptées passent réellement par le même formateur
+qu'UI02, avec égalité native et période exacte jusque1ms. Contrôleur0/Nodejoint,
+deuxJPEG inspectées, cgroupvide et originaux/config/référence/5982/huitcompteurs0
+recoupés. Zéro groupe complet ;138.3 reste ouvert avec fullUI/API12/25communs.

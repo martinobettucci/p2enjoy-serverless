@@ -10539,3 +10539,12 @@ Décision avant correction : formater la saisie du banc selon le canon natif,
 sans arrondir la précision ; partager ce formateur entre UI02 et les quatre
 cas acceptés du diagnostic. Les trois formes brutes refusées restent testées.
 Produit et bornes inchangés ; diagnostic corrigé et fullUI restent dus.
+
+### 23 novembre 2026 — Formateur138 éprouvé sans perte de précision
+
+5f9bb0ab passe dix formes sur529sources cbf1e15/f016 : sept recherches200 via
+le formateur commun àUI02, trois refus bruts maintenus, précision1ms conservée.
+DeuxJPEG ouvertes une à une, contrôleur0/Nodejoint, cgroupvide et génération/
+configuration/référence/5982/huitcompteurs0 recoupés.138.2 acquis, aucun groupe
+complet ni cause137 déduits. La reprise courante sera API12→UI10→25communs
+sur ce même vecteur529, chacune clôturée avant la suivante ;138.3 reste ouverte.
