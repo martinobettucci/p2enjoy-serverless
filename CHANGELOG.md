@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-135.2 : contrat avant code pour EINVAL/mountinfo, identité Z et pidfd
+  non bloquant ; vrai probe EXEC/zombie et clone HTTPS requis. Les observations
+  indisponibles restent des refus, aucune cause historique réattribuée.
+
 - SLS-135.1 : échec terminalâge scellé sans requalification ; garde et journal
   absents, seul dossier UUID vide retiré par rmdir après recoupement. Unité
   échouée libérée, services/démarrages/config/5982 intacts et huitcompteurs0 ;

@@ -347,3 +347,68 @@ EINVAL ni affaiblir les contrôles de références. Le protocole précis, ses
 bornes et ses vrais cas noyau seront persistés avant code après exploration.
 Les captures historiques, valeurs officielles et autres modes du helper sont
 conservés. Aucun succès de rétention n’est déduit de cette erreur de préflight.
+
+
+### Décision135.2 — EINVAL et fin attestée
+
+Le chemin nominal conserve les lectures réelles mountinfo/cmdline et tous les
+refus registre, Docker, FUSE et processus de volume. Seul EINVAL provenant de
+la lecture mountinfo déclenche un examen supplémentaire, sans attente ni signal.
+Lire stat, ouvrir un pidfd, puis relire stat autour d’un poll non bloquant :
+le même PID/naissance doit rester Z et son pidfd doit annoncer POLLIN. Fermer
+le descripteur dans tous les cas. Une disparition native ENOENT/ESRCH pendant
+cet examen conserve la règle existante des processus disparus ; ESRCH à
+pidfd_open n’est accepté que si le répertoire proc a disparu. Une identité
+changée, un état vivant, un pidfd non prêt, une erreur d’ouverture/lecture ou
+un stat inexploitable restent un refus process_reference_unavailable, avec
+cause native chaînée. EINVAL sur cmdline ou un autre fichier n’est pas éludé.
+
+Le diagnostic privé est borné aux PID, naissances, états, étape, errno et
+événements poll observés ; aucune ligne de commande, variable ou contenu de
+mountinfo n’y est recopié. Aucun nouveau service, délai de grâce, relecture en
+boucle ou signal à un processus découvert n’est introduit. Ce choix limite
+la correction au cas prouvé de fin, contrairement à une acceptation générale
+d’EINVAL ou d’un simple état lu sans identité/descripteur. Il ne réinterprète
+pas le PID1947870 de l’échec initial, dont l’état historique reste inconnu.
+
+### Protocole135.3 — vrai noyau et vraie référence
+
+Un client d’infrastructure dédié e2e/process-reference-lifecycle.py, exécuté
+uniquement sur infra-serverless, importe le vrai helper sans remplacer ses
+lectures, Docker ni SQLite. Il conserve les sources hachées et le uname réel.
+Le fichier supplémentaire entre dans le vecteur commun des sources, qui passe
+à527 ; les preuves historiques526 gardent leur époque.
+
+La fixture fork/exec le véritable storage/agent_system.py --probe, avec le
+chemin géré réel et un UUID, puis l’immobilise au vrai arrêt EXEC ptrace avant
+ses premières instructions. PID/naissance, parent, exe, arguments et cgroup
+sont recoupés. Ce processus encore vivant doit être refusé par no_references
+avec volume_process_retained. SIGKILL par son pidfd ne vise ensuite que cet
+enfant possédé ; le parent attend POLLIN et Z sans encore effectuer waitpid.
+La lecture réelle de son mountinfo doit rendre EINVAL ; sinon le scénario
+échoue, sans substitution d’errno ni qualification conditionnelle.
+
+Le mode before-fix doit reproduire ce même EINVAL sur ce PID dans le contrôle
+réel. Le mode after-fix exige que le contrôle accepte ce seul zombie, refuse
+encore une deuxième référence vivante en sa présence, puis accepte de nouveau
+après retrait/jonction de ce deuxième enfant. Le zombie reste présent pendant
+un aller-retour complet du vrai client instance-limit-environment release :
+clone de même image, HTTPS réel /api/session et /healthz, garde120s, restitution
+nominale et originaux conservés. Sa disparition n’est donc pas le moyen de
+faire passer les préconditions ou la restitution.
+
+La fixture s’exécute dans son seul cgroup root systemd RuntimeMaxSec480,
+TimeoutStopSec30 et KillModecontrol-group, sans redémarrage. Le client local
+est lui aussi borné et sérialise les opérations. Un canal privé annonce le
+zombie tenu puis reçoit release après jonction du client HTTP. EOF ou erreur
+entraîne enfin SIGKILL/jonction des seuls enfants possédés et fermeture des
+pidfd ; le reçu conserve ces résultats avant la fin de l’unité. Une perte du
+client HTTP déclenche la restitution indépendante existante, qui reste à
+constater avant le prochain test. Aucune commande n’est exécutée sur FORGE.
+
+Avant le correctif, le vrai rouge est scellé. Après le correctif, la preuve
+joint les deux reçus, le rapport HTTP et les états/cgroups terminés, sources
+et originaux recoupés. Les deux âges sont ensuite rejoués sur un même vecteur
+courant ; le composite six ne peut utiliser l’ancien sourceâge526. Les modes
+consommateurs et25groupes communs restent dus. Ni les tests de lifecycle ni
+le nouveau fichier ne changent l’image applicative ou les captures scellées.

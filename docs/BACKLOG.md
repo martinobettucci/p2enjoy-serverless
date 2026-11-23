@@ -4921,7 +4921,7 @@ Aucun faux /proc, errno injecté, processus substitué ou succès conditionnel.
   et de journal avant mutation, originaux strictement identiques et unitélocale
   terminée. Inspecter le seul dossier du nonce ; s’il est vide et de la bonne
   identité, retirer uniquement ce dossier par rmdir et conserver le reçu.
-- [ ] SLS-135.2 Écrire le contrat précis avant code : identité/lifecycle de la
+- [x] SLS-135.2 Écrire le contrat précis avant code : identité/lifecycle de la
   lecture /proc, gestion bornée de ses erreurs, diagnostic privé sans secret et
   refus des références vivantes. Conserver les bornes et contrôles de propriété.
 - [ ] SLS-135.3 Éprouver le défaut et la correction avec de vrais processus et
@@ -4936,3 +4936,5 @@ La correction est interne au bancDEV autorisé ; aucun accès externe demandé.
 achever les âges, sans relance aveugle ni publication du composite6 manquant.
 
 135.1 — [rouge et clôture extérieure scellés](evidence/retention-terminal-age-prearm-procfs-failed-dev-2026-11-23.json),526sourcesdd19196/f016 : premiergroupe terminalâge refusé avant toutévénement, OSError22 surmountinfo et cleanupclientfalse conservés. Garde/journal absents, dossierroot750/groupe1001 vide dont dev/inode revérifiés puis seulrmdir ; reçuJSONroot600 relu/haché. Unitélocale1/cgroupvide capturée puis reset de cette seuleunité. Services/démarrages/config/5982 strictement identiques et huitcompteurs0 aprèsclôture. Zéro groupe terminal acquis ; PID initial nonépinglé, aucune cause de mort attribuée. La correction135.2/135.3 reste à livrer avant replays135.4.
+
+135.2 — Décision persistée avant code : examiner seulement EINVAL/mountinfo ; fin attestée par Z/naissance stable et pidfd POLLIN, disparition native recoupée, sinon refus privé nommé sans signal. Protocole réel du véritable probe arrêté àEXEC, puis zombie nonrécolté ; rouge préalable, référence vivante et mélange refusés, cloneHTTPS/restitution sous zombie. Nouveau client527sources ; preuves et deuxâges courants encore dus.
