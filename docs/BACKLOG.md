@@ -4694,11 +4694,11 @@ métier, collecte, budgets, purge et rétention restent exigés.
   Éprouver aussi la perte réelle du pilote après CIDparser durable et avant
   start, puis reprise indépendante et retrait propriétaire ; ce cas support2
   ne vaut pas une lecturepstats réussie. Rejouer release/EOF sans profilage.
-- [~] SLS-133.7 La synthèse CLI distingue réponses HTTP de charge validées et
+- [x] SLS-133.7 La synthèse CLI distingue réponses HTTP de charge validées et
   démarrages de handlers observés. Le champ initial real_http_handlers utilisait
   responses.length : les modes diagnostiques affichaient0 malgré leur HTTP/cron
   réellement démarrés. Le compteur est renommé ordinary_http_responses et éprouvé
-  à2 sur les deux passages courts ; le plein reste dû. Conserver les preuves
+  à2 sur les deux passages courts puis à6000 sur le plein. Conserver les preuves
   anciennes et qualifier la synthèse avec les vrais passages de profilage.
 
 132 — nominal courant réellement rouge :9406HTTP, marge avantcron épuisée,
@@ -5047,10 +5047,10 @@ l’image ; le tag primaire ne prouve pas l’identité de tous les fichiers du 
 La cause de chaque incohérence n’est pas établie. Cette unité corrige la portée
 annoncée, sans remplacer le profiler ni transformer ces données en ventilationCPU.
 
-- [ ] SLS-136.1 Sceller le plein6000, ses SQLRO/timings et restaurations avec
+- [x] SLS-136.1 Sceller le plein6000, ses SQLRO/timings et restaurations avec
   cette limite explicite ; conserver intégralement données, anomalies et rapports
   natifs. Corriger la métadonnée éditoriale du reçu court en gardant son brut.
-- [ ] SLS-136.2 Corriger les métadonnées du collecteur et les documents :
+- [~] SLS-136.2 Corriger les métadonnées du collecteur et les documents :
   callbacks à portée d’interpréteur, aucun TID/tâche attribué, temps réels bruts,
   arêtes nonfiables pour ventiler les coûts. Nommer les incohérences observées
   sans les réparer, masquer ou inventer leur cause ; bornes et produit inchangés.
@@ -5058,3 +5058,11 @@ annoncée, sans remplacer le profiler ni transformer ces données en ventilation
   lectures/fermetures/restaurations et métadonnées exactes recoupées ; relecture
   du plein conservé, sans le présenter comme exécuté sur le nouveau collecteur.
   La mesure causale133.2 et les campagnes de plateforme restent distinctes.
+
+136.1 — [Plein6000](evidence/invocation-cost-full-schema011-dev-2026-11-23.json)
+et [release/EOF900](evidence/invocation-cost-default-restoration-schema011-dev-2026-11-23.json)
+scellés au geldc95781/f016, sans ajout au nominal. Deux et quatre groupes,
+contrôleurs0 et clôtures externes ; correction de portée explicite et7/356
+comptages recoupés par revueRO. Gzip court inchangé, seule phrase éditoriale
+corrigée avec SHA de l’ancienne synthèse. Métadonnées codées, syntaxe/revue
+acquises ; smoke2/perte corrigés restent à éprouver.133.7 est acquis sur2/6000.

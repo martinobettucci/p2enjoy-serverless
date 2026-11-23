@@ -10382,3 +10382,18 @@ anomalies sans altération, rapports natifs conservés, correction éditoriale d
 reçu court avec trace. Le plein et les SQLRO/client restent dans leur propre
 portée ; aucune sommeCPU ni réseau pur attribués. Nouveau smoke/perte pour les
 métadonnées, sans nouveau framework ni répétition artificielle du plein.
+
+### 23 novembre 2026 — Données pleines scellées et métadonnées136 codées
+
+Le reçu plein garde son geldc95781 et les anciennes déclarations dans le brut.
+Sa synthèse porte la correction explicite de portée, sept fonctions/356liens
+exacts et la bibliothèque effective lueRO. La revue recoupe ses deux copies,
+528sources,6000réponses, quatreSQL et deux groupes, ainsi que les quatre groupes
+release/EOF900. Les trois gzip ont leurs SHA/tailles recoupés ; le gzip court
+reste identique, sa synthèse éditoriale conserve le SHA de l’ancienne version.
+133.7 et136.1 sont acquis, sans groupe nominal ni attributionCPU ajoutés.
+
+Le module produit désormais measurement_scope et timing_consistency depuis les
+valeurs déjà lues ; les assertions du client les recoupent. Aucune statistique,
+borne, image ou code applicatif ne change. RevueRO sansP1/P2 et syntaxe acquises ;
+les nouveaux smoke2/perte restent requis avant clôture136.

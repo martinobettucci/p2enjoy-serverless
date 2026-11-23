@@ -1,6 +1,8 @@
 # @spec docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#profilage-du-coût-dinvocation-courant--sls-1336
 # @verifies docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#fermeture-et-statistiques-fraîches
 # @verifies docs/BACKLOG.md#sls-133 | docs/INVOCATION_PRODUCTION_PROFILE.md#propriété-et-retrait-du-parser
+# @spec docs/BACKLOG.md#sls-136 | docs/INVOCATION_PRODUCTION_PROFILE.md#portée-réelle-du-profiler--sls-136
+# @verifies docs/BACKLOG.md#sls-136 | docs/INVOCATION_PRODUCTION_PROFILE.md#portée-réelle-du-profiler--sls-136
 """Owned DEV cProfile lifecycle; real image, process, stats and isolated parser."""
 import hashlib
 import json
@@ -57,11 +59,16 @@ for (filename,line,name),(cc,nc,tt,ct,callers) in sorted(profile.stats.items()):
  links+=len(incoming);assert links<=100000
  functions.append({'file':filename,'line':line,'name':name,'primitive_calls':cc,'total_calls':nc,
                    'self_seconds':tt,'cumulative_seconds':ct,'callers':incoming})
+# @verifies docs/BACKLOG.md#sls-136 | docs/INVOCATION_PRODUCTION_PROFILE.md#portée-réelle-du-profiler--sls-136
+scope={'clock':'real','collection':'interpreter-global callbacks','thread_attribution':False,
+       'task_attribution':False,'call_path_timing_attribution':False}
+consistency={'functions_self_gt_cumulative':sum(f['self_seconds']>f['cumulative_seconds'] for f in functions),
+ 'caller_links_self_gt_cumulative':sum(c['self_seconds']>c['cumulative_seconds'] for f in functions for c in f['callers'])}
 value={'completed':True,'python':sys.version,'python_version':list(sys.version_info[:3]),'sqlite':sqlite3.sqlite_version,
  'pstats_module_sha256':hashlib.sha256(Path(pstats.__file__).read_bytes()).hexdigest(),
  'file_bytes':len(raw),'file_sha256':hashlib.sha256(raw).hexdigest(),'function_count':len(functions),'caller_links':links,
  'total_calls':profile.total_calls,'primitive_calls':profile.prim_calls,'total_self_seconds':profile.total_tt,
- 'timer':'cProfile default real time','functions':functions}
+ 'timer':'cProfile default real time','measurement_scope':scope,'timing_consistency':consistency,'functions':functions}
 output=json.dumps(value,allow_nan=False,separators=(',',':')).encode();assert len(output)<=16*1024**2
 signal.alarm(0);sys.stdout.buffer.write(output+b'\n')
 '''
@@ -348,7 +355,8 @@ def complete(item, journal, helper, request):
                                        'logs_bytes': len(data), 'logs_sha256': sha(data)},
               'parser': cost['parser'], 'projection': projection, 'sealed_directory': cost['sealed_identity'],
               'http_invocations': expected, 'invocation_ids_sha256': sha(json.dumps(sorted(v['id'] for v in calls), separators=(',', ':')).encode()),
-              'limitations': ['Main thread, real time, whole process lifecycle, explicit profiling overhead.',
+              'limitations': ['Interpreter-global callbacks, real time, whole lifecycle, explicit profiling overhead; no TID/task attribution.',
+                             'Raw callers timings do not provide a reliable cost decomposition; inconsistencies remain unaltered.',
                              'Overlapping cumulative values are not summed as CPU; coroutine resumptions are not invocations.',
                              'No COMMIT-body, fsync or pure network duration is inferred from SQL RO or client intervals.']}
     helper.atomic(work / 'invocation-cost-profile.json', result)

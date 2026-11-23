@@ -630,8 +630,17 @@
   "collector_sha256": "3493fae3d512814aa86f2104bc6dad4790892616191a7ac3c8cc356f2db663b1",
   "limitations": [
     "Ces quatre groupes support et sept refus ne qualifient ni le plein6000 ni le nominal10001HTTP+cron.",
-    "cProfile mesure le temps réel du thread principal sur tout son cycle, avec surcharge ; ce n est pas une mesure CPU ou réseau pur.",
+    "cProfile comptabilise des événements de plusieurs threads sans attribution TID/tâche ; les arêtes ne ventilent pas fiablement les coûts. Temps réels bruts, sans mesure CPU ni réseau pur.",
     "Le cas parser-loss prouve retrait et restauration après SIGSTOP réel ; aucune lecture pstats réussie n y est revendiquée.",
     "Les campagnes API/UI/communes, autres consommateurs et clôture globale restent dues."
-  ]
+  ],
+  "scope_correction": {
+    "unit": "SLS-136",
+    "former_summary_sha256": "69cbbe777a0385b731e15e91b0719e26cf4d93f1347feea4a0ca764c66bef929",
+    "former_editorial_limitation": "cProfile mesure le temps réel du thread principal sur tout son cycle, avec surcharge ; ce n est pas une mesure CPU ou réseau pur.",
+    "corrected_scope": "Interpreter-global callbacks; no TID/task/call-path timing attribution",
+    "reason": "Worker execution and self>cum inconsistencies observed in the real full6000; raw values retained.",
+    "raw_gzip_unchanged": true,
+    "actual_build_source_identity_not_claimed": true
+  }
 }

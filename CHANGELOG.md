@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-136 : métadonnées du parser et assertions du client corrigées pour la
+  portée d’interpréteur et les incohérences de temps brutes. Plein6000 scellé
+  sans attribution par arêtes ; phrase éditoriale du reçu court corrigée en
+  conservant le gzip. RevueRO et syntaxe acquises ; nouveau smoke et parser-loss
+  encore requis.133.7 et136.1 acquis, aucune clôture du nominal.
+
 - SLS-136 inscrite avant correction : le plein6000 et les régressions release/EOF
   passent, mais la portée « thread principal » du profiler est incorrecte.
   Sept fonctions/356liens self>cum et workers présents ; données conservées,
