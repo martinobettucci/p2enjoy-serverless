@@ -241,3 +241,62 @@ quatre lectures de source. Il ne qualifie pas encore révocation pendant IO,
 purge face à lecteur vivant, reconstruction unique/limitesZIP, diff/UI maintenu
 ou interruptions de publication.070.1–.5 restent ouverts ; aucun critère
 supplémentaire n’est coché. Les deux échecs gardent chacun zéro groupe qualifié.
+
+
+## Préparation explicite du contrôle courant — SLS-147
+
+Le [diagnostic natif du 24 novembre](evidence/editor-reader-held-reconciliation-dev-2026-11-24.json)
+retrouve les six checkpoints held du premier complément32. Le dernier contient
+quatre lecteurs, quatre FD/TID distincts et aucun clone ; les quatre identités
+figurent déjà dans le reçu de restitution précédent. Le client échoue avant
+le cinquième GET. Le défaut de préparation de la suite est établi ; aucune
+cause interne du pool ni panne produit n'est déduite.
+
+Décision avant code : fournir `python3 -B e2e/prepare-editor-worker-control.py`
+comme préparation explicite réutilisable. La suite32 l'exécute immédiatement
+avant code-editor-read-concurrency, après clôture des six campagnes précédentes,
+puis relève sa baseline avant le client. Le ciblé9 utilise exactement cette
+même commande. L'ordre32, ses276groupes, les huit préparationsSSO et tous les
+oracles restent inchangés ; cette préparation compte zéro groupe.
+
+La commande vise uniquement infra-serverless, API f016 et CID déjà observé.
+Elle exige les deux seuls conteneurs sains attendus, l'agent actif, zéro fonction
+vivante/brouillon/instance/opération/appel/réservation/candidat actif/bail/
+stockage en attente, onze migrations exactes, intégrités/FK, zéro garde active
+et aucun thread du contrôle arrêté ou tracé. Toute précondition refusée termine
+nonzéro avant la demande de redémarrage.
+
+Avant une unique demande Docker restart de la seule API, sauvegarder les deux
+bases par SQLite backup sous l'identité propriétaire1001, dans un nouveau dossier
+privé qualification-history ; intégrité/FK, schéma et cardinalités des copies
+recoupés et SHA conservés. Les sauvegardes ne sont jamais publiées. Conserver
+les empreintes des tables de configuration/identité/code, les fichiers officiels,
+les budgets et l'inventaire5982. Contrôle : security_metadata, namespaces,
+services, functions, service_tokens, revisions, function_versions, code_drafts,
+service_log_policies, schema_migrations ; registre : metadata, functions,
+volumes, configuration_receipts et discard_receipts. Les autres tables de
+maintenance et de diagnostic sont sauvegardées et dénombrées, sans prétendre
+que leurs curseurs ou rétentions restent figés pendant un redémarrage normal.
+
+Une seule demande restart, bornée35s ; si son observation expire, inspecter
+la même génération jusqu'à120s, sans nouvelle demande. Un retour nonnul reste
+un échec, même si le service revient sain. Avant réussite : nouvelle naissance
+et StartedAt, même CID/image, référence intégralement inchangée, santéHTTP200,
+repos/migrations/intégrités/FK, tables protégées, configuration, budgets et
+5982originaux égaux. Le reçu privé conserve avant/après, backups parSHA,
+retour réel, erreur primaire et secondaires de publication séparées. Aucune
+configuration ni limite du contrôle n'est changée pour créer les threads.
+
+Le helper de lecture exporte son recensement initial borné des TID/naissances.
+Le client conserve held dans ses observations avant les assertions ; le check
+à quatre lecteurs exige toujours un clone réel, et rapproche au moins un
+lecteur avec un enfant cloné et au moins un avec le recensement initial.
+La santéHTTP, quatre réponses exactes, cinquième429/Retry-After2 borné5s,
+sept handlers et six restitutions gardent leurs exigences et leurs bornes.
+
+Qualification : préparation réelle puis neufgroupes complets et25communs frais,
+captures inspectées, purges et gardes jointes ; aucun succès déduit du code.
+Le nouveau préparateur et les adaptations changent le vecteur indexé. Décision :
+refaire ensuite49/543/18 depuis le début sur ce nouveau gel, sceller/committer
+sa preuve, puis32/276 sur les mêmes sources. Le49cd01985/530 et le premier32
+rouge restent leurs époques ; aucune équivalence de produit ne remplace ce rejeu.

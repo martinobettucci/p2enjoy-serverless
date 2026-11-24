@@ -208,4 +208,23 @@ Le scellement49 exige les six essais courants incomplets distincts, y compris
 celui de146, exclus du total. Le lancement32 épingle réellement espacePID du
 lecteur et du worker vivant, boot et identités ; une absence ultérieure n’est
 interprétée que dans ce contexte vérifié. Manifeste et gzip49 sont déjà dans le
-commit de lancement32, dont les530SHA de sources restent strictement identiques.
+commit de lancement32 ; tous les SHA du vecteur de sources restent strictement
+identiques entre ces deux passages, avec sa cardinalité explicite au gel.
+
+
+## Préparation des workers — SLS-147
+
+Le premier32 sur530sources échoue faute de clone observé, après80groupes.
+Le contrat de préparation est dans CODE_EDITOR_READ_CONCURRENCY, section
+Préparation explicite du contrôle courant. La préparation réelle est placée
+immédiatement avant code-editor-read-concurrency, après repos vérifié des six
+précédents, puis une nouvelle baseline lie la génération de contrôle à ce client.
+Son reçu est archivé séparément des32commandes et des huitprérequisSSO ; il
+ne produit aucun groupe. MêmeCID/image, référence/configuration/budgets/données
+conservés, arrêt/naissance nouveaux explicites. Aucun retry du scénario.
+
+Le préparateur maintenu ajoute un fichier à l'index : le prochain gel doit
+compter531sources. Le contrat et les clients modifiés ne sont pas attribués au
+49cd01985/530. Après le ciblé9 et ses25communs frais, un nouveau49complet sur
+le nouveau gel précède le prochain32 ; mêmes sources entre ces deux passages,
+preuve49 committée avant lancement32. Les anciensmanifestes restent inchangés.

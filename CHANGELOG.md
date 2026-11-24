@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-147.2 : six checkpoints natifs retrouvés et rapprochés ; quatre lecteurs
+  existaient déjà avant le dernier maintien, zéroclone. Préparation du contrôle
+  spécifiée avant code : backups des deuxbases, repos, restart unique et baseline
+  fraîche immédiatement avant le client. Nouveau49/32 sur prochain vecteur531
+  décidé ; aucune nouvelle qualification fonctionnelle acquise.
+
 - SLS-147 : premier complément32 arrêté dans la création native de workers,
   après six campagnes/80groupes et sept checks partiels. Assertion exacte
   `fresh_worker_clone_not_observed` ; précondition de contrôle frais absente

@@ -11626,3 +11626,19 @@ les sept rapports, retours0/0/0/0/0/0/1, TAR530 exactGit,27captures sousSHA,
 distante par les sous-agents. Aucun secret sous clé interdite/JWT/p2s détecté.
 Seules cette trace et la précision « dans cette preuve initiale/le rapport
 client » du manque held sont ajoutées après revue, sans modifier les preuves.
+
+
+## 24 novembre 2026 — Diagnostic147 et préparation avant code
+
+Les sixheld.json natifs retrouvés sont exportés séparément du premier rouge.
+Le dernier confirme quatreFD/TID et zéroclone ; les quatre naissances existaient
+déjà dans le reçu de restitution précédent. Pas de conclusion sur la politique
+interne du pool ni de429 envoyé.147.2 est rapprochée avec la précondition
+historique de contrôle frais absente de la suite32.
+
+Décision : préparateur maintenu et réutilisable immédiatement avant ce client,
+avec backups SQLite des deuxbases, repos/gardes/traceurs, nouvelle baseline et
+conservation des invariants. Le client conserve held avant assertion et relie
+lecteurs aux identités initiales et clonées. Contrat précis persisté avant code.
+Le prochain vecteur531 impose nouveau49 puis32, sans requalifier l'ancien530.
+Produit f016 inchangé ; préparation, ciblé9/25 et nouvelles régressions encore dus.

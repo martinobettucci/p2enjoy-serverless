@@ -6194,7 +6194,7 @@ suppression d'assertion pour rendre le passage vert.
   27 originaux inspectés et zéro complément global. Recouper worker/lanceur/
   cgroup dans l'espacePID épinglé, purges et révocations des ressources possédées,
   gardes/traceurs, réservations, référence/configuration et5982artefacts.
-- [ ] SLS-147.2 Rapprocher l'assertion exacte, les préconditions documentées et
+- [x] SLS-147.2 Rapprocher l'assertion exacte, les préconditions documentées et
   celles effectivement établies par la suite ; conserver les observations
   manquantes et décider la préparation avant son implémentation.
 - [ ] SLS-147.3 Préparer et prouver réellement la création de workers sans
@@ -6220,3 +6220,17 @@ configuration/référence/5982conservés. Le retour brut de l'outil rétenteur d
 lancement manque après compaction ; ses reçus complets et leur épinglage vivant
 restent exacts, sans retour inventé. Métadonnées held du dernier cas non retenues dans cette preuve initiale, ni dans le rapport client.
 Aucun nouveau32 ni correction fonctionnelle acquis par ce scellement.
+
+
+147.2 — [Checkpoints natifs retrouvés](evidence/editor-reader-held-reconciliation-dev-2026-11-24.json) :
+les sixheld natifs sont conservés exactement ; le dernier rapproche quatre
+lecteurs préexistants, quatreFD/TID et zéroclone. Leur naissance était déjà
+observée dans le reçu de restitution précédent. Aucun429 ni défautproduit déduit.
+Décision et contrat de préparation persistés avant code dans
+[CODE_EDITOR_READ_CONCURRENCY](CODE_EDITOR_READ_CONCURRENCY.md#préparation-explicite-du-contrôle-courant--sls-147) :
+préparation réutilisable immédiatement avant le client, sauvegardes natives
+des deuxbases, repos et invariants avant/après, une seule demande restart,
+recensement initial et rapprochement lecteurs/clones, conservation de held.
+Le nouveau fichier porte le prochain vecteur à531 ; nouveau49 puis32 strictement
+identiques décidés, sans réutiliser le49/530 comme un rejeu de ces nouveaux octets.
+Implémentation et preuves147.3–.5 restent dues.

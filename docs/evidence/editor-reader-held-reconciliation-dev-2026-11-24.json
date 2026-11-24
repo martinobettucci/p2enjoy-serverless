@@ -1,0 +1,176 @@
+{
+  "format": "p2enjoy-serverless-reader-held-reconciliation-v1",
+  "completed": true,
+  "unit": "SLS-147",
+  "unit_complete": false,
+  "functional_groups_added": 0,
+  "frozen_client_source_commit": "9e66a79415bd1518fd7505b1b2fcc9b582c0c9be",
+  "first_failure_proof": {
+    "path": "additional-reader-clone-first-failed-dev-2026-11-24.json",
+    "sha256": "59acc8288299bfd5bbad691d194443f11fe166f24a73695fe9dcddd631074a57"
+  },
+  "native_collection": {
+    "completed": true,
+    "sampled_at_ns": 1795486384518958081,
+    "held": [
+      {
+        "path": "/run/serverless-restore-editor-read-636987f209684b7986a9f8cd10ebb519/held.json",
+        "sha256": "11a02038b8defe892cde8e11d8955ad6b94af4327e48b865e02b0de1891786c0",
+        "bytes": 647,
+        "text": "{\"event\": \"held\", \"unit\": \"serverless-restore-editor-read-636987f209684b7986a9f8cd10ebb519\", \"process\": {\"pid\": 3106088, \"birth\": \"609632424\", \"cgroup_sha256\": \"fd09197b0846227bc3017f3d70bad968b020e6ca050d490edd68421fa7ea6232\", \"state\": \"S\", \"tracer_pid\": 0, \"tgid\": 3106088}, \"readers\": [{\"tid\": 3110313, \"birth\": \"609692088\", \"fd\": 12, \"device\": 129, \"inode\": 614236, \"size\": 65, \"read_count\": 1048576, \"syscall\": 0, \"syscall_phase\": \"entry\", \"file_path\": \"/state/artifacts/3f9f469a-a220-4c2b-aecf-faa943f33d61/code/reader-gate.txt\", \"at_ns\": 1795485568483410260}], \"events\": 50, \"threads_seen\": 11, \"clone_events\": [], \"early_child_stops\": []}\n",
+        "mtime_ns": 1795485568561437190
+      },
+      {
+        "path": "/run/serverless-restore-editor-read-60d3c63fc24e46aa8be631beb0dd75e7/held.json",
+        "sha256": "30947356a85377ff7deba3935c14cb32b6188ba324bdaeea701c926e8da66742",
+        "bytes": 647,
+        "text": "{\"event\": \"held\", \"unit\": \"serverless-restore-editor-read-60d3c63fc24e46aa8be631beb0dd75e7\", \"process\": {\"pid\": 3106088, \"birth\": \"609632424\", \"cgroup_sha256\": \"fd09197b0846227bc3017f3d70bad968b020e6ca050d490edd68421fa7ea6232\", \"state\": \"S\", \"tracer_pid\": 0, \"tgid\": 3106088}, \"readers\": [{\"tid\": 3110312, \"birth\": \"609692088\", \"fd\": 16, \"device\": 129, \"inode\": 614236, \"size\": 65, \"read_count\": 1048576, \"syscall\": 0, \"syscall_phase\": \"entry\", \"file_path\": \"/state/artifacts/3f9f469a-a220-4c2b-aecf-faa943f33d61/code/reader-gate.txt\", \"at_ns\": 1795485573221129373}], \"events\": 40, \"threads_seen\": 11, \"clone_events\": [], \"early_child_stops\": []}\n",
+        "mtime_ns": 1795485573306366967
+      },
+      {
+        "path": "/run/serverless-restore-editor-read-8849fb726101489d8c7fa6b0da1e15cb/held.json",
+        "sha256": "ad6738d279557d237668f2d41f1bc03ebf7f6d21d39dab4837d6971e8fe0b4dc",
+        "bytes": 647,
+        "text": "{\"event\": \"held\", \"unit\": \"serverless-restore-editor-read-8849fb726101489d8c7fa6b0da1e15cb\", \"process\": {\"pid\": 3106088, \"birth\": \"609632424\", \"cgroup_sha256\": \"fd09197b0846227bc3017f3d70bad968b020e6ca050d490edd68421fa7ea6232\", \"state\": \"S\", \"tracer_pid\": 0, \"tgid\": 3106088}, \"readers\": [{\"tid\": 3145869, \"birth\": \"610143307\", \"fd\": 12, \"device\": 129, \"inode\": 614236, \"size\": 65, \"read_count\": 1048576, \"syscall\": 0, \"syscall_phase\": \"entry\", \"file_path\": \"/state/artifacts/3f9f469a-a220-4c2b-aecf-faa943f33d61/code/reader-gate.txt\", \"at_ns\": 1795485577877579855}], \"events\": 40, \"threads_seen\": 11, \"clone_events\": [], \"early_child_stops\": []}\n",
+        "mtime_ns": 1795485578001305248
+      },
+      {
+        "path": "/run/serverless-restore-editor-read-90882d2efaa6446d85a9fa1afb7695ce/held.json",
+        "sha256": "44041a9496142f5bd64ad0c890d181e84ea3fd8970e7de4bb3f044d75c16e619",
+        "bytes": 647,
+        "text": "{\"event\": \"held\", \"unit\": \"serverless-restore-editor-read-90882d2efaa6446d85a9fa1afb7695ce\", \"process\": {\"pid\": 3106088, \"birth\": \"609632424\", \"cgroup_sha256\": \"fd09197b0846227bc3017f3d70bad968b020e6ca050d490edd68421fa7ea6232\", \"state\": \"S\", \"tracer_pid\": 0, \"tgid\": 3106088}, \"readers\": [{\"tid\": 3106089, \"birth\": \"609632542\", \"fd\": 15, \"device\": 129, \"inode\": 614236, \"size\": 65, \"read_count\": 1048576, \"syscall\": 0, \"syscall_phase\": \"entry\", \"file_path\": \"/state/artifacts/3f9f469a-a220-4c2b-aecf-faa943f33d61/code/reader-gate.txt\", \"at_ns\": 1795485583211755509}], \"events\": 46, \"threads_seen\": 11, \"clone_events\": [], \"early_child_stops\": []}\n",
+        "mtime_ns": 1795485583303340666
+      },
+      {
+        "path": "/run/serverless-restore-editor-read-5c7e8f3d7bf848bba6c297f81cc16ec1/held.json",
+        "sha256": "0ea57e223ded718f7cad40f992756f1958fe971c7c9fc36281b933b8e2bb1bab",
+        "bytes": 647,
+        "text": "{\"event\": \"held\", \"unit\": \"serverless-restore-editor-read-5c7e8f3d7bf848bba6c297f81cc16ec1\", \"process\": {\"pid\": 3106088, \"birth\": \"609632424\", \"cgroup_sha256\": \"fd09197b0846227bc3017f3d70bad968b020e6ca050d490edd68421fa7ea6232\", \"state\": \"R\", \"tracer_pid\": 0, \"tgid\": 3106088}, \"readers\": [{\"tid\": 3143816, \"birth\": \"610115835\", \"fd\": 12, \"device\": 129, \"inode\": 614236, \"size\": 65, \"read_count\": 1048576, \"syscall\": 0, \"syscall_phase\": \"entry\", \"file_path\": \"/state/artifacts/3f9f469a-a220-4c2b-aecf-faa943f33d61/code/reader-gate.txt\", \"at_ns\": 1795485648407336703}], \"events\": 39, \"threads_seen\": 10, \"clone_events\": [], \"early_child_stops\": []}\n",
+        "mtime_ns": 1795485648493804245
+      },
+      {
+        "path": "/run/serverless-restore-editor-read-c3f3d803cf6e4f0692a61c5ab37ed1dd/held.json",
+        "sha256": "d696bfad82aab2458c6282f3c1ab7c7106219c2c6563c29006ea92e59dc4a74e",
+        "bytes": 1482,
+        "text": "{\"event\": \"held\", \"unit\": \"serverless-restore-editor-read-c3f3d803cf6e4f0692a61c5ab37ed1dd\", \"process\": {\"pid\": 3106088, \"birth\": \"609632424\", \"cgroup_sha256\": \"fd09197b0846227bc3017f3d70bad968b020e6ca050d490edd68421fa7ea6232\", \"state\": \"S\", \"tracer_pid\": 0, \"tgid\": 3106088}, \"readers\": [{\"tid\": 3143752, \"birth\": \"610115817\", \"fd\": 14, \"device\": 129, \"inode\": 614236, \"size\": 65, \"read_count\": 1048576, \"syscall\": 0, \"syscall_phase\": \"entry\", \"file_path\": \"/state/artifacts/3f9f469a-a220-4c2b-aecf-faa943f33d61/code/reader-gate.txt\", \"at_ns\": 1795485653582934862}, {\"tid\": 3110313, \"birth\": \"609692088\", \"fd\": 24, \"device\": 129, \"inode\": 614236, \"size\": 65, \"read_count\": 1048576, \"syscall\": 0, \"syscall_phase\": \"entry\", \"file_path\": \"/state/artifacts/3f9f469a-a220-4c2b-aecf-faa943f33d61/code/reader-gate.txt\", \"at_ns\": 1795485653593905099}, {\"tid\": 3145869, \"birth\": \"610143307\", \"fd\": 25, \"device\": 129, \"inode\": 614236, \"size\": 65, \"read_count\": 1048576, \"syscall\": 0, \"syscall_phase\": \"entry\", \"file_path\": \"/state/artifacts/3f9f469a-a220-4c2b-aecf-faa943f33d61/code/reader-gate.txt\", \"at_ns\": 1795485653594535507}, {\"tid\": 3109728, \"birth\": \"609690106\", \"fd\": 16, \"device\": 129, \"inode\": 614236, \"size\": 65, \"read_count\": 1048576, \"syscall\": 0, \"syscall_phase\": \"entry\", \"file_path\": \"/state/artifacts/3f9f469a-a220-4c2b-aecf-faa943f33d61/code/reader-gate.txt\", \"at_ns\": 1795485653634524422}], \"events\": 333, \"threads_seen\": 10, \"clone_events\": [], \"early_child_stops\": []}\n",
+        "mtime_ns": 1795485653710778133
+      }
+    ],
+    "groups_added": 0,
+    "collector_sha256": "ffce3ab0f4c1431dcc53c9c038c66b369c08900170d44c1bd176b10201c37d6e"
+  },
+  "collector": {
+    "path": ".local/collect-additional-reader-held-diagnostic-147.py",
+    "sha256": "ffce3ab0f4c1431dcc53c9c038c66b369c08900170d44c1bd176b10201c37d6e",
+    "bytes": 1974,
+    "text": "# @spec docs/BACKLOG.md#sls-147 | docs/CODE_EDITOR_READ_CONCURRENCY.md#barrière-native-retenue\n# @verifies docs/BACKLOG.md#sls-147 | docs/SCHEMA_011_REGRESSIONS.md#exécution-preuves-et-clôture\n\"\"\"Retain exact surviving native held checkpoints, with no replay or live trace.\"\"\"\nimport hashlib,json,runpy,subprocess,sys\nfrom pathlib import Path\nwork=Path(sys.argv[1]);closed=json.loads((work/'reader-guards-final.json').read_bytes());units=[x['unit']for x in closed['guards']];assert len(units)==6\nprogram='units='+repr(units)+'\\n'+r'''\nimport hashlib,json,os,re,socket,time\nfrom pathlib import Path\nassert socket.gethostname()=='infra-serverless'and os.geteuid()==0\nresult=[]\nfor unit in units:\n assert re.fullmatch('serverless-restore-editor-read-[0-9a-f]{32}',unit)\n folder=Path('/run')/unit;path=folder/'held.json'\n assert folder.resolve()==folder and path.is_file()and not path.is_symlink()\n raw=path.read_bytes();assert len(raw)<2*1024**2\n value=json.loads(raw);assert value['event']=='held'and value['unit']==unit\n result.append({'path':str(path),'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'text':raw.decode(),'mtime_ns':path.stat().st_mtime_ns})\nprint(json.dumps({'completed':True,'sampled_at_ns':time.time_ns(),'held':result,'groups_added':0}))\n'''\nssh=runpy.run_path('e2e/schedule_regressions.py')['SSH'];p=subprocess.run(ssh+['python3 -B -'],input=program,text=True,capture_output=True,check=True,timeout=45)\nv=json.loads(p.stdout);assert v['completed']and len(v['held'])==6\nv['collector_sha256']=hashlib.sha256(Path(__file__).read_bytes()).hexdigest();target=work/'reader-held-native-diagnostic.json';assert not target.exists();target.write_text(json.dumps(v,indent=2)+'\\n');target.chmod(0o600)\nlast=json.loads(v['held'][-1]['text']);print(json.dumps({'completed':True,'held_checkpoints':6,'last_readers':len(last['readers']),'last_clones':len(last['clone_events']),'last_threads_seen':last['threads_seen'],'path':str(target),'groups_added':0}))\n"
+  },
+  "prior_guard_terminal_receipt": {
+    "attempt_id": "2d84aef5c85148a281c902e9d817932e",
+    "started_at_ns": 1795485649662887928,
+    "event": "restored",
+    "independent": false,
+    "unit": "serverless-restore-editor-read-5c7e8f3d7bf848bba6c297f81cc16ec1",
+    "pid": 3106088,
+    "birth": "609632424",
+    "container_id": "b396de90eec2dd9c630567c9b4a50a529db81963d6ce9f92d02b7b3fa3b29479",
+    "image": "sha256:f016a1b71cb055c4f4c4e2fb2a2622c67c93f7a6ec26b39ec7e663cd9de4c0c7",
+    "started_at": "2026-11-24T00:00:03.784811812Z",
+    "cgroup_sha256": "fd09197b0846227bc3017f3d70bad968b020e6ca050d490edd68421fa7ea6232",
+    "helper_gone": false,
+    "threads": [
+      {
+        "tid": 3106088,
+        "birth": "609632424",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      },
+      {
+        "tid": 3106089,
+        "birth": "609632542",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      },
+      {
+        "tid": 3109728,
+        "birth": "609690106",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      },
+      {
+        "tid": 3110312,
+        "birth": "609692088",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      },
+      {
+        "tid": 3110313,
+        "birth": "609692088",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      },
+      {
+        "tid": 3143752,
+        "birth": "610115817",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      },
+      {
+        "tid": 3143816,
+        "birth": "610115835",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      },
+      {
+        "tid": 3143959,
+        "birth": "610115879",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      },
+      {
+        "tid": 3145869,
+        "birth": "610143307",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      },
+      {
+        "tid": 3170970,
+        "birth": "610348218",
+        "state": "S",
+        "tracer_pid": 0,
+        "tgid": 3106088
+      }
+    ],
+    "healthy": true,
+    "reference_unchanged": true,
+    "completed": true,
+    "finished_at_ns": 1795485649812686421,
+    "finished_monotonic_ns": 6103570155118958
+  },
+  "reconciliation": {
+    "held_count": 4,
+    "distinct_fds": 4,
+    "distinct_tids": 4,
+    "same_file_identity": true,
+    "clones": 0,
+    "threads_seen": 10,
+    "all_four_readers_observed_before_this_gate": true,
+    "prior_receipt_finished_at_ns": 1795485649812686421,
+    "first_read_at_ns": 1795485653582934862,
+    "fifth_request_not_reached": true
+  },
+  "limits": [
+    "Checkpoint natif retrouvé après le premier scellement ; ne remplace ni ne réécrit son rapport client incomplet.",
+    "Les quatre lecteurs existaient dans le reçu de restitution précédent ; aucune politique interne du pool ni cause produit déduite.",
+    "Aucun test rejoué, nouveau429 éprouvé ou groupe fonctionnel ajouté."
+  ]
+}
