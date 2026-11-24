@@ -776,14 +776,17 @@ Un seul scénario à la fois en DEV ;070reste ouverte pour les preuves résiduel
 
 Les quatre diagnostics SLS-147.3 du préparateur se lancent en série avec
 `python3 -B e2e/editor-worker-preparation-failures.py`, sur le seulSPARKDEV au
-repos et sans autre banc actif. Le contrôleur est implémenté pour qualification :
+repos et sans autre banc actif. Le contrôleur est
+[qualifié sur7cd5c54/532/f016](../docs/evidence/editor-worker-negative-current-dev-2026-11-24.json) :
 permissions, chemin de rapport, pipe et propreSSH réellement contraints,
 240s conservées. Retours clients nonnuls et erreurs/restitutions doivent être
-validés avant son succès0 ; zéro groupe fonctionnel ajouté.
+validés avant son succès0 ; clients1/1/120/1, timeout240s réel et restitutions
+acquis, huitnaissances CLI/SSH terminées ; zéro groupe fonctionnel ajouté.
 Le [premier passage](../docs/evidence/editor-worker-negative-first-failed-dev-2026-11-24.json)
 valide trois cas, puis échoue avant l'armement du quatrième ; clients1/1/120,
-contrôleur1 et restitutions conservées. Le filtre d'écritureFD1 doit être corrigé
-par l'inode du stdout possédé avant un nouveau passage explicite des quatre cas.
+contrôleur1 et restitutions conservées. Le filtre d'écritureFD1 a été corrigé
+par l'inode du stdout possédé ; le passage courant observe le vraiFD6 avant
+suspension/détachement, puis le SSH est joint par le préparateur après timeout.
 
 
 Préparation courante SLS-147, avant le ciblé et sans autre banc actif :
@@ -794,7 +797,7 @@ La suite32 la place immédiatement avant ce client, après les six précédents.
 Le reçu privé est distinct des groupes et des prérequisSSO. Les preuves
 nominales du préparateur et du passage9/25 sont
 [acquises sur1006ba1/531](../docs/evidence/editor-worker-preparation-current-dev-2026-11-24.json).
-Le négatif timeout et les nouveaux49/32 sur532sources restent dus.
+Les nouveaux49/32 sur les mêmes532sources restent dus.
 
 
 `node e2e/code-editor-read-concurrency.mjs` part de l’accueil et du vrai SSO,

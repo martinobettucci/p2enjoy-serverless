@@ -6197,7 +6197,7 @@ suppression d'assertion pour rendre le passage vert.
 - [x] SLS-147.2 Rapprocher l'assertion exacte, les préconditions documentées et
   celles effectivement établies par la suite ; conserver les observations
   manquantes et décider la préparation avant son implémentation.
-- [~] SLS-147.3 Préparer et prouver réellement la création de workers sans
+- [x] SLS-147.3 Préparer et prouver réellement la création de workers sans
   affaiblir les six scénarios, les bornes ni la restitution ; même déploiement
   identifié, données et configuration conservées, première exception et
   erreurs de finalisation distinctes. Pas d'action sur FORGE.
@@ -6259,8 +6259,8 @@ Le précontrôle62368123 termine1 avantSSO/Node, source nouvellement indexée no
 synchronisée ; zéro groupe, stderr distant original non archivé. Après livraison
 contrôlée des cinqautres fichiers indexés, le premier client effectivement
 exécuté c8212eab et ses25communs passent. Aucun scénario rejeté n'est relancé.
-147.4 acquise ;147.3 reste partielle pour les vrais négatifs de timeoutSSH et
-refus de publication, et147.5 pour le nouveau49 puis32 sur ce nouveau vecteur.
+À ce gel,147.4 est acquise ;147.3 reste partielle pour les vrais négatifs de
+timeoutSSH et refus de publication, et147.5 pour le nouveau49 puis32 sur ce vecteur.
 
 
 Décision147.3 avant diagnostics : [quatre fautes réelles](CODE_EDITOR_READ_CONCURRENCY.md#fautes-réelles-du-préparateur--sls-1473),
@@ -6278,7 +6278,7 @@ les flux au CLI par leurs FD/inodes et les processus par naissance/namespace/
 pidfd ; les fautes de fichiers et pipe restent privées, le timeout240s inchangé.
 Restitution indépendante des permissions/répertoire/processus, première erreur
 et secondaires séparées. Syntaxe contrôlée et relecture sansP1/P2 résiduel ;
-les quatre exécutions réelles restent dues.
+les passages réels sont documentés ci-dessous.
 
 147.3 — [Premier passage négatif scellé](evidence/editor-worker-negative-first-failed-dev-2026-11-24.json),
 3c3ce68/532/f016 : contrôleur1, trois diagnostics acquis avec clients1/1/120,
@@ -6294,4 +6294,16 @@ sur correction explicite dû, aucun timeout240s qualifié par ce refus.
 
 Correction du contrôleur implémentée localement : inode aux deux arrêts du
 syscall, FD/temps/statuts conservés même sur refus et retour du CLI secouru.
-Syntaxe contrôlée et relecture sansP1/P2 ; nouveau passage réel encore dû.
+Syntaxe contrôlée et relecture sansP1/P2 ; passage réel qualifié ci-dessous.
+
+147.3 — [Quatre négatifs courants acquis](evidence/editor-worker-negative-current-dev-2026-11-24.json)
+sur7cd5c54/532/f016 : contrôleur0 et clients1/1/120/1 attendus, primaire et
+secondaires exactes. ÉcritureSSH réelle surFD6 du bon inode, résultat natif
+complet avant livraisonSIGSTOP/détachement/étatT ; vrai timeout240s, retour SSH
+inconnu conservé, SSH joint par le préparateur sans secours. Permissions et
+répertoire restitués, huitnaissances locales terminées, huitbackups natifs privés
+sous1001, tables protégées/configuration/référence/5982/huit0 conservés.
+Scelleur0, brut882076/gzip209735 ; zéro groupe fonctionnel ajouté. Le premier
+passage3c3ce68 reste son refus distinct, sans FD ni statuts reconstitués.
+147.3 close avec le nominal34/531 ;147.5 et l'unité restent ouvertes pour
+nouveau49/543/18 puis32/276 sur les mêmes532sources applicables.

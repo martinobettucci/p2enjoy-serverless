@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-147.3 : [quatre négatifs réels qualifiés](docs/evidence/editor-worker-negative-current-dev-2026-11-24.json)
+  sur7cd5c54/532/f016, contrôleur0 et clients1/1/120/1 attendus. VraiFD6 puis
+  SIGSTOP/détachement et timeout240s, primaire/secondaires exactes, restitutions
+  et huitnaissances terminées. Premier refus conservé, zéro groupe ajouté ;
+  147.3close, nouveaux49/32 encore dus. Produit et image inchangés.
+
 - SLS-147.3 : ciblage des écritures corrigé par l'inode possédé plutôt que le
   numéro de FD, avec FD/temps/statuts réels et retour du CLI secouru conservés.
   Syntaxe contrôlée ; nouveau passage E2E encore dû.

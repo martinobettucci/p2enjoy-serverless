@@ -400,3 +400,22 @@ et tous les invariants restent exigés. Persister aussi le retour du CLI termin�
 par secours ; ne pas confondre cette terminaison avec une jointure par le
 préparateur. Aucun retry automatique. Un nouveau passage explicitement lié au
 code corrigé réexécute les quatre diagnostics ; le premier refus reste distinct.
+
+### Qualification des quatre négatifs courants
+
+Le [passage98939a8c](evidence/editor-worker-negative-current-dev-2026-11-24.json)
+sur7cd5c54/532/f016 termine réellement0, après clients1/1/120/1 attendus.
+Chaque primaire et la liste exacte de ses secondaires sont validées. Le quatrième
+observe write surFD6 du bon inode, sortie positive puis JSON6456octets complet,
+avant livraisonSIGSTOP et détachement confirmé en étatT/TracerPid0. Le vrai
+timeout240s reste primaire ; stdout-retain/parseEACCES restent secondaires,
+transport SSH unknown/exitnull et jointure par le préparateur sans secours.
+
+Les huitnaissances CLI/SSH sont terminées dans le namespacehôte épinglé,
+permissions0600 et répertoire de rapport restitués. Quatre préparations natives
+ont chacune leurs deuxbackups privés sous1001/0600 et restart unique0, sans
+timeoutDocker, avec tables protégées/configuration/référence/5982 conservés.
+États natifs finaux au repos ; snapshots de début/fin identiques pour les532
+sources, image et adaptateur. Zéro groupe fonctionnel ajouté ; le nominal34
+garde son gel1006ba1/531 et le premier négatif refusé son gel3c3ce68/532.
+147.3 est close ; nouveau49puis32 sur les mêmes532sources restent dus.

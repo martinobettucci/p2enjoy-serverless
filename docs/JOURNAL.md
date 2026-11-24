@@ -11758,3 +11758,25 @@ Relecture de la correction par inode sansP1/P2 ; les huitSHA, HEADfdc92df et
 statut sont recoupés inchangés par le principal. Préparateur et preuve du premier
 refus inchangés ; revue statique sans test ni action distante. Le code corrigé
 est committé/poussé avant son nouveau passage des quatre diagnostics.
+
+## 24 novembre 2026 — Quatre négatifs du préparateur147 acquis
+
+Passage98939a8c, source7cd5c54/532/f016 : commande réelle0 (session92409),
+clients1/1/120/1 attendus et erreurs/secondaires exactes. Write du stdout surFD6
+observé jusqu'au résultat natif complet ; livraisonSIGSTOP puis détachement
+enT/TracerPid0, vrai timeout240s et SSH joint par le préparateur sans secours.
+RetourSSH inconnu conservé malgré le JSON natif, EACCES secondaires distinctes.
+Permissions/répertoire restaurés ; huitnaissances locales terminées, huitbackups
+privés sous1001, quatre restarts uniques0 et tables protégées conservées.
+Configuration/référence/5982/huit0 et sources/image/adaptateur avant/après égaux.
+
+Scelleur0, brut882076/gzip209735. Premier négatif3c3ce68 gardé avec ses statuts
+perdus et quatrième faute non armée ; aucun groupe ajouté.147.3 est close avec
+le nominal34/531 et147.4 déjà acquise.147.5 attend nouveau49/543/18 puis32/276
+sur532sources strictement communes ; finalisations négatives143.5 restent dues
+avant leur intégration. Aucun changement produit, UI, manuel, migration ou route.
+
+Analyse indépendante des deux preuves sansP1/P2 ; principal : dixSHA/HEAD/statut
+inchangés au gel. DeuxTAR532 exactsGit,258références/67chemins,39JSON et scans
+structurés recoupés ; aucune sauvegardeSQLite lue ni action distante/test/écriture
+du vérificateur. Preuve courante et clôture147.3 prêtes à pousser ;147.5 reste due.

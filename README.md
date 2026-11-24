@@ -6,9 +6,12 @@ frais,22captures inspectées. La préparation sauvegarde les deuxbases et conser
 CID/image, tables protégées, configuration et référence ; nouvelle génération
 explicitement identifiée. Quatrelecteurs, dont troisclonés et unpréexistant,
 vrai429 en23,6ms, sept handlers et purgephysique ; sixgardes/helpers terminés,
-huitcompteurs0 et42backend/quatreHTTPSno-store/5982conservés.147.4 est close ;
-les fautes de transport/publication du nouveau préparateur et le prochain
-socle49 puis32 sur532sources restent dus. Le premierprécontrôle arrêté avant
+huitcompteurs0 et42backend/quatreHTTPSno-store/5982conservés. Les
+[quatre négatifs du préparateur](docs/evidence/editor-worker-negative-current-dev-2026-11-24.json)
+sont acquis sur7cd5c54/532/f016 : contrôleur0, clients1/1/120/1, refus de fichiers/
+pipe et vrai timeoutSSH240s avec secondaires exactes, restitutions et huit
+naissances terminées.147.3/.4 sont closes ; le prochain socle49 puis32 sur
+les mêmes532sources reste dû. Le premierprécontrôle arrêté avant
 SSO/Node, faute de sources entièrement synchronisées, ajoute zéro groupe.
 
 
