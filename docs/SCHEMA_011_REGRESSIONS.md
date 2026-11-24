@@ -364,6 +364,14 @@ négatifs143.5. Lancement du contrôleur pendant le vrai marqueur
 storage-preparations, après provenance/namespace épinglés ; retour réel0,
 fils joint, absence de primaire et de secondaire dans les deux résultats,
 portée schedules/rapport/run_id/vecteur532 identiques au lancement exigés.
+Le retour du fils dans result.json ne prouve pas celui du contrôleur : son
+dernier affichage peut échouer après la sauvegarde. Conserver à l'extérieur
+les observations réelles du lancement outil et des polls du même handle,
+jusqu'au retour terminal0 du contrôleur. Le reçu garde commande/programmeSHA,
+handle et sortie outil combinée exacte ; il ne prétend pas séparer stdout et
+stderr. Les deux objets réellement affichés doivent désigner le même résultat
+de contrôleur, puis joined/returncode0 sans erreur. Corrélateur et publicateur
+vérifient ce reçu en plus du checkpoint et des flux distincts du moniteur.
 La corrélation finale conserve le vrai UUIDHTTP/SQL/hash/instance-consumer et
 le contrôle succeeded/handler_started/HTTP200, sans déduire le souscode503 perdu.
 
