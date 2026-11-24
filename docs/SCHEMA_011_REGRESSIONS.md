@@ -347,3 +347,29 @@ de chaque passage, inspectés individuellement. Les diagnostics ajoutent0groupe.
 Les trois ciblés complets gardent leurs propres37groupes chacun ; aucune
 préparation ni répétition n'est ajoutée au543. Nouveau49 nominal puis32 sur
 le même vecteur restent requis ; aucune réussite déduite de cette spécification.
+
+### Intégration nominale après les six négatifs
+
+Le prochain49 conserve le vecteur courant de532sources. Les collecteurs privés
+de provenance, fermeture, état final, ressources embarquées, reprise, notes et
+corrélation sont de nouvelles copies532 ; les programmes530 exécutés restent
+intacts. Le publicateur dérive de la variante qui exige les six essais rouges.
+Le nom inédit de preuve est
+`schedules-regressions-schema011-finalization-dev-2026-11-24` ; aucun ancien
+manifeste/gzip n'est remplacé. Le code des collecteurs est livré sous octets/SHA
+dans un lot préparé avant le lancement ; cet état n'annonce aucune exécution.
+
+Le nominal utilise exactement les moniteur/contrôleur qualifiés par les six
+négatifs143.5. Lancement du contrôleur pendant le vrai marqueur
+storage-preparations, après provenance/namespace épinglés ; retour réel0,
+fils joint, absence de primaire et de secondaire dans les deux résultats,
+portée schedules/rapport/run_id/vecteur532 identiques au lancement exigés.
+La corrélation finale conserve le vrai UUIDHTTP/SQL/hash/instance-consumer et
+le contrôle succeeded/handler_started/HTTP200, sans déduire le souscode503 perdu.
+
+Les preuves147 nominale, négative réussie et premier refus, les trois ciblés
+et six négatifs143.5, le premier32 refusé et le précédent49 réussi sont des
+époques auxiliaires séparées. Le publicateur recoupe chacun de leurs manifestes
+et gzip/bruts sousSHA ; leur contribution au49 est0. Elles ne sont pas ajoutées
+à excluded_workers, qui reste réservé aux six essais schedules incomplets.
+Ni un auxiliaire vert ni son nombre de groupes ne prouve un cas du nouveau49.
