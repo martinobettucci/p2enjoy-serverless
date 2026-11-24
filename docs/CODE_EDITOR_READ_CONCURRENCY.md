@@ -300,3 +300,52 @@ Le nouveau préparateur et les adaptations changent le vecteur indexé. Décisio
 refaire ensuite49/543/18 depuis le début sur ce nouveau gel, sceller/committer
 sa preuve, puis32/276 sur les mêmes sources. Le49cd01985/530 et le premier32
 rouge restent leurs époques ; aucune équivalence de produit ne remplace ce rejeu.
+
+
+## Fautes réelles du préparateur — SLS-147.3
+
+Le nominal34 sur1006ba1/531 garde sa preuve. Avant le prochain49, exécuter
+`python3 -B e2e/editor-worker-preparation-failures.py` : quatre diagnostics
+réels, en série et à zéro groupe fonctionnel ajouté. Le préparateur déployé
+reste exactement celui du nominal ; ni source, timeout, dépendance ni retour
+ne sont substitués. Chaque diagnostic exécute une seule fois le vrai CLI,
+avec zéro ressource active avant/après et référence/configuration/5982conservés.
+
+1. Lecture refusée : après ouverture de ses flux, le seul stdout privé du
+   préparateur passe temporairement de0600 à0000. Le SSH continue à écrire sur
+   son FD déjà ouvert ; le vrai retour natif0 est conservé avant EACCES13.
+   PermissionError reste primaire, les refus suivants restent secondaires.
+2. Sauvegarde refusée : un répertoire vide possédé par le diagnostic occupe
+   son seul chemin report.json avant publication. Le vrai IsADirectoryError21
+   rend le CLI nonnul malgré la préparation native0 ; publication-errors.json
+   conserve cette première erreur. Le répertoire exact est ensuite retiré.
+3. Affichage refusé : fermer le seul lecteur du pipe stdout du CLI. Son vrai
+   BrokenPipeError32 est conservé dans le reçu terminal ; le reçu report.json
+   déjà écrit avant affichage est un état intermédiaire, jamais un succès final
+   lorsque le CLI termine nonnul. Conserver le code réel, y compris120 si le
+   flush de l'interpréteur échoue ensuite ; aucune conversion en0.
+4. Transport expiré avec secondaire : identifier le seul enfantSSH du CLI par
+   parent/naissance, commande et inodes de ses stdout/stderr privés, épingler
+   son pidfd, puis SIGSTOP. Le préparateur conserve sa vraie attente240s,
+   termine/joint son SSH et garde TimeoutExpired comme primaire, retour distant
+   inconnu. Le refus temporaire de lecture de son stdout ajoute EACCES13 comme
+   secondaire. Relever les octets réellement disponibles, même vides ; ne pas
+   déduire qu'un restart a été demandé ou achevé d'un transport expiré.
+
+Le contrôleur n'agit que sur ses processus et chemins privés nouvellement
+créés. Il ne suspend aucun processus du contrôle, du SPARK ou de FORGE. Avant
+mutation, UID/type/absence de symlink, identités/inodes et propriété sont
+recoupés. Les permissions sont restaurées par le FD conservé en finally ; un
+PID réutilisé n'est jamais signalé. Le CLI et son seul SSH sont joints avant
+cas suivant ; un échec du contrôleur restitue ses propres fautes et garde la
+première exception. Les quatre codes clients nonnuls attendus ne qualifient
+le contrôleur0 qu'après validation de ces erreurs et du repos natif final.
+Une faute non atteinte échoue, sans retry ni saut de scénario.
+
+Conserver pour chaque cas : source/commit, naissances/commandes expurgées,
+opérations et temps monotones, stdout/stderr réels sousSHA, reçus intermédiaire
+et terminal distincts, première erreur et secondaires, restitution et état
+natif final. Les sauvegardes SQLite restent privées ; aucun contenu métier
+ou secret ajouté aux exports. Ces diagnostics ne remplacent ni les neufgroupes
+nominalement acquis, ni25communs, ni le nouveau49/32. Le nouveau contrôleur
+maintenu porte le prochain vecteur à532sources ; le gel suivant le recoupe.

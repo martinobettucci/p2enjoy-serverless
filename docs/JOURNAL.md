@@ -11690,3 +11690,13 @@ TAR533avec deuxprogrammes privés, sixprogrammes et22images sousSHA vérifiés ;
 aucune lecture de backupSQLite ni nouveaupixel, test, SSH ou écriture par le
 vérificateur. Scanstructuré/JSON/text sans clé interdite/JWT/p2s. Cette trace
 seule est ajoutée après le gel ; la preuve et les531sources restent inchangées.
+
+
+## 24 novembre 2026 — Contrat des négatifs du préparateur147
+
+Reprise147.3 après34/531 acquis. Quatre diagnostics réels spécifiés avant code :
+EACCES de lecture, chemin report occupé par un répertoire possédé, pipe stdout
+fermé, puis seulSSH du CLI arrêté par pidfd jusqu'au vrai timeout240s avec
+secondaireEACCES. Aucun délai, source ou retour remplacé ; permissions et
+processus possédés restitués/joints, états natifs recoupés. Ils ajoutent0groupe.
+Le contrôleur maintenu porte le prochain gel à532 ; code et exécution encore dus.

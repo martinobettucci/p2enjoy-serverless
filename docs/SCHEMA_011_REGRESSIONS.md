@@ -223,8 +223,8 @@ Son reçu est archivé séparément des32commandes et des huitprérequisSSO ; il
 ne produit aucun groupe. MêmeCID/image, référence/configuration/budgets/données
 conservés, arrêt/naissance nouveaux explicites. Aucun retry du scénario.
 
-Le préparateur maintenu ajoute un fichier à l'index : le prochain gel doit
-compter531sources. Le contrat et les clients modifiés ne sont pas attribués au
+Le préparateur maintenu portait l'index à531sources pour le ciblé nominal.
+Son contrôleur de fautes maintenu porte le prochain gel à532sources. Le contrat et les clients modifiés ne sont pas attribués au
 49cd01985/530. Après le ciblé9 et ses25communs frais, un nouveau49complet sur
 le nouveau gel précède le prochain32 ; mêmes sources entre ces deux passages,
 preuve49 committée avant lancement32. Les anciensmanifestes restent inchangés.

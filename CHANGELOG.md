@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-147.3 : quatre négatifs du préparateur spécifiés avant code, via vraies
+  permissions/chemin/pipe et expiration240s du seulSSH possédé. Retour client
+  nonnul, primaire/secondaires et restitution exigés, zéro groupe ajouté.
+  Contrôleur maintenu et preuves à produire ; prochain vecteur532.
+
 - SLS-147 : [nominal34 qualifié](docs/evidence/editor-worker-preparation-current-dev-2026-11-24.json)
   sur1006ba1/531/f016 : préparation0/deuxbackups/restart unique, neuflectures
   puis25communs frais,22captures inspectées. Troislecteurs clonés/unpréexistant,

@@ -6261,3 +6261,13 @@ contrôlée des cinqautres fichiers indexés, le premier client effectivement
 exécuté c8212eab et ses25communs passent. Aucun scénario rejeté n'est relancé.
 147.4 acquise ;147.3 reste partielle pour les vrais négatifs de timeoutSSH et
 refus de publication, et147.5 pour le nouveau49 puis32 sur ce nouveau vecteur.
+
+
+Décision147.3 avant diagnostics : [quatre fautes réelles](CODE_EDITOR_READ_CONCURRENCY.md#fautes-réelles-du-préparateur--sls-1473),
+lecture EACCES sur stdout privé, sauvegarde IsADirectoryError, pipe d'affichage
+fermé et propreSSH suspendu jusqu'au vrai timeout240s avec secondaireEACCES.
+Sources/délais/retours inchangés, propriétés et pidfd vérifiés, restitutions et
+jonctions obligatoires. Chaque diagnostic compte0groupe ; les clients doivent
+rester nonnuls avec première erreur et secondaires distincts. Nouveau contrôleur
+maintenu, prochain vecteur532 ; preuves actuelles34/531 et49/530 inchangées.
+Ces quatre diagnostics et les nouveaux49/32 restent à exécuter.
