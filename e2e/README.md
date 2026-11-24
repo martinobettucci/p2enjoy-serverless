@@ -663,6 +663,40 @@ propres originaux et clôtures. Le nominal du nouveau49 puis32sur le même
 vecteur restent dus ; le lot prepared-not-executed conserve son état historique
 à sa publication et ne remplace pas la preuve d'exécution ultérieure.
 
+Le prochain nominal utilise le
+[lot d'intégration532](../docs/evidence/schedules-finalization-integration-programs-prepared-2026-11-24.json),
+seize programmes exacts à l'état préparé, sans résultat E2E annoncé. Les huit
+copies de collecte532 préservent les530 historiques. Restaurer les entrées
+`programs` sous `.local` en appliquant les mêmes contrôles de chemin, taille,
+SHA, compilation et refus d'écrasement que l'extraction ci-dessus, avec ce
+nouveau lot et une cardinalité16.
+
+Commandes de l'intégration, sur sources committées/synchronisées et banc au repos :
+
+1. `python3 -B e2e/schedules-worker.py start`, puis
+   `python3 -B .local/retain-schedules-launch-provenance-532.py NOM` pendant
+   la vie du worker ; épingler sources et namespace avant toute observation.
+2. Pendant le vrai marqueur `storage-preparations`,
+   `python3 -B .local/run-storage-response-observer-finalization.py NOM`.
+   Conserver dans `NOM/storage-controller-tool-results.json` le format
+   `p2enjoy-serverless-tool-observations-v1`, la commande sous tableau de mots,
+   programmeSHA, vrai résultat `launch`, puis `polls:[{request,result}]`.
+   Chaque request est le même objet transmis à write_stdin, session_id et
+   chars vide compris ; le terminal exit0 doit appartenir à ce handle.
+   La sortie outil combinée est conservée exactement ; les stdout/stderr du
+   moniteur restent leurs deux fichiers propres. Aucun stdin privé conservé.
+3. Inspecter les originaux de chaque campagne et enregistrer leurs reçus par
+   les deux recorders du lot ; retenir aussi les sept images de control-ui.
+   Attendre la fin réelle puis `python3 -B e2e/schedules-worker.py finish NOM`.
+4. Exécuter les copies532 close, final-state, recovery, embedded, notes puis
+   correlate, avec les arguments décrits par leurs sources exactes. Embedded
+   et notes reçoivent le chemin complet `.local/e2e/NOM` ; correlate reçoit
+   NOM puis le vrai chemin `result.json` du contrôleur.
+5. `final-collections.json` rattache les sorties actuelles, six workers rouges,
+   programmes exacts et six auxiliaires sousSHA ; le publicateur532 exige
+   `schedules-regressions-schema011-finalization-dev-2026-11-24`. Committer sa
+   preuve et son gzip avant le32, sans changer les532sources entre ces passages.
+
 Le passage49/543 historique ci-dessus correspond à l'image433 ; sa régression
 sur011 est acquise par le socle du24novembre en tête de ce document.
 Le [complément courant32/276](../docs/SCHEMA_011_REGRESSIONS.md) a son lanceur

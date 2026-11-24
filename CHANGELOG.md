@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-143.5 : nouveaux collecteurs532 et publicateur du nominal49 implémentés,
+  seize programmes exacts livrés dans un lot préparé. Retour outil final du
+  contrôleur lié au handle de chaque requête de poll, distinct du retour du
+  moniteur. Six époques auxiliaires recontrôlées hors total543 ; première
+  exécution nominale de cette intégration encore due.
+
 - SLS-143.5 : [six négatifs et trois passages ciblés réels qualifiés](docs/evidence/storage-observer-finalization-current-dev-2026-11-24.json)
   surc5e1eff/532/f016 : pilote0, clients120/−2/1/−2/1/120 conservés,
   secours110s, restitutions et corrélationHTTP/SQL vérifiés. Trois fois37groupes,

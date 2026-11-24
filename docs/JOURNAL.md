@@ -11872,3 +11872,25 @@ verts et six négatifs contribuent0 au49 et n'entrent pas dans excluded_workers.
 Nouveau nom de preuve inédit, sources synchronisées et provenance pendant la
 vie du worker, puis49entier et32sur le même vecteur ; aucun530 exécuté modifié.
 SLS-144 est déjà inscrite avec ses neuf critères et reste à développer après081/072.
+
+## 24 novembre 2026 — Intégration nominale532 codée avant son lancement
+
+Huit collecteurs neufs532 et huit helpers exacts livrés dans un lot préparé ;
+anciens530 inchangés. Contrat poussé b465075/e6b6e95 avant code : nouveau nom
+schedules-regressions-schema011-finalization-dev-2026-11-24, six époques
+auxiliaires recontrôlées hors543 et six rouges conservés. Corrélation lie
+scope/rapport/vecteur, succeeded/handler_started et vraiHTTP200 ; référence
+id/image/started_at et Running exigés. Revue : retour du fils ne prouve pas
+le dernier affichage du contrôleur ; reçu outil extérieur ajouté. Second P2 :
+chaque poll, y compris terminal, conserve sa requête réelle du même handle.
+Corrections contrôlées par le principal ; aucun nouveau délai/processus ajouté.
+
+Précontrôle strict initial1 avant lancement sur sources distantes différentes ;
+metadata outil conservée, zéro groupe. Un seul contrat documentaire synchronisé
+avec gardeSHA/sauvegarde/propriétaire/mode. Précontrôle suivant0 :532sources,
+f016 et huitcompteurs0 ; nouveau paragraphe de contrat e6b6e95 à synchroniser
+avant le lancement final. Pas de worker49 ni nominal encore acquis ici.
+Reprendre la synchronisation documentaire puis start/provenance532 ; pendant
+storage-preparations lancer le contrôleur exact et conserver lancement/polls
+avec request.session_id, jusqu'au code terminal réel. Finir49, captures fraîches,
+collectes et scellement avant32 ; aucune modification du vecteur entre49/32.

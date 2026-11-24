@@ -1,5 +1,12 @@
 # P2Enjoy Serverless
 
+Les [six finalisations négatives de stockage143.5](docs/evidence/storage-observer-finalization-current-dev-2026-11-24.json)
+sont qualifiées : trois passages ciblés37,42captures inspectées, contrôleur0,
+codes clients attendus conservés et restitutions/corrélationHTTP/SQL recoupées.
+Le [lot nominal532 préparé](docs/evidence/schedules-finalization-integration-programs-prepared-2026-11-24.json)
+livre les collecteurs et helpers exacts pour leur intégration dans un nouveau49,
+puis32sur les mêmes sources. Ce nominal n'est pas encore exécuté.
+
 Le [ciblé de préparation des workers147](docs/evidence/editor-worker-preparation-current-dev-2026-11-24.json)
 passe34groupes réels sur1006ba1/531sources et f016 : neuflectures puis25communs
 frais,22captures inspectées. La préparation sauvegarde les deuxbases et conserve
@@ -34,8 +41,8 @@ est fermé et ses41 fonctions/sept namespaces purgés, six gardes terminées,
 précondition de contrôle frais absente du banc ; le contrôle déployé reste
 inchangé. Un nouveau32/276 reste dû après correction et rattachement explicite
 des sources. SLS-072/132/133/134/143/145/146 restent ouverts
-selon leurs critères ; les causes anciennes non observées et les branches
-négatives des nouveaux finaliseurs143.5 gardent leurs limites. Les six passages
+selon leurs critères ; les causes anciennes non observées gardent leurs limites.
+Les négatifs143.5 sont acquis, leur nouvelle intégration nominale532 reste due. Les six passages
 rouges et les ciblés antérieurs ci-dessous restent propres à leur époque et
 n’ajoutent aucun groupe au total543.
 

@@ -5682,6 +5682,14 @@ d'assertion ou allongement arbitraire de délai pour obtenir200.
   finalisations négatives qualifiées ci-dessous ; leur nominal dans le nouveau
   socle49 puis le complément32 sur le même vecteur restent dus.
 
+143.5 — Intégration nominale532 préparée : huit nouvelles copies des collecteurs,
+avec les huit helpers existants exacts, dans le
+[lot de seize programmes](evidence/schedules-finalization-integration-programs-prepared-2026-11-24.json).
+Contrat et code livrés avant exécution ; SHA/tailles et compilation contrôlés.
+La revue a fait distinguer retour du contrôleur et retour du fils, puis exiger
+les requêtes réelles des polls jusqu'au terminal du même handle ; corrections
+vérifiées par le principal. Aucun nouveau49 lancé ni résultat nominal acquis.
+
 143.5 — [Six négatifs réels qualifiés](evidence/storage-observer-finalization-current-dev-2026-11-24.json)
 au gelc5e1eff/532/f016 : pilote0, clients120/−2/1/−2/1/120 attendus ; primaires
 et secondaires distinctes, vrai secours110,289604245s avec enfant−9 joint,
