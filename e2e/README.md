@@ -762,6 +762,15 @@ Un seul scénario à la fois en DEV ;070reste ouverte pour les preuves résiduel
 
 ## Lecteurs vivants de l’éditeur — qualification ciblée DEV
 
+Préparation courante SLS-147, avant le ciblé et sans autre banc actif :
+`python3 -B e2e/prepare-editor-worker-control.py`. Cette commande est implémentée
+pour qualification ; elle sauvegarde les deux bases du SPARK DEV puis demande
+un seul redémarrage de l'API, avec conservation des identités et données.
+La suite32 la place immédiatement avant ce client, après les six précédents.
+Le reçu privé est distinct des groupes et des prérequisSSO. Les preuves
+courantes du préparateur et du nouveau passage9/25 restent à produire.
+
+
 `node e2e/code-editor-read-concurrency.mjs` part de l’accueil et du vrai SSO,
 avec identifiants sur stdin privée. Il publie `editor-reader-lifecycle.cjs` et
 les données originales de `code-editor-read-package.py`, puis exécute neuf

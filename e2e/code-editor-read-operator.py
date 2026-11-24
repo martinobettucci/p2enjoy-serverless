@@ -171,6 +171,8 @@ def hold(fn,ns,image,count,unit):
             trace=WorkerTrace(tid);traces[tid]=trace;before=status(tid);assert before['tracer_pid']==0 and before['tgid']==item['pid']
             assert birth(tid)==trace.birth and Path('/proc',str(tid),'cgroup').read_text()==item['cgroup']
             trace.ptrace(0x4206,0,OPTIONS);trace.attached=True;trace.ptrace(0x4207);trace.wait(time.monotonic()+3);check_thread(trace,item)
+        # @spec docs/BACKLOG.md#sls-147 | docs/CODE_EDITOR_READ_CONCURRENCY.md#préparation-explicite-du-contrôle-courant--sls-147
+        initial_threads=[{'tid':trace.pid,'birth':trace.birth}for trace in traces.values()]
         for trace in traces.values():trace.proceed(main.pid)
         phase='reading';emit({'event':'armed','unit':unit,'process':owner(item),'threads_attached':len(traces),'count':count})
         while len(held)<count or any(t.early_child and t.parent_tid is None for t in traces.values()):
@@ -219,7 +221,7 @@ def hold(fn,ns,image,count,unit):
             trace=traces[row['tid']];check_thread(trace,item);assert trace.stopped
             observed=file_match(trace,trace.info()[1],item);assert observed is not None
             assert {k:v for k,v in observed.items() if k!='at_ns'}=={k:v for k,v in row.items() if k!='at_ns'}
-        value={'event':'held','unit':unit,'process':owner(item),'readers':held,'events':events,'threads_seen':len(traces),'clone_events':clone_events,'early_child_stops':early_child_stops};atomic(folder,'held.json',value);emit(value)
+        value={'event':'held','unit':unit,'process':owner(item),'readers':held,'events':events,'threads_seen':len(traces),'initial_threads':initial_threads,'clone_events':clone_events,'early_child_stops':early_child_stops};atomic(folder,'held.json',value);emit(value)
         deadline=started+45
         assert deadline>time.monotonic(),'reader_hold_deadline'
         ready=select.select([sys.stdin],[],[],deadline-time.monotonic())[0]

@@ -264,7 +264,7 @@ def main():
         'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
         'run_id': archive.id, 'archive_path': str(archive.path.relative_to(ROOT)),
         'before': baseline, 'native_baseline': native_baseline, 'previous_suite': previous_suite,
-        'commands': [], 'prerequisites': [], 'failure': None}
+        'commands': [], 'prerequisites': [], 'worker_preparations': [], 'failure': None}
     def save(): atomic(REPORT, report)
     def same_sources(state):
         for key in ('image', 'source_sha256', 'adapter_images'):
@@ -275,6 +275,18 @@ def main():
     try:
         for name in COUNTS:
             before_native = SUITE['native_state'](); SUITE['same_installation'](native_baseline, before_native)
+            # @spec docs/BACKLOG.md#sls-147 | docs/SCHEMA_011_REGRESSIONS.md#préparation-des-workers--sls-147
+            if name == 'code-editor-read-concurrency':
+                preparer = runpy.run_path(str(ROOT / 'e2e/prepare-editor-worker-control.py'))
+                path = preparer['prepare']()
+                raw = (ROOT / path).read_bytes(); preparation = json.loads(raw)
+                assert preparation['completed'] and preparation['failure'] is None and not preparation['secondary_errors']
+                assert preparation['source_commit'] == report['source_commit'] and preparation['exit_code'] == 0
+                before_native = SUITE['native_state'](); SUITE['same_installation'](native_baseline, before_native)
+                assert before_native['services'] == preparation['native_after']['services']
+                report['worker_preparations'].append({'campaign': name, 'path': path,
+                    'sha256': digest(raw), 'bytes': len(raw), 'groups_added': 0})
+                save()
             if name in SESSION_CASES:
                 path = '.local/e2e/dev-sso-sessions.json'
                 prior = archive.retain('dev-sso-sessions', path, False, 'previous')

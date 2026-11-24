@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-147.3 : préparateur DEV implémenté pour qualification, avec deux backups
+  SQLite privés, contrôles avant/après et un restart unique. La suite32 le place
+  juste avant les lecteurs ; recensement initial et correspondance lecteurs/
+  clones ajoutés, held conservé avant assertion. Syntaxes contrôlées ; E2E dus.
+
 - SLS-147.2 : six checkpoints natifs retrouvés et rapprochés ; quatre lecteurs
   existaient déjà avant le dernier maintien, zéroclone. Préparation du contrôle
   spécifiée avant code : backups des deuxbases, repos, restart unique et baseline

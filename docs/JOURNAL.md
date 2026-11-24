@@ -11642,3 +11642,23 @@ conservation des invariants. Le client conserve held avant assertion et relie
 lecteurs aux identités initiales et clonées. Contrat précis persisté avant code.
 Le prochain vecteur531 impose nouveau49 puis32, sans requalifier l'ancien530.
 Produit f016 inchangé ; préparation, ciblé9/25 et nouvelles régressions encore dus.
+
+
+147.3 codée localement : prepare-editor-worker-control.py sauvegarde les deux
+bases, vérifie repos et invariants, demande un seul restart puis recoupe la
+nouvelle génération ; rapports privés et erreurs premières conservés. La suite
+le lance juste avant read-concurrency. Le helper exporte initial_threads ;
+le client conserve held avant assertions et relie lecteurs aux identités
+initiales/clonées. Syntaxes Python/payload/Node passent, preuve DEV encore due.
+
+La première revue statique147.3 trouve deuxP2 avant exécution : flux perdus sur
+timeoutSSH et acceptation tardive après120s. Corrections locales : flux dirigés
+vers fichiers dès lancement, retour connu/inconnu et primaire fixés avant leurs
+hachages, chaque conservation et recoupement après erreur indépendant ; deadline
+avant/après inspect et timeout limité au reliquat. Syntaxes passent ; branches
+négatives et nominal restent à éprouver réellement, sans succès présumé.
+
+Relecture ciblée terminée sansP1/P2 résiduel ; les dixSHA, HEAD et statut
+restent égaux au gel, recoupés par le principal. Vecteur local531 confirmé.
+Cette lecture ne qualifie ni nominal ni négatifs ; commit du code avant
+préparation DEV, synchronisation du seul helper modifié et ciblé9/25.

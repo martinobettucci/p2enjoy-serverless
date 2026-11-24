@@ -6234,3 +6234,13 @@ recensement initial et rapprochement lecteurs/clones, conservation de held.
 Le nouveau fichier porte le prochain vecteur à531 ; nouveau49 puis32 strictement
 identiques décidés, sans réutiliser le49/530 comme un rejeu de ces nouveaux octets.
 Implémentation et preuves147.3–.5 restent dues.
+
+
+147.3 — Implémentation locale pour qualification : préparateur maintenu,
+backups SQLite contrôle/registre sous1001, préconditions de repos/gardes/
+traceurs, restart unique et rapprochement de génération/tables protégées.
+Suite32 : préparation immédiatement avant le client et baseline après celle-ci.
+Le helper expose le recensement initial et le client conserve held avant ses
+assertions, puis exige des lecteurs issus d'identités existantes et clonées.
+Syntaxes Python/payload natif/Node et diff contrôlés ; aucune préparation ni
+preuve E2E du nouveau code encore exécutée.147.3–.5 restent ouvertes.
