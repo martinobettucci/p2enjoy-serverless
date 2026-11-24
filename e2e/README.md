@@ -604,6 +604,18 @@ Pour une campagne suivie indépendamment du terminal :
 sur ce même script. Les identifiants SSO sont lus sur stdin privée et restent
 en mémoire ; les rapports et résultats systemd sont conservés dans .local/e2e.
 
+Pour qualifier les finalisations SLS-143.5, l'extension
+`python3 -B e2e/schedules-worker.py start --scope storage-console-focused`
+est implémentée, avant qualification E2E. Elle lance les sept vrais cas de la
+portée ciblée existante,37groupes et quatreprérequis, avec le même SSO privé.
+Dossier storage-console-worker-UUID, unité serverless-storage-console-regressions-UUID,
+rapport storage-console-focused.json et archives storage-console-run-UUID ;
+`status NOM` et `finish NOM` relisent ce contexte depuis le lancement.
+Le défaut schedules et ses49/543/18 sont conservés. Les métadonnées run_id,
+commit/baseline, dates et rapports exacts sont produits par la suite réelle.
+[Six négatifs et leurs passages](../docs/SCHEMA_011_REGRESSIONS.md#négatifs-des-finalisations-du-moniteur--sls-1435)
+restent à coder/qualifier ; aucune preuve déduite de cette extension.
+
 Le passage49/543 historique ci-dessus correspond à l'image433 ; sa régression
 sur011 est acquise par le socle du24novembre en tête de ce document.
 Le [complément courant32/276](../docs/SCHEMA_011_REGRESSIONS.md) a son lanceur

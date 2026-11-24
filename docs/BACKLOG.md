@@ -5779,6 +5779,13 @@ du seul moniteur, après affichage initial et dans le try ; aucun fauxworker/
 rapport/retour, aucune borne changée. Source/index exacts, restitutions,
 purges/captures exigées ; zéro groupe ajouté au socle. Code et preuves à livrer.
 
+Extension du vraiworker ciblé implémentée localement : table fermée des deux
+scopes/rapports, noms propres au stockage, archives et métadonnées réelles,
+assertion7/37/4 et état natif final. Syntaxes des trois fichiers passent,
+index532 inchangé en cardinalité et relecture sansP1/P2. Deux copies privées
+neuves des moniteurs sont préparées, nonrevues/nonexécutées ; pilote des six
+diagnostics et vrais passages restent dus. Les copies530 ne sont pas modifiées.
+
 <a id="sls-144"></a>
 ## SLS-144 — Rapports de jobs et dashboards générés
 

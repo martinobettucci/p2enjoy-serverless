@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-143.5 : worker storage-console-focused et ses archives/métadonnées
+  réelles implémentés pour qualification ; septcas/37groupes/quatreprérequis,
+  noms propres au stockage et défaut schedules conservé. Syntaxes contrôlées,
+  aucun passage E2E de cette extension encore acquis.
+
 - SLS-143.5 : six diagnostics négatifs de finalisation spécifiés avant code,
   sur trois vrais passages storage-console-focused. Worker ciblé et archives
   réelles à ajouter ; primaire/secondaires, secours110s, finish et pipe refusés,

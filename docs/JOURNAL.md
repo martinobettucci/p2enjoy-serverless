@@ -11798,3 +11798,18 @@ Collision du transportfinish : AssertionError après vrai arrêt distant,
 serverless-storage-console-regressions ; sources exactes et originaux UI de
 chaque ciblé à conserver. Les copies530 exécutées restent immuables.
 Contrat complet dans SCHEMA_011_REGRESSIONS, code et preuves encore dus.
+
+Extension implémentée localement dans schedules-worker, execution-suite et
+ProofArchive : scope ciblé fermé, noms/rapport liés au lancement, archives
+storage-console-run, run_id/commit/baseline/dates réels, oracles7/37/4 et repos
+natif final. Le défaut schedules et ses exigences sont conservés ; anciennes
+archives lisibles. Syntaxes et diff contrôlés, cardinalité532. Aucun nouveau
+worker ou diagnostic exécuté ; relecture avant checkpoint de code, puis copies
+neuves des moniteurs et pilote des six fautes à réaliser.
+
+Relecture du checkpointworker sansP1/P2 ; principal : huitSHA/HEAD6ce7853/
+statut inchangés. Septcas9+10+7+2+4+1+4 et quatreprérequis recoupés dans les
+sources ; formats de captures compatibles. Aucune exécution par le relecteur.
+Deux copies privées neuves du moniteur/contrôleur sont préparées sans toucher
+les copies530 : admission par scope/vecteur réel et résultat lié, pas encore
+revues ni exécutées. Le pilote natif des six diagnostics reste à écrire.

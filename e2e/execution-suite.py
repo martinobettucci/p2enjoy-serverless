@@ -8,6 +8,8 @@
 # @verifies docs/BACKLOG.md#sls-066 | docs/INVOCATION_URLS.md#suite-complète-de-preuve
 # @spec docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
 # @verifies docs/BACKLOG.md#sls-067 | docs/FUNCTION_CATALOGUE.md#réalisation-et-preuves
+# @spec docs/BACKLOG.md#sls-143 | docs/SCHEMA_011_REGRESSIONS.md#négatifs-des-finalisations-du-moniteur--sls-1435
+# @verifies docs/BACKLOG.md#sls-143 | docs/SCHEMA_011_REGRESSIONS.md#négatifs-des-finalisations-du-moniteur--sls-1435
 """Serial DEV qualification with fresh reports bound to sources and deployed image."""
 import argparse
 import hashlib
@@ -302,12 +304,12 @@ def main():
             cases=list({row[0]:row for row in union}.values())
             if extended:assert len(cases)==(37 if scope in ('function-catalogue','schedules') else 35)
     if scope=='schedules':cases += [(name,['node','e2e/'+name+'.mjs'],None,False) for name in SCHEDULE_COUNTS]
-    archive=ProofArchive() if scope=='schedules' else None
-    previous_suite=archive.retain('schedules-suite',str(report.relative_to(ROOT)),False,'previous') if archive else None
+    archive=ProofArchive('storage-console' if scope=='storage-console-focused' else 'schedules') if scope in ('schedules','storage-console-focused') else None
+    previous_suite=archive.retain('storage-console-suite' if scope=='storage-console-focused' else 'schedules-suite',str(report.relative_to(ROOT)),False,'previous') if archive else None
     source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip() if archive else None
     records=[];prerequisites=[];baseline=None;adapter_baseline=None
     native_baseline=native_state() if archive else None
-    retention_proofs=retained_retention_proofs() if archive else None
+    retention_proofs=retained_retention_proofs() if scope=='schedules' else None
     def save(done=False):
         temporary=report.with_suffix('.tmp')
         value={'completed':done,'serial':True,'scope':scope,'prerequisites':prerequisites,'commands':records}
@@ -409,6 +411,9 @@ def main():
                 '.local/e2e/schedules-physical.json' if scope=='schedules' else '.local/e2e/function-catalogue-physical.json' if scope=='function-catalogue' else '.local/e2e/invocation-urls-physical.json' if extended else '.local/e2e/storage-console-physical.json',False,count=False)
     if scope=='invocation-urls':assert len(records)==35 and sum(row['passed_groups'] for row in records)==467 and len(prerequisites)==6
     if scope=='function-catalogue':assert len(records)==37 and sum(row['passed_groups'] for row in records)==489 and len(prerequisites)==6
+    if scope=='storage-console-focused':
+        assert len(records)==7 and sum(row['passed_groups'] for row in records)==37 and len(prerequisites)==4
+        same_installation(native_baseline,native_state())
     if scope=='schedules':
         assert len(records)==49 and sum(row['passed_groups'] for row in records)==543 and len(prerequisites)==18
         assert retained_retention_proofs()==retention_proofs

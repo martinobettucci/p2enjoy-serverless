@@ -61,10 +61,13 @@ def verify_report(name, value):
 
 class ProofArchive:
     """Retain exact report bytes before overwrite, then each new result and image."""
-    def __init__(self):
+    # @spec docs/BACKLOG.md#sls-143 | docs/SCHEMA_011_REGRESSIONS.md#négatifs-des-finalisations-du-moniteur--sls-1435
+    # @verifies docs/BACKLOG.md#sls-143 | docs/SCHEMA_011_REGRESSIONS.md#négatifs-des-finalisations-du-moniteur--sls-1435
+    def __init__(self, purpose='schedules'):
+        assert purpose in ('schedules', 'storage-console')
         OUTPUT.mkdir(parents=True, exist_ok=True, mode=0o700)
         self.id = uuid4().hex
-        self.path = OUTPUT / ('schedules-run-' + self.id)
+        self.path = OUTPUT / (purpose + '-run-' + self.id)
         self.path.mkdir(mode=0o700)
         self.sequence = 0
 
