@@ -5678,7 +5678,25 @@ d'assertion ou allongement arbitraire de délai pour obtenir200.
   peuvent remplacer la primaire par save/print/terminate/wait. Ces programmes
   initiaux n’avaient pas été exécutés ; les nouvelles copies portent le
   traitement. Leur nominal0 et leur corrélation sont acquis dans le socle49
-  du24novembre ; leurs finalisations négatives restent à qualifier.
+  du24novembre pour les copies530. Les nouvelles copies532 ont leurs six
+  finalisations négatives qualifiées ci-dessous ; leur nominal dans le nouveau
+  socle49 puis le complément32 sur le même vecteur restent dus.
+
+143.5 — [Six négatifs réels qualifiés](evidence/storage-observer-finalization-current-dev-2026-11-24.json)
+au gelc5e1eff/532/f016 : pilote0, clients120/−2/1/−2/1/120 attendus ; primaires
+et secondaires distinctes, vrai secours110,289604245s avec enfant−9 joint,
+finish refusé après arrêt réel et pipe fermé sans transformer le checkpoint
+en succèsclient. Trois workers ciblés terminés0 et joints, chacun7/37/4 ;
+111groupes ciblés distincts, zéro groupe ajouté au543.42originaux inspectés,
+19naissances terminées/troiscgroupsvides, traces arrêtées/agentTracerPid0,
+HTTP200/UUIDSQL/hash/instance/consumer recoupés. Purges physiques, onze migrations,
+intégrités/FK, configuration/budgets/référence/5982/huit0 conservés ;42backend et
+quatreHTTPSno-store identiques.191reçus et TAR532+7 sousSHA, vérification
+indépendante sansP1/P2. Premier scelleur1 sur chemin absolu avant écriture
+publique, original conservé ; copie corrigée0 sans rejeu des campagnes.
+Les alias vivants historiques ne remplacent pas les archives immuables.
+Nouveau49 nominal puis32 restent dus ;143.5 et le parent restent ouverts,
+souscode503 historique toujours inconnu ;075/113 restent ouvertes.
 
 143.1 — [premier503 scellé](evidence/schedules-storage-console-invocation-first-failed-dev-2026-11-23.json) :
 35rapports, TAR529 exactGitc94,89captures inspectées, worker1/lanceurjoint/

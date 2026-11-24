@@ -11841,3 +11841,34 @@ sources ; formats de captures compatibles. Aucune exécution par le relecteur.
 Deux copies privées neuves du moniteur/contrôleur sont préparées sans toucher
 les copies530 : admission par scope/vecteur réel et résultat lié, pas encore
 revues ni exécutées. Le pilote natif des six diagnostics reste à écrire.
+
+## 24 novembre 2026 — Six finalisations143.5 et trois ciblés acquis
+
+Pilote session11831 terminé0 surc5e1eff/532/f016 ; trois workers distincts
+terminés0/joints, chacun7campagnes/37groupes/4prérequis. Six diagnostics
+120/−2/1/−2/1/120 conformes, primaires/secondaires séparées ; vrai secours
+110,289604245s, enfant−9 joint. Finish refusé et pipe fermé ont leurs clôtures
+natives ; dernier checkpointcompleted ne remplace pas le retour120.42images
+originales inspectées ; limites075/113 conservées.19naissances terminées et
+troiscgroupsvides, HTTP200 lié à son UUIDSQL/hash/instance/consumer, purges,
+configuration/référence/budgets/5982/huit0 et onze migrations/intégrités/FK
+recoupés ;42backend/quatreHTTPSno-store identiques. Zéro groupe ajouté au543.
+
+Scelleur initial1 avant écriture publique sur __file__ absolu, original et
+métadonnées conservés ; nouvelle copie -paths0 sans rejouer les campagnes.
+Revue a ajouté le contrôle exact de la référence et les six flux des suites
+avant exécution. Preuve : storage-observer-finalization-current-dev-2026-11-24,
+191reçus, TAR532+7, brut10225723/gzip3681472. Vérification indépendante sansP1/P2 ;
+principal : septSHA/HEAD/statut inchangés.800rapprochements,776SHA courants et
+24observations d'alias historiques distinguées des archives immuables ; aucun
+protocole brut/secret/backupSQLite publié.143.5 reste ouverte pour le nominal.
+
+Reprendre les nouvelles copies des collecteurs du prochain49 sur532sources,
+avec le nouveau couple observe-storage-response-finalization /
+run-storage-response-observer-finalization. Base de publication effective :
+publish-schedules-complete-six-refusals.py, pas l'ancien publisher530 simple.
+Conserver les six rouges et les époques147/premier32 séparées ; les trois ciblés
+verts et six négatifs contribuent0 au49 et n'entrent pas dans excluded_workers.
+Nouveau nom de preuve inédit, sources synchronisées et provenance pendant la
+vie du worker, puis49entier et32sur le même vecteur ; aucun530 exécuté modifié.
+SLS-144 est déjà inscrite avec ses neuf critères et reste à développer après081/072.

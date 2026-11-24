@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- SLS-143.5 : [six négatifs et trois passages ciblés réels qualifiés](docs/evidence/storage-observer-finalization-current-dev-2026-11-24.json)
+  surc5e1eff/532/f016 : pilote0, clients120/−2/1/−2/1/120 conservés,
+  secours110s, restitutions et corrélationHTTP/SQL vérifiés. Trois fois37groupes,
+  42captures inspectées,19naissances/troiscgroups fermés et état natif conservé.
+  Scellement et vérification indépendants acquis ; nominal du nouveau49 puis32
+  encore dus, aucun groupe ajouté au543 et unité toujours ouverte.
+
 - SLS-143.5 : pilote des six fautes et trois vrais workers ciblés codé et
   relu sansP1/P2, avec barrière native sur rapport, erreurs/restitutions et
   jonctions réelles. Sept programmes exacts livrés dans un lot préparé avec

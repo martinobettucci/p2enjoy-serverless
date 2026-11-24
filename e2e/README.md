@@ -606,7 +606,7 @@ en mémoire ; les rapports et résultats systemd sont conservés dans .local/e2e
 
 Pour qualifier les finalisations SLS-143.5, l'extension
 `python3 -B e2e/schedules-worker.py start --scope storage-console-focused`
-est implémentée, avant qualification E2E. Elle lance les sept vrais cas de la
+est qualifiée par trois passages réels distincts. Elle lance les sept vrais cas de la
 portée ciblée existante,37groupes et quatreprérequis, avec le même SSO privé.
 Dossier storage-console-worker-UUID, unité serverless-storage-console-regressions-UUID,
 rapport storage-console-focused.json et archives storage-console-run-UUID ;
@@ -614,7 +614,9 @@ rapport storage-console-focused.json et archives storage-console-run-UUID ;
 Le défaut schedules et ses49/543/18 sont conservés. Les métadonnées run_id,
 commit/baseline, dates et rapports exacts sont produits par la suite réelle.
 [Six négatifs et leurs passages](../docs/SCHEMA_011_REGRESSIONS.md#négatifs-des-finalisations-du-moniteur--sls-1435)
-ont leur pilote codé et relu sansP1/P2, avant première exécution.
+ont leur [preuve réelle](../docs/evidence/storage-observer-finalization-current-dev-2026-11-24.json) :
+pilote0, clients120/−2/1/−2/1/120 attendus, trois passages7/37/4 et42captures
+inspectées ; restitutions et corrélationHTTP/SQL recoupées. Aucun cumul au543.
 Le [lot des sept programmes](../docs/evidence/storage-observer-finalization-programs-prepared-2026-11-24.json)
 conserve les octets/SHA du pilote, de la barrière et des moniteurs, ainsi que
 les deux helpers historiques inchangés. Son état prepared-not-executed est
@@ -655,8 +657,11 @@ Après sources synchronisées et SPARK DEV au repos, sans autre banc actif :
 SSO sont lus sur stdin privée une seule fois puis gardés en mémoire. Les
 trois vrais workers ciblés restent en série, chacun terminé et joint avant
 le suivant. Leurs captures fraîches restent à inspecter après l'exécution.
-Six diagnostics/110s réel, trois passages7/37/4 et nouvelles intégrations49/32
-restent dus ; aucune qualification déduite de cette livraison de code.
+Les six diagnostics, dont le secours110,289604245s, et les trois passages7/37/4
+sont acquis dans la preuve ci-dessus. Chaque nouvelle exécution exige ses
+propres originaux et clôtures. Le nominal du nouveau49 puis32sur le même
+vecteur restent dus ; le lot prepared-not-executed conserve son état historique
+à sa publication et ne remplace pas la preuve d'exécution ultérieure.
 
 Le passage49/543 historique ci-dessus correspond à l'image433 ; sa régression
 sur011 est acquise par le socle du24novembre en tête de ce document.
