@@ -11807,6 +11807,13 @@ archives lisibles. Syntaxes et diff contrôlés, cardinalité532. Aucun nouveau
 worker ou diagnostic exécuté ; relecture avant checkpoint de code, puis copies
 neuves des moniteurs et pilote des six fautes à réaliser.
 
+Première revue des deux nouvelles copies privées : P2 de fraîcheur avant tout
+passage, un ancien focused commands vide au même commit peut être accepté
+pendant le démarrage d'un nouveau worker. Décision avant correction : ouvrir
+le rapport et relever fstat/mtime sur ce même FD avant de retenir ses octets/
+SHA/run_id ; exiger mtime depuis launch.created_at_ns, puis même borne/run_id
+aux lectures suivantes. Aucun retry ; contexte ancien refusé avant injections.
+
 Relecture du checkpointworker sansP1/P2 ; principal : huitSHA/HEAD6ce7853/
 statut inchangés. Septcas9+10+7+2+4+1+4 et quatreprérequis recoupés dans les
 sources ; formats de captures compatibles. Aucune exécution par le relecteur.

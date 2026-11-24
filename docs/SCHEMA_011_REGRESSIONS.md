@@ -260,6 +260,13 @@ Pour schedules, l'admission reste pendant storage-preparations. Pour focused,
 elle accepte le vrai état avant storage-console-api ou ce cas encore vivant ;
 un cas déjà terminé reste refusé. Commande canonique, image f016, fenêtre900s
 d'attente, trace90s, réponse80s et SQL/consumer corrélés restent inchangés.
+
+Le rapport initial est ouvert une seule fois et sa fraîcheur est vérifiée par
+fstat sur ce même FD : mtime au moins égal à la création du lancement, octets
+et SHA conservés avec run_id. Un ancien focused au même commit ne peut servir
+de contexte au nouveau worker, même avec commands vide. Les lectures suivantes
+conservent cette borne et ce run_id ; une absence ou une divergence reste refusée.
+
 La portée ciblée est retenue plutôt que six replays49 : elle exerce les mêmes
 parcours avec de vrais marqueurs, et laisse finir chaque campagne et son cleanup.
 
