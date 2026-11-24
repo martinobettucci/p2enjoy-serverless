@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-147.3 : contrôleur des quatre négatifs implémenté pour qualification,
+  avec identités/inodes/pidfd, retours réels et restitutions indépendantes.
+  Syntaxe contrôlée et relecture sansP1/P2 résiduel ; aucune preuve de ces
+  nouveaux diagnostics encore acquise.
+
 - SLS-147.3 : quatre négatifs du préparateur spécifiés avant code, via vraies
   permissions/chemin/pipe et expiration240s du seulSSH possédé. Retour client
   nonnul, primaire/secondaires et restitution exigés, zéro groupe ajouté.

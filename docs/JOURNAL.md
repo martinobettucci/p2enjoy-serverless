@@ -11714,3 +11714,19 @@ strictes par phase/type/errno. L'exploration confirme aussi le risque de stopper
 SSH avant EOF : observer sa vraie écriture vers le stdout possédé jusqu'au JSON
 natif complet avant livraison SIGSTOP/détachement, sans mémoire/buffer modifié.
 Le préparateur garde ses240s et son retour SSH inconnu ; aucun nouveau cas exécuté.
+
+Corrections du contrôleur avant premier passage : masque exact restauré avant
+exec et après acquisition du pidfd, secours sur la session du filsPopen non
+récolté, fermeture indépendante des FD épinglés ; détachement de l'observateur
+avant restitution. Les quatre transports disponibles sont empreintés même
+après refus, le pipe fermé reste explicitement sans capture, et le recoupement
+natif final est tenté indépendamment. Les secondaires sont comparées exactement
+par phase/type/errno et les conservations natives exigées. Syntaxe Python et
+diff passent ; relecture et quatre diagnostics réels restent dus.
+
+Relecture corrigée sansP1/P2 résiduel. Le principal recoupe les huitSHA,
+HEAD238cd33 et statut strictement égaux au gel ; aucune action distante ni
+exécution par le relecteur. Les troisP2 sont levés statiquement, sans présumer
+du fonctionnement Linux réel. Le README du banc est actualisé : nominal34/531
+acquis, quatre diagnostics et nouveaux49/32sur532 encore dus. Code committé
+avant synchronisation ciblée et premier passage réel.

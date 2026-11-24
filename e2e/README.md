@@ -774,13 +774,23 @@ Un seul scénario à la fois en DEV ;070reste ouverte pour les preuves résiduel
 
 ## Lecteurs vivants de l’éditeur — qualification ciblée DEV
 
+Les quatre diagnostics SLS-147.3 du préparateur se lancent en série avec
+`python3 -B e2e/editor-worker-preparation-failures.py`, sur le seulSPARKDEV au
+repos et sans autre banc actif. Le contrôleur est implémenté pour qualification :
+permissions, chemin de rapport, pipe et propreSSH réellement contraints,
+240s conservées. Retours clients nonnuls et erreurs/restitutions doivent être
+validés avant son succès0 ; zéro groupe fonctionnel ajouté. Preuves encore dues.
+
+
 Préparation courante SLS-147, avant le ciblé et sans autre banc actif :
-`python3 -B e2e/prepare-editor-worker-control.py`. Cette commande est implémentée
-pour qualification ; elle sauvegarde les deux bases du SPARK DEV puis demande
+`python3 -B e2e/prepare-editor-worker-control.py`. Cette commande sauvegarde
+les deux bases du SPARK DEV puis demande
 un seul redémarrage de l'API, avec conservation des identités et données.
 La suite32 la place immédiatement avant ce client, après les six précédents.
 Le reçu privé est distinct des groupes et des prérequisSSO. Les preuves
-courantes du préparateur et du nouveau passage9/25 restent à produire.
+nominales du préparateur et du passage9/25 sont
+[acquises sur1006ba1/531](../docs/evidence/editor-worker-preparation-current-dev-2026-11-24.json).
+Les quatre négatifs et les nouveaux49/32 sur532sources restent dus.
 
 
 `node e2e/code-editor-read-concurrency.mjs` part de l’accueil et du vrai SSO,

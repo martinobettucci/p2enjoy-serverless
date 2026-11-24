@@ -8,7 +8,7 @@ explicitement identifiée. Quatrelecteurs, dont troisclonés et unpréexistant,
 vrai429 en23,6ms, sept handlers et purgephysique ; sixgardes/helpers terminés,
 huitcompteurs0 et42backend/quatreHTTPSno-store/5982conservés.147.4 est close ;
 les fautes de transport/publication du nouveau préparateur et le prochain
-socle49 puis32 sur531sources restent dus. Le premierprécontrôle arrêté avant
+socle49 puis32 sur532sources restent dus. Le premierprécontrôle arrêté avant
 SSO/Node, faute de sources entièrement synchronisées, ajoute zéro groupe.
 
 

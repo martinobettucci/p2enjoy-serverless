@@ -6271,3 +6271,11 @@ jonctions obligatoires. Chaque diagnostic compte0groupe ; les clients doivent
 rester nonnuls avec première erreur et secondaires distincts. Nouveau contrôleur
 maintenu, prochain vecteur532 ; preuves actuelles34/531 et49/530 inchangées.
 Ces quatre diagnostics et les nouveaux49/32 restent à exécuter.
+
+
+147.3 : contrôleur des quatre négatifs implémenté pour qualification. Il lie
+les flux au CLI par leurs FD/inodes et les processus par naissance/namespace/
+pidfd ; les fautes de fichiers et pipe restent privées, le timeout240s inchangé.
+Restitution indépendante des permissions/répertoire/processus, première erreur
+et secondaires séparées. Syntaxe contrôlée et relecture sansP1/P2 résiduel ;
+les quatre exécutions réelles restent dues.
