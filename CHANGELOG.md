@@ -2,6 +2,10 @@
 
 ## [Non publié]
 
+- SLS-147.3 : ciblage des écritures corrigé par l'inode possédé plutôt que le
+  numéro de FD, avec FD/temps/statuts réels et retour du CLI secouru conservés.
+  Syntaxe contrôlée ; nouveau passage E2E encore dû.
+
 - SLS-147.3 : [premier passage négatif conservé](docs/evidence/editor-worker-negative-first-failed-dev-2026-11-24.json),
   trois diagnostics acquis (clients1/1/120), quatrième non armé et contrôleur1.
   Résultat natif complet mais statutSSH/FD non retenus ; secours joint et état

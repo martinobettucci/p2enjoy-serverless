@@ -6291,3 +6291,7 @@ retenus restent inconnus. Filtre FD1 inadéquat établi statiquement contre les
 FD dupliqués d'OpenSSH ; correction par inode et conservation des vrais statuts
 spécifiées avant code dans le contrat147.3. Nouveau passage des quatre diagnostics
 sur correction explicite dû, aucun timeout240s qualifié par ce refus.
+
+Correction du contrôleur implémentée localement : inode aux deux arrêts du
+syscall, FD/temps/statuts conservés même sur refus et retour du CLI secouru.
+Syntaxe contrôlée et relecture sansP1/P2 ; nouveau passage réel encore dû.

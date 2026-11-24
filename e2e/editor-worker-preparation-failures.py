@@ -119,13 +119,18 @@ class PayloadWriter(NativeObserver):
     def __init__(self, owner, descriptor):
         super().__init__(owner['pid'])
         self.owner, self.descriptor, self.last_status = owner, descriptor, None
+        self.exit_code, self.write_events = None, []
 
     def wait(self, deadline):
         while time.monotonic() < deadline:
             pid, status = os.waitpid(self.pid, os.WNOHANG | 0x40000000)
             if pid:
+                self.last_status = status
+                if os.WIFEXITED(status) or os.WIFSIGNALED(status):
+                    self.exit_code = os.waitstatus_to_exitcode(status)
+                    self.attached, self.stopped = False, False
                 assert os.WIFSTOPPED(status), 'owned_ssh_exited_during_observation'
-                self.stopped, self.last_status = True, status
+                self.stopped = True
                 return os.WSTOPSIG(status)
             time.sleep(.001)
         raise TimeoutError('owned_ssh_write_deadline')
@@ -134,6 +139,18 @@ class PayloadWriter(NativeObserver):
         assert self.last_status is not None
         sig = os.WSTOPSIG(self.last_status)
         return sig if self.last_status >> 16 == 0 and sig != (signal.SIGTRAP | 0x80) else 0
+
+    def matches_stdout(self, descriptor, expected):
+        try:
+            info = Path('/proc', str(self.pid), 'fd', str(descriptor)).stat()
+        except FileNotFoundError:
+            return False
+        return (info.st_dev, info.st_ino, info.st_uid) == (
+            expected['device'], expected['inode'], expected['uid']) and stat.S_ISREG(info.st_mode)
+
+    def observation(self):
+        return {'last_wait_status': self.last_status, 'observed_exit_code': self.exit_code,
+                'write_events': self.write_events, 'attached': self.attached, 'stopped': self.stopped}
 
     def complete_then_stop(self, path, expected):
         owner = same_process(self.owner)
@@ -151,9 +168,18 @@ class PayloadWriter(NativeObserver):
                 continue
             op, args = self.info()
             if op == 1:
-                pending = args[0] if args[0] in (1, 20) and args[1] == 1 else None
+                pending = None
+                if args[0] in (1, 20) and self.matches_stdout(args[1], expected):
+                    assert len(self.write_events) < 64, 'owned_stdout_write_event_limit'
+                    pending = {'syscall': args[0], 'fd': args[1],
+                               'entry_monotonic_ns': time.monotonic_ns()}
+                    self.write_events.append(pending)
                 continue
-            if op != 2 or pending is None or args <= 0:
+            if op != 2 or pending is None:
+                continue
+            pending.update(returned_bytes=args, exit_monotonic_ns=time.monotonic_ns())
+            assert self.matches_stdout(pending['fd'], expected), 'owned_stdout_fd_changed'
+            if args <= 0:
                 continue
             check_file(path, expected)
             assert path.stat().st_size <= 1024 ** 2, 'native_result_limit'
@@ -163,8 +189,12 @@ class PayloadWriter(NativeObserver):
             except (json.JSONDecodeError, UnicodeDecodeError):
                 continue  # A later real write must complete this one bounded response.
             assert native['completed'] and native['restart_exit_code'] == 0
+            assert native['failure'] is None and native['secondary_errors'] == []
             assert native['same_cid_image'] and native['reference_unchanged'] and native['protected_tables_unchanged']
-            result = {'syscall': pending, 'write_returned_bytes': args, 'bytes': len(raw),
+            result = {'syscall': pending['syscall'], 'fd': pending['fd'],
+                      'entry_monotonic_ns': pending['entry_monotonic_ns'],
+                      'exit_monotonic_ns': pending['exit_monotonic_ns'],
+                      'write_returned_bytes': args, 'bytes': len(raw),
                       'sha256': sha(raw), 'received_at_ns': time.time_ns(),
                       'native_result': native}
             # Establish a signal-delivery stop; DETACH from a syscall stop alone
@@ -185,6 +215,7 @@ class PayloadWriter(NativeObserver):
                 assert time.monotonic() < stop_deadline, 'owned_ssh_stop_not_confirmed'
                 time.sleep(.001)
             result['detached_stopped_at_ns'] = time.time_ns()
+            result['detached_stopped_monotonic_ns'] = time.monotonic_ns()
             return result
 
     def release_trace(self):
@@ -376,12 +407,16 @@ def run_case(mode, work, source_commit):
                 observer.release_trace()
             except BaseException as error:
                 cleanup_error('trace-detach', error)
+            value['ssh_write_observation'] = observer.observation()
         if child is not None and child.returncode is None:
             try:
                 value['session_members_joined'] = kill_owned_session(child)
                 value['client_joined_on_failure'] = True
             except BaseException as error:
                 cleanup_error('client-join', error)
+            finally:
+                if child.returncode is not None:
+                    value['actual_client_exit_code'] = child.returncode
         if client_fd is not None:
             try:
                 os.close(client_fd)

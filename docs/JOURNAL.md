@@ -11747,3 +11747,14 @@ La cause précise du premier syscall reste non observée. Décision avant code :
 recouper l'inode possédé à l'entrée/sortie du write réel, conserver FD/temps/
 statuts même en refus et code du CLI secouru. Garder bornes, signaux, oracles et
 quatre cas ; premier rouge distinct du prochain passage corrigé.
+
+Correction locale : chaque write/writev est rapproché par inode/UID/type
+à l'entrée et à la sortie, FD réel et temps monotones conservés, sans lecture
+de mémoire. Dernier statutwaitpid et retour observé sont retenus avant tout
+refus ; retour du CLI secouru persisté. Syntaxe et diff passent. Aucun nouveau
+diagnostic exécuté ; relecture puis passage corrigé des quatre cas dus.
+
+Relecture de la correction par inode sansP1/P2 ; les huitSHA, HEADfdc92df et
+statut sont recoupés inchangés par le principal. Préparateur et preuve du premier
+refus inchangés ; revue statique sans test ni action distante. Le code corrigé
+est committé/poussé avant son nouveau passage des quatre diagnostics.
