@@ -77,6 +77,7 @@ bloquée est sautée et son blocage est nommé.
 | 3 | [SLS-143](#sls-143) Invocation réelle refusée dans le parcours de stockage | Corriger | `[~]` | SLS-065 | cette unité, [CONSOLE_STORAGE](CONSOLE_STORAGE.md) |
 | 3 | [SLS-145](#sls-145) Barrière de réclamation non reçue à l’échéance | Corriger | `[~]` | SLS-078 | cette unité, [SCHEDULE_RECOVERY](SCHEDULE_RECOVERY.md) |
 | 3 | [SLS-146](#sls-146) Barrière de commit de publication ZIP non observée | Corriger | `[~]` | SLS-050, SLS-074 | cette unité, [ADMISSION](ADMISSION.md) |
+| 3 | [SLS-147](#sls-147) Précondition de création de workers dans les régressions de lecture | Corriger | `[~]` | SLS-070, SLS-072 | cette unité, [CODE_EDITOR_READ_CONCURRENCY](CODE_EDITOR_READ_CONCURRENCY.md) |
 | 3 | [SLS-132](#sls-132) Rétentions authentiques sur le schéma011 | Qualifier | `[~]` | SLS-078, SLS-072 | cette unité |
 | 3 | [SLS-133](#sls-133) Débit du nominal de rétention sous journal saturé | Corriger | `[~]` | SLS-072, SLS-132 | cette unité |
 | 3 | [SLS-134](#sls-134) Diagnostic discriminant de l’observateur de source | Corriger | `[~]` | SLS-132, SLS-133 | [INVOCATION_SOURCE_RETENTION_VOLUME](INVOCATION_SOURCE_RETENTION_VOLUME.md#diagnostic-discriminant-courant--sls-134) |
@@ -6150,3 +6151,72 @@ physiquement, quatre gardes de reprise et trois coupures137 terminées, huit0,
 42backend/quatreHTTPSno-store, manuel84 et5982artefacts conservés. Scelleur0,
 brut18028443octets/gzip5946405, source/TAR exacts et sixrouges exclus.32/276
 reste dû avec preuve49 déjàcommittée et même vecteur530 ; unité toujours[~].
+
+
+<a id="sls-147"></a>
+## SLS-147 — Précondition de création de workers dans les régressions de lecture
+
+Statut : [~]. Nature : Corriger (banc de preuve). Ordre : 3.
+Dépend de : SLS-070, SLS-072. Contrats : cette unité,
+[CODE_EDITOR_READ_CONCURRENCY](CODE_EDITOR_READ_CONCURRENCY.md),
+[SCHEMA_011_REGRESSIONS](SCHEMA_011_REGRESSIONS.md).
+
+Constat du 24 novembre 2026 : le premier complément32, worker
+`d7788bf6a7834cc88444bfd5c705cdaf`, gel `9e66a79` / 530 sources / image f016,
+termine réellement1 dans `code-editor-read-concurrency`. Six campagnes et
+80 groupes sont complets ; sept checks de la septième campagne passent, le
+huitième échoue et le neuvième n'est pas atteint. Aucun total276 n'est acquis.
+Les 27 captures fraîches de code-editor-ui sont inspectées individuellement.
+Le rapport et son SHA restent ceux du premier passage, sans relance.
+
+Le SHA du message AssertionError correspond exactement à
+`fresh_worker_clone_not_observed`, ligne104. L'assertion précédente exige déjà
+quatre lecteurs ; la cinquième requête429 n'est pas encore émise. Le contrat
+d'origine exige un contrôle fraîchement redémarré pour prouver la création
+native de workers ; la suite32 n'établit pas cette préparation avant ce client,
+après six autres campagnes. La cause précise des décisions de création du
+pool et les métadonnées held non conservées restent à distinguer de ce défaut
+de précondition établi. Aucun défaut de capacité du produit n'est déduit.
+
+Décision avant correction : conserver le premier rouge et ses programmes,
+recouper toutes les purges et gardes, puis établir une préparation explicite
+et bornée pour éprouver réellement les nouveaux workers, en plus des workers
+existants. Conserver l'exigence TRACECLONE et les quatre lectures exactes,
+le vrai429/Retry-After, la santé HTTP, les mêmes bornes et les six restitutions.
+Tout redémarrage DEV préparatoire est précédé de sauvegardes SQLite natives,
+d'un repos sans garde/traceur et d'une baseline explicite ; CID/image/données,
+référence et configuration restent conservés. Sa portée et son emplacement
+sont documentés avant le code. Aucun résultat substitué, retry, skip ou
+suppression d'assertion pour rendre le passage vert.
+
+- [x] SLS-147.1 Sceller ce premier complément incomplet : sept rapports exacts,
+  TAR530, transport client/worker1, 80 groupes antérieurs/sept checks partiels,
+  27 originaux inspectés et zéro complément global. Recouper worker/lanceur/
+  cgroup dans l'espacePID épinglé, purges et révocations des ressources possédées,
+  gardes/traceurs, réservations, référence/configuration et5982artefacts.
+- [ ] SLS-147.2 Rapprocher l'assertion exacte, les préconditions documentées et
+  celles effectivement établies par la suite ; conserver les observations
+  manquantes et décider la préparation avant son implémentation.
+- [ ] SLS-147.3 Préparer et prouver réellement la création de workers sans
+  affaiblir les six scénarios, les bornes ni la restitution ; même déploiement
+  identifié, données et configuration conservées, première exception et
+  erreurs de finalisation distinctes. Pas d'action sur FORGE.
+- [ ] SLS-147.4 Neuf groupes complets sur le contrôle déployé puis critères
+  communs frais avec captures inspectées, nettoyages et clôtures recoupés.
+- [ ] SLS-147.5 Nouveau complément32/276/huit prérequis depuis son début sur
+  un gel explicite ; socle49 lié aux mêmes sources applicables, sans cumul
+  des80 antérieurs ni des sept checks partiels. Toute modification du vecteur
+  indexé réévalue avant lancement le rattachement au49 ; aucun ancien résultat
+  n'est présenté comme un rejeu du nouveau code.
+
+
+147.1 — [Premier complément scellé](evidence/additional-reader-clone-first-failed-dev-2026-11-24.json) :
+sept rapports exacts et TAR530/Git9e66,80antérieurs/septpartiels/zéroglobal.
+Scelleur0,27originaux inspectés ; clôture indépendante0 des41fonctions/sept
+namespaces, sixgardes/helpers terminés et threads sans traceur. Worker1,
+lanceurjoint/naissances terminées/cgroupvide dans le namespacehôte épinglé,
+huitcompteurs0,11migrations/intégrités/FK et42backend/quatreHTTPSno-store,
+configuration/référence/5982conservés. Le retour brut de l'outil rétenteur de
+lancement manque après compaction ; ses reçus complets et leur épinglage vivant
+restent exacts, sans retour inventé. Métadonnées held du dernier cas non retenues dans cette preuve initiale, ni dans le rapport client.
+Aucun nouveau32 ni correction fonctionnelle acquis par ce scellement.

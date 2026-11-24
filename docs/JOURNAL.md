@@ -11581,3 +11581,48 @@ L’analyse recoupe988références vers427chemins,67rapports, TAR530/Git et
 écriture, inspection de pixels, campagne, opération distante ou modificationGit
 par les sous-agents ; zéro groupe ajouté. Seul ce bilan de revue est ajouté au
 journal après leurs deuxretours, sans modifier la preuve ni les530sources.
+
+
+## 24 novembre 2026 — Premier complément32 arrêté : SLS-147
+
+Le worker d7788bf6, lancé sur9e66a79/530/f016 après commit du socle49, termine1
+après six campagnes/80groupes. Le client code-editor-read-concurrency termine1
+au huitième check : SHA du message exactement égal à
+fresh_worker_clone_not_observed, avant émission du cinquième GET429.
+Sept checks passent, le neuvième n'est pas atteint ; cleanup_errors vide.
+Les27originaux de code-editor-ui sont ouverts séparément et leur reçu enregistré.
+Worker finalisé, unité arrêtée et lanceur joint ; clôture native indépendante
+et scellement du premier rouge restent à réaliser. Aucun nouveau test relancé.
+
+Le contrat de lecture demandait déjà un contrôle frais pour créer des workers,
+mais la suite32 n'établit pas cette précondition après ses six campagnes.
+SLS-147 inscrit le défaut, le diagnostic et la préparation à prouver avant code ;
+aucune panne produit déduite de cette assertion. Les530sources du lancement et
+ses preuves restent intacts, seuls ce registre et sa traçabilité évoluent.
+
+
+Clôture147 indépendamment terminée0 : les sept campagnes sont recoupées à
+nouveau en lecture native,41fonctions purgées/septnamespaces retirés, tokens
+révoqués et huitcompteurs0. Worker/lanceur naissances terminées et cgroupvide
+dans le namespacePID/boot épinglé vivant. Lecture des sixdossiers de garde0 :
+identités/programmes gelés/reçus conservés, derniers reçus complets, helpers
+terminés et tous les threads actuels sans tracer/arrêt. L'EMFILE attendu du
+secours reste un vrai reçu d'échec distinct de son finish normal ultérieur.
+Recoupement embarqué0 :42backend et quatreHTTPSno-store égaux à l'image/source,
+configuration/référence et5982artefacts conservés. Aucun redémarrage effectué.
+
+[Scellement147](evidence/additional-reader-clone-first-failed-dev-2026-11-24.json) terminé0 :
+sept rapports et leurs logs exacts,27captures/notes, sixprogrammes auxiliaires,
+TAR530, clôtures et transport. Brut5699567octets, gzip1003498octets. Le retour
+brut de l'appel outil du rétenteur de lancement n'a pas survécu à la compaction ;
+ses quatre reçus complets, archivage et pin vivant restent conservés, sans
+inventer son code de sortie. Unité147.1 prouvée,147.2–.5 restent ouvertes.
+
+
+Revue et analyse indépendantes147.1 terminées sansP1/P2 ; le principal recoupe
+HEAD, statut et septSHA inchangés au gel avant/après. Les analyses retrouvent
+les sept rapports, retours0/0/0/0/0/0/1, TAR530 exactGit,27captures sousSHA,
+41purges/septnamespaces, sixgardes et clôtures ; aucune campagne ni opération
+distante par les sous-agents. Aucun secret sous clé interdite/JWT/p2s détecté.
+Seules cette trace et la précision « dans cette preuve initiale/le rapport
+client » du manque held sont ajoutées après revue, sans modifier les preuves.

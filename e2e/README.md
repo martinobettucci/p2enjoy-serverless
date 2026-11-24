@@ -24,13 +24,23 @@ retient21sources de programmes et quatre reçus auxiliaires, dont la revue
 statique et deux refus de lecteurs : clé `checks` absente du rapport initial
 encore incomplet, puis identifiant donné au collecteur qui attendait un chemin.
 Leurs lectures corrigées terminent0, sans rejeuE2E ni changement du produit.
-Les sources32 préparées restent non exécutées ; la revue statique et le nominal
+À la clôture de ce49, les sources32 préparées restaient non exécutées ; la revue statique et le nominal
 de l’observateur ne qualifient pas ses finalisations négatives143.5.
 
 Scelleur réellement terminé0 ; gzip5946405octets/SHA`d81b8235…`, brut18028443/
 SHA`554eb91b…`. Le complément32/276, ses huitSSO et ses captures restent dus.
 Son lancement exige cette preuve49 déjà committée et le même vecteur530.
 Les checkpoints ci-dessous décrivent leurs résultats propres, antérieurs à ce49.
+
+Le [premier complément32](../docs/evidence/additional-reader-clone-first-failed-dev-2026-11-24.json)
+lancé ensuite sur9e66a79/530/f016 termine1 dans code-editor-read-concurrency :
+six campagnes/80groupes puis sept checks passés et un échec, neuvième non atteint.
+SHA exact de fresh_worker_clone_not_observed avant émission du cinquième GET ;
+le contrat demandait un contrôle frais que la suite ne prépare pas ici.
+SLS-147 porte ce reste. Sept rapports,27originaux inspectés et TAR530 conservés ;
+41fonctions/septnamespaces purgés, sixhelpers/gardes terminés et threads sans
+traceur. Worker/lanceur/cgroup fermés, huit0 et42backend/quatreHTTPSno-store/
+configuration/référence/5982conservés. Aucun276 acquis ni nouveau replay effectué.
 
 Le [ciblé courant de confirmation ordonnée](../docs/evidence/storage-confirmation-order-current-dev-2026-11-23.json)
 passe 40 groupes sur les 530 sources `98daf9f` et l’image f016 : quinze mutations,

@@ -2,6 +2,15 @@
 
 ## [Non publié]
 
+- SLS-147 : premier complément32 arrêté dans la création native de workers,
+  après six campagnes/80groupes et sept checks partiels. Assertion exacte
+  `fresh_worker_clone_not_observed` ; précondition de contrôle frais absente
+  de la suite après ses six premières campagnes. Premier rouge conservé,
+  [preuve scellée](docs/evidence/additional-reader-clone-first-failed-dev-2026-11-24.json),
+  worker1 finalisé/lanceur joint/cgroupvide,27captures inspectées,41purges/sept
+  namespaces et sixgardes fermés. Huit0,42backend/quatreHTTPSno-store,
+  référence/configuration/5982conservés ; correction encore due, aucun276 revendiqué.
+
 - Régressions011/f016 du24novembre : [socle49 complet](docs/evidence/schedules-regressions-schema011-query-dev-2026-11-24.json),
   543groupes/18prérequis sur530sources `cd01985`,120originaux inspectés et six
   anciensrouges exclus. Quatre gardes/troiscoupures137 recoupées,127fonctions/

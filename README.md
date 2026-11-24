@@ -11,8 +11,14 @@ quatre ressources HTTPS no-store et 84 paragraphes du manuel sont recoupés.
 La première réponse de stockage observée est liée à son invocation et à son
 consommateur réels, HTTP200 et acquisition acceptée ; le traceur est terminé.
 
-Le complément32commandes/276groupes reste à exécuter après commit de cette
-preuve, avec le même vecteur530. SLS-072/132/133/134/143/145/146 restent ouverts
+Le [premier complément32](docs/evidence/additional-reader-clone-first-failed-dev-2026-11-24.json)
+est arrêté sur `fresh_worker_clone_not_observed` : six campagnes/80 groupes
+antérieurs, sept checks partiels, zéro complément global qualifié. Le worker1
+est fermé et ses41 fonctions/sept namespaces purgés, six gardes terminées,
+27 captures originales inspectées et huit compteurs à0. SLS-147 porte la
+précondition de contrôle frais absente du banc ; le contrôle déployé reste
+inchangé. Un nouveau32/276 reste dû après correction et rattachement explicite
+des sources. SLS-072/132/133/134/143/145/146 restent ouverts
 selon leurs critères ; les causes anciennes non observées et les branches
 négatives des nouveaux finaliseurs143.5 gardent leurs limites. Les six passages
 rouges et les ciblés antérieurs ci-dessous restent propres à leur époque et
