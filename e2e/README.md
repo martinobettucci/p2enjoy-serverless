@@ -614,7 +614,49 @@ rapport storage-console-focused.json et archives storage-console-run-UUID ;
 Le défaut schedules et ses49/543/18 sont conservés. Les métadonnées run_id,
 commit/baseline, dates et rapports exacts sont produits par la suite réelle.
 [Six négatifs et leurs passages](../docs/SCHEMA_011_REGRESSIONS.md#négatifs-des-finalisations-du-moniteur--sls-1435)
-restent à coder/qualifier ; aucune preuve déduite de cette extension.
+ont leur pilote codé et relu sansP1/P2, avant première exécution.
+Le [lot des sept programmes](../docs/evidence/storage-observer-finalization-programs-prepared-2026-11-24.json)
+conserve les octets/SHA du pilote, de la barrière et des moniteurs, ainsi que
+les deux helpers historiques inchangés. Son état prepared-not-executed est
+une livraison de code, sans résultat de worker ni succès E2E annoncé.
+
+Restaurer les programmes privés depuis ce lot versionné, en refusant toute
+différence avec un fichier déjà présent :
+
+```sh
+python3 -B - <<'PY'
+# @spec docs/BACKLOG.md#sls-143 | docs/SCHEMA_011_REGRESSIONS.md#négatifs-des-finalisations-du-moniteur--sls-1435
+from pathlib import Path
+import hashlib, json
+root = Path.cwd().resolve()
+bundle = json.loads((root / 'docs/evidence/storage-observer-finalization-programs-prepared-2026-11-24.json').read_bytes())
+assert bundle['format'] == 'p2enjoy-serverless-qualification-programs-v1'
+assert len(bundle['programs']) == 7
+for item in bundle['programs']:
+    path = root / item['path']
+    assert path.parent == root / '.local' and not path.is_symlink()
+    raw = item['text'].encode()
+    assert len(raw) == item['bytes'] and hashlib.sha256(raw).hexdigest() == item['sha256']
+    compile(raw, item['path'], 'exec')
+    assert not path.exists() or path.read_bytes() == raw
+for item in bundle['programs']:
+    path = root / item['path']
+    if not path.exists():
+        path.parent.mkdir(mode=0o700, exist_ok=True)
+        with path.open('xb') as stream:
+            stream.write(item['text'].encode())
+        path.chmod(0o600)
+print('Sept programmes exacts disponibles ; aucun scénario exécuté.')
+PY
+```
+
+Après sources synchronisées et SPARK DEV au repos, sans autre banc actif :
+`python3 -B .local/qualify-storage-observer-finalization.py`. Les identifiants
+SSO sont lus sur stdin privée une seule fois puis gardés en mémoire. Les
+trois vrais workers ciblés restent en série, chacun terminé et joint avant
+le suivant. Leurs captures fraîches restent à inspecter après l'exécution.
+Six diagnostics/110s réel, trois passages7/37/4 et nouvelles intégrations49/32
+restent dus ; aucune qualification déduite de cette livraison de code.
 
 Le passage49/543 historique ci-dessus correspond à l'image433 ; sa régression
 sur011 est acquise par le socle du24novembre en tête de ce document.

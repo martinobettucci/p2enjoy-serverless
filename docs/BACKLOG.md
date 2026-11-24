@@ -5786,6 +5786,15 @@ index532 inchangé en cardinalité et relecture sansP1/P2. Deux copies privées
 neuves des moniteurs sont préparées, nonrevues/nonexécutées ; pilote des six
 diagnostics et vrais passages restent dus. Les copies530 ne sont pas modifiées.
 
+Pilote des six fautes et trois vrais workers ciblés codé, syntaxe contrôlée,
+relecture des cinq nouveaux programmes sansP1/P2 résiduel. Le défaut de
+fraîcheur est corrigé par fstat sur le FD réellement lu ; le diagnostic stderr
+du contrôleur garde codes/jointure si save et stdout sont refusés. Le
+[lot de code préparé](evidence/storage-observer-finalization-programs-prepared-2026-11-24.json)
+livre sept programmes exacts, dont deux helpers historiques inchangés ;
+README du banc : restauration stricte et commande réelle. Aucun des six
+diagnostics ni des trois passages7/37/4 n'est encore exécuté ;143.5 reste[~].
+
 <a id="sls-144"></a>
 ## SLS-144 — Rapports de jobs et dashboards générés
 

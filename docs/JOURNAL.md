@@ -11821,6 +11821,20 @@ inclure les vrais états finished/joined/returncode dans ce diagnostic terminal,
 sans inférer un retour à partir de la seule disparition du fils. Primaire et
 secondaires inchangées ; null reste inconnu.
 
+Pilote des trois passages ciblés et six fautes implémenté. Barrière sur le FD
+réel du rapport après stdout initial, dans current() ; delivery-stop des
+signaux, PID/pidfd/UID/namespace, collisions et permissions possédées, sources/
+TAR et premières erreurs conservés. Les workers sont terminés puis joints,
+avec7/37/4 réels et contrôle natif final, avant le suivant. Casfinish après
+armement : lecture distante indépendante du reçu/unité/cgroup/agent ; aucune
+trace protocole brute ni sauvegardeSQLite lue.
+
+Relecture des cinq nouveaux programmes sansP1/P2 ; principal : cinqSHA/HEAD/
+statut inchangés au gel ebccb97. Les deuxhelpers historiques correspondent aux
+SHA de la preuve49/530. Lot préparé versionné76579octets, sept programmes sous
+SHA ; restauration documentée sans écrasement d'un programme différent. Aucun
+programme ni scénario de ce pilote n'a été exécuté ; premier passage réel dû.
+
 Relecture du checkpointworker sansP1/P2 ; principal : huitSHA/HEAD6ce7853/
 statut inchangés. Septcas9+10+7+2+4+1+4 et quatreprérequis recoupés dans les
 sources ; formats de captures compatibles. Aucune exécution par le relecteur.

@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-143.5 : pilote des six fautes et trois vrais workers ciblés codé et
+  relu sansP1/P2, avec barrière native sur rapport, erreurs/restitutions et
+  jonctions réelles. Sept programmes exacts livrés dans un lot préparé avec
+  restauration stricte ; aucune exécution ni preuve E2E de ce pilote acquise.
+
 - SLS-143.5 : worker storage-console-focused et ses archives/métadonnées
   réelles implémentés pour qualification ; septcas/37groupes/quatreprérequis,
   noms propres au stockage et défaut schedules conservé. Syntaxes contrôlées,
