@@ -1,5 +1,17 @@
 # Qualification de la plateforme
 
+Le [ciblé147 courant](../docs/evidence/editor-worker-preparation-current-dev-2026-11-24.json)
+passe9lectures puis25communs frais sur1006ba1/531/f016. Préparation native0,
+deuxbackups SQLite privés sous1001, un seulrestart0 et mêmesCID/image/données
+protégées/configuration/référence. Troisclones, unlecteurpréexistant, quatreFD/TID,
+429/Retry-After2 en23,557984ms et sept handlers ; purgephysique et sixgardes
+terminées.22originaux inspectés,42backend/quatreHTTPSno-store et5982conservés.
+Le précontrôle62368123 termine1 avantSSO/Node, nouveau fichier indexé non encore
+synchronisé ; diagnostic conservé, zéro groupe. Sources ensuite synchronisées,
+le passagec8212eab termine0 et les25communs8b73d8d3 terminent0, sans retry de
+scénario. Les négatifs du préparateur et nouveau49→32/531 restent dus.
+
+
 Le [socle courant011/f016](../docs/evidence/schedules-regressions-schema011-query-dev-2026-11-24.json)
 passe49campagnes/543groupes et18prérequis sur les530sources `cd01985`.
 Les120originaux frais sont inspectés par le principal :107déclarés sousSHA et

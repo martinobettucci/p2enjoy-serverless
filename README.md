@@ -1,5 +1,17 @@
 # P2Enjoy Serverless
 
+Le [ciblé de préparation des workers147](docs/evidence/editor-worker-preparation-current-dev-2026-11-24.json)
+passe34groupes réels sur1006ba1/531sources et f016 : neuflectures puis25communs
+frais,22captures inspectées. La préparation sauvegarde les deuxbases et conserve
+CID/image, tables protégées, configuration et référence ; nouvelle génération
+explicitement identifiée. Quatrelecteurs, dont troisclonés et unpréexistant,
+vrai429 en23,6ms, sept handlers et purgephysique ; sixgardes/helpers terminés,
+huitcompteurs0 et42backend/quatreHTTPSno-store/5982conservés.147.4 est close ;
+les fautes de transport/publication du nouveau préparateur et le prochain
+socle49 puis32 sur531sources restent dus. Le premierprécontrôle arrêté avant
+SSO/Node, faute de sources entièrement synchronisées, ajoute zéro groupe.
+
+
 Le [socle courant sur le registre011](docs/evidence/schedules-regressions-schema011-query-dev-2026-11-24.json)
 est qualifié le 24 novembre 2026 : **49 campagnes, 543 groupes, 18 prérequis et
 120 captures originales inspectées**, sur les 530 sources `cd01985` et l’image

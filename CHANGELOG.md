@@ -2,6 +2,13 @@
 
 ## [Non publié]
 
+- SLS-147 : [nominal34 qualifié](docs/evidence/editor-worker-preparation-current-dev-2026-11-24.json)
+  sur1006ba1/531/f016 : préparation0/deuxbackups/restart unique, neuflectures
+  puis25communs frais,22captures inspectées. Troislecteurs clonés/unpréexistant,
+  vrai429 en23,6ms, sept handlers, purge et sixgardes fermées. Premierprécontrôle
+  avantSSO/Node conservé à0groupe ;147.4close, négatifs du préparateur et
+  nouveau49/32 encore dus, produit/image/manuel inchangés.
+
 - SLS-147.3 : préparateur DEV implémenté pour qualification, avec deux backups
   SQLite privés, contrôles avant/après et un restart unique. La suite32 le place
   juste avant les lecteurs ; recensement initial et correspondance lecteurs/

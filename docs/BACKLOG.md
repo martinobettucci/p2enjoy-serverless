@@ -6197,11 +6197,11 @@ suppression d'assertion pour rendre le passage vert.
 - [x] SLS-147.2 Rapprocher l'assertion exacte, les préconditions documentées et
   celles effectivement établies par la suite ; conserver les observations
   manquantes et décider la préparation avant son implémentation.
-- [ ] SLS-147.3 Préparer et prouver réellement la création de workers sans
+- [~] SLS-147.3 Préparer et prouver réellement la création de workers sans
   affaiblir les six scénarios, les bornes ni la restitution ; même déploiement
   identifié, données et configuration conservées, première exception et
   erreurs de finalisation distinctes. Pas d'action sur FORGE.
-- [ ] SLS-147.4 Neuf groupes complets sur le contrôle déployé puis critères
+- [x] SLS-147.4 Neuf groupes complets sur le contrôle déployé puis critères
   communs frais avec captures inspectées, nettoyages et clôtures recoupés.
 - [ ] SLS-147.5 Nouveau complément32/276/huit prérequis depuis son début sur
   un gel explicite ; socle49 lié aux mêmes sources applicables, sans cumul
@@ -6244,3 +6244,20 @@ Le helper expose le recensement initial et le client conserve held avant ses
 assertions, puis exige des lecteurs issus d'identités existantes et clonées.
 Syntaxes Python/payload natif/Node et diff contrôlés ; aucune préparation ni
 preuve E2E du nouveau code encore exécutée.147.3–.5 restent ouvertes.
+
+
+147.3/.4 — [Nominal courant34](evidence/editor-worker-preparation-current-dev-2026-11-24.json)
+qualifié sur1006ba1/531/f016 : préparateur0 avec deuxbackups SQLite sous1001,
+restart unique0 sans timeout, nouvelle génération et tables protégées inchangées.
+Neufgroupes de lecteurs puis25communs frais0,22captures originales inspectées.
+Quatrelecteurs du mêmefichier : trois issus de clones et un du recensement
+initial ; cinquième429/Retry-After2 en23,557984ms, réponses exactes et sept
+handlers succeeded. Fonction/namespace purgés physiquement, sixgardes/helpers
+terminés et threads sans traceur ; huit0, onze migrations/intégrités/FK,
+configuration/budgets/référence/5982 et42backend/quatreHTTPSno-store conservés.
+Le précontrôle62368123 termine1 avantSSO/Node, source nouvellement indexée non
+synchronisée ; zéro groupe, stderr distant original non archivé. Après livraison
+contrôlée des cinqautres fichiers indexés, le premier client effectivement
+exécuté c8212eab et ses25communs passent. Aucun scénario rejeté n'est relancé.
+147.4 acquise ;147.3 reste partielle pour les vrais négatifs de timeoutSSH et
+refus de publication, et147.5 pour le nouveau49 puis32 sur ce nouveau vecteur.

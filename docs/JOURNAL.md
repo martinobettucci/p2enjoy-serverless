@@ -11662,3 +11662,31 @@ Relecture ciblée terminée sansP1/P2 résiduel ; les dixSHA, HEAD et statut
 restent égaux au gel, recoupés par le principal. Vecteur local531 confirmé.
 Cette lecture ne qualifie ni nominal ni négatifs ; commit du code avant
 préparation DEV, synchronisation du seul helper modifié et ciblé9/25.
+
+
+## 24 novembre 2026 — Nominal147 qualifié, négatifs et régression restant dus
+
+Préparation147 réelle0 sur1006ba1/531/f016 : backups contrôle641bb2af et
+registre5dee8032 sous1001/0600, restart unique0 ; API StartedAt02:31:14.696UTC,
+mêmesCID/image, référence et tables protégées conservées, huit0. Le premier
+lanceur62368123 termine1 avantSSO/Node : nouveau fichier du vecteur non livré,
+CalledProcessError1 dont le stderr distant n'est pas archivé. Les cinqautres
+sources indexées sont synchronisées avec SHA précédent et backup, sans nouvelle
+demande de restart ; aucun scénario ni handler n'avait été exécuté par ce refus.
+
+Le cibléc8212eab termine réellement0 : neufgroupes, troislecteurs clonés et
+unpréexistant sur quatreFD/TID du mêmefichier,429/Retry-After2 en23,557984ms,
+sept handlers et purgephysique. Puis8b73d8d3 termine0 sur25communs frais avec
+SSO réel ;22originaux inspectés séparément et reçus conservés. Sixgardes
+recoupées0 : helpers terminés, unitésinactives et threads sans traceur/arrêt.
+42backend/quatreHTTPSno-store,11migrations/intégrités/FK, configuration,
+budgets, référence et5982conservés. Scelleur0, brut952510octets/gzip334349.
+147.4 est acquise ;147.3 garde les négatifs réels du préparateur,147.5 le
+nouveau49puis32/531. Aucun résultat du34 n'est ajouté aux543 du socle antérieur.
+
+Analyse indépendante du34 terminée sansP1/P2 ; le principal recoupe HEAD,
+statut et septSHA inchangés.107références/75chemins, cinqrapports, TAR531 et
+TAR533avec deuxprogrammes privés, sixprogrammes et22images sousSHA vérifiés ;
+aucune lecture de backupSQLite ni nouveaupixel, test, SSH ou écriture par le
+vérificateur. Scanstructuré/JSON/text sans clé interdite/JWT/p2s. Cette trace
+seule est ajoutée après le gel ; la preuve et les531sources restent inchangées.
