@@ -5767,6 +5767,18 @@ protocolebrut privé, projection et sources conservées. Les sixrouges restent
 exclus ; souscode historique503 inconnu, finalisations négatives143.5 et32/276
 encore dus.143 reste ouverte.
 
+Décision143.5 après147.3, avant code :
+[six vrais négatifs](SCHEMA_011_REGRESSIONS.md#négatifs-des-finalisations-du-moniteur--sls-1435).
+Étendre le vraiworker au scope storage-console-focused déjà existant, avec
+archives/métadonnées réelles et noms d'usage explicites ; sept commandes/
+37groupes/quatreprérequis inchangés. Trois passages ciblés complets portent
+primaire et save/print du moniteur, primaire et retain/save/print du contrôleur,
+finalisation seule du contrôleur, secours110s réel, finish refusé après arrêt
+natif et finalisation seule du moniteur. Barrière sur le vrai read de rapport
+du seul moniteur, après affichage initial et dans le try ; aucun fauxworker/
+rapport/retour, aucune borne changée. Source/index exacts, restitutions,
+purges/captures exigées ; zéro groupe ajouté au socle. Code et preuves à livrer.
+
 <a id="sls-144"></a>
 ## SLS-144 — Rapports de jobs et dashboards générés
 

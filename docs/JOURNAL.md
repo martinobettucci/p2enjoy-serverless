@@ -11780,3 +11780,21 @@ Analyse indépendante des deux preuves sansP1/P2 ; principal : dixSHA/HEAD/statu
 inchangés au gel. DeuxTAR532 exactsGit,258références/67chemins,39JSON et scans
 structurés recoupés ; aucune sauvegardeSQLite lue ni action distante/test/écriture
 du vérificateur. Preuve courante et clôture147.3 prêtes à pousser ;147.5 reste due.
+
+## 24 novembre 2026 — Reprise des négatifs143.5 avant nouvelle intégration
+
+147.3 est poussée0923d8c. Exploration bornée en lecture seule : moniteur530
+admet seulement un vraiworker schedules pendant storage-preparations. Sa
+fenêtre ancienne98–100s ne contient pas le secours110s ; le ciblé existant
+storage-console-focused a sept vrais cas/37groupes (~10m44 ancien, hors
+prérequis), mais sans métadonnées archivées ni worker compatible actuellement.
+
+Décision persistée avant code : étendre ce ciblé existant au vraiworker,
+sans modifier le défaut schedules ni ses49/543/18. Trois passages réels
+éprouveront six négatifs en série, avec une barrière au read du rapport dans
+le try pour les fautes avant armement ; aucun faux état ni timeout changé.
+Collision du transportfinish : AssertionError après vrai arrêt distant,
+à recouper extérieurement. Noms ciblés storage-console-worker et
+serverless-storage-console-regressions ; sources exactes et originaux UI de
+chaque ciblé à conserver. Les copies530 exécutées restent immuables.
+Contrat complet dans SCHEMA_011_REGRESSIONS, code et preuves encore dus.

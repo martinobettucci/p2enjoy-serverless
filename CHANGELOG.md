@@ -2,6 +2,11 @@
 
 ## [Non publié]
 
+- SLS-143.5 : six diagnostics négatifs de finalisation spécifiés avant code,
+  sur trois vrais passages storage-console-focused. Worker ciblé et archives
+  réelles à ajouter ; primaire/secondaires, secours110s, finish et pipe refusés,
+  restitutions/captures exigés. Aucun diagnostic de ce nouveau contrat acquis.
+
 - SLS-147.3 : [quatre négatifs réels qualifiés](docs/evidence/editor-worker-negative-current-dev-2026-11-24.json)
   sur7cd5c54/532/f016, contrôleur0 et clients1/1/120/1 attendus. VraiFD6 puis
   SIGSTOP/détachement et timeout240s, primaire/secondaires exactes, restitutions

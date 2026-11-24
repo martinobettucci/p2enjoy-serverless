@@ -228,3 +228,111 @@ Son contrôleur de fautes maintenu porte le prochain gel à532sources. Le contra
 49cd01985/530. Après le ciblé9 et ses25communs frais, un nouveau49complet sur
 le nouveau gel précède le prochain32 ; mêmes sources entre ces deux passages,
 preuve49 committée avant lancement32. Les anciensmanifestes restent inchangés.
+
+## Négatifs des finalisations du moniteur — SLS-143.5
+
+Décision après147.3, avant code : éprouver les deux vrais programmes de
+moniteur/contrôleur sur trois passages ciblés réels, puis leur nominal dans
+le prochain49. Les copies privées530 déjà exécutées restent immuables. Les
+nouvelles copies décrivent leur responsabilité, leur source et leurs paramètres ;
+elles sont conservées exactement avec les preuves, comme les programmes de
+collecte actuels. Aucun faux worker, rapport, run_id, acquisition ou retour.
+
+Le worker maintenu accepte `start --scope storage-console-focused`, en plus
+de `start` qui conserve schedules. Le ciblé emploie les sept commandes déjà
+existantes, leurs37groupes, les quatre prérequis réels (SSO, build historique,
+SSO décision et inspection physique) et tous leurs oracles. La suite produit
+ses propres archives, run_id, source_commit, baseline et dates de cas, comme
+le scope schedules. La sélection49/543/18 et ses exigences restent inchangées.
+Chaque passage ciblé reste distinct du49 et du32, sans addition aux819 uniques.
+
+Le lancement ciblé porte un dossier `storage-console-worker-<uuid>` et une
+unité `serverless-storage-console-regressions-<uuid>`. Scope et chemin de
+rapport viennent d'une table fermée, sont inscrits au vrai launch puis relus
+par status/finish ; aucun chemin libre ni autre profil. Les anciens dossiers
+schedules-worker restent lisibles avec leur scope schedules historique. Les
+bornes21600/60, identités/cgroups, résultat terminal et jonction restent exigés.
+Le ciblé ne devient pascompleted sur la seule fin d'un processus auxiliaire.
+
+La nouvelle copie du moniteur lie scope/rapport, vecteur exact et cardinalité
+du lancement, namespacePID/boot, naissance du worker et cgroup du vrai Node.
+Pour schedules, l'admission reste pendant storage-preparations. Pour focused,
+elle accepte le vrai état avant storage-console-api ou ce cas encore vivant ;
+un cas déjà terminé reste refusé. Commande canonique, image f016, fenêtre900s
+d'attente, trace90s, réponse80s et SQL/consumer corrélés restent inchangés.
+La portée ciblée est retenue plutôt que six replays49 : elle exerce les mêmes
+parcours avec de vrais marqueurs, et laisse finir chaque campagne et son cleanup.
+
+Pour les fautes avant armement, une barrière locale épingle uniquement son
+propre moniteur par UID/parent/naissance/namespace/pidfd. Après le premier
+affichage initial réellement réussi, elle observe l'entrée du premier read
+du rapport de suite dans current(), donc à l'intérieur du try protégé et
+avant traitement du marqueur. Les métadonnées du syscall et du FD sont lues,
+jamais les buffers/mémoires/registres modifiés. Le FD régulier doit désigner
+le chemin de rapport exact, éventuellement remplacé atomiquement ; la lecture
+bornée du fichier réellement ouvert recoupe run_id/source/scope du vraiworker.
+Un autre inode/rapport ou une observation manquante échoue. Cette barrière
+ne suspend ni worker de suite, ni Node, ni contrôle/agent du SPARK.
+
+Six diagnostics réels, en série dans leurs passages possédés :
+
+1. Moniteur avec primaire : après son affichage initial et à ce read protégé,
+   occuper son seul checkpoint.pending par un répertoire vide possédé, fermer
+   le lecteur de stdout, puis livrer son vrai SIGTERM. InterruptedError reste
+   primaire ; save/IsADirectoryError21 puis print/BrokenPipeError32 restent
+   secondaires exactes. Aucun appel natif n'a encore été armé.
+2. Contrôleur avec primaire : son moniteur est retenu au même read ; son seul
+   observer.stdout passe0600→0000 par FD conservé et son result.pending est
+   occupé par un répertoire possédé. Fermer le lecteur stdout du contrôleur
+   après son affichage initial, puis SIGINT du contrôleur. KeyboardInterrupt
+   reste primaire ; terminate/join réels du fils, retain_stdout/PermissionError13,
+   save/IsADirectoryError21 et print/BrokenPipeError32 restent secondaires.
+   Livrer le SIGTERM réel du parent au moniteur retenu, sans le remplacer.
+3. Contrôleur sans primaire propre : même EACCES sur observer.stdout, puis
+   SIGTERM réel du seul moniteur, sans signaler le contrôleur. Le retour nonnul
+   du fils est conservé et retain_stdout/PermissionError13 est la première
+   erreur du contrôleur. Ne pas confondre l'absence de primaire du parent et
+   l'InterruptedError attendu du fils.
+4. Contrôleur avec restitution longue : arrêter son moniteur au read protégé,
+   livrer SIGSTOP et détacher en exigeant T/TracerPid0 ; SIGINT du contrôleur.
+   Son terminate laisse le fils arrêté ; attendre les110s réelles avant kill,
+   puis jointure bornée10s. KeyboardInterrupt et vrai retour du fils restent
+   conservés. Ce timeout de secours n'est pas une secondaire du programme.
+5. Moniteur avec finish refusé : dans un passage canonique distinct, après
+   armement natif confirmé, créer seulement la collision privée
+   native-agent-trace-finish-transport.json, puis SIGTERM du moniteur. Son
+   vrai finish arrête d'abord la trace distante et échoue sur son assertion
+   de non-écrasement locale ; InterruptedError reste primaire et
+   native_trace_finish/AssertionError la secondaire. Le fichier collision
+   est retiré après jointure, sans écraser un reçu. Lire indépendamment
+   finished.json/unité/naissance/cgroup/agent identique et TracerPid0.
+6. Moniteur sans primaire : dans un autre passage canonique distinct, fermer
+   son lecteur stdout après l'affichage initial et laisser l'observation
+   complète finir normalement. print/BrokenPipeError32 est sa première
+   secondaire, le retour final reste nonnul même si checkpointcompletedtrue.
+
+Les diagnostics1–4 utilisent un premier passage ciblé ; le long reste dernier.
+Les diagnostics5 et6 utilisent chacun leur propre passage ciblé complet.
+Une observation non atteinte reste un refus, sans relance automatique. Les
+programmes finissent et leurs ressources sont recoupées avant passage suivant.
+Une sortie120 de flush Python est conservée telle quelle, sans conversion
+en0 ni assimilation à une autre primaire. Les stderr diagnostiques terminaux
+et les reçus intermédiaires sont distingués. Les erreurs de rétention éprouvent
+la vraie lecture préalable au SHA, sans prétendre altérer SHA256 lui-même.
+
+Chaque lancement est lié au code committé, aux sources réellement livrées et
+à ses programmes figés. Propriété/inodes/naissances sont vérifiés avant faute ;
+SIGSTOP se livre au signal-delivery-stop avant detach, les autres signaux
+sont préservés. Sur erreur, restituer d'abord toute trace locale, puis joindre
+les processus possédés, restaurer les permissions via FD et retirer seulement
+les répertoires/fichiers collisions exacts. Conserver première exception et
+chaque secondaire ; aucune restitution de secours ne devient une jointure
+réussie du programme testé. Ne pas réécrire un programme déjà exécuté.
+
+La preuve retient les six codes nonnuls attendus, leurs primaires/secondaires,
+flux réels sous taille/SHA, délais et identités, contrôle natif repos/config/
+référence/5982, purges physiques des vrais sept cas et tous les originaux UI
+de chaque passage, inspectés individuellement. Les diagnostics ajoutent0groupe.
+Les trois ciblés complets gardent leurs propres37groupes chacun ; aucune
+préparation ni répétition n'est ajoutée au543. Nouveau49 nominal puis32 sur
+le même vecteur restent requis ; aucune réussite déduite de cette spécification.
