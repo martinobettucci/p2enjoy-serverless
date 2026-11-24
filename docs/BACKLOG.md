@@ -1359,8 +1359,10 @@ Statut : [~] — registre011, API, vues, recherche, suivi et export déployés e
 surf016 ; [47groupes fonctionnels et visuels](evidence/execution-journal-complete-schema011-query-dev-2026-11-23.json)
 qualifiés sur529sources,44captures inspectées. Les corrections120→130 et137/138
 sont closes, dont la garde122 et son intégration fraîche12API/25communs.
-Les rétentions132/133 ont leurs preuves courantes séparées ; le socle49/543/18
-puis les32commandes/276groupes restent dus avant clôture de072.
+Les rétentions132/133 ont leurs preuves courantes séparées ; le
+[socle49/543/18 courant](evidence/schedules-regressions-schema011-query-dev-2026-11-24.json)
+est acquis sur530sources `cd01985`/f016,120captures inspectées et clôtures
+recoupées. Les32commandes/276groupes restent dues avant clôture de072.
 Nature : Développer. Dépend de : SLS-061, SLS-074. Ordre : 3.
 Contrat : [EXECUTION_LOGS](EXECUTION_LOGS.md), complétant
 [journaux](CONSOLE_USABILITY.md#journaux-et-corrélation).
@@ -1381,7 +1383,7 @@ Critères d'acceptation :
   rétention expirée et collecte indisponible signalées ; secrets expurgés ; valeurs
   d'authentification et corps métier non journalisés.
 - [ ] SLS-072.5 Export respectant les droits ; texte échappé, clavier et mobile.
-- [ ] SLS-072.6 Migration011 additive et [déploiement gardé](EXECUTION_LOG_DEPLOYMENT.md) : intégrité/FK,
+- [~] SLS-072.6 Migration011 additive et [déploiement gardé](EXECUTION_LOG_DEPLOYMENT.md) : intégrité/FK,
   conservation des données et des sources réelles, puis régression du socle
   49 campagnes / 543 groupes sur011 et des consommateurs ajoutés depuis,
   inventoriés séparément avant adaptation. Les préconditions des clients courants
@@ -5673,7 +5675,9 @@ d'assertion ou allongement arbitraire de délai pour obtenir200.
   finalisation seule échoue. Aucun résultat client, délai ou acquisition changé.
   Analyse statique du23novembre : les finally des deux programmes privés530
   peuvent remplacer la primaire par save/print/terminate/wait. Ces programmes
-  n’ont pas été exécutés ; les nouvelles copies portent le traitement avant49.
+  initiaux n’avaient pas été exécutés ; les nouvelles copies portent le
+  traitement. Leur nominal0 et leur corrélation sont acquis dans le socle49
+  du24novembre ; leurs finalisations négatives restent à qualifier.
 
 143.1 — [premier503 scellé](evidence/schedules-storage-console-invocation-first-failed-dev-2026-11-23.json) :
 35rapports, TAR529 exactGitc94,89captures inspectées, worker1/lanceurjoint/
@@ -5751,6 +5755,16 @@ PIDnamespace/boot/naissance pendant la vie du worker. Le socle49 et son gzip
 entrent dans le commit de lancement32 ; aucun des530fichiers indexés ne change
 entre les deux passages. Les bornes6h,900s d’expiration réelle et les oracles
 restent inchangés. Aucun résultat de ces préparations n’est encore acquis.
+
+143.4/.5 — [socle49 courant du24novembre](evidence/schedules-regressions-schema011-query-dev-2026-11-24.json) :
+49campagnes/543groupes/18prérequis sur530sources `cd01985`/f016,120originaux
+inspectés, worker/lanceur/cgroup fermés et huitcompteurs0. Les neufgroupesAPI
+stockage passent dans cet assemblage ; première réponse HTTP200 recoupée avec
+l’acquisition native acceptée, son invocation et le même consommateurinstance.
+Observateur et contrôleur nouveaux0, traceur terminé/cgroupvide/TracerPid0 ;
+protocolebrut privé, projection et sources conservées. Les sixrouges restent
+exclus ; souscode historique503 inconnu, finalisations négatives143.5 et32/276
+encore dus.143 reste ouverte.
 
 <a id="sls-144"></a>
 ## SLS-144 — Rapports de jobs et dashboards générés
@@ -5964,6 +5978,15 @@ présence de sa preuve dans le commit de lancement du32. Les505antérieurs,
 deuxpartiels et ciblé30 ne remplacent aucun groupe du nouveau49.
 
 
+145.4 — [socle49 courant du24novembre](evidence/schedules-regressions-schema011-query-dev-2026-11-24.json) :
+la reprise instrumentée passe ses cinqgroupes dans les543, quatre gardes
+restaurées/terminées et trois coupures137, troisfenêtres manquées sans
+invocation, claimed/linked interrompus puis tirs normaux sans rejeu. Les
+buffersstderr clients, diagnostics natifs et reçus sont recoupés après clôture.
+Le worker0, ses120captures inspectées et les127purgesphysiques sont ceux du
+nouvel assemblage entier, sans cumul des505antérieurs.32/276 reste dû ; phase
+primaire du rouge historique toujours inconnue et145.2/.3 restent ouvertes.
+
 <a id="sls-146"></a>
 ## SLS-146 — Barrière de commit de publication ZIP non observée
 
@@ -6043,7 +6066,7 @@ d’observation conserve les observateurs et dépendances réels.
 - [x] SLS-146.4 Quinze groupes de stockage complets puis 25 communs frais,
   captures inspectées et clôtures recoupées sur le code déployé. Les 13 partiels
   de ce refus restent exclus. Aucun retour secondaire ne devient un succès.
-- [ ] SLS-146.5 Nouveau socle 49/543/18 depuis le début puis complément 32/276,
+- [~] SLS-146.5 Nouveau socle 49/543/18 depuis le début puis complément 32/276,
   avec leurs preuves propres ; aucun ancien partiel ou ciblé ne remplit ce total.
 - [x] SLS-146.6 Diagnostics négatifs E2E distincts à zéro groupe : première
   attente cliente interrompue préservée malgré finalisation, refus réel de
@@ -6117,4 +6140,13 @@ HTTPSno-store,manuel84 et configuration/référence/5982/huit0 conservés.
 Sealer0 après revue sansP1/P2 ; aucun groupeunique ajouté aux543.
 146.2 reste partielle : la cause historique de commit_not_observed est inconnue ;
 le défaut d’ordre statique et les pertes de primaire sont corrigés et éprouvés.
-146.5 et l’unité restent ouverts pour49/543/18 puis32/276.
+Au terme de ce ciblé40,146.5 et l’unité attendaient49/543/18 puis32/276.
+
+146.5 — [nouveau socle49 acquis le24novembre](evidence/schedules-regressions-schema011-query-dev-2026-11-24.json),
+530sources `cd01985`/f016 :49campagnes/543groupes/18prérequis, dont les quinze
+groupesstockage complets et le cas ZIP qui avait arrêté le sixième passage.
+120captures originales inspectées ;127fonctions/35namespaces recoupés
+physiquement, quatre gardes de reprise et trois coupures137 terminées, huit0,
+42backend/quatreHTTPSno-store, manuel84 et5982artefacts conservés. Scelleur0,
+brut18028443octets/gzip5946405, source/TAR exacts et sixrouges exclus.32/276
+reste dû avec preuve49 déjàcommittée et même vecteur530 ; unité toujours[~].

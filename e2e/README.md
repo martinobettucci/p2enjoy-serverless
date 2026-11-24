@@ -1,5 +1,37 @@
 # Qualification de la plateforme
 
+Le [socle courant011/f016](../docs/evidence/schedules-regressions-schema011-query-dev-2026-11-24.json)
+passe49campagnes/543groupes et18prérequis sur les530sources `cd01985`.
+Les120originaux frais sont inspectés par le principal :107déclarés sousSHA et
+13complémentaires. Dix reçus visuels conservent leurs observations et limites.
+Les six anciens workers rouges sont exclus ; le ciblé40 et les répétitions
+communes n’ajoutent aucun groupeunique. Le worker6b667e0d termine0, son lanceur
+est joint, leurs naissances sont terminées et le cgroup est vide dans le
+namespacehôte épinglé pendant leur vie.
+
+Les18prérequis incluent le recoupement physique de127fonctions/35namespaces,
+dont36fonctions/12namespacescron. Les quatre gardes de reprise sont terminées,
+trois coupures du contrôle ont leur retour137 ; les quatre buffersstderr clients
+sont conservés avec leur borne16000unitésUTF16, sans prétendre au fluxSSH complet.
+Les trois preuves de rétention liées sont rehashées et gardent leur époque.
+État final : huitcompteurs0,11migrations, intégrités/FK, configuration/référence/
+5982artefacts conservés ;42backend et quatreHTTPSno-store exacts, manuel84.
+
+Le nouvel observateur143 et son contrôleur terminent0. Leur projection native
+est liée au vraiHTTP200 et au consommateur de l’invocation ; traceur terminé,
+cgroupvide et TracerPid0. Le protocole brut de l’agent reste privé. Le bundle
+retient21sources de programmes et quatre reçus auxiliaires, dont la revue
+statique et deux refus de lecteurs : clé `checks` absente du rapport initial
+encore incomplet, puis identifiant donné au collecteur qui attendait un chemin.
+Leurs lectures corrigées terminent0, sans rejeuE2E ni changement du produit.
+Les sources32 préparées restent non exécutées ; la revue statique et le nominal
+de l’observateur ne qualifient pas ses finalisations négatives143.5.
+
+Scelleur réellement terminé0 ; gzip5946405octets/SHA`d81b8235…`, brut18028443/
+SHA`554eb91b…`. Le complément32/276, ses huitSSO et ses captures restent dus.
+Son lancement exige cette preuve49 déjà committée et le même vecteur530.
+Les checkpoints ci-dessous décrivent leurs résultats propres, antérieurs à ce49.
+
 Le [ciblé courant de confirmation ordonnée](../docs/evidence/storage-confirmation-order-current-dev-2026-11-23.json)
 passe 40 groupes sur les 530 sources `98daf9f` et l’image f016 : quinze mutations,
 puis 25 communs frais. Trois pertes de confirmation produisent `storage_transport`
@@ -9,8 +41,8 @@ ressources conservés. Cinq diagnostics distincts à zéro groupe éprouvent les
 interruptions, le vrai refus SIGCONT/EPERM, le protocole excessif et EACCES.
 Les trois clients négatifs terminent réellement 1 ; leurs contrôleurs terminent 0
 après validation et restitution. Sept clôtures indépendantes, 22 originaux
-inspectés, 42 backend/quatre HTTPS no-store et manuel84 recoupés. Aucun socle49
-ni complément32 complet acquis ; la cause du premier rouge reste inconnue.
+inspectés, 42 backend/quatre HTTPS no-store et manuel84 recoupés. Ce ciblé
+précédait le socle49 acquis ci-dessus ; la cause du premier rouge reste inconnue.
 
 Le [sixième socle courant](../docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
 conserve son premier refus de publication ZIP : garde `commit_not_observed`,
@@ -131,8 +163,8 @@ pour le détail réseau anglais du dialog,139 pour le libellé latéral lorsque
 les tokens de texte sont doublés. Cet agrandissement ne prouve pas un zoom
 navigateur. Les images complètent les assertions DOM/HTTP/natives/clavier.
 
-**137et138 sont clos.072 reste ouvert** pour le socle49campagnes/543groupes/
-18prérequis puis le complément32commandes/276groupes. Les25communs sont inclus
+**137et138 sont clos.072 reste ouvert** pour le complément32commandes/276groupes,
+après le socle49/543/18 acquis le24novembre. Les25communs sont inclus
 dans543 et ne seront pas comptés deuxfois. Les preuves antérieures gardent
 leur source/image ; les12API du gel21834d8 restent attachées àf73 et le premier
 [checkpointf016](../docs/evidence/execution-journal-api-schema011-query-dev-2026-11-23.json)
@@ -550,8 +582,9 @@ Pour une campagne suivie indépendamment du terminal :
 sur ce même script. Les identifiants SSO sont lus sur stdin privée et restent
 en mémoire ; les rapports et résultats systemd sont conservés dans .local/e2e.
 
-Le passage49/543 ci-dessus correspond à l'image433 ; sa régression sur011
-reste à produire. Le [complément courant32/276](../docs/SCHEMA_011_REGRESSIONS.md) a son lanceur
+Le passage49/543 historique ci-dessus correspond à l'image433 ; sa régression
+sur011 est acquise par le socle du24novembre en tête de ce document.
+Le [complément courant32/276](../docs/SCHEMA_011_REGRESSIONS.md) a son lanceur
 `python3 -B e2e/additional-regressions-suite.py` et son worker durable
 `python3 -B e2e/additional-regressions-worker.py start`, puis `status NOM` /
 `finish NOM`. Les archives antérieures et la propriété exacte des30namespaces/

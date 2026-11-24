@@ -1,5 +1,23 @@
 # P2Enjoy Serverless
 
+Le [socle courant sur le registre011](docs/evidence/schedules-regressions-schema011-query-dev-2026-11-24.json)
+est qualifié le 24 novembre 2026 : **49 campagnes, 543 groupes, 18 prérequis et
+120 captures originales inspectées**, sur les 530 sources `cd01985` et l’image
+f016. Worker terminé0, lanceur joint et cgroup vide ; 127 fonctions dans35
+namespaces recoupées physiquement, quatre gardes de reprise terminées et trois
+coupures réelles du contrôle. Les huit compteurs actifs sont à0 ; configuration,
+référence et 5 982 artefacts d’origine sont conservés. Les 42 fichiers backend,
+quatre ressources HTTPS no-store et 84 paragraphes du manuel sont recoupés.
+La première réponse de stockage observée est liée à son invocation et à son
+consommateur réels, HTTP200 et acquisition acceptée ; le traceur est terminé.
+
+Le complément32commandes/276groupes reste à exécuter après commit de cette
+preuve, avec le même vecteur530. SLS-072/132/133/134/143/145/146 restent ouverts
+selon leurs critères ; les causes anciennes non observées et les branches
+négatives des nouveaux finaliseurs143.5 gardent leurs limites. Les six passages
+rouges et les ciblés antérieurs ci-dessous restent propres à leur époque et
+n’ajoutent aucun groupe au total543.
+
 Le [ciblé courant de confirmation ordonnée](docs/evidence/storage-confirmation-order-current-dev-2026-11-23.json)
 passe 40 groupes sur les 530 sources `98daf9f` et l’image f016 : quinze mutations,
 puis 25 communs frais. Trois pertes de confirmation produisent `storage_transport`
@@ -9,8 +27,8 @@ ressources conservés. Cinq diagnostics distincts à zéro groupe éprouvent les
 interruptions, le vrai refus SIGCONT/EPERM, le protocole excessif et EACCES.
 Les trois clients négatifs terminent réellement 1 ; leurs contrôleurs terminent 0
 après validation et restitution. Sept clôtures indépendantes, 22 originaux
-inspectés, 42 backend/quatre HTTPS no-store et manuel84 recoupés. Aucun socle49
-ni complément32 complet acquis ; la cause du premier rouge reste inconnue.
+inspectés, 42 backend/quatre HTTPS no-store et manuel84 recoupés. Ce ciblé
+précédait le socle49 acquis ci-dessus ; la cause du premier rouge reste inconnue.
 
 Le [ciblé stockage146](docs/evidence/storage-mutation-diagnostics-current-dev-2026-11-23.json)
 passe40groupes : quinze mutations puis25communs frais sur6f758b2/530/f016.
@@ -20,10 +38,10 @@ conserve la primaire native1 et termine0 après restitution. Troisclôtures
 indépendantes,22captures originales inspectées,42backend/quatreHTTPSno-store
 et manuel84 ; aucun49/32 complet ni cause du rouge historique revendiquée.
 L’exploration établit une course possible du banc : prepared précède la
-réponseRPC ; sa correction est qualifiée par le nouveau ciblé40 ci-dessus ; la nouvelle
-intégration reste due.
+réponseRPC ; sa correction est qualifiée par le ciblé40 ci-dessus et son
+intégration par le socle49 courant.
 
-Le [sixième socle courant](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
+Le [sixième socle du23novembre](docs/evidence/zip-storage-commit-barrier-first-failed-dev-2026-11-23.json)
 termine1 dans la publication ZIP : garde `commit_not_observed`, upload200
 attendu503.55groupes antérieurs puis13checks partiels, troisprérequis et aucune
 capture ; aucun49 complet. Le reçu natif confirme ensuite commit et publication
@@ -37,8 +55,8 @@ passe30groupes réels : cinqreprises puis25communs frais, surba55881/530sources
 et l’imagef016. Quatregardes, troiscoupures137, troisfenêtres manquées et
 troistirs normaux sans rejeu ; purgephysique et clôtures recoupées.22captures
 originales inspectées,42backend/quatreHTTPSno-store et manuel84 conservés.
-La phase du rouge historique reste inconnue ; aucun correctif causal ni49
-complet n’est revendiqué. Le prochain49/543/18 repart du début, puis32/276.
+La phase du rouge historique reste inconnue ; aucun correctif causal n’est
+revendiqué. L’intégration49 acquise ci-dessus conserve cette limite ;32 reste dû.
 
 Le [cinquième socle courant scellé](docs/evidence/schedules-recovery-gated-first-failed-dev-2026-11-23.json)
 termine1 dans la reprise : attente70s de gated expirée, puis clientSSH255 après
@@ -78,7 +96,7 @@ passe47groupes12API/10UI/25communs sur529sources,44captures inspectées. La
 [bascule gardée](docs/EXECUTION_LOG_DEPLOYMENT.md) recoupe deux sauvegardes SQLite,
 les anciennes colonnes et42backend/quatreweb ; son unité est terminée et son
 cgroup vide. [SLS-072](docs/BACKLOG.md#sls-072) reste ouvert pour les régressions
-sur011 :49campagnes/543groupes/18prérequis puis32commandes/276groupes. Aucun
+sur011 : socle49/543/18 acquis le24novembre ci-dessus, puis32commandes/276groupes dus. Aucun
 groupe fonctionnel ni critère de clôture n'est ajouté par le seul déploiement.
 Le [replay clavier124](docs/evidence/execution-journal-focus-replay-dev-2026-11-22.json)
 recoupe quatre relaisH2 en1440/390px, deux410 réels, six captures inspectées et
@@ -218,10 +236,11 @@ Pour une campagne suivie indépendamment du terminal :
 sur ce même script. Les identifiants SSO sont lus sur stdin privée et restent
 en mémoire ; les rapports et résultats systemd sont conservés dans .local/e2e.
 
-Le passage49/543 ci-dessus correspond à l'image433 ; sa régression sur011
-reste à produire. Le [checkpoint transport courant](docs/evidence/service-transport-sigchld-current-dev-2026-11-23.json)
+Le passage49/543 historique ci-dessus correspond à l'image433 ; sa régression
+sur011 est acquise par le socle du24novembre en tête de ce document.
+Le [checkpoint transport](docs/evidence/service-transport-sigchld-current-dev-2026-11-23.json)
 passe5canoniques et25communs sur529sources/f016, avec22captures inspectées ;
-le socle49 complet doit reprendre depuisle début. Le [complément courant32/276](docs/SCHEMA_011_REGRESSIONS.md) a son lanceur
+il garde sa portée ciblée. Le [complément courant32/276](docs/SCHEMA_011_REGRESSIONS.md) a son lanceur
 `python3 -B e2e/additional-regressions-suite.py` et son worker durable
 `python3 -B e2e/additional-regressions-worker.py start`, puis `status NOM` /
 `finish NOM`. Les archives antérieures et la propriété exacte des30namespaces/

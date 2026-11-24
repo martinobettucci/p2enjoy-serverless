@@ -2,6 +2,17 @@
 
 ## [Non publié]
 
+- Régressions011/f016 du24novembre : [socle49 complet](docs/evidence/schedules-regressions-schema011-query-dev-2026-11-24.json),
+  543groupes/18prérequis sur530sources `cd01985`,120originaux inspectés et six
+  anciensrouges exclus. Quatre gardes/troiscoupures137 recoupées,127fonctions/
+  35namespaces contrôlés physiquement, worker/lanceur/cgroup fermés et huit0.
+  Réponse native de stockage corrélée au vraiHTTP200/consommateur ; traceur
+  terminé.42backend/quatreHTTPSno-store, manuel84, référence/configuration et
+  5982artefacts préservés ; scelleur0. Complément32/276 et branches négatives
+  des nouveaux finaliseurs143.5 encore dus ; parents072/132/133/134/143/145/146
+  ouverts, aucune cause ancienne déduite de cette réussite. Deux refus de
+  lecteurs et leurs lectures corrigées0 sont conservés sans rejeuE2E.
+
 - SLS-143.5 : défaut statique de conservation de la primaire enregistré dans
   le moniteur auxiliaire49 et son contrôleur ; traitement décidé avant code,
   secondaires et restitutions distinctes. Préparation des six exclusions49 et

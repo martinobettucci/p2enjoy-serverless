@@ -11500,3 +11500,84 @@ antérieur. Source49 figée jusqu’au32, preuves49 déjàcommittées au lanceme
 L’ancien49 complet a duré14 033,595s (~3h54), sans promesse sur la durée nouvelle ;
 borne21600s et expiration900s réelles conservées. Ces décisions précèdent le
 code privé de préparation et ne prétendent pas qualifier les branches négatives.
+
+### 24 novembre2026 — Socle49 courant011/f016 qualifié et scellé
+
+Le worker6b667e0dcf224e5aaaf1b1ba094d4c40 part du commit `cd01985792470f9ad87fa7bd509bd7bad9673945`
+et de530sources. Lanceur1041700/naissance73667216 et worker1041701/73667217
+sont épinglés vivants dans le namespacePIDhôte4026531836, puis les530fichiers
+du TAR sont recoupés avecGit. Aucun fichier suivi niHEAD ne change pendant
+la suite, les collectes et le scellement ; produitf016 conservé. Les nouveaux
+observateur/contrôleur49 et les cinqpréparations32 sont relus sansP1/P2 ; le
+timeout1200 du contrôleur reste primaire, son arrêt/jointure suivent dans les
+finalisations protégées. Les branches négatives ne sont pas qualifiées par
+cette revue ni par le nominal courant ;143.5 reste[~].
+
+Les49commandes terminent0 et leurs rapports frais passent543groupes, dont
+12campagnes/54groupescron. Les18prérequis terminent0, avec quinzepréparationsSSO
+du socle et contrôle physique final de127fonctions/35namespaces, dont36/12cron.
+Temps cumulés des commandes14189,700s et des prérequis75,860s ; l’observation
+terminale du lanceur intervient14793,484s après son retourinitial. Cette dernière
+durée inclut la surveillance et la clôture, pas uniquement les commandes.
+Le rapport terminalSHA`1b5b0a0fa5064823a4612fc28fb670ba290c5491f8432424f7900116994a4cf0`
+est conservé ; finish réel0, unité arrêtée, clientjoint, puis clôtureexterne0 :
+naissances duworker/lanceur terminées, cgroupvide et huitcompteursactifs0.
+
+La reprise du contrôle passe quatre gardes/troiscoupures137, troisfenêtres
+manquées sans invocation, réclamations et invocations liées interrompues,
+troistirs normaux et aucun rejeu. Ses quatre buffersstderr clients sont
+conservés avec la borne16000unitésUTF16 ; aucun fluxSSH intégral inventé.
+Les cas d’admission CPU/RAM, files16/128, durées, recouvrement, changement de
+hash en file, instances réutilisées et concurrence passent sur de vrais
+handlers. La console recoupe six vrais tirs, pages5+1 et navigation clavier,
+vrai401 sans anciennes valeurs ni pagination puis reprise200 sur mêmefiche.
+Les troispreuves de rétention liées sont rehashées, sans nouveau groupe ni
+rejeu de leurs captures scellées. Sixanciensworkers rouges sont explicitement
+exclus du543 ; aucun ciblé ni groupepartiel ajouté au nouveau total.
+
+L’observateur de stockage nouveau est lancé pendant storage-preparations,
+contrôleur1150274/74047275 et moniteur1150275/74047279. Les deux terminent0,
+flux joints/hachés, sans erreur de finalisation. Après clôture, corrélateur0 :
+HTTP200, requête baa3cd5a-4f7e-4235-857d-9fd6f8a0acd8, fonction45fbe9ec,
+hashd025d393 et consommateurinstancee2dd9068 liés aux métadonnées SQL et à
+l’acquisition native acceptée. Traceur terminé/cgroupvide/agentTracerPid0 ;
+seule la projection détenue est exportée, protocole agent brut privé. Aucun
+souscode ancien503 ni site ancien70s ne sont reconstruits par ce succès.
+
+Le principal ouvre séparément les120originaux frais :107déclarés sousSHA et
+13complémentaires, dixreçus visuels. Limites conservées : viewports partiels,
+capturespleinepage distinctes d’un seulviewport, journaux/JSON bornés et
+captures aprèsrelecture sans causalité initiale inférée. Défauts déjàouverts
+075/101/113/131/139 maintenus ; aucun correctif revendiqué par cette inspection.
+
+Deux erreurs de lecteurs sont conservées comme transcriptions d’outil : le
+lecteur de progression supposait `checks` dans un rapport stockage encore
+initial ; KeyError1, lecture corrigée0 sansrejeu. Le collecteur embedded530
+reçoit d’abord un nom plutôt que le chemin `.local/e2e/…` ; assertionlocale1
+avantSSH, puis même programme invoqué au bonchemin0. Les fichiers stderr
+redirigés d’origine de ces deux appels n’existent pas et ne sont pas inventés.
+Leur code, les tests et le produit restent inchangés ; reçus séparés à0groupe.
+
+Collectes final/recovery/embedded/notes/correlation toutes0 :11migrations,
+intégrités/FK, référence/configuration et5982artefacts identiques.42backend
+embarqués et quatreHTTPSno-store exacts ; manuel84/source exacts. Les guides
+actifs restent àleurbaseline et les propositions courantes correspondent aux
+sources, sans adoption revendiquée. Le bundle conserve21sources de programmes
+et quatre reçus auxiliaires ; les cinqhelpers32 préparés restent nonexécutés.
+
+Scelleur réel0, [preuve courante](evidence/schedules-regressions-schema011-query-dev-2026-11-24.json) :
+gzip5946405octets/SHA`d81b8235a59029b3787b09e44f28f376573fc18a3ff7ee9844065af94b59ee02`,
+brut18028443/SHA`554eb91baa94db132b2cc679f220bd54732486a8a38eef00d5a9553e31ebe00a`.
+ManifestSHA`7c0ea8f1d055016f982c5c09ba267bf8c029bbf22da9bd8b9607b73bcb5266fa`.
+072.6/146.5 partiels pour32/276 ;143/145 gardent leurs observations anciennes
+manquantes,132/133/134 leurs critères propres. Décision maintenue : committer
+ce49 avant lancement32 et conserver le même vecteur530. Seuls README, backlog,
+journal, changelog et pièces de preuve évoluent avant ce second lancement.
+
+Revue de publication et analyse indépendante terminées sansP1/P2 : septSHA,
+HEAD et statutGit identiques avant/après, vérifiés ensuite par le principal.
+L’analyse recoupe988références vers427chemins,67rapports, TAR530/Git et
+624chaînes/lignesJSON, sans clé interdite ni formatJWT/p2s détecté. Aucune
+écriture, inspection de pixels, campagne, opération distante ou modificationGit
+par les sous-agents ; zéro groupe ajouté. Seul ce bilan de revue est ajouté au
+journal après leurs deuxretours, sans modifier la preuve ni les530sources.
