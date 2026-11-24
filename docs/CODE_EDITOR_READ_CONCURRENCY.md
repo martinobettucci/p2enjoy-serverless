@@ -326,7 +326,9 @@ avec zéro ressource active avant/après et référence/configuration/5982conser
    flush de l'interpréteur échoue ensuite ; aucune conversion en0.
 4. Transport expiré avec secondaire : identifier le seul enfantSSH du CLI par
    parent/naissance, commande et inodes de ses stdout/stderr privés, puis épingler
-   son pidfd. Observer seulement les métadonnées des write/writev vers son FD1,
+   son pidfd. Observer seulement les métadonnées des write/writev vers l'inode
+   du stdout possédé, y compris les FD dupliqués de son FD1. Recouper le FD réel
+   du syscall avec cet inode à l'entrée puis à la sortie, sans supposer son numéro,
    sans ouvrir sa mémoire ni lire ses buffers ou registres. Après sortie réelle
    d'une écriture, lire le fichier déjà écrit de façon bornée (1Mio) jusqu'au
    JSON natif complet, completed=true/restart_exit_code=0 et conservations validées.
@@ -374,3 +376,27 @@ et phases sont comparés en ordre ; toute erreur étrangère, notamment native-a
 fait échouer le diagnostic même si une lecture ultérieure retrouve un état sain.
 Conserver tous les flux après jointure/restitution sous taille/SHA ; le pipe fermé
 est identifié comme non lisible, sans présenter un fichier vide comme sa capture.
+
+### Premier refus du contrôleur négatif et correction des FD
+
+Le [premier passage](evidence/editor-worker-negative-first-failed-dev-2026-11-24.json)
+sur3c3ce68/532/f016 termine1 après trois diagnostics acquis : clients1/1/120,
+permissions et répertoire restitués. Le quatrième échoue avant injection sur
+owned_ssh_exited_during_observation ; résultat natif complet/restart0 reçu,
+configuration/référence/5982/huit0 conservés. Le secours termine et joint son CLI.
+Ses métadonnées syscall/FD et le statut de sortie consommé par waitpid ne sont
+pas archivés ; aucun timeout240s ni cause native rétrospective inventé.
+
+Défaut statique établi : le filtre impose FD1, alors que
+[OpenSSH10.2p1 ouvre sa session avec des FD dupliqués](https://raw.githubusercontent.com/openssh/openssh-portable/V_10_2_P1/ssh.c)
+et [écrit la sortie du canal sur son wfd](https://raw.githubusercontent.com/openssh/openssh-portable/V_10_2_P1/channels.c).
+Le client installé annonce OpenSSH10.2p1 Ubuntu ; cela ne restitue pas le numéro
+du FD du premier passage, qui reste inconnu.
+
+Décision avant correction : cibler l'inode exact au lieu du numéro1 et conserver
+FD réel, entrée/sortie, compteurs et derniers statuts d'attente, même sur refus.
+La réception complète, les240s, le vraiSIGSTOP livré/détaché, les erreurs exactes
+et tous les invariants restent exigés. Persister aussi le retour du CLI terminé
+par secours ; ne pas confondre cette terminaison avec une jointure par le
+préparateur. Aucun retry automatique. Un nouveau passage explicitement lié au
+code corrigé réexécute les quatre diagnostics ; le premier refus reste distinct.

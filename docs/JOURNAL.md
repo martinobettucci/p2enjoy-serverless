@@ -11730,3 +11730,20 @@ exécution par le relecteur. Les troisP2 sont levés statiquement, sans présume
 du fonctionnement Linux réel. Le README du banc est actualisé : nominal34/531
 acquis, quatre diagnostics et nouveaux49/32sur532 encore dus. Code committé
 avant synchronisation ciblée et premier passage réel.
+
+Premier passage0bf3d3a7 sur3c3ce68/532 : commande réelle1 (session76594), trois
+diagnostics acquis avec clients1/1/120 et restitutions. Quatrième erreur
+owned_ssh_exited_during_observation avant injection ; quatre résultats natifs
+complets avec restart0, huitbackups privés sous1001, tables protégées inchangées.
+Les huitnaissances CLI/SSH sont terminées lors du recoupement local, chaque
+état natif final est au repos, configuration/référence/5982 conservés. Le CLI du
+quatrième est terminé/joint par secours ; code non persisté, statut SSH consommé
+non retenu et aucun FD syscall conservé. Scelleur réel0, brut716379/gzip154759 ;
+premier refus conservé sans réexécution ni groupe ajouté.
+
+Inspection statique : filtre args[1]==1 ; OpenSSH10.2p1 installé et sources
+officielles de cette version montrent dup(STDOUT_FILENO) puis write du wfd.
+La cause précise du premier syscall reste non observée. Décision avant code :
+recouper l'inode possédé à l'entrée/sortie du write réel, conserver FD/temps/
+statuts même en refus et code du CLI secouru. Garder bornes, signaux, oracles et
+quatre cas ; premier rouge distinct du prochain passage corrigé.

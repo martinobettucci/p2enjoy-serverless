@@ -6279,3 +6279,15 @@ pidfd ; les fautes de fichiers et pipe restent privées, le timeout240s inchang�
 Restitution indépendante des permissions/répertoire/processus, première erreur
 et secondaires séparées. Syntaxe contrôlée et relecture sansP1/P2 résiduel ;
 les quatre exécutions réelles restent dues.
+
+147.3 — [Premier passage négatif scellé](evidence/editor-worker-negative-first-failed-dev-2026-11-24.json),
+3c3ce68/532/f016 : contrôleur1, trois diagnostics acquis avec clients1/1/120,
+permissions/répertoire restaurés et zéro groupe ajouté. Quatrième faute non
+atteinte : SSH terminé avant reconnaissance de l'écriture, résultat natif complet
+et restart0 néanmoins reçus ; CLI terminé/joint par secours, son retour non
+persisté. Huitnaissances locales terminées recoupées, huitcompteurs0 et
+configuration/référence/5982 conservés. Statut SSH consommé et FD syscall non
+retenus restent inconnus. Filtre FD1 inadéquat établi statiquement contre les
+FD dupliqués d'OpenSSH ; correction par inode et conservation des vrais statuts
+spécifiées avant code dans le contrat147.3. Nouveau passage des quatre diagnostics
+sur correction explicite dû, aucun timeout240s qualifié par ce refus.

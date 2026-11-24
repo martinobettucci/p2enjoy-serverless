@@ -2,6 +2,12 @@
 
 ## [Non publié]
 
+- SLS-147.3 : [premier passage négatif conservé](docs/evidence/editor-worker-negative-first-failed-dev-2026-11-24.json),
+  trois diagnostics acquis (clients1/1/120), quatrième non armé et contrôleur1.
+  Résultat natif complet mais statutSSH/FD non retenus ; secours joint et état
+  natif conservé. Correction du filtreFD1 spécifiée par inode avant code,
+  timeout240s et nouveau passage des quatre diagnostics encore dus.
+
 - SLS-147.3 : contrôleur des quatre négatifs implémenté pour qualification,
   avec identités/inodes/pidfd, retours réels et restitutions indépendantes.
   Syntaxe contrôlée et relecture sansP1/P2 résiduel ; aucune preuve de ces
