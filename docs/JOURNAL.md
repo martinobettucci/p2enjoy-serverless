@@ -11814,6 +11814,13 @@ le rapport et relever fstat/mtime sur ce même FD avant de retenir ses octets/
 SHA/run_id ; exiger mtime depuis launch.created_at_ns, puis même borne/run_id
 aux lectures suivantes. Aucun retry ; contexte ancien refusé avant injections.
 
+Lecture du chemin save+print refusés du contrôleur avant son exécution : son
+stderr final ne porte actuellement que primaire/secondaires ; joined/returncode
+resteraient perdus si result.pending bloque la sauvegarde. Correction décidée :
+inclure les vrais états finished/joined/returncode dans ce diagnostic terminal,
+sans inférer un retour à partir de la seule disparition du fils. Primaire et
+secondaires inchangées ; null reste inconnu.
+
 Relecture du checkpointworker sansP1/P2 ; principal : huitSHA/HEAD6ce7853/
 statut inchangés. Septcas9+10+7+2+4+1+4 et quatreprérequis recoupés dans les
 sources ; formats de captures compatibles. Aucune exécution par le relecteur.

@@ -327,6 +327,10 @@ en0 ni assimilation à une autre primaire. Les stderr diagnostiques terminaux
 et les reçus intermédiaires sont distingués. Les erreurs de rétention éprouvent
 la vraie lecture préalable au SHA, sans prétendre altérer SHA256 lui-même.
 
+Quand la sauvegarde et stdout échouent ensemble, le diagnostic terminal sur
+stderr conserve aussi finished/joined/returncode du vrai fils, y compris null
+si inconnu. Un checkpoint intermédiaire ne remplace pas ces états terminaux.
+
 Chaque lancement est lié au code committé, aux sources réellement livrées et
 à ses programmes figés. Propriété/inodes/naissances sont vérifiés avant faute ;
 SIGSTOP se livre au signal-delivery-stop avant detach, les autres signaux
