@@ -325,12 +325,20 @@ avec zéro ressource active avant/après et référence/configuration/5982conser
    lorsque le CLI termine nonnul. Conserver le code réel, y compris120 si le
    flush de l'interpréteur échoue ensuite ; aucune conversion en0.
 4. Transport expiré avec secondaire : identifier le seul enfantSSH du CLI par
-   parent/naissance, commande et inodes de ses stdout/stderr privés, épingler
-   son pidfd, puis SIGSTOP. Le préparateur conserve sa vraie attente240s,
-   termine/joint son SSH et garde TimeoutExpired comme primaire, retour distant
-   inconnu. Le refus temporaire de lecture de son stdout ajoute EACCES13 comme
-   secondaire. Relever les octets réellement disponibles, même vides ; ne pas
-   déduire qu'un restart a été demandé ou achevé d'un transport expiré.
+   parent/naissance, commande et inodes de ses stdout/stderr privés, puis épingler
+   son pidfd. Observer seulement les métadonnées des write/writev vers son FD1,
+   sans ouvrir sa mémoire ni lire ses buffers ou registres. Après sortie réelle
+   d'une écriture, lire le fichier déjà écrit de façon bornée (1Mio) jusqu'au
+   JSON natif complet, completed=true/restart_exit_code=0 et conservations validées.
+   Ce point prouve la fin des mutations du programme distant avant suspension ;
+   un arrêt avant EOF pourrait au contraire différer sa préparation jusqu'à la
+   fermeture du transport. Conserver les octets/SHA et les métadonnées du syscall.
+   Envoyer SIGSTOP par pidfd, observer son arrêt de livraison puis détacher en
+   livrant ce signal. Exiger même naissance, TracerPid0 et étatT. Le préparateur
+   conserve sa vraie attente240s, termine/joint son SSH et garde TimeoutExpired
+   comme primaire, retour SSH inconnu même avec résultat natif reçu. Le refus
+   temporaire de lecture de stdout ajoute EACCES13 comme secondaire ; les autres
+   flux disponibles, y compris vides, sont également conservés sousSHA.
 
 Le contrôleur n'agit que sur ses processus et chemins privés nouvellement
 créés. Il ne suspend aucun processus du contrôle, du SPARK ou de FORGE. Avant
@@ -349,3 +357,20 @@ natif final. Les sauvegardes SQLite restent privées ; aucun contenu métier
 ou secret ajouté aux exports. Ces diagnostics ne remplacent ni les neufgroupes
 nominalement acquis, ni25communs, ni le nouveau49/32. Le nouveau contrôleur
 maintenu porte le prochain vecteur à532sources ; le gel suivant le recoupe.
+
+
+Corrections de revue avant premier passage : le lancement du CLI et l'acquisition
+initiale de son pidfd sont protégés des SIGTERM/SIGINT. Le masque initial exact
+est rétabli dans l'enfant avant exec et dans le parent après acquisition ; le
+lanceur exige un seul thread actif. Si l'acquisition échoue, son objetPopen
+termine et joint le fils exact encore non récolté, sans recherche de PID.
+L'observateur SSH est détaché avant les autres restitutions, avec conservation
+des signaux intermédiaires. Toute observation incomplète reste un échec.
+
+Les secondaires acceptées sont exactes : lecture refusée → parse/PermissionError13 ;
+sauvegarde refusée → save/IsADirectoryError21 ; pipe fermé → print/BrokenPipeError32 ;
+transport expiré → stdout-retain puis parse/PermissionError13. Leurs types, errno
+et phases sont comparés en ordre ; toute erreur étrangère, notamment native-after,
+fait échouer le diagnostic même si une lecture ultérieure retrouve un état sain.
+Conserver tous les flux après jointure/restitution sous taille/SHA ; le pipe fermé
+est identifié comme non lisible, sans présenter un fichier vide comme sa capture.

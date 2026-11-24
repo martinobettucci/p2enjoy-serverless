@@ -11700,3 +11700,17 @@ fermé, puis seulSSH du CLI arrêté par pidfd jusqu'au vrai timeout240s avec
 secondaireEACCES. Aucun délai, source ou retour remplacé ; permissions et
 processus possédés restitués/joints, états natifs recoupés. Ils ajoutent0groupe.
 Le contrôleur maintenu porte le prochain gel à532 ; code et exécution encore dus.
+
+Contrôleur maintenu codé localement : quatre CLI réels en série, propriété des
+flux par FD/inode, processus via pidfd/naissance et namespace, restauration
+indépendante en finally, vérification de la primaire et des vrais retours.
+Aucun diagnostic exécuté ; syntaxe vérifiée et prochain index532 recoupé.
+
+Première revue du contrôleur non exécuté : troisP2, interruption précoce sans
+pidfd, flux insuffisamment empreintés et secondaires nonbornées à la faute.
+Décisions avant correction : fenêtre spawn/pin protégée avec masque enfant
+restauré et secours sur filsPopen non récolté ; flux exacts sousSHA ; secondaires
+strictes par phase/type/errno. L'exploration confirme aussi le risque de stopper
+SSH avant EOF : observer sa vraie écriture vers le stdout possédé jusqu'au JSON
+natif complet avant livraison SIGSTOP/détachement, sans mémoire/buffer modifié.
+Le préparateur garde ses240s et son retour SSH inconnu ; aucun nouveau cas exécuté.
